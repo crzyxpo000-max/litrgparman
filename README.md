@@ -31,5 +31,11 @@ Komut satırından:
 Klasörde Claude Code'u başlat ve şunu yaz:
 
 ```text
-docs/GDD.md, docs/GDD.en.md, CLAUDE.md ve docs/DECISIONS.md'yi oku. Aşama 2'yi GDD'ye sadık kalarak uygula. Önce kısa bir plan göster, sonra uygula. Bitince ./gradlew test ve ./gradlew assembleDebug çalıştır, CLAUDE.md'yi güncelle, commit at ve test etmem gereken 5 şeyi söyle.
+CLAUDE_CODE_GOREV.md dosyasını baştan sona oku ve uygula. Bana yalnızca dosyada yazan durma noktalarında soru sor.
+```
+
+Oturum yarıda kalırsa:
+
+```text
+CLAUDE_CODE_GOREV.md ve docs/PROGRESS.md'yi oku, kaldığın yerden devam et.
 ```

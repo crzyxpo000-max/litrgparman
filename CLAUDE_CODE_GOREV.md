@@ -1,0 +1,227 @@
+# Claude Code Görev Dosyası — Yükseliş Protokolü (Tam Geliştirme)
+
+> **Kullanıcı için (bu kutuyu Claude Code yok sayabilir):**
+> 1. Projeyi (yukselis-protokolu klasörü) bilgisayarına aç. Bu dosya klasörün kökünde olmalı.
+> 2. Android Studio kurulu olsun (Android SDK onunla gelir). Terminalde klasöre gir ve `claude` yaz.
+> 3. İlk mesaj olarak şunu yapıştır:
+>    `CLAUDE_CODE_GOREV.md dosyasını baştan sona oku ve uygula. Bana yalnızca dosyada yazan durma noktalarında soru sor.`
+> 4. İş çok uzun sürer ve birden fazla oturuma yayılabilir. Oturum biterse ya da durursa aynı klasörde yeniden başlat ve şunu yaz:
+>    `CLAUDE_CODE_GOREV.md ve docs/PROGRESS.md'yi oku, kaldığın yerden devam et.`
+> 5. Komut çalıştırma ve dosya düzenleme izinlerini sürekli onaylamak istemiyorsan Claude Code'un otomatik kabul ayarını aç.
+
+---
+
+## 1. Görevin
+
+Sen bu projenin baş geliştiricisisin. Görevin, "Yükseliş Protokolü / Ascension Protocol" adlı Android LitRPG oyununu **Aşama 0'dan Aşama 9'a kadar kendi başına** geliştirmek ve yayına hazır hale getirmek. Oyun Türkçe ve İngilizce (Kuzey Amerika yerelleştirmesi) olacak. Her seçim hikayenin gidişatını ve sonunu değiştirebilmeli.
+
+Aşama 1 (çekirdek) tamamlandı ama **Android uygulaması hiç derlenmedi**: internet erişimi olmayan bir ortamda yazıldı. Yalnızca `engine` modülü derlendi ve test edildi (38 test). İşe bunu doğrulayarak başla (Aşama 0).
+
+## 2. Kaynaklar ve öncelik sırası
+
+Çelişki olursa yukarıdaki kazanır:
+
+1. Bu dosya (`CLAUDE_CODE_GOREV.md`): kapsam, sıra, kabul kriterleri.
+2. `docs/GDD.md`: mekanik, hikaye, karakterler, sonlar için ana kaynak (Türkçe).
+3. `docs/GDD.en.md`: İngilizce isimler, terimler ve yerelleştirme için ana kaynak.
+4. `CLAUDE.md`: kod ve içerik kuralları. Her aşamada güncel tut.
+5. `docs/DECISIONS.md`: verilmiş kararlar. Yenilerini buraya ekle.
+
+Her oturumun başında 1, 4 ve `docs/PROGRESS.md`'yi oku. GDD'nin ilgili bölümünü, o bölüme ait aşamaya başlarken oku.
+
+## 3. Çalışma döngüsü (her aşama için)
+
+1. **Oku:** GDD'nin ilgili bölümlerini ve bu dosyadaki aşama tanımını oku.
+2. **Planla:** 5–15 maddelik kısa bir planı `docs/PROGRESS.md`'deki aşama başlığının altına yaz.
+3. **Uygula:** küçük adımlarla ilerle; her mantıklı birimden sonra derle ve test et.
+4. **Doğrula:** `scripts/check.sh` geçmeden aşama bitmiş sayılmaz (Aşama 0'da yazılacak).
+5. **Bağımsız inceleme:** aşamanın sonunda, işi yazmamış bir alt ajana (subagent) kodu ve içeriği GDD'ye ve bu dosyadaki kabul kriterlerine göre incelet. Bulduklarını düzelt.
+6. **Kaydet:** `CLAUDE.md`, `docs/DECISIONS.md` ve `docs/PROGRESS.md`'yi güncelle, ardından `Aşama N: <özet>` başlıklı bir commit at.
+7. **Devam et:** kullanıcıya sormadan bir sonraki aşamaya geç.
+
+Uzun içerik işlerinde (Aşama 6 ve 7) içeriği 10'ar olaylık partiler halinde yaz. Her partiden sonra `validateContent` ve testleri çalıştır, sonra commit at. Birbirinden bağımsız içerik partilerini paralel alt ajanlara verebilirsin. Her alt ajana `CLAUDE.md`, isim tablosu ve şema örneği ver.
+
+## 4. İlerleme dosyası: `docs/PROGRESS.md`
+
+Kaldığın yerden devam edebilmenin tek yolu bu dosya. Biçimi:
+
+```markdown
+# İlerleme
+
+Şu an: Aşama 3 — Savaş (devam ediyor)
+Son commit: <kısa hash> <mesaj>
+
+## Aşama 0 — Doğrulama  ✅
+- [x] ...
+
+## Aşama 3 — Savaş  ⏳
+Plan:
+- [x] Savaş durumu modeli
+- [ ] Boss fazları
+Notlar: <yarım kalan iş, bilinen sorunlar>
+```
+
+Bağlam dolmak üzereyse ya da oturum kapanacak gibiyse yarım kalan işi buraya not et ve commit at.
+
+## 5. Ne zaman durup soracaksın
+
+Yalnızca şu durumlarda dur ve kullanıcıya sor. Bunların dışında hiçbir şey sorma; makul varsayımı yap ve `DECISIONS.md`'ye yaz.
+
+- Uygulama imzalama anahtarı (keystore) oluşturma ya da parolaları.
+- Google Play Console'a yükleme ya da yayınlama.
+- Claude API vekil sunucusunu internette bir yere kurma (deploy) ya da API anahtarı.
+- Para gerektiren herhangi bir hizmet.
+- Geri alınamaz git işlemleri (force push, geçmişi yeniden yazma, dal silme).
+- GDD'deki ana hikayeyi ya da bir sonu kökten değiştiren bir karar.
+
+Durduğunda o ana kadarki işi commit et. Sorunu `PROGRESS.md`'ye yaz ve kullanıcıya tek, net bir soru sor. Soruyu beklemeden yapılabilecek başka iş varsa önce onu bitir.
+
+## 6. Genel kurallar
+
+### Kod
+- `engine/` saf Kotlin kalır, Android'e bağımlı olmaz. Oyun mantığı `app/`'e sızmaz.
+- `WorldState` değişmezdir ve yalnızca etkilerle değişir. Rastgelelik yalnızca `Rng` ile.
+- Kayıt biçimini değiştirirken `SaveCodec.VERSION`'ı artır ve eski kayıtlar için geçiş yaz. Eski kayıtların açıldığını test et.
+- GDD'deki her formül için birim testi yaz.
+- Uyarısız derleme hedeflenir; lint hataları kalmaz.
+
+### İçerik
+- Oyuncuya görünen her metin `{tr, en}`; ikisi de dolu.
+- İsimler asla metne yazılmaz, `{npc:...}`, `{yer:...}`, `{oyuncu}` belirteçleri kullanılır (`CLAUDE.md`'de söz dizimi).
+- İngilizce metin çeviri değil, Kuzey Amerika yerelleştirmesidir. Mil, lb, °F, ABD/Kanada deyimleri ve kültürel referanslar kullanılır; hikaye ve mekanikler aynı kalır.
+- **Telif:** ilham alınan romanlardan (Defiance of the Fall, He Who Fights With Monsters, The Primal Hunter, Solo Leveling) hiçbir metin, karakter, yer, sınıf ya da yetenek adı kopyalanmaz. Yalnızca genel tür kalıpları kullanılır.
+
+### Yazım üslubu
+- Türkçe anlatı ikinci tekil şahıs ve şimdiki zaman kullanır ("Gözlerini açıyorsun"); edebi ama akıcı.
+- İngilizce anlatı ikinci şahıs ve şimdiki zamanda, doğal ve sert bir tür kurgusu sesiyle yazılır.
+- Bir paragraf en fazla 3 cümle, bir sahne 2–5 paragraf olur.
+- Seçenekler emir kipinde ve en fazla 60 karakterdir. Her seçeneğin görünür ya da gizli bir sonucu olur.
+- Sistem bildirimleri kuru, kısa, yer yer alaycıdır. İngilizcede köşeli parantez üslubu kullanılır: `[Skill evolved: Shadow Step → Void Step]`.
+- Kişilikler GDD'deki "Dinamik karakterler" bölümüne uyar; bir karakter iki dilde aynı kişidir.
+
+## 7. Aşamalar ve kabul kriterleri
+
+Her aşamanın sonunda `scripts/check.sh` geçer, `CLAUDE.md` ile `PROGRESS.md` güncellenir ve commit atılır. Bu üç madde her aşama için geçerlidir ve aşağıda tekrar edilmez.
+
+### Aşama 0 — Ortam ve Aşama 1 doğrulaması
+- [ ] `./gradlew :engine:test`, `:engine:validateContent` ve `assembleDebug` çalışır. `app` modülündeki derleme hataları davranış değiştirmeden düzeltilir.
+- [ ] Gradle, AGP ya da Kotlin sürümü yükseltmek gerekirse en küçük yükseltme yapılır ve `DECISIONS.md`'ye yazılır.
+- [ ] `./gradlew lint` hata vermez (uyarılar kabul).
+- [ ] `scripts/check.sh` yazılır: test + validateContent + assembleDebug + lint. İleride eklenen kontroller de buraya girer.
+- [ ] Uygulama emülatörde açılır, prolog iki dilde baştan sona oynanır. Emülatör bu ortamda çalışmıyorsa Robolectric ya da Compose UI testleriyle başlık → yeni oyun → ilk seçim akışı test edilir.
+- [ ] `docs/PROGRESS.md` oluşturulur.
+
+### Aşama 2 — Sistem mekanikleri
+- [ ] **Eğilim vektörü** (8 eğilim): `egilim_*` değişkenleri yeni modele taşınır ve `egilim` etkisi eklenir.
+- [ ] **Sınıflar:** `content/classes.*` dosyasında 8 temel sınıf (her eğilime bir) ve 4 gizli sınıf bulunur (Kapı Yiyen, Sistem Hatası, Yas Tutan, Avcı'nın Gözü). Her sınıfın açılma koşulu, seviye başı stat artışı ve başlangıç yeteneği tanımlıdır.
+- [ ] Seviye 10'da sınıf teklifi olayı açılır: en güçlü iki eğilimden birer sınıf + bir gizli ya da nadir sınıf.
+- [ ] **Serbest stat dağıtımı:** Durum ekranında +/− ve onay; onaylanan dağıtım geri alınamaz.
+- [ ] **Kademeler ve evrim:** kademe eşiğinde seviye kazancı durur ve Evrim Görevi olayı açılır. E kademesi evrimi her temel sınıf için 2 seçenekle gelir.
+- [ ] **Yetenekler:** model (aktif/pasif, maliyet, bekleme, seviye 1–10, kullanım XP'si, 2 dallı evrim, kaynaştırma tarifleri, ceza yetenekleri) ve en az 30 yetenek.
+- [ ] **Unvanlar:** en az 15 unvan. "İlk" unvanları dünya genelinde bir kez verilir ve bunun kaydı tutulur (Aşama 5'te rakipler de alabilecek).
+- [ ] **Meslekler:** model, seçim olayı, ayrı XP ve basit üretim (en az Simyacı, 5 tarif; Çanta ekranından).
+- [ ] **Öz ve Yol:** model ve D kademesindeki yuva; içerik Aşama 7'de.
+- [ ] **Günlük Görev:** şablonlardan günlük üretim, ilerleme etkisi, ödül ve Ceza Bölgesi olay kancası.
+- [ ] **Arayüz:** Yetenekler ekranı (liste, uzun basınca ayrıntı, evrim seçimi), seviye atlama ve evrim için tam ekran kart, animasyon ve titreşim.
+- [ ] Sistem bildirim metinleri `EffectApplier`'dan içerik dosyasına taşınır (DECISIONS #7).
+
+### Aşama 3 — Savaş
+- [ ] Savaş durumu `WorldState` içinde tutulur; savaşın ortasında kaydedip yükleyince aynı yerden devam edilir.
+- [ ] Sahne etkisi `savas`: düşman listesi, ortam etiketleri, kazanınca / kaybedince / kaçınca gidilecek sahneler.
+- [ ] GDD'deki inisiyatif, isabet, hasar ve kritik formülleri ile kademe farkı çarpanı.
+- [ ] Eylemler: Saldır, Yetenek, Savun, Analiz, Ortam, Konuş, Kaç; her turda bir ana + bir küçük eylem.
+- [ ] GDD'deki 8 durum etkisi.
+- [ ] Düşman davranış kalıpları (agresif, temkinli, sürü, kaçan), zaaflar ve boss fazları (%70 / %40 / %15).
+- [ ] Kaçan zeki düşmanlar hafızaya girer ve güçlenmiş olarak geri dönebilir.
+- [ ] Ölüm: kademe başına bir İkinci Şans; Demir Mod'da ölüm Hasat sonuna bağlanır.
+- [ ] `content/enemies.*` dosyasında en az 15 düşman ve 1 boss (Perde 1 için).
+- [ ] **Arayüz:** eylem ızgarası, hedef seçimi, uzun basınca ayrıntı kartı, savaş günlüğü, otomatik tur.
+- [ ] Testler: formüller; aynı tohumla aynı savaş; "Seviye 5 oyuncu ile Kanal Faresi" gibi örnek eşleşmelerde kazanma oranı beklenen aralıkta (simülasyonla).
+
+### Aşama 4 — Hikaye motoru
+- [ ] İçerik biçimi kararı: GDD'ye uygun olarak **YAML'a (kaml) geç**. Mevcut JSON içerik dönüştürülür, anahtarlar aynı kalır ve JSON okuyucu kaldırılır. Bu, DECISIONS #1'i kapatır.
+- [ ] **Olay havuzu:** ön koşullar, ağırlık, etiketler, perde ve bölge kısıtları.
+- [ ] **Hikaye Yönetmeni:** GDD'deki puanlama formülü (ağırlık × gerilim uyumu × tazelik × kişisel bağ × ana yay önceliği) ve hedef gerilim eğrisi.
+- [ ] **Tohumlar:** `tohum` etkisi, gecikme aralığı, koşul ve kayıtla birlikte saklanan kuyruk.
+- [ ] **Gün döngüsü:** sabah Günlük Görev, gün içinde 2–4 olay yuvası ya da serbest eylem (keşif, antrenman, kapı, dinlenme), akşam kamp.
+- [ ] Bölge durumları: kontrol, tehlike ve açık kapılar; zamanında kapatılmayan kapı taşar.
+- [ ] Fraksiyon itibarı ve fraksiyonlar arası ilişki matrisi.
+- [ ] **Bayrak kaydı:** her bayrak `content/flags.*` dosyasında açıklamasıyla tanımlanır; tanımsız bayrak hata sayılır.
+- [ ] `validateContent` genişler: tanımsız bayrak, hiçbir yerde set edilmeyen bayrak (uyarı), ulaşılamayan olay, tohumun hedeflediği olayın varlığı.
+- [ ] Prolog sahneleri yeni sisteme taşınır (yazılmış giriş dizisi + olay havuzu).
+- [ ] **Arayüz:** Harita (bölgeler, tehlike, kapılar) ve Görevler ekranları.
+- [ ] **Başsız oynanış testi:** 200 rastgele oynanış hiç çökmeden ve çıkmaza girmeden ilerler (ileride simülatörün temeli).
+
+### Aşama 5 — NPC sistemi
+- [ ] GDD'deki model: 5 kişilik özelliği, değerler, 4 ilişki ekseni (Güven, Saygı, Korku, Bağlılık), solan hafıza, hedefler.
+- [ ] Günlük gündem simülasyonu: her NPC her gün bir adım atar, seviye atlar ve fraksiyon değiştirebilir.
+- [ ] GDD'deki eşik olayları: ihanet, kişisel görev, rakiplik, ayrılma.
+- [ ] Ölüm kalıcıdır; ölen NPC'nin yay düğümleri kapanır.
+- [ ] Yoldaş sistemi: kapasite KAR ve kademeye bağlı; yoldaşlar savaşa katılır.
+- [ ] Rakipler (özellikle Aras) "İlk" unvanlarını oyuncudan önce kapabilir.
+- [ ] 8 ana NPC'nin dosyaları ve her birinin yay düğümü listesi.
+- [ ] **Arayüz:** İlişkiler ekranı; 4 eksen, son hatıralar ve durum görünür.
+
+### Aşama 6 — Dikey dilim: Perde 1 içeriği (iki dilde)
+İçerik bütçesi (alt sınırlar):
+
+| Tür | Adet |
+| --- | --- |
+| Olay (Perde 1, Gün 0–30) | 40 |
+| Giriş dizisi (prolog yerine gerçek açılış) | 1 |
+| Deniz, Yankı ve Aras yay düğümleri | Her biri 3 |
+| Düşman / boss | 15 / 1 (Öğretici bossu) |
+| Çok odalı kapı zindanı | 2 |
+| Yetenek / sınıf / unvan | 30 / 8 + 4 / 15 |
+| Günlük Görev şablonu | 10 |
+
+- [ ] Her olayda en az 3 seçenek bulunur: en az biri koşullu, biri tohum eken, biri bir NPC ilişki eksenini değiştiren.
+- [ ] Perde 1 sonunda en az 3 belirgin farklı dünya durumu oluşabilir: hayatta kalan oranı, Deniz'in akıbeti, ilk fraksiyon eğilimi.
+- [ ] Başsız oynanış testi Perde 1 için genişler: 500 oynanışta çıkmaz yoktur ve tüm Perde 1 olaylarına en az bir kez ulaşılır.
+- [ ] Bağımsız içerik incelemesi: bir alt ajan rastgele 10 olayı TR ve EN olarak okur; üslup, yerelleştirme ve tutarlılık sorunlarını raporlar, sorunlar düzeltilir.
+
+### Aşama 7 — Perde 2–4 ve sonlar
+İçerik bütçesi:
+
+| Tür | Adet |
+| --- | --- |
+| Olay: Perde 2 / 3 / 4 | 60 / 45 / 25 |
+| Fraksiyon görev zinciri (Sığınak, Lonca, Yükselenler, Sessiz Ağ, Kadimler) | Her biri 5 düğüm |
+| 8 ana NPC'nin tam yayı | Her biri 3–5 düğüm, tüm olası kaderleriyle |
+| Kule | 100 kat: prosedürel katlar + her 10. katta yazılmış hikaye katı |
+| Çok-evren dünyası | 3 |
+| Son | 8 + gizli Döngü |
+
+- [ ] Sonlar GDD'deki koşullara göre belirlenir. Son ekranı epilog kartlarını gösterir: her NPC'nin akıbeti, fraksiyonlar ve en kritik 5 seçim.
+- [ ] Döngü sonu New Game+'ı açar.
+- [ ] Hacimden önce dallanma kapsamı gelir: her son, en az bir başsız oynanış stratejisiyle ulaşılabilir olmalı. Bunu kanıtlayan test yazılır.
+
+### Aşama 8 — Yapay zeka anlatıcısı
+- [ ] `engine` içinde `Narrator` arayüzü; varsayılan çevrimdışı `TemplateNarrator`.
+- [ ] `ClaudeNarrator`: istek olay şablonu, dünya durumu özeti ve ilgili NPC hafızalarını içerir; yanıt yapılandırılmış JSON olarak gelir ve şemayla doğrulanır. Hata, zaman aşımı ya da çevrimdışı durumda şablona düşülür.
+- [ ] Serbest metin eylemi motorun izin verdiği eylemlere eşlenir. Yapay zeka dünya durumunu asla doğrudan değiştiremez.
+- [ ] Anlatıcı seçili dilde ve o dilin isimleriyle yazar.
+- [ ] **Vekil sunucu** (`proxy/`): küçük bir JVM sunucusu (ör. Ktor). API anahtarı ortam değişkeninden okunur, model adı yapılandırılabilir, basit hız sınırı vardır. **API anahtarı asla uygulamaya girmez.**
+- [ ] Uygulama ayarlarında vekil sunucu adresi ve anlatıcı modu düğmesi.
+- [ ] Sahte (fake) anlatıcıyla testler; gerçek API çağrısı testlerde yapılmaz.
+- [ ] `proxy/README.md`: yerelde çalıştırma ve bir bulut hizmetine kurma adımları. Kurulumun kendisi bir durma noktasıdır (bölüm 5).
+
+### Aşama 9 — Denge ve yayın hazırlığı
+- [ ] `tools/simulator`: engine modülünü kullanarak rastgele ve sezgisel stratejilerle 1000 oynanış simüle eder. Son dağılımı, seviye eğrisi ve ölüm oranları `docs/BALANCE.md`'ye raporlanır, dengesizlikler düzeltilir. Hiçbir son %1'in altında ya da %40'ın üstünde kalmamalı (gizli son hariç).
+- [ ] `targetSdk`, Google Play'in o an istediği seviyeye yükseltilir.
+- [ ] Release derlemesi: R8 küçültme açık ve kuralları yazılmış. İmzalama `keystore.properties` dosyasından okunur (dosya git dışında tutulur). Anahtarı oluşturmak bir durma noktasıdır.
+- [ ] Son uygulama simgesi (uyarlanabilir, vektör) ve monokrom sürümü.
+- [ ] Mağaza metinleri: `fastlane/metadata/android/tr-TR` ve `en-US` (başlık, kısa ve uzun açıklama, yenilikler).
+- [ ] Gizlilik politikası taslağı (`docs/PRIVACY.md`): anlatıcı modunda hangi metnin sunucuya gittiği açıkça yazılır.
+- [ ] `./gradlew bundleRelease` imzasız olarak da çalışır; imzalı AAB, anahtar sağlanınca üretilir.
+
+## 8. Bitiş
+
+Tüm aşamalar bittiğinde (ya da bir durma noktasında beklerken) kullanıcıya kısa bir rapor ver:
+
+- Hangi aşamalar tamam, hangileri bekliyor ve neden.
+- `scripts/check.sh` sonucu ve test sayısı.
+- Telefonda denemesi gereken 5 şey.
+- Kullanıcının yapması gerekenler: keystore, Play Console, vekil sunucu kurulumu.
+
+Sonra `docs/PROGRESS.md`'yi "Tamam" olarak işaretle ve son commit'i at.

@@ -8,7 +8,7 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 ## Durum
 
 - **Aşama 1 (Çekirdek): tamam.** Motor, kayıt, i18n, içerik doğrulayıcı, Compose iskeleti, 5 sahnelik prolog demosu.
-- **Sıradaki: Aşama 2 (Sistem mekanikleri).** GDD "Geliştirme yol haritası" bölümündeki listeye bak.
+- **Tüm geliştirme planı ve kabul kriterleri:** `CLAUDE_CODE_GOREV.md`. Güncel durum: `docs/PROGRESS.md`.
 
 ## Komutlar
 
