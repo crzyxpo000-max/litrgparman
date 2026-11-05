@@ -1,5 +1,7 @@
 package com.yukselis.engine.core
 
+import com.yukselis.engine.system.AffinityVector
+import com.yukselis.engine.system.Grade
 import com.yukselis.engine.system.Progression
 import com.yukselis.engine.system.Stats
 
@@ -37,6 +39,11 @@ data class Morality(
     }
 }
 
+/** Oyuncunun sahip olduğu bir yetenek; seviye 1–10, kullanım XP'si. */
+data class SkillState(val id: String, val level: Int = 1, val xp: Int = 0)
+
+data class ProfessionState(val id: String, val level: Int = 1, val xp: Int = 0)
+
 data class PlayerState(
     val level: Int = 1,
     val xp: Long = 0,
@@ -45,10 +52,66 @@ data class PlayerState(
     val hp: Int = Progression.maxHp(stats, level),
     val mp: Int = Progression.maxMp(stats),
     val titles: List<String> = emptyList(),
+    /** Gizli Eğilim vektörü; arayüzde gösterilmez. */
+    val affinity: AffinityVector = AffinityVector(),
+    val classId: String? = null,
+    /** Evrimi tamamlanmış en yüksek kademe. Seviye bu kademenin dışına çıkamaz. */
+    val unlockedGrade: Grade = Grade.F,
+    val skills: List<SkillState> = emptyList(),
+    val inventory: Map<String, Int> = emptyMap(),
+    val credits: Int = 0,
+    val essenceCrystals: Int = 0,
+    val profession: ProfessionState? = null,
+    /** Öz kavrayışı (kimlik → 0…100); 100'e ulaşan ve yuvası olan Öz bağlanabilir. */
+    val essenceInsight: Map<String, Int> = emptyMap(),
+    val essences: List<String> = emptyList(),
+    /** A kademesinde iki Öz'den oluşan Yol (içerik Aşama 7). */
+    val path: String? = null,
 ) {
     val maxHp: Int get() = Progression.maxHp(stats, level)
     val maxMp: Int get() = Progression.maxMp(stats)
+    val grade: Grade get() = Grade.forLevel(level)
+
+    fun skill(id: String): SkillState? = skills.firstOrNull { it.id == id }
+
+    fun itemCount(id: String): Int = inventory[id] ?: 0
 }
+
+/**
+ * Motorun ürettiği, oyuncunun karar vermesi gereken Sistem istemi: sınıf teklifi, evrim,
+ * meslek seçimi, yetenek evrimi, kaynaştırma, Öz bağlama. Kuyruktadır; ilki çözülmeden
+ * hikaye seçimi yapılamaz. Yalnızca kimlik tutar, kayda girer.
+ */
+data class SystemPrompt(
+    val kind: PromptKind,
+    val options: List<String>,
+    /** Evrim için kademe, yetenek evrimi için yetenek, kaynaştırma için tarif, Öz için Öz kimliği. */
+    val subject: String? = null,
+)
+
+enum class PromptKind(val key: String) {
+    CLASS_OFFER("sinif_teklifi"),
+    EVOLUTION("evrim"),
+    PROFESSION("meslek"),
+    SKILL_EVOLUTION("yetenek_evrimi"),
+    FUSION("kaynastirma"),
+    ESSENCE_BIND("oz_baglama");
+
+    companion object {
+        fun fromKey(key: String?): PromptKind? = entries.firstOrNull { it.key == key }
+        const val ACCEPT = "kabul"
+        const val DECLINE = "red"
+    }
+}
+
+/** O günün Günlük Görevi. */
+data class DailyQuest(
+    val templateId: String,
+    val day: Int,
+    val progress: Int = 0,
+    val steps: Int,
+    val completed: Boolean = false,
+)
 
 /** Oyuncunun geçtiği sahne ve yaptığı seçim; hikaye akışını yeniden çizmek için kullanılır. */
 data class HistoryEntry(val sceneId: String, val choiceId: String)
@@ -71,6 +134,16 @@ data class WorldState(
     val morality: Morality = Morality(),
     val history: List<HistoryEntry> = emptyList(),
     val ended: Boolean = false,
+    /** "İlk" unvanlarının dünya kaydı: unvan → sahibi ("oyuncu" ya da NPC kimliği). */
+    val firstClaims: Map<String, String> = emptyMap(),
+    val prompts: List<SystemPrompt> = emptyList(),
+    val daily: DailyQuest? = null,
+    /** Art arda tamamlanan Günlük Görev sayısı. */
+    val dailyStreak: Int = 0,
+    /** Kesinti sahnelerinden (Ceza Bölgesi gibi) "@geri" ile dönülecek sahneler. */
+    val returnStack: List<String> = emptyList(),
+    /** Günlük Görev ihmal edildi; bir sonraki geçişte Ceza Bölgesi'ne ışınlanma. */
+    val penaltyPending: Boolean = false,
 ) {
     val act: Int get() = GameClock.actFor(day)
 
@@ -80,6 +153,7 @@ data class WorldState(
 
     companion object {
         const val HISTORY_LIMIT = 12
+        const val PLAYER_CLAIM = "oyuncu"
 
         fun newGame(seed: Long, playerName: String, mode: GameMode, startScene: String): WorldState =
             WorldState(

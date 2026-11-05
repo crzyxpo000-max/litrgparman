@@ -35,8 +35,13 @@ data class Stats(val values: Map<Stat, Int> = Stat.entries.associateWith { BASE_
 enum class Grade(val minLevel: Int) {
     F(1), E(25), D(50), C(100), B(200), A(400), S(800);
 
+    /** Bir sonraki kademe; S'den sonra yok. */
+    fun next(): Grade? = entries.getOrNull(ordinal + 1)
+
     companion object {
         fun forLevel(level: Int): Grade = entries.last { level >= it.minLevel }
+
+        fun fromKey(key: String?): Grade? = entries.firstOrNull { it.name.equals(key, ignoreCase = true) }
     }
 }
 
@@ -56,6 +61,33 @@ object Progression {
     fun maxMp(stats: Stats): Int = 30 + 8 * stats[Stat.INT] + 3 * stats[Stat.WIS]
 
     fun maxStamina(stats: Stats): Int = 40 + 5 * stats[Stat.END] + 5 * stats[Stat.AGI]
+
+    /** Sınıf teklifi seviyesi (GDD: Seviye 10'da temel sınıf). */
+    const val CLASS_OFFER_LEVEL = 10
+
+    /** Meslek teklifi seviyesi (GDD açık bırakıyor; DECISIONS #21). */
+    const val PROFESSION_OFFER_LEVEL = 5
+
+    const val SKILL_MAX_LEVEL = 10
+
+    /** Yetenek seviyesi için gereken kullanım XP'si: 4 · L (1→10 toplam 180). */
+    fun skillXpToNext(level: Int): Int = 4 * level
+
+    /** Meslek seviyesi için gereken XP: 50 · L. */
+    fun professionXpToNext(level: Int): Int = 50 * level
+
+    /** Kademe başına Öz yuvası: D'de 1, C ve üstünde 2 (GDD: Kademeler tablosu). */
+    fun essenceSlots(grade: Grade): Int = when {
+        grade < Grade.D -> 0
+        grade == Grade.D -> 1
+        else -> 2
+    }
+
+    /** Öz bir yuvaya bağlanmadan önce gereken kavrayış. */
+    const val ESSENCE_INSIGHT_TO_BIND = 100
+
+    /** Generic evolution (sınıfın o kademe için tanımlı evrimi yoksa) her stata verilen bonus. */
+    const val GENERIC_EVOLUTION_BONUS = 1
 }
 
 /** Yetenek, eşya ve unvan nadirlikleri; içerikte Türkçe ASCII anahtarlarla yazılır. */

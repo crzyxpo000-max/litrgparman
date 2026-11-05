@@ -1,0 +1,105 @@
+{
+  "meslekler": {
+    "simyaci": {
+      "ad": { "tr": "Simyacı", "en": "Alchemist" },
+      "aciklama": {
+        "tr": "Otları, canavar parçalarını ve manayı şişeye hapseder. Patlamaların çoğu kazadır.",
+        "en": "Bottles herbs, monster parts and mana. Most of the explosions are accidents."
+      }
+    },
+    "demirci": {
+      "ad": { "tr": "Demirci", "en": "Blacksmith" },
+      "aciklama": {
+        "tr": "Hurdayı ve canavar kemiğini silaha, zırha ve tamire dönüştürür.",
+        "en": "Turns scrap metal and monster bone into weapons, armor and repairs."
+      }
+    },
+    "run_ustasi": {
+      "ad": { "tr": "Rün Ustası", "en": "Runesmith" },
+      "aciklama": {
+        "tr": "Eşyalara Sistem'in kendi dilinde küçük talimatlar kazır. Yazım hatası affedilmez.",
+        "en": "Carves tiny instructions into gear in the System's own language. Typos are not forgiven."
+      }
+    },
+    "asci": {
+      "ad": { "tr": "Aşçı", "en": "Cook" },
+      "aciklama": {
+        "tr": "Canavar etini yenebilir, hatta lezzetli hâle getirir. Moral de bir kaynaktır.",
+        "en": "Makes monster meat edible, even tasty. Morale is a resource, too."
+      }
+    },
+    "kartograf": {
+      "ad": { "tr": "Kartograf", "en": "Cartographer" },
+      "aciklama": {
+        "tr": "Değişen dünyanın haritasını çıkarır. Kapıların, tuzakların ve kestirmelerin yerini bilir.",
+        "en": "Maps a world that keeps changing. Knows where the Gates, traps and shortcuts are."
+      }
+    }
+  },
+  "tarifler": {
+    "kucuk_iyilesme_iksiri": {
+      "meslek": "simyaci",
+      "girdiler": { "kirmizi_ot": 2, "kaynak_suyu": 1, "cam_sise": 1 },
+      "sonuc": "kucuk_iyilesme_iksiri",
+      "adet": 1,
+      "seviye": 1,
+      "xp": 10
+    },
+    "mana_iksiri": {
+      "meslek": "simyaci",
+      "girdiler": { "mavi_yosun": 2, "kaynak_suyu": 1, "cam_sise": 1 },
+      "sonuc": "mana_iksiri",
+      "adet": 1,
+      "seviye": 1,
+      "xp": 12
+    },
+    "goz_damlasi": {
+      "meslek": "simyaci",
+      "girdiler": { "goz_cicegi": 1, "kaynak_suyu": 1, "cam_sise": 1 },
+      "sonuc": "goz_damlasi",
+      "adet": 2,
+      "seviye": 1,
+      "xp": 12
+    },
+    "panzehir": {
+      "meslek": "simyaci",
+      "girdiler": { "aci_kok": 2, "orumcek_zehri": 1, "cam_sise": 1 },
+      "sonuc": "panzehir",
+      "adet": 1,
+      "seviye": 2,
+      "xp": 18
+    },
+    "ates_sisesi": {
+      "meslek": "simyaci",
+      "girdiler": { "ates_bezesi": 1, "kul": 2, "cam_sise": 1 },
+      "sonuc": "ates_sisesi",
+      "adet": 1,
+      "seviye": 2,
+      "xp": 20
+    },
+    "buyuk_iyilesme_iksiri": {
+      "meslek": "simyaci",
+      "girdiler": { "kirmizi_ot": 3, "canavar_cekirdegi": 1, "kaynak_suyu": 1, "cam_sise": 1 },
+      "sonuc": "buyuk_iyilesme_iksiri",
+      "adet": 1,
+      "seviye": 3,
+      "xp": 35
+    },
+    "kizarmis_et": {
+      "meslek": "asci",
+      "girdiler": { "diken_domuzu_eti": 1, "kaya_tuzu": 1 },
+      "sonuc": "kizarmis_et",
+      "adet": 2,
+      "seviye": 1,
+      "xp": 8
+    },
+    "mantar_corbasi": {
+      "meslek": "asci",
+      "girdiler": { "yabani_mantar": 3, "mavi_yosun": 1, "kaynak_suyu": 1 },
+      "sonuc": "mantar_corbasi",
+      "adet": 2,
+      "seviye": 2,
+      "xp": 14
+    }
+  }
+}

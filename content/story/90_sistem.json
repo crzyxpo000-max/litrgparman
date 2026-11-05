@@ -1,0 +1,122 @@
+{
+  "sahneler": [
+    {
+      "id": "ceza_bolgesi",
+      "yer": "ceza_bolgesi",
+      "paragraflar": [
+        {
+          "tr": "Zemin ayağının altından kayıp gidiyor. Bir an sonra tuz kokulu, bembeyaz bir düzlükte duruyorsun; ufuk yok, gölge yok, yalnızca gökyüzünde kırmızı bir sayaç.",
+          "en": "The ground drops out from under you. A heartbeat later you're standing on a blinding salt flat: no horizon, no shadows, just a red countdown burning in the sky."
+        },
+        {
+          "tr": "Tuzun altından bir şey kıpırdıyor. Sonra bir şey daha. Sistem sana kaçmak için yer bırakmamış; yalnızca dayanmak için süre.",
+          "en": "Something shifts under the salt. Then something else. The System didn't leave you anywhere to run. Just time to hold out."
+        }
+      ],
+      "bildirimler": [
+        {
+          "tur": "uyari",
+          "baslik": {
+            "tr": "Ceza Bölgesi",
+            "en": "Penalty Zone"
+          },
+          "satirlar": [
+            {
+              "tr": "Günlük Görev ihmal edildi. Hayatta kalma süresi: 4 saat.",
+              "en": "Daily Quest neglected. Survival window: 4 hours."
+            },
+            {
+              "tr": "Disiplin bir seçenek değildir.",
+              "en": "Discipline is not optional."
+            }
+          ]
+        }
+      ],
+      "secenekler": [
+        {
+          "id": "dayan",
+          "etiket": {
+            "tr": "Sırtını bir kayaya ver ve dayan",
+            "en": "Put your back to a rock and hold the line"
+          },
+          "etkiler": [
+            {
+              "can": -30
+            },
+            {
+              "stat": {
+                "end": 1
+              }
+            },
+            {
+              "egilim": {
+                "koruma": 1
+              }
+            },
+            {
+              "xp": 20
+            }
+          ],
+          "sonraki": "@geri"
+        },
+        {
+          "id": "saldir",
+          "etiket": {
+            "tr": "Tuzun altındakini çıkmadan vur",
+            "en": "Hit whatever's under the salt before it surfaces"
+          },
+          "etkiler": [
+            {
+              "can": -45
+            },
+            {
+              "stat": {
+                "str": 1
+              }
+            },
+            {
+              "egilim": {
+                "yakin_dovus": 1
+              }
+            },
+            {
+              "xp": 35
+            }
+          ],
+          "sonraki": "@geri"
+        },
+        {
+          "id": "izle",
+          "etiket": {
+            "tr": "Kıpırdama, kalıbı izle",
+            "en": "Stay still and read the pattern"
+          },
+          "gerekli": {
+            "stat": {
+              "per": 8
+            }
+          },
+          "etkiler": [
+            {
+              "can": -15
+            },
+            {
+              "stat": {
+                "per": 1
+              }
+            },
+            {
+              "egilim": {
+                "gizlilik": 1
+              }
+            },
+            {
+              "xp": 25
+            }
+          ],
+          "sonraki": "@geri"
+        }
+      ]
+    }
+  ]
+}

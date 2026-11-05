@@ -4,7 +4,16 @@ import com.yukselis.engine.core.MoralAxis
 import com.yukselis.engine.core.WorldState
 import com.yukselis.engine.i18n.LText
 import com.yukselis.engine.i18n.NameRegistry
+import com.yukselis.engine.system.Affinity
+import com.yukselis.engine.system.ClassDef
+import com.yukselis.engine.system.DailyTemplate
+import com.yukselis.engine.system.EssenceDef
+import com.yukselis.engine.system.FusionRecipe
+import com.yukselis.engine.system.ItemDef
+import com.yukselis.engine.system.ProfessionDef
 import com.yukselis.engine.system.Rarity
+import com.yukselis.engine.system.RecipeDef
+import com.yukselis.engine.system.SkillDef
 import com.yukselis.engine.system.Stat
 
 /** Sistem bildirimi türleri; arayüz her türe ayrı renk ve ikon verir. */
@@ -15,7 +24,10 @@ enum class NoticeKind(val key: String) {
     LEVEL_UP("seviye"),
     TITLE("unvan"),
     QUEST("gorev"),
-    WARNING("uyari");
+    WARNING("uyari"),
+    SKILL("yetenek"),
+    EVOLUTION("evrim"),
+    CLASS("sinif");
 
     companion object {
         fun fromKey(key: String?): NoticeKind = entries.firstOrNull { it.key == key } ?: SYSTEM
@@ -50,6 +62,42 @@ sealed interface Condition {
         override fun test(state: WorldState) = state.variable(key) >= value
     }
 
+    data class MoralityAtLeast(val axis: MoralAxis, val value: Int) : Condition {
+        override fun test(state: WorldState) = state.morality[axis] >= value
+    }
+
+    data class MoralityAtMost(val axis: MoralAxis, val value: Int) : Condition {
+        override fun test(state: WorldState) = state.morality[axis] <= value
+    }
+
+    data class LevelAtLeast(val value: Int) : Condition {
+        override fun test(state: WorldState) = state.player.level >= value
+    }
+
+    data class AffinityAtLeast(val affinity: Affinity, val value: Int) : Condition {
+        override fun test(state: WorldState) = state.player.affinity[affinity] >= value
+    }
+
+    data class HasSkill(val skillId: String) : Condition {
+        override fun test(state: WorldState) = state.player.skill(skillId) != null
+    }
+
+    data class HasTitle(val titleId: String) : Condition {
+        override fun test(state: WorldState) = titleId in state.player.titles
+    }
+
+    data class HasClass(val classId: String) : Condition {
+        override fun test(state: WorldState) = state.player.classId == classId
+    }
+
+    data class HasItem(val itemId: String, val count: Int) : Condition {
+        override fun test(state: WorldState) = state.player.itemCount(itemId) >= count
+    }
+
+    data class ReputationAtLeast(val faction: String, val value: Int) : Condition {
+        override fun test(state: WorldState) = (state.reputation[faction] ?: 0) >= value
+    }
+
     data class All(val conditions: List<Condition>) : Condition {
         override fun test(state: WorldState) = conditions.all { it.test(state) }
     }
@@ -66,6 +114,20 @@ sealed interface Effect {
     data class AdvanceDays(val days: Int) : Effect
     data class AddStat(val stat: Stat, val delta: Int) : Effect
     data class GrantTitle(val titleId: String) : Effect
+    data class ShiftAffinity(val affinity: Affinity, val delta: Int) : Effect
+    data class GrantSkill(val skillId: String) : Effect
+    data class SkillXp(val skillId: String, val amount: Int) : Effect
+    data class AddItem(val itemId: String, val count: Int) : Effect
+    data class AddCredits(val amount: Int) : Effect
+    data class AddCrystals(val amount: Int) : Effect
+    data class EssenceInsight(val essenceId: String, val amount: Int) : Effect
+    /** Aynı türdeki (antrenman, kesif, savas, kapi) Günlük Görevi ilerletir. */
+    data class DailyProgress(val kind: String, val amount: Int) : Effect
+    /** Can/mana değişimi. Savaş dışında can 1'in altına düşmez (savaşta ölüm Aşama 3). */
+    data class AddHp(val delta: Int) : Effect
+    data class AddMp(val delta: Int) : Effect
+    /** Meslek seçimi istemini açar. */
+    data object OfferProfession : Effect
 }
 
 data class Paragraph(val text: LText, val condition: Condition? = null)
@@ -98,6 +160,10 @@ data class TitleDef(
     val description: LText,
     val rarity: Rarity,
     val statBonus: Map<Stat, Int> = emptyMap(),
+    /** "İlk" unvanı: dünyada yalnızca bir sahibi olur. */
+    val first: Boolean = false,
+    /** Fraksiyon itibarı tavanı (Kardeş Katili: Sığınak en fazla −50). */
+    val reputationCap: Map<String, Int> = emptyMap(),
 )
 
 /** Yüklenmiş oyun içeriğinin tamamı. */
@@ -106,4 +172,21 @@ data class Content(
     val names: NameRegistry,
     val titles: Map<String, TitleDef>,
     val startScene: String,
-)
+    val classes: Map<String, ClassDef> = emptyMap(),
+    val skills: Map<String, SkillDef> = emptyMap(),
+    val fusions: List<FusionRecipe> = emptyList(),
+    val items: Map<String, ItemDef> = emptyMap(),
+    val professions: Map<String, ProfessionDef> = emptyMap(),
+    val recipes: Map<String, RecipeDef> = emptyMap(),
+    val essences: Map<String, EssenceDef> = emptyMap(),
+    val dailyTemplates: Map<String, DailyTemplate> = emptyMap(),
+    val texts: SystemTexts = SystemTexts.EMPTY,
+) {
+    companion object {
+        /** Kesinti sahnesinden önceki sahneye dönüş. */
+        const val RETURN = "@geri"
+
+        /** Günlük Görev cezası kancası: bu kimlikte bir sahne varsa oraya ışınlanılır. */
+        const val PENALTY_SCENE = "ceza_bolgesi"
+    }
+}
