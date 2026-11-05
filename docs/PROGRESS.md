@@ -1,7 +1,8 @@
 # İlerleme
 
 Şu an: Aşama 2 — Sistem mekanikleri (başlıyor)
-Son commit: (Aşama 0)
+Son commit: 6a0ad8e Arayüz: AMOLED (saf siyah) tema seçeneği
+Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
 ## Ortam notları
@@ -9,6 +10,24 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - SDK: `local.properties` → `sdk.dir=C:/Users/alpar/AppData/Local/Android/Sdk` (git dışı).
 - Emülatör: `Medium_Phone_API_36.0` (`emulator -avd Medium_Phone_API_36.0`), adb ile kurulum.
 - OneDrive kilidi yüzünden lint ara sıra "dosya kullanılıyor" der: `./gradlew --stop` ve tekrar.
+
+## Aşama 2 — Sistem mekanikleri  ⏳
+Plan:
+- [ ] `system/Affinity.kt`: 8 eğilim (yakin_dovus, menzilli, buyu, gizlilik, koruma, cagirma, zanaat, karanlik); `egilim` etkisi, `egilim_min` koşulu; prolog `egilim_*` değişkenleri taşınır (egilim_algi → menzilli, egilim_yakin → yakin_dovus)
+- [ ] SaveCodec v2 + v1 geçişi (egilim_* değişkenleri → eğilim vektörü); eski kayıt testi
+- [ ] Motor üretimli "Sistem istemi" (prompt) kuyruğu: sınıf teklifi, evrim, meslek seçimi, yetenek evrimi, kaynaştırma; tam ekran kart olarak gösterilir
+- [ ] `content/classes.json`: 8 temel + 4 gizli + nadir sınıflar; seviye başı stat artışı, başlangıç yeteneği, E evrimi (2 seçenek)
+- [ ] Seviye 10 sınıf teklifi; kademe eşiğinde seviye durur, XP bir seviyelik tamponda birikir, Evrim Görevi istemi
+- [ ] Serbest stat dağıtımı (motor: `allocate`), Durum ekranında +/− ve onay
+- [ ] `content/skills.json` ≥30 yetenek: aktif/pasif, maliyet, bekleme, seviye 1–10, kullanım XP'si, 2 dallı evrim, kaynaştırma tarifleri, ceza yetenekleri
+- [ ] `titles.json` ≥15 unvan; "İlk" unvanları için dünya kaydı (`firstClaims`), itibar tavanı (Kardeş Katili)
+- [ ] Meslekler + `items.json` + envanter; Simyacı 5 tarif, Çanta ekranında üretim
+- [ ] Öz kavrayışı ve D kademesi yuvası (model), Yol alanı
+- [ ] Günlük Görev: `daily.json` şablonları, günlük üretim (Rng), ilerleme etkisi, ödül (+1 serbest puan), Ceza Bölgesi kancası (`@geri` dönüşlü sahne)
+- [ ] Sistem bildirim metinleri `content/system.json`'a taşınır (DECISIONS #7)
+- [ ] Arayüz: Yetenekler ekranı, seviye/evrim tam ekran kartı + animasyon + titreşim, Çanta
+- [ ] Testler, check.sh, bağımsız inceleme, commit
+Notlar: Kullanıcı isteğiyle araya tema seçimi girdi (Sistem/Açık/Koyu/AMOLED), tamam ve GitHub'a gönderildi.
 
 ## Aşama 0 — Doğrulama  ✅ (2026-11-05)
 - [x] `:engine:test`, `:engine:validateContent`, `assembleDebug` çalışıyor (app ilk denemede derlendi, düzeltme gerekmedi)
