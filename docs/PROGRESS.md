@@ -1,7 +1,7 @@
 # İlerleme
 
 Şu an: Aşama 3 — Savaş (başlıyor)
-Son commit: 6a0ad8e Arayüz: AMOLED (saf siyah) tema seçeneği
+Son commit: 8c2d8b8 Aşama 2: sistem mekanikleri ve OP MC çekirdeği
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
