@@ -1,0 +1,66 @@
+package com.yukselis.engine.save
+
+import com.yukselis.engine.core.GameMode
+import com.yukselis.engine.core.WorldState
+
+/** Kayıtların fiziksel olarak nereye yazıldığı; Android'de uygulama depolaması, testlerde bellek. */
+interface SaveStorage {
+    fun read(name: String): String?
+    fun write(name: String, data: String)
+    fun delete(name: String)
+}
+
+class InMemorySaveStorage : SaveStorage {
+    private val files = mutableMapOf<String, String>()
+    override fun read(name: String) = files[name]
+    override fun write(name: String, data: String) { files[name] = data }
+    override fun delete(name: String) { files.remove(name) }
+}
+
+class IronmanSaveException : IllegalStateException("Demir Mod'da elle kayıt yapılamaz")
+
+data class SlotInfo(
+    val slot: String,
+    val playerName: String,
+    val day: Int,
+    val level: Int,
+    val mode: GameMode,
+    val ended: Boolean,
+    val savedAtMillis: Long,
+)
+
+/**
+ * Bir otomatik + üç elle kayıt slotu. Demir Mod'da yalnızca otomatik slot kullanılır.
+ */
+class SaveManager(
+    private val storage: SaveStorage,
+    private val now: () -> Long = System::currentTimeMillis,
+) {
+    fun autosave(state: WorldState) = storage.write(AUTO, SaveCodec.encode(state, now()))
+
+    fun save(slot: String, state: WorldState) {
+        require(slot in MANUAL) { "Geçersiz slot: $slot" }
+        if (state.mode == GameMode.IRONMAN) throw IronmanSaveException()
+        storage.write(slot, SaveCodec.encode(state, now()))
+    }
+
+    /** Bozuk ya da okunamayan kayıt null döner; oyun çökmez. */
+    fun load(slot: String): WorldState? = read(slot)?.state
+
+    fun info(slot: String): SlotInfo? = read(slot)?.let { data ->
+        val s = data.state
+        SlotInfo(slot, s.playerName, s.day, s.player.level, s.mode, s.ended, data.savedAtMillis)
+    }
+
+    fun allSlots(): List<Pair<String, SlotInfo?>> = (listOf(AUTO) + MANUAL).map { it to info(it) }
+
+    fun delete(slot: String) = storage.delete(slot)
+
+    private fun read(slot: String): SaveData? =
+        storage.read(slot)?.let { runCatching { SaveCodec.decode(it) }.getOrNull() }
+
+    companion object {
+        const val AUTO = "auto"
+        val MANUAL = listOf("slot1", "slot2", "slot3")
+    }
+}

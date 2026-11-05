@@ -1,0 +1,305 @@
+{
+  "baslangic": "giris_entegrasyon",
+  "sahneler": [
+    {
+      "id": "giris_entegrasyon",
+      "yer": "kiyikent_iskele",
+      "paragraflar": [
+        {
+          "tr": "Akşam vapuru yine gecikmiş. {npc:deniz_arman} iskelenin korkuluğuna yaslanmış, simidinin son parçasını martılarla paylaşıyor.",
+          "en": "The evening ferry is running late again. {npc:deniz_arman} leans on the terminal railing, tossing the last of a soft pretzel to the gulls."
+        },
+        {
+          "tr": "Sonra martılar susuyor. Körfezin üstünde gökyüzü, biri camı tırnağıyla çizmiş gibi incecik bir çizgiyle yarılıyor.",
+          "en": "Then the gulls go quiet. Above the sound, the sky splits along a hairline crack, like someone dragged a fingernail across glass."
+        },
+        {
+          "tr": "Çizgi açılıyor. İçinden mavi, kusursuz kenarlı bir pencere süzülüp tam gözünün önünde duruyor. İskeledeki herkesin önünde birer tane var.",
+          "en": "The crack opens. A blue window with perfectly clean edges drifts out and stops right in front of your eyes. Everyone on the pier has one."
+        }
+      ],
+      "bildirimler": [
+        {
+          "tur": "sistem",
+          "baslik": { "tr": "Entegrasyon başlatıldı", "en": "Integration initiated" },
+          "satirlar": [
+            { "tr": "Dünya, Çok-evren Ağı'na bağlanıyor.", "en": "Earth is being connected to the Multiverse Network." },
+            { "tr": "Tür: İnsan · Hayatta kalma eşiği: belirlenmedi", "en": "Species: Human · Survival threshold: TBD" },
+            { "tr": "Öğretici Katman'a aktarım: 10 saniye.", "en": "Transfer to the Tutorial Layer in 10 seconds." }
+          ]
+        }
+      ],
+      "secenekler": [
+        {
+          "id": "el_tut",
+          "etiket": { "tr": "{npc:deniz_arman|in} elini sıkıca tut", "en": "Grab {npc:deniz_arman|pos} hand and hold on" },
+          "etkiler": [
+            { "bayrak": "deniz_el_tutuldu" },
+            { "degisken": { "iliski_deniz_guven": 10 } },
+            { "ahlak": { "merhamet": 3 } }
+          ],
+          "sonraki": "ogretici_uyanis"
+        },
+        {
+          "id": "kalabaliga_kos",
+          "etiket": { "tr": "Kalabalığa koş, yaşlılara ve çocuklara yardım et", "en": "Run into the crowd and help the elderly and the kids" },
+          "etkiler": [
+            { "bayrak": "kalabaliga_yardim" },
+            { "ahlak": { "merhamet": 8, "insanlik": 5 } }
+          ],
+          "sonraki": "ogretici_uyanis"
+        },
+        {
+          "id": "pencereyi_oku",
+          "etiket": { "tr": "Kıpırdama. Pencerenin her satırını oku", "en": "Don't move. Read every line of the window" },
+          "etkiler": [
+            { "bayrak": "sistem_okundu" },
+            { "degisken": { "egilim_algi": 2 } },
+            { "stat": { "per": 1 } }
+          ],
+          "sonraki": "ogretici_uyanis"
+        }
+      ]
+    },
+    {
+      "id": "ogretici_uyanis",
+      "yer": "ogretici_orman",
+      "paragraflar": [
+        {
+          "metin": {
+            "tr": "Gözlerini açtığında parmakların hâlâ birinin elini sıkıyor. {npc:deniz_arman} yanında, yosunların üstünde öksürüyor ama sağlam.",
+            "en": "When you open your eyes, your fingers are still locked around someone's hand. {npc:deniz_arman} is next to you on the moss, coughing, but in one piece."
+          },
+          "kosul": { "bayrak": "deniz_el_tutuldu" }
+        },
+        {
+          "metin": {
+            "tr": "Gözlerini açtığında yalnızsın. {npc:deniz_arman} yok. Sadece sis, çam kokusu ve uzaklardan gelen bir çığlık.",
+            "en": "You open your eyes alone. No {npc:deniz_arman}. Just fog, the smell of pine, and a scream somewhere far off."
+          },
+          "kosul": { "bayrak_yok": "deniz_el_tutuldu" }
+        },
+        {
+          "metin": {
+            "tr": "Aktarımdan önceki son anını hatırlıyorsun: tekerlekli sandalyedeki yaşlı bir adamın elini tutuyordun. Şimdi o el yok.",
+            "en": "You remember your last second before the transfer: you were holding the hand of an old man in a wheelchair. That hand is gone now."
+          },
+          "kosul": { "bayrak": "kalabaliga_yardim" }
+        },
+        {
+          "tr": "Ağaçlar fazla uzun, gökyüzü fazla mor. Burası Ege değil. Burası hiçbir yer değil.",
+          "en": "The trees are too tall, the sky too purple. This isn't the Pacific Northwest. This isn't anywhere."
+        }
+      ],
+      "bildirimler": [
+        {
+          "tur": "durum",
+          "baslik": { "tr": "Durum penceresi açıldı", "en": "Status window unlocked" },
+          "satirlar": [
+            { "tr": "{oyuncu} · Seviye 1 · Sınıfsız · Kademe F", "en": "{oyuncu} · Level 1 · Classless · Grade F" },
+            { "tr": "Öğretici süresi: 30 gün", "en": "Tutorial time remaining: 30 days" },
+            { "tr": "İpucu: Statlarını Durum sekmesinde görebilirsin.", "en": "Tip: Check the Status tab to see your stats." }
+          ]
+        },
+        {
+          "tur": "uyari",
+          "nadirlik": "nadir",
+          "baslik": { "tr": "Gizli satır tespit edildi", "en": "Hidden line detected" },
+          "satirlar": [
+            { "tr": "Okumaya zaman ayıranlar daha fazlasını görür.", "en": "Those who take the time to read see more." },
+            { "tr": "Algı +1", "en": "Perception +1" }
+          ],
+          "kosul": { "bayrak": "sistem_okundu" }
+        }
+      ],
+      "secenekler": [
+        {
+          "id": "dinle",
+          "etiket": { "tr": "Gözlerini kapat ve sesleri dinle", "en": "Close your eyes and listen" },
+          "gerekli": { "stat": { "per": 6 } },
+          "etkiler": [
+            { "bayrak": "tehlike_sezildi" },
+            { "degisken": { "egilim_algi": 1 } }
+          ],
+          "sonraki": "ilk_canavar"
+        },
+        {
+          "id": "ciglige_kos",
+          "etiket": { "tr": "Çığlığın geldiği yöne koş", "en": "Run toward the scream" },
+          "etkiler": [
+            { "ahlak": { "merhamet": 3 } },
+            { "degisken": { "egilim_yakin": 1 } }
+          ],
+          "sonraki": "ilk_canavar"
+        },
+        {
+          "id": "saklan",
+          "etiket": { "tr": "Bir kayanın arkasına çömel ve bekle", "en": "Crouch behind a boulder and wait" },
+          "etkiler": [
+            { "degisken": { "egilim_gizlilik": 2 } }
+          ],
+          "sonraki": "ilk_canavar"
+        }
+      ]
+    },
+    {
+      "id": "ilk_canavar",
+      "yer": "ogretici_orman",
+      "paragraflar": [
+        {
+          "metin": {
+            "tr": "Ses önünden değil, sağındaki çalılardan geliyor. Bunu bildiğin için ilk hamle senin olacak.",
+            "en": "The sound isn't coming from ahead; it's coming from the brush on your right. Knowing that, you get the first move."
+          },
+          "kosul": { "bayrak": "tehlike_sezildi" }
+        },
+        {
+          "tr": "Çalılar yarılıyor. Sokak köpeği büyüklüğünde, dişleri paslı demir gibi parlayan bir fare çıkıyor. Arkasında, bir ağaç kökünün dibinde, dizini tutan bir yabancı inliyor.",
+          "en": "The brush splits. Out comes a rat the size of a golden retriever, teeth gleaming like rusted rebar. Behind it, at the foot of a tree root, a stranger clutches one knee and groans."
+        }
+      ],
+      "bildirimler": [
+        {
+          "tur": "analiz",
+          "nadirlik": "siradan",
+          "baslik": { "tr": "Kanal Faresi", "en": "Sewer Rat" },
+          "satirlar": [
+            { "tr": "Seviye 2 · Sıradan", "en": "Level 2 · Common" },
+            { "tr": "Zaaf: Gözler", "en": "Weak spot: Eyes" }
+          ]
+        }
+      ],
+      "secenekler": [
+        {
+          "id": "dovus",
+          "etiket": { "tr": "Kırık bir dalı kap ve saldır", "en": "Grab a broken branch and attack" },
+          "gerekli": { "stat": { "str": 5 } },
+          "etkiler": [
+            { "bayrak": "ilk_oldurme" },
+            { "xp": 140 },
+            { "unvan": "ogreticinin_ilk_kani" },
+            { "degisken": { "egilim_yakin": 2 } }
+          ],
+          "sonraki": "ilk_gece"
+        },
+        {
+          "id": "yabanciyi_koru",
+          "etiket": { "tr": "Taş fırlat, fareyi yabancıdan uzaklaştır", "en": "Throw a rock and draw the rat away from the stranger" },
+          "etkiler": [
+            { "bayrak": "yabanci_korundu" },
+            { "xp": 60 },
+            { "ahlak": { "merhamet": 10 } },
+            { "degisken": { "egilim_menzilli": 2 } }
+          ],
+          "sonraki": "ilk_gece"
+        },
+        {
+          "id": "kac",
+          "etiket": { "tr": "Yabancıyı bırak ve koş", "en": "Leave the stranger and run" },
+          "etkiler": [
+            { "bayrak": "yabanci_birakildi" },
+            { "ahlak": { "merhamet": -10 } },
+            { "degisken": { "egilim_gizlilik": 1 } }
+          ],
+          "sonraki": "ilk_gece"
+        }
+      ]
+    },
+    {
+      "id": "ilk_gece",
+      "yer": "ogretici_orman",
+      "paragraflar": [
+        {
+          "metin": {
+            "tr": "Ellerin hâlâ titriyor. Ama içinde daha önce hiç olmayan bir şey uyanıyor: açlık gibi, ama yemek için değil.",
+            "en": "Your hands are still shaking. But something new is waking up inside you, like hunger, but not for food."
+          },
+          "kosul": { "bayrak": "ilk_oldurme" }
+        },
+        {
+          "metin": {
+            "tr": "Kurtardığın yabancı adını söyleyemeden uyuyakalıyor. Avucunda, sana bıraktığı bir çakı var.",
+            "en": "The stranger you saved falls asleep before they can tell you their name. In your palm is the pocketknife they left you."
+          },
+          "kosul": { "bayrak": "yabanci_korundu" }
+        },
+        {
+          "metin": {
+            "tr": "Koşarken arkanda kalan çığlık kesildi. Ne zaman kesildiğini hatırlamıyorsun. Hatırlamak da istemiyorsun.",
+            "en": "The scream behind you stopped while you ran. You don't remember when. You don't want to."
+          },
+          "kosul": { "bayrak": "yabanci_birakildi" }
+        },
+        {
+          "metin": {
+            "tr": "'Annemler,' diyor {npc:deniz_arman} ateşin karşısından ve cümlenin gerisini getirmiyor.",
+            "en": "'My folks,' {npc:deniz_arman} says from across the fire, and doesn't finish the sentence."
+          },
+          "kosul": { "bayrak": "deniz_el_tutuldu" }
+        },
+        {
+          "tr": "Mor gökyüzü kararmıyor, sadece soluyor. Öğretici Katman'daki ilk gecen başlıyor.",
+          "en": "The purple sky doesn't go dark; it just fades. Your first night in the Tutorial Layer begins."
+        }
+      ],
+      "bildirimler": [
+        {
+          "tur": "gorev",
+          "baslik": { "tr": "Günlük Görev açıldı", "en": "Daily Quest unlocked" },
+          "satirlar": [
+            { "tr": "100 şınav · 100 mekik · 10 km koşu", "en": "100 push-ups · 100 sit-ups · 6-mile run" },
+            { "tr": "Ödül: +1 serbest stat puanı", "en": "Reward: +1 free stat point" },
+            { "tr": "Başarısızlık: Ceza Bölgesi", "en": "Failure: Penalty Zone" }
+          ]
+        }
+      ],
+      "secenekler": [
+        {
+          "id": "uyu",
+          "etiket": { "tr": "Ateşin yanında uyu", "en": "Sleep by the fire" },
+          "etkiler": [ { "gun": 1 } ],
+          "sonraki": "demo_son"
+        },
+        {
+          "id": "nobet_tut",
+          "etiket": { "tr": "Uyuma. Sabaha kadar nöbet tut", "en": "Don't sleep. Keep watch until morning" },
+          "etkiler": [
+            { "gun": 1 },
+            { "stat": { "wil": 1 } },
+            { "degisken": { "egilim_algi": 1 } }
+          ],
+          "sonraki": "demo_son"
+        }
+      ]
+    },
+    {
+      "id": "demo_son",
+      "yer": "ogretici_orman",
+      "son": true,
+      "paragraflar": [
+        {
+          "tr": "Sabah olduğunda Sistem yeni bir pencere açıyor: Öğretici Katman'da 29 gün kaldı.",
+          "en": "When morning comes, the System opens a new window: 29 days left in the Tutorial Layer."
+        },
+        {
+          "tr": "Yükseliş Protokolü'nün Aşama 1 demosu burada bitiyor. Seçimlerin kayda geçti; hikaye sonraki aşamalarda buradan devam edecek.",
+          "en": "This is where the Ascension Protocol Phase 1 demo ends. Your choices have been recorded; the story picks up from here in later phases."
+        }
+      ],
+      "bildirimler": [
+        {
+          "tur": "uyari",
+          "baslik": { "tr": "Bir tohum ekildi", "en": "A seed has been planted" },
+          "satirlar": [ { "tr": "Geride bıraktığın biri seni hatırlayacak.", "en": "Someone you left behind will remember you." } ],
+          "kosul": { "bayrak": "yabanci_birakildi" }
+        },
+        {
+          "tur": "uyari",
+          "baslik": { "tr": "Bir tohum ekildi", "en": "A seed has been planted" },
+          "satirlar": [ { "tr": "Kurtardığın biri bu iyiliği unutmayacak.", "en": "Someone you saved won't forget it." } ],
+          "kosul": { "bayrak": "yabanci_korundu" }
+        }
+      ]
+    }
+  ]
+}

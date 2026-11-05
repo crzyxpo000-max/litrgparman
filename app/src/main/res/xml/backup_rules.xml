@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 11 ve öncesi: kayıtlar ve ayarlar Google hesabına yedeklenir. -->
+<full-backup-content>
+    <include domain="file" path="saves/" />
+    <include domain="sharedpref" path="." />
+</full-backup-content>
