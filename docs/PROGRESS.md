@@ -1,7 +1,7 @@
 # İlerleme
 
 Şu an: Aşama 4 — Hikaye motoru (sırada)
-Son commit: 8c2d8b8 Aşama 2: sistem mekanikleri ve OP MC çekirdeği
+Son commit: a938f05 Aşama 3: savaş
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
