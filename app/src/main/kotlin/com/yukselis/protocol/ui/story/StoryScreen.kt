@@ -45,6 +45,10 @@ import com.yukselis.engine.story.SceneView
 import com.yukselis.protocol.R
 import com.yukselis.protocol.ui.components.SystemCard
 import com.yukselis.protocol.ui.theme.GameType
+import com.yukselis.protocol.ui.theme.InsightColor
+import com.yukselis.protocol.ui.theme.EchoColor
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Size
 import kotlinx.coroutines.delay
 
 /**
@@ -127,6 +131,10 @@ fun StoryScreen(
             )
         }
 
+        if (finished && scene.current.insights.isNotEmpty()) {
+            item(key = "insights-$passageKey") { Insights(scene.current.insights) }
+        }
+
         if (finished) {
             itemsIndexed(scene.current.notices, key = { i, _ -> "notice-$passageKey-$i" }) { _, notice ->
                 AppearingCard(notice)
@@ -166,6 +174,23 @@ private fun PastPassage(passage: PassageView) {
                 style = GameType.narrationPast.copy(fontStyle = FontStyle.Italic),
                 color = MaterialTheme.colorScheme.primary.copy(alpha = 0.75f),
             )
+        }
+    }
+}
+
+/** Pasif Sistem sezgisi: yalnızca oyuncunun gördüğü satırlar; tek aralıklı, renkli, sol çizgili. */
+@Composable
+private fun Insights(lines: List<String>) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(6.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .drawBehind { drawRect(InsightColor, size = Size(3.dp.toPx(), size.height)) }
+            .padding(start = 12.dp),
+    ) {
+        lines.forEach {
+            // "[ALG]" önekli satır stat sezgisidir; öneksiz satır Yankı'nın sesidir.
+            Text(it, style = GameType.system.copy(fontStyle = FontStyle.Italic), color = if (it.startsWith("[")) InsightColor else EchoColor)
         }
     }
 }

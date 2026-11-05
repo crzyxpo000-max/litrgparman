@@ -7,7 +7,9 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 
 ## Durum
 
-- **Aşama 0 (Doğrulama) ve Aşama 1 (Çekirdek): tamam.** Motor, kayıt, i18n, içerik doğrulayıcı, Compose iskeleti, 5 sahnelik prolog demosu; app emülatörde çalışıyor.
+- **Aşama 0, 1 ve 2 tamam.** Motor, kayıt (v2), i18n, içerik doğrulayıcı, Compose ekranları, prolog demosu;
+  Sistem mekanikleri (eğilim, sınıf, kademe/evrim, yetenek, unvan, meslek, Öz, Günlük Görev) ve OP MC çekirdeği.
+- **Tasarımın üst kuralı:** GDD'deki "OP MC tasarımı" bölümü (DECISIONS #19). Kahraman bir anomalidir; Yankı ona bağlıdır.
 - **Tüm geliştirme planı ve kabul kriterleri:** `CLAUDE_CODE_GOREV.md`. Güncel durum: `docs/PROGRESS.md`.
 
 ## Komutlar
@@ -27,7 +29,11 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 
 - `engine/` saf Kotlin'dir; Android'e **asla** bağımlı olmaz. Tüm oyun mantığı burada.
 - `app/` yalnızca gösterir: Compose ekranları + `GameViewModel`. Oyun kuralı app'e yazılmaz.
-- `WorldState` tek doğruluk kaynağıdır ve değişmezdir; yalnızca `story/Effects.kt` içindeki etkilerle değişir.
+- `WorldState` tek doğruluk kaynağıdır ve değişmezdir; yalnızca `story/Effects.kt` içindeki etkilerle ve
+  `story/PlayerActions.kt` eylemleriyle değişir. Geçersiz eylem `ActionRejected` fırlatır.
+- **Sistem istemleri** (`SystemPrompt` kuyruğu): sınıf teklifi, evrim, meslek, yetenek evrimi, kaynaştırma, Öz bağlama.
+  Motor tetikleyicilerle (`EffectApplier.checkTriggers`) ekler; istem bekliyorken hikaye seçimi yapılamaz.
+- Motorun ürettiği Sistem metinleri `content/system.json`'dadır; anahtarlar ve yer tutucular `SystemTexts.REQUIRED`'da.
 - Tüm rastgelelik `core/Rng.kt` (SplitMix64) üzerinden; durumu `WorldState.rngState` içinde.
 - Motor arayüze dili çözülmüş görünüm modelleri verir (`SceneView`, `StatusView`, `NoticeView`).
 - Kayıt biçimi `save/SaveCodec.kt` içinde, sürümlü (`VERSION`). Alan eklerken varsayılan ver; alan
@@ -39,15 +45,19 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 | Paket | İçerik |
 | --- | --- |
 | `core` | `WorldState`, `PlayerState`, `Morality`, `GameClock`, `Rng` |
-| `system` | `Stat`, `Stats`, `Grade`, `Progression` (GDD formülleri), `Rarity` |
+| `system` | `Stat`, `Stats`, `Grade`, `Progression` (GDD formülleri + OP MC: büyüme çarpanı, yüzdelik), `Rarity`, `Affinity`, içerik tanımları (`Defs.kt`) |
 | `i18n` | `Lang`, `LText`, `NameRegistry`, `TokenResolver`, `TurkishSuffix`, `EnglishGrammar` |
-| `story` | İçerik modeli (`Scene`, `ChoiceDef`, `Condition`, `Effect`, `Notice`), `EffectApplier`, `StoryEngine` |
+| `story` | İçerik modeli (`Model.kt`), `EffectApplier` (etkiler + tetikleyiciler), `PlayerActions` (istem, dağıtım, üretim, eşya, antrenman), `StoryEngine`, görünümler (`Views.kt`), `SystemTexts` |
 | `content` | `ContentParser` (JSON), `ContentLoader`, `ContentValidator` (+ `main`) |
 | `save` | `SaveCodec`, `SaveManager` (auto + 3 slot, Demir Mod), `SaveStorage` |
 
 ## İçerik kuralları (content/)
 
-- Yerleşim: `names.json`, `titles.json`, `story/*.json` (dosya adı sırasıyla yüklenir). APK'ya assets olarak girer.
+- Yerleşim: `names.json`, `titles.json`, `system.json`, `classes.json`, `skills.json`, `items.json`,
+  `professions.json`, `essences.json`, `daily.json`, `story/*.json` (dosya adı sırasıyla). APK'ya assets olarak girer.
+- `story/90_sistem.json`: kesinti sahneleri (`ceza_bolgesi`); dönüş `"sonraki": "@geri"`.
+- Sınıflar: her eğilime 1 `temel`; `gizli` sınıfların `kosul` + `egilimler` (Yankı'nın önerisi) alanı; temel/gizli
+  sınıfa tam 2 `evrim` (kademe E). Yetenekler: her eğilime tam 1 `benzersiz` yetenek (`egilim` alanıyla).
 - Anahtarlar Türkçe ASCII: `sahneler`, `paragraflar`, `bildirimler`, `secenekler`, `etiket`, `gerekli`,
   `goster`, `etkiler`, `sonraki`, `kosul`, `son`, `yer`.
 - Oyuncuya görünen **her** metin `{ "tr": ..., "en": ... }`. İngilizce çeviri değil, Kuzey Amerika
@@ -57,8 +67,14 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
   - Türkçe hal ekleri: `|e` `|i` `|in` `|de` `|den` `|le` → Deniz'e, Kaya'nın, Aras'tan
   - İngilizce iyelik: `|pos` → Devon's
   - `{yer:kiyikent}`, `{oyuncu}` (oyuncu adı, ek alabilir: `{oyuncu|in}`)
-- Etkiler: `bayrak`, `bayrak_kaldir`, `degisken`, `ahlak` (merhamet/duzen/insanlik), `itibar`, `xp`, `gun`, `stat`, `unvan`.
-- Koşullar: `stat` (asgari değer), `bayrak`, `bayrak_yok`, `degisken_min`. Birden çok anahtar = VE.
+- Etkiler: `bayrak`, `bayrak_kaldir`, `degisken`, `ahlak` (merhamet/duzen/insanlik), `itibar`, `xp`, `gun`, `stat`, `unvan`,
+  `egilim` {eğilim: n}, `yetenek` id, `yetenek_xp` {id: n}, `esya` {id: n}, `kredi` n, `oz_kristali` n, `oz` {öz: n},
+  `gunluk` {antrenman|kesif|savas|kapi: n}, `meslek_teklifi` true, `can` n, `mana` n, `arayuz` yetenekler|canta|harita.
+- Koşullar: `stat`, `bayrak`, `bayrak_yok`, `degisken_min`, `ahlak_min`, `ahlak_max`, `seviye_min`, `egilim_min`,
+  `yetenek`, `unvan`, `sinif`, `esya`, `itibar_min`. Birden çok anahtar = VE.
+- Sahnede `sezgiler`: [{`kosul`, `metin`}] → pasif Sistem sezgisi; stat koşullu satır "[ALG]" öneki alır, öneksiz satır Yankı'nın sesidir.
+- Bildirim türleri: sistem, durum, analiz, seviye, unvan, gorev, uyari, yetenek, evrim, sinif, `yanki` (bozuk yazı).
+- Eğilimler: yakin_dovus, menzilli, buyu, gizlilik, koruma, cagirma, zanaat, karanlik. Fraksiyonlar: siginak, lonca, yukselenler, sessiz_ag, kadimler.
 - `gerekli` karşılanmazsa seçenek görünür ama kilitlidir ve "[ALG 6]" etiketi alır; `goster` karşılanmazsa gizlenir.
 - İçerik değiştikten sonra `:engine:validateContent` ve `:engine:test` çalıştır (ContentFilesTest gerçek içeriği doğrular).
 
@@ -68,7 +84,10 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Uygulama içi dil `ProvideLanguage` (App.kt) ile seçilir; cihaz dilinden bağımsız ve anında değişir.
 - Türkçe büyük harf dönüşümünde yerel ayar kullan (`uppercase(locale)`): i → İ.
 - Türkçe metinde sayıya ek getirme ("Aşama 4'te" sayıya göre değişir); "Aşama %d ile" gibi eksiz kalıp kullan.
-- Kayıt: her seçimden sonra ve `onStop`'ta otomatik; dosyalar `files/saves/*.json`, Auto Backup kapsamında.
+- Kayıt: her seçimden ve her Sistem eyleminden sonra ve `onStop`'ta otomatik; dosyalar `files/saves/*.json`, Auto Backup kapsamında.
+- Kendini açan arayüz: Yetenekler ve Çanta sekmeleri `StatusView.tabs` içinde yoksa gizlidir.
+- Tam ekran kartlar `ui/system/Overlays.kt`: önce kutlama (seviye/evrim/sınıf), sonra bekleyen istem.
+- Tema: Sistem · Açık · Koyu · AMOLED (saf siyah).
 
 ## Test notları
 

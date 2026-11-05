@@ -51,6 +51,12 @@ import com.yukselis.protocol.data.ThemeMode
 import com.yukselis.protocol.ui.components.CenteredNote
 import com.yukselis.protocol.ui.components.StatBar
 import com.yukselis.protocol.ui.more.MoreScreen
+import com.yukselis.protocol.ui.bag.BagScreen
+import com.yukselis.protocol.ui.skills.SkillsScreen
+import com.yukselis.protocol.ui.system.CelebrationOverlay
+import com.yukselis.protocol.ui.system.PromptOverlay
+import com.yukselis.engine.core.WorldState
+import androidx.compose.foundation.layout.Box
 import com.yukselis.protocol.ui.status.StatusScreen
 import com.yukselis.protocol.ui.story.StoryScreen
 import com.yukselis.protocol.ui.theme.GameType
@@ -59,11 +65,12 @@ import com.yukselis.protocol.ui.title.TitleScreen
 import kotlinx.coroutines.launch
 import java.util.Locale
 
-private enum class Tab(val label: Int, val icon: ImageVector) {
+/** `grant`: Sistem'in vermesi gereken sekme (kendini açan arayüz); null ise her zaman açık. */
+private enum class Tab(val label: Int, val icon: ImageVector, val grant: String? = null) {
     STORY(R.string.tab_story, Icons.Filled.Home),
     STATUS(R.string.tab_status, Icons.Filled.Person),
-    SKILLS(R.string.tab_skills, Icons.Filled.Star),
-    BAG(R.string.tab_bag, Icons.Filled.Build),
+    SKILLS(R.string.tab_skills, Icons.Filled.Star, WorldState.TAB_SKILLS),
+    BAG(R.string.tab_bag, Icons.Filled.Build, WorldState.TAB_BAG),
     MORE(R.string.tab_more, Icons.Filled.Menu),
 }
 
@@ -110,6 +117,7 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
                 UiMessage.LOADED -> R.string.msg_loaded
                 UiMessage.LOAD_FAILED -> R.string.msg_load_failed
                 UiMessage.IRONMAN_NO_MANUAL -> R.string.msg_ironman_no_manual
+                UiMessage.ACTION_FAILED -> R.string.msg_action_failed
             },
         )
     }
@@ -122,14 +130,21 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
         viewModel.consumeMessage()
     }
 
+    val tabs = Tab.entries.filter { it.grant == null || it.grant in status.tabs }
+    if (tab !in tabs) tab = Tab.STORY
+
+    Box(modifier = Modifier.fillMaxSize()) {
     Scaffold(
         topBar = { Header(scene, status) },
         bottomBar = {
             NavigationBar {
-                Tab.entries.forEach { t ->
+                tabs.forEach { t ->
                     NavigationBarItem(
                         selected = tab == t,
-                        onClick = { tab = t },
+                        onClick = {
+                            tab = t
+                            viewModel.clearActionNotices()
+                        },
                         icon = { Icon(t.icon, contentDescription = null) },
                         label = { Text(stringResource(t.label), maxLines = 1, overflow = TextOverflow.Ellipsis) },
                     )
@@ -151,12 +166,15 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
                 onBackToTitle = viewModel::backToTitle,
                 modifier = content,
             )
-            Tab.STATUS -> StatusScreen(status, content)
-            Tab.SKILLS -> CenteredNote(stringResource(R.string.skills_placeholder), content)
-            Tab.BAG -> CenteredNote(stringResource(R.string.bag_placeholder), content)
+            Tab.STATUS -> StatusScreen(status, ui.actionNotices, viewModel::allocate, content)
+            Tab.SKILLS -> ui.skills?.let { SkillsScreen(it, content) } ?: CenteredNote("", content)
+            Tab.BAG -> ui.bag?.let { BagScreen(it, ui.actionNotices, viewModel::useItem, viewModel::craft, content) } ?: CenteredNote("", content)
             Tab.MORE -> MoreScreen(
                 lang = ui.lang,
                 settings = ui.settings,
+                daily = ui.daily,
+                notices = ui.actionNotices,
+                onTrain = viewModel::train,
                 mode = ui.game?.mode ?: GameMode.NORMAL,
                 slots = ui.slots,
                 onSave = viewModel::saveTo,
@@ -167,6 +185,13 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
                 modifier = content,
             )
         }
+    }
+    // Önce kutlama (seviye/evrim/sınıf), sonra bekleyen Sistem istemi.
+    if (ui.celebration.isNotEmpty()) {
+        CelebrationOverlay(ui.celebration, ui.settings.haptics, viewModel::dismissCelebration)
+    } else {
+        scene.prompt?.let { PromptOverlay(it, ui.settings.haptics, viewModel::resolvePrompt) }
+    }
     }
 }
 

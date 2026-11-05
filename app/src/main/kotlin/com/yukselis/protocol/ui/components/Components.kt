@@ -25,9 +25,11 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.yukselis.engine.story.NoticeKind
 import com.yukselis.engine.story.NoticeView
 import com.yukselis.protocol.R
 import com.yukselis.protocol.ui.theme.GameType
+import com.yukselis.protocol.ui.theme.glitch
 import com.yukselis.protocol.ui.theme.noticeColor
 
 /** Sistem bildirim kartı: köşeli çerçeve, renkli kenar, tek aralıklı yazı. */
@@ -46,14 +48,19 @@ fun SystemCard(notice: NoticeView, modifier: Modifier = Modifier) {
             .semantics(mergeDescendants = true) { contentDescription = spoken },
     ) {
         Text(
-            text = "[ ${stringResource(R.string.system_header)} ]",
+            text = if (notice.kind == NoticeKind.ECHO) "[ ${glitch(stringResource(R.string.echo_header))} ]" else "[ ${stringResource(R.string.system_header)} ]",
             style = GameType.system,
             color = accent.copy(alpha = 0.8f),
         )
         Spacer(Modifier.height(4.dp))
-        Text(text = notice.title, style = GameType.systemTitle, color = accent)
+        val echo = notice.kind == NoticeKind.ECHO
+        Text(text = if (echo) glitch(notice.title) else notice.title, style = GameType.systemTitle, color = accent)
         notice.lines.forEach { line ->
-            Text(text = line, style = GameType.system, color = MaterialTheme.colorScheme.onSurface)
+            Text(
+                text = line,
+                style = GameType.system,
+                color = if (echo) accent.copy(alpha = 0.85f) else MaterialTheme.colorScheme.onSurface,
+            )
         }
     }
 }

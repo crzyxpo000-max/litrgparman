@@ -30,12 +30,21 @@ import com.yukselis.protocol.R
 import com.yukselis.protocol.data.Settings
 import com.yukselis.protocol.data.ThemeMode
 import com.yukselis.protocol.ui.components.SectionTitle
+import com.yukselis.protocol.ui.components.StatBar
+import com.yukselis.protocol.ui.theme.EchoColor
+import com.yukselis.engine.story.DailyView
+import com.yukselis.engine.story.NoticeView
+import com.yukselis.protocol.ui.components.SystemCard
+import androidx.compose.ui.graphics.Color
 import com.yukselis.protocol.ui.theme.GameType
 
 @Composable
 fun MoreScreen(
     lang: Lang,
     settings: Settings,
+    daily: DailyView?,
+    notices: List<NoticeView>,
+    onTrain: () -> Unit,
     mode: GameMode,
     slots: List<Pair<String, SlotInfo?>>,
     onSave: (String) -> Unit,
@@ -54,7 +63,8 @@ fun MoreScreen(
         // Sonraki aşamalarda açılacak bölümler
         SectionTitle(stringResource(R.string.tab_more))
         ComingSoon(stringResource(R.string.map), 4)
-        ComingSoon(stringResource(R.string.daily_quest), 2)
+        notices.forEach { SystemCard(it, Modifier.padding(vertical = 4.dp)) }
+        daily?.let { DailyPanel(it, onTrain) }
         ComingSoon(stringResource(R.string.relationships), 5)
         ComingSoon(stringResource(R.string.quests), 4)
 
@@ -90,6 +100,31 @@ fun MoreScreen(
             Text(stringResource(R.string.back_to_title))
         }
         Spacer(Modifier.padding(bottom = 24.dp))
+    }
+}
+
+/** Günlük Görev: yalnızca oyuncunun gördüğü pencere. */
+@Composable
+private fun DailyPanel(daily: DailyView, onTrain: () -> Unit) {
+    Surface(
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        shape = MaterialTheme.shapes.small,
+        modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp),
+    ) {
+        Column(modifier = Modifier.padding(12.dp)) {
+            Text(stringResource(R.string.daily_quest), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(daily.title, style = GameType.systemTitle, color = Color(0xFF66BB6A))
+            Text(stringResource(R.string.daily_reward), style = GameType.system, color = Color(0xFFFFD54F))
+            Text(daily.description, style = GameType.system)
+            StatBar(stringResource(R.string.daily_steps), daily.progress.toLong(), daily.steps.toLong(), Color(0xFF66BB6A), Modifier.padding(top = 6.dp))
+            Text(stringResource(R.string.daily_streak, daily.streak), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(stringResource(R.string.daily_only_you), style = GameType.system, color = EchoColor)
+            when {
+                daily.completed -> Text(stringResource(R.string.daily_done), style = GameType.systemTitle, color = Color(0xFF66BB6A))
+                daily.trainable -> Button(onClick = onTrain, modifier = Modifier.padding(top = 6.dp)) { Text(stringResource(R.string.daily_train)) }
+                else -> Text(stringResource(R.string.daily_in_story), style = GameType.system, color = MaterialTheme.colorScheme.outline)
+            }
+        }
     }
 }
 

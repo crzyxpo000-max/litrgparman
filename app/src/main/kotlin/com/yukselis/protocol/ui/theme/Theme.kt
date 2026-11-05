@@ -65,6 +65,21 @@ object GameType {
     val systemTitle = system.copy(fontSize = 14.sp, fontWeight = FontWeight.Bold)
 }
 
+/** Yankı'nın bozuk bildirimleri ve pasif sezgi satırları için. */
+val EchoColor = Color(0xFFE040FB)
+val InsightColor = Color(0xFF26C6DA)
+
+/**
+ * Yankı bildirimleri için bozuk görünüm: belirli harflere birleşik "kesik" işareti ekler.
+ * Belirleyicidir (aynı metin hep aynı görünür); ekran okuyucuya düz metin verilir.
+ */
+fun glitch(text: String): String = buildString {
+    text.forEachIndexed { i, c ->
+        append(c)
+        if (c.isLetter() && (i * 7 + c.code) % 5 == 0) append('̶')
+    }
+}
+
 fun rarityColor(rarity: Rarity): Color = when (rarity) {
     Rarity.COMMON -> Color(0xFF9AA0A6)
     Rarity.RARE -> Color(0xFF42A5F5)
@@ -86,6 +101,10 @@ fun noticeColor(kind: NoticeKind, rarity: Rarity?): Color {
         NoticeKind.TITLE -> Color(0xFF42A5F5)
         NoticeKind.QUEST -> Color(0xFF66BB6A)
         NoticeKind.WARNING -> Color(0xFFFF7043)
+        NoticeKind.SKILL -> Color(0xFF29B6F6)
+        NoticeKind.EVOLUTION -> Color(0xFFFFA726)
+        NoticeKind.CLASS -> Color(0xFFAB47BC)
+        NoticeKind.ECHO -> EchoColor
     }
 }
 
