@@ -1,6 +1,7 @@
 package com.yukselis.protocol.ui
 
 import android.content.res.Configuration
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -46,6 +47,7 @@ import com.yukselis.engine.i18n.Lang
 import com.yukselis.engine.story.SceneView
 import com.yukselis.engine.story.StatusView
 import com.yukselis.protocol.R
+import com.yukselis.protocol.data.ThemeMode
 import com.yukselis.protocol.ui.components.CenteredNote
 import com.yukselis.protocol.ui.components.StatBar
 import com.yukselis.protocol.ui.more.MoreScreen
@@ -69,7 +71,12 @@ private enum class Tab(val label: Int, val icon: ImageVector) {
 fun App(viewModel: GameViewModel) {
     val ui by viewModel.ui.collectAsStateWithLifecycle()
     ProvideLanguage(ui.lang) {
-        YukselisTheme {
+        val dark = when (ui.settings.theme) {
+            ThemeMode.SYSTEM -> isSystemInDarkTheme()
+            ThemeMode.LIGHT -> false
+            ThemeMode.DARK -> true
+        }
+        YukselisTheme(dark = dark) {
             Surface(color = MaterialTheme.colorScheme.background, modifier = Modifier.fillMaxSize()) {
                 val scene = ui.scene
                 val status = ui.status
@@ -82,6 +89,8 @@ fun App(viewModel: GameViewModel) {
                         onNewGame = viewModel::newGame,
                         onContinue = viewModel::continueGame,
                         onLanguage = viewModel::setLanguage,
+                        theme = ui.settings.theme,
+                        onTheme = { mode -> viewModel.updateSettings { it.copy(theme = mode) } },
                     )
                 }
             }

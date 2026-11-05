@@ -35,7 +35,9 @@ import androidx.compose.ui.unit.sp
 import com.yukselis.engine.i18n.Lang
 import com.yukselis.engine.save.SlotInfo
 import com.yukselis.protocol.R
+import com.yukselis.protocol.data.ThemeMode
 import com.yukselis.protocol.ui.more.LanguagePicker
+import com.yukselis.protocol.ui.more.ThemePicker
 import com.yukselis.protocol.ui.theme.GameType
 
 @Composable
@@ -45,6 +47,8 @@ fun TitleScreen(
     onNewGame: (name: String, ironman: Boolean) -> Unit,
     onContinue: () -> Unit,
     onLanguage: (Lang) -> Unit,
+    theme: ThemeMode,
+    onTheme: (ThemeMode) -> Unit,
 ) {
     val defaultName = stringResource(R.string.default_player_name)
     var name by rememberSaveable { mutableStateOf("") }
@@ -125,6 +129,7 @@ fun TitleScreen(
 
         Spacer(Modifier.height(32.dp))
         LanguagePicker(lang, onLanguage)
+        ThemePicker(theme, onTheme)
         Spacer(Modifier.height(16.dp))
         Text(
             text = "v0.1 · Phase 1",

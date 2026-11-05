@@ -41,10 +41,14 @@ class FileSaveStorage(private val dir: File) : SaveStorage {
     }
 }
 
+/** Açık/koyu tema seçimi; SYSTEM cihaz ayarını izler. */
+enum class ThemeMode { SYSTEM, LIGHT, DARK }
+
 data class Settings(
     val typewriter: Boolean = true,
     val haptics: Boolean = true,
     val narratorMode: Boolean = false,
+    val theme: ThemeMode = ThemeMode.SYSTEM,
 )
 
 class SettingsStore(context: Context) {
@@ -62,6 +66,8 @@ class SettingsStore(context: Context) {
         typewriter = prefs.getBoolean(KEY_TYPEWRITER, true),
         haptics = prefs.getBoolean(KEY_HAPTICS, true),
         narratorMode = prefs.getBoolean(KEY_NARRATOR, false),
+        theme = prefs.getString(KEY_THEME, null)
+            ?.let { name -> ThemeMode.entries.firstOrNull { it.name == name } } ?: ThemeMode.SYSTEM,
     )
 
     fun save(settings: Settings) {
@@ -69,6 +75,7 @@ class SettingsStore(context: Context) {
             .putBoolean(KEY_TYPEWRITER, settings.typewriter)
             .putBoolean(KEY_HAPTICS, settings.haptics)
             .putBoolean(KEY_NARRATOR, settings.narratorMode)
+            .putString(KEY_THEME, settings.theme.name)
             .apply()
     }
 
@@ -77,5 +84,6 @@ class SettingsStore(context: Context) {
         const val KEY_TYPEWRITER = "typewriter"
         const val KEY_HAPTICS = "haptics"
         const val KEY_NARRATOR = "narrator"
+        const val KEY_THEME = "theme"
     }
 }

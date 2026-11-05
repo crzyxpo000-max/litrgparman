@@ -27,6 +27,7 @@ import com.yukselis.engine.save.SaveManager
 import com.yukselis.engine.save.SlotInfo
 import com.yukselis.protocol.R
 import com.yukselis.protocol.data.Settings
+import com.yukselis.protocol.data.ThemeMode
 import com.yukselis.protocol.ui.components.SectionTitle
 import com.yukselis.protocol.ui.theme.GameType
 
@@ -72,6 +73,7 @@ fun MoreScreen(
 
         SectionTitle(stringResource(R.string.settings))
         LanguagePicker(lang, onLanguage)
+        ThemePicker(settings.theme, { mode -> onSettings { it.copy(theme = mode) } })
         ToggleRow(stringResource(R.string.typewriter), null, settings.typewriter, enabled = true) { on ->
             onSettings { it.copy(typewriter = on) }
         }
@@ -145,6 +147,30 @@ fun LanguagePicker(current: Lang, onPick: (Lang) -> Unit, modifier: Modifier = M
                 Button(onClick = { }) { Text(label) }
             } else {
                 OutlinedButton(onClick = { onPick(lang) }) { Text(label) }
+            }
+        }
+    }
+}
+
+/** Tema: Sistem · Açık · Koyu. Seçim anında uygulanır ve kaydedilir. */
+@Composable
+fun ThemePicker(current: ThemeMode, onPick: (ThemeMode) -> Unit, modifier: Modifier = Modifier) {
+    Column(modifier = modifier.fillMaxWidth().padding(vertical = 6.dp)) {
+        Text(stringResource(R.string.theme), style = MaterialTheme.typography.bodyLarge)
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+        ) {
+            listOf(
+                ThemeMode.SYSTEM to R.string.theme_system,
+                ThemeMode.LIGHT to R.string.theme_light,
+                ThemeMode.DARK to R.string.theme_dark,
+            ).forEach { (mode, label) ->
+                if (mode == current) {
+                    Button(onClick = { }, modifier = Modifier.weight(1f)) { Text(stringResource(label), maxLines = 1) }
+                } else {
+                    OutlinedButton(onClick = { onPick(mode) }, modifier = Modifier.weight(1f)) { Text(stringResource(label), maxLines = 1) }
+                }
             }
         }
     }
