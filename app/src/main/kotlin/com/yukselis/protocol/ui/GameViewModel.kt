@@ -21,13 +21,18 @@ import com.yukselis.engine.story.StatusView
 import com.yukselis.engine.system.Stat
 import com.yukselis.protocol.YukselisApplication
 import com.yukselis.protocol.data.Settings
+import android.util.Log
+import com.yukselis.engine.core.PromptKind
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.random.Random
+
+private const val TAG = "Yukselis"
 
 enum class UiMessage { SAVED, LOADED, LOAD_FAILED, IRONMAN_NO_MANUAL, ACTION_FAILED }
 
@@ -62,6 +67,9 @@ data class UiState(
 class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val app = application as YukselisApplication
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private val saveDispatcher = Dispatchers.IO.limitedParallelism(1)
+
     private val _ui = MutableStateFlow(
         UiState(lang = app.settings.language(), settings = app.settings.settings()),
     )
@@ -82,14 +90,21 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     fun choose(choiceId: String) {
         val current = _ui.value.game ?: return
-        val outcome = runCatching { app.engine.choose(current, choiceId, _ui.value.lang) }.getOrNull() ?: return
+        val outcome = runCatching { app.engine.choose(current, choiceId, _ui.value.lang) }
+            .onFailure { e ->
+                Log.e(TAG, "Seçim başarısız: $choiceId", e)
+                _ui.update { it.copy(message = UiMessage.ACTION_FAILED) }
+            }
+            .getOrNull() ?: return
         show(outcome.state, outcome.notices)
         persistAuto(outcome.state)
     }
 
     // ---- Sistem eylemleri ----
 
-    fun resolvePrompt(optionId: String) = act { s, l -> app.engine.resolvePrompt(s, optionId, l) }
+    /** Kart, gösterildiği istemin türü ve konusuyla birlikte yanıt verir; istem değiştiyse motor reddeder. */
+    fun resolvePrompt(kind: PromptKind, subject: String?, optionId: String) =
+        act { s, l -> app.engine.resolvePrompt(s, optionId, l, kind, subject) }
 
     fun allocate(points: Map<Stat, Int>) = act { s, l -> app.engine.allocate(s, points, l) }
 
@@ -112,7 +127,13 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         val current = _ui.value.game ?: return
         val outcome = try {
             block(current, _ui.value.lang)
-        } catch (_: ActionRejected) {
+        } catch (e: ActionRejected) {
+            Log.i(TAG, "Eylem reddedildi: ${e.message}")
+            _ui.update { it.copy(message = UiMessage.ACTION_FAILED) }
+            return
+        } catch (e: RuntimeException) {
+            // Bozuk ya da eski içerikle uyumsuz kayıt oyunu çökertmesin.
+            Log.e(TAG, "Eylem başarısız", e)
             _ui.update { it.copy(message = UiMessage.ACTION_FAILED) }
             return
         }
@@ -152,7 +173,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun load(slot: String) {
-        val state = app.saves.load(slot)
+        val state = app.saves.load(slot)?.let { runCatching { app.engine.sanitize(it) }.getOrNull() }
         if (state == null) {
             _ui.update { it.copy(message = UiMessage.LOAD_FAILED) }
             return
@@ -210,7 +231,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun persistAuto(state: WorldState) {
-        viewModelScope.launch(Dispatchers.IO) {
+        // Tek iş parçacıklı kuyruk: kayıtlar sırayla yazılır, eski durum yenisinin üstüne yazılamaz.
+        viewModelScope.launch(saveDispatcher) {
             app.saves.autosave(state)
             refreshSlots()
         }

@@ -20,15 +20,25 @@ class PlayerActions(private val content: Content, private val effects: EffectApp
 
     private val texts get() = content.texts
 
-    fun resolvePrompt(state: WorldState, optionId: String): EffectApplier.Result {
+    /**
+     * İlk bekleyen istemi çözer. `kind`/`subject` verilirse istemle eşleşmeli: çift dokunuş bir
+     * sonraki istemi yanlışlıkla çözmesin.
+     */
+    fun resolvePrompt(state: WorldState, optionId: String, kind: PromptKind? = null, subject: String? = null): EffectApplier.Result {
         val prompt = state.prompts.firstOrNull() ?: throw ActionRejected("Bekleyen istem yok")
+        if (kind != null && (prompt.kind != kind || prompt.subject != subject)) throw ActionRejected("İstem değişti")
         if (optionId !in prompt.options) throw ActionRejected("'$optionId' bu istemin seçeneği değil")
         val popped = state.copy(prompts = state.prompts.drop(1))
         val r = when (prompt.kind) {
             PromptKind.CLASS_OFFER -> chooseClass(popped, optionId)
             PromptKind.EVOLUTION -> evolve(popped, Grade.fromKey(prompt.subject) ?: throw ActionRejected("Kademe yok"), optionId)
             PromptKind.PROFESSION -> chooseProfession(popped, optionId)
-            PromptKind.SKILL_EVOLUTION -> effects.evolveSkill(popped, prompt.subject!!, optionId)
+            PromptKind.SKILL_EVOLUTION -> if (optionId == PromptKind.DECLINE) {
+                // Ertelendi: bir sonraki kademe evrimine kadar yeniden sorulmaz (kaynaştırma için tutulabilir).
+                EffectApplier.Result(popped.copy(flags = popped.flags + EffectApplier.declinedFlag(prompt.kind, prompt.subject!!)), emptyList())
+            } else {
+                effects.evolveSkill(popped, prompt.subject!!, optionId)
+            }
             PromptKind.FUSION -> if (optionId == PromptKind.ACCEPT) {
                 effects.fuse(popped, prompt.subject!!)
             } else {
@@ -46,7 +56,8 @@ class PlayerActions(private val content: Content, private val effects: EffectApp
         val skill = def.skill?.let { effects.grantSkill(withClass, it) } ?: EffectApplier.Result(withClass, emptyList())
         // OP MC: sınıfla birlikte oyun tarzına bağlı Benzersiz yetenek gelir.
         val unique = effects.grantUniqueSkill(skill.state)
-        return EffectApplier.Result(unique.state, listOf(notice) + skill.notices + unique.notices)
+        val first = effects.grantTitleIfDefined(unique.state, EffectApplier.TITLE_FIRST_CLASS)
+        return EffectApplier.Result(first.state, listOf(notice) + skill.notices + unique.notices + first.notices)
     }
 
     private fun evolve(state: WorldState, grade: Grade, optionId: String): EffectApplier.Result {
@@ -91,9 +102,12 @@ class PlayerActions(private val content: Content, private val effects: EffectApp
             }
         }
         s = s.withPlayer { it.copy(hp = it.maxHp, mp = it.maxMp) }
+        // Ertelenen yetenek evrimleri yeni kademede yeniden sorulur.
+        s = s.copy(flags = s.flags.filterNot { it.startsWith(EffectApplier.declinedFlag(PromptKind.SKILL_EVOLUTION, "")) }.toSet())
+        val first = effects.grantTitleIfDefined(s, EffectApplier.TITLE_FIRST_EVOLUTION)
         // Tampondaki XP şimdi seviyeye dönüşür.
-        val leveled = effects.levelUp(s)
-        return EffectApplier.Result(leveled.state, notices + leveled.notices)
+        val leveled = effects.levelUp(first.state)
+        return EffectApplier.Result(leveled.state, notices + first.notices + leveled.notices)
     }
 
     private fun chooseProfession(state: WorldState, id: String): EffectApplier.Result {
@@ -164,7 +178,8 @@ class PlayerActions(private val content: Content, private val effects: EffectApp
             notices += Notice(NoticeKind.LEVEL_UP, texts.formatL("meslek_seviye", "name" to name, "level" to LText("${p.level}", "${p.level}")))
         }
         s = s.withPlayer { it.copy(profession = p) }.withVar(CRAFT_COUNT_VAR, 1)
-        return withTriggers(EffectApplier.Result(s, notices))
+        val first = effects.grantTitleIfDefined(s, EffectApplier.TITLE_FIRST_CRAFT)
+        return withTriggers(EffectApplier.Result(first.state, notices + first.notices))
     }
 
     fun useItem(state: WorldState, itemId: String): EffectApplier.Result {

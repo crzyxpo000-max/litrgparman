@@ -196,6 +196,10 @@ class EffectApplier(private val content: Content) {
         return Result(state.copy(player = player, firstClaims = claims, reputation = reputation), listOf(notice))
     }
 
+    /** İçerikte tanımlıysa unvanı verir (motor kancaları içerik dosyasına sıkı bağlı kalmasın). */
+    fun grantTitleIfDefined(state: WorldState, titleId: String): Result =
+        if (titleId in content.titles) grantTitle(state, titleId) else Result(state, emptyList())
+
     /** Bir NPC "İlk" unvanını kapar (Aşama 5'te rakipler kullanır). */
     fun claimFirstByNpc(state: WorldState, titleId: String, npcId: String): WorldState =
         if (state.firstClaims.containsKey(titleId)) state else state.copy(firstClaims = state.firstClaims + (titleId to npcId))
@@ -251,22 +255,28 @@ class EffectApplier(private val content: Content) {
     fun evolveSkill(state: WorldState, from: String, to: String): Result {
         val fromDef = content.skills[from] ?: error("Tanımsız yetenek: $from")
         val toDef = content.skills[to] ?: error("Tanımsız yetenek: $to")
-        require(to in fromDef.evolutions) { "$from → $to evrimi tanımlı değil" }
+        if (to !in fromDef.evolutions) throw ActionRejected("$from → $to evrimi tanımlı değil")
+        if ((state.player.skill(from)?.level ?: 0) < Progression.SKILL_MAX_LEVEL) throw ActionRejected("$from maksimum seviyede değil")
         val removed = state.withPlayer { p -> p.copy(skills = p.skills.filterNot { it.id == from }) }
         val granted = grantSkill(removed, to)
-        val notice = Notice(NoticeKind.EVOLUTION, texts.formatL("yetenek_evrildi", "from" to fromDef.name, "to" to toDef.name), listOf(toDef.description), toDef.rarity)
-        // grantSkill'in "kazanıldı" bildirimi yerine evrim bildirimi; ceza satırı korunur.
+        // grantSkill'in "kazanıldı" bildirimi yerine evrim bildirimi; ceza satırları korunur.
+        val penaltyLines = granted.notices.firstOrNull()?.lines?.drop(1) ?: emptyList()
+        val notice = Notice(NoticeKind.EVOLUTION, texts.formatL("yetenek_evrildi", "from" to fromDef.name, "to" to toDef.name), listOf(toDef.description) + penaltyLines, toDef.rarity)
         return Result(granted.state, listOf(notice) + granted.notices.drop(1))
     }
 
     fun fuse(state: WorldState, recipeId: String): Result {
-        val recipe = content.fusions.firstOrNull { it.id == recipeId } ?: error("Tanımsız kaynaştırma: $recipeId")
+        val recipe = content.fusions.firstOrNull { it.id == recipeId } ?: throw ActionRejected("Tanımsız kaynaştırma: $recipeId")
+        if (!recipe.inputs.all { (state.player.skill(it)?.level ?: 0) >= Progression.SKILL_MAX_LEVEL }) {
+            throw ActionRejected("Kaynaştırma girdileri artık yok ya da maksimum seviyede değil")
+        }
         val removed = state.withPlayer { p -> p.copy(skills = p.skills.filterNot { it.id in recipe.inputs }) }
         val granted = grantSkill(removed, recipe.result)
         val result = content.skills.getValue(recipe.result)
+        val penaltyLines = granted.notices.firstOrNull()?.lines?.drop(1) ?: emptyList()
         return Result(
             granted.state,
-            listOf(Notice(NoticeKind.EVOLUTION, texts.formatL("kaynastirma_tamam", "result" to result.name), listOf(result.description), result.rarity)) +
+            listOf(Notice(NoticeKind.EVOLUTION, texts.formatL("kaynastirma_tamam", "result" to result.name), listOf(result.description) + penaltyLines, result.rarity)) +
                 granted.notices.drop(1),
         )
     }
@@ -308,6 +318,11 @@ class EffectApplier(private val content: Content) {
         val notices = mutableListOf<Notice>()
         var s = state
         val old = s.daily
+        if (days > 1 && old?.completed == true) {
+            // Aradaki günlerde görev yapılmadı: seri kopar.
+            s = s.copy(dailyStreak = 0)
+            notices += Notice(NoticeKind.WARNING, texts.format("gunluk_kacirildi"))
+        }
         if (old != null && !old.completed) {
             val rng = Rng(s.rngState)
             val penalty = rng.chance(PENALTY_CHANCE)
@@ -321,7 +336,7 @@ class EffectApplier(private val content: Content) {
 
     /** O günün Günlük Görevini şablonlardan rastgele üretir. */
     fun newDaily(state: WorldState): Result {
-        val templates = content.dailyTemplates.values.sortedBy { it.id }
+        val templates = content.dailyTemplates.values.filter { it.condition?.test(state) ?: true }.sortedBy { it.id }
         if (templates.isEmpty()) return Result(state.copy(daily = null), emptyList())
         val rng = Rng(state.rngState)
         val t = templates[rng.nextInt(templates.size)]
@@ -345,7 +360,12 @@ class EffectApplier(private val content: Content) {
             .withPlayer { it.copy(freePoints = it.freePoints + points) }
         val notice = Notice(NoticeKind.QUEST, texts.format("gunluk_tamam"), listOf(texts.format("gunluk_odul", "n" to points, "xp" to template.xp)))
         val xp = gainXp(done, template.xp.toLong())
-        return Result(xp.state, listOf(notice) + xp.notices)
+        val title = when (streak) {
+            STREAK_TITLE_WEEK -> grantTitleIfDefined(xp.state, TITLE_STREAK_WEEK)
+            STREAK_TITLE_MONTH -> grantTitleIfDefined(xp.state, TITLE_STREAK_MONTH)
+            else -> Result(xp.state, emptyList())
+        }
+        return Result(title.state, listOf(notice) + xp.notices + title.notices)
     }
 
     // ---- Tetikleyiciler ----
@@ -382,9 +402,9 @@ class EffectApplier(private val content: Content) {
 
         for (skill in p.skills) {
             val def = content.skills[skill.id] ?: continue
-            if (skill.level >= Progression.SKILL_MAX_LEVEL && def.evolutions.size == 2) {
+            if (skill.level >= Progression.SKILL_MAX_LEVEL && def.evolutions.size == 2 && !s.hasFlag(declinedFlag(PromptKind.SKILL_EVOLUTION, skill.id))) {
                 enqueue(
-                    SystemPrompt(PromptKind.SKILL_EVOLUTION, def.evolutions, skill.id),
+                    SystemPrompt(PromptKind.SKILL_EVOLUTION, def.evolutions + PromptKind.DECLINE, skill.id),
                     Notice(NoticeKind.SKILL, texts.formatL("yetenek_evrim_teklifi", "name" to def.name), rarity = def.rarity),
                 )
             }
@@ -473,7 +493,7 @@ class EffectApplier(private val content: Content) {
     /** Kendini açan arayüz: sekmeyi verir ve kendi bildirimini üretir; zaten açıksa sessiz. */
     fun unlockTab(state: WorldState, tab: String): Result {
         if (tab in state.unlockedTabs) return Result(state, emptyList())
-        val key = "sekme_$tab"
+        val key = "sekme_$tab".takeIf { texts[it] != null } ?: "sekme_bilinmeyen"
         val notice = Notice(NoticeKind.SYSTEM, texts.format(key))
         return Result(state.copy(unlockedTabs = state.unlockedTabs + tab), listOf(notice))
     }
@@ -495,6 +515,14 @@ class EffectApplier(private val content: Content) {
 
     companion object {
         const val GENERIC_EVOLUTION = "genel"
+
+        const val STREAK_TITLE_WEEK = 7
+        const val STREAK_TITLE_MONTH = 30
+        const val TITLE_STREAK_WEEK = "disiplinli"
+        const val TITLE_STREAK_MONTH = "kirilmaz_rutin"
+        const val TITLE_FIRST_CLASS = "ilk_siniflanan"
+        const val TITLE_FIRST_EVOLUTION = "ilk_evrilen"
+        const val TITLE_FIRST_CRAFT = "ilk_zanaatkar"
 
         /** İhmal edilen Günlük Görevde Ceza Bölgesi'ne ışınlanma olasılığı (DECISIONS #23). */
         const val PENALTY_CHANCE = 0.5

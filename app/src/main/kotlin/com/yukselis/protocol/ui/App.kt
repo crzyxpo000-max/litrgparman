@@ -131,7 +131,8 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
     }
 
     val tabs = Tab.entries.filter { it.grant == null || it.grant in status.tabs }
-    if (tab !in tabs) tab = Tab.STORY
+    // Verilmemiş bir sekme seçili kaldıysa (ör. eski kayıt yüklendi) Hikaye gösterilir.
+    val active = if (tab in tabs) tab else Tab.STORY
 
     Box(modifier = Modifier.fillMaxSize()) {
     Scaffold(
@@ -140,7 +141,7 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
             NavigationBar {
                 tabs.forEach { t ->
                     NavigationBarItem(
-                        selected = tab == t,
+                        selected = active == t,
                         onClick = {
                             tab = t
                             viewModel.clearActionNotices()
@@ -155,7 +156,7 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
         containerColor = MaterialTheme.colorScheme.background,
     ) { padding ->
         val content = Modifier.padding(padding)
-        when (tab) {
+        when (active) {
             Tab.STORY -> StoryScreen(
                 scene = scene,
                 freshNotices = ui.freshNotices,
@@ -190,7 +191,7 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
     if (ui.celebration.isNotEmpty()) {
         CelebrationOverlay(ui.celebration, ui.settings.haptics, viewModel::dismissCelebration)
     } else {
-        scene.prompt?.let { PromptOverlay(it, ui.settings.haptics, viewModel::resolvePrompt) }
+        scene.prompt?.let { p -> PromptOverlay(p, ui.settings.haptics) { option -> viewModel.resolvePrompt(p.kind, p.subject, option) } }
     }
     }
 }

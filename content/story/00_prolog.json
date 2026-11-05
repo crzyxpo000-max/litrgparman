@@ -129,6 +129,11 @@
             },
             {
               "bayrak": "yanki_bagi"
+            },
+            {
+              "ahlak": {
+                "insanlik": -3
+              }
             }
           ],
           "sonraki": "ogretici_uyanis"
@@ -204,10 +209,6 @@
             {
               "tr": "Okumaya zaman ayıranlar daha fazlasını görür.",
               "en": "Those who take the time to read see more."
-            },
-            {
-              "tr": "Algı +1",
-              "en": "Perception +1"
             }
           ],
           "kosul": {
@@ -252,6 +253,11 @@
               "egilim": {
                 "menzilli": 1
               }
+            },
+            {
+              "ahlak": {
+                "duzen": 2
+              }
             }
           ],
           "sonraki": "ilk_canavar"
@@ -286,6 +292,11 @@
             {
               "egilim": {
                 "gizlilik": 2
+              }
+            },
+            {
+              "ahlak": {
+                "merhamet": -4
               }
             }
           ],
@@ -360,11 +371,6 @@
             "tr": "Kırık bir dalı kap ve saldır",
             "en": "Grab a broken branch and attack"
           },
-          "gerekli": {
-            "stat": {
-              "str": 5
-            }
-          },
           "etkiler": [
             {
               "bayrak": "ilk_oldurme"
@@ -378,6 +384,11 @@
             {
               "egilim": {
                 "yakin_dovus": 2
+              }
+            },
+            {
+              "ahlak": {
+                "insanlik": -2
               }
             }
           ],
@@ -450,8 +461,8 @@
             "bayrak": "yanki_bagi"
           },
           "metin": {
-            "tr": "[Kanal Faresi · Sv. 3 · Gerçek Sv. 3 · Zaaf: arka bacak] Başkalarının penceresinde yalnızca \"???\" yazıyor.",
-            "en": "[Sewer Rat · Lv. 3 · True Lv. 3 · Weakness: hind leg] Everyone else's window just says \"???\"."
+            "tr": "[Kanal Faresi · Görünen Sv. 2 · Gerçek Sv. 3 · Zaaf: sol arka bacak] Başkalarının penceresinde yalnızca \"???\" yazıyor.",
+            "en": "[Sewer Rat · Shown Lv. 2 · True Lv. 3 · Weakness: left hind leg] Everyone else's window just says \"???\"."
           }
         }
       ]
@@ -501,29 +512,7 @@
           "en": "The purple sky doesn't go dark; it just fades. Your first night in the Tutorial Layer begins."
         }
       ],
-      "bildirimler": [
-        {
-          "tur": "gorev",
-          "baslik": {
-            "tr": "Günlük Görev açıldı",
-            "en": "Daily Quest unlocked"
-          },
-          "satirlar": [
-            {
-              "tr": "100 şınav · 100 mekik · 10 km koşu",
-              "en": "100 push-ups · 100 sit-ups · 6-mile run"
-            },
-            {
-              "tr": "Ödül: +1 serbest stat puanı",
-              "en": "Reward: +1 free stat point"
-            },
-            {
-              "tr": "Başarısızlık: Ceza Bölgesi",
-              "en": "Failure: Penalty Zone"
-            }
-          ]
-        }
-      ],
+      "bildirimler": [],
       "secenekler": [
         {
           "id": "uyu",
@@ -534,6 +523,11 @@
           "etkiler": [
             {
               "gun": 1
+            },
+            {
+              "ahlak": {
+                "insanlik": 2
+              }
             }
           ],
           "sonraki": "demo_son"
@@ -556,6 +550,11 @@
             {
               "egilim": {
                 "menzilli": 1
+              }
+            },
+            {
+              "ahlak": {
+                "duzen": 2
               }
             }
           ],
@@ -584,8 +583,8 @@
           "en": "When morning comes, the System opens a new window: 29 days left in the Tutorial Layer."
         },
         {
-          "tr": "Yükseliş Protokolü'nün Aşama 1 demosu burada bitiyor. Seçimlerin kayda geçti; hikaye sonraki aşamalarda buradan devam edecek.",
-          "en": "This is where the Ascension Protocol Phase 1 demo ends. Your choices have been recorded; the story picks up from here in later phases."
+          "tr": "Yükseliş Protokolü'nün bu sürümdeki demosu burada bitiyor. Seçimlerin kayda geçti; hikaye sonraki aşamalarda buradan devam edecek.",
+          "en": "This is where the Ascension Protocol demo for this build ends. Your choices have been recorded; the story picks up from here in later phases."
         }
       ],
       "bildirimler": [

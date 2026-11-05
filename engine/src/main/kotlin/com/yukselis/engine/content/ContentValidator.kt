@@ -55,6 +55,7 @@ object ContentValidator {
                 is Effect.AddItem -> if (e.itemId !in content.items) problems += "$where: tanımsız eşya '${e.itemId}'"
                 is Effect.EssenceInsight -> if (e.essenceId !in content.essences) problems += "$where: tanımsız Öz '${e.essenceId}'"
                 is Effect.DailyProgress -> if (e.kind !in DAILY_KINDS) problems += "$where: bilinmeyen Günlük Görev türü '${e.kind}'"
+                is Effect.UnlockTab -> if (e.tab !in com.yukselis.engine.core.WorldState.TABS) problems += "$where: bilinmeyen sekme '${e.tab}'"
                 else -> Unit
             }
         }
@@ -159,6 +160,7 @@ object ContentValidator {
             checkText(d.description, "günlük ${d.id}.aciklama")
             if (d.kind !in DAILY_KINDS) problems += "günlük ${d.id}: bilinmeyen tür '${d.kind}'"
             if (d.steps < 1) problems += "günlük ${d.id}: adim en az 1"
+            checkCondition(d.condition, "günlük ${d.id}")
         }
 
         // ---- Sahneler ----
@@ -171,6 +173,10 @@ object ContentValidator {
             scene.paragraphs.forEachIndexed { i, p ->
                 checkText(p.text, "$at paragraf ${i + 1}")
                 checkCondition(p.condition, "$at paragraf ${i + 1}")
+            }
+            scene.insights.forEachIndexed { i, ins ->
+                checkText(ins.text, "$at sezgi ${i + 1}")
+                checkCondition(ins.condition, "$at sezgi ${i + 1}")
             }
             scene.notices.forEachIndexed { i, n ->
                 checkText(n.notice.title, "$at bildirim ${i + 1} başlık")

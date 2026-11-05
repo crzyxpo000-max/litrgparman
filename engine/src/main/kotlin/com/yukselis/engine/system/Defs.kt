@@ -137,4 +137,6 @@ data class DailyTemplate(
     val kind: String,
     val steps: Int,
     val xp: Int,
+    /** Şablonun çıkabilmesi için koşul (ör. keşif/kapı görevleri gün döngüsü gelene kadar kapalı). */
+    val condition: Condition? = null,
 )

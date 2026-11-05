@@ -37,7 +37,7 @@ import com.yukselis.protocol.ui.theme.noticeColor
 fun SystemCard(notice: NoticeView, modifier: Modifier = Modifier) {
     val accent = noticeColor(notice.kind, notice.rarity)
     val shape = RoundedCornerShape(6.dp)
-    val spoken = (listOf(notice.title) + notice.lines).joinToString(". ")
+    val spoken = (listOf(notice.title) + notice.lines).joinToString(" ") { if (it.endsWith(".")) it else "$it." }
     Column(
         modifier = modifier
             .fillMaxWidth()

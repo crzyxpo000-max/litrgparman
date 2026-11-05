@@ -235,6 +235,7 @@ object ContentParser {
         kind = o.string("tur") ?: throw ContentFormatException("günlük $id: 'tur' eksik"),
         steps = o.int("adim") ?: 1,
         xp = o.int("xp") ?: 0,
+        condition = o["kosul"]?.let { condition(it.jsonObject) },
     )
 
     private fun parseScene(o: JsonObject): Scene {

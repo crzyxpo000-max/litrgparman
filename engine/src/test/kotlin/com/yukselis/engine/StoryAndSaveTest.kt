@@ -118,7 +118,7 @@ class StoryEngineTest {
         s = engine.choose(s, "pencereyi_oku", Lang.TR).state
         s = engine.choose(s, "saklan", Lang.TR).state
         s = engine.choose(s, "kac", Lang.TR).state
-        assertEquals(-10, s.morality.mercy)
+        assertEquals(-14, s.morality.mercy) // saklan −4 + kac −10
         s = engine.choose(s, "nobet_tut", Lang.TR).state
         val notices = engine.view(s, Lang.TR).current.notices
         assertTrue(notices.any { it.lines.any { l -> l.contains("Geride bıraktığın") } })

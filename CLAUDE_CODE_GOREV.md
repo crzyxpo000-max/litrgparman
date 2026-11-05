@@ -115,26 +115,26 @@ Her aşamanın sonunda `scripts/check.sh` geçer, `CLAUDE.md` ile `PROGRESS.md` 
 - [ ] `docs/PROGRESS.md` oluşturulur.
 
 ### Aşama 2 — Sistem mekanikleri
-- [ ] **Eğilim vektörü** (8 eğilim): `egilim_*` değişkenleri yeni modele taşınır ve `egilim` etkisi eklenir.
-- [ ] **Sınıflar:** `content/classes.*` dosyasında 8 temel sınıf (her eğilime bir) ve 4 gizli sınıf bulunur (Kapı Yiyen, Sistem Hatası, Yas Tutan, Avcı'nın Gözü). Her sınıfın açılma koşulu, seviye başı stat artışı ve başlangıç yeteneği tanımlıdır.
-- [ ] Seviye 10'da sınıf teklifi olayı açılır: en güçlü iki eğilimden birer sınıf + bir gizli ya da nadir sınıf.
-- [ ] **Serbest stat dağıtımı:** Durum ekranında +/− ve onay; onaylanan dağıtım geri alınamaz.
-- [ ] **Kademeler ve evrim:** kademe eşiğinde seviye kazancı durur ve Evrim Görevi olayı açılır. E kademesi evrimi her temel sınıf için 2 seçenekle gelir.
-- [ ] **Yetenekler:** model (aktif/pasif, maliyet, bekleme, seviye 1–10, kullanım XP'si, 2 dallı evrim, kaynaştırma tarifleri, ceza yetenekleri) ve en az 30 yetenek.
-- [ ] **Unvanlar:** en az 15 unvan. "İlk" unvanları dünya genelinde bir kez verilir ve bunun kaydı tutulur (Aşama 5'te rakipler de alabilecek).
-- [ ] **Meslekler:** model, seçim olayı, ayrı XP ve basit üretim (en az Simyacı, 5 tarif; Çanta ekranından).
-- [ ] **Öz ve Yol:** model ve D kademesindeki yuva; içerik Aşama 7'de.
-- [ ] **Günlük Görev:** şablonlardan günlük üretim, ilerleme etkisi, ödül ve Ceza Bölgesi olay kancası.
-- [ ] **Arayüz:** Yetenekler ekranı (liste, uzun basınca ayrıntı, evrim seçimi), seviye atlama ve evrim için tam ekran kart, animasyon ve titreşim.
-- [ ] Sistem bildirim metinleri `EffectApplier`'dan içerik dosyasına taşınır (DECISIONS #7).
-- [ ] **OP MC (GDD: OP MC tasarımı):**
-  - [ ] Yankı bağı kanon: prolog/açılışta oyuncunun penceresi bozulur, Yankı'ya bağlanır; bayrak `yanki_bagi`. (Aşama 1 prologu için retrofit.)
-  - [ ] Günlük Görev yalnızca oyuncuda; metinler bunu söyler. Seri bonusu: her 7 günlük seride +1 ek serbest puan.
-  - [ ] Gizli bilgi altyapısı: sahnelere stat koşullu **pasif sezgi** satırları (`sezgiler`), "[ALG]" önekiyle ayrı stilde gösterilir; gizli Sistem satırları.
-  - [ ] Garanti: seviye 10 teklifinin üçüncü seçeneği her zaman gizli sınıf ("Yankı'nın önerisi" geri dönüşü); oyun tarzına bağlı tek bir **Benzersiz** yetenek (her eğilim için bir tane) sınıf seçiminde verilir.
-  - [ ] Üstel büyüme: sınıfın seviye başı artışı kademeyle çarpılır (F ×1, E ×2, D ×3…); Durum ekranında **insanlık yüzdeliği** ("İlk %0,001").
-  - [ ] Kendini açan arayüz: Yetenekler ve Çanta sekmeleri Sistem verene kadar gizli; her biri kendi bildirimiyle açılır (`arayuz` etkisi + ilk yetenek/eşyada otomatik).
-  - [ ] Denge: her önemli seçim en az bir ahlak eksenini oynatır (içerik kuralı; Aşama 4'te doğrulayıcı uyarısı).
+- [x] **Eğilim vektörü** (8 eğilim): `egilim_*` değişkenleri yeni modele taşınır ve `egilim` etkisi eklenir.
+- [x] **Sınıflar:** `content/classes.*` dosyasında 8 temel sınıf (her eğilime bir) ve 4 gizli sınıf bulunur (Kapı Yiyen, Sistem Hatası, Yas Tutan, Avcı'nın Gözü). Her sınıfın açılma koşulu, seviye başı stat artışı ve başlangıç yeteneği tanımlıdır.
+- [x] Seviye 10'da sınıf teklifi olayı açılır: en güçlü iki eğilimden birer sınıf + bir gizli ya da nadir sınıf.
+- [x] **Serbest stat dağıtımı:** Durum ekranında +/− ve onay; onaylanan dağıtım geri alınamaz.
+- [x] **Kademeler ve evrim:** kademe eşiğinde seviye kazancı durur ve Evrim Görevi olayı açılır. E kademesi evrimi her temel sınıf için 2 seçenekle gelir.
+- [x] **Yetenekler:** model (aktif/pasif, maliyet, bekleme, seviye 1–10, kullanım XP'si, 2 dallı evrim, kaynaştırma tarifleri, ceza yetenekleri) ve en az 30 yetenek.
+- [x] **Unvanlar:** en az 15 unvan. "İlk" unvanları dünya genelinde bir kez verilir ve bunun kaydı tutulur (Aşama 5'te rakipler de alabilecek).
+- [x] **Meslekler:** model, seçim olayı, ayrı XP ve basit üretim (en az Simyacı, 5 tarif; Çanta ekranından).
+- [x] **Öz ve Yol:** model ve D kademesindeki yuva; içerik Aşama 7'de.
+- [x] **Günlük Görev:** şablonlardan günlük üretim, ilerleme etkisi, ödül ve Ceza Bölgesi olay kancası.
+- [x] **Arayüz:** Yetenekler ekranı (liste, uzun basınca ayrıntı, evrim seçimi), seviye atlama ve evrim için tam ekran kart, animasyon ve titreşim.
+- [x] Sistem bildirim metinleri `EffectApplier`'dan içerik dosyasına taşınır (DECISIONS #7).
+- [x] **OP MC (GDD: OP MC tasarımı):**
+  - [x] Yankı bağı kanon: prolog/açılışta oyuncunun penceresi bozulur, Yankı'ya bağlanır; bayrak `yanki_bagi`. (Aşama 1 prologu için retrofit.)
+  - [x] Günlük Görev yalnızca oyuncuda; metinler bunu söyler. Seri bonusu: her 7 günlük seride +1 ek serbest puan.
+  - [x] Gizli bilgi altyapısı: sahnelere stat koşullu **pasif sezgi** satırları (`sezgiler`), "[ALG]" önekiyle ayrı stilde gösterilir; gizli Sistem satırları.
+  - [x] Garanti: seviye 10 teklifinin üçüncü seçeneği her zaman gizli sınıf ("Yankı'nın önerisi" geri dönüşü); oyun tarzına bağlı tek bir **Benzersiz** yetenek (her eğilim için bir tane) sınıf seçiminde verilir.
+  - [x] Üstel büyüme: sınıfın seviye başı artışı kademeyle çarpılır (F ×1, E ×2, D ×3…); Durum ekranında **insanlık yüzdeliği** ("İlk %0,001").
+  - [x] Kendini açan arayüz: Yetenekler ve Çanta sekmeleri Sistem verene kadar gizli; her biri kendi bildirimiyle açılır (`arayuz` etkisi + ilk yetenek/eşyada otomatik).
+  - [x] Denge: her önemli seçim en az bir ahlak eksenini oynatır (içerik kuralı; Aşama 4'te doğrulayıcı uyarısı).
 
 ### Aşama 3 — Savaş
 - [ ] Savaş durumu `WorldState` içinde tutulur; savaşın ortasında kaydedip yükleyince aynı yerden devam edilir.

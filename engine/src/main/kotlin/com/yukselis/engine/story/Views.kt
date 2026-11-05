@@ -31,7 +31,7 @@ data class PassageView(
     val paragraphs: List<String>,
     val notices: List<NoticeView>,
     /** Pasif Sistem sezgisi satırları; yalnızca oyuncu görür, ayrı stilde gösterilir. */
-    val insights: List<String> = emptyList(),
+    val insights: List<InsightView> = emptyList(),
     /** Geçmiş pasajlarda oyuncunun seçtiği seçenek. */
     val chosenLabel: String? = null,
 )
@@ -48,16 +48,23 @@ data class SceneView(
     val prompt: PromptView? = null,
 )
 
+/** `echo`: stat sezgisi değil, Yankı'nın sesi (öneksiz satır). */
+data class InsightView(val text: String, val echo: Boolean)
+
 data class PromptOptionView(
     val id: String,
     val name: String,
     val description: String,
     val details: List<String> = emptyList(),
     val rarity: Rarity? = null,
+    /** "Yankı'nın önerisi" gibi Yankı satırı; ayrı renkte gösterilir. */
+    val echoNote: String? = null,
 )
 
 data class PromptView(
     val kind: PromptKind,
+    /** İstemin konusu; çözülürken geri gönderilir (çift dokunuş koruması). */
+    val subject: String?,
     val title: String,
     val lines: List<String>,
     val options: List<PromptOptionView>,
@@ -104,6 +111,7 @@ data class SkillView(
     val description: String,
     val type: SkillType,
     val rarity: Rarity,
+    val rarityName: String,
     val level: Int,
     val xp: Int,
     /** Maksimum seviyede 0. */

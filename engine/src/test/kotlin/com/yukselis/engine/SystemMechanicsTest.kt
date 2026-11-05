@@ -118,7 +118,8 @@ class SystemMechanicsTest {
 
     @Test
     fun `tanimsiz evrimde genel evrim tum statlara bonus verir`() {
-        var s = fresh().copy(player = fresh().player.copy(level = 49, classId = "kirici", unlockedGrade = Grade.E))
+        // "İlk Evrilen" başkasında: unvan bonusu hesabı karıştırmasın.
+        var s = fresh().copy(player = fresh().player.copy(level = 49, classId = "kirici", unlockedGrade = Grade.E), firstClaims = mapOf("ilk_evrilen" to "aras_kurt"))
         s = apply(s, Effect.GainXp(Progression.xpToNext(49)))
         val evo = s.prompts.first { it.kind == PromptKind.EVOLUTION }
         assertEquals(listOf("genel"), evo.options)
@@ -154,6 +155,7 @@ class SystemMechanicsTest {
         s = apply(s, Effect.SkillXp("golge_adimi", 1000))
         assertEquals(10, s.player.skill("golge_adimi")!!.level)
         val prompt = s.prompts.single { it.kind == PromptKind.SKILL_EVOLUTION }
+        assertEquals(listOf("bosluk_adimi", "golge_avi", PromptKind.DECLINE), prompt.options)
         s = s.copy(prompts = listOf(prompt))
         s = engine.resolvePrompt(s, "bosluk_adimi", lang).state
         assertNull(s.player.skill("golge_adimi"))
@@ -322,7 +324,7 @@ class SystemMechanicsTest {
         assertEquals("kapi_yiyen", offer.options[2])
         s = s.copy(prompts = listOf(offer))
         val option = engine.view(s, Lang.EN).prompt!!.options.first { it.id == "kapi_yiyen" }
-        assertTrue(option.details.first().startsWith("[Echo's suggestion]"))
+        assertTrue(option.echoNote!!.startsWith("[Echo's suggestion]"))
     }
 
     @Test
@@ -361,8 +363,10 @@ class SystemMechanicsTest {
         val sharp = apply(base, Effect.AddStat(Stat.PER, 1), Effect.SetFlag("yanki_bagi"))
         val insights = engine.view(sharp, Lang.EN).current.insights
         assertEquals(2, insights.size)
-        assertTrue(insights[0].startsWith("[PER] "))
-        assertTrue(insights[1].startsWith("[Sewer Rat"))
+        assertTrue(insights[0].text.startsWith("[PER] "))
+        assertFalse(insights[0].echo)
+        assertTrue(insights[1].text.startsWith("[Sewer Rat"))
+        assertTrue(insights[1].echo)
     }
 
     @Test
@@ -394,6 +398,86 @@ class SystemMechanicsTest {
         val next = engine.choose(s, choice, lang).state
         assertTrue(next.hasFlag("yanki_bagi"))
         assertTrue(engine.view(s, lang).current.notices.any { it.kind == com.yukselis.engine.story.NoticeKind.ECHO })
+    }
+
+    // ---- Bağımsız inceleme düzeltmeleri ----
+
+    @Test
+    fun `kaynastirma girdileri artik yoksa reddedilir`() {
+        var s = apply(fresh(), Effect.GrantSkill("alev_oku"), Effect.GrantSkill("ruzgar_adimi"), Effect.AddVar("hareketli_atis", 100))
+        s = s.copy(player = s.player.copy(skills = s.player.skills.map { it.copy(level = 10) }), prompts = emptyList())
+        s = apply(s, Effect.AddVar("x", 0))
+        val fusion = s.prompts.first { it.kind == PromptKind.FUSION }
+        // Önce yetenek evrimi: alev_oku gider.
+        s = s.copy(prompts = listOf(s.prompts.first { it.kind == PromptKind.SKILL_EVOLUTION && it.subject == "alev_oku" }, fusion))
+        s = engine.resolvePrompt(s, content.skills.getValue("alev_oku").evolutions.first(), lang).state
+        try {
+            engine.resolvePrompt(s, PromptKind.ACCEPT, lang)
+            fail("Girdisi kalmayan kaynaştırma reddedilmeli")
+        } catch (_: ActionRejected) {
+        }
+    }
+
+    @Test
+    fun `yetenek evrimi ertelenebilir ve kademe evriminde yeniden sorulur`() {
+        var s = apply(fresh(), Effect.GrantSkill("golge_adimi"), Effect.SkillXp("golge_adimi", 1000))
+        s = s.copy(prompts = s.prompts.filter { it.kind == PromptKind.SKILL_EVOLUTION })
+        s = engine.resolvePrompt(s, PromptKind.DECLINE, lang).state
+        s = apply(s, Effect.AddVar("x", 0))
+        assertTrue(s.prompts.none { it.kind == PromptKind.SKILL_EVOLUTION })
+        assertEquals(10, s.player.skill("golge_adimi")!!.level)
+    }
+
+    @Test
+    fun `degisen istem eski karttan gelen yanitla cozulmez`() {
+        var s = apply(fresh(), Effect.GainXp(xpForLevel(10)))
+        val first = s.prompts.first()
+        s = engine.resolvePrompt(s, first.options.first(), lang, first.kind, first.subject).state
+        val next = s.prompts.firstOrNull() ?: return
+        try {
+            engine.resolvePrompt(s, next.options.first(), lang, first.kind, first.subject)
+            fail("Eski istemin türüyle yeni istem çözülmemeli")
+        } catch (_: ActionRejected) {
+        }
+    }
+
+    @Test
+    fun `yedi gunluk seri unvan verir ve gun atlamak seriyi koparir`() {
+        var s = fresh().copy(dailyStreak = 6)
+        val q = s.daily!!
+        s = apply(s, Effect.DailyProgress(content.dailyTemplates.getValue(q.templateId).kind, q.steps))
+        assertEquals(7, s.dailyStreak)
+        assertTrue("disiplinli" in s.player.titles)
+        assertEquals(2, s.player.freePoints)
+        s = apply(s, Effect.AdvanceDays(3))
+        assertEquals(0, s.dailyStreak)
+    }
+
+    @Test
+    fun `sistem olay unvanlari verilir`() {
+        var s = apply(fresh(), Effect.ShiftAffinity(Affinity.MELEE, 5), Effect.GainXp(xpForLevel(10)))
+        s = s.copy(prompts = s.prompts.filter { it.kind == PromptKind.CLASS_OFFER })
+        s = engine.resolvePrompt(s, "yakin_muharip", lang).state
+        assertTrue("ilk_siniflanan" in s.player.titles)
+    }
+
+    @Test
+    fun `gunluk sablon kosulu kesif ve kapi gorevleri simdilik cikmaz`() {
+        repeat(30) { i ->
+            val s = engine.newGame("T", GameMode.NORMAL, seed = i.toLong())
+            assertEquals("antrenman", content.dailyTemplates.getValue(s.daily!!.templateId).kind)
+        }
+    }
+
+    @Test
+    fun `sanitize eski icerige isaret eden istemleri atar ve gunluk uretir`() {
+        val broken = fresh().copy(
+            daily = null,
+            prompts = listOf(com.yukselis.engine.core.SystemPrompt(PromptKind.SKILL_EVOLUTION, listOf("yok_boyle"), "yok")),
+        )
+        val s = engine.sanitize(broken)
+        assertTrue(s.prompts.isEmpty())
+        assertNotNull(s.daily)
     }
 
     private fun <T> assertNotNullAndGet(v: T?): T {

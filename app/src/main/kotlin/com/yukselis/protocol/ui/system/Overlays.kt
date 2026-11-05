@@ -127,7 +127,7 @@ private fun OptionCard(option: PromptOptionView, onClick: () -> Unit) {
             .border(1.5.dp, accent, shape)
             .clickable(onClick = onClick)
             .semantics(mergeDescendants = true) {
-                contentDescription = (listOf(option.name, option.description) + option.details).joinToString(". ")
+                contentDescription = (listOfNotNull(option.name, option.description, option.echoNote) + option.details).joinToString(" ")
             },
     ) {
         Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -135,10 +135,8 @@ private fun OptionCard(option: PromptOptionView, onClick: () -> Unit) {
             if (option.description.isNotBlank()) {
                 Text(option.description, style = GameType.narrationPast, color = Color.White.copy(alpha = 0.9f))
             }
-            option.details.forEach { d ->
-                val echo = d.startsWith("[Yankı") || d.startsWith("[Echo")
-                Text(d, style = GameType.system, color = if (echo) EchoColor else Color.White.copy(alpha = 0.65f))
-            }
+            option.echoNote?.let { Text(it, style = GameType.system, color = EchoColor) }
+            option.details.forEach { d -> Text(d, style = GameType.system, color = Color.White.copy(alpha = 0.65f)) }
         }
     }
 }
@@ -165,6 +163,7 @@ fun CelebrationOverlay(notices: List<NoticeView>, haptics: Boolean, onDismiss: (
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(10.dp),
             modifier = Modifier
+                .verticalScroll(rememberScrollState())
                 .padding(28.dp)
                 .scale(scale)
                 .alpha(alpha),

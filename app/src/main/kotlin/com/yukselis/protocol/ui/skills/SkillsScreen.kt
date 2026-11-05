@@ -113,7 +113,7 @@ private fun SkillDetail(skill: SkillView, onDismiss: () -> Unit) {
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(skill.description, style = GameType.narrationPast)
-                Text(skill.rarity.label.let { stringResource(R.string.rarity_line, if (isTr()) it.tr else it.en) }, style = GameType.system)
+                Text(stringResource(R.string.rarity_line, skill.rarityName), style = GameType.system)
                 costText(skill)?.let { Text(it, style = GameType.system) }
                 if (skill.evolutions.isNotEmpty()) {
                     Text(stringResource(R.string.evolves_into, skill.evolutions.joinToString(" / ")), style = GameType.system, color = Color(0xFFFFA726))
@@ -124,5 +124,3 @@ private fun SkillDetail(skill: SkillView, onDismiss: () -> Unit) {
     )
 }
 
-@Composable
-private fun isTr(): Boolean = androidx.compose.ui.platform.LocalConfiguration.current.locales[0].language == "tr"

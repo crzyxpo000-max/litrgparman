@@ -38,6 +38,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.yukselis.engine.story.ChoiceView
+import com.yukselis.engine.story.InsightView
 import com.yukselis.engine.story.NoticeKind
 import com.yukselis.engine.story.NoticeView
 import com.yukselis.engine.story.PassageView
@@ -180,7 +181,7 @@ private fun PastPassage(passage: PassageView) {
 
 /** Pasif Sistem sezgisi: yalnızca oyuncunun gördüğü satırlar; tek aralıklı, renkli, sol çizgili. */
 @Composable
-private fun Insights(lines: List<String>) {
+private fun Insights(lines: List<InsightView>) {
     Column(
         verticalArrangement = Arrangement.spacedBy(6.dp),
         modifier = Modifier
@@ -189,8 +190,7 @@ private fun Insights(lines: List<String>) {
             .padding(start = 12.dp),
     ) {
         lines.forEach {
-            // "[ALG]" önekli satır stat sezgisidir; öneksiz satır Yankı'nın sesidir.
-            Text(it, style = GameType.system.copy(fontStyle = FontStyle.Italic), color = if (it.startsWith("[")) InsightColor else EchoColor)
+            Text(it.text, style = GameType.system.copy(fontStyle = FontStyle.Italic), color = if (it.echo) EchoColor else InsightColor)
         }
     }
 }

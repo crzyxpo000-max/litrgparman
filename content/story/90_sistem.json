@@ -5,12 +5,12 @@
       "yer": "ceza_bolgesi",
       "paragraflar": [
         {
-          "tr": "Zemin ayağının altından kayıp gidiyor. Bir an sonra tuz kokulu, bembeyaz bir düzlükte duruyorsun; ufuk yok, gölge yok, yalnızca gökyüzünde kırmızı bir sayaç.",
-          "en": "The ground drops out from under you. A heartbeat later you're standing on a blinding salt flat: no horizon, no shadows, just a red countdown burning in the sky."
+          "tr": "Bir göz kırpımında kendi sokağındasın; ama gece, ıssız ve donmuş. Her saat, Günlük Görevi bıraktığın dakikada durmuş.",
+          "en": "One blink and you're standing on your own street, except it's night, empty, and frozen. Every clock stopped at the minute you skipped your Daily Quest."
         },
         {
-          "tr": "Tuzun altından bir şey kıpırdıyor. Sonra bir şey daha. Sistem sana kaçmak için yer bırakmamış; yalnızca dayanmak için süre.",
-          "en": "Something shifts under the salt. Then something else. The System didn't leave you anywhere to run. Just time to hold out."
+          "tr": "Pencerelerde komşularının yüzleri var, ama gülümsemeleri fazla geniş. Kapılar birer birer açılıyor.",
+          "en": "Your neighbors' faces are in the windows, but their smiles are too wide. The doors start opening, one by one."
         }
       ],
       "bildirimler": [
@@ -22,8 +22,8 @@
           },
           "satirlar": [
             {
-              "tr": "Günlük Görev ihmal edildi. Hayatta kalma süresi: 4 saat.",
-              "en": "Daily Quest neglected. Survival window: 4 hours."
+              "tr": "Günlük Görev ihmal edildi. Saatler yeniden çalışana kadar dayan.",
+              "en": "Daily Quest neglected. Hold out until the clocks start again."
             },
             {
               "tr": "Disiplin bir seçenek değildir.",
@@ -36,8 +36,8 @@
         {
           "id": "dayan",
           "etiket": {
-            "tr": "Sırtını bir kayaya ver ve dayan",
-            "en": "Put your back to a rock and hold the line"
+            "tr": "Sırtını bir duvara ver ve dayan",
+            "en": "Put your back to a wall and hold the line"
           },
           "etkiler": [
             {
@@ -55,6 +55,11 @@
             },
             {
               "xp": 20
+            },
+            {
+              "ahlak": {
+                "duzen": 2
+              }
             }
           ],
           "sonraki": "@geri"
@@ -62,8 +67,8 @@
         {
           "id": "saldir",
           "etiket": {
-            "tr": "Tuzun altındakini çıkmadan vur",
-            "en": "Hit whatever's under the salt before it surfaces"
+            "tr": "Kapıdan ilk çıkana vur",
+            "en": "Hit the first thing out the door"
           },
           "etkiler": [
             {
@@ -81,6 +86,11 @@
             },
             {
               "xp": 35
+            },
+            {
+              "ahlak": {
+                "merhamet": -2
+              }
             }
           ],
           "sonraki": "@geri"
@@ -88,8 +98,8 @@
         {
           "id": "izle",
           "etiket": {
-            "tr": "Kıpırdama, kalıbı izle",
-            "en": "Stay still and read the pattern"
+            "tr": "Kıpırdama, saatleri izle",
+            "en": "Stay still and watch the clocks"
           },
           "gerekli": {
             "stat": {
@@ -112,6 +122,11 @@
             },
             {
               "xp": 25
+            },
+            {
+              "ahlak": {
+                "insanlik": -2
+              }
             }
           ],
           "sonraki": "@geri"

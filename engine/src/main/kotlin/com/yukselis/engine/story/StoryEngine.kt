@@ -31,7 +31,29 @@ class StoryEngine(val content: Content) {
 
     // ---- Hikaye dışı eylemler (geçersizse ActionRejected) ----
 
-    fun resolvePrompt(state: WorldState, optionId: String, lang: Lang): Outcome = outcome(actions.resolvePrompt(state, optionId), lang)
+    fun resolvePrompt(state: WorldState, optionId: String, lang: Lang, kind: PromptKind? = null, subject: String? = null): Outcome =
+        outcome(actions.resolvePrompt(state, optionId, kind, subject), lang)
+
+    /**
+     * Yüklenen kaydı içerikle uzlaştırır: artık var olmayan içeriğe işaret eden istemleri atar,
+     * Günlük Görevi olmayan (eski) kayda o günün görevini üretir. Kayıt yüklenince çağrılır.
+     */
+    fun sanitize(state: WorldState): WorldState {
+        val valid = state.prompts.filter { p ->
+            when (p.kind) {
+                PromptKind.CLASS_OFFER -> p.options.all { it in content.classes }
+                PromptKind.EVOLUTION -> p.options.all { it == EffectApplier.GENERIC_EVOLUTION || it in content.classes }
+                PromptKind.PROFESSION -> p.options.all { it in content.professions }
+                PromptKind.SKILL_EVOLUTION -> p.subject in content.skills && p.options.all { it == PromptKind.DECLINE || it in content.skills }
+                PromptKind.FUSION -> content.fusions.any { it.id == p.subject }
+                PromptKind.ESSENCE_BIND -> p.subject in content.essences
+            }
+        }
+        var s = state.copy(prompts = valid)
+        if (s.daily == null || s.daily?.templateId !in content.dailyTemplates) s = effects.newDaily(s).state
+        if (s.sceneId !in content.scenes) s = s.copy(sceneId = content.startScene)
+        return s
+    }
 
     fun allocate(state: WorldState, points: Map<Stat, Int>, lang: Lang): Outcome = outcome(actions.allocate(state, points), lang)
 
@@ -154,6 +176,7 @@ class StoryEngine(val content: Content) {
                     description = text(d.description[lang], state, lang),
                     type = d.type,
                     rarity = d.rarity,
+                    rarityName = d.rarity.label[lang],
                     level = s.level,
                     xp = s.xp,
                     xpToNext = if (s.level >= Progression.SKILL_MAX_LEVEL) 0 else Progression.skillXpToNext(s.level),
@@ -222,6 +245,8 @@ class StoryEngine(val content: Content) {
     private fun promptView(prompt: SystemPrompt, state: WorldState, lang: Lang): PromptView {
         val t = content.texts
         fun l(x: LText) = text(x[lang], state, lang)
+        fun pv(kind: PromptKind, title: String, lines: List<String>, options: List<PromptOptionView>) =
+            PromptView(kind, prompt.subject, title, lines, options)
         fun acceptOptions() = listOf(
             PromptOptionView(PromptKind.ACCEPT, t.format("kabul")[lang], ""),
             PromptOptionView(PromptKind.DECLINE, t.format("red")[lang], ""),
@@ -231,7 +256,7 @@ class StoryEngine(val content: Content) {
         fun skillName(id: String?) = content.skills[id]?.name ?: LText.EMPTY
 
         return when (prompt.kind) {
-            PromptKind.CLASS_OFFER -> PromptView(
+            PromptKind.CLASS_OFFER -> pv(
                 prompt.kind, l(t.format("sinif_teklifi")), listOf(l(t.format("sinif_teklifi_satir"))),
                 prompt.options.mapNotNull { id ->
                     val c = content.classes[id] ?: return@mapNotNull null
@@ -240,13 +265,13 @@ class StoryEngine(val content: Content) {
                         ClassKind.RARE -> Rarity.EPIC
                         else -> null
                     }
-                    val echo = if (effects.isEchoSuggestion(state, id)) listOf(l(t.format("yanki_onerisi"))) else emptyList()
-                    PromptOptionView(id, c.name[lang], l(c.description), echo + listOf(growthLine(c.growth, lang)) + skillLine(c.skill), rarity)
+                    val echo = if (effects.isEchoSuggestion(state, id)) l(t.format("yanki_onerisi")) else null
+                    PromptOptionView(id, c.name[lang], l(c.description), listOf(growthLine(c.growth, lang)) + skillLine(c.skill), rarity, echo)
                 },
             )
             PromptKind.EVOLUTION -> {
                 val g = prompt.subject ?: ""
-                PromptView(
+                pv(
                     prompt.kind, l(t.format("evrim_gorevi", "grade" to g)), listOf(l(t.format("evrim_gorevi_satir", "grade" to g))),
                     prompt.options.map { id ->
                         val c = content.classes[id]
@@ -266,24 +291,28 @@ class StoryEngine(val content: Content) {
                     },
                 )
             }
-            PromptKind.PROFESSION -> PromptView(
+            PromptKind.PROFESSION -> pv(
                 prompt.kind, l(t.format("meslek_teklifi")), listOf(l(t.format("meslek_teklifi_satir"))),
                 prompt.options.mapNotNull { id -> content.professions[id]?.let { PromptOptionView(id, it.name[lang], l(it.description)) } },
             )
             PromptKind.SKILL_EVOLUTION -> {
                 val from = content.skills[prompt.subject]
-                PromptView(
+                pv(
                     prompt.kind,
                     l(t.formatL("yetenek_evrim_teklifi", "name" to (from?.name ?: LText.EMPTY))),
                     listOfNotNull(from?.description?.let(::l)),
                     prompt.options.mapNotNull { id ->
-                        content.skills[id]?.let { PromptOptionView(id, it.name[lang], l(it.description), rarity = it.rarity) }
+                        if (id == PromptKind.DECLINE) {
+                            PromptOptionView(id, l(t.format("yetenek_evrimi_ertele")), "")
+                        } else {
+                            content.skills[id]?.let { PromptOptionView(id, it.name[lang], l(it.description), rarity = it.rarity) }
+                        }
                     },
                 )
             }
             PromptKind.FUSION -> {
                 val r = content.fusions.firstOrNull { it.id == prompt.subject }
-                PromptView(
+                pv(
                     prompt.kind,
                     l(t.formatL("kaynastirma_teklifi", "a" to skillName(r?.inputs?.getOrNull(0)), "b" to skillName(r?.inputs?.getOrNull(1)), "result" to skillName(r?.result))),
                     listOfNotNull(content.skills[r?.result]?.description?.let(::l)),
@@ -292,7 +321,7 @@ class StoryEngine(val content: Content) {
             }
             PromptKind.ESSENCE_BIND -> {
                 val e = content.essences[prompt.subject]
-                PromptView(
+                pv(
                     prompt.kind,
                     l(t.formatL("oz_baglama_teklifi", "name" to (e?.name ?: LText.EMPTY))),
                     listOfNotNull(e?.description?.let(::l)),
@@ -303,8 +332,7 @@ class StoryEngine(val content: Content) {
     }
 
     private fun growthLine(growth: Map<Stat, Int>, lang: Lang): String {
-        val perLevel = if (lang == Lang.TR) "/ seviye" else "/ level"
-        return "${statList(growth, lang)} $perLevel"
+        return content.texts.format("seviye_basi", "stats" to statList(growth, lang))[lang]
     }
 
     private fun statList(stats: Map<Stat, Int>, lang: Lang): String =
@@ -324,7 +352,10 @@ class StoryEngine(val content: Content) {
             .map { noticeView(it.notice, state, lang) },
         insights = scene.insights
             .filter { it.condition.test(state) }
-            .map { i -> listOfNotNull(insightPrefix(i.condition, lang), text(i.text[lang], state, lang)).joinToString(" ") },
+            .map { i ->
+                val prefix = insightPrefix(i.condition, lang)
+                InsightView(listOfNotNull(prefix, text(i.text[lang], state, lang)).joinToString(" "), echo = prefix == null)
+            },
     )
 
     /** "[ALG]" gibi önek: sezginin stat koşulundan. */
@@ -350,7 +381,7 @@ class StoryEngine(val content: Content) {
     private fun requirementTag(condition: Condition?, lang: Lang): String? = when (condition) {
         null -> null
         is Condition.StatAtLeast -> "[${condition.stat.abbr[lang]} ${condition.value}]"
-        is Condition.LevelAtLeast -> if (lang == Lang.TR) "[Sv. ${condition.value}]" else "[Lv. ${condition.value}]"
+        is Condition.LevelAtLeast -> content.texts.format("seviye_kosulu", "n" to condition.value)[lang]
         is Condition.HasSkill -> content.skills[condition.skillId]?.let { "[${it.name[lang]}]" }
         is Condition.HasTitle -> content.titles[condition.titleId]?.let { "[${it.name[lang]}]" }
         is Condition.HasItem -> content.items[condition.itemId]?.let {

@@ -17,6 +17,12 @@ GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En 
 | 27 | Pasif yeteneklerde stat/taban/kat şimdilik yok sayılır; fırlatılan eşyaların (`hasar`, `durum`) etkisi yalnızca savaşta | Savaş Aşama 3. | Aşama 3. |
 | 28 | Nadir sınıf "Çok Yönlü": tüm statlar ≥ 8 | İçerik varsayımı; dengeli oyuncuya ödül. | Aşama 9. |
 | 29 | Kaynaştırma koşul değişkenleri `hareketli_atis`, `korunan_muttefik`, `arkadan_vurus` savaşta sayılacak | Savaş Aşama 3. | Aşama 3. |
+| 30 | Yetenek evrimi Yetenekler ekranından değil, tam ekran Sistem istemiyle seçilir; "Şimdilik bekle" ile ertelenebilir, bir sonraki kademe evriminde yeniden sorulur | Tüm kalıcı seçimler aynı tam ekran an üzerinden gelir; erteleme, kaynaştırma için yeteneği maksimumda tutmayı sağlar. | — |
+| 31 | Keşif / savaş / kapı türü Günlük Görev şablonları `gunluk_genis_gorevler` bayrağı gelene kadar çıkmaz | Bu görevleri ilerletecek gün döngüsü ve savaş Aşama 3–4'te; tamamlanamayan görev oyuncuyu haksız cezalandırırdı. | Aşama 4: bayrak gün döngüsüyle açılır. |
+| 32 | Birden çok gün atlayan etki (`gun: 3`) Günlük Görev serisini koparır | Aradaki günlerde görev yapılmadı. | — |
+| 33 | Simya malzemeleri henüz içerikte verilmiyor | Toplama/ganimet Aşama 3 (düşman ganimeti) ve Aşama 6 (Perde 1 olayları) işi. | Aşama 3/6. |
+| 34 | Ceza Bölgesi ve "Temel Kondisyon" metinleri özgünleştirildi (bağımsız inceleme: ilham kaynağına fazla yakındı) | Telif kuralı: yalnızca tür kalıpları. | — |
+| 35 | Kayıt yüklenince `StoryEngine.sanitize`: tanımsız içeriğe işaret eden istemler atılır, eksik Günlük Görev üretilir; arayüz beklenmeyen hataları yakalayıp kaydeder | Eski/bozuk kayıt oyunu çökertmesin. | — |
 
 ## Aşama 0 — 2026-11-05
 

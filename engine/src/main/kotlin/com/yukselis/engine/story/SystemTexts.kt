@@ -82,6 +82,10 @@ class SystemTexts(private val texts: Map<String, LText>) {
             "sekme_yetenekler" to emptySet(),
             "sekme_canta" to emptySet(),
             "sekme_harita" to emptySet(),
+            "seviye_basi" to setOf("stats"),
+            "seviye_kosulu" to setOf("n"),
+            "yetenek_evrimi_ertele" to emptySet(),
+            "sekme_bilinmeyen" to emptySet(),
             "kabul" to emptySet(),
             "red" to emptySet(),
         )
