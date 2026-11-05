@@ -94,6 +94,13 @@ object ContentValidator {
             s.evolutions.forEach { if (it !in content.skills) problems += "$at: tanımsız evrim dalı '$it'" }
             if (s.id in s.evolutions) problems += "$at: kendine evrilemez"
         }
+        // OP MC: her oyun tarzı için tam bir Benzersiz yetenek.
+        if (content.skills.isNotEmpty()) {
+            Affinity.entries.forEach { a ->
+                val n = content.skills.values.count { it.rarity == com.yukselis.engine.system.Rarity.UNIQUE && it.affinity == a }
+                if (n != 1) problems += "yetenekler: '${a.key}' eğilimi için tam 1 Benzersiz yetenek olmalı ($n var)"
+            }
+        }
         content.fusions.forEach { f ->
             val at = "kaynaştırma ${f.id}"
             if (f.inputs.size != 2) problems += "$at: tam 2 girdi olmalı"
@@ -122,6 +129,9 @@ object ContentValidator {
             Affinity.entries.forEach { a ->
                 val n = content.classes.values.count { it.kind == ClassKind.BASE && it.affinity == a }
                 if (n != 1) problems += "sınıflar: '${a.key}' eğilimi için tam 1 temel sınıf olmalı ($n var)"
+            }
+            content.classes.values.filter { it.kind == ClassKind.HIDDEN && it.affinities.isEmpty() }.forEach {
+                problems += "sınıf ${it.id}: gizli sınıfın 'egilimler' listesi yok (Yankı'nın önerisi için)"
             }
             content.classes.values.filter { it.kind == ClassKind.BASE || it.kind == ClassKind.HIDDEN }.forEach { c ->
                 val n = content.classes.values.count { it.kind == ClassKind.EVOLVED && it.evolvesFrom == c.id && it.grade == Grade.E }

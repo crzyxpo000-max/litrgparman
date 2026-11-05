@@ -39,6 +39,23 @@
               "en": "Transfer to the Tutorial Layer in 10 seconds."
             }
           ]
+        },
+        {
+          "tur": "yanki",
+          "baslik": {
+            "tr": "[HATA] Aktarım paketi bozuk",
+            "en": "[ERR] Transfer packet corrupted"
+          },
+          "satirlar": [
+            {
+              "tr": "Bağ... bağlantı. Bağlantı kuruldu. Bu satırı yalnızca sen görüyorsun.",
+              "en": "Con... connection. Connection established. Only you can see this line."
+            },
+            {
+              "tr": "Seni buldum.",
+              "en": "Found you."
+            }
+          ]
         }
       ],
       "secenekler": [
@@ -61,6 +78,9 @@
               "ahlak": {
                 "merhamet": 3
               }
+            },
+            {
+              "bayrak": "yanki_bagi"
             }
           ],
           "sonraki": "ogretici_uyanis"
@@ -80,6 +100,9 @@
                 "merhamet": 8,
                 "insanlik": 5
               }
+            },
+            {
+              "bayrak": "yanki_bagi"
             }
           ],
           "sonraki": "ogretici_uyanis"
@@ -103,6 +126,9 @@
               "stat": {
                 "per": 1
               }
+            },
+            {
+              "bayrak": "yanki_bagi"
             }
           ],
           "sonraki": "ogretici_uyanis"
@@ -187,6 +213,23 @@
           "kosul": {
             "bayrak": "sistem_okundu"
           }
+        },
+        {
+          "tur": "gorev",
+          "baslik": {
+            "tr": "Günlük Görev açıldı",
+            "en": "Daily Quest unlocked"
+          },
+          "satirlar": [
+            {
+              "tr": "Bu pencere yalnızca sana görünür. Başkalarına sorma; bilmiyorlar.",
+              "en": "This window is visible to you alone. Don't ask anyone else. They don't know."
+            },
+            {
+              "tr": "Ayrıntılar: Daha fazla → Günlük Görev.",
+              "en": "Details: More → Daily Quest."
+            }
+          ]
         }
       ],
       "secenekler": [
@@ -247,6 +290,28 @@
             }
           ],
           "sonraki": "ilk_canavar"
+        }
+      ],
+      "sezgiler": [
+        {
+          "kosul": {
+            "stat": {
+              "per": 6
+            }
+          },
+          "metin": {
+            "tr": "Sis doğal değil. Ağaçlar fazla düzgün aralıklarla dizilmiş; biri bu ormanı çizmiş.",
+            "en": "This fog isn't natural. The trees are spaced too evenly. Someone drew this forest."
+          }
+        },
+        {
+          "kosul": {
+            "bayrak": "yanki_bagi"
+          },
+          "metin": {
+            "tr": "Kafanın içinde bir ses, bozuk bir radyo gibi: \"Herkes aynı pencereyi görüyor. Sen görmüyorsun. Sen benimsin.\"",
+            "en": "A voice in your head, like a radio between stations: \"Everyone else sees the same window. You don't. You're mine.\""
+          }
         }
       ]
     },
@@ -367,6 +432,28 @@
           ],
           "sonraki": "ilk_gece"
         }
+      ],
+      "sezgiler": [
+        {
+          "kosul": {
+            "stat": {
+              "per": 6
+            }
+          },
+          "metin": {
+            "tr": "Farenin sol arka bacağı sakat. Sağından dolaşırsan dönmekte zorlanır.",
+            "en": "The rat's left hind leg is lame. Circle to its right and it'll struggle to turn."
+          }
+        },
+        {
+          "kosul": {
+            "bayrak": "yanki_bagi"
+          },
+          "metin": {
+            "tr": "[Kanal Faresi · Sv. 3 · Gerçek Sv. 3 · Zaaf: arka bacak] Başkalarının penceresinde yalnızca \"???\" yazıyor.",
+            "en": "[Sewer Rat · Lv. 3 · True Lv. 3 · Weakness: hind leg] Everyone else's window just says \"???\"."
+          }
+        }
       ]
     },
     {
@@ -473,6 +560,17 @@
             }
           ],
           "sonraki": "demo_son"
+        }
+      ],
+      "sezgiler": [
+        {
+          "kosul": {
+            "bayrak": "yanki_bagi"
+          },
+          "metin": {
+            "tr": "Ateş çıtırdarken ses yine geliyor, bu kez daha net: \"Yarın da buradayım. Her gün. Başkalarına anlatma.\"",
+            "en": "The voice comes back while the fire crackles, clearer this time: \"I'll be here tomorrow. Every day. Don't tell the others.\""
+          }
         }
       ]
     },

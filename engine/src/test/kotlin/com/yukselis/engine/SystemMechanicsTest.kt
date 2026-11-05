@@ -313,6 +313,89 @@ class SystemMechanicsTest {
         assertTrue(view.options.all { it.name.isNotBlank() && it.description.isNotBlank() })
     }
 
+    // ---- OP MC (DECISIONS #19) ----
+
+    @Test
+    fun `yankinin onerisi en guclu egilime yakin gizli sinifi getirir`() {
+        var s = apply(fresh(), Effect.ShiftAffinity(Affinity.MELEE, 5), Effect.GainXp(xpForLevel(10)))
+        val offer = s.prompts.first { it.kind == PromptKind.CLASS_OFFER }
+        assertEquals("kapi_yiyen", offer.options[2])
+        s = s.copy(prompts = listOf(offer))
+        val option = engine.view(s, Lang.EN).prompt!!.options.first { it.id == "kapi_yiyen" }
+        assertTrue(option.details.first().startsWith("[Echo's suggestion]"))
+    }
+
+    @Test
+    fun `sinif seciminde oyun tarzina bagli benzersiz yetenek verilir ve dunyada tek sahiplidir`() {
+        var s = apply(fresh(), Effect.ShiftAffinity(Affinity.GUARD, 5), Effect.GainXp(xpForLevel(10)))
+        s = s.copy(prompts = s.prompts.filter { it.kind == PromptKind.CLASS_OFFER })
+        s = engine.resolvePrompt(s, "siper", lang).state
+        assertNotNull(s.player.skill("son_hat"))
+        assertEquals(WorldState.PLAYER_CLAIM, s.firstClaims[WorldState.UNIQUE_CLAIM_PREFIX + "son_hat"])
+        // Bir NPC almışsa sıradaki eğilimin Benzersiz yeteneği gelir.
+        var t = apply(fresh(), Effect.ShiftAffinity(Affinity.GUARD, 5), Effect.ShiftAffinity(Affinity.SUMMON, 2), Effect.GainXp(xpForLevel(10)))
+        t = t.copy(prompts = t.prompts.filter { it.kind == PromptKind.CLASS_OFFER }, firstClaims = mapOf(WorldState.UNIQUE_CLAIM_PREFIX + "son_hat" to "aras_kurt"))
+        t = engine.resolvePrompt(t, "siper", lang).state
+        assertNull(t.player.skill("son_hat"))
+        assertNotNull(t.player.skill("yanki_lejyonu"))
+    }
+
+    @Test
+    fun `sekmeler sistem verene kadar gizlidir`() {
+        var s = fresh()
+        assertTrue(s.unlockedTabs.isEmpty())
+        val r = engine.applyEffects(s, listOf(Effect.GrantSkill("golge_adimi")), lang)
+        s = r.state
+        assertEquals(setOf(WorldState.TAB_SKILLS), s.unlockedTabs)
+        assertTrue(r.notices.any { it.title == "[Yetenek penceresi verildi]" })
+        s = apply(s, Effect.AddItem("kirmizi_ot", 1))
+        assertTrue(WorldState.TAB_BAG in s.unlockedTabs)
+        s = apply(s, Effect.UnlockTab(WorldState.TAB_MAP))
+        assertEquals(WorldState.TABS.toSet(), s.unlockedTabs)
+    }
+
+    @Test
+    fun `pasif sezgi yuksek statta onekiyle gorunur`() {
+        val base = fresh().copy(sceneId = "ilk_canavar")
+        assertTrue(engine.view(base, lang).current.insights.isEmpty())
+        val sharp = apply(base, Effect.AddStat(Stat.PER, 1), Effect.SetFlag("yanki_bagi"))
+        val insights = engine.view(sharp, Lang.EN).current.insights
+        assertEquals(2, insights.size)
+        assertTrue(insights[0].startsWith("[PER] "))
+        assertTrue(insights[1].startsWith("[Sewer Rat"))
+    }
+
+    @Test
+    fun `insanlik yuzdeligi seviyeyle duser ve sinirlidir`() {
+        val low = Progression.humanityTopPercent(1, 0)
+        val mid = Progression.humanityTopPercent(10, 0)
+        val high = Progression.humanityTopPercent(200, 30)
+        assertEquals(100.0, low, 1e-9)
+        assertTrue(mid < 1.0)
+        assertEquals(100.0 / Progression.HUMANITY, high, 1e-15)
+        // Dünya güçlendikçe aynı seviye daha az etkileyici.
+        assertTrue(Progression.humanityTopPercent(10, 100) > mid)
+    }
+
+    @Test
+    fun `yedi gunluk seri ek serbest puan verir ve sinif artisi kademeyle carpilir`() {
+        assertEquals(1, Progression.dailyReward(6))
+        assertEquals(2, Progression.dailyReward(7))
+        assertEquals(2, Progression.dailyReward(14))
+        assertEquals(1, Progression.growthMultiplier(Grade.F))
+        assertEquals(2, Progression.growthMultiplier(Grade.E))
+        assertEquals(7, Progression.growthMultiplier(Grade.S))
+    }
+
+    @Test
+    fun `prologda yanki bagi kurulur`() {
+        val s = fresh()
+        val choice = engine.view(s, lang).choices.first().id
+        val next = engine.choose(s, choice, lang).state
+        assertTrue(next.hasFlag("yanki_bagi"))
+        assertTrue(engine.view(s, lang).current.notices.any { it.kind == com.yukselis.engine.story.NoticeKind.ECHO })
+    }
+
     private fun <T> assertNotNullAndGet(v: T?): T {
         assertNotNull(v)
         return v!!
