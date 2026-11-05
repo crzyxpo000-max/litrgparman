@@ -1,5 +1,8 @@
 package com.yukselis.engine.story
 
+import com.yukselis.engine.combat.CombatAction
+import com.yukselis.engine.combat.CombatEngine
+import com.yukselis.engine.combat.StatusEffects
 import com.yukselis.engine.core.GameMode
 import com.yukselis.engine.core.HistoryEntry
 import com.yukselis.engine.core.PromptKind
@@ -24,6 +27,99 @@ class StoryEngine(val content: Content) {
     private val resolver = TokenResolver(content.names)
     private val effects = EffectApplier(content)
     private val actions = PlayerActions(content, effects)
+    private val combat = CombatEngine(content, effects)
+
+    // ---- Savaş ----
+
+    /** Savaş eylemi (geçersizse ActionRejected). */
+    fun combatAction(state: WorldState, action: CombatAction, lang: Lang): Outcome {
+        val r = combat.act(state, action)
+        return Outcome(r.state, r.notices.map { noticeView(it, r.state, lang) })
+    }
+
+    /** Savaşı doğrudan başlatır (olay motoru ve testler için; hikayede `savas` etkisi kullanılır). */
+    fun startCombat(state: WorldState, spec: com.yukselis.engine.combat.CombatSpec, lang: Lang): Outcome {
+        val r = combat.start(state, spec)
+        return Outcome(r.state, r.notices.map { noticeView(it, r.state, lang) })
+    }
+
+    /** Otomatik tur için önerilen eylem. */
+    fun autoCombatAction(state: WorldState): CombatAction = combat.autoAction(state)
+
+    fun combatView(state: WorldState, lang: Lang): CombatView? {
+        val c = state.combat ?: return null
+        val t = content.texts
+        val p = state.player
+        fun statuses(list: List<com.yukselis.engine.combat.StatusInstance>) =
+            list.map { "${t.format("durum_${it.effect}")[lang]} (${it.turns})" }
+        val enemies = c.enemies.map { e ->
+            val d = content.enemies.getValue(e.id)
+            EnemyView(
+                uid = e.uid,
+                name = d.name[lang],
+                description = text(d.description[lang], state, lang),
+                level = e.level,
+                gradeName = d.grade.name,
+                hp = e.hp,
+                maxHp = e.maxHp,
+                stats = Stat.entries.map { StatLine(it, it.abbr[lang], it.label[lang], e.stats[it]) },
+                statuses = statuses(e.statuses),
+                weakness = if (e.analyzed) d.weaknessText?.get(lang) else null,
+                boss = d.boss,
+                phase = e.phase,
+                intelligent = d.intelligent,
+                alive = e.alive,
+            )
+        }
+        val skills = p.skills.mapNotNull { s ->
+            val d = content.skills[s.id] ?: return@mapNotNull null
+            if (d.type != com.yukselis.engine.system.SkillType.ACTIVE) return@mapNotNull null
+            val cd = c.cooldowns[d.id] ?: 0
+            CombatSkillView(
+                id = d.id,
+                name = d.name[lang],
+                costMp = d.costMp,
+                costStamina = d.costStamina,
+                cooldownLeft = cd,
+                usable = cd == 0 && p.mp >= d.costMp && c.stamina >= d.costStamina,
+                targetsAll = d.target == com.yukselis.engine.system.SkillTarget.ALL,
+                self = d.target == com.yukselis.engine.system.SkillTarget.SELF || d.heals,
+            )
+        }
+        val items = p.inventory.entries.sortedBy { it.key }.mapNotNull { (id, n) ->
+            val d = content.items[id] ?: return@mapNotNull null
+            if (d.type != ItemType.CONSUMABLE || d.use == null) return@mapNotNull null
+            ItemView(id, d.name[lang], d.description[lang], n, d.rarity, true)
+        }
+        val execution = c.pendingExecution?.let { uid ->
+            val d = content.enemies.getValue(c.enemy(uid)!!.id)
+            ExecutionView(
+                enemyName = d.name[lang],
+                options = CombatEngine.EXECUTIONS.map { id ->
+                    PromptOptionView(id, t.format("infaz_$id")[lang], t.format("infaz_${id}_aciklama")[lang])
+                },
+            )
+        }
+        return CombatView(
+            round = c.round,
+            enemies = enemies,
+            stamina = c.stamina,
+            maxStamina = c.maxStamina,
+            stance = c.stance,
+            effort = c.effort,
+            playerStatuses = statuses(c.playerStatuses),
+            log = c.log.map { CombatLogView(resolveLog(it.prose, state, lang), it.numbers?.get(lang)) },
+            environment = c.spec.environment.map { EnvironmentView(it, t.format("ortam_$it")[lang], it in c.usedEnvironment) },
+            skills = skills,
+            items = items,
+            execution = execution,
+            minorUsed = c.minorUsed,
+            extraActions = c.extraActions,
+            dead = state.dead,
+        )
+    }
+
+    private fun resolveLog(text: LText, state: WorldState, lang: Lang) = this.text(text[lang], state, lang)
 
     /** Yeni oyun: Gün 0'ın Günlük Görevi de üretilir. */
     fun newGame(playerName: String, mode: GameMode, seed: Long): WorldState =
@@ -50,6 +146,7 @@ class StoryEngine(val content: Content) {
             }
         }
         var s = state.copy(prompts = valid)
+        if (s.combat?.enemies?.any { it.id !in content.enemies } == true) s = s.copy(combat = null)
         if (s.daily == null || s.daily?.templateId !in content.dailyTemplates) s = effects.newDaily(s).state
         if (s.sceneId !in content.scenes) s = s.copy(sceneId = content.startScene)
         return s
@@ -107,10 +204,19 @@ class StoryEngine(val content: Content) {
         require(choice.requires?.test(state) ?: true) { "Koşulu karşılanmayan seçenek: $choiceId" }
         require(state.prompts.isEmpty()) { "Önce bekleyen Sistem istemi çözülmeli" }
 
-        val applied = effects.applyAll(state, choice.effects)
+        require(state.combat == null) { "Savaş sürerken hikaye seçimi yapılamaz" }
+
+        val fight = choice.effects.filterIsInstance<Effect.StartCombat>().firstOrNull()
+        val applied = effects.applyAll(state, choice.effects - setOfNotNull(fight))
         var next = applied.state.copy(
             history = (applied.state.history + HistoryEntry(scene.id, choice.id)).takeLast(WorldState.HISTORY_LIMIT),
         )
+        if (fight != null) {
+            // Savaş başlar; sahne, savaş bitince kazan/kaybet/kaç sahnesine geçer.
+            val started = combat.start(next, fight.spec)
+            val notices = applied.notices + started.notices
+            return Outcome(started.state, notices.map { noticeView(it, started.state, lang) })
+        }
         var nextId = choice.next
         if (nextId == Content.RETURN) {
             nextId = next.returnStack.lastOrNull() ?: content.startScene

@@ -1980,6 +1980,35 @@
         "mp": 20
       },
       "bekleme": 3
+    },
+    "son_nefes": {
+      "ad": {
+        "tr": "Son Nefes",
+        "en": "Last Breath"
+      },
+      "aciklama": {
+        "tr": "Canın azaldıkça vuruşların sertleşir. Ölümün kıyısında en tehlikeli halindesin.",
+        "en": "The lower your HP, the harder you hit. You're most dangerous on the edge of dying."
+      },
+      "tur": "aktif",
+      "nadirlik": "efsanevi",
+      "maliyet": {
+        "dayanim": 10
+      },
+      "bekleme": 3,
+      "stat": "wil",
+      "taban": 30,
+      "kat": 2.0,
+      "hedef": "tek",
+      "durum": {
+        "etki": "hizlanma",
+        "sans": 1.0,
+        "sure": 2
+      },
+      "etiketler": [
+        "uyanis",
+        "yakin"
+      ]
     }
   },
   "kaynastirma": [

@@ -1,5 +1,8 @@
 package com.yukselis.engine.story
 
+import com.yukselis.engine.combat.AwakeningDef
+import com.yukselis.engine.combat.CombatSpec
+import com.yukselis.engine.combat.EnemyDef
 import com.yukselis.engine.core.MoralAxis
 import com.yukselis.engine.core.WorldState
 import com.yukselis.engine.i18n.LText
@@ -62,6 +65,10 @@ sealed interface Condition {
 
     data class VarAtLeast(val key: String, val value: Int) : Condition {
         override fun test(state: WorldState) = state.variable(key) >= value
+    }
+
+    data class VarAtMost(val key: String, val value: Int) : Condition {
+        override fun test(state: WorldState) = state.variable(key) <= value
     }
 
     data class MoralityAtLeast(val axis: MoralAxis, val value: Int) : Condition {
@@ -128,6 +135,8 @@ sealed interface Effect {
     /** Can/mana değişimi. Savaş dışında can 1'in altına düşmez (savaşta ölüm Aşama 3). */
     data class AddHp(val delta: Int) : Effect
     data class AddMp(val delta: Int) : Effect
+    /** Savaş başlatır; seçenek `sonraki` yerine savaşın kazan/kaybet/kaç sahnelerine gider. */
+    data class StartCombat(val spec: CombatSpec) : Effect
     /** Kendini açan arayüz: bir sekmeyi verir (yetenekler, canta, harita). */
     data class UnlockTab(val tab: String) : Effect
     /** Meslek seçimi istemini açar. */
@@ -192,6 +201,8 @@ data class Content(
     val essences: Map<String, EssenceDef> = emptyMap(),
     val dailyTemplates: Map<String, DailyTemplate> = emptyMap(),
     val texts: SystemTexts = SystemTexts.EMPTY,
+    val enemies: Map<String, EnemyDef> = emptyMap(),
+    val awakenings: List<AwakeningDef> = emptyList(),
 ) {
     companion object {
         /** Kesinti sahnesinden önceki sahneye dönüş. */
@@ -199,5 +210,8 @@ data class Content(
 
         /** Günlük Görev cezası kancası: bu kimlikte bir sahne varsa oraya ışınlanılır. */
         const val PENALTY_SCENE = "ceza_bolgesi"
+
+        /** Demir Mod ölümü bu sahneye (Hasat sonu) bağlanır. */
+        const val HARVEST_SCENE = "son_hasat"
     }
 }

@@ -1,5 +1,11 @@
 package com.yukselis.engine.content
 
+import com.yukselis.engine.combat.AwakeningDef
+import com.yukselis.engine.combat.Behavior
+import com.yukselis.engine.combat.BossPhase
+import com.yukselis.engine.combat.CombatSpec
+import com.yukselis.engine.combat.EnemyAttack
+import com.yukselis.engine.combat.EnemyDef
 import com.yukselis.engine.core.MoralAxis
 import com.yukselis.engine.i18n.LText
 import com.yukselis.engine.i18n.NameEntry
@@ -33,6 +39,7 @@ import com.yukselis.engine.system.SkillDef
 import com.yukselis.engine.system.SkillTarget
 import com.yukselis.engine.system.SkillType
 import com.yukselis.engine.system.Stat
+import com.yukselis.engine.system.Stats
 import com.yukselis.engine.system.StatusApplication
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
@@ -62,6 +69,8 @@ object ContentParser {
     const val PROFESSIONS = "professions.json"
     const val ESSENCES = "essences.json"
     const val DAILY = "daily.json"
+    const val ENEMIES = "enemies.json"
+    const val AWAKENINGS = "awakenings.json"
 
     data class StoryFile(val start: String?, val scenes: List<Scene>)
 
@@ -95,6 +104,8 @@ object ContentParser {
                 EssenceDef(id, ltext(o["ad"], "$id.ad"), ltext(o["aciklama"], "$id.aciklama"))
             }?.associateBy { it.id } ?: emptyMap(),
             dailyTemplates = obj(DAILY)?.objectOf("gunluk")?.map { (id, v) -> parseDaily(id, v.jsonObject) }?.associateBy { it.id } ?: emptyMap(),
+            enemies = obj(ENEMIES)?.objectOf("dusmanlar")?.map { (id, v) -> parseEnemy(id, v.jsonObject) }?.associateBy { it.id } ?: emptyMap(),
+            awakenings = obj(AWAKENINGS)?.objectOf("uyanislar")?.map { (id, v) -> parseAwakening(id, v.jsonObject) } ?: emptyList(),
             texts = SystemTexts(obj(SYSTEM)?.map { (k, v) -> k to ltext(v, "system.$k") }?.toMap() ?: emptyMap()),
         )
     }
@@ -296,6 +307,7 @@ object ContentParser {
                 "bayrak" -> listOf(Condition.HasFlag(value.str(key)))
                 "bayrak_yok" -> listOf(Condition.LacksFlag(value.str(key)))
                 "degisken_min" -> value.jsonObject.map { (k, v) -> Condition.VarAtLeast(k, v.int(k)) }
+                "degisken_max" -> value.jsonObject.map { (k, v) -> Condition.VarAtMost(k, v.int(k)) }
                 "ahlak_min" -> value.jsonObject.map { (k, v) -> Condition.MoralityAtLeast(axis(k), v.int(k)) }
                 "ahlak_max" -> value.jsonObject.map { (k, v) -> Condition.MoralityAtMost(axis(k), v.int(k)) }
                 "seviye_min" -> listOf(Condition.LevelAtLeast(value.int(key)))
@@ -333,10 +345,79 @@ object ContentParser {
             "meslek_teklifi" -> listOf(Effect.OfferProfession)
             "can" -> listOf(Effect.AddHp(value.int(key)))
             "arayuz" -> listOf(Effect.UnlockTab(value.str(key)))
+            "savas" -> listOf(Effect.StartCombat(combatSpec(value.jsonObject, where)))
             "mana" -> listOf(Effect.AddMp(value.int(key)))
             else -> throw ContentFormatException("$where: bilinmeyen etki '$key'")
         }
     }
+
+    private fun combatSpec(o: JsonObject, where: String) = CombatSpec(
+        enemies = o.strings("dusmanlar").ifEmpty { throw ContentFormatException("$where: savaşta 'dusmanlar' boş") },
+        environment = o.strings("ortam"),
+        win = o.string("kazan") ?: throw ContentFormatException("$where: savaşta 'kazan' sahnesi eksik"),
+        lose = o.string("kaybet"),
+        flee = o.string("kac"),
+    )
+
+    private fun parseAttack(o: JsonObject, where: String): EnemyAttack {
+        val id = o.string("id") ?: throw ContentFormatException("$where: saldırıda 'id' eksik")
+        return EnemyAttack(
+            id = id,
+            name = ltext(o["ad"], "$where.$id.ad"),
+            stat = o.string("stat")?.let { stat(it) } ?: Stat.STR,
+            base = o.int("taban") ?: 0,
+            multiplier = o.double("kat") ?: 1.0,
+            tags = o.strings("etiketler"),
+            status = o["durum"]?.jsonObject?.let { d ->
+                StatusApplication(d.string("etki") ?: throw ContentFormatException("$where.$id: durum.etki eksik"), d.double("sans") ?: 1.0, d.int("sure") ?: 1)
+            },
+            cooldown = o.int("bekleme") ?: 0,
+            prose = ltext(o["metin"], "$where.$id.metin"),
+        )
+    }
+
+    private fun parseEnemy(id: String, o: JsonObject): EnemyDef {
+        val level = o.int("seviye") ?: throw ContentFormatException("düşman $id: 'seviye' eksik")
+        val statsObj = o["statlar"]?.jsonObject ?: throw ContentFormatException("düşman $id: 'statlar' eksik")
+        val stats = Stats(Stat.entries.associateWith { s -> statsObj.int(s.key) ?: throw ContentFormatException("düşman $id: statlar.${s.key} eksik") })
+        return EnemyDef(
+            id = id,
+            name = ltext(o["ad"], "$id.ad"),
+            description = ltext(o["aciklama"], "$id.aciklama"),
+            hook = ltext(o["kanca"], "$id.kanca"),
+            level = level,
+            grade = o.string("kademe")?.let { Grade.fromKey(it) ?: throw ContentFormatException("düşman $id: bilinmeyen kademe") } ?: Grade.forLevel(level),
+            maxHp = o.int("can") ?: throw ContentFormatException("düşman $id: 'can' eksik"),
+            stats = stats,
+            behavior = Behavior.fromKey(o.string("davranis")),
+            intelligent = o.bool("zeki"),
+            weakness = o.string("zaaf"),
+            weaknessText = o["zaaf_metin"]?.let { ltext(it, "$id.zaaf_metin") },
+            attacks = o.array("saldirilar").map { parseAttack(it.jsonObject, id) },
+            xp = (o["xp"] as? JsonPrimitive)?.longOrNull ?: 0,
+            credits = o.int("kredi") ?: 0,
+            loot = o["ganimet"]?.jsonObject?.map { (k, v) -> k to (v.jsonPrimitive.doubleOrNull ?: 0.0) }?.toMap() ?: emptyMap(),
+            tags = o.strings("etiketler"),
+            boss = o.bool("boss"),
+            phases = o.array("fazlar").map { e ->
+                val f = e.jsonObject
+                BossPhase(
+                    threshold = f.int("esik") ?: throw ContentFormatException("düşman $id: fazda 'esik' eksik"),
+                    text = ltext(f["metin"], "$id.faz.metin"),
+                    buff = statMap(f["guclenme"], "$id.faz.guclenme"),
+                    attack = f["saldiri"]?.jsonObject?.let { parseAttack(it, "$id.faz") },
+                )
+            },
+        )
+    }
+
+    private fun parseAwakening(id: String, o: JsonObject) = AwakeningDef(
+        id = id,
+        title = ltext(o["baslik"], "$id.baslik"),
+        lines = o.array("satirlar").map { ltext(it, "$id.satir") },
+        condition = o["kosul"]?.let { condition(it.jsonObject) } ?: throw ContentFormatException("uyanış $id: 'kosul' eksik"),
+        effects = o.array("etkiler").flatMap { effects(it.jsonObject, "uyanış $id") },
+    )
 
     private fun ltext(e: JsonElement?, where: String): LText {
         val o = (e as? JsonObject) ?: throw ContentFormatException("$where: {tr, en} metni bekleniyordu")

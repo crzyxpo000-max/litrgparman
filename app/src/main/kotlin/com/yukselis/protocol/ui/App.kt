@@ -52,6 +52,7 @@ import com.yukselis.protocol.ui.components.CenteredNote
 import com.yukselis.protocol.ui.components.StatBar
 import com.yukselis.protocol.ui.more.MoreScreen
 import com.yukselis.protocol.ui.bag.BagScreen
+import com.yukselis.protocol.ui.combat.CombatScreen
 import com.yukselis.protocol.ui.skills.SkillsScreen
 import com.yukselis.protocol.ui.system.CelebrationOverlay
 import com.yukselis.protocol.ui.system.PromptOverlay
@@ -157,7 +158,15 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
     ) { padding ->
         val content = Modifier.padding(padding)
         when (active) {
-            Tab.STORY -> StoryScreen(
+            Tab.STORY -> if (ui.combat != null) CombatScreen(
+                combat = ui.combat,
+                notices = ui.actionNotices,
+                auto = ui.autoCombat,
+                onAction = viewModel::combatAction,
+                onToggleAuto = viewModel::toggleAuto,
+                onCheckpoint = viewModel::returnToCheckpoint,
+                modifier = content,
+            ) else StoryScreen(
                 scene = scene,
                 freshNotices = ui.freshNotices,
                 turn = ui.turn,

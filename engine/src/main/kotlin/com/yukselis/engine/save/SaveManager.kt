@@ -44,6 +44,14 @@ class SaveManager(
         storage.write(slot, SaveCodec.encode(state, now()))
     }
 
+    /** Savaş başında: Normal modda ölümden sonra dönülecek nokta. Demir Mod'da yazılmaz. */
+    fun saveCheckpoint(state: WorldState) {
+        if (state.mode == GameMode.IRONMAN) return
+        storage.write(WorldState.CHECKPOINT_SLOT, SaveCodec.encode(state, now()))
+    }
+
+    fun loadCheckpoint(): WorldState? = load(WorldState.CHECKPOINT_SLOT)
+
     /** Bozuk ya da okunamayan kayıt null döner; oyun çökmez. */
     fun load(slot: String): WorldState? = read(slot)?.state
 

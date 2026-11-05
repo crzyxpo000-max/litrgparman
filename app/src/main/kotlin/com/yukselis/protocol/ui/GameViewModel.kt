@@ -11,7 +11,11 @@ import com.yukselis.engine.save.SaveManager
 import com.yukselis.engine.save.SlotInfo
 import com.yukselis.engine.story.ActionRejected
 import com.yukselis.engine.story.BagView
+import com.yukselis.engine.combat.CombatAction
+import com.yukselis.engine.story.CombatView
 import com.yukselis.engine.story.DailyView
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import com.yukselis.engine.story.NoticeKind
 import com.yukselis.engine.story.NoticeView
 import com.yukselis.engine.story.Outcome
@@ -33,6 +37,7 @@ import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 private const val TAG = "Yukselis"
+private const val AUTO_DELAY_MS = 650L
 
 enum class UiMessage { SAVED, LOADED, LOAD_FAILED, IRONMAN_NO_MANUAL, ACTION_FAILED }
 
@@ -45,6 +50,10 @@ data class UiState(
     val skills: SkillsView? = null,
     val bag: BagView? = null,
     val daily: DailyView? = null,
+    /** Süren savaş; varken Hikaye sekmesi savaş ekranını gösterir. */
+    val combat: CombatView? = null,
+    /** Otomatik tur açık. */
+    val autoCombat: Boolean = false,
     /** Son seçimin ürettiği bildirimler (XP, seviye, unvan). Bir sonraki seçimde temizlenir. */
     val freshNotices: List<NoticeView> = emptyList(),
     /** Hikaye dışı eylemlerin (dağıtım, üretim, istem) bildirimleri; Hikaye dışındaki sekmelerde kısa kartlar. */
@@ -96,8 +105,56 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 _ui.update { it.copy(message = UiMessage.ACTION_FAILED) }
             }
             .getOrNull() ?: return
+        // Savaş başladı: Normal modda ölüm sonrası dönülecek kayıt noktası seçimden önceki durumdur.
+        if (current.combat == null && outcome.state.combat != null) {
+            viewModelScope.launch(saveDispatcher) { app.saves.saveCheckpoint(current) }
+        }
         show(outcome.state, outcome.notices)
         persistAuto(outcome.state)
+    }
+
+    // ---- Savaş ----
+
+    private var autoJob: Job? = null
+
+    fun combatAction(action: CombatAction) {
+        val current = _ui.value.game ?: return
+        if (current.combat == null) return
+        act(advanceTurn = false) { s, l -> app.engine.combatAction(s, action, l) }
+        // Savaş bitti: hikaye yeni sahneyle sürer, daktilo efekti yeniden başlasın.
+        if (_ui.value.game?.combat == null) _ui.update { it.copy(turn = it.turn + 1, freshNotices = it.actionNotices, actionNotices = emptyList(), autoCombat = false) }
+    }
+
+    /** Otomatik tur: savaş bitene, infaz gelene ya da can %30'un altına düşene kadar önerilen eylemleri oynar. */
+    fun toggleAuto() {
+        if (_ui.value.autoCombat) {
+            autoJob?.cancel()
+            _ui.update { it.copy(autoCombat = false) }
+            return
+        }
+        _ui.update { it.copy(autoCombat = true) }
+        autoJob = viewModelScope.launch {
+            while (_ui.value.autoCombat) {
+                val s = _ui.value.game ?: break
+                val c = s.combat ?: break
+                if (s.dead || c.pendingExecution != null || s.player.hp * 100 / s.player.maxHp < 30) break
+                combatAction(app.engine.autoCombatAction(s))
+                delay(AUTO_DELAY_MS)
+            }
+            _ui.update { it.copy(autoCombat = false) }
+        }
+    }
+
+    /** Normal modda ölüm: savaş başındaki kayıt noktasına döner; yoksa otomatik kayda. */
+    fun returnToCheckpoint() {
+        val state = (app.saves.loadCheckpoint() ?: app.saves.load(SaveManager.AUTO)?.takeIf { !it.dead })
+            ?.let { runCatching { app.engine.sanitize(it) }.getOrNull() }
+        if (state == null) {
+            backToTitle()
+            return
+        }
+        show(state, emptyList())
+        persistAuto(state)
     }
 
     // ---- Sistem eylemleri ----
@@ -123,7 +180,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     /** Hikaye dışı eylem: tur sayacını ilerletmez; bildirimler eylem kartı ve gerekirse kutlama olur. */
-    private fun act(block: (WorldState, Lang) -> Outcome) {
+    private fun act(advanceTurn: Boolean = false, block: (WorldState, Lang) -> Outcome) {
         val current = _ui.value.game ?: return
         val outcome = try {
             block(current, _ui.value.lang)
@@ -137,7 +194,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             _ui.update { it.copy(message = UiMessage.ACTION_FAILED) }
             return
         }
-        render(outcome.state, _ui.value.freshNotices, advanceTurn = false)
+        render(outcome.state, _ui.value.freshNotices, advanceTurn)
         val big = celebrations(outcome.notices)
         _ui.update { it.copy(actionNotices = outcome.notices - big.toSet(), celebration = it.celebration + big) }
         persistAuto(outcome.state)
@@ -190,7 +247,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     fun backToTitle() {
         autosave()
         _ui.update {
-            it.copy(game = null, scene = null, status = null, skills = null, bag = null, daily = null,
+            it.copy(game = null, scene = null, status = null, skills = null, bag = null, daily = null, combat = null, autoCombat = false,
                 freshNotices = emptyList(), actionNotices = emptyList(), celebration = emptyList())
         }
         refreshSlots()
@@ -224,6 +281,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 skills = engine.skills(state, lang),
                 bag = engine.bag(state, lang),
                 daily = engine.daily(state, lang),
+                combat = engine.combatView(state, lang),
                 freshNotices = notices,
                 turn = if (advanceTurn) it.turn + 1 else it.turn,
             )

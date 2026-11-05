@@ -1,5 +1,7 @@
 package com.yukselis.engine.content
 
+import com.yukselis.engine.combat.CombatEngine
+import com.yukselis.engine.combat.StatusEffects
 import com.yukselis.engine.i18n.LText
 import com.yukselis.engine.i18n.NameEntry
 import com.yukselis.engine.i18n.TokenResolver
@@ -55,6 +57,11 @@ object ContentValidator {
                 is Effect.AddItem -> if (e.itemId !in content.items) problems += "$where: tanımsız eşya '${e.itemId}'"
                 is Effect.EssenceInsight -> if (e.essenceId !in content.essences) problems += "$where: tanımsız Öz '${e.essenceId}'"
                 is Effect.DailyProgress -> if (e.kind !in DAILY_KINDS) problems += "$where: bilinmeyen Günlük Görev türü '${e.kind}'"
+                is Effect.StartCombat -> {
+                    e.spec.enemies.forEach { if (it !in content.enemies) problems += "$where: tanımsız düşman '$it'" }
+                    listOfNotNull(e.spec.win, e.spec.lose, e.spec.flee).forEach { if (it !in content.scenes) problems += "$where: savaş sahnesi tanımsız '$it'" }
+                    e.spec.environment.forEach { if (it !in CombatEngine.ENVIRONMENTS) problems += "$where: bilinmeyen ortam '$it'" }
+                }
                 is Effect.UnlockTab -> if (e.tab !in com.yukselis.engine.core.WorldState.TABS) problems += "$where: bilinmeyen sekme '${e.tab}'"
                 else -> Unit
             }
@@ -163,6 +170,32 @@ object ContentValidator {
             checkCondition(d.condition, "günlük ${d.id}")
         }
 
+        // ---- Düşmanlar ve uyanışlar ----
+        content.enemies.values.forEach { d ->
+            val at = "düşman ${d.id}"
+            checkText(d.name, "$at.ad")
+            checkText(d.description, "$at.aciklama")
+            checkText(d.hook, "$at.kanca")
+            d.weaknessText?.let { checkText(it, "$at.zaaf_metin") }
+            if (d.attacks.isEmpty()) problems += "$at: saldırı yok"
+            (d.attacks + d.phases.mapNotNull { it.attack }).forEach { a ->
+                checkText(a.name, "$at.${a.id}.ad")
+                checkText(a.prose, "$at.${a.id}.metin")
+                a.status?.let { if (it.effect !in StatusEffects.ALL) problems += "$at.${a.id}: bilinmeyen durum '${it.effect}'" }
+            }
+            d.loot.keys.forEach { if (it !in content.items) problems += "$at: tanımsız ganimet '$it'" }
+            if (d.boss && d.phases.map { it.threshold } != listOf(70, 40, 15)) problems += "$at: boss fazları 70/40/15 olmalı"
+            d.phases.forEach { checkText(it.text, "$at faz ${it.threshold}") }
+            if (d.maxHp <= 0) problems += "$at: can pozitif olmalı"
+        }
+        content.skills.values.forEach { s -> s.status?.let { if (it.effect !in StatusEffects.ALL) problems += "yetenek ${s.id}: bilinmeyen durum '${it.effect}'" } }
+        content.awakenings.forEach { a ->
+            checkText(a.title, "uyanış ${a.id}.baslik")
+            a.lines.forEach { checkText(it, "uyanış ${a.id}.satir") }
+            checkCondition(a.condition, "uyanış ${a.id}")
+            a.effects.forEach { checkEffect(it, "uyanış ${a.id}") }
+        }
+
         // ---- Sahneler ----
         content.scenes.values.forEach { scene ->
             val at = "sahne ${scene.id}"
@@ -192,7 +225,9 @@ object ContentValidator {
                 checkText(c.label, where)
                 checkCondition(c.requires, where)
                 checkCondition(c.showWhen, where)
+                val fights = c.effects.any { it is Effect.StartCombat }
                 when {
+                    c.next == null && fights -> Unit
                     c.next == null -> problems += "$where: 'sonraki' eksik"
                     c.next == Content.RETURN -> if (scene.id != Content.PENALTY_SCENE) problems += "$where: '@geri' yalnızca kesinti sahnelerinde kullanılabilir"
                     c.next !in content.scenes -> problems += "$where: tanımsız sonraki sahne '${c.next}'"
@@ -202,13 +237,16 @@ object ContentValidator {
         }
 
         // Başlangıçtan (ve kesinti kancalarından) ulaşılamayan sahneler
-        val roots = listOf(content.startScene) + listOf(Content.PENALTY_SCENE).filter { it in content.scenes }
+        val roots = listOf(content.startScene) + listOf(Content.PENALTY_SCENE, Content.HARVEST_SCENE).filter { it in content.scenes }
         val reachable = mutableSetOf<String>()
         val queue = ArrayDeque(roots)
         while (queue.isNotEmpty()) {
             val id = queue.removeFirst()
             if (!reachable.add(id)) continue
-            content.scenes[id]?.choices?.mapNotNull { it.next }?.filter { it != Content.RETURN }?.forEach { queue.addLast(it) }
+            content.scenes[id]?.choices?.forEach { c ->
+                c.next?.takeIf { it != Content.RETURN }?.let { queue.addLast(it) }
+                c.effects.filterIsInstance<Effect.StartCombat>().forEach { f -> listOfNotNull(f.spec.win, f.spec.lose, f.spec.flee).forEach { queue.addLast(it) } }
+            }
         }
         (content.scenes.keys - reachable).sorted().forEach { problems += "sahne $it: başlangıçtan ulaşılamıyor" }
 

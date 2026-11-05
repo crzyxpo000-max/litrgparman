@@ -376,12 +376,6 @@
               "bayrak": "ilk_oldurme"
             },
             {
-              "xp": 140
-            },
-            {
-              "unvan": "ogreticinin_ilk_kani"
-            },
-            {
               "egilim": {
                 "yakin_dovus": 2
               }
@@ -390,9 +384,20 @@
               "ahlak": {
                 "insanlik": -2
               }
+            },
+            {
+              "savas": {
+                "dusmanlar": [
+                  "kanal_faresi"
+                ],
+                "ortam": [
+                  "karanlik"
+                ],
+                "kazan": "ilk_kan",
+                "kaybet": "ilk_gece"
+              }
             }
-          ],
-          "sonraki": "ilk_gece"
+          ]
         },
         {
           "id": "yabanciyi_koru",
@@ -463,6 +468,74 @@
           "metin": {
             "tr": "[Kanal Faresi · Görünen Sv. 2 · Gerçek Sv. 3 · Zaaf: sol arka bacak] Başkalarının penceresinde yalnızca \"???\" yazıyor.",
             "en": "[Sewer Rat · Shown Lv. 2 · True Lv. 3 · Weakness: left hind leg] Everyone else's window just says \"???\"."
+          }
+        }
+      ]
+    },
+    {
+      "id": "ilk_kan",
+      "yer": "ogretici_orman",
+      "paragraflar": [
+        {
+          "tr": "Fare son bir kez titreyip duruyor. Elindeki dal kan içinde; senin kanın da biraz.",
+          "en": "The rat twitches once and goes still. The branch in your hand is soaked. Some of it's yours."
+        },
+        {
+          "tr": "Gökyüzünde bir pencere daha açılıyor, bu kez herkesin görebileceği büyüklükte.",
+          "en": "Another window opens in the sky, big enough for everyone to see."
+        }
+      ],
+      "secenekler": [
+        {
+          "id": "pencereyi_kapat",
+          "etiket": {
+            "tr": "Pencereyi kapat ve yabancıya bak",
+            "en": "Swipe the window away and check on the stranger"
+          },
+          "etkiler": [
+            {
+              "unvan": "ogreticinin_ilk_kani"
+            },
+            {
+              "ahlak": {
+                "merhamet": 3
+              }
+            }
+          ],
+          "sonraki": "ilk_gece"
+        },
+        {
+          "id": "pencereyi_oku_ilk",
+          "etiket": {
+            "tr": "Pencerenin altındaki küçük satırı oku",
+            "en": "Read the fine print under the window"
+          },
+          "etkiler": [
+            {
+              "unvan": "ogreticinin_ilk_kani"
+            },
+            {
+              "ahlak": {
+                "insanlik": -2
+              }
+            },
+            {
+              "egilim": {
+                "menzilli": 1
+              }
+            }
+          ],
+          "sonraki": "ilk_gece"
+        }
+      ],
+      "sezgiler": [
+        {
+          "kosul": {
+            "bayrak": "yanki_bagi"
+          },
+          "metin": {
+            "tr": "\"Dünyada ilk. Herkes ismini görecek; ama yalnızca sen neyin peşinde olduğumu göreceksin.\"",
+            "en": "\"First in the world. Everyone's going to see your name. Only you get to see what I'm after.\""
           }
         }
       ]

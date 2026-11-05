@@ -175,3 +175,60 @@ data class DailyView(
 )
 
 data class Outcome(val state: WorldState, val notices: List<NoticeView>)
+
+// ---- Savaş ----
+
+data class EnemyView(
+    val uid: Int,
+    val name: String,
+    val description: String,
+    val level: Int,
+    val gradeName: String,
+    val hp: Int,
+    val maxHp: Int,
+    /** OP MC: gerçek statlar her zaman görünür. */
+    val stats: List<StatLine>,
+    val statuses: List<String>,
+    /** Analiz edildiyse zaaf metni. */
+    val weakness: String?,
+    val boss: Boolean,
+    val phase: Int,
+    val intelligent: Boolean,
+    val alive: Boolean,
+)
+
+data class CombatLogView(val prose: String, val numbers: String?)
+
+data class ExecutionView(val enemyName: String, val options: List<PromptOptionView>)
+
+data class CombatSkillView(
+    val id: String,
+    val name: String,
+    val costMp: Int,
+    val costStamina: Int,
+    val cooldownLeft: Int,
+    val usable: Boolean,
+    val targetsAll: Boolean,
+    val self: Boolean,
+)
+
+data class EnvironmentView(val tag: String, val name: String, val used: Boolean)
+
+data class CombatView(
+    val round: Int,
+    val enemies: List<EnemyView>,
+    val stamina: Int,
+    val maxStamina: Int,
+    val stance: com.yukselis.engine.combat.Stance,
+    val effort: Int,
+    val playerStatuses: List<String>,
+    val log: List<CombatLogView>,
+    val environment: List<EnvironmentView>,
+    val skills: List<CombatSkillView>,
+    val items: List<ItemView>,
+    /** Son düşman düştü: infaz seçenekleri. */
+    val execution: ExecutionView?,
+    val minorUsed: Boolean,
+    val extraActions: Int,
+    val dead: Boolean,
+)

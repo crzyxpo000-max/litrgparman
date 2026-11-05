@@ -1,5 +1,7 @@
 package com.yukselis.engine.core
 
+import com.yukselis.engine.combat.CombatState
+import com.yukselis.engine.combat.EnemyMemory
 import com.yukselis.engine.system.AffinityVector
 import com.yukselis.engine.system.Grade
 import com.yukselis.engine.system.Progression
@@ -146,6 +148,14 @@ data class WorldState(
     val penaltyPending: Boolean = false,
     /** Kendini açan arayüz: Sistem'in verdiği sekmeler. Hikaye, Durum ve Daha fazla her zaman açıktır. */
     val unlockedTabs: Set<String> = emptySet(),
+    /** Süren savaş; kayda girer, yüklenince aynı yerden devam edilir. */
+    val combat: CombatState? = null,
+    /** Kaçan ya da bağışlanan zeki düşmanlar (düşman kimliği → hafıza). */
+    val enemyMemory: Map<String, EnemyMemory> = emptyMap(),
+    /** İkinci Şans'ın kullanıldığı kademeler (her kademede bir kez). */
+    val secondChances: Set<Grade> = emptySet(),
+    /** Normal modda ölüm: arayüz son kayıt noktasına dönmeyi önerir. */
+    val dead: Boolean = false,
 ) {
     val act: Int get() = GameClock.actFor(day)
 
@@ -163,6 +173,9 @@ data class WorldState(
 
         /** Benzersiz yetenekler de dünyada tek sahiplidir; "İlk" kaydında bu önekle tutulur. */
         const val UNIQUE_CLAIM_PREFIX = "yetenek:"
+
+        /** Savaş başında yazılan kayıt noktası (Normal modda ölümden sonra dönülür). */
+        const val CHECKPOINT_SLOT = "checkpoint"
 
         fun newGame(seed: Long, playerName: String, mode: GameMode, startScene: String): WorldState =
             WorldState(

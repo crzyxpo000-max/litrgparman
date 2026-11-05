@@ -1,6 +1,15 @@
 package com.yukselis.engine.save
 
+import com.yukselis.engine.combat.CombatSpec
+import com.yukselis.engine.combat.CombatState
+import com.yukselis.engine.combat.EnemyMemory
+import com.yukselis.engine.combat.EnemyState
+import com.yukselis.engine.combat.LogEntry
+import com.yukselis.engine.combat.Stance
+import com.yukselis.engine.combat.StatusInstance
 import com.yukselis.engine.core.DailyQuest
+import com.yukselis.engine.i18n.LText
+import kotlinx.serialization.json.JsonElement
 import com.yukselis.engine.core.GameMode
 import com.yukselis.engine.core.HistoryEntry
 import com.yukselis.engine.core.Morality
@@ -47,6 +56,7 @@ data class SaveData(val state: WorldState, val savedAtMillis: Long)
  *  - v2 (Aşama 2): eğilim vektörü, sınıf, kademe kapısı, yetenekler, envanter, meslek, Öz,
  *    "İlk" unvan kaydı, istem kuyruğu, Günlük Görev, dönüş yığını. v1 → v2: `egilim_*`
  *    değişkenleri eğilim vektörüne taşınır ve değişkenlerden silinir.
+ *    Aşama 3 (alan ekleme, sürüm aynı): süren savaş, düşman hafızası, İkinci Şans kademeleri, ölüm.
  */
 object SaveCodec {
     const val VERSION = 2
@@ -114,7 +124,114 @@ object SaveCodec {
         putJsonArray("returns") { state.returnStack.forEach { add(it) } }
         put("penalty", state.penaltyPending)
         putJsonArray("tabs") { state.unlockedTabs.sorted().forEach { add(it) } }
+        state.combat?.let { put("combat", encodeCombat(it)) }
+        putJsonObject("memory") {
+            state.enemyMemory.toSortedMap().forEach { (k, m) -> putJsonObject(k) { put("f", m.fled); put("s", m.spared) } }
+        }
+        putJsonArray("second") { state.secondChances.sortedBy { it.ordinal }.forEach { add(it.name) } }
+        put("dead", state.dead)
     }.toString()
+
+    private fun encodeLText(t: LText) = buildJsonObject { put("tr", t.tr); put("en", t.en) }
+
+    private fun decodeLText(e: JsonElement?): LText? =
+        (e as? JsonObject)?.let { LText(it.string("tr") ?: "", it.string("en") ?: "") }
+
+    private fun encodeStatuses(list: List<StatusInstance>) = JsonArray(
+        list.map { st -> buildJsonObject { put("e", st.effect); put("t", st.turns); put("p", st.power) } },
+    )
+
+    private fun decodeStatuses(e: JsonElement?): List<StatusInstance> =
+        (e as? JsonArray)?.mapNotNull { x ->
+            val o = x.jsonObject
+            o.string("e")?.let { StatusInstance(it, o.int("t") ?: 1, o.int("p") ?: 0) }
+        } ?: emptyList()
+
+    private fun encodeCombat(c: CombatState) = buildJsonObject {
+        putJsonObject("spec") {
+            putJsonArray("enemies") { c.spec.enemies.forEach { add(it) } }
+            putJsonArray("env") { c.spec.environment.forEach { add(it) } }
+            put("win", c.spec.win)
+            c.spec.lose?.let { put("lose", it) }
+            c.spec.flee?.let { put("flee", it) }
+        }
+        putJsonArray("enemies") {
+            c.enemies.forEach { e ->
+                addJsonObject {
+                    put("uid", e.uid); put("id", e.id); put("hp", e.hp); put("max", e.maxHp); put("lv", e.level)
+                    putJsonObject("stats") { Stat.entries.forEach { put(it.key, e.stats[it]) } }
+                    put("st", encodeStatuses(e.statuses))
+                    put("phase", e.phase)
+                    putIntMap("cd", e.cooldowns)
+                    put("an", e.analyzed); put("guard", e.guarding); put("gone", e.gone)
+                    putJsonArray("extra") { e.extraAttacks.forEach { add(it) } }
+                }
+            }
+        }
+        put("round", c.round); put("stamina", c.stamina); put("maxStamina", c.maxStamina)
+        put("stance", c.stance.key); put("effort", c.effort)
+        put("pst", encodeStatuses(c.playerStatuses))
+        putIntMap("cd", c.cooldowns)
+        put("def", c.defending); put("minor", c.minorUsed); put("extra", c.extraActions)
+        putJsonArray("usedEnv") { c.usedEnvironment.sorted().forEach { add(it) } }
+        putJsonArray("log") {
+            c.log.forEach { l -> addJsonObject { put("p", encodeLText(l.prose)); l.numbers?.let { put("n", encodeLText(it)) } } }
+        }
+        c.pendingExecution?.let { put("exec", it) }
+        putJsonArray("struck") { c.struck.sorted().forEach { add(it) } }
+        put("low", c.lowestHpPercent); put("kills", c.kills)
+    }
+
+    private fun decodeCombat(o: JsonObject): CombatState {
+        val spec = o["spec"]!!.jsonObject
+        return CombatState(
+            spec = CombatSpec(
+                enemies = spec.strings("enemies"),
+                environment = spec.strings("env"),
+                win = spec.string("win") ?: throw SaveFormatException("Savaşta kazan sahnesi yok"),
+                lose = spec.string("lose"),
+                flee = spec.string("flee"),
+            ),
+            enemies = (o["enemies"] as? JsonArray)?.map { x ->
+                val e = x.jsonObject
+                val st = e["stats"]?.jsonObject
+                EnemyState(
+                    uid = e.int("uid") ?: 0,
+                    id = e.string("id") ?: "",
+                    hp = e.int("hp") ?: 0,
+                    maxHp = e.int("max") ?: 1,
+                    level = e.int("lv") ?: 1,
+                    stats = Stats(Stat.entries.associateWith { st?.int(it.key) ?: Stats.BASE_VALUE }),
+                    statuses = decodeStatuses(e["st"]),
+                    phase = e.int("phase") ?: 0,
+                    cooldowns = e.intMap("cd"),
+                    analyzed = e.bool("an"),
+                    guarding = e.bool("guard"),
+                    extraAttacks = e.strings("extra"),
+                    gone = e.bool("gone"),
+                )
+            } ?: emptyList(),
+            round = o.int("round") ?: 1,
+            stamina = o.int("stamina") ?: 0,
+            maxStamina = o.int("maxStamina") ?: 1,
+            stance = Stance.fromKey(o.string("stance")),
+            effort = o.int("effort") ?: 0,
+            playerStatuses = decodeStatuses(o["pst"]),
+            cooldowns = o.intMap("cd"),
+            defending = o.bool("def"),
+            minorUsed = o.bool("minor"),
+            extraActions = o.int("extra") ?: 0,
+            usedEnvironment = o.strings("usedEnv").toSet(),
+            log = (o["log"] as? JsonArray)?.mapNotNull { x ->
+                val l = x.jsonObject
+                decodeLText(l["p"])?.let { LogEntry(it, decodeLText(l["n"])) }
+            } ?: emptyList(),
+            pendingExecution = o.int("exec"),
+            struck = (o["struck"] as? JsonArray)?.mapNotNull { it.jsonPrimitive.intOrNull }?.toSet() ?: emptySet(),
+            lowestHpPercent = o.int("low") ?: 100,
+            kills = o.int("kills") ?: 0,
+        )
+    }
 
     fun decode(text: String): SaveData {
         val o = try {
@@ -198,6 +315,12 @@ object SaveCodec {
             dailyStreak = o.int("streak") ?: 0,
             returnStack = o.strings("returns"),
             penaltyPending = o.bool("penalty"),
+            combat = (o["combat"] as? JsonObject)?.let { decodeCombat(it) },
+            enemyMemory = (o["memory"] as? JsonObject)?.mapNotNull { (k, v) ->
+                (v as? JsonObject)?.let { m -> k to EnemyMemory(m.int("f") ?: 0, m.int("s") ?: 0) }
+            }?.toMap() ?: emptyMap(),
+            secondChances = o.strings("second").mapNotNull { Grade.fromKey(it) }.toSet(),
+            dead = o.bool("dead"),
             // Sekme kaydı olmayan eski kayıtlarda sahip olunanlara göre açılır.
             unlockedTabs = if (o["tabs"] is JsonArray) {
                 o.strings("tabs").toSet()

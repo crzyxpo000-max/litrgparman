@@ -72,6 +72,8 @@ class EffectApplier(private val content: Content) {
         is Effect.DailyProgress -> dailyProgress(state, effect.kind, effect.amount)
         Effect.OfferProfession -> offerProfession(state)
         is Effect.UnlockTab -> unlockTab(state, effect.tab)
+        // Savaş StoryEngine tarafından başlatılır (CombatEngine); burada etkisizdir.
+        is Effect.StartCombat -> Result(state, emptyList())
         is Effect.AddHp -> Result(state.withPlayer { it.copy(hp = (it.hp + effect.delta).coerceIn(1, it.maxHp)) }, emptyList())
         is Effect.AddMp -> Result(state.withPlayer { it.copy(mp = (it.mp + effect.delta).coerceIn(0, it.maxMp)) }, emptyList())
     }
@@ -484,6 +486,19 @@ class EffectApplier(private val content: Content) {
         val uniques = content.skills.values.filter { it.rarity == com.yukselis.engine.system.Rarity.UNIQUE && it.affinity != null }
         val pick = state.player.affinity.ranked().firstNotNullOfOrNull { a ->
             uniques.firstOrNull { it.affinity == a && !state.firstClaims.containsKey(WorldState.UNIQUE_CLAIM_PREFIX + it.id) }
+        } ?: return Result(state, emptyList())
+        val r = grantSkill(state, pick.id)
+        val echo = Notice(NoticeKind.ECHO, texts.format("benzersiz_yetenek"), listOf(texts.format("benzersiz_yetenek_satir")))
+        return Result(r.state, listOf(echo) + r.notices)
+    }
+
+    /** Kademe Kırma ödülü: sahibi olmayan bir Benzersiz yetenek (zaten bir tane olsa bile). */
+    fun grantExtraUniqueSkill(state: WorldState): Result {
+        val uniques = content.skills.values.filter { it.rarity == com.yukselis.engine.system.Rarity.UNIQUE && it.affinity != null }
+        val pick = state.player.affinity.ranked().firstNotNullOfOrNull { a ->
+            uniques.firstOrNull {
+                it.affinity == a && state.player.skill(it.id) == null && !state.firstClaims.containsKey(WorldState.UNIQUE_CLAIM_PREFIX + it.id)
+            }
         } ?: return Result(state, emptyList())
         val r = grantSkill(state, pick.id)
         val echo = Notice(NoticeKind.ECHO, texts.format("benzersiz_yetenek"), listOf(texts.format("benzersiz_yetenek_satir")))

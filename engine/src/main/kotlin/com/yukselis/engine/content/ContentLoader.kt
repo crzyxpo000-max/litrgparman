@@ -30,7 +30,7 @@ object ContentLoader {
     /** Zorunlu olmayan sistem dosyaları; yoksa ilgili mekanik boş kalır. */
     val SYSTEM_FILES = listOf(
         ContentParser.SYSTEM, ContentParser.CLASSES, ContentParser.SKILLS, ContentParser.ITEMS,
-        ContentParser.PROFESSIONS, ContentParser.ESSENCES, ContentParser.DAILY,
+        ContentParser.PROFESSIONS, ContentParser.ESSENCES, ContentParser.DAILY, ContentParser.ENEMIES, ContentParser.AWAKENINGS,
     )
 
     fun load(source: ContentSource): Content {

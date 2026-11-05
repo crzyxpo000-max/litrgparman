@@ -1,0 +1,95 @@
+{
+  "uyanislar": {
+    "son_nefes": {
+      "baslik": {
+        "tr": "[UYANIŞ] Son Nefes",
+        "en": "[AWAKENING] Last Breath"
+      },
+      "satirlar": [
+        {
+          "tr": "Canın %10'un altındaydı ve yine de kazandın. Bedenin bunu bir kural olarak kaydediyor.",
+          "en": "You were under 10% HP and you still won. Your body files that away as a rule."
+        },
+        {
+          "tr": "Yankı fısıldıyor: \"Ölmeyi reddettin. Ben de bunu reddetmeyi reddediyorum.\"",
+          "en": "Echo whispers: \"You refused to die. I refuse to let that go to waste.\""
+        }
+      ],
+      "kosul": {
+        "degisken_min": {
+          "_savas_kazanildi": 1
+        },
+        "degisken_max": {
+          "_savas_en_dusuk_can": 9,
+          "_savas_ezme": 0
+        }
+      },
+      "etkiler": [
+        {
+          "yetenek": "son_nefes"
+        },
+        {
+          "ahlak": {
+            "insanlik": -2
+          }
+        }
+      ]
+    },
+    "kirik_tavan": {
+      "baslik": {
+        "tr": "[UYANIŞ] Kırık Tavan",
+        "en": "[AWAKENING] Broken Ceiling"
+      },
+      "satirlar": [
+        {
+          "tr": "Kademe sınırı bir duvar değilmiş. Bir kapıymış ve sen onu tekmeyle açtın.",
+          "en": "The Grade limit wasn't a wall. It was a door, and you kicked it open."
+        },
+        {
+          "tr": "Bir sonraki evriminde gizli bir yol daha açılacak.",
+          "en": "A hidden path will open at your next evolution."
+        }
+      ],
+      "kosul": {
+        "degisken_min": {
+          "_savas_kademe_farki": 1
+        }
+      },
+      "etkiler": [
+        {
+          "bayrak": "gizli_evrim_kademe_kiran"
+        },
+        {
+          "stat": {
+            "wil": 2
+          }
+        }
+      ]
+    },
+    "ilk_bekci": {
+      "baslik": {
+        "tr": "[UYANIŞ] Bekçinin Mirası",
+        "en": "[AWAKENING] The Warden's Legacy"
+      },
+      "satirlar": [
+        {
+          "tr": "Bekçinin içinden ölmüş insanların pencereleri dökülüyor. Bir tanesi sana açılıyor.",
+          "en": "The dead people's windows spill out of the Warden. One of them opens for you."
+        }
+      ],
+      "kosul": {
+        "bayrak": "yenildi_ogretici_bekcisi"
+      },
+      "etkiler": [
+        {
+          "unvan": "ilk_bekci_deviren"
+        },
+        {
+          "oz": {
+            "koruma": 40
+          }
+        }
+      ]
+    }
+  }
+}

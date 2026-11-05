@@ -91,16 +91,19 @@ class StoryEngineTest {
         var s = engine.newGame("Arda", GameMode.NORMAL, seed = 5)
         s = engine.choose(s, "el_tut", Lang.TR).state
         s = engine.choose(s, "ciglige_kos", Lang.TR).state
-        val fight = engine.choose(s, "dovus", Lang.TR)
-        s = fight.state
+        s = engine.choose(s, "dovus", Lang.TR).state
+        assertNotNull(s.combat)
+        val fight = fightOut(engine, s)
+        s = fight.first
+        assertEquals("ilk_kan", s.sceneId)
         assertEquals(2, s.player.level)
-        assertEquals(40L, s.player.xp)
-        assertEquals(3, s.player.freePoints)
+        assertTrue(fight.second.any { it.kind == NoticeKind.LEVEL_UP })
+        assertEquals(s.player.maxHp, s.player.hp)
+        val title = engine.choose(s, "pencereyi_kapat", Lang.TR)
+        s = title.state
         assertEquals(6, s.player.stats[Stat.STR]) // unvan bonusu
         assertTrue("ogreticinin_ilk_kani" in s.player.titles)
-        assertTrue(fight.notices.any { it.kind == NoticeKind.LEVEL_UP })
-        assertTrue(fight.notices.any { it.kind == NoticeKind.TITLE && it.title.contains("Öğreticinin İlk Kanı") })
-        assertEquals(s.player.maxHp, s.player.hp)
+        assertTrue(title.notices.any { it.kind == NoticeKind.TITLE && it.title.contains("Öğreticinin İlk Kanı") })
 
         s = engine.choose(s, "uyu", Lang.TR).state
         assertEquals(1, s.day)
@@ -108,7 +111,7 @@ class StoryEngineTest {
         val end = engine.view(s, Lang.EN)
         assertTrue(end.isEnding)
         assertTrue(end.choices.isEmpty())
-        assertEquals(4, end.history.size)
+        assertEquals(5, end.history.size)
         assertEquals("Grab Devon's hand and hold on", end.history.first().chosenLabel)
     }
 
@@ -143,8 +146,10 @@ class SaveTest {
         var s = engine.newGame("Arda", GameMode.NORMAL, seed = 77)
         s = engine.choose(s, "el_tut", Lang.TR).state
         s = engine.choose(s, "ciglige_kos", Lang.TR).state
-        return engine.choose(s, "dovus", Lang.TR).state
+        s = fightOut(engine, engine.choose(s, "dovus", Lang.TR).state).first
+        return engine.choose(s, "pencereyi_kapat", Lang.TR).state
     }
+
 
     @Test
     fun kayitTamOlarakGeriYuklenir() {
@@ -198,4 +203,17 @@ class SaveTest {
         storage.write("slot1", "{bozuk")
         assertNull(SaveManager(storage).load("slot1"))
     }
+}
+
+/** Savaşı otomatik turla bitirir; durum ve tüm bildirimler. */
+internal fun fightOut(engine: StoryEngine, start: WorldState): Pair<WorldState, List<com.yukselis.engine.story.NoticeView>> {
+    var s = start
+    val notices = mutableListOf<com.yukselis.engine.story.NoticeView>()
+    var guard = 0
+    while (s.combat != null && !s.dead && guard++ < 200) {
+        val o = engine.combatAction(s, engine.autoCombatAction(s), Lang.TR)
+        s = o.state
+        notices += o.notices
+    }
+    return s to notices
 }
