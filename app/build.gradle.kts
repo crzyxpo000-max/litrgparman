@@ -35,6 +35,11 @@ android {
         compose = true
     }
 
+    bundle {
+        // Dil uygulama içinden anında değişir; AAB dil dosyalarını bölmemeli.
+        language { enableSplit = false }
+    }
+
     sourceSets {
         getByName("main") {
             // Oyun içeriği (content/) doğrudan assets olarak paketlenir.

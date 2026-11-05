@@ -33,4 +33,5 @@ tasks.register<JavaExec>("validateContent") {
     classpath = sourceSets["main"].runtimeClasspath
     mainClass.set("com.yukselis.engine.content.ContentValidatorKt")
     args = listOf(rootProject.file("content").absolutePath)
+    jvmArgs("-Dstdout.encoding=UTF-8", "-Dstderr.encoding=UTF-8")
 }

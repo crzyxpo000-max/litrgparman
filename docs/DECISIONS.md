@@ -2,6 +2,16 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Aşama 0 — 2026-11-05
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 13 | Gradle 8.14.3 → **9.1.0**, AGP 8.7.3 → **8.13.2**, Kotlin 2.0.21 → **2.2.21** | Geliştirme makinesindeki tek JDK, Android Studio 2026.2'nin JBR'si (Java 25). Gradle 8.14 ve Kotlin 2.0 Java 25'te çalışmıyor. Java 25'i destekleyen en küçük Gradle 9.1; AGP 8.x çizgisinde kalındı (AGP 9 yerleşik Kotlin ile kırıcı değişiklik getiriyor). | Aşama 9: targetSdk yükseltilirken AGP 9'a geçiş değerlendirilir. |
+| 14 | `scripts/check.sh` JAVA_HOME yoksa Android Studio JBR'sini kendisi bulur | Komut satırında Java kurulu olmayan makinelerde de çalışsın. | — |
+| 15 | AAB'de dil bölmesi kapalı (`bundle.language.enableSplit = false`) | Dil uygulama içinden anında değişiyor; Play bölerse diğer dilin metinleri cihazda olmaz (lint: AppBundleLocaleChanges). | — |
+| 16 | Prolog emülatörde (API 36, Medium Phone) iki dilde elle oynandı; Compose UI testi yazılmadı | Emülatör çalışıyor; görev dosyası UI testini yalnızca emülatör yoksa istiyor. | Aşama 4: başsız oynanış testi motor düzeyinde akışı kapsar. |
+| 17 | Proje OneDrive klasöründe; lint bazen "dosya başka işlem tarafından kullanılıyor" hatası veriyor | OneDrive build/ klasörünü kilitleyebiliyor. `./gradlew --stop` ve yeniden çalıştırma çözüyor. | Sorun sıklaşırsa projeyi OneDrive dışına taşımak önerilir. |
+
 ## Aşama 1 — 2026-11-05
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |

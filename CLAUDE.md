@@ -7,7 +7,7 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 
 ## Durum
 
-- **Aşama 1 (Çekirdek): tamam.** Motor, kayıt, i18n, içerik doğrulayıcı, Compose iskeleti, 5 sahnelik prolog demosu.
+- **Aşama 0 (Doğrulama) ve Aşama 1 (Çekirdek): tamam.** Motor, kayıt, i18n, içerik doğrulayıcı, Compose iskeleti, 5 sahnelik prolog demosu; app emülatörde çalışıyor.
 - **Tüm geliştirme planı ve kabul kriterleri:** `CLAUDE_CODE_GOREV.md`. Güncel durum: `docs/PROGRESS.md`.
 
 ## Komutlar
@@ -17,8 +17,11 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 ./gradlew :engine:validateContent  # content/ doğrulaması
 ./gradlew assembleDebug            # APK: app/build/outputs/apk/debug/
 ./gradlew installDebug             # bağlı telefona/emülatöre kur
-./gradlew test assembleDebug       # her aşamanın sonunda geçmeli
+./gradlew lint                     # Android lint (hata kalmamalı)
+scripts/check.sh                   # test + validateContent + assembleDebug + lint; her aşamanın sonunda geçmeli
 ```
+
+Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). `local.properties` git dışıdır.
 
 ## Mimari (değişmez kurallar)
 
