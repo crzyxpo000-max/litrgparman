@@ -25,6 +25,58 @@ Yükseliş Protokolü, Dünya'ya aniden inen bir "Sistem"in insanlığı seviye,
 
 **Hedef:** tek oynanış 15–25 saat, 8 son + 1 gizli son, en az 3 belirgin build yolu, Türkçe ve İngilizce tam dil desteği, platform Android (telefon ve tablet).
 
+## OP MC tasarımı
+
+Yükseliş Protokolü bir "OP MC" güç fantezisidir: kahraman zayıf başlar ama dünyanın kurallarının dışında büyür. Bu bölüm diğer tüm bölümlerin üstündedir; çelişkide bu bölüm geçerlidir. Mekanikler ilham alınan türden gelir; hiçbir metin, isim, sınıf ya da yetenek kopyalanmaz.
+
+### Temel kural: Kahraman bir anomalidir
+
+- **Herkes standart Sistem'i alır. Oyuncu bozuk ve ayrıcalıklı bir sürümünü alır.** Entegrasyon Günü'nde Sistem'in hatalı parçası Yankı oyuncuya bağlanır. Bu, prologda ve açılış dizisinde kanondur: aktarım sırasında oyuncunun penceresi bozulur, bir satır yalnızca ona görünür.
+- **Günlük Görev yalnızca oyuncudadır.** Diğer insanlar böyle bir şeyin var olduğunu bilmez; bir NPC'ye anlatmak bir [Açığa vur] eylemidir.
+- **Gizli bilgi:** oyuncu düşmanların gerçek statlarını, gerçek seviyeleri, görevlerin gizli ödüllerini ve Sistem'in gizli satırlarını görür. Yüksek statlar sahnelere yalnızca oyuncunun okuduğu **pasif sezgi** satırları ekler ("[ALG] Seviyesi sahte. Gerçek: 34.").
+- **Garanti:** her oynanışta oyuncu bir **Benzersiz yetenek** ve bir **gizli sınıf** kazanır; hangileri olduğu oyun tarzına (Eğilim vektörü, ahlak, bayraklar) bağlıdır. Seviye 10 teklifinin üçüncü seçeneği her zaman gizli sınıftır; hiçbir gizli sınıfın koşulu sağlanmadıysa, en güçlü eğilime en yakın gizli sınıf "Yankı'nın önerisi" olarak gelir.
+
+### Güç eğrisi: her kademe bir döngü
+
+Her kademe (F→S) dört evreden oluşur ve içerik bu sırayı izler:
+
+1. **Mücadele (kısa):** dünya yeni güçlendi; savaşlar gerçek ve taktiktir.
+2. **Kırılma:** koşulla tetiklenen, elle yazılmış bir **uyanış anı** (ör. %10'un altında canla kazanmak, birini büyük bedelle korumak). Gizli bir yetenek ya da evrim yolu açar. Yeniden kullanılabilir **uyanış tetikleyicisi** mekaniğiyle kurulur.
+3. **Hakimiyet (uzun, oyun süresinin çoğu):** oyuncu çevresini açıkça geride bırakır.
+4. **Yeni tavan:** bir üst kademeden gelen bir şey ölçeği sıfırlar.
+
+Oyuncunun stat büyümesi **üsteldir** (Günlük Görev serisi, Benzersiz yetenek, unvan bonusları, kademeyle büyüyen sınıf artışı); NPC'ler daha yavaş bir eğride büyür. Büyük sayılar eğlencenin parçasıdır: hasar sayıları, art arda seviye atlamalar ve Durum ekranında **insanlık yüzdeliği** ("İlk %0,001").
+
+### Yeni sistemler
+
+- **Küresel Sıralama:** insanlığın en güçlülerinin canlı listesi (oyuncu, Aras Kurt, Kaya Demir, prosedürel avcılar). NPC'ler ekran dışında tırmanır; Sistem değişiklikleri duyurur. Loncalar, Yükselenler ve rakipler oyuncunun sırasına tepki verir.
+- **Gizli ve Açık Güç:** oyuncunun bir **gerçek seviyesi** ve bir **görünen seviyesi** vardır. [Gizle] seçenekleri Dikkat'i düşük tutar ve "beni hafife aldılar" anlarını açar; [Açığa vur] seçenekleri korku, saygı ve katılım teklifleri getirir ama Dikkat'i artırır. NPC'ler açığa vurulana kadar görünen seviyeye tepki verir.
+- **Anomali Dikkati:** "kaybedebilirsin" yerine ana gerilim ölçeği. Hızlı büyüme ve açığa vurmalar onu artırır; eşikler avcıları, Sistem "düzeltmelerini", Kadim elçilerini ve rakipleri tetikler. Karanlık ve lanetli yetenekler için ayrı bir **Yozlaşma** ölçeği vardır.
+- **Tanıklar ve Efsane:** NPC'lerin önünde yapılan başarılar söylenti olarak yayılır, unvanlara ve fraksiyon tepkilerine dönüşür. Aynı başarı her fraksiyonda farklı okunur (Sığınak bir katliamdan korkar, Demir Lonca hayranlık duyar).
+- **Kademe Kırma:** kademe farkı hasar kuralı dünya için geçerli kalır; ama bir üst kademedeki düşmanı yenmek büyük XP, bir "Kademe Kıran" unvan zinciri ve Benzersiz yetenek şansı verir.
+- **Ordu:** oyuncuyla birlikte ölçeklenen çağrılar ve takipçiler (sınıfa göre gölge askerler, evcilleştirilmiş canavarlar ya da bir lonca); güç fantezisi Perde 3–4'te büyük ölçekte çalışır.
+
+### Yeniden ayarlanan mekanikler
+
+- **Kendini açan arayüz:** Yetenekler, Çanta, Harita ve sonra Anomali / Kök Erişim sekmeleri Sistem onları verene kadar gizlidir; her biri kendi bildirimiyle gelir ("[Envanter verildi]").
+- **Pasif Sistem sezgisi:** yüksek statlar sahnelere özel satırlar ekler (yukarıda).
+- **Gösteriş seçenekleri:** yüksek statlar "[GÜÇ 40 · Önemsiz] Kapıyı menteşesinden sök" gibi sorunu tarzla çözen seçenekler gösterir. Yeniden denenebilir (beyaz) ve tek seferlik (kırmızı) kontroller görünür olasılıklarla kalır, ama çoğunlukla sosyal ve ahlaki kontrollerde kullanılır.
+- **Fırsat eli:** serbest zamanda 3 rastgele olay kartı gösterilir; oyuncu birini seçer.
+- **İki savaş modu:**
+  - **Gerçek savaş** (denkler ve bosslar): taktik; her turda duruş (tam saldırı / ölçülü / savunmacı) ve Dayanım taahhüdü; düzyazıyla anlatılır, sayılar istenirse görünür; oyuncunun seçtiği bir **infaz** hamlesiyle biter.
+  - **Ezme:** oyuncunun açıkça üstün olduğu sıradan düşmanlar tek, şık bir satırla otomatik çözülür. Kasılma (grind) yoktur.
+- **Yoldaş tepkileri:** büyük seçimlerden önce yoldaşlar kişiliklerine ve ilişkilerine göre tek satırlık görüş bildirir. Oyuncunun büyüyen gücüne de hayranlık, endişe, kıskançlık ya da bağımlılıkla tepki verirler. Deniz'in yayı "arkadaşımın bir canavara ya da tanrıya dönüşmesini izlemek" olur.
+- **Bilgi günlüğü:** öğrenilen söylentiler, sırlar ve gerçek seviyeler diyalog seçeneklerini açar; NPC'lere söylenen yalanlar onların hafızasına girer ve sonra ortaya çıkabilir.
+- **İzler:** oyuncuda bedelli mutasyonlar ve soy uyanışları; NPC'lerde oyuncunun onlara yaptıklarından kalan kalıcı özellikler ve yaralar.
+- **Rakipler "İlk" unvanlarını oyuncudan önce kapabilir.**
+- **Bildirimler:** oturumlar arasında nadir, isteğe bağlı Android bildirimleri ("[Aras Kurt Küresel Sıralama'da seni geçti.]", "[A kademesinden bir varlık seni fark etti.]"); her biri küçük bir olay açar. Bildirim izni usulüne uygun istenir.
+
+### Denge kuralları
+
+- **Gerçek seçimler ahlakidir.** Oyuncu ne yaparsa yapsın güçlenir; ahlak eksenleri onun nasıl bir OP MC olacağını belirler (koruyucu, tiran, tanrı, kurtarıcı). Her önemli seçim en az bir ekseni oynatır.
+- **Demir Mod ölümleri haddini aşmaktan gelir** (her şeyi açığa vurup üst kademe varlıkları kışkırtmak), rastgele savaşlardan değil.
+- **Simülatör** perde başına oyuncu/NPC güç farkını, oyun süresinin "hakimiyet" evresindeki payını (hedef %60+), zaman içindeki Dikkat düzeyini ve son dağılımını raporlar.
+
 ## Dünya ve olay örgüsü iskeleti
 
 Oyun, Sistem'in Dünya'yı "Çok-evren Ağı"na kattığı Entegrasyon Günü başlar. İnsanlığın 365 günü vardır: sonunda Dünya ya tam bir Katman olarak kabul edilir ya da hasat edilir.
@@ -125,7 +177,7 @@ Sınıf ayrıca bir **Meslek** ağacından bağımsızdır: Simyacı, Demirci, R
 
 ### Günlük Görev ve ekonomi
 
-- **Günlük Görev:** her oyun günü Sistem bir antrenman görevi verir (100 şınav, 10 km koşu, 3 kapı). Tamamlamak +1 serbest stat; görmezden gelmek ceza bölgesine ışınlanma riski.
+- **Günlük Görev:** her oyun günü Sistem bir antrenman görevi verir (100 şınav, 10 km koşu, 3 kapı). Tamamlamak +1 serbest stat (her 7 günlük seri +1 daha); görmezden gelmek ceza bölgesine ışınlanma riski. **Günlük Görev yalnızca oyuncudadır** (bkz. OP MC tasarımı).
 - **Para:** Kredi (Sistem mağazası, ticaret) ve Öz Kristali (evrim, yetenek kaynaştırma).
 - **Ekipman:** 8 yuva, nadirlik renkleri, set bonusları; Meslek ile yükseltilir.
 
@@ -178,7 +230,7 @@ Kademe farkı ayrıca ezici bir çarpan uygular: her kademe farkı için hasar �
 
 **Düşman tasarımı.** Her düşmanın bir davranış kalıbı (agresif, temkinli, sürü, kaçan), bir zaafı ve bir "anlatı kancası" vardır. Bosslar faz geçişinde yeni yetenek açar ve kısa bir anlatı anı tetikler. Zekalı düşmanlar oyuncuyu hatırlar: kaçan bir düşman daha sonra güçlenmiş olarak geri gelebilir.
 
-**Ölüm.** Normal modda Sistem her kademede bir kez **İkinci Şans** verir (bedeli: rastgele bir yeteneğin seviyesi −2 ya da bir unvan kaybı). Sonrasında ölüm son kayda döndürür. Demir Mod'da ölüm kalıcıdır ve oyun o noktadaki dünya durumuyla "Hasat" sonuna bağlanır. NPC'lerin ölümü her modda kalıcıdır.
+**Ölüm.** Normal modda Sistem her kademede bir kez **İkinci Şans** verir (bedeli: rastgele bir yeteneğin seviyesi −2 ya da bir unvan kaybı). Sonrasında ölüm son kayda döndürür. Demir Mod'da ölüm kalıcıdır ve oyun o noktadaki dünya durumuyla "Hasat" sonuna bağlanır. Ölümler rastgele savaşlardan değil haddini aşmaktan gelmelidir: oyuncunun çok altındaki düşmanlar **Ezme** moduyla çözülür, gerçek tehlike Dikkat'i yükseltip üst kademe varlıkları kışkırtmaktır. NPC'lerin ölümü her modda kalıcıdır.
 
 ## Dinamik hikaye motoru
 
@@ -216,7 +268,7 @@ Yönetmen her adımda uygun olayları filtreler, sonra puanlar:
 Puan = Agirlik \cdot Gerilim_{uyumu} \cdot Tazelik \cdot Kisisel_{bag} \cdot Oncelik_{anayay}
 ```
 
-- **Gerilim uyumu:** hedef gerilim eğrisine (yükselen, zirve, nefes alma) uyan olaylar öne çıkar. Üç ağır savaştan sonra bir kamp ateşi sahnesi gelir.
+- **Gerilim uyumu:** hedef gerilim eğrisine (yükselen, zirve, nefes alma) uyan olaylar öne çıkar; ana gerilim kaynağı Anomali Dikkati'dir. Üç ağır savaştan sonra bir kamp ateşi sahnesi gelir.
 - **Tazelik:** yakın zamanda görülen etiketler cezalandırılır.
 - **Kişisel bağ:** oyuncunun ilişkisi yüksek NPC'leri içeren olaylar öne çıkar; böylece hikaye oyuncunun önemsediği kişiler etrafında döner.
 - **Ana yay önceliği:** zorunlu hikaye düğümleri zamanı gelince her zaman kazanır.
@@ -261,7 +313,7 @@ NPC'ler senaryo kuklası değil, kendi hedefleri, korkuları ve hafızası olan 
 | Kaya Demir | Demir Lonca lideri, eski asker | Akıl hocası · Oyuncunun devirdiği diktatör · Son savaşta müttefik general |
 | Elif Sarı | Sığınak Konseyi'nin hekim lideri | Konsey başkanı ve barış sonu anahtarı · Lonca darbesinde ölür · Oyuncuyla aşk yayı |
 | Vahit | Yükselenler'in peygamberi; Sistem'le konuştuğunu söyler | Sahtekar çıkar · Gerçekten haklı çıkar · Oyuncunun ellerinde Yükseliş sonunun kapısı |
-| Yankı | Sistem'in hatalı bir parçası; yalnızca oyuncuya fısıldayan ses | Sistem'in kaynağını açan rehber · Oyuncuyu ele geçirmeye çalışan virüs · Silinir |
+| Yankı | Sistem'in hatalı bir parçası; Entegrasyon Günü oyuncuya bağlanır ve ona ayrıcalıklı, bozuk bir Sistem verir; yalnızca oyuncuya fısıldayan ses | Sistem'in kaynağını açan rehber · Oyuncuyu ele geçirmeye çalışan virüs · Silinir |
 | Aras Kurt | Oyuncuyla aynı hızda yükselen gizemli rakip | Ebedi rakip · Çok-evren yoldaşı · Oyuncu yerine "S kademe insan" olan kişi |
 | Mert Kılıç | Sessiz Ağ'ın araştırmacısı | Kod Kırıcı sonunun anahtarı · Kadimler'e satılan muhbir |
 | Elçi Thessar | Kadimler'in Dünya elçisi | Vassal sonu ortağı · Kendi ırkına ihanet eden müttefik · Son boss |

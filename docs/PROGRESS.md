@@ -1,6 +1,6 @@
 # İlerleme
 
-Şu an: Aşama 2 — Sistem mekanikleri (başlıyor)
+Şu an: Aşama 2 — Sistem mekanikleri (motor tamam, OP MC retrofit + arayüz sürüyor)
 Son commit: 6a0ad8e Arayüz: AMOLED (saf siyah) tema seçeneği
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
@@ -13,18 +13,19 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
 ## Aşama 2 — Sistem mekanikleri  ⏳
 Plan:
-- [ ] `system/Affinity.kt`: 8 eğilim (yakin_dovus, menzilli, buyu, gizlilik, koruma, cagirma, zanaat, karanlik); `egilim` etkisi, `egilim_min` koşulu; prolog `egilim_*` değişkenleri taşınır (egilim_algi → menzilli, egilim_yakin → yakin_dovus)
-- [ ] SaveCodec v2 + v1 geçişi (egilim_* değişkenleri → eğilim vektörü); eski kayıt testi
-- [ ] Motor üretimli "Sistem istemi" (prompt) kuyruğu: sınıf teklifi, evrim, meslek seçimi, yetenek evrimi, kaynaştırma; tam ekran kart olarak gösterilir
-- [ ] `content/classes.json`: 8 temel + 4 gizli + nadir sınıflar; seviye başı stat artışı, başlangıç yeteneği, E evrimi (2 seçenek)
-- [ ] Seviye 10 sınıf teklifi; kademe eşiğinde seviye durur, XP bir seviyelik tamponda birikir, Evrim Görevi istemi
-- [ ] Serbest stat dağıtımı (motor: `allocate`), Durum ekranında +/− ve onay
-- [ ] `content/skills.json` ≥30 yetenek: aktif/pasif, maliyet, bekleme, seviye 1–10, kullanım XP'si, 2 dallı evrim, kaynaştırma tarifleri, ceza yetenekleri
-- [ ] `titles.json` ≥15 unvan; "İlk" unvanları için dünya kaydı (`firstClaims`), itibar tavanı (Kardeş Katili)
-- [ ] Meslekler + `items.json` + envanter; Simyacı 5 tarif, Çanta ekranında üretim
-- [ ] Öz kavrayışı ve D kademesi yuvası (model), Yol alanı
-- [ ] Günlük Görev: `daily.json` şablonları, günlük üretim (Rng), ilerleme etkisi, ödül (+1 serbest puan), Ceza Bölgesi kancası (`@geri` dönüşlü sahne)
-- [ ] Sistem bildirim metinleri `content/system.json`'a taşınır (DECISIONS #7)
+- [x] `system/Affinity.kt`: 8 eğilim (yakin_dovus, menzilli, buyu, gizlilik, koruma, cagirma, zanaat, karanlik); `egilim` etkisi, `egilim_min` koşulu; prolog `egilim_*` değişkenleri taşınır (egilim_algi → menzilli, egilim_yakin → yakin_dovus)
+- [x] SaveCodec v2 + v1 geçişi (egilim_* değişkenleri → eğilim vektörü); eski kayıt testi
+- [x] Motor üretimli "Sistem istemi" (prompt) kuyruğu: sınıf teklifi, evrim, meslek seçimi, yetenek evrimi, kaynaştırma; tam ekran kart olarak gösterilir
+- [x] `content/classes.json`: 8 temel + 4 gizli + nadir sınıflar; seviye başı stat artışı, başlangıç yeteneği, E evrimi (2 seçenek)
+- [x] Seviye 10 sınıf teklifi; kademe eşiğinde seviye durur, XP bir seviyelik tamponda birikir, Evrim Görevi istemi
+- [x] Serbest stat dağıtımı (motor: `allocate`); [ ] Durum ekranında +/− ve onay
+- [x] `content/skills.json` ≥30 yetenek: aktif/pasif, maliyet, bekleme, seviye 1–10, kullanım XP'si, 2 dallı evrim, kaynaştırma tarifleri, ceza yetenekleri
+- [x] `titles.json` ≥15 unvan; "İlk" unvanları için dünya kaydı (`firstClaims`), itibar tavanı (Kardeş Katili)
+- [x] Meslekler + `items.json` + envanter; Simyacı 5 tarif, Çanta ekranında üretim
+- [x] Öz kavrayışı ve D kademesi yuvası (model), Yol alanı
+- [x] Günlük Görev: `daily.json` şablonları, günlük üretim (Rng), ilerleme etkisi, ödül (+1 serbest puan), Ceza Bölgesi kancası (`@geri` dönüşlü sahne)
+- [x] Sistem bildirim metinleri `content/system.json`'a taşınır (DECISIONS #7)
+- [ ] **OP MC retrofit (DECISIONS #19):** Yankı bağı prologda (`yanki_bagi`), Günlük Görev yalnızca oyuncuda + 7 günlük seri bonusu, pasif sezgi satırları (`sezgiler`), gizli sınıf garantisi (üçüncü seçenek her zaman gizli), eğilime göre Benzersiz yetenek, kademeyle çarpan sınıf artışı, insanlık yüzdeliği, kendini açan sekmeler (`arayuz`)
 - [ ] Arayüz: Yetenekler ekranı, seviye/evrim tam ekran kartı + animasyon + titreşim, Çanta
 - [ ] Testler, check.sh, bağımsız inceleme, commit
 Notlar: Kullanıcı isteğiyle araya tema seçimi girdi (Sistem/Açık/Koyu/AMOLED), tamam ve GitHub'a gönderildi.

@@ -91,6 +91,9 @@ Durduğunda o ana kadarki işi commit et. Sorunu `PROGRESS.md`'ye yaz ve kullan�
 - İngilizce metin çeviri değil, Kuzey Amerika yerelleştirmesidir. Mil, lb, °F, ABD/Kanada deyimleri ve kültürel referanslar kullanılır; hikaye ve mekanikler aynı kalır.
 - **Telif:** ilham alınan romanlardan (Defiance of the Fall, He Who Fights With Monsters, The Primal Hunter, Solo Leveling) hiçbir metin, karakter, yer, sınıf ya da yetenek adı kopyalanmaz. Yalnızca genel tür kalıpları kullanılır.
 
+### OP MC
+- Oyun bir "OP MC" güç fantezisidir (GDD: OP MC tasarımı; o bölüm diğerlerinin üstündedir). Kahraman bir anomalidir; gerçek seçimler ahlakidir. Yalnızca mekanikler alınır; ilham kaynaklarından metin, isim, sınıf ya da yetenek kopyalanmaz.
+
 ### Yazım üslubu
 - Türkçe anlatı ikinci tekil şahıs ve şimdiki zaman kullanır ("Gözlerini açıyorsun"); edebi ama akıcı.
 - İngilizce anlatı ikinci şahıs ve şimdiki zamanda, doğal ve sert bir tür kurgusu sesiyle yazılır.
@@ -124,6 +127,14 @@ Her aşamanın sonunda `scripts/check.sh` geçer, `CLAUDE.md` ile `PROGRESS.md` 
 - [ ] **Günlük Görev:** şablonlardan günlük üretim, ilerleme etkisi, ödül ve Ceza Bölgesi olay kancası.
 - [ ] **Arayüz:** Yetenekler ekranı (liste, uzun basınca ayrıntı, evrim seçimi), seviye atlama ve evrim için tam ekran kart, animasyon ve titreşim.
 - [ ] Sistem bildirim metinleri `EffectApplier`'dan içerik dosyasına taşınır (DECISIONS #7).
+- [ ] **OP MC (GDD: OP MC tasarımı):**
+  - [ ] Yankı bağı kanon: prolog/açılışta oyuncunun penceresi bozulur, Yankı'ya bağlanır; bayrak `yanki_bagi`. (Aşama 1 prologu için retrofit.)
+  - [ ] Günlük Görev yalnızca oyuncuda; metinler bunu söyler. Seri bonusu: her 7 günlük seride +1 ek serbest puan.
+  - [ ] Gizli bilgi altyapısı: sahnelere stat koşullu **pasif sezgi** satırları (`sezgiler`), "[ALG]" önekiyle ayrı stilde gösterilir; gizli Sistem satırları.
+  - [ ] Garanti: seviye 10 teklifinin üçüncü seçeneği her zaman gizli sınıf ("Yankı'nın önerisi" geri dönüşü); oyun tarzına bağlı tek bir **Benzersiz** yetenek (her eğilim için bir tane) sınıf seçiminde verilir.
+  - [ ] Üstel büyüme: sınıfın seviye başı artışı kademeyle çarpılır (F ×1, E ×2, D ×3…); Durum ekranında **insanlık yüzdeliği** ("İlk %0,001").
+  - [ ] Kendini açan arayüz: Yetenekler ve Çanta sekmeleri Sistem verene kadar gizli; her biri kendi bildirimiyle açılır (`arayuz` etkisi + ilk yetenek/eşyada otomatik).
+  - [ ] Denge: her önemli seçim en az bir ahlak eksenini oynatır (içerik kuralı; Aşama 4'te doğrulayıcı uyarısı).
 
 ### Aşama 3 — Savaş
 - [ ] Savaş durumu `WorldState` içinde tutulur; savaşın ortasında kaydedip yükleyince aynı yerden devam edilir.
@@ -137,6 +148,12 @@ Her aşamanın sonunda `scripts/check.sh` geçer, `CLAUDE.md` ile `PROGRESS.md` 
 - [ ] `content/enemies.*` dosyasında en az 15 düşman ve 1 boss (Perde 1 için).
 - [ ] **Arayüz:** eylem ızgarası, hedef seçimi, uzun basınca ayrıntı kartı, savaş günlüğü, otomatik tur.
 - [ ] Testler: formüller; aynı tohumla aynı savaş; "Seviye 5 oyuncu ile Kanal Faresi" gibi örnek eşleşmelerde kazanma oranı beklenen aralıkta (simülasyonla).
+- [ ] **OP MC:**
+  - [ ] İki savaş modu: **Gerçek savaş** (denkler ve bosslar; her turda duruş: tam saldırı / ölçülü / savunmacı + Dayanım taahhüdü; düzyazı anlatım, sayılar isteğe bağlı; oyuncunun seçtiği **infaz** bitirişi) ve **Ezme** (çok altta kalan düşmanlar tek satırla otomatik çözülür).
+  - [ ] Yeniden kullanılabilir **uyanış tetikleyicisi**: koşullar (ör. %10 altı canla kazanmak, birini büyük bedelle korumak) gizli yetenek ya da evrim yolu açar; içerik dosyasında tanımlanır.
+  - [ ] **Kademe Kırma:** bir üst kademedeki düşmanı yenmek büyük XP, "Kademe Kıran" unvan zinciri ve Benzersiz yetenek şansı verir; kademe farkı hasar kuralı dünya için korunur.
+  - [ ] Düşmanların gerçek statları ve seviyesi oyuncuya görünür (Analiz gizli zaafı açar).
+  - [ ] Demir Mod ölümleri haddini aşmaktan gelir: rastgele savaşlar Ezme ya da kaçışla ölümsüz çözülebilir; simülasyon testi bunu doğrular.
 
 ### Aşama 4 — Hikaye motoru
 - [ ] İçerik biçimi kararı: GDD'ye uygun olarak **YAML'a (kaml) geç**. Mevcut JSON içerik dönüştürülür, anahtarlar aynı kalır ve JSON okuyucu kaldırılır. Bu, DECISIONS #1'i kapatır.
@@ -151,6 +168,13 @@ Her aşamanın sonunda `scripts/check.sh` geçer, `CLAUDE.md` ile `PROGRESS.md` 
 - [ ] Prolog sahneleri yeni sisteme taşınır (yazılmış giriş dizisi + olay havuzu).
 - [ ] **Arayüz:** Harita (bölgeler, tehlike, kapılar) ve Görevler ekranları.
 - [ ] **Başsız oynanış testi:** 200 rastgele oynanış hiç çökmeden ve çıkmaza girmeden ilerler (ileride simülatörün temeli).
+- [ ] **OP MC:**
+  - [ ] **Gizli ve Açık Güç:** gerçek seviye + görünen seviye; [Gizle] / [Açığa vur] seçenekleri; NPC'ler açığa vurulana kadar görünen seviyeye tepki verir.
+  - [ ] **Anomali Dikkati** (ana gerilim ölçeği) ve ayrı **Yozlaşma** ölçeği; eşikler avcı, Sistem "düzeltmesi", Kadim elçisi ve rakip olaylarını tetikler. Hikaye Yönetmeni gerilim uyumunda Dikkat'i kullanır.
+  - [ ] **Tanıklar ve Efsane:** NPC önünde yapılan başarılar söylentiye, unvana ve fraksiyona göre farklı okunan tepkilere dönüşür.
+  - [ ] **Gösteriş seçenekleri** ("[GÜÇ 40 · Önemsiz] …"); yeniden denenebilir (beyaz) ve tek seferlik (kırmızı) kontroller görünür olasılıkla, çoğunlukla sosyal/ahlaki kontrollerde.
+  - [ ] **Fırsat eli:** serbest zamanda 3 rastgele olay kartından biri seçilir.
+  - [ ] Doğrulayıcı: önemli seçeneklerin en az bir ahlak eksenini oynatması uyarısı.
 
 ### Aşama 5 — NPC sistemi
 - [ ] GDD'deki model: 5 kişilik özelliği, değerler, 4 ilişki ekseni (Güven, Saygı, Korku, Bağlılık), solan hafıza, hedefler.
@@ -161,6 +185,13 @@ Her aşamanın sonunda `scripts/check.sh` geçer, `CLAUDE.md` ile `PROGRESS.md` 
 - [ ] Rakipler (özellikle Aras) "İlk" unvanlarını oyuncudan önce kapabilir.
 - [ ] 8 ana NPC'nin dosyaları ve her birinin yay düğümü listesi.
 - [ ] **Arayüz:** İlişkiler ekranı; 4 eksen, son hatıralar ve durum görünür.
+- [ ] **OP MC:**
+  - [ ] **Küresel Sıralama:** oyuncu, Aras, Kaya ve prosedürel avcılar; NPC'ler ekran dışında tırmanır, Sistem değişiklikleri duyurur, loncalar/Yükselenler/rakipler sıraya tepki verir. Arayüzde sıralama ekranı.
+  - [ ] **Yoldaş tepkileri:** büyük seçimlerden önce kişilik ve ilişkiye göre tek satırlık görüş; oyuncunun gücüne hayranlık / endişe / kıskançlık / bağımlılık. Deniz'in yayı "arkadaşımın canavara ya da tanrıya dönüşmesi".
+  - [ ] **Bilgi günlüğü:** söylentiler, sırlar ve gerçek seviyeler diyalog açar; NPC'lere söylenen yalanlar hafızaya girer ve sonra ortaya çıkabilir.
+  - [ ] **İzler:** oyuncuda bedelli mutasyon/soy uyanışı; NPC'lerde oyuncunun yaptıklarından kalan kalıcı özellik ve yaralar.
+  - [ ] **Ordu** modeli: oyuncuyla ölçeklenen çağrılar/takipçiler (sınıfa göre gölge asker, canavar ya da lonca); içerik Aşama 7.
+  - [ ] NPC'ler oyuncudan yavaş bir eğride büyür (formül testle sabitlenir).
 
 ### Aşama 6 — Dikey dilim: Perde 1 içeriği (iki dilde)
 İçerik bütçesi (alt sınırlar):
@@ -179,6 +210,7 @@ Her aşamanın sonunda `scripts/check.sh` geçer, `CLAUDE.md` ile `PROGRESS.md` 
 - [ ] Perde 1 sonunda en az 3 belirgin farklı dünya durumu oluşabilir: hayatta kalan oranı, Deniz'in akıbeti, ilk fraksiyon eğilimi.
 - [ ] Başsız oynanış testi Perde 1 için genişler: 500 oynanışta çıkmaz yoktur ve tüm Perde 1 olaylarına en az bir kez ulaşılır.
 - [ ] Bağımsız içerik incelemesi: bir alt ajan rastgele 10 olayı TR ve EN olarak okur; üslup, yerelleştirme ve tutarlılık sorunlarını raporlar, sorunlar düzeltilir.
+- [ ] **OP MC güç döngüsü:** Perde 1 (F kademesi) Mücadele → Kırılma (yazılmış uyanış anı) → Hakimiyet (oyun süresinin çoğu) → Yeni tavan sırasını izler; yeni açılış Yankı bağını anlatır.
 
 ### Aşama 7 — Perde 2–4 ve sonlar
 İçerik bütçesi:
@@ -195,6 +227,7 @@ Her aşamanın sonunda `scripts/check.sh` geçer, `CLAUDE.md` ile `PROGRESS.md` 
 - [ ] Sonlar GDD'deki koşullara göre belirlenir. Son ekranı epilog kartlarını gösterir: her NPC'nin akıbeti, fraksiyonlar ve en kritik 5 seçim.
 - [ ] Döngü sonu New Game+'ı açar.
 - [ ] Hacimden önce dallanma kapsamı gelir: her son, en az bir başsız oynanış stratejisiyle ulaşılabilir olmalı. Bunu kanıtlayan test yazılır.
+- [ ] **OP MC:** her kademe (E→S) dört evreli döngüyü izler; Perde 3–4'te Ordu içeriği; sonlar oyuncunun ne tür bir OP MC olduğunu (koruyucu, tiran, tanrı, kurtarıcı) ahlak eksenlerinden okur.
 
 ### Aşama 8 — Yapay zeka anlatıcısı
 - [ ] `engine` içinde `Narrator` arayüzü; varsayılan çevrimdışı `TemplateNarrator`.
@@ -214,6 +247,9 @@ Her aşamanın sonunda `scripts/check.sh` geçer, `CLAUDE.md` ile `PROGRESS.md` 
 - [ ] Mağaza metinleri: `fastlane/metadata/android/tr-TR` ve `en-US` (başlık, kısa ve uzun açıklama, yenilikler).
 - [ ] Gizlilik politikası taslağı (`docs/PRIVACY.md`): anlatıcı modunda hangi metnin sunucuya gittiği açıkça yazılır.
 - [ ] `./gradlew bundleRelease` imzasız olarak da çalışır; imzalı AAB, anahtar sağlanınca üretilir.
+- [ ] **OP MC:**
+  - [ ] Simülatör ayrıca raporlar: perde başına oyuncu/NPC güç farkı, oyun süresinin "hakimiyet" evresindeki payı (hedef %60+), zaman içindeki Dikkat düzeyi, son dağılımı.
+  - [ ] **Bildirimler:** oturumlar arasında nadir, isteğe bağlı Android bildirimleri ("[Aras Kurt Küresel Sıralama'da seni geçti.]"); her biri küçük bir olay açar. Android 13+ bildirim izni usulüne uygun (açıklama + istek, reddedilince ısrar etmemek) istenir.
 
 ## 8. Bitiş
 

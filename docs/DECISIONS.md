@@ -2,6 +2,22 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Aşama 2 — 2026-11-05
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 19 | **Tasarım değişikliği (kullanıcı onaylı): OP MC.** GDD'ye "OP MC tasarımı" bölümü eklendi; diğer bölümlerin üstünde sayılır. Yankı bağı, yalnızca oyuncuda Günlük Görev, gizli bilgi, garantili Benzersiz yetenek + gizli sınıf, kademe başına 4 evreli güç döngüsü, Küresel Sıralama, Gizli/Açık Güç, Anomali Dikkati, Yozlaşma, Tanıklar, Kademe Kırma, Ordu, iki savaş modu vb. Kabul kriterleri görev dosyasında ilgili aşamalara dağıtıldı; bitmiş aşamaların işi (prolog) Aşama 2'ye retrofit olarak girdi. Çelişen GDD satırları (Günlük Görev, Ölüm, Gerilim uyumu, Yankı) güncellendi. | Kullanıcının tasarım güncellemesi. | — |
+| 20 | Yetenek seviyesi için kullanım XP'si `4 · L` (1→10 toplam 180) | GDD sayı vermiyor. | Aşama 9 simülatörü. |
+| 21 | Meslek teklifi seviye 5'te otomatik (ya da `meslek_teklifi` etkisiyle); ikinci dal (E) Aşama 7'ye kaldı | GDD zamanlamayı vermiyor. | Aşama 6 içerik akışında. |
+| 22 | Günlük Görev antrenmanı şimdilik Daha fazla → Günlük Görev'den set set yapılır | Gün döngüsü (serbest eylemler) Aşama 4'te. | Aşama 4. |
+| 23 | İhmal edilen Günlük Görevde Ceza Bölgesi olasılığı %50; kanca `ceza_bolgesi` sahnesi, dönüş `@geri` | GDD "risk" diyor. | Aşama 9 denge. |
+| 24 | Kademe eşiğinde XP en fazla bir seviyelik tamponda birikir; fazlası yanar | Evrimden sonra onlarca seviye atlamayı önler; evrim anı bir seviye atlamayla ödüllenir. | Aşama 9. |
+| 25 | Sınıf seçildiğinde geçmiş seviyeler için geriye dönük stat artışı yok | Basitlik; seviye 10'a kadar serbest puanlar var. | — |
+| 26 | Evrimi tanımlı olmayan kademede "genel evrim": sınıf aynı, tüm statlar +1 | Oyun eşikte kilitlenmesin; D+ evrimleri Aşama 7. | Aşama 7. |
+| 27 | Pasif yeteneklerde stat/taban/kat şimdilik yok sayılır; fırlatılan eşyaların (`hasar`, `durum`) etkisi yalnızca savaşta | Savaş Aşama 3. | Aşama 3. |
+| 28 | Nadir sınıf "Çok Yönlü": tüm statlar ≥ 8 | İçerik varsayımı; dengeli oyuncuya ödül. | Aşama 9. |
+| 29 | Kaynaştırma koşul değişkenleri `hareketli_atis`, `korunan_muttefik`, `arkadan_vurus` savaşta sayılacak | Savaş Aşama 3. | Aşama 3. |
+
 ## Aşama 0 — 2026-11-05
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |

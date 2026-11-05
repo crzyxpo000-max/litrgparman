@@ -27,6 +27,58 @@ Ascension Protocol is a single-player, fully text-based LitRPG for Android in wh
 
 **Target:** 15–25 hours per playthrough, 8 endings + 1 secret ending, at least 3 distinct build paths, full English and Turkish support, Android phones and tablets.
 
+## OP MC design
+
+Ascension Protocol is an "OP MC" power fantasy: the hero starts weak but grows outside the rules everyone else plays by. This section overrides every other section; where they conflict, this one wins. Mechanics come from the genre; no text, names, classes, or skills are copied from the inspiring works.
+
+### Core rule: the MC is an anomaly
+
+- **Everyone gets the standard System. The MC gets a corrupted, privileged build.** On Integration Day, Echo, a broken fragment of the System, bonds to the player. This is canon in the prologue and the opening sequence: the player's window glitches mid-transfer, and one line shows up only for them.
+- **Only the MC has the Daily Quest.** Nobody else knows it exists; telling an NPC about it is a [Reveal] action.
+- **Hidden information:** the MC sees exact enemy stats, true levels, hidden quest rewards, and hidden System lines. High stats add private **passive insight** lines to scenes ("[PER] His level is fake. Real: 34.").
+- **Guarantee:** every run, the MC earns one **Unique skill** and one **hidden class**; which ones depends on play style (the Affinity vector, morality, and flags). The third option of the Level 10 offer is always a hidden class. If no hidden class's condition is met, the hidden class closest to the strongest Affinity arrives as "Echo's suggestion."
+
+### Power curve: every Grade is one loop
+
+Each Grade (F→S) runs through four beats, and the content follows them in order:
+
+1. **Struggle (short):** the world just got stronger; fights are real and tactical.
+2. **Breakthrough:** an authored **awakening moment** triggered by conditions (e.g., winning under 10% HP, protecting someone at a steep cost). It unlocks a hidden skill or evolution path, built on a reusable **awakening trigger** mechanic.
+3. **Domination (long, most of the playtime):** the MC clearly outclasses everything around them.
+4. **New ceiling:** something from the next tier resets the scale.
+
+The MC's stat growth is **exponential** (Daily Quest streaks, the Unique skill, title bonuses, class growth that scales with Grade); NPCs grow on a slower curve. Big numbers are part of the fun: damage numbers, level-up chains, and a **humanity percentile** on the Status screen ("Top 0.001%").
+
+### New systems
+
+- **Global Ranking:** a live leaderboard of humanity's strongest (the MC, Ash Wolfe, Marcus Stone, procedural hunters). NPCs climb it off-screen, and the System announces the changes. Guilds, the Ascended, and rivals react to the MC's rank.
+- **Hidden vs. Revealed Power:** the MC has a **true level** and a **public level**. [Conceal] options keep Attention low and set up "they underestimated me" payoffs; [Reveal] options earn fear, respect, and recruitment offers but raise Attention. NPCs react to the public level until the reveal.
+- **Anomaly Attention:** the main tension meter, replacing "you might lose." Fast growth and reveals raise it; thresholds trigger hunters, System "corrections," Ancient envoys, and rivals. A separate **Corruption** meter tracks dark and cursed skills.
+- **Witnesses and Legend:** feats done in front of NPCs spread as rumors and turn into titles and faction reactions. The same feat reads differently per faction (the Haven Council fears a massacre; the Iron Guild admires it).
+- **Gap Breaking:** the Grade-gap damage rule still applies to the world, but beating an enemy a Grade above you grants huge XP, a "Gap Breaker" title chain, and a shot at a Unique skill.
+- **Army:** summons and followers that scale with the MC (shadow soldiers, tamed beasts, or a guild, depending on class), so the power fantasy works at scale in Acts 3–4.
+
+### Re-tuned mechanics
+
+- **Self-revealing UI:** the Skills, Bag, and Map tabs, and later the Anomaly and Root Access tabs, stay hidden until the System grants them, each with its own notification ("[Inventory granted]").
+- **Passive System insight:** high stats add private lines to scenes (see above).
+- **Flex options:** high stats unlock options like "[STR 40 · Trivial] Tear the door off its hinges" that solve problems in style. Retryable (white) and one-shot (red) checks stay, with visible odds, but they're used mostly for social and moral checks.
+- **Opportunity hand:** during free time, three random event cards are dealt; the player picks one.
+- **Two combat modes:**
+  - **Real fights** (equals and bosses): tactical, with a stance each round (all-out / measured / defensive) and a Stamina commitment; narrated in prose with numbers on demand; ending in an **execution** finisher the player picks.
+  - **Crush:** fodder the MC far outclasses auto-resolves in one stylish line. No grinding.
+- **Companion reactions:** before big choices, companions weigh in with a one-liner based on personality and relationship. They also react to the MC's growing power with awe, worry, jealousy, or dependence. Devon's arc becomes "watching my best friend turn into a monster or a god."
+- **Knowledge journal:** rumors, secrets, and true levels the MC learns unlock dialogue options; lies told to NPCs go into their memory and can come back to bite.
+- **Marks:** on the MC, mutations and bloodline awakenings that carry a cost; on NPCs, permanent traits and scars from what the MC did to them.
+- **Rivals can snatch "First" titles before the MC.**
+- **Notifications:** rare, opt-in Android notifications between sessions ("[Ash Wolfe passed you on the Global Ranking.]", "[A Grade-A entity has noticed you.]"), each opening a small event. The notification permission is requested the proper way.
+
+### Balance rules
+
+- **The real choices are moral.** The MC gets powerful no matter what; the morality axes decide what kind of OP MC they become (protector, tyrant, god, liberator). Every important choice moves at least one axis.
+- **Ironman deaths come from overreach** (provoking higher-tier entities while revealing everything), not from random fights.
+- **The simulator** reports the MC/NPC power gap per act, the share of playtime spent in "domination" (target: 60%+), Attention over time, and the ending distribution.
+
 ## World and story framework
 
 The game opens on Integration Day, when the System plugs Earth into the "Multiverse Network." Humanity has 365 days: at the end, Earth is either accepted as a full Layer or harvested.
@@ -127,7 +179,7 @@ Class is separate from the **Profession** tree: Alchemist, Blacksmith, Runesmith
 
 ### Daily Quest and economy
 
-- **Daily Quest:** every in-game day the System assigns training (100 push-ups, a 6-mile run, 3 gates). Finish it for +1 free stat point; skip it and risk being teleported into a Penalty Zone.
+- **Daily Quest:** every in-game day the System assigns training (100 push-ups, a 6-mile run, 3 gates). Finish it for +1 free stat point (plus one more for every 7-day streak); skip it and risk being teleported into a Penalty Zone. **Only the MC has the Daily Quest** (see OP MC design).
 - **Currency:** Credits (System shop, trading) and Essence Crystals (evolutions, skill fusion).
 - **Gear:** 8 slots, rarity colors, set bonuses; upgraded through Professions.
 
@@ -180,7 +232,7 @@ Grade gaps add a brutal multiplier: damage ×2 per grade up, ×0.5 per grade dow
 
 **Enemy design.** Every enemy has a behavior pattern (aggressive, cautious, pack, skittish), a weak spot, and a story hook. Bosses unlock new skills at phase changes and trigger a short story beat. Smart enemies remember you: one that gets away can come back stronger.
 
-**Death.** In Normal mode the System grants one **Second Chance** per grade (the price: a random skill loses 2 levels, or you lose a title). After that, death reloads your last save. In **Ironman Mode**, death is permanent and the run locks into the Harvest ending with the world as it stood. NPC deaths are permanent in every mode.
+**Death.** In Normal mode the System grants one **Second Chance** per grade (the price: a random skill loses 2 levels, or you lose a title). After that, death reloads your last save. In **Ironman Mode**, death is permanent and the run locks into the Harvest ending with the world as it stood. Deaths should come from overreach, not random fights: fodder far below the MC resolves in **Crush** mode, and the real danger is raising Attention and provoking higher-tier entities. NPC deaths are permanent in every mode.
 
 ## Dynamic story engine
 
@@ -218,7 +270,7 @@ At every step the Director filters the eligible events, then scores them:
 Score = Weight \cdot Tension_{fit} \cdot Freshness \cdot Personal_{bond} \cdot Priority_{mainarc}
 ```
 
-- **Tension fit:** events that match the target tension curve (rising, peak, breather) get a boost. Three hard fights in a row are followed by a campfire scene.
+- **Tension fit:** events that match the target tension curve (rising, peak, breather) get a boost; Anomaly Attention is the main source of tension. Three hard fights in a row are followed by a campfire scene.
 - **Freshness:** recently seen tags are penalized.
 - **Personal bond:** events featuring NPCs the player is close to get a boost, so the story orbits the people the player cares about.
 - **Main arc priority:** required story beats always win when their time comes.
@@ -263,7 +315,7 @@ NPCs aren't scripted puppets; they are agents with their own goals, fears, and m
 | Marcus Stone | Iron Guild leader, retired Marine gunnery sergeant | Mentor · Strongman the player topples · Allied general in the final battle |
 | Dr. Ellie Sawyer | ER physician who leads the Haven Council | Council chair and key to the peaceful ending · Killed in a Guild coup · Romance arc |
 | Brother Vance | Prophet of the Ascended; a former self-help podcaster who claims the System talks to him | Exposed as a fraud · Turns out to be right · The player's door to the Ascension ending |
-| Echo | A glitched fragment of the System; a voice only the player can hear | Guide to the System's origin · A virus trying to take over the player · Deleted |
+| Echo | A glitched fragment of the System; bonds to the player on Integration Day and gives them a corrupted, privileged System; a voice only the player can hear | Guide to the System's origin · A virus trying to take over the player · Deleted |
 | Ash Wolfe | A mysterious rival leveling at the same pace as the player | Lifelong rival · Multiverse companion · The human who reaches S grade instead of you |
 | Miles Kincaid | Quiet Network researcher, ex-cybersecurity engineer | Key to the Codebreaker ending · An informant sold to the Ancients |
 | Envoy Thessar | The Ancients' envoy to Earth | Partner in the Vassal ending · An ally who betrays his own race · Final boss |
