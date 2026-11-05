@@ -144,6 +144,8 @@ data class WorldState(
     val returnStack: List<String> = emptyList(),
     /** Günlük Görev ihmal edildi; bir sonraki geçişte Ceza Bölgesi'ne ışınlanma. */
     val penaltyPending: Boolean = false,
+    /** Kendini açan arayüz: Sistem'in verdiği sekmeler. Hikaye, Durum ve Daha fazla her zaman açıktır. */
+    val unlockedTabs: Set<String> = emptySet(),
 ) {
     val act: Int get() = GameClock.actFor(day)
 
@@ -154,6 +156,13 @@ data class WorldState(
     companion object {
         const val HISTORY_LIMIT = 12
         const val PLAYER_CLAIM = "oyuncu"
+        const val TAB_SKILLS = "yetenekler"
+        const val TAB_BAG = "canta"
+        const val TAB_MAP = "harita"
+        val TABS = listOf(TAB_SKILLS, TAB_BAG, TAB_MAP)
+
+        /** Benzersiz yetenekler de dünyada tek sahiplidir; "İlk" kaydında bu önekle tutulur. */
+        const val UNIQUE_CLAIM_PREFIX = "yetenek:"
 
         fun newGame(seed: Long, playerName: String, mode: GameMode, startScene: String): WorldState =
             WorldState(

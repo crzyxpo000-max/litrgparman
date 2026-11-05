@@ -86,6 +86,29 @@ object Progression {
     /** Öz bir yuvaya bağlanmadan önce gereken kavrayış. */
     const val ESSENCE_INSIGHT_TO_BIND = 100
 
+    /**
+     * OP MC üstel büyüme: sınıfın seviye başı artışı kademeyle çarpılır (F ×1, E ×2, D ×3 …).
+     */
+    fun growthMultiplier(grade: Grade): Int = grade.ordinal + 1
+
+    /** Her 7 günlük Günlük Görev serisinde +1 ek serbest puan. */
+    fun dailyReward(streakAfter: Int): Int = 1 + if (streakAfter > 0 && streakAfter % 7 == 0) 1 else 0
+
+    /** Dünya nüfusu (insanlık yüzdeliğinin alt sınırı: tek kişi). */
+    const val HUMANITY = 8_000_000_000.0
+
+    /**
+     * İnsanlık yüzdeliği: oyuncudan güçlü insanların yüzdesi ("İlk %0,001").
+     * Ortalama insan seviyesi zamanla yükselir (1 + 0,08 · gün); seviyeler üstel kuyruklu
+     * dağılır, ölçek ortalamayla büyür. Sonuç [1/nüfus, 100] aralığında.
+     */
+    fun humanityTopPercent(level: Int, day: Int): Double {
+        val avg = 1.0 + 0.08 * day
+        val scale = 1.0 + 0.25 * avg
+        val fraction = kotlin.math.exp(-(level - avg) / scale).coerceAtMost(1.0)
+        return (fraction * 100.0).coerceIn(100.0 / HUMANITY, 100.0)
+    }
+
     /** Generic evolution (sınıfın o kademe için tanımlı evrimi yoksa) her stata verilen bonus. */
     const val GENERIC_EVOLUTION_BONUS = 1
 }

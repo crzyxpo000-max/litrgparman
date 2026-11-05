@@ -8,6 +8,7 @@ import com.yukselis.engine.story.ChoiceDef
 import com.yukselis.engine.story.Condition
 import com.yukselis.engine.story.Content
 import com.yukselis.engine.story.Effect
+import com.yukselis.engine.story.Insight
 import com.yukselis.engine.story.Notice
 import com.yukselis.engine.story.NoticeKind
 import com.yukselis.engine.story.Paragraph
@@ -146,6 +147,7 @@ object ContentParser {
             description = ltext(o["aciklama"], "$id.aciklama"),
             kind = kind,
             affinity = o.string("egilim")?.let { affinity(it, id) },
+            affinities = o.strings("egilimler").map { affinity(it, "$id.egilimler") },
             unlock = o["kosul"]?.let { condition(it.jsonObject) },
             evolvesFrom = o.string("onceki"),
             grade = o.string("kademe")?.let { Grade.fromKey(it) ?: throw ContentFormatException("sınıf $id: bilinmeyen kademe $it") },
@@ -182,6 +184,7 @@ object ContentParser {
             evolutions = o.strings("evrim"),
             penalty = statMap(o["ceza"], "$id.ceza"),
             tags = o.strings("etiketler"),
+            affinity = o.string("egilim")?.let { affinity(it, "$id.egilim") },
         )
     }
 
@@ -243,6 +246,13 @@ object ContentParser {
             notices = o.array("bildirimler").map { parseNotice(it.jsonObject, id) },
             choices = o.array("secenekler").map { parseChoice(it.jsonObject, id) },
             isEnding = o.bool("son"),
+            insights = o.array("sezgiler").map { e ->
+                val i = e.jsonObject
+                Insight(
+                    text = ltext(i["metin"], "$id.sezgi"),
+                    condition = i["kosul"]?.let { condition(it.jsonObject) } ?: throw ContentFormatException("$id: sezgide 'kosul' eksik"),
+                )
+            },
         )
     }
 
@@ -321,6 +331,7 @@ object ContentParser {
             "gunluk" -> value.jsonObject.map { (k, v) -> Effect.DailyProgress(k, v.int(k)) }
             "meslek_teklifi" -> listOf(Effect.OfferProfession)
             "can" -> listOf(Effect.AddHp(value.int(key)))
+            "arayuz" -> listOf(Effect.UnlockTab(value.str(key)))
             "mana" -> listOf(Effect.AddMp(value.int(key)))
             else -> throw ContentFormatException("$where: bilinmeyen etki '$key'")
         }

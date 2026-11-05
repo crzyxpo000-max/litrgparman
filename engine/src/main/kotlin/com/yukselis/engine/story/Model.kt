@@ -27,7 +27,9 @@ enum class NoticeKind(val key: String) {
     WARNING("uyari"),
     SKILL("yetenek"),
     EVOLUTION("evrim"),
-    CLASS("sinif");
+    CLASS("sinif"),
+    /** Yankı'nın bozuk, yalnızca oyuncuya görünen bildirimleri (glitchli yazı). */
+    ECHO("yanki");
 
     companion object {
         fun fromKey(key: String?): NoticeKind = entries.firstOrNull { it.key == key } ?: SYSTEM
@@ -126,6 +128,8 @@ sealed interface Effect {
     /** Can/mana değişimi. Savaş dışında can 1'in altına düşmez (savaşta ölüm Aşama 3). */
     data class AddHp(val delta: Int) : Effect
     data class AddMp(val delta: Int) : Effect
+    /** Kendini açan arayüz: bir sekmeyi verir (yetenekler, canta, harita). */
+    data class UnlockTab(val tab: String) : Effect
     /** Meslek seçimi istemini açar. */
     data object OfferProfession : Effect
 }
@@ -133,6 +137,12 @@ sealed interface Effect {
 data class Paragraph(val text: LText, val condition: Condition? = null)
 
 data class SceneNotice(val notice: Notice, val condition: Condition? = null)
+
+/**
+ * Pasif Sistem sezgisi: koşulu (çoğunlukla yüksek stat) sağlanınca sahneye yalnızca oyuncunun
+ * okuduğu özel bir satır eklenir. Stat koşulunda satırın başına "[ALG]" gibi önek gelir.
+ */
+data class Insight(val text: LText, val condition: Condition)
 
 data class ChoiceDef(
     val id: String,
@@ -152,6 +162,7 @@ data class Scene(
     val notices: List<SceneNotice> = emptyList(),
     val choices: List<ChoiceDef> = emptyList(),
     val isEnding: Boolean = false,
+    val insights: List<Insight> = emptyList(),
 )
 
 data class TitleDef(

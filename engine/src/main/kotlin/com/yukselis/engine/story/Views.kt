@@ -30,6 +30,8 @@ data class PassageView(
     val placeName: String?,
     val paragraphs: List<String>,
     val notices: List<NoticeView>,
+    /** Pasif Sistem sezgisi satırları; yalnızca oyuncu görür, ayrı stilde gösterilir. */
+    val insights: List<String> = emptyList(),
     /** Geçmiş pasajlarda oyuncunun seçtiği seçenek. */
     val chosenLabel: String? = null,
 )
@@ -84,6 +86,10 @@ data class StatusView(
     val evolutionPending: Boolean,
     val essences: List<String>,
     val essenceSlots: Int,
+    /** İnsanlık yüzdeliği: oyuncudan güçlü insanların yüzdesi. */
+    val humanityTopPercent: Double,
+    /** Sistem'in verdiği sekmeler (kendini açan arayüz). */
+    val tabs: Set<String>,
     val mercy: Int,
     val order: Int,
     val humanity: Int,

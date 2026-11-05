@@ -60,10 +60,9 @@ class EffectApplier(private val content: Content) {
         is Effect.AddItem -> addItem(state, effect.itemId, effect.count)
         is Effect.AddCredits -> {
             val p = state.player
-            Result(
-                state.withPlayer { it.copy(credits = (p.credits + effect.amount).coerceAtLeast(0)) },
-                listOf(Notice(NoticeKind.SYSTEM, signed(texts.format("kredi", "n" to effect.amount), effect.amount))),
-            )
+            val base = state.withPlayer { it.copy(credits = (p.credits + effect.amount).coerceAtLeast(0)) }
+            val tab = if (effect.amount > 0) unlockTab(base, WorldState.TAB_BAG) else Result(base, emptyList())
+            Result(tab.state, listOf(Notice(NoticeKind.SYSTEM, signed(texts.format("kredi", "n" to effect.amount), effect.amount))) + tab.notices)
         }
         is Effect.AddCrystals -> Result(
             state.withPlayer { it.copy(essenceCrystals = (it.essenceCrystals + effect.amount).coerceAtLeast(0)) },
@@ -72,6 +71,7 @@ class EffectApplier(private val content: Content) {
         is Effect.EssenceInsight -> essenceInsight(state, effect.essenceId, effect.amount)
         is Effect.DailyProgress -> dailyProgress(state, effect.kind, effect.amount)
         Effect.OfferProfession -> offerProfession(state)
+        is Effect.UnlockTab -> unlockTab(state, effect.tab)
         is Effect.AddHp -> Result(state.withPlayer { it.copy(hp = (it.hp + effect.delta).coerceIn(1, it.maxHp)) }, emptyList())
         is Effect.AddMp -> Result(state.withPlayer { it.copy(mp = (it.mp + effect.delta).coerceIn(0, it.maxMp)) }, emptyList())
     }
@@ -124,7 +124,8 @@ class EffectApplier(private val content: Content) {
                 break
             }
             var stats = p.stats
-            classGrowth(p.classId).forEach { (stat, d) -> stats = stats.plus(stat, d) }
+            val mult = Progression.growthMultiplier(nextGrade)
+            classGrowth(p.classId).forEach { (stat, d) -> stats = stats.plus(stat, d * mult) }
             p = p.copy(
                 xp = p.xp - need,
                 level = p.level + 1,
@@ -210,9 +211,15 @@ class EffectApplier(private val content: Content) {
             p = applyPenalty(p, def.penalty)
             lines += texts.formatL("ceza_yetenegi", "penalty" to statList(def.penalty))
         }
+        val claimed = if (def.rarity == com.yukselis.engine.system.Rarity.UNIQUE) {
+            state.firstClaims + (WorldState.UNIQUE_CLAIM_PREFIX + skillId to WorldState.PLAYER_CLAIM)
+        } else {
+            state.firstClaims
+        }
+        val tab = unlockTab(state.copy(player = p, firstClaims = claimed), WorldState.TAB_SKILLS)
         return Result(
-            state.copy(player = p),
-            listOf(Notice(NoticeKind.SKILL, texts.formatL("yetenek_kazanildi", "name" to def.name), lines, def.rarity)),
+            tab.state,
+            listOf(Notice(NoticeKind.SKILL, texts.formatL("yetenek_kazanildi", "name" to def.name), lines, def.rarity)) + tab.notices,
         )
     }
 
@@ -274,10 +281,13 @@ class EffectApplier(private val content: Content) {
         val inventory = if (after == 0) state.player.inventory - itemId else state.player.inventory + (itemId to after)
         val key = if (count > 0) "esya_kazanildi" else "esya_kaybedildi"
         val shown = if (count > 0) count else have - after
-        return Result(
+        val base = Result(
             state.withPlayer { it.copy(inventory = inventory) },
             listOf(Notice(NoticeKind.SYSTEM, texts.formatL(key, "name" to def.name, "n" to num(shown)))),
         )
+        if (count <= 0) return base
+        val tab = unlockTab(base.state, WorldState.TAB_BAG)
+        return Result(tab.state, base.notices + tab.notices)
     }
 
     // ---- Öz ----
@@ -329,9 +339,11 @@ class EffectApplier(private val content: Content) {
         val progress = (quest.progress + amount).coerceAtMost(quest.steps)
         if (progress < quest.steps) return Result(state.copy(daily = quest.copy(progress = progress)), emptyList())
         // Tamamlandı: +1 serbest puan ve şablon XP'si (GDD: Günlük Görev).
-        val done = state.copy(daily = quest.copy(progress = progress, completed = true), dailyStreak = state.dailyStreak + 1)
-            .withPlayer { it.copy(freePoints = it.freePoints + 1) }
-        val notice = Notice(NoticeKind.QUEST, texts.format("gunluk_tamam"), listOf(texts.format("gunluk_odul", "xp" to template.xp)))
+        val streak = state.dailyStreak + 1
+        val points = Progression.dailyReward(streak)
+        val done = state.copy(daily = quest.copy(progress = progress, completed = true), dailyStreak = streak)
+            .withPlayer { it.copy(freePoints = it.freePoints + points) }
+        val notice = Notice(NoticeKind.QUEST, texts.format("gunluk_tamam"), listOf(texts.format("gunluk_odul", "n" to points, "xp" to template.xp)))
         val xp = gainXp(done, template.xp.toLong())
         return Result(xp.state, listOf(notice) + xp.notices)
     }
@@ -408,25 +420,62 @@ class EffectApplier(private val content: Content) {
     }
 
     /**
-     * Seviye 10 sınıf teklifi: en güçlü iki eğilimin temel sınıfları + koşulu sağlanan ilk gizli
-     * sınıf; yoksa ilk nadir sınıf; o da yoksa üçüncü eğilimin temel sınıfı.
+     * Seviye 10 sınıf teklifi (OP MC: gizli sınıf garantisi). En güçlü iki eğilimin temel
+     * sınıfları + her zaman bir gizli sınıf: koşulu sağlanan ilki, yoksa en güçlü eğilime en
+     * yakın gizli sınıf ("Yankı'nın önerisi"). Koşulu sağlanan nadir sınıf dördüncü seçenek olur.
      */
     fun classOffer(state: WorldState): List<String> {
         val ranked = state.player.affinity.ranked()
-        val bases = content.classes.values.filter { it.kind == ClassKind.BASE }
+        val all = content.classes.values.sortedBy { it.id }
+        val bases = all.filter { it.kind == ClassKind.BASE }
         fun baseFor(a: Affinity) = bases.firstOrNull { it.affinity == a }?.id
         val picks = mutableListOf<String>()
         for (a in ranked) {
             if (picks.size == 2) break
             baseFor(a)?.let { if (it !in picks) picks += it }
         }
-        val special = content.classes.values.sortedBy { it.id }.let { all ->
-            all.firstOrNull { it.kind == ClassKind.HIDDEN && it.unlock?.test(state) == true }
-                ?: all.firstOrNull { it.kind == ClassKind.RARE && it.unlock?.test(state) == true }
-        }?.id
-        val third = special ?: ranked.drop(2).firstNotNullOfOrNull { a -> baseFor(a)?.takeIf { it !in picks } }
-        third?.let { picks += it }
+        val hidden = all.filter { it.kind == ClassKind.HIDDEN }
+        val unlocked = hidden.firstOrNull { it.unlock?.test(state) == true }
+        (unlocked ?: echoSuggestion(state))?.let { picks += it.id }
+        all.firstOrNull { it.kind == ClassKind.RARE && it.unlock?.test(state) == true }?.let { picks += it.id }
         return picks
+    }
+
+    /** Koşulu sağlanmamış gizli sınıflar arasından oyun tarzına en yakın olanı. */
+    fun echoSuggestion(state: WorldState): com.yukselis.engine.system.ClassDef? {
+        val hidden = content.classes.values.filter { it.kind == ClassKind.HIDDEN }.sortedBy { it.id }
+        val ranked = state.player.affinity.ranked()
+        return ranked.firstNotNullOfOrNull { a -> hidden.firstOrNull { a in it.affinities } } ?: hidden.firstOrNull()
+    }
+
+    /** Gizli sınıf, koşulu sağlanmadan Yankı tarafından mı önerildi? */
+    fun isEchoSuggestion(state: WorldState, classId: String): Boolean {
+        val c = content.classes[classId] ?: return false
+        return c.kind == ClassKind.HIDDEN && c.unlock?.test(state) != true
+    }
+
+    /**
+     * OP MC garantisi: oyuncunun oyun tarzına (en güçlü eğilim) bağlı Benzersiz yetenek.
+     * Dünyada tek sahiplidir; zaten bir Benzersiz yeteneği varsa verilmez.
+     */
+    fun grantUniqueSkill(state: WorldState): Result {
+        val owned = state.player.skills.any { content.skills[it.id]?.rarity == com.yukselis.engine.system.Rarity.UNIQUE }
+        if (owned) return Result(state, emptyList())
+        val uniques = content.skills.values.filter { it.rarity == com.yukselis.engine.system.Rarity.UNIQUE && it.affinity != null }
+        val pick = state.player.affinity.ranked().firstNotNullOfOrNull { a ->
+            uniques.firstOrNull { it.affinity == a && !state.firstClaims.containsKey(WorldState.UNIQUE_CLAIM_PREFIX + it.id) }
+        } ?: return Result(state, emptyList())
+        val r = grantSkill(state, pick.id)
+        val echo = Notice(NoticeKind.ECHO, texts.format("benzersiz_yetenek"), listOf(texts.format("benzersiz_yetenek_satir")))
+        return Result(r.state, listOf(echo) + r.notices)
+    }
+
+    /** Kendini açan arayüz: sekmeyi verir ve kendi bildirimini üretir; zaten açıksa sessiz. */
+    fun unlockTab(state: WorldState, tab: String): Result {
+        if (tab in state.unlockedTabs) return Result(state, emptyList())
+        val key = "sekme_$tab"
+        val notice = Notice(NoticeKind.SYSTEM, texts.format(key))
+        return Result(state.copy(unlockedTabs = state.unlockedTabs + tab), listOf(notice))
     }
 
     // ---- yardımcılar ----

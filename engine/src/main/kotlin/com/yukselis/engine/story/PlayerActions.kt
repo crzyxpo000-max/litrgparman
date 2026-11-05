@@ -44,7 +44,9 @@ class PlayerActions(private val content: Content, private val effects: EffectApp
         val withClass = state.withPlayer { it.copy(classId = classId) }
         val notice = Notice(NoticeKind.CLASS, texts.formatL("sinif_kazanildi", "name" to def.name), listOf(def.description))
         val skill = def.skill?.let { effects.grantSkill(withClass, it) } ?: EffectApplier.Result(withClass, emptyList())
-        return EffectApplier.Result(skill.state, listOf(notice) + skill.notices)
+        // OP MC: sınıfla birlikte oyun tarzına bağlı Benzersiz yetenek gelir.
+        val unique = effects.grantUniqueSkill(skill.state)
+        return EffectApplier.Result(unique.state, listOf(notice) + skill.notices + unique.notices)
     }
 
     private fun evolve(state: WorldState, grade: Grade, optionId: String): EffectApplier.Result {
@@ -96,9 +98,10 @@ class PlayerActions(private val content: Content, private val effects: EffectApp
 
     private fun chooseProfession(state: WorldState, id: String): EffectApplier.Result {
         val def = content.professions[id] ?: throw ActionRejected("Tanımsız meslek: $id")
+        val tab = effects.unlockTab(state.withPlayer { it.copy(profession = ProfessionState(id)) }, WorldState.TAB_BAG)
         return EffectApplier.Result(
-            state.withPlayer { it.copy(profession = ProfessionState(id)) },
-            listOf(Notice(NoticeKind.QUEST, texts.formatL("meslek_secildi", "name" to def.name), listOf(def.description))),
+            tab.state,
+            listOf(Notice(NoticeKind.QUEST, texts.formatL("meslek_secildi", "name" to def.name), listOf(def.description))) + tab.notices,
         )
     }
 

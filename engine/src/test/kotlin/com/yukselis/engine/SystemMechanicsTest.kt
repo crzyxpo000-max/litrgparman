@@ -65,8 +65,8 @@ class SystemMechanicsTest {
         assertEquals(3, prompt.options.size)
         assertEquals("yakin_muharip", prompt.options[0])
         assertEquals("siper", prompt.options[1])
-        // Gizli/nadir koşul yok → üçüncü eğilimin temel sınıfı.
-        assertEquals("buyu_ciragi", prompt.options[2])
+        // OP MC: gizli koşul yok → yine de bir gizli sınıf ("Yankı'nın önerisi").
+        assertEquals(com.yukselis.engine.system.ClassKind.HIDDEN, content.classes.getValue(prompt.options[2]).kind)
         // İstem varken hikaye seçimi yapılamaz.
         try {
             engine.choose(s, s.let { engine.view(it, lang).choices.first().id }, lang)
@@ -126,7 +126,8 @@ class SystemMechanicsTest {
         s = s.copy(prompts = listOf(evo))
         s = engine.resolvePrompt(s, "genel", lang).state
         val growth = content.classes.getValue("kirici").growth
-        Stat.entries.forEach { assertEquals(before[it] + 1 + (growth[it] ?: 0), s.player.stats[it]) }
+        val mult = Progression.growthMultiplier(Grade.D)
+        Stat.entries.forEach { assertEquals(before[it] + 1 + (growth[it] ?: 0) * mult, s.player.stats[it]) }
         assertEquals(50, s.player.level)
     }
 

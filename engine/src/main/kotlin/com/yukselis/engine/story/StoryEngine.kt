@@ -130,6 +130,8 @@ class StoryEngine(val content: Content) {
             evolutionPending = state.prompts.any { it.kind == PromptKind.EVOLUTION },
             essences = p.essences.mapNotNull { content.essences[it]?.name?.get(lang) },
             essenceSlots = Progression.essenceSlots(p.grade),
+            humanityTopPercent = Progression.humanityTopPercent(p.level, state.day),
+            tabs = state.unlockedTabs,
             mercy = state.morality.mercy,
             order = state.morality.order,
             humanity = state.morality.humanity,
@@ -238,7 +240,8 @@ class StoryEngine(val content: Content) {
                         ClassKind.RARE -> Rarity.EPIC
                         else -> null
                     }
-                    PromptOptionView(id, c.name[lang], l(c.description), listOf(growthLine(c.growth, lang)) + skillLine(c.skill), rarity)
+                    val echo = if (effects.isEchoSuggestion(state, id)) listOf(l(t.format("yanki_onerisi"))) else emptyList()
+                    PromptOptionView(id, c.name[lang], l(c.description), echo + listOf(growthLine(c.growth, lang)) + skillLine(c.skill), rarity)
                 },
             )
             PromptKind.EVOLUTION -> {
@@ -319,7 +322,17 @@ class StoryEngine(val content: Content) {
         notices = scene.notices
             .filter { it.condition?.test(state) ?: true }
             .map { noticeView(it.notice, state, lang) },
+        insights = scene.insights
+            .filter { it.condition.test(state) }
+            .map { i -> listOfNotNull(insightPrefix(i.condition, lang), text(i.text[lang], state, lang)).joinToString(" ") },
     )
+
+    /** "[ALG]" gibi önek: sezginin stat koşulundan. */
+    private fun insightPrefix(c: Condition, lang: Lang): String? = when (c) {
+        is Condition.StatAtLeast -> "[${c.stat.abbr[lang]}]"
+        is Condition.All -> c.conditions.firstNotNullOfOrNull { insightPrefix(it, lang) }
+        else -> null
+    }
 
     private fun noticeView(notice: Notice, state: WorldState, lang: Lang) = NoticeView(
         kind = notice.kind,

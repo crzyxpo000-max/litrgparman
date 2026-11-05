@@ -28,7 +28,11 @@ Plan:
 - [ ] **OP MC retrofit (DECISIONS #19):** Yankı bağı prologda (`yanki_bagi`), Günlük Görev yalnızca oyuncuda + 7 günlük seri bonusu, pasif sezgi satırları (`sezgiler`), gizli sınıf garantisi (üçüncü seçenek her zaman gizli), eğilime göre Benzersiz yetenek, kademeyle çarpan sınıf artışı, insanlık yüzdeliği, kendini açan sekmeler (`arayuz`)
 - [ ] Arayüz: Yetenekler ekranı, seviye/evrim tam ekran kartı + animasyon + titreşim, Çanta
 - [ ] Testler, check.sh, bağımsız inceleme, commit
-Notlar: Kullanıcı isteğiyle araya tema seçimi girdi (Sistem/Açık/Koyu/AMOLED), tamam ve GitHub'a gönderildi.
+Notlar (kaldığın yer):
+- OP MC motor retrofiti YAZILDI ve testleri geçiyor: gizli sınıf garantisi + echoSuggestion, grantUniqueSkill (sınıf seçiminde), growthMultiplier, dailyReward (7 günlük seri), humanityTopPercent, unlockTab/`arayuz` + otomatik sekmeler, `sezgiler` (pasif sezgi), NoticeKind.ECHO, kayıtta `tabs`.
+- EKSİK İÇERİK: (1) skills.json'a 8 Benzersiz yetenek (`nadirlik: benzersiz`, `egilim: <eğilim>`), (2) classes.json gizli sınıflara `egilimler` listesi, (3) prologa Yankı bağı (`yanki_bagi` bayrağı, `yanki` türü bozuk bildirim, "Günlük Görev yalnızca sende"), (4) prolog sahnelerine `sezgiler`, (5) validator: Benzersiz yetenek her eğilim için 1, gizli sınıfta `egilimler` zorunlu, (6) testler: Benzersiz yetenek, sekmeler, sezgi, yüzdelik.
+- SONRA: arayüz (Yetenekler, Çanta, +/− dağıtım, tam ekran istem/seviye kartı, sezgi/ECHO stili, gizli sekmeler, yüzdelik, Günlük Görev paneli), check.sh, emülatör, bağımsız inceleme, Aşama 2 commit.
+- Kullanıcı isteğiyle araya tema seçimi girdi (Sistem/Açık/Koyu/AMOLED), tamam ve GitHub'a gönderildi.
 
 ## Aşama 0 — Doğrulama  ✅ (2026-11-05)
 - [x] `:engine:test`, `:engine:validateContent`, `assembleDebug` çalışıyor (app ilk denemede derlendi, düzeltme gerekmedi)

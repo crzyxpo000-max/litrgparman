@@ -20,6 +20,8 @@ data class ClassDef(
     val kind: ClassKind,
     /** Temel sınıfın eğilimi. */
     val affinity: Affinity? = null,
+    /** Gizli sınıfın yakın olduğu eğilimler: koşulu sağlanmazsa "Yankı'nın önerisi" bunlara göre seçilir. */
+    val affinities: List<Affinity> = emptyList(),
     /** Gizli/nadir sınıfın açılma koşulu. */
     val unlock: Condition? = null,
     /** Evrim sınıfının geldiği sınıf ve kademesi. */
@@ -72,6 +74,8 @@ data class SkillDef(
     /** Ceza yeteneği: her kademede (ve kazanıldığında) kalıcı stat kaybı. */
     val penalty: Map<Stat, Int> = emptyMap(),
     val tags: List<String> = emptyList(),
+    /** Benzersiz yeteneğin bağlı olduğu oyun tarzı (her eğilime bir Benzersiz yetenek). */
+    val affinity: Affinity? = null,
 )
 
 /** İki maksimum seviye yetenek + koşul → yeni yetenek. */

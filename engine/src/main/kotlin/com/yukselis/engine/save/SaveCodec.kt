@@ -113,6 +113,7 @@ object SaveCodec {
         put("streak", state.dailyStreak)
         putJsonArray("returns") { state.returnStack.forEach { add(it) } }
         put("penalty", state.penaltyPending)
+        putJsonArray("tabs") { state.unlockedTabs.sorted().forEach { add(it) } }
     }.toString()
 
     fun decode(text: String): SaveData {
@@ -197,6 +198,15 @@ object SaveCodec {
             dailyStreak = o.int("streak") ?: 0,
             returnStack = o.strings("returns"),
             penaltyPending = o.bool("penalty"),
+            // Sekme kaydı olmayan eski kayıtlarda sahip olunanlara göre açılır.
+            unlockedTabs = if (o["tabs"] is JsonArray) {
+                o.strings("tabs").toSet()
+            } else {
+                buildSet {
+                    if (player.skills.isNotEmpty()) add(WorldState.TAB_SKILLS)
+                    if (player.inventory.isNotEmpty() || player.credits > 0 || player.profession != null) add(WorldState.TAB_BAG)
+                }
+            },
         )
         return SaveData(state, o.long("savedAt") ?: 0)
     }
