@@ -27,6 +27,23 @@ private val DarkColors = darkColorScheme(
     outline = Color(0xFF34436B),
 )
 
+/**
+ * AMOLED: arka plan ve yüzeyler saf siyah. AMOLED ekranda siyah pikseller kapalıdır;
+ * pil tasarrufu ve en yüksek kontrast. Ayırıcı yüzeyler çok koyu gri kalır ki kartlar seçilebilsin.
+ */
+private val AmoledColors = DarkColors.copy(
+    background = Color.Black,
+    surface = Color.Black,
+    surfaceTint = Color.Black,
+    surfaceVariant = Color(0xFF101318),
+    surfaceContainerLowest = Color.Black,
+    surfaceContainerLow = Color(0xFF07080B),
+    surfaceContainer = Color(0xFF0A0C10),
+    surfaceContainerHigh = Color(0xFF101318),
+    surfaceContainerHighest = Color(0xFF151920),
+    outline = Color(0xFF2A3245),
+)
+
 private val LightColors = lightColorScheme(
     primary = Color(0xFF0277BD),
     onPrimary = Color.White,
@@ -73,9 +90,13 @@ fun noticeColor(kind: NoticeKind, rarity: Rarity?): Color {
 }
 
 @Composable
-fun YukselisTheme(dark: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+fun YukselisTheme(dark: Boolean = isSystemInDarkTheme(), amoled: Boolean = false, content: @Composable () -> Unit) {
     MaterialTheme(
-        colorScheme = if (dark) DarkColors else LightColors,
+        colorScheme = when {
+            !dark -> LightColors
+            amoled -> AmoledColors
+            else -> DarkColors
+        },
         typography = Typography(),
         content = content,
     )

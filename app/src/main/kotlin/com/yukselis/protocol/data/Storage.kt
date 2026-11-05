@@ -41,8 +41,8 @@ class FileSaveStorage(private val dir: File) : SaveStorage {
     }
 }
 
-/** Açık/koyu tema seçimi; SYSTEM cihaz ayarını izler. */
-enum class ThemeMode { SYSTEM, LIGHT, DARK }
+/** Tema seçimi; SYSTEM cihaz ayarını izler, AMOLED saf siyah koyu temadır. */
+enum class ThemeMode { SYSTEM, LIGHT, DARK, AMOLED }
 
 data class Settings(
     val typewriter: Boolean = true,

@@ -10,6 +10,7 @@ GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En 
 | 14 | `scripts/check.sh` JAVA_HOME yoksa Android Studio JBR'sini kendisi bulur | Komut satırında Java kurulu olmayan makinelerde de çalışsın. | — |
 | 15 | AAB'de dil bölmesi kapalı (`bundle.language.enableSplit = false`) | Dil uygulama içinden anında değişiyor; Play bölerse diğer dilin metinleri cihazda olmaz (lint: AppBundleLocaleChanges). | — |
 | 16 | Prolog emülatörde (API 36, Medium Phone) iki dilde elle oynandı; Compose UI testi yazılmadı | Emülatör çalışıyor; görev dosyası UI testini yalnızca emülatör yoksa istiyor. | Aşama 4: başsız oynanış testi motor düzeyinde akışı kapsar. |
+| 18 | Tema: Sistem · Açık · Koyu · **AMOLED** (kullanıcı isteği). AMOLED saf siyah arka plan/yüzey; alt çubuk ve kartlar çok koyu gri | AMOLED ekranda siyah piksel kapalı: pil tasarrufu, yüksek kontrast. Kartların seçilebilmesi için yüzey kapları #07–#15 aralığında. | Aşama 9: yüksek kontrast seçeneğiyle birleştirilebilir. |
 | 17 | Proje OneDrive klasöründe; lint bazen "dosya başka işlem tarafından kullanılıyor" hatası veriyor | OneDrive build/ klasörünü kilitleyebiliyor. `./gradlew --stop` ve yeniden çalıştırma çözüyor. | Sorun sıklaşırsa projeyi OneDrive dışına taşımak önerilir. |
 
 ## Aşama 1 — 2026-11-05

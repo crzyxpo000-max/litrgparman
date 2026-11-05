@@ -2,6 +2,7 @@ package com.yukselis.protocol.ui.more
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -165,11 +166,15 @@ fun ThemePicker(current: ThemeMode, onPick: (ThemeMode) -> Unit, modifier: Modif
                 ThemeMode.SYSTEM to R.string.theme_system,
                 ThemeMode.LIGHT to R.string.theme_light,
                 ThemeMode.DARK to R.string.theme_dark,
+                ThemeMode.AMOLED to R.string.theme_amoled,
             ).forEach { (mode, label) ->
+                val padding = PaddingValues(horizontal = 4.dp, vertical = 8.dp)
                 if (mode == current) {
-                    Button(onClick = { }, modifier = Modifier.weight(1f)) { Text(stringResource(label), maxLines = 1) }
+                    Button(onClick = { }, contentPadding = padding, modifier = Modifier.weight(1f)) { Text(stringResource(label), maxLines = 1) }
                 } else {
-                    OutlinedButton(onClick = { onPick(mode) }, modifier = Modifier.weight(1f)) { Text(stringResource(label), maxLines = 1) }
+                    OutlinedButton(onClick = { onPick(mode) }, contentPadding = padding, modifier = Modifier.weight(1f)) {
+                        Text(stringResource(label), maxLines = 1)
+                    }
                 }
             }
         }

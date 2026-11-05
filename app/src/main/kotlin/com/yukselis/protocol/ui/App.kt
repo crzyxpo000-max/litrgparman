@@ -74,9 +74,9 @@ fun App(viewModel: GameViewModel) {
         val dark = when (ui.settings.theme) {
             ThemeMode.SYSTEM -> isSystemInDarkTheme()
             ThemeMode.LIGHT -> false
-            ThemeMode.DARK -> true
+            ThemeMode.DARK, ThemeMode.AMOLED -> true
         }
-        YukselisTheme(dark = dark) {
+        YukselisTheme(dark = dark, amoled = ui.settings.theme == ThemeMode.AMOLED) {
             Surface(color = MaterialTheme.colorScheme.background, modifier = Modifier.fillMaxSize()) {
                 val scene = ui.scene
                 val status = ui.status
