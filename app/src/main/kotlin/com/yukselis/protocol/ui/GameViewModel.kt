@@ -89,6 +89,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun newGame(name: String, ironman: Boolean) {
+        stopAuto()
+        app.saves.clearCheckpoint()
         val mode = if (ironman) GameMode.IRONMAN else GameMode.NORMAL
         val state = app.engine.newGame(name, mode, seed = Random.nextLong())
         show(state, emptyList())
@@ -125,6 +127,12 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         if (_ui.value.game?.combat == null) _ui.update { it.copy(turn = it.turn + 1, freshNotices = it.actionNotices, actionNotices = emptyList(), autoCombat = false) }
     }
 
+    private fun stopAuto() {
+        autoJob?.cancel()
+        autoJob = null
+        _ui.update { it.copy(autoCombat = false) }
+    }
+
     /** Otomatik tur: savaş bitene, infaz gelene ya da can %30'un altına düşene kadar önerilen eylemleri oynar. */
     fun toggleAuto() {
         if (_ui.value.autoCombat) {
@@ -139,6 +147,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 val c = s.combat ?: break
                 if (s.dead || c.pendingExecution != null || s.player.hp * 100 / s.player.maxHp < 30) break
                 combatAction(app.engine.autoCombatAction(s))
+                // Eylem reddedildiyse durum değişmez: sonsuz döngüye girme.
+                if (_ui.value.game === s) break
                 delay(AUTO_DELAY_MS)
             }
             _ui.update { it.copy(autoCombat = false) }
@@ -147,7 +157,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     /** Normal modda ölüm: savaş başındaki kayıt noktasına döner; yoksa otomatik kayda. */
     fun returnToCheckpoint() {
-        val state = (app.saves.loadCheckpoint() ?: app.saves.load(SaveManager.AUTO)?.takeIf { !it.dead })
+        stopAuto()
+        val current = _ui.value.game ?: return backToTitle()
+        val state = (app.saves.loadCheckpoint(current) ?: app.saves.load(SaveManager.AUTO)?.takeIf { !it.dead })
             ?.let { runCatching { app.engine.sanitize(it) }.getOrNull() }
         if (state == null) {
             backToTitle()
@@ -230,6 +242,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun load(slot: String) {
+        stopAuto()
         val state = app.saves.load(slot)?.let { runCatching { app.engine.sanitize(it) }.getOrNull() }
         if (state == null) {
             _ui.update { it.copy(message = UiMessage.LOAD_FAILED) }
@@ -245,6 +258,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun backToTitle() {
+        stopAuto()
         autosave()
         _ui.update {
             it.copy(game = null, scene = null, status = null, skills = null, bag = null, daily = null, combat = null, autoCombat = false,

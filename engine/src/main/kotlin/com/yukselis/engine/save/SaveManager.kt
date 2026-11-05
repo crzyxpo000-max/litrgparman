@@ -50,7 +50,11 @@ class SaveManager(
         storage.write(WorldState.CHECKPOINT_SLOT, SaveCodec.encode(state, now()))
     }
 
-    fun loadCheckpoint(): WorldState? = load(WorldState.CHECKPOINT_SLOT)
+    /** Yalnızca aynı oyunun (aynı tohum ve ad) kayıt noktası döner; başka oyunun noktası yok sayılır. */
+    fun loadCheckpoint(current: WorldState): WorldState? =
+        load(WorldState.CHECKPOINT_SLOT)?.takeIf { it.seed == current.seed && it.playerName == current.playerName && !it.dead }
+
+    fun clearCheckpoint() = storage.delete(WorldState.CHECKPOINT_SLOT)
 
     /** Bozuk ya da okunamayan kayıt null döner; oyun çökmez. */
     fun load(slot: String): WorldState? = read(slot)?.state

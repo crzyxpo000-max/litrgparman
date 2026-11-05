@@ -56,7 +56,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         var over = false
 
         fun log(prose: LText, numbers: LText? = null) {
-            c = c.copy(log = (c.log + LogEntry(prose, numbers)).takeLast(CombatState.LOG_LIMIT))
+            c = c.copy(log = (c.log + LogEntry(capitalize(prose), numbers)).takeLast(CombatState.LOG_LIMIT))
         }
 
         fun done(): Result {
@@ -71,7 +71,29 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         fun addVar(key: String, delta: Int) {
             s = s.copy(vars = s.vars + (key to s.variable(key) + delta))
         }
+
+        /** Etki uygulamadan önce ve sonra RNG'yi eşitle: aynı rastgele akış iki kez kullanılmasın. */
+        fun applyEffects(list: List<Effect>) {
+            val r = effects.applyAll(s.copy(rngState = rng.state), list)
+            s = r.state
+            rng.state = r.state.rngState
+            notices += r.notices
+        }
+
+        fun sync(block: (WorldState) -> EffectApplier.Result) {
+            val r = block(s.copy(rngState = rng.state))
+            s = r.state
+            rng.state = r.state.rngState
+            notices += r.notices
+        }
     }
+
+    /** Düzyazıda düşman adı: İngilizcede "the" ile ("the Sewer Rat"); cümle başı sonra büyütülür. */
+    private fun proseName(d: EnemyDef): LText =
+        LText(d.name.tr, if (d.name.en.startsWith("The ")) d.name.en.replaceFirst("The ", "the ") else "the ${d.name.en}")
+
+    /** İngilizce metinde cümle başlarını büyük harfe çevirir ("the Sewer Rat staggers." → "The ..."). */
+    private fun capitalize(t: LText): LText = LText(t.tr, SENTENCE_START.replace(t.en) { m -> m.groupValues[1] + m.groupValues[2].uppercase() })
 
     // ---------------------------------------------------------------- başlangıç
 
@@ -87,7 +109,9 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         }
         val maxStamina = Progression.maxStamina(p.stats)
         var combat = CombatState(spec = spec, enemies = enemies, stamina = maxStamina, maxStamina = maxStamina)
-        val ctx = Ctx(state.copy(combat = combat, dead = false))
+        // Önceki savaşın bağlam değişkenleri yeni savaşa sızmasın.
+        val clean = state.copy(combat = combat, dead = false, vars = state.vars - CTX_VARS)
+        val ctx = Ctx(clean)
         ctx.c = combat
 
         val names = enemyNames(defs)
@@ -107,7 +131,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         defs.distinctBy { it.id }.forEach { d ->
             ctx.log(d.hook)
             state.enemyMemory[d.id]?.takeIf { it.fled > 0 }?.let {
-                ctx.log(texts.formatL("savas_hatirliyor", "enemy" to d.name))
+                ctx.log(texts.formatL("savas_hatirliyor", "enemy" to proseName(d)))
             }
         }
         // İnisiyatif: düşmanlardan biri oyuncuyu geçerse ilk vuruş onlarındır.
@@ -163,8 +187,8 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             is CombatAction.Attack -> attack(ctx, action.target)
             is CombatAction.UseSkill -> useSkill(ctx, action.skillId, action.target)
             CombatAction.Defend -> {
+                // "korunan_muttefik" yoldaşlar gelince (Aşama 5) bir müttefiki korurken sayılır.
                 ctx.c = ctx.c.copy(defending = true, stamina = (ctx.c.stamina + 10).coerceAtMost(ctx.c.maxStamina))
-                ctx.addVar("korunan_muttefik", 1)
                 ctx.log(texts.format("savas_savunma"))
             }
             is CombatAction.Analyze -> analyze(ctx, action.target)
@@ -215,26 +239,25 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         tags: List<String>,
         name: LText?,
         status: StatusApplication? = null,
+        usedEffort: Int = payEffort(ctx),
     ): Boolean {
         val p = ctx.s.player
         val def = ctx.def(target)
-        val effort = ctx.c.effort
-        val effortCost = effort * CombatMath.EFFORT_STAMINA
-        val usedEffort = if (ctx.c.stamina >= effortCost) effort else 0
-        ctx.c = ctx.c.copy(stamina = ctx.c.stamina - usedEffort * CombatMath.EFFORT_STAMINA)
 
         val hitP = CombatMath.hitChance(p.stats, target.stats, ctx.c.playerHas(StatusEffects.BLIND), usedEffort * CombatMath.EFFORT_HIT)
         val firstStrike = target.uid !in ctx.c.struck
         ctx.c = ctx.c.copy(struck = ctx.c.struck + target.uid)
         if (!ctx.rng.chance(hitP)) {
-            ctx.log(texts.formatL("savas_iskaladin", "target" to def.name), pct(hitP))
+            ctx.log(texts.formatL("savas_iskaladin", "target" to proseName(def)), pct(hitP))
             return false
         }
         // Sersem ya da korkmuş hedefe vuruş "arkadan vuruş" sayılır (kaynaştırma sayacı).
         if (target.has(StatusEffects.STUN) || target.has(StatusEffects.FEAR) || target.has(StatusEffects.BLIND)) ctx.addVar("arkadan_vurus", 1)
 
         val crit = ctx.rng.chance(CombatMath.critChance(p.stats))
-        val weak = def.weakness != null && def.weakness in tags
+        // Analiz edilen nişan alınabilir zaaf (göz) her vuruşta hedeflenebilir.
+        val aimed = target.analyzed && def.weakness in AIMABLE_WEAKNESSES
+        val weak = def.weakness != null && (def.weakness in tags || aimed)
         var extra = ctx.c.stance.damage * (1 + usedEffort * CombatMath.EFFORT_DAMAGE)
         if (crit) extra *= CombatMath.critMultiplier(p.stats)
         if (weak) extra *= CombatMath.WEAKNESS_MULTIPLIER
@@ -245,7 +268,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             CombatMath.resistance(target.stats, magical, target.has(StatusEffects.BURN)),
             ctx.rng, CombatMath.gradeMultiplier(p.grade, def.grade), extra,
         )
-        val prose = if (name == null) texts.formatL("savas_vurdun", "target" to def.name) else texts.formatL("savas_yetenek_vurdu", "skill" to name, "target" to def.name)
+        val prose = if (name == null) texts.formatL("savas_vurdun", "target" to proseName(def)) else texts.formatL("savas_yetenek_vurdu", "skill" to name, "target" to proseName(def))
         val tagsLine = listOfNotNull(
             if (crit) texts.format("savas_kritik") else null,
             if (weak) texts.format("savas_zaaf") else null,
@@ -257,6 +280,14 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             applyEnemyStatus(ctx, target.uid, status, ctx.s.player.level)
         }
         return true
+    }
+
+    /** Eforu öder (yetmezse 0); alan yeteneğinde bir kez ödenir. */
+    private fun payEffort(ctx: Ctx): Int {
+        val effort = ctx.c.effort
+        val used = if (ctx.c.stamina >= effort * CombatMath.EFFORT_STAMINA) effort else 0
+        ctx.c = ctx.c.copy(stamina = ctx.c.stamina - used * CombatMath.EFFORT_STAMINA)
+        return used
     }
 
     private fun useSkill(ctx: Ctx, skillId: String, uid: Int) {
@@ -281,7 +312,9 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
 
         when {
             def.heals -> {
-                val amount = (base + ctx.s.player.stats[stat] * def.multiplier).roundToInt()
+                val raw = (base + ctx.s.player.stats[stat] * def.multiplier).roundToInt()
+                // Zehir iyileşmeyi yarıya indirir (GDD).
+                val amount = if (ctx.c.playerHas(StatusEffects.POISON)) raw / 2 else raw
                 val p = ctx.s.player
                 ctx.s = ctx.s.copy(player = p.copy(hp = (p.hp + amount).coerceAtMost(p.maxHp)))
                 ctx.log(texts.formatL("savas_yetenek_kendine", "skill" to def.name), texts.format("savas_iyilesme", "n" to amount))
@@ -291,8 +324,11 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
                 def.status?.let { applyPlayerStatus(ctx, StatusInstance(it.effect, it.duration, power)) }
                 ctx.log(texts.formatL("savas_yetenek_kendine", "skill" to def.name), texts.format("savas_kalkan", "n" to power))
             }
-            def.target == SkillTarget.ALL -> ctx.c.living.forEach { e ->
-                if (!ctx.over) strike(ctx, e, base, stat, def.multiplier, def.tags, def.name, def.status)
+            def.target == SkillTarget.ALL -> {
+                val effort = payEffort(ctx)
+                ctx.c.living.forEach { e ->
+                    if (!ctx.over) strike(ctx, e, base, stat, def.multiplier, def.tags, def.name, def.status, effort)
+                }
             }
             else -> strike(ctx, requireTarget(ctx, uid), base, stat, def.multiplier, def.tags, def.name, def.status)
         }
@@ -301,9 +337,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             applyPlayerStatus(ctx, StatusInstance(def.status.effect, def.status.duration, base))
         }
         if (("menzilli" in def.tags || "ok" in def.tags) && ctx.c.effort > 0) ctx.addVar("hareketli_atis", 1)
-        val xp = effects.apply(ctx.s, Effect.SkillXp(skillId, 1))
-        ctx.s = xp.state
-        ctx.notices += xp.notices
+        ctx.applyEffects(listOf(Effect.SkillXp(skillId, 1)))
     }
 
     private fun analyze(ctx: Ctx, uid: Int) {
@@ -320,7 +354,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             ctx.notices += Notice(NoticeKind.ANALYZE, texts.formatL("savas_analiz_basarili", "enemy" to def.name), lines, Rarity.RARE)
             ctx.log(texts.formatL("savas_analiz_basarili", "enemy" to def.name))
         } else {
-            ctx.log(texts.formatL("savas_analiz_basarisiz", "enemy" to def.name))
+            ctx.log(texts.formatL("savas_analiz_basarisiz", "enemy" to proseName(def)))
         }
     }
 
@@ -335,7 +369,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
                 if (ctx.over) return@forEach
                 val d = ctx.def(e)
                 val dmg = CombatMath.damage(20, p.stats[Stat.STR], 1.5, 0.0, ctx.rng, CombatMath.gradeMultiplier(p.grade, d.grade))
-                ctx.log(texts.formatL("savas_ortam_vurdu", "target" to d.name), numbers(dmg, emptyList()))
+                ctx.log(texts.formatL("savas_ortam_vurdu", "target" to proseName(d)), numbers(dmg, emptyList()))
                 if (!damageEnemy(ctx, e.uid, dmg) && ctx.rng.chance(0.5)) applyEnemyStatus(ctx, e.uid, StatusApplication(StatusEffects.STUN, 1.0, 1), p.level)
             }
             ENV_WATER -> {
@@ -357,7 +391,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         val target = requireTarget(ctx, uid)
         val def = ctx.def(target)
         if (!def.intelligent) {
-            ctx.log(texts.formatL("savas_konus_anlamiyor", "enemy" to def.name))
+            ctx.log(texts.formatL("savas_konus_anlamiyor", "enemy" to proseName(def)))
             return
         }
         val p = ctx.s.player
@@ -369,17 +403,17 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             ctx.rng.d20() + p.stats[Stat.CHA] + wounded >= 12 + target.level / 2
         }
         if (!success) {
-            ctx.log(texts.formatL("savas_konus_basarisiz", "enemy" to def.name))
+            ctx.log(texts.formatL("savas_konus_basarisiz", "enemy" to proseName(def)))
             return
         }
         ctx.updateEnemy(uid) { it.copy(gone = true) }
         remember(ctx, def, spared = true)
         if (threaten) {
             ctx.s = ctx.s.copy(morality = ctx.s.morality.shift(MoralAxis.MERCY, -1))
-            ctx.log(texts.formatL("savas_tehdit", "enemy" to def.name))
+            ctx.log(texts.formatL("savas_tehdit", "enemy" to proseName(def)))
         } else {
             ctx.s = ctx.s.copy(morality = ctx.s.morality.shift(MoralAxis.MERCY, 2))
-            ctx.log(texts.formatL("savas_konus_basarili", "enemy" to def.name))
+            ctx.log(texts.formatL("savas_konus_basarili", "enemy" to proseName(def)))
         }
     }
 
@@ -404,8 +438,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         val use = def.use
         if (def.type != ItemType.CONSUMABLE || use == null) throw ActionRejected("Kullanılamaz")
         if (ctx.s.player.itemCount(def.id) <= 0) throw ActionRejected("Envanterde yok")
-        val removed = effects.addItem(ctx.s, def.id, -1)
-        ctx.s = removed.state
+        ctx.sync { effects.addItem(it, def.id, -1) }
         ctx.c = ctx.c.copy(minorUsed = true)
         val poisoned = ctx.c.playerHas(StatusEffects.POISON)
         if (use.hp > 0 || use.mp > 0) {
@@ -421,8 +454,11 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         if (use.damage > 0) {
             val target = action.target?.let { ctx.c.enemy(it) }?.takeIf { it.alive } ?: ctx.c.living.firstOrNull() ?: return
             val d = ctx.def(target)
-            val dmg = CombatMath.damage(use.damage, 0, 0.0, CombatMath.resistance(target.stats, true, false), ctx.rng)
-            ctx.log(texts.formatL("savas_esya_firlat", "item" to def.name, "target" to d.name), numbers(dmg, emptyList()))
+            val dmg = CombatMath.damage(
+                use.damage, 0, 0.0, CombatMath.resistance(target.stats, true, false), ctx.rng,
+                CombatMath.gradeMultiplier(ctx.s.player.grade, d.grade),
+            )
+            ctx.log(texts.formatL("savas_esya_firlat", "item" to def.name, "target" to proseName(d)), numbers(dmg, emptyList()))
             val tags = listOfNotNull(use.inflicts?.let { if (it == StatusEffects.BURN) "ates" else null })
             val weak = d.weakness != null && d.weakness in tags
             val killed = damageEnemy(ctx, target.uid, if (weak) (dmg * CombatMath.WEAKNESS_MULTIPLIER).roundToInt() else dmg)
@@ -451,9 +487,9 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             ctx.c = ctx.c.copy(kills = ctx.c.kills + 1)
             if (ctx.c.living.isEmpty()) {
                 ctx.c = ctx.c.copy(pendingExecution = uid)
-                ctx.notices += Notice(NoticeKind.WARNING, texts.formatL("savas_infaz_teklif", "enemy" to def.name))
+                ctx.notices += Notice(NoticeKind.WARNING, capitalize(texts.formatL("savas_infaz_teklif", "enemy" to proseName(def))))
             } else {
-                ctx.log(texts.formatL("savas_dustu", "enemy" to def.name))
+                ctx.log(texts.formatL("savas_dustu", "enemy" to proseName(def)))
             }
             return true
         }
@@ -483,11 +519,11 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         if (!e.alive) return
         val power = if (st.effect == StatusEffects.POISON || st.effect == StatusEffects.BURN) CombatMath.dotPower(sourceLevel) else 0
         ctx.updateEnemy(uid) { it.copy(statuses = it.statuses.filterNot { s -> s.effect == st.effect } + StatusInstance(st.effect, st.duration, power)) }
-        ctx.log(texts.formatL("savas_durum_uygulandi", "target" to ctx.def(e).name, "effect" to texts.format("durum_${st.effect}")))
+        ctx.log(texts.formatL("savas_durum_uygulandi", "target" to proseName(ctx.def(e)), "effect" to texts.format("durum_${st.effect}")))
     }
 
     private fun applyPlayerStatus(ctx: Ctx, st: StatusInstance) {
-        ctx.c = ctx.c.copy(playerStatuses = ctx.c.playerStatuses.filterNot { it.effect == st.effect } + st)
+        ctx.c = ctx.c.copy(playerStatuses = ctx.c.playerStatuses.filterNot { it.effect == st.effect } + st.copy(fresh = true))
         if (st.effect == StatusEffects.HASTE && ctx.c.extraActions == 0) ctx.c = ctx.c.copy(extraActions = 1)
     }
 
@@ -515,6 +551,13 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
     private fun playerDown(ctx: Ctx) {
         val s = ctx.s
         val grade = s.player.grade
+        // Yazılmış yenilgi sahnesi ölüm değildir (her iki modda): İkinci Şans harcanmaz (DECISIONS #52).
+        ctx.c.spec.lose?.let { lose ->
+            ctx.s = ctx.s.copy(player = ctx.s.player.copy(hp = 1))
+            ctx.notices += Notice(NoticeKind.WARNING, texts.format("savas_yenildin"))
+            leave(ctx, lose)
+            return
+        }
         if (s.mode == GameMode.NORMAL && grade !in s.secondChances) {
             // İkinci Şans: bedeli rastgele bir yeteneğin −2 seviyesi ya da bir unvan.
             var p = s.player.copy(hp = (s.player.maxHp * CombatMath.SECOND_CHANCE_HP).roundToInt().coerceAtLeast(1))
@@ -535,13 +578,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             ctx.log(texts.format("ikinci_sans"))
             return
         }
-        val lose = ctx.c.spec.lose
         when {
-            lose != null -> {
-                ctx.s = ctx.s.copy(player = ctx.s.player.copy(hp = 1))
-                ctx.notices += Notice(NoticeKind.WARNING, texts.format("savas_yenildin"))
-                leave(ctx, lose)
-            }
             s.mode == GameMode.IRONMAN -> {
                 ctx.notices += Notice(NoticeKind.WARNING, texts.format("savas_oldun"))
                 val harvest = Content.HARVEST_SCENE.takeIf { it in content.scenes }
@@ -568,35 +605,38 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             val def = ctx.def(e)
             ctx.updateEnemy(e.uid) { it.copy(guarding = false) }
             if (e.has(StatusEffects.STUN)) {
-                ctx.log(texts.formatL("savas_dusman_sersem", "enemy" to def.name))
+                ctx.log(texts.formatL("savas_dusman_sersem", "enemy" to proseName(def)))
                 continue
             }
             val hpPct = e.hp * 100 / e.maxHp
             if (def.behavior == Behavior.FLEEING && hpPct < 30 && ctx.rng.chance(0.6)) {
-                ctx.updateEnemy(e.uid) { it.copy(gone = true) }
+                ctx.updateEnemy(e.uid) { it.copy(gone = true, fled = true) }
                 remember(ctx, def, spared = false)
-                ctx.log(texts.formatL("savas_dusman_kacti", "enemy" to def.name))
+                ctx.log(texts.formatL("savas_dusman_kacti", "enemy" to proseName(def)))
                 continue
             }
             if (def.behavior == Behavior.CAUTIOUS && hpPct < 50 && ctx.rng.chance(0.35)) {
                 ctx.updateEnemy(e.uid) { it.copy(guarding = true) }
-                ctx.log(texts.formatL("savas_dusman_savunma", "enemy" to def.name))
+                ctx.log(texts.formatL("savas_dusman_savunma", "enemy" to proseName(def)))
                 continue
             }
             if (narrow && attacked >= 2) continue
             if (e.has(StatusEffects.FEAR) && !CombatMath.fearCheck(e.stats[Stat.WIL], ctx.rng.d20())) {
-                ctx.log(texts.formatL("savas_dusman_korku", "enemy" to def.name))
+                ctx.log(texts.formatL("savas_dusman_korku", "enemy" to proseName(def)))
                 continue
             }
             enemyAttack(ctx, e, def, narrow)
             attacked++
+            // Hızlanmış düşman iki kez saldırır.
+            if (!ctx.over && ctx.c.enemy(e.uid)?.has(StatusEffects.HASTE) == true) enemyAttack(ctx, ctx.c.enemy(e.uid)!!, def, narrow)
         }
     }
 
     private fun enemyAttack(ctx: Ctx, e: EnemyState, def: EnemyDef, narrow: Boolean) {
         val pool = def.attacks + def.phases.mapNotNull { it.attack }.filter { it.id in e.extraAttacks }
-        val ready = pool.filter { (e.cooldowns[it.id] ?: 0) <= 0 }.ifEmpty { pool }
-        if (ready.isEmpty()) return
+        if (pool.isEmpty()) return
+        // Hepsi beklemedeyse en kısa beklemeli saldırı (içerik her zaman en az bir beklemesiz saldırı vermeli).
+        val ready = pool.filter { (e.cooldowns[it.id] ?: 0) <= 0 }.ifEmpty { listOf(pool.minBy { e.cooldowns[it.id] ?: 0 }) }
         val atk = if (def.behavior == Behavior.AGGRESSIVE || def.boss) {
             ready.maxBy { it.base + e.stats[it.stat] * it.multiplier }
         } else {
@@ -606,12 +646,13 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         val p = ctx.s.player
         val pack = if (def.behavior == Behavior.PACK && !narrow) 0.05 * (ctx.c.living.count { it.uid != e.uid && ctx.def(it).behavior == Behavior.PACK }) else 0.0
         val hitP = CombatMath.hitChance(e.stats, p.stats, e.has(StatusEffects.BLIND), pack)
-        val prose = LText(atk.prose.tr.replace("{dusman}", def.name.tr), atk.prose.en.replace("{dusman}", def.name.en))
+        val n = proseName(def)
+        val prose = LText(atk.prose.tr.replace("{dusman}", n.tr), atk.prose.en.replace("{dusman}", n.en))
         if (!ctx.rng.chance(hitP)) {
-            ctx.log(texts.formatL("savas_dusman_iskaladi", "enemy" to def.name), pct(hitP))
+            ctx.log(texts.formatL("savas_dusman_iskaladi", "enemy" to n), pct(hitP))
             return
         }
-        val crit = ctx.rng.chance(CombatMath.critChance(e.stats) / 2)
+        val crit = ctx.rng.chance(CombatMath.critChance(e.stats))
         var extra = ctx.c.stance.incoming
         if (ctx.c.defending) extra *= CombatMath.DEFEND_MULTIPLIER
         if (crit) extra *= CombatMath.critMultiplier(e.stats)
@@ -649,7 +690,10 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
                 StatusEffects.POISON, StatusEffects.BURN -> st.power
                 else -> 0
             }
-            if (st.turns > 1) statuses += st.copy(turns = st.turns - 1)
+            when {
+                st.fresh -> statuses += st.copy(fresh = false)
+                st.turns > 1 -> statuses += st.copy(turns = st.turns - 1)
+            }
         }
         ctx.c = ctx.c.copy(
             playerStatuses = statuses,
@@ -678,7 +722,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             }
             ctx.updateEnemy(e.uid) { it.copy(statuses = kept, cooldowns = it.cooldowns.mapValues { (_, v) -> (v - 1).coerceAtLeast(0) }) }
             if (eDot > 0) {
-                ctx.log(texts.formatL("savas_durum_hasar", "target" to ctx.def(e).name), numbers(eDot, emptyList()))
+                ctx.log(texts.formatL("savas_durum_hasar", "target" to proseName(ctx.def(e))), numbers(eDot, emptyList()))
                 damageEnemy(ctx, e.uid, eDot)
             }
         }
@@ -687,7 +731,12 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         // Sersem oyuncunun turu atlanır.
         if (!ctx.over && ctx.c.pendingExecution == null && ctx.c.playerHas(StatusEffects.STUN)) {
             ctx.log(texts.format("savas_sersem"))
-            ctx.c = ctx.c.copy(playerStatuses = ctx.c.playerStatuses.filterNot { it.effect == StatusEffects.STUN })
+            // Sersemleme bu atlanan turla tükenir (süresi 1'den uzunsa bir azalır).
+            ctx.c = ctx.c.copy(
+                playerStatuses = ctx.c.playerStatuses.mapNotNull {
+                    if (it.effect != StatusEffects.STUN) it else if (it.turns > 1) it.copy(turns = it.turns - 1) else null
+                },
+            )
             enemyTurn(ctx)
             if (!ctx.over) endRound(ctx)
         }
@@ -718,7 +767,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             }
             else -> throw ActionRejected("Bilinmeyen infaz: $option")
         }
-        ctx.log(texts.formatL("infaz_${option}_metin", "enemy" to def.name))
+        ctx.log(texts.formatL("infaz_${option}_metin", "enemy" to proseName(def)))
         ctx.c = ctx.c.copy(pendingExecution = null)
         finishWin(ctx, crushed = false)
     }
@@ -726,7 +775,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
     private fun finishWin(ctx: Ctx, crushed: Boolean) {
         val p0 = ctx.s.player
         val killed = ctx.c.enemies.filter { it.hp <= 0 && !it.gone }
-        val spared = ctx.c.enemies.filter { it.gone }
+        val spared = ctx.c.enemies.filter { it.gone && !it.fled }
         var xp = 0.0
         var gapBreak = 0
         var bossDown = false
@@ -751,9 +800,10 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         }
         ctx.addVar("oldurme_sayisi", killed.size)
         // Savaş bağlamı değişkenleri (uyanış koşulları için; her savaşta üzerine yazılır).
+        val beaten = killed.isNotEmpty() || spared.isNotEmpty()
         ctx.s = ctx.s.copy(
             vars = ctx.s.vars + mapOf(
-                CTX_WON to 1,
+                CTX_WON to if (beaten) 1 else 0,
                 CTX_LOWEST_HP to ctx.c.lowestHpPercent,
                 CTX_GRADE_GAP to gapBreak,
                 CTX_BOSS to if (bossDown) 1 else 0,
@@ -764,39 +814,34 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         val target = ctx.c.spec.win
         ctx.s = ctx.s.copy(combat = null, sceneId = target, ended = content.scenes[target]?.isEnding ?: false)
 
-        ctx.notices += Notice(NoticeKind.SYSTEM, if (crushed) texts.format("ezme_zafer") else texts.format("savas_zafer"))
+        ctx.notices += Notice(
+            NoticeKind.SYSTEM,
+            when {
+                crushed -> texts.format("ezme_zafer")
+                beaten -> texts.format("savas_zafer")
+                else -> texts.format("savas_hepsi_kacti")
+            },
+        )
         val rewards = mutableListOf<Effect>(Effect.GainXp(xp.roundToInt().toLong()))
         killed.forEach { e ->
             val d = ctx.def(e)
             if (d.credits > 0) rewards += Effect.AddCredits(d.credits)
             d.loot.forEach { (item, chance) -> if (item in content.items && ctx.rng.chance(chance)) rewards += Effect.AddItem(item, 1) }
         }
-        val applied = effects.applyAll(ctx.s, rewards)
-        ctx.s = applied.state
-        ctx.notices += applied.notices
+        ctx.applyEffects(rewards)
 
         if (gapBreak > 0) {
             ctx.addVar(VAR_GAP_BREAKS, 1)
             val n = ctx.s.variable(VAR_GAP_BREAKS)
             ctx.notices += Notice(NoticeKind.EVOLUTION, texts.format("kademe_kirma"), listOf(texts.format("kademe_kirma_satir")), Rarity.LEGENDARY)
             GAP_TITLES.filter { (count, _) -> n >= count }.forEach { (_, title) ->
-                val t = effects.grantTitleIfDefined(ctx.s, title)
-                ctx.s = t.state
-                ctx.notices += t.notices
+                ctx.sync { effects.grantTitleIfDefined(it, title) }
             }
             // Kademe Kırma: Benzersiz yetenek şansı.
-            if (ctx.rng.chance(GAP_UNIQUE_CHANCE)) {
-                val u = effects.grantExtraUniqueSkill(ctx.s)
-                ctx.s = u.state
-                ctx.notices += u.notices
-            }
+            if (ctx.rng.chance(GAP_UNIQUE_CHANCE)) ctx.sync { effects.grantExtraUniqueSkill(it) }
         }
-        val awakened = checkAwakenings(ctx.s)
-        ctx.s = awakened.state
-        ctx.notices += awakened.notices
-        val t = effects.checkTriggers(ctx.s)
-        ctx.s = t.state
-        ctx.notices += t.notices
+        ctx.sync { st -> checkAwakenings(st).let { EffectApplier.Result(it.state, it.notices) } }
+        ctx.sync { effects.checkTriggers(it) }
     }
 
     /** Uyanış tetikleyicileri: koşulu sağlanan her uyanış bir kez çalışır. */
@@ -835,7 +880,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         if (c.pendingExecution != null) return CombatAction.Execute(EXEC_CLEAN)
         val p = state.player
         if (p.hp * 100 / p.maxHp < 35 && !c.minorUsed) {
-            content.items.values.filter { it.use?.hp ?: 0 > 0 && p.itemCount(it.id) > 0 }.maxByOrNull { it.use!!.hp }?.let {
+            content.items.values.filter { it.type == ItemType.CONSUMABLE && (it.use?.hp ?: 0) > 0 && p.itemCount(it.id) > 0 }.maxByOrNull { it.use!!.hp }?.let {
                 return CombatAction.UseItem(it.id)
             }
         }
@@ -895,6 +940,16 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         const val CTX_GRADE_GAP = "_savas_kademe_farki"
         const val CTX_BOSS = "_savas_boss"
         const val CTX_CRUSH = "_savas_ezme"
+
+        val CTX_VARS = setOf(CTX_WON, CTX_LOWEST_HP, CTX_GRADE_GAP, CTX_BOSS, CTX_CRUSH)
+
+        /** Analizden sonra her vuruşta hedeflenebilen zaaflar. */
+        val AIMABLE_WEAKNESSES = setOf("goz")
+
+        /** İçerikte izin verilen zaaf etiketleri. */
+        val WEAKNESS_TAGS = setOf("ates", "buz", "simsek", "isik", "karanlik", "delici", "fiziksel", "zihin", "ses", "ruzgar", "goz")
+
+        private val SENTENCE_START = Regex("(^|[.!?]\\s+)([a-z])")
 
         const val VAR_GAP_BREAKS = "kademe_kirma"
         /** "Kademe Kıran" unvan zinciri: kaçıncı kademe kırmada hangi unvan. */

@@ -166,6 +166,7 @@ class SystemTexts(private val texts: Map<String, LText>) {
             "infaz_bagisla" to emptySet(),
             "infaz_bagisla_aciklama" to emptySet(),
             "infaz_bagisla_metin" to setOf("enemy"),
+            "savas_hepsi_kacti" to emptySet(),
             "kabul" to emptySet(),
             "red" to emptySet(),
         )

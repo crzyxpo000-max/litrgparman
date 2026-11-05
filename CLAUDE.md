@@ -7,7 +7,8 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 
 ## Durum
 
-- **Aşama 0, 1 ve 2 tamam.** Motor, kayıt (v2), i18n, içerik doğrulayıcı, Compose ekranları, prolog demosu;
+- **Aşama 0–3 tamam.** Savaş: `combat/` paketi, 20 düşman, savaş ekranı.
+- **Aşama 0, 1 ve 2:** Motor, kayıt (v2), i18n, içerik doğrulayıcı, Compose ekranları, prolog demosu;
   Sistem mekanikleri (eğilim, sınıf, kademe/evrim, yetenek, unvan, meslek, Öz, Günlük Görev) ve OP MC çekirdeği.
 - **Tasarımın üst kuralı:** GDD'deki "OP MC tasarımı" bölümü (DECISIONS #19). Kahraman bir anomalidir; Yankı ona bağlıdır.
 - **Tüm geliştirme planı ve kabul kriterleri:** `CLAUDE_CODE_GOREV.md`. Güncel durum: `docs/PROGRESS.md`.
@@ -49,6 +50,7 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 | `i18n` | `Lang`, `LText`, `NameRegistry`, `TokenResolver`, `TurkishSuffix`, `EnglishGrammar` |
 | `story` | İçerik modeli (`Model.kt`), `EffectApplier` (etkiler + tetikleyiciler), `PlayerActions` (istem, dağıtım, üretim, eşya, antrenman), `StoryEngine`, görünümler (`Views.kt`), `SystemTexts` |
 | `content` | `ContentParser` (JSON), `ContentLoader`, `ContentValidator` (+ `main`) |
+| `combat` | `CombatModel` (düşman/uyanış tanımları, `CombatState`, duruş, durumlar), `CombatMath` (GDD formülleri), `CombatEngine` (tur, yapay zeka, fazlar, infaz, zafer, ölüm, Ezme) |
 | `save` | `SaveCodec`, `SaveManager` (auto + 3 slot, Demir Mod), `SaveStorage` |
 
 ## İçerik kuralları (content/)
@@ -72,6 +74,11 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
   `gunluk` {antrenman|kesif|savas|kapi: n}, `meslek_teklifi` true, `can` n, `mana` n, `arayuz` yetenekler|canta|harita.
 - Koşullar: `stat`, `bayrak`, `bayrak_yok`, `degisken_min`, `ahlak_min`, `ahlak_max`, `seviye_min`, `egilim_min`,
   `yetenek`, `unvan`, `sinif`, `esya`, `itibar_min`. Birden çok anahtar = VE.
+- Savaş: seçenekte `{"savas": {"dusmanlar": [...], "ortam": [tavan|su|yanici|karanlik|dar_gecit], "kazan": sahne, "kaybet": sahne?, "kac": sahne?}}`;
+  `sonraki` gerekmez. Düşmanlar `enemies.json` (`dusmanlar`), uyanışlar `awakenings.json` (`uyanislar`). Saldırı metninde `{dusman}` = düşman adı.
+  Türkçe savaş metinlerinde dinamik isme ek getirme ("{target}'e" yok); ismi özne yap.
+- Koşul `degisken_max` da var. Savaş sonrası bağlam değişkenleri: `_savas_kazanildi`, `_savas_en_dusuk_can`, `_savas_kademe_farki`, `_savas_boss`, `_savas_ezme`.
+- `story/90_sistem.json`: `son_hasat` (Demir Mod ölümü).
 - Sahnede `sezgiler`: [{`kosul`, `metin`}] → pasif Sistem sezgisi; stat koşullu satır "[ALG]" öneki alır, öneksiz satır Yankı'nın sesidir.
 - Bildirim türleri: sistem, durum, analiz, seviye, unvan, gorev, uyari, yetenek, evrim, sinif, `yanki` (bozuk yazı).
 - Eğilimler: yakin_dovus, menzilli, buyu, gizlilik, koruma, cagirma, zanaat, karanlik. Fraksiyonlar: siginak, lonca, yukselenler, sessiz_ag, kadimler.
@@ -88,6 +95,7 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Kendini açan arayüz: Yetenekler ve Çanta sekmeleri `StatusView.tabs` içinde yoksa gizlidir.
 - Tam ekran kartlar `ui/system/Overlays.kt`: önce kutlama (seviye/evrim/sınıf), sonra bekleyen istem.
 - Tema: Sistem · Açık · Koyu · AMOLED (saf siyah).
+- Savaş varken Hikaye sekmesi `CombatScreen` gösterir; savaş başında Normal modda `checkpoint` kaydı yazılır.
 
 ## Test notları
 

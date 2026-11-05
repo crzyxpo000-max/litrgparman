@@ -1,6 +1,6 @@
 # İlerleme
 
-Şu an: Aşama 3 — Savaş (başlıyor)
+Şu an: Aşama 4 — Hikaye motoru (sırada)
 Son commit: 8c2d8b8 Aşama 2: sistem mekanikleri ve OP MC çekirdeği
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
@@ -33,22 +33,27 @@ Notlar:
 - Bağımsız inceleme yapıldı; bulguların hepsi düzeltildi (kaynaştırma/evrim çakışması, çift dokunuş, kayıt yarışı, sezgi türü, eski içerikle çökme, olay unvanları, ceza satırı, çoklu gün, doğrulayıcı boşlukları, içerik ve telif yakınlığı). DECISIONS #30–35.
 - Bilinen eksik: simya malzemesi kaynağı (Aşama 3/6), cihazda Seviye 25 evrimi denenmedi (testle kapsanıyor).
 
-## Aşama 3 — Savaş  (sırada)
+## Aşama 3 — Savaş  ✅ (2026-11-06)
 Plan:
-- [ ] `combat/` paketi: `CombatState` (WorldState içinde, kayda girer), `Combatant`, düşman tanımı (`content/enemies.json`), ortam etiketleri
-- [ ] Sahne etkisi `savas`: düşmanlar, ortam, `kazan` / `kaybet` / `kac` sahneleri
-- [ ] GDD formülleri: inisiyatif, isabet (%5–95), hasar (direnç, ±%10), kritik şans/çarpan, kademe farkı ×2 / ×0,5 — testle sabitlenir
-- [ ] Tur: ana + küçük eylem; Saldır, Yetenek, Savun, Analiz, Ortam, Konuş, Kaç; bekleme süreleri, MP/Dayanım
-- [ ] 8 durum etkisi (kanama, zehir, yanma, sersemleme, korku, kör, hızlanma, kalkan)
-- [ ] Düşman kalıpları (agresif, temkinli, sürü, kaçan), zaaflar, boss fazları %70/%40/%15 + faz anlatısı
-- [ ] Kaçan zeki düşman hafızası (güçlenmiş dönüş)
-- [ ] OP MC: **Gerçek savaş** (duruş: tam saldırı / ölçülü / savunmacı + Dayanım taahhüdü, düzyazı + isteğe bağlı sayılar, **infaz** bitirişi) ve **Ezme** (çok altta kalan düşman tek satırla)
-- [ ] OP MC: **uyanış tetikleyicisi** (`content/awakenings.json`: koşul → gizli yetenek/evrim yolu); **Kademe Kırma** (büyük XP, "Kademe Kıran" unvan zinciri, Benzersiz şansı); gerçek stat/seviye görünür
-- [ ] Ölüm: kademe başına İkinci Şans (bedel), Demir Mod → Hasat; haddini aşma kuralı
-- [ ] Savaş sayaçları: `hareketli_atis`, `korunan_muttefik`, `arkadan_vurus`, `ilk_vurus_kritik_oldurme`, `kapi_boss_solo_ust5`
-- [ ] ≥15 düşman + Öğretici bossu (iki dilde)
-- [ ] Arayüz: eylem ızgarası, duruş seçimi, hedef seçimi, uzun basınca ayrıntı, savaş günlüğü, otomatik tur, infaz seçimi
-- [ ] Testler: formüller, aynı tohum = aynı savaş, kazanma oranı simülasyonu (ör. Seviye 5 vs Kanal Faresi)
+- [x] `combat/` paketi: `CombatState` (WorldState içinde, kayda girer), `Combatant`, düşman tanımı (`content/enemies.json`), ortam etiketleri
+- [x] Sahne etkisi `savas`: düşmanlar, ortam, `kazan` / `kaybet` / `kac` sahneleri
+- [x] GDD formülleri: inisiyatif, isabet (%5–95), hasar (direnç, ±%10), kritik şans/çarpan, kademe farkı ×2 / ×0,5 — testle sabitlenir
+- [x] Tur: ana + küçük eylem; Saldır, Yetenek, Savun, Analiz, Ortam, Konuş, Kaç; bekleme süreleri, MP/Dayanım
+- [x] 8 durum etkisi (kanama, zehir, yanma, sersemleme, korku, kör, hızlanma, kalkan)
+- [x] Düşman kalıpları (agresif, temkinli, sürü, kaçan), zaaflar, boss fazları %70/%40/%15 + faz anlatısı
+- [x] Kaçan zeki düşman hafızası (güçlenmiş dönüş)
+- [x] OP MC: **Gerçek savaş** (duruş: tam saldırı / ölçülü / savunmacı + Dayanım taahhüdü, düzyazı + isteğe bağlı sayılar, **infaz** bitirişi) ve **Ezme** (çok altta kalan düşman tek satırla)
+- [x] OP MC: **uyanış tetikleyicisi** (`content/awakenings.json`: koşul → gizli yetenek/evrim yolu); **Kademe Kırma** (büyük XP, "Kademe Kıran" unvan zinciri, Benzersiz şansı); gerçek stat/seviye görünür
+- [x] Ölüm: kademe başına İkinci Şans (bedel), Demir Mod → Hasat; haddini aşma kuralı
+- [x] Savaş sayaçları: `hareketli_atis`, `korunan_muttefik`, `arkadan_vurus`, `ilk_vurus_kritik_oldurme`, `kapi_boss_solo_ust5`
+- [x] ≥15 düşman + Öğretici bossu (iki dilde)
+- [x] Arayüz: eylem ızgarası, duruş seçimi, hedef seçimi, uzun basınca ayrıntı, savaş günlüğü, otomatik tur, infaz seçimi
+- [x] Testler: formüller, aynı tohum = aynı savaş, kazanma oranı simülasyonu (ör. Seviye 5 vs Kanal Faresi)
+Notlar:
+- 102 motor testi, check.sh geçiyor. Simülasyon (İkinci Şans kapalı): Sv. 5 ↔ Kanal Faresi ≥ %95, Sv. 1 ↔ fare ≥ %75, Sv. 10 ↔ 3 Sis Tazısı %60+, Sv. 12 ↔ E kademe elit ≤ %20; Demir Mod'da sıradan savaştan kaçış ≥ %90.
+- Emülatörde EN ve TR: prolog faresi gerçek savaş, infaz, seviye kartı, ganimet, Çanta sekmesinin açılması.
+- Bağımsız inceleme bulguları düzeltildi (sersemleme süresi, kayıt noktası, yenilgi/İkinci Şans sırası, kaçan ≠ bağışlanan, bağlam değişkenleri, RNG akışı, otomatik tur iptali, bekleme süreleri, alan yeteneğinde efor, erişilemeyen zaaflar, EN artikel/dilbilgisi, TR zaman). DECISIONS #52–60.
+- Bilinen eksik: kişi başı inisiyatif sırası ve yoldaşlar (Aşama 5).
 
 ## Aşama 0 — Doğrulama  ✅ (2026-11-05)
 - [x] `:engine:test`, `:engine:validateContent`, `assembleDebug` çalışıyor (app ilk denemede derlendi, düzeltme gerekmedi)

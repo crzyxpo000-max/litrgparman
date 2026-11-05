@@ -178,6 +178,8 @@ object ContentValidator {
             checkText(d.hook, "$at.kanca")
             d.weaknessText?.let { checkText(it, "$at.zaaf_metin") }
             if (d.attacks.isEmpty()) problems += "$at: saldırı yok"
+            if (d.attacks.none { it.cooldown == 0 }) problems += "$at: en az bir beklemesiz saldırı olmalı"
+            d.weakness?.let { if (it !in CombatEngine.WEAKNESS_TAGS) problems += "$at: bilinmeyen zaaf '$it'" }
             (d.attacks + d.phases.mapNotNull { it.attack }).forEach { a ->
                 checkText(a.name, "$at.${a.id}.ad")
                 checkText(a.prose, "$at.${a.id}.metin")

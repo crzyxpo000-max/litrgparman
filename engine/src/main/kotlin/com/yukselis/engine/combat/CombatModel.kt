@@ -89,8 +89,11 @@ enum class Stance(val key: String, val damage: Double, val incoming: Double, val
     }
 }
 
-/** Bir durum etkisinin süren örneği. `power`: kalkanda kalan emme, zehir/yanmada tur hasarı. */
-data class StatusInstance(val effect: String, val turns: Int, val power: Int = 0)
+/**
+ * Bir durum etkisinin süren örneği. `power`: kalkanda kalan emme, zehir/yanmada tur hasarı.
+ * `fresh`: bu tur uygulandı; tur sonunda süresi düşmez (1 turluk sersemleme gerçekten bir turu alsın).
+ */
+data class StatusInstance(val effect: String, val turns: Int, val power: Int = 0, val fresh: Boolean = false)
 
 data class EnemyState(
     val uid: Int,
@@ -108,8 +111,10 @@ data class EnemyState(
     val guarding: Boolean = false,
     /** Faz saldırıları (boss). */
     val extraAttacks: List<String> = emptyList(),
-    /** Kaçtı ya da teslim oldu: savaştan çıktı ama ölmedi. */
+    /** Teslim oldu / bağışlandı / kaçtı: savaştan çıktı ama ölmedi. */
     val gone: Boolean = false,
+    /** Kendi isteğiyle kaçtı (XP ve zafer saymaz). */
+    val fled: Boolean = false,
 ) {
     val alive: Boolean get() = hp > 0 && !gone
     fun has(effect: String) = statuses.any { it.effect == effect }

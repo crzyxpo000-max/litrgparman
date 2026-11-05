@@ -64,17 +64,18 @@ fun CombatScreen(
     onCheckpoint: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var target by rememberSaveable { mutableStateOf(0) }
+    var chosen by rememberSaveable { mutableStateOf(0) }
     var detail by rememberSaveable { mutableStateOf<Int?>(null) }
     var picker by rememberSaveable { mutableStateOf(Picker.NONE) }
     var showNumbers by rememberSaveable { mutableStateOf(false) }
     val living = combat.enemies.filter { it.alive }
-    if (living.isNotEmpty() && living.none { it.uid == target }) target = living.first().uid
+    // Seçili hedef düştüyse ilk yaşayan düşman hedeflenir (bileşim sırasında durum yazılmaz).
+    val target = if (living.any { it.uid == chosen }) chosen else living.firstOrNull()?.uid ?: chosen
 
     Column(modifier = modifier.fillMaxSize().padding(horizontal = 12.dp, vertical = 8.dp)) {
         // Düşmanlar: dokun → hedef, uzun bas → ayrıntı (gerçek statlar)
         combat.enemies.forEach { e ->
-            EnemyCard(e, selected = e.uid == target, onSelect = { if (e.alive) target = e.uid }, onDetail = { detail = e.uid })
+            EnemyCard(e, selected = e.uid == target, onSelect = { if (e.alive) chosen = e.uid }, onDetail = { detail = e.uid })
             Spacer(Modifier.height(6.dp))
         }
 

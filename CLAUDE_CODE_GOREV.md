@@ -137,23 +137,23 @@ Her aşamanın sonunda `scripts/check.sh` geçer, `CLAUDE.md` ile `PROGRESS.md` 
   - [x] Denge: her önemli seçim en az bir ahlak eksenini oynatır (içerik kuralı; Aşama 4'te doğrulayıcı uyarısı).
 
 ### Aşama 3 — Savaş
-- [ ] Savaş durumu `WorldState` içinde tutulur; savaşın ortasında kaydedip yükleyince aynı yerden devam edilir.
-- [ ] Sahne etkisi `savas`: düşman listesi, ortam etiketleri, kazanınca / kaybedince / kaçınca gidilecek sahneler.
-- [ ] GDD'deki inisiyatif, isabet, hasar ve kritik formülleri ile kademe farkı çarpanı.
-- [ ] Eylemler: Saldır, Yetenek, Savun, Analiz, Ortam, Konuş, Kaç; her turda bir ana + bir küçük eylem.
-- [ ] GDD'deki 8 durum etkisi.
-- [ ] Düşman davranış kalıpları (agresif, temkinli, sürü, kaçan), zaaflar ve boss fazları (%70 / %40 / %15).
-- [ ] Kaçan zeki düşmanlar hafızaya girer ve güçlenmiş olarak geri dönebilir.
-- [ ] Ölüm: kademe başına bir İkinci Şans; Demir Mod'da ölüm Hasat sonuna bağlanır.
-- [ ] `content/enemies.*` dosyasında en az 15 düşman ve 1 boss (Perde 1 için).
-- [ ] **Arayüz:** eylem ızgarası, hedef seçimi, uzun basınca ayrıntı kartı, savaş günlüğü, otomatik tur.
-- [ ] Testler: formüller; aynı tohumla aynı savaş; "Seviye 5 oyuncu ile Kanal Faresi" gibi örnek eşleşmelerde kazanma oranı beklenen aralıkta (simülasyonla).
-- [ ] **OP MC:**
-  - [ ] İki savaş modu: **Gerçek savaş** (denkler ve bosslar; her turda duruş: tam saldırı / ölçülü / savunmacı + Dayanım taahhüdü; düzyazı anlatım, sayılar isteğe bağlı; oyuncunun seçtiği **infaz** bitirişi) ve **Ezme** (çok altta kalan düşmanlar tek satırla otomatik çözülür).
-  - [ ] Yeniden kullanılabilir **uyanış tetikleyicisi**: koşullar (ör. %10 altı canla kazanmak, birini büyük bedelle korumak) gizli yetenek ya da evrim yolu açar; içerik dosyasında tanımlanır.
-  - [ ] **Kademe Kırma:** bir üst kademedeki düşmanı yenmek büyük XP, "Kademe Kıran" unvan zinciri ve Benzersiz yetenek şansı verir; kademe farkı hasar kuralı dünya için korunur.
-  - [ ] Düşmanların gerçek statları ve seviyesi oyuncuya görünür (Analiz gizli zaafı açar).
-  - [ ] Demir Mod ölümleri haddini aşmaktan gelir: rastgele savaşlar Ezme ya da kaçışla ölümsüz çözülebilir; simülasyon testi bunu doğrular.
+- [x] Savaş durumu `WorldState` içinde tutulur; savaşın ortasında kaydedip yükleyince aynı yerden devam edilir.
+- [x] Sahne etkisi `savas`: düşman listesi, ortam etiketleri, kazanınca / kaybedince / kaçınca gidilecek sahneler.
+- [x] GDD'deki inisiyatif, isabet, hasar ve kritik formülleri ile kademe farkı çarpanı.
+- [x] Eylemler: Saldır, Yetenek, Savun, Analiz, Ortam, Konuş, Kaç; her turda bir ana + bir küçük eylem.
+- [x] GDD'deki 8 durum etkisi.
+- [x] Düşman davranış kalıpları (agresif, temkinli, sürü, kaçan), zaaflar ve boss fazları (%70 / %40 / %15).
+- [x] Kaçan zeki düşmanlar hafızaya girer ve güçlenmiş olarak geri dönebilir.
+- [x] Ölüm: kademe başına bir İkinci Şans; Demir Mod'da ölüm Hasat sonuna bağlanır.
+- [x] `content/enemies.*` dosyasında en az 15 düşman ve 1 boss (Perde 1 için).
+- [x] **Arayüz:** eylem ızgarası, hedef seçimi, uzun basınca ayrıntı kartı, savaş günlüğü, otomatik tur.
+- [x] Testler: formüller; aynı tohumla aynı savaş; "Seviye 5 oyuncu ile Kanal Faresi" gibi örnek eşleşmelerde kazanma oranı beklenen aralıkta (simülasyonla).
+- [x] **OP MC:**
+  - [x] İki savaş modu: **Gerçek savaş** (denkler ve bosslar; her turda duruş: tam saldırı / ölçülü / savunmacı + Dayanım taahhüdü; düzyazı anlatım, sayılar isteğe bağlı; oyuncunun seçtiği **infaz** bitirişi) ve **Ezme** (çok altta kalan düşmanlar tek satırla otomatik çözülür).
+  - [x] Yeniden kullanılabilir **uyanış tetikleyicisi**: koşullar (ör. %10 altı canla kazanmak, birini büyük bedelle korumak) gizli yetenek ya da evrim yolu açar; içerik dosyasında tanımlanır.
+  - [x] **Kademe Kırma:** bir üst kademedeki düşmanı yenmek büyük XP, "Kademe Kıran" unvan zinciri ve Benzersiz yetenek şansı verir; kademe farkı hasar kuralı dünya için korunur.
+  - [x] Düşmanların gerçek statları ve seviyesi oyuncuya görünür (Analiz gizli zaafı açar).
+  - [x] Demir Mod ölümleri haddini aşmaktan gelir: rastgele savaşlar Ezme ya da kaçışla ölümsüz çözülebilir; simülasyon testi bunu doğrular.
 
 ### Aşama 4 — Hikaye motoru
 - [ ] İçerik biçimi kararı: GDD'ye uygun olarak **YAML'a (kaml) geç**. Mevcut JSON içerik dönüştürülür, anahtarlar aynı kalır ve JSON okuyucu kaldırılır. Bu, DECISIONS #1'i kapatır.

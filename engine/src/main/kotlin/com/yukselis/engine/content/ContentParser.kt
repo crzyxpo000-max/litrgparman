@@ -389,7 +389,9 @@ object ContentParser {
             grade = o.string("kademe")?.let { Grade.fromKey(it) ?: throw ContentFormatException("düşman $id: bilinmeyen kademe") } ?: Grade.forLevel(level),
             maxHp = o.int("can") ?: throw ContentFormatException("düşman $id: 'can' eksik"),
             stats = stats,
-            behavior = Behavior.fromKey(o.string("davranis")),
+            behavior = o.string("davranis")?.let { k ->
+                Behavior.entries.firstOrNull { it.key == k } ?: throw ContentFormatException("düşman $id: bilinmeyen davranış '$k'")
+            } ?: Behavior.AGGRESSIVE,
             intelligent = o.bool("zeki"),
             weakness = o.string("zaaf"),
             weaknessText = o["zaaf_metin"]?.let { ltext(it, "$id.zaaf_metin") },

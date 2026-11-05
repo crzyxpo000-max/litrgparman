@@ -232,8 +232,8 @@
     "en": "Combat: {enemies}"
   },
   "savas_hatirliyor": {
-    "tr": "{enemy} seni hatırlıyor. Bu kez hazırlıklı gelmiş.",
-    "en": "{enemy} remembers you. It came prepared this time."
+    "tr": "{enemy} seni hatırlıyor. Bu kez hazırlıklı.",
+    "en": "{enemy} remembers you, and came ready this time."
   },
   "savas_inisiyatif_kayip": {
     "tr": "Senden hızlılar. İlk darbe onların.",
@@ -312,16 +312,16 @@
     "en": "Your words go nowhere. {enemy} keeps coming."
   },
   "savas_konus_basarili": {
-    "tr": "{enemy} silahını indiriyor ve geri çekiliyor.",
-    "en": "{enemy} lowers its guard and backs off."
+    "tr": "{enemy} geri çekiliyor ve bir daha saldırmıyor.",
+    "en": "{enemy} backs off and doesn't come at you again."
   },
   "savas_tehdit": {
-    "tr": "Gözlerine bakıyorsun. {enemy} kaçıyor.",
-    "en": "You look it in the eye. {enemy} runs."
+    "tr": "Gözlerinin içine bakıyorsun. {enemy} dayanamayıp kaçıyor.",
+    "en": "You lock eyes. {enemy} breaks and runs."
   },
   "savas_kac_boss": {
-    "tr": "Kaçacak yer yok. Kapı kilitli.",
-    "en": "There's nowhere to run. The gate is sealed."
+    "tr": "Kaçış yolu yok. Buradan çıkmanın tek yolu kazanmak.",
+    "en": "There's no way out. The only exit is through it."
   },
   "savas_kac_basarili": {
     "tr": "Kaçtın. Gurur sonra iyileşir.",
@@ -332,12 +332,12 @@
     "en": "They cut you off. No escape."
   },
   "savas_esya": {
-    "tr": "{item} kullandın.",
+    "tr": "{item} kullanıyorsun.",
     "en": "You use {item}."
   },
   "savas_esya_firlat": {
-    "tr": "{item} fırlattın; {target} alevler içinde.",
-    "en": "You throw {item}. {target} goes up in flames."
+    "tr": "{item} fırlatıyorsun; {target} tam isabet alıyor.",
+    "en": "You hurl {item}. It catches {target} square."
   },
   "savas_infaz_teklif": {
     "tr": "{enemy} yerde. İşi bitir.",
@@ -356,8 +356,8 @@
     "en": "{target}: {effect}"
   },
   "savas_durum_sana": {
-    "tr": "Sana işledi: {effect}",
-    "en": "You've been hit with {effect}"
+    "tr": "[Durum: {effect}]",
+    "en": "[Status: {effect}]"
   },
   "savas_durum_hasar_sana": {
     "tr": "Yaraların yanıyor.",
@@ -533,6 +533,10 @@
   },
   "infaz_bagisla_metin": {
     "tr": "Silahını indiriyorsun. {enemy} sürünerek uzaklaşıyor.",
-    "en": "You lower your weapon. {enemy} drags itself away."
+    "en": "You lower your weapon. {enemy} crawls away."
+  },
+  "savas_hepsi_kacti": {
+    "tr": "Hepsi kaçtı. Kazanmadın ama kaybetmedin de.",
+    "en": "They all ran. Not a win, but not a loss either."
   }
 }

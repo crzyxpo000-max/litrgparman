@@ -239,7 +239,8 @@ class CombatTest {
     private fun winRate(level: Int, enemies: List<String>, runs: Int = 200, stat: Int = Stats.BASE_VALUE): Double {
         var wins = 0
         repeat(runs) { i ->
-            val s = auto(start(player(level, seed = 1000L + i, stat = stat), CombatSpec(enemies, win = "ilk_gece", flee = "ilk_gece")))
+            val p = player(level, seed = 1000L + i, stat = stat).copy(secondChances = Grade.entries.toSet())
+            val s = auto(start(p, CombatSpec(enemies, win = "ilk_gece", flee = "ilk_gece")))
             if (s.combat == null && !s.dead && s.sceneId == "ilk_gece" && s.variable(CombatEngine.CTX_WON) == 1) wins++
         }
         return wins.toDouble() / runs
@@ -274,11 +275,69 @@ class CombatTest {
         // Sıradan düşmanlardan kaçmak çoğunlukla başarılı olur (boss hariç).
         var escaped = 0
         repeat(100) { i ->
-            var s = start(player(3, seed = 500L + i), spec("sis_tazisi", "sis_tazisi"))
+            var s = start(player(3, seed = 500L + i, mode = GameMode.IRONMAN), spec("sis_tazisi", "sis_tazisi"))
             var n = 0
             while (s.combat != null && !s.dead && n++ < 10) s = engine.combatAction(s, CombatAction.Flee, lang).state
-            if (s.combat == null && !s.dead) escaped++
+            if (s.combat == null && !s.ended) escaped++
         }
         assertTrue("Kaçış $escaped/100", escaped >= 90)
+    }
+
+    @Test
+    fun `dusmanin uyguladigi bir turluk sersemleme oyuncunun bir turunu alir`() {
+        var s = start(player(4, seed = 21), spec("sis_tazisi"))
+        val hp = s.combat!!.enemies.first().hp
+        val round = s.combat!!.round
+        s = s.copy(combat = s.combat!!.copy(playerStatuses = listOf(com.yukselis.engine.combat.StatusInstance(StatusEffects.STUN, 1, fresh = true))))
+        s = engine.combatAction(s, CombatAction.Attack(0), lang).state
+        assertEquals(hp, s.combat!!.enemies.first().hp)
+        assertTrue(s.combat!!.round > round)
+        assertFalse(s.combat!!.playerHas(StatusEffects.STUN))
+    }
+
+    @Test
+    fun `yazili yenilgi sahnesi ikinci sansi harcamaz`() {
+        val s = auto(start(player(1, seed = 8, stat = 3), spec("kemik_tacli_geyik", lose = "demo_son")))
+        assertEquals("demo_son", s.sceneId)
+        assertTrue(s.secondChances.isEmpty())
+    }
+
+    @Test
+    fun `hepsi kacarsa zafer sayilmaz`() {
+        var s = start(player(5, seed = 22), spec("sis_tazisi"))
+        s = s.copy(combat = s.combat!!.copy(enemies = s.combat!!.enemies.map { it.copy(gone = true, fled = true) }))
+        s = engine.combatAction(s, CombatAction.Defend, lang).state
+        assertNull(s.combat)
+        assertEquals(0, s.variable(CombatEngine.CTX_WON))
+    }
+
+    @Test
+    fun `analiz edilen goz zaafi her vurusta hedeflenir`() {
+        var s = start(player(2, seed = 23), spec("kanal_faresi"))
+        s = s.copy(combat = s.combat!!.copy(enemies = s.combat!!.enemies.map { it.copy(analyzed = true) }))
+        var weak = false
+        var n = 0
+        while (!weak && s.combat != null && s.combat!!.pendingExecution == null && n++ < 30) {
+            s = engine.combatAction(s, CombatAction.Attack(0), lang).state
+            weak = s.combat?.log?.any { it.numbers?.en?.contains("WEAK SPOT") == true } == true
+        }
+        assertTrue(weak)
+    }
+
+    @Test
+    fun `ingilizce gunlukte dusman adi artikel ve buyuk harfle`() {
+        var s = start(player(3, seed = 24), spec("kanal_faresi"))
+        s = engine.combatAction(s, CombatAction.Attack(0), lang).state
+        val en = s.combat!!.log.map { it.prose.en }
+        assertTrue(en.joinToString("|"), en.any { it.contains("The Sewer Rat") || it.contains("the Sewer Rat") })
+        assertFalse(en.any { it.startsWith("the ") })
+    }
+
+    @Test
+    fun `yeni savas onceki savasin baglam degiskenlerini sifirlar`() {
+        val s = player(5).copy(vars = mapOf(CombatEngine.CTX_WON to 1, CombatEngine.CTX_LOWEST_HP to 3))
+        val started = start(s, spec("sis_tazisi"))
+        assertEquals(0, started.variable(CombatEngine.CTX_WON))
+        assertEquals(0, started.variable(CombatEngine.CTX_LOWEST_HP))
     }
 }

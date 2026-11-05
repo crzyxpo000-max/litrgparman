@@ -138,13 +138,13 @@ object SaveCodec {
         (e as? JsonObject)?.let { LText(it.string("tr") ?: "", it.string("en") ?: "") }
 
     private fun encodeStatuses(list: List<StatusInstance>) = JsonArray(
-        list.map { st -> buildJsonObject { put("e", st.effect); put("t", st.turns); put("p", st.power) } },
+        list.map { st -> buildJsonObject { put("e", st.effect); put("t", st.turns); put("p", st.power); put("f", st.fresh) } },
     )
 
     private fun decodeStatuses(e: JsonElement?): List<StatusInstance> =
         (e as? JsonArray)?.mapNotNull { x ->
             val o = x.jsonObject
-            o.string("e")?.let { StatusInstance(it, o.int("t") ?: 1, o.int("p") ?: 0) }
+            o.string("e")?.let { StatusInstance(it, o.int("t") ?: 1, o.int("p") ?: 0, o.bool("f")) }
         } ?: emptyList()
 
     private fun encodeCombat(c: CombatState) = buildJsonObject {
@@ -163,7 +163,7 @@ object SaveCodec {
                     put("st", encodeStatuses(e.statuses))
                     put("phase", e.phase)
                     putIntMap("cd", e.cooldowns)
-                    put("an", e.analyzed); put("guard", e.guarding); put("gone", e.gone)
+                    put("an", e.analyzed); put("guard", e.guarding); put("gone", e.gone); put("fled", e.fled)
                     putJsonArray("extra") { e.extraAttacks.forEach { add(it) } }
                 }
             }
@@ -183,7 +183,7 @@ object SaveCodec {
     }
 
     private fun decodeCombat(o: JsonObject): CombatState {
-        val spec = o["spec"]!!.jsonObject
+        val spec = o["spec"] as? JsonObject ?: throw SaveFormatException("Savaşta 'spec' yok")
         return CombatState(
             spec = CombatSpec(
                 enemies = spec.strings("enemies"),
@@ -209,6 +209,7 @@ object SaveCodec {
                     guarding = e.bool("guard"),
                     extraAttacks = e.strings("extra"),
                     gone = e.bool("gone"),
+                    fled = e.bool("fled"),
                 )
             } ?: emptyList(),
             round = o.int("round") ?: 1,

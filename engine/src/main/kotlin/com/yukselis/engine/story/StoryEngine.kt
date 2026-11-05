@@ -91,8 +91,8 @@ class StoryEngine(val content: Content) {
             if (d.type != ItemType.CONSUMABLE || d.use == null) return@mapNotNull null
             ItemView(id, d.name[lang], d.description[lang], n, d.rarity, true)
         }
-        val execution = c.pendingExecution?.let { uid ->
-            val d = content.enemies.getValue(c.enemy(uid)!!.id)
+        val execution = c.pendingExecution?.let { uid -> c.enemy(uid) }?.let { pending ->
+            val d = content.enemies.getValue(pending.id)
             ExecutionView(
                 enemyName = d.name[lang],
                 options = CombatEngine.EXECUTIONS.map { id ->
@@ -146,7 +146,10 @@ class StoryEngine(val content: Content) {
             }
         }
         var s = state.copy(prompts = valid)
-        if (s.combat?.enemies?.any { it.id !in content.enemies } == true) s = s.copy(combat = null)
+        s.combat?.let { c ->
+            val scenesOk = listOfNotNull(c.spec.win, c.spec.lose, c.spec.flee).all { it in content.scenes }
+            if (!scenesOk || c.enemies.any { it.id !in content.enemies }) s = s.copy(combat = null)
+        }
         if (s.daily == null || s.daily?.templateId !in content.dailyTemplates) s = effects.newDaily(s).state
         if (s.sceneId !in content.scenes) s = s.copy(sceneId = content.startScene)
         return s
