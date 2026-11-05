@@ -41,7 +41,6 @@ import com.yukselis.engine.system.SkillType
 import com.yukselis.engine.system.Stat
 import com.yukselis.engine.system.Stats
 import com.yukselis.engine.system.StatusApplication
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
@@ -58,19 +57,19 @@ import kotlinx.serialization.json.longOrNull
 class ContentFormatException(message: String) : RuntimeException(message)
 
 /**
- * content/ altındaki JSON dosyalarını okur. Anahtarlar Türkçe ASCII'dir (GDD: Teknik mimari).
+ * content/ altındaki YAML dosyalarını okur. Anahtarlar Türkçe ASCII'dir (GDD: Teknik mimari).
  * Hatalı içerik açık bir mesajla reddedilir; sessizce yutulmaz.
  */
 object ContentParser {
-    const val SYSTEM = "system.json"
-    const val CLASSES = "classes.json"
-    const val SKILLS = "skills.json"
-    const val ITEMS = "items.json"
-    const val PROFESSIONS = "professions.json"
-    const val ESSENCES = "essences.json"
-    const val DAILY = "daily.json"
-    const val ENEMIES = "enemies.json"
-    const val AWAKENINGS = "awakenings.json"
+    const val SYSTEM = "system.yaml"
+    const val CLASSES = "classes.yaml"
+    const val SKILLS = "skills.yaml"
+    const val ITEMS = "items.yaml"
+    const val PROFESSIONS = "professions.yaml"
+    const val ESSENCES = "essences.yaml"
+    const val DAILY = "daily.yaml"
+    const val ENEMIES = "enemies.yaml"
+    const val AWAKENINGS = "awakenings.yaml"
 
     data class StoryFile(val start: String?, val scenes: List<Scene>)
 
@@ -110,20 +109,16 @@ object ContentParser {
         )
     }
 
-    private fun parse(text: String, name: String): JsonObject = try {
-        Json.parseToJsonElement(text).jsonObject
-    } catch (e: Exception) {
-        throw ContentFormatException("$name okunamadı: ${e.message}")
-    }
+    private fun parse(text: String, name: String): JsonObject = YamlTree.parseObject(text, name)
 
     fun parseStory(text: String): StoryFile {
-        val root = Json.parseToJsonElement(text).jsonObject
+        val root = YamlTree.parseObject(text, "hikaye")
         val scenes = root.array("sahneler").map { parseScene(it.jsonObject) }
         return StoryFile(root.string("baslangic"), scenes)
     }
 
     fun parseNames(text: String): List<NameEntry> {
-        val root = Json.parseToJsonElement(text).jsonObject
+        val root = YamlTree.parseObject(text, "names.yaml")
         return NameEntry.Kind.entries.flatMap { kind ->
             val group = root[kind.tokenKey]?.jsonObject ?: JsonObject(emptyMap())
             group.map { (id, value) ->
@@ -135,7 +130,7 @@ object ContentParser {
     }
 
     fun parseTitles(text: String): List<TitleDef> {
-        val root = Json.parseToJsonElement(text).jsonObject
+        val root = YamlTree.parseObject(text, "titles.yaml")
         return root.map { (id, value) ->
             val o = value.jsonObject
             TitleDef(

@@ -5,8 +5,8 @@ import java.io.File
 
 /**
  * İçeriğin nereden okunduğunu soyutlar: testlerde ve doğrulayıcıda klasör, Android'de assets.
- * Yerleşim: names.json, titles.json, system.json, classes.json, skills.json, items.json,
- * professions.json, essences.json, daily.json, story/<dosya>.json
+ * Yerleşim: names.yaml, titles.yaml, system.yaml, classes.yaml, skills.yaml, items.yaml,
+ * professions.yaml, essences.yaml, daily.yaml, enemies.yaml, awakenings.yaml, story/<dosya>.yaml
  */
 interface ContentSource {
     fun read(path: String): String
@@ -23,8 +23,8 @@ class DirectoryContentSource(private val root: File) : ContentSource {
 }
 
 object ContentLoader {
-    const val NAMES = "names.json"
-    const val TITLES = "titles.json"
+    const val NAMES = "names.yaml"
+    const val TITLES = "titles.yaml"
     const val STORY_DIR = "story"
 
     /** Zorunlu olmayan sistem dosyaları; yoksa ilgili mekanik boş kalır. */
@@ -35,7 +35,7 @@ object ContentLoader {
 
     fun load(source: ContentSource): Content {
         val storyFiles = source.list(STORY_DIR)
-            .filter { it.endsWith(".json") }
+            .filter { it.endsWith(".yaml") }
             .sorted()
             .map { source.read("$STORY_DIR/$it") }
         val files = SYSTEM_FILES.mapNotNull { name -> source.readOrNull(name)?.let { name to it } }.toMap()

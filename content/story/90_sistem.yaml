@@ -1,0 +1,53 @@
+sahneler:
+  - id: "ceza_bolgesi"
+    yer: "ceza_bolgesi"
+    paragraflar:
+      - { tr: "Bir göz kırpımında kendi sokağındasın; ama gece, ıssız ve donmuş. Her saat, Günlük Görevi bıraktığın dakikada durmuş.", en: "One blink and you're standing on your own street, except it's night, empty, and frozen. Every clock stopped at the minute you skipped your Daily Quest." }
+      - { tr: "Pencerelerde komşularının yüzleri var, ama gülümsemeleri fazla geniş. Kapılar birer birer açılıyor.", en: "Your neighbors' faces are in the windows, but their smiles are too wide. The doors start opening, one by one." }
+    bildirimler:
+      - tur: "uyari"
+        baslik: { tr: "Ceza Bölgesi", en: "Penalty Zone" }
+        satirlar:
+          - { tr: "Günlük Görev ihmal edildi. Saatler yeniden çalışana kadar dayan.", en: "Daily Quest neglected. Hold out until the clocks start again." }
+          - { tr: "Disiplin bir seçenek değildir.", en: "Discipline is not optional." }
+    secenekler:
+      - id: "dayan"
+        etiket: { tr: "Sırtını bir duvara ver ve dayan", en: "Put your back to a wall and hold the line" }
+        etkiler:
+          - can: -30
+          - stat: { end: 1 }
+          - egilim: { koruma: 1 }
+          - xp: 20
+          - ahlak: { duzen: 2 }
+        sonraki: "@geri"
+      - id: "saldir"
+        etiket: { tr: "Kapıdan ilk çıkana vur", en: "Hit the first thing out the door" }
+        etkiler:
+          - can: -45
+          - stat: { str: 1 }
+          - egilim: { yakin_dovus: 1 }
+          - xp: 35
+          - ahlak: { merhamet: -2 }
+        sonraki: "@geri"
+      - id: "izle"
+        etiket: { tr: "Kıpırdama, saatleri izle", en: "Stay still and watch the clocks" }
+        gerekli:
+          stat: { per: 8 }
+        etkiler:
+          - can: -15
+          - stat: { per: 1 }
+          - egilim: { gizlilik: 1 }
+          - xp: 25
+          - ahlak: { insanlik: -2 }
+        sonraki: "@geri"
+  - id: "son_hasat"
+    yer: "hasat"
+    son: true
+    paragraflar:
+      - { tr: "Işık söndüğünde Sistem son bir pencere açıyor; bu kez yalnızca senin için değil, herkes için.", en: "When the light goes out, the System opens one last window. Not just for you this time. For everyone." }
+      - { tr: "Bir anomali kayboldu. Tür: İnsan. Değerlendirme: yetersiz. Hasat başlıyor.", en: "Anomaly lost. Species: Human. Assessment: insufficient. The Harvest begins." }
+    bildirimler:
+      - tur: "uyari"
+        baslik: { tr: "SON: Hasat", en: "ENDING: The Harvest" }
+        satirlar:
+          - { tr: "Demir Mod: ölüm kalıcıdır.", en: "Ironman Mode: death is permanent." }

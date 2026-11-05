@@ -1,0 +1,415 @@
+siniflar:
+  yakin_muharip:
+    ad: { tr: "Yakın Muharip", en: "Brawler" }
+    aciklama: { tr: "Sorunları kol mesafesinde çözmeyi tercih eden birey. Sistem bu yaklaşımı ilkel ama tutarlı buluyor.", en: "An individual who prefers to solve problems at arm's length. The System finds this primitive but consistent." }
+    tur: "temel"
+    egilim: "yakin_dovus"
+    artis: { str: 2, end: 1, agi: 1 }
+    yetenek: "agir_darbe"
+  atici:
+    ad: { tr: "Atıcı", en: "Marksman" }
+    aciklama: { tr: "Tehdidi yaklaşmadan bitirmeyi seçen birey. Mesafe, hayatta kalmanın en ucuz biçimidir.", en: "An individual who ends threats before they get close. Distance is the cheapest form of survival." }
+    tur: "temel"
+    egilim: "menzilli"
+    artis: { per: 2, agi: 1 }
+    yetenek: "alev_oku"
+  buyu_ciragi:
+    ad: { tr: "Büyü Çırağı", en: "Arcane Apprentice" }
+    aciklama: { tr: "Manayı ilk kez bilinçli olarak büken birey. Henüz çırak; Sistem sabırlı değildir.", en: "An individual who has bent mana on purpose for the first time. Still an apprentice. The System is not a patient teacher." }
+    tur: "temel"
+    egilim: "buyu"
+    artis: { int: 2, wis: 1 }
+    yetenek: "enerji_mermisi"
+  izsiz:
+    ad: { tr: "İzsiz", en: "Traceless" }
+    aciklama: { tr: "Görülmeden gelip görülmeden giden birey. Kayıtlarda bile zor bulunur.", en: "An individual who arrives unseen and leaves the same way. Hard to find, even in the logs." }
+    tur: "temel"
+    egilim: "gizlilik"
+    artis: { agi: 2, per: 1 }
+    yetenek: "golge_adimi"
+  siper:
+    ad: { tr: "Siper", en: "Bulwark" }
+    aciklama: { tr: "Başkalarıyla tehlike arasına kendini koyan birey. Sistem bunu verimsiz ama takdire değer buluyor.", en: "An individual who puts themselves between others and danger. The System calls it inefficient. Admirable, but inefficient." }
+    tur: "temel"
+    egilim: "koruma"
+    artis: { end: 2, str: 1, wil: 1 }
+    yetenek: "kalkan_duvari"
+  baglayici:
+    ad: { tr: "Bağlayıcı", en: "Binder" }
+    aciklama: { tr: "Başka varlıklarla sözleşme kurup onları yanında savaştıran birey. Sözleşmenin ince yazıları sana ait değil.", en: "An individual who strikes contracts with other beings and fights beside them. You didn't write the fine print." }
+    tur: "temel"
+    egilim: "cagirma"
+    artis: { wis: 2, cha: 1, wil: 1 }
+    yetenek: "ruh_pencesi"
+  tamirci:
+    ad: { tr: "Tamirci", en: "Tinker" }
+    aciklama: { tr: "Kıyamet sonrası hurdada fırsat gören birey. Kırık olan her şey bir parça, her parça bir çözüm.", en: "An individual who looks at post-apocalypse scrap and sees opportunity. Everything broken is a part. Every part is a solution." }
+    tur: "temel"
+    egilim: "zanaat"
+    artis: { int: 2, per: 1, agi: 1 }
+    yetenek: "dogaclama_tuzak"
+  kan_pazarlikcisi:
+    ad: { tr: "Kan Pazarlıkçısı", en: "Bloodbroker" }
+    aciklama: { tr: "Gücün bir bedeli olduğunu bilen ve ödemeye razı olan birey. Sistem fiyatları sabit tutmayı vaat etmez.", en: "An individual who knows power has a price and is willing to pay it. The System makes no promises about price stability." }
+    tur: "temel"
+    egilim: "karanlik"
+    artis: { wil: 2, int: 1, end: 1 }
+    yetenek: "kan_bedeli"
+  kapi_yiyen:
+    ad: { tr: "Kapı Yiyen", en: "Gate Eater" }
+    aciklama: { tr: "Kendisinden güçlü bir kapı bossunu yalnız başına devirip artığını özümseyen birey. Sistem bu sonucu öngörmemişti.", en: "An individual who took down a stronger Gate boss alone and absorbed what was left. The System did not forecast this outcome." }
+    tur: "gizli"
+    kosul:
+      degisken_min: { kapi_boss_solo_ust5: 1 }
+    artis: { str: 2, end: 1, wil: 1 }
+    yetenek: "kapi_agzi"
+    egilimler: ["yakin_dovus", "karanlik"]
+  sistem_hatasi:
+    ad: { tr: "Sistem Hatası", en: "System Glitch" }
+    aciklama: { tr: "Bu sınıf tanımlı değil. Bu sınıf tanımlı değil. Lütfen bu mesajı yok say.", en: "This class is not defined. This class is not defined. Please disregard this message." }
+    tur: "gizli"
+    kosul:
+      degisken_min: { glitch_bulundu: 3 }
+      bayrak: "yanki_ile_konusuldu"
+    artis: { int: 1, per: 1, wis: 1, wil: 1 }
+    yetenek: "bozuk_paket"
+    egilimler: ["buyu", "zanaat"]
+  yas_tutan:
+    ad: { tr: "Yas Tutan", en: "The Mourner" }
+    aciklama: { tr: "Bir kaybın ardından üç gün boyunca kılıcını kınında tutan birey. Sistem yası da bir eylem olarak kaydeder.", en: "An individual who kept their blade sheathed for three days after a loss. The System logs grief as an action, too." }
+    tur: "gizli"
+    kosul: { bayrak: "yas_tutuldu" }
+    artis: { wil: 2, wis: 1, cha: 1 }
+    yetenek: "agit"
+    egilimler: ["koruma", "cagirma"]
+  avcinin_gozu:
+    ad: { tr: "Avcı'nın Gözü", en: "Hunter's Eye" }
+    aciklama: { tr: "Elli hedefi tek kritik vuruşla indiren birey. Avcı ikinci şans tanımaz; sana da tanınmaz.", en: "An individual who dropped fifty targets with a single critical strike each. A hunter gives no second chances. Neither will you get one." }
+    tur: "gizli"
+    kosul:
+      degisken_min: { ilk_vurus_kritik_oldurme: 50 }
+    artis: { per: 2, agi: 1, str: 1 }
+    yetenek: "olumcul_nokta"
+    egilimler: ["menzilli", "gizlilik"]
+  merhamet_tasiyici:
+    ad: { tr: "Merhamet Taşıyıcısı", en: "Mercy Bearer" }
+    aciklama: { tr: "Kıyamette bile yabancılara el uzatan birey. Sistem bu davranışı istatistiksel olarak nadir buluyor.", en: "An individual who keeps reaching for strangers, apocalypse or not. The System flags the behavior as statistically rare." }
+    tur: "nadir"
+    kosul:
+      ahlak_min: { merhamet: 30 }
+    artis: { wis: 2, cha: 1, end: 1 }
+    yetenek: "sifa_dokunusu"
+  cok_yonlu:
+    ad: { tr: "Çok Yönlü", en: "Generalist" }
+    aciklama: { tr: "Hiçbir alanı ihmal etmeyen birey. Uzmanlık yerine denge seçildi; Sistem itirazını kayda geçirdi.", en: "An individual who neglects nothing. Balance was chosen over specialization. The System has noted its objection." }
+    tur: "nadir"
+    kosul:
+      stat:
+        str: 8
+        agi: 8
+        end: 8
+        int: 8
+        wis: 8
+        per: 8
+        wil: 8
+        cha: 8
+    artis: { str: 1, agi: 1, int: 1, per: 1 }
+    yetenek: "uyarlanma"
+  bos_kalp:
+    ad: { tr: "Boş Kalp", en: "Hollow Heart" }
+    aciklama: { tr: "İnsanlığını parça parça takas etmiş birey. Kalan boşluk, Sistem'e göre değerlendirilebilir bir alan.", en: "An individual who traded their humanity away piece by piece. The System considers the empty space usable capacity." }
+    tur: "nadir"
+    kosul:
+      ahlak_max: { insanlik: -20 }
+    artis: { wil: 2, int: 1, agi: 1 }
+    yetenek: "ruh_emme"
+  kirici:
+    ad: { tr: "Kırıcı", en: "Breaker" }
+    aciklama: { tr: "Yakın Muharip, kaba gücü sanata dönüştürdü. Önüne çıkan her şey iki parçaya ayrılmayı bekler.", en: "The Combatant has turned brute force into an art. Everything in your path is just waiting to be in two pieces." }
+    tur: "evrim"
+    onceki: "yakin_muharip"
+    kademe: "E"
+    artis: { str: 3, end: 1, agi: 1 }
+    yetenek: "kemik_kiran"
+    bonus: { str: 3, end: 2 }
+  kilic_dansci:
+    ad: { tr: "Kılıç Dansçısı", en: "Bladedancer" }
+    aciklama: { tr: "Vuruşlar akışa, akış ritme dönüştü. Sen dans ediyorsun; düşmanların sadece kanıyor.", en: "Strikes have become flow, flow has become rhythm. You dance. Your enemies just bleed." }
+    tur: "evrim"
+    onceki: "yakin_muharip"
+    kademe: "E"
+    artis: { str: 2, agi: 2, per: 1 }
+    yetenek: "celik_kasirga"
+    bonus: { agi: 3, str: 2 }
+  keskin_nisanci:
+    ad: { tr: "Keskin Nişancı", en: "Sharpshooter" }
+    aciklama: { tr: "Bir atış, bir hedef. Fazlası israf sayılır.", en: "One shot, one target. Anything more is waste." }
+    tur: "evrim"
+    onceki: "atici"
+    kademe: "E"
+    artis: { per: 3, agi: 1 }
+    yetenek: "goz_arasi"
+    bonus: { per: 4, agi: 1 }
+  firtina_okcusu:
+    ad: { tr: "Fırtına Okçusu", en: "Storm Archer" }
+    aciklama: { tr: "Oklarını gök gürültüsüyle besleyen atıcı. Tek tek nişan almak yerine gökyüzünü düşmanın üstüne indirirsin.", en: "An archer who feeds arrows on thunder. Why aim one at a time when you can bring the sky down on them?" }
+    tur: "evrim"
+    onceki: "atici"
+    kademe: "E"
+    artis: { agi: 2, per: 2, int: 1 }
+    yetenek: "yildirim_saganagi"
+    bonus: { agi: 2, per: 2, int: 1 }
+  kul_buyucusu:
+    ad: { tr: "Kül Büyücüsü", en: "Cinder Mage" }
+    aciklama: { tr: "Çırak ateşi buldu ve ateş çırağı buldu. Geriye kalan her şey kül.", en: "The apprentice found fire, and fire found the apprentice. Everything else is ash." }
+    tur: "evrim"
+    onceki: "buyu_ciragi"
+    kademe: "E"
+    artis: { int: 3, wis: 1, wil: 1 }
+    yetenek: "kul_firtinasi"
+    bonus: { int: 4, wil: 1 }
+  kural_bukucu:
+    ad: { tr: "Kural Bükücü", en: "Rulebender" }
+    aciklama: { tr: "Fizik kurallarını tavsiye olarak okumaya başlayan büyücü. Sistem bu yorumu henüz yasaklamadı.", en: "A mage who has started treating the laws of physics as suggestions. The System hasn't banned the interpretation. Yet." }
+    tur: "evrim"
+    onceki: "buyu_ciragi"
+    kademe: "E"
+    artis: { int: 2, wis: 2, per: 1 }
+    yetenek: "yercekimi_dugumu"
+    bonus: { int: 2, wis: 3 }
+  gece_bicagi:
+    ad: { tr: "Gece Bıçağı", en: "Nightknife" }
+    aciklama: { tr: "Karanlıkta görülmeyen, sadece hissedilen bir bıçak. Hissedildiğinde iş çoktan bitmiştir.", en: "A blade nobody sees in the dark, only feels. By then, the job's already done." }
+    tur: "evrim"
+    onceki: "izsiz"
+    kademe: "E"
+    artis: { agi: 3, per: 1, str: 1 }
+    yetenek: "sessiz_kesik"
+    bonus: { agi: 3, per: 2 }
+  sis_kacagi:
+    ad: { tr: "Sis Kaçağı", en: "Fog Runner" }
+    aciklama: { tr: "Seni yakalamaya çalışan herkes sonunda bir avuç sisle kalır.", en: "Everyone who tries to grab you ends up holding a fistful of fog." }
+    tur: "evrim"
+    onceki: "izsiz"
+    kademe: "E"
+    artis: { agi: 2, per: 1, wis: 1 }
+    yetenek: "sis_perdesi"
+    bonus: { agi: 2, wis: 2, per: 1 }
+  burc:
+    ad: { tr: "Burç", en: "Bastion" }
+    aciklama: { tr: "Siper artık bir kaleye dönüştü. Seni yıkmak için önce surları yıkmak gerek; surlar sensin.", en: "The Bulwark has become a fortress. To bring you down they'd have to breach the walls, and you are the walls." }
+    tur: "evrim"
+    onceki: "siper"
+    kademe: "E"
+    artis: { end: 3, str: 1, wil: 1 }
+    yetenek: "tas_yemin"
+    bonus: { end: 4, wil: 2 }
+  bekci:
+    ad: { tr: "Bekçi", en: "Warden" }
+    aciklama: { tr: "Korunanlar arkanda, tehdit önünde. Bütün düşmanlar önce seninle hesaplaşmak zorunda.", en: "The ones you protect behind you, the threat in front. Every enemy has to go through you first." }
+    tur: "evrim"
+    onceki: "siper"
+    kademe: "E"
+    artis: { end: 2, wil: 2, cha: 1 }
+    yetenek: "meydan_okuma"
+    bonus: { end: 2, wil: 2, cha: 1 }
+  suru_cobani:
+    ad: { tr: "Sürü Çobanı", en: "Swarmherd" }
+    aciklama: { tr: "Bir yaratıkla sözleşme yetmedi; yüzlercesiyle anlaştın. Sürü itaat eder, çünkü sen de sürünün parçasısın.", en: "One contract wasn't enough, so you signed hundreds. The swarm obeys because, in a way, you're part of it." }
+    tur: "evrim"
+    onceki: "baglayici"
+    kademe: "E"
+    artis: { wis: 2, cha: 1, wil: 1, int: 1 }
+    yetenek: "suru_salinimi"
+    bonus: { wis: 3, cha: 2 }
+  ruh_sozlesmecisi:
+    ad: { tr: "Ruh Sözleşmecisi", en: "Spirit Contractor" }
+    aciklama: { tr: "Daha az ama daha güçlü varlıklarla daha ağır sözleşmeler. Pazarlık masası her zaman açık.", en: "Fewer beings, stronger ones, heavier contracts. The negotiating table never closes." }
+    tur: "evrim"
+    onceki: "baglayici"
+    kademe: "E"
+    artis: { wis: 2, wil: 2, cha: 1 }
+    yetenek: "bagli_muhafiz"
+    bonus: { wil: 3, cha: 2 }
+  savas_muhendisi:
+    ad: { tr: "Savaş Mühendisi", en: "Combat Engineer" }
+    aciklama: { tr: "Tamirci artık sadece tamir etmiyor; inşa ediyor, ve inşa ettiği şeyler ateş ediyor.", en: "The Tinker doesn't just fix things anymore. They build them, and the things they build shoot back." }
+    tur: "evrim"
+    onceki: "tamirci"
+    kademe: "E"
+    artis: { int: 2, per: 1, end: 1, str: 1 }
+    yetenek: "taret_kur"
+    bonus: { int: 3, end: 2 }
+  duzenek_ustasi:
+    ad: { tr: "Düzenek Ustası", en: "Gadgeteer" }
+    aciklama: { tr: "Savaş alanını önceden kurulmuş bir makineye çeviren zanaatkâr. Düşman içeri adım attığında oyun çoktan bitmiştir.", en: "A craftsman who turns the battlefield into a machine built in advance. By the time the enemy steps in, the game's already over." }
+    tur: "evrim"
+    onceki: "tamirci"
+    kademe: "E"
+    artis: { int: 2, per: 2, agi: 1 }
+    yetenek: "tuzak_agi"
+    bonus: { per: 3, int: 2 }
+  lanetci:
+    ad: { tr: "Lanetçi", en: "Hexer" }
+    aciklama: { tr: "Kendi kanını ödemekten sıkılan pazarlıkçı, faturayı başkalarına kesmeyi öğrendi.", en: "Tired of paying in their own blood, the Bloodbroker learned to send the bill to someone else." }
+    tur: "evrim"
+    onceki: "kan_pazarlikcisi"
+    kademe: "E"
+    artis: { wil: 2, int: 2, wis: 1 }
+    yetenek: "curume_laneti"
+    bonus: { int: 3, wil: 2 }
+  kan_buyucusu:
+    ad: { tr: "Kan Büyücüsü", en: "Hemomancer" }
+    aciklama: { tr: "Kan artık bir bedel değil, bir malzeme. Damarlarında akan her şey silaha dönüşebilir.", en: "Blood isn't a price anymore. It's a material. Everything in your veins can become a weapon." }
+    tur: "evrim"
+    onceki: "kan_pazarlikcisi"
+    kademe: "E"
+    artis: { wil: 3, end: 1, str: 1 }
+    yetenek: "kan_mizragi"
+    bonus: { wil: 3, end: 2 }
+  boyut_oburu:
+    ad: { tr: "Boyut Oburu", en: "Rift Glutton" }
+    aciklama: { tr: "Bir kapıyla doymadın. Her yeni kapı, seni biraz daha büyüten bir ziyafet.", en: "One Gate didn't fill you up. Every new one is a feast, and every feast makes you bigger." }
+    tur: "evrim"
+    onceki: "kapi_yiyen"
+    kademe: "E"
+    artis: { str: 2, end: 2, wil: 1 }
+    yetenek: "yarik_sindirimi"
+    bonus: { end: 3, str: 3 }
+  patron_avcisi:
+    ad: { tr: "Patron Avcısı", en: "Bossbreaker" }
+    aciklama: { tr: "Sıradan düşmanlar seni artık sıkıyor. Senin ilgini sadece bir kapının en büyük canavarı çekiyor.", en: "Regular enemies bore you now. The only thing in a Gate worth your attention is the biggest thing in it." }
+    tur: "evrim"
+    onceki: "kapi_yiyen"
+    kademe: "E"
+    artis: { str: 3, per: 1, agi: 1 }
+    yetenek: "faz_kiran"
+    bonus: { str: 4, per: 2 }
+  bellek_sizintisi:
+    ad: { tr: "Bellek Sızıntısı", en: "Memory Leak" }
+    aciklama: { tr: "Sen bir hatasın ve hatalar yayılır. Etrafındaki her şey biraz daha az kararlı.", en: "You're a bug, and bugs spread. Everything around you is a little less stable." }
+    tur: "evrim"
+    onceki: "sistem_hatasi"
+    kademe: "E"
+    artis: { int: 2, per: 1, wis: 1, wil: 1 }
+    yetenek: "tasma_hatasi"
+    bonus: { int: 3, wil: 2 }
+  yetkisiz_kullanici:
+    ad: { tr: "Yetkisiz Kullanıcı", en: "Unauthorized User" }
+    aciklama: { tr: "Erişimin reddedildi. Erişimin reddedildi. Erişim izni verildi. Bu bir hata olmalı.", en: "Access denied. Access denied. Access granted. That must be a mistake." }
+    tur: "evrim"
+    onceki: "sistem_hatasi"
+    kademe: "E"
+    artis: { int: 1, agi: 2, per: 1, wil: 1 }
+    yetenek: "yetki_yukseltme"
+    bonus: { agi: 2, int: 2, per: 1 }
+  agitci:
+    ad: { tr: "Ağıtçı", en: "Dirge Singer" }
+    aciklama: { tr: "Yasın bir sese dönüştü. Sesin duyulduğu yerde kimse savaşmak istemez.", en: "Your grief has found a voice. Where it's heard, nobody wants to fight." }
+    tur: "evrim"
+    onceki: "yas_tutan"
+    kademe: "E"
+    artis: { wil: 2, cha: 2, wis: 1 }
+    yetenek: "son_agit"
+    bonus: { wil: 3, cha: 2 }
+  hatira_bekcisi:
+    ad: { tr: "Hatıra Bekçisi", en: "Keeper of Memory" }
+    aciklama: { tr: "Gidenlerin anısını taşıyan kişi düşemez. Düşerse onları kimse taşımaz.", en: "Whoever carries the memory of the dead can't afford to fall. If they do, nobody carries them." }
+    tur: "evrim"
+    onceki: "yas_tutan"
+    kademe: "E"
+    artis: { wis: 2, end: 1, wil: 1, cha: 1 }
+    yetenek: "unutulmayan"
+    bonus: { wis: 3, end: 2 }
+  tek_atis:
+    ad: { tr: "Tek Atış", en: "One Shot" }
+    aciklama: { tr: "Sistem kayıtlarında senin adına ikinci atış girdisi bulunmuyor. Hiç gerekmedi.", en: "The System has no record of you ever taking a second shot. It never came up." }
+    tur: "evrim"
+    onceki: "avcinin_gozu"
+    kademe: "E"
+    artis: { per: 3, agi: 1, wil: 1 }
+    yetenek: "kesin_hukum"
+    bonus: { per: 4, agi: 2 }
+  iz_suren:
+    ad: { tr: "İz Süren", en: "Tracker" }
+    aciklama: { tr: "Av kaçabilir, saklanabilir, yalvarabilir. Hiçbiri sonucu değiştirmez.", en: "The quarry can run, hide or beg. None of it changes how this ends." }
+    tur: "evrim"
+    onceki: "avcinin_gozu"
+    kademe: "E"
+    artis: { per: 2, agi: 2, end: 1 }
+    yetenek: "av_damgasi"
+    bonus: { per: 2, agi: 2, end: 1 }
+  saha_hekimi:
+    ad: { tr: "Saha Hekimi", en: "Field Medic" }
+    aciklama: { tr: "Kıyamette hastane yok; sen varsın. Kimin yaşayacağına çoğu zaman sen karar veriyorsun.", en: "There are no hospitals in the apocalypse. There's you. Most days, you decide who makes it." }
+    tur: "evrim"
+    onceki: "merhamet_tasiyici"
+    kademe: "E"
+    artis: { wis: 3, int: 1, end: 1 }
+    yetenek: "acil_mudahale"
+    bonus: { wis: 4, int: 1 }
+  merhamet_kalkani:
+    ad: { tr: "Merhamet Kalkanı", en: "Mercy's Aegis" }
+    aciklama: { tr: "İyileştirmek yetmedi; acının kendisini bölüşmeyi öğrendin. Yanında duranlar daha az kanar.", en: "Healing wasn't enough, so you learned to split the pain itself. The people beside you bleed less." }
+    tur: "evrim"
+    onceki: "merhamet_tasiyici"
+    kademe: "E"
+    artis: { wis: 2, end: 2, cha: 1 }
+    yetenek: "paylasilan_aci"
+    bonus: { end: 3, cha: 2 }
+  her_telden:
+    ad: { tr: "Her Telden", en: "Jack of All Trades" }
+    aciklama: { tr: "Her işten biraz anlıyorsun ve bu, çoğu uzmanın yapamadığını yapmana yetiyor.", en: "You know a little about everything, and that's enough to do what most specialists can't." }
+    tur: "evrim"
+    onceki: "cok_yonlu"
+    kademe: "E"
+    artis:
+      str: 1
+      agi: 1
+      int: 1
+      per: 1
+      cha: 1
+    yetenek: "dogaclama"
+    bonus:
+      str: 1
+      agi: 1
+      int: 1
+      wis: 1
+      cha: 1
+  denge_ustasi:
+    ad: { tr: "Denge Ustası", en: "Equilibrist" }
+    aciklama: { tr: "Denge bir uzlaşma değil, başlı başına bir güçtür. Sistem bu tezi isteksizce doğruladı.", en: "Balance isn't a compromise. It's a power of its own. The System grudgingly confirmed the thesis." }
+    tur: "evrim"
+    onceki: "cok_yonlu"
+    kademe: "E"
+    artis:
+      end: 1
+      wis: 1
+      wil: 1
+      per: 1
+      agi: 1
+    yetenek: "mukemmel_denge"
+    bonus:
+      end: 1
+      wis: 1
+      wil: 1
+      per: 1
+      agi: 1
+  ruh_tuccari:
+    ad: { tr: "Ruh Tüccarı", en: "Soul Broker" }
+    aciklama: { tr: "Ruhlar senin için artık birer varlık kalemi. Alırsın, satarsın, faizini işletirsin.", en: "Souls are line items to you now. You buy, you sell, you collect the interest." }
+    tur: "evrim"
+    onceki: "bos_kalp"
+    kademe: "E"
+    artis: { wil: 2, int: 1, cha: 1, agi: 1 }
+    yetenek: "ruh_senedi"
+    bonus: { wil: 3, int: 2 }
+  yankisiz:
+    ad: { tr: "Yankısız", en: "The Echoless" }
+    aciklama: { tr: "Bağırsan bile ses geri dönmüyor. İçinde yankılanacak hiçbir şey kalmadı.", en: "Even when you shout, nothing comes back. There's nothing left inside you to echo." }
+    tur: "evrim"
+    onceki: "bos_kalp"
+    kademe: "E"
+    artis: { wil: 3, per: 1, str: 1 }
+    yetenek: "bos_bakis"
+    bonus: { wil: 4, per: 2 }
