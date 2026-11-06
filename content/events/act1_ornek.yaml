@@ -31,7 +31,9 @@ olaylar:
             gerekli: { stat: { per: 8 } }
             etkiler:
               - ahlak: { duzen: 3 }
-              - degisken: { iliski_deniz_arman: 10 }
+              - iliski: { deniz_arman: { guven: 10, baglilik: 5 } }
+              - hafiza: { npc: "deniz_arman", id: "tazilardan_kurtardi", agirlik: 40 }
+              - yoldas_katil: "deniz_arman"
               - bayrak: "deniz_bulundu"
               - gorev: { deniz_bul: "tamam" }
               - xp: 60
@@ -40,7 +42,9 @@ olaylar:
             etiket: { tr: "Bekle. Önce tazılar onu yorsun", en: "Wait. Let the hounds wear them down first" }
             etkiler:
               - ahlak: { merhamet: -8, insanlik: -4 }
-              - degisken: { iliski_deniz_arman: -20 }
+              - iliski: { deniz_arman: { guven: -20 } }
+              - hafiza: { npc: "deniz_arman", id: "tazilar_bekledi", agirlik: -45 }
+              - yoldas_katil: "deniz_arman"
               - bayrak: "deniz_bulundu"
               - bayrak: "deniz_bekletildi"
               - gorev: { deniz_bul: "tamam" }
@@ -55,7 +59,9 @@ olaylar:
           - id: "kaldir"
             etiket: { tr: "Elini uzat ve onu ayağa kaldır", en: "Reach down and pull them up" }
             etkiler:
-              - degisken: { iliski_deniz_arman: 15 }
+              - iliski: { deniz_arman: { guven: 15, baglilik: 7 } }
+              - hafiza: { npc: "deniz_arman", id: "tazilardan_kurtardi", agirlik: 45 }
+              - yoldas_katil: "deniz_arman"
               - bayrak: "deniz_bulundu"
               - gorev: { deniz_bul: "tamam" }
               - ahlak: { insanlik: 3 }
@@ -68,7 +74,8 @@ olaylar:
           - id: "soluklan"
             etiket: { tr: "Soluklan ve yola devam et", en: "Catch your breath and keep moving" }
             etkiler:
-              - degisken: { iliski_deniz_arman: 5 }
+              - iliski: { deniz_arman: { guven: 5, baglilik: 2 } }
+              - yoldas_katil: "deniz_arman"
               - bayrak: "deniz_bulundu"
               - gorev: { deniz_bul: "tamam" }
               - ahlak: { duzen: 2 }
@@ -94,20 +101,21 @@ olaylar:
             etiket: { tr: "Doğruyu söyle: korktun", en: "Tell the truth: you were scared" }
             etkiler:
               - ahlak: { insanlik: 5 }
-              - degisken: { iliski_deniz_arman: 12 }
+              - iliski: { deniz_arman: { guven: 12, baglilik: 6 } }
             sonraki: "@akis"
           - id: "yalan"
             etiket: { tr: "Bir plan olduğunu söyle", en: "Say it was all part of a plan" }
-            zar: { stat: "cha", zorluk: 13, tek: true, basarisiz: "@akis", basarisiz_etkiler: [{ ahlak: { duzen: -3 } }, { degisken: { iliski_deniz_arman: -15 } }, { bayrak: "deniz_yalani_yakaladi" }] }
+            zar: { stat: "cha", zorluk: 13, tek: true, basarisiz: "@akis", basarisiz_etkiler: [{ ahlak: { duzen: -3 } }, { iliski: { deniz_arman: { guven: -15 } } }, { bayrak: "deniz_yalani_yakaladi" }] }
             etkiler:
               - ahlak: { duzen: -2 }
-              - degisken: { iliski_deniz_arman: 4 }
+              - iliski: { deniz_arman: { guven: 4, baglilik: 2 } }
+              - yalan: { npc: "deniz_arman", konu: "deniz_plan_yalani" }
             sonraki: "@akis"
           - id: "sert"
             etiket: { tr: "Hayatta kaldılar, değil mi? Konu kapandı", en: "They're alive, aren't they? Drop it" }
             etkiler:
               - ahlak: { merhamet: -4 }
-              - degisken: { iliski_deniz_arman: -10 }
+              - iliski: { deniz_arman: { guven: -10 } }
             sonraki: "@akis"
 
   - id: "yarali_avci"
@@ -321,13 +329,14 @@ olaylar:
             etkiler:
               - gorev: { istasyon_sinyali: "basla" }
               - bayrak: "yanki_ile_konusuldu"
-              - degisken: { iliski_yanki: 10, glitch_bulundu: 1 }
+              - degisken: { glitch_bulundu: 1 }
+              - iliski: { yanki: { guven: 10, baglilik: 5 } }
               - tohum: { olay: "istasyon_sinyali_2", gecikme: { min: 3, max: 5 } }
             sonraki: "@akis"
           - id: "parcala"
             etiket: { tr: "Hoparlörü sök ve parçala", en: "Rip the speaker out and smash it" }
             etkiler:
-              - degisken: { iliski_yanki: -5 }
+              - iliski: { yanki: { guven: -5 } }
               - ahlak: { duzen: -3 }
               - dikkat: -2
             sonraki: "@akis"
@@ -351,7 +360,9 @@ olaylar:
             etiket: { tr: "Yankı'ya güven ve izi sil", en: "Trust Echo and wipe the trail" }
             etkiler:
               - gizle: 8
-              - degisken: { iliski_yanki: 10, glitch_bulundu: 1 }
+              - degisken: { glitch_bulundu: 1 }
+              - iliski: { yanki: { guven: 10, baglilik: 5 } }
+              - bilgi: "yanki_parcasi"
               - gorev: { istasyon_sinyali: "tamam" }
             sonraki: "@akis"
           - id: "cevapla"
@@ -387,7 +398,7 @@ olaylar:
             etiket: { tr: "Sen de eski hayatını anlat", en: "Tell them about your old life too" }
             etkiler:
               - ahlak: { insanlik: 4 }
-              - degisken: { iliski_deniz_arman: 5 }
+              - iliski: { deniz_arman: { guven: 5, baglilik: 2 } }
               - can: 20
             sonraki: "@akis"
           - id: "dinle"
@@ -428,14 +439,15 @@ olaylar:
             etkiler:
               - gizle: 4
               - ahlak: { duzen: 2 }
-              - degisken: { iliski_aras_kurt: -5 }
+              - iliski: { aras_kurt: { guven: -5 } }
             sonraki: "@akis"
           - id: "goster"
             tur: "aciga_vur"
             etiket: { tr: "Gerçek seviyeni göster", en: "Show your true level" }
             etkiler:
               - aciga_vur: true
-              - degisken: { iliski_aras_kurt: 10 }
+              - iliski: { aras_kurt: { guven: 10, baglilik: 5 } }
+              - bilgi: "aras_hizi"
               - itibar: { lonca: 5 }
               - ahlak: { insanlik: -2 }
             sonraki: "@akis"
@@ -443,7 +455,8 @@ olaylar:
             etiket: { tr: "Bir sonraki kapıyı kimin önce kapatacağına bahse gir", en: "Bet them you'll close the next Gate first" }
             gerekli: { gizli_fark_min: 3 }
             etkiler:
-              - degisken: { iliski_aras_kurt: 15, rakip_bahsi: 1 }
+              - degisken: { rakip_bahsi: 1 }
+              - iliski: { aras_kurt: { guven: 15, baglilik: 7 } }
               - ahlak: { duzen: -3 }
               - dikkat: 4
             sonraki: "@akis"
@@ -581,7 +594,7 @@ olaylar:
             etkiler:
               - gizle: 15
               - can: -25
-              - degisken: { iliski_yanki: 10 }
+              - iliski: { yanki: { guven: 10, baglilik: 5 } }
               - ahlak: { insanlik: -2 }
             sonraki: "@akis"
           - id: "savas"

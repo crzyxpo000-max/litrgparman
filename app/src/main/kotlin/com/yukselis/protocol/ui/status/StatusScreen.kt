@@ -96,6 +96,12 @@ fun StatusScreen(
             style = GameType.system,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
+        if (status.publicRank > 0) {
+            Text(stringResource(R.string.status_rank, status.publicRank), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+        if (status.armyPower > 0) {
+            Text(stringResource(R.string.status_army, status.armyPower), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
         if (status.evolutionPending) {
             Text(stringResource(R.string.evolution_pending), style = GameType.system, color = Color(0xFFFFA726), modifier = Modifier.padding(top = 4.dp))
         }
@@ -165,6 +171,16 @@ fun StatusScreen(
             Column(modifier = Modifier.padding(bottom = 10.dp)) {
                 Text(title.name, style = GameType.systemTitle, color = rarityColor(title.rarity))
                 Text(title.description, style = GameType.system, color = MaterialTheme.colorScheme.onSurface)
+            }
+        }
+
+        if (status.traits.isNotEmpty()) {
+            SectionTitle(stringResource(R.string.traits))
+            status.traits.forEach { t ->
+                Column(modifier = Modifier.padding(bottom = 10.dp)) {
+                    Text(t.name, style = GameType.systemTitle, color = rarityColor(t.rarity))
+                    Text(t.description, style = GameType.system, color = MaterialTheme.colorScheme.onSurface)
+                }
             }
         }
 

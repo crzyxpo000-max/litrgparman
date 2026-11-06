@@ -27,12 +27,14 @@ object ContentLoader {
     const val TITLES = "titles.yaml"
     const val STORY_DIR = "story"
     const val EVENTS_DIR = "events"
+    const val NPCS_DIR = "npcs"
 
     /** Zorunlu olmayan sistem dosyaları; yoksa ilgili mekanik boş kalır. */
     val SYSTEM_FILES = listOf(
         ContentParser.SYSTEM, ContentParser.CLASSES, ContentParser.SKILLS, ContentParser.ITEMS,
         ContentParser.PROFESSIONS, ContentParser.ESSENCES, ContentParser.DAILY, ContentParser.ENEMIES, ContentParser.AWAKENINGS,
         ContentParser.REGIONS, ContentParser.FACTIONS, ContentParser.FEATS, ContentParser.QUESTS, ContentParser.FLAGS,
+        ContentParser.TRAITS, ContentParser.KNOWLEDGE, ContentParser.ARMY, ContentParser.RANKING,
     )
 
     fun load(source: ContentSource): Content {
@@ -42,6 +44,7 @@ object ContentLoader {
             .map { source.read("$STORY_DIR/$it") }
         val files = SYSTEM_FILES.mapNotNull { name -> source.readOrNull(name)?.let { name to it } }.toMap()
         val eventFiles = source.list(EVENTS_DIR).filter { it.endsWith(".yaml") }.sorted().map { source.read("$EVENTS_DIR/$it") }
-        return ContentParser.load(storyFiles, source.read(NAMES), source.read(TITLES), files, eventFiles)
+        val npcFiles = source.list(NPCS_DIR).filter { it.endsWith(".yaml") }.sorted().map { source.read("$NPCS_DIR/$it") }
+        return ContentParser.load(storyFiles, source.read(NAMES), source.read(TITLES), files, eventFiles, npcFiles)
     }
 }

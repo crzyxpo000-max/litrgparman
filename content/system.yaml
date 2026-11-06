@@ -164,3 +164,78 @@ gorev_basla: { tr: "Yeni görev: {name}", en: "New quest: {name}" }
 gorev_tamam: { tr: "Görev tamamlandı: {name}", en: "Quest complete: {name}" }
 gorev_basarisiz: { tr: "Görev başarısız: {name}", en: "Quest failed: {name}" }
 kontrol_canavar: { tr: "Canavarlar", en: "Monsters" }
+
+# ---- Aşama 5: NPC sistemi ----
+iliski_degisti: { tr: "{npc} · {changes}", en: "{npc} · {changes}" }
+eksen_guven: { tr: "Güven", en: "Trust" }
+eksen_saygi: { tr: "Saygı", en: "Respect" }
+eksen_korku: { tr: "Korku", en: "Fear" }
+eksen_baglilik: { tr: "Bağlılık", en: "Loyalty" }
+npc_oldu: { tr: "[{npc} öldü. Sistem kaydı kapattı.]", en: "[{npc} is dead. The System has closed the file.]" }
+yoldas_katildi: { tr: "[Yoldaş: {npc} artık seninle.]", en: "[Companion joined: {npc}]" }
+yoldas_ayrildi: { tr: "[Yoldaş ayrıldı: {npc}]", en: "[Companion left: {npc}]" }
+yoldas_dolu: { tr: "[Yoldaş kapasitesi dolu. {npc} yanında yürüyemez; önce Karizma ya da kademe.]", en: "[Party is full. {npc} can't travel with you. Raise your Charisma or your grade first.]" }
+npc_fraksiyon: { tr: "[Söylenti: {npc} artık {faction} saflarında.]", en: "[Word is {npc} now runs with {faction}.]" }
+npc_iz: { tr: "{npc} üzerinde iz kaldı: {name}", en: "{npc} carries a mark now: {name}" }
+iz_kazanildi: { tr: "İz: {name}", en: "Mark gained: {name}" }
+bilgi_eklendi: { tr: "Bilgi günlüğüne eklendi: {name}", en: "Added to your intel log: {name}" }
+ordu_katildi: { tr: "[Ordu: +{n} {name}]", en: "[Army: +{n} {name}]" }
+yoldas_tepki: { tr: "{npc}", en: "{npc}" }
+npc_kademe: { tr: "[Sistem duyurusu: {npc} {grade} kademesine evrildi.]", en: "[System announcement: {npc} has evolved to Grade {grade}.]" }
+npc_ilk_unvan: { tr: "[Sistem duyurusu: {npc} '{title}' unvanını aldı. Senden önce.]", en: "[System announcement: {npc} has claimed '{title}'. Before you.]" }
+yalan_ortaya_cikti: { tr: "{npc} bir şeyi öğrendi. Ona söylediğin yalanı.", en: "{npc} found something out. The lie you told." }
+sira_gecti: { tr: "[Küresel Sıralama: {npc} seni geçti.]", en: "[Global Ranking: {npc} has passed you.]" }
+sira_geride: { tr: "[Küresel Sıralama: {npc} artık senin gerisinde.]", en: "[Global Ranking: {npc} is now behind you.]" }
+sira_yukseldi: { tr: "[Küresel Sıralama: yeni yerin #{n}.]", en: "[Global Ranking: you're now #{n}.]" }
+sira_gizli: { tr: "Dünya senin görünen seviyeni görüyor. Yankı gerçek verini listeden saklıyor; gerçek yerin #{n}.", en: "The world sees your public level. Echo keeps your real data off the board. Your true spot: #{n}." }
+sira_acik: { tr: "Listede gördükleri, gerçekte olduğun yer.", en: "What they see on the board is what you are." }
+kisisel_gorev_ad: { tr: "Kişisel görev: {npc}", en: "Personal quest: {npc}" }
+savas_npc_kanca: { tr: "{npc} karşına dikiliyor, silahı hazır. Bu sefer şaka yok.", en: "{npc} squares up across from you. No jokes this time." }
+savas_koruma: { tr: "{enemy} yaralı olana atılıyor; araya girip darbeyi sen karşılıyorsun. {ally} hâlâ ayakta.", en: "{enemy} goes for the wounded one. You step in and eat the hit yourself. {ally} stays standing." }
+savas_yoldas_kalkan: { tr: "{ally} önüne geçiyor; aranıza bir koruma örülüyor.", en: "{ally} steps in front of you and throws up a guard." }
+savas_yoldas_sifa: { tr: "{ally} yaralarına el atıyor; acı geri çekiliyor.", en: "{ally} gets hands on your wounds. The pain backs off." }
+savas_yoldas_iskaladi: { tr: "{ally} saldırıyor ama {target} son anda kurtuluyor.", en: "{ally} swings, but {target} slips it at the last second." }
+savas_dusman_yoldas_iskaladi: { tr: "{enemy} yana dönüp saldırıyor; {ally} kıl payı sıyrılıyor.", en: "{enemy} turns and lunges. {ally} slips it by a hair." }
+savas_dusman_yoldasa: { tr: "{enemy} yana dönüp saldırıyor. Darbe yerini buluyor; {ally} sendeliyor.", en: "{enemy} turns and strikes. It connects. {ally} staggers." }
+savas_yoldas_dustu: { tr: "{ally} yere yığılıyor. Nefes alıyor ama bu savaşta yok artık.", en: "{ally} hits the ground. Still breathing, but out of this fight." }
+hafiza_olay_iyi: { tr: "Hatırlıyor: {event}", en: "Remembers: {event}" }
+hafiza_olay_kotu: { tr: "Unutmadı: {event}", en: "Hasn't forgotten: {event}" }
+hafiza_basari: { tr: "Gözüyle gördü: {name}", en: "Saw it firsthand: {name}" }
+hafiza_yalan_acik: { tr: "Yalanını biliyor: {name}", en: "Knows you lied: {name}" }
+hafiza_yalan_acik_genel: { tr: "Ona yalan söylediğini biliyor.", en: "Knows you lied to them." }
+hafiza_kisisel_tamam: { tr: "En çok ihtiyaç duyduğu an yanındaydın.", en: "You were there when it mattered most." }
+hafiza_savasta_dustu: { tr: "Senin yanında yere düştü.", en: "Went down fighting at your side." }
+hafiza_duelloda_yenildi: { tr: "Sana yenildi. Bunu taşıyor.", en: "Lost to you. Still carries it." }
+hafiza_duelloda_bagislandi: { tr: "Bitirebilirdin. Bitirmedin.", en: "You could have finished it. You didn't." }
+hafiza_guc_hayranlik: { tr: "Nasıl büyüdüğünü izledi ve hayran kaldı.", en: "Watched you grow and was in awe." }
+hafiza_guc_endise: { tr: "Neye dönüştüğünden korkuyor.", en: "Worries about what you're becoming." }
+hafiza_guc_kiskanclik: { tr: "Senin ulaştığın yere hâlâ uzanamıyor.", en: "Still can't reach where you are." }
+hafiza_guc_bagimlilik: { tr: "Sensiz ayakta kalamayacağını düşünüyor.", en: "Thinks they can't make it without you." }
+npc_durum_olu: { tr: "Öldü", en: "Dead" }
+npc_durum_gitti: { tr: "Gitti", en: "Gone" }
+npc_durum_yoldas: { tr: "Yoldaş", en: "Companion" }
+npc_durum_rakip: { tr: "Rakip", en: "Rival" }
+rol_saldiri: { tr: "Saldırı", en: "Striker" }
+rol_koruma: { tr: "Koruma", en: "Guard" }
+rol_sifa: { tr: "Şifa", en: "Healer" }
+rol_menzil: { tr: "Menzil", en: "Ranged" }
+hafiza_ihanetten_dondu: { tr: "Sana ihanet etmeye geldi; sen onu konuşarak geri getirdin.", en: "Came to betray you. You talked them back." }
+hafiza_ihanette_birakildi: { tr: "İhanet ettiği gece onu durdurmadın bile.", en: "The night they turned on you, you didn't even try to stop them." }
+hafiza_ihanet_sorgu: { tr: "Yenildikten sonra ona neden diye sordun.", en: "After it was over, you asked them why." }
+hafiza_rica_reddedildi: { tr: "Senden tek bir şey istedi. Reddettin.", en: "Asked you for one thing. You said no." }
+hafiza_kacinca_aradi: { tr: "Kaçtığında peşinden geldin; kızmadan.", en: "When they ran, you came after them. Not angry." }
+hafiza_ayaga_kaldirdi: { tr: "Önünde diz çöktü; sen onu ayağa kaldırdın.", en: "They knelt in front of you. You pulled them back up." }
+hafiza_kucumsendi: { tr: "Meydan okudu; sen yüzüne güldün.", en: "They challenged you. You laughed in their face." }
+hafiza_ayrilirken_ugurladi: { tr: "Ayrılırken onu kin tutmadan uğurladın.", en: "When they left, you saw them off. No grudge." }
+hafiza_degisecegine_soz: { tr: "Değişeceğine söz verdin. Bekliyor.", en: "You promised you'd change. They're waiting." }
+hafiza_yalani_itiraf_etti: { tr: "Yalanın ortaya çıkınca her şeyi itiraf ettin.", en: "When the lie came out, you owned all of it." }
+infaz_acimasiz_npc: { tr: "Öldür", en: "Kill" }
+infaz_acimasiz_npc_aciklama: { tr: "Bunun dönüşü yok. Merhamet −3, İnsanlık −2. Ölüm kalıcıdır.", en: "There's no coming back from this. Mercy −3, Humanity −2. Death is permanent." }
+infaz_acimasiz_npc_metin: { tr: "Bitiriyorsun. {enemy} son nefesinde bile gözlerini senden ayırmıyor.", en: "You finish it. Even on the last breath, {enemy} doesn't look away from you." }
+infaz_temiz_npc: { tr: "Dövüşü bitir", en: "End the fight" }
+infaz_temiz_npc_aciklama: { tr: "Kesin bir yenilgi; canını almadan. Düzen +2.", en: "A clear defeat, no killing blow. Order +2." }
+infaz_temiz_npc_metin: { tr: "Son darbe silahını elinden uçuruyor. {enemy} yerde kalıyor; yenildiğini ikiniz de biliyorsunuz.", en: "Your last strike sends the weapon flying. {enemy} stays down, and you both know it's over." }
+infaz_bagisla_npc: { tr: "Elini uzat", en: "Offer a hand" }
+infaz_bagisla_npc_aciklama: { tr: "Kazandın; bunu yüzüne vurma. Merhamet +5.", en: "You won. Don't rub it in. Mercy +5." }
+infaz_bagisla_npc_metin: { tr: "Silahını indirip elini uzatıyorsun. {enemy} bir an duraksıyor, sonra tutuyor.", en: "You lower your weapon and offer a hand. {enemy} hesitates, then takes it." }
+hafiza_maskeyi_gordu: { tr: "Sıralamadaki maskenin ardını bir an gördü.", en: "Got one look behind the mask on the board." }

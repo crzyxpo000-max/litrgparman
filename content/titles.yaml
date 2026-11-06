@@ -123,3 +123,44 @@ kademe_kiran_3:
   aciklama: { tr: "On kez. Kademeler senin için bir öneri.", en: "Ten times. For you, Grades are a suggestion." }
   nadirlik: "mitik"
   bonus: { str: 5, agi: 5, end: 5, wil: 5 }
+# ---- Aşama 5: kişisel görev ödülleri (Bağlılık ≥ 70) ----
+omuz_omuza:
+  ad: { tr: "Omuz Omuza", en: "Shoulder to Shoulder" }
+  aciklama: { tr: "Bir dostun en ağır yükünü birlikte taşıdınız. Yanınızda kim varsa daha az korkuyor.", en: "You and a friend carried their heaviest load together. Whoever stands near you is a little less afraid." }
+  nadirlik: "epik"
+  bonus: { end: 2, cha: 2 }
+demir_yemin:
+  ad: { tr: "Demir Yemin", en: "Iron Oath" }
+  aciklama: { tr: "Eski bir askerin sana verdiği sözü tutmasına yardım ettin; o da seninkini tutacak. Komuta etmeyi bilen birinin sesi artık sende.", en: "You helped an old soldier keep his word, and now he'll keep yours. You've picked up the voice of someone who knows how to give an order." }
+  nadirlik: "epik"
+  bonus: { str: 2, wil: 2 }
+gece_nobeti:
+  ad: { tr: "Gece Nöbeti", en: "Night Shift" }
+  aciklama: { tr: "Ölümün en çok uğradığı saatlerde bir hekimle birlikte nöbet tuttun. Yaralılar senin yanında biraz daha uzun dayanıyor.", en: "You stood watch with a doctor through the hours when death makes its rounds. The wounded hold on a little longer when you're near." }
+  nadirlik: "epik"
+  bonus: { wis: 2, end: 1, cha: 1 }
+kehanetin_tanigi:
+  ad: { tr: "Kehanetin Tanığı", en: "Witness to the Prophecy" }
+  aciklama: { tr: "Bir peygamberin en büyük sırrını gördün: ya yalan söylüyordu ya da söylemiyordu. Hangisi olduğunu bilmek seni değiştirdi.", en: "You saw a prophet's biggest secret. Either he was lying, or he wasn't. Knowing which one changed you." }
+  nadirlik: "epik"
+  bonus: { wil: 2, wis: 2, cha: -1 }
+catlak_kanal:
+  ad: { tr: "Çatlak Kanal", en: "Cracked Channel" }
+  aciklama: { tr: "Kafandaki bozuk ses sana bir şey gösterdi; Sistem'in hiçbir insana göstermemesi gereken bir şey. Artık pencerelerinin arasındaki boşlukları da okuyorsun.", en: "The broken voice in your head showed you something no human was ever supposed to see. Now you can read the gaps between your windows, too." }
+  nadirlik: "efsanevi"
+  bonus: { int: 2, per: 2, wis: 2 }
+nefes_nefese:
+  ad: { tr: "Nefes Nefese", en: "Neck and Neck" }
+  aciklama: { tr: "Bir rakiple aynı çizgiye o kadar çok vardınız ki artık kimin kimi kovaladığı belli değil. Arkanda biri koşarken daha hızlısın.", en: "You and your rival have hit the same finish line so many times nobody can tell who's chasing who. You run faster with someone on your heels." }
+  nadirlik: "epik"
+  bonus: { agi: 2, str: 1, per: 1 }
+arka_kapi:
+  ad: { tr: "Arka Kapı", en: "Backdoor" }
+  aciklama: { tr: "Bir araştırmacıyla birlikte Sistem'in kodunda kimsenin bilmediği bir boşluk buldunuz. Kimseye söylemediniz. Henüz.", en: "You and a researcher found a hole in the System's code that nobody else knows about. You haven't told anyone. Yet." }
+  nadirlik: "epik"
+  bonus: { int: 2, per: 2 }
+kadim_konugu:
+  ad: { tr: "Kadimlerin Konuğu", en: "Guest of the Ancients" }
+  aciklama: { tr: "Bir Kadim elçisi seni mülk olarak değil, misafir olarak ağırladı. Onun türünde bunun bir adı var ve pek az insan bunu duydu.", en: "An Ancient envoy received you as a guest, not as property. His kind has a word for that, and very few humans have ever heard it." }
+  nadirlik: "efsanevi"
+  bonus: { cha: 2, wil: 2, wis: 1 }

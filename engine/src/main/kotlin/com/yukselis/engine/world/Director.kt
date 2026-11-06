@@ -22,6 +22,7 @@ class Director(private val content: Content) {
         if (e.acts.isNotEmpty() && state.act !in e.acts) return false
         if (e.regions.isNotEmpty() && state.region !in e.regions) return false
         if (state.day < e.dayMin || state.day > e.dayMax) return false
+        if (!npcsAlive(state, e)) return false
         return e.condition?.test(state) ?: true
     }
 
@@ -44,20 +45,28 @@ class Director(private val content: Content) {
     fun witheredSeeds(state: WorldState): List<Seed> =
         state.seeds.filter { seed ->
             val event = content.events[seed.eventId]
-            seed.dueDay <= state.day && (event == null || !seedConditionHolds(state, seed) || (!event.repeatable && event.id in state.dayState.seen))
+            seed.dueDay <= state.day && (
+                event == null || !seedConditionHolds(state, seed) || (!event.repeatable && event.id in state.dayState.seen) ||
+                    !npcsAlive(state, event) || (seed.npc != null && state.npcs[seed.npc]?.alive == false)
+                )
         }
 
     data class Forced(val eventId: String, val seed: Seed?)
 
+    /** Ölen NPC'nin yay düğümleri kapanır: olayın NPC'lerinden biri ölüyse olay gelmez (ölüm kalıcıdır). */
+    fun npcsAlive(state: WorldState, e: EventDef): Boolean = e.npcs.all { state.npcs[it]?.alive != false }
+
     private fun eligibleIgnoringDay(state: WorldState, e: EventDef): Boolean {
         if (e.acts.isNotEmpty() && state.act !in e.acts) return false
         if (e.regions.isNotEmpty() && state.region !in e.regions) return false
+        if (!npcsAlive(state, e)) return false
         return e.condition?.test(state) ?: true
     }
 
     fun seedConditionHolds(state: WorldState, seed: Seed): Boolean {
         val raw = seed.condition ?: return true
-        return runCatching { ContentParser.condition(YamlTree.parseObject(raw, "tohum koşulu")).test(state) }.getOrDefault(false)
+        val focused = state.copy(focusNpc = seed.npc ?: state.focusNpc)
+        return runCatching { ContentParser.condition(YamlTree.parseObject(raw, "tohum koşulu")).test(focused) }.getOrDefault(false)
     }
 
     /** Hedef gerilim eğrisi: yükselen → zirve → nefes. Dikkat yükseldikçe eğri yukarı kayar. */
@@ -84,8 +93,8 @@ class Director(private val content: Content) {
         return 1.0 + best.coerceAtLeast(0) / 100.0
     }
 
-    /** NPC sistemi (Aşama 5) bağlanana kadar ilişki değişkeni. */
-    var bondValue: (WorldState, String) -> Int = { s, npc -> s.variable("iliski_$npc") }
+    /** Kişisel bağ değeri: NPC'ye güven ve bağlılığın ortalaması (Aşama 5). */
+    fun bondValue(state: WorldState, npc: String): Int = state.npcs[npc]?.relation?.let { (it.trust + it.bond) / 2 } ?: 0
 
     /** Ana yay önceliği: vadesi gelmemiş ana yay olayları da öne çıkar. */
     fun arcPriority(e: EventDef): Double = if (e.mainArcDay != null) 3.0 else 1.0

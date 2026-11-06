@@ -1,0 +1,18 @@
+# OP MC Ordu: oyuncuyla ölçeklenen çağrılar ve takipçiler. Birlik, oyuncunun en güçlü eğilimine göre seçilir
+# (`ordu_kazan: n`). Güç = adet · guc · (1 + kademe) · (1 + seviye/50). İçerik Aşama 7'de (Perde 3–4).
+birlikler:
+  kul_lejyoner:
+    ad: { tr: "Kül Lejyoneri", en: "Cinder Legionnaire" }
+    aciklama: { tr: "Kapattığın bir kapının külünden yoğrulmuş; içinde senin karanlığından bir kıvılcım yanıyor.", en: "Packed together from the ash of a Gate you burned shut. A spark of your own darkness burns inside it." }
+    egilim: [karanlik, gizlilik]
+    guc: 6
+  evcil_canavar:
+    ad: { tr: "Bağlı Canavar", en: "Bound Beast" }
+    aciklama: { tr: "Kapılardan çıkan bir yaratık; artık senin sesine uyuyor.", en: "Something that crawled out of a Gate. Now it answers to your voice." }
+    egilim: [cagirma, yakin_dovus]
+    guc: 8
+  lonca_avcisi:
+    ad: { tr: "Bayrağın Altındaki Avcı", en: "Banner Hunter" }
+    aciklama: { tr: "Adını duyup gelen insanlar. Senin için kapı temizlerler.", en: "People who heard your name and showed up. They clear Gates for you." }
+    egilim: [koruma, menzilli, buyu, zanaat]
+    guc: 5

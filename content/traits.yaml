@@ -1,0 +1,57 @@
+# OP MC izler: oyuncuda bedelli mutasyonlar ve soy uyanışları; NPC'de oyuncunun yaptıklarından kalan
+# kalıcı özellikler ve yaralar. Oyuncu izi: bonus + ceza (+ yozlaşma). NPC izi: kişilik değişimi.
+izler:
+  # ---- Oyuncu ----
+  kemik_kabuk:
+    hedef: oyuncu
+    ad: { tr: "Kemik Kabuk", en: "Bone Plating" }
+    aciklama: { tr: "Kaburgaların üstünde ikinci bir iskelet büyüdü. Darbeler seyreliyor; eğilmek zorlaşıyor.", en: "A second skeleton grew over your ribs. Hits land softer. Bending over doesn't." }
+    bonus: { end: 4 }
+    ceza: { agi: -2 }
+  yanki_damari:
+    hedef: oyuncu
+    ad: { tr: "Yankı Damarı", en: "Echo Vein" }
+    aciklama: { tr: "Bileğinden dirseğine mavi, titreşen bir çizgi uzanıyor. Her şeyi biraz önce görüyorsun; geceleri bazen kendi sesini duymuyorsun.", en: "A blue, flickering line runs from your wrist to your elbow. You see everything a beat early. Some nights you can't hear your own voice." }
+    bonus: { per: 3 }
+    ceza: { wis: -1 }
+    yozlasma: 5
+  kara_kan:
+    hedef: oyuncu
+    ad: { tr: "Kara Kan", en: "Black Blood" }
+    aciklama: { tr: "Yaraların koyu ve soğuk kanıyor. Güçlüsün; insanlar sana bakarken bir adım geri atıyor.", en: "Your cuts bleed dark and cold. You're stronger. People take a step back when they look at you." }
+    bonus: { str: 4 }
+    ceza: { cha: -3 }
+    yozlasma: 10
+  liman_ruzgari:
+    hedef: oyuncu
+    ad: { tr: "Liman Rüzgârı", en: "Harbor Wind" }
+    aciklama: { tr: "{yer:kiyikent|in} tuzlu rüzgârı ciğerlerine yerleşti. Hiç yorulmuyor gibisin; uyumak ise artık zor.", en: "{yer:kiyikent|pos} salt wind settled into your lungs. You barely tire anymore. Sleep is another story." }
+    bonus: { agi: 2, per: 2 }
+    ceza: { end: -1 }
+
+  # ---- NPC ----
+  yarali_guven:
+    hedef: npc
+    ad: { tr: "Yaralı Güven", en: "Broken Trust" }
+    aciklama: { tr: "Bir kez kandırıldı. Artık her sözün altını kazıyor.", en: "Got burned once. Now they dig under every word." }
+    kisilik: { supheci: 3, sadakat: -1 }
+  sertlesmis:
+    hedef: npc
+    ad: { tr: "Sertleşmiş", en: "Hardened" }
+    aciklama: { tr: "Gördükleri onu değiştirdi. Daha cesur, daha az yumuşak.", en: "What they saw changed them. Braver. Less soft." }
+    kisilik: { cesaret: 2, vicdan: -2 }
+  can_borcu:
+    hedef: npc
+    ad: { tr: "Can Borcu", en: "Life Debt" }
+    aciklama: { tr: "Hayatını sana borçlu. Bunu hiç unutmuyor.", en: "Owes you their life. Never lets themselves forget it." }
+    kisilik: { sadakat: 2 }
+  korku_izi:
+    hedef: npc
+    ad: { tr: "Korku İzi", en: "Fear-Scarred" }
+    aciklama: { tr: "Senin elinde ne olabileceğini gördü. Bir yanı hep kaçmaya hazır.", en: "Saw what could happen in your hands. Part of them is always ready to run." }
+    kisilik: { cesaret: -2 }
+  yara_izi:
+    hedef: npc
+    ad: { tr: "Yara İzi", en: "Scarred" }
+    aciklama: { tr: "Senin yüzünden aldığı bir yara. Her aynaya baktığında görüyor.", en: "A wound they took because of you. They see it every time they look in a mirror." }
+    kisilik: { hirs: 1, vicdan: -1 }

@@ -48,6 +48,8 @@ fun MoreScreen(
     daily: DailyView?,
     map: List<RegionView>,
     journal: JournalView?,
+    relations: com.yukselis.engine.story.RelationsView?,
+    ranking: com.yukselis.engine.story.RankingView?,
     notices: List<NoticeView>,
     onTrain: () -> Unit,
     mode: GameMode,
@@ -70,7 +72,8 @@ fun MoreScreen(
         if (map.isNotEmpty()) MapSection(map)
         notices.forEach { SystemCard(it, Modifier.padding(vertical = 4.dp)) }
         daily?.let { DailyPanel(it, onTrain, inDayLoop = map.isNotEmpty()) }
-        ComingSoon(stringResource(R.string.relationships), 5)
+        relations?.let { RelationsSection(it) }
+        ranking?.takeIf { map.isNotEmpty() }?.let { RankingSection(it) }
         journal?.let { JournalSection(it) }
 
         SectionTitle(stringResource(R.string.saves))
@@ -147,6 +150,16 @@ private fun JournalSection(journal: JournalView) {
         Text(stringResource(R.string.legend), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
         journal.legend.forEach { Text("${it.name} ×${it.count}", style = GameType.system) }
     }
+    // OP MC bilgi günlüğü: söylentiler, sırlar, gerçek seviyeler.
+    if (journal.knowledge.isNotEmpty()) {
+        Text(stringResource(R.string.intel_log), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
+        journal.knowledge.forEach { k ->
+            Column(modifier = Modifier.padding(vertical = 3.dp)) {
+                Text(k.name, style = GameType.systemTitle, color = Color(0xFF26A69A))
+                Text(k.description, style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+        }
+    }
 }
 
 /** Günlük Görev: yalnızca oyuncunun gördüğü pencere. */
@@ -175,16 +188,6 @@ private fun DailyPanel(daily: DailyView, onTrain: () -> Unit, inDayLoop: Boolean
     }
 }
 
-@Composable
-private fun ComingSoon(label: String, phase: Int) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-    ) {
-        Text(label, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
-        Text(stringResource(R.string.coming_in_phase, phase), style = GameType.system, color = MaterialTheme.colorScheme.outline)
-    }
-}
 
 @Composable
 private fun SlotRow(slot: String, info: SlotInfo?, canSave: Boolean, onSave: () -> Unit, onLoad: () -> Unit) {

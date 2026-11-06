@@ -29,4 +29,23 @@ object EnglishGrammar {
 
     /** Devon → Devon's, Miles → Miles's (Chicago Manual of Style). */
     fun possessive(name: String): String = "$name's"
+
+    /** Zamir ve fiil uyumu: `p` he/she/they/it; kipler bkz. TokenResolver. */
+    fun pronoun(p: String, mods: List<String>): String {
+        val plural = p == "they"
+        val m = mods.firstOrNull { it != "b" } ?: "o"
+        val word = when (m) {
+            "o" -> p
+            "onu" -> when (p) { "he" -> "him"; "she" -> "her"; "it" -> "it"; else -> "them" }
+            "onun" -> when (p) { "he" -> "his"; "she" -> "her"; "it" -> "its"; else -> "their" }
+            "kendi" -> when (p) { "he" -> "himself"; "she" -> "herself"; "it" -> "itself"; else -> "themselves" }
+            "s" -> if (plural) "" else "s"
+            "is" -> if (plural) "are" else "is"
+            "has" -> if (plural) "have" else "has"
+            "does" -> if (plural) "do" else "does"
+            "was" -> if (plural) "were" else "was"
+            else -> p
+        }
+        return if ("b" in mods) word.replaceFirstChar { it.uppercase() } else word
+    }
 }

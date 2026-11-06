@@ -120,6 +120,18 @@ data class EnemyState(
     fun has(effect: String) = statuses.any { it.effect == effect }
 }
 
+/** Savaşa katılan yoldaş (NPC). Can savaştan savaşa taşınmaz; düşen yoldaş ölmez, savaş dışında kalır. */
+data class AllyState(
+    val npc: String,
+    val hp: Int,
+    val maxHp: Int,
+    val level: Int,
+    val stats: Stats,
+    val down: Boolean = false,
+    /** Koruma/şifa yeteneğinin bekleme süresi. */
+    val cooldown: Int = 0,
+)
+
 /** Savaş günlüğünün bir satırı: düzyazı ve isteğe bağlı sayı satırı. */
 data class LogEntry(val prose: LText, val numbers: LText? = null)
 
@@ -156,10 +168,15 @@ data class CombatState(
     val struck: Set<Int> = emptySet(),
     val lowestHpPercent: Int = 100,
     val kills: Int = 0,
+    /** Aşama 5: yoldaşlar. */
+    val allies: List<AllyState> = emptyList(),
+    /** Savunurken düşük canlı bir yoldaşa gelen saldırıyı üstüne çektiğin sayı. */
+    val protectedAllies: Int = 0,
 ) {
     fun enemy(uid: Int): EnemyState? = enemies.firstOrNull { it.uid == uid }
     val living: List<EnemyState> get() = enemies.filter { it.alive }
     fun playerHas(effect: String) = playerStatuses.any { it.effect == effect }
+    val standingAllies: List<AllyState> get() = allies.filter { !it.down }
 
     companion object {
         const val LOG_LIMIT = 40

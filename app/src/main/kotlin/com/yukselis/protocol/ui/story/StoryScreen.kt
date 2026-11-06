@@ -137,6 +137,10 @@ fun StoryScreen(
         if (finished && scene.current.insights.isNotEmpty()) {
             item(key = "insights-$passageKey") { Insights(scene.current.insights) }
         }
+        // Yoldaş görüşleri: büyük seçimden önce yanındakilerin tek satırı.
+        if (finished && scene.opinions.isNotEmpty()) {
+            item(key = "opinions-$passageKey") { Opinions(scene.opinions) }
+        }
 
         if (finished) {
             itemsIndexed(scene.current.notices, key = { i, _ -> "notice-$passageKey-$i" }) { _, notice ->
@@ -178,6 +182,23 @@ private fun PastPassage(passage: PassageView) {
                 style = GameType.narrationPast.copy(fontStyle = FontStyle.Italic),
                 color = MaterialTheme.colorScheme.primary.copy(alpha = 0.75f),
             )
+        }
+    }
+}
+
+/** Yoldaşların görüşü: ad + tek satır; Yankı'nınki kendi renginde. */
+@Composable
+private fun Opinions(lines: List<com.yukselis.engine.story.CompanionLineView>) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(6.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .drawBehind { drawRect(com.yukselis.protocol.ui.theme.CompanionColor, size = Size(3.dp.toPx(), size.height)) }
+            .padding(start = 12.dp),
+    ) {
+        lines.forEach {
+            val color = if (it.echo) EchoColor else com.yukselis.protocol.ui.theme.CompanionColor
+            Text("${it.npcName}: ${it.text}", style = GameType.system, color = color)
         }
     }
 }

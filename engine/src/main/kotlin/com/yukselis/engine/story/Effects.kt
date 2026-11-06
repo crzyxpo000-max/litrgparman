@@ -26,6 +26,9 @@ class EffectApplier(private val content: Content) {
 
     private val texts get() = content.texts
 
+    /** NPC sistemi (Aşama 5). */
+    val npc = com.yukselis.engine.npc.NpcEngine(content, this)
+
     fun applyAll(state: WorldState, effects: List<Effect>): Result {
         var current = state
         val notices = mutableListOf<Notice>()
@@ -93,6 +96,11 @@ class EffectApplier(private val content: Content) {
         )
         is Effect.AddHp -> Result(state.withPlayer { it.copy(hp = (it.hp + effect.delta).coerceIn(1, it.maxHp)) }, emptyList())
         is Effect.AddMp -> Result(state.withPlayer { it.copy(mp = (it.mp + effect.delta).coerceIn(0, it.maxMp)) }, emptyList())
+        is Effect.ShiftRelation, is Effect.AddMemory, is Effect.KillNpc, is Effect.JoinParty, is Effect.LeaveParty, is Effect.NpcGone,
+        is Effect.SetNpcFaction, is Effect.MeetNpc, is Effect.NpcLevel, is Effect.NpcTrait, is Effect.NpcMark,
+        is Effect.PlayerTrait, is Effect.Learn, is Effect.TellLie, is Effect.PersonalQuest, is Effect.NpcReward,
+        is Effect.AddArmy, is Effect.GrowArmy,
+        -> npc.apply(state, effect)
     }
 
     // ---- Statlar, itibar ----
@@ -152,13 +160,15 @@ class EffectApplier(private val content: Content) {
         val gap = (state.player.level - state.publicLevel).coerceAtLeast(0)
         val s = state.copy(publicLevel = state.player.level)
         val a = shiftAttention(s, 5 + 2 * gap)
-        return Result(a.state, listOf(Notice(NoticeKind.WARNING, texts.format("aciga_vuruldu", "n" to state.player.level))) + a.notices)
+        // NPC'ler artık gerçek seviyeye tepki verir; sıralama güncellenir.
+        val n = npc.onReveal(a.state, gap)
+        return Result(n.state, listOf(Notice(NoticeKind.WARNING, texts.format("aciga_vuruldu", "n" to state.player.level))) + a.notices + n.notices)
     }
 
     private fun feat(state: WorldState, id: String): Result {
         val def = content.feats[id] ?: error("Tanımsız başarı: $id")
         val count = (state.legend[id] ?: 0) + 1
-        var s = state.copy(legend = state.legend + (id to count))
+        var s = npc.witnessFeat(state.copy(legend = state.legend + (id to count)), id)
         val lines = mutableListOf<LText>()
         def.reactions.forEach { (faction, d) ->
             s = shiftReputation(s, faction, d).state
@@ -188,7 +198,7 @@ class EffectApplier(private val content: Content) {
     private fun plantSeed(state: WorldState, e: Effect.PlantSeed): Result {
         val rng = Rng(state.rngState)
         val delay = if (e.maxDelay > e.minDelay) rng.nextInt(e.minDelay, e.maxDelay) else e.minDelay
-        val seed = com.yukselis.engine.world.Seed(e.eventId, state.day + delay, e.condition)
+        val seed = com.yukselis.engine.world.Seed(e.eventId, state.day + delay, e.condition, e.npc?.let { state.npcId(it) })
         return Result(state.copy(seeds = state.seeds + seed, rngState = rng.state), emptyList())
     }
 

@@ -65,7 +65,51 @@ data class QuestView(val name: String, val description: String, val status: com.
 
 data class LegendView(val name: String, val count: Int)
 
-data class JournalView(val quests: List<QuestView>, val legend: List<LegendView>, val pendingSeeds: Int)
+data class KnowledgeView(val name: String, val description: String, val kind: String)
+
+data class JournalView(
+    val quests: List<QuestView>,
+    val legend: List<LegendView>,
+    val pendingSeeds: Int,
+    /** Bilgi günlüğü: söylentiler, sırlar, gerçek seviyeler (en yeni önce). */
+    val knowledge: List<KnowledgeView> = emptyList(),
+)
+
+/** Yoldaşın büyük seçimden önceki tek satırlık görüşü. `echo`: Yankı'nın sesi. */
+data class CompanionLineView(val npcName: String, val text: String, val favoredChoice: String?, val echo: Boolean)
+
+data class NpcView(
+    val id: String,
+    val name: String,
+    val fullName: String,
+    val description: String,
+    val trust: Int,
+    val respect: Int,
+    val fear: Int,
+    val bond: Int,
+    val level: Int,
+    val gradeName: String,
+    /** Durum satırı: Yoldaş · Demir Lonca · Öldü … */
+    val status: String,
+    val alive: Boolean,
+    val companion: Boolean,
+    val memories: List<String>,
+    val traits: List<String>,
+    val goal: String?,
+)
+
+data class RelationsView(val npcs: List<NpcView>, val companions: Int, val capacity: Int, val armyPower: Int, val army: List<String>)
+
+data class RankRowView(val rank: Int, val name: String, val level: Int, val gradeName: String, val you: Boolean, val npc: Boolean)
+
+data class RankingView(
+    /** Dünyanın gördüğü sıralama (görünen seviyenle). */
+    val rows: List<RankRowView>,
+    val publicRank: Int,
+    val trueRank: Int,
+    val total: Int,
+    val note: String,
+)
 
 data class PassageView(
     val sceneId: String,
@@ -90,6 +134,8 @@ data class SceneView(
     val prompt: PromptView? = null,
     /** Gün akışındayken (olay dışı) dolu. */
     val hub: HubView? = null,
+    /** Yanındakilerin görüşleri (Aşama 5). */
+    val opinions: List<CompanionLineView> = emptyList(),
 )
 
 /** `echo`: stat sezgisi değil, Yankı'nın sesi (öneksiz satır). */
@@ -151,6 +197,11 @@ data class StatusView(
     val day: Int,
     val act: Int,
     val mode: GameMode,
+    /** OP MC izler (ad: açıklama). */
+    val traits: List<TitleLine> = emptyList(),
+    val armyPower: Int = 0,
+    /** Küresel Sıralama: dünyanın gördüğü sıra. */
+    val publicRank: Int = 0,
 )
 
 data class SkillView(
@@ -279,4 +330,7 @@ data class CombatView(
     val minorUsed: Boolean,
     val extraActions: Int,
     val dead: Boolean,
+    val allies: List<AllyView> = emptyList(),
 )
+
+data class AllyView(val name: String, val level: Int, val hp: Int, val maxHp: Int, val down: Boolean, val role: String)

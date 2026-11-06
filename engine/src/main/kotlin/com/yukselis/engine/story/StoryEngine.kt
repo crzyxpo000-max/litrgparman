@@ -24,6 +24,12 @@ import com.yukselis.engine.system.Stat
  * Aşama 4'te olay havuzu ve Hikaye Yönetmeni bunun yanına gelecek.
  */
 class StoryEngine(val content: Content) {
+    companion object {
+        const val MEMORY_SHOWN = 5
+        private const val DENIZ = "deniz_arman"
+        const val RANK_SHOWN = 10
+    }
+
     private val resolver = TokenResolver(content.names)
     private val effects = EffectApplier(content)
     private val actions = PlayerActions(content, effects)
@@ -54,10 +60,79 @@ class StoryEngine(val content: Content) {
     }
 
     fun journal(state: WorldState, lang: Lang): JournalView = JournalView(
-        quests = state.quests.mapNotNull { (id, st) -> content.quests[id]?.let { QuestView(it.name[lang], text(it.description[lang], state, lang), st) } },
+        quests = state.quests.mapNotNull { (id, st) -> content.quests[id]?.let { QuestView(text(it.name[lang], state, lang), text(it.description[lang], state, lang), st) } },
         legend = state.legend.mapNotNull { (id, n) -> content.feats[id]?.let { LegendView(it.name[lang], n) } },
         pendingSeeds = state.seeds.size,
+        knowledge = state.knowledge.reversed().mapNotNull { id ->
+            content.knowledge[id]?.let { KnowledgeView(text(it.name[lang], state, lang), text(it.description[lang], state, lang), it.kind) }
+        },
     )
+
+    // ---- NPC'ler (Aşama 5) ----
+
+    val npcEngine get() = effects.npc
+
+    /** İlişkiler ekranı: tanınan NPC'ler, dört eksen, son hatıralar, durum ve izler. */
+    fun relations(state: WorldState, lang: Lang): RelationsView {
+        val t = content.texts
+        val npcs = content.npcs.values.mapNotNull { d ->
+            val n = state.npcs[d.id]?.takeIf { it.known } ?: return@mapNotNull null
+            val status = buildList {
+                when {
+                    !n.alive -> add(t.format("npc_durum_olu")[lang])
+                    n.status == com.yukselis.engine.npc.NpcStatus.GONE -> add(t.format("npc_durum_gitti")[lang])
+                    n.companion -> add(t.format("npc_durum_yoldas")[lang])
+                }
+                n.faction?.let { add(npcEngine.factionName(it)[lang]) }
+                if (com.yukselis.engine.npc.NpcEngine.MARK_RIVAL in n.marks) add(t.format("npc_durum_rakip")[lang])
+            }.joinToString(" · ")
+            NpcView(
+                id = d.id,
+                name = npcEngine.name(d.id)[lang],
+                fullName = npcEngine.fullName(d.id)[lang],
+                description = text(d.description[lang], state, lang),
+                trust = n.relation.trust,
+                respect = n.relation.respect,
+                fear = n.relation.fear,
+                bond = n.relation.bond,
+                level = n.level,
+                gradeName = Grade.forLevel(n.level.coerceAtLeast(1)).name,
+                status = status,
+                alive = n.alive,
+                companion = n.companion,
+                memories = n.memories.sortedWith(compareByDescending<com.yukselis.engine.npc.Memory> { it.day }.thenByDescending { kotlin.math.abs(it.weight) })
+                    .mapNotNull { m -> npcEngine.memoryText(d.id, m)?.let { text(it[lang], state.copy(focusNpc = d.id), lang) } }
+                    .distinct().take(MEMORY_SHOWN),
+                traits = n.traits.mapNotNull { content.traits[it]?.name?.get(lang) },
+                goal = npcEngine.goalName(state, d.id)?.get(lang)?.takeIf { n.alive },
+            )
+        }.sortedWith(compareByDescending<NpcView> { it.companion }.thenByDescending { it.alive }.thenBy { it.name })
+        return RelationsView(
+            npcs = npcs,
+            companions = npcEngine.companions(state).size,
+            capacity = npcEngine.capacity(state),
+            armyPower = npcEngine.armyPower(state),
+            army = state.player.army.entries.sortedBy { it.key }.mapNotNull { (id, k) -> content.army[id]?.let { "${it.name[lang]} ×$k" } },
+        )
+    }
+
+    /** Küresel Sıralama: dünyanın gördüğü liste (görünen seviyen) + gerçek yerin. */
+    fun ranking(state: WorldState, lang: Lang): RankingView {
+        val list = npcEngine.ranking(state, public = true)
+        val rows = list.mapIndexed { i, e -> i to e }.filter { (i, e) -> i < RANK_SHOWN || e.kind == com.yukselis.engine.npc.NpcEngine.RankKind.PLAYER }
+            .map { (i, e) ->
+                val name = when (e.kind) {
+                    com.yukselis.engine.npc.NpcEngine.RankKind.PLAYER -> state.playerName
+                    com.yukselis.engine.npc.NpcEngine.RankKind.NPC -> npcEngine.fullName(e.id)[lang]
+                    com.yukselis.engine.npc.NpcEngine.RankKind.HUNTER -> state.hunters.firstOrNull { "avci_${it.uid}" == e.id }?.let { npcEngine.hunterName(it)[lang] } ?: "?"
+                }
+                RankRowView(i + 1, name, e.level, Grade.forLevel(e.level.coerceAtLeast(1)).name, e.kind == com.yukselis.engine.npc.NpcEngine.RankKind.PLAYER, e.kind == com.yukselis.engine.npc.NpcEngine.RankKind.NPC)
+            }
+        val pub = npcEngine.playerRank(state, public = true)
+        val real = npcEngine.playerRank(state, public = false)
+        val note = if (real < pub) content.texts.format("sira_gizli", "n" to real)[lang] else content.texts.format("sira_acik")[lang]
+        return RankingView(rows, pub, real, list.size, note)
+    }
 
     private fun controlName(control: String, lang: Lang): String =
         content.names.find(NameEntry.Kind.FACTION, control)?.full?.get(lang) ?: content.texts.format("kontrol_$control")[lang]
@@ -127,7 +202,7 @@ class StoryEngine(val content: Content) {
         fun statuses(list: List<com.yukselis.engine.combat.StatusInstance>) =
             list.map { "${t.format("durum_${it.effect}")[lang]} (${it.turns})" }
         val enemies = c.enemies.map { e ->
-            val d = content.enemies.getValue(e.id)
+            val d = combat.enemyDef(e.id, state) ?: return null
             EnemyView(
                 uid = e.uid,
                 name = d.name[lang],
@@ -166,11 +241,12 @@ class StoryEngine(val content: Content) {
             ItemView(id, d.name[lang], d.description[lang], n, d.rarity, true)
         }
         val execution = c.pendingExecution?.let { uid -> c.enemy(uid) }?.let { pending ->
-            val d = content.enemies.getValue(pending.id)
+            val d = combat.enemyDef(pending.id, state) ?: return null
+            val sfx = if (pending.id.startsWith(com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX)) "_npc" else ""
             ExecutionView(
                 enemyName = d.name[lang],
                 options = CombatEngine.EXECUTIONS.map { id ->
-                    PromptOptionView(id, t.format("infaz_$id")[lang], t.format("infaz_${id}_aciklama")[lang])
+                    PromptOptionView(id, t.format("infaz_$id$sfx")[lang], t.format("infaz_$id${sfx}_aciklama")[lang])
                 },
             )
         }
@@ -190,6 +266,10 @@ class StoryEngine(val content: Content) {
             minorUsed = c.minorUsed,
             extraActions = c.extraActions,
             dead = state.dead,
+            allies = c.allies.map { a ->
+                val role = content.npcs[a.npc]?.combat?.role?.key ?: ""
+                AllyView(npcEngine.name(a.npc)[lang], a.level, a.hp, a.maxHp, a.down, t.format("rol_$role")[lang])
+            },
         )
     }
 
@@ -197,7 +277,7 @@ class StoryEngine(val content: Content) {
 
     /** Yeni oyun: Gün 0'ın Günlük Görevi de üretilir. */
     fun newGame(playerName: String, mode: GameMode, seed: Long): WorldState =
-        effects.newDaily(WorldState.newGame(seed, playerName, mode, content.startScene)).state
+        npcEngine.ensure(effects.newDaily(WorldState.newGame(seed, playerName, mode, content.startScene)).state)
 
     // ---- Hikaye dışı eylemler (geçersizse ActionRejected) ----
 
@@ -222,11 +302,18 @@ class StoryEngine(val content: Content) {
         var s = state.copy(prompts = valid)
         s.combat?.let { c ->
             val scenesOk = listOfNotNull(c.spec.win, c.spec.lose, c.spec.flee).all { it == WorldState.HUB || it in content.scenes }
-            if (!scenesOk || c.enemies.any { it.id !in content.enemies }) s = s.copy(combat = null)
+            if (!scenesOk || c.enemies.any { combat.enemyDef(it.id, s) == null } || c.allies.any { it.npc !in content.npcs }) s = s.copy(combat = null)
         }
         if (s.daily == null || s.daily?.templateId !in content.dailyTemplates) s = effects.newDaily(s).state
         if (s.sceneId != WorldState.HUB && s.sceneId !in content.scenes) s = s.copy(sceneId = if (s.regions.isNotEmpty()) WorldState.HUB else content.startScene)
         s = s.copy(seeds = s.seeds.filter { it.eventId in content.events }, dayState = s.dayState.copy(hand = s.dayState.hand.filter { it in content.events }))
+        // NPC'ler: tanımsızlar atılır, eksikler (eski kayıt) içerikten kurulur.
+        val fresh = content.npcs.keys.filter { s.npcs[it]?.initialized != true }.toSet()
+        s = npcEngine.ensure(s.copy(npcs = s.npcs.filterKeys { it in content.npcs }))
+        // v2 kaydı: Deniz'le birlikte uyanılmış ya da bulunmuşsa yoldaş olarak kurulur (Aşama 5 içeriğiyle uyumlu).
+        if (DENIZ in fresh && (s.hasFlag("deniz_el_tutuldu") || s.hasFlag("deniz_bulundu"))) s = npcEngine.join(s, DENIZ).state
+        // Gün akışına girmiş eski kayıtta Küresel Sıralama'nın avcıları yok: kurulur.
+        if (s.regions.isNotEmpty() && s.hunters.isEmpty()) s = npcEngine.setupRanking(s)
         return s
     }
 
@@ -267,10 +354,16 @@ class StoryEngine(val content: Content) {
         val history = state.history.mapNotNull { entry ->
             val past = content.scenes[entry.sceneId] ?: return@mapNotNull null
             val chosen = past.choices.firstOrNull { it.id == entry.choiceId }
-            passage(past, state, lang).copy(chosenLabel = chosen?.let { text(it.label[lang], state, lang) })
+            // Geçmiş pasaj kendi odak NPC'siyle çözülür ("@" sonraki olaya sızmasın).
+            val then = state.copy(focusNpc = entry.focus)
+            passage(past, then, lang).copy(chosenLabel = chosen?.let { text(it.label[lang], then, lang) })
         }
-        val choices = scene.choices
-            .filter { it.showWhen?.test(state) ?: true }
+        val visibleChoices = scene.choices.filter { it.showWhen?.test(state) ?: true }
+        val important = state.dayState.currentEvent?.let { content.events[it]?.important } == true
+        val opinions = npcEngine.opinions(state, scene, visibleChoices, important).map { o ->
+            CompanionLineView(npcEngine.name(o.npc)[lang], text(o.text[lang], state, lang), o.favored, echo = content.npcs[o.npc]?.presentWhen != null)
+        }
+        val choices = visibleChoices
             .map { choice ->
                 val failed = choice.check?.oneShot == true && state.hasFlag(oneShotFlag(scene.id, choice.id))
                 val baseTag = requirementTag(choice.requires, lang)
@@ -303,6 +396,7 @@ class StoryEngine(val content: Content) {
             choices = choices,
             isEnding = scene.isEnding,
             prompt = state.prompts.firstOrNull()?.let { promptView(it, state, lang) },
+            opinions = opinions,
         )
     }
 
@@ -329,9 +423,13 @@ class StoryEngine(val content: Content) {
         }
         val chosenEffects = if (success) choice.effects else choice.check!!.failEffects
         val fight = chosenEffects.filterIsInstance<Effect.StartCombat>().firstOrNull()
-        val applied = effects.applyAll(start, chosenEffects - setOfNotNull(fight))
+        val applied0 = effects.applyAll(start, chosenEffects - setOfNotNull(fight))
+        // Tanıklar: seçimin ahlakını yanındaki NPC'ler kendi değerlerine göre yorumlar (GDD: NPC modeli).
+        val moral = chosenEffects.filterIsInstance<Effect.ShiftMorality>().groupBy { it.axis }.mapValues { (_, l) -> l.sumOf { it.delta } }
+        val witnessed = npcEngine.interpret(applied0.state, moral, state.dayState.currentEvent)
+        val applied = EffectApplier.Result(witnessed.state, applied0.notices + witnessed.notices)
         var next = applied.state.copy(
-            history = (applied.state.history + HistoryEntry(scene.id, choice.id)).takeLast(WorldState.HISTORY_LIMIT),
+            history = (applied.state.history + HistoryEntry(scene.id, choice.id, state.focusNpc)).takeLast(WorldState.HISTORY_LIMIT),
         )
         val checkNotices = mutableListOf<Notice>()
         choice.check?.let { c ->
@@ -407,6 +505,9 @@ class StoryEngine(val content: Content) {
             day = state.day,
             act = state.act,
             mode = state.mode,
+            traits = p.traits.mapNotNull { id -> content.traits[id]?.let { TitleLine(it.name[lang], text(it.description[lang], state, lang), Rarity.EPIC) } },
+            armyPower = npcEngine.armyPower(state),
+            publicRank = state.variable(com.yukselis.engine.npc.NpcEngine.VAR_RANK),
         )
     }
 
@@ -622,8 +723,17 @@ class StoryEngine(val content: Content) {
     private fun placeName(placeId: String?, lang: Lang): String? =
         placeId?.let { content.names.find(NameEntry.Kind.PLACE, it)?.full?.get(lang) }
 
-    private fun text(raw: String, state: WorldState, lang: Lang): String =
-        resolver.resolve(raw, lang, state.playerName)
+    private fun text(raw: String, state: WorldState, lang: Lang): String {
+        var t = raw
+        if ("@" in t) {
+            val focus = state.focusNpc
+            if (focus != null) {
+                t = t.replace("{npc:@", "{npc:$focus").replace("{zamir:@", "{zamir:$focus")
+                if ("{npc_hedef:@}" in t) t = t.replace("{npc_hedef:@}", npcEngine.goalName(state, focus)?.get(lang) ?: "")
+            }
+        }
+        return resolver.resolve(t, lang, state.playerName)
+    }
 
     private fun requirementTag(condition: Condition?, lang: Lang): String? = when (condition) {
         null -> null

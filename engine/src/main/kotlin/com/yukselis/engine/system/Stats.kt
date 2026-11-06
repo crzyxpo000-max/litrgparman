@@ -3,6 +3,7 @@ package com.yukselis.engine.system
 import com.yukselis.engine.i18n.LText
 import kotlin.math.floor
 import kotlin.math.pow
+import kotlin.math.roundToInt
 
 /** Sekiz temel stat. Koddaki kimlikler (key) İngilizcedir; ekranda dile göre ad ve kısaltma gösterilir. */
 enum class Stat(val key: String, val label: LText, val abbr: LText) {
@@ -118,6 +119,29 @@ object Progression {
 
     /** Generic evolution (sınıfın o kademe için tanımlı evrimi yoksa) her stata verilen bonus. */
     const val GENERIC_EVOLUTION_BONUS = 1
+
+    // ---- Aşama 5: NPC'ler ----
+
+    /**
+     * NPC'nin günlük büyümesi (seviyenin yüzde biri): 40 · hız / (1 + L/10).
+     * Sürekli biçimi dL/dt = 0,4 · hız / (1 + L/10): hız 1'lik bir insan Gün 30'da ~8, Gün 180'de ~29,
+     * Gün 365'te ~45. Oyuncunun beklenen eğrisi (1 + 0,4 · gün) bunun çok üstündedir (OP MC).
+     */
+    fun npcDailyGrowth(rate: Double, level: Int): Int = (40.0 * rate / (1 + level / 10.0)).roundToInt().coerceAtLeast(1)
+
+    /** Yoldaşlıkta ya da ihmal edilince "başka bir yoldan" büyüme çarpanı. */
+    const val NPC_COMPANION_GROWTH = 1.25
+    const val NPC_NEGLECT_GROWTH = 1.25
+
+    /** Bu kadar gün temas olmazsa NPC ihmal edilmiş sayılır. */
+    const val NPC_NEGLECT_DAYS = 10
+
+    /** Yoldaş kapasitesi: 1 + KAR/10 + kademe (F 0, E 1 …), 1–8. */
+    fun companionCapacity(stats: Stats, grade: Grade): Int = (1 + stats[Stat.CHA] / 10 + grade.ordinal).coerceIn(1, 8)
+
+    /** Ordu gücü: Σ adet · birlik gücü · (1 + kademe) · (1 + seviye/50). Oyuncuyla ölçeklenir. */
+    fun armyPower(unitPower: Int, count: Int, level: Int, grade: Grade): Int =
+        (count * unitPower * (1 + grade.ordinal) * (1 + level / 50.0)).roundToInt()
 }
 
 /** Yetenek, eşya ve unvan nadirlikleri; içerikte Türkçe ASCII anahtarlarla yazılır. */

@@ -46,7 +46,7 @@ class WorldEngine(
      * (ana yay, vadesi gelen tohum) varsa hemen başlar; yoksa fırsat eli dağıtılır.
      */
     fun enterHub(state: WorldState): Result {
-        var s = state.copy(sceneId = WorldState.HUB, dayState = state.dayState.copy(currentEvent = null))
+        var s = effects.npc.ensure(state.copy(sceneId = WorldState.HUB, dayState = state.dayState.copy(currentEvent = null), focusNpc = null))
         val notices = mutableListOf<Notice>()
         if (s.regions.isEmpty()) {
             val setup = setupWorld(s)
@@ -60,7 +60,7 @@ class WorldEngine(
         director.forced(s)?.let { f ->
             if (f.seed != null) s = s.copy(seeds = s.seeds.filterNot { it == f.seed })
             // Zorunlu olay yuva harcamaz: eylemin yuvası zaten harcandı (DECISIONS #73).
-            val started = startEvent(s, f.eventId, consumeSlot = false)
+            val started = startEvent(s, f.eventId, consumeSlot = false, focus = f.seed?.npc)
             return Result(started.state, notices + started.notices)
         }
         val rng = Rng(s.rngState)
@@ -78,6 +78,8 @@ class WorldEngine(
             flags = state.flags + DAILY_WIDE_FLAG,
             publicLevel = state.player.level,
         )
+        // NPC'ler ve Küresel Sıralama (Aşama 5)
+        s = effects.npc.setupRanking(effects.npc.ensure(s))
         val day = startDay(s, advance = false)
         s = day.state
         return Result(s, listOf(Notice(NoticeKind.SYSTEM, texts.format("akis_basladi"))) + day.notices)
@@ -91,6 +93,10 @@ class WorldEngine(
             val r = effects.applyAll(s, listOf(Effect.AdvanceDays(1)))
             s = r.state
             notices += r.notices
+            // Her NPC her gün bir adım atar (GDD: Dinamik karakterler).
+            val n = effects.npc.dailyTick(s)
+            s = n.state
+            notices += n.notices
         }
         val rng = Rng(s.rngState)
         val slots = rng.nextInt(Progression.MIN_SLOTS, Progression.MAX_SLOTS)
@@ -154,9 +160,12 @@ class WorldEngine(
         state.copy(dayState = state.dayState.copy(slotsLeft = (state.dayState.slotsLeft - 1).coerceAtLeast(0)))
 
     /** Olayı başlatır: giriş sahnesine geçer, görüldü olarak işaretler, gerilim/etiket geçmişini yazar. */
-    fun startEvent(state: WorldState, eventId: String, consumeSlot: Boolean): Result {
+    fun startEvent(state: WorldState, eventId: String, consumeSlot: Boolean, focus: String? = null): Result {
         val e = content.events[eventId] ?: throw ActionRejected("Tanımsız olay: $eventId")
-        val s0 = if (consumeSlot) spend(state) else state
+        var s0 = if (consumeSlot) spend(state) else state
+        // Olaydaki NPC'lerle temas: tanınırlar, ihmal sayacı sıfırlanır. Odak: tohumun NPC'si ya da olayın ilk NPC'si.
+        e.npcs.forEach { s0 = effects.npc.touch(s0, it) }
+        s0 = s0.copy(focusNpc = focus ?: e.npcs.firstOrNull())
         val d = s0.dayState
         val s = s0.copy(
             sceneId = e.entry,

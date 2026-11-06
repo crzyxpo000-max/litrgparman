@@ -7,7 +7,9 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 
 ## Durum
 
-- **Aşama 0–4 tamam.** Aşama 4: içerik YAML, olay havuzu, Hikaye Yönetmeni, tohumlar, gün döngüsü, bölgeler/kapılar,
+- **Aşama 0–5 tamam.** Aşama 5: NPC sistemi (`npc/`: 4 eksen, hafıza, gündem, eşikler, ölüm, yoldaşlar, düello,
+  Küresel Sıralama, yoldaş görüşleri, güce tepkiler, bilgi günlüğü, yalanlar, izler, Ordu modeli).
+- Aşama 0–4: Aşama 4: içerik YAML, olay havuzu, Hikaye Yönetmeni, tohumlar, gün döngüsü, bölgeler/kapılar,
   fraksiyon matrisi, bayrak kaydı, görevler, OP MC (Dikkat, Yozlaşma, gizli/görünen seviye, efsane, zar, gösteriş, fırsat eli).
 - Aşama 3: savaş (`combat/`, 20 düşman, savaş ekranı).
 - **Aşama 0, 1 ve 2:** Motor, kayıt (v2), i18n, içerik doğrulayıcı, Compose ekranları, prolog demosu;
@@ -54,7 +56,8 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 | `content` | `ContentParser` (YAML → `YamlTree`), `ContentLoader`, `ContentValidator` (+ `main`) |
 | `combat` | `CombatModel` (düşman/uyanış tanımları, `CombatState`, duruş, durumlar), `CombatMath` (GDD formülleri), `CombatEngine` (tur, yapay zeka, fazlar, infaz, zafer, ölüm, Ezme) |
 | `world` | `WorldModel` (olay/bölge/fraksiyon/başarı/görev tanımları, `RegionState`, `Gate`, `Seed`, `DayState`), `Director` (puanlama, zorunlu olaylar, fırsat eli), `WorldEngine` (gün döngüsü, akış eylemleri, kapılar) |
-| `save` | `SaveCodec`, `SaveManager` (auto + 3 slot, Demir Mod), `SaveStorage` |
+| `npc` | `NpcModel` (kişilik, ilişki, `NpcDef`, `NpcState`, hafıza, iz/bilgi/ordu/sıralama tanımları), `NpcEngine` (etkiler, günlük gündem, eşikler, tanık yorumu, görüşler, güce tepki, Küresel Sıralama, düello) |
+| `save` | `SaveCodec` (v3), `SaveManager` (auto + 3 slot, Demir Mod), `SaveStorage` |
 
 ## İçerik kuralları (content/)
 
@@ -91,6 +94,23 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
   `gizli_fark_min`, `bolge`, `perde`, `gun_min/max`, `gorev {id: durum}`, `itibar_max`. Belirteç `{fraksiyon:id}`.
 - Seçenek alanları: `tur: gizle|aciga_vur|gosteris`, `zar {stat, zorluk, tek, basarisiz, basarisiz_etkiler}`.
 - `validateContent` uyarıları (⚠) derlemeyi durdurmaz: set edilmeyen bayrak, ulaşılamayan tohum olayı, ahlak oynatmayan önemli seçim.
+- **NPC'ler (Aşama 5):** `npcs/<id>.yaml` (şema: `npcs/deniz_arman.yaml`): kisilik (cesaret/hirs/vicdan/sadakat/supheci),
+  degerler, baslangic_iliski (guven/saygi/korku/baglilik), hedefler, egilim, seviye, hiz, fraksiyon, yoldas, siralama, bilinen,
+  yaninda (koşul), savas {rol, stat, statlar, artis, saldiri, metin ({npc},{dusman}), duello_metin ({dusman})}, yay_dugumleri,
+  ilk_unvanlar, gorusler (merhamet+ … insanlik-), guc_tepkileri (hayranlik/endise/kiskanclik/bagimlilik), hafizalar, kisisel_odul.
+  Ayrıca `traits.yaml` (izler), `knowledge.yaml` (bilgiler), `army.yaml` (birlikler), `ranking.yaml` (avcılar, sıra tepkileri),
+  `factions.yaml` `degerler`. Her olayın `npc` listesindeki NPC'nin dosyası olmalı; ölen NPC'nin olayları gelmez.
+- NPC etkileri: `iliski {npc: {guven: n…}}`, `hafiza {npc, id, agirlik}`, `npc_ol`, `yoldas_katil`, `yoldas_ayril`, `npc_fraksiyon`,
+  `tanis`, `npc_seviye`, `npc_iz`, `npc_isaret`, `iz` (oyuncu), `bilgi`, `yalan {npc, konu}`, `kisisel_gorev {npc: durum}`, `npc_odul`,
+  `ordu {birlik: n}`, `ordu_kazan n`; `tohum` içinde `npc`. Koşullar: `npc_hayatta`, `npc_olu`, `yoldas`, `iliski_min/max`,
+  `npc_fraksiyon`, `npc_isaret`, `npc_seviye_min`, `hafiza {npc: id}`, `bilgi`, `yoldas_yer`, `gorunen_seviye_min/max`, `iz`, `npc_savasabilir`.
+- NPC kimliği `"@"` = olayın odak NPC'si (tohumun NPC'si ya da olayın ilk `npc`'si); metinde `{npc:@}`, `{npc_hedef:@}`.
+- İngilizce zamir: `{zamir:<npc|@>|o|onu|onun|kendi}` (he/him/his/himself …, `|b` büyük harf) ve fiil uyumu `|s` (say/says),
+  `|is`, `|has`, `|does`, `|was`; zamir `names.yaml` `zamir` alanından (Deniz "they"). Türkçe metinde kullanma (boş döner).
+  `npc_gitti` etkisi NPC'yi "gitti" durumuna alır (eşikleri kapanır). Düello düşmanı `npc:<id>` / `npc:@`.
+- Eşik olayları: genel `events/90_esikler.yaml` (`esik_ihanet|kisisel|kisisel_son|kacis|itaat|rakip|ayrilik|yalan`, `tekrar` + `yalniz_tohum`);
+  NPC'ye özel sürüm `esik_<tur>_<npc>` yazılırsa onun yerine gelir. Sahnede `yoldas_tepkileri: [{npc, metin, kosul}]`.
+- Sistem metni yer tutucusu olarak kimliksiz `{npc}` serbesttir (belirteç değil).
 - Sahnede `sezgiler`: [{`kosul`, `metin`}] → pasif Sistem sezgisi; stat koşullu satır "[ALG]" öneki alır, öneksiz satır Yankı'nın sesidir.
 - Bildirim türleri: sistem, durum, analiz, seviye, unvan, gorev, uyari, yetenek, evrim, sinif, `yanki` (bozuk yazı).
 - Eğilimler: yakin_dovus, menzilli, buyu, gizlilik, koruma, cagirma, zanaat, karanlik. Fraksiyonlar: siginak, lonca, yukselenler, sessiz_ag, kadimler.
@@ -107,6 +127,8 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Kendini açan arayüz: Yetenekler ve Çanta sekmeleri `StatusView.tabs` içinde yoksa gizlidir.
 - Tam ekran kartlar `ui/system/Overlays.kt`: önce kutlama (seviye/evrim/sınıf), sonra bekleyen istem.
 - Tema: Sistem · Açık · Koyu · AMOLED (saf siyah).
+- Daha fazla: İlişkiler (4 eksen, durum, hatıralar, izler; dokununca ayrıntı) ve Küresel Sıralama; Günlük'te bilgi günlüğü.
+  Hikaye'de yoldaş görüşleri, savaşta yoldaş satırları, Durum'da sıra/ordu/izler. Bildirim türü `yoldas` (pembe).
 - Gün akışında Hikaye sekmesi `HubPanel` gösterir (fırsat eli, serbest eylemler, kapılar, yolculuk, kamp); Harita ve Günlük Daha fazla'da.
 - Savaş varken Hikaye sekmesi `CombatScreen` gösterir; savaş başında Normal modda `checkpoint` kaydı yazılır.
 

@@ -300,7 +300,9 @@ class SystemMechanicsTest {
         val s = SaveCodec.decode(v1).state
         assertEquals(3, s.player.affinity[Affinity.RANGED])
         assertEquals(1, s.player.affinity[Affinity.MELEE])
-        assertEquals(mapOf("iliski_deniz_guven" to 10), s.vars)
+        // v2 → v3: ilişki değişkeni Deniz'in Güven eksenine taşındı.
+        assertEquals(emptyMap<String, Int>(), s.vars)
+        assertEquals(10, s.npcs.getValue("deniz_arman").relation.trust)
         assertEquals(Grade.F, s.player.unlockedGrade)
         assertNull(s.player.classId)
         assertNull(s.daily)

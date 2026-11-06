@@ -1,0 +1,68 @@
+# Deniz Arman / Devon Hale — Öğretici'de birlikte uyandığın eski arkadaş; Koruma eğilimli.
+# Yay: "arkadaşımın bir canavara ya da tanrıya dönüşmesini izlemek". Olası kaderler: sadık yoldaş ·
+# Yükselenler'e katılan trajik rakip · oyuncuyu kurtarmak için ölen kahraman.
+# İngilizce metinde Deniz için "they" kullanılır (DECISIONS #10).
+id: deniz_arman
+aciklama:
+  tr: "Kıyıkent vapurunda simidini martılarla paylaşan arkadaşın. Herkesi korumaya çalışıyor; kendisi hariç."
+  en: "Your friend from the Port Harlow ferry, the one who shares pretzels with the gulls. Tries to protect everybody. Except themselves."
+kisilik: { cesaret: 7, hirs: 4, vicdan: 8, sadakat: 9, supheci: 3 }
+degerler: { merhamet: 60, duzen: 10, insanlik: 70 }
+baslangic_iliski: { guven: 50, saygi: 20, korku: 0, baglilik: 40 }
+hedefler:
+  - id: kardesini_bul
+    oncelik: 10
+    ad: { tr: "Kız kardeşini bulmak", en: "Find their little sister" }
+  - id: oyuncuyu_koru
+    oncelik: 7
+    ad: { tr: "Seni hayatta tutmak", en: "Keep you alive" }
+egilim: { koruma: 8, yakin_dovus: 5 }
+seviye: 2
+hiz: 0.95
+yoldas: true
+bilinen: true
+savas:
+  rol: koruma
+  stat: str
+  statlar: { str: 6, agi: 5, end: 7, int: 4, wis: 5, per: 5, wil: 6, cha: 6 }
+  artis: { end: 1, str: 1 }
+  saldiri: { tr: "Kalkan Darbesi", en: "Shield Bash" }
+  metin:
+    tr: "{npc} omzunu indirip {dusman} üstüne yükleniyor."
+    en: "{npc} drops a shoulder and slams into {dusman}."
+  duello_metin:
+    tr: "{dusman} sana omuz atıyor; gözleri dolu ama vuruşu sert."
+    en: "{dusman} shoulder-checks you hard. Their eyes are wet. The hit isn't soft."
+yay_dugumleri: [deniz_bulusma, deniz_hesap, kamp_ates_basi, deniz_kardes_ipucu, deniz_son_secim]
+gorusler:
+  merhamet+:
+    - { tr: "\"Onu orada bırakamayız. Biz böyle insanlar değiliz.\"", en: "\"We can't just leave them. That's not who we are.\"" }
+    - { tr: "\"Bir dakika. Yardım edebiliriz, değil mi?\"", en: "\"Hang on. We could help, right?\"" }
+  merhamet-:
+    - { tr: "\"Bazen... bazen herkesi kurtaramıyorsun. Biliyorum.\"", en: "\"Sometimes you can't save everybody. I know that.\"" }
+  duzen+:
+    - { tr: "\"Bir kural koyalım. Herkes payını alsın, kimse geride kalmasın.\"", en: "\"Let's set some ground rules. Everybody gets a share. Nobody gets left behind.\"" }
+  duzen-:
+    - { tr: "\"Kurallar mı? Dünya bitti. İnsanlara bak, kurallara değil.\"", en: "\"Rules? The world ended. Look at the people, not the rules.\"" }
+  insanlik+:
+    - { tr: "\"Hâlâ insanız. Bunu unutma, tamam mı?\"", en: "\"We're still human. Don't forget that, okay?\"" }
+    - { tr: "\"Annemler olsa ne derdi, biliyor musun? Doğrusunu yap derdi.\"", en: "\"You know what my folks would say? Do the right thing.\"" }
+  insanlik-:
+    - { tr: "\"Hayatta kalmak için ne gerekiyorsa. Ama bunu sonra konuşacağız.\"", en: "\"Whatever it takes to survive. But we're talking about this later.\"" }
+guc_tepkileri:
+  hayranlik:
+    - { tr: "\"Vay be. Vapurda simit kavgası kaybeden sen miydin?\"", en: "\"Damn. Weren't you the one who lost a pretzel fight on the ferry?\"" }
+    - { tr: "\"Arkanda durmak güzel. Ama yine de bekle beni.\"", en: "\"It's nice being behind you. Just... wait up for me, okay?\"" }
+  endise:
+    - { tr: "\"Son zamanlarda gözlerin değişti. Bazen sana bakınca seni göremiyorum.\"", en: "\"Your eyes have changed lately. Sometimes I look at you and can't find you in there.\"" }
+    - { tr: "\"Ne kadar güçlenirsen o kadar az uyuyorsun. Fark ettin mi?\"", en: "\"The stronger you get, the less you sleep. Have you noticed?\"" }
+  kiskanclik:
+    - { tr: "\"Ben de çalışıyorum, biliyor musun. Her gün. Sadece... sen başka bir şeysin.\"", en: "\"I train too, you know. Every day. You're just... something else.\"" }
+  bagimlilik:
+    - { tr: "\"Sen olmasan dün gece ölmüştüm. Gitme, olur mu?\"", en: "\"Without you I'd have died last night. Don't go anywhere, okay?\"" }
+hafizalar:
+  el_tutuldu: { tr: "Aktarımda elini bırakmadın.", en: "You didn't let go of their hand during the transfer." }
+  tazilar_bekledi: { tr: "Tazılar onu sıkıştırırken bekledin.", en: "You waited while the hounds had them cornered." }
+  tazilardan_kurtardi: { tr: "Tazıların arasına senin için daldın. O da bunu yaptı.", en: "You dove into the hounds for them. They'd have done the same." }
+kisisel_odul:
+  - unvan: "omuz_omuza"

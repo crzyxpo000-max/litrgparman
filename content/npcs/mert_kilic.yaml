@@ -1,0 +1,71 @@
+# Mert Kılıç / Miles Kincaid — Sessiz Ağ'ın araştırmacısı; eski siber güvenlik mühendisi. Gergin bir dahi.
+# Sistem'in kaynak koduna ulaşmak istiyor. Hızlı konuşur, cümlelerini yarıda keser, her şeye log tutar.
+# Olası kaderler: Kod Kırıcı sonunun anahtarı · Kadimler'e satılan muhbir.
+# Kişilik: cesaret 2 + sadakat 5 → korkutulursa kaçar; hırs 7 → güveni çökerse ihanet (muhbir yolu).
+id: mert_kilic
+aciklama:
+  tr: "Sessiz Ağ'ın araştırmacısı, eski bir siber güvenlik mühendisi. Sistem'i bir program gibi okuyor ve her programın bir kaynak kodu olduğuna yemin ediyor. Çok az uyuyor, her şeyi not alıyor."
+  en: "Quiet Network researcher, ex-cybersecurity engineer. He reads the System like it's just another program, and he swears every program has source code. Sleeps about four hours a week. Logs everything."
+kisilik: { cesaret: 2, hirs: 7, vicdan: 6, sadakat: 5, supheci: 9 }
+degerler: { merhamet: 20, duzen: -50, insanlik: 50 }
+baslangic_iliski: { guven: -10, saygi: 10, korku: 10, baglilik: 0 }
+hedefler:
+  - id: kaynak_kodu
+    oncelik: 10
+    ad: { tr: "Sistem'in kaynak koduna ulaşmak", en: "Get to the System's source code" }
+  - id: radarin_altinda
+    oncelik: 8
+    ad: { tr: "Kimsenin radarına girmemek", en: "Stay off everybody's radar" }
+  - id: kanit_topla
+    oncelik: 6
+    gun: 35
+    ad: { tr: "Sistem'in ne olduğunu kanıtlamak", en: "Prove what the System really is" }
+egilim: { zanaat: 7, buyu: 5, gizlilik: 4 }
+seviye: 2
+hiz: 0.9
+fraksiyon: sessiz_ag
+yoldas: true
+siralama: true
+savas:
+  rol: menzil
+  stat: int
+  statlar: { str: 4, agi: 6, end: 4, int: 11, wis: 6, per: 9, wil: 4, cha: 5 }
+  artis: { int: 2 }
+  saldiri: { tr: "Parazit Yükü", en: "Packet Storm" }
+  metin:
+    tr: "{npc} titreyen ellerle bir panele bir dizi komut giriyor. {dusman} bir an donup kalıyor; etrafında bozuk satırlar akıyor."
+    en: "{npc} punches a string of commands into a panel, hands shaking. {dusman} locks up mid-step as corrupted text crawls over its body."
+  duello_metin:
+    tr: "{dusman} senden uzak duruyor, bir eli havada, gözleri ekranında. \"Özür dilerim,\" diye mırıldanıyor. Sonra Durum pencerende her şey kırmızıya dönüyor."
+    en: "{dusman} keeps his distance, one hand up, eyes locked on a screen. \"Sorry,\" he mutters. \"Really.\" Then your Status window goes red."
+yay_dugumleri: [mert_sifreli_mesaj, mert_kaynak_parcasi, mert_takip_edildi, mert_kadim_teklifi, mert_kod_kirici]
+gorusler:
+  merhamet+:
+    - { tr: "\"Onu öldürürsek elimizdeki tek kaynak gider. Ve, şey... ayrıca yanlış. Bence. Büyük ihtimalle.\"", en: "\"We kill him, we lose our only source. Also, um... it's wrong. I think. Pretty sure.\"" }
+  merhamet-:
+    - { tr: "\"Bizi gördü. Gördüyse anlatır. Anlatırsa hepimiz ölürüz. Matematiği ben yapmadım.\"", en: "\"He saw us. If he saw us, he talks. If he talks, we're all dead. I didn't write the math.\"" }
+  duzen+:
+    - { tr: "\"Bir protokol lazım. Kim neyi biliyor, kim kime anlatıyor. Yoksa sızıntı kaçınılmaz.\"", en: "\"We need a protocol. Who knows what, who tells who. Otherwise a leak is basically guaranteed.\"" }
+  duzen-:
+    - { tr: "\"Kurallar bir sistemin varsayılan ayarları. Varsayılanla kimse bir şey keşfetmedi.\"", en: "\"Rules are just a system's default settings. Nobody ever discovered anything running defaults.\"" }
+    - { tr: "\"İzin isteme. Erişim al. Sonra özür dilersin.\"", en: "\"Don't ask for permission. Get access. Apologize later.\"" }
+  insanlik+:
+    - { tr: "\"Kodu kırmak istiyorum ama insanlığı da bozmadan. İkisini birden isteyebilir miyim? Bence isteyebilirim.\"", en: "\"I want to crack the code without breaking people in the process. Can I want both? I think I can want both.\"" }
+  insanlik-:
+    - { tr: "\"Bu bir veri noktası. Kötü hissediyorum, evet, ama bu bir veri noktası.\"", en: "\"That's a data point. I feel awful, yeah. But it's a data point.\"" }
+guc_tepkileri:
+  hayranlik:
+    - { tr: "\"Sende çalışan şey standart sürüm değil. Bunu biliyorsun, değil mi? Lütfen bilip bana anlatmadığını söyle.\"", en: "\"Whatever's running on you isn't the standard build. You know that, right? Please tell me you know and just haven't told me.\"" }
+    - { tr: "\"Seni ölçmeye çalıştım. Ölçek bitti. Yeni ölçek yazmam lazım.\"", en: "\"I tried to measure you. Ran out of scale. I need to write a new one.\"" }
+  endise:
+    - { tr: "\"Senin grafiğin bir anomali değil, bir alarm. Ve alarmlar birinin masasına düşer.\"", en: "\"Your curve isn't an anomaly. It's an alert. And alerts land on somebody's desk.\"" }
+  kiskanclik:
+    - { tr: "\"Ben üç aydır tek bir satırı çözmeye çalışıyorum. Sen o satırın kendisisin. Harika. Gerçekten harika.\"", en: "\"I've spent three months trying to decode one line. You are the line. Great. That's just great.\"" }
+  bagimlilik:
+    - { tr: "\"Sen yanımdayken kimse kapıyı kırmaya cesaret edemiyor. Lütfen yakında ol. Bu bir rica değil, şey, evet bir rica.\"", en: "\"Nobody kicks my door in when you're around. Please stick close. That's not a request. Okay, it's a request.\"" }
+hafizalar:
+  logu_paylasti: { tr: "Ona Sistem pencerelerinin bir kaydını verdin. Gece boyunca uyumadı.", en: "You gave him a log of your System windows. He didn't sleep that night." }
+  onu_sakladi: { tr: "Onu arayanlar kapıya geldiğinde onu sakladın.", en: "When they came looking for him, you hid him." }
+  verisini_satti: { tr: "Ondan aldığın bilgiyi başkasına sattın.", en: "You sold what he gave you to someone else." }
+kisisel_odul:
+  - unvan: "arka_kapi"

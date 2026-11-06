@@ -76,7 +76,7 @@ data class RegionState(
 )
 
 /** Ertelenmiş sonuç: `dueDay` geldiğinde koşul (ham koşul metni) hâlâ doğruysa olay tetiklenir. */
-data class Seed(val eventId: String, val dueDay: Int, val condition: String? = null)
+data class Seed(val eventId: String, val dueDay: Int, val condition: String? = null, val npc: String? = null)
 
 enum class QuestStatus(val key: String) {
     ACTIVE("basla"), DONE("tamam"), FAILED("basarisiz");

@@ -64,7 +64,9 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             return Result(s.copy(combat = combat, rngState = rng.state), notices)
         }
 
-        fun def(e: EnemyState): EnemyDef = content.enemies.getValue(e.id)
+        fun def(e: EnemyState): EnemyDef = enemyDef(e.id, s) ?: throw ActionRejected("Tanımsız düşman: ${e.id}")
+        /** Düelloda sonucu işlenmiş NPC düşmanlar. */
+        val npcHandled = mutableSetOf<String>()
         fun updateEnemy(uid: Int, f: (EnemyState) -> EnemyState) {
             c = c.copy(enemies = c.enemies.map { if (it.uid == uid) f(it) else it })
         }
@@ -90,15 +92,55 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
 
     /** Düzyazıda düşman adı: İngilizcede "the" ile ("the Sewer Rat"); cümle başı sonra büyütülür. */
     private fun proseName(d: EnemyDef): LText =
-        LText(d.name.tr, if (d.name.en.startsWith("The ")) d.name.en.replaceFirst("The ", "the ") else "the ${d.name.en}")
+        // Adı olan NPC özel isimdir: artikel almaz ("Ash grins", "the Sewer Rat staggers").
+        if (npcIdOf(d.id) != null) d.name else LText(d.name.tr, if (d.name.en.startsWith("The ")) d.name.en.replaceFirst("The ", "the ") else "the ${d.name.en}")
 
     /** İngilizce metinde cümle başlarını büyük harfe çevirir ("the Sewer Rat staggers." → "The ..."). */
     private fun capitalize(t: LText): LText = LText(t.tr, SENTENCE_START.replace(t.en) { m -> m.groupValues[1] + m.groupValues[2].uppercase() })
 
+    // ---------------------------------------------------------------- NPC düşmanlar
+
+    /**
+     * Düşman tanımı: içerikteki düşman ya da `npc:<kimlik>` (düello, ihanet): NPC'nin o anki seviyesi ve
+     * savaş bloğundan türetilir.
+     */
+    fun enemyDef(id: String, state: WorldState): EnemyDef? {
+        content.enemies[id]?.let { return it }
+        if (!id.startsWith(com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX)) return null
+        val npcId = id.removePrefix(com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX)
+        val d = content.npcs[npcId] ?: return null
+        val c = d.combat ?: return null
+        val level = state.npcs[npcId]?.level?.takeIf { it > 0 } ?: d.startLevel
+        val npc = effects.npc
+        return EnemyDef(
+            id = id,
+            name = npc.name(npcId),
+            description = d.description,
+            hook = texts.formatL("savas_npc_kanca", "npc" to npc.name(npcId)),
+            level = level,
+            grade = Grade.forLevel(level),
+            maxHp = npc.combatHp(d, level),
+            stats = npc.combatStats(d, level),
+            behavior = Behavior.CAUTIOUS,
+            intelligent = true,
+            weakness = null,
+            weaknessText = null,
+            attacks = listOf(EnemyAttack("npc_saldiri", c.attackName, c.attackStat, ALLY_BASE + 2, 1.0, prose = c.duelProse)),
+            xp = 25L * level,
+        )
+    }
+
+    private fun npcIdOf(enemyId: String): String? =
+        enemyId.takeIf { it.startsWith(com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX) }?.removePrefix(com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX)
+
     // ---------------------------------------------------------------- başlangıç
 
-    fun start(state: WorldState, spec: CombatSpec): Result {
-        val defs = spec.enemies.map { content.enemies[it] ?: throw ActionRejected("Tanımsız düşman: $it") }
+    fun start(state: WorldState, specIn: CombatSpec): Result {
+        // Düello/ihanet: "npc:@" olayın odak NPC'sine çözülür.
+        val spec = specIn.copy(enemies = specIn.enemies.map { id ->
+            if (id == com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX + "@") com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX + (state.focusNpc ?: "") else id
+        })
+        val defs = spec.enemies.map { enemyDef(it, state) ?: throw ActionRejected("Tanımsız düşman: $it") }
         val p = state.player
         val enemies = defs.mapIndexed { i, d ->
             val mem = state.enemyMemory[d.id]?.fled ?: 0
@@ -108,7 +150,15 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             EnemyState(uid = i, id = d.id, hp = hp, maxHp = hp, level = d.level + 2 * mem, stats = stats)
         }
         val maxStamina = Progression.maxStamina(p.stats)
-        var combat = CombatState(spec = spec, enemies = enemies, stamina = maxStamina, maxStamina = maxStamina)
+        // Yoldaşlar savaşa katılır (düelloda karşındaki NPC hariç).
+        val opponents = spec.enemies.mapNotNull { npcIdOf(it) }.toSet()
+        // Düello bire birdir: karşında bir NPC varsa yoldaşlar karışmaz.
+        val allies = if (opponents.isNotEmpty()) emptyList() else effects.npc.companions(state).mapNotNull { n ->
+            val d = content.npcs[n.id]?.takeIf { it.combat != null } ?: return@mapNotNull null
+            val hp = effects.npc.combatHp(d, n.level)
+            AllyState(n.id, hp, hp, n.level, effects.npc.combatStats(d, n.level))
+        }
+        var combat = CombatState(spec = spec, enemies = enemies, stamina = maxStamina, maxStamina = maxStamina, allies = allies)
         // Önceki savaşın bağlam değişkenleri yeni savaşa sızmasın.
         val clean = state.copy(combat = combat, dead = false, vars = state.vars - CTX_VARS)
         val ctx = Ctx(clean)
@@ -118,7 +168,8 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         // OP MC "Ezme": hepsi açıkça altta kalıyorsa tek satırla biter.
         val crush = enemies.all { e ->
             val d = ctx.def(e)
-            !d.boss && CombatMath.isCrush(p.level, p.grade, e.level, d.grade)
+            // Adı olan NPC'yle düello her zaman gerçek savaştır (infaz seçimi ahlaki bir karardır).
+            !d.boss && npcIdOf(d.id) == null && CombatMath.isCrush(p.level, p.grade, e.level, d.grade)
         }
         if (crush) {
             ctx.c = ctx.c.copy(enemies = ctx.c.enemies.map { it.copy(hp = 0) }, kills = enemies.size)
@@ -187,7 +238,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             is CombatAction.Attack -> attack(ctx, action.target)
             is CombatAction.UseSkill -> useSkill(ctx, action.skillId, action.target)
             CombatAction.Defend -> {
-                // "korunan_muttefik" yoldaşlar gelince (Aşama 5) bir müttefiki korurken sayılır.
+                // "korunan_muttefik": savunurken düşük canlı yoldaşa gelen saldırı üstüne çekilince sayılır (enemyAttack).
                 ctx.c = ctx.c.copy(defending = true, stamina = (ctx.c.stamina + 10).coerceAtMost(ctx.c.maxStamina))
                 ctx.log(texts.format("savas_savunma"))
             }
@@ -209,6 +260,10 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             ctx.c = ctx.c.copy(extraActions = ctx.c.extraActions - 1)
             return
         }
+        alliesTurn(ctx)
+        if (ctx.over || ctx.c.pendingExecution != null) return
+        checkVictory(ctx)
+        if (ctx.over || ctx.c.pendingExecution != null) return
         enemyTurn(ctx)
         if (!ctx.over) endRound(ctx)
     }
@@ -643,6 +698,19 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             ready[ctx.rng.nextInt(ready.size)]
         }
         ctx.updateEnemy(e.uid) { it.copy(cooldowns = it.cooldowns + (atk.id to atk.cooldown)) }
+        // Yoldaşlar da hedef olabilir; savunan oyuncu düşük canlı yoldaşa gelen saldırıyı üstüne çeker.
+        val standing = ctx.c.standingAllies
+        if (standing.isNotEmpty() && ctx.rng.chance(ALLY_TARGET_CHANCE)) {
+            val ally = standing[ctx.rng.nextInt(standing.size)]
+            if (ctx.c.defending && ally.hp * 100 / ally.maxHp < 50) {
+                ctx.c = ctx.c.copy(protectedAllies = ctx.c.protectedAllies + 1)
+                ctx.addVar("korunan_muttefik", 1)
+                ctx.log(texts.formatL("savas_koruma", "ally" to effects.npc.name(ally.npc), "enemy" to proseName(def)))
+            } else {
+                attackAlly(ctx, e, def, atk, ally, narrow)
+                return
+            }
+        }
         val p = ctx.s.player
         val pack = if (def.behavior == Behavior.PACK && !narrow) 0.05 * (ctx.c.living.count { it.uid != e.uid && ctx.def(it).behavior == Behavior.PACK }) else 0.0
         val hitP = CombatMath.hitChance(e.stats, p.stats, e.has(StatusEffects.BLIND), pack)
@@ -675,6 +743,82 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             }
         }
         damagePlayer(ctx, dmg)
+    }
+
+    // ---------------------------------------------------------------- yoldaşlar
+
+    /** Yoldaşların turu: role göre saldırır, oyuncuyu kalkanla korur ya da iyileştirir. */
+    private fun alliesTurn(ctx: Ctx) {
+        for (snapshot in ctx.c.allies) {
+            if (ctx.over || ctx.c.pendingExecution != null) return
+            val a = ctx.c.allies.firstOrNull { it.npc == snapshot.npc } ?: continue
+            if (a.down) continue
+            val d = content.npcs[a.npc] ?: continue
+            val cb = d.combat ?: continue
+            val name = effects.npc.name(a.npc)
+            fun setAlly(f: (AllyState) -> AllyState) {
+                ctx.c = ctx.c.copy(allies = ctx.c.allies.map { if (it.npc == a.npc) f(it) else it })
+            }
+            setAlly { it.copy(cooldown = (it.cooldown - 1).coerceAtLeast(0)) }
+            val p = ctx.s.player
+            val hpPct = p.hp * 100 / p.maxHp
+            if (cb.role == com.yukselis.engine.npc.CombatRole.GUARD && hpPct < 50 && a.cooldown <= 0) {
+                val power = 5 + 2 * a.level
+                applyPlayerStatus(ctx, StatusInstance(StatusEffects.SHIELD, 2, power))
+                setAlly { it.copy(cooldown = 3) }
+                ctx.log(texts.formatL("savas_yoldas_kalkan", "ally" to name), texts.format("savas_kalkan", "n" to power))
+                continue
+            }
+            if (cb.role == com.yukselis.engine.npc.CombatRole.HEALER && hpPct < 60 && a.cooldown <= 0) {
+                val raw = 10 + 2 * a.level + a.stats[Stat.WIS]
+                val heal = if (ctx.c.playerHas(StatusEffects.POISON)) raw / 2 else raw
+                ctx.s = ctx.s.copy(player = p.copy(hp = (p.hp + heal).coerceAtMost(p.maxHp)))
+                setAlly { it.copy(cooldown = 2) }
+                ctx.log(texts.formatL("savas_yoldas_sifa", "ally" to name), texts.format("savas_iyilesme", "n" to heal))
+                continue
+            }
+            val target = ctx.c.living.minByOrNull { it.hp } ?: return
+            val td = ctx.def(target)
+            val hitP = CombatMath.hitChance(a.stats, target.stats, false, 0.0)
+            if (!ctx.rng.chance(hitP)) {
+                ctx.log(texts.formatL("savas_yoldas_iskaladi", "ally" to name, "target" to proseName(td)), pct(hitP))
+                continue
+            }
+            val dmg = CombatMath.damage(
+                ALLY_BASE, a.stats[cb.attackStat], 1.0,
+                CombatMath.resistance(target.stats, cb.attackStat in MAGIC_STATS, target.has(StatusEffects.BURN)),
+                ctx.rng, CombatMath.gradeMultiplier(Grade.forLevel(a.level), td.grade),
+            )
+            val n = proseName(td)
+            ctx.log(
+                LText(cb.prose.tr.replace("{npc}", name.tr).replace("{dusman}", n.tr), cb.prose.en.replace("{npc}", name.en).replace("{dusman}", n.en)),
+                numbers(dmg, emptyList()),
+            )
+            damageEnemy(ctx, target.uid, dmg)
+        }
+    }
+
+    private fun attackAlly(ctx: Ctx, e: EnemyState, def: EnemyDef, atk: EnemyAttack, ally: AllyState, narrow: Boolean) {
+        val pack = if (def.behavior == Behavior.PACK && !narrow) 0.05 * (ctx.c.living.count { it.uid != e.uid && ctx.def(it).behavior == Behavior.PACK }) else 0.0
+        val name = effects.npc.name(ally.npc)
+        val n = proseName(def)
+        val hitP = CombatMath.hitChance(e.stats, ally.stats, e.has(StatusEffects.BLIND), pack)
+        if (!ctx.rng.chance(hitP)) {
+            ctx.log(texts.formatL("savas_dusman_yoldas_iskaladi", "enemy" to n, "ally" to name), pct(hitP))
+            return
+        }
+        val dmg = CombatMath.damage(
+            atk.base, e.stats[atk.stat], atk.multiplier,
+            CombatMath.resistance(ally.stats, atk.stat in MAGIC_STATS, false),
+            ctx.rng, CombatMath.gradeMultiplier(def.grade, Grade.forLevel(ally.level)),
+        )
+        val hp = (ally.hp - dmg).coerceAtLeast(0)
+        ctx.c = ctx.c.copy(allies = ctx.c.allies.map { if (it.npc == ally.npc) it.copy(hp = hp, down = hp == 0) else it })
+        ctx.log(texts.formatL("savas_dusman_yoldasa", "enemy" to n, "ally" to name), numbers(dmg, emptyList()))
+        if (hp == 0) {
+            ctx.log(texts.formatL("savas_yoldas_dustu", "ally" to name))
+            ctx.s = effects.npc.allyDowned(ctx.s, ally.npc)
+        }
     }
 
     // ---------------------------------------------------------------- tur sonu
@@ -767,8 +911,22 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             }
             else -> throw ActionRejected("Bilinmeyen infaz: $option")
         }
-        ctx.log(texts.formatL("infaz_${option}_metin", "enemy" to proseName(def)))
+        val npcSuffix = if (npcIdOf(e.id) != null) "_npc" else ""
+        ctx.log(texts.formatL("infaz_${option}${npcSuffix}_metin", "enemy" to proseName(def)))
         ctx.c = ctx.c.copy(pendingExecution = null)
+        // Tanıklar (yoldaşlar) infazı kendi değerlerine göre yorumlar.
+        val deltas = when (option) {
+            EXEC_BRUTAL -> mapOf(MoralAxis.MERCY to -3, MoralAxis.HUMANITY to -2)
+            EXEC_SPARE -> mapOf(MoralAxis.MERCY to 5)
+            else -> mapOf(MoralAxis.ORDER to 2)
+        }
+        // Akılsız bir canavarın infazı tanıkları sarsmaz; zeki düşman ve insan sarsar.
+        if (def.intelligent) ctx.sync { effects.npc.interpret(it, deltas, null) }
+        // Düelloda yenilen NPC: acımasız infaz onu öldürür (kalıcı), temiz infaz ezer, bağışlamak bağ kurar.
+        npcIdOf(e.id)?.let { npcId ->
+            ctx.npcHandled += npcId
+            ctx.sync { effects.npc.duelResult(it, npcId, option) }
+        }
         finishWin(ctx, crushed = false)
     }
 
@@ -799,6 +957,13 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             if (e in killed) ctx.s = ctx.s.copy(flags = ctx.s.flags + "yenildi_${d.id}")
         }
         ctx.addVar("oldurme_sayisi", killed.size)
+        // Düelloda (infazsız) yenilen NPC'ler ezilmiş sayılır; ölmezler.
+        killed.mapNotNull { npcIdOf(it.id) }.filter { it !in ctx.npcHandled }.forEach { npcId ->
+            ctx.npcHandled += npcId
+            ctx.sync { effects.npc.duelResult(it, npcId, null) }
+        }
+        // Yas Tutan koşulu için son savaş günü.
+        ctx.s = ctx.s.copy(vars = ctx.s.vars + (com.yukselis.engine.npc.NpcEngine.VAR_LAST_FIGHT to ctx.s.day + 1))
         // Savaş bağlamı değişkenleri (uyanış koşulları için; her savaşta üzerine yazılır).
         val beaten = killed.isNotEmpty() || spared.isNotEmpty()
         ctx.s = ctx.s.copy(
@@ -808,6 +973,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
                 CTX_GRADE_GAP to gapBreak,
                 CTX_BOSS to if (bossDown) 1 else 0,
                 CTX_CRUSH to if (crushed) 1 else 0,
+                CTX_PROTECTED to ctx.c.protectedAllies,
             ),
         )
         ctx.over = true
@@ -941,7 +1107,13 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         const val CTX_BOSS = "_savas_boss"
         const val CTX_CRUSH = "_savas_ezme"
 
-        val CTX_VARS = setOf(CTX_WON, CTX_LOWEST_HP, CTX_GRADE_GAP, CTX_BOSS, CTX_CRUSH)
+        const val CTX_PROTECTED = "_savas_korunan"
+
+        val CTX_VARS = setOf(CTX_WON, CTX_LOWEST_HP, CTX_GRADE_GAP, CTX_BOSS, CTX_CRUSH, CTX_PROTECTED)
+
+        /** Yoldaşın temel saldırısı ve düşmanın yoldaşı hedef alma olasılığı. */
+        const val ALLY_BASE = 4
+        const val ALLY_TARGET_CHANCE = 0.35
 
         /** Analizden sonra her vuruşta hedeflenebilen zaaflar. */
         val AIMABLE_WEAKNESSES = setOf("goz")

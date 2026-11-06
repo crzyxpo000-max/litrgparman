@@ -1,0 +1,50 @@
+# OP MC Küresel Sıralama: oyuncu, sıralamadaki ana NPC'ler (siralama: true) ve prosedürel avcılar.
+# Avcı adları dile göre eşlenir (TR adı ↔ EN-NA adı); kişi iki dilde aynı insandır.
+avcilar:
+  sayi: 14
+  seviye: { min: 1, max: 5 }
+  hiz: { min: 0.7, max: 1.35 }
+  adlar:
+    - { tr: "Selin", en: "Sarah" }
+    - { tr: "Burak", en: "Brandon" }
+    - { tr: "Ece", en: "Emily" }
+    - { tr: "Tolga", en: "Tyler" }
+    - { tr: "Zeynep", en: "Zoe" }
+    - { tr: "Cem", en: "Cody" }
+    - { tr: "Derya", en: "Dana" }
+    - { tr: "Emre", en: "Ethan" }
+    - { tr: "Gizem", en: "Grace" }
+    - { tr: "Kaan", en: "Kyle" }
+    - { tr: "Melis", en: "Megan" }
+    - { tr: "Onur", en: "Owen" }
+    - { tr: "Pınar", en: "Paige" }
+    - { tr: "Serkan", en: "Shane" }
+    - { tr: "Yasemin", en: "Jasmine" }
+    - { tr: "Hakan", en: "Hunter" }
+  soyadlar:
+    - { tr: "Aksoy", en: "Mitchell" }
+    - { tr: "Yıldız", en: "Reyes" }
+    - { tr: "Öztürk", en: "Carter" }
+    - { tr: "Şahin", en: "Hawkins" }
+    - { tr: "Koç", en: "Brennan" }
+    - { tr: "Güneş", en: "Sullivan" }
+    - { tr: "Aydın", en: "Price" }
+    - { tr: "Erdem", en: "Dawson" }
+    - { tr: "Tekin", en: "Walsh" }
+    - { tr: "Bulut", en: "Morales" }
+    - { tr: "Çelik", en: "Grant" }
+    - { tr: "Karaca", en: "Holloway" }
+# Görünen sıran ilk kez bu yere çıktığında bir kez: fraksiyonlar tepki verir.
+tepkiler:
+  - sira: 10
+    etkiler:
+      - itibar: { lonca: 5, yukselenler: 3 }
+      - bilgi: "sirala_maske"
+  - sira: 3
+    etkiler:
+      - itibar: { lonca: 8, yukselenler: 6, siginak: -2 }
+      - dikkat: 4
+  - sira: 1
+    etkiler:
+      - itibar: { lonca: 10, yukselenler: 10, siginak: -4 }
+      - dikkat: 8

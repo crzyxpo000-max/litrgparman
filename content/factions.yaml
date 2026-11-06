@@ -1,6 +1,6 @@
 fraksiyonlar:
-  siginak: { iliski: { lonca: -20, yukselenler: -70, sessiz_ag: 10, kadimler: -60 } }
-  lonca: { iliski: { siginak: -20, yukselenler: -40, sessiz_ag: -10, kadimler: -50 } }
-  yukselenler: { iliski: { siginak: -70, lonca: -40, sessiz_ag: -50, kadimler: 20 } }
-  sessiz_ag: { iliski: { siginak: 10, lonca: -10, yukselenler: -50, kadimler: -30 } }
-  kadimler: { iliski: { siginak: -60, lonca: -50, yukselenler: 20, sessiz_ag: -30 } }
+  siginak: { iliski: { lonca: -20, yukselenler: -70, sessiz_ag: 10, kadimler: -60 }, degerler: { merhamet: 60, duzen: 30, insanlik: 60 } }
+  lonca: { iliski: { siginak: -20, yukselenler: -40, sessiz_ag: -10, kadimler: -50 }, degerler: { merhamet: -10, duzen: 60, insanlik: 10 } }
+  yukselenler: { iliski: { siginak: -70, lonca: -40, sessiz_ag: -50, kadimler: 20 }, degerler: { merhamet: -50, duzen: 40, insanlik: -70 } }
+  sessiz_ag: { iliski: { siginak: 10, lonca: -10, yukselenler: -50, kadimler: -30 }, degerler: { merhamet: 10, duzen: -30, insanlik: 30 } }
+  kadimler: { iliski: { siginak: -60, lonca: -50, yukselenler: 20, sessiz_ag: -30 }, degerler: { merhamet: -30, duzen: 50, insanlik: -80 } }

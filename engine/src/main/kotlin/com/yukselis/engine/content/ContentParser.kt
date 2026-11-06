@@ -83,6 +83,10 @@ object ContentParser {
     const val FEATS = "feats.yaml"
     const val QUESTS = "quests.yaml"
     const val FLAGS = "flags.yaml"
+    const val TRAITS = "traits.yaml"
+    const val KNOWLEDGE = "knowledge.yaml"
+    const val ARMY = "army.yaml"
+    const val RANKING = "ranking.yaml"
 
     data class StoryFile(val start: String?, val scenes: List<Scene>)
 
@@ -92,6 +96,7 @@ object ContentParser {
         titlesJson: String,
         files: Map<String, String> = emptyMap(),
         eventFiles: List<String> = emptyList(),
+        npcFiles: List<String> = emptyList(),
     ): Content {
         val stories = storyFiles.map { parseStory(it) }
         val eventPacks = eventFiles.map { parseEvents(it) }
@@ -104,9 +109,23 @@ object ContentParser {
 
         val skillsRoot = obj(SKILLS)
         val profRoot = obj(PROFESSIONS)
+        val names = NameRegistry(parseNames(namesJson))
+        val texts = SystemTexts(obj(SYSTEM)?.map { (k, v) -> k to ltext(v, "system.$k") }?.toMap() ?: emptyMap())
+        val npcs = npcFiles.map { parseNpc(YamlTree.parseObject(it, "npc")) }.also { list ->
+            val dup = list.groupBy { it.id }.filterValues { it.size > 1 }.keys
+            if (dup.isNotEmpty()) throw ContentFormatException("Aynı kimliğe sahip NPC'ler: $dup")
+        }.associateBy { it.id }
+        // Her NPC'nin kişisel görevi (Bağlılık ≥ 70 eşiği) Günlük'te görünür.
+        val personalQuests = npcs.values.associate { d ->
+            val short = names.find(NameEntry.Kind.NPC, d.id)?.short ?: LText(d.id, d.id)
+            val goal = d.goals.maxByOrNull { it.priority }?.name ?: LText.EMPTY
+            val qid = com.yukselis.engine.npc.NpcEngine.PERSONAL_QUEST_PREFIX + d.id
+            qid to QuestDef(qid, texts.formatL("kisisel_gorev_ad", "npc" to short), goal)
+        }
+        val factionsRoot = obj(FACTIONS)?.objectOf("fraksiyonlar")
         return Content(
             scenes = scenes.associateBy { it.id },
-            names = NameRegistry(parseNames(namesJson)),
+            names = names,
             titles = parseTitles(titlesJson).associateBy { it.id },
             startScene = start,
             classes = obj(CLASSES)?.objectOf("siniflar")?.map { (id, v) -> parseClass(id, v.jsonObject) }?.associateBy { it.id } ?: emptyMap(),
@@ -135,12 +154,142 @@ object ContentParser {
                 FactionDef(id, v.jsonObject["iliski"]?.jsonObject?.map { (k, x) -> k to x.int("$id.iliski.$k") }?.toMap() ?: emptyMap())
             }?.associateBy { it.id } ?: emptyMap(),
             feats = obj(FEATS)?.objectOf("basarilar")?.map { (id, v) -> parseFeat(id, v.jsonObject) }?.associateBy { it.id } ?: emptyMap(),
-            quests = obj(QUESTS)?.objectOf("gorevler")?.map { (id, v) ->
+            quests = personalQuests + (obj(QUESTS)?.objectOf("gorevler")?.map { (id, v) ->
                 val o = v.jsonObject
                 QuestDef(id, ltext(o["ad"], "$id.ad"), ltext(o["aciklama"], "$id.aciklama"))
+            }?.associateBy { it.id } ?: emptyMap()),
+            factionValues = factionsRoot?.mapNotNull { (id, v) -> (v.jsonObject["degerler"] as? JsonObject)?.let { id to morality(it) } }?.toMap() ?: emptyMap(),
+            npcs = npcs,
+            traits = obj(TRAITS)?.objectOf("izler")?.map { (id, v) -> parseTrait(id, v.jsonObject) }?.associateBy { it.id } ?: emptyMap(),
+            knowledge = obj(KNOWLEDGE)?.objectOf("bilgiler")?.map { (id, v) ->
+                val o = v.jsonObject
+                com.yukselis.engine.npc.KnowledgeDef(id, ltext(o["ad"], "$id.ad"), ltext(o["aciklama"], "$id.aciklama"), o.string("tur") ?: "soylenti")
             }?.associateBy { it.id } ?: emptyMap(),
+            army = obj(ARMY)?.objectOf("birlikler")?.map { (id, v) ->
+                val o = v.jsonObject
+                com.yukselis.engine.npc.ArmyUnitDef(id, ltext(o["ad"], "$id.ad"), ltext(o["aciklama"], "$id.aciklama"), o.strings("egilim").map { affinity(it, "$id.egilim") }, o.int("guc") ?: 1)
+            }?.associateBy { it.id } ?: emptyMap(),
+            ranking = obj(RANKING)?.let { parseRanking(it) } ?: com.yukselis.engine.npc.RankingDef(),
             flags = obj(FLAGS)?.objectOf("bayraklar")?.map { (id, v) -> id to (v.jsonPrimitive.contentOrNull ?: "") }?.toMap() ?: emptyMap(),
-            texts = SystemTexts(obj(SYSTEM)?.map { (k, v) -> k to ltext(v, "system.$k") }?.toMap() ?: emptyMap()),
+            texts = texts,
+        )
+    }
+
+    // ---------------------------------------------------------------- Aşama 5: NPC'ler
+
+    private fun morality(o: JsonObject) = com.yukselis.engine.core.Morality(
+        mercy = o.int("merhamet") ?: 0,
+        order = o.int("duzen") ?: 0,
+        humanity = o.int("insanlik") ?: 0,
+    )
+
+    private fun relDeltas(o: JsonObject, where: String): Map<com.yukselis.engine.npc.RelAxis, Int> =
+        o.map { (k, v) ->
+            (com.yukselis.engine.npc.RelAxis.fromKey(k) ?: throw ContentFormatException("$where: bilinmeyen ilişki ekseni '$k' (guven/saygi/korku/baglilik)")) to v.int("$where.$k")
+        }.toMap()
+
+    private fun ltexts(e: JsonElement?, where: String): List<LText> = when (e) {
+        null -> emptyList()
+        is JsonArray -> e.map { ltext(it, where) }
+        else -> listOf(ltext(e, where))
+    }
+
+    fun parseNpc(o: JsonObject): com.yukselis.engine.npc.NpcDef {
+        val id = o.string("id") ?: throw ContentFormatException("NPC'de 'id' eksik")
+        val k = o["kisilik"]?.jsonObject ?: throw ContentFormatException("NPC $id: 'kisilik' eksik")
+        val personality = com.yukselis.engine.npc.Personality(
+            com.yukselis.engine.npc.Trait.entries.associateWith { t -> k.int(t.key) ?: throw ContentFormatException("NPC $id: kisilik.${t.key} eksik") },
+        )
+        val combat = (o["savas"] as? JsonObject)?.let { c ->
+            val st = c["statlar"]?.jsonObject ?: throw ContentFormatException("NPC $id: savas.statlar eksik")
+            com.yukselis.engine.npc.NpcCombat(
+                stats = Stats(Stat.entries.associateWith { s -> st.int(s.key) ?: Stats.BASE_VALUE }),
+                growth = statMap(c["artis"], "$id.savas.artis"),
+                role = com.yukselis.engine.npc.CombatRole.fromKey(c.string("rol")),
+                attackStat = c.string("stat")?.let { stat(it) } ?: Stat.STR,
+                attackName = ltext(c["saldiri"], "$id.savas.saldiri"),
+                prose = ltext(c["metin"], "$id.savas.metin"),
+                duelProse = ltext(c["duello_metin"], "$id.savas.duello_metin"),
+            )
+        }
+        return com.yukselis.engine.npc.NpcDef(
+            id = id,
+            description = ltext(o["aciklama"], "$id.aciklama"),
+            personality = personality,
+            values = (o["degerler"] as? JsonObject)?.let { morality(it) } ?: com.yukselis.engine.core.Morality(),
+            startRelation = (o["baslangic_iliski"] as? JsonObject)?.let { com.yukselis.engine.npc.Relation().plus(relDeltas(it, "$id.baslangic_iliski")) }
+                ?: com.yukselis.engine.npc.Relation(),
+            goals = o.array("hedefler").map { e ->
+                val g = e.jsonObject
+                val gid = g.string("id") ?: throw ContentFormatException("NPC $id: hedefte 'id' eksik")
+                com.yukselis.engine.npc.GoalDef(
+                    id = gid,
+                    priority = g.int("oncelik") ?: 1,
+                    name = ltext(g["ad"], "$id.$gid.ad"),
+                    days = g.int("gun") ?: 0,
+                    condition = g["kosul"]?.let { condition(it.jsonObject) },
+                    effects = g.array("etkiler").flatMap { effects(it.jsonObject, "NPC $id.$gid") },
+                )
+            },
+            affinity = o["egilim"]?.jsonObject?.map { (a, v) -> affinity(a, "$id.egilim") to v.int("$id.egilim.$a") }?.toMap() ?: emptyMap(),
+            startLevel = o.int("seviye") ?: 1,
+            growthRate = o.double("hiz") ?: 1.0,
+            faction = o.string("fraksiyon"),
+            canJoin = o.bool("yoldas"),
+            ranked = o.bool("siralama"),
+            knownAtStart = o.bool("bilinen"),
+            presentWhen = o["yaninda"]?.let { condition(it.jsonObject) },
+            combat = combat,
+            arcNodes = o.strings("yay_dugumleri"),
+            firstClaims = o.array("ilk_unvanlar").map { e ->
+                val f = e.jsonObject
+                com.yukselis.engine.npc.FirstClaimDef(
+                    title = f.string("unvan") ?: throw ContentFormatException("NPC $id: ilk_unvanlar.unvan eksik"),
+                    level = f.int("seviye") ?: throw ContentFormatException("NPC $id: ilk_unvanlar.seviye eksik"),
+                )
+            },
+            opinions = o["gorusler"]?.jsonObject?.map { (key, v) -> key to ltexts(v, "$id.gorusler.$key") }?.toMap() ?: emptyMap(),
+            powerLines = o["guc_tepkileri"]?.jsonObject?.map { (key, v) ->
+                (com.yukselis.engine.npc.PowerReaction.fromKey(key) ?: throw ContentFormatException("NPC $id: bilinmeyen güç tepkisi '$key'")) to
+                    ltexts(v, "$id.guc_tepkileri.$key")
+            }?.toMap() ?: emptyMap(),
+            memories = o["hafizalar"]?.jsonObject?.map { (key, v) -> key to ltext(v, "$id.hafizalar.$key") }?.toMap() ?: emptyMap(),
+            personalReward = o.array("kisisel_odul").flatMap { effects(it.jsonObject, "NPC $id.kisisel_odul") },
+        )
+    }
+
+    private fun parseTrait(id: String, o: JsonObject) = com.yukselis.engine.npc.TraitDef(
+        id = id,
+        name = ltext(o["ad"], "$id.ad"),
+        description = ltext(o["aciklama"], "$id.aciklama"),
+        onPlayer = (o.string("hedef") ?: "oyuncu") == "oyuncu",
+        statBonus = statMap(o["bonus"], "$id.bonus"),
+        statPenalty = statMap(o["ceza"], "$id.ceza"),
+        personality = o["kisilik"]?.jsonObject?.map { (k, v) ->
+            (com.yukselis.engine.npc.Trait.fromKey(k) ?: throw ContentFormatException("iz $id: bilinmeyen kişilik '$k'")) to v.int("$id.kisilik.$k")
+        }?.toMap() ?: emptyMap(),
+        corruption = o.int("yozlasma") ?: 0,
+    )
+
+    private fun parseRanking(o: JsonObject): com.yukselis.engine.npc.RankingDef {
+        val h = o["avcilar"] as? JsonObject
+        val lv = h?.get("seviye") as? JsonObject
+        val rate = h?.get("hiz") as? JsonObject
+        return com.yukselis.engine.npc.RankingDef(
+            firstNames = h?.array("adlar")?.map { ltext(it, "ranking.adlar") } ?: emptyList(),
+            lastNames = h?.array("soyadlar")?.map { ltext(it, "ranking.soyadlar") } ?: emptyList(),
+            hunters = h?.int("sayi") ?: 0,
+            levelMin = lv?.int("min") ?: 1,
+            levelMax = lv?.int("max") ?: 3,
+            rateMin = rate?.double("min") ?: 0.6,
+            rateMax = rate?.double("max") ?: 1.2,
+            reactions = o.array("tepkiler").map { e ->
+                val t = e.jsonObject
+                com.yukselis.engine.npc.RankReaction(
+                    rank = t.int("sira") ?: throw ContentFormatException("ranking.tepkiler: 'sira' eksik"),
+                    effects = t.array("etkiler").flatMap { effects(it.jsonObject, "ranking.tepkiler") },
+                )
+            },
         )
     }
 
@@ -213,7 +362,7 @@ object ContentParser {
             group.map { (id, value) ->
                 val o = value.jsonObject
                 val full = ltext(o["ad"], "$id.ad")
-                NameEntry(id, kind, full, o["kisa_ad"]?.let { ltext(it, "$id.kisa_ad") } ?: full)
+                NameEntry(id, kind, full, o["kisa_ad"]?.let { ltext(it, "$id.kisa_ad") } ?: full, o.string("zamir") ?: "they")
             }
         }
     }
@@ -349,6 +498,14 @@ object ContentParser {
                     condition = i["kosul"]?.let { condition(it.jsonObject) } ?: throw ContentFormatException("$id: sezgide 'kosul' eksik"),
                 )
             },
+            companionLines = o.array("yoldas_tepkileri").map { e ->
+                val c = e.jsonObject
+                com.yukselis.engine.story.CompanionLine(
+                    npc = c.string("npc") ?: throw ContentFormatException("$id: yoldas_tepkileri.npc eksik"),
+                    text = ltext(c["metin"], "$id.yoldas_tepkisi"),
+                    condition = c["kosul"]?.let { condition(it.jsonObject) },
+                )
+            },
         )
     }
 
@@ -423,6 +580,22 @@ object ContentParser {
                 "gorev" -> value.jsonObject.map { (k, v) ->
                     Condition.QuestIs(k, QuestStatus.fromKey(v.str(k)) ?: throw ContentFormatException("görev $k: durum basla/tamam/basarisiz olmalı"))
                 }
+                // ---- Aşama 5 ----
+                "npc_hayatta" -> listOf(Condition.NpcAlive(value.str(key)))
+                "npc_olu" -> listOf(Condition.NpcDead(value.str(key)))
+                "yoldas" -> listOf(Condition.IsCompanion(value.str(key)))
+                "iliski_min" -> value.jsonObject.flatMap { (npc, v) -> relDeltas(v.jsonObject, "iliski_min.$npc").map { (a, n) -> Condition.RelationAtLeast(npc, a, n) } }
+                "iliski_max" -> value.jsonObject.flatMap { (npc, v) -> relDeltas(v.jsonObject, "iliski_max.$npc").map { (a, n) -> Condition.RelationAtMost(npc, a, n) } }
+                "npc_fraksiyon" -> value.jsonObject.map { (npc, v) -> Condition.NpcInFaction(npc, v.str(npc)) }
+                "npc_isaret" -> value.jsonObject.map { (npc, v) -> Condition.NpcMarked(npc, v.str(npc)) }
+                "npc_seviye_min" -> value.jsonObject.map { (npc, v) -> Condition.NpcLevelAtLeast(npc, v.int(npc)) }
+                "hafiza" -> value.jsonObject.map { (npc, v) -> Condition.Remembers(npc, v.str(npc)) }
+                "bilgi" -> listOf(Condition.Knows(value.str(key)))
+                "npc_savasabilir" -> listOf(Condition.NpcCanFight(value.str(key)))
+                "yoldas_yer" -> listOf(Condition.PartyRoom)
+                "gorunen_seviye_min" -> listOf(Condition.PublicLevelAtLeast(value.int(key)))
+                "gorunen_seviye_max" -> listOf(Condition.PublicLevelAtMost(value.int(key)))
+                "iz" -> listOf(Condition.HasTrait(value.str(key)))
                 else -> throw ContentFormatException("Bilinmeyen koşul: $key")
             }
         }
@@ -461,6 +634,7 @@ object ContentParser {
                         maxDelay = delay?.int("max") ?: delay?.int("min") ?: t.int("gecikme") ?: 1,
                         // Koşul ham metin olarak saklanır (kayda girer); vadesinde ayrıştırılır.
                         condition = t["kosul"]?.let { c -> condition(c.jsonObject); c.toString() },
+                        npc = t.string("npc"),
                     )
                 },
             )
@@ -476,6 +650,42 @@ object ContentParser {
             "tehlike" -> value.jsonObject.map { (k, v) -> Effect.ShiftDanger(k, v.int(k)) }
             "kontrol" -> value.jsonObject.map { (k, v) -> Effect.SetControl(k, v.str(k)) }
             "mana" -> listOf(Effect.AddMp(value.int(key)))
+            // ---- Aşama 5 ----
+            "iliski" -> value.jsonObject.map { (npc, v) -> Effect.ShiftRelation(npc, relDeltas(v.jsonObject, "$where.iliski.$npc")) }
+            "hafiza" -> listOf(
+                value.jsonObject.let { h ->
+                    Effect.AddMemory(
+                        npc = h.string("npc") ?: throw ContentFormatException("$where: hafiza.npc eksik"),
+                        memory = h.string("id") ?: throw ContentFormatException("$where: hafiza.id eksik"),
+                        weight = h.int("agirlik") ?: 10,
+                    )
+                },
+            )
+            "npc_ol" -> listOf(Effect.KillNpc(value.str(key)))
+            "yoldas_katil" -> listOf(Effect.JoinParty(value.str(key)))
+            "yoldas_ayril" -> listOf(Effect.LeaveParty(value.str(key)))
+            "npc_gitti" -> listOf(Effect.NpcGone(value.str(key)))
+            "npc_fraksiyon" -> value.jsonObject.map { (npc, v) -> Effect.SetNpcFaction(npc, v.str(npc)) }
+            "tanis" -> listOf(Effect.MeetNpc(value.str(key)))
+            "npc_seviye" -> value.jsonObject.map { (npc, v) -> Effect.NpcLevel(npc, v.int(npc)) }
+            "npc_iz" -> value.jsonObject.map { (npc, v) -> Effect.NpcTrait(npc, v.str(npc)) }
+            "npc_isaret" -> value.jsonObject.map { (npc, v) -> Effect.NpcMark(npc, v.str(npc)) }
+            "iz" -> listOf(Effect.PlayerTrait(value.str(key)))
+            "bilgi" -> listOf(Effect.Learn(value.str(key)))
+            "yalan" -> listOf(
+                value.jsonObject.let { y ->
+                    Effect.TellLie(
+                        npc = y.string("npc") ?: throw ContentFormatException("$where: yalan.npc eksik"),
+                        topic = y.string("konu") ?: throw ContentFormatException("$where: yalan.konu eksik"),
+                    )
+                },
+            )
+            "kisisel_gorev" -> value.jsonObject.map { (npc, v) ->
+                Effect.PersonalQuest(npc, QuestStatus.fromKey(v.str(npc)) ?: throw ContentFormatException("$where: kisisel_gorev durumu basla/tamam/basarisiz"))
+            }
+            "npc_odul" -> listOf(Effect.NpcReward(value.str(key)))
+            "ordu" -> value.jsonObject.map { (u, v) -> Effect.AddArmy(u, v.int(u)) }
+            "ordu_kazan" -> listOf(Effect.GrowArmy(value.int(key)))
             else -> throw ContentFormatException("$where: bilinmeyen etki '$key'")
         }
     }

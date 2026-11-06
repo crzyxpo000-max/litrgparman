@@ -1,0 +1,72 @@
+# Vahit / Brother Vance — Yükselenler'in peygamberi. Entegrasyon'dan önce kişisel gelişim videoları çeken bir
+# motivasyon konuşmacısı (EN: self-help podcaster). Sistem'in kendisiyle konuştuğunu söylüyor.
+# Olası kaderler: sahtekâr çıkar · gerçekten haklı çıkar · oyuncunun ellerinde Yükseliş sonunun kapısı.
+# Kişilik: cesaret 3 + sadakat 4 → korkutulursa kaçar (sahtekâr yolu); hırs 9 → güveni çökerse ihanet eder.
+# Metinler bilerek iki anlamlıdır: her satır hem bir dolandırıcının hem de bir peygamberin ağzına uyar.
+id: vahit
+aciklama:
+  tr: "Yükselenler'in peygamberi. Kıyametten önce sahnede insanlara 'en iyi versiyonlarını' satıyordu; şimdi Sistem'in kendisine fısıldadığını söylüyor. Asıl ürkütücü olan, bazen haklı çıkması."
+  en: "Prophet of the Ascended. Before the end he sold people their 'best selves' at twenty bucks a month. Now he says the System whispers to him. The scary part is how often he's right."
+kisilik: { cesaret: 3, hirs: 9, vicdan: 2, sadakat: 4, supheci: 2 }
+degerler: { merhamet: -50, duzen: 30, insanlik: -70 }
+baslangic_iliski: { guven: 0, saygi: 15, korku: 0, baglilik: 0 }
+hedefler:
+  - id: secilmisleri_topla
+    oncelik: 10
+    gun: 30
+    ad: { tr: "Seçilmişleri bir araya toplamak", en: "Gather the Chosen" }
+  - id: sesi_yeniden_duy
+    oncelik: 9
+    ad: { tr: "Sistem'in sesini yeniden duymak", en: "Hear the System's voice again" }
+  - id: anomaliyi_kazan
+    oncelik: 7
+    ad: { tr: "Anomaliyi kendi tarafına çekmek", en: "Bring the anomaly into the fold" }
+egilim: { karanlik: 7, buyu: 5, cagirma: 3 }
+seviye: 5
+hiz: 1.0
+fraksiyon: yukselenler
+siralama: true
+savas:
+  rol: menzil
+  stat: cha
+  statlar: { str: 5, agi: 5, end: 6, int: 8, wis: 9, per: 7, wil: 11, cha: 13 }
+  artis: { cha: 1, wil: 1 }
+  saldiri: { tr: "Hüküm Sesi", en: "The Verdict" }
+  metin:
+    tr: "{npc} sesini bile yükseltmiyor; tek bir cümle kuruyor ve {dusman} dizlerinin üstüne çöküyor, sanki biri ona değersiz olduğunu kanıtlamış gibi."
+    en: "{npc} doesn't even raise his voice. One sentence, and {dusman} folds to its knees like somebody just proved it worthless."
+  duello_metin:
+    tr: "{dusman} sana gülümsüyor ve tam olarak en çok korktuğun şeyi, kendi sesinle söylüyor. Kafanın içi ağırlaşıyor."
+    en: "{dusman} smiles at you and says the exact thing you're most afraid of. In your own voice. Your skull gets heavy."
+yay_dugumleri: [vahit_vaaz, vahit_secilmisler, vahit_mucize_sinavi, vahit_maske_duser, vahit_yukselis_kapisi]
+gorusler:
+  merhamet+:
+    - { tr: "\"Bağışla onu. Merhamet, güçlünün kendine aldığı en pahalı hediyedir. Sen bunu karşılayabilirsin.\"", en: "\"Spare him. Mercy is the most expensive gift the strong can buy themselves. You can afford it.\"" }
+  merhamet-:
+    - { tr: "\"Yakıt yanmak için vardır, kardeşim. Ağlamak onu daha iyi yakmaz.\"", en: "\"Fuel exists to burn, friend. Crying over it doesn't make it burn any better.\"" }
+    - { tr: "\"Sistem zayıflığı affetmez. Sen neden affedesin?\"", en: "\"The System doesn't forgive weakness. Why should you?\"" }
+  duzen+:
+    - { tr: "\"Her şeyin bir sırası var. Seçilmişler önde, yakıt arkada. Bu zulüm değil; bu mimari.\"", en: "\"Everything has its place. The Chosen up front, the fuel in back. That's not cruelty. That's architecture.\"" }
+  duzen-:
+    - { tr: "\"Eski kurallar eski dünyayla birlikte öldü. Sana yeni bir kitap lazım.\"", en: "\"The old rules died with the old world. You need a new book.\"" }
+  insanlik+:
+    - { tr: "\"İnsan kal, eğer ısrar ediyorsan. Tırtıl da kozasını sever, bir süre.\"", en: "\"Stay human, if you insist. A caterpillar loves its cocoon too. For a while.\"" }
+  insanlik-:
+    - { tr: "\"O et parçasına neden tutunuyorsun? Sistem sana çok daha iyisini teklif ediyor.\"", en: "\"Why are you hanging on to all that meat? The System's offering you an upgrade.\"" }
+    - { tr: "\"Dün gece bana senden bahsetti. 'Kabuğunu bıraksın' dedi. Ben sadece iletiyorum.\"", en: "\"It talked about you last night. Said you should shed the shell. I'm just the messenger.\"" }
+guc_tepkileri:
+  hayranlik:
+    - { tr: "\"Görüyor musunuz? Söylemiştim. Söylemiştim! O, kehanetin ete bürünmüş hâli.\"", en: "\"You see? I told them. I told them! You're the prophecy with a pulse.\"" }
+    - { tr: "\"Yanına diz çökmeme izin ver. Bunu kimseye yapmam. Kimseye.\"", en: "\"Let me kneel. I don't do this. For anyone.\"" }
+  endise:
+    - { tr: "\"Ses sustu. Sen yükseldikçe bana daha az konuşuyor. Sanki artık seninle konuşuyor.\"", en: "\"The voice went quiet. The higher you climb, the less it talks to me. Like it's talking to you now instead.\"" }
+  kiskanclik:
+    - { tr: "\"Yıllarca bekledim. Oruç tuttum, kanadım, dinledim. Sen hiçbir şey yapmadan seçildin.\"", en: "\"I waited years. Fasted. Bled. Listened. And you just... got picked.\"" }
+  bagimlilik:
+    - { tr: "\"Tarikat artık bana değil sana bakıyor. Benim değerim senin gölgende durmam. Gitme. Lütfen.\"", en: "\"The flock doesn't look at me anymore. They look at you. All I'm worth now is standing in your shadow. Don't leave. Please.\"" }
+hafizalar:
+  vaazda_guldu: { tr: "Vaazının ortasında güldün. Tarikatın önünde. Bunu bir kenara yazdı.", en: "You laughed in the middle of his sermon. In front of the whole flock. He made a note of it." }
+  kurbani_kurtardi: { tr: "Ritüelin ortasından bir 'yakıt'ı söküp aldın.", en: "You pulled one of the 'fuel' right out of the middle of his ritual." }
+  sesi_dogruladi: { tr: "Sistem'in sana da fısıldadığını ima ettin. O andan beri sana başka türlü bakıyor.", en: "You hinted that the System whispers to you too. He's looked at you differently ever since." }
+kisisel_odul:
+  - unvan: "kehanetin_tanigi"

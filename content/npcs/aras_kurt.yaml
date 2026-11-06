@@ -1,0 +1,76 @@
+# Aras Kurt / Ash Wolfe — oyuncuyla aynı hızda yükselen gizemli rakip. Siyah ceket, kendine güven, rekabet.
+# İlk karşılaşmada: "Sen de hızlısın, ha?" Geçmişi kapalı; neden bu kadar hızlı yükseldiği onun sırrı.
+# Olası kaderler: ebedi rakip · çok-evren yoldaşı · oyuncu yerine "S kademe insan" olan kişi.
+# Kişilik: hırs 10 → güven çökerse ihanet; sadakat 3; başlangıç saygısı yüksek, güveni sıfırın altında → rakip eşiğine yakın.
+id: aras_kurt
+aciklama:
+  tr: "Siyah ceketli, senin hızında yükselen yabancı. Nereden geldiğini söylemiyor; nereye gittiğini ise herkes biliyor: zirveye, senden önce."
+  en: "The stranger in the black jacket who's leveling as fast as you are. He won't say where he came from. Where he's going, everybody knows: the top. Ahead of you."
+kisilik: { cesaret: 9, hirs: 10, vicdan: 4, sadakat: 3, supheci: 7 }
+degerler: { merhamet: 0, duzen: -40, insanlik: 20 }
+baslangic_iliski: { guven: -10, saygi: 20, korku: 0, baglilik: 0 }
+hedefler:
+  - id: zirveye_cik
+    oncelik: 10
+    gun: 25
+    ad: { tr: "Sıralamada bir numara olmak", en: "Take the number-one spot on the Ranking" }
+    etkiler:
+      - npc_seviye: { "@": 2 }
+  - id: seni_gec
+    oncelik: 9
+    ad: { tr: "Seni geçmek", en: "Beat you" }
+  - id: gecmisini_gom
+    oncelik: 4
+    ad: { tr: "Geçmişini gömülü tutmak", en: "Keep his past buried" }
+egilim: { yakin_dovus: 7, gizlilik: 6, menzilli: 3 }
+seviye: 3
+hiz: 1.6
+yoldas: true
+siralama: true
+savas:
+  rol: saldiri
+  stat: agi
+  statlar: { str: 8, agi: 11, end: 6, int: 5, wis: 5, per: 8, wil: 7, cha: 6 }
+  artis: { agi: 2, str: 1 }
+  saldiri: { tr: "Gölge Hamlesi", en: "Afterimage Cut" }
+  metin:
+    tr: "{npc} bir an orada, bir an değil. {dusman} hâlâ eski yerine dönmüşken bıçak çoktan işini bitirmiş oluyor."
+    en: "{npc} is there, then he isn't. {dusman} is still turning toward where he used to be when the blade finishes the job."
+  duello_metin:
+    tr: "{dusman} sırıtıyor: \"Sen de hızlısın, ha? Bakalım ne kadar.\" Sonra görüş alanından çıkıyor ve böğrüne soğuk bir şey giriyor."
+    en: "{dusman} grins. \"You're fast too, huh? Let's see how fast.\" Then he's out of sight, and something cold finds your ribs."
+yay_dugumleri: [rakip_iz, aras_ilk_yaris, aras_sira_meydan, aras_kule_dovusu, aras_cok_evren_kapisi]
+ilk_unvanlar:
+  - { unvan: ilk_siniflanan, seviye: 10 }
+  - { unvan: ilk_kapi_kapatan, seviye: 9 }
+gorusler:
+  merhamet+:
+    - { tr: "\"Bırak gitsin. Zayıfı ezmek kimseyi güçlü yapmaz, sadece yorar.\"", en: "\"Let it go. Stepping on the weak doesn't make you strong. Just makes you tired.\"" }
+  merhamet-:
+    - { tr: "\"Arkanı dönersen yarın bıçağı o saplar. Bitir işini.\"", en: "\"Turn your back and tomorrow you're the one with a knife in you. Finish it.\"" }
+    - { tr: "\"Sen yapmazsan ben yaparım. Ve sonra herkes bunu benim yaptığımı konuşur.\"", en: "\"If you won't, I will. And then everybody'll be talking about how I did it.\"" }
+  duzen+:
+    - { tr: "\"Peki, kurallarla oynayalım. Kurallarla da yenerim seni.\"", en: "\"Fine, we play by the rules. I'll beat you by the rules too.\"" }
+  duzen-:
+    - { tr: "\"Lonca mı, Konsey mi? İkisi de seni tasmaya bağlamak istiyor. Kimseye diz çökme.\"", en: "\"Guild, Council, whatever. They all want you on a leash. Don't kneel for anybody.\"" }
+    - { tr: "\"Kural koyanlar hiç zirvede durmamış insanlar.\"", en: "\"The people writing the rules have never been anywhere near the top.\"" }
+  insanlik+:
+    - { tr: "\"Bak, ben de canavar değilim. Daha değilim. Sen de olma, yoksa seni yenmenin tadı kalmaz.\"", en: "\"Look, I'm not a monster either. Not yet. Don't you become one, or beating you won't even be fun.\"" }
+  insanlik-:
+    - { tr: "\"Sistem bize bir merdiven verdi. Basamaklara acıyan tepeye çıkamaz.\"", en: "\"The System gave us a ladder. You don't get to the top feeling sorry for the rungs.\"" }
+guc_tepkileri:
+  hayranlik:
+    - { tr: "\"Tamam. Tamam! Bu çok iyiydi. Bir dahakine ben daha iyisini yaparım ama bu çok iyiydi.\"", en: "\"Okay. Okay! That was sick. I'm doing better next time, but that was sick.\"" }
+  endise:
+    - { tr: "\"Aramızdaki fark artık seviye değil. Sen başka bir şeye dönüşüyorsun. Bunu sevmedim.\"", en: "\"The gap between us isn't levels anymore. You're turning into something else. I don't like it.\"" }
+  kiskanclik:
+    - { tr: "\"Sıralamaya baktım. Sabah baktım, öğlen baktım. Hâlâ oradasın. Benim yerimde.\"", en: "\"I checked the Ranking. This morning. Lunch. You're still up there. In my spot.\"" }
+    - { tr: "\"Bir gün geçeceğim seni. Bu bir tehdit değil, takvim.\"", en: "\"One day I pass you. That's not a threat. It's a schedule.\"" }
+  bagimlilik:
+    - { tr: "\"Sen olmasan kime karşı koşardım? Bunu bir daha sorma, cevabını sevmeyeceksin.\"", en: "\"Without you, who would I even be racing? Don't make me say that twice.\"" }
+hafizalar:
+  yarisi_kazandi: { tr: "Kapıya ondan önce vardın. Sana bir daha olmayacağını söyledi.", en: "You beat him to the Gate. He told you that would never happen again." }
+  sirtini_kolladi: { tr: "Ona arkasını kolladın, karşılığında hiçbir şey istemedin. Bunu anlamadı.", en: "You watched his back and asked for nothing. He couldn't figure that out." }
+  yerde_birakti: { tr: "Düelloda onu yere serdin ve elini uzatmadın.", en: "You put him on the ground in a duel and didn't offer him a hand." }
+kisisel_odul:
+  - unvan: "nefes_nefese"

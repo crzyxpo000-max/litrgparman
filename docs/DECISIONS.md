@@ -2,6 +2,32 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Aşama 5 — 2026-11-06
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 76 | NPC'ler `content/npcs/<id>.yaml` (dosya başına bir NPC); durum `WorldState.npcs` içinde, kayıt v3. Eski `iliski_<npc>` değişkenleri Güven eksenine (yarısı Bağlılığa) taşınır | GDD örnek NPC dosyası; tek sayılı ilişki dört eksene genişledi. | — |
+| 77 | NPC büyümesi: günde 40 · hız / (1 + L/10) yüzde-seviye (hız 1: Gün 30 ≈ 8, 180 ≈ 29, 365 ≈ 45). Yoldaşken ve ihmal edilince (10 gün temassız) ×1,25 | "NPC'ler oyuncudan yavaş bir eğride büyür"; ihmal edilen NPC "başka yoldan" güçlenir. | Aşama 9 simülatörü. |
+| 78 | Hafıza: her gün küçük hatıralar 1 solar; |ağırlık| ≥ 40 ve yalanlar kalıcı; en fazla 30 | GDD "küçükler solar, büyükler kalıcı". | — |
+| 79 | Eşikler günlük adımda denetlenir, NPC başına bir kez (`esik_<tur>` işareti) ve bir olay tohumlar: NPC'ye özel `esik_<tur>_<npc>` yoksa genel `esik_<tur>` (odak NPC "@", `{npc:@}`, `{npc_hedef:@}`). Ayrılık eşiği yoldaş değilse olay yerine en yakın değerli fraksiyona geçiştir | Genel olaylar sistemi şimdiden çalıştırır; NPC'ye özel yazım Aşama 6–7. | Aşama 6–7 içerik. |
+| 80 | Tanık yorumu: Güven Δ = Σ(Δeksen · değer)/50 · (0,5 + vicdan/10); acımasızlıkta Saygı Δ = −Δmerhamet · (hırs − 5)/5, Korku Δ = −Δmerhamet · (10 − cesaret)/20; eksen başına ±15; |Güven Δ| ≥ 6 olay hatırası | GDD: "vicdanlı güven kaybeder, hırslı saygı duyar". | Aşama 9. |
+| 81 | Yoldaşlar savaşta oyuncudan hemen sonra rolüne göre davranır (saldırı/menzil vurur, koruma kalkan, şifa iyileştirir); düşmanlar %35 yoldaşa saldırır; savunan oyuncu düşük canlı yoldaşın darbesini üstüne çeker (`korunan_muttefik`, `_savas_korunan`). Yoldaş savaşta ölmez, düşer; can savaştan savaşa taşınmaz | Kalıcı ölüm rastgele zarla değil hikaye seçimiyle gelsin; mobilde okunur tur ritmi. | Aşama 9. |
+| 82 | Düello/ihanet düşmanı `npc:<id>` (ya da `npc:@`): NPC'nin seviyesi ve savaş bloğundan türetilir; Ezme uygulanmaz; acımasız infaz NPC'yi öldürür, temiz infaz ezer, bağışlamak bağ kurar | "Ölüm kalıcıdır"; ahlaki karar oyuncunun. | — |
+| 83 | Küresel Sıralama dünyaya görünen seviyeyle hesaplanır; oyuncu gerçek yerini de görür ("Yankı gerçek verini saklıyor"). Eşitlikte oyuncu geride. `sira`, `gercek_sira` değişkenleri; ilk 10/3/1'e tırmanınca fraksiyon tepkisi (ranking.yaml) | Gizli/Açık Güç ile Sıralama'nın tutarlı olması için kanon açıklaması. | Aşama 7. |
+| 84 | Yoldaş kapasitesi 1 + KAR/10 + kademe (1–8) | GDD: "KAR ve kademeye bağlı". | Aşama 9. |
+| 85 | Yoldaş görüşü yalnızca önemli olaylarda ve iki+ seçenekte; NPC değerlerine en uygun seçeneğin baskın ekseni için `gorusler` satırı; sahneye yazılmış `yoldas_tepkileri` önceliklidir. Güce tepki 7 günde bir (seviye farkı ≥ 5), açığa vurmada hemen | Her sahnede konuşan yoldaş gürültü olur. | Aşama 6 içerik. |
+| 86 | Yalanlar: `yalan {npc, konu}`; her gün şüphecilik · %1,5 olasılıkla ortaya çıkar (Güven −20, Saygı −5, `esik_yalan`) | "Yalanlar hafızaya girer, sonra ortaya çıkabilir". | Aşama 9. |
+| 87 | Yas Tutan: yoldaş öldükten sonra 3 gün savaş yoksa motor `yas_tutuldu` bayrağını koyar | Aşama 2'den kalan gizli sınıf koşulu. | — |
+| 88 | Prologda el tutulursa Deniz baştan yoldaş; Öğretici'de bulunursa (her yolda) katılır. Deniz'in ilk savaşlara katılması prolog RNG akışını değiştirdi; tam akış testi Günlük Görev'i tamamlanmış sayar | Yoldaş sistemini ilk dakikadan göstermek. | Aşama 6 yeni açılış. |
+| 89 | Ordu modeli: birlik → adet, güç = adet · güç · (1 + kademe) · (1 + seviye/50); `ordu_kazan` eğilime uygun birliği verir. İçerik Aşama 7 | OP MC Ordu; şimdilik model. | Aşama 7. |
+| 90 | 7 NPC dosyası paralel içerik ajanıyla yazıldı (Deniz örnek şemayla elle); kişisel görev ödülü olarak her NPC'ye özgün bir unvan | Görev dosyası: içerikte paralel alt ajan. | Aşama 7 tam yaylar. |
+| 91 | Ayrılık eşiği (bağımsız inceleme): GDD'deki "fark > 120" nötr oyuncuyu bile aşıyordu; artık **sapma** = uzaklık(değer, oyuncu) − uzaklık(değer, nötr) > 60. Yoldaş değilse yalnızca fraksiyonu olan NPC ve yalnızca farklı bir fraksiyona geçer | Deniz ilk gün "seninle yürüyemem" demesin; işaret boşa harcanmasın. | Aşama 9. |
+| 92 | Kişisel görev, kaçış, itaat ve ayrılık eşikleri yalnızca yoldaşlarda; ihanet ve rakiplik savaş bloğu olan her tanıdıkta. Bedensiz NPC (Yankı) genel eşik almaz, yalnızca `esik_<tur>_yanki` yazılırsa; tanık yorumundan da muaf (ilişkisi yazılmış içerikle değişir) | Genel sahneler bedeni olan, yanında yürüyen birini anlatıyor. | Aşama 7 Yankı yayı. |
+| 93 | Hedefler: süreli (`gun`) hedefler ilerler ve etkilerini uygular; süresiz hedefler kalıcı arka plan amacıdır (`{npc_hedef:@}`) | İnceleme: süresiz hedefler gündemi tıkıyordu. | — |
+| 94 | Düello bire birdir (yoldaş katılmaz), Ezme yok; NPC adı artikelsiz kısa ad; NPC infazı için ayrı metinler (Öldür / Dövüşü bitir / Elini uzat). Akılsız düşmanın infazı tanıkları etkilemez | "The Ash Wolfe", "Spare it" ve her fare infazında Deniz'in güven kaybı. | — |
+| 95 | İngilizce zamir belirteci `{zamir:id|o|onu|onun|kendi|b}` ve fiil uyumu (`|s`, `|is`, `|has`, `|does`, `|was`); zamir `names.yaml`'da (Deniz they, Yankı it). Geçmiş pasajlar kendi odak NPC'siyle çözülür (`HistoryEntry.focus`) | Genel sahnelerde cinsiyetli NPC'lere "they" deniyordu; "@" sonraki olaya sızıyordu. | — |
+| 96 | Telif yakınlığı: "Gölge Asker" → "Kül Lejyoneri", "Avcı Soyu" → "Liman Rüzgârı"; `npc_gitti` etkisi (durum "gitti"); ölen NPC'nin kişisel görevi başarısız; v2 kaydında Deniz bayraklara göre yoldaş, avcılar kurulur | Bağımsız inceleme bulguları. | — |
+
 ## Aşama 4 — 2026-11-06
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |

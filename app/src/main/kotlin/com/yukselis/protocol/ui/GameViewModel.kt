@@ -59,6 +59,8 @@ data class UiState(
     val autoCombat: Boolean = false,
     val map: List<RegionView> = emptyList(),
     val journal: JournalView? = null,
+    val relations: com.yukselis.engine.story.RelationsView? = null,
+    val ranking: com.yukselis.engine.story.RankingView? = null,
     /** Son seçimin ürettiği bildirimler (XP, seviye, unvan). Bir sonraki seçimde temizlenir. */
     val freshNotices: List<NoticeView> = emptyList(),
     /** Hikaye dışı eylemlerin (dağıtım, üretim, istem) bildirimleri; Hikaye dışındaki sekmelerde kısa kartlar. */
@@ -322,6 +324,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 combat = engine.combatView(state, lang),
                 map = engine.map(state, lang),
                 journal = engine.journal(state, lang),
+                relations = engine.relations(state, lang),
+                ranking = engine.ranking(state, lang),
                 freshNotices = notices,
                 turn = if (advanceTurn) it.turn + 1 else it.turn,
             )

@@ -105,6 +105,8 @@ class StoryEngineTest {
         assertTrue("ogreticinin_ilk_kani" in s.player.titles)
         assertTrue(title.notices.any { it.kind == NoticeKind.TITLE && it.title.contains("Öğreticinin İlk Kanı") })
 
+        // Günlük Görev'i yapılmış say: Ceza Bölgesi zarı bu testin konusu değil.
+        s = s.copy(daily = s.daily?.copy(completed = true))
         s = engine.choose(s, "uyu", Lang.TR).state
         assertEquals(1, s.day)
         assertEquals("ilk_sabah", s.sceneId)

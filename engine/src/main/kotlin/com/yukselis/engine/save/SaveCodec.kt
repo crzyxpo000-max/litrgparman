@@ -1,6 +1,14 @@
 package com.yukselis.engine.save
 
+import com.yukselis.engine.combat.AllyState
 import com.yukselis.engine.combat.CombatSpec
+import com.yukselis.engine.npc.Hunter
+import com.yukselis.engine.npc.Memory
+import com.yukselis.engine.npc.NpcState
+import com.yukselis.engine.npc.NpcStatus
+import com.yukselis.engine.npc.RelAxis
+import com.yukselis.engine.npc.Relation
+import kotlinx.serialization.json.doubleOrNull
 import com.yukselis.engine.combat.CombatState
 import com.yukselis.engine.combat.EnemyMemory
 import com.yukselis.engine.combat.EnemyState
@@ -64,9 +72,13 @@ data class SaveData(val state: WorldState, val savedAtMillis: Long)
  *    Aşama 3 (alan ekleme, sürüm aynı): süren savaş, düşman hafızası, İkinci Şans kademeleri, ölüm.
  *    Aşama 4 (alan ekleme): bölge, bölge durumları, tohumlar, gün durumu, görevler, Dikkat, Yozlaşma,
  *    görünen seviye, efsane. Eksik alanlar varsayılana düşer; eski kayıtlar açılır.
+ *  - v3 (Aşama 5): NPC durumları (4 eksen, hafıza, hedef, seviye, fraksiyon, yoldaşlık), prosedürel
+ *    avcılar, bilgi günlüğü, izler, ordu, odak NPC, tohumun NPC'si, savaştaki yoldaşlar.
+ *    v2 → v3: `iliski_<npc>` değişkenleri NPC'nin Güven eksenine (yarısı Bağlılığa) taşınır;
+ *    `iliski_deniz_guven` → Deniz'e Güven. Değişkenlerden silinir.
  */
 object SaveCodec {
-    const val VERSION = 2
+    const val VERSION = 3
 
     fun encode(state: WorldState, savedAtMillis: Long): String = buildJsonObject {
         put("v", VERSION)
@@ -108,9 +120,11 @@ object SaveCodec {
             putIntMap("insight", p.essenceInsight)
             putJsonArray("essences") { p.essences.forEach { add(it) } }
             p.path?.let { put("path", it) }
+            putJsonArray("traits") { p.traits.forEach { add(it) } }
+            putIntMap("army", p.army)
         }
         putJsonArray("history") {
-            state.history.forEach { h -> addJsonObject { put("s", h.sceneId); put("c", h.choiceId) } }
+            state.history.forEach { h -> addJsonObject { put("s", h.sceneId); put("c", h.choiceId); h.focus?.let { put("f", it) } } }
         }
         putJsonObject("claims") { state.firstClaims.toSortedMap().forEach { (k, v) -> put(k, v) } }
         putJsonArray("prompts") {
@@ -155,7 +169,7 @@ object SaveCodec {
             }
         }
         putJsonArray("seeds") {
-            state.seeds.forEach { sd -> addJsonObject { put("e", sd.eventId); put("d", sd.dueDay); sd.condition?.let { put("c", it) } } }
+            state.seeds.forEach { sd -> addJsonObject { put("e", sd.eventId); put("d", sd.dueDay); sd.condition?.let { put("c", it) }; sd.npc?.let { put("n", it) } } }
         }
         putJsonObject("dayState") {
             val d = state.dayState
@@ -171,6 +185,30 @@ object SaveCodec {
         put("corruption", state.corruption)
         put("publicLevel", state.publicLevel)
         putIntMap("legend", state.legend)
+        // ---- Aşama 5 ----
+        putJsonObject("npcs") {
+            state.npcs.toSortedMap().forEach { (id, n) ->
+                putJsonObject(id) {
+                    put("st", n.status.key)
+                    putJsonObject("rel") { put("g", n.relation.trust); put("s", n.relation.respect); put("k", n.relation.fear); put("b", n.relation.bond) }
+                    put("lv", n.level); put("pr", n.progress)
+                    n.faction?.let { put("f", it) }
+                    put("comp", n.companion); put("known", n.known)
+                    putJsonArray("mem") { n.memories.forEach { m -> addJsonObject { put("id", m.id); put("d", m.day); put("w", m.weight) } } }
+                    n.goal?.let { put("goal", it) }
+                    put("gp", n.goalProgress)
+                    putJsonArray("done") { n.doneGoals.sorted().forEach { add(it) } }
+                    putJsonArray("marks") { n.marks.sorted().forEach { add(it) } }
+                    putJsonArray("traits") { n.traits.forEach { add(it) } }
+                    put("contact", n.lastContactDay); put("power", n.lastPowerDay)
+                }
+            }
+        }
+        putJsonArray("hunters") {
+            state.hunters.forEach { h -> addJsonObject { put("u", h.uid); put("f", h.first); put("l", h.last); put("lv", h.level); put("p", h.progress); put("r", h.rate) } }
+        }
+        putJsonArray("knowledge") { state.knowledge.forEach { add(it) } }
+        state.focusNpc?.let { put("focus", it) }
     }.toString()
 
     private fun encodeLText(t: LText) = buildJsonObject { put("tr", t.tr); put("en", t.en) }
@@ -221,6 +259,15 @@ object SaveCodec {
         c.pendingExecution?.let { put("exec", it) }
         putJsonArray("struck") { c.struck.sorted().forEach { add(it) } }
         put("low", c.lowestHpPercent); put("kills", c.kills)
+        putJsonArray("allies") {
+            c.allies.forEach { a ->
+                addJsonObject {
+                    put("npc", a.npc); put("hp", a.hp); put("max", a.maxHp); put("lv", a.level); put("down", a.down); put("cd", a.cooldown)
+                    putJsonObject("stats") { Stat.entries.forEach { put(it.key, a.stats[it]) } }
+                }
+            }
+        }
+        put("prot", c.protectedAllies)
     }
 
     private fun decodeCombat(o: JsonObject): CombatState {
@@ -272,6 +319,14 @@ object SaveCodec {
             struck = (o["struck"] as? JsonArray)?.mapNotNull { it.jsonPrimitive.intOrNull }?.toSet() ?: emptySet(),
             lowestHpPercent = o.int("low") ?: 100,
             kills = o.int("kills") ?: 0,
+            allies = (o["allies"] as? JsonArray)?.mapNotNull { x ->
+                val a = x.jsonObject
+                val st = a["stats"]?.jsonObject
+                a.string("npc")?.let {
+                    AllyState(it, a.int("hp") ?: 1, a.int("max") ?: 1, a.int("lv") ?: 1, Stats(Stat.entries.associateWith { s -> st?.int(s.key) ?: Stats.BASE_VALUE }), a.bool("down"), a.int("cd") ?: 0)
+                }
+            } ?: emptyList(),
+            protectedAllies = o.int("prot") ?: 0,
         )
     }
 
@@ -298,6 +353,17 @@ object SaveCodec {
             Affinity.LEGACY_VARS.forEach { (key, a) -> vars[key]?.let { affinity = affinity.plus(a, it) } }
             vars = vars - Affinity.LEGACY_VARS.keys
         }
+        // v2 → v3: tek sayılı ilişki değişkenleri dört eksene taşınır (NPC'nin kalanı içerikten kurulur).
+        var npcs = decodeNpcs(o["npcs"] as? JsonObject)
+        if (version < 3) {
+            val legacy = vars.filterKeys { it.startsWith(LEGACY_RELATION_PREFIX) }
+            legacy.forEach { (key, v) ->
+                val id = LEGACY_RELATION_ALIASES[key] ?: key.removePrefix(LEGACY_RELATION_PREFIX)
+                val cur = npcs[id] ?: NpcState(id)
+                npcs = npcs + (id to cur.copy(known = true, relation = cur.relation.shift(RelAxis.TRUST, v).shift(RelAxis.BOND, v / 2)))
+            }
+            vars = vars - legacy.keys
+        }
 
         val defaults = PlayerState(level = level, stats = stats)
         val player = defaults.copy(
@@ -321,6 +387,8 @@ object SaveCodec {
             essenceInsight = p.intMap("insight"),
             essences = p.strings("essences"),
             path = p.string("path"),
+            traits = p.strings("traits"),
+            army = p.intMap("army"),
         )
         val morality = o["morality"]?.jsonObject
         val state = WorldState(
@@ -343,7 +411,7 @@ object SaveCodec {
                 val h = e.jsonObject
                 val s = h.string("s")
                 val c = h.string("c")
-                if (s != null && c != null) HistoryEntry(s, c) else null
+                if (s != null && c != null) HistoryEntry(s, c, h.string("f")) else null
             } ?: emptyList(),
             ended = o.bool("ended"),
             firstClaims = (o["claims"] as? JsonObject)?.mapNotNull { (k, v) -> v.jsonPrimitive.contentOrNull?.let { k to it } }?.toMap() ?: emptyMap(),
@@ -384,7 +452,7 @@ object SaveCodec {
             }?.toMap() ?: emptyMap(),
             seeds = (o["seeds"] as? JsonArray)?.mapNotNull { x ->
                 val sd = x.jsonObject
-                sd.string("e")?.let { Seed(it, sd.int("d") ?: 0, sd.string("c")) }
+                sd.string("e")?.let { Seed(it, sd.int("d") ?: 0, sd.string("c"), sd.string("n")) }
             } ?: emptyList(),
             dayState = (o["dayState"] as? JsonObject)?.let { d ->
                 DayState(
@@ -403,6 +471,13 @@ object SaveCodec {
             corruption = o.int("corruption") ?: 0,
             publicLevel = o.int("publicLevel") ?: level,
             legend = o.intMap("legend"),
+            npcs = npcs,
+            hunters = (o["hunters"] as? JsonArray)?.mapNotNull { x ->
+                val h = x.jsonObject
+                Hunter(h.int("u") ?: return@mapNotNull null, h.int("f") ?: 0, h.int("l") ?: 0, h.int("lv") ?: 1, h.int("p") ?: 0, (h["r"] as? JsonPrimitive)?.doubleOrNull ?: 1.0)
+            } ?: emptyList(),
+            knowledge = o.strings("knowledge"),
+            focusNpc = o.string("focus"),
             // Sekme kaydı olmayan eski kayıtlarda sahip olunanlara göre açılır.
             unlockedTabs = if (o["tabs"] is JsonArray) {
                 o.strings("tabs").toSet()
@@ -415,6 +490,36 @@ object SaveCodec {
         )
         return SaveData(state, o.long("savedAt") ?: 0)
     }
+
+    private fun decodeNpcs(o: JsonObject?): Map<String, NpcState> =
+        o?.mapNotNull { (id, v) ->
+            val n = v as? JsonObject ?: return@mapNotNull null
+            val rel = n["rel"] as? JsonObject
+            id to NpcState(
+                id = id,
+                status = NpcStatus.fromKey(n.string("st")),
+                relation = Relation(rel?.int("g") ?: 0, rel?.int("s") ?: 0, rel?.int("k") ?: 0, rel?.int("b") ?: 0),
+                level = n.int("lv") ?: 0,
+                progress = n.int("pr") ?: 0,
+                faction = n.string("f"),
+                companion = n.bool("comp"),
+                known = n.bool("known"),
+                memories = (n["mem"] as? JsonArray)?.mapNotNull { x ->
+                    val m = x.jsonObject
+                    m.string("id")?.let { Memory(it, m.int("d") ?: 0, m.int("w") ?: 0) }
+                } ?: emptyList(),
+                goal = n.string("goal"),
+                goalProgress = n.int("gp") ?: 0,
+                doneGoals = n.strings("done").toSet(),
+                marks = n.strings("marks").toSet(),
+                traits = n.strings("traits"),
+                lastContactDay = n.int("contact") ?: 0,
+                lastPowerDay = n.int("power") ?: -100,
+            )
+        }?.toMap() ?: emptyMap()
+
+    private const val LEGACY_RELATION_PREFIX = "iliski_"
+    private val LEGACY_RELATION_ALIASES = mapOf("iliski_deniz_guven" to "deniz_arman")
 
     private fun JsonObjectBuilder.putIntMap(key: String, map: Map<String, Int>) =
         putJsonObject(key) { map.toSortedMap().forEach { (k, v) -> put(k, v) } }

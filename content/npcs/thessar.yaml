@@ -1,0 +1,68 @@
+# Elçi Thessar / Envoy Thessar — Kadimler'in Dünya elçisi. Çok-evren ırkı; Gün 365'te hasat ya da vassallık planlıyor.
+# Resmî, kibirli, sabırlı; insanlara bir laboratuvar türü gibi bakar. Oyuncu onun için ilk "ilginç" insandır.
+# Olası kaderler: Vassal sonu ortağı · kendi ırkına ihanet eden müttefik · son boss.
+# Kişilik: hırs 8 + sadakat 4 → güveni çökerse ihanet; vicdan 5 → kendi ırkına ihanet yolu açık. Savaş bloğu son düello içindir.
+id: thessar
+aciklama:
+  tr: "Kadimler'in Dünya'ya gönderdiği elçi. Dünya'yı bir ülke olarak değil, bir hasat tarlası olarak görüyor ve bunu söylemekten çekinmiyor. Kibarlığı, bir çiftçinin ineğine gösterdiği kibarlık."
+  en: "The envoy the Ancients sent to Earth. He sees the planet as a crop, not a country, and doesn't bother pretending otherwise. His manners are the manners of a rancher talking to his cattle."
+kisilik: { cesaret: 7, hirs: 8, vicdan: 5, sadakat: 4, supheci: 8 }
+degerler: { merhamet: -30, duzen: 90, insanlik: -80 }
+baslangic_iliski: { guven: -10, saygi: -30, korku: 0, baglilik: 0 }
+hedefler:
+  - id: hasada_hazirla
+    oncelik: 10
+    ad: { tr: "Dünya'yı Gün 365'e hazırlamak", en: "Get Earth ready for Day 365" }
+  - id: anomaliyi_incele
+    oncelik: 9
+    ad: { tr: "Anomaliyi incelemek", en: "Study the anomaly" }
+  - id: antlasma_imzalat
+    oncelik: 7
+    ad: { tr: "Bir insana boyunduruk antlaşmasını imzalatmak", en: "Get one human to sign the vassal treaty" }
+egilim: { buyu: 9, karanlik: 7, cagirma: 6, koruma: 5 }
+seviye: 120
+hiz: 0.3
+fraksiyon: kadimler
+savas:
+  rol: menzil
+  stat: wil
+  statlar: { str: 70, agi: 85, end: 95, int: 125, wis: 115, per: 100, wil: 145, cha: 95 }
+  artis: { wil: 2, int: 1 }
+  saldiri: { tr: "Katman Hükmü", en: "Layer Decree" }
+  metin:
+    tr: "{npc} yalnızca iki parmağını kaldırıyor. {dusman} bulunduğu yerde katlanıyor, sanki uzay onu yanlış yazılmış bir satır gibi silmiş."
+    en: "{npc} lifts two fingers. That's all. {dusman} folds in on itself, like space just deleted a typo."
+  duello_metin:
+    tr: "{dusman} sana bakmaya bile tenezzül etmiyor. Etrafındaki hava ağırlaşıyor, kemiklerin onun iradesine boyun eğmeye başlıyor."
+    en: "{dusman} doesn't even bother looking at you. The air goes thick, and your bones start bending to his will."
+yay_dugumleri: [thessar_inis, thessar_ticaret_masasi, thessar_vassal_teklifi, thessar_ihanet_fisiltisi, thessar_son_duello]
+gorusler:
+  merhamet+:
+    - { tr: "\"Bağışla. Canlı mal ölüsünden daha değerlidir. Bu merhamet değil; muhasebe.\"", en: "\"Spare it. Live stock is worth more than dead stock. That isn't mercy. That's accounting.\"" }
+  merhamet-:
+    - { tr: "\"Türünüz duygularına çok fazla oy hakkı tanıyor. Kes ve devam et.\"", en: "\"Your species gives its feelings far too many votes. Cut it and move on.\"" }
+  duzen+:
+    - { tr: "\"Nihayet. Bir yasa. Belki de sizin türünüz eğitilebilir.\"", en: "\"At last. A law. Perhaps your species is trainable after all.\"" }
+    - { tr: "\"Bin dünya gördüm. Ayakta kalanların hepsinin tek bir sesi vardı. Ses ol.\"", en: "\"I have seen a thousand worlds. Every one that survived spoke with a single voice. Be that voice.\"" }
+  duzen-:
+    - { tr: "\"Onların kuralları seni küçük tutmak için var. Benimkiler ise en azından dürüst.\"", en: "\"Their rules exist to keep you small. Mine, at least, are honest about it.\"" }
+  insanlik+:
+    - { tr: "\"İnsan kalmak istiyorsun. Ne sevimli. Kadimler de bir zamanlar bir şey kalmak istemişti.\"", en: "\"You wish to remain human. How quaint. The Ancients once wished to remain something, too.\"" }
+  insanlik-:
+    - { tr: "\"Kabuğunu bırak. Altında ne olduğunu ikimiz de merak ediyoruz.\"", en: "\"Shed the shell. We are both curious what lies beneath it.\"" }
+guc_tepkileri:
+  hayranlik:
+    - { tr: "\"Etkileyici. Bir insan için. Bunu raporuma yazacağım ve kimse inanmayacak.\"", en: "\"Impressive. For a human. I will put it in my report, and no one will believe it.\"" }
+  endise:
+    - { tr: "\"Sen bir sapmasın. Sapmalar ya yükseltilir ya budanır. Henüz karar verilmedi.\"", en: "\"You are a deviation. Deviations are either promoted or pruned. That decision has not been made.\"" }
+    - { tr: "\"Bin yıllık hesabı bir yılda bozuyorsun. Meclis bu tür şeylerden hoşlanmaz.\"", en: "\"You are ruining a thousand-year projection in a single year. The Conclave does not enjoy that sort of thing.\"" }
+  kiskanclik:
+    - { tr: "\"Benim türüm bu eşiğe dokuz nesilde ulaştı. Sen dokuz ayda. Bu... uygunsuz.\"", en: "\"My kind reached this threshold in nine generations. You did it in nine months. This is... improper.\"" }
+  bagimlilik:
+    - { tr: "\"Benim görevim artık sana bağlı. Bunu yüksek sesle söylemekten hoşlanmıyorum. Unut duyduğunu.\"", en: "\"My mission now depends on you. I do not enjoy saying that out loud. Forget you heard it.\"" }
+hafizalar:
+  bas_egmedi: { tr: "Onu ilk selamladığında başını eğmedin.", en: "You didn't bow when he first greeted you." }
+  teklifi_dinledi: { tr: "Antlaşma teklifini sonuna kadar dinledin, sözünü kesmeden.", en: "You heard out his treaty offer all the way to the end, without interrupting." }
+  elcisini_oldurdu: { tr: "Kadim öncülerinden birini öldürdün. Raporuna yazdı.", en: "You killed one of the Ancient vanguard. He wrote it in his report." }
+kisisel_odul:
+  - unvan: "kadim_konugu"

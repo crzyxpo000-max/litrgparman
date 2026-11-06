@@ -78,6 +78,15 @@ fun CombatScreen(
             EnemyCard(e, selected = e.uid == target, onSelect = { if (e.alive) chosen = e.uid }, onDetail = { detail = e.uid })
             Spacer(Modifier.height(6.dp))
         }
+        // Yoldaşlar: kendi turlarında otomatik davranır.
+        combat.allies.forEach { a ->
+            Text(
+                text = if (a.down) stringResource(R.string.ally_down, a.name) else stringResource(R.string.ally_line, a.name, a.role, a.level, a.hp, a.maxHp),
+                style = GameType.system,
+                color = if (a.down) MaterialTheme.colorScheme.outline else com.yukselis.protocol.ui.theme.CompanionColor,
+            )
+        }
+        if (combat.allies.isNotEmpty()) Spacer(Modifier.height(6.dp))
 
         // Oyuncu: Dayanım, durumlar, duruş, efor
         StatBar(stringResource(R.string.stamina_short), combat.stamina.toLong(), combat.maxStamina.toLong(), Color(0xFF66BB6A))

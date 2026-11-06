@@ -38,9 +38,29 @@ object ContentValidator {
             }
         }
 
+        fun npcRef(id: String, where: String) {
+            if (id == Content.FOCUS) return
+            if (id !in content.npcs) problems += "$where: tanımsız NPC '$id'"
+        }
+
         fun checkCondition(c: Condition?, where: String) {
             when (c) {
                 null -> Unit
+                is Condition.NpcAlive -> npcRef(c.npc, where)
+                is Condition.NpcDead -> npcRef(c.npc, where)
+                is Condition.IsCompanion -> npcRef(c.npc, where)
+                is Condition.RelationAtLeast -> npcRef(c.npc, where)
+                is Condition.RelationAtMost -> npcRef(c.npc, where)
+                is Condition.NpcMarked -> npcRef(c.npc, where)
+                is Condition.NpcLevelAtLeast -> npcRef(c.npc, where)
+                is Condition.Remembers -> npcRef(c.npc, where)
+                is Condition.NpcInFaction -> {
+                    npcRef(c.npc, where)
+                    if (c.faction !in content.factions) problems += "$where: tanımsız fraksiyon '${c.faction}'"
+                }
+                is Condition.NpcCanFight -> npcRef(c.npc, where)
+                is Condition.Knows -> if (c.knowledge !in content.knowledge) problems += "$where: tanımsız bilgi '${c.knowledge}'"
+                is Condition.HasTrait -> if (c.trait !in content.traits) problems += "$where: tanımsız iz '${c.trait}'"
                 is Condition.All -> c.conditions.forEach { checkCondition(it, where) }
                 is Condition.HasSkill -> if (c.skillId !in content.skills) problems += "$where: koşulda tanımsız yetenek '${c.skillId}'"
                 is Condition.HasTitle -> if (c.titleId !in content.titles) problems += "$where: koşulda tanımsız unvan '${c.titleId}'"
@@ -61,7 +81,14 @@ object ContentValidator {
                 is Effect.EssenceInsight -> if (e.essenceId !in content.essences) problems += "$where: tanımsız Öz '${e.essenceId}'"
                 is Effect.DailyProgress -> if (e.kind !in DAILY_KINDS) problems += "$where: bilinmeyen Günlük Görev türü '${e.kind}'"
                 is Effect.StartCombat -> {
-                    e.spec.enemies.forEach { if (it !in content.enemies) problems += "$where: tanımsız düşman '$it'" }
+                    e.spec.enemies.forEach { id ->
+                        val npcId = id.removePrefix(com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX)
+                        when {
+                            id.startsWith(com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX) ->
+                                if (npcId != Content.FOCUS && content.npcs[npcId]?.combat == null) problems += "$where: '$id' için NPC ya da savaş bloğu yok"
+                            id !in content.enemies -> problems += "$where: tanımsız düşman '$id'"
+                        }
+                    }
                     listOfNotNull(e.spec.win, e.spec.lose, e.spec.flee).forEach {
                         if (it != WorldState.HUB && it !in content.scenes) problems += "$where: savaş sahnesi tanımsız '$it'"
                     }
@@ -81,6 +108,38 @@ object ContentValidator {
                 }
                 is Effect.ShiftReputation -> if (content.factions.isNotEmpty() && e.faction !in content.factions) problems += "$where: tanımsız fraksiyon '${e.faction}'"
                 is Effect.UnlockTab -> if (e.tab !in com.yukselis.engine.core.WorldState.TABS) problems += "$where: bilinmeyen sekme '${e.tab}'"
+                // ---- Aşama 5 ----
+                is Effect.ShiftRelation -> npcRef(e.npc, where)
+                is Effect.AddMemory -> npcRef(e.npc, where)
+                is Effect.KillNpc -> npcRef(e.npc, where)
+                is Effect.LeaveParty -> npcRef(e.npc, where)
+                is Effect.NpcGone -> npcRef(e.npc, where)
+                is Effect.MeetNpc -> npcRef(e.npc, where)
+                is Effect.NpcLevel -> npcRef(e.npc, where)
+                is Effect.NpcMark -> npcRef(e.npc, where)
+                is Effect.NpcReward -> npcRef(e.npc, where)
+                is Effect.PersonalQuest -> npcRef(e.npc, where)
+                is Effect.TellLie -> npcRef(e.npc, where)
+                is Effect.JoinParty -> {
+                    npcRef(e.npc, where)
+                    content.npcs[e.npc]?.let { if (!it.canJoin) problems += "$where: '${e.npc}' yoldaş olamaz (yoldas: true değil)" }
+                }
+                is Effect.SetNpcFaction -> {
+                    npcRef(e.npc, where)
+                    if (e.faction !in content.factions) problems += "$where: tanımsız fraksiyon '${e.faction}'"
+                }
+                is Effect.NpcTrait -> {
+                    npcRef(e.npc, where)
+                    val t = content.traits[e.trait]
+                    if (t == null) problems += "$where: tanımsız iz '${e.trait}'" else if (t.onPlayer) problems += "$where: '${e.trait}' oyuncu izi, NPC'ye verilemez"
+                }
+                is Effect.PlayerTrait -> {
+                    val t = content.traits[e.trait]
+                    if (t == null) problems += "$where: tanımsız iz '${e.trait}'" else if (!t.onPlayer) problems += "$where: '${e.trait}' NPC izi, oyuncuya verilemez"
+                }
+                is Effect.Learn -> if (e.knowledge !in content.knowledge) problems += "$where: tanımsız bilgi '${e.knowledge}'"
+                is Effect.AddArmy -> if (e.unit !in content.army) problems += "$where: tanımsız birlik '${e.unit}'"
+                is Effect.GrowArmy -> if (content.army.isEmpty()) problems += "$where: ordu birliği tanımlı değil"
                 else -> Unit
             }
         }
@@ -252,6 +311,71 @@ object ContentValidator {
         }
         content.quests.values.forEach { q -> checkText(q.name, "görev ${q.id}.ad"); checkText(q.description, "görev ${q.id}.aciklama") }
 
+        // ---- NPC'ler (Aşama 5) ----
+        content.npcs.values.forEach { d ->
+            val at = "NPC ${d.id}"
+            if (content.names.find(NameEntry.Kind.NPC, d.id) == null) problems += "$at: names.yaml'da adı yok"
+            checkText(d.description, "$at.aciklama")
+            if (d.goals.isEmpty()) problems += "$at: en az bir hedef olmalı"
+            d.goals.forEach { g ->
+                checkText(g.name, "$at.${g.id}.ad")
+                checkCondition(g.condition, "$at.${g.id}")
+                g.effects.forEach { checkEffect(it, "$at.${g.id}") }
+            }
+            d.faction?.let { if (it !in content.factions) problems += "$at: tanımsız fraksiyon '$it'" }
+            if (d.startLevel < 1) problems += "$at: seviye en az 1"
+            if (d.growthRate <= 0) problems += "$at: hiz pozitif olmalı"
+            checkCondition(d.presentWhen, "$at.yaninda")
+            d.combat?.let { c ->
+                checkText(c.attackName, "$at.savas.saldiri")
+                checkText(c.prose, "$at.savas.metin")
+                checkText(c.duelProse, "$at.savas.duello_metin")
+                if ("{npc}" !in c.prose.tr || "{npc}" !in c.prose.en || "{dusman}" !in c.prose.tr || "{dusman}" !in c.prose.en) {
+                    problems += "$at.savas.metin: '{npc}' ve '{dusman}' iki dilde de olmalı"
+                }
+                if ("{dusman}" !in c.duelProse.tr || "{dusman}" !in c.duelProse.en) problems += "$at.savas.duello_metin: '{dusman}' iki dilde de olmalı"
+            }
+            if (d.canJoin && d.combat == null) problems += "$at: yoldaş olabilen NPC'nin 'savas' bloğu olmalı"
+            d.firstClaims.forEach { fc ->
+                val t = content.titles[fc.title]
+                if (t == null) problems += "$at: tanımsız unvan '${fc.title}'" else if (!t.first) problems += "$at: '${fc.title}' bir 'İlk' unvanı değil"
+            }
+            val opinionKeys = com.yukselis.engine.core.MoralAxis.entries.flatMap { listOf(com.yukselis.engine.npc.NpcDef.opinionKey(it, true), com.yukselis.engine.npc.NpcDef.opinionKey(it, false)) }
+            d.opinions.forEach { (k, lines) ->
+                if (k !in opinionKeys) problems += "$at.gorusler: bilinmeyen anahtar '$k' (ör. merhamet+, duzen-)"
+                lines.forEach { checkText(it, "$at.gorusler.$k") }
+            }
+            d.powerLines.forEach { (k, lines) -> lines.forEach { checkText(it, "$at.guc_tepkileri.${k.key}") } }
+            d.memories.forEach { (k, t) -> checkText(t, "$at.hafizalar.$k") }
+            d.personalReward.forEach { checkEffect(it, "$at.kisisel_odul") }
+        }
+        if (content.npcs.isNotEmpty()) {
+            // Eşik olayları motor tarafından tohumlanır: genel olaylar var, tekrarlanabilir ve yalnızca tohumla gelir.
+            com.yukselis.engine.npc.ThresholdKind.entries.forEach { k ->
+                val ev = content.events[k.genericEvent]
+                when {
+                    ev == null -> problems += "eşik olayı '${k.genericEvent}' tanımlı değil"
+                    !ev.repeatable -> problems += "olay ${ev.id}: genel eşik olayı 'tekrar: true' olmalı"
+                    !ev.seedOnly -> problems += "olay ${ev.id}: eşik olayı 'yalniz_tohum: true' olmalı"
+                }
+            }
+            content.events.values.forEach { ev ->
+                ev.npcs.forEach { if (it !in content.npcs) problems += "olay ${ev.id}: '$it' için npcs/ dosyası yok" }
+            }
+        }
+        content.traits.values.forEach { t -> checkText(t.name, "iz ${t.id}.ad"); checkText(t.description, "iz ${t.id}.aciklama") }
+        content.knowledge.values.forEach { k -> checkText(k.name, "bilgi ${k.id}.ad"); checkText(k.description, "bilgi ${k.id}.aciklama") }
+        content.army.values.forEach { a ->
+            checkText(a.name, "birlik ${a.id}.ad"); checkText(a.description, "birlik ${a.id}.aciklama")
+            if (a.affinities.isEmpty()) problems += "birlik ${a.id}: 'egilim' listesi boş"
+        }
+        content.ranking.let { r ->
+            (r.firstNames + r.lastNames).forEach { checkText(it, "ranking.yaml ad") }
+            if (r.hunters > 0 && (r.firstNames.isEmpty() || r.lastNames.isEmpty())) problems += "ranking.yaml: avcı adları boş"
+            r.reactions.forEach { re -> re.effects.forEach { checkEffect(it, "ranking.yaml sira ${re.rank}") } }
+        }
+        content.factionValues.keys.forEach { if (it !in content.factions) problems += "fraksiyon $it: değerler tanımsız fraksiyon için" }
+
         // ---- Bayrak kaydı: her bayrak flags.yaml'da tanımlı olmalı ----
         val usage = flagUsage(content)
         (usage.read + usage.written).filterNot { isEngineFlag(it) }.toSortedSet().forEach { f ->
@@ -272,6 +396,11 @@ object ContentValidator {
             scene.insights.forEachIndexed { i, ins ->
                 checkText(ins.text, "$at sezgi ${i + 1}")
                 checkCondition(ins.condition, "$at sezgi ${i + 1}")
+            }
+            scene.companionLines.forEachIndexed { i, l ->
+                npcRef(l.npc, "$at yoldaş tepkisi ${i + 1}")
+                checkText(l.text, "$at yoldaş tepkisi ${i + 1}")
+                checkCondition(l.condition, "$at yoldaş tepkisi ${i + 1}")
             }
             scene.notices.forEachIndexed { i, n ->
                 checkText(n.notice.title, "$at bildirim ${i + 1} başlık")
@@ -331,9 +460,10 @@ data class FlagUsage(val read: Set<String>, val written: Set<String>)
 
 /** Motorun kendisinin koyduğu bayraklar (kayıtta tanım gerekmez). */
 fun isEngineFlag(flag: String): Boolean =
-    ENGINE_FLAG_PREFIXES.any { flag.startsWith(it) } || flag in ENGINE_FLAGS
+    ENGINE_FLAG_PREFIXES.any { flag.startsWith(it) } || flag in ENGINE_FLAGS || flag in ENGINE_FLAGS_EXTRA
 
-private val ENGINE_FLAG_PREFIXES = listOf("yenildi_", "uyanis_", "olay_", "dikkat_esik_", "_red_", "_zar_")
+private val ENGINE_FLAG_PREFIXES = listOf("yenildi_", "uyanis_", "olay_", "dikkat_esik_", "_red_", "_zar_", "_sira_")
+private val ENGINE_FLAGS_EXTRA = setOf(com.yukselis.engine.npc.NpcEngine.FLAG_MOURNED)
 private val ENGINE_FLAGS = setOf(com.yukselis.engine.world.WorldEngine.DAILY_WIDE_FLAG)
 
 fun flagUsage(content: Content): FlagUsage {
@@ -371,6 +501,12 @@ fun flagUsage(content: Content): FlagUsage {
     content.events.values.forEach { cond(it.condition) }
     content.dailyTemplates.values.forEach { cond(it.condition) }
     content.awakenings.forEach { a -> cond(a.condition); a.effects.forEach { eff(it) } }
+    content.npcs.values.forEach { d ->
+        cond(d.presentWhen)
+        d.goals.forEach { g -> cond(g.condition); g.effects.forEach { eff(it) } }
+        d.personalReward.forEach { eff(it) }
+    }
+    content.ranking.reactions.forEach { r -> r.effects.forEach { eff(it) } }
     return FlagUsage(read, written)
 }
 
@@ -386,10 +522,18 @@ fun contentWarnings(content: Content): List<String> {
     val seeded = content.scenes.values.flatMap { s -> s.choices.flatMap { c -> c.effects + (c.check?.failEffects ?: emptyList()) } }
         .plus(content.awakenings.flatMap { it.effects })
         .filterIsInstance<Effect.PlantSeed>().map { it.eventId }.toSet()
-    content.events.values.filter { it.seedOnly && it.id !in seeded && !it.id.startsWith("dikkat_") }.forEach {
+    content.events.values.filter { it.seedOnly && it.id !in seeded && !it.id.startsWith("dikkat_") && !it.id.startsWith("esik_") }.forEach {
         warnings += "olay ${it.id}: yalnızca tohumla gelir ama hiçbir yerde tohumlanmıyor (ulaşılamaz)"
     }
     content.events.values.filter { it.repeatable.not() && it.dayMax < it.dayMin }.forEach { warnings += "olay ${it.id}: gün aralığı boş" }
+    // NPC yay düğümleri: henüz yazılmamış düğümler (Aşama 6–7 içeriği) uyarıdır.
+    content.npcs.values.forEach { d ->
+        d.arcNodes.forEach { n ->
+            val ev = content.events[n]
+            if (ev == null) warnings += "NPC ${d.id}: yay düğümü '$n' henüz yazılmadı"
+            else if (d.id !in ev.npcs) warnings += "NPC ${d.id}: yay düğümü '$n' olayının 'npc' listesinde yok (ölünce kapanmaz)"
+        }
+    }
     // OP MC: önemli olaylarda her seçenek en az bir ahlak eksenini oynatmalı.
     val important = content.events.values.filter { it.important }
     for (ev in important) {

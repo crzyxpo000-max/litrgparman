@@ -186,6 +186,8 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
                 daily = ui.daily,
                 map = ui.map,
                 journal = ui.journal,
+                relations = ui.relations,
+                ranking = ui.ranking,
                 notices = ui.actionNotices,
                 onTrain = viewModel::train,
                 mode = ui.game?.mode ?: GameMode.NORMAL,

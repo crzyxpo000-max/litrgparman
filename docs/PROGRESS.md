@@ -1,6 +1,6 @@
 # İlerleme
 
-Şu an: Aşama 5 — NPC sistemi (sırada)
+Şu an: Aşama 6 — Dikey dilim: Perde 1 içeriği (sırada)
 Son commit: 6d96bda Aşama 4: hikaye motoru
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
@@ -10,6 +10,28 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - SDK: `local.properties` → `sdk.dir=C:/Users/alpar/AppData/Local/Android/Sdk` (git dışı).
 - Emülatör: `Medium_Phone_API_36.0` (`emulator -avd Medium_Phone_API_36.0`), adb ile kurulum.
 - OneDrive kilidi yüzünden lint ara sıra "dosya kullanılıyor" der: `./gradlew --stop` ve tekrar.
+
+## Aşama 5 — NPC sistemi  ✅ (2026-11-06)
+Plan:
+- [x] `npc/` paketi: `NpcDef` (5 kişilik özelliği, değerler, başlangıç ilişkisi, hedefler, eğilim, savaş bloğu, yay düğümleri, eşik olayları, ses satırları), `NpcState` (4 eksen, solan hafıza, hedef ilerlemesi, seviye, fraksiyon, durum, izler)
+- [x] İçerik: `npcs/*.yaml` (8 ana NPC), `knowledge.yaml` (bilgi günlüğü), `traits.yaml` (izler), `army.yaml` (ordu), `ranking.yaml` (prosedürel avcılar + sıra tepkileri); yeni etkiler/koşullar, `{npc:@}` odak belirteci
+- [x] Günlük gündem: her NPC her gün bir adım (hedef, seviye eğrisi, ihmal bonusu, fraksiyon kayması); hafıza solması
+- [x] Eşik olayları (ihanet tohumu 5–15 gün, kişisel görev, kaçış/itaat, rakip düellosu, ayrılma/fraksiyon değişimi) + genel eşik olayları (`events/90_esikler.yaml`), NPC'ye özel geçersiz kılma `esik_<tur>_<npc>`
+- [x] Kalıcı ölüm: `npc_ol`; ölen NPC'nin olayları/tohumları kapanır
+- [x] Yoldaşlar: kapasite (KAR + kademe), savaşa katılım (müttefik turu, hedef dağılımı, koruma sayacı), NPC'yle düello (`npc:` düşman)
+- [x] OP MC: Küresel Sıralama (gerçek/görünen), Sistem duyuruları, fraksiyon tepkileri; rakiplerin "İlk" unvanlarını kapması
+- [x] OP MC: yoldaş tepkileri (önemli sahnede görüş satırı; güce hayranlık/endişe/kıskançlık/bağımlılık), görünen seviyeye ve açığa vurmaya tepki
+- [x] OP MC: bilgi günlüğü + yalanlar (hafızaya girer, şüpheciliğe göre ortaya çıkar), izler (oyuncu mutasyonu / NPC yarası), Ordu modeli, NPC büyüme eğrisi (testle sabit)
+- [x] Kayıt v3: NPC durumları, sıralama, bilgi, izler, ordu; v2 `iliski_*` değişkenleri → ilişki eksenleri
+- [x] Mevcut içerik `iliski_*` değişkenlerinden yeni `iliski` etkisine taşınır; doğrulayıcı NPC kontrolleri
+- [x] Arayüz: İlişkiler ekranı (4 eksen, hatıralar, durum, izler), Sıralama ekranı, savaşta yoldaşlar, bilgi günlüğü
+- [x] Testler, check.sh, bağımsız inceleme, commit
+Notlar:
+- 150 motor testi (NpcTest: büyüme eğrisi, eşikler, ölüm, yas, kapasite, yoldaşlı savaş determinizmi, düello ölümü, tanık yorumu, görüş, açığa vurma, sıralama, İlk unvan kapma, yalan, kayıt v3), check.sh geçiyor.
+- 8 ana NPC dosyası (Deniz elle, diğer 7 paralel içerik ajanıyla), 8 genel eşik olayı, kişisel görev unvanları. DECISIONS #76–90.
+- Bağımsız inceleme (15 bulgu) düzeltildi: ayrılık eşiği, eşiklerin kapsamı, hedef ilerlemesi, düello/infaz metinleri, ölü NPC konuşması, odak sızıntısı, zamirler, RNG akışı, tanık dengesi, kayıt geçişi, "gitti" durumu, telif yakınlığı. DECISIONS #91–96.
+- Emülatörde: v2 kaydı açıldı (Deniz Güven 50+10 geçişi), İlişkiler ve Küresel Sıralama ekranları.
+- Bilinen eksik (Aşama 6–7): NPC yay düğümü olayları henüz yazılmadı (validateContent uyarısı), NPC'ye özel eşik olayları, Ordu içeriği, Yankı'nın savaşsız ihanet yolu.
 
 ## Aşama 2 — Sistem mekanikleri  ✅ (2026-11-05)
 Plan:

@@ -32,7 +32,9 @@ enum class NoticeKind(val key: String) {
     EVOLUTION("evrim"),
     CLASS("sinif"),
     /** Yankı'nın bozuk, yalnızca oyuncuya görünen bildirimleri (glitchli yazı). */
-    ECHO("yanki");
+    ECHO("yanki"),
+    /** NPC'lerin sesi: yoldaş görüşü, güce tepki, ilişki değişimi. */
+    COMPANION("yoldas");
 
     companion object {
         fun fromKey(key: String?): NoticeKind = entries.firstOrNull { it.key == key } ?: SYSTEM
@@ -148,6 +150,73 @@ sealed interface Condition {
         override fun test(state: WorldState) = (state.reputation[faction] ?: 0) <= value
     }
 
+    // ---- Aşama 5: NPC'ler. NPC kimliği "@" ise olayın odak NPC'sidir. ----
+
+    data class NpcAlive(val npc: String) : Condition {
+        override fun test(state: WorldState) = state.npc(npc)?.alive == true
+    }
+
+    data class NpcDead(val npc: String) : Condition {
+        override fun test(state: WorldState) = state.npc(npc)?.alive == false
+    }
+
+    data class IsCompanion(val npc: String) : Condition {
+        override fun test(state: WorldState) = state.npc(npc)?.let { it.companion && it.alive } == true
+    }
+
+    data class RelationAtLeast(val npc: String, val axis: com.yukselis.engine.npc.RelAxis, val value: Int) : Condition {
+        override fun test(state: WorldState) = (state.npc(npc)?.relation?.get(axis) ?: -999) >= value
+    }
+
+    data class RelationAtMost(val npc: String, val axis: com.yukselis.engine.npc.RelAxis, val value: Int) : Condition {
+        override fun test(state: WorldState) = (state.npc(npc)?.relation?.get(axis) ?: 999) <= value
+    }
+
+    data class NpcInFaction(val npc: String, val faction: String) : Condition {
+        override fun test(state: WorldState) = state.npc(npc)?.faction == faction
+    }
+
+    data class NpcMarked(val npc: String, val mark: String) : Condition {
+        override fun test(state: WorldState) = state.npc(npc)?.marks?.contains(mark) == true
+    }
+
+    data class NpcLevelAtLeast(val npc: String, val value: Int) : Condition {
+        override fun test(state: WorldState) = (state.npc(npc)?.level ?: 0) >= value
+    }
+
+    data class Remembers(val npc: String, val memory: String) : Condition {
+        override fun test(state: WorldState) = state.npc(npc)?.remembers(memory) == true
+    }
+
+    /** NPC'nin savaş bloğu var (düello/ihanet savaşı açılabilir). */
+    data class NpcCanFight(val npc: String) : Condition {
+        override fun test(state: WorldState) =
+            state.npc(npc)?.let { it.alive && com.yukselis.engine.npc.NpcEngine.MARK_FIGHTER in it.marks } == true
+    }
+
+    data class Knows(val knowledge: String) : Condition {
+        override fun test(state: WorldState) = knowledge in state.knowledge
+    }
+
+    /** Yoldaş kapasitesinde yer var. */
+    data object PartyRoom : Condition {
+        override fun test(state: WorldState) =
+            state.npcs.values.count { it.companion && it.alive } <
+                com.yukselis.engine.system.Progression.companionCapacity(state.player.stats, state.player.grade)
+    }
+
+    data class PublicLevelAtLeast(val value: Int) : Condition {
+        override fun test(state: WorldState) = state.publicLevel >= value
+    }
+
+    data class PublicLevelAtMost(val value: Int) : Condition {
+        override fun test(state: WorldState) = state.publicLevel <= value
+    }
+
+    data class HasTrait(val trait: String) : Condition {
+        override fun test(state: WorldState) = trait in state.player.traits
+    }
+
     data class All(val conditions: List<Condition>) : Condition {
         override fun test(state: WorldState) = conditions.all { it.test(state) }
     }
@@ -177,7 +246,7 @@ sealed interface Effect {
     data class AddHp(val delta: Int) : Effect
     data class AddMp(val delta: Int) : Effect
     /** Ertelenmiş sonuç: `min..max` gün sonra, koşul (ham metin) hâlâ doğruysa olay tetiklenir. */
-    data class PlantSeed(val eventId: String, val minDelay: Int, val maxDelay: Int, val condition: String?) : Effect
+    data class PlantSeed(val eventId: String, val minDelay: Int, val maxDelay: Int, val condition: String?, val npc: String? = null) : Effect
     data class ShiftAttention(val delta: Int) : Effect
     data class ShiftCorruption(val delta: Int) : Effect
     /** [Açığa vur]: görünen seviye gerçek seviyeye çekilir; aradaki fark kadar Dikkat artar. */
@@ -196,6 +265,30 @@ sealed interface Effect {
     data class UnlockTab(val tab: String) : Effect
     /** Meslek seçimi istemini açar. */
     data object OfferProfession : Effect
+
+    // ---- Aşama 5: NPC'ler ("@" = olayın odak NPC'si) ----
+    data class ShiftRelation(val npc: String, val deltas: Map<com.yukselis.engine.npc.RelAxis, Int>) : Effect
+    data class AddMemory(val npc: String, val memory: String, val weight: Int) : Effect
+    data class KillNpc(val npc: String) : Effect
+    data class JoinParty(val npc: String) : Effect
+    data class LeaveParty(val npc: String) : Effect
+    /** NPC gruptan ve sahneden çıkar (kaçtı, ayrıldı): durumu "gitti", eşikleri kapanır. */
+    data class NpcGone(val npc: String) : Effect
+    data class SetNpcFaction(val npc: String, val faction: String) : Effect
+    data class MeetNpc(val npc: String) : Effect
+    data class NpcLevel(val npc: String, val delta: Int) : Effect
+    data class NpcTrait(val npc: String, val trait: String) : Effect
+    data class NpcMark(val npc: String, val mark: String) : Effect
+    data class PlayerTrait(val trait: String) : Effect
+    data class Learn(val knowledge: String) : Effect
+    /** NPC'ye yalan: hafızaya girer; şüpheciliğe göre bir gün ortaya çıkar. */
+    data class TellLie(val npc: String, val topic: String) : Effect
+    data class PersonalQuest(val npc: String, val status: com.yukselis.engine.world.QuestStatus) : Effect
+    /** NPC'nin kişisel görev ödülü (ortak yetenek ya da unvan). */
+    data class NpcReward(val npc: String) : Effect
+    data class AddArmy(val unit: String, val count: Int) : Effect
+    /** Sınıfa/eğilime uygun birlikten n tane. */
+    data class GrowArmy(val count: Int) : Effect
 }
 
 data class Paragraph(val text: LText, val condition: Condition? = null)
@@ -207,6 +300,9 @@ data class SceneNotice(val notice: Notice, val condition: Condition? = null)
  * okuduğu özel bir satır eklenir. Stat koşulunda satırın başına "[ALG]" gibi önek gelir.
  */
 data class Insight(val text: LText, val condition: Condition)
+
+/** Sahneye yazılmış yoldaş görüşü; NPC yanındaysa genel görüş satırının yerine geçer. */
+data class CompanionLine(val npc: String, val text: LText, val condition: Condition? = null)
 
 data class ChoiceDef(
     val id: String,
@@ -231,6 +327,7 @@ data class Scene(
     val choices: List<ChoiceDef> = emptyList(),
     val isEnding: Boolean = false,
     val insights: List<Insight> = emptyList(),
+    val companionLines: List<CompanionLine> = emptyList(),
 )
 
 data class TitleDef(
@@ -271,6 +368,14 @@ data class Content(
     val flags: Map<String, String> = emptyMap(),
     /** Gün akışının başladığı bölge. */
     val startRegion: String? = null,
+    // ---- Aşama 5 ----
+    val npcs: Map<String, com.yukselis.engine.npc.NpcDef> = emptyMap(),
+    val traits: Map<String, com.yukselis.engine.npc.TraitDef> = emptyMap(),
+    val knowledge: Map<String, com.yukselis.engine.npc.KnowledgeDef> = emptyMap(),
+    val army: Map<String, com.yukselis.engine.npc.ArmyUnitDef> = emptyMap(),
+    val ranking: com.yukselis.engine.npc.RankingDef = com.yukselis.engine.npc.RankingDef(),
+    /** Fraksiyonların ahlak profili (NPC fraksiyon değiştirirken en yakını seçilir). */
+    val factionValues: Map<String, com.yukselis.engine.core.Morality> = emptyMap(),
 ) {
     companion object {
         /** Kesinti sahnesinden önceki sahneye dönüş. */
@@ -281,5 +386,8 @@ data class Content(
 
         /** Demir Mod ölümü bu sahneye (Hasat sonu) bağlanır. */
         const val HARVEST_SCENE = "son_hasat"
+
+        /** Olayın odak NPC'si (eşik olayları, genel sahneler). */
+        const val FOCUS = "@"
     }
 }

@@ -89,6 +89,9 @@ fun rarityColor(rarity: Rarity): Color = when (rarity) {
     Rarity.UNIQUE -> Color(0xFFFFD54F)
 }
 
+/** NPC sesi: yoldaş görüşleri, ilişki değişimleri. */
+val CompanionColor = Color(0xFFF48FB1)
+
 @Composable
 fun noticeColor(kind: NoticeKind, rarity: Rarity?): Color {
     if (rarity != null && (kind == NoticeKind.TITLE || kind == NoticeKind.ANALYZE || kind == NoticeKind.WARNING)) {
@@ -105,6 +108,7 @@ fun noticeColor(kind: NoticeKind, rarity: Rarity?): Color {
         NoticeKind.EVOLUTION -> Color(0xFFFFA726)
         NoticeKind.CLASS -> Color(0xFFAB47BC)
         NoticeKind.ECHO -> EchoColor
+        NoticeKind.COMPANION -> CompanionColor
     }
 }
 

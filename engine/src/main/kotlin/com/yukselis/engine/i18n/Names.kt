@@ -9,6 +9,8 @@ data class NameEntry(
     val kind: Kind,
     val full: LText,
     val short: LText,
+    /** İngilizce zamir: he, she, they, it (DECISIONS #10: Deniz "they"). */
+    val pronoun: String = "they",
 ) {
     enum class Kind(val tokenKey: String) {
         NPC("npc"),
@@ -35,6 +37,9 @@ class NameRegistry(entries: Collection<NameEntry>) {
  *  - {npc:deniz_arman|pos}    → İngilizce iyelik (Devon's); Türkçede yok sayılır
  *  - {yer:kiyikent}           → mekan adı
  *  - {oyuncu} / {oyuncu|in}   → oyuncunun adı
+ *  - {zamir:aras_kurt|o}      → İngilizce zamir (he/she/they/it); kipler: o (özne), onu (nesne), onun (iyelik),
+ *                               kendi (dönüşlü), b (büyük harf), ve fiil uyumu s (says/say), is (is/are),
+ *                               has (has/have), does (does/do), was (was/were). Türkçede boş döner (Türkçe zamir düşer).
  * Ekler zincirlenebilir: {npc:deniz_arman|tam|e} → Deniz Arman'a
  */
 class TokenResolver(private val names: NameRegistry) {
@@ -45,6 +50,10 @@ class TokenResolver(private val names: NameRegistry) {
             val id = match.groupValues[2]
             val mods = match.groupValues[3].split('|').filter { it.isNotEmpty() }
             val wantsFull = "tam" in mods || "full" in mods
+            if (kindKey == PRONOUN) {
+                val entry = names.find(NameEntry.Kind.NPC, id) ?: return@replace "[?zamir:$id]"
+                return@replace if (lang == Lang.TR) "" else EnglishGrammar.pronoun(entry.pronoun, mods)
+            }
             val base = if (kindKey == PLAYER) {
                 playerName
             } else {
@@ -59,12 +68,15 @@ class TokenResolver(private val names: NameRegistry) {
         TOKEN.findAll(text)
             .filter { m ->
                 val kindKey = m.groupValues[1]
-                kindKey != PLAYER && lookup(kindKey, m.groupValues[2]) == null
+                // Kimliksiz "{npc}" bir Sistem metni yer tutucusudur (formatL ile doldurulur), belirteç değil.
+                kindKey != PLAYER && m.groupValues[2].isNotEmpty() && lookup(kindKey, m.groupValues[2]) == null ||
+                    kindKey != PLAYER && m.groupValues[2].isEmpty() && m.groupValues[3].isNotEmpty()
             }
             .map { it.value }
             .toList()
 
     private fun lookup(kindKey: String, id: String): NameEntry? {
+        if (kindKey == PRONOUN) return names.find(NameEntry.Kind.NPC, id)
         val kind = NameEntry.Kind.entries.firstOrNull { it.tokenKey == kindKey } ?: return null
         return names.find(kind, id)
     }
@@ -82,6 +94,7 @@ class TokenResolver(private val names: NameRegistry) {
 
     companion object {
         private const val PLAYER = "oyuncu"
-        val TOKEN = Regex("""\{(npc|yer|fraksiyon|oyuncu)(?::([a-z0-9_]+))?((?:\|[a-z]+)*)\}""")
+        private const val PRONOUN = "zamir"
+        val TOKEN = Regex("""\{(npc|yer|fraksiyon|oyuncu|zamir)(?::([a-z0-9_]+))?((?:\|[a-z]+)*)\}""")
     }
 }

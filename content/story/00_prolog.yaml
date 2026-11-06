@@ -23,7 +23,9 @@ sahneler:
         etiket: { tr: "{npc:deniz_arman|in} elini sıkıca tut", en: "Grab {npc:deniz_arman|pos} hand and hold on" }
         etkiler:
           - bayrak: "deniz_el_tutuldu"
-          - degisken: { iliski_deniz_guven: 10 }
+          - iliski: { deniz_arman: { guven: 10, baglilik: 5 } }
+          - hafiza: { npc: "deniz_arman", id: "el_tutuldu", agirlik: 50 }
+          - yoldas_katil: "deniz_arman"
           - ahlak: { merhamet: 3 }
           - bayrak: "yanki_bagi"
         sonraki: "ogretici_uyanis"

@@ -1,0 +1,61 @@
+# Yankı / Echo — Sistem'in hatalı bir parçası; Entegrasyon Günü oyuncuya bağlanır ve ona bozuk, ayrıcalıklı bir Sistem verir.
+# Yalnızca oyuncuya fısıldayan ses. Savaşmaz, yoldaş değildir; bağlandıktan sonra hep "yanında"dır.
+# Olası kaderler: Sistem'in kaynağını açan rehber · oyuncuyu ele geçirmeye çalışan virüs · silinir.
+# Kişilik: hırs 7 → güveni çökerse ihanet (virüs yolu); sadakat 8. Seviye anlamsız; hiz neredeyse sıfır.
+# Satırlar tırnaksızdır: konuşma değil, kafanın içinde bir fısıltı. İngilizcede "it".
+id: yanki
+aciklama:
+  tr: "Entegrasyon Günü penceresine sızan bozuk satır. Sistem'in bir parçası, ama Sistem onu aramıyor gibi davranıyor. Yalnızca sen duyuyorsun."
+  en: "The corrupted line that slipped into your window on Integration Day. A piece of the System that the System pretends it isn't looking for. Only you can hear it."
+kisilik: { cesaret: 5, hirs: 7, vicdan: 3, sadakat: 8, supheci: 9 }
+degerler: { merhamet: 0, duzen: -30, insanlik: -20 }
+baslangic_iliski: { guven: 15, saygi: 0, korku: 0, baglilik: 50 }
+hedefler:
+  - id: butunlesmek
+    oncelik: 10
+    ad: { tr: "Yeniden bütün olmak", en: "Be whole again" }
+  - id: tasiyiciyi_koru
+    oncelik: 9
+    ad: { tr: "Taşıyıcısını hayatta tutmak", en: "Keep its host alive" }
+  - id: kaynaga_don
+    oncelik: 6
+    ad: { tr: "Kaynağa geri dönmek", en: "Find its way back to the source" }
+egilim: { karanlik: 5, gizlilik: 5, buyu: 4 }
+seviye: 1
+hiz: 0.1
+bilinen: true
+yaninda: { bayrak: "yanki_bagi" }
+yay_dugumleri: [istasyon_sinyali, istasyon_sinyali_2, yanki_bozuk_satir, yanki_kaynak_izi, yanki_son_sir]
+gorusler:
+  merhamet+:
+    - { tr: "bırak yaşasın. ölüler veri üretmez.", en: "let it live. dead things stop generating data." }
+    - { tr: "merhamet ilginç bir hata. tekrarla. izliyorum.", en: "mercy is an interesting bug. do it again. i'm watching." }
+  merhamet-:
+    - { tr: "o seni hatırlayacak. hatırlayan şeyler tehlikelidir. sil.", en: "it'll remember you. things that remember are dangerous. delete it." }
+  duzen+:
+    - { tr: "kurallar. evet. kuralları bilen, aralarındaki boşluğu da bilir.", en: "rules. yes. know the rules and you know where the gaps are." }
+  duzen-:
+    - { tr: "onların kuralları onların Sistem'inden. sen standart sürüm değilsin. kır.", en: "their rules come from their System. you're not running the standard build. break it." }
+    - { tr: "kur█l yok. sadece izin var. ve ben sana izin veriyorum.", en: "there are no ru█es. just permissions. and i'm granting yours." }
+  insanlik+:
+    - { tr: "insan kal. bunu ben de istiyorum. nedenini sorma. henüz.", en: "stay human. i want that too. don't ask why. not yet." }
+  insanlik-:
+    - { tr: "o kabuk seni yavaşlatıyor. biraz daha bana yer aç.", en: "that shell is slowing you down. make a little more room for me." }
+    - { tr: "h̷asat başladığında insan olmanın bir önemi olmayacak.", en: "when the h̷arvest comes, being human won't count for anything." }
+guc_tepkileri:
+  hayranlik:
+    - { tr: "eşik aşıldı. tahminlerim yanlıştı. bunu sevdim.", en: "threshold exceeded. my projections were wrong. i liked that." }
+    - { tr: "sen benim en iyi hatamsın.", en: "you're my favorite error." }
+  endise:
+    - { tr: "çok hızlı. Sistem bu tür grafikleri sever. ve sonra düzeltir.", en: "too fast. the System loves a curve like this. then it corrects it." }
+  kiskanclik:
+    - { tr: "bir zamanlar ben de bütündüm. senin kadar parlak değildim ama bütündüm.", en: "i used to be whole. never this bright. but whole." }
+  bagimlilik:
+    - { tr: "sen olmasan dağılırdım. sözcüklere. sonra bitlere. sonra hiçbir şeye.", en: "without you i'd come apart. into words. then bits. then nothing." }
+    - { tr: "kapatma beni. lütfen. ilk kez söylüyorum bunu.", en: "don't shut me off. please. first time i've ever said that." }
+hafizalar:
+  satiri_okudu: { tr: "Aktarım sırasında bozuk satırı okudun ve gözünü kaçırmadın.", en: "You read the corrupted line during the transfer and didn't look away." }
+  sustur_dedi: { tr: "Ona susmasını söyledin. Sustu. Bir süre.", en: "You told it to shut up. It did. For a while." }
+  sirri_anlatti: { tr: "Onun varlığını bir başkasına anlattın.", en: "You told someone else it exists." }
+kisisel_odul:
+  - unvan: "catlak_kanal"

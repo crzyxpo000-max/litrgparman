@@ -73,6 +73,10 @@ data class PlayerState(
     val essences: List<String> = emptyList(),
     /** A kademesinde iki Öz'den oluşan Yol (içerik Aşama 7). */
     val path: String? = null,
+    /** OP MC izler: bedelli mutasyonlar ve soy uyanışları. */
+    val traits: List<String> = emptyList(),
+    /** OP MC Ordu: birlik → adet (içerik Aşama 7). */
+    val army: Map<String, Int> = emptyMap(),
 ) {
     val maxHp: Int get() = Progression.maxHp(stats, level)
     val maxMp: Int get() = Progression.maxMp(stats)
@@ -120,7 +124,7 @@ data class DailyQuest(
 )
 
 /** Oyuncunun geçtiği sahne ve yaptığı seçim; hikaye akışını yeniden çizmek için kullanılır. */
-data class HistoryEntry(val sceneId: String, val choiceId: String)
+data class HistoryEntry(val sceneId: String, val choiceId: String, val focus: String? = null)
 
 /**
  * Tek doğruluk kaynağı. Değişmezdir: her değişiklik yeni bir kopya üretir.
@@ -175,12 +179,25 @@ data class WorldState(
     val publicLevel: Int = 1,
     /** OP MC: Tanıklı başarılar (başarı → kaç kez). */
     val legend: Map<String, Int> = emptyMap(),
+    // ---- Aşama 5: NPC sistemi ----
+    val npcs: Map<String, com.yukselis.engine.npc.NpcState> = emptyMap(),
+    /** Küresel Sıralama'nın prosedürel avcıları. */
+    val hunters: List<com.yukselis.engine.npc.Hunter> = emptyList(),
+    /** Bilgi günlüğü (eklenme sırasıyla). */
+    val knowledge: List<String> = emptyList(),
+    /** Süren olayın odak NPC'si ({npc:@}). */
+    val focusNpc: String? = null,
 ) {
     val act: Int get() = GameClock.actFor(day)
 
     fun hasFlag(flag: String): Boolean = flag in flags
 
     fun variable(key: String): Int = vars[key] ?: 0
+
+    /** NPC durumu; "@" olayın odak NPC'sidir. */
+    fun npc(id: String): com.yukselis.engine.npc.NpcState? = npcId(id)?.let { npcs[it] }
+
+    fun npcId(id: String): String? = if (id == "@") focusNpc else id
 
     companion object {
         const val HISTORY_LIMIT = 12
