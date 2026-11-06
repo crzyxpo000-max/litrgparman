@@ -42,7 +42,10 @@ class Director(private val content: Content) {
 
     /** Vadesi geçmiş ama koşulu artık tutmayan tohumlar kurur (atılır). */
     fun witheredSeeds(state: WorldState): List<Seed> =
-        state.seeds.filter { it.dueDay <= state.day && (!seedConditionHolds(state, it) || content.events[it.eventId] == null) }
+        state.seeds.filter { seed ->
+            val event = content.events[seed.eventId]
+            seed.dueDay <= state.day && (event == null || !seedConditionHolds(state, seed) || (!event.repeatable && event.id in state.dayState.seen))
+        }
 
     data class Forced(val eventId: String, val seed: Seed?)
 

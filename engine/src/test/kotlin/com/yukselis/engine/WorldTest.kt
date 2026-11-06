@@ -204,6 +204,47 @@ class WorldTest {
         assertEquals(s, SaveCodec.decode(SaveCodec.encode(s, 1)).state)
     }
 
+    // ---- Bağımsız inceleme ----
+
+    @Test
+    fun `kapi savasindan kacmak kapiyi kapatmaz`() {
+        var s = atHub().copy(vars = mapOf("_savas_kazanildi" to 1))
+        val r = s.regions.getValue(s.region!!)
+        s = s.copy(regions = s.regions + (r.id to r.copy(gates = listOf(Gate(5, Grade.F, listOf("diken_domuzu"), s.day, s.day + 3)))))
+        s = engine.hubAction(s, HubAction.EnterGate(5), lang).state
+        var n = 0
+        while (s.combat != null && n++ < 20) s = engine.combatAction(s, com.yukselis.engine.combat.CombatAction.Flee, lang).state
+        if (s.combat == null && s.variable("_savas_kazanildi") == 0) {
+            assertTrue(s.regions.getValue(r.id).gates.any { it.uid == 5 })
+        }
+    }
+
+    @Test
+    fun `zorunlu olay yuva harcamaz`() {
+        var s = atHub()
+        val left = s.dayState.slotsLeft
+        s = s.copy(seeds = listOf(Seed("yabanci_minnet", s.day)))
+        s = engine.hubAction(s, HubAction.Rest, lang).state
+        assertEquals("yabanci_minnet_1", s.sceneId)
+        assertEquals(left - 1, s.dayState.slotsLeft)
+    }
+
+    @Test
+    fun `akistan acilan savas kaydedilip yuklenince surer`() {
+        var s = atHub()
+        val r = s.regions.getValue(s.region!!)
+        s = s.copy(regions = s.regions + (r.id to r.copy(gates = listOf(Gate(6, Grade.F, listOf("diken_domuzu"), s.day, s.day + 3)))))
+        s = engine.hubAction(s, HubAction.EnterGate(6), lang).state
+        val loaded = engine.sanitize(SaveCodec.decode(SaveCodec.encode(s, 1)).state)
+        assertNotNull(loaded.combat)
+    }
+
+    @Test
+    fun `gorulmus olayin tohumu kurur`() {
+        val s = atHub().let { it.copy(seeds = listOf(Seed("yabanci_minnet", it.day)), dayState = it.dayState.copy(seen = setOf("yabanci_minnet"))) }
+        assertEquals(1, director.witheredSeeds(s).size)
+    }
+
     // ---- Başsız oynanış ----
 
     private data class Run(val ended: Boolean, val dead: Boolean, val day: Int, val steps: Int, val deadEnd: String?)

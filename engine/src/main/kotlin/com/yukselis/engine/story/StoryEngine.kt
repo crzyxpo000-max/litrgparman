@@ -221,7 +221,7 @@ class StoryEngine(val content: Content) {
         }
         var s = state.copy(prompts = valid)
         s.combat?.let { c ->
-            val scenesOk = listOfNotNull(c.spec.win, c.spec.lose, c.spec.flee).all { it in content.scenes }
+            val scenesOk = listOfNotNull(c.spec.win, c.spec.lose, c.spec.flee).all { it == WorldState.HUB || it in content.scenes }
             if (!scenesOk || c.enemies.any { it.id !in content.enemies }) s = s.copy(combat = null)
         }
         if (s.daily == null || s.daily?.templateId !in content.dailyTemplates) s = effects.newDaily(s).state

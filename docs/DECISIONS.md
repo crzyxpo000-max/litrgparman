@@ -2,6 +2,26 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Aşama 4 — 2026-11-06
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 61 | **İçerik YAML (kaml 0.104) — DECISIONS #1 kapandı.** kaml'ın düğüm API'si okunur, genel ağaca (JsonElement) çevrilir; ayrıştırıcı mantığı aynı. JSON içerik okuyucusu kaldırıldı; kayıt dosyaları JSON kalır. Dönüşüm kayıpsız doğrulandı. | GDD: kaml; derleyici eklentisi gerekmez. | — |
+| 62 | Olaylar `content/events/*.yaml`; her olay kendi sahnelerini taşır; `"@akis"` gün akışına döner | Olay = havuz kaydı + küçük sahne grafiği. | — |
+| 63 | Yönetmen: gerilim 1–4; hedef = son gerilim + 1 + Dikkat/40 (iki ağır olaydan sonra 1); uyum 1/(1+|fark|); tazelik 0,6^çakışma (son 12 etiket); bağ 1 + ilişki/100 (`iliski_<npc>` değişkeni, Aşama 5'te NPC modeli); ana yay ×3, vadesi gelince zorunlu | GDD formülünü sayılaştırma. | Aşama 9 simülatörü. |
+| 64 | Fraksiyon itibarı dalgası: A'ya d → B'ye d · ilişki(A,B)/100 · 0,3 | GDD "ilişki matrisi". | Aşama 9. |
+| 65 | Gün: 2–4 yuva; serbest eylemler keşif, antrenman, kapı, dinlenme, yolculuk; olay kartı (fırsat eli, 3 kart) da bir yuva; akşam kamp (HP +%50, MP dolu) günü bitirir | GDD gün döngüsü + OP MC fırsat eli. | Aşama 6 içerik akışı. |
+| 66 | Kapı: her sabah bölge başına `kapi_sansi · (1 + tehlike/100)`, 3–6 gün süre, en fazla 3 açık kapı; taşma tehlike +15 ve `kapi_tasma_sayisi`; kapatmak tehlike −10 ve Öz Kristali | GDD kapı taşması. | Aşama 9. |
+| 67 | Tohum koşulu ham metin (JSON) olarak kayda girer, vadesinde ayrıştırılır; vadesi gelip koşulu tutmayan tohum kurur | Koşul DSL'i kod değil veri; kayıt taşınabilir. | — |
+| 68 | Anomali Dikkati 0–100: beklenen seviyenin (1 + 0,4·gün) üstündeki her yeni seviye +1, açığa vurma 5 + 2·fark, tanıklı başarı +2, dinlenme −1, `gizle` −n; 25/50/75/100 eşiklerinde `dikkat_<n>` olayı tohumlanır. Yozlaşma: ceza yeteneği +10, `yozlasma` etkisi | OP MC ana gerilim ölçeği. | Aşama 9 (Dikkat zaman grafiği). |
+| 69 | Görünen seviye ilk akış girişinde gerçek seviyeye eşitlenir, sonra yalnızca [Açığa vur] ile güncellenir | "Beni hafife aldılar" anları için fark birikmeli. | Aşama 5 (NPC tepkileri). |
+| 70 | Zar: d20 + stat ≥ zorluk; olasılık %5'lik adımlarla gösterilir; tek seferlik başarısızlık `_zar_<sahne>_<seçenek>` bayrağıyla kilitlenir | OP MC beyaz/kırmızı kontroller. | — |
+| 71 | Prolog sonu `demo_son` → `ilk_sabah` (gün akışına geçiş); Perde 1 bu sürümde `ogretici_bekci` ana yay olayıyla (Gün 28) biter | Yazılmış giriş dizisi + olay havuzu. | Aşama 6 yeni açılış. |
+| 72 | Olay içeriği Aşama 4'te 14 örnekle sınırlı; içerik ajanı kullanım limitine takıldığı için elle ve kısa yazıldı | Motoru sınamaya yeter; hacim Aşama 6'da. | Aşama 6. |
+| 73 | Zorunlu olay (ana yay, tohum, eşik) yuva harcamaz; eylemin yuvası zaten harcanmıştır | Bağımsız inceleme: çift yuva harcaması günü seçimsiz bitiriyordu. | — |
+| 74 | Görülmüş, tekrarlanmayan olayın tohumu kurur | Sonsuza kadar kuyrukta kalmasın. | — |
+| 75 | Bölge kontrolü `kontrol {bolge: fraksiyon}` etkisiyle değişir; NPC'lerin görünen seviyeye tepkisi, Yozlaşma eşik olayları ve Dikkat 75/100 içeriği Aşama 5–7'de | Bu aşamada model ve kancalar; içerik ve NPC tepkileri sonra. | Aşama 5 (NPC), 6–7 (içerik). |
+
 ## Aşama 3 — 2026-11-05
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |

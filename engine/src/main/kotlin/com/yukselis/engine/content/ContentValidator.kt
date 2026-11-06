@@ -75,6 +75,10 @@ object ContentValidator {
                 is Effect.SetQuest -> if (e.questId !in content.quests) problems += "$where: tanımsız görev '${e.questId}'"
                 is Effect.MoveTo -> if (e.region !in content.regions) problems += "$where: tanımsız bölge '${e.region}'"
                 is Effect.ShiftDanger -> if (e.region !in content.regions) problems += "$where: tanımsız bölge '${e.region}'"
+                is Effect.SetControl -> {
+                    if (e.region !in content.regions) problems += "$where: tanımsız bölge '${e.region}'"
+                    if (e.control != "canavar" && e.control !in content.factions) problems += "$where: tanımsız kontrol '${e.control}'"
+                }
                 is Effect.ShiftReputation -> if (content.factions.isNotEmpty() && e.faction !in content.factions) problems += "$where: tanımsız fraksiyon '${e.faction}'"
                 is Effect.UnlockTab -> if (e.tab !in com.yukselis.engine.core.WorldState.TABS) problems += "$where: bilinmeyen sekme '${e.tab}'"
                 else -> Unit
@@ -392,7 +396,7 @@ fun contentWarnings(content: Content): List<String> {
         val scenes = eventScenes(content, ev.entry)
         for (sid in scenes) {
             val scene = content.scenes[sid] ?: continue
-            scene.choices.filter { c -> c.effects.none { it is Effect.ShiftMorality } }.forEach { c ->
+            scene.choices.filter { c -> (c.effects + (c.check?.failEffects ?: emptyList())).none { it is Effect.ShiftMorality } }.forEach { c ->
                 warnings += "olay ${ev.id} / ${scene.id}.${c.id}: önemli seçim ahlak eksenini oynatmıyor"
             }
         }
@@ -410,6 +414,9 @@ private fun eventScenes(content: Content, entry: String): Set<String> {
         content.scenes[id]?.choices?.forEach { c ->
             c.next?.takeIf { it in content.scenes }?.let { q.addLast(it) }
             c.check?.failNext?.takeIf { it in content.scenes }?.let { q.addLast(it) }
+            c.effects.filterIsInstance<Effect.StartCombat>().forEach { f ->
+                listOfNotNull(f.spec.win, f.spec.lose, f.spec.flee).filter { it in content.scenes }.forEach { q.addLast(it) }
+            }
         }
     }
     return seen
@@ -423,7 +430,7 @@ fun main(args: Array<String>) {
     } catch (e: ContentFormatException) {
         listOf("Biçim hatası: ${e.message}")
     }
-    val warnings = runCatching { contentWarnings(ContentLoader.load(DirectoryContentSource(dir))) }.getOrDefault(emptyList())
+    val warnings = if (problems.isEmpty()) contentWarnings(ContentLoader.load(DirectoryContentSource(dir))) else emptyList()
     warnings.forEach { println("⚠ $it") }
     if (problems.isEmpty()) {
         println("İçerik geçerli: ${dir.absolutePath}" + if (warnings.isNotEmpty()) " (${warnings.size} uyarı)" else "")

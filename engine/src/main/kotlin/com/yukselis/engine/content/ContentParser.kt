@@ -474,6 +474,7 @@ object ContentParser {
             }
             "bolge" -> listOf(Effect.MoveTo(value.str(key)))
             "tehlike" -> value.jsonObject.map { (k, v) -> Effect.ShiftDanger(k, v.int(k)) }
+            "kontrol" -> value.jsonObject.map { (k, v) -> Effect.SetControl(k, v.str(k)) }
             "mana" -> listOf(Effect.AddMp(value.int(key)))
             else -> throw ContentFormatException("$where: bilinmeyen etki '$key'")
         }

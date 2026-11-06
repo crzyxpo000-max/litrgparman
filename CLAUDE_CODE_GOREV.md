@@ -156,25 +156,25 @@ Her aşamanın sonunda `scripts/check.sh` geçer, `CLAUDE.md` ile `PROGRESS.md` 
   - [x] Demir Mod ölümleri haddini aşmaktan gelir: rastgele savaşlar Ezme ya da kaçışla ölümsüz çözülebilir; simülasyon testi bunu doğrular.
 
 ### Aşama 4 — Hikaye motoru
-- [ ] İçerik biçimi kararı: GDD'ye uygun olarak **YAML'a (kaml) geç**. Mevcut JSON içerik dönüştürülür, anahtarlar aynı kalır ve JSON okuyucu kaldırılır. Bu, DECISIONS #1'i kapatır.
-- [ ] **Olay havuzu:** ön koşullar, ağırlık, etiketler, perde ve bölge kısıtları.
-- [ ] **Hikaye Yönetmeni:** GDD'deki puanlama formülü (ağırlık × gerilim uyumu × tazelik × kişisel bağ × ana yay önceliği) ve hedef gerilim eğrisi.
-- [ ] **Tohumlar:** `tohum` etkisi, gecikme aralığı, koşul ve kayıtla birlikte saklanan kuyruk.
-- [ ] **Gün döngüsü:** sabah Günlük Görev, gün içinde 2–4 olay yuvası ya da serbest eylem (keşif, antrenman, kapı, dinlenme), akşam kamp.
-- [ ] Bölge durumları: kontrol, tehlike ve açık kapılar; zamanında kapatılmayan kapı taşar.
-- [ ] Fraksiyon itibarı ve fraksiyonlar arası ilişki matrisi.
-- [ ] **Bayrak kaydı:** her bayrak `content/flags.*` dosyasında açıklamasıyla tanımlanır; tanımsız bayrak hata sayılır.
-- [ ] `validateContent` genişler: tanımsız bayrak, hiçbir yerde set edilmeyen bayrak (uyarı), ulaşılamayan olay, tohumun hedeflediği olayın varlığı.
-- [ ] Prolog sahneleri yeni sisteme taşınır (yazılmış giriş dizisi + olay havuzu).
-- [ ] **Arayüz:** Harita (bölgeler, tehlike, kapılar) ve Görevler ekranları.
-- [ ] **Başsız oynanış testi:** 200 rastgele oynanış hiç çökmeden ve çıkmaza girmeden ilerler (ileride simülatörün temeli).
-- [ ] **OP MC:**
-  - [ ] **Gizli ve Açık Güç:** gerçek seviye + görünen seviye; [Gizle] / [Açığa vur] seçenekleri; NPC'ler açığa vurulana kadar görünen seviyeye tepki verir.
-  - [ ] **Anomali Dikkati** (ana gerilim ölçeği) ve ayrı **Yozlaşma** ölçeği; eşikler avcı, Sistem "düzeltmesi", Kadim elçisi ve rakip olaylarını tetikler. Hikaye Yönetmeni gerilim uyumunda Dikkat'i kullanır.
-  - [ ] **Tanıklar ve Efsane:** NPC önünde yapılan başarılar söylentiye, unvana ve fraksiyona göre farklı okunan tepkilere dönüşür.
-  - [ ] **Gösteriş seçenekleri** ("[GÜÇ 40 · Önemsiz] …"); yeniden denenebilir (beyaz) ve tek seferlik (kırmızı) kontroller görünür olasılıkla, çoğunlukla sosyal/ahlaki kontrollerde.
-  - [ ] **Fırsat eli:** serbest zamanda 3 rastgele olay kartından biri seçilir.
-  - [ ] Doğrulayıcı: önemli seçeneklerin en az bir ahlak eksenini oynatması uyarısı.
+- [x] İçerik biçimi kararı: GDD'ye uygun olarak **YAML'a (kaml) geç**. Mevcut JSON içerik dönüştürülür, anahtarlar aynı kalır ve JSON okuyucu kaldırılır. Bu, DECISIONS #1'i kapatır.
+- [x] **Olay havuzu:** ön koşullar, ağırlık, etiketler, perde ve bölge kısıtları.
+- [x] **Hikaye Yönetmeni:** GDD'deki puanlama formülü (ağırlık × gerilim uyumu × tazelik × kişisel bağ × ana yay önceliği) ve hedef gerilim eğrisi.
+- [x] **Tohumlar:** `tohum` etkisi, gecikme aralığı, koşul ve kayıtla birlikte saklanan kuyruk.
+- [x] **Gün döngüsü:** sabah Günlük Görev, gün içinde 2–4 olay yuvası ya da serbest eylem (keşif, antrenman, kapı, dinlenme), akşam kamp.
+- [x] Bölge durumları: kontrol, tehlike ve açık kapılar; zamanında kapatılmayan kapı taşar.
+- [x] Fraksiyon itibarı ve fraksiyonlar arası ilişki matrisi.
+- [x] **Bayrak kaydı:** her bayrak `content/flags.*` dosyasında açıklamasıyla tanımlanır; tanımsız bayrak hata sayılır.
+- [x] `validateContent` genişler: tanımsız bayrak, hiçbir yerde set edilmeyen bayrak (uyarı), ulaşılamayan olay, tohumun hedeflediği olayın varlığı.
+- [x] Prolog sahneleri yeni sisteme taşınır (yazılmış giriş dizisi + olay havuzu).
+- [x] **Arayüz:** Harita (bölgeler, tehlike, kapılar) ve Görevler ekranları.
+- [x] **Başsız oynanış testi:** 200 rastgele oynanış hiç çökmeden ve çıkmaza girmeden ilerler (ileride simülatörün temeli).
+- [x] **OP MC:**
+  - [x] **Gizli ve Açık Güç:** gerçek seviye + görünen seviye; [Gizle] / [Açığa vur] seçenekleri; NPC'ler açığa vurulana kadar görünen seviyeye tepki verir.
+  - [x] **Anomali Dikkati** (ana gerilim ölçeği) ve ayrı **Yozlaşma** ölçeği; eşikler avcı, Sistem "düzeltmesi", Kadim elçisi ve rakip olaylarını tetikler. Hikaye Yönetmeni gerilim uyumunda Dikkat'i kullanır.
+  - [x] **Tanıklar ve Efsane:** NPC önünde yapılan başarılar söylentiye, unvana ve fraksiyona göre farklı okunan tepkilere dönüşür.
+  - [x] **Gösteriş seçenekleri** ("[GÜÇ 40 · Önemsiz] …"); yeniden denenebilir (beyaz) ve tek seferlik (kırmızı) kontroller görünür olasılıkla, çoğunlukla sosyal/ahlaki kontrollerde.
+  - [x] **Fırsat eli:** serbest zamanda 3 rastgele olay kartından biri seçilir.
+  - [x] Doğrulayıcı: önemli seçeneklerin en az bir ahlak eksenini oynatması uyarısı.
 
 ### Aşama 5 — NPC sistemi
 - [ ] GDD'deki model: 5 kişilik özelliği, değerler, 4 ilişki ekseni (Güven, Saygı, Korku, Bağlılık), solan hafıza, hedefler.

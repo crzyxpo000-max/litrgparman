@@ -58,8 +58,9 @@ class WorldEngine(
         if (withered.isNotEmpty()) s = s.copy(seeds = s.seeds - withered.toSet())
         // Zorunlu olay: yuva harcamadan değil, bir yuva yerine gelir (kalmadıysa yine gelir: hikaye beklemez).
         director.forced(s)?.let { f ->
-            if (f.seed != null) s = s.copy(seeds = s.seeds - f.seed)
-            val started = startEvent(s, f.eventId, consumeSlot = s.dayState.slotsLeft > 0)
+            if (f.seed != null) s = s.copy(seeds = s.seeds.filterNot { it == f.seed })
+            // Zorunlu olay yuva harcamaz: eylemin yuvası zaten harcandı (DECISIONS #73).
+            val started = startEvent(s, f.eventId, consumeSlot = false)
             return Result(started.state, notices + started.notices)
         }
         val rng = Rng(s.rngState)

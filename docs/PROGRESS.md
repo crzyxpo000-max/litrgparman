@@ -1,6 +1,6 @@
 # İlerleme
 
-Şu an: Aşama 4 — Hikaye motoru (sırada)
+Şu an: Aşama 5 — NPC sistemi (sırada)
 Son commit: a938f05 Aşama 3: savaş
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
@@ -32,6 +32,23 @@ Notlar:
 - 74 motor testi, check.sh geçiyor; emülatörde EN ve TR denendi (Yankı bağı, sezgiler, Günlük Görev, sınıf teklifi + Benzersiz yetenek, kutlama kartı, sekmelerin açılması, stat dağıtımı, üretim).
 - Bağımsız inceleme yapıldı; bulguların hepsi düzeltildi (kaynaştırma/evrim çakışması, çift dokunuş, kayıt yarışı, sezgi türü, eski içerikle çökme, olay unvanları, ceza satırı, çoklu gün, doğrulayıcı boşlukları, içerik ve telif yakınlığı). DECISIONS #30–35.
 - Bilinen eksik: simya malzemesi kaynağı (Aşama 3/6), cihazda Seviye 25 evrimi denenmedi (testle kapsanıyor).
+
+## Aşama 4 — Hikaye motoru  ✅ (2026-11-06)
+- [x] İçerik YAML'a (kaml) taşındı, JSON içerik okuyucusu kaldırıldı (kayıpsız doğrulandı)
+- [x] Olay havuzu (`events/*.yaml`), Hikaye Yönetmeni (GDD puanı + gerilim eğrisi + Dikkat), zorunlu ana yay
+- [x] Tohumlar (gecikme, koşul, kayıtta kuyruk), kuruma
+- [x] Gün döngüsü (2–4 yuva, fırsat eli, keşif/antrenman/kapı/dinlenme/yolculuk, kamp)
+- [x] Bölgeler (kontrol, tehlike, kapı doğuşu/taşması), fraksiyon ilişki matrisi
+- [x] Bayrak kaydı (`flags.yaml`), görevler, tanıklı başarılar
+- [x] validateContent: tanımsız bayrak (hata), set edilmeyen bayrak / ulaşılamayan tohum olayı / ahlak oynatmayan önemli seçim (uyarı), tohum hedefi
+- [x] Prolog → `ilk_sabah` → gün akışı; Perde 1 sonu Gün 28 ana yay (Öğretici Bekçisi)
+- [x] OP MC: Dikkat + Yozlaşma, gizli/görünen seviye, [Gizle]/[Açığa vur], gösteriş, görünür olasılıklı zar (beyaz/kırmızı), fırsat eli
+- [x] Arayüz: gün akışı paneli, Harita, Günlük (görevler + efsane), Durum'da Dikkat/Yozlaşma/görünen seviye
+- [x] Başsız oynanış: 200 rastgele oynanış çökmeden ve çıkmazsız biter
+Notlar:
+- 122 motor testi, check.sh geçiyor. 14 örnek olay (içerik ajanı limite takıldı; elle kısa yazıldı, hacim Aşama 6).
+- Bağımsız inceleme (Sonnet, kullanım tasarrufu) bulguları düzeltildi: çift yuva, kurumayan tohum, akıştan açılan savaşın yüklenince düşmesi, Deniz kurtarma ödülünün kaçışta da verilmesi, doğrulayıcı uyarı kapsamı. DECISIONS #61–75.
+- Bilinen eksik (Aşama 5–7): NPC'lerin görünen seviyeye tepkisi, Yozlaşma eşik olayları, Dikkat 75/100 olayları.
 
 ## Aşama 3 — Savaş  ✅ (2026-11-06)
 Plan:

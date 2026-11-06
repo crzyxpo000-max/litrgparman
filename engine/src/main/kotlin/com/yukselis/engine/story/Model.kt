@@ -188,6 +188,8 @@ sealed interface Effect {
     /** Bölge değiştirir (olay içinden yolculuk). */
     data class MoveTo(val region: String) : Effect
     data class ShiftDanger(val region: String, val delta: Int) : Effect
+    /** Bölgenin kontrolü bir fraksiyona (ya da "canavar") geçer. */
+    data class SetControl(val region: String, val control: String) : Effect
     /** Savaş başlatır; seçenek `sonraki` yerine savaşın kazan/kaybet/kaç sahnelerine gider. */
     data class StartCombat(val spec: CombatSpec) : Effect
     /** Kendini açan arayüz: bir sekmeyi verir (yetenekler, canta, harita). */

@@ -81,6 +81,10 @@ class EffectApplier(private val content: Content) {
         is Effect.Feat -> feat(state, effect.featId)
         is Effect.SetQuest -> setQuest(state, effect.questId, effect.status)
         is Effect.MoveTo -> Result(state.copy(region = effect.region), emptyList())
+        is Effect.SetControl -> Result(
+            state.regions[effect.region]?.let { r -> state.copy(regions = state.regions + (r.id to r.copy(control = effect.control))) } ?: state,
+            emptyList(),
+        )
         is Effect.ShiftDanger -> Result(
             state.regions[effect.region]?.let { r ->
                 state.copy(regions = state.regions + (r.id to r.copy(danger = (r.danger + effect.delta).coerceIn(0, 100))))

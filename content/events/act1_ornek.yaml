@@ -25,10 +25,7 @@ olaylar:
             etiket: { tr: "Aralarına dal ve tazıları üstüne çek", en: "Dive in and draw the hounds onto you" }
             etkiler:
               - ahlak: { merhamet: 6 }
-              - degisken: { iliski_deniz_arman: 15 }
-              - bayrak: "deniz_bulundu"
-              - gorev: { deniz_bul: "tamam" }
-              - savas: { dusmanlar: ["sis_tazisi", "sis_tazisi"], ortam: ["karanlik"], kazan: "@akis", kac: "@akis" }
+              - savas: { dusmanlar: ["sis_tazisi", "sis_tazisi"], ortam: ["karanlik"], kazan: "deniz_bulusma_zafer", kac: "deniz_bulusma_kacis" }
           - id: "tuzak_kur"
             etiket: { tr: "Zayıf tazıyı ayır, sürüyü dağıt", en: "Cut the weak one off and scatter the pack" }
             gerekli: { stat: { per: 8 } }
@@ -48,6 +45,33 @@ olaylar:
               - bayrak: "deniz_bekletildi"
               - gorev: { deniz_bul: "tamam" }
               - tohum: { olay: "deniz_hesap", gecikme: { min: 4, max: 8 }, kosul: { bayrak: "deniz_bekletildi" } }
+            sonraki: "@akis"
+
+      - id: "deniz_bulusma_zafer"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Son tazı sise karışıp kayboluyor. {npc:deniz_arman} dizlerinin üstüne çöküyor, sonra gülmeye başlıyor. \"Geç kaldın,\" diyor.", en: "The last hound bolts into the fog. {npc:deniz_arman} drops to their knees, then starts laughing. \"You're late,\" they say." }
+        secenekler:
+          - id: "kaldir"
+            etiket: { tr: "Elini uzat ve onu ayağa kaldır", en: "Reach down and pull them up" }
+            etkiler:
+              - degisken: { iliski_deniz_arman: 15 }
+              - bayrak: "deniz_bulundu"
+              - gorev: { deniz_bul: "tamam" }
+              - ahlak: { insanlik: 3 }
+            sonraki: "@akis"
+      - id: "deniz_bulusma_kacis"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Tazılar fazla. {npc:deniz_arman|i} kolundan yakalayıp sisin içine dalıyorsun; ikiniz de soluk soluğa ama hayattasınız.", en: "Too many hounds. You grab {npc:deniz_arman} by the arm and dive into the fog. You're both gasping, but alive." }
+        secenekler:
+          - id: "soluklan"
+            etiket: { tr: "Soluklan ve yola devam et", en: "Catch your breath and keep moving" }
+            etkiler:
+              - degisken: { iliski_deniz_arman: 5 }
+              - bayrak: "deniz_bulundu"
+              - gorev: { deniz_bul: "tamam" }
+              - ahlak: { duzen: 2 }
             sonraki: "@akis"
 
   - id: "deniz_hesap"
