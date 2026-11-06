@@ -173,6 +173,7 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
                 typewriter = ui.settings.typewriter,
                 haptics = ui.settings.haptics,
                 onChoose = viewModel::choose,
+                onHub = viewModel::hubAction,
                 onBackToTitle = viewModel::backToTitle,
                 modifier = content,
             )
@@ -183,6 +184,8 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
                 lang = ui.lang,
                 settings = ui.settings,
                 daily = ui.daily,
+                map = ui.map,
+                journal = ui.journal,
                 notices = ui.actionNotices,
                 onTrain = viewModel::train,
                 mode = ui.game?.mode ?: GameMode.NORMAL,

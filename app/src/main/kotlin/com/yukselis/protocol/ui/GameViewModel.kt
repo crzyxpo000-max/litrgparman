@@ -13,6 +13,9 @@ import com.yukselis.engine.story.ActionRejected
 import com.yukselis.engine.story.BagView
 import com.yukselis.engine.combat.CombatAction
 import com.yukselis.engine.story.CombatView
+import com.yukselis.engine.story.JournalView
+import com.yukselis.engine.story.RegionView
+import com.yukselis.engine.world.HubAction
 import com.yukselis.engine.story.DailyView
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -54,6 +57,8 @@ data class UiState(
     val combat: CombatView? = null,
     /** Otomatik tur açık. */
     val autoCombat: Boolean = false,
+    val map: List<RegionView> = emptyList(),
+    val journal: JournalView? = null,
     /** Son seçimin ürettiği bildirimler (XP, seviye, unvan). Bir sonraki seçimde temizlenir. */
     val freshNotices: List<NoticeView> = emptyList(),
     /** Hikaye dışı eylemlerin (dağıtım, üretim, istem) bildirimleri; Hikaye dışındaki sekmelerde kısa kartlar. */
@@ -108,6 +113,25 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             }
             .getOrNull() ?: return
         // Savaş başladı: Normal modda ölüm sonrası dönülecek kayıt noktası seçimden önceki durumdur.
+        if (current.combat == null && outcome.state.combat != null) {
+            viewModelScope.launch(saveDispatcher) { app.saves.saveCheckpoint(current) }
+        }
+        show(outcome.state, outcome.notices)
+        persistAuto(outcome.state)
+    }
+
+    // ---- Gün akışı ----
+
+    /** Gün akışı eylemi: bir yuva harcar (kamp günü bitirir); olay ya da savaş başlayabilir. */
+    fun hubAction(action: HubAction) {
+        val current = _ui.value.game ?: return
+        val outcome = try {
+            app.engine.hubAction(current, action, _ui.value.lang)
+        } catch (e: RuntimeException) {
+            Log.i(TAG, "Akış eylemi reddedildi: ${e.message}")
+            _ui.update { it.copy(message = UiMessage.ACTION_FAILED) }
+            return
+        }
         if (current.combat == null && outcome.state.combat != null) {
             viewModelScope.launch(saveDispatcher) { app.saves.saveCheckpoint(current) }
         }
@@ -296,6 +320,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 bag = engine.bag(state, lang),
                 daily = engine.daily(state, lang),
                 combat = engine.combatView(state, lang),
+                map = engine.map(state, lang),
+                journal = engine.journal(state, lang),
                 freshNotices = notices,
                 turn = if (advanceTurn) it.turn + 1 else it.turn,
             )

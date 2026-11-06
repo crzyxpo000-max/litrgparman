@@ -90,6 +90,12 @@ fun StatusScreen(
             style = GameType.system,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
+        // OP MC: Dikkat, Yozlaşma ve NPC'lerin gördüğü seviye.
+        Text(
+            text = stringResource(R.string.status_hidden, status.publicLevel, status.attention, status.corruption),
+            style = GameType.system,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
         if (status.evolutionPending) {
             Text(stringResource(R.string.evolution_pending), style = GameType.system, color = Color(0xFFFFA726), modifier = Modifier.padding(top = 4.dp))
         }

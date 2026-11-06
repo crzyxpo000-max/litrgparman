@@ -33,6 +33,9 @@ import com.yukselis.protocol.ui.components.SectionTitle
 import com.yukselis.protocol.ui.components.StatBar
 import com.yukselis.protocol.ui.theme.EchoColor
 import com.yukselis.engine.story.DailyView
+import com.yukselis.engine.story.JournalView
+import com.yukselis.engine.story.RegionView
+import com.yukselis.engine.world.QuestStatus
 import com.yukselis.engine.story.NoticeView
 import com.yukselis.protocol.ui.components.SystemCard
 import androidx.compose.ui.graphics.Color
@@ -43,6 +46,8 @@ fun MoreScreen(
     lang: Lang,
     settings: Settings,
     daily: DailyView?,
+    map: List<RegionView>,
+    journal: JournalView?,
     notices: List<NoticeView>,
     onTrain: () -> Unit,
     mode: GameMode,
@@ -62,11 +67,11 @@ fun MoreScreen(
     ) {
         // Sonraki aşamalarda açılacak bölümler
         SectionTitle(stringResource(R.string.tab_more))
-        ComingSoon(stringResource(R.string.map), 4)
+        if (map.isNotEmpty()) MapSection(map)
         notices.forEach { SystemCard(it, Modifier.padding(vertical = 4.dp)) }
-        daily?.let { DailyPanel(it, onTrain) }
+        daily?.let { DailyPanel(it, onTrain, inDayLoop = map.isNotEmpty()) }
         ComingSoon(stringResource(R.string.relationships), 5)
-        ComingSoon(stringResource(R.string.quests), 4)
+        journal?.let { JournalSection(it) }
 
         SectionTitle(stringResource(R.string.saves))
         slots.forEach { (slot, info) ->
@@ -103,9 +108,50 @@ fun MoreScreen(
     }
 }
 
+/** Harita: bölgeler, tehlike, kontrol, açık kapılar. */
+@Composable
+private fun MapSection(regions: List<RegionView>) {
+    Text(stringResource(R.string.map), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
+    regions.forEach { r ->
+        Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small, modifier = Modifier.fillMaxWidth().padding(vertical = 3.dp)) {
+            Column(modifier = Modifier.padding(10.dp)) {
+                Text(
+                    text = (if (r.current) "▶ " else "") + r.name,
+                    style = GameType.systemTitle,
+                    color = if (r.current) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+                )
+                Text(stringResource(R.string.map_line, r.danger, r.control, r.gates.size), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                r.gates.forEach { g -> Text(stringResource(R.string.hub_gate, g.grade, g.enemies, g.daysLeft), style = GameType.system, color = Color(0xFFFFA726)) }
+            }
+        }
+    }
+}
+
+/** Görevler ve efsane (tanıklı başarılar). */
+@Composable
+private fun JournalSection(journal: JournalView) {
+    Text(stringResource(R.string.quests), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
+    if (journal.quests.isEmpty()) Text(stringResource(R.string.no_quests), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    journal.quests.forEach { q ->
+        val color = when (q.status) {
+            QuestStatus.ACTIVE -> MaterialTheme.colorScheme.onSurface
+            QuestStatus.DONE -> Color(0xFF66BB6A)
+            QuestStatus.FAILED -> Color(0xFFEF5350)
+        }
+        Column(modifier = Modifier.padding(vertical = 3.dp)) {
+            Text(q.name, style = GameType.systemTitle, color = color)
+            Text(q.description, style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    }
+    if (journal.legend.isNotEmpty()) {
+        Text(stringResource(R.string.legend), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
+        journal.legend.forEach { Text("${it.name} ×${it.count}", style = GameType.system) }
+    }
+}
+
 /** Günlük Görev: yalnızca oyuncunun gördüğü pencere. */
 @Composable
-private fun DailyPanel(daily: DailyView, onTrain: () -> Unit) {
+private fun DailyPanel(daily: DailyView, onTrain: () -> Unit, inDayLoop: Boolean) {
     Surface(
         color = MaterialTheme.colorScheme.surfaceVariant,
         shape = MaterialTheme.shapes.small,
@@ -121,7 +167,8 @@ private fun DailyPanel(daily: DailyView, onTrain: () -> Unit) {
             Text(stringResource(R.string.daily_only_you), style = GameType.system, color = EchoColor)
             when {
                 daily.completed -> Text(stringResource(R.string.daily_done), style = GameType.systemTitle, color = Color(0xFF66BB6A))
-                daily.trainable -> Button(onClick = onTrain, modifier = Modifier.padding(top = 6.dp)) { Text(stringResource(R.string.daily_train)) }
+                daily.trainable && !inDayLoop -> Button(onClick = onTrain, modifier = Modifier.padding(top = 6.dp)) { Text(stringResource(R.string.daily_train)) }
+                daily.trainable -> Text(stringResource(R.string.daily_train_hub), style = GameType.system, color = MaterialTheme.colorScheme.outline)
                 else -> Text(stringResource(R.string.daily_in_story), style = GameType.system, color = MaterialTheme.colorScheme.outline)
             }
         }

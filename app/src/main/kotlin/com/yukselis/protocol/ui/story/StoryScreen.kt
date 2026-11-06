@@ -43,6 +43,7 @@ import com.yukselis.engine.story.NoticeKind
 import com.yukselis.engine.story.NoticeView
 import com.yukselis.engine.story.PassageView
 import com.yukselis.engine.story.SceneView
+import com.yukselis.engine.world.HubAction
 import com.yukselis.protocol.R
 import com.yukselis.protocol.ui.components.SystemCard
 import com.yukselis.protocol.ui.theme.GameType
@@ -64,6 +65,7 @@ fun StoryScreen(
     typewriter: Boolean,
     haptics: Boolean,
     onChoose: (String) -> Unit,
+    onHub: (HubAction) -> Unit,
     onBackToTitle: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -141,10 +143,11 @@ fun StoryScreen(
                 AppearingCard(notice)
             }
             item(key = "choices-$passageKey") {
-                if (scene.isEnding) {
-                    EndingActions(onBackToTitle)
-                } else {
-                    Choices(scene.choices, onChoose)
+                val hub = scene.hub
+                when {
+                    scene.isEnding -> EndingActions(onBackToTitle)
+                    hub != null -> HubPanel(hub, onHub)
+                    else -> Choices(scene.choices, onChoose)
                 }
             }
         } else if (typewriter) {
@@ -219,6 +222,9 @@ private fun Choices(choices: List<ChoiceView>, onChoose: (String) -> Unit) {
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Row(modifier = Modifier.fillMaxWidth()) {
+                    choice.kindTag?.let {
+                        Text(text = "$it ", style = GameType.system, color = com.yukselis.protocol.ui.theme.EchoColor)
+                    }
                     choice.requirementTag?.let {
                         Text(
                             text = "$it ",
@@ -226,7 +232,15 @@ private fun Choices(choices: List<ChoiceView>, onChoose: (String) -> Unit) {
                             color = if (choice.enabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                     }
-                    Text(text = choice.label, style = MaterialTheme.typography.bodyLarge)
+                    Text(text = choice.label, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
+                    // Görünür olasılık: tek seferlik (kırmızı) / yeniden denenebilir (beyaz).
+                    choice.odds?.let {
+                        Text(
+                            text = " %$it",
+                            style = GameType.system,
+                            color = if (choice.oneShot) androidx.compose.ui.graphics.Color(0xFFEF5350) else MaterialTheme.colorScheme.onSurface,
+                        )
+                    }
                 }
             }
         }
