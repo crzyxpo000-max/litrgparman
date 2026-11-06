@@ -53,7 +53,9 @@ sahneler:
       - metin: { tr: "Haber çok-evrenin geçitlerinden bile geçiyor: Dünya'nın anomalisi düştü. Bir Kadim gemisinde biri bir rapor yazıyor, siliyor, sonra tek kelimeyle yeniden yazıyor: beklendiği gibi.", en: "The news makes it through the multiverse passages: Earth's anomaly is down. On an Ancient ship, someone writes a report, deletes it, then writes it again in a single word: as expected." }
         kosul: { perde: 3 }
       - metin: { tr: "Hasat'a yalnızca birkaç sabah kala düşüyorsun. Körfezin üstündeki filo bekliyor; neyi beklediklerinden artık emin değiller, çünkü bekledikleri tek şey sendin.", en: "You fall with only a few mornings left before the Harvest. The fleet over the bay keeps waiting, though it's no longer sure what for. You were the only thing it was waiting on." }
-        kosul: { perde: 4 }
+        kosul: { perde: 4, bayrak_yok: "kadimler_yenildi" }
+      - metin: { tr: "Hasat'a yalnızca birkaç sabah kala düşüyorsun. Yendiğin filonun enkazı körfezin dibinde paslanıyor; bu kez seni bekleyen bir gemi yok, yalnızca gökyüzündeki sayaç. O da beklemiyor; sadece sayıyor.", en: "You fall with only a few mornings left before the Harvest. The wreck of the fleet you beat is rusting at the bottom of the bay. No ship is waiting on you this time, only the counter in the sky. And it isn't waiting. It's just counting." }
+        kosul: { perde: 4, bayrak: "kadimler_yenildi" }
       # Yanındakiler
       - metin: { tr: "{npc:deniz_arman|in} sesini duyuyorsun, çok uzaktan; adını söylüyor, bir kez, sonra bir kez daha. Cevap vermek istiyorsun. Pencere izin vermiyor.", en: "You hear {npc:deniz_arman|pos} voice from very far away, saying your name once, then once more. You want to answer. The window won't let you." }
         kosul: { yoldas: "deniz_arman" }

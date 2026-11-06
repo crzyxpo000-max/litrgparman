@@ -200,7 +200,7 @@ dusmanlar:
         etiketler: ["isik", "yakin"]
         durum: { etki: "kor", sans: 0.35, sure: 2 }
         bekleme: 0
-        metin: { tr: "{dusman} havaya bir satır çiziyor; satır bomboş ve bembeyaz, ve o beyazlık derini kesiyor.", en: "{dusman} draws a line in the air. It's empty and blinding white, and the white cuts." }
+        metin: { tr: "{dusman} havaya bir satır çiziyor; satır bomboş ve bembeyaz; o beyazlık derini kesiyor.", en: "{dusman} draws a line in the air. It's empty and blinding white, and the white cuts." }
     xp: 2200
     kredi: 0
     etiketler: ["sistem", "elit"]
@@ -262,8 +262,8 @@ dusmanlar:
         guclenme: { wil: 6, end: 4 }
 
   onceki_anomali:
-    ad: { tr: "Önceki Anomali", en: "The Last Anomaly" }
-    aciklama: { tr: "Bir önceki döngünün kahramanından geriye kalan iz: kendi Kule'sinin tepesine çıkmış, Çekirdek'e hayır demiş ve parçalanmış biri. Senin silahlarını, senin duruşunu, senin sınıfının bir eski sürümünü kullanıyor.", en: "What's left of the last cycle's hero: someone who climbed their own Spire, said no to the Core, and got torn apart for it. It fights with your weapons, your stance, an older build of your own class." }
+    ad: { tr: "İlk Anomali", en: "The First Anomaly" }
+    aciklama: { tr: "İlk döngünün kahramanından geriye kalan iz: kendi Kule'sinin tepesine çıkmış, Çekirdek'e hayır demiş ve parçalanmış biri. Senin silahlarını, senin duruşunu, senin sınıfının bir eski sürümünü kullanıyor.", en: "What's left of the first cycle's hero: someone who climbed their own Spire, said no to the Core, and got torn apart for it. It fights with your weapons, your stance, an older build of your own class." }
     kanca: { tr: "Kırık bir pencere açılıyor; üstünde tarih yok, yalnızca bir sayaç: [DÖNGÜ 7]. Pencerenin arkasından biri sana doğru yürüyor ve yürüyüşünü tanıyorsun.", en: "A broken window opens. No date on it, just a counter: [CYCLE 7]. Someone walks toward you from behind it, and you know that walk." }
     seviye: 45
     can: 1000
@@ -280,7 +280,7 @@ dusmanlar:
         kat: 0.9
         etiketler: ["fiziksel", "yakin"]
         bekleme: 0
-        metin: { tr: "{dusman} senin en sevdiğin hamleyi yapıyor; yalnızca daha yavaş, daha yorgun ve senden yedi döngü önce.", en: "{dusman} throws your favorite move. Just slower, wearier, and seven cycles before you ever did." }
+        metin: { tr: "{dusman} senin en sevdiğin hamleyi yapıyor; yalnızca daha yavaş, daha yorgun ve senden altı döngü önce.", en: "{dusman} throws your favorite move. Just slower, wearier, and six cycles before you ever did." }
       - id: "itiraz"
         ad: { tr: "İtiraz", en: "Dissent" }
         stat: "wil"
@@ -289,17 +289,17 @@ dusmanlar:
         etiketler: ["zihin", "glitch"]
         durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
         bekleme: 3
-        metin: { tr: "{dusman} tek bir kelime söylüyor, hayır, ve dünya bir anlığına dönmeyi reddediyor.", en: "{dusman} says one word, no, and for a heartbeat the world refuses to turn." }
+        metin: { tr: "{dusman} tek bir kelime söylüyor: hayır. Dünya bir anlığına dönmeyi reddediyor.", en: "{dusman} says one word, no, and for a heartbeat the world refuses to turn." }
     xp: 3200
     kredi: 0
     etiketler: ["sistem", "dongu"]
     boss: true
     fazlar:
       - esik: 70
-        metin: { tr: "Önceki anomali duruşunu değiştiriyor; senin bir sonraki evriminin duruşuna.", en: "The last anomaly shifts its stance, into the stance of your next evolution." }
+        metin: { tr: "İlk anomali duruşunu değiştiriyor; senin bir sonraki evriminin duruşuna.", en: "The first anomaly shifts its stance, into the stance of your next evolution." }
         guclenme: { str: 4, agi: 4 }
       - esik: 40
-        metin: { tr: "Sayaç titriyor: [DÖNGÜ 7... 8]. Önceki anomali duraksıyor; ilk kez sana değil, sayaca bakıyor.", en: "The counter flickers: [CYCLE 7... 8]. The last anomaly falters. For the first time it's looking at the counter, not you." }
+        metin: { tr: "Sayaç titriyor: [DÖNGÜ 7... 8]. İlk anomali duraksıyor; gözleri senden ayrılıyor ve altı döngüdür ilk defa sayaca bakıyor.", en: "The counter flickers: [CYCLE 7... 8]. The first anomaly falters. Its eyes leave you, and for the first time in six cycles it's looking at the counter." }
         guclenme: { wil: 8 }
       - esik: 15
         metin: { tr: "Yorgun bir sesle, senin sesine çok benzeyen bir sesle fısıldıyor: ben de buraya kadar gelmiştim.", en: "In a tired voice, a voice a lot like yours, it whispers: i made it this far too." }

@@ -18,8 +18,8 @@ olaylar:
       - id: "gecit_1"
         yer: "kule_dibi"
         paragraflar:
-          - { tr: "Gün doğmadan Kule nabız gibi atmaya başlıyor. Gövdesi boyunca yukarı doğru bir ışık halkası tırmanıyor, kat kat, ve tam ellinci katın hizasında duruyor.", en: "Before sunrise, the Spire starts to throb like a pulse. A ring of light climbs its body floor by floor and stops dead at the fiftieth." }
-          - { tr: "Kule Dibi'ndeki çadırlardan, tezgâhlardan, yarı yıkık apartmanların balkonlarından binlerce yüz aynı noktaya kalkıyor. Sonra herkesin penceresi aynı anda çalıyor.", en: "Out of the tents and stalls of Spire Plaza, off the balconies of half-gutted apartment blocks, thousands of faces tip up toward the same spot. Then everybody's window goes off at once." }
+          - { tr: "Gün doğmadan Kule nabız gibi atmaya başlıyor. Gövdesi boyunca yukarı doğru bir ışık halkası kat kat tırmanıyor ve tam ellinci katın hizasında duruyor.", en: "Before sunrise, the Spire starts to throb like a pulse. A ring of light climbs its body floor by floor and stops dead at the fiftieth." }
+          - { tr: "Kule Dibi'ndeki çadırlardan, tezgâhlardan, yarı yıkık apartmanların balkonlarından binlerce yüz aynı noktaya kalkıyor. Sonra herkesin penceresi aynı anda çalıyor.", en: "Out of the tents and stalls of {yer:kule_dibi}, off the balconies of half-gutted apartment blocks, thousands of faces tip up toward the same spot. Then everybody's window goes off at once." }
           - metin: { tr: "Ellinci katın ardındaki o kapıyı zaten gördün. Önünde durdun, eline soğuk bir mühür değdi ve geri döndün. Şimdi mühür yok.", en: "You've already seen that door behind the fiftieth floor. You stood in front of it, felt a cold seal under your palm, and turned back. Now the seal is gone." }
             kosul: { degisken_min: { kule_kat: 50 } }
           - metin: { tr: "Körfezin üstünde asılı duran Kadim gemisinin karnından ince, beyaz bir ışık iniyor ve Kule'nin ellinci katına dokunuyor. Biri, çok uzaktan, kapının açıldığını onaylıyor.", en: "From the belly of the Ancient ship hanging over the bay, a thin white beam comes down and touches the Spire's fiftieth floor. Somebody, a long way off, is signing for the delivery." }
@@ -273,7 +273,7 @@ olaylar:
               - esya: { nehha_cani: 1 }
               - ahlak: { merhamet: 3 }
               - itibar: { siginak: 3 }
-            kronik: { tr: "Başka bir dünyanın çocuğunu Kule Dibi'ndeki bir sahra çadırına emanet ettin; çadır o geceden sonra hiç boş kalmadı.", en: "You left another world's child in a field tent in Spire Plaza. After that night, the tent was never empty again." }
+            kronik: { tr: "Başka bir dünyanın çocuğunu Kule Dibi'ndeki bir sahra çadırına emanet ettin; çadır o geceden sonra hiç boş kalmadı.", en: "You left another world's child in a field tent in {yer:kule_dibi}. After that night, the tent was never empty again." }
             sonraki: "gecit_karar"
           - id: "yanina"
             etiket: { tr: "Onu yanında tut; eve sen götüreceksin", en: "Keep it with you. You'll take it home" }
@@ -334,7 +334,7 @@ olaylar:
       - id: "gecit_karar"
         yer: "kule_dibi"
         paragraflar:
-          - { tr: "Akşam olduğunda Kule Dibi bir pazar yerinden çok bir mahkeme salonuna benziyor. Lonca, Sığınak, Sessiz Ağ ve Yükselenler'in sözcüleri merdivenlerin dibinde bağırışıyor: geçit kimin, kim geçecek, kim geçemeyecek.", en: "By evening, Spire Plaza looks less like a market and more like a courtroom. Spokespeople from the Guild, the Haven, the Quiet Network and the Ascended are shouting at each other at the foot of the stairs: whose gate is it, who goes through, who doesn't." }
+          - { tr: "Akşam olduğunda {yer:kule_dibi} bir pazar yerinden çok bir mahkeme salonuna benziyor. Lonca, Sığınak, Sessiz Ağ ve Yükselenler'in sözcüleri merdivenlerin dibinde bağırışıyor: geçit kimin, kim geçecek, kim geçemeyecek.", en: "By evening, {yer:kule_dibi} looks less like a market and more like a courtroom. Spokespeople from the Guild, the Haven, the Quiet Network and the Ascended are shouting at each other at the foot of the stairs: whose gate is it, who goes through, who doesn't." }
           - { tr: "Sonra biri seni görüyor ve bağırışlar duruyor. Kimse söylemiyor ama herkes biliyor: bu meydanda geçitten geçip başka bir dünyanın havasını soluyan ve hiç yorulmamış görünen tek kişi sensin.", en: "Then somebody spots you, and the shouting stops. Nobody says it, but everybody knows: you're the only person in this plaza who went through that gate, breathed another world's air and doesn't look the least bit tired." }
           - metin: { tr: "Kasaba Çekirdeği sana bağlı. Hiçbiri bunu yüksek sesle söylemese de, kararın son sözü zaten senin.", en: "The Town Core is bound to you. Nobody says it out loud, but the last word on this was always going to be yours." }
             kosul: { bayrak: "cekirdek_oyuncu" }
@@ -419,7 +419,7 @@ olaylar:
           - kosul: { stat: { per: 120 } }
             metin: { tr: "Suyun altında sokaklar var. Kaldırım taşları, bir çeşmenin kenarı, bir okul bahçesinin yarısı. Bu bir deniz değil; boğulmuş bir kıta.", en: "There are streets under the water. Cobblestones, the rim of a fountain, half a schoolyard. This isn't a sea. It's a drowned continent." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "burada Sistem'in sesi yok. her şey toplanmış. ilk kez kendimi bu kadar net duyuyorum ve bu hiç hoşuma gitmiyor.", en: "no System voice here. everything's been collected. it's the first time i can hear myself this clearly, and i don't like it at all." }
+            metin: { tr: "burada sistemin sesi yok. her şey toplanmış. ilk kez kendimi bu kadar net duyuyorum ve bu hiç hoşuma gitmiyor.", en: "no system voice here. everything's been collected. it's the first time i can hear myself this clearly, and i don't like it at all." }
         yoldas_tepkileri:
           - npc: "deniz_arman"
             kosul: { yoldas: "deniz_arman" }
@@ -741,7 +741,7 @@ olaylar:
               - ahlak: { merhamet: 8, duzen: -2 }
               - itibar: { siginak: 5, lonca: -2 }
               - dikkat: 3
-            kronik: { tr: "Son Fener'in çocuklarını kendi dünyana taşıdın; Kıyıkent'in sokaklarında bir süre perdeli parmaklı çocuklar 'seviye on' oynadı.", en: "You carried the children of the Last Light back to your own world. For a while, kids with webbed fingers played 'level ten' in the streets of Port Harlow." }
+            kronik: { tr: "Son Fener'in çocuklarını kendi dünyana taşıdın; {yer:kiyikent|in} sokaklarında bir süre perdeli parmaklı çocuklar 'seviye on' oynadı.", en: "You carried the children of the Last Light back to your own world. For a while, kids with webbed fingers played 'level ten' in the streets of {yer:kiyikent}." }
             sonraki: "fener_goc"
           - id: "basakci"
             etiket: { tr: "Başakçı'yı öldüreceğim", en: "I'm going to kill the Gleaner" }
@@ -1141,7 +1141,7 @@ olaylar:
           - kosul: { stat: { per: 150 } }
             metin: { tr: "Ağlarındaki pencereler rastgele değil; her biri bir Nehha. Ve ağın en altında, en eskisi, dört yüz on dokuz yazıyor.", en: "The windows in its nets aren't random. Each one is a Nehha. And at the very bottom of the net, the oldest one reads four hundred and nineteen." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "bu Sistem'in bir parçası. benim gibi. ama o geride bırakıldı, ben kaçtım. aradaki fark bu kadar ince.", en: "it's a piece of the System. like me. but it got left behind, and i ran. that's how thin the difference is." }
+            metin: { tr: "bu sistemin bir parçası. benim gibi. ama o geride bırakıldı, ben kaçtım. aradaki fark bu kadar ince.", en: "it's a piece of the system. like me. but it got left behind, and i ran. that's how thin the difference is." }
         yoldas_tepkileri:
           - npc: "deniz_arman"
             kosul: { yoldas: "deniz_arman" }
@@ -1398,7 +1398,7 @@ olaylar:
       - id: "tilu_1"
         yer: "kule_dibi"
         paragraflar:
-          - metin: { tr: "Sığınak'ın Kule Dibi'ndeki sahra çadırından bir gönüllü seni buluyor. \"Kapıdan gelen çocuk,\" diyor. \"Yemiyor, uyumuyor, çanını sallayıp duruyor. Seni soruyor; yani seni tarif ediyor.\"", en: "A volunteer from the Haven's field tent in Spire Plaza tracks you down. \"The kid from the door,\" she says. \"Won't eat, won't sleep, just keeps shaking that bell. Asking for you. Well, describing you.\"" }
+          - metin: { tr: "Sığınak'ın Kule Dibi'ndeki sahra çadırından bir gönüllü seni buluyor. \"Kapıdan gelen çocuk,\" diyor. \"Yemiyor, uyumuyor, çanını sallayıp duruyor. Seni soruyor; yani seni tarif ediyor.\"", en: "A volunteer from the Haven's field tent in {yer:kule_dibi} tracks you down. \"The kid from the door,\" she says. \"Won't eat, won't sleep, just keeps shaking that bell. Asking for you. Well, describing you.\"" }
             kosul: { bayrak: "tilu_korundu" }
           - metin: { tr: "Sessiz Ağ'dan bir teknisyen seni buluyor, gözlerinin altı mor. \"Çocuk,\" diyor. \"Ölçümler bitti. Yemek yemiyor. Ekip... ekip onu senin götürmeni istiyor. Ya da ölçmeye devam etmemizi. Sana soruyorlar.\"", en: "A Quiet Network tech finds you, dark circles under his eyes. \"The kid,\" he says. \"Measurements are done. It's not eating. The team... the team wants you to take it home. Or for us to keep measuring. They're asking you.\"" }
             kosul: { bayrak: "tilu_ag_teslim" }
@@ -1679,7 +1679,7 @@ olaylar:
         yer: "pirinc_kervan"
         paragraflar:
           - { tr: "Tartı Çarşısı'nın ortasında bir ev büyüklüğünde bir terazi duruyor. Tavvarlar ona her şeyi koyuyor: tahıl, kumaş, köle sözleşmeleri, çocukların gelecekteki emekleri. Ve yabancıları.", en: "In the middle of the Weighing Bazaar stands a scale the size of a house. The Tavvari weigh everything on it: grain, cloth, indenture contracts, children's future labor. And strangers." }
-          - { tr: "Derisi bütünüyle pullarla kaplı yaşlı bir tartıcı sana el ediyor. \"Yabancı,\" diyor, ve bunun için kendi kendine bir pul ödüyor. \"Burada her şeyin bir fiyatı var. Seninkini öğrenelim.\"", en: "An old weigher whose skin is covered head to toe in chits waves you over. \"Stranger,\" he says, and pays himself a chit for it. \"Everything here has a price. Let's learn yours.\"" }
+          - { tr: "Derisi bütünüyle pullarla kaplı yaşlı bir tartıcı sana el ediyor. \"Yabancı,\" diyor ve bunun için kendi kendine bir pul ödüyor. \"Burada her şeyin bir fiyatı var. Seninkini öğrenelim.\"", en: "An old weigher whose skin is covered head to toe in chits waves you over. \"Stranger,\" he says, and pays himself a chit for it. \"Everything here has a price. Let's learn yours.\"" }
         secenekler:
           - id: "tartil"
             etiket: { tr: "Kefeye çık; tartılmayı kabul et", en: "Step onto the pan. Let them weigh you" }
@@ -2655,12 +2655,12 @@ olaylar:
         yer: "yedi_taht"
         paragraflar:
           - { tr: "Salonun ortasında biri seni bekliyor. Uzun, ince, eklemleri yanlış yerlerden bükülen bir Kadim; derisinin altında bir dünyanın takımyıldızları yavaşça dönüyor. Yüzü var ama ifadesi yok, bir maske gibi değil, bir ölçü aleti gibi.", en: "Someone's waiting for you in the middle of the hall. A tall, thin Ancient, joints bending the wrong way, a whole world's constellations turning slowly under its skin. It has a face but no expression. Not like a mask. Like a measuring instrument." }
-          - { tr: "\"Ben Ulvenne,\" diyor. \"İkinci Taht'ın Nazırı. Senin buraya getirilmene karar verildi. Ne olduğuna da yakında karar verilecek.\"", en: "\"I am Ulvenne,\" it says. \"Chamberlain of the Second Throne. It was decided that you would be brought here. What you are will be decided soon.\"" }
-          - metin: { tr: "\"Elçimizin raporları seni önceden getirdi,\" diye ekliyor Ulvenne. \"{npc:thessar} seni 'ilginç' diye tanımladı. Bu kelimeyi bin yıldır kullanmamıştı.\"", en: "\"Our envoy's reports preceded you,\" Ulvenne adds. \"{npc:thessar} described you as 'interesting.' He had not used that word in a thousand years.\"" }
+          - { tr: "\"Ben {npc:ulvenne},\" diyor. \"İkinci Taht'ın Nazırı. Senin buraya getirilmene karar verildi. Ne olduğuna da yakında karar verilecek.\"", en: "\"I am {npc:ulvenne},\" it says. \"Chamberlain of the Second Throne. It was decided that you would be brought here. What you are will be decided soon.\"" }
+          - metin: { tr: "\"Elçimizin raporları seni önceden getirdi,\" diye ekliyor {npc:ulvenne}. \"{npc:thessar} seni 'ilginç' diye tanımladı. Bu kelimeyi bin yıldır kullanmamıştı.\"", en: "\"Our envoy's reports preceded you,\" {npc:ulvenne} adds. \"{npc:thessar} described you as 'interesting.' He had not used that word in a thousand years.\"" }
             kosul: { bayrak: "thessar_indi", bayrak_yok: "ihanet_thessar" }
-          - metin: { tr: "\"Elçimiz bize ihanet etti,\" diyor Ulvenne, sesinde hiçbir şey yokken. \"{npc:thessar}. Senin dünyanda. Bu yüzden salonun yarısı bugün seni öldürmeyi oyluyor.\"", en: "\"Our envoy betrayed us,\" Ulvenne says, with nothing at all in its voice. \"{npc:thessar}. On your world. Which is why half this hall is voting today on whether to kill you.\"" }
+          - metin: { tr: "\"Elçimiz bize ihanet etti,\" diyor {npc:ulvenne}, sesinde hiçbir şey yokken. \"{npc:thessar}. Senin dünyanda. Bu yüzden salonun yarısı bugün seni öldürmeyi oyluyor.\"", en: "\"Our envoy betrayed us,\" {npc:ulvenne} says, with nothing at all in its voice. \"{npc:thessar}. On your world. Which is why half this hall is voting today on whether to kill you.\"" }
             kosul: { bayrak: "ihanet_thessar" }
-          - metin: { tr: "Ulvenne sana bir bakış atıyor; yalnızca görünen seviyeni görüyor. \"Bu mu?\" diye soruyor salona. Arkadaki muhafızlardan biri bir ses çıkarıyor; Kadim dilinde bunun bir gülüş olduğunu tahmin ediyorsun.", en: "Ulvenne gives you a once-over and only sees your visible level. \"This?\" it asks the hall. One of the guards in the back makes a noise. In the Ancient language, you guess that's a laugh." }
+          - metin: { tr: "{npc:ulvenne} sana bir bakış atıyor; yalnızca görünen seviyeni görüyor. \"Bu mu?\" diye soruyor salona. Arkadaki muhafızlardan biri bir ses çıkarıyor; Kadim dilinde bunun bir gülüş olduğunu tahmin ediyorsun.", en: "{npc:ulvenne} gives you a once-over and only sees your visible level. \"This?\" it asks the hall. One of the guards in the back makes a noise. In the Ancient language, you guess that's a laugh." }
             kosul: { bayrak: "taht_hafife_alindi" }
         secenekler:
           - id: "egil"
@@ -2694,7 +2694,7 @@ olaylar:
         yer: "yedi_taht"
         paragraflar:
           - { tr: "Penceren bir anlığına bütün salona açılıyor. Muhafızların derisindeki yıldızlar aynı anda dağılıyor; bir an kendi bedenlerini tanımıyorlar.", en: "For one second your window opens up to the entire hall. The stars under the guards' skin scatter all at once. For a beat they don't recognize their own bodies." }
-          - { tr: "Ulvenne kıpırdamıyor. Ama ölçü aletine benzeyen yüzünde, ilk kez, bir çizgi beliriyor. \"Ah,\" diyor. \"Demek raporlar abartmamış. Bu çok uygunsuz.\"", en: "Ulvenne doesn't move. But on that measuring-instrument face, for the first time, a line appears. \"Ah,\" it says. \"So the reports did not exaggerate. This is very improper.\"" }
+          - { tr: "{npc:ulvenne} kıpırdamıyor. Ama ölçü aletine benzeyen yüzünde, ilk kez, bir çizgi beliriyor. \"Ah,\" diyor. \"Demek raporlar abartmamış. Bu çok uygunsuz.\"", en: "{npc:ulvenne} doesn't move. But on that measuring-instrument face, for the first time, a line appears. \"Ah,\" it says. \"So the reports did not exaggerate. This is very improper.\"" }
         secenekler:
           - id: "devam"
             etiket: { tr: "Pencereni kapat ve bekle", en: "Close your window and wait" }
@@ -2736,7 +2736,7 @@ olaylar:
         yer: "yedi_taht"
         paragraflar:
           - { tr: "Âlim titreyen şeyi parmaklarının arasında tutuyor ve uzun süre bakıyor. \"Bir artık,\" diyor sonunda, salona. \"Eski bir şeyden kopmuş. Bunları yakarız.\"", en: "The scholar holds the flickering thing between its fingers and stares at it a long time. \"A remnant,\" it finally tells the hall. \"Broken off something old. We burn these.\"" }
-          - { tr: "Ulvenne elini kaldırıyor. \"Konuk kaydında,\" diyor. \"Henüz değil.\" Âlim parmaklarını çekiyor; {npc:yanki} pencerenin en dibine, bir köşeye büzülmüş.", en: "Ulvenne raises a hand. \"It is on the guest registry,\" it says. \"Not yet.\" The scholar lets go, and {npc:yanki} has curled up in the very bottom corner of your window." }
+          - { tr: "{npc:ulvenne} elini kaldırıyor. \"Konuk kaydında,\" diyor. \"Henüz değil.\" Âlim parmaklarını çekiyor; {npc:yanki} pencerenin en dibine, bir köşeye büzülmüş.", en: "{npc:ulvenne} raises a hand. \"It is on the guest registry,\" it says. \"Not yet.\" The scholar lets go, and {npc:yanki} has curled up in the very bottom corner of your window." }
           - { tr: "{npc:yanki}: beni yakmak istediler. sen izin verdin bakmalarına. bunu hatırlayacağım. kızgın değilim. yalnızca hatırlayacağım.", en: "{npc:yanki}: they wanted to burn me. you let them look. i'll remember that. i'm not angry. i'll just remember." }
         secenekler:
           - id: "devam"
@@ -2749,7 +2749,7 @@ olaylar:
         yer: "yedi_taht"
         paragraflar:
           - { tr: "Ziyafet sofrası uzun ve boş; Kadimler yemek yemiyor. Yalnızca içiyorlar. Önüne bir kadeh konuyor; içindeki sıvı ışık gibi, ılık ve hafifçe titreşiyor.", en: "The banquet table is long and empty. The Ancients don't eat. They only drink. A goblet is set down in front of you; the liquid inside is like light, warm and faintly humming." }
-          - { tr: "\"Ondalık şarabı,\" diyor Ulvenne. \"Bağlı Katmanlardan. Bir konuğa sunulabilecek en büyük onur.\"", en: "\"Tithe wine,\" Ulvenne says. \"From the bonded Layers. The highest honor that can be offered to a guest.\"" }
+          - { tr: "\"Ondalık şarabı,\" diyor {npc:ulvenne}. \"Bağlı Katmanlardan. Bir konuğa sunulabilecek en büyük onur.\"", en: "\"Tithe wine,\" {npc:ulvenne} says. \"From the bonded Layers. The highest honor that can be offered to a guest.\"" }
           - metin: { tr: "Kadehin dibinde, ışığın arasında, minicik bir pirinç pul parlıyor. Üstünde tek hece. Ninu.", en: "At the bottom of the goblet, in the light, a tiny brass chit glints. One syllable on it. Ninu." }
             kosul: { bayrak: "ninu_teslim" }
         sezgiler:
@@ -2791,13 +2791,13 @@ olaylar:
           - { tr: "Kadehi el değmemiş bırakıyorsun ve kimse fark etmiyor. Ya da herkes fark ediyor ve bunu da uygunsuzluğa sayıyor.", en: "You set the goblet down untouched, and nobody notices. Or everybody notices, and counts that as impropriety too." }
         secenekler:
           - id: "devam"
-            etiket: { tr: "Ulvenne'nin yanına geç", en: "Go stand beside Ulvenne" }
+            etiket: { tr: "{npc:ulvenne|in} yanına geç", en: "Go stand beside {npc:ulvenne}" }
             sonraki: "salon_son"
 
       - id: "salon_son"
         yer: "yedi_taht"
         paragraflar:
-          - { tr: "Ziyafetin sonunda Ulvenne yanına eğiliyor; uzun boynu yanlış yerden bükülüyor. \"Sana yedinci koltuğu göstermeye karar verildi,\" diye fısıldıyor. \"Henüz kimin kararıyla olduğuna karar verilmedi.\"", en: "At the end of the feast, Ulvenne leans down beside you, long neck bending in the wrong place. \"It has been decided that you will be shown the seventh seat,\" it whispers. \"It has not yet been decided on whose authority.\"" }
+          - { tr: "Ziyafetin sonunda {npc:ulvenne} yanına eğiliyor; uzun boynu yanlış yerden bükülüyor. \"Sana yedinci koltuğu göstermeye karar verildi,\" diye fısıldıyor. \"Henüz kimin kararıyla olduğuna karar verilmedi.\"", en: "At the end of the feast, {npc:ulvenne} leans down beside you, long neck bending in the wrong place. \"It has been decided that you will be shown the seventh seat,\" it whispers. \"It has not yet been decided on whose authority.\"" }
           - { tr: "Salonun öbür ucunda biri seni izliyor. Derisinin altında üç ayrı dünyanın yıldızları dönüyor ve dördüncüsü için boş bir yer bırakılmış.", en: "At the far end of the hall, someone is watching you. Three separate worlds' worth of stars turn under its skin, and there's an empty space left for a fourth." }
         secenekler:
           - id: "bak"
@@ -2807,7 +2807,7 @@ olaylar:
               - dikkat: 2
             sonraki: "@akis"
           - id: "sor"
-            etiket: { tr: "Ulvenne'ye onun kim olduğunu sor", en: "Ask Ulvenne who that is" }
+            etiket: { tr: "{npc:ulvenne|e} onun kim olduğunu sor", en: "Ask {npc:ulvenne} who that is" }
             etkiler:
               - ahlak: { duzen: 1 }
             sonraki: "salon_varis"
@@ -2815,7 +2815,7 @@ olaylar:
       - id: "salon_varis"
         yer: "yedi_taht"
         paragraflar:
-          - { tr: "\"Ossiran,\" diyor Ulvenne. \"Yedinci Taht'ın varisi; kendi ilan ettiği. Üç dünya hasat etti. Dördüncüsü için seninkini seçti.\"", en: "\"Ossiran,\" Ulvenne says. \"Heir to the Seventh Throne, by his own declaration. He has harvested three worlds. For the fourth, he has chosen yours.\"" }
+          - { tr: "\"{npc:ossiran},\" diyor {npc:ulvenne}. \"Yedinci Taht'ın varisi; kendi ilan ettiği. Üç dünya hasat etti. Dördüncüsü için seninkini seçti.\"", en: "\"{npc:ossiran},\" {npc:ulvenne} says. \"Heir to the Seventh Throne, by his own declaration. He has harvested three worlds. For the fourth, he has chosen yours.\"" }
           - { tr: "\"Bazılarımız onun koltuğa oturmasını istemiyor,\" diye ekliyor, bir şey söylemediğini söylermiş gibi. \"Bir koltuk, bir talibin daha olduğunda çok daha ilginç olur.\"", en: "\"Some of us would prefer he did not take the seat,\" it adds, like it's not saying anything at all. \"A seat becomes much more interesting when it has a second claimant.\"" }
         secenekler:
           - id: "anla"
@@ -2841,22 +2841,22 @@ olaylar:
       - id: "koltuk_1"
         yer: "yedi_taht"
         paragraflar:
-          - { tr: "Ulvenne seni Yedi Taht'ın kalbine, taht salonuna götürüyor. Yedi koltuk bir yarım ay biçiminde dizilmiş; altısında birer Kadim oturuyor, her biri bir Hane'nin Sesi. Yedincisi boş.", en: "Ulvenne leads you into the heart of the Sevenfold Court: the throne room. Seven seats stand in a half-moon. On six sit Ancients, each one the Voice of a House. The seventh is empty." }
+          - { tr: "{npc:ulvenne} seni Yedi Taht'ın kalbine, taht salonuna götürüyor. Yedi koltuk bir yarım ay biçiminde dizilmiş; altısında birer Kadim oturuyor, her biri bir Hane'nin Sesi. Yedincisi boş.", en: "{npc:ulvenne} leads you into the heart of the Sevenfold Court: the throne room. Seven seats stand in a half-moon. On six sit Ancients, each one the Voice of a House. The seventh is empty." }
           - { tr: "Boş koltuk ötekilerden farklı. Taştan değil; binlerce ince, saydam pencerenin üst üste örülmesinden yapılmış ve içinde bir şey bekliyor. Bir dünya büyüklüğünde bir boşluk.", en: "The empty seat isn't like the others. It isn't stone. It's woven from thousands of thin, clear windows layered one over another, and something inside it is waiting: an emptiness the size of a world." }
-          - { tr: "\"Yedinci koltuk bin yıldır boş,\" diyor Ulvenne. \"Bir dünyayı tek başına hasat edene verilir. Gün 365'te senin dünyanın hasadı kime yazılırsa, koltuk onun olacak. Bunun bir Kadim olması gerekmiyor.\"", en: "\"The seventh seat has been empty for a thousand years,\" Ulvenne says. \"It goes to whoever harvests a world single-handed. On Day 365, whoever your world's harvest is credited to will have it. That does not have to be an Ancient.\"" }
-          - { tr: "Altı Ses aynı anda sana bakıyor. Odanın öbür ucunda Ossiran gülümsüyor; derisinde dördüncü dünya için ayrılmış karanlık nabız gibi atıyor.", en: "All six Voices look at you at once. Across the room Ossiran is smiling, and the dark he's saved in his skin for a fourth world is throbbing like a pulse." }
+          - { tr: "\"Yedinci koltuk bin yıldır boş,\" diyor {npc:ulvenne}. \"Bir dünyayı tek başına hasat edene verilir. Gün 365'te senin dünyanın hasadı kime yazılırsa, koltuk onun olacak. Bunun bir Kadim olması gerekmiyor.\"", en: "\"The seventh seat has been empty for a thousand years,\" {npc:ulvenne} says. \"It goes to whoever harvests a world single-handed. On Day 365, whoever your world's harvest is credited to will have it. That does not have to be an Ancient.\"" }
+          - { tr: "Altı Ses aynı anda sana bakıyor. Odanın öbür ucunda {npc:ossiran} gülümsüyor; derisinde dördüncü dünya için ayrılmış karanlık nabız gibi atıyor.", en: "All six Voices look at you at once. Across the room {npc:ossiran} is smiling, and the dark he's saved in his skin for a fourth world is throbbing like a pulse." }
         bildirimler:
           - tur: "sistem"
             nadirlik: "efsanevi"
             baslik: { tr: "[YEDİNCİ TAHT · talip kaydı]", en: "[SEVENTH THRONE · claimant registry]" }
             satirlar:
-              - { tr: "Talip 1: Ossiran (Kadim). Hedef: Dünya Katmanı.", en: "Claimant 1: Ossiran (Ancient). Target: Earth Layer." }
+              - { tr: "Talip 1: {npc:ossiran} (Kadim). Hedef: Dünya Katmanı.", en: "Claimant 1: {npc:ossiran} (Ancient). Target: Earth Layer." }
               - { tr: "Talip 2: kayıt bekliyor.", en: "Claimant 2: pending registration." }
         sezgiler:
           - kosul: { stat: { wis: 160 } }
-            metin: { tr: "Koltuğun içindeki boşluk senin dünyanın şeklinde. Kıyı çizgileri, dağlar, Kıyıkent'in körfezi. Biri onu çoktan ölçmüş.", en: "The emptiness inside the seat is shaped like your world. Coastlines, mountains, the bay at Port Harlow. Somebody's already measured it." }
+            metin: { tr: "Koltuğun içindeki boşluk senin dünyanın şeklinde. Kıyı çizgileri, dağlar, {yer:kiyikent|in} körfezi. Biri onu çoktan ölçmüş.", en: "The emptiness inside the seat is shaped like your world. Coastlines, mountains, the bay at {yer:kiyikent}. Somebody's already measured it." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "ona oturma. ya da otur, bilmiyorum. ama oturursan ben sende yer bulamayabilirim. oraya sekiz milyar kişi sığar ve ben çok küçüğüm.", en: "don't sit in it. or do, i don't know. but if you sit, i might not find room in you anymore. eight billion people fit in there, and i'm very small." }
+            metin: { tr: "ona oturma. ya da otur, bilmiyorum. ama oturursan ben sende yer bulamayabilirim. oraya bütün bir dünya sığar ve ben çok küçüğüm.", en: "don't sit in it. or do, i don't know. but if you sit, i might not find room in you anymore. a whole world fits in there, and i'm very small." }
         yoldas_tepkileri:
           - npc: "deniz_arman"
             kosul: { yoldas: "deniz_arman" }
@@ -2899,7 +2899,7 @@ olaylar:
             sonraki: "koltuk_pazarlik"
           - id: "kir"
             tur: "gosteris"
-            etiket: { tr: "Koltuğun kolunu kopar ve Ossiran'a fırlat", en: "Rip off the seat's armrest. Throw it at Ossiran" }
+            etiket: { tr: "Koltuğun kolunu kopar ve {npc:ossiran|e} fırlat", en: "Rip off the seat's armrest. Throw it at {npc:ossiran}" }
             gerekli: { stat: { str: 230 } }
             etkiler:
               - bolge: "yedi_taht"
@@ -2916,9 +2916,9 @@ olaylar:
       - id: "koltuk_otur"
         yer: "yedi_taht"
         paragraflar:
-          - { tr: "Oturduğun an koltuk açılıyor; içindeki boşluk değil, sen. Sekiz milyar pencere aynı anda önünde yanıyor; her biri bir insan, her biri bir seviye ve her biri sana doğru eğilmiş, rüzgâra yatan başaklar gibi.", en: "The moment you sit, the seat opens. Not the emptiness inside it. You. Eight billion windows light up in front of you at once, every one a person, every one a level, every one leaning toward you like wheat bending in the wind." }
+          - { tr: "Oturduğun an koltuk açılıyor; içindeki boşluk değil, sen. Hayatta kalan her insanın penceresi aynı anda önünde yanıyor; her biri bir insan, her biri bir seviye ve her biri sana doğru eğilmiş, rüzgâra yatan başaklar gibi.", en: "The moment you sit, the seat opens. Not the emptiness inside it. You. The window of every human still alive lights up in front of you at once, every one a person, every one a level, every one leaning toward you like wheat bending in the wind." }
           - { tr: "Tek bir düşünce yeter. Hepsi akar ve sen bir tanrı olursun. Bunun ne kadar kolay olacağını hissediyorsun ve bu kolaylık, gördüğün en korkunç şey.", en: "One thought would do it. All of it would flow in, and you'd be a god. You can feel exactly how easy it would be, and that easiness is the most horrifying thing you've ever seen." }
-          - { tr: "Pencerelerin arasında tanıdık olanlar var. Kıyıkent'ten. Seninle Öğretici'den çıkanlar.", en: "Some of the windows are familiar. People from Port Harlow. People who walked out of the Tutorial with you." }
+          - { tr: "Pencerelerin arasında tanıdık olanlar var. {yer:kiyikent|den}. Seninle Öğretici'den çıkanlar.", en: "Some of the windows are familiar. People from {yer:kiyikent}. People who walked out of the Tutorial with you." }
           - metin: { tr: "Bir pencere ötekilerden daha parlak ve sana eğilmiyor; tam tersine, geri çekiliyor. {npc:deniz_arman}.", en: "One window is brighter than the rest, and it doesn't lean toward you. It pulls away. {npc:deniz_arman}." }
             kosul: { npc_hayatta: "deniz_arman" }
         bildirimler:
@@ -2939,7 +2939,7 @@ olaylar:
               - itibar: { yukselenler: 8, kadimler: 4 }
               - degisken: { kadim_tehdit: 3 }
               - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 1, max: 2 } }
-            kronik: { tr: "Yedinci koltukta, sekiz milyar insanın sana doğru eğildiğini hissedecek kadar uzun oturdun; Yedi Taht seni Dünya'nın hasadına ikinci talip olarak yazdı.", en: "You sat in the seventh seat long enough to feel eight billion people lean toward you. The Sevenfold Court wrote you down as the second claimant to Earth's harvest." }
+            kronik: { tr: "Yedinci koltukta, hayatta kalan bütün insanlığın sana doğru eğildiğini hissedecek kadar uzun oturdun; Yedi Taht seni Dünya'nın hasadına ikinci talip olarak yazdı.", en: "You sat in the seventh seat long enough to feel every human left alive lean toward you. The Sevenfold Court wrote you down as the second claimant to Earth's harvest." }
             sonraki: "koltuk_kalkis"
           - id: "kalk"
             etiket: { tr: "Kalk. Hemen", en: "Get up. Now" }
@@ -2954,8 +2954,8 @@ olaylar:
       - id: "koltuk_kalkis"
         yer: "yedi_taht"
         paragraflar:
-          - { tr: "Ayağa kalktığında dizlerin titriyor. Sekiz milyar pencere sönüyor ama içinde bir yerde hâlâ eğiliyorlar.", en: "When you stand, your knees are shaking. Eight billion windows go dark, but somewhere inside you they're still leaning." }
-          - { tr: "Ossiran salonun öbür ucundan sana doğru yürüyor. Gülümsemesi gitmiş. \"Bir hasat,\" diyor yavaşça, \"hasatçısının koltuğuna oturmaz.\"", en: "Ossiran is crossing the room toward you. The smile is gone. \"A crop,\" he says slowly, \"does not sit in its harvester's chair.\"" }
+          - { tr: "Ayağa kalktığında dizlerin titriyor. Bütün o pencereler sönüyor ama içinde bir yerde hâlâ eğiliyorlar.", en: "When you stand, your knees are shaking. All those windows go dark, but somewhere inside you they're still leaning." }
+          - { tr: "{npc:ossiran} salonun öbür ucundan sana doğru yürüyor. Gülümsemesi gitmiş. \"Bir hasat,\" diyor yavaşça, \"hasatçısının koltuğuna oturmaz.\"", en: "{npc:ossiran} is crossing the room toward you. The smile is gone. \"A crop,\" he says slowly, \"does not sit in its harvester's chair.\"" }
         secenekler:
           - id: "cevap"
             etiket: { tr: "O zaman gel ve kaldır beni", en: "Then come get me out of it" }
@@ -2975,8 +2975,8 @@ olaylar:
         yer: "yedi_taht"
         paragraflar:
           - { tr: "Sırtını koltuğa dönüyorsun. Taht salonunda bin yıldır duyulmamış bir ses yükseliyor: altı Ses aynı anda nefes alıyor.", en: "You turn your back on the seat. A sound nobody's heard in this throne room for a thousand years goes up: six Voices inhaling at the same time." }
-          - { tr: "\"Hiçbir ölümlü,\" diyor Ulvenne, ve sesinde ilk kez bir şey var, \"bunu bize yapmamıştı.\"", en: "\"No mortal,\" Ulvenne says, and for the first time there's something in its voice, \"has ever done that to us.\"" }
-          - { tr: "Ossiran kahkaha atıyor. \"O zaman koltuk benim,\" diyor. \"Ve dünyan da.\"", en: "Ossiran laughs. \"Then the seat is mine,\" he says. \"And so is your world.\"" }
+          - { tr: "\"Hiçbir ölümlü,\" diyor {npc:ulvenne}; sesinde ilk kez bir şey var. \"Bunu bize yapmamıştı.\"", en: "\"No mortal,\" {npc:ulvenne} says, and for the first time there's something in its voice, \"has ever done that to us.\"" }
+          - { tr: "{npc:ossiran} kahkaha atıyor. \"O zaman koltuk benim,\" diyor. \"Ve dünyan da.\"", en: "{npc:ossiran} laughs. \"Then the seat is mine,\" he says. \"And so is your world.\"" }
         secenekler:
           - id: "hayir"
             etiket: { tr: "Ne koltuk ne dünya", en: "Neither one" }
@@ -2989,9 +2989,9 @@ olaylar:
       - id: "koltuk_kirildi"
         yer: "yedi_taht"
         paragraflar:
-          - { tr: "Koltuğun kolu, bin pencereden örülmüş o saydam kol, bir buz sarkıtı gibi kopuyor. Fırlatıyorsun ve Ossiran'ın göğsünde, derisinin altındaki karanlık boşluğun tam ortasında, paramparça oluyor.", en: "The seat's armrest, that clear arm woven from a thousand windows, snaps off like an icicle. You throw it, and it shatters dead center on Ossiran's chest, right in the dark hollow under his skin." }
+          - { tr: "Koltuğun kolu, bin pencereden örülmüş o saydam kol, bir buz sarkıtı gibi kopuyor. Fırlatıyorsun ve {npc:ossiran|in} göğsünde, derisinin altındaki karanlık boşluğun tam ortasında, paramparça oluyor.", en: "The seat's armrest, that clear arm woven from a thousand windows, snaps off like an icicle. You throw it, and it shatters dead center on {npc:ossiran|pos} chest, right in the dark hollow under his skin." }
           - { tr: "Altı Ses kıpırdamıyor. Ama altısının da derisindeki yıldızlar bir an titriyor; bin yıllık bir hesap, salonun ortasında, yanlış sonuç veriyor.", en: "None of the six Voices move. But the stars under all six skins shiver for a second. A thousand-year calculation just came out wrong, right in the middle of the room." }
-          - { tr: "Ossiran göğsündeki cam tozunu silkeliyor. \"Yarın,\" diyor. \"Hüküm salonunda. Altı tahtın önünde.\"", en: "Ossiran brushes the glass dust off his chest. \"Tomorrow,\" he says. \"In the Hall of Decree. Before all six thrones.\"" }
+          - { tr: "{npc:ossiran} göğsündeki cam tozunu silkeliyor. \"Yarın,\" diyor. \"Hüküm salonunda. Altı tahtın önünde.\"", en: "{npc:ossiran} brushes the glass dust off his chest. \"Tomorrow,\" he says. \"In the Hall of Decree. Before all six thrones.\"" }
         secenekler:
           - id: "kabul"
             etiket: { tr: "Yarın", en: "Tomorrow" }
@@ -3004,13 +3004,13 @@ olaylar:
         yer: "yedi_taht"
         paragraflar:
           - { tr: "Altı Ses birbirine bakıyor. Sonra Beşinci Taht'ın Sesi, bir çocuk büyüklüğünde ve bin yaşında bir Kadim, konuşuyor: \"Bir hasat pazarlık etmez. Ama bir talip eder.\"", en: "The six Voices look at each other. Then the Voice of the Fifth Throne, an Ancient the size of a child and a thousand years old, speaks: \"A crop does not bargain. But a claimant does.\"" }
-          - { tr: "Ulvenne teklifi açıklıyor: Ossiran'ı yenersen, Dünya'nın hasadı bu döngüde 'talipsiz' kalacak. Kadimler yine gelecek; ama bir Kadim'in koltuğu için değil. Bir anlaşma için.", en: "Ulvenne spells out the offer: beat Ossiran, and Earth's harvest stays 'unclaimed' this cycle. The Ancients will still come. But not for an Ancient's throne. For a treaty." }
+          - { tr: "{npc:ulvenne} teklifi açıklıyor: {npc:ossiran|i} yenersen, Dünya'nın hasadı bu döngüde 'talipsiz' kalacak. Kadimler yine gelecek; ama bir Kadim'in koltuğu için değil. Bir anlaşma için.", en: "{npc:ulvenne} spells out the offer: beat {npc:ossiran}, and Earth's harvest stays 'unclaimed' this cycle. The Ancients will still come. But not for an Ancient's throne. For a treaty." }
           - { tr: "Bir anlaşma. Pirinç Kervan'ın derisine yazılı olan türden. Bunu fark ettiğini görüyorlar ve kimse bir şey söylemiyor.", en: "A treaty. The kind written on the Brass Caravan's hide. They can see you realize it, and nobody says a word." }
-          - metin: { tr: "\"Elçimiz {npc:thessar} senin dünyanla masaya oturacak,\" diyor Ulvenne. \"Bu salon, onun getireceği senedi senin imzanla görmek istiyor.\"", en: "\"Our envoy {npc:thessar} will sit down at the table with your world,\" Ulvenne says. \"This hall would like to see the treaty he brings carry your signature.\"" }
+          - metin: { tr: "\"Elçimiz {npc:thessar} senin dünyanla masaya oturacak,\" diyor {npc:ulvenne}. \"Bu salon, onun getireceği senedi senin imzanla görmek istiyor.\"", en: "\"Our envoy {npc:thessar} will sit down at the table with your world,\" {npc:ulvenne} says. \"This hall would like to see the treaty he brings carry your signature.\"" }
             kosul: { bayrak: "thessar_indi", bayrak_yok: "ihanet_thessar" }
         secenekler:
           - id: "kabul"
-            etiket: { tr: "Kabul et; önce Ossiran", en: "Accept. Ossiran first" }
+            etiket: { tr: "Kabul et; önce {npc:ossiran}", en: "Accept. {npc:ossiran} first" }
             etkiler:
               - ahlak: { duzen: 4, insanlik: -3 }
               - itibar: { kadimler: 6 }
@@ -3043,7 +3043,7 @@ olaylar:
         yer: "yedi_taht"
         paragraflar:
           - { tr: "Taht salonundan çıkarken boş koltuk arkanda hafifçe parlıyor; içindeki boşluk hâlâ senin dünyanın şeklinde.", en: "As you leave the throne room, the empty seat glows faintly behind you, the hollow inside it still shaped like your world." }
-          - { tr: "Ulvenne kapıda seni durduruyor. \"Hüküm salonunda,\" diyor, \"altı taht seyreder ama karışmaz. Bu da bir oydur. Unutma.\"", en: "Ulvenne stops you at the door. \"In the Hall of Decree,\" it says, \"the six thrones watch, but do not intervene. That is also a vote. Remember that.\"" }
+          - { tr: "{npc:ulvenne} kapıda seni durduruyor. \"Hüküm salonunda,\" diyor, \"altı taht seyreder ama karışmaz. Bu da bir oydur. Unutma.\"", en: "{npc:ulvenne} stops you at the door. \"In the Hall of Decree,\" it says, \"the six thrones watch, but do not intervene. That is also a vote. Remember that.\"" }
         secenekler:
           - id: "hazir"
             etiket: { tr: "Hazırlan", en: "Get ready" }
@@ -3251,7 +3251,7 @@ olaylar:
         paragraflar:
           - { tr: "Hüküm salonunun çağrısı pencerende bir mühür olarak beliriyor ve seni nerede olursan ol Kule'nin ellinci katına, oradan da Yedi Taht'a çekiyor. Salon yuvarlak ve boş; tavanı yok, yerine yıldızsız bir karanlık.", en: "The Hall of Decree's summons shows up in your window as a seal, and wherever you are, it pulls you to the Spire's fiftieth floor and from there into the Sevenfold Court. The hall is round and empty. No ceiling, just a starless dark." }
           - { tr: "Duvarların yerine altı taht, altı Ses. Seyrediyorlar. Karışmayacaklar.", en: "Instead of walls, six thrones, six Voices. Watching. They won't step in." }
-          - { tr: "Ossiran ortada duruyor. Derisinin altında üç dünyanın yıldızları dönüyor ve dördüncü için ayrılmış boşluk artık senin şeklinde. \"Bir hasat,\" diyor, \"hasatçısına meydan okumaz. Bunu sana öğretmek benim için bir onur olacak.\"", en: "Ossiran stands in the middle. Three worlds' stars turn under his skin, and the space reserved for the fourth is shaped like you now. \"A crop,\" he says, \"does not challenge its harvester. It will be my honor to teach you that.\"" }
+          - { tr: "{npc:ossiran} ortada duruyor. Derisinin altında üç dünyanın yıldızları dönüyor ve dördüncü için ayrılmış boşluk artık senin şeklinde. \"Bir hasat,\" diyor, \"hasatçısına meydan okumaz. Bunu sana öğretmek benim için bir onur olacak.\"", en: "{npc:ossiran} stands in the middle. Three worlds' stars turn under his skin, and the space reserved for the fourth is shaped like you now. \"A crop,\" he says, \"does not challenge its harvester. It will be my honor to teach you that.\"" }
           - metin: { tr: "Altı Ses'ten biri, Beşinci Taht'ınki, sana hafifçe başını eğiyor. Anlaşmanız hâlâ geçerli.", en: "One of the six Voices, the Fifth Throne's, dips its head at you, just slightly. Your deal still stands." }
             kosul: { bayrak: "taht_ittifak" }
         bildirimler:
@@ -3259,11 +3259,11 @@ olaylar:
             nadirlik: "mitik"
             baslik: { tr: "[HÜKÜM DÜELLOSU]", en: "[DUEL OF DECREE]" }
             satirlar:
-              - { tr: "Talip: Ossiran. Karşı taraf: kayıtlı ya da değil, fark etmez.", en: "Claimant: Ossiran. Opponent: registered or not, irrelevant." }
+              - { tr: "Talip: {npc:ossiran}. Karşı taraf: kayıtlı ya da değil, fark etmez.", en: "Claimant: {npc:ossiran}. Opponent: registered or not, irrelevant." }
               - { tr: "Sonuç Dünya Katmanı'nın hasat kaydına işlenecek.", en: "The outcome will be entered into Earth Layer's harvest record." }
         sezgiler:
           - kosul: { stat: { per: 170 } }
-            metin: { tr: "Ossiran'ın görünen seviyesi tek bir varlığın değil; üç dünyanın toplamı. Yıldızları çıkarırsan altında kalan şey şaşırtıcı derecede küçük.", en: "Ossiran's visible level isn't one being's. It's three worlds added together. Take the stars away and what's left underneath is surprisingly small." }
+            metin: { tr: "{npc:ossiran|in} görünen seviyesi tek bir varlığın değil; üç dünyanın toplamı. Yıldızları çıkarırsan altında kalan şey şaşırtıcı derecede küçük.", en: "{npc:ossiran|pos} visible level isn't one being's. It's three worlds added together. Take the stars away and what's left underneath is surprisingly small." }
           - kosul: { bayrak: "yanki_bagi" }
             metin: { tr: "onun içindeki üç dünya birbirini sevmiyor. onları biraz karıştırabilirim. ama bunu yaparsam ben de biraz karışırım.", en: "the three worlds inside him don't like each other. i could stir them up a little. but if i do, i get a little stirred up too." }
         yoldas_tepkileri:
@@ -3310,15 +3310,15 @@ olaylar:
               - ahlak: { duzen: 2, merhamet: -2 }
               - itibar: { kadimler: -5 }
               - degisken: { kadim_tehdit: 6 }
-            kronik: { tr: "Yedi Taht'ın varisinin düellosunu reddettin; Ossiran dünyanı hasat listesine kendi adıyla yazdırdı.", en: "You refused the Sevenfold Court heir's duel, and Ossiran had your world entered on the harvest list under his own name." }
+            kronik: { tr: "Yedi Taht'ın varisinin düellosunu reddettin; {npc:ossiran} dünyanı hasat listesine kendi adıyla yazdırdı.", en: "You refused the Sevenfold Court heir's duel, and {npc:ossiran} had your world entered on the harvest list under his own name." }
             sonraki: "varis_ret"
 
       - id: "varis_zafer"
         yer: "yedi_taht"
         paragraflar:
-          - { tr: "Ossiran dizlerinin üstüne çöküyor. Derisi çatlamış; çatlaklardan üç dünyanın ışığı sızıyor ve o ışığın içinde bir sürü küçük, şaşkın yüz görüyorsun. Onun hasat ettikleri.", en: "Ossiran drops to his knees. His skin is cracked, light from three worlds leaking out of the seams, and inside that light you can see a crowd of small, bewildered faces. The ones he harvested." }
+          - { tr: "{npc:ossiran} dizlerinin üstüne çöküyor. Derisi çatlamış; çatlaklardan üç dünyanın ışığı sızıyor ve o ışığın içinde bir sürü küçük, şaşkın yüz görüyorsun. Onun hasat ettikleri.", en: "{npc:ossiran} drops to his knees. His skin is cracked, light from three worlds leaking out of the seams, and inside that light you can see a crowd of small, bewildered faces. The ones he harvested." }
           - { tr: "Altı taht kıpırdamıyor. Karışmadılar; bu da bir oydu. Şimdi senin ne yapacağını bekliyorlar.", en: "The six thrones don't move. They didn't step in, and that was a vote too. Now they're waiting to see what you'll do." }
-          - { tr: "\"Bitir,\" diyor Ossiran. \"Ya da al. Biz ikisinin arasında bir fark görmeyiz.\"", en: "\"Finish it,\" Ossiran says. \"Or take it. We do not see a difference between the two.\"" }
+          - { tr: "\"Bitir,\" diyor {npc:ossiran}. \"Ya da al. Biz ikisinin arasında bir fark görmeyiz.\"", en: "\"Finish it,\" {npc:ossiran} says. \"Or take it. We do not see a difference between the two.\"" }
         bildirimler:
           - tur: "unvan"
             nadirlik: "mitik"
@@ -3375,9 +3375,9 @@ olaylar:
       - id: "varis_yenilgi"
         yer: "yedi_taht"
         paragraflar:
-          - { tr: "Ossiran'ın avucu göğsünde. İtmiyor; çekiyor. Sayıların ona doğru eğiliyor ve derisindeki dördüncü boşluk senin ışığınla dolmaya başlıyor.", en: "Ossiran's palm is flat on your chest. He isn't pushing. He's pulling. Your numbers lean toward him, and the fourth hollow in his skin starts filling with your light." }
-          - { tr: "Sonra altı tahttan biri konuşuyor. Ulvenne'nin Sesi, İkinci Taht'tan: \"Konuk kaydında.\" Tek bir cümle; ama bu salonda bir yasa.", en: "Then one of the six thrones speaks. Ulvenne's Voice, from the Second Throne: \"It is on the guest registry.\" One sentence. In this hall, it's law." }
-          - { tr: "Ossiran elini çekiyor ve sen, yarısı boşalmış, pencereli zeminden aşağı, Kule'nin ellinci katına düşüyorsun.", en: "Ossiran pulls his hand back, and you, half drained, fall down through the window floor to the Spire's fiftieth floor." }
+          - { tr: "{npc:ossiran|in} avucu göğsünde. İtmiyor; çekiyor. Sayıların ona doğru eğiliyor ve derisindeki dördüncü boşluk senin ışığınla dolmaya başlıyor.", en: "{npc:ossiran|pos} palm is flat on your chest. He isn't pushing. He's pulling. Your numbers lean toward him, and the fourth hollow in his skin starts filling with your light." }
+          - { tr: "Sonra altı tahttan biri konuşuyor. {npc:ulvenne|in} Sesi, İkinci Taht'tan: \"Konuk kaydında.\" Tek bir cümle; ama bu salonda bir yasa.", en: "Then one of the six thrones speaks. {npc:ulvenne|pos} Voice, from the Second Throne: \"It is on the guest registry.\" One sentence. In this hall, it's law." }
+          - { tr: "{npc:ossiran} elini çekiyor ve sen, yarısı boşalmış, pencereli zeminden aşağı, Kule'nin ellinci katına düşüyorsun.", en: "{npc:ossiran} pulls his hand back, and you, half drained, fall down through the window floor to the Spire's fiftieth floor." }
         secenekler:
           - id: "kalk"
             etiket: { tr: "Kule'nin taşında nefeslen", en: "Catch your breath on the Spire's stone" }
@@ -3395,7 +3395,7 @@ olaylar:
         yer: "yedi_taht"
         paragraflar:
           - { tr: "Pencereli zemine yumruğunu indiriyorsun ve cam açılıyor; aşağı, Kule'ye düşüyorsun. Yukarıda altı taht kıpırdamıyor.", en: "You slam your fist into the window floor and the glass gives way. You drop through it, down into the Spire. Up above, the six thrones don't move." }
-          - { tr: "Ossiran'ın sesi peşinden geliyor: \"Kaçan bir hasat hâlâ bir hasattır.\"", en: "Ossiran's voice follows you down: \"A crop that runs is still a crop.\"" }
+          - { tr: "{npc:ossiran|in} sesi peşinden geliyor: \"Kaçan bir hasat hâlâ bir hasattır.\"", en: "{npc:ossiran|pos} voice follows you down: \"A crop that runs is still a crop.\"" }
         secenekler:
           - id: "kalk"
             etiket: { tr: "Ayağa kalk", en: "Get up" }
@@ -3405,14 +3405,14 @@ olaylar:
               - gorev: { cok_evren_taht: basarisiz }
               - ahlak: { duzen: 1, merhamet: -2 }
               - degisken: { kadim_tehdit: 5 }
-            kronik: { tr: "Yedi Taht'ın hüküm salonundan kaçtın; Ossiran dünyanı kendi listesine yazdırdı.", en: "You ran from the Sevenfold Court's Hall of Decree, and Ossiran entered your world on his own list." }
+            kronik: { tr: "Yedi Taht'ın hüküm salonundan kaçtın; {npc:ossiran} dünyanı kendi listesine yazdırdı.", en: "You ran from the Sevenfold Court's Hall of Decree, and {npc:ossiran} entered your world on his own list." }
             sonraki: "@akis"
 
       - id: "varis_ret"
         yer: "kule_dibi"
         paragraflar:
-          - { tr: "Salondan çıkıyorsun ve mühürlü kapı arkandan kapanıyor. Kule Dibi'nde akşam; insanlar tezgâhlarını topluyor.", en: "You walk out of the hall, and the sealed door shuts behind you. It's evening in Spire Plaza. People are packing up their stalls." }
-          - { tr: "Gece yarısı herkesin penceresi aynı anda çalıyor: [Dünya Katmanı · hasat talibi kaydedildi: Ossiran.] Kimse bunun ne demek olduğunu bilmiyor. Sen biliyorsun.", en: "At midnight everybody's window goes off at once: [Earth Layer · harvest claimant registered: Ossiran.] Nobody knows what that means. You do." }
+          - { tr: "Salondan çıkıyorsun ve mühürlü kapı arkandan kapanıyor. Kule Dibi'nde akşam; insanlar tezgâhlarını topluyor.", en: "You walk out of the hall, and the sealed door shuts behind you. It's evening in {yer:kule_dibi}. People are packing up their stalls." }
+          - { tr: "Gece yarısı herkesin penceresi aynı anda çalıyor: [Dünya Katmanı · hasat talibi kaydedildi: {npc:ossiran}.] Kimse bunun ne demek olduğunu bilmiyor. Sen biliyorsun.", en: "At midnight everybody's window goes off at once: [Earth Layer · harvest claimant registered: {npc:ossiran}.] Nobody knows what that means. You do." }
         secenekler:
           - id: "bak"
             etiket: { tr: "Ellinci kata bak ve bekle", en: "Look up at the fiftieth floor and wait" }
@@ -3424,8 +3424,8 @@ olaylar:
       - id: "varis_son"
         yer: "yedi_taht"
         paragraflar:
-          - { tr: "Altı taht ayağa kalkıyor. Bu, bin yıldır olmamış. Ulvenne hüküm salonunun ortasına yürüyor ve Kadim dilinde bir şey okuyor; Sistem çeviriyor: [Dünya Katmanı'nın hasadının talipsiz kalmasına karar verildi.]", en: "The six thrones rise. That hasn't happened in a thousand years. Ulvenne walks into the middle of the Hall of Decree and reads something in the Ancient language, and the System translates: [It has been decided that the harvest of Earth Layer shall remain unclaimed.]" }
-          - metin: { tr: "\"Bu döngüde,\" diye ekliyor Ulvenne, alçak sesle, yalnızca sana. \"Gerisi elçimizin masasına kaldı. Anlaşmamızı unutmadık.\"", en: "\"For this cycle,\" Ulvenne adds quietly, only to you. \"The rest is left to our envoy's table. We have not forgotten our arrangement.\"" }
+          - { tr: "Altı taht ayağa kalkıyor. Bu, bin yıldır olmamış. {npc:ulvenne} hüküm salonunun ortasına yürüyor ve Kadim dilinde bir şey okuyor; Sistem çeviriyor: [Dünya Katmanı'nın hasadının talipsiz kalmasına karar verildi.]", en: "The six thrones rise. That hasn't happened in a thousand years. {npc:ulvenne} walks into the middle of the Hall of Decree and reads something in the Ancient language, and the System translates: [It has been decided that the harvest of Earth Layer shall remain unclaimed.]" }
+          - metin: { tr: "\"Bu döngüde,\" diye ekliyor {npc:ulvenne}, alçak sesle, yalnızca sana. \"Gerisi elçimizin masasına kaldı. Anlaşmamızı unutmadık.\"", en: "\"For this cycle,\" {npc:ulvenne} adds quietly, only to you. \"The rest is left to our envoy's table. We have not forgotten our arrangement.\"" }
             kosul: { bayrak: "taht_ittifak" }
           - metin: { tr: "Altı Ses'in derilerindeki yıldızlar sana doğru kayıyor; bir çiçeğin güneşe dönmesi gibi. İçindeki üç dünya onları tanıyor ve selamlıyor.", en: "The stars under the six Voices' skin drift toward you, like a flower turning to the sun. The three worlds inside you recognize them, and salute." }
             kosul: { bayrak: "ossiran_yutuldu" }
@@ -3472,7 +3472,7 @@ olaylar:
       - id: "kesh_1"
         yer: "kule"
         paragraflar:
-          - { tr: "Sığınak'ın Kule Dibi'ndeki çadırından bir gönüllü seni nerede olursan ol buluyor. \"Ellinci kattaki su kapısından biri çıktı,\" diyor. \"Kimseyle konuşmuyor; yalnızca seni tarif ediyor.\"", en: "A volunteer from the Haven's tent in Spire Plaza tracks you down wherever you are. \"Somebody came out of the water door up on fifty,\" she says. \"Won't talk to anybody. Just keeps describing you.\"" }
+          - { tr: "Sığınak'ın Kule Dibi'ndeki çadırından bir gönüllü seni nerede olursan ol buluyor. \"Ellinci kattaki su kapısından biri çıktı,\" diyor. \"Kimseyle konuşmuyor; yalnızca seni tarif ediyor.\"", en: "A volunteer from the Haven's tent in {yer:kule_dibi} tracks you down wherever you are. \"Somebody came out of the water door up on fifty,\" she says. \"Won't talk to anybody. Just keeps describing you.\"" }
           - metin: { tr: "Geçidin önünde Kesh duruyor; arkasında altı Nehha, sırtlarında kemik zıpkınlar, ayaklarının dibinde birikmiş deniz suyu. Avcılar etraflarında yarım çember olmuş; kimse silahını indirmiyor, kimse kaldırmıyor da.", en: "Kesh is standing in front of the gate with six Nehha behind him, bone harpoons on their backs, seawater pooling at their feet. Hunters have formed a half circle around them. Nobody's lowering a weapon. Nobody's raising one either." }
             kosul: { bayrak_yok: "batik_hasat_yutuldu" }
           - metin: { tr: "Seni görünce Kesh zıpkınını ikinci kez ayaklarının dibine bırakıyor. Sistem çeviriyor: [Bir kez bırakılan zıpkın teşekkürdür. İkinci kez bırakılan, yemin.]", en: "When he sees you, Kesh lays his harpoon at your feet for the second time. The System translates: [A harpoon laid down once is thanks. Laid down twice, it is an oath.]" }
@@ -3554,13 +3554,13 @@ olaylar:
       - id: "kesh_yemin"
         yer: "kule"
         paragraflar:
-          - { tr: "Zıpkını yerden alıp Kesh'e uzatıyorsun. Bir an elini uzatmıyor; sonra alıyor ve sapını bir kez yere vuruyor, arkasındaki altı Nehha da aynısını yapıyor. Kule Dibi'nin taşlarında yedi kuru ses çınlıyor.", en: "You pick the harpoon up and hold it out to Kesh. For a second he doesn't reach for it. Then he takes it and knocks the butt against the ground once, the six behind him do the same, and seven dry knocks ring off the stones of Spire Plaza." }
+          - { tr: "Zıpkını yerden alıp Kesh'e uzatıyorsun. Bir an elini uzatmıyor; sonra alıyor ve sapını bir kez yere vuruyor, arkasındaki altı Nehha da aynısını yapıyor. {yer:kule_dibi|in} taşlarında yedi kuru ses çınlıyor.", en: "You pick the harpoon up and hold it out to Kesh. For a second he doesn't reach for it. Then he takes it and knocks the butt against the ground once, the six behind him do the same, and seven dry knocks ring off the stones of {yer:kule_dibi}." }
           - { tr: "Penceren güncelleniyor; ama yedi satır yerine yalnızca bir tane: [Ordu: +7. Tür: tanımsız. Seviye: okunamıyor.] Sistem onları sayıyor; ama neyi saydığını bilmiyor.", en: "Your window updates, but instead of seven lines there's just one: [Army: +7. Type: undefined. Level: unreadable.] The System is counting them. It just doesn't know what it's counting." }
-          - metin: { tr: "{npc:yanki}: çanlarını duydun mu? Sistem'in kayıt frekansının tam tersinde çalıyorlar. o sesi öğrenebilirim. öğrenirsem bir gün Sistem de bizi duymayabilir.", en: "{npc:yanki}: did you hear their bells? they ring at the exact inverse of the System's logging frequency. i could learn that sound. if i do, someday the System might not hear us either." }
+          - metin: { tr: "{npc:yanki}: çanlarını duydun mu? sistemin kayıt frekansının tam tersinde çalıyorlar. o sesi öğrenebilirim. öğrenirsem bir gün sistem de bizi duymayabilir.", en: "{npc:yanki}: did you hear their bells? they ring at the exact inverse of the system's logging frequency. i could learn that sound. if i do, someday the system might not hear us either." }
             kosul: { bayrak: "yanki_bagi" }
         secenekler:
           - id: "kordon"
-            etiket: { tr: "Onları Kordon'un sahil hattına yerleştir; deniz onların", en: "Post them on the Esplanade shore. The sea is theirs" }
+            etiket: { tr: "Onları {yer:kordon|in} sahil hattına yerleştir; deniz onların", en: "Post them on {yer:kordon} shore. The sea is theirs" }
             etkiler:
               - ahlak: { duzen: 2, merhamet: 1 }
               - degisken: { hayatta_kalan: 1 }
@@ -3712,7 +3712,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "İçine uzanıyorsun; elle değil, iradeyle. Sistem uyarı üstüne uyarı basıyor ve sen hepsini kapatıyorsun. Sonra dört yüz on dokuzu buluyorsun: öbür sayılarının arasında, yabancı bir dilde konuşan biri gibi.", en: "You reach inside, not with your hand but with your will. The System throws up warning after warning and you close every one. Then you find four hundred and nineteen, sitting among your other numbers like someone speaking a foreign language." }
-          - { tr: "Söktüğünde dizlerinin bağı çözülüyor ve Kule Dibi'nin taşlarına çöküyorsun. Avucunda küçük, sönük bir pencere: 419.", en: "When you tear it loose, your knees give out and you go down on the stones of Spire Plaza. In your palm, a small, dim window: 419." }
+          - { tr: "Söktüğünde dizlerinin bağı çözülüyor ve {yer:kule_dibi|in} taşlarına çöküyorsun. Avucunda küçük, sönük bir pencere: 419.", en: "When you tear it loose, your knees give out and you go down on the stones of {yer:kule_dibi}. In your palm, a small, dim window: 419." }
           - { tr: "Kesh pencereyi iki eliyle, bir yumurtayı tutar gibi alıyor. Tek kelime etmeden geçide koşuyor ve suya dalıyor. Bir saat sonra geçidin ardından bir çan sesi geliyor: tek ve uzun.", en: "Kesh takes the window in both hands like he's holding an egg. Without a word, he runs for the gate and dives. An hour later a bell sounds from the other side: once, long." }
         bildirimler:
           - tur: "sistem"

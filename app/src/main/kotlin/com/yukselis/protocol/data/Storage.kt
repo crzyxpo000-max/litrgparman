@@ -80,20 +80,23 @@ class SettingsStore(context: Context) {
 
     // ---- Aşama 7: oyunlar arası meta (Döngü sonu, New Game+) ----
 
-    /** Bu cihazda bitirilmiş oyun sayısı (Döngü sonunun koşulu). */
-    fun completedGames(): Int = prefs.getInt(KEY_COMPLETED, 0)
+    /** Bu cihazda bitirilmiş oyun sayısı (Döngü sonunun koşulu): farklı oyun tohumlarının sayısı. */
+    fun completedGames(): Int = maxOf(prefs.getInt(KEY_COMPLETED, 0), finishedSeeds().size)
+
+    private fun finishedSeeds(): Set<String> = prefs.getStringSet(KEY_SEEDS, emptySet()) ?: emptySet()
 
     /** Döngü sonu görüldü: başlıkta New Game+ açılır. */
     fun newGamePlusUnlocked(): Boolean = prefs.getBoolean(KEY_NG_PLUS, false)
 
     fun endingsSeen(): Set<String> = prefs.getStringSet(KEY_ENDINGS, emptySet()) ?: emptySet()
 
-    /** Bir oyunun sonunu bir kez kaydeder (aynı oyun tohumu iki kez sayılmaz). */
+    /**
+     * Bir oyunun sonunu kaydeder. Bitirilmiş oyun sayısı farklı tohumlardan gelir (aynı oyun ya da eski bir kaydın
+     * yeniden yüklenmesi iki kez sayılmaz); görülen sonlar ve New Game+ her seferinde birleşir.
+     */
     fun recordEnding(gameSeed: Long, endingId: String, unlocksNewGamePlus: Boolean) {
-        if (prefs.getLong(KEY_LAST_SEED, 0L) == gameSeed && prefs.contains(KEY_LAST_SEED)) return
         prefs.edit()
-            .putLong(KEY_LAST_SEED, gameSeed)
-            .putInt(KEY_COMPLETED, completedGames() + 1)
+            .putStringSet(KEY_SEEDS, finishedSeeds() + gameSeed.toString())
             .putStringSet(KEY_ENDINGS, endingsSeen() + endingId)
             .putBoolean(KEY_NG_PLUS, newGamePlusUnlocked() || unlocksNewGamePlus)
             .apply()
@@ -103,7 +106,7 @@ class SettingsStore(context: Context) {
         const val KEY_COMPLETED = "meta_completed"
         const val KEY_NG_PLUS = "meta_ng_plus"
         const val KEY_ENDINGS = "meta_endings"
-        const val KEY_LAST_SEED = "meta_last_seed"
+        const val KEY_SEEDS = "meta_finished_seeds"
         const val KEY_LANG = "lang"
         const val KEY_TYPEWRITER = "typewriter"
         const val KEY_HAPTICS = "haptics"

@@ -66,7 +66,7 @@ class Director(private val content: Content) {
     fun seedConditionHolds(state: WorldState, seed: Seed): Boolean {
         val raw = seed.condition ?: return true
         val focused = state.copy(focusNpc = seed.npc ?: state.focusNpc)
-        return runCatching { ContentParser.condition(YamlTree.parseObject(raw, "tohum koşulu")).test(focused) }.getOrDefault(false)
+        return runCatching { ContentParser.condition(YamlTree.parseObject(raw, "tohum koşulu"), content.endings).test(focused) }.getOrDefault(false)
     }
 
     /** Hedef gerilim eğrisi: yükselen → zirve → nefes. Dikkat yükseldikçe eğri yukarı kayar. */

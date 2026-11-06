@@ -27,12 +27,12 @@ olaylar:
           - { tr: "Tepsiyi taşıyan genç, Öğretici'de sana yakıt listesini getiren mürit. Bir ayda on yaş büyümüş gibi. \"Artık bana On Üç diyorlar,\" diyor; sesinde gurur mu var utanç mı, çıkaramıyorsun. \"Listede kaçıncı olduğumu kimse unutmasın diye.\"", en: "The kid carrying the tray is the disciple who brought you the fuel list back in the Tutorial. He looks ten years older in one month. \"They call me Thirteen now,\" he says, and you can't tell if it's pride or shame. \"So nobody forgets where I was on the list.\"" }
           - metin: { tr: "Gözleri bir an ellerine kayıyor. \"Adımı bir kez yaktın,\" diyor alçak sesle. \"O günden beri onu geri kazanmaya çalışıyorum.\"", en: "His eyes drop to your hands for a second. \"You burned my name once,\" he says, low. \"I've been trying to earn it back ever since.\"" }
             kosul: { bayrak: "yakit_listesi_yakildi" }
-          - { tr: "\"Peygamber seni {yer:tepe|e} çağırıyor. Bu gece Çağrı var.\" Tepsiyi biraz daha uzatıyor. \"Ya cübbeyi giyersin ya külü sürersin; Tepe'de üçüncü bir renk yok.\"", en: "\"The Prophet's calling you up to {yer:tepe}. Tonight's the Calling.\" He holds the tray out a little farther. \"You put on the robe or you put on the ash. There's no third color on the hill.\"" }
-          - metin: { tr: "Fraksiyonların seni istediği gün onların yanında durmuştun; kâğıt üstünde zaten onlardansın. Ama On Üç'ün bakışı açık: Tepe'de kâğıdın hükmü yok, orada insan renginden tanınır.", en: "On the day the factions came for you, you stood with them. On paper, you're already one of them. But the look Thirteen gives you says it plain: paper doesn't count on the hill. Up there, they know you by your color." }
+          - { tr: "\"Peygamber seni {yer:tepe|e} çağırıyor. Bu gece Çağrı var.\" Tepsiyi biraz daha uzatıyor. \"Ya cübbeyi giyersin ya külü sürersin; {yer:tepe|de} üçüncü bir renk yok.\"", en: "\"The Prophet's calling you up to {yer:tepe}. Tonight's the Calling.\" He holds the tray out a little farther. \"You put on the robe or you put on the ash. There's no third color on the hill.\"" }
+          - metin: { tr: "Fraksiyonların seni istediği gün onların yanında durmuştun; kâğıt üstünde zaten onlardansın. Ama On Üç'ün bakışı açık: {yer:tepe|de} kâğıdın hükmü yok, orada insan renginden tanınır.", en: "On the day the factions came for you, you stood with them. On paper, you're already one of them. But the look Thirteen gives you says it plain: paper doesn't count on the hill. Up there, they know you by your color." }
             kosul: { bayrak: "uye_yukselenler" }
-          - metin: { tr: "Fenerlerin ışığı yolun aşağısına vuruyor. Kordon'dan kaçanlar battaniyeleri ve bebek arabalarıyla yokuşa tırmanıyor; çoğunun alnında şimdiden gri bir başparmak izi var.", en: "Lantern light spills down the road. People who ran from the Esplanade are climbing the hill with blankets and strollers, and most of them already have a gray thumbprint on their foreheads." }
+          - metin: { tr: "Fenerlerin ışığı yolun aşağısına vuruyor. {yer:kordon|den} kaçanlar battaniyeleri ve bebek arabalarıyla yokuşa tırmanıyor; çoğunun alnında şimdiden gri bir başparmak izi var.", en: "Lantern light spills down the road. People who ran from {yer:kordon} are climbing the hill with blankets and strollers, and most of them already have a gray thumbprint on their foreheads." }
             kosul: { bayrak: "kordon_dustu" }
-          - metin: { tr: "Kasaba Çekirdeği'nin uğultusu bu akşam bir ilahiye benziyor. Çekirdek onların; şehrin bütün panelleri artık Tepe'nin saatine göre yanıp sönüyor.", en: "Tonight the hum of the Town Core sounds like a hymn. The Core belongs to them now, and every panel in the city blinks on the hill's schedule." }
+          - metin: { tr: "Kasaba Çekirdeği'nin uğultusu bu akşam bir ilahiye benziyor. Çekirdek onların; şehrin bütün panelleri artık {yer:tepe|in} saatine göre yanıp sönüyor.", en: "Tonight the hum of the Town Core sounds like a hymn. The Core belongs to them now, and every panel in the city blinks on the hill's schedule." }
             kosul: { bayrak: "cekirdek_yukselenler" }
         sezgiler:
           - kosul: { stat: { per: 40 } }
@@ -45,13 +45,13 @@ olaylar:
             metin: { tr: "\"O kâseyi tanıyorum. Külü sürenlerin hiçbiri koğuşuma geri dönmedi.\"", en: "\"I know that bowl. Not one person who wore the ash ever came back to my ward.\"" }
           - npc: "mert_kilic"
             kosul: { yoldas: "mert_kilic" }
-            metin: { tr: "\"Tepe'den her gece bir sinyal çıkıyor. Kısa, düzenli. Biri bir şey sayıyor.\"", en: "\"There's a signal coming off that hill every night. Short. Regular. Somebody up there is counting something.\"" }
+            metin: { tr: "\"{yer:tepe|den} her gece bir sinyal çıkıyor. Kısa, düzenli. Biri bir şey sayıyor.\"", en: "\"There's a signal coming off that hill every night. Short. Regular. Somebody up there is counting something.\"" }
           - npc: "deniz_arman"
             kosul: { yoldas: "deniz_arman" }
             metin: { tr: "\"Bu insanlar kardeşimi aldı. Gidiyorsan ben de geliyorum.\"", en: "\"These people took my sister. If you're going up there, I'm coming.\"" }
         secenekler:
           - id: "cubbe"
-            etiket: { tr: "Beyaz cübbeyi al ve Tepe'ye çık", en: "Take the white robe. Climb the hill" }
+            etiket: { tr: "Beyaz cübbeyi al ve {yer:tepe|e} çık", en: "Take the white robe. Climb the hill" }
             etkiler:
               - tanis: "vahit"
               - bolge: "tepe"
@@ -59,7 +59,7 @@ olaylar:
               - ahlak: { duzen: 2, insanlik: -2 }
               - itibar: { yukselenler: 4 }
               - iliski: { vahit: { saygi: 3 } }
-            kronik: { tr: "Beyaz cübbeyi kendi elinle aldın; Tepe seni o gece kendi renginden saydı.", en: "You took the white robe with your own hands. From that night on, the hill counted you as one of its own." }
+            kronik: { tr: "Beyaz cübbeyi kendi elinle aldın; {yer:tepe} seni o gece kendi renginden saydı.", en: "You took the white robe with your own hands. From that night on, the hill counted you as one of its own." }
             sonraki: "yuk1_tepe"
           - id: "kul"
             tur: "gizle"
@@ -70,7 +70,7 @@ olaylar:
               - bayrak: "vahit_yakin_takip"
               - gizle: 4
               - ahlak: { insanlik: 3, merhamet: 1 }
-            kronik: { tr: "Tepe'ye yakıtın arasında, alnında külle çıktın ve onların gözünden baktın.", en: "You climbed the hill among the fuel, ash on your forehead, and saw it through their eyes." }
+            kronik: { tr: "{yer:tepe|e} yakıtın arasında, alnında külle çıktın ve onların gözünden baktın.", en: "You climbed the hill among the fuel, ash on your forehead, and saw it through their eyes." }
             sonraki: "yuk1_kul"
           - id: "ret"
             etiket: { tr: "Tepsiyi geri çevir", en: "Hand the tray back" }
@@ -80,11 +80,11 @@ olaylar:
               - ahlak: { insanlik: 2, duzen: -1 }
               - itibar: { yukselenler: -4 }
               - iliski: { vahit: { guven: -3 } }
-            kronik: { tr: "Tepe'nin çağrısını kapında geri çevirdin; tepsi yine de eşiğinde kaldı.", en: "You turned the hill's Calling away at your own door. The tray stayed on your step anyway." }
+            kronik: { tr: "{yer:tepe|in} çağrısını kapında geri çevirdin; tepsi yine de eşiğinde kaldı.", en: "You turned the hill's Calling away at your own door. The tray stayed on your step anyway." }
             sonraki: "yuk1_ret"
           - id: "insin"
             tur: "gosteris"
-            etiket: { tr: "Peygamber kendisi insin; Tepe sana gelsin", en: "Let the Prophet come down. The hill comes to you" }
+            etiket: { tr: "Peygamber kendisi insin; {yer:tepe} sana gelsin", en: "Let the Prophet come down. The hill comes to you" }
             gerekli: { stat: { cha: 45 } }
             etkiler:
               - tanis: "vahit"
@@ -99,7 +99,7 @@ olaylar:
       - id: "yuk1_tepe"
         yer: "tepe"
         paragraflar:
-          - { tr: "Tepe Mahallesi'nin dar sokakları fenerle dolu. Çamaşır iplerinde çarşafların yerine beyaz cübbeler kuruyor; her kapının üstüne kömürle tek bir göz çizilmiş.", en: "The narrow streets of the Heights are full of lanterns. White robes hang drying on the clotheslines where the bedsheets used to be, and over every door someone has drawn a single eye in charcoal." }
+          - { tr: "Tepe Mahallesi'nin dar sokakları fenerle dolu. Çamaşır iplerinde çarşafların yerine beyaz cübbeler kuruyor; her kapının üstüne kömürle tek bir göz çizilmiş.", en: "The narrow streets of {yer:tepe} are full of lanterns. White robes hang drying on the clotheslines where the bedsheets used to be, and over every door someone has drawn a single eye in charcoal." }
           - { tr: "Doruğunda eski rasathane duruyor; kubbesi yarık, teleskobu çoktan sökülmüş. Kubbenin altındaki taş sarnıçta bir Kapı açık; kimse onu kapatmamış, kimsenin kapatmaya niyeti de yok. Zarı süt gibi beyaz ve nefes alıyor.", en: "The old observatory sits at the top, its dome split open, the telescope long since stripped out. Down in the stone reservoir under the dome there's an open Gate; nobody's closed it, and nobody means to. Its membrane is milk-white, and it breathes." }
           - { tr: "Sarnıcın çevresinde iki halka var. İçeride beyazlar; dışarıda, taş basamaklarda, alınlarında gri başparmak iziyle yakıt. Hepsi ilahi söylüyor ve en yüksek sesle söyleyenler dışarıdakiler.", en: "There are two rings around the reservoir. Inside, the white robes. Outside, on the stone steps, the fuel, each with a gray thumbprint on the forehead. Everyone's singing, and the loudest are the ones on the outside." }
           - { tr: "{npc:vahit} sarnıcın ağzında duruyor; eskisinden zayıf, eskisinden parlak. \"Sistem bana bir merdiven gösterdi,\" diyor, sesi yine mikrofonsuz her kulağa ulaşarak, \"ve basamaklarını size saydırdı. Bu gece en üst basamak bize geldi.\"", en: "{npc:vahit} stands at the mouth of the reservoir, thinner than before and brighter. \"The System showed me a ladder,\" he says, and his voice still reaches every ear without a mic, \"and it had you count the rungs. Tonight, the top rung came to us.\"" }
@@ -145,7 +145,7 @@ olaylar:
               - iliski: { vahit: { saygi: 10, korku: 6 } }
               - bayrak: "yakit_reddi_goruldu"
               - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } } }
-            kronik: { tr: "Sarnıcın zarına kendi elini soktun ve Sistem seni yakmayı reddetti; Tepe o geceyi bir mucize diye anlattı.", en: "You pushed your own hand into the membrane and the System refused to burn you. The hill told it as a miracle." }
+            kronik: { tr: "Sarnıcın zarına kendi elini soktun ve Sistem seni yakmayı reddetti; {yer:tepe} o geceyi bir mucize diye anlattı.", en: "You pushed your own hand into the membrane and the System refused to burn you. The hill told it as a miracle." }
             sonraki: "yuk1_kendin"
           - id: "ikircik"
             etiket: { tr: "\"Tırmanırım. Ama kimseyi yakmam.\"", en: "\"I'll climb. I'm not burning anybody.\"" }
@@ -156,7 +156,7 @@ olaylar:
               - iliski: { vahit: { guven: -4, saygi: 4 } }
               - bayrak: "yukselenler_ikircikli"
               - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } } }
-            kronik: { tr: "Beyazı giydin ama kimseyi adlandırmadın; Tepe bunu bir süre sabır, bir süre de inat saydı.", en: "You wore the white but named no one. For a while the hill called it patience. Then it called it stubbornness." }
+            kronik: { tr: "Beyazı giydin ama kimseyi adlandırmadın; {yer:tepe} bunu bir süre sabır, bir süre de inat saydı.", en: "You wore the white but named no one. For a while the hill called it patience. Then it called it stubbornness." }
             sonraki: "yuk1_ikircik"
           - id: "casus"
             etiket: { tr: "Kabul et; gördüğün her şeyi dışarı taşı", en: "Say yes. Carry everything you see back out" }
@@ -168,7 +168,7 @@ olaylar:
               - bayrak: "yukselenler_casus"
               - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 6, max: 12 } }
               - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } } }
-            kronik: { tr: "Beyazı bir maske gibi giydin; Tepe'nin sırları senin cebinde aşağı indi.", en: "You wore the white like a mask, and the hill's secrets walked down in your pockets." }
+            kronik: { tr: "Beyazı bir maske gibi giydin; {yer:tepe|in} sırları senin cebinde aşağı indi.", en: "You wore the white like a mask, and the hill's secrets walked down in your pockets." }
             sonraki: "yuk1_casus"
           - id: "cik"
             etiket: { tr: "Cübbeyi sarnıca at ve aşağı in", en: "Toss the robe in the reservoir. Walk down" }
@@ -184,7 +184,7 @@ olaylar:
       - id: "yuk1_isim"
         yer: "tepe"
         paragraflar:
-          - { tr: "Gözlerin basamaklarda geziniyor ve bir yüzde duruyor: Kordon'un tuzunu hâlâ saçında taşıyan yaşlı bir adam. Bakışını yakalıyor ve gülümsüyor; seçilmiş olmak bu yüze ne kadar yakışıyor, görünce midene bir şey oturuyor.", en: "Your eyes move over the steps and land on one face: an old man with sea salt still in his hair. He catches you looking and smiles, and the way being chosen lights him up sits in your stomach like a stone." }
+          - { tr: "Gözlerin basamaklarda geziniyor ve bir yüzde duruyor: {yer:kordon|in} tuzunu hâlâ saçında taşıyan yaşlı bir adam. Bakışını yakalıyor ve gülümsüyor; seçilmiş olmak bu yüze ne kadar yakışıyor, görünce midene bir şey oturuyor.", en: "Your eyes move over the steps and land on one face: an old man with sea salt still in his hair. He catches you looking and smiles, and the way being chosen lights him up sits in your stomach like a stone." }
           - { tr: "Adını söylüyor; sen de tekrar ediyorsun. Halka bir ağızdan tekrarlıyor ve isim sarnıcın taş duvarlarında üç kez yankılanıyor.", en: "He tells you his name. You say it back. The ring repeats it in one voice, and the name echoes three times off the reservoir's stone walls." }
           - { tr: "\"Torunum içeride,\" diyor adam sana, halkanın beyaz tarafını göstererek. \"Ben yanınca o tırmanacak. Teşekkür ederim. Gerçekten.\"", en: "\"My granddaughter's in there,\" the old man tells you, pointing at the white side of the ring. \"When I burn, she climbs. Thank you. Really.\"" }
         bildirimler:
@@ -221,7 +221,7 @@ olaylar:
               - itibar: { yukselenler: -4 }
               - iliski: { vahit: { guven: -4, saygi: 2 } }
               - hafiza: { npc: "vahit", id: "kurbani_kurtardi", agirlik: -15 }
-            kronik: { tr: "Bir ismi sarnıca söyleyip geri aldın; Tepe bunu ilk tereddüdün diye yazdı.", en: "You said a name to the reservoir and then took it back. The hill wrote it down as your first hesitation." }
+            kronik: { tr: "Bir ismi sarnıca söyleyip geri aldın; {yer:tepe} bunu ilk tereddüdün diye yazdı.", en: "You said a name to the reservoir and then took it back. The hill wrote it down as your first hesitation." }
             sonraki: "@akis"
 
       - id: "yuk1_torun"
@@ -274,7 +274,7 @@ olaylar:
               - itibar: { yukselenler: -2 }
               - iliski: { vahit: { guven: -3 } }
               - degisken: { hayatta_kalan: 1 }
-            kronik: { tr: "Tepe'nin ortasında, kimsenin yanmak zorunda olmadığını söyledin; birkaç kişi o gece külü sildi.", en: "In the middle of the hill, you said nobody had to burn. A few people wiped off their ash that night." }
+            kronik: { tr: "{yer:tepe|in} ortasında, kimsenin yanmak zorunda olmadığını söyledin; birkaç kişi o gece külü sildi.", en: "In the middle of the hill, you said nobody had to burn. A few people wiped off their ash that night." }
             sonraki: "@akis"
           - id: "diz"
             etiket: { tr: "Bırak diz çöksünler", en: "Let them kneel" }
@@ -314,7 +314,7 @@ olaylar:
               - ahlak: { merhamet: 4, duzen: -1 }
               - degisken: { hayatta_kalan: 1 }
               - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 4, max: 9 } }
-            kronik: { tr: "Senin adına yakılacak kadını gece yarısı uyardın; çocuklarıyla birlikte Tepe'den kaçtı.", en: "You warned the woman they meant to burn in your name. She ran off the hill with her kids." }
+            kronik: { tr: "Senin adına yakılacak kadını gece yarısı uyardın; çocuklarıyla birlikte {yer:tepe|den} kaçtı.", en: "You warned the woman they meant to burn in your name. She ran off the hill with her kids." }
             sonraki: "@akis"
 
       - id: "yuk1_casus"
@@ -331,22 +331,22 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 2, duzen: 1 }
               - itibar: { siginak: 4 }
-            kronik: { tr: "Tepe'nin haritasını Sığınak Konseyi'ne verdin; o harita sonra birçok kapıyı açtı.", en: "You handed the Haven Council a map of the hill. That map opened a lot of doors later." }
+            kronik: { tr: "{yer:tepe|in} haritasını Sığınak Konseyi'ne verdin; o harita sonra birçok kapıyı açtı.", en: "You handed the Haven Council a map of the hill. That map opened a lot of doors later." }
             sonraki: "@akis"
           - id: "sessiz_aga"
-            etiket: { tr: "Sessiz Ağ'a Tepe'nin sinyal saatini ver", en: "Give the Quiet Network the hill's signal times" }
+            etiket: { tr: "Sessiz Ağ'a {yer:tepe|in} sinyal saatini ver", en: "Give the Quiet Network the hill's signal times" }
             etkiler:
               - ahlak: { duzen: -2, insanlik: 1 }
               - itibar: { sessiz_ag: 4 }
               - bilgi: "yakit_katkisi"
-            kronik: { tr: "Tepe'nin gece sinyallerini Sessiz Ağ'a verdin; radyocular sayacın ne saydığını çözdü.", en: "You gave the hill's night signals to the Quiet Network. The radio crew worked out what the counter was counting." }
+            kronik: { tr: "{yer:tepe|in} gece sinyallerini Sessiz Ağ'a verdin; radyocular sayacın ne saydığını çözdü.", en: "You gave the hill's night signals to the Quiet Network. The radio crew worked out what the counter was counting." }
             sonraki: "@akis"
           - id: "kendine"
             etiket: { tr: "Kimseye söyleme; kendine sakla", en: "Tell no one. Keep it for yourself" }
             etkiler:
               - ahlak: { insanlik: -2, duzen: -1 }
               - bilgi: "yakit_katkisi"
-            kronik: { tr: "Tepe'nin sırlarını kimseyle paylaşmadın; onları yalnızca kendin için biriktirdin.", en: "You shared the hill's secrets with no one. You kept them, all of them, for yourself." }
+            kronik: { tr: "{yer:tepe|in} sırlarını kimseyle paylaşmadın; onları yalnızca kendin için biriktirdin.", en: "You shared the hill's secrets with no one. You kept them, all of them, for yourself." }
             sonraki: "@akis"
 
       - id: "yuk1_cikis"
@@ -369,13 +369,13 @@ olaylar:
               - iliski: { vahit: { korku: 4, guven: -4 } }
               - degisken: { hayatta_kalan: 3 }
               - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 5, max: 10 } }
-            kronik: { tr: "Tepe'den inerken peşine yirmi kişi taktın; çoğu bir daha yokuşu çıkmadı.", en: "Twenty people followed you down off the hill. Most of them never climbed it again." }
+            kronik: { tr: "{yer:tepe|den} inerken peşine yirmi kişi taktın; çoğu bir daha yokuşu çıkmadı.", en: "Twenty people followed you down off the hill. Most of them never climbed it again." }
             sonraki: "@akis"
           - id: "in"
             etiket: { tr: "Arkana bakmadan in", en: "Walk down without looking back" }
             etkiler:
               - ahlak: { insanlik: 1, duzen: 1 }
-            kronik: { tr: "Tepe'yi arkana bakmadan terk ettin; ilahi seni yokuşun dibine kadar izledi.", en: "You left the hill without looking back. The hymn followed you all the way to the bottom." }
+            kronik: { tr: "{yer:tepe|i} arkana bakmadan terk ettin; ilahi seni yokuşun dibine kadar izledi.", en: "You left the hill without looking back. The hymn followed you all the way to the bottom." }
             sonraki: "@akis"
           - id: "yemin"
             etiket: { tr: "{npc:vahit|e} dön: \"Bu sarnıcı kapatacağım.\"", en: "Turn to {npc:vahit}: \"I'll close this reservoir.\"" }
@@ -396,7 +396,7 @@ olaylar:
             etiket: { tr: "Yut ve yürü", en: "Swallow it. Keep walking" }
             etkiler:
               - ahlak: { duzen: 1 }
-            kronik: { tr: "Kimse peşinden gelmedi; Tepe senin için de bir ilahi yazdı.", en: "Nobody followed you. The hill wrote a hymn about you anyway." }
+            kronik: { tr: "Kimse peşinden gelmedi; {yer:tepe} senin için de bir ilahi yazdı.", en: "Nobody followed you. The hill wrote a hymn about you anyway." }
             sonraki: "@akis"
           - id: "cocuk"
             etiket: { tr: "Ayağa kalkan çocuğun yüzünü aklına yaz", en: "Burn that kid's face into your memory" }
@@ -410,7 +410,7 @@ olaylar:
         yer: "tepe"
         paragraflar:
           - { tr: "Alnındaki kül soğuk ve yağlı. Yokuşu gri bir kalabalıkla tırmanıyorsun; kimse sana bakmıyor, çünkü yakıt yakıta bakmaz. Herkes yukarıya, kubbenin yarığından sızan beyaz ışığa bakıyor.", en: "The ash on your forehead is cold and greasy. You climb the hill in a gray crowd, and nobody looks at you, because fuel doesn't look at fuel. Everybody's looking up at the white light leaking out of the split dome." }
-          - { tr: "Basamakta yanına oturan kadın Kordon'dan. \"Oğlum içeride,\" diyor, halkanın beyaz tarafını göstererek. \"Ben yandıkça o yükseliyor. Annelik başka ne ki?\"", en: "The woman who sits down next to you on the steps is from the Esplanade. \"My boy's in there,\" she says, pointing to the white side of the ring. \"Every time I burn a little, he climbs. What else is being a mother?\"" }
+          - { tr: "Basamakta yanına oturan kadın {yer:kordon|den}. \"Oğlum içeride,\" diyor, halkanın beyaz tarafını göstererek. \"Ben yandıkça o yükseliyor. Annelik başka ne ki?\"", en: "The woman who sits down next to you on the steps is from {yer:kordon}. \"My boy's in there,\" she says, pointing to the white side of the ring. \"Every time I burn a little, he climbs. What else is being a mother?\"" }
           - { tr: "Rasathanenin içindeki kara tahtayı buradan görebiliyorsun: seçilmişlerin adları ve her birinin altına tebeşirle yazılmış \"yakıtları\". Kadının adı oğlunun adının altında. Hemen yanında, kenarda, yeni bir satır: \"Anomali — gelecek.\"", en: "From here you can see the chalkboard inside the observatory: the names of the Chosen, and under each one, chalked in, their \"fuel.\" The woman's name sits under her son's. Right next to it, off to the side, there's a fresh line: \"The anomaly — coming.\"" }
           - { tr: "Sonra {npc:vahit} vaazını yarıda kesiyor. Bakışları basamaklarda geziniyor ve sende duruyor. \"Sistem seçilmişini yakıtın arasına saklamış,\" diyor yumuşakça, \"bizi sınamak için.\"", en: "Then {npc:vahit} stops mid-sermon. His eyes travel over the steps and stop on you. \"The System hid its Chosen among the fuel,\" he says softly, \"to test us.\"" }
         sezgiler:
@@ -428,7 +428,7 @@ olaylar:
               - ahlak: { duzen: 2, insanlik: -3 }
               - itibar: { yukselenler: 10 }
               - iliski: { vahit: { saygi: 10, baglilik: 6 } }
-            kronik: { tr: "Yakıtın arasından kalktın ve gerçek seviyeni gösterdin; Tepe seni o gün kendi tanrısı ilan etti.", en: "You rose up out of the fuel and showed your real level. That day the hill declared you its god." }
+            kronik: { tr: "Yakıtın arasından kalktın ve gerçek seviyeni gösterdin; {yer:tepe} seni o gün kendi tanrısı ilan etti.", en: "You rose up out of the fuel and showed your real level. That day the hill declared you its god." }
             sonraki: "yuk1_kul_ifsa"
           - id: "egil"
             tur: "gizle"
@@ -451,7 +451,7 @@ olaylar:
               - iliski: { vahit: { guven: -8, korku: 6 } }
               - hafiza: { npc: "vahit", id: "kurbani_kurtardi", agirlik: -30 }
               - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 5, max: 10 } }
-            kronik: { tr: "Yakıtın arasından kalkıp kırk kişiyi Tepe'den indirdin; peygamber seni durdurmaya cesaret edemedi.", en: "You stood up out of the fuel and led forty people off the hill. The prophet didn't dare stop you." }
+            kronik: { tr: "Yakıtın arasından kalkıp kırk kişiyi {yer:tepe|den} indirdin; peygamber seni durdurmaya cesaret edemedi.", en: "You stood up out of the fuel and led forty people off the hill. The prophet didn't dare stop you." }
             sonraki: "yuk1_kul_inis"
 
       - id: "yuk1_kul_ifsa"
@@ -506,33 +506,33 @@ olaylar:
               - ahlak: { merhamet: 3, duzen: 2 }
               - itibar: { siginak: 4 }
               - degisken: { hayatta_kalan: 2 }
-            kronik: { tr: "Tepe'den indirdiğin kırk kişiyi Sığınak'a teslim ettin; çoğu bir yıl sonra hâlâ yaşıyordu.", en: "You handed the forty from the hill over to the Haven Council. A year later most of them were still alive." }
+            kronik: { tr: "{yer:tepe|den} indirdiğin kırk kişiyi Sığınak'a teslim ettin; çoğu bir yıl sonra hâlâ yaşıyordu.", en: "You handed the forty from the hill over to the Haven Council. A year later most of them were still alive." }
             sonraki: "@akis"
           - id: "kendi"
             etiket: { tr: "Onları kendi kanadının altına al", en: "Take them under your own wing" }
             etkiler:
               - ahlak: { merhamet: 2, insanlik: -1 }
               - ordu: { lonca_avcisi: 2 }
-            kronik: { tr: "Tepe'nin yakıtını kendi insanların yaptın; sana Tepe'dekinden farklı bakmadılar.", en: "You made the hill's fuel into your own people. They didn't look at you any differently than they'd looked at the hill." }
+            kronik: { tr: "{yer:tepe|in} yakıtını kendi insanların yaptın; sana {yer:tepe|de}kinden farklı bakmadılar.", en: "You made the hill's fuel into your own people. They didn't look at you any differently than they'd looked at the hill." }
             sonraki: "@akis"
           - id: "secsinler"
             etiket: { tr: "\"Nereye gideceğinize siz karar verin.\"", en: "\"You decide where you go.\"" }
             etkiler:
               - ahlak: { duzen: -3, insanlik: 2 }
               - degisken: { hayatta_kalan: 1 }
-            kronik: { tr: "Kırk kişiye nereye gideceklerini kendilerinin seçmesini söyledin; altısı Tepe'ye geri döndü.", en: "You told forty people to choose where they'd go. Six of them climbed back up the hill." }
+            kronik: { tr: "Kırk kişiye nereye gideceklerini kendilerinin seçmesini söyledin; altısı {yer:tepe|e} geri döndü.", en: "You told forty people to choose where they'd go. Six of them climbed back up the hill." }
             sonraki: "@akis"
 
       - id: "yuk1_ret"
         paragraflar:
           - { tr: "On Üç tepsiyi geri almıyor. Eşiğine bırakıyor, cübbeyi ve kâseyi yan yana. \"Peygamber 'reddedecek' dedi,\" diyor. \"Sonra da 'gelecek' dedi.\"", en: "Thirteen doesn't take the tray back. He sets it on your step, robe and bowl side by side. \"The Prophet said you'd refuse,\" he says. \"Then he said you'd come.\"" }
-          - { tr: "Fenerler yokuşa doğru uzaklaşıyor. Gece boyunca Tepe'den gelen ilahiyi duyuyorsun; ritmi senin nefesine uymaya çalışıyor gibi.", en: "The lanterns move off toward the hill. All night you can hear the hymn coming down from the Heights. Its rhythm seems to be trying to match your breathing." }
+          - { tr: "Fenerler yokuşa doğru uzaklaşıyor. Gece boyunca {yer:tepe|den} gelen ilahiyi duyuyorsun; ritmi senin nefesine uymaya çalışıyor gibi.", en: "The lanterns move off toward the hill. All night you can hear the hymn coming down from {yer:tepe}. Its rhythm seems to be trying to match your breathing." }
         secenekler:
           - id: "yak"
             etiket: { tr: "Cübbeyi ve külü ateşe at", en: "Throw the robe and the ash in the fire" }
             etkiler:
               - ahlak: { insanlik: 1, duzen: -1 }
-            kronik: { tr: "Tepe'nin cübbesini kendi ateşinde yaktın.", en: "You burned the hill's robe in your own fire." }
+            kronik: { tr: "{yer:tepe|in} cübbesini kendi ateşinde yaktın.", en: "You burned the hill's robe in your own fire." }
             sonraki: "@akis"
           - id: "sakla"
             etiket: { tr: "Cübbeyi katla ve bir kenara koy", en: "Fold the robe. Put it away" }
@@ -561,7 +561,7 @@ olaylar:
             metin: { tr: "s̷istem ona bir şey demedi. ya da dedi ve ben duymadım. ikisinden hangisinin daha kötü olduğunu bilmiyorum.", en: "t̷he system didn't say anything to him. or it did, and i didn't hear it. i don't know which one's worse." }
         secenekler:
           - id: "onunde"
-            etiket: { tr: "Kabul et; Tepe'ye onun önünde çık", en: "Accept. Walk up the hill ahead of him" }
+            etiket: { tr: "Kabul et; {yer:tepe|e} onun önünde çık", en: "Accept. Walk up the hill ahead of him" }
             etkiler:
               - gorev: { zincir_yukselenler: "basla" }
               - bolge: "tepe"
@@ -609,16 +609,16 @@ olaylar:
       - id: "yuk2_defter"
         yer: "tepe"
         paragraflar:
-          - { tr: "Sabah bir mürit kapını çalıyor: Peygamber seni rasathanede bekliyor. Yokuşu çıkıyorsun; Tepe'nin pencerelerinden beyaz yüzler seni selamlıyor.", en: "A disciple knocks on your door in the morning: the Prophet is waiting for you at the observatory. You climb the hill, and white faces greet you from the windows of the Heights." }
+          - { tr: "Sabah bir mürit kapını çalıyor: Peygamber seni rasathanede bekliyor. Yokuşu çıkıyorsun; {yer:tepe|in} pencerelerinden beyaz yüzler seni selamlıyor.", en: "A disciple knocks on your door in the morning: the Prophet is waiting for you at the observatory. You climb the hill, and white faces greet you from the windows of {yer:tepe}." }
           - { tr: "Rasathanenin kubbesi altında, eskiden yıldız haritalarının asılı olduğu duvarda şimdi tek bir defter çivili duruyor. Kalın, mavi kapaklı bir muhasebe defteri; sayfaları kenarından aşağı sarkıyor.", en: "Under the observatory dome, on the wall where the star charts used to hang, there's one ledger nailed open. A fat, blue-covered accounting book, its pages sagging over the edge." }
           - { tr: "Her satırda bir ad, bir seviye, bir adres. Başlık {npc:vahit|in} yuvarlak, sakin el yazısıyla: \"BÜYÜK AYİN · İLK MEVSİM · YAKIT: 300\".", en: "Every line has a name, a level, an address. The heading is in {npc:vahit|pos} round, calm handwriting: \"THE GREAT RITE · FIRST SEASON · FUEL: 300\"." }
           - metin: { tr: "Seviyeler Kasaba Çekirdeği'nden okunmuş; her satırın yanında Çekirdek'in mavi damgası var. Şehrin bütün seviyeleri artık bu kubbenin altında.", en: "The levels were read straight off the Town Core. Every line carries the Core's blue stamp. Every level in the city lives under this dome now." }
             kosul: { bayrak: "cekirdek_yukselenler" }
           - metin: { tr: "Seviyeleri sokak sokak dolaşan müritler toplamış; kapı kapı, gülümseyerek, \"Sistem sizi merak ediyor\" diyerek.", en: "The levels were collected by disciples going street by street, door to door, smiling, saying \"The System's curious about you.\"" }
             kosul: { bayrak_yok: "cekirdek_yukselenler" }
-          - metin: { tr: "İlk sayfanın tamamı Kordon'dan: düşen sahilden kaçan ailelerin adları, Tepe'deki çadır numaralarıyla birlikte.", en: "The whole first page is from the Esplanade: the families who fled the fallen waterfront, listed with their tent numbers on the hill." }
+          - metin: { tr: "İlk sayfanın tamamı {yer:kordon|den}: düşen sahilden kaçan ailelerin adları, {yer:tepe|de}ki çadır numaralarıyla birlikte.", en: "The whole first page is from {yer:kordon}: the families who fled the fallen waterfront, listed with their tent numbers on the hill." }
             kosul: { bayrak: "kordon_dustu" }
-          - metin: { tr: "Kordon tutulduğu için defterde Kordon'dan tek bir isim yok. {npc:vahit} bunu sana bir iltifat gibi söylüyor: \"Senin kurtardığın sahil bize yakıt vermedi.\"", en: "Because the Esplanade held, there isn't a single name from there in the ledger. {npc:vahit} says it to you like a compliment: \"The shore you saved didn't give us any fuel.\"" }
+          - metin: { tr: "{yer:kordon} tutulduğu için defterde {yer:kordon|den} tek bir isim yok. {npc:vahit} bunu sana bir iltifat gibi söylüyor: \"Senin kurtardığın sahil bize yakıt vermedi.\"", en: "Because {yer:kordon} held, there isn't a single name from there in the ledger. {npc:vahit} says it to you like a compliment: \"The shore you saved didn't give us any fuel.\"" }
             kosul: { bayrak: "kordon_kurtarildi" }
           - metin: { tr: "Bir şartın vardı: yakıt sırası kalkacaktı. {npc:vahit} defteri gösterip omuz silkiyor. \"Sıra kalktı,\" diyor. \"Bu bir sıra değil; bu bir defter.\"", en: "You had one condition: the fuel line goes away. {npc:vahit} gestures at the ledger and shrugs. \"The line's gone,\" he says. \"This isn't a line. It's a ledger.\"" }
             kosul: { bayrak: "yakit_sarti" }
@@ -708,7 +708,7 @@ olaylar:
               - bayrak: "yukselenler_2_tamam"
               - iliski: { vahit: { guven: 2 } }
               - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 3, max: 7 } }
-            kronik: { tr: "Yakıt defterini imzalar gibi yapıp kopyasını Tepe'den indirdin; yüzlerce kişi Büyük Ayin'den önce ortadan kayboldu.", en: "You pretended to sign the fuel ledger and smuggled a copy off the hill. Hundreds of people vanished before the Great Rite." }
+            kronik: { tr: "Yakıt defterini imzalar gibi yapıp kopyasını {yer:tepe|den} indirdin; yüzlerce kişi Büyük Ayin'den önce ortadan kayboldu.", en: "You pretended to sign the fuel ledger and smuggled a copy off the hill. Hundreds of people vanished before the Great Rite." }
             sonraki: "yuk2_sizinti"
 
       - id: "yuk2_imza"
@@ -743,7 +743,7 @@ olaylar:
             kronik: { tr: "Yakıt defterini imzaladığın kırmızı kalemi yanında taşıdın.", en: "You carried the red pen you signed the fuel ledger with." }
             sonraki: "@akis"
           - id: "as"
-            etiket: { tr: "Defteri Tepe'nin meydanına astır", en: "Have the ledger hung in the hill's square" }
+            etiket: { tr: "Defteri {yer:tepe|in} meydanına astır", en: "Have the ledger hung in the hill's square" }
             etkiler:
               - ahlak: { duzen: 4, insanlik: -3 }
               - dikkat: 2
@@ -760,7 +760,7 @@ olaylar:
           - { tr: "Çocuğunu yükseltmek isteyen anneler. Bir kapıda ekibini kaybetmiş avcılar. \"Artık bir işe yarayayım\" diyen yaşlılar. Gülümseyen bir genç: \"Ben de ışığa gitmek istiyorum.\" İstekliler, anlıyorsun, en korkunç kısımmış.", en: "Mothers who want to lift their kids. Hunters who lost their whole crew in a Gate. Old folks saying \"let me be useful for once.\" A smiling teenager: \"I want to go to the light too.\" The willing, you realize, are the worst part." }
         sezgiler:
           - kosul: { stat: { wis: 50 } }
-            metin: { tr: "Bu insanların çoğu ölmek istemiyor. Bir şeyin parçası olmak istiyorlar; ölüm, Tepe'nin onlara sattığı tek parça.", en: "Most of these people don't want to die. They want to be part of something. Death is the only part the hill has for sale." }
+            metin: { tr: "Bu insanların çoğu ölmek istemiyor. Bir şeyin parçası olmak istiyorlar; ölüm, {yer:tepe|in} onlara sattığı tek parça.", en: "Most of these people don't want to die. They want to be part of something. Death is the only part the hill has for sale." }
         secenekler:
           - id: "dagit"
             etiket: { tr: "Kuyruğu dağıt; kimse gitmeyecek", en: "Break up the line. Nobody's going" }
@@ -845,7 +845,7 @@ olaylar:
               - bayrak: "yakit_listesi_imzalandi"
               - bayrak: "yukselenler_2_tamam"
               - iliski: { vahit: { korku: 8, baglilik: 4 } }
-            kronik: { tr: "Peygamberin yakıt payını kendi adına yazdın; Tepe'nin ağzı o günden sonra senin için yedi.", en: "You signed the prophet's share of the fuel over to yourself. From then on, the hill's mouth ate for you." }
+            kronik: { tr: "Peygamberin yakıt payını kendi adına yazdın; {yer:tepe|in} ağzı o günden sonra senin için yedi.", en: "You signed the prophet's share of the fuel over to yourself. From then on, the hill's mouth ate for you." }
             sonraki: "@akis"
           - id: "kapat"
             etiket: { tr: "Hesabı açık bırak ve defteri kapat", en: "Leave the math up. Close the ledger" }
@@ -881,11 +881,11 @@ olaylar:
               - savas: { dusmanlar: ["yukselen_muhafiz@dunya", "yukselen_muhafiz@dunya"], ortam: ["karanlik"], kazan: "yuk2_yak_zafer", kaybet: "yuk2_yak_yenilgi" }
             kronik: { tr: "Rasathanenin kubbesi altında beyaz cübbelilerle dövüştün.", en: "You fought the white robes under the observatory dome." }
           - id: "in"
-            etiket: { tr: "Arkanı dön ve Tepe'den in", en: "Turn your back. Walk down off the hill" }
+            etiket: { tr: "Arkanı dön ve {yer:tepe|den} in", en: "Turn your back. Walk down off the hill" }
             etkiler:
               - ahlak: { insanlik: 2 }
               - iliski: { vahit: { saygi: 3 } }
-            kronik: { tr: "Bıçakları arkanda bırakıp Tepe'den yürüyerek indin; kimse peşinden gelmeye cesaret edemedi.", en: "You turned your back on the knives and walked off the hill. Nobody dared follow." }
+            kronik: { tr: "Bıçakları arkanda bırakıp {yer:tepe|den} yürüyerek indin; kimse peşinden gelmeye cesaret edemedi.", en: "You turned your back on the knives and walked off the hill. Nobody dared follow." }
             sonraki: "@akis"
 
       - id: "yuk2_yak_zafer"
@@ -915,14 +915,14 @@ olaylar:
         yer: "tepe"
         paragraflar:
           - { tr: "Bıçaklardan biri kaburgalarının arasından geçiyor. Dizlerinin üstüne çöküyorsun; gözlerinin önü kararırken {npc:vahit|in} çıplak ayaklarını görüyorsun.", en: "One of the knives slides between your ribs. You go down on your knees, and as your vision goes dark you can see {npc:vahit|pos} bare feet." }
-          - { tr: "\"Yeter,\" diyor. \"Sistem'in seçtiğini Sistem'den başkası öldüremez.\" Uyandığında Tepe'nin dibindesin; yaraların sarılmış, yanında kül dolu küçük bir kâse.", en: "\"Enough,\" he says. \"Nobody but the System gets to kill the System's chosen.\" When you wake up you're at the bottom of the hill, your wounds bandaged, a little bowl of ash next to you." }
+          - { tr: "\"Yeter,\" diyor. \"Sistem'in seçtiğini Sistem'den başkası öldüremez.\" Uyandığında {yer:tepe|in} dibindesin; yaraların sarılmış, yanında kül dolu küçük bir kâse.", en: "\"Enough,\" he says. \"Nobody but the System gets to kill the System's chosen.\" When you wake up you're at the bottom of the hill, your wounds bandaged, a little bowl of ash next to you." }
         secenekler:
           - id: "kase"
             etiket: { tr: "Kâseyi yokuşa fırlat", en: "Hurl the bowl back up the hill" }
             etkiler:
               - can: -10
               - ahlak: { duzen: -1, insanlik: 1 }
-            kronik: { tr: "Tepe'de yenildin; peygamberin sana bıraktığı kül kâsesini yokuşa geri fırlattın.", en: "You lost on the hill, and threw the bowl of ash the prophet left you right back up the slope." }
+            kronik: { tr: "{yer:tepe|de} yenildin; peygamberin sana bıraktığı kül kâsesini yokuşa geri fırlattın.", en: "You lost on the hill, and threw the bowl of ash the prophet left you right back up the slope." }
             sonraki: "@akis"
           - id: "sakla"
             etiket: { tr: "Kâseyi sakla; bunu unutmayacaksın", en: "Keep the bowl. You won't forget this" }
@@ -930,7 +930,7 @@ olaylar:
               - can: -10
               - ahlak: { merhamet: -1, duzen: 1 }
               - esya: { kul_muhru: 1 }
-            kronik: { tr: "Tepe'deki yenilgini, peygamberin bıraktığı kül kâsesinde sakladın.", en: "You kept your defeat on the hill in the bowl of ash the prophet left you." }
+            kronik: { tr: "{yer:tepe|de}ki yenilgini, peygamberin bıraktığı kül kâsesinde sakladın.", en: "You kept your defeat on the hill in the bowl of ash the prophet left you." }
             sonraki: "@akis"
 
       - id: "yuk2_sizinti"
@@ -946,7 +946,7 @@ olaylar:
               - ahlak: { merhamet: 3, insanlik: 2 }
               - bayrak: "on_ucuncu_cizildi"
               - iliski: { vahit: { guven: -1 } }
-            kronik: { tr: "Bir müridin adını, kendisini değil, Tepe'den kaçırdın.", en: "You smuggled a disciple's name off the hill. Not the disciple." }
+            kronik: { tr: "Bir müridin adını, kendisini değil, {yer:tepe|den} kaçırdın.", en: "You smuggled a disciple's name off the hill. Not the disciple." }
             sonraki: "@akis"
           - id: "onu"
             etiket: { tr: "\"Adın değil, sen kurtulmalısın.\"", en: "\"Not your name. You need to get out.\"" }
@@ -956,7 +956,7 @@ olaylar:
               - bayrak: "on_ucuncu_kacti"
               - degisken: { hayatta_kalan: 1 }
               - iliski: { vahit: { guven: -3 } }
-            kronik: { tr: "On Üç'ü o gece Tepe'den kaçırdın; adı defterden silinmeden önce kendisi gitmişti.", en: "You got Thirteen off the hill that night. He was gone before his name was ever crossed out." }
+            kronik: { tr: "On Üç'ü o gece {yer:tepe|den} kaçırdın; adı defterden silinmeden önce kendisi gitmişti.", en: "You got Thirteen off the hill that night. He was gone before his name was ever crossed out." }
             sonraki: "@akis"
           - id: "kandir"
             etiket: { tr: "Ona Peygamber'in seni yolladığını söyle", en: "Tell him the Prophet sent you" }
@@ -977,7 +977,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 1, merhamet: 1 }
               - bayrak: "on_ucuncu_cizildi"
-            kronik: { tr: "On Üç'ü kurtaramadın; yalnızca adını Tepe'den indirebildin.", en: "You couldn't save Thirteen. You could only get his name off the hill." }
+            kronik: { tr: "On Üç'ü kurtaramadın; yalnızca adını {yer:tepe|den} indirebildin.", en: "You couldn't save Thirteen. You could only get his name off the hill." }
             sonraki: "@akis"
           - id: "bekle"
             etiket: { tr: "Karanlıkta bir süre daha bekle", en: "Wait in the dark a while longer" }
@@ -1002,14 +1002,14 @@ olaylar:
       - id: "yuk3_ayin"
         yer: "tepe"
         paragraflar:
-          - { tr: "Mevsim dönüyor ve Tepe'nin bütün fenerleri aynı anda yanıyor. Sarnıcın zarı artık kubbeye sığmıyor; rasathanenin yarığından taşmış, göğe doğru beyaz bir sütun gibi yükseliyor ve nefes aldıkça bütün yokuş onunla birlikte nefes alıyor.", en: "The season turns, and every lantern on the Heights lights at once. The reservoir's membrane doesn't fit under the dome anymore. It has spilled up out of the split and rises toward the sky like a white pillar, and every time it breathes, the whole hill breathes with it." }
+          - { tr: "Mevsim dönüyor ve {yer:tepe|in} bütün fenerleri aynı anda yanıyor. Sarnıcın zarı artık kubbeye sığmıyor; rasathanenin yarığından taşmış, göğe doğru beyaz bir sütun gibi yükseliyor ve nefes aldıkça bütün yokuş onunla birlikte nefes alıyor.", en: "The season turns, and every lantern on {yer:tepe} lights at once. The reservoir's membrane doesn't fit under the dome anymore. It has spilled up out of the split and rises toward the sky like a white pillar, and every time it breathes, the whole hill breathes with it." }
           - metin: { tr: "Yokuşun dibinden üç yüz gri insan tek sıra hâlinde çıkıyor. Her birinin boynunda bir ip, ipte defterdeki satır numarası; senin imzanın altındaki numaralar.", en: "Three hundred gray figures climb up from the bottom of the hill in single file. Around each neck hangs a string, and on each string, a line number from the ledger. The numbers under your signature." }
             kosul: { bayrak: "yakit_listesi_imzalandi" }
           - metin: { tr: "Gönüllüler ilahi söyleyerek çıkıyor; en önde, kuyruktaki o gülümseyen genç. Kimse onları itmiyor. Kimsenin itmesine gerek yok.", en: "The volunteers climb singing, and at the front is that smiling teenager from the line. Nobody is pushing them. Nobody has to." }
             kosul: { bayrak: "yakit_gonulluler" }
           - metin: { tr: "Mahkûmlar zincirleriyle çıkıyor; zincirlerin şakırtısı ilahiyi bastırıyor. Birkaçı hâlâ kaçmayı deniyor, birkaçı çoktan vazgeçmiş.", en: "The prisoners climb in their chains, and the clanking drowns out the hymn. A few of them are still trying to break away. A few gave up a long time ago." }
             kosul: { bayrak: "yakit_mahkumlar" }
-          - metin: { tr: "Defterin yarısı bir gecede ortadan kaybolmuş; Sığınak'ın gizli yolları onları şehrin öbür ucuna taşımış. {npc:vahit} boşlukları bulabildiği herkesle doldurmuş: Tepe'de yaşayan, kimsenin aramayacağı, yaşlı ve yalnız olanlarla.", en: "Half the ledger vanished in one night, carried off to the far side of the city along the Haven Council's back roads. {npc:vahit} filled the gaps with whoever he could find: the old and the alone on the hill, the ones nobody would come looking for." }
+          - metin: { tr: "Defterin yarısı bir gecede ortadan kaybolmuş; Sığınak'ın gizli yolları onları şehrin öbür ucuna taşımış. {npc:vahit} boşlukları bulabildiği herkesle doldurmuş: {yer:tepe|de} yaşayan, kimsenin aramayacağı, yaşlı ve yalnız olanlarla.", en: "Half the ledger vanished in one night, carried off to the far side of the city along the Haven Council's back roads. {npc:vahit} filled the gaps with whoever he could find: the old and the alone on the hill, the ones nobody would come looking for." }
             kosul: { bayrak: "yakit_defteri_sizdi" }
           - metin: { tr: "Rasathanenin balkonunda uzun, fazla ince bir figür duruyor; {npc:thessar|in} elçiliğinden bir gözcü. İnsanların kendi kendilerini nasıl hasat ettiğini, büyük bir ilgiyle izliyor.", en: "There's a tall, too-thin figure standing on the observatory balcony: an observer from {npc:thessar|pos} embassy. It is watching, with great interest, how humans harvest themselves." }
             kosul: { bayrak: "thessar_indi" }
@@ -1095,7 +1095,7 @@ olaylar:
               - itibar: { siginak: 8, yukselenler: -20 }
               - gorev: { zincir_yukselenler: "basarisiz" }
               - iliski: { vahit: { guven: -20 } }
-            kronik: { tr: "Büyük Ayin gecesi Tepe'nin kapılarını Sığınak'a açtın; beyaz cübbeyi o gece çıkardın.", en: "On the night of the Great Rite you opened the hill's doors to the Haven Council. You took off the white robe that night." }
+            kronik: { tr: "Büyük Ayin gecesi {yer:tepe|in} kapılarını Sığınak'a açtın; beyaz cübbeyi o gece çıkardın.", en: "On the night of the Great Rite you opened the hill's doors to the Haven Council. You took off the white robe that night." }
             sonraki: "yuk3_baskin"
 
       - id: "yuk3_alis"
@@ -1159,7 +1159,7 @@ olaylar:
         yer: "tepe"
         paragraflar:
           - { tr: "Sıranın önüne geçiyorsun ve kimse durduramadan zara giriyorsun. İçerisi ne sıcak ne soğuk; yalnızca aç. Bir şey seni tartıyor, sayıyor, bölmeye çalışıyor.", en: "You step in front of the line and walk into the membrane before anyone can stop you. Inside it's not warm and not cold. Just hungry. Something is weighing you, counting you, trying to divide you." }
-          - { tr: "Ve beceremiyor. Penceren bir hata kodu basıyor; arkasında {npc:yanki|in} tanıdık çatlak sesi. Zar sarsılıyor, öğürüyor ve içindekileri dışarı kusuyor: sen, ve senden önce giren dokuz kişi, ıslak, titreyen, canlı.", en: "And it can't. Your window throws an error code, and behind it, that familiar cracked voice of {npc:yanki|pos}. The membrane shudders, gags, and throws up what's inside it: you, and the nine people who went in before you, wet and shaking and alive." }
+          - { tr: "Ve beceremiyor. Penceren bir hata kodu basıyor; arkasında {npc:yanki|in} tanıdık çatlak sesi. Zar sarsılıyor, öğürüyor ve içindekileri dışarı kusuyor: sen ve senden önce giren dokuz kişi; ıslak, titreyen, canlı.", en: "And it can't. Your window throws an error code, and behind it, that familiar cracked voice of {npc:yanki|pos}. The membrane shudders, gags, and throws up what's inside it: you, and the nine people who went in before you, wet and shaking and alive." }
           - { tr: "Kalabalık nefesini tutuyor. Sonra zar ikinci kez kasılıyor ve bu sefer dışarı yüzlerce yüzden örülmüş, kenarları kor gibi yanan bir ağız itiyor; yutamadığı her şeyin öfkesiyle.", en: "The crowd holds its breath. Then the membrane cramps a second time, and this time it pushes out a mouth woven from hundreds of faces, edges glowing like embers, angry at everything it couldn't swallow." }
         bildirimler:
           - tur: "yanki"
@@ -1183,7 +1183,7 @@ olaylar:
               - degisken: { hayatta_kalan: 2 }
               - iliski: { vahit: { korku: 4 } }
               - savas: { dusmanlar: ["ocak_agzi@oyuncu+5"], ortam: ["karanlik"], kazan: "yuk3_zafer", kaybet: "yuk3_yenilgi" }
-            kronik: { tr: "Ayinin ortasında sırayı geri çektirdin; üç yüz kişiden iki yüz doksanı o gece Tepe'den yürüyerek indi.", en: "In the middle of the rite you had the line pulled back. Two hundred and ninety of three hundred walked down off the hill that night." }
+            kronik: { tr: "Ayinin ortasında sırayı geri çektirdin; üç yüz kişiden iki yüz doksanı o gece {yer:tepe|den} yürüyerek indi.", en: "In the middle of the rite you had the line pulled back. Two hundred and ninety of three hundred walked down off the hill that night." }
 
       - id: "yuk3_zafer"
         yer: "tepe"
@@ -1208,7 +1208,7 @@ olaylar:
               - itibar: { yukselenler: -4 }
               - bayrak: "sarnic_kapandi"
               - iliski: { vahit: { guven: -4, korku: 4 } }
-            kronik: { tr: "Büyük Ayin'den sonra Tepe'nin sarnıcını kendi ellerinle mühürledin; Yükselenler bir daha o zarı besleyemedi.", en: "After the Great Rite you sealed the hill's reservoir with your own hands. The Ascended never fed that membrane again." }
+            kronik: { tr: "Büyük Ayin'den sonra {yer:tepe|in} sarnıcını kendi ellerinle mühürledin; Yükselenler bir daha o zarı besleyemedi.", en: "After the Great Rite you sealed the hill's reservoir with your own hands. The Ascended never fed that membrane again." }
             sonraki: "@akis"
           - id: "acik"
             etiket: { tr: "Zarı açık bırak; ayin sürsün", en: "Leave the membrane open. The rite goes on" }
@@ -1218,7 +1218,7 @@ olaylar:
               - ahlak: { insanlik: -4, duzen: 2 }
               - itibar: { yukselenler: 6 }
               - iliski: { vahit: { baglilik: 6 } }
-            kronik: { tr: "Ocak Ağzı'nı yendin ve sarnıcı açık bıraktın; Tepe her mevsim yeniden ayin yaptı.", en: "You beat the Kiln Mouth and left the reservoir open. The hill held a new rite every season." }
+            kronik: { tr: "Ocak Ağzı'nı yendin ve sarnıcı açık bıraktın; {yer:tepe} her mevsim yeniden ayin yaptı.", en: "You beat the Kiln Mouth and left the reservoir open. The hill held a new rite every season." }
             sonraki: "@akis"
           - id: "gozcu"
             etiket: { tr: "Balkondaki gözcünün selamına karşılık ver", en: "Return the observer's bow" }
@@ -1267,13 +1267,13 @@ olaylar:
             kronik: { tr: "Ayini kırdıktan sonra kaçan peygamberi rasathanenin tepesine kadar kovaladın.", en: "After you broke the rite, you chased the fleeing prophet all the way to the top of the observatory." }
             sonraki: "yuk3_kovalama"
           - id: "indir"
-            etiket: { tr: "Kaçanları topla ve Tepe'den indir", en: "Round up the runners. Get them off the hill" }
+            etiket: { tr: "Kaçanları topla ve {yer:tepe|den} indir", en: "Round up the runners. Get them off the hill" }
             etkiler:
               - ahlak: { merhamet: 5, duzen: 1 }
               - degisken: { hayatta_kalan: 6 }
               - itibar: { siginak: 5 }
               - tohum: { olay: "on_ucuncu_secim", gecikme: { min: 4, max: 9 }, kosul: { bayrak_yok: "on_ucuncu_kacti" } }
-            kronik: { tr: "Büyük Ayin'in üç yüz yakıtını gecenin içinde Tepe'den indirdin.", en: "You walked the Great Rite's three hundred fuel down off the hill in the middle of the night." }
+            kronik: { tr: "Büyük Ayin'in üç yüz yakıtını gecenin içinde {yer:tepe|den} indirdin.", en: "You walked the Great Rite's three hundred fuel down off the hill in the middle of the night." }
             sonraki: "@akis"
           - id: "zar"
             etiket: { tr: "Aç kalan zara dön; onu şimdi kapat", en: "Turn to the starving membrane. Close it now" }
@@ -1298,7 +1298,7 @@ olaylar:
               - npc_ol: "vahit"
               - unvan: "kardes_katili"
               - itibar: { yukselenler: -15 }
-            kronik: { tr: "Yükselenler'in peygamberini kendi rasathanesinin kubbesinden aşağı ittin; Tepe'nin sesi o gece sustu.", en: "You pushed the Ascended's prophet off the dome of his own observatory. The hill went quiet that night." }
+            kronik: { tr: "Yükselenler'in peygamberini kendi rasathanesinin kubbesinden aşağı ittin; {yer:tepe|in} sesi o gece sustu.", en: "You pushed the Ascended's prophet off the dome of his own observatory. The hill went quiet that night." }
             sonraki: "@akis"
           - id: "bagisla"
             etiket: { tr: "\"Fark eder. Yaşa ve bunu düşün.\"", en: "\"It matters. Live, and think about that.\"" }
@@ -1336,7 +1336,7 @@ olaylar:
               - ahlak: { insanlik: 4, merhamet: 2 }
               - bayrak: "sarnic_kapandi"
               - gun: 1
-            kronik: { tr: "Tepe'nin sarnıcını kapattın ve dibindeki dört bin yüz on iki çentiği bir bir saydın.", en: "You closed the hill's reservoir and counted every one of the four thousand one hundred and twelve notches at the bottom." }
+            kronik: { tr: "{yer:tepe|in} sarnıcını kapattın ve dibindeki dört bin yüz on iki çentiği bir bir saydın.", en: "You closed the hill's reservoir and counted every one of the four thousand one hundred and twelve notches at the bottom." }
             sonraki: "@akis"
           - id: "git"
             etiket: { tr: "Sarnıcı arkanda bırak", en: "Leave the reservoir behind" }
@@ -1344,14 +1344,14 @@ olaylar:
               - unvan: "ocak_kirici"
               - ahlak: { duzen: 2, merhamet: 1 }
               - bayrak: "sarnic_kapandi"
-            kronik: { tr: "Tepe'nin sarnıcını kapattın ve bir daha oraya bakmadın.", en: "You closed the hill's reservoir and never looked down into it again." }
+            kronik: { tr: "{yer:tepe|in} sarnıcını kapattın ve bir daha oraya bakmadın.", en: "You closed the hill's reservoir and never looked down into it again." }
             sonraki: "@akis"
 
       - id: "yuk3_kesinti_yenilgi"
         yer: "tepe"
         paragraflar:
           - { tr: "Yere düşüyorsun ve beyaz cübbeler seni yokuştan aşağı yuvarlıyor. Taşların arasından, son gördüğün şey, sıranın yeniden düzelmesi.", en: "You go down, and the white robes roll you down the hill. Between the stones, the last thing you see is the line straightening back up." }
-          - { tr: "Sabah Tepe sessiz. Göğün panellerinde kimsenin anlamadığı bir satır: \"[Katkı alındı ×300.]\" Bu sefer kimseye ait değil.", en: "In the morning the hill is quiet. On the sky panels, a line nobody understands: \"[Contribution received ×300.]\" This time it belongs to no one." }
+          - { tr: "Sabah {yer:tepe} sessiz. Göğün panellerinde kimsenin anlamadığı bir satır: \"[Katkı alındı ×300.]\" Bu sefer kimseye ait değil.", en: "In the morning the hill is quiet. On the sky panels, a line nobody understands: \"[Contribution received ×300.]\" This time it belongs to no one." }
         secenekler:
           - id: "kalk"
             etiket: { tr: "Kalk. Bir dahaki mevsime hazırlan", en: "Get up. Get ready for next season" }
@@ -1367,7 +1367,7 @@ olaylar:
               - ahlak: { merhamet: 2, insanlik: 2 }
               - degisken: { hayatta_kalan: -4 }
               - itibar: { siginak: 4, yukselenler: -6 }
-            kronik: { tr: "Ayini durduramadın ama şehre olanları anlattın; Tepe'ye bir daha bu kadar kalabalık çıkmadı.", en: "You couldn't stop the rite, but you told the city what happened. The hill never drew a crowd that big again." }
+            kronik: { tr: "Ayini durduramadın ama şehre olanları anlattın; {yer:tepe|e} bir daha bu kadar kalabalık çıkmadı.", en: "You couldn't stop the rite, but you told the city what happened. The hill never drew a crowd that big again." }
             sonraki: "@akis"
 
       - id: "yuk3_baskin"
@@ -1418,7 +1418,7 @@ olaylar:
           - metin: { tr: "Feneri peygamber değil, halkanın en içteki on iki kişisi taşıyor. Aynı anda, tek bir ağızdan konuşuyorlar; peygamber öldüğünden beri böyle konuşuyorlar.", en: "The lantern isn't carried by the prophet. It's carried by the inner twelve of the ring. They speak at the same time, out of one mouth. They've talked like that ever since the prophet died." }
             kosul: { npc_olu: "vahit" }
           - { tr: "\"Sistem kanıt istiyor,\" diye devam ediyor ses. \"Seni bu dünyaya bağlayan son ipi kestiğine dair. Bir kalp. Seni seven bir kalp, Ocak'a yürüyecek.\"", en: "\"The System wants proof,\" the voice goes on. \"Proof that you've cut the last cord tying you to this world. A heart. A heart that loves you walks into the Kiln.\"" }
-          - metin: { tr: "Sarnıç kapalı; onu sen mühürledin. Ama Tepe yeni bir Ocak açmış: rasathanenin bodrumunda, bir kazanın içinde, daha küçük, daha aç bir zar.", en: "The reservoir's sealed; you sealed it. But the hill opened a new Kiln: in the observatory basement, inside an old boiler, a smaller, hungrier membrane." }
+          - metin: { tr: "Sarnıç kapalı; onu sen mühürledin. Ama {yer:tepe} yeni bir Ocak açmış: rasathanenin bodrumunda, bir kazanın içinde, daha küçük, daha aç bir zar.", en: "The reservoir's sealed; you sealed it. But the hill opened a new Kiln: in the observatory basement, inside an old boiler, a smaller, hungrier membrane." }
             kosul: { bayrak: "sarnic_kapandi" }
         sezgiler:
           - kosul: { stat: { wis: 150 } }
@@ -1443,7 +1443,7 @@ olaylar:
               - itibar: { yukselenler: 10 }
               - bayrak: "on_ucuncu_kurban"
               - bayrak: "yukselenler_4_tamam"
-            kronik: { tr: "Sana tanrı diye bakan bir genci kendi elinle Ocak'a yürüttün; Tepe ona sonunda gerçek adıyla ağıt yaktı.", en: "You walked a boy who looked at you like a god into the Kiln with your own hands. The hill finally mourned him by his real name." }
+            kronik: { tr: "Sana tanrı diye bakan bir genci kendi elinle Ocak'a yürüttün; {yer:tepe} ona sonunda gerçek adıyla ağıt yaktı.", en: "You walked a boy who looked at you like a god into the Kiln with your own hands. The hill finally mourned him by his real name." }
             sonraki: "yuk4_on_uc"
           - id: "kendin"
             etiket: { tr: "Kendini sun; Ocak'a sen yürü", en: "Offer yourself. Walk into the Kiln" }
@@ -1453,7 +1453,7 @@ olaylar:
               - itibar: { yukselenler: 12 }
               - bayrak: "kurban_kendisi"
               - bayrak: "yukselenler_4_tamam"
-            kronik: { tr: "Seni seven kalp olarak kendini sundun ve Ocak'tan yanmadan çıktın; Tepe sana o günden sonra Yanmayan dedi.", en: "You offered yourself as the heart that loves you and walked out of the Kiln unburned. From then on the hill called you the Unburnable." }
+            kronik: { tr: "Seni seven kalp olarak kendini sundun ve Ocak'tan yanmadan çıktın; {yer:tepe} sana o günden sonra Yanmayan dedi.", en: "You offered yourself as the heart that loves you and walked out of the Kiln unburned. From then on the hill called you the Unburnable." }
             sonraki: "yuk4_kendin"
           - id: "vahit"
             etiket: { tr: "\"Seni seven kalp onunki.\" {npc:vahit|i} göster", en: "\"The heart that loves me is his.\" Point at {npc:vahit}" }
@@ -1489,7 +1489,7 @@ olaylar:
               - itibar: { yukselenler: -20 }
               - gorev: { zincir_yukselenler: "basarisiz" }
               - savas: { dusmanlar: ["secilmis_avci@oyuncu+3", "yukselen_muhafiz@dunya", "yukselen_muhafiz@dunya"], ortam: ["karanlik", "dar_gecit"], kazan: "yuk4_ret_zafer", kaybet: "yuk4_ret_yenilgi" }
-            kronik: { tr: "Son ipi kesmeyi reddettin ve Tepe'nin Ocak'ını kendi ellerinle devirdin.", en: "You refused to cut the last cord and tore down the hill's Kiln with your own hands." }
+            kronik: { tr: "Son ipi kesmeyi reddettin ve {yer:tepe|in} Ocak'ını kendi ellerinle devirdin.", en: "You refused to cut the last cord and tore down the hill's Kiln with your own hands." }
 
       - id: "yuk4_on_uc"
         yer: "tepe"
@@ -1506,7 +1506,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 2, merhamet: 1 }
               - iliski: { yanki: { guven: 4 } }
-            kronik: { tr: "On Üç'ü Ocak'a yürüttün ve sonra gerçek adını bütün Tepe'ye duyurdun.", en: "You walked Thirteen into the Kiln, and then you told the whole hill his real name." }
+            kronik: { tr: "On Üç'ü Ocak'a yürüttün ve sonra gerçek adını bütün {yer:tepe|e} duyurdun.", en: "You walked Thirteen into the Kiln, and then you told the whole hill his real name." }
             sonraki: "@akis"
           - id: "unut"
             etiket: { tr: "Adını unut. Bilerek", en: "Forget his name. On purpose" }
@@ -1522,7 +1522,7 @@ olaylar:
         paragraflar:
           - { tr: "\"Beni seven bir kalp,\" diyorsun. \"Kendimden başka kimseye bu kadar güvenmiyorum.\" Kimse seni durdurmadan Ocak'ın zarına yürüyorsun.", en: "\"A heart that loves me,\" you say. \"I don't trust anybody else that much.\" Nobody stops you as you walk into the Kiln's membrane." }
           - { tr: "İçeride bir şey seni yine tartıyor. Bu sefer daha uzun; neredeyse kibar, neredeyse özür diler gibi. Sonra yine pes ediyor ve seni dışarı bırakıyor; cübben yanmış, tenin dokunulmamış.", en: "Inside, something weighs you again. Longer this time. Almost polite, almost apologetic. Then it gives up again and lets you out, your robe burned away, your skin untouched." }
-          - { tr: "Tepe diz çöküyor. Yüzlerce ağızdan aynı kelime çıkıyor, ve o kelime senin adın değil, yeni adın: \"Yanmayan.\"", en: "The hill kneels. The same word comes out of hundreds of mouths, and it isn't your name. It's your new one: \"The Unburnable.\"" }
+          - { tr: "{yer:tepe} diz çöküyor. Yüzlerce ağızdan aynı kelime çıkıyor; o kelime senin adın değil, yeni adın: \"Yanmayan.\"", en: "The hill kneels. The same word comes out of hundreds of mouths, and it isn't your name. It's your new one: \"The Unburnable.\"" }
         bildirimler:
           - tur: "unvan"
             nadirlik: "efsanevi"
@@ -1536,7 +1536,7 @@ olaylar:
               - unvan: "kendi_yakiti"
               - ahlak: { insanlik: -4, duzen: 3 }
               - itibar: { yukselenler: 6 }
-            kronik: { tr: "Kendi adını bırakıp Tepe'nin sana verdiği Yanmayan adını kabul ettin.", en: "You let go of your own name and took the one the hill gave you: the Unburnable." }
+            kronik: { tr: "Kendi adını bırakıp {yer:tepe|in} sana verdiği Yanmayan adını kabul ettin.", en: "You let go of your own name and took the one the hill gave you: the Unburnable." }
             sonraki: "@akis"
           - id: "reddet"
             etiket: { tr: "\"Benim bir adım var.\"", en: "\"I already have a name.\"" }
@@ -1544,7 +1544,7 @@ olaylar:
               - unvan: "kendi_yakiti"
               - ahlak: { insanlik: 4 }
               - itibar: { yukselenler: -2 }
-            kronik: { tr: "Ocak'tan yanmadan çıktın ama Tepe'ye kendi adını hatırlattın.", en: "You walked out of the Kiln unburned, but you made the hill remember your real name." }
+            kronik: { tr: "Ocak'tan yanmadan çıktın ama {yer:tepe|e} kendi adını hatırlattın.", en: "You walked out of the Kiln unburned, but you made the hill remember your real name." }
             sonraki: "@akis"
 
       - id: "yuk4_vahit"
@@ -1574,7 +1574,7 @@ olaylar:
               - bayrak: "yukselenler_4_tamam"
               - xp_seviye: 60
               - itibar: { yukselenler: 4 }
-            kronik: { tr: "Yükselenler'in peygamberini kendi Ocak'ına yürüttün; Tepe'nin ağzı o gece sonsuza dek sustu.", en: "You walked the Ascended's prophet into his own Kiln. That night the hill's mouth went silent for good." }
+            kronik: { tr: "Yükselenler'in peygamberini kendi Ocak'ına yürüttün; {yer:tepe|in} ağzı o gece sonsuza dek sustu.", en: "You walked the Ascended's prophet into his own Kiln. That night the hill's mouth went silent for good." }
             sonraki: "@akis"
 
       - id: "yuk4_deniz"
@@ -1613,6 +1613,7 @@ olaylar:
               - unvan: "kurban_eden"
               - xp_seviye: 120
               - bayrak: "deniz_ocakta"
+              - bayrak: "deniz_oyuncu_oldurdu"
               - bayrak: "yukselenler_4_tamam"
             kronik: { tr: "Vapurda simidini paylaştığın arkadaşını kendi elinle Ocak'a ittin; Yükselenler bunu son ipin kesildiği gece diye andı.", en: "You pushed the friend you shared pretzels with on the ferry into the Kiln with your own hands. The Ascended remembered it as the night the last cord was cut." }
             sonraki: "@akis"
@@ -1674,7 +1675,7 @@ olaylar:
         yer: "tepe"
         paragraflar:
           - { tr: "Ocak'ın kazanı devriliyor ve zar, bir balon gibi sönerek, bodrumun duvarlarına yapışıp kuruyor. Seçilmiş avcı yerde, kırık kalkanının yanında; muhafızlar merdivenlerden kaçmış.", en: "The Kiln's boiler tips over, and the membrane deflates like a balloon, sticks to the basement walls, and dries out. The Chosen hunter's on the floor next to his broken shield. The guards ran up the stairs." }
-          - { tr: "Yukarıda, Tepe'nin fenerleri birer birer sönüyor. Son ipi kesmeyi reddettin; Tepe de seni artık kendinden saymıyor.", en: "Up top, the hill's lanterns go out one by one. You refused to cut the last cord, and the hill doesn't count you as one of its own anymore." }
+          - { tr: "Yukarıda, {yer:tepe|in} fenerleri birer birer sönüyor. Son ipi kesmeyi reddettin; {yer:tepe} de seni artık kendinden saymıyor.", en: "Up top, the hill's lanterns go out one by one. You refused to cut the last cord, and the hill doesn't count you as one of its own anymore." }
         secenekler:
           - id: "yak"
             etiket: { tr: "Bodrumu ateşe ver", en: "Set the basement on fire" }
@@ -1682,34 +1683,34 @@ olaylar:
               - ahlak: { merhamet: 1, duzen: -3 }
               - degisken: { hayatta_kalan: 2 }
               - iliski: { vahit: { korku: 8, guven: -10 } }
-            kronik: { tr: "Tepe'nin ikinci Ocak'ını devirip rasathanenin bodrumunu yaktın.", en: "You knocked over the hill's second Kiln and burned out the observatory basement." }
+            kronik: { tr: "{yer:tepe|in} ikinci Ocak'ını devirip rasathanenin bodrumunu yaktın.", en: "You knocked over the hill's second Kiln and burned out the observatory basement." }
             sonraki: "@akis"
           - id: "git"
             etiket: { tr: "Beyaz cübbeni bodrumda bırak ve çık", en: "Leave your white robe in the basement. Go" }
             etkiler:
               - ahlak: { insanlik: 3 }
               - degisken: { hayatta_kalan: 1 }
-            kronik: { tr: "Beyaz cübbeni devrilmiş Ocak'ın yanında bıraktın ve Tepe'den son kez indin.", en: "You left your white robe beside the toppled Kiln and walked down off the hill for the last time." }
+            kronik: { tr: "Beyaz cübbeni devrilmiş Ocak'ın yanında bıraktın ve {yer:tepe|den} son kez indin.", en: "You left your white robe beside the toppled Kiln and walked down off the hill for the last time." }
             sonraki: "@akis"
 
       - id: "yuk4_ret_yenilgi"
         yer: "tepe"
         paragraflar:
           - { tr: "Seçilmiş avcının kılıcı seni merdivenin dibine seriyor. Bodrumun tavanı dönüyor; muhafızların ayakları ve Ocak'ın uğultusu.", en: "The Chosen hunter's blade drops you at the foot of the stairs. The basement ceiling spins: guards' feet, and the hum of the Kiln." }
-          - { tr: "Seni öldürmüyorlar. Tepe'nin kapısına bırakıyorlar, yüzünü külle işaretleyip. Artık onlar için ne seçilmişsin ne yakıt; yalnızca bir uyarı.", en: "They don't kill you. They leave you at the hill's gate with your face marked in ash. To them you're not Chosen anymore, and not fuel either. Just a warning." }
+          - { tr: "Seni öldürmüyorlar. {yer:tepe|in} kapısına bırakıyorlar, yüzünü külle işaretleyip. Artık onlar için ne seçilmişsin ne yakıt; yalnızca bir uyarı.", en: "They don't kill you. They leave you at the hill's gate with your face marked in ash. To them you're not Chosen anymore, and not fuel either. Just a warning." }
         secenekler:
           - id: "sil"
             etiket: { tr: "Külü yüzünden sil", en: "Wipe the ash off your face" }
             etkiler:
               - ahlak: { insanlik: 2 }
-            kronik: { tr: "Tepe seni yüzünde külle kapısına bıraktı; külü sildin ve yürüdün.", en: "The hill dumped you at its gate with ash on your face. You wiped it off and walked." }
+            kronik: { tr: "{yer:tepe} seni yüzünde külle kapısına bıraktı; külü sildin ve yürüdün.", en: "The hill dumped you at its gate with ash on your face. You wiped it off and walked." }
             sonraki: "@akis"
           - id: "birak"
             etiket: { tr: "Külü bırak; herkes görsün", en: "Leave the ash. Let everyone see" }
             etkiler:
               - ahlak: { duzen: -2, merhamet: 2 }
               - itibar: { siginak: 3 }
-            kronik: { tr: "Tepe'nin yüzüne sürdüğü külü günlerce silmeden taşıdın; şehir ne anlama geldiğini öğrendi.", en: "You wore the ash the hill smeared on your face for days. The city learned what it meant." }
+            kronik: { tr: "{yer:tepe|in} yüzüne sürdüğü külü günlerce silmeden taşıdın; şehir ne anlama geldiğini öğrendi.", en: "You wore the ash the hill smeared on your face for days. The city learned what it meant." }
             sonraki: "@akis"
 
   # ================================================================== ZİNCİR 5: MUTLAK SADAKAT
@@ -1728,8 +1729,8 @@ olaylar:
       - id: "yuk5_cagri"
         yer: "tepe"
         paragraflar:
-          - { tr: "Gök artık mavi değil. Panellerin arkasında Kadim filosunun gölgeleri dolaşıyor ve her sabah göğe aynı satır yazılıyor: kalan gün sayısı. {yer:kiyikent} korkudan susmuş; yalnızca Tepe şarkı söylüyor.", en: "The sky isn't blue anymore. The shadows of the Ancient fleet drift behind the panels, and every morning the same line gets written across the sky: the number of days left. {yer:kiyikent} has gone quiet with fear. Only the hill is singing." }
-          - { tr: "Yokuşun her basamağında, her damında, her balkonunda insan var. Binlerce alında gri başparmak izi; ortada, rasathanenin yarığından göğe uzanan beyaz bir sütun. Tepe bütün şehrin korkusunu toplamış ve ona bir ilahi yazmış.", en: "There are people on every step of the hill, on every roof, on every balcony. Thousands of foreheads with gray thumbprints, and in the middle, a white pillar reaching from the split dome up into the sky. The hill has gathered up the whole city's fear and written it a hymn." }
+          - { tr: "Gök artık mavi değil. Panellerin arkasında Kadim filosunun gölgeleri dolaşıyor ve her sabah göğe aynı satır yazılıyor: kalan gün sayısı. {yer:kiyikent} korkudan susmuş; yalnızca {yer:tepe} şarkı söylüyor.", en: "The sky isn't blue anymore. The shadows of the Ancient fleet drift behind the panels, and every morning the same line gets written across the sky: the number of days left. {yer:kiyikent} has gone quiet with fear. Only the hill is singing." }
+          - { tr: "Yokuşun her basamağında, her damında, her balkonunda insan var. Binlerce alında gri başparmak izi; ortada, rasathanenin yarığından göğe uzanan beyaz bir sütun. {yer:tepe} bütün şehrin korkusunu toplamış ve ona bir ilahi yazmış.", en: "There are people on every step of the hill, on every roof, on every balcony. Thousands of foreheads with gray thumbprints, and in the middle, a white pillar reaching from the split dome up into the sky. The hill has gathered up the whole city's fear and written it a hymn." }
           - metin: { tr: "Sütundan bir ses geliyor ve bu sefer herkes duyuyor; peygamber haklıymış. Göğün panellerinde imzalı bir satır: \"[Ön seçim tamamlandı. Yükselen adayı: {oyuncu}.]\"", en: "A voice comes out of the pillar, and this time everybody hears it; the prophet was right. Across the sky panels, a signed line: \"[Pre-selection complete. Ascension candidate: {oyuncu}.]\"" }
             kosul: { bayrak: "vahit_hakli" }
           - metin: { tr: "Sütundan hiçbir ses gelmiyor; hiç gelmedi. {npc:vahit} binlerce yüzün önünde sana dönüyor ve yalnızca senin duyacağın kadar alçak sesle konuşuyor: \"Şimdi sen konuş. Ses ol. Ben hep sadece bekledim.\"", en: "No voice comes out of the pillar. None ever did. In front of thousands of faces {npc:vahit} turns to you and speaks low enough that only you can hear: \"Now you speak. Be the voice. All I ever did was wait.\"" }
@@ -1742,7 +1743,7 @@ olaylar:
             kosul: { npc_fraksiyon: { deniz_arman: "yukselenler" }, npc_hayatta: "deniz_arman" }
           - metin: { tr: "Kalabalığın arasından bir fısıltı dalgası geçiyor: \"Yanmayan.\" Ocak'ın iki kez reddettiği kişi sensin; bu gece onlar senden kendilerini reddetmemeni istiyor.", en: "A wave of whispers passes through the crowd: \"The Unburnable.\" You're the one the Kiln refused twice. Tonight they're asking you not to refuse them." }
             kosul: { bayrak: "kurban_kendisi" }
-          - { tr: "Son Ocak'ın kuralı basit: diz çöküp kendini Sistem'e yazdırırsın; sonra Tepe'deki herkes, bir bir, senden sonra sütuna yürür. Binlerce katkı, tek bir alıcı. Hasat başlamadan önce kendi hasadını yapan bir şehir.", en: "The rule of the Last Kiln is simple: you kneel and let the System write you in. Then everyone on the hill walks into the pillar after you, one by one. Thousands of contributions, a single recipient. A city harvesting itself before the Harvest arrives." }
+          - { tr: "Son Ocak'ın kuralı basit: diz çöküp kendini Sistem'e yazdırırsın; sonra {yer:tepe|de}ki herkes, bir bir, senden sonra sütuna yürür. Binlerce katkı, tek bir alıcı. Hasat başlamadan önce kendi hasadını yapan bir şehir.", en: "The rule of the Last Kiln is simple: you kneel and let the System write you in. Then everyone on the hill walks into the pillar after you, one by one. Thousands of contributions, a single recipient. A city harvesting itself before the Harvest arrives." }
         sezgiler:
           - kosul: { stat: { per: 350 } }
             metin: { tr: "Sütunun içindeki sayaç: 9.871. Kalabalık: yaklaşık 11.000. Hesap tutuyor. Bu, seni S kademesinin ötesine taşır; nereye, kimse bilmiyor.", en: "The counter inside the pillar: 9,871. The crowd: roughly 11,000. The math works. It would carry you past Grade S. To where, nobody knows." }
@@ -1769,7 +1770,7 @@ olaylar:
               - degisken: { hayatta_kalan: -8 }
               - bayrak: "yukselis_sadakati"
               - iliski: { yanki: { guven: -15 } }
-            kronik: { tr: "Hasattan önce Tepe'de diz çöktün ve kendini Sistem'e yazdırdın; arkandan on bir bin kişi beyaz sütuna yürüdü.", en: "Before the Harvest you knelt on the hill and let the System write you in. Behind you, eleven thousand people walked into the white pillar." }
+            kronik: { tr: "Hasattan önce {yer:tepe|de} diz çöktün ve kendini Sistem'e yazdırdın; arkandan on bir bin kişi beyaz sütuna yürüdü.", en: "Before the Harvest you knelt on the hill and let the System write you in. Behind you, eleven thousand people walked into the white pillar." }
             sonraki: "yuk5_diz"
           - id: "taht"
             etiket: { tr: "Diz çökme. Onları kendine diz çöktür", en: "Don't kneel. Make them kneel to you" }
@@ -1780,7 +1781,7 @@ olaylar:
               - itibar: { yukselenler: 20 }
               - degisken: { hayatta_kalan: -3 }
               - bayrak: "yukselenler_oyuncuya_bagli"
-            kronik: { tr: "Tepe senden Sistem'e sadakat istedi; sen o sadakati kendin aldın ve on bir bin kişi sana diz çöktü.", en: "The hill asked for your loyalty to the System. You took that loyalty for yourself, and eleven thousand people knelt to you." }
+            kronik: { tr: "{yer:tepe} senden Sistem'e sadakat istedi; sen o sadakati kendin aldın ve on bir bin kişi sana diz çöktü.", en: "The hill asked for your loyalty to the System. You took that loyalty for yourself, and eleven thousand people knelt to you." }
             sonraki: "yuk5_taht"
           - id: "yakitsiz"
             tur: "gosteris"
@@ -1811,7 +1812,7 @@ olaylar:
         paragraflar:
           - { tr: "Dizlerin taşa değiyor ve dünya susuyor. Sonra penceren açılıyor; ama bu sefer sana bir şey göstermek için değil. Seni okumak için.", en: "Your knees touch the stone and the world goes silent. Then your window opens, but not to show you something this time. To read you." }
           - { tr: "Satır satır yazılıyorsun: adın, seviyen, korktuğun her şey, sevdiğin her şey. Sevdiklerin satırlarının üstü bir bir çiziliyor. Arkanda ilk yakıt sütuna yürüyor ve içinde bir şey, seninle birlikte, büyüyor.", en: "You get written in line by line: your name, your level, everything you're afraid of, everything you love. One by one, the lines with the people you love get struck out. Behind you, the first fuel walks into the pillar, and something inside you grows along with it." }
-          - { tr: "Sabaha kadar yürüyorlar. Sabah Tepe boş; sen ise artık bir insanın sığabileceği yerden çok daha büyüksün ve göğün panelleri ilk kez sana doğrudan bakıyor.", en: "They walk until dawn. In the morning the hill is empty, and you're far bigger than anywhere a person could fit, and for the first time the sky panels are looking straight at you." }
+          - { tr: "Sabaha kadar yürüyorlar. Sabah {yer:tepe} boş; sen ise artık bir insanın sığabileceği yerden çok daha büyüksün ve göğün panelleri ilk kez sana doğrudan bakıyor.", en: "They walk until dawn. In the morning the hill is empty, and you're far bigger than anywhere a person could fit, and for the first time the sky panels are looking straight at you." }
         bildirimler:
           - tur: "evrim"
             nadirlik: "mitik"
@@ -1821,11 +1822,11 @@ olaylar:
               - { tr: "Son karar için bekleniyorsun.", en: "You are awaited for the final decision." }
         secenekler:
           - id: "kalk"
-            etiket: { tr: "Ayağa kalk. Boş Tepe'ye bak", en: "Get up. Look at the empty hill" }
+            etiket: { tr: "Ayağa kalk. Boş {yer:tepe|e} bak", en: "Get up. Look at the empty hill" }
             etkiler:
               - unvan: "sesin_ta_kendisi"
               - ahlak: { insanlik: -3 }
-            kronik: { tr: "Sabah boşalmış Tepe'nin ortasında, tek başına ayağa kalktın.", en: "In the morning you stood up alone in the middle of the emptied hill." }
+            kronik: { tr: "Sabah boşalmış {yer:tepe|in} ortasında, tek başına ayağa kalktın.", en: "In the morning you stood up alone in the middle of the emptied hill." }
             sonraki: "@akis"
           - id: "say"
             etiket: { tr: "İçindeki sesleri saymaya çalış", en: "Try to count the voices inside you" }
@@ -1909,7 +1910,7 @@ olaylar:
         yer: "tepe"
         paragraflar:
           - { tr: "Beyaz sütun bir mum gibi sönüyor. Yokuştaki binlerce insan bir süre kıpırdamadan duruyor; sonra biri alnındaki külü siliyor, sonra bir başkası.", en: "The white pillar goes out like a candle. The thousands on the slope stand still for a while. Then someone wipes the ash off their forehead, then someone else." }
-          - { tr: "Kimse teşekkür etmiyor. Gök hâlâ kalan günleri sayıyor; ama Tepe bu sefer saymıyor, yalnızca dağılıyor, evlerine, ailelerine, korkularına.", en: "Nobody says thank you. The sky is still counting the days left, but this time the hill isn't counting along. It just breaks apart, back to its homes, its families, its fears." }
+          - { tr: "Kimse teşekkür etmiyor. Gök hâlâ kalan günleri sayıyor; ama {yer:tepe} bu sefer saymıyor, yalnızca dağılıyor, evlerine, ailelerine, korkularına.", en: "Nobody says thank you. The sky is still counting the days left, but this time the hill isn't counting along. It just breaks apart, back to its homes, its families, its fears." }
           - metin: { tr: "{npc:vahit} rasathanenin basamaklarında oturuyor; çıplak ayakları, boş elleri. \"Şimdi ne olacağım?\" diye soruyor, kimseye.", en: "{npc:vahit} sits on the observatory steps, bare feet, empty hands. \"What am I now?\" he asks, of no one." }
             kosul: { npc_hayatta: "vahit" }
         secenekler:
@@ -1922,11 +1923,11 @@ olaylar:
             kronik: { tr: "Yükselenler'i dağıttın ve peygamberlerine yeniden insan olmayı öğrettin.", en: "You disbanded the Ascended and taught their prophet how to be human again." }
             sonraki: "@akis"
           - id: "git"
-            etiket: { tr: "Boşalan Tepe'den in", en: "Walk down off the emptied hill" }
+            etiket: { tr: "Boşalan {yer:tepe|den} in", en: "Walk down off the emptied hill" }
             etkiler:
               - ahlak: { duzen: 1, insanlik: 2 }
               - unvan: "ocak_kirici"
-            kronik: { tr: "Son Ocak'ı söndürdüğün gece Tepe'den son kez indin; arkanda yalnızca kül kaldı.", en: "The night you put out the Last Kiln, you walked down off the hill one last time. Only ash was left behind you." }
+            kronik: { tr: "Son Ocak'ı söndürdüğün gece {yer:tepe|den} son kez indin; arkanda yalnızca kül kaldı.", en: "The night you put out the Last Kiln, you walked down off the hill one last time. Only ash was left behind you." }
             sonraki: "@akis"
 
       - id: "yuk5_dagit_yenilgi"
@@ -2066,7 +2067,7 @@ olaylar:
               - bayrak: "vahit_yankiyi_biliyor"
               - iliski: { vahit: { baglilik: 8 }, yanki: { guven: -6 } }
               - tohum: { olay: "vahit_mucize_sinavi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "vahit" } }
-            kronik: { tr: "{npc:yanki|in} sözlerini bir peygambere okudun; o sözler ertesi hafta Tepe'nin ilahisinde söylendi.", en: "You read {npc:yanki|pos} words to a prophet. The next week they were in the hill's hymn." }
+            kronik: { tr: "{npc:yanki|in} sözlerini bir peygambere okudun; o sözler ertesi hafta {yer:tepe|in} ilahisinde söylendi.", en: "You read {npc:yanki|pos} words to a prophet. The next week they were in the hill's hymn." }
             sonraki: "@akis"
           - id: "koru"
             etiket: { tr: "\"Hayır. O benim; senin değil.\"", en: "\"No. It's mine. Not yours.\"" }
@@ -2224,10 +2225,10 @@ olaylar:
     sahneler:
       - id: "vmuc_1"
         paragraflar:
-          - { tr: "Tepe'nin eteğindeki eski ilkokulun bahçesinde bir Kapı açılmış. Zarı mor, kenarları çatlak; taşmaya bir gece kalmış. Bunu bütün şehir biliyor, çünkü {npc:vahit} bütün şehre söyledi.", en: "A Gate has opened in the yard of the old grade school at the foot of the Heights. Its membrane is purple, its edges cracked. It's one night from breaking. The whole city knows, because {npc:vahit} told the whole city." }
+          - { tr: "{yer:tepe|in} eteğindeki eski ilkokulun bahçesinde bir Kapı açılmış. Zarı mor, kenarları çatlak; taşmaya bir gece kalmış. Bunu bütün şehir biliyor, çünkü {npc:vahit} bütün şehre söyledi.", en: "A Gate has opened in the yard of the old grade school at the foot of {yer:tepe}. Its membrane is purple, its edges cracked. It's one night from breaking. The whole city knows, because {npc:vahit} told the whole city." }
           - { tr: "\"Şafakta,\" demiş on bin kişiye, \"Sistem kendi eliyle kapatacak bu kapıyı. Kimse dokunmasın; kim dokunursa inançsızlığını gösterir.\" Şimdi okulun çevresi mumlarla dolu ve kimse kapıya dokunmuyor.", en: "\"At dawn,\" he told ten thousand people, \"the System will close this Gate with its own hand. Nobody touch it. Whoever touches it shows their lack of faith.\" Now the schoolyard's ringed with candles and nobody is touching the Gate." }
           - { tr: "Gece yarısı kapın çalıyor. {npc:vahit} yalnız; beyazının altında titriyor. \"Eğer kapanmazsa,\" diyor, \"beni parçalarlar. Sahtekârsam, parçalasınlar. Ama değilsem... Sistem'in eline yardım et.\"", en: "At midnight somebody knocks. It's {npc:vahit}, alone, shaking under his white robe. \"If it doesn't close,\" he says, \"they'll tear me apart. If I'm a fraud, let them. But if I'm not... help the System's hand.\"" }
-          - metin: { tr: "Okulun avlusunda, mum ışığında, Kordon'dan kaçmış ailelerin çadırları var. Kapı taşarsa ilk onlar gider.", en: "In the schoolyard, in the candlelight, there are tents belonging to families who fled the Esplanade. If the Gate breaks, they go first." }
+          - metin: { tr: "Okulun avlusunda, mum ışığında, {yer:kordon|den} kaçmış ailelerin çadırları var. Kapı taşarsa ilk onlar gider.", en: "In the schoolyard, in the candlelight, there are tents belonging to families who fled {yer:kordon}. If the Gate breaks, they go first." }
             kosul: { bayrak: "kordon_dustu" }
         sezgiler:
           - kosul: { stat: { per: 60 } }
@@ -2327,7 +2328,7 @@ olaylar:
 
       - id: "vmuc_acik_zafer"
         paragraflar:
-          - { tr: "Şafak sökerken on bin kişinin önünde Kapı'ya yürüyorsun. Kemik taçlı şey dışarı çıktığında mumlar sönüyor; bittiğinde Kapı yok, çekirdeği elinde, ve on bin yüz sana dönük.", en: "As dawn breaks you walk up to the Gate in front of ten thousand people. When the bone-crowned thing comes out, the candles go out. When it's over, the Gate is gone, its core is in your hand, and ten thousand faces are turned toward you." }
+          - { tr: "Şafak sökerken on bin kişinin önünde Kapı'ya yürüyorsun. Kemik taçlı şey dışarı çıktığında mumlar sönüyor; bittiğinde Kapı yok, çekirdeği elinde; on bin yüz sana dönük.", en: "As dawn breaks you walk up to the Gate in front of ten thousand people. When the bone-crowned thing comes out, the candles go out. When it's over, the Gate is gone, its core is in your hand, and ten thousand faces are turned toward you." }
           - { tr: "{npc:vahit} kalabalığın önünde, yalnız. Sonra dizlerinin üstüne çöküyor. \"Sistem'in eli,\" diyor titreyerek. \"Size söylemiştim. Elini... size söylemiştim.\"", en: "{npc:vahit} stands in front of the crowd, alone. Then he drops to his knees. \"The System's hand,\" he says, trembling. \"I told you. Its hand... I told you all.\"" }
         bildirimler:
           - tur: "sistem"
@@ -2470,7 +2471,7 @@ olaylar:
             kosul: { bayrak: ["on_ucuncu_kacti"] }
           - metin: { tr: "Gece yarısı kapında beyaz bir mürit; yüzünü tanımıyorsun. On Üç'ün eskiden taşıdığı feneri taşıyor. \"Dokuz gündür yemek yemiyor,\" diyor. \"Kubbenin üstündeki odaya kapandı. Seni istiyor.\"", en: "There's a disciple in white at your door at midnight, a face you don't know, carrying the lantern Thirteen used to carry. \"He hasn't eaten in nine days,\" she says. \"He locked himself in the room at the top of the dome. He wants you there.\"" }
             kosul: { bayrak: "on_ucuncu_yandi" }
-          - { tr: "Rasathanenin en tepesinde, döner merdivenin bittiği yerde, kimsenin girmediği bir kapı var. Tepe'de herkes onun adını biliyor: Dinleme Odası.", en: "At the very top of the observatory, where the spiral stair ends, there's a door nobody goes through. Everyone on the hill knows its name: the Listening Room." }
+          - { tr: "Rasathanenin en tepesinde, döner merdivenin bittiği yerde, kimsenin girmediği bir kapı var. {yer:tepe|de} herkes onun adını biliyor: Dinleme Odası.", en: "At the very top of the observatory, where the spiral stair ends, there's a door nobody goes through. Everyone on the hill knows its name: the Listening Room." }
           - metin: { tr: "Şehir artık Sistem'in ne olduğunu biliyor, ya da bildiğini sanıyor: bir hasat aracı. {npc:vahit} bunu ilk duyduğunda gülmüş. Ağlayarak.", en: "The city knows what the System is now, or thinks it does: a harvesting tool. When {npc:vahit} first heard, he laughed. Crying." }
             kosul: { bayrak: "gercek_hasat" }
           - metin: { tr: "Şehir artık Sistem'in ne olduğunu biliyor, ya da bildiğini sanıyor: ölü bir ırkın yazdığı bir kurtarma protokolü. {npc:vahit} bunu ilk duyduğunda dokuz gün sürecek orucuna başlamış.", en: "The city knows what the System is now, or thinks it does: a rescue protocol written by a dead race. When {npc:vahit} first heard, he started the fast that's now nine days long." }
@@ -2547,7 +2548,7 @@ olaylar:
               - bayrak: "vahit_hakli"
               - bayrak: "vahit_maskesi_dustu"
               - ahlak: { merhamet: 1, insanlik: 1 }
-            kronik: { tr: "Peygamberin odasındaki gerçeğe bakmadın; onu ertesi sabah bütün Tepe'den duydun.", en: "You didn't look at the truth in the prophet's room. The next morning you heard it from the whole hill." }
+            kronik: { tr: "Peygamberin odasındaki gerçeğe bakmadın; onu ertesi sabah bütün {yer:tepe|den} duydun.", en: "You didn't look at the truth in the prophet's room. The next morning you heard it from the whole hill." }
             sonraki: "vmask_kac_hakli"
           - id: "kac_sahte"
             etiket: { tr: "Bakma. Kapıyı kapat ve in", en: "Don't look. Close the door and go down" }
@@ -2556,7 +2557,7 @@ olaylar:
               - bayrak: "vahit_sahtekar"
               - bayrak: "vahit_maskesi_dustu"
               - ahlak: { merhamet: 1, insanlik: 1 }
-            kronik: { tr: "Peygamberin odasındaki gerçeğe bakmadın; onu ertesi sabah bütün Tepe'den duydun.", en: "You didn't look at the truth in the prophet's room. The next morning you heard it from the whole hill." }
+            kronik: { tr: "Peygamberin odasındaki gerçeğe bakmadın; onu ertesi sabah bütün {yer:tepe|den} duydun.", en: "You didn't look at the truth in the prophet's room. The next morning you heard it from the whole hill." }
             sonraki: "vmask_kac_sahte"
 
       - id: "vmask_hakli"
@@ -2569,7 +2570,7 @@ olaylar:
           - kosul: { bayrak: "yanki_bagi" }
             metin: { tr: "b̷unu tanıyorum. hasat aracının elleri. sayan, seçen, teslim eden. ben bunlardan biri değilim. değilim. değilim, değil mi?", en: "i̷ know this. the harvesting tool's hands. the ones that count, pick, deliver. i'm not one of them. i'm not. i'm not, am i?" }
           - kosul: { stat: { int: 150 } }
-            metin: { tr: "Kota Kıyıkent'in nüfusunun yüzde kırkı. Teslim günü hasadın başladığı gün. Yükselenler bir tarikat değil; hasadın yerel dağıtım şubesi.", en: "The quota is forty percent of Port Harlow's population. The delivery date is the day the Harvest begins. The Ascended aren't a cult. They're the Harvest's local distribution branch." }
+            metin: { tr: "Kota {yer:kiyikent|in} nüfusunun yüzde kırkı. Teslim günü hasadın başladığı gün. Yükselenler bir tarikat değil; hasadın yerel dağıtım şubesi.", en: "The quota is forty percent of {yer:kiyikent|pos} population. The delivery date is the day the Harvest begins. The Ascended aren't a cult. They're the Harvest's local distribution branch." }
         secenekler:
           - id: "yetki"
             etiket: { tr: "Yetkiyi al", en: "Take the authority" }
@@ -2607,14 +2608,14 @@ olaylar:
             kronik: { tr: "Peygamberin hasatla konuştuğunu bildin ve sustun; kanal Gün 331'e kadar açık kaldı.", en: "You knew the prophet was talking to the Harvest, and you kept quiet. The channel stayed open until Day 331." }
             sonraki: "@akis"
           - id: "ilan"
-            etiket: { tr: "Tepe'ye ilan et: \"Peygamber haklıydı.\"", en: "Tell the hill: \"The Prophet was right.\"" }
+            etiket: { tr: "{yer:tepe|e} ilan et: \"Peygamber haklıydı.\"", en: "Tell the hill: \"The Prophet was right.\"" }
             etkiler:
               - ahlak: { duzen: 4, insanlik: -4 }
               - itibar: { yukselenler: 15 }
               - degisken: { hayatta_kalan: -3 }
               - iliski: { vahit: { baglilik: 12 } }
               - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 2, max: 6 } }
-            kronik: { tr: "Bütün Tepe'ye peygamberin haklı olduğunu ilan ettin; tarikat o hafta iki katına çıktı.", en: "You announced to the whole hill that the prophet had been right. The cult doubled that week." }
+            kronik: { tr: "Bütün {yer:tepe|e} peygamberin haklı olduğunu ilan ettin; tarikat o hafta iki katına çıktı.", en: "You announced to the whole hill that the prophet had been right. The cult doubled that week." }
             sonraki: "@akis"
 
       - id: "vmask_kanal_kirildi"
@@ -2651,7 +2652,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 2, insanlik: 2 }
               - bayrak: "vahit_sirri_saklandi"
-            kronik: { tr: "Hasadın kanalına yenildin; peygamber ve penceresi o gece Tepe'de bir yere saklandı.", en: "You lost to the Harvest's channel. That night the prophet and his window hid somewhere on the hill." }
+            kronik: { tr: "Hasadın kanalına yenildin; peygamber ve penceresi o gece {yer:tepe|de} bir yere saklandı.", en: "You lost to the Harvest's channel. That night the prophet and his window hid somewhere on the hill." }
             sonraki: "@akis"
 
       - id: "vmask_kopar"
@@ -2705,7 +2706,7 @@ olaylar:
               - bayrak: "vahit_kukla"
               - itibar: { yukselenler: 8 }
               - iliski: { vahit: { baglilik: 15, korku: 10 } }
-            kronik: { tr: "Sahte peygamberin sırrını sakladın ve o günden sonra Tepe'nin kehanetlerini sen yazdın.", en: "You kept the false prophet's secret, and from then on you wrote the hill's prophecies yourself." }
+            kronik: { tr: "Sahte peygamberin sırrını sakladın ve o günden sonra {yer:tepe|in} kehanetlerini sen yazdın.", en: "You kept the false prophet's secret, and from then on you wrote the hill's prophecies yourself." }
             sonraki: "@akis"
           - id: "affet"
             etiket: { tr: "Onu affet; ama yazıcıyı yanında götür", en: "Forgive him. But take the printer with you" }
@@ -2714,7 +2715,7 @@ olaylar:
               - bayrak: "vahit_affedildi"
               - iliski: { vahit: { guven: 15 } }
               - npc_iz: { vahit: "yarali_guven" }
-            kronik: { tr: "Sahte peygamberi affettin ve kehanetlerini basan yazıcıyı kolunun altında Tepe'den indirdin.", en: "You forgave the false prophet and carried the printer that made his prophecies down off the hill under your arm." }
+            kronik: { tr: "Sahte peygamberi affettin ve kehanetlerini basan yazıcıyı kolunun altında {yer:tepe|den} indirdin.", en: "You forgave the false prophet and carried the printer that made his prophecies down off the hill under your arm." }
             sonraki: "@akis"
           - id: "oldur"
             etiket: { tr: "Bu odada, bu gece, bitir", en: "End it. This room, tonight" }
@@ -2723,7 +2724,7 @@ olaylar:
               - npc_ol: "vahit"
               - unvan: "maskeyi_indiren"
               - itibar: { yukselenler: -15 }
-            kronik: { tr: "Sahte peygamberi kendi Dinleme Odası'nda öldürdün; Tepe ertesi sabah kehanetsiz uyandı.", en: "You killed the false prophet in his own Listening Room. The next morning the hill woke up with no prophecy." }
+            kronik: { tr: "Sahte peygamberi kendi Dinleme Odası'nda öldürdün; {yer:tepe} ertesi sabah kehanetsiz uyandı.", en: "You killed the false prophet in his own Listening Room. The next morning the hill woke up with no prophecy." }
             sonraki: "@akis"
 
       - id: "vmask_ifsa"
@@ -2748,13 +2749,13 @@ olaylar:
               - ahlak: { merhamet: -6, duzen: -2 }
               - unvan: "maskeyi_indiren"
               - npc_ol: "vahit"
-            kronik: { tr: "Sahte peygamberi kendi sürüsüne bıraktın; Tepe'nin taşları onu rasathanenin basamaklarında buldu.", en: "You left the false prophet to his own flock. The hill's stones found him on the observatory steps." }
+            kronik: { tr: "Sahte peygamberi kendi sürüsüne bıraktın; {yer:tepe|in} taşları onu rasathanenin basamaklarında buldu.", en: "You left the false prophet to his own flock. The hill's stones found him on the observatory steps." }
             sonraki: "@akis"
 
       - id: "vmask_kac_hakli"
         paragraflar:
-          - { tr: "Kapıyı kapatıp iniyorsun. Sabah müridin biri Tepe'nin meydanına titreyerek iniyor ve bağırıyor: \"Gördüm! Pencereyi gördüm! Gerçek! Bana da konuştu!\"", en: "You close the door and go down. In the morning a disciple comes stumbling into the hill's square, shaking, shouting: \"I saw it! I saw the window! It's real! It talked to me too!\"" }
-          - { tr: "O gün Tepe'nin kalabalığı ikiye katlanıyor. {npc:vahit} artık kimsenin sorgulayamayacağı bir peygamber; ve sen, bakmamayı seçtiğin için, onu durdurabilecek tek kişiydin.", en: "That day the crowd on the hill doubles. {npc:vahit} is a prophet nobody can question anymore, and you, because you chose not to look, were the one person who could have stopped him." }
+          - { tr: "Kapıyı kapatıp iniyorsun. Sabah müridin biri {yer:tepe|in} meydanına titreyerek iniyor ve bağırıyor: \"Gördüm! Pencereyi gördüm! Gerçek! Bana da konuştu!\"", en: "You close the door and go down. In the morning a disciple comes stumbling into the hill's square, shaking, shouting: \"I saw it! I saw the window! It's real! It talked to me too!\"" }
+          - { tr: "O gün {yer:tepe|in} kalabalığı ikiye katlanıyor. {npc:vahit} artık kimsenin sorgulayamayacağı bir peygamber; ve sen, bakmamayı seçtiğin için, onu durdurabilecek tek kişiydin.", en: "That day the crowd on the hill doubles. {npc:vahit} is a prophet nobody can question anymore, and you, because you chose not to look, were the one person who could have stopped him." }
         secenekler:
           - id: "kabul"
             etiket: { tr: "Kabul et; bazı kapılar kapalı kalmalı", en: "Accept it. Some doors should stay shut" }
@@ -2773,11 +2774,11 @@ olaylar:
 
       - id: "vmask_kac_sahte"
         paragraflar:
-          - { tr: "Kapıyı kapatıp iniyorsun. Sabah bir mürit, kucağında notlar ve bir yazıcıyla Tepe'nin meydanına iniyor. Söyleyecek bir şeyi yok; sayfaları yere bırakıyor ve herkes kendi sayfasını buluyor.", en: "You close the door and go down. In the morning a disciple comes down into the hill's square with an armful of notes and a printer. They don't say anything. They just drop the pages, and everyone finds their own." }
-          - { tr: "Öğlene kadar Tepe'nin yarısı boşalıyor. {npc:vahit} kubbenin odasından çıkmıyor; kapısının önünde taşlar birikiyor.", en: "By noon, half the hill has emptied out. {npc:vahit} won't come out of the room in the dome, and rocks are piling up outside his door." }
+          - { tr: "Kapıyı kapatıp iniyorsun. Sabah bir mürit, kucağında notlar ve bir yazıcıyla {yer:tepe|in} meydanına iniyor. Söyleyecek bir şeyi yok; sayfaları yere bırakıyor ve herkes kendi sayfasını buluyor.", en: "You close the door and go down. In the morning a disciple comes down into the hill's square with an armful of notes and a printer. They don't say anything. They just drop the pages, and everyone finds their own." }
+          - { tr: "Öğlene kadar {yer:tepe|in} yarısı boşalıyor. {npc:vahit} kubbenin odasından çıkmıyor; kapısının önünde taşlar birikiyor.", en: "By noon, half the hill has emptied out. {npc:vahit} won't come out of the room in the dome, and rocks are piling up outside his door." }
         secenekler:
           - id: "kacir"
-            etiket: { tr: "Gece onu Tepe'den kaçır", en: "Get him off the hill tonight" }
+            etiket: { tr: "Gece onu {yer:tepe|den} kaçır", en: "Get him off the hill tonight" }
             etkiler:
               - ahlak: { merhamet: 5, duzen: -1 }
               - npc_gitti: "vahit"
@@ -2810,7 +2811,7 @@ olaylar:
     sahneler:
       - id: "vkap_1"
         paragraflar:
-          - { tr: "Hasadın on beşinci günü. Gök Kadim gemileriyle dolu, şehir yanıyor, Kule'nin tepesi bulutların içinde kaybolmuş. {npc:vahit} seni Tepe'nin doruğunda, artık kubbesi kalmamış rasathanenin taş zemininde bekliyor.", en: "The fifteenth day of the Harvest. The sky is full of Ancient ships, the city is burning, and the top of the tower is lost in the clouds. {npc:vahit} is waiting for you at the top of the Heights, on the stone floor of an observatory that doesn't have a dome anymore." }
+          - { tr: "Hasadın on beşinci günü. Gök Kadim gemileriyle dolu, şehir yanıyor, Kule'nin tepesi bulutların içinde kaybolmuş. {npc:vahit} seni {yer:tepe|in} doruğunda, artık kubbesi kalmamış rasathanenin taş zemininde bekliyor.", en: "The fifteenth day of the Harvest. The sky is full of Ancient ships, the city is burning, and the top of the tower is lost in the clouds. {npc:vahit} is waiting for you at the top of {yer:tepe}, on the stone floor of an observatory that doesn't have a dome anymore." }
           - metin: { tr: "Şehri terk etmişti; ama işte burada, yalınayak, sakallı, yolun tozu üstünde. \"Döndüm,\" diyor. \"Kapı beni bekliyordu. Ya da seni.\"", en: "He'd left the city, but here he is, barefoot, bearded, road dust all over him. \"I came back,\" he says. \"The door was waiting for me. Or for you.\"" }
             kosul: { bayrak: "vahit_kacti" }
           - { tr: "Zeminin ortasında bir kapı var. Duvarı yok, çerçevesi yok; yalnızca havada duran beyaz bir dikdörtgen. Diğer bütün kapılar dışarı açılıyor. Bu, yukarı.", en: "In the middle of the floor there's a door. No wall, no frame. Just a white rectangle standing in the air. Every other door opens out. This one opens up." }
@@ -2824,7 +2825,7 @@ olaylar:
             kosul: { bayrak_yok: "yukselis_sadakati", gorev: { zincir_yukselenler: "basla" } }
         sezgiler:
           - kosul: { stat: { per: 400 } }
-            metin: { tr: "Kapının ardında bir sayaç var ve sayaç, Kıyıkent'in kalan nüfusunu gösteriyor. Rakam her saniye biraz düşüyor.", en: "There's a counter behind the door, and it shows Port Harlow's remaining population. The number drops a little every second." }
+            metin: { tr: "Kapının ardında bir sayaç var ve sayaç, {yer:kiyikent|in} kalan nüfusunu gösteriyor. Rakam her saniye biraz düşüyor.", en: "There's a counter behind the door, and it shows {yer:kiyikent|pos} remaining population. The number drops a little every second." }
           - kosul: { bayrak: "yanki_bagi" }
             metin: { tr: "b̷u kapıyı tanıyorum. önceki döngüde biri açtı. sonra... sonra döngü yeniden başladı. ondan sonrasını hatırlamıyorum. belki hatırlamamam gerekiyordu.", en: "i̷ know this door. somebody opened it in the last loop. then... then the loop started over. i don't remember after that. maybe i'm not supposed to." }
         yoldas_tepkileri:
@@ -2884,7 +2885,7 @@ olaylar:
         yer: "tepe"
         paragraflar:
           - { tr: "Kapının kolu yok; yalnızca elini koyuyorsun ve kapı açılıyor. {npc:vahit} arkanda konuşmaya başlıyor ve bu sefer sesi gerçekten her kulağa ulaşıyor: şehrin bütün panellerinden, bütün radyolarından, bütün kafatası içlerinden.", en: "The door has no handle. You just lay your hand on it, and it opens. Behind you, {npc:vahit} starts to speak, and this time his voice really does reach every ear: out of every panel in the city, every radio, the inside of every skull." }
-          - { tr: "Aşağıda, yanan sokaklarda, insanlar duruyor. Sonra birer birer yukarı bakıyorlar ve yürümeye başlıyorlar; Tepe'ye doğru, kapıya doğru, sana doğru.", en: "Down below, in the burning streets, people stop. Then one by one they look up and start walking: toward the hill, toward the door, toward you." }
+          - { tr: "Aşağıda, yanan sokaklarda, insanlar duruyor. Sonra birer birer yukarı bakıyorlar ve yürümeye başlıyorlar; {yer:tepe|e} doğru, kapıya doğru, sana doğru.", en: "Down below, in the burning streets, people stop. Then one by one they look up and start walking: toward the hill, toward the door, toward you." }
           - { tr: "Kapı henüz arkanı kapatmıyor. Bekliyor; son karar gününe kadar, bütün şehrin sana yetişmesini.", en: "The door doesn't close behind you yet. It's waiting, until the day of the final decision, for the whole city to catch up to you." }
         bildirimler:
           - tur: "evrim"
@@ -2957,7 +2958,7 @@ olaylar:
       - id: "vkap_yikildi"
         yer: "tepe"
         paragraflar:
-          - { tr: "{npc:vahit} rasathanenin taş zemininde yatıyor; sesi, sonunda, yalnızca bir insanın sesi. Kapı titriyor, anahtarını kaybetmiş bir kilit gibi, ve sonra çatlıyor.", en: "{npc:vahit} lies on the observatory's stone floor. His voice, at last, is just a human voice. The door trembles like a lock that lost its key, and then it cracks." }
+          - { tr: "{npc:vahit} rasathanenin taş zemininde yatıyor; sesi, sonunda, yalnızca bir insanın sesi. Kapı, anahtarını kaybetmiş bir kilit gibi titriyor ve sonra çatlıyor.", en: "{npc:vahit} lies on the observatory's stone floor. His voice, at last, is just a human voice. The door trembles like a lock that lost its key, and then it cracks." }
           - { tr: "\"Bitir,\" diyor sana. \"Ya da bitirme. İkisi de... sanırım ikisi de benim için bir cevap.\"", en: "\"Finish it,\" he tells you. \"Or don't. Either one... I guess either one is an answer for me.\"" }
         secenekler:
           - id: "bitir"
@@ -3015,13 +3016,13 @@ olaylar:
     sahneler:
       - id: "drakip_1"
         paragraflar:
-          - { tr: "Eski Şehir'in meydanında, kırık saat kulesinin altında beyaz cübbeli bir kalabalık seni bekliyor. Ortalarında, kalkanı sırtında, göğsünde dikili tek göz, {npc:deniz_arman} duruyor.", en: "In the square in Old Town, under the broken clock tower, a crowd in white is waiting for you. In the middle of them, shield on {zamir:deniz_arman|onun} back, a single eye stitched over {zamir:deniz_arman|onun} heart, stands {npc:deniz_arman}." }
-          - { tr: "Değişmiş. Omuzları genişlemiş, yüzü incelmiş; gözlerinin altında uykusuzluk değil, başka bir şey var. Tepe'de ona Beyaz Kalkan diyorlarmış: Seçilmişlerin önünde duran, hiç düşmeyen.", en: "{zamir:deniz_arman|o|b}'ve changed. Broader in the shoulders, thinner in the face, and what's under {zamir:deniz_arman|onun} eyes isn't lack of sleep. It's something else. On the hill they call {zamir:deniz_arman|onu} the White Shield: the one who stands in front of the Chosen and never falls." }
+          - { tr: "{yer:eski_sehir|in} meydanında, kırık saat kulesinin altında beyaz cübbeli bir kalabalık seni bekliyor. Ortalarında, kalkanı sırtında, göğsünde dikili tek göz, {npc:deniz_arman} duruyor.", en: "In the square in {yer:eski_sehir}, under the broken clock tower, a crowd in white is waiting for you. In the middle of them, shield on {zamir:deniz_arman|onun} back, a single eye stitched over {zamir:deniz_arman|onun} heart, stands {npc:deniz_arman}." }
+          - { tr: "Değişmiş. Omuzları genişlemiş, yüzü incelmiş; gözlerinin altında uykusuzluk değil, başka bir şey var. {yer:tepe|de} ona Beyaz Kalkan diyorlarmış: Seçilmişlerin önünde duran, hiç düşmeyen.", en: "{zamir:deniz_arman|o|b}'ve changed. Broader in the shoulders, thinner in the face, and what's under {zamir:deniz_arman|onun} eyes isn't lack of sleep. It's something else. Up in {yer:tepe} they call {zamir:deniz_arman|onu} the White Shield: the one who stands in front of the Chosen and never falls." }
           - metin: { tr: "\"Onu buldum,\" diyor, sana selam bile vermeden. \"Tok, güvende, martılar çiziyor. Beni hatırlamıyor. Ama martıları hatırlıyor.\"", en: "\"I found her,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}, without even saying hi. \"She's fed, she's safe, she draws gulls. She doesn't remember me. But she remembers the gulls.\"" }
             kosul: { bayrak: "deniz_kardes_bulundu" }
           - metin: { tr: "\"Hâlâ görmeme izin vermiyorlar,\" diyor, sana selam bile vermeden. \"Yakında, diyorlar. Kalkan yeterince güçlenince. Ben de güçleniyorum.\"", en: "\"They still won't let me see her,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}, without even saying hi. \"Soon, they say. Once the Shield's strong enough. So I'm getting stronger.\"" }
             kosul: { bayrak_yok: "deniz_kardes_bulundu" }
-          - { tr: "\"Peygamber senin Seçilmiş olduğunu söylüyor,\" diye devam ediyor. \"O zaman Tepe'ye gel. Ya da onların önünde bana yanıldığımı söyle. Ama bu sefer arkanı dönüp gitme.\"", en: "\"The Prophet says you're the Chosen,\" {zamir:deniz_arman|o} keep{zamir:deniz_arman|s} going. \"So come up to the hill. Or tell me I'm wrong, right here, in front of them. But don't turn your back and walk away this time.\"" }
+          - { tr: "\"Peygamber senin Seçilmiş olduğunu söylüyor,\" diye devam ediyor. \"O zaman {yer:tepe|e} gel. Ya da onların önünde bana yanıldığımı söyle. Ama bu sefer arkanı dönüp gitme.\"", en: "\"The Prophet says you're the Chosen,\" {zamir:deniz_arman|o} keep{zamir:deniz_arman|s} going. \"So come up to {yer:tepe}. Or tell me I'm wrong, right here, in front of them. But don't turn your back and walk away this time.\"" }
           - metin: { tr: "Giderken ona söz vermiştin: bir gün ikisini de oradan çıkaracaktın. Gözleri sözünü hatırladığını söylüyor.", en: "When {zamir:deniz_arman|o} left, you made a promise: someday you'd walk them both out of there. {zamir:deniz_arman|onun|b} eyes say {zamir:deniz_arman|o} remember{zamir:deniz_arman|s}." }
             kosul: { hafiza: { deniz_arman: "gidis_soz" } }
           - metin: { tr: "Giderken ona arkanı dönmüştün. Bunu sana bakışından çok, sana hiç bakmamasından anlıyorsun.", en: "When {zamir:deniz_arman|o} left, you turned your back. You can tell {zamir:deniz_arman|o} remember{zamir:deniz_arman|s}, less from the way {zamir:deniz_arman|o} look{zamir:deniz_arman|s} at you than from the way {zamir:deniz_arman|o} won't." }
@@ -3047,16 +3048,16 @@ olaylar:
               - ahlak: { duzen: 2, merhamet: -1 }
               - iliski: { deniz_arman: { saygi: 6 } }
               - savas: { dusmanlar: ["deniz_beyaz_kalkan@oyuncu+3"], kazan: "drakip_zafer", kaybet: "drakip_yenilgi" }
-            kronik: { tr: "Eski Şehir'in meydanında, kırık saatin altında en eski arkadaşınla dövüştün.", en: "You fought your oldest friend in the Old Town square, under the broken clock." }
+            kronik: { tr: "{yer:eski_sehir|in} meydanında, kırık saatin altında en eski arkadaşınla dövüştün.", en: "You fought your oldest friend in the {yer:eski_sehir} square, under the broken clock." }
           - id: "teslim"
-            etiket: { tr: "\"Tamam. Tepe'ye geliyorum.\"", en: "\"Fine. I'm coming up the hill.\"" }
+            etiket: { tr: "\"Tamam. {yer:tepe|e} geliyorum.\"", en: "\"Fine. I'm coming up the hill.\"" }
             etkiler:
               - ahlak: { insanlik: -6, duzen: 3 }
               - itibar: { yukselenler: 8 }
               - bayrak: "deniz_kalkanin_oldu"
               - iliski: { deniz_arman: { baglilik: 6, guven: -4, korku: 4 } }
               - tohum: { olay: "vahit_secilmisler", gecikme: { min: 2, max: 5 }, kosul: { npc_hayatta: "vahit" } }
-            kronik: { tr: "Arkadaşının peşinden Tepe'ye çıktın; Beyaz Kalkan o günden sonra senin kalkanın oldu.", en: "You followed your friend up the hill. From that day on, the White Shield was your shield." }
+            kronik: { tr: "Arkadaşının peşinden {yer:tepe|e} çıktın; Beyaz Kalkan o günden sonra senin kalkanın oldu.", en: "You followed your friend up to {yer:tepe}. From that day on, the White Shield was your shield." }
             sonraki: "drakip_teslim"
           - id: "guc"
             tur: "aciga_vur"
@@ -3090,6 +3091,7 @@ olaylar:
               - ahlak: { merhamet: 4, duzen: 1 }
               - npc_fraksiyon: { deniz_arman: "siginak" }
               - bayrak: "deniz_yukselenlerden_dondu"
+              - bayrak_kaldir: "deniz_yukselenlere_gitti"
               - itibar: { siginak: 4, yukselenler: -8 }
               - iliski: { deniz_arman: { baglilik: 8 } }
               - hafiza: { npc: "deniz_arman", id: "olay:deniz_yukselen_rakip", agirlik: 50 }
@@ -3101,6 +3103,7 @@ olaylar:
               - ahlak: { insanlik: 4, merhamet: 2 }
               - npc_fraksiyon: { deniz_arman: "siginak" }
               - bayrak: "deniz_yukselenlerden_dondu"
+              - bayrak_kaldir: "deniz_yukselenlere_gitti"
               - iliski: { deniz_arman: { baglilik: 10, guven: 6 } }
               - hafiza: { npc: "deniz_arman", id: "olay:deniz_yukselen_rakip", agirlik: 55 }
             kronik: { tr: "Beyazı çıkaran arkadaşına kırık saatin altında sarıldın; ikiniz de uzun süre konuşmadınız.", en: "Under the broken clock you hugged the friend who'd just taken off the white. Neither of you said anything for a long time." }
@@ -3123,7 +3126,7 @@ olaylar:
               - ahlak: { merhamet: 3, insanlik: 2 }
               - bayrak: "deniz_rakip_oldu"
               - iliski: { deniz_arman: { saygi: -4, guven: 2 } }
-            kronik: { tr: "Arkadaşın kalkanını kaldırdığında dövüşmedin; o da vurmadı ve Tepe'ye döndü.", en: "When your friend raised the shield, you didn't fight. Neither did they. They went back up the hill." }
+            kronik: { tr: "Arkadaşın kalkanını kaldırdığında dövüşmedin; o da vurmadı ve {yer:tepe|e} döndü.", en: "When your friend raised the shield, you didn't fight. Neither did they. They went back up the hill." }
             sonraki: "@akis"
 
       - id: "drakip_zafer"
@@ -3146,9 +3149,10 @@ olaylar:
               - ahlak: { merhamet: -15, insanlik: -10 }
               - npc_ol: "deniz_arman"
               - unvan: "kardes_katili"
+              - bayrak: "deniz_oyuncu_oldurdu"
               - yozlasma: 6
               - itibar: { yukselenler: -10 }
-            kronik: { tr: "En eski arkadaşını Eski Şehir'in meydanında, kırık saatin altında öldürdün.", en: "You killed your oldest friend in the Old Town square, under the broken clock." }
+            kronik: { tr: "En eski arkadaşını {yer:eski_sehir|in} meydanında, kırık saatin altında öldürdün.", en: "You killed your oldest friend in the {yer:eski_sehir} square, under the broken clock." }
             sonraki: "@akis"
           - id: "cubbe"
             etiket: { tr: "Cübbesini çıkar: \"Kardeşine git. Beyazsız.\"", en: "Pull off the robe: \"Go to your sister. No white.\"" }
@@ -3157,7 +3161,7 @@ olaylar:
               - bayrak: "deniz_rakip_oldu"
               - iliski: { deniz_arman: { korku: 6, saygi: 6 } }
               - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 5, max: 10 } }
-            kronik: { tr: "Yendiğin arkadaşının beyaz cübbesini herkesin önünde çıkardın; o, cübbesiz, yine Tepe'ye döndü.", en: "You stripped the white robe off your beaten friend in front of everyone. Robeless, they went back up the hill anyway." }
+            kronik: { tr: "Yendiğin arkadaşının beyaz cübbesini herkesin önünde çıkardın; o, cübbesiz, yine {yer:tepe|e} döndü.", en: "You stripped the white robe off your beaten friend in front of everyone. Robeless, they went back up the hill anyway." }
             sonraki: "@akis"
 
       - id: "drakip_yenilgi"
@@ -3171,7 +3175,7 @@ olaylar:
               - ahlak: { insanlik: 3 }
               - bayrak: "deniz_rakip_oldu"
               - iliski: { deniz_arman: { saygi: -4, guven: 4 } }
-            kronik: { tr: "En eski arkadaşına meydanda yenildin; seni bağışladı ve Tepe'nin kahramanı oldu.", en: "You lost to your oldest friend in the square. They spared you and became the hill's hero." }
+            kronik: { tr: "En eski arkadaşına meydanda yenildin; seni bağışladı ve {yer:tepe|in} kahramanı oldu.", en: "You lost to your oldest friend in the square. They spared you and became the hill's hero." }
             sonraki: "@akis"
           - id: "seslen"
             etiket: { tr: "Arkasından seslen: \"Bu sen değilsin!\"", en: "Shout after them: \"This isn't you!\"" }
@@ -3199,7 +3203,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 3, merhamet: 1 }
               - iliski: { deniz_arman: { guven: 6 } }
-            kronik: { tr: "Tepe'ye çıkarken arkadaşına korkmakta haklı olduğunu söyledin.", en: "On the way up the hill you told your friend they were right to be scared." }
+            kronik: { tr: "{yer:tepe|e} çıkarken arkadaşına korkmakta haklı olduğunu söyledin.", en: "On the way up to {yer:tepe} you told your friend they were right to be scared." }
             sonraki: "@akis"
 
       - id: "drakip_guc"
@@ -3238,12 +3242,12 @@ olaylar:
             kronik: { tr: "En eski arkadaşına gücünün her çentiğinin bir insan olduğunu söyledin.", en: "You told your oldest friend that every notch of their power was a person." }
             sonraki: "drakip_cetik"
           - id: "aile"
-            etiket: { tr: "\"Bana Tepe'den bir aile ver. Tek bir aile.\"", en: "\"Give me one family off the hill. Just one.\"" }
+            etiket: { tr: "\"Bana {yer:tepe|den} bir aile ver. Tek bir aile.\"", en: "\"Give me one family off the hill. Just one.\"" }
             etkiler:
               - ahlak: { merhamet: 4, duzen: -1 }
               - iliski: { deniz_arman: { guven: 6, saygi: 4 } }
               - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 3, max: 6 } }
-            kronik: { tr: "Beyaz Kalkan senin için Tepe'den gizlice bir aile kaçırdı.", en: "For you, the White Shield smuggled one family off the hill." }
+            kronik: { tr: "Beyaz Kalkan senin için {yer:tepe|den} gizlice bir aile kaçırdı.", en: "For you, the White Shield smuggled one family off the hill." }
             sonraki: "@akis"
           - id: "veda"
             etiket: { tr: "\"O zaman bir gün karşı karşıya geliriz.\"", en: "\"Then someday we'll be on opposite sides.\"" }
@@ -3265,6 +3269,7 @@ olaylar:
               - ahlak: { merhamet: 4, insanlik: 3 }
               - npc_fraksiyon: { deniz_arman: "siginak" }
               - bayrak: "deniz_yukselenlerden_dondu"
+              - bayrak_kaldir: "deniz_yukselenlere_gitti"
               - iliski: { deniz_arman: { baglilik: 10, guven: 6 } }
             kronik: { tr: "En eski arkadaşına gücünün bedelini gösterdin; kalkanını meydanda bırakıp seninle geldi.", en: "You showed your oldest friend what their power cost. They left the shield in the square and came with you." }
             sonraki: "@akis"
@@ -3274,7 +3279,7 @@ olaylar:
               - ahlak: { duzen: -2, insanlik: 2 }
               - bayrak: "deniz_rakip_oldu"
               - iliski: { deniz_arman: { saygi: 8 } }
-            kronik: { tr: "Arkadaşına gerçeği söyledin ve kararı ona bıraktın; Tepe'ye döndü, ama artık başka bir nedenle.", en: "You told your friend the truth and left the choice to them. They went back up the hill, but for a different reason now." }
+            kronik: { tr: "Arkadaşına gerçeği söyledin ve kararı ona bıraktın; {yer:tepe|e} döndü, ama artık başka bir nedenle.", en: "You told your friend the truth and left the choice to them. They went back up to {yer:tepe}, but for a different reason now." }
             sonraki: "@akis"
 
   # ================================================================== TOHUM: KAÇAK AİLE
@@ -3291,7 +3296,7 @@ olaylar:
       - id: "kacak_1"
         paragraflar:
           - { tr: "Gece yarısı kapın tıkırdıyor; vurulmuyor, tıkırdıyor, korkan birinin parmak uçlarıyla. Eşikte bir adam ve iki çocuk duruyor; üçünün de alnında gri başparmak izi.", en: "At midnight there's a tapping at your door. Not knocking, tapping, with the fingertips of somebody scared. On the step stand a man and two kids, all three with gray thumbprints on their foreheads." }
-          - { tr: "\"Tepe'den kaçtık,\" diyor adam. \"Bizim satırımız gelmişti. Peşimizde avcılar var; beyazlar. Bir yer... bir gece. Sadece bir gece.\"", en: "\"We got off the hill,\" the man says. \"Our line came up. There are hunters after us. White robes. Somewhere... one night. Just one night.\"" }
+          - { tr: "\"{yer:tepe|den} kaçtık,\" diyor adam. \"Bizim satırımız gelmişti. Peşimizde avcılar var; beyazlar. Bir yer... bir gece. Sadece bir gece.\"", en: "\"We got off {yer:tepe},\" the man says. \"Our line came up. There are hunters after us. White robes. Somewhere... one night. Just one night.\"" }
           - metin: { tr: "Sonra omzunun üstündeki beyaz kumaşı görüyor ve geri çekiliyor; küçük olanı arkasına itiyor. Sen de onlardansın.", en: "Then he sees the white cloth over your shoulder and pulls back, pushing the little one behind him. You're one of them." }
             kosul: { gorev: { zincir_yukselenler: "basla" } }
           - metin: { tr: "Sokağın başında fenerler beliriyor. Üç, dört; acele etmiyorlar. Acele etmelerine gerek yok.", en: "Lanterns show up at the end of the street. Three, four. They're not hurrying. They don't have to." }
@@ -3307,7 +3312,7 @@ olaylar:
               - ahlak: { merhamet: 5, duzen: -2 }
               - degisken: { hayatta_kalan: 1 }
               - itibar: { yukselenler: -4 }
-            kronik: { tr: "Tepe'den kaçan bir aileyi gece yarısı evine aldın.", en: "At midnight you took in a family running from the hill." }
+            kronik: { tr: "{yer:tepe|den} kaçan bir aileyi gece yarısı evine aldın.", en: "At midnight you took in a family running from the hill." }
             sonraki: "kacak_kapi"
           - id: "teslim"
             etiket: { tr: "Fenerlere seslen: \"Buradalar.\"", en: "Call to the lanterns: \"They're here.\"" }
@@ -3316,7 +3321,7 @@ olaylar:
               - itibar: { yukselenler: 8 }
               - degisken: { hayatta_kalan: -1 }
               - iliski: { vahit: { guven: 4 } }
-            kronik: { tr: "Gece yarısı kapına sığınan bir aileyi Tepe'nin avcılarına teslim ettin.", en: "At midnight you handed the family that came to your door over to the hill's hunters." }
+            kronik: { tr: "Gece yarısı kapına sığınan bir aileyi {yer:tepe|in} avcılarına teslim ettin.", en: "At midnight you handed the family that came to your door over to the hill's hunters." }
             sonraki: "kacak_teslim"
           - id: "benim"
             tur: "gosteris"
@@ -3327,7 +3332,7 @@ olaylar:
               - dikkat: 2
               - degisken: { hayatta_kalan: 1 }
               - iliski: { vahit: { saygi: 4 } }
-            kronik: { tr: "Bir aileyi Tepe'nin avcılarından onları kendi yakıtın ilan ederek kurtardın.", en: "You saved a family from the hill's hunters by claiming them as your own fuel." }
+            kronik: { tr: "Bir aileyi {yer:tepe|in} avcılarından onları kendi yakıtın ilan ederek kurtardın.", en: "You saved a family from {yer:tepe}' hunters by claiming them as your own fuel." }
             sonraki: "kacak_benim"
           - id: "siginak"
             etiket: { tr: "Arka sokaktan Sığınak'a götür", en: "Take them to the Haven by the back alleys" }
@@ -3336,7 +3341,7 @@ olaylar:
               - itibar: { siginak: 3 }
               - degisken: { hayatta_kalan: 2 }
               - tohum: { olay: "vahit_mucize_sinavi", gecikme: { min: 8, max: 16 }, kosul: { npc_hayatta: "vahit", bayrak: "vahit_yakin_takip" } }
-            kronik: { tr: "Tepe'den kaçan bir aileyi gecenin içinde arka sokaklardan Sığınak'a taşıdın.", en: "You walked a family running from the hill through the back alleys to the Haven in the middle of the night." }
+            kronik: { tr: "{yer:tepe|den} kaçan bir aileyi gecenin içinde arka sokaklardan Sığınak'a taşıdın.", en: "You walked a family running from {yer:tepe} through the back alleys to the Haven in the middle of the night." }
             sonraki: "@akis"
 
       - id: "kacak_kapi"
@@ -3348,7 +3353,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 2, duzen: -2 }
               - savas: { dusmanlar: ["secilmis_avci@dunya", "yukselen_muhafiz@dunya"], kazan: "kacak_zafer", kaybet: "kacak_yenilgi" }
-            kronik: { tr: "Kapına sığınan bir aile için Tepe'nin avcılarıyla sokakta dövüştün.", en: "You fought the hill's hunters in the street for a family that came to your door." }
+            kronik: { tr: "Kapına sığınan bir aile için {yer:tepe|in} avcılarıyla sokakta dövüştün.", en: "You fought {yer:tepe}' hunters in the street for a family that came to your door." }
           - id: "sus"
             etiket: { tr: "Sus; ışıkları söndür ve bekle", en: "Stay quiet. Kill the lights. Wait" }
             zar: { stat: "agi", zorluk: 28, tek: true, basarisiz: "kacak_bulundu", basarisiz_etkiler: [{ ahlak: { merhamet: 1 } }] }
@@ -3380,7 +3385,7 @@ olaylar:
               - ahlak: { merhamet: 3, duzen: 1 }
               - degisken: { hayatta_kalan: 1 }
               - itibar: { yukselenler: -4, siginak: 2 }
-            kronik: { tr: "Tepe'nin avcılarını yere serdin ve bir aileyi sabah güvenli bir yere bıraktın.", en: "You put the hill's hunters on the ground and dropped a family somewhere safe in the morning." }
+            kronik: { tr: "{yer:tepe|in} avcılarını yere serdin ve bir aileyi sabah güvenli bir yere bıraktın.", en: "You put {yer:tepe}' hunters on the ground and dropped a family somewhere safe in the morning." }
             sonraki: "@akis"
           - id: "ordu"
             etiket: { tr: "Adama sor: \"Benim için savaşır mısın?\"", en: "Ask the man: \"Would you fight for me?\"" }
@@ -3477,7 +3482,7 @@ olaylar:
               - ahlak: { merhamet: 3, duzen: 2, insanlik: -1 }
               - bayrak: "on_ucuncu_yaninda"
               - iliski: { vahit: { guven: -4 } }
-            kronik: { tr: "On Üç'ü Tepe'nin ateşinden alıp yanına aldın; sana bir tanrıya bakar gibi baktı.", en: "You took Thirteen out of the hill's fire and kept him by your side. He looked at you like a god." }
+            kronik: { tr: "On Üç'ü {yer:tepe|in} ateşinden alıp yanına aldın; sana bir tanrıya bakar gibi baktı.", en: "You took Thirteen out of the hill's fire and kept him by your side. He looked at you like a god." }
             sonraki: "onuc_yaninda"
           - id: "kac"
             etiket: { tr: "\"Kaç. Yolu ben açarım.\"", en: "\"Run. I'll clear the road.\"" }
@@ -3509,7 +3514,7 @@ olaylar:
               - bayrak: "on_ucuncu_adini_aldi"
               - degisken: { hayatta_kalan: 1 }
               - iliski: { vahit: { saygi: 4, guven: -6 } }
-            kronik: { tr: "On Üç'e listeden önceki adını hatırlattın; o adla Tepe'den indi ve bir daha numarayla anılmadı.", en: "You reminded Thirteen of the name he had before the list. He walked down off the hill with it and was never called by a number again." }
+            kronik: { tr: "On Üç'e listeden önceki adını hatırlattın; o adla {yer:tepe|den} indi ve bir daha numarayla anılmadı.", en: "You reminded Thirteen of the name he had before the list. He walked down off the hill with it and was never called by a number again." }
             sonraki: "onuc_adi"
 
       - id: "onuc_yaninda"

@@ -137,7 +137,7 @@ olaylar:
               - degisken: { hayatta_kalan: 2 }
               - tohum: { olay: "lonca_1_kapi_temizligi", gecikme: { min: 5, max: 10 }, kosul: { bayrak_yok: "lonca_1_tamam" } }
               - tohum: { olay: "kaya_sert_ders", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "kaya_demir" } }
-            kronik: { tr: "{npc:kaya_demir|in} masasında Konsey'le ortak bir hattı savundun; Sanayi ile Liman arasındaki sınır o gün biraz inceldi.", en: "At {npc:kaya_demir|pos} table you argued for a joint line with the Council. The border between the Ironworks and the Waterfront got a little thinner that day." }
+            kronik: { tr: "{npc:kaya_demir|in} masasında Konsey'le ortak bir hattı savundun; {yer:sanayi} ile {yer:kiyikent_liman} arasındaki sınır o gün biraz inceldi.", en: "At {npc:kaya_demir|pos} table you argued for a joint line with the Council. The border between {yer:sanayi} and {yer:kiyikent_liman} got a little thinner that day." }
             sonraki: "kaya_lonca_teklifi_pano"
           - id: "reddet"
             etiket: { tr: "\"Ben kimsenin askeri değilim.\"", en: "\"I'm nobody's soldier.\"" }
@@ -167,7 +167,7 @@ olaylar:
           - kosul: { stat: { per: 40 } }
             metin: { tr: "Destek sütunundaki bazı noktaların yanında ince bir çarpı işareti var. Tebeşir yeni; bu hafta atılmış.", en: "Some of the dots in the Support column have a thin X next to them. Fresh chalk. Somebody added those this week." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "s̷ayılar. Sistem de seni sayılarla ölçüyor. bu adam sadece kendi Sistem'ini kurmuş; daha dürüst, daha küçük.", en: "n̷umbers. the System measures you in numbers too. this man just built his own System. more honest. smaller." }
+            metin: { tr: "s̷ayılar. sistem de seni sayılarla ölçüyor. bu adam sadece kendi sistemini kurmuş; daha dürüst, daha küçük.", en: "n̷umbers. the system measures you in numbers too. this man just built his own system. more honest. smaller." }
         secenekler:
           - id: "en_uste"
             tur: "gosteris"
@@ -731,7 +731,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 8, korku: 3 } }
               - bayrak: "lonca_1_tamam"
               - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 } }
-            kronik: { tr: "Kızak Kraliçesi'nin başını omzunda Sanayi'nin ortasından geçirdin; o yürüyüşü gören kimse Lonca'nın merdiveninin tepesinde senden başkasını düşünemedi.", en: "You carried the Slipway Queen's head on your shoulder straight through the middle of the Ironworks. Nobody who saw that walk could picture anyone else at the top of the Guild's ladder." }
+            kronik: { tr: "Kızak Kraliçesi'nin başını omzunda {yer:sanayi|in} ortasından geçirdin; o yürüyüşü gören kimse Lonca'nın merdiveninin tepesinde senden başkasını düşünemedi.", en: "You carried the Slipway Queen's head on your shoulder straight through the middle of {yer:sanayi}. Nobody who saw that walk could picture anyone else at the top of the Guild's ladder." }
             sonraki: "@akis"
 
       - id: "lonca_1_yenilgi"
@@ -767,7 +767,7 @@ olaylar:
         yer: "sanayi"
         paragraflar:
           - { tr: "Halata tutunup havuzdan dışarı tırmanıyorsun; arkanda saclar kaynıyor. Kenara vardığında Defterdar yazı altlığına bir şey yazıyor, sonra telsizi ağzına götürüyor: \"Ağır mangayı gönderin.\"", en: "You grab the rope and climb out of the basin with the plates boiling behind you. When you make the edge, the Ledger writes something on her clipboard, then lifts the radio: \"Send the heavy squad.\"" }
-          - { tr: "Ağır manga yirmi dakika sonra geliyor. Havuzdan taşan kurtlardan biri tersanenin trafosunu kemirmiş; Sanayi'nin yarısı bu gece karanlıkta kalacak.", en: "The heavy squad shows up twenty minutes later. One of the grubs that spilled out of the basin has chewed through the shipyard's transformer. Half the Ironworks is going to be dark tonight." }
+          - { tr: "Ağır manga yirmi dakika sonra geliyor. Havuzdan taşan kurtlardan biri tersanenin trafosunu kemirmiş; {yer:sanayi|in} yarısı bu gece karanlıkta kalacak.", en: "The heavy squad shows up twenty minutes later. One of the grubs that spilled out of the basin has chewed through the shipyard's transformer. Half {yer:sanayi} is going to be dark tonight." }
         secenekler:
           - id: "geri_in"
             etiket: { tr: "Ağır mangayla birlikte geri in", en: "Go back down with the heavy squad" }
@@ -783,7 +783,7 @@ olaylar:
               - degisken: { hayatta_kalan: 1 }
               - bayrak: "lonca_1_tamam"
               - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 } }
-            kronik: { tr: "Kuru havuzun kapısını ağır mangaya bırakıp Sanayi'nin trafosunu onardın; o gece Lojmanlar'ın ışığı senin sayende yandı.", en: "You left the dry dock Gate to the heavy squad and fixed the Ironworks transformer instead. That night, the lights in the company houses were on because of you." }
+            kronik: { tr: "Kuru havuzun kapısını ağır mangaya bırakıp {yer:sanayi|in} trafosunu onardın; o gece Lojmanlar'ın ışığı senin sayende yandı.", en: "You left the dry dock Gate to the heavy squad and fixed {yer:sanayi} transformer instead. That night, the lights in the company houses were on because of you." }
             sonraki: "@akis"
 
   # ================================================================== KAYA — SERT DERS (P2)
@@ -802,17 +802,17 @@ olaylar:
       - id: "kaya_sert_ders_1"
         yer: "sanayi"
         paragraflar:
-          - { tr: "Gece yarısını geçiyor ki Sanayi'nin bütün sirenleri birden ötüyor. Nerede olursan ol, turuncu yamalı bir koşucu seni yine buluyor; bu sefer soluk soluğa: \"Cüruf tepesindeki kapı taştı. Başçavuş seni haddehanede istiyor. Hemen.\"", en: "It's just past midnight when every siren in the Ironworks goes off at once. Wherever you are, an orange-patched runner finds you again, out of breath this time: \"The Gate on the slag heap broke. Gunny wants you at the mill. Now.\"" }
+          - { tr: "Gece yarısını geçiyor ki {yer:sanayi|in} bütün sirenleri birden ötüyor. Nerede olursan ol, turuncu yamalı bir koşucu seni yine buluyor; bu sefer soluk soluğa: \"Cüruf tepesindeki kapı taştı. Başçavuş seni haddehanede istiyor. Hemen.\"", en: "It's just past midnight when every siren in {yer:sanayi} goes off at once. Wherever you are, an orange-patched runner finds you again, out of breath this time: \"The Gate on the slag heap broke. Gunny wants you at the mill. Now.\"" }
           - { tr: "{npc:kaya_demir} ambar kapağı masasının başında, tek bir lambanın altında. Haritada iki kırmızı nokta var: kuzeyde Döküm Atölyesi, Lonca'nın bütün silahlarını döktüğü ve şehrin yarısının kapı zırhını onardığı yer. Güneyde Lojmanlar: çelik fabrikasının eski işçi evleri, iki yüz kişi, çoğu Destek sütunundan.", en: "{npc:kaya_demir} is at the hatch-cover table under a single lamp. There are two red dots on the map. North: the Foundry, where the Guild casts every weapon it has and patches the Gate armor for half the city. South: the company houses, the steel plant's old worker row homes. Two hundred people, most of them from the Support column." }
           - { tr: "\"Sürü ikiye ayrıldı,\" diyor, sana bakmadan. \"İki hattı birden tutacak adamım yok. Döküm düşerse şehir bir ay silahsız kalır; bir ay silahsız kalan şehir kışı görmez. Lojmanlar iki yüz kişi. Döküm yirmi bin.\"", en: "\"The swarm split in two,\" he says, without looking at you. \"I don't have the bodies to hold both lines. Foundry falls, the city goes a month without weapons, and a city that goes a month without weapons doesn't see winter. The houses are two hundred people. The Foundry's twenty thousand.\"" }
           - { tr: "Sonra başını kaldırıyor. \"Döküm'ü tutacaksın. Bu bir emir. Ve bu gece komutanlık nedir, onu öğreneceksin: kimin öleceğini seçmek.\"", en: "Then he looks up. \"You're holding the Foundry. That's an order. And tonight you're going to learn what command actually is: choosing who dies.\"" }
-          - metin: { tr: "\"Kordon'u Konsey üç saat oy verirken kaybettik,\" diye ekliyor. \"Ben oy vermem.\"", en: "\"We lost the Esplanade while the Council spent three hours voting,\" he adds. \"I don't vote.\"" }
+          - metin: { tr: "\"{yer:kordon|i} Konsey üç saat oy verirken kaybettik,\" diye ekliyor. \"Ben oy vermem.\"", en: "\"We lost {yer:kordon} while the Council spent three hours voting,\" he adds. \"I don't vote.\"" }
             kosul: { bayrak: "kordon_dustu" }
-          - metin: { tr: "\"Kordon'u tuttun. Aferin,\" diye ekliyor. \"Bu gece farklı. Bu gece herkesi kurtarmak diye bir seçenek yok.\"", en: "\"You held the Esplanade. Good work,\" he adds. \"Tonight's different. Tonight there's no option where everybody makes it.\"" }
+          - metin: { tr: "\"{yer:kordon|i} tuttun. Aferin,\" diye ekliyor. \"Bu gece farklı. Bu gece herkesi kurtarmak diye bir seçenek yok.\"", en: "\"You held {yer:kordon}. Good work,\" he adds. \"Tonight's different. Tonight there's no option where everybody makes it.\"" }
             kosul: { bayrak: "kordon_kurtarildi" }
         bildirimler:
           - tur: "uyari"
-            baslik: { tr: "[KAPI TAŞMASI] Sanayi · Cüruf Tepesi", en: "[GATE BREAK] Ironworks · Slag Heap" }
+            baslik: { tr: "[KAPI TAŞMASI] {yer:sanayi} · Cüruf Tepesi", en: "[GATE BREAK] Ironworks · Slag Heap" }
             satirlar:
               - { tr: "Sürü ikiye bölündü. Kuzey kolu: Döküm Atölyesi. Güney kolu: Lojmanlar.", en: "Swarm has split. North column: the Foundry. South column: the company houses." }
               - { tr: "Tahmini temas: 14 dakika.", en: "Estimated contact: 14 minutes." }
@@ -975,7 +975,7 @@ olaylar:
       - id: "kaya_sert_ders_ikisi"
         yer: "sanayi"
         paragraflar:
-          - { tr: "Haddehaneden çıkıyorsun ve Sanayi'nin sokakları bir an bulanıklaşıyor. Döküm'ün kapısında kuzey kolunun ilk sırası yere seriliyor; dört dakika sonra Lojmanlar'ın çatılarındaki insanlar güney kolunun ön saflarının dağıldığını görüyor.", en: "You walk out of the mill and the streets of the Ironworks blur for a second. At the Foundry door, the first rank of the north column hits the ground. Four minutes later, the people on the roofs of the company houses watch the front of the south column fall apart." }
+          - { tr: "Haddehaneden çıkıyorsun ve {yer:sanayi|in} sokakları bir an bulanıklaşıyor. Döküm'ün kapısında kuzey kolunun ilk sırası yere seriliyor; dört dakika sonra Lojmanlar'ın çatılarındaki insanlar güney kolunun ön saflarının dağıldığını görüyor.", en: "You walk out of the mill and the streets of {yer:sanayi} blur for a second. At the Foundry door, the first rank of the north column hits the ground. Four minutes later, the people on the roofs of the company houses watch the front of the south column fall apart." }
           - { tr: "Gece boyunca iki hat arasında gidip geliyorsun. Döküm ustaları seni kuzeyde görüyor; çatılardakiler güneyde. Sabah iki taraf da seni bütün gece yanlarında sanıyor.", en: "All night you go back and forth between the two lines. The casters see you in the north. The people on the roofs see you in the south. By morning, both sides think you were with them all night." }
           - { tr: "Şafakta {npc:kaya_demir} Döküm'ün kapısında, süngüsü temiz, haritası elinde duruyor. Harita artık hiçbir şey anlatmıyor; o da bunu biliyor.", en: "At dawn, {npc:kaya_demir} is standing at the Foundry door with a clean bayonet and his map in his hand. The map doesn't mean anything anymore, and he knows it." }
         bildirimler:
@@ -1503,7 +1503,7 @@ olaylar:
         yer: "sanayi"
         paragraflar:
           - { tr: "Haddehanenin harekât odası, eski kontrol kabininin camlarının arkasında. Duvarda {yer:kiyikent|in} haritası ve üstünde yeni bir kararname: TEK BAYRAK. Şehirdeki her avcı Lonca'ya kayıt olacak; Kule'nin otuzuncu katından yukarısı Lonca'nın izniyle tırmanılacak.", en: "The mill's operations room sits behind the glass of the old control booth. On the wall: a map of {yer:kiyikent} and, pinned over it, a new decree. ONE BANNER. Every hunter in the city registers with the Guild. Anything above the Spire's thirtieth floor gets climbed with Guild permission, or not at all." }
-          - { tr: "Bir lonca imzalamamış: Mavi Çapa. Liman'ın eski hamalları, römorkörcüleri ve balıkçılarından kurulmuş, kendi kapılarını kendi kapatan, kendi ölülerini kendi gömen bir avcı loncası. Masada bir ihbar duruyor: Çapa'nın Kadim simsarlarına kule kristali sattığına dair.", en: "One guild didn't sign: the Blue Anchor. Longshoremen, tug crews and fishermen off the Waterfront who close their own Gates and bury their own dead. There's a tip on the table: the Anchor's been selling Spire crystals to Ancient brokers." }
+          - { tr: "Bir lonca imzalamamış: Mavi Çapa. {yer:kiyikent_liman|in} eski hamalları, römorkörcüleri ve balıkçılarından kurulmuş, kendi kapılarını kendi kapatan, kendi ölülerini kendi gömen bir avcı loncası. Masada bir ihbar duruyor: Çapa'nın Kadim simsarlarına kule kristali sattığına dair.", en: "One guild didn't sign: the Blue Anchor. Longshoremen, tug crews and fishermen off {yer:kiyikent_liman} who close their own Gates and bury their own dead. There's a tip on the table: the Anchor's been selling Spire crystals to Ancient brokers." }
           - metin: { tr: "{npc:kaya_demir} ihbarı sana uzatıyor. \"Kadimler körfezde demirli ve bu adamlar onlara kristal satıyor,\" diyor. \"Bu gece Reis'i getir. Çapa'yı dağıt. Nasıl yapacağın senin işin; yapılmış olması benim işim.\"", en: "{npc:kaya_demir} slides the tip across to you. \"The Ancients are anchored in the bay and these people are selling them crystals,\" he says. \"Bring me the Harbormaster tonight. Break up the Anchor. How you do it is your business. That it gets done is mine.\"" }
             kosul: { npc_hayatta: "kaya_demir" }
           - metin: { tr: "Subay konseyi emri oy birliğiyle vermiş; Defterdar okuyor. \"Bu gece. Reis'i getir, Çapa'yı dağıt. Başçavuş olsa beklemezdi.\"", en: "The officer council voted the order unanimously, and the Ledger reads it out. \"Tonight. Bring in the Harbormaster, break up the Anchor. The Gunny wouldn't have waited.\"" }
@@ -1535,7 +1535,7 @@ olaylar:
               - ahlak: { duzen: 6, merhamet: -6, insanlik: -3 }
               - itibar: { lonca: 6, siginak: -4 }
               - iliski: { kaya_demir: { saygi: 4, guven: 3 } }
-            kronik: { tr: "Mavi Çapa'nın salonunu Lonca'nın bayrağıyla bastın; Liman o geceyi bir kuşak boyunca anlattı.", en: "You raided the Blue Anchor's hall under the Guild's banner. The Waterfront told the story of that night for a generation." }
+            kronik: { tr: "Mavi Çapa'nın salonunu Lonca'nın bayrağıyla bastın; {yer:kiyikent_liman} o geceyi bir kuşak boyunca anlattı.", en: "You raided the Blue Anchor's hall under the Guild's banner. The Waterfront told the story of that night for a generation." }
             sonraki: "lonca_3_baskin"
           - id: "duello"
             etiket: { tr: "Reis'e düello teklif et: kazanan bayrağı seçer", en: "Offer the Harbormaster a duel. Winner picks the banner" }
@@ -1543,7 +1543,7 @@ olaylar:
               - bolge: "kiyikent_liman"
               - ahlak: { duzen: 3, insanlik: 2 }
               - itibar: { lonca: 2 }
-            kronik: { tr: "Mavi Çapa'yla savaşmak yerine Reis'ine bire bir düello teklif ettin; Liman bunu bir onur meselesi olarak hatırladı.", en: "Instead of going to war with the Blue Anchor, you offered its Harbormaster a one-on-one duel. The Waterfront remembered it as a matter of honor." }
+            kronik: { tr: "Mavi Çapa'yla savaşmak yerine Reis'ine bire bir düello teklif ettin; {yer:kiyikent_liman} bunu bir onur meselesi olarak hatırladı.", en: "Instead of going to war with the Blue Anchor, you offered its Harbormaster a one-on-one duel. The Waterfront remembered it as a matter of honor." }
             sonraki: "lonca_3_duello"
           - id: "aura"
             tur: "gosteris"
@@ -1572,7 +1572,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 5, duzen: -5 }
               - gizle: 2
-            kronik: { tr: "Mavi Çapa'yı Lonca'nın baskınından önce gizlice uyardın; Liman'ın tekneleri gece yarısı ışıksız çıktı.", en: "You quietly tipped off the Blue Anchor before the Guild could hit them. The Waterfront's boats slipped out at midnight with their lights off." }
+            kronik: { tr: "Mavi Çapa'yı Lonca'nın baskınından önce gizlice uyardın; {yer:kiyikent_liman|in} tekneleri gece yarısı ışıksız çıktı.", en: "You quietly tipped off the Blue Anchor before the Guild could hit them. The Waterfront's boats slipped out at midnight with their lights off." }
             sonraki: "lonca_3_uyari"
           - id: "reddet"
             etiket: { tr: "\"Bu emri uygulamayacağım.\"", en: "\"I'm not carrying out this order.\"" }
@@ -1625,7 +1625,7 @@ olaylar:
               - xp_seviye: 80
               - bayrak: "lonca_3_tamam"
               - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
-            kronik: { tr: "Mavi Çapa'nın Reis'ini kendi mezat salonunda, avcılarının önünde infaz ettin; Liman o günden sonra Lonca'nın bayrağı altında, ama başını hiç kaldırmadan çalıştı.", en: "You executed the Blue Anchor's Harbormaster in his own auction hall, in front of his hunters. After that, the Waterfront worked under the Guild's banner without ever lifting its head." }
+            kronik: { tr: "Mavi Çapa'nın Reis'ini kendi mezat salonunda, avcılarının önünde infaz ettin; {yer:kiyikent_liman} o günden sonra Lonca'nın bayrağı altında, ama başını hiç kaldırmadan çalıştı.", en: "You executed the Blue Anchor's Harbormaster in his own auction hall, in front of his hunters. After that, {yer:kiyikent_liman} worked under the Guild's banner without ever lifting its head." }
             sonraki: "@akis"
           - id: "hapis"
             etiket: { tr: "Zincire vur ve haddehaneye götür", en: "Put him in irons. Take him to the mill" }
@@ -1657,7 +1657,7 @@ olaylar:
         yer: "kiyikent_liman"
         paragraflar:
           - { tr: "Reis teklifini mezat kürsüsünün başında, bütün loncasının önünde dinliyor. Sonra gülüyor; elli yıldır körfezde gemi itmiş bir adamın kocaman, tuzlu gülüşü.", en: "The Harbormaster hears your offer standing at the auction podium, in front of his whole guild. Then he laughs, a big salty laugh from a man who's spent fifty years shoving ships around a bay." }
-          - { tr: "\"Kazanırsam Lonca Liman'a bir daha adım atmaz,\" diyor. \"Kazanırsan Çapa senin bayrağını taşır. Ama benim bayrağımı değil; senin. Kaptanının değil.\" İskelenin en ucuna yürüyor; altında kara, soğuk su.", en: "\"I win, the Guild never sets foot on the Waterfront again,\" he says. \"You win, the Anchor flies your banner. Yours, mind you. Not your captain's.\" He walks out to the very end of the pier, black cold water underneath." }
+          - { tr: "\"Kazanırsam Lonca {yer:kiyikent_liman|e} bir daha adım atmaz,\" diyor. \"Kazanırsan Çapa senin bayrağını taşır. Ama benim bayrağımı değil; senin. Kaptanının değil.\" İskelenin en ucuna yürüyor; altında kara, soğuk su.", en: "\"I win, the Guild never sets foot on {yer:kiyikent_liman} again,\" he says. \"You win, the Anchor flies your banner. Yours, mind you. Not your captain's.\" He walks out to the very end of the pier, black cold water underneath." }
         sezgiler:
           - kosul: { stat: { per: 90 } }
             metin: { tr: "Penceresini olduğundan çok daha küçük gösteriyor. Lonca onu ciddiye almamış. Sen alıyorsun; ama yine de senin yanında bir çocuk.", en: "His window is dialed way down. The Guild never took him seriously. You do. Next to you, he's still a kid." }
@@ -1668,7 +1668,7 @@ olaylar:
               - ahlak: { duzen: 2, insanlik: 2 }
               - bilgi: "liman_reisi_seviyesi"
               - savas: { dusmanlar: ["liman_reisi@oyuncu+2"], ortam: ["su"], kazan: "lonca_3_duello_sonu", kaybet: "lonca_3_yenilgi", kac: "lonca_3_yenilgi" }
-            kronik: { tr: "Mavi Çapa'nın Reis'iyle körfezin üstündeki iskelenin ucunda dövüştün; bütün Liman sundurmaların altından izledi.", en: "You fought the Blue Anchor's Harbormaster at the end of the pier over the bay, with the whole Waterfront watching from under the awnings." }
+            kronik: { tr: "Mavi Çapa'nın Reis'iyle körfezin üstündeki iskelenin ucunda dövüştün; bütün {yer:kiyikent_liman} sundurmaların altından izledi.", en: "You fought the Blue Anchor's Harbormaster at the end of the pier over the bay, with the whole Waterfront watching from under the awnings." }
 
       - id: "lonca_3_duello_sonu"
         yer: "kiyikent_liman"
@@ -1690,7 +1690,7 @@ olaylar:
             kronik: { tr: "Yendiğin Reis'i kendi subayın yaptın; Mavi Çapa Lonca'ya katıldı ama her zaman önce sana selam verdi.", en: "You made the Harbormaster you'd beaten one of your officers. The Blue Anchor joined the Guild, but it always saluted you first." }
             sonraki: "@akis"
           - id: "limani_birak"
-            etiket: { tr: "\"Liman sizin kalsın; yalnızca kayıt olun.\"", en: "\"Keep your docks. Just register.\"" }
+            etiket: { tr: "\"{yer:kiyikent_liman} sizin kalsın; yalnızca kayıt olun.\"", en: "\"Keep your docks. Just register.\"" }
             etkiler:
               - ahlak: { merhamet: 3, duzen: 1, insanlik: 2 }
               - bayrak: "capa_yutuldu"
@@ -1700,7 +1700,7 @@ olaylar:
               - xp_seviye: 70
               - bayrak: "lonca_3_tamam"
               - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
-            kronik: { tr: "Düelloyu kazandın ama Liman'ı Çapa'ya bıraktın; Tek Bayrak kâğıtta yazıldı, Liman'da ise eski bayrak dalgalanmaya devam etti.", en: "You won the duel but left the docks to the Anchor. One Banner got written down on paper. Down on the Waterfront, the old flag kept flying." }
+            kronik: { tr: "Düelloyu kazandın ama {yer:kiyikent_liman|i} Çapa'ya bıraktın; Tek Bayrak kâğıtta yazıldı, {yer:kiyikent_liman|de} ise eski bayrak dalgalanmaya devam etti.", en: "You won the duel but left the docks to the Anchor. One Banner got written down on paper. Down on {yer:kiyikent_liman}, the old flag kept flying." }
             sonraki: "@akis"
 
       - id: "lonca_3_aura"
@@ -1738,7 +1738,7 @@ olaylar:
               - xp_seviye: 80
               - bayrak: "lonca_3_tamam"
               - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
-            kronik: { tr: "Yamayı Mavi Çapa'nın kürsüsünde bırakıp çıktın; ertesi sabah Liman'ın bütün avcıları haddehanenin önünde sıraya girmişti.", en: "You left the patch on the Blue Anchor's podium and walked out. The next morning, every hunter on the Waterfront was lined up outside the rolling mill." }
+            kronik: { tr: "Yamayı Mavi Çapa'nın kürsüsünde bırakıp çıktın; ertesi sabah {yer:kiyikent_liman|in} bütün avcıları haddehanenin önünde sıraya girmişti.", en: "You left the patch on the Blue Anchor's podium and walked out. The next morning, every hunter on {yer:kiyikent_liman} was lined up outside the rolling mill." }
             sonraki: "@akis"
 
       - id: "lonca_3_ihbar"
@@ -1801,13 +1801,13 @@ olaylar:
               - bayrak: "capa_yutuldu"
               - ordu: { lonca_avcisi: 20 }
               - iliski: { kaya_demir: { saygi: 3 } }
-            kronik: { tr: "Mavi Çapa kendi kayıt defterini sana getirdi; Liman Lonca'ya korkuyla değil, sana duyduğu güvenle katıldı.", en: "The Blue Anchor brought you its own register. The Waterfront joined the Guild out of trust in you, not fear." }
+            kronik: { tr: "Mavi Çapa kendi kayıt defterini sana getirdi; {yer:kiyikent_liman} Lonca'ya korkuyla değil, sana duyduğu güvenle katıldı.", en: "The Blue Anchor brought you its own register. The Waterfront joined the Guild out of trust in you, not fear." }
             sonraki: "@akis"
 
       - id: "lonca_3_uyari"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "Gece yarısı Liman'a tek başına iniyorsun. Reis seni mezat salonunun arka kapısında karşılıyor ve seni dinlerken hiç konuşmuyor.", en: "At midnight you go down to the Waterfront alone. The Harbormaster meets you at the back door of the auction hall and doesn't say a word while you talk." }
+          - { tr: "Gece yarısı {yer:kiyikent_liman|e} tek başına iniyorsun. Reis seni mezat salonunun arka kapısında karşılıyor ve seni dinlerken hiç konuşmuyor.", en: "At midnight you go down to {yer:kiyikent_liman} alone. The Harbormaster meets you at the back door of the auction hall and doesn't say a word while you talk." }
           - { tr: "Şafaktan önce Mavi Çapa'nın teknelerinin hepsi ışıksız, sessizce körfezden çıkıyor. Lonca'nın mangası sabah salona girdiğinde içeride yalnızca tuz, ağlar ve boş bir kürsü buluyor.", en: "Before dawn, every one of the Blue Anchor's boats slips out of the bay, lights off, dead quiet. When the Guild squad hits the hall in the morning, all they find is salt, nets and an empty podium." }
           - { tr: "{npc:kaya_demir} boş salonun ortasında duruyor ve sana bakıyor. \"Biri onları önceden duymuş,\" diyor.", en: "{npc:kaya_demir} stands in the middle of the empty hall and looks at you. \"Somebody heard us coming,\" he says." }
         secenekler:
@@ -1846,7 +1846,7 @@ olaylar:
             kosul: { npc_olu: "kaya_demir" }
         secenekler:
           - id: "capa_yaninda"
-            etiket: { tr: "Liman'a git ve Çapa'nın yanında dur", en: "Go to the Waterfront. Stand with the Anchor" }
+            etiket: { tr: "{yer:kiyikent_liman|e} git ve Çapa'nın yanında dur", en: "Go to {yer:kiyikent_liman}. Stand with the Anchor" }
             etkiler:
               - ahlak: { duzen: -6, merhamet: 4, insanlik: 3 }
               - bayrak: "lonca_dusmani"
@@ -1854,7 +1854,7 @@ olaylar:
               - itibar: { lonca: -25, siginak: 6 }
               - iliski: { kaya_demir: { guven: -10, saygi: 4 } }
               - degisken: { hayatta_kalan: 2 }
-            kronik: { tr: "Lonca'nın emrini reddedip Mavi Çapa'nın yanında durdun; o günden sonra Sanayi'nin kapıları sana kapandı ve Liman sana açıldı.", en: "You refused the Guild's order and stood with the Blue Anchor. After that, the Ironworks' doors closed to you and the Waterfront's opened." }
+            kronik: { tr: "Lonca'nın emrini reddedip Mavi Çapa'nın yanında durdun; o günden sonra {yer:sanayi|in} kapıları sana kapandı ve {yer:kiyikent_liman} sana açıldı.", en: "You refused the Guild's order and stood with the Blue Anchor. After that, {yer:sanayi}' doors closed to you and {yer:kiyikent_liman|pos} opened." }
             sonraki: "@akis"
           - id: "geri_don"
             etiket: { tr: "\"Peki. O zaman emri ben veririm.\"", en: "\"Fine. Then I'll give the order.\"" }
@@ -1868,7 +1868,7 @@ olaylar:
         yer: "kiyikent_liman"
         paragraflar:
           - { tr: "Reis'in çapası iskelenin tahtalarını parçalıyor ve sen körfezin soğuk suyuna gömülüyorsun. Seni sudan Lonca'nın zırhlıları çıkarıyor.", en: "The Harbormaster's anchor smashes through the pier planks and you go under into the cold bay. It's the Guild's armored squad that fishes you out." }
-          - { tr: "Kıyıda Reis bekliyor, zinciri omzunda. \"Liman bugün bizim,\" diyor. \"Ama sen buraya bir askerden fazlası olarak geldin; bunu gördüm. Masaya otururuz.\"", en: "The Harbormaster's waiting on the shore, chain over his shoulder. \"Waterfront's ours today,\" he says. \"But you came down here as more than a soldier. I saw that. We'll sit down and talk.\"" }
+          - { tr: "Kıyıda Reis bekliyor, zinciri omzunda. \"{yer:kiyikent_liman} bugün bizim,\" diyor. \"Ama sen buraya bir askerden fazlası olarak geldin; bunu gördüm. Masaya otururuz.\"", en: "The Harbormaster's waiting on the shore, chain over his shoulder. \"Waterfront's ours today,\" he says. \"But you came down here as more than a soldier. I saw that. We'll sit down and talk.\"" }
         secenekler:
           - id: "masa"
             etiket: { tr: "Masaya otur", en: "Sit down and talk" }
@@ -1879,7 +1879,7 @@ olaylar:
               - xp_seviye: 50
               - bayrak: "lonca_3_tamam"
               - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
-            kronik: { tr: "Mavi Çapa'nın Reis'ine yenildin ve onunla masaya oturdun; Liman Lonca'ya bir anlaşmayla, kendi şartlarıyla katıldı.", en: "The Blue Anchor's Harbormaster beat you, and you sat down at the table with him. The Waterfront joined the Guild by treaty, on its own terms." }
+            kronik: { tr: "Mavi Çapa'nın Reis'ine yenildin ve onunla masaya oturdun; {yer:kiyikent_liman} Lonca'ya bir anlaşmayla, kendi şartlarıyla katıldı.", en: "The Blue Anchor's Harbormaster beat you, and you sat down at the table with him. The Waterfront joined the Guild by treaty, on its own terms." }
             sonraki: "@akis"
           - id: "intikam"
             etiket: { tr: "Mangayı topla ve gece yeniden saldır", en: "Regroup the squad and hit them again tonight" }
@@ -1903,7 +1903,7 @@ olaylar:
               - xp_seviye: 50
               - bayrak: "lonca_3_tamam"
               - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
-            kronik: { tr: "Mavi Çapa'ya iki kez yenildin ve sonunda inadınla kazandın; Liman'da hâlâ 'o suya iki kez giren subay' diye anlatılırsın.", en: "The Blue Anchor beat you twice, and you won anyway on sheer stubbornness. On the Waterfront, you're still 'the officer who went into the water twice.'" }
+            kronik: { tr: "Mavi Çapa'ya iki kez yenildin ve sonunda inadınla kazandın; {yer:kiyikent_liman|de} hâlâ 'o suya iki kez giren subay' diye anlatılırsın.", en: "The Blue Anchor beat you twice, and you won anyway on sheer stubbornness. On {yer:kiyikent_liman}, you're still 'the officer who went into the water twice.'" }
             sonraki: "@akis"
 
   # ================================================================== ZİNCİR 4 — DEMİR YASA (P3)
@@ -1998,7 +1998,7 @@ olaylar:
             sonraki: "lonca_4_sistem"
           - id: "yirt"
             etiket: { tr: "Taslağı al ve onun önünde yırt", en: "Take the draft and tear it in front of him" }
-            goster: { bilgi: "kaya_yirtilan_emir" }
+            goster: { bilgi: "kaya_yirtilan_emir", npc_hayatta: "kaya_demir" }
             etkiler:
               - ahlak: { duzen: -8, insanlik: 4, merhamet: 2 }
               - bayrak: "kaya_yasa_yirtildi"
@@ -2025,21 +2025,21 @@ olaylar:
               - { tr: "Yetki: Kasaba Çekirdeği · Yazan: {oyuncu}", en: "Authority: Town Core · Author: {oyuncu}" }
               - { tr: "Madde 7 yetkilisi: {oyuncu}", en: "Article 7 authority: {oyuncu}" }
           - tur: "yanki"
-            baslik: { tr: "b̷unu Sistem'in diliyle yazdın.", en: "y̷ou wrote this in the System's language." }
+            baslik: { tr: "b̷unu sistemin diliyle yazdın.", en: "y̷ou wrote this in the system's language." }
             satirlar:
               - { tr: "çok iyi yazdın. bu beni korkutuyor.", en: "you wrote it very well. that scares me." }
         secenekler:
           - id: "devam"
-            etiket: { tr: "Kule Dibi'ne in; ilanı izle", en: "Go down to Spire Plaza. Watch it land" }
+            etiket: { tr: "Kule Dibi'ne in; ilanı izle", en: "Go down to {yer:kule_dibi}. Watch it land" }
             etkiler:
               - ahlak: { duzen: 2, insanlik: -1 }
-            kronik: { tr: "Yasayı Sistem'e yazdıktan sonra Kule Dibi'ne inip şehrin onu okumasını izledin.", en: "After you wrote the law into the System, you went down to Spire Plaza to watch the city read it." }
+            kronik: { tr: "Yasayı Sistem'e yazdıktan sonra Kule Dibi'ne inip şehrin onu okumasını izledin.", en: "After you wrote the law into the System, you went down to {yer:kule_dibi} to watch the city read it." }
             sonraki: "lonca_4_ilan"
 
       - id: "lonca_4_ilan"
         yer: "kule_dibi"
         paragraflar:
-          - { tr: "Demir Yasa Kule Dibi'nin meydanında, Kule'nin gölgesinde okunuyor. Kalabalık sessiz; kimse alkışlamıyor, kimse yuhalamıyor. Lonca'nın zırhlıları meydanın dört köşesinde.", en: "The Iron Law gets read out on Spire Plaza, in the shadow of the Spire. The crowd is quiet. Nobody cheers. Nobody boos. Guild armor stands at all four corners of the square." }
+          - { tr: "Demir Yasa {yer:kule_dibi|in} meydanında, Kule'nin gölgesinde okunuyor. Kalabalık sessiz; kimse alkışlamıyor, kimse yuhalamıyor. Lonca'nın zırhlıları meydanın dört köşesinde.", en: "The Iron Law gets read out on {yer:kule_dibi}, in the shadow of the Spire. The crowd is quiet. Nobody cheers. Nobody boos. Guild armor stands at all four corners of the square." }
           - { tr: "İlk uygulama hemen geliyor. Seferberlik listesinin ilk adı, Seviye 52 bir lise öğrencisi. Annesi oğlunun kolunu tutmuş, Lonca'nın çavuşuna bırakmıyor; sonra sana dönüyor, çünkü herkes sana dönüyor.", en: "The first enforcement comes right away. The first name on the draft list is a level fifty-two high school kid. His mother has hold of his arm and won't let the Guild sergeant take him. Then she turns to you, because everybody turns to you." }
           - metin: { tr: "Meydanın kenarındaki darağacı yeni; tahtası henüz kurumamış.", en: "The gallows at the edge of the square is new. The wood hasn't even dried yet." }
             kosul: { bayrak: "demir_yasa_sert" }
@@ -2392,7 +2392,7 @@ olaylar:
               - itibar: { lonca: 6 }
               - ordu: { lonca_avcisi: 30 }
               - xp_seviye: 150
-            kronik: { tr: "{npc:kaya_demir|i} devirdin ve şehirden sürdün; topallayarak Sanayi'nin kapısından çıktı ve bir daha {yer:kiyikent|de} görülmedi.", en: "You toppled {npc:kaya_demir} and exiled him. He limped out the Ironworks gate and was never seen in {yer:kiyikent} again." }
+            kronik: { tr: "{npc:kaya_demir|i} devirdin ve şehirden sürdün; topallayarak {yer:sanayi|in} kapısından çıktı ve bir daha {yer:kiyikent|de} görülmedi.", en: "You toppled {npc:kaya_demir} and exiled him. He limped out {yer:sanayi} gate and was never seen in {yer:kiyikent} again." }
             sonraki: "kaya_darbe_gecesi_son"
           - id: "yemin"
             etiket: { tr: "\"Üçüncü yol: bana yemin et ve komuta etmeye devam et.\"", en: "\"Third way: swear to me and keep commanding.\"" }
@@ -2460,7 +2460,7 @@ olaylar:
       - id: "kaya_darbe_gecesi_kacis"
         yer: "sanayi"
         paragraflar:
-          - { tr: "Haddehaneden çıktığında Sanayi'nin sokakları boş; kamyonların izleri çamurda, Liman'a doğru uzanıyor. Darbe şafakta değil, Sistem'in geri sayımının altmış beşi gösterdiği sabah olacak; plan bunu söylüyordu. Önünde birkaç gün var.", en: "When you come out of the mill the Ironworks streets are empty, truck tracks in the mud running toward the Waterfront. The coup isn't going down tonight. It's the morning the countdown hits sixty-five. The plan said so. You've got a few days." }
+          - { tr: "Haddehaneden çıktığında {yer:sanayi|in} sokakları boş; kamyonların izleri çamurda, {yer:kiyikent_liman|e} doğru uzanıyor. Darbe şafakta değil, Sistem'in geri sayımının altmış beşi gösterdiği sabah olacak; plan bunu söylüyordu. Önünde birkaç gün var.", en: "When you come out of the mill {yer:sanayi} streets are empty, truck tracks in the mud running toward {yer:kiyikent_liman}. The coup isn't going down tonight. It's the morning the countdown hits sixty-five. The plan said so. You've got a few days." }
         secenekler:
           - id: "hazirlan"
             etiket: { tr: "O sabaha hazırlan", en: "Get ready for that morning" }
@@ -2582,13 +2582,13 @@ olaylar:
           - { tr: "Körfezin üstündeki gökyüzü artık mavi değil. Kadim filosu ufuktan ufka bir tavan gibi asılı; gemilerin karınlarındaki ışıklar her gece biraz daha aşağı iniyor. Sistem'in geri sayımı herkesin penceresinde aynı sayıyı gösteriyor ve kimse ona bakmak istemiyor.", en: "The sky over the bay isn't blue anymore. The Ancient fleet hangs from horizon to horizon like a ceiling, and every night the lights in the ships' bellies come down a little lower. The System countdown shows the same number in everybody's window, and nobody wants to look at it." }
           - metin: { tr: "Haddehanenin soğuk fırınının kapısını açıyorsun. {npc:kaya_demir} içeride, karanlıkta, sırtını duvara vermiş oturuyor; günlerdir göğün sesini dinlediği belli. \"Duydum,\" diyor. \"Filoyu. Kaç gün?\"", en: "You open the door of the mill's cold furnace. {npc:kaya_demir} is sitting in the dark with his back to the wall. You can tell he's been listening to the sky for days. \"I heard it,\" he says. \"The fleet. How many days?\"" }
             kosul: { bayrak: "kaya_hapiste" }
-          - metin: { tr: "{npc:kaya_demir} Kordon'un siperlerinde seni bekliyor; üstünde bir sancak değil, beyaz bir bez. Darbeden beri şehri o yönetiyor ve bunu saklamıyor. \"Düşman kapıda,\" diyor. \"Savaştan sonra beni asabilirsin. Önce savaş.\"", en: "{npc:kaya_demir} is waiting for you in the Esplanade trenches, under a white rag instead of a banner. He's run the city since the coup and he isn't pretending otherwise. \"Enemy's at the gate,\" he says. \"After the fight, you can hang me. Fight first.\"" }
+          - metin: { tr: "{npc:kaya_demir} {yer:kordon|in} siperlerinde seni bekliyor; üstünde bir sancak değil, beyaz bir bez. Darbeden beri şehri o yönetiyor ve bunu saklamıyor. \"Düşman kapıda,\" diyor. \"Savaştan sonra beni asabilirsin. Önce savaş.\"", en: "{npc:kaya_demir} is waiting for you in {yer:kordon} trenches, under a white rag instead of a banner. He's run the city since the coup and he isn't pretending otherwise. \"Enemy's at the gate,\" he says. \"After the fight, you can hang me. Fight first.\"" }
             kosul: { bayrak: "ihanet_kaya", bayrak_yok: "kaya_devrildi" }
-          - metin: { tr: "{npc:kaya_demir} Kordon'un siperlerinde sana selam vermeden rapor veriyor; sana yemin ettiğinden beri hep böyle. \"Sahra komutanı hazır,\" diyor. \"Emirlerinizi bekliyor.\"", en: "{npc:kaya_demir} reports to you in the Esplanade trenches without a salute. He's done it that way ever since he swore to you. \"Field commander's ready,\" he says. \"Awaiting your orders.\"" }
+          - metin: { tr: "{npc:kaya_demir} {yer:kordon|in} siperlerinde sana selam vermeden rapor veriyor; sana yemin ettiğinden beri hep böyle. \"Sahra komutanı hazır,\" diyor. \"Emirlerinizi bekliyor.\"", en: "{npc:kaya_demir} reports to you in {yer:kordon} trenches without a salute. He's done it that way ever since he swore to you. \"Field commander's ready,\" he says. \"Awaiting your orders.\"" }
             kosul: { bayrak: "kaya_yemin_etti" }
-          - metin: { tr: "{npc:kaya_demir} Kordon'un siperlerinde, elinde bir harita, seni bekliyor. Gri saçları uzamış; sağ bacağını artık bir çelik desteğe yaslıyor. Sırtı hâlâ bir bayrak direği gibi dik.", en: "{npc:kaya_demir} is waiting for you in the Esplanade trenches with a map in his hand. His gray hair's grown out, and his right leg rests in a steel brace now. His back is still straight as a flagpole." }
+          - metin: { tr: "{npc:kaya_demir} {yer:kordon|in} siperlerinde, elinde bir harita, seni bekliyor. Gri saçları uzamış; sağ bacağını artık bir çelik desteğe yaslıyor. Sırtı hâlâ bir bayrak direği gibi dik.", en: "{npc:kaya_demir} is waiting for you in {yer:kordon} trenches with a map in his hand. His gray hair's grown out, and his right leg rests in a steel brace now. His back is still straight as a flagpole." }
             kosul: { bayrak_yok: ["kaya_hapiste", "kaya_yemin_etti", "ihanet_kaya"] }
-          - { tr: "\"Elimde tüfek tutabilen üç bin kişi var,\" diyor. \"Kapı tutabilen dört yüz. Kordon'dan Sanayi'ye bir kara hattı kurabilirim ve onu tutabilirim. Ama göğü tutamam. Göğü tutabilecek tek bir şey var bu şehirde.\" Sana bakıyor.", en: "\"I've got three thousand people who can hold a rifle,\" he says. \"Four hundred who can hold a Gate. I can build a ground line from the Esplanade to the Ironworks, and I can hold it. What I can't hold is the sky. There's exactly one thing in this city that can.\" He looks at you." }
+          - { tr: "\"Elimde tüfek tutabilen üç bin kişi var,\" diyor. \"Kapı tutabilen dört yüz. {yer:kordon|den} {yer:sanayi|e} bir kara hattı kurabilirim ve onu tutabilirim. Ama göğü tutamam. Göğü tutabilecek tek bir şey var bu şehirde.\" Sana bakıyor.", en: "\"I've got three thousand people who can hold a rifle,\" he says. \"Four hundred who can hold a Gate. I can build a ground line from {yer:kordon} to {yer:sanayi}, and I can hold it. What I can't hold is the sky. There's exactly one thing in this city that can.\" He looks at you." }
           - metin: { tr: "Anlattığı hattı tanıyorsun. Soğuk fırının isli duvarına bir çivinin ucuyla kazıdığı hattın aynısı bu; tek farkla: artık her siperin yanında bir isim var ve isimlerin hiçbiri onunki değil.", en: "You know the line he's describing. It's the same one he scratched into the sooty wall of the cold furnace with the tip of a nail, with one difference: now there's a name next to every trench, and none of the names are his." }
             kosul: { bayrak: "kaya_firin_plani" }
         sezgiler:
@@ -2616,7 +2616,7 @@ olaylar:
               - ahlak: { duzen: 4, insanlik: 2 }
               - itibar: { lonca: 8 }
               - iliski: { kaya_demir: { guven: 8, saygi: 6, baglilik: 6 } }
-            kronik: { tr: "Kadim filosunun altında {npc:kaya_demir|e} kara hattını verdin; Kordon'dan Sanayi'ye kadar her siper onun sesiyle tutuldu.", en: "Under the Ancient fleet you gave {npc:kaya_demir} the ground line. Every trench from the Esplanade to the Ironworks held to the sound of his voice." }
+            kronik: { tr: "Kadim filosunun altında {npc:kaya_demir|e} kara hattını verdin; {yer:kordon|den} {yer:sanayi|e} kadar her siper onun sesiyle tutuldu.", en: "Under the Ancient fleet you gave {npc:kaya_demir} the ground line. Every trench from {yer:kordon} to {yer:sanayi} held to the sound of his voice." }
             sonraki: "kaya_son_savas_generali_selam"
           - id: "komuta_bende"
             etiket: { tr: "\"Komuta bende. Sen sahadaki generalimsin.\"", en: "\"I'm in command. You're my general in the field.\"" }
@@ -2675,7 +2675,7 @@ olaylar:
               - ahlak: { duzen: 3, insanlik: -2 }
               - iliski: { kaya_demir: { guven: -8, saygi: 4 } }
               - savas: { dusmanlar: ["demir_bascavus@oyuncu+3"], ortam: ["su"], kazan: "kaya_son_savas_generali_hesap", kaybet: "kaya_son_savas_generali_hesap_yenilgi" }
-            kronik: { tr: "Kadim filosu tepedeyken {npc:kaya_demir|e} darbenin hesabını Kordon'un siperlerinde sordun.", en: "With the Ancient fleet overhead, you made {npc:kaya_demir} answer for the coup right there in the Esplanade trenches." }
+            kronik: { tr: "Kadim filosu tepedeyken {npc:kaya_demir|e} darbenin hesabını {yer:kordon|in} siperlerinde sordun.", en: "With the Ancient fleet overhead, you made {npc:kaya_demir} answer for the coup right there in {yer:kordon} trenches." }
           - id: "guvenme"
             etiket: { tr: "\"Sana ordu vermem. Bu savaşı sensiz veririz.\"", en: "\"You don't get an army. We fight this without you.\"" }
             etkiler:
@@ -2761,7 +2761,7 @@ olaylar:
               - ahlak: { duzen: 5, merhamet: 2 }
               - iliski: { kaya_demir: { saygi: 8, korku: 4 } }
               - xp_seviye: 150
-            kronik: { tr: "Kordon'un siperlerinde {npc:kaya_demir|i} devirdin ve aynı anda generalin yaptın; darbenin hesabı son savaştan sonraya kaldı.", en: "In the Esplanade trenches you toppled {npc:kaya_demir} and made him your general in the same breath. The bill for the coup got pushed past the last battle." }
+            kronik: { tr: "{yer:kordon|in} siperlerinde {npc:kaya_demir|i} devirdin ve aynı anda generalin yaptın; darbenin hesabı son savaştan sonraya kaldı.", en: "In {yer:kordon} trenches you toppled {npc:kaya_demir} and made him your general in the same breath. The bill for the coup got pushed past the last battle." }
             sonraki: "kaya_son_savas_generali_selam"
           - id: "tutukla"
             etiket: { tr: "Tutuklat; hattı kendin yönet", en: "Have him arrested. Run the line yourself" }
@@ -2775,7 +2775,7 @@ olaylar:
               - ahlak: { duzen: 6, merhamet: -3, insanlik: -3 }
               - itibar: { lonca: 8 }
               - xp_seviye: 150
-            kronik: { tr: "Kordon'un siperlerinde {npc:kaya_demir|i} devirip zincire vurdun ve son savaşı onun ordusuyla, onsuz verdin.", en: "In the Esplanade trenches you toppled {npc:kaya_demir}, had him put in irons, and fought the last battle with his army and without him." }
+            kronik: { tr: "{yer:kordon|in} siperlerinde {npc:kaya_demir|i} devirip zincire vurdun ve son savaşı onun ordusuyla, onsuz verdin.", en: "In {yer:kordon} trenches you toppled {npc:kaya_demir}, had him put in irons, and fought the last battle with his army and without him." }
             sonraki: "@akis"
 
       - id: "kaya_son_savas_generali_hesap_yenilgi"
@@ -2797,7 +2797,7 @@ olaylar:
       - id: "kaya_son_savas_generali_pencere"
         yer: "kordon"
         paragraflar:
-          - { tr: "{npc:kaya_demir} haritasını katlayıp cebine koyuyor. Bir şey söylemiyor. Siperlerden çıkıp Sanayi'ye doğru, çelik destekli bacağıyla topallayarak yürüyor.", en: "{npc:kaya_demir} folds his map and puts it in his pocket. He doesn't say a word. He climbs out of the trenches and limps off toward the Ironworks on his braced leg." }
+          - { tr: "{npc:kaya_demir} haritasını katlayıp cebine koyuyor. Bir şey söylemiyor. Siperlerden çıkıp {yer:sanayi|e} doğru, çelik destekli bacağıyla topallayarak yürüyor.", en: "{npc:kaya_demir} folds his map and puts it in his pocket. He doesn't say a word. He climbs out of the trenches and limps off toward {yer:sanayi} on his braced leg." }
           - { tr: "O gece haddehanenin çatısında, Kadim gemilerinin ışığında tek başına bir siluet görüyorsun; elinde bir tüfek, hiç kıpırdamadan göğü izliyor.", en: "That night, up on the roof of the rolling mill, you can make out a lone silhouette in the light of the Ancient ships, rifle in hand, watching the sky without moving." }
         secenekler:
           - id: "birak"
@@ -2865,11 +2865,11 @@ olaylar:
       - id: "lonca_5_taht_1"
         yer: "sanayi"
         paragraflar:
-          - metin: { tr: "Kadim istilası püskürtüldü. Körfezin üstündeki gökyüzünde gemi enkazları hâlâ yanıyor; Sanayi'nin bacalarından yükselen duman onlarla karışıyor ve şehir, bir yıldır ilk kez, bir zaferin kokusunu alıyor.", en: "The Ancient invasion's been thrown back. Wrecked ships are still burning in the sky over the bay, their smoke mixing with the smoke from the Ironworks stacks, and for the first time in a year the city can smell a victory." }
+          - metin: { tr: "Kadim istilası püskürtüldü. Körfezin üstündeki gökyüzünde gemi enkazları hâlâ yanıyor; {yer:sanayi|in} bacalarından yükselen duman onlarla karışıyor ve şehir, bir yıldır ilk kez, bir zaferin kokusunu alıyor.", en: "The Ancient invasion's been thrown back. Wrecked ships are still burning in the sky over the bay, their smoke mixing with the smoke from {yer:sanayi} stacks, and for the first time in a year the city can smell a victory." }
             kosul: { bayrak: "kadimler_yenildi" }
           - metin: { tr: "Kadim istilası bir anlaşmayla durdu. Filo gökte asılı duruyor ama ateş etmiyor; şehir bir yıldır ilk kez sessiz ve bu sessizliğin bedelini henüz kimse tam bilmiyor.", en: "The Ancient invasion stopped on a treaty. The fleet still hangs in the sky, but it isn't firing. For the first time in a year the city is quiet, and nobody's quite sure yet what that quiet cost." }
             kosul: { bayrak: "kadim_anlasmasi" }
-          - metin: { tr: "{yer:kiyikent|in} yarısı düştü. Liman yanıyor, Kordon artık bir siper bile değil. Sanayi'nin çelik duvarları hâlâ ayakta; şehirden geriye kalanların çoğu bu duvarların arkasına sığınmış.", en: "Half of {yer:kiyikent} fell. The Waterfront's burning and the Esplanade isn't even a trench anymore. The Ironworks' steel walls are still standing, and most of what's left of the city is packed in behind them." }
+          - metin: { tr: "{yer:kiyikent|in} yarısı düştü. {yer:kiyikent_liman} yanıyor, {yer:kordon} artık bir siper bile değil. {yer:sanayi|in} çelik duvarları hâlâ ayakta; şehirden geriye kalanların çoğu bu duvarların arkasına sığınmış.", en: "Half of {yer:kiyikent} fell. The Waterfront's burning and {yer:kordon} isn't even a trench anymore. The Ironworks' steel walls are still standing, and most of what's left of the city is packed in behind them." }
             kosul: { bayrak: "kiyikent_dustu" }
           - { tr: "Haddehanenin ortasında, ambar kapağı masasının yerinde, bir sandalye duruyor. Lonca'nın döküm ustaları onu kaynakla yapmış: Kuru Havuz'un kraliçesinin kabuğundan bir sırt, inşaat demirinden kollar, Pano'nun çelik levhasından bir oturak. Kimse ona taht demiyor. Herkes öyle düşünüyor.", en: "In the middle of the rolling mill, where the hatch-cover table used to be, there's a chair. The Guild's casters welded it together: a back cut from the dry dock queen's shell, arms of rebar, a seat made from the steel plate of the Board itself. Nobody calls it a throne. Everybody's thinking it." }
           - { tr: "Lonca'nın bütün subayları çevresinde. Defterdar yazı altlığını göğsüne bastırmış. Örs balyozunu yere dayamış. Hepsi sana bakıyor; çünkü bu gezegende senden daha güçlü bir şey yok ve Lonca'nın tek kuralı bu.", en: "Every officer in the Guild is standing around it. The Ledger has her clipboard pressed to her chest. Anvil's leaning his sledge on the floor. They're all looking at you. There's nothing stronger than you on this planet, and that's the Guild's only rule." }
@@ -2883,7 +2883,7 @@ olaylar:
           - kosul: { stat: { cha: 400 } }
             metin: { tr: "Bu oda yalnızca Lonca değil. Kapıdaki muhafızlar, sokaklardaki Demir Yasa, Kule'deki nöbetler, ordunun tamamı. Bu sandalyeye oturan, şehre oturur.", en: "This room isn't just the Guild. The guards at the door, the Iron Law on the streets, the Spire rotations, the whole army. Whoever sits in this chair sits on the city." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "o̷tur. ya da oturma. ama bil ki Sistem bu sandalyeyi zaten görüyor. bir tahta oturan her şeyi, hasat sırasında ayrı tartıyor.", en: "s̷it. or don't. but know that the System can already see this chair. it weighs everything that sits on a throne separately, come harvest." }
+            metin: { tr: "o̷tur. ya da oturma. ama bil ki sistem bu sandalyeyi zaten görüyor. bir tahta oturan her şeyi, hasat sırasında ayrı tartıyor.", en: "s̷it. or don't. but know that the system can already see this chair. it weighs everything that sits on a throne separately, come harvest." }
         yoldas_tepkileri:
           - npc: "elif_sari"
             kosul: { yoldas: "elif_sari" }
@@ -3159,7 +3159,7 @@ olaylar:
       - id: "ors_soguk_oda_1"
         yer: "sanayi"
         paragraflar:
-          - { tr: "Defterdar seni nerede olursan ol buluyor; yazı altlığı koltuğunun altında, eldivenlerinin parmak uçları delik. \"Sanayi'ye gelmen lazım,\" diyor. \"Kural gereği değil.\"", en: "The Ledger finds you wherever you are, clipboard under her arm, the fingertips of her gloves worn through. \"You need to come to the Ironworks,\" she says. \"Not because of any rule.\"" }
+          - { tr: "Defterdar seni nerede olursan ol buluyor; yazı altlığı koltuğunun altında, eldivenlerinin parmak uçları delik. \"{yer:sanayi|e} gelmen lazım,\" diyor. \"Kural gereği değil.\"", en: "The Ledger finds you wherever you are, clipboard under her arm, the fingertips of her gloves worn through. \"You need to come to {yer:sanayi},\" she says. \"Not because of any rule.\"" }
           - { tr: "Döküm'ün rüzgâr alan arka tarafında basamaksızların kaldığı bir konteyner sırası var. En sondakinin iç duvarlarını kırağı tutmuş; köşede Örs'ün balyozunu satıp aldığı gaz sobası duruyor, buz gibi, çünkü gaz yağına para kalmamış.", en: "Out back of the Foundry, where the wind hits hardest, there's a row of shipping containers for people with no rung. Frost has crept up the inside walls of the last one. In the corner sits the kerosene heater Anvil sold his sledge to buy, stone cold, because there was nothing left over for kerosene." }
           - { tr: "Portatif bir yatakta, üç battaniyenin altında, Merdiven Günü turuncu kartı göğsüne bastıran küçük oğlan öksürüyor. Örs ters çevrilmiş bir kovanın üstünde oturuyor ve sana bakmadan konuşuyor: \"Seni buraya ben çağırmadım.\"", en: "On a cot under three blankets, the little boy who clutched the orange card on Ladder Day is coughing. Anvil sits on an upturned bucket and talks without looking at you. \"I didn't call you here.\"" }
           - { tr: "\"Ben çağırdım,\" diyor Defterdar. \"Kural rütbeyi korur. Çocuğu korumaz.\"", en: "\"I did,\" says the Ledger. \"The rule protects the rank. It doesn't protect the kid.\"" }
@@ -3240,7 +3240,7 @@ olaylar:
       - id: "ors_soguk_oda_revir"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "Oğlanı battaniyesiyle birlikte sırtına alıyorsun ve gece yarısı Sanayi'den Liman'a yürüyorsun. Örs arkandan geliyor, eli boş, adımlarını seninkine uydurmaya çalışarak. Bir kez bile çocuğu taşımayı teklif etmiyor; teklif edecek yüzü yok.", en: "You hoist the boy onto your back, blanket and all, and walk from the Ironworks to the Waterfront in the middle of the night. Anvil follows, empty-handed, trying to match your stride. Not once does he offer to carry him. He doesn't have the face for it." }
+          - { tr: "Oğlanı battaniyesiyle birlikte sırtına alıyorsun ve gece yarısı {yer:sanayi|den} {yer:kiyikent_liman|e} yürüyorsun. Örs arkandan geliyor, eli boş, adımlarını seninkine uydurmaya çalışarak. Bir kez bile çocuğu taşımayı teklif etmiyor; teklif edecek yüzü yok.", en: "You hoist the boy onto your back, blanket and all, and walk from {yer:sanayi} to {yer:kiyikent_liman} in the middle of the night. Anvil follows, empty-handed, trying to match your stride. Not once does he offer to carry him. He doesn't have the face for it." }
           - { tr: "Revirin lambası saat üçte hâlâ yanıyor. {npc:elif_sari} çocuğun göğsünü dinliyor, sonra sana bakıyor: \"İki gün daha geç kalsaydın bu konuşmayı yapmıyor olurduk.\" Sığınak'ın son antibiyotik kutusundan bir şırınga dolduruyor.", en: "The clinic lamp is still on at three in the morning. {npc:elif_sari} listens to the boy's chest, then looks at you. \"Two more days and we wouldn't be having this conversation.\" She fills a syringe from the Haven's last box of antibiotics." }
           - { tr: "Şafağa doğru Örs revirin kapısında yanına oturuyor. \"Sana borçlu değilim,\" diyor, duvara bakarak. \"Ama kinim de kalmadı. Nereye gittiğini bilmiyorum.\"", en: "Toward dawn, Anvil sits down next to you in the clinic doorway. \"I don't owe you,\" he says, staring at the wall. \"But the grudge is gone too. I don't know where it went.\"" }
         secenekler:
@@ -3313,11 +3313,11 @@ olaylar:
             kosul: { bayrak: "ors_borclu" }
           - metin: { tr: "Fırının önündeki nöbetçi anahtarı sana uzatıyor ve gözlerini kaçırıyor. \"On gündür uyumuyor,\" diyor. \"Bir şey çiziyor.\"", en: "The guard outside the furnace hands you the key and won't meet your eyes. \"Hasn't slept in ten days,\" he says. \"He's drawing something.\"" }
             kosul: { bayrak_yok: "ors_borclu" }
-          - { tr: "İçeride {npc:kaya_demir} bir mum ışığında, sırtı kapıya dönük oturuyor. Fırının isli iç duvarları baştan sona çizgilerle kaplı: bir çivinin ucuyla kazınmış bir kıyı, Kordon'dan Sanayi'ye uzanan siperler, geri çekilme hatları, köşelerde küçük rakamlar: 3.000 tüfek, 400 kapı.", en: "Inside, {npc:kaya_demir} sits by a candle with his back to the door. The sooty inner walls of the furnace are covered end to end in lines: a coastline scratched in with the tip of a nail, trenches running from the Esplanade to the Ironworks, fallback lines, little numbers in the corners. 3,000 rifles. 400 Gates." }
+          - { tr: "İçeride {npc:kaya_demir} bir mum ışığında, sırtı kapıya dönük oturuyor. Fırının isli iç duvarları baştan sona çizgilerle kaplı: bir çivinin ucuyla kazınmış bir kıyı, {yer:kordon|den} {yer:sanayi|e} uzanan siperler, geri çekilme hatları, köşelerde küçük rakamlar: 3.000 tüfek, 400 kapı.", en: "Inside, {npc:kaya_demir} sits by a candle with his back to the door. The sooty inner walls of the furnace are covered end to end in lines: a coastline scratched in with the tip of a nail, trenches running from {yer:kordon} to {yer:sanayi}, fallback lines, little numbers in the corners. 3,000 rifles. 400 Gates." }
           - { tr: "\"Bir asker hapiste de askerdir,\" diyor, dönmeden. \"Ne olduğumu bırakamıyorum. Sen de bırakmamı istemedin; isteseydin beni öldürürdün.\"", en: "\"A soldier in a cell is still a soldier,\" he says without turning around. \"I can't stop being what I am. And you didn't want me to. If you had, you'd have killed me.\"" }
         sezgiler:
           - kosul: { stat: { per: 160 } }
-            metin: { tr: "[ALG] Plan iyi. İyiden de öte: ikinci hat Kordon'un eski iskelesinin altından geçiyor; senin hiç aklına gelmemiş bir yerden.", en: "[PER] The plan's good. Better than good: the second line runs under the Esplanade's old pier, somewhere that never once crossed your mind." }
+            metin: { tr: "[ALG] Plan iyi. İyiden de öte: ikinci hat {yer:kordon|in} eski iskelesinin altından geçiyor; senin hiç aklına gelmemiş bir yerden.", en: "[PER] The plan's good. Better than good: the second line runs under {yer:kordon|pos} old pier, somewhere that never once crossed your mind." }
           - kosul: { bayrak: "yanki_bagi" }
             metin: { tr: "o̷na dört duvar verdin; dördünü de kullanmış. böyle bir adamı kilitleyebilirsin. ne için yapıldığını kilitleyemezsin.", en: "y̷ou gave him four walls. he used all four. you can lock up a man like this. you can't lock up what he was made for." }
         yoldas_tepkileri:
@@ -3387,7 +3387,7 @@ olaylar:
         paragraflar:
           - { tr: "Bir kova su ve bir bez istiyorsun. {npc:kaya_demir} kalkıp kenara çekiliyor ve her çizginin kayboluşunu izliyor: önce geri çekilme hatları, sonra siperler, en son kıyı.", en: "You ask for a bucket of water and a rag. {npc:kaya_demir} gets up, steps aside, and watches every line disappear: the fallback lines first, then the trenches, the coastline last." }
           - { tr: "Duvar yeniden isli ve boş olduğunda başını sallıyor. \"Doğru,\" diyor. \"Ben de öyle yapardım.\"", en: "When the wall's black and blank again, he nods. \"Correct,\" he says. \"I'd have done the same.\"" }
-          - { tr: "Kapıya dönerken arkandan sesleniyor: \"İkinci hat eski iskelenin altından geçmeli. Geçmezse Kordon bir gecede düşer.\"", en: "As you turn for the door, he calls after you. \"The second line has to run under the old pier. If it doesn't, the Esplanade falls in one night.\"" }
+          - { tr: "Kapıya dönerken arkandan sesleniyor: \"İkinci hat eski iskelenin altından geçmeli. Geçmezse {yer:kordon} bir gecede düşer.\"", en: "As you turn for the door, he calls after you. \"The second line has to run under the old pier. If it doesn't, {yer:kordon} falls in one night.\"" }
         secenekler:
           - id: "kilitle"
             etiket: { tr: "Hiçbir şey söyleme; kapıyı kilitle", en: "Say nothing. Lock the door" }
@@ -3427,7 +3427,7 @@ olaylar:
         paragraflar:
           - { tr: "Anahtarı kilitten çıkarıp ona atıyorsun ve kapıyı ardına kadar açık bırakıyorsun. {npc:kaya_demir} anahtarı havada yakalamıyor; anahtar ayaklarının dibine düşüyor ve uzun süre orada kalıyor.", en: "You pull the key out of the lock, toss it to him, and leave the door wide open. {npc:kaya_demir} doesn't catch it. It drops at his feet and stays there a long time." }
           - { tr: "\"Komutan değilim,\" diyor sonunda. \"Değilsin,\" diyorsun. \"Mühendisimsin. Hat senin, emir benim.\"", en: "\"I'm not a commander,\" he finally says. \"You're not,\" you say. \"You're my engineer. The line's yours. The orders are mine.\"" }
-          - { tr: "Ayağa kalkarken sağ dizi bir kez kilitleniyor, sonra açılıyor. Haddehaneden Kordon'a doğru topallayarak ama bir bayrak direği kadar dik yürüyor; nöbetçiler selam mı vermeleri gerektiğini bilemeden kenara çekiliyor.", en: "When he stands, his right knee locks once, then gives. He walks out of the mill toward the Esplanade, limping but straight as a flagpole, and the guards step aside, not sure whether they're supposed to salute." }
+          - { tr: "Ayağa kalkarken sağ dizi bir kez kilitleniyor, sonra açılıyor. Haddehaneden {yer:kordon|e} doğru topallayarak ama bir bayrak direği kadar dik yürüyor; nöbetçiler selam mı vermeleri gerektiğini bilemeden kenara çekiliyor.", en: "When he stands, his right knee locks once, then gives. He walks out of the mill toward {yer:kordon}, limping but straight as a flagpole, and the guards step aside, not sure whether they're supposed to salute." }
         secenekler:
           - id: "izle"
             etiket: { tr: "Arkasından bak", en: "Watch him go" }

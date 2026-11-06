@@ -21,7 +21,7 @@ olaylar:
         yer: "kiyikent_iskele"
         paragraflar:
           - { tr: "Işık seni bir kez daha yutuyor ve bu kez tükürdüğü yer tanıdık: {yer:kiyikent_iskele}. Ayağının altında ıslak tahta, burnunda mazot ve yosun; otuz gün önce her sabah bindiğin vapur, iskelenin yanında yan yatmış, karnını gökyüzüne vermiş.", en: "The light swallows you one more time, and this time it spits you out somewhere you know: the {yer:kiyikent_iskele}. Wet planks under your feet, diesel and kelp in your nose. The ferry you rode every single morning thirty days ago is lying on its side against the dock, belly to the sky." }
-          - { tr: "Gökyüzünde mavi paneller hâlâ asılı; bazıları bir apartman kadar büyük ve hepsi aynı satırı yazıyor. Körfezin karşısında, eskiden {yer:kordon|in} ışıklarının yandığı yerde bir kapı dönüyor; deniz onun çevresinde ters akıyor.", en: "The blue panels are still hanging in the sky, some as big as apartment buildings, all of them showing the same line. Across the bay, where the lights of the Esplanade used to come on at dusk, a Gate is turning, and the sea runs backward around it." }
+          - { tr: "Gökyüzünde mavi paneller hâlâ asılı; bazıları bir apartman kadar büyük ve hepsi aynı satırı yazıyor. Körfezin karşısında, eskiden {yer:kordon|in} ışıklarının yandığı yerde bir kapı dönüyor; deniz onun çevresinde ters akıyor.", en: "The blue panels are still hanging in the sky, some as big as apartment buildings, all of them showing the same line. Across the bay, where the lights of {yer:kordon} used to come on at dusk, a Gate is turning, and the sea runs backward around it." }
           - metin: { tr: "Senden önce gelenler bir avuç. İskele neredeyse boş; ışıktan çıkan her yeni yüz, yalnızca kendisi kadar bir umut getiriyor.", en: "The ones who made it through ahead of you are a handful. The terminal's practically empty, and every new face stepping out of the light brings exactly one person's worth of hope." }
             kosul: { degisken_max: { hayatta_kalan: 35 } }
           - metin: { tr: "İskele kalabalık ama sessiz. İnsanlar ışıktan çıkıyor, bir an durup şehre bakıyor ve sonra, hepsi aynı anda, birini aramaya başlıyor.", en: "The terminal's crowded, but quiet. People step out of the light, stop to stare at the city for a second, and then, all at once, start looking for somebody." }
@@ -36,11 +36,11 @@ olaylar:
             baslik: { tr: "[ENTEGRE DÜNYA]", en: "[INTEGRATED WORLD]" }
             satirlar:
               - { tr: "Katman değerlendirmesi sürüyor. Kalan süre: 334 gün.", en: "Layer assessment in progress. Time remaining: 334 days." }
-              - { tr: "Bölge: Kıyıkent. Kontrol: dağınık. Tavsiye: dağınık olmayın.", en: "Region: Port Harlow. Control: fragmented. Recommendation: don't be." }
+              - { tr: "Bölge: {yer:kiyikent}. Kontrol: dağınık. Tavsiye: dağınık olmayın.", en: "Region: {yer:kiyikent}. Control: fragmented. Recommendation: don't be." }
           - tur: "uyari"
             baslik: { tr: "[KAPI UYARISI]", en: "[GATE WARNING]" }
             satirlar:
-              - { tr: "Kordon · kapı kademesi D · taşmaya 49 gün.", en: "The Esplanade · Gate grade D · 49 days to overflow." }
+              - { tr: "{yer:kordon} · kapı kademesi D · taşmaya 49 gün.", en: "The Esplanade · Gate grade D · 49 days to overflow." }
               - { tr: "Kapatılmayan kapılar taşar. Bu bir hatırlatmadır.", en: "Gates that stay open overflow. This is a courtesy reminder." }
         sezgiler:
           - kosul: { stat: { per: 22 } }
@@ -233,7 +233,7 @@ olaylar:
         yer: "kiyikent_iskele"
         paragraflar:
           - { tr: "Vapurun gövdesi kaygan ve sıcak; yan yatmış bacasına tırmanınca bütün {yer:kiyikent} ayaklarının altında. Bir zamanlar on dakikada yürüdüğün şehir şimdi renk renk parçalara bölünmüş bir harita.", en: "The ferry's hull is slick and warm, and once you're up on its sideways smokestack, all of {yer:kiyikent} is spread out under you. The city you used to cross in ten minutes is a map now, cut up into colored pieces." }
-          - { tr: "Terminal binasının üstünde beyaz çarşaflardan bir haç; {npc:elif_sari|in} çadırları. {yer:sanayi|de} vinçlere turuncu bayraklar asılmış. {yer:tepe|de} eski fenerin çevresinde beyazlılar; {yer:eski_sehir|de} saat kulesinin tepesinde bir anten ormanı.", en: "On the terminal roof, a cross made of white bedsheets: {npc:elif_sari|pos} tents. Orange flags hang off the cranes in the Ironworks. People in white circle the old lighthouse up in the Heights, and a forest of antennas sprouts off the clock tower in Old Town." }
+          - { tr: "Terminal binasının üstünde beyaz çarşaflardan bir haç; {npc:elif_sari|in} çadırları. {yer:sanayi|de} vinçlere turuncu bayraklar asılmış. {yer:tepe|de} eski fenerin çevresinde beyazlılar; {yer:eski_sehir|de} saat kulesinin tepesinde bir anten ormanı.", en: "On the terminal roof, a cross made of white bedsheets: {npc:elif_sari|pos} tents. Orange flags hang off the cranes in {yer:sanayi}. People in white circle the old lighthouse up in {yer:tepe}, and a forest of antennas sprouts off the clock tower in {yer:eski_sehir}." }
           - { tr: "Şehrin ortasında, eski meydanda kimse yok. Asfalt orada kusursuz bir daire hâlinde çatlamış ve dairenin içinde martılar bile yürümüyor.", en: "In the middle of the city, the old square is empty. The asphalt there has cracked in a perfect circle, and not even the gulls will walk inside it." }
         sezgiler:
           - kosul: { stat: { per: 24 } }
@@ -261,12 +261,12 @@ olaylar:
       - id: "donus_vapur_yanki"
         yer: "kiyikent_iskele"
         paragraflar:
-          - { tr: "{npc:yanki} uzun süre cevap vermiyor. Sonra: altında bir şey var. bir bina değil. bir merdiven. Sistem her katmana bir tane diker. tırmanabilsinler diye. ya da tırmanırken ölçülebilsinler diye.", en: "{npc:yanki} doesn't answer for a long time. Then: there's something under there. not a building. a staircase. the System plants one in every layer. so they can climb. or so they can be measured climbing." }
+          - { tr: "{npc:yanki} uzun süre cevap vermiyor. Sonra: altında bir şey var. bir bina değil. bir merdiven. sistem her katmana bir tane diker. tırmanabilsinler diye. ya da tırmanırken ölçülebilsinler diye.", en: "{npc:yanki} doesn't answer for a long time. Then: there's something under there. not a building. a staircase. the system plants one in every layer. so they can climb. or so they can be measured climbing." }
           - { tr: "Bir de şu var, diye ekliyor: karşıdaki kapının sayacı. kırk dokuz gün. o kapıyı kapatabilecek tek kişi şu an bu vapurun üstünde oturuyor. sadece söylüyorum.", en: "And there's this, it adds. the counter on that Gate across the bay. forty-nine days. the only person who could close it is currently sitting on top of this ferry. just saying." }
         secenekler:
           - id: "tamam"
             etiket: { tr: "Kırk dokuz gün. Aklının bir köşesine yaz", en: "Forty-nine days. File it away" }
-            kronik: { tr: "Kordon'un kapısının sayacını dönüşünün ilk gününden biliyordun.", en: "You knew about the countdown on the Esplanade Gate from your very first day home." }
+            kronik: { tr: "{yer:kordon|in} kapısının sayacını dönüşünün ilk gününden biliyordun.", en: "You knew about the countdown on {yer:kordon} Gate from your very first day home." }
             etkiler:
               - ahlak: { duzen: 2 }
             sonraki: "donus_duvar"
@@ -325,7 +325,7 @@ olaylar:
       - id: "donus_duvar"
         yer: "kiyikent_iskele"
         paragraflar:
-          - { tr: "Terminalin bekleme salonunda bir duvar baştan sona kâğıtla kaplı. Fotoğraflar, fiş arkalarına yazılmış adlar, bir çocuk çizimi; hepsinin üstünde aynı iki kelime, yüz farklı el yazısıyla: ARIYORUM ve HAYATTAYIM.", en: "In the terminal's waiting room, one wall is papered over from floor to ceiling. Photos, names on the backs of receipts, a kid's drawing, and over all of it the same three words in a hundred different hands: LOOKING FOR and I'M ALIVE." }
+          - { tr: "Terminalin bekleme salonunda bir duvar baştan sona kâğıtla kaplı. Fotoğraflar, fiş arkalarına yazılmış adlar, bir çocuk çizimi; hepsinin üstünde aynı iki kelime, yüz farklı el yazısıyla: ARIYORUM ve HAYATTAYIM.", en: "In the terminal's waiting room, one wall is papered over from floor to ceiling. Photos, names on the backs of receipts, a kid's drawing, and over all of it the same two phrases in a hundred different hands: LOOKING FOR and I'M ALIVE." }
           - { tr: "İnsanlar duvarın önünde sıra olmuş, kâğıtları parmaklarıyla tek tek geçiyor. Birileri bir ad bulduğunda bütün salon susuyor; bulamadığında kimse bir şey söylemiyor.", en: "People are lined up in front of it, running their fingers over the notes one by one. When somebody finds a name, the whole room goes silent. When they don't, nobody says anything at all." }
           - metin: { tr: "{npc:deniz_arman} duvarın önünde donup kalmış. Fayansa kazınmış o martıyı arıyor; ördeğe benzeyen martıyı.", en: "{npc:deniz_arman} has frozen in front of the wall. {zamir:deniz_arman|b} {zamir:deniz_arman|is} looking for that gull scratched into the tile. The one that looks like a duck." }
             kosul: { yoldas: "deniz_arman" }
@@ -337,7 +337,7 @@ olaylar:
           - kosul: { npc_olu: "deniz_arman" }
             metin: { tr: "Duvarda bir yer boş kalmış; bir kâğıt boyunda. Oraya ne yazacağını biliyorsun ve yazamayacağını da.", en: "There's one empty spot on the wall, about the size of a sheet of paper. You know exactly what you'd write there. You know you can't." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "bu duvardaki adların yüzde kırkı Sistem'in kayıtlarında 'tamamlandı' olarak işaretli. söylemememi ister misin. söylemeyeceğim.", en: "forty percent of the names on this wall are marked 'completed' in the System's records. want me not to tell you. i won't." }
+            metin: { tr: "bu duvardaki adların yüzde kırkı sistemin kayıtlarında 'tamamlandı' olarak işaretli. söylemememi ister misin. söylemeyeceğim.", en: "forty percent of the names on this wall are marked 'completed' in the system's records. want me not to tell you. i won't." }
         secenekler:
           - id: "deniz_not"
             etiket: { tr: "{npc:deniz_arman|in} kardeşine not yazmasına yardım et", en: "Help {npc:deniz_arman} write a note for {zamir:deniz_arman|onun} sister" }
@@ -607,7 +607,7 @@ olaylar:
           - { tr: "Önlüklü bir hemşire elinde katlanmış bir battaniye tutuyor; turuncu kol bantlı bir kurye bir ranza anahtarı sallıyor. Beyazlar içinde bir kız bir mum tutuyor; kulağında kulaklık olan bir oğlan da cebinden telsizinin antenini çıkarıyor.", en: "A nurse in scrubs is holding a folded blanket. A courier with an orange armband is twirling the key to a bunk. A girl in white holds a candle, and a boy with an earpiece fishes a radio antenna out of his pocket." }
           - metin: { tr: "Hemşire öne çıkıyor: \"{npc:elif_sari} seni bekliyordu. Sana bir yatak ayırdı; içimizde en çok ihtiyacı olan sen değilsin ama sen de yorgun görünüyorsun.\"", en: "The nurse steps up first: \"{npc:elif_sari} was waiting for you. She saved you a cot. You're not the one who needs it most, but you look tired too.\"" }
             kosul: { lider_fraksiyon: "siginak", itibar_min: { siginak: 15 } }
-          - metin: { tr: "Kurye öne çıkıyor: \"{npc:kaya_demir} rütbeni korudu. {yer:sanayi|de} bir ranza, bir silah ve sana bağlı on kişi var.\"", en: "The courier steps up first: \"{npc:kaya_demir} held your rank. There's a bunk in the Ironworks, a weapon and ten people reporting to you.\"" }
+          - metin: { tr: "Kurye öne çıkıyor: \"{npc:kaya_demir} rütbeni korudu. {yer:sanayi|de} bir ranza, bir silah ve sana bağlı on kişi var.\"", en: "The courier steps up first: \"{npc:kaya_demir} held your rank. There's a bunk in {yer:sanayi}, a weapon and ten people reporting to you.\"" }
             kosul: { lider_fraksiyon: "lonca", itibar_min: { lonca: 15 } }
           - metin: { tr: "Beyazlı kız öne çıkıyor ve sana değil, bir yere, senin biraz üstüne bakarak konuşuyor: \"Peygamber seni rüyasında gördü. Kule'nin tepesinde. Yanan bir taç.\"", en: "The girl in white steps up first, and talks not to you but to a spot just above your head: \"The Prophet saw you in a dream. On top of the Spire. Wearing a crown on fire.\"" }
             kosul: { lider_fraksiyon: "yukselenler", itibar_min: { yukselenler: 15 } }
@@ -631,15 +631,15 @@ olaylar:
             sonraki: "@akis"
           - id: "lonca"
             etiket: { tr: "Anahtarı al; Lonca'nın ranzasına git", en: "Take the key. Go to the Guild's bunk" }
-            kronik: { tr: "Dönüş gecesini {yer:sanayi|de}, Lonca'nın silah yağı kokan ranzalarında geçirdin.", en: "You spent your first night home in the Ironworks, in a Guild bunk that smelled like gun oil." }
+            kronik: { tr: "Dönüş gecesini {yer:sanayi|de}, Lonca'nın silah yağı kokan ranzalarında geçirdin.", en: "You spent your first night home in {yer:sanayi}, in a Guild bunk that smelled like gun oil." }
             etkiler:
               - ahlak: { duzen: 3 }
               - itibar: { lonca: 4 }
               - iliski: { kaya_demir: { saygi: 3 } }
             sonraki: "@akis"
           - id: "yukselenler"
-            etiket: { tr: "Mumu al; beyazlılarla {yer:tepe|e} çık", en: "Take the candle. Go up to the Heights with the white" }
-            kronik: { tr: "Dönüş gecesini {yer:tepe|de}, adını ilahiye ekleyen beyazlıların arasında geçirdin.", en: "You spent your first night home in the Heights, among the people in white working your name into their hymns." }
+            etiket: { tr: "Mumu al; beyazlılarla {yer:tepe|e} çık", en: "Take the candle. Go up to {yer:tepe} with the white" }
+            kronik: { tr: "Dönüş gecesini {yer:tepe|de}, adını ilahiye ekleyen beyazlıların arasında geçirdin.", en: "You spent your first night home in {yer:tepe}, among the people in white working your name into their hymns." }
             etkiler:
               - ahlak: { insanlik: -3, duzen: 1 }
               - itibar: { yukselenler: 4 }
@@ -881,7 +881,7 @@ olaylar:
           - tur: "unvan"
             baslik: { tr: "[KÜRESEL DUYURU]", en: "[GLOBAL ANNOUNCEMENT]" }
             satirlar:
-              - { tr: "Bir Kule'ye ilk adım atıldı. Konum: Kıyıkent.", en: "First step taken inside a Spire. Location: Port Harlow." }
+              - { tr: "Bir Kule'ye ilk adım atıldı. Konum: {yer:kiyikent}.", en: "First step taken inside a Spire. Location: {yer:kiyikent}." }
               - { tr: "Sıralama güncellendi. Herkes güncellemeyi gördü.", en: "Ranking updated. Everybody saw the update." }
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
@@ -1011,7 +1011,7 @@ olaylar:
         yer: "kule_dibi"
         paragraflar:
           - { tr: "İkiniz aynı anda fırlıyorsunuz. Haberci çanını çalıyor; {npc:aras_kurt} sesin altından eğilip geçiyor, sen sesin içinden geçiyorsun. Kapının eşiğine bir adım önce sen basıyorsun.", en: "You both launch at the same moment. The herald tolls; {npc:aras_kurt} ducks under the sound, and you go straight through it. You hit the threshold one step ahead." }
-          - { tr: "Arkanda {npc:aras_kurt} kayarak duruyor, nefes nefese, ve ilk kez gülmüyor. Bütün gezegendeki pencereler aynı anda kayıyor: senin adın, onunkinin bir satır üstünde.", en: "Behind you {npc:aras_kurt} skids to a stop, breathing hard, and for once he isn't laughing. Every window on the planet slides over at the same time: your name, one line above his." }
+          - { tr: "Arkanda {npc:aras_kurt} nefes nefese, kayarak duruyor ve ilk kez gülmüyor. Bütün gezegendeki pencereler aynı anda kayıyor: senin adın, onunkinin bir satır üstünde.", en: "Behind you {npc:aras_kurt} skids to a stop, breathing hard, and for once he isn't laughing. Every window on the planet slides over at the same time: your name, one line above his." }
           - { tr: "Haberci kapının önünde başını sana doğru eğiyor ve susuyor. Davetiye teslim edildi.", en: "In front of the door, the herald tips its head your way and goes quiet. Invitation delivered." }
         secenekler:
           - id: "selam"
@@ -1210,7 +1210,7 @@ olaylar:
         yer: "kiyikent_liman"
         paragraflar:
           - { tr: "{npc:kaya_demir} duvardan ayrılmıyor. \"Lafı dolandırmayacağım,\" diyor. \"Lonca'da rütbeyi güç verir. Sen bu şehrin en güçlüsüsün; sana bir manga teklif etmiyorum. Bir ordu teklif ediyorum.\"", en: "{npc:kaya_demir} doesn't come off the wall. \"I'm not gonna dance around it,\" he says. \"In the Guild, strength is rank. You're the strongest thing in this city. I'm not offering you a squad. I'm offering you an army.\"" }
-          - { tr: "\"Kordon'daki kapının sayacı otuz beşte. Otuz beş gün sonra o kapı taşacak ve bu masadakilerden biri, kimin ölüp kimin yaşayacağına karar verecek. O kişinin ben ya da sen olması lazım. Çay içenler değil.\"", en: "\"The counter on the Esplanade Gate says thirty-five. Thirty-five days from now that thing overflows, and somebody at this counter decides who lives and who doesn't. That somebody needs to be me or you. Not the tea crowd.\"" }
+          - { tr: "\"{yer:kordon|de}ki kapının sayacı otuz beşte. Otuz beş gün sonra o kapı taşacak ve bu masadakilerden biri, kimin ölüp kimin yaşayacağına karar verecek. O kişinin ben ya da sen olması lazım. Çay içenler değil.\"", en: "\"The counter on {yer:kordon} Gate says thirty-five. Thirty-five days from now that thing overflows, and somebody at this counter decides who lives and who doesn't. That somebody needs to be me or you. Not the tea crowd.\"" }
           - metin: { tr: "\"Öğretici'de sağ kolumdun,\" diye ekliyor. \"Hâlâ öylesin, istersen. İstemezsen, ben sağ kol olurum.\" Bunu söylemek ona bir şeye mal oluyor.", en: "\"You were my right hand in the Tutorial,\" he adds. \"Still are, if you want it. If you don't, I'll be yours.\" Saying that costs him something." }
             kosul: { bayrak: "lonca_ikinci_adam" }
           - metin: { tr: "\"Bir keresinde komutamı elimden aldın,\" diyor. \"Bu kez kendi elimle veriyorum. Fark bu.\"", en: "\"You took my command off me once,\" he says. \"This time I'm handing it over myself. That's the difference.\"" }
@@ -1236,8 +1236,8 @@ olaylar:
               - ahlak: { duzen: -1 }
             sonraki: "secim_dinle"
           - id: "kordon"
-            etiket: { tr: "\"Kordon'u kapatırsak, kimse ölmeden?\"", en: "\"What if we close the Esplanade Gate before anyone dies?\"" }
-            kronik: { tr: "{npc:kaya_demir|e} Kordon kapısını kimse ölmeden kapatmayı sordun; bunu ilk kez biri ona sormuştu.", en: "You asked {npc:kaya_demir} about closing the Esplanade Gate before anybody died. Nobody had ever asked him that." }
+            etiket: { tr: "\"{yer:kordon|i} kapatırsak, kimse ölmeden?\"", en: "\"What if we close {yer:kordon} Gate before anyone dies?\"" }
+            kronik: { tr: "{npc:kaya_demir|e} {yer:kordon} kapısını kimse ölmeden kapatmayı sordun; bunu ilk kez biri ona sormuştu.", en: "You asked {npc:kaya_demir} about closing {yer:kordon} Gate before anybody died. Nobody had ever asked him that." }
             etkiler:
               - ahlak: { merhamet: 3, duzen: 1 }
               - iliski: { kaya_demir: { saygi: 5 } }
@@ -1252,7 +1252,7 @@ olaylar:
         secenekler:
           - id: "katil"
             etiket: { tr: "\"Hattını ver. Lonca'dayım.\"", en: "\"Give me the line. I'm in the Guild.\"" }
-            kronik: { tr: "Kordon için Demir Lonca'ya katıldın; {npc:kaya_demir} sana yüz kişilik bir hat verdi.", en: "You joined the Iron Guild for the Esplanade's sake, and {npc:kaya_demir} gave you a line of a hundred people." }
+            kronik: { tr: "{yer:kordon} için Demir Lonca'ya katıldın; {npc:kaya_demir} sana yüz kişilik bir hat verdi.", en: "You joined the Iron Guild for {yer:kordon|pos} sake, and {npc:kaya_demir} gave you a line of a hundred people." }
             etkiler:
               - bayrak: "uye_lonca"
               - bayrak: "lonca_kordon_hatti"
@@ -1441,7 +1441,7 @@ olaylar:
         yer: "kiyikent_liman"
         paragraflar:
           - { tr: "Tezgâhın ortasına geçiyorsun ve kimse bir şey söylemeden dört sandalye çekiyorsun. {npc:kaya_demir} ilk kez duvardan ayrılıp oturuyor; {npc:vahit|in} müritleri kımıldamaya cesaret edemiyor. {npc:mert_kilic} dizüstünü kapatıyor.", en: "You walk to the middle of the counter and, without anybody saying a word, pull out four chairs. {npc:kaya_demir} comes off the wall and sits for the first time. {npc:vahit|pos} followers don't dare move. {npc:mert_kilic} closes his laptop." }
-          - { tr: "\"Hiçbirinizin değilim,\" diyorsun. \"Ama bu şehir yandığında, hepinizin yanında olacağım. Karşılığında birbirinizi öldürmeyeceksiniz. Kordon'un kapısı taşmadan önce değil; ben buradayken hiç değil.\"", en: "\"I'm not any of yours,\" you say. \"But when this city catches fire, I'll be standing next to every one of you. In exchange, you don't kill each other. Not before the Esplanade Gate blows. Not while I'm here, period.\"" }
+          - { tr: "\"Hiçbirinizin değilim,\" diyorsun. \"Ama bu şehir yandığında, hepinizin yanında olacağım. Karşılığında birbirinizi öldürmeyeceksiniz. {yer:kordon|in} kapısı taşmadan önce değil; ben buradayken hiç değil.\"", en: "\"I'm not any of yours,\" you say. \"But when this city catches fire, I'll be standing next to every one of you. In exchange, you don't kill each other. Not before {yer:kordon} Gate blows. Not while I'm here, period.\"" }
           - { tr: "Uzun bir sessizlik. Sonra {npc:elif_sari} termosunun kapağına çay dolduruyor ve masanın ortasına koyuyor. Dördü de, birer birer, ondan bir yudum alıyor.", en: "A long silence. Then {npc:elif_sari} pours tea into the thermos cap and sets it in the middle of the table. One by one, all four of them take a sip." }
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
@@ -1598,7 +1598,7 @@ olaylar:
       - id: "cekirdek_1"
         yer: "eski_sehir"
         paragraflar:
-          - { tr: "{yer:eski_sehir|in} saat kulesi kırk yıldır beş dakika geri çalıyordu. Bu öğlen on üçü vuruyor ve hükümet konağının önündeki meydanın taşları, sesle birlikte, bir nefes alır gibi kabarıyor.", en: "The clock tower in Old Town has run five minutes slow for forty years. This noon it strikes thirteen, and the paving stones in front of the old courthouse swell with the sound, like something underneath just took a breath." }
+          - { tr: "{yer:eski_sehir|in} saat kulesi kırk yıldır beş dakika geri çalıyordu. Bu öğlen on üçü vuruyor ve hükümet konağının önündeki meydanın taşları, sesle birlikte, bir nefes alır gibi kabarıyor.", en: "The clock tower in {yer:eski_sehir} has run five minutes slow for forty years. This noon it strikes thirteen, and the paving stones in front of the old courthouse swell with the sound, like something underneath just took a breath." }
           - { tr: "Meydanın ortasından bir kristal yükseliyor; bir insan boyunda, içinde mavi bir ışık, ışığın içinde bütün şehrin haritası. Sonra taşlar birbirine kenetlenip ayağa kalkıyor ve kristalin önünde, göğsünde sarkaç sallanan bir muhafız beliriyor.", en: "A crystal pushes up out of the middle of the square, as tall as a person, a blue light inside it and the map of the whole city inside the light. Then the stones lock together and stand up, and in front of the crystal there's a guardian with a pendulum swinging in its chest." }
           - { tr: "Bir saat geçmeden meydanın dört köşesi doluyor: Sığınak'ın sedyeleri, Lonca'nın turuncu bantlı tüfekleri, Yükselenler'in mumları, Sessiz Ağ'ın çatılara dizilmiş antenleri. Herkes kristale bakıyor. Herkes birbirine bakıyor.", en: "Inside an hour all four corners of the square fill up: the Haven's stretchers, the Guild's orange-banded rifles, the Ascended's candles, the Quiet Network's antennas lined up on the rooftops. Everybody's looking at the crystal. Everybody's looking at each other." }
           - metin: { tr: "Senin kampının insanları sana dönüyor. Kimse bir şey söylemiyor; söylemelerine gerek yok.", en: "The people in your camp turn to look at you. Nobody says a word. They don't have to." }
@@ -1610,7 +1610,7 @@ olaylar:
             nadirlik: "efsanevi"
             baslik: { tr: "[KASABA ÇEKİRDEĞİ BELİRDİ]", en: "[TOWN CORE MANIFESTED]" }
             satirlar:
-              - { tr: "Bölge: Kıyıkent. Bağlanan yönetir.", en: "Region: Port Harlow. Whoever binds it, governs." }
+              - { tr: "Bölge: {yer:kiyikent}. Bağlanan yönetir.", en: "Region: {yer:kiyikent}. Whoever binds it, governs." }
               - { tr: "Muhafız etkin. Adaylar sırayla gelsin. Gelmeyecekler; biliyoruz.", en: "Guardian active. Candidates, please form a line. You won't. We know." }
         sezgiler:
           - kosul: { stat: { per: 34 } }
@@ -1710,7 +1710,7 @@ olaylar:
         secenekler:
           - id: "siginak"
             etiket: { tr: "Çekirdeği Konsey'e bağla", en: "Bind the Core to the Council" }
-            kronik: { tr: "Kasaba Çekirdeği'ni Sığınak Konseyi'ne bağladın; {yer:eski_sehir} her kararı oyla almaya başladı, yavaş ama birlikte.", en: "You bound the Town Core to the Haven Council. Old Town started deciding everything by vote. Slowly, but together." }
+            kronik: { tr: "Kasaba Çekirdeği'ni Sığınak Konseyi'ne bağladın; {yer:eski_sehir} her kararı oyla almaya başladı, yavaş ama birlikte.", en: "You bound the Town Core to the Haven Council. {yer:eski_sehir} started deciding everything by vote. Slowly, but together." }
             etkiler:
               - bayrak: "cekirdek_siginak"
               - kontrol: { eski_sehir: "siginak" }
@@ -1723,7 +1723,7 @@ olaylar:
             sonraki: "cekirdek_son"
           - id: "lonca"
             etiket: { tr: "Çekirdeği Lonca'ya bağla", en: "Bind the Core to the Guild" }
-            kronik: { tr: "Kasaba Çekirdeği'ni Demir Lonca'ya bağladın; {yer:eski_sehir|in} sokaklarında nöbet kulübeleri, kapılarında sicil defterleri belirdi.", en: "You bound the Town Core to the Iron Guild. Guard booths went up on the streets of Old Town, and ledgers showed up at every door." }
+            kronik: { tr: "Kasaba Çekirdeği'ni Demir Lonca'ya bağladın; {yer:eski_sehir|in} sokaklarında nöbet kulübeleri, kapılarında sicil defterleri belirdi.", en: "You bound the Town Core to the Iron Guild. Guard booths went up on the streets of {yer:eski_sehir}, and ledgers showed up at every door." }
             etkiler:
               - bayrak: "cekirdek_lonca"
               - kontrol: { eski_sehir: "lonca" }
@@ -1812,13 +1812,13 @@ olaylar:
         paragraflar:
           - metin: { tr: "Kristalin haritasındaki soru işaretleri tek tek beyaz bir çarpıya dönüşüyor: hastane, okul, su. Akşam {npc:elif_sari} meydanda ilk konsey oturumunu açıyor; oy sayımı sabaha kadar sürüyor ve kimse şikâyet etmiyor.", en: "One by one the question marks on the crystal's map turn into white crosses: clinic, school, water. That evening {npc:elif_sari} opens the first Council session right in the square. The vote count runs till dawn, and nobody complains." }
             kosul: { bayrak: "cekirdek_siginak" }
-          - metin: { tr: "Haritadaki her mahallenin üstüne turuncu bir nöbet çizelgesi düşüyor. Ertesi sabah {yer:eski_sehir|de} sokaklar daha güvenli ve daha sessiz; ikisi aynı şey değil.", en: "An orange watch roster drops over every neighborhood on the map. The next morning the streets of Old Town are safer and quieter, which isn't the same thing." }
+          - metin: { tr: "Haritadaki her mahallenin üstüne turuncu bir nöbet çizelgesi düşüyor. Ertesi sabah {yer:eski_sehir|de} sokaklar daha güvenli ve daha sessiz; ikisi aynı şey değil.", en: "An orange watch roster drops over every neighborhood on the map. The next morning the streets of {yer:eski_sehir} are safer and quieter, which isn't the same thing." }
             kosul: { bayrak: "cekirdek_lonca" }
           - metin: { tr: "Kristalin çevresine beyaz örtüler seriliyor. {npc:vahit} haritanın üstüne bir liste yansıtıyor; listenin başlığı \"Seçilmişler\", altında başlıksız, çok daha uzun ikinci bir liste var.", en: "White cloths get laid out around the crystal. {npc:vahit} projects a list over the map, titled \"The Chosen\". Under it there's a second list, no title, a lot longer." }
             kosul: { bayrak: "cekirdek_yukselenler" }
           - metin: { tr: "Kristale on yedi kablo bağlanıyor. Harita yerine akan satırlar beliriyor ve {npc:mert_kilic} ilk kez, gerçekten, gülüyor. Şehri kimse yönetmiyor; ama şehrin kalbinin ne yazdığını birileri okuyor.", en: "Seventeen cables get plugged into the crystal. The map gives way to scrolling lines, and for the first time, really, {npc:mert_kilic} laughs. Nobody's running the city. But somebody's reading what its heart writes." }
             kosul: { bayrak: "cekirdek_sessiz_ag" }
-          - metin: { tr: "Kristal avucunun altında ısınıyor ve bir an şehrin bütün sokaklarını aynı anda hissediyorsun: bir çocuğun koşusu, bir kapının kapanışı, Kordon'daki kapının sabırsız nabzı. Dört kamp meydanı sessizce terk ediyor; hiçbiri arkasını tam dönmüyor.", en: "The crystal warms under your palm, and for one moment you feel every street in the city at once: a kid running, a door closing, the impatient pulse of the Gate on the Esplanade. The four camps leave the square without a word. None of them quite turns their back on you." }
+          - metin: { tr: "Kristal avucunun altında ısınıyor ve bir an şehrin bütün sokaklarını aynı anda hissediyorsun: bir çocuğun koşusu, bir kapının kapanışı, {yer:kordon|de}ki kapının sabırsız nabzı. Dört kamp meydanı sessizce terk ediyor; hiçbiri arkasını tam dönmüyor.", en: "The crystal warms under your palm, and for one moment you feel every street in the city at once: a kid running, a door closing, the impatient pulse of the Gate on {yer:kordon}. The four camps leave the square without a word. None of them quite turns their back on you." }
             kosul: { bayrak: "cekirdek_oyuncu" }
           - { tr: "Saat kulesi, ya da kulenin kalıntısı, bundan sonra hep doğru saati gösterecek. Kimse bunun iyi bir işaret olup olmadığını bilmiyor.", en: "From now on, the clock tower, or what's left of it, will always tell the right time. Nobody knows if that's a good sign." }
         sezgiler:
@@ -1833,7 +1833,7 @@ olaylar:
             sonraki: "@akis"
           - id: "dinle"
             etiket: { tr: "Kristale elini koy; şehrin nabzını dinle", en: "Put your hand on the crystal. Listen to the city's pulse" }
-            kronik: { tr: "Kasaba Çekirdeği'ne elini koyup şehrin nabzını dinledin; Kordon'daki kapının ne kadar sabırsız olduğunu o gün öğrendin.", en: "You put your hand on the Town Core and listened to the city's pulse. That was the day you learned how impatient the Esplanade Gate had gotten." }
+            kronik: { tr: "Kasaba Çekirdeği'ne elini koyup şehrin nabzını dinledin; {yer:kordon|de}ki kapının ne kadar sabırsız olduğunu o gün öğrendin.", en: "You put your hand on the Town Core and listened to the city's pulse. That was the day you learned how impatient {yer:kordon} Gate had gotten." }
             etkiler:
               - ahlak: { insanlik: -1, duzen: 1 }
               - stat: { wis: 1 }
@@ -1863,21 +1863,21 @@ olaylar:
       - id: "tasma_1"
         yer: "kordon"
         paragraflar:
-          - { tr: "Sayaç gece yarısı sıfıra iniyor ve şafakta deniz çekiliyor. Kordon'un önündeki su, kumu, taşları ve yüz yıllık bir iskeleyi açıkta bırakarak kapıya doğru, ters yöne akıyor; balıklar çamurda çırpınıyor.", en: "The counter hits zero at midnight, and at dawn the sea pulls out. The water off the Esplanade runs the wrong way, toward the Gate, leaving sand, rocks and a hundred-year-old pier high and dry. Fish flop in the mud." }
+          - { tr: "Sayaç gece yarısı sıfıra iniyor ve şafakta deniz çekiliyor. {yer:kordon|in} önündeki su, kumu, taşları ve yüz yıllık bir iskeleyi açıkta bırakarak kapıya doğru, ters yöne akıyor; balıklar çamurda çırpınıyor.", en: "The counter hits zero at midnight, and at dawn the sea pulls out. The water off {yer:kordon} runs the wrong way, toward the Gate, leaving sand, rocks and a hundred-year-old pier high and dry. Fish flop in the mud." }
           - { tr: "Sahil boyunca dizili apartmanların balkonlarından insanlar bakıyor. Çoğu üç aydır burada yaşıyor; canavar bölgesi olduğunu biliyorlar, ama deniz manzarası bedava ve kira yok.", en: "People are watching from the balconies of the apartment blocks lining the waterfront. Most of them have been living here for three months. They know it's a monster zone. But the ocean view is free, and nobody's collecting rent." }
           - { tr: "Sonra kapı patlıyor. Su geri geliyor, bir duvar gibi; duvarın içinde, bir binanın boyunda, sırtında binlerce köpük yavrusu taşıyan bir şey var.", en: "Then the Gate blows. The sea comes back like a wall, and inside the wall, tall as a building, there's something with thousands of foamlings riding on its back." }
           - metin: { tr: "Arkanda {npc:kaya_demir|in} sözünü verdiği hat duruyor: yüz kişi, kalkanlar, tüfekler, kum torbaları. {npc:kaya_demir} en önde. \"Emrini bekliyoruz,\" diyor; bunu ilk kez birine söylüyor.", en: "Behind you stands the line {npc:kaya_demir} promised: a hundred people, shields, rifles, sandbags. {npc:kaya_demir} is out front. \"Awaiting your orders,\" he says. First time he's ever said that to anybody." }
             kosul: { bayrak: "lonca_kordon_hatti" }
           - metin: { tr: "Sessiz Ağ bir saat önce bütün frekanslardan uyarı geçti; balkonların yarısı çoktan boşalmış.", en: "The Quiet Network put a warning out on every frequency an hour ago. Half the balconies are already empty." }
             kosul: { bayrak: "cekirdek_sessiz_ag" }
-          - metin: { tr: "Çekirdek bunu sana gece yarısı söyledi: avucunun içinde bir nabız gibi. Kordon'a herkesten önce geldin.", en: "The Core told you at midnight, like a pulse in your palm. You got to the Esplanade before anybody else." }
+          - metin: { tr: "Çekirdek bunu sana gece yarısı söyledi: avucunun içinde bir nabız gibi. {yer:kordon|e} herkesten önce geldin.", en: "The Core told you at midnight, like a pulse in your palm. You got to {yer:kordon} before anybody else." }
             kosul: { bayrak: "cekirdek_oyuncu" }
         bildirimler:
           - tur: "uyari"
             nadirlik: "efsanevi"
             baslik: { tr: "[KAPI TAŞMASI]", en: "[GATE OVERFLOW]" }
             satirlar:
-              - { tr: "Kordon · D kademe · taşma: %100.", en: "The Esplanade · grade D · overflow: 100%." }
+              - { tr: "{yer:kordon} · D kademe · taşma: %100.", en: "The Esplanade · grade D · overflow: 100%." }
               - { tr: "Kapatılmayan kapılar taşar. Bunu söylemiştik.", en: "Gates that stay open overflow. We did mention this." }
         sezgiler:
           - kosul: { stat: { per: 40 } }
@@ -1900,7 +1900,7 @@ olaylar:
           - id: "gedik"
             tur: "aciga_vur"
             etiket: { tr: "Gediğe yürü; dalgayı sen karşıla", en: "Walk into the breach. Meet the wave yourself" }
-            kronik: { tr: "İlk kapı taşmasında dalganın önüne tek başına yürüdün; {yer:kordon|in} bütün balkonları seni izledi.", en: "When the first Gate overflowed, you walked out alone to meet the wave. Every balcony on the Esplanade watched you do it." }
+            kronik: { tr: "İlk kapı taşmasında dalganın önüne tek başına yürüdün; {yer:kordon|in} bütün balkonları seni izledi.", en: "When the first Gate overflowed, you walked out alone to meet the wave. Every balcony on {yer:kordon} watched you do it." }
             etkiler:
               - aciga_vur: true
               - ahlak: { duzen: 2, merhamet: 2 }
@@ -1914,7 +1914,7 @@ olaylar:
             sonraki: "tasma_tahliye"
           - id: "komuta"
             tur: "gosteris"
-            etiket: { tr: "Kamplara emir ver; Kordon'u dört koldan tut", en: "Order the camps in. Hold the Esplanade four ways" }
+            etiket: { tr: "Kamplara emir ver; {yer:kordon|i} dört koldan tut", en: "Order the camps in. Hold {yer:kordon} four ways" }
             gerekli: { stat: { cha: 45 } }
             kronik: { tr: "İlk kapı taşmasında dört kampa birden emir verdin ve hepsi uydu; {yer:kiyikent} kimin sözünün geçtiğini o sabah öğrendi.", en: "When the first Gate overflowed, you gave orders to all four camps at once, and every one of them obeyed. That morning {yer:kiyikent} learned whose word counted." }
             etkiler:
@@ -1933,8 +1933,8 @@ olaylar:
               - iliski: { deniz_arman: { guven: 6, saygi: 4 } }
               - savas: { dusmanlar: ["tasma_anasi@oyuncu+6", "tasma_yavrusu@dunya"], ortam: ["su"], kazan: "tasma_zafer", kaybet: "tasma_yenilgi", kac: "tasma_kacis" }
           - id: "birak"
-            etiket: { tr: "Kordon'u bırak; Liman'ı koru", en: "Give up the Esplanade. Hold the Waterfront" }
-            kronik: { tr: "İlk kapı taşmasında Kordon'u denize bıraktın ve Liman'ı tuttun; hesap doğruydu, sahildeki balkonlar boşaldı.", en: "When the first Gate overflowed, you gave the Esplanade to the sea and held the Waterfront. The math was right. The balconies emptied." }
+            etiket: { tr: "{yer:kordon|i} bırak; {yer:kiyikent_liman|i} koru", en: "Give up {yer:kordon}. Hold {yer:kiyikent_liman}" }
+            kronik: { tr: "İlk kapı taşmasında {yer:kordon|i} denize bıraktın ve {yer:kiyikent_liman|i} tuttun; hesap doğruydu, sahildeki balkonlar boşaldı.", en: "When the first Gate overflowed, you gave {yer:kordon} to the sea and held {yer:kiyikent_liman}. The math was right. The balconies emptied." }
             etkiler:
               - ahlak: { merhamet: -6, duzen: 4 }
               - iliski: { kaya_demir: { saygi: 3 }, elif_sari: { guven: -6 }, deniz_arman: { guven: -6 } }
@@ -2012,7 +2012,7 @@ olaylar:
         yer: "kordon"
         paragraflar:
           - { tr: "Kabuğu yarılıyor ve içindeki mavi kalp avucuna düşüyor, hâlâ atıyor. Dalga Ana, sırtındaki son köpükle birlikte çamura çöküyor; deniz ona dokunmadan geri çekiliyor, bu kez doğru yöne.", en: "Her shell splits and the blue heart inside drops into your palm, still beating. The Brood Tide collapses into the mud with the last of the foam on her back, and the sea pulls away without touching her, the right direction this time." }
-          - { tr: "Kapı, arkasında hiçbir şey kalmamış bir yara gibi titriyor ve kapanıyor. Sahil boyunca balkonlarda biri alkışlamaya başlıyor; sonra on kişi, sonra bütün Kordon.", en: "The Gate shudders like a wound with nothing left behind it and closes. Somebody on a balcony starts clapping. Then ten people. Then the whole Esplanade." }
+          - { tr: "Kapı, arkasında hiçbir şey kalmamış bir yara gibi titriyor ve kapanıyor. Sahil boyunca balkonlarda biri alkışlamaya başlıyor; sonra on kişi, sonra bütün {yer:kordon}.", en: "The Gate shudders like a wound with nothing left behind it and closes. Somebody on a balcony starts clapping. Then ten people. Then the whole Esplanade." }
           - metin: { tr: "Mavi Apartman'ın merdivenlerinde altmış kişi ayakta. Bir kadın sana bir termos çay uzatıyor; ellerin hâlâ tuzlu.", en: "Sixty people are standing on the Blue Building's stairs. A woman holds out a thermos of tea to you. Your hands are still salty." }
             kosul: { bayrak: "tasma_apartman" }
           - metin: { tr: "Hastane teknesi iskelede, sapasağlam. {npc:elif_sari} güvertede, eldivenleri kan içinde, sana bakıyor ve bir şey söylemiyor; söylemesine gerek yok.", en: "The hospital boat's at the pier, in one piece. {npc:elif_sari} is on deck, gloves covered in blood, looking at you. She doesn't say anything. She doesn't have to." }
@@ -2021,12 +2021,12 @@ olaylar:
           - tur: "sistem"
             baslik: { tr: "[TAŞMA BASTIRILDI]", en: "[OVERFLOW CONTAINED]" }
             satirlar:
-              - { tr: "Kordon: kontrol değişti. Kayıplar: beklenenin altında.", en: "The Esplanade: control changed. Casualties: below projection." }
+              - { tr: "{yer:kordon}: kontrol değişti. Kayıplar: beklenenin altında.", en: "The Esplanade: control changed. Casualties: below projection." }
               - { tr: "Projeksiyonlar güncelleniyor. Tekrar güncelleniyor.", en: "Updating projections. Updating them again." }
         secenekler:
           - id: "kalp"
             etiket: { tr: "Kalbi göğe kaldır; bırak görsünler", en: "Hold the heart up high. Let them see it" }
-            kronik: { tr: "Taşmanın kalbini Kordon'un balkonlarına doğru kaldırdın; o sahilde adın bir sığınak gibi anılır oldu.", en: "You held the overflow's heart up to the balconies of the Esplanade. On that waterfront your name became something people said like a shelter." }
+            kronik: { tr: "Taşmanın kalbini {yer:kordon|in} balkonlarına doğru kaldırdın; o sahilde adın bir sığınak gibi anılır oldu.", en: "You held the overflow's heart up to the balconies of {yer:kordon}. On that waterfront your name became something people said like a shelter." }
             etkiler:
               - bayrak: "kordon_kurtarildi"
               - unvan: "kordon_kalkani"
@@ -2057,8 +2057,8 @@ olaylar:
               - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 } }
             sonraki: "@akis"
           - id: "lonca"
-            etiket: { tr: "Kordon'u Lonca'nın nöbetine teslim et", en: "Hand the Esplanade over to the Guild's watch" }
-            kronik: { tr: "Taşmadan sonra Kordon'u Lonca'nın nöbetine verdin; sahil güvenli oldu ve kimse kira ödemeden orada bir daha yaşamadı.", en: "After the overflow you handed the Esplanade to the Guild's watch. The waterfront got safe, and nobody ever lived there rent-free again." }
+            etiket: { tr: "{yer:kordon|i} Lonca'nın nöbetine teslim et", en: "Hand {yer:kordon} over to the Guild's watch" }
+            kronik: { tr: "Taşmadan sonra {yer:kordon|i} Lonca'nın nöbetine verdin; sahil güvenli oldu ve kimse kira ödemeden orada bir daha yaşamadı.", en: "After the overflow you handed {yer:kordon} to the Guild's watch. The waterfront got safe, and nobody ever lived there rent-free again." }
             etkiler:
               - bayrak: "kordon_kurtarildi"
               - unvan: "kordon_kalkani"
@@ -2076,14 +2076,14 @@ olaylar:
       - id: "tasma_yenilgi"
         yer: "kordon"
         paragraflar:
-          - { tr: "Son gelgit seni kabuğun içine kapatıyor; tuz, karanlık, sonra hiçbir şey. Gözünü açtığında Liman'ın taş rıhtımındasın ve biri seni battaniyeye sarmış.", en: "The last tide slams the shell shut over you: salt, dark, then nothing. When you open your eyes you're on the stone quay at the Waterfront, and somebody's wrapped you in a blanket." }
-          - { tr: "Kordon gitmiş. Sahildeki apartmanların ilk üç katı su altında; balkonlarda köpük yavruları tıkırdıyor ve Dalga Ana, kapının önünde, yeni yuvasında yarı uykuda yatıyor.", en: "The Esplanade's gone. The first three floors of the waterfront buildings are under water, foamlings tick-tick-tick across the balconies, and the Brood Tide lies half asleep in front of the Gate, in her new home." }
+          - { tr: "Son gelgit seni kabuğun içine kapatıyor; tuz, karanlık, sonra hiçbir şey. Gözünü açtığında {yer:kiyikent_liman|in} taş rıhtımındasın ve biri seni battaniyeye sarmış.", en: "The last tide slams the shell shut over you: salt, dark, then nothing. When you open your eyes you're on the stone quay at {yer:kiyikent_liman}, and somebody's wrapped you in a blanket." }
+          - { tr: "{yer:kordon} gitmiş. Sahildeki apartmanların ilk üç katı su altında; balkonlarda köpük yavruları tıkırdıyor ve Dalga Ana, kapının önünde, yeni yuvasında yarı uykuda yatıyor.", en: "The Esplanade's gone. The first three floors of the waterfront buildings are under water, foamlings tick-tick-tick across the balconies, and the Brood Tide lies half asleep in front of the Gate, in her new home." }
           - metin: { tr: "Çıkardıkların burada, rıhtımda, senin çevrende. Hepsi değil; ama sen olmasan hiçbiri olmazdı.", en: "The ones you got out are here on the quay, all around you. Not all of them. But without you, there'd be none." }
             kosul: { bayrak: "tasma_apartman" }
         secenekler:
           - id: "yemin"
-            etiket: { tr: "Kordon'a bak ve geri alacağına yemin et", en: "Look at the Esplanade. Swear you'll take it back" }
-            kronik: { tr: "İlk kapı taşmasında yenildin ve Kordon düştü; rıhtımda onu geri alacağına yemin ettin.", en: "You lost the first Gate overflow, and the Esplanade fell. On the quay, you swore you'd take it back." }
+            etiket: { tr: "{yer:kordon|e} bak ve geri alacağına yemin et", en: "Look at {yer:kordon}. Swear you'll take it back" }
+            kronik: { tr: "İlk kapı taşmasında yenildin ve {yer:kordon} düştü; rıhtımda onu geri alacağına yemin ettin.", en: "You lost the first Gate overflow, and {yer:kordon} fell. On the quay, you swore you'd take it back." }
             etkiler:
               - bayrak: "kordon_dustu"
               - kontrol: { kordon: "canavar" }
@@ -2095,7 +2095,7 @@ olaylar:
             sonraki: "@akis"
           - id: "say"
             etiket: { tr: "Rıhtımdakileri tek tek say", en: "Count the people on the quay, one by one" }
-            kronik: { tr: "Kordon düştüğü sabah rıhtımda kurtulanları tek tek saydın; o sayıyı hiç unutmadın.", en: "The morning the Esplanade fell, you counted the survivors on the quay one by one. You never forgot the number." }
+            kronik: { tr: "{yer:kordon} düştüğü sabah rıhtımda kurtulanları tek tek saydın; o sayıyı hiç unutmadın.", en: "The morning {yer:kordon} fell, you counted the survivors on the quay one by one. You never forgot the number." }
             etkiler:
               - bayrak: "kordon_dustu"
               - kontrol: { kordon: "canavar" }
@@ -2109,11 +2109,11 @@ olaylar:
         yer: "kordon"
         paragraflar:
           - { tr: "Kabuktan sıyrılıp bir çatıya tırmanıyorsun. Aşağıda deniz sokakları bir bir yutuyor; balkonlardan atlayan insanlar, yüzenler, yüzemeyenler.", en: "You twist free of the shell and scramble up onto a roof. Below you the sea swallows the streets one after another: people jumping off balconies, people swimming, people who can't." }
-          - { tr: "Dalga Ana senin peşinden gelmiyor. Gelmesine gerek yok; Kordon artık onun.", en: "The Brood Tide doesn't come after you. She doesn't need to. The Esplanade is hers now." }
+          - { tr: "Dalga Ana senin peşinden gelmiyor. Gelmesine gerek yok; {yer:kordon} artık onun.", en: "The Brood Tide doesn't come after you. She doesn't need to. The Esplanade is hers now." }
         secenekler:
           - id: "atla"
             etiket: { tr: "Suya atla; yüzemeyenleri çıkar", en: "Jump in. Pull out the ones who can't swim" }
-            kronik: { tr: "Kordon'u kaybettin ama kaçarken suya geri atlayıp yüzemeyenleri çıkardın.", en: "You lost the Esplanade, but on your way out you went back into the water for the ones who couldn't swim." }
+            kronik: { tr: "{yer:kordon|i} kaybettin ama kaçarken suya geri atlayıp yüzemeyenleri çıkardın.", en: "You lost {yer:kordon}, but on your way out you went back into the water for the ones who couldn't swim." }
             etkiler:
               - bayrak: "kordon_dustu"
               - kontrol: { kordon: "canavar" }
@@ -2124,8 +2124,8 @@ olaylar:
               - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 } }
             sonraki: "@akis"
           - id: "git"
-            etiket: { tr: "Çatıdan çatıya, Liman'a kadar git", en: "Go roof to roof, all the way to the Waterfront" }
-            kronik: { tr: "Kordon düşerken çatıdan çatıya kaçtın; arkanda kalan sesleri yıllarca duydun.", en: "As the Esplanade fell, you ran roof to roof. You heard the voices behind you for years." }
+            etiket: { tr: "Çatıdan çatıya, {yer:kiyikent_liman|e} kadar git", en: "Go roof to roof, all the way to {yer:kiyikent_liman}" }
+            kronik: { tr: "{yer:kordon} düşerken çatıdan çatıya kaçtın; arkanda kalan sesleri yıllarca duydun.", en: "As {yer:kordon} fell, you ran roof to roof. You heard the voices behind you for years." }
             etkiler:
               - bayrak: "kordon_dustu"
               - kontrol: { kordon: "canavar" }
@@ -2138,13 +2138,13 @@ olaylar:
       - id: "tasma_geri"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "Liman'ın taş rıhtımına kum torbası diziyorsun ve arkanı Kordon'a dönüyorsun. Körfezin öbür yakasında deniz sahile iniyor; buradan çığlıklar yalnızca bir martı sesi kadar.", en: "You stack sandbags along the Waterfront's stone quay and turn your back on the Esplanade. Across the bay the sea comes down on the beach. From here the screams are about as loud as gulls." }
-          - { tr: "Liman tutuyor. Liman'ın bir tek damı bile ıslanmıyor. Öğleye doğru Kordon'un balkonları boş ve Dalga Ana, kapının önünde, yeni yuvasına yerleşiyor.", en: "The Waterfront holds. Not one roof here even gets wet. By noon the balconies on the Esplanade are empty, and the Brood Tide is settling into her new home in front of the Gate." }
+          - { tr: "{yer:kiyikent_liman|in} taş rıhtımına kum torbası diziyorsun ve arkanı {yer:kordon|e} dönüyorsun. Körfezin öbür yakasında deniz sahile iniyor; buradan çığlıklar yalnızca bir martı sesi kadar.", en: "You stack sandbags along {yer:kiyikent_liman|pos} stone quay and turn your back on {yer:kordon}. Across the bay the sea comes down on the beach. From here the screams are about as loud as gulls." }
+          - { tr: "{yer:kiyikent_liman} tutuyor. {yer:kiyikent_liman|in} bir tek damı bile ıslanmıyor. Öğleye doğru {yer:kordon|in} balkonları boş ve Dalga Ana, kapının önünde, yeni yuvasına yerleşiyor.", en: "The Waterfront holds. Not one roof here even gets wet. By noon the balconies on {yer:kordon} are empty, and the Brood Tide is settling into her new home in front of the Gate." }
           - { tr: "Rıhtımdaki insanlar sana teşekkür ediyor. Bazıları teşekkür ederken körfezin öbür yakasına bakmamaya çalışıyor.", en: "The people on the quay thank you. Some of them try very hard not to look across the bay while they do." }
         secenekler:
           - id: "hesap"
             etiket: { tr: "Hesap doğruydu. Bunu kendine tekrarla", en: "The math was right. Tell yourself again" }
-            kronik: { tr: "Kordon'u bilerek düşürdün; hesap doğruydu ve sen bunu kendine yıllarca tekrarladın.", en: "You let the Esplanade fall on purpose. The math was right, and you told yourself so for years." }
+            kronik: { tr: "{yer:kordon|i} bilerek düşürdün; hesap doğruydu ve sen bunu kendine yıllarca tekrarladın.", en: "You let {yer:kordon} fall on purpose. The math was right, and you told yourself so for years." }
             etkiler:
               - bayrak: "kordon_dustu"
               - kontrol: { kordon: "canavar" }
@@ -2156,7 +2156,7 @@ olaylar:
             sonraki: "@akis"
           - id: "tekne"
             etiket: { tr: "Bir tekne al; körfezden kurtarabildiğini topla", en: "Grab a boat. Pull whoever you can out of the bay" }
-            kronik: { tr: "Kordon'u bıraktıktan sonra bir tekneyle körfeze çıkıp kurtarabildiklerini topladın; bu, hesabı biraz olsun düzeltti.", en: "After you let the Esplanade go, you took a boat out into the bay and picked up whoever you could. It fixed the math a little." }
+            kronik: { tr: "{yer:kordon|i} bıraktıktan sonra bir tekneyle körfeze çıkıp kurtarabildiklerini topladın; bu, hesabı biraz olsun düzeltti.", en: "After you let {yer:kordon} go, you took a boat out into the bay and picked up whoever you could. It fixed the math a little." }
             etkiler:
               - bayrak: "kordon_dustu"
               - kontrol: { kordon: "canavar" }
@@ -2189,7 +2189,7 @@ olaylar:
             kosul: { bayrak: "cekirdek_siginak" }
           - metin: { tr: "Yayını Lonca veriyor; sokaklarda turuncu bantlı nöbetçiler ne yapacaklarını bilmeden tüfeklerini kavrıyor.", en: "The Guild runs the broadcast, and on the street the orange-banded sentries grip their rifles without a clue what to point them at." }
             kosul: { bayrak: "cekirdek_lonca" }
-          - metin: { tr: "Yayını Yükselenler veriyor; {yer:tepe|den} bir ilahi yükselmeye başlıyor bile. Birileri bunu bir mucize olarak okuyor.", en: "The Ascended run the broadcast, and a hymn is already rising out of the Heights. Somebody's reading this as a miracle." }
+          - metin: { tr: "Yayını Yükselenler veriyor; {yer:tepe|den} bir ilahi yükselmeye başlıyor bile. Birileri bunu bir mucize olarak okuyor.", en: "The Ascended run the broadcast, and a hymn is already rising out of {yer:tepe}. Somebody's reading this as a miracle." }
             kosul: { bayrak: "cekirdek_yukselenler" }
           - metin: { tr: "Yayın Sessiz Ağ'ın kablolarından geçiyor; çatılardaki antenlerden biri kıvılcım saçıp sönüyor. {npc:mert_kilic} bunun olmasını bekliyordu ama bu kadar erken değil.", en: "The broadcast runs through the Quiet Network's cables, and one of the rooftop antennas spits sparks and dies. {npc:mert_kilic} saw this coming, just not this soon." }
             kosul: { bayrak: "cekirdek_sessiz_ag" }
@@ -2399,7 +2399,7 @@ olaylar:
         yer: "eski_sehir"
         paragraflar:
           - { tr: "Gece yarısına kadar şehirde tek bir konu konuşuluyor. Ertesi sabah konuşulmuyor; fısıldanıyor.", en: "Until midnight there's only one thing anybody in the city talks about. By morning nobody talks about it. They whisper." }
-          - metin: { tr: "{yer:tepe|de} beyazlılar küçük harflerle ilahiler yazıyor. {npc:vahit} sabah vaazında senin adını değil, \"iki sesi\" anıyor: Sistem'in kendi içinden konuşan ses.", en: "Up in the Heights the people in white are writing hymns in lowercase. In his morning sermon {npc:vahit} doesn't mention your name. He mentions \"the two voices\": the System speaking from inside itself." }
+          - metin: { tr: "{yer:tepe|de} beyazlılar küçük harflerle ilahiler yazıyor. {npc:vahit} sabah vaazında senin adını değil, \"iki sesi\" anıyor: Sistem'in kendi içinden konuşan ses.", en: "Up in {yer:tepe} the people in white are writing hymns in lowercase. In his morning sermon {npc:vahit} doesn't mention your name. He mentions \"the two voices\": the System speaking from inside itself." }
             kosul: { npc_hayatta: "vahit" }
           - metin: { tr: "{npc:kaya_demir} Lonca'nın panosuna yeni bir kural asıyor: \"Bozuk Sistem taşıyanlar bildirilir.\" Altında tek bir isim yok; herkes kimi kastettiğini biliyor.", en: "{npc:kaya_demir} pins a new rule to the Guild board: \"Anyone running a corrupted System must be reported.\" There's no name under it. Everybody knows who it means." }
             kosul: { npc_hayatta: "kaya_demir" }
@@ -2684,7 +2684,7 @@ olaylar:
         yer: "kiyikent_liman"
         paragraflar:
           - { tr: "Öğlen güneşi bir anda sönüyor. Martılar havada donup kalıyor, sonra hepsi aynı anda, çığlık atmadan, karaya doğru uçuyor.", en: "The noon sun goes out like somebody hit a switch. The gulls freeze in midair, and then all of them at once, without a sound, fly inland." }
-          - { tr: "Körfezin üstünde bir şey asılı. Gemi demek için fazla büyük, şehir demek için fazla sessiz: ters çevrilmiş bir kule, sivri ucu denize doğru, tabanı bulutların içinde. Tabanının yedi köşesinden ince bir ışık sızıyor ve gölgesi bütün körfezi, yan yatmış vapuru, Kordon'u ve Kule'nin ilk elli katını örtüyor.", en: "Something is hanging over the bay. Too big to call a ship, too quiet to call a city: a tower turned upside down, its point aimed at the water, its base lost in the clouds. A thin light leaks from the seven corners of that base, and its shadow covers the whole bay, the capsized ferry, the Esplanade and the first fifty floors of the Spire." }
+          - { tr: "Körfezin üstünde bir şey asılı. Gemi demek için fazla büyük, şehir demek için fazla sessiz: ters çevrilmiş bir kule, sivri ucu denize doğru, tabanı bulutların içinde. Tabanının yedi köşesinden ince bir ışık sızıyor ve gölgesi bütün körfezi, yan yatmış vapuru, {yer:kordon|i} ve Kule'nin ilk elli katını örtüyor.", en: "Something is hanging over the bay. Too big to call a ship, too quiet to call a city: a tower turned upside down, its point aimed at the water, its base lost in the clouds. A thin light leaks from the seven corners of that base, and its shadow covers the whole bay, the capsized ferry, {yer:kordon} and the first fifty floors of the Spire." }
           - { tr: "Gökyüzündeki mavi paneller, yüz yetmiş sekiz gündür ilk kez, aynı anda yön değiştiriyor. Hepsi ona dönüyor; bir sınıfın öğretmen içeri girdiğinde döndüğü gibi.", en: "For the first time in a hundred and seventy-eight days, every blue panel in the sky turns at once. They all face it, the way a classroom turns when the teacher walks in." }
           - metin: { tr: "Başlıktaki yedi köşeli mühür. Aynı şekil. Aynı ışık. Çiftçi tarlasına bakmaya gelmiş.", en: "The seven-pointed seal from the header. Same shape. Same light. The farmer's come to look at the field." }
             kosul: { bayrak: "gercek_hasat" }
@@ -2870,9 +2870,9 @@ olaylar:
         yer: "kiyikent_liman"
         paragraflar:
           - { tr: "Akşam olduğunda gemi hâlâ orada; güneş batmıyor, çünkü güneş yok. Şehrin üstünde yedi köşeli bir gece başlıyor ve bu gece üç gün sürecek.", en: "By evening the ship's still there. The sun doesn't set, because there's no sun to set. A seven-pointed night starts over the city, and this one's going to last three days." }
-          - metin: { tr: "Kordon'un balkonlarında ışıklar yanıyor; geri aldığın sahil, bu gece bile kendi lambalarını yakıyor.", en: "Lights are on along the Esplanade's balconies. The waterfront you held is burning its own lamps, even tonight." }
+          - metin: { tr: "{yer:kordon|in} balkonlarında ışıklar yanıyor; geri aldığın sahil, bu gece bile kendi lambalarını yakıyor.", en: "Lights are on along {yer:kordon|pos} balconies. The waterfront you held is burning its own lamps, even tonight." }
             kosul: { bayrak: "kordon_kurtarildi" }
-          - metin: { tr: "Kordon karanlık. Su altındaki katlardan, köpüğün içinden, küçük bacakların tıkırtısı geliyor; gölgenin altında daha da cesur.", en: "The Esplanade's dark. From the drowned floors, inside the foam, comes the tick-tick-tick of little legs, braver under the shadow." }
+          - metin: { tr: "{yer:kordon} karanlık. Su altındaki katlardan, köpüğün içinden, küçük bacakların tıkırtısı geliyor; gölgenin altında daha da cesur.", en: "The Esplanade's dark. From the drowned floors, inside the foam, comes the tick-tick-tick of little legs, braver under the shadow." }
             kosul: { bayrak: "kordon_dustu" }
           - metin: { tr: "Sistem bir hasat aracı ve hasatçı kapıda. Şehrin geri kalanı bunu bilmiyor; sen biliyorsun ve bilmek, gölgeden daha ağır.", en: "The System's a harvesting tool, and the harvester's at the door. The rest of the city doesn't know that. You do, and knowing is heavier than the shadow." }
             kosul: { bayrak: "gercek_hasat" }
@@ -2931,7 +2931,7 @@ olaylar:
       - id: "d50p2_1"
         yer: "kule_dibi"
         paragraflar:
-          - { tr: "Bir çocuk elinde buruşuk bir kâğıtla sana koşuyor: \"Bu sen misin?\" Kâğıt Kule Dibi'ndeki ödül panosundan koparılmış. Sokaklarda insanlar sana bir saniye fazla uzun bakıyor; panoya varana kadar nedenini anlıyorsun.", en: "A kid runs up holding a crumpled sheet of paper: \"Hey, is this you?\" It's been torn off the bounty board at Spire Plaza. On the way over, people look at you a second too long, and by the time you reach the board you know why." }
+          - { tr: "Bir çocuk elinde buruşuk bir kâğıtla sana koşuyor: \"Bu sen misin?\" Kâğıt Kule Dibi'ndeki ödül panosundan koparılmış. Sokaklarda insanlar sana bir saniye fazla uzun bakıyor; panoya varana kadar nedenini anlıyorsun.", en: "A kid runs up holding a crumpled sheet of paper: \"Hey, is this you?\" It's been torn off the bounty board at {yer:kule_dibi}. On the way over, people look at you a second too long, and by the time you reach the board you know why." }
           - { tr: "Kule'nin dibindeki avcı pazarında ödül panosu bir otobüs durağının camı. Camın tam ortasında senin yüzün var; kötü bir karakalem, ama sen. Altında: ANOMALİ. CANLI. 5.000 KREDİ. ÖLÜ: 0.", en: "The bounty board at the hunters' market under the Spire is an old bus-shelter panel. Dead center is your face. A lousy charcoal sketch, but you. Under it: ANOMALY. ALIVE. 5,000 CREDITS. DEAD: 0." }
           - { tr: "Panonun önünde üç kişi var: uzun namlulu tüfekler, dürbünler, el yapımı ağ atarlar. Üçü de seni çoktan görmüş ve üçü de görmemiş gibi yapıyor.", en: "Three people are standing in front of the board: long rifles, scopes, homemade net launchers. All three spotted you a while ago. All three are pretending they didn't." }
         bildirimler:
@@ -3044,7 +3044,7 @@ olaylar:
           - { tr: "Gece biri panodaki ilanı değiştiriyor; yüzünün altına bir not eklenmiş: \"Görülmedi.\" Bu, şimdilik, yeterli.", en: "Overnight somebody updates the notice. Under your face there's a new line: \"Not sighted.\" For now, that's enough." }
         secenekler:
           - id: "tamam"
-            etiket: { tr: "Bir süre Kule Dibi'nden uzak dur", en: "Stay away from Spire Plaza for a while" }
+            etiket: { tr: "Bir süre Kule Dibi'nden uzak dur", en: "Stay away from {yer:kule_dibi} for a while" }
             etkiler:
               - gizle: 4
               - ahlak: { duzen: 1 }
@@ -3370,7 +3370,7 @@ olaylar:
 
       - id: "d100p2_yenilgi"
         paragraflar:
-          - { tr: "Çizgi tam üstünden geçiyor ve çatıya yığılıyorsun. Gözcü yanına diz çöküyor, sanki bir böceği inceler gibi, ve kalemini bir kez havada sallıyor.", en: "The stroke goes straight through you and you fold up on the rooftop. The watcher kneels down next to you like it's studying a bug and flicks its pen once in the air." }
+          - { tr: "Çizgi tam üstünden geçiyor ve çatıya yığılıyorsun. Gözcü, sanki bir böceği inceler gibi yanına diz çöküyor ve kalemini bir kez havada sallıyor.", en: "The stroke goes straight through you and you fold up on the rooftop. The watcher kneels down next to you like it's studying a bug and flicks its pen once in the air." }
           - { tr: "Seni öldürmüyor. Gerek yok. Sistem çeviriyor: [Ölçüm tamam. Henüz değil.]. Sonra gidiyor; yanında bir pul bırakıyor, sanki bir makbuz gibi.", en: "It doesn't kill you. It doesn't need to. The System translates: [Measurement complete. Not yet.] Then it leaves, dropping a scale next to you like a receipt." }
           - { tr: "Kafanın içinde {npc:yanki}: yeni tavan. bunu sevmedim. ama bunu hatırla. bir gün bu sen olacaksın.", en: "Inside your head, {npc:yanki}: new ceiling. didn't like that. but remember it. someday that's going to be you." }
         secenekler:
@@ -3398,7 +3398,7 @@ olaylar:
       - id: "kdc_1"
         yer: "kiyikent_iskele"
         paragraflar:
-          - { tr: "Liman'dan bir çocuk seni buluyor; nefes nefese, elinde bir kâğıt. \"Duvardaki notunun altına yazmışlar,\" diyor. \"Bir sürü kişi. Görmen lazım.\"", en: "A kid from the Waterfront tracks you down, out of breath, holding a slip of paper. \"People wrote under your note on the wall,\" she says. \"A whole bunch of them. You gotta see.\"" }
+          - { tr: "{yer:kiyikent_liman|den} bir çocuk seni buluyor; nefes nefese, elinde bir kâğıt. \"Duvardaki notunun altına yazmışlar,\" diyor. \"Bir sürü kişi. Görmen lazım.\"", en: "A kid from {yer:kiyikent_liman} tracks you down, out of breath, holding a slip of paper. \"People wrote under your note on the wall,\" she says. \"A whole bunch of them. You gotta see.\"" }
           - { tr: "Terminale vardığında notunun altı başka el yazılarıyla dolmuş. Çoğu yalnızca bir teşekkür. Ama üçü bir cevap bekliyor.", en: "When you get to the terminal, the space under your note is full of other people's handwriting. Most of it's just thank-you. But three of them are waiting for an answer." }
           - metin: { tr: "Birinin el yazısı titrek ve iri: \"Vapurumu yan yatmış bırakmayacağım. Çarşıdaki kaptan. Hatırlarsan, gel.\"", en: "One's in big, shaky handwriting: \"I'm not leaving my ferry on its side. The captain from the mall. If you remember me, come.\"" }
             kosul: { bayrak: "mahsur_kaptan_tanindi", bayrak_yok: "mahsur_kaptan_kaldi" }
@@ -3469,7 +3469,7 @@ olaylar:
         yer: "kiyikent_iskele"
         paragraflar:
           - { tr: "Vapur inliyor, çamurdan kurtuluyor ve ağır ağır doğruluyor; içinden aylardır birikmiş deniz suyu şelale gibi boşalıyor. İskelede biri bir tencereye vurmaya başlıyor; sonra herkes.", en: "The ferry groans, sucks free of the mud and slowly comes upright, dumping months of trapped seawater like a waterfall. Somebody on the dock starts banging on a pot. Then everybody does." }
-          - { tr: "Kaptan dümen evine çıkıp düdüğü çekiyor. Ses körfezin üstünden Kordon'a kadar gidiyor. Bütün şehir başını kaldırıyor ve o sabah, bir an için, eski bir sabah gibi.", en: "The captain climbs up into the wheelhouse and pulls the whistle. The sound carries across the bay all the way to the Esplanade. The whole city looks up, and for a moment that morning feels like an old morning." }
+          - { tr: "Kaptan dümen evine çıkıp düdüğü çekiyor. Ses körfezin üstünden {yer:kordon|e} kadar gidiyor. Bütün şehir başını kaldırıyor ve o sabah, bir an için, eski bir sabah gibi.", en: "The captain climbs up into the wheelhouse and pulls the whistle. The sound carries across the bay all the way to {yer:kordon}. The whole city looks up, and for a moment that morning feels like an old morning." }
           - metin: { tr: "{npc:deniz_arman} iskelede, yedi kırk vapurunun düdüğünü duyunca gözlerini kapatıyor.", en: "On the dock, {npc:deniz_arman} closes {zamir:deniz_arman|onun} eyes at the sound of the seven-forty boat's whistle." }
             kosul: { yoldas: "deniz_arman" }
         secenekler:
@@ -3721,9 +3721,9 @@ olaylar:
     sahneler:
       - id: "ts_1"
         paragraflar:
-          - metin: { tr: "Kordon'da bir şenlik var. Kurtarılan balkonlardan çamaşır ipleriyle bayraklar sarkıyor, biri bir hoparlörden eski bir yaz şarkısı çalıyor. Çocuklar sana deniz kabuklarından bir taç yapmış.", en: "There's a block party on the Esplanade. Flags hang from clotheslines between the balconies you saved, and somebody's playing an old summer song off a speaker. The kids made you a crown out of seashells." }
+          - metin: { tr: "{yer:kordon|de} bir şenlik var. Kurtarılan balkonlardan çamaşır ipleriyle bayraklar sarkıyor, biri bir hoparlörden eski bir yaz şarkısı çalıyor. Çocuklar sana deniz kabuklarından bir taç yapmış.", en: "There's a block party on {yer:kordon}. Flags hang from clotheslines between the balconies you saved, and somebody's playing an old summer song off a speaker. The kids made you a crown out of seashells." }
             kosul: { bayrak: "kordon_kurtarildi" }
-          - metin: { tr: "Liman'ın rıhtımında bir anma var. Kordon'dan çıkamayanların adları bir çarşafa yazılmış, çarşaf iki direğe gerilmiş. Körfezin öbür yakasında, karanlık balkonlarda köpük tıkırdıyor.", en: "There's a memorial on the Waterfront quay. The names of everyone who couldn't get off the Esplanade are written on a bedsheet strung between two poles. Across the bay, foam ticks along the dark balconies." }
+          - metin: { tr: "{yer:kiyikent_liman|in} rıhtımında bir anma var. {yer:kordon|den} çıkamayanların adları bir çarşafa yazılmış, çarşaf iki direğe gerilmiş. Körfezin öbür yakasında, karanlık balkonlarda köpük tıkırdıyor.", en: "There's a memorial on {yer:kiyikent_liman} quay. The names of everyone who couldn't get off {yer:kordon} are written on a bedsheet strung between two poles. Across the bay, foam ticks along the dark balconies." }
             kosul: { bayrak: "kordon_dustu" }
           - { tr: "Herkes seni bekliyormuş gibi; sen gelince konuşmalar kesiliyor ve yüzler sana dönüyor.", en: "Feels like everybody was waiting on you. When you show up the talk stops and the faces turn your way." }
         yoldas_tepkileri:
@@ -3759,7 +3759,7 @@ olaylar:
               - iliski: { elif_sari: { guven: 3 }, deniz_arman: { guven: 3 } }
             sonraki: "ts_sen"
           - id: "yemin"
-            etiket: { tr: "\"Kordon'u geri alacağız.\"", en: "\"We're taking the Esplanade back.\"" }
+            etiket: { tr: "\"{yer:kordon|i} geri alacağız.\"", en: "\"We're taking {yer:kordon} back.\"" }
             goster: { bayrak: "kordon_dustu" }
             etkiler:
               - ahlak: { duzen: 3, merhamet: 1 }
@@ -3843,7 +3843,7 @@ olaylar:
 
       - id: "iss_tas"
         paragraflar:
-          - { tr: "Adam taşı kaldırıyor ve sen tam önünde duruyorsun. Elleri titriyor. \"Karım Kordon'daydı,\" diyor. \"Senin içindeki o şey... bunu o mu yaptı? Sistem mi? Sen mi?\"", en: "The man raises the rock, and you stop right in front of him. His hands are shaking. \"My wife was on the Esplanade,\" he says. \"That thing inside you... did it do this? Did the System? Did you?\"" }
+          - { tr: "Adam taşı kaldırıyor ve sen tam önünde duruyorsun. Elleri titriyor. \"Karım {yer:kordon|de}ydı,\" diyor. \"Senin içindeki o şey... bunu o mu yaptı? Sistem mi? Sen mi?\"", en: "The man raises the rock, and you stop right in front of him. His hands are shaking. \"My wife was on {yer:kordon},\" he says. \"That thing inside you... did it do this? Did the System? Did you?\"" }
           - { tr: "Taşı atmıyor. Sonunda bırakıyor; taş kaldırıma düşüp ikiye ayrılıyor. Adam da taşla birlikte yere çöküyor.", en: "He doesn't throw it. Finally he lets it go. It hits the curb and splits in two, and he folds right down onto the pavement with it." }
         secenekler:
           - id: "otur"
@@ -3959,9 +3959,9 @@ olaylar:
       - id: "gag_1"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "Güneşsiz ikinci gün. Liman'da balıkçı tekneleri insanla dolmuş; körfezden açık denize, geminin gölgesinin dışına kaçmaya çalışıyorlar.", en: "Second day without a sun. The fishing boats at the Waterfront are packed with people trying to run out of the bay, past the edge of the ship's shadow, into open water." }
+          - { tr: "Güneşsiz ikinci gün. {yer:kiyikent_liman|de} balıkçı tekneleri insanla dolmuş; körfezden açık denize, geminin gölgesinin dışına kaçmaya çalışıyorlar.", en: "Second day without a sun. The fishing boats at {yer:kiyikent_liman} are packed with people trying to run out of the bay, past the edge of the ship's shadow, into open water." }
           - { tr: "İlk tekne gölgenin kenarına vardığında su kaynamaya başlıyor; tekne nazikçe, bir el tarafından itilir gibi, geri dönüyor. İkinci tekne de. Rıhtımda biri çığlık atıyor: \"Bizi kafese koydular!\"", en: "When the first boat hits the edge of the shadow, the water starts to boil, and the boat gets turned around, gently, like a hand pushed it. The second boat too. Somebody on the quay screams: \"They put us in a cage!\"" }
-          - metin: { tr: "{yer:tepe|den} {npc:vahit|in} sesi hoparlörlerden yayılıyor: \"Bahçıvanlar geldi! Olgunlaşanlar seçilecek! Korkmayın; büyüyün!\"", en: "{npc:vahit|pos} voice booms out of the speakers up in the Heights: \"The Gardeners have come! The ripe will be chosen! Don't be afraid. Grow!\"" }
+          - metin: { tr: "{yer:tepe|den} {npc:vahit|in} sesi hoparlörlerden yayılıyor: \"Bahçıvanlar geldi! Olgunlaşanlar seçilecek! Korkmayın; büyüyün!\"", en: "{npc:vahit|pos} voice booms out of the speakers up in {yer:tepe}: \"The Gardeners have come! The ripe will be chosen! Don't be afraid. Grow!\"" }
             kosul: { npc_hayatta: "vahit" }
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
@@ -3976,7 +3976,7 @@ olaylar:
               - iliski: { elif_sari: { guven: 4 } }
             sonraki: "gag_tekne"
           - id: "vahit"
-            etiket: { tr: "{yer:tepe|e} çık; hoparlörleri sustur", en: "Go up to the Heights. Shut those speakers off" }
+            etiket: { tr: "{yer:tepe|e} çık; hoparlörleri sustur", en: "Go up to {yer:tepe}. Shut those speakers off" }
             goster: { npc_hayatta: "vahit" }
             etkiler:
               - ahlak: { duzen: 3, insanlik: 2 }
@@ -4010,7 +4010,7 @@ olaylar:
       - id: "gag_vahit"
         yer: "tepe"
         paragraflar:
-          - { tr: "Tepedeki eski fenerin dibinde {npc:vahit} mikrofonun başında; arkasında yüzlerce beyazlı ellerini göğe kaldırmış. Kabloyu tek bir hareketle koparıyorsun.", en: "At the foot of the old lighthouse up in the Heights, {npc:vahit} is at the microphone with hundreds of people in white behind him, hands raised to the sky. You rip the cable out in one motion." }
+          - { tr: "Tepedeki eski fenerin dibinde {npc:vahit} mikrofonun başında; arkasında yüzlerce beyazlı ellerini göğe kaldırmış. Kabloyu tek bir hareketle koparıyorsun.", en: "At the foot of the old lighthouse up in {yer:tepe}, {npc:vahit} is at the microphone with hundreds of people in white behind him, hands raised to the sky. You rip the cable out in one motion." }
           - { tr: "Sessizlik. {npc:vahit} sana dönüyor ve ilk kez, gerçekten, korkuyor. Sonra gülümsemeyi hatırlıyor. \"Sen de onlardansın,\" diyor. \"Bahçıvanlardan. Sadece henüz bilmiyorsun.\"", en: "Silence. {npc:vahit} turns to you and, for the first time, really, he's scared. Then he remembers to smile. \"You're one of them too,\" he says. \"The Gardeners. You just don't know it yet.\"" }
         secenekler:
           - id: "tamam"

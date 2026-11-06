@@ -547,6 +547,7 @@ class StoryEngine(val content: Content) {
      */
     private fun chronicleAfter(after: WorldState, before: WorldState, sceneId: String, choice: ChoiceDef, chosen: List<Effect>): List<ChronicleEntry> {
         val eventId = before.dayState.currentEvent ?: return after.chronicle
+        if (before.returnStack.isNotEmpty() || sceneId == Content.PENALTY_SCENE) return after.chronicle
         val event = content.events[eventId] ?: return after.chronicle
         if (!event.important && choice.chronicle == null) return after.chronicle
         val weight = choice.chronicleWeight ?: (chosen.sumOf { e ->

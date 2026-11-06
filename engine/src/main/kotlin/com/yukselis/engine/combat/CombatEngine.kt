@@ -148,7 +148,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         val defs = spec.enemies.map { enemyDef(it, state) ?: throw ActionRejected("Tanımsız düşman: $it") }
         val p = state.player
         val enemies = defs.mapIndexed { i, d ->
-            val mem = state.enemyMemory[d.id]?.fled ?: 0
+            val mem = state.enemyMemory[EnemyScaling.baseId(d.id)]?.fled ?: 0
             // Kaçan zeki düşman güçlenmiş olarak döner: her kaçış +2 seviye, statlara ve cana +%15/%20.
             val stats = if (mem == 0) d.stats else Stats(d.stats.values.mapValues { (_, v) -> (v * (1 + 0.15 * mem)).roundToInt() })
             val hp = (d.maxHp * (1 + 0.2 * mem)).roundToInt()
@@ -186,7 +186,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         ctx.notices += Notice(NoticeKind.WARNING, texts.formatL("savas_basladi", "enemies" to names))
         defs.distinctBy { it.id }.forEach { d ->
             ctx.log(d.hook)
-            state.enemyMemory[d.id]?.takeIf { it.fled > 0 }?.let {
+            state.enemyMemory[EnemyScaling.baseId(d.id)]?.takeIf { it.fled > 0 }?.let {
                 ctx.log(texts.formatL("savas_hatirliyor", "enemy" to proseName(d)))
             }
         }
@@ -1041,9 +1041,10 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
 
     private fun remember(ctx: Ctx, def: EnemyDef, spared: Boolean) {
         if (!def.intelligent) return
-        val m = ctx.s.enemyMemory[def.id] ?: EnemyMemory()
+        val memKey = EnemyScaling.baseId(def.id)
+        val m = ctx.s.enemyMemory[memKey] ?: EnemyMemory()
         val updated = if (spared) m.copy(spared = m.spared + 1) else m.copy(fled = m.fled + 1)
-        ctx.s = ctx.s.copy(enemyMemory = ctx.s.enemyMemory + (def.id to updated))
+        ctx.s = ctx.s.copy(enemyMemory = ctx.s.enemyMemory + (memKey to updated))
     }
 
     // ---------------------------------------------------------------- otomatik tur

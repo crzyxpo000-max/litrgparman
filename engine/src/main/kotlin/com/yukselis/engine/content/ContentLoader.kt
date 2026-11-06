@@ -73,7 +73,9 @@ object ContentLoader {
         parts.forEachIndexed { i, text ->
             YamlTree.parseObject(text, "$dir parça ${i + 1}").forEach { (top, v) ->
                 val group = merged.getOrPut(top) { linkedMapOf() }
-                (v as? kotlinx.serialization.json.JsonObject)?.forEach { (k, x) ->
+                val obj = v as? kotlinx.serialization.json.JsonObject
+                    ?: throw ContentFormatException("$dir: parçalanmış dosyada '$top' bir eşlem olmalı (liste birleştirilemez)")
+                obj.forEach { (k, x) ->
                     if (k in group) throw ContentFormatException("$dir: '$k' iki kez tanımlı")
                     group[k] = x
                 }

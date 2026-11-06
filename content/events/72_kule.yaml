@@ -32,7 +32,7 @@ olaylar:
           - tur: "sistem"
             baslik: { tr: "[KULE · KAT 10 · KAYIT ODASI]", en: "[SPIRE · FLOOR 10 · RECORD ROOM]" }
             satirlar:
-              - { tr: "Oynatılan kayıt: Entegrasyon · Kıyıkent · Gün 0 · 18:52.", en: "Playback: Integration · Port Harlow · Day 0 · 6:52 PM." }
+              - { tr: "Oynatılan kayıt: Entegrasyon · {yer:kiyikent} · Gün 0 · 18:52.", en: "Playback: Integration · {yer:kiyikent} · Day 0 · 6:52 PM." }
               - { tr: "Kayıt numarası: #█. Lütfen kayda dokunmayın.", en: "Record number: #█. Please do not touch the recording." }
         sezgiler:
           - kosul: { stat: { per: 30 } }
@@ -816,7 +816,7 @@ olaylar:
       - id: "k30_el"
         yer: "kule"
         paragraflar:
-          - { tr: "Yaklaştıkça oda netleşiyor: bir hastane odası, perdeleri Kıyıkent'in sabah ışığında. Yataktaki kişinin yüzü cama dönük değil. Elini tuttuğun el yaşlı, ince, damarları belirgin.", en: "The closer you get, the clearer the room: a hospital room, curtains lit by Port Harlow's morning sun. The person in the bed isn't facing the glass. The hand you're holding is old, thin, the veins standing out." }
+          - { tr: "Yaklaştıkça oda netleşiyor: bir hastane odası, perdeleri {yer:kiyikent|in} sabah ışığında. Yataktaki kişinin yüzü cama dönük değil. Elini tuttuğun el yaşlı, ince, damarları belirgin.", en: "The closer you get, the clearer the room: a hospital room, curtains lit by {yer:kiyikent|pos} morning sun. The person in the bed isn't facing the glass. The hand you're holding is old, thin, the veins standing out." }
           - { tr: "Aynadaki sen yüzünü sana çeviriyor ve gülümsüyor; bu gülümsemeyi tanıyorsun, çünkü sen de bazen öyle gülümsüyorsun. Sonra ayna kararıyor. Bunun hangi hayattan olduğunu hiçbir zaman bilmeyeceksin. Ya da bir gün, çok geç, bileceksin.", en: "The you in the mirror turns to face you and smiles. You know that smile, because you smile like that sometimes too. Then the mirror goes dark. You'll never know what life that came from. Or someday, way too late, you will." }
         secenekler:
           - id: "in"
@@ -914,7 +914,7 @@ olaylar:
               - { tr: "Not: Ceza bölgeleri bu mekanizmanın bir alt kümesini kullanır. İlginiz için teşekkürler.", en: "Note: Penalty zones run on a subset of this mechanism. Thank you for your interest." }
         sezgiler:
           - kosul: { stat: { per: 75 } }
-            metin: { tr: "Donmuş kadının Analiz'i: [İnsan · Seviye 140 · Kademe C · Durum: durdurulmuş]. Bir insan. C kademesi bir insan. Kıyıkent'te böyle biri yok. Bu döngüde yok.", en: "The frozen woman's Analysis: [Human · Level 140 · Grade C · Status: suspended]. A human. A C-Grade human. There's nobody like that in Port Harlow. Not in this cycle." }
+            metin: { tr: "Donmuş kadının Analiz'i: [İnsan · Seviye 140 · Kademe C · Durum: durdurulmuş]. Bir insan. C kademesi bir insan. {yer:kiyikent|de} böyle biri yok. Bu döngüde yok.", en: "The frozen woman's Analysis: [Human · Level 140 · Grade C · Status: suspended]. A human. A C-Grade human. There's nobody like that in {yer:kiyikent}. Not in this cycle." }
           - kosul: { stat: { wis: 72 } }
             metin: { tr: "Saatin tiklemesi bir kalp atışı değil; geri sayım. Ve ustanın görevi saati kurmak değil, saati kimin geri sardığını yakalamak.", en: "The ticking isn't a heartbeat. It's a countdown. And the clockwright's job isn't winding the clock. It's catching whoever keeps rewinding it." }
           - kosul: { bayrak: "yanki_bagi" }
@@ -983,7 +983,7 @@ olaylar:
       - id: "k40_kadin"
         yer: "kule"
         paragraflar:
-          - { tr: "Kadının yüzü bir çığlığın ortasında donmuş; öfke değil, kararlılık. Zırhı hiç görmediğin bir loncanın arması taşıyor, kolunda Kıyıkent'in eski belediye logosu var. Ama zırhın tasarımı yıllarca ileriden, ya da çok uzun bir yıldan geliyor gibi.", en: "Her face is frozen mid-shout. Not rage: resolve. Her armor carries the crest of a guild you've never seen, and on her arm is Port Harlow's old city seal. But the armor's design looks like it came from years ahead, or from one very long year." }
+          - { tr: "Kadının yüzü bir çığlığın ortasında donmuş; öfke değil, kararlılık. Zırhı hiç görmediğin bir loncanın arması taşıyor, kolunda {yer:kiyikent|in} eski belediye logosu var. Ama zırhın tasarımı yıllarca ileriden, ya da çok uzun bir yıldan geliyor gibi.", en: "Her face is frozen mid-shout. Not rage: resolve. Her armor carries the crest of a guild you've never seen, and on her arm is {yer:kiyikent|pos} old city seal. But the armor's design looks like it came from years ahead, or from one very long year." }
           - { tr: "Mızrağının ucu ustanın göğsüne bir karış kala durmuş. Neredeyse başarmış. Neredeyse.", en: "Her spear point stopped a hand's width from the clockwright's chest. She almost made it. Almost." }
           - { tr: "Göğsündeki küçük bir rozette, el yazısıyla, bir gün sayısı var: 341. Altında, sonradan kazınmış: \"bu sefer\".", en: "On a little badge on her chest, handwritten, is a day count: 341. Under it, scratched in later: \"this time.\"" }
         secenekler:
@@ -1294,7 +1294,7 @@ olaylar:
               - aciga_vur: true
               - dikkat: 5
               - ahlak: { duzen: -4, merhamet: -2 }
-            kronik: { tr: "Ellinci katın bekçisinin mızrağını bir yol gibi kullandın; ondan sonra Kule Dibi'nde senin hakkında anlatılanlar abartı sayılmadı.", en: "You used the fiftieth-floor warden's spear like a road, and after that nobody on Spire Plaza called the stories about you exaggerated." }
+            kronik: { tr: "Ellinci katın bekçisinin mızrağını bir yol gibi kullandın; ondan sonra Kule Dibi'nde senin hakkında anlatılanlar abartı sayılmadı.", en: "You used the fiftieth-floor warden's spear like a road, and after that nobody on {yer:kule_dibi} called the stories about you exaggerated." }
             sonraki: "k50_savas_once"
 
       - id: "k50_tercume"
@@ -1328,7 +1328,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Molozun her katmanı başka bir dünya. En altta, neredeyse toz olmuş, sarmal kabuklar; onların üstünde pirinç dişliler; onların üstünde kemikten bir saray kubbesi. Her katmanın tepesinde kırık bir kule ucu.", en: "Every layer of the rubble is a different world. At the bottom, nearly dust, spiral shells; on top of them, brass gears; on top of those, the dome of a palace made of bone. At the top of every layer, the tip of a broken spire." }
-          - { tr: "En üstte, henüz moloza dönüşmemiş, boş bir yer duruyor. Kenarları temiz, düzgün, beklemeye hazır. Ölçüsü kabaca bir şehrin. Kabaca Kıyıkent'in.", en: "At the very top, not rubble yet, there's an empty space. Clean edges, neat, ready and waiting. Roughly the size of a city. Roughly the size of Port Harlow." }
+          - { tr: "En üstte, henüz moloza dönüşmemiş, boş bir yer duruyor. Kenarları temiz, düzgün, beklemeye hazır. Ölçüsü kabaca bir şehrin. Kabaca {yer:kiyikent|in}.", en: "At the very top, not rubble yet, there's an empty space. Clean edges, neat, ready and waiting. Roughly the size of a city. Roughly the size of {yer:kiyikent}." }
           - metin: { tr: "Sistem gerçeğinin parçası aklına geliyor: hasat. Bu moloz yığını, o kelimenin neye benzediğini gösteriyor.", en: "The piece of the System's truth comes back to you: harvest. This rubble heap is what that word looks like." }
             kosul: { bayrak: "gercek_hasat" }
           - metin: { tr: "Sistem gerçeğinin parçası aklına geliyor: bir kurtarma protokolü. Bu moloz, kurtarılamayanların listesi; ve liste çok uzun.", en: "The piece of the System's truth comes back to you: a rescue protocol. This rubble is the list of the ones it couldn't save, and the list is very long." }
@@ -1338,7 +1338,7 @@ olaylar:
             etiket: { tr: "Boş yere bak, sonra devin önüne çık", en: "Look at the empty space. Then step up to the giant" }
             etkiler:
               - ahlak: { insanlik: 2, merhamet: 1 }
-            kronik: { tr: "Başka dünyaların enkazının tepesinde, Kıyıkent büyüklüğünde bir boşluk gördün ve onu doldurmamaya yemin ettin.", en: "On top of the other worlds' wreckage you saw an empty space the size of Port Harlow, and you swore it would stay empty." }
+            kronik: { tr: "Başka dünyaların enkazının tepesinde, {yer:kiyikent} büyüklüğünde bir boşluk gördün ve onu doldurmamaya yemin ettin.", en: "On top of the other worlds' wreckage you saw an empty space the size of {yer:kiyikent}, and you swore it would stay empty." }
             sonraki: "k50_savas_once"
 
       - id: "k50_savas_once"
@@ -1516,7 +1516,7 @@ olaylar:
               - { tr: "Arşivin yanması normaldir. Yangın alarmı yoktur.", en: "The archive burning is normal. There is no fire alarm." }
         sezgiler:
           - kosul: { stat: { per: 155 } }
-            metin: { tr: "Rafların etiketleri bir düzen izliyor. Bir koridorun tamamı tek bir dünyaya ayrılmış: Kıyıkent. Ve o koridorun dosyalarının üstünde, ardışık, numaralar var.", en: "The shelf labels follow a pattern. A whole aisle is set aside for one world: Port Harlow. And the files in that aisle have numbers on them. Consecutive numbers." }
+            metin: { tr: "Rafların etiketleri bir düzen izliyor. Bir koridorun tamamı tek bir dünyaya ayrılmış: {yer:kiyikent}. Ve o koridorun dosyalarının üstünde, ardışık, numaralar var.", en: "The shelf labels follow a pattern. A whole aisle is set aside for one world: {yer:kiyikent}. And the files in that aisle have numbers on them. Consecutive numbers." }
           - kosul: { stat: { int: 150 } }
             metin: { tr: "Sonuç satırları farklı; son satır hep aynı. Sistem hangi sonu seçtiğinize bakmıyor. Yalnızca bir sonun geldiğine bakıyor.", en: "The outcome lines are all different. The last line is always the same. The System doesn't care which ending you pick. It only cares that one comes." }
           - kosul: { bayrak: "yanki_bagi" }
@@ -1533,7 +1533,7 @@ olaylar:
             metin: { tr: "\"Bizim dosyamız da burada mı? Benim? Okumak istemiyorum. Okumak istiyorum. Bilmiyorum.\"", en: "\"Is our file in here too? Mine? I don't want to read it. I want to read it. I don't know.\"" }
         secenekler:
           - id: "kiyikent"
-            etiket: { tr: "Kıyıkent koridorunu bul", en: "Find the Port Harlow aisle" }
+            etiket: { tr: "{yer:kiyikent} koridorunu bul", en: "Find the {yer:kiyikent} aisle" }
             gerekli: { stat: { per: 155 } }
             etkiler:
               - bilgi: "kule_yeni_entegrasyon"
@@ -1562,7 +1562,7 @@ olaylar:
       - id: "k60_koridor"
         yer: "kule"
         paragraflar:
-          - { tr: "Kıyıkent koridoru yarı yanmış. Dosyalar numaralı ve numaralar senin sayabileceğinden fazla; her birinin sırtında aynı tarih: Entegrasyon Günü. Aynı gün, defalarca.", en: "The Port Harlow aisle is half burned. The files are numbered, and there are more numbers than you could ever count. Every spine carries the same date: Integration Day. The same day, over and over." }
+          - { tr: "{yer:kiyikent} koridoru yarı yanmış. Dosyalar numaralı ve numaralar senin sayabileceğinden fazla; her birinin sırtında aynı tarih: Entegrasyon Günü. Aynı gün, defalarca.", en: "The {yer:kiyikent} aisle is half burned. The files are numbered, and there are more numbers than you could ever count. Every spine carries the same date: Integration Day. The same day, over and over." }
           - { tr: "Birini açıyorsun. Sonuç: hasat edildi. Bir başkası: koruyucu. Bir başkası: demir taht. Bir başkası: yükseliş. Her birinin son satırı aynı. Ve hiçbirinde senin adın yok. Hiçbirinde ana karakter yok; yalnızca bir boşluk, bir taşıyıcının oturacağı yer.", en: "You open one. Outcome: harvested. Another: guardian. Another: iron crown. Another: ascension. Every one ends on the same line. And your name isn't in any of them. None of them have a lead, just a blank, the space where a host would sit." }
           - metin: { tr: "Bu dosyaların çoğunda, hasat bir sondu. Ama son satır ona bile bir başlangıç diyor.", en: "In most of these files, the harvest was an ending. But the last line calls even that a beginning." }
             kosul: { bayrak: "gercek_hasat" }
@@ -1684,7 +1684,7 @@ olaylar:
               - { tr: "Arşiv bakımı askıya alındı. Kayıt imhası: ertelendi.", en: "Archive maintenance suspended. Record destruction: postponed." }
         secenekler:
           - id: "oku"
-            etiket: { tr: "Kurtulan sayfaları topla; Kıyıkent'e götür", en: "Gather the pages that survived. Take them to Port Harlow" }
+            etiket: { tr: "Kurtulan sayfaları topla; {yer:kiyikent|e} götür", en: "Gather the pages that survived. Take them to {yer:kiyikent}" }
             etkiler:
               - kule_kat: 60
               - xp_seviye: 130
@@ -1797,7 +1797,7 @@ olaylar:
               - { tr: "Lütfen tohumlukları uyandırmayın. Uyandırılan tohumluk iade edilmez.", en: "Please do not wake the seed stock. Woken stock is non-refundable." }
         sezgiler:
           - kosul: { stat: { per: 195 } }
-            metin: { tr: "Etiketlerin döngü sütununda aynı dünya defalarca var: Kıyıkent. Her döngüden birkaç kişi. Hep en güçlüler. Hep en hızlılar.", en: "The cycle column on the labels shows the same world over and over: Port Harlow. A few people from every cycle. Always the strongest. Always the fastest." }
+            metin: { tr: "Etiketlerin döngü sütununda aynı dünya defalarca var: {yer:kiyikent}. Her döngüden birkaç kişi. Hep en güçlüler. Hep en hızlılar.", en: "The cycle column on the labels shows the same world over and over: {yer:kiyikent}. A few people from every cycle. Always the strongest. Always the fastest." }
           - kosul: { stat: { wis: 190 } }
             metin: { tr: "Kozalar uyuyanları beslemiyor; uyuyanlardan besleniyor. Uyuyanların Öz'ü ince bir damarla tavana, tavandan yukarıya akıyor.", en: "The pods aren't feeding the sleepers. They're feeding on them. The sleepers' Essence runs up a thin vein into the ceiling, and from the ceiling, up." }
           - kosul: { bayrak: "yanki_bagi" }
@@ -1814,7 +1814,7 @@ olaylar:
             metin: { tr: "\"En güçlüleri saklamışlar. Yani hasatta kazanmak bir ödül değil; bir kavanoz.\"", en: "\"They kept the strongest ones. So winning the harvest isn't a prize. It's a jar.\"" }
         secenekler:
           - id: "etiket"
-            etiket: { tr: "Kıyıkent etiketli kozaları ara", en: "Look for the pods labeled Port Harlow" }
+            etiket: { tr: "{yer:kiyikent} etiketli kozaları ara", en: "Look for the pods labeled {yer:kiyikent}" }
             gerekli: { stat: { per: 195 } }
             etkiler:
               - bilgi: "kule_tohumluk"
@@ -1844,7 +1844,7 @@ olaylar:
       - id: "k70_kiyikent"
         yer: "kule"
         paragraflar:
-          - { tr: "Kıyıkent sırası uzun. Kozalarda tanımadığın yüzler; ama bazı zırhlarda Kıyıkent'in eski belediye logosu var. Bir kozada, kırkıncı kattaki kadının zırhının aynısı. İçinde başka bir kadın.", en: "The Port Harlow row runs long. Faces you don't know in the pods, but some of the armor carries Port Harlow's old city seal. In one pod, the same armor as the woman on the fortieth floor. A different woman inside." }
+          - { tr: "{yer:kiyikent} sırası uzun. Kozalarda tanımadığın yüzler; ama bazı zırhlarda {yer:kiyikent|in} eski belediye logosu var. Bir kozada, kırkıncı kattaki kadının zırhının aynısı. İçinde başka bir kadın.", en: "The {yer:kiyikent} row runs long. Faces you don't know in the pods, but some of the armor carries {yer:kiyikent|pos} old city seal. In one pod, the same armor as the woman on the fortieth floor. A different woman inside." }
           - { tr: "Sıranın sonunda bir koza boş. Kapağı içeriden kırılmış; çatlakları dışa doğru. Etiketinde tür yok, kademe yok; yalnızca bir kelime: [taşıyıcı]. Ve kozanın camında, kırılmadan önce içeriden kazınmış bir şekil: yarım kalmış bir imza.", en: "At the end of the row, one pod is empty. The lid was broken from the inside; the cracks point outward. Its label has no species, no Grade, just one word: [host]. And on the glass, scratched from the inside before it broke: an unfinished signature." }
           - metin: { tr: "Sistem gerçeğinin parçasını hatırlıyorsun: hasat. Yanlışmış; ya da eksik. Hasat öldürmüyor. Biçiyor ve saklıyor.", en: "You remember your piece of the System's truth: harvest. It was wrong. Or incomplete. The harvest doesn't kill. It reaps, and it keeps." }
             kosul: { bayrak: "gercek_hasat" }
@@ -1879,8 +1879,8 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Kristali kırıyorsun. İçerideki adam bir nefesle, boğulmuş birinin ilk nefesi gibi, uyanıyor. Gözleri sana takılıyor ve tanımıyor. Sonra etrafına bakıyor ve her şeyi tanıyor.", en: "You crack the crystal. The man inside wakes with a gasp, like a drowning man's first breath. His eyes catch on you and don't know you. Then he looks around and knows everything." }
-          - { tr: "\"Hangi gün?\" diye soruyor. Söylüyorsun. Gülüyor; gülüşü bir öksürüğe dönüşüyor. \"Hangi döngü, demek istedim. Neyse. Önemi yok. Çıkış nerede? Eve gitmem lazım. Kıyıkent'e.\"", en: "\"What day is it?\" he asks. You tell him. He laughs, and the laugh turns into a cough. \"I meant which cycle. Never mind. Doesn't matter. Where's the way out? I have to get home. Port Harlow.\"" }
-          - { tr: "Senin Kıyıkent'in onun Kıyıkent'i değil. Bunu ona söyleyecek kelimeyi bulamıyorsun.", en: "Your Port Harlow isn't his Port Harlow. You can't find the words to tell him." }
+          - { tr: "\"Hangi gün?\" diye soruyor. Söylüyorsun. Gülüyor; gülüşü bir öksürüğe dönüşüyor. \"Hangi döngü, demek istedim. Neyse. Önemi yok. Çıkış nerede? Eve gitmem lazım. {yer:kiyikent|e}.\"", en: "\"What day is it?\" he asks. You tell him. He laughs, and the laugh turns into a cough. \"I meant which cycle. Never mind. Doesn't matter. Where's the way out? I have to get home. {yer:kiyikent}.\"" }
+          - { tr: "Senin {yer:kiyikent|in} onun {yer:kiyikent|i} değil. Bunu ona söyleyecek kelimeyi bulamıyorsun.", en: "Your {yer:kiyikent} isn't his {yer:kiyikent}. You can't find the words to tell him." }
         secenekler:
           - id: "gonder"
             etiket: { tr: "Ona merdiveni göster; eve dönsün", en: "Show him the stairs. Let him go home" }
@@ -1958,7 +1958,7 @@ olaylar:
               - ahlak: { insanlik: -2 }
             sonraki: "k70_son"
           - id: "isaretle"
-            etiket: { tr: "Kıyıkent kozalarına ad yaz; birileri onları bilsin", en: "Write names on the Port Harlow pods. Someone should know them" }
+            etiket: { tr: "{yer:kiyikent} kozalarına ad yaz; birileri onları bilsin", en: "Write names on the {yer:kiyikent} pods. Someone should know them" }
             etkiler:
               - kule_kat: 70
               - xp_seviye: 140
@@ -2136,7 +2136,7 @@ olaylar:
       - id: "k80_dunya"
         yer: "kule"
         paragraflar:
-          - { tr: "Dünya avucunun içine sığacak kadar küçük. Bulutlar bir misketin içindeki girdaplar; Kıyıkent'in olduğu kıyıda, gecenin içinde, küçücük bir ışık var. Belki bir şenlik ateşi. Belki bir kapı.", en: "Earth is small enough to fit in your palm. The clouds are swirls inside a marble, and on the coast where Port Harlow is, in the night, there's one tiny light. Maybe a bonfire. Maybe a Gate." }
+          - { tr: "Dünya avucunun içine sığacak kadar küçük. Bulutlar bir misketin içindeki girdaplar; {yer:kiyikent|in} olduğu kıyıda, gecenin içinde, küçücük bir ışık var. Belki bir şenlik ateşi. Belki bir kapı.", en: "Earth is small enough to fit in your palm. The clouds are swirls inside a marble, and on the coast where {yer:kiyikent} is, in the night, there's one tiny light. Maybe a bonfire. Maybe a Gate." }
           - { tr: "Gemilerin halkası kıpırdamıyor. Sabırlı. Bir şey olmasını beklemiyorlar; bir tarihin gelmesini bekliyorlar.", en: "The ring of ships doesn't move. Patient. They aren't waiting for something to happen. They're waiting for a date." }
         secenekler:
           - id: "taht"
@@ -2302,7 +2302,7 @@ olaylar:
             nadirlik: "mitik"
             baslik: { tr: "[ANALİZ] Önceki Taşıyıcı · Kademe S · Durum: süresi dolmuş", en: "[ANALYSIS] The Previous Host · Grade S · Status: expired" }
             satirlar:
-              - { tr: "İnsan. Kıyıkent. Döngü: önceki.", en: "Human. Port Harlow. Cycle: previous." }
+              - { tr: "İnsan. {yer:kiyikent}. Döngü: önceki.", en: "Human. {yer:kiyikent}. Cycle: previous." }
               - { tr: "Not: Bu kayıt silinmiş olmalıydı.", en: "Note: This record should have been deleted." }
         sezgiler:
           - kosul: { stat: { per: 315 } }
@@ -2314,7 +2314,7 @@ olaylar:
         yoldas_tepkileri:
           - npc: "deniz_arman"
             kosul: { yoldas: "deniz_arman" }
-            metin: { tr: "\"Bu bir insan. Kıyıkent'ten. Ve yalnızmış. Senin kadar hızlı olmuş ve yapayalnız kalmış.\"", en: "\"That's a person. From Port Harlow. And they were alone. They got as fast as you, and they ended up completely alone.\"" }
+            metin: { tr: "\"Bu bir insan. {yer:kiyikent|den}. Ve yalnızmış. Senin kadar hızlı olmuş ve yapayalnız kalmış.\"", en: "\"That's a person. From {yer:kiyikent}. And they were alone. They got as fast as you, and they ended up completely alone.\"" }
           - npc: "aras_kurt"
             kosul: { yoldas: "aras_kurt" }
             metin: { tr: "\"S kademesi bir insan. Benden önce. Senden önce. Ve şuna bak. Kazanmak buysa, bir daha düşünürüm.\"", en: "\"A Grade S human. Before me. Before you. And look at them. If that's what winning looks like, I'll think twice.\"" }
@@ -2358,8 +2358,8 @@ olaylar:
       - id: "k90_konusma"
         yer: "kule"
         paragraflar:
-          - { tr: "\"Adımı unuttum,\" diyor. \"Taşıyıcılar adlarını unutur. Adın, sesine yaslanır; ses gidince ad da düşer.\" Gülümsüyor. \"Kıyıkent'liydim. Akşam vapurunu beklerdim. Gecikirse yüzerek giderim derdim.\"", en: "\"I forgot my name,\" they say. \"Hosts forget their names. Your name leans on your voice, and when the voice leaves, the name falls over.\" They smile. \"I was from Port Harlow. I used to wait for the evening ferry. If it ran late, I'd say I was going to swim.\"" }
-          - { tr: "Bir an göğsünün sıkıştığını hissediyorsun. O şakayı bir başkası, on yıldır, her akşam yapar. Belki herkes yapar. Belki Kıyıkent'te herkes, her döngüde, aynı şakayı yapar.", en: "For a second your chest tightens. Someone else has been making that joke every evening for ten years. Maybe everybody does. Maybe everyone in Port Harlow makes the same joke, every cycle." }
+          - { tr: "\"Adımı unuttum,\" diyor. \"Taşıyıcılar adlarını unutur. Adın, sesine yaslanır; ses gidince ad da düşer.\" Gülümsüyor. \"Kıyıkent'liydim. Akşam vapurunu beklerdim. Gecikirse yüzerek giderim derdim.\"", en: "\"I forgot my name,\" they say. \"Hosts forget their names. Your name leans on your voice, and when the voice leaves, the name falls over.\" They smile. \"I was from {yer:kiyikent}. I used to wait for the evening ferry. If it ran late, I'd say I was going to swim.\"" }
+          - { tr: "Bir an göğsünün sıkıştığını hissediyorsun. O şakayı bir başkası, on yıldır, her akşam yapar. Belki herkes yapar. Belki {yer:kiyikent|de} herkes, her döngüde, aynı şakayı yapar.", en: "For a second your chest tightens. Someone else has been making that joke every evening for ten years. Maybe everybody does. Maybe everyone in {yer:kiyikent} makes the same joke, every cycle." }
           - { tr: "\"Zirveye çıktım,\" diyor. \"Zirve başlangıç. Orada bir pencere var. Ona hayır dedim. Yine de oldu. Sonra ses gitti. Bir sonrakine. Sana.\"", en: "\"I made it to the top,\" they say. \"The top is the beginning. There's a window up there. I told it no. It happened anyway. Then the voice left. For the next one. For you.\"" }
         secenekler:
           - id: "neden"
@@ -2755,7 +2755,7 @@ olaylar:
               - bilgi: "kule_zirve_baslangic"
               - esya: { kule_ilk_pencere_parcasi: 1 }
               - ahlak: { insanlik: -5, duzen: 2 }
-            kronik: { tr: "İlk Pencere'nin bir kırığını Kule'den indirdin; Kıyıkent'in en büyük sırrı bir süre senin cebinde taşındı.", en: "You carried a shard of the First Window down from the Spire, and for a while Port Harlow's biggest secret rode around in your pocket." }
+            kronik: { tr: "İlk Pencere'nin bir kırığını Kule'den indirdin; {yer:kiyikent|in} en büyük sırrı bir süre senin cebinde taşındı.", en: "You carried a shard of the First Window down from the Spire, and for a while {yer:kiyikent|pos} biggest secret rode around in your pocket." }
             sonraki: "k100_son"
           - id: "oku"
             etiket: { tr: "Döngü kaydının kapalı rakamını oku", en: "Read the blacked-out number in the cycle record" }
@@ -2768,14 +2768,15 @@ olaylar:
               - bayrak: "kule_dongu_sayisi"
               - dikkat: 6
               - ahlak: { insanlik: -3, duzen: -2 }
-            kronik: { tr: "Kule'nin zirvesinde döngü sayacının kapalı rakamını okudun ve o sayıyı kimseye, hiçbir zaman, söylemedin.", en: "At the top of the Spire you read the cycle counter's blacked-out number, and you never told anyone what it was." }
+            kronik: { tr: "Kule'nin zirvesinde döngü sayacının kapalı rakamını ve altındaki sayılamayan denemeleri okudun; gördüğünü kimseye, hiçbir zaman, anlatmadın.", en: "At the top of the Spire you read the cycle counter's blacked-out number and the uncountable attempts beneath it, and you never told anyone what you saw." }
             sonraki: "k100_sayi"
 
       - id: "k100_sayi"
         yer: "kule"
         paragraflar:
-          - { tr: "Karalamanın altına iniyorsun. Rakamlar üst üste yazılmış; her biri bir öncekini silmeye çalışmış ve başaramamış. En alttakini okuyorsun. Sonra bir üstündekini. Sonra saymayı bırakıyorsun.", en: "You dig under the smudge. The digits are written over one another, each one trying to erase the last and failing. You read the bottom one. Then the one above it. Then you stop counting." }
-          - { tr: "Bu ilk değil. Hiçbir zaman ilk değildi. Sen de ilk değilsin. Ama bu sayının yanında, en üstte, hiç olmayan bir şey var: soru işareti. Sistem bir sonrakinden emin değil.", en: "This isn't the first time. It never was. You're not the first either. But next to that number, at the very top, there's something that's never been there: a question mark. The System isn't sure about the next one." }
+          - { tr: "Karalamanın altına iniyorsun. İlk bulduğun rakam sade ve sakin: 7. Döngü sütununda yalnızca o var. Ama karalama yalnızca onu örtmüyor. Yedinin yanındaki sütunda rakamlar üst üste yazılmış; her biri bir öncekini silmeye çalışmış ve başaramamış. En alttakini okuyorsun. Sonra bir üstündekini. Sonra saymayı bırakıyorsun.", en: "You dig under the smudge. The first number you find is plain and calm: 7. It's the only thing in the cycle column. But the smudge isn't just covering that. In the column next to the seven, digits are written over one another, each one trying to erase the last and failing. You read the bottom one. Then the one above it. Then you stop counting." }
+          - { tr: "Bunlar döngü değil; denemeler. Yedi döngünün içinde Sistem'in kaç kez geri sardığı, kaç sabahı baştan başlattığı, bir taşıyıcıyı kaç kez aynı iskeleye yeniden koyduğu. Döngülerin altısının yanında aynı kelime yazıyor: hasat. Yedincinin yanı boş.", en: "These aren't cycles. They're attempts: how many times, inside those seven cycles, the System rewound; how many mornings it started over; how many times it set a host back down on the same pier. Six of the cycles have the same word next to them: harvest. The space next to the seventh is empty." }
+          - { tr: "Bu ilk değil. Hiçbir zaman ilk değildi. Sen de ilk değilsin. Ama yedinci satırın yanında, en üstte, hiç olmayan bir şey var: soru işareti. Sistem bu döngünün nasıl biteceğinden emin değil.", en: "This isn't the first time. It never was. You're not the first either. But next to the seventh line, at the very top, there's something that's never been there: a question mark. The System isn't sure how this one ends." }
         secenekler:
           - id: "son"
             etiket: { tr: "Pencereyi kapat", en: "Close the window" }
@@ -2787,7 +2788,7 @@ olaylar:
       - id: "k100_son"
         yer: "kule"
         paragraflar:
-          - { tr: "Zirve yavaşça kararıyor. İskele, vapur, martılar; hepsi bir kaydın sonu gibi, yavaşça, griye dönüyor. Merdiven ayağının dibinde beliriyor. Aşağıda, doksan dokuz kat aşağıda, Kıyıkent seni bekliyor; gerçek olan, bu döngünün Kıyıkent'i.", en: "The summit slowly goes dark. Pier, ferry, gulls, all of it fading to gray like the end of a recording. The stairs appear at your feet. Down below, ninety-nine floors down, Port Harlow is waiting for you: the real one, this cycle's Port Harlow." }
+          - { tr: "Zirve yavaşça kararıyor. İskele, vapur, martılar; hepsi bir kaydın sonu gibi, yavaşça, griye dönüyor. Merdiven ayağının dibinde beliriyor. Aşağıda, doksan dokuz kat aşağıda, {yer:kiyikent} seni bekliyor; gerçek olan, bu döngünün {yer:kiyikent|i}.", en: "The summit slowly goes dark. Pier, ferry, gulls, all of it fading to gray like the end of a recording. The stairs appear at your feet. Down below, ninety-nine floors down, {yer:kiyikent} is waiting for you: the real one, this cycle's {yer:kiyikent}." }
           - { tr: "İnmeden önce son bir kez dönüp bakıyorsun. Korkuluğun dibinde, griye dönmeden önceki son anda, biri sana el sallıyor. Yüzünü göremiyorsun. Ama el sallayışını tanıyorsun. Seninki.", en: "Before you go down, you look back one last time. At the railing, in the last moment before it all goes gray, someone waves at you. You can't see their face. But you know that wave. It's yours." }
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
@@ -2801,7 +2802,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 2 }
               - tohum: { olay: "yanki_son_sir", gecikme: { min: 1, max: 2 }, kosul: { bayrak: "yanki_bagi" } }
-            kronik: { tr: "Kule'nin zirvesinden, başlangıcı görmüş biri olarak indin; Kıyıkent'te kimse o inişte neyi taşıdığını bilmedi.", en: "You came down from the top of the Spire as someone who had seen the beginning. Nobody in Port Harlow ever knew what you carried down those stairs." }
+            kronik: { tr: "Kule'nin zirvesinden, başlangıcı görmüş biri olarak indin; {yer:kiyikent|de} kimse o inişte neyi taşıdığını bilmedi.", en: "You came down from the top of the Spire as someone who had seen the beginning. Nobody in {yer:kiyikent} ever knew what you carried down those stairs." }
             sonraki: "@akis"
           - id: "yanki"
             etiket: { tr: "{npc:yanki|e} \"Bir gün. Sonra her şey.\" de", en: "Tell {npc:yanki}: \"One day. Then everything.\"" }
@@ -3168,14 +3169,14 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: -4, duzen: 3 }
               - itibar: { lonca: 4, siginak: -3 }
-            kronik: { tr: "Kıyıkent'e inen gri kayıtları tek tek dağıttın; yaşlı bir kadının kafedeki masası o günden sonra hep boş kaldı.", en: "You scattered the gray recordings that came down into Port Harlow one by one. After that, an old woman's café table was always empty." }
+            kronik: { tr: "{yer:kiyikent|e} inen gri kayıtları tek tek dağıttın; yaşlı bir kadının kafedeki masası o günden sonra hep boş kaldı.", en: "You scattered the gray recordings that came down into {yer:kiyikent} one by one. After that, an old woman's café table was always empty." }
             sonraki: "kkop_kadin"
           - id: "birak"
             etiket: { tr: "Onlara dokunma; kimseye zarar vermiyorlar", en: "Leave them be. They're not hurting anybody" }
             etkiler:
               - ahlak: { merhamet: 4, duzen: -4 }
               - itibar: { yukselenler: 4 }
-            kronik: { tr: "Kule'den inen gri yolculara dokunmadın; Kule Dibi'nde ölülerle yaşayanların aynı kafede oturduğu bir mahalle doğdu.", en: "You left the gray passengers alone, and on Spire Plaza a neighborhood was born where the dead and the living shared the same café." }
+            kronik: { tr: "Kule'den inen gri yolculara dokunmadın; Kule Dibi'nde ölülerle yaşayanların aynı kafede oturduğu bir mahalle doğdu.", en: "You left the gray passengers alone, and on {yer:kule_dibi} a neighborhood was born where the dead and the living shared the same café." }
             sonraki: "kkop_kadin"
           - id: "durdur"
             tur: "gosteris"
@@ -3185,7 +3186,7 @@ olaylar:
               - aciga_vur: true
               - dikkat: 6
               - ahlak: { duzen: 3, insanlik: -3 }
-            kronik: { tr: "Kule'nin sızan kaydını tek elinle durdurdun; Kıyıkent o gün Kule'ye değil, sana baktı.", en: "You stopped the Spire's leaking record with one hand. That day, Port Harlow wasn't looking at the Spire. It was looking at you." }
+            kronik: { tr: "Kule'nin sızan kaydını tek elinle durdurdun; {yer:kiyikent} o gün Kule'ye değil, sana baktı.", en: "You stopped the Spire's leaking record with one hand. That day, {yer:kiyikent} wasn't looking at the Spire. It was looking at you." }
             sonraki: "kkop_kadin"
 
       - id: "kkop_kadin"
@@ -3213,7 +3214,7 @@ olaylar:
             etkiler:
               - iliski: { yanki: { guven: 6, baglilik: 4 } }
               - ahlak: { insanlik: 2 }
-            kronik: { tr: "Kule Dibi'nde bir kayda bakarken kafanın içindeki sese kayıtların hatırlayıp hatırlamadığını sordun; cevabı, ikiniz için de, aynıydı.", en: "On Spire Plaza, looking at a recording, you asked the voice in your head whether recordings remember. The answer was the same for both of you." }
+            kronik: { tr: "Kule Dibi'nde bir kayda bakarken kafanın içindeki sese kayıtların hatırlayıp hatırlamadığını sordun; cevabı, ikiniz için de, aynıydı.", en: "On {yer:kule_dibi}, looking at a recording, you asked the voice in your head whether recordings remember. The answer was the same for both of you." }
             sonraki: "kkop_yanki"
 
       - id: "kkop_yanki"
@@ -3390,7 +3391,7 @@ olaylar:
       - id: "kgok_son"
         yer: "kule_dibi"
         paragraflar:
-          - { tr: "Sabah meydanda yalnızca çatlak taşlar kalıyor. Kule Dibi'nde insanlar, gece gördüklerini birbirine fısıltıyla anlatıyor; her anlatışta gözcü biraz daha uzun, sen biraz daha büyük.", en: "By morning there's nothing left on the plaza but cracked stones. On Spire Plaza people whisper what they saw last night to each other, and with every retelling the observer gets a little taller and you get a little bigger." }
+          - { tr: "Sabah meydanda yalnızca çatlak taşlar kalıyor. Kule Dibi'nde insanlar, gece gördüklerini birbirine fısıltıyla anlatıyor; her anlatışta gözcü biraz daha uzun, sen biraz daha büyük.", en: "By morning there's nothing left on the plaza but cracked stones. On {yer:kule_dibi} people whisper what they saw last night to each other, and with every retelling the observer gets a little taller and you get a little bigger." }
           - { tr: "Gün 365 artık bir tarih değil. Bir randevu.", en: "Day 365 isn't a date anymore. It's an appointment." }
         secenekler:
           - id: "yanki"

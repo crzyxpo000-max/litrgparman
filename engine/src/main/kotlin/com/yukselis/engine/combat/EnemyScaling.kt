@@ -34,6 +34,14 @@ object EnemyScaling {
     private val RELATIVE = Regex("""^(dunya|oyuncu)([+-]\d+)?$""")
 
     /** Göreli seviye mi (`@dunya`, `@dunya+20` yüzde; `@oyuncu`, `@oyuncu+5` seviye)? */
+    /** Başvuru eki geçerli mi: ek yok, tamsayı seviye ya da `dunya±n` / `oyuncu±n`. */
+    fun validSuffix(ref: String): Boolean {
+        val i = ref.indexOf(SEPARATOR)
+        if (i < 0) return true
+        val suffix = ref.substring(i + 1)
+        return suffix.toIntOrNull()?.let { it in 1..MAX_LEVEL } ?: RELATIVE.matches(suffix)
+    }
+
     fun isRelative(ref: String): Boolean = ref.indexOf(SEPARATOR).let { it > 0 && RELATIVE.matches(ref.substring(it + 1)) }
 
     /**
@@ -81,7 +89,7 @@ object EnemyScaling {
     }
 
     fun scale(def: EnemyDef, level: Int): EnemyDef {
-        if (level == def.level) return def.copy(id = ref(def.id, level))
+        if (level == def.level) return def.copy(id = ref(def.id, level), xp = xpFor(def, level))
         val s = expectedStat(level) / expectedStat(def.level)
         val hp = expectedHp(level) / expectedHp(def.level)
         fun scaleStats(st: Stats) = Stats(Stat.entries.associateWith { (st[it] * s).roundToInt().coerceAtLeast(1) })

@@ -356,13 +356,13 @@ olaylar:
       - id: "sanayi_ocak_cocuklari_1"
         yer: "sanayi"
         paragraflar:
-          - metin: { tr: "Sanayinin kapısında, rıhtımdan gelen el arabalarının arasında birisi adını sesleniyor. Ocaktaki körükçü çocuk; boynunda bu kez iki fiş asılı.", en: "Somebody's calling your name at the Ironworks gate, in between the wheelbarrows rolling up from the dock. It's the bellows kid from the forge, and this time he's got two chits hanging around his neck." }
+          - metin: { tr: "Sanayinin kapısında, rıhtımdan gelen el arabalarının arasında birisi adını sesleniyor. Ocaktaki körükçü çocuk; boynunda bu kez iki fiş asılı.", en: "Somebody's calling your name at {yer:sanayi} gate, in between the wheelbarrows rolling up from the dock. It's the bellows kid from the forge, and this time he's got two chits hanging around his neck." }
             kosul: { bayrak: "sanayi_cocuklar_odul" }
-          - metin: { tr: "Sanayinin kapısında birisi adını sesleniyor. Ocaktaki körükçü çocuk; boynunda fiş yok. Lonca'nın denetçileri ocağı kapatınca fişleri de toplamışlar.", en: "Somebody's calling your name at the Ironworks gate. It's the bellows kid from the forge, and there's no chit around his neck. When the Guild inspectors shut the forge down, they collected the chits too." }
+          - metin: { tr: "Sanayinin kapısında birisi adını sesleniyor. Ocaktaki körükçü çocuk; boynunda fiş yok. Lonca'nın denetçileri ocağı kapatınca fişleri de toplamışlar.", en: "Somebody's calling your name at {yer:sanayi} gate. It's the bellows kid from the forge, and there's no chit around his neck. When the Guild inspectors shut the forge down, they collected the chits too." }
             kosul: { bayrak: "sanayi_ocak_raporlandi", bayrak_yok: "sanayi_cocuklar_odul" }
-          - metin: { tr: "Sanayinin kapısında birisi adını sesleniyor. Yanan ocaktaki körükçü çocuk; kolunda pembe, parlak bir yanık izi, boynunda fiş yok.", en: "Somebody's calling your name at the Ironworks gate. It's the bellows kid from the burnt forge, a shiny pink scar on his arm and no chit around his neck." }
+          - metin: { tr: "Sanayinin kapısında birisi adını sesleniyor. Yanan ocaktaki körükçü çocuk; kolunda pembe, parlak bir yanık izi, boynunda fiş yok.", en: "Somebody's calling your name at {yer:sanayi} gate. It's the bellows kid from the burnt forge, a shiny pink scar on his arm and no chit around his neck." }
             kosul: { bayrak: "sanayi_ocak_yandi", bayrak_yok: ["sanayi_cocuklar_odul", "sanayi_ocak_raporlandi"] }
-          - metin: { tr: "Bir sokak başında birisi adını sesleniyor. Sanayideki ocağın körükçü çocuğu; sana yetişmek için yarım şehri koşmuş.", en: "Somebody's calling your name at a street corner. It's the bellows kid from the Ironworks forge. He's run half the city to catch up with you." }
+          - metin: { tr: "Bir sokak başında birisi adını sesleniyor. Sanayideki ocağın körükçü çocuğu; sana yetişmek için yarım şehri koşmuş.", en: "Somebody's calling your name at a street corner. It's the bellows kid from {yer:sanayi} forge. He's run half the city to catch up with you." }
             kosul: { bayrak_yok: ["sanayi_cocuklar_odul", "sanayi_ocak_raporlandi", "sanayi_ocak_yandi"] }
           - { tr: "Elinde paslı bir boru var; bir kılıç gibi tutuyor. \"Bana dövüşmeyi öğret,\" diyor. \"Avcı olursam çekirdeği ben getiririm, öğünü ben belirlerim.\"", en: "He's holding a rusty pipe like it's a sword. \"Teach me to fight,\" he says. \"If I'm a hunter, I bring in the cores. I decide how many meals.\"" }
           - { tr: "On üç yaşında. Kıyamet onu ancak ikinci seviyeye çıkarabilmiş; bir kapının ilk odasında ölmek için fazlasıyla yeterli.", en: "He's thirteen. The apocalypse has gotten him all the way to Level 2. Plenty enough to die in the first room of a Gate." }
@@ -643,7 +643,7 @@ olaylar:
         yer: "sanayi"
         paragraflar:
           - { tr: "Yanına çömeliyorsun ve sesini yalnızca onun duyacağı kadar alçaltıyorsun. Çocuğun dudakları titriyor; sonra her şey bir çırpıda dökülüyor.", en: "You crouch down next to him and drop your voice so only he can hear. His lips tremble. Then it all comes out at once." }
-          - { tr: "\"Geri çekilme emrini o verdi. Siloda kayda geçmemiş bir sandık C çekirdeği vardı; Tepe'dekilere satıyor. Üçü sandığı taşırken öldü, ben de sandığı taşıdım.\"", en: "\"He gave the order to fall back. There was a crate of unregistered C cores in the silo. He sells them to the people up in the Heights. The other three died carrying it. I carried it too.\"" }
+          - { tr: "\"Geri çekilme emrini o verdi. Siloda kayda geçmemiş bir sandık C çekirdeği vardı; {yer:tepe|de}kilere satıyor. Üçü sandığı taşırken öldü, ben de sandığı taşıdım.\"", en: "\"He gave the order to fall back. There was a crate of unregistered C cores in the silo. He sells them to the people up in {yer:tepe}. The other three died carrying it. I carried it too.\"" }
           - { tr: "\"Kız kardeşim revirde,\" diye fısıldıyor. \"Konuşursam yatağı daha yüksek sayılı birine gider.\"", en: "\"My little sister's in the infirmary,\" he whispers. \"If I talk, her bed goes to somebody with a bigger number.\"" }
         secenekler:
           - id: "acikla"
@@ -675,7 +675,7 @@ olaylar:
       - id: "sanayi_disiplin_meydani_hesap"
         yer: "sanayi"
         paragraflar:
-          - { tr: "Subayın cebinden çıkan çekirdek avlunun ortasında mavi mavi yanıyor. Lonca'nın kayıt mührü üstünde yok; olması gereken yerde Tepe'nin göz işareti kazınmış.", en: "The core from the provost's pocket burns blue in the middle of the yard. There's no Guild registry stamp on it. Where the stamp should be, somebody has scratched the eye sigil of the Heights." }
+          - { tr: "Subayın cebinden çıkan çekirdek avlunun ortasında mavi mavi yanıyor. Lonca'nın kayıt mührü üstünde yok; olması gereken yerde {yer:tepe|in} göz işareti kazınmış.", en: "The core from the provost's pocket burns blue in the middle of the yard. There's no Guild registry stamp on it. Where the stamp should be, somebody has scratched the eye sigil of {yer:tepe}." }
           - { tr: "Saflarda üç isim dolaşmaya başlıyor; silodan dönmeyen üç isim. Avcılar halata değil, subaya bakıyor artık.", en: "Three names start moving through the ranks, the three who never came back from the silo. The hunters aren't looking at the cable anymore. They're looking at the provost." }
           - metin: { tr: "Lonca'da bir üyenin sözü bir subayınkinden ağır gelmez; ama saflar sana bakıyor ve seninki geliyor.", en: "In the Guild, a member's word doesn't outweigh an officer's. But the ranks are looking at you, and yours does." }
             kosul: { bayrak: "uye_lonca" }
@@ -733,7 +733,7 @@ olaylar:
               - bayrak: "sanayi_avci_kurtarildi"
               - xp_seviye: 30
               - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 } }
-            kronik: { tr: "Lonca ile Tepe arasındaki kaçak çekirdek defterini Sessiz Ağ'a sızdırdın.", en: "You leaked the Guild-to-Heights core-smuggling ledger to the Quiet Network." }
+            kronik: { tr: "Lonca ile {yer:tepe} arasındaki kaçak çekirdek defterini Sessiz Ağ'a sızdırdın.", en: "You leaked the Guild-to-Heights core-smuggling ledger to the Quiet Network." }
             sonraki: "@akis"
 
       - id: "sanayi_disiplin_meydani_ceza"
@@ -957,7 +957,7 @@ olaylar:
             kosul: { bayrak: "sanayi_subay_teslim" }
           - metin: { tr: "Kolunda Konsey'in beyaz bandı var. Kız kardeşinin ateşi düşmüş; Sığınak'ın revirinde kimse kimsenin sayısına bakmıyormuş.", en: "He's wearing the Council's white armband. His sister's fever broke. Over at the Haven infirmary, he says, nobody looks at anybody's number." }
             kosul: { bayrak: "sanayi_avci_siginakta" }
-          - metin: { tr: "Topallıyor. Kırbacın izleri gömleğinin yakasından taşıyor ve son günlerde Tepe'nin vaizleri onun peşini bırakmamış: güçsüz yakıttır, yakıt yanar.", en: "He's limping. The lash marks spill up past his collar, and the preachers from the Heights have been on him for days: the weak are fuel, and fuel burns." }
+          - metin: { tr: "Topallıyor. Kırbacın izleri gömleğinin yakasından taşıyor ve son günlerde {yer:tepe|in} vaizleri onun peşini bırakmamış: güçsüz yakıttır, yakıt yanar.", en: "He's limping. The lash marks spill up past his collar, and the preachers from {yer:tepe} have been on him for days: the weak are fuel, and fuel burns." }
             kosul: { bayrak: "sanayi_avci_kirbaclandi" }
           - metin: { tr: "Sırtında tek bir iz yok. \"On şaklama,\" diyor gülerek, \"sıfır yara. Lonca'da hâlâ bunu konuşuyorlar, ama kimse ne olduğunu anlamadı.\"", en: "There's not a mark on his back. \"Ten cracks,\" he says, grinning, \"zero scars. They're still talking about it in the Guild, and nobody's figured it out.\"" }
             kosul: { bayrak: "sanayi_avci_hafif" }
@@ -986,7 +986,7 @@ olaylar:
               - xp_seviye: 10
             sonraki: "@akis"
           - id: "vaiz"
-            etiket: { tr: "Tepe'nin vaizlerinden uzak durmasını söyle", en: "Tell him to stay away from the Heights preachers" }
+            etiket: { tr: "{yer:tepe|in} vaizlerinden uzak durmasını söyle", en: "Tell him to stay away from {yer:tepe} preachers" }
             goster: { bayrak: "sanayi_avci_kirbaclandi" }
             zar: { stat: "cha", zorluk: 15, tek: true, basarisiz: "sanayi_kacak_avci_tepe", basarisiz_etkiler: [{ bayrak: "kacak_avci_yukselenlerde" }, { itibar: { yukselenler: 2 } }] }
             etkiler:
@@ -1037,7 +1037,7 @@ olaylar:
           - { tr: "\"Yakıt değilim,\" diyor sonunda, kendine söyler gibi. Sesi hâlâ titriyor ama cümle yerinde duruyor.", en: "\"I'm not fuel,\" he finally says, like he's telling himself. His voice still shakes, but the sentence holds." }
         secenekler:
           - id: "devam"
-            etiket: { tr: "Ona bir yer göster: Lonca değil, Tepe değil", en: "Show him somewhere that isn't the Guild or the Heights" }
+            etiket: { tr: "Ona bir yer göster: Lonca değil, {yer:tepe} değil", en: "Show him somewhere that isn't the Guild or {yer:tepe}" }
             etkiler:
               - ahlak: { merhamet: 2, insanlik: 2 }
               - degisken: { hayatta_kalan: 1 }
@@ -1048,7 +1048,7 @@ olaylar:
         yer: "sanayi"
         paragraflar:
           - { tr: "Sözlerin ona ulaşmıyor. Kırbacın izleri senin sesinden daha yüksek konuşuyor.", en: "Your words don't reach him. The lash marks are talking louder than you are." }
-          - { tr: "\"Sen güçlüsün,\" diyor, \"o yüzden kolay konuşuyorsun.\" Ertesi sabah Tepe'nin yolunda, göğsüne kömürle çizilmiş bir gözle görülüyor.", en: "\"You're strong,\" he says, \"so it's easy for you to talk.\" Next morning, somebody sees him on the road up to the Heights with an eye drawn on his chest in charcoal." }
+          - { tr: "\"Sen güçlüsün,\" diyor, \"o yüzden kolay konuşuyorsun.\" Ertesi sabah {yer:tepe|in} yolunda, göğsüne kömürle çizilmiş bir gözle görülüyor.", en: "\"You're strong,\" he says, \"so it's easy for you to talk.\" Next morning, somebody sees him on the road up to {yer:tepe} with an eye drawn on his chest in charcoal." }
         secenekler:
           - id: "devam"
             etiket: { tr: "Bunu da hesaba yaz", en: "Add it to the tab" }
@@ -1722,7 +1722,7 @@ olaylar:
       - id: "sanayi_grev_uzak"
         yer: "sanayi"
         paragraflar:
-          - { tr: "Haddehanenin önünden geçip gidiyorsun. Gece, kaldığın yerin penceresinden sanayinin üstünde bir turuncu ışık görüyorsun; sonra sirenler.", en: "You walk on past the mill. That night, from your window, you see an orange glow over the Ironworks. Then sirens." }
+          - { tr: "Haddehanenin önünden geçip gidiyorsun. Gece, kaldığın yerin penceresinden sanayinin üstünde bir turuncu ışık görüyorsun; sonra sirenler.", en: "You walk on past the mill. That night, from your window, you see an orange glow over {yer:sanayi}. Then sirens." }
           - { tr: "Sabah haberi duyuyorsun: icracılar barikatı gece yarısı aşmış, iki kişi ölmüş. Vinççi kadın kabinine geri dönmüş; artık oradan inmiyor.", en: "In the morning you hear the news. The enforcers came over the barricade at midnight, and two people died. The crane operator went back up to her cab. She won't come down anymore." }
         secenekler:
           - id: "cenaze"
@@ -1869,7 +1869,7 @@ olaylar:
         yer: "sanayi"
         paragraflar:
           - { tr: "Bahis defterini tutan tek gözlü kâtip seni baştan aşağı süzüyor. \"Kendi adına? İlk yirmiye? Bu akşama kadar?\" Gülüyor ve kırk kat yazıyor.", en: "The one-eyed clerk who keeps the betting book looks you up and down. \"On yourself? Top twenty? By tonight?\" He laughs and writes down forty to one." }
-          - { tr: "Parayı masaya koyuyorsun. Sonra tahtanın önüne yürüyorsun, herkesin görebileceği yere, ve pencereni açıyorsun.", en: "You put the money on the table. Then you walk up to the board, right where everyone can see you, and open your window." }
+          - { tr: "Parayı masaya koyuyorsun. Sonra tahtanın önüne, herkesin görebileceği yere yürüyorsun ve pencereni açıyorsun.", en: "You put the money on the table. Then you walk up to the board, right where everyone can see you, and open your window." }
         secenekler:
           - id: "devam"
             tur: "aciga_vur"
@@ -1927,7 +1927,7 @@ olaylar:
         paragraflar:
           - { tr: "Seksen Sekiz tepsini almak için uzanıyor; işaret parmağını tepsinin kenarına koyuyorsun. Çekiyor. Tepsi kıpırdamıyor.", en: "Eighty-Eight reaches over to take your tray. You set one index finger on the rim. He pulls. The tray doesn't move." }
           - { tr: "İki eliyle çekiyor, sonra bütün ağırlığıyla. Alüminyum tepsi senin parmağının çevresinde yavaşça bükülüyor; sen kıpırdamıyorsun.", en: "He pulls with both hands, then with his whole body. The aluminum tray slowly bends around your finger. You don't budge." }
-          - { tr: "Masalar susuyor. Seksen Sekiz elini bırakıyor ve bir adım geri çekiliyor; tahtaya bakıyor, sonra sana, ve sayıların bir yerde yanlış olduğunu ilk kez anlıyor.", en: "The tables go quiet. Eighty-Eight lets go and takes a step back. He looks at the board, then at you, and for the first time he realizes the numbers are wrong somewhere." }
+          - { tr: "Masalar susuyor. Seksen Sekiz elini bırakıyor ve bir adım geri çekiliyor; tahtaya bakıyor, sonra sana. Sayıların bir yerde yanlış olduğunu ilk kez anlıyor.", en: "The tables go quiet. Eighty-Eight lets go and takes a step back. He looks at the board, then at you, and for the first time he realizes the numbers are wrong somewhere." }
         secenekler:
           - id: "birak"
             etiket: { tr: "Bükük tepsiyi ona geri ver", en: "Hand him back the bent tray" }
@@ -1996,11 +1996,11 @@ olaylar:
             kosul: { bayrak: "sanayi_grev_kazanildi" }
           - metin: { tr: "\"Barikatı tek eliyle söktü,\" diyor biri, sesini alçaltarak, sanki bir korku hikâyesi anlatıyormuş gibi. \"Vinççi kadın bir daha konuşmadı.\"", en: "\"Tore the barricade down one-handed,\" somebody says, voice low, like it's a ghost story. \"The crane operator never said another word.\"" }
             kosul: { bayrak: "sanayi_grev_ezildi" }
-          - metin: { tr: "\"Kule Dibi'nde sahte rekorcuların maskesini düşürdü,\" diyor genç bir avcı. \"Yirminci kat dediler; o on dördüncüde kaldıklarını herkese gösterdi.\"", en: "\"Down at Spire Plaza he ripped the mask off those fake record guys,\" says a young hunter. \"They claimed Floor 20. Showed everybody they never got past 14.\"" }
+          - metin: { tr: "\"Kule Dibi'nde sahte rekorcuların maskesini düşürdü,\" diyor genç bir avcı. \"Yirminci kat dediler; o on dördüncüde kaldıklarını herkese gösterdi.\"", en: "\"Down at {yer:kule_dibi} he ripped the mask off those fake record guys,\" says a young hunter. \"They claimed Floor 20. Showed everybody they never got past 14.\"" }
             kosul: { bayrak: "kuledibi_sahte_ifsa" }
-          - metin: { tr: "\"Tepe'deki beşik kapısına bir çocuğun peşinden girdi,\" diyor hikâyeci, sesi titreyerek. \"Yükselenler hâlâ ne olduğunu anlatamıyor.\"", en: "\"Went into the cradle Gate up in the Heights after a kid,\" the storyteller says, his voice shaking. \"The Ascended still can't explain what happened.\"" }
+          - metin: { tr: "\"{yer:tepe|de}ki beşik kapısına bir çocuğun peşinden girdi,\" diyor hikâyeci, sesi titreyerek. \"Yükselenler hâlâ ne olduğunu anlatamıyor.\"", en: "\"Went into the cradle Gate up in {yer:tepe} after a kid,\" the storyteller says, his voice shaking. \"The Ascended still can't explain what happened.\"" }
             kosul: { bayrak: "tepe_sinav_bozuldu" }
-          - metin: { tr: "Sanayide bir çocuk, ona dokunmaya kalkanlara senin adını söylüyormuş. Söylenene göre o ad bir kalkandan daha iyi işliyor.", en: "There's a kid in the Ironworks, they say, who says your name to anybody who tries to lay a hand on him. Word is, it works better than a shield." }
+          - metin: { tr: "Sanayide bir çocuk, ona dokunmaya kalkanlara senin adını söylüyormuş. Söylenene göre o ad bir kalkandan daha iyi işliyor.", en: "There's a kid in {yer:sanayi}, they say, who says your name to anybody who tries to lay a hand on him. Word is, it works better than a shield." }
             kosul: { bayrak: "ocak_cocugu_adini_tasir" }
           - metin: { tr: "Hikâyelerin bazısı aynı yerde bitiyor: gri paltolu adamların gelip soru sormasıyla. Kimse onların kim olduğunu bilmiyor.", en: "Some versions all end the same way: men in gray coats showing up to ask questions. Nobody knows who they are." }
             kosul: { dikkat_min: 50 }
@@ -2106,10 +2106,10 @@ olaylar:
       - id: "tepe_besik_sinavi_1"
         yer: "tepe"
         paragraflar:
-          - { tr: "Tepe'nin deniz gören villalarından birinin boşaltılmış yüzme havuzunda bir kapı açık duruyor: küçük, solgun, kenarları bir yara gibi kabarık. Yükselenler ona Beşik diyor.", en: "In the drained swimming pool of one of the Heights' ocean-view mansions, a Gate stands open: small, pale, its edges puffed up like a wound. The Ascended call it the Cradle." }
-          - { tr: "Havuzun kenarında beyaz giysili bir Kutsayıcı ve on iki yaşında bir kız duruyor; saçında mavi bir kurdele var. Tepe'de her çocuk on iki yaşında Beşik'e iner: bir yetenekle çıkan Seçilmiş olur, çıkamayan ya da boş elle çıkan yakıt.", en: "At the pool's edge stand an Anointer in white and a twelve-year-old girl with a blue ribbon in her hair. In the Heights, every kid goes down into the Cradle at twelve. Come out with a skill, you're Chosen. Come out empty-handed, or don't come out, you're fuel." }
+          - { tr: "{yer:tepe|in} deniz gören villalarından birinin boşaltılmış yüzme havuzunda bir kapı açık duruyor: küçük, solgun, kenarları bir yara gibi kabarık. Yükselenler ona Beşik diyor.", en: "In the drained swimming pool of one of {yer:tepe}' ocean-view mansions, a Gate stands open: small, pale, its edges puffed up like a wound. The Ascended call it the Cradle." }
+          - { tr: "Havuzun kenarında beyaz giysili bir Kutsayıcı ve on iki yaşında bir kız duruyor; saçında mavi bir kurdele var. {yer:tepe|de} her çocuk on iki yaşında Beşik'e iner: bir yetenekle çıkan Seçilmiş olur, çıkamayan ya da boş elle çıkan yakıt.", en: "At the pool's edge stand an Anointer in white and a twelve-year-old girl with a blue ribbon in her hair. In {yer:tepe}, every kid goes down into the Cradle at twelve. Come out with a skill, you're Chosen. Come out empty-handed, or don't come out, you're fuel." }
           - { tr: "Kalabalığın en önünde bir kadın iki Seçilmiş muhafızın kolları arasında kıvranıyor. \"Hemşireydim,\" diye bağırıyor kimseye. \"Kıyametten önce hemşireydim, çocuk doğurttum, bu bir sınav değil!\"", en: "At the front of the crowd, a woman's twisting in the grip of two Chosen guards. \"I was a nurse,\" she screams at nobody. \"Before the end of the world I was a nurse, I delivered babies, this isn't a test!\"" }
-          - metin: { tr: "Kasaba Çekirdeği Yükselenler'de ve sınavı bütün Tepe'ye yayınlıyor; her pencerede havuzun kenarı, her pencerede kurdeleli kız. Bayram havası var.", en: "The Town Core belongs to the Ascended, and it's broadcasting the trial across the whole Heights: every window showing the pool's edge, every window showing the girl with the ribbon. It feels like a holiday." }
+          - metin: { tr: "Kasaba Çekirdeği Yükselenler'de ve sınavı bütün {yer:tepe|e} yayınlıyor; her pencerede havuzun kenarı, her pencerede kurdeleli kız. Bayram havası var.", en: "The Town Core belongs to the Ascended, and it's broadcasting the trial across the whole Heights: every window showing the pool's edge, every window showing the girl with the ribbon. It feels like a holiday." }
             kosul: { bayrak: "cekirdek_yukselenler" }
           - metin: { tr: "Konsey bu sınavları yasakladı; Çekirdek onların. Bu yüzden şafakta, perdeler kapalıyken yapılıyor ve kalabalık fısıltıyla konuşuyor.", en: "The Council banned these trials, and the Core is theirs. So they hold them at dawn with the curtains drawn, and the crowd talks in whispers." }
             kosul: { bayrak: "cekirdek_siginak" }
@@ -2146,7 +2146,7 @@ olaylar:
             etkiler:
               - dikkat: 4
               - ahlak: { merhamet: 3, duzen: -3, insanlik: -1 }
-            kronik: { tr: "Tepe'nin Beşik kapısını çıplak ellerinle katlayıp kapattın.", en: "You folded the Heights' Cradle Gate shut with your bare hands." }
+            kronik: { tr: "{yer:tepe|in} Beşik kapısını çıplak ellerinle katlayıp kapattın.", en: "You folded {yer:tepe}' Cradle Gate shut with your bare hands." }
             sonraki: "tepe_besik_sinavi_kapat"
           - id: "ifsa"
             etiket: { tr: "Sınavın hileli olduğunu kalabalığa göster", en: "Show the crowd the trial is rigged" }
@@ -2154,7 +2154,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 2, merhamet: 3 }
               - bilgi: "besik_sinavi_hilesi"
-            kronik: { tr: "Beşik sınavının yalnızca yoksul çocuklar için ölümcül olduğunu bütün Tepe'nin önünde söyledin.", en: "In front of the whole Heights, you said out loud that the Cradle trial was only deadly for poor kids." }
+            kronik: { tr: "Beşik sınavının yalnızca yoksul çocuklar için ölümcül olduğunu bütün {yer:tepe|in} önünde söyledin.", en: "In front of the whole Heights, you said out loud that the Cradle trial was only deadly for poor kids." }
             sonraki: "tepe_besik_sinavi_ifsa"
           - id: "kutsa"
             etiket: { tr: "Elini kızın başına koy; onu kutsa", en: "Lay your hand on the girl's head. Anoint her" }
@@ -2204,7 +2204,7 @@ olaylar:
               - bayrak: "tepe_sinav_bozuldu"
               - xp_seviye: 60
               - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
-            kronik: { tr: "Beşik'i kapattıktan sonra Tepe'nin önünde diz çökmelerine izin verdin.", en: "After you closed the Cradle, you let the Heights kneel to you." }
+            kronik: { tr: "Beşik'i kapattıktan sonra {yer:tepe|in} önünde diz çökmelerine izin verdin.", en: "After you closed the Cradle, you let {yer:tepe} kneel to you." }
             sonraki: "@akis"
           - id: "in"
             etiket: { tr: "Kızı al ve tek kelime etmeden in", en: "Take the girl and walk down without a word" }
@@ -2217,7 +2217,7 @@ olaylar:
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 60
               - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
-            kronik: { tr: "Beşik'i kapattın, kurdeleli kızı ve annesini Tepe'den indirdin.", en: "You closed the Cradle and walked the girl with the ribbon and her mother down off the Heights." }
+            kronik: { tr: "Beşik'i kapattın, kurdeleli kızı ve annesini {yer:tepe|den} indirdin.", en: "You closed the Cradle and walked the girl with the ribbon and her mother down off {yer:tepe}." }
             sonraki: "@akis"
           - id: "uyar"
             etiket: { tr: "Kutsayıcıya: \"Bir daha açarsan kapatırım\"", en: "Tell the Anointer: \"Open another, I'll close it\"" }
@@ -2229,7 +2229,7 @@ olaylar:
               - bayrak: "tepe_kiz_indirildi"
               - xp_seviye: 60
               - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
-            kronik: { tr: "Kutsayıcıya Tepe'de açılacak her Beşik'i kapatacağını söyledin; bir süre kimse açmaya cesaret edemedi.", en: "You told the Anointer you'd close every Cradle they opened in the Heights. For a while, nobody dared open one." }
+            kronik: { tr: "Kutsayıcıya {yer:tepe|de} açılacak her Beşik'i kapatacağını söyledin; bir süre kimse açmaya cesaret edemedi.", en: "You told the Anointer you'd close every Cradle they opened in {yer:tepe}. For a while, nobody dared open one." }
             sonraki: "@akis"
 
       - id: "tepe_besik_sinavi_ifsa"
@@ -2264,7 +2264,7 @@ olaylar:
               - degisken: { hayatta_kalan: 2 }
               - xp_seviye: 50
               - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
-            kronik: { tr: "Beşik sınavının hilesini açığa çıkardın ve Tepe'nin aileleri çocuklarını alıp gitti.", en: "You exposed the Cradle trial, and the families of the Heights took their kids and left." }
+            kronik: { tr: "Beşik sınavının hilesini açığa çıkardın ve {yer:tepe|in} aileleri çocuklarını alıp gitti.", en: "You exposed the Cradle trial, and the families of {yer:tepe} took their kids and left." }
             sonraki: "@akis"
           - id: "kapat"
             tur: "gosteris"
@@ -2366,9 +2366,9 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 4, duzen: -3 }
               - savas: { dusmanlar: ["secilmis_muhafiz@dunya", "secilmis_muhafiz@dunya"], ortam: ["karanlik"], kazan: "tepe_besik_sinavi_kurtar", kaybet: "tepe_besik_sinavi_yenilgi", kac: "tepe_besik_sinavi_yenilgi" }
-            kronik: { tr: "Yakıt ilan edilen bir kız için Tepe'nin muhafızlarıyla dövüştün.", en: "You fought the Heights' guards over a girl they'd declared fuel." }
+            kronik: { tr: "Yakıt ilan edilen bir kız için {yer:tepe|in} muhafızlarıyla dövüştün.", en: "You fought {yer:tepe}' guards over a girl they'd declared fuel." }
           - id: "birak"
-            etiket: { tr: "Bırak; Tepe'nin kuralı bu", en: "Let it go. That's the law up here" }
+            etiket: { tr: "Bırak; {yer:tepe|in} kuralı bu", en: "Let it go. That's the law up here" }
             etkiler:
               - ahlak: { merhamet: -5, insanlik: -3 }
               - bayrak: "tepe_kiz_yakit"
@@ -2382,7 +2382,7 @@ olaylar:
         paragraflar:
           - metin: { tr: "Muhafızlar yerde, kılıçları havuzun dibinde. Ezme diye buna denir; kalabalık bir an kimin kutsandığını şaşırıyor.", en: "The guards are on the ground, their swords at the bottom of the pool. That's what a curb-stomp looks like, and for a second the crowd isn't sure who just got anointed." }
             kosul: { degisken_min: { _savas_ezme: 1 } }
-          - { tr: "Kızı kucağına alıyorsun; annesi elini tutuyor ve bırakmıyor. Tepe'den aşağı inerken arkanızdan kimse gelmiyor; yalnızca villaların perdeleri bir bir aralanıyor.", en: "You pick the girl up. Her mother takes her hand and won't let go. Nobody follows you down off the Heights. The curtains in the mansion windows just twitch open, one by one." }
+          - { tr: "Kızı kucağına alıyorsun; annesi elini tutuyor ve bırakmıyor. {yer:tepe|den} aşağı inerken arkanızdan kimse gelmiyor; yalnızca villaların perdeleri bir bir aralanıyor.", en: "You pick the girl up. Her mother takes her hand and won't let go. Nobody follows you down off {yer:tepe}. The curtains in the mansion windows just twitch open, one by one." }
         secenekler:
           - id: "siginak"
             etiket: { tr: "İkisini {fraksiyon:siginak|e} götür", en: "Take them both to the {fraksiyon:siginak}" }
@@ -2395,7 +2395,7 @@ olaylar:
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 45
               - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
-            kronik: { tr: "Yakıt ilan edilen kızı ve annesini Tepe'den Sığınak'a taşıdın.", en: "You carried a girl they'd declared fuel, and her mother, from the Heights down to the Haven." }
+            kronik: { tr: "Yakıt ilan edilen kızı ve annesini {yer:tepe|den} Sığınak'a taşıdın.", en: "You carried a girl they'd declared fuel, and her mother, from {yer:tepe} down to the Haven." }
             sonraki: "@akis"
           - id: "kendin"
             etiket: { tr: "Onları kendi korumana al", en: "Take them under your own protection" }
@@ -2433,10 +2433,10 @@ olaylar:
               - bayrak: "tepe_kiz_indirildi"
               - xp_seviye: 80
               - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
-            kronik: { tr: "Beşik'ten bir kızla çıktın ve gerçek seviyenle Tepe'nin muhafızlarını yerlerine çiviledin.", en: "You came out of the Cradle with a girl on your back and froze the Heights' guards in place with your true level." }
+            kronik: { tr: "Beşik'ten bir kızla çıktın ve gerçek seviyenle {yer:tepe|in} muhafızlarını yerlerine çiviledin.", en: "You came out of the Cradle with a girl on your back and froze {yer:tepe}' guards in place with your true level." }
             sonraki: "@akis"
           - id: "annesine"
-            etiket: { tr: "Kızı annesine ver ve Tepe'den inin", en: "Give the girl to her mother. Walk down the hill" }
+            etiket: { tr: "Kızı annesine ver ve {yer:tepe|den} inin", en: "Give the girl to her mother. Walk down the hill" }
             etkiler:
               - ahlak: { merhamet: 4, duzen: -2 }
               - itibar: { yukselenler: -4, siginak: 4 }
@@ -2469,7 +2469,7 @@ olaylar:
           - { tr: "Kutsayıcı havuzun kenarından sana bakıyor ve ne diyeceğini bilmiyor. Yakıt mı, Seçilmiş mi; kitabında senin için bir sayfa yok.", en: "The Anointer stares down at you from the pool's edge and doesn't know what to say. Fuel or Chosen, there's no page in his book for you." }
         secenekler:
           - id: "in"
-            etiket: { tr: "Kızı al ve Tepe'den in; kimse durdurmasın", en: "Carry the girl down the hill. Dare them to stop you" }
+            etiket: { tr: "Kızı al ve {yer:tepe|den} in; kimse durdurmasın", en: "Carry the girl down the hill. Dare them to stop you" }
             etkiler:
               - ahlak: { merhamet: 3, duzen: -2 }
               - itibar: { yukselenler: -2, siginak: 2 }
@@ -2477,7 +2477,7 @@ olaylar:
               - bayrak: "tepe_kiz_indirildi"
               - xp_seviye: 30
               - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
-            kronik: { tr: "Beşik'te yenildin ama kızı yine de kucağında Tepe'den indirdin.", en: "You lost inside the Cradle, but you still carried the girl down off the Heights." }
+            kronik: { tr: "Beşik'te yenildin ama kızı yine de kucağında {yer:tepe|den} indirdin.", en: "You lost inside the Cradle, but you still carried the girl down off {yer:tepe}." }
             sonraki: "@akis"
           - id: "pazarlik"
             etiket: { tr: "Kutsayıcıyla pazarlık et: kız yakıt sayılmasın", en: "Bargain with the Anointer: she isn't fuel" }
@@ -2534,9 +2534,9 @@ olaylar:
             kosul: { bayrak: "tepe_kiz_secilmis" }
           - metin: { tr: "Bir sabah kapında bir kadın duruyor; eski bir hemşire üniforması giyiyor ve elinde mavi bir kurdele var. Kızı yakıt evlerinde. Senden bir şey istemiyor; yalnızca kurdeleyi uzatıyor.", en: "One morning there's a woman at your door in old nursing scrubs, a blue ribbon in her hand. Her daughter's in the fuel houses. She isn't asking you for anything. She just holds out the ribbon." }
             kosul: { bayrak: "tepe_kiz_yakit" }
-          - metin: { tr: "Tepe'de yeni bir havuz kazılıyor. Kutsayıcılar yeni bir Beşik arıyor; ama her kazmanın sesinde artık bir tereddüt var.", en: "Up in the Heights they're digging a new pool. The Anointers are looking for a new Cradle. But there's a hesitation in every swing of the pick now." }
+          - metin: { tr: "{yer:tepe|de} yeni bir havuz kazılıyor. Kutsayıcılar yeni bir Beşik arıyor; ama her kazmanın sesinde artık bir tereddüt var.", en: "Up in {yer:tepe} they're digging a new pool. The Anointers are looking for a new Cradle. But there's a hesitation in every swing of the pick now." }
             kosul: { bayrak: "tepe_sinav_bozuldu" }
-          - metin: { tr: "Tepe'deki Beşik hâlâ açık. Dün bir çocuk daha indi; çıkıp çıkmadığını kimse söylemiyor.", en: "The Cradle up in the Heights is still open. Another kid went down yesterday. Nobody will say whether they came back up." }
+          - metin: { tr: "{yer:tepe|de}ki Beşik hâlâ açık. Dün bir çocuk daha indi; çıkıp çıkmadığını kimse söylemiyor.", en: "The Cradle up in {yer:tepe} is still open. Another kid went down yesterday. Nobody will say whether they came back up." }
             kosul: { bayrak: "tepe_sinav_suruyor" }
         sezgiler:
           - kosul: { stat: { wis: 35 } }
@@ -2578,7 +2578,7 @@ olaylar:
               - xp_seviye: 25
             sonraki: "tepe_sinav_sonrasi_yakit"
           - id: "kazi"
-            etiket: { tr: "Tepe'ye çık ve yeni havuzu doldur", en: "Go up the hill and fill in the new pool" }
+            etiket: { tr: "{yer:tepe|e} çık ve yeni havuzu doldur", en: "Go up the hill and fill in the new pool" }
             goster: { bayrak: "tepe_sinav_bozuldu" }
             etkiler:
               - ahlak: { duzen: -2, merhamet: 2 }
@@ -2609,7 +2609,7 @@ olaylar:
         yer: "kiyikent"
         paragraflar:
           - { tr: "Kız beyaz giysisinin yakasını düzeltiyor. \"Sen beni ittin,\" diyor, sakin. \"Sen öğrettin. Şimdi geri mi alıyorsun?\"", en: "The girl straightens the collar of her white robe. \"You pushed me,\" she says, calm. \"You taught me. Now you want to take it back?\"" }
-          - { tr: "Arkasını dönüp Tepe'ye doğru yürüyor. Kurdelesi, adımlarının ritminde sallanıyor.", en: "She turns and walks back toward the Heights. Her ribbon swings in time with her steps." }
+          - { tr: "Arkasını dönüp {yer:tepe|e} doğru yürüyor. Kurdelesi, adımlarının ritminde sallanıyor.", en: "She turns and walks back toward {yer:tepe}. Her ribbon swings in time with her steps." }
         secenekler:
           - id: "devam"
             etiket: { tr: "Arkasından bakakal", en: "Watch her go" }
@@ -2620,7 +2620,7 @@ olaylar:
       - id: "tepe_sinav_sonrasi_yakit"
         yer: "tepe"
         paragraflar:
-          - { tr: "Yakıt evleri Tepe'nin arka yamacında, eskiden hizmetçilerin kaldığı alçak binalar. Kapıda bir muhafız var; seni görünce kapıyı açıyor ve bir şey sormuyor.", en: "The fuel houses sit on the back slope of the Heights, low buildings where the servants used to live. There's a guard at the door. He sees you, opens the door, and doesn't ask a thing." }
+          - { tr: "Yakıt evleri {yer:tepe|in} arka yamacında, eskiden hizmetçilerin kaldığı alçak binalar. Kapıda bir muhafız var; seni görünce kapıyı açıyor ve bir şey sormuyor.", en: "The fuel houses sit on the back slope of {yer:tepe}, low buildings where the servants used to live. There's a guard at the door. He sees you, opens the door, and doesn't ask a thing." }
           - { tr: "Kız bir ranzanın köşesinde oturuyor, saçı kesilmiş. Kurdeleyi gördüğünde ayağa kalkıyor; ilk kez gülüyor.", en: "The girl's sitting on the corner of a bunk, her hair cut short. When she sees the ribbon, she stands up. For the first time, she smiles." }
         secenekler:
           - id: "devam"
@@ -2646,7 +2646,7 @@ olaylar:
       - id: "tepe_sayim_gecesi_1"
         yer: "tepe"
         paragraflar:
-          - { tr: "Tepe'de akşam sayımı var. Beyaz giysili üç Yükselen bir fenerle evden eve dolaşıyor; fenerin ışığı kime değerse başının üstünde seviyesi beliriyor ve kâtip deftere yazıyor: Seçilmiş, hizmetli, yakıt.", en: "It's evening census in the Heights. Three Ascended in white go house to house with a lantern. Whoever its light touches, their level pops up over their head, and the clerk writes it in the book: Chosen, servant, fuel." }
+          - { tr: "{yer:tepe|de} akşam sayımı var. Beyaz giysili üç Yükselen bir fenerle evden eve dolaşıyor; fenerin ışığı kime değerse başının üstünde seviyesi beliriyor ve kâtip deftere yazıyor: Seçilmiş, hizmetli, yakıt.", en: "It's evening census in {yer:tepe}. Three Ascended in white go house to house with a lantern. Whoever its light touches, their level pops up over their head, and the clerk writes it in the book: Chosen, servant, fuel." }
           - { tr: "Sokağın sonundaki evin kapısı aralanıyor ve otuzlarında bir kadın seni kolundan içeri çekiyor. \"Babam çatı arasında,\" diye fısıldıyor. \"Üçüncü seviye. Yetmiş iki yaşında. Fener onu görürse yakıt evlerine götürürler.\"", en: "The door of the last house on the street cracks open and a woman in her thirties pulls you inside by the arm. \"My dad's in the attic,\" she whispers. \"Level 3. He's seventy-two. If that lantern sees him, they'll take him to the fuel houses.\"" }
           - { tr: "Merdivenin başında iki çocuk oturuyor. Büyüğü, on yaşlarında bir oğlan, annesine değil sana bakıyor; sayıyı görmüş ve bundan bir şey bekliyor.", en: "Two kids sit at the top of the stairs. The older one, a boy of about ten, isn't looking at his mother. He's looking at you. He saw your number, and he expects something from it." }
           - metin: { tr: "Kasaba Çekirdeği Yükselenler'de. Fenerin ışığı Çekirdek'ten besleniyor; ondan kaçmak, Çekirdek'ten kaçmak demek.", en: "The Town Core belongs to the Ascended. The lantern draws its light straight from the Core. Hiding from one means hiding from the other." }
@@ -2677,20 +2677,20 @@ olaylar:
             etkiler:
               - dikkat: 2
               - ahlak: { merhamet: 4, duzen: -3 }
-            kronik: { tr: "Tepe'nin sayım fenerini bir bakışla söndürdün ve bir yaşlı adam yakıt sayılmadı.", en: "You snuffed the Heights' census lantern with one look, and an old man didn't get counted as fuel." }
+            kronik: { tr: "{yer:tepe|in} sayım fenerini bir bakışla söndürdün ve bir yaşlı adam yakıt sayılmadı.", en: "You snuffed {yer:tepe}' census lantern with one look, and an old man didn't get counted as fuel." }
             sonraki: "tepe_sayim_gecesi_fener"
           - id: "kapi"
             etiket: { tr: "Kapıda dur; sayımı içeri sokma", en: "Block the door. The census doesn't come in" }
             etkiler:
               - ahlak: { merhamet: 4, duzen: -3 }
-            kronik: { tr: "Sayım gecesi Tepe'de bir evin kapısında durdun ve fenerin içeri girmesine izin vermedin.", en: "On census night in the Heights, you stood in a doorway and wouldn't let the lantern in." }
+            kronik: { tr: "Sayım gecesi {yer:tepe|de} bir evin kapısında durdun ve fenerin içeri girmesine izin vermedin.", en: "On census night in {yer:tepe}, you stood in a doorway and wouldn't let the lantern in." }
             sonraki: "tepe_sayim_gecesi_kapi"
           - id: "kacir"
-            etiket: { tr: "Dedeyi damlardan Eski Şehir'e kaçır", en: "Sneak grandpa over the rooftops to Old Town" }
+            etiket: { tr: "Dedeyi damlardan {yer:eski_sehir|e} kaçır", en: "Sneak grandpa over the rooftops to {yer:eski_sehir}" }
             zar: { stat: "agi", zorluk: 15, tek: true, basarisiz: "tepe_sayim_gecesi_yakalandi", basarisiz_etkiler: [{ ahlak: { merhamet: 1 } }] }
             etkiler:
               - ahlak: { merhamet: 3, duzen: -2 }
-            kronik: { tr: "Sayım gecesi yetmiş iki yaşında bir adamı Tepe'nin damlarından aşağı kaçırdın.", en: "On census night, you smuggled a seventy-two-year-old man down off the Heights over the rooftops." }
+            kronik: { tr: "Sayım gecesi yetmiş iki yaşında bir adamı {yer:tepe|in} damlarından aşağı kaçırdın.", en: "On census night, you smuggled a seventy-two-year-old man down off {yer:tepe} over the rooftops." }
             sonraki: "tepe_sayim_gecesi_kacir"
           - id: "muaf"
             etiket: { tr: "Bir Yükselen olarak aileyi muaf ilan et", en: "As one of the Ascended, declare the family exempt" }
@@ -2717,7 +2717,7 @@ olaylar:
           - { tr: "Çatı arasından önce bir baston, sonra yaşlı bir adam, sonra on beş yaşlarında bir kız iniyor; kız da sayılmaktan kaçıyormuş. Evdekiler sana bakıyor; kimse bir şey sormuyor, sormaya korkuyorlar.", en: "First a cane comes down from the attic, then an old man, then a girl about fifteen. She was hiding from the count too. The family stares at you. Nobody asks anything. They're afraid to." }
         secenekler:
           - id: "in"
-            etiket: { tr: "İkisini de gece yarısı Tepe'den indir", en: "Get them both off the Heights by midnight" }
+            etiket: { tr: "İkisini de gece yarısı {yer:tepe|den} indir", en: "Get them both off {yer:tepe} by midnight" }
             etkiler:
               - ahlak: { merhamet: 3, duzen: -1 }
               - itibar: { siginak: 3, yukselenler: -1 }
@@ -2726,7 +2726,7 @@ olaylar:
               - degisken: { hayatta_kalan: 2 }
               - xp_seviye: 40
               - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
-            kronik: { tr: "Fenerin sönük kaldığı gece bir dedeyle bir kızı Tepe'den indirdin.", en: "The night the lantern stayed dark, you got an old man and a girl down off the Heights." }
+            kronik: { tr: "Fenerin sönük kaldığı gece bir dedeyle bir kızı {yer:tepe|den} indirdin.", en: "The night the lantern stayed dark, you got an old man and a girl down off {yer:tepe}." }
             sonraki: "@akis"
           - id: "kal"
             etiket: { tr: "Evde kalsınlar; sayım bir daha bu kapıya uğramaz", en: "They stay. The census won't hit this door again" }
@@ -2736,7 +2736,7 @@ olaylar:
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 40
               - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
-            kronik: { tr: "Bir aileyi Tepe'de, sayımın görmediği bir evde bıraktın.", en: "You left a family in the Heights, in a house the census never saw." }
+            kronik: { tr: "Bir aileyi {yer:tepe|de}, sayımın görmediği bir evde bıraktın.", en: "You left a family in {yer:tepe}, in a house the census never saw." }
             sonraki: "@akis"
 
       - id: "tepe_sayim_gecesi_kapi"
@@ -2769,7 +2769,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: -2, merhamet: 1 }
               - kredi: -40
-            kronik: { tr: "Bir yaşlı adamın hayatını Tepe'nin sayımcısından kırk krediye satın aldın.", en: "You bought an old man's life from the Heights' census taker for forty credits." }
+            kronik: { tr: "Bir yaşlı adamın hayatını {yer:tepe|in} sayımcısından kırk krediye satın aldın.", en: "You bought an old man's life from {yer:tepe}' census taker for forty credits." }
             sonraki: "tepe_sayim_gecesi_rusvet"
 
       - id: "tepe_sayim_gecesi_egildi"
@@ -2787,7 +2787,7 @@ olaylar:
               - dikkat: 1
               - xp_seviye: 40
               - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
-            kronik: { tr: "Tepe'nin sayımcıları senin önünde eğildi ve bir ev sayılmadan kaldı.", en: "The Heights' census team bowed to you, and one house went uncounted." }
+            kronik: { tr: "{yer:tepe|in} sayımcıları senin önünde eğildi ve bir ev sayılmadan kaldı.", en: "The Heights' census team bowed to you, and one house went uncounted." }
             sonraki: "@akis"
 
       - id: "tepe_sayim_gecesi_rusvet"
@@ -2805,7 +2805,7 @@ olaylar:
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 30
               - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
-            kronik: { tr: "Sayımcıya rüşvet verdin, sonra yine de dedeyi o gece Tepe'den indirdin.", en: "You bribed the census taker, then got grandpa off the Heights that same night anyway." }
+            kronik: { tr: "Sayımcıya rüşvet verdin, sonra yine de dedeyi o gece {yer:tepe|den} indirdin.", en: "You bribed the census taker, then got grandpa off {yer:tepe} that same night anyway." }
             sonraki: "@akis"
           - id: "her_ay"
             etiket: { tr: "Her ay gelip ödeyeceğine söz ver", en: "Promise to come back and pay every month" }
@@ -2838,7 +2838,7 @@ olaylar:
               - degisken: { hayatta_kalan: 2 }
               - xp_seviye: 45
               - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
-            kronik: { tr: "Tepe'nin sayım defterini sokağın ortasında yaktın; o sokakta bir daha kimse sayılmadı.", en: "You burned the Heights' census book in the middle of the street. Nobody on that street ever got counted again." }
+            kronik: { tr: "{yer:tepe|in} sayım defterini sokağın ortasında yaktın; o sokakta bir daha kimse sayılmadı.", en: "You burned {yer:tepe}' census book in the middle of the street. Nobody on that street ever got counted again." }
             sonraki: "@akis"
           - id: "dede"
             etiket: { tr: "Defteri bırak; dedeyi aşağı indir", en: "Leave the book. Get grandpa down the hill" }
@@ -2849,7 +2849,7 @@ olaylar:
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 45
               - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
-            kronik: { tr: "Muhafızları yere serdin ve yetmiş iki yaşında bir adamı Tepe'den indirdin.", en: "You put the guards down and walked a seventy-two-year-old man off the Heights." }
+            kronik: { tr: "Muhafızları yere serdin ve yetmiş iki yaşında bir adamı {yer:tepe|den} indirdin.", en: "You put the guards down and walked a seventy-two-year-old man off {yer:tepe}." }
             sonraki: "@akis"
 
       - id: "tepe_sayim_gecesi_yenilgi"
@@ -2882,17 +2882,17 @@ olaylar:
         yer: "tepe"
         paragraflar:
           - { tr: "Yaşlı adamı sırtına alıyorsun; bastonu kemerine sıkıştırıyorsun. Çatı penceresinden çıkıp villaların kiremitleri üstünde, fenerin ışığının bir adım önünde koşuyorsun.", en: "You get the old man on your back and jam his cane through your belt. Out the attic window, across the mansion roof tiles, one step ahead of the lantern's light." }
-          - { tr: "Şafak sökerken Eski Şehir'in dar sokaklarındasınız. Yaşlı adam sırtından iniyor, nefes nefese gülüyor. \"Kırk yıl tarih öğrettim,\" diyor. \"Hiçbir kitapta böyle bir kaçış okumadım.\"", en: "By dawn you're in the narrow streets of Old Town. The old man slides off your back, laughing and out of breath. \"Forty years I taught history,\" he says. \"Never read an escape like that in any book.\"" }
+          - { tr: "Şafak sökerken {yer:eski_sehir|in} dar sokaklarındasınız. Yaşlı adam sırtından iniyor, nefes nefese gülüyor. \"Kırk yıl tarih öğrettim,\" diyor. \"Hiçbir kitapta böyle bir kaçış okumadım.\"", en: "By dawn you're in the narrow streets of {yer:eski_sehir}. The old man slides off your back, laughing and out of breath. \"Forty years I taught history,\" he says. \"Never read an escape like that in any book.\"" }
         secenekler:
           - id: "birak"
-            etiket: { tr: "Onu Eski Şehir'de güvenli bir yere bırak", en: "Leave him somewhere safe in Old Town" }
+            etiket: { tr: "Onu {yer:eski_sehir|de} güvenli bir yere bırak", en: "Leave him somewhere safe in {yer:eski_sehir}" }
             etkiler:
               - ahlak: { merhamet: 3, duzen: -1 }
               - bayrak: "tepe_dede_kurtarildi"
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 35
               - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
-            kronik: { tr: "Kırk yıl tarih öğretmiş bir adamı Tepe'nin damlarından Eski Şehir'e taşıdın.", en: "You carried a man who'd taught history for forty years over the Heights' rooftops to Old Town." }
+            kronik: { tr: "Kırk yıl tarih öğretmiş bir adamı {yer:tepe|in} damlarından {yer:eski_sehir|e} taşıdın.", en: "You carried a man who'd taught history for forty years over {yer:tepe}' rooftops to {yer:eski_sehir}." }
             sonraki: "@akis"
           - id: "siginak"
             etiket: { tr: "Onu {fraksiyon:siginak|e} teslim et", en: "Hand him over to the {fraksiyon:siginak}" }
@@ -2904,7 +2904,7 @@ olaylar:
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 35
               - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
-            kronik: { tr: "Tepe'den kaçırdığın yaşlı adamı Sığınak'ın kapısına bıraktın.", en: "You left the old man you smuggled off the Heights at the Haven's door." }
+            kronik: { tr: "{yer:tepe|den} kaçırdığın yaşlı adamı Sığınak'ın kapısına bıraktın.", en: "You left the old man you smuggled off {yer:tepe} at the Haven's door." }
             sonraki: "@akis"
 
       - id: "tepe_sayim_gecesi_yakalandi"
@@ -2918,7 +2918,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 3, duzen: -3 }
               - savas: { dusmanlar: ["secilmis_muhafiz@dunya", "secilmis_muhafiz@dunya"], ortam: ["karanlik"], kazan: "tepe_sayim_gecesi_zafer", kaybet: "tepe_sayim_gecesi_yenilgi", kac: "tepe_sayim_gecesi_yenilgi" }
-            kronik: { tr: "Bir yaşlı adamı baca dibine bırakıp Tepe'nin damlarında muhafızlarla dövüştün.", en: "You set an old man down by a chimney and fought the guards on the Heights' rooftops." }
+            kronik: { tr: "Bir yaşlı adamı baca dibine bırakıp {yer:tepe|in} damlarında muhafızlarla dövüştün.", en: "You set an old man down by a chimney and fought the guards on {yer:tepe}' rooftops." }
           - id: "ac"
             tur: "aciga_vur"
             etiket: { tr: "Gerçek seviyeni gökyüzüne yaz", en: "Write your true level across the sky" }
@@ -2926,7 +2926,7 @@ olaylar:
               - aciga_vur: true
               - ahlak: { duzen: 1, merhamet: 2 }
               - itibar: { yukselenler: 2 }
-            kronik: { tr: "Tepe'nin damlarında gerçek seviyeni açtın; muhafızlar saçaktan aşağı indi.", en: "You opened your true level on the Heights' rooftops, and the guards climbed back down off the eaves." }
+            kronik: { tr: "{yer:tepe|in} damlarında gerçek seviyeni açtın; muhafızlar saçaktan aşağı indi.", en: "You opened your true level on {yer:tepe}' rooftops, and the guards climbed back down off the eaves." }
             sonraki: "tepe_sayim_gecesi_egildi"
 
       - id: "tepe_sayim_gecesi_muaf"
@@ -2992,9 +2992,9 @@ olaylar:
         paragraflar:
           - metin: { tr: "Bir harabenin önünde, bir tebeşir tahtasının başında yaşlı bir adam on iki çocuğa ders veriyor: çatı arasındaki dede. Tahtada bir tarih ve altında tek bir cümle: İnsanlar sayılardan önce de vardı.", en: "In front of a ruin, at a chalkboard, an old man is teaching twelve kids: grandpa from the attic. On the board, a date, and under it, one sentence: People existed before numbers did." }
             kosul: { bayrak: "tepe_dede_kurtarildi" }
-          - metin: { tr: "Bir sokak başında kadın seni bekliyor; Tepe'deki evin kadını. Babası yakıt evlerinde üç gün dayandı. \"Seni suçlamıyorum,\" diyor ve bunu söylemek ona her şeyden ağır geliyor.", en: "The woman from the house in the Heights is waiting for you on a street corner. Her father lasted three days in the fuel houses. \"I don't blame you,\" she says, and saying it costs her more than anything." }
+          - metin: { tr: "Bir sokak başında kadın seni bekliyor; {yer:tepe|de}ki evin kadını. Babası yakıt evlerinde üç gün dayandı. \"Seni suçlamıyorum,\" diyor ve bunu söylemek ona her şeyden ağır geliyor.", en: "The woman from the house in {yer:tepe} is waiting for you on a street corner. Her father lasted three days in the fuel houses. \"I don't blame you,\" she says, and saying it costs her more than anything." }
             kosul: { bayrak: "tepe_dede_teslim" }
-          - metin: { tr: "Kapının önünde bir kuyruk var: Tepe'den aileler. Yükselenler'in defterinde adının yanında bir ev olduğu duyulmuş; herkes kendi evinin de oraya yazılmasını istiyor.", en: "There's a line outside your door: families from the Heights. Word got around that there's a house next to your name in the Ascended book. Everybody wants theirs written in too." }
+          - metin: { tr: "Kapının önünde bir kuyruk var: {yer:tepe|den} aileler. Yükselenler'in defterinde adının yanında bir ev olduğu duyulmuş; herkes kendi evinin de oraya yazılmasını istiyor.", en: "There's a line outside your door: families from {yer:tepe}. Word got around that there's a house next to your name in the Ascended book. Everybody wants theirs written in too." }
             kosul: { bayrak: "tepe_aile_muaf" }
           - metin: { tr: "Merdivenin başındaki oğlan da orada; artık on bir yaşında ve bir şeyi kesin biliyor: sayılar insanları korumuyor, insanlar insanları koruyor.", en: "The boy from the top of the stairs is there too. He's eleven now, and he's sure of one thing: numbers don't protect people. People protect people." }
             kosul: { bayrak: "tepe_dede_kurtarildi" }
@@ -3072,7 +3072,7 @@ olaylar:
       - id: "tepe_dinleyiciler_1"
         yer: "tepe"
         paragraflar:
-          - { tr: "Tepe'nin zirvesindeki eski gözlemevinin kubbesi yarı açık. İçeride yirmi kişi kulaklıklarla oturuyor; önlerinde eski radyolar, hepsi aynı cızırtıya ayarlı. Yükselenler onlara Dinleyiciler diyor.", en: "The dome of the old observatory at the top of the Heights is half open. Inside, twenty people sit in headphones in front of old radios, all tuned to the same static. The Ascended call them the Listeners." }
+          - { tr: "{yer:tepe|in} zirvesindeki eski gözlemevinin kubbesi yarı açık. İçeride yirmi kişi kulaklıklarla oturuyor; önlerinde eski radyolar, hepsi aynı cızırtıya ayarlı. Yükselenler onlara Dinleyiciler diyor.", en: "The dome of the old observatory at the top of {yer:tepe} is half open. Inside, twenty people sit in headphones in front of old radios, all tuned to the same static. The Ascended call them the Listeners." }
           - { tr: "Başlarında gözleri bantlı, kıyametten önce gece yarısı programı yapan bir spiker var. \"Sistem uğulduyor,\" diyor sana, yüzünü sesine çevirerek. \"Biz uğultunun arasındaki kelimeleri yazıyoruz. {npc:vahit} Efendi'ye gidiyor hepsi.\"", en: "Their leader has a bandage over his eyes. He used to host a late-night radio show before the end of the world. \"The System hums,\" he tells you, turning his face toward your voice. \"We write down the words in between. All of it goes to {npc:vahit|tam}.\"" }
           - { tr: "Sen içeri girdiğin anda bütün radyolar aynı anda cızırdıyor. Dinleyicilerden biri kulaklığını çıkarıp sana dönüyor, ağzı açık.", en: "The second you walk in, every radio in the room crackles at once. One of the Listeners pulls off her headphones and turns to stare at you, mouth hanging open." }
           - metin: { tr: "Gözlemevinin duvarında Kule'nin bir çizimi var; her katın yanında Dinleyicilerin duyduğunu iddia ettiği bir kelime yazılı.", en: "There's a drawing of the Spire on the observatory wall. Next to every floor is a word the Listeners claim to have heard." }
@@ -3240,9 +3240,9 @@ olaylar:
       - id: "tepe_yakit_duvari_1"
         yer: "tepe"
         paragraflar:
-          - { tr: "Tepe'ye çıkan yolun dibindeki istinat duvarı baştan sona isimlerle boyanmış: Öğretici Katman'da ölenlerin isimleri. Her ismin altında aynı üç kelime var: Yandı, ışık verdi.", en: "The retaining wall at the bottom of the road up to the Heights is painted end to end with names: the people who died in the Tutorial Layer. Under every name, the same four words: Burned, and gave light." }
+          - { tr: "{yer:tepe|e} çıkan yolun dibindeki istinat duvarı baştan sona isimlerle boyanmış: Öğretici Katman'da ölenlerin isimleri. Her ismin altında aynı üç kelime var: Yandı, ışık verdi.", en: "The retaining wall at the bottom of the road up to {yer:tepe} is painted end to end with names: the people who died in the Tutorial Layer. Under every name, the same four words: Burned, and gave light." }
           - { tr: "Yükselenler duvarın önüne mumlar diziyor. Bir kadın, yeni boyanmış bir ismin önünde dua eder gibi duruyor; ama dudakları dua etmiyor, küfrediyor.", en: "The Ascended keep candles lined up in front of the wall. A woman stands before a freshly painted name like she's praying, except her lips aren't praying. They're cursing." }
-          - metin: { tr: "Duvarın tam ortasında, altın boyayla ve herkesinkinden büyük harflerle bir isim yazılı: {npc:deniz_arman|tam}. Altında üç kelime değil, beş: Anomali için yandı, en çok ışık verdi.", en: "Dead center on the wall, in gold paint and bigger letters than anybody else's, is one name: {npc:deniz_arman|tam}. Under it, not four words but seven: Burned for the anomaly. Gave the most light." }
+          - metin: { tr: "Duvarın tam ortasında, altın boyayla ve herkesinkinden büyük harflerle bir isim yazılı: {npc:deniz_arman|tam}. Altında üç kelime değil, yedi: Anomali için yandı, en çok ışık verdi.", en: "Dead center on the wall, in gold paint and bigger letters than anybody else's, is one name: {npc:deniz_arman|tam}. Under it, not four words but eight: Burned for the anomaly. Gave the most light." }
             kosul: { npc_olu: "deniz_arman" }
           - metin: { tr: "Duvarın önünde, iskelenin üstünde, beyaz giysili biri yeni bir ismi boyuyor. Fırçayı tutuş biçimini tanıyorsun; sonra omuzlarını, sonra sesini. {npc:deniz_arman}.", en: "Up on a scaffold in front of the wall, somebody in white is painting a new name. You know the way they hold that brush. Then the shoulders. Then the voice. {npc:deniz_arman}." }
             kosul: { bayrak: "deniz_yukselenlere_gitti", npc_hayatta: "deniz_arman" }
@@ -3269,7 +3269,7 @@ olaylar:
               - itibar: { yukselenler: -1 }
             sonraki: "tepe_yakit_duvari_alti"
           - id: "boya"
-            etiket: { tr: "Bir fırça al; \"Yakıt\" kelimelerinin üstünü çiz", en: "Grab a brush. Paint over every \"burned\"" }
+            etiket: { tr: "Bir fırça al; her \"Yandı, ışık verdi\"nin üstünü çiz", en: "Grab a brush. Paint over every \"Burned, and gave light\"" }
             etkiler:
               - gun: 1
               - ahlak: { insanlik: 4, duzen: -2 }
@@ -3569,7 +3569,7 @@ olaylar:
         paragraflar:
           - { tr: "Kule'nin kapısında bir kuyruk var, meydanın yarısına kadar. Kapıda iki Lonca bekçisi duruyor ve kat başına yirmi kredi alıyor; parası olmayan sırayı başkasına satıyor.", en: "There's a line at the Spire's door stretching halfway across the plaza. Two Guild gatekeepers stand at the door charging twenty credits a floor. Whoever can't pay sells their spot to somebody who can." }
           - { tr: "Kuyruğun ortasında on altı yaşlarında bir oğlan paslı bir kılıç tutuyor. Elindeki kâğıtta bir hekimin el yazısı: Akciğer çürümesi. Beşinci kat kristaliyle yapılan ilaç. Fiyat: dört kristal.", en: "In the middle of the line, a boy about sixteen is holding a rusty sword. The paper in his other hand is in a doctor's handwriting: Lung rot. Medicine made from Floor 5 crystals. Price: four crystals." }
-          - { tr: "Seviyesi 6. Beşinci katta 6'nın ne kadar yaşadığını Kule Dibi'nde herkes biliyor; çocuğun kendisi hariç.", en: "He's Level 6. Everybody at Spire Plaza knows how long a Level 6 lasts on Floor 5. Everybody except him." }
+          - { tr: "Seviyesi 6. Beşinci katta 6'nın ne kadar yaşadığını Kule Dibi'nde herkes biliyor; çocuğun kendisi hariç.", en: "He's Level 6. Everybody at {yer:kule_dibi} knows how long a Level 6 lasts on Floor 5. Everybody except him." }
           - metin: { tr: "Kasaba Çekirdeği Lonca'da ve kapının üstündeki pencere her girenin seviyesini, ödediği krediyi ve dönme ihtimalini yazıyor. Oğlanın satırında bir yüzde var: %11.", en: "The Town Core belongs to the Guild, and the window over the door lists everybody going in: level, credits paid, odds of coming back. There's a percentage on the boy's line: 11%." }
             kosul: { bayrak: "cekirdek_lonca" }
           - metin: { tr: "Lonca halkasını görünce bekçiler seni kuyruğun dışından, doğrudan kapıya çağırıyor.", en: "The gatekeepers spot your Guild ring and wave you straight up to the door, past the whole line." }
@@ -3807,11 +3807,11 @@ olaylar:
       - id: "kule_dibi_donus_1"
         yer: "kiyikent"
         paragraflar:
-          - metin: { tr: "Kule Dibi'ndeki oğlan seni buluyor; öksürüğü geçmiş, yanında annesi. Kadın elini tutuyor ve bırakmıyor; hekim kıyafeti bile böyle sıkı tutmazdı.", en: "The boy from Spire Plaza finds you, his cough gone, his mother with him. She takes your hand and won't let go. Not even a surgeon's grip holds that tight." }
+          - metin: { tr: "Kule Dibi'ndeki oğlan seni buluyor; öksürüğü geçmiş, yanında annesi. Kadın elini tutuyor ve bırakmıyor; hekim kıyafeti bile böyle sıkı tutmazdı.", en: "The boy from {yer:kule_dibi} finds you, his cough gone, his mother with him. She takes your hand and won't let go. Not even a surgeon's grip holds that tight." }
             kosul: { bayrak_yok: ["kuledibi_genc_tek", "kuledibi_genc_eve", "kuledibi_kask_alindi"] }
-          - metin: { tr: "Kule Dibi'ndeki oğlan seni buluyor. Kule'den dönmüş, bir kristal ve iki eksik parmakla. Annesi yaşıyor. \"Beşinci kat,\" diyor gururla. \"Tek başıma.\"", en: "The boy from Spire Plaza finds you. He made it back from the Spire with one crystal and two fewer fingers. His mom's alive. \"Floor 5,\" he says, proud. \"By myself.\"" }
+          - metin: { tr: "Kule Dibi'ndeki oğlan seni buluyor. Kule'den dönmüş, bir kristal ve iki eksik parmakla. Annesi yaşıyor. \"Beşinci kat,\" diyor gururla. \"Tek başıma.\"", en: "The boy from {yer:kule_dibi} finds you. He made it back from the Spire with one crystal and two fewer fingers. His mom's alive. \"Floor 5,\" he says, proud. \"By myself.\"" }
             kosul: { bayrak: "kuledibi_genc_tek" }
-          - metin: { tr: "Kule Dibi'ndeki oğlanın annesi seni buluyor. Oğlu kılıçsız da gitmiş; bir mutfak bıçağıyla. Üç gündür dönmedi. Senden bir şey istemiyor; yalnızca söylüyor.", en: "The mother of the boy from Spire Plaza finds you. He went anyway, without the sword. With a kitchen knife. That was three days ago. She isn't asking you for anything. She's just telling you." }
+          - metin: { tr: "Kule Dibi'ndeki oğlanın annesi seni buluyor. Oğlu kılıçsız da gitmiş; bir mutfak bıçağıyla. Üç gündür dönmedi. Senden bir şey istemiyor; yalnızca söylüyor.", en: "The mother of the boy from {yer:kule_dibi} finds you. He went anyway, without the sword. With a kitchen knife. That was three days ago. She isn't asking you for anything. She's just telling you." }
             kosul: { bayrak: "kuledibi_genc_eve" }
           - metin: { tr: "Pazardan aldığın kaskın sahibini buluyorsun: üçüncü katta kaybolmuş, ikinci kattan sürünerek inmiş bir kadın. Kaskı görünce gülüyor. \"Saçımı da mı sattılar?\"", en: "You track down the owner of the helmet you bought at the market: a woman who got lost on Floor 3 and crawled down from Floor 2. She sees the helmet and laughs. \"They sold my hair too?\"" }
             kosul: { bayrak: "kuledibi_kask_alindi" }

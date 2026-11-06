@@ -96,6 +96,7 @@ object ContentValidator {
                             id.startsWith(com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX) ->
                                 if (npcId != Content.FOCUS && content.npcs[npcId]?.combat == null) problems += "$where: '$id' için NPC ya da savaş bloğu yok"
                             com.yukselis.engine.combat.EnemyScaling.baseId(id) !in content.enemies -> problems += "$where: tanımsız düşman '$id'"
+                            !com.yukselis.engine.combat.EnemyScaling.validSuffix(id) -> problems += "$where: geçersiz seviye eki '$id' (sayı, dunya±n ya da oyuncu±n)"
                         }
                     }
                     listOfNotNull(e.spec.win, e.spec.lose, e.spec.flee).forEach {
@@ -300,7 +301,10 @@ object ContentValidator {
         content.regions.values.forEach { r ->
             val at = "bölge ${r.id}"
             if (content.names.find(NameEntry.Kind.PLACE, r.id) == null) problems += "$at: names.yaml'da yer adı yok"
-            (r.enemies + r.gateEnemies).forEach { if (com.yukselis.engine.combat.EnemyScaling.baseId(it) !in content.enemies) problems += "$at: tanımsız düşman '$it'" }
+            (r.enemies + r.gateEnemies).forEach {
+                if (com.yukselis.engine.combat.EnemyScaling.baseId(it) !in content.enemies) problems += "$at: tanımsız düşman '$it'"
+                if ('@' in it) problems += "$at: bölge düşmanında seviye eki olmaz ('$it'); motor dünya seviyesine ölçekler"
+            }
             r.neighbors.forEach { if (it !in content.regions) problems += "$at: tanımsız komşu '$it'" }
             r.forage.forEach { if (it !in content.items) problems += "$at: tanımsız toplama eşyası '$it'" }
             if (r.control != "canavar" && r.control !in content.factions) problems += "$at: tanımsız kontrol '${r.control}'"
@@ -315,7 +319,10 @@ object ContentValidator {
             }
             t.bands.forEach { b ->
                 if (b.enemies.isEmpty()) problems += "kule bandı ${b.min}–${b.max}: düşman yok"
-                b.enemies.forEach { if (com.yukselis.engine.combat.EnemyScaling.baseId(it) !in content.enemies) problems += "kule bandı ${b.min}–${b.max}: tanımsız düşman '$it'" }
+                b.enemies.forEach {
+                    if (com.yukselis.engine.combat.EnemyScaling.baseId(it) !in content.enemies) problems += "kule bandı ${b.min}–${b.max}: tanımsız düşman '$it'"
+                    if ('@' in it) problems += "kule bandı ${b.min}–${b.max}: seviye eki olmaz ('$it'); kat seviyesi motordan gelir"
+                }
                 b.lines.forEach { checkText(it, "kule bandı ${b.min}–${b.max}.metin") }
             }
             t.storyFloors.forEach { (f, ev) ->
@@ -549,7 +556,7 @@ fun flagUsage(content: Content): FlagUsage {
             is Effect.SetFlag -> written += e.flag
             is Effect.ClearFlag -> written += e.flag
             is Effect.PlantSeed -> e.condition?.let { raw ->
-                runCatching { cond(ContentParser.condition(YamlTree.parseObject(raw, "tohum"))) }
+                runCatching { cond(ContentParser.condition(YamlTree.parseObject(raw, "tohum"), content.endings)) }
             }
             else -> Unit
         }

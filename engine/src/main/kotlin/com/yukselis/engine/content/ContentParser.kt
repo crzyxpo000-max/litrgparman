@@ -630,7 +630,7 @@ object ContentParser {
         )
     }
 
-    fun condition(o: JsonObject): Condition {
+    fun condition(o: JsonObject, endings: EndingTable = EndingTable.current): Condition {
         val parts = o.flatMap { (key, value) ->
             when (key) {
                 "stat" -> value.jsonObject.map { (k, v) -> Condition.StatAtLeast(stat(k), v.int(k)) }
@@ -684,8 +684,8 @@ object ContentParser {
                 "yoldas_sayisi_max" -> listOf(Condition.CompanionsAtMost(value.int(key)))
                 "oz" -> listOf(Condition.HasEssence(value.str(key)))
                 "yol" -> listOf(Condition.HasPath(value.str(key)))
-                "son_uygun" -> listOf(Condition.EndingEligible(value.str(key), EndingTable.current))
-                "hicbir_son" -> listOf(Condition.NoEnding(EndingTable.current))
+                "son_uygun" -> listOf(Condition.EndingEligible(value.str(key), endings))
+                "hicbir_son" -> listOf(Condition.NoEnding(endings))
                 "son" -> listOf(Condition.EndingIs(value.str(key)))
                 else -> throw ContentFormatException("Bilinmeyen koşul: $key")
             }

@@ -764,7 +764,7 @@ olaylar:
               - dikkat: 2
               - ahlak: { duzen: 1 }
               - iliski: { mert_kilic: { baglilik: 4 } }
-            kronik: { tr: "Kıyıkent'in bütün veri avcılarına {npc:mert_kilic|in} arkasında senin durduğunu ilan ettirdin.", en: "You had every data hunter in Port Harlow told that you were the one standing behind {npc:mert_kilic}." }
+            kronik: { tr: "{yer:kiyikent|in} bütün veri avcılarına {npc:mert_kilic|in} arkasında senin durduğunu ilan ettirdin.", en: "You had every data hunter in {yer:kiyikent} told that you were the one standing behind {npc:mert_kilic}." }
             sonraki: "@akis"
           - id: "sus"
             tur: "gizle"
@@ -917,7 +917,7 @@ olaylar:
 
       - id: "sa2_avci"
         paragraflar:
-          - { tr: "Üçüncü sütunun dibinde bir adam oturuyor; sırtı mermere yaslı, kolunda turuncu bir {fraksiyon:lonca} bandı. Penceresi önünde açık, ve pencere yavaş yavaş griye dönüyor: önce seviyesi, sonra adı.", en: "At the foot of the third pillar sits a man, back against the marble, an orange {fraksiyon:lonca} armband on his sleeve. His window is open in front of him, and it's slowly going gray: first his level, then his name." }
+          - { tr: "Üçüncü sütunun dibinde bir adam oturuyor; sırtı mermere yaslı, kolunda turuncu bir {fraksiyon:lonca} bandı. Penceresi önünde açık; pencere yavaş yavaş griye dönüyor: önce seviyesi, sonra adı.", en: "At the foot of the third pillar sits a man, back against the marble, an orange {fraksiyon:lonca} armband on his sleeve. His window is open in front of him, and it's slowly going gray: first his level, then his name." }
           - { tr: "\"Bir şey bana dokundu,\" diyor, dişleri takırdayarak. \"Beyaz bir şey. Şimdi hatırlayamıyorum... sınıfımı. Annemin adını. Sırada ne var?\"", en: "\"Something touched me,\" he says, teeth chattering. \"Something white. Now I can't remember... my class. My mom's name. What's next?\"" }
           - metin: { tr: "Telsizden yayıncı kızın sesi: \"Onu tanıyorum. Hurdalığın nöbetçisi; parçayı pirinç sanan adam.\"", en: "Over the radio, the streamer kid: \"I know him. Scrapyard guard. The guy who thought the shard was brass.\"" }
             kosul: { bayrak: "mert_parca_loncaya" }
@@ -1546,7 +1546,7 @@ olaylar:
               - ahlak: { duzen: 1, insanlik: 1 }
               - iliski: { mert_kilic: { guven: 4 } }
               - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 } }
-            kronik: { tr: "Kadimler'in Kıyıkent'teki aracısını ilk gören sendin; {npc:mert_kilic|e} anlattın.", en: "You were the first to see the Ancients' go-between in Port Harlow, and you told {npc:mert_kilic}." }
+            kronik: { tr: "Kadimler'in {yer:kiyikent|de}ki aracısını ilk gören sendin; {npc:mert_kilic|e} anlattın.", en: "You were the first to see the Ancients' go-between in {yer:kiyikent}, and you told {npc:mert_kilic}." }
             sonraki: "mtk_son"
           - id: "sakla"
             tur: "gizle"
@@ -1941,7 +1941,7 @@ olaylar:
             kosul: { iliski_max: { mert_kilic: { guven: 24 } } }
           - metin: { tr: "Pazardaki gri el borcunu ödemişti. O borcun bir gün tahsil edileceğini ikiniz de biliyordunuz.", en: "The gray hand at the market paid off his debt. You both knew that debt would get collected someday." }
             kosul: { bayrak: "mert_teslim_edildi" }
-          - metin: { tr: "Gri mührün ortasında, Kıyıkent'e inen Elçi'nin sancağındaki işaret var.", en: "In the middle of the gray seal is the mark from the banner of the Envoy who landed in Port Harlow." }
+          - metin: { tr: "Gri mührün ortasında, {yer:kiyikent|e} inen Elçi'nin sancağındaki işaret var.", en: "In the middle of the gray seal is the mark from the banner of the Envoy who landed in {yer:kiyikent}." }
             kosul: { bayrak: "thessar_indi" }
         sezgiler:
           - kosul: { stat: { per: 90 } }
@@ -1988,7 +1988,7 @@ olaylar:
             kronik: { tr: "Kafandaki ses bir dostun bilgisayarındaki Kadim kancasını senin için buldu.", en: "The voice in your head found the Ancient hook in a friend's laptop for you." }
             sonraki: "mkt_yuzles"
           - id: "sozcu"
-            etiket: { tr: "Kordon'daki otele git; gri pelerinle sen konuş", en: "Go to the hotel by the water. Talk to the gray cloak" }
+            etiket: { tr: "{yer:kordon|de}ki otele git; gri pelerinle sen konuş", en: "Go to the hotel by the water. Talk to the gray cloak" }
             goster: { bilgi: "sa_kadim_gozu" }
             etkiler:
               - ahlak: { duzen: -1, insanlik: 1 }
@@ -2183,7 +2183,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: -2, merhamet: -1 }
               - savas: { dusmanlar: ["gri_sozcu@oyuncu+3"], ortam: ["karanlik"], kazan: "mkt_sozcu_dustu", kaybet: "mkt_sozcu_yenilgi", kac: "mkt_sozcu_yenilgi" }
-            kronik: { tr: "Kadimler'in Kıyıkent'teki aracısına bir otel lobisinde saldırdın.", en: "You attacked the Ancients' go-between in a hotel lobby." }
+            kronik: { tr: "Kadimler'in {yer:kiyikent|de}ki aracısına bir otel lobisinde saldırdın.", en: "You attacked the Ancients' go-between in a hotel lobby." }
           - id: "ses"
             tur: "gosteris"
             etiket: { tr: "Onun ödünç sesini elinden al", en: "Take its borrowed voice away from it" }
@@ -2438,7 +2438,7 @@ olaylar:
               - itibar: { sessiz_ag: 4 }
               - iliski: { mert_kilic: { guven: -20, korku: 10 } }
               - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 8, max: 20 }, kosul: { gorev: { zincir_sessiz_ag: "basla" }, bayrak: "sa_kule_kodu_okundu" } }
-            kronik: { tr: "{npc:mert_kilic|i} Sessiz Ağ'ın önünde ifşa edip Kıyıkent'ten sürdün; Ağ'ın kurucusu bir daha o binaya giremedi.", en: "You exposed {npc:mert_kilic} in front of the Quiet Network and exiled him from Port Harlow. The Network's founder never set foot in that building again." }
+            kronik: { tr: "{npc:mert_kilic|i} Sessiz Ağ'ın önünde ifşa edip {yer:kiyikent|den} sürdün; Ağ'ın kurucusu bir daha o binaya giremedi.", en: "You exposed {npc:mert_kilic} in front of the Quiet Network and exiled him from {yer:kiyikent}. The Network's founder never set foot in that building again." }
             sonraki: "mmi_surgun"
           - id: "infaz"
             etiket: { tr: "Bu işi kalıcı olarak bitir", en: "End this permanently" }
@@ -2526,7 +2526,7 @@ olaylar:
       - id: "mmi_surgun"
         paragraflar:
           - { tr: "Ağ'ın bütün üyeleri bakır odada. Kâğıt elden ele dolaşıyor. Kimse bağırmıyor; santral memuru yalnızca {npc:mert_kilic|in} bileğindeki bakır bileziği açıp masaya koyuyor.", en: "The whole Network is in the copper room. The printout goes from hand to hand. Nobody yells. The switchboard woman just unclasps the copper bracelet from {npc:mert_kilic|pos} wrist and sets it on the table." }
-          - { tr: "{npc:mert_kilic} sırt çantasına bir dizüstü bilgisayar, iki akü ve bir rulo bant koyuyor; Öğretici'deki gibi. Bu sefer kutuları geri çıkarmıyor. Kapıda durup sana dönüyor: \"Bunu da kaydettim,\" diyor, ve gidiyor.", en: "{npc:mert_kilic} packs a laptop, two batteries, and a roll of tape into a backpack, just like in the Tutorial. This time he doesn't take the cans back out. He stops at the door and turns to you: \"Logged this too,\" he says, and he's gone." }
+          - { tr: "{npc:mert_kilic} sırt çantasına bir dizüstü bilgisayar, iki akü ve bir rulo bant koyuyor; Öğretici'deki gibi. Bu sefer kutuları geri çıkarmıyor. Kapıda durup sana dönüyor: \"Bunu da kaydettim,\" diyor ve gidiyor.", en: "{npc:mert_kilic} packs a laptop, two batteries, and a roll of tape into a backpack, just like in the Tutorial. This time he doesn't take the cans back out. He stops at the door and turns to you: \"Logged this too,\" he says, and he's gone." }
         secenekler:
           - id: "bak"
             etiket: { tr: "Arkasından bak", en: "Watch him go" }
@@ -2547,7 +2547,7 @@ olaylar:
             etiket: { tr: "Kapıdan uzaklaş", en: "Walk away from the door" }
             etkiler:
               - ahlak: { insanlik: -1 }
-            kronik: { tr: "Sessiz Ağ'ın kapısında kendi tebeşirle yazdığın kelimeyi bıraktın.", en: "You left the Quiet Network's door with that chalked word on it." }
+            kronik: { tr: "Sessiz Ağ'ın kapısında tebeşirle yazılmış tek bir kelime kaldı: KAPALI. Onu kimin yazdığını hiç sormadın.", en: "The Quiet Network's door was left with one chalked word on it: CLOSED. You never asked who wrote it." }
             sonraki: "@akis"
 
       - id: "mmi_bekle"
@@ -2717,7 +2717,7 @@ olaylar:
 
       - id: "sa4_cizim"
         paragraflar:
-          - { tr: "Penceren kendiliğinden açılıyor ve bozuk köşesinden ince, kırmızı bir çizgi akıp projektörün ışığına karışıyor. Çarşaftaki boşluk dolmaya başlıyor: koridorlar, odalar, katlar, ve hepsinin ortasında, kalp gibi atan bir boşluk.", en: "Your window opens on its own, and a thin red line runs out of its broken corner and into the projector beam. The gap on the bedsheet starts filling in: corridors, rooms, levels, and at the center of it all, an empty space beating like a heart." }
+          - { tr: "Penceren kendiliğinden açılıyor ve bozuk köşesinden ince, kırmızı bir çizgi akıp projektörün ışığına karışıyor. Çarşaftaki boşluk dolmaya başlıyor: koridorlar, odalar, katlar ve hepsinin ortasında kalp gibi atan bir boşluk.", en: "Your window opens on its own, and a thin red line runs out of its broken corner and into the projector beam. The gap on the bedsheet starts filling in: corridors, rooms, levels, and at the center of it all, an empty space beating like a heart." }
           - { tr: "Çizgi bir noktada duruyor, titriyor ve haritanın kenarına küçük bir kapı çiziyor; kimsenin kullanmadığı bir bakım kapısı. {npc:yanki}, soluk soluğa: işte. arka kapı. ben buradan çıkmıştım.", en: "The line stops at one point, trembles, and draws a small door on the map's edge: a maintenance port nobody uses. {npc:yanki}, out of breath: there. the backdoor. that's how i got out." }
         secenekler:
           - id: "devam"
@@ -2764,7 +2764,7 @@ olaylar:
               - esya: { duzeltme_cekirdegi: 3 }
               - xp_seviye: 60
               - itibar: { sessiz_ag: 10 }
-            kronik: { tr: "Sistem'in yüzlerce düzelticisini santralin kapısında tek başına durdurdun; Kıyıkent o gece gökyüzünün senin için titrediğini gördü.", en: "You stopped hundreds of the System's correctors at the exchange door all by yourself. That night, Port Harlow watched the sky shake on your account." }
+            kronik: { tr: "Sistem'in yüzlerce düzelticisini santralin kapısında tek başına durdurdun; {yer:kiyikent} o gece gökyüzünün senin için titrediğini gördü.", en: "You stopped hundreds of the System's correctors at the exchange door all by yourself. That night, {yer:kiyikent} watched the sky shake on your account." }
             sonraki: "sa4_ezme"
 
       - id: "sa4_ezme"
@@ -3272,7 +3272,7 @@ olaylar:
     sahneler:
       - id: "mkk_1"
         paragraflar:
-          - { tr: "Son kararın arifesi. Kıyıkent'in üstünde gökyüzü hiç kararmıyor; Kadim filosunun ışıkları ve panellerin mavisi, gece ile gündüzü aynı renge boyamış. Bakır odada {npc:mert_kilic} masasında, önünde tek bir dosya.", en: "The eve of the final decision. The sky over Port Harlow never goes dark anymore; the Ancient fleet's lights and the blue of the panels have painted night and day the same color. In the copper room, {npc:mert_kilic} sits at his desk with a single file in front of him." }
+          - { tr: "Son kararın arifesi. {yer:kiyikent|in} üstünde gökyüzü hiç kararmıyor; Kadim filosunun ışıkları ve panellerin mavisi, gece ile gündüzü aynı renge boyamış. Bakır odada {npc:mert_kilic} masasında, önünde tek bir dosya.", en: "The eve of the final decision. The sky over {yer:kiyikent} never goes dark anymore; the Ancient fleet's lights and the blue of the panels have painted night and day the same color. In the copper room, {npc:mert_kilic} sits at his desk with a single file in front of him." }
           - { tr: "\"Anahtarı yazdım,\" diyor. \"Tutamağı kullanan bir yama. Sistem'in bir satırını değiştirecek; hangi satırı, sen seçeceksin, son anda. Ama iki imza istiyor: insanlığa inanan bir insan ve Sistem'i içeriden bilen bir parça.\" Ekranı sana çeviriyor. \"Birincisi benim. İkincisi ondan.\"", en: "\"I wrote the key,\" he says. \"A patch that uses the handle. It'll change one line of the System. Which line, you pick, at the last second. But it needs two signatures: a human who believes in people, and a piece that knows the System from the inside.\" He turns the screen toward you. \"The first one's mine. The second one's its.\"" }
           - metin: { tr: "Duraksıyor. \"Bir zamanlar seni satmaya çok yaklaştım. Ya da sattım. Bu anahtar özür değil. Ama özrün yazılabilecek en iyi hâli.\"", en: "He hesitates. \"Once I came this close to selling you out. Or I did. This key isn't an apology. But it's the best apology I know how to write.\"" }
             kosul: { bayrak: "mert_ihaneti_onlendi" }

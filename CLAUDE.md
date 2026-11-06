@@ -7,8 +7,8 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 
 ## Durum
 
-- **Aşama 7 sürüyor:** Perde 2–4 ve sonlar (`docs/PERDE2_4.md` içerik sözleşmesi: perdeler, bölgeler, ortak bayraklar, son koşulları, partiler).
-- **Aşama 0–6 tamam** (Aşama 8 kaldırıldı). Aşama 6: Perde 1 dikey dilimi (`docs/PERDE1.md`; 48 olay, yeni açılış, zindanlar).
+- **Aşama 0–7 tamam.** Aşama 7: Perde 2–4 ve sonlar (`docs/PERDE2_4.md` içerik sözleşmesi: perdeler, bölgeler, ortak bayraklar, son koşulları, partiler).
+- Aşama 8 kaldırıldı. Aşama 6: Perde 1 dikey dilimi (`docs/PERDE1.md`; 48 olay, yeni açılış, zindanlar).
 - Aşama 5 tamam. Aşama 5: NPC sistemi (`npc/`: 4 eksen, hafıza, gündem, eşikler, ölüm, yoldaşlar, düello,
   Küresel Sıralama, yoldaş görüşleri, güce tepkiler, bilgi günlüğü, yalanlar, izler, Ordu modeli).
 - Aşama 0–4: Aşama 4: içerik YAML, olay havuzu, Hikaye Yönetmeni, tohumlar, gün döngüsü, bölgeler/kapılar,

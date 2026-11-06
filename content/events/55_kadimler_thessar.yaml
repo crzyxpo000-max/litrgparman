@@ -32,8 +32,8 @@ olaylar:
       - id: "thessar_inis_1"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "Yüz seksen birinci günün şafağında körfezin üstündeki gemi ilk kez kıpırdıyor. Üç gündür ucu suya dönük asılı duran o ters kule, kemik rengi taştan dev bir diş gibi yavaşça dönüyor. Altındaki su hâlâ dalgasız, gölgesi hâlâ güneşe doğru düşüyor.", en: "At dawn on Day 181, the ship over the bay moves for the first time. For three days that upside-down spire has hung point-first above the water, and now it turns, slow, like a bone-white tooth working itself loose. The water under it still doesn't have a single wave. Its shadow still falls toward the sun." }
-          - { tr: "Ucundan Liman'a bir merdiven iniyor. Basamakları yok; yalnızca kendi üstüne katlanmış ışık, her katta biraz daha katılaşan. Rıhtımda dört kamp omuz omuza dizilmiş: silahlar kalkık, kimse kimseye bakmıyor, herkes yukarı bakıyor.", en: "A stairway lowers from the tip down to the Waterfront. No steps, just light folded over on itself, a little more solid with every fold. Four camps line the pier shoulder to shoulder, weapons up, nobody looking at anybody. Everybody's looking up." }
+          - { tr: "Yüz seksen birinci günün şafağında körfezin üstündeki gemi ilk kez kıpırdıyor. Üç gündür ucu suya dönük asılı duran o ters kule, kemik rengi taştan dev bir diş gibi yavaşça dönüyor. Altındaki su hâlâ dalgasız, gölgesi hâlâ güneşe doğru düşüyor.", en: "At dawn on Day 181, the ship over the bay moves for the first time. For three days that upside-down tower has hung point-first above the water, and now it turns, slow, like a bone-white tooth working itself loose. The water under it still doesn't have a single wave. Its shadow still falls toward the sun." }
+          - { tr: "Ucundan {yer:kiyikent_liman|e} bir merdiven iniyor. Basamakları yok; yalnızca kendi üstüne katlanmış ışık, her katta biraz daha katılaşan. Rıhtımda dört kamp omuz omuza dizilmiş: silahlar kalkık, kimse kimseye bakmıyor, herkes yukarı bakıyor.", en: "A stairway lowers from the tip down to {yer:kiyikent_liman}. No steps, just light folded over on itself, a little more solid with every fold. Four camps line the pier shoulder to shoulder, weapons up, nobody looking at anybody. Everybody's looking up." }
           - { tr: "Önce muhafızlar iniyor: neredeyse üç metre boyunda, eklemleri yanlış yerden bükülen, cilalı defter sayfalarından zırh giymiş figürler. Sonra o geliyor. Uzun, sabırlı, elinde zincire bağlı bir kalem; derisi baştan sona ince çentiklerle, bir hesap defterinin satırları gibi çizilmiş.", en: "The guards come down first: nearly ten feet tall, joints bending in the wrong places, armored in lacquered ledger pages. Then he comes. Tall, patient, a stylus swinging on a chain from one hand, his skin scored head to toe with fine notches, like the ruled lines of an account book." }
           - metin: { tr: "Duruşunu tanıyorsun. Öğretici'de, sırtın üstünde, Kemik Taçlı Geyik'in önünde eğildiği şey de böyle duruyordu: fazla uzun, fazla hareketsiz.", en: "You know that posture. Back in the Tutorial, up on the ridge, the thing the Bonecrown Stag bowed to stood exactly like that. Too tall. Too still." }
             kosul: { bayrak: "yeni_tavan_goruldu" }
@@ -128,7 +128,7 @@ olaylar:
               - ahlak: { duzen: 5, insanlik: -3 }
               - itibar: { kadimler: 5, lonca: -3 }
               - iliski: { thessar: { baglilik: 6, saygi: -5 } }
-            kronik: { tr: "Dört kampın önünde bir Kadim'e eğildin; Kıyıkent o eğilişi aylarca konuştu, bazıları utançla, bazıları umutla.", en: "You bowed to an Ancient in front of all four camps. Port Harlow talked about that bow for months, some out of shame, some out of hope." }
+            kronik: { tr: "Dört kampın önünde bir Kadim'e eğildin; {yer:kiyikent} o eğilişi aylarca konuştu, bazıları utançla, bazıları umutla.", en: "You bowed to an Ancient in front of all four camps. {yer:kiyikent} talked about that bow for months, some out of shame, some out of hope." }
             sonraki: "thessar_inis_okuma"
           - id: "egilme"
             etiket: { tr: "Eğilme. Gözlerinin içine bak", en: "Don't bow. Look him in the eye" }
@@ -247,7 +247,7 @@ olaylar:
               - ahlak: { merhamet: -5, insanlik: -2 }
               - itibar: { lonca: 8, yukselenler: -5, kadimler: -15 }
               - iliski: { thessar: { korku: 8, guven: -10 } }
-            kronik: { tr: "Bir Kadim'in cesedinin üstünde durdun ve bütün Liman seni alkışladı; elçi o gün seni sapma değil, düşman olarak kaydetti.", en: "You stood on an Ancient's corpse while the whole Waterfront cheered. That day the Envoy entered you not as a deviation, but as an enemy." }
+            kronik: { tr: "Bir Kadim'in cesedinin üstünde durdun ve bütün {yer:kiyikent_liman} seni alkışladı; elçi o gün seni sapma değil, düşman olarak kaydetti.", en: "You stood on an Ancient's corpse while the whole Waterfront cheered. That day the Envoy entered you not as a deviation, but as an enemy." }
             sonraki: "thessar_inis_okuma"
 
       - id: "thessar_inis_yenilgi"
@@ -262,7 +262,7 @@ olaylar:
               - can: 300
               - ahlak: { insanlik: 2, duzen: -1 }
               - iliski: { thessar: { saygi: 3 } }
-            kronik: { tr: "Elçinin muhafızlarına yenildin ve kanlı yüzünle ayağa kalktın; Liman bu görüntüyü hiç unutmadı.", en: "The Envoy's guards put you down, and you got back up with blood on your face. The Waterfront never forgot that picture." }
+            kronik: { tr: "Elçinin muhafızlarına yenildin ve kanlı yüzünle ayağa kalktın; {yer:kiyikent_liman} bu görüntüyü hiç unutmadı.", en: "The Envoy's guards put you down, and you got back up with blood on your face. The Waterfront never forgot that picture." }
             sonraki: "thessar_inis_okuma"
           - id: "yat"
             etiket: { tr: "Yerde kal. Bırak o gelsin", en: "Stay down. Make him come to you" }
@@ -391,11 +391,11 @@ olaylar:
       - id: "thessar_inis_son"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "{npc:thessar} rıhtımın ortasına dönüp herkese konuşuyor; iki sesi Liman'ın bütün hoparlörlerinden, bütün pencerelerden aynı anda çıkıyor. \"Gün üç yüz altmış beşe kadar elçiliğim açıktır. Ticaret yaparız. Konuşuruz. Hesaplarınızı tutarız.\"", en: "{npc:thessar} turns to face the whole pier, and his two voices come out of every speaker on the Waterfront and every window at once. \"Until Day three hundred sixty-five, my embassy is open. We will trade. We will talk. We will keep your books for you.\"" }
+          - { tr: "{npc:thessar} rıhtımın ortasına dönüp herkese konuşuyor; iki sesi {yer:kiyikent_liman|in} bütün hoparlörlerinden, bütün pencerelerden aynı anda çıkıyor. \"Gün üç yüz altmış beşe kadar elçiliğim açıktır. Ticaret yaparız. Konuşuruz. Hesaplarınızı tutarız.\"", en: "{npc:thessar} turns to face the whole pier, and his two voices come out of every speaker on {yer:kiyikent_liman} and every window at once. \"Until Day three hundred sixty-five, my embassy is open. We will trade. We will talk. We will keep your books for you.\"" }
           - { tr: "\"O gün geldiğinde,\" diye devam ediyor, \"hesap kapanır. Nasıl kapanacağı sizin elinizde. Ve onun.\" Bir an, yalnızca bir an, sana bakıyor.", en: "\"When that day comes,\" he goes on, \"the account closes. How it closes is up to you. And to that one.\" For one second, just one, he looks at you." }
           - metin: { tr: "Dört kampın liderleri birbirine bakıyor. Hiçbiri sana bakmak istemiyor ama hepsi bakıyor.", en: "The leaders of the four camps look at each other. None of them wants to look at you, and all of them do." }
             kosul: { bayrak: "perde2_basladi" }
-          - { tr: "Sonra merdiven yeniden ışığa katlanıyor. Kemik rengi kule, körfezin üstünde hâlâ asılı; artık kapısı açık.", en: "Then the stairway folds back up into light. The bone-white spire still hangs over the bay. Only now its door is open." }
+          - { tr: "Sonra merdiven yeniden ışığa katlanıyor. Kemik rengi kule, körfezin üstünde hâlâ asılı; artık kapısı açık.", en: "Then the stairway folds back up into light. The bone-white tower still hangs over the bay. Only now its door is open." }
         secenekler:
           - id: "kapi_acik"
             etiket: { tr: "Elçiliğin kapısını açık tut; ticarete izin ver", en: "Keep the embassy door open. Allow trade" }
@@ -408,7 +408,7 @@ olaylar:
               - xp_seviye: 30
               - tohum: { olay: "kadimler_1_ticaret", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "thessar" } }
               - tohum: { olay: "thessar_ticaret_masasi", gecikme: { min: 19, max: 28 }, kosul: { npc_hayatta: "thessar" } }
-            kronik: { tr: "Kadimler'in elçiliğine kapıyı açık bıraktın; Liman'da ilk sayım çadırları bir hafta sonra kuruldu.", en: "You left the door open to the Ancients' embassy. The first tally tents went up on the Waterfront a week later." }
+            kronik: { tr: "Kadimler'in elçiliğine kapıyı açık bıraktın; {yer:kiyikent_liman|de} ilk sayım çadırları bir hafta sonra kuruldu.", en: "You left the door open to the Ancients' embassy. The first tally tents went up on {yer:kiyikent_liman} a week later." }
             sonraki: "@akis"
           - id: "cizgi"
             etiket: { tr: "Herkesin önünde ona bir sınır çiz", en: "Draw him a line in front of everyone" }
@@ -451,10 +451,10 @@ olaylar:
       - id: "kadimler_1_ticaret_1"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "Liman'ın eski balık halinin önüne bir çadır kurulmuş. Bezden değil, gerilmiş soluk bir deriden; güneş içinden geçerken üstündeki ince satırlar görünüyor. Şafaktan beri önünde iki yüz kişilik bir sıra var.", en: "Somebody's pitched a tent in front of the old fish market on the Waterfront. Not canvas. Pale stretched hide, thin enough that when the sun comes through you can see the fine lines written on it. There's been a line of two hundred people in front of it since dawn." }
+          - { tr: "{yer:kiyikent_liman|in} eski balık halinin önüne bir çadır kurulmuş. Bezden değil, gerilmiş soluk bir deriden; güneş içinden geçerken üstündeki ince satırlar görünüyor. Şafaktan beri önünde iki yüz kişilik bir sıra var.", en: "Somebody's pitched a tent in front of the old fish market on {yer:kiyikent_liman}. Not canvas. Pale stretched hide, thin enough that when the sun comes through you can see the fine lines written on it. There's been a line of two hundred people in front of it since dawn." }
           - { tr: "Sırada ateşi düşmeyen çocuklarını kucaklamış anneler, kapı yanığı taşıyan avcılar, kimsenin adını bilmediği yaşlılar var. Çadırın ağzındaki masada bir Kadim oturuyor; her gelene koyu, soğuk bir şurup veriyor ve karşılığında tek bir şey istiyor: adını.", en: "The line is mothers holding kids whose fevers won't break, hunters with gate burns, old folks nobody knows the names of. At a table in the mouth of the tent sits one of the Ancients. It hands each person a dark, cold syrup and asks for exactly one thing in return: their name." }
           - { tr: "Masanın arkasında, kemik rengi bir sandalyede {npc:thessar} oturuyor. Seni görünce kalemiyle sırayı gösteriyor. \"Halkın sana güveniyor,\" diyor. \"Sen sıranın başında durursan sıra uzar.\"", en: "Behind the table, in a bone-white chair, sits {npc:thessar}. When he sees you, he points his stylus at the line. \"Your people trust you,\" he says. \"If you stand at the head of this line, the line gets longer.\"" }
-          - metin: { tr: "Sıradakilerin yarısı Kordon'dan. Kordon düştüğünden beri evleri, ilaçları, hekimleri yok.", en: "Half the people in line are from the Esplanade. Ever since the Esplanade fell, they don't have homes, or medicine, or doctors." }
+          - metin: { tr: "Sıradakilerin yarısı {yer:kordon|den}. {yer:kordon} düştüğünden beri evleri, ilaçları, hekimleri yok.", en: "Half the people in line are from {yer:kordon}. Ever since {yer:kordon} fell, they don't have homes, or medicine, or doctors." }
             kosul: { bayrak: "kordon_dustu" }
           - metin: { tr: "Şehrin yarısı ya hasta ya yaralı. Sığınak'ın revirinde yatak değil, yer kalmamış.", en: "Half the city's sick or hurt. The Haven clinic isn't out of beds, it's out of floor." }
             kosul: { degisken_max: { hayatta_kalan: 35 } }
@@ -507,7 +507,7 @@ olaylar:
               - bilgi: "vel_bedeli"
               - ahlak: { insanlik: 2 }
               - iliski: { thessar: { saygi: 6 } }
-            kronik: { tr: "Sayım çadırının gerçek fiyatını okudun; Kıyıkent'te Vel'in neye mal olduğunu bilen ilk insan sendin.", en: "You read the real price at the tally tent. You were the first person in Port Harlow to know what vel actually cost." }
+            kronik: { tr: "Sayım çadırının gerçek fiyatını okudun; {yer:kiyikent|de} Vel'in neye mal olduğunu bilen ilk insan sendin.", en: "You read the real price at the tally tent. You were the first person in {yer:kiyikent} to know what vel actually cost." }
             sonraki: "kadimler_1_ticaret_fiyat"
           - id: "yik"
             etiket: { tr: "Çadırı yık; kimse kendini satmasın", en: "Tear the tent down. Nobody sells themselves" }
@@ -557,7 +557,7 @@ olaylar:
               - itibar: { kadimler: -12, siginak: 3, sessiz_ag: 3 }
               - iliski: { thessar: { saygi: 5, baglilik: -8, guven: -6 } }
               - savas: { dusmanlar: ["kadim_defter_askeri@dunya+20", "kadim_defter_askeri@dunya+20"], kazan: "kadimler_1_ticaret_yikildi", kaybet: "kadimler_1_ticaret_yenilgi" }
-            kronik: { tr: "Vel'in bedelini herkese okudun ve sayım çadırını yerle bir ettin; Liman'da o yıl kimse kendini satmadı.", en: "You read everyone the price of vel and leveled the tally tent. Nobody on the Waterfront sold themselves that year." }
+            kronik: { tr: "Vel'in bedelini herkese okudun ve sayım çadırını yerle bir ettin; {yer:kiyikent_liman|de} o yıl kimse kendini satmadı.", en: "You read everyone the price of vel and leveled the tally tent. Nobody on {yer:kiyikent_liman} sold themselves that year." }
 
       - id: "kadimler_1_ticaret_anlatildi"
         yer: "kiyikent_liman"
@@ -723,14 +723,14 @@ olaylar:
       - id: "thessar_ticaret_masasi_1"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "Sabah kapının altından bir yaprak kaymış: cilalı, soğuk, tek bir satırla. Pencerene düşen çeviri kısa: [Davet. Öğle. Yalnız.] Öğlen körfezin üstündeki kulenin ucundan katlanmış ışıktan merdiven iniyor; yalnızca senin için.", en: "Somebody slid a leaf under your door this morning: lacquered, cold, one line of script. The translation that drops into your window is short: [Invitation. Noon. Alone.] At noon the stair of folded light comes down from the tip of the spire over the bay. Just for you." }
+          - { tr: "Sabah kapının altından bir yaprak kaymış: cilalı, soğuk, tek bir satırla. Pencerene düşen çeviri kısa: [Davet. Öğle. Yalnız.] Öğlen körfezin üstündeki kulenin ucundan katlanmış ışıktan merdiven iniyor; yalnızca senin için.", en: "Somebody slid a leaf under your door this morning: lacquered, cold, one line of script. The translation that drops into your window is short: [Invitation. Noon. Alone.] At noon the stair of folded light comes down from the tip of the tower over the bay. Just for you." }
           - { tr: "Geminin içi bir kütüphane gibi; raflar yukarıya, gözün seçemeyeceği kadar yukarıya uzanıyor ve her rafta ciltler var. Kadimler gemilerine Onuncu Sabır diyor; içindeki her şey sabırla sayılmış.", en: "The inside of the ship is like a library. Shelves run up and up, farther than your eyes can follow, and every shelf is full of bound volumes. The Ancients call the ship the Tenth Patience, and everything in it has been patiently counted." }
           - { tr: "Ortada siyah taştan bir masa var. Üstünde otuz dokuz dünyadan birer parça: bir kavanozda hâlâ dalgalanan bir deniz, artık var olmayan bir ormanın tohumları, kırık bir taç. {npc:thessar} karşına oturuyor. \"Bu bir ticaret masasıdır,\" diyor. \"Ticarette iki taraf da bir şey verir. Ben bir saat istiyorum. Seni okuyacağım bir saat.\"", en: "In the middle is a table of black stone. On it sits one piece from each of thirty-nine worlds: a sea in a jar that's still making waves, seeds from a forest that doesn't exist anymore, a broken crown. {npc:thessar} sits down across from you. \"This is a trading table,\" he says. \"In a trade, both sides give something. I want one hour. One hour in which I read you.\"" }
           - metin: { tr: "\"İlk okumam eksikti,\" diye ekliyor. \"Okuyucum bir şeyi sayamadı. Eksik bir hesabı sevmem.\"", en: "\"My first reading was incomplete,\" he adds. \"My Reader could not count something. I do not like an incomplete account.\"" }
             kosul: { bayrak: "thessar_okuma_izni" }
           - metin: { tr: "\"İlk okumam tutmadı,\" diyor, sesinde hiçbir şey yok. \"Okuyucum küçük bir sayı getirdi. Sonra sen küçük bir sayının yapamayacağı şeyler yaptın.\"", en: "\"My first reading did not balance,\" he says, with nothing at all in his voice. \"My Reader brought me back a small number. Then you did things a small number cannot do.\"" }
             kosul: { hafiza: { thessar: "yalan:sahte_okuma_yalani" } }
-          - metin: { tr: "Masanın kenarında kırık bir mühür duruyor: Liman'da öldürdüğün muhafızın kalkan mührü. {npc:thessar} onu kaldırmamış.", en: "On the edge of the table sits a broken seal: the shield seal off the Warden you killed on the Waterfront. {npc:thessar} never put it away." }
+          - metin: { tr: "Masanın kenarında kırık bir mühür duruyor: {yer:kiyikent_liman|de} öldürdüğün muhafızın kalkan mührü. {npc:thessar} onu kaldırmamış.", en: "On the edge of the table sits a broken seal: the shield seal off the Warden you killed on {yer:kiyikent_liman}. {npc:thessar} never put it away." }
             kosul: { bayrak: "thessar_inis_saldiri" }
         sezgiler:
           - kosul: { stat: { per: 180 } }
@@ -985,8 +985,8 @@ olaylar:
       - id: "kadimler_2_vergi_1"
         yer: "eski_sehir"
         paragraflar:
-          - { tr: "Bir sabah Kıyıkent'in bütün kapılarına aynı yaprak çakılmış: cilalı, soğuk, tek satırlık. Herkesin penceresine düşen çeviri aynı: [Mevsim payı. On günlük Öz Kristali üretimi ya da her yüz kayıtlıdan biri. Teslim: yedi gün.]", en: "One morning the same leaf is nailed to every door in Port Harlow: lacquered, cold, one line long. The translation that drops into everybody's window is identical: [The season's share. Ten days' Essence Crystal output, or one of every hundred entered. Due in seven days.]" }
-          - { tr: "Eski Şehir'deki belediye binasının yarısı çökmüş meclis salonunda liderler toplanmış. Hepsi aynı anda konuşuyor; sen içeri girince susuyorlar. Kadimler'in kapısını açan sendin, kapıyı kapatmanın yolunu da senden bekliyorlar.", en: "The leaders have packed into the half-collapsed council chamber of Old Town's city hall. They're all talking at once, and when you walk in, they stop. You're the one who opened the door to the Ancients. They're waiting for you to tell them how to shut it." }
+          - { tr: "Bir sabah {yer:kiyikent|in} bütün kapılarına aynı yaprak çakılmış: cilalı, soğuk, tek satırlık. Herkesin penceresine düşen çeviri aynı: [Mevsim payı. On günlük Öz Kristali üretimi ya da her yüz kayıtlıdan biri. Teslim: yedi gün.]", en: "One morning the same leaf is nailed to every door in {yer:kiyikent}: lacquered, cold, one line long. The translation that drops into everybody's window is identical: [The season's share. Ten days' Essence Crystal output, or one of every hundred entered. Due in seven days.]" }
+          - { tr: "{yer:eski_sehir|de}ki belediye binasının yarısı çökmüş meclis salonunda liderler toplanmış. Hepsi aynı anda konuşuyor; sen içeri girince susuyorlar. Kadimler'in kapısını açan sendin, kapıyı kapatmanın yolunu da senden bekliyorlar.", en: "The leaders have packed into the half-collapsed council chamber of {yer:eski_sehir|pos} city hall. They're all talking at once, and when you walk in, they stop. You're the one who opened the door to the Ancients. They're waiting for you to tell them how to shut it." }
           - metin: { tr: "{npc:elif_sari} masaya avucuyla vuruyor: \"Kimseyi vermeyiz. Yüzde bir bir sayı değil; bir isim listesi.\"", en: "{npc:elif_sari} slaps the table with her palm. \"We hand over nobody. One percent isn't a number. It's a list of names.\"" }
             kosul: { npc_hayatta: "elif_sari" }
           - metin: { tr: "{npc:kaya_demir} kollarını kavuşturmuş. \"Kristalleri veririz. On gün açlık çekeriz. Sonra o gemiyi indirmenin yolunu buluruz.\"", en: "{npc:kaya_demir} has his arms crossed. \"We give them the crystals. We go hungry for ten days. Then we figure out how to bring that ship down.\"" }
@@ -1019,7 +1019,7 @@ olaylar:
               - itibar: { kadimler: 6, lonca: -4 }
               - iliski: { thessar: { baglilik: 6, guven: 4 } }
               - tohum: { olay: "kadimler_3_muhbir", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } } }
-            kronik: { tr: "Kadimler'in ilk mevsim payını kristalle ödedin; Kıyıkent o kış soğuktan titredi ama kimseyi vermedi.", en: "You paid the Ancients' first season share in crystals. Port Harlow shivered all winter, but nobody got handed over." }
+            kronik: { tr: "Kadimler'in ilk mevsim payını kristalle ödedin; {yer:kiyikent} o kış soğuktan titredi ama kimseyi vermedi.", en: "You paid the Ancients' first season share in crystals. {yer:kiyikent} shivered all winter, but nobody got handed over." }
             sonraki: "kadimler_2_vergi_kristal"
           - id: "kendin"
             etiket: { tr: "Payı kendinle öde: Okuyucu seni üç gün okusun", en: "Pay with yourself. Let the Reader have three days" }
@@ -1033,7 +1033,7 @@ olaylar:
               - itibar: { siginak: 6, kadimler: 6 }
               - iliski: { thessar: { baglilik: 10, saygi: 6 }, yanki: { guven: -6 } }
               - tohum: { olay: "kadimler_3_muhbir", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } } }
-            kronik: { tr: "Şehrin payını kendinle ödedin; üç gün boyunca bir Kadim Okuyucu'su seni okudu ve Kıyıkent'ten tek bir kristal, tek bir insan gitmedi.", en: "You paid the city's share with yourself. For three days an Ancient Reader read you, and Port Harlow didn't lose a single crystal or a single person." }
+            kronik: { tr: "Şehrin payını kendinle ödedin; üç gün boyunca bir Kadim Okuyucu'su seni okudu ve {yer:kiyikent|den} tek bir kristal, tek bir insan gitmedi.", en: "You paid the city's share with yourself. For three days an Ancient Reader read you, and {yer:kiyikent} didn't lose a single crystal or a single person." }
             sonraki: "kadimler_2_vergi_kendin"
           - id: "liste"
             etiket: { tr: "Kayıtlılardan yüzde birini ver", en: "Hand over one percent of the entered" }
@@ -1085,15 +1085,15 @@ olaylar:
               - ahlak: { insanlik: 6, duzen: -6 }
               - itibar: { siginak: 6, lonca: 4, kadimler: -15 }
               - iliski: { thessar: { baglilik: -10, saygi: 4 } }
-            kronik: { tr: "Kadimler'in mevsim payını reddettin; o gece Eski Şehir'e tazılar indi ve sabah elçiliğin kapısı sana kapalıydı.", en: "You refused the Ancients' season share. That night hounds came down into Old Town, and by morning the embassy's door was closed to you." }
+            kronik: { tr: "Kadimler'in mevsim payını reddettin; o gece {yer:eski_sehir|e} tazılar indi ve sabah elçiliğin kapısı sana kapalıydı.", en: "You refused the Ancients' season share. That night hounds came down into {yer:eski_sehir}, and by morning the embassy's door was closed to you." }
             sonraki: "kadimler_2_vergi_red"
 
       - id: "kadimler_2_vergi_kristal"
         yer: "eski_sehir"
         paragraflar:
-          - { tr: "Kristaller yedi gün boyunca toplanıyor: santrallerden, revirlerden, kapı avcılarının ceplerinden. Sonunda Liman'da bir yığın oluyor; mavi, sıcak, şehrin on günlük nefesi.", en: "For seven days the crystals get collected: from the generators, the clinics, the pockets of gate hunters. In the end they make a pile on the Waterfront. Blue, warm, ten days of the city's breath." }
+          - { tr: "Kristaller yedi gün boyunca toplanıyor: santrallerden, revirlerden, kapı avcılarının ceplerinden. Sonunda {yer:kiyikent_liman|de} bir yığın oluyor; mavi, sıcak, şehrin on günlük nefesi.", en: "For seven days the crystals get collected: from the generators, the clinics, the pockets of gate hunters. In the end they make a pile on {yer:kiyikent_liman}. Blue, warm, ten days of the city's breath." }
           - { tr: "Okuyucu yığını bir kez okuyor ve yarığını kapatıyor. {npc:thessar} başını üç derece eğiyor. \"Hesap kapanır,\" diyor. \"Bu mevsimlik.\"", en: "The Reader reads the pile once and closes its slit. {npc:thessar} tips his head three degrees. \"The account closes,\" he says. \"For this season.\"" }
-          - { tr: "O gece Eski Şehir'de ışıklar erken sönüyor. İnsanlar battaniyelere sarılıp kapılarındaki yaprağa bakıyor: hâlâ orada, bir sonraki mevsimi bekliyor.", en: "That night the lights in Old Town go out early. People wrap themselves in blankets and stare at the leaf on their doors. It's still there. Waiting on next season." }
+          - { tr: "O gece {yer:eski_sehir|de} ışıklar erken sönüyor. İnsanlar battaniyelere sarılıp kapılarındaki yaprağa bakıyor: hâlâ orada, bir sonraki mevsimi bekliyor.", en: "That night the lights in {yer:eski_sehir} go out early. People wrap themselves in blankets and stare at the leaf on their doors. It's still there. Waiting on next season." }
         secenekler:
           - id: "devam"
             etiket: { tr: "Yaprakları kapılardan söktür", en: "Have the leaves pulled off the doors" }
@@ -1107,7 +1107,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 2 }
               - iliski: { thessar: { baglilik: 2 } }
-            kronik: { tr: "Kadim yapraklarını kapılarda bıraktın; Kıyıkent her sabah kime borçlu olduğunu okuyarak uyandı.", en: "You left the Ancient leaves up on the doors. Port Harlow woke every morning reading who it owed." }
+            kronik: { tr: "Kadim yapraklarını kapılarda bıraktın; {yer:kiyikent} her sabah kime borçlu olduğunu okuyarak uyandı.", en: "You left the Ancient leaves up on the doors. {yer:kiyikent} woke every morning reading who it owed." }
             sonraki: "@akis"
 
       - id: "kadimler_2_vergi_kendin"
@@ -1132,7 +1132,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 1 }
               - iliski: { thessar: { saygi: 3 } }
-            kronik: { tr: "Kadim gemisinden üç günlük okumanın ardından sendeleyerek indin; Liman'da seni bekleyenler alkışlamadı, yalnızca sarıldılar.", en: "You staggered down off the Ancient ship after three days of reading. The people waiting on the Waterfront didn't clap. They just hugged you." }
+            kronik: { tr: "Kadim gemisinden üç günlük okumanın ardından sendeleyerek indin; {yer:kiyikent_liman|de} seni bekleyenler alkışlamadı, yalnızca sarıldılar.", en: "You staggered down off the Ancient ship after three days of reading. The people waiting on {yer:kiyikent_liman} didn't clap. They just hugged you." }
             sonraki: "@akis"
 
       - id: "kadimler_2_vergi_liste"
@@ -1141,7 +1141,7 @@ olaylar:
           - { tr: "Liste yedi günde hazırlanıyor. Kimin hazırladığını kimse söylemiyor; ama herkes senin onayladığını biliyor.", en: "The list takes seven days to put together. Nobody will say who put it together. But everybody knows you signed off on it." }
           - metin: { tr: "{npc:vahit} listeye kendi Yükselenler'inden bir sütun ekliyor: \"Yakıt,\" diyor, gülümseyerek. \"Sistem'e yakın olmak bir şereftir.\"", en: "{npc:vahit} adds a column from his own Ascended to the list. \"Fuel,\" he says, smiling. \"To be near the System is an honor.\"" }
             kosul: { npc_hayatta: "vahit" }
-          - { tr: "Yedinci gün dört yüz kişi Liman'da sıraya giriyor. Bazıları ağlıyor, bazıları sessiz, birkaçı neredeyse rahatlamış görünüyor. Katlanmış ışıktan merdiven iniyor ve onları birer birer yukarı alıyor.", en: "On the seventh day, four hundred people line up on the Waterfront. Some are crying, some are quiet, a few look almost relieved. The stair of folded light comes down and takes them up, one at a time." }
+          - { tr: "Yedinci gün dört yüz kişi {yer:kiyikent_liman|de} sıraya giriyor. Bazıları ağlıyor, bazıları sessiz, birkaçı neredeyse rahatlamış görünüyor. Katlanmış ışıktan merdiven iniyor ve onları birer birer yukarı alıyor.", en: "On the seventh day, four hundred people line up on {yer:kiyikent_liman}. Some are crying, some are quiet, a few look almost relieved. The stair of folded light comes down and takes them up, one at a time." }
           - { tr: "Sonuncusu genç bir adam; merdivenin başında dönüp sana bakıyor. Bir şey söylemiyor. Bakışı yeterli.", en: "The last one's a young guy. At the top of the stair he turns and looks at you. He doesn't say anything. The look is enough." }
         secenekler:
           - id: "bak"
@@ -1162,7 +1162,7 @@ olaylar:
       - id: "kadimler_2_vergi_sahte"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "Kristallerin yarısı içi boş cam; Sessiz Ağ'ın atölyesinde üç gecede üflendi, dışları gerçek kristal tozuyla kaplandı. Yığın Liman'da parlıyor, gerçeğinden ayırt edilemiyor.", en: "Half the crystals are hollow glass, blown over three nights in a Quiet Network workshop and dusted with real crystal powder. The pile glitters on the Waterfront. You can't tell it from the real thing." }
+          - { tr: "Kristallerin yarısı içi boş cam; Sessiz Ağ'ın atölyesinde üç gecede üflendi, dışları gerçek kristal tozuyla kaplandı. Yığın {yer:kiyikent_liman|de} parlıyor, gerçeğinden ayırt edilemiyor.", en: "Half the crystals are hollow glass, blown over three nights in a Quiet Network workshop and dusted with real crystal powder. The pile glitters on {yer:kiyikent_liman}. You can't tell it from the real thing." }
           - { tr: "Okuyucu yığını okuyor; yarığı bir an duraksıyor. {npc:thessar} sana bakıyor. \"Hepsi gerçek mi?\" diye soruyor, sesi düz.", en: "The Reader reads the pile, and its slit hesitates for a second. {npc:thessar} looks at you. \"Are they all real?\" he asks, flat." }
           - { tr: "\"Hepsi,\" diyorsun. Gözlerinin içine bakarak. O bir süre bakıyor; sonra başını üç derece eğiyor. \"Hesap kapanır,\" diyor. Ama kalemiyle bileğine çentik atmıyor.", en: "\"All of them,\" you say, looking him straight in the eye. He looks back a while. Then he tips his head three degrees. \"The account closes,\" he says. But he doesn't cut a notch into his wrist." }
         secenekler:
@@ -1188,21 +1188,21 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 2 }
               - iliski: { thessar: { baglilik: 3 } }
-            kronik: { tr: "Bir Kadim elçisinden muhasebe dersi için teşekkür aldın; Kıyıkent o kışı yarı payla atlattı.", en: "You got thanked by an Ancient envoy for an accounting lesson. Port Harlow made it through that winter on half the share." }
+            kronik: { tr: "Bir Kadim elçisinden muhasebe dersi için teşekkür aldın; {yer:kiyikent} o kışı yarı payla atlattı.", en: "You got thanked by an Ancient envoy for an accounting lesson. {yer:kiyikent} made it through that winter on half the share." }
             sonraki: "@akis"
 
       - id: "kadimler_2_vergi_red"
         yer: "eski_sehir"
         paragraflar:
           - { tr: "{npc:thessar} reddini dinliyor ve hiçbir şey söylemiyor. Okuyucusuyla birlikte çıkıyor; kapı arkasından kendi kendine kapanıyor.", en: "{npc:thessar} hears your refusal and says nothing. He leaves with his Reader, and the door swings shut behind them on its own." }
-          - { tr: "Gece yarısı Eski Şehir'in dar sokaklarında uluma başlıyor; bir sayı gibi, ritmik. Sayım Tazıları kapılardaki yapraklara bakıp kayıtlıların evlerini buluyor.", en: "At midnight, howling starts up in the narrow streets of Old Town. Rhythmic, like counting. The Tally Hounds are reading the leaves on the doors and finding the houses of the entered." }
+          - { tr: "Gece yarısı {yer:eski_sehir|in} dar sokaklarında uluma başlıyor; bir sayı gibi, ritmik. Sayım Tazıları kapılardaki yapraklara bakıp kayıtlıların evlerini buluyor.", en: "At midnight, howling starts up in the narrow streets of {yer:eski_sehir}. Rhythmic, like counting. The Tally Hounds are reading the leaves on the doors and finding the houses of the entered." }
         secenekler:
           - id: "savas"
             etiket: { tr: "Sokağa in; tazıları karşıla", en: "Get down to the street. Meet the hounds" }
             etkiler:
               - ahlak: { merhamet: 4, insanlik: 2 }
               - savas: { dusmanlar: ["kadim_sayim_tazisi@dunya+30", "kadim_sayim_tazisi@dunya+30", "kadim_sayim_tazisi@dunya+30"], ortam: ["dar_gecit", "karanlik"], kazan: "kadimler_2_vergi_tazi_zafer", kaybet: "kadimler_2_vergi_tazi_yenilgi" }
-            kronik: { tr: "Vergiyi reddettiğin gece Eski Şehir'in sokaklarında Kadim tazılarını karşıladın.", en: "The night you refused the tax, you met the Ancients' hounds in the streets of Old Town." }
+            kronik: { tr: "Vergiyi reddettiğin gece {yer:eski_sehir|in} sokaklarında Kadim tazılarını karşıladın.", en: "The night you refused the tax, you met the Ancients' hounds in the streets of {yer:eski_sehir}." }
           - id: "ses"
             tur: "gosteris"
             etiket: { tr: "Bütün şehri uyandıracak kadar yüksek bir ses çıkar", en: "Make a noise loud enough to wake the city" }
@@ -1219,7 +1219,7 @@ olaylar:
         yer: "eski_sehir"
         paragraflar:
           - { tr: "Sabah sokakta tazılardan geriye yalnızca uzun bacaklar ve çentikli deriler kalıyor. Kapılar birer birer aralanıyor; insanlar çıkıp yaprakları kendi elleriyle söküyor.", en: "By morning, all that's left of the hounds in the street is long legs and notched hides. Doors creak open one at a time, and people come out and tear the leaves down with their own hands." }
-          - { tr: "Körfezin üstündeki kule kıpırdamıyor. Ama elçiliğin kapısından inen katlanmış ışık o gün hiç inmiyor.", en: "The spire over the bay doesn't move. But that day, the folded light never comes down from the embassy door." }
+          - { tr: "Körfezin üstündeki kule kıpırdamıyor. Ama elçiliğin kapısından inen katlanmış ışık o gün hiç inmiyor.", en: "The tower over the bay doesn't move. But that day, the folded light never comes down from the embassy door." }
         secenekler:
           - id: "devam"
             etiket: { tr: "Söktükleri yaprakları bir ateşte yaktır", en: "Have the torn-down leaves burned" }
@@ -1229,7 +1229,7 @@ olaylar:
               - itibar: { siginak: 4 }
               - iliski: { thessar: { saygi: 3, guven: -4 } }
               - tohum: { olay: "thessar_vassal_teklifi", gecikme: { min: 10, max: 20 }, kosul: { npc_hayatta: "thessar" } }
-            kronik: { tr: "Kadim yapraklarını Eski Şehir'in ortasında bir ateşte yaktırdın; o ateşin dumanı körfezin üstündeki gemiye kadar yükseldi.", en: "You had the Ancient leaves burned in a bonfire in the middle of Old Town. The smoke rose all the way to the ship over the bay." }
+            kronik: { tr: "Kadim yapraklarını {yer:eski_sehir|in} ortasında bir ateşte yaktırdın; o ateşin dumanı körfezin üstündeki gemiye kadar yükseldi.", en: "You had the Ancient leaves burned in a bonfire in the middle of {yer:eski_sehir}. The smoke rose all the way to the ship over the bay." }
             sonraki: "@akis"
 
       - id: "kadimler_2_vergi_tazi_yenilgi"
@@ -1265,7 +1265,7 @@ olaylar:
       - id: "thessar_vassal_teklifi_1"
         yer: "kordon"
         paragraflar:
-          - { tr: "Gün batarken Kordon'un kırık iskelesinde dört kamp yine yan yana duruyor. Bu kez silahlar kalkık değil; herkes elçinin elindeki şeye bakıyor. Kâğıt değil, ince ve soluk bir deri; iki ucu rüzgârda kıpırdamıyor.", en: "At sundown, the four camps stand side by side again on the Esplanade's broken pier. This time the weapons are down. Everybody's looking at what the Envoy is holding. Not paper. A thin, pale hide. The wind can't make either end of it move." }
+          - { tr: "Gün batarken {yer:kordon|in} kırık iskelesinde dört kamp yine yan yana duruyor. Bu kez silahlar kalkık değil; herkes elçinin elindeki şeye bakıyor. Kâğıt değil, ince ve soluk bir deri; iki ucu rüzgârda kıpırdamıyor.", en: "At sundown, the four camps stand side by side again on {yer:kordon|pos} broken pier. This time the weapons are down. Everybody's looking at what the Envoy is holding. Not paper. A thin, pale hide. The wind can't make either end of it move." }
           - { tr: "{npc:thessar} okumaya başlıyor; iki sesi iskelenin tahtalarında yankılanıyor. \"Birinci madde: Dünya hasat edilmez. Ithren Defteri'ne bir Katman olarak yazılır ve yaşar. İkinci madde: her mevsim vel ödenir; kristal olarak ve örnek olarak.\"", en: "{npc:thessar} begins to read, his two voices echoing off the boards of the pier. \"Article one: Earth is not harvested. It is entered in the Ledger of the Ithren as a Layer, and it lives. Article two: each season, vel is paid. In crystals, and in samples.\"" }
           - { tr: "\"Üçüncü madde: hiçbir insan B kademesini geçmez; tek bir istisna dışında. Dördüncü madde: o istisna imzacıdır. İmzacı Defter Bekçisi olur ve Dünya'yı Ithren adına yönetir.\" Başını kaldırıyor ve rıhtımdaki yüzlerce kişinin arasından yalnızca birine bakıyor.", en: "\"Article three: no human advances past Grade B, with a single exception. Article four: that exception is the signatory. The signatory becomes Keeper of the Ledger and governs Earth on behalf of the Ithren.\" He looks up, and out of the hundreds on the pier, he looks at exactly one person." }
           - metin: { tr: "{npc:kaya_demir} yere tükürüyor. \"Kafesi altınla süsleyince kafes olmaktan çıkmaz.\"", en: "{npc:kaya_demir} spits on the boards. \"Gild a cage all you want. It's still a cage.\"" }
@@ -1355,7 +1355,7 @@ olaylar:
               - itibar: { lonca: 6, siginak: 4, kadimler: -20 }
               - iliski: { thessar: { baglilik: -20, saygi: 8, korku: 4, guven: -15 } }
               - tohum: { olay: "thessar_ihanet_fisiltisi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar" } }
-            kronik: { tr: "Kadimler'in boyunduruk antlaşmasını dört kampın önünde ikiye yırttın; o gün Kıyıkent seni ilk kez tek sesle alkışladı ve körfezin üstündeki gemi ilk kez kıpırdamadı.", en: "You tore the Ancients' vassal treaty in two in front of all four camps. That day Port Harlow cheered you with one voice for the first time, and the ship over the bay went completely still." }
+            kronik: { tr: "Kadimler'in boyunduruk antlaşmasını dört kampın önünde ikiye yırttın; o gün {yer:kiyikent} seni ilk kez tek sesle alkışladı ve körfezin üstündeki gemi ilk kez kıpırdamadı.", en: "You tore the Ancients' vassal treaty in two in front of all four camps. That day {yer:kiyikent} cheered you with one voice for the first time, and the ship over the bay went completely still." }
             sonraki: "thessar_vassal_teklifi_yirtildi"
 
       - id: "thessar_vassal_teklifi_liderler"
@@ -1412,7 +1412,7 @@ olaylar:
               - xp_seviye: 60
               - tohum: { olay: "kadimler_2_vergi", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } } }
               - tohum: { olay: "thessar_ihanet_fisiltisi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar" } }
-            kronik: { tr: "Kordon'un kırık iskelesinde Kadimler'in boyunduruk antlaşmasını ilke olarak kabul ettin; Kıyıkent'in yarısı o gece seni bir kurtarıcı, yarısı bir hain olarak andı.", en: "On the Esplanade's broken pier, you accepted the Ancients' vassal treaty in principle. That night half of Port Harlow called you a savior, and the other half called you a traitor." }
+            kronik: { tr: "{yer:kordon|in} kırık iskelesinde Kadimler'in boyunduruk antlaşmasını ilke olarak kabul ettin; {yer:kiyikent|in} yarısı o gece seni bir kurtarıcı, yarısı bir hain olarak andı.", en: "On {yer:kordon|pos} broken pier, you accepted the Ancients' vassal treaty in principle. That night half of {yer:kiyikent} called you a savior, and the other half called you a traitor." }
             sonraki: "thessar_vassal_teklifi_kabul"
           - id: "red"
             etiket: { tr: "Reddet: \"Biz imzalamayız\"", en: "Refuse: \"We don't sign\"" }
@@ -1458,7 +1458,7 @@ olaylar:
       - id: "thessar_vassal_teklifi_red"
         yer: "kordon"
         paragraflar:
-          - { tr: "Rıhtım bir an sessiz kalıyor; sonra biri alkışlıyor, sonra bir başkası. Alkış Kordon boyunca, kırık iskeleden yıkık sahil yoluna kadar yayılıyor.", en: "The pier stays silent for a second. Then somebody claps, then somebody else. The applause rolls down the whole Esplanade, from the broken pier to the wrecked beach road." }
+          - { tr: "Rıhtım bir an sessiz kalıyor; sonra biri alkışlıyor, sonra bir başkası. Alkış {yer:kordon} boyunca, kırık iskeleden yıkık sahil yoluna kadar yayılıyor.", en: "The pier stays silent for a second. Then somebody claps, then somebody else. The applause rolls down the whole Esplanade, from the broken pier to the wrecked beach road." }
           - { tr: "{npc:thessar} alkışı bir istatistik gibi dinliyor. \"Ret bir müzakere pozisyonudur,\" diyor. \"Sizin türünüzde öyle; bizimkinde de öyleydi. Gün üç yüz altmış beşte herkes imzalamak ister. Soru, kimin elinde kalem olduğudur.\"", en: "{npc:thessar} listens to the applause like it's a statistic. \"Refusal is a negotiating position,\" he says. \"It is in your species. It was in mine. On Day three hundred sixty-five, everyone wants to sign. The question is who is holding the pen.\"" }
         secenekler:
           - id: "devam"
@@ -1495,7 +1495,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 2 }
               - iliski: { thessar: { saygi: 3 } }
-            kronik: { tr: "Yırttığın antlaşmanın parçalarını Kordon'dan denize attın; dalgalar onları gemiye doğru taşıdı.", en: "You threw the pieces of the torn treaty off the Esplanade. The waves carried them toward the ship." }
+            kronik: { tr: "Yırttığın antlaşmanın parçalarını {yer:kordon|den} denize attın; dalgalar onları gemiye doğru taşıdı.", en: "You threw the pieces of the torn treaty off {yer:kordon}. The waves carried them toward the ship." }
             sonraki: "@akis"
 
   # ================================================================== ZİNCİR 3: MUHBİR
@@ -1514,7 +1514,7 @@ olaylar:
       - id: "kadimler_3_muhbir_1"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "Gece geç saatte {npc:thessar} seni Liman'daki boş bir ambara çağırıyor. Muhafızları dışarıda bekliyor; içeride yalnızca o, bir Okuyucu ve bir masa var. Masanın üstünde boş bir yaprak.", en: "Late at night, {npc:thessar} calls you to an empty warehouse on the Waterfront. His Wardens wait outside. Inside it's just him, a Reader, and a table. On the table, a blank leaf." }
+          - { tr: "Gece geç saatte {npc:thessar} seni {yer:kiyikent_liman|de}ki boş bir ambara çağırıyor. Muhafızları dışarıda bekliyor; içeride yalnızca o, bir Okuyucu ve bir masa var. Masanın üstünde boş bir yaprak.", en: "Late at night, {npc:thessar} calls you to an empty warehouse on {yer:kiyikent_liman}. His Wardens wait outside. Inside it's just him, a Reader, and a table. On the table, a blank leaf." }
           - { tr: "\"Gün üç yüz altmış beşte,\" diyor, \"birileri direnecek. Hep direnirler. Direnenler hesabı bozar: fazladan ölüm, fazladan kayıp, fazladan sayım. Kimlerin direneceğini bilmek istiyorum. Önceden.\"", en: "\"On Day three hundred sixty-five,\" he says, \"someone will resist. Someone always does. Resistance spoils the books: extra deaths, extra losses, extra counting. I want to know who will resist. In advance.\"" }
           - { tr: "Kalemini masaya, yaprağın yanına bırakıyor. \"Senin listen temiz olur. Kimse sana yalan söylemez; herkes sana bakar.\"", en: "He sets his stylus on the table beside the leaf. \"Your list would be clean. Nobody lies to you. Everybody watches you.\"" }
           - metin: { tr: "Yaprağın altında başka yapraklar var; dolu. El yazısını tanıyorsun: hızlı, sıkışık, cümleleri yarıda kesilmiş. \"Zaten bir muhbirim var,\" diyor {npc:thessar}. \"Raporları... duygusal. Yarısı senin hakkında.\"", en: "There are more leaves under the blank one, and they're full. You know the handwriting: fast, cramped, sentences chopped off halfway. \"I already have an informant,\" {npc:thessar} says. \"His reports are... emotional. Half of them are about you.\"" }
@@ -1572,7 +1572,7 @@ olaylar:
               - itibar: { siginak: 6, sessiz_ag: 6, kadimler: -15 }
               - iliski: { thessar: { baglilik: -12, saygi: 5 } }
               - tohum: { olay: "thessar_ihanet_fisiltisi", gecikme: { min: 12, max: 20 }, kosul: { npc_hayatta: "thessar" } }
-            kronik: { tr: "Kadimler'in muhbir ağını Kıyıkent'e ifşa ettin; o hafta Liman'daki üç ambarın kapısı kırıldı ve hiçbirinde artık kimse yoktu.", en: "You exposed the Ancients' informant network to all of Port Harlow. That week three warehouse doors on the Waterfront got kicked in, and nobody was inside any of them anymore." }
+            kronik: { tr: "Kadimler'in muhbir ağını {yer:kiyikent|e} ifşa ettin; o hafta {yer:kiyikent_liman|de}ki üç ambarın kapısı kırıldı ve hiçbirinde artık kimse yoktu.", en: "You exposed the Ancients' informant network to all of {yer:kiyikent}. That week three warehouse doors on {yer:kiyikent_liman} got kicked in, and nobody was inside any of them anymore." }
             sonraki: "kadimler_3_muhbir_ifsa"
 
       - id: "kadimler_3_muhbir_mert"
@@ -1618,7 +1618,7 @@ olaylar:
         yer: "kiyikent_liman"
         paragraflar:
           - { tr: "Boş yaprak önünde duruyor. Kalem ılık; birinin elinden yeni bırakılmış gibi.", en: "The blank leaf sits in front of you. The stylus is warm, like someone just put it down." }
-          - { tr: "{npc:thessar} bekliyor. Okuyucu bekliyor. Dışarıda muhafızlar, rıhtımda dalgalar, körfezin üstünde ters kule; hepsi bekliyor.", en: "{npc:thessar} waits. The Reader waits. Outside, the Wardens, the waves on the pier, the upside-down spire over the bay. All of it waits." }
+          - { tr: "{npc:thessar} bekliyor. Okuyucu bekliyor. Dışarıda muhafızlar, rıhtımda dalgalar, körfezin üstünde ters kule; hepsi bekliyor.", en: "{npc:thessar} waits. The Reader waits. Outside, the Wardens, the waves on the pier, the upside-down tower over the bay. All of it waits." }
         secenekler:
           - id: "ver"
             etiket: { tr: "İsimleri yaz", en: "Write the names" }
@@ -1666,7 +1666,7 @@ olaylar:
               - itibar: { siginak: 6, sessiz_ag: 6, kadimler: -15 }
               - iliski: { thessar: { baglilik: -12, saygi: 5 } }
               - tohum: { olay: "thessar_ihanet_fisiltisi", gecikme: { min: 12, max: 20 }, kosul: { npc_hayatta: "thessar" } }
-            kronik: { tr: "Kadimler'in muhbir yaprağını ve elçinin kalemini aynı gece kırdın; ertesi gün Kıyıkent'in her köşesinde o ambarın adı konuşuluyordu.", en: "You broke the Ancients' informant leaf and the Envoy's stylus on the same night. The next day, every corner of Port Harlow was talking about that warehouse." }
+            kronik: { tr: "Kadimler'in muhbir yaprağını ve elçinin kalemini aynı gece kırdın; ertesi gün {yer:kiyikent|in} her köşesinde o ambarın adı konuşuluyordu.", en: "You broke the Ancients' informant leaf and the Envoy's stylus on the same night. The next day, every corner of {yer:kiyikent} was talking about that warehouse." }
             sonraki: "kadimler_3_muhbir_ifsa"
 
       - id: "kadimler_3_muhbir_yazildi"
@@ -1715,13 +1715,13 @@ olaylar:
       - id: "kadimler_3_muhbir_ifsa"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "Ertesi sabah Liman'ın her duvarına aynı şey yazılmış: ambarın adresi, Kadim yaprakları, elçinin muhbir aradığı. Kalabalık ambarın kapısını kırıyor; içeride yalnızca boş bir masa var.", en: "By the next morning, the same thing is written on every wall on the Waterfront: the warehouse address, the Ancient leaves, the Envoy shopping for informants. A crowd kicks in the warehouse door. There's nothing inside but an empty table." }
-          - { tr: "Akşam körfezin üstündeki kulenin ucundan katlanmış ışık inmiyor. Elçilik ilk kez kapısını kapatmış.", en: "That evening no folded light comes down from the tip of the spire over the bay. For the first time, the embassy's closed its door." }
+          - { tr: "Ertesi sabah {yer:kiyikent_liman|in} her duvarına aynı şey yazılmış: ambarın adresi, Kadim yaprakları, elçinin muhbir aradığı. Kalabalık ambarın kapısını kırıyor; içeride yalnızca boş bir masa var.", en: "By the next morning, the same thing is written on every wall on {yer:kiyikent_liman}: the warehouse address, the Ancient leaves, the Envoy shopping for informants. A crowd kicks in the warehouse door. There's nothing inside but an empty table." }
+          - { tr: "Akşam körfezin üstündeki kulenin ucundan katlanmış ışık inmiyor. Elçilik ilk kez kapısını kapatmış.", en: "That evening no folded light comes down from the tip of the tower over the bay. For the first time, the embassy's closed its door." }
           - metin: { tr: "Sessiz Ağ'ın frekanslarında bir mesaj dolaşıyor, kısa: \"Teşekkürler. Sıradaki biziz, biliyoruz.\"", en: "A message makes the rounds on the Quiet Network's frequencies, short: \"Thanks. We know we're next.\"" }
             kosul: { npc_hayatta: "mert_kilic" }
         secenekler:
           - id: "devam"
-            etiket: { tr: "Kapalı kapıya, kuleye bak", en: "Look up at the shut door, at the spire" }
+            etiket: { tr: "Kapalı kapıya, kuleye bak", en: "Look up at the shut door, at the tower" }
             etkiler:
               - ahlak: { insanlik: 1 }
               - iliski: { thessar: { saygi: 2 } }
@@ -1744,7 +1744,7 @@ olaylar:
       - id: "thessar_ihanet_fisiltisi_1"
         yer: "kule_dibi"
         paragraflar:
-          - { tr: "Gece yarısı Kule Dibi'nde, kapalı avcı pazarının tezgâhları arasında biri seni bekliyor. Önce gölgesini görüyorsun: ay ışığına doğru düşüyor. Sonra onu.", en: "At midnight on Spire Plaza, somebody's waiting for you between the shuttered stalls of the hunters' market. First you see the shadow, falling toward the moonlight. Then you see him." }
+          - { tr: "Gece yarısı Kule Dibi'nde, kapalı avcı pazarının tezgâhları arasında biri seni bekliyor. Önce gölgesini görüyorsun: ay ışığına doğru düşüyor. Sonra onu.", en: "At midnight on {yer:kule_dibi}, somebody's waiting for you between the shuttered stalls of the hunters' market. First you see the shadow, falling toward the moonlight. Then you see him." }
           - { tr: "{npc:thessar} yalnız. Arkasında muhafız yok, Okuyucu yok. Kalemini zincirinden çıkarıp avucuna almış; ilk kez onu bir silah gibi değil, bir şeye tutunur gibi tutuyor.", en: "{npc:thessar} is alone. No Wardens behind him, no Reader. He's taken the stylus off its chain and closed it in his fist. For the first time he isn't holding it like a weapon. He's holding it like something to hang on to." }
           - { tr: "\"Raporumu okudular,\" diyor. İkinci sesi birincinin gerisinde kalmıyor; ikisi de fısıldıyor. \"Meclis kararını verdi. Sapma budanacak. Ve sapmayı raporlayıp duran elçi de sapmanın bir parçası sayılıyor. Budayıcı yolda. Senin için. Benim için.\"", en: "\"They read my report,\" he says. His second voice doesn't lag behind the first. Both of them are whispering. \"The Conclave has ruled. The deviation is to be pruned. And the envoy who kept filing reports on the deviation counts as part of the deviation. The Pruner is on its way. For you. For me.\"" }
           - metin: { tr: "\"Sana güvendiğim için gelmedim,\" diye ekliyor. \"Başka kimse kalmadığı için geldim.\"", en: "\"I did not come because I trust you,\" he adds. \"I came because there is no one else left.\"" }
@@ -1819,7 +1819,7 @@ olaylar:
               - iliski: { thessar: { baglilik: 15, guven: 15 } }
               - xp_seviye: 80
               - tohum: { olay: "thessar_kirik_muhur", gecikme: { min: 12, max: 20 }, kosul: { npc_hayatta: "thessar", bayrak_yok: "ihanet_thessar" } }
-            kronik: { tr: "Kendi ırkına ihanet etmeye hazırlanan bir Kadim'e söz verdin; o gece Kule Dibi'nde iki sapma aynı tarafa geçti.", en: "You gave your word to an Ancient getting ready to betray his own kind. That night on Spire Plaza, two deviations switched to the same side." }
+            kronik: { tr: "Kendi ırkına ihanet etmeye hazırlanan bir Kadim'e söz verdin; o gece Kule Dibi'nde iki sapma aynı tarafa geçti.", en: "You gave your word to an Ancient getting ready to betray his own kind. That night on {yer:kule_dibi}, two deviations switched to the same side." }
             sonraki: "thessar_ihanet_fisiltisi_kabul"
           - id: "ikna"
             tur: "gosteris"
@@ -1954,7 +1954,7 @@ olaylar:
       - id: "thessar_ihanet_fisiltisi_ihbar"
         yer: "kule_dibi"
         paragraflar:
-          - { tr: "Kule Dibi'nin karanlığına doğru tek bir cümle söylüyorsun; adını, elçinin adını ve \"ihanet\" kelimesini. Bir Okuyucu'nun yarığı her zaman bir yerde açıktır.", en: "You say a single sentence into the dark of Spire Plaza: your name, the Envoy's name, and the word \"treason.\" A Reader's slit is always open somewhere." }
+          - { tr: "{yer:kule_dibi|in} karanlığına doğru tek bir cümle söylüyorsun; adını, elçinin adını ve \"ihanet\" kelimesini. Bir Okuyucu'nun yarığı her zaman bir yerde açıktır.", en: "You say a single sentence into the dark of {yer:kule_dibi}: your name, the Envoy's name, and the word \"treason.\" A Reader's slit is always open somewhere." }
           - { tr: "{npc:thessar} kıpırdamıyor. Gölgesi ay ışığına doğru düşüyor. \"Doğru hesap,\" diyor sonunda, sesi buz gibi. \"Meclis seni ödüllendirecek. Ben de seni kaydedeceğim; ama başka bir sütuna.\"", en: "{npc:thessar} doesn't move. His shadow falls toward the moonlight. \"Correct arithmetic,\" he says finally, his voice like ice. \"The Conclave will reward you. And I will enter you too. In a different column.\"" }
           - metin: { tr: "{npc:yanki}: ne yaptın. ne yaptın. o seni artık sayıyor. tek tek.", en: "{npc:yanki}: what did you do. what did you do. it's counting you now. one by one." }
             kosul: { bayrak: "yanki_bagi" }
@@ -1983,7 +1983,7 @@ olaylar:
       - id: "kadimler_4_vassal_sozlesmesi_1"
         yer: "kordon"
         paragraflar:
-          - { tr: "Gece, Kordon'un kırık iskelesi. Bu kez kalabalık yok; yalnızca sen, {npc:thessar} ve iki okuyucunun arasına gerilmiş deri. Kenarlarında ince satırlar kıpırdıyor, sanki metin hâlâ yazılıyor.", en: "Night on the Esplanade's broken pier. No crowd this time. Just you, {npc:thessar}, and the hide stretched between two Readers. Fine lines squirm along its edges, like the text is still being written." }
+          - { tr: "Gece, {yer:kordon|in} kırık iskelesi. Bu kez kalabalık yok; yalnızca sen, {npc:thessar} ve iki okuyucunun arasına gerilmiş deri. Kenarlarında ince satırlar kıpırdıyor, sanki metin hâlâ yazılıyor.", en: "Night on {yer:kordon|pos} broken pier. No crowd this time. Just you, {npc:thessar}, and the hide stretched between two Readers. Fine lines squirm along its edges, like the text is still being written." }
           - { tr: "\"Asıl antlaşma,\" diyor elçi. \"İlkeler değil; hükümler. Dünya hasat edilmez. Vel her mevsim ödenir. Hiçbir insan B kademesini geçmez. İmzacı Defter Bekçisi olur. İmza kanla atılır ve geri alınmaz.\"", en: "\"The real treaty,\" the Envoy says. \"Not principles. Provisions. Earth is not harvested. Vel is paid every season. No human advances past Grade B. The signatory becomes Keeper of the Ledger. The signature is made in blood, and it cannot be withdrawn.\"" }
           - metin: { tr: "İkinci maddede \"örnek\" kelimesinin yerinde hâlâ bir çentik var. Elçi sözünü tutmuş.", en: "In article two, there's still just a notch where the word \"samples\" used to be. The Envoy kept his word." }
             kosul: { hafiza: { thessar: "teklifi_dinledi" } }
@@ -2070,7 +2070,7 @@ olaylar:
         yer: "kordon"
         paragraflar:
           - { tr: "Avucundaki eski çentik açılıyor; kan deriye düşer düşmez emiliyor. İmzan bir an parlıyor ve sönmüyor. Durum pencerende yeni bir satır beliriyor, kırmızı değil, altın: [Defter Bekçisi (aday). Katman: Dünya.]", en: "The old notch in your palm opens up, and the blood soaks into the hide the second it lands. Your signature glows, and it doesn't go out. A new line appears in your Status window, not red but gold: [Keeper of the Ledger (candidate). Layer: Earth.]" }
-          - { tr: "Aynı anda, Kıyıkent'in her yerinde, B kademesinin üstündeki herkesin penceresi bir kez titriyor. Bir yerlerde biri çığlık atıyor.", en: "At the same moment, all over Port Harlow, the windows of everyone above Grade B flicker once. Somewhere, somebody screams." }
+          - { tr: "Aynı anda, {yer:kiyikent|in} her yerinde, B kademesinin üstündeki herkesin penceresi bir kez titriyor. Bir yerlerde biri çığlık atıyor.", en: "At the same moment, all over {yer:kiyikent}, the windows of everyone above Grade B flicker once. Somewhere, somebody screams." }
           - { tr: "{npc:thessar} ikinci imza boşluğuna kendi adını yazıyor; kendi kanıyla, bileğinin içinden. \"Hesap açıldı,\" diyor. \"Kapanması için tek bir şey kaldı: teslim.\"", en: "{npc:thessar} writes his own name on the second signature line, in his own blood, from the inside of his wrist. \"The account is open,\" he says. \"Only one thing remains to close it: the handover.\"" }
         secenekler:
           - id: "devam"
@@ -2140,10 +2140,10 @@ olaylar:
       - id: "thessar_kirik_muhur_1"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "Gece Liman'a bir alarm düşüyor: körfezin üstündeki kulenin ucundan katlanmış ışık iniyor, ama bu kez basamakları titriyor, kırılıyor, yeniden katlanıyor. Liman'a koştuğunda merdivenin dibinde bir gölge yere yığılmış.", en: "An alarm rips through the Waterfront in the middle of the night. The folded light is coming down from the tip of the spire over the bay, but this time the steps are shaking, cracking, folding back up again. By the time you run down to the Waterfront, there's a shadow crumpled at the foot of the stair." }
+          - { tr: "Gece {yer:kiyikent_liman|e} bir alarm düşüyor: körfezin üstündeki kulenin ucundan katlanmış ışık iniyor, ama bu kez basamakları titriyor, kırılıyor, yeniden katlanıyor. {yer:kiyikent_liman|e} koştuğunda merdivenin dibinde bir gölge yere yığılmış.", en: "An alarm rips through {yer:kiyikent_liman} in the middle of the night. The folded light is coming down from the tip of the tower over the bay, but this time the steps are shaking, cracking, folding back up again. By the time you run down to {yer:kiyikent_liman}, there's a shadow crumpled at the foot of the stair." }
           - { tr: "{npc:thessar}. Ceketi yırtık, sol kolundan siyah mürekkep akıyor; düzgün satırlar hâlinde değil, dağınık, bir insanın kanı gibi. Yumruğunda avuç içi büyüklüğünde, ılık, nabız gibi atan bir şey var.", en: "{npc:thessar}. His coat's torn, and black ink is running from his left arm. Not in neat lines. Messy, like a human's blood. In his fist there's something the size of a palm, warm, beating like a pulse." }
           - { tr: "\"Al,\" diyor, iki sesi birbirine karışarak. \"Şimdi al.\" Merdivenin tepesinde iki Elçilik Muhafızı ve bir Okuyucu beliriyor; inmeye başlıyorlar.", en: "\"Take it,\" he says, his two voices tangling together. \"Take it now.\" At the top of the stair, two Embassy Wardens and a Reader appear. They start coming down." }
-          - metin: { tr: "Kemik rengi kulenin içinde bir yerde bir şey çalıyor; bir çan değil, bir hesap makinesinin sonsuz tıkırtısı gibi.", en: "Somewhere inside the bone-white spire, something's ringing. Not a bell. More like an adding machine clattering away forever." }
+          - metin: { tr: "Kemik rengi kulenin içinde bir yerde bir şey çalıyor; bir çan değil, bir hesap makinesinin sonsuz tıkırtısı gibi.", en: "Somewhere inside the bone-white tower, something's ringing. Not a bell. More like an adding machine clattering away forever." }
             kosul: { bayrak: "kadim_sozlesme_zehirli" }
         sezgiler:
           - kosul: { stat: { per: 280 } }
@@ -2191,7 +2191,7 @@ olaylar:
       - id: "thessar_kirik_muhur_zafer"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "Merdiven boş. Rıhtımın taşlarında mavi-siyah mürekkep lekeleri kalmış. Kulenin ucundaki ışık sönmüş; elçilik kapısı ilk kez kendiliğinden kapanmış.", en: "The stair is empty. Blue-black ink stains the stones of the pier. The light at the tip of the spire has gone out. For the first time, the embassy door has shut on its own." }
+          - { tr: "Merdiven boş. Rıhtımın taşlarında mavi-siyah mürekkep lekeleri kalmış. Kulenin ucundaki ışık sönmüş; elçilik kapısı ilk kez kendiliğinden kapanmış.", en: "The stair is empty. Blue-black ink stains the stones of the pier. The light at the tip of the tower has gone out. For the first time, the embassy door has shut on its own." }
           - { tr: "Mühür avucunda atıyor. Pencerende bir satır, sen bakarken yazılıyor: [Defter Mührü. Hasat yetkisi: devredildi. Yeni sahip: tanımsız.]", en: "The seal beats in your palm. A line writes itself in your window while you watch: [Ledger Seal. Harvest authority: transferred. New holder: undefined.]" }
           - { tr: "{npc:thessar} bir babaya yaslanmış, kolunu bastırıyor. \"Kayda geçmiyorum,\" diyor. \"Artık geçiremem. Defter'den çıktım. Kırkıncı dünyada, kırkıncı sayfanın dışında.\"", en: "{npc:thessar} is leaning against a mooring bollard, pressing on his arm. \"I am not entering this,\" he says. \"I cannot, anymore. I am out of the Ledger. On the fortieth world, outside the fortieth page.\"" }
         bildirimler:
@@ -2249,10 +2249,10 @@ olaylar:
         paragraflar:
           - { tr: "Mührü merdivenin ilk basamağına bırakıyorsun. Muhafızlar iniyor; biri mührü alıyor, öbürü elçinin iki kolunu arkadan kavrıyor.", en: "You set the seal down on the first step of the stair. The Wardens come down. One picks up the seal. The other grabs both of the Envoy's arms from behind." }
           - { tr: "{npc:thessar} direnmiyor. Sana bakıyor; ıslak arduvaz gözleri bir kez kırpılıyor. \"Doğru hesap,\" diyor, çok sessiz. \"Ben de böyle yapardım. Bu yüzden budanmayı hak ediyorum, sanırım.\"", en: "{npc:thessar} doesn't fight. He looks at you, and those wet-slate eyes blink once. \"Correct arithmetic,\" he says, very quietly. \"I would have done the same. Which is why I deserve to be pruned, I suppose.\"" }
-          - { tr: "Merdiven onları yukarı alıyor ve ışığa katlanıyor. O gece körfezin üstündeki kulenin içinden bir kez, yalnızca bir kez, makas sesine benzer bir ses geliyor.", en: "The stair carries them up and folds back into light. That night, from inside the spire over the bay, there's a sound, once and only once. Something like shears closing." }
+          - { tr: "Merdiven onları yukarı alıyor ve ışığa katlanıyor. O gece körfezin üstündeki kulenin içinden bir kez, yalnızca bir kez, makas sesine benzer bir ses geliyor.", en: "The stair carries them up and folds back into light. That night, from inside the tower over the bay, there's a sound, once and only once. Something like shears closing." }
         secenekler:
           - id: "devam"
-            etiket: { tr: "Kuleye bakma", en: "Don't look at the spire" }
+            etiket: { tr: "Kuleye bakma", en: "Don't look at the tower" }
             etkiler:
               - npc_ol: "thessar"
               - ahlak: { insanlik: -2 }
@@ -2272,7 +2272,7 @@ olaylar:
               - bilgi: "thael_kelimesi"
               - ahlak: { merhamet: 2, insanlik: 2 }
               - iliski: { thessar: { baglilik: 4 } }
-            kronik: { tr: "Kendi ırkından kaçan elçiyle birlikte Liman'da güneşin doğuşunu izledin; gölgeleri ikinizin de güneşin tersine düştü.", en: "You watched the sun come up on the Waterfront with the Envoy who'd run from his own kind. Both your shadows fell away from the sun." }
+            kronik: { tr: "Kendi ırkından kaçan elçiyle birlikte {yer:kiyikent_liman|de} güneşin doğuşunu izledin; gölgeleri ikinizin de güneşin tersine düştü.", en: "You watched the sun come up on {yer:kiyikent_liman} with the Envoy who'd run from his own kind. Both your shadows fell away from the sun." }
             sonraki: "@akis"
 
   # ================================================================== ZİNCİR 5: TESLİM
@@ -2291,7 +2291,7 @@ olaylar:
       - id: "kadimler_5_teslim_1"
         yer: "kasaba_cekirdegi"
         paragraflar:
-          - { tr: "Hasat başladı. Gökyüzünde filo var; körfezin üstündeki ters kule artık yalnız değil. Antlaşmanın son maddesi bugün işliyor: Katman'ın anahtarı, Kasaba Çekirdeği, imzacının eliyle Ithren'e teslim edilecek.", en: "The Harvest has started. There's a fleet in the sky. The upside-down spire over the bay isn't alone anymore. Today the last article of the treaty comes due: the key to the Layer, the Town Core, gets handed to the Ithren by the signatory's own hand." }
+          - { tr: "Hasat başladı. Gökyüzünde filo var; körfezin üstündeki ters kule artık yalnız değil. Antlaşmanın son maddesi bugün işliyor: Katman'ın anahtarı, Kasaba Çekirdeği, imzacının eliyle Ithren'e teslim edilecek.", en: "The Harvest has started. There's a fleet in the sky. The upside-down tower over the bay isn't alone anymore. Today the last article of the treaty comes due: the key to the Layer, the Town Core, gets handed to the Ithren by the signatory's own hand." }
           - { tr: "Çekirdek'in çevresinde insanlar sıraya girmiş; yüzlerce, binlerce. Her birinin önünden bir Okuyucu geçiyor ve her birini bir kez okuyor. Sayım. Kimse ağlamıyor; ağlamanın sırası geçmiş.", en: "People have lined up all around the Core. Hundreds, thousands. A Reader passes in front of each one and reads them once. The count. Nobody's crying. It's past the point for crying." }
           - metin: { tr: "Çekirdek zaten sana bağlı. Teslim etmek için kimseye sormak zorunda değilsin; bu, işin en ağır yanı.", en: "The Core's already bound to you. You don't have to ask anyone's permission to hand it over. That's the heaviest part." }
             kosul: { bayrak: "cekirdek_oyuncu" }
@@ -2346,7 +2346,7 @@ olaylar:
               - itibar: { kadimler: 20, siginak: -8, lonca: -4 }
               - iliski: { thessar: { baglilik: 12, saygi: 12 } }
               - xp_seviye: 220
-            kronik: { tr: "Kadimler'e teslim olurken töreni sen yönettin; bütün Okuyucular imzacının önünde eğildi ve Kıyıkent bunu bir yenilgi olarak değil, bir taç giyme olarak hatırladı.", en: "When you surrendered to the Ancients, you ran the ceremony. Every Reader bowed to the signatory, and Port Harlow remembered it not as a defeat, but as a coronation." }
+            kronik: { tr: "Kadimler'e teslim olurken töreni sen yönettin; bütün Okuyucular imzacının önünde eğildi ve {yer:kiyikent} bunu bir yenilgi olarak değil, bir taç giyme olarak hatırladı.", en: "When you surrendered to the Ancients, you ran the ceremony. Every Reader bowed to the signatory, and {yer:kiyikent} remembered it not as a defeat, but as a coronation." }
             sonraki: "kadimler_5_teslim_dikte"
           - id: "tuzak"
             etiket: { tr: "Elini uzat; avucunda mühür, kanında zehir", en: "Reach out. Seal in your palm, poison in your blood" }
@@ -2377,7 +2377,7 @@ olaylar:
       - id: "kadimler_5_teslim_tamam"
         yer: "kasaba_cekirdegi"
         paragraflar:
-          - { tr: "Avucunu Çekirdek'in üstüne koyuyorsun. Avucundaki eski çentik açılıyor ve Çekirdek kanını içiyor. Bütün Kıyıkent'in pencereleri aynı anda yeni bir satır gösteriyor: [Katman: Dünya. Durum: kayıtlı. Bekçi: {oyuncu}.]", en: "You lay your palm on the Core. The old notch in your palm opens, and the Core drinks your blood. Every window in Port Harlow shows a new line at the same time: [Layer: Earth. Status: entered. Keeper: {oyuncu}.]" }
+          - { tr: "Avucunu Çekirdek'in üstüne koyuyorsun. Avucundaki eski çentik açılıyor ve Çekirdek kanını içiyor. Bütün {yer:kiyikent|in} pencereleri aynı anda yeni bir satır gösteriyor: [Katman: Dünya. Durum: kayıtlı. Bekçi: {oyuncu}.]", en: "You lay your palm on the Core. The old notch in your palm opens, and the Core drinks your blood. Every window in {yer:kiyikent} shows a new line at the same time: [Layer: Earth. Status: entered. Keeper: {oyuncu}.]" }
           - { tr: "Filo kıpırdamıyor. Gökyüzündeki gemilerin hiçbiri inmiyor. Bir süre sonra birinin güldüğünü duyuyorsun, sinirden; sonra başka biri ağlıyor, rahatlamadan.", en: "The fleet doesn't move. Not one of the ships in the sky comes down. After a while you hear somebody laugh, from nerves. Then somebody else cries, from relief." }
           - { tr: "{npc:thessar} yanında duruyor. \"Hesap kapandı,\" diyor. \"Defter'de kırkıncı sayfa. Hasat edilmemiş tek sayfa.\" Başını eğiyor. Üç derece değil; bir Bekçiye eğilinen kadar.", en: "{npc:thessar} stands beside you. \"The account is closed,\" he says. \"The fortieth page in the Ledger. The only one never harvested.\" He bows his head. Not three degrees. As far as you bow to a Keeper." }
         secenekler:
@@ -2468,13 +2468,13 @@ olaylar:
         yer: "kiyikent_liman"
         paragraflar:
           - { tr: "Hasatın on beşinci günü. Körfezin üstündeki gökyüzü artık bir gökyüzü değil; bir defterin açık sayfası gibi, satır satır gemilerle çizilmiş.", en: "The fifteenth day of the Harvest. The sky over the bay isn't a sky anymore. It's an open page in a ledger, ruled line by line with ships." }
-          - metin: { tr: "Gemilerin yarısı kırık; gövdeleri denize gömülmüş, kemik rengi taşları dalgalarda bir iskelet gibi parlıyor. Kadimler istilada yenildi. Ama ters kule hâlâ yerinde.", en: "Half the ships are broken, their hulls sunk into the sea, their bone-white stone gleaming in the waves like a skeleton. The Ancients lost the invasion. But the upside-down spire is still hanging there." }
+          - metin: { tr: "Gemilerin yarısı kırık; gövdeleri denize gömülmüş, kemik rengi taşları dalgalarda bir iskelet gibi parlıyor. Kadimler istilada yenildi. Ama ters kule hâlâ yerinde.", en: "Half the ships are broken, their hulls sunk into the sea, their bone-white stone gleaming in the waves like a skeleton. The Ancients lost the invasion. But the upside-down tower is still hanging there." }
             kosul: { bayrak: "kadimler_yenildi" }
           - metin: { tr: "Filo sessizce demirli; bir anlaşma imzalandı ve gemilerin hiçbiri inmiyor. Bekliyorlar; Kadimler beklemekte iyidir.", en: "The fleet rides at anchor in silence. A deal was signed, and not one ship comes down. They're waiting. The Ancients are good at waiting." }
             kosul: { bayrak: "kadim_anlasmasi" }
-          - metin: { tr: "Kıyıkent'in yarısı yanıyor. Kordon'da Kadim sancakları dalgalanıyor; her birinde tek bir çentik.", en: "Half of Port Harlow is burning. Ancient banners hang over the Esplanade, each one marked with a single notch." }
+          - metin: { tr: "{yer:kiyikent|in} yarısı yanıyor. {yer:kordon|de} Kadim sancakları dalgalanıyor; her birinde tek bir çentik.", en: "Half of {yer:kiyikent} is burning. Ancient banners hang over {yer:kordon}, each one marked with a single notch." }
             kosul: { bayrak: "kiyikent_dustu" }
-          - metin: { tr: "Bu kez katlanmış ışık inmiyor; {npc:thessar} Liman'ın taşları üstünde, yanında, sargılı koluyla bekliyor. Gökyüzü yukarıda bir makasın iki ağzı gibi açılıyor. Meclis'in Budayıcı'sı geldi.", en: "No folded light comes down this time. {npc:thessar} is already on the Waterfront stones next to you, bandaged arm and all. Up above, the sky opens like the two blades of a pair of shears. The Conclave's Pruner has arrived." }
+          - metin: { tr: "Bu kez katlanmış ışık inmiyor; {npc:thessar} {yer:kiyikent_liman|in} taşları üstünde, yanında, sargılı koluyla bekliyor. Gökyüzü yukarıda bir makasın iki ağzı gibi açılıyor. Meclis'in Budayıcı'sı geldi.", en: "No folded light comes down this time. {npc:thessar} is already on {yer:kiyikent_liman} stones next to you, bandaged arm and all. Up above, the sky opens like the two blades of a pair of shears. The Conclave's Pruner has arrived." }
             kosul: { bayrak: "thessar_ihanete_hazir" }
           - metin: { tr: "Katlanmış ışık iniyor ve {npc:thessar} yalnız iniyor; sonra yanına dönüp gökyüzüne bakıyor. Kendi ırkına sırtını döndüğü günden beri Meclis'in Budayıcı'sını bekliyordu. Gökyüzü bir makas gibi açılıyor.", en: "The folded light comes down, and {npc:thessar} comes down it alone. Then he turns to stand beside you and looks up. Ever since the day he turned his back on his own kind, he's been waiting for the Conclave's Pruner. The sky opens like a pair of shears." }
             kosul: { bayrak: "ihanet_thessar", bayrak_yok: "thessar_ihanete_hazir" }
@@ -2630,7 +2630,7 @@ olaylar:
       - id: "thessar_son_duello_ezme"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "Bırakıyorsun. Hepsini. Pencerendeki sayı bir sayı olmaktan çıkıyor; Liman'daki her pencere aynı anda beyaza dönüyor, körfezin üstündeki gemilerin satırları titriyor.", en: "You let go. All of it. The number in your window stops being a number. Every window on the Waterfront goes white at once, and the lines of the ships over the bay start to shake." }
+          - { tr: "Bırakıyorsun. Hepsini. Pencerendeki sayı bir sayı olmaktan çıkıyor; {yer:kiyikent_liman|de}ki her pencere aynı anda beyaza dönüyor, körfezin üstündeki gemilerin satırları titriyor.", en: "You let go. All of it. The number in your window stops being a number. Every window on {yer:kiyikent_liman} goes white at once, and the lines of the ships over the bay start to shake." }
           - { tr: "{npc:thessar} kalemini kaldırmıyor. Kaldıramıyor. Bir süre bakıyor, sonra yavaşça, çok yavaşça diz çöküyor; otuz dokuz dünyada hiç yapmadığı bir şeyi yapıyor. \"Hesap kapanmadı,\" diyor. \"Ben kapattım. Bu farklı.\"", en: "{npc:thessar} doesn't raise his stylus. He can't. He stares for a while, then slowly, very slowly, goes down on one knee, doing something he never did on thirty-nine worlds. \"The account did not close,\" he says. \"I closed it. That is different.\"" }
         secenekler:
           - id: "kaldir"
@@ -2656,13 +2656,13 @@ olaylar:
               - itibar: { lonca: 8, kadimler: -20 }
               - iliski: { thessar: { korku: 20, saygi: 10 } }
               - xp_seviye: 250
-            kronik: { tr: "Kadim elçisini Liman'ın taşlarında diz çökmüş bıraktın; filosuna dönen elçi Meclis'e tek bir satır yazdı: \"Bu dünya sayılamaz.\"", en: "You left the Ancient envoy kneeling on the Waterfront stones. When he got back to his fleet, he wrote the Conclave a single line: \"This world cannot be counted.\"" }
+            kronik: { tr: "Kadim elçisini {yer:kiyikent_liman|in} taşlarında diz çökmüş bıraktın; filosuna dönen elçi Meclis'e tek bir satır yazdı: \"Bu dünya sayılamaz.\"", en: "You left the Ancient envoy kneeling on {yer:kiyikent_liman} stones. When he got back to his fleet, he wrote the Conclave a single line: \"This world cannot be counted.\"" }
             sonraki: "@akis"
 
       - id: "thessar_son_duello_budayici_zafer"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "Budayıcı'nın tek gözü sonunda kapanıyor. Makas kolları bir daha açılmamak üzere kapanıyor; dev gövde Liman'ın taşlarına bir ağaç gibi devriliyor ve denize kayıyor.", en: "The Pruner's single eye finally closes. Its shear-arms snap shut for the last time, and the huge body topples onto the Waterfront stones like a tree and slides into the sea." }
+          - { tr: "Budayıcı'nın tek gözü sonunda kapanıyor. Makas kolları bir daha açılmamak üzere kapanıyor; dev gövde {yer:kiyikent_liman|in} taşlarına bir ağaç gibi devriliyor ve denize kayıyor.", en: "The Pruner's single eye finally closes. Its shear-arms snap shut for the last time, and the huge body topples onto {yer:kiyikent_liman} stones like a tree and slides into the sea." }
           - { tr: "Gökyüzündeki gemilerin hepsi aynı anda titriyor. Pencerende yazılmamış bir satır: [Meclis: bir koltuk boş.]", en: "Every ship in the sky shudders at once. An unwritten line appears in your window: [Conclave: one seat vacant.]" }
           - { tr: "{npc:thessar} denize, Budayıcı'nın battığı yere bakıyor. \"Defter'de ilk kez boş bir satır var,\" diyor. \"Ne bir çentik, ne bir toplam. Hiçbir şey.\" Sonra sana dönüyor ve kelimeyi söylüyor, bin yılda dördüncü kez: \"Thael.\"", en: "{npc:thessar} looks at the sea, at the spot where the Pruner went under. \"For the first time, there is an empty line in the Ledger,\" he says. \"No notch. No total. Nothing.\" Then he turns to you and says the word, for the fourth time in a thousand years: \"Thael.\"" }
         bildirimler:
@@ -2726,7 +2726,7 @@ olaylar:
         yer: "kiyikent_liman"
         paragraflar:
           - { tr: "Bir adım geri çekiliyorsun. Bu kadar. {npc:thessar} başını çevirip sana bakıyor; ıslak arduvaz gözleri bir kez kırpılıyor.", en: "You take one step back. That's all. {npc:thessar} turns his head to look at you, and those wet-slate eyes blink once." }
-          - { tr: "Makasın iki ağzı kapanıyor. Ses yok. Elçinin gövdesi Liman'ın taşlarına sessizce, bir sayfa gibi düşüyor. Budayıcı tek gözünü sana çeviriyor, uzun uzun bakıyor ve sonra başını eğiyor: üç derece.", en: "The shears close. No sound. The Envoy's body falls to the Waterfront stones quietly, like a page. The Pruner turns its single eye on you, stares a long time, then tips its head. Three degrees." }
+          - { tr: "Makasın iki ağzı kapanıyor. Ses yok. Elçinin gövdesi {yer:kiyikent_liman|in} taşlarına sessizce, bir sayfa gibi düşüyor. Budayıcı tek gözünü sana çeviriyor, uzun uzun bakıyor ve sonra başını eğiyor: üç derece.", en: "The shears close. No sound. The Envoy's body falls to {yer:kiyikent_liman} stones quietly, like a page. The Pruner turns its single eye on you, stares a long time, then tips its head. Three degrees." }
           - { tr: "Pencerende altın bir satır: [Meclis: sadakat kaydedildi.] Gökyüzündeki makas kapanıyor.", en: "A gold line in your window: [Conclave: loyalty entered.] The shears in the sky close." }
         secenekler:
           - id: "devam"
@@ -2793,7 +2793,7 @@ olaylar:
       - id: "thessar_son_duello_elci_zafer"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "Kalemin ucu kırık; mürekkep bitmiş. {npc:thessar} Liman'ın taşlarında, otuz dokuz dünyanın çentikleri derisinde sönmüş hâlde yatıyor. Kırkıncının yerindeki çerçeve hâlâ boş.", en: "The stylus nib is broken, the ink run dry. {npc:thessar} lies on the Waterfront stones, the notches of thirty-nine worlds gone dark on his skin. The frame where the fortieth should go is still empty." }
+          - { tr: "Kalemin ucu kırık; mürekkep bitmiş. {npc:thessar} {yer:kiyikent_liman|in} taşlarında, otuz dokuz dünyanın çentikleri derisinde sönmüş hâlde yatıyor. Kırkıncının yerindeki çerçeve hâlâ boş.", en: "The stylus nib is broken, the ink run dry. {npc:thessar} lies on {yer:kiyikent_liman} stones, the notches of thirty-nine worlds gone dark on his skin. The frame where the fortieth should go is still empty." }
           - { tr: "\"Hesap kapanmadı,\" diyor, iki sesi artık tek. \"Bu bir ilk. Kayda geçir; benim yerime.\"", en: "\"The account did not close,\" he says, his two voices one voice now. \"That is a first. Enter it. On my behalf.\"" }
           - metin: { tr: "\"Beni ihbar ettiğin gece,\" diye ekliyor, \"bunun böyle biteceğini hesaplamıştım. Hesabım tuttu. Hiç bu kadar üzülmemiştim.\"", en: "\"The night you reported me,\" he adds, \"I calculated it would end this way. My math was correct. I have never been so sorry to be right.\"" }
             kosul: { bayrak: "thessar_ihbar_edildi" }

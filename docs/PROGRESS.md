@@ -1,6 +1,6 @@
 # İlerleme
 
-Şu an: Aşama 7 — Perde 2–4 ve sonlar (devam ediyor)
+Şu an: Aşama 9 — Denge ve yayın hazırlığı (sırada)
 Son commit: 8472fd5 Aşama 6: Perde 1 dikey dilimi
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
@@ -11,7 +11,7 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - Emülatör: `Medium_Phone_API_36.0` (`emulator -avd Medium_Phone_API_36.0`), adb ile kurulum.
 - OneDrive kilidi yüzünden lint ara sıra "dosya kullanılıyor" der: `./gradlew --stop` ve tekrar.
 
-## Aşama 7 — Perde 2–4 ve sonlar  ⏳
+## Aşama 7 — Perde 2–4 ve sonlar  ✅ (2026-11-06)
 Plan:
 - [x] Motor: ölçekli düşman başvurusu (`id@seviye`: stat/can/saldırı/XP seviyeyle ölçeklenir), `xp_seviye` etkisi (seviyenin XP'sine oranla)
 - [x] Motor: perde geçişi (Perde 1 sonu → Dönüş; içerik partisinde), bölgelerin perde aralığı ve giriş koşulu, Kıyıkent + 3 çok-evren dünyası + Sistem çekirdeği
@@ -20,15 +20,14 @@ Plan:
 - [x] Motor: New Game+ (Döngü sonu; önceki bitirilmiş oyun sayısı `onceki_oyun`), kayıt v4
 - [x] Arayüz: son ekranı + epilog kartları, Kule düğmesi, başlıkta New Game+
 - [x] İçerik sözleşmesi `docs/PERDE2_4.md` (perde yapısı, bölgeler, bayraklar, son koşulları, partiler)
-- [ ] İçerik partileri (paralel): Perde 2 ana yay · fraksiyon zincirleri (5×5) · 8 NPC'nin tam yayları · Perde 2 genel · Perde 3 + çok-evren · Perde 4 + sonlar + epiloglar · Kule + düşmanlar
-- [ ] Testler: her son en az bir başsız stratejiyle ulaşılır; 365 günlük başsız oynanış çıkmazsız; Döngü → NG+
-- [ ] Bağımsız içerik ve kod incelemesi, düzeltmeler, check.sh, commit
+- [x] İçerik partileri (paralel): Perde 2 ana yay · fraksiyon zincirleri (5×5) · 8 NPC'nin tam yayları · Perde 2 genel · Perde 3 + çok-evren · Perde 4 + sonlar + epiloglar · Kule + düşmanlar
+- [x] Testler: her son en az bir başsız stratejiyle ulaşılır; 365 günlük başsız oynanış çıkmazsız; Döngü → NG+
+- [x] Bağımsız içerik ve kod incelemesi, düzeltmeler, check.sh, commit
 Notlar:
-- Motor + arayüz altyapısı tamam. Sözleşme yazıldı; 15 içerik partisi (A, B1, B2, C, D, E, F, G, H, I, J, K1, K2, L1, L2) paralel yazıyor:
-  dosyaları `events/5x–8x_*.yaml`, `flags|enemies|titles|items|knowledge/<aynı ön ek>.yaml`, `endings.yaml`, `tower.yaml`, `awakenings/72_kademeler.yaml`.
-  Oturum yarıda kalırsa: `git status` ile yazılanları gör, `validateContent` çalıştır, eksik partiyi PERDE2_4.md'deki tanımıyla yeniden başlat.
-- Entegrasyon yapılacaklar: (1) Parti I `gecit_karar` seçeneklerine `aras_cok_evren_kapisi` tohumunu geri ekle (`npc_hayatta: aras_kurt`) — F bitince; (2) Parti I'nin 5 zar kontrolü zorluğu 40 (Perde 3 statlarında hep geçer): sınır 5000'e çıkarıldı, ölçeğe göre yeniden ayarla; (3) `elif_baskan`, `kaya_general` B1/B2 tarafından tanımlanmalı; (4) `budayiciyi_budayan` çakışması çözüldü; (5) `kod_kirici` son koşuluna `npc_hayatta: yanki` ekle (silinmiş Yankı'yla Kod Kırıcı olmasın); (6) seed-only kapanış olayları (`mert_son_log` vb.) tohum kuralından muaf mı karar ver; (7) `deniz_yukselenlerden_dondu` C/F çift tanımı.
-- Testler hazır: `Perde2_4Test` (bütçe, kurallar, 365 günlük oynanış, her sona strateji), `Asama7MotorTest`; Perde1Test Perde 1 sonunda durur.
+- 165 motor testi, check.sh geçiyor. 252 olay toplam (Perde 2–4: ~190), 15 paralel içerik partisi + düzeltme ajanları. DECISIONS #105–115.
+- Her son en az bir strateji profiliyle ulaşılıyor (`Perde2_4Test`); 12 rastgele 365 günlük oynanış çıkmazsız biter; Perde 2–4 olaylarının ~%97'sine ulaşılır.
+- Bağımsız kod incelemesi (8 bulgu) ve içerik incelemesi (2 yüksek, 9 orta, 10+ düşük) düzeltildi.
+- Bilinen eksik / Aşama 9: rastgele oynanışta Yalnız Avcı sık (12'de ~6; hedef ≤ %40), son günlerde seviye patlaması (bitişte Sv. 1000–1900), ara sıra ölüm döngüsü (Normal modda kayıt noktasıyla aşılıyor); `TurkishSuffix` bileşik yer adlarında (Kule Dibi'nde) yanlış ek verdiği için 35 yerde düz yazım kaldı; D+ sınıf evrimleri genel evrim (DECISIONS #26); emülatörde Perde 2–4 elle oynanmadı.
 
 ## Aşama 6 — Dikey dilim: Perde 1 içeriği  ✅ (2026-11-06)
 - [x] Perde 1 tasarım belgesi `docs/PERDE1.md` (güç döngüsü, dünya durumu, olay listesi, partiler)

@@ -105,10 +105,18 @@ arketipler:
 epilog:
   npc:
     deniz_arman:
+      - kosul: { bayrak: "deniz_oyuncu_oldurdu", son: "dongu" }
+        metin: { tr: "Bu döngüde {npc:deniz_arman|i} kendi elinle öldürdün. Bir sonrakinde iskelede yine yanındaydı, simidini martılarla bölüşerek, hiçbir şeyden habersiz. Ona uzun süre bakamadın. Sonra baktın ve bu kez elini hiç bırakmadın.", en: "In this loop, you killed {npc:deniz_arman} with your own hands. In the next one, {zamir:deniz_arman|o} {zamir:deniz_arman|was} next to you at the terminal again, splitting a pretzel with the gulls, knowing nothing. For a long time you couldn't look at {zamir:deniz_arman|onu}. Then you did, and this time you never let go of {zamir:deniz_arman|onun} hand." }
+      - kosul: { bayrak: "deniz_ocakta" }
+        metin: { tr: "{npc:deniz_arman|i} kendi elinle Ocak'a ittin. Yükselenler o geceyi son ipin kesildiği gece diye anıyor; sen hiç anmıyorsun. Simit satan her tezgâhın önünden yolunu değiştirerek geçiyorsun ve vapur düdüğünü duyduğun her akşam biraz daha az uyuyorsun.", en: "You pushed {npc:deniz_arman} into the Hearth with your own hands. The Ascended remember it as the night the last rope was cut. You never bring it up at all. You cross the street every time you pass a pretzel cart, and every evening the ferry horn sounds, you sleep a little less." }
+      - kosul: { bayrak: "deniz_acisi_bitirildi" }
+        metin: { tr: "İhanet gecesi {npc:deniz_arman|in} acısına {yer:tepe|de} kendi elinle son verdin. Bunun merhamet mi yoksa başka bir şey mi olduğunu kimseye sormadın; sorsaydın, sana dürüstçe cevap verecek tek kişi oydu.", en: "On the night of the betrayal, you ended {npc:deniz_arman|pos} pain up in {yer:tepe} with your own hands. You never asked anyone whether that was mercy or something else. If you had, the only one who'd have told you the truth was {npc:deniz_arman}." }
+      - kosul: { bayrak: "deniz_oyuncu_oldurdu" }
+        metin: { tr: "En eski arkadaşını kendi elinle öldürdün. O günden sonra kimse sana {npc:deniz_arman|in} adını anmadı ve sen de anmadın; ama kalkanı hâlâ bir yerde, sen onu hiç aramasan da, seni bekliyor.", en: "You killed your oldest friend with your own hands. After that, nobody ever said {npc:deniz_arman|pos} name to you, and you never said it either. But that shield is still out there somewhere, waiting for you, even though you never go looking for it." }
       - kosul: { npc_olu: "deniz_arman", son: "dongu" }
-        metin: { tr: "Bu döngüde {npc:deniz_arman|i} kaybettin. Bir sonrakinde vapurda yine yanında oturuyordu, simidini martılarla bölüşerek; bu kez elini bırakmamaya yemin ettin.", en: "You lost {npc:deniz_arman} in this loop. In the next one, {zamir:deniz_arman|o} {zamir:deniz_arman|was} sitting next to you on the ferry again, splitting a pretzel with the gulls, and this time you swore you wouldn't let go of {zamir:deniz_arman|onun} hand." }
+        metin: { tr: "Bu döngüde {npc:deniz_arman|i} kaybettin. Bir sonrakinde iskelede yine yanındaydı, simidini martılarla bölüşerek; bu kez elini bırakmamaya yemin ettin.", en: "You lost {npc:deniz_arman} in this loop. In the next one, {zamir:deniz_arman|o} {zamir:deniz_arman|was} next to you at the terminal again, splitting a pretzel with the gulls, and this time you swore you wouldn't let go of {zamir:deniz_arman|onun} hand." }
       - kosul: { son: "dongu" }
-        metin: { tr: "{npc:deniz_arman} yeni döngüde yine vapurdaydı, yine yanındaydı ve hiçbir şey hatırlamıyordu. Sen her şeyi hatırlıyordun; bu yüzden ilk kez sen onun önüne geçtin.", en: "In the new loop, {npc:deniz_arman} was on the ferry again, next to you again, and remembered nothing. You remembered everything, so for the first time, you were the one who stepped in front." }
+        metin: { tr: "{npc:deniz_arman} yeni döngüde yine iskeledeydi, yine yanındaydı ve hiçbir şey hatırlamıyordu. Sen her şeyi hatırlıyordun; bu yüzden ilk kez sen onun önüne geçtin.", en: "In the new loop, {npc:deniz_arman} was at the terminal again, next to you again, and remembered nothing. You remembered everything, so for the first time, you were the one who stepped in front." }
       - kosul: { npc_olu: "deniz_arman", bayrak: "deniz_hatti_tuttu" }
         metin: { tr: "{npc:deniz_arman} Öğretici'nin çıkışında bir hattı tuttu ve o hat dayandı. Kapı'dan geçen herkes ona bir gün borçluydu, adını bilmeden; sen ise her gününü.", en: "{npc:deniz_arman} held a line at the tutorial's exit, and the line held. Everyone who made it through the Gate owed {zamir:deniz_arman|onu} a day without ever learning {zamir:deniz_arman|onun} name. You owed {zamir:deniz_arman|onu} every one of yours." }
       - kosul: { npc_olu: "deniz_arman", npc_fraksiyon: { deniz_arman: "yukselenler" } }
@@ -318,6 +326,8 @@ epilog:
         metin: { tr: "{npc:thessar} kendi ırkına ihanet ettikten sonra insanlığın yanında savaşarak öldü. Kadim kayıtlarından adı silindi; {yer:kiyikent} bir sokağa onun adını verdi.", en: "{npc:thessar} died fighting on humanity's side after he betrayed his own kind. The Ancients erased his name from their records. {yer:kiyikent} named a street after him." }
       - kosul: { npc_olu: "thessar" }
         metin: { tr: "{npc:thessar} son düelloda düştü. Raporunun son satırını yazmaya fırsatı olmadı; Meclis o satırı hâlâ bekliyor.", en: "{npc:thessar} fell in the final duel. He never got to write the last line of his report. The Conclave is still waiting for it." }
+      - kosul: { son: "vassal", bayrak: "ihanet_thessar" }
+        metin: { tr: "{npc:thessar} Meclis'in arkasından yazdığı antlaşmayla Dünya'nın efendisi oldu; Kadimler'in değil, kendi adına. Otuz dokuz dünyanın defterini tutmuş eller ilk kez sahip olduğu bir yerin haritasını çiziyor. Meclis onu hâlâ hain diye anıyor; o ise raporlarını artık kimseye göndermiyor.", en: "With the treaty he wrote behind the Conclave's back, {npc:thessar} became Earth's overlord, in his own name, not the Ancients'. The hands that kept the books on thirty-nine worlds are drawing a map of a place they own for the first time. The Conclave still calls him a traitor. He doesn't send his reports to anyone anymore." }
       - kosul: { son: "vassal" }
         metin: { tr: "{npc:thessar} Dünya'nın valisi oldu ve bin dünya görmüş gözleriyle ilk kez bir yere yerleşti. Senin hakkındaki raporunda tek bir sıfat kullandı; Meclis onu okuyunca toplantıyı erteledi.", en: "{npc:thessar} became governor of Earth, and for the first time those eyes that had seen a thousand worlds settled in one place. His report on you used a single adjective. When the Conclave read it, they adjourned." }
       - kosul: { bayrak: "ihanet_thessar" }
@@ -329,7 +339,7 @@ epilog:
       - kosul: { bayrak: "kadimler_yenildi" }
         metin: { tr: "{npc:thessar} yenik filosuyla evine döndü ve Meclis'e raporunu sundu. Rapor tek kelimeden ibaretti: senin adın.", en: "{npc:thessar} went home with his beaten fleet and delivered his report to the Conclave. It was one word long: your name." }
       - kosul: { son: "hasat" }
-        metin: { tr: "{npc:thessar} hasadı yönetti; bin dünyada yaptığı gibi kibar ve eksiksiz. Yalnızca bir kez durdu: senin pencerenin arşivlendiği satırda.", en: "{npc:thessar} oversaw the harvest, polite and thorough, the way he had on a thousand worlds. He stopped only once: at the line where your window was archived." }
+        metin: { tr: "{npc:thessar} hasadı yönetti; otuz dokuz dünyada yaptığı gibi kibar ve eksiksiz. Yalnızca bir kez durdu: senin pencerenin arşivlendiği satırda.", en: "{npc:thessar} oversaw the harvest, polite and thorough, the way he had on thirty-nine worlds. He stopped only once: at the line where your window was archived." }
       - metin: { tr: "{npc:thessar} Kadimler'in elçisi olarak kaldı ve Dünya hakkındaki raporunu hiç bitiremedi. Her taslakta aynı yerde duruyordu: anomalinin adında.", en: "{npc:thessar} stayed on as the Ancients' envoy and never managed to finish his report on Earth. Every draft stopped in the same place: the anomaly's name." }
 
   fraksiyon:
@@ -420,6 +430,8 @@ epilog:
     kadimler:
       - kosul: { son: "dongu" }
         metin: { tr: "Kadimler bu döngüde de bekledi; bir sonrakinde de bekleyecekler. Ama artık, bilmeseler de, karşılarındaki anomali onları tanıyor.", en: "The Ancients waited in this loop, and they'll wait in the next one too. Only now, whether they know it or not, the anomaly on the other side knows them." }
+      - kosul: { son: "vassal", bayrak: "ihanet_thessar", npc_hayatta: "thessar" }
+        metin: { tr: "Kadimler Dünya'yı ne hasat edebildi ne sahiplenebildi; {npc:thessar} onu Meclis'in elinden kendi adına aldı. Gökyüzündeki sancak bir ırkın değil, tek bir hainin sancağı ve Meclis bu ihaneti hâlâ, her toplantıda, yeniden tartışıyor.", en: "The Ancients never got to harvest Earth, or to own it. {npc:thessar} took it out of the Conclave's hands in his own name. The banner in the sky belongs to a single traitor, not a race, and the Conclave still argues over that betrayal at every session." }
       - kosul: { son: "vassal" }
         metin: { tr: "Kadimler Dünya'yı hasat etmedi; onun yerine sahiplendi. Gökyüzündeki sancakları hiç inmiyor ve her yıl aynı gün haraç gemileri körfeze iniyor.", en: "The Ancients didn't harvest Earth. They took ownership instead. Their banners never come down from the sky, and every year on the same day, the tribute ships come down into the bay." }
       - kosul: { son: "yukselis" }
