@@ -7,6 +7,14 @@ import com.yukselis.engine.combat.CombatSpec
 import com.yukselis.engine.combat.EnemyAttack
 import com.yukselis.engine.combat.EnemyDef
 import com.yukselis.engine.core.MoralAxis
+import com.yukselis.engine.world.ChoiceKind
+import com.yukselis.engine.world.DiceCheck
+import com.yukselis.engine.world.EventDef
+import com.yukselis.engine.world.FactionDef
+import com.yukselis.engine.world.FeatDef
+import com.yukselis.engine.world.QuestDef
+import com.yukselis.engine.world.QuestStatus
+import com.yukselis.engine.world.RegionDef
 import com.yukselis.engine.i18n.LText
 import com.yukselis.engine.i18n.NameEntry
 import com.yukselis.engine.i18n.NameRegistry
@@ -70,12 +78,24 @@ object ContentParser {
     const val DAILY = "daily.yaml"
     const val ENEMIES = "enemies.yaml"
     const val AWAKENINGS = "awakenings.yaml"
+    const val REGIONS = "regions.yaml"
+    const val FACTIONS = "factions.yaml"
+    const val FEATS = "feats.yaml"
+    const val QUESTS = "quests.yaml"
+    const val FLAGS = "flags.yaml"
 
     data class StoryFile(val start: String?, val scenes: List<Scene>)
 
-    fun load(storyFiles: List<String>, namesJson: String, titlesJson: String, files: Map<String, String> = emptyMap()): Content {
+    fun load(
+        storyFiles: List<String>,
+        namesJson: String,
+        titlesJson: String,
+        files: Map<String, String> = emptyMap(),
+        eventFiles: List<String> = emptyList(),
+    ): Content {
         val stories = storyFiles.map { parseStory(it) }
-        val scenes = stories.flatMap { it.scenes }
+        val eventPacks = eventFiles.map { parseEvents(it) }
+        val scenes = stories.flatMap { it.scenes } + eventPacks.flatMap { it.second }
         val duplicates = scenes.groupBy { it.id }.filterValues { it.size > 1 }.keys
         if (duplicates.isNotEmpty()) throw ContentFormatException("Aynı kimliğe sahip sahneler: $duplicates")
         val start = stories.mapNotNull { it.start }.distinct().singleOrNull()
@@ -105,11 +125,80 @@ object ContentParser {
             dailyTemplates = obj(DAILY)?.objectOf("gunluk")?.map { (id, v) -> parseDaily(id, v.jsonObject) }?.associateBy { it.id } ?: emptyMap(),
             enemies = obj(ENEMIES)?.objectOf("dusmanlar")?.map { (id, v) -> parseEnemy(id, v.jsonObject) }?.associateBy { it.id } ?: emptyMap(),
             awakenings = obj(AWAKENINGS)?.objectOf("uyanislar")?.map { (id, v) -> parseAwakening(id, v.jsonObject) } ?: emptyList(),
+            events = eventPacks.flatMap { it.first }.also { list ->
+                val dup = list.groupBy { it.id }.filterValues { it.size > 1 }.keys
+                if (dup.isNotEmpty()) throw ContentFormatException("Aynı kimliğe sahip olaylar: $dup")
+            }.associateBy { it.id },
+            regions = obj(REGIONS)?.objectOf("bolgeler")?.map { (id, v) -> parseRegion(id, v.jsonObject) }?.associateBy { it.id } ?: emptyMap(),
+            startRegion = obj(REGIONS)?.string("baslangic"),
+            factions = obj(FACTIONS)?.objectOf("fraksiyonlar")?.map { (id, v) ->
+                FactionDef(id, v.jsonObject["iliski"]?.jsonObject?.map { (k, x) -> k to x.int("$id.iliski.$k") }?.toMap() ?: emptyMap())
+            }?.associateBy { it.id } ?: emptyMap(),
+            feats = obj(FEATS)?.objectOf("basarilar")?.map { (id, v) -> parseFeat(id, v.jsonObject) }?.associateBy { it.id } ?: emptyMap(),
+            quests = obj(QUESTS)?.objectOf("gorevler")?.map { (id, v) ->
+                val o = v.jsonObject
+                QuestDef(id, ltext(o["ad"], "$id.ad"), ltext(o["aciklama"], "$id.aciklama"))
+            }?.associateBy { it.id } ?: emptyMap(),
+            flags = obj(FLAGS)?.objectOf("bayraklar")?.map { (id, v) -> id to (v.jsonPrimitive.contentOrNull ?: "") }?.toMap() ?: emptyMap(),
             texts = SystemTexts(obj(SYSTEM)?.map { (k, v) -> k to ltext(v, "system.$k") }?.toMap() ?: emptyMap()),
         )
     }
 
     private fun parse(text: String, name: String): JsonObject = YamlTree.parseObject(text, name)
+
+    /** Olay dosyası: `olaylar` listesi; her olay kendi `sahneler`ini taşır. */
+    fun parseEvents(text: String): Pair<List<EventDef>, List<Scene>> {
+        val root = YamlTree.parseObject(text, "olaylar")
+        val events = mutableListOf<EventDef>()
+        val scenes = mutableListOf<Scene>()
+        root.array("olaylar").forEach { e ->
+            val o = e.jsonObject
+            val id = o.string("id") ?: throw ContentFormatException("olayda 'id' eksik")
+            val own = o.array("sahneler").map { parseScene(it.jsonObject) }
+            scenes += own
+            val gun = o["gun"] as? JsonObject
+            events += EventDef(
+                id = id,
+                acts = o.ints("perde"),
+                regions = o.strings("bolge"),
+                dayMin = gun?.int("min") ?: 0,
+                dayMax = gun?.int("max") ?: Int.MAX_VALUE,
+                condition = o["kosul"]?.let { condition(it.jsonObject) },
+                weight = o.double("agirlik") ?: 1.0,
+                tags = o.strings("etiketler"),
+                tension = o.int("gerilim") ?: 2,
+                repeatable = o.bool("tekrar"),
+                npcs = o.strings("npc"),
+                mainArcDay = (o["ana_yay"] as? JsonObject)?.int("gun"),
+                card = ltext(o["kart"], "$id.kart"),
+                important = o.bool("onemli"),
+                seedOnly = o.bool("yalniz_tohum"),
+                entry = o.string("sahne") ?: own.firstOrNull()?.id ?: throw ContentFormatException("olay $id: 'sahne' eksik"),
+            )
+        }
+        return events to scenes
+    }
+
+    private fun parseRegion(id: String, o: JsonObject) = RegionDef(
+        id = id,
+        act = o.int("perde") ?: 1,
+        baseDanger = o.int("tehlike") ?: 0,
+        control = o.string("kontrol") ?: "canavar",
+        enemies = o.strings("dusmanlar"),
+        neighbors = o.strings("komsu"),
+        gateChance = o.double("kapi_sansi") ?: 0.0,
+        gateEnemies = o.strings("kapi_dusmanlari"),
+        forage = o.strings("toplama"),
+    )
+
+    private fun parseFeat(id: String, o: JsonObject) = FeatDef(
+        id = id,
+        name = ltext(o["ad"], "$id.ad"),
+        reactions = o["tepkiler"]?.jsonObject?.map { (k, v) -> k to v.int("$id.tepkiler.$k") }?.toMap() ?: emptyMap(),
+        lines = o["satirlar"]?.jsonObject?.map { (k, v) -> k to ltext(v, "$id.satirlar.$k") }?.toMap() ?: emptyMap(),
+        titleAt = (o["unvan"] as? JsonObject)?.int("esik"),
+        title = (o["unvan"] as? JsonObject)?.string("id"),
+    )
 
     fun parseStory(text: String): StoryFile {
         val root = YamlTree.parseObject(text, "hikaye")
@@ -292,6 +381,16 @@ object ContentParser {
             showWhen = o["goster"]?.let { condition(it.jsonObject) },
             effects = o.array("etkiler").flatMap { effects(it.jsonObject, "$sceneId.$id") },
             next = o.string("sonraki"),
+            kind = ChoiceKind.fromKey(o.string("tur")),
+            check = (o["zar"] as? JsonObject)?.let { z ->
+                DiceCheck(
+                    stat = stat(z.string("stat") ?: throw ContentFormatException("$sceneId.$id: zar.stat eksik")),
+                    difficulty = z.int("zorluk") ?: throw ContentFormatException("$sceneId.$id: zar.zorluk eksik"),
+                    oneShot = z.bool("tek"),
+                    failNext = z.string("basarisiz"),
+                    failEffects = z.array("basarisiz_etkiler").flatMap { effects(it.jsonObject, "$sceneId.$id.basarisiz") },
+                )
+            },
         )
     }
 
@@ -312,6 +411,18 @@ object ContentParser {
                 "sinif" -> listOf(Condition.HasClass(value.str(key)))
                 "esya" -> value.jsonObject.map { (k, v) -> Condition.HasItem(k, v.int(k)) }
                 "itibar_min" -> value.jsonObject.map { (k, v) -> Condition.ReputationAtLeast(k, v.int(k)) }
+                "itibar_max" -> value.jsonObject.map { (k, v) -> Condition.ReputationAtMost(k, v.int(k)) }
+                "dikkat_min" -> listOf(Condition.AttentionAtLeast(value.int(key)))
+                "dikkat_max" -> listOf(Condition.AttentionAtMost(value.int(key)))
+                "yozlasma_min" -> listOf(Condition.CorruptionAtLeast(value.int(key)))
+                "gizli_fark_min" -> listOf(Condition.HiddenGapAtLeast(value.int(key)))
+                "bolge" -> listOf(Condition.InRegion(value.str(key)))
+                "perde" -> listOf(Condition.InAct(value.int(key)))
+                "gun_min" -> listOf(Condition.DayAtLeast(value.int(key)))
+                "gun_max" -> listOf(Condition.DayAtMost(value.int(key)))
+                "gorev" -> value.jsonObject.map { (k, v) ->
+                    Condition.QuestIs(k, QuestStatus.fromKey(v.str(k)) ?: throw ContentFormatException("görev $k: durum basla/tamam/basarisiz olmalı"))
+                }
                 else -> throw ContentFormatException("Bilinmeyen koşul: $key")
             }
         }
@@ -341,6 +452,28 @@ object ContentParser {
             "can" -> listOf(Effect.AddHp(value.int(key)))
             "arayuz" -> listOf(Effect.UnlockTab(value.str(key)))
             "savas" -> listOf(Effect.StartCombat(combatSpec(value.jsonObject, where)))
+            "tohum" -> listOf(
+                (value.jsonObject).let { t ->
+                    val delay = t["gecikme"] as? JsonObject
+                    Effect.PlantSeed(
+                        eventId = t.string("olay") ?: throw ContentFormatException("$where: tohum.olay eksik"),
+                        minDelay = delay?.int("min") ?: t.int("gecikme") ?: 1,
+                        maxDelay = delay?.int("max") ?: delay?.int("min") ?: t.int("gecikme") ?: 1,
+                        // Koşul ham metin olarak saklanır (kayda girer); vadesinde ayrıştırılır.
+                        condition = t["kosul"]?.let { c -> condition(c.jsonObject); c.toString() },
+                    )
+                },
+            )
+            "dikkat" -> listOf(Effect.ShiftAttention(value.int(key)))
+            "gizle" -> listOf(Effect.ShiftAttention(-value.int(key)))
+            "yozlasma" -> listOf(Effect.ShiftCorruption(value.int(key)))
+            "aciga_vur" -> listOf(Effect.Reveal)
+            "efsane" -> listOf(Effect.Feat(value.str(key)))
+            "gorev" -> value.jsonObject.map { (k, v) ->
+                Effect.SetQuest(k, QuestStatus.fromKey(v.str(k)) ?: throw ContentFormatException("$where: görev $k durumu basla/tamam/basarisiz"))
+            }
+            "bolge" -> listOf(Effect.MoveTo(value.str(key)))
+            "tehlike" -> value.jsonObject.map { (k, v) -> Effect.ShiftDanger(k, v.int(k)) }
             "mana" -> listOf(Effect.AddMp(value.int(key)))
             else -> throw ContentFormatException("$where: bilinmeyen etki '$key'")
         }
@@ -439,7 +572,17 @@ object ContentParser {
 
     private fun JsonObject.bool(key: String): Boolean = (this[key] as? JsonPrimitive)?.booleanOrNull ?: false
 
+    private fun JsonObject.ints(key: String): List<Int> = when (val v = this[key]) {
+        is JsonArray -> v.mapNotNull { it.jsonPrimitive.intOrNull }
+        is JsonPrimitive -> listOfNotNull(v.intOrNull)
+        else -> emptyList()
+    }
+
+    /** Tek değer ya da liste: `bolge: orman` ya da `bolge: [orman, carsi]`. */
     private fun JsonObject.strings(key: String): List<String> =
+        (this[key] as? JsonPrimitive)?.contentOrNull?.let { listOf(it) } ?: stringList(key)
+
+    private fun JsonObject.stringList(key: String): List<String> =
         (this[key] as? JsonArray)?.mapNotNull { it.jsonPrimitive.contentOrNull } ?: emptyList()
 
     private fun JsonObject.objectOf(key: String): JsonObject = this[key]?.jsonObject ?: JsonObject(emptyMap())

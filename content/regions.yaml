@@ -1,0 +1,29 @@
+baslangic: "ogretici_orman"
+bolgeler:
+  ogretici_orman:
+    perde: 1
+    tehlike: 15
+    kontrol: "canavar"
+    dusmanlar: ["kanal_faresi", "igne_tavsan", "pas_kenesi", "sis_tazisi", "diken_domuzu"]
+    komsu: ["harabe_carsi", "kirik_istasyon"]
+    kapi_sansi: 0.25
+    kapi_dusmanlari: ["sis_tazisi", "diken_domuzu", "sis_dokuyucu"]
+    toplama: ["kirmizi_ot", "mavi_yosun", "yabani_mantar", "kaynak_suyu"]
+  harabe_carsi:
+    perde: 1
+    tehlike: 35
+    kontrol: "canavar"
+    dusmanlar: ["fisildayan_karga", "cop_avcisi", "ciglik_yarasasi", "vitrin_mankeni", "kor_kertenkelesi"]
+    komsu: ["ogretici_orman", "kirik_istasyon"]
+    kapi_sansi: 0.3
+    kapi_dusmanlari: ["vitrin_mankeni", "soluk_musteri", "hurdacik"]
+    toplama: ["cam_sise", "kul", "hurda", "kaya_tuzu"]
+  kirik_istasyon:
+    perde: 1
+    tehlike: 55
+    kontrol: "canavar"
+    dusmanlar: ["kablo_yilani", "yosun_sirtli", "yarik_sulugu", "soluk_musteri", "run_kabuklu"]
+    komsu: ["ogretici_orman", "harabe_carsi"]
+    kapi_sansi: 0.35
+    kapi_dusmanlari: ["run_kabuklu", "yarik_sulugu", "kepenk_cenesi"]
+    toplama: ["canli_bakir", "aci_kok", "goz_cicegi"]

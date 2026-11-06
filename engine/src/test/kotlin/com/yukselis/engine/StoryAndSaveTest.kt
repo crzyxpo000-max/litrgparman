@@ -107,12 +107,15 @@ class StoryEngineTest {
 
         s = engine.choose(s, "uyu", Lang.TR).state
         assertEquals(1, s.day)
-        assertTrue(s.ended)
-        val end = engine.view(s, Lang.EN)
-        assertTrue(end.isEnding)
-        assertTrue(end.choices.isEmpty())
-        assertEquals(5, end.history.size)
-        assertEquals("Grab Devon's hand and hold on", end.history.first().chosenLabel)
+        assertEquals("ilk_sabah", s.sceneId)
+        val morning = engine.view(s, Lang.EN)
+        assertEquals(5, morning.history.size)
+        assertEquals("Grab Devon's hand and hold on", morning.history.first().chosenLabel)
+        // Yazılmış giriş dizisi biter, gün akışı (olay havuzu) başlar.
+        s = engine.choose(s, "gune_basla", Lang.TR).state
+        assertEquals(com.yukselis.engine.core.WorldState.HUB, s.sceneId)
+        assertNotNull(engine.view(s, Lang.EN).hub)
+        assertFalse(s.ended)
     }
 
     @Test

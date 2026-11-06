@@ -109,6 +109,13 @@ object Progression {
         return (fraction * 100.0).coerceIn(100.0 / HUMANITY, 100.0)
     }
 
+    /** Gün başına beklenen insan seviyesi (Dikkat hesabı): 1 + 0,4 · gün. */
+    fun expectedLevel(day: Int): Int = 1 + (0.4 * day).toInt()
+
+    /** Gün içi olay/eylem yuvası sayısı: 2–4 (GDD: Gün döngüsü). */
+    const val MIN_SLOTS = 2
+    const val MAX_SLOTS = 4
+
     /** Generic evolution (sınıfın o kademe için tanımlı evrimi yoksa) her stata verilen bonus. */
     const val GENERIC_EVOLUTION_BONUS = 1
 }

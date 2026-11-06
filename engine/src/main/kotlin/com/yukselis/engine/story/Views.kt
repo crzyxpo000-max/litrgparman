@@ -23,7 +23,49 @@ data class ChoiceView(
     /** "[ALG 6]" gibi koşul etiketi; koşulsuz seçeneklerde null. */
     val requirementTag: String?,
     val enabled: Boolean,
+    /** OP MC: [Gizle] / [Açığa vur] öneki. */
+    val kindTag: String? = null,
+    val kind: com.yukselis.engine.world.ChoiceKind = com.yukselis.engine.world.ChoiceKind.NORMAL,
+    /** Zar kontrolü: başarı olasılığı (yüzde); kontrol yoksa null. */
+    val odds: Int? = null,
+    /** Tek seferlik (kırmızı) kontrol; başarısızsa kilitlenir. */
+    val oneShot: Boolean = false,
 )
+
+data class CardView(val id: String, val title: String, val tension: Int)
+
+data class GateView(val uid: Int, val grade: String, val enemies: String, val daysLeft: Int)
+
+data class RegionLinkView(val id: String, val name: String)
+
+/** Gün akışı (olay dışı): yuvalar, fırsat eli, serbest eylemler, kapılar, yolculuk, kamp. */
+data class HubView(
+    val day: Int,
+    val slotsLeft: Int,
+    val slotsTotal: Int,
+    val regionName: String,
+    val danger: Int,
+    val cards: List<CardView>,
+    val gates: List<GateView>,
+    val travel: List<RegionLinkView>,
+    val mustCamp: Boolean,
+)
+
+data class RegionView(
+    val id: String,
+    val name: String,
+    val danger: Int,
+    val control: String,
+    val gates: List<GateView>,
+    val current: Boolean,
+    val neighbor: Boolean,
+)
+
+data class QuestView(val name: String, val description: String, val status: com.yukselis.engine.world.QuestStatus)
+
+data class LegendView(val name: String, val count: Int)
+
+data class JournalView(val quests: List<QuestView>, val legend: List<LegendView>, val pendingSeeds: Int)
 
 data class PassageView(
     val sceneId: String,
@@ -46,6 +88,8 @@ data class SceneView(
     val isEnding: Boolean,
     /** Bekleyen Sistem istemi; varken hikaye seçimi yapılamaz, arayüz tam ekran kart gösterir. */
     val prompt: PromptView? = null,
+    /** Gün akışındayken (olay dışı) dolu. */
+    val hub: HubView? = null,
 )
 
 /** `echo`: stat sezgisi değil, Yankı'nın sesi (öneksiz satır). */
@@ -97,6 +141,10 @@ data class StatusView(
     val humanityTopPercent: Double,
     /** Sistem'in verdiği sekmeler (kendini açan arayüz). */
     val tabs: Set<String>,
+    /** OP MC: Anomali Dikkati ve Yozlaşma (0–100), görünen seviye. */
+    val attention: Int = 0,
+    val corruption: Int = 0,
+    val publicLevel: Int = 1,
     val mercy: Int,
     val order: Int,
     val humanity: Int,

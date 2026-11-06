@@ -127,6 +127,7 @@ sahneler:
       - id: "yabanciyi_koru"
         etiket: { tr: "Taş fırlat, fareyi yabancıdan uzaklaştır", en: "Throw a rock and draw the rat away from the stranger" }
         etkiler:
+          - tohum: { olay: "yabanci_minnet", gecikme: { min: 6, max: 12 }, kosul: { bayrak: "yabanci_korundu" } }
           - bayrak: "yabanci_korundu"
           - xp: 60
           - ahlak: { merhamet: 10 }
@@ -135,6 +136,7 @@ sahneler:
       - id: "kac"
         etiket: { tr: "Yabancıyı bırak ve koş", en: "Leave the stranger and run" }
         etkiler:
+          - tohum: { olay: "yabanci_geri_donus", gecikme: { min: 12, max: 20 }, kosul: { bayrak: "yabanci_birakildi" } }
           - bayrak: "yabanci_birakildi"
           - ahlak: { merhamet: -10 }
           - egilim: { gizlilik: 1 }
@@ -186,7 +188,7 @@ sahneler:
         etkiler:
           - gun: 1
           - ahlak: { insanlik: 2 }
-        sonraki: "demo_son"
+        sonraki: "ilk_sabah"
       - id: "nobet_tut"
         etiket: { tr: "Uyuma. Sabaha kadar nöbet tut", en: "Don't sleep. Keep watch until morning" }
         etkiler:
@@ -194,16 +196,15 @@ sahneler:
           - stat: { wil: 1 }
           - egilim: { menzilli: 1 }
           - ahlak: { duzen: 2 }
-        sonraki: "demo_son"
+        sonraki: "ilk_sabah"
     sezgiler:
       - kosul: { bayrak: "yanki_bagi" }
         metin: { tr: "Ateş çıtırdarken ses yine geliyor, bu kez daha net: \"Yarın da buradayım. Her gün. Başkalarına anlatma.\"", en: "The voice comes back while the fire crackles, clearer this time: \"I'll be here tomorrow. Every day. Don't tell the others.\"" }
-  - id: "demo_son"
+  - id: "ilk_sabah"
     yer: "ogretici_orman"
-    son: true
     paragraflar:
       - { tr: "Sabah olduğunda Sistem yeni bir pencere açıyor: Öğretici Katman'da 29 gün kaldı.", en: "When morning comes, the System opens a new window: 29 days left in the Tutorial Layer." }
-      - { tr: "Yükseliş Protokolü'nün bu sürümdeki demosu burada bitiyor. Seçimlerin kayda geçti; hikaye sonraki aşamalarda buradan devam edecek.", en: "This is where the Ascension Protocol demo for this build ends. Your choices have been recorded; the story picks up from here in later phases." }
+      - { tr: "Çıkış Kapısı'na giden yol uzun. Her gün birkaç saatin var; nasıl harcayacağına sen karar vereceksin.", en: "The road to the Exit Gate is long. Every day you get a few hours, and how you spend them is up to you." }
     bildirimler:
       - tur: "uyari"
         baslik: { tr: "Bir tohum ekildi", en: "A seed has been planted" }
@@ -215,3 +216,9 @@ sahneler:
         satirlar:
           - { tr: "Kurtardığın biri bu iyiliği unutmayacak.", en: "Someone you saved won't forget it." }
         kosul: { bayrak: "yabanci_korundu" }
+    secenekler:
+      - id: "gune_basla"
+        etiket: { tr: "Güne başla", en: "Start the day" }
+        etkiler:
+          - gorev: { ogretici_cikis: "basla" }
+        sonraki: "@akis"

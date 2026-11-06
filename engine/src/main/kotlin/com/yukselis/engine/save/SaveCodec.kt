@@ -9,6 +9,11 @@ import com.yukselis.engine.combat.Stance
 import com.yukselis.engine.combat.StatusInstance
 import com.yukselis.engine.core.DailyQuest
 import com.yukselis.engine.i18n.LText
+import com.yukselis.engine.world.DayState
+import com.yukselis.engine.world.Gate
+import com.yukselis.engine.world.QuestStatus
+import com.yukselis.engine.world.RegionState
+import com.yukselis.engine.world.Seed
 import kotlinx.serialization.json.JsonElement
 import com.yukselis.engine.core.GameMode
 import com.yukselis.engine.core.HistoryEntry
@@ -57,6 +62,8 @@ data class SaveData(val state: WorldState, val savedAtMillis: Long)
  *    "İlk" unvan kaydı, istem kuyruğu, Günlük Görev, dönüş yığını. v1 → v2: `egilim_*`
  *    değişkenleri eğilim vektörüne taşınır ve değişkenlerden silinir.
  *    Aşama 3 (alan ekleme, sürüm aynı): süren savaş, düşman hafızası, İkinci Şans kademeleri, ölüm.
+ *    Aşama 4 (alan ekleme): bölge, bölge durumları, tohumlar, gün durumu, görevler, Dikkat, Yozlaşma,
+ *    görünen seviye, efsane. Eksik alanlar varsayılana düşer; eski kayıtlar açılır.
  */
 object SaveCodec {
     const val VERSION = 2
@@ -130,6 +137,40 @@ object SaveCodec {
         }
         putJsonArray("second") { state.secondChances.sortedBy { it.ordinal }.forEach { add(it.name) } }
         put("dead", state.dead)
+        // ---- Aşama 4 ----
+        state.region?.let { put("region", it) }
+        putJsonObject("regions") {
+            state.regions.toSortedMap().forEach { (id, r) ->
+                putJsonObject(id) {
+                    put("danger", r.danger); put("control", r.control)
+                    putJsonArray("gates") {
+                        r.gates.forEach { g ->
+                            addJsonObject {
+                                put("uid", g.uid); put("grade", g.grade.name); put("open", g.openedDay); put("due", g.deadline)
+                                putJsonArray("enemies") { g.enemies.forEach { add(it) } }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        putJsonArray("seeds") {
+            state.seeds.forEach { sd -> addJsonObject { put("e", sd.eventId); put("d", sd.dueDay); sd.condition?.let { put("c", it) } } }
+        }
+        putJsonObject("dayState") {
+            val d = state.dayState
+            put("left", d.slotsLeft); put("total", d.slotsTotal); put("gate", d.nextGateUid)
+            putJsonArray("hand") { d.hand.forEach { add(it) } }
+            d.currentEvent?.let { put("event", it) }
+            putJsonArray("seen") { d.seen.sorted().forEach { add(it) } }
+            putJsonArray("tension") { d.recentTension.forEach { add(it) } }
+            putJsonArray("tags") { d.recentTags.forEach { add(it) } }
+        }
+        putJsonObject("quests") { state.quests.toSortedMap().forEach { (k, v) -> put(k, v.key) } }
+        put("attention", state.attention)
+        put("corruption", state.corruption)
+        put("publicLevel", state.publicLevel)
+        putIntMap("legend", state.legend)
     }.toString()
 
     private fun encodeLText(t: LText) = buildJsonObject { put("tr", t.tr); put("en", t.en) }
@@ -322,6 +363,46 @@ object SaveCodec {
             }?.toMap() ?: emptyMap(),
             secondChances = o.strings("second").mapNotNull { Grade.fromKey(it) }.toSet(),
             dead = o.bool("dead"),
+            region = o.string("region"),
+            regions = (o["regions"] as? JsonObject)?.mapNotNull { (id, v) ->
+                val r = v as? JsonObject ?: return@mapNotNull null
+                id to RegionState(
+                    id = id,
+                    danger = r.int("danger") ?: 0,
+                    control = r.string("control") ?: "canavar",
+                    gates = (r["gates"] as? JsonArray)?.mapNotNull { x ->
+                        val g = x.jsonObject
+                        Gate(
+                            uid = g.int("uid") ?: return@mapNotNull null,
+                            grade = Grade.fromKey(g.string("grade")) ?: Grade.F,
+                            enemies = g.strings("enemies"),
+                            openedDay = g.int("open") ?: 0,
+                            deadline = g.int("due") ?: 0,
+                        )
+                    } ?: emptyList(),
+                )
+            }?.toMap() ?: emptyMap(),
+            seeds = (o["seeds"] as? JsonArray)?.mapNotNull { x ->
+                val sd = x.jsonObject
+                sd.string("e")?.let { Seed(it, sd.int("d") ?: 0, sd.string("c")) }
+            } ?: emptyList(),
+            dayState = (o["dayState"] as? JsonObject)?.let { d ->
+                DayState(
+                    slotsLeft = d.int("left") ?: 0,
+                    slotsTotal = d.int("total") ?: 0,
+                    hand = d.strings("hand"),
+                    currentEvent = d.string("event"),
+                    seen = d.strings("seen").toSet(),
+                    recentTension = (d["tension"] as? JsonArray)?.mapNotNull { it.jsonPrimitive.intOrNull } ?: emptyList(),
+                    recentTags = d.strings("tags"),
+                    nextGateUid = d.int("gate") ?: 1,
+                )
+            } ?: DayState(),
+            quests = (o["quests"] as? JsonObject)?.mapNotNull { (k, v) -> QuestStatus.fromKey(v.jsonPrimitive.contentOrNull)?.let { k to it } }?.toMap() ?: emptyMap(),
+            attention = o.int("attention") ?: 0,
+            corruption = o.int("corruption") ?: 0,
+            publicLevel = o.int("publicLevel") ?: level,
+            legend = o.intMap("legend"),
             // Sekme kaydı olmayan eski kayıtlarda sahip olunanlara göre açılır.
             unlockedTabs = if (o["tabs"] is JsonArray) {
                 o.strings("tabs").toSet()

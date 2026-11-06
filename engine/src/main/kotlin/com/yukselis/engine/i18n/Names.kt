@@ -13,6 +13,7 @@ data class NameEntry(
     enum class Kind(val tokenKey: String) {
         NPC("npc"),
         PLACE("yer"),
+        FACTION("fraksiyon"),
     }
 }
 
@@ -81,6 +82,6 @@ class TokenResolver(private val names: NameRegistry) {
 
     companion object {
         private const val PLAYER = "oyuncu"
-        val TOKEN = Regex("""\{(npc|yer|oyuncu)(?::([a-z0-9_]+))?((?:\|[a-z]+)*)\}""")
+        val TOKEN = Regex("""\{(npc|yer|fraksiyon|oyuncu)(?::([a-z0-9_]+))?((?:\|[a-z]+)*)\}""")
     }
 }

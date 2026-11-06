@@ -190,9 +190,9 @@ class CombatTest {
     @Test
     fun `yenilgi sahnesi varsa oraya gidilir`() {
         var s = player(1, seed = 8, stat = 3).copy(secondChances = setOf(Grade.F))
-        s = auto(start(s, spec("kemik_tacli_geyik", lose = "demo_son")))
+        s = auto(start(s, spec("kemik_tacli_geyik", lose = "ilk_sabah")))
         assertNull(s.combat)
-        assertEquals("demo_son", s.sceneId)
+        assertEquals("ilk_sabah", s.sceneId)
         assertEquals(1, s.player.hp)
     }
 
@@ -297,8 +297,8 @@ class CombatTest {
 
     @Test
     fun `yazili yenilgi sahnesi ikinci sansi harcamaz`() {
-        val s = auto(start(player(1, seed = 8, stat = 3), spec("kemik_tacli_geyik", lose = "demo_son")))
-        assertEquals("demo_son", s.sceneId)
+        val s = auto(start(player(1, seed = 8, stat = 3), spec("kemik_tacli_geyik", lose = "ilk_sabah")))
+        assertEquals("ilk_sabah", s.sceneId)
         assertTrue(s.secondChances.isEmpty())
     }
 

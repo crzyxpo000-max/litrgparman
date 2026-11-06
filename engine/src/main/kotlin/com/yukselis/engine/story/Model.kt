@@ -107,6 +107,47 @@ sealed interface Condition {
         override fun test(state: WorldState) = (state.reputation[faction] ?: 0) >= value
     }
 
+    data class AttentionAtLeast(val value: Int) : Condition {
+        override fun test(state: WorldState) = state.attention >= value
+    }
+
+    data class AttentionAtMost(val value: Int) : Condition {
+        override fun test(state: WorldState) = state.attention <= value
+    }
+
+    data class CorruptionAtLeast(val value: Int) : Condition {
+        override fun test(state: WorldState) = state.corruption >= value
+    }
+
+    /** Gerçek seviye − görünen seviye ≥ n ("beni hafife aldılar"). */
+    data class HiddenGapAtLeast(val value: Int) : Condition {
+        override fun test(state: WorldState) = state.player.level - state.publicLevel >= value
+    }
+
+    data class InRegion(val region: String) : Condition {
+        override fun test(state: WorldState) = state.region == region
+    }
+
+    data class InAct(val act: Int) : Condition {
+        override fun test(state: WorldState) = state.act == act
+    }
+
+    data class DayAtLeast(val day: Int) : Condition {
+        override fun test(state: WorldState) = state.day >= day
+    }
+
+    data class DayAtMost(val day: Int) : Condition {
+        override fun test(state: WorldState) = state.day <= day
+    }
+
+    data class QuestIs(val quest: String, val status: com.yukselis.engine.world.QuestStatus) : Condition {
+        override fun test(state: WorldState) = state.quests[quest] == status
+    }
+
+    data class ReputationAtMost(val faction: String, val value: Int) : Condition {
+        override fun test(state: WorldState) = (state.reputation[faction] ?: 0) <= value
+    }
+
     data class All(val conditions: List<Condition>) : Condition {
         override fun test(state: WorldState) = conditions.all { it.test(state) }
     }
@@ -135,6 +176,18 @@ sealed interface Effect {
     /** Can/mana değişimi. Savaş dışında can 1'in altına düşmez (savaşta ölüm Aşama 3). */
     data class AddHp(val delta: Int) : Effect
     data class AddMp(val delta: Int) : Effect
+    /** Ertelenmiş sonuç: `min..max` gün sonra, koşul (ham metin) hâlâ doğruysa olay tetiklenir. */
+    data class PlantSeed(val eventId: String, val minDelay: Int, val maxDelay: Int, val condition: String?) : Effect
+    data class ShiftAttention(val delta: Int) : Effect
+    data class ShiftCorruption(val delta: Int) : Effect
+    /** [Açığa vur]: görünen seviye gerçek seviyeye çekilir; aradaki fark kadar Dikkat artar. */
+    data object Reveal : Effect
+    /** Tanıklı başarı: söylenti, fraksiyon tepkileri, eşikte unvan. */
+    data class Feat(val featId: String) : Effect
+    data class SetQuest(val questId: String, val status: com.yukselis.engine.world.QuestStatus) : Effect
+    /** Bölge değiştirir (olay içinden yolculuk). */
+    data class MoveTo(val region: String) : Effect
+    data class ShiftDanger(val region: String, val delta: Int) : Effect
     /** Savaş başlatır; seçenek `sonraki` yerine savaşın kazan/kaybet/kaç sahnelerine gider. */
     data class StartCombat(val spec: CombatSpec) : Effect
     /** Kendini açan arayüz: bir sekmeyi verir (yetenekler, canta, harita). */
@@ -162,6 +215,10 @@ data class ChoiceDef(
     val showWhen: Condition? = null,
     val effects: List<Effect> = emptyList(),
     val next: String? = null,
+    /** OP MC: [Gizle] / [Açığa vur] / gösteriş seçeneği. */
+    val kind: com.yukselis.engine.world.ChoiceKind = com.yukselis.engine.world.ChoiceKind.NORMAL,
+    /** Görünür olasılıklı zar kontrolü; başarısızlıkta `failNext` ve `failEffects`. */
+    val check: com.yukselis.engine.world.DiceCheck? = null,
 )
 
 data class Scene(
@@ -203,6 +260,15 @@ data class Content(
     val texts: SystemTexts = SystemTexts.EMPTY,
     val enemies: Map<String, EnemyDef> = emptyMap(),
     val awakenings: List<AwakeningDef> = emptyList(),
+    val events: Map<String, com.yukselis.engine.world.EventDef> = emptyMap(),
+    val regions: Map<String, com.yukselis.engine.world.RegionDef> = emptyMap(),
+    val factions: Map<String, com.yukselis.engine.world.FactionDef> = emptyMap(),
+    val feats: Map<String, com.yukselis.engine.world.FeatDef> = emptyMap(),
+    val quests: Map<String, com.yukselis.engine.world.QuestDef> = emptyMap(),
+    /** Bayrak kaydı: kimlik → açıklama (geliştirici için). */
+    val flags: Map<String, String> = emptyMap(),
+    /** Gün akışının başladığı bölge. */
+    val startRegion: String? = null,
 ) {
     companion object {
         /** Kesinti sahnesinden önceki sahneye dönüş. */

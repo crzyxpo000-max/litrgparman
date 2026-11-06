@@ -1,0 +1,6 @@
+fraksiyonlar:
+  siginak: { iliski: { lonca: -20, yukselenler: -70, sessiz_ag: 10, kadimler: -60 } }
+  lonca: { iliski: { siginak: -20, yukselenler: -40, sessiz_ag: -10, kadimler: -50 } }
+  yukselenler: { iliski: { siginak: -70, lonca: -40, sessiz_ag: -50, kadimler: 20 } }
+  sessiz_ag: { iliski: { siginak: 10, lonca: -10, yukselenler: -50, kadimler: -30 } }
+  kadimler: { iliski: { siginak: -60, lonca: -50, yukselenler: 20, sessiz_ag: -30 } }

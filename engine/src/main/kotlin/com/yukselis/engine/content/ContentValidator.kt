@@ -2,6 +2,7 @@ package com.yukselis.engine.content
 
 import com.yukselis.engine.combat.CombatEngine
 import com.yukselis.engine.combat.StatusEffects
+import com.yukselis.engine.core.WorldState
 import com.yukselis.engine.i18n.LText
 import com.yukselis.engine.i18n.NameEntry
 import com.yukselis.engine.i18n.TokenResolver
@@ -45,6 +46,8 @@ object ContentValidator {
                 is Condition.HasTitle -> if (c.titleId !in content.titles) problems += "$where: koşulda tanımsız unvan '${c.titleId}'"
                 is Condition.HasClass -> if (c.classId !in content.classes) problems += "$where: koşulda tanımsız sınıf '${c.classId}'"
                 is Condition.HasItem -> if (c.itemId !in content.items) problems += "$where: koşulda tanımsız eşya '${c.itemId}'"
+                is Condition.InRegion -> if (c.region !in content.regions) problems += "$where: koşulda tanımsız bölge '${c.region}'"
+                is Condition.QuestIs -> if (c.quest !in content.quests) problems += "$where: koşulda tanımsız görev '${c.quest}'"
                 else -> Unit
             }
         }
@@ -59,9 +62,20 @@ object ContentValidator {
                 is Effect.DailyProgress -> if (e.kind !in DAILY_KINDS) problems += "$where: bilinmeyen Günlük Görev türü '${e.kind}'"
                 is Effect.StartCombat -> {
                     e.spec.enemies.forEach { if (it !in content.enemies) problems += "$where: tanımsız düşman '$it'" }
-                    listOfNotNull(e.spec.win, e.spec.lose, e.spec.flee).forEach { if (it !in content.scenes) problems += "$where: savaş sahnesi tanımsız '$it'" }
+                    listOfNotNull(e.spec.win, e.spec.lose, e.spec.flee).forEach {
+                        if (it != WorldState.HUB && it !in content.scenes) problems += "$where: savaş sahnesi tanımsız '$it'"
+                    }
                     e.spec.environment.forEach { if (it !in CombatEngine.ENVIRONMENTS) problems += "$where: bilinmeyen ortam '$it'" }
                 }
+                is Effect.PlantSeed -> {
+                    if (e.eventId !in content.events) problems += "$where: tohumun hedeflediği olay yok '${e.eventId}'"
+                    if (e.maxDelay < e.minDelay || e.minDelay < 0) problems += "$where: tohum gecikmesi geçersiz"
+                }
+                is Effect.Feat -> if (e.featId !in content.feats) problems += "$where: tanımsız başarı '${e.featId}'"
+                is Effect.SetQuest -> if (e.questId !in content.quests) problems += "$where: tanımsız görev '${e.questId}'"
+                is Effect.MoveTo -> if (e.region !in content.regions) problems += "$where: tanımsız bölge '${e.region}'"
+                is Effect.ShiftDanger -> if (e.region !in content.regions) problems += "$where: tanımsız bölge '${e.region}'"
+                is Effect.ShiftReputation -> if (content.factions.isNotEmpty() && e.faction !in content.factions) problems += "$where: tanımsız fraksiyon '${e.faction}'"
                 is Effect.UnlockTab -> if (e.tab !in com.yukselis.engine.core.WorldState.TABS) problems += "$where: bilinmeyen sekme '${e.tab}'"
                 else -> Unit
             }
@@ -198,6 +212,48 @@ object ContentValidator {
             a.effects.forEach { checkEffect(it, "uyanış ${a.id}") }
         }
 
+        // ---- Olaylar, bölgeler, fraksiyonlar, başarılar, görevler ----
+        content.events.values.forEach { ev ->
+            val at = "olay ${ev.id}"
+            checkText(ev.card, "$at.kart")
+            if (ev.entry !in content.scenes) problems += "$at: giriş sahnesi yok '${ev.entry}'"
+            ev.regions.forEach { if (it !in content.regions) problems += "$at: tanımsız bölge '$it'" }
+            ev.npcs.forEach { if (content.names.find(NameEntry.Kind.NPC, it) == null) problems += "$at: tanımsız NPC '$it'" }
+            if (ev.tension !in 1..4) problems += "$at: gerilim 1–4 olmalı"
+            if (ev.weight <= 0) problems += "$at: ağırlık pozitif olmalı"
+            ev.acts.forEach { if (it !in 1..4) problems += "$at: perde 1–4 olmalı" }
+            checkCondition(ev.condition, at)
+        }
+        content.startRegion?.let { if (it !in content.regions) problems += "regions.yaml: başlangıç bölgesi tanımsız '$it'" }
+        content.regions.values.forEach { r ->
+            val at = "bölge ${r.id}"
+            if (content.names.find(NameEntry.Kind.PLACE, r.id) == null) problems += "$at: names.yaml'da yer adı yok"
+            (r.enemies + r.gateEnemies).forEach { if (it !in content.enemies) problems += "$at: tanımsız düşman '$it'" }
+            r.neighbors.forEach { if (it !in content.regions) problems += "$at: tanımsız komşu '$it'" }
+            r.forage.forEach { if (it !in content.items) problems += "$at: tanımsız toplama eşyası '$it'" }
+            if (r.control != "canavar" && r.control !in content.factions) problems += "$at: tanımsız kontrol '${r.control}'"
+        }
+        content.factions.values.forEach { f ->
+            if (content.names.find(NameEntry.Kind.FACTION, f.id) == null) problems += "fraksiyon ${f.id}: names.yaml'da ad yok"
+            f.relations.forEach { (o, v) ->
+                if (o !in content.factions) problems += "fraksiyon ${f.id}: tanımsız ilişki '$o'"
+                if (v !in -100..100) problems += "fraksiyon ${f.id}: ilişki −100…100 olmalı"
+            }
+        }
+        content.feats.values.forEach { f ->
+            checkText(f.name, "başarı ${f.id}.ad")
+            f.lines.values.forEach { checkText(it, "başarı ${f.id}.satir") }
+            f.reactions.keys.forEach { if (content.factions.isNotEmpty() && it !in content.factions) problems += "başarı ${f.id}: tanımsız fraksiyon '$it'" }
+            f.title?.let { if (it !in content.titles) problems += "başarı ${f.id}: tanımsız unvan '$it'" }
+        }
+        content.quests.values.forEach { q -> checkText(q.name, "görev ${q.id}.ad"); checkText(q.description, "görev ${q.id}.aciklama") }
+
+        // ---- Bayrak kaydı: her bayrak flags.yaml'da tanımlı olmalı ----
+        val usage = flagUsage(content)
+        (usage.read + usage.written).filterNot { isEngineFlag(it) }.toSortedSet().forEach { f ->
+            if (f !in content.flags) problems += "bayrak '$f': flags.yaml'da tanımlı değil"
+        }
+
         // ---- Sahneler ----
         content.scenes.values.forEach { scene ->
             val at = "sahne ${scene.id}"
@@ -228,7 +284,13 @@ object ContentValidator {
                 checkCondition(c.requires, where)
                 checkCondition(c.showWhen, where)
                 val fights = c.effects.any { it is Effect.StartCombat }
+                c.check?.let { chk ->
+                    chk.failNext?.let { n -> if (n != WorldState.HUB && n != Content.RETURN && n !in content.scenes) problems += "$where: zar başarısız sahnesi tanımsız '$n'" }
+                    chk.failEffects.forEach { checkEffect(it, "$where (başarısız)") }
+                    if (chk.difficulty !in 2..40) problems += "$where: zar zorluğu 2–40 olmalı"
+                }
                 when {
+                    c.next == WorldState.HUB -> Unit
                     c.next == null && fights -> Unit
                     c.next == null -> problems += "$where: 'sonraki' eksik"
                     c.next == Content.RETURN -> if (scene.id != Content.PENALTY_SCENE) problems += "$where: '@geri' yalnızca kesinti sahnelerinde kullanılabilir"
@@ -239,21 +301,118 @@ object ContentValidator {
         }
 
         // Başlangıçtan (ve kesinti kancalarından) ulaşılamayan sahneler
-        val roots = listOf(content.startScene) + listOf(Content.PENALTY_SCENE, Content.HARVEST_SCENE).filter { it in content.scenes }
+        val roots = listOf(content.startScene) + listOf(Content.PENALTY_SCENE, Content.HARVEST_SCENE).filter { it in content.scenes } +
+            content.events.values.map { it.entry }
         val reachable = mutableSetOf<String>()
         val queue = ArrayDeque(roots)
         while (queue.isNotEmpty()) {
             val id = queue.removeFirst()
             if (!reachable.add(id)) continue
             content.scenes[id]?.choices?.forEach { c ->
-                c.next?.takeIf { it != Content.RETURN }?.let { queue.addLast(it) }
-                c.effects.filterIsInstance<Effect.StartCombat>().forEach { f -> listOfNotNull(f.spec.win, f.spec.lose, f.spec.flee).forEach { queue.addLast(it) } }
+                c.next?.takeIf { it != Content.RETURN && it != WorldState.HUB }?.let { queue.addLast(it) }
+                c.check?.failNext?.takeIf { it != Content.RETURN && it != WorldState.HUB }?.let { queue.addLast(it) }
+                (c.effects + (c.check?.failEffects ?: emptyList())).filterIsInstance<Effect.StartCombat>().forEach { f ->
+                    listOfNotNull(f.spec.win, f.spec.lose, f.spec.flee).filter { it != WorldState.HUB }.forEach { queue.addLast(it) }
+                }
             }
         }
         (content.scenes.keys - reachable).sorted().forEach { problems += "sahne $it: başlangıçtan ulaşılamıyor" }
 
         return problems
     }
+}
+
+/** Bayrakların okunduğu ve yazıldığı yerler. */
+data class FlagUsage(val read: Set<String>, val written: Set<String>)
+
+/** Motorun kendisinin koyduğu bayraklar (kayıtta tanım gerekmez). */
+fun isEngineFlag(flag: String): Boolean =
+    ENGINE_FLAG_PREFIXES.any { flag.startsWith(it) } || flag in ENGINE_FLAGS
+
+private val ENGINE_FLAG_PREFIXES = listOf("yenildi_", "uyanis_", "olay_", "dikkat_esik_", "_red_", "_zar_")
+private val ENGINE_FLAGS = setOf(com.yukselis.engine.world.WorldEngine.DAILY_WIDE_FLAG)
+
+fun flagUsage(content: Content): FlagUsage {
+    val read = mutableSetOf<String>()
+    val written = mutableSetOf<String>()
+    fun cond(c: Condition?) {
+        when (c) {
+            is Condition.HasFlag -> read += c.flag
+            is Condition.LacksFlag -> read += c.flag
+            is Condition.All -> c.conditions.forEach { cond(it) }
+            else -> Unit
+        }
+    }
+    fun eff(e: Effect) {
+        when (e) {
+            is Effect.SetFlag -> written += e.flag
+            is Effect.ClearFlag -> written += e.flag
+            is Effect.PlantSeed -> e.condition?.let { raw ->
+                runCatching { cond(ContentParser.condition(YamlTree.parseObject(raw, "tohum"))) }
+            }
+            else -> Unit
+        }
+    }
+    content.scenes.values.forEach { s ->
+        s.paragraphs.forEach { cond(it.condition) }
+        s.notices.forEach { cond(it.condition) }
+        s.insights.forEach { cond(it.condition) }
+        s.choices.forEach { c ->
+            cond(c.requires); cond(c.showWhen)
+            (c.effects + (c.check?.failEffects ?: emptyList())).forEach { eff(it) }
+        }
+    }
+    content.classes.values.forEach { cond(it.unlock) }
+    content.fusions.forEach { cond(it.condition) }
+    content.events.values.forEach { cond(it.condition) }
+    content.dailyTemplates.values.forEach { cond(it.condition) }
+    content.awakenings.forEach { a -> cond(a.condition); a.effects.forEach { eff(it) } }
+    return FlagUsage(read, written)
+}
+
+/** Hata olmayan ama bakılması gereken içerik sorunları. */
+fun contentWarnings(content: Content): List<String> {
+    val warnings = mutableListOf<String>()
+    val usage = flagUsage(content)
+    content.flags.keys.sorted().forEach { f ->
+        if (f !in usage.written && !isEngineFlag(f)) warnings += "bayrak '$f': hiçbir yerde set edilmiyor"
+        if (f !in usage.read && f !in usage.written) warnings += "bayrak '$f': hiç kullanılmıyor"
+    }
+    // Ulaşılamayan olay: yalnızca tohumla gelen ama hiçbir yerde tohumlanmayan olaylar.
+    val seeded = content.scenes.values.flatMap { s -> s.choices.flatMap { c -> c.effects + (c.check?.failEffects ?: emptyList()) } }
+        .plus(content.awakenings.flatMap { it.effects })
+        .filterIsInstance<Effect.PlantSeed>().map { it.eventId }.toSet()
+    content.events.values.filter { it.seedOnly && it.id !in seeded && !it.id.startsWith("dikkat_") }.forEach {
+        warnings += "olay ${it.id}: yalnızca tohumla gelir ama hiçbir yerde tohumlanmıyor (ulaşılamaz)"
+    }
+    content.events.values.filter { it.repeatable.not() && it.dayMax < it.dayMin }.forEach { warnings += "olay ${it.id}: gün aralığı boş" }
+    // OP MC: önemli olaylarda her seçenek en az bir ahlak eksenini oynatmalı.
+    val important = content.events.values.filter { it.important }
+    for (ev in important) {
+        val scenes = eventScenes(content, ev.entry)
+        for (sid in scenes) {
+            val scene = content.scenes[sid] ?: continue
+            scene.choices.filter { c -> c.effects.none { it is Effect.ShiftMorality } }.forEach { c ->
+                warnings += "olay ${ev.id} / ${scene.id}.${c.id}: önemli seçim ahlak eksenini oynatmıyor"
+            }
+        }
+    }
+    return warnings
+}
+
+/** Bir olayın giriş sahnesinden ulaşılan sahneleri (olay içi). */
+private fun eventScenes(content: Content, entry: String): Set<String> {
+    val seen = mutableSetOf<String>()
+    val q = ArrayDeque(listOf(entry))
+    while (q.isNotEmpty()) {
+        val id = q.removeFirst()
+        if (!seen.add(id)) continue
+        content.scenes[id]?.choices?.forEach { c ->
+            c.next?.takeIf { it in content.scenes }?.let { q.addLast(it) }
+            c.check?.failNext?.takeIf { it in content.scenes }?.let { q.addLast(it) }
+        }
+    }
+    return seen
 }
 
 /** Gradle: ./gradlew :engine:validateContent */
@@ -264,8 +423,10 @@ fun main(args: Array<String>) {
     } catch (e: ContentFormatException) {
         listOf("Biçim hatası: ${e.message}")
     }
+    val warnings = runCatching { contentWarnings(ContentLoader.load(DirectoryContentSource(dir))) }.getOrDefault(emptyList())
+    warnings.forEach { println("⚠ $it") }
     if (problems.isEmpty()) {
-        println("İçerik geçerli: ${dir.absolutePath}")
+        println("İçerik geçerli: ${dir.absolutePath}" + if (warnings.isNotEmpty()) " (${warnings.size} uyarı)" else "")
     } else {
         problems.forEach { System.err.println("✗ $it") }
         System.err.println("${problems.size} sorun bulundu.")

@@ -3,6 +3,10 @@ package com.yukselis.engine.core
 import com.yukselis.engine.combat.CombatState
 import com.yukselis.engine.combat.EnemyMemory
 import com.yukselis.engine.system.AffinityVector
+import com.yukselis.engine.world.DayState
+import com.yukselis.engine.world.QuestStatus
+import com.yukselis.engine.world.RegionState
+import com.yukselis.engine.world.Seed
 import com.yukselis.engine.system.Grade
 import com.yukselis.engine.system.Progression
 import com.yukselis.engine.system.Stats
@@ -156,6 +160,21 @@ data class WorldState(
     val secondChances: Set<Grade> = emptySet(),
     /** Normal modda ölüm: arayüz son kayıt noktasına dönmeyi önerir. */
     val dead: Boolean = false,
+    // ---- Aşama 4: hikaye motoru ----
+    /** Oyuncunun bulunduğu bölge (gün akışında). */
+    val region: String? = null,
+    val regions: Map<String, RegionState> = emptyMap(),
+    val seeds: List<Seed> = emptyList(),
+    val dayState: DayState = DayState(),
+    val quests: Map<String, QuestStatus> = emptyMap(),
+    /** OP MC: Anomali Dikkati (0–100), ana gerilim ölçeği. */
+    val attention: Int = 0,
+    /** OP MC: Yozlaşma (0–100), karanlık/lanetli yetenekler. */
+    val corruption: Int = 0,
+    /** OP MC: NPC'lerin bildiği seviye; açığa vurulana kadar gerçek seviyeden düşüktür. */
+    val publicLevel: Int = 1,
+    /** OP MC: Tanıklı başarılar (başarı → kaç kez). */
+    val legend: Map<String, Int> = emptyMap(),
 ) {
     val act: Int get() = GameClock.actFor(day)
 
@@ -173,6 +192,9 @@ data class WorldState(
 
         /** Benzersiz yetenekler de dünyada tek sahiplidir; "İlk" kaydında bu önekle tutulur. */
         const val UNIQUE_CLAIM_PREFIX = "yetenek:"
+
+        /** Gün akışı (olay dışı) "sahnesi". */
+        const val HUB = "@akis"
 
         /** Savaş başında yazılan kayıt noktası (Normal modda ölümden sonra dönülür). */
         const val CHECKPOINT_SLOT = "checkpoint"

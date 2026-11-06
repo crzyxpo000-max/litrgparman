@@ -74,6 +74,19 @@ class EffectApplier(private val content: Content) {
         is Effect.UnlockTab -> unlockTab(state, effect.tab)
         // Savaş StoryEngine tarafından başlatılır (CombatEngine); burada etkisizdir.
         is Effect.StartCombat -> Result(state, emptyList())
+        is Effect.PlantSeed -> plantSeed(state, effect)
+        is Effect.ShiftAttention -> shiftAttention(state, effect.delta)
+        is Effect.ShiftCorruption -> shiftCorruption(state, effect.delta)
+        Effect.Reveal -> reveal(state)
+        is Effect.Feat -> feat(state, effect.featId)
+        is Effect.SetQuest -> setQuest(state, effect.questId, effect.status)
+        is Effect.MoveTo -> Result(state.copy(region = effect.region), emptyList())
+        is Effect.ShiftDanger -> Result(
+            state.regions[effect.region]?.let { r ->
+                state.copy(regions = state.regions + (r.id to r.copy(danger = (r.danger + effect.delta).coerceIn(0, 100))))
+            } ?: state,
+            emptyList(),
+        )
         is Effect.AddHp -> Result(state.withPlayer { it.copy(hp = (it.hp + effect.delta).coerceIn(1, it.maxHp)) }, emptyList())
         is Effect.AddMp -> Result(state.withPlayer { it.copy(mp = (it.mp + effect.delta).coerceIn(0, it.maxMp)) }, emptyList())
     }
@@ -91,9 +104,88 @@ class EffectApplier(private val content: Content) {
     }
 
     private fun shiftReputation(state: WorldState, faction: String, delta: Int): Result {
-        val cap = reputationCap(state, faction)
-        val value = ((state.reputation[faction] ?: 0) + delta).coerceIn(-100, cap)
-        return Result(state.copy(reputation = state.reputation + (faction to value)), emptyList())
+        var rep = state.reputation
+        fun shift(f: String, d: Int) {
+            rep = rep + (f to ((rep[f] ?: 0) + d).coerceIn(-100, reputationCap(state, f)))
+        }
+        shift(faction, delta)
+        // Fraksiyonlar arası ilişki matrisi: dostların sevinir, düşmanların öfkelenir (DECISIONS #64).
+        content.factions[faction]?.relations?.forEach { (other, rel) ->
+            val ripple = (delta * rel * RIPPLE / 100.0).toInt()
+            if (ripple != 0 && other != faction) shift(other, ripple)
+        }
+        return Result(state.copy(reputation = rep), emptyList())
+    }
+
+    // ---- OP MC: Dikkat, Yozlaşma, gizli güç, efsane ----
+
+    fun shiftAttention(state: WorldState, delta: Int): Result {
+        if (delta == 0) return Result(state, emptyList())
+        val before = state.attention
+        val after = (before + delta).coerceIn(0, 100)
+        var s = state.copy(attention = after)
+        val notices = mutableListOf<Notice>()
+        // Eşik geçişleri: avcılar, Sistem düzeltmeleri, Kadim elçileri (olay `dikkat_<n>` varsa tohumlanır).
+        for (t in ATTENTION_THRESHOLDS) {
+            if (before < t && after >= t && !s.hasFlag("dikkat_esik_$t")) {
+                s = s.copy(flags = s.flags + "dikkat_esik_$t")
+                val eventId = "dikkat_$t"
+                if (eventId in content.events) s = s.copy(seeds = s.seeds + com.yukselis.engine.world.Seed(eventId, s.day))
+                notices += Notice(NoticeKind.ECHO, texts.format("dikkat_esik", "n" to t), listOf(texts.format("dikkat_esik_$t")))
+            }
+        }
+        return Result(s, notices)
+    }
+
+    private fun shiftCorruption(state: WorldState, delta: Int): Result {
+        val after = (state.corruption + delta).coerceIn(0, 100)
+        val notices = if (delta > 0) listOf(Notice(NoticeKind.ECHO, texts.format("yozlasma", "n" to after))) else emptyList()
+        return Result(state.copy(corruption = after), notices)
+    }
+
+    /** [Açığa vur]: görünen seviye gerçeğe çekilir; Dikkat 5 + 2 · fark artar. */
+    private fun reveal(state: WorldState): Result {
+        val gap = (state.player.level - state.publicLevel).coerceAtLeast(0)
+        val s = state.copy(publicLevel = state.player.level)
+        val a = shiftAttention(s, 5 + 2 * gap)
+        return Result(a.state, listOf(Notice(NoticeKind.WARNING, texts.format("aciga_vuruldu", "n" to state.player.level))) + a.notices)
+    }
+
+    private fun feat(state: WorldState, id: String): Result {
+        val def = content.feats[id] ?: error("Tanımsız başarı: $id")
+        val count = (state.legend[id] ?: 0) + 1
+        var s = state.copy(legend = state.legend + (id to count))
+        val lines = mutableListOf<LText>()
+        def.reactions.forEach { (faction, d) ->
+            s = shiftReputation(s, faction, d).state
+            def.lines[faction]?.let { lines += it }
+        }
+        val notices = mutableListOf(Notice(NoticeKind.SYSTEM, texts.formatL("soylenti", "name" to def.name), lines))
+        if (def.title != null && def.titleAt != null && count >= def.titleAt) {
+            val t = grantTitleIfDefined(s, def.title)
+            s = t.state
+            notices += t.notices
+        }
+        // Tanıklı her başarı biraz dikkat çeker.
+        val a = shiftAttention(s, FEAT_ATTENTION)
+        return Result(a.state, notices + a.notices)
+    }
+
+    private fun setQuest(state: WorldState, id: String, status: com.yukselis.engine.world.QuestStatus): Result {
+        val def = content.quests[id] ?: error("Tanımsız görev: $id")
+        if (state.quests[id] == status) return Result(state, emptyList())
+        val key = "gorev_${status.key}"
+        return Result(
+            state.copy(quests = state.quests + (id to status)),
+            listOf(Notice(NoticeKind.QUEST, texts.formatL(key, "name" to def.name), listOf(def.description))),
+        )
+    }
+
+    private fun plantSeed(state: WorldState, e: Effect.PlantSeed): Result {
+        val rng = Rng(state.rngState)
+        val delay = if (e.maxDelay > e.minDelay) rng.nextInt(e.minDelay, e.maxDelay) else e.minDelay
+        val seed = com.yukselis.engine.world.Seed(e.eventId, state.day + delay, e.condition)
+        return Result(state.copy(seeds = state.seeds + seed, rngState = rng.state), emptyList())
     }
 
     /** Unvanların koyduğu en düşük tavan (yoksa 100). */
@@ -151,6 +243,14 @@ class EffectApplier(private val content: Content) {
             )
         }
         var next = state.copy(player = p)
+        // OP MC: beklenenden hızlı büyüme Dikkat çeker (beklenen seviyenin üstündeki her yeni seviye +1).
+        val expected = Progression.expectedLevel(next.day)
+        val fast = (startLevel + 1..p.level).count { it > expected }
+        if (fast > 0) {
+            val a = shiftAttention(next, fast)
+            next = a.state
+            notices += a.notices
+        }
         if (blockedAt != null && next.prompts.none { it.kind == PromptKind.EVOLUTION }) {
             next = next.copy(prompts = next.prompts + SystemPrompt(PromptKind.EVOLUTION, evolutionOptions(p.classId, blockedAt), blockedAt.name))
             notices += Notice(
@@ -213,16 +313,18 @@ class EffectApplier(private val content: Content) {
         if (state.player.skill(skillId) != null) return Result(state, emptyList())
         var p = state.player.copy(skills = state.player.skills + SkillState(skillId))
         val lines = mutableListOf(def.description)
+        var corruption = state.corruption
         if (def.penalty.isNotEmpty()) {
             p = applyPenalty(p, def.penalty)
             lines += texts.formatL("ceza_yetenegi", "penalty" to statList(def.penalty))
+            corruption = (corruption + PENALTY_CORRUPTION).coerceAtMost(100)
         }
         val claimed = if (def.rarity == com.yukselis.engine.system.Rarity.UNIQUE) {
             state.firstClaims + (WorldState.UNIQUE_CLAIM_PREFIX + skillId to WorldState.PLAYER_CLAIM)
         } else {
             state.firstClaims
         }
-        val tab = unlockTab(state.copy(player = p, firstClaims = claimed), WorldState.TAB_SKILLS)
+        val tab = unlockTab(state.copy(player = p, firstClaims = claimed, corruption = corruption), WorldState.TAB_SKILLS)
         return Result(
             tab.state,
             listOf(Notice(NoticeKind.SKILL, texts.formatL("yetenek_kazanildi", "name" to def.name), lines, def.rarity)) + tab.notices,
@@ -530,6 +632,13 @@ class EffectApplier(private val content: Content) {
 
     companion object {
         const val GENERIC_EVOLUTION = "genel"
+
+        val ATTENTION_THRESHOLDS = listOf(25, 50, 75, 100)
+        const val FEAT_ATTENTION = 2
+        const val PENALTY_CORRUPTION = 10
+
+        /** İtibar dalgası: A'ya d itibar → B'ye d · ilişki(A,B)/100 · 0,3. */
+        const val RIPPLE = 0.3
 
         const val STREAK_TITLE_WEEK = 7
         const val STREAK_TITLE_MONTH = 30

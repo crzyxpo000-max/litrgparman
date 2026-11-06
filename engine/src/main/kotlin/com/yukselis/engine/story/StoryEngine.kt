@@ -28,14 +28,88 @@ class StoryEngine(val content: Content) {
     private val effects = EffectApplier(content)
     private val actions = PlayerActions(content, effects)
     private val combat = CombatEngine(content, effects)
+    val world = com.yukselis.engine.world.WorldEngine(content, effects, combat)
+
+    // ---- Gün akışı ----
+
+    fun hubAction(state: WorldState, action: com.yukselis.engine.world.HubAction, lang: Lang): Outcome {
+        val r = world.act(state, action)
+        return Outcome(r.state, r.notices.map { noticeView(it, r.state, lang) })
+    }
+
+    fun map(state: WorldState, lang: Lang): List<RegionView> {
+        val here = state.region?.let { content.regions[it] }
+        return content.regions.values.sortedBy { it.act * 1000 + it.baseDanger }.map { d ->
+            val r = state.regions[d.id]
+            RegionView(
+                id = d.id,
+                name = world.regionName(d.id)[lang],
+                danger = r?.danger ?: d.baseDanger,
+                control = controlName(r?.control ?: d.control, lang),
+                gates = r?.gates?.map { gateView(it, state, lang) } ?: emptyList(),
+                current = d.id == state.region,
+                neighbor = here != null && d.id in here.neighbors,
+            )
+        }
+    }
+
+    fun journal(state: WorldState, lang: Lang): JournalView = JournalView(
+        quests = state.quests.mapNotNull { (id, st) -> content.quests[id]?.let { QuestView(it.name[lang], text(it.description[lang], state, lang), st) } },
+        legend = state.legend.mapNotNull { (id, n) -> content.feats[id]?.let { LegendView(it.name[lang], n) } },
+        pendingSeeds = state.seeds.size,
+    )
+
+    private fun controlName(control: String, lang: Lang): String =
+        content.names.find(NameEntry.Kind.FACTION, control)?.full?.get(lang) ?: content.texts.format("kontrol_$control")[lang]
+
+    private fun gateView(g: com.yukselis.engine.world.Gate, state: WorldState, lang: Lang) = GateView(
+        uid = g.uid,
+        grade = g.grade.name,
+        enemies = g.enemies.mapNotNull { content.enemies[it]?.name?.get(lang) }.groupingBy { it }.eachCount()
+            .entries.joinToString(", ") { (n, k) -> if (k > 1) "$n ×$k" else n },
+        daysLeft = g.deadline - state.day,
+    )
+
+    private fun hubView(state: WorldState, lang: Lang): HubView {
+        val d = state.dayState
+        val region = state.region
+        val here = region?.let { content.regions[it] }
+        return HubView(
+            day = state.day,
+            slotsLeft = d.slotsLeft,
+            slotsTotal = d.slotsTotal,
+            regionName = region?.let { world.regionName(it)[lang] } ?: "",
+            danger = region?.let { state.regions[it]?.danger } ?: 0,
+            cards = d.hand.mapNotNull { id -> content.events[id]?.let { CardView(id, text(it.card[lang], state, lang), it.tension) } },
+            gates = region?.let { state.regions[it] }?.gates?.map { gateView(it, state, lang) } ?: emptyList(),
+            travel = here?.neighbors?.map { RegionLinkView(it, world.regionName(it)[lang]) } ?: emptyList(),
+            mustCamp = d.slotsLeft <= 0,
+        )
+    }
 
     // ---- Savaş ----
 
     /** Savaş eylemi (geçersizse ActionRejected). */
     fun combatAction(state: WorldState, action: CombatAction, lang: Lang): Outcome {
         val r = combat.act(state, action)
-        return Outcome(r.state, r.notices.map { noticeView(it, r.state, lang) })
+        var s = r.state
+        val notices = r.notices.toMutableList()
+        // Gün akışından açılan savaş bitti (keşif, kapı): akışa dön, kapıyı kapat.
+        if (state.combat != null && s.combat == null && s.sceneId == WorldState.HUB && !s.ended) {
+            val back = world.afterCombat(s)
+            s = back.state
+            notices += back.notices
+        }
+        return Outcome(s, notices.map { noticeView(it, s, lang) })
     }
+
+    /** Zar kontrolünün görünür olasılığı (yüzde): P(d20 + stat ≥ zorluk). */
+    fun odds(state: WorldState, c: com.yukselis.engine.world.DiceCheck): Int {
+        val need = c.difficulty - state.player.stats[c.stat]
+        return ((21 - need).coerceIn(0, 20) * 5)
+    }
+
+    private fun oneShotFlag(scene: String, choice: String) = "_zar_${scene}_$choice"
 
     /** Savaşı doğrudan başlatır (olay motoru ve testler için; hikayede `savas` etkisi kullanılır). */
     fun startCombat(state: WorldState, spec: com.yukselis.engine.combat.CombatSpec, lang: Lang): Outcome {
@@ -151,7 +225,8 @@ class StoryEngine(val content: Content) {
             if (!scenesOk || c.enemies.any { it.id !in content.enemies }) s = s.copy(combat = null)
         }
         if (s.daily == null || s.daily?.templateId !in content.dailyTemplates) s = effects.newDaily(s).state
-        if (s.sceneId !in content.scenes) s = s.copy(sceneId = content.startScene)
+        if (s.sceneId != WorldState.HUB && s.sceneId !in content.scenes) s = s.copy(sceneId = if (s.regions.isNotEmpty()) WorldState.HUB else content.startScene)
+        s = s.copy(seeds = s.seeds.filter { it.eventId in content.events }, dayState = s.dayState.copy(hand = s.dayState.hand.filter { it in content.events }))
         return s
     }
 
@@ -171,6 +246,23 @@ class StoryEngine(val content: Content) {
     // ---- Hikaye ----
 
     fun view(state: WorldState, lang: Lang): SceneView {
+        if (state.sceneId == WorldState.HUB) {
+            val hub = hubView(state, lang)
+            val t = content.texts
+            val paragraphs = listOf(text(t.formatL("akis_metin", "day" to LText("${state.day}", "${state.day}"), "region" to LText(hub.regionName, hub.regionName))[lang], state, lang)) +
+                if (hub.mustCamp) listOf(t.format("akis_kamp_vakti")[lang]) else emptyList()
+            return SceneView(
+                day = state.day,
+                act = state.act,
+                placeName = hub.regionName,
+                history = emptyList(),
+                current = PassageView(WorldState.HUB, hub.regionName, paragraphs, emptyList()),
+                choices = emptyList(),
+                isEnding = false,
+                prompt = state.prompts.firstOrNull()?.let { promptView(it, state, lang) },
+                hub = hub,
+            )
+        }
         val scene = scene(state.sceneId)
         val history = state.history.mapNotNull { entry ->
             val past = content.scenes[entry.sceneId] ?: return@mapNotNull null
@@ -180,11 +272,26 @@ class StoryEngine(val content: Content) {
         val choices = scene.choices
             .filter { it.showWhen?.test(state) ?: true }
             .map { choice ->
+                val failed = choice.check?.oneShot == true && state.hasFlag(oneShotFlag(scene.id, choice.id))
+                val baseTag = requirementTag(choice.requires, lang)
+                val tag = if (choice.kind == com.yukselis.engine.world.ChoiceKind.FLEX && baseTag != null) {
+                    baseTag.removeSuffix("]") + " · " + content.texts.format("gosteris")[lang] + "]"
+                } else {
+                    baseTag
+                }
                 ChoiceView(
                     id = choice.id,
                     label = text(choice.label[lang], state, lang),
-                    requirementTag = requirementTag(choice.requires, lang),
-                    enabled = choice.requires?.test(state) ?: true,
+                    requirementTag = tag,
+                    enabled = (choice.requires?.test(state) ?: true) && !failed,
+                    kindTag = when (choice.kind) {
+                        com.yukselis.engine.world.ChoiceKind.CONCEAL -> content.texts.format("secenek_gizle")[lang]
+                        com.yukselis.engine.world.ChoiceKind.REVEAL -> content.texts.format("secenek_aciga_vur")[lang]
+                        else -> null
+                    },
+                    kind = choice.kind,
+                    odds = choice.check?.let { odds(state, it) },
+                    oneShot = choice.check?.oneShot == true,
                 )
             }
         return SceneView(
@@ -209,32 +316,60 @@ class StoryEngine(val content: Content) {
 
         require(state.combat == null) { "Savaş sürerken hikaye seçimi yapılamaz" }
 
-        val fight = choice.effects.filterIsInstance<Effect.StartCombat>().firstOrNull()
-        val applied = effects.applyAll(state, choice.effects - setOfNotNull(fight))
+        if (choice.check?.oneShot == true && state.hasFlag(oneShotFlag(scene.id, choice.id))) {
+            throw IllegalArgumentException("Tek seferlik kontrol zaten başarısız: $choiceId")
+        }
+        // Zar kontrolü: d20 + stat ≥ zorluk. Başarısızlık başka sahneye ve başka etkilere gider.
+        var start = state
+        var success = true
+        choice.check?.let { c ->
+            val rng = com.yukselis.engine.core.Rng(state.rngState)
+            success = rng.d20() + state.player.stats[c.stat] >= c.difficulty
+            start = state.copy(rngState = rng.state)
+        }
+        val chosenEffects = if (success) choice.effects else choice.check!!.failEffects
+        val fight = chosenEffects.filterIsInstance<Effect.StartCombat>().firstOrNull()
+        val applied = effects.applyAll(start, chosenEffects - setOfNotNull(fight))
         var next = applied.state.copy(
             history = (applied.state.history + HistoryEntry(scene.id, choice.id)).takeLast(WorldState.HISTORY_LIMIT),
         )
+        val checkNotices = mutableListOf<Notice>()
+        choice.check?.let { c ->
+            checkNotices += Notice(
+                if (success) NoticeKind.SYSTEM else NoticeKind.WARNING,
+                content.texts.format(if (success) "zar_basarili" else "zar_basarisiz", "n" to odds(state, c)),
+            )
+            if (!success && c.oneShot) next = next.copy(flags = next.flags + oneShotFlag(scene.id, choice.id))
+        }
         if (fight != null) {
             // Savaş başlar; sahne, savaş bitince kazan/kaybet/kaç sahnesine geçer.
             val started = combat.start(next, fight.spec)
-            val notices = applied.notices + started.notices
+            val notices = checkNotices + applied.notices + started.notices
             return Outcome(started.state, notices.map { noticeView(it, started.state, lang) })
         }
-        var nextId = choice.next
+        var nextId = if (success) choice.next else (choice.check?.failNext ?: choice.next)
         if (nextId == Content.RETURN) {
             nextId = next.returnStack.lastOrNull() ?: content.startScene
             next = next.copy(returnStack = next.returnStack.dropLast(1))
         }
+        val extra = mutableListOf<Notice>()
         if (nextId != null) {
             // Ceza kancası: ihmal edilen Günlük Görev, bir sonraki geçişte Ceza Bölgesi'ne götürür.
-            val target = scene(nextId)
-            if (next.penaltyPending && !target.isEnding && Content.PENALTY_SCENE in content.scenes && nextId != Content.PENALTY_SCENE) {
+            val endingTarget = nextId != WorldState.HUB && scene(nextId).isEnding
+            if (next.penaltyPending && !endingTarget && Content.PENALTY_SCENE in content.scenes && nextId != Content.PENALTY_SCENE) {
                 next = next.copy(returnStack = next.returnStack + nextId, penaltyPending = false)
                 nextId = Content.PENALTY_SCENE
             }
-            next = next.copy(sceneId = nextId, ended = scene(nextId).isEnding)
+            if (nextId == WorldState.HUB) {
+                // Olay bitti: gün akışına dön (zorunlu olay varsa hemen başlar).
+                val hub = world.enterHub(next)
+                next = hub.state
+                extra += hub.notices
+            } else {
+                next = next.copy(sceneId = nextId, ended = scene(nextId).isEnding)
+            }
         }
-        return Outcome(next, applied.notices.map { noticeView(it, next, lang) })
+        return Outcome(next, (checkNotices + applied.notices + extra).map { noticeView(it, next, lang) })
     }
 
     // ---- Ekran görünümleri ----
@@ -263,6 +398,9 @@ class StoryEngine(val content: Content) {
             essenceSlots = Progression.essenceSlots(p.grade),
             humanityTopPercent = Progression.humanityTopPercent(p.level, state.day),
             tabs = state.unlockedTabs,
+            attention = state.attention,
+            corruption = state.corruption,
+            publicLevel = state.publicLevel,
             mercy = state.morality.mercy,
             order = state.morality.order,
             humanity = state.morality.humanity,
