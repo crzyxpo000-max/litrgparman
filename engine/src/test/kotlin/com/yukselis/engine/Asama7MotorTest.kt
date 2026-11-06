@@ -92,3 +92,16 @@ class Asama7MotorTest {
         assertEquals(listOf(20, 40, 60, 80, 90), top.map { it.day })
     }
 }
+
+class Asama7GoreliSeviyeTest {
+    @Test
+    fun `goreli seviye savas basinda cozulur`() {
+        assertEquals("kanal_faresi@20", EnemyScaling.resolve("kanal_faresi@dunya", 30, 7))
+        assertEquals("kanal_faresi@22", EnemyScaling.resolve("kanal_faresi@dunya+10", 30, 7))
+        assertEquals("kanal_faresi@12", EnemyScaling.resolve("kanal_faresi@oyuncu+5", 100, 7))
+        assertEquals("kanal_faresi@4", EnemyScaling.resolve("kanal_faresi@oyuncu-3", 100, 7))
+        assertEquals("kanal_faresi@50", EnemyScaling.resolve("kanal_faresi@50", 100, 7))
+        assertEquals("kanal_faresi", EnemyScaling.baseId("kanal_faresi@dunya+10"))
+        assertTrue(EnemyScaling.isRelative("x@oyuncu"))
+    }
+}

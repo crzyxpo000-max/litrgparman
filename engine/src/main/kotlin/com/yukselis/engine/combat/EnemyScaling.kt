@@ -27,8 +27,29 @@ object EnemyScaling {
 
     fun ref(id: String, level: Int): String = "$id$SEPARATOR$level"
 
-    /** Temel düşman kimliği ("x@40" → "x"). */
-    fun baseId(ref: String): String = parse(ref).first
+    /** Temel düşman kimliği ("x@40" → "x", "x@dunya+10" → "x"). */
+    fun baseId(ref: String): String = ref.indexOf(SEPARATOR).let { if (it > 0) ref.substring(0, it) else ref }
+
+    private val RELATIVE = Regex("""^(dunya|oyuncu)([+-]\d+)?$""")
+
+    /** Göreli seviye mi (`@dunya`, `@dunya+20` yüzde; `@oyuncu`, `@oyuncu+5` seviye)? */
+    fun isRelative(ref: String): Boolean = ref.indexOf(SEPARATOR).let { it > 0 && RELATIVE.matches(ref.substring(it + 1)) }
+
+    /**
+     * Göreli başvuruyu savaş başında sayıya çevirir: `@dunya±n` dünyanın seviyesi ±%n (gün ilerledikçe yükselir),
+     * `@oyuncu±n` oyuncunun gerçek seviyesi ±n (her oyuncu için gerçek savaş). Mutlak başvuru olduğu gibi kalır.
+     */
+    fun resolve(ref: String, day: Int, playerLevel: Int): String {
+        val i = ref.indexOf(SEPARATOR)
+        if (i <= 0) return ref
+        val m = RELATIVE.matchEntire(ref.substring(i + 1)) ?: return ref
+        val n = m.groupValues[2].takeIf { it.isNotEmpty() }?.toInt() ?: 0
+        val level = when (m.groupValues[1]) {
+            "dunya" -> Progression.worldLevel(day) * (1 + n / 100.0)
+            else -> (playerLevel + n).toDouble()
+        }
+        return EnemyScaling.ref(ref.substring(0, i), level.roundToInt().coerceIn(1, MAX_LEVEL))
+    }
 
     /**
      * Seviyedeki beklenen ortalama stat: 5 + Σ (4 · kademe çarpanı + 3) / 8. Sınıf artışı (≈ 4 puan) kademeyle

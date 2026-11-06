@@ -154,11 +154,16 @@ class EffectApplier(private val content: Content) {
         var s = state.copy(attention = after)
         val notices = mutableListOf<Notice>()
         // Eşik geçişleri: avcılar, Sistem düzeltmeleri, Kadim elçileri (olay `dikkat_<n>` varsa tohumlanır).
+        // Aşama 7: eşikler her perdede yeniden kurulur; olay önce perdeye özel `dikkat_<n>_p<perde>`, yoksa
+        // (yalnızca o perdeye uygunsa) genel `dikkat_<n>`.
         for (t in ATTENTION_THRESHOLDS) {
-            if (before < t && after >= t && !s.hasFlag("dikkat_esik_$t")) {
-                s = s.copy(flags = s.flags + "dikkat_esik_$t")
-                val eventId = "dikkat_$t"
-                if (eventId in content.events) s = s.copy(seeds = s.seeds + com.yukselis.engine.world.Seed(eventId, s.day))
+            val flag = attentionFlag(t, s.act)
+            if (before < t && after >= t && !s.hasFlag(flag)) {
+                s = s.copy(flags = s.flags + flag)
+                val eventId = listOf("dikkat_${t}_p${s.act}", "dikkat_$t").firstOrNull { id ->
+                    content.events[id]?.let { it.acts.isEmpty() || s.act in it.acts } == true
+                }
+                if (eventId != null) s = s.copy(seeds = s.seeds + com.yukselis.engine.world.Seed(eventId, s.day))
                 notices += Notice(NoticeKind.ECHO, texts.format("dikkat_esik", "n" to t), listOf(texts.format("dikkat_esik_$t")))
             }
         }
@@ -166,9 +171,20 @@ class EffectApplier(private val content: Content) {
     }
 
     private fun shiftCorruption(state: WorldState, delta: Int): Result {
-        val after = (state.corruption + delta).coerceIn(0, 100)
+        val before = state.corruption
+        val after = (before + delta).coerceIn(0, 100)
         val notices = if (delta > 0) listOf(Notice(NoticeKind.ECHO, texts.format("yozlasma", "n" to after))) else emptyList()
-        return Result(state.copy(corruption = after), notices)
+        var s = state.copy(corruption = after)
+        // Aşama 7: Yozlaşma eşikleri (bir kez): `yozlasma_<n>` olayı varsa tohumlanır (Yankı'nın virüs yolu, izler).
+        for (t in CORRUPTION_THRESHOLDS) {
+            val flag = "yozlasma_esik_$t"
+            if (before < t && after >= t && !s.hasFlag(flag)) {
+                s = s.copy(flags = s.flags + flag)
+                val eventId = "yozlasma_$t"
+                if (eventId in content.events) s = s.copy(seeds = s.seeds + com.yukselis.engine.world.Seed(eventId, s.day))
+            }
+        }
+        return Result(s, notices)
     }
 
     /** [Açığa vur]: görünen seviye gerçeğe çekilir; Dikkat 5 + 2 · fark artar. */
@@ -667,6 +683,10 @@ class EffectApplier(private val content: Content) {
         const val TOWER_VAR = "kule_kat"
 
         val ATTENTION_THRESHOLDS = listOf(25, 50, 75, 100)
+        val CORRUPTION_THRESHOLDS = listOf(25, 50, 75, 100)
+
+        /** Dikkat eşiği işareti: Perde 1'de eski ad (kayıt uyumu), sonra perde başına. */
+        fun attentionFlag(threshold: Int, act: Int): String = if (act <= 1) "dikkat_esik_$threshold" else "dikkat_esik_${threshold}_p$act"
         const val FEAT_ATTENTION = 2
         const val PENALTY_CORRUPTION = 10
 

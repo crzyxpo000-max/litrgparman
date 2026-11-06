@@ -529,7 +529,7 @@ data class FlagUsage(val read: Set<String>, val written: Set<String>)
 fun isEngineFlag(flag: String): Boolean =
     ENGINE_FLAG_PREFIXES.any { flag.startsWith(it) } || flag in ENGINE_FLAGS || flag in ENGINE_FLAGS_EXTRA
 
-private val ENGINE_FLAG_PREFIXES = listOf("yenildi_", "uyanis_", "olay_", "dikkat_esik_", "_red_", "_zar_", "_sira_")
+private val ENGINE_FLAG_PREFIXES = listOf("yenildi_", "uyanis_", "olay_", "dikkat_esik_", "yozlasma_esik_", "_red_", "_zar_", "_sira_")
 private val ENGINE_FLAGS_EXTRA = setOf(com.yukselis.engine.npc.NpcEngine.FLAG_MOURNED)
 private val ENGINE_FLAGS = setOf(com.yukselis.engine.world.WorldEngine.DAILY_WIDE_FLAG)
 

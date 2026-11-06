@@ -23,3 +23,37 @@ ozler:
   yanki:
     ad: { tr: "Yankı", en: "Echo" }
     aciklama: { tr: "Geride kalanın kavramı: bir sesin, bir anının, bir hatanın. Sistem bu Öz'ün tanımını eksik buluyor.", en: "The concept of what lingers: a sound, a memory, an error. The System considers this Essence's definition incomplete." }
+# Yollar (A kademesi): iki Öz birleşip oyuncuya özgü bir güç olur (GDD). Yol oluşumu Perde 3 ana yayında (`yol` etkisi).
+yollar:
+  kor_sur:
+    ad: { tr: "Kor Sur", en: "The Ember Wall" }
+    aciklama: { tr: "Ateş ve Koruma: arkandakileri ısıtan, önündekileri yakan bir sınır. Senin olan hiçbir şey soğumaz.", en: "Fire and Warding: a line that warms everyone behind you and burns everything in front. Nothing that's yours ever goes cold." }
+    ozler: [ates, koruma]
+  ufuk_avcisi:
+    ad: { tr: "Ufuk Avcısı", en: "The Horizon Hunt" }
+    aciklama: { tr: "Uzay ve Avlanma: mesafe avın sığınağı olmaktan çıkar. Gözünün gördüğü her yer bir adım uzaktadır.", en: "Space and the Hunt: distance stops being a place to hide. Anywhere you can see is one step away." }
+    ozler: [uzay, avlanma]
+  son_saat:
+    ad: { tr: "Son Saat", en: "The Last Hour" }
+    aciklama: { tr: "Ölüm ve Zaman: her şeyin ne zaman biteceğini bilirsin; bazen o saati ertelemeyi de.", en: "Death and Time: you know when everything ends, and sometimes how to push that hour back." }
+    ozler: [olum, zaman]
+  kul_dogan:
+    ad: { tr: "Külden Doğan", en: "Born of Ash" }
+    aciklama: { tr: "Yıkım ve Ateş: yaktığın şeyin yerine daha güçlüsü çıkar. Önce sen.", en: "Ruin and Fire: whatever you burn down comes back stronger. Starting with you." }
+    ozler: [yikim, ates]
+  durmus_kalkan:
+    ad: { tr: "Durmuş Kalkan", en: "The Stilled Shield" }
+    aciklama: { tr: "Zaman ve Koruma: koruduğun şey için an donar. Darbe hiç gelmez; yalnızca bekler.", en: "Time and Warding: for what you guard, the moment freezes. The blow never lands. It just waits." }
+    ozler: [zaman, koruma]
+  bosluk_yurur:
+    ad: { tr: "Boşlukta Yürüyen", en: "Voidwalker" }
+    aciklama: { tr: "Uzay ve Ölüm: dünyaların arasındaki boşluk senin koridorun olur. Orada ölü olan tek şey sen değilsin.", en: "Space and Death: the gap between worlds becomes your hallway. You're not the only dead thing in there." }
+    ozler: [uzay, olum]
+  yikici_av:
+    ad: { tr: "Yıkıcı Av", en: "The Breaking Hunt" }
+    aciklama: { tr: "Yıkım ve Avlanma: avın yalnızca bedeni değil, kaçabileceği her yol da yıkılır.", en: "Ruin and the Hunt: you don't just break the prey. You break every road it could run down." }
+    ozler: [yikim, avlanma]
+  yankinin_yolu:
+    ad: { tr: "Yankı'nın Yolu", en: "The Echo's Path" }
+    aciklama: { tr: "Yankı ve Zaman: Sistem'in tanımlayamadığı bir güç. Döngünün içinden geçen tek ses.", en: "Echo and Time: a power the System can't define. The one voice that carries through the Loop." }
+    ozler: [yanki, zaman]

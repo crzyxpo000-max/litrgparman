@@ -140,8 +140,10 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
 
     fun start(state: WorldState, specIn: CombatSpec): Result {
         // Düello/ihanet: "npc:@" olayın odak NPC'sine çözülür.
+        // Göreli seviye (`@dunya`, `@oyuncu`) savaş başında sayıya çevrilir; kayıtta sabit kalır.
         val spec = specIn.copy(enemies = specIn.enemies.map { id ->
-            if (id == com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX + "@") com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX + (state.focusNpc ?: "") else id
+            if (id == com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX + "@") com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX + (state.focusNpc ?: "")
+            else EnemyScaling.resolve(id, state.day, state.player.level)
         })
         val defs = spec.enemies.map { enemyDef(it, state) ?: throw ActionRejected("Tanımsız düşman: $it") }
         val p = state.player
