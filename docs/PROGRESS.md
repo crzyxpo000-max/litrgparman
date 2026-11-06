@@ -1,7 +1,7 @@
 # İlerleme
 
 Şu an: Aşama 7 — Perde 2–4 ve sonlar (sırada)
-Son commit: 6f1bf15 Aşama 5: NPC sistemi
+Son commit: 8472fd5 Aşama 6: Perde 1 dikey dilimi
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
