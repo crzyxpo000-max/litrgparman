@@ -14,7 +14,7 @@ tanımındadır (2026-11-07); özet:
 | Adım | Durum |
 | --- | --- |
 | 1 Otomatik ölçüm | **bitti** (2026-11-07) |
-| 2 Kod ve motor incelemesi | bekliyor |
+| 2 Kod ve motor incelemesi | **bitti** (2026-11-07) |
 | 3 Hikaye ve oynanış örneklemesi | bekliyor |
 | 4 Rapor | bekliyor |
 | 5 Düzeltme | onay bekleyecek |
@@ -113,3 +113,63 @@ etkisi taşımayan ana NPC olayı.
    ad (belirteç yerine "Yankı") kalan sorun.
 7. Oyun tarzı hedefe ulaşma: koruyucu %48.9, yükseliş %55.7.
 8. Lint: `help_free` format uyarısı, 11 kullanılmayan kaynak, `ModifierParameter`.
+
+## Adım 2 — Kod, motor ve arayüz incelemesi
+
+Okunan yerler: `save/SaveCodec.kt` (decode ve geçişler), `save/SaveManager.kt`, app `data/Storage.kt`,
+`StoryEngine.sanitize`, `world/Director.kt` (tamamı), `combat/CombatMath.kt`, `GameViewModel` eylem ve render yolları,
+arayüzde erişilebilirlik ve tıklanabilir öğe aramaları. Emülatörde 360dp + yazı ×1,3 ve tablet (800dp) ekran görüntüleri.
+
+### Yeni test: `tools/simulator` `KayitVeBelirlenimTest` (geçti)
+
+- 6 tam oynanışta **her savaş başında** (savaş ortası durum dahil) `SaveCodec.encode → decode` aynı `WorldState`'i veriyor.
+- Aynı tohum + aynı tarz aynı oynanışı üretiyor (son, gün, seviye, görülen olaylar, seviye eğrisi).
+
+### Bulgular
+
+**Kayıt**
+- Geçişler v1→v2→v3→v4 test edilmiş (`SystemMechanicsTest`, `Asama7MotorTest`); yazma atomik (geçici dosya + rename);
+  bozuk kayıt `null` döner, çökmez; daha yeni sürüm kaydı reddedilir. İçerik değişince `sanitize` geçersiz istem, savaş,
+  sahne, tohum ve el kartlarını temizliyor.
+- **Bozuk/okunamayan otomatik kayıt sessizce kayboluyor:** `load` null döner, başlık ekranında "Devam et" görünmez; Demir
+  Mod'da tek kayıt olduğu için oyun tamamen gider. Önceki otomatik kaydın yedeği (`auto.prev.json`) yok; `fsync` yok.
+- `sanitize` `dayState.currentEvent`'i denetlemiyor (içerikten silinmiş olayın ortasında kayıt): `sceneId` düzeltilse de
+  `currentEvent` eski kimlikte kalır. Düşük risk (yalnız içerik güncellemesinde).
+- CLAUDE.md "dosyalar `files/saves/*.yaml`" diyor; gerçekte `*.json` (belge hatası).
+
+**Hikaye Yönetmeni ve tohumlar**
+- Puan formülü GDD ile aynı. Ama `arcPriority` **ölü kod**: ana yay olayları `candidates`'tan zaten dışlandığı için çarpan
+  hep 1,0.
+- GDD "üç ağır savaştan sonra kamp ateşi" diyor; kod **iki** ağır olaydan (gerilim ≥3) sonra nefes veriyor.
+- `desiredTension = son + 1 + Dikkat/40`: Dikkat Perde 3–4'te ~90 olduğundan hedef gerilim hep 4'e kilitleniyor
+  (Adım 1'deki Dikkat tavanıyla birleşince eğri düzleşiyor; nefes yalnız iki ağır olaydan sonra).
+- `seedConditionHolds` tohum koşulunu her gün YAML'dan yeniden ayrıştırıyor (`forced` + `witheredSeeds`); önbellek yok.
+- Vadesi gelen ama koşulu tutmayan tohum hemen kuruyor (bekleme yok) — tasarım gereği olabilir, belgede yok.
+
+**Savaş formülleri** — GDD ile uyumlu (inisiyatif, isabet ±ölçek, hasar + zırh sabiti, kritik, kademe ×2); sapmalar
+DECISIONS #112 vb. belgeli. Kritik şansına %75, kritik çarpanına ×3,5 tavanı GDD'de yok (zararsız).
+
+**Çökme riski** — Motor istisnaları `GameViewModel` içinde yakalanıyor (`choose` runCatching, `hubAction`/`act`
+RuntimeException). `error("Tanımsız …")` çağrıları validateContent'in denetlediği kimliklerde. `render` içindeki
+görünüm üreticileri (`engine.view/status/journal…`) yakalanmıyor: bir görünüm istisnası uygulamayı çökertir (düşük
+olasılık). Simülatörün `-Xss4m` ayarı gereksiz görünüyor (testler varsayılan yığında 200 oynanış geçiyor).
+
+**Performans (arayüz)**
+- **İlk motor erişiminde ana iş parçacığında içerik yükleme: 3,9 sn donma** (Adım 1). `YukselisApplication.engine`
+  `lazy`; arka planda önceden ısıtılmalı (`Dispatchers.Default`) ve başlık ekranı hazır olana dek düğmeyi bekletmeli.
+- Her eylemde `render` 12 görünüm modelini (günlük, harita, ilişkiler, sıralama, çanta…) ana iş parçacığında yeniden
+  kuruyor; çoğu o an görünmüyor. Masaüstü ölçüsüyle eylem başı ms düzeyi; düşük cihazda kare kaçırabilir.
+- `collectAsStateWithLifecycle` kullanılıyor; Kotlin 2.2 Compose derleyicisinde güçlü atlama açık — yeniden çizim
+  sorunu görülmedi (ölçülmedi; Layout Inspector gerekir).
+
+**Erişilebilirlik ve görünüm** (ekran görüntüleri: emülatör)
+- 4 `Icon(contentDescription = null)` — hepsi yanında metin olan süs ikonları, sorun değil.
+- `Overlays.kt:128/158` tıklanabilir kartlarda `onClickLabel`/rol yok: TalkBack "dokununca ne olur" söylemiyor.
+- **360dp + yazı ×1,3:** alttaki `ActionDock` (3 seçenek) ekranın yarısından fazlasını kaplıyor; hikaye metnine ~4
+  satır kalıyor. Dock'a en yüksek yükseklik (ör. ekranın %45'i) + kendi kaydırması gerekli.
+- **Başlık ekranı ×1,3:** "Yükseliş / Protokolü" iki satırı üst üste biniyor (ş çengeli ü noktalarına değiyor): satır
+  yüksekliği dar.
+- **Tablet (800dp):** metin tam genişlikte, satırda ~95 karakter; okunabilirlik düşük. İçerik en çok ~640dp genişlikte
+  ortalanmalı; büyük ekranda alt çubuk yerine `NavigationRail` düşünülebilir.
+- Ekran yönü değişince (tablet testinde yapılandırma değişti) daktilo efekti baştan başlıyor; metin zaten okunmuşsa
+  rahatsız edici (küçük).
