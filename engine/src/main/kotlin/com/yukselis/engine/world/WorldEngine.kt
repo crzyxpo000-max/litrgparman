@@ -205,7 +205,9 @@ class WorldEngine(
         if (region == null || region.act <= 1 || '@' in ref) return ref
         val base = content.enemies[ref] ?: return ref
         val world = Progression.worldLevel(state.day) * (if (gate) GATE_LEVEL_FACTOR else 1.0) * (1 + (state.regions[region.id]?.danger ?: 0) / 400.0)
-        return com.yukselis.engine.combat.EnemyScaling.ref(ref, maxOf(base.level, world.toInt()))
+        // Geride kalan oyuncu sıkışmasın: dünya, oyuncunun en fazla birkaç seviye üstüne çıkar (DECISIONS #111).
+        val cap = state.player.level + if (gate) GATE_PLAYER_MARGIN else REGION_PLAYER_MARGIN
+        return com.yukselis.engine.combat.EnemyScaling.ref(ref, minOf(world.toInt(), cap).coerceAtLeast(1))
     }
 
     /** Yolculuk: komşu ve koşulu tutan, bu perdede canlı bölgeler. */
@@ -394,6 +396,8 @@ class WorldEngine(
 
         /** Kapı düşmanları dünya seviyesinin bu katı. */
         const val GATE_LEVEL_FACTOR = 1.15
+        const val REGION_PLAYER_MARGIN = 2
+        const val GATE_PLAYER_MARGIN = 5
         const val FIRST_GATE_TITLE = "ilk_kapi_kapatan"
         const val OVERFLOW_DANGER = 15
         const val MAX_GATES = 3

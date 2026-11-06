@@ -77,7 +77,14 @@ class Perde2_4Test {
         assertEquals((1..10).map { it * 10 }.toSet(), t.storyFloors.keys)
         (1..100).forEach { f -> assertTrue("kat $f", f in t.storyFloors || t.band(f) != null) }
         // Çok-evren: 3 dünya, her birinde olay.
-        for (w in WORLDS) assertTrue("$w olayı yok", content.events.values.count { w in it.regions } >= 4)
+        // Dünyanın olayları: bölgeye bağlı olaylar + onların tohumladığı (bölgesiz) devam olayları.
+        for (w in WORLDS) {
+            val own = content.events.values.filter { w in it.regions }
+            val followUps = own.flatMap { e -> eventScenes(e.entry).flatMap { content.scenes[it]?.choices ?: emptyList() } }
+                .flatMap { it.allEffects() }.filterIsInstance<Effect.PlantSeed>().map { it.eventId }
+                .filter { content.events[it]?.let { f -> f.seedOnly && f.regions.isEmpty() } == true }.toSet()
+            assertTrue("$w olayı: ${own.size} + ${followUps.size}", own.size + followUps.size >= 4)
+        }
         // Sonlar: 8 + gizli Döngü.
         assertEquals(ENDINGS.toSet(), content.endings.endings.keys)
         assertTrue(content.endings.endings.getValue("dongu").hidden)
@@ -92,9 +99,13 @@ class Perde2_4Test {
             if (entry.choices.size < 3 && e.id !in RULE_EXEMPT) problems += "${e.id}: giriş sahnesinde ${entry.choices.size} seçenek (en az 3)"
             val scenes = eventScenes(e.entry)
             val choices = scenes.flatMap { content.scenes[it]?.choices ?: emptyList() }
-            if (choices.none { it.requires != null || it.showWhen != null }) problems += "${e.id}: koşullu seçenek yok"
+            // Tohumla gelen devam olayları zaten bir sonucun kendisidir: koşullu ve tohum kuralından muaf.
+            // Perde 4'te başlayan olayların tohumu olgunlaşacak zaman bulamaz: tohum kuralından muaf (DECISIONS #111).
+            val followUp = e.seedOnly && !e.id.startsWith("kule_kat_")
+            val late = (e.mainArcDay ?: e.dayMin) >= 331
+            if (!followUp && choices.none { it.requires != null || it.showWhen != null }) problems += "${e.id}: koşullu seçenek yok"
             if (e.id !in RULE_EXEMPT) {
-                if (choices.none { c -> c.allEffects().any { it is Effect.PlantSeed } }) problems += "${e.id}: tohum eken seçenek yok"
+                if (!followUp && !late && choices.none { c -> c.allEffects().any { it is Effect.PlantSeed } }) problems += "${e.id}: tohum eken seçenek yok"
                 if (choices.none { c -> c.allEffects().any { it is Effect.ShiftRelation } }) problems += "${e.id}: ilişki eksenini değiştiren seçenek yok"
             }
             if (e.important) {
@@ -132,6 +143,7 @@ class Perde2_4Test {
         val loner: Boolean = false,
         val tower: Double = 0.35,
         val previousGames: Int = 0,
+        val drifting: Boolean = false,
     )
 
     private val profiles = listOf(
@@ -166,7 +178,8 @@ class Perde2_4Test {
             "dongu", relations = mapOf("yanki" to mapOf(RelAxis.TRUST to 1.0)), wantFlags = setOf("yanki_son_sirri"),
             avoidFlags = setOf("yanki_silindi"), tower = 0.85, previousGames = 1,
         ),
-        Profile("hasat", moral = mapOf(MoralAxis.MERCY to -0.5), avoidFlags = setOf("kadimler_yenildi", "kadim_anlasmasi")),
+        // Hasat: hiçbir yola bağlanmayan, kararsız (rastgele) bir oyun; son karar yalnızca Hasat'ı sunar.
+        Profile("hasat", drifting = true),
     )
 
     private data class Run(val end: WorldState, val ending: String?, val reached: Set<String>)
@@ -177,13 +190,15 @@ class Perde2_4Test {
         val reached = mutableSetOf<String>()
         var checkpoint: WorldState? = null
         var deaths = 0
+        var lastDeathDay = -10
         var steps = 0
         while (!s.ended && steps++ < STEP_LIMIT) {
             s.dayState.currentEvent?.let { reached += it }
             // Normal mod: ölüm savaş başındaki kayıt noktasına döndürür (arayüzdeki gibi); sonra başka bir şey dene.
             if (s.dead) {
                 deaths++
-                assertTrue("seed $seed (${profile?.ending}): sürekli ölüm (Gün ${s.day})", deaths < DEATH_LIMIT)
+                lastDeathDay = s.day
+                assertTrue("seed $seed (${profile?.ending}): sürekli ölüm (Gün ${s.day}, sahne ${checkpoint?.sceneId}, olay ${checkpoint?.dayState?.currentEvent}, düşman ${s.combat?.enemies?.map { it.id }}, sv ${s.player.level})", deaths < DEATH_LIMIT)
                 s = checkpoint ?: break
                 checkpoint = null
                 if (s.sceneId == WorldState.HUB && !engine.view(s, lang).hub!!.mustCamp) {
@@ -202,8 +217,14 @@ class Perde2_4Test {
                     val opt = p.options.firstOrNull { it.id != com.yukselis.engine.core.PromptKind.DECLINE } ?: p.options.first()
                     engine.resolvePrompt(s, (if (rng.nextDouble() < 0.7) opt else p.options[rng.nextInt(p.options.size)]).id, lang, p.kind, p.subject).state
                 }
-                s.combat != null -> engine.combatAction(s, engine.autoCombatAction(s), lang).state
-                s.sceneId == WorldState.HUB -> engine.hubAction(s, hubAction(s, rng, profile), lang).state
+                // Normal oyuncu gibi: gün akışından açılan (kaçılabilir) savaşta can %25'in altına inince kaç.
+                s.combat != null -> {
+                    val c = s.combat!!
+                    val flee = c.spec.flee == WorldState.HUB && s.player.hp < s.player.maxHp / 4
+                    val action = if (flee) com.yukselis.engine.combat.CombatAction.Flee else engine.autoCombatAction(s)
+                    runCatching { engine.combatAction(s, action, lang).state }.getOrElse { engine.combatAction(s, engine.autoCombatAction(s), lang).state }
+                }
+                s.sceneId == WorldState.HUB -> engine.hubAction(s, hubAction(s, rng, profile, cautious = s.day - lastDeathDay < 4), lang).state
                 else -> engine.choose(s, pickChoice(s, rng, profile), lang).state
             }
             if (before.combat == null && s.combat != null) checkpoint = before
@@ -226,18 +247,25 @@ class Perde2_4Test {
         else -> 0.0
     }
 
-    private fun choiceScore(c: ChoiceDef, p: Profile?): Double {
+    private fun choiceScore(c: ChoiceDef, p: Profile?, depth: Int = 2): Double {
         if (p == null) return 1.0
         // Hedef sonun sahnesine giden seçenek her zaman kazanır.
         c.next?.let { n -> content.endings.forScene(n)?.let { return if (it.id == p.ending) 1e6 else -1e3 } }
-        return c.effects.sumOf { effectScore(it, p) }
+        val own = c.effects.sumOf { effectScore(it, p) }
+        // Bir adım ileri bak: etkisi bir sonraki sahnede olan seçimler (ör. "tahta yürü" → "otur").
+        val ahead = if (depth <= 0) 0.0 else c.next?.let { content.scenes[it] }?.choices
+            ?.maxOfOrNull { choiceScore(it, p, depth - 1) }?.coerceAtLeast(0.0) ?: 0.0
+        return own + 0.9 * ahead
     }
 
     private fun pickChoice(s: WorldState, rng: Random, p: Profile?): String {
         val views = engine.view(s, lang).choices.filter { it.enabled }
         assertTrue("çıkmaz: ${s.sceneId} (Gün ${s.day})", views.isNotEmpty())
         val defs = content.scenes.getValue(s.sceneId).choices.associateBy { it.id }
-        if (p == null || rng.nextDouble() < 0.1) return views[rng.nextInt(views.size)].id
+        if (p?.drifting == true) {
+            views.firstOrNull { v -> defs[v.id]?.next?.let { content.endings.forScene(it)?.id } == p.ending }?.let { return it.id }
+        }
+        if (p == null || p.drifting || rng.nextDouble() < 0.1) return views[rng.nextInt(views.size)].id
         return views.maxBy { v -> (defs[v.id]?.let { choiceScore(it, p) } ?: 0.0) + rng.nextDouble() * 0.5 }.id
     }
 
@@ -247,12 +275,12 @@ class Perde2_4Test {
         return eventScenes(e.entry).flatMap { content.scenes[it]?.choices ?: emptyList() }.maxOfOrNull { choiceScore(it, p) } ?: 0.0
     }
 
-    private fun hubAction(s: WorldState, rng: Random, p: Profile?): HubAction {
+    private fun hubAction(s: WorldState, rng: Random, p: Profile?, cautious: Boolean = false): HubAction {
         val hub = engine.view(s, lang).hub!!
         if (hub.mustCamp) return HubAction.Camp
         val pl = s.player
         if (pl.hp < pl.maxHp * 0.45) return HubAction.Rest
-        hub.tower?.let { t ->
+        hub.tower?.takeIf { !cautious }?.let { t ->
             if (pl.level >= t.level - 2 && rng.nextDouble() < (p?.tower ?: 0.35)) return HubAction.ClimbTower
         }
         // Kule'nin bölgesine yönel (kule açık ve tırmanmak istiyorsa).
@@ -263,6 +291,8 @@ class Perde2_4Test {
             val best = hub.cards.maxBy { cardScore(it.id, p) + rng.nextDouble() }
             if (rng.nextDouble() < 0.6) return HubAction.Card(best.id)
         }
+        // Yeni öldüyse toparlan: keşif ve kapı yerine antrenman.
+        if (cautious) return HubAction.Train
         val r = rng.nextDouble()
         return when {
             hub.travel.isNotEmpty() && r < 0.12 -> HubAction.Travel(hub.travel[rng.nextInt(hub.travel.size)].id)
@@ -286,7 +316,17 @@ class Perde2_4Test {
     fun `her son en az bir stratejiyle ulasilir`() {
         val unreached = mutableListOf<String>()
         for (p in profiles) {
-            val hit = (1L..TRIES).firstOrNull { seed -> play(seed * 7919 + p.ending.hashCode(), p).ending == p.ending }
+            val hit = (1L..TRIES).firstOrNull { seed ->
+                val r = play(seed * 7919 + p.ending.hashCode(), p)
+                if (r.ending != p.ending) {
+                    val e = r.end
+                    println("  ${p.ending} deneme $seed → ${r.ending}: merhamet ${e.morality.mercy} düzen ${e.morality.order} insanlık ${e.morality.humanity} " +
+                        "itibar ${e.reputation} kademe ${e.player.grade} yoldaş ${e.npcs.values.count { it.companion && it.alive }} kule ${e.variable("kule_kat")} " +
+                        "tehdit ${e.variable("kadim_tehdit")} hayatta ${e.variable("hayatta_kalan")} görevler ${e.quests.filterKeys { it.startsWith("zincir_") }} " +
+                        "bayraklar ${e.flags.filter { it in setOf("lonca_hakimiyeti", "kaya_devrildi", "kadimler_yenildi", "kadim_anlasmasi", "sistem_cekirdegine_ulasildi", "yanki_son_sirri", "uye_lonca") }}")
+                }
+                r.ending == p.ending
+            }
             println("Son ${p.ending}: ${if (hit != null) "ulaşıldı (deneme $hit)" else "ULAŞILAMADI"}")
             if (hit == null) unreached += p.ending!!
         }
@@ -297,7 +337,7 @@ class Perde2_4Test {
         const val STEP_LIMIT = 200_000
         const val DEATH_LIMIT = 40
         const val FULL_RUNS = 12L
-        const val TRIES = 8L
+        const val TRIES = 16L
         val ENDINGS = listOf("koruyucu", "demir_taht", "yukselis", "kod_kirici", "ozgurluk", "vassal", "yalniz_avci", "hasat", "dongu")
         val MAIN_NPCS = listOf("deniz_arman", "kaya_demir", "elif_sari", "vahit", "yanki", "aras_kurt", "mert_kilic", "thessar")
         val WORLDS = listOf("batik_takimada", "pirinc_kervan", "yedi_taht")

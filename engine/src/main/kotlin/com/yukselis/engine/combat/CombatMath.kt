@@ -13,9 +13,19 @@ object CombatMath {
     /** İnisiyatif = ÇEV + 0,5 · ALG + d20 */
     fun initiative(stats: Stats, d20: Int): Double = stats[Stat.AGI] + 0.5 * stats[Stat.PER] + d20
 
-    /** İsabet = 75% + (ALG_saldıran − ÇEV_savunan) · 1,5% (5%–95%). Kör: −40 puan. */
+    /**
+     * Stat ölçeği (Aşama 7): iki statın ortalaması 20'yi aşınca farklar bu oranla küçültülür. Düşük statlarda 1 (GDD
+     * formülleri aynen); seviye 100+'da 55 puanlık fark Perde 1'deki ~10 puanlık fark kadar ağırlık taşır (DECISIONS #112).
+     */
+    fun statScale(a: Int, b: Int): Double = maxOf(1.0, (a + b) / 2.0 / SCALE_BASE)
+
+    const val SCALE_BASE = 20.0
+
+    /** İsabet = 75% + (ALG_saldıran − ÇEV_savunan) · 1,5% / ölçek (5%–95%). Kör: −40 puan. */
     fun hitChance(attacker: Stats, defender: Stats, blind: Boolean = false, bonus: Double = 0.0): Double {
-        var p = 0.75 + (attacker[Stat.PER] - defender[Stat.AGI]) * 0.015 + bonus
+        val per = attacker[Stat.PER]
+        val agi = defender[Stat.AGI]
+        var p = 0.75 + (per - agi) * 0.015 / statScale(per, agi) + bonus
         if (blind) p -= 0.40
         return p.coerceIn(0.05, 0.95)
     }
@@ -24,7 +34,9 @@ object CombatMath {
     fun critChance(stats: Stats): Double = (0.05 + 0.002 * stats[Stat.AGI]).coerceAtMost(0.75)
 
     /** Kritik çarpanı = 1,5 + 0,005 · ALG */
-    fun critMultiplier(stats: Stats): Double = 1.5 + 0.005 * stats[Stat.PER]
+    fun critMultiplier(stats: Stats): Double = (1.5 + 0.005 * stats[Stat.PER]).coerceAtMost(CRIT_MULT_MAX)
+
+    const val CRIT_MULT_MAX = 3.5
 
     /** Kademe farkı: her kademe için ×2 (üst) ya da ×0,5 (alt). */
     fun gradeMultiplier(attacker: Grade, defender: Grade): Double = 2.0.pow(attacker.ordinal - defender.ordinal)
@@ -48,12 +60,16 @@ object CombatMath {
         gradeMult: Double = 1.0,
         extra: Double = 1.0,
     ): Int {
-        val raw = (base + statValue * multiplier) * 100.0 / (100.0 + resistance)
+        // Zırh sabiti saldıranın statıyla büyür (Aşama 7): düşük statta 100 (GDD), yüksek seviyede hasar dirençle
+        // birlikte ölçeklenir ve ~40'ta tavanlanmaz (DECISIONS #112).
+        val armor = maxOf(100.0, ARMOR_PER_STAT * statValue)
+        val raw = (base + statValue * multiplier) * armor / (armor + resistance)
         val variance = 0.9 + rng.nextDouble() * 0.2
         return (raw * variance * gradeMult * extra).roundToInt().coerceAtLeast(1)
     }
 
     /** Efor kademesi başına hasar ve isabet bonusu ve Dayanım bedeli. */
+    const val ARMOR_PER_STAT = 5.0
     const val EFFORT_DAMAGE = 0.12
     const val EFFORT_HIT = 0.05
     const val EFFORT_STAMINA = 8
@@ -64,7 +80,8 @@ object CombatMath {
     /** Kaçış: 50% + (ÇEV_oyuncu − ort. ÇEV_düşman) · 3% (10%–95%). */
     fun fleeChance(player: Stats, enemies: List<Stats>): Double {
         val avg = if (enemies.isEmpty()) 0.0 else enemies.map { it[Stat.AGI] }.average()
-        return (0.5 + (player[Stat.AGI] - avg) * 0.03).coerceIn(0.10, 0.95)
+        val agi = player[Stat.AGI]
+        return (0.5 + (agi - avg) * 0.03 / statScale(agi, avg.toInt())).coerceIn(0.10, 0.95)
     }
 
     /**

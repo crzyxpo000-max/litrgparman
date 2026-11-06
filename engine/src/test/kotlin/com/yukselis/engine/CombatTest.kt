@@ -135,7 +135,9 @@ class CombatTest {
         val mercy = s.morality.mercy
         s = engine.combatAction(s, CombatAction.Execute(CombatEngine.EXEC_BRUTAL), lang).state
         assertNull(s.combat)
-        assertEquals(mercy - 3, s.morality.mercy)
+        // Akılsız canavarın (fare) infazı ahlakı kaydırmaz (DECISIONS #113); sayaç yine artar.
+        assertEquals(mercy, s.morality.mercy)
+        assertEquals(1, s.variable("acimasiz_infaz"))
         assertTrue(s.hasFlag("yenildi_kanal_faresi"))
     }
 

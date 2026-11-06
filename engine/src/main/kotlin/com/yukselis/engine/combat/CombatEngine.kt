@@ -902,14 +902,17 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         val uid = ctx.c.pendingExecution ?: throw ActionRejected("İnfaz bekleyen düşman yok")
         val e = ctx.c.enemy(uid)!!
         val def = ctx.def(e)
+        // Ahlak yalnızca zeki düşmanın (insan, NPC, konuşan varlık) infazında kayar: yüzlerce canavar infazı eksenleri
+        // tavana taşımasın; gerçek seçimler hikayede (DECISIONS #113).
+        val moral = def.intelligent
         when (option) {
             EXEC_BRUTAL -> {
-                ctx.s = ctx.s.copy(morality = ctx.s.morality.shift(MoralAxis.MERCY, -3).shift(MoralAxis.HUMANITY, -2))
+                if (moral) ctx.s = ctx.s.copy(morality = ctx.s.morality.shift(MoralAxis.MERCY, -3).shift(MoralAxis.HUMANITY, -2))
                 ctx.addVar("acimasiz_infaz", 1)
             }
-            EXEC_CLEAN -> ctx.s = ctx.s.copy(morality = ctx.s.morality.shift(MoralAxis.ORDER, 2))
+            EXEC_CLEAN -> if (moral) ctx.s = ctx.s.copy(morality = ctx.s.morality.shift(MoralAxis.ORDER, 2))
             EXEC_SPARE -> {
-                ctx.s = ctx.s.copy(morality = ctx.s.morality.shift(MoralAxis.MERCY, 5))
+                if (moral) ctx.s = ctx.s.copy(morality = ctx.s.morality.shift(MoralAxis.MERCY, 5))
                 ctx.updateEnemy(uid) { it.copy(gone = true, hp = 1) }
                 ctx.c = ctx.c.copy(kills = ctx.c.kills - 1)
                 remember(ctx, def, spared = true)

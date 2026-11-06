@@ -16,6 +16,7 @@ import kotlin.math.roundToLong
 object EnemyScaling {
     const val SEPARATOR = '@'
     private const val MAX_LEVEL = 2000
+    const val WORLD_PLAYER_MARGIN = 6
 
     /** "id@seviye" → (id, seviye); ölçeksiz başvuruda seviye null. */
     fun parse(ref: String): Pair<String, Int?> {
@@ -45,7 +46,8 @@ object EnemyScaling {
         val m = RELATIVE.matchEntire(ref.substring(i + 1)) ?: return ref
         val n = m.groupValues[2].takeIf { it.isNotEmpty() }?.toInt() ?: 0
         val level = when (m.groupValues[1]) {
-            "dunya" -> Progression.worldLevel(day) * (1 + n / 100.0)
+            // Dünyaya bağlı tehdit, geride kalan oyuncunun en fazla WORLD_PLAYER_MARGIN seviye üstüne çıkar.
+            "dunya" -> minOf(Progression.worldLevel(day) * (1 + n / 100.0), (playerLevel + WORLD_PLAYER_MARGIN).toDouble())
             else -> (playerLevel + n).toDouble()
         }
         return EnemyScaling.ref(ref.substring(0, i), level.roundToInt().coerceIn(1, MAX_LEVEL))

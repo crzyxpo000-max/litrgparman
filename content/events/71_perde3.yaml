@@ -2976,6 +2976,8 @@ olaylar:
           - { tr: "Muhafızlardan biri sana bakıyor, sonra penceresine. Rengi atıyor. Sonra diğerini dürtüyor ve ikisi birden kapıyı açıyor, eğilerek.", en: "One of the guards looks at you, then at his window. The color drains out of his face. He elbows the other one, and they both swing the gate open, bowing." }
           - metin: { tr: "Kapının dibinde, merdivenin sahanlığında, on bir yaşında bir kız oturuyor; sırtında bir çanta, elinde bir kapı kristali. E kademesi. İçeri alınmayı bekliyor; anlaşılan günlerdir.", en: "On the landing at the foot of the gate sits an eleven-year-old girl with a backpack and a Gate crystal in her hand. E-Grade. Waiting to be let in. For days, by the look of it." }
             kosul: { gorunen_seviye_min: 1 }
+          - metin: { tr: "Kapının üstündeki balkonda, bacaklarını boşluğa sarkıtmış {npc:aras_kurt} oturuyor. Kat'a hiç girmemiş; kapıyı izlemek için oraya tırmanmış. \"Merak ediyorum,\" diye sesleniyor aşağıya. \"Hangi kapıdan gireceksin?\"", en: "Up on the balcony over the gate, legs dangling over the drop, sits {npc:aras_kurt}. He never went inside the Floor. He climbed up there to watch the gate. \"I'm curious,\" he calls down. \"Which door are you gonna use?\"" }
+            kosul: { npc_hayatta: "aras_kurt", bayrak_yok: ["aras_cok_evren_yoldasi", "aras_kadimlere_gitti"] }
         sezgiler:
           - kosul: { stat: { per: 180 } }
             metin: { tr: "[ALG] Kızın elindeki kristal B kademesi bir kapıdan. Onu kendi başına kapatmış. Kademesi E, ama yaptığı şey değil.", en: "[PER] The crystal in the girl's hand came out of a B-Grade Gate. She closed it herself. She's E-Grade. What she did isn't." }
@@ -2996,6 +2998,7 @@ olaylar:
               - ahlak: { duzen: -4, insanlik: -1 }
               - dikkat: 5
               - itibar: { siginak: 4, lonca: -3 }
+              - iliski: { aras_kurt: { saygi: 5, guven: 2 } }
             sonraki: "p3_ellinciler_ic"
           - id: "gizli"
             tur: "gizle"
@@ -3004,6 +3007,7 @@ olaylar:
               - gizle: 8
               - ahlak: { insanlik: 2 }
               - bilgi: "ellinci_kat_hizmet"
+              - iliski: { aras_kurt: { guven: 3 } }
             sonraki: "p3_ellinciler_hizmet"
 
       - id: "p3_ellinciler_ic"
@@ -3013,6 +3017,8 @@ olaylar:
           - { tr: "\"Burada bir yeriniz var,\" diyor Sözcü. \"En üst katta. Aşağıdaki karmaşayı unutun. Sıralama'nın birincisi aşağıda yaşamamalı.\"", en: "\"There's a place for you here,\" the Speaker says. \"Top floor. Forget the mess down there. Number One on the Ranking shouldn't be living downstairs.\"" }
           - metin: { tr: "Kız elini hâlâ bırakmamış. Sözcü ona bakıyor, sonra sana, sonra yine ona; gülümsemesi bir an çatlıyor.", en: "The girl still hasn't let go of your hand. The Speaker looks at her, then at you, then at her again, and her smile cracks for a second." }
             kosul: { bayrak: "p3_ellinci_kiz" }
+          - metin: { tr: "Balkondan inen {npc:aras_kurt} kapının pervazına yaslanmış, Sözcü'nün teklifini dinliyor. Dudağının kenarı kıvrılıyor; senin ne cevap vereceğini merak eden birinin yüzü değil bu, bahse girmiş birininki.", en: "{npc:aras_kurt} has come down off the balcony and is leaning in the doorframe, listening to the Speaker's offer. The corner of his mouth curls. That isn't the face of somebody wondering what you'll say. It's the face of somebody who's got money on it." }
+            kosul: { npc_hayatta: "aras_kurt", bayrak_yok: ["aras_cok_evren_yoldasi", "aras_kadimlere_gitti"] }
         secenekler:
           - id: "kabul"
             etiket: { tr: "Kat'ta bir oda kabul et", en: "Accept a room on the Floor" }
@@ -3020,6 +3026,7 @@ olaylar:
               - ahlak: { duzen: 3, merhamet: -3 }
               - itibar: { lonca: 5, siginak: -5 }
               - bayrak: "p3_ellinci_oda"
+              - iliski: { aras_kurt: { saygi: -5, guven: -2 } }
             sonraki: "@akis"
           - id: "kapi_ac"
             etiket: { tr: "\"Kapı bundan sonra herkese açık.\"", en: "\"From now on, that gate's open to everybody.\"" }
@@ -3029,6 +3036,7 @@ olaylar:
               - bayrak: "p3_ellinci_kapi_acildi"
               - degisken: { hayatta_kalan: 3 }
               - itibar: { siginak: 8 }
+              - iliski: { aras_kurt: { saygi: 4 } }
             sonraki: "p3_ellinciler_acilis"
           - id: "kiz_birak"
             etiket: { tr: "Kızı Kat'a bırak; ona bir oda sen ödersin", en: "Leave the girl on the Floor. You pay for her room" }
@@ -3061,6 +3069,8 @@ olaylar:
         paragraflar:
           - { tr: "Hizmet girişi bir çamaşırhanenin arkasından geçiyor. Burada kimse temiz giymiyor; D ve E kademesi insanlar Kat'ın çamaşırını yıkıyor, yemeğini pişiriyor, çöpünü elli kat aşağı taşıyor.", en: "The service entrance runs past the back of a laundry. Nobody's dressed clean back here. D- and E-Grades wash the Floor's sheets, cook its food, haul its trash fifty floors down." }
           - { tr: "Biri sana bir kova uzatıyor. \"Yenisin? Kuyu suyu yirmi ikinci katta. Acele et; Sözcü bugün misafir bekliyor. Sıralama'nın birincisi gelecekmiş.\"", en: "Somebody hands you a bucket. \"New? Well water's on twenty-two. Hurry up. The Speaker's got a guest today. Number One on the Ranking, supposedly.\"" }
+          - metin: { tr: "Çamaşırhanenin penceresinden yukarı baktığında {npc:aras_kurt|i} görüyorsun; balkonda, sana bakıp sessizce gülüyor. Saklanmayı bilen birini tanıyan birinin gülüşü bu.", en: "When you glance up through the laundry window, you see {npc:aras_kurt} on the balcony, looking down at you and laughing without a sound. It's the laugh of somebody who knows how to hide, recognizing somebody else who does." }
+            kosul: { npc_hayatta: "aras_kurt", bayrak_yok: ["aras_cok_evren_yoldasi", "aras_kadimlere_gitti"] }
         secenekler:
           - id: "kova"
             etiket: { tr: "Kovayı al; bir gün burada çalış", en: "Take the bucket. Work a day down here" }
@@ -3905,6 +3915,8 @@ olaylar:
         paragraflar:
           - { tr: "Sancağın altında yüzlerce kişi Kordon'a iniyor; sırayla, senin öğrettiğin gibi. Kabuklular sudan çıktığında karşılarında bir duvar buluyorlar.", en: "Hundreds of people come down onto the Esplanade under your banner, in order, the way you taught them. When the shellbacks crawl out of the water, they find a wall waiting for them." }
           - { tr: "Sen yalnızca izliyorsun; bir kez müdahale ediyorsun, bir çocuğu sudan çekmek için. Gece yarısı sahil sessiz. Senin ordun ilk kez sensiz kazandı.", en: "You mostly just watch. You step in once, to pull a kid out of the water. By midnight the shore is quiet. Your army won without you for the first time." }
+          - metin: { tr: "Gece yarısından sonra Liman tarafından bir el arabası geliyor: {npc:elif_sari} ve iki Sığınak gönüllüsü, bidon bidon gaz yağı. \"Fener yakacaksanız,\" diyor, \"yağı da birinin getirmesi lazımdı.\" Sonra sancaklara bakıyor ve bir şey söylemiyor.", en: "After midnight a handcart comes rattling up from the waterfront: {npc:elif_sari} and two Haven volunteers, with jerrycan after jerrycan of lamp oil. \"If you're lighting lanterns,\" she says, \"somebody had to bring the oil.\" Then she looks at the banners and doesn't say anything." }
+            kosul: { npc_hayatta: "elif_sari" }
         secenekler:
           - id: "fener"
             etiket: { tr: "İlk feneri onlar yaksın", en: "Let them light the first lantern" }
@@ -3914,6 +3926,8 @@ olaylar:
               - degisken: { hayatta_kalan: 3 }
               - kontrol: { kordon: "siginak" }
               - itibar: { siginak: 6 }
+              - iliski: { elif_sari: { guven: 3, saygi: 2 } }
+              - tohum: { olay: "p3_kordon_aksami", gecikme: { min: 5, max: 10 }, kosul: { bayrak: "p3_kordon_geri_alindi" } }
             sonraki: "@akis"
           - id: "karargah"
             etiket: { tr: "Kordon'u ordunun karargâhı yap", en: "Make the Esplanade your army's HQ" }
@@ -3924,6 +3938,8 @@ olaylar:
               - kontrol: { kordon: "lonca" }
               - ordu_kazan: 20
               - itibar: { lonca: 5 }
+              - iliski: { elif_sari: { guven: -3 } }
+              - tohum: { olay: "p3_kordon_aksami", gecikme: { min: 5, max: 10 }, kosul: { bayrak: "p3_kordon_geri_alindi" } }
             sonraki: "@akis"
 
       - id: "p3_kordon_fener"
@@ -3931,6 +3947,8 @@ olaylar:
         paragraflar:
           - { tr: "Son kabuklu suya geri kaçıyor. Kordon, ilk taşmadan beri ilk kez, gecenin bir yarısında boş ve sessiz.", en: "The last shellback scuttles back into the water. For the first time since the first break, the Esplanade is empty and quiet in the middle of the night." }
           - { tr: "Haberci arkandan bir fener uzatıyor, eski bir gaz lambası. Fitili ıslak; yine de yanıyor.", en: "The runner hands you a lantern from behind, an old kerosene lamp. The wick's damp. It lights anyway." }
+          - metin: { tr: "Liman tarafından bir el arabası tıkırdayarak geliyor: {npc:elif_sari} ve iki Sığınak gönüllüsü, bidon bidon gaz yağı. \"Fener yakacaksanız,\" diyor nefes nefese, \"yağı da birinin getirmesi lazımdı.\"", en: "A handcart comes rattling up from the waterfront: {npc:elif_sari} and two Haven volunteers, with jerrycan after jerrycan of lamp oil. \"If you're lighting lanterns,\" she says, out of breath, \"somebody had to bring the oil.\"" }
+            kosul: { npc_hayatta: "elif_sari" }
         secenekler:
           - id: "yak"
             etiket: { tr: "Feneri as; ilk ışık senin olsun", en: "Hang the lantern. First light's yours" }
@@ -3940,6 +3958,8 @@ olaylar:
               - degisken: { hayatta_kalan: 3 }
               - kontrol: { kordon: "siginak" }
               - itibar: { siginak: 5 }
+              - iliski: { elif_sari: { saygi: 2 } }
+              - tohum: { olay: "p3_kordon_aksami", gecikme: { min: 5, max: 10 }, kosul: { bayrak: "p3_kordon_geri_alindi" } }
             sonraki: "@akis"
           - id: "habercive"
             etiket: { tr: "Feneri habercinin eline geri ver", en: "Hand the lantern back to the runner" }
@@ -3948,6 +3968,8 @@ olaylar:
               - bayrak: "p3_kordon_geri_alindi"
               - degisken: { hayatta_kalan: 3 }
               - kontrol: { kordon: "siginak" }
+              - iliski: { elif_sari: { guven: 3, saygi: 2 } }
+              - tohum: { olay: "p3_kordon_aksami", gecikme: { min: 5, max: 10 }, kosul: { bayrak: "p3_kordon_geri_alindi" } }
             sonraki: "@akis"
 
       - id: "p3_kordon_yenilgi"
@@ -4043,6 +4065,7 @@ olaylar:
               - bilgi: "firtina_tasi"
               - degisken: { kadim_tehdit: -3 }
               - iliski: { thessar: { saygi: 3 } }
+              - tohum: { olay: "p3_firtina_olcucu", gecikme: { min: 3, max: 7 } }
             sonraki: "p3_firtina_sabah"
           - id: "kir"
             etiket: { tr: "Taşı orada kır", en: "Smash the stone right there" }
@@ -4109,4 +4132,354 @@ olaylar:
               - ahlak: { duzen: 2 }
               - degisken: { hayatta_kalan: -2 }
               - iliski: { yanki: { saygi: 2 } }
+            sonraki: "@akis"
+
+  # ---------------------------------------------------------------- Kordon akşamı (tohum: p3_kordon_geri)
+  - id: "p3_kordon_aksami"
+    perde: [3, 4]
+    agirlik: 1
+    etiketler: ["kordon", "toplum", "savas"]
+    gerilim: 3
+    yalniz_tohum: true
+    kart: { tr: "Kordon akşamı", en: "Evening on the Esplanade" }
+    sahne: "p3_kordon_aksami_1"
+    sahneler:
+      - id: "p3_kordon_aksami_1"
+        yer: "kordon"
+        paragraflar:
+          - { tr: "Haberci seni yine buluyor, nerede olursan ol; bu kez nefes nefese değil, gülerek. \"Gel,\" diyor. \"Görmen lazım. Kordon'da insanlar yürüyor.\"", en: "The runner finds you again, wherever you are. Not out of breath this time. Grinning. \"Come on,\" he says. \"You've gotta see this. People are walking the Esplanade.\"" }
+          - { tr: "Güneş körfeze inerken fenerler birer birer yanıyor. Entegrasyon'dan beri ilk kez Kordon'da akşam yürüyüşü var: elinde tepsiyle simit satan bir ihtiyar, bankta el ele oturan iki genç, eski iskelenin ucunda misina sallayan çocuklar.", en: "As the sun goes down into the bay, the lanterns light one after another. For the first time since Integration there's an evening stroll on the Esplanade: an old man selling pretzels off a tray, two teenagers holding hands on a bench, kids dangling fishing line off the end of the old pier." }
+          - metin: { tr: "Fenerlerden birinin altındaki bankta {npc:elif_sari} oturuyor; aylardır ilk kez üstünde önlük yok.", en: "On a bench under one of the lanterns sits {npc:elif_sari}, out of her scrubs for the first time in months." }
+            kosul: { npc_hayatta: "elif_sari" }
+          - { tr: "Sonra eski iskelenin altında su kaynamaya başlıyor. Kabuklular temizlenmişti, ama anaları hiç gitmemiş. Bir kamyon büyüklüğünde bir sırt, çocukların ayaklarının altından yükseliyor.", en: "Then the water under the old pier starts to boil. The shellbacks got cleared out, but their mother never left. A back the size of a pickup truck rises up right under the kids' feet." }
+        sezgiler:
+          - kosul: { stat: { per: 200 } }
+            metin: { tr: "[ALG] Ana kabuklu yaşlı ve yavaş; kabuğunun sol yanında, kıskacın kökünde bir çatlak var. Işıktan hoşlanmıyor; yuvasına dönmek istiyor, ama önünde çocuklar var.", en: "[PER] The mother is old and slow, with a crack in her shell on the left side, right at the root of the claw. She doesn't like the light. She wants to go back to her nest, but the kids are in the way." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "fenerleri yaktın ve ışık onu uyandırdı. her ışık bir şeyi uyandırır. yine de yak. yalnızca bunu bil.", en: "you lit the lanterns and the light woke it up. every light wakes something. light them anyway. just know that." }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Çocuklar! Önce çocuklar!\"", en: "\"The kids! Kids first!\"" }
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "\"Kamyon büyüklüğünde bir yengeç. Bu şehri seviyorum.\"", en: "\"A crab the size of a pickup. God, I love this city.\"" }
+        secenekler:
+          - id: "iskele"
+            etiket: { tr: "İskeleye koş; çocukları sudan çek", en: "Run for the pier. Get the kids out of the water" }
+            etkiler:
+              - ahlak: { merhamet: 4 }
+              - savas: { dusmanlar: ["kordon_kabuklusu@dunya+40", "kordon_kabuklusu@dunya"], ortam: ["su"], kazan: "p3_kordon_aksami_son", kaybet: "p3_kordon_aksami_yenilgi" }
+          - id: "karanlik"
+            etiket: { tr: "Fenerleri söndür; onu karanlıkta, yuvasında avla", en: "Douse the lanterns. Hunt it in the dark, in its nest" }
+            etkiler:
+              - ahlak: { duzen: 1, merhamet: 1 }
+              - savas: { dusmanlar: ["kordon_kabuklusu@dunya+30"], ortam: ["su", "karanlik"], kazan: "p3_kordon_aksami_son", kaybet: "p3_kordon_aksami_yenilgi" }
+          - id: "bakis"
+            tur: "gosteris"
+            etiket: { tr: "Suya tek bir bakış at; geri batsın", en: "Give the water one look. Let it sink back down" }
+            gerekli: { stat: { wil: 260 } }
+            etkiler:
+              - dikkat: 4
+              - ahlak: { insanlik: -2, duzen: 1 }
+              - xp_seviye: 15
+            sonraki: "p3_kordon_aksami_bakis"
+          - id: "ordu"
+            etiket: { tr: "Sancağın altındakilere seslen: \"Bu sahil sizin!\"", en: "Call to your banner: \"This shore is yours!\"" }
+            goster: { ordu_min: 1 }
+            etkiler:
+              - ahlak: { duzen: 3, merhamet: 2 }
+              - ordu_kazan: 10
+            sonraki: "p3_kordon_aksami_ordu"
+
+      - id: "p3_kordon_aksami_bakis"
+        yer: "kordon"
+        paragraflar:
+          - { tr: "Kalabalığın arasından sıyrılıp iskelenin ucuna yürüyorsun ve suya bakıyorsun; yalnızca bakıyorsun. Kaynayan su duruyor.", en: "You slip through the crowd, walk to the end of the pier, and look at the water. That's all. You just look. The boiling stops." }
+          - { tr: "Kamyon büyüklüğündeki sırt bir an orada asılı kalıyor; sonra çok yavaş, bir denizaltı gibi, geldiği karanlığa geri gömülüyor. Bir daha çıkmayacak; bunu ikiniz de biliyorsunuz.", en: "The pickup-sized back hangs there for a second. Then, very slowly, like a submarine, it sinks back into the dark it came from. It isn't coming up again. You both know it." }
+          - { tr: "Arkanda kimse alkışlamıyor. Simitçi ihtiyar tepsisini göğsüne bastırmış, sana Kadim gemisine bakar gibi bakıyor.", en: "Behind you, nobody claps. The old pretzel guy has his tray clutched to his chest, and he's staring at you the way people stare at the Ancient ship." }
+        secenekler:
+          - id: "simit"
+            etiket: { tr: "İhtiyardan bir simit al", en: "Buy a pretzel off the old man" }
+            etkiler:
+              - ahlak: { insanlik: 3 }
+            sonraki: "@akis"
+          - id: "yuru"
+            etiket: { tr: "Arkanı dön ve yürü", en: "Turn around and walk off" }
+            etkiler:
+              - ahlak: { insanlik: -1 }
+            sonraki: "@akis"
+
+      - id: "p3_kordon_aksami_ordu"
+        yer: "kordon"
+        paragraflar:
+          - { tr: "Sesin Kordon boyunca yankılanıyor ve fenerlerin altından insanlar fırlıyor: simitçinin yanındaki genç, banktaki iki âşık, misinasını bırakan bir baba. Sancağının altında savaşmayı öğrenmiş sıradan insanlar.", en: "Your voice carries down the whole Esplanade, and people come running out from under the lanterns: the kid next to the pretzel guy, the two on the bench, a dad dropping his fishing line. Ordinary people who learned to fight under your banner." }
+          - { tr: "Ana kabuklu iskelenin altından çıktığında karşısında bir duvar buluyor; senin değil, onların. Sen yalnızca bir kez araya giriyorsun: kıskacın bir çocuğun misinasına dolandığı an.", en: "When the mother comes up from under the pier, she finds a wall waiting. Not yours. Theirs. You only step in once: the second her claw tangles in a kid's fishing line." }
+          - { tr: "Gece yarısı ana kabuklu iskelenin taşlarında sırtüstü yatıyor. Biri sönen fenerlerden birini yeniden yakıyor; sonra herkes yakıyor.", en: "By midnight the mother is lying on her back on the pier stones. Somebody relights one of the lanterns that went out. Then everybody does." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Fenerlerin altına yürü", en: "Walk out under the lanterns" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+              - degisken: { hayatta_kalan: 1 }
+            sonraki: "p3_kordon_aksami_son"
+
+      - id: "p3_kordon_aksami_son"
+        yer: "kordon"
+        paragraflar:
+          - { tr: "Kordon yeniden sessiz. Ana kabuklu eski iskelenin taşlarında yatıyor; kabuğundaki su fener ışığında buhar gibi tütüyor.", en: "The Esplanade is quiet again. The mother lies on the stones of the old pier, the water on her shell steaming in the lantern light." }
+          - { tr: "Yürüyüş yavaş yavaş geri geliyor. Önce simitçi ihtiyar, sonra banktaki iki genç; en son, misinalarını yeniden suya atan çocuklar.", en: "The stroll comes back little by little. The old pretzel guy first, then the two on the bench, and last of all the kids, casting their lines back into the water." }
+          - metin: { tr: "{npc:elif_sari} yanına geliyor; elinde iki bardak çay, birini sana uzatıyor. \"Bir akşam,\" diyor. \"Yalnızca bir akşam istemiştim. Aldık mı onu?\"", en: "{npc:elif_sari} comes over with two paper cups of coffee and hands you one. \"One evening,\" she says. \"That's all I wanted. Just one. Did we get it?\"" }
+            kosul: { npc_hayatta: "elif_sari" }
+        secenekler:
+          - id: "elif"
+            etiket: { tr: "{npc:elif_sari|le} fenerlerin altında yürü", en: "Walk the lanterns with {npc:elif_sari}" }
+            goster: { npc_hayatta: "elif_sari" }
+            etkiler:
+              - ahlak: { insanlik: 3 }
+              - iliski: { elif_sari: { guven: 4, baglilik: 3 } }
+            sonraki: "@akis"
+          - id: "simit"
+            etiket: { tr: "Yürüyüşe katıl; ihtiyardan bir simit al", en: "Join the stroll. Buy a pretzel off the old man" }
+            etkiler:
+              - ahlak: { insanlik: 3 }
+            sonraki: "@akis"
+          - id: "nobet"
+            etiket: { tr: "Fenerlere nöbet kur; her gece biri beklesin", en: "Set a lantern watch. Somebody on it every night" }
+            etkiler:
+              - ahlak: { duzen: 3 }
+              - degisken: { hayatta_kalan: 1 }
+            sonraki: "@akis"
+
+      - id: "p3_kordon_aksami_yenilgi"
+        yer: "kordon"
+        paragraflar:
+          - { tr: "Ana kabuklu seni iskelenin taşlarına yapıştırıyor ve kıskacı bir mengene gibi kapanıyor. Fener ışığı bir an kararıyor.", en: "The mother pins you to the pier stones, and her claw closes like a vise. The lantern light goes dark for a second." }
+          - { tr: "Sonra bir kanca, bir halat, bir sürü el: Kordon'un akşam yürüyüşçüleri ellerinde ne varsa kabukluya üşüşüyor. Onu sudan söküp çıkaran sen değilsin; onlar.", en: "Then a gaff hook, a rope, a whole lot of hands: the Esplanade's evening strollers pile onto the shellback with whatever they've got. You're not the one who drags it out of the water. They are." }
+          - { tr: "Yere düştüğün ilk gece bu değil. Ama seni ilk kez bir şehir ayağa kaldırıyor.", en: "It isn't the first night you've gone down. But it's the first time a city has picked you back up." }
+        secenekler:
+          - id: "kalk"
+            etiket: { tr: "Kalk; onlara tek tek teşekkür et", en: "Get up. Thank them one by one" }
+            etkiler:
+              - ahlak: { insanlik: 3, merhamet: 1 }
+              - degisken: { hayatta_kalan: 1 }
+            sonraki: "p3_kordon_aksami_son"
+
+  # ---------------------------------------------------------------- Ölçücü (tohum: p3_kapi_firtinasi · fırtına taşı)
+  - id: "p3_firtina_olcucu"
+    perde: [3, 4]
+    agirlik: 1
+    etiketler: ["kadimler", "kapi", "hakimiyet"]
+    gerilim: 3
+    yalniz_tohum: true
+    kart: { tr: "Ölçücü", en: "The Assessor" }
+    sahne: "p3_olcucu_1"
+    sahneler:
+      - id: "p3_olcucu_1"
+        yer: "eski_sehir"
+        paragraflar:
+          - { tr: "Fırtına taşını cebinde taşıdığın üçüncü gün taş ısınıyor ve sızlayan bir diş gibi tek bir yönü gösteriyor. Nerede olursan ol, çekişi aynı: Eski Şehir'e, saat kulesine.", en: "On the third day you've been carrying the storm stone, it warms up and starts pointing one way, like an aching tooth. Wherever you are, the pull is the same: the Old Town. The clock tower." }
+          - { tr: "Kulenin tepesinde, durmuş saatin dişlileri arasında uzun, ince, şapkalı bir Kadim oturuyor; dizlerinin üstünde bir defter, elinde bir cetvel. Cetveli şehre doğru tutuyor ve deftere bir şey yazıyor; sonra bir daha.", en: "At the top of the tower, among the gears of the stopped clock, sits a tall, thin Ancient in a hat, a ledger on its knees and a measuring rod in its hand. It holds the rod out toward the city and writes something down. Then again." }
+          - { tr: "Ayaklarının dibinde, Sanayi'nin döküm önlüğünü giymiş yaşlı bir adam Kadim'in pelerininin eteğindeki tozu fırçalıyor. Seni görünce fırça elinden düşüyor.", en: "At its feet, an old man in an Ironworks foundry apron is brushing the dust off the hem of the Ancient's cloak. When he sees you, the brush falls out of his hand." }
+          - { tr: "\"Ah,\" diyor Ölçücü, kibarca gülümseyerek. \"Ölçülen geldi. Kıpırdamayın lütfen; fırtına sonrası değerleriniz eksik.\"", en: "\"Ah,\" the Assessor says with a polite smile. \"The measured has arrived. Please hold still. Your post-storm figures are incomplete.\"" }
+        sezgiler:
+          - kosul: { stat: { per: 220 } }
+            metin: { tr: "[ALG] Defterin açık sayfasında yedi kapı, her birinin kapanma süresi ve en altta, üstü çizilip yeniden yazılmış bir satır: senin adın, yanında bir soru işareti.", en: "[PER] The open page of the ledger lists seven Gates, how long each took to close, and at the bottom a line that's been crossed out and rewritten: your name, with a question mark next to it." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "işte. seni ölçmek isteyen bu. ölçtüğü şey küçülürmüş. sen küçülme.", en: "there. that's the one who wanted to measure you. they say whatever it measures gets smaller. don't." }
+        yoldas_tepkileri:
+          - npc: "mert_kilic"
+            kosul: { yoldas: "mert_kilic" }
+            metin: { tr: "\"O defterin bir kopyası lazım. Kopyası. Lütfen yakma.\"", en: "\"I need a copy of that ledger. A copy. Please don't burn it.\"" }
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Yedi mahalleyi bunun için mi ateşe verdi? Bir sayı için mi?\"", en: "\"It set seven neighborhoods on fire for this? For a number?\"" }
+        secenekler:
+          - id: "saldir"
+            etiket: { tr: "Cetvelini kır; defterini al", en: "Break its rod. Take its ledger" }
+            etkiler:
+              - ahlak: { duzen: 2, insanlik: -1 }
+              - savas: { dusmanlar: ["kadim_olcucu@oyuncu+2"], ortam: ["dar_gecit"], kazan: "p3_olcucu_zafer", kaybet: "p3_olcucu_yenilgi" }
+          - id: "kucuk"
+            tur: "gizle"
+            etiket: { tr: "Ölçülmene izin ver; sayılarını küçük göster", en: "Let it measure you. Show it smaller numbers" }
+            etkiler:
+              - gizle: 8
+              - ahlak: { insanlik: 1, duzen: -1 }
+            sonraki: "p3_olcucu_kucuk"
+          - id: "thessar"
+            etiket: { tr: "{npc:thessar|i} çağır: bu ölçüm kimin emriyle?", en: "Call {npc:thessar}. Whose orders is this on?" }
+            goster: { npc_hayatta: "thessar", bayrak: "thessar_indi" }
+            etkiler:
+              - ahlak: { duzen: 3 }
+              - iliski: { thessar: { guven: 4, saygi: 3 } }
+            sonraki: "p3_olcucu_thessar"
+          - id: "usta"
+            etiket: { tr: "Önce yaşlı adamla konuş", en: "Talk to the old man first" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+            sonraki: "p3_olcucu_usta"
+
+      - id: "p3_olcucu_usta"
+        yer: "eski_sehir"
+        paragraflar:
+          - { tr: "Adam fırçasını yerden almıyor. \"Taşı ben taşıdım,\" diyor, sen sormadan. \"Döküm fırınına ben koydum. Vel verdiler; vel değil, adımı Defter'e yazdılar. Torunum korunsun diye.\"", en: "The man doesn't pick up his brush. \"I carried the stone,\" he says, before you can ask. \"I put it in the foundry furnace. They paid me in vel. Not vel. They wrote my name in the Ledger. So my grandson would be protected.\"" }
+          - { tr: "\"Yedi mahalle,\" diyor sonra, sesi çatlayarak. \"Biri benim sokağımdı. Bilmiyordum; yemin ederim bilmiyordum.\"", en: "\"Seven neighborhoods,\" he says then, his voice cracking. \"One of them was my street. I didn't know. I swear to God I didn't know.\"" }
+          - { tr: "Ölçücü deftere bir şey not ediyor. \"Kaynak işbirliği: beklenen,\" diye mırıldanıyor. \"Pişmanlık: beklenen.\"", en: "The Assessor jots something in its ledger. \"Source cooperation: as expected,\" it murmurs. \"Remorse: as expected.\"" }
+        secenekler:
+          - id: "git"
+            etiket: { tr: "\"Torununa git. Gerisi benim.\"", en: "\"Go home to your grandson. I've got this.\"" }
+            etkiler:
+              - ahlak: { merhamet: 4, duzen: -2 }
+            sonraki: "p3_olcucu_karar"
+          - id: "lonca"
+            etiket: { tr: "Onu Lonca'ya teslim et; hesabını versin", en: "Turn him over to the Guild. He answers for it" }
+            etkiler:
+              - ahlak: { duzen: 4, merhamet: -3 }
+              - itibar: { lonca: 2 }
+            sonraki: "p3_olcucu_karar"
+
+      - id: "p3_olcucu_karar"
+        yer: "eski_sehir"
+        paragraflar:
+          - { tr: "Yaşlı adam merdivenlerden iniyor; ayak sesleri saat kulesinin içinde uzun süre yankılanıyor. Ölçücü cetvelini yeniden kaldırıyor. \"Şimdi,\" diyor, \"siz.\"", en: "The old man goes down the stairs, and his footsteps echo inside the clock tower for a long time. The Assessor raises its rod again. \"Now,\" it says. \"You.\"" }
+        secenekler:
+          - id: "saldir"
+            etiket: { tr: "Cetvelini kır; defterini al", en: "Break its rod. Take its ledger" }
+            etkiler:
+              - ahlak: { duzen: 2, insanlik: -1 }
+              - savas: { dusmanlar: ["kadim_olcucu@oyuncu+2"], ortam: ["dar_gecit"], kazan: "p3_olcucu_zafer", kaybet: "p3_olcucu_yenilgi" }
+          - id: "kucuk"
+            tur: "gizle"
+            etiket: { tr: "Ölçülmene izin ver; sayılarını küçük göster", en: "Let it measure you. Show it smaller numbers" }
+            etkiler:
+              - gizle: 8
+              - ahlak: { insanlik: 1, duzen: -1 }
+            sonraki: "p3_olcucu_kucuk"
+          - id: "thessar"
+            etiket: { tr: "{npc:thessar|i} çağır: bu ölçüm kimin emriyle?", en: "Call {npc:thessar}. Whose orders is this on?" }
+            goster: { npc_hayatta: "thessar", bayrak: "thessar_indi" }
+            etkiler:
+              - ahlak: { duzen: 3 }
+              - iliski: { thessar: { guven: 4, saygi: 3 } }
+            sonraki: "p3_olcucu_thessar"
+
+      - id: "p3_olcucu_kucuk"
+        yer: "eski_sehir"
+        paragraflar:
+          - { tr: "Nefesini, nabzını, penceredeki sayıları küçültüyorsun; bir avcının kapı canavarından saklanması gibi, ama içeriden. Cetvel omzuna değiyor ve hiçbir şey eksilmiyor, çünkü alınacak bir şey bırakmadın.", en: "You shrink your breathing, your pulse, the numbers in your window, the way a hunter hides from a Gate monster, but from the inside. The rod touches your shoulder and nothing goes missing, because you didn't leave it anything to take." }
+          - { tr: "Ölçücü defterine bakıyor, bir şeyin üstünü çizip yeniden yazıyor. \"Beklentinin altında,\" diyor; sesinde hafif bir hayal kırıklığı. \"Fırtına bir sapmaymış demek. Özür dilerim, vaktinizi aldım.\"", en: "The Assessor looks at its ledger, crosses something out, writes it again. \"Below projection,\" it says, with a faint note of disappointment. \"The storm was an outlier, then. My apologies for taking your time.\"" }
+          - { tr: "Şapkasına dokunup pencereden, bir merdiven inermiş gibi havaya adım atıyor. Defterinde artık küçük, sıradan, budanmaya değmeyecek bir insanın sayıları var.", en: "It touches its hat and steps out the window into the air like it's walking down a staircase. Its ledger now holds the numbers of a small, ordinary person. Not worth pruning." }
+          - metin: { tr: "{npc:yanki}: iyi yalan. benden öğrendin.", en: "{npc:yanki}: good lie. you learned that from me." }
+            kosul: { bayrak: "yanki_bagi" }
+        secenekler:
+          - id: "birak"
+            etiket: { tr: "Gitmesine izin ver", en: "Let it go" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+              - degisken: { kadim_tehdit: -2 }
+              - xp_seviye: 15
+            sonraki: "@akis"
+
+      - id: "p3_olcucu_thessar"
+        yer: "eski_sehir"
+        paragraflar:
+          - { tr: "Taşın Kadim yazılı yüzünü körfezdeki kemik rengi kuleye doğru tutuyorsun. Bir dakika sonra saat kulesinin penceresinde katlanmış ışıktan bir merdiven beliriyor ve {npc:thessar} iniyor; muhafızsız.", en: "You hold the stone's Ancient-scripted face up toward the bone-white spire over the bay. A minute later a stair of folded light appears in the clock tower window, and {npc:thessar} comes down it. No Wardens." }
+          - { tr: "Ölçücü ayağa kalkıp üç derece eğiliyor; {npc:thessar} eğilmiyor. \"Bu ölçümü ben istemedim,\" diyor iki sesiyle. \"Kimin defterine yazıyorsun?\"", en: "The Assessor gets up and bows three degrees. {npc:thessar} doesn't bow back. \"I did not request this measurement,\" he says in both voices. \"Whose ledger are you writing in?\"" }
+          - { tr: "Ölçücünün gülümsemesi ilk kez kayıyor. \"Meclis'in, elçim,\" diyor. \"Doğrudan.\"", en: "For the first time, the Assessor's smile slips. \"The Conclave's, Envoy,\" it says. \"Directly.\"" }
+          - { tr: "{npc:thessar} sana dönüyor. Yüzünde bir Kadim'de görmeyi hiç beklemediğin bir şey var: utanç. \"Benim kayıtlarımın üstünden,\" diyor. \"Karar senin. Burası senin dünyan.\"", en: "{npc:thessar} turns to you. There's something on his face you never expected to see on an Ancient's: shame. \"Over the top of my records,\" he says. \"The decision is yours. This is your world.\"" }
+        secenekler:
+          - id: "yargila"
+            etiket: { tr: "\"Onu sen yargıla. Sizin hesabınız.\"", en: "\"You judge it. They're your books.\"" }
+            etkiler:
+              - ahlak: { duzen: 3 }
+              - degisken: { kadim_tehdit: -4 }
+              - iliski: { thessar: { guven: 5, baglilik: 3 } }
+            sonraki: "p3_olcucu_thessar_son"
+          - id: "kendin"
+            etiket: { tr: "\"Benim dünyam, benim hesabım.\" Saldır", en: "\"My world, my books.\" Attack" }
+            etkiler:
+              - ahlak: { duzen: 1, insanlik: -2 }
+              - iliski: { thessar: { saygi: 4 } }
+              - savas: { dusmanlar: ["kadim_olcucu@oyuncu+1"], ortam: ["dar_gecit"], kazan: "p3_olcucu_zafer", kaybet: "p3_olcucu_yenilgi" }
+          - id: "birak"
+            etiket: { tr: "Gitsin; Meclis ne bildiğini bilsin", en: "Let it go. Let the Conclave know what it knows" }
+            etkiler:
+              - ahlak: { duzen: 1, insanlik: -1 }
+              - degisken: { kadim_tehdit: 2 }
+              - iliski: { thessar: { guven: -3 } }
+            sonraki: "@akis"
+
+      - id: "p3_olcucu_thessar_son"
+        yer: "eski_sehir"
+        paragraflar:
+          - { tr: "{npc:thessar} iki parmağını kaldırıyor ve Ölçücü, bir kâğıdın katlanması gibi, kendi içine katlanıyor. Yerde yalnızca şapkası ve kırık cetveli kalıyor.", en: "{npc:thessar} raises two fingers, and the Assessor folds in on itself like a sheet of paper. All that's left on the floor is its hat and its broken rod." }
+          - { tr: "Elçi defteri yerden alıp sana uzatıyor. \"Bunu kayda geçirmiyorum,\" diyor. \"Meclis bir Ölçücü kaybettiğini fark edecek. Ama nerede kaybettiğini değil.\"", en: "The Envoy picks the ledger up off the floor and holds it out to you. \"I am not entering this,\" he says. \"The Conclave will notice it has lost an Assessor. But not where.\"" }
+        secenekler:
+          - id: "al"
+            etiket: { tr: "Defteri al", en: "Take the ledger" }
+            etkiler:
+              - ahlak: { duzen: 1 }
+              - degisken: { kadim_tehdit: -2 }
+              - iliski: { thessar: { guven: 2 } }
+              - xp_seviye: 20
+            sonraki: "@akis"
+          - id: "geri"
+            etiket: { tr: "Defteri ona geri ver", en: "Give the ledger back to him" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+              - iliski: { thessar: { baglilik: 3 } }
+              - xp_seviye: 20
+            sonraki: "@akis"
+
+      - id: "p3_olcucu_zafer"
+        yer: "eski_sehir"
+        paragraflar:
+          - { tr: "Cetvel ikiye kırılıyor ve Ölçücü, ölçtüğü her şey gibi, bir an küçülüyor. Sonra saat kulesinin dişlileri arasına bir yaprak gibi düşüyor.", en: "The rod snaps in two, and the Assessor shrinks for a moment, like everything it ever measured. Then it drops between the clock tower's gears like a leaf." }
+          - { tr: "Defter ayaklarının dibinde açık duruyor: yedi kapının saatleri, mahallelerin nüfusları, avcıların tepki süreleri ve en altta senin satırın. [Gerçek değer: ölçülemedi. Öneri: Budayıcı.]", en: "The ledger lies open at your feet: times for all seven Gates, neighborhood populations, hunter response times, and at the bottom, your line. [True value: unmeasurable. Recommendation: Pruner.]" }
+          - metin: { tr: "{npc:yanki}: budayıcı. yine o kelime.", en: "{npc:yanki}: pruner. that word again." }
+            kosul: { bayrak: "yanki_bagi" }
+        secenekler:
+          - id: "yak"
+            etiket: { tr: "Defteri yak", en: "Burn the ledger" }
+            etkiler:
+              - ahlak: { duzen: -1, insanlik: 2 }
+              - degisken: { kadim_tehdit: -3 }
+              - xp_seviye: 25
+            sonraki: "@akis"
+          - id: "sakla"
+            etiket: { tr: "Defteri sakla; Kadimler'in nasıl ölçtüğünü öğren", en: "Keep the ledger. Learn how the Ancients measure" }
+            etkiler:
+              - ahlak: { duzen: 2, insanlik: -1 }
+              - degisken: { kadim_tehdit: -4 }
+              - xp_seviye: 25
+            sonraki: "@akis"
+          - id: "mert"
+            etiket: { tr: "Defteri {npc:mert_kilic|e} götür", en: "Take the ledger to {npc:mert_kilic}" }
+            goster: { npc_hayatta: "mert_kilic", bayrak_yok: "mert_kadimlere_satti" }
+            etkiler:
+              - ahlak: { duzen: -2 }
+              - degisken: { kadim_tehdit: -4 }
+              - itibar: { sessiz_ag: 4 }
+              - iliski: { mert_kilic: { guven: 4, saygi: 3 } }
+              - xp_seviye: 25
+            sonraki: "@akis"
+
+      - id: "p3_olcucu_yenilgi"
+        yer: "eski_sehir"
+        paragraflar:
+          - { tr: "Cetvel omzuna değiyor ve bir şey eksiliyor; ne olduğunu bilmiyorsun. Dizlerinin üstüne çöktüğünde Ölçücü defterine son bir satır yazıyor ve şapkasını düzeltiyor.", en: "The rod touches your shoulder and something goes missing. You don't know what. As you drop to your knees, the Assessor writes one last line in its ledger and straightens its hat." }
+          - { tr: "\"Teşekkürler,\" diyor ve pencereden, bir merdiven inermiş gibi, havaya adım atıyor. \"Değerler tamam.\"", en: "\"Thank you,\" it says, and steps out the window into the air like it's walking down a staircase. \"Figures complete.\"" }
+        secenekler:
+          - id: "kalk"
+            etiket: { tr: "Kalk", en: "Get up" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+              - degisken: { kadim_tehdit: 3 }
+            sonraki: "@akis"
+          - id: "bagir"
+            etiket: { tr: "Arkasından bağır: \"Bir dahaki sefere!\"", en: "Yell after it: \"Next time!\"" }
+            etkiler:
+              - ahlak: { duzen: -1 }
+              - degisken: { kadim_tehdit: 3 }
             sonraki: "@akis"

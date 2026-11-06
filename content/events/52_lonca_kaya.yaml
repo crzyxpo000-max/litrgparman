@@ -1277,6 +1277,7 @@ olaylar:
               - itibar: { lonca: 8 }
               - degisken: { hayatta_kalan: -1 }
               - iliski: { kaya_demir: { saygi: 6, korku: 4 } }
+              - tohum: { olay: "ors_soguk_oda", gecikme: { min: 12, max: 22 }, kosul: { bayrak: "ors_kin" } }
             kronik: { tr: "Merdiven Günü'nde Örs'ün yamasını herkesin önünde söktün; Lonca alkışladı ve çocuklarının ısıtmalı odası o hafta başkasına verildi.", en: "On Ladder Day you ripped Anvil's patch off in front of everyone. The Guild cheered, and that week his kids' heated room went to someone else." }
             sonraki: "lonca_2_son"
           - id: "reform"
@@ -1322,6 +1323,7 @@ olaylar:
               - ahlak: { duzen: 3, insanlik: -3 }
               - bayrak: "ors_kin"
               - itibar: { lonca: 4 }
+              - tohum: { olay: "ors_soguk_oda", gecikme: { min: 12, max: 22 }, kosul: { bayrak: "ors_kin" } }
             kronik: { tr: "On bir subayı yerde bırakıp Pano'ya yürüdün; Lonca o yürüyüşü hayranlıkla, Örs ise kinle hatırladı.", en: "You left eleven officers on the floor and walked to the Board. The Guild remembered that walk with awe. Anvil remembered it with a grudge." }
             sonraki: "lonca_2_son"
 
@@ -2374,6 +2376,7 @@ olaylar:
               - ordu: { lonca_avcisi: 35 }
               - xp_seviye: 150
               - iliski: { kaya_demir: { korku: 6, guven: -4 } }
+              - tohum: { olay: "kaya_soguk_firin", gecikme: { min: 8, max: 14 }, kosul: { bayrak: "kaya_hapiste", npc_hayatta: "kaya_demir", perde: 3 } }
             kronik: { tr: "{npc:kaya_demir|i} devirdin ve haddehanenin soğuk fırınına kapattın; şafak onsuz geldi, Lonca senin oldu.", en: "You toppled {npc:kaya_demir} and locked him in the mill's cold furnace. Dawn came without him, and the Guild was yours." }
             sonraki: "kaya_darbe_gecesi_son"
           - id: "surgun"
@@ -2586,6 +2589,8 @@ olaylar:
           - metin: { tr: "{npc:kaya_demir} Kordon'un siperlerinde, elinde bir harita, seni bekliyor. Gri saçları uzamış; sağ bacağını artık bir çelik desteğe yaslıyor. Sırtı hâlâ bir bayrak direği gibi dik.", en: "{npc:kaya_demir} is waiting for you in the Esplanade trenches with a map in his hand. His gray hair's grown out, and his right leg rests in a steel brace now. His back is still straight as a flagpole." }
             kosul: { bayrak_yok: ["kaya_hapiste", "kaya_yemin_etti", "ihanet_kaya"] }
           - { tr: "\"Elimde tüfek tutabilen üç bin kişi var,\" diyor. \"Kapı tutabilen dört yüz. Kordon'dan Sanayi'ye bir kara hattı kurabilirim ve onu tutabilirim. Ama göğü tutamam. Göğü tutabilecek tek bir şey var bu şehirde.\" Sana bakıyor.", en: "\"I've got three thousand people who can hold a rifle,\" he says. \"Four hundred who can hold a Gate. I can build a ground line from the Esplanade to the Ironworks, and I can hold it. What I can't hold is the sky. There's exactly one thing in this city that can.\" He looks at you." }
+          - metin: { tr: "Anlattığı hattı tanıyorsun. Soğuk fırının isli duvarına bir çivinin ucuyla kazıdığı hattın aynısı bu; tek farkla: artık her siperin yanında bir isim var ve isimlerin hiçbiri onunki değil.", en: "You know the line he's describing. It's the same one he scratched into the sooty wall of the cold furnace with the tip of a nail, with one difference: now there's a name next to every trench, and none of the names are his." }
+            kosul: { bayrak: "kaya_firin_plani" }
         sezgiler:
           - kosul: { stat: { per: 350 } }
             metin: { tr: "Filonun öncü gemilerinden üçünün karnı açık. İçlerinde inmeye hazır, büyük, yavaş bir şeyler kıpırdıyor; ilk dalga yarın değil, bu gece.", en: "Three of the fleet's lead ships have their bellies open. Something big and slow is stirring inside them, ready to drop. The first wave isn't coming tomorrow. It's coming tonight." }
@@ -3139,4 +3144,299 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 3, duzen: 1 }
             kronik: { tr: "Haddehanenin kapısında Lonca'nın ve Konsey'in bayraklarının aynı direkte dalgalanmasını izledin; {yer:kiyikent|in} son günlerinde ilk kez tek bir şehir vardı.", en: "You watched the Guild's flag and the Council's fly from the same pole over the mill door. In {yer:kiyikent|pos} last days, for the first time, there was one city." }
+            sonraki: "@akis"
+
+  # ================================================================== ÖRS'ÜN SOĞUK ODASI (tohum: lonca_2_rutbe · ors_kin)
+  - id: "ors_soguk_oda"
+    perde: [2, 3]
+    agirlik: 1
+    etiketler: ["lonca", "ahlak", "sanayi"]
+    gerilim: 2
+    yalniz_tohum: true
+    kart: { tr: "Soğuk oda", en: "The cold room" }
+    sahne: "ors_soguk_oda_1"
+    sahneler:
+      - id: "ors_soguk_oda_1"
+        yer: "sanayi"
+        paragraflar:
+          - { tr: "Defterdar seni nerede olursan ol buluyor; yazı altlığı koltuğunun altında, eldivenlerinin parmak uçları delik. \"Sanayi'ye gelmen lazım,\" diyor. \"Kural gereği değil.\"", en: "The Ledger finds you wherever you are, clipboard under her arm, the fingertips of her gloves worn through. \"You need to come to the Ironworks,\" she says. \"Not because of any rule.\"" }
+          - { tr: "Döküm'ün rüzgâr alan arka tarafında basamaksızların kaldığı bir konteyner sırası var. En sondakinin iç duvarlarını kırağı tutmuş; köşede Örs'ün balyozunu satıp aldığı gaz sobası duruyor, buz gibi, çünkü gaz yağına para kalmamış.", en: "Out back of the Foundry, where the wind hits hardest, there's a row of shipping containers for people with no rung. Frost has crept up the inside walls of the last one. In the corner sits the kerosene heater Anvil sold his sledge to buy, stone cold, because there was nothing left over for kerosene." }
+          - { tr: "Portatif bir yatakta, üç battaniyenin altında, Merdiven Günü turuncu kartı göğsüne bastıran küçük oğlan öksürüyor. Örs ters çevrilmiş bir kovanın üstünde oturuyor ve sana bakmadan konuşuyor: \"Seni buraya ben çağırmadım.\"", en: "On a cot under three blankets, the little boy who clutched the orange card on Ladder Day is coughing. Anvil sits on an upturned bucket and talks without looking at you. \"I didn't call you here.\"" }
+          - { tr: "\"Ben çağırdım,\" diyor Defterdar. \"Kural rütbeyi korur. Çocuğu korumaz.\"", en: "\"I did,\" says the Ledger. \"The rule protects the rank. It doesn't protect the kid.\"" }
+        sezgiler:
+          - kosul: { stat: { per: 80 } }
+            metin: { tr: "[ALG] Çocuğun göğsünden ıslak bir hırıltı geliyor: zatürre. Bu soğukta üç gün daha kalırsa ateşi düşmeyecek.", en: "[PER] There's a wet rattle in the kid's chest: pneumonia. Three more days in this cold and that fever isn't coming down." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "b̷ir basamak aldın. basamağın altında bu oda vardı. merdivenler hep bir şeyin üstüne kurulur; çoğu zaman birinin.", en: "y̷ou took a rung. this room was under it. ladders always get built on top of something. usually someone." }
+        yoldas_tepkileri:
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Zatürre. Bunu duymak için hekim olmaya gerek yok. Bir saat bile bekletme.\"", en: "\"That's pneumonia. You don't need a medical degree to hear it. Don't wait another hour.\"" }
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"O gün herkes alkışladı. Bugün burada kimse yok.\"", en: "\"Everybody cheered that day. Today there's nobody here.\"" }
+        secenekler:
+          - id: "kart"
+            etiket: { tr: "Turuncu kartını yatağın üstüne bırak", en: "Leave your orange card on the cot" }
+            etkiler:
+              - ahlak: { merhamet: 6, duzen: -2 }
+              - bayrak_kaldir: "ors_kin"
+              - bayrak: "ors_borclu"
+              - degisken: { hayatta_kalan: 1 }
+              - iliski: { kaya_demir: { saygi: 3, guven: 3 } }
+              - xp_seviye: 15
+            sonraki: "ors_soguk_oda_kart"
+          - id: "revir"
+            etiket: { tr: "Çocuğu sırtla; Sığınak'ın revirine taşı", en: "Carry the kid to the Haven clinic yourself" }
+            goster: { npc_hayatta: "elif_sari" }
+            etkiler:
+              - ahlak: { merhamet: 5, insanlik: 2 }
+              - bayrak_kaldir: "ors_kin"
+              - itibar: { siginak: 2 }
+              - iliski: { elif_sari: { guven: 4, saygi: 2 } }
+              - xp_seviye: 15
+            sonraki: "ors_soguk_oda_revir"
+          - id: "kural"
+            etiket: { tr: "\"Kural kural. Gelecek Merdiven Günü geri alsın.\"", en: "\"Rules are rules. He can win it back next Ladder Day.\"" }
+            etkiler:
+              - ahlak: { duzen: 4, merhamet: -5 }
+              - itibar: { lonca: 2 }
+              - iliski: { kaya_demir: { saygi: 2 } }
+            sonraki: "ors_soguk_oda_kural"
+          - id: "kapi"
+            tur: "gosteris"
+            etiket: { tr: "Bir kapıya gir; bütün sırayı ısıtacak kristal getir", en: "Clear a Gate tonight. Bring crystal for the whole row" }
+            gerekli: { stat: { end: 80 } }
+            etkiler:
+              - ahlak: { merhamet: 4, insanlik: -2 }
+              - dikkat: 3
+              - degisken: { hayatta_kalan: 2 }
+              - itibar: { lonca: 4 }
+              - xp_seviye: 20
+            sonraki: "ors_soguk_oda_kapi"
+
+      - id: "ors_soguk_oda_kart"
+        yer: "sanayi"
+        paragraflar:
+          - { tr: "Kartı cebinden çıkarıp battaniyenin üstüne bırakıyorsun. Örs karta bakıyor, sonra sana; çenesinin kası bir kez atıyor. \"Bunu almam,\" diyor.", en: "You take the card out of your pocket and set it on the blanket. Anvil looks at the card, then at you, and a muscle in his jaw jumps once. \"I'm not taking that,\" he says." }
+          - { tr: "\"Senin için değil.\" Oğlanın eli battaniyenin altından çıkıp kartın üstüne kapanıyor; Merdiven Günü'ndeki gibi, sıkıca. Örs o küçük ele uzun süre bakıyor, sonra yüzünü duvara çeviriyor.", en: "\"It's not for you.\" The boy's hand comes out from under the blanket and closes over the card, tight, same as on Ladder Day. Anvil stares at that small hand for a long time. Then he turns his face to the wall." }
+          - metin: { tr: "Ertesi sabah kantinde, basamaksızların sırasında tepsinle beklerken {npc:kaya_demir} yanına geliyor. \"Komutan kendi tayınını çavuşuna verirse, o çavuş komutan için ölür,\" diyor alçak sesle. \"Bu kitapta yazmaz. Yazmalı.\"", en: "Next morning in the mess hall, while you're waiting with your tray in the no-rung line, {npc:kaya_demir} walks up next to you. \"An officer gives his rations to his sergeant, that sergeant will die for him,\" he says quietly. \"That's not in the book. It ought to be.\"" }
+            kosul: { npc_hayatta: "kaya_demir" }
+          - metin: { tr: "Ertesi sabah kantinde, basamaksızların sırasında tepsinle beklerken subay konseyinin en yaşlısı yanından geçiyor ve tek kelime etmeden başını sallıyor.", en: "Next morning in the mess hall, while you wait with your tray in the no-rung line, the oldest officer on the council walks past and nods at you without a word." }
+            kosul: { npc_olu: "kaya_demir" }
+        secenekler:
+          - id: "sira"
+            etiket: { tr: "Sıranı bekle; tepsini doldur", en: "Wait your turn. Fill your tray" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+            sonraki: "@akis"
+          - id: "cavus"
+            etiket: { tr: "Örs'ün çavuşluğunu Pano'ya geri yazdır", en: "Get Anvil's sergeant stripes back on the Board" }
+            etkiler:
+              - ahlak: { duzen: 2, merhamet: 1 }
+              - itibar: { lonca: 2 }
+            sonraki: "@akis"
+
+      - id: "ors_soguk_oda_revir"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Oğlanı battaniyesiyle birlikte sırtına alıyorsun ve gece yarısı Sanayi'den Liman'a yürüyorsun. Örs arkandan geliyor, eli boş, adımlarını seninkine uydurmaya çalışarak. Bir kez bile çocuğu taşımayı teklif etmiyor; teklif edecek yüzü yok.", en: "You hoist the boy onto your back, blanket and all, and walk from the Ironworks to the Waterfront in the middle of the night. Anvil follows, empty-handed, trying to match your stride. Not once does he offer to carry him. He doesn't have the face for it." }
+          - { tr: "Revirin lambası saat üçte hâlâ yanıyor. {npc:elif_sari} çocuğun göğsünü dinliyor, sonra sana bakıyor: \"İki gün daha geç kalsaydın bu konuşmayı yapmıyor olurduk.\" Sığınak'ın son antibiyotik kutusundan bir şırınga dolduruyor.", en: "The clinic lamp is still on at three in the morning. {npc:elif_sari} listens to the boy's chest, then looks at you. \"Two more days and we wouldn't be having this conversation.\" She fills a syringe from the Haven's last box of antibiotics." }
+          - { tr: "Şafağa doğru Örs revirin kapısında yanına oturuyor. \"Sana borçlu değilim,\" diyor, duvara bakarak. \"Ama kinim de kalmadı. Nereye gittiğini bilmiyorum.\"", en: "Toward dawn, Anvil sits down next to you in the clinic doorway. \"I don't owe you,\" he says, staring at the wall. \"But the grudge is gone too. I don't know where it went.\"" }
+        secenekler:
+          - id: "cay"
+            etiket: { tr: "Ona bir bardak çay ver", en: "Hand him a cup of coffee" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+            sonraki: "@akis"
+          - id: "kal"
+            etiket: { tr: "Çocuğun ateşi düşene kadar revirde kal", en: "Stay at the clinic till the kid's fever breaks" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - iliski: { elif_sari: { guven: 2 } }
+            sonraki: "@akis"
+
+      - id: "ors_soguk_oda_kural"
+        yer: "sanayi"
+        paragraflar:
+          - { tr: "Örs başını sallıyor. \"Kural kural,\" diyor ve Defterdar'ın yüzünde bir şey kapanıyor. O gece Örs balyozsuz, elinde bir levyeyle, basamaksız birinin gidebileceği tek yere gidiyor: kimsenin almak istemediği bir D kademesi kapıya.", en: "Anvil nods. \"Rules are rules,\" he says, and something in the Ledger's face shuts. That night Anvil goes out with no sledge, just a crowbar, to the only place a man with no rung can go: a D-Grade Gate nobody else wanted." }
+          - { tr: "Şafakta geri dönüyor; kolundaki sargı kan içinde, elinde bir bidon gaz yağı. Konteyner sırasından aşağı yürürken yanından geçiyor ve sana bakmıyor.", en: "He comes back at dawn, the wrap on his arm soaked through with blood, a jerrycan of kerosene in his hand. Walking down the container row, he goes right past you and doesn't look." }
+          - metin: { tr: "Balkondan izleyen {npc:kaya_demir} aşağı inmiyor; yalnızca sesleniyor: \"Kural tuttu. Adam da tuttu. Bir gün ikisinden biri tutmayacak.\"", en: "{npc:kaya_demir} watches from the balcony and doesn't come down. He just calls it out: \"The rule held. So did the man. One of these days, one of them won't.\"" }
+            kosul: { npc_hayatta: "kaya_demir" }
+        secenekler:
+          - id: "yuru"
+            etiket: { tr: "Yürü", en: "Walk away" }
+            etkiler:
+              - ahlak: { duzen: 1, insanlik: -1 }
+            sonraki: "@akis"
+          - id: "kolla"
+            etiket: { tr: "Bir sonraki gece kapıda onu görünmeden kolla", en: "Next night, shadow him through the Gate unseen" }
+            etkiler:
+              - ahlak: { merhamet: 3, duzen: -1 }
+            sonraki: "@akis"
+
+      - id: "ors_soguk_oda_kapi"
+        yer: "sanayi"
+        paragraflar:
+          - { tr: "Şafakta kapıdan çıkıyorsun; sırtında, bir D kademesi kapının içinde ne kristal varsa hepsiyle dolu bir çuval. Çuvalı konteyner sırasının ortasına boşaltıyorsun ve kristaller kırağının üstünde mavi mavi parlıyor.", en: "You come out of the Gate at dawn with a sack on your back holding every crystal that D-Grade Gate had in it. You dump it out in the middle of the container row, and the crystals glow blue against the frost." }
+          - { tr: "Kapılar açılıyor; basamaksızlar birer birer dışarı çıkıyor, önce inanmadan, sonra avuç avuç. Bu sıra bir ay boyunca ısınacak.", en: "Doors open. The no-rung families come out one at a time, not believing it at first, then scooping it up by the handful. This row is going to be warm for a month." }
+          - { tr: "Örs kalabalığa katılmıyor. \"Bir kapıyı bir balyozla üç gün tuttum,\" diyor kristallere bakarak, \"sen bir geceyi bir çuvala koydun.\" Sesinde ne teşekkür var ne öfke; yalnızca küçülmüş bir adamın sesi.", en: "Anvil doesn't join the crowd. \"I held a Gate for three days with a sledgehammer,\" he says, looking at the crystals, \"and you put a whole night in a sack.\" There's no thanks in it and no anger, just the voice of a man who got smaller." }
+        secenekler:
+          - id: "defterdar"
+            etiket: { tr: "Kristalleri Defterdar dağıtsın; sırayla", en: "Let the Ledger hand it out. In order" }
+            etkiler:
+              - ahlak: { duzen: 2 }
+              - itibar: { lonca: 2 }
+            sonraki: "@akis"
+          - id: "avuc"
+            etiket: { tr: "Bir avuç kristali Örs'ün eline kendin koy", en: "Put a handful in Anvil's hand yourself" }
+            etkiler:
+              - ahlak: { merhamet: 2, insanlik: -1 }
+            sonraki: "@akis"
+
+  # ================================================================== SOĞUK FIRIN (tohum: kaya_darbe_gecesi · hapis)
+  - id: "kaya_soguk_firin"
+    perde: [3]
+    agirlik: 1
+    etiketler: ["lonca", "npc", "hapis"]
+    gerilim: 2
+    yalniz_tohum: true
+    npc: ["kaya_demir"]
+    kart: { tr: "Soğuk fırın", en: "The cold furnace" }
+    sahne: "kaya_soguk_firin_1"
+    sahneler:
+      - id: "kaya_soguk_firin_1"
+        yer: "sanayi"
+        paragraflar:
+          - { tr: "Defterdar'ın notu seni nerede olursan ol buluyor; tek satır: \"Fırına gelmen lazım.\" Haddehane gece vardiyasında bile sessiz; vinçler duruyor, yalnızca soğuk fırının önünde bir fener yanıyor.", en: "A note from the Ledger finds you wherever you are, one line: \"Come to the furnace.\" The mill is quiet even for the night shift. The cranes are still, and the only light is a lantern outside the cold furnace." }
+          - metin: { tr: "Nöbette Örs var. Anahtarı uzatırken sesini alçaltıyor: \"Başçavuş on gündür uyumuyor. Bir şey çiziyor.\"", en: "Anvil has the watch. He keeps his voice down as he hands over the key. \"Gunny hasn't slept in ten days. He's drawing something.\"" }
+            kosul: { bayrak: "ors_borclu" }
+          - metin: { tr: "Fırının önündeki nöbetçi anahtarı sana uzatıyor ve gözlerini kaçırıyor. \"On gündür uyumuyor,\" diyor. \"Bir şey çiziyor.\"", en: "The guard outside the furnace hands you the key and won't meet your eyes. \"Hasn't slept in ten days,\" he says. \"He's drawing something.\"" }
+            kosul: { bayrak_yok: "ors_borclu" }
+          - { tr: "İçeride {npc:kaya_demir} bir mum ışığında, sırtı kapıya dönük oturuyor. Fırının isli iç duvarları baştan sona çizgilerle kaplı: bir çivinin ucuyla kazınmış bir kıyı, Kordon'dan Sanayi'ye uzanan siperler, geri çekilme hatları, köşelerde küçük rakamlar: 3.000 tüfek, 400 kapı.", en: "Inside, {npc:kaya_demir} sits by a candle with his back to the door. The sooty inner walls of the furnace are covered end to end in lines: a coastline scratched in with the tip of a nail, trenches running from the Esplanade to the Ironworks, fallback lines, little numbers in the corners. 3,000 rifles. 400 Gates." }
+          - { tr: "\"Bir asker hapiste de askerdir,\" diyor, dönmeden. \"Ne olduğumu bırakamıyorum. Sen de bırakmamı istemedin; isteseydin beni öldürürdün.\"", en: "\"A soldier in a cell is still a soldier,\" he says without turning around. \"I can't stop being what I am. And you didn't want me to. If you had, you'd have killed me.\"" }
+        sezgiler:
+          - kosul: { stat: { per: 160 } }
+            metin: { tr: "[ALG] Plan iyi. İyiden de öte: ikinci hat Kordon'un eski iskelesinin altından geçiyor; senin hiç aklına gelmemiş bir yerden.", en: "[PER] The plan's good. Better than good: the second line runs under the Esplanade's old pier, somewhere that never once crossed your mind." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "o̷na dört duvar verdin; dördünü de kullanmış. böyle bir adamı kilitleyebilirsin. ne için yapıldığını kilitleyemezsin.", en: "y̷ou gave him four walls. he used all four. you can lock up a man like this. you can't lock up what he was made for." }
+        yoldas_tepkileri:
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Bu adam Konsey'i basacaktı. Şimdi Konsey'i nasıl koruyacağını çiziyor. İnsanlar tuhaf.\"", en: "\"This man was going to storm the Council. Now he's drawing how to defend it. People are strange.\"" }
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Ona bakınca ne görüyorum biliyor musun? Seni. Yirmi yıl sonra.\"", en: "\"You know what I see when I look at him? You. Twenty years from now.\"" }
+        secenekler:
+          - id: "kopya"
+            etiket: { tr: "Duvarı kopyalat; planı subaylara götür", en: "Have the wall copied. Take it to the officers" }
+            etkiler:
+              - bayrak: "kaya_firin_plani"
+              - ahlak: { duzen: 3, insanlik: 1 }
+              - degisken: { hayatta_kalan: 1 }
+              - itibar: { lonca: 3 }
+              - iliski: { kaya_demir: { saygi: 4, guven: 2 } }
+              - xp_seviye: 20
+            sonraki: "kaya_soguk_firin_kopya"
+          - id: "sil"
+            etiket: { tr: "Duvarı sil. Sen bir tutuklusun, general değil", en: "Wipe the wall. You're a prisoner, not a general" }
+            etkiler:
+              - ahlak: { duzen: 4, merhamet: -3 }
+              - iliski: { kaya_demir: { korku: 4, guven: -6 } }
+            sonraki: "kaya_soguk_firin_sil"
+          - id: "lamba"
+            etiket: { tr: "Ona bir lamba, kâğıt ve bir sandalye getir", en: "Bring him a lamp, paper, and a chair" }
+            etkiler:
+              - bayrak: "kaya_firin_plani"
+              - ahlak: { merhamet: 3, insanlik: 3 }
+              - iliski: { kaya_demir: { guven: 5, baglilik: 3 } }
+              - xp_seviye: 20
+            sonraki: "kaya_soguk_firin_lamba"
+          - id: "ac"
+            etiket: { tr: "Kapıyı açık bırak: \"Git, hattını kendin kur.\"", en: "Leave the door open. \"Go build your line yourself.\"" }
+            gerekli: { iliski_min: { kaya_demir: { saygi: 30 } } }
+            etkiler:
+              - bayrak_kaldir: "kaya_hapiste"
+              - bayrak: "kaya_firin_plani"
+              - ahlak: { merhamet: 3, duzen: -3 }
+              - itibar: { lonca: -2 }
+              - iliski: { kaya_demir: { guven: 10, baglilik: 6, saygi: 4 } }
+              - xp_seviye: 25
+            sonraki: "kaya_soguk_firin_acik"
+
+      - id: "kaya_soguk_firin_kopya"
+        yer: "sanayi"
+        paragraflar:
+          - { tr: "Gece yarısından sonra Defterdar iki çizerle geliyor. Fenerin ışığında duvarı siper siper kâğıda geçiriyorlar; {npc:kaya_demir} her yanlış çizgiyi sesini yükseltmeden düzeltiyor.", en: "After midnight the Ledger shows up with two draftsmen. By lantern light they copy the wall onto paper, trench by trench, and {npc:kaya_demir} corrects every wrong line without raising his voice." }
+          - { tr: "Şafakta kopya bitiyor. Defterdar başlığa ne yazacağını soruyor ve {npc:kaya_demir} başını kaldırmıyor: \"Benim adımı yazmayın. Kimse bir tutuklunun planını izlemez.\"", en: "The copy's done by dawn. The Ledger asks what to put at the top, and {npc:kaya_demir} doesn't look up. \"Don't put my name on it. Nobody follows a prisoner's plan.\"" }
+        secenekler:
+          - id: "ad_yaz"
+            etiket: { tr: "Adını yaz", en: "Put his name on it" }
+            etkiler:
+              - ahlak: { insanlik: 2, duzen: -1 }
+              - iliski: { kaya_demir: { saygi: 2, guven: 2 } }
+            sonraki: "@akis"
+          - id: "adsiz"
+            etiket: { tr: "Başlığı boş bırak", en: "Leave the top blank" }
+            etkiler:
+              - ahlak: { duzen: 2 }
+            sonraki: "@akis"
+
+      - id: "kaya_soguk_firin_sil"
+        yer: "sanayi"
+        paragraflar:
+          - { tr: "Bir kova su ve bir bez istiyorsun. {npc:kaya_demir} kalkıp kenara çekiliyor ve her çizginin kayboluşunu izliyor: önce geri çekilme hatları, sonra siperler, en son kıyı.", en: "You ask for a bucket of water and a rag. {npc:kaya_demir} gets up, steps aside, and watches every line disappear: the fallback lines first, then the trenches, the coastline last." }
+          - { tr: "Duvar yeniden isli ve boş olduğunda başını sallıyor. \"Doğru,\" diyor. \"Ben de öyle yapardım.\"", en: "When the wall's black and blank again, he nods. \"Correct,\" he says. \"I'd have done the same.\"" }
+          - { tr: "Kapıya dönerken arkandan sesleniyor: \"İkinci hat eski iskelenin altından geçmeli. Geçmezse Kordon bir gecede düşer.\"", en: "As you turn for the door, he calls after you. \"The second line has to run under the old pier. If it doesn't, the Esplanade falls in one night.\"" }
+        secenekler:
+          - id: "kilitle"
+            etiket: { tr: "Hiçbir şey söyleme; kapıyı kilitle", en: "Say nothing. Lock the door" }
+            etkiler:
+              - ahlak: { duzen: 1, merhamet: -1 }
+            sonraki: "@akis"
+          - id: "iskele"
+            etiket: { tr: "\"Eski iskele. Tamam.\"", en: "\"The old pier. Got it.\"" }
+            etkiler:
+              - bayrak: "kaya_firin_plani"
+              - ahlak: { insanlik: 2 }
+              - iliski: { kaya_demir: { saygi: 2 } }
+            sonraki: "@akis"
+
+      - id: "kaya_soguk_firin_lamba"
+        yer: "sanayi"
+        paragraflar:
+          - { tr: "Bir saat sonra fırının içinde bir gaz lambası, masa yerine ters çevrilmiş bir sandık, bir sandalye ve bir deste kâğıt var. {npc:kaya_demir} oturmadan önce sandalyeye bir süre bakıyor; bir sandalyenin bir teklif olduğunu anlamış gibi.", en: "An hour later the furnace has a kerosene lamp, an upturned crate for a desk, a chair, and a stack of paper. {npc:kaya_demir} looks at the chair a while before he sits, like he's figured out that a chair is an offer." }
+          - { tr: "Gece boyunca çiziyor; sen kapının dibinde oturuyorsun. Bir ara kalemi bırakmadan konuşuyor: \"Bir daha asla yanlış bir emre uymayacağım diye yemin etmiştim. Yanlış emri veren biri olacağım hiç aklıma gelmedi.\"", en: "He draws all night while you sit by the door. At some point he talks without putting the pencil down. \"I swore I'd never follow a wrong order again. It never crossed my mind I'd be the one giving it.\"" }
+          - { tr: "Şafakta sana otuz sayfa uzatıyor; her sayfanın köşesinde bir numara, her siperin yanında bir isim için boşluk.", en: "At dawn he hands you thirty pages, a number in the corner of every one, and next to every trench, a blank for a name." }
+        secenekler:
+          - id: "al"
+            etiket: { tr: "Sayfaları al; subaylara götür", en: "Take the pages to the officers" }
+            etkiler:
+              - ahlak: { duzen: 2 }
+              - itibar: { lonca: 2 }
+            sonraki: "@akis"
+          - id: "birak"
+            etiket: { tr: "\"Kendin vereceksin. Zamanı gelince.\"", en: "\"You'll hand them over yourself. When it's time.\"" }
+            etkiler:
+              - ahlak: { insanlik: 2, merhamet: 1 }
+              - iliski: { kaya_demir: { baglilik: 3 } }
+            sonraki: "@akis"
+
+      - id: "kaya_soguk_firin_acik"
+        yer: "sanayi"
+        paragraflar:
+          - { tr: "Anahtarı kilitten çıkarıp ona atıyorsun ve kapıyı ardına kadar açık bırakıyorsun. {npc:kaya_demir} anahtarı havada yakalamıyor; anahtar ayaklarının dibine düşüyor ve uzun süre orada kalıyor.", en: "You pull the key out of the lock, toss it to him, and leave the door wide open. {npc:kaya_demir} doesn't catch it. It drops at his feet and stays there a long time." }
+          - { tr: "\"Komutan değilim,\" diyor sonunda. \"Değilsin,\" diyorsun. \"Mühendisimsin. Hat senin, emir benim.\"", en: "\"I'm not a commander,\" he finally says. \"You're not,\" you say. \"You're my engineer. The line's yours. The orders are mine.\"" }
+          - { tr: "Ayağa kalkarken sağ dizi bir kez kilitleniyor, sonra açılıyor. Haddehaneden Kordon'a doğru topallayarak ama bir bayrak direği kadar dik yürüyor; nöbetçiler selam mı vermeleri gerektiğini bilemeden kenara çekiliyor.", en: "When he stands, his right knee locks once, then gives. He walks out of the mill toward the Esplanade, limping but straight as a flagpole, and the guards step aside, not sure whether they're supposed to salute." }
+        secenekler:
+          - id: "izle"
+            etiket: { tr: "Arkasından bak", en: "Watch him go" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+            sonraki: "@akis"
+          - id: "selam"
+            etiket: { tr: "Nöbetçilere selam vermelerini söyle", en: "Tell the guards to salute" }
+            etkiler:
+              - ahlak: { duzen: 2 }
+              - iliski: { kaya_demir: { saygi: 2 } }
             sonraki: "@akis"

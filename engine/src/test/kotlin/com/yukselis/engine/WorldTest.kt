@@ -274,7 +274,7 @@ class WorldTest {
                         buildList<HubAction> {
                             d.hand.forEach { add(HubAction.Card(it)) }
                             add(HubAction.Explore); add(HubAction.Train); add(HubAction.Rest)
-                            s.region?.let { content.regions[it] }?.neighbors?.forEach { add(HubAction.Travel(it)) }
+                            s.region?.let { content.regions[it] }?.neighbors?.filter { engine.world.canTravel(s, it) }?.forEach { add(HubAction.Travel(it)) }
                             s.region?.let { s.regions[it] }?.gates?.forEach { add(HubAction.EnterGate(it.uid)) }
                         }
                     }

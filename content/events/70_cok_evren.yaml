@@ -1374,12 +1374,14 @@ olaylar:
             etiket: { tr: "Suya, sonra alnına dokun; veda et", en: "Touch the water, then your brow. Say goodbye" }
             etkiler:
               - ahlak: { insanlik: 3 }
+              - tohum: { olay: "batik_kesh_yemini", gecikme: { min: 5, max: 12 } }
             kronik: { tr: "Batık Takımada'ya onların selamıyla veda ettin.", en: "You said goodbye to the Drowned Reach with their own greeting." }
             sonraki: "@akis"
           - id: "dunya"
             etiket: { tr: "Kendi dünyanı düşün; Gün 365'i", en: "Think about your own world. About Day 365" }
             etkiler:
               - ahlak: { duzen: 2 }
+              - tohum: { olay: "batik_kesh_yemini", gecikme: { min: 5, max: 12 } }
             kronik: { tr: "Hasat edilmiş bir dünyanın sabahında kendi dünyanın son gününü düşündün.", en: "On the morning of a harvested world, you thought about your own world's last day." }
             sonraki: "@akis"
 
@@ -3455,4 +3457,272 @@ olaylar:
               - bolge: "kule_dibi"
               - ahlak: { insanlik: 3 }
             kronik: { tr: "Bir tanrının koltuğunun seni beklediğini bilerek ona arkanı döndün.", en: "Knowing a god's seat would wait for you, you turned your back on it." }
+            sonraki: "@akis"
+
+  # ------------------------------------------------------------------ KESH'İN YEMİNİ (tohum: batik_son_basakci · basakci_sabah)
+  - id: "batik_kesh_yemini"
+    perde: [3, 4]
+    agirlik: 1
+    etiketler: ["cok_evren", "batik", "ordu"]
+    gerilim: 3
+    yalniz_tohum: true
+    kart: { tr: "İkinci zıpkın", en: "The second harpoon" }
+    sahne: "kesh_1"
+    sahneler:
+      - id: "kesh_1"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Sığınak'ın Kule Dibi'ndeki çadırından bir gönüllü seni nerede olursan ol buluyor. \"Ellinci kattaki su kapısından biri çıktı,\" diyor. \"Kimseyle konuşmuyor; yalnızca seni tarif ediyor.\"", en: "A volunteer from the Haven's tent in Spire Plaza tracks you down wherever you are. \"Somebody came out of the water door up on fifty,\" she says. \"Won't talk to anybody. Just keeps describing you.\"" }
+          - metin: { tr: "Geçidin önünde Kesh duruyor; arkasında altı Nehha, sırtlarında kemik zıpkınlar, ayaklarının dibinde birikmiş deniz suyu. Avcılar etraflarında yarım çember olmuş; kimse silahını indirmiyor, kimse kaldırmıyor da.", en: "Kesh is standing in front of the gate with six Nehha behind him, bone harpoons on their backs, seawater pooling at their feet. Hunters have formed a half circle around them. Nobody's lowering a weapon. Nobody's raising one either." }
+            kosul: { bayrak_yok: "batik_hasat_yutuldu" }
+          - metin: { tr: "Seni görünce Kesh zıpkınını ikinci kez ayaklarının dibine bırakıyor. Sistem çeviriyor: [Bir kez bırakılan zıpkın teşekkürdür. İkinci kez bırakılan, yemin.]", en: "When he sees you, Kesh lays his harpoon at your feet for the second time. The System translates: [A harpoon laid down once is thanks. Laid down twice, it is an oath.]" }
+            kosul: { bayrak_yok: "batik_hasat_yutuldu" }
+          - metin: { tr: "\"Sizin dünyanıza da bir hasat geliyor,\" diyor. \"Başakçı yalnızca artıktı; size gelen bütünü. Hasat'ın neye benzediğini biz biliyoruz, siz bilmiyorsunuz.\"", en: "\"A harvest is coming for your world too,\" he says. \"The Gleaner was only the leftovers. What's coming for you is the whole thing. We know what the Harvest looks like. You don't.\"" }
+            kosul: { bayrak_yok: "batik_hasat_yutuldu" }
+          - metin: { tr: "Geçidin önünde Kesh tek başına duruyor. Zıpkını elinde; bu sefer ayaklarının dibinde değil. Etrafındaki avcılar ona bir canavara bakar gibi bakıyor, o da sana öyle bakıyor.", en: "Kesh is standing in front of the gate alone. His harpoon is in his hand this time, not at your feet. The hunters around him are looking at him like he's a monster, and he's looking at you the same way." }
+            kosul: { bayrak: "batik_hasat_yutuldu" }
+          - metin: { tr: "\"Oru-Venn artık yürümüyor,\" diyor. Sistem çeviriyor, sesini düzleştirerek: [Ağdayken seviyesi hâlâ onundu; bir iplikle ona bağlıydı. Sen ipliği kopardın.]", en: "\"Oru-Venn doesn't walk anymore,\" he says. The System translates, flattening his voice: [While it was in the net, her level was still hers. A thread tied it to her. You broke the thread.]" }
+            kosul: { bayrak: "batik_hasat_yutuldu" }
+          - metin: { tr: "\"Yaşlı kadın senin içinde,\" diyor Kesh. \"Onu geri istiyorum.\"", en: "\"The old woman is inside you,\" Kesh says. \"I want her back.\"" }
+            kosul: { bayrak: "batik_hasat_yutuldu" }
+        sezgiler:
+          - kosul: { stat: { per: 150 }, bayrak_yok: "batik_hasat_yutuldu" }
+            metin: { tr: "[ALG] Yedi Nehha'nın hiçbirinin başının üstünde bir şey yazmıyor. Sistem onları görmüyor; Sistem'le çalışan bir şeye karşı bundan iyi asker olmaz.", en: "[PER] There's nothing written over any of the seven Nehha's heads. The System doesn't see them. Against something that runs on the System, you couldn't ask for better soldiers." }
+          - kosul: { bayrak: "yanki_bagi", bayrak_yok: "batik_hasat_yutuldu" }
+            metin: { tr: "yedi kişi ve hiçbirinin sistemi yok. onlara bakınca kıskanıyorum. bunu nasıl yapıyorlar?", en: "seven people and not one of them has a system. looking at them, i'm jealous. how do they do it?" }
+          - kosul: { bayrak: ["yanki_bagi", "batik_hasat_yutuldu"] }
+            metin: { tr: "içinde dört yüz on dokuz diye bir sayı var. her gece kendi adını biraz daha yüksek sesle söylüyor. ben duyuyorum; sen duymuyormuş gibi yapıyorsun.", en: "there's a number in you that says four hundred and nineteen. every night it says its own name a little louder. i hear it. you pretend you don't." }
+        yoldas_tepkileri:
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari", bayrak_yok: "batik_hasat_yutuldu" }
+            metin: { tr: "\"Hepsi susuz kalmış. Önce su, sonra yemin.\"", en: "\"They're all dehydrated. Water first, oaths after.\"" }
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt", bayrak_yok: "batik_hasat_yutuldu" }
+            metin: { tr: "\"Altı adam, kemik zıpkın. Eskiden gülerdim. Sonra o Başakçı'yı gördüm.\"", en: "\"Six guys with bone harpoons. I'd have laughed, once. Then I saw that Gleaner.\"" }
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman", bayrak: "batik_hasat_yutuldu" }
+            metin: { tr: "\"Yaşlı bir kadın. Yaşlı bir kadını yuttun.\"", en: "\"An old woman. You swallowed an old woman.\"" }
+        secenekler:
+          - id: "kabul"
+            etiket: { tr: "Zıpkını kaldır, ona geri ver: yemini kabul et", en: "Pick up the harpoon, hand it back. Accept the oath" }
+            goster: { bayrak_yok: "batik_hasat_yutuldu" }
+            etkiler:
+              - bayrak: "nehha_yemini"
+              - ordu: { lonca_avcisi: 7 }
+              - ahlak: { duzen: 2, merhamet: 1 }
+              - itibar: { siginak: 2 }
+              - xp_seviye: 15
+            sonraki: "kesh_yemin"
+          - id: "eve"
+            etiket: { tr: "\"Bu sizin savaşınız değil. Eve dönün.\"", en: "\"This isn't your war. Go home.\"" }
+            goster: { bayrak_yok: "batik_hasat_yutuldu" }
+            etkiler:
+              - ahlak: { merhamet: 4, insanlik: 3 }
+            sonraki: "kesh_eve"
+          - id: "bedel"
+            etiket: { tr: "Yeminin karşılığında ne istediklerini sor", en: "Ask what they want in return for the oath" }
+            goster: { bayrak_yok: "batik_hasat_yutuldu" }
+            etkiler:
+              - ahlak: { duzen: 1 }
+            sonraki: "kesh_bedel"
+          - id: "oru"
+            etiket: { tr: "Onunla geçitten geç; geri vermeyi dene", en: "Go back through with him. Try to give it back" }
+            goster: { bayrak: "batik_hasat_yutuldu" }
+            etkiler:
+              - bolge: "batik_takimada"
+              - ahlak: { merhamet: 5, insanlik: 3 }
+            sonraki: "kesh_oru"
+          - id: "benim"
+            etiket: { tr: "\"O seviye artık benim. Git.\"", en: "\"That level's mine now. Leave.\"" }
+            goster: { bayrak: "batik_hasat_yutuldu" }
+            etkiler:
+              - ahlak: { merhamet: -6, insanlik: -5 }
+              - yozlasma: 3
+            sonraki: "kesh_benim"
+          - id: "sok"
+            tur: "gosteris"
+            etiket: { tr: "Sayıyı burada, kendi ellerinle içinden sök", en: "Tear the number out of yourself, here, by hand" }
+            goster: { bayrak: "batik_hasat_yutuldu" }
+            gerekli: { stat: { wil: 300 } }
+            etkiler:
+              - stat: { str: -3, end: -3, wil: -3 }
+              - yozlasma: -4
+              - dikkat: 4
+              - ahlak: { merhamet: 6, insanlik: 4 }
+            sonraki: "kesh_sokum"
+
+      - id: "kesh_yemin"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Zıpkını yerden alıp Kesh'e uzatıyorsun. Bir an elini uzatmıyor; sonra alıyor ve sapını bir kez yere vuruyor, arkasındaki altı Nehha da aynısını yapıyor. Kule Dibi'nin taşlarında yedi kuru ses çınlıyor.", en: "You pick the harpoon up and hold it out to Kesh. For a second he doesn't reach for it. Then he takes it and knocks the butt against the ground once, the six behind him do the same, and seven dry knocks ring off the stones of Spire Plaza." }
+          - { tr: "Penceren güncelleniyor; ama yedi satır yerine yalnızca bir tane: [Ordu: +7. Tür: tanımsız. Seviye: okunamıyor.] Sistem onları sayıyor; ama neyi saydığını bilmiyor.", en: "Your window updates, but instead of seven lines there's just one: [Army: +7. Type: undefined. Level: unreadable.] The System is counting them. It just doesn't know what it's counting." }
+          - metin: { tr: "{npc:yanki}: çanlarını duydun mu? Sistem'in kayıt frekansının tam tersinde çalıyorlar. o sesi öğrenebilirim. öğrenirsem bir gün Sistem de bizi duymayabilir.", en: "{npc:yanki}: did you hear their bells? they ring at the exact inverse of the System's logging frequency. i could learn that sound. if i do, someday the System might not hear us either." }
+            kosul: { bayrak: "yanki_bagi" }
+        secenekler:
+          - id: "kordon"
+            etiket: { tr: "Onları Kordon'un sahil hattına yerleştir; deniz onların", en: "Post them on the Esplanade shore. The sea is theirs" }
+            etkiler:
+              - ahlak: { duzen: 2, merhamet: 1 }
+              - degisken: { hayatta_kalan: 1 }
+            sonraki: "@akis"
+          - id: "yanki"
+            etiket: { tr: "{npc:yanki} çanlarının sesini öğrensin", en: "Let {npc:yanki} learn the sound of their bells" }
+            goster: { bayrak: "yanki_bagi" }
+            etkiler:
+              - bilgi: "basakci_cani"
+              - ahlak: { insanlik: -2, duzen: -2 }
+              - iliski: { yanki: { guven: 6, saygi: 4 } }
+            sonraki: "@akis"
+          - id: "on"
+            etiket: { tr: "Onları ordunun önüne koy; herkes görsün", en: "Put them at the front of your army. Let everyone see" }
+            etkiler:
+              - ahlak: { duzen: 3, insanlik: -1 }
+              - ordu_kazan: 8
+            sonraki: "@akis"
+
+      - id: "kesh_eve"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kesh zıpkını yerden alıyor. Bir an onu kırdığını sanıyorsun; sonra kemerinden yeşile çalmış küçük bir çan çıkarıyor ve üç kez sallıyor.", en: "Kesh picks the harpoon up off the ground. For a second you think you've insulted him. Then he takes a little green-tarnished bell off his belt and shakes it three times." }
+          - { tr: "Sistem çeviriyor: [Gün geldiğinde çanınızı çalın. Duyarsak geliriz. Bu bir yemin değil; komşuluk.]", en: "The System translates: [When the day comes, ring your bell. If we hear it, we come. That is not an oath. That is being neighbors.]" }
+          - { tr: "Altı Nehha geçide dönüyor. Arkalarında bıraktıkları deniz suyu Kule'nin taşlarında saatlerce kurumuyor.", en: "The six Nehha turn back to the gate. The seawater they leave behind takes hours to dry on the Spire's stones." }
+        secenekler:
+          - id: "al"
+            etiket: { tr: "Çanı al", en: "Take the bell" }
+            etkiler:
+              - esya: { nehha_cani: 1 }
+              - ahlak: { insanlik: 2 }
+            sonraki: "@akis"
+          - id: "ugurla"
+            etiket: { tr: "Onları geçide kadar uğurla", en: "Walk them back to the gate" }
+            etkiler:
+              - ahlak: { merhamet: 2, insanlik: 1 }
+            sonraki: "@akis"
+
+      - id: "kesh_bedel"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kesh sorunun çevrilmesini bekliyor, sonra gülüyor; kısa, ıslak bir gülüş. \"Sönükler pazarlık etmez,\" diyor. \"Pazarlık, sayılanların işi.\"", en: "Kesh waits for the question to be translated, then laughs, short and wet. \"The Dimmed don't bargain,\" he says. \"Bargaining is for people who get counted.\"" }
+          - { tr: "Sonra ciddileşiyor. \"Bir şey isteyeceğim, ama bedel değil. Biz düşersek biri bizim çanımızı sizin dünyanızda çalsın; bir yerde birileri bir zamanlar Ilunnar diye bir dünya olduğunu hatırlasın.\"", en: "Then he gets serious. \"I will ask one thing, but it is not a price. If we fall, someone rings our bell in your world. So that somewhere, someone remembers there was once a world called Ilunnar.\"" }
+        secenekler:
+          - id: "soz"
+            etiket: { tr: "Söz ver; yemini kabul et", en: "Promise. Accept the oath" }
+            etkiler:
+              - bayrak: "nehha_yemini"
+              - ordu: { lonca_avcisi: 7 }
+              - ahlak: { merhamet: 2, insanlik: 2 }
+              - xp_seviye: 15
+            sonraki: "kesh_yemin"
+          - id: "eve"
+            etiket: { tr: "\"O zaman siz düşmeyin. Eve dönün.\"", en: "\"Then don't fall. Go home.\"" }
+            etkiler:
+              - ahlak: { merhamet: 3, insanlik: 2 }
+            sonraki: "kesh_eve"
+
+      - id: "kesh_oru"
+        yer: "batik_takimada"
+        paragraflar:
+          - { tr: "Su kapısından geçtiğinizde takımada sessiz; çanlar yalnızca rüzgâr esince, kendiliğinden, tek tük çalıyor. Oru-Venn fenerin merdivenlerinde yatıyor, yüzü güneşe dönük, nefesi bir mum alevi kadar ince.", en: "When you come through the water door, the archipelago is quiet. The bells only ring now and then, on their own, when the wind picks up. Oru-Venn is lying on the Light's stairs, face to the sun, her breath as thin as a candle flame." }
+          - { tr: "Yanına diz çöküyorsun. İçinde bir yerde dört yüz on dokuz diye bir sayı kıpırdıyor, onu tanıyor gibi. Ama Sistem'de geri ver diye bir tuş yok; hiç olmadı.", en: "You kneel beside her. Somewhere inside you a number, four hundred and nineteen, stirs like it recognizes her. But the System doesn't have a give-it-back button. It never has." }
+          - { tr: "Oru-Venn kör gözlerini sana çeviriyor. \"Sıcaksın,\" diyor. \"İçinde benim bir parçam var; onu hissediyorum. Bir de seni.\"", en: "Oru-Venn turns her blind eyes toward you. \"You're warm,\" she says. \"There's a piece of me in you. I can feel it. And you.\"" }
+        secenekler:
+          - id: "yanki"
+            etiket: { tr: "{npc:yanki} sayıyı ayıklasın; neye mal olursa olsun", en: "Have {npc:yanki} pick the number out. Whatever it costs" }
+            goster: { bayrak: "yanki_bagi" }
+            etkiler:
+              - stat: { wil: -4, per: -2 }
+              - yozlasma: -3
+              - ahlak: { merhamet: 6, insanlik: 4 }
+              - iliski: { yanki: { guven: 6, baglilik: 6 } }
+            sonraki: "kesh_oru_don"
+          - id: "sok"
+            tur: "gosteris"
+            etiket: { tr: "Sayıyı kendi ellerinle sök; acısı senin olsun", en: "Tear the number out yourself. The pain is yours" }
+            gerekli: { stat: { wil: 300 } }
+            etkiler:
+              - stat: { str: -3, end: -3, wil: -3 }
+              - yozlasma: -4
+              - dikkat: 3
+              - ahlak: { merhamet: 5, insanlik: 2 }
+            sonraki: "kesh_oru_don"
+          - id: "el"
+            etiket: { tr: "Elini tut; sonuna kadar yanında kal", en: "Hold her hand. Stay till the end" }
+            etkiler:
+              - ahlak: { merhamet: 3, insanlik: 3 }
+            sonraki: "kesh_oru_veda"
+
+      - id: "kesh_oru_don"
+        yer: "batik_takimada"
+        paragraflar:
+          - { tr: "Acı soğuk geliyor; kökünden çekilen bir diş gibi, ama içeriden. Avucunda küçük, sönük bir pencere beliriyor; üstünde yalnızca bir sayı: 419.", en: "The pain comes cold, like a tooth pulled at the root, but from the inside. A small, dim window shows up in your palm with just one number on it: 419." }
+          - { tr: "Pencereyi Oru-Venn'in göğsüne bastırıyorsun. Bir süre hiçbir şey olmuyor; sonra kadın derin, hırıltılı bir nefes alıyor ve kör gözleri kırpılıyor.", en: "You press the window to Oru-Venn's chest. For a while nothing happens. Then she pulls in a deep, rattling breath, and her blind eyes blink." }
+          - { tr: "Kesh zıpkınını yere bırakıyor; bu kez senin ayaklarının dibine değil, ikinizin arasındaki taşa. Sistem bunu çevirmiyor. Gerek de yok.", en: "Kesh lays his harpoon down, not at your feet this time, but on the stone between the two of you. The System doesn't translate it. It doesn't need to." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[Seviye kaybı: kaynak sahibine iade edildi]", en: "[Level loss: source returned to owner]" }
+            satirlar:
+              - { tr: "Sistem bu işlemi tanımıyor. Yine de kaydedildi.", en: "The System does not recognize this operation. Logged anyway." }
+        secenekler:
+          - id: "veda"
+            etiket: { tr: "Suya, sonra alnına dokun", en: "Touch the water, then your brow" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+              - xp_seviye: 20
+            sonraki: "@akis"
+          - id: "kal"
+            etiket: { tr: "Bir gece daha fenerde kal", en: "Stay one more night at the Light" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - xp_seviye: 20
+            sonraki: "@akis"
+
+      - id: "kesh_oru_veda"
+        yer: "batik_takimada"
+        paragraflar:
+          - { tr: "Elini tutuyorsun. Avucu tuzlu, kuru ve sandığından sıcak. Güneş kulelerin ardına inerken sana bir şey anlatıyor; Sistem çeviriyor, sonra çevirmeyi bırakıyor, sen yine de dinliyorsun.", en: "You take her hand. Her palm is salty, dry, warmer than you expected. As the sun goes down behind the towers she tells you something, and the System translates, then stops translating, and you keep listening anyway." }
+          - { tr: "Son nefesinde içindeki sayı bir kez ısınıyor ve sonra soğuyor. Artık yalnızca bir sayı.", en: "With her last breath, the number inside you warms once, then goes cold. Now it's just a number." }
+          - { tr: "Kesh zıpkınını onun göğsünün üstüne bırakıyor ve sana bakmadan fenerin çanını çalıyor: uzun, tek bir vuruş. Takımadanın dört bir yanından çanlar cevap veriyor.", en: "Kesh lays his harpoon across her chest and, without looking at you, rings the Light's bell: one long stroke. Bells answer from every corner of the archipelago." }
+        secenekler:
+          - id: "kal"
+            etiket: { tr: "Çanlar susana kadar orada kal", en: "Stay until the bells go quiet" }
+            etkiler:
+              - ahlak: { insanlik: 3 }
+            sonraki: "@akis"
+          - id: "git"
+            etiket: { tr: "Sessizce kapıya yürü", en: "Walk back to the door in silence" }
+            etkiler:
+              - ahlak: { insanlik: 1, merhamet: -1 }
+            sonraki: "@akis"
+
+      - id: "kesh_benim"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kesh uzun süre sana bakıyor. Sonra zıpkınının ucunu yere değdiriyor ve kemiği taşa sürterek ikinizin arasına bir çizgi çiziyor.", en: "Kesh looks at you for a long time. Then he touches the point of his harpoon to the ground and drags it, bone scraping stone, drawing a line between the two of you." }
+          - { tr: "\"Başakçı da öyle derdi,\" diyor; Sistem bu kez sesini düzleştirmiyor. Geçide dönüyor ve suya dalmadan önce son kez çanını çalıyor. Öbür taraftan hiçbir şey cevap vermiyor.", en: "\"The Gleaner used to say that too,\" he says, and this time the System doesn't flatten his voice. He turns back to the gate and, before he dives, rings his bell one last time. Nothing answers from the other side." }
+          - metin: { tr: "{npc:yanki}: dört yüz on dokuz. şimdi daha sessiz. bu iyi bir şey değil.", en: "{npc:yanki}: four hundred and nineteen. it's quieter now. that's not a good thing." }
+            kosul: { bayrak: "yanki_bagi" }
+        secenekler:
+          - id: "don"
+            etiket: { tr: "Arkanı dön", en: "Turn your back" }
+            etkiler:
+              - ahlak: { insanlik: -1 }
+            sonraki: "@akis"
+
+      - id: "kesh_sokum"
+        yer: "kule"
+        paragraflar:
+          - { tr: "İçine uzanıyorsun; elle değil, iradeyle. Sistem uyarı üstüne uyarı basıyor ve sen hepsini kapatıyorsun. Sonra dört yüz on dokuzu buluyorsun: öbür sayılarının arasında, yabancı bir dilde konuşan biri gibi.", en: "You reach inside, not with your hand but with your will. The System throws up warning after warning and you close every one. Then you find four hundred and nineteen, sitting among your other numbers like someone speaking a foreign language." }
+          - { tr: "Söktüğünde dizlerinin bağı çözülüyor ve Kule Dibi'nin taşlarına çöküyorsun. Avucunda küçük, sönük bir pencere: 419.", en: "When you tear it loose, your knees give out and you go down on the stones of Spire Plaza. In your palm, a small, dim window: 419." }
+          - { tr: "Kesh pencereyi iki eliyle, bir yumurtayı tutar gibi alıyor. Tek kelime etmeden geçide koşuyor ve suya dalıyor. Bir saat sonra geçidin ardından bir çan sesi geliyor: tek ve uzun.", en: "Kesh takes the window in both hands like he's holding an egg. Without a word, he runs for the gate and dives. An hour later a bell sounds from the other side: once, long." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[Seviye kaybı]", en: "[Level loss]" }
+            satirlar:
+              - { tr: "Kaynak: gönüllü. Sistem bunu bir hata olarak kaydetti.", en: "Source: voluntary. The System has logged this as an error." }
+        secenekler:
+          - id: "kalk"
+            etiket: { tr: "Kalk", en: "Get up" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+              - xp_seviye: 20
             sonraki: "@akis"

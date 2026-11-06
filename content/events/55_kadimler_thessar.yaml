@@ -1774,6 +1774,17 @@ olaylar:
               - iliski: { thessar: { guven: 3 } }
             kronik: { tr: "Muhafızsız gelen elçiye ne önerdiğini sordun.", en: "You asked the Envoy, who came with no Wardens, what he was proposing." }
             sonraki: "thessar_ihanet_fisiltisi_teklif"
+          - id: "pencere"
+            tur: "aciga_vur"
+            etiket: { tr: "Pencereni aç; okunmayan satırları ona göster", en: "Open your window. Show him the lines that won't read" }
+            etkiler:
+              - aciga_vur: true
+              - bayrak: "thessar_pencere_goruldu"
+              - bilgi: "defterdeki_ilk_anomali"
+              - ahlak: { insanlik: 3, duzen: -3 }
+              - iliski: { thessar: { guven: 10, saygi: 6 } }
+            kronik: { tr: "Budayıcı'nın yolda olduğunu söyleyen elçiye kendi pencereni açtın; on bin yıldır kimse ona okunmayan bir şeyi kendi isteğiyle göstermemişti.", en: "When the Envoy told you the Pruner was coming, you opened your own window to him. In ten thousand years, nobody had ever shown him something unreadable of their own free will." }
+            sonraki: "thessar_ihanet_fisiltisi_pencere"
           - id: "ihbar"
             etiket: { tr: "Onu dinleme; Meclis'e ihbar et", en: "Don't listen. Report him to the Conclave" }
             etkiler:
@@ -1789,7 +1800,10 @@ olaylar:
       - id: "thessar_ihanet_fisiltisi_teklif"
         yer: "kule_dibi"
         paragraflar:
-          - { tr: "\"Defter'in ilk sayfasında senin gibi bir satır var,\" diyor {npc:thessar}. \"Okunmayan, sayılmayan bir şey. Biz onu budadık ve imzaladık. On bin yıldır merak ediyorum: budamasaydık ne olurdu?\"", en: "\"On the first page of the Ledger there is a line like you,\" {npc:thessar} says. \"Something that would not read, would not count. We pruned it, and we signed. For ten thousand years I have wondered what would have happened if we had not.\"" }
+          - metin: { tr: "\"Defter'in ilk sayfasında senin gibi bir satır var,\" diyor {npc:thessar}. \"Okunmayan, sayılmayan bir şey. Biz onu budadık ve imzaladık. On bin yıldır merak ediyorum: budamasaydık ne olurdu?\"", en: "\"On the first page of the Ledger there is a line like you,\" {npc:thessar} says. \"Something that would not read, would not count. We pruned it, and we signed. For ten thousand years I have wondered what would have happened if we had not.\"" }
+            kosul: { bayrak_yok: "thessar_pencere_goruldu" }
+          - metin: { tr: "\"O satırı budadık ve imzaladık,\" diyor {npc:thessar}. \"On bin yıldır merak ediyorum: budamasaydık ne olurdu? Şimdi cevap karşımda duruyor ve onu hâlâ okuyamıyorum.\"", en: "\"We pruned that line, and we signed,\" {npc:thessar} says. \"For ten thousand years I have wondered what would have happened if we had not. Now the answer is standing in front of me, and I still cannot read it.\"" }
+            kosul: { bayrak: "thessar_pencere_goruldu" }
           - { tr: "Sol kolunu gösteriyor; taze kesiği. \"Filonun hasat yetkisi burada. Defter Mührü. Her elçi onu kendi derisinde taşır. Zamanı geldiğinde onu söküp sana vereceğim. Onunla basılan her emir Meclis'in emri sayılır; geri çekilme emri de.\"", en: "He shows you his left arm, the fresh cut. \"The fleet's authority to harvest is in here. The Ledger Seal. Every envoy carries it in his own skin. When the time comes, I will cut it out and give it to you. Any order stamped with it counts as an order of the Conclave. Including an order to withdraw.\"" }
           - { tr: "\"Karşılığında,\" diyor ve sesi ilk kez bir şey istemenin ağırlığını taşıyor, \"bana Defter'de yazılı olmayan bir son ver.\"", en: "\"In exchange,\" he says, and for the first time his voice carries the weight of someone asking for something, \"give me an ending that is not written in the Ledger.\"" }
         secenekler:
@@ -1857,6 +1871,34 @@ olaylar:
               - iliski: { thessar: { guven: -40, baglilik: -20, korku: 10 } }
             kronik: { tr: "Elçinin ihanet teklifini sonuna kadar dinledin ve sonra her kelimesini Meclis'e ihbar ettin.", en: "You heard the Envoy's offer of treason all the way through, then reported every word of it to the Conclave." }
             sonraki: "thessar_ihanet_fisiltisi_ihbar"
+
+      - id: "thessar_ihanet_fisiltisi_pencere"
+        yer: "kule_dibi"
+        paragraflar:
+          - { tr: "Pencereni açıp ona çeviriyorsun; bir sayfayı ışığa tutar gibi. Durumun, seviyen ve onların altında kimsenin okuyamadığı satırlar: kırık harfler, sayılmayan sayılar, kenar boşluğuna sıkışmış ikinci bir el yazısı. Sistem seni durdurmuyor; izliyor gibi.", en: "You open your window and turn it toward him, the way you'd hold a page up to the light. Your status, your level, and under them the lines nobody has ever been able to read: broken letters, numbers that won't count, a second handwriting crammed into the margins. The System doesn't stop you. It seems to be watching." }
+          - { tr: "{npc:thessar} kalemini kullanmıyor. Kendi gözleriyle, satır satır, bir mezar taşındaki adı okur gibi yavaş okuyor. Bir satırda ikinci sesi tamamen susuyor; ilk kez.", en: "{npc:thessar} doesn't use his stylus. He reads with his own eyes, line by line, slow, the way you'd read a name on a headstone. At one line his second voice goes completely silent. For the first time." }
+          - { tr: "\"Bunu biliyorum,\" diyor. \"Defter'in ilk sayfasında, kendi adımızın hemen altında; onu biz budadık.\" Sonra başını kaldırıp sana bakıyor: \"Sen yeni bir hata değilsin. Sen geri dönen bir satırsın.\"", en: "\"I know this,\" he says. \"On the first page of the Ledger, right under our own name. We are the ones who pruned it.\" Then he looks up at you. \"You are not a new error. You are a line that came back.\"" }
+          - metin: { tr: "{npc:yanki} pencerenin en köşesine sıkışıyor, satırları titriyor: o bana bakıyor. beni okuyor. kapat. lütfen kapat.", en: "{npc:yanki} squeezes itself into the farthest corner of your window, its lines shaking: he's looking at me. he's reading me. close it. please close it." }
+            kosul: { bayrak: "yanki_bagi" }
+        sezgiler:
+          - kosul: { stat: { per: 260 } }
+            metin: { tr: "[ALG] Elçinin sol kolundaki taze kesik yeniden kanıyor. Farkında değil; gözleri hâlâ o satırda.", en: "[PER] The fresh cut on the Envoy's left arm is bleeding again. He hasn't noticed. His eyes are still on that line." }
+        secenekler:
+          - id: "kapat"
+            etiket: { tr: "Pencereyi kapat: \"Şimdi teklifini söyle.\"", en: "Close the window. \"Now tell me your offer.\"" }
+            etkiler:
+              - ahlak: { duzen: -1, insanlik: 1 }
+              - iliski: { thessar: { guven: 3 } }
+            kronik: { tr: "Pencereni elçinin gözlerinden çekip kapattın ve ondan teklifini istedin.", en: "You pulled your window back from the Envoy's eyes, shut it, and asked him for his offer." }
+            sonraki: "thessar_ihanet_fisiltisi_teklif"
+          - id: "soz"
+            etiket: { tr: "{npc:yanki|e} söz ver: bu sefer kimse budanmayacak", en: "Promise {npc:yanki}: nobody gets pruned this time" }
+            goster: { bayrak: "yanki_bagi" }
+            etkiler:
+              - ahlak: { merhamet: 3, insanlik: 2 }
+              - iliski: { yanki: { guven: 6, baglilik: 4 }, thessar: { saygi: 3 } }
+            kronik: { tr: "Bir Kadim'in gözleri önünde kafandaki sese söz verdin: bu sefer kimse budanmayacaktı.", en: "In front of an Ancient's eyes, you made the voice in your head a promise: this time, nobody was getting pruned." }
+            sonraki: "thessar_ihanet_fisiltisi_teklif"
 
       - id: "thessar_ihanet_fisiltisi_kabul"
         yer: "kule_dibi"

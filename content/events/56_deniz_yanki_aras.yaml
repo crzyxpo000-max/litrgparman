@@ -885,6 +885,8 @@ olaylar:
             kosul: { npc_hayatta: "deniz_arman" }
           - metin: { tr: "Sonra kız {npc:deniz_arman|in} omzunun üstünden sana bakıyor. \"Martıları sen mi gördün?\" diye soruyor. \"{npc:deniz_arman} hep yanlış yöne bakar. Hep birinin göstermesi gerekir.\"", en: "Then the girl looks at you over {npc:deniz_arman|pos} shoulder. \"Did you see the gulls first?\" she asks. \"{npc:deniz_arman} always looks the wrong way. Somebody always has to point.\"" }
             kosul: { npc_hayatta: "deniz_arman" }
+          - metin: { tr: "Kız sana bakıyor, sonra arkana; birini arıyor. Söylemen gereken şeyi söylüyorsun. Ağlamıyor. Yalnızca cebindeki mavi tebeşiri çıkarıp avucuna bırakıyor: \"Bunu ona verecektim.\"", en: "The girl looks at you, then past you, looking for someone. You tell her what you have to tell her. She doesn't cry. She just takes the blue chalk out of her pocket and puts it in your palm. \"I was gonna give this to them.\"" }
+            kosul: { npc_olu: "deniz_arman" }
           - { tr: "Depodaki çocuklar onları çevreliyor, alkışlıyor, bir kısmı neden alkışladığını bilmeden. Bu şehirde bir kavuşma, herkesin kavuşmasıdır.", en: "The kids in the warehouse gather around and start clapping, some of them with no idea why. In this town, one reunion belongs to everybody." }
         secenekler:
           - id: "aksam"
@@ -904,6 +906,15 @@ olaylar:
               - iliski: { deniz_arman: { baglilik: 10, guven: 6 } }
             kronik: { tr: "Kıyametin ortasında bir iskelede üç kişi simit yedi ve martılara pay ayırdı.", en: "In the middle of the apocalypse, three people ate pretzels on a pier and saved some for the gulls." }
             sonraki: "dkb_karar"
+          - id: "emanet"
+            etiket: { tr: "Kızın elini tut; artık sana emanet", en: "Take the girl's hand. She's yours to look after now" }
+            goster: { npc_olu: "deniz_arman" }
+            etkiler:
+              - ahlak: { merhamet: 4, insanlik: 3 }
+              - itibar: { siginak: 3 }
+              - bayrak: "kardes_emanet"
+            kronik: { tr: "{npc:deniz_arman|in} kız kardeşini, ona hiç kavuşamayan birinin yerine sen büyüttün.", en: "You raised {npc:deniz_arman|pos} little sister in place of the one who never got to see her again." }
+            sonraki: "@akis"
 
       - id: "dkb_siginak_hikaye"
         yer: "kiyikent_liman"
@@ -979,6 +990,26 @@ olaylar:
             sonraki: "@akis"
 
       # ---------------------------------------------------------------- akşam: Deniz'in kararı
+      - id: "dkb_sana_kalmis"
+        yer: "kiyikent_iskele"
+        paragraflar:
+          - { tr: "{npc:deniz_arman} uzun süre sana bakıyor, sonra gülüyor; yorgun, kısa bir gülüş. \"Vapurdan beri hep sen söyledin nereye gideceğimizi,\" diyor. \"Biliyor musun, bunu ilk kez fark ettim.\"", en: "{npc:deniz_arman} looks at you for a long time, then laughs, short and tired. \"Ever since the ferry, you've been the one saying where we go,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}. \"I only just noticed that.\"" }
+          - { tr: "Tebeşiri cebine koyup kalkıyor. Ne kalacağını söylüyor ne gideceğini; yalnızca iskelenin ucuna kadar yürüyüp suya bakıyor. Martılar bir kez havalanıp yeniden konuyor.", en: "{zamir:deniz_arman|o|b} pocket{zamir:deniz_arman|s} the chalk and stand{zamir:deniz_arman|s} up. No word on staying, none on going. {zamir:deniz_arman|o|b} just walk{zamir:deniz_arman|s} to the end of the pier and look{zamir:deniz_arman|s} at the water. The gulls lift off once and settle again." }
+          - { tr: "\"Yarın söylerim,\" diyor, sırtı sana dönük. \"Bu sefer kendim için.\"", en: "\"I'll tell you tomorrow,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}, back still turned. \"This time I'm deciding for me.\"" }
+        secenekler:
+          - id: "bekle"
+            etiket: { tr: "Yanına git, sessizce suya bak", en: "Walk over and watch the water with them" }
+            etkiler:
+              - ahlak: { merhamet: 1 }
+              - iliski: { deniz_arman: { baglilik: 4 } }
+            sonraki: "@akis"
+          - id: "birak"
+            etiket: { tr: "Onu orada yalnız bırak", en: "Leave them alone out there" }
+            etkiler:
+              - ahlak: { duzen: -1 }
+              - iliski: { deniz_arman: { saygi: 3 } }
+            sonraki: "@akis"
+
       - id: "dkb_karar"
         yer: "kiyikent_iskele"
         paragraflar:
@@ -994,6 +1025,14 @@ olaylar:
           - kosul: { bayrak: "yanki_bagi" }
             metin: { tr: "ne istediğini söyle. yalan söylersen ikimiz de bileceğiz. o da bilecek; bu insan yalanlarını artık kokusundan tanıyor.", en: "tell {zamir:deniz_arman|onu} what you want. lie, and we'll both know. so will {zamir:deniz_arman|o}. this one can smell your lies now." }
         secenekler:
+          - id: "sana_kalmis"
+            etiket: { tr: "\"Bunu ben söyleyemem. Senin hayatın.\"", en: "\"That's not mine to say. It's your life.\"" }
+            etkiler:
+              - ahlak: { duzen: -3, insanlik: 2 }
+              - bayrak: "deniz_kendi_karari"
+              - iliski: { deniz_arman: { saygi: 6, guven: 2 } }
+            kronik: { tr: "{npc:deniz_arman|e} ne istediğini söylemedin; kararı ona bıraktın ve o kararı ilk kez kimseye sormadan verdi.", en: "You didn't tell {npc:deniz_arman} what you wanted. You left the call to {zamir:deniz_arman|onu}, and for the first time {zamir:deniz_arman|o} made it without asking anyone." }
+            sonraki: "dkb_sana_kalmis"
           - id: "kal"
             etiket: { tr: "\"Yanımda kal. Ne olursa olsun.\"", en: "\"Stay with me. No matter what.\"" }
             goster: { yoldas: "deniz_arman" }
