@@ -48,7 +48,11 @@ fun SystemCard(notice: NoticeView, modifier: Modifier = Modifier) {
             .semantics(mergeDescendants = true) { contentDescription = spoken },
     ) {
         Text(
-            text = if (notice.kind == NoticeKind.ECHO) "[ ${glitch(stringResource(R.string.echo_header))} ]" else "[ ${stringResource(R.string.system_header)} ]",
+            text = when (notice.kind) {
+                NoticeKind.ECHO -> "[ ${glitch(stringResource(R.string.echo_header))} ]"
+                NoticeKind.COMPANION -> "[ ${stringResource(R.string.companion_header)} ]"
+                else -> "[ ${stringResource(R.string.system_header)} ]"
+            },
             style = GameType.system,
             color = accent.copy(alpha = 0.8f),
         )

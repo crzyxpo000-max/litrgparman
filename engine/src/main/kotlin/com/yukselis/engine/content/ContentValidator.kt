@@ -60,6 +60,7 @@ object ContentValidator {
                     if (c.faction !in content.factions) problems += "$where: tanımsız fraksiyon '${c.faction}'"
                 }
                 is Condition.NpcCanFight -> npcRef(c.npc, where)
+                is Condition.TopReputation -> if (c.faction !in content.factions) problems += "$where: tanımsız fraksiyon '${c.faction}'"
                 is Condition.Knows -> if (c.knowledge !in content.knowledge) problems += "$where: tanımsız bilgi '${c.knowledge}'"
                 is Condition.HasTrait -> if (c.trait !in content.traits) problems += "$where: tanımsız iz '${c.trait}'"
                 is Condition.All -> c.conditions.forEach { checkCondition(it, where) }
@@ -537,6 +538,24 @@ fun contentWarnings(content: Content): List<String> {
         val inNpc = if (npc == Content.FOCUS) content.npcs.values.any { mem in it.memories } else content.npcs[npc]?.memories?.containsKey(mem) == true
         if (!inNpc && content.texts["hafiza_$mem"] == null) warnings += "hatıra '$mem' ($npc): metni yok (npcs/$npc.yaml hafizalar ya da system.yaml hafiza_$mem)"
     }
+    // Metne düz yazılmış NPC adları (belirteç kuralı): adlar dile göre değişir, `{npc:id}` kullanılmalı.
+    val nameRegexes = content.names.all.filter { it.kind == NameEntry.Kind.NPC }.flatMap { n ->
+        listOf(n.short.tr, n.short.en).distinct().filter { it.length >= 3 }.map { w -> n.id to Regex("(?<!\\p{L})${Regex.escape(w)}(?!\\p{L})") }
+    }
+    fun scanNames(t: LText, where: String) {
+        for (raw in listOf(t.tr, t.en)) {
+            val plain = TokenResolver.TOKEN.replace(raw, "")
+            nameRegexes.firstOrNull { (_, r) -> r.containsMatchIn(plain) }?.let { (id, _) -> warnings += "$where: '$id' adı düz yazılmış; {npc:$id} kullan" }
+        }
+    }
+    content.scenes.values.forEach { sc ->
+        sc.paragraphs.forEach { scanNames(it.text, "sahne ${sc.id}") }
+        sc.insights.forEach { scanNames(it.text, "sahne ${sc.id} sezgi") }
+        sc.choices.forEach { scanNames(it.label, "sahne ${sc.id}.${it.id}") }
+        sc.notices.forEach { n -> (listOf(n.notice.title) + n.notice.lines).forEach { scanNames(it, "sahne ${sc.id} bildirim") } }
+        sc.companionLines.forEach { scanNames(it.text, "sahne ${sc.id} yoldaş") }
+    }
+    content.events.values.forEach { scanNames(it.card, "olay ${it.id}.kart") }
     // NPC yay düğümleri: henüz yazılmamış düğümler (Aşama 6–7 içeriği) uyarıdır.
     content.npcs.values.forEach { d ->
         d.arcNodes.forEach { n ->

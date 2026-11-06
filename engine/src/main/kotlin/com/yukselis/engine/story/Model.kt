@@ -222,6 +222,18 @@ sealed interface Condition {
         override fun test(state: WorldState) = trait in state.player.traits
     }
 
+    /**
+     * Fraksiyonlar arasında en yüksek itibar bu fraksiyonda (eşitlikte alfabetik ilk). Eşik ayrıca `itibar_min` ile verilir.
+     * Perde sonlarında "ilk fraksiyon eğilimi" tek bir paragrafla anlatılsın diye.
+     */
+    data class TopReputation(val faction: String, val among: List<String>) : Condition {
+        override fun test(state: WorldState): Boolean {
+            val pool = among.ifEmpty { state.reputation.keys.toList() }
+            val best = pool.sorted().maxByOrNull { state.reputation[it] ?: 0 } ?: return false
+            return best == faction
+        }
+    }
+
     data class All(val conditions: List<Condition>) : Condition {
         override fun test(state: WorldState) = conditions.all { it.test(state) }
     }
@@ -304,7 +316,7 @@ data class SceneNotice(val notice: Notice, val condition: Condition? = null)
  * Pasif Sistem sezgisi: koşulu (çoğunlukla yüksek stat) sağlanınca sahneye yalnızca oyuncunun
  * okuduğu özel bir satır eklenir. Stat koşulunda satırın başına "[ALG]" gibi önek gelir.
  */
-data class Insight(val text: LText, val condition: Condition)
+data class Insight(val text: LText, val condition: Condition, val narration: Boolean = false)
 
 /** Sahneye yazılmış yoldaş görüşü; NPC yanındaysa genel görüş satırının yerine geçer. */
 data class CompanionLine(val npc: String, val text: LText, val condition: Condition? = null)

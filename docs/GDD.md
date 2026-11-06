@@ -177,7 +177,7 @@ Sınıf ayrıca bir **Meslek** ağacından bağımsızdır: Simyacı, Demirci, R
 
 ### Günlük Görev ve ekonomi
 
-- **Günlük Görev:** her oyun günü Sistem bir antrenman görevi verir (100 şınav, 10 km koşu, 3 kapı). Tamamlamak +1 serbest stat (her 7 günlük seri +1 daha); görmezden gelmek ceza bölgesine ışınlanma riski. **Günlük Görev yalnızca oyuncudadır** (bkz. OP MC tasarımı).
+- **Günlük Görev:** her oyun günü Sistem dünyaya özgü bir görev verir (kampın suyunu taşı, sınırı dolaş, 3 kapı kapat; spor salonu sayı listeleri değil). Tamamlamak +1 serbest stat (her 7 günlük seri +1 daha); görmezden gelmek "Durmuş Saat"e ışınlanma riski (DECISIONS #98). **Günlük Görev yalnızca oyuncudadır** (bkz. OP MC tasarımı).
 - **Para:** Kredi (Sistem mağazası, ticaret) ve Öz Kristali (evrim, yetenek kaynaştırma).
 - **Ekipman:** 8 yuva, nadirlik renkleri, set bonusları; Meslek ile yükseltilir.
 

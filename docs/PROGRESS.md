@@ -1,6 +1,6 @@
 # İlerleme
 
-Şu an: Aşama 6 — Dikey dilim: Perde 1 içeriği (sırada)
+Şu an: Aşama 7 — Perde 2–4 ve sonlar (sırada)
 Son commit: 6f1bf15 Aşama 5: NPC sistemi
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
@@ -10,6 +10,18 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - SDK: `local.properties` → `sdk.dir=C:/Users/alpar/AppData/Local/Android/Sdk` (git dışı).
 - Emülatör: `Medium_Phone_API_36.0` (`emulator -avd Medium_Phone_API_36.0`), adb ile kurulum.
 - OneDrive kilidi yüzünden lint ara sıra "dosya kullanılıyor" der: `./gradlew --stop` ve tekrar.
+
+## Aşama 6 — Dikey dilim: Perde 1 içeriği  ✅ (2026-11-06)
+- [x] Perde 1 tasarım belgesi `docs/PERDE1.md` (güç döngüsü, dünya durumu, olay listesi, partiler)
+- [x] Yeni açılış: aktarımda Yankı bağı sahnesi, ilk savaş yenilgi sahnesi, hayatta kalan oranı
+- [x] 48 Perde 1 olayı (4 paralel içerik partisi), Deniz/Yankı/Aras yay düğümleri (her biri ≥ 3), 4 ilk kamp (Lonca/Sığınak/Yükselenler/Sessiz Ağ), 2 çok odalı zindan, Kırılma (3 uyanış), Yeni tavan, Bekçi + dünya durumu epilogu
+- [x] Bütçe: düşman 20 + boss, yetenek ≥ 30, sınıf 8 + 4, unvan ≥ 15, Günlük Görev şablonu 14
+- [x] Perde1Test: içerik kuralları, 500 başsız oynanış (çıkmaz yok, tüm olaylara ulaşılır), dünya durumu çeşitliliği, düz yazılmış ad yasağı
+- [x] Bağımsız içerik incelemesi (10 rastgele olay + açılış + final, TR/EN): 12 yüksek, 10 orta bulgu düzeltildi (telif: Günlük Görev seti ve Ceza Bölgesi; düz yazılmış adlar; dal tutarsızlıkları; final sözleşmesi)
+- [x] Emülatörde yeni açılış (EN) oynandı: Yankı bağı sahnesi, bağ kartı, ilişki bildirimi
+Notlar:
+- 153 motor testi, check.sh geçiyor. DECISIONS #98–104.
+- Bilinen eksik: Perde 2+ yay düğümleri (validateContent 25 uyarı, Aşama 7); ordu içeriği Aşama 7.
 
 ## Tasarım değişikliği — Yapay zeka anlatıcı kaldırıldı  ✅ (2026-11-06)
 - [x] GDD (TR/EN), görev dosyası (Aşama 8 "Kaldırıldı", durma noktası ve gizlilik maddesi), CLAUDE.md, DECISIONS #97

@@ -16,7 +16,7 @@ android {
         // Yayından önce (Aşama 9) Google Play'in o an istediği hedef API'ye yükseltilecek.
         targetSdk = 35
         versionCode = 1
-        versionName = "0.1.0-phase1"
+        versionName = "0.6.0"
     }
 
     buildTypes {

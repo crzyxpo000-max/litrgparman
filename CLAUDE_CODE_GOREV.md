@@ -205,11 +205,11 @@ Her aşamanın sonunda `scripts/check.sh` geçer, `CLAUDE.md` ile `PROGRESS.md` 
 | Yetenek / sınıf / unvan | 30 / 8 + 4 / 15 |
 | Günlük Görev şablonu | 10 |
 
-- [ ] Her olayda en az 3 seçenek bulunur: en az biri koşullu, biri tohum eken, biri bir NPC ilişki eksenini değiştiren.
-- [ ] Perde 1 sonunda en az 3 belirgin farklı dünya durumu oluşabilir: hayatta kalan oranı, Deniz'in akıbeti, ilk fraksiyon eğilimi.
-- [ ] Başsız oynanış testi Perde 1 için genişler: 500 oynanışta çıkmaz yoktur ve tüm Perde 1 olaylarına en az bir kez ulaşılır.
-- [ ] Bağımsız içerik incelemesi: bir alt ajan rastgele 10 olayı TR ve EN olarak okur; üslup, yerelleştirme ve tutarlılık sorunlarını raporlar, sorunlar düzeltilir.
-- [ ] **OP MC güç döngüsü:** Perde 1 (F kademesi) Mücadele → Kırılma (yazılmış uyanış anı) → Hakimiyet (oyun süresinin çoğu) → Yeni tavan sırasını izler; yeni açılış Yankı bağını anlatır.
+- [x] Her olayda en az 3 seçenek bulunur: en az biri koşullu, biri tohum eken, biri bir NPC ilişki eksenini değiştiren.
+- [x] Perde 1 sonunda en az 3 belirgin farklı dünya durumu oluşabilir: hayatta kalan oranı, Deniz'in akıbeti, ilk fraksiyon eğilimi.
+- [x] Başsız oynanış testi Perde 1 için genişler: 500 oynanışta çıkmaz yoktur ve tüm Perde 1 olaylarına en az bir kez ulaşılır.
+- [x] Bağımsız içerik incelemesi: bir alt ajan rastgele 10 olayı TR ve EN olarak okur; üslup, yerelleştirme ve tutarlılık sorunlarını raporlar, sorunlar düzeltilir.
+- [x] **OP MC güç döngüsü:** Perde 1 (F kademesi) Mücadele → Kırılma (yazılmış uyanış anı) → Hakimiyet (oyun süresinin çoğu) → Yeni tavan sırasını izler; yeni açılış Yankı bağını anlatır.
 
 ### Aşama 7 — Perde 2–4 ve sonlar
 İçerik bütçesi:

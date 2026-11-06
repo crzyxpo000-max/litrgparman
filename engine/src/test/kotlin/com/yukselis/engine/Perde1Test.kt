@@ -66,6 +66,26 @@ class Perde1Test {
         assertTrue(content.dailyTemplates.size >= 10)
     }
 
+    @Test
+    fun `metinde duz yazilmis NPC adi yok`() {
+        val named = com.yukselis.engine.content.contentWarnings(content).filter { "düz yazılmış" in it }
+        assertTrue(named.joinToString("\n"), named.isEmpty())
+    }
+
+    @Test
+    fun `lider fraksiyon ve anlati sezgisi`() {
+        val s = engine.newGame("T", GameMode.NORMAL, 1).copy(reputation = mapOf("siginak" to 20, "lonca" to 30, "yukselenler" to 30))
+        val top = com.yukselis.engine.story.Condition.TopReputation("lonca", listOf("lonca", "sessiz_ag", "siginak", "yukselenler"))
+        assertTrue(top.test(s))
+        assertTrue(!com.yukselis.engine.story.Condition.TopReputation("siginak", listOf("lonca", "siginak")).test(s))
+        // Aktarım sahnesinde el tutulduysa anlatı satırı paragraf olarak, Yankı rengi olmadan gelir.
+        val t = transfer(engine, engine.newGame("T", GameMode.NORMAL, 1), "el_tut")
+        val scene = engine.view(engine.choose(engine.newGame("T", GameMode.NORMAL, 1), "el_tut", lang).state, Lang.EN)
+        assertTrue(scene.current.paragraphs.any { "You didn't let go" in it })
+        assertTrue(scene.current.insights.none { "You didn't let go" in it.text })
+        assertTrue(t.hasFlag("yanki_bagi"))
+    }
+
     // ---- 500 başsız oynanış ----
 
     /** Oynanış tarzı: seçimleri ve gün akışı eylemlerini yönlendirir (kapsama için çeşitlilik). */

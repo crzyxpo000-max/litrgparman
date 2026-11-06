@@ -179,7 +179,7 @@ Class is separate from the **Profession** tree: Alchemist, Blacksmith, Runesmith
 
 ### Daily Quest and economy
 
-- **Daily Quest:** every in-game day the System assigns training (100 push-ups, a 6-mile run, 3 gates). Finish it for +1 free stat point (plus one more for every 7-day streak); skip it and risk being teleported into a Penalty Zone. **Only the MC has the Daily Quest** (see OP MC design).
+- **Daily Quest:** every in-game day the System assigns a world-grounded task (haul the camp's water, walk the border, close 3 gates; never gym rep counts). Finish it for +1 free stat point (plus one more for every 7-day streak); skip it and risk being pulled into the Stopped Hour (DECISIONS #98). **Only the MC has the Daily Quest** (see OP MC design).
 - **Currency:** Credits (System shop, trading) and Essence Crystals (evolutions, skill fusion).
 - **Gear:** 8 slots, rarity colors, set bonuses; upgraded through Professions.
 
@@ -405,7 +405,7 @@ The game is built for one-handed play in portrait on an Android phone and should
 | Faction | Sığınak Konseyi · Demir Lonca · Yükselenler · Sessiz Ağ · Kadimler | Haven Council · Iron Guild · The Ascended · The Quiet Network · The Ancients |
 | Place | Öğretici Katman · Harabe Çarşı · Kasaba Çekirdeği · Kule · Kapı | Tutorial Layer · Dead Mall · Town Core · The Spire · Gate |
 | Concept | Sistem · Kademe · Öz · Yol · Eğilim · Meslek | the System · Grade · Essence · Path · Affinity · Profession |
-| Concept | Günlük Görev · Ceza Bölgesi · İkinci Şans · Demir Mod | Daily Quest · Penalty Zone · Second Chance · Ironman Mode |
+| Concept | Günlük Görev · Durmuş Saat · İkinci Şans · Demir Mod | Daily Quest · The Stopped Hour · Second Chance · Ironman Mode |
 | Stats | GÜÇ · ÇEV · DAY · ZEK · BİL · ALG · İRD · KAR | STR · AGI · END · INT · WIS · PER · WIL · CHA |
 | Rarity | Sıradan · Nadir · Epik · Efsanevi · Mitik · Benzersiz | Common · Rare · Epic · Legendary · Mythic · Unique |
 | Hidden class | Kapı Yiyen · Sistem Hatası · Yas Tutan · Avcı'nın Gözü | Gate Eater · System Glitch · The Mourner · Hunter's Eye |

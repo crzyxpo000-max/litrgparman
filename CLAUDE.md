@@ -7,7 +7,8 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 
 ## Durum
 
-- **Aşama 0–5 tamam.** Aşama 5: NPC sistemi (`npc/`: 4 eksen, hafıza, gündem, eşikler, ölüm, yoldaşlar, düello,
+- **Aşama 0–6 tamam** (Aşama 8 kaldırıldı). Aşama 6: Perde 1 dikey dilimi (`docs/PERDE1.md`; 48 olay, yeni açılış, zindanlar).
+- Aşama 5 tamam. Aşama 5: NPC sistemi (`npc/`: 4 eksen, hafıza, gündem, eşikler, ölüm, yoldaşlar, düello,
   Küresel Sıralama, yoldaş görüşleri, güce tepkiler, bilgi günlüğü, yalanlar, izler, Ordu modeli).
 - Aşama 0–4: Aşama 4: içerik YAML, olay havuzu, Hikaye Yönetmeni, tohumlar, gün döngüsü, bölgeler/kapılar,
   fraksiyon matrisi, bayrak kaydı, görevler, OP MC (Dikkat, Yozlaşma, gizli/görünen seviye, efsane, zar, gösteriş, fırsat eli).
@@ -62,6 +63,8 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 
 ## İçerik kuralları (content/)
 
+- Kayıt parçaları: `flags/`, `quests/`, `knowledge/`, `feats/` klasörlerindeki dosyalar ana dosyayla birleşir (aynı kimlik iki kez = hata).
+- Olay dosyaları: `events/10_yoldaslar`, `20_orman`, `30_carsi_istasyon`, `40_ana_yay`, `90_esikler`.
 - Yerleşim: `names.yaml`, `titles.yaml`, `system.yaml`, `classes.yaml`, `skills.yaml`, `items.yaml`,
   `professions.yaml`, `essences.yaml`, `daily.yaml`, `story/*.yaml` (dosya adı sırasıyla). APK'ya assets olarak girer.
 - `story/90_sistem.yaml`: kesinti sahneleri (`ceza_bolgesi`); dönüş `"sonraki": "@geri"`.
@@ -112,6 +115,14 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Eşik olayları: genel `events/90_esikler.yaml` (`esik_ihanet|kisisel|kisisel_son|kacis|itaat|rakip|ayrilik|yalan`, `tekrar` + `yalniz_tohum`);
   NPC'ye özel sürüm `esik_<tur>_<npc>` yazılırsa onun yerine gelir. Sahnede `yoldas_tepkileri: [{npc, metin, kosul}]`.
 - Sistem metni yer tutucusu olarak kimliksiz `{npc}` serbesttir (belirteç değil).
+- **Yankı'nın sesi:** Yankı'nın kendi sözleri her yerde küçük harfle ve tırnaksız yazılır (fısıltı); anlatı "{npc:yanki}" ile atfeder.
+  Yankı adı da her yerde belirteçle (`{npc:yanki|e}` → Yankı'ya). Doğrulayıcı düz yazılmış NPC adlarını uyarır.
+- Sezgide `anlati: true`: Sistem/Yankı sesi olmayan koşullu anlatı satırı; paragrafların sonuna düz metin olarak eklenir.
+- Koşul `lider_fraksiyon: f` (lonca/sessiz_ag/siginak/yukselenler arasında en yüksek itibar; eşik `itibar_min` ile), `npc_gitti: id`,
+  `bayrak`/`bayrak_yok` liste alabilir (`bayrak_yok: [a, b]` = hiçbiri).
+- Türkçe noktalama: İngilizce kalıbı ", ve" kullanma; Türkçede "ve"den önce virgül konmaz.
+- Başarısız zar (`basarisiz`) sessizce `@akis`'e dönmesin; kısa bir başarısızlık sahnesi yaz. Tohum olayı bölge/gün tanımaz:
+  belirli bir yeri anlatan açılışı koşullu yaz ya da bölgeye geliş satırı ekle.
 - Sahnede `sezgiler`: [{`kosul`, `metin`}] → pasif Sistem sezgisi; stat koşullu satır "[ALG]" öneki alır, öneksiz satır Yankı'nın sesidir.
 - Bildirim türleri: sistem, durum, analiz, seviye, unvan, gorev, uyari, yetenek, evrim, sinif, `yanki` (bozuk yazı).
 - Eğilimler: yakin_dovus, menzilli, buyu, gizlilik, koruma, cagirma, zanaat, karanlik. Fraksiyonlar: siginak, lonca, yukselenler, sessiz_ag, kadimler.

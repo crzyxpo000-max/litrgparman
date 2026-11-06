@@ -692,14 +692,16 @@ class StoryEngine(val content: Content) {
     private fun passage(scene: Scene, state: WorldState, lang: Lang) = PassageView(
         sceneId = scene.id,
         placeName = placeName(scene.place, lang),
+        // Anlatı sezgisi (koşullu ama Sistem/Yankı sesi olmayan satır) paragrafların sonuna eklenir.
         paragraphs = scene.paragraphs
             .filter { it.condition?.test(state) ?: true }
-            .map { text(it.text[lang], state, lang) },
+            .map { text(it.text[lang], state, lang) } +
+            scene.insights.filter { it.narration && it.condition.test(state) }.map { text(it.text[lang], state, lang) },
         notices = scene.notices
             .filter { it.condition?.test(state) ?: true }
             .map { noticeView(it.notice, state, lang) },
         insights = scene.insights
-            .filter { it.condition.test(state) }
+            .filter { !it.narration && it.condition.test(state) }
             .map { i ->
                 val prefix = insightPrefix(i.condition, lang)
                 InsightView(listOfNotNull(prefix, text(i.text[lang], state, lang)).joinToString(" "), echo = prefix == null)

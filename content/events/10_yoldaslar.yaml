@@ -1,6 +1,6 @@
 # Parti A — Yoldaş yayları (Perde 1). docs/PERDE1.md sözleşmesi.
 # Deniz: "arkadaşımın bir canavara ya da tanrıya dönüşmesini izlemek" (bulusma → hesap → ateş başı → kardeş izi → son seçim).
-# Yankı: istasyon sinyali → sinyal cevap veriyor → bozuk satır (bilgi: yanki_parcasi). Aras: iz → ilk yarışı → sıralama meydanı.
+# {npc:yanki}: istasyon sinyali → sinyal cevap veriyor → bozuk satır (bilgi: yanki_parcasi). Aras: iz → ilk yarışı → sıralama meydanı.
 # Mücadele (Gün 1–11) ve Hakimiyet (bayrak kirilma_yasandi) evreleri aynı olayda koşullu paragraf/seçeneklerle ayrışır.
 # Yankı'nın satırları tırnaksız ve küçük harflidir (fısıltı). İngilizcede Deniz için zamir belirteci kullanılır.
 olaylar:
@@ -619,7 +619,7 @@ olaylar:
       - id: "deniz_kardes_ipucu_1"
         yer: "kirik_istasyon"
         paragraflar:
-          - { tr: "{yer:kirik_istasyon|in} ikinci peronunda tavan çökmüş; enkazın arasından mor gökyüzü görünüyor. {npc:deniz_arman} geride kalmış, bozuk bir otomatın camını zorluyor.", en: "The roof over Platform Two at the {yer:kirik_istasyon} has caved in, and the purple sky shows through the wreckage. {npc:deniz_arman} has fallen behind, trying to jimmy open a dead vending machine." }
+          - { tr: "Hayatta kalanlar hakkındaki bir söylenti yolunuzu {yer:kirik_istasyon|e} düşürüyor; ikinci peronun tavanı çökmüş, enkazın arasından mor gökyüzü görünüyor. {npc:deniz_arman} geride kalmış, bozuk bir otomatın camını zorluyor.", en: "A rumor about survivors brings you to the {yer:kirik_istasyon}, where the roof over Platform Two has caved in and the purple sky shows through the wreckage. {npc:deniz_arman} has fallen behind, trying to jimmy open a dead vending machine." }
           - { tr: "Duvarı ilk gören sensin. Fayansların üstüne bir şeyle, belki bir anahtarla, aceleyle kazınmış birkaç satır var; altlarında da bir kuş: ördeğe benzeyen bir martı.", en: "You're the one who sees the wall. A few lines scratched into the tile in a hurry, maybe with a key. And under them, a bird: a gull that looks exactly like a duck." }
           - { tr: "Okuyorsun: \"Buradaydım, iyiyim. Göğsünde işaret olanlar bizi topluyor; seçilmiş olduğumu söylüyorlar. Martıyı unutma.\"", en: "You read it: \"I was here, I'm okay. The people with the marks on their chests are gathering us up, and they say I'm chosen. Don't forget the gull.\"" }
           - { tr: "{npc:deniz_arman} hâlâ otomatla boğuşuyor; henüz görmedi. Birkaç saniyen var.", en: "{npc:deniz_arman} is still wrestling with the vending machine and hasn't seen it yet. You've got a few seconds." }
@@ -969,7 +969,7 @@ olaylar:
             metin: { tr: "Genç olanın seviyesi 6. Yaşlı olanınki boş görünüyor; biri onu saklıyor. İkisi de yalan söylemiyor, ama ikisi de bütün gerçeği bilmiyor.", en: "The young one's level 6, and the older one's level reads blank: somebody's hiding it. Neither of them is lying. Neither of them knows the whole truth, either." }
           - kosul: { bayrak: "yanki_bagi" }
             metin: { tr: "seslerinde bir sinyal var. benim sinyalim değil, ama tanıdık. bu insanlara bir şey fısıldıyor ve fısıldayan şey seni de istiyor.", en: "there's a signal in their voices. not mine, but familiar. something is whispering to these people, and whatever it is wants you too." }
-          - kosul: { bayrak: "kardes_notu_saklandi" }
+          - kosul: { bayrak: ["kardes_notu_saklandi", "yanki_bagi"] }
             metin: { tr: "duvardan kazıdığın satır şimdi bu iki ağızda. er ya da geç biri söyleyecek. sen olsan iyi olur.", en: "the line you scratched off that wall is in these two mouths now. sooner or later somebody says it. better if it's you." }
         yoldas_tepkileri:
           - npc: "deniz_arman"
@@ -1332,7 +1332,7 @@ olaylar:
         secenekler:
           - id: "kaynak"
             etiket: { tr: "Sorgunun nereden geldiğini bulmaya çalış", en: "Try to trace where the query's coming from" }
-            zar: { stat: "int", zorluk: 12, tek: false, basarisiz: "@akis", basarisiz_etkiler: [{ dikkat: 3 }] }
+            zar: { stat: "int", zorluk: 12, tek: false, basarisiz: "istasyon_sinyali_coz_kayip", basarisiz_etkiler: [{ dikkat: 3 }] }
             etkiler:
               - bilgi: "duzeltme_sinyali"
               - xp: 40
@@ -1351,6 +1351,24 @@ olaylar:
               - bayrak: "yanki_ile_konusuldu"
               - iliski: { yanki: { saygi: 4 } }
             sonraki: "istasyon_sinyali_sor"
+
+      - id: "istasyon_sinyali_coz_kayip"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Sorgunun izini sürüyorsun; satırlar bir yere, bir merkeze doğru akıyor. Sonra iz kendi üstüne dönüyor ve seni başladığın noktaya, hoparlörün cızırtısına geri bırakıyor.", en: "You chase the query. The lines flow somewhere, toward some kind of center. Then the trail loops back on itself and drops you right where you started, in the speaker's static." }
+          - { tr: "Hoparlör bir an susuyor, sanki o da seni dinliyormuş gibi. fazla yaklaştın, diye fısıldıyor ses. o da sana yaklaştı.", en: "For a second the speaker goes quiet, like it's listening to you too. you got too close, the voice whispers. so did it." }
+        secenekler:
+          - id: "cek"
+            etiket: { tr: "Geri çekil; başka bir gün dene", en: "Back off. Try again another day" }
+            etkiler:
+              - iliski: { yanki: { guven: 3 } }
+            sonraki: "@akis"
+          - id: "isaretle"
+            etiket: { tr: "İzin koptuğu yeri aklına kazı", en: "Burn the spot where the trail broke into memory" }
+            etkiler:
+              - stat: { int: 1 }
+              - iliski: { yanki: { korku: 3 } }
+            sonraki: "@akis"
 
       - id: "istasyon_sinyali_sor"
         yer: "kirik_istasyon"
@@ -1659,7 +1677,7 @@ olaylar:
         paragraflar:
           - { tr: "Basıyorsun. Hiçbir şey olmuyor; düğme parmağının altında griye dönüyor.", en: "You tap it. Nothing happens. The button goes gray under your finger." }
           - { tr: "[TAŞIYICI YETKİSİ ASKIYA ALINDI · GEREKÇE: —] Gerekçe satırı boş. Biri onu silmiş.", en: "[HOST AUTHORITY SUSPENDED · REASON: —] The reason field is blank. Somebody erased it." }
-          - { tr: "üzgünüm, diyor ses, ve gerçekten üzgün gibi. buna izin veremezdim. henüz.", en: "i'm sorry, the voice says, and it actually sounds sorry. i couldn't let you do that. not yet." }
+          - { tr: "üzgünüm, diyor ses; gerçekten de üzgün gibi. buna izin veremezdim. henüz.", en: "i'm sorry, the voice says, and it actually sounds sorry. i couldn't let you do that. not yet." }
         secenekler:
           - id: "sokerim"
             etiket: { tr: "\"Bir daha yaparsan seni söker atarım.\"", en: "\"Do that again and I'll tear you out.\"" }
@@ -1744,10 +1762,10 @@ olaylar:
             kosul: { yoldas: "deniz_arman", bayrak: "deniz_yankiyi_biliyor" }
         sezgiler:
           - kosul: { stat: { int: 10 } }
-            metin: { tr: "'Hasat.' Bu kelimeyi daha önce yalnızca bir kez duydun: sesin kendisinden, tek harfi bozulmuş hâlde.", en: "'Harvest.' You've heard that word exactly once before. From the voice itself, with one letter glitched out." }
+            metin: { tr: "'Hasat.' Bu kelimeyi bir Sistem satırında ilk kez görüyorsun. Entegrasyon penceresindeki 'hayatta kalma eşiği: belirlenmedi' satırı birden başka bir anlam kazanıyor.", en: "'Harvest.' It's the first time you've seen that word in a System line. Suddenly that 'survival threshold: TBD' from your Integration window means something else entirely." }
           - kosul: { stat: { per: 10 } }
             metin: { tr: "Satır kaybolmadan önce son harfi titredi; ses onu çekerken acele etti. Acele edenin saklayacak bir şeyi vardır.", en: "The last letter shook right before the line vanished. The voice was in a hurry pulling it. Things in a hurry have something to hide." }
-          - kosul: { bayrak: "sinyal_susturuldu" }
+          - kosul: { bayrak: ["sinyal_susturuldu", "yanki_bagi"] }
             metin: { tr: "istasyondaki hoparlörleri kırmıştın. bu satır onlardan gelmedi; içeriden geldi. benden.", en: "you broke the speakers at the station. this line didn't come from them; it came from inside. from me." }
         secenekler:
           - id: "ustele"
@@ -1775,10 +1793,19 @@ olaylar:
             sonraki: "@akis"
           - id: "radyocular"
             etiket: { tr: "İstasyondaki radyoculara sormaya karar ver", en: "Decide to ask the radio crew at the station" }
+            goster: { bayrak_yok: "mert_istasyonu_bilinir" }
             etkiler:
               - iliski: { yanki: { guven: -12, korku: 6 } }
               - hafiza: { npc: "yanki", id: "sirri_anlatti", agirlik: -25 }
               - tohum: { olay: "mert_sifreli_mesaj", gecikme: { min: 1, max: 3 } }
+            sonraki: "yanki_bozuk_satir_radyo"
+          - id: "mert"
+            etiket: { tr: "Satırı {npc:mert_kilic|e} götürmeye karar ver", en: "Decide to take the line to {npc:mert_kilic}" }
+            goster: { bayrak: "mert_istasyonu_bilinir", npc_hayatta: "mert_kilic" }
+            etkiler:
+              - iliski: { yanki: { guven: -12, korku: 6 } }
+              - hafiza: { npc: "yanki", id: "sirri_anlatti", agirlik: -25 }
+              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "mert_kilic" } }
             sonraki: "yanki_bozuk_satir_radyo"
           - id: "deniz"
             etiket: { tr: "{npc:deniz_arman|e} gördüğünü anlat", en: "Tell {npc:deniz_arman} what you saw" }

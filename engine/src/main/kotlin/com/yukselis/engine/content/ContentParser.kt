@@ -494,6 +494,7 @@ object ContentParser {
             insights = o.array("sezgiler").map { e ->
                 val i = e.jsonObject
                 Insight(
+                    narration = i.bool("anlati"),
                     text = ltext(i["metin"], "$id.sezgi"),
                     condition = i["kosul"]?.let { condition(it.jsonObject) } ?: throw ContentFormatException("$id: sezgide 'kosul' eksik"),
                 )
@@ -594,6 +595,7 @@ object ContentParser {
                 "hafiza" -> value.jsonObject.map { (npc, v) -> Condition.Remembers(npc, v.str(npc)) }
                 "bilgi" -> listOf(Condition.Knows(value.str(key)))
                 "npc_savasabilir" -> listOf(Condition.NpcCanFight(value.str(key)))
+                "lider_fraksiyon" -> listOf(Condition.TopReputation(value.str(key), LEADER_POOL))
                 "yoldas_yer" -> listOf(Condition.PartyRoom)
                 "gorunen_seviye_min" -> listOf(Condition.PublicLevelAtLeast(value.int(key)))
                 "gorunen_seviye_max" -> listOf(Condition.PublicLevelAtMost(value.int(key)))
@@ -804,6 +806,9 @@ object ContentParser {
 
     private fun JsonElement.int(where: String): Int =
         jsonPrimitive.intOrNull ?: throw ContentFormatException("$where: tam sayı bekleniyordu")
+
+    /** "İlk fraksiyon eğilimi" yarışan fraksiyonlar (Kadimler insan kampı değildir). */
+    private val LEADER_POOL = listOf("lonca", "sessiz_ag", "siginak", "yukselenler")
 
     private fun flagList(value: JsonElement, where: String): List<String> =
         (value as? JsonArray)?.map { it.str(where) } ?: listOf(value.str(where))

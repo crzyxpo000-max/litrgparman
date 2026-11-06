@@ -2,6 +2,18 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Aşama 6 — 2026-11-06
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 98 | **Telif:** antrenman türü Günlük Görevler spor salonu sayı listesi değil, Öğretici dünyasına özgü görevler (su taşı, sınırı dolaş, buz gibi tünel); "Ceza Bölgesi" oyuncuya görünen her yerde "Durmuş Saat / The Stopped Hour" (iç kimlik `ceza_bolgesi` aynı); unvan "Saati Yeniden Kuran" | Bağımsız içerik incelemesi: "100 şınav, 100 mekik, 100 squat, 10 km" ve "Ceza Bölgesi" Solo Leveling'in imza mekaniğine fazla yakındı. | — |
+| 99 | Perde 1 yapısı `docs/PERDE1.md`: Mücadele (1–11) → Kırılma (ana yay 12) → Hakimiyet (12–24) → Yeni tavan (ana yay 24) → Bekçi (28). Dünya durumu: `hayatta_kalan` (açılışta 50), Deniz'in akıbeti (yoldaş / Yükselenler / öldü / gitti / hiç bulunamadı), ilk fraksiyon eğilimi (`lider_fraksiyon` + itibar ≥ 15, yoksa yalnız kurt) | Görev dosyası: Perde 1 sonunda en az 3 belirgin dünya durumu ve OP MC güç döngüsü. | Aşama 7: Perde 2 açılışı bu durumları okur. |
+| 100 | 48 Perde 1 olayı 4 paralel içerik partisiyle yazıldı (yoldaş yayları, orman/genel, çarşı/istasyon/kamplar, ana yay/zindanlar); her parti kendi `flags/`, `quests/`, `knowledge/` parçasına yazar (kayıt dosyaları parçalanabilir, aynı kimlik iki kez hata). Aşama 4'ün kısa örnek olayları tam kaliteyle yeniden yazıldı; eski metin `docs/eski/` altında | Kullanıcı kuralı: hikaye kusursuz, kısaltma yok; paralel yazımda dosya çakışması olmasın. | — |
+| 101 | Yeni içerik kuralları: Yankı'nın sözleri küçük harf ve tırnaksız; NPC adları her yerde belirteçle (doğrulayıcı düz yazılmış adı uyarır, test hata sayar); sezgide `anlati: true` = düz anlatı satırı (Yankı rengi değil); `bayrak`/`bayrak_yok` listesi; `npc_gitti`; Türkçede ", ve" yok; başarısız zar kısa bir sahneye gider | Bağımsız içerik incelemesi bulguları (12 yüksek, 10 orta). | — |
+| 102 | Yeni açılış: iskele → aktarımda Yankı bağı (kabul et / sor / [İRD 6] direnmeye çalış; bağ her yolda kurulur, Yankı ilişkisi ve hatırası seçime göre) → uyanış. İlk savaş kaybedilirse yazılmış yenilgi sahnesi; "ilk öldürme" bayrağı zaferde konur | Görev dosyası: "yeni açılış Yankı bağını anlatır"; inceleme H4. | — |
+| 103 | Perde 1 testleri: kurallar (her olayda ≥ 3 giriş seçeneği, koşullu, tohum, ilişki), 500 başsız oynanış (5 oyun tarzı: rastgele, açığa vuran, gizleyen, merhametli, acımasız; serbest puan rastgele dağıtılır) çıkmazsız biter, tüm Perde 1 olaylarına ulaşılır, dünya durumu boyutlarının her biri ≥ 2–3 farklı sonuç verir | Görev dosyası kabul kriterleri. | Aşama 9 simülatörü. |
+| 104 | Uygulama sürümü 0.6.0 (başlık ekranı "v0.6") | Eski "Phase 1" etiketi yanıltıcıydı. | Her aşama sonunda. |
+
 ## Tasarım değişikliği — 2026-11-06
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |
