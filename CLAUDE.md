@@ -31,6 +31,8 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 ./gradlew :tools:simulator:run --args="1000"   # denge simülatörü → docs/BALANCE.md
 ./gradlew bundleRelease            # AAB (keystore.properties yoksa imzasız)
 ./gradlew :tools:uslup:run         # Türkçe üslup işi: HEAD'e göre yalnız tr değişti mi + üslup ölçümü (--ayrinti, --olcum, --ref)
+./gradlew :tools:tarama:run        # içerik taraması → docs/TARAMA.md (QA; docs/QA.md)
+./gradlew :tools:simulator:perf    # içerik yükleme / kayıt boyutu ölçümü
 scripts/check.sh                   # test + validateContent + simülatör denge testi + assembleDebug + lint; her aşamanın sonunda geçmeli
 ```
 

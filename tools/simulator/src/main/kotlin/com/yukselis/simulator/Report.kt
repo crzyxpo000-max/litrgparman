@@ -130,6 +130,12 @@ object Report {
         sb.appendLine("## Kapsam")
         sb.appendLine()
         sb.appendLine("- Oynanış başına görülen olay: ortalama ${num(results.map { it.events.toDouble() }.average())}.")
+        val freq = content.events.keys.associateWith { id -> results.count { id in it.seenIds } }
+        val never = freq.filter { it.value == 0 }.keys.sorted()
+        sb.appendLine("- Hiç görülmeyen olay: ${never.size} / ${freq.size}" + if (never.isEmpty()) "." else ": " + never.joinToString(", ") { "`$it`" } + ".")
+        val seenSorted = freq.filter { it.value > 0 }.entries.sortedBy { it.value }
+        sb.appendLine("- En nadir 10 olay: " + seenSorted.take(10).joinToString(", ") { "`${it.key}` ${pct(it.value.toDouble() / results.size)}" } + ".")
+        sb.appendLine("- En sık 10 olay: " + seenSorted.takeLast(10).reversed().joinToString(", ") { "`${it.key}` ${pct(it.value.toDouble() / results.size)}" } + ".")
         sb.appendLine("- Bitiş seviyesi: p10 ${percentile(results.map { it.level }, 0.1)}, p50 ${percentile(results.map { it.level }, 0.5)}, p90 ${percentile(results.map { it.level }, 0.9)}.")
         return sb.toString()
     }

@@ -93,6 +93,8 @@ data class RunResult(
     val crushShare: Double,
     val towerFloor: Int,
     val events: Int,
+    /** Görülen olay kimlikleri (kapsam raporu). */
+    val seenIds: Set<String> = emptySet(),
     /** Ölüm nedenleri: "kaynak:düşman" (kaynak: kesif/kapi/kule/hikaye). */
     val deathCauses: List<String> = emptyList(),
     /** Ölüm anındaki oyuncu seviyesi − düşman seviyesi. */
@@ -254,7 +256,7 @@ class Simulator(private val content: Content) {
             npcMean = npcMean, npcMax = npcMax,
             dominance = if (daysCounted == 0) 0.0 else daysAhead.toDouble() / daysCounted,
             crushShare = if (fights == 0) 0.0 else crushes.toDouble() / fights,
-            towerFloor = s.variable("kule_kat"), events = s.dayState.seen.size,
+            towerFloor = s.variable("kule_kat"), events = s.dayState.seen.size, seenIds = s.dayState.seen,
             deathCauses = causes, deathGaps = gaps,
             ironDeath = s.ended && s.sceneId == com.yukselis.engine.story.Content.HARVEST_SCENE,
             stuck = if (s.ended) null else "sahne ${s.sceneId}, olay ${s.dayState.currentEvent}, gün ${s.day}, adım $steps, ölüm $deaths, savaş ${s.combat?.enemies?.map { it.id }}",

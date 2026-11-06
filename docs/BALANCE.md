@@ -1,6 +1,6 @@
 # Denge raporu (simülatör)
 
-`./gradlew :tools:simulator:run --args="1000"` ile üretildi; 1000 oynanış, 21 sn. Nüfus: %30 rastgele oyuncu, %70 sekiz hedefli
+`./gradlew :tools:simulator:run --args="1000"` ile üretildi; 1000 oynanış, 17 sn. Nüfus: %30 rastgele oyuncu, %70 sekiz hedefli
 oyun tarzı (%25 rastgele seçim gürültüsüyle); her 10 oynanıştan biri Demir Mod. Ayrıntı: `tools/simulator`.
 
 ## Son dağılımı
@@ -91,4 +91,7 @@ Hedef: her son %1–%40 (gizli Döngü hariç).
 ## Kapsam
 
 - Oynanış başına görülen olay: ortalama 205.
+- Hiç görülmeyen olay: 5 / 255: `bildirim_goz`, `bildirim_kapi`, `bildirim_rakip`, `esik_itaat`, `hasat_vakti`.
+- En nadir 10 olay: `p3_firtina_olcucu` 2.0%, `kaya_soguk_firin` 5.1%, `thessar_kirik_muhur` 6.2%, `fener_yavrulari` 11.9%, `deniz_yukselen_rakip` 14.5%, `deniz_anma_kardes` 17.1%, `deniz_kardes_cizimi` 17.4%, `deniz_anma_ayna` 18.2%, `pala_yargilanmasi` 18.9%, `kadimler_5_teslim` 19.8%.
+- En sık 10 olay: `son_karar` 100.0%, `p4_son_gece_ates` 100.0%, `p4_yikik_kiyikent` 100.0%, `p4_son_yayin` 100.0%, `p4_siralama_zirvesi` 100.0%, `p4_kadim_oncusu` 100.0%, `sistem_cekirdegi` 100.0%, `cekirdege_yol` 100.0%, `kadim_istilasi` 100.0%, `fraksiyon_son_pozisyon` 100.0%.
 - Bitiş seviyesi: p10 1095, p50 1272, p90 1429.

@@ -31,3 +31,12 @@ tasks.named<JavaExec>("run") {
     workingDir = rootProject.projectDir
     jvmArgs("-Dstdout.encoding=UTF-8", "-Dstderr.encoding=UTF-8", "-Xss4m")
 }
+
+// Masaüstü performans ölçümü (docs/QA.md): ./gradlew :tools:simulator:perf
+tasks.register<JavaExec>("perf") {
+    group = "verification"
+    classpath = sourceSets["main"].runtimeClasspath
+    mainClass.set("com.yukselis.simulator.PerfKt")
+    workingDir = rootProject.projectDir
+    jvmArgs("-Dstdout.encoding=UTF-8", "-Dstderr.encoding=UTF-8", "-Xss4m")
+}
