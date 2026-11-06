@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "yukselis-protokolu"
-include(":engine", ":app")
+include(":engine", ":app", ":tools:simulator")

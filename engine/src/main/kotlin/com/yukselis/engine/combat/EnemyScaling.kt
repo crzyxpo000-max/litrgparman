@@ -18,6 +18,9 @@ object EnemyScaling {
     private const val MAX_LEVEL = 2000
     const val WORLD_PLAYER_MARGIN = 6
 
+    /** XP oranının büyümesinin durduğu seviye (Aşama 9). */
+    const val XP_LEVEL_CAP = 400
+
     /** "id@seviye" → (id, seviye); ölçeksiz başvuruda seviye null. */
     fun parse(ref: String): Pair<String, Int?> {
         val i = ref.lastIndexOf(SEPARATOR)
@@ -85,7 +88,8 @@ object EnemyScaling {
     fun xpFor(def: EnemyDef, level: Int): Long {
         val native = def.xp.toDouble() / Progression.xpToNext(def.level).coerceAtLeast(1)
         val kind = (native / 0.1).coerceIn(0.5, 3.0) * (if (def.boss) 3.0 else 1.0)
-        return (Progression.xpToNext(level) * maxOf(0.1, 0.012 * level) * kind).roundToLong()
+        // Seviye başına zafer oranı S kademesine kadar büyür, sonra sabitlenir (Aşama 9: son günlerde seviye patlamasın).
+        return (Progression.xpToNext(level) * (0.012 * level.coerceAtMost(XP_LEVEL_CAP)).coerceAtLeast(0.1) * kind).roundToLong()
     }
 
     fun scale(def: EnemyDef, level: Int): EnemyDef {

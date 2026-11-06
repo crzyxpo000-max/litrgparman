@@ -838,12 +838,16 @@ olaylar:
           - id: "kalk"
             etiket: { tr: "Kalk. Kule Dibi'ne git", en: "Get up. Go to {yer:kule_dibi}" }
             etkiler:
+              - can: 999999
+              - mana: 999999
               - ahlak: { insanlik: 2, duzen: 1 }
               - degisken: { hayatta_kalan: -2 }
             sonraki: "p4_istila_2"
           - id: "ismini_sor"
             etiket: { tr: "Seni kaldıranın adını sor", en: "Ask the name of whoever pulled you up" }
             etkiler:
+              - can: 999999
+              - mana: 999999
               - ahlak: { merhamet: 3, insanlik: 2 }
               - degisken: { hayatta_kalan: -2 }
               - iliski: { deniz_arman: { baglilik: 4 } }
@@ -1036,6 +1040,8 @@ olaylar:
           - id: "tekrar"
             etiket: { tr: "Kalk. Bir kez daha", en: "Get up. One more time" }
             etkiler:
+              - can: 999999
+              - mana: 999999
               - ahlak: { merhamet: 2, insanlik: 3 }
               - degisken: { hayatta_kalan: -3 }
               - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu-3"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_dusus" }

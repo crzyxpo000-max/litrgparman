@@ -192,7 +192,7 @@ class WorldEngine(
         val line = band.lines.takeIf { it.isNotEmpty() }?.let { it[rng.nextInt(it.size)] }
         s = s.copy(rngState = rng.state, vars = s.vars + (PENDING_TOWER_VAR to floor))
         val notices = mutableListOf(Notice(NoticeKind.QUEST, texts.format("kule_kat", "n" to floor, "level" to level), listOfNotNull(line)))
-        val started = combat.start(s, CombatSpec(enemies, environment = band.environment, win = WorldState.HUB, flee = WorldState.HUB))
+        val started = combat.start(s, CombatSpec(enemies, environment = band.environment, win = WorldState.HUB, flee = WorldState.HUB, lose = WorldState.HUB))
         return resolvedNow(started.state, notices + started.notices)
     }
 
@@ -269,7 +269,7 @@ class WorldEngine(
             s = s.copy(rngState = rng.state)
             notices += Notice(NoticeKind.WARNING, texts.formatL("kesif_karsilasma", "region" to regionName(s.region!!)))
             val env = def!!.environment ?: ENV_BY_REGION[s.region] ?: "karanlik"
-            val started = combat.start(s, CombatSpec(enemies, environment = listOf(env), win = WorldState.HUB, flee = WorldState.HUB))
+            val started = combat.start(s, CombatSpec(enemies, environment = listOf(env), win = WorldState.HUB, flee = WorldState.HUB, lose = WorldState.HUB))
             return resolvedNow(started.state, notices + started.notices)
         }
         val found = def?.forage?.takeIf { it.isNotEmpty() }?.let { it[rng.nextInt(it.size)] }
@@ -308,7 +308,7 @@ class WorldEngine(
         val region = state.region?.let { state.regions[it] } ?: throw ActionRejected("Bölge yok")
         val gate = region.gates.firstOrNull { it.uid == uid } ?: throw ActionRejected("Kapı yok")
         val s = spend(state).copy(vars = state.vars + (PENDING_GATE_VAR to uid))
-        val started = combat.start(s, CombatSpec(gate.enemies, environment = listOf("dar_gecit"), win = WorldState.HUB, flee = WorldState.HUB))
+        val started = combat.start(s, CombatSpec(gate.enemies, environment = listOf("dar_gecit"), win = WorldState.HUB, flee = WorldState.HUB, lose = WorldState.HUB))
         return resolvedNow(started.state, listOf(Notice(NoticeKind.WARNING, texts.format("kapiya_girildi"))) + started.notices)
     }
 
@@ -323,6 +323,8 @@ class WorldEngine(
         val p = state.player
         var s = state.copy(player = p.copy(hp = (p.hp + p.maxHp / 2).coerceAtMost(p.maxHp), mp = p.maxMp))
         val notices = mutableListOf(Notice(NoticeKind.SYSTEM, texts.format("kamp")))
+        // Göze batmayan her gece Dikkat biraz söner (DECISIONS #116).
+        if (s.day >= 30) s = effects.shiftAttention(s, -EffectApplier.ATTENTION_NIGHT_DECAY).state
         val day = startDay(s, advance = true)
         s = day.state
         notices += day.notices
@@ -397,7 +399,7 @@ class WorldEngine(
         /** Kapı düşmanları dünya seviyesinin bu katı. */
         const val GATE_LEVEL_FACTOR = 1.15
         const val REGION_PLAYER_MARGIN = 2
-        const val GATE_PLAYER_MARGIN = 5
+        const val GATE_PLAYER_MARGIN = 3
         const val FIRST_GATE_TITLE = "ilk_kapi_kapatan"
         const val OVERFLOW_DANGER = 15
         const val MAX_GATES = 3

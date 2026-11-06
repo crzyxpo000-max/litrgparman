@@ -149,7 +149,7 @@ class Perde2_4Test {
     private val profiles = listOf(
         Profile(
             "koruyucu", moral = mapOf(MoralAxis.MERCY to 1.0, MoralAxis.HUMANITY to 0.4), reps = mapOf("siginak" to 1.5, "kadimler" to -0.5),
-            wantFlags = setOf("kadimler_yenildi", "uye_siginak", "cekirdek_siginak", "kordon_kurtarildi"), quests = setOf("zincir_siginak"),
+            wantFlags = setOf("kadimler_yenildi", "uye_siginak", "cekirdek_siginak", "kordon_kurtarildi"), avoidFlags = setOf("kiyikent_dustu"), quests = setOf("zincir_siginak"),
             vars = mapOf("hayatta_kalan" to 1.5, "kadim_tehdit" to -0.5), protect = setOf("elif_sari"),
         ),
         Profile(
@@ -207,7 +207,11 @@ class Perde2_4Test {
                 }
             }
             if (s.player.freePoints > 0 && s.combat == null) {
-                val stat = Stat.entries[rng.nextInt(Stat.entries.size)]
+                // Hedefli oyuncu güçlü statlarına yatırır (simülatörle aynı); rastgele oyuncu dağıtır.
+                val st = s.player.stats
+                val stat = if (profile == null || profile.drifting || rng.nextDouble() < 0.3) Stat.entries[rng.nextInt(Stat.entries.size)]
+                else if (rng.nextDouble() < 0.4) listOf(Stat.PER, Stat.AGI, Stat.WIS, Stat.END).minBy { st[it] }
+                else listOf(Stat.STR, Stat.END, Stat.AGI, Stat.PER, Stat.INT, Stat.WIL).sortedByDescending { st[it] }.take(3)[rng.nextInt(3)]
                 s = engine.allocate(s, mapOf(stat to s.player.freePoints), lang).state
             }
             val before = s

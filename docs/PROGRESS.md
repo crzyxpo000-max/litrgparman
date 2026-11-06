@@ -11,6 +11,19 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - Emülatör: `Medium_Phone_API_36.0` (`emulator -avd Medium_Phone_API_36.0`), adb ile kurulum.
 - OneDrive kilidi yüzünden lint ara sıra "dosya kullanılıyor" der: `./gradlew --stop` ve tekrar.
 
+## Aşama 9 — Denge ve yayın hazırlığı  ⏳
+Plan:
+- [x] `tools/simulator`: engine'i kullanan JVM aracı; 1000 oynanış (rastgele + sezgisel strateji karışımı), paralel
+- [x] Rapor `docs/BALANCE.md`: son dağılımı, seviye eğrisi, ölüm oranları, perde başına oyuncu/NPC güç farkı, hakimiyet payı (hedef %60+), zaman içinde Dikkat
+- [x] Denge düzeltmeleri: her son %1–%40 (Döngü hariç), seviye patlaması, ölüm döngüleri; simülatör testle sabitlenir
+- [ ] targetSdk 36, R8 küçültme + kurallar, imzalama `keystore.properties`'ten (git dışı), imzasız `bundleRelease`
+- [ ] Uyarlanabilir vektör simge + monokrom
+- [ ] `fastlane/metadata/android/{tr-TR,en-US}`, `docs/PRIVACY.md`
+- [ ] Bildirimler: isteğe bağlı, nadir; Android 13+ izin akışı (açıklama + istek, reddedilince ısrar yok); her biri küçük bir olay açar
+- [ ] Bağımsız inceleme, check.sh, commit; durma noktası: keystore ve Play Console (kullanıcı)
+Notlar:
+- Simülatör ve denge tamam: 1000 oynanışta her son %5–%22, her hedefli tarz kendi sonuna ≥ %49, hakimiyet %82, ölüm yalnızca hikaye savaşlarında. DECISIONS #116–120. Sırada: yayın yapılandırması.
+
 ## Aşama 7 — Perde 2–4 ve sonlar  ✅ (2026-11-06)
 Plan:
 - [x] Motor: ölçekli düşman başvurusu (`id@seviye`: stat/can/saldırı/XP seviyeyle ölçeklenir), `xp_seviye` etkisi (seviyenin XP'sine oranla)

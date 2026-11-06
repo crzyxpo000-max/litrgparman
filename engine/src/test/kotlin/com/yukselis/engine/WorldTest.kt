@@ -255,7 +255,7 @@ class WorldTest {
         val r = Random(seed)
         var s = engine.newGame("Bot", mode, seed)
         var steps = 0
-        while (steps++ < 6000) {
+        while (steps++ < 120_000) {
             if (s.ended) return Run(true, false, s.day, steps, null)
             if (s.dead) return Run(false, true, s.day, steps, null)
             when {

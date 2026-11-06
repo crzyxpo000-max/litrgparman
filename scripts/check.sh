@@ -30,6 +30,7 @@ GRADLE="./gradlew"
 $GRADLE --console=plain \
     :engine:test \
     :engine:validateContent \
+    :tools:simulator:test \
     :app:assembleDebug \
     :app:lint
 

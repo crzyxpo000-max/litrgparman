@@ -290,7 +290,8 @@ class EffectApplier(private val content: Content) {
         }
         var next = state.copy(player = p)
         // OP MC: beklenenden hızlı büyüme Dikkat çeker (beklenen seviyenin üstündeki her yeni seviye +1).
-        val expected = Progression.expectedLevel(next.day)
+        // Perde 2+'da beklenen seviye dünyanın seviyesidir (Aşama 9): dünyayı geride bırakan büyüme Dikkat çeker.
+        val expected = if (next.day > 30) maxOf(Progression.expectedLevel(next.day), (Progression.worldLevel(next.day) * ATTENTION_WORLD_MARGIN).toInt()) else Progression.expectedLevel(next.day)
         val fast = (startLevel + 1..p.level).count { it > expected }
         if (fast > 0) {
             val a = shiftAttention(next, fast)
@@ -479,7 +480,10 @@ class EffectApplier(private val content: Content) {
             s = s.copy(rngState = rng.state, dailyStreak = 0, penaltyPending = s.penaltyPending || penalty)
             notices += Notice(NoticeKind.WARNING, texts.format("gunluk_kacirildi"))
         }
+        val actBefore = s.act
         s = GameClock.advance(s, days)
+        // Yeni perde, yeni gözler: Dikkat yarıya iner (eşikler perde başına yeniden kurulur; DECISIONS #116).
+        if (s.act != actBefore) s = s.copy(attention = s.attention / 2)
         val fresh = newDaily(s)
         return Result(fresh.state, notices + fresh.notices)
     }
@@ -683,6 +687,12 @@ class EffectApplier(private val content: Content) {
         const val TOWER_VAR = "kule_kat"
 
         val ATTENTION_THRESHOLDS = listOf(25, 50, 75, 100)
+
+        /** Perde 2+: dünya seviyesinin bu katının üstündeki her yeni seviye Dikkat çeker. */
+        const val ATTENTION_WORLD_MARGIN = 1.2
+
+        /** Her gece Dikkat bu kadar söner (göze batmayan bir gün). */
+        const val ATTENTION_NIGHT_DECAY = 2
         val CORRUPTION_THRESHOLDS = listOf(25, 50, 75, 100)
 
         /** Dikkat eşiği işareti: Perde 1'de eski ad (kayıt uyumu), sonra perde başına. */

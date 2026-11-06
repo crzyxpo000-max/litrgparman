@@ -2,6 +2,16 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Aşama 9 — 2026-11-06
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 116 | **Simülatör** `tools/simulator` (`./gradlew :tools:simulator:run --args="1000"` → `docs/BALANCE.md`): nüfus %30 rastgele + %70 sekiz hedefli tarz (%25 gürültü), her 10. oynanış Demir Mod; `DengeTest` 200 oynanışla sınırları sabitler ve `check.sh`'te koşar | Görev dosyası Aşama 9. | — |
+| 117 | Gün akışından açılan savaşlarda (keşif, kapı, prosedürel Kule katı) yenilgi ölüm değil bayılmadır: 1 canla akışa dönülür. Gerçek ölüm riski hikaye savaşları ve bosslarda | GDD: Demir Mod ölümleri haddini aşmaktan gelmeli; simülatörde Demir Mod oynanışlarının %85'i rastgele savaşlarda ölüyordu. | — |
+| 118 | Dikkat: Perde 2+'da seviye Dikkat'i dünya seviyesinin 1,2 katının üstündeki seviyelerden gelir; her gece (Gün 30+) −2; her yeni perdede yarıya iner | Dikkat Gün 120'den sonra hep 100'deydi; gerilim ölçeği anlamını yitiriyordu. | — |
+| 119 | Ölçekli XP oranı Sv. 400'de sabitlenir; kapı düşmanları oyuncu + 3; isabet/kaçış ölçeği iki stattan büyüğüne göre | Son günlerde seviye patlaması (p90 2034); aşırı uzmanlaşmış yapı (ALG 171, ÇEV 3042'ye karşı) bossa hiç vuramıyordu. | — |
+| 120 | Yenilgiden sonra savaşı yeniden deneyen seçenekler canı yeniler ve sahnelerde her zaman bir geri çekilme yolu vardır (Sessiz Ağ zinciri: geri çekilmek zinciri başarısız kılar) | Simülatör: kazanılamayan savaş + tek "yeniden dene" seçeneği sonsuz döngü. | — |
+
 ## Aşama 7 — 2026-11-06
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |

@@ -1083,6 +1083,8 @@ olaylar:
           - id: "tekrar"
             etiket: { tr: "Kalk ve hemen geri in", en: "Get up. Go right back down" }
             etkiler:
+              - can: 999999
+              - mana: 999999
               - ahlak: { duzen: -1 }
               - savas: { dusmanlar: ["duzeltme_birimi@oyuncu+2"], ortam: ["su", "karanlik"], kazan: "sa2_cekirdek", kaybet: "sa2_dusus", kac: "sa2_dusus" }
             kronik: { tr: "Sistem'in seni sildiği yere, adını hatırlar hatırlamaz geri indin.", en: "The moment you remembered your name, you went straight back down to where the System had tried to erase you." }
@@ -1102,6 +1104,15 @@ olaylar:
               - iliski: { yanki: { guven: 5, baglilik: 4 } }
             kronik: { tr: "Seni silinmekten kurtaran kafandaki sese teşekkür ettin; ses, bu kelimeyi ilk kez duydu.", en: "You thanked the voice in your head for saving you from erasure. It was the first time it had heard the word." }
             sonraki: "sa2_bekci"
+          - id: "geri_cekil"
+            etiket: { tr: "Geri çekil; kaynağın peşini bırak", en: "Back off. Let the source go" }
+            etkiler:
+              - ahlak: { insanlik: 2, duzen: 2 }
+              - bayrak: "sa2_geri_cekildi"
+              - gorev: { zincir_sessiz_ag: "basarisiz" }
+              - iliski: { mert_kilic: { guven: -5, saygi: -3 } }
+            kronik: { tr: "Kaynak avının ortasında geri çekildin; Sessiz Ağ o kodun izini bir daha hiç bulamadı.", en: "You pulled out halfway through the source hunt. The Quiet Network never picked up that trail again." }
+            sonraki: "@akis"
 
       - id: "sa2_cekirdek"
         paragraflar:
@@ -1781,6 +1792,8 @@ olaylar:
           - id: "tekrar"
             etiket: { tr: "Yeniden çık ve dövüş", en: "Climb back up and fight" }
             etkiler:
+              - can: 999999
+              - mana: 999999
               - ahlak: { duzen: -1 }
               - savas: { dusmanlar: ["satir_bekcisi@oyuncu+3"], ortam: ["dar_gecit", "tavan"], kazan: "sa3_okuma", kaybet: "sa3_yenilgi", kac: "sa3_yenilgi" }
             kronik: { tr: "Kule'nin bekçisine yenildin ve aynı merdivene geri döndün.", en: "The Spire's warden beat you, and you climbed right back up the same stairs." }
@@ -1792,6 +1805,15 @@ olaylar:
               - can: 60
             kronik: { tr: "Bekçiye yenildikten sonra bir gün dinlenip dikişe döndün.", en: "After losing to the warden, you rested a day and went back to the seam." }
             sonraki: "sa3_merdiven"
+          - id: "geri_cekil"
+            etiket: { tr: "Geri çekil; merdiven sensiz kalsın", en: "Back off. Let the stairs go without you" }
+            etkiler:
+              - ahlak: { insanlik: 2, duzen: 2 }
+              - bayrak: "sa3_geri_cekildi"
+              - gorev: { zincir_sessiz_ag: "basarisiz" }
+              - iliski: { mert_kilic: { guven: -5, saygi: -3 } }
+            kronik: { tr: "Kule'nin kod merdiveninden geri döndün; o satırları kimse okuyamadı.", en: "You turned back from the Spire's code stairs. Nobody ever read those lines." }
+            sonraki: "@akis"
 
       - id: "sa3_okuma"
         paragraflar:
@@ -3010,6 +3032,8 @@ olaylar:
           - id: "tekrar"
             etiket: { tr: "Kalk ve yeniden dövüş", en: "Get up and fight again" }
             etkiler:
+              - can: 999999
+              - mana: 999999
               - ahlak: { duzen: -1 }
               - savas: { dusmanlar: ["standart_kopya@oyuncu+4"], ortam: ["karanlik"], kazan: "sa5_kok", kaybet: "sa5_kopya_yenilgi", kac: "sa5_kopya_yenilgi" }
             kronik: { tr: "Kendi standart kopyana yenildin ve kalkıp yeniden dövüştün.", en: "Your standard copy beat you, and you got up and fought it again." }
@@ -3020,6 +3044,15 @@ olaylar:
               - ahlak: { duzen: 1 }
             kronik: { tr: "Kendinle dövüşmek yerine kendinden kaçtın; işe yaradı.", en: "Instead of fighting yourself, you outran yourself. It worked." }
             sonraki: "sa5_kok"
+          - id: "geri_cekil"
+            etiket: { tr: "Geri çekil; kopyanı arkanda bırak", en: "Back off. Leave your copy behind" }
+            etkiler:
+              - ahlak: { insanlik: 2, duzen: 2 }
+              - bayrak: "sa5_kopya_geri"
+              - gorev: { zincir_sessiz_ag: "basarisiz" }
+              - iliski: { mert_kilic: { guven: -5, saygi: -3 } }
+            kronik: { tr: "Kendi kopyana yenildin ve kök kapısına giden yoldan geri döndün.", en: "Your own copy beat you, and you turned back from the road to the root door." }
+            sonraki: "@akis"
 
       - id: "sa5_kok"
         paragraflar:
@@ -3109,6 +3142,8 @@ olaylar:
           - id: "tekrar"
             etiket: { tr: "Kalk ve yeniden yürü", en: "Get up and walk at it again" }
             etkiler:
+              - can: 999999
+              - mana: 999999
               - ahlak: { duzen: -1 }
               - savas: { dusmanlar: ["kok_bekcisi@oyuncu+5"], ortam: ["karanlik", "tavan"], kazan: "sa5_kapi", kaybet: "sa5_kok_yenilgi", kac: "sa5_kok_yenilgi" }
             kronik: { tr: "Sistem'in son bekçisine yenildin ve zamanın olmadığı yerde yeniden kalktın.", en: "The System's last warden beat you, and in a place with no time you got back up anyway." }
@@ -3123,6 +3158,15 @@ olaylar:
               - iliski: { yanki: { guven: 6, saygi: 6 } }
             kronik: { tr: "Yenildiğin bekçiyi kafandaki ses senin yerine içeriden söktü.", en: "The voice in your head took apart the warden that beat you, from the inside, in your place." }
             sonraki: "sa5_uzandi"
+          - id: "geri_cekil"
+            etiket: { tr: "Geri çekil; bu kapı sensiz kapansın", en: "Back off. Let this door close without you" }
+            etkiler:
+              - ahlak: { insanlik: 2, duzen: 2 }
+              - bayrak: "sa5_geri_cekildi"
+              - gorev: { zincir_sessiz_ag: "basarisiz" }
+              - iliski: { mert_kilic: { guven: -5, saygi: -3 } }
+            kronik: { tr: "Sistem'in kök kapısının önünden geri döndün; kaynak kodu bir daha hiç bu kadar yakın olmadı.", en: "You turned back at the System's root door. The source code never came that close again." }
+            sonraki: "@akis"
 
       - id: "sa5_kapi"
         paragraflar:

@@ -14,10 +14,10 @@ object CombatMath {
     fun initiative(stats: Stats, d20: Int): Double = stats[Stat.AGI] + 0.5 * stats[Stat.PER] + d20
 
     /**
-     * Stat ölçeği (Aşama 7): iki statın ortalaması 20'yi aşınca farklar bu oranla küçültülür. Düşük statlarda 1 (GDD
+     * Stat ölçeği (Aşama 7, 9): iki stattan büyüğü 20'yi aşınca farklar bu oranla küçültülür. Düşük statlarda 1 (GDD
      * formülleri aynen); seviye 100+'da 55 puanlık fark Perde 1'deki ~10 puanlık fark kadar ağırlık taşır (DECISIONS #112).
      */
-    fun statScale(a: Int, b: Int): Double = maxOf(1.0, (a + b) / 2.0 / SCALE_BASE)
+    fun statScale(a: Int, b: Int): Double = maxOf(1.0, maxOf(a, b) / SCALE_BASE)
 
     const val SCALE_BASE = 20.0
 
