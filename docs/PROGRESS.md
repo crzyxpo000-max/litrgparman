@@ -1,7 +1,7 @@
 # İlerleme
 
 Şu an: Aşama 5 — NPC sistemi (sırada)
-Son commit: a938f05 Aşama 3: savaş
+Son commit: 6d96bda Aşama 4: hikaye motoru
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
