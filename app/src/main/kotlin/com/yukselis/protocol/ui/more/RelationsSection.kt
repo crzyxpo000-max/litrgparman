@@ -30,7 +30,6 @@ import com.yukselis.protocol.ui.theme.GameType
 /** İlişkiler: tanınan NPC'ler; dört eksen, durum, son hatıralar ve izler. Dokununca ayrıntı açılır. */
 @Composable
 fun RelationsSection(view: RelationsView) {
-    Text(stringResource(R.string.relationships), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
     Text(stringResource(R.string.party_line, view.companions, view.capacity), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
     if (view.armyPower > 0) {
         Text(stringResource(R.string.army_line, view.armyPower, view.army.joinToString(", ")), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -90,7 +89,6 @@ private fun Axis(label: String, value: Int, modifier: Modifier) {
 /** OP MC Küresel Sıralama: dünyanın gördüğü liste + Yankı'nın sakladığı gerçek yer. */
 @Composable
 fun RankingSection(view: RankingView) {
-    Text(stringResource(R.string.ranking), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
     Text(stringResource(R.string.ranking_you, view.publicRank, view.total), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
     Text(view.note, style = GameType.system, color = EchoColor)
     view.rows.forEach { r ->

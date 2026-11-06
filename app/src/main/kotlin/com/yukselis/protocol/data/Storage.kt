@@ -50,7 +50,16 @@ data class Settings(
     val theme: ThemeMode = ThemeMode.SYSTEM,
     /** Oturumlar arası bildirimler (isteğe bağlı; varsayılan kapalı). */
     val notifications: Boolean = false,
+    /** Yazı boyutu: tüm sp ölçüleri bu oranla büyür (cihazın yazı ölçeğinin üstüne). */
+    val textSize: TextSize = TextSize.MEDIUM,
+    /** Savaş günlüğünde hasar sayıları. */
+    val combatNumbers: Boolean = false,
+    /** Bir kez gösterilen ipuçları (sembol açıklamaları); görüldükçe eklenir. */
+    val seenTips: Set<String> = emptySet(),
 )
+
+/** Yazı boyutu seçenekleri. */
+enum class TextSize(val scale: Float) { SMALL(0.9f), MEDIUM(1f), LARGE(1.15f), XLARGE(1.3f) }
 
 class SettingsStore(context: Context) {
     private val prefs = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
@@ -69,6 +78,10 @@ class SettingsStore(context: Context) {
         theme = prefs.getString(KEY_THEME, null)
             ?.let { name -> ThemeMode.entries.firstOrNull { it.name == name } } ?: ThemeMode.SYSTEM,
         notifications = prefs.getBoolean(KEY_NOTIFICATIONS, false),
+        textSize = prefs.getString(KEY_TEXT_SIZE, null)
+            ?.let { name -> TextSize.entries.firstOrNull { it.name == name } } ?: TextSize.MEDIUM,
+        combatNumbers = prefs.getBoolean(KEY_COMBAT_NUMBERS, false),
+        seenTips = prefs.getStringSet(KEY_SEEN_TIPS, emptySet())?.toSet() ?: emptySet(),
     )
 
     fun save(settings: Settings) {
@@ -79,6 +92,9 @@ class SettingsStore(context: Context) {
             .remove(LEGACY_NARRATOR)
             .putString(KEY_THEME, settings.theme.name)
             .putBoolean(KEY_NOTIFICATIONS, settings.notifications)
+            .putString(KEY_TEXT_SIZE, settings.textSize.name)
+            .putBoolean(KEY_COMBAT_NUMBERS, settings.combatNumbers)
+            .putStringSet(KEY_SEEN_TIPS, settings.seenTips)
             .apply()
     }
 
@@ -141,6 +157,9 @@ class SettingsStore(context: Context) {
         const val LEGACY_NARRATOR = "narrator"
         const val KEY_THEME = "theme"
         const val KEY_NOTIFICATIONS = "notifications"
+        const val KEY_TEXT_SIZE = "text_size"
+        const val KEY_COMBAT_NUMBERS = "combat_numbers"
+        const val KEY_SEEN_TIPS = "seen_tips"
         const val KEY_NOTIF_TIME = "notif_last_time"
         const val KEY_NOTIF_KEY = "notif_last_key"
         const val KEY_NOTIF_DENIED = "notif_denied"

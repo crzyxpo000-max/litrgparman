@@ -40,6 +40,32 @@ import com.yukselis.engine.story.NoticeView
 import com.yukselis.protocol.ui.components.SystemCard
 import androidx.compose.ui.graphics.Color
 import com.yukselis.protocol.ui.theme.GameType
+import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Place
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.style.TextOverflow
+import com.yukselis.protocol.data.TextSize
+import com.yukselis.protocol.ui.components.Glossary
+import com.yukselis.protocol.ui.components.HelpEntry
+import com.yukselis.protocol.ui.components.TipCard
 
 @Composable
 fun MoreScreen(
@@ -63,58 +89,184 @@ fun MoreScreen(
     onNotificationPermission: (Boolean) -> Unit = {},
     notificationDenied: Boolean = false,
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = 20.dp, vertical = 8.dp),
+    var page by rememberSaveable { mutableStateOf<MorePage?>(null) }
+    // Sistem geri tuşu önce alt sayfayı kapatır.
+    BackHandler(enabled = page != null) { page = null }
+    val inDayLoop = map.isNotEmpty()
+
+    val current = page
+    if (current == null) {
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 16.dp, vertical = 12.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+        ) {
+            notices.forEach { SystemCard(it) }
+            TipCard("more", stringResource(R.string.tip_more))
+            val tiles = buildList {
+                add(Tile(MorePage.MAP, Icons.Filled.Place, stringResource(R.string.map),
+                    if (map.isEmpty()) stringResource(R.string.tile_map_none) else map.firstOrNull { it.current }?.name ?: "",
+                    enabled = inDayLoop))
+                daily?.let {
+                    add(Tile(MorePage.DAILY, Icons.Filled.DateRange, stringResource(R.string.daily_quest),
+                        if (it.completed) stringResource(R.string.daily_done) else stringResource(R.string.tile_daily, it.progress, it.steps)))
+                }
+                journal?.let {
+                    add(Tile(MorePage.JOURNAL, Icons.AutoMirrored.Filled.List, stringResource(R.string.journal),
+                        stringResource(R.string.tile_quests, it.quests.count { q -> q.status == QuestStatus.ACTIVE })))
+                }
+                relations?.let {
+                    add(Tile(MorePage.RELATIONS, Icons.Filled.Face, stringResource(R.string.relationships),
+                        stringResource(R.string.party_line, it.companions, it.capacity)))
+                }
+                ranking?.takeIf { inDayLoop }?.let {
+                    add(Tile(MorePage.RANKING, Icons.Filled.Star, stringResource(R.string.ranking), "#${it.publicRank} / ${it.total}"))
+                }
+                add(Tile(MorePage.SAVES, Icons.Filled.Check, stringResource(R.string.saves), stringResource(R.string.tile_saves)))
+                add(Tile(MorePage.SETTINGS, Icons.Filled.Settings, stringResource(R.string.settings), stringResource(R.string.tile_settings)))
+                add(Tile(MorePage.HELP, Icons.Filled.Info, stringResource(R.string.help), stringResource(R.string.help_desc)))
+            }
+            tiles.chunked(2).forEach { row ->
+                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    row.forEach { t -> TileCard(t, Modifier.weight(1f)) { page = t.page } }
+                    if (row.size == 1) Spacer(Modifier.weight(1f))
+                }
+            }
+            OutlinedButton(onClick = onBackToTitle, modifier = Modifier.fillMaxWidth().padding(top = 6.dp)) {
+                Text(stringResource(R.string.back_to_title))
+            }
+        }
+        return
+    }
+
+    Column(modifier = modifier.fillMaxSize()) {
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().padding(start = 4.dp, end = 16.dp, top = 4.dp)) {
+            IconButton(onClick = { page = null }) { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.back)) }
+            Text(stringResource(current.title), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary)
+        }
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 20.dp, vertical = 4.dp),
+        ) {
+            when (current) {
+                MorePage.MAP -> MapSection(map)
+                MorePage.DAILY -> {
+                    notices.forEach { SystemCard(it, Modifier.padding(vertical = 4.dp)) }
+                    daily?.let { DailyPanel(it, onTrain, inDayLoop) }
+                }
+                MorePage.JOURNAL -> journal?.let { JournalSection(it) }
+                MorePage.RELATIONS -> relations?.let { RelationsSection(it) }
+                MorePage.RANKING -> ranking?.let { RankingSection(it) }
+                MorePage.SAVES -> {
+                    slots.forEach { (slot, info) ->
+                        SlotRow(
+                            slot = slot,
+                            info = info,
+                            canSave = slot != SaveManager.AUTO && mode != GameMode.IRONMAN,
+                            onSave = { onSave(slot) },
+                            onLoad = { onLoad(slot) },
+                        )
+                    }
+                    if (mode == GameMode.IRONMAN) {
+                        Text(stringResource(R.string.msg_ironman_no_manual), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                }
+                MorePage.SETTINGS -> {
+                    LanguagePicker(lang, onLanguage)
+                    ThemePicker(settings.theme, { mode -> onSettings { it.copy(theme = mode) } })
+                    TextSizePicker(settings.textSize) { size -> onSettings { it.copy(textSize = size) } }
+                    ToggleRow(stringResource(R.string.typewriter), null, settings.typewriter, enabled = true) { on ->
+                        onSettings { it.copy(typewriter = on) }
+                    }
+                    ToggleRow(stringResource(R.string.haptics), null, settings.haptics, enabled = true) { on ->
+                        onSettings { it.copy(haptics = on) }
+                    }
+                    ToggleRow(stringResource(R.string.combat_numbers), null, settings.combatNumbers, enabled = true) { on ->
+                        onSettings { it.copy(combatNumbers = on) }
+                    }
+                    NotificationToggle(settings.notifications, notificationDenied, onSettings, onNotificationPermission)
+                }
+                MorePage.HELP -> HelpPage(onResetTips = { onSettings { it.copy(seenTips = emptySet()) } })
+            }
+            Spacer(Modifier.height(24.dp))
+        }
+    }
+}
+
+private enum class MorePage(val title: Int) {
+    MAP(R.string.map), DAILY(R.string.daily_quest), JOURNAL(R.string.journal), RELATIONS(R.string.relationships),
+    RANKING(R.string.ranking), SAVES(R.string.saves), SETTINGS(R.string.settings), HELP(R.string.help),
+}
+
+private data class Tile(val page: MorePage, val icon: ImageVector, val title: String, val subtitle: String, val enabled: Boolean = true)
+
+@Composable
+private fun TileCard(tile: Tile, modifier: Modifier, onClick: () -> Unit) {
+    Surface(
+        onClick = onClick,
+        enabled = tile.enabled,
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        shape = MaterialTheme.shapes.medium,
+        modifier = modifier.heightIn(min = 92.dp),
     ) {
-        // Sonraki aşamalarda açılacak bölümler
-        SectionTitle(stringResource(R.string.tab_more))
-        if (map.isNotEmpty()) MapSection(map)
-        notices.forEach { SystemCard(it, Modifier.padding(vertical = 4.dp)) }
-        daily?.let { DailyPanel(it, onTrain, inDayLoop = map.isNotEmpty()) }
-        relations?.let { RelationsSection(it) }
-        ranking?.takeIf { map.isNotEmpty() }?.let { RankingSection(it) }
-        journal?.let { JournalSection(it) }
+        val alpha = if (tile.enabled) 1f else 0.45f
+        Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Icon(tile.icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary.copy(alpha = alpha), modifier = Modifier.size(24.dp))
+            Text(tile.title, style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = alpha), maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text(tile.subtitle, style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = alpha), maxLines = 2, overflow = TextOverflow.Ellipsis)
+        }
+    }
+}
 
-        SectionTitle(stringResource(R.string.saves))
-        slots.forEach { (slot, info) ->
-            SlotRow(
-                slot = slot,
-                info = info,
-                canSave = slot != SaveManager.AUTO && mode != GameMode.IRONMAN,
-                onSave = { onSave(slot) },
-                onLoad = { onLoad(slot) },
-            )
-        }
-        if (mode == GameMode.IRONMAN) {
-            Text(stringResource(R.string.msg_ironman_no_manual), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        }
+/** Yardım: her ekranın sembolleri tek yerde; ipuçlarını yeniden gösterme. */
+@Composable
+private fun HelpPage(onResetTips: () -> Unit) {
+    listOf(
+        R.string.help_story to Glossary.story(),
+        R.string.help_hub to Glossary.hub(),
+        R.string.help_combat to Glossary.combat(),
+        R.string.help_status to Glossary.status(),
+    ).forEach { (title, entries) ->
+        SectionTitle(stringResource(title))
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) { entries.forEach { (t, m) -> HelpEntry(t, m) } }
+    }
+    OutlinedButton(onClick = onResetTips, modifier = Modifier.fillMaxWidth().padding(top = 20.dp)) {
+        Text(stringResource(R.string.help_tips_reset))
+    }
+}
 
-        SectionTitle(stringResource(R.string.settings))
-        LanguagePicker(lang, onLanguage)
-        ThemePicker(settings.theme, { mode -> onSettings { it.copy(theme = mode) } })
-        ToggleRow(stringResource(R.string.typewriter), null, settings.typewriter, enabled = true) { on ->
-            onSettings { it.copy(typewriter = on) }
+@Composable
+private fun TextSizePicker(current: TextSize, onPick: (TextSize) -> Unit) {
+    Column(modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp)) {
+        Text(stringResource(R.string.text_size), style = MaterialTheme.typography.bodyLarge)
+        Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth().padding(top = 6.dp)) {
+            listOf(
+                TextSize.SMALL to R.string.text_small,
+                TextSize.MEDIUM to R.string.text_medium,
+                TextSize.LARGE to R.string.text_large,
+                TextSize.XLARGE to R.string.text_xlarge,
+            ).forEach { (size, label) ->
+                val padding = PaddingValues(horizontal = 2.dp, vertical = 8.dp)
+                if (size == current) {
+                    Button(onClick = { }, contentPadding = padding, modifier = Modifier.weight(1f)) { Text(stringResource(label), maxLines = 1, overflow = TextOverflow.Ellipsis) }
+                } else {
+                    OutlinedButton(onClick = { onPick(size) }, contentPadding = padding, modifier = Modifier.weight(1f)) {
+                        Text(stringResource(label), maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    }
+                }
+            }
         }
-        ToggleRow(stringResource(R.string.haptics), null, settings.haptics, enabled = true) { on ->
-            onSettings { it.copy(haptics = on) }
-        }
-        NotificationToggle(settings.notifications, notificationDenied, onSettings, onNotificationPermission)
-
-        Spacer(Modifier.padding(top = 16.dp))
-        OutlinedButton(onClick = onBackToTitle, modifier = Modifier.fillMaxWidth()) {
-            Text(stringResource(R.string.back_to_title))
-        }
-        Spacer(Modifier.padding(bottom = 24.dp))
     }
 }
 
 /** Harita: bölgeler, tehlike, kontrol, açık kapılar. */
 @Composable
 private fun MapSection(regions: List<RegionView>) {
-    Text(stringResource(R.string.map), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
     regions.forEach { r ->
         Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small, modifier = Modifier.fillMaxWidth().padding(vertical = 3.dp)) {
             Column(modifier = Modifier.padding(10.dp)) {

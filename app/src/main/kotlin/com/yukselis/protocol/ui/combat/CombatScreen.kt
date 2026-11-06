@@ -1,7 +1,15 @@
 package com.yukselis.protocol.ui.combat
 
+import com.yukselis.protocol.ui.components.AppAlertDialog
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.AssistChip
+import com.yukselis.protocol.ui.components.Glossary
+import com.yukselis.protocol.ui.components.HelpButton
+import com.yukselis.protocol.ui.components.TipCard
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,7 +25,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
@@ -59,6 +66,7 @@ fun CombatScreen(
     combat: CombatView,
     notices: List<NoticeView>,
     auto: Boolean,
+    showNumbers: Boolean,
     onAction: (CombatAction) -> Unit,
     onToggleAuto: () -> Unit,
     onCheckpoint: () -> Unit,
@@ -67,7 +75,7 @@ fun CombatScreen(
     var chosen by rememberSaveable { mutableStateOf(0) }
     var detail by rememberSaveable { mutableStateOf<Int?>(null) }
     var picker by rememberSaveable { mutableStateOf(Picker.NONE) }
-    var showNumbers by rememberSaveable { mutableStateOf(false) }
+    var tactics by rememberSaveable { mutableStateOf(false) }
     val living = combat.enemies.filter { it.alive }
     // Seçili hedef düştüyse ilk yaşayan düşman hedeflenir (bileşim sırasında durum yazılmaz).
     val target = if (living.any { it.uid == chosen }) chosen else living.firstOrNull()?.uid ?: chosen
@@ -93,23 +101,21 @@ fun CombatScreen(
         if (combat.playerStatuses.isNotEmpty()) {
             Text(combat.playerStatuses.joinToString(" · "), style = GameType.system, color = Color(0xFFFF7043))
         }
-        Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth().padding(top = 4.dp)) {
-            Stance.entries.forEach { st ->
-                FilterChip(
-                    selected = combat.stance == st,
-                    onClick = { onAction(CombatAction.SetStance(st)) },
-                    label = { Text(stringResource(stanceLabel(st)), maxLines = 1) },
-                )
-            }
+        // Duruş ve efor tek satırda: dokununca açıklamalı seçim penceresi açılır.
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth().padding(top = 2.dp),
+        ) {
+            AssistChip(
+                onClick = { tactics = true },
+                label = { Text(stringResource(R.string.tactics_line, stringResource(stanceLabel(combat.stance)), combat.effort), maxLines = 1) },
+                leadingIcon = { Text(stringResource(R.string.tactics), style = GameType.system, color = MaterialTheme.colorScheme.primary) },
+                modifier = Modifier.weight(1f, fill = false),
+            )
+            HelpButton(stringResource(R.string.help_combat), Glossary.combat())
         }
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            Text(stringResource(R.string.effort), style = GameType.system)
-            (0..3).forEach { n ->
-                FilterChip(selected = combat.effort == n, onClick = { onAction(CombatAction.SetEffort(n)) }, label = { Text("$n") })
-            }
-            Spacer(Modifier.weight(1f))
-            FilterChip(selected = showNumbers, onClick = { showNumbers = !showNumbers }, label = { Text(stringResource(R.string.numbers)) })
-        }
+        TipCard("combat", stringResource(R.string.tip_combat))
 
         // Günlük (düzyazı; sayılar isteğe bağlı)
         val listState = rememberLazyListState()
@@ -151,6 +157,8 @@ fun CombatScreen(
 
     detail?.let { uid -> combat.enemies.firstOrNull { it.uid == uid }?.let { EnemyDetail(it) { detail = null } } }
 
+    if (tactics) TacticsDialog(combat.stance, combat.effort, onAction) { tactics = false }
+
     when (picker) {
         Picker.SKILL -> PickerDialog(
             title = stringResource(R.string.action_skill),
@@ -188,6 +196,48 @@ fun CombatScreen(
         )
         Picker.NONE -> Unit
     }
+}
+
+/** Duruş ve efor: her seçeneğin altında ne yaptığı yazar. Seçim anında uygulanır. */
+@Composable
+private fun TacticsDialog(stance: Stance, effort: Int, onAction: (CombatAction) -> Unit, onDismiss: () -> Unit) {
+    AppAlertDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) } },
+        title = { Text(stringResource(R.string.tactics_title)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.verticalScroll(rememberScrollState())) {
+                Text(stringResource(R.string.stance), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary)
+                Stance.entries.forEach { st ->
+                    val selected = st == stance
+                    OutlinedButton(
+                        onClick = { onAction(CombatAction.SetStance(st)) },
+                        shape = RoundedCornerShape(12.dp),
+                        border = BorderStroke(if (selected) 2.dp else 1.dp, if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline),
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Column(modifier = Modifier.fillMaxWidth()) {
+                            Text((if (selected) "✓ " else "") + stringResource(stanceLabel(st)), style = GameType.systemTitle)
+                            Text(stringResource(stanceDesc(st)), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
+                    }
+                }
+                Text(stringResource(R.string.effort), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 4.dp))
+                Text(stringResource(R.string.effort_desc), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    (0..3).forEach { n ->
+                        FilterChip(selected = effort == n, onClick = { onAction(CombatAction.SetEffort(n)) }, label = { Text("$n") })
+                    }
+                }
+            }
+        },
+    )
+}
+
+private fun stanceDesc(s: Stance) = when (s) {
+    Stance.ALL_OUT -> R.string.stance_all_out_desc
+    Stance.MEASURED -> R.string.stance_measured_desc
+    Stance.DEFENSIVE -> R.string.stance_defensive_desc
 }
 
 private fun stanceLabel(s: Stance) = when (s) {
@@ -232,7 +282,7 @@ private fun EnemyCard(e: EnemyView, selected: Boolean, onSelect: () -> Unit, onD
 
 @Composable
 private fun EnemyDetail(e: EnemyView, onDismiss: () -> Unit) {
-    AlertDialog(
+    AppAlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) } },
         title = { Text("${e.name} · ${stringResource(R.string.enemy_level, e.level, e.gradeName)}") },
@@ -317,7 +367,7 @@ private fun DeathPanel(onCheckpoint: () -> Unit) {
 
 @Composable
 private fun PickerDialog(title: String, options: List<Triple<String, String, Boolean>>, onPick: (String) -> Unit, onDismiss: () -> Unit) {
-    AlertDialog(
+    AppAlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } },
         title = { Text(title) },

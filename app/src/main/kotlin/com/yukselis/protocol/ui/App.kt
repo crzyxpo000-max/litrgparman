@@ -63,6 +63,14 @@ import com.yukselis.protocol.ui.story.StoryScreen
 import com.yukselis.protocol.ui.theme.GameType
 import com.yukselis.protocol.ui.theme.YukselisTheme
 import com.yukselis.protocol.ui.title.TitleScreen
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Density
+import com.yukselis.protocol.ui.components.LocalAppConfiguration
+import com.yukselis.protocol.ui.components.LocalAppContext
+import com.yukselis.protocol.ui.components.LocalAppDensity
+import com.yukselis.protocol.ui.components.LocalTips
+import com.yukselis.protocol.ui.components.Tips
 import kotlinx.coroutines.launch
 import java.util.Locale
 
@@ -84,6 +92,15 @@ fun App(viewModel: GameViewModel) {
             ThemeMode.LIGHT -> false
             ThemeMode.DARK, ThemeMode.AMOLED -> true
         }
+        val density = LocalDensity.current
+        val tips = Tips(ui.settings.seenTips) { id -> viewModel.updateSettings { it.copy(seenTips = it.seenTips + id) } }
+        // Yazı boyutu ayarı cihazın yazı ölçeğinin üstüne çarpılır.
+        val scaled = Density(density.density, density.fontScale * ui.settings.textSize.scale)
+        CompositionLocalProvider(
+            LocalDensity provides scaled,
+            LocalAppDensity provides scaled,
+            LocalTips provides tips,
+        ) {
         YukselisTheme(dark = dark, amoled = ui.settings.theme == ThemeMode.AMOLED) {
             Surface(color = MaterialTheme.colorScheme.background, modifier = Modifier.fillMaxSize()) {
                 val scene = ui.scene
@@ -103,6 +120,7 @@ fun App(viewModel: GameViewModel) {
                     )
                 }
             }
+        }
         }
     }
 }
@@ -140,6 +158,9 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
     Scaffold(
         topBar = { Header(scene, status) },
         bottomBar = {
+            // Sekme çubuğu gezinmedir, okuma değil: oyun içi yazı boyutu onu büyütmez (etiketler kesilmesin).
+            val d = LocalDensity.current
+            CompositionLocalProvider(LocalDensity provides Density(d.density, d.fontScale / ui.settings.textSize.scale)) {
             NavigationBar {
                 tabs.forEach { t ->
                     NavigationBarItem(
@@ -153,6 +174,7 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
                     )
                 }
             }
+            }
         },
         snackbarHost = { SnackbarHost(snackbar) },
         containerColor = MaterialTheme.colorScheme.background,
@@ -163,6 +185,7 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
                 combat = ui.combat,
                 notices = ui.actionNotices,
                 auto = ui.autoCombat,
+                showNumbers = ui.settings.combatNumbers,
                 onAction = viewModel::combatAction,
                 onToggleAuto = viewModel::toggleAuto,
                 onCheckpoint = viewModel::returnToCheckpoint,
@@ -222,7 +245,7 @@ private fun Header(scene: SceneView, status: StatusView) {
             modifier = Modifier
                 .fillMaxWidth()
                 .statusBarsPadding()
-                .padding(horizontal = 16.dp, vertical = 10.dp),
+                .padding(horizontal = 16.dp, vertical = 8.dp),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
@@ -230,16 +253,19 @@ private fun Header(scene: SceneView, status: StatusView) {
                     style = GameType.systemTitle,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier.weight(1f).padding(end = 8.dp),
                 )
                 Text(
-                    text = stringResource(R.string.level_grade, status.level, status.grade.name),
+                    text = stringResource(R.string.level_grade_short, status.level, status.grade.name),
                     style = GameType.system,
                     color = MaterialTheme.colorScheme.primary,
                 )
             }
-            StatBar(stringResource(R.string.hp), status.hp.toLong(), status.maxHp.toLong(), Color(0xFFEF5350), Modifier.padding(top = 6.dp))
-            StatBar(stringResource(R.string.mp), status.mp.toLong(), status.maxMp.toLong(), Color(0xFF42A5F5), Modifier.padding(top = 4.dp))
+            // Can ve mana yan yana: hikayeye bir satır daha kalır.
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.padding(top = 6.dp)) {
+                StatBar(stringResource(R.string.hp), status.hp.toLong(), status.maxHp.toLong(), Color(0xFFEF5350), Modifier.weight(1f))
+                StatBar(stringResource(R.string.mp), status.mp.toLong(), status.maxMp.toLong(), Color(0xFF42A5F5), Modifier.weight(1f))
+            }
         }
     }
 }
@@ -260,6 +286,9 @@ private fun ProvideLanguage(lang: Lang, content: @Composable () -> Unit) {
     val provided = buildList {
         add(LocalContext provides localized)
         add(LocalConfiguration provides configuration)
+        // Pencereler (diyalog, alt sayfa) bunları sıfırlar; Localized{} geri verir.
+        add(LocalAppContext provides localized)
+        add(LocalAppConfiguration provides configuration)
         if (registryOwner != null) add(androidx.activity.compose.LocalActivityResultRegistryOwner provides registryOwner)
     }
     CompositionLocalProvider(*provided.toTypedArray(), content = content)

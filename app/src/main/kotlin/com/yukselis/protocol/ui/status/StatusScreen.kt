@@ -1,5 +1,6 @@
 package com.yukselis.protocol.ui.status
 
+import com.yukselis.protocol.ui.components.AppAlertDialog
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,7 +14,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.LinearProgressIndicator
@@ -49,6 +49,13 @@ import com.yukselis.protocol.ui.components.SystemCard
 import com.yukselis.protocol.ui.theme.EchoColor
 import com.yukselis.protocol.ui.theme.GameType
 import com.yukselis.protocol.ui.theme.rarityColor
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import com.yukselis.protocol.ui.components.Glossary
+import com.yukselis.protocol.ui.components.HelpButton
+import com.yukselis.protocol.ui.components.TipCard
 import java.text.NumberFormat
 import kotlin.math.floor
 import kotlin.math.log10
@@ -66,47 +73,85 @@ fun StatusScreen(
     val spent = pending.values.sum()
     var confirm by remember { mutableStateOf(false) }
 
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(20.dp),
-    ) {
-        notices.forEach { SystemCard(it, Modifier.padding(bottom = 8.dp)) }
-        Text(status.playerName, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-        Text(
-            text = listOfNotNull(stringResource(R.string.level_grade, status.level, status.grade.name), status.className).joinToString(" · "),
-            style = GameType.systemTitle,
-            color = MaterialTheme.colorScheme.primary,
+    var tab by rememberSaveable { mutableIntStateOf(0) }
+    Column(modifier = modifier.fillMaxSize()) {
+        // Her sekmede görünen kısa özet.
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(start = 20.dp, end = 8.dp, top = 12.dp)) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(status.playerName, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                Text(
+                    text = listOfNotNull(stringResource(R.string.level_grade, status.level, status.grade.name), status.className).joinToString(" · "),
+                    style = GameType.systemTitle,
+                    color = MaterialTheme.colorScheme.primary,
+                )
+                Text(
+                    text = stringResource(R.string.humanity_percentile, formatPercent(status.humanityTopPercent)),
+                    style = GameType.system,
+                    color = EchoColor,
+                )
+            }
+            HelpButton(stringResource(R.string.help_status), Glossary.status())
+        }
+        TabRow(selectedTabIndex = tab, containerColor = MaterialTheme.colorScheme.background, modifier = Modifier.padding(top = 8.dp)) {
+            listOf(R.string.status_tab_stats, R.string.status_tab_titles, R.string.status_tab_morality).forEachIndexed { i, label ->
+                Tab(
+                    selected = tab == i,
+                    onClick = { tab = i },
+                    text = {
+                        // Harcanacak puan varsa Statlar sekmesinde nokta.
+                        val dot = if (i == 0 && status.freePoints > 0) " •" else ""
+                        Text(stringResource(label) + dot, maxLines = 1)
+                    },
+                )
+            }
+        }
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 20.dp, vertical = 12.dp),
+        ) {
+            notices.forEach { SystemCard(it, Modifier.padding(bottom = 8.dp)) }
+            TipCard("status", stringResource(R.string.tip_status), Modifier.padding(bottom = 8.dp))
+            when (tab) {
+                0 -> StatsTab(status, pending, spent) { confirm = true }
+                1 -> TitlesTab(status)
+                else -> MoralityTab(status)
+            }
+        }
+    }
+
+    if (confirm) {
+        AppAlertDialog(
+            onDismissRequest = { confirm = false },
+            title = { Text(stringResource(R.string.confirm_allocation)) },
+            text = { Text(stringResource(R.string.confirm_allocation_desc)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    confirm = false
+                    onAllocate(pending.filterValues { it > 0 }.toMap())
+                }) { Text(stringResource(R.string.confirm)) }
+            },
+            dismissButton = { TextButton(onClick = { confirm = false }) { Text(stringResource(R.string.cancel)) } },
         )
-        Text(
-            text = stringResource(R.string.humanity_percentile, formatPercent(status.humanityTopPercent)),
-            style = GameType.systemTitle,
-            color = EchoColor,
-        )
+    }
+}
+
+@Composable
+private fun StatsTab(status: StatusView, pending: MutableMap<Stat, Int>, spent: Int, onConfirm: () -> Unit) {
+    Column {
         val mode = if (status.mode == GameMode.IRONMAN) stringResource(R.string.mode_ironman) else stringResource(R.string.mode_normal)
         Text(
             text = "${stringResource(R.string.day_short, status.day)} · ${stringResource(R.string.act_short, status.act)} · $mode",
             style = GameType.system,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
-        // OP MC: Dikkat, Yozlaşma ve NPC'lerin gördüğü seviye.
-        Text(
-            text = stringResource(R.string.status_hidden, status.publicLevel, status.attention, status.corruption),
-            style = GameType.system,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-        if (status.publicRank > 0) {
-            Text(stringResource(R.string.status_rank, status.publicRank), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        }
-        if (status.armyPower > 0) {
-            Text(stringResource(R.string.status_army, status.armyPower), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        }
         if (status.evolutionPending) {
             Text(stringResource(R.string.evolution_pending), style = GameType.system, color = Color(0xFFFFA726), modifier = Modifier.padding(top = 4.dp))
         }
 
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(12.dp))
         StatBar(stringResource(R.string.hp), status.hp.toLong(), status.maxHp.toLong(), Color(0xFFEF5350))
         Spacer(Modifier.height(6.dp))
         StatBar(stringResource(R.string.mp), status.mp.toLong(), status.maxMp.toLong(), Color(0xFF42A5F5))
@@ -149,7 +194,7 @@ fun StatusScreen(
         if (spent > 0) {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
                 OutlinedButton(onClick = { pending.clear() }, modifier = Modifier.weight(1f)) { Text(stringResource(R.string.reset)) }
-                Button(onClick = { confirm = true }, modifier = Modifier.weight(1f)) { Text(stringResource(R.string.confirm)) }
+                Button(onClick = onConfirm, modifier = Modifier.weight(1f)) { Text(stringResource(R.string.confirm)) }
             }
         }
 
@@ -162,8 +207,13 @@ fun StatusScreen(
             )
             status.essences.forEach { Text(it, style = GameType.systemTitle, color = Color(0xFFFFA726)) }
         }
+    }
+}
 
-        SectionTitle(stringResource(R.string.titles))
+@Composable
+private fun TitlesTab(status: StatusView) {
+    Column {
+        SectionTitle(stringResource(R.string.titles), Modifier.padding(top = 0.dp))
         if (status.titles.isEmpty()) {
             Text(stringResource(R.string.no_titles), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
@@ -184,25 +234,28 @@ fun StatusScreen(
             }
         }
 
+    }
+}
+
+@Composable
+private fun MoralityTab(status: StatusView) {
+    Column {
+        // OP MC: NPC'lerin gördüğü seviye, Dikkat ve Yozlaşma.
+        SectionTitle(stringResource(R.string.status_hidden_title), Modifier.padding(top = 0.dp))
+        Text(stringResource(R.string.status_public, status.publicLevel), style = GameType.system, color = MaterialTheme.colorScheme.onSurface)
+        StatBar(stringResource(R.string.status_attention), status.attention.toLong(), 100, Color(0xFFFF7043), Modifier.padding(top = 6.dp), labelWidth = 96)
+        StatBar(stringResource(R.string.status_corruption), status.corruption.toLong(), 100, EchoColor, Modifier.padding(top = 4.dp), labelWidth = 96)
+        if (status.publicRank > 0) {
+            Text(stringResource(R.string.status_rank, status.publicRank), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 6.dp))
+        }
+        if (status.armyPower > 0) {
+            Text(stringResource(R.string.status_army, status.armyPower), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+
         SectionTitle(stringResource(R.string.morality))
         MoralityBar(stringResource(R.string.cruelty), stringResource(R.string.mercy), status.mercy)
         MoralityBar(stringResource(R.string.freedom), stringResource(R.string.order), status.order)
         MoralityBar(stringResource(R.string.power), stringResource(R.string.humanity), status.humanity)
-    }
-
-    if (confirm) {
-        AlertDialog(
-            onDismissRequest = { confirm = false },
-            title = { Text(stringResource(R.string.confirm_allocation)) },
-            text = { Text(stringResource(R.string.confirm_allocation_desc)) },
-            confirmButton = {
-                TextButton(onClick = {
-                    confirm = false
-                    onAllocate(pending.filterValues { it > 0 }.toMap())
-                }) { Text(stringResource(R.string.confirm)) }
-            },
-            dismissButton = { TextButton(onClick = { confirm = false }) { Text(stringResource(R.string.cancel)) } },
-        )
     }
 }
 

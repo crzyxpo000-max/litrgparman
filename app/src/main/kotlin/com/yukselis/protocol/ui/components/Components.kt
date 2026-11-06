@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -77,6 +78,7 @@ fun StatBar(
     max: Long,
     color: Color,
     modifier: Modifier = Modifier,
+    labelWidth: Int = 28,
 ) {
     val fraction = if (max <= 0) 0f else (value.toFloat() / max).coerceIn(0f, 1f)
     Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
@@ -84,7 +86,9 @@ fun StatBar(
             text = label,
             style = GameType.system,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.width(28.dp),
+            maxLines = 1,
+            // Büyük yazıda etiket kesilmesin: en az bu genişlik, gerekirse daha geniş.
+            modifier = Modifier.widthIn(min = labelWidth.dp).padding(end = 4.dp),
         )
         LinearProgressIndicator(
             progress = { fraction },

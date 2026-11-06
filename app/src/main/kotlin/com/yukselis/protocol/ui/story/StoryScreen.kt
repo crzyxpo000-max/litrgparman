@@ -51,12 +51,33 @@ import com.yukselis.protocol.ui.theme.InsightColor
 import com.yukselis.protocol.ui.theme.EchoColor
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Surface
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.runtime.saveable.rememberSaveable
+import com.yukselis.protocol.ui.components.Glossary
+import com.yukselis.protocol.ui.components.HelpButton
+import com.yukselis.protocol.ui.components.LocalTips
+import com.yukselis.protocol.ui.components.Localized
+import com.yukselis.protocol.ui.components.TipCard
 import kotlinx.coroutines.delay
 
 /**
- * Hikaye sekmesi: geçmiş pasajlar soluk, güncel pasaj daktilo efektiyle yazılır.
- * Ekrana dokunmak yazmayı anında tamamlar. Metin bitince Sistem kartları ve seçenekler belirir.
+ * Hikaye sekmesi: ekranda yalnızca güncel sahne durur (daktilo efektiyle yazılır, dokununca tamamlanır).
+ * Seçenekler ya da gün akışı eylemleri altta sabit bir panelde: aramak için kaydırmak gerekmez.
+ * Önceki sahneler üstteki düğmeyle açılan bir sayfada okunur.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StoryScreen(
     scene: SceneView,
@@ -93,77 +114,136 @@ fun StoryScreen(
         if (haptics && hasBigMoment) hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
     }
 
-    // Yeni pasaj başlarken onun başına, yazı bitince seçeneklere kaydır.
-    // (Son öğeye kaydırmak listeyi en alta yaslar; LazyColumn sonun ötesine kaymaz.)
-    val listState = rememberLazyListState()
-    val startIndex = scene.history.size + if (scene.history.isNotEmpty()) 1 else 0
-    val lastIndex = startIndex + freshNotices.size + if (finished) scene.current.notices.size + 1 else 1
+    // Seçenekler, "metni göster" düğmesinin yerinde belirir: aynı yere yapılan ikinci dokunuş yanlışlıkla
+    // seçim yapmasın diye eylemler kısa bir süre sonra etkinleşir.
+    var armed by remember(passageKey) { mutableStateOf(false) }
     LaunchedEffect(passageKey, finished) {
-        listState.animateScrollToItem(if (finished) lastIndex else startIndex)
+        if (finished) {
+            delay(ARM_DELAY_MS)
+            armed = true
+        }
     }
+    val choose: (String) -> Unit = { if (armed) onChoose(it) }
+    val hubAct: (HubAction) -> Unit = { if (armed) onHub(it) }
+
+    // Her yeni sahne en baştan okunur.
+    val listState = rememberLazyListState()
+    LaunchedEffect(passageKey) { listState.scrollToItem(0) }
+    var showHistory by rememberSaveable { mutableStateOf(false) }
 
     val skip = remember { MutableInteractionSource() }
-    LazyColumn(
-        state = listState,
-        contentPadding = PaddingValues(horizontal = 20.dp, vertical = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(14.dp),
-        modifier = modifier
-            .fillMaxSize()
-            .clickable(interactionSource = skip, indication = null) { finished = true },
-    ) {
-        itemsIndexed(scene.history, key = { i, p -> "h$i-${p.sceneId}" }) { _, passage ->
-            PastPassage(passage)
-        }
-
-        if (scene.history.isNotEmpty()) {
-            item(key = "divider-$passageKey") {
-                HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.4f))
-            }
-        }
-
-        // Son seçimin sonuçları (XP, seviye atlama, unvan) yeni pasajdan önce gösterilir.
-        itemsIndexed(freshNotices, key = { i, _ -> "fresh-$passageKey-$i" }) { _, notice ->
-            AppearingCard(notice)
-        }
-
-        item(key = "text-$passageKey") {
-            val visible = if (finished) fullText else fullText.take(shown)
-            Text(
-                text = visible,
-                style = GameType.narration,
-                color = MaterialTheme.colorScheme.onBackground,
-            )
-        }
-
-        if (finished && scene.current.insights.isNotEmpty()) {
-            item(key = "insights-$passageKey") { Insights(scene.current.insights) }
-        }
-        // Yoldaş görüşleri: büyük seçimden önce yanındakilerin tek satırı.
-        if (finished && scene.opinions.isNotEmpty()) {
-            item(key = "opinions-$passageKey") { Opinions(scene.opinions) }
-        }
-
-        if (finished) {
-            itemsIndexed(scene.current.notices, key = { i, _ -> "notice-$passageKey-$i" }) { _, notice ->
-                AppearingCard(notice)
-            }
-            item(key = "choices-$passageKey") {
-                val hub = scene.hub
-                when {
-                    scene.isEnding -> EndingActions(ending, onBackToTitle)
-                    hub != null -> HubPanel(hub, onHub)
-                    else -> Choices(scene.choices, onChoose)
+    Column(modifier = modifier.fillMaxSize()) {
+        LazyColumn(
+            state = listState,
+            contentPadding = PaddingValues(horizontal = 20.dp, vertical = 12.dp),
+            verticalArrangement = Arrangement.spacedBy(14.dp),
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+                .clickable(interactionSource = skip, indication = null) { finished = true },
+        ) {
+            if (scene.history.isNotEmpty()) {
+                item(key = "earlier") {
+                    TextButton(onClick = { showHistory = true }, contentPadding = PaddingValues(horizontal = 0.dp)) {
+                        Icon(Icons.Filled.KeyboardArrowUp, contentDescription = null, modifier = Modifier.size(18.dp))
+                        Text(stringResource(R.string.earlier), style = GameType.system)
+                    }
                 }
             }
-        } else if (typewriter) {
-            item(key = "skip-$passageKey") {
+
+            // Son seçimin sonuçları (XP, seviye atlama, unvan) yeni pasajdan önce gösterilir.
+            itemsIndexed(freshNotices, key = { i, _ -> "fresh-$passageKey-$i" }) { _, notice ->
+                AppearingCard(notice)
+            }
+
+            item(key = "text-$passageKey") {
+                val visible = if (finished) fullText else fullText.take(shown)
                 Text(
-                    text = stringResource(R.string.tap_to_skip),
-                    style = GameType.system,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                    text = visible,
+                    style = GameType.narration,
+                    color = MaterialTheme.colorScheme.onBackground,
                 )
             }
+
+            if (finished && scene.current.insights.isNotEmpty()) {
+                item(key = "insights-$passageKey") { Insights(scene.current.insights) }
+            }
+            // Yoldaş görüşleri: büyük seçimden önce yanındakilerin tek satırı.
+            if (finished && scene.opinions.isNotEmpty()) {
+                item(key = "opinions-$passageKey") { Opinions(scene.opinions) }
+            }
+            if (finished) {
+                itemsIndexed(scene.current.notices, key = { i, _ -> "notice-$passageKey-$i" }) { _, notice ->
+                    AppearingCard(notice)
+                }
+            }
+            // Son ekranının epilog kartları uzun bir okuma: kaydırılan alanda kalır.
+            if (finished && scene.isEnding) {
+                item(key = "ending-$passageKey") { EndingContent(ending) }
+            }
         }
+
+        ActionDock(resetKey = passageKey) {
+            val hub = scene.hub
+            when {
+                !finished -> TextButton(onClick = { finished = true }, modifier = Modifier.fillMaxWidth()) {
+                    Text(stringResource(R.string.show_all_text), style = GameType.system)
+                }
+                scene.isEnding -> Button(onClick = onBackToTitle, modifier = Modifier.fillMaxWidth()) {
+                    Text(stringResource(R.string.back_to_title))
+                }
+                hub != null -> HubPanel(hub, hubAct)
+                else -> Choices(scene.choices, choose)
+            }
+        }
+    }
+
+    if (showHistory) {
+        ModalBottomSheet(onDismissRequest = { showHistory = false }, sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)) {
+          Localized {
+            Text(
+                stringResource(R.string.earlier_title),
+                style = GameType.systemTitle,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp),
+            )
+            val historyState = rememberLazyListState(initialFirstVisibleItemIndex = (scene.history.size - 1).coerceAtLeast(0))
+            LazyColumn(
+                state = historyState,
+                contentPadding = PaddingValues(horizontal = 20.dp, vertical = 12.dp),
+                verticalArrangement = Arrangement.spacedBy(14.dp),
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                itemsIndexed(scene.history, key = { i, p -> "h$i-${p.sceneId}" }) { i, passage ->
+                    if (i > 0) HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f), modifier = Modifier.padding(bottom = 14.dp))
+                    PastPassage(passage)
+                }
+            }
+          }
+        }
+    }
+}
+
+/**
+ * Altta sabit eylem paneli: ekranın en fazla yarısını kaplar, sığmazsa kendi içinde kayar.
+ * Başparmağın ulaştığı yerde durur; metin üstte serbestçe okunur.
+ */
+@Composable
+private fun ActionDock(resetKey: String, content: @Composable () -> Unit) {
+    val maxHeight = (LocalConfiguration.current.screenHeightDp * 0.5f).dp
+    val scroll = remember(resetKey) { androidx.compose.foundation.ScrollState(0) }
+    Surface(
+        color = MaterialTheme.colorScheme.surface,
+        tonalElevation = 3.dp,
+        shadowElevation = 8.dp,
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Column(
+            modifier = Modifier
+                .heightIn(max = maxHeight)
+                .verticalScroll(scroll)
+                .padding(horizontal = 16.dp, vertical = 10.dp),
+        ) { content() }
     }
 }
 
@@ -234,7 +314,16 @@ private fun AppearingCard(notice: NoticeView) {
 
 @Composable
 private fun Choices(choices: List<ChoiceView>, onChoose: (String) -> Unit) {
-    Column(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.padding(top = 4.dp)) {
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        // Etiketli seçenek ilk kez çıktığında tek satırlık ipucu; (i) her zaman açıklar.
+        val tagged = choices.any { it.requirementTag != null || it.odds != null || it.kindTag != null }
+        if (tagged) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                TipCard("choices", stringResource(R.string.tip_choices), Modifier.weight(1f))
+                if ("choices" in LocalTips.current.seen) Spacer(Modifier.weight(1f))
+                HelpButton(stringResource(R.string.help_story), Glossary.story())
+            }
+        }
         choices.forEach { choice ->
             OutlinedButton(
                 onClick = { onChoose(choice.id) },
@@ -258,7 +347,7 @@ private fun Choices(choices: List<ChoiceView>, onChoose: (String) -> Unit) {
                     // Görünür olasılık: tek seferlik (kırmızı) / yeniden denenebilir (beyaz).
                     choice.odds?.let {
                         Text(
-                            text = " %$it",
+                            text = " " + stringResource(R.string.odds_fmt, it),
                             style = GameType.system,
                             color = if (choice.oneShot) androidx.compose.ui.graphics.Color(0xFFEF5350) else MaterialTheme.colorScheme.onSurface,
                         )
@@ -270,16 +359,12 @@ private fun Choices(choices: List<ChoiceView>, onChoose: (String) -> Unit) {
 }
 
 @Composable
-private fun EndingActions(ending: com.yukselis.engine.story.EndingView?, onBackToTitle: () -> Unit) {
+private fun EndingContent(ending: com.yukselis.engine.story.EndingView?) {
     Column(modifier = Modifier.fillMaxWidth().padding(top = 8.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
         if (ending == null) {
             Text(text = stringResource(R.string.the_end), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary)
         } else {
             EndingCards(ending)
-        }
-        Spacer(Modifier.height(12.dp))
-        Button(onClick = onBackToTitle, modifier = Modifier.fillMaxWidth()) {
-            Text(stringResource(R.string.back_to_title))
         }
     }
 }
@@ -329,5 +414,6 @@ private fun EpilogueCardView(title: String, body: String) {
     }
 }
 
+private const val ARM_DELAY_MS = 400L
 private const val CHAR_DELAY_MS = 16L
 private const val CHARS_PER_TICK = 2

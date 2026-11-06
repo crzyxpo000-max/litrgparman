@@ -2,6 +2,15 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Arayüz sadeleştirme — 2026-11-07
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 124 | Hikaye ekranı yalnızca güncel sahneyi gösterir; önceki sahneler üstteki "Önceki sahneler" düğmesiyle alt sayfada okunur. Seçenekler ve gün akışı eylemleri altta sabit panelde (en fazla ekranın yarısı, sığmazsa kendi içinde kayar). Seçenekler belirdikten 400 ms sonra etkinleşir | Kullanıcı: kaydırma en aza insin. Eski düzen tüm oturumu tek sayfada biriktiriyordu; "metni göster"e ikinci dokunuş aynı yerde beliren seçeneği seçiyordu. | Oyuncu geri bildirimi. |
+| 125 | Gün akışı paneli: kalan eylem + tehlike tek satır, serbest eylemler tek satır, Kule / Kapılar (n) / Yolculuk tek satır; kapı ve yolculuk listeleri pencerede. Durum üç sekme (Statlar · Unvanlar · Ahlak); Daha fazla karo ızgarası + alt sayfalar (geri tuşu kapatır) | Aynı neden: her ekran tek bakışta sığsın. | — |
+| 126 | Semboller her ekranda (i) düğmesiyle açıklanır; Daha fazla → Yardım hepsini toplar. İlk karşılaşmada tek satırlık ipucu kartı ("Anladım" ile bir daha çıkmaz; Yardım'dan sıfırlanır). Savaşta duruş + efor tek "Taktik" düğmesinde, her seçeneğin etkisi yazılı; hasar sayıları Ayarlar'a taşındı | [ALG 6], %, ●, Efor gibi işaretler açıklamasızdı. | — |
+| 127 | Yazı boyutu ayarı (Küçük/Orta/Büyük/Çok büyük = ×0,9/1/1,15/1,3, cihaz ölçeğinin üstüne). Sekme çubuğu ölçeklenmez. Diyalog ve alt sayfalar `AppAlertDialog` / `Localized` ile oyunun dilini ve yazı boyutunu taşır | Pencereler cihaz dilini kullanıyordu (Türkçe oyunda "Cancel", "days left"): eskiden beri var olan hata. | Uygulamada yeni diyalog = `AppAlertDialog`. |
+
 ## Aşama 9 — 2026-11-06
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |

@@ -1,5 +1,6 @@
 package com.yukselis.protocol.ui.skills
 
+import com.yukselis.protocol.ui.components.AppAlertDialog
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
@@ -11,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -106,7 +106,7 @@ private fun costText(skill: SkillView): String? {
 
 @Composable
 private fun SkillDetail(skill: SkillView, onDismiss: () -> Unit) {
-    AlertDialog(
+    AppAlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) } },
         title = { Text(skill.name, color = rarityColor(skill.rarity)) },

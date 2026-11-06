@@ -162,6 +162,11 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Daha fazla: İlişkiler (4 eksen, durum, hatıralar, izler; dokununca ayrıntı) ve Küresel Sıralama; Günlük'te bilgi günlüğü.
   Hikaye'de yoldaş görüşleri, savaşta yoldaş satırları, Durum'da sıra/ordu/izler. Bildirim türü `yoldas` (pembe).
 - Gün akışında Hikaye sekmesi `HubPanel` gösterir (fırsat eli, serbest eylemler, kapılar, yolculuk, kamp); Harita ve Günlük Daha fazla'da.
+- Kaydırmayı azaltan düzen (DECISIONS #124–127): Hikaye yalnızca güncel sahne + alttaki sabit `ActionDock`; önceki sahneler alt
+  sayfada. Daha fazla = karo ızgarası + alt sayfalar; Durum = 3 sekme. Semboller `components/Glossary.kt` (her ekranda (i)
+  `HelpButton`, Daha fazla → Yardım); bir kerelik ipuçları `TipCard` (`Settings.seenTips`). Yazı boyutu `Settings.textSize`.
+- **Diyalog/alt sayfa:** `AlertDialog` değil `AppAlertDialog` kullan; `ModalBottomSheet` içeriğini `Localized {}` ile sar
+  (yoksa pencere cihaz dilinde ve ölçeksiz yazıyla açılır).
 - Savaş varken Hikaye sekmesi `CombatScreen` gösterir; savaş başında Normal modda `checkpoint` kaydı yazılır.
 - Release: R8 açık (`app/proguard-rules.pro`), imzalama `keystore.properties` (git dışı). compileSdk 37, targetSdk 36.
 - Bildirimler: `data/Notifications.kt` (WorkManager, kanal, izin); Ayarlar'da anahtar; `ProvideLanguage` izin kaydını taşır.
