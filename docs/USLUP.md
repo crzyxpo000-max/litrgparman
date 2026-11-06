@@ -220,7 +220,7 @@ olarak verdi, birleştirme tek elden yapıldı). Ardından 5 bağımsız okuyucu
 okudu: 39 bulgu (anlam kayması 13, Türkçe hatası 15, tekrar 9, etiket 2) süzülüp uygulandı. Üslup ölçümü (5 dosya):
 noktalı virgül >1 19→0 · art arda 3 -yor 19→2 · art arda kısa cümle 214→177 · "Bu, " 7→0. Açık kalan noktalar:
 prologda {npc:yanki|in} sözleri tırnaklı ve büyük harfli (63, 66, 98, 100, 102, 172, 267, 300; DECISIONS #101 ile
-çelişiyor, kullanıcıya soruldu); `30_carsi_istasyon` 1643'te TR/EN anlamı özgün metinde ayrışıyor; 3618'in EN'inde
+kullanıcı: kasıtlı, DECISIONS #128); `30_carsi_istasyon` 1643'te TR/EN anlamı özgün metinde ayrışıyor; 3618'in EN'inde
 açılış tırnağı eksik (EN bu işin dışında).
 
 ### 7.3 Parti akışı

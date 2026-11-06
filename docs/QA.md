@@ -109,6 +109,7 @@ etkisi taşımayan ana NPC olayı.
 4. `esik_itaat` hiç tetiklenmiyor.
 5. 352 okunmayan bayrak: seçimlerin uzun vadeli sonucu yok.
 6. `awakenings.yaml` ve birkaç ansiklopedik dosyada düz "Yankı/Echo" adı ve Yankı'nın tırnaklı/büyük harfli sesi;
-   prologda da Yankı sözleri tırnaklı/büyük harfli (DECISIONS #101 ile çelişki; kullanıcıya soruldu).
+   prologda da Yankı sözleri tırnaklı/büyük harfli. **Kullanıcı: kasıtlı, bırak (DECISIONS #128)** — yalnız düz yazılmış
+   ad (belirteç yerine "Yankı") kalan sorun.
 7. Oyun tarzı hedefe ulaşma: koruyucu %48.9, yükseliş %55.7.
 8. Lint: `help_free` format uyarısı, 11 kullanılmayan kaynak, `ModifierParameter`.

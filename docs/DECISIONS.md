@@ -2,6 +2,12 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Türkçe üslup ve QA — 2026-11-07
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 128 | Prologda (`story/00_prolog.yaml`) ve uyanış satırlarında (`awakenings.yaml`) Yankı'nın sözleri tırnaklı ve büyük harfle yazılır; #101'deki küçük harf/tırnaksız kuralı bunlara uygulanmaz. Üslup ve QA araçları bunları sorun saymaz | Kullanıcı kararı: kasıtlı (ilk temasta ses henüz "ses"tir; uyanış anları yüksek sesle söylenir). | — |
+
 ## Arayüz sadeleştirme — 2026-11-07
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |
