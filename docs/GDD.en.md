@@ -23,7 +23,7 @@ Ascension Protocol is a single-player, fully text-based LitRPG for Android in wh
 2. **Your build grows out of how you play.** You never pick a class from a menu. The System watches how you fight and what you choose, then makes you an offer.
 3. **Numbers must be visible and satisfying.** Level-ups, skill evolutions, and new titles are the genre's real payoff; each gets its own on-screen moment.
 4. **The world turns without you.** NPCs and factions pursue their own goals. If you don't save a town, that town can fall.
-5. **Hand-written skeleton, dynamic details.** Main story beats are authored; the event engine and an optional AI narrator fill in everything between them.
+5. **Hand-written skeleton, dynamic details.** Main story beats are authored; the event engine, the Story Director, and seeds fill in everything between them; all text comes from pre-written content.
 
 **Target:** 15–25 hours per playthrough, 8 endings + 1 secret ending, at least 3 distinct build paths, full English and Turkish support, Android phones and tablets.
 
@@ -240,7 +240,7 @@ The story isn't a fixed branching tree; it is made of events that run on a singl
 
 &#91;embedded content: story engine loop · 8 parts\]
 
-NPC agendas and ripening seeds write into the World State every day; the Director decides only by reading that state, and the narrator only writes the text.
+NPC agendas and ripening seeds write into the World State every day; the Director decides only by reading that state; every line the player reads comes from pre-written content.
 
 ### World State (single source of truth)
 
@@ -275,15 +275,6 @@ Score = Weight \cdot Tension_{fit} \cdot Freshness \cdot Personal_{bond} \cdot P
 - **Personal bond:** events featuring NPCs the player is close to get a boost, so the story orbits the people the player cares about.
 - **Main arc priority:** required story beats always win when their time comes.
 
-### AI narrator (optional, hybrid)
-
-The game runs in two modes:
-
-- **Classic mode:** all text comes from hand-written templates; works fully offline.
-- **Narrator mode:** the Claude API (through a server proxy) takes the event template + a World State summary + relevant NPC memories and writes the scene in rich prose, generates in-character NPC dialogue, and interprets free-text actions ("I climb the wall and get behind the boss").
-
-**Golden rule:** the AI can never change the World State directly. It only proposes engine-approved actions as structured JSON; the engine applies the rules and dice itself. That keeps the AI from derailing the story or handing the player free power.
-
 ## Dynamic characters
 
 NPCs aren't scripted puppets; they are agents with their own goals, fears, and memories. Whatever the player does, every NPC advances their own agenda one step per in-game day. Death, betrayal, and faction switches are permanent.
@@ -294,7 +285,7 @@ NPCs aren't scripted puppets; they are agents with their own goals, fears, and m
 - **Values:** where they stand on the morality axes. The player's actions are judged against these: a high-Conscience NPC who sees you execute a prisoner loses trust; a high-Ambition NPC respects it.
 - **Relationship axes** (−100…+100): Trust, Respect, Fear, Devotion. Four axes instead of one "friendship" meter create layered states like "scared of you, but respects you."
 - **Goals:** a prioritized list ("find my sister," "take over the Guild"). When a goal is met or becomes impossible, a new one is picked.
-- **Memory:** a log of key events involving the player, each with an emotional weight. Small moments fade; big ones (saving a life, betrayal) stick. Dialogue and the AI narrator draw on this memory.
+- **Memory:** a log of key events involving the player, each with an emotional weight. Small moments fade; big ones (saving a life, betrayal) stick. Dialogue and event conditions draw on this memory.
 - **Their own growth:** NPCs level up, learn skills, and evolve grades too. Neglect an NPC and they get stronger some other way.
 
 ### Threshold events
@@ -381,7 +372,6 @@ The game is built for one-handed play in portrait on an Android phone and should
 │ [ Flame Arrow at the skylight  ] │
 │ [ PER 25 · Cut the anchor line ] │
 │ [ Stay quiet. Use Devon as bait] │
-│ [ ✎ Write your own action…     ] │
 ├──────────────────────────────────┤
 │ Story  Status  Skills  Bag     ⋯ │
 └──────────────────────────────────┘
@@ -389,7 +379,7 @@ The game is built for one-handed play in portrait on an Android phone and should
 
 **System notification types:** level-up, skill gained/evolved, title, quest, warning, hidden-condition hint, and Echo's "corrupted" notifications (glitched text, scrambled letters). Rarity colors: gray, green, blue, purple, orange, red, gold. Big moments get a short haptic buzz and an optional sound effect.
 
-**Navigation.** A bottom navigation bar: Story · Status (stats, grade, titles, Essence) · Skills · Bag (inventory, gear) · More (map, Daily Quest, relationships, quests, saves, settings). In combat, the option list becomes an action grid (Attack, Skill, Defend, Analyze, Environment, Talk, Flee) with target selection. Long-press a skill or enemy to open its detail card. The free-text box only appears in Narrator mode.
+**Navigation.** A bottom navigation bar: Story · Status (stats, grade, titles, Essence) · Skills · Bag (inventory, gear) · More (map, Daily Quest, relationships, quests, saves, settings). In combat, the option list becomes an action grid (Attack, Skill, Defend, Analyze, Environment, Talk, Flee) with target selection. Long-press a skill or enemy to open its detail card.
 
 **Pacing and accessibility.** The typewriter effect can be toggled; tapping the screen finishes the line instantly. Level-ups and evolutions get a full-screen card and a short animation. Long fights have an "auto-turn" option. Font size, light/dark theme, high contrast, and TalkBack (screen reader) are supported.
 
@@ -403,7 +393,6 @@ The game is built for one-handed play in portrait on an Android phone and should
 - Content text never hard-codes names; it uses tokens (`{npc:deniz_arman}`), so the same event says "Deniz" in Turkish and "Devon" in English.
 - English copy reads like native genre fiction; System notifications keep the bracketed LitRPG style ("\[Skill evolved: Shadow Step → Void Step\]").
 - Helpers handle grammar: Turkish suffixes by vowel harmony; English a/an, plurals, and pronouns.
-- In Narrator mode, Claude writes in the selected language using that language's names.
 
 **Localization reference (TR → EN, North America)**
 
@@ -443,7 +432,7 @@ yukselis-protokolu/
 ├── docs/GDD.en.md             # this document (source of truth for English names and terms)
 ├── engine/                    # pure Kotlin module, no Android dependency
 │   └── src/main/kotlin/…/     # core/ (state, rng, clock, save) · system/ · combat/
-│                              # story/ · npc/ · narrator/ · i18n/
+│                              # story/ · npc/ · i18n/
 ├── app/                       # Android app (Jetpack Compose)
 │   └── src/main/
 │       ├── kotlin/…/ui/       # story/ status/ skills/ inventory/ combat/ settings/ + ViewModels
@@ -451,8 +440,7 @@ yukselis-protokolu/
 │       └── res/values-tr/     # strings.xml (Turkish)
 ├── content/                   # events/ npcs/ skills/ classes/ titles/ enemies/ items/ regions/
 │                              # (every text field tr + en; validated and copied to assets at build)
-├── tools/simulator/           # automated playthrough and balance simulator (JVM)
-└── proxy/                     # optional: Claude API proxy server
+└── tools/simulator/           # automated playthrough and balance simulator (JVM)
 ```
 
 **Sample event file**
@@ -515,7 +503,6 @@ yay_dugumleri: [deniz_ilk_kavga, deniz_kardes_ipucu, deniz_yukselenler_teklifi, 
 - The World State is a single immutable data class; events change it only through effect functions. The UI observes it through a ViewModel as a StateFlow.
 - The condition language (`on_kosullar`, `kosul`) is a small, safe DSL; no script execution.
 - Content text never names people; it uses tokens: `{npc:deniz_arman}`, `{yer:harabe_carsi}`, and `{npc:deniz_arman|e}` for Turkish suffixes ("Deniz'e" in Turkish, "Devon" in English).
-- The AI layer sits behind an interface (`Narrator`): `TemplateNarrator` is the offline default. `ClaudeNarrator` never ships an API key in the app; it calls a small proxy server. Responses are schema-validated and fall back to templates if invalid or offline.
 - A `validateContent` Gradle task checks every YAML file before build: undefined flags, unreachable events, broken references, undefined name tokens, missing or empty translations.
 
 ## Development roadmap and Claude Code prompt
@@ -550,14 +537,13 @@ TECHNICAL RULES
 - At the end of every phase: ./gradlew test and ./gradlew assembleDebug pass, the app launches on the emulator, update CLAUDE.md (architecture, commands, rules), make a meaningful git commit, and tell me 5 things to test on my phone.
 
 PHASES
-1. Core: Gradle project (engine + app), CLAUDE.md, World State model, RNG, game clock (day/act), save/load (JSON in app storage, 3 slots + auto-save, save on background, Android Auto Backup, Ironman Mode), i18n foundation (strings.xml, {tr, en} content, name tokens, grammar helpers, language picker), Compose skeleton: Story screen (flowing text, typewriter effect, tap to finish, option buttons, free-action box), System notification cards with rarity colors, bottom navigation (Story, Status, Skills, Bag, More), light/dark theme.
+1. Core: Gradle project (engine + app), CLAUDE.md, World State model, RNG, game clock (day/act), save/load (JSON in app storage, 3 slots + auto-save, save on background, Android Auto Backup, Ironman Mode), i18n foundation (strings.xml, {tr, en} content, name tokens, grammar helpers, language picker), Compose skeleton: Story screen (flowing text, typewriter effect, tap to finish, option buttons), System notification cards with rarity colors, bottom navigation (Story, Status, Skills, Bag, More), light/dark theme.
 2. System mechanics: 8 stats and derived values, XP/level formulas, F→S grades and Evolution Quests, hidden Affinity vector, Level 10 class offer (2 affinities + 1 hidden class), Profession tree, skills (rarity, use-based leveling, branching evolution, fusion, cursed skills), titles and "First" titles, Essence and Path, Daily Quest and penalty. Status and Skills screens; full-screen card, animation, and haptics for level-ups and evolutions.
 3. Combat: turn flow, the GDD's initiative/hit/damage/crit formulas, grade-gap multiplier, status effects, Analyze/Environment/Talk/Flee actions, enemy behavior patterns, boss phases, escaped enemies returning, Second Chance. Combat screen: action grid, target selection, long-press detail cards.
 4. Story engine: event loader, condition DSL, gated options (like [PER 25]), effects, seed queue, Story Director scoring (tension curve, freshness, personal bond, main-arc priority), faction reputation and faction relationship matrix, 3 morality axes, region states and gate breaks, validateContent Gradle task (undefined flags, unreachable events, broken references, undefined name tokens, missing or empty translations).
 5. NPC system: personality, values, 4 relationship axes (Trust, Respect, Fear, Devotion), fading memory, goals and daily agenda simulation, the GDD's threshold events (betrayal, personal quest, rivalry, departure), NPC leveling, permanent death. Relationships screen.
 6. Vertical slice, Act 1 content in both languages: the full Tutorial Layer (Days 0–30). At least 40 events, the first arc beats for Devon, Echo, and Ash, 15 enemies, 1 boss, 30 skills, 8 base + 4 hidden classes, 15 titles. The game must be playable start to finish on a phone in both languages.
 7. Acts 2–4 and endings: remaining factions, character arcs, the Spire, the multiverse, 8 endings + the secret Loop ending, ending screen and epilogue cards (every NPC's fate, factions, the 5 most important choices).
-8. AI narrator: a Narrator interface in engine, an offline TemplateNarrator default, and a ClaudeNarrator. Never ship the API key in the app: write a small proxy server in proxy/ that forwards requests to the Claude API, and have the app call it; the address and model name come from settings. Structured JSON responses, schema validation, template fallback on error or offline, mapping free-text actions onto allowed actions. The narrator writes in the selected language with that language's names. The AI can never change the World State directly.
 9. Balance and release prep: in tools/simulator, write a JVM tool that uses the engine module to simulate 1,000 playthroughs with random and heuristic strategies; report the ending distribution, level curve, and death rates, and fix imbalances. Then prepare a signed release build (AAB), app icon, and Google Play store listings (EN-US and TR).
 
 NOW: Read docs/GDD.md and docs/GDD.en.md end to end. First produce a plan for the full architecture and all 9 phases and get my approval. After approval, implement Phase 1 only and stop.

@@ -99,9 +99,6 @@ fun MoreScreen(
         ToggleRow(stringResource(R.string.haptics), null, settings.haptics, enabled = true) { on ->
             onSettings { it.copy(haptics = on) }
         }
-        ToggleRow(stringResource(R.string.narrator_mode), stringResource(R.string.narrator_mode_desc), settings.narratorMode, enabled = false) { on ->
-            onSettings { it.copy(narratorMode = on) }
-        }
 
         Spacer(Modifier.padding(top = 16.dp))
         OutlinedButton(onClick = onBackToTitle, modifier = Modifier.fillMaxWidth()) {

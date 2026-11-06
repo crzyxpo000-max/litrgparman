@@ -21,7 +21,7 @@ Yükseliş Protokolü, Dünya'ya aniden inen bir "Sistem"in insanlığı seviye,
 2. **Build, oyuncunun davranışından doğar.** Sınıf menüden seçilmez; Sistem oyuncunun nasıl savaştığını ve neyi seçtiğini izler, teklifini buna göre yapar.
 3. **Sayılar görünür ve tatmin edici olmalı.** Seviye atlama, yetenek evrimi ve unvan anları türün asıl ödülüdür; her birinin kendine ait bir ekran anı vardır.
 4. **Dünya oyuncu olmadan da döner.** NPC'ler ve fraksiyonlar kendi hedeflerini izler; oyuncu bir kasabayı kurtarmazsa o kasaba düşebilir.
-5. **İskelet el yazımı, ayrıntılar dinamik.** Ana hikaye düğümleri tasarlanır; aralarını olay motoru ve isteğe bağlı yapay zeka anlatıcısı doldurur.
+5. **İskelet el yazımı, ayrıntılar dinamik.** Ana hikaye düğümleri tasarlanır; aralarını olay motoru, Hikaye Yönetmeni ve tohumlar doldurur; tüm metin önceden yazılmış içerikten gelir.
 
 **Hedef:** tek oynanış 15–25 saat, 8 son + 1 gizli son, en az 3 belirgin build yolu, Türkçe ve İngilizce tam dil desteği, platform Android (telefon ve tablet).
 
@@ -238,7 +238,7 @@ Hikaye sabit bir dal ağacı değildir; tek bir **Dünya Durumu** üzerinde çal
 
 &#91;embedded content: hikaye motoru döngüsü · 8 parça\]
 
-NPC gündemleri ve olgunlaşan tohumlar her gün Dünya Durumu'na yazılır; Yönetmen yalnızca bu durumu okuyarak karar verir, anlatıcı ise sadece metni yazar.
+NPC gündemleri ve olgunlaşan tohumlar her gün Dünya Durumu'na yazılır; Yönetmen yalnızca bu durumu okuyarak karar verir; oyuncunun okuduğu her metin önceden yazılmış içerikten gelir.
 
 ### Dünya Durumu (tek doğruluk kaynağı)
 
@@ -273,15 +273,6 @@ Puan = Agirlik \cdot Gerilim_{uyumu} \cdot Tazelik \cdot Kisisel_{bag} \cdot Onc
 - **Kişisel bağ:** oyuncunun ilişkisi yüksek NPC'leri içeren olaylar öne çıkar; böylece hikaye oyuncunun önemsediği kişiler etrafında döner.
 - **Ana yay önceliği:** zorunlu hikaye düğümleri zamanı gelince her zaman kazanır.
 
-### Yapay zeka anlatıcısı (isteğe bağlı, hibrit)
-
-Oyun iki modda çalışır:
-
-- **Klasik mod:** tüm metin el yazımı şablonlardan gelir; çevrimdışı çalışır.
-- **Anlatıcı modu:** Claude API (bir sunucu vekili üzerinden), olayın şablonunu + dünya durumu özetini + ilgili NPC hafızalarını alıp sahneyi zengin düzyazıyla yazar, NPC diyaloglarını kişiliğe uygun üretir ve serbest metin eylemleri ("duvara tırmanıp bossun arkasına geçiyorum") yorumlar.
-
-**Altın kural:** yapay zeka dünya durumunu asla doğrudan değiştiremez. Yalnızca motorun izin verdiği eylemleri yapılandırılmış JSON olarak önerir; motor kuralları ve zar atışlarını kendisi uygular. Bu, yapay zekanın hikayeyi bozmasını ya da oyuncuya bedava güç vermesini engeller.
-
 ## Dinamik karakterler
 
 NPC'ler senaryo kuklası değil, kendi hedefleri, korkuları ve hafızası olan ajanlardır. Oyuncu ne yaparsa yapsın her NPC oyun günü başına bir adım kendi gündemini ilerletir; ölüm, ihanet ve fraksiyon değiştirme tamamen kalıcıdır.
@@ -292,7 +283,7 @@ NPC'ler senaryo kuklası değil, kendi hedefleri, korkuları ve hafızası olan 
 - **Değerler:** ahlak eksenlerinde nerede durduğu. Oyuncunun eylemleri bu değerlere göre yorumlanır: Vicdanı yüksek bir NPC, oyuncunun bir esiri öldürdüğünü görürse güveni düşer; hırsı yüksek biri aynı şeye saygı duyar.
 - **İlişki eksenleri** (−100…+100): Güven, Saygı, Korku, Bağlılık. Tek bir "dostluk" puanı yerine dört eksen, "senden korkuyor ama sana saygı duyuyor" gibi zengin durumlar üretir.
 - **Hedefler:** öncelikli bir liste ("kız kardeşini bul", "Lonca'nın liderliğini al"). Hedef tamamlanınca ya da imkansızlaşınca yenisi seçilir.
-- **Hafıza:** oyuncuyla ilgili önemli olayların listesi, her biri bir duygusal ağırlıkla. Küçük olaylar zamanla solar, büyükler (hayat kurtarmak, ihanet) kalıcıdır. Diyaloglar ve yapay zeka anlatıcısı bu hafızadan beslenir.
+- **Hafıza:** oyuncuyla ilgili önemli olayların listesi, her biri bir duygusal ağırlıkla. Küçük olaylar zamanla solar, büyükler (hayat kurtarmak, ihanet) kalıcıdır. Diyaloglar ve olay koşulları bu hafızadan beslenir.
 - **Kendi gelişimi:** NPC'ler de seviye atlar, yetenek kazanır, kademe evrimi geçirir. Oyuncu bir NPC'yi ihmal ederse o NPC başka bir yoldan güçlenir.
 
 ### Eşik olayları
@@ -378,7 +369,6 @@ Oyun Android telefonda dikey ekranda, tek elle oynanacak şekilde tasarlanır ve
 │ [ Alev Oku ile tavanı hedefle  ] │
 │ [ ALG 25 · Taşıyıcı ipi kes    ] │
 │ [ Sessiz kal, Deniz'i yem yap  ] │
-│ [ ✎ Kendi eylemini yaz…        ] │
 ├──────────────────────────────────┤
 │ Hikaye  Durum  Yetenek  Çanta  ⋯ │
 └──────────────────────────────────┘
@@ -386,7 +376,7 @@ Oyun Android telefonda dikey ekranda, tek elle oynanacak şekilde tasarlanır ve
 
 **Sistem bildirim türleri:** seviye atlama, yetenek kazanımı/evrimi, unvan, görev, uyarı, gizli koşul ipucu ve Yankı'nın "bozuk" bildirimleri (glitchli yazı, karışık harfler). Nadirlik renkleri: gri, yeşil, mavi, mor, turuncu, kırmızı, altın. Önemli anlarda kısa titreşim ve isteğe bağlı ses efekti çalar.
 
-**Gezinme.** Terminal komutları yerine alt gezinme çubuğu kullanılır: Hikaye · Durum (statlar, kademe, unvanlar, Öz) · Yetenekler · Çanta (envanter, ekipman) · Daha fazla (harita, Günlük Görev, ilişkiler, görevler, kayıt, ayarlar). Savaşta seçenek listesinin yerini eylem ızgarası (Saldır, Yetenek, Savun, Analiz, Ortam, Konuş, Kaç) ve hedef seçimi alır. Bir yeteneğe ya da düşmana uzun basmak ayrıntı kartını açar. Serbest eylem kutusu yalnızca anlatıcı modunda görünür.
+**Gezinme.** Terminal komutları yerine alt gezinme çubuğu kullanılır: Hikaye · Durum (statlar, kademe, unvanlar, Öz) · Yetenekler · Çanta (envanter, ekipman) · Daha fazla (harita, Günlük Görev, ilişkiler, görevler, kayıt, ayarlar). Savaşta seçenek listesinin yerini eylem ızgarası (Saldır, Yetenek, Savun, Analiz, Ortam, Konuş, Kaç) ve hedef seçimi alır. Bir yeteneğe ya da düşmana uzun basmak ayrıntı kartını açar.
 
 **Hız, ritim ve erişilebilirlik.** Daktilo efekti açılıp kapanabilir; ekrana dokunmak metni anında tamamlar. Seviye atlama ve evrim anlarında tam ekran kart ve kısa animasyon kullanılır. Uzun savaşlar için "otomatik tur" vardır. Yazı boyutu, açık/koyu tema, yüksek kontrast ve TalkBack (ekran okuyucu) desteklenir.
 
@@ -399,7 +389,6 @@ Oyun Android telefonda dikey ekranda, tek elle oynanacak şekilde tasarlanır ve
 - İçerik metinleri isim yazmaz, belirteç kullanır (`{npc:deniz_arman}`); böylece aynı olay Türkçede "Deniz", İngilizcede "Devon" der.
 - İngilizce metin türün doğal İngilizcesiyle yazılır; Sistem bildirimleri köşeli parantezli LitRPG üslubunu korur ("\[Skill evolved: Shadow Step → Void Step\]").
 - Türkçe ekler (Deniz'e, Kaya'nın, Yankı'yla) ünlü uyumuna göre eki seçen bir yardımcıyla üretilir; İngilizce için a/an ve çoğul yardımcıları vardır.
-- Anlatıcı modunda Claude seçili dilde ve o dilin isimleriyle yazar; oyuncu serbest eylemini iki dilden birinde girebilir.
 
 **Yerelleştirme eşleme tablosu (TR → EN, Kuzey Amerika).** Tam liste İngilizce sekmededir; ana isimler:
 
@@ -436,7 +425,7 @@ yukselis-protokolu/
 ├── docs/GDD.en.md             # İngilizce (Kuzey Amerika) tasarım dokümanı
 ├── engine/                    # saf Kotlin modülü, Android bağımlılığı yok
 │   └── src/main/kotlin/…/     # core/ (state, rng, clock, save) · system/ · combat/
-│                              # story/ · npc/ · narrator/ · i18n/
+│                              # story/ · npc/ · i18n/
 ├── app/                       # Android uygulaması (Jetpack Compose)
 │   └── src/main/
 │       ├── kotlin/…/ui/       # story/ status/ skills/ inventory/ combat/ settings/ + ViewModel'ler
@@ -444,8 +433,7 @@ yukselis-protokolu/
 │       └── res/values-tr/     # strings.xml (Türkçe)
 ├── content/                   # events/ npcs/ skills/ classes/ titles/ enemies/ items/ regions/
 │                              # (her metin alanı tr + en; derlemede doğrulanıp assets'e kopyalanır)
-├── tools/simulator/           # otomatik oynanış ve denge simülatörü (JVM)
-└── proxy/                     # isteğe bağlı: Claude API vekil sunucusu
+└── tools/simulator/           # otomatik oynanış ve denge simülatörü (JVM)
 ```
 
 **Örnek olay dosyası**
@@ -506,7 +494,6 @@ yay_dugumleri: [deniz_ilk_kavga, deniz_kardes_ipucu, deniz_yukselenler_teklifi, 
 - Dünya durumu tek, değişmez bir veri sınıfıdır; olaylar onu yalnızca etki fonksiyonlarıyla değiştirir. Arayüz bu durumu bir ViewModel üzerinden StateFlow olarak dinler.
 - Koşul dili (`on_kosullar`, `kosul`) küçük, güvenli bir DSL'dir; betik çalıştırma yoktur.
 - İçerik metinleri isim yazmaz, belirteç kullanır: `{npc:deniz_arman}`, `{yer:harabe_carsi}`, Türkçe ek için `{npc:deniz_arman|e}` → "Deniz'e" (İngilizcede "Devon").
-- Yapay zeka katmanı bir arayüzün arkasındadır (`Narrator`): `TemplateNarrator` varsayılan ve çevrimdışıdır. `ClaudeNarrator` API anahtarını uygulamaya gömmez; küçük bir vekil sunucu üzerinden çağırır. Yanıt şeması doğrulanır, geçersizse ya da internet yoksa şablona düşer.
 - `validateContent` Gradle görevi derlemeden önce tüm YAML dosyalarını kontrol eder: tanımsız bayrak, ulaşılamayan olay, bozuk referans, tanımsız isim belirteci, eksik ya da boş çeviri.
 
 **Çok dil mimarisi.** Arayüz metinleri Android kaynaklarındadır (`values/strings.xml`, `values-tr/strings.xml`); içerikte oyuncuya görünen her alan bir `{tr, en}` sözlüğüdür. `t()` yardımcısı seçili dildeki metni döndürür, eksik çeviride diğer dile düşer ve uyarı yazar. Dünya durumu, kayıt, koşullar ve olay mantığı dilden tamamen bağımsızdır; stat ve kavram kimlikleri koddaki İngilizce adlardır (`str`, `agi`, `essence`).
@@ -542,14 +529,13 @@ TEKNİK KURALLAR
 - Her aşamanın sonunda: ./gradlew test ve ./gradlew assembleDebug geçsin, uygulama emülatörde açılsın, CLAUDE.md'yi güncelle (mimari, komutlar, kurallar), anlamlı bir git commit at ve telefonda neyi test etmem gerektiğini 5 maddede söyle.
 
 AŞAMALAR
-1. Çekirdek: Gradle projesi (engine + app), CLAUDE.md, dünya durumu modeli, RNG, oyun saati (gün/perde), kayıt/yükleme (uygulama depolamasında JSON, 3 slot + otomatik kayıt, arka plana alınınca kayıt, Android otomatik yedekleme, Demir Mod), i18n altyapısı (strings.xml, {tr, en} içerik, isim belirteçleri, ek yardımcıları, dil seçimi), Compose iskeleti: Hikaye ekranı (akan metin, daktilo efekti, dokununca tamamlama, seçenek butonları, serbest eylem kutusu), Sistem bildirim kartları ve nadirlik renkleri, alt gezinme (Hikaye, Durum, Yetenekler, Çanta, Daha fazla), açık/koyu tema.
+1. Çekirdek: Gradle projesi (engine + app), CLAUDE.md, dünya durumu modeli, RNG, oyun saati (gün/perde), kayıt/yükleme (uygulama depolamasında JSON, 3 slot + otomatik kayıt, arka plana alınınca kayıt, Android otomatik yedekleme, Demir Mod), i18n altyapısı (strings.xml, {tr, en} içerik, isim belirteçleri, ek yardımcıları, dil seçimi), Compose iskeleti: Hikaye ekranı (akan metin, daktilo efekti, dokununca tamamlama, seçenek butonları), Sistem bildirim kartları ve nadirlik renkleri, alt gezinme (Hikaye, Durum, Yetenekler, Çanta, Daha fazla), açık/koyu tema.
 2. Sistem mekanikleri: 8 stat ve türetilmiş değerler, XP/seviye formülleri, F→S kademeleri ve Evrim Görevleri, gizli Eğilim vektörü, Seviye 10 sınıf teklifi (2 eğilim + 1 gizli sınıf), Meslek ağacı, yetenekler (nadirlik, kullanımla seviye, dallı evrim, kaynaştırma, ceza yetenekleri), unvanlar ve "İlk" unvanları, Öz ve Yol, Günlük Görev ve ceza. Durum ve Yetenekler ekranları; seviye atlama ve evrim için tam ekran kart, animasyon ve titreşim.
 3. Savaş: tur akışı, GDD'deki inisiyatif/isabet/hasar/kritik formülleri, kademe farkı çarpanı, durum etkileri, Analiz/Ortam/Konuş/Kaç eylemleri, düşman davranış kalıpları, boss fazları, kaçan düşmanların geri dönmesi, İkinci Şans. Savaş ekranı: eylem ızgarası, hedef seçimi, uzun basınca ayrıntı kartı.
 4. Hikaye motoru: olay yükleyici, koşul DSL'i, koşullu seçenekler ([ALG 25] gibi), etkiler, tohum kuyruğu, Hikaye Yönetmeni puanlaması (gerilim eğrisi, tazelik, kişisel bağ, ana yay önceliği), fraksiyon itibarı ve fraksiyonlar arası ilişki matrisi, 3 ahlak ekseni, bölge durumları ve kapı taşmaları, validateContent Gradle görevi (tanımsız bayrak, ulaşılamayan olay, bozuk referans, tanımsız isim belirteci, eksik ya da boş çeviri).
 5. NPC sistemi: kişilik, değerler, 4 ilişki ekseni (Güven, Saygı, Korku, Bağlılık), solan hafıza, hedefler ve günlük gündem simülasyonu, GDD'deki eşik olayları (ihanet, kişisel görev, rakiplik, ayrılma), NPC seviye atlama, kalıcı ölüm. İlişkiler ekranı.
 6. Dikey dilim, Perde 1 içeriği iki dilde: Öğretici Katman'ın tamamı (Gün 0–30). En az 40 olay, Deniz, Yankı ve Aras'ın ilk yay düğümleri, 15 düşman, 1 boss, 30 yetenek, 8 temel + 4 gizli sınıf, 15 unvan. Oyun telefonda baştan sona, iki dilde de oynanabilir olmalı.
 7. Perde 2–4 ve sonlar: kalan fraksiyonlar, karakter yayları, Kule, çok-evren, 8 son + gizli Döngü sonu, son ekranı ve epilog kartları (her NPC'nin akıbeti, fraksiyonlar, en kritik 5 seçim).
-8. Yapay zeka anlatıcısı: engine içinde Narrator arayüzü, varsayılan çevrimdışı TemplateNarrator ve ClaudeNarrator. API anahtarını uygulamaya asla gömme: proxy/ klasöründe Claude API'ye istek ileten küçük bir vekil sunucu yaz, uygulama ona bağlansın; adres ve model adı ayarlardan gelsin. Yapılandırılmış JSON yanıt, şema doğrulaması, hata ya da çevrimdışı durumda şablona düşme, serbest metin eylemlerinin izinli eylemlere eşlenmesi. Anlatıcı seçili dilde ve o dilin isimleriyle yazsın. Yapay zeka dünya durumunu asla doğrudan değiştiremez.
 9. Denge ve yayın hazırlığı: tools/simulator içinde, engine modülünü kullanarak rastgele ve sezgisel stratejilerle 1000 oynanışı simüle eden bir JVM aracı yaz; son dağılımını, seviye eğrisini ve ölüm oranlarını raporla, dengesizlikleri düzelt. Ardından imzalı release derlemesi (AAB), uygulama simgesi ve Google Play mağaza metinlerini (TR ve EN-NA) hazırla.
 
 ŞİMDİ: docs/GDD.md ve docs/GDD.en.md'yi baştan sona oku. Önce tüm mimarinin ve 9 aşamanın planını çıkar, bana onaylat. Onaydan sonra yalnızca Aşama 1'i uygula ve dur.

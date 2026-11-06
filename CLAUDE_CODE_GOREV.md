@@ -69,7 +69,6 @@ Yalnızca şu durumlarda dur ve kullanıcıya sor. Bunların dışında hiçbir 
 
 - Uygulama imzalama anahtarı (keystore) oluşturma ya da parolaları.
 - Google Play Console'a yükleme ya da yayınlama.
-- Claude API vekil sunucusunu internette bir yere kurma (deploy) ya da API anahtarı.
 - Para gerektiren herhangi bir hizmet.
 - Geri alınamaz git işlemleri (force push, geçmişi yeniden yazma, dal silme).
 - GDD'deki ana hikayeyi ya da bir sonu kökten değiştiren bir karar.
@@ -229,15 +228,9 @@ Her aşamanın sonunda `scripts/check.sh` geçer, `CLAUDE.md` ile `PROGRESS.md` 
 - [ ] Hacimden önce dallanma kapsamı gelir: her son, en az bir başsız oynanış stratejisiyle ulaşılabilir olmalı. Bunu kanıtlayan test yazılır.
 - [ ] **OP MC:** her kademe (E→S) dört evreli döngüyü izler; Perde 3–4'te Ordu içeriği; sonlar oyuncunun ne tür bir OP MC olduğunu (koruyucu, tiran, tanrı, kurtarıcı) ahlak eksenlerinden okur.
 
-### Aşama 8 — Yapay zeka anlatıcısı
-- [ ] `engine` içinde `Narrator` arayüzü; varsayılan çevrimdışı `TemplateNarrator`.
-- [ ] `ClaudeNarrator`: istek olay şablonu, dünya durumu özeti ve ilgili NPC hafızalarını içerir; yanıt yapılandırılmış JSON olarak gelir ve şemayla doğrulanır. Hata, zaman aşımı ya da çevrimdışı durumda şablona düşülür.
-- [ ] Serbest metin eylemi motorun izin verdiği eylemlere eşlenir. Yapay zeka dünya durumunu asla doğrudan değiştiremez.
-- [ ] Anlatıcı seçili dilde ve o dilin isimleriyle yazar.
-- [ ] **Vekil sunucu** (`proxy/`): küçük bir JVM sunucusu (ör. Ktor). API anahtarı ortam değişkeninden okunur, model adı yapılandırılabilir, basit hız sınırı vardır. **API anahtarı asla uygulamaya girmez.**
-- [ ] Uygulama ayarlarında vekil sunucu adresi ve anlatıcı modu düğmesi.
-- [ ] Sahte (fake) anlatıcıyla testler; gerçek API çağrısı testlerde yapılmaz.
-- [ ] `proxy/README.md`: yerelde çalıştırma ve bir bulut hizmetine kurma adımları. Kurulumun kendisi bir durma noktasıdır (bölüm 5).
+### Aşama 8 — Kaldırıldı (yapay zeka anlatıcı oyundan çıkarıldı)
+
+Oyun tamamen çevrimdışı çalışır; tüm metinler önceden yazılmış içerikten gelir (DECISIONS #97).
 
 ### Aşama 9 — Denge ve yayın hazırlığı
 - [ ] `tools/simulator`: engine modülünü kullanarak rastgele ve sezgisel stratejilerle 1000 oynanış simüle eder. Son dağılımı, seviye eğrisi ve ölüm oranları `docs/BALANCE.md`'ye raporlanır, dengesizlikler düzeltilir. Hiçbir son %1'in altında ya da %40'ın üstünde kalmamalı (gizli son hariç).
@@ -245,7 +238,7 @@ Her aşamanın sonunda `scripts/check.sh` geçer, `CLAUDE.md` ile `PROGRESS.md` 
 - [ ] Release derlemesi: R8 küçültme açık ve kuralları yazılmış. İmzalama `keystore.properties` dosyasından okunur (dosya git dışında tutulur). Anahtarı oluşturmak bir durma noktasıdır.
 - [ ] Son uygulama simgesi (uyarlanabilir, vektör) ve monokrom sürümü.
 - [ ] Mağaza metinleri: `fastlane/metadata/android/tr-TR` ve `en-US` (başlık, kısa ve uzun açıklama, yenilikler).
-- [ ] Gizlilik politikası taslağı (`docs/PRIVACY.md`): anlatıcı modunda hangi metnin sunucuya gittiği açıkça yazılır.
+- [ ] Gizlilik politikası taslağı (`docs/PRIVACY.md`): Oyun hiçbir kişisel veriyi cihaz dışına göndermez; kayıtlar yalnızca cihazda ve Android otomatik yedeklemede tutulur.
 - [ ] `./gradlew bundleRelease` imzasız olarak da çalışır; imzalı AAB, anahtar sağlanınca üretilir.
 - [ ] **OP MC:**
   - [ ] Simülatör ayrıca raporlar: perde başına oyuncu/NPC güç farkı, oyun süresinin "hakimiyet" evresindeki payı (hedef %60+), zaman içindeki Dikkat düzeyi, son dağılımı.
@@ -258,6 +251,6 @@ Tüm aşamalar bittiğinde (ya da bir durma noktasında beklerken) kullanıcıya
 - Hangi aşamalar tamam, hangileri bekliyor ve neden.
 - `scripts/check.sh` sonucu ve test sayısı.
 - Telefonda denemesi gereken 5 şey.
-- Kullanıcının yapması gerekenler: keystore, Play Console, vekil sunucu kurulumu.
+- Kullanıcının yapması gerekenler: keystore, Play Console.
 
 Sonra `docs/PROGRESS.md`'yi "Tamam" olarak işaretle ve son commit'i at.

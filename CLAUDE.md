@@ -14,6 +14,7 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 - Aşama 3: savaş (`combat/`, 20 düşman, savaş ekranı).
 - **Aşama 0, 1 ve 2:** Motor, kayıt (v2), i18n, içerik doğrulayıcı, Compose ekranları, prolog demosu;
   Sistem mekanikleri (eğilim, sınıf, kademe/evrim, yetenek, unvan, meslek, Öz, Günlük Görev) ve OP MC çekirdeği.
+- **Yapay zeka anlatıcı yok** (DECISIONS #97): oyun tamamen çevrimdışı; tüm metin önceden yazılmış içerikten gelir. Aşama 8 kaldırıldı.
 - **Tasarımın üst kuralı:** GDD'deki "OP MC tasarımı" bölümü (DECISIONS #19). Kahraman bir anomalidir; Yankı ona bağlıdır.
 - **Tüm geliştirme planı ve kabul kriterleri:** `CLAUDE_CODE_GOREV.md`. Güncel durum: `docs/PROGRESS.md`.
 

@@ -47,7 +47,6 @@ enum class ThemeMode { SYSTEM, LIGHT, DARK, AMOLED }
 data class Settings(
     val typewriter: Boolean = true,
     val haptics: Boolean = true,
-    val narratorMode: Boolean = false,
     val theme: ThemeMode = ThemeMode.SYSTEM,
 )
 
@@ -65,7 +64,6 @@ class SettingsStore(context: Context) {
     fun settings(): Settings = Settings(
         typewriter = prefs.getBoolean(KEY_TYPEWRITER, true),
         haptics = prefs.getBoolean(KEY_HAPTICS, true),
-        narratorMode = prefs.getBoolean(KEY_NARRATOR, false),
         theme = prefs.getString(KEY_THEME, null)
             ?.let { name -> ThemeMode.entries.firstOrNull { it.name == name } } ?: ThemeMode.SYSTEM,
     )
@@ -74,7 +72,8 @@ class SettingsStore(context: Context) {
         prefs.edit()
             .putBoolean(KEY_TYPEWRITER, settings.typewriter)
             .putBoolean(KEY_HAPTICS, settings.haptics)
-            .putBoolean(KEY_NARRATOR, settings.narratorMode)
+            // Kaldırılan yapay zeka anlatıcı ayarının eski kaydı silinir (DECISIONS #97).
+            .remove(LEGACY_NARRATOR)
             .putString(KEY_THEME, settings.theme.name)
             .apply()
     }
@@ -83,7 +82,7 @@ class SettingsStore(context: Context) {
         const val KEY_LANG = "lang"
         const val KEY_TYPEWRITER = "typewriter"
         const val KEY_HAPTICS = "haptics"
-        const val KEY_NARRATOR = "narrator"
+        const val LEGACY_NARRATOR = "narrator"
         const val KEY_THEME = "theme"
     }
 }

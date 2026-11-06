@@ -11,6 +11,10 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - Emülatör: `Medium_Phone_API_36.0` (`emulator -avd Medium_Phone_API_36.0`), adb ile kurulum.
 - OneDrive kilidi yüzünden lint ara sıra "dosya kullanılıyor" der: `./gradlew --stop` ve tekrar.
 
+## Tasarım değişikliği — Yapay zeka anlatıcı kaldırıldı  ✅ (2026-11-06)
+- [x] GDD (TR/EN), görev dosyası (Aşama 8 "Kaldırıldı", durma noktası ve gizlilik maddesi), CLAUDE.md, DECISIONS #97
+- [x] Ayarlardaki anlatıcı düğmesi, `Settings.narratorMode` ve kaydı, ilgili metinler (iki dilde) kaldırıldı; kodda Narrator/proxy yoktu, internet izni yoktu
+
 ## Aşama 5 — NPC sistemi  ✅ (2026-11-06)
 Plan:
 - [x] `npc/` paketi: `NpcDef` (5 kişilik özelliği, değerler, başlangıç ilişkisi, hedefler, eğilim, savaş bloğu, yay düğümleri, eşik olayları, ses satırları), `NpcState` (4 eksen, solan hafıza, hedef ilerlemesi, seviye, fraksiyon, durum, izler)

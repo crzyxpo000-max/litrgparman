@@ -2,6 +2,12 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Tasarım değişikliği — 2026-11-06
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 97 | **Yapay zeka anlatıcı oyundan tamamen çıkarıldı (kullanıcı onaylı).** Narrator/ClaudeNarrator, vekil sunucu, anlatıcı modu düğmesi ve serbest metin eylemi yok; Aşama 8 kaldırıldı (numaralar değişmedi). Hikaye Yönetmeni, olay havuzu ve tohumlar aynen kalır; tüm metinler önceden yazılmış içerikten gelir. Uygulama internet izni istemez | API maliyeti ve internet bağımlılığı; oyun tamamen çevrimdışı çalışacak. | — |
+
 ## Aşama 5 — 2026-11-06
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |
