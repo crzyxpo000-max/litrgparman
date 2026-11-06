@@ -204,7 +204,7 @@ sözcükten fazlasını tek seferde almaz.
 | Parti | Dosyalar | ~Sözcük | Durum |
 | --- | --- | --- | --- |
 | 0 | Doğrulama aracı (`tools/uslup`) | — | **bitti** |
-| 1 | `story/00_prolog`, `events/10_yoldaslar`, `20_orman`, `30_carsi_istasyon`, `40_ana_yay` (Perde 1) | 27.600 | bekliyor |
+| 1 | `story/00_prolog`, `events/10_yoldaslar`, `20_orman`, `30_carsi_istasyon`, `40_ana_yay` (Perde 1) | 27.600 | **bitti** |
 | 2 | `50_perde2_ana`, `56_deniz_yanki_aras` | 23.800 | bekliyor |
 | 3 | `51_siginak_elif`, `52_lonca_kaya`, `53_yukselenler_vahit` | 30.900 | bekliyor |
 | 4 | `54_sessiz_ag_mert`, `55_kadimler_thessar`, `90_esikler`, `95_bildirimler` | 19.500 | bekliyor |
@@ -214,6 +214,14 @@ sözcükten fazlasını tek seferde almaz.
 | 8 | `80_perde4`, `81_sonlar`, `endings.yaml`, `story/90_sistem` | 19.300 | bekliyor |
 | 9 | `npcs/*`, `traits`, `knowledge*`, `ranking`, `army`, `quests*`, `feats*`, `regions`, `factions` | ~6.000 | bekliyor |
 | 10 | `enemies*` (bestiyer dahil), `items*`, `skills`, `classes`, `titles*`, `awakenings*`, `essences`, `professions`, `daily`, `system.yaml` | ~25.000 | bekliyor |
+
+**Parti 1 notu (2026-11-07):** 1.774 `tr` değeri yeniden yazıldı (9 dilim ajanı; dilimler çıktıyı `{satır, tr}` JSON'u
+olarak verdi, birleştirme tek elden yapıldı). Ardından 5 bağımsız okuyucu dosyaların tamamını eski/yeni/EN yan yana
+okudu: 39 bulgu (anlam kayması 13, Türkçe hatası 15, tekrar 9, etiket 2) süzülüp uygulandı. Üslup ölçümü (5 dosya):
+noktalı virgül >1 19→0 · art arda 3 -yor 19→2 · art arda kısa cümle 214→177 · "Bu, " 7→0. Açık kalan noktalar:
+prologda {npc:yanki|in} sözleri tırnaklı ve büyük harfli (63, 66, 98, 100, 102, 172, 267, 300; DECISIONS #101 ile
+çelişiyor, kullanıcıya soruldu); `30_carsi_istasyon` 1643'te TR/EN anlamı özgün metinde ayrışıyor; 3618'in EN'inde
+açılış tırnağı eksik (EN bu işin dışında).
 
 ### 7.3 Parti akışı
 

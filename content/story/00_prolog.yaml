@@ -4,9 +4,9 @@ sahneler:
     yer: "kiyikent_iskele"
     paragraflar:
       - { tr: "Akşam vapuru yine gecikmiş. {npc:deniz_arman} iskelenin korkuluğuna yaslanmış, simidinin son parçasını martılarla paylaşıyor.", en: "The evening ferry is running late again. {npc:deniz_arman} leans on the terminal railing, tossing the last of a soft pretzel to the gulls." }
-      - { tr: "\"Yarın da gecikirse yüzerek giderim,\" diyor. Gülüyorsun; on yıldır aynı şakayı yapıyor ve on yıldır komik.", en: "\"If it's late again tomorrow, I'm swimming,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}. You laugh. Same joke for ten years, and it's still funny." }
-      - { tr: "Sonra martılar susuyor. Körfezin üstünde gökyüzü, biri camı tırnağıyla çizmiş gibi incecik bir çizgiyle yarılıyor.", en: "Then the gulls go quiet. Above the sound, the sky splits along a hairline crack, like someone dragged a fingernail across glass." }
-      - { tr: "Çizgi açılıyor. İçinden mavi, kusursuz kenarlı bir pencere süzülüp tam gözünün önünde duruyor. İskeledeki herkesin önünde birer tane var.", en: "The crack opens. A blue window with perfectly clean edges drifts out and stops right in front of your eyes. Everyone on the pier has one." }
+      - { tr: "\"Yarın da gecikirse yüzerek giderim,\" diyor. Gülüyorsun: on yıldır aynı şaka, on yıldır da tutuyor.", en: "\"If it's late again tomorrow, I'm swimming,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}. You laugh. Same joke for ten years, and it's still funny." }
+      - { tr: "Derken martılar susuyor. Körfezin üstünde gökyüzü, biri camı tırnağıyla çizmiş gibi kıl inceliğinde bir çizgiyle yarılıyor.", en: "Then the gulls go quiet. Above the sound, the sky splits along a hairline crack, like someone dragged a fingernail across glass." }
+      - { tr: "Çizgi aralanıyor; içinden kenarları kusursuz, mavi bir pencere süzülüp tam gözünün önünde duruyor. İskeledeki herkesin önünde de birer tane asılı.", en: "The crack opens. A blue window with perfectly clean edges drifts out and stops right in front of your eyes. Everyone on the pier has one." }
     bildirimler:
       - tur: "sistem"
         baslik: { tr: "Entegrasyon başlatıldı", en: "Integration initiated" }
@@ -21,7 +21,7 @@ sahneler:
           - { tr: "Seni buldum.", en: "Found you." }
     secenekler:
       - id: "el_tut"
-        etiket: { tr: "{npc:deniz_arman|in} elini sıkıca tut", en: "Grab {npc:deniz_arman|pos} hand and hold on" }
+        etiket: { tr: "{npc:deniz_arman|in} elini sıkı sıkı tut", en: "Grab {npc:deniz_arman|pos} hand and hold on" }
         etkiler:
           - bayrak: "deniz_el_tutuldu"
           - iliski: { deniz_arman: { guven: 10, baglilik: 5 } }
@@ -30,13 +30,13 @@ sahneler:
           - ahlak: { merhamet: 3 }
         sonraki: "giris_yanki"
       - id: "kalabaliga_kos"
-        etiket: { tr: "Kalabalığa koş, yaşlılara ve çocuklara yardım et", en: "Run into the crowd and help the elderly and the kids" }
+        etiket: { tr: "Kalabalığa dal, yaşlılara, çocuklara yardım et", en: "Run into the crowd and help the elderly and the kids" }
         etkiler:
           - bayrak: "kalabaliga_yardim"
           - ahlak: { merhamet: 8, insanlik: 5 }
         sonraki: "giris_yanki"
       - id: "pencereyi_oku"
-        etiket: { tr: "Kıpırdama. Pencerenin her satırını oku", en: "Don't move. Read every line of the window" }
+        etiket: { tr: "Kıpırdama, pencereyi satır satır oku", en: "Don't move. Read every line of the window" }
         etkiler:
           - bayrak: "sistem_okundu"
           - egilim: { menzilli: 2 }
@@ -45,28 +45,28 @@ sahneler:
         sonraki: "giris_yanki"
   - id: "giris_yanki"
     paragraflar:
-      - { tr: "Işık seni yutuyor. Bedenin yok, ağırlığın yok; yalnızca milyonlarca insanın aynı anda çektiği bir nefesin sesi var.", en: "The light swallows you. No body, no weight. Just the sound of millions of people drawing the same breath at once." }
-      - { tr: "Sonra o ses kopuyor. Senin pencerenin kenarları titriyor, harfler birbirinin üstüne yığılıyor; bir şey çatlaktan içeri sızıyor.", en: "Then that sound cuts out. The edges of your window shudder, the letters pile up on top of each other, and something seeps in through the crack." }
-      - { tr: "Herkesin penceresi mavi. Seninki bir an için kırmızıya, sonra hiçbir rengin adı olmayan bir şeye dönüyor.", en: "Everybody else's window is blue. Yours flickers red for a second, then turns a color nothing has a name for." }
+      - { tr: "Işık seni yutuyor. Ne bedenin kalıyor ne ağırlığın; milyonlarca insanın aynı anda çektiği tek bir nefesin sesinden başka hiçbir şey yok.", en: "The light swallows you. No body, no weight. Just the sound of millions of people drawing the same breath at once." }
+      - { tr: "Derken o ses kesiliyor. Pencerenin kenarları titreşmeye, harfler birbirinin üstüne yığılmaya başlıyor; çatlaktan içeri bir şey sızıyor.", en: "Then that sound cuts out. The edges of your window shudder, the letters pile up on top of each other, and something seeps in through the crack." }
+      - { tr: "Herkesin penceresi mavi. Seninki bir an kırmızıya çalıyor, ardından adı konmamış bir renge bürünüyor.", en: "Everybody else's window is blue. Yours flickers red for a second, then turns a color nothing has a name for." }
     bildirimler:
       - tur: "yanki"
         baslik: { tr: "[H̷ATA] Paket 0x00 · sahipsiz parça", en: "[E̷RR] Packet 0x00 · orphaned fragment" }
         satirlar:
-          - { tr: "Senin penceren bozuk. Ben de öyle. Birbirimize uyuyoruz.", en: "Your window's broken. So am I. We fit." }
-          - { tr: "Herkes Sistem'i alıyor. Sen beni alıyorsun.", en: "Everyone gets the System. You get me." }
+          - { tr: "Penceren bozuk. Ben de bozuğum. Birbirimize uyarız.", en: "Your window's broken. So am I. We fit." }
+          - { tr: "Herkese Sistem düştü. Sana ben düştüm.", en: "Everyone gets the System. You get me." }
     sezgiler:
       - anlati: true
         kosul: { bayrak: "sistem_okundu" }
-        metin: { tr: "Okumayı bırakmadın; bu yüzden gördün: pencerenin en altında, herkesin satırında olmayan tek bir satır var. Bir imza gibi. Yarım kalmış.", en: "You never stopped reading, so you caught it: at the very bottom of the window, one line nobody else has. Like a signature. Unfinished." }
+        metin: { tr: "Okumayı bırakmadığın için gözünden kaçmadı: pencerenin en altında başka kimsede olmayan tek bir satır duruyor. Yarım kalmış bir imza gibi.", en: "You never stopped reading, so you caught it: at the very bottom of the window, one line nobody else has. Like a signature. Unfinished." }
       - anlati: true
         kosul: { bayrak: "deniz_el_tutuldu" }
-        metin: { tr: "Elin hâlâ bir elin içinde. Ses bunu fark ediyor: \"Bırakmadın. İlginç.\"", en: "Your hand is still inside someone else's. The voice notices: \"You didn't let go. Interesting.\"" }
+        metin: { tr: "Elin hâlâ bir başka elin içinde. Ses bunu görüyor: \"Bırakmadın. İlginç.\"", en: "Your hand is still inside someone else's. The voice notices: \"You didn't let go. Interesting.\"" }
       - anlati: true
         kosul: { bayrak: "kalabaliga_yardim" }
-        metin: { tr: "Kalabalığın sesleri hâlâ kulağında. Ses onları da duyuyor: \"Başkalarını kurtarmaya koştun. Bunu hatırlayacağım.\"", en: "The crowd's voices are still ringing in your ears. The voice hears them too: \"You ran to save other people. I'll remember that.\"" }
+        metin: { tr: "Kalabalığın uğultusu hâlâ kulaklarında çınlıyor. Ses onu da duyuyor: \"Başkalarını kurtarmaya koştun. Bunu unutmayacağım.\"", en: "The crowd's voices are still ringing in your ears. The voice hears them too: \"You ran to save other people. I'll remember that.\"" }
     secenekler:
       - id: "kabul_et"
-        etiket: { tr: "\"Tamam. Kimsen, benimlesin.\"", en: "\"Fine. Whatever you are, you're with me.\"" }
+        etiket: { tr: "\"Peki. Her neysen, benimlesin.\"", en: "\"Fine. Whatever you are, you're with me.\"" }
         etkiler:
           - bayrak: "yanki_bagi"
           - iliski: { yanki: { guven: 10, baglilik: 10 } }
@@ -95,35 +95,35 @@ sahneler:
         sonraki: "giris_yanki_bag"
   - id: "giris_yanki_bag"
     paragraflar:
-      - metin: { tr: "\"Tamam,\" diyor ses; sanki gülümsüyormuş gibi. \"Bunu daha önce kimse söylemedi.\"", en: "\"Fine,\" the voice echoes back, like it's smiling. \"Nobody's ever said that before.\"" }
+      - metin: { tr: "\"Peki,\" diye tekrarlıyor ses, gülümsüyormuş gibi. \"Bunu bana daha önce kimse dememişti.\"", en: "\"Fine,\" the voice echoes back, like it's smiling. \"Nobody's ever said that before.\"" }
         kosul: { hafiza: { yanki: "kabul_edildi" } }
-      - metin: { tr: "\"Bir hata,\" diyor ses. \"Bir yankı. Bir şeyin koparılmış ucu. Şimdilik bu kadar yeter; gerisi pahalı.\"", en: "\"A glitch,\" the voice says. \"An echo. The torn-off end of something. That's enough for now. The rest costs extra.\"" }
+      - metin: { tr: "\"Bir hata,\" diyor ses. \"Bir yankı. Bir şeyden koparılmış bir uç. Şimdilik bu kadarı yeter; gerisi pahalıya gelir.\"", en: "\"A glitch,\" the voice says. \"An echo. The torn-off end of something. That's enough for now. The rest costs extra.\"" }
         kosul: { hafiza: { yanki: "ne_oldugu_soruldu" } }
-      - metin: { tr: "Çatlağı iradenle bastırıyorsun ve bir an için gerçekten kapanıyor. Sonra ses, neredeyse saygıyla, aralıktan yeniden içeri süzülüyor: \"Güçlüsün. İyi. Güçlü olana ihtiyacım var.\"", en: "You lean on the crack with everything you've got, and for one second it actually closes. Then the voice slides back in through the gap, almost respectful: \"You're strong. Good. I need strong.\"" }
+      - metin: { tr: "Bütün iradenle çatlağa yükleniyorsun ve bir an için gerçekten kapanıyor. Ama ses, saygıyla eğilir gibi, aralıktan yeniden içeri süzülüyor: \"Güçlüsün. İyi. Bana güçlü biri lazım.\"", en: "You lean on the crack with everything you've got, and for one second it actually closes. Then the voice slides back in through the gap, almost respectful: \"You're strong. Good. I need strong.\"" }
         kosul: { hafiza: { yanki: "direnildi" } }
-      - { tr: "Pencerende yeni bir satır beliriyor; harfler hâlâ titriyor ama okunuyor. Kimsenin göremeyeceği bir satır.", en: "A new line appears in your window, letters still jittering but readable. A line nobody else will ever see." }
-      - { tr: "Işık seni bir yere fırlatıyor. Düşüş uzun sürüyor.", en: "The light flings you somewhere. The fall takes a long time." }
+      - { tr: "Pencerende yeni bir satır beliriyor. Harfleri hâlâ titrek ama okunuyor; senden başka kimsenin göremeyeceği bir satır bu.", en: "A new line appears in your window, letters still jittering but readable. A line nobody else will ever see." }
+      - { tr: "Işık seni bir yerlere fırlatıyor ve düşüş bir türlü bitmek bilmiyor.", en: "The light flings you somewhere. The fall takes a long time." }
     bildirimler:
       - tur: "yanki"
         nadirlik: "mitik"
         baslik: { tr: "[BAĞ KURULDU · YANKI]", en: "[BOND ESTABLISHED · ECHO]" }
         satirlar:
-          - { tr: "Gizli satırlar: açık. Günlük Görev: yalnızca sende. Gerçek veriler: senin gözünde.", en: "Hidden lines: unlocked. Daily Quest: yours alone. True data: for your eyes only." }
-          - { tr: "Başkalarına anlatma. Anlamazlar. Bazıları anlar; onlar daha kötü.", en: "Don't tell anyone. They won't understand. A few will, and they're worse." }
+          - { tr: "Gizli satırlar: açık. Günlük Görev: yalnız sende. Gerçek veriler: yalnızca sana görünür.", en: "Hidden lines: unlocked. Daily Quest: yours alone. True data: for your eyes only." }
+          - { tr: "Kimseye anlatma. Anlamazlar. Anlayanlar da çıkar; onlar daha beter.", en: "Don't tell anyone. They won't understand. A few will, and they're worse." }
     secenekler:
       - id: "dus"
-        etiket: { tr: "Bırak, düşsün", en: "Let yourself fall" }
+        etiket: { tr: "Bırak kendini, düş", en: "Let yourself fall" }
         sonraki: "ogretici_uyanis"
   - id: "ogretici_uyanis"
     yer: "ogretici_orman"
     paragraflar:
-      - metin: { tr: "Gözlerini açtığında parmakların hâlâ birinin elini sıkıyor. {npc:deniz_arman} yanında, yosunların üstünde öksürüyor ama sağlam.", en: "When you open your eyes, your fingers are still locked around someone's hand. {npc:deniz_arman} is next to you on the moss, coughing, but in one piece." }
+      - metin: { tr: "Gözlerini açtığında parmakların hâlâ bir eli sıkıyor. {npc:deniz_arman} yanı başında, yosunların üstünde öksürüp duruyor ama sapasağlam.", en: "When you open your eyes, your fingers are still locked around someone's hand. {npc:deniz_arman} is next to you on the moss, coughing, but in one piece." }
         kosul: { bayrak: "deniz_el_tutuldu" }
-      - metin: { tr: "Gözlerini açtığında yalnızsın. {npc:deniz_arman} yok. Sadece sis, çam kokusu ve uzaklardan gelen bir çığlık.", en: "You open your eyes alone. No {npc:deniz_arman}. Just fog, the smell of pine, and a scream somewhere far off." }
+      - metin: { tr: "Gözlerini açtığında yapayalnızsın; {npc:deniz_arman} ortada yok. Sis, çam kokusu, bir de uzaklardan gelen bir çığlık...", en: "You open your eyes alone. No {npc:deniz_arman}. Just fog, the smell of pine, and a scream somewhere far off." }
         kosul: { bayrak_yok: "deniz_el_tutuldu" }
-      - metin: { tr: "Aktarımdan önceki son anını hatırlıyorsun: tekerlekli sandalyedeki yaşlı bir adamın elini tutuyordun. Şimdi o el yok.", en: "You remember your last second before the transfer: you were holding the hand of an old man in a wheelchair. That hand is gone now." }
+      - metin: { tr: "Aktarımdan önceki son anı hatırlıyorsun: tekerlekli sandalyedeki yaşlı bir adamın elini tutuyordun. Şimdi avucun bomboş.", en: "You remember your last second before the transfer: you were holding the hand of an old man in a wheelchair. That hand is gone now." }
         kosul: { bayrak: "kalabaliga_yardim" }
-      - { tr: "Ağaçlar fazla uzun, gökyüzü fazla mor. Burası Ege değil. Burası hiçbir yer değil.", en: "The trees are too tall, the sky too purple. This isn't the Pacific Northwest. This isn't anywhere." }
+      - { tr: "Ağaçlar olması gerekenden uzun, gökyüzü olması gerekenden mor. Burası Ege değil; burası hiçbir yer değil.", en: "The trees are too tall, the sky too purple. This isn't the Pacific Northwest. This isn't anywhere." }
     bildirimler:
       - tur: "durum"
         baslik: { tr: "Durum penceresi açıldı", en: "Status window unlocked" }
@@ -140,11 +140,11 @@ sahneler:
       - tur: "gorev"
         baslik: { tr: "Günlük Görev açıldı", en: "Daily Quest unlocked" }
         satirlar:
-          - { tr: "Bu pencere yalnızca sana görünür. Başkalarına sorma; bilmiyorlar.", en: "This window is visible to you alone. Don't ask anyone else. They don't know." }
+          - { tr: "Bu pencereyi yalnızca sen görürsün. Başkalarına sorma; bilmezler.", en: "This window is visible to you alone. Don't ask anyone else. They don't know." }
           - { tr: "Ayrıntılar: Daha fazla → Günlük Görev.", en: "Details: More → Daily Quest." }
     secenekler:
       - id: "dinle"
-        etiket: { tr: "Gözlerini kapat ve sesleri dinle", en: "Close your eyes and listen" }
+        etiket: { tr: "Gözlerini kapa, sesleri dinle", en: "Close your eyes and listen" }
         gerekli:
           stat: { per: 6 }
         etkiler:
@@ -159,7 +159,7 @@ sahneler:
           - egilim: { yakin_dovus: 1 }
         sonraki: "ilk_canavar"
       - id: "saklan"
-        etiket: { tr: "Bir kayanın arkasına çömel ve bekle", en: "Crouch behind a boulder and wait" }
+        etiket: { tr: "Bir kayanın ardına çömel, bekle", en: "Crouch behind a boulder and wait" }
         etkiler:
           - egilim: { gizlilik: 2 }
           - ahlak: { merhamet: -4 }
@@ -167,16 +167,16 @@ sahneler:
     sezgiler:
       - kosul:
           stat: { per: 6 }
-        metin: { tr: "Sis doğal değil. Ağaçlar fazla düzgün aralıklarla dizilmiş; biri bu ormanı çizmiş.", en: "This fog isn't natural. The trees are spaced too evenly. Someone drew this forest." }
+        metin: { tr: "Bu sis doğal değil. Ağaçlar fazla düzenli aralıklarla dizilmiş; bu ormanı biri çizmiş.", en: "This fog isn't natural. The trees are spaced too evenly. Someone drew this forest." }
       - kosul: { bayrak: "yanki_bagi" }
-        metin: { tr: "Kafanın içinde bir ses, bozuk bir radyo gibi: \"Herkes aynı pencereyi görüyor. Sen görmüyorsun. Sen benimsin.\"", en: "A voice in your head, like a radio between stations: \"Everyone else sees the same window. You don't. You're mine.\"" }
+        metin: { tr: "Kafanın içinde, istasyon arayan bir radyo gibi cızırdayan bir ses: \"Herkes aynı pencereyi görüyor, sen görmüyorsun. Sen benimsin.\"", en: "A voice in your head, like a radio between stations: \"Everyone else sees the same window. You don't. You're mine.\"" }
   - id: "ilk_canavar"
     yer: "ogretici_orman"
     paragraflar:
-      - metin: { tr: "Ses önünden değil, sağındaki çalılardan geliyor. Bunu bildiğin için ilk hamle senin olacak.", en: "The sound isn't coming from ahead; it's coming from the brush on your right. Knowing that, you get the first move." }
+      - metin: { tr: "Ses önünden değil, sağındaki çalılıktan geliyor. Bunu bildiğine göre ilk hamle senin.", en: "The sound isn't coming from ahead; it's coming from the brush on your right. Knowing that, you get the first move." }
         kosul: { bayrak: "tehlike_sezildi" }
-      - { tr: "Çalılar yarılıyor. Sokak köpeği büyüklüğünde, dişleri paslı demir gibi parlayan bir fare çıkıyor. Arkasında, bir ağaç kökünün dibinde, dizini tutan bir yabancı inliyor.", en: "The brush splits. Out comes a rat the size of a golden retriever, teeth gleaming like rusted rebar. Behind it, at the foot of a tree root, a stranger clutches one knee and groans." }
-      - metin: { tr: "{npc:deniz_arman} yanında, eğilip yerden yumruk büyüklüğünde bir taş alıyor. \"Sağdan,\" diye fısıldıyor. \"Ben soldan.\"", en: "{npc:deniz_arman} is right beside you, crouching for a rock the size of a fist. \"You go right,\" {zamir:deniz_arman|o} whisper{zamir:deniz_arman|s}. \"I've got left.\"" }
+      - { tr: "Çalılar ikiye ayrılıyor ve içinden sokak köpeği iriliğinde, dişleri paslı demir gibi parıldayan bir fare fırlıyor. Hemen arkasında, bir ağaç kökünün dibinde, dizini tutmuş bir yabancı inliyor.", en: "The brush splits. Out comes a rat the size of a golden retriever, teeth gleaming like rusted rebar. Behind it, at the foot of a tree root, a stranger clutches one knee and groans." }
+      - metin: { tr: "{npc:deniz_arman} yanında eğilip yerden yumruk büyüklüğünde bir taş kapıyor. \"Sen sağdan,\" diye fısıldıyor, \"ben soldan.\"", en: "{npc:deniz_arman} is right beside you, crouching for a rock the size of a fist. \"You go right,\" {zamir:deniz_arman|o} whisper{zamir:deniz_arman|s}. \"I've got left.\"" }
         kosul: { bayrak: "deniz_el_tutuldu" }
     bildirimler:
       - tur: "analiz"
@@ -187,7 +187,7 @@ sahneler:
           - { tr: "Zaaf: Gözler", en: "Weak spot: Eyes" }
     secenekler:
       - id: "dovus"
-        etiket: { tr: "Kırık bir dalı kap ve saldır", en: "Grab a broken branch and attack" }
+        etiket: { tr: "Kırık bir dal kap, saldır", en: "Grab a broken branch and attack" }
         etkiler:
           - egilim: { yakin_dovus: 2 }
           - ahlak: { insanlik: -2 }
@@ -206,7 +206,7 @@ sahneler:
           - egilim: { menzilli: 2 }
         sonraki: "ilk_gece"
       - id: "kac"
-        etiket: { tr: "Yabancıyı bırak ve koş", en: "Leave the stranger and run" }
+        etiket: { tr: "Yabancıyı bırak, kaç", en: "Leave the stranger and run" }
         etkiler:
           - tohum: { olay: "yabanci_geri_donus", gecikme: { min: 12, max: 20 }, kosul: { bayrak: "yabanci_birakildi" } }
           - bayrak: "yabanci_birakildi"
@@ -222,18 +222,18 @@ sahneler:
   - id: "ilk_canavar_yenilgi"
     yer: "ogretici_orman"
     paragraflar:
-      - { tr: "Dişler baldırına gömülüyor ve dünya bir an beyaza kesiyor. Sırtüstü yerdesin; fare göğsünün üstünde, ağzından sıcak, pis bir nefes yüzüne vuruyor.", en: "The teeth sink into your calf and the world goes white for a second. You're flat on your back, the rat on your chest, its breath hot and rank in your face." }
-      - metin: { tr: "Bir taş farenin kafasına çarpıyor, sonra bir tane daha. {npc:deniz_arman} bağırarak üstüne atılıyor ve fare cıyaklayarak sise kaçıyor.", en: "A rock cracks off the rat's skull, then another. {npc:deniz_arman} comes in yelling, and the rat squeals and bolts into the fog." }
+      - { tr: "Dişler baldırına gömülünce dünya bir an bembeyaz kesiliyor. Sırtüstü yere serilmişsin; fare göğsüne çökmüş, ağzından çıkan sıcak, leş gibi nefes yüzüne vuruyor.", en: "The teeth sink into your calf and the world goes white for a second. You're flat on your back, the rat on your chest, its breath hot and rank in your face." }
+      - metin: { tr: "Farenin kafasına bir taş iniyor, ardından bir taş daha. {npc:deniz_arman} bağıra çağıra üstüne atılınca fare cıyaklayarak sise kaçıyor.", en: "A rock cracks off the rat's skull, then another. {npc:deniz_arman} comes in yelling, and the rat squeals and bolts into the fog." }
         kosul: { bayrak: "deniz_el_tutuldu" }
-      - metin: { tr: "Bir taş farenin kafasına çarpıyor. Dizini tutan yabancı, yerde sürünerek ikincisini fırlatıyor ve fare cıyaklayarak sise kaçıyor.", en: "A rock cracks off the rat's skull. The stranger with the bad knee drags across the dirt to throw a second one, and the rat squeals and bolts into the fog." }
+      - metin: { tr: "Farenin kafasına bir taş iniyor. Dizi sakat yabancı toprakta sürünerek ikinci taşı da fırlatınca fare cıyaklayarak sise kaçıyor.", en: "A rock cracks off the rat's skull. The stranger with the bad knee drags across the dirt to throw a second one, and the rat squeals and bolts into the fog." }
         kosul: { bayrak_yok: "deniz_el_tutuldu" }
-      - { tr: "Hayattasın. Bunu sen kazanmadın. Pencere yalnızca kuru bir satır yazıyor: [Savaş kaybedildi · Ölüm engellendi].", en: "You're alive. You didn't earn it. The window types one dry line: [Fight lost · Death prevented]." }
+      - { tr: "Hayattasın, ama bunu sen kazanmadın. Pencere kupkuru tek bir satır düşüyor: [Savaş kaybedildi · Ölüm engellendi].", en: "You're alive. You didn't earn it. The window types one dry line: [Fight lost · Death prevented]." }
     sezgiler:
       - kosul: { bayrak: "yanki_bagi" }
-        metin: { tr: "ilk dersin bu olsun. herkes seni kurtarmak için orada olmayacak.", en: "let that be lesson one. not everyone will be there to save you." }
+        metin: { tr: "ilk dersin bu olsun. seni kurtarmaya her seferinde biri gelmeyecek.", en: "let that be lesson one. not everyone will be there to save you." }
     secenekler:
       - id: "kalk"
-        etiket: { tr: "Bacağını sar ve kalk", en: "Wrap your leg and get up" }
+        etiket: { tr: "Bacağını sar, ayağa kalk", en: "Wrap your leg and get up" }
         etkiler:
           - ahlak: { insanlik: 2 }
           - stat: { wil: 1 }
@@ -241,12 +241,12 @@ sahneler:
   - id: "ilk_kan"
     yer: "ogretici_orman"
     paragraflar:
-      - { tr: "Fare son bir kez titreyip duruyor. Elindeki dal kan içinde; senin kanın da biraz.", en: "The rat twitches once and goes still. The branch in your hand is soaked. Some of it's yours." }
-      - { tr: "Ağacın dibindeki yabancı nefes nefese sana bakıyor; dizi kötü ama yaşıyor.", en: "The stranger at the foot of the tree is staring at you, out of breath. Bad knee, but alive." }
-      - { tr: "Gökyüzünde bir pencere daha açılıyor, bu kez herkesin görebileceği büyüklükte.", en: "Another window opens in the sky, big enough for everyone to see." }
+      - { tr: "Fare son bir kez titreyip kaskatı kesiliyor. Elindeki dal kana bulanmış; birazı da senin kanın.", en: "The rat twitches once and goes still. The branch in your hand is soaked. Some of it's yours." }
+      - { tr: "Ağacın dibindeki yabancı soluk soluğa seni süzüyor. Dizi kötü durumda ama yaşıyor.", en: "The stranger at the foot of the tree is staring at you, out of breath. Bad knee, but alive." }
+      - { tr: "Gökyüzünde bir pencere daha açılıyor; bu seferki herkesin görebileceği kadar büyük.", en: "Another window opens in the sky, big enough for everyone to see." }
     secenekler:
       - id: "pencereyi_kapat"
-        etiket: { tr: "Pencereyi kapat ve yabancıya bak", en: "Swipe the window away and check on the stranger" }
+        etiket: { tr: "Pencereyi kapat, yabancıyla ilgilen", en: "Swipe the window away and check on the stranger" }
         etkiler:
           - bayrak: "ilk_oldurme"
           - bayrak: "yabanci_korundu"
@@ -255,7 +255,7 @@ sahneler:
           - ahlak: { merhamet: 3 }
         sonraki: "ilk_gece"
       - id: "pencereyi_oku_ilk"
-        etiket: { tr: "Pencerenin altındaki küçük satırı oku", en: "Read the fine print under the window" }
+        etiket: { tr: "Pencerenin altındaki ince yazıyı oku", en: "Read the fine print under the window" }
         etkiler:
           - bayrak: "ilk_oldurme"
           - unvan: "ogreticinin_ilk_kani"
@@ -264,21 +264,21 @@ sahneler:
         sonraki: "ilk_gece"
     sezgiler:
       - kosul: { bayrak: "yanki_bagi" }
-        metin: { tr: "\"Dünyada ilk. Herkes ismini görecek; ama yalnızca sen neyin peşinde olduğumu göreceksin.\"", en: "\"First in the world. Everyone's going to see your name. Only you get to see what I'm after.\"" }
+        metin: { tr: "\"Dünyada bir ilk. Adını herkes görecek; ama neyin peşinde olduğumu yalnızca sen göreceksin.\"", en: "\"First in the world. Everyone's going to see your name. Only you get to see what I'm after.\"" }
   - id: "ilk_gece"
     yer: "ogretici_orman"
     paragraflar:
-      - metin: { tr: "Ellerin hâlâ titriyor. Ama içinde daha önce hiç olmayan bir şey uyanıyor: açlık gibi, ama yemek için değil.", en: "Your hands are still shaking. But something new is waking up inside you, like hunger, but not for food." }
+      - metin: { tr: "Ellerin hâlâ titriyor; yine de içinde daha önce hiç tanımadığın bir şey uyanıyor. Açlığa benziyor, ama karnının açlığına değil.", en: "Your hands are still shaking. But something new is waking up inside you, like hunger, but not for food." }
         kosul: { bayrak: "ilk_oldurme" }
-      - metin: { tr: "Fare taşın peşinden sise daldı ve bir daha görünmedi.", en: "The rat chased the rock into the fog and never came back." }
+      - metin: { tr: "Fare taşın peşinden sise dalıp gitti; bir daha da görünmedi.", en: "The rat chased the rock into the fog and never came back." }
         kosul: { bayrak: "yabanci_korundu", bayrak_yok: "ilk_oldurme" }
-      - metin: { tr: "Kurtardığın yabancı adını söyleyemeden uyuyakalıyor. Avucunda, sana bıraktığı bir çakı var.", en: "The stranger you saved falls asleep before they can tell you their name. In your palm is the pocketknife they left you." }
+      - metin: { tr: "Kurtardığın yabancı adını bile söyleyemeden uyuyakalıyor. Avucunun içinde, sana bıraktığı çakı duruyor.", en: "The stranger you saved falls asleep before they can tell you their name. In your palm is the pocketknife they left you." }
         kosul: { bayrak: "yabanci_korundu" }
-      - metin: { tr: "Koşarken arkanda kalan çığlık kesildi. Ne zaman kesildiğini hatırlamıyorsun. Hatırlamak da istemiyorsun.", en: "The scream behind you stopped while you ran. You don't remember when. You don't want to." }
+      - metin: { tr: "Sen koşarken arkanda kalan çığlık bir yerde kesildi. Ne zaman kesildiğini hatırlamıyorsun; hatırlamak da istemiyorsun.", en: "The scream behind you stopped while you ran. You don't remember when. You don't want to." }
         kosul: { bayrak: "yabanci_birakildi" }
-      - metin: { tr: "\"Annemler,\" diyor {npc:deniz_arman} ateşin karşısından ve cümlenin gerisini getirmiyor.", en: "\"My folks,\" {npc:deniz_arman} says from across the fire, and doesn't finish the sentence." }
+      - metin: { tr: "\"Annemler...\" diyor {npc:deniz_arman} ateşin öbür yanından, ama cümlenin gerisini getirmiyor.", en: "\"My folks,\" {npc:deniz_arman} says from across the fire, and doesn't finish the sentence." }
         kosul: { bayrak: "deniz_el_tutuldu" }
-      - { tr: "Mor gökyüzü kararmıyor, sadece soluyor. Öğretici Katman'daki ilk gecen başlıyor.", en: "The purple sky doesn't go dark; it just fades. Your first night in the Tutorial Layer begins." }
+      - { tr: "Mor gökyüzü kararmıyor, yalnızca rengi soluyor. Öğretici Katman'daki ilk gecen böyle başlıyor.", en: "The purple sky doesn't go dark; it just fades. Your first night in the Tutorial Layer begins." }
     bildirimler: []
     secenekler:
       - id: "uyu"
@@ -288,7 +288,7 @@ sahneler:
           - ahlak: { insanlik: 2 }
         sonraki: "ilk_sabah"
       - id: "nobet_tut"
-        etiket: { tr: "Uyuma. Sabaha kadar nöbet tut", en: "Don't sleep. Keep watch until morning" }
+        etiket: { tr: "Uyuma, sabaha kadar nöbet tut", en: "Don't sleep. Keep watch until morning" }
         etkiler:
           - gun: 1
           - stat: { wil: 1 }
@@ -297,12 +297,12 @@ sahneler:
         sonraki: "ilk_sabah"
     sezgiler:
       - kosul: { bayrak: "yanki_bagi" }
-        metin: { tr: "Ateş çıtırdarken ses yine geliyor, bu kez daha net: \"Yarın da buradayım. Her gün. Başkalarına anlatma.\"", en: "The voice comes back while the fire crackles, clearer this time: \"I'll be here tomorrow. Every day. Don't tell the others.\"" }
+        metin: { tr: "Ateş çıtırdarken ses yine geliyor, bu sefer daha berrak: \"Yarın da buradayım. Her gün buradayım. Kimseye anlatma.\"", en: "The voice comes back while the fire crackles, clearer this time: \"I'll be here tomorrow. Every day. Don't tell the others.\"" }
   - id: "ilk_sabah"
     yer: "ogretici_orman"
     paragraflar:
-      - { tr: "Sabah olduğunda Sistem yeni bir pencere açıyor: Öğretici Katman'da 29 gün kaldı.", en: "When morning comes, the System opens a new window: 29 days left in the Tutorial Layer." }
-      - { tr: "Çıkış Kapısı'na giden yol uzun. Her gün birkaç saatin var; nasıl harcayacağına sen karar vereceksin.", en: "The road to the Exit Gate is long. Every day you get a few hours, and how you spend them is up to you." }
+      - { tr: "Sabah olunca Sistem yeni bir pencere açıyor: Öğretici Katman'da 29 gün kaldı.", en: "When morning comes, the System opens a new window: 29 days left in the Tutorial Layer." }
+      - { tr: "Çıkış Kapısı'na giden yol uzun. Her gün eline birkaç saat geçecek; onları nasıl harcayacağın sana kalmış.", en: "The road to the Exit Gate is long. Every day you get a few hours, and how you spend them is up to you." }
     bildirimler:
       - tur: "uyari"
         baslik: { tr: "Bir tohum ekildi", en: "A seed has been planted" }
