@@ -1,7 +1,7 @@
 # İlerleme
 
 Şu an: Aşama 6 — Dikey dilim: Perde 1 içeriği (sırada)
-Son commit: 6d96bda Aşama 4: hikaye motoru
+Son commit: 6f1bf15 Aşama 5: NPC sistemi
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
