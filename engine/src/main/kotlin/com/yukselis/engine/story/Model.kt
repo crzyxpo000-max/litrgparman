@@ -160,6 +160,11 @@ sealed interface Condition {
         override fun test(state: WorldState) = state.npc(npc)?.alive == false
     }
 
+    /** NPC gruptan ve sahneden çıktı (kaçtı, ayrıldı): yaşıyor ama "gitti". */
+    data class NpcGoneCond(val npc: String) : Condition {
+        override fun test(state: WorldState) = state.npc(npc)?.status == com.yukselis.engine.npc.NpcStatus.GONE
+    }
+
     data class IsCompanion(val npc: String) : Condition {
         override fun test(state: WorldState) = state.npc(npc)?.let { it.companion && it.alive } == true
     }

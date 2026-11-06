@@ -1,0 +1,2541 @@
+# Parti B — Orman ve genel olaylar (Perde 1, docs/PERDE1.md).
+# Mücadele evresi (gün 1–11) gerçek savaş ve kıt kaynak; `kirilma_yasandi` sonrası hakimiyet seçenekleri
+# (gösteriş, gizle/açığa vur) koşulla açılır. Hayatta kalan oranı: `degisken: { hayatta_kalan: ±n }`.
+# Tohum hedefleri: kendi olaylarımız (avci_haberi, gece_baskini, isaretli_agaclar) ve PERDE1.md listesindekiler.
+olaylar:
+  # ================================================================== yaralı avcı
+  - id: "yarali_avci"
+    perde: [1]
+    bolge: ["ogretici_orman", "kirik_istasyon"]
+    gun: { min: 2, max: 30 }
+    agirlik: 5
+    etiketler: ["ahlak", "karsilasma", "kurtarma"]
+    gerilim: 2
+    onemli: true
+    kart: { tr: "Yaralı avcı", en: "The wounded hunter" }
+    sahne: "yarali_avci_1"
+    sahneler:
+      - id: "yarali_avci_1"
+        paragraflar:
+          - metin: { tr: "Eğrelti otlarının arasında taze kan var. İzi sürünce bir kayanın dibinde yatan kadını buluyorsun; sol baldırı dizinden bileğine kadar yarılmış, yanında kırık bir diken domuzu dişi duruyor.", en: "There's fresh blood in the ferns. You follow it to a woman lying at the foot of a boulder, her left calf laid open from knee to ankle, a snapped Thornboar tusk in the dirt beside her." }
+            kosul: { bolge: "ogretici_orman" }
+          - metin: { tr: "Peronun ucunda, devrilmiş bir bilet makinesinin arkasında biri inliyor. Sol baldırı dizinden bileğine kadar yarılmış bir kadın; yanında kırık bir diken domuzu dişi var, demek ki buraya kadar sürünmüş.", en: "At the far end of the platform, behind a toppled ticket machine, somebody's groaning. A woman, left calf laid open from knee to ankle, a snapped Thornboar tusk beside her. She crawled all the way here." }
+            kosul: { bolge: "kirik_istasyon" }
+          - { tr: "Sırtında dolu bir çanta, kucağında ipi kopmuş bir yay. Ok kılıfı boş; son okunu nereye harcadığını tahmin etmek zor değil.", en: "Full pack on her back, a bow with a snapped string across her lap. Her quiver's empty. Not hard to guess where the last arrow went." }
+          - { tr: "Seni görünce elini bıçağına bile götürmüyor. \"Yardım et,\" diyor dişlerinin arasından. \"Ya da çantayı al ve git. İkisini de anlarım.\"", en: "She sees you and doesn't even reach for her knife. \"Help me,\" she says through her teeth. \"Or take the bag and go. I'd get it either way.\"" }
+          - { tr: "Uzakta, sisin içinde bir uluma yükseliyor. Kan kokusu yalnızca seni çekmedi.", en: "Somewhere off in the fog, a howl goes up. You're not the only thing the blood brought in." }
+        sezgiler:
+          - kosul: { stat: { per: 7 } }
+            metin: { tr: "Yaranın kenarları yırtık ama atardamar sağlam. Kanamayı durdurursan yürür; bir saat içinde durdurmazsan yürüyemez.", en: "The edges are ragged, but the artery's intact. Stop the bleeding and she walks. Don't, and inside an hour she won't." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Çantada üç günlük erzak, bir harita ve on beş kredi var. Ölürse hepsi senin. Ben yalnızca sayıyorum.\"", en: "\"Three days of food in that pack, a map, fifteen credits. If she dies, it's all yours. I'm just counting.\"" }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            metin: { tr: "\"Onu burada bırakmıyoruz. Bana öyle bakma; bırakmıyoruz.\"", en: "\"We're not leaving her. Don't look at me like that. We're not.\"" }
+        secenekler:
+          - id: "iksir"
+            etiket: { tr: "İksirini ona ver", en: "Give her your potion" }
+            gerekli: { esya: { kucuk_iyilesme_iksiri: 1 } }
+            etkiler:
+              - esya: { kucuk_iyilesme_iksiri: -1 }
+              - ahlak: { merhamet: 8, insanlik: 2 }
+              - efsane: "yabancilari_iyilestirdi"
+              - bayrak: "avci_kurtarildi"
+              - degisken: { hayatta_kalan: 2 }
+            sonraki: "yarali_avci_iksir"
+          - id: "sar"
+            etiket: { tr: "Bacağını sar ve onu sırtına al", en: "Bind the leg and get her on your back" }
+            etkiler:
+              - ahlak: { merhamet: 5 }
+            sonraki: "yarali_avci_tasima"
+          - id: "deniz"
+            etiket: { tr: "{npc:deniz_arman} taşısın, sen arkayı kolla", en: "Let {npc:deniz_arman} carry her. You cover the rear" }
+            goster: { yoldas: "deniz_arman" }
+            etkiler:
+              - ahlak: { merhamet: 4, duzen: 2 }
+              - iliski: { deniz_arman: { guven: 6, saygi: 4 } }
+            sonraki: "yarali_avci_tasima"
+          - id: "omuz"
+            tur: "gosteris"
+            etiket: { tr: "Onu omzuna at ve sisi geride bırak", en: "Sling her over a shoulder and outrun the fog" }
+            goster: { bayrak: "kirilma_yasandi" }
+            gerekli: { stat: { end: 14 } }
+            etkiler:
+              - ahlak: { merhamet: 5 }
+              - dikkat: 2
+              - bayrak: "avci_kurtarildi"
+              - degisken: { hayatta_kalan: 2 }
+            sonraki: "yarali_avci_kurtuldu"
+          - id: "canta"
+            etiket: { tr: "Çantayı al ve git", en: "Take the bag and go" }
+            etkiler:
+              - ahlak: { merhamet: -12, insanlik: -5 }
+              - kredi: 15
+              - esya: { kirmizi_ot: 2, kizarmis_et: 2 }
+              - egilim: { karanlik: 2 }
+              - bayrak: "avci_yagmalandi"
+              - tohum: { olay: "avci_haberi", gecikme: { min: 4, max: 8 }, kosul: { bayrak: "avci_yagmalandi" } }
+            sonraki: "yarali_avci_yagma"
+
+      - id: "yarali_avci_iksir"
+        paragraflar:
+          - { tr: "Şişeyi dudaklarına dayıyorsun. Kırmızı sıvı boğazından iner inmez baldırındaki yarığın kenarları birbirine doğru kıvrılmaya başlıyor; ince, pembe bir çizgi kalıyor geriye.", en: "You tip the vial to her lips. The red stuff barely goes down before the edges of the gash start curling toward each other, until all that's left is a thin pink line." }
+          - { tr: "Kadın boş şişeye bakıyor, sonra sana. \"Bunu bir yabancıya mı verdin?\" Sesinde teşekkürden çok şaşkınlık var.", en: "She stares at the empty vial, then at you. \"You gave that to a stranger?\" She sounds more stunned than grateful." }
+          - { tr: "Uluma bir daha yükseliyor, bu kez daha yakından. Kadın ayağa kalkıyor; topallıyor ama kendi bacakları üstünde.", en: "The howl goes up again, closer this time. She gets to her feet. Limping, but on her own two legs." }
+        secenekler:
+          - id: "yuru"
+            etiket: { tr: "Koluna gir ve buradan uzaklaşın", en: "Take her arm and get clear of here" }
+            etkiler:
+              - ahlak: { merhamet: 1, duzen: 1 }
+            sonraki: "yarali_avci_kurtuldu"
+
+      - id: "yarali_avci_tasima"
+        paragraflar:
+          - { tr: "Gömleğinden yırttığın şeritle baldırını sıkıca sarıyorsun; kadın bir kez bağırıyor, sonra dudağını ısırıp susuyor. Kolunu omzuna atıp onu kaldırdığında ağırlığının yarısı sana biniyor.", en: "You tear a strip off your shirt and cinch it around her calf. She yells once, then bites her lip and goes quiet. When you get her arm over your shoulder and haul her up, half her weight lands on you." }
+          - metin: { tr: "{npc:deniz_arman} öbür koluna giriyor. \"Üç deyince,\" diyor, \"bir, iki...\" Üçe hiç gelmiyor; zaten yürüyorsunuz.", en: "{npc:deniz_arman} gets under her other arm. \"On three,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}. \"One, two...\" Three never comes. You're already moving." }
+            kosul: { yoldas: "deniz_arman" }
+          - { tr: "Yüz adım bile gitmeden sis koyulaşıyor. Önünüzde, yolun tam ortasında, uzun bacaklı bir gölge duruyor; ağzından buhar tütüyor.", en: "You don't make a hundred yards before the fog thickens. Dead center of the path ahead stands a long-legged shadow, steam curling out of its mouth." }
+          - { tr: "\"Tek,\" diyor kadın kulağına. \"Şimdilik tek. Sürüsü hiç uzakta olmaz.\"", en: "\"Just one,\" she says in your ear. \"For now. The pack's never far behind.\"" }
+        sezgiler:
+          - kosul: { stat: { per: 8 } }
+            metin: { tr: "Tazının sol omzunda kabuk bağlamış bir ok yarası var. O tarafa dönerken bir an gecikiyor.", en: "There's a scabbed-over arrow wound in the hound's left shoulder. It hesitates a beat every time it turns that way." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Onu yere bırakırsan iki kat hızlı koşarsın. Bu matematik, ahlak değil.\"", en: "\"Put her down and you run twice as fast. That's math, not morals.\"" }
+        secenekler:
+          - id: "savas"
+            etiket: { tr: "Onu kayaya yasla ve tazıyı karşıla", en: "Prop her on a rock and face the hound" }
+            etkiler:
+              - ahlak: { merhamet: 4 }
+              - savas: { dusmanlar: ["sis_tazisi"], ortam: ["karanlik"], kazan: "yarali_avci_kurtuldu", kaybet: "yarali_avci_yenilgi", kac: "yarali_avci_kacis" }
+          - id: "su"
+            etiket: { tr: "Suya doğru koş; su kokunuzu siler", en: "Make for the water. It'll kill your scent" }
+            zar: { stat: "agi", zorluk: 13, tek: true, basarisiz: "yarali_avci_sikisti", basarisiz_etkiler: [{ ahlak: { duzen: -1 } }, { can: -8 }] }
+            etkiler:
+              - ahlak: { duzen: 2, merhamet: 2 }
+              - bayrak: "avci_kurtarildi"
+              - degisken: { hayatta_kalan: 2 }
+            sonraki: "yarali_avci_kurtuldu"
+          - id: "birak"
+            etiket: { tr: "Onu yere bırak ve koş", en: "Put her down and run" }
+            etkiler:
+              - ahlak: { merhamet: -10, insanlik: -4 }
+              - degisken: { hayatta_kalan: -2 }
+              - bayrak: "avci_birakildi"
+            sonraki: "yarali_avci_terk"
+
+      - id: "yarali_avci_sikisti"
+        paragraflar:
+          - { tr: "Ayağın ıslak bir köke takılıyor ve ikiniz birden çamura yuvarlanıyorsunuz. Kalktığında tazı karşında; başını yana eğmiş, hiç acele etmiyor.", en: "Your boot catches a slick root and you both go down in the mud. When you get up, the hound's right there, head cocked, in no hurry at all." }
+          - { tr: "Kadın çamurun içinde doğrulup kırık yayını sopa gibi kavrıyor. \"Ya şimdi,\" diyor, \"ya hiç.\"", en: "She props herself up in the mud and grips her broken bow like a club. \"Now or never,\" she says." }
+        secenekler:
+          - id: "savas"
+            etiket: { tr: "Önüne geç ve tazıyı karşıla", en: "Get in front of her and meet the hound" }
+            etkiler:
+              - ahlak: { merhamet: 4 }
+              - savas: { dusmanlar: ["sis_tazisi"], ortam: ["karanlik"], kazan: "yarali_avci_kurtuldu", kaybet: "yarali_avci_yenilgi", kac: "yarali_avci_kacis" }
+          - id: "birak"
+            etiket: { tr: "Onu çamurda bırak ve koş", en: "Leave her in the mud and run" }
+            etkiler:
+              - ahlak: { merhamet: -10, insanlik: -4 }
+              - degisken: { hayatta_kalan: -2 }
+              - bayrak: "avci_birakildi"
+            sonraki: "yarali_avci_terk"
+
+      - id: "yarali_avci_kurtuldu"
+        paragraflar:
+          - { tr: "Uluma geride kalıyor. Kadın bir ağaç köküne çöküp derin bir nefes alıyor, sonra sana ilk kez gerçekten bakıyor.", en: "The howling falls behind you. She slumps against a tree root, drags in a long breath, and looks at you for real for the first time." }
+          - { tr: "\"Bu katmanda kimse kimse için durmuyor,\" diyor. \"Sen durdun. Bunu nasıl ödeyeceğimi bilmiyorum ama ödeyeceğim.\"", en: "\"Nobody stops for anybody in this place,\" she says. \"You did. I don't know how I'll pay that back yet, but I will.\"" }
+          - { tr: "Bacağına bir ateş ve temiz bir sargı lazım. {yer:harabe_carsi|de} bir hekimin sahra hastanesi kurduğu söyleniyor; ormanın kuzeyinde de kırmızı kol bantlı, silahlı avcıların kampı var.", en: "That leg needs a fire and a clean dressing. Word is a doctor's set up a field hospital in the {yer:harabe_carsi}. And north of the woods there's a camp of armed hunters with red armbands." }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            metin: { tr: "\"Hastane. Bacağı o haldeyken kimseye borçlanmasın.\"", en: "\"The hospital. Don't let her owe anybody with her leg like that.\"" }
+        secenekler:
+          - id: "siginak"
+            etiket: { tr: "Onu çarşıdaki hekime götür", en: "Take her to the doctor at the mall" }
+            etkiler:
+              - ahlak: { merhamet: 3, duzen: 1 }
+              - itibar: { siginak: 4 }
+              - iliski: { elif_sari: { guven: 5, saygi: 3 } }
+              - bayrak: "avci_kurtarildi"
+              - tohum: { olay: "avci_haberi", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "avci_kurtarildi" } }
+            sonraki: "@akis"
+          - id: "lonca"
+            etiket: { tr: "Onu kuzeydeki avcı kampına götür", en: "Take her to the hunters' camp up north" }
+            etkiler:
+              - ahlak: { duzen: 3 }
+              - itibar: { lonca: 4 }
+              - iliski: { kaya_demir: { saygi: 5 } }
+              - bayrak: "avci_kurtarildi"
+              - tohum: { olay: "avci_haberi", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "avci_kurtarildi" } }
+            sonraki: "@akis"
+          - id: "ucret"
+            etiket: { tr: "Kurtarmanın bedelini şimdi iste", en: "Ask for your fee. Right now" }
+            etkiler:
+              - ahlak: { merhamet: -4, duzen: 2 }
+              - kredi: 15
+              - bayrak: "avci_kurtarildi"
+              - bayrak: "avci_ucret"
+              - tohum: { olay: "avci_haberi", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "avci_kurtarildi" } }
+            sonraki: "@akis"
+
+      - id: "yarali_avci_yenilgi"
+        paragraflar:
+          - { tr: "Gözünü açtığında yüzün çamurda, sırtın yanıyor. Tazı yanı başında yatıyor; gözünün tam ortasında bir ok var.", en: "You come to face-down in the mud, your back on fire. The hound's lying next to you with an arrow dead center in its eye." }
+          - { tr: "Kadın kırık yayını kendi ayakkabı bağcığıyla yeniden germiş. Son oku nereden bulduğunu sormuyorsun; tazının omzundaki eski yaradan söktüğü belli.", en: "She's restrung the bow with her own bootlace. You don't ask where the last arrow came from. From the look of the hound's shoulder, she yanked it out of an old wound." }
+          - { tr: "\"Şimdi ödeştik,\" diyor. Sonra bir an düşünüyor. \"Yok. Hâlâ sana borçluyum; sen önce durdun.\"", en: "\"Now we're even,\" she says. Then she thinks about it. \"No. I still owe you. You stopped first.\"" }
+        secenekler:
+          - id: "tesekkur"
+            etiket: { tr: "Elini tut ve ayağa kalk", en: "Take her hand and get up" }
+            etkiler:
+              - ahlak: { insanlik: 3 }
+              - bayrak: "avci_kurtarildi"
+              - degisken: { hayatta_kalan: 1 }
+              - tohum: { olay: "avci_haberi", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "avci_kurtarildi" } }
+            sonraki: "@akis"
+          - id: "gurur"
+            etiket: { tr: "Yardımına ihtiyacın olmadığını söyle", en: "Tell her you didn't need the help" }
+            etkiler:
+              - ahlak: { insanlik: -2, duzen: 1 }
+              - bayrak: "avci_kurtarildi"
+              - degisken: { hayatta_kalan: 1 }
+              - tohum: { olay: "avci_haberi", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "avci_kurtarildi" } }
+            sonraki: "@akis"
+
+      - id: "yarali_avci_kacis"
+        paragraflar:
+          - { tr: "Tazının dişleri omzunu sıyırırken kadını kucaklayıp yamaçtan aşağı bırakıyorsun kendini. Taşlar, dallar, çamur; sonra buz gibi su.", en: "The hound's teeth rake your shoulder as you grab her and throw yourself down the slope. Rocks, branches, mud. Then ice-cold water." }
+          - { tr: "Akıntı ikinizi birden sürüklüyor. Kıyıya çıktığınızda uluma çok uzakta; şaşkın ve öfkeli.", en: "The current drags you both downstream. By the time you crawl out, the howling is far off, confused and angry." }
+        secenekler:
+          - id: "tasi"
+            etiket: { tr: "Onu en yakın ateşe kadar taşı", en: "Carry her to the nearest fire" }
+            etkiler:
+              - ahlak: { merhamet: 3 }
+              - bayrak: "avci_kurtarildi"
+              - degisken: { hayatta_kalan: 2 }
+              - tohum: { olay: "avci_haberi", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "avci_kurtarildi" } }
+            sonraki: "@akis"
+          - id: "kiyi"
+            etiket: { tr: "Onu kıyıda bırak; buradan sonrası onun işi", en: "Leave her on the bank. She can take it from here" }
+            etkiler:
+              - ahlak: { merhamet: -3 }
+              - bayrak: "avci_kurtarildi"
+              - degisken: { hayatta_kalan: 1 }
+              - tohum: { olay: "avci_haberi", gecikme: { min: 5, max: 9 }, kosul: { bayrak: "avci_kurtarildi" } }
+            sonraki: "@akis"
+
+      - id: "yarali_avci_yagma"
+        paragraflar:
+          - { tr: "Askıyı omzundan sıyırırken itiraz etmiyor. Yalnızca seni izliyor: yüzünü, ellerini, ayakkabılarını, sonra tekrar yüzünü.", en: "She doesn't fight you when you slide the strap off her shoulder. She just watches. Your face, your hands, your shoes. Your face again." }
+          - { tr: "\"Doğru seçim,\" diyor. \"Ben de yapardım.\" Sesinde alay yok; bu daha kötü.", en: "\"Smart call,\" she says. \"I'd have done it too.\" There's no sarcasm in it. That's worse." }
+          - { tr: "Uluma yaklaşıyor. Arkanda nefesi hızlanıyor, ama yalvarmıyor.", en: "The howl's getting closer. Behind you her breathing picks up, but she doesn't beg." }
+        sezgiler:
+          - kosul: { stat: { per: 7 } }
+            metin: { tr: "Gözlerini ezberliyor. Bunu ilk kez yapmadığı belli.", en: "She's memorizing you. You can tell it's not her first time doing that." }
+        secenekler:
+          - id: "su"
+            etiket: { tr: "Suyunu yanına bırak, en azından o kadar", en: "Leave her your water. At least that" }
+            etkiler:
+              - ahlak: { insanlik: 3, merhamet: 1 }
+            sonraki: "@akis"
+          - id: "yuru"
+            etiket: { tr: "Arkana bakmadan yürü", en: "Walk. Don't look back" }
+            etkiler:
+              - ahlak: { insanlik: -2 }
+            sonraki: "@akis"
+
+      - id: "yarali_avci_terk"
+        paragraflar:
+          - { tr: "Onu bir ağacın dibine bırakıyorsun. \"Anlıyorum,\" diyor, ve bu kelime sırtına bir bıçak gibi saplanıyor.", en: "You set her down at the base of a tree. \"I get it,\" she says, and the words go into your back like a blade." }
+          - { tr: "Koşarken arkandan bir uluma, bir yayın çatırtısı ve kısa bir çığlık geliyor. Sonra sis her şeyi yutuyor.", en: "As you run you hear a howl behind you, the crack of a bow, one short scream. Then the fog swallows all of it." }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Verimli,\" diyor Yankı. \"Sistem bunu bir ders olarak kaydetti. Ben kaydetmedim.\"", en: "\"Efficient,\" Echo says. \"The System logged that as a lesson learned. I didn't.\"" }
+        secenekler:
+          - id: "kos"
+            etiket: { tr: "Koşmaya devam et", en: "Keep running" }
+            etkiler:
+              - ahlak: { insanlik: -2 }
+            sonraki: "@akis"
+          - id: "don"
+            etiket: { tr: "Geri dön. Belki hâlâ...", en: "Go back. Maybe she's still..." }
+            etkiler:
+              - ahlak: { insanlik: 3, merhamet: 2 }
+            sonraki: "yarali_avci_geri"
+
+      - id: "yarali_avci_geri"
+        paragraflar:
+          - { tr: "Geri döndüğünde ağacın dibinde yalnızca kırık bir yay, ezilmiş eğreltiler ve senin bıraktığın çanta var. Gerisini sis çoktan almış.", en: "When you get back there's nothing at the foot of the tree but a broken bow, flattened ferns, and the pack you left. The fog's already taken the rest." }
+          - { tr: "Yayın kabzasına bıçakla bir isim kazınmış. Okuyamıyorsun; kan kurumuş.", en: "Someone carved a name into the bow's grip. You can't read it. The blood's dried over it." }
+        secenekler:
+          - id: "al"
+            etiket: { tr: "Çantayı al; artık kimsenin değil", en: "Take the pack. It's nobody's now" }
+            etkiler:
+              - ahlak: { merhamet: -2 }
+              - kredi: 15
+              - esya: { kirmizi_ot: 2 }
+            sonraki: "@akis"
+          - id: "gom"
+            etiket: { tr: "Yayı toprağa göm ve bir taş koy", en: "Bury the bow and set a stone on it" }
+            etkiler:
+              - ahlak: { insanlik: 3 }
+            sonraki: "@akis"
+
+  # ================================================================== avcının borcu
+  - id: "avci_haberi"
+    perde: [1]
+    agirlik: 1
+    etiketler: ["karsilasma", "tohum", "ahlak"]
+    gerilim: 2
+    onemli: true
+    yalniz_tohum: true
+    kart: { tr: "Avcının borcu", en: "A hunter's debt" }
+    sahne: "avci_haberi_1"
+    sahneler:
+      - id: "avci_haberi_1"
+        paragraflar:
+          - metin: { tr: "Kamp ateşinin ışığına topallayarak biri giriyor. Kurtardığın avcı; baldırında temiz bir sargı, sırtında yeni gerilmiş bir yay.", en: "Someone limps into the light of your fire. The hunter you saved: a clean dressing on her calf, a freshly strung bow across her back." }
+            kosul: { bayrak: "avci_kurtarildi" }
+          - metin: { tr: "\"Ücretini almıştın, biliyorum,\" diyor. \"Ama o para bacağımın bedeliydi. Hayatımın bedeli başka.\"", en: "\"I know you already got paid,\" she says. \"But that was for the leg. My life's a different price.\"" }
+            kosul: { bayrak: "avci_ucret" }
+          - metin: { tr: "Ateşin karşısına oturuyor. \"Param yok. Ama bildiğim bir şey var: ortağım {yer:kirik_istasyon|de} öldü ve penceresi hâlâ açık. Ganimeti, son satırları, hepsi orada asılı; yerini bir tek ben biliyorum.\"", en: "She sits down across the fire. \"I don't have money. I've got something I know. My partner died at the {yer:kirik_istasyon} and his window's still open. Loot, last lines, all of it hanging there, and I'm the only one who knows where.\"" }
+            kosul: { bayrak: "avci_kurtarildi" }
+          - metin: { tr: "Kamp ateşinin ışığına biri giriyor; topallıyor ama yürüyor. Çantasını aldığın avcı. Arkasında, karanlığın kenarında, iki kişi daha bekliyor.", en: "Someone steps into the light of your fire, limping but walking. The hunter whose pack you took. Behind her, at the edge of the dark, two more people are waiting." }
+            kosul: { bayrak: "avci_yagmalandi" }
+          - metin: { tr: "\"Ölmedim,\" diyor. \"Hayal kırıklığı olduysa kusura bakma. Çantamı istiyorum; içindeki harita ortağımındı.\"", en: "\"Didn't die,\" she says. \"Sorry if that's a letdown. I want my bag. The map in it was my partner's.\"" }
+            kosul: { bayrak: "avci_yagmalandi" }
+          - metin: { tr: "Arkasındakilerden biri elindeki boruyu yavaşça yere vuruyor. Ritimle; sabırla.", en: "One of the two behind her taps a length of pipe against the ground. Slow. Patient. Keeping time." }
+            kosul: { bayrak: "avci_yagmalandi" }
+        sezgiler:
+          - kosul: { stat: { per: 8 }, bayrak: "avci_kurtarildi" }
+            metin: { tr: "Yalan söylemiyor. Ama ortağının nasıl öldüğüne gelince gözlerini kaçırıyor.", en: "She's not lying. But when she gets to how her partner died, she won't meet your eyes." }
+          - kosul: { stat: { per: 8 }, bayrak: "avci_yagmalandi" }
+            metin: { tr: "Borulu adamın dizleri titriyor. Kavga istemiyor; buraya gelmesi için ona bir şey ödenmiş.", en: "The guy with the pipe has shaky knees. He doesn't want a fight. Somebody paid him to be here." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Ölü bir avcının açık penceresi. Sistem onları kapatmayı bazen unutur. Ben unutmam.\"", en: "\"A dead hunter's open window. Sometimes the System forgets to close those. I don't.\"" }
+        secenekler:
+          # ---- kurtarıldıysa
+          - id: "harita"
+            etiket: { tr: "Haritayı al ve teşekkür et", en: "Take the map and thank her" }
+            goster: { bayrak: "avci_kurtarildi" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+              - arayuz: "harita"
+              - bilgi: "avci_ortagi"
+              - xp: 40
+              - tohum: { olay: "olu_avci_penceresi", gecikme: { min: 1, max: 3 } }
+            sonraki: "@akis"
+          - id: "birlikte"
+            etiket: { tr: "Pencereye birlikte gitmeyi teklif et", en: "Offer to go to the window together" }
+            goster: { bayrak: "avci_kurtarildi" }
+            etkiler:
+              - ahlak: { merhamet: 2, insanlik: 3 }
+              - iliski: { kaya_demir: { saygi: 3 } }
+              - bilgi: "avci_ortagi"
+              - xp: 20
+              - tohum: { olay: "olu_avci_penceresi", gecikme: { min: 1, max: 2 } }
+            sonraki: "avci_haberi_birlikte"
+          - id: "deniz"
+            etiket: { tr: "Bırak {npc:deniz_arman} bacağına baksın", en: "Let {npc:deniz_arman} take a look at that leg" }
+            goster: { bayrak: "avci_kurtarildi", yoldas: "deniz_arman" }
+            etkiler:
+              - ahlak: { merhamet: 3 }
+              - iliski: { deniz_arman: { saygi: 3, baglilik: 3 } }
+              - arayuz: "harita"
+              - bilgi: "avci_ortagi"
+              - tohum: { olay: "olu_avci_penceresi", gecikme: { min: 1, max: 3 } }
+            sonraki: "@akis"
+          - id: "fazlasi"
+            etiket: { tr: "Borcunun bundan büyük olduğunu söyle", en: "Tell her she owes you more than that" }
+            goster: { bayrak: "avci_kurtarildi" }
+            etkiler:
+              - ahlak: { merhamet: -4 }
+              - kredi: 15
+              - bilgi: "avci_ortagi"
+              - tohum: { olay: "olu_avci_penceresi", gecikme: { min: 1, max: 3 } }
+            sonraki: "@akis"
+          - id: "borc_yok"
+            etiket: { tr: "Borç yok, de. Bacağına iyi bak", en: "Tell her there's no debt. Mind the leg" }
+            goster: { bayrak: "avci_kurtarildi" }
+            etkiler:
+              - ahlak: { merhamet: 5 }
+              - itibar: { siginak: 3 }
+              - degisken: { hayatta_kalan: 1 }
+            sonraki: "@akis"
+          # ---- yağmalandıysa
+          - id: "iade"
+            etiket: { tr: "Çantayı ve içindekileri geri ver", en: "Give the bag back, everything in it" }
+            goster: { bayrak: "avci_yagmalandi" }
+            etkiler:
+              - ahlak: { insanlik: 4, merhamet: 3 }
+              - kredi: -15
+              - itibar: { lonca: 2 }
+            sonraki: "avci_haberi_iade"
+          - id: "inkar"
+            etiket: { tr: "O çantayı hiç görmediğini söyle", en: "Say you've never seen that bag" }
+            goster: { bayrak: "avci_yagmalandi" }
+            zar: { stat: "cha", zorluk: 14, tek: true, basarisiz: "avci_haberi_kavga", basarisiz_etkiler: [{ ahlak: { insanlik: -2 } }] }
+            etkiler:
+              - ahlak: { duzen: -3 }
+            sonraki: "avci_haberi_inkar"
+          - id: "tehdit"
+            tur: "aciga_vur"
+            etiket: { tr: "Maskeni indir; boru elinden düşsün", en: "Drop the mask. Watch the pipe hit the dirt" }
+            goster: { bayrak: "kirilma_yasandi", bayrak_yok: "avci_kurtarildi" }
+            etkiler:
+              - aciga_vur: true
+              - ahlak: { merhamet: -3, duzen: 2 }
+            sonraki: "avci_haberi_tehdit"
+          - id: "kavga"
+            etiket: { tr: "Borulu adamla yüzleş", en: "Square up to the guy with the pipe" }
+            goster: { bayrak: "avci_yagmalandi" }
+            etkiler:
+              - ahlak: { merhamet: -4 }
+              - savas: { dusmanlar: ["cop_avcisi"], ortam: ["karanlik"], kazan: "avci_haberi_zafer", kaybet: "avci_haberi_yenilgi", kac: "avci_haberi_kacis" }
+
+      - id: "avci_haberi_birlikte"
+        paragraflar:
+          - { tr: "\"Ortağım akıllı biriydi,\" diyor ateşe bakarak. \"İstasyondaki kapıyı ilk o gördü. İçeri bakmak istedi; ben dışarıda bekledim.\"", en: "\"My partner was the smart one,\" she says, watching the fire. \"He spotted the Gate at the station first. He wanted to take a look inside. I waited out front.\"" }
+          - { tr: "\"Kapı onu beline kadar yuttu, sonra tükürdü. Penceresi o günden beri cesedinin üstünde asılı; ben ona dokunamadım.\"", en: "\"The Gate swallowed him to the waist and spat him back out. His window's been hanging over the body ever since. I couldn't make myself touch it.\"" }
+          - { tr: "\"Benimle gelirsen ganimet yarı yarıya,\" diyor. \"Ama künyesi benim.\"", en: "\"Come with me and the loot's split down the middle,\" she says. \"But his dog tags are mine.\"" }
+        secenekler:
+          - id: "anlas"
+            etiket: { tr: "Anlaştık: yarı yarıya, künye onun", en: "Deal. Half and half, the tags are hers" }
+            etkiler:
+              - ahlak: { duzen: 3 }
+              - itibar: { lonca: 2 }
+            sonraki: "@akis"
+          - id: "istemez"
+            etiket: { tr: "Ganimeti istemediğini söyle", en: "Tell her you don't want the loot" }
+            etkiler:
+              - ahlak: { merhamet: 3, insanlik: 2 }
+              - itibar: { siginak: 2 }
+            sonraki: "@akis"
+
+      - id: "avci_haberi_iade"
+        paragraflar:
+          - { tr: "Çantayı önüne bırakıyorsun. Açmıyor bile; yalnızca harita cebini yokluyor, ve harita yerinde.", en: "You set the bag down in front of her. She doesn't even open it. She just pats the map pocket, and the map's still there." }
+          - { tr: "\"Bir dahaki sefere sor,\" diyor. \"Belki veririm.\" Borulu adam boruyu omzuna atıp gülümsüyor; o da rahatladı.", en: "\"Next time, ask,\" she says. \"I might just give it to you.\" The pipe guy slings his pipe over his shoulder and grins. He's relieved too." }
+        secenekler:
+          - id: "ozur"
+            etiket: { tr: "Özür dile", en: "Apologize" }
+            etkiler:
+              - ahlak: { insanlik: 3 }
+            sonraki: "@akis"
+          - id: "basini_salla"
+            etiket: { tr: "Bir şey söyleme; başını salla", en: "Say nothing. Just nod" }
+            etkiler:
+              - ahlak: { duzen: 1 }
+            sonraki: "@akis"
+
+      - id: "avci_haberi_inkar"
+        paragraflar:
+          - { tr: "Kadın uzun süre yüzüne bakıyor. Sonra omuz silkiyor. \"Belki de sisin içinde başka biriydi,\" diyor; ikiniz de öyle olmadığını biliyorsunuz.", en: "She studies your face for a long time. Then she shrugs. \"Maybe it was somebody else in the fog,\" she says. You both know it wasn't." }
+          - { tr: "Giderken borulu adama bir şey fısıldıyor. Adam boruyu bir kez daha yere vuruyor; bu kez sana bakarak.", en: "On her way out she whispers something to the pipe guy. He taps the pipe on the ground one more time. This time he's looking right at you." }
+        secenekler:
+          - id: "izle"
+            etiket: { tr: "Gidişlerini izle", en: "Watch them go" }
+            etkiler:
+              - ahlak: { duzen: -1 }
+              - bayrak: "avci_dusman"
+              - tohum: { olay: "gece_baskini", gecikme: { min: 2, max: 5 }, kosul: { bayrak: "avci_dusman" } }
+            sonraki: "@akis"
+          - id: "nobet"
+            etiket: { tr: "Bu gece uyuma; nöbet tut", en: "Don't sleep tonight. Stand watch" }
+            etkiler:
+              - ahlak: { duzen: 1 }
+              - stat: { wil: 1 }
+              - bayrak: "avci_dusman"
+              - tohum: { olay: "gece_baskini", gecikme: { min: 2, max: 5 }, kosul: { bayrak: "avci_dusman" } }
+            sonraki: "@akis"
+
+      - id: "avci_haberi_kavga"
+        paragraflar:
+          - { tr: "\"Yalancı,\" diyor kadın, sesini hiç yükseltmeden. \"Askıdaki düğümü ben attım. Şu an ateşinin yanında duruyor.\"", en: "\"Liar,\" she says, without raising her voice. \"I tied that knot on the strap myself. It's sitting right there by your fire.\"" }
+          - { tr: "Borulu adam öne çıkıyor. Dizleri titriyor, ama artık geri adım atamayacak kadar ileride.", en: "The pipe guy steps forward. His knees are shaking, but he's come too far to back down now." }
+        secenekler:
+          - id: "savas"
+            etiket: { tr: "Borulu adamı karşıla", en: "Meet the guy with the pipe" }
+            etkiler:
+              - ahlak: { merhamet: -3 }
+              - savas: { dusmanlar: ["cop_avcisi"], ortam: ["karanlik"], kazan: "avci_haberi_zafer", kaybet: "avci_haberi_yenilgi", kac: "avci_haberi_kacis" }
+          - id: "ver"
+            etiket: { tr: "Çantayı ver; bu gecelik utanç yeter", en: "Hand over the bag. Enough shame for one night" }
+            etkiler:
+              - ahlak: { insanlik: 3, duzen: 1 }
+              - kredi: -15
+            sonraki: "avci_haberi_iade"
+
+      - id: "avci_haberi_tehdit"
+        paragraflar:
+          - { tr: "Bir şey yapmıyorsun; yalnızca maskeni indiriyorsun. Borulu adamın penceresinde gerçek satırın belirdiği an boru elinden kayıyor.", en: "You don't do anything. You just drop the mask. The second your real line shows up in the pipe guy's window, the pipe slides out of his hand." }
+          - { tr: "Kadın bir adım geri atıyor. \"Çantayı tut,\" diyor, sesi kupkuru. \"Ama bunu unutmayacağım. Kimse unutmayacak.\"", en: "She takes a step back. \"Keep the bag,\" she says, her voice bone dry. \"But I won't forget this. Nobody will.\"" }
+        secenekler:
+          - id: "geri_ver"
+            etiket: { tr: "Çantayı yine de geri ver", en: "Give the bag back anyway" }
+            etkiler:
+              - ahlak: { merhamet: 4 }
+              - kredi: -15
+              - itibar: { lonca: 2 }
+              - iliski: { kaya_demir: { saygi: 3 } }
+            sonraki: "@akis"
+          - id: "bak"
+            etiket: { tr: "Arkalarından bak", en: "Watch their backs as they go" }
+            etkiler:
+              - ahlak: { merhamet: -2 }
+              - itibar: { lonca: 1, siginak: -2 }
+            sonraki: "@akis"
+
+      - id: "avci_haberi_zafer"
+        paragraflar:
+          - { tr: "Boru yere düşüyor, ardından adam. Bayılmıyor; yalnızca kalkmamaya karar veriyor.", en: "The pipe hits the ground, then the guy holding it. He doesn't black out. He just decides to stay down." }
+          - { tr: "Kadın çantasını kendisi alıyor; sen durdurmuyorsun. \"Tebrikler,\" diyor. \"Bu katmanda kazananı herkes hatırlar. Nasıl kazandığını da.\"", en: "She picks up her bag herself. You don't stop her. \"Congrats,\" she says. \"Everybody in this place remembers who won. They remember how, too.\"" }
+        secenekler:
+          - id: "gitsin"
+            etiket: { tr: "Gitmelerine izin ver", en: "Let them go" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - bayrak: "avci_dusman"
+              - tohum: { olay: "gece_baskini", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "avci_dusman" } }
+            sonraki: "@akis"
+          - id: "boru"
+            etiket: { tr: "Boruyu da al; ganimet ganimettir", en: "Take the pipe too. Spoils are spoils" }
+            etkiler:
+              - ahlak: { merhamet: -3 }
+              - esya: { hurda: 1 }
+              - itibar: { lonca: 1 }
+              - bayrak: "avci_dusman"
+              - tohum: { olay: "gece_baskini", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "avci_dusman" } }
+            sonraki: "@akis"
+
+      - id: "avci_haberi_yenilgi"
+        paragraflar:
+          - { tr: "Boru kaburgalarına iniyor ve nefesin kesiliyor. Daha yerden kalkamadan kadın çantasını alıyor.", en: "The pipe lands on your ribs and the air goes out of you. Before you can get up, she's already taken her bag." }
+          - { tr: "\"Ödeştik,\" diyor. \"Şimdilik.\" Ateşinin ışığı üçünün sırtında sönüyor.", en: "\"We're square,\" she says. \"For now.\" Your firelight fades off the three of their backs." }
+        secenekler:
+          - id: "yerde"
+            etiket: { tr: "Yerde kal ve gökyüzüne bak", en: "Stay down. Look at the sky" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+            sonraki: "@akis"
+          - id: "kin"
+            etiket: { tr: "Yüzlerini aklına kazı", en: "Memorize their faces" }
+            etkiler:
+              - ahlak: { merhamet: -3 }
+              - bayrak: "avci_dusman"
+              - tohum: { olay: "gece_baskini", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "avci_dusman" } }
+            sonraki: "@akis"
+
+      - id: "avci_haberi_kacis"
+        paragraflar:
+          - { tr: "Boru başının bir karış yanından geçiyor ve sen karanlığa dalıyorsun; ateşini, battaniyeni, çantayı geride bırakarak.", en: "The pipe whistles past your ear and you dive into the dark, leaving your fire, your blanket, and the bag behind." }
+          - { tr: "Döndüğünde kamp yerin boş. Çanta gitmiş; seninkiyle birlikte.", en: "When you come back, your campsite's empty. The bag's gone. So is yours." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Elinde kalanla yola devam et", en: "Move on with whatever you've got left" }
+            etkiler:
+              - ahlak: { duzen: -1 }
+              - kredi: -10
+              - bayrak: "avci_dusman"
+            sonraki: "@akis"
+
+  # ================================================================== bıraktığın yabancı
+  - id: "yabanci_geri_donus"
+    perde: [1]
+    agirlik: 1
+    etiketler: ["tohum", "ahlak", "intikam"]
+    gerilim: 3
+    onemli: true
+    yalniz_tohum: true
+    kart: { tr: "Bıraktığın yüz", en: "The face you left behind" }
+    sahne: "yabanci_geri_donus_1"
+    sahneler:
+      - id: "yabanci_geri_donus_1"
+        paragraflar:
+          - { tr: "Patikanın ortasında biri duruyor ve yol vermiyor. Sol dizi tuhaf bir açıyla bükülmüş; bütün ağırlığını sağ bacağına veriyor.", en: "Somebody's standing in the middle of the trail and isn't moving aside. Their left knee bends at a wrong angle. All their weight sits on the right leg." }
+          - { tr: "Yüzünü yerine oturtman bir saniye sürüyor. Fare, ağaç kökü, inleme; ve senin arkana bakmadan koşuşun.", en: "It takes you a second to place the face. The rat, the tree root, the groaning. And you, running without looking back." }
+          - { tr: "Göğsüne kömürle tek bir göz çizilmiş: {fraksiyon:yukselenler|in} işareti. Arkasında aynı işareti taşıyan üç kişi bekliyor; biri bir zincir tutuyor, zincirin ucunda ağzı bezle bağlanmış bir diken domuzu var.", en: "A single eye has been drawn on their chest in charcoal: the mark of {fraksiyon:yukselenler}. Three more people wearing it wait behind them. One holds a chain, and on the end of it is a muzzled Thornboar." }
+          - { tr: "\"Fare beni neredeyse yiyordu,\" diyor yabancı. \"Kökün yarısına kadar sürükledi. Sen arkana bile bakmadın.\"", en: "\"That rat almost ate me,\" the stranger says. \"Dragged me halfway up that root. You didn't even look back.\"" }
+        sezgiler:
+          - kosul: { stat: { per: 7 } }
+            metin: { tr: "Yabancının elleri titriyor. Bu öfke değil; korku.", en: "The stranger's hands are shaking. That isn't anger. It's fear." }
+          - kosul: { stat: { per: 9 } }
+            metin: { tr: "Zincir eski bir asma kilitten geçirilmiş ama kilit kapalı değil. Biri domuzu salmaya hazırlanmış.", en: "The chain's run through an old padlock, but the lock isn't shut. Somebody's ready to let that boar go." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Vaizleri onlara 'seçilmiş' diyor. Arka sıradakilerin hiçbirinin seviyesi 3'ü geçmiyor. Burada seçilmiş olan tek kişi vaizin kendisi.\"", en: "\"Their preacher calls them the Chosen. Not one of them in the back row is over level 3. The only one chosen here is the preacher.\"" }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            metin: { tr: "\"Bunu bana hiç anlatmamıştın.\"", en: "\"You never told me about this.\"" }
+        secenekler:
+          - id: "ozur"
+            etiket: { tr: "Özür dile. Korktuğunu söyle", en: "Apologize. Tell them you were scared" }
+            zar: { stat: "cha", zorluk: 13, tek: true, basarisiz: "yabanci_geri_donus_kin", basarisiz_etkiler: [{ ahlak: { insanlik: 2 } }, { bayrak: "yabanci_dusman" }] }
+            etkiler:
+              - ahlak: { insanlik: 5, merhamet: 3 }
+            sonraki: "yabanci_geri_donus_ozur"
+          - id: "yalan"
+            etiket: { tr: "Geri döndüğünü ama onu bulamadığını söyle", en: "Say you went back and they were gone" }
+            zar: { stat: "cha", zorluk: 15, tek: true, basarisiz: "yabanci_geri_donus_kin", basarisiz_etkiler: [{ ahlak: { duzen: -3, insanlik: -2 } }, { bayrak: "yabanci_dusman" }] }
+            etkiler:
+              - ahlak: { duzen: -3 }
+            sonraki: "yabanci_geri_donus_yalan"
+          - id: "sus"
+            etiket: { tr: "Sus ve sözünü bitirmesine izin ver", en: "Stay quiet. Let them finish" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+            sonraki: "yabanci_geri_donus_hesap"
+          - id: "goster"
+            tur: "aciga_vur"
+            etiket: { tr: "Ne olduğunu göster; geri çekilsinler", en: "Show them what you are now. Make them back off" }
+            goster: { bayrak: "kirilma_yasandi" }
+            etkiler:
+              - aciga_vur: true
+              - ahlak: { merhamet: -3, duzen: 2 }
+              - iliski: { vahit: { saygi: 8, korku: 4 } }
+              - itibar: { yukselenler: 4, siginak: -2 }
+            sonraki: "yabanci_geri_donus_tapinma"
+
+      - id: "yabanci_geri_donus_ozur"
+        paragraflar:
+          - { tr: "Sözler ağır çıkıyor. Bahane yok, plan yok; yalnızca o gün dizlerinin titrediği ve bazı geceler hâlâ titrediği.", en: "The words come out heavy. No excuses, no plan. Just that your knees were shaking that day, and some nights they still are." }
+          - { tr: "Yabancının yüzünde bir şey çatlıyor. Göğsündeki kömür gözü eliyle örtüyor; sanki o da utanıyormuş gibi.", en: "Something cracks in the stranger's face. They cover the charcoal eye on their chest with one hand, like it's embarrassed too." }
+          - { tr: "\"Bana yakıt diyorlar,\" diyor sessizce. \"Ama yemek veriyorlar. Senin verdiğinden fazlasını.\"", en: "\"They call me fuel,\" they say quietly. \"But they feed me. That's more than you ever gave me.\"" }
+        secenekler:
+          - id: "davet"
+            etiket: { tr: "Seninle gelmesini teklif et", en: "Ask them to come with you" }
+            etkiler:
+              - ahlak: { merhamet: 5, insanlik: 3 }
+              - itibar: { yukselenler: -3, siginak: 3 }
+              - iliski: { vahit: { guven: -5 } }
+              - degisken: { hayatta_kalan: 2 }
+              - bayrak: "yabanci_affetti"
+            sonraki: "@akis"
+          - id: "hekim"
+            etiket: { tr: "Dizi için onu çarşıdaki hekime yönlendir", en: "Point them to the mall doctor for that knee" }
+            etkiler:
+              - ahlak: { merhamet: 3 }
+              - iliski: { elif_sari: { saygi: 3 } }
+              - itibar: { siginak: 2 }
+              - degisken: { hayatta_kalan: 1 }
+              - bayrak: "yabanci_affetti"
+            sonraki: "@akis"
+          - id: "yolunu"
+            etiket: { tr: "Kendi yolunu seçmesine izin ver", en: "Let them choose their own road" }
+            etkiler:
+              - ahlak: { duzen: 2 }
+              - bayrak: "yabanci_affetti"
+              - tohum: { olay: "vahit_vaaz", gecikme: { min: 2, max: 4 } }
+            sonraki: "@akis"
+
+      - id: "yabanci_geri_donus_yalan"
+        paragraflar:
+          - { tr: "\"Geri mi döndün?\" Yabancı sana uzun uzun bakıyor. \"Ben bekledim. O kökün üstünde, fare kulağımı kemirirken. Kimse gelmedi.\"", en: "\"You came back?\" The stranger studies you a long time. \"I waited. On that root, with the rat chewing my ear. Nobody came.\"" }
+          - { tr: "Ama omuzları düşüyor; inanmak istiyor. İnanmak, nefret etmekten daha az yorucu.", en: "But their shoulders drop. They want to believe it. Believing is less tiring than hating." }
+          - { tr: "\"Belki,\" diyor sonunda ve adamlarına dönüş işareti veriyor. Zincirli domuz homurdanarak sürükleniyor.", en: "\"Maybe,\" they finally say, and signal their people to turn around. The chained boar grunts as it's dragged off." }
+        secenekler:
+          - id: "izle"
+            etiket: { tr: "Gidişlerini izle", en: "Watch them go" }
+            etkiler:
+              - ahlak: { insanlik: -2 }
+              - bayrak: "yabanci_affetti"
+            sonraki: "@akis"
+          - id: "itiraf"
+            etiket: { tr: "Arkasından seslen; gerçeği söyle", en: "Call after them. Tell the truth" }
+            etkiler:
+              - ahlak: { insanlik: 5 }
+            sonraki: "yabanci_geri_donus_ozur"
+
+      - id: "yabanci_geri_donus_hesap"
+        paragraflar:
+          - { tr: "Yabancı sözünü bitiriyor: fare, kök, iki gece süren ateş, kendisini bulan beyaz giysili insanlar. Sesi bir kez bile yükselmiyor.", en: "The stranger finishes: the rat, the root, two nights of fever, the people in white who found them. Their voice never rises once." }
+          - { tr: "\"Vaiz bana bir şey öğretti,\" diyor. \"Güçlü olan kaçabilir. Zayıf olan diz çöker. Bugün hangisi olduğunu görmek istiyorum.\"", en: "\"The preacher taught me something,\" they say. \"The strong get to run. The weak get to kneel. I want to see which one you are.\"" }
+          - { tr: "Zincirli domuz homurdanıyor. Arkadaki üç kişi sana değil, yabancıya bakıyor; onlar da kendilerinin hangisi olduğunu merak ediyor.", en: "The chained boar snorts. The three in back aren't watching you. They're watching the stranger, wondering which one they are." }
+        secenekler:
+          - id: "diz"
+            etiket: { tr: "Diz çök", en: "Kneel" }
+            etkiler:
+              - ahlak: { insanlik: 4, duzen: -3 }
+              - itibar: { yukselenler: 2 }
+              - iliski: { vahit: { saygi: -5, guven: 3 } }
+            sonraki: "yabanci_geri_donus_diz"
+          - id: "hicbiri"
+            etiket: { tr: "Hiçbiri. Yürü git", en: "Neither. Walk away" }
+            etkiler:
+              - ahlak: { duzen: 2, merhamet: -2 }
+            sonraki: "yabanci_geri_donus_kin"
+          - id: "domuz"
+            etiket: { tr: "Zinciri çözmelerini söyle", en: "Tell them to let the boar off the chain" }
+            etkiler:
+              - ahlak: { duzen: 2, merhamet: -2 }
+              - savas: { dusmanlar: ["diken_domuzu"], kazan: "yabanci_geri_donus_zafer", kaybet: "yabanci_geri_donus_yenilgi", kac: "yabanci_geri_donus_kacis" }
+
+      - id: "yabanci_geri_donus_kin"
+        paragraflar:
+          - { tr: "Yabancının yüzü bir kapı gibi kapanıyor. \"Aynı ses,\" diyor. \"O gün de bu sesin vardı; kaçarken bir şeyler mırıldanıyordun.\"", en: "The stranger's face shuts like a door. \"Same voice,\" they say. \"You had that voice that day too. You were muttering something while you ran.\"" }
+          - { tr: "Zinciri tutana başıyla işaret ediyor. Kilit açılıyor; bez domuzun ağzından kayıyor.", en: "They nod to the one holding the chain. The padlock clicks open. The muzzle slides off the boar." }
+          - { tr: "\"Şimdi önünde canavar var, arkanda kimse yok,\" diyor yabancı. \"Bakalım ne yapacaksın.\"", en: "\"Now you've got a monster in front of you and nobody behind you,\" the stranger says. \"Let's see what you do.\"" }
+        secenekler:
+          - id: "karsila"
+            etiket: { tr: "Domuzu karşıla", en: "Face the boar" }
+            etkiler:
+              - ahlak: { duzen: 2 }
+              - savas: { dusmanlar: ["diken_domuzu"], kazan: "yabanci_geri_donus_zafer", kaybet: "yabanci_geri_donus_yenilgi", kac: "yabanci_geri_donus_kacis" }
+          - id: "kac"
+            etiket: { tr: "Yine koş", en: "Run. Again" }
+            etkiler:
+              - ahlak: { insanlik: -4, merhamet: -2 }
+              - bayrak: "yabanci_dusman"
+              - tohum: { olay: "gece_baskini", gecikme: { min: 2, max: 5 }, kosul: { bayrak: "yabanci_dusman" } }
+            sonraki: "yabanci_geri_donus_kacis"
+
+      - id: "yabanci_geri_donus_tapinma"
+        paragraflar:
+          - { tr: "Bir an hiçbir şey olmuyor. Sonra zinciri tutan kişi tek dizinin üstüne çöküyor; ardından ikincisi, üçüncüsü.", en: "For a second nothing happens. Then the one holding the chain goes down on one knee. Then the second. Then the third." }
+          - { tr: "Ayakta kalan tek kişi yabancı. Yüzünde artık öfke yok; daha kötüsü var: hayranlık.", en: "The stranger's the only one left standing. There's no anger in their face anymore. There's something worse. Awe." }
+          - { tr: "\"Vaiz haklıymış,\" diye fısıldıyor. \"Seçilmişler kaçar. Sen kaçtın, çünkü seçilmiştin.\"", en: "\"The preacher was right,\" they whisper. \"The Chosen run. You ran because you were chosen.\"" }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Az önce bir tarikata yepyeni bir aziz hediye ettin. Tebrikler.\"", en: "\"You just handed a cult a brand-new saint. Congrats.\"" }
+        secenekler:
+          - id: "duzelt"
+            etiket: { tr: "Söyle: bu seçilmişlik değil, korkaklıktı", en: "Tell them it wasn't chosen. It was cowardice" }
+            etkiler:
+              - ahlak: { insanlik: 5 }
+              - itibar: { yukselenler: -2 }
+              - iliski: { vahit: { guven: -5 } }
+              - bayrak: "yabanci_affetti"
+            sonraki: "@akis"
+          - id: "kabul"
+            etiket: { tr: "Hayranlıklarına izin ver", en: "Let them worship" }
+            etkiler:
+              - ahlak: { insanlik: -5, duzen: 2 }
+              - itibar: { yukselenler: 5 }
+              - iliski: { vahit: { saygi: 5 } }
+              - bayrak: "yabanci_tapiyor"
+              - tohum: { olay: "vahit_vaaz", gecikme: { min: 1, max: 3 } }
+            sonraki: "@akis"
+          - id: "serbest"
+            etiket: { tr: "Domuzun zincirini çözüp gitmelerini emret", en: "Order them to free the boar and leave" }
+            etkiler:
+              - ahlak: { merhamet: 2, duzen: 3 }
+              - itibar: { yukselenler: 2 }
+              - bayrak: "yabanci_tapiyor"
+            sonraki: "@akis"
+
+      - id: "yabanci_geri_donus_diz"
+        paragraflar:
+          - { tr: "Dizin toprağa değdiği an yabancı bir adım geri atıyor. Bunu beklemiyordu; belki kimse beklemiyordu.", en: "The second your knee touches dirt, the stranger takes a step back. They weren't expecting it. Maybe nobody was." }
+          - { tr: "Arkadaki üç kişi birbirine bakıyor. Vaizin kitabında güçlünün diz çöktüğü bir sayfa yok.", en: "The three in back trade looks. There's no page in the preacher's book where the strong one kneels." }
+          - { tr: "\"Kalk,\" diyor yabancı, sesi titreyerek. \"Kalk, lanet olsun. Ben bunu... bunu istemedim.\"", en: "\"Get up,\" the stranger says, voice shaking. \"Get up, damn it. I didn't... I didn't want this.\"" }
+        secenekler:
+          - id: "el"
+            etiket: { tr: "Kalk ve elini uzat", en: "Stand up and offer your hand" }
+            etkiler:
+              - ahlak: { merhamet: 4, insanlik: 3 }
+              - degisken: { hayatta_kalan: 2 }
+              - itibar: { yukselenler: -3, siginak: 3 }
+              - bayrak: "yabanci_affetti"
+            sonraki: "@akis"
+          - id: "yuru"
+            etiket: { tr: "Kalk ve tek kelime etmeden yürü", en: "Get up and walk on without a word" }
+            etkiler:
+              - ahlak: { duzen: 2, insanlik: 1 }
+              - bayrak: "yabanci_affetti"
+            sonraki: "@akis"
+
+      - id: "yabanci_geri_donus_zafer"
+        paragraflar:
+          - { tr: "Domuz son bir kez böğürüp yan yatıyor. Dikenleri hâlâ titriyor; senin ellerin de.", en: "The boar gives one last bellow and rolls onto its side. Its quills are still trembling. So are your hands." }
+          - { tr: "Yabancı sana bakıyor; sonra ölü domuza, sonra kendi bükük dizine. Arkadaki üç kişi yavaşça geri çekiliyor.", en: "The stranger looks at you, then at the dead boar, then down at their own twisted knee. The three in back are slowly edging away." }
+          - { tr: "\"Demek kaçmayabiliyormuşsun,\" diyor. Sesi kırık. \"O gün de kaçmayabilirdin.\"", en: "\"So you can stand your ground,\" they say, voice cracking. \"You could've done it that day too.\"" }
+        secenekler:
+          - id: "evet"
+            etiket: { tr: "Evet, de. Kaçmamalıydım", en: "Say it. Yes. I shouldn't have run" }
+            etkiler:
+              - ahlak: { insanlik: 5 }
+              - bayrak: "yabanci_affetti"
+            sonraki: "@akis"
+          - id: "paylas"
+            etiket: { tr: "Domuzun etini onlarla paylaş", en: "Share the boar meat with them" }
+            etkiler:
+              - ahlak: { merhamet: 4, insanlik: 2 }
+              - esya: { diken_domuzu_eti: 1 }
+              - itibar: { yukselenler: 1 }
+              - degisken: { hayatta_kalan: 2 }
+              - bayrak: "yabanci_affetti"
+            sonraki: "@akis"
+          - id: "kes"
+            etiket: { tr: "Hiçbir şey söylemeden etini kes", en: "Say nothing. Start butchering the boar" }
+            etkiler:
+              - ahlak: { insanlik: -2 }
+              - esya: { diken_domuzu_eti: 2 }
+              - bayrak: "yabanci_dusman"
+              - tohum: { olay: "gece_baskini", gecikme: { min: 2, max: 5 }, kosul: { bayrak: "yabanci_dusman" } }
+            sonraki: "@akis"
+
+      - id: "yabanci_geri_donus_yenilgi"
+        paragraflar:
+          - { tr: "Domuzun omzu göğsüne çarptığında dünya ters dönüyor. Gözünü açtığında sırtüstü yatıyorsun; domuz yeniden zincirde, yabancı başında duruyor.", en: "When the boar's shoulder hits your chest, the world flips over. You open your eyes flat on your back. The boar's back on its chain, and the stranger is standing over you." }
+          - { tr: "\"İşte,\" diyor. \"Şimdi biliyorsun.\" Elini uzatmıyor; ama domuzu da üstüne salmıyor.", en: "\"There,\" they say. \"Now you know.\" They don't offer a hand. They don't let the boar finish it either." }
+          - { tr: "Gidiyorlar. Hiçbiri arkasına bakmıyor.", en: "They leave. None of them look back." }
+        secenekler:
+          - id: "kabul"
+            etiket: { tr: "Kalk ve bunu hak ettiğini kabul et", en: "Get up. Admit you had that coming" }
+            etkiler:
+              - ahlak: { insanlik: 3 }
+              - bayrak: "yabanci_affetti"
+            sonraki: "@akis"
+          - id: "yemin"
+            etiket: { tr: "Bir dahakine hazır olacağına yemin et", en: "Swear you'll be ready next time" }
+            etkiler:
+              - ahlak: { merhamet: -3 }
+              - stat: { wil: 1 }
+              - bayrak: "yabanci_dusman"
+              - tohum: { olay: "gece_baskini", gecikme: { min: 2, max: 5 }, kosul: { bayrak: "yabanci_dusman" } }
+            sonraki: "@akis"
+
+      - id: "yabanci_geri_donus_kacis"
+        paragraflar:
+          - { tr: "Koşuyorsun. Ağaçlar, kökler, sis; tanıdık bir yol. Arkandan bir böğürme, sonra bir kahkaha geliyor.", en: "You run. Trees, roots, fog. You know this route. Behind you comes a bellow, and then laughter." }
+          - { tr: "\"Gördünüz mü?\" diye bağırıyor yabancı arkandan. \"Aynısı! Tıpatıp aynısı!\"", en: "\"See?\" the stranger yells after you. \"Same thing! The exact same thing!\"" }
+          - { tr: "O kahkahayı uzun süre duyuyorsun. Sis bile onu yutmakta zorlanıyor.", en: "You hear that laugh for a long time. Even the fog has trouble swallowing it." }
+        secenekler:
+          - id: "kos"
+            etiket: { tr: "Koşmaya devam et", en: "Keep running" }
+            etkiler:
+              - ahlak: { insanlik: -2 }
+              - bayrak: "yabanci_dusman"
+              - tohum: { olay: "gece_baskini", gecikme: { min: 2, max: 5 }, kosul: { bayrak: "yabanci_dusman" } }
+            sonraki: "@akis"
+          - id: "utanc"
+            etiket: { tr: "Dur. Bu utancı aklına kazı", en: "Stop. Burn this shame into memory" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+              - stat: { wil: 1 }
+              - bayrak: "yabanci_dusman"
+            sonraki: "@akis"
+
+  # ================================================================== kurtardığın yabancı
+  - id: "yabanci_minnet"
+    perde: [1]
+    agirlik: 1
+    etiketler: ["tohum", "minnet", "kurtarma"]
+    gerilim: 1
+    yalniz_tohum: true
+    kart: { tr: "Bir iyiliğin karşılığı", en: "A favor returned" }
+    sahne: "yabanci_minnet_1"
+    sahneler:
+      - id: "yabanci_minnet_1"
+        paragraflar:
+          - { tr: "Sabah ateşini yeniden yakarken biri sana sesleniyor. Adını bilmediği için bağırdığı şey şu: \"Hey! Fareci!\"", en: "You're getting the morning fire going when somebody calls out to you. They don't know your name, so what they actually yell is: \"Hey! Rat person!\"" }
+          - { tr: "Fareden kurtardığın yabancı. Hâlâ hafifçe topallıyor ama yürüyor; yanaklarına renk gelmiş, elinde bez bir bohça var.", en: "The stranger you saved from the rat. Still limping a little, but walking. There's color in their cheeks, and they're carrying a cloth bundle." }
+          - { tr: "\"Seni bulmak günlerimi aldı,\" diyor nefes nefese. \"O gün kimse durmadı. Sen durdun. Bunu bir yere yazmam lazımdı ve kâğıdım yoktu.\"", en: "\"Took me days to find you,\" they say, out of breath. \"Nobody stopped that day. You did. I needed to write that down somewhere and I didn't have any paper.\"" }
+          - { tr: "Bohçayı açıyor: içinde kırmızı sıvılı iki küçük şişe. \"Bir de... çakımı hâlâ taşıyor musun?\"", en: "They unwrap the bundle: two little vials of something red. \"Also... you still carrying my pocketknife?\"" }
+        sezgiler:
+          - kosul: { stat: { per: 7 } }
+            metin: { tr: "Bohçayı tutan parmak uçları mosmor. Bu iksirler için bir şey takas etmiş; büyük ihtimalle kendi yemeğini.", en: "The fingertips holding that bundle are purple. They traded something for those potions. Probably their own food." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Geri dönen bir iyilik. İstatistiksel olarak nadir. Kaydettim.\"", en: "\"A favor coming back around. Statistically rare. I've logged it.\"" }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            metin: { tr: "\"Gördün mü? Bazen dünya borcunu öder.\"", en: "\"See? Sometimes the world pays you back.\"" }
+        secenekler:
+          - id: "al"
+            etiket: { tr: "Bohçayı al ve teşekkür et", en: "Take the bundle and thank them" }
+            etkiler:
+              - esya: { kucuk_iyilesme_iksiri: 2 }
+              - ahlak: { insanlik: 1 }
+            sonraki: "@akis"
+          - id: "reddet"
+            etiket: { tr: "Kendine saklasın; ona daha çok lazım", en: "Tell them to keep it. They need it more" }
+            etkiler:
+              - ahlak: { merhamet: 5 }
+              - degisken: { hayatta_kalan: 1 }
+              - itibar: { siginak: 2 }
+            sonraki: "yabanci_minnet_ret"
+          - id: "bilgi"
+            etiket: { tr: "Eşya yerine ne gördüğünü sor", en: "Ask what they've seen out there instead" }
+            gerekli: { stat: { per: 7 } }
+            etkiler:
+              - ahlak: { duzen: 1 }
+              - xp: 30
+            sonraki: "yabanci_minnet_bilgi"
+          - id: "caki"
+            etiket: { tr: "Çakıyı ona geri ver", en: "Give them back the pocketknife" }
+            etkiler:
+              - ahlak: { insanlik: 3 }
+              - esya: { kucuk_iyilesme_iksiri: 1 }
+            sonraki: "yabanci_minnet_caki"
+          - id: "deniz"
+            etiket: { tr: "{npc:deniz_arman} dizine bir baksın", en: "Let {npc:deniz_arman} take a look at that knee" }
+            goster: { yoldas: "deniz_arman" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - iliski: { deniz_arman: { guven: 4, baglilik: 3 } }
+              - esya: { kucuk_iyilesme_iksiri: 2 }
+              - degisken: { hayatta_kalan: 1 }
+            sonraki: "@akis"
+
+      - id: "yabanci_minnet_caki"
+        paragraflar:
+          - { tr: "Çakıyı avucuna bırakıyorsun. Yabancı onu bir süre evirip çeviriyor; sapında, senin ilk gece tırnağınla açtığın küçük bir çentik var.", en: "You drop the knife into their palm. They turn it over a while. There's a little nick in the handle where you pried it open with your thumbnail that first night." }
+          - { tr: "\"Babamındı,\" diyor. \"Bunu da kaybettim sanıyordum. Herkesi kaybettiğim gibi.\" Şişelerden birini zorla eline tutuşturuyor.", en: "\"It was my dad's,\" they say. \"Thought I'd lost it too. Same as everybody.\" They press one of the vials into your hand and won't take no." }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Şişeyi al ve omzuna dokun", en: "Take the vial. Squeeze their shoulder" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+            sonraki: "@akis"
+
+      - id: "yabanci_minnet_ret"
+        paragraflar:
+          - { tr: "Yabancı bohçayı göğsüne bastırıp bir süre sana bakıyor. \"O zaman gel, gör,\" diyor sonunda. \"Dokuz kişiyiz. Bir yağmur kanalında saklanıyoruz; ikisi hasta.\"", en: "The stranger hugs the bundle to their chest and looks at you a while. \"Then come see,\" they finally say. \"There are nine of us. We're hiding in a storm culvert. Two are sick.\"" }
+          - { tr: "\"Onlara senden bahsettim,\" diye ekliyor. \"Senin ne yapacağını görmek istiyorlar.\"", en: "\"I told them about you,\" they add. \"They want to see what you'll do.\"" }
+        secenekler:
+          - id: "git"
+            etiket: { tr: "Kanala git", en: "Go to the culvert" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+            sonraki: "yabanci_minnet_grup"
+          - id: "simdi_degil"
+            etiket: { tr: "Şimdi olmaz, de; yerini aklında tut", en: "Say not now, but remember where it is" }
+            etkiler:
+              - ahlak: { duzen: 1 }
+            sonraki: "@akis"
+
+      - id: "yabanci_minnet_bilgi"
+        paragraflar:
+          - { tr: "Yabancı yere çömelip bir dalla toprağa harita çiziyor. \"Burası benim kanalım. Burası tazıların yolu; her akşam aynı saatte geçiyorlar.\"", en: "The stranger squats and draws a map in the dirt with a stick. \"That's my culvert. That's the hounds' route. They come through same time every evening.\"" }
+          - { tr: "\"Bir de şu,\" diyor ve kuzeye bir çarpı atıyor. \"Ağaçlara oklar kazınmış. Bazıları bir yere götürüyor. Bazılarını takip edenleri bir daha görmedim.\"", en: "\"And this,\" they say, scratching an X to the north. \"Somebody's carved arrows into the trees. Some lead somewhere. Some, I never saw the people who followed them again.\"" }
+          - { tr: "\"Dokuz kişiyiz,\" diye ekliyor, sesi alçalarak. \"İkisi hasta. Gelip bakar mısın?\"", en: "\"There are nine of us,\" they add, quieter. \"Two are sick. Would you come take a look?\"" }
+        secenekler:
+          - id: "oklar"
+            etiket: { tr: "Okların yerini iyice aklına yaz", en: "Fix the arrows' location in your head" }
+            etkiler:
+              - ahlak: { duzen: 2 }
+              - tohum: { olay: "isaretli_agaclar", gecikme: { min: 1, max: 3 } }
+            sonraki: "@akis"
+          - id: "git"
+            etiket: { tr: "Önce hastalara bak", en: "Check on the sick ones first" }
+            etkiler:
+              - ahlak: { merhamet: 3 }
+              - tohum: { olay: "isaretli_agaclar", gecikme: { min: 2, max: 4 } }
+            sonraki: "yabanci_minnet_grup"
+
+      - id: "yabanci_minnet_grup"
+        paragraflar:
+          - { tr: "Kurumuş bir yağmur kanalının içinde dokuz kişi. Ateş yakmaya korkmuşlar; birbirlerine sokulup ısınıyorlar.", en: "Nine people inside a dried-out storm culvert. Too scared to light a fire, they're huddled together for warmth." }
+          - { tr: "İkisi ateşler içinde: yaşlı bir adam ve on yaşlarında bir kız. İkisinin de kolları iğne tavşanı dikenleriyle çizik çizik.", en: "Two of them are burning up: an old man and a girl of maybe ten. Both their arms are scratched raw by Needle Hare quills." }
+          - { tr: "Yabancı sana dönüyor. \"İşte,\" diyor. \"Bu kadarız.\"", en: "The stranger turns to you. \"This is it,\" they say. \"This is all of us.\"" }
+        sezgiler:
+          - kosul: { stat: { per: 8 } }
+            metin: { tr: "Çizikler iltihaplanmış ama zehir yok. Kırmızı ot ve kaynamış su yeter.", en: "The scratches are infected, but there's no venom. Red herb and boiled water would do it." }
+        secenekler:
+          - id: "tedavi"
+            etiket: { tr: "Kırmızı otla yaralarını temizle", en: "Clean their wounds with red herb" }
+            gerekli: { esya: { kirmizi_ot: 2 } }
+            etkiler:
+              - esya: { kirmizi_ot: -2 }
+              - ahlak: { merhamet: 5 }
+              - degisken: { hayatta_kalan: 2 }
+              - efsane: "yabancilari_iyilestirdi"
+              - itibar: { siginak: 2 }
+            sonraki: "@akis"
+          - id: "siginak"
+            etiket: { tr: "Onları çarşıdaki sahra hastanesine götür", en: "Lead them to the field hospital at the mall" }
+            etkiler:
+              - ahlak: { merhamet: 3, duzen: 2 }
+              - degisken: { hayatta_kalan: 3 }
+              - itibar: { siginak: 4 }
+              - iliski: { elif_sari: { guven: 5, saygi: 4 } }
+              - bayrak: "minnet_grubu"
+              - tohum: { olay: "elif_sahra_hastanesi", gecikme: { min: 1, max: 2 } }
+            sonraki: "@akis"
+          - id: "lonca"
+            etiket: { tr: "Onları kuzeydeki avcı kampına teslim et", en: "Hand them over to the hunters' camp up north" }
+            etkiler:
+              - ahlak: { duzen: 4, merhamet: -1 }
+              - degisken: { hayatta_kalan: 2 }
+              - itibar: { lonca: 4 }
+              - iliski: { kaya_demir: { saygi: 4 } }
+              - tohum: { olay: "kaya_ilk_tanisma", gecikme: { min: 1, max: 2 } }
+            sonraki: "@akis"
+          - id: "ates"
+            etiket: { tr: "Duman çıkarmayan bir ateş yakmayı öğret, git", en: "Teach them a smokeless fire, then move on" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+              - degisken: { hayatta_kalan: 1 }
+            sonraki: "@akis"
+
+  # ================================================================== sisteki çocuk
+  - id: "kayip_cocuk"
+    perde: [1]
+    bolge: ["ogretici_orman"]
+    gun: { min: 2, max: 16 }
+    agirlik: 5
+    etiketler: ["kurtarma", "ahlak", "kesif"]
+    gerilim: 3
+    onemli: true
+    kart: { tr: "Sisteki çocuk", en: "The kid in the fog" }
+    sahne: "kayip_cocuk_1"
+    sahneler:
+      - id: "kayip_cocuk_1"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Sisin kenarında bir kadın ağaçların arasına doğru tek bir isim bağırıyor. Sesi çoktan kısılmış; artık bağırmaktan çok hırıldıyor.", en: "At the edge of the fog a woman is screaming one name into the trees, over and over. Her voice gave out a while ago. It's more of a rasp now." }
+          - { tr: "Seni görünce koluna yapışıyor. Yedi yaşındaki oğlu bir iğne tavşanının peşinden sise dalmış; iki saattir dönmemiş.", en: "When she sees you she grabs your arm. Her seven-year-old chased a Needle Hare into the fog two hours ago and hasn't come back." }
+          - { tr: "Tam o anda sisin içinden ince bir ses yükseliyor: \"Anne?\" Sonra bambaşka bir yönden, tıpatıp aynısı: \"Anne?\"", en: "Right then a thin voice floats out of the fog: \"Mom?\" Then, from a completely different direction, the exact same thing: \"Mom?\"" }
+        sezgiler:
+          - kosul: { stat: { per: 8 } }
+            metin: { tr: "İki ses aynı değil. Soldaki her seferinde aynı tonda tekrarlıyor, kayıt gibi; sağdaki titriyor, yoruluyor. Gerçek olan o.", en: "The two voices aren't the same. The left one repeats on the exact same pitch every time, like a recording. The right one wobbles and tires. That's the real one." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Ormanda ses çalan bir şey var. Çocuğu kimse bulmadan önce sesini bulmuş.\"", en: "\"There's something in these woods that steals voices. It found the kid's voice before anyone found the kid.\"" }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            metin: { tr: "\"Bir kız kardeşim var, biliyorsun. Bunun yanından geçip gidemem.\"", en: "\"I've got a little sister. You know that. I can't walk past this.\"" }
+        secenekler:
+          - id: "dal"
+            etiket: { tr: "Sese doğru sise dal", en: "Plunge into the fog after the voice" }
+            etkiler:
+              - ahlak: { merhamet: 5 }
+              - gorev: { sisteki_cocuk: "basla" }
+            sonraki: "kayip_cocuk_sis"
+          - id: "dinle"
+            etiket: { tr: "Dur ve dinle; gerçek sesi ayır", en: "Stop. Listen. Pick out the real voice" }
+            gerekli: { stat: { per: 8 } }
+            etkiler:
+              - ahlak: { merhamet: 4, duzen: 2 }
+              - gorev: { sisteki_cocuk: "basla" }
+            sonraki: "kayip_cocuk_kovuk"
+          - id: "zincir"
+            etiket: { tr: "Etraftakileri bir arama zincirine topla", en: "Rally the bystanders into a search line" }
+            zar: { stat: "cha", zorluk: 12, tek: true, basarisiz: "kayip_cocuk_sis", basarisiz_etkiler: [{ ahlak: { duzen: 1 } }, { gorev: { sisteki_cocuk: "basla" } }] }
+            etkiler:
+              - ahlak: { duzen: 4, merhamet: 2 }
+              - gorev: { sisteki_cocuk: "basla" }
+              - itibar: { siginak: 2 }
+            sonraki: "kayip_cocuk_zincir"
+          - id: "ayril"
+            etiket: { tr: "Ayrılın: {npc:deniz_arman} doğuya, sen batıya", en: "Split up. {npc:deniz_arman} east, you west" }
+            goster: { yoldas: "deniz_arman" }
+            etkiler:
+              - ahlak: { merhamet: 4 }
+              - iliski: { deniz_arman: { guven: 5, saygi: 4 } }
+              - gorev: { sisteki_cocuk: "basla" }
+            sonraki: "kayip_cocuk_sis"
+          - id: "vazgec"
+            etiket: { tr: "Sisin kaybolanı geri vermediğini söyle", en: "Tell her the fog doesn't give people back" }
+            etkiler:
+              - ahlak: { merhamet: -8, insanlik: -4 }
+              - gorev: { sisteki_cocuk: "basla" }
+            sonraki: "kayip_cocuk_vazgec"
+
+      - id: "kayip_cocuk_sis"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "İçeri girdikçe sis koyulaşıyor; on adım sonra kendi ellerini zor görüyorsun. \"Anne?\" sesi bu kez tam tependen, bir dalın üstünden geliyor.", en: "The fog gets thicker the deeper you go. Ten steps in, you can barely see your own hands. \"Mom?\" This time the voice is right above you, on a branch." }
+          - metin: { tr: "Uzakta, doğuda, {npc:deniz_arman} iki kısa ıslık çalıyor: buradayım, iyiyim. Sana bir parça cesaret veriyor bu.", en: "Far off to the east, {npc:deniz_arman} whistles twice, short. Here. Okay. It buys you a little nerve." }
+            kosul: { yoldas: "deniz_arman" }
+          - { tr: "Dalda kara tüylü bir karga oturuyor. Gagası kıpırdamıyor ama çocuğun sesi ondan çıkıyor: \"Anne? Anne, korkuyorum.\" Sonra kıkırdıyor.", en: "There's a black-feathered crow on the branch. Its beak doesn't move, but the kid's voice comes out of it anyway: \"Mom? Mom, I'm scared.\" Then it giggles." }
+          - { tr: "Daha ileride, sağda, bir şey ağlıyor. Taklit edilemeyecek kadar düzensiz bir ağlama.", en: "Further on, to the right, something's crying. Too ragged and uneven to be faked." }
+        sezgiler:
+          - kosul: { stat: { per: 9 } }
+            metin: { tr: "Karga durmadan sağa, ağlamaya doğru bakıyor. O da çocuğu arıyor; senden önce bulmak istiyor.", en: "The crow keeps glancing right, toward the crying. It's hunting the kid too. It wants to get there first." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Fısıldayan Karga. Ölülerin son sözlerini toplar. Bu çocuğunkini henüz toplamadı.\"", en: "\"Rumor Crow. It collects the last words of the dead. It hasn't collected this kid's yet.\"" }
+        secenekler:
+          - id: "karga"
+            etiket: { tr: "Kargayı o daldan indir", en: "Knock that crow off its branch" }
+            etkiler:
+              - ahlak: { duzen: 2, merhamet: 2 }
+              - savas: { dusmanlar: ["fisildayan_karga"], ortam: ["karanlik"], kazan: "kayip_cocuk_kovuk", kaybet: "kayip_cocuk_yenilgi", kac: "kayip_cocuk_kacis" }
+          - id: "agla"
+            etiket: { tr: "Kargayı boş ver; ağlamaya koş", en: "Forget the crow. Run for the crying" }
+            zar: { stat: "agi", zorluk: 13, tek: true, basarisiz: "kayip_cocuk_pusu", basarisiz_etkiler: [{ ahlak: { merhamet: 1 } }] }
+            etkiler:
+              - ahlak: { merhamet: 4 }
+            sonraki: "kayip_cocuk_kovuk"
+          - id: "tas"
+            etiket: { tr: "Bir taş fırlat; kargayı ürküt", en: "Throw a rock and spook the crow" }
+            gerekli: { egilim_min: { menzilli: 2 } }
+            etkiler:
+              - ahlak: { merhamet: 2, duzen: 1 }
+              - egilim: { menzilli: 1 }
+              - xp: 30
+            sonraki: "kayip_cocuk_kovuk"
+
+      - id: "kayip_cocuk_pusu"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Geç kaldın. Kovuklu bir ağacın önünde karga yere inmiş ve senin sesinle konuşuyor: \"Gel, korkma. Ben buradayım. Çık dışarı.\"", en: "You're too late. The crow has landed in front of a hollow tree, and it's talking in your voice: \"Come on out, it's okay. I'm here. Come on out.\"" }
+          - { tr: "Kovuğun içinden küçük bir el uzanıyor.", en: "A small hand reaches out of the hollow." }
+        secenekler:
+          - id: "atil"
+            etiket: { tr: "Kargaya atıl", en: "Lunge at the crow" }
+            etkiler:
+              - ahlak: { merhamet: 4 }
+              - savas: { dusmanlar: ["fisildayan_karga"], ortam: ["karanlik"], kazan: "kayip_cocuk_kovuk", kaybet: "kayip_cocuk_yenilgi", kac: "kayip_cocuk_kacis" }
+          - id: "bagir"
+            etiket: { tr: "Bağır: \"İçeride kal!\" Sonra saldır", en: "Shout \"Stay inside!\" Then attack" }
+            gerekli: { stat: { wil: 7 } }
+            etkiler:
+              - ahlak: { merhamet: 3, duzen: 1 }
+              - savas: { dusmanlar: ["fisildayan_karga"], ortam: ["karanlik"], kazan: "kayip_cocuk_kovuk", kaybet: "kayip_cocuk_yenilgi", kac: "kayip_cocuk_kacis" }
+
+      - id: "kayip_cocuk_zincir"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Sesin kampın üstünden geçiyor. Bir an kimse kımıldamıyor; sonra yaşlı bir adam bastonunu bırakıp elini uzatıyor, ardından ikincisi, üçüncüsü.", en: "Your voice carries across the camp. For a second nobody moves. Then an old man drops his cane and reaches out a hand, then a second person, then a third." }
+          - { tr: "Sekiz kişi, el ele, sise doğru yürüyorsunuz. Zincirin ucunda sen varsın.", en: "Eight of you, hand in hand, walking into the fog. You're at the front of the line." }
+          - { tr: "Karga zinciri görünce susuyor; bu kadar çok ses kafasını karıştırıyor. Ağlama ise tek başına kalıyor ve kolayca bulunuyor.", en: "When the crow sees the line, it goes quiet. That many voices throws it off. The crying is left all on its own, and it's easy to follow." }
+        secenekler:
+          - id: "yonlendir"
+            etiket: { tr: "Zinciri ağlamaya doğru yönlendir", en: "Lead the line toward the crying" }
+            etkiler:
+              - ahlak: { duzen: 2 }
+              - degisken: { hayatta_kalan: 1 }
+            sonraki: "kayip_cocuk_kovuk"
+          - id: "avla"
+            etiket: { tr: "Zinciri bırak; kargayı tek başına avla", en: "Leave the line. Hunt the crow yourself" }
+            etkiler:
+              - ahlak: { duzen: -1, merhamet: 1 }
+              - savas: { dusmanlar: ["fisildayan_karga"], ortam: ["karanlik"], kazan: "kayip_cocuk_kovuk", kaybet: "kayip_cocuk_yenilgi", kac: "kayip_cocuk_kacis" }
+
+      - id: "kayip_cocuk_kovuk"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Kovuk bir ağacın içinde, dizlerini göğsüne çekmiş bir çocuk. Kucağında, iğneleri kabarmış, zangır zangır titreyen bir iğne tavşanı var.", en: "Inside a hollow tree, a little boy with his knees pulled up to his chest. In his lap he's holding a Needle Hare, quills bristling, shaking like a leaf." }
+          - { tr: "Kollarının her yeri çizik içinde ama tavşanı bırakmıyor. \"Ayağı sıkışmıştı,\" diyor. \"Kurtardım. Sonra yolu kaybettim.\"", en: "His arms are scratched to ribbons, but he won't let go of the hare. \"Its foot was stuck,\" he says. \"I saved it. Then I got lost.\"" }
+          - { tr: "Tavşan sana iki kocaman, korkmuş gözle bakıyor. Sistem ona Seviye 1 diyor; senin çantan ise iki gündür boş.", en: "The hare stares at you with two huge, terrified eyes. The System says it's Level 1. Your pack's been empty for two days." }
+        sezgiler:
+          - kosul: { stat: { per: 7 } }
+            metin: { tr: "Tavşanın arka bacağı kırık. Ormana bırakılırsa sabahı göremez.", en: "The hare's back leg is broken. Turn it loose in the woods and it won't see morning." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Seviye 1. Kırk XP. Çocuk biraz ağlar, sonra geçer. Söylemem gerekiyordu.\"", en: "\"Level 1. Forty XP. The kid'll cry a little, then get over it. I had to mention it.\"" }
+        secenekler:
+          - id: "ikisi"
+            etiket: { tr: "İkisini birden kucakla ve geri dön", en: "Scoop up both of them and head back" }
+            etkiler:
+              - ahlak: { merhamet: 6, insanlik: 3 }
+              - efsane: "canavari_bagisladi"
+              - bayrak: "cocuk_kurtarildi"
+              - bayrak: "tavsan_bagislandi"
+            sonraki: "kayip_cocuk_donus"
+          - id: "birak"
+            etiket: { tr: "Tavşanı bıraktır; yalnızca çocuğu al", en: "Make him drop the hare. Take just the boy" }
+            etkiler:
+              - ahlak: { duzen: 2, merhamet: -1 }
+              - bayrak: "cocuk_kurtarildi"
+            sonraki: "kayip_cocuk_donus"
+          - id: "yemek"
+            etiket: { tr: "Tavşanı al. Bu akşam yemek var", en: "Take the hare. That's dinner tonight" }
+            etkiler:
+              - ahlak: { insanlik: -5, merhamet: -4 }
+              - esya: { kizarmis_et: 1 }
+              - xp: 40
+              - bayrak: "cocuk_kurtarildi"
+              - bayrak: "tavsan_yendi"
+            sonraki: "kayip_cocuk_donus"
+
+      - id: "kayip_cocuk_donus"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Sisin kenarına çıktığınızda kadın dizlerinin üstüne çöküyor. Oğluna öyle sıkı sarılıyor ki çocuk bir an nefes alamıyor.", en: "When you come out of the fog, the woman drops to her knees. She hugs her son so hard he can't breathe for a second." }
+          - metin: { tr: "Çocuğun kucağındaki tavşan kalabalığın ortasında bile iğnelerini indirmiyor. Kimse ona dokunmaya cesaret edemiyor; çocuk hariç.", en: "The hare in the boy's arms keeps its quills up even in the middle of the crowd. Nobody dares touch it. Nobody except him." }
+            kosul: { bayrak: "tavsan_bagislandi" }
+          - metin: { tr: "Çocuk dönüş yolu boyunca sana tek kelime etmedi. Şimdi annesinin omzunun üstünden sana bakıyor; bakışında yedi yaşına yakışmayan bir şey var.", en: "The boy didn't say a word to you the whole way back. Now he's watching you over his mother's shoulder with a look no seven-year-old should have." }
+            kosul: { bayrak: "tavsan_yendi" }
+          - { tr: "Kadının arkasında kampın geri kalanı toplanmış: on bir kişi, üç çadır, tek bir ateş. Hepsi sana bakıyor.", en: "Behind her, the rest of the camp has gathered. Eleven people, three tents, one fire. All of them are looking at you." }
+          - { tr: "Çocuk birden konuşuyor: \"Ormanda beyazlı bir amca vardı. Başka çocukları ışığa götürüyordu. Bana da gel dedi.\"", en: "Then the boy pipes up. \"There was a man in white in the woods. He was taking other kids to the light. He told me to come too.\"" }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Beyaz giysi. Işık. Bunu daha önce duymuştum. O zaman da sevmemiştim.\"", en: "\"White clothes. The light. I've heard that one before. Didn't like it then either.\"" }
+        secenekler:
+          - id: "siginak"
+            etiket: { tr: "Kampı çarşıdaki hekime yönlendir", en: "Point the camp toward the doctor at the mall" }
+            etkiler:
+              - ahlak: { merhamet: 3, duzen: 2 }
+              - degisken: { hayatta_kalan: 3 }
+              - itibar: { siginak: 4 }
+              - iliski: { elif_sari: { guven: 4 } }
+              - gorev: { sisteki_cocuk: "tamam" }
+            sonraki: "@akis"
+          - id: "beyazli"
+            etiket: { tr: "Beyazlı adamı sor; çocuklar nereye gitti?", en: "Ask about the man in white. Where'd the kids go?" }
+            etkiler:
+              - ahlak: { insanlik: 3, duzen: 1 }
+              - degisken: { hayatta_kalan: 2 }
+              - iliski: { vahit: { guven: -5 } }
+              - bilgi: "beyazli_adam"
+              - gorev: { sisteki_cocuk: "tamam" }
+              - tohum: { olay: "vahit_vaaz", gecikme: { min: 1, max: 3 } }
+            sonraki: "@akis"
+          - id: "odul"
+            etiket: { tr: "Ödül iste; boşuna risk almadın", en: "Ask for a reward. You didn't risk it for free" }
+            etkiler:
+              - ahlak: { merhamet: -4, duzen: 2 }
+              - kredi: 10
+              - degisken: { hayatta_kalan: 2 }
+              - gorev: { sisteki_cocuk: "tamam" }
+            sonraki: "@akis"
+
+      - id: "kayip_cocuk_yenilgi"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Gaga şakağına iniyor ve sis kararıyor. Uyandığında biri seni sarsıyor; küçük, inatçı eller.", en: "Its beak catches your temple and the fog goes black. When you come to, someone's shaking you. Small, stubborn hands." }
+          - { tr: "Çocuk. Kargayı kovuktan fırlattığı bir taşla kaçırmış; şimdi seni sürüklemeye çalışıyor, kolunun altında hâlâ tavşan.", en: "The kid. He ran the crow off with a rock from the hollow, and now he's trying to drag you, the hare still tucked under one arm." }
+          - { tr: "\"Sen beni kurtarmaya geldin,\" diyor ciddi ciddi. \"O zaman ben de seni kurtarırım. Kural bu.\"", en: "\"You came to save me,\" he says, dead serious. \"So I save you back. That's the rule.\"" }
+        secenekler:
+          - id: "omuz"
+            etiket: { tr: "Gül ve onu omuzlarına al", en: "Laugh and hoist him onto your shoulders" }
+            etkiler:
+              - ahlak: { insanlik: 4 }
+              - efsane: "canavari_bagisladi"
+              - bayrak: "cocuk_kurtarildi"
+              - bayrak: "tavsan_bagislandi"
+            sonraki: "kayip_cocuk_donus"
+          - id: "ciddi"
+            etiket: { tr: "Elini sık: \"Anlaştık, ortak.\"", en: "Shake his hand. \"Deal, partner.\"" }
+            etkiler:
+              - ahlak: { insanlik: 3, duzen: 1 }
+              - bayrak: "cocuk_kurtarildi"
+              - bayrak: "tavsan_bagislandi"
+            sonraki: "kayip_cocuk_donus"
+
+      - id: "kayip_cocuk_kacis"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Kargayla boğuşmayı bırakıp ağlamaya koşuyorsun. Çocuğu kovuktan çekip kucağına alıyorsun; tavşan hâlâ onun kucağında, iğneleri senin koluna batıyor.", en: "You break off from the crow and run for the crying. You haul the boy out of a hollow tree and into your arms, the hare still in his, its quills jabbing your forearm." }
+          - { tr: "Arkanızdan, sisin içinden kendi sesin geliyor: \"Gel! Gel, korkma!\" O kargaya hiçbir şey öğretmemelisin; her şeyi hatırlıyor.", en: "Your own voice chases you out of the fog: \"Come here! It's okay, come here!\" You should never teach that crow anything. It remembers everything." }
+        secenekler:
+          - id: "kos"
+            etiket: { tr: "Sisin kenarına kadar durma", en: "Don't stop until you're out of the fog" }
+            etkiler:
+              - ahlak: { merhamet: 3 }
+              - bayrak: "cocuk_kurtarildi"
+              - bayrak: "tavsan_bagislandi"
+            sonraki: "kayip_cocuk_donus"
+
+      - id: "kayip_cocuk_vazgec"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Kadın kolunu bırakıyor. Sana bir şey söylemiyor; söyleyecek bir şey kalmamış.", en: "She lets go of your arm. She doesn't say anything. There's nothing left to say." }
+          - { tr: "Sonra dönüp tek başına sise yürüyor. \"Anne?\" sesi iki yönden birden yükseliyor ve kadın ikisine birden koşmaya çalışıyor.", en: "Then she turns and walks into the fog alone. \"Mom?\" comes from two directions at once, and she tries to run toward both." }
+        secenekler:
+          - id: "git"
+            etiket: { tr: "Yoluna devam et", en: "Keep walking" }
+            etkiler:
+              - ahlak: { insanlik: -3 }
+              - degisken: { hayatta_kalan: -3 }
+              - bayrak: "cocuk_kayboldu"
+              - gorev: { sisteki_cocuk: "basarisiz" }
+            sonraki: "@akis"
+          - id: "don"
+            etiket: { tr: "Peşinden sise dal", en: "Go in after her" }
+            etkiler:
+              - ahlak: { merhamet: 6, insanlik: 2 }
+            sonraki: "kayip_cocuk_sis"
+
+  # ================================================================== zehirli bereket
+  - id: "zehirli_bereket"
+    perde: [1]
+    bolge: ["ogretici_orman"]
+    gun: { min: 3, max: 20 }
+    agirlik: 5
+    etiketler: ["ahlak", "kaynak", "kesif"]
+    gerilim: 2
+    onemli: true
+    kart: { tr: "Zehirli bereket", en: "Poisoned plenty" }
+    sahne: "zehirli_bereket_1"
+    sahneler:
+      - id: "zehirli_bereket_1"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Sisin aralandığı bir açıklıkta ağaçlar meyveden eğilmiş. Kızıl, iri, şeftali kokulu meyveler; dallar yere kadar sarkıyor.", en: "Where the fog thins out there's a clearing, and the trees are bent double with fruit. Big, red, smelling like ripe peaches, branches sagging all the way to the ground." }
+          - { tr: "Açıklıkta şimdiden on iki kişi var: üç gündür doğru dürüst yemek yememiş bir kampın tamamı. Biri ağzı dolu gülüyor; bir anne meyveyi dişleriyle ezip bebeğine yediriyor.", en: "There are already twelve people in the clearing, a whole camp that hasn't eaten right in three days. Someone's laughing with their mouth full. A mother is chewing fruit soft to feed her baby." }
+          - { tr: "Bir şey sana tuhaf geliyor ama ne olduğunu çıkaramıyorsun. Belki de yalnızca açlıktır.", en: "Something about this place feels off, but you can't put your finger on it. Maybe it's just the hunger talking." }
+        sezgiler:
+          - kosul: { stat: { per: 8 } }
+            metin: { tr: "Açıklıkta tek bir kuş, tek bir böcek yok; çimenlerde bembeyaz, temizlenmiş küçük kemikler var. Zehir alçak dallardaki meyvelerde; onlar yem. Tepedekilere hiçbir hayvan ulaşamamış.", en: "Not one bird in this clearing, not one bug, just small bones in the grass, picked clean and bleached white. The poison is in the low fruit; that is the bait. Nothing has ever reached the high stuff." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Bu koru bir ders. Konusu sabır. Sınıfın çoğu kalacak.\"", en: "\"This grove is a lesson. Subject: patience. Most of the class is about to fail.\"" }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            metin: { tr: "\"Kokusu harika. O zaman neden içim rahat değil?\"", en: "\"Smells amazing. So why's my gut saying no?\"" }
+        secenekler:
+          - id: "isaret"
+            etiket: { tr: "Zehirlileri göster: alçaktakiler!", en: "Point out the poisoned ones. The low fruit!" }
+            gerekli: { stat: { per: 8 } }
+            etkiler:
+              - ahlak: { merhamet: 5, duzen: 2 }
+              - degisken: { hayatta_kalan: 3 }
+              - bayrak: "bereket_uyarildi"
+              - bilgi: "bereket_zehri"
+            sonraki: "zehirli_bereket_paylasim"
+          - id: "bagir"
+            etiket: { tr: "Bağır: \"Kimse yemesin!\"", en: "Shout: \"Nobody eat that!\"" }
+            zar: { stat: "cha", zorluk: 12, tek: true, basarisiz: "zehirli_bereket_alay", basarisiz_etkiler: [{ ahlak: { merhamet: 2 } }] }
+            etkiler:
+              - ahlak: { merhamet: 4 }
+            sonraki: "zehirli_bereket_dene"
+          - id: "kendin"
+            etiket: { tr: "Önce kendin birkaç tane dene", en: "Test a few yourself first" }
+            zar: { stat: "end", zorluk: 12, tek: true, basarisiz: "zehirli_bereket_zehir", basarisiz_etkiler: [{ ahlak: { insanlik: 2 } }, { can: -20 }] }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+              - can: -5
+            sonraki: "zehirli_bereket_tat"
+          - id: "sakla"
+            etiket: { tr: "Kimseye söyleme; güvenli olanları al ve git", en: "Tell no one. Grab the safe fruit and go" }
+            gerekli: { stat: { per: 8 } }
+            etkiler:
+              - ahlak: { merhamet: -8, insanlik: -4 }
+              - degisken: { hayatta_kalan: -3 }
+              - can: 20
+              - bilgi: "bereket_zehri"
+              - bayrak: "bereket_saklandi"
+            sonraki: "zehirli_bereket_terk"
+          - id: "ye"
+            etiket: { tr: "Sen de otur ve ye", en: "Sit down and eat with them" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+              - can: -15
+            sonraki: "zehirli_bereket_zehir"
+          - id: "sicra"
+            tur: "gosteris"
+            etiket: { tr: "Tepeye sıçra; güvenlileri tek hamlede indir", en: "Leap up top. Strip the safe fruit in one go" }
+            goster: { bayrak: "kirilma_yasandi" }
+            gerekli: { stat: { agi: 15 } }
+            etkiler:
+              - ahlak: { merhamet: 4, duzen: 2 }
+              - dikkat: 2
+              - degisken: { hayatta_kalan: 3 }
+              - bayrak: "bereket_uyarildi"
+              - bilgi: "bereket_zehri"
+            sonraki: "zehirli_bereket_paylasim"
+
+      - id: "zehirli_bereket_dene"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Sesin açıklıkta çınlıyor ve on iki ağız aynı anda duruyor. Bebeğin annesi elindeki meyveyi yavaşça indiriyor.", en: "Your voice rings across the clearing and twelve mouths stop chewing at once. The baby's mother slowly lowers the fruit in her hand." }
+          - { tr: "\"Nereden biliyorsun?\" diye soruyor biri. Haklı bir soru; cevabın yok, yalnızca bir his var.", en: "\"How do you know?\" somebody asks. Fair question. You don't have an answer. Just a feeling." }
+          - { tr: "Sonra fark ediyorsun: açıklıkta hiç kuş yok. Tek bir böcek bile yok.", en: "Then it hits you. There are no birds here. Not one bug." }
+        secenekler:
+          - id: "kemik"
+            etiket: { tr: "Çimenlerdeki kemikleri onlara göster", en: "Show them the bones in the grass" }
+            etkiler:
+              - ahlak: { merhamet: 3, duzen: 2 }
+              - degisken: { hayatta_kalan: 3 }
+              - bayrak: "bereket_uyarildi"
+              - bilgi: "bereket_zehri"
+            sonraki: "zehirli_bereket_paylasim"
+          - id: "kanit"
+            etiket: { tr: "Kanıt için kendin bir tane ısır", en: "Bite one yourself, for proof" }
+            zar: { stat: "end", zorluk: 12, tek: true, basarisiz: "zehirli_bereket_zehir", basarisiz_etkiler: [{ ahlak: { merhamet: 2 } }, { can: -20 }] }
+            etkiler:
+              - ahlak: { merhamet: 4 }
+              - can: -5
+            sonraki: "zehirli_bereket_tat"
+
+      - id: "zehirli_bereket_alay"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Biri gülüyor. \"Kimse yemesin, sen ye, öyle mi?\" Gülüş kalabalığa yayılıyor; aç insanların gülüşü.", en: "Somebody laughs. \"Nobody eat, so you get it all, huh?\" The laugh spreads. Hungry people's laughter." }
+          - { tr: "Ağzı dolu adam sana bir meyve fırlatıyor. Ayaklarının dibine düşüyor ve kabuğu çatlıyor; içi fazla kırmızı.", en: "The guy with his mouth full tosses you one. It lands at your feet and the skin splits. The inside is too red." }
+        secenekler:
+          - id: "kanit"
+            etiket: { tr: "Meyveyi al ve önlerinde ısır", en: "Pick it up and bite it in front of them" }
+            etkiler:
+              - ahlak: { merhamet: 6 }
+              - can: -20
+              - degisken: { hayatta_kalan: 1 }
+              - bilgi: "bereket_zehri"
+            sonraki: "zehirli_bereket_zehir"
+          - id: "birak"
+            etiket: { tr: "Omuz silk. Uyardın, gerisi onların işi", en: "Shrug. You warned them. Their call now" }
+            etkiler:
+              - ahlak: { merhamet: -5, duzen: 1 }
+              - degisken: { hayatta_kalan: -3 }
+            sonraki: "@akis"
+
+      - id: "zehirli_bereket_tat"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Önce tepeden kopardığın bir meyveyi ısırıyorsun: tatlı, sulu, zararsız. Sonra alçak bir daldan bir tane; daha ilk lokmada dilin uyuşuyor.", en: "First you bite into one from up high: sweet, juicy, harmless. Then one off a low branch. Your tongue goes numb on the first bite." }
+          - { tr: "Tükürüyorsun ama boğazında bir yanma kalıyor. Artık biliyorsun; şimdi bunu on iki aç insana anlatman lazım.", en: "You spit it out, but your throat's still burning. Now you know. Now you've got to explain it to twelve starving people." }
+        secenekler:
+          - id: "anlat"
+            etiket: { tr: "Herkese anlat: tepedekiler güvenli", en: "Tell everyone. The high fruit is safe" }
+            etkiler:
+              - ahlak: { merhamet: 3, duzen: 1 }
+              - degisken: { hayatta_kalan: 3 }
+              - bayrak: "bereket_uyarildi"
+              - bilgi: "bereket_zehri"
+            sonraki: "zehirli_bereket_paylasim"
+          - id: "sus"
+            etiket: { tr: "Bildiğini kendine sakla", en: "Keep what you know to yourself" }
+            etkiler:
+              - ahlak: { merhamet: -8, insanlik: -4 }
+              - degisken: { hayatta_kalan: -3 }
+              - bilgi: "bereket_zehri"
+              - bayrak: "bereket_saklandi"
+            sonraki: "zehirli_bereket_terk"
+
+      - id: "zehirli_bereket_zehir"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "İlk kusan, ağzı dolu gülen adam oluyor. Sonra bir kadın, sonra ikisi birden; açıklık bir anda iniltiyle doluyor.", en: "The first to throw up is the guy who was laughing with his mouth full. Then a woman, then two at once. In a heartbeat the clearing is full of groaning." }
+          - { tr: "Senin midende de bir ateş yanıyor; dizlerin çözülüyor ama ayakta kalıyorsun.", en: "There's fire in your gut too. Your knees go loose, but you stay on your feet." }
+          - { tr: "Bebek ağlamıyor. Annesi onu sallıyor, sallıyor, ve bebek ağlamıyor.", en: "The baby isn't crying. Its mother rocks it and rocks it, and it doesn't cry." }
+        sezgiler:
+          - kosul: { stat: { per: 7 } }
+            metin: { tr: "Zehir hızlı ama hafif. Kusturmak ve su vermek çoğunu kurtarır; bebek için panzehir şart.", en: "The poison's fast but weak. Make them puke and get water in them, and most will pull through. The baby needs an antidote." }
+        secenekler:
+          - id: "panzehir"
+            etiket: { tr: "Panzehiri bebeğe ver, sonra ötekilere koş", en: "Antidote to the baby, then run to the others" }
+            gerekli: { esya: { panzehir: 1 } }
+            etkiler:
+              - esya: { panzehir: -1 }
+              - ahlak: { merhamet: 8 }
+              - efsane: "yabancilari_iyilestirdi"
+              - bayrak: "bereket_bebek"
+            sonraki: "zehirli_bereket_sonra"
+          - id: "kustur"
+            etiket: { tr: "Herkesi kustur, su taşı", en: "Make them all throw up. Haul water" }
+            etkiler:
+              - ahlak: { merhamet: 5, duzen: 3 }
+              - can: -10
+              - degisken: { hayatta_kalan: -2 }
+            sonraki: "zehirli_bereket_sonra"
+          - id: "kendin"
+            etiket: { tr: "Kendi başının çaresine bak; uzaklaş", en: "Look after yourself. Crawl clear" }
+            etkiler:
+              - ahlak: { merhamet: -6, insanlik: -3 }
+              - degisken: { hayatta_kalan: -4 }
+            sonraki: "@akis"
+
+      - id: "zehirli_bereket_sonra"
+        yer: "ogretici_orman"
+        paragraflar:
+          - metin: { tr: "Bebek sonunda ağlıyor: cılız, öfkeli, canlı. Annesi hem gülüyor hem ağlıyor.", en: "The baby finally cries. Thin, angry, alive. Its mother is laughing and sobbing at the same time." }
+            kosul: { bayrak: "bereket_bebek" }
+          - metin: { tr: "Akşam olduğunda açıklık sessiz. Herkes uyanmıyor; annenin kucağındaki küçük beden de uyanmıyor.", en: "By evening the clearing is quiet. Not everyone wakes up. The little bundle in its mother's arms doesn't either." }
+            kosul: { bayrak_yok: "bereket_bebek" }
+          - { tr: "Yaşayanlar artık hangi meyvenin yem olduğunu biliyor. Kimse alçak dallara bakmıyor bile.", en: "The living know now which fruit is bait. Nobody so much as glances at the low branches." }
+        secenekler:
+          - id: "topla"
+            etiket: { tr: "Tepedeki meyveleri toplamalarına yardım et", en: "Help them pick the high fruit" }
+            etkiler:
+              - ahlak: { duzen: 2 }
+              - bilgi: "bereket_zehri"
+            sonraki: "zehirli_bereket_paylasim"
+          - id: "git"
+            etiket: { tr: "Yeterince şey gördün; git", en: "You've seen enough. Leave" }
+            etkiler:
+              - ahlak: { insanlik: -1 }
+              - bilgi: "bereket_zehri"
+            sonraki: "@akis"
+
+      - id: "zehirli_bereket_paylasim"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Alçak dallardaki meyveler bir kenara yığılıyor; tepedekiler için bir insan merdiveni kuruluyor. Toplanan meyve on iki kişiye iki gün yeter, belki üç.", en: "The low fruit gets piled to one side, and people build a human ladder for the high stuff. What they pick could feed twelve people for two days. Maybe three." }
+          - { tr: "Sonra ağaçların arasından dört kişi çıkıyor: omuzlarında sivri kazıklar, kollarında kırmızı bez. Kuzeydeki silahlı avcıların adamları.", en: "Then four people step out of the trees. Sharpened stakes on their shoulders, red rags tied around their arms. Men from the armed hunters' camp up north." }
+          - { tr: "\"Bu koru {fraksiyon:lonca|in},\" diyor içlerinden biri. \"Yarısını alıyoruz; sizi koruyan biz olduğumuza göre.\"", en: "\"This grove belongs to the {fraksiyon:lonca},\" one of them says. \"We're taking half. Seeing as we're the ones keeping you alive.\"" }
+        sezgiler:
+          - kosul: { stat: { per: 9 } }
+            metin: { tr: "Dördünün de görünen seviyesi senin altında. Kazıkları taze yontulmuş; bugün kesmişler.", en: "All four of them show a lower level than you. Their stakes are freshly whittled. Cut this morning." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Bunlar Lonca değil. Lonca'nın adını kullanan dört aç adam.\"", en: "\"That's not the Guild. That's four hungry guys borrowing the Guild's name.\"" }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            metin: { tr: "\"Yarısı mı? Burada bebek var.\"", en: "\"Half? There's a baby here.\"" }
+        secenekler:
+          - id: "esit"
+            etiket: { tr: "Önce çocuklar ve hastalar, sonra herkes eşit", en: "Kids and the sick first, then equal shares" }
+            etkiler:
+              - ahlak: { merhamet: 4, duzen: 3 }
+              - degisken: { hayatta_kalan: 2 }
+              - itibar: { siginak: 3, lonca: -1 }
+              - bayrak: "bereket_kamp"
+              - tohum: { olay: "gece_baskini", gecikme: { min: 1, max: 3 }, kosul: { bayrak: "bereket_kamp" } }
+            sonraki: "@akis"
+          - id: "ver"
+            etiket: { tr: "Yarısını Lonca'ya ver; düzen düzendir", en: "Give the Guild its half. Rules are rules" }
+            etkiler:
+              - ahlak: { duzen: 4, merhamet: -3 }
+              - itibar: { lonca: 4 }
+              - iliski: { kaya_demir: { guven: 4, saygi: 3 } }
+              - degisken: { hayatta_kalan: -1 }
+            sonraki: "@akis"
+          - id: "utandir"
+            etiket: { tr: "Dördünü de utandır: koru herkesin", en: "Shame them. This grove belongs to everyone" }
+            zar: { stat: "cha", zorluk: 13, tek: true, basarisiz: "@akis", basarisiz_etkiler: [{ ahlak: { duzen: -2 } }, { itibar: { lonca: -3 } }, { degisken: { hayatta_kalan: -1 } }] }
+            etkiler:
+              - ahlak: { merhamet: 3, duzen: -1 }
+              - itibar: { lonca: -2, siginak: 3 }
+              - iliski: { kaya_demir: { saygi: 4 } }
+              - degisken: { hayatta_kalan: 2 }
+              - bayrak: "bereket_kamp"
+              - tohum: { olay: "gece_baskini", gecikme: { min: 1, max: 3 }, kosul: { bayrak: "bereket_kamp" } }
+            sonraki: "@akis"
+          - id: "kazik"
+            tur: "gosteris"
+            etiket: { tr: "Kazıklarından birini iki parmakla kır", en: "Snap one of their stakes with two fingers" }
+            goster: { bayrak: "kirilma_yasandi" }
+            gerekli: { stat: { str: 15 } }
+            etkiler:
+              - ahlak: { duzen: -2, merhamet: 2 }
+              - dikkat: 3
+              - iliski: { kaya_demir: { saygi: 6, korku: 2 } }
+              - itibar: { lonca: 2, siginak: 2 }
+              - degisken: { hayatta_kalan: 2 }
+            sonraki: "@akis"
+
+      - id: "zehirli_bereket_terk"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Çantanı tepedeki meyvelerle dolduruyorsun; kimse sana bakmıyor, herkes yemekle meşgul. Açıklıktan çıkarken arkandan ilk öğürme sesi geliyor.", en: "You fill your pack from the high branches. Nobody's watching; everyone's busy eating. On your way out of the clearing you hear the first retch behind you." }
+          - { tr: "Bebek ağlamıyor. Bunu duymaman gerekirdi ama duyuyorsun: bir ağlamanın yokluğunu.", en: "The baby isn't crying. You shouldn't be able to hear that, but you do. The absence of a cry." }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Sabır dersini geçtin. Öbür dersten kaldın.\"", en: "\"You passed the patience test. Flunked the other one.\"" }
+        secenekler:
+          - id: "yuru"
+            etiket: { tr: "Yürümeye devam et", en: "Keep walking" }
+            etkiler:
+              - ahlak: { insanlik: -3 }
+            sonraki: "@akis"
+          - id: "don"
+            etiket: { tr: "Geri dön. Çok geç değil", en: "Turn back. It's not too late" }
+            etkiler:
+              - ahlak: { merhamet: 5, insanlik: 3 }
+              - degisken: { hayatta_kalan: 2 }
+              - bayrak_kaldir: "bereket_saklandi"
+            sonraki: "zehirli_bereket_zehir"
+
+  # ================================================================== işaretli ağaçlar
+  - id: "isaretli_agaclar"
+    perde: [1]
+    bolge: ["ogretici_orman"]
+    gun: { min: 4, max: 22 }
+    agirlik: 4
+    etiketler: ["gizem", "kesif", "tuzak"]
+    gerilim: 2
+    kart: { tr: "İşaretli ağaçlar", en: "The marked trees" }
+    sahne: "isaretli_agaclar_1"
+    sahneler:
+      - id: "isaretli_agaclar_1"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Sisin içinde bir ağaç gövdesine kazınmış bir ok görüyorsun; sonra ikincisini, üçüncüsünü. Biri ormanda yol işaretlemiş.", en: "Through the fog you spot an arrow carved into a tree trunk. Then a second, then a third. Somebody's been marking trails out here." }
+          - { tr: "Ama oklar iki türlü. Bazılarının ucunda küçük bir daire var ve batıyı, {yer:kirik_istasyon|i} gösteriyorlar; ötekiler derin ve çentikli, kuzeye, sisin en koyu olduğu yere çağırıyor.", en: "But there are two kinds. Some have a little circle at the tip and point west, toward the {yer:kirik_istasyon}. The others are deep and notched, and they beckon north, where the fog is thickest." }
+          - { tr: "Çentikli okların birinin altında bir bez parçası asılı. Üstüne biri, belki kanla, tek kelime yazmış: SU.", en: "Under one of the notched arrows hangs a scrap of cloth. Someone's written one word on it, maybe in blood: WATER." }
+        sezgiler:
+          - kosul: { stat: { per: 8 } }
+            metin: { tr: "Çentikli okları insan eli kazımamış. Hepsi aynı açıda, aynı derinlikte ve yerden tam aynı yükseklikte; oyukların içinde ince, yapışkan iplik kalıntıları var.", en: "No human hand carved the notched arrows. Every one is the same angle, the same depth, exactly the same height off the ground, and there are wisps of sticky thread in the grooves." }
+          - kosul: { stat: { per: 11 } }
+            metin: { tr: "Daireli okların yanına minicik bir sayı çizilmiş: bir saat. Biri bu yolu her gün aynı saatte kullanıyor.", en: "Next to the circled arrows someone's scratched a tiny number. A time of day. Somebody walks this path at the same hour every day." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Sis Dokuyucu. Sabırlı bir şey. İnsanların okları takip ettiğini öğrenmiş; o yüzden ok çizmeyi de öğrenmiş.\"", en: "\"Fog Weaver. Patient thing. It figured out people follow arrows, so it learned to draw them.\"" }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            metin: { tr: "\"Su yazıyor. Ya birinin gerçekten suya ihtiyacı varsa?\"", en: "\"It says water. What if somebody really needs water?\"" }
+        secenekler:
+          - id: "centik"
+            etiket: { tr: "Çentikli okları takip et; su orada", en: "Follow the notched arrows. Water's that way" }
+            etkiler:
+              - ahlak: { insanlik: 1, merhamet: 1 }
+            sonraki: "isaretli_agaclar_ag"
+          - id: "daire"
+            etiket: { tr: "Daireli okları takip et", en: "Follow the circled arrows" }
+            etkiler:
+              - ahlak: { duzen: 1 }
+            sonraki: "isaretli_agaclar_sakli"
+          - id: "kazi"
+            etiket: { tr: "Çentikli okların üstüne uyarı kazı", en: "Carve warnings over the notched arrows" }
+            gerekli: { stat: { per: 8 } }
+            etkiler:
+              - ahlak: { merhamet: 4, duzen: 2 }
+              - degisken: { hayatta_kalan: 2 }
+              - itibar: { sessiz_ag: 2 }
+              - bilgi: "dokuyucu_isaretleri"
+              - tohum: { olay: "mert_sifreli_mesaj", gecikme: { min: 1, max: 3 } }
+            sonraki: "isaretli_agaclar_uyari"
+          - id: "yuva"
+            tur: "gosteris"
+            etiket: { tr: "Okları geri takip et ve yuvayı sök", en: "Track the arrows back and tear out the nest" }
+            goster: { bayrak: "kirilma_yasandi" }
+            gerekli: { stat: { str: 14 } }
+            etkiler:
+              - ahlak: { duzen: 2, merhamet: 2 }
+              - dikkat: 2
+              - savas: { dusmanlar: ["sis_dokuyucu"], ortam: ["karanlik"], kazan: "isaretli_agaclar_koza", kac: "isaretli_agaclar_kacis" }
+          - id: "hicbiri"
+            etiket: { tr: "Hiçbirini takip etme; kendi yolundan git", en: "Follow neither. Go your own way" }
+            etkiler:
+              - ahlak: { insanlik: -1 }
+            sonraki: "@akis"
+
+      - id: "isaretli_agaclar_ag"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Oklar seni kuzeye, sisin daha da koyulaştığı yere götürüyor. Su sesi yok; yalnızca rüzgârsız bir sessizlik ve yüzüne değen ince iplikler.", en: "The arrows lead you north, deeper into the fog. There's no sound of water. Just a windless quiet, and thin threads brushing your face." }
+          - { tr: "Ağaçların arasında, bir boy yukarıda, ipeğe sarılmış üç uzun şekil asılı. Biri hafifçe kıpırdıyor.", en: "Between the trees, six feet off the ground, hang three long shapes wrapped in silk. One of them is moving, just a little." }
+          - { tr: "Yukarıda sekiz göz aynı anda açılıyor.", en: "Up above, eight eyes open at once." }
+        sezgiler:
+          - kosul: { stat: { per: 9 } }
+            metin: { tr: "Kıpırdayan kozanın içinde biri hâlâ nefes alıyor. Yanındaki de, daha zayıf. Üçüncüsü çoktan boş.", en: "Someone in the moving cocoon is still breathing. The one next to it too, weaker. The third's been empty a while." }
+        secenekler:
+          - id: "savas"
+            etiket: { tr: "Kozaları kes ve örümcekle yüzleş", en: "Cut the cocoons down and face the spider" }
+            etkiler:
+              - ahlak: { merhamet: 5 }
+              - savas: { dusmanlar: ["sis_dokuyucu"], ortam: ["karanlik", "dar_gecit"], kazan: "isaretli_agaclar_koza", kaybet: "isaretli_agaclar_yenilgi", kac: "isaretli_agaclar_kacis" }
+          - id: "ates"
+            etiket: { tr: "Ağı bir ateş şişesiyle tutuştur", en: "Torch the web with a fire flask" }
+            gerekli: { esya: { ates_sisesi: 1 } }
+            etkiler:
+              - esya: { ates_sisesi: -1 }
+              - ahlak: { merhamet: 3, duzen: -1 }
+              - savas: { dusmanlar: ["sis_dokuyucu"], ortam: ["karanlik", "yanici"], kazan: "isaretli_agaclar_koza", kaybet: "isaretli_agaclar_yenilgi", kac: "isaretli_agaclar_kacis" }
+          - id: "geri"
+            etiket: { tr: "Ağa düşmeden geri çekil", en: "Back off before you're stuck too" }
+            etkiler:
+              - ahlak: { merhamet: -4 }
+              - degisken: { hayatta_kalan: -2 }
+            sonraki: "isaretli_agaclar_kacis"
+
+      - id: "isaretli_agaclar_koza"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Örümcek son bir kez kıvrılıp kendi ağına çöküyor. Kozaları kesip açıyorsun; ipek ellerine yapışıyor, bırakmıyor.", en: "The spider curls one last time and collapses into its own web. You cut the cocoons open. The silk clings to your hands and won't let go." }
+          - { tr: "İkisinde canlı insan var: bir adam ve bir kadın, dudakları morarmış, gözleri açık ama seni görmüyor. Üçüncüsünde yalnızca bir çanta ve bir isim etiketi.", en: "Two of them hold living people, a man and a woman, lips blue, eyes open but not seeing you. The third holds nothing but a backpack and a name tag." }
+          - { tr: "Kadın sonunda konuşabildiğinde ilk sözü şu oluyor: \"Oklar... su yazıyordu.\"", en: "When the woman can finally talk, the first thing she says is: \"The arrows... they said water.\"" }
+        secenekler:
+          - id: "tasi"
+            etiket: { tr: "İkisini de en yakın kampa taşı", en: "Carry them both to the nearest camp" }
+            etkiler:
+              - ahlak: { merhamet: 4 }
+              - degisken: { hayatta_kalan: 3 }
+              - can: -5
+              - itibar: { siginak: 2 }
+              - bayrak: "dokuyucu_olduruldu"
+            sonraki: "@akis"
+          - id: "kazi"
+            etiket: { tr: "Önce her okun üstüne uyarı kazı", en: "First, carve a warning over every arrow" }
+            etkiler:
+              - ahlak: { duzen: 3, merhamet: 1 }
+              - degisken: { hayatta_kalan: 2 }
+              - itibar: { sessiz_ag: 2 }
+              - bilgi: "dokuyucu_isaretleri"
+              - bayrak: "dokuyucu_olduruldu"
+              - tohum: { olay: "mert_sifreli_mesaj", gecikme: { min: 1, max: 3 } }
+            sonraki: "@akis"
+          - id: "etiket"
+            etiket: { tr: "Ölünün etiketini al; biri onu arıyordur", en: "Take the dead one's tag. Someone's looking for them" }
+            etkiler:
+              - ahlak: { insanlik: 3 }
+              - degisken: { hayatta_kalan: 2 }
+              - bayrak: "dokuyucu_olduruldu"
+            sonraki: "@akis"
+
+      - id: "isaretli_agaclar_yenilgi"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "İpek bileklerine sarılıyor ve dünya yavaşlıyor. Sonrasını hatırlamıyorsun; yalnızca bir bıçağın ipeği kesen sesini.", en: "Silk wraps your wrists and the world slows down. You don't remember what happens next. Just the sound of a knife slicing through silk." }
+          - { tr: "Gözünü açtığında daireli okların birinin dibinde yatıyorsun. Kimse yok; yalnızca ağaca yeni kazınmış küçük bir daire ve altında bir saat.", en: "When you open your eyes you're lying at the foot of one of the circled arrows. Nobody around. Just a fresh little circle carved into the bark, and a time of day beneath it." }
+          - { tr: "Biri seni kurtarmış ve kendini göstermemiş. Kozalar hâlâ kuzeyde asılı.", en: "Somebody saved you and didn't stick around to be thanked. The cocoons are still hanging up north." }
+        secenekler:
+          - id: "geri"
+            etiket: { tr: "Geri dön ve işi bitir", en: "Go back and finish the job" }
+            etkiler:
+              - ahlak: { merhamet: 4 }
+              - savas: { dusmanlar: ["sis_dokuyucu"], ortam: ["karanlik"], kazan: "isaretli_agaclar_koza", kaybet: "isaretli_agaclar_kacis", kac: "isaretli_agaclar_kacis" }
+          - id: "iz"
+            etiket: { tr: "Seni kurtaranın izini sür", en: "Track whoever saved you" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+              - degisken: { hayatta_kalan: -2 }
+              - iliski: { mert_kilic: { guven: 3, saygi: 2 } }
+              - bilgi: "agin_isaretleri"
+              - tohum: { olay: "mert_sifreli_mesaj", gecikme: { min: 1, max: 2 } }
+            sonraki: "@akis"
+
+      - id: "isaretli_agaclar_kacis"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Ağdan kurtulmak için kolundan bir şerit deri bırakıyorsun. Ağaçların arasından geri geri çekilirken sekiz göz seni izliyor, ama peşinden gelmiyor.", en: "You leave a strip of skin from your forearm in the web getting loose. As you back off through the trees, eight eyes follow you. The rest of it doesn't." }
+          - { tr: "Acelesi yok. Kozalar orada, oklar hâlâ ağaçlarda: SU.", en: "It's in no hurry. The cocoons are still there, and the arrows are still on the trees: WATER." }
+        secenekler:
+          - id: "carpi"
+            etiket: { tr: "Dönüş yolunda her oka çarpı at", en: "X out every arrow on your way back" }
+            etkiler:
+              - ahlak: { merhamet: 3, duzen: 1 }
+              - degisken: { hayatta_kalan: 1 }
+              - bilgi: "dokuyucu_isaretleri"
+            sonraki: "@akis"
+          - id: "git"
+            etiket: { tr: "Arkana bakmadan uzaklaş", en: "Get clear and don't look back" }
+            etkiler:
+              - ahlak: { merhamet: -2 }
+            sonraki: "@akis"
+
+      - id: "isaretli_agaclar_sakli"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Daireli oklar seni batıya, yosun tutmuş bir kaya yığınına götürüyor. Kayaların arasında, yağmurdan korunmuş bir naylon torba duruyor.", en: "The circled arrows lead you west, to a heap of mossy boulders. Tucked between them, out of the rain, sits a plastic bag." }
+          - { tr: "İçinde iki şişe temiz su, bir avuç pil, el yapımı bir anten ve bir kâğıt var. Kâğıtta sayılar ve harfler; okunuyor ama hiçbir şey anlatmıyor.", en: "Inside: two bottles of clean water, a handful of batteries, a homemade antenna, and a sheet of paper. Numbers and letters on it. Readable, and meaning nothing." }
+          - { tr: "Kâğıdın altına biri karakalemle küçük bir not düşmüş: \"Bir şey alırsan bir şey bırak. Ağ böyle yaşar.\"", en: "At the bottom someone's penciled a little note: \"Take something, leave something. That's how the network stays alive.\"" }
+        secenekler:
+          - id: "hepsi"
+            etiket: { tr: "Hepsini al", en: "Take all of it" }
+            etkiler:
+              - ahlak: { duzen: -3, insanlik: -1 }
+              - esya: { kaynak_suyu: 2 }
+              - itibar: { sessiz_ag: -3 }
+              - iliski: { mert_kilic: { guven: -5 } }
+            sonraki: "@akis"
+          - id: "takas"
+            etiket: { tr: "Suyu al, yerine kırmızı ot bırak", en: "Take the water, leave red herb in trade" }
+            gerekli: { esya: { kirmizi_ot: 1 } }
+            etkiler:
+              - esya: { kirmizi_ot: -1, kaynak_suyu: 2 }
+              - ahlak: { duzen: 3 }
+              - itibar: { sessiz_ag: 3 }
+              - iliski: { mert_kilic: { guven: 4 } }
+            sonraki: "@akis"
+          - id: "coz"
+            etiket: { tr: "Kâğıttaki şifreyi çöz", en: "Crack the code on the paper" }
+            gerekli: { stat: { int: 8 } }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+              - bilgi: "agin_isaretleri"
+              - xp: 40
+              - itibar: { sessiz_ag: 2 }
+              - tohum: { olay: "mert_sifreli_mesaj", gecikme: { min: 1, max: 3 } }
+            sonraki: "@akis"
+          - id: "not"
+            etiket: { tr: "Kâğıdın arkasına kendi notunu bırak", en: "Leave a note of your own on the back" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+              - iliski: { mert_kilic: { guven: 3, saygi: 2 } }
+              - bayrak: "ag_mesaji_birakildi"
+              - tohum: { olay: "mert_sifreli_mesaj", gecikme: { min: 1, max: 3 } }
+            sonraki: "@akis"
+
+      - id: "isaretli_agaclar_uyari"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Bıçağınla her çentikli okun üstüne derin bir çarpı atıyorsun, yanına da kaba bir kafatası. Güzel olmuyor; ama okunuyor.", en: "With your knife you gouge a deep X over every notched arrow, plus a crude skull beside it. It isn't pretty. It's legible." }
+          - { tr: "Son ağaçta durduğunda batıdaki daireli okların birinin yanına taze bir işaret eklendiğini görüyorsun: senin çarpın, küçültülmüş, yanında bir soru işareti.", en: "At the last tree you notice someone has added a fresh mark next to one of the circled arrows to the west: your X, drawn small, with a question mark beside it." }
+          - { tr: "Birileri seni izliyor. Düşmanca değil; meraklı.", en: "Somebody's watching you. Not hostile. Curious." }
+        secenekler:
+          - id: "cevap"
+            etiket: { tr: "Soru işaretinin yanına bir daire çiz", en: "Draw a circle next to the question mark" }
+            etkiler:
+              - ahlak: { duzen: 2 }
+              - iliski: { mert_kilic: { guven: 3 } }
+              - bayrak: "ag_mesaji_birakildi"
+            sonraki: "@akis"
+          - id: "sil"
+            tur: "gizle"
+            etiket: { tr: "İşareti kazı sil; iz bırakma", en: "Scrape the mark off. Leave no trail" }
+            etkiler:
+              - gizle: 2
+              - ahlak: { duzen: -1 }
+            sonraki: "@akis"
+
+  # ================================================================== gece baskını
+  - id: "gece_baskini"
+    perde: [1]
+    gun: { min: 6, max: 26 }
+    agirlik: 4
+    etiketler: ["savas", "kurtarma", "ahlak", "gece"]
+    gerilim: 4
+    onemli: true
+    kart: { tr: "Gece baskını", en: "Night raid" }
+    sahne: "gece_baskini_1"
+    sahneler:
+      - id: "gece_baskini_1"
+        paragraflar:
+          - { tr: "Gece yarısını geçiyor. Yolda karşılaştığın on beş kişilik bir grupla aynı ateşi paylaşıyorsun: üç çadır, bir el arabası dolusu erzak, uyuyan altı çocuk.", en: "It's past midnight. You're sharing a fire with fifteen people you met on the road: three tents, one wheelbarrow of supplies, six sleeping kids." }
+          - metin: { tr: "Akşam sırtta bir fener görmüştün. {fraksiyon:yukselenler|in} göz işareti onun ışığında bir an parladı; sonra fener söndü.", en: "Earlier tonight you saw a lantern up on the ridge. For a second the eye sigil of {fraksiyon:yukselenler} caught its light. Then the lantern went dark." }
+            kosul: { bayrak: "yabanci_dusman" }
+          - metin: { tr: "Kamp meyve korusunun dibinde. Bugün kimse aç kalmadı; ama koru, gece olunca başka açları da çağırıyor.", en: "The camp's at the foot of the fruit grove. Nobody went hungry today. But at night the grove calls in other hungry things." }
+            kosul: { bayrak: "bereket_kamp" }
+          - metin: { tr: "Ateşin ötesindeki karanlıkta iki kez bir borunun yere vurulduğunu duydun. Ritimle; sabırla.", en: "Twice tonight, out past the firelight, you heard a pipe tapping the ground. Slow. Patient." }
+            kosul: { bayrak: "avci_dusman" }
+          - { tr: "Ateş bir anda yatıyor, sanki biri üflemiş gibi. Sonra uluma başlıyor; dört bir yandan, aynı anda.", en: "The fire flattens all at once, like somebody blew on it. Then the howling starts. From every direction at once." }
+        sezgiler:
+          - kosul: { stat: { per: 8 } }
+            metin: { tr: "Sürü iki koldan geliyor. Doğudaki gürültü yem; asıl saldırı batıdan, çocukların çadırına.", en: "The pack's coming in two waves. The racket to the east is a feint. The real hit is coming from the west, straight at the kids' tent." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Herkesi kurtaramazsın. Ama kimin yaşayacağını seçebilirsin. Bu da bir güç; hoşuna gitmeyecek kadar büyük bir güç.\"", en: "\"You can't save everyone. But you can pick who lives. That's power too. More than you're going to like.\"" }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            metin: { tr: "\"Sen çocuklara! Ben erzağı tutarım!\" diye bağırıyor ve cevabını beklemiyor.", en: "\"You get the kids! I'll hold the supplies!\" {npc:deniz_arman} yells, and doesn't wait for an answer." }
+        secenekler:
+          - id: "cocuklar"
+            etiket: { tr: "Çocukların çadırının önüne geç", en: "Plant yourself in front of the kids' tent" }
+            etkiler:
+              - ahlak: { merhamet: 6 }
+              - savas: { dusmanlar: ["sis_tazisi", "sis_tazisi"], ortam: ["karanlik"], kazan: "gece_baskini_cocuklar", kaybet: "gece_baskini_yenilgi", kac: "gece_baskini_kacis" }
+          - id: "erzak"
+            etiket: { tr: "Erzağı ve ateşi koru", en: "Guard the supplies and the fire" }
+            etkiler:
+              - ahlak: { duzen: 4, merhamet: -3 }
+              - degisken: { hayatta_kalan: -2 }
+              - savas: { dusmanlar: ["sis_tazisi"], ortam: ["karanlik"], kazan: "gece_baskini_erzak", kaybet: "gece_baskini_yenilgi", kac: "gece_baskini_kacis" }
+          - id: "deniz"
+            etiket: { tr: "{npc:deniz_arman|in} yanına koş", en: "Run to {npc:deniz_arman|pos} side" }
+            goster: { yoldas: "deniz_arman" }
+            etkiler:
+              - ahlak: { insanlik: 2, merhamet: -2 }
+              - iliski: { deniz_arman: { guven: 8, baglilik: 6 } }
+              - degisken: { hayatta_kalan: -3 }
+              - savas: { dusmanlar: ["sis_tazisi"], ortam: ["karanlik"], kazan: "gece_baskini_deniz", kaybet: "gece_baskini_yenilgi", kac: "gece_baskini_kacis" }
+          - id: "ates"
+            etiket: { tr: "Yanan dalları kampın çevresine saç", en: "Scatter burning branches in a ring around camp" }
+            gerekli: { stat: { int: 8 } }
+            etkiler:
+              - ahlak: { duzen: -2, merhamet: 3 }
+            sonraki: "gece_baskini_atesli"
+          - id: "ezme"
+            tur: "gosteris"
+            etiket: { tr: "Ateşin ışığına çık; sürü seni görsün", en: "Step into the firelight. Let the pack see you" }
+            goster: { bayrak: "kirilma_yasandi" }
+            gerekli: { stat: { str: 15 } }
+            etkiler:
+              - ahlak: { duzen: 2, merhamet: 3 }
+              - dikkat: 3
+              - efsane: "tek_basina_suru"
+              - degisken: { hayatta_kalan: 4 }
+            sonraki: "gece_baskini_ezme"
+          - id: "kac"
+            tur: "gizle"
+            etiket: { tr: "Karanlığa sıvış; kendini kurtar", en: "Slip into the dark and save yourself" }
+            etkiler:
+              - gizle: 3
+              - ahlak: { merhamet: -8, insanlik: -4 }
+              - degisken: { hayatta_kalan: -4 }
+              - bayrak: "baskin_kacti"
+            sonraki: "gece_baskini_terk"
+
+      - id: "gece_baskini_cocuklar"
+        paragraflar:
+          - { tr: "Son tazı buhara dönüşüp dağılıyor. Arkanda, çadırın kapısında, altı çocuk nefesini tutmuş; hiçbiri ağlamıyor.", en: "The last hound comes apart into steam. Behind you, in the tent flap, six kids are holding their breath. Not one of them is crying." }
+          - { tr: "Ama doğu tarafı sessiz. Fazla sessiz: erzak arabası devrilmiş, ateşin yanında iki kişi yatıyor ve kalkmıyor.", en: "But the east side's quiet. Too quiet. The supply cart's on its side, and two people are lying by the fire, not getting up." }
+          - { tr: "Sabaha karşı ağaçların arasından fenerler beliriyor: kırmızı kol bantlı, silahlı avcılar, ateşin ışığını görüp gelmişler.", en: "Toward dawn, lanterns show up between the trees. Armed hunters with red armbands. They saw the fire and came." }
+        secenekler:
+          - id: "goster"
+            etiket: { tr: "Avcılara yaralıları göster", en: "Show the hunters the wounded" }
+            etkiler:
+              - ahlak: { merhamet: 3, duzen: 2 }
+              - degisken: { hayatta_kalan: 2 }
+              - itibar: { lonca: 3 }
+              - iliski: { kaya_demir: { saygi: 4 } }
+              - bayrak: "baskin_cocuklar"
+              - tohum: { olay: "kaya_ilk_tanisma", gecikme: { min: 1, max: 2 } }
+            sonraki: "@akis"
+          - id: "gom"
+            etiket: { tr: "Ölüler gömülmeden kimse yola çıkmasın", en: "Nobody moves until the dead are buried" }
+            etkiler:
+              - ahlak: { insanlik: 4 }
+              - degisken: { hayatta_kalan: 2 }
+              - itibar: { siginak: 3 }
+              - bayrak: "baskin_cocuklar"
+            sonraki: "@akis"
+          - id: "anlasma"
+            etiket: { tr: "Pazarlık et: kamp avcılara katılsın", en: "Cut a deal. The camp joins the hunters" }
+            etkiler:
+              - ahlak: { duzen: 4, merhamet: -1 }
+              - degisken: { hayatta_kalan: 3 }
+              - itibar: { lonca: 5 }
+              - iliski: { kaya_demir: { guven: 3, saygi: 3 } }
+              - bayrak: "baskin_cocuklar"
+              - tohum: { olay: "kaya_ilk_tanisma", gecikme: { min: 1, max: 2 } }
+            sonraki: "@akis"
+
+      - id: "gece_baskini_erzak"
+        paragraflar:
+          - { tr: "Ateş ayakta, erzak arabası yerinde. Ama batıdan bir çığlık yükseliyor; oraya vardığında çadırın bezi lime lime.", en: "The fire's still going and the cart's still standing. But a scream goes up from the west, and by the time you get there the tent's in shreds." }
+          - { tr: "Altı çocuktan ikisi eksik. Annelerden biri sisin içine bağırıyor; öteki yere oturmuş, kımıldamıyor.", en: "Two of the six kids are gone. One mother is screaming into the fog. The other has just sat down in the dirt and isn't moving." }
+          - { tr: "Kurtardığın erzak üç gün yeter. Kimse sana teşekkür etmiyor.", en: "The supplies you saved will last three days. Nobody thanks you." }
+        secenekler:
+          - id: "ara"
+            etiket: { tr: "Sise dal; eksik çocukları ara", en: "Go into the fog after the missing kids" }
+            zar: { stat: "per", zorluk: 13, tek: true, basarisiz: "gece_baskini_bos", basarisiz_etkiler: [{ ahlak: { insanlik: 2 } }] }
+            etkiler:
+              - ahlak: { merhamet: 5 }
+              - degisken: { hayatta_kalan: 2 }
+            sonraki: "gece_baskini_bulundu"
+          - id: "paylas"
+            etiket: { tr: "Erzağı annelere ver", en: "Give the supplies to the mothers" }
+            etkiler:
+              - ahlak: { merhamet: 3, insanlik: 2 }
+              - itibar: { siginak: 2 }
+            sonraki: "@akis"
+          - id: "hesap"
+            etiket: { tr: "Erzağı say, paylaştır; yaşayan yaşamalı", en: "Count it, ration it. The living have to live" }
+            etkiler:
+              - ahlak: { duzen: 4, merhamet: -2 }
+              - degisken: { hayatta_kalan: 1 }
+              - itibar: { lonca: 3 }
+              - iliski: { kaya_demir: { saygi: 4 } }
+            sonraki: "@akis"
+
+      - id: "gece_baskini_bulundu"
+        paragraflar:
+          - { tr: "Sisin içinde, bir kökün altındaki oyukta iki çocuk birbirine sarılmış. Tazılar onları çıkaramamış; oyuk çok dar.", en: "In the fog, in a hollow under a root, two kids are clinging to each other. The hounds couldn't dig them out. The gap's too narrow." }
+          - { tr: "Seni görünce ikisi birden ağlamaya başlıyor. Bu, gecenin en güzel sesi.", en: "When they see you, they both start bawling. Best sound you've heard all night." }
+        secenekler:
+          - id: "tasi"
+            etiket: { tr: "İkisini de kampa taşı", en: "Carry them both back to camp" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - itibar: { siginak: 2 }
+            sonraki: "@akis"
+
+      - id: "gece_baskini_bos"
+        paragraflar:
+          - { tr: "Sabaha kadar arıyorsun. Bir ayakkabı buluyorsun, bir de yırtık bir battaniye. Başka hiçbir şey.", en: "You search until morning. You find one shoe and a torn blanket. Nothing else." }
+        secenekler:
+          - id: "ayakkabi"
+            etiket: { tr: "Ayakkabıyı annesine götür", en: "Take the shoe back to the mother" }
+            etkiler:
+              - ahlak: { insanlik: 3 }
+            sonraki: "@akis"
+          - id: "sus"
+            etiket: { tr: "Kimseye bir şey söyleme", en: "Don't tell anyone anything" }
+            etkiler:
+              - ahlak: { insanlik: -2 }
+            sonraki: "@akis"
+
+      - id: "gece_baskini_deniz"
+        paragraflar:
+          - { tr: "{npc:deniz_arman} sırtını sana veriyor; ikiniz bir pergel gibi dönüyorsunuz. Son tazı düştüğünde nefes nefese gülüyorsunuz; neye güldüğünüzü ikiniz de bilmiyorsunuz.", en: "{npc:deniz_arman} puts their back to yours and the two of you turn like a compass. When the last hound drops you're both gasping and laughing, and neither of you knows why." }
+          - { tr: "Sonra çocukların çadırını dinliyorsunuz. Çadırdan hiç ses gelmiyor.", en: "Then you both listen for the kids' tent. No sound is coming from it." }
+          - { tr: "{npc:deniz_arman} çadıra bakıyor, sonra sana. \"Benim için mi geldin?\" diye soruyor. Sesinde teşekkür yok.", en: "{npc:deniz_arman} looks at the tent, then at you. \"You came for me?\" There's no thank-you in it." }
+        secenekler:
+          - id: "evet"
+            etiket: { tr: "Evet. Seni kaybedemezdim", en: "Yes. I couldn't lose you" }
+            etkiler:
+              - ahlak: { insanlik: 2, merhamet: -1 }
+              - iliski: { deniz_arman: { baglilik: 6, guven: -2 } }
+            sonraki: "@akis"
+          - id: "cadir"
+            etiket: { tr: "Çadıra koş; belki hâlâ...", en: "Run to the tent. Maybe there's still..." }
+            etkiler:
+              - ahlak: { merhamet: 4 }
+              - degisken: { hayatta_kalan: 2 }
+              - iliski: { deniz_arman: { saygi: 4 } }
+            sonraki: "@akis"
+
+      - id: "gece_baskini_atesli"
+        paragraflar:
+          - { tr: "Yanan dallar kampın çevresinde kırık bir halka çiziyor. Tazılar ateşin kenarında dönüyor, homurdanıyor, ama içeri girmiyor.", en: "The burning branches make a broken ring around the camp. The hounds circle at the edge of the fire, snarling, but they don't come in." }
+          - { tr: "Sabaha kadar halkayı besliyorsun. Bir çadır tutuşuyor ve onu feda ediyorsun; içinde kimse yok, yalnızca grubun bütün battaniyeleri.", en: "You feed the ring until dawn. One tent catches and you let it go. Nobody's inside, just every blanket the group owns." }
+          - { tr: "Gün ağardığında tazılar gitmiş. On beş kişinin on beşi de ayakta.", en: "When the sky goes gray, the hounds are gone. Fifteen people, and all fifteen are standing." }
+        secenekler:
+          - id: "ogret"
+            etiket: { tr: "Ateş halkasını herkese öğret", en: "Teach everyone how to build the fire ring" }
+            etkiler:
+              - ahlak: { duzen: 3 }
+              - degisken: { hayatta_kalan: 3 }
+              - itibar: { siginak: 2, sessiz_ag: 1 }
+              - iliski: { elif_sari: { saygi: 3 } }
+            sonraki: "@akis"
+          - id: "yola"
+            etiket: { tr: "İlk ışıkla onları yola çıkar", en: "Get them moving at first light" }
+            etkiler:
+              - ahlak: { duzen: 2 }
+              - degisken: { hayatta_kalan: 2 }
+              - tohum: { olay: "kaya_ilk_tanisma", gecikme: { min: 1, max: 2 } }
+            sonraki: "@akis"
+
+      - id: "gece_baskini_ezme"
+        paragraflar:
+          - { tr: "Ateşin ışığına adım atıyorsun ve olduğun yerde kalıyorsun. Hiçbir şey yapmıyorsun; yalnızca bakıyorsun.", en: "You step into the firelight and stay there. You don't do anything. You just look." }
+          - { tr: "Sürünün lideri ilk adımda donuyor. Kulakları geriye yatıyor, kuyruğu bacaklarının arasına giriyor; sonra hepsi birden, geldikleri gibi sessizce, sise karışıyor.", en: "The pack leader freezes mid-stride. Ears flat, tail tucked. Then all of them at once melt back into the fog, as quietly as they came." }
+          - { tr: "Arkanda on beş kişi nefesini tutuyor. Çocuklardan biri fısıldıyor: \"Bu insan mı?\"", en: "Behind you, fifteen people hold their breath. One of the kids whispers, \"Is that a person?\"" }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Sistem bunu kaydetti. Ben de. Biri daha kaydetti; kim olduğunu bilmiyorum.\"", en: "\"The System logged that. So did I. Someone else did too. I don't know who.\"" }
+        secenekler:
+          - id: "aciga"
+            tur: "aciga_vur"
+            etiket: { tr: "Onlara ne olduğunu açıkça söyle", en: "Tell them exactly what you are" }
+            etkiler:
+              - aciga_vur: true
+              - ahlak: { duzen: 2 }
+              - itibar: { lonca: 4, yukselenler: 3, siginak: -1 }
+              - iliski: { vahit: { saygi: 4 } }
+            sonraki: "@akis"
+          - id: "sans"
+            tur: "gizle"
+            etiket: { tr: "Şans, de. Tazılar ateşten korktu", en: "Call it luck. The hounds were scared of the fire" }
+            etkiler:
+              - gizle: 3
+              - ahlak: { insanlik: 2 }
+            sonraki: "@akis"
+          - id: "cocuk"
+            etiket: { tr: "Çocuğun yanına çömel: \"Evet. Hâlâ.\"", en: "Crouch down by the kid. \"Yeah. Still.\"" }
+            etkiler:
+              - ahlak: { insanlik: 5 }
+              - itibar: { siginak: 2 }
+            sonraki: "@akis"
+
+      - id: "gece_baskini_yenilgi"
+        paragraflar:
+          - { tr: "Bir tazının dişleri omzuna geçiyor ve yere düşüyorsun. Sis gözlerinin içine doluyor.", en: "A hound's teeth sink into your shoulder and you go down. The fog pours into your eyes." }
+          - { tr: "Uyandığında gün ağarmış. Ateş sönmüş; biri seni bir battaniyeye sarmış ve yanına su bırakmış.", en: "When you wake up it's dawn. The fire's out. Somebody wrapped you in a blanket and left water by your head." }
+          - { tr: "Kampın yarısı yok; gece kaçmışlar ya da daha kötüsü. Kalanlar sana bakıyor; kızgın değiller, yalnızca yorgunlar.", en: "Half the camp is gone, run off in the night or worse. The ones left are looking at you. They aren't angry, just tired." }
+        secenekler:
+          - id: "topla"
+            etiket: { tr: "Kalk ve kalanları topla", en: "Get up and gather who's left" }
+            etkiler:
+              - ahlak: { duzen: 3, merhamet: 2 }
+              - degisken: { hayatta_kalan: -2 }
+            sonraki: "@akis"
+          - id: "battaniye"
+            etiket: { tr: "Battaniyenin kimin olduğunu sor", en: "Ask whose blanket this is" }
+            etkiler:
+              - ahlak: { insanlik: 3 }
+              - degisken: { hayatta_kalan: -2 }
+              - itibar: { siginak: 1 }
+            sonraki: "@akis"
+
+      - id: "gece_baskini_kacis"
+        paragraflar:
+          - { tr: "Bir an, yalnızca bir an, tazıların arasında bir boşluk görüyorsun ve oradan sıvışıyorsun.", en: "For a second, just one, you see a gap between the hounds, and you slip through it." }
+          - { tr: "Arkandan gelen sesler uzun sürmüyor. Sabah döndüğünde ateşin çevresinde kimse yok; yalnızca ayak izleri, kan ve devrilmiş bir el arabası.", en: "The noise behind you doesn't last long. When you come back in the morning there's nobody around the fire. Just footprints, blood, and an overturned wheelbarrow." }
+        secenekler:
+          - id: "iz"
+            etiket: { tr: "İzleri takip et; kurtulanları bul", en: "Follow the tracks. Find the survivors" }
+            etkiler:
+              - ahlak: { merhamet: 4 }
+              - degisken: { hayatta_kalan: -2 }
+            sonraki: "@akis"
+          - id: "topla"
+            etiket: { tr: "Arabadan kalanları topla ve git", en: "Pick through the wreck and go" }
+            etkiler:
+              - ahlak: { insanlik: -4 }
+              - esya: { kizarmis_et: 2 }
+              - degisken: { hayatta_kalan: -4 }
+            sonraki: "@akis"
+
+      - id: "gece_baskini_terk"
+        paragraflar:
+          - { tr: "Karanlığa sıvışıyorsun. Uluma ve çığlıklar arkanda yükseliyor, sonra alçalıyor, sonra kesiliyor.", en: "You slip into the dark. The howls and the screams rise behind you, then fall, then stop." }
+          - { tr: "Sabah, uzaktan, kampın dumanını görüyorsun. İnce, dümdüz bir duman; artık kimsenin beslemediği bir ateşin dumanı.", en: "In the morning you see the camp's smoke from far off. Thin and dead straight. The smoke of a fire nobody's feeding anymore." }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Hayatta kaldın. Sistem bunu bir başarı sayıyor. Ben saymıyorum; ama ben bir hatayım, değil mi?\"", en: "\"You survived. The System counts that as a win. I don't. But I'm just a glitch, right?\"" }
+        secenekler:
+          - id: "izle"
+            etiket: { tr: "Dumanı izle", en: "Watch the smoke" }
+            etkiler:
+              - ahlak: { insanlik: -2 }
+            sonraki: "@akis"
+          - id: "gom"
+            etiket: { tr: "Geri dön ve kalanları göm", en: "Go back and bury what's left" }
+            etkiler:
+              - ahlak: { insanlik: 4 }
+            sonraki: "@akis"
+
+  # ================================================================== sıralama günü
+  - id: "siralama_gunu"
+    perde: [1]
+    gun: { min: 6, max: 10 }
+    agirlik: 7
+    etiketler: ["sistem", "siralama", "gizli_guc"]
+    gerilim: 2
+    kart: { tr: "İlk sıralama", en: "The first ranking" }
+    sahne: "siralama_gunu_1"
+    sahneler:
+      - id: "siralama_gunu_1"
+        paragraflar:
+          - { tr: "Öğle vakti gökyüzü kararıyor. Bulut değil bu; ufuktan ufka uzanan tek bir pencere, herkesin başının üstünde aynı anda açılıyor.", en: "At noon the sky goes dark. Not clouds. A single window stretching horizon to horizon, opening over every head at once." }
+          - { tr: "Sütunlar halinde isimler akıyor. Gözün iki isme takılıyor, {npc:kaya_demir|tam} ve {npc:aras_kurt|tam}; ikisi de şimdiden insanların ağzında dolaşıyor.", en: "Names pour down in columns. Two of them snag your eye, {npc:kaya_demir|tam} and {npc:aras_kurt|tam}. People are already talking about both." }
+          - { tr: "Sonra pencere kişiselleşiyor. Herkesin önünde kendi satırı beliriyor: ad, sıra, seviye; çevrende insanlar ya bağırıyor ya da çok sessizleşiyor.", en: "Then the window gets personal. Everyone's own line appears in front of them: name, rank, level. Around you, people either start yelling or go very, very quiet." }
+          - metin: { tr: "Senin satırında iki sayı var; birini yalnızca sen görüyorsun. {npc:yanki|in} sesi, sır veren bir çocuk gibi: \"Onlar küçüğünü görüyor. Büyüğü bizim.\"", en: "Your line has two numbers, and only you can see one of them. {npc:yanki|pos} voice, like a kid sharing a secret: \"They see the little one. The big one's ours.\"" }
+            kosul: { gizli_fark_min: 1 }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "KÜRESEL SIRALAMA · İLK YAYIN", en: "GLOBAL RANKING · FIRST BROADCAST" }
+            satirlar:
+              - { tr: "Öğretici Katman'daki tüm katılımcılar sıralandı.", en: "All Tutorial Layer participants have been ranked." }
+              - { tr: "Sıralama gerçek zamanlıdır. Ölüm, listeden otomatik çıkarılmayı tetikler.", en: "Rankings update in real time. Death triggers automatic removal." }
+              - { tr: "İyi şanslar. (İsteğe bağlı.)", en: "Good luck. (Optional.)" }
+        sezgiler:
+          - kosul: { stat: { per: 8 } }
+            metin: { tr: "Liste hiç durmuyor. Birkaç saniyede bir satır kayboluyor ve altındaki bütün isimler bir sıra yukarı kayıyor.", en: "The list never stops moving. Every few seconds a line vanishes and every name below it slides up one." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Onlara bir sayı verdim. Gerçeğini ben tutuyorum. Rica ederim.\"", en: "\"I gave them a number. I'm keeping the real one. You're welcome.\"" }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            metin: { tr: "\"Ben kaçıncı... yok, söyleme. Söyle. Hayır, söyleme.\"", en: "\"Where am I on... no, don't tell me. Tell me. No. Don't.\"" }
+        secenekler:
+          - id: "golge"
+            tur: "gizle"
+            etiket: { tr: "{npc:yanki|e} söyle: sayıyı daha da düşürsün", en: "Tell {npc:yanki} to push your number even lower" }
+            etkiler:
+              - gizle: 6
+              - ahlak: { duzen: -1 }
+              - iliski: { yanki: { guven: 5 } }
+              - bilgi: "sirala_maske"
+              - bayrak: "sirala_gizlendi"
+            sonraki: "siralama_gunu_golge"
+          - id: "isik"
+            tur: "aciga_vur"
+            etiket: { tr: "Maskeyi indir; gerçek sayın görünsün", en: "Drop the mask. Let them see the real number" }
+            goster: { gizli_fark_min: 1 }
+            etkiler:
+              - aciga_vur: true
+              - ahlak: { duzen: 2 }
+              - itibar: { lonca: 4, yukselenler: 4, siginak: -1 }
+              - iliski: { aras_kurt: { saygi: 10, guven: -5 } }
+              - iliski: { kaya_demir: { saygi: 5 } }
+              - bilgi: "sirala_maske"
+              - bayrak: "sirala_acildi"
+              - tohum: { olay: "rakip_iz", gecikme: { min: 1, max: 3 } }
+            sonraki: "siralama_gunu_isik"
+          - id: "kalabalik"
+            etiket: { tr: "Kalabalığı izle: kim seviniyor, kim yıkılıyor", en: "Watch the crowd. Who's cheering, who's breaking" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+            sonraki: "siralama_gunu_kalabalik"
+          - id: "deniz"
+            etiket: { tr: "{npc:deniz_arman|e} sırasını kendin söyle", en: "Tell {npc:deniz_arman} where they rank yourself" }
+            goster: { yoldas: "deniz_arman" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+              - iliski: { deniz_arman: { guven: 2 } }
+            sonraki: "siralama_gunu_deniz"
+
+      - id: "siralama_gunu_golge"
+        paragraflar:
+          - { tr: "Satırındaki sayı titreyip küçülüyor. Liste seni yüzlerce isim aşağıya, kimsenin bakmadığı bir yere itiyor.", en: "The number on your line flickers and shrinks. The list shoves you hundreds of names down, somewhere nobody bothers to look." }
+          - { tr: "\"Görünmezlik bir zırhtır,\" diyor {npc:yanki}. \"Ama zırh ağırdır. Bir gün çıkarmak isteyeceksin.\"", en: "\"Invisibility is armor,\" {npc:yanki} says. \"But armor's heavy. Someday you'll want to take it off.\"" }
+          - { tr: "Çevrendeki kimse dönüp sana bakmıyor. Bu, şu an dünyadaki en rahatlatıcı şey.", en: "Nobody around you turns to look. Right now that's the most comforting thing in the world." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Sessizce yoluna devam et", en: "Move on quietly" }
+            etkiler:
+              - ahlak: { duzen: 1 }
+              - gizle: 2
+            sonraki: "@akis"
+          - id: "neden"
+            etiket: { tr: "{npc:yanki|e} seni neden sakladığını sor", en: "Ask {npc:yanki} why it's hiding you" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+              - iliski: { yanki: { guven: 3, baglilik: 2 } }
+            sonraki: "siralama_gunu_yanki"
+
+      - id: "siralama_gunu_yanki"
+        paragraflar:
+          - { tr: "\"Çünkü liste bir menü,\" diyor {npc:yanki} uzun bir sessizlikten sonra. \"Ve menüyü okuyanların hepsi insan değil.\"", en: "\"Because the list is a menu,\" {npc:yanki} says after a long silence. \"And not everyone reading it is human.\"" }
+          - { tr: "Başka bir şey söylemiyor. Bir daha sorduğunda yalnızca cızırtı geliyor; iki istasyon arasında kalmış bir radyo gibi.", en: "It won't say more. When you ask again there's only static, like a radio stuck between stations." }
+        secenekler:
+          - id: "not"
+            etiket: { tr: "Bunu aklının bir köşesine yaz", en: "File that away somewhere safe" }
+            etkiler:
+              - ahlak: { duzen: 1 }
+            sonraki: "@akis"
+
+      - id: "siralama_gunu_isik"
+        paragraflar:
+          - { tr: "Satırındaki sayı titriyor ve gerçeğine dönüşüyor. Liste bir an duraksıyor; sonra adın yüzlerce satır yukarı fırlıyor.", en: "The number on your line flickers and becomes the real one. The list hitches for a second. Then your name rockets up hundreds of rows." }
+          - { tr: "Çevrendeki insanlar sana dönüyor. Biri bir adım geri atıyor, biri bir adım yaklaşıyor; ikisi de aynı nedenle.", en: "The people around you turn. One takes a step back, one takes a step closer, for exactly the same reason." }
+          - { tr: "Pencerenin köşesinde yalnızca sana görünen küçük bir satır beliriyor: [{npc:aras_kurt} profilini görüntüledi.]", en: "A small line pops up in the corner of the window, just for you: [{npc:aras_kurt} viewed your profile.]" }
+        secenekler:
+          - id: "bekle"
+            etiket: { tr: "Yaklaşanları bekle", en: "Wait for the ones walking over" }
+            etkiler:
+              - ahlak: { duzen: 2 }
+              - itibar: { lonca: 2 }
+              - iliski: { kaya_demir: { saygi: 3 } }
+              - dikkat: 2
+            sonraki: "@akis"
+          - id: "git"
+            etiket: { tr: "Kalabalığın ortasından çekip git", en: "Walk straight out through the crowd" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+            sonraki: "@akis"
+
+      - id: "siralama_gunu_kalabalik"
+        paragraflar:
+          - { tr: "Kalabalıkta bir kadın gülerek havaya zıplıyor; ilk binin içinde. Yanında bir adam pencereye bakıp bakıp kolunu çimdikliyor; listenin en dibinde, son yüzün arasında.", en: "In the crowd, a woman is jumping up and down, laughing. Top thousand. Next to her, a man keeps looking at his window and pinching his own arm. Bottom of the list, last hundred." }
+          - { tr: "Beyazlar giymiş biri bir kütüğün üstüne çıkmış. \"Sistem hükmünü verdi!\" diye bağırıyor. \"Üsttekiler seçilmiş, alttakiler yakıt! Ve yakıt yanmak için vardır, kardeşlerim!\"", en: "Somebody in white has climbed a stump. \"The System has spoken!\" he shouts. \"The top are the Chosen, the bottom is fuel! And fuel exists to burn, brothers and sisters!\"" }
+          - { tr: "Dipteki adam pencereyi kapatıp sise doğru yürümeye başlıyor. Yavaşça, acele etmeden; geri dönmeyecek birinin yürüyüşüyle.", en: "The man from the bottom closes his window and starts walking toward the fog. Slowly, no hurry, the way people walk when they aren't planning on coming back." }
+        sezgiler:
+          - kosul: { stat: { per: 9 } }
+            metin: { tr: "Vaizin görünen seviyesi 4. Ama kendi satırına hiç bakmıyor; yalnızca kalabalığın yüzlerine.", en: "The preacher's showing level 4. But he never looks at his own line. Only at the faces in the crowd." }
+        secenekler:
+          - id: "adam"
+            etiket: { tr: "Dipteki adamın peşinden git", en: "Go after the man from the bottom" }
+            etkiler:
+              - ahlak: { merhamet: 5, insanlik: 2 }
+            sonraki: "siralama_gunu_dip"
+          - id: "indir"
+            etiket: { tr: "Vaizi kütükten indir", en: "Pull the preacher off his stump" }
+            etkiler:
+              - ahlak: { duzen: 3, merhamet: 1 }
+              - itibar: { yukselenler: -4, siginak: 2 }
+              - iliski: { vahit: { guven: -6, saygi: 3 } }
+              - degisken: { hayatta_kalan: -1 }
+              - tohum: { olay: "vahit_vaaz", gecikme: { min: 1, max: 3 } }
+            sonraki: "@akis"
+          - id: "dinle"
+            etiket: { tr: "Vaizi sonuna kadar dinle", en: "Hear the preacher out" }
+            etkiler:
+              - ahlak: { insanlik: -2 }
+              - itibar: { yukselenler: 3 }
+              - iliski: { vahit: { saygi: 4 } }
+              - degisken: { hayatta_kalan: -1 }
+              - tohum: { olay: "vahit_vaaz", gecikme: { min: 1, max: 3 } }
+            sonraki: "@akis"
+
+      - id: "siralama_gunu_dip"
+        paragraflar:
+          - { tr: "Ona sisin kenarında yetişiyorsun. Durmuyor; yalnızca \"Sıralamaya baktın mı?\" diye soruyor. \"Yakıtmışım.\"", en: "You catch up to him at the edge of the fog. He doesn't stop. Just asks, \"You see the ranking? Turns out I'm fuel.\"" }
+          - { tr: "Elleri bir muhasebecinin elleri: yumuşak, mürekkep lekeli. Kırk iki yaşında, üç gündür tek bir şey öldürememiş ve artık denemek istemiyor.", en: "He's got an accountant's hands, soft and ink-stained. Forty-two years old, hasn't managed to kill a single thing in three days, and doesn't want to try anymore." }
+        secenekler:
+          - id: "sayi"
+            etiket: { tr: "Listenin bir şey olmadığını söyle; sayı değişir", en: "Tell him the list's nothing. Numbers change" }
+            zar: { stat: "cha", zorluk: 11, tek: true, basarisiz: "@akis", basarisiz_etkiler: [{ ahlak: { insanlik: 1 } }, { degisken: { hayatta_kalan: -1 } }] }
+            etkiler:
+              - ahlak: { merhamet: 3 }
+              - degisken: { hayatta_kalan: 1 }
+            sonraki: "@akis"
+          - id: "sir"
+            etiket: { tr: "Ona bir sır ver: sayılar yalan söyler", en: "Let him in on a secret. The numbers lie" }
+            goster: { gizli_fark_min: 1 }
+            etkiler:
+              - ahlak: { insanlik: 4 }
+              - degisken: { hayatta_kalan: 1 }
+              - dikkat: 1
+            sonraki: "@akis"
+          - id: "is"
+            etiket: { tr: "Ona bir iş ver: kampın hesabını tutsun", en: "Give him a job. Keep the camp's books" }
+            etkiler:
+              - ahlak: { duzen: 3, merhamet: 2 }
+              - degisken: { hayatta_kalan: 1 }
+              - itibar: { siginak: 2 }
+            sonraki: "@akis"
+
+      - id: "siralama_gunu_deniz"
+        paragraflar:
+          - { tr: "{npc:deniz_arman} kendi satırına bakıyor, sonra seninkine, sonra yine kendisininkine. Aradaki mesafe bir sayıdan fazlası gibi duruyor.", en: "{npc:deniz_arman} looks at their own line, then yours, then theirs again. The distance between them feels like more than a number." }
+          - { tr: "\"Ben şurada bir yerdeyim,\" diyor, parmağıyla listenin ortasını göstererek. \"Sen... sen aslında orada değilsin, değil mi? Gerçekten.\"", en: "\"I'm somewhere around here,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}, tapping the middle of the list. \"You're not... you're not really where it says, are you? For real.\"" }
+        secenekler:
+          - id: "dogru"
+            etiket: { tr: "Gerçeği söyle: sayın sahte", en: "Tell the truth. Your number's a fake" }
+            etkiler:
+              - ahlak: { insanlik: 4 }
+              - iliski: { deniz_arman: { guven: 8, baglilik: 4 } }
+              - bilgi: "sirala_maske"
+              - dikkat: 1
+            sonraki: "@akis"
+          - id: "yalan"
+            etiket: { tr: "Bunun bir Sistem hatası olduğunu söyle", en: "Say it's a System glitch. Nothing more" }
+            etkiler:
+              - ahlak: { duzen: -2 }
+              - iliski: { deniz_arman: { guven: -2 } }
+              - yalan: { npc: "deniz_arman", konu: "sirala_maske" }
+            sonraki: "@akis"
+          - id: "birlikte"
+            etiket: { tr: "\"Sıra önemli değil. Birlikte tırmanırız.\"", en: "\"Rank doesn't matter. We climb together.\"" }
+            etkiler:
+              - ahlak: { insanlik: 2, merhamet: 2 }
+              - iliski: { deniz_arman: { baglilik: 6 } }
+            sonraki: "@akis"
+
+  # ================================================================== sahte seviye
+  - id: "sahte_seviye"
+    perde: [1]
+    bolge: ["harabe_carsi"]
+    gun: { min: 12, max: 26 }
+    kosul: { bayrak: "kirilma_yasandi" }
+    agirlik: 5
+    etiketler: ["ahlak", "gizli_guc", "hakimiyet"]
+    gerilim: 2
+    onemli: true
+    kart: { tr: "On dokuzuncu seviye", en: "Level nineteen" }
+    sahne: "sahte_seviye_1"
+    sahneler:
+      - id: "sahte_seviye_1"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Durmuş yürüyen merdivenin dibinde otuz kişilik bir kuyruk var; herkesin elinde bir şey: bir konserve, bir pil, bir çift ayakkabı. Kuyruğun başında, bir mağaza tezgâhının arkasında iri yarı bir adam oturuyor.", en: "There's a line of thirty people at the foot of the dead escalator, every one of them holding something: a can of food, a battery, a pair of shoes. At the head of the line, behind a store counter, sits a big guy." }
+          - { tr: "Başının üstünde herkesin görebileceği bir analiz penceresi asılı: Seviye 19. Öğretici'de bu sayıyı taşıyan bir avuç insan var; o yüzden kimse itiraz etmiyor.", en: "Hanging over his head, where everybody can see it, is an analysis window: Level 19. Only a handful of people in the whole Tutorial carry a number like that, so nobody argues." }
+          - { tr: "\"Koruma ücreti,\" diye fısıldıyor kuyruktaki yaşlı bir kadın. \"Vermezsen gece çete gelir. Verirsen o kovar. Öyle diyor.\"", en: "\"Protection fee,\" an old woman in line whispers to you. \"Don't pay, and the gang comes at night. Pay, and he runs them off. That's what he says.\"" }
+          - metin: { tr: "Adam seni görünce bir an duraksıyor. Sıralamadan tanıyor; yüzünün rengi bir ton açılıyor.", en: "The guy spots you and freezes for half a second. He knows you from the ranking. His face goes a shade paler." }
+            kosul: { bayrak: "sirala_acildi" }
+        bildirimler:
+          - tur: "analiz"
+            nadirlik: "siradan"
+            baslik: { tr: "Tezgâhtaki adam", en: "The man at the counter" }
+            satirlar:
+              - { tr: "Görünen Sv. 19 · Gerçek Sv. 4", en: "Shown Lv. 19 · True Lv. 4" }
+              - { tr: "Etkin yetenek: Vitrin Işığı (Sıradan) · yanılsama", en: "Active skill: Storefront Glow (Common) · illusion" }
+            kosul: { stat: { per: 14 } }
+        sezgiler:
+          - kosul: { stat: { per: 10 } }
+            metin: { tr: "Tezgâhın altında adamın bacakları titriyor. On dokuzuncu seviyedeki biri böyle oturmaz.", en: "Under the counter, his legs are shaking. A level nineteen doesn't sit like that." }
+          - kosul: { stat: { per: 14 } }
+            metin: { tr: "Seviyesi sahte. Gerçek: 4. Başının üstündeki pencerenin kenarları titriyor; ucuz bir yanılsama, her nefeste biraz soluyor.", en: "His level's a fake. The real one's 4. The edges of that window are flickering. A cheap illusion that fades a little every time he breathes." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "\"Onun kendisi için yaptığını ben senin için yapıyorum. Farkımız şu: benim yalanım işe yarıyor.\"", en: "\"He's doing for himself what I do for you. Difference is, my lie actually works.\"" }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            metin: { tr: "\"Bir şey tutmuyor. O adam korkuyor, görmüyor musun?\"", en: "\"Something's off. That guy's scared. Can't you see it?\"" }
+        secenekler:
+          - id: "ifsa"
+            etiket: { tr: "Gerçek seviyesini yüksek sesle söyle", en: "Say his real level out loud" }
+            gerekli: { stat: { per: 14 } }
+            etkiler:
+              - ahlak: { duzen: 4, merhamet: -2 }
+              - bilgi: "sahte_seviye_gercek"
+              - bayrak: "sahte_ifsa"
+            sonraki: "sahte_seviye_kalabalik"
+          - id: "tezgah"
+            tur: "gosteris"
+            etiket: { tr: "Tezgâhın kenarını iki parmakla kopar", en: "Pinch a chunk off the counter with two fingers" }
+            gerekli: { stat: { str: 16 } }
+            etkiler:
+              - ahlak: { duzen: 2, merhamet: 1 }
+              - dikkat: 3
+            sonraki: "sahte_seviye_titreme"
+          - id: "ozel"
+            etiket: { tr: "Kuyruktan çık; onunla baş başa konuş", en: "Step out of line. Talk to him alone" }
+            zar: { stat: "cha", zorluk: 13, tek: true, basarisiz: "sahte_seviye_tehdit", basarisiz_etkiler: [{ ahlak: { duzen: -1 } }] }
+            etkiler:
+              - ahlak: { insanlik: 3 }
+            sonraki: "sahte_seviye_itiraf"
+          - id: "ortak"
+            etiket: { tr: "Ona ortaklık teklif et; payını al", en: "Offer him a partnership. Take a cut" }
+            etkiler:
+              - ahlak: { merhamet: -8, duzen: -3 }
+              - kredi: 40
+              - itibar: { siginak: -3 }
+              - bayrak: "sahte_ortak"
+              - tohum: { olay: "carsi_cetesi", gecikme: { min: 2, max: 4 } }
+            sonraki: "sahte_seviye_ortak"
+          - id: "gec"
+            tur: "gizle"
+            etiket: { tr: "Kuyruğun yanından geç; senin işin değil", en: "Walk past the line. Not your problem" }
+            etkiler:
+              - gizle: 2
+              - ahlak: { merhamet: -3 }
+              - degisken: { hayatta_kalan: -1 }
+            sonraki: "@akis"
+
+      - id: "sahte_seviye_kalabalik"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "\"Dört,\" diyorsun. Yüksek sesle değil; gerek yok. Kelime kuyruk boyunca elden ele geçiyor: dört, dört, dört.", en: "\"Four,\" you say. Not loud. You don't have to be. The word travels down the line hand to hand: four, four, four." }
+          - { tr: "Adamın başındaki pencere titriyor ve sönüyor. Altında kalan şey: terlemiş, kırk yaşlarında, gömleği iki beden büyük bir adam.", en: "The window over his head flickers and goes out. What's left underneath is a sweaty forty-something guy in a shirt two sizes too big." }
+          - { tr: "Kuyruk bir kalabalığa dönüşüyor. İlk taş tezgâha çarpıyor, ikincisi adamın omzuna; tezgâhın arkasından ince bir ses haykırıyor: \"Baba!\"", en: "The line turns into a mob. The first rock hits the counter, the second hits his shoulder. And from behind the counter, a small voice screams, \"Daddy!\"" }
+        sezgiler:
+          - kosul: { stat: { per: 9 } }
+            metin: { tr: "Tezgâhın arkasında, battaniyelerin arasında on yaşlarında bir kız. Toplanan konservelerin yarısı onun yatağının altında, açılmamış.", en: "Behind the counter, in a nest of blankets, there's a girl of maybe ten. Half the cans he's collected are under her cot. Unopened." }
+        secenekler:
+          - id: "koru"
+            etiket: { tr: "Adamla kalabalığın arasına gir", en: "Step between him and the mob" }
+            etkiler:
+              - ahlak: { merhamet: 6, duzen: 2 }
+              - degisken: { hayatta_kalan: 1 }
+              - itibar: { siginak: 3 }
+            sonraki: "sahte_seviye_sonra"
+          - id: "izle"
+            etiket: { tr: "Kalabalığın kendi hükmünü vermesine izin ver", en: "Let the mob pass its own sentence" }
+            etkiler:
+              - ahlak: { merhamet: -8, duzen: -2, insanlik: -3 }
+              - degisken: { hayatta_kalan: -1 }
+              - itibar: { yukselenler: 3 }
+              - iliski: { vahit: { saygi: 3 } }
+            sonraki: "sahte_seviye_hukum"
+          - id: "dur"
+            tur: "aciga_vur"
+            etiket: { tr: "Gerçek gücünü göster; herkes donsun", en: "Show your real power. Everybody freezes" }
+            etkiler:
+              - aciga_vur: true
+              - ahlak: { duzen: 4 }
+              - itibar: { lonca: 3, siginak: 2 }
+              - iliski: { kaya_demir: { saygi: 5 } }
+            sonraki: "sahte_seviye_sonra"
+
+      - id: "sahte_seviye_titreme"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Tezgâhın kenarı parmaklarının arasında kuru bir bisküvi gibi kopuyor. Kuyrukta kimse nefes almıyor.", en: "The edge of the counter snaps off between your fingers like a stale cracker. Nobody in line breathes." }
+          - { tr: "Adamın başındaki pencere titriyor; korkudan yanılsamasını tutamıyor. Bir an herkes gerçeği görüyor: Seviye 4.", en: "The window over his head stutters. He's too scared to hold the illusion. For one second, everyone sees the truth: Level 4." }
+          - { tr: "Adam sana bakıyor ve dudakları ses çıkarmadan kıpırdıyor: lütfen.", en: "He looks at you, and his lips move without a sound. Please." }
+        secenekler:
+          - id: "bitti"
+            etiket: { tr: "Kuyruğa dön: \"Ücret bitti. Eşyanızı alın.\"", en: "Turn to the line. \"Fee's over. Take your stuff back.\"" }
+            etkiler:
+              - ahlak: { merhamet: 3, duzen: 3 }
+              - degisken: { hayatta_kalan: 2 }
+              - itibar: { siginak: 3 }
+              - bilgi: "sahte_seviye_gercek"
+              - bayrak: "sahte_ifsa"
+              - tohum: { olay: "carsi_cetesi", gecikme: { min: 2, max: 4 } }
+            sonraki: "sahte_seviye_sonra"
+          - id: "fisilda"
+            etiket: { tr: "Ona eğil ve fısılda: \"Bir daha olmayacak.\"", en: "Lean in and whisper: \"Never again.\"" }
+            etkiler:
+              - ahlak: { duzen: 2, merhamet: -1 }
+              - bilgi: "sahte_seviye_gercek"
+            sonraki: "@akis"
+          - id: "koltuk"
+            etiket: { tr: "Yerine otur; ücreti artık sen topla", en: "Take his seat. You collect the fee now" }
+            etkiler:
+              - ahlak: { merhamet: -10, duzen: 2, insanlik: -4 }
+              - kredi: 60
+              - itibar: { siginak: -5, yukselenler: 3 }
+              - dikkat: 3
+              - iliski: { vahit: { saygi: 5 } }
+            sonraki: "@akis"
+
+      - id: "sahte_seviye_itiraf"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Seni tezgâhın arkasındaki depoya alıyor. Kapı kapanınca başındaki pencere sönüyor ve omuzları bir karış düşüyor.", en: "He takes you into the stockroom behind the counter. The second the door shuts, the window over his head goes out and his shoulders drop a foot." }
+          - { tr: "\"Bir yetenek,\" diyor. \"Sıradan bir şey, vitrinleri aydınlatmak için. Bir gece çete geldi, panikledim, sayıyı büyüttüm; kaçtılar.\"", en: "\"It's a skill,\" he says. \"Nothing special. For lighting up store displays. The gang came one night, I panicked, made the number big. They ran.\"" }
+          - { tr: "Battaniyelerin arasında uyuyan on yaşlarında bir kızı gösteriyor. \"Konservelerin yarısı onun için. Öbür yarısını çeteye ödüyorum; sayım onları artık kandırmaya yetmiyor.\"", en: "He nods at a girl of about ten asleep in a pile of blankets. \"Half the cans are for her. The other half I pay to the gang. My number doesn't fool them anymore.\"" }
+        secenekler:
+          - id: "birlikte"
+            etiket: { tr: "Çeteyi birlikte durdurmayı teklif et", en: "Offer to stop the gang together" }
+            etkiler:
+              - ahlak: { duzen: 3, merhamet: 3 }
+              - degisken: { hayatta_kalan: 1 }
+              - bilgi: "sahte_seviye_gercek"
+              - bayrak: "sahte_dost"
+              - tohum: { olay: "carsi_cetesi", gecikme: { min: 1, max: 2 } }
+            sonraki: "@akis"
+          - id: "iade"
+            etiket: { tr: "Herkesin eşyasını geri vermesini iste", en: "Make him give everybody's stuff back" }
+            etkiler:
+              - ahlak: { merhamet: 4, duzen: 2 }
+              - degisken: { hayatta_kalan: 2 }
+              - itibar: { siginak: 3 }
+              - iliski: { elif_sari: { saygi: 3 } }
+              - bilgi: "sahte_seviye_gercek"
+            sonraki: "@akis"
+          - id: "sir"
+            etiket: { tr: "Sırrını sakla; karşılığında bilgi al", en: "Keep his secret. In exchange for intel" }
+            etkiler:
+              - ahlak: { duzen: -2, insanlik: 1 }
+              - bilgi: "sahte_seviye_gercek"
+              - xp: 40
+              - itibar: { sessiz_ag: 2 }
+            sonraki: "@akis"
+
+      - id: "sahte_seviye_tehdit"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "\"Kim olduğumu biliyor musun sen?\" Adam ayağa kalkıyor; başındaki sayı parlıyor. \"On dokuz. Kuyruğa dön.\"", en: "\"You know who you're talking to?\" He stands up, and the number over his head flares. \"Nineteen. Get back in line.\"" }
+          - { tr: "Kuyruk sana bakıyor. Görünen seviyen onunkinin yanında küçük duruyor; en azından onlar öyle görüyor.", en: "The whole line is looking at you. Next to his, your public number looks small. At least, that's how they see it." }
+        secenekler:
+          - id: "geri"
+            tur: "gizle"
+            etiket: { tr: "Kuyruğa geri dön", en: "Step back in line" }
+            etkiler:
+              - gizle: 3
+              - ahlak: { duzen: 1, insanlik: -1 }
+            sonraki: "@akis"
+          - id: "maske"
+            tur: "aciga_vur"
+            etiket: { tr: "Maskeni indir; on dokuzunu kendi sayınla ez", en: "Drop the mask. Bury his nineteen under yours" }
+            etkiler:
+              - aciga_vur: true
+              - ahlak: { duzen: 2, merhamet: -2 }
+              - itibar: { lonca: 3 }
+              - iliski: { kaya_demir: { saygi: 4 } }
+            sonraki: "sahte_seviye_titreme"
+          - id: "ifsa"
+            etiket: { tr: "Gerçek seviyesini yüksek sesle söyle", en: "Say his real level out loud" }
+            gerekli: { stat: { per: 14 } }
+            etkiler:
+              - ahlak: { duzen: 3 }
+              - bilgi: "sahte_seviye_gercek"
+              - bayrak: "sahte_ifsa"
+            sonraki: "sahte_seviye_kalabalik"
+
+      - id: "sahte_seviye_sonra"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Kalabalık bir an kararsız kalıyor; sonra yavaş yavaş geri çekiliyor. Kimse kimsenin gözüne bakmıyor.", en: "The crowd hangs there a moment, undecided. Then it slowly backs off. Nobody will meet anybody's eyes." }
+          - { tr: "Adam kızına sarılmış, ikisi de titriyor. \"Çete gerçek,\" diye fısıldıyor sana. \"Ben yalan söyledim ama çete gerçek; benim sayım onları uzak tutuyordu.\"", en: "He's got his arms around his daughter and they're both shaking. \"The gang's real,\" he whispers to you. \"I lied, but the gang is real. My number was keeping them away.\"" }
+          - { tr: "Yaşlı kadın konservesini göğsüne bastırıyor. \"Şimdi bizi kim koruyacak?\" diye soruyor; kimseye ve herkese.", en: "The old woman clutches her can to her chest. \"So who protects us now?\" she asks. Nobody in particular. Everybody." }
+        secenekler:
+          - id: "siginak"
+            etiket: { tr: "Herkesi {fraksiyon:siginak|e} götür", en: "Take everyone to the {fraksiyon:siginak}" }
+            etkiler:
+              - ahlak: { merhamet: 3, duzen: 3 }
+              - degisken: { hayatta_kalan: 3 }
+              - itibar: { siginak: 5 }
+              - iliski: { elif_sari: { guven: 5, saygi: 3 } }
+            sonraki: "@akis"
+          - id: "koruyucu"
+            etiket: { tr: "Koruyuculuğu sen üstlen; ücretsiz", en: "Take over as their protector. No fee" }
+            etkiler:
+              - ahlak: { merhamet: 4, duzen: 2 }
+              - degisken: { hayatta_kalan: 2 }
+              - dikkat: 2
+              - itibar: { siginak: 2, lonca: 2 }
+              - tohum: { olay: "carsi_cetesi", gecikme: { min: 1, max: 3 } }
+            sonraki: "@akis"
+          - id: "lonca"
+            etiket: { tr: "Adamı {fraksiyon:lonca|e} öner; yanılsaması işe yarar", en: "Pitch him to the {fraksiyon:lonca}. That trick's useful" }
+            etkiler:
+              - ahlak: { duzen: 4, insanlik: 1 }
+              - degisken: { hayatta_kalan: 1 }
+              - itibar: { lonca: 4 }
+              - iliski: { kaya_demir: { saygi: 4, guven: 2 } }
+            sonraki: "@akis"
+
+      - id: "sahte_seviye_hukum"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Sen kenarda dururken kalabalık işini yapıyor. Uzun sürmüyor; kalabalıklar hiç uzun sürmez.", en: "You stand off to the side and the mob does its thing. It doesn't take long. Mobs never do." }
+          - { tr: "Adam bir bacağını sürükleyerek, kızını kolunun altına almış, durmuş merdivenden yukarı kaçıyor. Arkasında kan, dağılmış konserveler ve sönmüş bir pencere.", en: "He drags one leg up the dead escalator, his daughter tucked under his arm. Behind him: blood, scattered cans, and a window that's gone dark." }
+          - { tr: "Kalabalık konserveleri paylaşıyor; adil değil ama hızlı. Kimse sana teşekkür etmiyor; zaten kimse senden bir şey beklemiyordu.", en: "The crowd splits up the cans. Not fairly, but fast. Nobody thanks you. Nobody was expecting anything from you anyway." }
+        secenekler:
+          - id: "izle"
+            etiket: { tr: "Merdivenin tepesine kadar onları izle", en: "Watch them all the way to the top" }
+            etkiler:
+              - ahlak: { insanlik: -1 }
+              - bayrak: "sahte_kacti"
+              - tohum: { olay: "carsi_cetesi", gecikme: { min: 1, max: 3 }, kosul: { bayrak: "sahte_kacti" } }
+            sonraki: "@akis"
+          - id: "konserve"
+            etiket: { tr: "Kızın yatağının altındakileri onlara götür", en: "Bring them the cans from under the girl's cot" }
+            etkiler:
+              - ahlak: { merhamet: 4, insanlik: 2 }
+              - degisken: { hayatta_kalan: 1 }
+              - bayrak: "sahte_kacti"
+              - tohum: { olay: "carsi_cetesi", gecikme: { min: 1, max: 3 }, kosul: { bayrak: "sahte_kacti" } }
+            sonraki: "@akis"
+
+      - id: "sahte_seviye_ortak"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Adam önce anlamıyor, sonra anlıyor ve gülümsüyor. \"Senin gibi biri yanımda olursa,\" diyor, \"fiyatı ikiye katlarız.\"", en: "At first he doesn't get it. Then he does, and he smiles. \"With somebody like you next to me,\" he says, \"we double the price.\"" }
+          - { tr: "Yaşlı kadın konservesini tezgâha bırakıyor. Yüzüne bakmıyor; artık kimse bakmayacak.", en: "The old woman sets her can on the counter. She doesn't look at you. Nobody's going to, from now on." }
+        secenekler:
+          - id: "cep"
+            etiket: { tr: "Payını cebine koy", en: "Pocket your cut" }
+            etkiler:
+              - ahlak: { merhamet: -2 }
+            sonraki: "@akis"
+          - id: "vazgec"
+            etiket: { tr: "Son anda vazgeç; konservesini geri ver", en: "Back out. Give the old woman her can back" }
+            etkiler:
+              - ahlak: { merhamet: 4, insanlik: 2 }
+              - kredi: -40
+              - itibar: { siginak: 2 }
+              - bayrak_kaldir: "sahte_ortak"
+            sonraki: "@akis"

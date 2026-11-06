@@ -48,6 +48,7 @@ object ContentValidator {
                 null -> Unit
                 is Condition.NpcAlive -> npcRef(c.npc, where)
                 is Condition.NpcDead -> npcRef(c.npc, where)
+                is Condition.NpcGoneCond -> npcRef(c.npc, where)
                 is Condition.IsCompanion -> npcRef(c.npc, where)
                 is Condition.RelationAtLeast -> npcRef(c.npc, where)
                 is Condition.RelationAtMost -> npcRef(c.npc, where)
@@ -526,6 +527,16 @@ fun contentWarnings(content: Content): List<String> {
         warnings += "olay ${it.id}: yalnızca tohumla gelir ama hiçbir yerde tohumlanmıyor (ulaşılamaz)"
     }
     content.events.values.filter { it.repeatable.not() && it.dayMax < it.dayMin }.forEach { warnings += "olay ${it.id}: gün aralığı boş" }
+    // Hatıra metni: İlişkiler ekranında görünmesi için NPC dosyasında ya da system.yaml'da (`hafiza_<id>`) metni olmalı.
+    val memoryEffects = content.scenes.values.flatMap { sc -> sc.choices.flatMap { c -> c.effects + (c.check?.failEffects ?: emptyList()) } }
+        .filterIsInstance<Effect.AddMemory>()
+    memoryEffects.map { it.npc to it.memory }.distinct().filterNot { (_, mem) ->
+        // Olay hatırası metnini olay kartından alır.
+        mem.startsWith(com.yukselis.engine.npc.Memory.EVENT_PREFIX) && mem.removePrefix(com.yukselis.engine.npc.Memory.EVENT_PREFIX) in content.events
+    }.forEach { (npc, mem) ->
+        val inNpc = if (npc == Content.FOCUS) content.npcs.values.any { mem in it.memories } else content.npcs[npc]?.memories?.containsKey(mem) == true
+        if (!inNpc && content.texts["hafiza_$mem"] == null) warnings += "hatıra '$mem' ($npc): metni yok (npcs/$npc.yaml hafizalar ya da system.yaml hafiza_$mem)"
+    }
     // NPC yay düğümleri: henüz yazılmamış düğümler (Aşama 6–7 içeriği) uyarıdır.
     content.npcs.values.forEach { d ->
         d.arcNodes.forEach { n ->

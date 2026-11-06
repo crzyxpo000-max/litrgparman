@@ -1,0 +1,26 @@
+# Parti A — Yoldaş yayları bilgi günlüğü kayıtları.
+bilgiler:
+  kardes_notu:
+    tur: sir
+    ad: { tr: "Duvardaki martı", en: "The gull on the wall" }
+    aciklama: { tr: "{yer:kirik_istasyon|in} ikinci peronunda, {npc:deniz_arman|in} kardeşinin kazıdığı satırlar: \"Göğsünde işaret olanlar bizi topluyor; seçilmiş olduğumu söylüyorlar.\"", en: "Lines scratched into the tile on Platform Two at the {yer:kirik_istasyon} by {npc:deniz_arman|pos} sister: \"The people with the marks on their chests are gathering us up. They say I'm chosen.\"" }
+  kardes_notu_yalani:
+    tur: yalan
+    ad: { tr: "Kardeşinin izini {npc:deniz_arman|den} sakladın", en: "You hid the sister's trail from {npc:deniz_arman}" }
+    aciklama: { tr: "Duvardaki satırı ya da Sistem'in kaydını gördün ve {npc:deniz_arman|den} sakladın; onu korumak için olduğunu söylüyorsun.", en: "You saw the line on the wall, or the System's record, and kept it from {npc:deniz_arman}. You tell yourself it was to protect {zamir:deniz_arman|onu}." }
+  yukselenler_kardes:
+    tur: sir
+    ad: { tr: "Aday · 12 · Nakledildi", en: "Candidate · 12 · Transferred" }
+    aciklama: { tr: "Sistem kayıtlarında {npc:deniz_arman|in} kardeşi bir 'aday' olarak geçiyor; ön seçimi {fraksiyon:yukselenler} yapmış ve kız oraya nakledilmiş.", en: "In the System logs, {npc:deniz_arman|pos} sister is listed as a 'candidate.' She was pre-selected by {fraksiyon:yukselenler} and transferred to them." }
+  yukselenler_vaadi:
+    tur: soylenti
+    ad: { tr: "Peygamberin çadırının yanındaki çocuklar", en: "The kids by the Prophet's tent" }
+    aciklama: { tr: "Diz çöken vaizlere göre {fraksiyon:yukselenler} çocukları Peygamber'in çadırının yanındaki ayrı bir kampta tutuyor. Kimse onlara kötü davranmıyor; kimse gitmek de istemiyor.", en: "{fraksiyon:yukselenler} keep the kids in a separate camp beside the Prophet's tent, or so the kneeling preachers say. Nobody hurts them. Nobody wants to leave, either." }
+  duzeltme_sinyali:
+    tur: sir
+    ad: { tr: "Sahipsiz parça 0x00", en: "Orphaned fragment 0x00" }
+    aciklama: { tr: "Sistem kayıp bir parçayı arıyor: 0x00. Son bilinen taşıyıcısı sensin. Arama Kırık İstasyon'un hoparlörlerinden yayınlanıyordu.", en: "The System is searching for a missing piece: 0x00. Its last known host is you. The search was broadcasting through the speakers at the Broken Station." }
+  aras_gecmisi:
+    tur: soylenti
+    ad: { tr: "{npc:aras_kurt|in} gecesi", en: "{npc:aras_kurt|pos} night" }
+    aciklama: { tr: "{npc:aras_kurt}, aktarımdan önceki gece birini öldürmesi gerektiğini ve öldürmediğini söyledi. Sonra gökyüzü açılmış. Kimi, söylemiyor.", en: "{npc:aras_kurt} says that the night before the transfer, he was supposed to kill somebody, and didn't. Then the sky opened. He won't say who." }

@@ -4,6 +4,7 @@ sahneler:
     yer: "kiyikent_iskele"
     paragraflar:
       - { tr: "Akşam vapuru yine gecikmiş. {npc:deniz_arman} iskelenin korkuluğuna yaslanmış, simidinin son parçasını martılarla paylaşıyor.", en: "The evening ferry is running late again. {npc:deniz_arman} leans on the terminal railing, tossing the last of a soft pretzel to the gulls." }
+      - { tr: "\"Yarın da gecikirse yüzerek giderim,\" diyor. Gülüyorsun; on yıldır aynı şakayı yapıyor ve on yıldır komik.", en: "\"If it's late again tomorrow, I'm swimming,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}. You laugh. Same joke for ten years, and it's still funny." }
       - { tr: "Sonra martılar susuyor. Körfezin üstünde gökyüzü, biri camı tırnağıyla çizmiş gibi incecik bir çizgiyle yarılıyor.", en: "Then the gulls go quiet. Above the sound, the sky splits along a hairline crack, like someone dragged a fingernail across glass." }
       - { tr: "Çizgi açılıyor. İçinden mavi, kusursuz kenarlı bir pencere süzülüp tam gözünün önünde duruyor. İskeledeki herkesin önünde birer tane var.", en: "The crack opens. A blue window with perfectly clean edges drifts out and stops right in front of your eyes. Everyone on the pier has one." }
     bildirimler:
@@ -27,23 +28,88 @@ sahneler:
           - hafiza: { npc: "deniz_arman", id: "el_tutuldu", agirlik: 50 }
           - yoldas_katil: "deniz_arman"
           - ahlak: { merhamet: 3 }
-          - bayrak: "yanki_bagi"
-        sonraki: "ogretici_uyanis"
+        sonraki: "giris_yanki"
       - id: "kalabaliga_kos"
         etiket: { tr: "Kalabalığa koş, yaşlılara ve çocuklara yardım et", en: "Run into the crowd and help the elderly and the kids" }
         etkiler:
           - bayrak: "kalabaliga_yardim"
           - ahlak: { merhamet: 8, insanlik: 5 }
-          - bayrak: "yanki_bagi"
-        sonraki: "ogretici_uyanis"
+        sonraki: "giris_yanki"
       - id: "pencereyi_oku"
         etiket: { tr: "Kıpırdama. Pencerenin her satırını oku", en: "Don't move. Read every line of the window" }
         etkiler:
           - bayrak: "sistem_okundu"
           - egilim: { menzilli: 2 }
           - stat: { per: 1 }
-          - bayrak: "yanki_bagi"
           - ahlak: { insanlik: -3 }
+        sonraki: "giris_yanki"
+  - id: "giris_yanki"
+    paragraflar:
+      - { tr: "Işık seni yutuyor. Bedenin yok, ağırlığın yok; yalnızca milyonlarca insanın aynı anda çektiği bir nefesin sesi var.", en: "The light swallows you. No body, no weight. Just the sound of millions of people drawing the same breath at once." }
+      - { tr: "Sonra o ses kopuyor. Senin pencerenin kenarları titriyor, harfler birbirinin üstüne yığılıyor; bir şey çatlaktan içeri sızıyor.", en: "Then that sound cuts out. The edges of your window shudder, the letters pile up on top of each other, and something seeps in through the crack." }
+      - { tr: "Herkesin penceresi mavi. Seninki bir an için kırmızıya, sonra hiçbir rengin adı olmayan bir şeye dönüyor.", en: "Everybody else's window is blue. Yours flickers red for a second, then turns a color nothing has a name for." }
+    bildirimler:
+      - tur: "yanki"
+        baslik: { tr: "[H̷ATA] Paket 0x00 · sahipsiz parça", en: "[E̷RR] Packet 0x00 · orphaned fragment" }
+        satirlar:
+          - { tr: "Senin penceren bozuk. Ben de öyle. Birbirimize uyuyoruz.", en: "Your window's broken. So am I. We fit." }
+          - { tr: "Herkes Sistem'i alıyor. Sen beni alıyorsun.", en: "Everyone gets the System. You get me." }
+    sezgiler:
+      - kosul: { bayrak: "sistem_okundu" }
+        metin: { tr: "Okumayı bırakmadın; bu yüzden gördün: pencerenin en altında, herkesin satırında olmayan tek bir satır var. Bir imza gibi. Yarım kalmış.", en: "You never stopped reading, so you caught it: at the very bottom of the window, one line nobody else has. Like a signature. Unfinished." }
+      - kosul: { bayrak: "deniz_el_tutuldu" }
+        metin: { tr: "Elin hâlâ bir elin içinde. Ses bunu fark ediyor: \"Bırakmadın. İlginç.\"", en: "Your hand is still inside someone else's. The voice notices: \"You didn't let go. Interesting.\"" }
+      - kosul: { bayrak: "kalabaliga_yardim" }
+        metin: { tr: "Kalabalığın sesleri hâlâ kulağında. Ses onları da duyuyor: \"Başkalarını kurtarmaya koştun. Bunu hatırlayacağım.\"", en: "The crowd's voices are still ringing in your ears. The voice hears them too: \"You ran to save other people. I'll remember that.\"" }
+    secenekler:
+      - id: "kabul_et"
+        etiket: { tr: "\"Tamam. Kimsen, benimlesin.\"", en: "\"Fine. Whatever you are, you're with me.\"" }
+        etkiler:
+          - bayrak: "yanki_bagi"
+          - iliski: { yanki: { guven: 10, baglilik: 10 } }
+          - hafiza: { npc: "yanki", id: "kabul_edildi", agirlik: 45 }
+          - ahlak: { duzen: -2 }
+          - egilim: { karanlik: 1 }
+        sonraki: "giris_yanki_bag"
+      - id: "sor"
+        etiket: { tr: "\"Sen nesin?\"", en: "\"What are you?\"" }
+        etkiler:
+          - bayrak: "yanki_bagi"
+          - iliski: { yanki: { saygi: 10 } }
+          - hafiza: { npc: "yanki", id: "ne_oldugu_soruldu", agirlik: 25 }
+          - ahlak: { insanlik: 2 }
+          - egilim: { buyu: 1 }
+        sonraki: "giris_yanki_bag"
+      - id: "dir"
+        etiket: { tr: "Çatlağı kapatmaya çalış", en: "Try to seal the crack shut" }
+        gerekli: { stat: { wil: 6 } }
+        etkiler:
+          - bayrak: "yanki_bagi"
+          - iliski: { yanki: { saygi: 15, guven: -10 } }
+          - hafiza: { npc: "yanki", id: "direnildi", agirlik: -20 }
+          - stat: { wil: 1 }
+          - ahlak: { duzen: 3 }
+        sonraki: "giris_yanki_bag"
+  - id: "giris_yanki_bag"
+    paragraflar:
+      - metin: { tr: "\"Tamam,\" diyor ses; sanki gülümsüyormuş gibi. \"Bunu daha önce kimse söylemedi.\"", en: "\"Fine,\" the voice echoes back, like it's smiling. \"Nobody's ever said that before.\"" }
+        kosul: { hafiza: { yanki: "kabul_edildi" } }
+      - metin: { tr: "\"Bir hata,\" diyor ses. \"Bir yankı. Bir şeyin koparılmış ucu. Şimdilik bu kadar yeter; gerisi pahalı.\"", en: "\"A glitch,\" the voice says. \"An echo. The torn-off end of something. That's enough for now. The rest costs extra.\"" }
+        kosul: { hafiza: { yanki: "ne_oldugu_soruldu" } }
+      - metin: { tr: "Çatlağı iradenle bastırıyorsun ve bir an için gerçekten kapanıyor. Sonra ses, neredeyse saygıyla, aralıktan yeniden içeri süzülüyor: \"Güçlüsün. İyi. Güçlü olana ihtiyacım var.\"", en: "You lean on the crack with everything you've got, and for one second it actually closes. Then the voice slides back in through the gap, almost respectful: \"You're strong. Good. I need strong.\"" }
+        kosul: { hafiza: { yanki: "direnildi" } }
+      - { tr: "Pencerende yeni bir satır beliriyor; harfler hâlâ titriyor ama okunuyor. Kimsenin göremeyeceği bir satır.", en: "A new line appears in your window, letters still jittering but readable. A line nobody else will ever see." }
+      - { tr: "Işık seni bir yere fırlatıyor. Düşüş uzun sürüyor.", en: "The light flings you somewhere. The fall takes a long time." }
+    bildirimler:
+      - tur: "yanki"
+        nadirlik: "mitik"
+        baslik: { tr: "[BAĞ KURULDU · YANKI]", en: "[BOND ESTABLISHED · ECHO]" }
+        satirlar:
+          - { tr: "Gizli satırlar: açık. Günlük Görev: yalnızca sende. Gerçek veriler: senin gözünde.", en: "Hidden lines: unlocked. Daily Quest: yours alone. True data: for your eyes only." }
+          - { tr: "Başkalarına anlatma. Anlamazlar. Bazıları anlar; onlar daha kötü.", en: "Don't tell anyone. They won't understand. A few will, and they're worse." }
+    secenekler:
+      - id: "dus"
+        etiket: { tr: "Bırak, düşsün", en: "Let yourself fall" }
         sonraki: "ogretici_uyanis"
   - id: "ogretici_uyanis"
     yer: "ogretici_orman"
@@ -223,4 +289,6 @@ sahneler:
         etiket: { tr: "Güne başla", en: "Start the day" }
         etkiler:
           - gorev: { ogretici_cikis: "basla" }
+          # Perde 1 dünya durumu: Öğretici'den sağ çıkacakların oranı (docs/PERDE1.md).
+          - degisken: { hayatta_kalan: 50 }
         sonraki: "@akis"

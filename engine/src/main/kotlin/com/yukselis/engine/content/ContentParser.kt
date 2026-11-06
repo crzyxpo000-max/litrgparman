@@ -555,8 +555,9 @@ object ContentParser {
         val parts = o.flatMap { (key, value) ->
             when (key) {
                 "stat" -> value.jsonObject.map { (k, v) -> Condition.StatAtLeast(stat(k), v.int(k)) }
-                "bayrak" -> listOf(Condition.HasFlag(value.str(key)))
-                "bayrak_yok" -> listOf(Condition.LacksFlag(value.str(key)))
+                // Tek bayrak ya da liste (hepsi): `bayrak_yok: [a, b]`.
+                "bayrak" -> flagList(value, key).map { Condition.HasFlag(it) }
+                "bayrak_yok" -> flagList(value, key).map { Condition.LacksFlag(it) }
                 "degisken_min" -> value.jsonObject.map { (k, v) -> Condition.VarAtLeast(k, v.int(k)) }
                 "degisken_max" -> value.jsonObject.map { (k, v) -> Condition.VarAtMost(k, v.int(k)) }
                 "ahlak_min" -> value.jsonObject.map { (k, v) -> Condition.MoralityAtLeast(axis(k), v.int(k)) }
@@ -583,6 +584,7 @@ object ContentParser {
                 // ---- Aşama 5 ----
                 "npc_hayatta" -> listOf(Condition.NpcAlive(value.str(key)))
                 "npc_olu" -> listOf(Condition.NpcDead(value.str(key)))
+                "npc_gitti" -> listOf(Condition.NpcGoneCond(value.str(key)))
                 "yoldas" -> listOf(Condition.IsCompanion(value.str(key)))
                 "iliski_min" -> value.jsonObject.flatMap { (npc, v) -> relDeltas(v.jsonObject, "iliski_min.$npc").map { (a, n) -> Condition.RelationAtLeast(npc, a, n) } }
                 "iliski_max" -> value.jsonObject.flatMap { (npc, v) -> relDeltas(v.jsonObject, "iliski_max.$npc").map { (a, n) -> Condition.RelationAtMost(npc, a, n) } }
@@ -802,6 +804,9 @@ object ContentParser {
 
     private fun JsonElement.int(where: String): Int =
         jsonPrimitive.intOrNull ?: throw ContentFormatException("$where: tam sayı bekleniyordu")
+
+    private fun flagList(value: JsonElement, where: String): List<String> =
+        (value as? JsonArray)?.map { it.str(where) } ?: listOf(value.str(where))
 
     private fun JsonElement.str(where: String): String =
         jsonPrimitive.contentOrNull ?: throw ContentFormatException("$where: metin bekleniyordu")

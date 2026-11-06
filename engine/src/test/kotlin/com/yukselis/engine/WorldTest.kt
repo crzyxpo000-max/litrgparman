@@ -72,7 +72,8 @@ class WorldTest {
 
     @Test
     fun `ana yay dugumu zamani gelince zorlanir`() {
-        val s = atHub().copy(day = 28)
+        // Önceki ana yay düğümleri (Kırılma Gün 12, Yeni tavan Gün 24) görülmüş.
+        val s = atHub().let { it.copy(day = 28, dayState = it.dayState.copy(seen = it.dayState.seen + "kirilma" + "yeni_tavan")) }
         val f = director.forced(s)
         assertEquals("ogretici_bekci", f?.eventId)
         assertFalse(director.forced(s.copy(day = 10)) ?.eventId == "ogretici_bekci")

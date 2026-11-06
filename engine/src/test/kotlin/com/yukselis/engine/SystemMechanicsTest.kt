@@ -397,7 +397,11 @@ class SystemMechanicsTest {
     fun `prologda yanki bagi kurulur`() {
         val s = fresh()
         val choice = engine.view(s, lang).choices.first().id
-        val next = engine.choose(s, choice, lang).state
+        // İskeleden sonra aktarım sırasında Yankı'yla bağ sahnesi gelir; bağ orada kurulur.
+        val transfer = engine.choose(s, choice, lang).state
+        assertEquals("giris_yanki", transfer.sceneId)
+        assertTrue(engine.view(transfer, lang).current.notices.any { it.kind == com.yukselis.engine.story.NoticeKind.ECHO })
+        val next = engine.choose(transfer, "sor", lang).state
         assertTrue(next.hasFlag("yanki_bagi"))
         assertTrue(engine.view(s, lang).current.notices.any { it.kind == com.yukselis.engine.story.NoticeKind.ECHO })
     }

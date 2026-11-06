@@ -60,8 +60,8 @@ class StoryEngineTest {
     @Test
     fun algiKosuluSeciminSonucunaBaglidir() {
         // "Pencereyi oku" Algı +1 verir; ikinci sahnedeki [ALG 6] seçeneği açılır.
-        val reader = engine.choose(engine.newGame("A", GameMode.NORMAL, 1), "pencereyi_oku", Lang.TR).state
-        val holder = engine.choose(engine.newGame("A", GameMode.NORMAL, 1), "el_tut", Lang.TR).state
+        val reader = transfer(engine, engine.newGame("A", GameMode.NORMAL, 1), "pencereyi_oku")
+        val holder = transfer(engine, engine.newGame("A", GameMode.NORMAL, 1), "el_tut")
         val listenForReader = engine.view(reader, Lang.TR).choices.first { it.id == "dinle" }
         val listenForHolder = engine.view(holder, Lang.TR).choices.first { it.id == "dinle" }
         assertTrue(listenForReader.enabled)
@@ -77,8 +77,8 @@ class StoryEngineTest {
 
     @Test
     fun kosulluParagraflarSecimleriYansitir() {
-        val withDeniz = engine.choose(engine.newGame("A", GameMode.NORMAL, 1), "el_tut", Lang.TR).state
-        val alone = engine.choose(engine.newGame("A", GameMode.NORMAL, 1), "kalabaliga_kos", Lang.TR).state
+        val withDeniz = transfer(engine, engine.newGame("A", GameMode.NORMAL, 1), "el_tut")
+        val alone = transfer(engine, engine.newGame("A", GameMode.NORMAL, 1), "kalabaliga_kos")
         val a = engine.view(withDeniz, Lang.TR).current.paragraphs.joinToString(" ")
         val b = engine.view(alone, Lang.TR).current.paragraphs.joinToString(" ")
         assertTrue(a.contains("parmakların hâlâ"))
@@ -89,7 +89,7 @@ class StoryEngineTest {
     @Test
     fun tamOyunAkisiSeviyeUnvanVeSon() {
         var s = engine.newGame("Arda", GameMode.NORMAL, seed = 5)
-        s = engine.choose(s, "el_tut", Lang.TR).state
+        s = transfer(engine, s, "el_tut")
         s = engine.choose(s, "ciglige_kos", Lang.TR).state
         s = engine.choose(s, "dovus", Lang.TR).state
         assertNotNull(s.combat)
@@ -111,7 +111,7 @@ class StoryEngineTest {
         assertEquals(1, s.day)
         assertEquals("ilk_sabah", s.sceneId)
         val morning = engine.view(s, Lang.EN)
-        assertEquals(5, morning.history.size)
+        assertEquals(7, morning.history.size)
         assertEquals("Grab Devon's hand and hold on", morning.history.first().chosenLabel)
         // Yazılmış giriş dizisi biter, gün akışı (olay havuzu) başlar.
         s = engine.choose(s, "gune_basla", Lang.TR).state
@@ -123,7 +123,7 @@ class StoryEngineTest {
     @Test
     fun kacmakTohumBildirimiBirakir() {
         var s = engine.newGame("A", GameMode.NORMAL, 1)
-        s = engine.choose(s, "pencereyi_oku", Lang.TR).state
+        s = transfer(engine, s, "pencereyi_oku")
         s = engine.choose(s, "saklan", Lang.TR).state
         s = engine.choose(s, "kac", Lang.TR).state
         assertEquals(-14, s.morality.mercy) // saklan −4 + kac −10
@@ -149,7 +149,7 @@ class SaveTest {
 
     private fun midGame(): WorldState {
         var s = engine.newGame("Arda", GameMode.NORMAL, seed = 77)
-        s = engine.choose(s, "el_tut", Lang.TR).state
+        s = transfer(engine, s, "el_tut")
         s = engine.choose(s, "ciglige_kos", Lang.TR).state
         s = fightOut(engine, engine.choose(s, "dovus", Lang.TR).state).first
         return engine.choose(s, "pencereyi_kapat", Lang.TR).state
@@ -211,6 +211,10 @@ class SaveTest {
 }
 
 /** Savaşı otomatik turla bitirir; durum ve tüm bildirimler. */
+/** Açılış: iskele seçimi, ardından Yankı bağı sahneleri ("sor", "dus"). */
+internal fun transfer(engine: StoryEngine, start: WorldState, choice: String): WorldState =
+    listOf(choice, "sor", "dus").fold(start) { s, c -> engine.choose(s, c, Lang.TR).state }
+
 internal fun fightOut(engine: StoryEngine, start: WorldState): Pair<WorldState, List<com.yukselis.engine.story.NoticeView>> {
     var s = start
     val notices = mutableListOf<com.yukselis.engine.story.NoticeView>()

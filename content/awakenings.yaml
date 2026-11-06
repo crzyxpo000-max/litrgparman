@@ -28,3 +28,31 @@ uyanislar:
     etkiler:
       - unvan: "ilk_bekci_deviren"
       - oz: { koruma: 40 }
+  # ---- Kırılma (Parti D, events/40_ana_yay.yaml): Kırılma'dan sonraki ilk zaferde Sistem gecikmeli kaydeder.
+  kirilma_kemik_kabuk:
+    baslik: { tr: "[UYANIŞ] Kırılma · Kemik Kabuk", en: "[AWAKENING] The Break · Bone Plating" }
+    satirlar:
+      - { tr: "Sistem kaydı gecikmeli düşüyor: 'Kademe sınırı ihlali · kaynak bulunamadı.' Kaynak sensin.", en: "The System logs it late: 'Grade limit breach · source not found.' The source is you." }
+      - { tr: "Yankı: sen dayandın. ben yalnızca kapıyı tuttum.", en: "Echo: you held. i just held the door." }
+    kosul: { iz: "kemik_kabuk", bayrak: "kirilma_yasandi", degisken_min: { _savas_kazanildi: 1 } }
+    etkiler:
+      - yetenek: "kale_durusu"
+      - stat: { end: 1, wil: 1 }
+  kirilma_yanki_damari:
+    baslik: { tr: "[UYANIŞ] Kırılma · Yankı Damarı", en: "[AWAKENING] The Break · Echo Vein" }
+    satirlar:
+      - { tr: "Sistem kaydı gecikmeli düşüyor: 'Kademe sınırı ihlali · kaynak bulunamadı.' Kaynak ikiniz.", en: "The System logs it late: 'Grade limit breach · source not found.' The source is both of you." }
+      - { tr: "Yankı: artık birlikte görüyoruz. güzel, değil mi?", en: "Echo: we see together now. isn't that nice?" }
+    kosul: { iz: "yanki_damari", bayrak: "kirilma_yasandi", degisken_min: { _savas_kazanildi: 1 } }
+    etkiler:
+      - yetenek: "tehlike_sezgisi"
+      - stat: { per: 1, int: 1 }
+  kirilma_kara_kan:
+    baslik: { tr: "[UYANIŞ] Kırılma · Kara Kan", en: "[AWAKENING] The Break · Black Blood" }
+    satirlar:
+      - { tr: "Sistem kaydı gecikmeli düşüyor: 'Kademe sınırı ihlali · kaynak bulunamadı.' Kaynak sensin ve hâlâ kanıyorsun.", en: "The System logs it late: 'Grade limit breach · source not found.' The source is you, and you're still bleeding." }
+      - { tr: "Yankı: bunu ben yapmadım. sen yaptın. ve hoşuna gitti.", en: "Echo: i didn't do that. you did. and you liked it." }
+    kosul: { iz: "kara_kan", bayrak: "kirilma_yasandi", degisken_min: { _savas_kazanildi: 1 } }
+    etkiler:
+      - yetenek: "kan_bedeli"
+      - stat: { str: 1, wil: 1 }

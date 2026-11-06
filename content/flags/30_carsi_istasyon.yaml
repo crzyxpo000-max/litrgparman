@@ -1,0 +1,77 @@
+# Parti C — Harabe Çarşı, Kırık İstasyon ve ilk kamplar (events/30_carsi_istasyon.yaml).
+# "Tanışıldı" bayrakları ayrıca değişkenle de tutulur (kaya_tanidik, elif_tanidik) ki iki bayrağı birlikte isteyen koşullar yazılabilsin.
+bayraklar:
+  # ---- çarşıdaki mahsurlar
+  mahsurlar_kurtarildi: "Ayakkabı mağazasındaki yedi kişi kepengin ardından çıkarıldı."
+  mahsurlar_birakildi: "Ayakkabı mağazasındaki mahsurlar manken çemberinde bırakıldı."
+  mahsurlar_siginakta: "Kurtarılan mahsurlar Elif'in yemek katındaki hastanesine götürüldü."
+  mahsurlar_loncada: "Kurtarılan mahsurlar Kaya'nın yükleme rampasındaki kampına götürüldü (iş verildi)."
+  mahsurlar_yukselenlerde: "Kurtarılan mahsurlar Vahit'in vaaz halkasına götürüldü (anne 'yakıt' sayıldı)."
+  mahsurlar_kampta: "Kurtarılan mahsurlar oyuncunun kendi kampına alındı."
+  mahsur_kaptan_kaldi: "Mahsurlar kurtarılırken yaşlı vapur kaptanı mağazada geride kaldı."
+  mahsur_anne_toparlandi: "Mahsurlardan ateşli anneye hemen bakıldı."
+  # ---- çete
+  cete_gisede: "Cam köprüdeki 'geçiş ücreti' gişesi hâlâ açık (ödendi, izlendi ya da yenildi)."
+  cete_dagitildi: "Gişe bariyeri gösterişle bükülüp çete dağıtıldı."
+  cete_lideri_olduruldu: "Gişeci herkesin önünde öldürüldü (küçük kardeşin intikam tohumu)."
+  cete_lideri_bagislandi: "Gişeci bağışlandı, sürüldü ya da aldıklarını geri verdi."
+  cete_loncaya_teslim: "Gişeci Kaya'nın kampına teslim edildi (orada 'katkı' toplayan bir avcıya dönüştü)."
+  cete_muhafiz: "Çete ikna edilip muhafızlığa (köprüden geçirme) yönlendirildi."
+  cete_sana_bagli: "Muhafızlığa dönen çete doğrudan oyuncuya bağlandı."
+  cete_oglan_kurtuldu: "Gişecinin on beş yaşındaki kardeşi çeteden koparıldı."
+  # ---- eczane
+  eczane_hastaneye: "Eczanedeki son ilaçlar Elif'in koğuşuna gitti."
+  eczane_kiza: "İnsülin kalemlerinden ikisi diyabetli annesi için gelen kıza verildi."
+  eczane_saklandi: "Eczane ilaçlarından pay alınıp saklandı (Elif fark etti)."
+  eczane_satildi: "Eczane ilaçları pazarcı kadına satıldı."
+  eczane_yukselenlere: "Eczane ilaçları Vahit'in 'seçilmişlerine' verildi."
+  eczane_kaybedildi: "Eczane ilaçları kaybedildi ya da bırakıldı; çete el koydu."
+  # ---- kayıp eşya
+  kayip_esya_yagmalandi: "Kayıp Eşya ofisindeki ölülerin eşyaları yağmalandı."
+  kayip_etiket_yakildi: "Hasat defterindeki oyuncuya 'ayrılmış' sayfa yırtılıp yakıldı."
+  kayip_umut_yalani: "Kayıp çocuğun annesine, etiketi koparılarak umut veren bir yalan söylendi."
+  # ---- son tren
+  tren_bosaltildi: "Döngüdeki vagonun yolcuları perona indirildi."
+  # ---- su baskını
+  su_once_avci: "Su baskınında emre uyulup önce Kaya'nın kırık bacaklı avcısı çıkarıldı."
+  su_once_siviller: "Su baskınında emir çiğnenip önce çocuklar çıkarıldı."
+  su_herkes_kurtuldu: "Su baskınındaki altı kişinin hepsi kurtarıldı."
+  su_genc_kayboldu: "Su baskınında gençlerden biri boğuldu."
+  su_avci_boguldu: "Su baskınında Kaya'nın kırık bacaklı avcısı boğuldu."
+  su_duvar_yikildi: "Su çekilirken tünelin dibinde mavi ışık sızan bir yarık açığa çıktı (metro zindanı)."
+  # ---- ölü avcı
+  olu_avci_kunyesi: "Sistem'in 'düzelttiği' ölü avcının künyesi alındı (kızına götürülecek)."
+  olu_avci_yagmalandi: "Ölü avcının çantası yağmalandı."
+  olu_avci_katil_bagislandi: "Sistem göreviyle avcıyı öldüren adam bağışlandı."
+  olu_avci_katil_olduruldu: "Sistem göreviyle avcıyı öldüren adam öldürüldü."
+  olu_avci_katil_teslim: "Sistem göreviyle avcıyı öldüren adam Kaya'nın kampına teslim edildi."
+  avci_kizi_teselli: "Ölü avcının kızına babasının onu sevdiği söylendi (yarım cümle tamamlandı)."
+  # ---- Kaya / Lonca çekirdeği
+  kaya_kampi_bilinir: "Kaya ile tanışıldı; yükleme rampasındaki silahlı avcı kampı biliniyor."
+  kaya_sinavi_komuta: "Kaya'nın sınavında iki avcıya komuta edildi."
+  kaya_sinavi_yalniz: "Kaya'nın sınavında çatı tek başına (gösterişle) temizlendi."
+  lonca_saflarinda: "Oyuncu turuncu bandı taktı; Lonca çekirdeğinin saflarında."
+  lonca_ikinci_adam: "Oyuncu Kaya'nın ikinci adamı oldu."
+  lonca_komutasi_alindi: "Oyuncu Kaya'nın kampında komutayı fiilen ele geçirdi."
+  lonca_muafiyet: "Kaya'nın 'bedava ağız yok' kuralına çocuk ve yaşlı muafiyeti eklendi."
+  kaya_elif_koprusu: "Kaya'ya Elif'in hastanesiyle birlikte çalışması önerildi (Lonca–Sığınak köprüsü)."
+  # ---- Elif / Sığınak çekirdeği
+  elif_hastanesi_bilinir: "Elif ile tanışıldı; yemek katındaki sahra hastanesi biliniyor."
+  elif_anomaliyi_biliyor: "Elif, oyuncunun nabzından ve itirafından anomaliyi öğrendi."
+  elif_yoldas: "Elif sahra hastanesinden ayrılıp ilaç seferleri için yoldaş oldu."
+  karantina_oylandi: "Hastanede ısırıklı adam için ilk konsey oylaması yapıldı."
+  karantina_nobeti: "Isırıklı adam içeride kaldı; oyuncu kapısında nöbet tuttu."
+  karantina_iceride: "Isırıklı adam içeride kalsın diye oy verildi (nöbetçisiz)."
+  karantina_disarida: "Isırıklı adam dışarı çıkarılsın diye oy verildi."
+  karantina_cozuldu: "Isırığın altındaki sülük yumurtaları oyuncu tarafından temizlendi."
+  # ---- Vahit / Yükselenler çekirdeği
+  vahit_vaazi_dinlendi: "Vahit ile tanışıldı; vaaz halkası biliniyor."
+  yakit_kadin_kurtarildi: "Vahit'in sunusunda son ekmeğini bırakamayan kadın korundu."
+  secilmislere_katildi: "Oyuncu Vahit'in 'seçilmişleri' arasına geçti ya da iç halkaya katıldı."
+  yakit_listesi_yakildi: "Vahit'in 'yakıt — ilk sunu' listesi bozuldu (yakıldı ya da yırttırıldı)."
+  vahit_ifsa_edildi: "Vahit müritlerinin önünde ifşa edildi."
+  # ---- Mert / Sessiz Ağ çekirdeği
+  mert_istasyonu_bilinir: "Mert ile tanışıldı; istasyon kontrol odasındaki radyocular biliniyor."
+  mert_yoldas: "Mert sahada veri toplamak için yoldaş oldu."
+  telsizler_satildi: "Radyocuların telsizleri Kaya'nın avcılarına ihbar edildi."
+  sessiz_ag_sirri: "Mert'in çözdüğü satırlar ikisinin arasında sır olarak kaldı."
