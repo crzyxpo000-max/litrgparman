@@ -10,7 +10,7 @@ EN/TR uzunluk oranı dağılımı (TR ≥40 karakter): p1 0.79 · p50 1.10 · p9
 | Düz yazılmış NPC adı | 35 |
 | İngilizcede metrik birim | 0 |
 | 3 cümleyi aşan paragraf | 1777 |
-| 60 karakteri aşan seçenek | 31 |
+| 60 karakteri aşan seçenek | 5 |
 | Birebir aynı metin (TR) | 28 |
 | Neredeyse aynı metin (TR, Jaccard ≥0.6) | 18 |
 | Sonucu olmayan seçim (tüm seçenekler aynı yere, hiçbirinin etkisi yok) | 0 |
@@ -1838,39 +1838,13 @@ EN/TR uzunluk oranı dağılımı (TR ≥40 karakter): p1 0.79 · p50 1.10 · p9
 - `content/story/90_sistem.yaml sahneler[son_hasat].paragraflar[5].metin` — tr 3 · en 5 cümle · Hasat'a yalnızca birkaç sabah kala düşüyorsun. Yendiğin filonun enkazı körfezin…
 - `content/story/90_sistem.yaml sahneler[son_hasat].paragraflar[7].metin` — tr 4 · en 4 cümle · {npc:yanki} karanlığın içinde son satırını yazıyor: haddini aştın. biliyordum. …
 
-## 60 karakteri aşan seçenek (31)
+## 60 karakteri aşan seçenek (5)
 
-- `content/events/10_yoldaslar.yaml olaylar[kamp_ates_basi].sahneler[kamp_ates_basi_1].secenekler[kardes].etiket` — tr 37 · en 66 · {npc:deniz_arman\|e} kız kardeşini sor
-- `content/events/10_yoldaslar.yaml olaylar[deniz_kardes_ipucu].sahneler[deniz_kardes_ipucu_1].secenekler[goster_ona].etiket` — tr 40 · en 69 · {npc:deniz_arman\|i} çağır, duvarı göster
-- `content/events/10_yoldaslar.yaml olaylar[deniz_kardes_ipucu].sahneler[deniz_kardes_ipucu_1].secenekler[iz_sur].etiket` — tr 39 · en 61 · Duvarı göster, hemen izlerin peşine düş
-- `content/events/10_yoldaslar.yaml olaylar[deniz_kardes_ipucu].sahneler[deniz_kardes_ipucu_sildi].secenekler[dogru].etiket` — tr 38 · en 71 · Doğruyu söyle: onu korumak için sildin
-- `content/events/10_yoldaslar.yaml olaylar[deniz_kardes_ipucu].sahneler[deniz_kardes_ipucu_tunel].secenekler[geri_cek].etiket` — tr 41 · en 65 · Onu geri çek; bu tünel ikinizi de öldürür
-- `content/events/10_yoldaslar.yaml olaylar[deniz_son_secim].sahneler[deniz_son_secim_1].secenekler[kal_iste].etiket` — tr 45 · en 69 · Kalmasını iste; birlikte bulacağınıza söz ver
-- `content/events/10_yoldaslar.yaml olaylar[deniz_son_secim].sahneler[deniz_son_secim_1].secenekler[vapur].etiket` — tr 43 · en 66 · Vapuru hatırlat: on yıl, martılar, simitler
-- `content/events/10_yoldaslar.yaml olaylar[deniz_son_secim].sahneler[deniz_son_secim_gidis].secenekler[sarilip_birak].etiket` — tr 35 · en 64 · Ona sarıl, sonra gitmesine izin ver
-- `content/events/20_orman.yaml olaylar[siralama_gunu].sahneler[siralama_gunu_1].secenekler[deniz].etiket` — tr 41 · en 61 · {npc:deniz_arman\|e} sırasını kendin söyle
-- `content/events/50_perde2_ana.yaml olaylar[perde2_donus].sahneler[donus_duvar].secenekler[deniz_not].etiket` — tr 54 · en 71 · {npc:deniz_arman\|in} kardeşine not yazmasına yardım et
-- `content/events/50_perde2_ana.yaml olaylar[perde2_donus].sahneler[donus_anma].secenekler[kalkan].etiket` — tr 47 · en 65 · Bir kâğıda adını yaz, vapurun gövdesine iliştir
 - `content/events/51_siginak_elif.yaml olaylar[elif_konsey_oylamasi].sahneler[elif_konsey_oylamasi_karne].secenekler[cizelge].etiket` — tr 55 · en 64 · "Karne değil, çizelge: herkes nöbet tutar, herkes yer."
 - `content/events/51_siginak_elif.yaml olaylar[elif_gece_nobeti].sahneler[elif_gece_nobeti_kaynak].secenekler[fis].etiket` — tr 46 · en 64 · Teslimat fişini sök; Lonca'ya hesap soracaksın
 - `content/events/51_siginak_elif.yaml olaylar[elif_gece_nobeti].sahneler[elif_gece_nobeti_cati].secenekler[kahve].etiket` — tr 53 · en 62 · "Kahve getireyim. Gümrük'ün makinesi hâlâ çalışıyor."
-- `content/events/56_deniz_yanki_aras.yaml olaylar[deniz_kardes_bulundu].sahneler[dkb_tepe_deniz].secenekler[destek].etiket` — tr 67 · en 69 · {npc:deniz_arman\|in} omzuna elini koy; sesini ilahinin üstüne çıkar
-- `content/events/56_deniz_yanki_aras.yaml olaylar[deniz_kardes_bulundu].sahneler[dkb_tepe_anma].secenekler[birak].etiket` — tr 51 · en 63 · Onu {fraksiyon:siginak\|e} emanet et; arada bir uğra
-- `content/events/56_deniz_yanki_aras.yaml olaylar[deniz_son_fedakarlik].sahneler[dsf_1].secenekler[arkama].etiket` — tr 37 · en 71 · Onu arkana çek: "Bu sefer hat bende."
-- `content/events/56_deniz_yanki_aras.yaml olaylar[deniz_son_fedakarlik].sahneler[dsf_hat_zafer].secenekler[tut].etiket` — tr 37 · en 61 · Elini tut ve son nefese kadar bırakma
-- `content/events/56_deniz_yanki_aras.yaml olaylar[deniz_son_fedakarlik].sahneler[dsf_birlikte].secenekler[carklar].etiket` — tr 28 · en 62 · Bir çark al; ona ver. Hatıra
-- `content/events/56_deniz_yanki_aras.yaml olaylar[deniz_son_fedakarlik].sahneler[dsf_deniz_olur].secenekler[tut].etiket` — tr 38 · en 72 · Ona sarıl; yalnız gitmesine izin verme
-- `content/events/56_deniz_yanki_aras.yaml olaylar[yanki_kaynak_izi].sahneler[yki_kaynak].secenekler[sakla].etiket` — tr 62 · en 60 · {npc:yanki\|i} pencerenin en dibine sakla; standart taşıyıcı ol
-- `content/events/70_cok_evren.yaml olaylar[batik_kesh_yemini].sahneler[kesh_yemin].secenekler[kordon].etiket` — tr 61 · en 50 · Onları {yer:kordon\|in} sahil hattına yerleştir; deniz onların
-- `content/events/71_perde3.yaml olaylar[buyuk_ihanet].sahneler[ihanet_deniz_2].secenekler[birak].etiket` — tr 38 · en 69 · Bırak, kendi yangınını kendi söndürsün
-- `content/events/71_perde3.yaml olaylar[p3_bayrak_altinda].sahneler[p3_bayrak_1].secenekler[kaya_konus].etiket` — tr 56 · en 62 · Önce {npc:kaya_demir\|in} adamlarını komutanlarına gönder
 - `content/events/72_kule.yaml olaylar[kule_kat_10].sahneler[k10_giris].secenekler[gizlen].etiket` — tr 45 · en 61 · Yolcuların arasına karış; kayıt seni görmesin
-- `content/events/72_kule.yaml olaylar[kule_kat_70].sahneler[k70_zafer].secenekler[isaretle].etiket` — tr 56 · en 64 · {yer:kiyikent} kozalarına ad yaz; birileri onları bilsin
-- `content/events/72_kule.yaml olaylar[kule_kat_70].sahneler[k70_son].secenekler[deniz].etiket` — tr 61 · en 65 · {npc:deniz_arman\|e} söz ver: kardeşini burada aramayacaksınız
-- `content/events/72_kule.yaml olaylar[kule_kat_80].sahneler[k80_son].secenekler[yanki].etiket` — tr 63 · en 54 · {npc:yanki\|e} söyle: "Sen sınavı geçmeyeceksin. Biz geçeceğiz."
-- `content/events/72_kule.yaml olaylar[kule_kat_90].sahneler[k90_savas_once].secenekler[birlikte].etiket` — tr 64 · en 60 · {npc:yanki} ile birlikte dövüş; ikiniz, onun yalnız olduğu yerde
 - `content/events/72_kule.yaml olaylar[kule_kat_100].sahneler[k100_zafer].secenekler[al].etiket` — tr 51 · en 64 · Pencerenin bir kırığını al; başlangıç seninle insin
-- `content/events/72_kule.yaml olaylar[kule_gokten_inen].sahneler[kgok_son].secenekler[aras].etiket` — tr 61 · en 59 · {npc:aras_kurt\|e} sor: "Kapının öbür tarafına geliyor musun?"
 
 ## Birebir aynı metin (TR) (28)
 

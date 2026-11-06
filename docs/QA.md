@@ -3,7 +3,8 @@
 Bu dosya QA görevinin hafızasıdır: oturum kapanırsa buradan devam edilir. Adımlar ve kurallar kullanıcının görev
 tanımındadır (2026-11-07); özet:
 
-- **Kaynak kuralları:** paralel alt ajan yok (en fazla bir tane, yalnız Adım 3 hikaye örneklemesi için); content/
+- **Kaynak kuralları (2026-11-07 güncellendi: kullanıcı "kaynak kullanımını artırabiliriz, çok yavaşız" dedi —
+  bağımsız işler paralel alt ajanlara bölünebilir):** content/
   baştan sona okunmaz, tarama programları yazılır; büyük kaynaklar önce aranır, sonra ilgili bölüm okunur.
 - **Adımlar:** 1 otomatik ölçüm → 2 hedefli kod/motor/arayüz incelemesi → 3 hikaye/oynanış örneklemesi (tek alt ajan) →
   4 P0/P1/P2 raporu ve **dur, kullanıcıya sor** → 5 onaydan sonra 5–10 maddelik düzeltme partileri.

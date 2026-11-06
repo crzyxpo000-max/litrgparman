@@ -116,6 +116,9 @@ object Report {
             "en az bir ölüm ${pct(normal.count { it.deaths > 0 }.toDouble() / normal.size.coerceAtLeast(1))}; p90 ${percentile(normal.map { it.deaths }, 0.9)}.")
         sb.appendLine("- Demir Mod: ${iron.size} oynanış; ölümle Hasat ${pct(iron.count { it.ironDeath }.toDouble() / iron.size.coerceAtLeast(1))}. " +
             "(Simülatörde haddini aşan, bilerek her şeyi açığa vuran bir tarz yok: Demir Mod ölümleri hikaye savaşı ve bosslardan gelir.)")
+        val tot = results.sumOf { it.fightsTotal }.coerceAtLeast(1)
+        sb.appendLine("- Savaş: oynanış başına ortalama ${num(results.map { it.fightsTotal.toDouble() }.average())}; yere düşülen (yazılmış yenilgi ya da bayılma) " +
+            "${pct(results.sumOf { it.fightsDown }.toDouble() / tot)}; İkinci Şans kullanan oynanış ${pct(results.count { it.secondChances > 0 }.toDouble() / results.size)}.")
         sb.appendLine("- Bitmeyen oynanış: ${results.count { !it.finished }}." + results.filter { !it.finished }.take(5).joinToString("") { " [${it.seed} ${it.profile}: ${it.stuck}]" })
         val causes = results.flatMap { it.deathCauses }
         if (causes.isNotEmpty()) {

@@ -1,6 +1,6 @@
 # Denge raporu (simülatör)
 
-`./gradlew :tools:simulator:run --args="1000"` ile üretildi; 1000 oynanış, 17 sn. Nüfus: %30 rastgele oyuncu, %70 sekiz hedefli
+`./gradlew :tools:simulator:run --args="1000"` ile üretildi; 1000 oynanış, 18 sn. Nüfus: %30 rastgele oyuncu, %70 sekiz hedefli
 oyun tarzı (%25 rastgele seçim gürültüsüyle); her 10 oynanıştan biri Demir Mod. Ayrıntı: `tools/simulator`.
 
 ## Son dağılımı
@@ -86,6 +86,7 @@ Hedef: her son %1–%40 (gizli Döngü hariç).
 
 - Normal mod: oynanış başına ortalama 0.00 ölüm (kayıt noktasına dönüş); en az bir ölüm 0.0%; p90 0.
 - Demir Mod: 100 oynanış; ölümle Hasat 0.0%. (Simülatörde haddini aşan, bilerek her şeyi açığa vuran bir tarz yok: Demir Mod ölümleri hikaye savaşı ve bosslardan gelir.)
+- Savaş: oynanış başına ortalama 519; yere düşülen (yazılmış yenilgi ya da bayılma) 6.4%; İkinci Şans kullanan oynanış 0.0%.
 - Bitmeyen oynanış: 0.
 
 ## Kapsam

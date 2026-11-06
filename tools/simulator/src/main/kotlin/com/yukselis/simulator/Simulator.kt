@@ -93,6 +93,10 @@ data class RunResult(
     val crushShare: Double,
     val towerFloor: Int,
     val events: Int,
+    /** Savaş sayısı ve oyuncunun yere düştüğü (yazılmış yenilgi ya da bayılma, 1 cana inen) savaşlar. */
+    val fightsTotal: Int = 0,
+    val fightsDown: Int = 0,
+    val secondChances: Int = 0,
     /** Görülen olay kimlikleri (kapsam raporu). */
     val seenIds: Set<String> = emptySet(),
     /** Ölüm nedenleri: "kaynak:düşman" (kaynak: kesif/kapi/kule/hikaye). */
@@ -182,6 +186,8 @@ class Simulator(private val content: Content) {
         var lastDay = -1
         var fights = 0
         var crushes = 0
+        var combats = 0
+        var downs = 0
         while (!s.ended && steps++ < STEP_LIMIT) {
             if (s.day != lastDay) {
                 lastDay = s.day
@@ -240,6 +246,10 @@ class Simulator(private val content: Content) {
                     else -> "kesif"
                 }
             }
+            if (before.combat != null && s.combat == null && !s.dead) {
+                combats++
+                if (s.player.hp <= 1 && s.variable("_savas_kazanildi") == 0) downs++
+            }
             // Kazanılan her savaş öldürme sayacını artırır; o savaşın Ezme olup olmadığı bağlam değişkeninde.
             if (s.variable("oldurme_sayisi") > before.variable("oldurme_sayisi") && s.combat == null) {
                 fights++
@@ -257,6 +267,7 @@ class Simulator(private val content: Content) {
             dominance = if (daysCounted == 0) 0.0 else daysAhead.toDouble() / daysCounted,
             crushShare = if (fights == 0) 0.0 else crushes.toDouble() / fights,
             towerFloor = s.variable("kule_kat"), events = s.dayState.seen.size, seenIds = s.dayState.seen,
+            fightsTotal = combats, fightsDown = downs, secondChances = s.secondChances.size,
             deathCauses = causes, deathGaps = gaps,
             ironDeath = s.ended && s.sceneId == com.yukselis.engine.story.Content.HARVEST_SCENE,
             stuck = if (s.ended) null else "sahne ${s.sceneId}, olay ${s.dayState.currentEvent}, gün ${s.day}, adım $steps, ölüm $deaths, savaş ${s.combat?.enemies?.map { it.id }}",

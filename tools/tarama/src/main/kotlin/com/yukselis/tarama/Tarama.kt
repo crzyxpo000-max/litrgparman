@@ -138,7 +138,9 @@ fun main(args: Array<String>) {
         if (st > 3 || se > 3) add("3 cümleyi aşan paragraf", "${t.file} ${t.path}", "tr $st · en $se cümle · ${short(t.tr, 80)}")
     }
     for (t in texts.filter { it.isLabel }) {
-        val lt = t.tr?.length ?: 0; val le = t.en?.length ?: 0
+        // Belirteç ekranda bir ada dönüşür (~6 karakter); ham uzunluk yanıltır.
+        fun shown(x: String?) = x?.let { TOKEN.replace(it, "Xxxxxx").length } ?: 0
+        val lt = shown(t.tr); val le = shown(t.en)
         if (lt > 60 || le > 60) add("60 karakteri aşan seçenek", "${t.file} ${t.path}", "tr $lt · en $le · ${short(t.tr, 90)}")
     }
 
