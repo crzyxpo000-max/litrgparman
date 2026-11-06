@@ -165,6 +165,7 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Kaydırmayı azaltan düzen (DECISIONS #124–127): Hikaye yalnızca güncel sahne + alttaki sabit `ActionDock`; önceki sahneler alt
   sayfada. Daha fazla = karo ızgarası + alt sayfalar; Durum = 3 sekme. Semboller `components/Glossary.kt` (her ekranda (i)
   `HelpButton`, Daha fazla → Yardım); bir kerelik ipuçları `TipCard` (`Settings.seenTips`). Yazı boyutu `Settings.textSize`.
+- **Türkçe üslup:** hikaye metni yazarken/düzeltirken `docs/USLUP.md` (kılavuz + parti planı ve ilerleme durumu).
 - **Diyalog/alt sayfa:** `AlertDialog` değil `AppAlertDialog` kullan; `ModalBottomSheet` içeriğini `Localized {}` ile sar
   (yoksa pencere cihaz dilinde ve ölçeksiz yazıyla açılır).
 - Savaş varken Hikaye sekmesi `CombatScreen` gösterir; savaş başında Normal modda `checkpoint` kaydı yazılır.

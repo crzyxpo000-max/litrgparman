@@ -249,7 +249,8 @@ private fun Header(scene: SceneView, status: StatusView) {
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    text = listOfNotNull(stringResource(R.string.day_short, scene.day), scene.placeName).joinToString(" · "),
+                    // Telefonda "Bölge · Alan" sığmıyor: başlık yalnızca en özel yeri gösterir (tam ad Harita karosunda).
+                    text = listOfNotNull(stringResource(R.string.day_short, scene.day), scene.placeName?.substringAfterLast(" · ")).joinToString(" · "),
                     style = GameType.systemTitle,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
