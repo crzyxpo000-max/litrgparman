@@ -146,7 +146,7 @@ fun TitleScreen(
         ThemePicker(theme, onTheme)
         Spacer(Modifier.height(16.dp))
         Text(
-            text = "v0.7",
+            text = "v1.0",
             style = GameType.system,
             color = MaterialTheme.colorScheme.outline,
             textAlign = TextAlign.Center,

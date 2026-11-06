@@ -14,7 +14,20 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        handleNotification(intent)
         setContent { App(viewModel) }
+    }
+
+    override fun onNewIntent(intent: android.content.Intent) {
+        super.onNewIntent(intent)
+        handleNotification(intent)
+    }
+
+    /** Bildirime dokunuldu: oyun açılır, bildirimin olayı bir sonraki gün akışında gelir. */
+    private fun handleNotification(intent: android.content.Intent?) {
+        val note = intent?.getStringExtra(com.yukselis.protocol.data.Notifications.EXTRA_NOTE) ?: return
+        intent.removeExtra(com.yukselis.protocol.data.Notifications.EXTRA_NOTE)
+        viewModel.openFromNotification(note)
     }
 
     override fun onStop() {

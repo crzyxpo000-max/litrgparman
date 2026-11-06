@@ -596,7 +596,7 @@ fun contentWarnings(content: Content): List<String> {
     val seeded = content.scenes.values.flatMap { s -> s.choices.flatMap { c -> c.effects + (c.check?.failEffects ?: emptyList()) } }
         .plus(content.awakenings.flatMap { it.effects })
         .filterIsInstance<Effect.PlantSeed>().map { it.eventId }.toSet()
-    content.events.values.filter { it.seedOnly && it.id !in seeded && !it.id.startsWith("dikkat_") && !it.id.startsWith("esik_") && !it.id.startsWith("yozlasma_") && content.tower?.storyFloors?.containsValue(it.id) != true }.forEach {
+    content.events.values.filter { it.seedOnly && it.id !in seeded && !it.id.startsWith("dikkat_") && !it.id.startsWith("esik_") && !it.id.startsWith("yozlasma_") && !it.id.startsWith("bildirim_") && content.tower?.storyFloors?.containsValue(it.id) != true }.forEach {
         warnings += "olay ${it.id}: yalnızca tohumla gelir ama hiçbir yerde tohumlanmıyor (ulaşılamaz)"
     }
     content.events.values.filter { it.repeatable.not() && it.dayMax < it.dayMin }.forEach { warnings += "olay ${it.id}: gün aralığı boş" }

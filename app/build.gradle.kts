@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -6,23 +7,44 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
+// İmzalama anahtarı git dışında: keystore.properties (storeFile, storePassword, keyAlias, keyPassword).
+// Dosya yoksa release imzasız üretilir (bundleRelease yine çalışır); anahtarı oluşturmak kullanıcının işidir.
+val keystoreProps = Properties().apply {
+    val f = rootProject.file("keystore.properties")
+    if (f.isFile) f.inputStream().use { load(it) }
+}
+
 android {
     namespace = "com.yukselis.protocol"
-    compileSdk = 35
+    // Kurulu en yeni platform (android-37.0); hedef API Google Play'in 2026 şartı (Android 16, API 36).
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.yukselis.protocol"
         minSdk = 26
-        // Yayından önce (Aşama 9) Google Play'in o an istediği hedef API'ye yükseltilecek.
-        targetSdk = 35
-        versionCode = 2
-        versionName = "0.7.0"
+        // Google Play: Ağustos 2026'dan itibaren yeni uygulamalar ve güncellemeler API 36 hedeflemeli (DECISIONS #121).
+        targetSdk = 36
+        versionCode = 3
+        versionName = "1.0.0"
+    }
+
+    signingConfigs {
+        if (keystoreProps.getProperty("storeFile") != null) {
+            create("release") {
+                storeFile = rootProject.file(keystoreProps.getProperty("storeFile"))
+                storePassword = keystoreProps.getProperty("storePassword")
+                keyAlias = keystoreProps.getProperty("keyAlias")
+                keyPassword = keystoreProps.getProperty("keyPassword")
+            }
+        }
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.findByName("release")
         }
     }
 
@@ -63,6 +85,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.process)
     implementation(libs.androidx.activity.compose)
+    // Oturumlar arası nadir yerel bildirimler (Aşama 9); ağ kullanmaz.
+    implementation(libs.androidx.work.runtime.ktx)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)

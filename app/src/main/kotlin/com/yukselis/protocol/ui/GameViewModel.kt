@@ -75,6 +75,8 @@ data class UiState(
     val ending: com.yukselis.engine.story.EndingView? = null,
     /** Döngü sonu görüldü: başlıkta New Game+ seçeneği. */
     val newGamePlusUnlocked: Boolean = false,
+    /** Android 13+ bildirim izni reddedildi (bir daha kendiliğinden istenmez). */
+    val notificationDenied: Boolean = false,
 ) {
     val inGame: Boolean get() = game != null
     val autosave: SlotInfo? get() = slots.firstOrNull { it.first == SaveManager.AUTO }?.second
@@ -91,7 +93,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val saveDispatcher = Dispatchers.IO.limitedParallelism(1)
 
     private val _ui = MutableStateFlow(
-        UiState(lang = app.settings.language(), settings = app.settings.settings(), newGamePlusUnlocked = app.settings.newGamePlusUnlocked()),
+        UiState(lang = app.settings.language(), settings = app.settings.settings(), newGamePlusUnlocked = app.settings.newGamePlusUnlocked(), notificationDenied = app.settings.notificationPermissionDenied()),
     )
     val ui: StateFlow<UiState> = _ui.asStateFlow()
 
@@ -253,9 +255,30 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun updateSettings(transform: (Settings) -> Settings) {
-        val updated = transform(_ui.value.settings)
+        val before = _ui.value.settings
+        val updated = transform(before)
         app.settings.save(updated)
         _ui.update { it.copy(settings = updated) }
+        if (updated.notifications != before.notifications) {
+            com.yukselis.protocol.data.Notifications.schedule(getApplication(), updated.notifications)
+        }
+    }
+
+    /** Android 13+ bildirim izni sonucu: reddedildiyse ayar kapanır ve bir daha kendiliğinden istenmez. */
+    fun onNotificationPermission(granted: Boolean) {
+        app.settings.setNotificationPermissionDenied(!granted)
+        _ui.update { it.copy(notificationDenied = !granted) }
+        updateSettings { it.copy(notifications = granted) }
+    }
+
+
+    /** Bildirimden açıldı: otomatik kayıt yüklenir ve bildirimin küçük olayı tohumlanır. */
+    fun openFromNotification(noteId: String) {
+        val current = _ui.value.game ?: app.saves.load(SaveManager.AUTO)?.let { runCatching { app.engine.sanitize(it) }.getOrNull() } ?: return
+        if (current.ended) return
+        val opened = app.engine.openNotification(current, noteId)
+        show(opened, emptyList())
+        persistAuto(opened)
     }
 
     fun saveTo(slot: String) {

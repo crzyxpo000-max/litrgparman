@@ -302,6 +302,17 @@ class StoryEngine(val content: Content) {
         return npcEngine.ensure(effects.newDaily(s).state)
     }
 
+    // ---- Bildirimler (Aşama 9) ----
+
+    val notifier by lazy { Notifier(content, npcEngine) }
+
+    /** Kayıtlı oyun için oturumlar arası bildirim önerisi (dile çözülmüş başlık ve metin). */
+    fun pendingNotification(state: WorldState, lang: Lang): Triple<String, String, String>? =
+        notifier.pick(state)?.let { Triple(it.id, it.title[lang], text(it.text[lang], state, lang)) }
+
+    /** Bildirime dokunuldu: küçük olayı bir sonraki akış girişine tohumlar. */
+    fun openNotification(state: WorldState, noteId: String): WorldState = notifier.open(state, noteId)
+
     // ---- Sonlar (Aşama 7) ----
 
     /** Ulaşılan son (son sahnesinden türetilir); son değilse null. */

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Temalı (monokrom) simge, Android 13+: aynı biçim, tek renk; sistem yalnızca alfa kanalını kullanır. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="3"
+        android:strokeLineCap="square"
+        android:strokeLineJoin="miter"
+        android:pathData="M60,30 L30,30 L30,80 L78,80 L78,52" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M30,30h22v4h-22z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M66,30h10v3h-10z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M74,38h7v3h-7z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M78,44h3v4h-3z" />
+    <!-- Kule gövdesi; kat çizgileri boşluk olarak kesilir (çift kural) -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M54,27 L60,42 L58,42 L61,80 L47,80 L50,42 L48,42 Z M49.5,52h9v2h-9z M49,64h10v2h-10z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M54,20 L56,24.5 L54,27 L52,24.5 Z" />
+</vector>

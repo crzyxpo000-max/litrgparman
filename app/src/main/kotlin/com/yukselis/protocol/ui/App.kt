@@ -199,6 +199,8 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
                 onLanguage = viewModel::setLanguage,
                 onSettings = viewModel::updateSettings,
                 onBackToTitle = viewModel::backToTitle,
+                onNotificationPermission = viewModel::onNotificationPermission,
+                notificationDenied = ui.notificationDenied,
                 modifier = content,
             )
         }
@@ -253,9 +255,12 @@ private fun ProvideLanguage(lang: Lang, content: @Composable () -> Unit) {
         Configuration(base.resources.configuration).apply { setLocale(Locale.forLanguageTag(lang.code)) }
     }
     val localized = remember(configuration) { base.createConfigurationContext(configuration) }
-    CompositionLocalProvider(
-        LocalContext provides localized,
-        LocalConfiguration provides configuration,
-        content = content,
-    )
+    // Yapılandırma bağlamı Activity değildir: izin isteme kaydı (Aşama 9 bildirim izni) dıştaki Activity'den taşınır.
+    val registryOwner = androidx.activity.compose.LocalActivityResultRegistryOwner.current
+    val provided = buildList {
+        add(LocalContext provides localized)
+        add(LocalConfiguration provides configuration)
+        if (registryOwner != null) add(androidx.activity.compose.LocalActivityResultRegistryOwner provides registryOwner)
+    }
+    CompositionLocalProvider(*provided.toTypedArray(), content = content)
 }

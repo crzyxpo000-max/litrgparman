@@ -48,6 +48,8 @@ data class Settings(
     val typewriter: Boolean = true,
     val haptics: Boolean = true,
     val theme: ThemeMode = ThemeMode.SYSTEM,
+    /** Oturumlar arası bildirimler (isteğe bağlı; varsayılan kapalı). */
+    val notifications: Boolean = false,
 )
 
 class SettingsStore(context: Context) {
@@ -66,6 +68,7 @@ class SettingsStore(context: Context) {
         haptics = prefs.getBoolean(KEY_HAPTICS, true),
         theme = prefs.getString(KEY_THEME, null)
             ?.let { name -> ThemeMode.entries.firstOrNull { it.name == name } } ?: ThemeMode.SYSTEM,
+        notifications = prefs.getBoolean(KEY_NOTIFICATIONS, false),
     )
 
     fun save(settings: Settings) {
@@ -75,7 +78,25 @@ class SettingsStore(context: Context) {
             // Kaldırılan yapay zeka anlatıcı ayarının eski kaydı silinir (DECISIONS #97).
             .remove(LEGACY_NARRATOR)
             .putString(KEY_THEME, settings.theme.name)
+            .putBoolean(KEY_NOTIFICATIONS, settings.notifications)
             .apply()
+    }
+
+    // ---- Bildirimler (Aşama 9) ----
+
+    fun lastNotificationMillis(): Long = prefs.getLong(KEY_NOTIF_TIME, 0L)
+
+    fun lastNotificationKey(): String? = prefs.getString(KEY_NOTIF_KEY, null)
+
+    fun markNotified(millis: Long, key: String) {
+        prefs.edit().putLong(KEY_NOTIF_TIME, millis).putString(KEY_NOTIF_KEY, key).apply()
+    }
+
+    /** Android 13+ izni reddedildi: bir daha kendiliğinden istenmez (ısrar yok). */
+    fun notificationPermissionDenied(): Boolean = prefs.getBoolean(KEY_NOTIF_DENIED, false)
+
+    fun setNotificationPermissionDenied(denied: Boolean) {
+        prefs.edit().putBoolean(KEY_NOTIF_DENIED, denied).apply()
     }
 
     // ---- Aşama 7: oyunlar arası meta (Döngü sonu, New Game+) ----
@@ -112,5 +133,9 @@ class SettingsStore(context: Context) {
         const val KEY_HAPTICS = "haptics"
         const val LEGACY_NARRATOR = "narrator"
         const val KEY_THEME = "theme"
+        const val KEY_NOTIFICATIONS = "notifications"
+        const val KEY_NOTIF_TIME = "notif_last_time"
+        const val KEY_NOTIF_KEY = "notif_last_key"
+        const val KEY_NOTIF_DENIED = "notif_denied"
     }
 }

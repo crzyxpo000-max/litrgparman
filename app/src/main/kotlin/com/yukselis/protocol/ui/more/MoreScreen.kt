@@ -60,6 +60,8 @@ fun MoreScreen(
     onSettings: ((Settings) -> Settings) -> Unit,
     onBackToTitle: () -> Unit,
     modifier: Modifier = Modifier,
+    onNotificationPermission: (Boolean) -> Unit = {},
+    notificationDenied: Boolean = false,
 ) {
     Column(
         modifier = modifier
@@ -99,6 +101,7 @@ fun MoreScreen(
         ToggleRow(stringResource(R.string.haptics), null, settings.haptics, enabled = true) { on ->
             onSettings { it.copy(haptics = on) }
         }
+        NotificationToggle(settings.notifications, notificationDenied, onSettings, onNotificationPermission)
 
         Spacer(Modifier.padding(top = 16.dp))
         OutlinedButton(onClick = onBackToTitle, modifier = Modifier.fillMaxWidth()) {
@@ -259,6 +262,39 @@ fun ThemePicker(current: ThemeMode, onPick: (ThemeMode) -> Unit, modifier: Modif
                     }
                 }
             }
+        }
+    }
+}
+
+/**
+ * Bildirim anahtarı (Aşama 9): açıklama metni her zaman görünür; Android 13+'da açarken izin istenir.
+ * Reddedilirse anahtar kapanır, Android ayarlarına yönlendiren not çıkar ve izin bir daha kendiliğinden istenmez.
+ */
+@Composable
+private fun NotificationToggle(
+    enabled: Boolean,
+    denied: Boolean,
+    onSettings: ((Settings) -> Settings) -> Unit,
+    onPermission: (Boolean) -> Unit,
+) {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val launcher = androidx.activity.compose.rememberLauncherForActivityResult(
+        androidx.activity.result.contract.ActivityResultContracts.RequestPermission(),
+    ) { granted -> onPermission(granted) }
+    val description = if (denied && !enabled) stringResource(R.string.notifications_denied) else stringResource(R.string.notifications_desc)
+    ToggleRow(stringResource(R.string.notifications), description, enabled, enabled = true) { on ->
+        when {
+            !on -> onSettings { it.copy(notifications = false) }
+            com.yukselis.protocol.data.Notifications.permitted(context) -> onSettings { it.copy(notifications = true) }
+            // Daha önce reddedildi: ısrar yok, sistem ayarlarını aç.
+            denied -> context.startActivity(
+                android.content.Intent(android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                    .putExtra(android.provider.Settings.EXTRA_APP_PACKAGE, context.packageName)
+                    .addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK),
+            )
+            android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU ->
+                launcher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+            else -> onSettings { it.copy(notifications = true) }
         }
     }
 }
