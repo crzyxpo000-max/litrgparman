@@ -275,7 +275,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     /** Bildirimden açıldı: otomatik kayıt yüklenir ve bildirimin küçük olayı tohumlanır. */
     fun openFromNotification(noteId: String) {
         val current = _ui.value.game ?: app.saves.load(SaveManager.AUTO)?.let { runCatching { app.engine.sanitize(it) }.getOrNull() } ?: return
-        if (current.ended) return
+        if (current.ended || current.dead) return
         val opened = app.engine.openNotification(current, noteId)
         show(opened, emptyList())
         persistAuto(opened)

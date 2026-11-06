@@ -86,14 +86,14 @@ object Report {
         sb.appendLine("## OP MC ölçüleri")
         sb.appendLine()
         val dom = results.map { it.dominance }.average()
-        sb.appendLine("- **Hakimiyet evresi payı** (Gün 31+'de oyuncunun dünya seviyesinin üstünde olduğu günler): ortalama ${pct(dom)} " +
+        sb.appendLine("- **Hakimiyet evresi payı** (Gün 31+'de oyuncu seviyesinin dünya seviyesine eşit ya da üstünde olduğu günler): ortalama ${pct(dom)} " +
             "(hedef %60+; ${if (dom >= DOMINANCE_TARGET) "sağlanıyor" else "sağlanmıyor"}).")
         sb.appendLine("- **Ezme payı** (kazanılan savaşların tek satırla çözülen kısmı): ortalama ${pct(results.map { it.crushShare }.average())}.")
         sb.appendLine("- **Perde başına oyuncu / NPC güç farkı** (oyuncu seviyesi p50 ÷ ana NPC'lerin ortalama seviyesi; en güçlü NPC ortalaması):")
         Simulator.ACT_ENDS.forEach { d ->
             val ratio = results.mapNotNull { r -> r.levels.entries.firstOrNull { it.key >= d }?.value?.let { lv -> r.npcMean[d]?.takeIf { it > 0 }?.let { lv / it } } }
             val maxNpc = results.mapNotNull { it.npcMax[d] }.average()
-            sb.appendLine("  - Gün $d: ×${num(ratio.sorted().getOrElse(ratio.size / 2) { 0.0 })} (en güçlü NPC ortalaması Sv. ${num(maxNpc)})")
+            sb.appendLine("  - Gün $d: ×${String.format(Locale.ROOT, "%.1f", ratio.sorted().getOrElse(ratio.size / 2) { 0.0 })} (en güçlü NPC ortalaması Sv. ${num(maxNpc)})")
         }
         sb.appendLine("- **Kule:** ortalama en yüksek kat ${num(results.map { it.towerFloor.toDouble() }.average())}; 100'e ulaşan ${pct(results.count { it.towerFloor >= 100 }.toDouble() / n)}.")
         sb.appendLine()
@@ -114,7 +114,8 @@ object Report {
         val iron = results.filter { it.ironman }
         sb.appendLine("- Normal mod: oynanış başına ortalama ${String.format(Locale.ROOT, "%.2f", normal.map { it.deaths }.average())} ölüm (kayıt noktasına dönüş); " +
             "en az bir ölüm ${pct(normal.count { it.deaths > 0 }.toDouble() / normal.size.coerceAtLeast(1))}; p90 ${percentile(normal.map { it.deaths }, 0.9)}.")
-        sb.appendLine("- Demir Mod: ${iron.size} oynanış; ölümle Hasat ${pct(iron.count { it.ending == "hasat" && it.day < 358 }.toDouble() / iron.size.coerceAtLeast(1))}.")
+        sb.appendLine("- Demir Mod: ${iron.size} oynanış; ölümle Hasat ${pct(iron.count { it.ironDeath }.toDouble() / iron.size.coerceAtLeast(1))}. " +
+            "(Simülatörde haddini aşan, bilerek her şeyi açığa vuran bir tarz yok: Demir Mod ölümleri hikaye savaşı ve bosslardan gelir.)")
         sb.appendLine("- Bitmeyen oynanış: ${results.count { !it.finished }}." + results.filter { !it.finished }.take(5).joinToString("") { " [${it.seed} ${it.profile}: ${it.stuck}]" })
         val causes = results.flatMap { it.deathCauses }
         if (causes.isNotEmpty()) {

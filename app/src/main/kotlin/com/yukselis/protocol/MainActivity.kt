@@ -14,7 +14,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        handleNotification(intent)
+        // Süreç yeniden kurulduysa ya da "Son kullanılanlar"dan açıldıysa eski bildirim intent'i yeniden işlenmez.
+        val fromHistory = (intent?.flags ?: 0) and android.content.Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY != 0
+        if (savedInstanceState == null && !fromHistory) handleNotification(intent)
         setContent { App(viewModel) }
     }
 

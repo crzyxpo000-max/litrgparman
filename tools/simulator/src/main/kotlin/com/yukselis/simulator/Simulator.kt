@@ -99,6 +99,8 @@ data class RunResult(
     val deathGaps: List<Int> = emptyList(),
     /** Bitmediyse son sahne ve neden. */
     val stuck: String? = null,
+    /** Demir Mod ölümüyle Hasat (son sahnesi `son_hasat`). */
+    val ironDeath: Boolean = false,
 )
 
 class Simulator(private val content: Content) {
@@ -244,7 +246,8 @@ class Simulator(private val content: Content) {
         }
         val lv = MAIN_NPCS.mapNotNull { id -> s.npcs[id]?.takeIf { it.alive }?.level }
         ACT_ENDS.filter { it !in npcMean }.forEach { d -> npcMean[d] = if (lv.isEmpty()) 0.0 else lv.average(); npcMax[d] = lv.maxOrNull() ?: 0 }
-        CHECKPOINTS.filter { it !in levels }.forEach { d -> levels[d] = s.player.level; attention[d] = s.attention }
+        // Erken biten oynanış (Demir Mod ölümü) sonraki kontrol noktalarına değer yazmaz; eğriyi kirletmesin.
+        if (s.day >= 358) CHECKPOINTS.filter { it !in levels }.forEach { d -> levels[d] = s.player.level; attention[d] = s.attention }
         return RunResult(
             seed = seed, profile = profile.name + if (profile.ironman) " (Demir)" else "", ending = engine.endingOf(s)?.id, finished = s.ended,
             day = s.day, level = s.player.level, deaths = deaths, ironman = profile.ironman, levels = levels, attention = attention,
@@ -253,6 +256,7 @@ class Simulator(private val content: Content) {
             crushShare = if (fights == 0) 0.0 else crushes.toDouble() / fights,
             towerFloor = s.variable("kule_kat"), events = s.dayState.seen.size,
             deathCauses = causes, deathGaps = gaps,
+            ironDeath = s.ended && s.sceneId == com.yukselis.engine.story.Content.HARVEST_SCENE,
             stuck = if (s.ended) null else "sahne ${s.sceneId}, olay ${s.dayState.currentEvent}, gün ${s.day}, adım $steps, ölüm $deaths, savaş ${s.combat?.enemies?.map { it.id }}",
         )
     }

@@ -88,6 +88,13 @@ class SettingsStore(context: Context) {
 
     fun lastNotificationKey(): String? = prefs.getString(KEY_NOTIF_KEY, null)
 
+    /** Önceki kontrolde rakip sıralamada öndeydi ("seni geçti" yalnızca geçişte). */
+    fun rivalWasAhead(): Boolean = prefs.getBoolean(KEY_RIVAL_AHEAD, true)
+
+    fun setRivalWasAhead(ahead: Boolean) {
+        prefs.edit().putBoolean(KEY_RIVAL_AHEAD, ahead).apply()
+    }
+
     fun markNotified(millis: Long, key: String) {
         prefs.edit().putLong(KEY_NOTIF_TIME, millis).putString(KEY_NOTIF_KEY, key).apply()
     }
@@ -137,5 +144,6 @@ class SettingsStore(context: Context) {
         const val KEY_NOTIF_TIME = "notif_last_time"
         const val KEY_NOTIF_KEY = "notif_last_key"
         const val KEY_NOTIF_DENIED = "notif_denied"
+        const val KEY_RIVAL_AHEAD = "notif_rival_ahead"
     }
 }

@@ -22,7 +22,7 @@ class Asama9Test {
 
     @Test
     fun `dikkat yuksekse ust kademeden goz bildirimi ve dokununca olay tohumlanir`() {
-        val s = engine.newGame("A", GameMode.NORMAL, 3).copy(attention = 80, day = 120)
+        val s = engine.newGame("A", GameMode.NORMAL, 3).copy(attention = 95, day = 120)
         val note = engine.pendingNotification(s, Lang.TR)
         assertNotNull(note)
         assertEquals("goz", note!!.first)

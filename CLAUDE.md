@@ -7,7 +7,7 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 
 ## Durum
 
-- **Aşama 0–7 tamam.** Aşama 7: Perde 2–4 ve sonlar (`docs/PERDE2_4.md` içerik sözleşmesi: perdeler, bölgeler, ortak bayraklar, son koşulları, partiler).
+- **Aşama 9 (denge ve yayın) bitti; imzalama anahtarı ve Play Console kullanıcıda.** Aşama 0–7 tamam. Aşama 7: Perde 2–4 ve sonlar (`docs/PERDE2_4.md` içerik sözleşmesi: perdeler, bölgeler, ortak bayraklar, son koşulları, partiler).
 - Aşama 8 kaldırıldı. Aşama 6: Perde 1 dikey dilimi (`docs/PERDE1.md`; 48 olay, yeni açılış, zindanlar).
 - Aşama 5 tamam. Aşama 5: NPC sistemi (`npc/`: 4 eksen, hafıza, gündem, eşikler, ölüm, yoldaşlar, düello,
   Küresel Sıralama, yoldaş görüşleri, güce tepkiler, bilgi günlüğü, yalanlar, izler, Ordu modeli).
@@ -28,7 +28,9 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 ./gradlew assembleDebug            # APK: app/build/outputs/apk/debug/
 ./gradlew installDebug             # bağlı telefona/emülatöre kur
 ./gradlew lint                     # Android lint (hata kalmamalı)
-scripts/check.sh                   # test + validateContent + assembleDebug + lint; her aşamanın sonunda geçmeli
+./gradlew :tools:simulator:run --args="1000"   # denge simülatörü → docs/BALANCE.md
+./gradlew bundleRelease            # AAB (keystore.properties yoksa imzasız)
+scripts/check.sh                   # test + validateContent + simülatör denge testi + assembleDebug + lint; her aşamanın sonunda geçmeli
 ```
 
 Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). `local.properties` git dışıdır.
@@ -142,6 +144,11 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Eşik olayları: Dikkat `dikkat_<n>_p<perde>` (eşikler her perdede yeniden kurulur; Perde 1'de `dikkat_<n>`), Yozlaşma `yozlasma_<n>` (bir kez).
 - New Game+: `StoryEngine.newGame(…, previousGames, newGamePlus)` → değişken `onceki_oyun`, bayrak `yeni_dongu`; meta uygulama ayarlarında.
 
+- **Aşama 9:** `tools/simulator` (engine'i kullanan JVM aracı; `DengeTest` 200 oynanışla son dağılımı %1–%40, hakimiyet %60+ sınar).
+  Gün akışından açılan savaşlarda yenilgi bayılmadır (1 can, akışa dönüş); gerçek ölüm hikaye savaşları ve bosslarda. Yenilgiden
+  sonra yeniden deneme seçeneği canı yeniler ve her yenilgi sahnesinden savaşsız bir çıkış (`@akis`) olmalı.
+  Bildirim olayları `events/95_bildirimler.yaml` (`bildirim_rakip|goz|kapi`, `story/Notifier.kt`).
+
 ## Arayüz notları (app/)
 
 - Arayüz metinleri: `res/values/strings.xml` (EN) ve `res/values-tr/strings.xml` (TR). Yeni metin = iki dosyaya birden.
@@ -156,6 +163,8 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
   Hikaye'de yoldaş görüşleri, savaşta yoldaş satırları, Durum'da sıra/ordu/izler. Bildirim türü `yoldas` (pembe).
 - Gün akışında Hikaye sekmesi `HubPanel` gösterir (fırsat eli, serbest eylemler, kapılar, yolculuk, kamp); Harita ve Günlük Daha fazla'da.
 - Savaş varken Hikaye sekmesi `CombatScreen` gösterir; savaş başında Normal modda `checkpoint` kaydı yazılır.
+- Release: R8 açık (`app/proguard-rules.pro`), imzalama `keystore.properties` (git dışı). compileSdk 37, targetSdk 36.
+- Bildirimler: `data/Notifications.kt` (WorkManager, kanal, izin); Ayarlar'da anahtar; `ProvideLanguage` izin kaydını taşır.
 - Gün akışında Kule Dibi'nde Kule düğmesi (`HubView.tower`). Son sahnesinde epilog kartları (`EndingView`: son, OP MC türü, NPC'ler,
   fraksiyonlar, en kritik 5 seçim). Bitirilen oyunlar ve Döngü (New Game+) `SettingsStore` metasında; başlıkta Yeni Oyun+ anahtarı.
 

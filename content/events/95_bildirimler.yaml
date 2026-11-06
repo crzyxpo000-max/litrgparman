@@ -12,7 +12,7 @@ olaylar:
     sahneler:
       - id: "bldr_rakip_1"
         paragraflar:
-          - { tr: "Gözünü açar açmaz pencere zaten orada; gece boyunca beklemiş gibi. Küresel Sıralama'da senin adının hemen üstünde bir ad duruyor ve dün orada değildi.", en: "The window's already there the second you open your eyes, like it waited up all night. On the Global Ranking there's a name sitting right above yours, and it wasn't there yesterday." }
+          - { tr: "Pencere hiçbir uyarı vermeden önüne düşüyor; sanki saatlerdir göstermek için bekliyormuş. Küresel Sıralama'da senin adının hemen üstünde bir ad duruyor ve dün orada değildi.", en: "The window drops in front of you without warning, like it's been waiting hours to show you this. On the Global Ranking there's a name sitting right above yours, and it wasn't there yesterday." }
           - { tr: "{npc:aras_kurt|tam}. Seviyesinin yanında küçük, yeşil bir ok var. Sistem bunu sana özellikle göstermek istemiş gibi.", en: "{npc:aras_kurt|tam}. There's a small green arrow next to the level, like the System wanted to make extra sure you saw it." }
           - metin: { tr: "Bir saat sonra telsizinde tek bir cümle cızırdıyor; ses tanıdık: \"Uyandın mı? Ben çoktan yoldayım.\"", en: "An hour later a single line crackles over your radio, in a voice you know: \"You up yet? I'm already on the road.\"" }
             kosul: { iliski_min: { aras_kurt: { saygi: 20 } } }
@@ -83,7 +83,7 @@ olaylar:
     sahneler:
       - id: "bldr_goz_1"
         paragraflar:
-          - { tr: "Uyandığında oda fazla sessiz. Pencerenin camında, dışarıdan değil içeriden çizilmiş gibi ince bir satır var: senin adın, bir de yanında hiç görmediğin bir işaret.", en: "When you wake up, the room is too quiet. There's a thin line on the window glass, like it was scratched from the inside, not the outside: your name, and next to it a symbol you've never seen." }
+          - { tr: "Etrafındaki her şey bir anlığına fazla sessizleşiyor. Durum pencerenin kenarında, dışarıdan değil içeriden çizilmiş gibi ince bir satır beliriyor: senin adın, bir de yanında hiç görmediğin bir işaret.", en: "For a second, everything around you goes too quiet. A thin line shows up on the edge of your status window, like it was scratched from the inside, not the outside: your name, and next to it a symbol you've never seen." }
           - { tr: "Sistem penceresi açılmıyor. Bu kez açılmasına gerek yok; birinin seni okuduğunu, bir kitabın sayfasını çevirir gibi okuduğunu biliyorsun.", en: "No System window opens. This time it doesn't have to. You know someone is reading you, the way you'd turn a page in a book." }
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
@@ -92,7 +92,7 @@ olaylar:
             metin: { tr: "İşaretin çizgileri yedi köşeli; Kadimlerin pullarında gördüğün biçime benziyor ama daha eski.", en: "The symbol has seven points. It looks like the marks on the Ancients' scales, only older." }
         secenekler:
           - id: "sil"
-            etiket: { tr: "Camdaki satırı elinle sil", en: "Wipe the line off the glass" }
+            etiket: { tr: "Penceredeki satırı elinle sil", en: "Wipe the line off the window" }
             etkiler:
               - gizle: 8
               - ahlak: { insanlik: 2 }
@@ -146,7 +146,7 @@ olaylar:
     sahneler:
       - id: "bldr_kapi_1"
         paragraflar:
-          - { tr: "Sabaha karşı sokakta bir köpek uluyor, sonra bir tane daha. Kapının dikişleri gece boyunca gerilmiş; kenarlarından mavi değil, kırmızı bir ışık sızıyor.", en: "Just before dawn a dog starts howling in the street, then another. The Gate's seams stretched all night, and the light leaking out the edges isn't blue anymore. It's red." }
+          - { tr: "Sokakta bir köpek uluyor, sonra bir tane daha. Kapının dikişleri saatlerdir geriliyor; kenarlarından mavi değil, kırmızı bir ışık sızıyor.", en: "A dog starts howling in the street, then another. The Gate's seams have been stretching for hours, and the light leaking out the edges isn't blue anymore. It's red." }
           - { tr: "Sistem kısa ve kuru: yarın bu saatte kapı taşacak. Kapı hâlâ açık; bugün içeri girmek senin elinde.", en: "The System keeps it short and dry: by this time tomorrow, the Gate overflows. It's still open. Going in today is up to you." }
         secenekler:
           - id: "uyar"

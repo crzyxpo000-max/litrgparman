@@ -1,6 +1,6 @@
 # Denge raporu (simülatör)
 
-`./gradlew :tools:simulator:run --args="1000"` ile üretildi; 1000 oynanış, 16 sn. Nüfus: %30 rastgele oyuncu, %70 sekiz hedefli
+`./gradlew :tools:simulator:run --args="1000"` ile üretildi; 1000 oynanış, 21 sn. Nüfus: %30 rastgele oyuncu, %70 sekiz hedefli
 oyun tarzı (%25 rastgele seçim gürültüsüyle); her 10 oynanıştan biri Demir Mod. Ayrıntı: `tools/simulator`.
 
 ## Son dağılımı
@@ -55,13 +55,13 @@ Hedef: her son %1–%40 (gizli Döngü hariç).
 
 ## OP MC ölçüleri
 
-- **Hakimiyet evresi payı** (Gün 31+'de oyuncunun dünya seviyesinin üstünde olduğu günler): ortalama 82.2% (hedef %60+; sağlanıyor).
+- **Hakimiyet evresi payı** (Gün 31+'de oyuncu seviyesinin dünya seviyesine eşit ya da üstünde olduğu günler): ortalama 82.2% (hedef %60+; sağlanıyor).
 - **Ezme payı** (kazanılan savaşların tek satırla çözülen kısmı): ortalama 10.7%.
 - **Perde başına oyuncu / NPC güç farkı** (oyuncu seviyesi p50 ÷ ana NPC'lerin ortalama seviyesi; en güçlü NPC ortalaması):
-  - Gün 30: ×1 (en güçlü NPC ortalaması Sv. 14)
-  - Gün 180: ×5 (en güçlü NPC ortalaması Sv. 43)
-  - Gün 330: ×20 (en güçlü NPC ortalaması Sv. 61)
-  - Gün 365: ×23 (en güçlü NPC ortalaması Sv. 86)
+  - Gün 30: ×0.7 (en güçlü NPC ortalaması Sv. 14)
+  - Gün 180: ×5.1 (en güçlü NPC ortalaması Sv. 43)
+  - Gün 330: ×19.5 (en güçlü NPC ortalaması Sv. 61)
+  - Gün 365: ×22.5 (en güçlü NPC ortalaması Sv. 86)
 - **Kule:** ortalama en yüksek kat 96; 100'e ulaşan 91.8%.
 
 ### Zaman içinde Dikkat
@@ -85,7 +85,7 @@ Hedef: her son %1–%40 (gizli Döngü hariç).
 ## Ölüm oranları
 
 - Normal mod: oynanış başına ortalama 0.00 ölüm (kayıt noktasına dönüş); en az bir ölüm 0.0%; p90 0.
-- Demir Mod: 100 oynanış; ölümle Hasat 0.0%.
+- Demir Mod: 100 oynanış; ölümle Hasat 0.0%. (Simülatörde haddini aşan, bilerek her şeyi açığa vuran bir tarz yok: Demir Mod ölümleri hikaye savaşı ve bosslardan gelir.)
 - Bitmeyen oynanış: 0.
 
 ## Kapsam

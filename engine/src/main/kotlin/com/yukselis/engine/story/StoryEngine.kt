@@ -307,8 +307,11 @@ class StoryEngine(val content: Content) {
     val notifier by lazy { Notifier(content, npcEngine) }
 
     /** Kayıtlı oyun için oturumlar arası bildirim önerisi (dile çözülmüş başlık ve metin). */
-    fun pendingNotification(state: WorldState, lang: Lang): Triple<String, String, String>? =
-        notifier.pick(state)?.let { Triple(it.id, it.title[lang], text(it.text[lang], state, lang)) }
+    fun pendingNotification(state: WorldState, lang: Lang, rivalWasAhead: Boolean = false): Triple<String, String, String>? =
+        notifier.pick(state, rivalWasAhead)?.let { Triple(it.id, it.title[lang], text(it.text[lang], state, lang)) }
+
+    /** Rakip şu an sıralamada önde mi (uygulama geçişleri saptamak için saklar). */
+    fun rivalAhead(state: WorldState): Boolean = notifier.rivalAhead(state)
 
     /** Bildirime dokunuldu: küçük olayı bir sonraki akış girişine tohumlar. */
     fun openNotification(state: WorldState, noteId: String): WorldState = notifier.open(state, noteId)

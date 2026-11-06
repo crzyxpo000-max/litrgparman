@@ -21,4 +21,13 @@ class YukselisApplication : Application() {
     }
 
     val settings: SettingsStore by lazy { SettingsStore(this) }
+
+    override fun onCreate() {
+        super.onCreate()
+        // Ayar ile gerçek izin uyumlu kalsın (yedekten geri yükleme, sistemden izin geri alma): zamanlayıcı yeniden kurulur.
+        val s = settings.settings()
+        val on = s.notifications && com.yukselis.protocol.data.Notifications.permitted(this)
+        if (s.notifications && !on) settings.save(s.copy(notifications = false))
+        com.yukselis.protocol.data.Notifications.schedule(this, on)
+    }
 }

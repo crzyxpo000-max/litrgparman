@@ -69,7 +69,7 @@ object Notifications {
         if (!permitted(context)) return
         ensureChannel(context)
         val intent = Intent(context, MainActivity::class.java)
-            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             .putExtra(EXTRA_NOTE, noteId)
         val pending = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         val notification = NotificationCompat.Builder(context, CHANNEL)
@@ -97,7 +97,9 @@ class NotificationWorker(context: Context, params: WorkerParameters) : Coroutine
         val now = System.currentTimeMillis()
         if (now - settings.lastNotificationMillis() < Notifications.MIN_INTERVAL_MS) return Result.success()
         val state = runCatching { app.saves.load(SaveManager.AUTO) }.getOrNull() ?: return Result.success()
-        val note = runCatching { app.engine.pendingNotification(state, settings.language()) }.getOrNull() ?: return Result.success()
+        val rivalWasAhead = settings.rivalWasAhead()
+        runCatching { app.engine.rivalAhead(state) }.getOrNull()?.let { settings.setRivalWasAhead(it) }
+        val note = runCatching { app.engine.pendingNotification(state, settings.language(), rivalWasAhead) }.getOrNull() ?: return Result.success()
         // Aynı bildirimi aynı oyun gününde tekrarlama.
         val key = "${state.seed}:${state.day}:${note.first}"
         if (settings.lastNotificationKey() == key) return Result.success()

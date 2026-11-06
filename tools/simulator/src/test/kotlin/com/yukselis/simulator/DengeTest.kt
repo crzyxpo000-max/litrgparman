@@ -25,8 +25,11 @@ class DengeTest {
         assertTrue("Son dağılımı sınır dışı: $problems", problems.isEmpty())
         val dominance = results.map { it.dominance }.average()
         assertTrue("Hakimiyet payı %${(dominance * 100).toInt()} < %60", dominance >= Report.DOMINANCE_TARGET)
-        val ironDeaths = results.filter { it.ironman && it.ending == "hasat" && it.day < 358 }.size
+        val ironDeaths = results.count { it.ironDeath }
         assertTrue("Demir Mod'da erken Hasat çok: $ironDeaths", ironDeaths <= results.count { it.ironman } / 4)
+        // Dikkat bir gerilim ölçeğidir: Perde 2–3'ün ortasında herkes tavanda olmamalı.
+        val mid = results.mapNotNull { it.attention[150] }.sorted()
+        if (mid.isNotEmpty()) assertTrue("Gün 150 Dikkat medyanı ${mid[mid.size / 2]} ≥ 95", mid[mid.size / 2] < 95)
     }
 
     companion object {
