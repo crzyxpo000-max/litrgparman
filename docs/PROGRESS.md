@@ -49,6 +49,7 @@ Notlar:
 - 122 motor testi, check.sh geçiyor. 14 örnek olay (içerik ajanı limite takıldı; elle kısa yazıldı, hacim Aşama 6).
 - Bağımsız inceleme (Sonnet, kullanım tasarrufu) bulguları düzeltildi: çift yuva, kurumayan tohum, akıştan açılan savaşın yüklenince düşmesi, Deniz kurtarma ödülünün kaçışta da verilmesi, doğrulayıcı uyarı kapsamı. DECISIONS #61–75.
 - Bilinen eksik (Aşama 5–7): NPC'lerin görünen seviyeye tepkisi, Yozlaşma eşik olayları, Dikkat 75/100 olayları.
+- **KULLANICI KURALI: Hikaye kusursuz olmalı; hikaye içeriğinde asla kaynak kısılmaz.** Aşama 4'ün 14 örnek olayı (`events/act1_ornek.yaml`) tasarruf için kısa yazıldı: Aşama 6'da tam kaliteyle yeniden yazılacak/genişletilecek (paralel içerik ajanları + bağımsız içerik incelemesi, tam model).
 
 ## Aşama 3 — Savaş  ✅ (2026-11-06)
 Plan:
