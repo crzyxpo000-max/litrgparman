@@ -79,7 +79,7 @@ NPC'lerin Perde 1 sonundaki olası durumlarını `content/npcs/<id>.yaml` ve `co
 | Koruyucu | `koruyucu` | `ahlak_min: {merhamet: 40}`, `itibar_min: {siginak: 50}`, `degisken_min: {hayatta_kalan: 40}`, `bayrak: kadimler_yenildi` |
 | Demir Taht | `demir_taht` | `ahlak_min: {duzen: 50}`, `ahlak_max: {insanlik: -30}`, `bayrak: lonca_hakimiyeti` |
 | Yükseliş | `yukselis` | `ahlak_max: {insanlik: -70}`, `gorev: {zincir_yukselenler: tamam}`, `npc_hayatta: vahit` |
-| Kod Kırıcı | `kod_kirici` | `gorev: {zincir_sessiz_ag: tamam}`, `iliski_min: {yanki: {guven: 60}}`, `npc_hayatta: mert_kilic` |
+| Kod Kırıcı | `kod_kirici` | `gorev: {zincir_sessiz_ag: tamam}`, `iliski_min: {yanki: {guven: 60}}`, `npc_hayatta: mert_kilic`, `bayrak_yok: yanki_silindi` |
 | Özgürlük | `ozgurluk` | `ahlak_max: {duzen: -60}`, `ahlak_min: {insanlik: 50}`, `bayrak: sistem_cekirdegine_ulasildi` |
 | Vassal | `vassal` | `iliski_min: {thessar: {baglilik: 50}}`, `degisken_min: {kadim_tehdit: 70}` |
 | Yalnız Avcı | `yalniz_avci` | `yoldas_sayisi_max: 0`, `kademe_min: S` |

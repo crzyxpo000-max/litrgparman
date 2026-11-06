@@ -1,0 +1,27 @@
+# Parti B1 — Sığınak zinciri ve Elif yayı eşyaları.
+esyalar:
+  mendirek_kabugu:
+    ad: { tr: "Mendirek Kabuğu", en: "Jetty Shell" }
+    aciklama: { tr: "Mendirek Anası'nın midye ve tuz kabuğuyla örülmüş kabuğundan bir parça. Zırhçılar bunun için kavga eder.", en: "A piece of the Jetty Mother's mussel-and-salt-crusted shell. Armorers fight over these." }
+    tur: "malzeme"
+    nadirlik: "nadir"
+    deger: 60
+  sarnic_suyu:
+    ad: { tr: "Sarnıç Suyu", en: "Cistern Water" }
+    aciklama: { tr: "Eski Şehir'in altındaki sarnıçtan, bir asırdır kimsenin dokunmadığı berrak su. İçen, bir dileğin tadını alıyor.", en: "Clear water from the reservoir under Old Town, untouched for a century. Drink it and you taste somebody's wish." }
+    tur: "tuketim"
+    nadirlik: "nadir"
+    deger: 40
+    kullan: { hp: 250, mp: 120 }
+  hasat_kristali:
+    ad: { tr: "Hasat Kristali", en: "Harvest Crystal" }
+    aciklama: { tr: "Kadimler'in örnekleme aracından sökülmüş beyaz bir kristal. İçinde hâlâ satırlar akıyor; bir gün biri onları okuyacak.", en: "A white crystal pried out of an Ancient sampling instrument. Lines are still scrolling inside it. Someday somebody's going to read them." }
+    tur: "malzeme"
+    nadirlik: "epik"
+    deger: 300
+  elif_nesteri:
+    ad: { tr: "Hekimin Neşteri", en: "The Doctor's Scalpel" }
+    aciklama: { tr: "Demir Gece'de bir hekimin son nefesiyle avucuna bıraktığı neşter. Kimseyi dikmiyor artık; ama atamıyorsun da.", en: "The scalpel a doctor pressed into your palm with her last breath on Iron Night. It doesn't stitch anybody anymore. You can't throw it away, either." }
+    tur: "malzeme"
+    nadirlik: "efsanevi"
+    deger: 0

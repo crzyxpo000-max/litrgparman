@@ -1,0 +1,132 @@
+# Parti L2 — Kule / The Spire (GDD: 100 katlı dikey zindan; her 10 katta bir hikaye sırrı).
+# Kat seviyesi = round(taban · çarpan^kat): kat 10 ≈ 29 (E) · 20 ≈ 43 · 30 ≈ 62 (D) · 40 ≈ 91 · 50 ≈ 132 (C) · 60 ≈ 193 ·
+# 70 ≈ 281 (B) · 80 ≈ 410 (A) · 90 ≈ 597 · 100 ≈ 876 (S). Prosedürel katlar bantlardan; her 10. kat events/72_kule.yaml.
+# Kule'nin gizli mantığı (hikaye katları adım adım açar): Kule her Entegrasyon'un kaydıdır. Aşağıdan yukarı, önce bu
+# döngünün Kıyıkent'i, sonra önceki dünyaların kalıntıları, en tepede ise her şeyin başladığı an. Zirve, başlangıçtır.
+kule:
+  bolge: kule_dibi
+  kosul: { bayrak: kule_acik }
+  seviye: { taban: 20, carpan: 1.0385 }
+  kat_sayisi: 100
+  bantlar:
+    # ---------------------------------------------------------------- 1–9: Kıyıkent'in Yankısı
+    - min: 1
+      max: 9
+      dusmanlar: [kule_yolcu_golgesi, kule_ters_marti, kule_asfalt_agzi, kat_sarmasigi, basamak_yiyen]
+      ortam: [dar_gecit]
+      metinler:
+        - { tr: "Merdiven, Kordon'un bir sokağına açılıyor. Her şey yerinde: bakkalın tentesi, otobüs durağı, duvardaki seçim afişi. Yalnızca insanlar yok ve gökyüzü bir tavan.", en: "The stairs open onto a street off the Esplanade. Everything's where it should be: the corner store awning, the bus shelter, the election poster on the wall. Just no people, and the sky is a ceiling." }
+        - { tr: "Bu kat Kıyıkent'in bir mahallesinin kopyası; ama sokak tabelalarındaki isimler bir harf kaymış, sanki biri şehri ezberden çizmiş.", en: "This floor is a copy of a Port Harlow neighborhood, but every street sign is off by one letter, like someone drew the city from memory." }
+        - { tr: "Bir pastanenin camında Entegrasyon Günü'nün tarihi yazılı bir pasta siparişi asılı. Teslim saati: akşam yedi. Kimse almaya gelmemiş.", en: "Taped to a bakery window: a cake order dated Integration Day. Pickup at seven p.m. Nobody ever came for it." }
+        - { tr: "Uzakta, katın duvarlarının ötesinde bir yerde vapur düdüğü çalıyor. Her katta aynı düdük, her seferinde biraz daha geç.", en: "Somewhere past the walls of this floor, a ferry horn blows. Same horn on every floor, a little later each time." }
+        - { tr: "Kaldırımda tebeşirle çizilmiş bir seksek var. Son karenin içinde bir çocuk ayakkabısı duruyor; tek, bağcıkları hâlâ bağlı.", en: "There's a hopscotch grid chalked on the sidewalk. In the last square sits one kid's sneaker, laces still tied." }
+    # ---------------------------------------------------------------- 11–19: İçerideki Deniz
+    - min: 11
+      max: 19
+      dusmanlar: [kule_tuz_kancasi, kule_derin_feneri, kule_ters_marti, kuyu_sakini]
+      ortam: [su, karanlik]
+      metinler:
+        - { tr: "Merdivenin son basamağı suya gömülü. Kat bir deniz: tuzlu, durgun ve dibi görünmeyecek kadar derin. Bir binanın içinde ufuk çizgisi olmamalı. Var.", en: "The last stair is underwater. The whole floor is a sea: salt, flat calm, too deep to see bottom. There shouldn't be a horizon inside a building. There is." }
+        - { tr: "Suyun üstünde bir sandal sallanıyor. İçinde kürek yok, yalnızca ıslak bir Sistem bildirimi: [Yüzme bilmiyorsanız lütfen geri dönün.]", en: "A rowboat bobs on the water. No oars, just a soggy System notice: [If you cannot swim, please turn back.]" }
+        - { tr: "Su göğsüne kadar çıkıyor ve sıcaklığı on dereceyi bile bulmuyor; Kule'nin denizi Ege'den çok daha soğuk.", en: "The water comes up to your chest, and it isn't even fifty degrees. The Spire's sea runs a lot colder than the Pacific." }
+        - { tr: "Dipten bir ışık yükseliyor, sonra sönüyor. Bir şey aşağıda nefes alıyor ve her nefesinde su biraz yükseliyor.", en: "A light rises from the deep, then goes out. Something down there is breathing, and every breath raises the water a little." }
+        - { tr: "Suyun üstünde gri çöp yüzüyor: plastik şişeler, bir can yeleği, bir vapur bileti. Hepsi aynı akşamın.", en: "Gray trash floats on the surface: plastic bottles, a life vest, a ferry ticket. All from the same evening." }
+    # ---------------------------------------------------------------- 21–29: Cam
+    - min: 21
+      max: 29
+      dusmanlar: [kule_cam_orumcek, kule_ayna_ikiz, kule_derin_feneri, kat_avcisi]
+      ortam: [tavan]
+      metinler:
+        - { tr: "Bu katın duvarları, zemini, tavanı camdan. Her adımında aşağıda bir önceki katı, yukarıda bir sonrakini görüyorsun. Ve camın içinde, kendini.", en: "The walls, floor and ceiling on this floor are all glass. With every step you can see the floor below and the one above. And, in the glass, yourself." }
+        - { tr: "Yansımaların seninle aynı anda durmuyor. Hep yarım an geç. Bazen yarım an erken.", en: "Your reflections don't stop when you stop. Always half a beat late. Sometimes half a beat early." }
+        - { tr: "Camın bir köşesine biri parmağıyla yazmış; buğulanınca beliriyor: \"bakma.\" Bakıyorsun. Yazı senin yazın.", en: "Someone wrote in the corner of the glass with a fingertip; it shows up when your breath fogs it: \"don't look.\" You look. It's your handwriting." }
+        - { tr: "Tavandaki cam çatlak ve çatlaktan ince bir ışık sızıyor. Işığın vurduğu yerde gölgen iki tane.", en: "The glass ceiling is cracked, and a thin light leaks through. Where it lands, you have two shadows." }
+        - { tr: "Bütün kat çan gibi tek bir notada uğulduyor. Sesin içinde bir şey camı adım adım tırmanıyor.", en: "The whole floor hums on a single note, like a bell. Inside the sound, something is climbing the glass, one step at a time." }
+    # ---------------------------------------------------------------- 31–39: Saat
+    - min: 31
+      max: 39
+      dusmanlar: [kule_sarkac, kule_geri_sayim, kule_ayna_ikiz, sinav_heykeli]
+      ortam: [dar_gecit, tavan]
+      metinler:
+        - { tr: "Kat bir saatin içi: dişliler, yaylar, kat kat dönen pirinç çarklar. Koridorlar dişlilerin arasındaki boşluklar ve o boşluklar her tik sesinde yer değiştiriyor.", en: "The floor is the inside of a clock: gears, springs, brass wheels turning in layers. The hallways are the gaps between the teeth, and the gaps move on every tick." }
+        - { tr: "Duvarda bir takvim asılı. Bütün günlerin üstü çizilmiş, Gün 365 dahil. Altında bir gün daha var: Gün 0. Onun üstü çizilmemiş.", en: "A calendar hangs on the wall. Every day is crossed out, Day 365 included. Under it there's one more: Day 0. That one isn't crossed out." }
+        - { tr: "Burada nabzın saatin ritmine uyuyor. Fark edince durdurmaya çalışıyorsun. Duramıyorsun.", en: "Your pulse falls in step with the clock here. When you notice, you try to stop it. You can't." }
+        - { tr: "Bir dişlinin üstünde kazınmış bir çentik dizisi var; biri günleri saymış. Sayı 365'te bitiyor, sonra 1'den yeniden başlıyor.", en: "Someone notched a tally into the face of a gear. The count stops at 365, then starts over at 1." }
+        - { tr: "Saatin tiklemesi bir an duruyor. Sessizlikte bir şeyin seni beklediğini duyuyorsun. Sonra tik, yeniden.", en: "The ticking stops for a second. In the quiet, you can hear something waiting for you. Then tick, again." }
+    # ---------------------------------------------------------------- 41–49: Sessizlik
+    - min: 41
+      max: 49
+      dusmanlar: [kule_kulaksiz, kule_geri_sayim, kule_cam_orumcek, sessiz_kanat]
+      ortam: [karanlik]
+      metinler:
+        - { tr: "Merdivenden çıktığın an ses bitiyor. Ayak seslerin, nefesin, kalbin; hepsi orada, ama hiçbiri kulağına ulaşmıyor.", en: "The second you clear the stairs, sound ends. Your footsteps, your breath, your heart: all still there, but none of it reaches your ears." }
+        - { tr: "Duvarlara binlerce kez aynı kelime kazınmış, farklı dillerde. Sistem birini çeviriyor: \"sus.\"", en: "The same word is carved into the walls thousands of times, in different languages. The System translates one: \"hush.\"" }
+        - { tr: "Burada bildirimler bile sessiz geliyor; pencerelerin kenarları titremiyor. Sistem bu katta bir şeyden çekiniyor.", en: "Even the notifications come in silent here; the window edges don't flicker. The System is wary of something on this floor." }
+        - { tr: "Karanlıkta biri seni geçiyor. Rüzgârından anlıyorsun; sesinden değil. Dönüp bakmıyorsun.", en: "Somebody passes you in the dark. You can tell from the draft, not the sound. You don't turn around." }
+        - { tr: "Bir duvarda yarım kalmış bir tebeşir mesajı: \"kalbinin sesini kıs\". Altında bir ok. Okun ucu sana dönük.", en: "A half-finished chalk message on a wall: \"turn your heartbeat down\". Under it, an arrow. The arrow points at you." }
+    # ---------------------------------------------------------------- 51–59: Başka Dünyaların Kalıntıları
+    - min: 51
+      max: 59
+      dusmanlar: [kule_hasat_artigi, kule_sahipsiz_zirh, kule_kulaksiz, kayip_ekip]
+      ortam: [karanlik, dar_gecit]
+      metinler:
+        - { tr: "Bu kat bir moloz tarlası; ama moloz bu dünyadan değil. Kabuklu, kıvrık, bilmediğin renklerde mimari parçalar. Bir yerlerde, başka bir alfabeyle yazılmış bir dükkân tabelası.", en: "This floor is a field of rubble, but the rubble isn't from this world. Shelled, curled architecture in colors you don't have names for. Somewhere, a shop sign in another alphabet." }
+        - { tr: "Molozun arasında bir oyuncak buluyorsun; dört kollu bir bebek. Sistem açıklamasında yalnızca şu yazıyor: [Sahibi: hasat edildi.]", en: "In the rubble you find a toy: a doll with four arms. The System's description just says: [Owner: harvested.]" }
+        - { tr: "Burada hava başka bir gezegenin kokusunu taşıyor: bakır, tuz ve hiç tatmadığın bir meyve.", en: "The air here smells like another planet: copper, salt, and some fruit you've never tasted." }
+        - { tr: "Bir duvarın dibinde, yabancı bir ırkın kemikleri bir çember halinde oturmuş. Ortalarında bir ateşin külleri. Sonuna kadar birlikte beklemişler.", en: "At the foot of a wall, the bones of some other species sit in a circle around the ashes of a fire. They waited it out together, all the way to the end." }
+        - { tr: "Tavana kadar yükselen bir yığın, yalnızca kırık Sistem pencerelerinden oluşuyor. Hepsinin dili farklı; hepsinin son satırı aynı.", en: "A pile reaching all the way to the ceiling, made of nothing but broken System windows. Every one is in a different language. Every one ends on the same line." }
+    # ---------------------------------------------------------------- 61–69: Yanık Arşiv
+    - min: 61
+      max: 69
+      dusmanlar: [kule_kul_katibi, kule_sahipsiz_zirh, kule_hasat_artigi, sinav_sovalyesi]
+      ortam: [yanici, tavan]
+      metinler:
+        - { tr: "Kat, ufka kadar uzanan raflardan oluşan bir arşiv ve arşiv yanıyor. Alevler yavaş, sabırlı; sanki yakmak için değil, okumak için yanıyorlar.", en: "The floor is an archive of shelves that run all the way to the horizon, and the archive is burning. The flames are slow and patient, like they're burning to read, not to destroy." }
+        - { tr: "Ayağının dibine yarısı yanmış bir sayfa düşüyor. Bir hayatın son satırı: [Seviye 61 · Kademe D · Durum: hasat edildi.] Adın olduğu kısım kül olmuş.", en: "A half-burned page drifts down at your feet. The last line of somebody's life: [Level 61 · Grade D · Status: harvested.] The part with the name is ash." }
+        - { tr: "Rafların arasındaki havanın sıcaklığı elli dereceyi geçiyor ve terin, akmadan buharlaşıyor.", en: "The air between the shelves runs past a hundred and twenty degrees, and your sweat evaporates before it can run." }
+        - { tr: "Bir rafın kenarında hâlâ yanmamış bir dosya var. Etiketinde Kıyıkent yazıyor. Altında bir numara. Numara bir değil.", en: "On the edge of one shelf, a file that hasn't caught yet. The label says Port Harlow. Under that, a number. The number isn't one." }
+        - { tr: "Kül, tavanda bir kar gibi birikmiş. Bazen bir parçası düşüyor ve düşerken, bir an, okunabilir bir harfe dönüşüyor.", en: "Ash has piled up on the ceiling like snow. Now and then a flake drops, and on the way down, for a second, it turns into a letter you can read." }
+    # ---------------------------------------------------------------- 71–79: Tohumluk
+    - min: 71
+      max: 79
+      dusmanlar: [kule_tohum_bekcisi, kule_kul_katibi, kule_hasat_artigi, kat_avcisi]
+      ortam: [karanlik, dar_gecit]
+      metinler:
+        - { tr: "Kat bir sera; ama bitki yok. Sıra sıra kristal kozalar, her birinin içinde uyuyan bir şey. Kimi insana benziyor, kimi hiçbir şeye.", en: "The floor is a greenhouse with no plants. Row after row of crystal pods, something sleeping in each one. Some look human. Some don't look like anything." }
+        - { tr: "Kozaların üstünde küçük etiketler var: tür, kademe, döngü numarası. Sonuncusunu okumaya çalıştıkça harfler kayıyor.", en: "Each pod has a little label: species, Grade, cycle number. The harder you try to read the last one, the more the letters slide." }
+        - { tr: "Bir kozanın camında içeriden bırakılmış bir el izi var. Avuç içi tam senin elinin büyüklüğünde.", en: "There's a handprint on the inside of one pod's glass. The palm is exactly the size of yours." }
+        - { tr: "Sera nemli ve ılık; yirmi yedi derece, bir yaz akşamı gibi. Uykuya dalmamak için dişlerini sıkıyorsun.", en: "The greenhouse is warm and damp, eighty degrees, like a summer evening. You grit your teeth to keep from nodding off." }
+        - { tr: "Uzakta bir makas sesi. Kırp. Kırp. Bekçiler sıraları dolaşıyor ve bu gece biçilecek olanı seçiyor.", en: "Far off, the snip of shears. Snip. Snip. The keepers walk the rows, choosing what gets cut tonight." }
+    # ---------------------------------------------------------------- 81–89: Ters Gök
+    - min: 81
+      max: 89
+      dusmanlar: [kule_yercekimsiz, kule_tohum_bekcisi, kule_sahipsiz_zirh, ara_kat_devi]
+      ortam: [karanlik, tavan]
+      metinler:
+        - { tr: "Merdivenin üstünde zemin yok; gökyüzü var, ayaklarının altında. Yıldızlar aşağıda, Kule yukarıda ve sen ikisinin arasında, ters bir dünyada yürüyorsun.", en: "At the top of the stairs there's no floor. There's sky, under your feet. The stars are down, the Spire is up, and you're walking upside down between them." }
+        - { tr: "Aşağıdaki yıldızların arasında Dünya'yı görüyorsun. Küçük, mavi ve çevresinde bir halka gibi dizilmiş, kıpırtısız, karanlık gemiler.", en: "Down among the stars you can see Earth. Small, blue, ringed with dark ships hanging perfectly still." }
+        - { tr: "Takımyıldızlar burada başka şekiller çiziyor: bir taht, bir orak, bir pencere. Sonuncusu sana göz kırpıyor.", en: "The constellations draw different shapes up here: a throne, a scythe, a window. The last one winks at you." }
+        - { tr: "Burada yerçekimi bir öneri. Bir adımı yanlış atarsan Kule'nin dibine değil, yıldızlara düşersin.", en: "Gravity's a suggestion here. One wrong step and you won't fall to the bottom of the Spire. You'll fall into the stars." }
+        - { tr: "Bir yıldız sana fazla yakın; yaklaşınca bir pencere olduğunu görüyorsun. Üstünde bir ırkın adı ve tek kelime: [Kabul edildi.]", en: "One star is too close. Up close, it turns out to be a window. On it: the name of some species, and one word. [Accepted.]" }
+    # ---------------------------------------------------------------- 91–99: Taslak
+    - min: 91
+      max: 99
+      dusmanlar: [kule_silinmis_surec, kule_yolcu_golgesi, kule_ayna_ikiz, kule_yercekimsiz, sinav_sovalyesi]
+      ortam: [karanlik, dar_gecit]
+      metinler:
+        - { tr: "Bu kat bitmemiş. Duvarlar beyaz çizgilerden bir taslak, zemin ızgara, tavan hiç çizilmemiş. Bir yerde kalem havada durmuş, bekliyor.", en: "This floor isn't finished. The walls are a sketch in white lines, the floor is a grid, and nobody ever drew the ceiling. Somewhere, a pencil hangs in midair, waiting." }
+        - { tr: "Çizgilerin arasında tanıdık şekiller var: bir iskele, bir vapur, bir orman. Kule'nin bütün katları burada önce taslak olarak çizilmiş.", en: "There are familiar shapes between the lines: a pier, a ferry, a forest. Every floor of the Spire got sketched up here first." }
+        - { tr: "Bir taslak insan yanından geçiyor. Yüzü yok, ama yürüyüşünü tanıyorsun. Seninki.", en: "A sketched person walks past you. No face, but you know that walk. It's yours." }
+        - { tr: "Havada asılı bir not: [Bu katı silme. Bir sonrakine lazım.] Kimin bıraktığını değil, kime bıraktığını merak ediyorsun.", en: "A note hangs in the air: [Don't delete this floor. The next one needs it.] You don't wonder who left it. You wonder who it's for." }
+        - { tr: "Burada Sistem bildirimleri yarım geliyor: [Uyarı: ] [Kademe: ] [Döngü: ]. Boşlukları doldurmaya kimse zahmet etmemiş.", en: "System notices come in half-finished up here: [Warning: ] [Grade: ] [Cycle: ]. Nobody bothered to fill in the blanks." }
+  hikaye_katlari:
+    10: kule_kat_10
+    20: kule_kat_20
+    30: kule_kat_30
+    40: kule_kat_40
+    50: kule_kat_50
+    60: kule_kat_60
+    70: kule_kat_70
+    80: kule_kat_80
+    90: kule_kat_90
+    100: kule_kat_100

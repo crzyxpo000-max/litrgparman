@@ -1,0 +1,2439 @@
+# Parti L1 — Bestiyer: Perde 2–4 bölge düşmanları, çok-evren dünyaları, Sistem Çekirdeği ve Kule bantları.
+# Tasarım seviyesi 20–40; bölgelerde dünya seviyesine, Kule'de kat seviyesine ölçeklenir (combat/EnemyScaling.kt).
+# Sıradan düşman XP'si ≈ seviyenin bir sonraki seviye ihtiyacının %10'u (tür çarpanı ≈ 1), sürü ≈ %7, elit ≈ %20.
+dusmanlar:
+  # ---------------------------------------------------------------- Kıyıkent · Liman (EN: the Waterfront)
+  pas_vatozu:
+    ad: { tr: "Pas Vatozu", en: "Rust Ray" }
+    aciklama: { tr: "Limanın mazot tabakasının altında büyümüş, kanat açıklığı bir kayık kadar olan bir vatoz. Sırtı gemi sacı gibi paslı; kuyruğundaki diken hâlâ bir zamanlar battığı teknenin akümülatöründen akım çekiyor.", en: "A stingray as wide as a rowboat that grew up under the harbor's diesel slick. Its back is rusted like old hull plating, and the barb on its tail still pulls current from the battery of whatever boat it sank." }
+    kanca: { tr: "İskelenin altındaki su bir an kararıyor; sonra o karanlık, kenarları dalgalanarak kıpırdıyor ve iki küçük göz yüzeye çıkıyor.", en: "The water under the dock goes dark for a second. Then the dark ripples at the edges and moves, and two small eyes break the surface." }
+    seviye: 21
+    can: 250
+    statlar:
+      str: 12
+      agi: 15
+      end: 10
+      int: 14
+      wis: 9
+      per: 13
+      wil: 10
+      cha: 2
+    davranis: "temkinli"
+    zeki: false
+    zaaf: "buz"
+    zaaf_metin: { tr: "Soğuk suya alışık değil; liman bunca yıldır mazotla ılık. Buz kanatlarını kaskatı eder ve vatoz bir tahta gibi dibe çöker.", en: "It's not built for cold water; this harbor has run warm with diesel for years. Ice locks its wings stiff, and it sinks like a dropped plank." }
+    saldirilar:
+      - id: "pas_dikeni"
+        ad: { tr: "Pas Dikeni", en: "Rust Barb" }
+        stat: "agi"
+        taban: 12
+        kat: 0.8
+        etiketler: ["fiziksel", "delici"]
+        durum: { etki: "zehir", sans: 0.35, sure: 3 }
+        bekleme: 0
+        metin: { tr: "{dusman} sudan bir kırbaç gibi fırlıyor ve paslı kuyruk dikeni baldırına saplanıyor; yara anında morarıyor.", en: "{dusman} snaps out of the water like a whip, and its rusted barb punches into your calf. The wound goes purple on the spot." }
+      - id: "akim_kanadi"
+        ad: { tr: "Akım Kanadı", en: "Current Wing" }
+        stat: "int"
+        taban: 13
+        kat: 0.8
+        etiketler: ["simsek", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} kanatlarını ıslak tahtaya yapıştırıyor; iskele boyunca bir vızıltı koşuyor ve dişlerin birbirine kilitleniyor.", en: "{dusman} plasters its wings flat against the wet planks. A hum runs the length of the dock, and your teeth clamp shut on their own." }
+      - id: "camur_bulutu"
+        ad: { tr: "Dip Çamuru", en: "Silt Cloud" }
+        stat: "per"
+        taban: 9
+        kat: 0.6
+        etiketler: ["menzilli"]
+        durum: { etki: "kor", sans: 0.35, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} dibe vurup kanatlarını çırpıyor; yüzüne kara, mazot kokulu bir çamur bulutu patlıyor.", en: "{dusman} slaps the bottom with both wings, and a cloud of black, diesel-stinking silt blows up into your face." }
+    xp: 2400
+    kredi: 12
+    ganimet: { vatoz_dikeni: 0.45, canli_bakir: 0.15, kaya_tuzu: 0.3 }
+    etiketler: ["hayvan", "deniz"]
+    boss: false
+  halat_bogan:
+    ad: { tr: "Halat Boğan", en: "Hawser Strangler" }
+    aciklama: { tr: "Limandaki çürümüş palamar halatları, ağ parçaları ve yosun birbirine dolanıp bir yılanbalığı biçimi almış. Babalardan sarkar, bir bacağın suya değmesini bekler.", en: "Rotten mooring lines, net scraps and kelp, wound together into the shape of an eel. It hangs off the bollards and waits for a leg to dip into the water." }
+    kanca: { tr: "Babaya sarılı kalın halat, rüzgar yokken gerilip gevşiyor. Bir kere. İki kere. Nefes alır gibi.", en: "The thick line looped around the bollard draws tight and goes slack, with no wind at all. Once. Twice. Like it's breathing." }
+    seviye: 22
+    can: 290
+    statlar:
+      str: 18
+      agi: 11
+      end: 16
+      int: 4
+      wis: 8
+      per: 11
+      wil: 14
+      cha: 2
+    davranis: "agresif"
+    zeki: false
+    zaaf: "ates"
+    zaaf_metin: { tr: "Halatlarının yarısı eski katranla kaplı. Islak görünüyor ama içi kuru; bir alev değince fitil gibi tutuşuyor ve düğümleri çözülüyor.", en: "Half its rope is coated in old tar. It looks soaked, but it's dry inside: one flame and it catches like a wick and the knots start letting go." }
+    saldirilar:
+      - id: "palamar_dugumu"
+        ad: { tr: "Palamar Düğümü", en: "Bowline" }
+        stat: "str"
+        taban: 13
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.25, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} bileklerine iki tur atıyor ve bir denizci düğümü gibi tek hamlede sıkılıyor; kolların gövdene yapışıyor.", en: "{dusman} throws two turns around your wrists and cinches down like a sailor's knot. Your arms are pinned to your sides." }
+      - id: "yosun_bogumu"
+        ad: { tr: "Yosun Boğumu", en: "Kelp Choke" }
+        stat: "str"
+        taban: 11
+        kat: 0.8
+        etiketler: ["fiziksel"]
+        durum: { etki: "kanama", sans: 0.3, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} boynuna kayıyor; yosunun altındaki kırık olta iğneleri derine sürtünerek sıkıyor.", en: "{dusman} slides up around your neck and squeezes, and the broken fishhooks buried in the kelp drag across your skin." }
+      - id: "dibe_cekme"
+        ad: { tr: "Dibe Çekme", en: "Undertow" }
+        stat: "wil"
+        taban: 10
+        kat: 0.8
+        etiketler: ["zihin"]
+        durum: { etki: "korku", sans: 0.35, sure: 2 }
+        bekleme: 3
+        metin: { tr: "{dusman} ayak bileğini kavrayıp seni iskelenin kenarına sürüklüyor; bir an, yeşil suyun içinde yukarı bakan yüzleri görüyorsun.", en: "{dusman} grabs your ankle and drags you to the edge of the dock, and for a second you see faces in the green water, looking up." }
+    xp: 2600
+    kredi: 10
+    ganimet: { katranli_halat: 0.5, mavi_yosun: 0.3, hurda: 0.3 }
+    etiketler: ["deniz", "yaratik"]
+    boss: false
+  demir_gagali_marti:
+    ad: { tr: "Demir Gagalı Martı", en: "Ironbill Gull" }
+    aciklama: { tr: "Kıyametten önce de simidini kaparlardı; şimdi parmağını kapıyorlar. Gagaları demir, çığlıkları bir sis düdüğü kadar yüksek. Asla tek gelmezler ve asla doymazlar.", en: "They used to steal your fries off the pier. Now they steal fingers. Iron beaks, screams as loud as a foghorn. They never come alone, and they're never full." }
+    kanca: { tr: "Vapurun direğindeki martılar aynı anda başlarını sana çeviriyor. Biri çığlık atıyor. Sonra hepsi.", en: "Every gull on the ferry's mast turns its head toward you at the same time. One of them screams. Then all of them do." }
+    seviye: 20
+    can: 170
+    statlar:
+      str: 9
+      agi: 16
+      end: 7
+      int: 5
+      wis: 6
+      per: 15
+      wil: 7
+      cha: 3
+    davranis: "suru"
+    zeki: false
+    zaaf: "ses"
+    zaaf_metin: { tr: "Sürü, çığlıklarla birbirine yön veriyor. Onları bastıran tek bir sağır edici ses, sürüyü bir avuç şaşkın kuşa böler.", en: "The flock steers by its own screaming. Drown them out with one deafening sound and the flock breaks into a handful of confused birds." }
+    saldirilar:
+      - id: "demir_gaga"
+        ad: { tr: "Demir Gaga", en: "Iron Bill" }
+        stat: "agi"
+        taban: 11
+        kat: 0.8
+        etiketler: ["fiziksel", "delici"]
+        durum: { etki: "kanama", sans: 0.3, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} pike yapıp demir gagasını omzuna gömüyor ve bir parça etle havalanıyor.", en: "{dusman} dives, drives its iron bill into your shoulder, and lifts off with a piece of you." }
+      - id: "kapip_kacma"
+        ad: { tr: "Kapıp Kaçma", en: "Snatch and Run" }
+        stat: "agi"
+        taban: 9
+        kat: 0.7
+        etiketler: ["fiziksel", "yakin"]
+        bekleme: 0
+        metin: { tr: "{dusman} kulağının dibinden geçerken pençeleriyle yanağını sıyırıyor ve kahkahaya benzeyen bir sesle uzaklaşıyor.", en: "{dusman} buzzes your ear, rakes your cheek with its feet, and wheels off making a sound a lot like laughter." }
+      - id: "ciglik_firtinasi"
+        ad: { tr: "Çığlık Fırtınası", en: "Shrieking Squall" }
+        stat: "wil"
+        taban: 8
+        kat: 0.7
+        etiketler: ["ses", "alan"]
+        durum: { etki: "korku", sans: 0.3, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} sürünün ortasından bir çığlık koparıyor ve bütün kanatlar etrafında bir kasırga gibi dönmeye başlıyor.", en: "{dusman} lets out a scream from the middle of the flock, and every wing in the sky starts wheeling around you like a twister." }
+    xp: 1500
+    kredi: 6
+    ganimet: { demir_gaga: 0.4, hurda: 0.2 }
+    etiketler: ["hayvan", "deniz"]
+    boss: false
+  dip_balikcisi:
+    ad: { tr: "Dip Balıkçısı", en: "Bottom Angler" }
+    aciklama: { tr: "Körfezin dibinde, batık vapurun gölgesinde yaşayan, römorkör büyüklüğünde bir fener balığı. Alnından sarkan yem, uzaktan bir kamaranın sarı penceresine benziyor; geceleri limana bakan herkes o pencerede birinin el salladığını görüyor.", en: "A tugboat-sized anglerfish that lives at the bottom of the bay in the shadow of the sunken ferry. The lure hanging off its forehead looks, from a distance, like the yellow window of a cabin, and at night everyone who looks out over the harbor sees someone waving from it." }
+    kanca: { tr: "Suyun altında sıcak, sarı bir ışık yanıyor: bir ev penceresi gibi davetkâr. Işığın arkasında, o pencerenin yüz katı genişliğinde bir karanlık açılıyor.", en: "A warm yellow light glows under the water, inviting as a kitchen window. Behind it, a darkness a hundred times wider than the window opens up." }
+    seviye: 27
+    can: 640
+    statlar:
+      str: 30
+      agi: 14
+      end: 28
+      int: 22
+      wis: 20
+      per: 26
+      wil: 24
+      cha: 18
+    davranis: "temkinli"
+    zeki: false
+    zaaf: "isik"
+    zaaf_metin: { tr: "Ömrünü zifiri karanlıkta geçirmiş; kendi yemi dışında ışık görmemiş. Gerçek, keskin bir ışık gözlerini yakar ve yemi sönük bir et parçasına döner.", en: "It has spent its life in pitch black and never seen any light but its own lure. Real, hard light sears its eyes and turns that lure into a dull lump of meat." }
+    saldirilar:
+      - id: "fener_yemi"
+        ad: { tr: "Fener Yemi", en: "The Lure" }
+        stat: "cha"
+        taban: 14
+        kat: 0.8
+        etiketler: ["zihin", "isik"]
+        durum: { etki: "sersemleme", sans: 0.4, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} yemini yavaşça sallıyor. Pencerede biri var; tanıdık biri. Farkında olmadan suya doğru bir adım atıyorsun.", en: "{dusman} sways its lure, slow and gentle. There's someone in the window. Someone you know. You take a step toward the water before you notice." }
+      - id: "dip_agzi"
+        ad: { tr: "Dip Ağzı", en: "Abyssal Gulp" }
+        stat: "str"
+        taban: 18
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.4, sure: 3 }
+        bekleme: 0
+        metin: { tr: "{dusman} sudan bir çene olarak yükseliyor; iğne gibi dişlerin arasında bir an kalıyorsun ve seni tükürdüğünde yarın onun ağzında kalıyor.", en: "{dusman} comes up out of the water as nothing but jaw. For a second you're inside a cage of needle teeth, and when it spits you out, part of you stays behind." }
+      - id: "kara_su"
+        ad: { tr: "Kara Su", en: "Blackwater" }
+        stat: "wil"
+        taban: 14
+        kat: 0.8
+        etiketler: ["karanlik", "alan"]
+        durum: { etki: "kor", sans: 0.4, sure: 2 }
+        bekleme: 3
+        metin: { tr: "{dusman} mürekkep gibi kara bir bulut salıyor; iskelenin ışıkları birer birer kayboluyor ve geriye yalnızca o sarı pencere kalıyor.", en: "{dusman} bleeds out an ink-black cloud. The lights on the dock go out one by one until there's nothing left but that yellow window." }
+    xp: 7540
+    kredi: 70
+    ganimet: { fener_yemi: 0.6, canavar_cekirdegi: 1.0, buyuk_iyilesme_iksiri: 0.2 }
+    etiketler: ["hayvan", "deniz", "elit"]
+    boss: false
+    fazlar:
+      - esik: 50
+        metin: { tr: "Yemi titreyip sönüyor. Dip Balıkçısı ilk kez gözleriyle bakmak zorunda kalıyor ve gördüğü şeyden, yani senden, hoşlanmıyor. Kendini iskeleye fırlatıyor; tahtalar ağırlığı altında inliyor.", en: "Its lure flickers and dies. For the first time, the angler has to look with its own eyes, and it doesn't like what it sees: you. It hurls itself up onto the dock, and the planks groan under it." }
+        guclenme: { str: 4, agi: 4 }
+        saldiri:
+          id: "karaya_vurus"
+          ad: { tr: "Karaya Vuruş", en: "Beaching" }
+          stat: "str"
+          taban: 20
+          kat: 0.8
+          etiketler: ["fiziksel", "alan"]
+          durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+          bekleme: 2
+          metin: { tr: "{dusman} bütün gövdesiyle iskeleye çarpıyor; tahtalar havaya fırlıyor ve sen de onlarla birlikte.", en: "{dusman} slams its whole body down on the dock. The planks go flying, and so do you." }
+  # ---------------------------------------------------------------- Kıyıkent · Kordon (EN: the Esplanade)
+  kopuk_ruhu:
+    ad: { tr: "Köpük Ruhu", en: "Spindrift" }
+    aciklama: { tr: "Lodos dalgaları kordonu döverken taşlara çarpıp savrulan köpükten doğmuş bir şey. İnsan boyunda, tuzlu ve soğuk; kırık banklara, devrilmiş fener direklerine yaslanıp dalga sesine benzer bir sesle ağlıyor.", en: "Something born from the foam that flies off the seawall when the winter storms pound the Esplanade. Human-sized, salty and cold. It leans against broken benches and toppled lampposts and cries in a voice that sounds like surf." }
+    kanca: { tr: "Kordona vuran bir dalga geri çekilmiyor. Köpüğü taşların üstünde toplanıyor, doğruluyor ve sana doğru bir adım atıyor.", en: "A wave breaks over the Esplanade and doesn't go back. Its foam gathers on the stones, stands up, and takes a step toward you." }
+    seviye: 22
+    can: 230
+    statlar:
+      str: 8
+      agi: 15
+      end: 9
+      int: 16
+      wis: 14
+      per: 10
+      wil: 12
+      cha: 2
+    davranis: "temkinli"
+    zeki: false
+    zaaf: "simsek"
+    zaaf_metin: { tr: "Bedeni tuzlu su ve hava. Tuzlu su akımı çok iyi iletir: tek bir şimşek onu içinden kaynatır ve köpük, sönmüş bir bira gibi dağılır.", en: "Its body is salt water and air, and salt water carries current beautifully. One bolt of lightning boils it from the inside, and the foam goes flat like a stale beer." }
+    saldirilar:
+      - id: "tuzlu_kopuk"
+        ad: { tr: "Tuzlu Köpük", en: "Brine Froth" }
+        stat: "int"
+        taban: 11
+        kat: 0.8
+        etiketler: ["menzilli", "alan"]
+        durum: { etki: "kor", sans: 0.35, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} kollarını açıyor ve yüzüne bir avuç tuzlu köpük çarpıyor; gözlerin yanıyor, dünya beyaza kesiyor.", en: "{dusman} flings its arms wide and a slap of salt foam hits you full in the face. Your eyes burn and the world goes white." }
+      - id: "bogan_dalga"
+        ad: { tr: "Boğan Dalga", en: "Drowning Surge" }
+        stat: "wis"
+        taban: 14
+        kat: 0.8
+        etiketler: ["alan"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} çöküp bir dalgaya dönüşüyor ve seni kordonun taşlarına yapıştırıyor; ağzın, burnun tuzlu suyla doluyor.", en: "{dusman} collapses into a breaker and pins you to the seawall stones. Your mouth and nose fill with brine." }
+      - id: "ayaz_serpintisi"
+        ad: { tr: "Ayaz Serpintisi", en: "Cold Spray" }
+        stat: "int"
+        taban: 12
+        kat: 0.8
+        etiketler: ["buz", "menzilli"]
+        bekleme: 0
+        metin: { tr: "{dusman} üstüne buz gibi bir serpinti savuruyor; ıslak giysilerin anında kaskatı kesiliyor.", en: "{dusman} hurls an ice-cold spray over you, and your wet clothes go stiff in an instant." }
+    xp: 2600
+    kredi: 8
+    ganimet: { kopuk_tuzu: 0.5, kaya_tuzu: 0.4 }
+    etiketler: ["deniz", "ruh"]
+    boss: false
+  fener_guvesi:
+    ad: { tr: "Fener Güvesi", en: "Lamplight Moth" }
+    aciklama: { tr: "Kordondaki sokak lambalarının etrafında toplanan, kanatları bir şemsiye kadar açılan güveler. Işığa delice tutkunlar: bir el feneri, bir çakmak, bir göz bebeği. Hepsi aynı ölçüde ışık sayılır.", en: "Moths with wings as wide as an umbrella that swarm the Esplanade's streetlamps. They are crazy for light: a flashlight, a lighter, the shine in your eyes. It all counts." }
+    kanca: { tr: "Kordonun yanmayan lambalarından birinin etrafında gri bir bulut dönüyor. Elindeki ışığı fark ettiği an dönmeyi kesiyor.", en: "A gray cloud is circling one of the Esplanade's dead streetlamps. The second it notices the light in your hand, it stops circling." }
+    seviye: 21
+    can: 160
+    statlar:
+      str: 6
+      agi: 14
+      end: 7
+      int: 10
+      wis: 9
+      per: 13
+      wil: 8
+      cha: 2
+    davranis: "suru"
+    zeki: false
+    zaaf: "ruzgar"
+    zaaf_metin: { tr: "Kanatları büyük ama tüy kadar hafif. Sert bir rüzgar sürüyü denize savurur; ıslanan bir güve bir daha havalanamaz.", en: "Big wings, feather-light bodies. A hard gust throws the whole swarm out over the water, and a moth that gets wet never flies again." }
+    saldirilar:
+      - id: "kanat_tozu"
+        ad: { tr: "Kanat Tozu", en: "Wing Dust" }
+        stat: "int"
+        taban: 10
+        kat: 0.7
+        etiketler: ["alan", "zehir"]
+        durum: { etki: "kor", sans: 0.35, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} başının üstünde çırpınıyor ve gözlerine gümüşi, kaşındıran bir toz yağıyor.", en: "{dusman} beats its wings right over your head, and silvery, itching dust rains into your eyes." }
+      - id: "hortum"
+        ad: { tr: "Emici Hortum", en: "Proboscis" }
+        stat: "str"
+        taban: 10
+        kat: 0.8
+        etiketler: ["yakin", "can_emme"]
+        durum: { etki: "kanama", sans: 0.3, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} göz kapağının dibine konuyor ve kıvrık hortumunu açıp tam gözünün kenarına saplıyor.", en: "{dusman} lands right at the edge of your eyelid, uncoils its proboscis, and stabs it into the corner of your eye." }
+      - id: "isik_cilginligi"
+        ad: { tr: "Işık Çılgınlığı", en: "Light Frenzy" }
+        stat: "wil"
+        taban: 9
+        kat: 0.7
+        etiketler: ["zihin", "alan"]
+        durum: { etki: "korku", sans: 0.3, sure: 1 }
+        bekleme: 3
+        metin: { tr: "{dusman} ışığının etrafında öyle bir hızla dönmeye başlıyor ki fırtına kanatlardan ibaret bir hortuma dönüşüyor ve sen o hortumun tam ortasındasın.", en: "{dusman} starts circling your light so fast the swarm turns into a tornado made of wings, and you're standing in the eye of it." }
+    xp: 1700
+    kredi: 5
+    ganimet: { guve_tozu: 0.5, goz_cicegi: 0.1 }
+    etiketler: ["bocek"]
+    boss: false
+  kemik_fayton:
+    ad: { tr: "Kemik Fayton", en: "Bone Carriage" }
+    aciklama: { tr: "Entegrasyon sabahı kordonda turist taşıyan bir fayton. At öldü, arabacı öldü, yolcular öldü; fayton durmadı. Atın iskeleti hâlâ koşumlarda, göz çukurlarında fener yağıyla yanan iki alev; araba hâlâ aynı turu atıyor ve önüne çıkanı ezip geçiyor.", en: "On the morning of Integration, this carriage was hauling tourists down the Esplanade. The horse died. The driver died. The passengers died. The carriage never stopped. The horse's skeleton is still in harness with two lamp-oil flames burning in its eye sockets, and the carriage still runs the same loop, flattening anything in its way." }
+    kanca: { tr: "Kordonun ucundan toynak sesleri geliyor; nal sesi değil, kemiğin taşa çarpışı. Ardından bir çıngırak.", en: "Hoofbeats come from the far end of the Esplanade. Not horseshoes: bone on stone. Then a little bell." }
+    seviye: 23
+    can: 300
+    statlar:
+      str: 18
+      agi: 13
+      end: 15
+      int: 5
+      wis: 6
+      per: 11
+      wil: 14
+      cha: 3
+    davranis: "agresif"
+    zeki: false
+    zaaf: "goz"
+    zaaf_metin: { tr: "Atın göz çukurlarındaki iki alev, onu ayakta tutan şey. Birini söndür ve at körleşip koşumlarıyla birlikte kendi arabasına dolanır.", en: "The two flames in the horse's sockets are what keep the thing moving. Put one out and the horse goes blind and tangles itself up in its own harness." }
+    saldirilar:
+      - id: "toynak_yagmuru"
+        ad: { tr: "Toynak Yağmuru", en: "Hoofbeats" }
+        stat: "str"
+        taban: 13
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.25, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} şaha kalkıyor; kemik toynaklar arka arkaya göğsüne iniyor.", en: "{dusman} rears up, and the bone hooves come down on your chest one after another." }
+      - id: "tekerlek_ezmesi"
+        ad: { tr: "Tekerlek Ezmesi", en: "Run Down" }
+        stat: "end"
+        taban: 15
+        kat: 0.8
+        etiketler: ["fiziksel"]
+        durum: { etki: "kanama", sans: 0.35, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} dönüp üstüne sürüyor; demir çemberli tekerlek bacağının üstünden geçiyor ve çıngırak neşeyle çalıyor.", en: "{dusman} swings around and runs you down. An iron-rimmed wheel rolls right over your leg, and the little bell jingles cheerfully." }
+      - id: "hayalet_kirbac"
+        ad: { tr: "Hayalet Kırbaç", en: "Phantom Whip" }
+        stat: "wil"
+        taban: 11
+        kat: 0.8
+        etiketler: ["ses", "zihin"]
+        durum: { etki: "korku", sans: 0.35, sure: 2 }
+        bekleme: 3
+        metin: { tr: "Arabacının boş koltuğundan bir kırbaç şaklıyor. Kimse yok; ama {dusman} o sesle hızlanıyor ve sen de bir an yolcuların çığlığını duyuyorsun.", en: "A whip cracks from the empty driver's seat. Nobody's there, but {dusman} picks up speed at the sound, and for a moment you hear the passengers screaming." }
+    xp: 2830
+    kredi: 14
+    ganimet: { fayton_cingiragi: 0.4, hurda: 0.4 }
+    etiketler: ["olu", "kukla"]
+    boss: false
+  dalgakiran:
+    ad: { tr: "Dalgakıran", en: "The Breakwater" }
+    aciklama: { tr: "Kordonu denizden koruyan beton bloklar, ilk taşmada ayağa kalkıp birbirine kenetlendi. Şimdi iki kat yüksekliğinde, dört kollu, yosun ve midye kaplı bir dev; kıyıyı korumayı bırakıp kıyıya çıkanı ezmeye başladı.", en: "The concrete jacks that kept the sea off the Esplanade stood up during the first gate break and locked together. Now it's a giant two stories tall with four arms, crusted in barnacles and kelp, and it has stopped protecting the shore and started crushing whatever walks on it." }
+    kanca: { tr: "Kordonun ucundaki dalgakıran bloklarından biri yerinden oynuyor. Sonra hepsi. Deniz bir an korunaksız kalıyor ve dalgalar sevinçle içeri dolarken bloklar sana dönüyor.", en: "One of the concrete jacks at the end of the seawall shifts. Then all of them. For a second the sea has nothing in its way, and as the waves come pouring in, the blocks turn toward you." }
+    seviye: 28
+    can: 760
+    statlar:
+      str: 36
+      agi: 10
+      end: 40
+      int: 12
+      wis: 20
+      per: 18
+      wil: 32
+      cha: 2
+    davranis: "agresif"
+    zeki: false
+    zaaf: "delici"
+    zaaf_metin: { tr: "Blokların birleştiği yerlerde, midyelerin altında ince çatlaklar var. Sivri bir uç oraya girerse dalgakıran kendi ağırlığıyla yarılır.", en: "Where the blocks lock together, under the barnacles, there are thin cracks. Get a point in there and the Breakwater splits under its own weight." }
+    saldirilar:
+      - id: "tetrapod_yumrugu"
+        ad: { tr: "Beton Yumruk", en: "Tetrapod Fist" }
+        stat: "str"
+        taban: 20
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} dört kollu bir beton bloğu üstüne indiriyor; yer çatlıyor ve sen o çatlağın içindesin.", en: "{dusman} brings a four-armed concrete block down on you. The ground cracks, and you're in the crack." }
+      - id: "dalga_kirma"
+        ad: { tr: "Dalga Kırma", en: "Breaker Slam" }
+        stat: "end"
+        taban: 18
+        kat: 0.8
+        etiketler: ["fiziksel", "alan"]
+        durum: { etki: "kanama", sans: 0.3, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} kollarını kordona çarpıyor; arkasından taşan dalga, midye kabuklarıyla dolu bir duvar gibi üstüne yıkılıyor.", en: "{dusman} hammers its arms into the seawall, and the wave that comes over behind it falls on you like a wall full of broken shells." }
+      - id: "tuz_kabugu"
+        ad: { tr: "Tuz Kabuğu", en: "Salt Crust" }
+        stat: "end"
+        taban: 16
+        kat: 0.6
+        etiketler: ["fiziksel"]
+        durum: { etki: "kalkan", sans: 1.0, sure: 2 }
+        bekleme: 3
+        metin: { tr: "{dusman} omzuyla sana yükleniyor; geri çekilirken gövdesini beyaz, kaya gibi bir tuz kabuğu kaplıyor.", en: "{dusman} shoulders into you, and as it pulls back, a white crust of salt hard as rock spreads over its body." }
+    xp: 8060
+    kredi: 90
+    ganimet: { dalgakiran_tasi: 0.6, canavar_cekirdegi: 1.0, kopuk_tuzu: 0.5 }
+    etiketler: ["deniz", "kukla", "elit"]
+    boss: false
+    fazlar:
+      - esik: 50
+        metin: { tr: "Bloklardan biri çatırdayıp kopuyor ve denize yuvarlanıyor. Dalgakıran sallanıyor, sonra denize dönüp onu çağırıyor: arkasında bir dalga, kordondan da yüksek bir dalga, kabarmaya başlıyor.", en: "One of the blocks cracks off and tumbles into the sea. The Breakwater sways, then turns to the water and calls it, and behind it a wave starts to rise, taller than the Esplanade." }
+        guclenme: { str: 4, wil: 4 }
+        saldiri:
+          id: "med_dalgasi"
+          ad: { tr: "Med Dalgası", en: "Storm Surge" }
+          stat: "wil"
+          taban: 22
+          kat: 0.8
+          etiketler: ["alan"]
+          durum: { etki: "sersemleme", sans: 0.4, sure: 1 }
+          bekleme: 3
+          metin: { tr: "{dusman} kollarını açıyor ve arkasındaki dalga kordonu baştan sona süpürüyor; banklar, direkler ve sen, hepiniz aynı yöne savruluyorsunuz.", en: "{dusman} spreads its arms, and the wave behind it sweeps the Esplanade end to end. Benches, lampposts and you all go the same direction." }
+  # ---------------------------------------------------------------- Kıyıkent · Eski Şehir (EN: Old Town)
+  sokak_golgesi:
+    ad: { tr: "Çıkmaz Gölgesi", en: "Alley Shade" }
+    aciklama: { tr: "Eski Şehir'in güneş görmeyen dar sokaklarında, iki duvarın birbirine yaslandığı yerlerde yaşayan bir gölge. Kendi sahibi yok; geçenlerin gölgesini ödünç alıp onlarla birlikte yürüyor, sonra boğazlarına sarılıyor.", en: "A shadow that lives in Old Town's sunless alleys, wherever two walls lean close enough to touch. It has no owner of its own. It borrows the shadows of people walking by, walks along with them for a while, and then goes for the throat." }
+    kanca: { tr: "Sokak lambasının altında gölgen iki tane. Biri seninle birlikte duruyor. Öteki durmuyor.", en: "Under the streetlight, you've got two shadows. One of them stops when you stop. The other one doesn't." }
+    seviye: 23
+    can: 230
+    statlar:
+      str: 10
+      agi: 17
+      end: 8
+      int: 14
+      wis: 12
+      per: 16
+      wil: 13
+      cha: 2
+    davranis: "temkinli"
+    zeki: false
+    zaaf: "isik"
+    zaaf_metin: { tr: "Var olabilmek için ışığın kenarına ihtiyacı var ama ışığın ortasında yaşayamaz. Güçlü bir ışık her yanını aydınlatınca tutunacak bir kenar bulamaz ve incelip yırtılır.", en: "It needs the edge of a light to exist, but it can't survive in the middle of one. Flood it from every side and it can't find an edge to hold on to. It thins out and tears." }
+    saldirilar:
+      - id: "duvardan_kol"
+        ad: { tr: "Duvardan Uzanan Kol", en: "Wall Grab" }
+        stat: "agi"
+        taban: 12
+        kat: 0.8
+        etiketler: ["karanlik", "yakin"]
+        durum: { etki: "korku", sans: 0.25, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} sıvası dökülmüş duvardan bir kol gibi uzanıyor ve ensenden kavrayıp seni taşlara yapıştırıyor.", en: "{dusman} reaches out of the crumbling plaster like an arm, catches you by the back of the neck, and slams you into the stones." }
+      - id: "cikmaz_bogumu"
+        ad: { tr: "Çıkmaz Boğumu", en: "Dead-End Choke" }
+        stat: "wil"
+        taban: 13
+        kat: 0.8
+        etiketler: ["karanlik", "zihin"]
+        durum: { etki: "kanama", sans: 0.25, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} kendi gölgene karışıyor ve gölgen boynuna sarılıyor. Kendi ellerinin soğukluğunu tenine değerken hissediyorsun.", en: "{dusman} melts into your own shadow, and your shadow wraps around your neck. You can feel the cold of your own hands on your skin." }
+      - id: "lambalari_sondurme"
+        ad: { tr: "Işıkları Söndür", en: "Lights Out" }
+        stat: "int"
+        taban: 11
+        kat: 0.7
+        etiketler: ["karanlik", "alan"]
+        durum: { etki: "kor", sans: 0.4, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} sokak boyunca akıyor ve geçtiği her lamba bir mum gibi sönüyor. Karanlıkta yalnızca onun hareket ettiğini biliyorsun.", en: "{dusman} pours down the alley, and every lamp it passes goes out like a candle. In the dark, the only thing you know is that it's moving." }
+    xp: 2830
+    kredi: 9
+    ganimet: { golge_ipligi: 0.45, kul: 0.3 }
+    etiketler: ["ruh"]
+    boss: false
+  karaborsa_tetikcisi:
+    ad: { tr: "Karaborsa Tetikçisi", en: "Black Market Enforcer" }
+    aciklama: { tr: "Eski Şehir'in karaborsasında borç tahsil eden, öğreticiden E kademeyle çıkmış ve sınıfını başkalarını sindirmek için kullanan biri. Kimseye bağlı değil; kim daha çok ödüyorsa ona çalışıyor. İşin kötüye gittiğini ilk o anlar ve ilk o kaçar.", en: "A debt collector for Old Town's black market who walked out of the tutorial at E grade and has been using his class to lean on people ever since. He's loyal to no one; he works for whoever pays more. He's always the first to realize a job's gone sideways, and the first to bolt." }
+    kanca: { tr: "Dar sokağın iki ucunda birer gölge beliriyor. Önündeki gülümsüyor: \"Hayırdır? Bu sokağın geçiş ücretini kimse söylemedi mi sana?\"", en: "A figure steps into each end of the alley. The one in front of you smiles. \"Something wrong? Nobody told you about the toll on this street?\"" }
+    seviye: 24
+    can: 280
+    statlar:
+      str: 14
+      agi: 16
+      end: 12
+      int: 12
+      wis: 9
+      per: 15
+      wil: 10
+      cha: 12
+    davranis: "kacan"
+    zeki: true
+    zaaf: "zihin"
+    zaaf_metin: { tr: "Bütün cesareti yanındaki adamlardan ve senin onu tanımamandan geliyor. Kim olduğunu bildiğini, kime çalıştığını bildiğini söyle; elleri titremeye başlar.", en: "All his nerve comes from the guys at his back and from you not knowing who he is. Tell him you know his name, and who he works for, and watch his hands start to shake." }
+    saldirilar:
+      - id: "musta"
+        ad: { tr: "Muşta", en: "Brass Knuckles" }
+        stat: "str"
+        taban: 13
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.2, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} muştalı yumruğunu kaburgalarının arasına gömüyor ve kulağına \"Faizi de var\" diye fısıldıyor.", en: "{dusman} buries a brass-knuckled fist between your ribs and murmurs in your ear, \"That's the interest.\"" }
+      - id: "kirli_atis"
+        ad: { tr: "Kirli Atış", en: "Cheap Shot" }
+        stat: "agi"
+        taban: 12
+        kat: 0.8
+        etiketler: ["delici", "menzilli"]
+        durum: { etki: "kanama", sans: 0.3, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} ceketinin altından kısa bir tatar yayı çekip daha sen dönmeden dizinin arkasına bir cıvata yolluyor.", en: "{dusman} pulls a sawed-off crossbow from under his jacket and puts a bolt in the back of your knee before you've even turned around." }
+      - id: "duman_bombasi"
+        ad: { tr: "Duman Bombası", en: "Smoke Bomb" }
+        stat: "int"
+        taban: 9
+        kat: 0.6
+        etiketler: ["alan"]
+        durum: { etki: "kor", sans: 0.4, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} ayağının dibine bir kutu fırlatıyor; sokak gri, acı bir dumanla doluyor ve dumanın içinden bir kahkaha geliyor.", en: "{dusman} tosses a canister at your feet. The alley fills with bitter gray smoke, and somewhere inside it, somebody laughs." }
+      - id: "ayak_oyunu"
+        ad: { tr: "Ayak Oyunu", en: "Footwork" }
+        stat: "agi"
+        taban: 8
+        kat: 0.5
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "hizlanma", sans: 1.0, sure: 2 }
+        bekleme: 4
+        metin: { tr: "{dusman} geri sıçrayıp seninle arasına bir el arabası devriyor ve topuklarının üstünde dans etmeye başlıyor. Sınıfının bir yeteneği; şimdi iki kat hızlı.", en: "{dusman} skips back, kicks a handcart over between you, and starts bouncing on his toes. Some class skill. He's twice as fast now." }
+    xp: 3050
+    kredi: 45
+    ganimet: { karaborsa_fisi: 0.4, kucuk_iyilesme_iksiri: 0.35, ates_sisesi: 0.1 }
+    etiketler: ["insan"]
+    boss: false
+  kaldirim_solucani:
+    ad: { tr: "Kaldırım Solucanı", en: "Cobble Worm" }
+    aciklama: { tr: "Eski Şehir'in Arnavut kaldırımlı yokuşlarının altında büyümüş, bir otobüs boyunda bir solucan. Söktüğü kaldırım taşlarını pul gibi sırtına yapıştırıyor; sokakta yürürken üstüne bastığın taşın ona ait olup olmadığını asla bilemiyorsun.", en: "A worm as long as a city bus that grew up under Old Town's cobblestone hills. It glues the cobbles it tears loose onto its back like scales, so when you're walking down the street you never know if the stone under your boot belongs to it." }
+    kanca: { tr: "Yokuşun kaldırım taşları bir dalga gibi kabarıp iniyor. Taşlar yerine oturuyor. Sonra bir dalga daha geliyor, bu kez sana doğru.", en: "The cobbles on the hill swell and settle like a wave. The stones fall back into place. Then another wave comes, and this one's heading your way." }
+    seviye: 23
+    can: 320
+    statlar:
+      str: 18
+      agi: 9
+      end: 17
+      int: 3
+      wis: 6
+      per: 13
+      wil: 12
+      cha: 1
+    davranis: "agresif"
+    zeki: false
+    zaaf: "ses"
+    zaaf_metin: { tr: "Gözü yok; dünyayı kaldırımın titreşimiyle duyuyor. Ani, sağır edici bir ses bütün sinirlerini aynı anda yakar ve solucan, yüzeyde kıvranarak kalır.", en: "It has no eyes; it hears the world through the shiver of the cobbles. A sudden, deafening noise lights up every nerve it has at once, and it ends up writhing on the surface." }
+    saldirilar:
+      - id: "kaldirim_patlamasi"
+        ad: { tr: "Kaldırım Patlaması", en: "Cobble Burst" }
+        stat: "str"
+        taban: 15
+        kat: 0.8
+        etiketler: ["fiziksel", "alan"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} tam ayaklarının altından yüzeye fırlıyor; kaldırım taşları havada bir saniye asılı kalıp üstüne yağıyor.", en: "{dusman} erupts right under your feet. The cobblestones hang in the air for a second, then come raining down on you." }
+      - id: "tas_pullu_sarilma"
+        ad: { tr: "Taş Pullu Sarılma", en: "Cobblescale Coil" }
+        stat: "str"
+        taban: 14
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.25, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} bedenine dolanıp sıkıyor; sırtındaki taşların sivri köşeleri derine gömülüyor.", en: "{dusman} coils around you and squeezes, and the sharp corners of the stones on its back dig in deep." }
+      - id: "cukur"
+        ad: { tr: "Göçük", en: "Sinkhole" }
+        stat: "end"
+        taban: 11
+        kat: 0.8
+        etiketler: ["fiziksel"]
+        durum: { etki: "korku", sans: 0.3, sure: 1 }
+        bekleme: 3
+        metin: { tr: "{dusman} altındaki toprağı boşaltıyor; zemin bir anda çöküyor ve beline kadar bir çukura gömülüyorsun. Aşağıda bir şey ayağını kokluyor.", en: "{dusman} hollows out the dirt underneath you. The street drops away and you're waist-deep in a sinkhole, and something down there is sniffing at your boots." }
+    xp: 2830
+    kredi: 7
+    ganimet: { kaldirim_pulu: 0.5, canavar_cekirdegi: 0.1 }
+    etiketler: ["hayvan"]
+    boss: false
+  bedesten_agasi:
+    ad: { tr: "Bedesten Ağası", en: "The Undercity Landlord" }
+    aciklama: { tr: "Eski Şehir'in kubbeli bedesteninin içinde, kapanmış dükkânların tabelalarından, eski tapu defterlerinden ve kira senetlerinden örülmüş bir şey. Bedestene sığınan herkesten kira alıyor; parayla değil, ömürle. Defterinde kimin ne kadar borcu kaldığı yazıyor ve defter hiç yanılmıyor.", en: "A thing woven out of shuttered shop signs, old property deeds and rent receipts, living down in the bricked-over streets of Old Town's underground. Everyone who shelters down there pays it rent. Not in money. In years. Its ledger lists exactly how much everyone still owes, and the ledger is never wrong." }
+    kanca: { tr: "Bedestenin karanlığında bir defter açılıyor; sayfaların hışırtısı kubbede yankılanıyor. Kuru bir ses adını okuyor ve ekliyor: \"Kirası ödenmemiş.\"", en: "In the dark of the underground, a ledger falls open, and the rustle of its pages echoes off the old brick. A dry voice reads your name out loud and adds: \"Rent outstanding.\"" }
+    seviye: 28
+    can: 640
+    statlar:
+      str: 20
+      agi: 16
+      end: 24
+      int: 32
+      wis: 28
+      per: 24
+      wil: 34
+      cha: 30
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "ates"
+    zaaf_metin: { tr: "Gövdesi kâğıttan ve kurumuş tahtadan; defteri ise ruhu. Ateş değdiği her senedi siler ve silinen her senetle biraz daha küçülür.", en: "Its body is paper and dried-out wood, and the ledger is its soul. Every receipt the fire touches is a debt wiped clean, and with every one, it gets a little smaller." }
+    saldirilar:
+      - id: "kira_tahsili"
+        ad: { tr: "Kira Tahsili", en: "Rent Collection" }
+        stat: "wil"
+        taban: 17
+        kat: 0.8
+        etiketler: ["karanlik", "can_emme"]
+        durum: { etki: "kanama", sans: 0.4, sure: 3 }
+        bekleme: 0
+        metin: { tr: "{dusman} kâğıt elini göğsüne koyuyor ve defterine bir satır ekliyor. Avucunun altından bir şey çekilip gidiyor: birkaç gün, belki bir hafta.", en: "{dusman} lays a paper hand on your chest and writes a line in its ledger. Something drains out from under its palm. A few days. Maybe a week." }
+      - id: "tabela_firtinasi"
+        ad: { tr: "Tabela Fırtınası", en: "Signboard Storm" }
+        stat: "int"
+        taban: 18
+        kat: 0.8
+        etiketler: ["fiziksel", "alan"]
+        durum: { etki: "kanama", sans: 0.3, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} kollarını açıyor; kapanmış dükkânların paslı tabelaları duvarlardan sökülüp üstüne yağıyor. \"Kuyumcu\", \"Bakırcı\", \"Devren Kiralık\".", en: "{dusman} spreads its arms, and the rusted signs of a hundred dead shops tear off the walls and rain down on you. JEWELER. HARDWARE. FOR LEASE." }
+      - id: "senet"
+        ad: { tr: "Senet", en: "Promissory Note" }
+        stat: "cha"
+        taban: 14
+        kat: 0.8
+        etiketler: ["zihin"]
+        durum: { etki: "sersemleme", sans: 0.4, sure: 1 }
+        bekleme: 3
+        metin: { tr: "{dusman} önüne bir kâğıt uzatıyor. İmzan altında. Ne zaman imzaladığını hatırlamıyorsun ama elin, kendi isteğinle, kalemi arıyor.", en: "{dusman} holds out a slip of paper. Your signature's on the bottom. You don't remember signing it, but your hand, all on its own, is reaching for the pen." }
+    xp: 8060
+    kredi: 160
+    ganimet: { kira_defteri: 0.6, canavar_cekirdegi: 1.0, karaborsa_fisi: 0.5 }
+    etiketler: ["ruh", "elit"]
+    boss: false
+    fazlar:
+      - esik: 50
+        metin: { tr: "Defterin sayfaları kendi kendine çevriliyor ve en sona geliyor. Bedesten Ağası seni yeniden hesaplıyor; kuru bir sesle mırıldanıyor: \"Borç faize bağlandı.\" Tabelalar etrafında dönmeye başlıyor.", en: "The ledger's pages flip on their own, all the way to the back. The Landlord runs your numbers again and mutters, in that dry voice: \"Account now accruing interest.\" The signs start circling it." }
+        guclenme: { int: 4, wil: 4 }
+        saldiri:
+          id: "hesap_kapanisi"
+          ad: { tr: "Hesap Kapanışı", en: "Closing the Books" }
+          stat: "wil"
+          taban: 20
+          kat: 0.8
+          etiketler: ["karanlik", "zihin"]
+          durum: { etki: "korku", sans: 0.45, sure: 2 }
+          bekleme: 3
+          metin: { tr: "{dusman} defterini sertçe kapatıyor. Ses kubbede bir tabut kapağı gibi yankılanıyor ve bir an, ödemediğin bütün borçların ağırlığını omuzlarında hissediyorsun.", en: "{dusman} slams its ledger shut. The sound booms off the brick like a coffin lid, and for one moment you feel the weight of every debt you ever skipped out on." }
+  # ---------------------------------------------------------------- Kıyıkent · Sanayi (EN: the Ironworks)
+  curuf_iti:
+    ad: { tr: "Cüruf İti", en: "Slag Hound" }
+    aciklama: { tr: "Sanayinin dökümhanelerinde dolaşan sokak köpekleri, Entegrasyon gecesi erimiş cürufun içinde uyudu ve uyanmadı; ya da uyandı ama artık köpek değildi. Damarlarında kızgın cüruf akıyor, havlamaları körük gibi sıcak.", en: "The strays that used to hang around the Ironworks' foundries curled up in the warm slag on the night of Integration and never woke up. Or they did wake up, and they weren't dogs anymore. Molten slag runs in their veins, and their barks come out hot as a bellows." }
+    kanca: { tr: "Dökümhanenin kapısının altından turuncu bir ışık sızıyor ve ışığın içinden, hırlayan dört gölge çıkıyor.", en: "Orange light leaks out under the foundry door, and four growling shapes come out of it." }
+    seviye: 24
+    can: 220
+    statlar:
+      str: 15
+      agi: 14
+      end: 13
+      int: 3
+      wis: 5
+      per: 12
+      wil: 10
+      cha: 1
+    davranis: "suru"
+    zeki: false
+    zaaf: "delici"
+    zaaf_metin: { tr: "Kabuk gibi soğumuş cüruf derileri sert ama kırılgan. İnce bir uç o kabuğu deler ve içerideki erimiş çekirdeğe ulaşır; it kendi ateşiyle söner.", en: "Their hides are slag cooled to a crust, hard but brittle. A thin point cracks through and reaches the molten core underneath, and the dog burns out on its own fire." }
+    saldirilar:
+      - id: "erimis_isirik"
+        ad: { tr: "Erimiş Isırık", en: "Molten Bite" }
+        stat: "str"
+        taban: 13
+        kat: 0.8
+        etiketler: ["ates", "yakin"]
+        durum: { etki: "yanma", sans: 0.35, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} kolunu kapıyor; dişlerinin değdiği yerde kumaş tutuşuyor, deri cızırdıyor.", en: "{dusman} clamps onto your arm. Where its teeth touch, your sleeve catches fire and your skin sizzles." }
+      - id: "curuf_silkme"
+        ad: { tr: "Cüruf Silkme", en: "Slag Shake" }
+        stat: "end"
+        taban: 11
+        kat: 0.7
+        etiketler: ["ates", "alan"]
+        durum: { etki: "kor", sans: 0.3, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} ıslak bir köpek gibi silkiniyor; etrafına kıvılcım ve kızgın cüruf damlaları saçılıyor.", en: "{dusman} shakes itself off like a wet dog, and a spray of sparks and molten droplets flies in every direction." }
+    xp: 2100
+    kredi: 6
+    ganimet: { curuf_cekirdegi: 0.4, kul: 0.5 }
+    etiketler: ["hayvan", "ates"]
+    boss: false
+  catal_cene:
+    ad: { tr: "Çatal Çene", en: "Forkjaw" }
+    aciklama: { tr: "Lonca'nın depolarında yük taşıyan bir forklift. Bir sabah kendi kendine çalıştı ve bir daha durmadı. Çatalları bir çene gibi açılıp kapanıyor; geri vites uyarısı çalmaya başladığında artık çok geçtir.", en: "A forklift that used to haul pallets in the Guild's warehouses. One morning it started up on its own and never shut off. Its forks open and close like a jaw, and by the time you hear the backup beeper, it's already too late." }
+    kanca: { tr: "Deponun karanlığında bir motor öksürerek çalışıyor. İki far yanıyor. Çatallar yerden bir metre kalkıyor ve tam göğüs hizanda duruyor.", en: "Somewhere in the dark of the warehouse, an engine coughs to life. Two headlights snap on. The forks rise about three feet off the floor and stop, level with your chest." }
+    seviye: 25
+    can: 330
+    statlar:
+      str: 20
+      agi: 10
+      end: 18
+      int: 6
+      wis: 4
+      per: 12
+      wil: 13
+      cha: 1
+    davranis: "agresif"
+    zeki: false
+    zaaf: "simsek"
+    zaaf_metin: { tr: "Bir akü ve bir yığın kabloyla yaşıyor. Güçlü bir akım devrelerini yakar, çatalları kilitlenir ve motor boğulur.", en: "It runs on one battery and a nest of wiring. A strong jolt fries its circuits, locks the forks in place, and stalls the engine." }
+    saldirilar:
+      - id: "catal_saplama"
+        ad: { tr: "Çatal Saplama", en: "Tine Skewer" }
+        stat: "str"
+        taban: 15
+        kat: 0.9
+        etiketler: ["fiziksel", "delici"]
+        durum: { etki: "kanama", sans: 0.35, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} tam gaz üstüne sürüyor; çatallardan biri böğrüne giriyor ve seni bir palet gibi duvara taşıyor.", en: "{dusman} floors it. One tine catches you in the side and it carries you into the wall like a pallet." }
+      - id: "kaldir_at"
+        ad: { tr: "Kaldır At", en: "Lift and Dump" }
+        stat: "str"
+        taban: 13
+        kat: 0.8
+        etiketler: ["fiziksel"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} çatallarını altına sokup seni dört metre havaya kaldırıyor, sonra çatalları devirip beton zemine boşaltıyor.", en: "{dusman} slides its forks under you, hoists you twelve feet up, then tips them and dumps you onto the concrete." }
+      - id: "geri_vites"
+        ad: { tr: "Geri Vites Uyarısı", en: "Backup Beeper" }
+        stat: "wil"
+        taban: 10
+        kat: 0.7
+        etiketler: ["ses", "zihin"]
+        durum: { etki: "korku", sans: 0.35, sure: 1 }
+        bekleme: 3
+        metin: { tr: "Bip. Bip. Bip. {dusman} geri geri sana doğru geliyor; ses her öttüğünde kalbin bir kez atmayı unutuyor.", en: "Beep. Beep. Beep. {dusman} backs toward you, and every time it beeps, your heart forgets to beat once." }
+    xp: 3280
+    kredi: 12
+    ganimet: { catal_disi: 0.4, hurda: 0.6, canli_bakir: 0.2 }
+    etiketler: ["mekanik"]
+    boss: false
+  boya_buhari:
+    ad: { tr: "Boya Buharı", en: "Paint-Fume Wraith" }
+    aciklama: { tr: "Sanayinin boyahanelerinde, tinerin, vernik ve solventin birbirine karıştığı kapalı odalarda yoğunlaşmış zehirli bir bulut. Bir yüzü yok ama gülümsemesi var; içine çekildiğinde başın döner ve onu sevmeye başlarsın.", en: "A toxic cloud that condensed out of the Ironworks' paint shops, in the sealed rooms where thinner, varnish and solvent all ran together. It has no face, but it has a smile. Breathe it in and your head swims, and you start to like it." }
+    kanca: { tr: "Boyahanenin kapısını açtığın an keskin, tatlı bir koku burnuna doluyor. Gökkuşağı renginde bir sis kapı aralığından sana doğru eğiliyor.", en: "The second you open the paint-shop door, a sharp, sweet smell fills your nose. A haze in every color of an oil slick leans out through the gap toward you." }
+    seviye: 24
+    can: 210
+    statlar:
+      str: 4
+      agi: 13
+      end: 9
+      int: 17
+      wis: 15
+      per: 11
+      wil: 14
+      cha: 3
+    davranis: "temkinli"
+    zeki: false
+    zaaf: "ruzgar"
+    zaaf_metin: { tr: "Kapalı, havasız odalarda güçlü. Sert bir rüzgar onu inceltir, dağıtır; geriye yalnızca hafif bir baş ağrısı kalır.", en: "It's strong in sealed, stale rooms. A hard wind thins it out and scatters it, and all that's left is a mild headache." }
+    saldirilar:
+      - id: "tiner_nefesi"
+        ad: { tr: "Tiner Nefesi", en: "Thinner Breath" }
+        stat: "int"
+        taban: 12
+        kat: 0.8
+        etiketler: ["zehir", "alan"]
+        durum: { etki: "zehir", sans: 0.45, sure: 3 }
+        bekleme: 0
+        metin: { tr: "{dusman} yüzüne sarılıyor; ciğerlerin tatlı, yakıcı bir şeyle doluyor ve öksürmek bile acıtıyor.", en: "{dusman} wraps itself around your face. Your lungs fill with something sweet and burning, and even coughing hurts." }
+      - id: "renk_korlugu"
+        ad: { tr: "Renk Körlüğü", en: "Color Blind" }
+        stat: "wis"
+        taban: 10
+        kat: 0.7
+        etiketler: ["zihin"]
+        durum: { etki: "kor", sans: 0.4, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} gözlerinin önünde dalgalanıyor; dünyanın renkleri birbirine akıyor ve nerede durduğunu bile kestiremiyorsun.", en: "{dusman} ripples in front of your eyes. The colors of the world run together until you can't even tell where you're standing." }
+      - id: "parlama"
+        ad: { tr: "Parlama", en: "Flashover" }
+        stat: "int"
+        taban: 16
+        kat: 0.8
+        etiketler: ["ates", "alan"]
+        durum: { etki: "yanma", sans: 0.45, sure: 2 }
+        bekleme: 3
+        metin: { tr: "Bir yerde bir kıvılcım çakıyor ve {dusman} tek bir gürlemeyle alev alıyor; oda bir anlığına ateşten bir nefes alıyor.", en: "A spark pops somewhere, and {dusman} goes up in one big whump. For an instant, the whole room takes a breath of fire." }
+    xp: 3050
+    kredi: 8
+    ganimet: { boya_ozu: 0.45, cam_sise: 0.4 }
+    etiketler: ["ruh", "zehir"]
+    boss: false
+  yuksek_firin:
+    ad: { tr: "Yüksek Fırın", en: "The Blast Furnace" }
+    aciklama: { tr: "Sanayinin kalbindeki yüksek fırın, ilk kapı taşmasında kapıdan sızan bir şeyi yuttu ve o şey fırının kendisi oldu. Şimdi kızgın demirden bacaklar üstünde yürüyen, ağzı bir döküm kepçesi, göğsü bir körük olan bir dev. Lonca onu durdurmaya çalışmıyor; etrafına çit çekip içinde ürettiği çeliği topluyor.", en: "During the first gate break, the blast furnace at the heart of the Ironworks swallowed something that crawled out of a Gate, and that something became the furnace. Now it's a giant walking on legs of red-hot iron, with a casting ladle for a mouth and a bellows for a chest. The Guild doesn't try to stop it. They fenced it in and harvest the steel it makes." }
+    kanca: { tr: "Fabrikanın çatısındaki bacadan siyah bir duman yükseliyor ve tuğla duvarlar içeriden kızarmaya başlıyor. Sonra duvarlardan biri yürüyor.", en: "Black smoke rolls out of the stack on the mill roof, and the brick walls start to glow from the inside. Then one of the walls starts walking." }
+    seviye: 30
+    can: 820
+    statlar:
+      str: 38
+      agi: 10
+      end: 42
+      int: 32
+      wis: 18
+      per: 18
+      wil: 32
+      cha: 2
+    davranis: "agresif"
+    zeki: false
+    zaaf: "buz"
+    zaaf_metin: { tr: "Ateşi sürekli yanmak zorunda; ısısı düşerse demir bacakları kasılıp çatlar. Buz, kızgın gövdesine değdiği her yerde onu kendi kendine kırar.", en: "Its fire has to keep burning. If the heat drops, the iron in its legs contracts and cracks. Wherever ice touches that red-hot body, the metal tears itself apart." }
+    saldirilar:
+      - id: "dokum_kepcesi"
+        ad: { tr: "Döküm Kepçesi", en: "Ladle Pour" }
+        stat: "str"
+        taban: 21
+        kat: 0.8
+        etiketler: ["ates", "yakin"]
+        durum: { etki: "yanma", sans: 0.45, sure: 3 }
+        bekleme: 0
+        metin: { tr: "{dusman} kepçe ağzını eğiyor ve üstüne bembeyaz, erimiş demir döküyor; çevrendeki beton bile cızırdıyor.", en: "{dusman} tips its ladle-mouth and pours white-hot iron down on you. Even the concrete around you sizzles." }
+      - id: "curuf_yagmuru"
+        ad: { tr: "Cüruf Yağmuru", en: "Slag Rain" }
+        stat: "int"
+        taban: 19
+        kat: 0.8
+        etiketler: ["ates", "alan"]
+        durum: { etki: "yanma", sans: 0.4, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} bacasından göğe bir kıvılcım sütunu fırlatıyor ve gökyüzünden sıcak, kara bir yağmur yağmaya başlıyor.", en: "{dusman} blasts a column of sparks out of its stack, and a hot black rain starts falling out of the sky." }
+      - id: "koruk"
+        ad: { tr: "Körük", en: "Bellows" }
+        stat: "end"
+        taban: 17
+        kat: 0.7
+        etiketler: ["ruzgar", "ates"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 3
+        metin: { tr: "{dusman} göğsündeki körüğü bir kere, derin bir nefes gibi çalıştırıyor; kavurucu bir hava dalgası seni ayaklarından koparıp duvara yapıştırıyor.", en: "{dusman} works the bellows in its chest once, like a deep breath, and a blast of scorching air lifts you off your feet and pins you to the wall." }
+    xp: 9120
+    kredi: 100
+    ganimet: { firin_yuregi: 0.6, canavar_cekirdegi: 1.0, curuf_cekirdegi: 0.6 }
+    etiketler: ["mekanik", "ates", "elit"]
+    boss: false
+    fazlar:
+      - esik: 50
+        metin: { tr: "Fırının kapağı patlayarak açılıyor. İçinde, eriyik demirin ortasında, kapıdan gelen o şey kıvranıyor: kırmızı, çok gözlü bir çekirdek. Isı dalgası o kadar yoğun ki havanın kendisi titriyor.", en: "The furnace door blows open. Inside, in the middle of the molten iron, the thing that came out of the Gate is writhing: a red core with far too many eyes. The heat is so thick the air itself is shaking." }
+        guclenme: { str: 4, int: 5 }
+        saldiri:
+          id: "erime_noktasi"
+          ad: { tr: "Erime Noktası", en: "Meltdown" }
+          stat: "int"
+          taban: 24
+          kat: 0.8
+          etiketler: ["ates", "alan"]
+          durum: { etki: "yanma", sans: 0.55, sure: 3 }
+          bekleme: 3
+          metin: { tr: "{dusman} açık kapağından içindeki cehennemi bir nefes gibi üstüne üflüyor; ter damlaları daha teninden ayrılmadan buharlaşıyor.", en: "{dusman} breathes the hell inside it out through its open door, and the sweat on your skin turns to steam before it can drip." }
+  # ---------------------------------------------------------------- Kıyıkent · Tepe (EN: the Heights)
+  recine_ayisi:
+    ad: { tr: "Reçine Ayısı", en: "Pitchback Bear" }
+    aciklama: { tr: "Tepedeki çamlıktan inen, sırtı katman katman donmuş reçineyle zırhlanmış bir ayı. Villaların bahçelerinde, boşaltılmış havuzların dibinde uyuyor; kahverengi kürkü reçinenin altında bir böcek gibi hapsolmuş.", en: "A bear that came down out of the fir woods on the Heights, its back armored in layer after layer of hardened pitch. It sleeps at the bottom of drained swimming pools in the big houses' backyards, its brown fur trapped under the resin like a bug in amber." }
+    kanca: { tr: "Boş havuzun dibinde amber renginde bir tepe yatıyor. Yaklaştıkça tepe nefes alıyor ve reçine kabuğu bir kayanın çatlaması gibi çıtırdıyor.", en: "There's an amber-colored mound lying at the bottom of the empty pool. As you get closer, the mound breathes, and the resin shell creaks like a rock splitting." }
+    seviye: 25
+    can: 360
+    statlar:
+      str: 22
+      agi: 10
+      end: 20
+      int: 3
+      wis: 8
+      per: 12
+      wil: 14
+      cha: 1
+    davranis: "agresif"
+    zeki: false
+    zaaf: "goz"
+    zaaf_metin: { tr: "Reçine bütün gövdesini kaplamış ama gözlerini değil; gözlerinin çevresindeki kürk bile hâlâ yumuşak. Göze inen bir darbe onu öfkeyle kör eder.", en: "The pitch covers every inch of it except the eyes; even the fur around them is still soft. A blow to the eye leaves it blind and furious." }
+    saldirilar:
+      - id: "recineli_pence"
+        ad: { tr: "Reçineli Pençe", en: "Pitch Claw" }
+        stat: "str"
+        taban: 15
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.35, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} reçineyle sertleşmiş pençesini savuruyor; tırnaklar göğsünde dört paralel çizgi bırakıyor.", en: "{dusman} swings a paw hardened with pitch, and its claws leave four parallel lines across your chest." }
+      - id: "ayi_kucagi"
+        ad: { tr: "Ayı Kucağı", en: "Bear Hug" }
+        stat: "str"
+        taban: 14
+        kat: 0.8
+        etiketler: ["fiziksel"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} iki ayağı üstüne kalkıp seni göğsüne bastırıyor; yapışkan reçine giysilerine yapışıyor ve kaburgaların tek tek esniyor.", en: "{dusman} rises onto its hind legs and crushes you to its chest. The sticky pitch glues itself to your clothes, and your ribs flex one by one." }
+      - id: "cam_kukremesi"
+        ad: { tr: "Çamlık Kükremesi", en: "Timber Roar" }
+        stat: "wil"
+        taban: 11
+        kat: 0.8
+        etiketler: ["ses"]
+        durum: { etki: "korku", sans: 0.35, sure: 2 }
+        bekleme: 3
+        metin: { tr: "{dusman} başını kaldırıp kükrüyor; tepedeki bütün köpekler susuyor ve villaların camları çerçevelerinde titriyor.", en: "{dusman} throws its head back and roars. Every dog on the Heights goes quiet, and the windows of the big houses rattle in their frames." }
+    xp: 3280
+    kredi: 9
+    ganimet: { recine_kehribari: 0.45, canavar_cekirdegi: 0.12 }
+    etiketler: ["hayvan"]
+    boss: false
+  gozetleme_dronu:
+    ad: { tr: "Gözetleme Dronu", en: "Sentinel Drone" }
+    aciklama: { tr: "Tepedeki akıllı villaların güvenlik dronları. Sahipleri öldü ya da kaçtı ama dronlar hâlâ \"izinsiz giriş\" arıyor; şimdi tanımadıkları her yüzü izinsiz sayıyorlar ve sürü hâlinde avlanıyorlar.", en: "Security drones from the smart homes up on the Heights. Their owners are dead or long gone, but the drones are still looking for trespassers, and these days every face they don't recognize counts. They hunt in flocks." }
+    kanca: { tr: "Tependen ince bir vızıltı geçiyor. Kırmızı bir ışık göğsünde duruyor; sonra bir tane daha, sonra bir tane daha. Ve bir ses: \"Yüz tanınmadı.\"", en: "A thin whine passes overhead. A red dot settles on your chest. Then another one. Then another. And a voice: \"Face not recognized.\"" }
+    seviye: 23
+    can: 170
+    statlar:
+      str: 5
+      agi: 16
+      end: 8
+      int: 14
+      wis: 6
+      per: 18
+      wil: 8
+      cha: 1
+    davranis: "suru"
+    zeki: false
+    zaaf: "simsek"
+    zaaf_metin: { tr: "Pervaneleri, kameraları ve küçük akülerinden ibaretler. Tek bir şimşek bütün sürünün devrelerini aynı anda yakar; hepsi yağmur damlası gibi düşer.", en: "They're nothing but rotors, cameras and tiny batteries. One bolt of lightning fries the whole flock's circuits at once, and they drop like rain." }
+    saldirilar:
+      - id: "elektrosok"
+        ad: { tr: "Şok Dikeni", en: "Stun Prong" }
+        stat: "int"
+        taban: 11
+        kat: 0.8
+        etiketler: ["simsek", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} boynuna dalıyor ve iki metal dikeni tenine dayıyor; bir çatırtı, ardından kasılan bütün bir beden.", en: "{dusman} dives at your neck and presses two metal prongs to your skin. One crackle, then every muscle in your body seizes." }
+      - id: "projektor"
+        ad: { tr: "Projektör", en: "Floodlight" }
+        stat: "per"
+        taban: 9
+        kat: 0.7
+        etiketler: ["isik", "menzilli"]
+        durum: { etki: "kor", sans: 0.4, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} tam yüzüne bembeyaz bir projektör tutuyor; göz kapaklarının arkasında bile mor lekeler dans ediyor.", en: "{dusman} hits you right in the face with a white floodlight. Purple blotches dance even behind your eyelids." }
+      - id: "alarm"
+        ad: { tr: "Alarm", en: "Alarm" }
+        stat: "wil"
+        taban: 8
+        kat: 0.7
+        etiketler: ["ses", "alan"]
+        durum: { etki: "korku", sans: 0.3, sure: 1 }
+        bekleme: 3
+        metin: { tr: "{dusman} bir siren çalmaya başlıyor ve tepenin bütün evlerinden aynı siren cevap veriyor. Karanlıkta yeni kırmızı ışıklar yanıyor.", en: "{dusman} starts wailing like a siren, and every house on the Heights answers with the same siren. New red dots light up in the dark." }
+    xp: 2000
+    kredi: 10
+    ganimet: { dron_lensi: 0.4, canli_bakir: 0.3 }
+    etiketler: ["mekanik"]
+    boss: false
+  yukselen_mumin:
+    ad: { tr: "Yükselen Mümin", en: "Ascended Zealot" }
+    aciklama: { tr: "Yükselenler'in tepedeki villalarda yaşayan inançlıları. Sistem'e tapıyor, insanları \"seçilmiş\" ve \"yakıt\" diye ayırıyorlar. Kendi aralarında yaşlılara, hastalara ve zayıflara yakıt deniyor; tepeye gelen yabancılar da genellikle yakıt sayılıyor.", en: "True believers of the Ascended, living in the mansions on the Heights. They worship the System and sort people into two piles: the Chosen and the fuel. Among themselves, the old, the sick and the weak are called fuel, and outsiders who wander up the hill usually get counted as fuel too." }
+    kanca: { tr: "Villanın merdivenlerinde beyaz giysili biri bekliyor; gözleri Sistem penceresi gibi mavi parlıyor. Gülümsüyor: \"Hoş geldin. Senin için dua ediyorduk.\"", en: "Someone in white is waiting on the mansion steps, eyes glowing blue as a System window. They smile. \"Welcome. We've been praying for you.\"" }
+    seviye: 25
+    can: 300
+    statlar:
+      str: 14
+      agi: 12
+      end: 14
+      int: 12
+      wis: 14
+      per: 11
+      wil: 18
+      cha: 13
+    davranis: "agresif"
+    zeki: true
+    zaaf: "zihin"
+    zaaf_metin: { tr: "İnancı onun zırhı ama inancın altında soru var: Sistem gerçekten onu seçti mi? O soruyu yüksek sesle sor; bir an duraksar ve o bir an yeter.", en: "Their faith is their armor, but under the faith there's a question: did the System really choose them? Ask it out loud. They'll hesitate for a heartbeat, and a heartbeat is all you need." }
+    saldirilar:
+      - id: "arinma_asasi"
+        ad: { tr: "Arınma Asası", en: "Purifying Rod" }
+        stat: "str"
+        taban: 13
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.2, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} üstüne mavi işaretler kazınmış çelik asasını omzuna indiriyor ve vurduğu yerde bir dua mırıldanıyor.", en: "{dusman} brings a steel rod carved with blue sigils down on your shoulder and murmurs a prayer over the spot where it lands." }
+      - id: "yukselis_ilahisi"
+        ad: { tr: "Yükseliş İlahisi", en: "Litany of Ascent" }
+        stat: "wil"
+        taban: 12
+        kat: 0.8
+        etiketler: ["zihin", "ses"]
+        durum: { etki: "korku", sans: 0.35, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} kollarını açıp bir ilahi okumaya başlıyor; kelimeler Sistem bildirimlerinden kopyalanmış ve her biri kafatasının içinde yankılanıyor.", en: "{dusman} spreads their arms and starts to chant. The words are lifted straight out of System notifications, and every one of them echoes inside your skull." }
+      - id: "yakit_muhru"
+        ad: { tr: "Yakıt Mührü", en: "Fuel Brand" }
+        stat: "wis"
+        taban: 14
+        kat: 0.8
+        etiketler: ["karanlik", "yakin"]
+        durum: { etki: "yanma", sans: 0.4, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} avucunu bileğine bastırıyor; derinde mavi bir işaret yanıyor ve tenin bir damga gibi cızırdıyor. \"Artık yakıtsın.\"", en: "{dusman} presses a palm to your wrist. A blue mark burns deep, and your skin sizzles like a brand. \"Now you're fuel.\"" }
+    xp: 3280
+    kredi: 20
+    ganimet: { yukselen_nisani: 0.5, kucuk_iyilesme_iksiri: 0.2 }
+    etiketler: ["insan"]
+    boss: false
+  yasli_cam:
+    ad: { tr: "Yaşlı Çam", en: "The Old Growth" }
+    aciklama: { tr: "Tepenin en yüksek noktasında, kıyametten önce de yüzlerce yaşında olan bir çam. Entegrasyonda uyandı. Yükselenler onu bir işaret saydı; dallarına mavi kurdeleler, Sistem pencerelerinin dökümleri ve \"yakıt\" sayılanların eşyalarını asıyorlar. Kökleri villaların temellerini çatlatıyor ve ağaç her geçen gün biraz daha aç.", en: "A Douglas fir at the very top of the Heights that was already a few hundred years old before the world ended. It woke up on Integration Day. The Ascended took it for a sign: they hang its branches with blue ribbons, printouts of System windows, and the belongings of the people they counted as fuel. Its roots are cracking the foundations of the mansions, and every day the tree gets a little hungrier." }
+    kanca: { tr: "Rüzgar yok ama çamın dalları sallanıyor; asılı kurdeleler, ayakkabılar, bir çocuk gözlüğü birbirine çarpıp tıkırdıyor. Gövdedeki kabuk bir göz kapağı gibi aralanıyor.", en: "There's no wind, but the fir's branches are swaying. The things hanging from them, ribbons, sneakers, a kid's glasses, knock together and click. The bark on the trunk slides open like an eyelid." }
+    seviye: 30
+    can: 900
+    statlar:
+      str: 34
+      agi: 6
+      end: 44
+      int: 18
+      wis: 32
+      per: 20
+      wil: 36
+      cha: 4
+    davranis: "temkinli"
+    zeki: false
+    zaaf: "ates"
+    zaaf_metin: { tr: "Yüzyılların reçinesi gövdesinde birikmiş. Bir alev değerse yaşlı çam bir meşale gibi yanar; asılı adakların ilk tutuştuğu yer de onun en zayıf yeridir.", en: "Centuries of pitch have pooled in its trunk. Get a flame on it and the Old Growth goes up like a torch, and the offerings hanging from its branches are where it catches first." }
+    saldirilar:
+      - id: "kok_kafesi"
+        ad: { tr: "Kök Kafesi", en: "Root Cage" }
+        stat: "str"
+        taban: 20
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} toprağı yarıp köklerini etrafına bir kafes gibi örüyor ve kafes daralıyor.", en: "{dusman} splits the earth and weaves its roots around you like a cage, and the cage starts closing in." }
+      - id: "igne_yagmuru"
+        ad: { tr: "İğne Yağmuru", en: "Needlefall" }
+        stat: "per"
+        taban: 18
+        kat: 0.8
+        etiketler: ["delici", "alan"]
+        durum: { etki: "kanama", sans: 0.4, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} dallarını silkeliyor ve bir bulut çam iğnesi, çivi sertliğinde, üstüne iniyor.", en: "{dusman} shakes its boughs, and a cloud of needles hard as finishing nails comes down on you." }
+      - id: "adak_canlari"
+        ad: { tr: "Adak Çanları", en: "Offering Chimes" }
+        stat: "wil"
+        taban: 16
+        kat: 0.8
+        etiketler: ["ses", "zihin"]
+        durum: { etki: "korku", sans: 0.4, sure: 2 }
+        bekleme: 3
+        metin: { tr: "{dusman} dallarındaki adakları birbirine çarptırıyor; tıkırtıların arasında, asılı eşyaların sahiplerinin sesleri yükseliyor. Hepsi aynı şeyi soruyor: neden?", en: "{dusman} knocks the offerings in its branches together, and between the clicks rise the voices of the people those things belonged to. All of them ask the same thing: why?" }
+    xp: 9120
+    kredi: 80
+    ganimet: { yasli_cam_kozalagi: 0.6, canavar_cekirdegi: 1.0, recine_kehribari: 0.6 }
+    etiketler: ["bitki", "elit"]
+    boss: false
+    fazlar:
+      - esik: 50
+        metin: { tr: "Gövde boydan boya yarılıyor ve içinden reçine değil, mavi bir ışık sızıyor. Yükselenler'in ona verdiği her dua, her kurban, şimdi o ışığın içinde. Yaşlı çam kökleriyle tepenin bütün bahçelerini kavrıyor.", en: "The trunk splits open top to bottom, and what leaks out isn't sap. It's blue light. Every prayer and every sacrifice the Ascended ever gave it is in that light now, and the Old Growth grips every backyard on the Heights with its roots." }
+        guclenme: { str: 4, wis: 4, wil: 3 }
+        saldiri:
+          id: "yakit_koku"
+          ad: { tr: "Yakıt Kökü", en: "Fuel Root" }
+          stat: "wis"
+          taban: 22
+          kat: 0.8
+          etiketler: ["karanlik", "can_emme"]
+          durum: { etki: "zehir", sans: 0.5, sure: 3 }
+          bekleme: 2
+          metin: { tr: "{dusman} ince bir kökü bacağına saplıyor ve emmeye başlıyor; Yükselenler'in neden ona yakıt getirdiğini şimdi anlıyorsun.", en: "{dusman} drives a thin root into your leg and starts to drink, and now you understand why the Ascended keep bringing it fuel." }
+  # ---------------------------------------------------------------- Kıyıkent · Kule Dibi (EN: Spire Plaza)
+  kule_kirintisi:
+    ad: { tr: "Kule Kırıntısı", en: "Spire Shard" }
+    aciklama: { tr: "Kule'nin kara camdan dış yüzeyinden kopup meydana düşen parçalar. Yere değdikleri an örümcek gibi bacaklar çıkarıyor ve sürü hâlinde geri tırmanmaya çalışıyorlar; yollarına çıkanı kesip geçiyorlar.", en: "Pieces that crack off the Spire's black glass skin and fall into the plaza. The second they hit the ground they sprout spider legs and try to climb back up in swarms, slicing through anything in the way." }
+    kanca: { tr: "Yukarıdan bir çatırtı geliyor. Bir saniye sonra meydana kara bir cam yağmuru iniyor ve kırıklar, düştükleri yerde, bacak çıkarıp doğruluyor.", en: "A crack echoes from way up. A second later, black glass rains down on the plaza, and where the shards land, they grow legs and stand up." }
+    seviye: 26
+    can: 230
+    statlar:
+      str: 14
+      agi: 15
+      end: 14
+      int: 8
+      wis: 6
+      per: 12
+      wil: 12
+      cha: 1
+    davranis: "suru"
+    zeki: false
+    zaaf: "ses"
+    zaaf_metin: { tr: "Kule'nin camı tek bir frekansta titreşir. Doğru perdeden sert bir ses, bir şarap kadehi gibi hepsini aynı anda çatlatır.", en: "The Spire's glass rings at one frequency. Hit the right pitch, hard, and the whole swarm cracks at once like a wineglass." }
+    saldirilar:
+      - id: "cam_kenar"
+        ad: { tr: "Cam Kenar", en: "Glass Edge" }
+        stat: "agi"
+        taban: 13
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.35, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} bacağına tırmanıyor; jilet keskinliğindeki kenarı, sen fark etmeden pantolonunu ve altındaki deriyi açıyor.", en: "{dusman} scrambles up your leg, and its razor edge opens your jeans and the skin under them before you even feel it." }
+      - id: "kirilma_yagmuru"
+        ad: { tr: "Kırılma Yağmuru", en: "Shatterburst" }
+        stat: "end"
+        taban: 14
+        kat: 0.7
+        etiketler: ["delici", "alan"]
+        durum: { etki: "kanama", sans: 0.3, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} kendi kendini parçalıyor; yüzlerce küçük kara kıymık her yöne saçılıyor ve bir kısmı sana saplanıyor.", en: "{dusman} shatters itself on purpose. Hundreds of tiny black splinters fly in every direction, and a lot of them end up in you." }
+    xp: 2450
+    kredi: 7
+    ganimet: { kule_cami: 0.45 }
+    etiketler: ["kule", "kukla"]
+    boss: false
+  kacak_kat_bekcisi:
+    ad: { tr: "Kaçak Kat Bekçisi", en: "Runaway Floorwarden" }
+    aciklama: { tr: "Kule'nin alt katlarından birinin kurallarını uygulamak için yaratılmış bir bekçi; bir şekilde katından düştü ve kapısından çıkıp meydana indi. Hâlâ kendi katının kurallarını uyguluyor ama artık yanlış yerde: meydandaki herkes onun gözünde kural ihlali.", en: "A warden built to enforce the rules on one of the Spire's lower floors. Somehow it fell off its floor, walked out the door and wandered down into the plaza. It's still enforcing its floor's rules, just in the wrong place, and to it, everyone in the plaza is a violation." }
+    kanca: { tr: "Önüne mavi bir pencere açılıyor ama bu senin Sistem'in değil: [Kat 7 Kuralı: Koşmak yasaktır.] Pencerenin arkasında, kırık bir zırh içinde bir şey sana doğru yürüyor.", en: "A blue window pops up in front of you, but it isn't your System's: [Floor 7 Rule: No running.] Behind the window, something in cracked armor is walking toward you." }
+    seviye: 27
+    can: 360
+    statlar:
+      str: 18
+      agi: 12
+      end: 18
+      int: 14
+      wis: 12
+      per: 14
+      wil: 16
+      cha: 2
+    davranis: "temkinli"
+    zeki: false
+    zaaf: "karanlik"
+    zaaf_metin: { tr: "Sistem'in ışığıyla çalışıyor; kendi katından koptuğu için o ışık her gün biraz daha sönük. Karanlık, bağını tamamen keser ve kurallarını okuyamaz hâle gelir.", en: "It runs on the System's light, and cut off from its floor, that light gets dimmer every day. Darkness severs the link completely, and it can't even read its own rules anymore." }
+    saldirilar:
+      - id: "kural_ihlali"
+        ad: { tr: "Kural İhlali", en: "Rule Violation" }
+        stat: "wil"
+        taban: 14
+        kat: 0.8
+        etiketler: ["zihin"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} parmağını sana doğrultuyor: [İhlal tespit edildi.] Bacakların kendiliğinden duruyor; kural, kaslarından daha güçlü.", en: "{dusman} points at you: [Violation detected.] Your legs stop on their own. The rule is stronger than your muscles." }
+      - id: "kat_cezasi"
+        ad: { tr: "Kat Cezası", en: "Floor Penalty" }
+        stat: "str"
+        taban: 15
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        bekleme: 0
+        metin: { tr: "{dusman} kırık zırhlı yumruğunu sırtına indiriyor; darbenin yanında küçük bir pencere beliriyor: [Ceza uygulandı.]", en: "{dusman} drives a cracked, armored fist into your back, and a little window pops up next to the hit: [Penalty applied.]" }
+      - id: "sahanlik_kalkani"
+        ad: { tr: "Sahanlık Kalkanı", en: "Landing Shield" }
+        stat: "end"
+        taban: 12
+        kat: 0.6
+        etiketler: ["fiziksel"]
+        durum: { etki: "kalkan", sans: 1.0, sure: 2 }
+        bekleme: 3
+        metin: { tr: "{dusman} kalkanını yere çarpıyor; sarsıntı seni geri iterken önünde mavi, yarı saydam bir duvar beliriyor: [Kat güvenliği etkin.]", en: "{dusman} slams its shield into the ground. The shockwave shoves you back, and a translucent blue wall flickers up in front of it: [Floor security active.]" }
+    xp: 3770
+    kredi: 15
+    ganimet: { kat_muhru: 0.45, canavar_cekirdegi: 0.15 }
+    etiketler: ["kule", "kukla"]
+    boss: false
+  kule_akbabasi:
+    ad: { tr: "Kule Akbabası", en: "Spire Vulture" }
+    aciklama: { tr: "Kule'nin çevresinde daireler çizen, kanat açıklığı bir minibüs boyunda leşçiler. Kule'den düşen tırmanıcıları beklerler. Bekledikleri tırmanıcı geç kalırsa aşağıdan birini seçerler.", en: "Carrion birds with wingspans as wide as a minivan that circle the Spire around the clock. They wait for climbers to fall. When a climber's running late, they pick someone off the ground instead." }
+    kanca: { tr: "Meydana geniş bir gölge düşüyor ve yavaşça daireler çiziyor. Gölgenin ortasında duruyorsun. Gölge küçülmeye başlıyor; yani şey alçalıyor.", en: "A wide shadow slides across the plaza and starts circling, slow. You're standing in the middle of it. The shadow is getting smaller, which means whatever's casting it is coming down." }
+    seviye: 26
+    can: 260
+    statlar:
+      str: 14
+      agi: 18
+      end: 11
+      int: 5
+      wis: 10
+      per: 19
+      wil: 11
+      cha: 1
+    davranis: "kacan"
+    zeki: false
+    zaaf: "ruzgar"
+    zaaf_metin: { tr: "Kule'nin çevresindeki yükselen hava akımlarına bağımlı; kanadını çırpmadan süzülüyor. Ters bir rüzgar onu dengesiz yakalar ve taş gibi düşürür.", en: "It lives on the updrafts around the Spire and barely ever flaps. Catch it with a crosswind and it loses its balance and drops like a stone." }
+    saldirilar:
+      - id: "pike"
+        ad: { tr: "Pike", en: "Stoop" }
+        stat: "agi"
+        taban: 14
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.35, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} kanatlarını katlayıp gökten düşüyor ve pençeleriyle sırtını yararak yeniden yükseliyor.", en: "{dusman} folds its wings, drops out of the sky, rakes its talons down your back, and climbs again." }
+      - id: "les_nefesi"
+        ad: { tr: "Leş Nefesi", en: "Carrion Breath" }
+        stat: "end"
+        taban: 11
+        kat: 0.8
+        etiketler: ["zehir"]
+        durum: { etki: "zehir", sans: 0.4, sure: 3 }
+        bekleme: 0
+        metin: { tr: "{dusman} yüzüne doğru tıslıyor; nefesi o kadar çürük ki midene bir yumruk yemiş gibi iki büklüm oluyorsun.", en: "{dusman} hisses right in your face, and its breath is so rotten you double over like you took a punch to the gut." }
+      - id: "asagi_akim"
+        ad: { tr: "Aşağı Akım", en: "Downdraft" }
+        stat: "str"
+        taban: 12
+        kat: 0.8
+        etiketler: ["ruzgar", "alan"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} tam tepende kanatlarını bir kez, sertçe çırpıyor; hava seni bir el gibi yere bastırıyor.", en: "{dusman} beats its wings once, hard, right over your head, and the air shoves you flat like a giant hand." }
+    xp: 3520
+    kredi: 8
+    ganimet: { akbaba_tuyu: 0.5, kule_cami: 0.15 }
+    etiketler: ["hayvan", "kule"]
+    boss: false
+  dusmus_tirmanici:
+    ad: { tr: "Düşmüş Tırmanıcı", en: "The Fallen Climber" }
+    aciklama: { tr: "Kule'ye ilk tırmananlardan biriydi; hakkı olmayan bir kata çıktı ve oradan düştü. Meydana çarptığı yerde ölmedi. Kule'nin taşı kemiklerine karıştı ve onu ayağa kaldırdı; şimdi yeniden tırmanmak için yukarı bakıyor, meydandaki her canlıyı da yolundaki bir basamak sayıyor.", en: "He was one of the first people to climb the Spire. He made it to a floor he had no business on, and he fell. He didn't die where he hit the plaza. The Spire's stone got into his bones and stood him back up, and now he stares up at it, wanting to climb again, and treats every living thing in the plaza as one more step on the way." }
+    kanca: { tr: "Meydanın ortasındaki çatlak kraterde biri oturuyor; sırtı sana dönük, başı Kule'ye kalkık. Dudakları kıpırdıyor; kat numaraları sayıyor. Otuz ikiye gelince duruyor ve sana dönüyor.", en: "Someone's sitting in the cracked crater in the middle of the plaza, back to you, head tipped up at the Spire. His lips are moving. He's counting floors. When he gets to thirty-two, he stops and turns around." }
+    seviye: 30
+    can: 760
+    statlar:
+      str: 30
+      agi: 26
+      end: 28
+      int: 18
+      wis: 16
+      per: 26
+      wil: 30
+      cha: 14
+    davranis: "agresif"
+    zeki: true
+    zaaf: "zihin"
+    zaaf_metin: { tr: "Kule her şeyini aldı ama adını alamadı; hâlâ cebinde katlanmış bir fotoğraf taşıyor. Ona kim olduğunu hatırlat ve bir an tırmanmayı unutur.", en: "The Spire took everything from him except his name, and he still carries a folded photo in his pocket. Remind him who he was and, for a moment, he forgets about climbing." }
+    saldirilar:
+      - id: "kirik_kazma"
+        ad: { tr: "Kırık Kazma", en: "Broken Pick" }
+        stat: "str"
+        taban: 19
+        kat: 0.8
+        etiketler: ["fiziksel", "delici"]
+        durum: { etki: "kanama", sans: 0.4, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} kırık buz kazmasını omzuna geçiriyor ve seni bir kaya yüzü gibi tutunarak kendine çekiyor.", en: "{dusman} hooks his broken ice ax into your shoulder and hauls you in, using you like a handhold on a rock face." }
+      - id: "dusus_hatirasi"
+        ad: { tr: "Düşüşün Hatırası", en: "The Fall Remembered" }
+        stat: "wil"
+        taban: 17
+        kat: 0.8
+        etiketler: ["zihin", "karanlik"]
+        durum: { etki: "korku", sans: 0.45, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} alnını alnına dayıyor ve bir an onun düşüşünü yaşıyorsun: rüzgar, dönen gökyüzü, yaklaşan taşlar. Midende boşluk, ellerin kendiliğinden bir tutunacak yer arıyor.", en: "{dusman} presses his forehead to yours, and for one second you live his fall: the wind, the sky spinning, the stones rushing up. Your stomach drops and your hands grab for something to hold on to." }
+      - id: "kat_tasi_yumrugu"
+        ad: { tr: "Kat Taşı Yumruğu", en: "Floorstone Fist" }
+        stat: "end"
+        taban: 18
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} Kule taşına dönüşmüş yumruğunu çenene indiriyor; ses bir kayanın yarılmasına benziyor.", en: "{dusman} drives a fist that's half Spire stone into your jaw. It sounds like a boulder splitting." }
+    xp: 9120
+    kredi: 120
+    ganimet: { tirmanici_ipi: 0.6, canavar_cekirdegi: 1.0, kule_cami: 0.5 }
+    etiketler: ["insan", "kule", "elit"]
+    boss: false
+    fazlar:
+      - esik: 50
+        metin: { tr: "Cebinden bir fotoğraf düşüyor; yere değmeden yakalıyor. Bir an ona bakıyor. Sonra fotoğrafı buruşturup atıyor ve Kule'nin taşı, son insan yanını da yutarak boynuna kadar tırmanıyor.", en: "A photo slips out of his pocket, and he catches it before it touches the ground. He looks at it for a moment. Then he crumples it up and throws it away, and the Spire's stone climbs all the way up his neck, swallowing the last of the human in him." }
+        guclenme: { str: 4, agi: 3, end: 4 }
+        saldiri:
+          id: "son_tirmanis"
+          ad: { tr: "Son Tırmanış", en: "The Last Climb" }
+          stat: "str"
+          taban: 22
+          kat: 0.8
+          etiketler: ["fiziksel", "yakin"]
+          durum: { etki: "kanama", sans: 0.45, sure: 3 }
+          bekleme: 2
+          metin: { tr: "{dusman} sırtına sıçrayıp tırmanmaya başlıyor; kazması, dizleri, tırnakları, hepsi sana tutunmak için birer kanca.", en: "{dusman} leaps onto your back and starts to climb. His pick, his knees, his fingernails: every one of them is a hook, and you're the wall." }
+  # ---------------------------------------------------------------- Çok-evren · Batık Takımada (EN: the Drowned Reach)
+  bogulmus_canci:
+    ad: { tr: "Boğulmuş Çancı", en: "Drowned Bellringer" }
+    aciklama: { tr: "Batık Takımada'nın halkından geriye kalanlardan biri. Hasat geldiğinde adalarının gelgit çanlarını çalıp halkını uyarmaya çalışmış; deniz yükselmiş, halk gitmiş, o çalmaya devam etmiş. Hâlâ çalıyor. Çanının sesini duyan her yabancıyı geç kalmış bir uyarının cevabı sanıyor.", en: "One of the last of the people of the Drowned Reach. When the Harvest came, it rang the tide bells of its island to warn everyone. The sea rose, the people were gone, and it kept ringing. It's still ringing. Every stranger who hears the bell, it takes for an answer to a warning that came far too late." }
+    kanca: { tr: "Suyun altından boğuk bir çan sesi yükseliyor. Bir kere. Bir kere daha. Sonra yosun kaplı bir kule tepesinden, iki kolu da çan ipine sarılı bir beden sana bakıyor.", en: "A muffled bell tolls from under the water. Once. Once more. Then, from the top of a weed-choked tower, a figure with both arms wound into a bell rope looks down at you." }
+    seviye: 33
+    can: 400
+    statlar:
+      str: 20
+      agi: 12
+      end: 22
+      int: 14
+      wis: 20
+      per: 14
+      wil: 24
+      cha: 4
+    davranis: "temkinli"
+    zeki: false
+    zaaf: "simsek"
+    zaaf_metin: { tr: "Çanı ve çan ipine sarılı tuzlu bedeni aynı devrenin parçaları. Bir şimşek tunç çandan girip ipten akar; çancı ile çan aynı anda susar.", en: "The bell and the brine-soaked body wound into its rope are one circuit. Lightning goes into the bronze and runs down the rope, and the ringer and the bell go quiet at the same time." }
+    saldirilar:
+      - id: "gelgit_cani"
+        ad: { tr: "Gelgit Çanı", en: "Tide Bell" }
+        stat: "wil"
+        taban: 16
+        kat: 0.8
+        etiketler: ["ses", "alan"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} ipe asılıyor ve çan tam başının üstünde vuruyor; ses kemiklerini bir diyapazon gibi titretiyor.", en: "{dusman} hauls on the rope and the bell strikes right over your head. The sound rings through your bones like a tuning fork." }
+      - id: "can_tokmagi"
+        ad: { tr: "Çan Tokmağı", en: "Clapper" }
+        stat: "str"
+        taban: 17
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        bekleme: 0
+        metin: { tr: "{dusman} çanından sökülmüş tunç tokmağı bir topuz gibi savuruyor ve kalçana indiriyor.", en: "{dusman} swings a bronze clapper torn out of a bell like a mace and slams it into your hip." }
+      - id: "bogulmus_ezgi"
+        ad: { tr: "Boğulmuşların Ezgisi", en: "Drowned Hymn" }
+        stat: "wis"
+        taban: 15
+        kat: 0.8
+        etiketler: ["zihin", "ses"]
+        durum: { etki: "korku", sans: 0.4, sure: 2 }
+        bekleme: 3
+        metin: { tr: "{dusman} çanı yavaşça, bir cenaze temposuyla çalıyor ve suyun altından binlerce ses aynı ezgiyi mırıldanmaya başlıyor. Ezgiyi bilmiyorsun ama sonunu biliyorsun.", en: "{dusman} tolls the bell slow, like a funeral, and from under the water a thousand voices start humming the same tune. You don't know the song, but you know how it ends." }
+    xp: 5400
+    kredi: 15
+    ganimet: { can_tuncu: 0.45, kaya_tuzu: 0.4 }
+    etiketler: ["olu", "cok_evren"]
+    boss: false
+  hasat_kirpintisi:
+    ad: { tr: "Hasat Kırpıntısı", en: "Harvest Chaff" }
+    aciklama: { tr: "Bir dünyanın özü hasat edildiğinde geride kalan şey: insana benzeyen ama içi boş, gri, rengi alınmış kabuklar. Ne öldüler ne yaşıyorlar; yalnızca bir zamanlar sahip oldukları şeyi, ışığı, sıcaklığı, adı, başkalarında arıyorlar.", en: "What's left when a world's essence gets harvested: gray, hollow shells shaped like people, every bit of color taken out of them. They're not dead and they're not alive. They just go looking in other people for what they used to have: light, warmth, a name." }
+    kanca: { tr: "Sığlıkta gri figürler duruyor; dalgalar bacaklarına çarpıyor ama hiçbiri sallanmıyor. Hepsi aynı anda başını sana çeviriyor. Yüzleri yok; yalnızca yüzün olması gereken yerde bir açlık var.", en: "Gray figures stand in the shallows. The waves slap their legs, and none of them so much as sways. They all turn their heads toward you at once. They have no faces, only a hunger where a face should be." }
+    seviye: 32
+    can: 280
+    statlar:
+      str: 12
+      agi: 16
+      end: 10
+      int: 14
+      wis: 12
+      per: 13
+      wil: 16
+      cha: 1
+    davranis: "suru"
+    zeki: false
+    zaaf: "isik"
+    zaaf_metin: { tr: "Hasat onlardan ışığı aldı; ışığa hem açlar hem de dayanamıyorlar. Güçlü bir ışık onları doyurur, doyan kırpıntı da kül gibi dağılır.", en: "The Harvest took their light, and now they crave it and can't stand it at the same time. Hit them with real light and they get their fill, and a full husk falls apart like ash." }
+    saldirilar:
+      - id: "gri_dokunus"
+        ad: { tr: "Gri Dokunuş", en: "Gray Touch" }
+        stat: "wil"
+        taban: 14
+        kat: 0.8
+        etiketler: ["karanlik", "can_emme"]
+        durum: { etki: "kanama", sans: 0.35, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} koluna dokunuyor ve dokunduğu yerde tenin rengini kaybediyor; elinin kendi elin olduğundan bir an emin olamıyorsun.", en: "{dusman} touches your arm, and where it touches, your skin goes gray. For a second you aren't sure that hand is still yours." }
+      - id: "bos_bakis"
+        ad: { tr: "Boş Bakış", en: "Empty Stare" }
+        stat: "wis"
+        taban: 12
+        kat: 0.7
+        etiketler: ["zihin"]
+        durum: { etki: "korku", sans: 0.35, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} yüzünün olması gereken boşlukla sana bakıyor ve o boşlukta kendi şehrini görüyorsun: aynı gri, aynı sessiz.", en: "{dusman} looks at you with the blank where its face should be, and in that blank you see your own city. Just as gray. Just as quiet." }
+    xp: 3600
+    kredi: 4
+    ganimet: { hasat_kulu: 0.5 }
+    etiketler: ["olu", "cok_evren"]
+    boss: false
+  mercan_cobani:
+    ad: { tr: "Mercan Çobanı", en: "Reef Shepherd" }
+    aciklama: { tr: "Batık şehirlerin üstünde büyüyen mercanları güden, balina büyüklüğünde, sırtı resif olmuş bir yaratık. Halkı gittikten sonra şehirlerini yaşatmanın tek yolunu buldu: mercanı onlara benzetmek. Mercanların arasında sokaklar, kubbeler, yüzleri olmayan heykeller var. Bahçesine giren herkesi yeni bir heykel olarak görüyor.", en: "A whale-sized creature with a living reef for a back that tends the coral growing over the drowned cities. After its people were gone, it found the only way to keep their cities alive: grow the coral into their shape. There are streets in that reef, domes, statues with no faces. Anyone who wanders into its garden, it sees as a new statue." }
+    kanca: { tr: "Altında kayalık sandığın resif kalkıyor. Mercan kubbeler, mercan sokaklar suyun içinden yükseliyor ve resifin ortasında, yosun gibi dalgalanan bir yüz sana eğiliyor.", en: "The reef you took for rock lifts under you. Coral domes and coral streets rise out of the water, and from the middle of the reef, a face rippling like seaweed leans down toward you." }
+    seviye: 36
+    can: 940
+    statlar:
+      str: 40
+      agi: 18
+      end: 44
+      int: 26
+      wis: 34
+      per: 28
+      wil: 38
+      cha: 10
+    davranis: "temkinli"
+    zeki: false
+    zaaf: "buz"
+    zaaf_metin: { tr: "Mercanı ılık, sığ sularda yaşıyor. Soğuk resifi beyazlatır ve öldürür; ölen mercan sırtında taş gibi ağırlaşır, çobanı dibe çeker.", en: "Its reef lives in warm, shallow water. Cold bleaches the coral and kills it, and dead coral turns to dead weight on its back, dragging the shepherd down." }
+    saldirilar:
+      - id: "mercan_asasi"
+        ad: { tr: "Mercan Asası", en: "Coral Crook" }
+        stat: "str"
+        taban: 21
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.4, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} kıvrık, mercandan bir uzvu bir çoban değneği gibi beline geçiriyor ve seni resifin keskin kenarlarına sürtüyor.", en: "{dusman} hooks a curved coral limb around your waist like a shepherd's crook and drags you across the reef's sharp edges." }
+      - id: "resif_surusu"
+        ad: { tr: "Resif Sürüsü", en: "Reefswarm" }
+        stat: "wis"
+        taban: 19
+        kat: 0.8
+        etiketler: ["zehir", "alan"]
+        durum: { etki: "zehir", sans: 0.45, sure: 3 }
+        bekleme: 2
+        metin: { tr: "{dusman} sırtındaki resifi silkeliyor ve mercanların arasından binlerce küçük, renkli, iğneli balık bir bulut gibi üstüne çullanıyor.", en: "{dusman} shudders its reef, and thousands of tiny, brilliant, spined fish burst out of the coral and swarm you like a cloud." }
+      - id: "derinlik_agirligi"
+        ad: { tr: "Derinlik Ağırlığı", en: "Fathom Weight" }
+        stat: "wil"
+        taban: 18
+        kat: 0.8
+        etiketler: ["zihin"]
+        durum: { etki: "sersemleme", sans: 0.4, sure: 1 }
+        bekleme: 3
+        metin: { tr: "{dusman} etrafındaki suyu ağırlaştırıyor; sanki birden yüz kulaç dibe inmişsin gibi göğsün çöküyor, kulakların çınlıyor.", en: "{dusman} makes the water around you heavy. Your chest caves in like you just dropped a hundred fathoms, and your ears start to ring." }
+    xp: 12660
+    kredi: 70
+    ganimet: { mercan_yuregi: 0.6, canavar_cekirdegi: 1.0, can_tuncu: 0.4 }
+    etiketler: ["hayvan", "deniz", "cok_evren", "elit"]
+    boss: false
+    fazlar:
+      - esik: 50
+        metin: { tr: "Resifin bir kısmı beyazlayıp çöküyor; bir mercan kubbe, bir mercan sokak, sessizce dibe kayıyor. Çoban ilk kez sesleniyor: uzun, alçak, bir şehrin ikinci kez ölüşüne yakılan bir ağıt.", en: "Part of the reef bleaches and caves in. A coral dome, a coral street, slide quietly into the deep. For the first time, the shepherd makes a sound: long and low, a lament for a city dying for the second time." }
+        guclenme: { str: 4, wil: 5 }
+        saldiri:
+          id: "ikinci_olum"
+          ad: { tr: "İkinci Ölüm", en: "The Second Drowning" }
+          stat: "wil"
+          taban: 24
+          kat: 0.8
+          etiketler: ["zihin", "alan"]
+          durum: { etki: "korku", sans: 0.5, sure: 2 }
+          bekleme: 3
+          metin: { tr: "{dusman} kalan bütün mercanını sana yöneltiyor; dalgaların arasında bu dünyanın son gününü görüyorsun ve aynı göğün senin şehrinin üstünde de açılmayı beklediğini biliyorsun.", en: "{dusman} turns all the reef it has left on you, and in the waves you see the last day of the Reach. You know the same sky is waiting over your city." }
+  # ---------------------------------------------------------------- Çok-evren · Pirinç Kervan (EN: the Brass Caravan)
+  gumruk_muhafizi:
+    ad: { tr: "Gümrük Muhafızı", en: "Tariff Warden" }
+    aciklama: { tr: "Pirinç Kervan'ın güvertelerinde dolaşan, pirinç zırhlı muhafızlar. Tüccar halkın kendi askerleri değiller: Kadimler'e boyun eğdiğinde kervana dayatılan bir kurumun parçası. Her yolcuya, her yüke, her nefese bir vergi biçiyorlar; ödeyemeyenin elindekine el koyuyorlar.", en: "Brass-armored wardens who patrol the decks of the Brass Caravan. They aren't the merchant people's own soldiers. They belong to an office the Ancients forced on the Caravan the day it bent the knee. They levy a duty on every passenger, every crate, every breath, and whatever you can't pay for, they confiscate." }
+    kanca: { tr: "Önüne pirinç bir mızrak iniyor. Kaskın arkasından, mekanik bir sesle, ezberlenmiş bir cümle geliyor: \"Beyan edilmemiş yük. Değerlendirme başlıyor.\"", en: "A brass pike drops across your path. From behind the helmet comes a mechanical voice reciting something it's said ten thousand times: \"Undeclared cargo. Assessment in progress.\"" }
+    seviye: 35
+    can: 450
+    statlar:
+      str: 22
+      agi: 16
+      end: 24
+      int: 18
+      wis: 16
+      per: 22
+      wil: 20
+      cha: 14
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "simsek"
+    zaaf_metin: { tr: "Pirinç zırh güzel ama iletken; içindeki tüccar bedeni ise kervanın kuru havasında yıllardır su görmemiş. Bir şimşek zırhın içinde dolaşır ve onu kendi mühürleriyle kaynatır.", en: "Brass armor is gorgeous, and it conducts. The merchant body inside hasn't seen water in years of dry Caravan air. Lightning races around inside the armor and welds the warden into its own seals." }
+    saldirilar:
+      - id: "gumruk_mizragi"
+        ad: { tr: "Gümrük Mızrağı", en: "Duty Pike" }
+        stat: "str"
+        taban: 18
+        kat: 0.8
+        etiketler: ["fiziksel", "delici"]
+        durum: { etki: "kanama", sans: 0.35, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} mızrağını kısa, kusursuz bir hamleyle omzuna saplıyor ve geri çekerken ucunda bir damga bırakıyor: [Vergilendirildi].", en: "{dusman} drives its pike into your shoulder with one short, perfect thrust, and as it pulls back, the tip leaves a stamp behind: [ASSESSED]." }
+      - id: "el_koyma"
+        ad: { tr: "El Koyma", en: "Confiscation" }
+        stat: "int"
+        taban: 15
+        kat: 0.8
+        etiketler: ["zihin"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} eldivenli elini kaldırıp bir mühür basıyor; elindeki silah, bir anlığına, artık sana ait değilmiş gibi ağırlaşıyor ve parmakların açılıyor.", en: "{dusman} raises a gloved hand and presses down a seal. For a moment the weapon in your hand doesn't belong to you anymore, it goes heavy, and your fingers open." }
+      - id: "muhurlu_siper"
+        ad: { tr: "Mühürlü Siper", en: "Sealed Bulwark" }
+        stat: "end"
+        taban: 14
+        kat: 0.6
+        etiketler: ["fiziksel"]
+        durum: { etki: "kalkan", sans: 1.0, sure: 2 }
+        bekleme: 3
+        metin: { tr: "{dusman} pirinç kalkanını sana çarpıyor ve kalkanın yüzeyindeki mühürler bir bir yanıyor: [Kadim himayesi altındadır].", en: "{dusman} slams its brass shield into you, and the seals across its face light up one after another: [UNDER ANCIENT PROTECTION]." }
+    xp: 6000
+    kredi: 40
+    ganimet: { pirinc_muhur: 0.45, canli_bakir: 0.3 }
+    etiketler: ["cok_evren", "kadim"]
+    boss: false
+  kazan_bocegi:
+    ad: { tr: "Kazan Böceği", en: "Boilerbug" }
+    aciklama: { tr: "Pirinç Kervan'ın kazan güvertelerinde yaşayan, kedi büyüklüğünde, perçinli böcekler. Bir zamanlar tüccarların yetiştirdiği bakım hayvanlarıydı; boruları temizler, çatlakları tıkarlardı. Kervan Kadimler'e boyun eğip bakımcılarını kaybettiğinden beri yabanileştiler ve sürü hâlinde her sıcak şeye saldırıyorlar.", en: "Cat-sized riveted bugs that live on the Brass Caravan's boiler decks. They used to be maintenance animals the merchants bred to scrub pipes and plug cracks. Since the Caravan bent the knee and lost its keepers, they've gone feral, and now they swarm anything warm." }
+    kanca: { tr: "Buhar borularının üstünde yüzlerce küçük pirinç kabuk aynı anda tıkırdıyor, sanki biri bir avuç bozuk para sallıyormuş gibi. Sonra hepsi borudan iniyor.", en: "On top of the steam pipes, hundreds of little brass shells start clicking at once, like someone's shaking a fistful of loose change. Then they all come down off the pipes." }
+    seviye: 34
+    can: 300
+    statlar:
+      str: 14
+      agi: 18
+      end: 14
+      int: 10
+      wis: 8
+      per: 16
+      wil: 12
+      cha: 1
+    davranis: "suru"
+    zeki: false
+    zaaf: "buz"
+    zaaf_metin: { tr: "Kazanların sıcağında yaşamaya alışık; içlerindeki küçük buhar odaları soğukta yoğuşur ve kabukları bir saat gibi durur.", en: "They're built for boiler heat. In the cold, the little steam chambers inside them condense, and their shells seize up like a stopped watch." }
+    saldirilar:
+      - id: "buhar_fiskirtma"
+        ad: { tr: "Buhar Fışkırtma", en: "Steam Jet" }
+        stat: "end"
+        taban: 15
+        kat: 0.8
+        etiketler: ["ates", "menzilli"]
+        durum: { etki: "yanma", sans: 0.35, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} sırtındaki valfi açıp yüzüne kaynar bir buhar fışkırtıyor.", en: "{dusman} pops a valve on its back and blasts scalding steam in your face." }
+      - id: "percin_cenesi"
+        ad: { tr: "Perçin Çenesi", en: "Rivet Mandibles" }
+        stat: "str"
+        taban: 15
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.3, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} perçinli çenelerini baldırına kapatıyor ve bir çatlağı tıkar gibi sıkıyor.", en: "{dusman} clamps its riveted mandibles on your calf and squeezes like it's sealing a leak." }
+    xp: 4000
+    kredi: 6
+    ganimet: { kazan_kabugu: 0.45, hurda: 0.4 }
+    etiketler: ["bocek", "mekanik", "cok_evren"]
+    boss: false
+  degerleyici:
+    ad: { tr: "Değerleyici", en: "The Assessor" }
+    aciklama: { tr: "Pirinç Kervan'ın ana güvertesinde duran, iki kefesi bir ev kadar olan bir terazi-makine. Kadimler'in kervana yüklediği haracı hesaplar: her yükün, her işçinin, her çocuğun değerini biçer ve Kadimler'in payını ayırır. Tüccar halkı ona bakmaz. Bakarsan, sana da bir fiyat biçer.", en: "A scale-machine with pans the size of houses that stands on the Brass Caravan's main deck. It calculates the tribute the Ancients levy on the Caravan: it prices every crate, every worker, every child, and sets aside the Ancients' share. The merchant people never look at it. If you look, it puts a price on you, too." }
+    kanca: { tr: "Dev terazinin tek, kristal merceği sana dönüyor. Kefeler sallanıyor, sonra duruyor. Havada bir rakam beliriyor: senin fiyatın. Rakam yükseliyor. Yükseliyor. Makine ilk kez tereddüt ediyor.", en: "The giant scale's single crystal lens swivels toward you. The pans sway, then settle. A number appears in the air: your price. It goes up. And up. For the first time, the machine hesitates." }
+    seviye: 37
+    can: 900
+    statlar:
+      str: 30
+      agi: 14
+      end: 40
+      int: 42
+      wis: 36
+      per: 44
+      wil: 38
+      cha: 30
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "goz"
+    zaaf_metin: { tr: "Bütün hesabı tek bir mercekten geçiyor. O merceği kör et ve Değerleyici neyi tarttığını bilemez; kefeleri boşlukta sallanıp durur.", en: "Every calculation it makes runs through that one lens. Blind it and the Assessor can't tell what it's weighing, and its pans just swing at nothing." }
+    saldirilar:
+      - id: "kefe_darbesi"
+        ad: { tr: "Kefe Darbesi", en: "Pan Strike" }
+        stat: "str"
+        taban: 20
+        kat: 0.8
+        etiketler: ["fiziksel", "alan"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} kefelerinden birini bir çekiç gibi güverteye indiriyor; perçinler fırlıyor, sen de onlarla birlikte.", en: "{dusman} brings one of its pans down on the deck like a hammer. Rivets go flying, and so do you." }
+      - id: "deger_bicme"
+        ad: { tr: "Değer Biçme", en: "Appraisal" }
+        stat: "per"
+        taban: 18
+        kat: 0.8
+        etiketler: ["zihin", "isik"]
+        durum: { etki: "korku", sans: 0.4, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} merceğini üstüne odaklıyor ve önünde bir döküm beliriyor: senin, sevdiklerinin, şehrinin fiyatı. Hepsi Kadimler'in payı düşüldükten sonra.", en: "{dusman} focuses its lens on you, and an itemized list unrolls in front of you: your price, the people you love, your whole city. All of it net of the Ancients' share." }
+      - id: "harac_kesintisi"
+        ad: { tr: "Haraç Kesintisi", en: "Tithe Cut" }
+        stat: "int"
+        taban: 19
+        kat: 0.8
+        etiketler: ["karanlik", "can_emme"]
+        durum: { etki: "kanama", sans: 0.4, sure: 3 }
+        bekleme: 2
+        metin: { tr: "{dusman} haracını kesiyor: göğsünden ince, kırmızı bir ışık çekilip boş kefeye akıyor ve kefe hafifçe iniyor.", en: "{dusman} takes its cut. A thin red light pulls out of your chest and pours into the empty pan, and the pan dips, just a little." }
+    xp: 13300
+    kredi: 220
+    ganimet: { degerleyici_mercegi: 0.6, canavar_cekirdegi: 1.0, pirinc_muhur: 0.6 }
+    etiketler: ["mekanik", "cok_evren", "kadim", "elit"]
+    boss: false
+    fazlar:
+      - esik: 50
+        metin: { tr: "Senin fiyatın havada kırmızıya dönüyor ve sayılar birbirine karışıyor: makine seni ödeyemeyeceğini hesaplıyor. Kefeler birden ters dönüyor; Değerleyici artık tartmıyor, siliyor.", en: "Your price turns red in the air, and the digits scramble: the machine has worked out that it can't afford you. The pans flip over. The Assessor isn't weighing anymore. It's writing you off." }
+        guclenme: { int: 5, per: 4 }
+        saldiri:
+          id: "son_teklif"
+          ad: { tr: "Son Teklif", en: "Final Offer" }
+          stat: "int"
+          taban: 24
+          kat: 0.8
+          etiketler: ["zihin", "alan"]
+          durum: { etki: "sersemleme", sans: 0.45, sure: 1 }
+          bekleme: 3
+          metin: { tr: "{dusman} merceğinden beyaz bir ışın sana yolluyor ve önünde tek satırlık bir pencere açılıyor: [Değer: sıfır. Zarar yazıldı.]", en: "{dusman} fires a white beam from its lens, and a one-line window opens in front of you: [Value: zero. Written off as a loss.]" }
+  # ---------------------------------------------------------------- Çok-evren · Yedi Taht (EN: the Sevenfold Court)
+  huzur_muhafizi:
+    ad: { tr: "Huzur Muhafızı", en: "Presence Guard" }
+    aciklama: { tr: "Yedi Taht'ın salonlarını bekleyen, yüzleri kalıplanmış maskelerin ardında saklı muhafızlar. Tahtların huzurunda konuşmak yasaktır ve onlar o yasanın kendisidir: sessizliği bozanı susturur, diz çökmeyeni diz çöktürürler. Ağızlarının olup olmadığını kimse bilmiyor.", en: "Guards who keep the halls of the Sevenfold Court, their faces hidden behind molded masks. Speaking in the presence of the thrones is forbidden, and they are that law in the flesh: they silence whoever breaks the silence and put whoever won't kneel on their knees. Nobody knows if they even have mouths." }
+    kanca: { tr: "Uzun salonda adımlarının yankısı bile ayıp gibi. İki sütunun arasındaki maskeli figür tek bir parmak kaldırıyor, dudaklarına götürüyor; sonra teberini indiriyor.", en: "In the long hall, even the echo of your footsteps feels rude. The masked figure between two pillars raises a single finger to its lips. Then it lowers its halberd." }
+    seviye: 37
+    can: 470
+    statlar:
+      str: 26
+      agi: 20
+      end: 24
+      int: 16
+      wis: 18
+      per: 20
+      wil: 26
+      cha: 10
+    davranis: "agresif"
+    zeki: false
+    zaaf: "ses"
+    zaaf_metin: { tr: "Yeminleri sessizliğe bağlı; güçlerini salonun sessizliğinden alıyorlar. Sağır edici bir ses o yemini parçalar ve muhafız, kendi yasasını çiğnenmiş görünce bir an ne yapacağını bilemez.", en: "Their oath is bound to silence, and they draw their strength from the hush of the halls. A deafening noise shatters the oath, and when a guard sees its own law broken, it doesn't know what to do for a moment." }
+    saldirilar:
+      - id: "sessiz_teber"
+        ad: { tr: "Sessiz Teber", en: "Silent Halberd" }
+        stat: "str"
+        taban: 19
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.35, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} teberini yay gibi savuruyor; ne ıslık ne rüzgar sesi, hiçbir şey yok. Yalnızca böğründe açılan yara.", en: "{dusman} sweeps its halberd in a long arc. No whistle, no rush of air, nothing at all. Just the cut opening in your side." }
+      - id: "diz_coktur"
+        ad: { tr: "Diz Çöktürme", en: "Kneel" }
+        stat: "wil"
+        taban: 17
+        kat: 0.8
+        etiketler: ["zihin"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} teberinin sapını yere vuruyor ve salonun bütün ağırlığı omuzlarına çöküyor; dizlerin, sen istemeden, mermere değiyor.", en: "{dusman} raps the butt of its halberd on the floor, and the whole weight of the hall comes down on your shoulders. Your knees hit the marble before you can decide not to let them." }
+      - id: "huzur_yasasi"
+        ad: { tr: "Huzur Yasası", en: "Law of Presence" }
+        stat: "wil"
+        taban: 15
+        kat: 0.8
+        etiketler: ["zihin", "karanlik"]
+        durum: { etki: "korku", sans: 0.4, sure: 2 }
+        bekleme: 3
+        metin: { tr: "{dusman} maskesini sana çeviriyor ve boğazın kendiliğinden kapanıyor. Konuşmaya çalışıyorsun; ses yok. Nefes almaya çalışıyorsun; o da yasak gibi.", en: "{dusman} turns its mask toward you, and your throat closes on its own. You try to speak. Nothing. You try to breathe, and that feels forbidden too." }
+    xp: 6650
+    kredi: 30
+    ganimet: { sessizlik_muhru: 0.45 }
+    etiketler: ["cok_evren", "kadim"]
+    boss: false
+  hasat_kandili:
+    ad: { tr: "Hasat Kandili", en: "Harvest Lamp" }
+    aciklama: { tr: "Yedi Taht'ın koridorlarını aydınlatan, havada süzülen kristal kandiller. Yaktıkları şey yağ değil: hasat edilmiş dünyaların özü. Her kandilin içinde bir dünyanın son kıvılcımı yanıyor ve yakından bakınca, alevin içinde hâlâ kıpırdayan bir yüz görülüyor.", en: "Floating crystal lamps that light the corridors of the Sevenfold Court. They don't burn oil. They burn the essence of harvested worlds. Inside each one, the last spark of some world is still going, and if you look close, there's a face in the flame, still moving." }
+    kanca: { tr: "Koridorun kandillerinden biri yerinden kopup sana doğru süzülüyor. Alevin içindeki yüz camın arkasından sana bakıyor ve dudakları senin dilinde bir kelime söylüyor: \"Kaç.\"", en: "One of the corridor lamps drifts loose and floats toward you. The face in the flame looks at you through the crystal, and its lips shape a word in your language: \"Run.\"" }
+    seviye: 36
+    can: 360
+    statlar:
+      str: 6
+      agi: 16
+      end: 12
+      int: 26
+      wis: 22
+      per: 14
+      wil: 24
+      cha: 8
+    davranis: "temkinli"
+    zeki: false
+    zaaf: "karanlik"
+    zaaf_metin: { tr: "Yanmaya mecbur; Kadimler onu böyle bağladı. Karanlık alevi boğar ve kandil sönerken içindeki yüz, uzun zamandır ilk kez, gözlerini kapatır.", en: "It has to burn; the Ancients bound it that way. Darkness smothers the flame, and as the lamp goes out, the face inside closes its eyes for the first time in a very long time." }
+    saldirilar:
+      - id: "oz_alevi"
+        ad: { tr: "Öz Alevi", en: "Essence Flame" }
+        stat: "int"
+        taban: 18
+        kat: 0.8
+        etiketler: ["ates", "menzilli"]
+        durum: { etki: "yanma", sans: 0.4, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} camının kapağını aralıyor ve üstüne soluk, mavi-beyaz bir alev akıyor; bir dünyanın son ateşi, şimdi tenini yakıyor.", en: "{dusman} cracks its crystal open and a pale blue-white flame pours over you. The last fire of a whole world, burning your skin." }
+      - id: "icerideki_ses"
+        ad: { tr: "İçerideki Ses", en: "The Voice Inside" }
+        stat: "wis"
+        taban: 16
+        kat: 0.8
+        etiketler: ["zihin", "ses"]
+        durum: { etki: "korku", sans: 0.4, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} kıpırdıyor ve alevin içindeki yüz çığlık atıyor; ses camdan değil, kafatasının içinden geliyor ve bir dünyanın son anını anlatıyor.", en: "{dusman} flickers, and the face in the flame screams. The sound doesn't come through the crystal. It comes from inside your skull, and it's describing a world's last moment." }
+      - id: "fitil_cekme"
+        ad: { tr: "Fitil Çekme", en: "Wick Draw" }
+        stat: "wil"
+        taban: 17
+        kat: 0.8
+        etiketler: ["karanlik", "can_emme"]
+        durum: { etki: "kanama", sans: 0.35, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} göğsünden ince bir ışık ipliği çekiyor ve kendi fitiline ekliyor; alevi bir an daha parlak, sen bir an daha soluk.", en: "{dusman} draws a thin thread of light out of your chest and twists it into its own wick. For a moment its flame burns brighter, and you burn a little dimmer." }
+    xp: 6330
+    kredi: 18
+    ganimet: { kandil_fitili: 0.45, canavar_cekirdegi: 0.15 }
+    etiketler: ["ruh", "cok_evren", "kadim"]
+    boss: false
+  bos_taht_golgesi:
+    ad: { tr: "Boş Tahtın Gölgesi", en: "Shadow of the Empty Throne" }
+    aciklama: { tr: "Yedi Taht'ın yedi tahtından biri boş. Kim oturuyordu, neden kalktı, Kadimler bundan söz etmiyor. Ama tahtın gölgesi sahibini beklemekten hiç vazgeçmedi; tahta yaklaşan her yabancıyı bir gaspçı sayıyor ve bir zamanlar orada oturanın gücüyle onu ezmeye çalışıyor.", en: "One of the seven thrones of the Sevenfold Court is empty. Who sat there, and why they left, the Ancients never say. But the throne's shadow never stopped waiting for its owner. It takes every stranger who comes near for a usurper, and tries to crush them with the power of whoever used to sit there." }
+    kanca: { tr: "Boş tahtın önünden geçerken gölgesi seninkinin üstüne düşüyor ve senin gölgen yerinden kalkıp diz çöküyor. Sen hâlâ ayaktasın. Taht gölgesi bunu hoş karşılamıyor.", en: "As you pass in front of the empty throne, its shadow falls across yours, and your shadow gets up off the floor and kneels. You're still standing. The throne's shadow does not care for that." }
+    seviye: 39
+    can: 980
+    statlar:
+      str: 38
+      agi: 30
+      end: 38
+      int: 40
+      wis: 34
+      per: 32
+      wil: 46
+      cha: 30
+    davranis: "agresif"
+    zeki: false
+    zaaf: "isik"
+    zaaf_metin: { tr: "Bir gölge olarak tahtın arkasındaki karanlığa bağlı. Tahtın üstüne güçlü bir ışık düşür; gölge kısalır, incelir ve kendi sahibinin boyuna, yani hiçliğe, iner.", en: "As a shadow, it's tied to the dark behind the throne. Throw a hard light onto the throne itself and the shadow shortens, thins out, and shrinks down to the size of its owner. Which is to say, nothing." }
+    saldirilar:
+      - id: "taht_hukmu"
+        ad: { tr: "Taht Hükmü", en: "Throne Edict" }
+        stat: "wil"
+        taban: 22
+        kat: 0.8
+        etiketler: ["karanlik", "zihin"]
+        durum: { etki: "korku", sans: 0.45, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} bir hüküm veriyor; dili bilmiyorsun ama anlamını kemiklerin anlıyor: diz çök ya da yok ol.", en: "{dusman} hands down a decree. You don't speak the language, but your bones understand it fine: kneel, or stop existing." }
+      - id: "golge_kilic"
+        ad: { tr: "Gölge Kılıç", en: "Shade Blade" }
+        stat: "agi"
+        taban: 21
+        kat: 0.8
+        etiketler: ["karanlik", "yakin"]
+        durum: { etki: "kanama", sans: 0.4, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} yerdeki gölgenden bir kılıç çekiyor, senin gölgenden, ve onu sana saplıyor.", en: "{dusman} draws a sword out of the shadow at your feet, your own shadow, and runs you through with it." }
+      - id: "bos_koltuk"
+        ad: { tr: "Boş Koltuk", en: "The Empty Seat" }
+        stat: "int"
+        taban: 20
+        kat: 0.8
+        etiketler: ["zihin"]
+        durum: { etki: "sersemleme", sans: 0.4, sure: 1 }
+        bekleme: 3
+        metin: { tr: "{dusman} tahtı gösteriyor ve bir an kendini orada otururken görüyorsun: altında dünyalar, önünde diz çökmüş Kadimler. Görüntü kaybolduğunda hâlâ yerinden kıpırdayamıyorsun.", en: "{dusman} gestures at the throne, and for a moment you see yourself sitting in it, worlds beneath you, Ancients kneeling at your feet. When the vision fades, you still can't move." }
+    xp: 14600
+    kredi: 150
+    ganimet: { taht_golgesi_parcasi: 0.6, canavar_cekirdegi: 1.0, sessizlik_muhru: 0.4 }
+    etiketler: ["ruh", "cok_evren", "kadim", "elit"]
+    boss: false
+    fazlar:
+      - esik: 60
+        metin: { tr: "Gölge tahta geri çekiliyor ve tahtın üstünde bir an bir biçim beliriyor: uzun, taçlı, tanıdık olmayan. Sonra biçim dağılıyor ve gölge iki katına çıkarak salona yayılıyor.", en: "The shadow pulls back onto the throne, and for a moment a shape appears in the seat: tall, crowned, like nothing you know. Then the shape breaks up, and the shadow spills across the hall, twice the size it was." }
+        guclenme: { str: 4, wil: 5 }
+        saldiri:
+          id: "taht_karanligi"
+          ad: { tr: "Taht Karanlığı", en: "Throne Dark" }
+          stat: "wil"
+          taban: 24
+          kat: 0.8
+          etiketler: ["karanlik", "alan"]
+          durum: { etki: "kor", sans: 0.45, sure: 2 }
+          bekleme: 3
+          metin: { tr: "{dusman} salonun bütün ışıklarını tahtın arkasına çekiyor; karanlıkta yalnızca tahtın kenarları parlıyor ve bir taç.", en: "{dusman} drags every light in the hall back behind the throne. In the dark, the only things still shining are the edges of the throne, and a crown." }
+      - esik: 25
+        metin: { tr: "Gölge çatlıyor; çatlaklardan, tahttan kalkıp gidenin son sözleri sızıyor. Anlamıyorsun ama bir kelimeyi tanıyorsun, çünkü onu senin Sistem'in de kullanıyor: [Hasat].", en: "The shadow cracks, and through the cracks seep the last words of whoever got up and left that throne. You don't understand them, but you recognize one word, because your System uses it too: [Harvest]." }
+        guclenme: { int: 5, agi: 4 }
+        saldiri:
+          id: "gaspcinin_sonu"
+          ad: { tr: "Gaspçının Sonu", en: "The Usurper's End" }
+          stat: "int"
+          taban: 26
+          kat: 0.8
+          etiketler: ["karanlik", "can_emme"]
+          durum: { etki: "kanama", sans: 0.5, sure: 3 }
+          bekleme: 2
+          metin: { tr: "{dusman} bütün ağırlığıyla üstüne çöküyor, bir tahtın bir gaspçıya çöktüğü gibi; gölgesi seninkini yutmaya başlıyor.", en: "{dusman} comes down on you with all its weight, the way a throne comes down on a usurper, and its shadow starts swallowing yours." }
+  # ---------------------------------------------------------------- Sistem Çekirdeği (EN: the System Core) — bağışıklık sistemi
+  ak_surec:
+    ad: { tr: "Ak Süreç", en: "White Process" }
+    aciklama: { tr: "Sistem Çekirdeği'nin koridorlarında dolaşan, bembeyaz, kusursuz geometrik biçimler: bir küp, bir çokyüzlü, bir dönen halka. Sistem'in bağışıklık hücreleri. Hata ararlar; buldukları her hatayı sarar, eritir ve silerler. Çekirdeğin gözünde, sen bir hatasın.", en: "Blinding white, perfectly geometric shapes that drift through the corridors of the System Core: a cube, a polyhedron, a spinning ring. The System's immune cells. They hunt for errors, and every error they find, they wrap up, dissolve and delete. As far as the Core is concerned, you're an error." }
+    kanca: { tr: "Koridorun beyazlığında bir kıvrım beliriyor; bir küp, kendi etrafında dönerek sana yaklaşıyor. Önünde bir satır akıyor: [Tanımsız varlık. Sınıflandırılıyor...]", en: "A fold appears in the whiteness of the corridor: a cube, rotating slowly on its own axis, drifting closer. A line scrolls past in front of it: [Undefined entity. Classifying...]" }
+    seviye: 38
+    can: 380
+    statlar:
+      str: 18
+      agi: 24
+      end: 16
+      int: 24
+      wis: 18
+      per: 24
+      wil: 20
+      cha: 1
+    davranis: "suru"
+    zeki: false
+    zaaf: "karanlik"
+    zaaf_metin: { tr: "Saf Sistem ışığından yapılmışlar ve yalnızca temiz kodu tanırlar. Karanlık, onların gözünde bozulmuş veridir: dokundukları an kendilerini enfekte sayıp karantinaya alırlar.", en: "They're made of pure System light, and they only recognize clean code. Darkness reads to them as corrupted data: the moment they touch it, they flag themselves as infected and quarantine themselves." }
+    saldirilar:
+      - id: "silme_dokunusu"
+        ad: { tr: "Silme Dokunuşu", en: "Delete Touch" }
+        stat: "int"
+        taban: 19
+        kat: 0.8
+        etiketler: ["isik", "yakin"]
+        durum: { etki: "kanama", sans: 0.35, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} koluna değiyor ve değdiği yerde tenin bir an pikselleşiyor; birkaç satır, sessizce, siliniyor.", en: "{dusman} brushes your arm, and where it touches, your skin pixelates for a second. A few lines of you quietly get deleted." }
+      - id: "yama"
+        ad: { tr: "Yama", en: "Patch" }
+        stat: "wis"
+        taban: 16
+        kat: 0.7
+        etiketler: ["zihin"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} üstüne beyaz bir kare yapıştırıyor: [Yama uygulanıyor]. Bir an hareketlerin, sana ait olmayan bir koda göre işliyor.", en: "{dusman} slaps a white square onto you: [Applying patch]. For a moment, your body runs on code that isn't yours." }
+      - id: "inceleme_isareti"
+        ad: { tr: "İnceleme İşareti", en: "Flag for Review" }
+        stat: "per"
+        taban: 14
+        kat: 0.7
+        etiketler: ["isik", "alan"]
+        durum: { etki: "kor", sans: 0.4, sure: 2 }
+        bekleme: 3
+        metin: { tr: "{dusman} etrafında bir halka çiziyor ve çekirdeğin bütün beyazlığı sana dönüyor; gözlerin bembeyaz bir hatayla doluyor: [İnceleme için işaretlendi].", en: "{dusman} draws a ring around you, and all the white in the Core turns your way. Your eyes fill with one blinding error: [Flagged for review]." }
+    xp: 4900
+    kredi: 10
+    ganimet: { ak_surec_parcasi: 0.45 }
+    etiketler: ["sistem", "kukla"]
+    boss: false
+  karantina:
+    ad: { tr: "Karantina", en: "Quarantine" }
+    aciklama: { tr: "Sistem Çekirdeği'nin anomaliler için çalıştırdığı en büyük süreç: kendi etrafında yavaşça dönen, iç içe geçmiş beyaz kafeslerden oluşan bir yapı. Sistem'in sana karşı ilk ve son kişisel cevabı. Seni öldürmek için değil, seni hiçbir şeye dokunamayacağın bir yere kapatmak için var.", en: "The biggest process the System Core runs against anomalies: a structure of nested white cages, all turning slowly inside one another. The System's first and last personal answer to you. It isn't built to kill you. It's built to lock you somewhere you can never touch anything again." }
+    kanca: { tr: "Önündeki koridor kapanıyor; arkandaki de. Duvarlar, tavan, zemin, hepsi aynı anda içe doğru katlanıyor ve ortada, kafeslerden yapılmış bir şey dönmeye başlıyor. [Anomali yalıtılıyor.]", en: "The corridor ahead of you seals shut. So does the one behind you. Walls, ceiling, floor, all of it folds inward at once, and in the middle, something made of cages starts to turn. [Isolating anomaly.]" }
+    seviye: 40
+    can: 1000
+    statlar:
+      str: 30
+      agi: 26
+      end: 50
+      int: 50
+      wis: 44
+      per: 40
+      wil: 52
+      cha: 4
+    davranis: "temkinli"
+    zeki: false
+    zaaf: "zihin"
+    zaaf_metin: { tr: "Kusursuz bir mantıkla çalışıyor ve kusursuz mantığın da bir dibi var. Ona bir çelişki ver: kendini korumak için onu yok etmen gerektiğini, onu yok edersen Sistem'i koruyacağını. Kafesleri bir an birbirine takılır.", en: "It runs on flawless logic, and flawless logic has a floor. Hand it a contradiction: that to protect itself, it has to let you go; that destroying it is how the System gets protected. Its cages snag on each other for a moment." }
+    saldirilar:
+      - id: "karantina_hucresi"
+        ad: { tr: "Karantina Hücresi", en: "Containment Cell" }
+        stat: "int"
+        taban: 22
+        kat: 0.8
+        etiketler: ["isik", "zihin"]
+        durum: { etki: "sersemleme", sans: 0.4, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} kafeslerinden birini fırlatıyor; beyaz çubuklar etrafında kapanıyor ve hücre daralırken her çubuk tenini dağlıyor.", en: "{dusman} throws out one of its cages. White bars snap shut around you, and as the cell tightens, every bar sears your skin." }
+      - id: "sterilizasyon"
+        ad: { tr: "Sterilizasyon", en: "Sterilize" }
+        stat: "wil"
+        taban: 22
+        kat: 0.8
+        etiketler: ["isik", "alan"]
+        durum: { etki: "yanma", sans: 0.45, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} bütün kafeslerini aynı anda yakıyor ve yalıtılmış alan, temizlenecek bir şey gibi, beyaz bir ateşle dolup taşıyor.", en: "{dusman} lights up every one of its cages at once, and the sealed space floods with white fire, like something that needs to be scrubbed clean." }
+      - id: "yalitim_duvari"
+        ad: { tr: "Yalıtım Duvarı", en: "Isolation Wall" }
+        stat: "end"
+        taban: 18
+        kat: 0.6
+        etiketler: ["fiziksel"]
+        durum: { etki: "kalkan", sans: 1.0, sure: 2 }
+        bekleme: 3
+        metin: { tr: "{dusman} kafeslerini bir duvar gibi önüne diziyor ve seni geri itiyor: [Yalıtım katmanı eklendi].", en: "{dusman} stacks its cages into a wall between you and shoves you back: [Isolation layer added]." }
+    xp: 15300
+    kredi: 50
+    ganimet: { karantina_anahtari: 0.6, canavar_cekirdegi: 1.0, ak_surec_parcasi: 0.6 }
+    etiketler: ["sistem", "elit"]
+    boss: false
+    fazlar:
+      - esik: 50
+        metin: { tr: "Kafesler yavaşlıyor ve aralarından bir pencere süzülüyor: [Yalıtım başarısız. İkinci protokole geçiliyor.] Karantina artık seni kapatmaya çalışmıyor; seni küçültmeye çalışıyor.", en: "The cages slow down, and a window slips out between them: [Isolation failed. Escalating to secondary protocol.] Quarantine isn't trying to lock you up anymore. It's trying to make you smaller." }
+        guclenme: { int: 5, wil: 5 }
+        saldiri:
+          id: "geri_yukleme"
+          ad: { tr: "Geri Yükleme", en: "Restore Point" }
+          stat: "int"
+          taban: 25
+          kat: 0.8
+          etiketler: ["zihin"]
+          durum: { etki: "korku", sans: 0.5, sure: 2 }
+          bekleme: 3
+          metin: { tr: "{dusman} seni bir geri yükleme noktasına döndürmeye çalışıyor; bir an yeniden Entegrasyon sabahındasın, güçsüz ve korkmuş, mavi bir pencerenin önünde.", en: "{dusman} tries to roll you back to a restore point, and for one moment you're standing in the morning of Integration again, weak and scared, in front of a blue window." }
+      - esik: 20
+        metin: { tr: "Kafeslerin hepsi aynı anda çatlıyor ve çatlakların arasından, Sistem'in sesi değil, yorgun bir başka ses duyuluyor: [Bu döngüde de olmadı.] Sonra Karantina bütün gücünü tek bir noktaya, sana, topluyor.", en: "Every cage cracks at once, and through the cracks comes a voice that isn't the System's. A tired one: [Not this loop either.] Then Quarantine pulls everything it has into a single point. You." }
+        guclenme: { end: 5, wil: 6 }
+        saldiri:
+          id: "tam_silme"
+          ad: { tr: "Tam Silme", en: "Hard Delete" }
+          stat: "wil"
+          taban: 28
+          kat: 0.8
+          etiketler: ["isik", "alan"]
+          durum: { etki: "kanama", sans: 0.5, sure: 3 }
+          bekleme: 3
+          metin: { tr: "{dusman} tek bir beyaz ışın oluyor ve ışının geçtiği yerde, bir an için, hiçbir şey yok; ne koridor, ne zemin, ne de senin bir parçan.", en: "{dusman} becomes a single white beam, and wherever the beam passes, for a moment, there is nothing: no corridor, no floor, and not one piece of you." }
+  # ---------------------------------------------------------------- Kule bantları (EN: the Spire) — kat seviyesine ölçeklenir
+  kat_sarmasigi:
+    ad: { tr: "Kat Sarmaşığı", en: "Stairvine" }
+    aciklama: { tr: "Kule'nin iç boşluğunda, katları birbirine bağlayan merdiven kuyusunda yukarı doğru tırmanan bir sarmaşık. Hiç güneş görmedi; Sistem'in mavi ışığıyla besleniyor ve tırmananların ayaklarına dolanıp onları kendi gübresi yapıyor.", en: "A vine that climbs the hollow core of the Spire, up the stairwell that ties the floors together. It has never seen the sun. It lives on the System's blue light, and it tangles climbers' ankles and turns them into fertilizer." }
+    kanca: { tr: "Basamağa bastığında altından bir yaprak kıpırdıyor. Sonra merdiven korkuluğuna sarılı bütün sarmaşık, bir yılan gibi, sana doğru başını kaldırıyor.", en: "When you step onto the stair, a leaf stirs under your boot. Then the whole vine wrapped around the railing lifts its head toward you like a snake." }
+    seviye: 21
+    can: 290
+    statlar:
+      str: 15
+      agi: 8
+      end: 16
+      int: 4
+      wis: 12
+      per: 10
+      wil: 13
+      cha: 1
+    davranis: "temkinli"
+    zeki: false
+    zaaf: "ates"
+    zaaf_metin: { tr: "Kule'nin kuru, durgun havasında büyüdü; yaprakları kâğıt gibi. Bir alev bütün merdiven boyunca tırmanır ve sarmaşığı kökünden söker.", en: "It grew up in the Spire's dry, dead air, and its leaves are like paper. A flame will race up the whole stairwell and burn it out by the root." }
+    saldirilar:
+      - id: "dolanma"
+        ad: { tr: "Dolanma", en: "Tangle" }
+        stat: "str"
+        taban: 12
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} ayak bileklerine dolanıp seni basamaklardan aşağı çekiyor; her basamak bir tokat gibi sırtına iniyor.", en: "{dusman} winds around your ankles and yanks you down the stairs, and every step lands on your back like a slap." }
+      - id: "diken_filizi"
+        ad: { tr: "Diken Filizi", en: "Thornshoot" }
+        stat: "per"
+        taban: 11
+        kat: 0.8
+        etiketler: ["delici", "menzilli"]
+        durum: { etki: "kanama", sans: 0.3, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} duvardan bir filiz fırlatıyor; ucundaki diken koluna giriyor ve içeride kök salmaya çalışıyor.", en: "{dusman} shoots a sprout out of the wall. The thorn on its tip goes into your arm and tries to put down roots." }
+    xp: 2400
+    kredi: 5
+    ganimet: { sarmasik_lifi: 0.5, aci_kok: 0.3 }
+    etiketler: ["bitki", "kule"]
+    boss: false
+  basamak_yiyen:
+    ad: { tr: "Basamak Yiyen", en: "Stair Eater" }
+    aciklama: { tr: "Kule'nin basamaklarını yiyerek yaşayan, halka ağızlı, gri bir kurt. Yediği basamakların yerine kendi bedenini koyuyor; bu yüzden Kule'de bazı merdivenler yumuşaktır ve bazı merdivenler nefes alır.", en: "A gray, ring-mouthed worm that lives by eating the Spire's stairs. It replaces every step it eats with a piece of its own body, which is why some staircases in the Spire are soft, and some of them breathe." }
+    kanca: { tr: "Önündeki on basamak aynı anda, hafifçe, aşağı doğru çöküyor. Sonra yükseliyor. Merdiven bir yutkunma sesi çıkarıyor.", en: "The next ten steps all sag at once, just slightly. Then they rise again. The staircase makes a sound like a swallow." }
+    seviye: 22
+    can: 310
+    statlar:
+      str: 18
+      agi: 10
+      end: 17
+      int: 3
+      wis: 6
+      per: 12
+      wil: 12
+      cha: 1
+    davranis: "agresif"
+    zeki: false
+    zaaf: "delici"
+    zaaf_metin: { tr: "Taş basamak taklidi yaptığı yerde derisi gergin ve ince. Bir uç o gerginliği deler; kurt bir balon gibi söner ve merdivenin altına çekilir.", en: "Where it's pretending to be a stone step, its skin is stretched tight and thin. A sharp point punctures that, and the worm deflates like a balloon and pulls back under the stairs." }
+    saldirilar:
+      - id: "basamak_cokertme"
+        ad: { tr: "Basamak Çökertme", en: "Stair Collapse" }
+        stat: "str"
+        taban: 14
+        kat: 0.8
+        etiketler: ["fiziksel", "alan"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} altındaki basamakları birden çekiyor; zemin kayboluyor ve bir alt sahanlığa yuvarlanıyorsun.", en: "{dusman} yanks the steps out from under you all at once. The floor disappears and you tumble down to the landing below." }
+      - id: "halka_agiz"
+        ad: { tr: "Halka Ağız", en: "Ring Maw" }
+        stat: "str"
+        taban: 14
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.3, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} basamağın ortasında yuvarlak bir ağız açıyor; içe dönük diş halkaları bacağını kavrıyor ve döne döne çekiyor.", en: "{dusman} opens a round mouth in the middle of the step, and rings of inward-pointing teeth grab your leg and start to twist." }
+    xp: 2600
+    kredi: 6
+    ganimet: { basamak_tasi: 0.45 }
+    etiketler: ["hayvan", "kule"]
+    boss: false
+  kat_avcisi:
+    ad: { tr: "Kat Avcısı", en: "Floor Stalker" }
+    aciklama: { tr: "Kule'nin kendi yırtıcısı: uzun, eklemleri ters bükülen, gri derili bir şey. Bir katı bir avlak gibi kullanır; tırmananı bir kat boyunca izler, en yorgun anını bekler ve ancak o zaman karanlıktan çıkar.", en: "The Spire's own predator: a long, gray-skinned thing with joints that bend the wrong way. It treats each floor like a hunting ground, follows a climber the whole length of it, waits for the most exhausted moment, and only then steps out of the dark." }
+    kanca: { tr: "Bütün kat boyunca bir şeyin seni izlediğini hissettin. Şimdi, nefesini toplamak için durduğun anda, arkandaki karanlıkta iki göz yavaşça açılıyor.", en: "You've felt something watching you the whole length of this floor. Now, the moment you stop to catch your breath, two eyes slowly open in the dark behind you." }
+    seviye: 24
+    can: 260
+    statlar:
+      str: 16
+      agi: 20
+      end: 11
+      int: 8
+      wis: 10
+      per: 20
+      wil: 11
+      cha: 1
+    davranis: "temkinli"
+    zeki: false
+    zaaf: "isik"
+    zaaf_metin: { tr: "Kule'nin loş koridorlarında doğdu; gözleri en küçük ışığı bile toplayacak kadar büyük. Ani, güçlü bir ışık onu kör eder ve gizlenmenin ona verdiği her şeyi elinden alır.", en: "It was born in the Spire's dim corridors, and its eyes are huge enough to soak up the faintest light. A sudden, strong light blinds it and takes away everything hiding ever gave it." }
+    saldirilar:
+      - id: "kor_nokta_pencesi"
+        ad: { tr: "Kör Nokta Pençesi", en: "Blindside Claw" }
+        stat: "agi"
+        taban: 14
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.35, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} tam görüş alanının kenarından çıkıyor ve uzun pençeleriyle sırtını yarıp yeniden gölgeye karışıyor.", en: "{dusman} comes from right at the edge of your vision, splits your back open with its long claws, and melts back into the shadows." }
+      - id: "topuk_kesme"
+        ad: { tr: "Topuk Kesme", en: "Hamstring" }
+        stat: "agi"
+        taban: 12
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} yere kapaklanıp dizinin arkasına bir pençe atıyor; bacağın altından boşalıyor.", en: "{dusman} drops flat and swipes at the back of your knee, and your leg folds right out from under you." }
+      - id: "kaybolma"
+        ad: { tr: "Kaybolma", en: "Fade" }
+        stat: "agi"
+        taban: 9
+        kat: 0.6
+        etiketler: ["fiziksel"]
+        durum: { etki: "hizlanma", sans: 1.0, sure: 2 }
+        bekleme: 4
+        metin: { tr: "{dusman} sana bir kez dokunup geri çekiliyor ve koridorun karanlığına karışıyor. Bir sonraki adımında onu iki yerden birden duyuyorsun.", en: "{dusman} tags you once, pulls back and dissolves into the dark of the corridor. On your next step, you hear it in two places at once." }
+    xp: 3050
+    kredi: 8
+    ganimet: { avci_pencesi: 0.45 }
+    etiketler: ["hayvan", "kule"]
+    boss: false
+  sessiz_kanat:
+    ad: { tr: "Sessiz Kanat", en: "Hushwing" }
+    aciklama: { tr: "Kule'nin yüksek tavanlı katlarında yaşayan, baykuşa benzeyen ama yüzü olmayan bir avcı. Uçarken hiç ses çıkarmıyor; etrafındaki sesleri de yutuyor. Geldiğini, kendi ayak seslerini duyamadığında anlarsın.", en: "A hunter that lives on the Spire's high-ceilinged floors. It's shaped like an owl but has no face. It makes no sound when it flies, and it swallows the sounds around it too. You know it's coming when you can't hear your own footsteps anymore." }
+    kanca: { tr: "Adımların sessizleşiyor. Nefesin sessizleşiyor. Kalbinin atışını bile duyamıyorsun. Tepende, geniş ve beyaz bir şey kanatlarını açıyor.", en: "Your footsteps go quiet. Your breathing goes quiet. You can't even hear your heartbeat. Overhead, something wide and white spreads its wings." }
+    seviye: 25
+    can: 250
+    statlar:
+      str: 12
+      agi: 20
+      end: 10
+      int: 10
+      wis: 14
+      per: 22
+      wil: 12
+      cha: 1
+    davranis: "kacan"
+    zeki: false
+    zaaf: "ses"
+    zaaf_metin: { tr: "Sessizliği bir zırh gibi giyiyor. Yuttuğundan daha büyük bir ses çıkar; zırhı yırtılır, kanatları bir anda ağırlaşır ve yere çakılır.", en: "It wears silence like armor. Make more noise than it can swallow and the armor rips, its wings go heavy all at once, and it crashes to the floor." }
+    saldirilar:
+      - id: "sessiz_pike"
+        ad: { tr: "Sessiz Pike", en: "Silent Stoop" }
+        stat: "agi"
+        taban: 14
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.35, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} hiçbir ses çıkarmadan tavandan düşüyor; pençeleri omzuna giriyor ve sen çığlık attığını yalnızca boğazının acısından anlıyorsun.", en: "{dusman} drops off the ceiling without a sound. Its talons sink into your shoulder, and the only way you know you screamed is the ache in your throat." }
+      - id: "sessizlik_ortusu"
+        ad: { tr: "Sessizlik Örtüsü", en: "Hush" }
+        stat: "wis"
+        taban: 11
+        kat: 0.8
+        etiketler: ["zihin", "alan"]
+        durum: { etki: "korku", sans: 0.35, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} kanatlarını üstüne bir örtü gibi geriyor ve dünya tamamen susuyor. O sessizliğin içinde yalnız olduğunu, tamamen yalnız olduğunu düşünmeye başlıyorsun.", en: "{dusman} spreads its wings over you like a blanket, and the world goes completely silent. Inside that silence, you start to believe you're alone. Completely alone." }
+    xp: 3280
+    kredi: 6
+    ganimet: { sessiz_tuy: 0.5 }
+    etiketler: ["hayvan", "kule"]
+    boss: false
+  kuyu_sakini:
+    ad: { tr: "Kuyu Sakini", en: "Shaftdweller" }
+    aciklama: { tr: "Kule'nin ortasından geçen, asansörü hiç olmamış bir asansör boşluğu var: ne dibi görünüyor ne tepesi. O boşluğun duvarlarında, ızgaraların arkasında, kolları gövdesinin üç katı uzun bir şey yaşıyor. Yukarı çıkanları seyrediyor. Arada bir, birini içeri alıyor.", en: "There's an elevator shaft running up the middle of the Spire that never had an elevator in it. You can't see the bottom or the top. On the walls of that shaft, behind the grates, lives something with arms three times longer than its body. It watches people climb. Every so often, it takes one inside." }
+    kanca: { tr: "Duvardaki havalandırma ızgarasından ılık, sürekli bir hava akıyor. Sonra akış kesiliyor; çünkü ızgaranın arkasında bir şey nefesini tutuyor. Izgaranın çubuklarını, içeriden, uzun gri parmaklar kavrıyor.", en: "A steady, warm draft breathes out of the vent grate in the wall. Then it stops, because something behind the grate is holding its breath. Long gray fingers curl around the bars from the inside." }
+    seviye: 26
+    can: 300
+    statlar:
+      str: 18
+      agi: 16
+      end: 13
+      int: 8
+      wis: 12
+      per: 18
+      wil: 14
+      cha: 1
+    davranis: "agresif"
+    zeki: false
+    zaaf: "ruzgar"
+    zaaf_metin: { tr: "Boşluğun duvarlarına yalnızca parmak uçlarıyla tutunuyor ve kuyudan yükselen sıcak hava onu taşıyor. Ters, sert bir rüzgar onu tutunduğu yerden koparır; dipsiz kuyuya düşmemek için bütün kollarıyla duvara yapışmak zorunda kalır.", en: "It clings to the shaft walls by its fingertips, riding the warm air that rises up the well. A hard crosswind rips it off its holds, and it has to throw every arm it has at the wall just to keep from falling into the bottomless dark." }
+    saldirilar:
+      - id: "izgaradan_uzanan"
+        ad: { tr: "Izgaradan Uzanan", en: "Through the Grate" }
+        stat: "str"
+        taban: 14
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "korku", sans: 0.25, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} ızgaranın arkasından bir kol uzatıyor, sonra bir dirsek, sonra bir dirsek daha; kol bitmiyor ve sonunda bileğini kavrıyor.", en: "{dusman} reaches an arm out through the grate. Then an elbow. Then another elbow. The arm just keeps coming, and finally it closes around your wrist." }
+      - id: "bosluga_cekme"
+        ad: { tr: "Boşluğa Çekme", en: "Into the Shaft" }
+        stat: "str"
+        taban: 15
+        kat: 0.8
+        etiketler: ["fiziksel"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} seni ızgaraya doğru çekip duvara çarpıyor; çubukların arasından aşağı bakıyorsun ve kuyunun dibi yok.", en: "{dusman} hauls you against the grate and slams you into the wall. Through the bars you're looking straight down, and the shaft has no bottom." }
+      - id: "kuyu_ugultusu"
+        ad: { tr: "Kuyu Uğultusu", en: "Shaft Moan" }
+        stat: "wil"
+        taban: 12
+        kat: 0.8
+        etiketler: ["ses", "zihin"]
+        durum: { etki: "korku", sans: 0.35, sure: 2 }
+        bekleme: 3
+        metin: { tr: "{dusman} boşluğa doğru uzun, alçak bir ses bırakıyor ve kuyu o sesi yüz kat aşağıdan ve yüz kat yukarıdan aynı anda geri yolluyor.", en: "{dusman} lets a long, low moan out into the shaft, and the shaft sends it back from a hundred floors down and a hundred floors up at the same time." }
+    xp: 3520
+    kredi: 10
+    ganimet: { kuyu_tirnagi: 0.45 }
+    etiketler: ["kule", "yaratik"]
+    boss: false
+  sinav_heykeli:
+    ad: { tr: "Sınav Heykeli", en: "Trial Statue" }
+    aciklama: { tr: "Kule'nin sınav katlarında duran, kaidesinin üstünde kımıldamadan bekleyen taş heykeller. Bir tırmanıcı katın kuralını çiğnediğinde ya da bir sınavı yarıda bıraktığında canlanıyorlar. Kaidelerinde, Sistem'in dilinde yazılmış tek bir soru var; kimse cevabını bilmiyor.", en: "Stone statues that stand motionless on their plinths on the Spire's trial floors. They come to life when a climber breaks a floor's rule or walks away from a trial halfway through. Each plinth has a single question carved on it in the System's language. Nobody knows the answer." }
+    kanca: { tr: "Kaidenin üstündeki yazı mavi parlamaya başlıyor. Taş bir göz kapağı ağır ağır kalkıyor ve heykel, yüzyılların tozunu silkeleyerek kaidesinden iniyor.", en: "The carving on the plinth starts to glow blue. A stone eyelid lifts, slow and heavy, and the statue steps down off its plinth, shaking off centuries of dust." }
+    seviye: 28
+    can: 450
+    statlar:
+      str: 22
+      agi: 8
+      end: 26
+      int: 6
+      wis: 10
+      per: 14
+      wil: 20
+      cha: 1
+    davranis: "temkinli"
+    zeki: false
+    zaaf: "buz"
+    zaaf_metin: { tr: "Taşının içinde, yüzyıllardır biriken ince nem damarları var. Buz o damarları genişletir ve heykel, bir kaya gibi, içten çatlar.", en: "There are thin veins of moisture inside its stone, centuries in the making. Ice swells those veins and the statue cracks from the inside, like a boulder in a hard frost." }
+    saldirilar:
+      - id: "tas_kilic"
+        ad: { tr: "Taş Kılıç", en: "Stone Blade" }
+        stat: "str"
+        taban: 16
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.25, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} kılıcını ağır, kusursuz bir yay çizerek indiriyor; taş bıçak keskin değil, ama bu ağırlıkta keskin olması gerekmiyor.", en: "{dusman} brings its sword down in a slow, perfect arc. The stone blade isn't sharp. At that weight, it doesn't need to be." }
+      - id: "kaide_darbesi"
+        ad: { tr: "Kaide Darbesi", en: "Plinth Stomp" }
+        stat: "end"
+        taban: 15
+        kat: 0.8
+        etiketler: ["fiziksel", "alan"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} taş ayağını yere vuruyor; bütün kat bir kez titriyor ve sen o titremenin içinde dengeni kaybediyorsun.", en: "{dusman} stamps a stone foot, and the whole floor shudders once. You lose your balance in the middle of it." }
+      - id: "sinav_sorusu"
+        ad: { tr: "Sınavın Sorusu", en: "The Question" }
+        stat: "wil"
+        taban: 13
+        kat: 0.8
+        etiketler: ["zihin"]
+        durum: { etki: "korku", sans: 0.35, sure: 2 }
+        bekleme: 3
+        metin: { tr: "{dusman} kaidesindeki soruyu yüksek sesle soruyor. Dili bilmiyorsun ama sorunun ne olduğunu biliyorsun: neden tırmanıyorsun? Cevabın yok.", en: "{dusman} asks the question carved on its plinth out loud. You don't know the language, but you know what it's asking: why are you climbing? You don't have an answer." }
+    xp: 4030
+    kredi: 12
+    ganimet: { heykel_tozu: 0.45, canavar_cekirdegi: 0.15 }
+    etiketler: ["kule", "kukla"]
+    boss: false
+  kayip_ekip:
+    ad: { tr: "Kayıp Ekip", en: "Lost Party" }
+    aciklama: { tr: "Kule'ye birlikte giren ve birlikte geri dönmeyen bir tırmanış ekibi. Hâlâ birbirlerine iple bağlılar; hâlâ tırmanıyorlar. Kask lambaları yanıyor, telsizleri cızırdıyor ve yollarına çıkan her canlıyı ekibe katmaya çalışıyorlar.", en: "A climbing party that went into the Spire together and never came back out. They're still roped together. They're still climbing. Their headlamps are on, their radios crackle, and they try to recruit every living thing they meet." }
+    kanca: { tr: "Merdivenden yukarı bir sıra kask lambası yaklaşıyor; hepsi aynı ritimle sallanıyor. Telsizden cızırtılı bir ses geliyor: \"Bir kişi daha. Bağlayın.\"", en: "A line of headlamps comes up the stairs, all of them bobbing in the same rhythm. A radio crackles: \"One more. Rope 'em in.\"" }
+    seviye: 30
+    can: 340
+    statlar:
+      str: 18
+      agi: 14
+      end: 16
+      int: 10
+      wis: 8
+      per: 14
+      wil: 18
+      cha: 4
+    davranis: "suru"
+    zeki: false
+    zaaf: "isik"
+    zaaf_metin: { tr: "Kask lambalarını hiç söndürmüyorlar ama o ışık onları yakmıyor; zayıf, sarı bir ışık. Gerçek, güçlü bir ışık onlara Kule'nin dışını, güneşi hatırlatır ve ip çözülür.", en: "Their headlamps never go out, but that weak yellow light doesn't hurt them. Real, strong light reminds them of the outside, of the sun, and the rope comes loose." }
+    saldirilar:
+      - id: "kazma_darbesi"
+        ad: { tr: "Kazma Darbesi", en: "Pick Swing" }
+        stat: "str"
+        taban: 16
+        kat: 0.8
+        etiketler: ["fiziksel", "delici"]
+        durum: { etki: "kanama", sans: 0.3, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} buz kazmasını bir duvara saplar gibi sırtına saplıyor ve ip üzerinden ötekilere işaret veriyor.", en: "{dusman} sinks an ice ax into your back the way you'd sink one into a wall, then tugs the rope to signal the others." }
+      - id: "ipe_baglama"
+        ad: { tr: "İpe Bağlama", en: "Roped Together" }
+        stat: "str"
+        taban: 14
+        kat: 0.8
+        etiketler: ["fiziksel"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} beline bir ip dolayıp ekibin geri kalanına çekiyor; bir an bütün o ölü ağırlık, seni de yanlarına sürüklüyor.", en: "{dusman} loops a rope around your waist and hauls on it, and for a moment all that dead weight drags you in with them." }
+      - id: "son_telsiz"
+        ad: { tr: "Son Telsiz Kaydı", en: "Last Radio Call" }
+        stat: "wil"
+        taban: 13
+        kat: 0.8
+        etiketler: ["ses", "zihin"]
+        durum: { etki: "korku", sans: 0.35, sure: 2 }
+        bekleme: 3
+        metin: { tr: "{dusman} telsizini açıyor ve ekibin son kaydı çalıyor: rüzgar, bir çığlık, sonra uzun bir sessizlik ve en sonda senin adın.", en: "{dusman} keys its radio and the party's last transmission plays: wind, a scream, a long silence, and at the very end, your name." }
+    xp: 3200
+    kredi: 15
+    ganimet: { tirmanici_kunyesi: 0.4, kucuk_iyilesme_iksiri: 0.2 }
+    etiketler: ["olu", "insan", "kule"]
+    boss: false
+  sinav_sovalyesi:
+    ad: { tr: "Sınav Şövalyesi", en: "Proving Knight" }
+    aciklama: { tr: "Kule'nin yüksek katlarından birinde, bir sahanlığı bekleyen, içi boş bir zırh. Bir zamanlar orada kim vardıysa çoktan gitti; zırh ise yalnızca bir şey için var: önünden geçmek isteyeni sınamak. Yenilenleri öldürmüyor. Hak etmeyenleri öldürüyor.", en: "An empty suit of armor that guards a landing high up in the Spire. Whoever wore it is long gone, and the armor exists for one reason: to test anyone who wants to get past. It doesn't kill the ones who lose. It kills the ones who don't deserve to." }
+    kanca: { tr: "Sahanlığın ortasındaki zırh kılıcını kaldırıyor ve sana selam veriyor; eski, ağır, kusursuz bir selam. Sonra kılıcın ucu sana dönüyor.", en: "The armor in the middle of the landing raises its sword and salutes you, an old, heavy, flawless salute. Then the point of the blade swings toward you." }
+    seviye: 33
+    can: 820
+    statlar:
+      str: 40
+      agi: 28
+      end: 36
+      int: 14
+      wis: 20
+      per: 30
+      wil: 34
+      cha: 10
+    davranis: "agresif"
+    zeki: false
+    zaaf: "simsek"
+    zaaf_metin: { tr: "İçi boş zırhı birbirine bağlayan şey, eklemlerinden akan ince bir mavi akım. Bir şimşek o akımı boğar; zırh bir an için gerçekten boştur ve parçaları yere düşmek üzeredir.", en: "What holds the empty armor together is a thin blue current running through its joints. Lightning drowns that current out, and for one moment the suit really is empty, every piece about to hit the floor." }
+    saldirilar:
+      - id: "dogru_hamle"
+        ad: { tr: "Doğru Hamle", en: "Riposte" }
+        stat: "agi"
+        taban: 20
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.4, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} senin darbeni kılıcının düzüyle saptırıyor ve aynı hareketin devamında bileğinden omzuna kadar açıyor.", en: "{dusman} turns your swing aside with the flat of its blade and, in the same motion, opens you up from wrist to shoulder." }
+      - id: "kalkan_ezmesi"
+        ad: { tr: "Kalkan Ezmesi", en: "Shield Bash" }
+        stat: "end"
+        taban: 19
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} kalkanını yüzüne çarpıyor; bir an yalnızca metalin uğultusunu duyuyorsun.", en: "{dusman} smashes its shield into your face, and for a moment all you can hear is the metal ringing." }
+      - id: "selam"
+        ad: { tr: "Selam", en: "The Salute" }
+        stat: "wil"
+        taban: 14
+        kat: 0.6
+        etiketler: ["zihin"]
+        durum: { etki: "hizlanma", sans: 1.0, sure: 2 }
+        bekleme: 4
+        metin: { tr: "{dusman} geri çekilip yeniden selam veriyor; bu kez selamın ardından gelen ilk adım, öncekilerin hepsinden daha hızlı.", en: "{dusman} steps back and salutes again, and this time the first step after the salute is faster than anything it's done yet." }
+    xp: 10800
+    kredi: 90
+    ganimet: { sovalye_plakasi: 0.6, canavar_cekirdegi: 1.0 }
+    etiketler: ["kule", "kukla", "elit"]
+    boss: false
+    fazlar:
+      - esik: 50
+        metin: { tr: "Zırhın göğüs plakası çatlıyor ve içinden mavi bir ışık sızıyor. Şövalye kalkanını yere bırakıyor, kılıcını iki eliyle kavrıyor. Artık sınamıyor; artık savaşıyor.", en: "The armor's breastplate cracks, and blue light leaks out of it. The knight sets its shield down and takes its sword in both hands. It isn't testing you anymore. It's fighting you." }
+        guclenme: { str: 5, agi: 4 }
+        saldiri:
+          id: "iki_elle"
+          ad: { tr: "İki El Kılıç", en: "Two-Handed Cut" }
+          stat: "str"
+          taban: 24
+          kat: 0.8
+          etiketler: ["fiziksel", "yakin"]
+          durum: { etki: "kanama", sans: 0.45, sure: 3 }
+          bekleme: 2
+          metin: { tr: "{dusman} kılıcı başının üstünden iki elle indiriyor; zemin taşı bile ikiye ayrılıyor ve sen o çizginin tam yanındasın.", en: "{dusman} brings the sword down two-handed from over its head. It splits the floor stone in half, and you're standing right next to the line." }
+  ara_kat_devi:
+    ad: { tr: "Sahanlık Devi", en: "Landing Colossus" }
+    aciklama: { tr: "Kule'nin bazı katları arasında, tavanı üç kat yüksekliğinde geniş sahanlıklar var. O sahanlıklardan birinde, tavana değecek boyda, tek gözlü bir dev oturuyor. Kule onu oraya bir kapı gibi koydu: geçmek için ya onu yenersin ya da Kule'nin gözünden düşersin.", en: "Between some of the Spire's floors there are wide landings with ceilings three stories high. On one of them sits a one-eyed giant tall enough to scrape that ceiling. The Spire put it there like a door: to get past, you beat it, or you fall out of the Spire's favor." }
+    kanca: { tr: "Sahanlığın ortasında bir tepe yükseliyor. Tepe ayağa kalkıyor, kalkıyor, kalkıyor; başı tavana sürtünüyor. Tek göz açılıyor ve bütün sahanlık o gözün ışığıyla doluyor.", en: "There's a hill in the middle of the landing. The hill stands up, and up, and up, until its head scrapes the ceiling. A single eye opens, and the whole landing fills with its light." }
+    seviye: 38
+    can: 1050
+    statlar:
+      str: 52
+      agi: 16
+      end: 54
+      int: 22
+      wis: 26
+      per: 32
+      wil: 46
+      cha: 4
+    davranis: "agresif"
+    zeki: false
+    zaaf: "goz"
+    zaaf_metin: { tr: "Tek bir gözü var ve bu göz, Kule'nin ona verdiği her şeyin kaynağı. Göze inen bir darbe devi kör eder; kör dev kendi sahanlığında duvarlara çarpar.", en: "It has one eye, and that eye is the source of everything the Spire gave it. Land a hit on the eye and the giant goes blind, and a blind giant stumbles into the walls of its own landing." }
+    saldirilar:
+      - id: "sahanlik_yumrugu"
+        ad: { tr: "Sahanlık Yumruğu", en: "Landing Fist" }
+        stat: "str"
+        taban: 24
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} bir kamyon büyüklüğündeki yumruğunu üstüne indiriyor; zemin çöküyor ve bir an bir alt katın tavanını görüyorsun.", en: "{dusman} drops a fist the size of a pickup truck on you. The floor caves in, and for a second you can see the ceiling of the floor below." }
+      - id: "tavan_cokertme"
+        ad: { tr: "Tavan Çökertme", en: "Ceiling Drop" }
+        stat: "str"
+        taban: 22
+        kat: 0.8
+        etiketler: ["fiziksel", "alan"]
+        durum: { etki: "kanama", sans: 0.35, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} başını tavana vuruyor; üstüne kara taş blokları yağmaya başlıyor ve her biri bir kapı kadar.", en: "{dusman} rams its head into the ceiling, and black stone blocks start raining down on you, every one of them as big as a door." }
+      - id: "tek_goz"
+        ad: { tr: "Tek Göz", en: "The One Eye" }
+        stat: "per"
+        taban: 20
+        kat: 0.8
+        etiketler: ["isik", "alan"]
+        durum: { etki: "kor", sans: 0.45, sure: 2 }
+        bekleme: 3
+        metin: { tr: "{dusman} tek gözünü sonuna kadar açıyor ve sahanlığı bembeyaz bir ışık dolduruyor; gözlerini kapatsan bile o ışık göz kapaklarından geçiyor.", en: "{dusman} opens its one eye as wide as it'll go, and the landing floods with white light. Even with your eyes shut, it shines straight through your eyelids." }
+    xp: 13940
+    kredi: 110
+    ganimet: { dev_gozu: 0.6, canavar_cekirdegi: 1.0 }
+    etiketler: ["kule", "elit"]
+    boss: false
+    fazlar:
+      - esik: 50
+        metin: { tr: "Dev bir dizinin üstüne çöküyor ve sahanlık sarsılıyor. Tek gözü kızarıyor; Kule'nin bütün ağırlığı omuzlarına binmiş gibi, ama o ağırlığı kaldırıp sana fırlatmaya hazırlanıyor.", en: "The giant drops to one knee, and the landing shakes. Its one eye goes red. It looks like the whole weight of the Spire just landed on its shoulders, and it's getting ready to pick that weight up and throw it at you." }
+        guclenme: { str: 5, end: 5 }
+        saldiri:
+          id: "kule_agirligi"
+          ad: { tr: "Kule'nin Ağırlığı", en: "The Weight of the Spire" }
+          stat: "str"
+          taban: 28
+          kat: 0.8
+          etiketler: ["fiziksel", "alan"]
+          durum: { etki: "sersemleme", sans: 0.45, sure: 1 }
+          bekleme: 3
+          metin: { tr: "{dusman} iki kolunu birden sahanlığa indiriyor ve dalgası seni duvara yapıştırıyor; bir an, üstündeki yüz katın her birinin ağırlığını ayrı ayrı hissediyorsun.", en: "{dusman} slams both arms into the landing, and the shockwave pins you to the wall. For one moment you can feel every one of the hundred floors above you, each with its own weight." }

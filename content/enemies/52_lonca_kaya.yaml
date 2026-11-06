@@ -1,0 +1,546 @@
+# Parti B2 düşmanları. Tasarım seviyesi 30; içerikte hep göreli başvuruyla kullanılır (@dunya, @oyuncu+N).
+dusmanlar:
+  percin_kurdu:
+    ad: { tr: "Perçin Kurdu", en: "Rivet Grub" }
+    aciklama: { tr: "Kapının öbür yanından taşan, kol boyunda soluk bir kurtçuk. Demir yer; perçinleri söküp yutar, sonra midesinde eritip kabuğuna sıvar.", en: "A pale grub as long as your forearm that spills out of the Gate. It eats iron: pulls rivets loose, swallows them, melts them down in its gut and plasters them onto its own shell." }
+    kanca: { tr: "Havuzun dibindeki saç levhalar kendiliğinden tıkırdamaya başlıyor; her perçin deliğinden soluk bir baş uzanıyor.", en: "The steel plates at the bottom of the basin start ticking on their own, and a pale head pokes out of every rivet hole." }
+    seviye: 30
+    can: 260
+    statlar:
+      str: 18
+      agi: 20
+      end: 22
+      int: 4
+      wis: 6
+      per: 14
+      wil: 10
+      cha: 2
+    davranis: "suru"
+    zeki: false
+    zaaf: "ates"
+    zaaf_metin: { tr: "Kabuğu eritilmiş demirden; ama içi hâlâ yumuşak ve kuru. Alev kabuğun altına girerse kurt kendi demirinde pişer.", en: "Its shell is melted-down iron, but the inside is still soft and dry. Get fire under that shell and it cooks in its own armor." }
+    saldirilar:
+      - id: "matkap_agiz"
+        ad: { tr: "Matkap Ağız", en: "Drill Mouth" }
+        stat: "str"
+        taban: 9
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.3, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} halka halka dişlerini döndürerek baldırına gömülüyor.", en: "{dusman} spins its rings of teeth and bores into your calf." }
+      - id: "pas_tukurugu"
+        ad: { tr: "Pas Tükürüğü", en: "Rust Spit" }
+        stat: "end"
+        taban: 7
+        kat: 0.7
+        etiketler: ["zehir", "menzilli"]
+        durum: { etki: "zehir", sans: 0.35, sure: 3 }
+        bekleme: 2
+        metin: { tr: "{dusman} gövdesini kasıp yüzüne turuncu, ılık bir pas çamuru püskürtüyor.", en: "{dusman} clenches and sprays a warm orange sludge of rust right in your face." }
+    xp: 4600
+    kredi: 30
+    ganimet: { hurda: 0.7, canli_bakir: 0.3 }
+    etiketler: ["bocek", "kapi"]
+    boss: false
+
+  kizak_kralicesi:
+    ad: { tr: "Kızak Kraliçesi", en: "The Slipway Queen" }
+    aciklama: { tr: "Tersanenin kızağında yarım kalmış bir yük gemisinin gövdesini kabuk diye giymiş dev bir kapı yaratığı. Perçin kurtlarının annesi; gemiyi içten yiyerek büyümüş.", en: "A massive Gate creature wearing the hull of a half-built freighter off the shipyard slipway like a hermit crab's shell. Mother of the rivet grubs. It grew by eating the ship from the inside out." }
+    kanca: { tr: "Kuru havuzun dibindeki gemi gövdesi inliyor, yan yatıyor ve kaburgalarının arasından iki kırmızı göz açılıyor.", en: "The ship's hull at the bottom of the dry dock groans and rolls onto its side, and two red eyes open between its ribs." }
+    seviye: 30
+    can: 2100
+    statlar:
+      str: 38
+      agi: 14
+      end: 42
+      int: 12
+      wis: 16
+      per: 22
+      wil: 30
+      cha: 6
+    davranis: "agresif"
+    zeki: false
+    zaaf: "simsek"
+    zaaf_metin: { tr: "Gövdesi gemi sacıyla kaynaşmış; sac iletken. Kabuğa inen bir yıldırım içindeki yumuşak eti doğrudan bulur.", en: "Its body's fused into ship steel, and ship steel conducts. Lightning that hits the shell goes straight into the soft meat inside." }
+    saldirilar:
+      - id: "omurga_ezmesi"
+        ad: { tr: "Omurga Ezmesi", en: "Keel Crush" }
+        stat: "str"
+        taban: 16
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.25, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} gövdesini yana yatırıyor ve geminin omurgası, bir çekiç gibi üstüne iniyor.", en: "{dusman} rolls its hull and the ship's keel comes down on you like a sledgehammer." }
+      - id: "kurt_dogumu"
+        ad: { tr: "Kurt Doğumu", en: "Brood Burst" }
+        stat: "end"
+        taban: 11
+        kat: 0.8
+        etiketler: ["alan", "zehir"]
+        durum: { etki: "zehir", sans: 0.4, sure: 3 }
+        bekleme: 2
+        metin: { tr: "{dusman} kaburgalarının arasından bir avuç perçin kurdu kusuyor; kurtlar düştükleri yerde sana doğru kıvrılıyor.", en: "{dusman} heaves a fistful of rivet grubs out from between its ribs, and they hit the ground squirming toward you." }
+    xp: 9000
+    kredi: 260
+    ganimet: { kizak_kabugu: 1.0, canavar_cekirdegi: 1.0, canli_bakir: 0.6 }
+    etiketler: ["boss", "kapi"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Gemi gövdesi çatırdıyor ve kraliçe sacları bir kalkan gibi önüne çekiyor. Kaynak dikişlerinden turuncu bir buhar fışkırıyor.", en: "The hull cracks and the queen drags its plating forward like a shield. Orange steam hisses out of every weld seam." }
+        guclenme: { end: 8, wil: 4 }
+        saldiri:
+          id: "sac_kalkan"
+          ad: { tr: "Sac Duvar", en: "Plate Wall" }
+          stat: "end"
+          taban: 13
+          kat: 0.8
+          etiketler: ["fiziksel", "alan"]
+          bekleme: 2
+          metin: { tr: "{dusman} kocaman bir sac levhayı havuzun dibinde sürükleyip seni duvara sıkıştırıyor.", en: "{dusman} drags a huge steel plate across the basin floor and pins you against the wall." }
+      - esik: 40
+        metin: { tr: "Kraliçe kabuğunun yarısını söküp atıyor; altından soluk, titreyen bir et çıkıyor. Artık daha hafif ve çok daha hızlı.", en: "The queen tears off half its shell and throws it aside. Underneath is pale, quivering meat. It's lighter now, and a lot faster." }
+        guclenme: { agi: 10, str: 4 }
+        saldiri:
+          id: "kizak_hucumu"
+          ad: { tr: "Kızak Hücumu", en: "Slipway Charge" }
+          stat: "agi"
+          taban: 15
+          kat: 0.9
+          etiketler: ["fiziksel", "yakin"]
+          durum: { etki: "kanama", sans: 0.4, sure: 2 }
+          bekleme: 2
+          metin: { tr: "{dusman} havuzun eğimini kızak gibi kullanıp bütün ağırlığıyla üstüne kayıyor.", en: "{dusman} uses the slope of the basin like a launch ramp and slides down on you with its full weight." }
+      - esik: 15
+        metin: { tr: "Kraliçe havuzun ortasına çöküyor ve kapının ışığı onun içine akmaya başlıyor. Son bir kez doğuracak; bütün perçin delikleri aynı anda kıpırdıyor.", en: "The queen collapses in the middle of the basin, and the Gate's light starts pouring into it. It's going to brood one last time. Every rivet hole in the dock twitches at once." }
+        guclenme: { str: 6, end: 6, wil: 6 }
+        saldiri:
+          id: "son_kulucka"
+          ad: { tr: "Son Kuluçka", en: "Final Clutch" }
+          stat: "wil"
+          taban: 18
+          kat: 0.9
+          etiketler: ["alan", "zehir"]
+          durum: { etki: "korku", sans: 0.35, sure: 2 }
+          bekleme: 3
+          metin: { tr: "{dusman} havuzun bütün tabanını kurtla dolduruyor; zemin canlı, kıpır kıpır bir halıya dönüşüyor.", en: "{dusman} floods the entire dock floor with grubs until the ground turns into a living, writhing carpet." }
+
+  ors_bascavus:
+    ad: { tr: "Örs · Lonca'nın Birinci Çavuşu", en: "Anvil · The Guild's First Sergeant" }
+    aciklama: { tr: "Entegrasyon Günü tersanenin kapısını bir balyozla tutan eski bir kaynakçı. Lonca'nın Pano'sunda yıllardır en üst basamakta duruyor; yerini bırakmaya hiç niyeti yok.", en: "An old shipyard welder who held the yard gate with a sledgehammer on Integration Day. He's sat on the top rung of the Guild Board ever since, and he's got no plans to come down." }
+    kanca: { tr: "Örs balyozunu omzundan indiriyor, eldivenlerini sıkıyor ve Haddehane'nin ortasına, tebeşirle çizilmiş çemberin içine adım atıyor.", en: "Anvil lowers the sledge off his shoulder, tightens his gloves, and steps into the chalk circle in the middle of the rolling mill." }
+    seviye: 30
+    can: 1900
+    statlar:
+      str: 40
+      agi: 18
+      end: 38
+      int: 10
+      wis: 18
+      per: 22
+      wil: 34
+      cha: 14
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "zihin"
+    zaaf_metin: { tr: "Kollarında yirmi yılın gücü var ama dizleri yalan söylemiyor. Ailesinin tayın kartı gözünün önünden gitmiyor; aklı dağılırsa savunması da dağılır.", en: "Twenty years of strength in his arms, but his knees don't lie. His family's ration card is never far from his mind. Rattle his head and his guard goes with it." }
+    saldirilar:
+      - id: "balyoz"
+        ad: { tr: "Kaynakçı Balyozu", en: "Welder's Sledge" }
+        stat: "str"
+        taban: 17
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.25, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} balyozu bir örse iner gibi kısa ve dümdüz indiriyor.", en: "{dusman} brings the sledge down short and straight, like he's working an anvil." }
+      - id: "kivilcim"
+        ad: { tr: "Kıvılcım Perdesi", en: "Spark Curtain" }
+        stat: "per"
+        taban: 11
+        kat: 0.7
+        etiketler: ["ates", "alan"]
+        durum: { etki: "kor", sans: 0.35, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} balyozu zemindeki çeliğe sürtüyor; yüzüne bir kıvılcım duvarı fışkırıyor.", en: "{dusman} drags the sledge across the steel floor and throws a wall of sparks into your face." }
+    xp: 7000
+    kredi: 120
+    ganimet: { turuncu_yama: 1.0, lonca_tayini: 0.6 }
+    etiketler: ["insan", "elit"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Örs kaskını çıkarıp yere atıyor. Seyirciler susuyor; bunu son kez Entegrasyon Günü yaptığını herkes biliyor.", en: "Anvil pulls his helmet off and drops it on the floor. The crowd goes quiet. Everybody knows the last time he did that was Integration Day." }
+        guclenme: { str: 6, wil: 4 }
+        saldiri:
+          id: "orse_vurus"
+          ad: { tr: "Örse Vuruş", en: "Anvil Strike" }
+          stat: "str"
+          taban: 19
+          kat: 0.9
+          etiketler: ["fiziksel", "yakin"]
+          bekleme: 2
+          metin: { tr: "{dusman} iki eliyle sapı kavrayıp balyozu omzunun arkasından, bütün gövdesiyle savuruyor.", en: "{dusman} grips the handle two-handed and swings the sledge from behind his shoulder with his whole body." }
+      - esik: 40
+        metin: { tr: "Dizi bir an titriyor. Örs dişlerini sıkıp doğruluyor; kenarda bir çocuk sesi babasının adını bağırıyor.", en: "His knee buckles for a second. Anvil grits his teeth and straightens up, and somewhere at the edge of the crowd a kid's voice yells for his dad." }
+        guclenme: { wil: 8, end: 4 }
+        saldiri:
+          id: "inat"
+          ad: { tr: "Kaynakçı İnadı", en: "Welder's Grit" }
+          stat: "wil"
+          taban: 15
+          kat: 0.8
+          etiketler: ["fiziksel"]
+          durum: { etki: "kalkan", sans: 1.0, sure: 2 }
+          bekleme: 3
+          metin: { tr: "{dusman} yerinden kıpırdamıyor; darbeni omzuyla karşılayıp geri itiyor.", en: "{dusman} doesn't give an inch. He takes your hit on the shoulder and shoves it right back." }
+      - esik: 15
+        metin: { tr: "Örs'ün nefesi hırıltıya dönüyor ama balyozu hâlâ elinde. Kaybedeceğini biliyor; yine de çemberden çıkmıyor.", en: "Anvil's breathing turns into a rattle, but the sledge is still in his hands. He knows he's going to lose. He still won't step out of the circle." }
+        guclenme: { str: 8 }
+        saldiri:
+          id: "son_darbe"
+          ad: { tr: "Son Vardiya", en: "Last Shift" }
+          stat: "str"
+          taban: 22
+          kat: 1.0
+          etiketler: ["fiziksel", "yakin"]
+          bekleme: 3
+          metin: { tr: "{dusman} kalan her şeyini tek bir darbeye koyuyor; balyoz havayı bir kepenk gibi yırtıyor.", en: "{dusman} puts everything he's got left into one swing. The sledge rips through the air like a slammed steel shutter." }
+
+  capa_avcisi:
+    ad: { tr: "Mavi Çapa Avcısı", en: "Blue Anchor Hunter" }
+    aciklama: { tr: "Limanın eski liman işçilerinden, gemicilerinden ve balıkçılarından kurulmuş avcı loncasının üyesi. Zıpkını, kancası ve kendi limanı için ölmeye hazır bir inadı var.", en: "A member of the hunting guild the old longshoremen, deckhands and fishermen built on the waterfront. Harpoon, cargo hook, and the kind of stubborn that dies for its own docks." }
+    kanca: { tr: "Balık mezatının sundurmalarından biri mavi bir çapa dövmeli bileğini kaldırıyor: \"Bu salon Lonca'nın değil, bizim.\"", en: "Somebody under the fish-auction awnings raises a wrist with a blue anchor tattoo on it. \"This hall isn't the Guild's. It's ours.\"" }
+    seviye: 30
+    can: 340
+    statlar:
+      str: 22
+      agi: 22
+      end: 20
+      int: 10
+      wis: 12
+      per: 20
+      wil: 18
+      cha: 10
+    davranis: "suru"
+    zeki: true
+    zaaf: "zihin"
+    zaaf_metin: { tr: "Hepsi Reis'e bakarak savaşıyor. Reis sarsılırsa onlar da sarsılır.", en: "They all fight with one eye on the Harbormaster. Shake him and they shake too." }
+    saldirilar:
+      - id: "zipkin"
+        ad: { tr: "Zıpkın", en: "Harpoon Thrust" }
+        stat: "agi"
+        taban: 11
+        kat: 0.8
+        etiketler: ["delici", "yakin"]
+        durum: { etki: "kanama", sans: 0.3, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} zıpkını bir balina avcısı gibi kısa ve sert saplıyor.", en: "{dusman} drives the harpoon in short and hard, like a whaler." }
+      - id: "yuk_kancasi"
+        ad: { tr: "Yük Kancası", en: "Cargo Hook" }
+        stat: "str"
+        taban: 9
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.2, sure: 1 }
+        bekleme: 1
+        metin: { tr: "{dusman} yük kancasını bileğine takıp seni yere çekmeye çalışıyor.", en: "{dusman} hooks your wrist with a cargo hook and tries to drag you down." }
+    xp: 4600
+    kredi: 40
+    ganimet: { hurda: 0.4, kucuk_iyilesme_iksiri: 0.3 }
+    etiketler: ["insan"]
+    boss: false
+
+  liman_reisi:
+    ad: { tr: "Liman Reisi", en: "The Harbormaster" }
+    aciklama: { tr: "Mavi Çapa'nın başındaki eski römorkör kaptanı. Elli yıl boyunca körfezde gemileri iterek geçirmiş; şimdi Lonca'yı itiyor. Penceresini olduğundan küçük gösterecek kadar akıllı.", en: "The old tugboat captain who runs the Blue Anchor. Fifty years pushing ships around the bay, and now he's pushing back on the Guild. Smart enough to keep his window dialed down." }
+    kanca: { tr: "Mezat kürsüsünün arkasından iri, sakallı bir adam kalkıyor; omzunda bir römorkör halatı, elinde gemi zinciri. \"Kaptanınıza söyleyin, bu limanın tek bir kaptanı var.\"", en: "A big bearded man gets up from behind the auction podium, a tug line over his shoulder and a length of anchor chain in his fist. \"Tell your captain this harbor's only got room for one.\"" }
+    seviye: 30
+    can: 2000
+    statlar:
+      str: 36
+      agi: 20
+      end: 36
+      int: 14
+      wis: 22
+      per: 24
+      wil: 32
+      cha: 26
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "zihin"
+    zaaf_metin: { tr: "Bütün loncası ona bakıyor; ölmekten değil, onların gözü önünde diz çökmekten korkuyor.", en: "His whole guild is watching him. He isn't scared of dying. He's scared of going to his knees in front of them." }
+    saldirilar:
+      - id: "zincir"
+        ad: { tr: "Çapa Zinciri", en: "Anchor Chain" }
+        stat: "str"
+        taban: 16
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.25, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} gemi zincirini başının üstünde çevirip bir çapa gibi bırakıyor.", en: "{dusman} whirls the anchor chain over his head and lets it drop like an anchor." }
+      - id: "dalga"
+        ad: { tr: "Körfez Dalgası", en: "Bay Swell" }
+        stat: "wis"
+        taban: 12
+        kat: 0.8
+        etiketler: ["su", "alan"]
+        bekleme: 2
+        metin: { tr: "{dusman} yumruğunu iskelenin tahtalarına indiriyor; altındaki körfez kabarıp salonun içine taşıyor.", en: "{dusman} drives his fist into the dock planks, and the bay underneath heaves up and floods into the hall." }
+    xp: 7500
+    kredi: 180
+    ganimet: { canavar_cekirdegi: 0.8, buyuk_iyilesme_iksiri: 0.5 }
+    etiketler: ["insan", "elit"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Reis penceresinin ayarını açıyor; görünen seviyesi gözünün önünde tırmanıyor. Kendi avcıları bile bir adım geri çekiliyor.", en: "The Harbormaster opens his window back up, and his displayed level climbs right in front of you. Even his own hunters take a step back." }
+        guclenme: { str: 6, end: 6 }
+        saldiri:
+          id: "halat"
+          ad: { tr: "Römorkör Halatı", en: "Tug Line" }
+          stat: "str"
+          taban: 17
+          kat: 0.9
+          etiketler: ["fiziksel"]
+          durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+          bekleme: 2
+          metin: { tr: "{dusman} halatı beline dolayıp seni bir mavna gibi kendine çekiyor.", en: "{dusman} loops the tug line around your waist and hauls you in like a barge." }
+      - esik: 40
+        metin: { tr: "Salonun camları patlıyor ve körfezin soğuk suyu dizlerinize kadar yükseliyor. Reis bu sudan güç alıyor; elli yıldır öyle.", en: "The hall windows blow out and cold bay water rises to your knees. The Harbormaster draws strength from it. He has for fifty years." }
+        guclenme: { wis: 8, wil: 6 }
+        saldiri:
+          id: "gelgit"
+          ad: { tr: "Gelgit", en: "Riptide" }
+          stat: "wis"
+          taban: 16
+          kat: 0.9
+          etiketler: ["su", "alan"]
+          durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+          bekleme: 3
+          metin: { tr: "{dusman} kollarını açıyor ve ayağının altındaki su seni bir anafor gibi dibe çekiyor.", en: "{dusman} spreads his arms and the water at your feet turns into an undertow that drags you down." }
+      - esik: 15
+        metin: { tr: "Reis bir dizinin üstüne çöküyor ama zinciri bırakmıyor. Arkasında avcıları bekliyor; o diz çökerse onlar da çökecek.", en: "The Harbormaster goes down on one knee but doesn't let go of the chain. His hunters are waiting behind him. If he kneels, they all kneel." }
+        guclenme: { str: 8, wil: 8 }
+        saldiri:
+          id: "son_demir"
+          ad: { tr: "Son Demir", en: "Let Go the Anchor" }
+          stat: "str"
+          taban: 21
+          kat: 1.0
+          etiketler: ["fiziksel", "yakin"]
+          bekleme: 3
+          metin: { tr: "{dusman} zinciri son bir kez fırlatıyor; çapa salonun döşemesini kırıp senin olduğun yere iniyor.", en: "{dusman} throws the chain one last time, and the anchor smashes through the floorboards right where you're standing." }
+
+  lonca_muhafizi:
+    ad: { tr: "Lonca Muhafızı", en: "Guild Enforcer" }
+    aciklama: { tr: "Haddehane'nin kapılarını tutan, turuncu yamalı, plaka zırhlı bir Lonca avcısı. Emir alır; neden diye sormaz.", en: "An orange-patched Guild hunter in plate armor who guards the rolling mill doors. Takes orders. Doesn't ask why." }
+    kanca: { tr: "Kepenkler iniyor ve turuncu yamalı iki muhafız, kalkanlarını birbirine kenetleyip önüne çıkıyor.", en: "The shutters come down and two orange-patched enforcers lock their shields together in front of you." }
+    seviye: 30
+    can: 380
+    statlar:
+      str: 24
+      agi: 16
+      end: 26
+      int: 8
+      wis: 12
+      per: 16
+      wil: 22
+      cha: 8
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "zihin"
+    zaaf_metin: { tr: "Disiplinli ama emir zincirine bağlı. Komutanları düşerse tereddüt ederler.", en: "Disciplined, but hooked to the chain of command. Drop their commander and they hesitate." }
+    saldirilar:
+      - id: "kalkan_duvari"
+        ad: { tr: "Kalkan Hattı", en: "Shield Line" }
+        stat: "str"
+        taban: 11
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        bekleme: 0
+        metin: { tr: "{dusman} kalkanını öne sürüp ardından kısa bir cop darbesi indiriyor.", en: "{dusman} shoves his shield forward and follows it with a short baton strike." }
+      - id: "bagir"
+        ad: { tr: "Disiplin Haykırışı", en: "Drill Shout" }
+        stat: "wil"
+        taban: 8
+        kat: 0.7
+        etiketler: ["ses"]
+        durum: { etki: "korku", sans: 0.25, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} talim alanındaki gibi haykırıyor; ses Haddehane'nin çelik çatısında çınlıyor.", en: "{dusman} barks like he's on a parade deck, and the shout rings off the rolling mill's steel roof." }
+    xp: 4600
+    kredi: 50
+    ganimet: { turuncu_yama: 0.4, lonca_tayini: 0.4 }
+    etiketler: ["insan"]
+    boss: false
+
+  demir_bascavus:
+    ad: { tr: "Demir Lonca'nın Başçavuşu", en: "The Iron Guild's Gunny" }
+    aciklama: { tr: "Yirmi yıl üniforma giymiş, kıyamete herkesten önce hazır olan adam; şimdi Haddehane'nin ortasında, Lonca'nın zırhçılarının ona döktüğü sac koşumun içinde. Süngüsü hâlâ aynı süngü.", en: "Twenty years in uniform, ready for the end of the world before anyone else. Now he's standing in the middle of the rolling mill in a steel rig the Guild's armorers poured just for him. Same bayonet as always." }
+    kanca: { tr: "Başçavuş miğferini takmıyor; koltuğunun altına alıyor. \"Talimdeymişiz gibi,\" diyor. \"Hazır olduğunda.\"", en: "The Gunny doesn't put his helmet on. He tucks it under his arm. \"Like it's a drill,\" he says. \"Whenever you're ready.\"" }
+    seviye: 30
+    can: 2400
+    statlar:
+      str: 42
+      agi: 24
+      end: 40
+      int: 16
+      wis: 22
+      per: 30
+      wil: 40
+      cha: 22
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "zihin"
+    zaaf_metin: { tr: "Bedeni bir saat gibi çalışıyor; aklı ise şehirde. Ona haklı olmadığını gösterirsen eli bir an duraklar.", en: "His body runs like clockwork. His mind's out in the city. Show him he might be wrong and his hand hesitates, just for a beat." }
+    saldirilar:
+      - id: "sungu"
+        ad: { tr: "Süngü Disiplini", en: "Bayonet Drill" }
+        stat: "str"
+        taban: 17
+        kat: 0.9
+        etiketler: ["delici", "yakin"]
+        durum: { etki: "kanama", sans: 0.3, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} hiç acele etmeden adım alıyor; kısa, ekonomik iki vuruş. Üçüncüsünü ancak geldikten sonra görüyorsun.", en: "{dusman} steps in without hurrying. Two short, economical strikes. You only see the third one after it lands." }
+      - id: "dipcik"
+        ad: { tr: "Dipçik", en: "Butt Stroke" }
+        stat: "end"
+        taban: 13
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} tüfeği ters çevirip dipçiği çenene oturtuyor.", en: "{dusman} flips the rifle and plants the butt stock on your jaw." }
+    xp: 9500
+    kredi: 300
+    ganimet: { demir_muhur: 1.0, lonca_tayini: 1.0 }
+    etiketler: ["insan", "boss"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Başçavuş miğferini nihayet takıyor. Koşumun omuzlarındaki pistonlar tıslıyor; artık bir talim yapmıyor.", en: "The Gunny finally puts his helmet on. The pistons in the shoulders of his rig hiss. This isn't a drill anymore." }
+        guclenme: { str: 6, end: 6 }
+        saldiri:
+          id: "piston"
+          ad: { tr: "Piston Yumruğu", en: "Piston Punch" }
+          stat: "str"
+          taban: 19
+          kat: 0.9
+          etiketler: ["fiziksel", "yakin"]
+          durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+          bekleme: 2
+          metin: { tr: "{dusman} koşumun kolundaki pistonu ateşliyor; yumruğu bir pres gibi göğsüne iniyor.", en: "{dusman} fires the piston in his rig's arm and his fist hits your chest like a hydraulic press." }
+      - esik: 40
+        metin: { tr: "Sağ dizindeki eski yara nihayet konuşuyor; Başçavuş topallıyor. Ama duruşu değişmiyor, sesi de: \"Daha bitmedi, asker.\"", en: "The old wound in his right knee finally speaks up, and the Gunny starts to limp. His stance doesn't change. Neither does his voice: \"Not done yet, kid.\"" }
+        guclenme: { wil: 8, per: 6 }
+        saldiri:
+          id: "emir"
+          ad: { tr: "Komuta Sesi", en: "Command Voice" }
+          stat: "wil"
+          taban: 15
+          kat: 0.8
+          etiketler: ["ses", "zihin"]
+          durum: { etki: "korku", sans: 0.35, sure: 2 }
+          bekleme: 3
+          metin: { tr: "{dusman} tek bir kelime söylüyor, yirmi yıllık bir talim alanının bütün ağırlığıyla: \"Dur.\" Bacakların bir an itaat ediyor.", en: "{dusman} says one word, with twenty years of parade decks behind it: \"Halt.\" For a second, your legs obey." }
+      - esik: 15
+        metin: { tr: "Koşumun pistonlarından biri kopuyor; Başçavuş onu söküp atıyor ve yalnızca süngüyle kalıyor. Yüzünde ne korku ne öfke var; yalnızca dikkat.", en: "One of the rig's pistons snaps. The Gunny rips it out, tosses it aside, and keeps only the bayonet. There's no fear on his face and no anger. Just focus." }
+        guclenme: { agi: 10, str: 6 }
+        saldiri:
+          id: "son_hucum"
+          ad: { tr: "Süngü Hücumu", en: "Bayonet Charge" }
+          stat: "agi"
+          taban: 22
+          kat: 1.0
+          etiketler: ["delici", "yakin"]
+          durum: { etki: "kanama", sans: 0.45, sure: 3 }
+          bekleme: 3
+          metin: { tr: "{dusman} yirmi yıllık bir askerin bütün hızını tek bir hücuma koyuyor; süngünün ucu kalbini arıyor.", en: "{dusman} pours every ounce of speed a twenty-year soldier has into one charge, the tip of the bayonet hunting for your heart." }
+
+  kadim_hat_yarici:
+    ad: { tr: "Kadim Hat Yarıcı", en: "Ancient Line-Breaker" }
+    aciklama: { tr: "Kadim filosunun öncü dalgasıyla inen, savaş için yetiştirilmiş bir yaratık: üç katlı bir bina boyunda, sırtında Kadim nişancıların yuvaları. Siperleri yarıp arkasından askerin geçmesi için yaratılmış.", en: "A war-bred creature dropped with the Ancient fleet's first wave: three stories tall, with nests for Ancient marksmen on its back. Built to split a defensive line open so the infantry can pour through." }
+    kanca: { tr: "Körfezin üstündeki gökyüzü yırtılıyor ve bir şey, sırtındaki ışıklar yanıp sönerek kıyıya iniyor. Yer üç kez sarsılıyor; dördüncüde siper çöküyor.", en: "The sky over the bay rips open and something comes down on the shoreline with lights blinking across its back. The ground shakes three times. On the fourth, the trench caves in." }
+    seviye: 30
+    can: 2300
+    statlar:
+      str: 44
+      agi: 16
+      end: 44
+      int: 18
+      wis: 16
+      per: 26
+      wil: 34
+      cha: 4
+    davranis: "agresif"
+    zeki: true
+    zaaf: "goz"
+    zaaf_metin: { tr: "Sırtındaki nişancılar onun gözü. Yuvaları susturursan dev kör bir boğa gibi döner durur.", en: "The marksmen on its back are its eyes. Shut the nests down and the giant just wheels around like a blind bull." }
+    saldirilar:
+      - id: "yarma"
+        ad: { tr: "Hat Yarma", en: "Breach" }
+        stat: "str"
+        taban: 18
+        kat: 0.9
+        etiketler: ["fiziksel", "alan"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} başını indirip siperin içinden geçiyor; kum torbaları, kalaslar ve sen havaya savruluyorsunuz.", en: "{dusman} drops its head and plows straight through the trench. Sandbags, timbers and you all go flying." }
+      - id: "yuva_atesi"
+        ad: { tr: "Yuva Ateşi", en: "Nest Fire" }
+        stat: "per"
+        taban: 14
+        kat: 0.8
+        etiketler: ["isik", "menzilli"]
+        durum: { etki: "yanma", sans: 0.35, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} sırtındaki yuvalardan soluk mavi ışınlar yağdırıyor; ışınların değdiği çamur camlaşıyor.", en: "{dusman} rains pale blue beams from the nests on its back, and the mud turns to glass wherever they hit." }
+    xp: 9000
+    kredi: 300
+    ganimet: { canavar_cekirdegi: 1.0, buyuk_iyilesme_iksiri: 0.6 }
+    etiketler: ["kadim", "boss"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Sırttaki nişancılar haykırıyor ve dev şaha kalkıyor; karnındaki zırh plakaları birer birer açılıyor.", en: "The marksmen on its back start shrieking, and the giant rears up as the armor plates on its belly peel open one by one." }
+        guclenme: { str: 6, per: 4 }
+        saldiri:
+          id: "karin_topu"
+          ad: { tr: "Karın Topu", en: "Belly Cannon" }
+          stat: "int"
+          taban: 17
+          kat: 0.9
+          etiketler: ["isik", "alan"]
+          durum: { etki: "yanma", sans: 0.4, sure: 2 }
+          bekleme: 3
+          metin: { tr: "{dusman} karnındaki açıklıktan beyaz bir ışık topu kusuyor; patlama siperin yarısını götürüyor.", en: "{dusman} vomits a ball of white light out of the opening in its belly, and the blast takes out half the trench." }
+      - esik: 40
+        metin: { tr: "Yuvalardan biri susuyor; dev yarı kör, öfkeyle dönüyor. Sağa sola savurduğu kuyruğu bir mahalleyi silebilecek uzunlukta.", en: "One of the nests goes quiet. The giant's half blind now and spinning in a rage, swinging a tail long enough to wipe out a city block." }
+        guclenme: { str: 8, agi: 6 }
+        saldiri:
+          id: "kuyruk"
+          ad: { tr: "Kuyruk Savurma", en: "Tail Sweep" }
+          stat: "str"
+          taban: 20
+          kat: 0.9
+          etiketler: ["fiziksel", "alan"]
+          bekleme: 2
+          metin: { tr: "{dusman} kuyruğunu yerin bir karış üstünden savuruyor; önünde ne varsa biçiliyor.", en: "{dusman} sweeps its tail a few inches off the ground and mows down everything in front of it." }
+      - esik: 15
+        metin: { tr: "Dev dizlerinin üstüne çöküyor. Sırtındaki son nişancı gökyüzüne bir ışık fırlatıyor: filoya bir çağrı ya da bir veda.", en: "The giant drops to its knees. The last marksman on its back fires a light into the sky. A call to the fleet, or a goodbye." }
+        guclenme: { wil: 8, end: 8 }
+        saldiri:
+          id: "son_cagri"
+          ad: { tr: "Filo Çağrısı", en: "Fleet Call" }
+          stat: "wil"
+          taban: 22
+          kat: 1.0
+          etiketler: ["isik", "alan"]
+          durum: { etki: "korku", sans: 0.35, sure: 2 }
+          bekleme: 3
+          metin: { tr: "{dusman} başını göğe kaldırıp uluyor ve gökten cevap olarak bir ışık sütunu iniyor; tam üstüne.", en: "{dusman} throws its head back and howls, and the sky answers with a column of light. Straight down on top of you." }

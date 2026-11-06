@@ -99,7 +99,8 @@ class Perde1Test {
         var s = engine.newGame("T", if (seed % 7 == 3L) GameMode.IRONMAN else GameMode.NORMAL, seed)
         val reached = mutableSetOf<String>()
         var steps = 0
-        while (!s.ended && steps++ < STEP_LIMIT) {
+        // Aşama 7: Perde 1 sonu artık oyunun sonu değil; oynanış Perde 1 son sahnesinde (ya da Gün 30'u geçince) durur.
+        while (!s.ended && s.sceneId !in ACT1_FINALS && s.day <= 30 && steps++ < STEP_LIMIT) {
             s.dayState.currentEvent?.let { reached += it }
             if (s.dead) break
             // Serbest puanları rastgele dağıt: stat koşullu seçenekler de denensin.
@@ -118,7 +119,7 @@ class Perde1Test {
             }
         }
         s.dayState.currentEvent?.let { reached += it }
-        assertTrue("seed $seed: oynanış bitmedi (Gün ${s.day}, ${s.sceneId})", s.ended || s.dead)
+        assertTrue("seed $seed: oynanış bitmedi (Gün ${s.day}, ${s.sceneId})", s.ended || s.dead || s.sceneId in ACT1_FINALS)
         return Run(s, reached + s.dayState.seen)
     }
 
@@ -191,6 +192,7 @@ class Perde1Test {
 
     companion object {
         const val RUNS = 500L
+        val ACT1_FINALS = setOf("perde1_son", "perde1_son_yenilgi")
         const val STEP_LIMIT = 4000
     }
 }

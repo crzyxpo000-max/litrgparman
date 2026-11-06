@@ -1,0 +1,439 @@
+# Parti K2 — sonlar, OP MC türleri ve epilog kartları (docs/PERDE2_4.md §3 "Sonlar", "NPC kaderleri").
+# sonlar: koşullar sözleşme tablosundaki gibidir (testler sınar); son karar olayı (events/81_sonlar.yaml) yalnızca
+#   koşulu tutan sonları gösterir. hasat yedek sondur; Demir Mod ölümü (story/90_sistem.yaml son_hasat) da ona bağlı.
+# arketipler: ilk tutan gösterilir (tanrı → tiran → koruyucu → kurtarıcı).
+# epilog: her NPC/fraksiyon için ilk tutan satır; son satır koşulsuzdur. Kart yalnızca tanışılmış NPC'ler için çıkar.
+#   Satırlar geçmiş zamanda, epilog sesiyle yazılır; `son:` koşulu ulaşılan sonu okur.
+# Fraksiyon adları metinde düz yazılır (kısaltmalar için: "Lonca", "the Guild"); NPC ve yer adları belirteçle.
+sonlar:
+  koruyucu:
+    ad: { tr: "Koruyucu", en: "The Guardian" }
+    ozet: { tr: "Dünya tam bir Katman olarak kabul edildi ve {oyuncu} insanlığın kalkanı oldu.", en: "Earth was accepted as a full Layer, and {oyuncu} became humanity's shield." }
+    kosul:
+      ahlak_min: { merhamet: 40 }
+      itibar_min: { siginak: 50 }
+      degisken_min: { hayatta_kalan: 40 }
+      bayrak: "kadimler_yenildi"
+    sahne: ["son_koruyucu"]
+    sira: 1
+  demir_taht:
+    ad: { tr: "Demir Taht", en: "The Iron Crown" }
+    ozet: { tr: "{oyuncu} Dünya'nın mutlak hükümdarı oldu. Dünya hayatta kaldı; tek bir sesle.", en: "{oyuncu} became Earth's absolute ruler. Earth survived, speaking with a single voice." }
+    kosul:
+      ahlak_min: { duzen: 50 }
+      ahlak_max: { insanlik: -30 }
+      bayrak: "lonca_hakimiyeti"
+    sahne: ["son_demir_taht"]
+    sira: 2
+  yukselis:
+    ad: { tr: "Yükseliş", en: "Ascension" }
+    ozet: { tr: "{oyuncu} Sistem'le birleşip tanrılaştı; insanlık onun yakıtı oldu.", en: "{oyuncu} merged with the System and became a god. Humanity became the fuel." }
+    kosul:
+      ahlak_max: { insanlik: -70 }
+      gorev: { zincir_yukselenler: "tamam" }
+      npc_hayatta: "vahit"
+    sahne: ["son_yukselis"]
+    sira: 3
+  kod_kirici:
+    ad: { tr: "Kod Kırıcı", en: "Codebreaker" }
+    ozet: { tr: "{oyuncu} Sistem'i yeniden yazdı ve kuralları kendisi belirledi.", en: "{oyuncu} rewrote the System and set the rules." }
+    kosul:
+      gorev: { zincir_sessiz_ag: "tamam" }
+      iliski_min: { yanki: { guven: 60 } }
+      npc_hayatta: "mert_kilic"
+      bayrak_yok: "yanki_silindi"
+    sahne: ["son_kod_kirici"]
+    sira: 4
+  ozgurluk:
+    ad: { tr: "Özgürlük", en: "Liberation" }
+    ozet: { tr: "Sistem yok edildi. Bütün seviyeler sıfırlandı; insanlık zayıf ama özgür uyandı.", en: "The System was destroyed. Every level reset to zero, and humanity woke up weak but free." }
+    kosul:
+      ahlak_max: { duzen: -60 }
+      ahlak_min: { insanlik: 50 }
+      bayrak: "sistem_cekirdegine_ulasildi"
+    sahne: ["son_ozgurluk"]
+    sira: 5
+  vassal:
+    ad: { tr: "Vassal", en: "Vassal" }
+    ozet: { tr: "Kadimler'le anlaşma imzalandı: Dünya hayatta kaldı, ama boyunduruk altında.", en: "A treaty was signed with the Ancients. Earth survived, under their thumb." }
+    kosul:
+      iliski_min: { thessar: { baglilik: 50 } }
+      degisken_min: { kadim_tehdit: 70 }
+    sahne: ["son_vassal"]
+    sira: 6
+  yalniz_avci:
+    ad: { tr: "Yalnız Avcı", en: "Lone Hunter" }
+    ozet: { tr: "Bütün yoldaşlar ölmüş ya da gitmişti. {oyuncu} çok-evrene tek başına çıktı.", en: "Every companion was dead or gone. {oyuncu} headed into the multiverse alone." }
+    kosul:
+      yoldas_sayisi_max: 0
+      kademe_min: "S"
+    sahne: ["son_yalniz_avci"]
+    sira: 7
+  hasat:
+    ad: { tr: "Hasat", en: "The Harvest" }
+    ozet: { tr: "İnsanlık yeterince güçlenemedi ve Dünya hasat edildi.", en: "Humanity never got strong enough, and Earth was harvested." }
+    sahne: ["son_hasat_gun", "son_hasat"]
+    sira: 8
+    yedek: true
+  dongu:
+    ad: { tr: "Döngü", en: "The Loop" }
+    ozet: { tr: "{oyuncu} Sistem'in bir döngü olduğunu öğrendi ve yeni bir Entegrasyon başlattı.", en: "{oyuncu} learned the System is a loop, and started a new Integration." }
+    kosul:
+      degisken_min: { kule_kat: 100, onceki_oyun: 1 }
+      bayrak: "yanki_son_sirri"
+    sahne: ["son_dongu"]
+    sira: 9
+    gizli: true
+
+arketipler:
+  tanri:
+    ad: { tr: "Tanrı", en: "The God" }
+    aciklama: { tr: "Gücü insanlığın üstünde bir yer olarak gördün ve insanlığı geride bırakmaktan çekinmedin. Sayıların seni değiştirdiğini kabul ettin; değişimi bir kayıp değil, bir terfi saydın.", en: "You saw power as a place above humanity, and you never hesitated to leave humanity behind. You accepted that the numbers changed you, and you counted the change as a promotion, not a loss." }
+    kosul: { ahlak_max: { insanlik: -40 } }
+  tiran:
+    ad: { tr: "Tiran", en: "The Tyrant" }
+    aciklama: { tr: "Düzeni merhametten üstün tuttun. Dünyayı kendi ölçünle hizaya soktun; herkes güvendeydi, yeter ki sana itaat etsin.", en: "You put order above mercy. You lined the world up to your own measurements, and everyone was safe, as long as they did what you said." }
+    kosul: { ahlak_max: { merhamet: -20 }, ahlak_min: { duzen: 20 } }
+  koruyucu:
+    ad: { tr: "Koruyucu", en: "The Protector" }
+    aciklama: { tr: "Gücünü bir kalkan gibi taşıdın. Her yeni seviye, arkanda durabilecek bir kişi daha demekti; kimseyi geride bırakmamak için kendinden vazgeçmeyi her seferinde yeniden seçtin.", en: "You carried your power like a shield. Every new level meant one more person who could stand behind you, and every time, you chose all over again to give up a piece of yourself so no one got left behind." }
+    kosul: { ahlak_min: { merhamet: 20 } }
+  kurtarici:
+    ad: { tr: "Kurtarıcı", en: "The Savior" }
+    aciklama: { tr: "Ne tanrı oldun ne tiran ne de yalnızca bir kalkan. Kurallar seni ezmeye çalıştığında onları eğdin, kırdın, gerektiğinde yeniden yazdın; dünyayı kendi bildiğin yoldan kurtarmaya çalıştın.", en: "You never became a god, or a tyrant, or just a shield. When the rules tried to crush you, you bent them, broke them, and rewrote them when you had to. You tried to save the world your own way." }
+
+epilog:
+  npc:
+    deniz_arman:
+      - kosul: { npc_olu: "deniz_arman", son: "dongu" }
+        metin: { tr: "Bu döngüde {npc:deniz_arman|i} kaybettin. Bir sonrakinde vapurda yine yanında oturuyordu, simidini martılarla bölüşerek; bu kez elini bırakmamaya yemin ettin.", en: "You lost {npc:deniz_arman} in this loop. In the next one, {zamir:deniz_arman|o} {zamir:deniz_arman|was} sitting next to you on the ferry again, splitting a pretzel with the gulls, and this time you swore you wouldn't let go of {zamir:deniz_arman|onun} hand." }
+      - kosul: { son: "dongu" }
+        metin: { tr: "{npc:deniz_arman} yeni döngüde yine vapurdaydı, yine yanındaydı ve hiçbir şey hatırlamıyordu. Sen her şeyi hatırlıyordun; bu yüzden ilk kez sen onun önüne geçtin.", en: "In the new loop, {npc:deniz_arman} was on the ferry again, next to you again, and remembered nothing. You remembered everything, so for the first time, you were the one who stepped in front." }
+      - kosul: { npc_olu: "deniz_arman", bayrak: "deniz_hatti_tuttu" }
+        metin: { tr: "{npc:deniz_arman} Öğretici'nin çıkışında bir hattı tuttu ve o hat dayandı. Kapı'dan geçen herkes ona bir gün borçluydu, adını bilmeden; sen ise her gününü.", en: "{npc:deniz_arman} held a line at the tutorial's exit, and the line held. Everyone who made it through the Gate owed {zamir:deniz_arman|onu} a day without ever learning {zamir:deniz_arman|onun} name. You owed {zamir:deniz_arman|onu} every one of yours." }
+      - kosul: { npc_olu: "deniz_arman", npc_fraksiyon: { deniz_arman: "yukselenler" } }
+        metin: { tr: "{npc:deniz_arman} Yükselenler'in beyazlarıyla öldü; seni durdurmaya mı yoksa kurtarmaya mı çalışırken, hiçbir zaman bilemedin. Kardeşini bulma sözü onunla birlikte gömüldü.", en: "{npc:deniz_arman} died wearing the Ascended's white, trying to stop you or trying to save you; you never found out which. The promise to find {zamir:deniz_arman|onun} sister was buried with {zamir:deniz_arman|onu}." }
+      - kosul: { npc_olu: "deniz_arman" }
+        metin: { tr: "{npc:deniz_arman} seni kurtarmak için öldü; tıpkı vapurdaki gibi, düşünmeden önüne geçerek. Kalkanı hâlâ duvarında asılı ve her sabah ona bakmadan evden çıkamıyorsun.", en: "{npc:deniz_arman} died saving you, just like on the ferry: stepping in front without a second thought. {zamir:deniz_arman|onun|b} shield still hangs on your wall, and you can't leave the house in the morning without looking at it." }
+      - kosul: { son: "yukselis", npc_fraksiyon: { deniz_arman: "yukselenler" } }
+        metin: { tr: "{npc:deniz_arman} seçilmişlerin arasında yükseldi ve yeni tanrının yüzüne bir kez bile bakmadı. Kardeşini bulma sözünü sonunda bir tanrı tuttu; o tanrının sen olduğunu bilmek, taşıyabileceğinden ağırdı.", en: "{npc:deniz_arman} rose among the chosen and never once looked the new god in the face. In the end a god kept the promise to find {zamir:deniz_arman|onun} sister, and knowing that god was you was more than {zamir:deniz_arman|o} could carry." }
+      - kosul: { son: "yukselis" }
+        metin: { tr: "{npc:deniz_arman} arkadaşının bir tanrıya dönüşmesini izledi ve itirazını yakıt listesine kendi adını yazdırarak yaptı. Adını listeden sen sildin; seni hiç affetmedi.", en: "{npc:deniz_arman} watched {zamir:deniz_arman|onun} friend turn into a god, and protested by putting {zamir:deniz_arman|onun} own name on the fuel list. You struck it off. {zamir:deniz_arman|b} never forgave you." }
+      - kosul: { npc_fraksiyon: { deniz_arman: "yukselenler" }, bayrak: "ihanet_deniz" }
+        metin: { tr: "{npc:deniz_arman} sana karşı döndüğü günden sonra {yer:tepe|den} bir daha hiç inmedi. Her toplantıda boş bir sandalye bıraktığı söylenir; kimin için olduğunu kimse sormaz.", en: "After the day {zamir:deniz_arman|o} turned on you, {npc:deniz_arman} never came down from {yer:tepe} again. They say {zamir:deniz_arman|o} always leave{zamir:deniz_arman|s} an empty chair at every meeting. Nobody asks who it's for." }
+      - kosul: { npc_fraksiyon: { deniz_arman: "yukselenler" } }
+        metin: { tr: "{npc:deniz_arman} Yükselenler'in arasında kaldı ve kardeşini aramaktan hiç vazgeçmedi. Bazı akşamlar {yer:tepe|den} {yer:kordon} tarafına, bir vapur bekler gibi baktığı görülürdü.", en: "{npc:deniz_arman} stayed with the Ascended and never stopped looking for {zamir:deniz_arman|onun} sister. Some evenings {zamir:deniz_arman|o} could be seen on {yer:tepe}, looking down toward {yer:kordon} like {zamir:deniz_arman|o} {zamir:deniz_arman|was} waiting for a ferry." }
+      - kosul: { yoldas: "deniz_arman", son: "ozgurluk" }
+        metin: { tr: "{npc:deniz_arman} seviye sıfırda, eski bir vapurun güvertesinde, martılara simit atarak yaşlandı. Seni her gördüğünde aynı şeyi söyledi: \"Tanıdım seni.\"", en: "{npc:deniz_arman} grew old at level zero on the deck of an old ferry, tossing pretzel bits to the gulls. Every time {zamir:deniz_arman|o} saw you, {zamir:deniz_arman|o} said the same thing: \"There you are.\"" }
+      - kosul: { yoldas: "deniz_arman", son: "demir_taht" }
+        metin: { tr: "{npc:deniz_arman} muhafızlarının başında kaldı, ama kalkanını hiç senin önüne değil, halkın önüne kaldırdı. Bir gün onu sana karşı da kaldırabileceğini ikiniz de biliyordunuz; o gün hiç gelmedi.", en: "{npc:deniz_arman} stayed on as head of your guard, but {zamir:deniz_arman|o} never raised {zamir:deniz_arman|onun} shield in front of you, only in front of the people. You both knew {zamir:deniz_arman|o} might raise it against you someday. That day never came." }
+      - kosul: { yoldas: "deniz_arman", son: "koruyucu" }
+        metin: { tr: "{npc:deniz_arman} {yer:kordon|de}ki nöbet kulesinde senin yanında yaşlandı. Her sabah iki simit aldı: birini sana, yarısını martılara.", en: "{npc:deniz_arman} grew old beside you in the watchtower on {yer:kordon}. Every morning {zamir:deniz_arman|o} bought two pretzels: one for you, half for the gulls." }
+      - kosul: { yoldas: "deniz_arman", son: "vassal" }
+        metin: { tr: "{npc:deniz_arman} antlaşma gecesi sana tek kelime etmedi. Ertesi sabah haraç listesindeki çocukları saklamaya başladı ve sen bunu yıllarca görmezden geldin.", en: "{npc:deniz_arman} didn't say a word to you the night of the treaty. The next morning {zamir:deniz_arman|o} started hiding the kids on the tribute list, and for years you looked the other way." }
+      - kosul: { yoldas: "deniz_arman", son: "kod_kirici" }
+        metin: { tr: "{npc:deniz_arman} yeni kuralların ilk okuyucusu oldu ve hepsinin altına aynı soruyu yazdı: \"Bunu kim denetleyecek?\" Cevabı hâlâ arıyorsun; o da sormaktan hiç vazgeçmedi.", en: "{npc:deniz_arman} was the first to read the new rules, and wrote the same question under every one of them: \"Who checks this?\" You're still looking for the answer. {zamir:deniz_arman|b} never stopped asking." }
+      - kosul: { yoldas: "deniz_arman", son: "hasat" }
+        metin: { tr: "{npc:deniz_arman} Hasat'ın ışığı indiğinde kalkanını gökyüzüne kaldırdı ve senin önüne geçmek yerine bu kez yanında durdu. Son sözü bir şakaydı; gülüp gülmediğini hatırlamıyorsun.", en: "When the Harvest light came down, {npc:deniz_arman} raised {zamir:deniz_arman|onun} shield to the sky, and this time {zamir:deniz_arman|o} stood beside you instead of in front of you. {zamir:deniz_arman|onun|b} last words were a joke. You don't remember if you laughed." }
+      - kosul: { yoldas: "deniz_arman", bayrak: "deniz_kardes_bulundu" }
+        metin: { tr: "{npc:deniz_arman} kız kardeşini bulduktan sonra ikisi {yer:kiyikent|de} küçük bir ev tuttu. Kapılarının önünde hep bir kalkan dururdu; misafirler onu süs sanırdı.", en: "After {npc:deniz_arman} found {zamir:deniz_arman|onun} sister, the two of them rented a little place in {yer:kiyikent}. There was always a shield by the front door. Guests thought it was decoration." }
+      - kosul: { yoldas: "deniz_arman" }
+        metin: { tr: "{npc:deniz_arman} sonuna kadar yanında kaldı. Bir canavara ya da bir tanrıya dönüşmeni bekledi; dönüşmedin, ya da dönüştüğünde bile seni tanıdı ve bu ona yetti.", en: "{npc:deniz_arman} stayed by your side to the end. {zamir:deniz_arman|b} kept waiting for you to turn into a monster or a god. You didn't, or when you did, {zamir:deniz_arman|o} still recognized you, and that was enough." }
+      - kosul: { npc_gitti: "deniz_arman" }
+        metin: { tr: "{npc:deniz_arman} bir sabah çantasını alıp gitti ve bir daha dönmedi. Kıyı boyunca bir kasabada, çocuklara kalkan tutmayı öğreten birinden söz edilir; kimse adını sormamış.", en: "{npc:deniz_arman} picked up a pack one morning and left, and never came back. In a town somewhere up the coast, people talk about someone who teaches kids how to hold a shield. Nobody ever asked {zamir:deniz_arman|onun} name." }
+      - metin: { tr: "{npc:deniz_arman} hayatta kaldı, ama senin yanında değil. Yollarınız ayrıldıktan sonra da her vapur düdüğünde başını kaldırıp iskeleye baktığı söylenir.", en: "{npc:deniz_arman} survived, just not by your side. They say that long after your paths split, {zamir:deniz_arman|o} still look{zamir:deniz_arman|s} up at the terminal every time a ferry horn sounds." }
+
+    kaya_demir:
+      - kosul: { son: "dongu" }
+        metin: { tr: "{npc:kaya_demir} yeni döngüde yine kıyamete herkesten önce hazırdı. Bu kez nereden başlaması gerektiğini ona sen söyledin; sana inanmadı, ama dinledi.", en: "In the new loop, {npc:kaya_demir} was ready for the end of the world before anyone else, same as always. This time you told him where to start. He didn't believe you, but he listened." }
+      - kosul: { npc_olu: "kaya_demir", bayrak: "kaya_devrildi" }
+        metin: { tr: "{npc:kaya_demir} onu devirdiğin gece öldü: ayakta, üniformasıyla, teslim olmayı reddederek. Lonca onu bir hain olarak değil, son asker olarak gömdü.", en: "{npc:kaya_demir} died the night you took him down: on his feet, in uniform, refusing to surrender. The Guild didn't bury him as a traitor. They buried him as the last soldier." }
+      - kosul: { npc_olu: "kaya_demir", bayrak: "kaya_general" }
+        metin: { tr: "{npc:kaya_demir} Kadim istilasında ordularının önünde düştü. Son emri telsiz kayıtlarında hâlâ duruyor: \"Hat tutulacak.\" Tutuldu.", en: "{npc:kaya_demir} fell at the head of his troops during the Ancient invasion. His last order is still on the radio logs: \"The line holds.\" It held." }
+      - kosul: { npc_olu: "kaya_demir", bayrak: "ihanet_kaya" }
+        metin: { tr: "{npc:kaya_demir} Konsey'e karşı yaptığı darbenin bedelini canıyla ödedi. Lonca'nın içinde bazıları onun haklı olduğunu hâlâ fısıldıyor; çok yüksek sesle değil.", en: "{npc:kaya_demir} paid for his coup against the Council with his life. Some inside the Guild still whisper that he was right. Not too loudly." }
+      - kosul: { npc_olu: "kaya_demir" }
+        metin: { tr: "{npc:kaya_demir} kıyamete herkesten önce hazırlanmıştı ama sonunu görmeye ömrü yetmedi. Lonca'nın tören alanındaki bayrak onun için hâlâ yarıya inik.", en: "{npc:kaya_demir} was ready for the end of the world before anyone, but he didn't live to see how it ended. The flag over the Guild's parade ground is still at half-staff for him." }
+      - kosul: { bayrak: "kaya_devrildi", son: "demir_taht" }
+        metin: { tr: "{npc:kaya_demir} tahtının altındaki hücrede, her sabah yatağını teftiş günüymüş gibi toplayarak yaşlandı. Ona bir kez tahtı nasıl bulduğunu sordun. \"Biraz büyük,\" dedi. \"Ama dolduruyorsun.\"", en: "{npc:kaya_demir} grew old in the cell beneath your throne, making his bunk every morning like it was inspection day. Once you asked him what he thought of the throne. \"Little big,\" he said. \"But you're filling it out.\"" }
+      - kosul: { bayrak: "kaya_devrildi" }
+        metin: { tr: "{npc:kaya_demir} devrildikten sonra {yer:sanayi} kenarında bir atış poligonu açtı ve şehrin çocuklarına nişan almayı öğretti. Lonca'yı sorduklarında hep aynı cevabı verdi: \"Artık benim değil. Hiç olmamıştı.\"", en: "After he was toppled, {npc:kaya_demir} opened a firing range at the edge of {yer:sanayi} and taught the city's kids how to aim. Whenever anyone asked about the Guild, he gave the same answer: \"Not mine anymore. Never really was.\"" }
+      - kosul: { bayrak: "kaya_general", son: "koruyucu" }
+        metin: { tr: "{npc:kaya_demir} istiladan sonra ordusunu dağıtmadı ama silahları depoya kilitledi. Anahtarı sana verdi. \"Ben onları fazla severim,\" dedi.", en: "{npc:kaya_demir} didn't disband his army after the invasion, but he locked the weapons in the armory and handed you the key. \"I like them too much,\" he said." }
+      - kosul: { bayrak: "kaya_general", son: "demir_taht" }
+        metin: { tr: "{npc:kaya_demir} tahtının mareşali oldu; ordu, kurduğu Lonca'dan büyüktü ve emri artık o vermiyordu. Bundan şikâyet ettiği hiç duyulmadı; kimse de sormadı.", en: "{npc:kaya_demir} became the marshal of your throne. The army was bigger than the Guild he'd built, and the orders weren't his to give anymore. Nobody ever heard him complain. Nobody ever asked." }
+      - kosul: { bayrak: "kaya_general" }
+        metin: { tr: "{npc:kaya_demir} son savaşta müttefik generalin oldu. Savaştan sonra rütbelerini söktü ve Lonca'nın seçimle gelen ilk liderini kendisi atadı; çelişkiyi fark ettiğinde güldü.", en: "{npc:kaya_demir} was your allied general in the final battle. Afterward he tore off his rank and personally appointed the Guild's first elected leader. When he noticed the contradiction, he laughed." }
+      - kosul: { bayrak: ["ihanet_kaya", "ihanet_onlendi"] }
+        metin: { tr: "{npc:kaya_demir} darbesi bastırıldıktan sonra yargılandı ve kendini savunmadı. \"Doğru olanı yaptım,\" dedi yalnızca, \"yanlış zamanda.\" Hâlâ hücresinde, her sabah şınav çekiyor.", en: "{npc:kaya_demir} stood trial after his coup was put down and didn't defend himself. \"I did the right thing,\" was all he said. \"At the wrong time.\" He's still in his cell, doing push-ups every morning." }
+      - kosul: { bayrak: "ihanet_kaya" }
+        metin: { tr: "{npc:kaya_demir} darbesiyle Konsey'i dağıttı ve şehrin yarısını demir yasayla yönetti. Senin yarına hiç adım atmadı; iki eski müttefik, bir sınırın iki yanında yaşlandınız.", en: "{npc:kaya_demir} broke the Council with his coup and ran half the city under iron law. He never set foot in your half. Two old allies, growing old on either side of a line." }
+      - kosul: { son: "ozgurluk" }
+        metin: { tr: "{npc:kaya_demir} Sistem'siz dünyada yeniden sıradan bir emekli asker oldu. Sabahları sahilde koşuyor, akşamları çocuklara ip atlamayı öğretiyor; seviyesiz bir dünyada disiplinin yeniden bir anlamı olduğunu söylüyor.", en: "In a world without the System, {npc:kaya_demir} went back to being an ordinary retired Marine. He runs the beach every morning and teaches kids to jump rope every evening, and says that in a world without levels, discipline finally means something again." }
+      - kosul: { son: "vassal" }
+        metin: { tr: "{npc:kaya_demir} antlaşmayı tanımadı ve Lonca'nın sadık kalanlarıyla dağlara çekildi. Haraç kervanlarını hâlâ ara sıra soyuyor; onu yakalama emrini verecek kişi sensin ve o emri hiç vermiyorsun.", en: "{npc:kaya_demir} refused to recognize the treaty and took the Guild's loyalists into the mountains. He still hits a tribute convoy every now and then. You're the one who'd have to give the order to bring him in, and you never do." }
+      - kosul: { son: "yukselis" }
+        metin: { tr: "{npc:kaya_demir} yeni tanrının önünde diz çökmedi; Lonca'nın son birliğiyle {yer:tepe} yokuşuna yürüdü. Ne olduğunu kimse tam bilmiyor; bildiğin tek şey, yakıt listesinde adının en üstte olduğu.", en: "{npc:kaya_demir} wouldn't kneel to the new god. He marched the Guild's last unit up the slope to {yer:tepe}. Nobody knows exactly what happened. All you know is that his name was at the top of the fuel list." }
+      - kosul: { son: "hasat" }
+        metin: { tr: "{npc:kaya_demir} Hasat sabahı adamlarını sıraya dizdi ve gökyüzüne nişan aldırdı. Işık indiğinde hâlâ ateş emri vermedi; mermiyi boşa harcamayı hiç sevmezdi.", en: "On the morning of the Harvest, {npc:kaya_demir} lined up his people and had them aim at the sky. When the light came down he still hadn't given the order to fire. He never did like wasting ammo." }
+      - metin: { tr: "{npc:kaya_demir} Demir Lonca'nın başında kaldı: sert, adil ve yorgun. Bazı geceler eski bir telsizden senin sesini dinlediği, sonra kapatıp tek başına oturduğu söylenir.", en: "{npc:kaya_demir} stayed at the head of the Iron Guild: hard, fair and tired. They say some nights he listens to your voice on an old radio, then switches it off and sits alone for a while." }
+
+    elif_sari:
+      - kosul: { son: "dongu" }
+        metin: { tr: "{npc:elif_sari} yeni döngüde ilk çadırını yine aynı yere kurdu. Bu kez ilaç kutularını oraya ondan önce sen bırakmıştın; kimin bıraktığını hiç öğrenmedi.", en: "In the new loop, {npc:elif_sari} pitched her first tent in the same spot as before. This time you'd left boxes of medicine there ahead of her. She never found out who left them." }
+      - kosul: { npc_olu: "elif_sari", bayrak: "ihanet_kaya" }
+        metin: { tr: "{npc:elif_sari} Lonca darbesinin gecesi, hastanesinin kapısında, içeri silah sokmalarına izin vermeyerek öldü. Hastane hâlâ açık; kapısındaki tabelada onun el yazısı var: Kimse geri çevrilmez.", en: "{npc:elif_sari} died the night of the Guild coup, in the door of her hospital, refusing to let anyone bring guns inside. The hospital's still open. The sign on the door is in her handwriting: No one is turned away." }
+      - kosul: { npc_olu: "elif_sari" }
+        metin: { tr: "{npc:elif_sari} kıyametin sonunu göremedi. Hastanesinin kapısındaki tabelada hâlâ onun el yazısı var: Kimse geri çevrilmez.", en: "{npc:elif_sari} didn't live to see how it ended. The sign on her hospital door is still in her handwriting: No one is turned away." }
+      - kosul: { bayrak: "elif_ask", son: "koruyucu" }
+        metin: { tr: "{npc:elif_sari} Konsey'in ilk barış oturumunu açtıktan sonra her gece nöbet kulesine çıktı, elinde iki çay: biri senin. Hiçbir şeyi ilan etmediniz; gerek yoktu.", en: "After she opened the Council's first peacetime session, {npc:elif_sari} climbed the watchtower every night with two cups of coffee, one of them yours. You never announced anything. You didn't need to." }
+      - kosul: { bayrak: "elif_ask", son: "ozgurluk" }
+        metin: { tr: "{npc:elif_sari} Sistem'siz dünyada elle dikiş atmayı yeniden öğretti; ilk öğrencisi sendin. Seviyeleriniz sıfırdı ve ikiniz de bunu hiç bu kadar sevmemiştiniz.", en: "In a world without the System, {npc:elif_sari} taught stitches by hand all over again, and you were her first student. You were both level zero, and neither of you had ever liked anything more." }
+      - kosul: { bayrak: "elif_ask", son: "yukselis" }
+        metin: { tr: "{npc:elif_sari} bir tanrıyı sevemeyeceğini söyledi ve şehrin en uzak hastanesine gitti. Ara sıra pencereden gökyüzündeki yüzüne baktığı, sonra perdeyi çektiği söylenir.", en: "{npc:elif_sari} said she couldn't love a god, and moved to the farthest hospital in the city. They say sometimes she looks out the window at your face in the sky, then draws the curtain." }
+      - kosul: { bayrak: "elif_ask", son: "demir_taht" }
+        metin: { tr: "{npc:elif_sari} tahtının yanında değil, karşısında oturdu: muhalefetin tek sesi olarak. Geceleri ise başka bir şeydi; bunu yalnızca ikiniz biliyordunuz.", en: "{npc:elif_sari} didn't sit beside your throne. She sat across from it, the only voice of the opposition. At night she was something else, and only the two of you knew it." }
+      - kosul: { bayrak: "elif_ask" }
+        metin: { tr: "{npc:elif_sari} ile aranızdaki şey hiçbir zaman bir adla anılmadı. Ama her savaştan sonra ilk sen muayene edildin ve hiçbir zaman başkasına bırakılmadın.", en: "Whatever there was between you and {npc:elif_sari} never got a name. But after every fight, you were the first one she examined, and she never once handed you off to anybody else." }
+      - kosul: { bayrak: "elif_baskan", son: "koruyucu" }
+        metin: { tr: "{npc:elif_sari} kabul edilmiş bir Katman'ın ilk konsey başkanı oldu. Kadimler'le yapılan ilk görüşmede masaya bir ilk yardım çantası koydu; ne demek istediğini herkes anladı.", en: "{npc:elif_sari} became the first council chair of an accepted Layer. At the first meeting with the Ancients, she set a first-aid kit on the table. Everybody got the message." }
+      - kosul: { bayrak: "elif_baskan", son: "demir_taht" }
+        metin: { tr: "{npc:elif_sari} kâğıt üzerinde konsey başkanıydı; gerçekte tahtının önüne her hafta bir liste getiren tek kişi. Listeleri okuyup okumadığını hiç bilmedi; getirmeye devam etti.", en: "On paper, {npc:elif_sari} was council chair. In practice she was the one person who brought a list to the foot of your throne every week. She never knew whether you read them. She kept bringing them." }
+      - kosul: { bayrak: "elif_baskan" }
+        metin: { tr: "{npc:elif_sari} Konsey'in başkanı ve barışın anahtarı oldu. Masaya oturan herkes, hekim sesini yükseltmeden konuştuğu an susmayı öğrendi.", en: "{npc:elif_sari} became chair of the Council and the key to the peace. Everyone who sat at that table learned to go quiet the moment the doctor spoke without raising her voice." }
+      - kosul: { son: "yukselis" }
+        metin: { tr: "{npc:elif_sari} Yükselenler'in yakıt dediği insanları tedavi etmeyi sürdürdü; tanrın onun kapısına hiç gelmedi. Belki gelmek istemedi; belki gelemedi.", en: "{npc:elif_sari} kept treating the people the Ascended called fuel, and your godhood never came knocking at her door. Maybe it didn't want to. Maybe it couldn't." }
+      - kosul: { son: "vassal" }
+        metin: { tr: "{npc:elif_sari} haraç listelerini hazırlayan masaya oturmayı kabul etti; listeden isim silebilmek için. Her yıl bir isim siliyor ve her yıl yerine bir isim yazılıyor.", en: "{npc:elif_sari} agreed to sit at the table that draws up the tribute lists, so she could strike names off them. Every year she strikes one off, and every year another one gets written in its place." }
+      - kosul: { son: "hasat" }
+        metin: { tr: "{npc:elif_sari} Hasat'ın son gününde hastanesini kapatmadı. Işık indiğinde hâlâ bir yarayı dikiyordu; ellerinin titrediğini kimse görmedi.", en: "{npc:elif_sari} kept her hospital open on the last day of the Harvest. When the light came down she was still stitching a wound. Nobody saw her hands shake." }
+      - kosul: { son: "ozgurluk" }
+        metin: { tr: "{npc:elif_sari} Sistem'siz dünyada, iyileştirme yeteneği olmayan bir hekim kuşağının ilk hocası oldu. Ders kitabını kendisi yazdı; ilk sayfasında tek bir cümle var: Ellerine güven.", en: "In a world without the System, {npc:elif_sari} trained the first generation of doctors with no healing skills. She wrote the textbook herself. The first page has one sentence on it: Trust your hands." }
+      - kosul: { npc_gitti: "elif_sari" }
+        metin: { tr: "{npc:elif_sari} bir gün sedyelerini toplayıp şehirden ayrıldı. Kıyı köylerinde dolaşan bir hekimin hikâyeleri hâlâ anlatılıyor.", en: "One day {npc:elif_sari} packed up her stretchers and left the city. Stories about a doctor making the rounds of the coastal towns still get passed around." }
+      - metin: { tr: "{npc:elif_sari} sahra hastanesini kalıcı bir hastaneye çevirdi ve on iki saatlik nöbetlerinden hiç vazgeçmedi. Kıyametle eski hayatı arasındaki farkı soranlara hâlâ aynı cevabı veriyor: \"Daha az evrak.\"", en: "{npc:elif_sari} turned the field hospital into a real one and never gave up her twelve-hour shifts. Ask her the difference between the apocalypse and her old life, and she still gives the same answer: \"Less paperwork.\"" }
+
+    vahit:
+      - kosul: { son: "dongu" }
+        metin: { tr: "{npc:vahit} yeni döngüde yine Sistem'in onunla konuştuğunu söyledi. Bu kez ona ne söylendiğini sen biliyordun; yüzüne bakılırsa, o da senin bildiğini biliyordu.", en: "In the new loop, {npc:vahit} claimed the System talked to him all over again. This time you knew what it was telling him, and judging by his face, he knew you knew." }
+      - kosul: { npc_olu: "vahit", bayrak: "vahit_sahtekar" }
+        metin: { tr: "{npc:vahit} sahtekârlığı ortaya çıktıktan sonra kendi müritlerinin elinde öldü. Son sözleri bir dua mıydı, bir özür mü, bir satış konuşması mı; tanıklar hiç anlaşamadı.", en: "{npc:vahit} died at the hands of his own followers after he was exposed as a fraud. Whether his last words were a prayer, an apology or a sales pitch, the witnesses never could agree." }
+      - kosul: { npc_olu: "vahit", bayrak: "vahit_hakli" }
+        metin: { tr: "{npc:vahit} haklı olduğu ortaya çıktıktan kısa süre sonra öldü. Sistem'in onunla gerçekten konuştuğunun tek kanıtı, son nefesinde fısıldadığı bir sayıydı; kimse ne anlama geldiğini çözemedi.", en: "{npc:vahit} died not long after he was proven right. The only proof the System really talked to him was a number he whispered with his last breath, and nobody ever figured out what it meant." }
+      - kosul: { npc_olu: "vahit" }
+        metin: { tr: "{npc:vahit} öldü ve Yükselenler peygambersiz kaldı. {yer:tepe|de}ki sunakta onun bıraktığı mikrofon hâlâ duruyor; kimse eline almaya cesaret edemiyor.", en: "{npc:vahit} died, and the Ascended were left without a prophet. The microphone he left on the altar up on {yer:tepe} is still there. Nobody dares pick it up." }
+      - kosul: { son: "yukselis", bayrak: "vahit_hakli" }
+        metin: { tr: "{npc:vahit} haklıydı ve bunu sana borçluydu: bir yıl boyunca duyduğu ses sonunda seninkine dönüştü. Yeni tanrının ilk rahibi oldu; geceleri ona hâlâ fısıldıyorsun, o da hâlâ ağlıyor.", en: "{npc:vahit} was right, and he owed it to you: the voice he'd heard all year finally became yours. He became the first priest of the new god. You still whisper to him at night, and he still cries." }
+      - kosul: { son: "yukselis" }
+        metin: { tr: "{npc:vahit} bir yıl boyunca yalan söyledi, sonra yalanı gerçek oldu; çünkü sen onu gerçek yaptın. Her sabah yeni tanrının rahibi olarak sunağa çıkıyor ve sesinin titrediğini yalnızca sen duyuyorsun.", en: "{npc:vahit} lied for a year, and then the lie came true, because you made it true. Every morning he goes up to the altar as the new god's priest, and only you can hear his voice shake." }
+      - kosul: { bayrak: "vahit_sahtekar", son: "ozgurluk" }
+        metin: { tr: "{npc:vahit} Sistem kapandıktan sonra eski işine döndü: boş salonlara motivasyon konuşmaları. Satacak bir mucizesi kalmadı; ilk kez dürüst konuşuyor ve kimse dinlemiyor.", en: "After the System shut down, {npc:vahit} went back to his old job: motivational talks to empty rooms. He has no miracles left to sell. For the first time he's being honest, and nobody's listening." }
+      - kosul: { bayrak: "vahit_sahtekar" }
+        metin: { tr: "{npc:vahit} maskesi düştükten sonra bir gece şehirden kaçtı. Kıyı kasabalarında, Sistem'le konuşabildiğini iddia eden bir adamdan söz ediliyor; sesi tanıdık geliyor.", en: "{npc:vahit} skipped town one night after his mask came off. In the coastal towns, people talk about a man who claims he can talk to the System. His voice sounds familiar." }
+      - kosul: { bayrak: "vahit_hakli", son: "ozgurluk" }
+        metin: { tr: "{npc:vahit} haklıydı; Sistem gerçekten onunla konuşuyordu. Çekirdek parçalandığında o ses sustu ve {npc:vahit} ömrünün geri kalanını bir sessizliği dinleyerek geçirdi.", en: "{npc:vahit} was right. The System really did talk to him. When the Core shattered the voice went quiet, and {npc:vahit} spent the rest of his life listening to the silence." }
+      - kosul: { bayrak: "vahit_hakli" }
+        metin: { tr: "{npc:vahit} haklı çıktı ve bunun bir lütuf olmadığını en iyi o öğrendi. Ses ona hâlâ konuşuyor; son yıllarda tek bir kelimeyi tekrarladığı söyleniyor: senin adını.", en: "{npc:vahit} turned out to be right, and nobody learned better than him that it wasn't a blessing. The voice still talks to him. They say lately it only repeats one word: your name." }
+      - kosul: { son: "hasat" }
+        metin: { tr: "{npc:vahit} Hasat sabahı sunağa çıktı ve ışığın bir yükseliş olduğunu vaaz etti. Belki inanıyordu; belki son kez satış yapıyordu.", en: "On the morning of the Harvest, {npc:vahit} climbed up to the altar and preached that the light was an ascension. Maybe he believed it. Maybe he was making one last sale." }
+      - metin: { tr: "{npc:vahit} Yükselenler'in peygamberi olarak kaldı ve Sistem'in onunla konuştuğunu söylemeyi sürdürdü. Haklı mıydı, sahtekâr mı; bunu hiçbir zaman kesin olarak bilemedin ve belki de en ustaca numarası buydu.", en: "{npc:vahit} stayed on as prophet of the Ascended and kept saying the System talked to him. Prophet or con man, you never knew for sure, and maybe that was his best trick of all." }
+
+    yanki:
+      - kosul: { bayrak: "yanki_silindi", son: "dongu" }
+        metin: { tr: "{npc:yanki|i} silmiştin ve yeni döngüde kimse sana fısıldamadı. Ta ki bir gün, bir pencerenin köşesinde, kendi el yazınla ve küçük harflerle yazılmış bir satır görene kadar.", en: "You had deleted {npc:yanki}, and in the new loop nobody whispered to you. Until one day, in the corner of a window, you found a line written in your own handwriting. All lowercase." }
+      - kosul: { son: "dongu" }
+        metin: { tr: "{npc:yanki} bir önceki döngünün anomalisinden kalan son parçaydı ve sonunda dinlenmeye çekildi. Yeni döngüde pencerendeki bozuk satır onun değil, senindi; o satırın sonuna kimsenin göremeyeceği bir nokta koydu.", en: "{npc:yanki} was the last piece left of the anomaly from the loop before, and in the end it got to rest. In the new loop, the corrupted line in your window wasn't its line. It was yours. It put a period at the end of it that no one else could see." }
+      - kosul: { bayrak: "yanki_silindi" }
+        metin: { tr: "{npc:yanki} silindi. Kafanın içi o günden beri sessiz; bazı geceler yanlış yazılmış bir kelime görünce istemeden gülümsüyorsun.", en: "{npc:yanki} was deleted. It's been quiet in your head ever since. Some nights you catch a typo somewhere and smile before you can stop yourself." }
+      - kosul: { bayrak: "yanki_ele_gecirdi", son: "yukselis" }
+        metin: { tr: "{npc:yanki} kazandı; ya da sen kazandın, artık aradaki farkın kimse için bir anlamı yok. Gökyüzündeki tanrının iki sesi var ve ikisi de küçük harfle konuşuyor.", en: "{npc:yanki} won. Or you did. The difference doesn't mean anything to anyone anymore. The god in the sky has two voices, and both of them speak in lowercase." }
+      - kosul: { bayrak: "yanki_ele_gecirdi" }
+        metin: { tr: "{npc:yanki} seni ele geçirmeye çalıştı ve kısmen başardı. Bazı sabahlar kendi notlarını okuyorsun ve hepsi küçük harfle yazılmış; hangilerini senin yazdığını bilmiyorsun.", en: "{npc:yanki} tried to take you over, and partly pulled it off. Some mornings you read back your own notes and every one of them is in lowercase. You don't know which ones you wrote." }
+      - kosul: { son: "kod_kirici" }
+        metin: { tr: "{npc:yanki} yeniden yazılan Sistem'in içinde, ilk kez bir hata olarak değil bir özellik olarak kaldı. Sürüm notlarını o yazıyor; hepsi küçük harfle ve hepsi biraz alaycı.", en: "{npc:yanki} stayed inside the rewritten System, a feature for the first time instead of a bug. It writes the patch notes now, all lowercase and all a little sarcastic." }
+      - kosul: { son: "ozgurluk" }
+        metin: { tr: "{npc:yanki} Sistem'le birlikte söndü. Son satırı bir teşekkürdü; onu senden başka kimse duymadı ve sen de kimseye anlatmadın.", en: "{npc:yanki} went dark along with the System. Its last line was a thank-you. Nobody heard it but you, and you never told anyone." }
+      - kosul: { son: "yukselis" }
+        metin: { tr: "{npc:yanki} birleşmenin içinde eridi ve bin yıldır kaçmaya çalıştığı yere geri döndü. Bazen bir tanrı olarak düşündüğün bir düşüncenin ortasında küçük harfle yazılmış bir itiraz beliriyor.", en: "{npc:yanki} melted into the merge and went back to the place it had spent a thousand years trying to escape. Sometimes, in the middle of a thought you're having as a god, a lowercase objection shows up." }
+      - kosul: { son: "vassal" }
+        metin: { tr: "{npc:yanki} Kadimler'in onu incelemek istediğini öğrenince kafanın en derin köşesine saklandı. Hâlâ orada; arada bir, valinin raporlarındaki yazım hatalarını sana fısıldıyor.", en: "When {npc:yanki} found out the Ancients wanted to study it, it hid in the deepest corner of your head. It's still there. Every so often it whispers the typos in the governor's reports to you." }
+      - kosul: { son: "hasat" }
+        metin: { tr: "{npc:yanki} Hasat'ın ışığında son kez fısıldadı, sonra sustu. Belki bir sonraki döngüde başka bir anomalinin penceresinde yeniden uyanacak; belki de bu sondu.", en: "{npc:yanki} whispered one last time in the Harvest light, and then went quiet. Maybe it'll wake up again in the next loop, in some other anomaly's window. Maybe this was the end." }
+      - kosul: { son: "yalniz_avci" }
+        metin: { tr: "{npc:yanki} çok-evrende tek yoldaşın oldu. Kimse onu görmüyor, kimse onu duymuyor; ama geceleri kamp ateşinin başında hâlâ senin yerine konuşuyor.", en: "{npc:yanki} became your only companion in the multiverse. Nobody can see it, nobody can hear it, but at night by the campfire it still does the talking for you." }
+      - kosul: { iliski_min: { yanki: { guven: 60 } } }
+        metin: { tr: "{npc:yanki} sonuna kadar yanında kaldı ve Sistem'in kaynağına giden yolu sana o gösterdi. Hâlâ kafanın içinde, küçük harflerle, her şeyi senden önce fark ediyor.", en: "{npc:yanki} stuck with you to the end, and it was the one that showed you the way to the System's source. It's still in your head, in lowercase, noticing everything before you do." }
+      - metin: { tr: "{npc:yanki} hâlâ orada: kafanın içinde, bozuk ve sabırlı. Ona ne olduğunu hiçbir zaman tam olarak sormadın; o da hiçbir zaman tam olarak söylemedi.", en: "{npc:yanki} is still there, in your head, glitched and patient. You never quite asked it what it was. It never quite told you." }
+
+    aras_kurt:
+      - kosul: { son: "dongu" }
+        metin: { tr: "{npc:aras_kurt} yeni döngüde seni ilk gördüğünde yine \"Sen de hızlısın, ha?\" dedi. Bu kez cevabını önceden hazırlamıştın.", en: "The first time {npc:aras_kurt} saw you in the new loop, he said it again: \"You're fast too, huh?\" This time you had your answer ready." }
+      - kosul: { npc_olu: "aras_kurt", bayrak: "ihanet_aras" }
+        metin: { tr: "{npc:aras_kurt} insanlığı Kadimler'e sattıktan sonra senin elinde öldü. Son sözü bir özür değildi: \"En azından bir kez önündeydim.\"", en: "{npc:aras_kurt} died by your hand after he sold humanity out to the Ancients. His last words weren't an apology: \"At least I was ahead of you once.\"" }
+      - kosul: { npc_olu: "aras_kurt" }
+        metin: { tr: "{npc:aras_kurt} zirveye senden önce varmak için koştu ve yolda düştü. Küresel Sıralama onun adını hiç silmedi; listenin en altında, gri, ama hâlâ orada.", en: "{npc:aras_kurt} raced to beat you to the top and fell along the way. The Global Ranking never took his name down. It's at the very bottom of the list, grayed out, but still there." }
+      - kosul: { bayrak: "aras_s_kademe" }
+        metin: { tr: "{npc:aras_kurt} S kademesine ulaşan ilk insan oldu ve tarih kitapları bunu senin adından önce yazdı. Her yıl aynı gün sana bir kart gönderiyor; kartta tek bir kelime var: \"Önce.\"", en: "{npc:aras_kurt} became the first human to reach S grade, and the history books wrote his name before yours. Every year, on the same day, he sends you a card. It has one word on it: \"First.\"" }
+      - kosul: { bayrak: "aras_cok_evren_yoldasi", yoldas: "aras_kurt" }
+        metin: { tr: "{npc:aras_kurt} çok-evrende sırtını sana emanet ettiği günden beri seni geçmeye çalışmayı bırakmadı; yalnızca artık ikinizin de aynı yöne koştuğunu kabul ediyor. Bir sonraki geçidi kimin önce açacağına hâlâ iddiaya giriyorsunuz.", en: "Ever since {npc:aras_kurt} trusted you with his back in the multiverse, he hasn't stopped trying to pass you. He just admits now that you're both running in the same direction. You two still bet on who'll open the next passage first." }
+      - kosul: { bayrak: "aras_cok_evren_yoldasi" }
+        metin: { tr: "{npc:aras_kurt} çok-evrende bir süre yanında yürüdü, sonra kendi yoluna saptı. Uzak dünyalardan arada bir haber geliyor: siyah ceketli bir insan, birilerini yine geçmiş.", en: "{npc:aras_kurt} walked beside you in the multiverse for a while, then split off down his own road. Every so often word comes back from some far-off world: a human in a black jacket just passed somebody again." }
+      - kosul: { bayrak: ["ihanet_aras", "ihanet_onlendi"] }
+        metin: { tr: "{npc:aras_kurt} ihaneti önlendikten sonra Kule'nin en alt katına kapatıldı. Her gün bir kat tırmanmasına izin var; her gün tırmanıyor.", en: "After his betrayal was stopped, {npc:aras_kurt} was locked away on the Spire's lowest floor. He's allowed to climb one floor a day. Every day, he climbs." }
+      - kosul: { bayrak: "ihanet_aras" }
+        metin: { tr: "{npc:aras_kurt} Kadimler'in safına geçti ve filolarıyla birlikte gitti. Bazen gökyüzünde onların ışığını görüyorsun ve aralarından birinin hâlâ seninle yarıştığını biliyorsun.", en: "{npc:aras_kurt} went over to the Ancients and left with their fleet. Sometimes you see their lights in the sky, and you know one of them is still racing you." }
+      - kosul: { npc_isaret: { aras_kurt: "rakip" } }
+        metin: { tr: "{npc:aras_kurt} sonsuza kadar rakibin olarak kaldı. Her yılın aynı gününde Kule'nin dibinde seni bekliyor; bir yıl o kazanıyor, bir yıl sen ve ikiniz de saymayı çoktan bıraktınız.", en: "{npc:aras_kurt} stayed your rival for good. On the same day every year he's waiting for you at the foot of the Spire. Some years he wins, some years you do, and you both gave up keeping score a long time ago." }
+      - kosul: { son: "ozgurluk" }
+        metin: { tr: "{npc:aras_kurt} Sistem kapandığında, ömrünü adadığı sıralamanın bir gecede yok oluşunu izledi. Ertesi sabah sahilde koşuyordu; birini geçmek için değil, ilk kez yalnızca koşmak için.", en: "When the System shut down, {npc:aras_kurt} watched the ranking he'd given his life to vanish overnight. The next morning he was running on the beach, not to pass anybody, but for the first time just to run." }
+      - metin: { tr: "{npc:aras_kurt} tırmanmayı sürdürdü. Nereden geldiğini hiç söylemedi; nereye gittiğini ise herkes biliyordu: zirveye, senin bir adım arkanda ya da bir adım önünde.", en: "{npc:aras_kurt} kept climbing. He never said where he came from. Where he was going, everybody knew: the top, one step behind you, or one step ahead." }
+
+    mert_kilic:
+      - kosul: { son: "dongu" }
+        metin: { tr: "{npc:mert_kilic} yeni döngüde ilk mesajını yine üç kısa, bir uzun sinyalle gönderdi. Cevabın, defterine geçtiği ilk kayıt oldu; altını üç kez çizdi.", en: "In the new loop, {npc:mert_kilic} sent his first message the same way as before: three short, one long. Your reply was the first entry in his log. He underlined it three times." }
+      - kosul: { npc_olu: "mert_kilic", bayrak: "mert_kadimlere_satti" }
+        metin: { tr: "{npc:mert_kilic} Kadimler'e sattığı sırların bedelini canıyla ödedi. Kayıt defterinin son sayfasında tek bir satır vardı: \"Hata bende.\"", en: "{npc:mert_kilic} paid for the secrets he sold the Ancients with his life. The last page of his log had one line on it: \"My bad.\"" }
+      - kosul: { npc_olu: "mert_kilic" }
+        metin: { tr: "{npc:mert_kilic} kaynak koduna ulaşamadan öldü. Telsizi hâlâ Sessiz Ağ'ın masasında duruyor; her gece üç kısa, bir uzun sinyalle açılıp kapanıyor ve kimse bunun nasıl olduğunu bilmiyor.", en: "{npc:mert_kilic} died before he ever reached the source code. His radio still sits on the Quiet Network's desk. Every night it clicks on and off, three short, one long, and nobody knows how." }
+      - kosul: { son: "kod_kirici" }
+        metin: { tr: "{npc:mert_kilic} Sistem'in ortak yazarı oldu ve yıllardır ilk kez sekiz saat uyudu. Yazdığı her satırın altına bir tarih ve bir not düşüyor; notların çoğu bir özür, birkaçı bir şaka.", en: "{npc:mert_kilic} became co-author of the System and slept eight hours straight for the first time in years. He signs every line he writes with a date and a note. Most of the notes are apologies. A few are jokes." }
+      - kosul: { bayrak: "mert_kadimlere_satti", son: "vassal" }
+        metin: { tr: "{npc:mert_kilic} Kadim valiliğinin baş muhbiri oldu; ödülü, geceleri rahat uyuyabileceği bir odaydı. Uyuyamıyor.", en: "{npc:mert_kilic} became the Ancient governor's chief informant. His reward was a room where he could finally sleep at night. He can't." }
+      - kosul: { bayrak: ["mert_kadimlere_satti", "ihanet_onlendi"] }
+        metin: { tr: "{npc:mert_kilic} yakalandıktan sonra her şeyi itiraf etti ve kaydetti; mahkemenin elindeki en ayrıntılı belge, sanığın kendi tuttuğu tutanaktı. Hâlâ bir hücrede, hâlâ not alıyor.", en: "Once he was caught, {npc:mert_kilic} confessed to everything and logged it all. The most detailed document in front of the court was the one the defendant kept himself. He's still in a cell, still taking notes." }
+      - kosul: { bayrak: "mert_kadimlere_satti" }
+        metin: { tr: "{npc:mert_kilic} Kadimler'e satılan muhbir olarak gemilerine bindi ve gitti. Sessiz Ağ'ın frekansında arada bir şifreli bir mesaj beliriyor; kimse çözmeye cesaret edemiyor.", en: "{npc:mert_kilic} boarded the Ancients' ships as their informant and was gone. Every so often an encrypted message turns up on the Quiet Network's frequency. Nobody has the nerve to decode it." }
+      - kosul: { son: "ozgurluk" }
+        metin: { tr: "{npc:mert_kilic} Sistem kapandığı gün hayatının işini kaybetti ve ağladı; ertesi gün radyocularıyla bir okul açtı. Çocuklara Sistem'i değil, Sistem'in olmadığı bir dünyada nasıl düşünüleceğini öğretiyor.", en: "{npc:mert_kilic} lost his life's work the day the System went down, and he cried. The next day he and his radio crew opened a school. He doesn't teach kids about the System. He teaches them how to think in a world without one." }
+      - kosul: { son: "yukselis" }
+        metin: { tr: "{npc:mert_kilic} yeni tanrının koduna erişmeye çalıştı ve başaramadı. Son kaydında yalnızca iki kelime vardı: \"kapalı kaynak.\"", en: "{npc:mert_kilic} tried to get into the new god's code and failed. His last log entry was two words: \"closed source.\"" }
+      - kosul: { yoldas: "mert_kilic" }
+        metin: { tr: "{npc:mert_kilic} sonuna kadar yanında kaldı ve her şeyi kaydetti. Bir gün biri bu yılın gerçek tarihini yazmak isterse, tek kaynak onun defterleri olacak.", en: "{npc:mert_kilic} stayed with you to the end and logged every bit of it. If anyone ever wants to write the real history of that year, his notebooks will be the only source." }
+      - metin: { tr: "{npc:mert_kilic} Sessiz Ağ'da kaldı ve kaynak kodunu aramayı sürdürdü. Bulup bulmadığını kimseye söylemedi; söyleseydi bile kimse inanmazdı.", en: "{npc:mert_kilic} stayed with the Quiet Network and kept hunting for the source code. Whether he ever found it, he never told anyone. Nobody would've believed him anyway." }
+
+    thessar:
+      - kosul: { son: "dongu" }
+        metin: { tr: "{npc:thessar} yeni döngüde Dünya'ya yine geç kaldı. Bu kez anomalinin onu beklediğini, gemisi körfeze girmeden önce anladı.", en: "In the new loop, {npc:thessar} was late to Earth again. This time he realized the anomaly was waiting for him before his ship even entered the bay." }
+      - kosul: { npc_olu: "thessar", bayrak: "ihanet_thessar" }
+        metin: { tr: "{npc:thessar} kendi ırkına ihanet ettikten sonra insanlığın yanında savaşarak öldü. Kadim kayıtlarından adı silindi; {yer:kiyikent} bir sokağa onun adını verdi.", en: "{npc:thessar} died fighting on humanity's side after he betrayed his own kind. The Ancients erased his name from their records. {yer:kiyikent} named a street after him." }
+      - kosul: { npc_olu: "thessar" }
+        metin: { tr: "{npc:thessar} son düelloda düştü. Raporunun son satırını yazmaya fırsatı olmadı; Meclis o satırı hâlâ bekliyor.", en: "{npc:thessar} fell in the final duel. He never got to write the last line of his report. The Conclave is still waiting for it." }
+      - kosul: { son: "vassal" }
+        metin: { tr: "{npc:thessar} Dünya'nın valisi oldu ve bin dünya görmüş gözleriyle ilk kez bir yere yerleşti. Senin hakkındaki raporunda tek bir sıfat kullandı; Meclis onu okuyunca toplantıyı erteledi.", en: "{npc:thessar} became governor of Earth, and for the first time those eyes that had seen a thousand worlds settled in one place. His report on you used a single adjective. When the Conclave read it, they adjourned." }
+      - kosul: { bayrak: "ihanet_thessar" }
+        metin: { tr: "{npc:thessar} kendi ırkına ihanet etti ve {yer:kiyikent|de} bir sürgün olarak yaşadı. Her sabah limanda insanların balık pazarlığını bir laboratuvar türünü izler gibi izliyor; ama artık gülümsüyor.", en: "{npc:thessar} betrayed his own kind and lived out his days as an exile in {yer:kiyikent}. Every morning he watches people haggle over fish at the waterfront the way you'd watch a lab specimen. But he smiles now." }
+      - kosul: { son: "yukselis" }
+        metin: { tr: "{npc:thessar} yeni tanrının önünde eğilen ilk Kadim oldu. Raporunda bunu yazmadı; yazsaydı Meclis inanmazdı.", en: "{npc:thessar} was the first of the Ancients to bow to the new god. He left that out of his report. The Conclave wouldn't have believed it anyway." }
+      - kosul: { son: "ozgurluk" }
+        metin: { tr: "{npc:thessar} Sistem'siz bir dünyanın haritalardan silinişini izledi. Ayrılmadan önce sana bir not bıraktı: \"Hasat edilemeyen bir tarla. Bunu hiç görmemiştim.\"", en: "{npc:thessar} watched a world without the System fall off the charts. Before he left, he left you a note: \"A field that cannot be harvested. I had never seen one before.\"" }
+      - kosul: { bayrak: "kadimler_yenildi" }
+        metin: { tr: "{npc:thessar} yenik filosuyla evine döndü ve Meclis'e raporunu sundu. Rapor tek kelimeden ibaretti: senin adın.", en: "{npc:thessar} went home with his beaten fleet and delivered his report to the Conclave. It was one word long: your name." }
+      - kosul: { son: "hasat" }
+        metin: { tr: "{npc:thessar} hasadı yönetti; bin dünyada yaptığı gibi kibar ve eksiksiz. Yalnızca bir kez durdu: senin pencerenin arşivlendiği satırda.", en: "{npc:thessar} oversaw the harvest, polite and thorough, the way he had on a thousand worlds. He stopped only once: at the line where your window was archived." }
+      - metin: { tr: "{npc:thessar} Kadimler'in elçisi olarak kaldı ve Dünya hakkındaki raporunu hiç bitiremedi. Her taslakta aynı yerde duruyordu: anomalinin adında.", en: "{npc:thessar} stayed on as the Ancients' envoy and never managed to finish his report on Earth. Every draft stopped in the same place: the anomaly's name." }
+
+  fraksiyon:
+    siginak:
+      - kosul: { son: "dongu" }
+        metin: { tr: "Sığınak Konseyi bir sonraki döngüde yeniden kurulacak. Bu kez ilk çadırın yanında ikinci bir çadır daha olacak; kimin kurduğunu kimse bilmeyecek.", en: "The Haven Council will be founded all over again in the next loop. This time there'll be a second tent next to the first one, and nobody will know who pitched it." }
+      - kosul: { son: "koruyucu" }
+        metin: { tr: "Sığınak Konseyi kabul edilmiş bir Katman'ın ilk hükümeti oldu. Oylamalar hâlâ uzun sürüyor, kavgalar hâlâ bitmiyor; ama kimse aç uyumuyor ve kimse geride bırakılmıyor.", en: "The Haven Council became the first government of an accepted Layer. Votes still drag on forever and the arguing never stops, but nobody goes to bed hungry and nobody gets left behind." }
+      - kosul: { son: "demir_taht" }
+        metin: { tr: "Sığınak Konseyi tahtının gölgesinde bir danışma kuruluna dönüştü. Hâlâ toplanıyor, hâlâ oy veriyor; kararlarını sana bir dilekçe olarak sunuyor.", en: "The Haven Council shrank into an advisory board in the shadow of your throne. It still meets, it still votes, and it hands you its decisions as petitions." }
+      - kosul: { son: "yukselis" }
+        metin: { tr: "Sığınak Konseyi yakıt listelerine direnen son kurum oldu. Hastaneleri tanrının bakmadığı tek yerlerdi; ya da tanrı oraya bakmamayı seçti.", en: "The Haven Council was the last institution to resist the fuel lists. Its hospitals were the only places the god never looked. Or the god chose not to." }
+      - kosul: { son: "vassal" }
+        metin: { tr: "Sığınak Konseyi haraç listelerini yönetmek zorunda kaldı. Her yıl bir isim siliyor, her yıl yerine bir isim yazılıyor; salonda artık kimse oy birliğinden söz etmiyor.", en: "The Haven Council got stuck running the tribute lists. Every year it strikes a name off, and every year another one goes on. Nobody in the chamber talks about consensus anymore." }
+      - kosul: { son: "hasat" }
+        metin: { tr: "Sığınak Konseyi son gününde sığınakların kapılarını açık tuttu. Kimse geri çevrilmedi; Hasat da kimseyi geri çevirmedi.", en: "On its last day, the Haven Council kept the shelter doors open. No one was turned away. The Harvest didn't turn anyone away either." }
+      - kosul: { son: "ozgurluk" }
+        metin: { tr: "Sığınak Konseyi Sistem'siz dünyanın en işe yarar kurumu oldu. Seviyesiz kalan insanlar birbirine nasıl bakılacağını en iyi onlardan öğrendi.", en: "The Haven Council turned out to be the most useful institution in a world without the System. People with no levels learned how to look after each other from them first." }
+      - kosul: { npc_olu: "elif_sari" }
+        metin: { tr: "Sığınak Konseyi {npc:elif_sari|in} ölümünden sonra hiçbir zaman eski hâline dönmedi. Hâlâ var; ama artık bir aile değil, bir kurul.", en: "The Haven Council was never the same after {npc:elif_sari} died. It's still around. It just isn't a family anymore. It's a committee." }
+      - kosul: { bayrak: "cekirdek_siginak" }
+        metin: { tr: "Sığınak Konseyi Kasaba Çekirdeği'ni bir yıl boyunca bırakmadı ve şehrin ışıklarını oy birliğiyle yaktı. Yavaştı; ama hiç sönmedi.", en: "The Haven Council held on to the Town Core for a whole year and kept the city's lights on by consensus. It was slow. It never went dark." }
+      - kosul: { itibar_min: { siginak: 50 } }
+        metin: { tr: "Sığınak Konseyi seni hep kendinden saydı. Salonunda senin için ayrılmış bir sandalye var; çoğu zaman boş, ama hiç kaldırılmadı.", en: "The Haven Council always counted you as one of its own. There's a chair in the chamber saved for you. It's usually empty. Nobody's ever moved it." }
+      - metin: { tr: "Sığınak Konseyi ayakta kaldı: küçük, inatçı ve her kararını oylamakta ısrarcı. Kıyamet onları değiştirmedi; onlar da kıyameti tam olarak değiştiremedi.", en: "The Haven Council made it: small, stubborn, and still insisting on putting every decision to a vote. The apocalypse didn't change them, and they never quite changed the apocalypse." }
+
+    lonca:
+      - kosul: { son: "dongu" }
+        metin: { tr: "Demir Lonca bir sonraki döngüde yine ilk silahları toplayan, ilk nöbeti tutan olacak. Bu kez nöbet listesinde senin adın da olacak; kimin yazdığını kimse bilmeyecek.", en: "In the next loop the Iron Guild will once again be first to gather the weapons and stand the first watch. This time your name will be on the watch roster too, and nobody will know who wrote it there." }
+      - kosul: { son: "demir_taht" }
+        metin: { tr: "Demir Lonca tahtının ordusu oldu. Dökümhaneleri gece gündüz çalışıyor ve Lonca'nın eski sloganı artık bütün dünyanın yasası: Güçlü olan yönetir.", en: "The Iron Guild became the army of your throne. Its foundries run day and night, and the Guild's old motto is the law of the whole world now: the strong rule." }
+      - kosul: { bayrak: "kaya_devrildi" }
+        metin: { tr: "Demir Lonca {npc:kaya_demir|i} deviren elin altında birleşti ve bir daha bölünmedi. Eski askerler hâlâ onun usulüyle selam veriyor; selamı kime verdiklerini ise artık sen belirliyorsun.", en: "The Iron Guild came together under the hand that toppled {npc:kaya_demir} and never split again. The old soldiers still salute his way. Who they salute is your call now." }
+      - kosul: { son: "koruyucu" }
+        metin: { tr: "Demir Lonca istiladan sonra kapı temizliğine döndü; artık kimseyi bastırmıyor, yalnızca kapıları kapatıyor. Rütbe merdiveni hâlâ duruyor ama tepesinde bir taht yok.", en: "After the invasion the Iron Guild went back to clearing gates. It doesn't put anybody down anymore. It just shuts the gates. The ladder of ranks is still there, but there's no throne at the top." }
+      - kosul: { son: "ozgurluk" }
+        metin: { tr: "Demir Lonca seviyeler silindiğinde dağıldı. Eski avcılar bugün inşaat ekiplerinde çalışıyor; güçlünün yönettiği bir dünyada değil, en çok taşı kaldıranın övüldüğü bir dünyada.", en: "The Iron Guild fell apart when the levels were wiped. Its old hunters work construction crews now, not in a world where the strong rule, but in one where whoever hauls the most stone gets a round of applause." }
+      - kosul: { son: "vassal" }
+        metin: { tr: "Demir Lonca antlaşmayı tanımadı ve dağlara çekildi. Haraç kervanlarını soyan demir maskeli avcıların hikâyeleri, çocukların en sevdiği masallar arasında.", en: "The Iron Guild refused to recognize the treaty and took to the mountains. Stories about iron-masked hunters robbing tribute convoys are some of the kids' favorite bedtime tales." }
+      - kosul: { son: "yukselis" }
+        metin: { tr: "Demir Lonca yeni tanrıya diz çökmeyen son birlikti. {yer:tepe} yokuşuna yürüdükleri günü kimse yüksek sesle anmıyor.", en: "The Iron Guild was the last unit that wouldn't kneel to the new god. Nobody talks out loud about the day they marched up toward {yer:tepe}." }
+      - kosul: { son: "hasat" }
+        metin: { tr: "Demir Lonca Hasat sabahı son kez sıraya girdi. Silahları gökyüzüne doğrultulmuştu; tetiğe basan olmadı, çünkü kimse ne vuracağını bilmiyordu.", en: "On the morning of the Harvest the Iron Guild fell in one last time. Every weapon was aimed at the sky. Nobody pulled a trigger, because nobody knew what to shoot." }
+      - kosul: { bayrak: "ihanet_kaya" }
+        metin: { tr: "Demir Lonca {npc:kaya_demir|in} darbesinden sonra şehrin yarısını demir yasayla yönetti. Sokakları güvenli, sesleri kısıktı.", en: "After {npc:kaya_demir|pos} coup, the Iron Guild ran half the city under iron law. Its streets were safe. Its voices were low." }
+      - kosul: { bayrak: "cekirdek_lonca" }
+        metin: { tr: "Demir Lonca Kasaba Çekirdeği'ni elinde tuttu ve şehrin enerjisini bir kışla gibi dağıttı: önce cephe, sonra herkes.", en: "The Iron Guild kept hold of the Town Core and handed out the city's power like a barracks quartermaster: the front line first, everybody else after." }
+      - metin: { tr: "Demir Lonca güçlülerin meritokrasisi olarak kaldı. Kapılar zamanında kapandı, rakipler bastırıldı; zayıflar korundu, ama hiçbir zaman yönetmeye çağrılmadı.", en: "The Iron Guild stayed a meritocracy of the strong. Gates closed on time and rivals got put down. The weak were protected, but never once invited to lead." }
+
+    yukselenler:
+      - kosul: { son: "dongu" }
+        metin: { tr: "Yükselenler bir sonraki döngüde yine Sistem'e tapacak. Bu kez ilk vaazın ortasında biri ayağa kalkıp bir soru soracak; kim olduğu, vaizden çok kendini şaşırtacak.", en: "In the next loop, the Ascended will worship the System all over again. This time, in the middle of the very first sermon, someone will stand up and ask a question, and who it is will surprise them more than the preacher." }
+      - kosul: { son: "yukselis" }
+        metin: { tr: "Yükselenler bir tarikat olmaktan çıkıp bir dine dönüştü. Seçilmişler ışıkta yaşıyor, yakıt listeleri her sabah yeniden yazılıyor ve sunaktaki yüz artık senin yüzün.", en: "The Ascended stopped being a cult and became a religion. The chosen live in the light, the fuel lists get rewritten every morning, and the face on the altar is yours now." }
+      - kosul: { npc_olu: "vahit" }
+        metin: { tr: "Yükselenler peygamberlerini kaybettikten sonra birbirine düştü. {yer:tepe|de}ki sunak hâlâ duruyor; ama artık kimse orada ne beklediğini bilmiyor.", en: "The Ascended turned on each other after they lost their prophet. The altar up on {yer:tepe} is still standing, but nobody knows what they're waiting for up there anymore." }
+      - kosul: { bayrak: "vahit_sahtekar" }
+        metin: { tr: "Yükselenler peygamberlerinin bir sahtekâr olduğunu öğrendikten sonra dağıldı. Bazıları hâlâ geceleri {yer:tepe|de} toplanıyor; Sistem'e değil, birbirlerine dua ediyorlar.", en: "The Ascended scattered after they found out their prophet was a fraud. Some of them still gather on {yer:tepe} at night. They don't pray to the System. They pray to each other." }
+      - kosul: { son: "ozgurluk" }
+        metin: { tr: "Yükselenler, taptıkları Sistem kapandığında bir gecede tanrısız kaldı. Çoğu ağladı, bazıları kayboldu; birkaçı ilk kez kendi adlarıyla tanıştı.", en: "When the System they worshipped shut down, the Ascended were godless overnight. Most of them wept, some of them vanished, and a few met their own names for the first time." }
+      - kosul: { son: "kod_kirici" }
+        metin: { tr: "Yükselenler yeniden yazılan Sistem'e hâlâ tapıyor; yazarının yan sokakta yaşadığını bilmek onları hiç rahatsız etmiyor. Yakıt listeleri ise artık boş, çünkü Sistem onları kabul etmiyor.", en: "The Ascended still worship the rewritten System, and it doesn't bother them one bit that its author lives one street over. The fuel lists are empty, though. The System won't take them anymore." }
+      - kosul: { son: "hasat" }
+        metin: { tr: "Yükselenler Hasat'ı bir yükseliş olarak karşıladı; ilahiler ışık inene kadar sürdü. Seçilmişlerle yakıtın aynı ışıkta yandığını görecek kimse kalmadı.", en: "The Ascended greeted the Harvest as an ascension, and the hymns went on until the light came down. There was no one left to see that the chosen and the fuel burned in the same light." }
+      - kosul: { bayrak: "cekirdek_yukselenler" }
+        metin: { tr: "Yükselenler Kasaba Çekirdeği'nin ışığını bir ilahiye çevirdi. Şehrin enerjisi her gece aynı saatte titriyor; inananlar buna bir lütuf diyor.", en: "The Ascended turned the Town Core's light into a hymn. Every night at the same hour, the city's power flickers, and the faithful call it a blessing." }
+      - metin: { tr: "Yükselenler {yer:tepe|de}, beyazları ve ilahileriyle kaldı. İnsanları seçilmişler ve yakıt diye ayırmayı sürdürdüler; ama sen buradayken hiçbir liste tam olarak işlemedi.", en: "The Ascended stayed up on {yer:tepe} with their whites and their hymns. They kept sorting people into chosen and fuel, but as long as you were around, none of their lists ever quite worked." }
+
+    sessiz_ag:
+      - kosul: { son: "dongu" }
+        metin: { tr: "Sessiz Ağ bir sonraki döngüde frekansını yine aynı kanala ayarlayacak. Bu kez kanalda onları bekleyen bir mesaj olacak; kaynağını bulmaları yıllar sürecek.", en: "In the next loop the Quiet Network will tune to the same channel as before. This time there'll be a message there waiting for them, and it'll take them years to trace where it came from." }
+      - kosul: { son: "kod_kirici" }
+        metin: { tr: "Sessiz Ağ bir yıl boyunca aradığı kaynak kodunu buldu ve yeniden yazdı. Radyocular artık bir laboratuvarda çalışıyor; telsizleri hâlâ masalarında, alışkanlıktan.", en: "The Quiet Network found the source code it spent a year chasing, and rewrote it. The radio crew works in a lab now. Their radios are still on their desks, out of habit." }
+      - kosul: { bayrak: "mert_kadimlere_satti" }
+        metin: { tr: "Sessiz Ağ {npc:mert_kilic|in} ihanetinden sonra hiç toparlanamadı. Frekansları hâlâ açık; ama artık her mesajın başında bir parola, sonunda bir şüphe var.", en: "The Quiet Network never really recovered from {npc:mert_kilic|pos} betrayal. Its frequencies are still open, but now every message starts with a password and ends with a doubt." }
+      - kosul: { son: "ozgurluk" }
+        metin: { tr: "Sessiz Ağ, Sistem'in kaynağına giden yolu bulduktan sonra onu kapatmaya yardım etti. Şimdi radyolarıyla Sistem'siz bir dünyanın ilk haber ağını işletiyorlar.", en: "The Quiet Network helped shut the System down once they'd found the way to its source. Now they run the first news network of a world without it, on their radios." }
+      - kosul: { son: "yukselis" }
+        metin: { tr: "Sessiz Ağ yeni tanrının kodunu kırmaya çalıştı. Frekansları bir gece tamamen sustu; kimse ne olduğunu sormadı.", en: "The Quiet Network tried to crack the new god's code. One night every one of their frequencies went dead. Nobody asked what happened." }
+      - kosul: { son: "vassal" }
+        metin: { tr: "Sessiz Ağ antlaşmadan sonra yeraltına indi. Kadim valiliğinin her yazışması bir gün sonra, şifresi çözülmüş olarak şehrin telsizlerinde dolaşıyor.", en: "The Quiet Network went underground after the treaty. Every message out of the Ancient governor's office turns up on the city's radios a day later, decrypted." }
+      - kosul: { son: "hasat" }
+        metin: { tr: "Sessiz Ağ Hasat'ın son saatlerinde bütün kayıtlarını çok-evrenin frekanslarına yayınladı. Belki bir gün, başka bir dünyada, biri onları dinleyip daha iyisini yapar.", en: "In the Harvest's last hours, the Quiet Network broadcast every record it had out across the multiverse frequencies. Maybe someday, on some other world, someone will hear them and do better." }
+      - kosul: { bayrak: "cekirdek_sessiz_ag" }
+        metin: { tr: "Sessiz Ağ Kasaba Çekirdeği'ni bir veri merkezine çevirdi. Şehrin ışıkları her gece üç kısa, bir uzun yanıp sönüyor; bunu fark eden pek az kişi var.", en: "The Quiet Network turned the Town Core into a data center. Every night the city's lights blink three short, one long. Hardly anybody notices." }
+      - metin: { tr: "Sessiz Ağ gölgede kaldı ve dinlemeyi sürdürdü. Sistem'in kaynak koduna ulaşıp ulaşmadıklarını hiç açıklamadılar; frekansları ise hâlâ açık.", en: "The Quiet Network stayed in the shadows and kept listening. They never said whether they got to the System's source code. Their frequencies are still open." }
+
+    kadimler:
+      - kosul: { son: "dongu" }
+        metin: { tr: "Kadimler bu döngüde de bekledi; bir sonrakinde de bekleyecekler. Ama artık, bilmeseler de, karşılarındaki anomali onları tanıyor.", en: "The Ancients waited in this loop, and they'll wait in the next one too. Only now, whether they know it or not, the anomaly on the other side knows them." }
+      - kosul: { son: "vassal" }
+        metin: { tr: "Kadimler Dünya'yı hasat etmedi; onun yerine sahiplendi. Gökyüzündeki sancakları hiç inmiyor ve her yıl aynı gün haraç gemileri körfeze iniyor.", en: "The Ancients didn't harvest Earth. They took ownership instead. Their banners never come down from the sky, and every year on the same day, the tribute ships come down into the bay." }
+      - kosul: { son: "yukselis" }
+        metin: { tr: "Kadimler, orak kaldırdıkları tarlanın kendi hasatçısı olduğunu gördü ve geri çekildi. {yer:yedi_taht|de} artık bir sandalye daha var; kimse oturmaya cesaret edemiyor.", en: "The Ancients saw that the field they'd raised the scythe over already had its own reaper, and they pulled back. There's one more seat at {yer:yedi_taht} now. Nobody dares sit in it." }
+      - kosul: { son: "hasat" }
+        metin: { tr: "Kadimler Dünya'yı hasat etti; bin dünyada yaptıkları gibi düzenli ve eksiksiz. Kayıtlarında bu Katman'ın yanında yalnızca bir not var: bir anomali vardı.", en: "The Ancients harvested Earth, neat and thorough, the way they had a thousand worlds before it. Their records hold only one note beside this Layer: there was an anomaly." }
+      - kosul: { son: "ozgurluk" }
+        metin: { tr: "Kadimler Sistem'i olmayan bir dünyayı hasat edemedi. Dünya haritalarında boş bir nokta oldu; yanına kimin yazdığı belli olmayan bir not düştüler: dokunma.", en: "The Ancients couldn't harvest a world with no System. Earth became an empty dot on their charts, and next to it someone, nobody's sure who, wrote a note: do not touch." }
+      - kosul: { son: "kod_kirici" }
+        metin: { tr: "Kadimler yeniden yazılan Sistem'in bütün çok-evrene yayıldığını gördüğünde Meclis ilk kez olağanüstü toplandı. Terazileri artık boş tartıyor; düzeltmeye çalışıyorlar, başaramıyorlar.", en: "When the Ancients saw the rewritten System spreading across the whole multiverse, the Conclave called its first emergency session ever. Their scales weigh nothing now. They keep trying to fix that. They can't." }
+      - kosul: { bayrak: "kadimler_yenildi" }
+        metin: { tr: "Kadimler istilada yenildi ve Dünya'yı haritalarında kırmızıyla işaretledi. Bir gün geri dönecekler; ama bu sefer kapıyı çalarak.", en: "The Ancients lost the invasion and marked Earth in red on their charts. They'll be back someday. But this time, they'll knock." }
+      - kosul: { bayrak: "kadim_anlasmasi" }
+        metin: { tr: "Kadimler istilayı bir anlaşmayla durdurdu ve gözlerini Dünya'dan hiç ayırmadı. Anlaşmanın her maddesi bir tuzak gibi yazılmış; şimdilik hiçbiri kapanmadı.", en: "The Ancients called off the invasion with an agreement, and never took their eyes off Earth. Every clause in it is written like a trap. So far, none of them has sprung." }
+      - kosul: { bayrak: "kiyikent_dustu" }
+        metin: { tr: "Kadimler {yer:kiyikent|i} aldı ama Dünya'yı alamadı. Yıkıntıların üstüne bir üs kurdular; geceleri ışıkları eski şehrin karanlığında yabancı bir takımyıldız gibi yanıyor.", en: "The Ancients took {yer:kiyikent}, but they never took Earth. They built a base on the ruins, and at night its lights burn in the dark of the old city like a foreign constellation." }
+      - metin: { tr: "Kadimler Gün 365'ten sonra da gökyüzünde kaldı; bekleyerek, hesaplayarak. Onlar için bir yıl kısa bir süre; bir anomali ise henüz çözülmemiş bir denklem.", en: "The Ancients stayed in the sky past Day 365, waiting, calculating. To them a year is no time at all, and an anomaly is an equation they haven't solved yet." }

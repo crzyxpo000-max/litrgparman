@@ -1,0 +1,501 @@
+# Parti B1 — Sığınak zinciri ve Elif yayının düşmanları. Hikaye savaşlarında @oyuncu±N ile ölçeklenir (tasarım seviyesi 24–40).
+dusmanlar:
+  mendirek_anasi:
+    ad: { tr: "Mendirek Anası", en: "Jetty Mother" }
+    aciklama: { tr: "Dalgakıranın altına yuva yapmış, bir minibüs büyüklüğünde kabuklu bir ana. Kabuğu midye ve tuz kabuğuyla örülü; kıskaçları bir tekneyi ikiye bölebilir.", en: "A shelled brood-mother the size of a minivan that's nested under the breakwater. Her shell is armored in mussels and salt crust, and her claws can split a fishing boat in two." }
+    kanca: { tr: "Fenerin dibinde su kabarıyor ve iki kıskaç, iki çapa gibi, kayalıklara iniyor.", en: "The water heaves at the foot of the light, and two claws come down on the rocks like a pair of anchors." }
+    seviye: 28
+    can: 1100
+    statlar: { str: 34, agi: 18, end: 36, int: 10, wis: 16, per: 22, wil: 26, cha: 6 }
+    davranis: "agresif"
+    zeki: false
+    zaaf: "simsek"
+    zaaf_metin: { tr: "Islak ve tuzlu; elektrik kabuğunun altındaki yumuşak ete doğrudan iner.", en: "She's wet and salty. Electricity goes straight through the shell to the soft meat underneath." }
+    saldirilar:
+      - id: "kiskac"
+        ad: { tr: "Kıskaç", en: "Pincer" }
+        stat: "str"
+        taban: 16
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.3, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} kıskacını bir mengene gibi kapatıyor; kemiklerin gıcırdıyor.", en: "{dusman} shuts a claw on you like a vise. Your bones creak." }
+      - id: "dalga"
+        ad: { tr: "Dip Dalgası", en: "Undertow" }
+        stat: "str"
+        taban: 12
+        kat: 0.8
+        etiketler: ["fiziksel", "alan"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} gövdesini suya vuruyor ve kalkan dalga seni kayalıklara çarpıyor.", en: "{dusman} slams her body into the water, and the wave it throws up smashes you into the rocks." }
+    xp: 6000
+    kredi: 120
+    ganimet: { mendirek_kabugu: 1.0, canavar_cekirdegi: 0.6 }
+    etiketler: ["boss", "deniz"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Yumurta keseleri kabarıyor; ana yavrularını çağırıyor ve dalgaların arasından küçük kıskaçlar yükseliyor.", en: "The egg sacs swell. The mother is calling her brood, and little claws rise out of the surf." }
+        guclenme: { str: 3, agi: 3 }
+      - esik: 40
+        metin: { tr: "Kabuğu çatlıyor ve çatlaktan siyah, sıcak bir sıvı sızıyor. Artık savunmuyor; saldırıyor.", en: "Her shell cracks, and black, hot fluid seeps out. She's done defending. Now she attacks." }
+        guclenme: { str: 5 }
+        saldiri:
+          id: "ana_ofkesi"
+          ad: { tr: "Ana Öfkesi", en: "Mother's Fury" }
+          stat: "str"
+          taban: 22
+          kat: 1.0
+          etiketler: ["fiziksel", "yakin"]
+          bekleme: 3
+          metin: { tr: "{dusman} iki kıskacını birden indiriyor; mendireğin betonu çatlıyor.", en: "{dusman} brings both claws down at once, and the concrete of the breakwater cracks." }
+      - esik: 15
+        metin: { tr: "Ana son kez fenere tırmanmaya çalışıyor, yuvasını örtmek için. Gözlerinde sana karşı değil, sana rağmen bir şey var.", en: "The mother tries one last time to climb the light, to cover her nest. There's something in her eyes that isn't against you, just in spite of you." }
+        guclenme: { wil: 6, end: 4 }
+  mendirek_yavrusu:
+    ad: { tr: "Mendirek Yavrusu", en: "Jetty Brood" }
+    aciklama: { tr: "Ananın yumurtalarından vaktinden önce çıkmış, köpek büyüklüğünde, yumuşak kabuklu bir yengeç. Açlıktan başka bir şey bilmiyor.", en: "A soft-shelled crab the size of a dog, hatched early from the mother's eggs. It doesn't know anything but hunger." }
+    kanca: { tr: "Taşların arasından yan yan, tıkırdayarak bir şey çıkıyor.", en: "Something comes clicking sideways out from between the rocks." }
+    seviye: 24
+    can: 420
+    statlar: { str: 24, agi: 26, end: 20, int: 4, wis: 8, per: 20, wil: 12, cha: 2 }
+    davranis: "suru"
+    zeki: false
+    zaaf: "ates"
+    zaaf_metin: { tr: "Kabuğu henüz sertleşmemiş; ateş onu bir saniyede pişirir.", en: "Its shell hasn't hardened yet. Fire cooks it in a second." }
+    saldirilar:
+      - id: "cimdik"
+        ad: { tr: "Çimdik", en: "Nip" }
+        stat: "agi"
+        taban: 11
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        bekleme: 0
+        metin: { tr: "{dusman} bacağına yapışıp kıskaçlarını sıkıyor.", en: "{dusman} latches onto your leg and squeezes." }
+      - id: "atilis"
+        ad: { tr: "Yan Atılış", en: "Side Lunge" }
+        stat: "agi"
+        taban: 13
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        bekleme: 2
+        metin: { tr: "{dusman} yan yan, beklemediğin bir açıdan üstüne atılıyor.", en: "{dusman} scuttles sideways and lunges at you from an angle you didn't expect." }
+    xp: 2400
+    kredi: 20
+    ganimet: { mendirek_kabugu: 0.3 }
+    etiketler: ["hayvan", "deniz"]
+    boss: false
+  lonca_tahsildari:
+    ad: { tr: "Lonca Tahsildarı", en: "Guild Collector" }
+    aciklama: { tr: "Demir Lonca'nın turnike bekçisi; kepenk demirinden kalkan, çivili sopa ve bir defter. Seviyesi düşük, cesareti seviyesinden yüksek.", en: "One of the Iron Guild's turnstile men: a shield cut from a storefront shutter, a nail bat, and a ledger. Low level, more nerve than level." }
+    kanca: { tr: "Tahsildar kalkanını kaldırıyor ve defterini cebine sokuyor. \"Fatura sonra.\"", en: "The collector raises his shield and tucks his ledger in his pocket. \"Bill comes later.\"" }
+    seviye: 25
+    can: 480
+    statlar: { str: 26, agi: 20, end: 26, int: 12, wis: 12, per: 18, wil: 18, cha: 10 }
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "zihin"
+    zaaf_metin: { tr: "İnsan; korkar. Bir gözdağı onu kalkanının arkasından çıkarır.", en: "He's human. He scares. One good threat drags him out from behind that shield." }
+    saldirilar:
+      - id: "sopa"
+        ad: { tr: "Çivili Sopa", en: "Nail Bat" }
+        stat: "str"
+        taban: 12
+        kat: 0.85
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.25, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} çivili sopayı omzuna indiriyor.", en: "{dusman} brings the nail bat down on your shoulder." }
+      - id: "kalkan_itisi"
+        ad: { tr: "Kepenk İtişi", en: "Shutter Shove" }
+        stat: "end"
+        taban: 10
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.25, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} kepenk kalkanıyla üstüne yükleniyor.", en: "{dusman} drives into you behind his shutter shield." }
+    xp: 2600
+    kredi: 40
+    ganimet: { hurda: 0.6, kucuk_iyilesme_iksiri: 0.3 }
+    etiketler: ["insan", "lonca"]
+    boss: false
+  sarnic_bekcisi:
+    ad: { tr: "Sarnıç Bekçisi", en: "Cistern Warden" }
+    aciklama: { tr: "Eski Şehir'in altındaki sarnıcın suyundan ve kireçten yükselmiş bir bekçi. Gövdesinde bir asırlık bozukluklar ve dilek kâğıtları; göğsünde tek bir çekirdek atıyor.", en: "A warden risen out of the water and limescale of the reservoir under Old Town. A century of tossed coins and wish notes are caked into its body, and a single core beats in its chest." }
+    kanca: { tr: "Sütunların arasında su kendi kendine yükseliyor ve bir yüz ediniyor.", en: "Between the columns, the water rises on its own and grows a face." }
+    seviye: 30
+    can: 1300
+    statlar: { str: 30, agi: 16, end: 40, int: 22, wis: 30, per: 20, wil: 32, cha: 8 }
+    davranis: "temkinli"
+    zeki: false
+    zaaf: "buz"
+    zaaf_metin: { tr: "Sudan yapılmış. Donarsa çatlar; çatlarsa çekirdeği açıkta kalır.", en: "It's made of water. Freeze it and it cracks. Crack it and the core is exposed." }
+    saldirilar:
+      - id: "sel"
+        ad: { tr: "Sarnıç Seli", en: "Cistern Flood" }
+        stat: "wis"
+        taban: 14
+        kat: 0.85
+        etiketler: ["alan"]
+        durum: { etki: "sersemleme", sans: 0.25, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} kollarını açıyor ve sarnıcın suyu bir duvar gibi üstüne yığılıyor.", en: "{dusman} spreads its arms, and the cistern's water piles onto you like a collapsing wall." }
+      - id: "bozukluk"
+        ad: { tr: "Bozukluk Yağmuru", en: "Coin Hail" }
+        stat: "str"
+        taban: 12
+        kat: 0.8
+        etiketler: ["fiziksel", "menzilli"]
+        durum: { etki: "kanama", sans: 0.3, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} gövdesindeki bozuklukları saçma gibi fırlatıyor.", en: "{dusman} fires the coins in its body at you like buckshot." }
+    xp: 7000
+    kredi: 200
+    ganimet: { sarnic_suyu: 1.0, canavar_cekirdegi: 0.7 }
+    etiketler: ["boss", "su"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Sarnıcın suyu yükseliyor; artık dizlerinde değil, belinde.", en: "The cistern water rises. It isn't at your knees anymore. It's at your waist." }
+        guclenme: { wis: 3, end: 3 }
+      - esik: 40
+        metin: { tr: "Dilek kâğıtları gövdesinden kopup suyun yüzeyinde yüzüyor; bazılarında hâlâ bir isim okunuyor.", en: "Wish notes peel off its body and float on the surface. You can still read a name on some of them." }
+        guclenme: { wil: 4 }
+        saldiri:
+          id: "dilek"
+          ad: { tr: "Unutulmuş Dilekler", en: "Forgotten Wishes" }
+          stat: "wil"
+          taban: 18
+          kat: 0.9
+          etiketler: ["zihin"]
+          durum: { etki: "korku", sans: 0.4, sure: 2 }
+          bekleme: 3
+          metin: { tr: "{dusman} sana yüz yılın dileklerini fısıldıyor; hiçbiri gerçekleşmemiş.", en: "{dusman} whispers a hundred years of wishes at you. Not one of them came true." }
+      - esik: 15
+        metin: { tr: "Bekçi çekirdeğini sütunların arkasına saklamaya çalışıyor. Su ilk kez geri çekiliyor.", en: "The warden tries to hide its core behind the columns. For the first time, the water pulls back." }
+        guclenme: { agi: 5 }
+  hasat_toplayici:
+    ad: { tr: "Hasat Toplayıcısı", en: "Harvester" }
+    aciklama: { tr: "Kadimler'in camdan ve kemikten yapılmış, araba büyüklüğünde örnekleme yusufçuğu. Kalabalığın üstünde asılı durur, en yüksek seviyeyi seçer ve bir ışık huzmesiyle yukarı kaldırır.", en: "An Ancient sampling drone, a sedan-sized dragonfly of glass and bone. It hangs over crowds, picks out the highest level below, and lifts them up in a beam of light." }
+    kanca: { tr: "Gökten camdan bir vızıltı iniyor ve bir ışık huzmesi kalabalığın üstünde dolaşmaya başlıyor.", en: "A glassy whine comes down out of the sky, and a beam of light starts sweeping over the crowd." }
+    seviye: 32
+    can: 600
+    statlar: { str: 18, agi: 38, end: 22, int: 30, wis: 18, per: 34, wil: 20, cha: 4 }
+    davranis: "agresif"
+    zeki: false
+    zaaf: "fiziksel"
+    zaaf_metin: { tr: "Kanatları cam. Tek bir sağlam darbe onu yere indirir.", en: "Its wings are glass. One solid hit brings it down." }
+    saldirilar:
+      - id: "huzme"
+        ad: { tr: "Örnekleme Huzmesi", en: "Sampling Beam" }
+        stat: "int"
+        taban: 14
+        kat: 0.9
+        etiketler: ["isik", "menzilli"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} üstüne beyaz bir huzme indiriyor; bir an ayaklarının yerden kesildiğini hissediyorsun.", en: "{dusman} drops a white beam on you, and for a second your feet leave the ground." }
+      - id: "kanat"
+        ad: { tr: "Cam Kanat", en: "Glass Wing" }
+        stat: "agi"
+        taban: 12
+        kat: 0.85
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.35, sure: 2 }
+        bekleme: 1
+        metin: { tr: "{dusman} alçalıyor ve cam kanadı bir jilet gibi yanından geçiyor.", en: "{dusman} dives, and its glass wing goes past you like a razor." }
+    xp: 3200
+    kredi: 30
+    ganimet: { hasat_kristali: 0.3 }
+    etiketler: ["kadim", "yaratik"]
+    boss: false
+  hasat_sutunu:
+    ad: { tr: "Hasat Sütunu", en: "Harvest Pillar" }
+    aciklama: { tr: "Kadimler'in örnekleme aracı: gökten bir iğne gibi saplanan, yüzeyinde uygulanmak için yazılmış satırlar akan beyaz bir sütun. Tehdit edildiğinde kollar açar.", en: "The Ancients' sampling instrument: a white pillar that comes down like a needle, lines of execution code scrolling over its surface. When threatened, it opens arms." }
+    kanca: { tr: "Sütunun satırları duruyor. Sonra, sana doğru, kollar açıyor.", en: "The lines on the pillar stop scrolling. Then it opens its arms toward you." }
+    seviye: 36
+    can: 1600
+    statlar: { str: 32, agi: 14, end: 44, int: 40, wis: 30, per: 26, wil: 36, cha: 2 }
+    davranis: "temkinli"
+    zeki: false
+    zaaf: "zihin"
+    zaaf_metin: { tr: "Satırlarında tekrar eden bir döngü var. Döngüyü bozarsan kendi ağırlığını taşıyamaz.", en: "There's a repeating loop in its lines. Break the loop and it can't hold its own weight." }
+    saldirilar:
+      - id: "olcum"
+        ad: { tr: "Ölçüm", en: "Measurement" }
+        stat: "int"
+        taban: 16
+        kat: 0.9
+        etiketler: ["isik", "zihin"]
+        durum: { etki: "korku", sans: 0.3, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} seni ölçüyor; penceren kendiliğinden açılıyor ve sayıların bir başkasının eliyle okunuyor.", en: "{dusman} measures you. Your window pops open on its own, and somebody else's hand reads your numbers." }
+      - id: "kol"
+        ad: { tr: "Beyaz Kol", en: "White Arm" }
+        stat: "str"
+        taban: 15
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        bekleme: 1
+        metin: { tr: "{dusman} kollarından birini bir çekiç gibi indiriyor.", en: "{dusman} brings one of its arms down like a hammer." }
+    xp: 9000
+    kredi: 250
+    ganimet: { hasat_kristali: 1.0, canavar_cekirdegi: 0.8 }
+    etiketler: ["boss", "kadim"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Meydandaki heykelleşmiş insanların pencereleri hızlanıyor; sütun onlardan güç çekiyor.", en: "The windows over the frozen people in the square start counting faster. The pillar is drawing power from them." }
+        guclenme: { int: 4, wil: 3 }
+      - esik: 40
+        metin: { tr: "Satırlar kırmızıya dönüyor. Sütun artık örneklemiyor; temizliyor.", en: "The lines turn red. The pillar isn't sampling anymore. It's purging." }
+        guclenme: { int: 5 }
+        saldiri:
+          id: "temizlik"
+          ad: { tr: "Temizlik Satırı", en: "Purge Line" }
+          stat: "int"
+          taban: 22
+          kat: 1.0
+          etiketler: ["isik", "alan"]
+          durum: { etki: "yanma", sans: 0.4, sure: 2 }
+          bekleme: 3
+          metin: { tr: "{dusman} meydanı tek bir beyaz satırla süpürüyor.", en: "{dusman} sweeps the square with a single white line." }
+      - esik: 15
+        metin: { tr: "Sütunun tepesi titriyor; gökyüzüne bir çağrı gönderiyor ve cevap gelmiyor.", en: "The top of the pillar shudders. It sends a call up into the sky. No answer comes." }
+        guclenme: { end: 6, wil: 4 }
+  demir_gece_askeri:
+    ad: { tr: "Demir Gece Askeri", en: "Iron Night Enforcer" }
+    aciklama: { tr: "Pala'nın darbe gecesi için seçtiği Lonca adamlarından biri; gaz maskesi, kepenk kalkanı, tarım ilacı tüplerinden bozma gaz bombaları.", en: "One of the Guild men Cleaver handpicked for the night of the coup: gas mask, shutter shield, gas bombs rigged out of crop-duster canisters." }
+    kanca: { tr: "Gaz maskeli bir adam bir tüpün pimini çekiyor.", en: "A man in a gas mask pulls the pin on a canister." }
+    seviye: 30
+    can: 560
+    statlar: { str: 28, agi: 24, end: 28, int: 14, wis: 14, per: 22, wil: 22, cha: 8 }
+    davranis: "suru"
+    zeki: true
+    zaaf: "zihin"
+    zaaf_metin: { tr: "Maskenin ardında korkmuş bir insan var; bu gecenin doğru olduğundan emin değil.", en: "There's a scared human behind that mask, and he isn't sure tonight is right." }
+    saldirilar:
+      - id: "gaz"
+        ad: { tr: "Gaz Bombası", en: "Gas Bomb" }
+        stat: "agi"
+        taban: 12
+        kat: 0.85
+        etiketler: ["alan", "menzilli"]
+        durum: { etki: "zehir", sans: 0.4, sure: 3 }
+        bekleme: 2
+        metin: { tr: "{dusman} ayaklarının dibine bir tüp atıyor; acı, sarı bir gaz yükseliyor.", en: "{dusman} tosses a canister at your feet, and a bitter yellow gas comes boiling up." }
+      - id: "cop"
+        ad: { tr: "Demir Cop", en: "Iron Baton" }
+        stat: "str"
+        taban: 13
+        kat: 0.85
+        etiketler: ["fiziksel", "yakin"]
+        bekleme: 0
+        metin: { tr: "{dusman} demir copunu kaburgalarına indiriyor.", en: "{dusman} cracks an iron baton across your ribs." }
+    xp: 3000
+    kredi: 50
+    ganimet: { hurda: 0.5, kucuk_iyilesme_iksiri: 0.4 }
+    etiketler: ["insan", "lonca"]
+    boss: false
+  pala:
+    ad: { tr: "Pala", en: "Cleaver" }
+    aciklama: { tr: "Demir Lonca'nın tahsildarı ve şahinlerin başı: deri önlüklü, iri, sakin bir adam. Her şeyin bir faturası olduğuna inanıyor; faturayı da hep o kesiyor.", en: "The Iron Guild's collector and the head of its hawks: a big, calm man in a leather apron. He believes everything comes with a bill, and he's always the one who sends it." }
+    kanca: { tr: "Pala balık bıçağını önlüğüne siliyor. \"Fatura günü,\" diyor.", en: "Cleaver wipes his fish knife on his apron. \"Billing day,\" he says." }
+    seviye: 34
+    can: 1400
+    statlar: { str: 36, agi: 30, end: 32, int: 18, wis: 20, per: 28, wil: 30, cha: 14 }
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "zihin"
+    zaaf_metin: { tr: "Ölmekten korkmuyor; unutulmaktan korkuyor. Ona kimsenin onu hatırlamayacağını söyle.", en: "He isn't afraid of dying. He's afraid of being forgotten. Tell him nobody will remember him." }
+    saldirilar:
+      - id: "bicak"
+        ad: { tr: "Balık Bıçağı", en: "Fish Knife" }
+        stat: "agi"
+        taban: 15
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.4, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} bıçağı bir balığı temizler gibi, sakin ve hızlı, yanından geçiriyor.", en: "{dusman} runs the knife past you the way he'd clean a fish: calm and quick." }
+      - id: "fatura"
+        ad: { tr: "Fatura", en: "The Invoice" }
+        stat: "str"
+        taban: 18
+        kat: 0.95
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} bütün ağırlığıyla omzunu göğsüne gömüyor. \"Bu sana,\" diyor.", en: "{dusman} drives his shoulder into your chest with everything he's got. \"That one's yours,\" he says." }
+    xp: 8000
+    kredi: 300
+    ganimet: { buyuk_iyilesme_iksiri: 0.6 }
+    etiketler: ["boss", "insan", "lonca"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Pala önlüğünü çıkarıp yere atıyor. Altında Lonca'nın eski rütbe işaretleri var; hepsi sökülmüş.", en: "Cleaver strips off his apron and throws it down. Underneath are old Guild rank patches. All of them torn off." }
+        guclenme: { agi: 4, str: 2 }
+      - esik: 40
+        metin: { tr: "Adamlarına bağırıyor ama kimse gelmiyor. İlk kez yalnız savaşıyor.", en: "He yells for his men, but nobody comes. For the first time, he's fighting alone." }
+        guclenme: { str: 5, wil: 3 }
+        saldiri:
+          id: "son_tahsilat"
+          ad: { tr: "Son Tahsilat", en: "Final Collection" }
+          stat: "str"
+          taban: 24
+          kat: 1.0
+          etiketler: ["fiziksel", "yakin"]
+          durum: { etki: "kanama", sans: 0.5, sure: 3 }
+          bekleme: 3
+          metin: { tr: "{dusman} bıçağını iki eliyle kaldırıp indiriyor; bütün gecenin hesabı bu darbede.", en: "{dusman} raises the knife in both hands and brings it down. The whole night's tab is in that swing." }
+      - esik: 15
+        metin: { tr: "Pala dizlerinin üstüne çöküyor ama bıçağı bırakmıyor. \"Kimse hatırlamayacak,\" diyor; sana değil, kendine.", en: "Cleaver drops to his knees, but he doesn't let go of the knife. \"Nobody's going to remember,\" he says. Not to you. To himself." }
+        guclenme: { wil: 6 }
+  havuz_uyuyani:
+    ad: { tr: "Havuz Uyuyanı", en: "The Drydock Sleeper" }
+    aciklama: { tr: "Kuru havuzun altındaki eski odada uyuyan, kayadan, külden ve başka bir çağın kalkanlarından yapılmış bir bekçi. Neyi beklediğini unutmuş; beklemeyi unutmamış.", en: "A guardian asleep in the old chamber under the drydock, built out of rock and ash and the shields of another age. It's forgotten what it was guarding. It hasn't forgotten how to guard." }
+    kanca: { tr: "Fenerlerin ışığı ona değiyor ve bir göz açılıyor.", en: "The lantern light touches it, and an eye opens." }
+    seviye: 40
+    can: 2000
+    statlar: { str: 42, agi: 16, end: 50, int: 24, wis: 36, per: 24, wil: 44, cha: 10 }
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "isik"
+    zaaf_metin: { tr: "Karanlıkta uyumaya alışmış. Güçlü bir ışık onu bir an kör eder ve kalkanlarının arası açılır.", en: "It's used to sleeping in the dark. A strong light blinds it for a moment, and gaps open between its shields." }
+    saldirilar:
+      - id: "kalkan_duvari"
+        ad: { tr: "Kalkan Duvarı", en: "Shield Wall" }
+        stat: "end"
+        taban: 18
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} gövdesindeki eski kalkanları bir duvar gibi üstüne yığıyor.", en: "{dusman} stacks the old shields in its body into a wall and drives it into you." }
+      - id: "kul"
+        ad: { tr: "Kül Nefesi", en: "Ash Breath" }
+        stat: "wis"
+        taban: 16
+        kat: 0.9
+        etiketler: ["alan", "karanlik"]
+        durum: { etki: "kor", sans: 0.35, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} odayı yüzyılların külüyle dolduruyor; gözlerin yanıyor.", en: "{dusman} fills the chamber with the ash of centuries. Your eyes burn." }
+    xp: 12000
+    kredi: 400
+    ganimet: { canavar_cekirdegi: 1.0, buyuk_iyilesme_iksiri: 0.5 }
+    etiketler: ["boss", "kadim_oncesi"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Bekçinin gövdesindeki armalar parlıyor; bazıları senin tanıdığın şeylere benziyor ama değil.", en: "The crests on the guardian's body light up. Some of them look like things you know. They aren't." }
+        guclenme: { end: 4, wil: 3 }
+      - esik: 40
+        metin: { tr: "Duvardaki çentikler titriyor ve bekçi onlarla birlikte sayıyor, yüksek sesle, senin bilmediğin bir dilde.", en: "The tallies on the walls tremble, and the guardian counts along with them, out loud, in a language you don't know." }
+        guclenme: { str: 5 }
+        saldiri:
+          id: "sayim"
+          ad: { tr: "Son Sayım", en: "Final Count" }
+          stat: "wil"
+          taban: 24
+          kat: 1.0
+          etiketler: ["zihin", "alan"]
+          durum: { etki: "korku", sans: 0.45, sure: 2 }
+          bekleme: 3
+          metin: { tr: "{dusman} sayıyor ve her sayıda bir isim düşüyor; o isimleri hiç duymadın ama hepsini tanıyorsun.", en: "{dusman} counts, and with every number a name falls away. You've never heard any of those names, and you know every one." }
+      - esik: 15
+        metin: { tr: "Bekçi duraksıyor ve sana bakıyor; sanki neyi korumaya çalıştığını hatırlamak üzereymiş gibi.", en: "The guardian hesitates and looks at you, like it's on the verge of remembering what it was trying to protect." }
+        guclenme: { wil: 6, end: 4 }
+  kadim_oncu_komutani:
+    ad: { tr: "Kadim Öncü Komutanı", en: "Ancient Vanguard Commander" }
+    aciklama: { tr: "Filodan istiladan önce inen öncünün komutanı: uzun, ince, zırhının dikiş yerlerinden beyaz ışık sızan bir Kadim. Tek bir görevi var: anomaliyi istiladan önce etkisiz hale getirmek.", en: "Commander of the vanguard that comes down from the fleet ahead of the invasion: tall, thin, an Ancient with white light leaking from the seams of its armor. It has exactly one mission: neutralize the anomaly before the invasion." }
+    kanca: { tr: "Komutan bir pencere açıyor; üstünde senin adın ve tek bir kelime: Öncelik.", en: "The commander opens a window. Your name is on it, with one word: Priority." }
+    seviye: 40
+    can: 2100
+    statlar: { str: 44, agi: 34, end: 42, int: 36, wis: 30, per: 34, wil: 40, cha: 18 }
+    davranis: "agresif"
+    zeki: true
+    zaaf: "fiziksel"
+    zaaf_metin: { tr: "Gücü zırhında, zırhının gücü dikişlerinde. Dikişe inen sert bir darbe ışığı söndürür.", en: "Its power is in its armor, and the armor's power is in the seams. A hard hit on a seam puts the light out." }
+    saldirilar:
+      - id: "mizrak"
+        ad: { tr: "Işık Mızrağı", en: "Light Lance" }
+        stat: "str"
+        taban: 18
+        kat: 0.95
+        etiketler: ["isik", "yakin"]
+        durum: { etki: "yanma", sans: 0.3, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} zırhının ışığını bir mızrak gibi öne savuruyor.", en: "{dusman} hurls the light in its armor forward like a lance." }
+      - id: "hukum"
+        ad: { tr: "Öncelik Hükmü", en: "Priority Order" }
+        stat: "int"
+        taban: 16
+        kat: 0.9
+        etiketler: ["zihin"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} pencereni zorla açıyor ve üstüne kendi hükmünü yazıyor.", en: "{dusman} forces your window open and writes its own order over it." }
+    xp: 13000
+    kredi: 500
+    ganimet: { hasat_kristali: 1.0, buyuk_iyilesme_iksiri: 0.6 }
+    etiketler: ["boss", "kadim"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Komutan askerlerine yabancı bir dilde bir emir veriyor; öncü sana doğru bir hilal gibi açılıyor.", en: "The commander barks an order in an alien tongue, and the vanguard spreads toward you in a crescent." }
+        guclenme: { agi: 4, wil: 2 }
+      - esik: 40
+        metin: { tr: "Zırhın dikişlerinden sızan ışık beyazdan maviye dönüyor; komutan artık seni ölçmüyor, siliyor.", en: "The light leaking from the seams of its armor goes from white to blue. The commander isn't measuring you anymore. It's deleting you." }
+        guclenme: { str: 5, int: 4 }
+        saldiri:
+          id: "silme"
+          ad: { tr: "Silme Emri", en: "Deletion Order" }
+          stat: "int"
+          taban: 26
+          kat: 1.0
+          etiketler: ["isik", "zihin"]
+          durum: { etki: "korku", sans: 0.4, sure: 2 }
+          bekleme: 3
+          metin: { tr: "{dusman} adını penceresinden silmeye çalışıyor; bir an kendi adını hatırlayamıyorsun.", en: "{dusman} tries to delete your name from its window. For a moment, you can't remember your own name." }
+      - esik: 15
+        metin: { tr: "Komutan geri adım atıyor ve filoya bir şey gönderiyor; bir rapor, belki bir uyarı.", en: "The commander takes a step back and sends something up to the fleet. A report. Maybe a warning." }
+        guclenme: { end: 6, wil: 4 }
+  kadim_oncu_askeri:
+    ad: { tr: "Kadim Öncü Askeri", en: "Ancient Vanguard Soldier" }
+    aciklama: { tr: "Kadim öncüsünün yüzü olmayan askerlerinden biri; zırhı kabuk gibi, mızrağı ışıktan.", en: "One of the faceless soldiers of the Ancient vanguard, armored like a shell, carrying a spear of light." }
+    kanca: { tr: "Sudan bir sıra kabuk zırh yükseliyor.", en: "A row of shell-armored figures rises out of the water." }
+    seviye: 34
+    can: 700
+    statlar: { str: 34, agi: 28, end: 32, int: 20, wis: 18, per: 26, wil: 26, cha: 4 }
+    davranis: "suru"
+    zeki: false
+    zaaf: "simsek"
+    zaaf_metin: { tr: "Zırhı ıslak ve iletken; şimşek içine akar.", en: "Its armor is wet and conductive. Lightning runs right through it." }
+    saldirilar:
+      - id: "mizrak"
+        ad: { tr: "Işık Mızrağı", en: "Light Spear" }
+        stat: "str"
+        taban: 14
+        kat: 0.9
+        etiketler: ["isik", "yakin"]
+        bekleme: 0
+        metin: { tr: "{dusman} ışıktan mızrağını öne savuruyor.", en: "{dusman} thrusts its spear of light at you." }
+      - id: "duzen"
+        ad: { tr: "Saf Düzeni", en: "Phalanx" }
+        stat: "end"
+        taban: 12
+        kat: 0.85
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kalkan", sans: 0.5, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} yanındakilerle omuz omuza bir kabuk duvarı kuruyor.", en: "{dusman} locks shoulders with the others into a wall of shell." }
+    xp: 3600
+    kredi: 40
+    ganimet: { hasat_kristali: 0.2 }
+    etiketler: ["kadim"]
+    boss: false

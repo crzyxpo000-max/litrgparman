@@ -1,0 +1,43 @@
+# Parti E — Kadimler zinciri ve Elçi Thessar unvanları (events/55_kadimler_thessar.yaml). Düz eşlem (titles.yaml biçimi).
+# Perde 3–4 unvanları: bonuslar bu aşamanın stat ölçeğine göre büyük.
+ilk_kadim_avcisi:
+  ad: { tr: "İlk Kadim Avcısı", en: "First to Fell an Ancient" }
+  aciklama: { tr: "Bir Kadim'i öldüren ilk insan sensin. Sistem bunu bütün gezegene duyurdu; körfezin üstündeki gemi de duydu.", en: "You're the first human to kill one of the Ancients. The System announced it to the whole planet. The ship over the bay heard it too." }
+  nadirlik: "efsanevi"
+  bonus: { str: 12, agi: 12, wil: 10 }
+  ilk: true
+defter_tanigi:
+  ad: { tr: "Defterin Tanığı", en: "Witness to the Ledger" }
+  aciklama: { tr: "Kadim Defteri'nin bir sayfasını gördün ve okumayı başardın. Artık bir fiyatın arkasındaki gerçek bedeli görebiliyorsun.", en: "You saw a page of the Ancients' Ledger and managed to read it. Now you can see the real cost behind any price." }
+  nadirlik: "epik"
+  bonus: { int: 10, per: 10, cha: 5 }
+cift_defter:
+  ad: { tr: "Çift Defter", en: "Double Books" }
+  aciklama: { tr: "Bir muhasebeci ırkına yanlış hesap tuttun ve fark etmediler. Ya da fark ettiler ve sustular. İkisi de bir başarı.", en: "You cooked the books on a whole species of accountants and they didn't notice. Or they noticed and kept quiet. Either way, that's an achievement." }
+  nadirlik: "epik"
+  bonus: { int: 12, cha: 12 }
+boyunduruk_imzacisi:
+  ad: { tr: "Boyunduruğun İmzacısı", en: "Signatory of the Yoke" }
+  aciklama: { tr: "Dünya adına Kadimler'le antlaşma imzalayan insan sensin. Tarih seni ya kurtarıcı ya hain olarak yazacak; Defter ise yalnızca imzacı olarak.", en: "You're the human who signed the treaty with the Ancients on Earth's behalf. History will call you a savior or a traitor. The Ledger just calls you the signatory." }
+  nadirlik: "efsanevi"
+  bonus: { cha: 20, wil: 15, wis: 10 }
+defter_bekcisi:
+  ad: { tr: "Defter Bekçisi", en: "Keeper of the Ledger" }
+  aciklama: { tr: "Kadimler sana bir dünyanın anahtarlarını teslim ettirdi ve sonra o dünyanın defterini senin eline bıraktı. Sekiz milyar satır; hepsi senin kaleminde.", en: "The Ancients had you hand over a world, then left that world's ledger in your hands. Eight billion lines, every one of them under your pen." }
+  nadirlik: "mitik"
+  bonus: { cha: 25, wil: 25, int: 15 }
+hainin_dostu:
+  ad: { tr: "Hainin Dostu", en: "A Traitor's Friend" }
+  aciklama: { tr: "Kendi ırkına ihanet eden bir Kadim'e sırtını döndün ve sırtın hâlâ yerinde. Onun türünde buna verilecek bir ad yok; bu yüzden ona bir tane uydurdunuz.", en: "You turned your back on an Ancient who betrayed his own kind, and your back is still in one piece. His people don't have a word for that, so the two of you made one up." }
+  nadirlik: "efsanevi"
+  bonus: { cha: 15, wis: 15, wil: 10 }
+budayici_kiran:
+  ad: { tr: "Budayıcıyı Budayan", en: "Who Pruned the Pruner" }
+  aciklama: { tr: "Meclis'in sapmaları kesmek için gönderdiği şeyi sen kestin. Meclis'te bir koltuk artık senin adını taşıyan bir çentikle boş duruyor.", en: "You cut down the thing the Conclave sends to cut down deviations. Somewhere in the Conclave, a seat sits empty with a notch in your name." }
+  nadirlik: "mitik"
+  bonus: { str: 20, agi: 20, per: 20 }
+hesabi_kapatan:
+  ad: { tr: "Hesabı Kapatan", en: "Closer of the Account" }
+  aciklama: { tr: "Otuz dokuz dünyanın defterini tutan elçiyi yendin. Kırkıncı sayfa boş kaldı ve boş kalacak.", en: "You beat the envoy who kept the books on thirty-nine worlds. The fortieth page stayed blank, and it's going to stay that way." }
+  nadirlik: "mitik"
+  bonus: { wil: 30, int: 20, end: 10 }

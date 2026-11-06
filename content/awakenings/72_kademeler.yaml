@@ -1,0 +1,90 @@
+# Parti L2 — Kademe kırılmaları (GDD OP MC: her kademe Mücadele → Kırılma → Hakimiyet → Yeni tavan).
+# Her biri bir kez çalışır (motor `uyanis_<id>` bayrağı koyar). Koşul: `kademe_min` + savaş bağlamı (`_savas_*`).
+# E: neredeyse ölerek kazanmak · D: başkalarını korurken kazanmak · C: bossu son canla devirmek ·
+# B: bir üst kademeyi yenmek · A: bossu son nefesle devirmek · S: insanlığın tavanında ölürken kazanmak.
+uyanislar:
+  kirilma_e_catlak_tavan:
+    baslik: { tr: "[KIRILMA · E] Çatlak Tavan", en: "[THE BREAK · E] Cracked Ceiling" }
+    satirlar:
+      - { tr: "E kademesinin ilk gerçek dövüşünü canının son kırıntısıyla kazandın. Kademeler bir duvar gibi görünüyordu; meğer bir camın çatlağıymış ve sen içinden geçtin.", en: "You won your first real Grade E fight on the last crumbs of your health. Grades looked like walls. Turns out they're cracks in the glass, and you just walked through one." }
+      - { tr: "{npc:yanki}: hissettin mi? bir şey esnedi. kırılmadı. esnedi. bir dahaki sefere kırılır.", en: "{npc:yanki}: feel that? something gave. didn't break. gave. next time it breaks." }
+    kosul:
+      kademe_min: "E"
+      degisken_min: { _savas_kazanildi: 1 }
+      degisken_max: { _savas_en_dusuk_can: 15, _savas_ezme: 0 }
+    etkiler:
+      - unvan: "catlak_tavan"
+      - yetenek: "ikinci_soluk"
+      - stat: { end: 1, wil: 1 }
+  kirilma_d_yuk_tasiyan:
+    baslik: { tr: "[KIRILMA · D] Yük Taşıyan", en: "[THE BREAK · D] Load-Bearer" }
+    satirlar:
+      - { tr: "Darbeler başkalarına gidecekti; hepsini sen aldın ve yine de ayaktaydın. D kademesi bedenin, taşıdığı ağırlığı bir kas gibi kaydediyor.", en: "Those hits were going to land on someone else. You took every one and you were still standing. Your Grade D body logs that weight like a muscle." }
+      - { tr: "Sistem notu: [Koruma davranışı tekrarlandı. Bu bir karakter özelliği olarak kaydedildi.]", en: "System note: [Protective behavior repeated. Logged as a character trait.]" }
+      - { tr: "{npc:yanki}: ben kimseyi korumayı bilmem. ama seni izleyerek öğreniyorum. bu yavaş bir ders.", en: "{npc:yanki}: i don't know how to protect anybody. but i'm learning by watching you. it's a slow lesson." }
+    kosul:
+      kademe_min: "D"
+      degisken_min: { _savas_kazanildi: 1, _savas_korunan: 1 }
+      degisken_max: { _savas_en_dusuk_can: 30 }
+    etkiler:
+      - unvan: "yuk_tasiyan"
+      - yetenek: "yansitici_kalkan"
+      - egilim: { koruma: 2 }
+      - ahlak: { merhamet: 2 }
+  kirilma_c_dikis_yeri:
+    baslik: { tr: "[KIRILMA · C] Dikiş Yeri", en: "[THE BREAK · C] The Seam" }
+    satirlar:
+      - { tr: "Boss bir biçimden ötekine geçerken, o yarım saniyelik dikiş yerinde, sen oradaydın. Canın tükenirken bile. Özellikle canın tükenirken.", en: "When the boss shifted from one form to the next, in that half-second seam, you were right there. Even running on empty. Especially running on empty." }
+      - { tr: "Artık her bossun faz geçişini bir kapı gibi görüyorsun; kapılar açılırken içeri girilir.", en: "Now every boss's phase shift looks like a door to you. And you walk through doors while they're opening." }
+      - { tr: "{npc:yanki}: o dikiş yerleri benim gibi şeylerin yaşadığı yer. hoş geldin.", en: "{npc:yanki}: those seams are where things like me live. welcome." }
+    kosul:
+      kademe_min: "C"
+      degisken_min: { _savas_kazanildi: 1, _savas_boss: 1 }
+      degisken_max: { _savas_en_dusuk_can: 20, _savas_ezme: 0 }
+    etkiler:
+      - unvan: "dikis_yeri"
+      - yetenek: "faz_kiran"
+      - stat: { agi: 2, per: 2 }
+  kirilma_b_yetkisiz:
+    baslik: { tr: "[KIRILMA · B] Yetkisiz", en: "[THE BREAK · B] Unauthorized" }
+    satirlar:
+      - { tr: "Kademe farkı kuralı dünya için hâlâ geçerli. Senin için artık bir öneri. Bir üst kademeyi yere serdin ve Sistem işlemi geri almaya çalıştı; başaramadı.", en: "The Grade gap rule still applies to the world. For you it's a suggestion now. You put something a Grade above you on the ground, and the System tried to roll the action back. It couldn't." }
+      - { tr: "Sistem notu: [Yetkisiz işlem. Kullanıcının bu işlem için yetkisi yok.] Ve bir saniye sonra: [Yetki: tanımlandı. Kaynak: bilinmiyor.]", en: "System note: [Unauthorized operation. User lacks permission for this action.] And a second later: [Permission: granted. Source: unknown.]" }
+      - { tr: "{npc:yanki}: kaynak ben değilim. bu sefer gerçekten değilim. bu sensin.", en: "{npc:yanki}: the source isn't me. this time it really isn't. that's you." }
+    kosul:
+      kademe_min: "B"
+      degisken_min: { _savas_kazanildi: 1, _savas_kademe_farki: 1 }
+    etkiler:
+      - unvan: "yetkisiz"
+      - yetenek: "yetki_yukseltme"
+      - stat: { str: 2, agi: 2, int: 2 }
+      - dikkat: 5
+  kirilma_a_yarim_nefes:
+    baslik: { tr: "[KIRILMA · A] Yarım Nefes", en: "[THE BREAK · A] Half a Breath" }
+    satirlar:
+      - { tr: "A kademesinde bir bossu, canının yüzde onundan azıyla, son nefesinin yarısıyla devirdin. Öbür yarısı hâlâ ciğerlerinde; onu bırakmayı reddediyorsun.", en: "At Grade A you brought a boss down with less than ten percent of your health, on half of your last breath. The other half is still in your lungs, and you refuse to let it go." }
+      - { tr: "Bedenin bunu bir denge olarak kaydediyor: en zayıf yerin, en güçlü yerin kadar sağlam olmak zorunda. Artık öyle.", en: "Your body logs it as balance: your weakest point has to hold as hard as your strongest. Now it does." }
+      - { tr: "{npc:yanki}: bir önceki taşıyıcı burada durdu. sen durmadın. bunu ona söyleyemem. sana söylüyorum.", en: "{npc:yanki}: the previous host stopped here. you didn't. i can't tell them that. i'm telling you." }
+    kosul:
+      kademe_min: "A"
+      degisken_min: { _savas_kazanildi: 1, _savas_boss: 1 }
+      degisken_max: { _savas_en_dusuk_can: 10, _savas_ezme: 0 }
+    etkiler:
+      - unvan: "yarim_nefes"
+      - yetenek: "mukemmel_denge"
+      - stat: { end: 3, wil: 3 }
+  kirilma_s_insanligin_tavani:
+    baslik: { tr: "[KIRILMA · S] İnsanlığın Tavanı", en: "[THE BREAK · S] Humanity's Ceiling" }
+    satirlar:
+      - { tr: "S kademesinde, bir insanın ulaşabileceği en yüksek yerde, ölmek üzereyken kazandın. Bundan yükseği yok. Ve yine de, tavanın üstünde, ilk kez bir şey görüyorsun.", en: "At Grade S, as high as any human can go, you won while you were dying. There's nothing higher. And still, above the ceiling, for the first time, you can see something." }
+      - { tr: "Sistem notu: [Katman sınırı. Bu değerin üstü tanımlanmamıştır.] Satır bir an titriyor: [tanımlanmamıştı.]", en: "System note: [Layer limit. Values above this are undefined.] The line flickers for a second: [were undefined.]" }
+      - { tr: "{npc:yanki}: şimdi görüyor musun? tavanın üstünde bir el var. her zaman vardı. artık sen de görebiliyorsun.", en: "{npc:yanki}: see it now? there's a hand above the ceiling. there always was. now you can see it too." }
+    kosul:
+      kademe_min: "S"
+      degisken_min: { _savas_kazanildi: 1 }
+      degisken_max: { _savas_en_dusuk_can: 10, _savas_ezme: 0 }
+    etkiler:
+      - unvan: "insanligin_tavani"
+      - bayrak: "kule_s_kirilmasi"
+      - oz: { yanki: 30 }
+      - stat: { wil: 4 }

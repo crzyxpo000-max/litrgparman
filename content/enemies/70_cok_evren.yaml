@@ -1,0 +1,342 @@
+# Parti I — Çok-evren düşmanları (docs/PERDE2_4.md §4). Tasarım seviyesi 30–38; hikayede `@oyuncu+N` ile ölçeklenir.
+# Batık Takımada: tuz_yuruyeni (elit), son_basakci (boss). Pirinç Kervan: ondalikci (elit), muhurdar (boss).
+# Yedi Taht: taht_muhafizi (elit), varis_ossiran (boss).
+dusmanlar:
+  # ---------------------------------------------------------------- BATIK TAKIMADA
+  tuz_yuruyeni:
+    ad: { tr: "Tuz Yürüyeni", en: "Saltwalker" }
+    aciklama: { tr: "Hasat edilmiş bir Nehha'nın kabuğu. Sistem'i söküldüğünde içi boşalmış, boşluğu deniz tuzu doldurmuş. Hâlâ yürüyor; çünkü durmayı kimse ona öğretmedi.", en: "The husk of a harvested Nehha. When its System was pulled out, the hollow filled with sea salt. It still walks, because nobody ever taught it how to stop." }
+    kanca: { tr: "Sığ suyun içinden beyaz, kırılgan bir siluet doğruluyor. Her adımında omuzlarından tuz dökülüyor ve göğsünde sönmüş bir pencerenin çerçevesi duruyor.", en: "A white, brittle silhouette straightens up out of the shallows. Salt sloughs off its shoulders with every step, and in its chest sits the empty frame of a window that went dark a long time ago." }
+    seviye: 33
+    can: 900
+    statlar: { str: 44, agi: 26, end: 48, int: 12, wis: 20, per: 30, wil: 36, cha: 4 }
+    davranis: "agresif"
+    zeki: false
+    zaaf: "fiziksel"
+    zaaf_metin: { tr: "Tuz ne kadar sertse o kadar kırılgandır. Ağır, düz bir darbe gövdesini bir kavanoz gibi çatlatır.", en: "The harder the salt, the more brittle it gets. One heavy, flat-footed blow cracks the body like a mason jar." }
+    saldirilar:
+      - id: "tuz_kucagi"
+        ad: { tr: "Tuz Kucağı", en: "Salt Embrace" }
+        stat: "str"
+        taban: 16
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} kollarını açıp sana sarılıyor; tuz derine gömülüyor ve her nefeste ciğerlerin yanıyor.", en: "{dusman} opens its arms and hugs you. The salt grinds into your skin, and every breath burns going down." }
+      - id: "sonuk_ciglik"
+        ad: { tr: "Sönük Çığlık", en: "The Dimmed Scream" }
+        stat: "wil"
+        taban: 14
+        kat: 0.9
+        etiketler: ["zihin", "ses"]
+        durum: { etki: "korku", sans: 0.45, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} ağzını açıyor. Ses yok; yalnızca kendi pencerenin bir an söndüğünü görüyorsun ve bunun nasıl bir şey olduğunu bütün bedeninle hatırlıyorsun.", en: "{dusman} opens its mouth. No sound comes out. Your own window just flickers dark for a second, and your whole body remembers what that would feel like." }
+    xp: 5200
+    kredi: 140
+    ganimet: { tuz_tableti: 0.6, canavar_cekirdegi: 1.0 }
+    etiketler: ["olumsuz", "elit", "cok_evren"]
+    boss: false
+
+  son_basakci:
+    ad: { tr: "Son Başakçı", en: "The Last Gleaner" }
+    aciklama: { tr: "Hasat bittikten sonra geride bırakılan şey. Ağlar, cam bıçaklar ve on bin sönmüş pencereden örülmüş, sığ denizin dibini tarayan dev bir artık. Seviyesi olan her şeyi bulur ve son damlasına kadar toplar.", en: "The thing left behind after the Harvest was over. A huge leftover woven out of nets, glass blades and ten thousand dead windows, combing the floor of the shallow sea. It finds anything with a level and gleans it down to the last drop." }
+    kanca: { tr: "Takımada'nın bütün çanları aynı anda susuyor. Suyun altından, ağlarının arasında hâlâ yanıp sönen pencerelerle, bir gölge yükseliyor: [Artık tespit edildi. Toplama başlatılıyor.]", en: "Every bell in the Reach goes silent at once. A shadow rises out of the water, windows still blinking in its nets: [Remnant detected. Commencing collection.]" }
+    seviye: 36
+    can: 1500
+    statlar: { str: 52, agi: 34, end: 50, int: 46, wis: 30, per: 48, wil: 44, cha: 2 }
+    davranis: "agresif"
+    zeki: true
+    zaaf: "ses"
+    zaaf_metin: { tr: "Nehha çanlarının sesi onu yönsüz bırakır; Hasat'tan önce bu dünyada yalnızca çanlar Sistem'e ait değildi.", en: "The ring of a Nehha bell leaves it lost. Before the Harvest, the bells were the only thing on this world that didn't belong to the System." }
+    saldirilar:
+      - id: "basak_agi"
+        ad: { tr: "Başak Ağı", en: "Gleaning Net" }
+        stat: "agi"
+        taban: 16
+        kat: 0.8
+        etiketler: ["fiziksel", "alan"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} ağlarını suyun üstüne savuruyor. İplikler bileklerine dolanıyor ve her düğümde bir sayı, senin sayın, yavaşça sökülüyor.", en: "{dusman} flings its nets across the water. The lines wrap your wrists, and at every knot a number, one of yours, starts slowly working loose." }
+      - id: "cam_orak"
+        ad: { tr: "Cam Orak", en: "Glass Scythe" }
+        stat: "str"
+        taban: 18
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin", "delici"]
+        durum: { etki: "kanama", sans: 0.45, sure: 3 }
+        bekleme: 1
+        metin: { tr: "{dusman} sönmüş pencerelerden dövülmüş bir orağı yatay savuruyor; kesik ince, temiz ve önce hiç acımıyor.", en: "{dusman} sweeps a scythe forged out of dead windows in a flat arc. The cut is thin and clean, and for a second it doesn't hurt at all." }
+    xp: 9000
+    kredi: 400
+    ganimet: { basakci_cekirdegi: 1.0, tuz_tableti: 1.0, canavar_cekirdegi: 1.0 }
+    etiketler: ["boss", "cok_evren", "hasat"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Ağlarındaki pencereler sırayla yanıyor: Nehha adları, seviyeleri, son bildirimleri. Biri bir çocuğa ait. [Toplandı. Toplandı. Toplandı.]", en: "The windows in its nets light up one by one: Nehha names, levels, final notifications. One of them belongs to a child. [Collected. Collected. Collected.]" }
+        guclenme: { int: 4, per: 3 }
+        saldiri:
+          id: "seviye_sagma"
+          ad: { tr: "Seviye Sağımı", en: "Level Milking" }
+          stat: "int"
+          taban: 18
+          kat: 0.9
+          etiketler: ["zihin", "glitch"]
+          durum: { etki: "zehir", sans: 0.5, sure: 3 }
+          bekleme: 2
+          metin: { tr: "{dusman} sana dokunmadan çekiyor. Durum pencerende seviyenin altında ince, kırmızı bir çizgi beliriyor ve çizgi sana doğru değil, ona doğru akıyor.", en: "{dusman} pulls without touching you. A thin red line shows up under the level in your Status window, and it isn't flowing toward you. It's flowing toward it." }
+      - esik: 40
+        metin: { tr: "Deniz çekiliyor. Çanların dibindeki şehir bir anlığına kuru kalıyor ve Başakçı gövdesini bütün bir sokağın üstüne yayıyor, tarlasını savunan bir korkuluk gibi.", en: "The sea pulls back. For a moment the city at the foot of the bells is dry ground, and the Gleaner spreads its body over an entire street like a scarecrow defending its field." }
+        guclenme: { str: 5, end: 5 }
+        saldiri:
+          id: "geri_cekilen_deniz"
+          ad: { tr: "Çekilen Deniz", en: "The Receding Sea" }
+          stat: "str"
+          taban: 20
+          kat: 0.9
+          etiketler: ["su", "alan"]
+          durum: { etki: "sersemleme", sans: 0.4, sure: 1 }
+          bekleme: 3
+          metin: { tr: "Çekilen deniz duvar gibi geri geliyor ve {dusman} onunla birlikte, ağlarının bütün ağırlığıyla üstüne çöküyor.", en: "The sea that pulled back comes back as a wall, and {dusman} comes with it, dropping the whole weight of its nets on top of you." }
+      - esik: 15
+        metin: { tr: "Ağlarındaki pencerelerin hepsi aynı anda sönüyor. Geriye tek bir satır kalıyor, yalnızca senin görebildiğin bozuk bir satır: [b̷u dünyayı ben toplamadım. ben yalnızca artığım.]", en: "Every window in its nets goes out at once. One line is left, a broken line only you can see: [i̷ didn't harvest this world. i'm only what was left over.]" }
+        guclenme: { str: 4, agi: 4, wil: 5 }
+        saldiri:
+          id: "son_toplama"
+          ad: { tr: "Son Toplama", en: "Final Collection" }
+          stat: "wil"
+          taban: 22
+          kat: 1.0
+          etiketler: ["karanlik", "glitch"]
+          durum: { etki: "korku", sans: 0.5, sure: 2 }
+          bekleme: 3
+          metin: { tr: "{dusman} kalan her şeyini tek bir ağa düğümleyip sana fırlatıyor. Ağın içinde bir an kendi pencereni, sönmüş halde, başkalarının arasında asılı görüyorsun.", en: "{dusman} knots everything it has left into one net and hurls it. For a second, inside the net, you see your own window hanging dark among all the others." }
+
+  # ---------------------------------------------------------------- PİRİNÇ KERVAN
+  ondalikci:
+    ad: { tr: "Ondalıkçı", en: "Tithe-Taker" }
+    aciklama: { tr: "Kadimler'e satılmış bir Tavvar. Derisindeki bütün pirinç pullar sökülüp yerine tek, kesintisiz bir levha dövülmüş; sesi de alınmış. Kervan'ın her onda birini o seçer.", en: "A Tavvari sold to the Ancients. Every brass chit was stripped from his skin and one seamless plate hammered on in its place. They took his voice, too. He's the one who picks every tenth soul on the Caravan." }
+    kanca: { tr: "Çarşının uğultusu bıçakla kesilmiş gibi duruyor. Kalabalık ikiye ayrılıyor ve aradan pirinç kaplı, yüzsüz bir figür, elinde bir terazi, sessizce yürüyor.", en: "The bazaar's racket stops like somebody cut it with a knife. The crowd splits down the middle, and through the gap walks a faceless figure plated in brass, a set of scales in one hand, without a sound." }
+    seviye: 34
+    can: 950
+    statlar: { str: 38, agi: 40, end: 42, int: 30, wis: 26, per: 44, wil: 40, cha: 10 }
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "simsek"
+    zaaf_metin: { tr: "Pirinç levha gövdesine perçinli. Bir şimşek perçinlerden geçer ve onu kendi zırhının içinde kaynatır.", en: "The brass plate is riveted straight into his body. Lightning runs down the rivets and cooks him inside his own armor." }
+    saldirilar:
+      - id: "kefe_darbesi"
+        ad: { tr: "Kefe Darbesi", en: "Scale-Pan Strike" }
+        stat: "str"
+        taban: 15
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} terazinin ağır pirinç kefesini zincirinden savurup şakağına indiriyor.", en: "{dusman} swings the heavy brass pan of his scales on its chain and cracks it across your temple." }
+      - id: "tartim"
+        ad: { tr: "Tartım", en: "The Weighing" }
+        stat: "per"
+        taban: 14
+        kat: 0.9
+        etiketler: ["zihin", "buyu"]
+        durum: { etki: "korku", sans: 0.4, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} teraziyi kaldırıyor ve kefelerden biri, içinde hiçbir şey yokken, senin ağırlığınla yere iniyor. Bir an kendini satılık hissediyorsun.", en: "{dusman} raises the scales, and one pan drops to the floor with your weight in it, though it's empty. For a second you feel like merchandise." }
+    xp: 5400
+    kredi: 260
+    ganimet: { pirinc_pul: 1.0, muhur_parcasi: 0.4 }
+    etiketler: ["insansi", "elit", "cok_evren", "kadimler"]
+    boss: false
+
+  muhurdar:
+    ad: { tr: "Mühürdar", en: "The Sealwarden" }
+    aciklama: { tr: "Boyun Senedi'nin bekçisi. Kadimler onu dört yüz yıl önce Kervan'ın kalbine, senedin mühür makinesinin içine yerleştirdi. Dişliler, pirinç zincirler ve imzalanmış her sözleşmenin sesinden yapılmış.", en: "Guardian of the Neckbond. Four hundred years ago the Ancients installed it in the Caravan's heart, inside the engine that holds the treaty's seal. Gears, brass chains and the voice of every contract ever signed." }
+    kanca: { tr: "Mühür makinesinin dişlileri duruyor. Sonra hepsi aynı anda ters yöne dönüyor ve makinenin içinden bir ses, binlerce imzanın sesi, aynı cümleyi kuruyor: [Senet bozulamaz.]", en: "The gears of the seal engine grind to a halt. Then all of them spin backward at once, and a voice from inside, the voice of a thousand signatures, says one sentence: [The bond cannot be broken.]" }
+    seviye: 37
+    can: 1600
+    statlar: { str: 50, agi: 28, end: 58, int: 48, wis: 36, per: 40, wil: 50, cha: 20 }
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "simsek"
+    zaaf_metin: { tr: "Dişlileri pirinçten, zincirleri pirinçten; makinenin bütün kalbi iletken. Bir şimşek senedi değil ama bekçisini durdurur.", en: "Brass gears, brass chains; the whole heart of the machine conducts. Lightning won't break the treaty, but it'll stop the thing guarding it." }
+    saldirilar:
+      - id: "zincir_hukmu"
+        ad: { tr: "Zincir Hükmü", en: "Chain Clause" }
+        stat: "str"
+        taban: 17
+        kat: 0.8
+        etiketler: ["fiziksel", "alan"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} tavandan sarkan pirinç zincirleri kırbaç gibi savuruyor; biri boynuna dolanıp seni bir an diz çöktürüyor.", en: "{dusman} whips the brass chains hanging from the ceiling. One of them loops your neck and drags you to your knees for a second." }
+      - id: "imza_sesi"
+        ad: { tr: "İmzaların Sesi", en: "Voice of the Signatories" }
+        stat: "wil"
+        taban: 16
+        kat: 0.9
+        etiketler: ["zihin", "ses"]
+        durum: { etki: "korku", sans: 0.45, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} senedi okuyor; binlerce Tavvar sesi, her biri kendi boyun eğişini, aynı anda kulaklarının içinde tekrarlıyor.", en: "{dusman} reads the treaty aloud, and a thousand Tavvari voices, each one repeating its own surrender, go off inside your skull at once." }
+    xp: 9500
+    kredi: 600
+    ganimet: { muhur_parcasi: 1.0, pirinc_pul: 1.0, canavar_cekirdegi: 1.0 }
+    etiketler: ["boss", "cok_evren", "kadimler", "yapi"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Makinenin göğsündeki kapak açılıyor ve senedin aslı görünüyor: deriden, bir Tavvar sırtından alınmış, hâlâ sıcak.", en: "The hatch in the machine's chest swings open, and you see the original treaty: written on hide, taken off a Tavvari back, still warm." }
+        guclenme: { end: 4, wil: 3 }
+        saldiri:
+          id: "faiz"
+          ad: { tr: "Faiz", en: "Interest" }
+          stat: "int"
+          taban: 18
+          kat: 0.9
+          etiketler: ["buyu", "glitch"]
+          durum: { etki: "zehir", sans: 0.5, sure: 3 }
+          bekleme: 2
+          metin: { tr: "{dusman} sana bir borç yazıyor. Hiç imzalamadığın bir satır derinin üstünde beliriyor ve her tur biraz daha derine işliyor.", en: "{dusman} writes you a debt. A line you never signed appears on your skin, and every turn it eats a little deeper." }
+      - esik: 40
+        metin: { tr: "Kervan sarsılıyor. Makine, kendini korumak için bütün dünya-geminin rotasını değiştiriyor; dışarıda binlerce Tavvar aynı anda yere düşüyor.", en: "The Caravan lurches. To protect itself, the machine changes the course of the whole world-ship, and outside, thousands of Tavvari hit the deck at the same time." }
+        guclenme: { str: 5, agi: 4 }
+        saldiri:
+          id: "rota_degisimi"
+          ad: { tr: "Rota Değişimi", en: "Course Correction" }
+          stat: "str"
+          taban: 20
+          kat: 0.9
+          etiketler: ["fiziksel", "alan"]
+          durum: { etki: "sersemleme", sans: 0.4, sure: 1 }
+          bekleme: 3
+          metin: { tr: "Zemin altından kayıyor. {dusman} bu anı bekliyormuş; bütün ağırlığıyla senin düştüğün yere iniyor.", en: "The floor slides out from under you. {dusman} was waiting for it, and it comes down with all its weight right where you land." }
+      - esik: 15
+        metin: { tr: "Dişliler kırılmaya başlıyor. İmzaların sesi dağılıyor; aralarından tek bir ses, bir çocuk sesi, senedin son satırını okumayı reddediyor.", en: "The gears start to shatter. The voice of the signatures falls apart, and out of it one voice, a child's voice, refuses to read the last line of the treaty." }
+        guclenme: { str: 4, end: 4, wil: 5 }
+        saldiri:
+          id: "son_madde"
+          ad: { tr: "Son Madde", en: "Final Clause" }
+          stat: "wil"
+          taban: 22
+          kat: 1.0
+          etiketler: ["zihin", "karanlik"]
+          durum: { etki: "korku", sans: 0.5, sure: 2 }
+          bekleme: 3
+          metin: { tr: "{dusman} senedin son maddesini sana okuyor: [Borç, borçlunun ölümüyle kapanmaz.] Kemiklerin bunu bir an doğru sanıyor.", en: "{dusman} reads you the treaty's final clause: [The debt does not close with the debtor's death.] For one second, your bones believe it." }
+
+  # ---------------------------------------------------------------- YEDİ TAHT
+  taht_muhafizi:
+    ad: { tr: "Taht Muhafızı", en: "Court Warden" }
+    aciklama: { tr: "Yedi Taht'ın sarayında nöbet tutan Kadim askeri. Uzun, eklemleri yanlış yerlerden bükülen, derisinin altında hasat edilmiş bir dünyanın yıldızları gibi parlayan noktalar taşıyan bir varlık.", en: "An Ancient soldier standing watch in the Sevenfold Court. Tall, joints bending in the wrong places, and under its skin, points of light like the stars of a harvested world." }
+    kanca: { tr: "Koridorun sonundaki heykel kıpırdıyor. Heykel değilmiş. Başını ağır ağır sana çeviriyor ve derisinin altındaki ışıklar bir takımyıldız gibi yeniden diziliyor.", en: "The statue at the end of the hall moves. It was never a statue. Its head turns toward you, slow, and the lights under its skin rearrange themselves like a constellation." }
+    seviye: 35
+    can: 1000
+    statlar: { str: 46, agi: 42, end: 44, int: 36, wis: 34, per: 40, wil: 46, cha: 18 }
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "isik"
+    zaaf_metin: { tr: "Derisinin altındaki yıldızlar başka bir dünyadan çalınmış ışık. Güçlü bir ışık o yıldızları karıştırır ve muhafız bir an kendi bedenini tanımaz.", en: "The stars under its skin are light stolen from another world. Hit it with enough light and those stars scramble, and for a beat it doesn't recognize its own body." }
+    saldirilar:
+      - id: "yanlis_eklem"
+        ad: { tr: "Yanlış Eklem", en: "Wrong Joint" }
+        stat: "agi"
+        taban: 16
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.35, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} kolunu bir eklemin bükülmemesi gereken yönden büküp vuruyor; darbe hiç beklemediğin yerden, arkandan geliyor.", en: "{dusman} bends its arm the way no joint should bend and strikes. The hit comes from somewhere you weren't watching: behind you." }
+      - id: "hukum_bakisi"
+        ad: { tr: "Hüküm Bakışı", en: "Gaze of Decree" }
+        stat: "wil"
+        taban: 15
+        kat: 0.9
+        etiketler: ["zihin", "isik"]
+        durum: { etki: "kor", sans: 0.4, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} sana bakıyor ve derisindeki yıldızlar gözlerine akıyor. Bir an dünyayı onun gördüğü gibi görüyorsun: tartılmış, ölçülmüş, hasada hazır.", en: "{dusman} looks at you, and the stars in its skin pour into your eyes. For a second you see the world the way it does: weighed, measured, ripe." }
+    xp: 5600
+    kredi: 300
+    ganimet: { kadim_ipligi: 0.7, canavar_cekirdegi: 1.0 }
+    etiketler: ["kadimler", "elit", "cok_evren"]
+    boss: false
+
+  varis_ossiran:
+    ad: { tr: "Varis Ossiran", en: "Heir Ossiran" }
+    aciklama: { tr: "Yedinci Taht'ın en güçlü talibi. Dünya'yı kendi elleriyle hasat edip boş koltuğa oturmak, bir dünyanın bütün seviyelerini derisinin altına gömüp tanrılaşmak istiyor. Sana bakarken bir rakip görmüyor; bir hasat görüyor.", en: "The strongest claimant to the Seventh Throne. He wants to harvest Earth with his own hands, take the empty seat and bury a whole world's levels under his skin until he's a god. When he looks at you he doesn't see a rival. He sees a crop." }
+    kanca: { tr: "Ossiran ayağa kalkıyor ve salondaki bütün Kadimler başlarını eğiyor. Derisinin altında üç dünyanın yıldızları dönüyor; dördüncüsü için boş bir yer bırakılmış.", en: "Ossiran rises, and every Ancient in the hall bows its head. Three worlds' worth of stars turn under his skin, and there's an empty space left for a fourth." }
+    seviye: 38
+    can: 1700
+    statlar: { str: 48, agi: 46, end: 50, int: 56, wis: 44, per: 48, wil: 58, cha: 40 }
+    davranis: "agresif"
+    zeki: true
+    zaaf: "isik"
+    zaaf_metin: { tr: "Derisinin altındaki üç dünya birbirine hiç alışmadı. Güçlü bir ışık onları ayrıştırır; bir an Ossiran tek bir varlık değil, üç ayrı yasın kavgası olur.", en: "The three worlds under his skin never got used to each other. Enough light pulls them apart, and for a moment Ossiran isn't one being. He's three separate griefs, fighting." }
+    saldirilar:
+      - id: "hasat_eli"
+        ad: { tr: "Hasat Eli", en: "The Reaping Hand" }
+        stat: "int"
+        taban: 17
+        kat: 0.8
+        etiketler: ["buyu", "yakin"]
+        durum: { etki: "zehir", sans: 0.4, sure: 3 }
+        bekleme: 0
+        metin: { tr: "{dusman} avucunu göğsüne dayıyor. İtmiyor; çekiyor. Sayıların bir an ona doğru eğiliyor, sanki rüzgâra yatan başaklar gibi.", en: "{dusman} lays his palm flat on your chest. He doesn't push. He pulls. For a second your numbers lean toward him, like wheat bending in the wind." }
+      - id: "dunya_agirligi"
+        ad: { tr: "Bir Dünyanın Ağırlığı", en: "The Weight of a World" }
+        stat: "wil"
+        taban: 18
+        kat: 0.9
+        etiketler: ["zihin", "alan"]
+        durum: { etki: "sersemleme", sans: 0.4, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} derisinin altındaki dünyalardan birini serbest bırakıyor. Bir gezegenin bütün yası bir saniyeliğine omuzlarına iniyor.", en: "{dusman} lets one of the worlds under his skin off the leash. For one second, a whole planet's grief comes down on your shoulders." }
+    xp: 10000
+    kredi: 800
+    ganimet: { ossiran_tac_parcasi: 1.0, kadim_ipligi: 1.0, canavar_cekirdegi: 1.0 }
+    etiketler: ["boss", "cok_evren", "kadimler"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Ossiran ilk kez gülümsüyor. \"Demek gerçeksin,\" diyor ve derisindeki yıldızlar bir dünyanın ana kıtası gibi kollarına doğru akıyor.", en: "Ossiran smiles for the first time. \"So you're real,\" he says, and the stars in his skin pour down into his arms like a continent sliding into the sea." }
+        guclenme: { str: 4, int: 3 }
+        saldiri:
+          id: "ucuncu_dunya"
+          ad: { tr: "Üçüncü Dünyanın Denizi", en: "Sea of the Third World" }
+          stat: "int"
+          taban: 19
+          kat: 0.9
+          etiketler: ["su", "alan"]
+          durum: { etki: "sersemleme", sans: 0.4, sure: 1 }
+          bekleme: 2
+          metin: { tr: "{dusman} hasat ettiği üçüncü dünyanın denizini avucundan döküyor. Tuzlu, kara bir dalga salonu boydan boya geçiyor.", en: "{dusman} pours the sea of the third world he harvested out of his palm. A black, salty wave sweeps the hall from end to end." }
+      - esik: 40
+        metin: { tr: "Taht salonunun duvarları geri çekiliyor. Altı taht, altı Kadim yüzü, kavgayı sessizce izliyor; hiçbiri müdahale etmiyor. Bu da bir oy.", en: "The walls of the throne room pull back. Six thrones, six Ancient faces, watching the fight in silence. None of them step in. That's a vote too." }
+        guclenme: { agi: 5, wil: 4 }
+        saldiri:
+          id: "alti_tahtin_sessizligi"
+          ad: { tr: "Altı Tahtın Sessizliği", en: "Silence of the Six" }
+          stat: "wil"
+          taban: 20
+          kat: 0.9
+          etiketler: ["zihin", "karanlik"]
+          durum: { etki: "korku", sans: 0.45, sure: 2 }
+          bekleme: 3
+          metin: { tr: "{dusman} altı tahta doğru elini açıyor ve onların sessizliği bir ağırlık olarak üstüne çöküyor: kimse seni kurtarmayacak, burada kimse kimseyi kurtarmaz.", en: "{dusman} opens a hand toward the six thrones, and their silence drops on you like a weight: no one's coming to save you. No one here saves anyone." }
+      - esik: 15
+        metin: { tr: "Ossiran'ın derisi çatlıyor. Çatlaklardan üç dünyanın ışığı sızıyor ve bir an, yalnızca bir an, o ışığın içinde bir sürü küçük, şaşkın yüz görüyorsun.", en: "Ossiran's skin starts to crack. Light from three worlds leaks out of the seams, and for a moment, just a moment, you see a crowd of small, confused faces inside it." }
+        guclenme: { str: 5, int: 5, wil: 5 }
+        saldiri:
+          id: "dorduncu_yer"
+          ad: { tr: "Dördüncü Yer", en: "The Fourth Place" }
+          stat: "int"
+          taban: 23
+          kat: 1.0
+          etiketler: ["karanlik", "glitch"]
+          durum: { etki: "zehir", sans: 0.5, sure: 3 }
+          bekleme: 3
+          metin: { tr: "{dusman} derisindeki boş yeri, dördüncü dünya için ayırdığı karanlığı sana açıyor. Bir an senin dünyanın oraya ne kadar iyi sığacağını görüyorsun.", en: "{dusman} opens the empty place in his skin to you, the dark he's been saving for a fourth world. For a moment you can see exactly how well yours would fit." }

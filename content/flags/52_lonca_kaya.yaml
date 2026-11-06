@@ -1,0 +1,63 @@
+# Parti B2 — Demir Lonca zinciri + Kaya Demir'in yayı (docs/PERDE2_4.md "Parti B2").
+# Ortak bayraklar (lonca_hakimiyeti, kaya_devrildi, ihanet_kaya …) flags/00_sozlesme.yaml'dadır; burada yalnızca partinin kendi bayrakları.
+# Lonca rütbesi bayrakla değil değişkenle tutulur: lonca_rutbe (0 Destek · 1 Avcı · 2 Çavuş · 3 Komutan Yardımcısı · 4 Komutan).
+bayraklar:
+  # ---- Kaya: Lonca teklifi (P2) ----
+  kaya_teklifi_goruldu: "Kaya Perde 2'de oyuncuyu Haddehane'ye çağırıp Lonca'da rütbe teklif etti (cevap ne olursa olsun)."
+  kaya_teklifi_kabul: "Oyuncu Kaya'nın rütbe teklifini kabul etti ve Lonca kolluğunu taktı."
+  kaya_teklifi_sozlesme: "Oyuncu rütbe yerine Lonca'yla paralı sözleşme yaptı."
+  kaya_sag_kol: "Oyuncu gerçek seviyesini açınca Kaya onu sağ kolu (komutan yardımcısı) yaptı."
+  lonca_hafife_aldi: "Oyuncu seviyesini küçük gösterdi; Lonca'nın çavuşları onu hafife alıyor (sonra hakimiyet anları)."
+  lonca_siginak_hatti: "Oyuncu Lonca ile Sığınak Konseyi arasında ortak bir savunma hattı kurdurdu."
+  lonca_dusmani: "Oyuncu Lonca'ya açıkça karşı geldi; zincir kapandı (Kaya'nın darbe gecesi yine gelebilir)."
+  # ---- Zincir 1: Kuru Havuz kapısı (P2) ----
+  lonca_1_tamam: "Lonca zinciri 1: Tersane'nin kuru havuzundaki kapı temizlendi."
+  lonca_yuk_onde: "Kuru havuz kapısında Lonca'nın planı uygulandı; Destek sütunundaki taşıyıcılar önden gönderildi."
+  lonca_yuk_korundu: "Kuru havuz kapısında taşıyıcılar geri çekildi ya da arkaya alındı; hepsi sağ çıktı."
+  havuz_yalniz_temizlendi: "Kuru havuz kapısı oyuncu tarafından tek başına temizlendi (gösteriş)."
+  lonca_yuk_payi: "Lonca'nın katkı kuralı değişti: kapıya giren taşıyıcılar da ganimetten pay alıyor."
+  # ---- Kaya: Sert ders (P2) ----
+  kaya_akil_hocasi: "Kaya oyuncunun akıl hocası oldu (komuta etmeyi öğretiyor; kader: akıl hocası)."
+  kaya_doktrin_kirildi: "Oyuncu Lojmanlar gecesinde iki hattı birden tutarak Kaya'nın 'herkesi kurtaramazsın' doktrinini kırdı."
+  sert_ders_emre_uyuldu: "Lojmanlar gecesinde Kaya'nın emrine uyulup Döküm Atölyesi tutuldu."
+  sert_ders_emir_cignendi: "Lojmanlar gecesinde Kaya'nın emri çiğnenip Lojmanlar'a gidildi."
+  lojmanlar_kurtarildi: "Sanayi Lojmanları'ndaki aileler canavar dalgasından kurtarıldı."
+  lojmanlar_yandi: "Sanayi Lojmanları canavar dalgasında yandı; içindekilerin çoğu öldü."
+  kaya_rakip_gordu: "Kaya oyuncuyu ilk kez bir halef değil bir rakip olarak gördü."
+  # ---- Zincir 2: Merdiven Günü (P2) ----
+  lonca_2_tamam: "Lonca zinciri 2: Merdiven Günü'nde rütbe alındı."
+  ors_borclu: "Örs (Lonca'nın birinci çavuşu) oyuncuya borçlu ve sadık; darbe gecesinde onun yanında durur."
+  ors_kin: "Örs oyuncuya kin tutuyor; darbe gecesinde Kaya'nın yanında durur."
+  lonca_rutbe_reformu: "Merdiven kuralı değişti: rütbe kaybeden aç kalmıyor."
+  lonca_merdiven_reddi: "Oyuncu Merdiven Günü'nü reddedip çıktı; zincir burada kaldı."
+  # ---- Zincir 3: Mavi Çapa (P3) ----
+  lonca_3_tamam: "Lonca zinciri 3: rakip avcı loncası Mavi Çapa bastırıldı, yutuldu ya da dağıldı."
+  capa_ezildi: "Mavi Çapa'nın salonu zorla basıldı; lonca kanla dağıtıldı."
+  capa_yutuldu: "Mavi Çapa'nın avcıları Lonca'ya (oyuncunun komutasına) katıldı."
+  capa_kacti: "Mavi Çapa oyuncunun gizli uyarısıyla şehirden kaçtı (Lonca bunu şans sanıyor)."
+  capa_adalet: "Sahte ihbar ortaya çıkarıldı; yalnızca Kadimler'le ticaret yapan tek adam cezalandırıldı."
+  capa_reisi_infaz: "Liman Reisi herkesin önünde infaz edildi."
+  kaya_sirri_elde: "Oyuncu Mavi Çapa ihbarının sahte olduğunu ve emri kimin verdiğini biliyor; elinde koz var."
+  # ---- Zincir 4: Demir Yasa (P3) ----
+  lonca_4_tamam: "Lonca zinciri 4: Demir Yasa yürürlüğe girdi."
+  demir_yasa_yururlukte: "Demir Yasa Kıyıkent'te yürürlükte (sıkıyönetim, katkıya göre tayın, seferberlik)."
+  demir_yasa_sert: "Demir Yasa oyuncunun eliyle daha sert yazıldı (ihanete istisnasız ölüm)."
+  demir_yasa_muafiyet: "Demir Yasa'ya çocuk, yaşlı ve hekim muafiyeti maddesi eklendi."
+  demir_yasa_sistemde: "Demir Yasa Kasaba Çekirdeği'ne yazıldı; Sistem onu uyguluyor."
+  kaya_yasa_yirtildi: "Oyuncu Demir Yasa'nın taslağını Kaya'nın önünde yırttı."
+  lonca_yasa_reddedildi: "Oyuncu Demir Yasa'yı reddedip Lonca'dan çıktı; zincir burada kaldı."
+  lonca_5_acik: "Lonca'nın tahtı oyuncuya açık (Demir Yasa sonrası ya da Kaya devrildikten sonra)."
+  # ---- Kaya: Darbe gecesi (P3) ----
+  kaya_darbe_hazirligi: "Kaya Konsey'e darbe hazırlığını tamamladı ve kimse onu durdurmadı (Parti J buyuk_ihanet: Kaya hain)."
+  kaya_darbe_ortagi: "Oyuncu Kaya'nın darbesine ortak oldu (ikinci kolun başında)."
+  kaya_darbeden_vazgecti: "Oyuncu Kaya'yı darbeden vazgeçirdi; Lonca şehrin savunmasına ortak bir masada katıldı."
+  kaya_ihbar_edildi: "Oyuncu Kaya'nın darbe planını Konsey'e ihbar etti."
+  kaya_hapiste: "Kaya devrildi ve Haddehane'nin soğuk fırınında tutuklu."
+  kaya_surgun: "Kaya devrildi ve şehirden sürüldü (npc_gitti)."
+  kaya_yemin_etti: "Kaya devrildi ama oyuncuya yemin edip onun komutasına girdi."
+  # ---- Kaya: Son savaşın generali (P4) ----
+  kaya_general: "Kaya son savaşta müttefik general: Kadim istilasında kara hattını o yönetiyor (Parti K1)."
+  kaya_selam_tam: "Kaya oyuncuya ilk kez tam bir asker selamı verdi."
+  # ---- Zincir 5: Taht (P4) ----
+  lonca_kayaya_birakildi: "Oyuncu Lonca'nın tahtını Kaya'ya bıraktı (akıl hocası kaderi)."
+  lonca_cozuldu: "Oyuncu tahtı eritti; Demir Lonca Sığınak Konseyi'ne bağlandı."

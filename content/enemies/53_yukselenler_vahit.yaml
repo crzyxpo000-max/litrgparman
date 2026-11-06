@@ -1,0 +1,298 @@
+# Parti C — Yükselenler'in insanları ve ayinden doğanlar. Tasarım seviyesi 30–36; içerikte @dunya / @oyuncu+N ile ölçeklenir.
+dusmanlar:
+  yukselen_muhafiz:
+    ad: { tr: "Beyaz Muhafız", en: "White Warden" }
+    aciklama: { tr: "Yükselenler'in beyaz cübbeli muhafızı. Kapı temizlemedi; seviyesini başkalarının katkısıyla aldı ve bunu bir lütuf sanıyor.", en: "A white-robed guard of the Ascended. Never cleared a Gate. Got its levels from other people's contributions and thinks it was a blessing." }
+    kanca: { tr: "Beyaz bir cübbe fenerin ışığına çıkıyor, bıçağını çekmeden önce sana nazikçe başını eğiyor.", en: "A white robe steps into the lantern light and gives you a polite little bow before it draws its knife." }
+    seviye: 30
+    can: 520
+    statlar: { str: 30, agi: 28, end: 30, int: 18, wis: 20, per: 24, wil: 34, cha: 26 }
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "ses"
+    zaaf_metin: { tr: "Hep aynı ilahinin ritmiyle hareket ediyor. Ritmi bir bağırışla ya da gürültüyle kır; adımları birbirine karışır.", en: "It moves to the beat of the same hymn every time. Break the rhythm with a shout or a crash and its footwork falls apart." }
+    saldirilar:
+      - id: "sunu_bicagi"
+        ad: { tr: "Sunu Bıçağı", en: "Offering Knife" }
+        stat: "str"
+        taban: 11
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.3, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} kısa, kıvrık bıçağını bir dua gibi kaburgalarının arasına sokuyor.", en: "{dusman} slides its short, curved knife between your ribs like a prayer." }
+      - id: "beyaz_ilahi"
+        ad: { tr: "Beyaz İlahi", en: "White Hymn" }
+        stat: "wil"
+        taban: 9
+        kat: 0.8
+        etiketler: ["ses", "zihin"]
+        durum: { etki: "korku", sans: 0.35, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} ilahiyi yükseltiyor ve ilahi kafatasının içine yerleşiyor: yakıt yanmak için vardır.", en: "{dusman} raises the hymn, and it settles inside your skull: fuel exists to burn." }
+    xp: 700
+    kredi: 40
+    ganimet: { beyaz_keten: 0.6, kul_muhru: 0.15 }
+    etiketler: ["insan", "yukselenler"]
+    boss: false
+  secilmis_avci:
+    ad: { tr: "Seçilmiş Avcı", en: "Chosen Hunter" }
+    aciklama: { tr: "Yüzlerce katkıyla şişirilmiş bir Seçilmiş. Kasları kendi değil, gözleri bazen başkasının gözü gibi bakıyor.", en: "One of the Chosen, swollen on hundreds of contributions. The muscle isn't really his, and sometimes his eyes look out like somebody else's." }
+    kanca: { tr: "Fenerlerin arkasından iri bir beyaz cübbe çıkıyor; yüzünde birkaç farklı insanın ifadesi aynı anda geziniyor.", en: "A huge white robe steps out from behind the lanterns, and several different people's expressions flicker across its face at once." }
+    seviye: 35
+    can: 820
+    statlar: { str: 44, agi: 30, end: 40, int: 16, wis: 14, per: 28, wil: 30, cha: 20 }
+    davranis: "agresif"
+    zeki: true
+    zaaf: "zihin"
+    zaaf_metin: { tr: "İçinde yakıtın sesleri var. Onları uyandıracak bir zihin darbesi, avcıyı bir an kendi bedeniyle kavga ettirir.", en: "The fuel's voices are still inside him. Hit his mind hard enough to wake them and for a moment he's fighting his own body." }
+    saldirilar:
+      - id: "bagis_kilici"
+        ad: { tr: "Bağış Kılıcı", en: "Gift Blade" }
+        stat: "str"
+        taban: 16
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.35, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} geniş kılıcını iki eliyle indiriyor; vuruşta yüzlerce kolun gücü var.", en: "{dusman} brings the broad blade down two-handed. There are hundreds of arms' worth of strength in the swing." }
+      - id: "teşekkur"
+        ad: { tr: "Teşekkür", en: "Thank You" }
+        stat: "wil"
+        taban: 12
+        kat: 0.8
+        etiketler: ["ses", "zihin"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 3
+        metin: { tr: "{dusman} ağzını açıyor ve içinden onlarca ses aynı anda teşekkür ediyor. Dizlerin bir an çözülüyor.", en: "{dusman} opens its mouth and dozens of voices say thank you all at once. Your knees go loose for a second." }
+    xp: 1100
+    kredi: 70
+    ganimet: { kul_muhru: 0.5, beyaz_keten: 0.5, buyuk_iyilesme_iksiri: 0.3 }
+    etiketler: ["insan", "yukselenler", "elit"]
+    boss: false
+  ocak_agzi:
+    ad: { tr: "Ocak Ağzı", en: "The Kiln Mouth" }
+    aciklama: { tr: "Aşırı beslenmiş bir Kapı zarının çatlağından doğan, yakıt olmuş yüzlerce insanın yüzünden örülmüş bir ağız. Kenarları kor gibi yanıyor; her yüzü hâlâ teşekkür ediyor.", en: "A mouth born from the split in an overfed Gate membrane, woven from the faces of hundreds of people who became fuel. Its edges glow like embers. Every face is still saying thank you." }
+    kanca: { tr: "Zar bir mide gibi gerilip yırtılıyor ve içinden, yüzlerden yapılmış bir ağız sana doğru açılıyor.", en: "The membrane stretches like a stomach and tears, and out of it a mouth made of faces opens toward you." }
+    seviye: 34
+    kademe: "E"
+    can: 1400
+    statlar: { str: 40, agi: 18, end: 46, int: 30, wis: 20, per: 22, wil: 40, cha: 6 }
+    davranis: "agresif"
+    zeki: false
+    zaaf: "isik"
+    zaaf_metin: { tr: "Yüzlerin gözleri yıllardır karanlıkta. Ani bir ışık, ağzı oluşturan yüzleri bir an birbirinden ayırır.", en: "The faces' eyes have been in the dark a long time. A sudden flash of light pulls the faces apart for a moment." }
+    saldirilar:
+      - id: "kul_kucagi"
+        ad: { tr: "Kül Kucağı", en: "Ash Embrace" }
+        stat: "str"
+        taban: 15
+        kat: 0.8
+        etiketler: ["ates", "yakin"]
+        durum: { etki: "yanma", sans: 0.45, sure: 3 }
+        bekleme: 0
+        metin: { tr: "{dusman} kor kenarlı dudaklarını üstüne kapatıyor; kül nefesine doluyor.", en: "{dusman} closes its ember-edged lips around you, and ash fills your lungs." }
+      - id: "katki_cagrisi"
+        ad: { tr: "Katkı Çağrısı", en: "Call for Contribution" }
+        stat: "int"
+        taban: 13
+        kat: 0.8
+        etiketler: ["zihin", "alan"]
+        durum: { etki: "korku", sans: 0.4, sure: 2 }
+        bekleme: 2
+        metin: { tr: "Yüzlerin hepsi aynı anda senin adını söylüyor ve sana katkıda bulunmak istiyor.", en: "Every face says your name at once and asks to contribute to you." }
+    xp: 2400
+    kredi: 120
+    ganimet: { ocak_cekirdegi: 1.0, kul_muhru: 1.0, canavar_cekirdegi: 0.8 }
+    etiketler: ["boss", "kapi", "yukselenler"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Ağzın kenarındaki yüzler gözlerini açıyor. Bazılarını tanıyorsun: bir yaşlı adam, sarı yağmurluklu bir kadın, gülümseyen bir genç.", en: "The faces around the rim open their eyes. You know some of them: an old man, a woman in a yellow raincoat, a smiling teenager." }
+        guclenme: { str: 3, wil: 3 }
+        saldiri:
+          id: "tanidik_yuzler"
+          ad: { tr: "Tanıdık Yüzler", en: "Familiar Faces" }
+          stat: "wil"
+          taban: 14
+          kat: 0.8
+          etiketler: ["zihin"]
+          durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+          bekleme: 3
+          metin: { tr: "{dusman} sana tanıdığın bir yüzü çeviriyor; o yüz sana teşekkür ediyor ve elin bir an duruyor.", en: "{dusman} turns a face you know toward you. It thanks you, and your hand stops for a beat." }
+      - esik: 40
+        metin: { tr: "Ağız kendi kenarlarını yiyerek büyüyor. Kor turuncudan beyaza dönüyor.", en: "The mouth grows by eating its own edges. The embers go from orange to white." }
+        guclenme: { agi: 4, int: 4 }
+        saldiri:
+          id: "beyaz_kor"
+          ad: { tr: "Beyaz Kor", en: "White Ember" }
+          stat: "int"
+          taban: 16
+          kat: 0.8
+          etiketler: ["ates", "alan"]
+          durum: { etki: "yanma", sans: 0.5, sure: 3 }
+          bekleme: 2
+          metin: { tr: "{dusman} öksürüyor ve beyaz bir kor bulutu sarnıcın her köşesine yayılıyor.", en: "{dusman} coughs, and a cloud of white embers spreads into every corner of the reservoir." }
+      - esik: 15
+        metin: { tr: "Yüzler birer birer susuyor. Kalanlar artık teşekkür etmiyor; yalvarıyor: bitir.", en: "The faces go quiet one by one. The ones left aren't saying thank you anymore. They're begging: finish it." }
+        guclenme: { str: 4, end: 4 }
+        saldiri:
+          id: "son_teskur"
+          ad: { tr: "Son Teşekkür", en: "Last Thank-You" }
+          stat: "str"
+          taban: 18
+          kat: 0.9
+          etiketler: ["fiziksel", "yakin"]
+          durum: { etki: "kanama", sans: 0.5, sure: 3 }
+          bekleme: 3
+          metin: { tr: "{dusman} bütün ağırlığıyla üstüne çöküyor; içinden yüzlerce ses son kez teşekkür ediyor.", en: "{dusman} drops its whole weight on you, and hundreds of voices inside it say thank you one last time." }
+  deniz_beyaz_kalkan:
+    ad: { tr: "Beyaz Kalkan", en: "The White Shield" }
+    aciklama: { tr: "En eski arkadaşın, beyazlar içinde. Göğsünde dikili tek göz, kalkanının iç yüzünde yakıtın çentikleri. Hiç düşmüyor; düşmemek için ne kadar ödediğini bilmiyor.", en: "Your oldest friend, all in white. A single eye stitched over the heart, the fuel's notches scratched inside the shield. Never falls. Doesn't know what it costs not to." }
+    kanca: { tr: "Kalkan kalkıyor ve arkasından tanıdık iki göz sana bakıyor; ıslak ama kararlı.", en: "The shield comes up, and two familiar eyes look at you over it. Wet, but set." }
+    seviye: 32
+    can: 1300
+    statlar: { str: 36, agi: 26, end: 48, int: 16, wis: 24, per: 26, wil: 40, cha: 28 }
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "zihin"
+    zaaf_metin: { tr: "Kalkanın iç yüzündeki çentikleri saymayı bilmiyor. Ona neyi taşıdığını hatırlatan her şey savunmasını bir an düşürür.", en: "Doesn't know how to count the notches inside the shield. Anything that reminds them what they're carrying drops their guard for a moment." }
+    saldirilar:
+      - id: "kalkan_darbesi"
+        ad: { tr: "Kalkan Darbesi", en: "Shield Bash" }
+        stat: "str"
+        taban: 13
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} omzunu indirip kalkanıyla üstüne yükleniyor; vapurdaki itişmelerin yüz katı.", en: "{dusman} drops a shoulder and drives the shield into you, a hundred times harder than any shove on the ferry." }
+      - id: "beyaz_duvar"
+        ad: { tr: "Beyaz Duvar", en: "White Wall" }
+        stat: "end"
+        taban: 10
+        kat: 0.7
+        etiketler: ["koruma"]
+        durum: { etki: "kalkan", sans: 1.0, sure: 2 }
+        bekleme: 3
+        metin: { tr: "{dusman} kalkanını yere dayıyor; kalkanın çevresinde beyaz bir ışık katılaşıyor.", en: "{dusman} plants the shield in the ground, and white light hardens around its rim." }
+    xp: 1800
+    kredi: 0
+    ganimet: { beyaz_keten: 1.0 }
+    etiketler: ["insan", "yukselenler", "duello"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Kalkanın arkasından bir ses: \"Durma. Lütfen durma. Durursan sana vurmak zorunda kalmam.\"", en: "A voice from behind the shield: \"Don't stop. Please don't stop. If you stop, I won't have to hit you.\"" }
+        guclenme: { end: 3, wil: 3 }
+        saldiri:
+          id: "simit"
+          ad: { tr: "Vapur Hatırası", en: "Ferry Memory" }
+          stat: "cha"
+          taban: 10
+          kat: 0.8
+          etiketler: ["zihin"]
+          durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+          bekleme: 3
+          metin: { tr: "{dusman} vuruşun ortasında martılardan bahsediyor. Bir an, yalnızca bir an, ikiniz de vapurdasınız.", en: "Mid-swing, {dusman} says something about the gulls. For a moment, just a moment, you're both back on the ferry." }
+      - esik: 40
+        metin: { tr: "Kalkanın iç yüzündeki çentikler parlıyor. Yakıtın gücü bir anda geri akıyor; gözleri bir yabancının gözleri.", en: "The notches inside the shield light up. The fuel's power floods back all at once, and the eyes looking at you are a stranger's." }
+        guclenme: { str: 5, agi: 3 }
+        saldiri:
+          id: "cetik_darbesi"
+          ad: { tr: "Kırk Yedi", en: "Forty-Seven" }
+          stat: "str"
+          taban: 16
+          kat: 0.9
+          etiketler: ["fiziksel", "yakin"]
+          durum: { etki: "kanama", sans: 0.4, sure: 2 }
+          bekleme: 2
+          metin: { tr: "{dusman} kalkanın kenarını savuruyor; vuruşta kırk yedi kişinin ağırlığı var.", en: "{dusman} swings the shield's edge, and there are forty-seven people's worth of weight behind it." }
+      - esik: 15
+        metin: { tr: "Kalkan çatlıyor. Arkasındaki yüz yeniden tanıdık; ağlıyor ama geri çekilmiyor.", en: "The shield cracks. The face behind it is familiar again. Crying, but not backing down." }
+        guclenme: { wil: 5, end: 3 }
+        saldiri:
+          id: "son_siper"
+          ad: { tr: "Son Siper", en: "Last Stand" }
+          stat: "end"
+          taban: 14
+          kat: 0.8
+          etiketler: ["koruma"]
+          durum: { etki: "kalkan", sans: 1.0, sure: 2 }
+          bekleme: 3
+          metin: { tr: "{dusman} çatlak kalkanını önüne çekiyor ve diz çökmüyor. Hiç çökmüyor.", en: "{dusman} pulls the cracked shield in close and won't go down. Never goes down." }
+  vahit_hukum:
+    ad: { tr: "Hüküm Sesi", en: "The Verdict" }
+    aciklama: { tr: "Peygamber, ama ağzından çıkan ses artık yalnızca onun değil. Bir kanal ya da bir kapı ona kendi sesini ödünç vermiş; her cümlesi bir hüküm.", en: "The prophet, but the voice coming out of his mouth isn't only his anymore. A channel, or a door, has lent him its own voice, and every sentence is a sentence handed down." }
+    kanca: { tr: "Ayakları yerden kesiliyor; sesi mikrofonsuz, bütün göğe yayılıyor: \"Yakıt yanmak için vardır.\"", en: "His feet leave the ground, and his voice spreads across the whole sky without a mic: \"Fuel exists to burn.\"" }
+    seviye: 33
+    can: 1250
+    statlar: { str: 18, agi: 24, end: 30, int: 36, wis: 34, per: 30, wil: 48, cha: 52 }
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "ses"
+    zaaf_metin: { tr: "Bütün gücü sesinde. Sesini bastıracak bir gürültü ya da onun duymak istemediği bir gerçek, hükmünü bir an susturur.", en: "All of his power is in his voice. A noise loud enough to drown it out, or a truth he doesn't want to hear, silences the Verdict for a moment." }
+    saldirilar:
+      - id: "hukum"
+        ad: { tr: "Hüküm", en: "Sentence" }
+        stat: "cha"
+        taban: 14
+        kat: 0.9
+        etiketler: ["ses", "zihin"]
+        durum: { etki: "korku", sans: 0.35, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} tek bir cümle kuruyor ve dizlerin, sanki biri değersiz olduğunu kanıtlamış gibi, çözülüyor.", en: "{dusman} says one sentence, and your knees give out like someone just proved you're worthless." }
+      - id: "kendi_sesin"
+        ad: { tr: "Kendi Sesin", en: "Your Own Voice" }
+        stat: "wis"
+        taban: 12
+        kat: 0.8
+        etiketler: ["zihin"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} en çok korktuğun şeyi, kendi sesinle söylüyor. Kafanın içi ağırlaşıyor.", en: "{dusman} says the exact thing you're most afraid of, in your own voice. Your skull gets heavy." }
+    xp: 2200
+    kredi: 90
+    ganimet: { vahit_mikrofonu: 1.0, kul_muhru: 0.5 }
+    etiketler: ["insan", "yukselenler", "boss"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Kırk bin isim okunmaya başlıyor; bir kısmı onun sesiyle, bir kısmı başka bir şeyin.", en: "Forty thousand names start being read aloud, some in his voice, some in something else's." }
+        guclenme: { cha: 4, wil: 3 }
+        saldiri:
+          id: "liste"
+          ad: { tr: "Liste", en: "The List" }
+          stat: "int"
+          taban: 14
+          kat: 0.8
+          etiketler: ["zihin", "alan"]
+          durum: { etki: "korku", sans: 0.4, sure: 2 }
+          bekleme: 3
+          metin: { tr: "{dusman} senin adını listenin başına okuyor. Her harfi bir taş gibi göğsüne iniyor.", en: "{dusman} reads your name at the top of the list. Every letter lands on your chest like a stone." }
+      - esik: 40
+        metin: { tr: "Ayakları yerden kesiliyor; çıplak ayaklarından kan değil, ışık damlıyor.", en: "His feet lift off the ground. What drips from his bare feet isn't blood anymore. It's light." }
+        guclenme: { int: 4, wis: 4 }
+        saldiri:
+          id: "kehanet"
+          ad: { tr: "Kehanet", en: "Prophecy" }
+          stat: "wis"
+          taban: 16
+          kat: 0.8
+          etiketler: ["isik", "alan"]
+          durum: { etki: "kor", sans: 0.4, sure: 2 }
+          bekleme: 2
+          metin: { tr: "{dusman} bir sonraki hamleni yüksek sesle söylüyor; söylediği an gözlerin beyaza kesiyor.", en: "{dusman} calls out your next move before you make it, and the moment he says it your eyes white out." }
+      - esik: 15
+        metin: { tr: "Ses çatlıyor. Altından, ilk kez, yalnızca bir adamın sesi duyuluyor: yorgun, korkmuş, kırk iki izleyicili.", en: "The voice cracks. Underneath it, for the first time, you can hear just a man's voice: tired, scared, forty-two viewers." }
+        guclenme: { wil: 5, cha: 3 }
+        saldiri:
+          id: "seni_duyuyorum"
+          ad: { tr: "Seni Duyuyorum", en: "I Hear You" }
+          stat: "cha"
+          taban: 18
+          kat: 0.9
+          etiketler: ["ses", "zihin"]
+          durum: { etki: "sersemleme", sans: 0.45, sure: 1 }
+          bekleme: 3
+          metin: { tr: "{dusman} fısıldıyor: \"Seni duyuyorum.\" Ve bir an, sen de onu duyuyorsun; hepsini.", en: "{dusman} whispers: \"I hear you.\" And for a moment you hear him too. All of it." }

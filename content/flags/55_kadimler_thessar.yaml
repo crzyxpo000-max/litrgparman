@@ -1,0 +1,54 @@
+# Parti E — Kadimler zinciri + Elçi Thessar (events/55_kadimler_thessar.yaml). Bayrak → açıklama.
+# Ortak bayraklar (thessar_indi, yedi_taht_davet, ihanet_thessar, kadimler_yenildi …) flags/00_sozlesme.yaml'dadır.
+bayraklar:
+  # ---- thessar_inis
+  thessar_inis_egildi: "İnişte oyuncu Thessar'ın önünde ondan daha derin eğildi."
+  thessar_inis_saldiri: "İnişte oyuncu merdiven yere değmeden Kadim öncülerine saldırdı."
+  thessar_dusman: "Oyuncu Kadimler'e açıkça düşman oldu (saldırı, ret, ifşa, ihbar); son düelloda düşman dalının rengi."
+  thessar_okuma_izni: "Oyuncu Thessar'ın Okuyucu'sunun kendisini okumasına izin verdi."
+  thessar_okuma_reddi: "Oyuncu Thessar'ın okumasını reddetti."
+  # ---- ticaret masası
+  ticaret_masasi_okundu: "Onuncu Sabır'daki ticaret masasında oyuncu bir saatlik okumayı sattı."
+  ticaret_masasi_reddedildi: "Oyuncu ticaret masasından hiçbir şey almadan kalktı."
+  # ---- zincir 1: sayım çadırı
+  kadim_ticaret_acik: "Kadim sayım çadırı oyuncunun onayıyla açıldı (zincir başladı)."
+  kadim_ticaret_kosullu: "Sayım çadırı oyuncunun şartıyla açıldı (çocuklar ya da bilmeden kimse yazılmadı)."
+  kadim_ticaret_reddedildi: "Oyuncu Kadim sayım çadırını yıktı ya da kapattı."
+  # ---- zincir 2: vel vergisi
+  kadim_vergi_odendi: "İlk mevsim payı (vel) ödendi; hangi yolla olduğu ayrı bayraklarda."
+  kadim_vergi_kendisi: "Pay, oyuncunun kendini üç gün okutmasıyla ödendi."
+  kadim_vergi_listesi: "Pay, kayıtlıların yüzde biri (dört yüz insan) verilerek ödendi."
+  kadim_vergi_sahte: "Pay sahte kristallerle ödendi (Thessar'a yalan)."
+  kadim_vergi_reddedildi: "Oyuncu mevsim payını reddetti; tazılar Eski Şehir'e indi (zincir başarısız)."
+  # ---- vassal teklifi
+  vassal_teklifi_kabul: "Oyuncu boyunduruk antlaşmasını ilke olarak kabul etti."
+  vassal_teklifi_red: "Oyuncu boyunduruk antlaşmasını reddetti ya da yırttı."
+  vassal_teklifi_ertelendi: "Oyuncu boyunduruk teklifine cevap vermeyip zaman istedi."
+  # ---- zincir 3: muhbir
+  kadim_muhbiri: "Oyuncu Kadimler'e direnişçi listesi verdi (gerçek, sahte ya da yalnızca kendi adı)."
+  kadim_muhbir_cift: "Oyuncu Kadimler'e ölülerden ve uydurma adlardan oluşan sahte bir liste verdi."
+  kadim_agi_ifsa: "Oyuncu Kadim muhbir ağını Kıyıkent'e ifşa etti (zincir başarısız)."
+  # ---- ihanet fısıltısı
+  thessar_ihanete_hazir: "Thessar kendi ırkına ihanete hazırlanıyor ve oyuncu ona söz verdi (müttefik yolu; Parti J buyuk_ihanet bunu okuyabilir)."
+  thessar_sadakat_secildi: "Oyuncu Thessar'ın ihanet teklifini reddedip Defter'e sadık kalmayı seçti (vassal yolu)."
+  thessar_yalniz_birakildi: "Oyuncu Thessar'ı kendi hesabıyla yalnız bıraktı; o Defter'e döndü."
+  thessar_ihbar_edildi: "Oyuncu Thessar'ı Meclis'e ihbar etti."
+  # ---- kırık mühür
+  thessar_muhru_alindi: "Thessar filonun hasat yetkisini (Defter Mührü) derisinden söküp oyuncuya verdi."
+  thessar_teslim_edildi: "Oyuncu kaçan Thessar'ı mührüyle birlikte muhafızlarına teslim etti; Meclis onu budadı."
+  # ---- zincir 4: sözleşme
+  kadim_vassal_imzalandi: "Boyunduruk antlaşması oyuncunun kanıyla imzalandı (Vassal yolu)."
+  kadim_sozlesme_yumusak: "Antlaşma imzadan önce yumuşatıldı (vel yalnızca kristal, kademe tavanı A)."
+  kadim_sozlesme_zehirli: "Antlaşmaya Thessar'ın gizli hükümsüzlük maddesi eklendi (müttefik yolu)."
+  kadim_sozlesme_yirtildi: "Antlaşma imzadan önce yırtıldı ya da kan sınavında kanla bozuldu."
+  # ---- zincir 5: teslim
+  kadim_teslim_tamam: "Kasaba Çekirdeği Kadimler'e teslim edildi; oyuncu Defter Bekçisi (Vassal)."
+  kadim_teslim_tuzak: "Teslim bir tuzaktı: mühürlü geri çekilme emri ve zehirli madde filoyu durdurdu."
+  kadim_teslim_reddedildi: "Oyuncu teslim gününde elini geri çekti; antlaşma bozuldu."
+  # ---- son düello
+  budayici_yenildi: "Meclis'in Budayıcı'sı Thessar'la birlikte yenildi."
+  thessar_muttefik: "Thessar kendi ırkına ihanet eden müttefik olarak son düelloyu oyuncunun yanında tamamladı (yaşıyor ya da onun için öldü)."
+  thessar_ortak: "Kan sınavı tamamlandı; Thessar Vassal sonunun ortağı."
+  thessar_yenildi: "Thessar son boss olarak yenildi."
+  thessar_olduruldu: "Thessar son düelloda öldürüldü."
+  thessar_bagislandi: "Thessar son düelloda yenildikten sonra bağışlandı."

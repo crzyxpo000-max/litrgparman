@@ -1,0 +1,446 @@
+# Parti D (Aşama 7) — Sessiz Ağ zinciri ve Mert'in yayı düşmanları.
+# Tasarım seviyeleri 28–40; olaylarda "@oyuncu+N" ya da "@dunya" ile ölçeklenir.
+dusmanlar:
+  duzeltme_birimi:
+    ad: { tr: "Düzeltme Birimi", en: "Correction Unit" }
+    aciklama: { tr: "Sistem'in kendi bağışıklık hücresi. Pürüzsüz, beyaz, yüzsüz bir insan silueti; göğsünde dönen bir küp var. Standarttan sapan her şeyi bulur ve standarda döndürür.", en: "The System's own immune cell. A smooth, white, faceless human outline with a cube turning in its chest. It finds anything that deviates from standard and puts it back." }
+    kanca: { tr: "Havada bir sayfa çevrilir gibi bir ses. Karşında, az önce orada olmayan beyaz bir figür duruyor; başını yana eğmiş, seni okuyor.", en: "A sound like a page turning in midair. In front of you stands a white figure that wasn't there a second ago, head tilted, reading you." }
+    seviye: 30
+    kademe: "E"
+    can: 640
+    statlar:
+      str: 22
+      agi: 26
+      end: 24
+      int: 30
+      wis: 20
+      per: 28
+      wil: 26
+      cha: 4
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "zihin"
+    zaaf_metin: { tr: "Yalnızca standart olanı okuyabiliyor. Beklenmedik, kuralsız bir hamle onu bir anlığına donduruyor; küpü o an korumasız.", en: "It can only read what's standard. One unexpected, off-script move and it freezes for a beat, and the cube in its chest is wide open." }
+    saldirilar:
+      - id: "geri_yukle"
+        ad: { tr: "Varsayılana Döndür", en: "Reset to Default" }
+        stat: "int"
+        taban: 13
+        kat: 0.9
+        etiketler: ["zihin", "glitch"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 1
+        metin: { tr: "{dusman} avucunu göğsüne bastırıyor. Bir an kim olduğunu unutuyorsun; Durum pencerende statların gri bir varsayılana kayıyor.", en: "{dusman} presses a palm flat to your chest. For a second you forget who you are, and every stat in your Status window slides toward a gray default." }
+      - id: "beyaz_kesik"
+        ad: { tr: "Beyaz Kesik", en: "White Cut" }
+        stat: "agi"
+        taban: 11
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        durum: { etki: "kanama", sans: 0.3, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} parmaklarını birleştiriyor ve elinin kenarı bir cetvel gibi keskinleşiyor. Kesik dümdüz; fazla düz.", en: "{dusman} presses its fingers together until the edge of its hand is sharp as a ruler. The cut is perfectly straight. Too straight." }
+      - id: "kayit_disi"
+        ad: { tr: "Kayıt Dışı Bırak", en: "Mark Unlogged" }
+        stat: "wil"
+        taban: 10
+        kat: 0.8
+        etiketler: ["zihin"]
+        durum: { etki: "korku", sans: 0.3, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} senin önünde bir pencere açıyor ve adının yanına tek bir kelime yazıyor: [sapma]. Silinmeyi beklemek, silinmekten kötü.", en: "{dusman} opens a window in front of you and types one word next to your name: [deviation]. Waiting to be deleted is worse than being deleted." }
+    xp: 900
+    kredi: 40
+    ganimet: { duzeltme_cekirdegi: 0.8, canavar_cekirdegi: 0.4 }
+    etiketler: ["sistem", "elit"]
+    boss: false
+
+  veri_avcisi:
+    ad: { tr: "Veri Avcısı", en: "Data Hunter" }
+    aciklama: { tr: "Bilgi satan birinin parasıyla başkalarının pencerelerini kovalayan bir paralı avcı. Gözlüğünün camına başkalarının statları akıyor.", en: "A hunter for hire who chases other people's windows for whoever's buying. Someone else's stats scroll across the lenses of his glasses." }
+    kanca: { tr: "Sokak lambasının altında biri duruyor ve gözlüğünün camında senin adın yanıp sönüyor.", en: "Somebody's standing under the streetlight, and your name is blinking on the lenses of his glasses." }
+    seviye: 28
+    kademe: "E"
+    can: 420
+    statlar:
+      str: 20
+      agi: 24
+      end: 18
+      int: 16
+      wis: 12
+      per: 26
+      wil: 16
+      cha: 10
+    davranis: "suru"
+    zeki: true
+    zaaf: "goz"
+    zaaf_metin: { tr: "Her şeyi gözlüğünden görüyor. Camı kır ya da göz kamaştır; bir anda kör bir adama dönüşür.", en: "He sees everything through those glasses. Crack the lenses or flash him and he turns into a blind man in a hurry." }
+    saldirilar:
+      - id: "sok_copu"
+        ad: { tr: "Şok Copu", en: "Shock Baton" }
+        stat: "str"
+        taban: 10
+        kat: 0.8
+        etiketler: ["simsek", "yakin"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} bir kapı çekirdeğiyle beslenen copunu kaburgalarına gömüyor; dişlerin birbirine kenetleniyor.", en: "{dusman} jams a baton juiced with a Gate core into your ribs, and your teeth clamp together." }
+      - id: "stat_okuma"
+        ad: { tr: "Zaaf Taraması", en: "Weakness Scan" }
+        stat: "per"
+        taban: 11
+        kat: 0.9
+        etiketler: ["menzilli", "fiziksel"]
+        bekleme: 1
+        metin: { tr: "{dusman} camında en düşük statını buluyor ve oradan vuruyor; tam bilmediğin bir açıdan.", en: "{dusman} finds your lowest stat on his lenses and shoots right there, from an angle you didn't know you had." }
+    xp: 520
+    kredi: 55
+    ganimet: { canavar_cekirdegi: 0.3 }
+    etiketler: ["insan"]
+    boss: false
+
+  cam_gozlu_izci:
+    ad: { tr: "Cam Gözlü İzci", en: "Glass-Eyed Tracker" }
+    aciklama: { tr: "Uzun bacaklı, ince, gri bir şey; yüzünün yerinde içinde ışık dönen bir mercek var. İnsan kalabalığına karışmak için giydiği palto ona iki beden büyük.", en: "A long-legged, skinny gray thing with a lens where its face should be, light turning slowly inside it. The coat it wears to blend into a crowd is two sizes too big." }
+    kanca: { tr: "Kalabalığın içinde bir baş, herkesin başından bir karış yüksekte, sana dönüyor. Yüzü yok; yalnızca dönen bir ışık.", en: "In the crowd, one head, a hand's width taller than the rest, turns toward you. It has no face. Just a light, turning." }
+    seviye: 34
+    kademe: "E"
+    can: 700
+    statlar:
+      str: 22
+      agi: 34
+      end: 22
+      int: 28
+      wis: 24
+      per: 38
+      wil: 24
+      cha: 6
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "isik"
+    zaaf_metin: { tr: "Merceği her şeyi topluyor; ışığı da. Doğrudan bir parlama onu kendi gözüyle kör eder.", en: "Its lens gathers in everything, light included. One direct flare and it's blinded by its own eye." }
+    saldirilar:
+      - id: "kayit_isini"
+        ad: { tr: "Kayıt Işını", en: "Recording Beam" }
+        stat: "int"
+        taban: 13
+        kat: 0.9
+        etiketler: ["isik", "menzilli"]
+        durum: { etki: "kor", sans: 0.35, sure: 2 }
+        bekleme: 1
+        metin: { tr: "{dusman} merceğini sana çeviriyor ve dönen ışık bir anda beyaz bir ışına dönüşüyor; seni okurken yakıyor.", en: "{dusman} turns its lens on you and the slow light snaps into a white beam. It burns while it reads." }
+      - id: "uzun_kol"
+        ad: { tr: "Uzayan Kol", en: "Reaching Arm" }
+        stat: "agi"
+        taban: 12
+        kat: 0.8
+        etiketler: ["fiziksel", "yakin"]
+        bekleme: 0
+        metin: { tr: "{dusman} paltosunun kolundan, kolun olması gerekenden iki kat uzun bir kol fırlıyor ve boğazına uzanıyor.", en: "{dusman} sends an arm out of its sleeve that's twice as long as any arm should be, straight for your throat." }
+      - id: "isaret"
+        ad: { tr: "İşaret Koy", en: "Tag" }
+        stat: "per"
+        taban: 9
+        kat: 0.7
+        etiketler: ["zihin"]
+        durum: { etki: "korku", sans: 0.4, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} sana dokunmadan bir şey koyuyor üstüne; görmüyorsun ama artık her adımın bir yere bildiriliyor gibi.", en: "{dusman} puts something on you without touching you. You can't see it, but every step you take feels like it's being reported somewhere." }
+    xp: 1100
+    kredi: 0
+    ganimet: { canavar_cekirdegi: 1.0 }
+    etiketler: ["kadim", "elit"]
+    boss: false
+
+  satir_bekcisi:
+    ad: { tr: "Satır Bekçisi", en: "The Line Warden" }
+    aciklama: { tr: "Kule'nin iki katı arasındaki dikişte yaşayan bir bekçi. Gövdesi, merdiven korkuluğuna dolanmış uzun bir metin şeridinden ibaret; okuduğu her satırı kendi bedenine ekliyor.", en: "A warden that lives in the seam between two of the Spire's floors. Its whole body is one long ribbon of text wound around the stair rail, and every line it reads gets added to it." }
+    kanca: { tr: "Korkuluktaki yazı çözülüyor, havaya kalkıyor ve sana doğru bir yılan gibi kıvrılıyor. Her harfin bir ağzı var.", en: "The writing on the rail comes unwound, lifts into the air, and coils toward you like a snake. Every letter has a mouth." }
+    seviye: 36
+    kademe: "E"
+    can: 1600
+    statlar:
+      str: 26
+      agi: 28
+      end: 30
+      int: 38
+      wis: 32
+      per: 30
+      wil: 34
+      cha: 8
+    davranis: "agresif"
+    zeki: true
+    zaaf: "ates"
+    zaaf_metin: { tr: "Kağıt gibi okunur, kağıt gibi yanar. Ateş satırları tutuşturur ve bekçi kendi kelimelerini kaybeder.", en: "It reads like paper and it burns like paper. Fire catches the lines and the warden starts losing its own words." }
+    saldirilar:
+      - id: "satir_dolama"
+        ad: { tr: "Satır Dolama", en: "Line Wrap" }
+        stat: "int"
+        taban: 15
+        kat: 0.9
+        etiketler: ["zihin", "glitch"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 1
+        metin: { tr: "{dusman} metin şeridini bileklerine dolayıp sıkıyor. Harfler derine işliyor; kolunda okunmayan bir cümle kalıyor.", en: "{dusman} wraps its ribbon around your wrists and cinches it tight. The letters bite in and leave a sentence on your arm you can't read." }
+      - id: "duzelti"
+        ad: { tr: "Yazım Düzeltmesi", en: "Spellcheck" }
+        stat: "wil"
+        taban: 13
+        kat: 0.9
+        etiketler: ["zihin"]
+        durum: { etki: "korku", sans: 0.35, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} adını yüksek sesle okuyor ve bir harfini yanlış buluyor. O harfi silmeye çalıştığında bütün vücudun çığlık atıyor.", en: "{dusman} reads your name out loud and decides one letter is a typo. When it tries to delete that letter, your whole body screams." }
+      - id: "kat_carpmasi"
+        ad: { tr: "Kat Çarpması", en: "Floor Slam" }
+        stat: "str"
+        taban: 14
+        kat: 0.8
+        etiketler: ["fiziksel", "alan"]
+        bekleme: 0
+        metin: { tr: "{dusman} merdiveni kendi gövdesiyle sarsıyor; basamaklar bir an yukarıdaki katla aşağıdakinin arasında kayboluyor ve sen boşluğa düşüyorsun.", en: "{dusman} shakes the whole stairwell with its body. For a second the steps vanish between the floor above and the floor below, and you drop through nothing." }
+    xp: 3200
+    kredi: 200
+    ganimet: { kaynak_parcasi: 0.5, canavar_cekirdegi: 1.0 }
+    etiketler: ["sistem", "boss"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Şerit hızlanıyor; yukarıdaki katlardan yeni satırlar akıp ona ekleniyor. Okuyabildiğin tek kelime, her yerde tekrar eden: [ölç].", en: "The ribbon speeds up as new lines pour down from the floors above and join it. The only word you can make out repeats everywhere: [measure]." }
+        guclenme: { int: 4, wil: 3 }
+        saldiri:
+          id: "olcum"
+          ad: { tr: "Ölçüm", en: "Measurement" }
+          stat: "int"
+          taban: 16
+          kat: 0.9
+          etiketler: ["isik", "alan"]
+          durum: { etki: "kor", sans: 0.4, sure: 2 }
+          bekleme: 2
+          metin: { tr: "{dusman} bütün harflerini aynı anda yakıyor ve seni baştan aşağı ölçüyor. Işık o kadar parlak ki kendi gölgen bir an sayıya dönüşüyor.", en: "{dusman} lights every letter at once and measures you head to toe. The light's so bright your own shadow turns into a number for a second." }
+      - esik: 40
+        metin: { tr: "Bekçi merdiveni kendi etrafına sarıyor; basamaklar satır oluyor, satırlar basamak. Artık nerede durduğunu bile o yazıyor.", en: "The warden winds the whole stairwell around itself until the steps turn into lines and the lines into steps. Now it's writing where you're standing, too." }
+        guclenme: { end: 4, wis: 4 }
+        saldiri:
+          id: "basamak_silme"
+          ad: { tr: "Basamak Silme", en: "Step Deletion" }
+          stat: "wis"
+          taban: 15
+          kat: 0.9
+          etiketler: ["zihin", "alan"]
+          durum: { etki: "sersemleme", sans: 0.4, sure: 1 }
+          bekleme: 2
+          metin: { tr: "{dusman} ayağının altındaki basamağı siliyor. Bir sonrakini de. Düşmemek için havada bir satıra tutunuyorsun.", en: "{dusman} deletes the step under your foot. Then the next one. You grab a floating line just to keep from falling." }
+      - esik: 15
+        metin: { tr: "Şerit yırtılıyor ve yırtığın içinden, bir an, senin pencerendeki o bozuk harflerin aynısı görünüyor. Bekçi geri çekiliyor; ilk kez korkmuş gibi.", en: "The ribbon tears, and for a second the same broken letters from your window show through the rip. The warden pulls back, like it's afraid for the first time." }
+        guclenme: { agi: 5, str: 4 }
+        saldiri:
+          id: "son_satir"
+          ad: { tr: "Son Satır", en: "Last Line" }
+          stat: "str"
+          taban: 18
+          kat: 0.9
+          etiketler: ["fiziksel", "yakin"]
+          durum: { etki: "kanama", sans: 0.45, sure: 3 }
+          bekleme: 3
+          metin: { tr: "{dusman} kalan bütün metnini tek bir sivri satıra topluyor ve göğsüne saplıyor. Satırın sonunda nokta yok.", en: "{dusman} gathers everything it has left into one sharp line and drives it into your chest. There's no period at the end." }
+
+  gri_sozcu:
+    ad: { tr: "Gri Sözcü", en: "The Gray Speaker" }
+    aciklama: { tr: "Kadimler'in insanlarla konuşmak için kullandığı aracı. Gri bir pelerin, yüzün olması gereken yerde sürekli odaktan kayan bir bulanıklık. Kibar; korkunç derecede kibar.", en: "The go-between the Ancients use when they need to talk to humans. A gray cloak, and where a face should be, a blur that keeps sliding out of focus. Polite. Horribly polite." }
+    kanca: { tr: "Gri pelerin bir adım öne çıkıyor ve bulanık yüzünden, senin sesinle konuşan bir ses geliyor: \"Bu konuşmayı daha medeni bir yerde bitirebilirdik.\"", en: "The gray cloak steps forward, and out of the blur where its face should be comes a voice that sounds exactly like yours: \"We could have finished this conversation somewhere more civilized.\"" }
+    seviye: 38
+    kademe: "E"
+    can: 1300
+    statlar:
+      str: 24
+      agi: 30
+      end: 26
+      int: 40
+      wis: 36
+      per: 32
+      wil: 38
+      cha: 34
+    davranis: "temkinli"
+    zeki: true
+    zaaf: "ses"
+    zaaf_metin: { tr: "Sesi ödünç alıyor; kendi sesi yok. Gürültü, bağırış, her türlü sağırlık onun sözlerini dağıtır ve sözleri dağılan sözcü savunmasızdır.", en: "It borrows voices. It doesn't have one of its own. Noise, shouting, anything deafening scatters its words, and a speaker without words is wide open." }
+    saldirilar:
+      - id: "mahkeme_dili"
+        ad: { tr: "Mahkeme Dili", en: "Court Tongue" }
+        stat: "cha"
+        taban: 14
+        kat: 0.9
+        etiketler: ["ses", "zihin"]
+        durum: { etki: "korku", sans: 0.4, sure: 2 }
+        bekleme: 1
+        metin: { tr: "{dusman} sana, senin annenin sesiyle, çok kibar bir şekilde dizlerinin üstüne çökmeni öneriyor. Dizlerin neredeyse dinliyor.", en: "{dusman} very politely suggests, in your mother's voice, that you get down on your knees. Your knees almost listen." }
+      - id: "gri_el"
+        ad: { tr: "Gri El", en: "Gray Hand" }
+        stat: "int"
+        taban: 13
+        kat: 0.9
+        etiketler: ["karanlik", "zihin"]
+        durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
+        bekleme: 0
+        metin: { tr: "{dusman} pelerininin altından bir el uzatıyor; dokunduğu yerde renk soluyor, sesler uzaklaşıyor.", en: "{dusman} reaches a hand out from under the cloak. Wherever it touches, color drains away and sound goes far off." }
+      - id: "sozlesme"
+        ad: { tr: "Bağlayıcı Madde", en: "Binding Clause" }
+        stat: "wil"
+        taban: 15
+        kat: 0.8
+        etiketler: ["zihin"]
+        bekleme: 3
+        metin: { tr: "{dusman} havada bir cümle kuruyor ve sonuna senin adını ekliyor. Cümle kapandığında bir an hareket edemiyorsun; imzalamışsın gibi.", en: "{dusman} builds a sentence in the air and signs your name at the end of it. When the sentence closes, you can't move for a moment, like you signed it yourself." }
+    xp: 2800
+    kredi: 0
+    ganimet: { canavar_cekirdegi: 1.0 }
+    etiketler: ["kadim", "elit"]
+    boss: false
+
+  standart_kopya:
+    ad: { tr: "Standart Kopya", en: "The Standard Copy" }
+    aciklama: { tr: "Sistem'in senin test kayıtlarından kurduğu sürüm: bozuk satır olmasaydı olacağın kişi. Yüzün, sesin, duruşun; ama gözlerinde hiçbir şey yok.", en: "The build the System put together from your test logs: who you'd be without the glitched line. Your face, your voice, your stance. Nothing behind the eyes." }
+    kanca: { tr: "Beyazlığın içinden biri yürüyor. Seni görünce duruyor ve tam senin yapacağın gibi başını yana eğiyor.", en: "Somebody walks out of the white. When they see you, they stop and tilt their head exactly the way you would." }
+    seviye: 40
+    kademe: "E"
+    can: 1500
+    statlar:
+      str: 32
+      agi: 32
+      end: 32
+      int: 32
+      wis: 32
+      per: 32
+      wil: 32
+      cha: 32
+    davranis: "agresif"
+    zeki: true
+    zaaf: "zihin"
+    zaaf_metin: { tr: "Senin bildiğin her şeyi biliyor; bilmediği tek şey bozuk satır. Ondan gelen, kuralsız bir hamle onu tamamen hazırlıksız yakalar.", en: "It knows everything you know except one thing: the glitched line. Anything that comes from there catches it flat-footed." }
+    saldirilar:
+      - id: "senin_hamlen"
+        ad: { tr: "Senin Hamlen", en: "Your Move" }
+        stat: "str"
+        taban: 16
+        kat: 0.9
+        etiketler: ["fiziksel", "yakin"]
+        bekleme: 0
+        metin: { tr: "{dusman} senin en sevdiğin hamleyi yapıyor; senin kadar iyi, belki biraz daha temiz.", en: "{dusman} hits you with your own favorite move. Just as good as you do it. Maybe a little cleaner." }
+      - id: "ortalama"
+        ad: { tr: "Ortalamaya Çek", en: "Regression to the Mean" }
+        stat: "int"
+        taban: 15
+        kat: 0.9
+        etiketler: ["zihin", "glitch"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 2
+        metin: { tr: "{dusman} sana uzanıyor ve bir an olağanüstü olan her şey senden çekiliyor; sıradan, yorgun, korkmuş birisin.", en: "{dusman} reaches for you, and for a moment everything extraordinary drains out of you. You're just somebody. Tired. Scared." }
+      - id: "ayna_soz"
+        ad: { tr: "Aynadan Söz", en: "Mirror Talk" }
+        stat: "cha"
+        taban: 12
+        kat: 0.8
+        etiketler: ["ses", "zihin"]
+        durum: { etki: "korku", sans: 0.35, sure: 2 }
+        bekleme: 1
+        metin: { tr: "{dusman} senin sesinle, senin hiç söylemediğin ama hep düşündüğün bir şeyi söylüyor.", en: "{dusman} says something in your voice. Something you never said out loud but always thought." }
+    xp: 3000
+    kredi: 0
+    ganimet: { kaynak_parcasi: 0.3 }
+    etiketler: ["sistem", "elit"]
+    boss: false
+
+  kok_bekcisi:
+    ad: { tr: "Kök Bekçisi", en: "The Root Warden" }
+    aciklama: { tr: "Kaynak Katmanı'nın en derin kapısının önünde duran şey. Bir katedral kadar büyük, bir sayfa kadar ince; yüzeyinde Sistem'in bütün kuralları dönüyor. Kural olmayan hiçbir şeyin geçmesine izin vermez.", en: "The thing standing in front of the deepest door in the Source Layer. Big as a cathedral, thin as a page, every rule the System has ever written turning across its surface. It lets nothing through that isn't a rule." }
+    kanca: { tr: "Beyazlık bir sayfa gibi katlanıyor ve katlanan yerden, üstünde binlerce kural dönen dev, ince bir şey doğruluyor: [Yetki: yok. Sebep: sen.]", en: "The white folds like a page, and from the crease rises something huge and thin with a thousand rules turning on its surface: [Permission: none. Reason: you.]" }
+    seviye: 40
+    kademe: "E"
+    can: 2600
+    statlar:
+      str: 34
+      agi: 28
+      end: 40
+      int: 44
+      wis: 40
+      per: 34
+      wil: 42
+      cha: 10
+    davranis: "agresif"
+    zeki: true
+    zaaf: "zihin"
+    zaaf_metin: { tr: "Her kuralı biliyor ve her kurala uyuyor. Hiçbir kurala uymayan bir şey, mesela kafandaki ses, onun için görünmezdir; görünmeyen bir el bekçinin içine uzanabilir.", en: "It knows every rule and follows every rule. Something that follows none of them, like the voice in your head, is invisible to it. An invisible hand can reach right inside." }
+    saldirilar:
+      - id: "kural_duvari"
+        ad: { tr: "Kural Duvarı", en: "Wall of Rules" }
+        stat: "end"
+        taban: 18
+        kat: 0.9
+        etiketler: ["fiziksel", "alan"]
+        durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
+        bekleme: 1
+        metin: { tr: "{dusman} yüzeyindeki kurallardan biri büyüyüp bir duvara dönüşüyor ve sana çarpıyor. Duvarda okuduğun tek cümle: [Buradan geçilmez.]", en: "{dusman} grows one of the rules on its surface into a wall and slams it into you. The only sentence you can read on it: [No passage.]" }
+      - id: "yetki_iptali"
+        ad: { tr: "Yetki İptali", en: "Permission Revoked" }
+        stat: "int"
+        taban: 17
+        kat: 1.0
+        etiketler: ["zihin", "glitch"]
+        durum: { etki: "korku", sans: 0.4, sure: 2 }
+        bekleme: 2
+        metin: { tr: "{dusman} senin bir yeteneğinin üstüne kırmızı bir çizgi çekiyor. Bir an onu nasıl kullandığını hatırlamıyorsun.", en: "{dusman} draws a red line through one of your skills. For a second you can't remember how it works." }
+      - id: "derleme"
+        ad: { tr: "Derleme", en: "Compile" }
+        stat: "wil"
+        taban: 16
+        kat: 0.9
+        etiketler: ["isik", "alan"]
+        durum: { etki: "yanma", sans: 0.4, sure: 2 }
+        bekleme: 0
+        metin: { tr: "{dusman} bütün kurallarını aynı anda çalıştırıyor; beyazlık ısınıyor, sonra yanıyor.", en: "{dusman} runs every rule it has at once. The white heats up, then catches fire." }
+    xp: 6000
+    kredi: 0
+    ganimet: { kaynak_parcasi: 1.0, duzeltme_cekirdegi: 1.0 }
+    etiketler: ["sistem", "boss"]
+    boss: true
+    fazlar:
+      - esik: 70
+        metin: { tr: "Bekçinin yüzeyindeki kurallar yer değiştiriyor ve aralarından biri öne çıkıyor; senin için yazılmış bir kural: [Anomali görüldüğü yerde düzeltilir.]", en: "The rules on the warden's surface shuffle, and one of them comes forward. One written just for you: [Anomaly is corrected on sight.]" }
+        guclenme: { int: 5, wil: 4 }
+        saldiri:
+          id: "anomali_kurali"
+          ad: { tr: "Anomali Kuralı", en: "The Anomaly Clause" }
+          stat: "int"
+          taban: 20
+          kat: 1.0
+          etiketler: ["zihin", "glitch"]
+          durum: { etki: "sersemleme", sans: 0.45, sure: 1 }
+          bekleme: 2
+          metin: { tr: "{dusman} senin için yazılan kuralı üstüne indiriyor. Durum pencerende bütün sayılar bir an sıfıra dönüyor; sonra, isteksizce, geri geliyor.", en: "{dusman} brings the rule written for you crashing down. Every number in your Status window snaps to zero for a beat, then crawls back, reluctant." }
+      - esik: 40
+        metin: { tr: "Bekçi kendini yeniden derliyor. Yüzeyindeki kurallar sıklaşıyor, aralarındaki boşluklar kapanıyor; nefes alacak satır kalmıyor.", en: "The warden recompiles itself. The rules on its surface pack in tighter and the gaps between them close up until there's no line left to breathe in." }
+        guclenme: { end: 6, wis: 4 }
+        saldiri:
+          id: "sikistirma"
+          ad: { tr: "Sıkıştırma", en: "Compression" }
+          stat: "wis"
+          taban: 19
+          kat: 0.9
+          etiketler: ["zihin", "alan"]
+          durum: { etki: "korku", sans: 0.4, sure: 2 }
+          bekleme: 2
+          metin: { tr: "{dusman} etrafındaki bütün boşluğu sıkıştırıyor. Kaburgaların birbirine yaklaşıyor; düşüncelerin de.", en: "{dusman} compresses all the empty space around you. Your ribs squeeze together. So do your thoughts." }
+      - esik: 15
+        metin: { tr: "Bekçi bir sayfa gibi yırtılmaya başlıyor. Yırtığın kenarında, kimsenin yazmadığı boş bir satır parlıyor; bir kural olmayan tek yer.", en: "The warden starts tearing like a page. Along the edge of the rip glows one blank line nobody wrote. The only place in it that isn't a rule." }
+        guclenme: { str: 6, end: 5 }
+        saldiri:
+          id: "son_kural"
+          ad: { tr: "Son Kural", en: "Final Rule" }
+          stat: "str"
+          taban: 22
+          kat: 1.0
+          etiketler: ["fiziksel", "alan"]
+          durum: { etki: "kanama", sans: 0.45, sure: 3 }
+          bekleme: 3
+          metin: { tr: "{dusman} bütün ağırlığıyla katlanıp üstüne kapanıyor; bir kitabın kapağı gibi, seni iki sayfanın arasında ezmeye çalışarak.", en: "{dusman} folds down on you with all its weight, like a book slamming shut, trying to press you flat between two pages." }

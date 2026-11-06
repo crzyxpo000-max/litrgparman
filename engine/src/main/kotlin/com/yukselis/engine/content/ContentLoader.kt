@@ -35,6 +35,7 @@ object ContentLoader {
         ContentParser.PROFESSIONS, ContentParser.ESSENCES, ContentParser.DAILY, ContentParser.ENEMIES, ContentParser.AWAKENINGS,
         ContentParser.REGIONS, ContentParser.FACTIONS, ContentParser.FEATS, ContentParser.QUESTS, ContentParser.FLAGS,
         ContentParser.TRAITS, ContentParser.KNOWLEDGE, ContentParser.ARMY, ContentParser.RANKING,
+        ContentParser.ENDINGS, ContentParser.TOWER,
     )
 
     /**

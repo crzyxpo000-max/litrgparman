@@ -37,60 +37,60 @@ bolgeler:
     tehlike: 30
     kontrol: "siginak"
     ortam: "su"
-    dusmanlar: ["kablo_yilani", "yosun_sirtli", "fisildayan_karga"]
+    dusmanlar: ["pas_vatozu", "halat_bogan", "demir_gagali_marti"]
     komsu: ["kordon", "sanayi"]
     kapi_sansi: 0.15
-    kapi_dusmanlari: ["yarik_sulugu", "run_kabuklu"]
+    kapi_dusmanlari: ["dip_balikcisi", "halat_bogan", "pas_vatozu"]
     toplama: ["kaya_tuzu", "hurda", "cam_sise"]
   kordon:
     perde: 2
     tehlike: 45
     kontrol: "canavar"
     ortam: "su"
-    dusmanlar: ["fisildayan_karga", "ciglik_yarasasi", "yosun_sirtli"]
+    dusmanlar: ["kopuk_ruhu", "fener_guvesi", "kemik_fayton"]
     komsu: ["kiyikent_liman", "eski_sehir", "kule_dibi"]
     kapi_sansi: 0.25
-    kapi_dusmanlari: ["yarik_sulugu", "kepenk_cenesi"]
+    kapi_dusmanlari: ["dalgakiran", "kemik_fayton", "kopuk_ruhu"]
     toplama: ["kaya_tuzu", "mavi_yosun"]
   eski_sehir:
     perde: 2
     tehlike: 40
     kontrol: "canavar"
     ortam: "dar_gecit"
-    dusmanlar: ["cop_avcisi", "vitrin_mankeni", "soluk_musteri"]
+    dusmanlar: ["sokak_golgesi", "karaborsa_tetikcisi", "kaldirim_solucani"]
     komsu: ["kordon", "tepe", "sanayi", "kule_dibi"]
     kapi_sansi: 0.2
-    kapi_dusmanlari: ["soluk_musteri", "hurdacik"]
+    kapi_dusmanlari: ["bedesten_agasi", "sokak_golgesi", "kaldirim_solucani"]
     toplama: ["kul", "cam_sise", "kirmizi_ot"]
   sanayi:
     perde: 2
     tehlike: 50
     kontrol: "lonca"
     ortam: "yanici"
-    dusmanlar: ["hurdacik", "kablo_yilani", "run_kabuklu"]
+    dusmanlar: ["curuf_iti", "catal_cene", "boya_buhari"]
     komsu: ["kiyikent_liman", "eski_sehir", "kule_dibi"]
     kapi_sansi: 0.25
-    kapi_dusmanlari: ["kepenk_cenesi", "run_kabuklu"]
+    kapi_dusmanlari: ["yuksek_firin", "catal_cene", "curuf_iti"]
     toplama: ["hurda", "canli_bakir"]
   tepe:
     perde: 2
     tehlike: 35
     kontrol: "yukselenler"
     ortam: "karanlik"
-    dusmanlar: ["sis_tazisi", "diken_domuzu", "sis_dokuyucu"]
+    dusmanlar: ["recine_ayisi", "gozetleme_dronu", "yukselen_mumin"]
     komsu: ["eski_sehir"]
     kapi_sansi: 0.2
-    kapi_dusmanlari: ["sis_dokuyucu", "kemik_tacli_geyik"]
+    kapi_dusmanlari: ["yasli_cam", "recine_ayisi", "gozetleme_dronu"]
     toplama: ["yabani_mantar", "goz_cicegi", "aci_kok"]
   kule_dibi:
     perde: 2
     tehlike: 60
     kontrol: "canavar"
     ortam: "tavan"
-    dusmanlar: ["run_kabuklu", "soluk_musteri", "kor_kertenkelesi"]
+    dusmanlar: ["kule_kirintisi", "kacak_kat_bekcisi", "kule_akbabasi"]
     komsu: ["kordon", "eski_sehir", "sanayi", "batik_takimada", "pirinc_kervan", "yedi_taht", "sistem_cekirdegi"]
     kapi_sansi: 0.3
-    kapi_dusmanlari: ["kepenk_cenesi", "kemik_tacli_geyik"]
+    kapi_dusmanlari: ["dusmus_tirmanici", "kacak_kat_bekcisi", "kule_kirintisi"]
     toplama: ["canli_bakir", "goz_cicegi"]
   # ---- Perde 3: çok-evren dünyaları (Kule'nin geçidinden; bayrak cok_evren_acik) ----
   batik_takimada:
@@ -99,7 +99,7 @@ bolgeler:
     kontrol: "canavar"
     ortam: "su"
     kosul: { bayrak: "cok_evren_acik" }
-    dusmanlar: ["yarik_sulugu", "yosun_sirtli"]
+    dusmanlar: ["bogulmus_canci", "hasat_kirpintisi", "mercan_cobani"]
     komsu: ["kule_dibi", "pirinc_kervan"]
     kapi_sansi: 0.0
     kapi_dusmanlari: []
@@ -110,7 +110,7 @@ bolgeler:
     kontrol: "kadimler"
     ortam: "dar_gecit"
     kosul: { bayrak: "cok_evren_acik" }
-    dusmanlar: ["hurdacik", "vitrin_mankeni"]
+    dusmanlar: ["gumruk_muhafizi", "kazan_bocegi", "degerleyici"]
     komsu: ["kule_dibi", "batik_takimada", "yedi_taht"]
     kapi_sansi: 0.0
     kapi_dusmanlari: []
@@ -121,7 +121,7 @@ bolgeler:
     kontrol: "kadimler"
     ortam: "karanlik"
     kosul: { bayrak: "yedi_taht_davet" }
-    dusmanlar: ["soluk_musteri", "run_kabuklu"]
+    dusmanlar: ["huzur_muhafizi", "hasat_kandili", "bos_taht_golgesi"]
     komsu: ["kule_dibi", "pirinc_kervan"]
     kapi_sansi: 0.0
     kapi_dusmanlari: []
@@ -133,7 +133,7 @@ bolgeler:
     kontrol: "canavar"
     ortam: "karanlik"
     kosul: { bayrak: "cekirdek_yolu_acik" }
-    dusmanlar: ["run_kabuklu"]
+    dusmanlar: ["ak_surec", "karantina"]
     komsu: ["kule_dibi"]
     kapi_sansi: 0.0
     kapi_dusmanlari: []

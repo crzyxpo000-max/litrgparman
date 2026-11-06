@@ -1,0 +1,47 @@
+# Parti L2 — Kule hikaye katları ve kademe kırılmaları (events/72_kule.yaml, awakenings/72_kademeler.yaml). Bayrak → açıklama.
+# Kat ilerlemesi bayrak değil, motor değişkeni `kule_kat`; yenilgi/kaçış sayacı `kuleNN_deneme` (açılışa "daha önce geldin" satırı).
+bayraklar:
+  # ---- Kat 10 · Vapur
+  kule_kayit_durduruldu: "Kat 10: İskele kaydı bir saniyeliğine durduruldu; gri yolculara bir an verildi."
+  kule_kayit_okundu: "Kat 10: Aktarım Bekçisi'nin pencerelerinden Kule'nin dizini okundu (Kat 11+ önceki kayıtlar)."
+  # ---- Kat 20 · Fener
+  kule_derin_birakildi: "Kat 20: Dipteki D kademesi Derin Feneri uyandırılmadan bırakıldı."
+  kule_derin_yenildi: "Kat 20: Dipteki D kademesi Derin Feneri yenildi (isteğe bağlı Kademe Kırma)."
+  kule_alici_yedi: "Kat 20: Fener Gözü'nün okumasının alıcısı çözüldü: Yedi Taht."
+  # ---- Kat 30 · Ayna salonu
+  kule_cam_erken_okundu: "Kat 30: On yedinci aynadaki el yazısı yansımayla dövüşmeden önce bulundu."
+  kule_cam_mektup_alindi: "Kat 30: Oyuncunun kendi el yazısıyla yazılmış cam mektup kırılıp alındı (kule_cam_mektup olayında okunur)."
+  kule_yuzuk_soruldu: "Kat 30: Yansımaya yüzüğünün içindeki yazı soruldu (\"bir dahaki sefere\")."
+  # ---- Kat 40 · Durmuş saat
+  kule_saat_dinlendi: "Kat 40: Saat dinlendi; 365 vuruş ve bir boşluk (Entegrasyon) duyuldu."
+  kule_kadin_konustu: "Kat 40: Donmuş C kademesi kadın bir saniyeliğine çözüldü ve \"Kaçıncı?\" diye sordu."
+  kule_kadina_soz: "Kat 40: Donmuş kadına \"Ben bitireceğim\" diye söz verildi."
+  kule_rozet_alindi: "Kat 40: Donmuş kadının \"bu sefer\" rozeti alındı."
+  kule_kum_saati: "Kat 40: Saat Ustası'nın kum saati çevrildi; son tanecik Gün 0."
+  # ---- Kat 50 · Eşik
+  kule_esik_gomuldu: "Kat 50: Eşik Muhafızı gömüldü; yamaçta bir mezar taşı var."
+  kule_esik_nobeti: "Kat 50: Oyuncu geçidin nöbetini insanlık adına devraldı."
+  # ---- Kat 60 · Yanık arşiv
+  kule_dosyalar_kurtarildi: "Kat 60: Yanan arşivden dosyalar kurtarıldı."
+  kule_son_sayfa_yirtildi: "Kat 60: Oyuncunun kendi dosyasının son sayfası yırtılıp yakıldı."
+  kule_son_sayfa_saklandi: "Kat 60: Oyuncunun kendi dosyasının son sayfası (\"Taşıyıcı devredildi\") saklandı."
+  kule_tasiyici_izi: "Kat 60: \"Taşıyıcı hariç\" satırının izi doksanıncı kata kadar sürüldü."
+  # ---- Kat 70 · Tohumluk
+  kule_tohumluk_uyandi: "Kat 70: Bir önceki döngüden bir Kıyıkentli kozasından uyandırılıp aşağı gönderildi."
+  kule_tohumluk_adlandi: "Kat 70: Kıyıkent kozalarına ad yazıldı."
+  kule_damar_izlendi: "Kat 70: Kozalardaki Öz damarlarının zirveyi beslediği görüldü."
+  # ---- Kat 80 · Ters gök
+  kule_kabul_damgasi: "Kat 80: Gök Gözcüsü'nün erken kabul damgası alındı (Kadimler'e yakınlık)."
+  kule_ucuncu_yol: "Kat 80: Oyuncu ne kabulü ne tohumluğu seçti: \"üçüncüsü benim\"."
+  kule_thessar_sorusu: "Kat 80: Oyuncu, Thessar'a ırkının bir zamanlar bir Katman olduğunu soracağına yemin etti."
+  # ---- Kat 90 · Taslak
+  kule_yanki_secti: "Kat 90: Yankı'ya önceki taşıyıcısıyla kalmak isteyip istemediği soruldu; Yankı oyuncuyu seçti."
+  kule_taslaga_cizildi: "Kat 90: Önceki taşıyıcının adı Kule'nin taslağına eklendi."
+  # ---- Kat 100 · Zirve
+  kule_zirve_hayir: "Kat 100: İlk Pencere düğmesiz bir hayırla, elle kapatıldı."
+  kule_dongu_sayisi: "Kat 100: Döngü sayacının kapalı rakamı okundu (sayı söylenmez)."
+  # ---- Takip olayları
+  kule_tirmanici_egitildi: "kule_dibi_tirmanicilar: Kask takan genç tırmanıcı eğitildi ya da doğru haritayla korundu."
+  kule_cama_cevap: "kule_cam_mektup: Cam mektuba bir cevap yazıldı (\"sordum. bu sefer.\")."
+  # ---- Kademe kırılmaları (awakenings/72_kademeler.yaml)
+  kule_s_kirilmasi: "S kademesi kırılması yaşandı: insanlığın tavanı kırıldı (Kat 100'de sezgi açar)."

@@ -1,0 +1,50 @@
+# Parti L2 — Kule zirveleri ("İlk" unvanları; rakipler önce kapabilir) ve kademe kırılması unvanları.
+kule_ilk_onuncu_kat:
+  ad: { tr: "Onuncu Katın İlki", en: "First Past Ten" }
+  aciklama: { tr: "Kule'nin onuncu katını geçen ilk insan sensin. Kule Dibi bütün gün başka bir şey konuşmadı.", en: "You're the first human past the Spire's tenth floor. Spire Plaza didn't talk about anything else all day." }
+  nadirlik: "epik"
+  bonus: { agi: 2, end: 2, per: 2 }
+  ilk: true
+kule_ilk_esik:
+  ad: { tr: "Eşiğin İlk Tanığı", en: "First at the Threshold" }
+  aciklama: { tr: "Kule'nin ellinci katındaki geçide ilk dokunan insan sensin. Öbür taraftan biri avucunun sıcaklığını ölçtü.", en: "You're the first human to touch the passage on the Spire's fiftieth floor. Someone on the other side measured the warmth of your hand." }
+  nadirlik: "efsanevi"
+  bonus: { str: 4, end: 4, wil: 4 }
+  ilk: true
+kule_ilk_zirve:
+  ad: { tr: "Zirvedeki İlk", en: "First to the Summit" }
+  aciklama: { tr: "Kule'nin yüzüncü katına ilk çıkan insan sensin. Ya da ilk olduğunu söyleyen tek kayıt bu.", en: "You're the first human to reach the Spire's hundredth floor. Or this is the only record that says you were first." }
+  nadirlik: "mitik"
+  bonus: { str: 8, agi: 8, end: 8, int: 8, wis: 8, per: 8, wil: 8, cha: 8 }
+  ilk: true
+# ---- Kademe kırılmaları
+catlak_tavan:
+  ad: { tr: "Çatlak Tavan", en: "Cracked Ceiling" }
+  aciklama: { tr: "E kademesine çıktığın ilk gerçek dövüşü canın tükenmek üzereyken kazandın. Kademeler bir duvar değil; bir çatlak.", en: "You won your first real fight at Grade E with almost nothing left. Grades aren't walls. They're cracks." }
+  nadirlik: "nadir"
+  bonus: { end: 2, wil: 2 }
+yuk_tasiyan:
+  ad: { tr: "Yük Taşıyan", en: "Load-Bearer" }
+  aciklama: { tr: "D kademesinde, başkalarını korurken düşmeden kazandın. Omzundaki ağırlık artık bir kas.", en: "At Grade D you won while shielding others and never went down. The weight on your shoulders is muscle now." }
+  nadirlik: "epik"
+  bonus: { end: 3, wil: 3, cha: 1 }
+dikis_yeri:
+  ad: { tr: "Dikiş Yeri", en: "The Seam" }
+  aciklama: { tr: "C kademesinde bir bossu, faz geçişlerinin dikiş yerinden, canın tükenirken söktün.", en: "At Grade C you tore a boss apart at the seams between its phases while you were running on empty." }
+  nadirlik: "epik"
+  bonus: { agi: 3, per: 3, int: 2 }
+yetkisiz:
+  ad: { tr: "Yetkisiz", en: "Unauthorized" }
+  aciklama: { tr: "B kademesinde bir üst kademeyi yere serdin. Sistem bu işlem için yetkin olmadığını hâlâ iddia ediyor.", en: "At Grade B you put something a Grade above you on the ground. The System still insists you weren't authorized to do that." }
+  nadirlik: "efsanevi"
+  bonus: { str: 4, agi: 4, int: 4 }
+yarim_nefes:
+  ad: { tr: "Yarım Nefes", en: "Half a Breath" }
+  aciklama: { tr: "A kademesinde bir bossu, son nefesinin yarısıyla devirdin. Öbür yarısını hâlâ bekletiyorsun.", en: "At Grade A you brought a boss down on half of your last breath. You're still holding the other half." }
+  nadirlik: "efsanevi"
+  bonus: { end: 5, wil: 5, wis: 4 }
+insanligin_tavani:
+  ad: { tr: "İnsanlığın Tavanı", en: "Humanity's Ceiling" }
+  aciklama: { tr: "S kademesinde, bir insanın ulaşabileceği en yüksek yerde, ölmek üzereyken kazandın. Artık tavan sensin; üstünde ne olduğunu görebiliyorsun.", en: "At Grade S, as high as a human can go, you won while you were dying. You're the ceiling now, and you can see what's above it." }
+  nadirlik: "mitik"
+  bonus: { str: 6, agi: 6, end: 6, int: 6, wis: 6, per: 6, wil: 6, cha: 6 }

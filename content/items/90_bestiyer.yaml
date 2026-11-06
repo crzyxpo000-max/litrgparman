@@ -1,0 +1,277 @@
+# Parti L1 — Bestiyer ganimetleri (Perde 2–4 bölge düşmanları, çok-evren, Sistem Çekirdeği, Kule bantları).
+esyalar:
+  # ---- Kıyıkent · Liman
+  vatoz_dikeni:
+    ad: { tr: "Vatoz Dikeni", en: "Rust Ray Barb" }
+    aciklama: { tr: "Pas vatozunun kuyruk dikeni. Ucunda hâlâ hafif bir akım titriyor; zıpkın ucu yapanlar buna bayılıyor.", en: "A rust ray's tail barb. A faint current still hums at the tip. Harpoon makers love these things." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 14
+  katranli_halat:
+    ad: { tr: "Katranlı Halat", en: "Tarred Hawser" }
+    aciklama: { tr: "Halat boğanın gövdesinden kesilmiş bir parça. Kendi kendine düğüm atmaya çalışıyor; bağladığın şeyi bir daha bırakmıyor.", en: "A length cut from a hawser strangler. It keeps trying to tie itself into knots, and whatever you tie with it stays tied." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 12
+  demir_gaga:
+    ad: { tr: "Demir Gaga", en: "Ironbill" }
+    aciklama: { tr: "Bir martının demirleşmiş gagası. Ok ucu olarak harika; parmağına dikkat et, hâlâ kapmaya meraklı.", en: "A gull's beak gone to iron. Makes a great arrowhead. Watch your fingers. It still likes to snap." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 10
+  fener_yemi:
+    ad: { tr: "Dip Feneri", en: "Angler's Lure" }
+    aciklama: { tr: "Dip balıkçısının alnından sökülmüş yem. Karanlıkta sarı bir pencere gibi yanıyor ve bakan herkes içinde tanıdık birini görüyor. Uzun süre bakma.", en: "The lure cut from a bottom angler's forehead. In the dark it glows like a yellow window, and everyone who looks into it sees someone they know. Don't look too long." }
+    tur: "malzeme"
+    nadirlik: "epik"
+    deger: 220
+  # ---- Kıyıkent · Kordon
+  kopuk_tuzu:
+    ad: { tr: "Köpük Tuzu", en: "Spindrift Salt" }
+    aciklama: { tr: "Dağılan bir köpük ruhundan geriye kalan ince, parlak tuz. Avucunda tutunca uzaktan bir dalga sesi duyuyorsun.", en: "Fine, glittering salt left behind when a spindrift falls apart. Hold it in your palm and you can hear surf somewhere far off." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 12
+  guve_tozu:
+    ad: { tr: "Güve Tozu", en: "Moth Dust" }
+    aciklama: { tr: "Fener güvelerinin kanatlarından dökülen gümüşi toz. Gözü kör eder; simyacılar onu ışık iksirlerinde kullanır.", en: "Silvery dust shed from lamplight moth wings. It'll blind you. Alchemists use it in light potions anyway." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 9
+  fayton_cingiragi:
+    ad: { tr: "Fayton Çıngırağı", en: "Carriage Bell" }
+    aciklama: { tr: "Kemik faytonun koşumundan kopmuş küçük pirinç çıngırak. Rüzgarda hiç çalmıyor; yalnızca biri ölmek üzereyken çalıyor.", en: "A little brass bell snapped off the bone carriage's harness. It never rings in the wind. It only rings when someone's about to die." }
+    tur: "malzeme"
+    nadirlik: "nadir"
+    deger: 35
+  dalgakiran_tasi:
+    ad: { tr: "Dalgakıran Çekirdeği", en: "Breakwater Heart" }
+    aciklama: { tr: "Dalgakıran'ın en içteki bloğundan kopmuş, tuzla kristalleşmiş bir beton parçası. Ağır, soğuk ve her zaman denize dönük duruyor.", en: "A chunk of concrete from the Breakwater's innermost block, crystallized with salt. Heavy, cold, and it always ends up facing the sea." }
+    tur: "malzeme"
+    nadirlik: "epik"
+    deger: 240
+  # ---- Kıyıkent · Eski Şehir
+  golge_ipligi:
+    ad: { tr: "Gölge İpliği", en: "Shadow Thread" }
+    aciklama: { tr: "Bir çıkmaz gölgesinden çekilmiş ince, kara bir iplik. Işığa tutunca kayboluyor, gölgeye girince yeniden beliriyor.", en: "A thin black thread pulled out of an alley shade. It vanishes when you hold it to the light and comes back when you step into shadow." }
+    tur: "malzeme"
+    nadirlik: "nadir"
+    deger: 30
+  karaborsa_fisi:
+    ad: { tr: "Karaborsa Fişi", en: "Black Market Chit" }
+    aciklama: { tr: "Eski Şehir karaborsasının el yazısıyla kesilmiş borç senedi. Kimin kime ne kadar borçlu olduğu yazıyor; doğru kişiye satarsan iyi para eder.", en: "A handwritten IOU from Old Town's black market, listing who owes who and how much. Sell it to the right person and it's worth real money." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 25
+  kaldirim_pulu:
+    ad: { tr: "Kaldırım Pulu", en: "Cobble Scale" }
+    aciklama: { tr: "Kaldırım solucanının sırtından sökülmüş bir taş. Alt yüzü hâlâ etli ve sıcak; zırh ustaları buna kalkan yüzü diye para veriyor.", en: "A cobblestone pried off a cobble worm's back. The underside is still fleshy and warm. Armorers pay good money for these as shield facing." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 14
+  kira_defteri:
+    ad: { tr: "Kira Defteri", en: "The Rent Ledger" }
+    aciklama: { tr: "Bedesten Ağası'nın defteri. Sayfaları hâlâ kendi kendine yazılıyor; borçluların adları siliniyor, ama yalnızca biri borcunu ödediğinde ya da öldüğünde.", en: "The Undercity Landlord's ledger. Its pages still write themselves. Names come off the books, but only when someone pays up, or dies." }
+    tur: "malzeme"
+    nadirlik: "epik"
+    deger: 260
+  # ---- Kıyıkent · Sanayi
+  curuf_cekirdegi:
+    ad: { tr: "Cüruf Çekirdeği", en: "Slag Core" }
+    aciklama: { tr: "Bir cüruf itinin göğsünden çıkan, hâlâ içten kızaran bir yumru. Demircilerin ocağını bir gün boyunca sıcak tutar.", en: "A lump from a slag hound's chest that still glows from the inside. It'll keep a smith's forge hot for a full day." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 16
+  catal_disi:
+    ad: { tr: "Çatal Dişi", en: "Forkjaw Tine" }
+    aciklama: { tr: "Çatal çenenin çeliğinden sökülmüş bir çatal. Ucunda bir dişli işareti var; Lonca'nın demircileri bundan mızrak yapıyor.", en: "A tine pried off a forkjaw. There's a gear stamp near the tip. The Guild's smiths turn these into spears." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 18
+  boya_ozu:
+    ad: { tr: "Boya Özü", en: "Fume Essence" }
+    aciklama: { tr: "Bir şişeye hapsedilmiş, yoğunlaşmış boya buharı. Kapağını açma. Açman gerekirse, ateşten uzak aç.", en: "Condensed paint fumes trapped in a bottle. Don't open it. If you have to, do it far away from any flame." }
+    tur: "malzeme"
+    nadirlik: "nadir"
+    deger: 32
+  firin_yuregi:
+    ad: { tr: "Fırın Yüreği", en: "Furnace Heart" }
+    aciklama: { tr: "Yüksek Fırın'ın içinden çıkarılan çok gözlü, kızıl çekirdek. Soğumuş olması gerekirdi. Soğumadı. Gözleri arada bir kırpışıyor.", en: "The red, many-eyed core pulled out of the Blast Furnace. It should have cooled by now. It hasn't. Every so often, its eyes blink." }
+    tur: "malzeme"
+    nadirlik: "epik"
+    deger: 280
+  # ---- Kıyıkent · Tepe
+  recine_kehribari:
+    ad: { tr: "Reçine Kehribarı", en: "Pitch Amber" }
+    aciklama: { tr: "Bir reçine ayısının sırtından kopmuş, içinde birkaç tutam kahverengi kürk hapsolmuş amber renkli bir parça. Hafif ve şaşırtıcı derecede sert.", en: "An amber-colored slab broken off a pitchback bear, with a few tufts of brown fur trapped inside. Light and surprisingly hard." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 15
+  dron_lensi:
+    ad: { tr: "Dron Merceği", en: "Drone Lens" }
+    aciklama: { tr: "Bir gözetleme dronunun kamera merceği. Hâlâ kayıt yapıyor; içinde sahiplerinin son haftası duruyor.", en: "The camera lens off a sentinel drone. It's still recording, and the last week of its owners' lives is still in there." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 18
+  yukselen_nisani:
+    ad: { tr: "Yükselen Nişanı", en: "Ascended Token" }
+    aciklama: { tr: "Yükselenler'in boyunlarında taşıdığı, Sistem penceresi biçiminde oyulmuş mavi bir taş. Arkasında bir rakam yazıyor: sahibinin \"değeri\".", en: "A blue stone carved in the shape of a System window, worn around the necks of the Ascended. There's a number on the back: its owner's \"worth.\"" }
+    tur: "malzeme"
+    nadirlik: "nadir"
+    deger: 28
+  yasli_cam_kozalagi:
+    ad: { tr: "Yaşlı Çam Kozalağı", en: "Old Growth Cone" }
+    aciklama: { tr: "Yaşlı Çam'ın tepesinden düşen tek kozalak. Pullarının arasında mavi bir ışık yanıyor; ekersen ne çıkacağını kimse bilmiyor.", en: "The single cone that dropped from the top of the Old Growth. Blue light burns between its scales. Nobody knows what would come up if you planted it." }
+    tur: "malzeme"
+    nadirlik: "epik"
+    deger: 260
+  # ---- Kıyıkent · Kule Dibi
+  kule_cami:
+    ad: { tr: "Kule Camı", en: "Spire Glass" }
+    aciklama: { tr: "Kule'nin dış yüzeyinden kopmuş kara cam. Kenarı jilet gibi; elinde tutarken hafifçe yukarı, Kule'ye doğru çekiyor.", en: "Black glass from the Spire's outer skin. Razor-edged. When you hold it, it tugs gently upward, toward the Spire." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 18
+  kat_muhru:
+    ad: { tr: "Kat Mührü", en: "Floor Seal" }
+    aciklama: { tr: "Kaçak bir kat bekçisinin göğsünden sökülmüş mühür. Üstünde, ait olduğu katın kuralı yazıyor ve onu taşıyan herkes o kurala biraz uymak zorunda hissediyor.", en: "A seal pried off a runaway floorwarden's chest. It's engraved with the rule of the floor it came from, and whoever carries it feels a little obligated to follow that rule." }
+    tur: "malzeme"
+    nadirlik: "nadir"
+    deger: 40
+  akbaba_tuyu:
+    ad: { tr: "Akbaba Tüyü", en: "Vulture Quill" }
+    aciklama: { tr: "Kule akbabasının uzun, gri tüyü. Ok yeleği olarak kullanılırsa ok hep yukarı doğru biraz sapar.", en: "A long gray quill from a spire vulture. Fletch an arrow with it and the arrow always drifts a little upward." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 14
+  tirmanici_ipi:
+    ad: { tr: "Düşmüş Tırmanıcının İpi", en: "The Fallen Climber's Rope" }
+    aciklama: { tr: "Düşmüş tırmanıcının beline dolanmış ip. Kopmuş ucu Kule taşına dönüşmüş. Bağladığın şey asla düşmüyor; ama ipin kendisi yukarı çıkmak istiyor.", en: "The rope that was wound around the fallen climber's waist. Its snapped end has turned to Spire stone. Anything you tie with it never falls, but the rope itself wants to climb." }
+    tur: "malzeme"
+    nadirlik: "epik"
+    deger: 270
+  # ---- Çok-evren · Batık Takımada
+  can_tuncu:
+    ad: { tr: "Boğulmuş Tunç", en: "Drowned Bronze" }
+    aciklama: { tr: "Bir gelgit çanından kopmuş yeşil, tuz kaplı tunç. Kulağına tutunca, bir dünyanın son uyarısı hâlâ içinde çınlıyor.", en: "Green, salt-crusted bronze broken off a tide bell. Hold it to your ear and the last warning of a whole world is still ringing inside it." }
+    tur: "malzeme"
+    nadirlik: "nadir"
+    deger: 45
+  hasat_kulu:
+    ad: { tr: "Hasat Külü", en: "Harvest Ash" }
+    aciklama: { tr: "Doyup dağılan bir hasat kırpıntısından kalan gri kül. Hiçbir şeyin külü değil; bir şeyin yokluğunun külü.", en: "Gray ash left behind when a harvest husk gets its fill and crumbles. It isn't the ash of anything. It's the ash of something that's gone." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 20
+  mercan_yuregi:
+    ad: { tr: "Mercan Yüreği", en: "Reef Heart" }
+    aciklama: { tr: "Mercan çobanının sırtındaki resifin ortasından çıkan, kubbe biçimli küçük bir mercan. İçine bakınca minicik sokaklar, minicik pencereler ve hiç insan görmüyorsun.", en: "A small, dome-shaped coral from the middle of the reef shepherd's back. Look inside and you see tiny streets, tiny windows, and not a single person." }
+    tur: "malzeme"
+    nadirlik: "epik"
+    deger: 320
+  # ---- Çok-evren · Pirinç Kervan
+  pirinc_muhur:
+    ad: { tr: "Gümrük Mührü", en: "Tariff Seal" }
+    aciklama: { tr: "Pirinç Kervan'ın gümrük muhafızlarının mührü. Bir yüzünde tüccar halkın eski arması var; öteki yüzünde, onun üstüne basılmış Kadim damgası.", en: "A seal from the Brass Caravan's tariff wardens. One side carries the merchant people's old crest. The other carries the Ancient stamp pressed right over it." }
+    tur: "malzeme"
+    nadirlik: "nadir"
+    deger: 50
+  kazan_kabugu:
+    ad: { tr: "Kazan Kabuğu", en: "Boiler Shell" }
+    aciklama: { tr: "Bir kazan böceğinin perçinli pirinç kabuğu. İçindeki küçük buhar odası hâlâ ılık; bir çaydanlığı kaynatmaya yeter.", en: "A boilerbug's riveted brass shell. The little steam chamber inside is still warm. Enough to boil a kettle." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 22
+  degerleyici_mercegi:
+    ad: { tr: "Değerleyici Merceği", en: "Assessor's Lens" }
+    aciklama: { tr: "Değerleyici'nin tek kristal merceği. İçinden bakınca her şeyin üstünde küçük bir rakam beliriyor. Kendi elinin üstündeki rakama bakmamaya çalış.", en: "The Assessor's one crystal lens. Look through it and a little number appears over everything. Try not to look at the one over your own hand." }
+    tur: "malzeme"
+    nadirlik: "epik"
+    deger: 360
+  # ---- Çok-evren · Yedi Taht
+  sessizlik_muhru:
+    ad: { tr: "Sessizlik Mührü", en: "Seal of Silence" }
+    aciklama: { tr: "Bir huzur muhafızının maskesinin ağız kısmını kapatan mühür. Avucunda tuttuğun sürece etrafındaki herkes biraz daha alçak sesle konuşuyor.", en: "The seal that covered the mouth of a presence guard's mask. As long as you hold it, everyone around you talks a little quieter." }
+    tur: "malzeme"
+    nadirlik: "nadir"
+    deger: 55
+  kandil_fitili:
+    ad: { tr: "Kandil Fitili", en: "Lamp Wick" }
+    aciklama: { tr: "Sönmüş bir hasat kandilinin fitili. Hâlâ hafifçe sıcak ve bazen, gece, kısık bir sesle teşekkür ediyor.", en: "The wick of a harvest lamp that's gone out. It's still faintly warm, and sometimes, at night, it says thank you in a very small voice." }
+    tur: "malzeme"
+    nadirlik: "nadir"
+    deger: 50
+  taht_golgesi_parcasi:
+    ad: { tr: "Taht Gölgesi Parçası", en: "Throne-Shadow Shard" }
+    aciklama: { tr: "Boş tahtın gölgesinden koparılmış bir parça; elinde tutulabilen bir karanlık. Gölgen onu taşırken hep biraz daha uzun düşüyor.", en: "A piece torn off the empty throne's shadow: a darkness you can hold in your hand. While you carry it, your shadow always falls a little longer than it should." }
+    tur: "malzeme"
+    nadirlik: "epik"
+    deger: 380
+  # ---- Sistem Çekirdeği
+  ak_surec_parcasi:
+    ad: { tr: "Ak Süreç Parçası", en: "White Process Fragment" }
+    aciklama: { tr: "Bir ak süreçten kopmuş kusursuz beyaz bir köşe. Üstüne dokununca küçük bir satır beliriyor: [Hata bulunamadı.] Sana dokunduğunda başka bir şey yazıyor.", en: "A perfect white corner chipped off a white process. Touch it and a small line appears: [No errors found.] When it touches you, it says something else." }
+    tur: "malzeme"
+    nadirlik: "nadir"
+    deger: 60
+  karantina_anahtari:
+    ad: { tr: "Karantina Anahtarı", en: "Quarantine Key" }
+    aciklama: { tr: "Karantina'nın en içteki kafesinden kalan beyaz bir çubuk. Sistem'in bir anomaliyi kapatmak için kullandığı kilidin anahtarı; belki de içeriden açmak için.", en: "A white bar left over from Quarantine's innermost cage. The key to the lock the System uses to seal away an anomaly. Or maybe to open it from the inside." }
+    tur: "malzeme"
+    nadirlik: "efsanevi"
+    deger: 600
+  # ---- Kule bantları
+  sarmasik_lifi:
+    ad: { tr: "Sarmaşık Lifi", en: "Stairvine Fiber" }
+    aciklama: { tr: "Kat sarmaşığının sert lifi. Mavi ışıkta hafifçe parlıyor; iyi bir yay kirişi olur.", en: "Tough fiber from a stairvine. It glows faintly under blue light, and it makes a fine bowstring." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 10
+  basamak_tasi:
+    ad: { tr: "Yumuşak Basamak", en: "Soft Step" }
+    aciklama: { tr: "Basamak yiyenden kesilmiş, taş görünümlü bir et parçası. Üstüne basınca hafifçe iç çekiyor.", en: "A slab of stone-looking flesh cut from a stair eater. Step on it and it lets out a little sigh." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 12
+  avci_pencesi:
+    ad: { tr: "Kat Avcısı Pençesi", en: "Stalker Claw" }
+    aciklama: { tr: "Bir kat avcısının uzun, gri pençesi. Hiç ses çıkarmadan kesiyor; suikastçılar için biçilmiş kaftan.", en: "A floor stalker's long gray claw. It cuts without making a sound. Made to order for assassins." }
+    tur: "malzeme"
+    nadirlik: "nadir"
+    deger: 30
+  sessiz_tuy:
+    ad: { tr: "Sessiz Tüy", en: "Hush Feather" }
+    aciklama: { tr: "Sessiz kanadın beyaz tüyü. Cebine koyarsan ayak seslerin yarı yarıya kısılıyor.", en: "A white feather from a hushwing. Keep it in your pocket and your footsteps get half as loud." }
+    tur: "malzeme"
+    nadirlik: "nadir"
+    deger: 30
+  kuyu_tirnagi:
+    ad: { tr: "Kuyu Tırnağı", en: "Shaftdweller Nail" }
+    aciklama: { tr: "Bir kuyu sakininin uzun, kancalı tırnağı. Pürüzsüz bir duvara bile tutunuyor; tırmanıcılar onu ipten daha çok seviyor.", en: "A long, hooked nail from a shaftdweller. It'll catch on even a smooth wall, and climbers trust it more than rope." }
+    tur: "malzeme"
+    nadirlik: "nadir"
+    deger: 32
+  heykel_tozu:
+    ad: { tr: "Sınav Tozu", en: "Trial Dust" }
+    aciklama: { tr: "Bir sınav heykelinden dökülen ince taş tozu. Kaidedeki sorunun harfleri hâlâ tozun içinde, karışık ama okunur.", en: "Fine stone dust shed by a trial statue. The letters of the plinth's question are still in it, scrambled but readable." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 18
+  tirmanici_kunyesi:
+    ad: { tr: "Tırmanıcı Künyesi", en: "Climber's Tag" }
+    aciklama: { tr: "Kayıp ekipten birinin boynundaki metal künye. Üstünde bir ad, bir kan grubu ve ulaştığı en yüksek kat yazıyor.", en: "A metal tag from around the neck of someone in the lost party. It lists a name, a blood type, and the highest floor they ever reached." }
+    tur: "malzeme"
+    nadirlik: "siradan"
+    deger: 20
+  sovalye_plakasi:
+    ad: { tr: "Sınav Şövalyesi Plakası", en: "Proving Knight's Plate" }
+    aciklama: { tr: "Sınav şövalyesinin çatlamış göğüs plakası. İçindeki mavi akım tamamen sönmedi; onu giyen birinin duruşu kendiliğinden düzeliyor.", en: "The proving knight's cracked breastplate. The blue current inside hasn't quite died, and anyone who wears it finds themselves standing up straighter." }
+    tur: "malzeme"
+    nadirlik: "epik"
+    deger: 300
+  dev_gozu:
+    ad: { tr: "Sahanlık Devinin Gözü", en: "Colossus Eye" }
+    aciklama: { tr: "Sahanlık devinin tek gözü, kristale dönüşmüş. Kule'nin içinde onu taşıyana her kat biraz daha aydınlık görünüyor.", en: "The landing colossus's one eye, turned to crystal. Inside the Spire, every floor looks a little brighter to whoever carries it." }
+    tur: "malzeme"
+    nadirlik: "epik"
+    deger: 340

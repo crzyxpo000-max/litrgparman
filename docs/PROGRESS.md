@@ -19,12 +19,16 @@ Plan:
 - [x] Motor: sonlar (`endings.yaml`: koşul, sahne), `son_uygun` / `hicbir_son` koşulları, Gün 365 Hasat; kronik (önemli seçimler + `kronik` metni), epilog görünümü (NPC akıbetleri, fraksiyonlar, en kritik 5 seçim)
 - [x] Motor: New Game+ (Döngü sonu; önceki bitirilmiş oyun sayısı `onceki_oyun`), kayıt v4
 - [x] Arayüz: son ekranı + epilog kartları, Kule düğmesi, başlıkta New Game+
-- [ ] İçerik sözleşmesi `docs/PERDE2_4.md` (perde yapısı, bölgeler, bayraklar, son koşulları, partiler)
+- [x] İçerik sözleşmesi `docs/PERDE2_4.md` (perde yapısı, bölgeler, bayraklar, son koşulları, partiler)
 - [ ] İçerik partileri (paralel): Perde 2 ana yay · fraksiyon zincirleri (5×5) · 8 NPC'nin tam yayları · Perde 2 genel · Perde 3 + çok-evren · Perde 4 + sonlar + epiloglar · Kule + düşmanlar
 - [ ] Testler: her son en az bir başsız stratejiyle ulaşılır; 365 günlük başsız oynanış çıkmazsız; Döngü → NG+
 - [ ] Bağımsız içerik ve kod incelemesi, düzeltmeler, check.sh, commit
 Notlar:
-- Motor + arayüz altyapısı tamam (159 test). Sırada: içerik sözleşmesi `docs/PERDE2_4.md` ve paralel içerik partileri.
+- Motor + arayüz altyapısı tamam. Sözleşme yazıldı; 15 içerik partisi (A, B1, B2, C, D, E, F, G, H, I, J, K1, K2, L1, L2) paralel yazıyor:
+  dosyaları `events/5x–8x_*.yaml`, `flags|enemies|titles|items|knowledge/<aynı ön ek>.yaml`, `endings.yaml`, `tower.yaml`, `awakenings/72_kademeler.yaml`.
+  Oturum yarıda kalırsa: `git status` ile yazılanları gör, `validateContent` çalıştır, eksik partiyi PERDE2_4.md'deki tanımıyla yeniden başlat.
+- Entegrasyon yapılacaklar: (1) Parti I `gecit_karar` seçeneklerine `aras_cok_evren_kapisi` tohumunu geri ekle (`npc_hayatta: aras_kurt`) — F bitince; (2) Parti I'nin 5 zar kontrolü zorluğu 40 (Perde 3 statlarında hep geçer): sınır 5000'e çıkarıldı, ölçeğe göre yeniden ayarla; (3) `elif_baskan`, `kaya_general` B1/B2 tarafından tanımlanmalı; (4) `budayiciyi_budayan` çakışması çözüldü; (5) `kod_kirici` son koşuluna `npc_hayatta: yanki` ekle (silinmiş Yankı'yla Kod Kırıcı olmasın); (6) seed-only kapanış olayları (`mert_son_log` vb.) tohum kuralından muaf mı karar ver; (7) `deniz_yukselenlerden_dondu` C/F çift tanımı.
+- Testler hazır: `Perde2_4Test` (bütçe, kurallar, 365 günlük oynanış, her sona strateji), `Asama7MotorTest`; Perde1Test Perde 1 sonunda durur.
 
 ## Aşama 6 — Dikey dilim: Perde 1 içeriği  ✅ (2026-11-06)
 - [x] Perde 1 tasarım belgesi `docs/PERDE1.md` (güç döngüsü, dünya durumu, olay listesi, partiler)

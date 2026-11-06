@@ -917,7 +917,6 @@ olaylar:
 
       - id: "perde1_son"
         yer: "ogretici_kapi"
-        son: true
         paragraflar:
           # Hayatta kalan oranı
           - metin: { tr: "Sisli ormanda uyanan her on kişiden dördü bile Kapı'dan geçemiyor. Geride kalanların pencereleri, Bekçi'nin dağılan gövdesiyle birlikte rüzgâra karışıyor. İnsanlık öğreticiden kan kaybederek çıkıyor.", en: "Out of every ten people who woke up in that fog, not even four make it through the Gate. The windows of the ones left behind scatter on the wind with what's left of the Warden. Humanity walks out of the tutorial bleeding." }
@@ -960,11 +959,18 @@ olaylar:
           - tur: "uyari"
             baslik: { tr: "[PERDE 1 TAMAMLANDI]", en: "[ACT 1 COMPLETE]" }
             satirlar:
-              - { tr: "Bu sürümde hikâye burada duruyor.", en: "In this build, the story pauses here." }
+              - { tr: "Sonraki perde: Entegre Dünya.", en: "Next act: The Integrated World." }
+        secenekler:
+          - id: "isiga_yuru"
+            etiket: { tr: "Işığa yürü", en: "Walk into the light" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+              - gun: 3
+              - bolge: "kiyikent_liman"
+            sonraki: "@akis"
 
       - id: "perde1_son_yenilgi"
         yer: "ogretici_kapi"
-        son: true
         paragraflar:
           - { tr: "Bekçinin darbesi seni asfalta yapıştırıyor ve dünya mavi bir ışıkla kararıyor. Gözünü açtığında Kapı çoktan açılmış; biri seni kollarından tutup ışığa sürüklüyor. Gökyüzündeki satırda senin adın yok.", en: "The Warden's blow plants you in the asphalt, and the world goes dark in a flash of blue. When you open your eyes, the Gate's already open and somebody's dragging you toward the light by your arms. Your name isn't on the line in the sky." }
           # Hayatta kalan oranı
@@ -1012,7 +1018,15 @@ olaylar:
           - tur: "uyari"
             baslik: { tr: "[PERDE 1 TAMAMLANDI]", en: "[ACT 1 COMPLETE]" }
             satirlar:
-              - { tr: "Bu sürümde hikâye burada duruyor.", en: "In this build, the story pauses here." }
+              - { tr: "Sonraki perde: Entegre Dünya.", en: "Next act: The Integrated World." }
+        secenekler:
+          - id: "isiga_yuru"
+            etiket: { tr: "Işığa yürü", en: "Walk into the light" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+              - gun: 3
+              - bolge: "kiyikent_liman"
+            sonraki: "@akis"
 
   # ================================================================== DİKKAT 25 (motor tohumu)
   - id: "dikkat_25"

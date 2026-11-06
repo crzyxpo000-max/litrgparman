@@ -487,7 +487,7 @@ object ContentValidator {
                 c.check?.let { chk ->
                     chk.failNext?.let { n -> if (n != WorldState.HUB && n != Content.RETURN && n !in content.scenes) problems += "$where: zar başarısız sahnesi tanımsız '$n'" }
                     chk.failEffects.forEach { checkEffect(it, "$where (başarısız)") }
-                    if (chk.difficulty !in 2..40) problems += "$where: zar zorluğu 2–40 olmalı"
+                    if (chk.difficulty !in 2..5000) problems += "$where: zar zorluğu 2–5000 olmalı (Perde 2+ statları büyük)"
                 }
                 when {
                     c.next == WorldState.HUB -> Unit
@@ -589,7 +589,7 @@ fun contentWarnings(content: Content): List<String> {
     val seeded = content.scenes.values.flatMap { s -> s.choices.flatMap { c -> c.effects + (c.check?.failEffects ?: emptyList()) } }
         .plus(content.awakenings.flatMap { it.effects })
         .filterIsInstance<Effect.PlantSeed>().map { it.eventId }.toSet()
-    content.events.values.filter { it.seedOnly && it.id !in seeded && !it.id.startsWith("dikkat_") && !it.id.startsWith("esik_") }.forEach {
+    content.events.values.filter { it.seedOnly && it.id !in seeded && !it.id.startsWith("dikkat_") && !it.id.startsWith("esik_") && !it.id.startsWith("yozlasma_") && content.tower?.storyFloors?.containsValue(it.id) != true }.forEach {
         warnings += "olay ${it.id}: yalnızca tohumla gelir ama hiçbir yerde tohumlanmıyor (ulaşılamaz)"
     }
     content.events.values.filter { it.repeatable.not() && it.dayMax < it.dayMin }.forEach { warnings += "olay ${it.id}: gün aralığı boş" }
