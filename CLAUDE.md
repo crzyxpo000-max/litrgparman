@@ -30,6 +30,7 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 ./gradlew lint                     # Android lint (hata kalmamalı)
 ./gradlew :tools:simulator:run --args="1000"   # denge simülatörü → docs/BALANCE.md
 ./gradlew bundleRelease            # AAB (keystore.properties yoksa imzasız)
+./gradlew :tools:uslup:run         # Türkçe üslup işi: HEAD'e göre yalnız tr değişti mi + üslup ölçümü (--ayrinti, --olcum, --ref)
 scripts/check.sh                   # test + validateContent + simülatör denge testi + assembleDebug + lint; her aşamanın sonunda geçmeli
 ```
 

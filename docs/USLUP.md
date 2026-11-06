@@ -171,6 +171,31 @@ karşılaştırır ve şunları **hata** sayar:
 Ve **uyarı** olarak üslup ölçümleri: paragraf başına noktalı virgül > 1, art arda 3 "-yor" sonu, "Bu, " ile başlayan
 cümle, "etrafında kur", "komik derecede", ", aynı anda". Araç dosya başına özet basar; her parti sonunda koşulur.
 
+**Parti 0 notu (2026-11-07):** Araç `tools/uslup` (JVM modülü, `engine`'in `YamlTree`'sini kullanır; testler
+`CheckerTest`, `scripts/check.sh` içinde). Kullanım:
+
+```bash
+./gradlew :tools:uslup:run                          # HEAD'e göre değişen content/ dosyaları; hata varsa çıkış kodu 1
+./gradlew :tools:uslup:run --args="--ayrinti"        # uyarılar dahil her bulgu, yeri ve yeni metniyle
+./gradlew :tools:uslup:run --args="--olcum"          # karşılaştırmasız üslup ölçümü (tüm content/ ya da verilen dosyalar)
+./gradlew :tools:uslup:run --args="--ref HEAD~1 content/events/20_orman.yaml"
+```
+
+Hatalar: satır sayısı ya da `tr: "…"` maskelendikten sonra herhangi bir satır değişmiş (en, anahtar, yorum, biçim);
+ağaçta anahtar/liste uzunluğu/`tr` dışı değer farkı; belirteç çoklu kümesi (ek hariç) değişmiş; bozuk Yankı yazısı
+(birleşen işaretli ya da `█` içeren sözcükler) değişmiş; küçük harfle başlayan (belirteçle başlamayan) satır büyük
+harfe dönmüş; boş `tr`; yeni ya da silinmiş dosya. Uyarılar: uzunluk eskisinin %60'ının altında ya da %160'ının
+üstünde (eski ≥20 karakterse); büyük harfli satır küçük harfe dönmüş; üslup kuralları. Üslup kuralları değer
+başına sayılır ve dosya başına "eski → yeni" basılır. `-yor` ve noktalı virgül kuralları köşeli parantezle başlayan
+Sistem satırlarına uygulanmaz. §7.1'deki listeye ek olarak "art arda kısa cümle" (en çok 3 sözcüklük iki cümle üst
+üste: §0.2'deki kesik ritim) ve sözlükten ", ve", "bir şekilde", "muhtemelen", "-mayı seçiyorsun", "fark ediyorsun".
+Paragraflar arası "-yor" tekrarı ölçülmez (her `tr` ayrı değerlendirilir); okuma denetimi bunu yakalar.
+
+Başlangıç ölçümü (19.249 `tr`): noktalı virgül >1: 216 · art arda 3 -yor: 303 · art arda kısa cümle: 1.616 ·
+"Bu, ": 24 · "etrafında kur": 9 · ", aynı anda": 12 · "bir şekilde": 11 · "fark ediyorsun": 11 · "muhtemelen": 3 ·
+", ve": 3 · "komik derecede": 1 · "-mayı seçiyorsun": 1. Bunlar sıfıra indirilecek hedef değil (Yankı fısıltısı ve
+diyalog kısa olabilir); partiden partiye düşüşü gösterir.
+
 ### 7.2 Partiler (sıra: oyuncunun karşılaştığı sıra)
 
 Sözcük sayıları yaklaşık (tek satırlık `tr` değerleri). Büyük dosyalar olay sınırlarından bölünür; bir ajan ~5.000
@@ -178,7 +203,7 @@ sözcükten fazlasını tek seferde almaz.
 
 | Parti | Dosyalar | ~Sözcük | Durum |
 | --- | --- | --- | --- |
-| 0 | Doğrulama aracı | — | bekliyor |
+| 0 | Doğrulama aracı (`tools/uslup`) | — | **bitti** |
 | 1 | `story/00_prolog`, `events/10_yoldaslar`, `20_orman`, `30_carsi_istasyon`, `40_ana_yay` (Perde 1) | 27.600 | bekliyor |
 | 2 | `50_perde2_ana`, `56_deniz_yanki_aras` | 23.800 | bekliyor |
 | 3 | `51_siginak_elif`, `52_lonca_kaya`, `53_yukselenler_vahit` | 30.900 | bekliyor |
