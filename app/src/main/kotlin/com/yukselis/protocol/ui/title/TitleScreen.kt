@@ -44,7 +44,8 @@ import com.yukselis.protocol.ui.theme.GameType
 fun TitleScreen(
     lang: Lang,
     autosave: SlotInfo?,
-    onNewGame: (name: String, ironman: Boolean) -> Unit,
+    onNewGame: (name: String, ironman: Boolean, newGamePlus: Boolean) -> Unit,
+    newGamePlusUnlocked: Boolean = false,
     onContinue: () -> Unit,
     onLanguage: (Lang) -> Unit,
     theme: ThemeMode,
@@ -53,6 +54,7 @@ fun TitleScreen(
     val defaultName = stringResource(R.string.default_player_name)
     var name by rememberSaveable { mutableStateOf("") }
     var ironman by rememberSaveable { mutableStateOf(false) }
+    var newGamePlus by rememberSaveable { mutableStateOf(false) }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -120,7 +122,19 @@ fun TitleScreen(
             }
             Switch(checked = ironman, onCheckedChange = { ironman = it })
         }
-        val start = { onNewGame(name.ifBlank { defaultName }, ironman) }
+        if (newGamePlusUnlocked) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp),
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(stringResource(R.string.ng_plus), style = MaterialTheme.typography.bodyLarge)
+                    Text(stringResource(R.string.ng_plus_desc), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+                Switch(checked = newGamePlus, onCheckedChange = { newGamePlus = it })
+            }
+        }
+        val start = { onNewGame(name.ifBlank { defaultName }, ironman, newGamePlus && newGamePlusUnlocked) }
         if (autosave != null) {
             OutlinedButton(onClick = start, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.start)) }
         } else {
@@ -132,7 +146,7 @@ fun TitleScreen(
         ThemePicker(theme, onTheme)
         Spacer(Modifier.height(16.dp))
         Text(
-            text = "v0.6",
+            text = "v0.7",
             style = GameType.system,
             color = MaterialTheme.colorScheme.outline,
             textAlign = TextAlign.Center,

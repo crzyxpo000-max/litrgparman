@@ -21,6 +21,7 @@ import com.yukselis.engine.system.Stat
 import com.yukselis.engine.system.Stats
 import com.yukselis.engine.system.StatusApplication
 import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 
 /** Oyuncunun savaş eylemleri. Ana eylemler turu tüketir; küçük eylem (eşya) ve ayarlar tüketmez. */
 sealed interface CombatAction {
@@ -106,6 +107,8 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
      */
     fun enemyDef(id: String, state: WorldState): EnemyDef? {
         content.enemies[id]?.let { return it }
+        // Ölçekli başvuru: "id@seviye" (Aşama 7).
+        EnemyScaling.parse(id).let { (base, level) -> if (level != null) return content.enemies[base]?.let { EnemyScaling.scale(it, level) } }
         if (!id.startsWith(com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX)) return null
         val npcId = id.removePrefix(com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX)
         val d = content.npcs[npcId] ?: return null
@@ -954,7 +957,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
                 bossDown = true
                 if ("kapi" in d.tags && e.level >= p0.level + 5) ctx.addVar("kapi_boss_solo_ust5", 1)
             }
-            if (e in killed) ctx.s = ctx.s.copy(flags = ctx.s.flags + "yenildi_${d.id}")
+            if (e in killed) ctx.s = ctx.s.copy(flags = ctx.s.flags + "yenildi_${EnemyScaling.baseId(d.id)}")
         }
         ctx.addVar("oldurme_sayisi", killed.size)
         // Düelloda (infazsız) yenilen NPC'ler ezilmiş sayılır; ölmezler.
@@ -988,7 +991,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
                 else -> texts.format("savas_hepsi_kacti")
             },
         )
-        val rewards = mutableListOf<Effect>(Effect.GainXp(xp.roundToInt().toLong()))
+        val rewards = mutableListOf<Effect>(Effect.GainXp(xp.roundToLong()))
         killed.forEach { e ->
             val d = ctx.def(e)
             if (d.credits > 0) rewards += Effect.AddCredits(d.credits)

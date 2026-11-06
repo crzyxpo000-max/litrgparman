@@ -78,7 +78,7 @@ data class SaveData(val state: WorldState, val savedAtMillis: Long)
  *    `iliski_deniz_guven` → Deniz'e Güven. Değişkenlerden silinir.
  */
 object SaveCodec {
-    const val VERSION = 3
+    const val VERSION = 4
 
     fun encode(state: WorldState, savedAtMillis: Long): String = buildJsonObject {
         put("v", VERSION)
@@ -209,6 +209,10 @@ object SaveCodec {
         }
         putJsonArray("knowledge") { state.knowledge.forEach { add(it) } }
         state.focusNpc?.let { put("focus", it) }
+        // v4: kronik (Aşama 7)
+        putJsonArray("chronicle") {
+            state.chronicle.forEach { c -> addJsonObject { put("d", c.day); put("e", c.event); put("s", c.scene); put("c", c.choice); put("w", c.weight) } }
+        }
     }.toString()
 
     private fun encodeLText(t: LText) = buildJsonObject { put("tr", t.tr); put("en", t.en) }
@@ -478,6 +482,14 @@ object SaveCodec {
             } ?: emptyList(),
             knowledge = o.strings("knowledge"),
             focusNpc = o.string("focus"),
+            // v3 ve öncesinde kronik yok: boş başlar.
+            chronicle = (o["chronicle"] as? JsonArray)?.mapNotNull { x ->
+                val c = x.jsonObject
+                com.yukselis.engine.core.ChronicleEntry(
+                    c.int("d") ?: 0, c.string("e") ?: return@mapNotNull null, c.string("s") ?: return@mapNotNull null,
+                    c.string("c") ?: return@mapNotNull null, c.int("w") ?: 0,
+                )
+            } ?: emptyList(),
             // Sekme kaydı olmayan eski kayıtlarda sahip olunanlara göre açılır.
             unlockedTabs = if (o["tabs"] is JsonArray) {
                 o.strings("tabs").toSet()

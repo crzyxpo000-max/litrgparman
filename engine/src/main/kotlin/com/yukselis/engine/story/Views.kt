@@ -49,6 +49,33 @@ data class HubView(
     val gates: List<GateView>,
     val travel: List<RegionLinkView>,
     val mustCamp: Boolean,
+    /** Kule burada tırmanılabiliyorsa bir sonraki kat (Aşama 7). */
+    val tower: TowerView? = null,
+)
+
+data class TowerView(val floor: Int, val level: Int, val story: Boolean)
+
+// ---- Aşama 7: son ekranı ----
+
+data class EpilogueCard(val title: String, val text: String)
+
+data class ChronicleView(val day: Int, val event: String, val choice: String, val effect: String?)
+
+/** Son ekranı: sonun adı, OP MC türü, NPC akıbetleri, fraksiyonlar ve en kritik 5 seçim (epilog kartları). */
+data class EndingView(
+    val id: String,
+    val name: String,
+    val summary: String,
+    val archetype: String?,
+    val archetypeText: String?,
+    val npcs: List<EpilogueCard>,
+    val factions: List<EpilogueCard>,
+    val choices: List<ChronicleView>,
+    val level: Int,
+    val grade: String,
+    val day: Int,
+    /** Gizli Döngü sonu: New Game+ açılır. */
+    val unlocksNewGamePlus: Boolean,
 )
 
 data class RegionView(

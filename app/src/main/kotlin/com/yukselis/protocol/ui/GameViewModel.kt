@@ -71,6 +71,10 @@ data class UiState(
     val turn: Int = 0,
     val slots: List<Pair<String, SlotInfo?>> = emptyList(),
     val message: UiMessage? = null,
+    /** Son ekranı: epilog kartları (Aşama 7). */
+    val ending: com.yukselis.engine.story.EndingView? = null,
+    /** Döngü sonu görüldü: başlıkta New Game+ seçeneği. */
+    val newGamePlusUnlocked: Boolean = false,
 ) {
     val inGame: Boolean get() = game != null
     val autosave: SlotInfo? get() = slots.firstOrNull { it.first == SaveManager.AUTO }?.second
@@ -87,7 +91,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val saveDispatcher = Dispatchers.IO.limitedParallelism(1)
 
     private val _ui = MutableStateFlow(
-        UiState(lang = app.settings.language(), settings = app.settings.settings()),
+        UiState(lang = app.settings.language(), settings = app.settings.settings(), newGamePlusUnlocked = app.settings.newGamePlusUnlocked()),
     )
     val ui: StateFlow<UiState> = _ui.asStateFlow()
 
@@ -95,11 +99,12 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         refreshSlots()
     }
 
-    fun newGame(name: String, ironman: Boolean) {
+    fun newGame(name: String, ironman: Boolean, newGamePlus: Boolean = false) {
         stopAuto()
         app.saves.clearCheckpoint()
         val mode = if (ironman) GameMode.IRONMAN else GameMode.NORMAL
-        val state = app.engine.newGame(name, mode, seed = Random.nextLong())
+        val ngPlus = newGamePlus && app.settings.newGamePlusUnlocked()
+        val state = app.engine.newGame(name, mode, seed = Random.nextLong(), previousGames = app.settings.completedGames(), newGamePlus = ngPlus)
         show(state, emptyList())
         persistAuto(state)
     }
@@ -326,13 +331,22 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 journal = engine.journal(state, lang),
                 relations = engine.relations(state, lang),
                 ranking = engine.ranking(state, lang),
+                ending = engine.endingView(state, lang),
                 freshNotices = notices,
                 turn = if (advanceTurn) it.turn + 1 else it.turn,
             )
         }
     }
 
+    /** Son: bitirilmiş oyun meta kaydına girer (Döngü sonu New Game+'ı açar). */
+    private fun recordEnding(state: WorldState) {
+        val ending = app.engine.endingOf(state) ?: return
+        app.settings.recordEnding(state.seed, ending.id, ending.id == com.yukselis.engine.story.StoryEngine.LOOP_ENDING)
+        _ui.update { it.copy(newGamePlusUnlocked = app.settings.newGamePlusUnlocked()) }
+    }
+
     private fun persistAuto(state: WorldState) {
+        if (state.ended) recordEnding(state)
         // Tek iş parçacıklı kuyruk: kayıtlar sırayla yazılır, eski durum yenisinin üstüne yazılamaz.
         viewModelScope.launch(saveDispatcher) {
             app.saves.autosave(state)

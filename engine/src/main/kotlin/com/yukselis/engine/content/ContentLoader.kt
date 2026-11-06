@@ -41,7 +41,26 @@ object ContentLoader {
      * Kayıt dosyaları (bayraklar, görevler, bilgiler, başarılar) parçalanabilir: `flags.yaml` + `flags/` klasöründeki parçalar.
      * Parçaların üst düzey eşlemleri (ör. `bayraklar`) birleştirilir; aynı kimlik iki kez tanımlanırsa hata.
      */
-    val MERGEABLE = setOf(ContentParser.FLAGS, ContentParser.QUESTS, ContentParser.KNOWLEDGE, ContentParser.FEATS)
+    val MERGEABLE = setOf(
+        ContentParser.FLAGS, ContentParser.QUESTS, ContentParser.KNOWLEDGE, ContentParser.FEATS,
+        // Aşama 7: paralel içerik partileri kendi düşman ve eşya parçalarını yazar (`enemies/`, `items/`).
+        ContentParser.ENEMIES, ContentParser.ITEMS, ContentParser.AWAKENINGS,
+    )
+
+    /** Unvanlar düz bir eşlemdir (üst düzey anahtar = unvan kimliği); `titles/` parçaları da birleşir. */
+    private fun mergedTitles(source: ContentSource): String {
+        val main = source.read(TITLES)
+        val parts = source.list("titles").filter { it.endsWith(".yaml") }.sorted()
+        if (parts.isEmpty()) return main
+        val merged = linkedMapOf<String, kotlinx.serialization.json.JsonElement>()
+        (listOf(main) + parts.map { source.read("titles/$it") }).forEachIndexed { i, text ->
+            YamlTree.parseObject(text, "titles parça ${i + 1}").forEach { (k, v) ->
+                if (k in merged) throw ContentFormatException("titles: '$k' iki kez tanımlı")
+                merged[k] = v
+            }
+        }
+        return kotlinx.serialization.json.JsonObject(merged).toString()
+    }
 
     private fun mergedFile(source: ContentSource, name: String): String? {
         val main = source.readOrNull(name)
@@ -70,6 +89,6 @@ object ContentLoader {
         val files = SYSTEM_FILES.mapNotNull { name -> mergedFile(source, name)?.let { name to it } }.toMap()
         val eventFiles = source.list(EVENTS_DIR).filter { it.endsWith(".yaml") }.sorted().map { source.read("$EVENTS_DIR/$it") }
         val npcFiles = source.list(NPCS_DIR).filter { it.endsWith(".yaml") }.sorted().map { source.read("$NPCS_DIR/$it") }
-        return ContentParser.load(storyFiles, source.read(NAMES), source.read(TITLES), files, eventFiles, npcFiles)
+        return ContentParser.load(storyFiles, source.read(NAMES), mergedTitles(source), files, eventFiles, npcFiles)
     }
 }

@@ -2,6 +2,7 @@ baslangic: "ogretici_orman"
 bolgeler:
   ogretici_orman:
     perde: 1
+    son_perde: 1
     tehlike: 15
     kontrol: "canavar"
     dusmanlar: ["kanal_faresi", "igne_tavsan", "pas_kenesi", "sis_tazisi", "diken_domuzu"]
@@ -11,6 +12,7 @@ bolgeler:
     toplama: ["kirmizi_ot", "mavi_yosun", "yabani_mantar", "kaynak_suyu"]
   harabe_carsi:
     perde: 1
+    son_perde: 1
     tehlike: 35
     kontrol: "canavar"
     dusmanlar: ["fisildayan_karga", "cop_avcisi", "ciglik_yarasasi", "vitrin_mankeni", "kor_kertenkelesi"]
@@ -20,6 +22,7 @@ bolgeler:
     toplama: ["cam_sise", "kul", "hurda", "kaya_tuzu"]
   kirik_istasyon:
     perde: 1
+    son_perde: 1
     tehlike: 55
     kontrol: "canavar"
     dusmanlar: ["kablo_yilani", "yosun_sirtli", "yarik_sulugu", "soluk_musteri", "run_kabuklu"]
@@ -27,3 +30,111 @@ bolgeler:
     kapi_sansi: 0.35
     kapi_dusmanlari: ["run_kabuklu", "yarik_sulugu", "kepenk_cenesi"]
     toplama: ["canli_bakir", "aci_kok", "goz_cicegi"]
+  # ---- Perde 2–4: Kıyıkent (Aşama 7). Düşmanlar dünyanın seviyesine ölçeklenir (Progression.worldLevel);
+  # bölge listeleri Kule/bestiyer partisi (docs/PERDE2_4.md, Parti L) tarafından kendi düşmanlarıyla değiştirilir.
+  kiyikent_liman:
+    perde: 2
+    tehlike: 30
+    kontrol: "siginak"
+    ortam: "su"
+    dusmanlar: ["kablo_yilani", "yosun_sirtli", "fisildayan_karga"]
+    komsu: ["kordon", "sanayi"]
+    kapi_sansi: 0.15
+    kapi_dusmanlari: ["yarik_sulugu", "run_kabuklu"]
+    toplama: ["kaya_tuzu", "hurda", "cam_sise"]
+  kordon:
+    perde: 2
+    tehlike: 45
+    kontrol: "canavar"
+    ortam: "su"
+    dusmanlar: ["fisildayan_karga", "ciglik_yarasasi", "yosun_sirtli"]
+    komsu: ["kiyikent_liman", "eski_sehir", "kule_dibi"]
+    kapi_sansi: 0.25
+    kapi_dusmanlari: ["yarik_sulugu", "kepenk_cenesi"]
+    toplama: ["kaya_tuzu", "mavi_yosun"]
+  eski_sehir:
+    perde: 2
+    tehlike: 40
+    kontrol: "canavar"
+    ortam: "dar_gecit"
+    dusmanlar: ["cop_avcisi", "vitrin_mankeni", "soluk_musteri"]
+    komsu: ["kordon", "tepe", "sanayi", "kule_dibi"]
+    kapi_sansi: 0.2
+    kapi_dusmanlari: ["soluk_musteri", "hurdacik"]
+    toplama: ["kul", "cam_sise", "kirmizi_ot"]
+  sanayi:
+    perde: 2
+    tehlike: 50
+    kontrol: "lonca"
+    ortam: "yanici"
+    dusmanlar: ["hurdacik", "kablo_yilani", "run_kabuklu"]
+    komsu: ["kiyikent_liman", "eski_sehir", "kule_dibi"]
+    kapi_sansi: 0.25
+    kapi_dusmanlari: ["kepenk_cenesi", "run_kabuklu"]
+    toplama: ["hurda", "canli_bakir"]
+  tepe:
+    perde: 2
+    tehlike: 35
+    kontrol: "yukselenler"
+    ortam: "karanlik"
+    dusmanlar: ["sis_tazisi", "diken_domuzu", "sis_dokuyucu"]
+    komsu: ["eski_sehir"]
+    kapi_sansi: 0.2
+    kapi_dusmanlari: ["sis_dokuyucu", "kemik_tacli_geyik"]
+    toplama: ["yabani_mantar", "goz_cicegi", "aci_kok"]
+  kule_dibi:
+    perde: 2
+    tehlike: 60
+    kontrol: "canavar"
+    ortam: "tavan"
+    dusmanlar: ["run_kabuklu", "soluk_musteri", "kor_kertenkelesi"]
+    komsu: ["kordon", "eski_sehir", "sanayi", "batik_takimada", "pirinc_kervan", "yedi_taht", "sistem_cekirdegi"]
+    kapi_sansi: 0.3
+    kapi_dusmanlari: ["kepenk_cenesi", "kemik_tacli_geyik"]
+    toplama: ["canli_bakir", "goz_cicegi"]
+  # ---- Perde 3: çok-evren dünyaları (Kule'nin geçidinden; bayrak cok_evren_acik) ----
+  batik_takimada:
+    perde: 3
+    tehlike: 55
+    kontrol: "canavar"
+    ortam: "su"
+    kosul: { bayrak: "cok_evren_acik" }
+    dusmanlar: ["yarik_sulugu", "yosun_sirtli"]
+    komsu: ["kule_dibi", "pirinc_kervan"]
+    kapi_sansi: 0.0
+    kapi_dusmanlari: []
+    toplama: ["mavi_yosun", "kaya_tuzu"]
+  pirinc_kervan:
+    perde: 3
+    tehlike: 40
+    kontrol: "kadimler"
+    ortam: "dar_gecit"
+    kosul: { bayrak: "cok_evren_acik" }
+    dusmanlar: ["hurdacik", "vitrin_mankeni"]
+    komsu: ["kule_dibi", "batik_takimada", "yedi_taht"]
+    kapi_sansi: 0.0
+    kapi_dusmanlari: []
+    toplama: ["canli_bakir", "hurda"]
+  yedi_taht:
+    perde: 3
+    tehlike: 70
+    kontrol: "kadimler"
+    ortam: "karanlik"
+    kosul: { bayrak: "yedi_taht_davet" }
+    dusmanlar: ["soluk_musteri", "run_kabuklu"]
+    komsu: ["kule_dibi", "pirinc_kervan"]
+    kapi_sansi: 0.0
+    kapi_dusmanlari: []
+    toplama: ["goz_cicegi"]
+  # ---- Perde 4 ----
+  sistem_cekirdegi:
+    perde: 4
+    tehlike: 90
+    kontrol: "canavar"
+    ortam: "karanlik"
+    kosul: { bayrak: "cekirdek_yolu_acik" }
+    dusmanlar: ["run_kabuklu"]
+    komsu: ["kule_dibi"]
+    kapi_sansi: 0.0
+    kapi_dusmanlari: []
+

@@ -1,6 +1,6 @@
 # İlerleme
 
-Şu an: Aşama 7 — Perde 2–4 ve sonlar (sırada)
+Şu an: Aşama 7 — Perde 2–4 ve sonlar (devam ediyor)
 Son commit: 8472fd5 Aşama 6: Perde 1 dikey dilimi
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
@@ -10,6 +10,21 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - SDK: `local.properties` → `sdk.dir=C:/Users/alpar/AppData/Local/Android/Sdk` (git dışı).
 - Emülatör: `Medium_Phone_API_36.0` (`emulator -avd Medium_Phone_API_36.0`), adb ile kurulum.
 - OneDrive kilidi yüzünden lint ara sıra "dosya kullanılıyor" der: `./gradlew --stop` ve tekrar.
+
+## Aşama 7 — Perde 2–4 ve sonlar  ⏳
+Plan:
+- [x] Motor: ölçekli düşman başvurusu (`id@seviye`: stat/can/saldırı/XP seviyeyle ölçeklenir), `xp_seviye` etkisi (seviyenin XP'sine oranla)
+- [x] Motor: perde geçişi (Perde 1 sonu → Dönüş; içerik partisinde), bölgelerin perde aralığı ve giriş koşulu, Kıyıkent + 3 çok-evren dünyası + Sistem çekirdeği
+- [x] Motor: Kule (100 kat; prosedürel katlar `tower.yaml`, her 10. kat yazılmış hikaye olayı), `kule_kat` değişkeni, Kule eylemi
+- [x] Motor: sonlar (`endings.yaml`: koşul, sahne), `son_uygun` / `hicbir_son` koşulları, Gün 365 Hasat; kronik (önemli seçimler + `kronik` metni), epilog görünümü (NPC akıbetleri, fraksiyonlar, en kritik 5 seçim)
+- [x] Motor: New Game+ (Döngü sonu; önceki bitirilmiş oyun sayısı `onceki_oyun`), kayıt v4
+- [x] Arayüz: son ekranı + epilog kartları, Kule düğmesi, başlıkta New Game+
+- [ ] İçerik sözleşmesi `docs/PERDE2_4.md` (perde yapısı, bölgeler, bayraklar, son koşulları, partiler)
+- [ ] İçerik partileri (paralel): Perde 2 ana yay · fraksiyon zincirleri (5×5) · 8 NPC'nin tam yayları · Perde 2 genel · Perde 3 + çok-evren · Perde 4 + sonlar + epiloglar · Kule + düşmanlar
+- [ ] Testler: her son en az bir başsız stratejiyle ulaşılır; 365 günlük başsız oynanış çıkmazsız; Döngü → NG+
+- [ ] Bağımsız içerik ve kod incelemesi, düzeltmeler, check.sh, commit
+Notlar:
+- Motor + arayüz altyapısı tamam (159 test). Sırada: içerik sözleşmesi `docs/PERDE2_4.md` ve paralel içerik partileri.
 
 ## Aşama 6 — Dikey dilim: Perde 1 içeriği  ✅ (2026-11-06)
 - [x] Perde 1 tasarım belgesi `docs/PERDE1.md` (güç döngüsü, dünya durumu, olay listesi, partiler)

@@ -78,7 +78,32 @@ class SettingsStore(context: Context) {
             .apply()
     }
 
+    // ---- Aşama 7: oyunlar arası meta (Döngü sonu, New Game+) ----
+
+    /** Bu cihazda bitirilmiş oyun sayısı (Döngü sonunun koşulu). */
+    fun completedGames(): Int = prefs.getInt(KEY_COMPLETED, 0)
+
+    /** Döngü sonu görüldü: başlıkta New Game+ açılır. */
+    fun newGamePlusUnlocked(): Boolean = prefs.getBoolean(KEY_NG_PLUS, false)
+
+    fun endingsSeen(): Set<String> = prefs.getStringSet(KEY_ENDINGS, emptySet()) ?: emptySet()
+
+    /** Bir oyunun sonunu bir kez kaydeder (aynı oyun tohumu iki kez sayılmaz). */
+    fun recordEnding(gameSeed: Long, endingId: String, unlocksNewGamePlus: Boolean) {
+        if (prefs.getLong(KEY_LAST_SEED, 0L) == gameSeed && prefs.contains(KEY_LAST_SEED)) return
+        prefs.edit()
+            .putLong(KEY_LAST_SEED, gameSeed)
+            .putInt(KEY_COMPLETED, completedGames() + 1)
+            .putStringSet(KEY_ENDINGS, endingsSeen() + endingId)
+            .putBoolean(KEY_NG_PLUS, newGamePlusUnlocked() || unlocksNewGamePlus)
+            .apply()
+    }
+
     private companion object {
+        const val KEY_COMPLETED = "meta_completed"
+        const val KEY_NG_PLUS = "meta_ng_plus"
+        const val KEY_ENDINGS = "meta_endings"
+        const val KEY_LAST_SEED = "meta_last_seed"
         const val KEY_LANG = "lang"
         const val KEY_TYPEWRITER = "typewriter"
         const val KEY_HAPTICS = "haptics"

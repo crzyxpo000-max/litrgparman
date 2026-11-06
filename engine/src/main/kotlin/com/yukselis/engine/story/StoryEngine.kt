@@ -1,5 +1,7 @@
 package com.yukselis.engine.story
 
+import com.yukselis.engine.core.ChronicleEntry
+
 import com.yukselis.engine.combat.CombatAction
 import com.yukselis.engine.combat.CombatEngine
 import com.yukselis.engine.combat.StatusEffects
@@ -28,6 +30,12 @@ class StoryEngine(val content: Content) {
         const val MEMORY_SHOWN = 5
         private const val DENIZ = "deniz_arman"
         const val RANK_SHOWN = 10
+        const val CHRONICLE_SHOWN = 5
+        const val CHRONICLE_KEPT = 40
+        const val PREVIOUS_GAMES_VAR = "onceki_oyun"
+        const val NG_PLUS_FLAG = "yeni_dongu"
+        const val NG_PLUS_STATS = 3
+        const val LOOP_ENDING = "dongu"
     }
 
     private val resolver = TokenResolver(content.names)
@@ -54,7 +62,7 @@ class StoryEngine(val content: Content) {
                 control = controlName(r?.control ?: d.control, lang),
                 gates = r?.gates?.map { gateView(it, state, lang) } ?: emptyList(),
                 current = d.id == state.region,
-                neighbor = here != null && d.id in here.neighbors,
+                neighbor = here != null && world.canTravel(state, d.id),
             )
         }
     }
@@ -140,7 +148,7 @@ class StoryEngine(val content: Content) {
     private fun gateView(g: com.yukselis.engine.world.Gate, state: WorldState, lang: Lang) = GateView(
         uid = g.uid,
         grade = g.grade.name,
-        enemies = g.enemies.mapNotNull { content.enemies[it]?.name?.get(lang) }.groupingBy { it }.eachCount()
+        enemies = g.enemies.mapNotNull { content.enemy(it)?.name?.get(lang) }.groupingBy { it }.eachCount()
             .entries.joinToString(", ") { (n, k) -> if (k > 1) "$n ×$k" else n },
         daysLeft = g.deadline - state.day,
     )
@@ -157,8 +165,12 @@ class StoryEngine(val content: Content) {
             danger = region?.let { state.regions[it]?.danger } ?: 0,
             cards = d.hand.mapNotNull { id -> content.events[id]?.let { CardView(id, text(it.card[lang], state, lang), it.tension) } },
             gates = region?.let { state.regions[it] }?.gates?.map { gateView(it, state, lang) } ?: emptyList(),
-            travel = here?.neighbors?.map { RegionLinkView(it, world.regionName(it)[lang]) } ?: emptyList(),
+            travel = here?.neighbors?.filter { world.canTravel(state, it) }?.map { RegionLinkView(it, world.regionName(it)[lang]) } ?: emptyList(),
             mustCamp = d.slotsLeft <= 0,
+            tower = content.tower?.takeIf { world.towerOpen(state) }?.let { t ->
+                val f = world.nextFloor(state)
+                TowerView(f, t.levelOf(f), f in t.storyFloors)
+            },
         )
     }
 
@@ -275,9 +287,66 @@ class StoryEngine(val content: Content) {
 
     private fun resolveLog(text: LText, state: WorldState, lang: Lang) = this.text(text[lang], state, lang)
 
-    /** Yeni oyun: Gün 0'ın Günlük Görevi de üretilir. */
-    fun newGame(playerName: String, mode: GameMode, seed: Long): WorldState =
-        npcEngine.ensure(effects.newDaily(WorldState.newGame(seed, playerName, mode, content.startScene)).state)
+    /**
+     * Yeni oyun: Gün 0'ın Günlük Görevi de üretilir. `previousGames`: bu cihazda bitirilmiş oyun sayısı (Döngü sonunun
+     * koşulu, değişken `onceki_oyun`). `newGamePlus`: Döngü sonundan sonra yeni bir Entegrasyon (bayrak `yeni_dongu`).
+     */
+    fun newGame(playerName: String, mode: GameMode, seed: Long, previousGames: Int = 0, newGamePlus: Boolean = false): WorldState {
+        var s = WorldState.newGame(seed, playerName, mode, content.startScene)
+        if (previousGames > 0) s = s.copy(vars = s.vars + (PREVIOUS_GAMES_VAR to previousGames))
+        if (newGamePlus) {
+            // Döngüyü hatırlayan bir anomali: her stat +NG_PLUS_STATS.
+            s = s.copy(flags = s.flags + NG_PLUS_FLAG)
+            s = s.copy(player = s.player.copy(stats = Stat.entries.fold(s.player.stats) { st, k -> st.plus(k, NG_PLUS_STATS) }))
+        }
+        return npcEngine.ensure(effects.newDaily(s).state)
+    }
+
+    // ---- Sonlar (Aşama 7) ----
+
+    /** Ulaşılan son (son sahnesinden türetilir); son değilse null. */
+    fun endingOf(state: WorldState): EndingDef? =
+        if (!state.ended) null else content.endings.forScene(state.sceneId)
+
+    /** Son ekranı: epilog kartları (her ana NPC'nin akıbeti, fraksiyonlar, en kritik 5 seçim). */
+    fun endingView(state: WorldState, lang: Lang): EndingView? {
+        val def = endingOf(state) ?: return null
+        val s = state.copy(ending = def.id)
+        fun first(lines: List<EpilogueLine>?) = lines?.firstOrNull { it.condition?.test(s) ?: true }?.text
+        val archetype = content.endings.archetypes.firstOrNull { it.condition?.test(s) ?: true }
+        val npcs = content.endings.npcFates.mapNotNull { (id, lines) ->
+            val n = s.npcs[id] ?: return@mapNotNull null
+            if (!n.known) return@mapNotNull null
+            first(lines)?.let { EpilogueCard(npcEngine.fullName(id)[lang], text(it[lang], s.copy(focusNpc = id), lang)) }
+        }
+        val factions = content.endings.factionFates.mapNotNull { (id, lines) ->
+            first(lines)?.let { EpilogueCard(npcEngine.factionName(id)[lang], text(it[lang], s, lang)) }
+        }
+        val choices = topChronicle(s).mapNotNull { c ->
+            val event = content.events[c.event] ?: return@mapNotNull null
+            val choice = content.scenes[c.scene]?.choices?.firstOrNull { it.id == c.choice } ?: return@mapNotNull null
+            ChronicleView(c.day, text(event.card[lang], s, lang), text(choice.label[lang], s, lang), choice.chronicle?.let { text(it[lang], s, lang) })
+        }
+        return EndingView(
+            id = def.id,
+            name = def.name[lang],
+            summary = text(def.summary[lang], s, lang),
+            archetype = archetype?.name?.get(lang),
+            archetypeText = archetype?.description?.let { text(it[lang], s, lang) },
+            npcs = npcs,
+            factions = factions,
+            choices = choices,
+            level = s.player.level,
+            grade = s.player.grade.name,
+            day = s.day,
+            unlocksNewGamePlus = def.id == LOOP_ENDING,
+        )
+    }
+
+    /** En kritik 5 seçim: ağırlığa göre, eşitlikte erken olan; gün sırasıyla gösterilir. */
+    fun topChronicle(state: WorldState): List<ChronicleEntry> =
+        state.chronicle.sortedWith(compareByDescending<ChronicleEntry> { it.weight }.thenBy { it.day })
+            .take(CHRONICLE_SHOWN).sortedBy { it.day }
 
     // ---- Hikaye dışı eylemler (geçersizse ActionRejected) ----
 
@@ -430,6 +499,7 @@ class StoryEngine(val content: Content) {
         val applied = EffectApplier.Result(witnessed.state, applied0.notices + witnessed.notices)
         var next = applied.state.copy(
             history = (applied.state.history + HistoryEntry(scene.id, choice.id, state.focusNpc)).takeLast(WorldState.HISTORY_LIMIT),
+            chronicle = chronicleAfter(applied.state, state, scene.id, choice, chosenEffects),
         )
         val checkNotices = mutableListOf<Notice>()
         choice.check?.let { c ->
@@ -468,6 +538,31 @@ class StoryEngine(val content: Content) {
             }
         }
         return Outcome(next, (checkNotices + applied.notices + extra).map { noticeView(it, next, lang) })
+    }
+
+    /**
+     * Kronik: önemli olaylardaki seçimler (ya da `kronik` metni olan seçimler) ağırlıklarıyla saklanır.
+     * Ağırlık yazılmadıysa: ahlak kaymaları + itibar/2 + NPC ölümü 25, fraksiyon değişimi/ayrılık 12, tohum 6;
+     * `kronik` metni +10.
+     */
+    private fun chronicleAfter(after: WorldState, before: WorldState, sceneId: String, choice: ChoiceDef, chosen: List<Effect>): List<ChronicleEntry> {
+        val eventId = before.dayState.currentEvent ?: return after.chronicle
+        val event = content.events[eventId] ?: return after.chronicle
+        if (!event.important && choice.chronicle == null) return after.chronicle
+        val weight = choice.chronicleWeight ?: (chosen.sumOf { e ->
+            when (e) {
+                is Effect.ShiftMorality -> kotlin.math.abs(e.delta)
+                is Effect.ShiftReputation -> kotlin.math.abs(e.delta) / 2
+                is Effect.KillNpc -> 25
+                is Effect.SetNpcFaction, is Effect.LeaveParty, is Effect.NpcGone -> 12
+                is Effect.PlantSeed -> 6
+                else -> 0
+            }
+        } + if (choice.chronicle != null) 10 else 0)
+        val list = after.chronicle + ChronicleEntry(before.day, eventId, sceneId, choice.id, weight)
+        // En fazla CHRONICLE_KEPT kayıt: en hafifler düşer.
+        return if (list.size <= CHRONICLE_KEPT) list
+        else list.sortedWith(compareByDescending<ChronicleEntry> { it.weight }.thenBy { it.day }).take(CHRONICLE_KEPT).sortedBy { it.day }
     }
 
     // ---- Ekran görünümleri ----

@@ -13,6 +13,7 @@ import com.yukselis.engine.system.Affinity
 import com.yukselis.engine.system.ClassKind
 import com.yukselis.engine.system.Grade
 import com.yukselis.engine.system.Progression
+import com.yukselis.engine.system.Rarity
 import com.yukselis.engine.system.Stat
 
 /**
@@ -101,6 +102,21 @@ class EffectApplier(private val content: Content) {
         is Effect.PlayerTrait, is Effect.Learn, is Effect.TellLie, is Effect.PersonalQuest, is Effect.NpcReward,
         is Effect.AddArmy, is Effect.GrowArmy,
         -> npc.apply(state, effect)
+        // ---- Aşama 7 ----
+        is Effect.GainLevelXp -> gainXp(state, Progression.xpToNext(state.player.level) * effect.percent / 100)
+        is Effect.TowerFloor -> Result(
+            state.copy(vars = state.vars + (TOWER_VAR to maxOf(state.variable(TOWER_VAR), effect.floor))),
+            emptyList(),
+        )
+        is Effect.SetPath -> setPath(state, effect.path)
+    }
+
+    private fun setPath(state: WorldState, id: String): Result {
+        val def = content.paths[id] ?: error("Tanımsız Yol: $id")
+        return Result(
+            state.withPlayer { it.copy(path = id) },
+            listOf(Notice(NoticeKind.EVOLUTION, texts.formatL("yol_olustu", "path" to def.name), listOf(def.description), Rarity.UNIQUE)),
+        )
     }
 
     // ---- Statlar, itibar ----
@@ -646,6 +662,9 @@ class EffectApplier(private val content: Content) {
 
     companion object {
         const val GENERIC_EVOLUTION = "genel"
+
+        /** Kule'de en yüksek temizlenen kat. */
+        const val TOWER_VAR = "kule_kat"
 
         val ATTENTION_THRESHOLDS = listOf(25, 50, 75, 100)
         const val FEAT_ATTENTION = 2

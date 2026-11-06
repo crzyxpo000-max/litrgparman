@@ -48,7 +48,15 @@ data class RegionDef(
     val gateEnemies: List<String>,
     /** Keşifte karşılaşma yerine bulunabilecek malzemeler. */
     val forage: List<String> = emptyList(),
-)
+    /** Bölgenin canlı olduğu son perde (Öğretici Katman Perde 1'de kapanır). Kapı doğuşu/taşması yalnızca bu aralıkta. */
+    val lastAct: Int = 4,
+    /** Yolculuk koşulu (çok-evren dünyaları, Sistem çekirdeği). */
+    val condition: com.yukselis.engine.story.Condition? = null,
+    /** Keşif savaşının ortam etiketi. */
+    val environment: String? = null,
+) {
+    fun liveIn(act: Int): Boolean = act in this.act..lastAct
+}
 
 data class FactionDef(val id: String, val relations: Map<String, Int>)
 
@@ -116,3 +124,32 @@ data class DiceCheck(
     val failNext: String? = null,
     val failEffects: List<Effect> = emptyList(),
 )
+
+// ---- Aşama 7: Kule ----
+
+/** Kule katı bandı: bu aralıktaki prosedürel katların düşmanları, ortamı ve açılış satırları. */
+data class TowerBand(
+    val min: Int,
+    val max: Int,
+    val enemies: List<String>,
+    val environment: List<String>,
+    val lines: List<LText>,
+)
+
+/**
+ * Kule (GDD: 100 katlı dikey zindan; her 10 katta bir hikaye sırrı). Kat seviyesi = taban · çarpan^kat.
+ * Her 10. kat yazılmış bir hikaye olayıdır (`hikaye_katlari`); diğerleri bantlardan prosedürel üretilir.
+ */
+data class TowerDef(
+    val region: String,
+    val condition: com.yukselis.engine.story.Condition?,
+    val baseLevel: Double,
+    val growth: Double,
+    val floors: Int,
+    val bands: List<TowerBand>,
+    val storyFloors: Map<Int, String>,
+) {
+    fun levelOf(floor: Int): Int = kotlin.math.round(baseLevel * Math.pow(growth, floor.toDouble())).toInt().coerceAtLeast(1)
+
+    fun band(floor: Int): TowerBand? = bands.firstOrNull { floor in it.min..it.max }
+}

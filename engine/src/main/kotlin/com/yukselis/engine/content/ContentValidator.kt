@@ -64,6 +64,11 @@ object ContentValidator {
                 is Condition.Knows -> if (c.knowledge !in content.knowledge) problems += "$where: tanımsız bilgi '${c.knowledge}'"
                 is Condition.HasTrait -> if (c.trait !in content.traits) problems += "$where: tanımsız iz '${c.trait}'"
                 is Condition.All -> c.conditions.forEach { checkCondition(it, where) }
+                // ---- Aşama 7 ----
+                is Condition.EndingEligible -> if (c.ending !in content.endings.endings) problems += "$where: tanımsız son '${c.ending}'"
+                is Condition.EndingIs -> if (c.ending !in content.endings.endings) problems += "$where: tanımsız son '${c.ending}'"
+                is Condition.HasEssence -> if (c.essence !in content.essences) problems += "$where: tanımsız Öz '${c.essence}'"
+                is Condition.HasPath -> if (c.path !in content.paths) problems += "$where: tanımsız Yol '${c.path}'"
                 is Condition.HasSkill -> if (c.skillId !in content.skills) problems += "$where: koşulda tanımsız yetenek '${c.skillId}'"
                 is Condition.HasTitle -> if (c.titleId !in content.titles) problems += "$where: koşulda tanımsız unvan '${c.titleId}'"
                 is Condition.HasClass -> if (c.classId !in content.classes) problems += "$where: koşulda tanımsız sınıf '${c.classId}'"
@@ -81,6 +86,8 @@ object ContentValidator {
                 is Effect.SkillXp -> if (e.skillId !in content.skills) problems += "$where: tanımsız yetenek '${e.skillId}'"
                 is Effect.AddItem -> if (e.itemId !in content.items) problems += "$where: tanımsız eşya '${e.itemId}'"
                 is Effect.EssenceInsight -> if (e.essenceId !in content.essences) problems += "$where: tanımsız Öz '${e.essenceId}'"
+                is Effect.SetPath -> if (e.path !in content.paths) problems += "$where: tanımsız Yol '${e.path}'"
+                is Effect.TowerFloor -> if (content.tower == null || e.floor !in 1..content.tower.floors) problems += "$where: Kule katı geçersiz (${e.floor})"
                 is Effect.DailyProgress -> if (e.kind !in DAILY_KINDS) problems += "$where: bilinmeyen Günlük Görev türü '${e.kind}'"
                 is Effect.StartCombat -> {
                     e.spec.enemies.forEach { id ->
@@ -88,7 +95,7 @@ object ContentValidator {
                         when {
                             id.startsWith(com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX) ->
                                 if (npcId != Content.FOCUS && content.npcs[npcId]?.combat == null) problems += "$where: '$id' için NPC ya da savaş bloğu yok"
-                            id !in content.enemies -> problems += "$where: tanımsız düşman '$id'"
+                            com.yukselis.engine.combat.EnemyScaling.baseId(id) !in content.enemies -> problems += "$where: tanımsız düşman '$id'"
                         }
                     }
                     listOfNotNull(e.spec.win, e.spec.lose, e.spec.flee).forEach {
@@ -293,10 +300,67 @@ object ContentValidator {
         content.regions.values.forEach { r ->
             val at = "bölge ${r.id}"
             if (content.names.find(NameEntry.Kind.PLACE, r.id) == null) problems += "$at: names.yaml'da yer adı yok"
-            (r.enemies + r.gateEnemies).forEach { if (it !in content.enemies) problems += "$at: tanımsız düşman '$it'" }
+            (r.enemies + r.gateEnemies).forEach { if (com.yukselis.engine.combat.EnemyScaling.baseId(it) !in content.enemies) problems += "$at: tanımsız düşman '$it'" }
             r.neighbors.forEach { if (it !in content.regions) problems += "$at: tanımsız komşu '$it'" }
             r.forage.forEach { if (it !in content.items) problems += "$at: tanımsız toplama eşyası '$it'" }
             if (r.control != "canavar" && r.control !in content.factions) problems += "$at: tanımsız kontrol '${r.control}'"
+        }
+        // ---- Aşama 7: Kule, Yollar, sonlar ----
+        content.regions.values.forEach { r -> checkCondition(r.condition, "bölge ${r.id}.kosul") }
+        content.tower?.let { t ->
+            if (t.region !in content.regions) problems += "kule: tanımsız bölge '${t.region}'"
+            checkCondition(t.condition, "kule.kosul")
+            (1..t.floors).filter { it !in t.storyFloors }.forEach { f ->
+                if (t.band(f) == null) problems += "kule: kat $f için bant yok"
+            }
+            t.bands.forEach { b ->
+                if (b.enemies.isEmpty()) problems += "kule bandı ${b.min}–${b.max}: düşman yok"
+                b.enemies.forEach { if (com.yukselis.engine.combat.EnemyScaling.baseId(it) !in content.enemies) problems += "kule bandı ${b.min}–${b.max}: tanımsız düşman '$it'" }
+                b.lines.forEach { checkText(it, "kule bandı ${b.min}–${b.max}.metin") }
+            }
+            t.storyFloors.forEach { (f, ev) ->
+                if (ev !in content.events) problems += "kule: kat $f hikaye olayı tanımsız '$ev'"
+                else if (!content.events.getValue(ev).seedOnly) problems += "kule: kat $f olayı '$ev' yalniz_tohum olmalı (havuzdan gelmesin)"
+            }
+        }
+        content.paths.values.forEach { y ->
+            checkText(y.name, "yol ${y.id}.ad")
+            checkText(y.description, "yol ${y.id}.aciklama")
+            if (y.essences.size != 2) problems += "yol ${y.id}: tam iki Öz olmalı"
+            y.essences.forEach { if (it !in content.essences) problems += "yol ${y.id}: tanımsız Öz '$it'" }
+        }
+        val endings = content.endings
+        endings.endings.values.forEach { e ->
+            checkText(e.name, "son ${e.id}.ad")
+            checkText(e.summary, "son ${e.id}.ozet")
+            checkCondition(e.condition, "son ${e.id}.kosul")
+            e.scenes.forEach { sc ->
+                val scene = content.scenes[sc]
+                if (scene == null) problems += "son ${e.id}: tanımsız sahne '$sc'"
+                else if (!scene.isEnding) problems += "son ${e.id}: '$sc' son sahnesi değil (son: true)"
+            }
+        }
+        if (endings.endings.isNotEmpty() && endings.endings.values.count { it.fallback } != 1) problems += "endings.yaml: tam bir yedek (Hasat) son olmalı"
+        endings.archetypes.forEach { a ->
+            checkText(a.name, "arketip ${a.id}.ad")
+            checkText(a.description, "arketip ${a.id}.aciklama")
+            checkCondition(a.condition, "arketip ${a.id}.kosul")
+        }
+        endings.npcFates.forEach { (id, lines) ->
+            if (id !in content.npcs) problems += "epilog: tanımsız NPC '$id'"
+            if (lines.lastOrNull()?.condition != null) problems += "epilog NPC $id: son satır koşulsuz olmalı (yedek)"
+            lines.forEachIndexed { i, l -> checkText(l.text, "epilog.npc.$id[$i]"); checkCondition(l.condition, "epilog.npc.$id[$i]") }
+        }
+        endings.factionFates.forEach { (id, lines) ->
+            if (id !in content.factions) problems += "epilog: tanımsız fraksiyon '$id'"
+            if (lines.lastOrNull()?.condition != null) problems += "epilog fraksiyon $id: son satır koşulsuz olmalı (yedek)"
+            lines.forEachIndexed { i, l -> checkText(l.text, "epilog.fraksiyon.$id[$i]"); checkCondition(l.condition, "epilog.fraksiyon.$id[$i]") }
+        }
+        // Son sahnesi olup hiçbir sona bağlanmayan sahne (Perde 1 sonları Aşama 7'de devam eder).
+        if (endings.endings.isNotEmpty()) {
+            content.scenes.values.filter { it.isEnding }.forEach { sc ->
+                if (endings.forScene(sc.id) == null) problems += "sahne ${sc.id}: son sahnesi ama endings.yaml'da hiçbir sona bağlı değil"
+            }
         }
         content.factions.values.forEach { f ->
             if (content.names.find(NameEntry.Kind.FACTION, f.id) == null) problems += "fraksiyon ${f.id}: names.yaml'da ad yok"
@@ -416,6 +480,7 @@ object ContentValidator {
             scene.choices.forEach { c ->
                 val where = "$at seçenek ${c.id}"
                 checkText(c.label, where)
+                c.chronicle?.let { checkText(it, "$where.kronik") }
                 checkCondition(c.requires, where)
                 checkCondition(c.showWhen, where)
                 val fights = c.effects.any { it is Effect.StartCombat }
@@ -551,7 +616,7 @@ fun contentWarnings(content: Content): List<String> {
     content.scenes.values.forEach { sc ->
         sc.paragraphs.forEach { scanNames(it.text, "sahne ${sc.id}") }
         sc.insights.forEach { scanNames(it.text, "sahne ${sc.id} sezgi") }
-        sc.choices.forEach { scanNames(it.label, "sahne ${sc.id}.${it.id}") }
+        sc.choices.forEach { scanNames(it.label, "sahne ${sc.id}.${it.id}"); it.chronicle?.let { k -> scanNames(k, "sahne ${sc.id}.${it.id}.kronik") } }
         sc.notices.forEach { n -> (listOf(n.notice.title) + n.notice.lines).forEach { scanNames(it, "sahne ${sc.id} bildirim") } }
         sc.companionLines.forEach { scanNames(it.text, "sahne ${sc.id} yoldaş") }
     }

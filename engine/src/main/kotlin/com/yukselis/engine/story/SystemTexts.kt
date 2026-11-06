@@ -35,6 +35,10 @@ class SystemTexts(private val texts: Map<String, LText>) {
         /** Motorun kullandığı anahtarlar ve beklenen yer tutucular; doğrulayıcı denetler. */
         val REQUIRED: Map<String, Set<String>> = mapOf(
             "xp_kazanildi" to setOf("n"),
+            // ---- Aşama 7 ----
+            "kule_kat" to setOf("n", "level"),
+            "kule_kat_temiz" to setOf("n"),
+            "yol_olustu" to setOf("path"),
             "seviye_atladin" to emptySet(),
             "seviye_satiri" to setOf("from", "to"),
             "serbest_puan" to setOf("n"),

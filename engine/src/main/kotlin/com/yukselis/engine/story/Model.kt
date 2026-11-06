@@ -234,6 +234,46 @@ sealed interface Condition {
         }
     }
 
+    // ---- Aşama 7 ----
+
+    /** Oyuncunun kademesi en az bu (`kademe_min: C`). */
+    data class GradeAtLeast(val grade: com.yukselis.engine.system.Grade) : Condition {
+        override fun test(state: WorldState) = state.player.grade >= grade
+    }
+
+    /** Ordudaki toplam birlik sayısı en az n (`ordu_min`). */
+    data class ArmyAtLeast(val value: Int) : Condition {
+        override fun test(state: WorldState) = state.player.army.values.sum() >= value
+    }
+
+    /** Yaşayan aktif yoldaş sayısı en fazla n (Yalnız Avcı). */
+    data class CompanionsAtMost(val value: Int) : Condition {
+        override fun test(state: WorldState) = state.npcs.values.count { it.companion && it.alive } <= value
+    }
+
+    data class HasEssence(val essence: String) : Condition {
+        override fun test(state: WorldState) = essence in state.player.essences
+    }
+
+    data class HasPath(val path: String) : Condition {
+        override fun test(state: WorldState) = state.player.path == path
+    }
+
+    /** Bu sonun koşulları şu an sağlanıyor (`son_uygun: koruyucu`). */
+    data class EndingEligible(val ending: String, val table: EndingTable) : Condition {
+        override fun test(state: WorldState) = table.eligible(state, ending)
+    }
+
+    /** Yedek (Hasat) dışında hiçbir sonun koşulu sağlanmıyor. */
+    data class NoEnding(val table: EndingTable) : Condition {
+        override fun test(state: WorldState) = table.endings.values.none { !it.fallback && table.eligible(state, it.id) }
+    }
+
+    /** Ulaşılan son bu (epilog koşulları; `son: koruyucu`). */
+    data class EndingIs(val ending: String) : Condition {
+        override fun test(state: WorldState) = state.ending == ending
+    }
+
     data class All(val conditions: List<Condition>) : Condition {
         override fun test(state: WorldState) = conditions.all { it.test(state) }
     }
@@ -306,6 +346,14 @@ sealed interface Effect {
     data class AddArmy(val unit: String, val count: Int) : Effect
     /** Sınıfa/eğilime uygun birlikten n tane. */
     data class GrowArmy(val count: Int) : Effect
+
+    // ---- Aşama 7 ----
+    /** Seviyeye oranlı XP: n · (bir sonraki seviyenin XP ihtiyacı) / 100. Her perdede aynı ağırlıkta ödül. */
+    data class GainLevelXp(val percent: Int) : Effect
+    /** Kule'de en yüksek temizlenen kat (yalnızca yükselir). */
+    data class TowerFloor(val floor: Int) : Effect
+    /** Yol: iki Öz'den doğan özgün güç (A kademesi). */
+    data class SetPath(val path: String) : Effect
 }
 
 data class Paragraph(val text: LText, val condition: Condition? = null)
@@ -334,6 +382,10 @@ data class ChoiceDef(
     val kind: com.yukselis.engine.world.ChoiceKind = com.yukselis.engine.world.ChoiceKind.NORMAL,
     /** Görünür olasılıklı zar kontrolü; başarısızlıkta `failNext` ve `failEffects`. */
     val check: com.yukselis.engine.world.DiceCheck? = null,
+    /** Kronik (Aşama 7): son ekranındaki "en kritik seçimler" kartında bu seçimin uzun vadeli etkisi. */
+    val chronicle: LText? = null,
+    /** Kronik ağırlığı; yoksa etkilerden hesaplanır. */
+    val chronicleWeight: Int? = null,
 )
 
 data class Scene(
@@ -393,7 +445,17 @@ data class Content(
     val ranking: com.yukselis.engine.npc.RankingDef = com.yukselis.engine.npc.RankingDef(),
     /** Fraksiyonların ahlak profili (NPC fraksiyon değiştirirken en yakını seçilir). */
     val factionValues: Map<String, com.yukselis.engine.core.Morality> = emptyMap(),
+    // ---- Aşama 7 ----
+    val endings: EndingTable = EndingTable(),
+    val tower: com.yukselis.engine.world.TowerDef? = null,
+    /** Yollar: iki Öz'den doğan özgün güçler. */
+    val paths: Map<String, com.yukselis.engine.system.PathDef> = emptyMap(),
 ) {
+    /** Düşman tanımı; "id@seviye" ölçekli başvurudur. */
+    fun enemy(ref: String): EnemyDef? = enemies[ref] ?: com.yukselis.engine.combat.EnemyScaling.parse(ref).let { (base, level) ->
+        if (level == null) null else enemies[base]?.let { com.yukselis.engine.combat.EnemyScaling.scale(it, level) }
+    }
+
     companion object {
         /** Kesinti sahnesinden önceki sahneye dönüş. */
         const val RETURN = "@geri"
@@ -406,5 +468,49 @@ data class Content(
 
         /** Olayın odak NPC'si (eşik olayları, genel sahneler). */
         const val FOCUS = "@"
+    }
+}
+
+// ---- Aşama 7: sonlar ve epilog ----
+
+/** Sonlardan biri (GDD: Yapı → Sonlar). Koşul sağlanınca son karar olayında seçenek olarak açılır. */
+data class EndingDef(
+    val id: String,
+    val name: LText,
+    val summary: LText,
+    val condition: Condition?,
+    /** Bu sona ait son sahneler (`son: true`). */
+    val scenes: List<String>,
+    val order: Int = 0,
+    /** Gizli son (Döngü): koşul ipucu gösterilmez. */
+    val hidden: Boolean = false,
+    /** Yedek son (Hasat): hiçbir son tutmazsa. */
+    val fallback: Boolean = false,
+)
+
+/** Epilog satırı: ilk tutan koşulun metni gösterilir. */
+data class EpilogueLine(val condition: Condition?, val text: LText)
+
+/** OP MC türü: sonlar oyuncunun nasıl bir güç olduğunu ahlak eksenlerinden okur. */
+data class ArchetypeDef(val id: String, val name: LText, val description: LText, val condition: Condition?)
+
+/**
+ * Sonlar, OP MC türleri ve epilog kartları (`endings.yaml`). Koşul dilindeki `son_uygun` bu tabloya bakar;
+ * tablo içerik ayrıştırılırken kurulur ve [current] olarak da tutulur (çalışma anında ayrıştırılan tohum koşulları için).
+ */
+class EndingTable {
+    val endings: MutableMap<String, EndingDef> = linkedMapOf()
+    val archetypes: MutableList<ArchetypeDef> = mutableListOf()
+    val npcFates: MutableMap<String, List<EpilogueLine>> = linkedMapOf()
+    val factionFates: MutableMap<String, List<EpilogueLine>> = linkedMapOf()
+
+    fun eligible(state: WorldState, id: String): Boolean = endings[id]?.let { it.condition?.test(state) ?: true } ?: false
+
+    fun forScene(sceneId: String): EndingDef? = endings.values.firstOrNull { sceneId in it.scenes }
+
+    companion object {
+        /** Son yüklenen içeriğin tablosu (çalışma anında ayrıştırılan tohum koşulları için). */
+        @Volatile
+        var current: EndingTable = EndingTable()
     }
 }

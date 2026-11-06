@@ -23,6 +23,8 @@ sealed interface HubAction {
     data object Rest : HubAction
     data class Travel(val region: String) : HubAction
     data object Camp : HubAction
+    /** Kule'nin bir sonraki katına çık (Aşama 7). */
+    data object ClimbTower : HubAction
 }
 
 /**
@@ -101,8 +103,13 @@ class WorldEngine(
         val rng = Rng(s.rngState)
         val slots = rng.nextInt(Progression.MIN_SLOTS, Progression.MAX_SLOTS)
         var uid = s.dayState.nextGateUid
+        // Perde geçişinde yeni bölgeler kayda eklenir (eski kayıtlar ve Perde 2+ bölgeleri).
+        val missing = content.regions.values.filter { it.id !in s.regions }
+        if (missing.isNotEmpty()) s = s.copy(regions = s.regions + missing.associate { it.id to RegionState(it.id, it.baseDanger, it.control) })
         val regions = s.regions.mapValues { (id, r) ->
             val def = content.regions[id] ?: return@mapValues r
+            // Yalnızca bu perdede canlı bölgelerde kapı doğar ve taşar (Öğretici Katman Perde 1'de kapanır).
+            if (!def.liveIn(s.act)) return@mapValues if (r.gates.isEmpty()) r else r.copy(gates = emptyList())
             var region = r
             // Taşma: vaktinde kapatılmayan kapı bölgeye canavar salar.
             val overflowed = region.gates.filter { it.deadline < s.day }
@@ -115,8 +122,8 @@ class WorldEngine(
             val chance = def.gateChance * (1 + region.danger / 100.0)
             if (def.gateEnemies.isNotEmpty() && region.gates.size < MAX_GATES && rng.chance(chance)) {
                 val n = rng.nextInt(1, 3)
-                val enemies = List(n) { def.gateEnemies[rng.nextInt(def.gateEnemies.size)] }
-                val grade = enemies.mapNotNull { content.enemies[it]?.grade }.maxOrNull() ?: Grade.F
+                val enemies = List(n) { scaledRef(def.gateEnemies[rng.nextInt(def.gateEnemies.size)], s.copy(region = id), gate = true) }
+                val grade = enemies.mapNotNull { content.enemy(it)?.grade }.maxOrNull() ?: Grade.F
                 val gate = Gate(uid++, grade, enemies, s.day, s.day + rng.nextInt(GATE_MIN_DAYS, GATE_MAX_DAYS))
                 region = region.copy(gates = region.gates + gate)
                 if (id == s.region) notices += Notice(NoticeKind.QUEST, texts.formatL("kapi_acildi", "region" to regionName(id), "grade" to LText(grade.name, grade.name)))
@@ -151,7 +158,61 @@ class WorldEngine(
             HubAction.Rest -> rest(state)
             is HubAction.Travel -> travel(state, action.region)
             HubAction.Camp -> camp(state)
+            HubAction.ClimbTower -> climbTower(state)
         }
+    }
+
+    // ---------------------------------------------------------------- Kule (Aşama 7)
+
+    /** Kule burada ve şimdi tırmanılabilir mi? */
+    fun towerOpen(state: WorldState): Boolean {
+        val t = content.tower ?: return false
+        return state.region == t.region && (t.condition?.test(state) ?: true) && state.variable(EffectApplier.TOWER_VAR) < t.floors
+    }
+
+    fun nextFloor(state: WorldState): Int = state.variable(EffectApplier.TOWER_VAR) + 1
+
+    /**
+     * Bir sonraki kat: her 10. kat (ve tanımlı her hikaye katı) yazılmış bir olaydır; diğerleri bandın düşmanlarından
+     * kat seviyesine ölçeklenmiş prosedürel bir savaştır. Zaferde `kule_kat` bir artar.
+     */
+    private fun climbTower(state: WorldState): Result {
+        val t = content.tower ?: throw ActionRejected("Kule yok")
+        if (!towerOpen(state)) throw ActionRejected("Kule şu an tırmanılamaz")
+        val floor = nextFloor(state)
+        t.storyFloors[floor]?.let { eventId ->
+            if (eventId in content.events) return startEvent(state, eventId, consumeSlot = true)
+        }
+        val band = t.band(floor) ?: throw ActionRejected("Kat $floor için bant yok")
+        var s = spend(state)
+        val rng = Rng(s.rngState)
+        val level = t.levelOf(floor)
+        val n = if (floor % 5 == 0) 1 else rng.nextInt(1, 3)
+        val enemies = List(n) { com.yukselis.engine.combat.EnemyScaling.ref(band.enemies[rng.nextInt(band.enemies.size)], level) }
+        val line = band.lines.takeIf { it.isNotEmpty() }?.let { it[rng.nextInt(it.size)] }
+        s = s.copy(rngState = rng.state, vars = s.vars + (PENDING_TOWER_VAR to floor))
+        val notices = mutableListOf(Notice(NoticeKind.QUEST, texts.format("kule_kat", "n" to floor, "level" to level), listOfNotNull(line)))
+        val started = combat.start(s, CombatSpec(enemies, environment = band.environment, win = WorldState.HUB, flee = WorldState.HUB))
+        return resolvedNow(started.state, notices + started.notices)
+    }
+
+    /**
+     * Perde 2+ bölge düşmanları dünyanın seviyesine ölçeklenir (gün ilerledikçe yükselir; Kule'yi hızla tırmanan
+     * oyuncu onları ezer: OP MC hakimiyet evresi). Kapılar dünyanın biraz üstündedir.
+     */
+    private fun scaledRef(ref: String, state: WorldState, gate: Boolean = false): String {
+        val region = state.region?.let { content.regions[it] }
+        if (region == null || region.act <= 1 || '@' in ref) return ref
+        val base = content.enemies[ref] ?: return ref
+        val world = Progression.worldLevel(state.day) * (if (gate) GATE_LEVEL_FACTOR else 1.0) * (1 + (state.regions[region.id]?.danger ?: 0) / 400.0)
+        return com.yukselis.engine.combat.EnemyScaling.ref(ref, maxOf(base.level, world.toInt()))
+    }
+
+    /** Yolculuk: komşu ve koşulu tutan, bu perdede canlı bölgeler. */
+    fun canTravel(state: WorldState, region: String): Boolean {
+        val here = state.region?.let { content.regions[it] } ?: return false
+        val def = content.regions[region] ?: return false
+        return region in here.neighbors && def.liveIn(state.act) && (def.condition?.test(state) ?: true)
     }
 
     private fun Result.toResult() = this
@@ -202,10 +263,11 @@ class WorldEngine(
         s = s.copy(rngState = rng.state)
         if (fight) {
             val n = if (rng.chance(0.3)) 2 else 1
-            val enemies = List(n) { def!!.enemies[rng.nextInt(def.enemies.size)] }
+            val enemies = List(n) { scaledRef(def!!.enemies[rng.nextInt(def.enemies.size)], s) }
             s = s.copy(rngState = rng.state)
             notices += Notice(NoticeKind.WARNING, texts.formatL("kesif_karsilasma", "region" to regionName(s.region!!)))
-            val started = combat.start(s, CombatSpec(enemies, environment = listOf(ENV_BY_REGION[s.region] ?: "karanlik"), win = WorldState.HUB, flee = WorldState.HUB))
+            val env = def!!.environment ?: ENV_BY_REGION[s.region] ?: "karanlik"
+            val started = combat.start(s, CombatSpec(enemies, environment = listOf(env), win = WorldState.HUB, flee = WorldState.HUB))
             return resolvedNow(started.state, notices + started.notices)
         }
         val found = def?.forage?.takeIf { it.isNotEmpty() }?.let { it[rng.nextInt(it.size)] }
@@ -235,7 +297,7 @@ class WorldEngine(
     private fun travel(state: WorldState, region: String): Result {
         val here = state.region?.let { content.regions[it] }
         if (region !in content.regions) throw ActionRejected("Tanımsız bölge")
-        if (here != null && region !in here.neighbors) throw ActionRejected("Komşu bölge değil")
+        if (here != null && !canTravel(state, region)) throw ActionRejected("Bu bölgeye şu an gidilemez")
         val moved = spend(state).copy(region = region)
         return finishSlot(moved, listOf(Notice(NoticeKind.SYSTEM, texts.formatL("yolculuk", "region" to regionName(region)))))
     }
@@ -301,6 +363,16 @@ class WorldEngine(
                 }
             }
         }
+        val floor = s.variable(PENDING_TOWER_VAR)
+        if (floor > 0) {
+            s = s.copy(vars = s.vars - PENDING_TOWER_VAR)
+            if (s.variable(CombatEngine.CTX_WON) == 1) {
+                val r = effects.applyAll(s, listOf(Effect.TowerFloor(floor), Effect.AddCrystals(1 + floor / 10)))
+                s = r.state
+                notices += Notice(NoticeKind.QUEST, texts.format("kule_kat_temiz", "n" to floor))
+                notices += r.notices
+            }
+        }
         if (s.variable(CombatEngine.CTX_WON) == 1) {
             val r = effects.applyAll(s, listOf(Effect.DailyProgress("savas", 1)))
             s = r.state
@@ -318,6 +390,10 @@ class WorldEngine(
         const val OVERFLOW_VAR = "kapi_tasma_sayisi"
         const val GATES_CLOSED_VAR = "kapatilan_kapi"
         const val PENDING_GATE_VAR = "_bekleyen_kapi"
+        const val PENDING_TOWER_VAR = "_bekleyen_kat"
+
+        /** Kapı düşmanları dünya seviyesinin bu katı. */
+        const val GATE_LEVEL_FACTOR = 1.15
         const val FIRST_GATE_TITLE = "ilk_kapi_kapatan"
         const val OVERFLOW_DANGER = 15
         const val MAX_GATES = 3

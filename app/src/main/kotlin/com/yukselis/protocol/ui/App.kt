@@ -95,6 +95,7 @@ fun App(viewModel: GameViewModel) {
                         lang = ui.lang,
                         autosave = ui.autosave,
                         onNewGame = viewModel::newGame,
+                        newGamePlusUnlocked = ui.newGamePlusUnlocked,
                         onContinue = viewModel::continueGame,
                         onLanguage = viewModel::setLanguage,
                         theme = ui.settings.theme,
@@ -175,6 +176,7 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
                 onChoose = viewModel::choose,
                 onHub = viewModel::hubAction,
                 onBackToTitle = viewModel::backToTitle,
+                ending = ui.ending,
                 modifier = content,
             )
             Tab.STATUS -> StatusScreen(status, ui.actionNotices, viewModel::allocate, content)

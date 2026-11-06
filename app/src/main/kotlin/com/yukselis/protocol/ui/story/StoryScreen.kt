@@ -67,6 +67,7 @@ fun StoryScreen(
     onChoose: (String) -> Unit,
     onHub: (HubAction) -> Unit,
     onBackToTitle: () -> Unit,
+    ending: com.yukselis.engine.story.EndingView? = null,
     modifier: Modifier = Modifier,
 ) {
     val fullText = scene.current.paragraphs.joinToString("\n\n")
@@ -149,7 +150,7 @@ fun StoryScreen(
             item(key = "choices-$passageKey") {
                 val hub = scene.hub
                 when {
-                    scene.isEnding -> EndingActions(onBackToTitle)
+                    scene.isEnding -> EndingActions(ending, onBackToTitle)
                     hub != null -> HubPanel(hub, onHub)
                     else -> Choices(scene.choices, onChoose)
                 }
@@ -269,16 +270,61 @@ private fun Choices(choices: List<ChoiceView>, onChoose: (String) -> Unit) {
 }
 
 @Composable
-private fun EndingActions(onBackToTitle: () -> Unit) {
-    Column(modifier = Modifier.fillMaxWidth().padding(top = 8.dp)) {
-        Text(
-            text = stringResource(R.string.end_of_demo),
-            style = GameType.systemTitle,
-            color = MaterialTheme.colorScheme.primary,
-        )
+private fun EndingActions(ending: com.yukselis.engine.story.EndingView?, onBackToTitle: () -> Unit) {
+    Column(modifier = Modifier.fillMaxWidth().padding(top = 8.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        if (ending == null) {
+            Text(text = stringResource(R.string.the_end), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary)
+        } else {
+            EndingCards(ending)
+        }
         Spacer(Modifier.height(12.dp))
         Button(onClick = onBackToTitle, modifier = Modifier.fillMaxWidth()) {
             Text(stringResource(R.string.back_to_title))
+        }
+    }
+}
+
+/** Epilog kartları: son, OP MC türü, NPC akıbetleri, fraksiyonlar, en kritik 5 seçim (Aşama 7). */
+@Composable
+private fun EndingCards(e: com.yukselis.engine.story.EndingView) {
+    val gold = androidx.compose.ui.graphics.Color(0xFFFFC107)
+    Text(text = stringResource(R.string.ending_label, e.name), style = GameType.systemTitle, color = gold)
+    Text(text = e.summary, style = GameType.narration)
+    Text(text = stringResource(R.string.ending_stats, e.level, e.grade, e.day), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    e.archetype?.let { name ->
+        EpilogueSection(stringResource(R.string.ending_archetype))
+        EpilogueCardView(name, e.archetypeText ?: "")
+    }
+    if (e.npcs.isNotEmpty()) {
+        EpilogueSection(stringResource(R.string.ending_people))
+        e.npcs.forEach { EpilogueCardView(it.title, it.text) }
+    }
+    if (e.factions.isNotEmpty()) {
+        EpilogueSection(stringResource(R.string.ending_factions))
+        e.factions.forEach { EpilogueCardView(it.title, it.text) }
+    }
+    if (e.choices.isNotEmpty()) {
+        EpilogueSection(stringResource(R.string.ending_choices))
+        e.choices.forEach { c ->
+            EpilogueCardView(stringResource(R.string.ending_choice_day, c.day, c.event), listOfNotNull(c.choice, c.effect).joinToString("\n"))
+        }
+    }
+    if (e.unlocksNewGamePlus) {
+        Text(text = stringResource(R.string.ng_plus_unlocked), style = GameType.systemTitle, color = gold)
+    }
+}
+
+@Composable
+private fun EpilogueSection(title: String) {
+    Text(text = title, style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
+}
+
+@Composable
+private fun EpilogueCardView(title: String, body: String) {
+    androidx.compose.material3.Card(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text(text = title, style = GameType.system, color = MaterialTheme.colorScheme.primary)
+            if (body.isNotEmpty()) Text(text = body, style = GameType.narration)
         }
     }
 }

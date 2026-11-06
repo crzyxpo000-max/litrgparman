@@ -15,10 +15,16 @@ import com.yukselis.engine.world.FeatDef
 import com.yukselis.engine.world.QuestDef
 import com.yukselis.engine.world.QuestStatus
 import com.yukselis.engine.world.RegionDef
+import com.yukselis.engine.world.TowerBand
+import com.yukselis.engine.world.TowerDef
 import com.yukselis.engine.i18n.LText
 import com.yukselis.engine.i18n.NameEntry
 import com.yukselis.engine.i18n.NameRegistry
+import com.yukselis.engine.story.ArchetypeDef
 import com.yukselis.engine.story.ChoiceDef
+import com.yukselis.engine.story.EndingDef
+import com.yukselis.engine.story.EndingTable
+import com.yukselis.engine.story.EpilogueLine
 import com.yukselis.engine.story.Condition
 import com.yukselis.engine.story.Content
 import com.yukselis.engine.story.Effect
@@ -40,6 +46,7 @@ import com.yukselis.engine.system.Grade
 import com.yukselis.engine.system.ItemDef
 import com.yukselis.engine.system.ItemType
 import com.yukselis.engine.system.ItemUse
+import com.yukselis.engine.system.PathDef
 import com.yukselis.engine.system.ProfessionDef
 import com.yukselis.engine.system.Rarity
 import com.yukselis.engine.system.RecipeDef
@@ -87,6 +94,8 @@ object ContentParser {
     const val KNOWLEDGE = "knowledge.yaml"
     const val ARMY = "army.yaml"
     const val RANKING = "ranking.yaml"
+    const val ENDINGS = "endings.yaml"
+    const val TOWER = "tower.yaml"
 
     data class StoryFile(val start: String?, val scenes: List<Scene>)
 
@@ -98,6 +107,9 @@ object ContentParser {
         eventFiles: List<String> = emptyList(),
         npcFiles: List<String> = emptyList(),
     ): Content {
+        // Sonlar tablosu olaylardan önce kurulur: `son_uygun` koşulları ona bağlanır, tablo sonra doldurulur.
+        val endingTable = EndingTable()
+        EndingTable.current = endingTable
         val stories = storyFiles.map { parseStory(it) }
         val eventPacks = eventFiles.map { parseEvents(it) }
         val scenes = stories.flatMap { it.scenes } + eventPacks.flatMap { it.second }
@@ -123,7 +135,14 @@ object ContentParser {
             qid to QuestDef(qid, texts.formatL("kisisel_gorev_ad", "npc" to short), goal)
         }
         val factionsRoot = obj(FACTIONS)?.objectOf("fraksiyonlar")
+        obj(ENDINGS)?.let { fillEndings(endingTable, it) }
         return Content(
+            endings = endingTable,
+            tower = obj(TOWER)?.let { (it["kule"] as? JsonObject)?.let(::parseTower) },
+            paths = obj(ESSENCES)?.objectOf("yollar")?.map { (id, v) ->
+                val o = v.jsonObject
+                PathDef(id, ltext(o["ad"], "$id.ad"), ltext(o["aciklama"], "$id.aciklama"), o.strings("ozler"))
+            }?.associateBy { it.id } ?: emptyMap(),
             scenes = scenes.associateBy { it.id },
             names = names,
             titles = parseTitles(titlesJson).associateBy { it.id },
@@ -338,7 +357,64 @@ object ContentParser {
         gateChance = o.double("kapi_sansi") ?: 0.0,
         gateEnemies = o.strings("kapi_dusmanlari"),
         forage = o.strings("toplama"),
+        lastAct = o.int("son_perde") ?: 4,
+        condition = o["kosul"]?.let { condition(it.jsonObject) },
+        environment = o.string("ortam"),
     )
+
+    private fun parseTower(o: JsonObject): TowerDef {
+        val lvl = o["seviye"] as? JsonObject
+        return TowerDef(
+            region = o.string("bolge") ?: throw ContentFormatException("kule: 'bolge' eksik"),
+            condition = o["kosul"]?.let { condition(it.jsonObject) },
+            baseLevel = lvl?.double("taban") ?: 20.0,
+            growth = lvl?.double("carpan") ?: 1.0385,
+            floors = o.int("kat_sayisi") ?: 100,
+            bands = o.array("bantlar").mapIndexed { i, e ->
+                val b = e.jsonObject
+                TowerBand(
+                    min = b.int("min") ?: throw ContentFormatException("kule.bantlar[$i]: 'min' eksik"),
+                    max = b.int("max") ?: throw ContentFormatException("kule.bantlar[$i]: 'max' eksik"),
+                    enemies = b.strings("dusmanlar"),
+                    environment = b.strings("ortam"),
+                    lines = b.array("metinler").map { ltext(it, "kule.bantlar[$i].metin") },
+                )
+            },
+            storyFloors = (o["hikaye_katlari"] as? JsonObject)?.map { (k, v) ->
+                (k.toIntOrNull() ?: throw ContentFormatException("kule.hikaye_katlari: '$k' kat numarası olmalı")) to v.str(k)
+            }?.toMap() ?: emptyMap(),
+        )
+    }
+
+    /** `endings.yaml`: sonlar, OP MC türleri, NPC ve fraksiyon epilogları. */
+    private fun fillEndings(table: EndingTable, o: JsonObject) {
+        o.objectOf("sonlar")?.forEach { (id, v) ->
+            val e = v.jsonObject
+            table.endings[id] = EndingDef(
+                id = id,
+                name = ltext(e["ad"], "son.$id.ad"),
+                summary = ltext(e["ozet"], "son.$id.ozet"),
+                condition = e["kosul"]?.let { condition(it.jsonObject) },
+                scenes = e.strings("sahne").ifEmpty { throw ContentFormatException("son $id: 'sahne' eksik") },
+                order = e.int("sira") ?: 0,
+                hidden = e.bool("gizli"),
+                fallback = e.bool("yedek"),
+            )
+        }
+        o.objectOf("arketipler")?.forEach { (id, v) ->
+            val a = v.jsonObject
+            table.archetypes += ArchetypeDef(id, ltext(a["ad"], "arketip.$id.ad"), ltext(a["aciklama"], "arketip.$id.aciklama"), a["kosul"]?.let { condition(it.jsonObject) })
+        }
+        fun lines(x: JsonObject?, kind: String) = x?.map { (id, v) ->
+            id to v.jsonArray.map { l ->
+                val lo = l.jsonObject
+                EpilogueLine(lo["kosul"]?.let { condition(it.jsonObject) }, ltext(lo["metin"], "epilog.$kind.$id"))
+            }
+        }?.toMap() ?: emptyMap()
+        val ep = o["epilog"] as? JsonObject
+        table.npcFates += lines(ep?.get("npc") as? JsonObject, "npc")
+        table.factionFates += lines(ep?.get("fraksiyon") as? JsonObject, "fraksiyon")
+    }
 
     private fun parseFeat(id: String, o: JsonObject) = FeatDef(
         id = id,
@@ -540,6 +616,8 @@ object ContentParser {
             effects = o.array("etkiler").flatMap { effects(it.jsonObject, "$sceneId.$id") },
             next = o.string("sonraki"),
             kind = ChoiceKind.fromKey(o.string("tur")),
+            chronicle = o["kronik"]?.let { ltext(it, "$sceneId.$id.kronik") },
+            chronicleWeight = o.int("kronik_agirlik"),
             check = (o["zar"] as? JsonObject)?.let { z ->
                 DiceCheck(
                     stat = stat(z.string("stat") ?: throw ContentFormatException("$sceneId.$id: zar.stat eksik")),
@@ -600,6 +678,15 @@ object ContentParser {
                 "gorunen_seviye_min" -> listOf(Condition.PublicLevelAtLeast(value.int(key)))
                 "gorunen_seviye_max" -> listOf(Condition.PublicLevelAtMost(value.int(key)))
                 "iz" -> listOf(Condition.HasTrait(value.str(key)))
+                // ---- Aşama 7 ----
+                "kademe_min" -> listOf(Condition.GradeAtLeast(Grade.fromKey(value.str(key)) ?: throw ContentFormatException("kademe_min: F–S olmalı")))
+                "ordu_min" -> listOf(Condition.ArmyAtLeast(value.int(key)))
+                "yoldas_sayisi_max" -> listOf(Condition.CompanionsAtMost(value.int(key)))
+                "oz" -> listOf(Condition.HasEssence(value.str(key)))
+                "yol" -> listOf(Condition.HasPath(value.str(key)))
+                "son_uygun" -> listOf(Condition.EndingEligible(value.str(key), EndingTable.current))
+                "hicbir_son" -> listOf(Condition.NoEnding(EndingTable.current))
+                "son" -> listOf(Condition.EndingIs(value.str(key)))
                 else -> throw ContentFormatException("Bilinmeyen koşul: $key")
             }
         }
@@ -690,6 +777,10 @@ object ContentParser {
             "npc_odul" -> listOf(Effect.NpcReward(value.str(key)))
             "ordu" -> value.jsonObject.map { (u, v) -> Effect.AddArmy(u, v.int(u)) }
             "ordu_kazan" -> listOf(Effect.GrowArmy(value.int(key)))
+            // ---- Aşama 7 ----
+            "xp_seviye" -> listOf(Effect.GainLevelXp(value.int(key)))
+            "kule_kat" -> listOf(Effect.TowerFloor(value.int(key)))
+            "yol" -> listOf(Effect.SetPath(value.str(key)))
             else -> throw ContentFormatException("$where: bilinmeyen etki '$key'")
         }
     }

@@ -113,6 +113,16 @@ object Progression {
     /** Gün başına beklenen insan seviyesi (Dikkat hesabı): 1 + 0,4 · gün. */
     fun expectedLevel(day: Int): Int = 1 + (0.4 * day).toInt()
 
+    /**
+     * Dünyanın seviyesi (Aşama 7): Perde 2+ bölge düşmanlarının ve kapıların seviyesi. Kule eğrisini (20 · 1,0385^kat)
+     * Gün 30'dan Gün 330'a doğrusal bir tırmanışla izler: Gün 31 ≈ 20, Gün 180 ≈ 132 (C), Gün 330 ≈ 870 (S).
+     * Kule'yi bundan hızlı tırmanan oyuncu çevresini ezer (DECISIONS #106).
+     */
+    fun worldLevel(day: Int): Double {
+        val floor = ((day - 30).coerceAtLeast(0) / 3.0).coerceAtMost(100.0)
+        return 20.0 * 1.0385.pow(floor)
+    }
+
     /** Gün içi olay/eylem yuvası sayısı: 2–4 (GDD: Gün döngüsü). */
     const val MIN_SLOTS = 2
     const val MAX_SLOTS = 4

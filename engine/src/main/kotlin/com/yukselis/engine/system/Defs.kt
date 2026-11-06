@@ -129,6 +129,9 @@ data class RecipeDef(
 
 data class EssenceDef(val id: String, val name: LText, val description: LText)
 
+/** Yol (A kademesi): iki Öz'ün birleşmesinden doğan, oyuncuya özgü güç (GDD: Unvanlar, Öz ve Miras). */
+data class PathDef(val id: String, val name: LText, val description: LText, val essences: List<String>)
+
 data class DailyTemplate(
     val id: String,
     val title: LText,

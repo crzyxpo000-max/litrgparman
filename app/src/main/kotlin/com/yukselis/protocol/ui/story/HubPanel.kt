@@ -52,6 +52,15 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
             OutlinedButton(onClick = { onAction(HubAction.Train) }, contentPadding = pad, modifier = Modifier.weight(1f)) { Text(stringResource(R.string.hub_train), maxLines = 1) }
             OutlinedButton(onClick = { onAction(HubAction.Rest) }, contentPadding = pad, modifier = Modifier.weight(1f)) { Text(stringResource(R.string.hub_rest), maxLines = 1) }
         }
+        hub.tower?.let { t ->
+            OutlinedButton(onClick = { onAction(HubAction.ClimbTower) }, modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    stringResource(if (t.story) R.string.hub_tower_story else R.string.hub_tower, t.floor, t.level),
+                    style = GameType.system,
+                    color = Color(0xFFAB47BC),
+                )
+            }
+        }
         hub.gates.forEach { g ->
             OutlinedButton(onClick = { onAction(HubAction.EnterGate(g.uid)) }, modifier = Modifier.fillMaxWidth()) {
                 Text(stringResource(R.string.hub_gate, g.grade, g.enemies, g.daysLeft), style = GameType.system, color = Color(0xFFFFA726))

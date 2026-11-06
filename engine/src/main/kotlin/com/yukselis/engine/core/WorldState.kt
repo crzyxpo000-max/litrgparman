@@ -187,6 +187,11 @@ data class WorldState(
     val knowledge: List<String> = emptyList(),
     /** Süren olayın odak NPC'si ({npc:@}). */
     val focusNpc: String? = null,
+    // ---- Aşama 7 ----
+    /** Kronik: önemli seçimler (son ekranındaki "en kritik 5 seçim"). */
+    val chronicle: List<ChronicleEntry> = emptyList(),
+    /** Ulaşılan son (kaydedilmez; son sahnesinden türetilir). */
+    val ending: String? = null,
 ) {
     val act: Int get() = GameClock.actFor(day)
 
@@ -226,6 +231,9 @@ data class WorldState(
             )
     }
 }
+
+/** Kronikte bir seçim: kimlikler (dil bağımsız) ve ağırlık. */
+data class ChronicleEntry(val day: Int, val event: String, val scene: String, val choice: String, val weight: Int)
 
 /** Oyun takvimi: 365 gün, dört perde (GDD: Yapı → Perdeler). */
 object GameClock {

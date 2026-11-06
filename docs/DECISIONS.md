@@ -2,6 +2,17 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Aşama 7 — 2026-11-06
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 105 | **Ölçekli düşman başvurusu** `id@seviye`: statlar ve saldırı tabanları beklenen insan statı eğrisiyle (5 + Σ (4 · kademe çarpanı + 3)/8), can aynı eğrinin can formülüyle, XP `xpToNext(L) · max(0,1; 0,012·L) · tür` ile ölçeklenir (tür = tanımdaki XP'nin kendi seviyesine oranı/0,1, 0,5–3; boss ×3); kademe seviyeden | Perde 2–4'ün E→S düşmanları, Kule ve kapılar için yüzlerce stat bloğu yazmadan; seviye yükseldikçe zafer başına daha çok seviye (OP MC üstel büyüme). | Aşama 9 simülatörü. |
+| 106 | **Dünya seviyesi** `20 · 1,0385^((gün−30)/3)`: Perde 2+ bölge düşmanları bu seviyede (tehlikeyle +%25'e kadar), kapılar ×1,15. Kule katı seviyesi aynı eğri: `20 · 1,0385^kat` (kat 50 ≈ 132 C, kat 100 ≈ 876 S) | Kule'yi beklenenden hızlı tırmanan oyuncu çevresini ezer (hakimiyet evresi); GDD kademe tablosuyla perdeler örtüşür (Gün 180 ≈ C, Gün 330 ≈ S). | Aşama 9. |
+| 107 | **Kule**: `tower.yaml` (bantlar, kat seviyesi, hikaye katları); her 10. kat yazılmış `yalniz_tohum` olay, diğerleri bant düşmanlarından prosedürel savaş (her 5. kat tek, güçlü düşman). Zafer `kule_kat` +1, Öz Kristali; hikaye katı `kule_kat: n` etkisiyle ilerler | GDD "100 katlı dikey zindan, her 10 katta bir hikaye sırrı". | — |
+| 108 | **Sonlar** `endings.yaml`: koşul, sahne(ler), yedek (Hasat) ve gizli (Döngü); koşul dili `son_uygun`, `hicbir_son`, `son`; son karar olayı yalnızca uygun sonları gösterir. Son ekranı: OP MC türü (ahlak koşullu arketip), NPC ve fraksiyon epilogları (ilk tutan satır), **kronik**: önemli olaylardaki seçimler ağırlıkla (ahlak + itibar/2 + ölüm 25 + fraksiyon/ayrılık 12 + tohum 6 + `kronik` metni 10; `kronik_agirlik` ile elle) saklanır, en ağır 5'i gösterilir | GDD son anlatımı (Fallout tarzı epilog kartları). | — |
+| 109 | **New Game+**: cihazda bitirilmiş oyun sayısı ve Döngü sonu uygulama ayarlarında (meta) tutulur; yeni oyun `onceki_oyun` değişkenini ve NG+ için `yeni_dongu` bayrağını alır, her stat +3. Kayıt v4 (kronik) | GDD: Döngü "en az bir önceki bitirilmiş oyun" ister ve New Game+'ı açar. | Aşama 9. |
+| 110 | Yeni koşullar `kademe_min`, `ordu_min` (birlik sayısı), `yoldas_sayisi_max`, `oz`, `yol`; yeni etkiler `xp_seviye` (seviye XP'sinin yüzdesi), `kule_kat`, `yol`. Bölgelerde `son_perde` (Öğretici Katman Perde 1'de kapanır; kapı doğuşu/taşması yalnızca canlı bölgede), `kosul` (yolculuk), `ortam`. Düşman, eşya, uyanış ve unvan dosyaları parçalanabilir (`enemies/`, `items/`, `awakenings/`, `titles/`) | Paralel içerik partileri birbirinin dosyasına yazmasın; Perde 2+ ödülleri her seviyede anlamlı kalsın. | — |
+
 ## Aşama 6 — 2026-11-06
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |
