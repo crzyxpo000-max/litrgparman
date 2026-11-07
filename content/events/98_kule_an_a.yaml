@@ -1,0 +1,1474 @@
+# Kule kat anları A (DECISIONS #148): şablonlar "kestirme" ve "hazine", her biri bantta bir varyasyon (0–9).
+# Havuzdan gelmez (yalniz_tohum); kat geçildikten sonra WorldEngine.towerMoment günde en çok bir kez, %40 olasılıkla
+# `kule_an` etiketli bir varyasyon seçer. `kule_kat` = geçilen en yüksek kat; her varyasyon kendi bandına kapılıdır.
+# Hızlı tırmanışta motorun özet satırı ilk paragraf olur: açılışlar tırmanışı yeniden anlatmaz.
+# Zar eşikleri bant düzeyine göre (d20 + stat ≥ zorluk): 1–9 ≈ 32 · 11–19 ≈ 45 · 21–29 ≈ 60 · 31–39 ≈ 78 · 41–49 ≈ 105 ·
+# 51–59 ≈ 140 · 61–69 ≈ 185 · 71–79 ≈ 235 · 81–89 ≈ 300 · 91–99 ≈ 375; `gerekli` eşikleri biraz altında.
+# Zarlar `tek: false`: olay tekrar ettiği için kalıcı kilit bırakmaz.
+olaylar:
+  # ================================================================== KESTİRME 0 — 1–9: Kıyıkent'in Yankısı (çatılar)
+  - id: "kule_an_kestirme_0"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "kestirme"]
+    gerilim: 1
+    kosul: { degisken_min: { kule_kat: 1 }, degisken_max: { kule_kat: 9 } }
+    kart: { tr: "Çatılardan kestirme", en: "Over the rooftops" }
+    sahne: "kan_kes0_giris"
+    sahneler:
+      - id: "kan_kes0_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Bir sonraki merdiven sokağın öbür ucunda, iki blok ötede. Ama sokak düz durmuyor: her köşeyi dönüşünde biraz daha uzamış, sanki şehri ezberden çizen el yolu bir kez fazla çizmiş.", en: "The next stairwell is at the far end of the street, two blocks down. Except the street won't stay put: every time you turn a corner it's gotten a little longer, like whoever drew the city from memory drew the road one time too many." }
+          - { tr: "Apartmanların çatıları ise neredeyse birbirine değiyor, aralarında ancak birer adımlık boşluk var. Çatılardan gidersen merdivene birkaç dakikada varırsın; yeter ki aşağıda ağzını açıp kapayan asfaltın üstüne düşme.", en: "The rooftops, though, almost touch, with barely a stride between them. Go over the roofs and you'd hit the stairs in a couple of minutes. You'd just have to not fall onto the asphalt down there, opening and shutting its mouth." }
+          - metin: { tr: "{npc:deniz_arman} köşedeki fırının tabelasına bakıp kaşlarını çatıyor. Bu mahalleyi ezbere bildiği belli; tabeladaki kaymış harf canını sıkmış.", en: "{npc:deniz_arman} squints at the bakery sign on the corner. {zamir:deniz_arman|o|b} clearly know{zamir:deniz_arman|s} this neighborhood by heart, and the letter that's off on that sign is bugging {zamir:deniz_arman|onu}." }
+            kosul: { yoldas: "deniz_arman" }
+        sezgiler:
+          - kosul: { stat: { per: 24 } }
+            metin: { tr: "En geniş boşluk üçüncü blokta. Oradaki oluk da çürük görünüyor.", en: "The widest gap is at the third building, and the gutter there looks rotten." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "aşağıdaki asfalt nefes alıyor. düşersen yutmaz herhalde. herhalde.", en: "the asphalt down there is breathing. it probably won't swallow you if you fall. probably." }
+        secenekler:
+          - id: "cati"
+            etiket: { tr: "Çatıdan çatıya atla", en: "Jump from roof to roof" }
+            zar: { stat: "agi", zorluk: 32, tek: false, basarisiz: "kan_kes0_dusus", basarisiz_etkiler: [{ can: -6 }, { xp_seviye: 2 }] }
+            etkiler:
+              - xp_seviye: 6
+              - oz_kristali: 2
+            sonraki: "kan_kes0_cati"
+          - id: "sokak"
+            etiket: { tr: "Uzayan sokaktan yürü, acele etme", en: "Walk the stretching street. No rush" }
+            etkiler:
+              - xp_seviye: 3
+            sonraki: "@akis"
+          - id: "deniz"
+            etiket: { tr: "{npc:deniz_arman|in} bildiği yoldan git", en: "Let {npc:deniz_arman} show you the real shortcut" }
+            goster: { yoldas: "deniz_arman" }
+            etkiler:
+              - xp_seviye: 5
+              - oz_kristali: 2
+              - iliski: { deniz_arman: { guven: 2, baglilik: 2 } }
+            sonraki: "kan_kes0_deniz"
+
+      - id: "kan_kes0_cati"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Koşup ilk boşluğun üstünden süzülüyorsun; indiğinde kopya kiremitlerin tek biri bile kaymıyor. Üçüncü çatının çürük oluğunu sezip bir adım erken sıçrıyorsun.", en: "You get a running start and sail over the first gap, and when you land not one copied shingle slips. At the third roof you feel the rotten gutter coming and jump a step early." }
+          - { tr: "Son çatının köşesinde, bir televizyon antenine sıkışmış küçük bir kristal kümesi parlıyor. Aşağıda asfalt ağzını boşuna açıp kapamış.", en: "On the corner of the last roof, a little cluster of crystals glints, wedged against a TV antenna. Down below, the asphalt opened and shut its mouth for nothing." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Merdiven boşluğuna in", en: "Drop down into the stairwell" }
+            sonraki: "@akis"
+
+      - id: "kan_kes0_dusus"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Üçüncü çatının oluğu ayağının altında un ufak oluyor. Bir balkon tentesine çarpıp kaldırıma yuvarlanırken asfaltın ağzı bileğinin bir karış ötesinde şak diye kapanıyor.", en: "The third roof's gutter crumbles under your boot. You bounce off a balcony awning and roll onto the sidewalk, and the asphalt's mouth snaps shut about six inches from your wrist." }
+          - { tr: "Kalkıp üstünü başını silkeliyorsun. Sokak yine uzamış; yürümekten başka çare yok.", en: "You get up and brush yourself off. The street's gotten longer again. Nothing to do but walk." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Topallayarak yürü", en: "Limp the rest of the way" }
+            sonraki: "@akis"
+
+      - id: "kan_kes0_deniz"
+        yer: "kule"
+        paragraflar:
+          - { tr: "{npc:deniz_arman} kolundan tuttuğu gibi seni fırının arka kapısına götürüyor. \"Bu sokakta fırın hep köşedeydi, iki blok ötede değil,\" diyor. \"Biri yanlış çizmiş ama arka kapı yine doğru yere açılır.\"", en: "{npc:deniz_arman} drags you around to the bakery's back door. \"The bakery was always on the corner, not two blocks down,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}. \"Somebody drew it wrong, but the back door still opens where it should.\"" }
+          - { tr: "Un kokan dar bir koridordan geçip merdiven boşluğunun tam dibinde çıkıyorsunuz. Tezgâhın altındaki kasa çekmecesinde, bozuk paraların arasına karışmış iki Öz Kristali parlıyor.", en: "You go down a narrow hallway that smells like flour and come out right at the foot of the stairwell. In the register drawer under the counter, two Essence Crystals glint among the loose change." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "\"Bu şehri benden iyi biliyorsun.\"", en: "\"You know this city better than I do.\"" }
+            sonraki: "@akis"
+
+  # ================================================================== KESTİRME 1 — 11–19: İçerideki Deniz (karanlık su)
+  - id: "kule_an_kestirme_1"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "kestirme"]
+    gerilim: 1
+    kosul: { degisken_min: { kule_kat: 11 }, degisken_max: { kule_kat: 19 } }
+    kart: { tr: "Karanlık sudan kestirme", en: "Across the dark water" }
+    sahne: "kan_kes1_giris"
+    sahneler:
+      - id: "kan_kes1_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Bir sonraki merdiven, durgun suyun ortasından yükselen bir kayalığın tepesinde. Kıyıdan dolaşan yol yarı batık bir iskelenin kazıklarına tutuna tutuna ilerliyor; uzun ve kaygan, ama güvenli.", en: "The next stairs rise from a rocky islet out in the middle of the flat water. The way around hugs the shore along the pilings of a half-sunk pier: long and slick, but safe." }
+          - { tr: "Dosdoğru yüzersen yol yarı yarıya kısalır. Ama dipteki ışık arada bir yükselip sönüyor, aşağıda nefes alan şey de her nefeste suyu biraz daha kabartıyor.", en: "Swim straight across and you'd cut the distance in half. But every so often the light rises from the deep and goes out, and whatever's breathing down there lifts the water a little more with every breath." }
+        sezgiler:
+          - kosul: { stat: { per: 36 } }
+            metin: { tr: "Işık her yükselişinde su bir karış çekiliyor ve kayalığa uzanan bir kum sırtı birkaç saniyeliğine açığa çıkıyor.", en: "Every time the light rises, the water draws back about a foot, and for a few seconds a sandbar shows, running out to the islet." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "aşağıdaki bizi duymuyor. ya da duyuyor da umursamıyor. ikisi de iyi değil.", en: "the thing below can't hear us. or it can and doesn't care. neither one's good." }
+        secenekler:
+          - id: "yuz"
+            etiket: { tr: "Karşıya dosdoğru yüz", en: "Swim straight across" }
+            zar: { stat: "end", zorluk: 45, tek: false, basarisiz: "kan_kes1_akinti", basarisiz_etkiler: [{ can: -10 }, { xp_seviye: 2 }] }
+            etkiler:
+              - xp_seviye: 6
+              - oz_kristali: 3
+            sonraki: "kan_kes1_yuz"
+          - id: "kazik"
+            etiket: { tr: "İskele kazıklarına tutunarak dolaş", en: "Work your way around on the pier pilings" }
+            etkiler:
+              - xp_seviye: 3
+            sonraki: "@akis"
+          - id: "kum"
+            etiket: { tr: "Işık yükselince kum sırtından koş", en: "Run the sandbar when the light rises" }
+            gerekli: { stat: { per: 36 } }
+            etkiler:
+              - xp_seviye: 6
+              - oz_kristali: 3
+            sonraki: "kan_kes1_kum"
+
+      - id: "kan_kes1_yuz"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Buz gibi su göğsünü mengene gibi sıkarken sen kulaç atmayı bırakmıyorsun. Bir ara dipteki ışık tam altında yanıyor ve bacaklarının arasından devasa, sakin bir şeyin gölgesi kayıp gidiyor.", en: "The ice-cold water clamps your chest like a vise, and you keep stroking anyway. At one point the light burns right underneath you, and the shadow of something huge and calm slides past between your legs." }
+          - { tr: "Kayalığa çıktığında dişlerin takırdıyor. Taşın yosunlu dibindeki tuz kabuklarının arasında birkaç Öz Kristali parlıyor; bu taraftan gelen pek olmamış belli ki.", en: "By the time you haul yourself onto the rocks your teeth are chattering. In the salt crust on the mossy base of the rock, a few Essence Crystals glint. Clearly not many people come this way." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Merdivene tırman", en: "Climb up to the stairs" }
+            sonraki: "@akis"
+
+      - id: "kan_kes1_akinti"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Yolun yarısında su birden kabarıyor: aşağıdaki şey nefesini vermiş. Akıntı seni kazıkların arasına geri savuruyor, midye kabukları da kolunu boydan boya çiziyor.", en: "Halfway across, the water surges all at once: the thing below has breathed out. The current flings you back among the pilings, and the mussel shells rake your arm from wrist to elbow." }
+          - { tr: "Bir kazığa sarılıp soluklanıyorsun. Kıyıdan dolaşmaktan başka yol kalmadı.", en: "You hug a piling until you get your breath back. The long way around is the only way left." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kazıklardan dolaş", en: "Go around by the pilings" }
+            sonraki: "@akis"
+
+      - id: "kan_kes1_kum"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Işık yükselip su çekilir çekilmez kum sırtına atılıyorsun. Islak kumda soluk soluğa koşarken arkanda su yeniden kapanıyor.", en: "The light rises, the water draws back, and you throw yourself onto the sandbar. You run flat out across the wet sand while the water closes up behind you." }
+          - { tr: "Kayalığa vardığında yalnızca ayakkabıların ıslak. Kum sırtının bittiği yerde, çekilen suyun geride bıraktığı küçük bir kristal yığını seni bekliyor.", en: "By the time you reach the islet, only your shoes are wet. Where the sandbar ends, the retreating water has left a little heap of crystals waiting for you." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kristalleri topla, merdivene çık", en: "Scoop up the crystals and head up" }
+            sonraki: "@akis"
+
+  # ================================================================== KESTİRME 2 — 21–29: Cam (çatlak köprü)
+  - id: "kule_an_kestirme_2"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "kestirme"]
+    gerilim: 1
+    kosul: { degisken_min: { kule_kat: 21 }, degisken_max: { kule_kat: 29 } }
+    kart: { tr: "Çatlak cam köprü", en: "The cracked-glass bridge" }
+    sahne: "kan_kes2_giris"
+    sahneler:
+      - id: "kan_kes2_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Merdivene giden en kısa yol, iki cam duvarın arasına gerilmiş ince bir cam köprü. Altından bir önceki katı, kendi ayak izlerinle birlikte görebiliyorsun; köprünün ortasında örümcek ağı gibi bir çatlak yayılmış.", en: "The shortest way to the stairs is a thin glass bridge strung between two glass walls. Through it you can see the floor below, your own footprints and all. In the middle of the bridge, a crack has spread like a spiderweb." }
+          - { tr: "Uzun yol katın kalın çerçevesini izleyerek dolanıyor. Orada camdaki yansımaların her adımda yanında yürüyor, hep yarım an geriden.", en: "The long way follows the floor's thick frame all the way around. There, your reflections in the glass walk with you step for step, always half a beat behind." }
+          - { tr: "Köprünün camındaki yansıman ise senden önce davranıyor: sen daha kıpırdamadan bir adım atıp duruyor.", en: "Your reflection in the bridge glass, though, moves first. Before you've even shifted your weight, it takes a step and stops." }
+        sezgiler:
+          - kosul: { stat: { wis: 50 } }
+            metin: { tr: "Yansıman çatlağın kollarına hiç basmıyor.", en: "Your reflection never steps on the arms of the crack." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "o ben değilim, söyleyeyim. o adımları ben atmıyorum.", en: "that isn't me, just so you know. i'm not the one taking those steps." }
+        secenekler:
+          - id: "kopru"
+            etiket: { tr: "Çatlak köprüden koşarak geç", en: "Sprint across the cracked bridge" }
+            zar: { stat: "agi", zorluk: 60, tek: false, basarisiz: "kan_kes2_kirik", basarisiz_etkiler: [{ can: -12 }, { xp_seviye: 2 }] }
+            etkiler:
+              - xp_seviye: 6
+              - oz_kristali: 3
+            sonraki: "kan_kes2_kopru"
+          - id: "cerceve"
+            etiket: { tr: "Çerçeveyi izleyip uzun yoldan dolaş", en: "Take the long way along the frame" }
+            etkiler:
+              - xp_seviye: 3
+            sonraki: "@akis"
+          - id: "yansima"
+            etiket: { tr: "Yansımanın bastığı yere bas", en: "Step where your reflection steps" }
+            gerekli: { stat: { wis: 50 } }
+            etkiler:
+              - xp_seviye: 7
+              - oz_kristali: 2
+            sonraki: "kan_kes2_yansima"
+
+      - id: "kan_kes2_kopru"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Çatlak ayağının altında incecik bir sesle çıtırdıyor; sen hızını kesmeden karşıya varıyorsun. Arkanda köprü, bütün kata yayılan tek bir notada inlemeye başlamış.", en: "The crack ticks under your feet with a thin little sound, and you make the far side without slowing down. Behind you, the bridge has started to moan on a single note that carries across the whole floor." }
+          - { tr: "Köprünün bittiği yerdeki cam sütunun içinde, camla birlikte donup kalmış birkaç kristal var. Yumruğunu indirince sütun onları sana teslim ediyor.", en: "Inside the glass pillar where the bridge ends, a few crystals have frozen right into the glass. You bring your fist down and the pillar gives them up." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Merdivene geç", en: "Head for the stairs" }
+            sonraki: "@akis"
+
+      - id: "kan_kes2_kirik"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Ortaya vardığında çatlak birden açılıyor. Kırık camla birlikte bir kat aşağıdaki çıkıntıya düşüyorsun; kesikler ince ama sayısız.", en: "When you reach the middle, the crack opens all at once. You drop with the broken glass onto a ledge one floor down. The cuts are thin, but there are a lot of them." }
+          - { tr: "Yukarıda, kırılan köprünün kenarında yansıman dikiliyor. O düşmemiş.", en: "Up above, at the edge of the broken bridge, your reflection is standing there. It didn't fall." }
+          - { tr: "Çıkıntıdan tırmanıp çerçeve yoluna dönmen epey vakit alıyor.", en: "It takes a good while to climb off the ledge and back onto the frame path." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Uzun yoldan devam et", en: "Keep going the long way" }
+            sonraki: "@akis"
+
+      - id: "kan_kes2_yansima"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Gözünü kendi ayaklarından ayırıp camın içindeki ayaklara dikiyorsun. Yansıman nereye basarsa sen de yarım an sonra oraya basıyorsun ve çatlağın hiçbir kolu ses çıkarmıyor.", en: "You take your eyes off your own feet and fix them on the feet in the glass. Wherever your reflection steps, you step half a beat later, and not one arm of the crack makes a sound." }
+          - { tr: "Karşıya varınca yansıman bir an duraksıyor, sonra köprünün kenarındaki bir noktayı gösteriyor. Orada camın içine gömülmüş bir avuç kristal duruyor. Sen elini kaldırdığında yansıman elini çoktan indirmiş.", en: "On the far side your reflection pauses, then points at a spot near the edge of the bridge. A handful of crystals sits there, sunk into the glass. By the time you raise your hand, your reflection has already lowered its own." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Yansımana sırtını dön, merdivene çık", en: "Turn your back on your reflection and climb" }
+            sonraki: "@akis"
+
+  # ================================================================== KESTİRME 3 — 31–39: Saat (dişliler)
+  - id: "kule_an_kestirme_3"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "kestirme"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 31 }, degisken_max: { kule_kat: 39 } }
+    kart: { tr: "Dişlilerin arası", en: "Between the teeth" }
+    sahne: "kan_kes3_giris"
+    sahneler:
+      - id: "kan_kes3_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Merdivene giden geçit her tik sesinde kapanıp açılıyor: iki dev çarkın dişleri birbirine geçip yeniden ayrılıyor. Aradaki boşluk bir insanın sığacağı kadar, ama yalnızca bir anlığına.", en: "The passage to the stairs shuts and opens on every tick: the teeth of two giant wheels mesh, then part again. The gap is wide enough for a person, but only for an instant." }
+          - { tr: "Saatin kadranını dolanan bir bakım yolu da var, ama dar pirinç kenarda yürümek bitmek bilmez. Tam başının üstünde de ağır ağır salınan bir sarkaç.", en: "There's also a maintenance walkway that runs around the clock face, a narrow brass rim that takes forever to walk. And right over your head, a pendulum, swinging slow." }
+        sezgiler:
+          - kosul: { stat: { int: 66 } }
+            metin: { tr: "Tikler eşit değil: her yedinci tik ötekilerden biraz uzun sürüyor ve boşluk o tikte biraz daha geniş kalıyor.", en: "The ticks aren't even. Every seventh one runs a little long, and the gap stays open a little wider on that one." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "sarkaca dokunma demeyeceğim. ama sistem bu saati seviyor, bilmiş ol.", en: "i'm not going to tell you not to touch the pendulum. but the system likes this clock. just so you know." }
+        secenekler:
+          - id: "disli"
+            etiket: { tr: "Tikleri say, boşluktan atla", en: "Count the ticks and jump the gap" }
+            zar: { stat: "int", zorluk: 78, tek: false, basarisiz: "kan_kes3_sikisma", basarisiz_etkiler: [{ can: -15 }, { xp_seviye: 2 }] }
+            etkiler:
+              - xp_seviye: 6
+              - oz_kristali: 3
+            sonraki: "kan_kes3_disli"
+          - id: "kenar"
+            etiket: { tr: "Kadranın kenarından dolaş", en: "Walk the rim of the clock face" }
+            etkiler:
+              - xp_seviye: 3
+            sonraki: "@akis"
+          - id: "sarkac"
+            etiket: { tr: "Sarkacı yakala, saati durdur", en: "Grab the pendulum and stop the clock" }
+            gerekli: { stat: { str: 66 } }
+            etkiler:
+              - xp_seviye: 7
+              - oz_kristali: 4
+              - dikkat: 3
+            sonraki: "kan_kes3_sarkac"
+
+      - id: "kan_kes3_disli"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Saymaya başlıyorsun: bir, iki, üç... Yedinci tik uzayınca dişlerin arasına dalıyorsun; arkanda pirincin kapandığını ensende hissediyorsun.", en: "You start counting. One, two, three... When the seventh tick runs long, you dive between the teeth, and you feel the brass close behind you, right at the back of your neck." }
+          - { tr: "Öbür tarafta çarkın göbeğine kristaller sıkışmış. Hemen yanlarında biri pirince çentik atarak günleri saymış; sayı burada da 365'te bitiyor.", en: "On the far side, crystals are wedged into the hub of the wheel. Right beside them, someone notched a tally into the brass, and here too the count stops at 365." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Merdivene yürü", en: "Walk to the stairs" }
+            sonraki: "@akis"
+
+      - id: "kan_kes3_sikisma"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Saymayı bir tik şaşırıyorsun. Dişliler kapanırken ceketinin eteği arada kalıyor; kendini kurtardığında kaburgalarında pirinç dişlerin izi çıkmış.", en: "You lose count by a single tick. The gears close on the tail of your jacket, and by the time you tear free, the brass teeth have left their mark across your ribs." }
+          - { tr: "Geri çekilip soluklanıyorsun. Saat hiçbir şey olmamış gibi tiklemeyi sürdürüyor.", en: "You back off and catch your breath. The clock goes on ticking like nothing happened." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kenardan dolaş", en: "Take the rim instead" }
+            sonraki: "@akis"
+
+      - id: "kan_kes3_sarkac"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Sarkaç yanından geçerken iki elinle yakalıyorsun. Bütün kat bir kez sarsılıyor, ardından tik sesi kesilip çarklar dönerken donakalıyor.", en: "As the pendulum swings past you catch it with both hands. The whole floor lurches once, then the ticking cuts out and the wheels freeze mid-turn." }
+          - { tr: "Duran dişlilerin arasından yürüyüp merdivene varıyorsun. Yol boyunca, çarklar dönerken köşelere savrulup birikmiş kristalleri de topluyorsun.", en: "You stroll between the stopped gears to the stairs, picking up the crystals that got flung into the corners while everything was still turning." }
+        bildirimler:
+          - tur: "uyari"
+            baslik: { tr: "[KULE SAATİ DURDURULDU]", en: "[SPIRE CLOCK HALTED]" }
+            satirlar:
+              - { tr: "Yeniden başlatılıyor.", en: "Restarting." }
+              - { tr: "Müdahale kaydedildi.", en: "Interference logged." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Saat yeniden işlemeden geç", en: "Get through before it starts again" }
+            sonraki: "@akis"
+
+  # ================================================================== KESTİRME 4 — 41–49: Sessizlik (uyuyanların salonu)
+  - id: "kule_an_kestirme_4"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "kestirme"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 41 }, degisken_max: { kule_kat: 49 } }
+    kart: { tr: "Uyuyanların salonu", en: "The sleepers' hall" }
+    sahne: "kan_kes4_giris"
+    sahneler:
+      - id: "kan_kes4_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Merdivene giden kısa yol, kulaksızların uyuduğu bir salondan geçiyor. Karanlıkta duvar diplerine sinmiş, nefes bile almadan yatıyorlar. Burada ses taşınmaz, ama yerdeki titreşimi duydukları kesin.", en: "The short way to the stairs runs through a hall where the earless ones sleep. They lie curled against the walls in the dark, not even breathing. Sound doesn't carry here, but you know they can feel vibration through the floor." }
+          - { tr: "Uzun yol, duvar boyunca çizilmiş tebeşir oklarını izliyor. Hepsi aynı eğik elden çıkma; salonu dolanıp merdivende bitiyorlar.", en: "The long way follows chalk arrows drawn along the wall, all in the same slanted hand, looping around the hall and ending at the stairs." }
+        sezgiler:
+          - kosul: { stat: { wil: 90 } }
+            metin: { tr: "Kulaksızlar ayak sesini değil, kalp atışını duyuyor. Yeterince yavaş atan bir kalp onlara taş gibi gelir.", en: "The earless don't sense footsteps. They sense heartbeats. A slow enough heart feels like stone to them." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "ben de susuyorum. sen de sus. ikimizin kalbi tek kalp sayılır mı, bilmiyorum.", en: "i'm being quiet too. you be quiet. i don't know if our two hearts count as one." }
+        secenekler:
+          - id: "salon"
+            etiket: { tr: "Uyuyanların arasından süzül", en: "Slip between the sleepers" }
+            zar: { stat: "agi", zorluk: 105, tek: false, basarisiz: "kan_kes4_uyanis", basarisiz_etkiler: [{ can: -18 }, { xp_seviye: 2 }] }
+            etkiler:
+              - xp_seviye: 6
+              - oz_kristali: 3
+              - egilim: { gizlilik: 1 }
+            sonraki: "kan_kes4_salon"
+          - id: "ok"
+            etiket: { tr: "Tebeşir oklarını izle", en: "Follow the chalk arrows" }
+            etkiler:
+              - xp_seviye: 3
+            sonraki: "@akis"
+          - id: "kalp"
+            etiket: { tr: "Kalbini yavaşlat, dosdoğru yürü", en: "Slow your heart and walk straight through" }
+            gerekli: { stat: { wil: 90 } }
+            etkiler:
+              - xp_seviye: 7
+              - oz_kristali: 3
+              - egilim: { gizlilik: 2 }
+              - dikkat: -2
+            sonraki: "kan_kes4_kalp"
+
+      - id: "kan_kes4_salon"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Topuklarını yere değdirmeden, parmak uçlarında ilerliyorsun. Bir kulaksızın uzun parmakları ayak bileğinin bir karış ötesinde seğirip yeniden gevşiyor.", en: "You move on the balls of your feet, never letting a heel touch down. A pair of long fingers twitches six inches from your ankle, then goes slack again." }
+          - { tr: "Salonun ortasında, uyuyanların halka olup çevrelediği yerde bir kristal yığını duruyor. Tek birini bile düşürmeden avucunu dolduruyorsun.", en: "In the middle of the hall, where the sleepers lie in a ring, sits a heap of crystals. You fill your palm without dropping a single one." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Merdivene çık", en: "Head up the stairs" }
+            sonraki: "@akis"
+
+      - id: "kan_kes4_uyanis"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Çizmenin altında bir kristal kırıntısı çatlıyor. Sesini kimse duymuyor ama titreşim yetiyor: en yakındaki kulaksız başını kaldırıp üstüne atılıyor.", en: "A sliver of crystal cracks under your boot. Nobody hears it, but the vibration is enough. The nearest earless one lifts its head and lunges." }
+          - { tr: "Pençeleri omzunu yarıp geçiyor. Geri çekilip duvara yapıştığında bir süre bekliyor, sonra halkasına dönüp yeniden kıvrılıyor.", en: "Its claws open up your shoulder. You back away flat against the wall, and after a while it goes back to its ring and curls up again." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Okları izle", en: "Follow the arrows" }
+            sonraki: "@akis"
+
+      - id: "kan_kes4_kalp"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Gözlerini kapayıp kalbine kulak veriyorsun. Her atışı biraz daha geciktirerek sonunda iki atışın arasına koca bir sessizlik sığdırıyorsun.", en: "You close your eyes and listen to your heart. You hold each beat back a little longer, until there's a whole silence between one and the next." }
+          - { tr: "Uyuyanların ortasından dosdoğru yürüyorsun. Biri başını sana çevirip uzun uzun dinledikten sonra seni taş sanıp uykusuna dönüyor. Halkanın ortasındaki kristalleri toplarken kalbin hâlâ atmak için sıra bekler gibi.", en: "You walk straight through the middle of the sleepers. One turns its head toward you and listens for a long time, then decides you're a stone and goes back to sleep. While you scoop up the crystals in the center of the ring, your heart is still waiting its turn to beat." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Merdivende nefes al", en: "Breathe once you hit the stairs" }
+            sonraki: "@akis"
+
+  # ================================================================== KESTİRME 5 — 51–59: Başka Dünyaların Kalıntıları (asansör)
+  - id: "kule_an_kestirme_5"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "kestirme"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 51 }, degisken_max: { kule_kat: 59 } }
+    kart: { tr: "Ölü bir dünyanın asansörü", en: "A dead world's elevator" }
+    sahne: "kan_kes5_giris"
+    sahneler:
+      - id: "kan_kes5_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Moloz tarlasının ortasında, başka bir dünyanın mimarisinden kalma kıvrık bir kule yükseliyor. İçinde camı çizik bir kapsül duruyor; paneli tanımadığın bir alfabeyle dolu, kapısı hâlâ yarı açık.", en: "In the middle of the rubble field stands a curled tower from some other world's architecture. Inside is a capsule with scratched glass, its panel covered in an alphabet you don't know, its door still half open." }
+          - { tr: "Kapsülün rayı yukarı, merdivene yakın bir çıkıntıya uzanıyor. Öbür yol moloz yığınlarına tırmanmak, saatler sürer.", en: "The capsule's track runs up to a ledge near the stairs. The other way means climbing the rubble heaps, and that'll take hours." }
+          - metin: { tr: "{npc:mert_kilic} panelin başına çömelmiş, parmakları kaşınıyor. \"Arayüz arayüzdür,\" diye mırıldanıyor. \"Hangi gezegenden gelirse gelsin.\"", en: "{npc:mert_kilic} is crouched by the panel, fingers itching. \"An interface is an interface,\" he mutters. \"Doesn't matter what planet it's from.\"" }
+            kosul: { yoldas: "mert_kilic" }
+        sezgiler:
+          - kosul: { stat: { int: 125 } }
+            metin: { tr: "Paneldeki simgelerden üçü, yukarıyı gösteren bir ok gibi art arda diziliyor. Dördüncüsü kırmızı ve biri üstünü kazımış.", en: "Three of the symbols on the panel line up like an arrow pointing up. A fourth is red, and someone scratched it out." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "bunu yapanlar da yukarı çıkmak istemiş. kimse aşağı inmek için asansör yapmaz.", en: "whoever built this wanted to go up too. nobody builds an elevator to go down." }
+        secenekler:
+          - id: "kapsul"
+            etiket: { tr: "Panele bas, kapsülü çalıştır", en: "Work the panel and run the capsule" }
+            zar: { stat: "int", zorluk: 140, tek: false, basarisiz: "kan_kes5_dusus", basarisiz_etkiler: [{ can: -22 }, { xp_seviye: 2 }] }
+            etkiler:
+              - xp_seviye: 6
+              - oz_kristali: 4
+            sonraki: "kan_kes5_kapsul"
+          - id: "moloz"
+            etiket: { tr: "Moloz yığınlarına tırman", en: "Climb the rubble heaps" }
+            etkiler:
+              - xp_seviye: 3
+            sonraki: "@akis"
+          - id: "mert"
+            etiket: { tr: "Paneli {npc:mert_kilic|e} bırak", en: "Let {npc:mert_kilic} take the panel" }
+            goster: { yoldas: "mert_kilic" }
+            etkiler:
+              - xp_seviye: 6
+              - oz_kristali: 3
+              - iliski: { mert_kilic: { saygi: 3, guven: 2 } }
+            sonraki: "kan_kes5_mert"
+
+      - id: "kan_kes5_kapsul"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Ok biçimli üç simgeye sırayla basıyorsun. Kapsül titreyip kapısını kapatıyor, tanımadığın bir dilde kibar bir şey söyledikten sonra da yükselmeye başlıyor.", en: "You press the three arrow-shaped symbols in order. The capsule shudders and shuts its door, says something polite in a language you don't know, and starts to rise." }
+          - { tr: "Koltuğun altında yolculardan birinin unuttuğu bir çanta var. İçinde kristaller ve tek kelimelik bir Sistem etiketi: [Hasat edildi.]", en: "Under the seat sits a bag one of the passengers left behind. Inside: crystals, and a one-word System tag. [Harvested.]" }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Çıkıntıya in", en: "Step out onto the ledge" }
+            sonraki: "@akis"
+
+      - id: "kan_kes5_dusus"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Yanlış simgeye basıyorsun, belki de üstü kazınmış kırmızı olana. Kapsül fırlayıp yarı yolda duruyor, sonra raydan boşanıp moloza çakılıyor.", en: "You hit the wrong symbol, maybe the scratched-out red one. The capsule shoots up, stops halfway, then lets go of the track and slams back down into the rubble." }
+          - { tr: "Çizik camın arasından sürünerek çıkıyorsun. Kapsül son bir kez aynı kibar sesle bir şey söyleyip susuyor.", en: "You crawl out through the scratched glass. The capsule says something one last time in that same polite voice, then goes quiet." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Molozdan tırman", en: "Climb the rubble" }
+            sonraki: "@akis"
+
+      - id: "kan_kes5_mert"
+        yer: "kule"
+        paragraflar:
+          - { tr: "{npc:mert_kilic} panele üç dakika bakıyor, bir yerine vuruyor, sonra kırmızı simgenin altındaki paslı kapağı açıp iki kabloyu birbirine değdiriyor. \"Her yerde aynı,\" diyor. \"Biri mutlaka güvenlik kilidini çıplak kabloyla atlatmıştır.\"", en: "{npc:mert_kilic} stares at the panel for three minutes, smacks it once, then pries open a rusty hatch under the red symbol and touches two wires together. \"Same everywhere,\" he says. \"Somebody always bypasses the safety lock with bare wire.\"" }
+          - { tr: "Kapsül yükselirken {npc:mert_kilic} koltuğun altında unutulmuş bir çanta bulup kristalleri sana uzatıyor. Ellerinin titrediğini görmezden geliyorsun.", en: "As the capsule rises, {npc:mert_kilic} finds a forgotten bag under the seat and hands you the crystals. You pretend not to notice his hands shaking." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "\"İyi iş.\"", en: "\"Nice work.\"" }
+            sonraki: "@akis"
+
+  # ================================================================== KESTİRME 6 — 61–69: Yanık Arşiv (yanan raflar)
+  - id: "kule_an_kestirme_6"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "kestirme"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 61 }, degisken_max: { kule_kat: 69 } }
+    kart: { tr: "Yanan rafların arasından", en: "Through the burning stacks" }
+    sahne: "kan_kes6_giris"
+    sahneler:
+      - id: "kan_kes6_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Merdiven, yanan rafların arasında açılmış dar bir koridorun sonunda görünüyor. Alevler kitapları tek tek, ağır ağır yalıyor; koridorun içi fırından farksız.", en: "The stairs show at the end of a narrow corridor between burning shelves. The flames lick the books one at a time, slowly. Inside that corridor, it's an oven." }
+          - { tr: "Arşivin kenarında rafların hiç değmediği geniş bir yangın yolu da var. Oradan gitmek bütün katı dolanmak demek.", en: "Along the edge of the archive there's a wide firebreak the shelves never touch. Going that way means circling the whole floor." }
+        sezgiler:
+          - kosul: { stat: { wis: 165 } }
+            metin: { tr: "Alevler raflarda gelişigüzel ilerlemiyor; satır satır, soldan sağa okur gibi gidiyorlar. Geçtikleri yer çoktan soğumuş.", en: "The flames don't move along the shelves at random. They go line by line, left to right, like reading. Wherever they've already been has cooled." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "kendi dosyanı arama. bulsan da yarısı kül olur.", en: "don't go looking for your own file. even if you find it, half of it will be ash." }
+        secenekler:
+          - id: "koridor"
+            etiket: { tr: "Yanan koridordan koşarak geç", en: "Run the burning corridor" }
+            zar: { stat: "end", zorluk: 185, tek: false, basarisiz: "kan_kes6_yanik", basarisiz_etkiler: [{ can: -26 }, { xp_seviye: 3 }] }
+            etkiler:
+              - xp_seviye: 6
+              - oz_kristali: 4
+            sonraki: "kan_kes6_koridor"
+          - id: "yangin"
+            etiket: { tr: "Yangın yolundan dolaş", en: "Circle around by the firebreak" }
+            etkiler:
+              - xp_seviye: 3
+            sonraki: "@akis"
+          - id: "okuma"
+            etiket: { tr: "Alevlerin ardından, okudukları yerden yürü", en: "Walk behind the flames, where they've already read" }
+            gerekli: { stat: { wis: 165 } }
+            etkiler:
+              - xp_seviye: 7
+              - oz_kristali: 3
+            sonraki: "kan_kes6_okuma"
+
+      - id: "kan_kes6_koridor"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Nefesini tutup içeri dalıyorsun. Saçların cızırdıyor, gözlerin kuruyup yanıyor; yine de koridorun sonuna varana kadar durmuyorsun.", en: "You hold your breath and dive in. Your hair sizzles, your eyes dry out and sting, and you don't stop until you hit the end of the corridor." }
+          - { tr: "Merdivenin ilk basamağında kapağı açık, ateşe dayanıklı bir kutu yatıyor; içindeki kristaller ısıdan kızarmış. Kolunun yenini eline çekip hepsini topluyorsun.", en: "On the first stair lies a fireproof box with its lid open, the crystals inside glowing red from the heat. You pull your sleeve down over your hand and scoop them all up." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Basamaklara çık", en: "Take the stairs" }
+            sonraki: "@akis"
+
+      - id: "kan_kes6_yanik"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Koridorun yarısında bir raf çöküp yolu kesiyor. Geri dönerken kıvılcımlar ensene, ellerine yağıyor; dışarı çıktığında kendi derinin kokusunu alıyorsun.", en: "Halfway in, a shelf collapses across the corridor. On the way back out sparks rain down your neck and hands, and when you get clear you can smell your own skin." }
+          - { tr: "Ellerini bir süre külün içine bastırıp serinletiyorsun. Yangın yolu uzun, ama yanmıyor.", en: "You press your hands into the ash for a while to cool them. The firebreak is long, but it isn't on fire." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Yangın yolundan dolaş", en: "Take the firebreak" }
+            sonraki: "@akis"
+
+      - id: "kan_kes6_okuma"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Alevlerin önünden değil, ardından gidiyorsun. Bir satır yanıp bitince oraya basıyor, ateş bir sonraki satıra geçince bir adım daha atıyorsun. Ayağının altındaki kül ılık kum gibi.", en: "You don't go ahead of the flames; you go behind them. Each time a line burns out you step there, and as the fire moves on to the next line you take one more step. The ash under your boots is like warm sand." }
+          - { tr: "Bir rafın dibinde, alevlerin okuyup bıraktığı bir sayfanın altında birkaç kristal parlıyor. Sayfada yalnızca bir seviye, bir kademe ve [Durum: hasat edildi] kalmış.", en: "At the foot of a shelf, under a page the flames have read and left, a few crystals glint. All that's left on the page is a level, a Grade, and [Status: harvested]." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Okuyanların ardından merdivene çık", en: "Follow the readers up to the stairs" }
+            sonraki: "@akis"
+
+  # ================================================================== KESTİRME 7 — 71–79: Tohumluk (bekçilerin sırası)
+  - id: "kule_an_kestirme_7"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "kestirme"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 71 }, degisken_max: { kule_kat: 79 } }
+    kart: { tr: "Bekçilerin sırası", en: "The keepers' row" }
+    sahne: "kan_kes7_giris"
+    sahneler:
+      - id: "kan_kes7_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Merdivene giden en kısa yol kozaların arasındaki bir sıradan geçiyor. Sıranın öbür ucunda tohum bekçileri makaslarını açıp kapıyor: kırp, kırp. Bu gece hangi kozanın biçileceğini seçiyorlar.", en: "The shortest way to the stairs runs down a row between the pods. At the far end of the row, the seed keepers open and close their shears. Snip. Snip. They're choosing which pod gets cut tonight." }
+          - { tr: "Uzun yol seranın altındaki ılık, nemli su kanalından geçiyor. Oradaki hava ağır; insanın gözlerini ister istemez kapatan cinsten.", en: "The long way goes through the warm, damp drainage channel under the greenhouse. The air down there is heavy, the kind that shuts your eyes whether you want it to or not." }
+        sezgiler:
+          - kosul: { stat: { wil: 210 } }
+            metin: { tr: "Bekçilerin makası yalnızca uyuyanların üstünde duruyor. Uyanık olanın yanından geçip gidiyorlar.", en: "The keepers' shears only stop over sleepers. Anything that's awake, they walk right past." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "bu sıcaklık tanıdık geliyor. neden tanıdık geldiğini düşünmek istemiyorum.", en: "this warmth feels familiar. i don't want to think about why." }
+        yoldas_tepkileri:
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Bu havada uzun kalırsak bayılırız. Gaz değil bu, başka bir şey; gözkapağına doğrudan çöküyor.\"", en: "\"We stay in this air too long, we'll pass out. It's not a gas, it's something else. It goes straight for your eyelids.\"" }
+        secenekler:
+          - id: "sira"
+            etiket: { tr: "Kozaların arasından gizlice geç", en: "Sneak down the row between the pods" }
+            zar: { stat: "agi", zorluk: 235, tek: false, basarisiz: "kan_kes7_makas", basarisiz_etkiler: [{ can: -30 }, { xp_seviye: 3 }] }
+            etkiler:
+              - xp_seviye: 6
+              - oz_kristali: 4
+            sonraki: "kan_kes7_sira"
+          - id: "kanal"
+            etiket: { tr: "Ilık kanaldan dolaş", en: "Take the warm channel around" }
+            etkiler:
+              - xp_seviye: 3
+            sonraki: "@akis"
+          - id: "uyanik"
+            etiket: { tr: "Gözünü dört aç, bekçilerin önünden yürü", en: "Stay wide awake and walk past the keepers" }
+            gerekli: { stat: { wil: 210 } }
+            etkiler:
+              - xp_seviye: 7
+              - oz_kristali: 3
+              - dikkat: 2
+            sonraki: "kan_kes7_uyanik"
+
+      - id: "kan_kes7_sira"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kozaların gölgesine yapışıp bir sıradan ötekine geçiyorsun. Bir bekçi tam yanında durup makasını bir kozanın üstünde açıyor; sen nefesini tutup beklerken makasını kapamadan yoluna devam ediyor.", en: "You hug the shadows of the pods, slipping from one row to the next. A keeper stops right beside you and opens its shears over a pod. You hold your breath, and it moves on without closing them." }
+          - { tr: "Sıranın sonunda, kozaların köklerinin toprağa karıştığı yerde kristal tomurcuklar bitmiş. Birkaçını koparıp cebine atıyorsun.", en: "At the end of the row, where the pods' roots run into the soil, crystal buds have sprouted. You pick a few and pocket them." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Merdivene sıvış", en: "Slip off to the stairs" }
+            sonraki: "@akis"
+
+      - id: "kan_kes7_makas"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Ilık hava göz kapaklarına çöküyor ve bir an, yalnızca bir an, gözlerin kapanıyor. Açtığında bir bekçi tepende, makası çoktan iniyor.", en: "The warm air settles on your eyelids and for a second, just one second, your eyes close. When they open, a keeper is standing over you, shears already coming down." }
+          - { tr: "Kendini yana atıyorsun ama makas kolunu sıyırıp geçiyor. Kozaların arasından geri kaçarken kırp sesi bir süre peşini bırakmıyor.", en: "You throw yourself sideways, but the shears catch your arm on the way past. As you scramble back through the pods, the snipping follows you for a while." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kanaldan dolaş", en: "Go around through the channel" }
+            sonraki: "@akis"
+
+      - id: "kan_kes7_uyanik"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Dilinin ucunu ısırıp gözlerini dört açıyor, uykuya her adımda yeniden direniyorsun. Bekçiler birer birer yanından geçiyor; makasları sana bir kez bile açılmıyor.", en: "You bite the tip of your tongue and keep your eyes wide open, fighting off sleep again with every step. The keepers pass you one by one, and not once do their shears open for you." }
+          - { tr: "Biri sıranın sonunda durup başını sana çeviriyor, uzun uzun bakıyor. Sonra elindeki etiketlerden birine bir şey karalayıp ayağının dibine bir kristal tomurcuğu bırakıyor.", en: "One of them stops at the end of the row and turns its head toward you for a long look. Then it scribbles something on one of its labels and drops a crystal bud at your feet." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Etikete ne yazdığını sormadan çık", en: "Leave without asking what it wrote" }
+            sonraki: "@akis"
+
+  # ================================================================== KESTİRME 8 — 81–89: Ters Gök (yukarı düşmek)
+  - id: "kule_an_kestirme_8"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "kestirme"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 81 }, degisken_max: { kule_kat: 89 } }
+    kart: { tr: "Göğe bırakmak", en: "Letting go into the sky" }
+    sahne: "kan_kes8_giris"
+    sahneler:
+      - id: "kan_kes8_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Merdivenin bir sonraki parçası tepende, Kule'nin baş aşağı sarktığı yerde asılı. Ayaklarının altında yıldızlar var; aradaki boşlukta ise birbirine tam değmeyen takımyıldız çizgilerinden başka bir şey yok.", en: "The next section of stairs hangs overhead, where the Spire dangles upside down. Stars under your feet, and in the space between, nothing but constellation lines that never quite touch." }
+          - { tr: "Çizgilerin üstünden yürüyerek oraya varmak saatler alır. Kendini bırakırsan yukarı düşebilirsin; bu katta yerçekimi yalnızca bir öneri, yeter ki doğru açıyla düş.", en: "Walking the lines would take hours. Or you could let go and fall up. Gravity's only a suggestion on this floor. You'd just have to fall at the right angle." }
+        sezgiler:
+          - kosul: { stat: { int: 270 } }
+            metin: { tr: "Takımyıldızların arasında görünmez bir akıntı var: bir yıldızın çekimi bittiği yerde öbürününki başlıyor. Doğru sırayla atlayan yukarı varır.", en: "There's an invisible current between the constellations. Where one star's pull ends, the next one's begins. Jump in the right order and you get to the top." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "aşağı bakma. aşağısı yıldız dolu ve hepsi çok uzak.", en: "don't look down. down is full of stars and they're all very far away." }
+        secenekler:
+          - id: "birak"
+            etiket: { tr: "Kendini bırak, yukarı düş", en: "Let go and fall up" }
+            zar: { stat: "wil", zorluk: 300, tek: false, basarisiz: "kan_kes8_kayis", basarisiz_etkiler: [{ can: -35 }, { xp_seviye: 3 }] }
+            etkiler:
+              - xp_seviye: 7
+              - oz_kristali: 4
+            sonraki: "kan_kes8_birak"
+          - id: "cizgi"
+            etiket: { tr: "Takımyıldız çizgilerinden yürü", en: "Walk the constellation lines" }
+            etkiler:
+              - xp_seviye: 3
+            sonraki: "@akis"
+          - id: "akinti"
+            etiket: { tr: "Akıntıyı izleyip yıldızdan yıldıza atla", en: "Ride the current, star to star" }
+            gerekli: { stat: { int: 270 } }
+            etkiler:
+              - xp_seviye: 7
+              - oz_kristali: 3
+            sonraki: "kan_kes8_akinti"
+
+      - id: "kan_kes8_birak"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Gözlerini kapayıp dizlerini bükerek ayağının altındaki gökten kendini koparıyorsun. Bir süre sonra midendeki boşluk yön değiştirmiş: artık düşmüyor, yükseliyorsun.", en: "You shut your eyes, bend your knees, and push off from the sky under your feet. After a while the empty feeling in your stomach flips over, and you're not falling anymore. You're rising." }
+          - { tr: "Merdivenin alt yüzüne tutunduğunda avucunda, yolda kaptığın küçük bir yıldız var. Yakından bakınca yıldız değil, ufalanan bir kristal kümesi olduğunu görüyorsun.", en: "When you grab hold of the underside of the stairs, there's a little star in your fist that you snatched on the way. Up close it isn't a star. It's a crumbly cluster of crystals." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Basamaklara tırman", en: "Pull yourself onto the stairs" }
+            sonraki: "@akis"
+
+      - id: "kan_kes8_kayis"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Yarı yolda içindeki yüz binlerce yıllık bir içgüdü yere tutunmak istiyor ve yönünü şaşırıyorsun. Kule'ye değil, yıldızlara doğru düşmeye başlıyorsun.", en: "Halfway up, some instinct in you a few hundred thousand years old wants to grab for the ground, and you lose your direction. You start falling toward the stars instead of the Spire." }
+          - { tr: "Bir takımyıldız çizgisi göğsüne çarpıp seni durduruyor; nefesin kesilmiş, kaburgaların sızlıyor. Çizginin üstünde doğrulup yukarıya, uzun yola bakıyorsun.", en: "A constellation line catches you across the chest and stops you, knocking the wind out of you, ribs aching. You get your feet under you on the line and look up at the long way." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Çizgilerden yürü", en: "Walk the lines" }
+            sonraki: "@akis"
+
+      - id: "kan_kes8_akinti"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Bir yıldızın çekimine kapılıp bırakıyorsun; çekim zayıflarken bir sonrakinin kolları seni yakalıyor. Takımyıldızların arasında elden ele geçen bir taş gibi yükseliyorsun.", en: "You ride one star's pull and let go, and as it fades the next one's reach catches you. You rise through the constellations like a stone passed from hand to hand." }
+          - { tr: "Son yıldız fazla yakın, içinde bir pencere titreşiyor. Okumadan yanından geçerken kenarına yapışmış kristalleri avuçluyorsun.", en: "The last star is too close, and a window flickers inside it. You go past without reading it, scooping up the crystals stuck to its edge." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Merdivene adım at", en: "Step onto the stairs" }
+            sonraki: "@akis"
+
+  # ================================================================== KESTİRME 9 — 91–99: Taslak (kendi merdivenini çiz)
+  - id: "kule_an_kestirme_9"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "kestirme"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 91 }, degisken_max: { kule_kat: 99 } }
+    kart: { tr: "Kendi merdivenini çiz", en: "Draw your own stairs" }
+    sahne: "kan_kes9_giris"
+    sahneler:
+      - id: "kan_kes9_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Merdiven boşluğu ızgaranın en ucunda, yarısı çizilmiş halde duruyor. Oraya varmak için çizgilerin üstünden bütün katı yürümen gerekiyor.", en: "The stairwell stands at the far end of the grid, only half drawn. Getting there means walking the lines across the whole floor." }
+          - { tr: "Önünde, havada asılı kalem bekliyor. Bu katta her şey çizildiği için var olduğuna göre, buraya bir merdiven de sen çizebilirsin.", en: "Right in front of you, the pencil hangs in midair, waiting. Everything on this floor exists because someone drew it, so you could draw yourself some stairs right here." }
+          - { tr: "Uzakta yüzsüz bir taslak insan ızgarada yürüyor. Yürüyüşü seninki; nereye gittiğini biliyor gibi bir hali var.", en: "Off in the distance, a faceless sketched figure is walking the grid. The walk is yours, and it moves like it knows where it's going." }
+        sezgiler:
+          - kosul: { stat: { wis: 340 } }
+            metin: { tr: "Taslağın bastığı çizgiler koyulaşıyor, öbürleri silikleşiyor. Bu katın bir yolu var ve o, yolu biliyor.", en: "The lines the sketch steps on get darker, and the rest fade. This floor has a path, and it knows the way." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "kalemi alırsan biri görür. kim olduğunu bilmiyorum, hiç bilmedim.", en: "pick up the pencil and someone will notice. i don't know who. i never have." }
+        secenekler:
+          - id: "kalem"
+            etiket: { tr: "Kalemi al, kendi merdivenini çiz", en: "Take the pencil and draw your own stairs" }
+            zar: { stat: "int", zorluk: 375, tek: false, basarisiz: "kan_kes9_silinme", basarisiz_etkiler: [{ can: -40 }, { xp_seviye: 3 }, { dikkat: 2 }] }
+            etkiler:
+              - xp_seviye: 8
+              - oz_kristali: 4
+              - dikkat: 3
+            sonraki: "kan_kes9_kalem"
+          - id: "izgara"
+            etiket: { tr: "Izgaranın çizgilerinden yürü", en: "Walk the grid lines" }
+            etkiler:
+              - xp_seviye: 3
+            sonraki: "@akis"
+          - id: "taslak"
+            etiket: { tr: "Yüzsüz taslağın peşinden git", en: "Follow the faceless sketch" }
+            gerekli: { stat: { wis: 340 } }
+            etkiler:
+              - xp_seviye: 7
+              - oz_kristali: 3
+            sonraki: "kan_kes9_taslak"
+
+      - id: "kan_kes9_kalem"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kalem parmaklarına değer değmez ağırlaşıyor. Havaya ilk basamağı çizdiğinde çizgi koyulaşıp taşa dönüyor; basamak basamak çizip tırmandıkça her biri bir öncekinden daha emin çıkıyor.", en: "The pencil gets heavy the instant your fingers touch it. When you draw the first stair in the air, the line darkens and turns to stone. You draw and climb, step after step, each one a little surer than the last." }
+          - { tr: "Son basamakta kalem elinden kayıp havadaki eski yerine dönüyor. Basamağın üstünde, kalemden yeni çıkmış gibi keskin köşeli birkaç kristal duruyor.", en: "At the last stair the pencil slips out of your hand and floats back to where it was. On the step sit a few crystals with edges as sharp as if they'd just been drawn." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[TASLAK]", en: "[DRAFT]" }
+            satirlar:
+              - { tr: "Yetkisiz ekleme: 1 merdiven.", en: "Unauthorized addition: 1 staircase." }
+              - { tr: "Kaydedildi.", en: "Saved." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Çizdiğin merdivenden çık", en: "Climb the stairs you drew" }
+            sonraki: "@akis"
+
+      - id: "kan_kes9_silinme"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Dördüncü basamağı çizerken kalemin ucu kırılıyor. Çizgiler arkandan birer birer siliniyor, en son da üstünde durduğun basamak; ızgaranın üstüne sırtüstü düşüyorsun.", en: "On the fourth stair, the pencil tip snaps. The lines erase behind you one by one, then the one you're standing on, and you land flat on your back on the grid." }
+          - { tr: "Düşerken bir yerinin de silindiğini sanıyorsun. Nefesin yerine gelince kendini yokluyor, bütün olduğunu görüyorsun. Bu seferlik.", en: "For a second on the way down you think part of you got erased too. When your breath comes back you check, and you're all there. This time." }
+        bildirimler:
+          - tur: "uyari"
+            baslik: { tr: "[TASLAK]", en: "[DRAFT]" }
+            satirlar:
+              - { tr: "Yetkisiz ekleme girişimi. Geri alındı.", en: "Unauthorized edit attempted. Reverted." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Izgaradan yürü", en: "Walk the grid" }
+            sonraki: "@akis"
+
+      - id: "kan_kes9_taslak"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Taslağın birkaç adım gerisinden yürüyorsun. Bastığı çizgiler ayağının altında taş gibi sağlam; basmadıkları ise sen yaklaştıkça silikleşiyor.", en: "You walk a few steps behind the sketch. The lines it steps on hold under your boots like stone. The ones it skips fade as you come near." }
+          - { tr: "Merdivenin dibinde taslak durup yüzsüz yüzünü sana çeviriyor. Bir an elini kaldırıp göğsünün ortasına dokunuyor, sonra çizgileri dağılıp gidiyor. Durduğu yerde birkaç kristal kalmış.", en: "At the foot of the stairs the sketch stops and turns its faceless face to you. For a moment it raises a hand and touches the center of its chest, then its lines scatter. A few crystals are left where it stood." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Merdivene çık", en: "Take the stairs" }
+            sonraki: "@akis"
+
+  # ================================================================== HAZİNE 0 — 1–9: Kıyıkent'in Yankısı (durak otomatı)
+  - id: "kule_an_hazine_0"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "hazine"]
+    gerilim: 1
+    kosul: { degisken_min: { kule_kat: 1 }, degisken_max: { kule_kat: 9 } }
+    kart: { tr: "Durak otomatı", en: "The bus-stop vending machine" }
+    sahne: "kan_haz0_giris"
+    sahneler:
+      - id: "kan_haz0_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Otobüs durağının yanındaki otomatın ışığı hâlâ yanıyor. Camın ardında çikolata, cips ve kola sıralarının arasına bir avuç Öz Kristali dizilmiş; etiketinde fiyat yerine bir soru işareti var.", en: "The vending machine by the bus shelter still has its light on. Behind the glass, between the rows of candy bars, chips and soda, somebody has stocked a handful of Essence Crystals. The price tag just says a question mark." }
+          - { tr: "Para ağzı olması gerekenden geniş. Kenarları asfalt rengi küçük dişlerle dolu ve arada bir açılıp kapanıyor.", en: "The coin slot is too wide. It's lined with little asphalt-gray teeth, and every so often it opens and shuts." }
+        sezgiler:
+          - kosul: { stat: { per: 24 } }
+            metin: { tr: "Ağız her dördüncü açılışta daha uzun açık kalıyor, ardından iki kez hızla kapanıyor.", en: "Every fourth time the slot opens it stays open longer, then snaps shut twice, fast." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "elini oraya mı sokacaksın? gerçekten mi? peki. ben bakmıyorum.", en: "you're putting your hand in there? really? fine. i'm not watching." }
+        secenekler:
+          - id: "uzan"
+            etiket: { tr: "Ağız açılınca uzanıp kristalleri çek", en: "Reach in when it opens and grab the crystals" }
+            zar: { stat: "agi", zorluk: 32, tek: false, basarisiz: "kan_haz0_isirik", basarisiz_etkiler: [{ can: -8 }, { oz_kristali: 1 }] }
+            etkiler:
+              - oz_kristali: 3
+              - xp_seviye: 3
+            sonraki: "kan_haz0_basari"
+          - id: "kir"
+            etiket: { tr: "Camı yumrukla kır", en: "Punch out the glass" }
+            etkiler:
+              - can: -5
+              - oz_kristali: 2
+            sonraki: "kan_haz0_kir"
+          - id: "birak"
+            etiket: { tr: "Otomatı rahat bırak", en: "Leave the machine alone" }
+            sonraki: "@akis"
+
+      - id: "kan_haz0_basari"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Ağız dördüncü kez açılınca elini içeri daldırıyorsun. Kristaller avucuna dolarken dişler bileğinin arkasında boşluğu ısırıyor.", en: "When the slot opens the fourth time you plunge your hand in. Crystals fill your palm while the teeth bite empty air behind your wrist." }
+          - { tr: "Otomat hayal kırıklığına uğramış gibi bir süre vızıldıyor, sonra ışığı sönüyor.", en: "The machine hums for a while like it's disappointed, then its light goes out." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kristalleri cebine at", en: "Pocket the crystals" }
+            sonraki: "@akis"
+
+      - id: "kan_haz0_isirik"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Ağız erken kapanıyor. Dişler elinin üstüne geçiyor; elini kurtardığında avucunda tek bir kristal, bileğinde de bir halka diş izi kalmış.", en: "The slot closes early. The teeth clamp down on the back of your hand, and when you wrench it free you've got one crystal in your palm and a ring of tooth marks around your wrist." }
+          - { tr: "Otomat çikolata sıralarını tek tek çevirip rafları yeniden dolduruyor, sanki hiçbir şey olmamış.", en: "The machine turns its candy coils one by one and restocks itself, like nothing happened." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Bileğini sar, yoluna devam et", en: "Wrap your wrist and move on" }
+            sonraki: "@akis"
+
+      - id: "kan_haz0_kir"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Yumruğun camı paramparça ediyor. Otomatın içinden asfalt rengi bir dil fırlayıp parmaklarına dolanıyor, cam kırıkları da eklemlerine gömülüyor.", en: "Your fist shatters the glass. An asphalt-gray tongue whips out of the machine and wraps around your fingers, and the broken glass sinks into your knuckles." }
+          - { tr: "Dili silkeleyip kurtulana kadar kristallerin bir kısmı makinenin dibine yuvarlanıp kayboluyor. Kalanları topluyorsun.", en: "By the time you shake the tongue loose, some of the crystals have rolled down into the guts of the machine and vanished. You gather up the rest." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Ellerini silkele", en: "Shake out your hands" }
+            sonraki: "@akis"
+
+  # ================================================================== HAZİNE 1 — 11–19: İçerideki Deniz (zincirli dolap)
+  - id: "kule_an_hazine_1"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "hazine"]
+    gerilim: 1
+    kosul: { degisken_min: { kule_kat: 11 }, degisken_max: { kule_kat: 19 } }
+    kart: { tr: "Zincirli dolap", en: "The chained locker" }
+    sahne: "kan_haz1_giris"
+    sahneler:
+      - id: "kan_haz1_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Suyun üstünde turuncu bir acil durum dolabı yüzüyor; yanında yarısı soyulmuş bir vapur logosu var. Kapağı kilitli değil, ama dibinden kalın bir zincir karanlığa doğru sarkıyor.", en: "An orange emergency locker floats on the water, a half-peeled ferry logo on its side. The lid isn't locked, but a heavy chain hangs from the bottom of it, down into the dark." }
+          - { tr: "Zincir gergin; aşağıda bir şey onu tutuyor. Kapağa dokunduğun an zincirin bir karış daha gerildiğini görüyorsun.", en: "The chain is taut. Something down there is holding it. The moment you touch the lid, it pulls another foot tighter." }
+        sezgiler:
+          - kosul: { stat: { per: 36 } }
+            metin: { tr: "Dolabın içinde can yeleklerinin arasında kristaller parlıyor. Zincir kapağın menteşesine bağlı: kapak açılınca dolap aşağı çekilecek.", en: "Crystals glint among the life vests inside. The chain is hooked to the lid hinge: open it and the locker gets yanked under." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "zincirin öbür ucundaki uyanmasın diye dua ederdim. dua etmeyi bilseydim.", en: "i'd pray the thing on the other end of that chain stays asleep. if i knew how to pray." }
+        secenekler:
+          - id: "tut"
+            etiket: { tr: "Zinciri kendin tut, kapağı tek elle aç", en: "Hold the chain yourself, open the lid one-handed" }
+            zar: { stat: "str", zorluk: 45, tek: false, basarisiz: "kan_haz1_cekilme", basarisiz_etkiler: [{ can: -12 }, { oz_kristali: 1 }] }
+            etkiler:
+              - oz_kristali: 4
+              - xp_seviye: 3
+            sonraki: "kan_haz1_basari"
+          - id: "kir"
+            etiket: { tr: "Dolabı kır, ne çıkarsa kap", en: "Smash the locker and grab whatever comes out" }
+            etkiler:
+              - can: -8
+              - oz_kristali: 2
+            sonraki: "kan_haz1_kir"
+          - id: "birak"
+            etiket: { tr: "Dolabı akıntıya bırak", en: "Let the locker drift" }
+            sonraki: "@akis"
+
+      - id: "kan_haz1_basari"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Zinciri koluna dolayıp ayaklarını dibe diriyorsun. Kapak açılınca aşağıdan gelen çekiş omzunu yerinden oynatacak gibi, ama bırakmıyorsun.", en: "You wrap the chain around your forearm and dig your feet into the bottom. When the lid opens, the pull from below nearly wrenches your shoulder out, but you don't let go." }
+          - { tr: "Boştaki elinle can yeleklerinin arasındaki kristalleri tek tek topluyorsun. Zinciri bıraktığında dolap sessizce karanlığa gömülüyor.", en: "With your free hand you pick the crystals out from between the life vests. When you let go of the chain, the locker sinks into the dark without a sound." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kıyıya yüz", en: "Swim for shore" }
+            sonraki: "@akis"
+
+      - id: "kan_haz1_cekilme"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Zincir elinden kayıyor. Dolap bir anda dibe çekilirken seni de peşinden sürüklüyor ve ciğerlerine tuzlu su doluyor.", en: "The chain slips through your grip. The locker gets yanked under all at once and drags you down with it, and salt water floods your lungs." }
+          - { tr: "Dolabı bırakıp yüzeye çıktığında elinde tek bir kristal kalmış. Öksürüğün dinince aşağıdaki ışığın bir kez yanıp söndüğünü görüyorsun.", en: "When you let go and kick for the surface, you've got exactly one crystal in your hand. Once you stop coughing, you see the light down below flash once and go out." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Sudan çık", en: "Get out of the water" }
+            sonraki: "@akis"
+
+      - id: "kan_haz1_kir"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Dolabın yan duvarını tekmeyle içeri göçertiyorsun. Zincir boşalıp dolabı dibe çekerken içindekilerin bir kısmı suya saçılıyor.", en: "You kick the locker's side wall in. The chain goes slack, then jerks the locker under, and part of what was inside scatters across the water." }
+          - { tr: "Batmadan yakaladığın kristallerin yanı sıra göğsüne kırık bir sac parçası da saplanmış. Çekip çıkarıyorsun.", en: "Along with the crystals you snag before they sink, there's a shard of torn sheet metal stuck in your chest. You pull it out." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Yaranı bastır", en: "Put pressure on the wound" }
+            sonraki: "@akis"
+
+  # ================================================================== HAZİNE 2 — 21–29: Cam (aynalı vitrin)
+  - id: "kule_an_hazine_2"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "hazine"]
+    gerilim: 1
+    kosul: { degisken_min: { kule_kat: 21 }, degisken_max: { kule_kat: 29 } }
+    kart: { tr: "Aynalı vitrin", en: "The mirrored case" }
+    sahne: "kan_haz2_giris"
+    sahneler:
+      - id: "kan_haz2_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Cam bir sütuna oyulmuş bir vitrin, içinde kadife bir yastık, yastığın üstünde de Öz Kristalleri. Vitrinin kapağı yok; elini uzatıp almak yetecek gibi.", en: "A display case carved into a glass pillar, a velvet cushion inside, and Essence Crystals on the cushion. No lid. Looks like all you'd have to do is reach in." }
+          - { tr: "Ama vitrinin içinde de bir yansıman var. Sen elini kaldırınca o da kaldırıyor, yalnız yarım an sonra. Vitrinin kenarlarına da ince ince parlayan sayısız cam iğne dizilmiş.", en: "But there's a reflection of you inside the case too. When you raise your hand, it raises its hand, half a beat later. And the edges of the case bristle with countless thin, glittering glass needles." }
+        sezgiler:
+          - kosul: { stat: { per: 50 } }
+            metin: { tr: "İğneler senin elini değil, yansımanın elini izliyor. İkiniz aynı anda içerideyken kımıldamıyorlar.", en: "The needles aren't tracking your hand. They're tracking your reflection's. While you're both inside at the same time, they don't move." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "yansımanla yarışma. yansımalar hile yapar.", en: "don't race your reflection. reflections cheat." }
+        secenekler:
+          - id: "uyum"
+            etiket: { tr: "Yansımanı bekle, birlikte uzanın", en: "Wait for your reflection and reach in together" }
+            zar: { stat: "per", zorluk: 60, tek: false, basarisiz: "kan_haz2_igne", basarisiz_etkiler: [{ can: -14 }, { oz_kristali: 1 }] }
+            etkiler:
+              - oz_kristali: 4
+              - xp_seviye: 3
+            sonraki: "kan_haz2_basari"
+          - id: "kir"
+            etiket: { tr: "Sütunu kır, kristaller dökülsün", en: "Break the pillar and let the crystals spill" }
+            etkiler:
+              - can: -10
+              - oz_kristali: 2
+            sonraki: "kan_haz2_kir"
+          - id: "birak"
+            etiket: { tr: "Vitrini yansımana bırak", en: "Leave the case to your reflection" }
+            sonraki: "@akis"
+
+      - id: "kan_haz2_basari"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Elini kaldırıp yansıman sana yetişene kadar kıpırdamadan bekliyorsun. İki el yan yana vitrine girerken iğneler yerlerinde donup kalıyor.", en: "You lift your hand and hold perfectly still until your reflection catches up. As the two hands go into the case side by side, the needles freeze where they are." }
+          - { tr: "Kristalleri alıp elini geri çekiyorsun. Yansımanınki ise yastığın üstünde bir süre daha bekliyor, sonra o da ağır ağır çekiliyor.", en: "You take the crystals and pull back. Your reflection's hand stays over the cushion a while longer, then it pulls back too, slowly." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Arkana bakmadan yürü", en: "Walk away without looking back" }
+            sonraki: "@akis"
+
+      - id: "kan_haz2_igne"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Elin yansımanınkinden önce davranıyor. İğneler bir anda fırlayıp koluna saplanıyor, yüzlercesi birden.", en: "Your hand moves before your reflection's does. The needles fire all at once and sink into your arm, hundreds of them." }
+          - { tr: "Elini çektiğinde avucunda tek bir kristal var. Vitrinin içindeki yansımanın kolunda ise tek çizik bile yok.", en: "When you yank your hand back, you've got one crystal. Your reflection's arm, inside the case, doesn't have a scratch on it." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "İğneleri tek tek çıkar", en: "Pick the needles out one by one" }
+            sonraki: "@akis"
+
+      - id: "kan_haz2_kir"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Sütuna omuz atıyorsun. Cam çan gibi uzun uzun çınlayıp çatlıyor ve vitrindeki her şey kırıklarla birlikte ayağının dibine dökülüyor.", en: "You throw your shoulder into the pillar. The glass rings like a bell for a long time, then cracks, and everything in the case pours out at your feet with the shards." }
+          - { tr: "İğnelerin birkaçı boynuna saplanmış. Kırıkların arasından seçebildiğin kristalleri toplarken yansımanın hiçbir parçada görünmediğini görüyorsun.", en: "A few of the needles caught you in the neck. You pick out what crystals you can from the shards, and you can't help noticing your reflection doesn't show up in any of the pieces." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kırıklardan uzaklaş", en: "Step away from the shards" }
+            sonraki: "@akis"
+
+  # ================================================================== HAZİNE 3 — 31–39: Saat (kurulu kutu)
+  - id: "kule_an_hazine_3"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "hazine"]
+    gerilim: 1
+    kosul: { degisken_min: { kule_kat: 31 }, degisken_max: { kule_kat: 39 } }
+    kart: { tr: "Kurulu kutu", en: "The wound-up box" }
+    sahne: "kan_haz3_giris"
+    sahneler:
+      - id: "kan_haz3_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Bir çarkın göbeğine pirinç bir kutu perçinlenmiş. Kapağındaki küçük kadranda akrep on ikiyi, yelkovan on biri gösteriyor: beş dakika var.", en: "A brass box is riveted to the hub of a wheel. On the little dial on its lid, the hour hand points at twelve and the minute hand at eleven. Five minutes to go." }
+          - { tr: "Kutunun yanında, kapağı zorlayan birinin bıraktığı kurumuş bir kan izi var. Kapağın altında gerili bir yay vızıldıyor; sesini duyabiliyorsun.", en: "Beside the box is a dried smear of blood left by somebody who tried to force the lid. There's a spring wound tight under there, and you can hear it whine." }
+        sezgiler:
+          - kosul: { stat: { int: 66 } }
+            metin: { tr: "Kadran bir zamanlayıcı. Yelkovanı geri çevirirsen yay gevşer; bir diş fazla çevirirsen boşanır.", en: "The dial is a timer. Turn the minute hand back and the spring eases off. Turn it one notch too far and it lets go." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "beş dakika kala, değil mi? her şey hep beş dakika kala bozulur.", en: "five minutes to go, huh? everything always breaks at five minutes to go." }
+        secenekler:
+          - id: "geri"
+            etiket: { tr: "Yelkovanı diş diş geri çevir", en: "Turn the minute hand back, notch by notch" }
+            zar: { stat: "int", zorluk: 78, tek: false, basarisiz: "kan_haz3_yay", basarisiz_etkiler: [{ can: -16 }, { oz_kristali: 1 }] }
+            etkiler:
+              - oz_kristali: 4
+              - xp_seviye: 4
+            sonraki: "kan_haz3_basari"
+          - id: "kir"
+            etiket: { tr: "Kapağı bir çubukla zorla", en: "Pry the lid open with a rod" }
+            etkiler:
+              - can: -12
+              - oz_kristali: 2
+            sonraki: "kan_haz3_kir"
+          - id: "birak"
+            etiket: { tr: "Kutuyu kendi zamanına bırak", en: "Leave the box to its own time" }
+            sonraki: "@akis"
+
+      - id: "kan_haz3_basari"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Yelkovanı tırnağınla iterek diş diş geri çeviriyorsun. Her dişte yayın vızıltısı biraz daha inceliyor ve sonunda kutu, derin bir nefes verir gibi tık diye açılıyor.", en: "You push the minute hand back with your thumbnail, one notch at a time. With every notch the spring's whine gets thinner, until the box clicks open like it's letting out a long breath." }
+          - { tr: "İçinde kristaller ve durmuş bir cep saati var. Saatin camına tek bir sayı kazınmış: 0.", en: "Inside: crystals, and a stopped pocket watch. One number is scratched into its glass: 0." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Saati bırak, kristalleri al", en: "Leave the watch, take the crystals" }
+            sonraki: "@akis"
+
+      - id: "kan_haz3_yay"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Bir diş fazla çeviriyorsun. Yay boşanırken kapak giyotin gibi fırlıyor, keskin kenarı parmaklarını kesip geçiyor.", en: "You turn it one notch too far. The spring lets go and the lid snaps up like a guillotine, its edge slicing across your fingers." }
+          - { tr: "Kutunun içindekiler çarkın dönüşüyle dört bir yana saçılıyor; ancak tek bir kristali yakalayabiliyorsun. Çarkın göbeğinde artık iki kan izi var.", en: "The wheel's turning flings everything in the box in every direction, and you only manage to catch one crystal. There are two smears of blood on the hub now." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Parmaklarını sar", en: "Bandage your fingers" }
+            sonraki: "@akis"
+
+      - id: "kan_haz3_kir"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kapağın aralığına bir pirinç çubuk sokup bütün gücünle bastırıyorsun. Yay bir patlamayla boşanırken çubuk elinden fırlayıp alnını sıyırıyor.", en: "You jam a brass rod into the seam of the lid and lean on it with everything you've got. The spring lets go with a bang, and the rod flies out of your hands and grazes your forehead." }
+          - { tr: "Kapak eğrilmiş ama açık. Dökülenlerin arasından kristallerin yarısını toplayabiliyorsun, öbürleri dişlilerin arasında kaybolmuş.", en: "The lid's bent, but open. You gather about half the crystals from the spill. The rest are lost in the gears." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Alnını sil, devam et", en: "Wipe your forehead and keep going" }
+            sonraki: "@akis"
+
+  # ================================================================== HAZİNE 4 — 41–49: Sessizlik (müzik kutusu)
+  - id: "kule_an_hazine_4"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "hazine"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 41 }, degisken_max: { kule_kat: 49 } }
+    kart: { tr: "Sessiz katta müzik kutusu", en: "A music box on the silent floor" }
+    sahne: "kan_haz4_giris"
+    sahneler:
+      - id: "kan_haz4_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Karanlıkta, bir duvar oyuğunda küçük bir müzik kutusu duruyor. Kapağındaki balerinin bir kolu kırık; kapağın aralığından kristallerin ışığı sızıyor.", en: "In the dark, in a niche in the wall, sits a little music box. The ballerina on the lid has one broken arm, and crystal light leaks out from under the lid." }
+          - { tr: "Bu katta ses yok. Kapak açılırsa duyulacak tek ses kutunun çalacağı ezgi olur ve duvar diplerine sinmiş kulaksızlar onu duyar.", en: "There's no sound on this floor. Open that lid and its tune will be the only sound there is, and the earless ones curled along the walls will hear it." }
+        sezgiler:
+          - kosul: { stat: { per: 90 } }
+            metin: { tr: "Kutunun tarağı açıkta. Kapak kalkarken dişlere bir parmak bastırırsan hiçbiri titreşmez.", en: "The comb inside is exposed. Press a finger on the teeth as the lid comes up and none of them will ring." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "ben de bir şarkı biliyordum galiba. bir sesi hatırlıyorum, kimin olduğunu değil.", en: "i think i used to know a song. i remember a voice. not whose it was." }
+        secenekler:
+          - id: "bastir"
+            etiket: { tr: "Tarağı parmağınla bastırıp kapağı aç", en: "Open the lid with a finger on the comb" }
+            zar: { stat: "agi", zorluk: 105, tek: false, basarisiz: "kan_haz4_nota", basarisiz_etkiler: [{ can: -18 }, { oz_kristali: 1 }] }
+            etkiler:
+              - oz_kristali: 4
+              - xp_seviye: 4
+            sonraki: "kan_haz4_basari"
+          - id: "kir"
+            etiket: { tr: "Kutuyu duvara vurup kır", en: "Smash the box against the wall" }
+            etkiler:
+              - can: -14
+              - oz_kristali: 2
+            sonraki: "kan_haz4_kir"
+          - id: "birak"
+            etiket: { tr: "Kutuyu oyukta bırak", en: "Leave it in the niche" }
+            sonraki: "@akis"
+
+      - id: "kan_haz4_basari"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Parmağını tarağın dişlerine yaslayıp kapağı milim milim kaldırıyorsun. Silindir dönmeye başlıyor; dişler parmağının altında kıpırdanıyor ama hiçbiri ses vermiyor.", en: "You rest a finger across the teeth of the comb and lift the lid a fraction of an inch at a time. The cylinder starts to turn. The teeth shift under your finger, but not one of them makes a sound." }
+          - { tr: "Kristalleri alıp kapağı aynı yavaşlıkla kapatıyorsun. Sen uzaklaşırken bile kırık kollu balerin dönmeyi sürdürüyor.", en: "You take the crystals and close the lid just as slowly. The ballerina with the broken arm keeps turning, even as you walk away." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Sessizce uzaklaş", en: "Back away quietly" }
+            sonraki: "@akis"
+
+      - id: "kan_haz4_nota"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Parmağın bir an kayıyor. İnce, berrak tek bir nota katın bütün sessizliğini yırtıyor.", en: "Your finger slips for an instant. One note, thin and clear, tears through all the silence on the floor." }
+          - { tr: "Kulaksızlar aynı anda başlarını kaldırıyor. Kutudan bir kristal kapıp kaçarken biri uzun pençeleriyle sırtını yarıyor ve ancak merdivene vardığında peşini bırakıyorlar.", en: "Every earless one lifts its head at once. You snatch one crystal from the box and run, and one of them rakes your back with its long claws. They don't give up the chase until you reach the stairs." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Nefesini toparla", en: "Get your breath back" }
+            sonraki: "@akis"
+
+      - id: "kan_haz4_kir"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kutuyu duvara vuruyorsun. Kırılma sesi kulağına ulaşmıyor ama taşın titreşimi bütün kata yayılıyor ve karanlıkta bir şeyler kıpırdanmaya başlıyor.", en: "You slam the box against the wall. The crash never reaches your ears, but the shudder runs through the stone across the whole floor, and things start stirring in the dark." }
+          - { tr: "Dağılan kristallerden kapabildiğini kapıp kaçıyorsun. Bir pençe baldırını sıyırıyor, ama sen çoktan merdivendesin.", en: "You grab what crystals you can from the wreckage and run. A claw grazes your calf, but you're already on the stairs." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Arkana bakma", en: "Don't look back" }
+            sonraki: "@akis"
+
+  # ================================================================== HAZİNE 5 — 51–59: Başka Dünyaların Kalıntıları (çemberdeki sandık)
+  - id: "kule_an_hazine_5"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "hazine"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 51 }, degisken_max: { kule_kat: 59 } }
+    kart: { tr: "Çemberdeki sandık", en: "The chest in the circle" }
+    sahne: "kan_haz5_giris"
+    sahneler:
+      - id: "kan_haz5_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Yabancı bir ırkın kemikleri sönmüş bir ateşin çevresinde çember olmuş oturuyor. Çemberin ortasında, küllerin içinde kabuklu, kıvrık bir sandık var; kapağında dört parmaklı bir el izine benzeyen bir oyuk.", en: "The bones of some other species sit in a circle around a dead fire. In the middle of the circle, in the ashes, there's a curled, shelled chest. On its lid is a hollow shaped like a four-fingered handprint." }
+          - { tr: "Oyuğun dibinde ince bir iğne parlıyor. Kilit, açan elin kanını tadacak: beğenirse açılır, beğenmezse...", en: "A thin needle glints at the bottom of the hollow. The lock wants a taste of the hand that opens it. If it likes what it tastes, it opens. If not..." }
+        sezgiler:
+          - kosul: { stat: { wis: 125 } }
+            metin: { tr: "Kemiklerin her birinin bir eli sandığa uzanmış. Bu bir hazine değil, bir sunu; kilit almaya değil, vermeye gelene açılır.", en: "Every one of the skeletons has a hand reaching toward the chest. This isn't treasure. It's an offering, and the lock opens for whoever comes to give, not to take." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "sonuna kadar birlikte beklemişler. biz de mi böyle biteceğiz?", en: "they waited it out together, all the way to the end. is that how we end too?" }
+        yoldas_tepkileri:
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Kemiklere dokunma. Hangi gezegenden olursa olsun, ölülerin de bir düzeni var.\"", en: "\"Don't touch the bones. Doesn't matter what planet they're from, the dead still have their order.\"" }
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Birbirlerine yaslanmışlar, baksana. Son ana kadar.\"", en: "\"Look, they're leaning on each other. Right up to the end.\"" }
+        secenekler:
+          - id: "sun"
+            etiket: { tr: "Bir şey bırak, elini oyuğa koy", en: "Leave something, then put your hand in the hollow" }
+            zar: { stat: "wis", zorluk: 140, tek: false, basarisiz: "kan_haz5_igne", basarisiz_etkiler: [{ can: -22 }, { oz_kristali: 1 }] }
+            etkiler:
+              - oz_kristali: 3
+              - xp_seviye: 4
+              - ahlak: { insanlik: 1 }
+            sonraki: "kan_haz5_basari"
+          - id: "kir"
+            etiket: { tr: "Sandığı çemberden çekip kır", en: "Drag the chest out of the circle and crack it" }
+            etkiler:
+              - can: -16
+              - oz_kristali: 3
+              - ahlak: { insanlik: -2 }
+            sonraki: "kan_haz5_kir"
+          - id: "birak"
+            etiket: { tr: "Ölüleri rahat bırak", en: "Leave the dead in peace" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+            sonraki: "@akis"
+
+      - id: "kan_haz5_basari"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kendi kristallerinden birini sandığın yanına, küllerin içine bırakıp elini oyuğa yerleştiriyorsun. İğne parmağına batıyor, kilit bir an düşünüyor, sonra kabuk kapak çiçek gibi açılıyor.", en: "You set one of your own crystals in the ash beside the chest and fit your hand into the hollow. The needle pricks your finger, the lock thinks it over, then the shelled lid opens like a flower." }
+          - { tr: "İçinde kristaller ve bir avuç kurumuş meyve çekirdeği var. Kristalleri alıp çekirdekleri olduğu yerde bırakıyorsun; sandığa el uzatanlara onlar daha çok lazım.", en: "Inside are crystals and a handful of dried fruit pits. You take the crystals and leave the pits where they are. The ones reaching for the chest need those more." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Çemberden geri çekil", en: "Step back out of the circle" }
+            sonraki: "@akis"
+
+      - id: "kan_haz5_igne"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Elini oyuğa koyduğunda aklında yalnızca kristaller var. İğne batıyor, kilit kanını tadıp beğenmiyor ve oyuktan sızan yakıcı bir sıvı kolunu boydan boya dağlıyor.", en: "When you put your hand in the hollow, all you're thinking about is the crystals. The needle pricks you, the lock tastes your blood and doesn't like it, and a stinging fluid seeps out of the hollow and burns its way up your arm." }
+          - { tr: "Sandık kapanmadan önce aralığından tek bir kristal yuvarlanıyor. Kemikler, çemberlerini bozmadan seni izliyor gibi.", en: "Before it seals shut, a single crystal rolls out of the gap. The bones seem to watch you without breaking their circle." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kolunu küle bastır", en: "Press your arm into the ash" }
+            sonraki: "@akis"
+
+      - id: "kan_haz5_kir"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Sandığı çemberin ortasından sürükleyip çıkarırken kemiklerden birinin eli kopup küle düşüyor. Kabuğu bir taşla kırdığında içinden fışkıran asit kolunu yakıyor.", en: "As you drag the chest out of the middle of the circle, one skeleton's hand breaks off and drops into the ash. When you crack the shell with a rock, acid spurts out and burns your arm." }
+          - { tr: "Kristaller sağlam. Çemberde ise bir el artık sandığa uzanmıyor.", en: "The crystals are fine. In the circle, though, one hand doesn't reach for the chest anymore." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kristalleri al, yürü", en: "Take the crystals and go" }
+            sonraki: "@akis"
+
+  # ================================================================== HAZİNE 6 — 61–69: Yanık Arşiv (ateşe dayanıklı dolap)
+  - id: "kule_an_hazine_6"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "hazine"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 61 }, degisken_max: { kule_kat: 69 } }
+    kart: { tr: "Ateşe dayanıklı dolap", en: "The fireproof cabinet" }
+    sahne: "kan_haz6_giris"
+    sahneler:
+      - id: "kan_haz6_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Yanan rafların arasında hâlâ alev almamış tek şey çelik bir dosya dolabı. Gövdesi ısıdan kızarmış, çekmecesinin aralığından kristallerin soğuk ışığı sızıyor.", en: "The only thing between the burning shelves that hasn't caught is a steel filing cabinet. Its body is glowing red from the heat, and the cold light of crystals leaks out around the drawer." }
+          - { tr: "İçerideki kâğıtlar havasızlıktan alev alamamış, için için kömürleşiyor. Çekmeceyi birden açarsan içeri dolan hava hepsini aynı anda tutuşturur.", en: "The papers inside never caught for lack of air; they've just been smoldering. Yank the drawer open all at once and the air rushing in will light them all at the same time." }
+        sezgiler:
+          - kosul: { stat: { int: 165 } }
+            metin: { tr: "Çekmecenin kenarındaki kilit vidası gevşetilirse hava ince bir sızıntıyla, yavaş yavaş girer. Basınç azar azar dengelenirse parlama olmaz.", en: "Loosen the lock screw on the edge of the drawer and the air seeps in slowly. Let the pressure even out bit by bit and there's no flashover." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "etiketine bakma. lütfen. bu sefer bakma.", en: "don't read the label. please. not this time." }
+        secenekler:
+          - id: "vida"
+            etiket: { tr: "Vidayı gevşet, havayı azar azar ver", en: "Loosen the screw and let the air in slowly" }
+            zar: { stat: "int", zorluk: 185, tek: false, basarisiz: "kan_haz6_alev", basarisiz_etkiler: [{ can: -26 }, { oz_kristali: 1 }] }
+            etkiler:
+              - oz_kristali: 4
+              - xp_seviye: 4
+            sonraki: "kan_haz6_basari"
+          - id: "kir"
+            etiket: { tr: "Çekmeceyi tekmeyle aç, geri sıçra", en: "Kick the drawer open and jump back" }
+            etkiler:
+              - can: -20
+              - oz_kristali: 3
+            sonraki: "kan_haz6_kir"
+          - id: "birak"
+            etiket: { tr: "Dolabı yangına bırak", en: "Leave the cabinet to the fire" }
+            sonraki: "@akis"
+
+      - id: "kan_haz6_basari"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Vidayı yarım tur gevşetince ince bir ıslık başlıyor. Aralıktan sızan duman kararıp ağarana kadar bekledikten sonra çekmeceyi çekiyorsun.", en: "Half a turn on the screw and a thin whistle starts. You wait until the smoke seeping out of the gap goes from black to white, then pull the drawer." }
+          - { tr: "Kâğıtlar kömür olmuş ama kristaller sapasağlam. Dosyalardan birinin kenarında yarısı okunan bir etiket var; okumadan çekmeceyi kapatıyorsun.", en: "The papers are charcoal, but the crystals are fine. On the edge of one folder there's a half-legible label. You shut the drawer without reading it." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kristalleri al, raflardan çık", en: "Take the crystals and get out of the stacks" }
+            sonraki: "@akis"
+
+      - id: "kan_haz6_alev"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Vida bir anda yerinden fırlıyor. İçeri hücum eden hava kâğıtlarla buluşunca dolap bir ocak gibi gürleyip alev kusuyor; kollarınla yüzünü kapatsan da kaşların kavruluyor.", en: "The screw shoots out all at once. Air rushes in, meets the paper, and the cabinet roars like a furnace and spits fire. You get your arms over your face, but your eyebrows still singe." }
+          - { tr: "Alev sönünce çekmecenin ağzında isten kapkara olmuş tek bir kristal kalmış. Öbürleri ısıdan çatlayıp un ufak olmuş.", en: "When the fire dies down there's one crystal left at the mouth of the drawer, black with soot. The rest cracked in the heat and crumbled." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Yüzündeki isi sil", en: "Wipe the soot off your face" }
+            sonraki: "@akis"
+
+      - id: "kan_haz6_kir"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Çekmeceye tekmeyi basar basmaz kendini geriye atıyorsun. Dolaptan fışkıran alev topu burnunun dibinden geçerken ısısı bacaklarını kavuruyor.", en: "You kick the drawer and throw yourself backward in the same motion. A fireball bursts out of the cabinet right past your nose, and the heat scorches your legs." }
+          - { tr: "Alev çekilince kristallerin çoğu yerinde duruyor, kâğıtlar ise kül olup havaya karışmış.", en: "When the flames pull back, most of the crystals are still there. The papers have gone up as ash." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Bacaklarını yokla, yürü", en: "Check your legs and keep moving" }
+            sonraki: "@akis"
+
+  # ================================================================== HAZİNE 7 — 71–79: Tohumluk (kozanın kökü)
+  - id: "kule_an_hazine_7"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "hazine"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 71 }, degisken_max: { kule_kat: 79 } }
+    kart: { tr: "Kozanın kökü", en: "The root of the pod" }
+    sahne: "kan_haz7_giris"
+    sahneler:
+      - id: "kan_haz7_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Bir kozanın kökünde, toprağı yarıp çıkmış yumruk büyüklüğünde bir kristal salkımı var. Kozanın içinde bir şey uyuyor; salkım onun nefesiyle birlikte hafif hafif parlayıp sönüyor.", en: "At the root of one pod, a crystal cluster the size of a fist has pushed up through the soil. Something sleeps inside the pod, and the cluster glows and dims gently with its breathing." }
+          - { tr: "Salkımın çevresinde, toprağa gömülü kıl inceliğinde teller var. Tellerin ucu sıranın başındaki bir bekçi makasına bağlı.", en: "Around the cluster, hair-thin wires are buried in the soil. They run back to a pair of keeper's shears at the head of the row." }
+        sezgiler:
+          - kosul: { stat: { per: 210 } }
+            metin: { tr: "Tellerden biri salkımın içinden geçiyor. Salkımı kökünden değil, tepesinden koparırsan o tel gerilmez.", en: "One of the wires runs right through the cluster. Snap it off at the top instead of the root and that wire stays slack." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "içindeki uyuyor. bırak uyusun. uyanmak her zaman iyi bir şey değil.", en: "whatever's in there is asleep. let it sleep. waking up isn't always a good thing." }
+        secenekler:
+          - id: "tel"
+            etiket: { tr: "Telleri izle, salkımı tepesinden kopar", en: "Trace the wires and snap the cluster off at the top" }
+            zar: { stat: "per", zorluk: 235, tek: false, basarisiz: "kan_haz7_makas", basarisiz_etkiler: [{ can: -30 }, { oz_kristali: 1 }] }
+            etkiler:
+              - oz_kristali: 5
+              - xp_seviye: 4
+            sonraki: "kan_haz7_basari"
+          - id: "kir"
+            etiket: { tr: "Salkımı kökünden söküp kaç", en: "Rip the cluster out by the root and run" }
+            etkiler:
+              - can: -22
+              - oz_kristali: 3
+              - ahlak: { merhamet: -1 }
+            sonraki: "kan_haz7_kir"
+          - id: "birak"
+            etiket: { tr: "Uyuyanı rahat bırak", en: "Let the sleeper be" }
+            etkiler:
+              - ahlak: { merhamet: 1 }
+            sonraki: "@akis"
+
+      - id: "kan_haz7_basari"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Telleri parmaklarınla tek tek yoklayıp salkımı tepesinden kavrıyor, kırıyorsun. Teller kıpırdamıyor; sıranın başındaki makas açık kalıyor.", en: "You feel along the wires one by one, then grip the cluster near the top and snap it off. The wires don't move. The shears at the head of the row stay open." }
+          - { tr: "Kökte kalan parça bir süre ışıksız kaldıktan sonra kozanın nefesiyle yeniden parlamaya başlıyor. İçerideki uyanmıyor.", en: "The stub left at the root stays dark for a while, then starts glowing again with the pod's breathing. The sleeper doesn't wake." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kristalleri cebine koy", en: "Pocket the crystals" }
+            sonraki: "@akis"
+
+      - id: "kan_haz7_makas"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Yanlış teli çekiyorsun. Sıranın başındaki makas, bekçisi olmadan kendi kendine havalanıp ağzı açık üstüne uçuyor.", en: "You pull the wrong wire. The shears at the head of the row lift off on their own, no keeper needed, and come flying at you with their blades open." }
+          - { tr: "Kolunu kaldırıp makası savuşturuyorsun, ama bıçaklardan biri önkolunu derin bir yarıkla açıyor. Salkımdan elinde yalnızca kırık bir parça kalmış.", en: "You throw up your arm and knock the shears aside, but one blade opens a deep gash along your forearm. All you've got left of the cluster is one broken piece." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Önkolunu sıkıca sar", en: "Bind your forearm tight" }
+            sonraki: "@akis"
+
+      - id: "kan_haz7_kir"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Salkımı iki elinle kavrayıp kökünden söküyorsun. Kozanın içindeki şey bir kez, derinden inliyor; ışığı titreyip neredeyse sönüyor.", en: "You grab the cluster with both hands and tear it out by the root. The thing in the pod groans once, deep down, and its light flickers almost to nothing." }
+          - { tr: "Teller gerilince makas üstüne atılıyor. Sırtından bir yara alıp sıraların arasından kaçarken cebindeki kristaller hâlâ o nefesin ritmiyle parlıyor.", en: "The wires go taut and the shears come at you. You take a cut across your back and run through the rows, and the crystals in your pocket are still pulsing to that breathing." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Arkana bakmadan kaç", en: "Run and don't look back" }
+            sonraki: "@akis"
+
+  # ================================================================== HAZİNE 8 — 81–89: Ters Gök (fazla yakın bir yıldız)
+  - id: "kule_an_hazine_8"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "hazine"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 81 }, degisken_max: { kule_kat: 89 } }
+    kart: { tr: "Fazla yakın bir yıldız", en: "A star too close" }
+    sahne: "kan_haz8_giris"
+    sahneler:
+      - id: "kan_haz8_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Bir takımyıldız çizgisinin ucunda, bir kol boyu ötede küçük bir yıldız asılı. Işığının içinde kristaller dönüyor; bir avuç dolusu, belki daha fazla.", en: "At the end of a constellation line, an arm's length away, hangs a little star. Crystals are turning inside its light. A handful, maybe more." }
+          - { tr: "Çizgi yıldıza doğru incelip bitiyor. Ona uzanırsan ayağının altındaki tek dayanak o incecik ışık olacak, altında da bütün gökyüzü.", en: "The line thins out toward the star and ends. Reach for it, and the only thing under your feet will be that sliver of light, with the whole sky underneath." }
+          - { tr: "Üstelik yıldız yaklaşanı itiyor. Çizginin ucuna varan, ağırlığını yitirmeye başlıyor.", en: "And the star pushes back. Anyone who makes it to the end of the line starts to lose their weight." }
+        sezgiler:
+          - kosul: { stat: { str: 270 } }
+            metin: { tr: "Çizgi tek kolla asılacak kadar sağlam. Öbür kolunla uzanırsan yıldız itse de düşmezsin.", en: "The line's sturdy enough to hang from one-handed. Reach with the other arm, and even if the star shoves you, you won't fall." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "yıldız toplamak. bunu da yaptık sayılır artık.", en: "collecting stars. guess we can say we've done that now." }
+        secenekler:
+          - id: "tutun"
+            etiket: { tr: "Çizgiye tek kolla asıl, öbürüyle uzan", en: "Hang off the line one-handed and reach" }
+            zar: { stat: "str", zorluk: 300, tek: false, basarisiz: "kan_haz8_itilme", basarisiz_etkiler: [{ can: -35 }, { oz_kristali: 1 }] }
+            etkiler:
+              - oz_kristali: 5
+              - xp_seviye: 4
+            sonraki: "kan_haz8_basari"
+          - id: "kir"
+            etiket: { tr: "Yıldıza var gücünle vur", en: "Hit the star as hard as you can" }
+            etkiler:
+              - can: -25
+              - oz_kristali: 2
+            sonraki: "kan_haz8_kir"
+          - id: "birak"
+            etiket: { tr: "Yıldızı gökte bırak", en: "Leave the star in the sky" }
+            sonraki: "@akis"
+
+      - id: "kan_haz8_basari"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Çizgiye bir kolunla asılıp öbürünü uzatıyorsun. Yıldız itmeye başlayınca omzun yanıyor, parmakların çizgiden kaymak istiyor; bırakmıyorsun.", en: "You hang off the line by one arm and stretch out the other. When the star starts shoving, your shoulder burns and your fingers want to slide off the line. You don't let go." }
+          - { tr: "Avucun ışığa girip dönen kristallerle dolu çıkıyor. Yıldız biraz sönükleşmiş halde çizginin ucunda asılı kalıyor.", en: "Your hand goes into the light and comes out full of turning crystals. The star dims a little and stays hanging at the end of the line." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Çizgiden geri dön", en: "Work your way back along the line" }
+            sonraki: "@akis"
+
+      - id: "kan_haz8_itilme"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Yıldız seni hiç beklemediğin anda itiyor ve parmakların çizgiden kurtuluyor. Gökyüzüne doğru düşerken başka bir çizgiye sırtüstü çarpıyorsun.", en: "The star shoves when you're not ready, and your fingers come off the line. You fall toward the sky and slam back-first into another line." }
+          - { tr: "Yıldızdan kopardığın tek kristali hâlâ avucunda sıkıyorsun. Sırtının ağrısı ise kolay kolay geçecek gibi değil.", en: "You're still clutching the one crystal you tore loose. The ache in your back doesn't feel like it'll fade anytime soon." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Doğrul, çizgiye tırman", en: "Get up and climb the line" }
+            sonraki: "@akis"
+
+      - id: "kan_haz8_kir"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Yumruğunu yıldızın tam ortasına indiriyorsun. Yıldız bir an parlayıp patlıyor; dalga seni çizgi boyunca geri savururken kristaller dört bir yana saçılıyor.", en: "You bring your fist down right in the center of the star. It flares and bursts, and the blast throws you back along the line while crystals scatter in every direction." }
+          - { tr: "Birkaçını havada yakalıyorsun. Öbürleri aşağıdaki yıldızların arasına düşüp gözden kayboluyor; belki Dünya'ya doğru, bilemiyorsun.", en: "You snatch a couple out of the air. The rest fall away among the stars below. Toward Earth, maybe. You can't tell." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Yanan elini silkele", en: "Shake out your burning hand" }
+            sonraki: "@akis"
+
+  # ================================================================== HAZİNE 9 — 91–99: Taslak (yarım çizilmiş sandık)
+  - id: "kule_an_hazine_9"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "hazine"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 91 }, degisken_max: { kule_kat: 99 } }
+    kart: { tr: "Yarım çizilmiş sandık", en: "The half-drawn chest" }
+    sahne: "kan_haz9_giris"
+    sahneler:
+      - id: "kan_haz9_giris"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Izgaranın üstünde beyaz çizgilerden bir sandık duruyor; menteşeleri çizilmiş, kilidi çizilmemiş. İçindeki kristaller ise gerçek, ağır ve ışıl ışıl.", en: "On the grid sits a chest made of white lines: hinges drawn in, no lock drawn at all. The crystals inside are real, though, heavy and shining." }
+          - { tr: "Sandığın üstünde yarım bir Sistem notu asılı: [Tuzak: ]. Boşluğu dolduran olmamış; açınca ne olacağını sandık da bilmiyor gibi.", en: "A half-finished System notice hangs over the chest: [Trap: ]. Nobody filled in the blank. It's like the chest doesn't know what happens when you open it either." }
+        sezgiler:
+          - kosul: { stat: { wis: 340 } }
+            metin: { tr: "Taslakta boş bırakılan her şey, ona ilk dokunanın beklediği şeye dönüşüyor. Tuzak beklersen tuzak bulursun.", en: "Anything left blank in the draft turns into whatever the first person to touch it expects. Expect a trap, and you'll find one." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "boşluğu doldurma. benim boşluklarımı da doldurmaya çalışma. bazıları boş kalmalı.", en: "don't fill in the blank. don't try to fill in mine either. some of them should stay empty." }
+        secenekler:
+          - id: "bos"
+            etiket: { tr: "Hiçbir şey beklemeden kapağı kaldır", en: "Lift the lid expecting nothing at all" }
+            zar: { stat: "wis", zorluk: 375, tek: false, basarisiz: "kan_haz9_tuzak", basarisiz_etkiler: [{ can: -40 }, { oz_kristali: 1 }] }
+            etkiler:
+              - oz_kristali: 5
+              - xp_seviye: 5
+            sonraki: "kan_haz9_basari"
+          - id: "kir"
+            etiket: { tr: "Sandığın çizgilerini sil, kristaller düşsün", en: "Rub out the chest's lines and let the crystals drop" }
+            etkiler:
+              - can: -30
+              - oz_kristali: 3
+              - dikkat: 2
+            sonraki: "kan_haz9_kir"
+          - id: "birak"
+            etiket: { tr: "Notu boş, sandığı kapalı bırak", en: "Leave the blank empty and the chest shut" }
+            sonraki: "@akis"
+
+      - id: "kan_haz9_basari"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Aklını boşaltıp kapağı kaldırıyorsun; ne bir iğne bekliyorsun ne bir alev, hiçbir şey. Not bir an titreyip kendini dolduruyor: [Tuzak: yok.]", en: "You empty your head and lift the lid, expecting no needle, no fire, nothing at all. The notice flickers and fills itself in: [Trap: none.]" }
+          - { tr: "Kristalleri alırken sandığın çizgileri yavaş yavaş solup ızgaraya karışıyor. Taslakta bir boşluk daha dolmuş oldu.", en: "As you take the crystals, the chest's lines slowly fade into the grid. One more blank in the draft, filled in." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Izgarada yürümeye devam et", en: "Keep walking the grid" }
+            sonraki: "@akis"
+
+      - id: "kan_haz9_tuzak"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kapağa dokunduğun an aklından bir iğne geçiyor, yalnızca bir an için. Not hemen doluyor: [Tuzak: iğne.] Sandığın kenarından fırlayan bir demet beyaz çizgi ellerine saplanıyor.", en: "The moment you touch the lid, a needle crosses your mind, just for a second. The notice fills in right away: [Trap: needles.] A spray of white lines shoots from the edge of the chest and stabs into your hands." }
+          - { tr: "Çizgileri çekip çıkarınca parmaklarında mürekkep lekesine benzer izler kalıyor. Sandık kapanmadan tek bir kristali kurtarabiliyorsun.", en: "When you pull the lines out, they leave marks on your fingers like ink stains. You save one crystal before the chest shuts." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Ellerini sil", en: "Wipe your hands" }
+            sonraki: "@akis"
+
+      - id: "kan_haz9_kir"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Avucunla sandığın çizgilerini silmeye başlıyorsun. Çizgiler kayboldukça kristaller ızgaraya dökülüyor; ama silgi gibi sürttüğün avucunun derisi de çizgilerle birlikte soyuluyor.", en: "You start rubbing out the chest's lines with your palm. As they disappear the crystals spill onto the grid, but the skin of your palm comes away with the lines, like you've been using it as an eraser." }
+          - { tr: "Kristallerin bir kısmı da çizgilerle birlikte silinip gidiyor. Kalanları topluyorsun.", en: "Some of the crystals get erased along with the lines. You gather up what's left." }
+        bildirimler:
+          - tur: "uyari"
+            baslik: { tr: "[TASLAK]", en: "[DRAFT]" }
+            satirlar:
+              - { tr: "Yetkisiz silme algılandı.", en: "Unauthorized erasure detected." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Soyulan avucunu kapa", en: "Close your raw hand" }
+            sonraki: "@akis"
