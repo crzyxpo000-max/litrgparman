@@ -356,6 +356,12 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun show(state: WorldState, notices: List<NoticeView>) {
+        // Operasyon başlıyor: hemen önceki durum ayrı bir yuvaya kaydedilir (geri dönüp hazırlanabilmek için).
+        val previous = _ui.value.game
+        val opKind = com.yukselis.engine.world.MissionKind.OPERATION
+        if (previous != null && previous.seed == state.seed && previous.mission?.kind != opKind && state.mission?.kind == opKind) {
+            viewModelScope.launch(saveDispatcher) { app.saves.saveBeforeOperation(previous) }
+        }
         render(state, notices, advanceTurn = true)
         _ui.update { it.copy(actionNotices = emptyList(), celebration = celebrations(notices)) }
     }

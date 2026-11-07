@@ -196,7 +196,7 @@ class SaveTest {
         assertNotNull(info)
         assertEquals(2, info!!.level)
         assertEquals(42L, info.savedAtMillis)
-        assertEquals(4, mgr.allSlots().size)
+        assertEquals(5, mgr.allSlots().size) // otomatik, operasyon öncesi, 3 elle
 
         try {
             mgr.save("slot1", s.copy(mode = GameMode.IRONMAN))

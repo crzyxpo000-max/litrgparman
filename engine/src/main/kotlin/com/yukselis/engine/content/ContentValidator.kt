@@ -555,6 +555,16 @@ object ContentValidator {
                 }
                 ch.operationEvents.forEach { if (it !in content.events) problems += "$where: tanımsız operasyon olayı '$it'" }
                 ch.overflowEffects.forEach { checkEffect(it, "$where.tasma_etkiler") }
+                ch.countdown?.let { checkText(it, "$where.geri_sayim") }
+                if (!ch.earlyEntry && ch.preparations.size < 2) problems += "$where: tarihli operasyonun en az 2 hazırlığı olmalı"
+                ch.preparations.forEach { pr ->
+                    checkText(pr.name, "$where.hazirlik.${pr.id}.ad"); checkText(pr.description, "$where.hazirlik.${pr.id}.aciklama")
+                    checkText(pr.result, "$where.hazirlik.${pr.id}.sonuc")
+                    checkCondition(pr.condition, "$where.hazirlik.${pr.id}")
+                    pr.operationEffects.forEach { checkEffect(it, "$where.hazirlik.${pr.id}.operasyonda") }
+                    if (pr.cost !in 1..3) problems += "$where.hazirlik.${pr.id}: bedel 1–3 yuva olmalı"
+                }
+                ch.preparations.groupBy { it.id }.filterValues { it.size > 1 }.keys.forEach { problems += "$where: hazırlık '$it' iki kez" }
             }
             content.events.values.forEach { ev ->
                 ev.location.filter { it !in validPlaces }.forEach { problems += "olay ${ev.id}: konum '$it' tanımsız (bölge, us ya da *)" }
@@ -578,7 +588,7 @@ fun isEngineFlag(flag: String): Boolean =
 /** Bu kadar ve daha uzun gecikmeli tohumun olayı bir hatırlatma cümlesiyle başlamalı (DECISIONS #130). */
 const val REMINDER_MIN_DELAY = 3
 
-private val ENGINE_FLAG_PREFIXES = listOf("yenildi_", "uyanis_", "olay_", "dikkat_esik_", "yozlasma_esik_", "_red_", "_zar_", "_sira_", "bolum_")
+private val ENGINE_FLAG_PREFIXES = listOf("yenildi_", "uyanis_", "olay_", "dikkat_esik_", "yozlasma_esik_", "_red_", "_zar_", "_sira_", "bolum_", "hazirlik_")
 private val ENGINE_FLAGS_EXTRA = setOf(com.yukselis.engine.npc.NpcEngine.FLAG_MOURNED)
 private val ENGINE_FLAGS = setOf(com.yukselis.engine.world.WorldEngine.DAILY_WIDE_FLAG)
 

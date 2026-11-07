@@ -407,6 +407,20 @@ object ContentParser {
                 overflowEffects = c.array("tasma_etkiler").flatMap { effects(it.jsonObject, "$where.tasma_etkiler") },
                 overflowText = c["tasma"]?.let { ltext(it, "$where.tasma") } ?: LText.EMPTY,
                 earlyEntry = (c["erken"] as? JsonPrimitive)?.booleanOrNull ?: true,
+                countdown = c["geri_sayim"]?.let { ltext(it, "$where.geri_sayim") },
+                preparations = c.array("hazirlik").map { x ->
+                    val h = x.jsonObject
+                    val hid = h.string("id") ?: throw ContentFormatException("$where.hazirlik: 'id' eksik")
+                    com.yukselis.engine.world.PreparationDef(
+                        id = hid,
+                        name = ltext(h["ad"], "$where.hazirlik.$hid.ad"),
+                        description = ltext(h["aciklama"], "$where.hazirlik.$hid.aciklama"),
+                        result = ltext(h["sonuc"], "$where.hazirlik.$hid.sonuc"),
+                        cost = h.int("bedel") ?: 1,
+                        condition = h["kosul"]?.let { condition(it.jsonObject) },
+                        operationEffects = h.array("operasyonda").flatMap { effects(it.jsonObject, "$where.hazirlik.$hid.operasyonda") },
+                    )
+                },
             )
         }
         return ChapterTable(list.sortedBy { it.no }, bases)

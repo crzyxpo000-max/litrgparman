@@ -128,6 +128,9 @@ class Simulator(private val content: Content) {
 
         /** Keşif görevi en çok bu kadar gün sürer, sonra üsse dönülür. */
         const val MISSION_DAYS = 3
+
+        /** Üste her yuvada bir hazırlık yapma olasılığı (varsa). */
+        const val PREP_WISH = 0.25
         const val DEATH_LIMIT = 80
         val CHECKPOINTS = (1..12).map { it * 30 } + 365
         val ACT_ENDS = listOf(30, 180, 330, 365)
@@ -395,6 +398,8 @@ class Simulator(private val content: Content) {
                 val left = hub.operations.first().daysLeft
                 if (left <= 1 || rng.nextDouble() < OP_EAGERNESS) return HubAction.EnterOperation(hub.operations[rng.nextInt(hub.operations.size)].index)
             }
+            // Hazırlık: gerçek oyuncu tarihli operasyondan önce çoğu zaman en az birini yapar.
+            hub.preparations.firstOrNull { it.enabled }?.let { if (rng.nextDouble() < PREP_WISH) return HubAction.Prepare(it.id) }
             if (tower != null && s.hasFlag("kule_acik") && rng.nextDouble() < towerWish * 0.6) {
                 hub.travel.firstOrNull { it.id == tower.region }?.let { return HubAction.Travel(it.id) }
             }

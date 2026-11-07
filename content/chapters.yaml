@@ -55,6 +55,20 @@ bolumler:
   - no: 4
     perde: 2
     erken: false
+    geri_sayim: { tr: "Kule'nin yükselişine {n} gün", en: "{n} days until the Spire rises" }
+    hazirlik:
+      - id: "kule_iskele"
+        ad: { tr: "İskele kur", en: "Put up scaffolding" }
+        aciklama: { tr: "Meydanın çevresindeki cephelere iskele çak; düşen bir cephe tutulabilsin.", en: "Brace the building fronts around the square with scaffolding so a falling wall can be held." }
+        sonuc: { tr: "İskeleler gece yarısına kadar çakıldı. Düşen bir cepheyi tutmak artık kas işi değil, zamanlama işi.", en: "The scaffolding goes up by midnight. Holding a falling wall is a matter of timing now, not muscle." }
+        bedel: 1
+      - id: "kule_tahliye"
+        ad: { tr: "Meydanı boşalt", en: "Clear the square" }
+        aciklama: { tr: "Dairenin çevresindeki apartmanları kapı kapı dolaş; insanları uzaklaştır.", en: "Go door to door through the buildings around the circle and get people out." }
+        sonuc: { tr: "Yarım gün kapı çaldın. Çoğu gitti; kalanlar en azından balkonlarda oturmuyor.", en: "You spent half a day knocking on doors. Most of them left. The rest at least aren't sitting out on their balconies." }
+        bedel: 1
+        operasyonda:
+          - degisken: { hayatta_kalan: 3 }
     acilis: 31
     son_tarih: 40
     bitis: 45
@@ -70,6 +84,20 @@ bolumler:
   - no: 5
     perde: 2
     erken: false
+    geri_sayim: { tr: "Çekirdeğin uyanışına {n} gün", en: "{n} days until the Core wakes" }
+    hazirlik:
+      - id: "cekirdek_kule"
+        ad: { tr: "Saat kulesinin temelini oy", en: "Undercut the clock tower" }
+        aciklama: { tr: "Saat kulesinin temel taşlarını gevşet; gerekirse muhafızın üstüne devrilsin.", en: "Loosen the clock tower's foundation stones so it can come down on the guardian if it has to." }
+        sonuc: { tr: "Temel taşlarının üçünü yerinden oynattın. Kule hâlâ dimdik, ama artık bir itişe bakıyor.", en: "You worked three of the foundation stones loose. The tower's still standing tall, but it's one shove from coming down." }
+        bedel: 2
+      - id: "cekirdek_sivil"
+        ad: { tr: "Meydanın çevresini boşalt", en: "Clear the streets around the square" }
+        aciklama: { tr: "Meydana açılan sokaklardaki aileleri yokuş aşağı taşı.", en: "Move the families on the streets around the square down the hill." }
+        sonuc: { tr: "Sokaklar boşaldı. Meydanda olacaklara artık yalnız gözcüler tanık olacak.", en: "The streets are empty. Whatever happens in the square, only the lookouts will be there to see it." }
+        bedel: 1
+        operasyonda:
+          - degisken: { hayatta_kalan: 3 }
     acilis: 46
     son_tarih: 60
     bitis: 66
@@ -84,6 +112,20 @@ bolumler:
   - no: 6
     perde: 2
     erken: false
+    geri_sayim: { tr: "Kordon kapısının taşmasına {n} gün", en: "{n} days until the Esplanade Gate spills" }
+    hazirlik:
+      - id: "tasma_plan"
+        ad: { tr: "Kamp komutanlarıyla plan yap", en: "Plan it with the camp commanders" }
+        aciklama: { tr: "Dört kampın komutanlarını aynı haritanın başına topla; kim nereyi tutacak, bugünden belli olsun.", en: "Get the four camps' commanders around one map and settle who holds what, starting now." }
+        sonuc: { tr: "Harita masada, her kampın rengiyle işaretli. Kimse sevmedi ama herkes imzaladı.", en: "The map's on the table, marked in every camp's color. Nobody likes it, but everybody signed." }
+        bedel: 2
+      - id: "tasma_balkon"
+        ad: { tr: "Balkonları önceden boşalt", en: "Clear the balconies ahead of time" }
+        aciklama: { tr: "{yer:kordon|de}ki apartmanları dolaş; seyirciyi deniz çekilmeden önce içeri al.", en: "Go through the buildings on {yer:kordon} and get the spectators inside before the sea pulls back." }
+        sonuc: { tr: "Balkonların yarısı boş. Kalanlar seni gördü ve en azından ayakkabılarını giydi.", en: "Half the balconies are empty. The rest saw you coming and at least put their shoes on." }
+        bedel: 1
+        operasyonda:
+          - degisken: { hayatta_kalan: 4 }
     acilis: 67
     son_tarih: 80
     bitis: 95
@@ -125,6 +167,22 @@ bolumler:
   - no: 9
     perde: 2
     erken: false
+    geri_sayim: { tr: "Gemi inişine {n} gün", en: "{n} days until the ship arrives" }
+    hazirlik:
+      - id: "gemi_siginak"
+        ad: { tr: "Sığınakları stokla", en: "Stock the shelters" }
+        aciklama: { tr: "{yer:kiyikent_liman|in} altındaki ambarlara su ve erzak taşı; panik olursa insanlar bir yere sığabilsin.", en: "Haul water and supplies into the storerooms under the harbor so people have somewhere to go if it turns to panic." }
+        sonuc: { tr: "Ambarlar dolu. Kapılarına tebeşirle kaç kişi alacakları yazılı.", en: "The storerooms are full. Chalked on each door is how many people it can hold." }
+        bedel: 1
+        operasyonda:
+          - degisken: { hayatta_kalan: 3 }
+      - id: "gemi_gozcu"
+        ad: { tr: "Kule'de gözcü yeri hazırla", en: "Set up a lookout in the Spire" }
+        aciklama: { tr: "Kule'nin yüksek bir katında körfezi gören bir yer ayarla; gelen şeye ilk sen bak.", en: "Set up a spot high in the Spire with a view of the bay so you're the first to see whatever comes." }
+        sonuc: { tr: "Kırkıncı katın penceresinden körfez avucunun içi gibi görünüyor. Dürbün yerinde.", en: "From the fortieth-floor window the bay looks small enough to hold. The binoculars are set." }
+        bedel: 1
+        operasyonda:
+          - gizle: 5
     acilis: 151
     son_tarih: 178
     bitis: 180
@@ -140,6 +198,21 @@ bolumler:
   - no: 10
     perde: 3
     erken: false
+    geri_sayim: { tr: "Geçidin açılmasına {n} gün", en: "{n} days until the passage opens" }
+    hazirlik:
+      - id: "gecit_cephe"
+        ad: { tr: "Dış cephede tırmanış yolu işaretle", en: "Mark a climbing route up the outside" }
+        aciklama: { tr: "Kule'nin dış cephesinde ellinci kata çıkan bir yol bul, tutunma yerlerini işaretle.", en: "Find a way up the outside of the Spire to the fiftieth floor and mark the handholds." }
+        sonuc: { tr: "Kırk dokuz kat boyunca tebeşir işaretleri. Yolun nerede biteceğini artık biliyorsun.", en: "Forty-nine floors of chalk marks. Now you know exactly where the route ends." }
+        bedel: 2
+      - id: "gecit_avci"
+        ad: { tr: "Avcıları önceden topla", en: "Round up hunters early" }
+        aciklama: { tr: "Geçit açıldığında yanında olacak bir avcı ekibi kur.", en: "Put together a crew of hunters who'll be with you when the passage opens." }
+        sonuc: { tr: "On iki avcı adını yazdırdı. Hepsi aynı soruyu sordu: öbür tarafta para var mı?", en: "Twelve hunters signed up. Every one of them asked the same thing: is there money on the other side?" }
+        bedel: 1
+        operasyonda:
+          - ordu_kazan: 5
+          - itibar: { lonca: 2 }
     acilis: 181
     son_tarih: 200
     bitis: 205
@@ -187,6 +260,20 @@ bolumler:
   - no: 13
     perde: 3
     erken: false
+    geri_sayim: { tr: "Kapı fırtınasına {n} gün", en: "{n} days until the Gate storm" }
+    hazirlik:
+      - id: "firtina_ritim"
+        ad: { tr: "Kapıların ritmini ölç", en: "Measure the Gates' rhythm" }
+        aciklama: { tr: "{fraksiyon:sessiz_ag} ile kapıların atışını dinle; hepsinin merkezini bul.", en: "Listen to the Gates' pulse with the {fraksiyon:sessiz_ag|k} and find the center they all beat around." }
+        sonuc: { tr: "Kayıtlar aynı noktayı gösteriyor: {yer:sanayi|de}ki eski döküm fırını. Fırtına koptuğunda nereye koşacağını biliyorsun.", en: "The recordings all point to the same spot: the old foundry furnace in {yer:sanayi}. When the storm hits, you'll know where to run." }
+        bedel: 2
+      - id: "firtina_nobet"
+        ad: { tr: "Mahallelere nöbetçi yerleştir", en: "Post lookouts in the neighborhoods" }
+        aciklama: { tr: "Kapıların sıklaştığı yedi mahalleye birer nöbetçi koy; ilk açılan kapı hemen duyulsun.", en: "Put a lookout in each of the seven neighborhoods where the Gates keep coming, so the first one to open gets heard." }
+        sonuc: { tr: "Yedi telsiz, yedi nöbetçi. Hepsi aynı frekansta, hepsi uykusuz.", en: "Seven radios, seven lookouts. All on the same frequency, all running on no sleep." }
+        bedel: 1
+        operasyonda:
+          - degisken: { hayatta_kalan: 4 }
     acilis: 261
     son_tarih: 292
     bitis: 292
@@ -218,6 +305,22 @@ bolumler:
   - no: 15
     perde: 3
     erken: false
+    geri_sayim: { tr: "Filonun görünmesine {n} gün", en: "{n} days until the fleet comes into view" }
+    hazirlik:
+      - id: "filo_sancak"
+        ad: { tr: "Bayrağının altına adam topla", en: "Rally people to your banner" }
+        aciklama: { tr: "Şehirde dolaş; filo geldiğinde yanında durmak isteyenleri kaydet.", en: "Walk the city and sign up anyone who wants to be standing with you when the fleet comes." }
+        sonuc: { tr: "Liste uzadı. İçinde çocuk sesiyle verilmiş birkaç ad da var; onları sildin.", en: "The list got long. A few of the names were given in a kid's voice. You crossed those out." }
+        bedel: 1
+        operasyonda:
+          - ordu_kazan: 10
+      - id: "filo_stok"
+        ad: { tr: "Kıtlığa hazırlan", en: "Get ready for the shortages" }
+        aciklama: { tr: "Ekmek, su ve ilacı mahallelere dağıt; filodan sonrası uzun sürebilir.", en: "Spread bread, water and medicine across the neighborhoods. What comes after the fleet could last a while." }
+        sonuc: { tr: "Her mahallenin bir deposu var artık. Anahtarlar güvendiğin ellerde.", en: "Every neighborhood has a stockpile now. The keys are in hands you trust." }
+        bedel: 1
+        operasyonda:
+          - degisken: { hayatta_kalan: 3 }
     acilis: 306
     son_tarih: 320
     bitis: 330
@@ -233,6 +336,27 @@ bolumler:
   - no: 16
     perde: 4
     erken: false
+    geri_sayim: { tr: "İstilaya {n} gün", en: "{n} days until the invasion" }
+    hazirlik:
+      - id: "istila_ordu"
+        ad: { tr: "Kıyı boyunca birlik topla", en: "Raise units along the shore" }
+        aciklama: { tr: "Kampların avcılarını kıyı hattına göre birliklere ayır.", en: "Sort the camps' hunters into units along the shoreline." }
+        sonuc: { tr: "Kıyı boyunca sancaklar dikili. Her birinin altında yorgun ama ayakta birileri var.", en: "There are banners all along the shore. Under each one, somebody tired but still on their feet." }
+        bedel: 2
+        operasyonda:
+          - ordu_kazan: 20
+      - id: "istila_silah"
+        ad: { tr: "Ağır silahları Kule'ye taşı", en: "Haul the heavy guns up the Spire" }
+        aciklama: { tr: "Lonca'nın ağır silahlarını Kule'nin yüksek katlarına çıkar; ilk gemiyi gökyüzünde karşıla.", en: "Get the Guild's heavy guns up to the Spire's high floors so you can meet the first ship in the sky." }
+        sonuc: { tr: "Altmışıncı katta üç ağır top, namluları körfeze dönük. Mermileri saymak bir saat sürdü.", en: "Three heavy guns on the sixtieth floor, barrels turned toward the bay. Counting the shells took an hour." }
+        bedel: 2
+      - id: "istila_tahkimat"
+        ad: { tr: "{yer:kiyikent_liman|i} tahkim et", en: "Fortify {yer:kiyikent_liman}" }
+        aciklama: { tr: "Rıhtıma barikat kur, sığınakların kapılarını güçlendir.", en: "Barricade the docks and reinforce the shelter doors." }
+        sonuc: { tr: "Konteynerler rıhtım boyunca dizildi; aralarından yalnız bir insan geçer. Gemiler bunu umursamayacak, ama insanlar umursuyor.", en: "Shipping containers line the docks, with only one person's width between them. The ships won't care. The people do." }
+        bedel: 1
+        operasyonda:
+          - degisken: { hayatta_kalan: 4 }
     acilis: 331
     son_tarih: 342
     bitis: 342
@@ -247,6 +371,21 @@ bolumler:
   - no: 17
     perde: 4
     erken: false
+    geri_sayim: { tr: "Merdivenin açılmasına {n} gün", en: "{n} days until the stairs open" }
+    hazirlik:
+      - id: "merdiven_kilit"
+        ad: { tr: "Merdivenin kilidini incele", en: "Study the stairway lock" }
+        aciklama: { tr: "{yer:kule_dibi|in} çöken taşlarının arasından sızan ışığın düzenini oku; kilidin nerede olduğunu bul.", en: "Read the pattern of the light leaking up through the sunken stones of {yer:kule_dibi} and find where the lock is." }
+        sonuc: { tr: "Işık her yedi saniyede bir aynı yerde kırılıyor. Kilit orada; iradeyle değil, sırayla açılıyor.", en: "Every seven seconds the light breaks in the same spot. That's the lock. It doesn't open to willpower. It opens in sequence." }
+        bedel: 2
+      - id: "merdiven_erzak"
+        ad: { tr: "Uzun bir iniş için hazırlan", en: "Get ready for a long way down" }
+        aciklama: { tr: "Işık, su, sargı bezi; aşağıda ne kadar kalacağını bilen yok.", en: "Light, water, bandages. Nobody knows how long you'll be down there." }
+        sonuc: { tr: "Çantan ağır, ama içindekilerin hiçbiri fazla değil.", en: "Your pack is heavy, but nothing in it is extra." }
+        bedel: 1
+        operasyonda:
+          - can: 99999
+          - mana: 99999
     acilis: 343
     son_tarih: 350
     bitis: 352
@@ -263,6 +402,23 @@ bolumler:
   - no: 18
     perde: 4
     erken: false
+    geri_sayim: { tr: "Son karara {n} gün", en: "{n} days until the final decision" }
+    hazirlik:
+      - id: "son_veda"
+        ad: { tr: "Vedalaş", en: "Say your goodbyes" }
+        aciklama: { tr: "Yanındakilerle, kamplarla, şehrin sokaklarıyla vedalaş.", en: "Say goodbye to the people close to you, to the camps, to the streets." }
+        sonuc: { tr: "Herkese söyleyeceğini söyledin. Kalanını pencere söyleyecek.", en: "You said what you had to say to everyone. The window can say the rest." }
+        bedel: 1
+        operasyonda:
+          - can: 99999
+          - mana: 99999
+      - id: "son_yollar"
+        ad: { tr: "Kaçış yollarını aç", en: "Open the escape routes" }
+        aciklama: { tr: "Ne olursa olsun, şehirden çıkmak isteyenlere bir yol bırak.", en: "Whatever happens, leave a way out for anyone who wants to leave the city." }
+        sonuc: { tr: "Kuzeye giden iki yol açık, iskelede üç tekne hazır. Kullanan olmazsa da olsun.", en: "Two roads north are open and three boats are ready at the pier. If nobody uses them, fine." }
+        bedel: 1
+        operasyonda:
+          - degisken: { hayatta_kalan: 2 }
     acilis: 353
     son_tarih: 358
     bitis: 365

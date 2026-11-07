@@ -167,7 +167,7 @@ fun MoreScreen(
                         SlotRow(
                             slot = slot,
                             info = info,
-                            canSave = slot != SaveManager.AUTO && mode != GameMode.IRONMAN,
+                            canSave = slot in SaveManager.MANUAL && mode != GameMode.IRONMAN,
                             onSave = { onSave(slot) },
                             onLoad = { onLoad(slot) },
                         )
@@ -359,6 +359,7 @@ private fun DailyPanel(daily: DailyView, onTrain: () -> Unit, inDayLoop: Boolean
 private fun SlotRow(slot: String, info: SlotInfo?, canSave: Boolean, onSave: () -> Unit, onLoad: () -> Unit) {
     val name = when (slot) {
         SaveManager.AUTO -> stringResource(R.string.slot_auto)
+        SaveManager.OPERATION -> stringResource(R.string.slot_operation)
         else -> stringResource(R.string.slot_n, SaveManager.MANUAL.indexOf(slot) + 1)
     }
     Surface(

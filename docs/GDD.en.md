@@ -276,6 +276,10 @@ The main story runs on a proven structure (details in `docs/CHAPTERS.md`, decisi
   closed run of scenes that opens with travel and an arrival scene; inside it only the mission's own events play. Every
   event has a location and never fires anywhere else; an event set elsewhere shows up at base as a mission card.
 - **Chapter rhythm:** Briefing → Preparation → Main operation → Aftermath → Bottleneck.
+- **Dated operations** (world events) can't be entered early; the objective line counts down ("6 days until the ship
+  arrives"). Free days go to **preparation** (scouting, fortifying, rallying allies): each leaves a flag and changes the
+  operation (fewer losses, an extra option or a better start). A side mission is never cut off on operation day, and the
+  game saves to a separate slot right before the operation.
 - The UI always shows a "Chapter N · Objective · Days left" line; every seeded event opens with a reminder line; a short
   recap appears when you come back after a long break.
 

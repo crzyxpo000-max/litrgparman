@@ -63,6 +63,19 @@ olaylar:
               - itibar: { lonca: 4, yukselenler: 4 }
             kronik: { tr: "Ellinci kata herkesten önce, duvarı koşarak tırmandın. O sabah bütün şehir başka dünyalara giden yolu senin sırtında gördü.", en: "You ran up the wall to the fiftieth floor ahead of everyone. That morning the whole city saw the road to other worlds on your back." }
             sonraki: "gecit_kosu"
+          - id: "kos_hazirlik"
+            etiket: { tr: "İşaretlediğin yoldan ellinci kata tırman", en: "Climb the route you marked to the fiftieth floor" }
+            goster: { bayrak: "hazirlik_gecit_cephe" }
+            etkiler:
+              - bolge: "kule_dibi"
+              - bayrak: "cok_evren_acik"
+              - bayrak: "gecit_ilk_giren"
+              - aciga_vur: true
+              - dikkat: 6
+              - ahlak: { duzen: -3, insanlik: -1 }
+              - itibar: { lonca: 4, yukselenler: 4 }
+            kronik: { tr: "Ellinci kata herkesten önce, duvarı koşarak tırmandın. O sabah bütün şehir başka dünyalara giden yolu senin sırtında gördü.", en: "You ran up the wall to the fiftieth floor ahead of everyone. That morning the whole city saw the road to other worlds on your back." }
+            sonraki: "gecit_kosu"
           - id: "topla"
             etiket: { tr: "Avcıları topla; geçide birlikte yürüyün", en: "Gather the hunters. Walk to the gate together" }
             etkiler:

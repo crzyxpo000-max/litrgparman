@@ -35,7 +35,7 @@ import com.yukselis.protocol.ui.components.HelpButton
 import com.yukselis.protocol.ui.components.TipCard
 import com.yukselis.protocol.ui.theme.GameType
 
-private enum class HubDialog { GATES, TRAVEL }
+private enum class HubDialog { GATES, TRAVEL, PREPARE }
 
 /**
  * Gün akışı, sabit alt panelde: üstte kalan eylem ve tehlike, sonra fırsat kartları, tek satır serbest eylem,
@@ -44,6 +44,9 @@ private enum class HubDialog { GATES, TRAVEL }
 @Composable
 fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
     var dialog by remember { mutableStateOf<HubDialog?>(null) }
+    // Operasyon yaklaşırken üsten ayrılan eylem önce onay ister (DECISIONS #141).
+    var pending by remember { mutableStateOf<HubAction?>(null) }
+    val leave: (HubAction) -> Unit = { a -> if (hub.deadlineWarning != null) pending = a else onAction(a) }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
@@ -79,11 +82,16 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
                 }
             }
         }
+        if (hub.preparations.isNotEmpty()) {
+            OutlinedButton(onClick = { dialog = HubDialog.PREPARE }, modifier = Modifier.fillMaxWidth()) {
+                Text(pluralStringResource(R.plurals.hub_prepare_n, hub.preparations.size, hub.preparations.size), color = MaterialTheme.colorScheme.tertiary)
+            }
+        }
         if (hub.cards.isNotEmpty()) {
             Text(stringResource(R.string.hub_hand), style = GameType.system, color = MaterialTheme.colorScheme.primary)
             hub.cards.forEach { card ->
                 OutlinedButton(
-                    onClick = { onAction(HubAction.Card(card.id)) },
+                    onClick = { if (card.region != null) leave(HubAction.Card(card.id)) else onAction(HubAction.Card(card.id)) },
                     contentPadding = PaddingValues(horizontal = 14.dp, vertical = 10.dp),
                     modifier = Modifier.fillMaxWidth(),
                 ) {
@@ -155,10 +163,36 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
             onDismiss = { dialog = null },
         ) {
             hub.travel.forEach { r ->
-                OutlinedButton(onClick = { dialog = null; onAction(HubAction.Travel(r.id)) }, modifier = Modifier.fillMaxWidth()) { Text("→ ${r.name}") }
+                OutlinedButton(onClick = { dialog = null; leave(HubAction.Travel(r.id)) }, modifier = Modifier.fillMaxWidth()) { Text("→ ${r.name}") }
+            }
+        }
+        HubDialog.PREPARE -> ListDialog(
+            title = stringResource(R.string.hub_prepare_title),
+            onDismiss = { dialog = null },
+        ) {
+            hub.preparations.forEach { p ->
+                OutlinedButton(
+                    onClick = { dialog = null; onAction(HubAction.Prepare(p.id)) },
+                    enabled = p.enabled,
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                        Text(p.name + " · " + pluralStringResource(R.plurals.hub_prepare_cost, p.cost, p.cost), style = MaterialTheme.typography.bodyLarge)
+                        Text(p.description, style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                }
             }
         }
         null -> Unit
+    }
+    pending?.let { action ->
+        AppAlertDialog(
+            onDismissRequest = { pending = null },
+            confirmButton = { TextButton(onClick = { pending = null; onAction(action) }) { Text(stringResource(R.string.hub_leave_anyway)) } },
+            dismissButton = { TextButton(onClick = { pending = null }) { Text(stringResource(R.string.cancel)) } },
+            title = { Text(stringResource(R.string.hub_deadline_title)) },
+            text = { Text(hub.deadlineWarning ?: "") },
+        )
     }
 }
 

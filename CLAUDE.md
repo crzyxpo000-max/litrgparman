@@ -90,7 +90,9 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - `story/90_sistem.yaml`: kesinti sahneleri (`ceza_bolgesi`); dönüş `"sonraki": "@geri"`.
 - **Bölüm yapısı** (`chapters.yaml`; DECISIONS #130–#139): `uslar` (perde → üs bölgesi) ve `bolumler` (`no, perde, acilis,
   son_tarih, bitis, erken, baslik, hedef, tehdit, brifing[], operasyon[] ya da [{ad, bolge, olaylar}], darbogaz[],
-  darbogaz_gun, tasma, tasma_etkiler`). Her olayın **`konum`** etiketi vardır: `us`, bölge kimlikleri ya da `*`; yeni olay
+  darbogaz_gun, tasma, tasma_etkiler, geri_sayim {tr,en} ({n}), hazirlik [{id, ad, aciklama, sonuc, bedel, kosul, operasyonda}]`).
+  Tarihli (`erken: false`) operasyonun en az 2 hazırlığı olmalı; bayrak `hazirlik_<id>` (motor öneki), operasyon sahnesinde
+  ek seçenek `goster: { bayrak: "hazirlik_<id>" }`. Kayıt yuvası `operasyon`: operasyon öncesi otomatik kayıt. Her olayın **`konum`** etiketi vardır: `us`, bölge kimlikleri ya da `*`; yeni olay
   yazarken zorunlu. Üste yalnız `us` ve üs bölgesindeki olaylar gelir; başka bölgede geçen olay görev kartı olur.
   Yapısal sahneler `events/07–09_bolumler_*.yaml`: `brifing_<n>`, `darbogaz_<n>`, `varis_<bölge>` (görevin ilk sahnesi;
   `ziyaret_<bölge>` değişkeni ilk/sonraki ziyareti ayırır). Tohum etkisinde **`hatirlatma {tr,en}`** (gecikme ≥ 3 ise yaz):

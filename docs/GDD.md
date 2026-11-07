@@ -289,6 +289,10 @@ Ana hikaye kanıtlanmış bir yapıya oturur (ayrıntı `docs/CHAPTERS.md`, kara
   tetiklenmez; başka bölgede geçen olay üste görev kartı olur.
 - **Bölüm ritmi:** Brifing (yeni tehdit, son tarih, "önceki bölümde") → Hazırlık → Ana operasyon → Sonrası → Darboğaz.
   OP MC döngüsüyle eşleşir: brifing yeni tavan, hazırlık hakimiyet, operasyon mücadele ve kırılma.
+- **Tarihli operasyonlar** (dünya olayları) erken girilemez; hedef satırı geri sayar ("Gemi inişine 6 gün"). Serbest
+  günlerde **hazırlık** yapılır (keşif, tahkimat, müttefik toplama): her biri bir bayrak bırakır ve operasyonu değiştirir
+  (daha az kayıp, ek seçenek ya da avantajlı başlangıç). Yan görev operasyon gününde kesilmez; operasyondan önce oyun
+  ayrı bir yuvaya kaydedilir.
 - Arayüzde her zaman "Bölüm N · Hedef · Kalan gün" satırı görünür; tohumdan doğan her olay bağlantıyı hatırlatan bir
   cümleyle başlar; uzun aradan sonra açılan oyunda kısa bir dönüş özeti gösterilir.
 

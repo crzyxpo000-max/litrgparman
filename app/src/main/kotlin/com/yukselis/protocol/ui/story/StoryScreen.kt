@@ -249,7 +249,7 @@ private fun ChapterBar(line: com.yukselis.engine.world.ChapterLine) {
             modifier = Modifier.weight(1f),
         )
         Text(
-            androidx.compose.ui.res.pluralStringResource(R.plurals.chapter_days, line.daysLeft, line.daysLeft),
+            line.countdown ?: androidx.compose.ui.res.pluralStringResource(R.plurals.chapter_days, line.daysLeft, line.daysLeft),
             style = GameType.system,
             color = if (line.daysLeft <= DEADLINE_WARN_DAYS) DeadlineColor else MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(start = 8.dp),

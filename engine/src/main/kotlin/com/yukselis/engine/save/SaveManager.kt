@@ -51,6 +51,12 @@ class SaveManager(
         storage.write(slot, SaveCodec.encode(state, now()))
     }
 
+    /** Operasyon başlamadan hemen önceki durum (DECISIONS #141). Demir Mod'da yazılmaz (tek kayıt kuralı). */
+    fun saveBeforeOperation(state: WorldState) {
+        if (state.mode == GameMode.IRONMAN) return
+        storage.write(OPERATION, SaveCodec.encode(state, now()))
+    }
+
     /** Savaş başında: Normal modda ölümden sonra dönülecek nokta. Demir Mod'da yazılmaz. */
     fun saveCheckpoint(state: WorldState) {
         if (state.mode == GameMode.IRONMAN) return
@@ -71,7 +77,7 @@ class SaveManager(
         SlotInfo(slot, s.playerName, s.day, s.player.level, s.mode, s.ended, data.savedAtMillis)
     }
 
-    fun allSlots(): List<Pair<String, SlotInfo?>> = (listOf(AUTO) + MANUAL).map { it to info(it) }
+    fun allSlots(): List<Pair<String, SlotInfo?>> = (listOf(AUTO, OPERATION) + MANUAL).map { it to info(it) }
 
     fun delete(slot: String) {
         storage.delete(slot)
@@ -87,5 +93,8 @@ class SaveManager(
         /** Bir önceki sağlam otomatik kayıt; yalnız otomatik kayıt okunamazsa kullanılır. */
         const val AUTO_PREV = "auto.prev"
         val MANUAL = listOf("slot1", "slot2", "slot3")
+
+        /** Operasyon öncesi otomatik kayıt. */
+        const val OPERATION = "operasyon"
     }
 }

@@ -4057,6 +4057,13 @@ olaylar:
               - bolge: "sanayi"
               - ahlak: { duzen: 2 }
               - savas: { dusmanlar: ["firtina_dogumu@oyuncu+2", "firtina_dogumu@oyuncu"], ortam: ["yanici"], kazan: "p3_firtina_merkez", kaybet: "p3_firtina_yenilgi" }
+          - id: "merkez_hazirlik"
+            etiket: { tr: "Ölçtüğün merkeze, {yer:sanayi|de}ki fırına koş", en: "Run for the center you measured, the furnace in {yer:sanayi}" }
+            goster: { bayrak: "hazirlik_firtina_ritim" }
+            etkiler:
+              - bolge: "sanayi"
+              - ahlak: { duzen: 2 }
+              - savas: { dusmanlar: ["firtina_dogumu@oyuncu+2", "firtina_dogumu@oyuncu"], ortam: ["yanici"], kazan: "p3_firtina_merkez", kaybet: "p3_firtina_yenilgi" }
           - id: "bol"
             etiket: { tr: "Ordunu yedi kapıya böl", en: "Split your army across all seven Gates" }
             goster: { ordu_min: 1 }

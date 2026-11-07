@@ -31,6 +31,9 @@ sealed interface HubAction {
 
     /** Keşif görevinden üsse dön. */
     data object ReturnToBase : HubAction
+
+    /** Bölümün bir hazırlık eylemini yap (üste, operasyondan önce). */
+    data class Prepare(val id: String) : HubAction
 }
 
 /**
@@ -260,7 +263,15 @@ class WorldEngine(
         val op = ch.operations.getOrNull(variant) ?: return Result(state.copy(chapterPhase = ChapterPhase.AFTER), emptyList())
         val region = operationRegion(state, op)
         val notices = mutableListOf(Notice(NoticeKind.QUEST, texts.formatL("operasyon_basladi", "title" to (if (op.title == LText.EMPTY) ch.title else op.title))))
-        return beginMission(state.copy(chapterPhase = ChapterPhase.OPERATION), MissionKind.OPERATION, region, op.events, consumeSlot = false, notices = notices, variant = variant)
+        // Hazırlıklar işe yarıyor: her yapılmış hazırlığın operasyon etkileri (daha az kayıp, birlik, tam can…).
+        var s = state.copy(chapterPhase = ChapterPhase.OPERATION)
+        ch.preparations.filter { s.hasFlag(it.flag) }.forEach { pr ->
+            val r = effects.applyAll(s, pr.operationEffects)
+            s = r.state
+            notices += Notice(NoticeKind.QUEST, texts.formatL("hazirlik_ise_yaradi", "name" to pr.name))
+            notices += r.notices
+        }
+        return beginMission(s, MissionKind.OPERATION, region, op.events, consumeSlot = false, notices = notices, variant = variant)
     }
 
     fun operationRegion(state: WorldState, op: OperationDef): String =
@@ -429,6 +440,11 @@ class WorldEngine(
         val waiting = s.chapterPhase == ChapterPhase.BRIEF || s.chapterPhase == ChapterPhase.PREP
         if (!waiting) return Result(s, emptyList())
         val notices = mutableListOf<Notice>()
+        // Operasyon günü geldi: keşifteki oyuncu üsse çağrılır. Yan görev kesilmez; bitince operasyon başlar.
+        if (ch.deadline - s.day <= 0 && s.mission?.kind == MissionKind.EXPLORE) {
+            notices += Notice(NoticeKind.WARNING, texts.formatL("operasyon_gunu", "title" to ch.title))
+            s = returnHome(s, auto = false, notices = notices)
+        }
         val left = ch.deadline - s.day
         if (left in 0..DEADLINE_WARNING_DAYS && ch.earlyEntry) {
             notices += Notice(NoticeKind.WARNING, texts.formatL("bolum_son_tarih", "title" to ch.title, "n" to LText("$left", "$left")))
@@ -446,7 +462,7 @@ class WorldEngine(
             s = r.state
             notices += Notice(NoticeKind.WARNING, texts.formatL("bolum_tasti", "title" to ch.title), listOf(ch.overflowText).filter { it != LText.EMPTY })
             notices += r.notices
-            if (s.mission != null && s.mission?.kind != MissionKind.OPERATION) {
+            if (s.mission?.kind == MissionKind.EXPLORE) {
                 notices += Notice(NoticeKind.WARNING, texts.format("gorev_yarida"))
                 s = returnHome(s, auto = false, notices = notices)
             }
@@ -490,6 +506,7 @@ class WorldEngine(
                 val r = spend(state).copy(vars = state.vars + (OP_REQUEST_VAR to action.variant + 1))
                 finishSlot(r, emptyList())
             }
+            is HubAction.Prepare -> prepare(state, action.id)
             HubAction.ReturnToBase -> {
                 // Dönüş yolu yuva harcamaz: görevin yolculuğu gidişte ödendi (DECISIONS #130).
                 val notices = mutableListOf<Notice>()
@@ -517,6 +534,11 @@ class WorldEngine(
                 if (operationChoices(state).none { it.first == action.variant }) throw ActionRejected("Şu an girilecek operasyon yok")
             }
             HubAction.ReturnToBase -> if (m == null || m.kind == MissionKind.OPERATION) throw ActionRejected("Üsse dönülecek görev yok")
+            is HubAction.Prepare -> {
+                if (m != null) throw ActionRejected("Hazırlık üste yapılır")
+                val pr = preparationChoices(state).firstOrNull { it.id == action.id } ?: throw ActionRejected("Bu hazırlık şu an yapılamaz")
+                if (state.dayState.slotsLeft < pr.cost) throw ActionRejected("Bugün bu hazırlık için yeterli vakit yok")
+            }
             is HubAction.Travel -> if (m != null) throw ActionRejected("Önce üsse dön")
             else -> if (m?.kind == MissionKind.OPERATION) throw ActionRejected("Operasyon sürüyor")
         }
@@ -540,6 +562,7 @@ class WorldEngine(
             } else if (m == null) {
                 destinations(state).forEach { add(HubAction.Travel(it)) }
                 operationChoices(state).forEach { add(HubAction.EnterOperation(it.first)) }
+                preparationChoices(state).filter { it.cost <= state.dayState.slotsLeft }.forEach { add(HubAction.Prepare(it.id)) }
             } else if (m.kind == MissionKind.EXPLORE) {
                 add(HubAction.Explore)
                 state.region?.let { state.regions[it] }?.gates?.forEach { add(HubAction.EnterGate(it.uid)) }
@@ -548,6 +571,31 @@ class WorldEngine(
             }
             add(HubAction.Camp)
         }
+    }
+
+    /** Şu an yapılabilecek hazırlıklar: üste, operasyon beklerken, yapılmamış ve koşulu tutan. */
+    fun preparationChoices(state: WorldState): List<PreparationDef> {
+        if (!chapterMode || state.mission != null) return emptyList()
+        val ch = chapters.get(state.chapter) ?: return emptyList()
+        if (state.chapterPhase != ChapterPhase.PREP && state.chapterPhase != ChapterPhase.BRIEF) return emptyList()
+        return ch.preparations.filter { !state.hasFlag(it.flag) && (it.condition?.test(state) ?: true) }
+    }
+
+    /** Hazırlık: yuva(lar) harcanır, bayrak konur, sonuç satırı gösterilir. */
+    private fun prepare(state: WorldState, id: String): Result {
+        val pr = preparationChoices(state).first { it.id == id }
+        var s = state
+        repeat(pr.cost) { s = spend(s) }
+        s = s.copy(flags = s.flags + pr.flag)
+        return finishSlot(s, listOf(Notice(NoticeKind.QUEST, texts.formatL("hazirlik_yapildi", "name" to pr.name), listOf(pr.result))))
+    }
+
+    /** Operasyon yaklaşırken üsten ayrılmak operasyonu geciktirebilir (son tarihe en çok 1 gün; DECISIONS #141). */
+    fun deadlineRisk(state: WorldState): Boolean {
+        if (!chapterMode || state.mission != null) return false
+        val ch = chapters.get(state.chapter) ?: return false
+        if (state.chapterPhase != ChapterPhase.PREP && state.chapterPhase != ChapterPhase.BRIEF) return false
+        return ch.deadline - state.day <= DEADLINE_RISK_DAYS
     }
 
     /** Üste girilebilecek operasyonlar: (varyant, bölge). */
@@ -821,6 +869,9 @@ class WorldEngine(
 
         /** Başka bölgede geçen tohum bu kadar gün kart olarak bekledikten sonra yan görev olarak açılır. */
         const val SEED_PATIENCE_DAYS = 6
+
+        /** Son tarihe bu kadar ya da daha az gün kala üsten ayrılmak için uyarı. */
+        const val DEADLINE_RISK_DAYS = 1
 
         /** Varış sahnesinin o gün oynandığı (bölge başına) değişken öneki. */
         const val ARRIVAL_DAY_PREFIX = "_varis_gunu_"

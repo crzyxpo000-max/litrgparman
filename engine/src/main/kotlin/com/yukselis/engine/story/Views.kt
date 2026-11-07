@@ -63,7 +63,13 @@ data class HubView(
     val canReturn: Boolean = false,
     /** Gün akışında keşif / Kapı yapılabilir (görevdeyken). */
     val canExplore: Boolean = true,
+    /** Üste: bölümün hazırlık eylemleri. */
+    val preparations: List<PreparationView> = emptyList(),
+    /** Üsten ayrılmak operasyonu geciktirebilir: dile çözülmüş uyarı (yoksa null). */
+    val deadlineWarning: String? = null,
 )
+
+data class PreparationView(val id: String, val name: String, val description: String, val cost: Int, val enabled: Boolean)
 
 data class OperationChoiceView(val index: Int, val title: String, val region: String, val daysLeft: Int)
 

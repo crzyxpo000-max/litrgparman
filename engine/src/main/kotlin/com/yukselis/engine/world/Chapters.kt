@@ -56,6 +56,22 @@ data class Mission(
     val variant: Int = 0,
 )
 
+/**
+ * Hazırlık eylemi (üste, operasyondan önceki serbest günlerde): `bedel` yuva harcar, `hazirlik_<id>` bayrağını bırakır.
+ * Operasyon başlarken `operasyonda` etkileri uygulanır; operasyon sahneleri bayrağa bakarak ek seçenek açabilir.
+ */
+data class PreparationDef(
+    val id: String,
+    val name: LText,
+    val description: LText,
+    val result: LText,
+    val cost: Int = 1,
+    val condition: com.yukselis.engine.story.Condition? = null,
+    val operationEffects: List<Effect> = emptyList(),
+) {
+    val flag: String get() = ChapterTable.PREP_FLAG_PREFIX + id
+}
+
 /** Bir bölümün ana operasyonu (Bölüm 11'de iki seçenek vardır). */
 data class OperationDef(
     val title: LText,
@@ -87,6 +103,10 @@ data class ChapterDef(
      * kendiliğinden başlar. Diğerlerinde operasyona girme zamanını oyuncu seçer.
      */
     val earlyEntry: Boolean = true,
+    /** Hedef satırının geri sayımı (`geri_sayim`, `{n}` = kalan gün): "Gemi inişine 6 gün". */
+    val countdown: LText? = null,
+    /** Serbest günlerin hazırlık eylemleri (tarihli operasyonlar için en az 2; DECISIONS #141). */
+    val preparations: List<PreparationDef> = emptyList(),
 ) {
     val operationEvents: List<String> get() = operations.flatMap { it.events }
     val managed: Set<String> get() = (brief + operationEvents + bottleneck).toSet()
@@ -126,6 +146,7 @@ data class ChapterTable(
         /** Bölgeye kaçıncı kez gidildiği (varış sahnesinin ilk/sonraki paragrafları). */
         const val VISIT_PREFIX = "ziyaret_"
         const val OVERFLOW_FLAG_PREFIX = "bolum_"
+        const val PREP_FLAG_PREFIX = "hazirlik_"
         const val OVERFLOW_FLAG_SUFFIX = "_tasti"
         const val OVERFLOW_SURVIVORS = -3
         const val OVERFLOW_DANGER = 15
@@ -144,4 +165,6 @@ data class ChapterLine(
     val onMission: Boolean,
     val missionLabel: String?,
     val isFinal: Boolean,
+    /** Tarihli operasyonun geri sayımı ("Gemi inişine 6 gün"); yoksa null. */
+    val countdown: String? = null,
 )

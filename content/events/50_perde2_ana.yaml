@@ -732,6 +732,15 @@ olaylar:
               - dikkat: 4
               - degisken: { hayatta_kalan: 2 }
             sonraki: "kule_cephe"
+          - id: "cephe_hazirlik"
+            etiket: { tr: "Kurduğun iskelelerle düşen cepheyi tut", en: "Use the scaffolding you put up to hold the falling wall" }
+            goster: { bayrak: "hazirlik_kule_iskele" }
+            etkiler:
+              - bayrak: "kule_acik"
+              - ahlak: { merhamet: 4, duzen: -1 }
+              - dikkat: 4
+              - degisken: { hayatta_kalan: 2 }
+            sonraki: "kule_cephe"
           - id: "haberci"
             etiket: { tr: "Habercinin önüne çık", en: "Step out in front of the herald" }
             etkiler:
@@ -1653,6 +1662,15 @@ olaylar:
               - dikkat: 6
               - itibar: { lonca: 4, yukselenler: 4, siginak: -3 }
             sonraki: "cekirdek_ezme"
+          - id: "kule_hazirlik"
+            etiket: { tr: "Oyduğun saat kulesini muhafızın üstüne it", en: "Shove the clock tower you undercut down on the guardian" }
+            goster: { bayrak: "hazirlik_cekirdek_kule" }
+            kronik: { tr: "Kırk yıl boyunca beş dakika geri çalmış saat kulesini Çekirdek'in muhafızının üstüne kendi ellerinle devirdin.", en: "You brought down the clock tower that ran five minutes slow for forty years, on top of the Core's guardian, with your own hands." }
+            etkiler:
+              - ahlak: { duzen: -3, merhamet: -1 }
+              - dikkat: 6
+              - itibar: { lonca: 4, yukselenler: 4, siginak: -3 }
+            sonraki: "cekirdek_ezme"
           - id: "golge"
             tur: "gizle"
             etiket: { tr: "Kamplar dövüşsün; son darbeyi sen vur", en: "Let the camps fight it. You land the last hit" }
@@ -1923,6 +1941,16 @@ olaylar:
             tur: "gosteris"
             etiket: { tr: "Kamplara emir ver; {yer:kordon|i} dört koldan tut", en: "Order the camps in. Hold {yer:kordon} four ways" }
             gerekli: { stat: { cha: 45 } }
+            kronik: { tr: "Dalga gelirken dört kampa birden emir verdin, dördü de uydu; {yer:kiyikent} kimin sözünün geçtiğini o sabah öğrendi.", en: "With the wave coming in, you gave orders to all four camps at once, and every one of them obeyed. That morning {yer:kiyikent} learned whose word counted." }
+            etkiler:
+              - ahlak: { duzen: 5, merhamet: 2 }
+              - dikkat: 4
+              - itibar: { siginak: 3, lonca: 5, yukselenler: 2, sessiz_ag: 3 }
+              - iliski: { kaya_demir: { saygi: 6 }, elif_sari: { saygi: 4 } }
+            sonraki: "tasma_komuta"
+          - id: "komuta_hazirlik"
+            etiket: { tr: "Masadaki planı işlet; {yer:kordon|i} dört koldan tutun", en: "Run the plan from the table: hold {yer:kordon} from four sides" }
+            goster: { bayrak: "hazirlik_tasma_plan" }
             kronik: { tr: "Dalga gelirken dört kampa birden emir verdin, dördü de uydu; {yer:kiyikent} kimin sözünün geçtiğini o sabah öğrendi.", en: "With the wave coming in, you gave orders to all four camps at once, and every one of them obeyed. That morning {yer:kiyikent} learned whose word counted." }
             etkiler:
               - ahlak: { duzen: 5, merhamet: 2 }
@@ -2731,6 +2759,19 @@ olaylar:
             tur: "gosteris"
             etiket: { tr: "Gölgenin tam ortasında dur; bakışına karşılık ver", en: "Stand dead center in the shadow. Stare back" }
             gerekli: { stat: { wil: 70 } }
+            kronik: { tr: "Kadim gemisi körfezin üstüne geldiğinde herkes kaçtı ya da diz çöktü; sen gölgenin ortasında durup ona baktın, o da sana.", en: "When the Ancient ship came over the bay, everyone ran or knelt. You stood in the middle of its shadow and looked up at it, and it looked back." }
+            etkiler:
+              - bayrak: "kadim_gemisi_goruldu"
+              - degisken: { kadim_tehdit: 10 }
+              - aciga_vur: true
+              - unvan: "golgede_duran"
+              - ahlak: { duzen: -3, insanlik: -2 }
+              - itibar: { kadimler: 5, lonca: 4, yukselenler: 4 }
+              - dikkat: 10
+            sonraki: "gemi_bakis"
+          - id: "dur_hazirlik"
+            etiket: { tr: "Gözcü yerinden bakışına karşılık ver", en: "Meet its gaze from your lookout" }
+            goster: { bayrak: "hazirlik_gemi_gozcu" }
             kronik: { tr: "Kadim gemisi körfezin üstüne geldiğinde herkes kaçtı ya da diz çöktü; sen gölgenin ortasında durup ona baktın, o da sana.", en: "When the Ancient ship came over the bay, everyone ran or knelt. You stood in the middle of its shadow and looked up at it, and it looked back." }
             etkiler:
               - bayrak: "kadim_gemisi_goruldu"

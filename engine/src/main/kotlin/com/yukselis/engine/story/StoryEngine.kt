@@ -110,6 +110,12 @@ class StoryEngine(val content: Content) {
             onMission = m != null,
             missionLabel = label,
             isFinal = content.chapters.next(ch.no) == null,
+            countdown = ch.countdown?.takeIf {
+                state.chapterPhase == com.yukselis.engine.world.ChapterPhase.BRIEF || state.chapterPhase == com.yukselis.engine.world.ChapterPhase.PREP
+            }?.let { cd ->
+                val n = chapterDaysLeft(state, ch)
+                text(LText(cd.tr.replace("{n}", "$n"), cd.en.replace("{n}", "$n"))[lang], state, lang)
+            },
         )
     }
 
@@ -261,6 +267,12 @@ class StoryEngine(val content: Content) {
             },
             canReturn = state.mission != null && state.mission.kind != com.yukselis.engine.world.MissionKind.OPERATION,
             canExplore = content.chapters.isEmpty || state.mission?.kind == com.yukselis.engine.world.MissionKind.EXPLORE,
+            preparations = world.preparationChoices(state).map { pr ->
+                PreparationView(pr.id, text(pr.name[lang], state, lang), text(pr.description[lang], state, lang), pr.cost, pr.cost <= d.slotsLeft)
+            },
+            deadlineWarning = if (world.deadlineRisk(state)) content.chapters.get(state.chapter)?.let { ch ->
+                text(content.texts.formatL("son_tarih_uyari", "title" to ch.title, "n" to LText("${(ch.deadline - state.day).coerceAtLeast(0)}", "${(ch.deadline - state.day).coerceAtLeast(0)}"))[lang], state, lang)
+            } else null,
         )
     }
 

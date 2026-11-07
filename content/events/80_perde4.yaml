@@ -772,6 +772,17 @@ olaylar:
               - iliski: { thessar: { korku: 6, saygi: 6 } }
             kronik: { tr: "Bütün şehrin önünde bir Kadim gemisini gökyüzünden söküp körfeze çaktın. Maskeli sıralar ilk kez geri adım attı.", en: "In front of the whole city, you tore an Ancient ship out of the sky and drove it into the bay, and the masked ranks took a step back for the first time." }
             sonraki: "p4_istila_gosteri"
+          - id: "gemi_indir_hazirlik"
+            etiket: { tr: "Kule'deki toplarla ilk gemiyi gökyüzünden sök", en: "Use the guns in the Spire to tear the first ship out of the sky" }
+            goster: { bayrak: "hazirlik_istila_silah" }
+            etkiler:
+              - ahlak: { insanlik: -3, duzen: -2 }
+              - dikkat: 10
+              - degisken: { kadim_tehdit: -5 }
+              - efsane: "tek_basina_suru"
+              - iliski: { thessar: { korku: 6, saygi: 6 } }
+            kronik: { tr: "Bütün şehrin önünde bir Kadim gemisini gökyüzünden söküp körfeze çaktın. Maskeli sıralar ilk kez geri adım attı.", en: "In front of the whole city, you tore an Ancient ship out of the sky and drove it into the bay, and the masked ranks took a step back for the first time." }
+            sonraki: "p4_istila_gosteri"
           - id: "thessar_sinyal"
             etiket: { tr: "{npc:thessar|in} açık tuttuğu kanalı dinle", en: "Listen on the channel {npc:thessar} kept open" }
             goster: { bayrak: "p4_muzakere_kapisi", npc_hayatta: "thessar", bayrak_yok: "ihanet_thessar" }
@@ -1478,6 +1489,17 @@ olaylar:
             tur: "gosteris"
             etiket: { tr: "Merdivenin Sistem kilidini iradenle kır", en: "Break the stairs' System lock with sheer will" }
             gerekli: { stat: { wil: 330 } }
+            etkiler:
+              - bayrak: "cekirdek_yolu_acik"
+              - gorev: { cekirdege_inis: "basla" }
+              - ahlak: { duzen: -4, insanlik: -2 }
+              - dikkat: 10
+              - tohum: { olay: "p4_son_gece_ates", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Merdivenin kilidini kırdığın geceden beri bir yıl önceki o ilk ateş aklında.", en: "Since the night you broke the lock on the stairs, you keep thinking about that first fire a year ago." } }
+            kronik: { tr: "Sistem'in kendi kilidini iradenle kırdın. O an Sistem'in sesi ilk kez şaşkın çıktı.", en: "You broke the System's own lock with sheer will, and for one moment the System's voice sounded confused for the first time." }
+            sonraki: "p4_cyol_irade"
+          - id: "irade_hazirlik"
+            etiket: { tr: "Kilidi okuduğun sırayla aç", en: "Open the lock in the sequence you read" }
+            goster: { bayrak: "hazirlik_merdiven_kilit" }
             etkiler:
               - bayrak: "cekirdek_yolu_acik"
               - gorev: { cekirdege_inis: "basla" }
