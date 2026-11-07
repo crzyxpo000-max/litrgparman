@@ -24,10 +24,10 @@ Başka P0 bulunmadı: ulaşılamayan son yok, çıkmaz yok, kayıt kaybı yalnı
 - [x] **P1-2 `esik_itaat` hiç tetiklenemez.** — *NpcEngine.thresholds: yoldaş + korku ≥60 + cesaret ≤3 + sadakat ≥6; tek aday Mert (cesaret 2, sadakat 5)* — Koşulu `sadakat ≥6 ya da bağlılık ≥40` yap veya Mert'e özel `esik_itaat_mert_kilic`; simülatörde görüldüğünü doğrula. — küçük
 - [x] **P1-3 Kademe Kırma seçeneğine pratikte erişilemiyor.** — *40_ana_yay `yeni_tavan_1` `kir`: `seviye_min: 14`, Gün 24; Gün 30 p90 Sv 9* — Eşiği 7–8'e indir ya da stat/iz koşuluna çevir; simülatörde `yeni_tavan_kirma` oranını ölç (hedef %15–30). — küçük
 - [x] **P1-4 Deniz'in ölümü seçimden önce ilan ediliyor.** — *40_ana_yay `bekci_deniz_hat` ¶3 "Yüzünü son görüşün bu oluyor"; `vazgec` Deniz'i yaşatıyor* — Cümleyi ölüm dalına (`bekci_cokus_deniz`) taşı ya da belirsizleştir. — küçük
-- [ ] **P1-5 Kronik satırları gerçekleşmeyen ya da henüz belli olmayan sonuçları anlatıyor; 352 bayrak hiç okunmuyor.** — *ör. `gemi_kule›ezberle`, `perde3_son_ordu›talim`, `ihanet_mert_konus›geri_cek`, `elif_konsey_oylamasi›zorlama`, `vmask_hakli›kir`, `akd_kopru›sebep`, `mkt_kacamak›tehdit`; liste docs/TARAMA.md* — Kronikleri yalnız kesinleşeni anlatacak biçimde yeniden yaz ya da vaadi tutan bayrak + koşullu satır ekle; savaşa bağlı kroniği `kazan` sahnesine taşı; taramaya "kronik vaat ediyor ama bayrak yok" kuralı. — büyük
-- [ ] **P1-6 Vassal sonu Thessar düğümündeki seçimleri yansıtmıyor (B tavanı, Defter Bekçisi, "örnek" maddesi).** — *55_kadimler_thessar `thessar_vassal_teklifi_*` → 81_sonlar `son_vassal`* — Madde seçimine bayrak koy; sona koşullu paragraf ve unvan satırı. — orta
-- [ ] **P1-7 Döngü sonu New Game+ ile çelişiyor ("önceki altı döngünün altısı da hasatla kapandı").** — *`son_dongu`, `yanki_son_sir` (ysr_1 sezgisi, ysr_sir)* — `onceki_oyun ≥1` için ayrı paragraf: önceki döngü oyuncunun bitirdiği sonla anılsın. — küçük
-- [ ] **P1-8 `son_yukselis`'te çelişen iki Deniz paragrafı birlikte görünebilir (doğrulanmalı).** — *81_sonlar `son_yukselis`: `yoldas` ve `npc_fraksiyon: yukselenler` koşulları çakışıyor* — Koşulları dışlayıcı yap; bir test kaydıyla doğrula. — küçük
+- [x] **P1-5 Kronik satırları gerçekleşmeyen ya da henüz belli olmayan sonuçları anlatıyor; 352 bayrak hiç okunmuyor.** — *ör. `gemi_kule›ezberle`, `perde3_son_ordu›talim`, `ihanet_mert_konus›geri_cek`, `elif_konsey_oylamasi›zorlama`, `vmask_hakli›kir`, `akd_kopru›sebep`, `mkt_kacamak›tehdit`; liste docs/TARAMA.md* — Kronikleri yalnız kesinleşeni anlatacak biçimde yeniden yaz ya da vaadi tutan bayrak + koşullu satır ekle; savaşa bağlı kroniği `kazan` sahnesine taşı; taramaya "kronik vaat ediyor ama bayrak yok" kuralı. — büyük
+- [x] **P1-6 Vassal sonu Thessar düğümündeki seçimleri yansıtmıyor (B tavanı, Defter Bekçisi, "örnek" maddesi).** — *55_kadimler_thessar `thessar_vassal_teklifi_*` → 81_sonlar `son_vassal`* — Madde seçimine bayrak koy; sona koşullu paragraf ve unvan satırı. — orta
+- [x] **P1-7 Döngü sonu New Game+ ile çelişiyor ("önceki altı döngünün altısı da hasatla kapandı").** — *`son_dongu`, `yanki_son_sir` (ysr_1 sezgisi, ysr_sir)* — `onceki_oyun ≥1` için ayrı paragraf: önceki döngü oyuncunun bitirdiği sonla anılsın. — küçük
+- [x] **P1-8 `son_yukselis`'te çelişen iki Deniz paragrafı birlikte görünebilir (doğrulanmalı).** — *81_sonlar `son_yukselis`: `yoldas` ve `npc_fraksiyon: yukselenler` koşulları çakışıyor* — Koşulları dışlayıcı yap; bir test kaydıyla doğrula. — küçük
 
 **Denge ve oynanış**
 - [x] **P1-9 Seviye 10 sınıf teklifi Perde 1'de oyuncuların %90+'ına gelmiyor (GDD Perde 1 düğümü).** — *BALANCE Gün 30 p50 8 / p90 9; Perde 1 XP* — Perde 1 XP'sini %20–30 artır ya da Perde 1 düğüm listesini güncelle; simülatöre "ilk sınıf günü" ölçüsü. — orta
@@ -35,12 +35,12 @@ Başka P0 bulunmadı: ulaşılamayan son yok, çıkmaz yok, kayıt kaybı yalnı
 - [x] **P1-11 Savaş sayısı yüksek, risk yok: oynanış başına 519 savaş, ölüm 0, İkinci Şans 0, yere düşme %6,4.** — *simülatör; gün akışı keşif savaşları* — Keşif savaşı sıklığını düşür (ya da savaşsız keşif sonuçlarını artır) ve hikaye/boss savaşlarını sertleştir; hedef: oynanış başına ~250 savaş, hikaye savaşlarında yere düşme %15–25. P1-10 ile birlikte ayarlanmalı. — orta
 - [x] **P1-12 Dikkat Perde 3–4'te tavanda (Gün 210–300 p50 91–97) ve Yönetmen'in hedef gerilimi hep 4.** — *Dikkat dinamiği (`dikkat`, günlük sönüm), `Director.desiredTension` (+Dikkat/40)* — Perde 3'te doğal sönümü artır / eşik olayı sonrası boşaltma; `desiredTension`'da Dikkat katkısını sınırla; GDD'deki "üç ağır olaydan sonra kamp ateşi"ni uygula (kod iki diyor). Hedef p50 60–85 dalgalanma. — orta
 - [x] **P1-13 Yalnız Avcı en sık son (%22; rastgele oyuncuda %38); Koruyucu tarzı hedefe %49, Yükseliş %56.** — *endings.yaml koşulları, yoldaş ayrılık eşiği `DEPARTURE_DISTANCE`* — Yalnız Avcı'ya "bilinçli yalnızlık" koşulu ekle (ayrılık eşiği yaşandı / yoldaş bırakıldı), Koruyucu'nun hangi koşulda düştüğünü simülatörde ayrıştır. — orta
-- [ ] **P1-14 Perde 4 temposu: 27 günde 11 zorunlu düğüm, art arda 4 "veda turu" aynı iskelette.** — *80_perde4, 81_sonlar: `perde3_son_gece`, `p4_son_gece_ates`, `son_karar_veda`, `son_karar_2`* — `p4_son_gece_ates` ile `son_karar_veda`'yı birleştir ya da birini koşullu yap; `p4_yikik_kiyikent` ve `p4_siralama_zirvesi`'ni fırsat eli kartına çevir; yoldaş satır sırası ilişkiye göre. — orta
+- [x] **P1-14 Perde 4 temposu: 27 günde 11 zorunlu düğüm, art arda 4 "veda turu" aynı iskelette.** — *80_perde4, 81_sonlar: `perde3_son_gece`, `p4_son_gece_ates`, `son_karar_veda`, `son_karar_2`* — `p4_son_gece_ates` ile `son_karar_veda`'yı birleştir ya da birini koşullu yap; `p4_yikik_kiyikent` ve `p4_siralama_zirvesi`'ni fırsat eli kartına çevir; yoldaş satır sırası ilişkiye göre. — orta
 
 **Türkçe ve İngilizce metin**
-- [ ] **P1-15 Perde 2–4 Türkçesi USLUP'tan geçmedi (kılavuzun "kaçın" örnekleri birebir duruyor).** — *docs/USLUP.md Parti 2–10* — Üslup partilerini sürdür; sıra önerisi: 50_perde2_ana → 81_sonlar → 80_perde4 → 71_perde3 → kalanlar. — büyük
-- [ ] **P1-16 Türkçe dil hataları.** — *`bekci_cokus_deniz›yanki` "{npc:yanki} tek söz etmeden sustur onu"; `yanki_meydan` "bir sürü balık gibi"; `gecit_korundu` "kimse ona zorlamıyor"; "Hasatın" (5 yer); `fraksiyon_son_pozisyon` "steteskobu"* — Tek tek düzelt (Parti 2 beklemeden). — küçük
-- [ ] **P1-17 Bir yıldan kısa süren dünyada "yıllardır".** — *53_yukselenler_vahit 2188/2481/2542 (`vmask_1`, `vmask_oda›bak_sahte`), 52_lonca_kaya 2247; TR/EN farklı ("for months")* — "aylardır / Entegrasyon'dan beri". — küçük
+- [x] **P1-15 Perde 2–4 Türkçesi USLUP'tan geçmedi (kılavuzun "kaçın" örnekleri birebir duruyor).** — *docs/USLUP.md Parti 2–10* — Üslup partilerini sürdür; sıra önerisi: 50_perde2_ana → 81_sonlar → 80_perde4 → 71_perde3 → kalanlar. — büyük
+- [x] **P1-16 Türkçe dil hataları.** — *`bekci_cokus_deniz›yanki` "{npc:yanki} tek söz etmeden sustur onu"; `yanki_meydan` "bir sürü balık gibi"; `gecit_korundu` "kimse ona zorlamıyor"; "Hasatın" (5 yer); `fraksiyon_son_pozisyon` "steteskobu"* — Tek tek düzelt (Parti 2 beklemeden). — küçük
+- [x] **P1-17 Bir yıldan kısa süren dünyada "yıllardır".** — *53_yukselenler_vahit 2188/2481/2542 (`vmask_1`, `vmask_oda›bak_sahte`), 52_lonca_kaya 2247; TR/EN farklı ("for months")* — "aylardır / Entegrasyon'dan beri". — küçük
 - [x] **P1-18 EN bozuk cümle.** — *`deniz_son_secim_kalir_yarali` ("wider than it is."; "the fire" düşmüş)* — Cümleyi onar. — küçük
 
 **Arayüz ve kayıt**
@@ -109,7 +109,7 @@ tanımındadır (2026-11-07); özet:
 | 2 Kod ve motor incelemesi | **bitti** (2026-11-07) |
 | 3 Hikaye ve oynanış örneklemesi | **bitti** (2026-11-07) |
 | 4 Rapor | **bitti** (2026-11-07) — onay bekleniyor |
-| 5 Düzeltme | sürüyor — kullanıcı onayı: P0 + tüm P1 (2026-11-07) |
+| 5 Düzeltme | **bitti** — P0 + tüm P1 (2026-11-07/08); P2'ler açık |
 
 Not: QA başlarken Türkçe üslup işinin (docs/USLUP.md) Parti 0 ve 1'i bitti ve commit edildi (`798d990`); Parti 2–10
 QA'dan sonraya kaldı. Ölçümler Parti 1 sonrası içerikle alındı.
@@ -335,7 +335,42 @@ Onay (2026-11-07): **P0 + tüm P1.** Plan: (1) kod/arayüz/küçük içerik, (2)
 - Gün 330'da oyuncu dünyanın ×0,9'u (önce ×1,09): seyrek savaşla geç oyun biraz yavaşladı; Gün 365 p50 seviye 1.239
   (önce 1.272). Hakimiyet hedefi (%60+) korunuyor.
 
-**DURAKLATILDI (2026-11-07, kullanım limiti) — devam noktası:**
+**Parti 3 (yapısal hikaye) ve Parti 4 (Perde 2–4 Türkçe üslup + kronik doğruluğu):**
+- P1-6/7/8: Vassal sonu Thessar maddelerini (örnek maddesi, B tavanı, Defter Bekçisi) hatırlıyor; Döngü sonu oyuncunun
+  önceki yılını ayrı satır sayıyor; Yükseliş'te Deniz paragrafları çakışmıyor.
+- P1-14: `p4_son_gece_ates` Perde 3 son gecesini yakınlarla geçirene gelmez (`p3_son_gece_yakinlar`); Perde 4 veda
+  sahnelerinde yoldaş satırları ve "bir yıl önce" geri çağrısı çeşitlendi.
+- P1-15/5/16/17: Perde 2–4'ün bütün olay dosyaları + sonlar + endings + eşik/bildirim/sistem + Kule (~13.000 `tr`)
+  `docs/qa/uslup_brief.md` ile 33 yazar diliminde yeniden yazıldı; her dosyayı bağımsız bir okuyucu baştan sona okudu
+  (`docs/qa/okuma_brief.md`), 199 bulgu süzülüp uygulandı. Kronikler yalnız kesinleşeni anlatıyor (TR+EN birlikte);
+  "İhanet gecesi…/On the night of…" gibi tekrarlı iskeletler kırıldı; "yıllardır", "Hasatın", belirteç dışı ekler
+  (`{yer:x|de}ki`), çift olumsuzluk vb. dil hataları giderildi. Ek içerik düzeltmeleri: Tepe Mahallesi belirteçle,
+  sahtekâr Vahit çakışması, `kcam_sil` Yankı koşulu, karantina gemisi oğlan satırı, Koruyucu'da Deniz "başka hiçbir
+  şey" çelişkisi (TR+EN).
+- Kalan üslup işi: USLUP Parti 9–10 (NPC, eşya, yetenek, düşman, sistem metinleri; ansiklopedik). QA P1 kapsamı dışında.
+
+### Tarama ve ölçüm: önce (Adım 1) → sonra (Adım 5 sonu)
+
+| Kategori | Önce | Sonra | Not |
+| --- | ---: | ---: | --- |
+| Eksik/boş çeviri | 0 | 0 | |
+| TR/EN uzunluk oranı aşırı | 0 | 0 | |
+| Düz yazılmış NPC adı | 35 | 35 | P2-13 (awakenings, enemies, knowledge, system) |
+| İngilizcede metrik birim | 0 | 0 | |
+| 3 cümleyi aşan paragraf | 1.777 | 1.792 | üslup ulaçla bağlayınca bazı paragraflarda cümle sayısı arttı; P2-20 |
+| 60 karakteri aşan seçenek | 31 | 7 | önce sayısı belirteçleri ham saydı; düzeltilmiş araçla önce ~5 |
+| Birebir aynı metin (TR) | 28 | 25 | |
+| Neredeyse aynı metin (TR) | 18 | 13 | |
+| Konulup hiç okunmayan bayrak | 352 | 352 | P1-5 kroniklerin dürüstleştirilmesiyle kapandı; ölü bayraklar P2 |
+| Kilitli seçeneği olmayan olay | 48 | 48 | |
+| Üslup: noktalı virgül >1 / 3 -yor / kısa cümle dizisi | 216 / 303 / 1.616 | 15 / 62 / 1.262 | 19.254 `tr` |
+| Üslup: "Bu, " / ", aynı anda" / "bir şekilde" / "fark ediyorsun" | 24 / 12 / 11 / 11 | 1 / 2 / 2 / 2 | |
+| Hiç görülmeyen olay (simülatör) | 5 (esik_itaat dahil) | 4 (yalnız beklenenler) | P1-2 |
+| Savaş / oynanış · Ezme · Hakimiyet | 520 · %10,4 · %81 | 389 · %26,8 · %79 | |
+| Son aralığı | %5,7–%22,1 | %6,3–%18,5 | |
+| İlk "Devam et" ana iş parçacığı donması | 3,9 sn (222 kare) | 0 kare | P0-1 |
+
+**(Geçmiş) Duraklatma notu — tamamlandı:**
 - Çalışma kopyasında COMMIT EDİLMEMİŞ: dalga 1 üslup+kronik uygulaması (50, 51, 52, 53, 54, 56; 3.665 tr, uslup `--kronik-en` 0 hata,
   validateContent temiz) + `80_perde4` `p4_son_gece_ates` koşulu + `flags/71_perde3.yaml` `p3_son_gece_yakinlar`.
   Eski hâl HEAD'de (okuma denetimi `tools/qa/show.py` HEAD'le karşılaştırır) — denetim bitmeden commit etme.

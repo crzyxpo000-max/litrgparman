@@ -205,13 +205,13 @@ sözcükten fazlasını tek seferde almaz.
 | --- | --- | --- | --- |
 | 0 | Doğrulama aracı (`tools/uslup`) | — | **bitti** |
 | 1 | `story/00_prolog`, `events/10_yoldaslar`, `20_orman`, `30_carsi_istasyon`, `40_ana_yay` (Perde 1) | 27.600 | **bitti** |
-| 2 | `50_perde2_ana`, `56_deniz_yanki_aras` | 23.800 | bekliyor |
-| 3 | `51_siginak_elif`, `52_lonca_kaya`, `53_yukselenler_vahit` | 30.900 | bekliyor |
-| 4 | `54_sessiz_ag_mert`, `55_kadimler_thessar`, `90_esikler`, `95_bildirimler` | 19.500 | bekliyor |
-| 5 | `60_kiyikent_a`, `61_kiyikent_b` | 24.700 | bekliyor |
-| 6 | `70_cok_evren`, `71_perde3` | 24.700 | bekliyor |
-| 7 | `72_kule`, `tower.yaml` | 11.700 | bekliyor |
-| 8 | `80_perde4`, `81_sonlar`, `endings.yaml`, `story/90_sistem` | 19.300 | bekliyor |
+| 2 | `50_perde2_ana`, `56_deniz_yanki_aras` | 23.800 | **bitti** |
+| 3 | `51_siginak_elif`, `52_lonca_kaya`, `53_yukselenler_vahit` | 30.900 | **bitti** |
+| 4 | `54_sessiz_ag_mert`, `55_kadimler_thessar`, `90_esikler`, `95_bildirimler` | 19.500 | **bitti** |
+| 5 | `60_kiyikent_a`, `61_kiyikent_b` | 24.700 | **bitti** |
+| 6 | `70_cok_evren`, `71_perde3` | 24.700 | **bitti** |
+| 7 | `72_kule`, `tower.yaml` | 11.700 | **bitti** |
+| 8 | `80_perde4`, `81_sonlar`, `endings.yaml`, `story/90_sistem` | 19.300 | **bitti** |
 | 9 | `npcs/*`, `traits`, `knowledge*`, `ranking`, `army`, `quests*`, `feats*`, `regions`, `factions` | ~6.000 | bekliyor |
 | 10 | `enemies*` (bestiyer dahil), `items*`, `skills`, `classes`, `titles*`, `awakenings*`, `essences`, `professions`, `daily`, `system.yaml` | ~25.000 | bekliyor |
 
@@ -222,6 +222,12 @@ noktalı virgül >1 19→0 · art arda 3 -yor 19→2 · art arda kısa cümle 21
 prologda {npc:yanki|in} sözleri tırnaklı ve büyük harfli (63, 66, 98, 100, 102, 172, 267, 300; DECISIONS #101 ile
 kullanıcı: kasıtlı, DECISIONS #128); `30_carsi_istasyon` 1643'te TR/EN anlamı özgün metinde ayrışıyor; 3618'in EN'inde
 açılış tırnağı eksik (EN bu işin dışında).
+
+**Parti 2–8 notu (2026-11-07/08, QA P1-15 ile birlikte):** Perde 2–4 olayları, sonlar, endings, eşikler, bildirimler,
+sistem sahneleri ve Kule (~13.000 `tr`) 33 yazar dilimi + her dosyaya bir okuyucu ile yeniden yazıldı (199 okuma bulgusu
+uygulandı). Aynı geçişte kronikler "yalnız kesinleşeni anlat" ilkesiyle TR+EN düzeltildi (`tools/uslup --kronik-en`).
+Briefler: `docs/qa/uslup_brief.md`, `docs/qa/okuma_brief.md`; araçlar `tools/qa/`. Tüm içerik ölçümü (19.254 `tr`):
+noktalı virgül >1 216→15 · art arda 3 -yor 303→62 · kısa cümle dizisi 1.616→1.262 · "Bu, " 24→1. Kalan: Parti 9–10.
 
 ### 7.3 Parti akışı
 
