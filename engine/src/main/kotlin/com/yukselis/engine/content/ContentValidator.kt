@@ -469,6 +469,14 @@ object ContentValidator {
             scene.insights.forEachIndexed { i, ins ->
                 checkText(ins.text, "$at sezgi ${i + 1}")
                 checkCondition(ins.condition, "$at sezgi ${i + 1}")
+                // Motor stat koşullu sezgiye "[ALG]" önekini kendisi ekler; metinde de olursa ekranda iki kez çıkar (QA P1-1).
+                fun hasStat(c: Condition): Boolean = c is Condition.StatAtLeast || (c is Condition.All && c.conditions.any { hasStat(it) })
+                fun statPrefixed(s: String) = com.yukselis.engine.system.Stat.entries.any { st ->
+                    s.trimStart().startsWith("[${st.abbr.tr}]") || s.trimStart().startsWith("[${st.abbr.en}]")
+                }
+                if (hasStat(ins.condition) && (statPrefixed(ins.text.tr) || statPrefixed(ins.text.en))) {
+                    problems += "$at sezgi ${i + 1}: stat koşullu sezgi metni '[' ile başlamamalı (önek motorca eklenir)"
+                }
             }
             scene.companionLines.forEachIndexed { i, l ->
                 npcRef(l.npc, "$at yoldaş tepkisi ${i + 1}")
