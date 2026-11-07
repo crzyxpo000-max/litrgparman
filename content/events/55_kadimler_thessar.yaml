@@ -1325,6 +1325,7 @@ olaylar:
             etiket: { tr: "Bir maddeyi değiştirt: \"örnek\" silinsin", en: "Get an article changed. Strike \"samples\"" }
             gerekli: { stat: { wil: 250 } }
             etkiler:
+              - bayrak: "vassal_ornek_silindi"   # QA P1-6: Vassal sonu bu maddeyi hatırlar
               - dikkat: 4
               - ahlak: { merhamet: 5, duzen: 2 }
               - iliski: { thessar: { saygi: 12, baglilik: 4 } }
