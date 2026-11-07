@@ -1,7 +1,7 @@
 # İlerleme
 
-Şu an: Boş serbest günler: hikayesiz gün ölçütü ve saha kampı sahneleri bitti; bölge olayı sayısı kullanıcı onayında. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
-Son commit: 4c1c564 yeni üs olayları (sonraki: ölçüt ve saha kampı)
+Şu an: Boş serbest günler: 128 bölge/kamp olayı yazıldı; hikayesiz gün hedefi için kalan açık kullanıcı kararında. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
+Son commit: 78e663c ölçüt ve saha kampı (sonraki: 128 bölge olayı)
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
@@ -20,7 +20,9 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - [x] Yeni üs olayları (onaylı 23 + 12 takip düğümü; 6, 9, 12, 13, 14, 15. bölümler; TR/EN inceleme; DECISIONS #143)
 - [x] Kullanıcı kararı: bölge olayları. Ölçüt "hikayesiz gün" oldu, simülatöre insan benzeri strateji eklendi, motora saha kampı
       sahneleri (`kamp: true`) geldi; `SahaKampiTest` (DECISIONS #144)
-- [ ] Bölge başına olay ve kamp sahnesi sayısı kullanıcı onayını bekliyor (STORY_FLOW "Yeni ölçüt")
+- [x] 128 bölge/üs/kamp olayı (Bölüm 5–15, 18; TR/EN inceleme; DECISIONS #145). Hikayesiz gün ~18 puan düştü; hedef %35
+      tutmadı (kalan açık oynanış başına ~49 gün). Denge: hakimiyet %62,0, son dağılımı en çok 1,3 puan kaydı
+- [ ] Kalan açık için yol (kamp sahnesi koşulu / Kule katlarına hikaye anı): kullanıcı kararı
 
 ## Hikaye yapısı değişikliği — bölüm, üs ve görev  ✅ (2026-11-07)
 - [x] Adım 1: olay sırası kaydı (`:tools:simulator:akis`), teşhis `docs/STORY_FLOW.md`, sınıflandırma, plan `docs/CHAPTERS.md`

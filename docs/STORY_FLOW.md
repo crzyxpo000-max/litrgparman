@@ -308,3 +308,53 @@ görev bir kez başlayınca süresi aynı. İnsan benzeri stratejiyle (20 oynan�
 Bölge bazında açık `python tools/qa/akis/bolge_acik.py <klasör>` ile alınır. Açığın %40–60'ı Kule Dibi'nde: Kule
 oradan tırmanılıyor ve her kat bir savaş günü. Hedefe inmek için oynanış başına yaklaşık 85 hikaye günü daha gerekiyor.
 
+### Sonrası (128 bölge, üs ve kamp olayı; DECISIONS #145)
+
+Kullanıcının onayladığı 105 bölge/üs olayı ve 23 saha kampı sahnesi yazıldı: Bölüm 5–15 ve 18, dosyalar
+`events/58_bolge_p2a|b|c.yaml` ve `75_bolge_p3a|b|c|d.yaml`. Hepsinin TR/EN incelemesi yapıldı. İnsan benzeri strateji,
+20 oynanış:
+
+| Bölüm | Serbest gün (ort.) | Havuzun tükendiği gün (açılıştan, medyan) | Tükenen oynanış | Salt savaş günü | Ne olay ne savaş | Atlanan gün | Hikayesiz gün |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | 10.7 | 12 | 1/20 | %11 | %5 | %7 | %12 |
+| 2 | 11.2 | 5 | 19/20 | %30 | %12 | %14 | %43 |
+| 3 | 3.0 | 0 | 18/20 | %37 | %18 | %13 | %35 |
+| 4 | 9.4 | 8 | 1/20 | %11 | %4 | %4 | %13 |
+| 5 | 18.4 | 16 | 16/20 | %31 | %12 | %7 | %40 |
+| 6 | 13.8 | 12 | 17/20 | %35 | %20 | %4 | %47 |
+| 7 | 23.4 | 16 | 20/20 | %9 | %26 | %25 | %55 |
+| 8 | 26.2 | 17 | 20/20 | %14 | %19 | %27 | %56 |
+| 9 | 30.1 | 13 | 20/20 | %40 | %12 | %7 | %53 |
+| 10 | 22.1 | 23 | 5/20 | %26 | %16 | %3 | %40 |
+| 11 | 17.6 | 21 | 18/20 | %25 | %18 | %16 | %51 |
+| 12 | 29.9 | 16 | 18/20 | %34 | %20 | %5 | %55 |
+| 13 | 31.8 | 15 | 20/20 | %39 | %15 | %6 | %54 |
+| 14 | 12.8 | 9 | 20/20 | %26 | %25 | %19 | %61 |
+| 15 | 25.0 | 17 | 19/20 | %20 | %23 | %19 | %56 |
+| 16 | 11.8 | 10 | 8/20 | %29 | %8 | %0 | %32 |
+| 17 | 7.6 | 3 | 18/20 | %28 | %11 | %8 | %32 |
+| 18 | 4.8 | 1 | 17/20 | %26 | %19 | %3 | %36 |
+
+| Bölüm | Hikayesiz gün (önce → sonra) |
+| ---: | --- |
+| 7 | %73 → %55 |
+| 8 | %80 → %56 |
+| 9 | %71 → %53 |
+| 11 | %70 → %51 |
+| 12 | %72 → %55 |
+| 13 | %72 → %54 |
+| 14 | %65 → %61 |
+| 15 | %85 → %56 |
+
+**Hedefe ulaşılamadı.** Hikayesiz gün payı ortalama 18 puan düştü, ama 13 bölüm hâlâ %35'in üstünde. Kalan açık oynanış
+başına yaklaşık 49 hikaye günü (önce 85). Bir oynanışta yeni olayların 96'sı oynanıyor, ama açığı ancak yaklaşık 36 gün
+kapatıyor. Nedenler:
+1. Olayların bir kısmı zaten hikaye anı olan günlere düşüyor: zincirler ve aynı gün gelen kartlar.
+2. Kamp sahnelerinin yalnız yaklaşık 4'ü oynanıyor (23'ten). O göreve o yoldaşın katılmış olması gerekiyor.
+3. Kule Dibi'nde tırmanılan her kat savaş günü olarak kalıyor.
+
+**Denge (1000 oynanış):** ilk ölçümde 200 oynanışlık denge testi hakimiyeti %59 buldu. Yeni olay bir savaş yuvasının yerini
+alıp daha az XP veriyordu. Yeni olayların `xp_seviye` ödülleri 1,5 katına çıkarıldı (560 etki; 5–12 → 8–18). Sonrası:
+hakimiyet %62,0 (önce %63,4, sınır %60). Sonların payı en çok 1,3 puan kaydı (Demir Taht %7,9 → %6,6). Hepsi
+%1–%40 içinde. Kule 100'e ulaşan %59,2 → %51,5. Bitmeyen oynanış 0.
+
