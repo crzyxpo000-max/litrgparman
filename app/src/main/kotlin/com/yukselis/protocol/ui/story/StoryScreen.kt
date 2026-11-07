@@ -88,15 +88,16 @@ fun StoryScreen(
     onChoose: (String) -> Unit,
     onHub: (HubAction) -> Unit,
     onBackToTitle: () -> Unit,
-    ending: com.yukselis.engine.story.EndingView? = null,
     modifier: Modifier = Modifier,
+    ending: com.yukselis.engine.story.EndingView? = null,
 ) {
     val fullText = scene.current.paragraphs.joinToString("\n\n")
     val textLength by rememberUpdatedState(fullText.length)
     val passageKey = "${scene.current.sceneId}#$turn"
 
-    var shown by remember(passageKey) { mutableIntStateOf(0) }
-    var finished by remember(passageKey) { mutableStateOf(!typewriter) }
+    // Döndürme/yapılandırma değişince daktilo baştan başlamasın (QA P2-4).
+    var shown by rememberSaveable(passageKey) { mutableIntStateOf(0) }
+    var finished by rememberSaveable(passageKey) { mutableStateOf(!typewriter) }
 
     LaunchedEffect(passageKey, finished) {
         if (!finished) {

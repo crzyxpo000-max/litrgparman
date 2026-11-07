@@ -360,23 +360,29 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private fun render(state: WorldState, notices: List<NoticeView>, advanceTurn: Boolean) {
         val lang = _ui.value.lang
         val engine = app.engine
-        _ui.update {
-            it.copy(
-                game = state,
-                scene = engine.view(state, lang),
-                status = engine.status(state, lang),
-                skills = engine.skills(state, lang),
-                bag = engine.bag(state, lang),
-                daily = engine.daily(state, lang),
-                combat = engine.combatView(state, lang),
-                map = engine.map(state, lang),
-                journal = engine.journal(state, lang),
-                relations = engine.relations(state, lang),
-                ranking = engine.ranking(state, lang),
-                ending = engine.endingView(state, lang),
-                freshNotices = notices,
-                turn = if (advanceTurn) it.turn + 1 else it.turn,
-            )
+        // Görünüm üreticilerinden biri istisna fırlatırsa uygulama çökmesin (QA P2-10); durum değişmeden kalır.
+        try {
+            _ui.update {
+                it.copy(
+                    game = state,
+                    scene = engine.view(state, lang),
+                    status = engine.status(state, lang),
+                    skills = engine.skills(state, lang),
+                    bag = engine.bag(state, lang),
+                    daily = engine.daily(state, lang),
+                    combat = engine.combatView(state, lang),
+                    map = engine.map(state, lang),
+                    journal = engine.journal(state, lang),
+                    relations = engine.relations(state, lang),
+                    ranking = engine.ranking(state, lang),
+                    ending = engine.endingView(state, lang),
+                    freshNotices = notices,
+                    turn = if (advanceTurn) it.turn + 1 else it.turn,
+                )
+            }
+        } catch (e: RuntimeException) {
+            Log.e(TAG, "Görünüm kurulamadı", e)
+            _ui.update { it.copy(message = UiMessage.ACTION_FAILED) }
         }
     }
 

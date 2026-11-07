@@ -637,6 +637,8 @@ object ContentParser {
                 // Tek bayrak ya da liste (hepsi): `bayrak_yok: [a, b]`.
                 "bayrak" -> flagList(value, key).map { Condition.HasFlag(it) }
                 "bayrak_yok" -> flagList(value, key).map { Condition.LacksFlag(it) }
+                "herhangi" -> listOf(Condition.AnyOf((value as? kotlinx.serialization.json.JsonArray ?: throw ContentFormatException("herhangi: liste bekleniyordu"))
+                    .map { condition(it.jsonObject, endings) }))
                 "degisken_min" -> value.jsonObject.map { (k, v) -> Condition.VarAtLeast(k, v.int(k)) }
                 "degisken_max" -> value.jsonObject.map { (k, v) -> Condition.VarAtMost(k, v.int(k)) }
                 "ahlak_min" -> value.jsonObject.map { (k, v) -> Condition.MoralityAtLeast(axis(k), v.int(k)) }

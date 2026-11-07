@@ -111,7 +111,7 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
         ) {
             hub.gates.forEach { g ->
                 OutlinedButton(onClick = { dialog = null; onAction(HubAction.EnterGate(g.uid)) }, modifier = Modifier.fillMaxWidth()) {
-                    Text(stringResource(R.string.hub_gate, g.grade, g.enemies, g.daysLeft), style = GameType.system, color = GateColor)
+                    Text(androidx.compose.ui.res.pluralStringResource(R.plurals.hub_gate, g.daysLeft, g.grade, g.enemies, g.daysLeft), style = GameType.system, color = GateColor)
                 }
             }
         }

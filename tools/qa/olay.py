@@ -52,7 +52,7 @@ def scene(s):
     for y in s.get('yoldas_tepkileri', []) or []:
         print(f'  ~ yoldaş {y.get("npc")} [{short(y.get("kosul"), 50)}]'); lt(y.get('metin'), '    ')
     for b in s.get('bildirimler', []) or []:
-        print(f'  ! bildirim {b.get("tur")}'); lt(b.get('baslik'), '    ')
+        print(f'  ! bildirim {b.get("tur")}' + (f' [{short(b.get("kosul"), 60)}]' if b.get('kosul') else '')); lt(b.get('baslik'), '    ')
         for r in b.get('satirlar', []) or []: lt(r, '      ')
     for c in s.get('secenekler', []) or []:
         extra = []

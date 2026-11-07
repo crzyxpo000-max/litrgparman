@@ -45,10 +45,24 @@ class WorldTest {
     // ---- Yönetmen ----
 
     @Test
+    fun `herhangi kosulu veya demektir`() {
+        // QA P2-11: `herhangi: [...]` birini tutması yeterli koşul; iç içe VE ile birleşir.
+        val c = com.yukselis.engine.content.ContentParser.condition(
+            com.yukselis.engine.content.YamlTree.parseObject("{ herhangi: [ { bayrak: a }, { bayrak: b, bayrak_yok: c } ], bayrak_yok: d }", "test"),
+        )
+        val s = atHub()
+        assertFalse(c.test(s))
+        assertTrue(c.test(s.copy(flags = s.flags + "a")))
+        assertTrue(c.test(s.copy(flags = s.flags + "b")))
+        assertFalse(c.test(s.copy(flags = s.flags + setOf("b", "c"))))
+        assertFalse(c.test(s.copy(flags = s.flags + setOf("a", "d"))))
+    }
+
+    @Test
     fun `yonetmen puani gdd formulu`() {
         val s = atHub()
         val e = event(weight = 4.0, tension = 2, tags = listOf("a"), npcs = listOf("deniz_arman"))
-        val expected = 4.0 * director.tensionFit(s, e) * director.freshness(s, e) * director.bond(s, e) * director.arcPriority(e)
+        val expected = 4.0 * director.tensionFit(s, e) * director.freshness(s, e) * director.bond(s, e)
         assertEquals(expected, director.score(s, e), 1e-9)
     }
 

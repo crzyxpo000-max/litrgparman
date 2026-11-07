@@ -29,7 +29,7 @@ application {
 // Rapor docs/BALANCE.md'ye yazılır.
 tasks.named<JavaExec>("run") {
     workingDir = rootProject.projectDir
-    jvmArgs("-Dstdout.encoding=UTF-8", "-Dstderr.encoding=UTF-8", "-Xss4m")
+    jvmArgs("-Dstdout.encoding=UTF-8", "-Dstderr.encoding=UTF-8")
 }
 
 // Masaüstü performans ölçümü (docs/QA.md): ./gradlew :tools:simulator:perf
@@ -38,5 +38,5 @@ tasks.register<JavaExec>("perf") {
     classpath = sourceSets["main"].runtimeClasspath
     mainClass.set("com.yukselis.simulator.PerfKt")
     workingDir = rootProject.projectDir
-    jvmArgs("-Dstdout.encoding=UTF-8", "-Dstderr.encoding=UTF-8", "-Xss4m")
+    jvmArgs("-Dstdout.encoding=UTF-8", "-Dstderr.encoding=UTF-8")
 }

@@ -28,5 +28,17 @@ fun main() {
         val t = System.nanoTime(); val json = SaveCodec.encode(s, 0L); val enc = (System.nanoTime() - t) / 1_000
         val t2 = System.nanoTime(); SaveCodec.decode(json); val dec = (System.nanoTime() - t2) / 1_000
         println("Gün ${s.day} kaydı (savaş ortası): ${json.toByteArray().size / 1024} KB · kodlama $enc µs · çözme $dec µs")
+        // Arayüzün her eylemde kurduğu görünüm modelleri (GameViewModel.render) — QA P2-5.
+        val engine = com.yukselis.engine.story.StoryEngine(content)
+        val lang = com.yukselis.engine.i18n.Lang.TR
+        val views = listOf<Pair<String, () -> Any?>>(
+            "view" to { engine.view(s, lang) }, "status" to { engine.status(s, lang) }, "skills" to { engine.skills(s, lang) },
+            "bag" to { engine.bag(s, lang) }, "daily" to { engine.daily(s, lang) }, "combat" to { engine.combatView(s, lang) },
+            "map" to { engine.map(s, lang) }, "journal" to { engine.journal(s, lang) }, "relations" to { engine.relations(s, lang) },
+            "ranking" to { engine.ranking(s, lang) }, "ending" to { engine.endingView(s, lang) },
+        )
+        repeat(20) { views.forEach { it.second() } } // ısınma
+        val costs = views.map { (n, f) -> val t = System.nanoTime(); repeat(50) { f() }; n to (System.nanoTime() - t) / 50_000 }
+        println("render görünümleri (µs, ısınmış): " + costs.joinToString(" · ") { "${it.first} ${it.second}" } + " · toplam ${costs.sumOf { it.second }}")
     }
 }

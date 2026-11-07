@@ -64,6 +64,7 @@ object ContentValidator {
                 is Condition.Knows -> if (c.knowledge !in content.knowledge) problems += "$where: tanımsız bilgi '${c.knowledge}'"
                 is Condition.HasTrait -> if (c.trait !in content.traits) problems += "$where: tanımsız iz '${c.trait}'"
                 is Condition.All -> c.conditions.forEach { checkCondition(it, where) }
+                is Condition.AnyOf -> c.conditions.forEach { checkCondition(it, where) }
                 // ---- Aşama 7 ----
                 is Condition.EndingEligible -> if (c.ending !in content.endings.endings) problems += "$where: tanımsız son '${c.ending}'"
                 is Condition.EndingIs -> if (c.ending !in content.endings.endings) problems += "$where: tanımsız son '${c.ending}'"
@@ -556,6 +557,7 @@ fun flagUsage(content: Content): FlagUsage {
             is Condition.HasFlag -> read += c.flag
             is Condition.LacksFlag -> read += c.flag
             is Condition.All -> c.conditions.forEach { cond(it) }
+            is Condition.AnyOf -> c.conditions.forEach { cond(it) }
             else -> Unit
         }
     }

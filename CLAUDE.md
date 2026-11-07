@@ -125,7 +125,7 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
   Yankı adı da her yerde belirteçle (`{npc:yanki|e}` → Yankı'ya). Doğrulayıcı düz yazılmış NPC adlarını uyarır.
 - Sezgide `anlati: true`: Sistem/Yankı sesi olmayan koşullu anlatı satırı; paragrafların sonuna düz metin olarak eklenir.
 - Koşul `lider_fraksiyon: f` (lonca/sessiz_ag/siginak/yukselenler arasında en yüksek itibar; eşik `itibar_min` ile), `npc_gitti: id`,
-  `bayrak`/`bayrak_yok` liste alabilir (`bayrak_yok: [a, b]` = hiçbiri).
+  `bayrak`/`bayrak_yok` liste alabilir (`bayrak_yok: [a, b]` = hiçbiri). VEYA: `herhangi: [{…}, {…}]` (birini tutması yeter; kopya paragraf yazma).
 - Türkçe noktalama: İngilizce kalıbı ", ve" kullanma; Türkçede "ve"den önce virgül konmaz.
 - Başarısız zar (`basarisiz`) sessizce `@akis`'e dönmesin; kısa bir başarısızlık sahnesi yaz. Tohum olayı bölge/gün tanımaz:
   belirli bir yeri anlatan açılışı koşullu yaz ya da bölgeye geliş satırı ekle.
@@ -158,7 +158,7 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Uygulama içi dil `ProvideLanguage` (App.kt) ile seçilir; cihaz dilinden bağımsız ve anında değişir.
 - Türkçe büyük harf dönüşümünde yerel ayar kullan (`uppercase(locale)`): i → İ.
 - Türkçe metinde sayıya ek getirme ("Aşama 4'te" sayıya göre değişir); "Aşama %d ile" gibi eksiz kalıp kullan.
-- Kayıt: her seçimden ve her Sistem eyleminden sonra ve `onStop`'ta otomatik; dosyalar `files/saves/*.yaml`, Auto Backup kapsamında.
+- Kayıt: her seçimden ve her Sistem eyleminden sonra ve `onStop`'ta otomatik; dosyalar `files/saves/*.json`, Auto Backup kapsamında.
 - Kendini açan arayüz: Yetenekler ve Çanta sekmeleri `StatusView.tabs` içinde yoksa gizlidir.
 - Tam ekran kartlar `ui/system/Overlays.kt`: önce kutlama (seviye/evrim/sınıf), sonra bekleyen istem.
 - Tema: Sistem · Açık · Koyu · AMOLED (saf siyah).

@@ -277,6 +277,11 @@ sealed interface Condition {
     data class All(val conditions: List<Condition>) : Condition {
         override fun test(state: WorldState) = conditions.all { it.test(state) }
     }
+
+    /** VEYA: `herhangi: [{…}, {…}]` — birini tutması yeter (QA P2-11; kopya paragraf yerine). */
+    data class AnyOf(val conditions: List<Condition>) : Condition {
+        override fun test(state: WorldState) = conditions.any { it.test(state) }
+    }
 }
 
 /** Dünya durumunu değiştirmenin tek yolu. */

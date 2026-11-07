@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
@@ -185,7 +186,9 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
         snackbarHost = { SnackbarHost(snackbar) },
         containerColor = MaterialTheme.colorScheme.background,
     ) { padding ->
-        val content = Modifier.padding(padding)
+        // Tablette satır ~95 karaktere çıkıyordu (QA P2-1): içerik en çok MAX_CONTENT_WIDTH genişlikte, ortada.
+        val content = Modifier.padding(padding).widthIn(max = MAX_CONTENT_WIDTH)
+        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
         when (active) {
             Tab.STORY -> if (ui.combat != null) CombatScreen(
                 combat = ui.combat,
@@ -232,6 +235,7 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
                 notificationDenied = ui.notificationDenied,
                 modifier = content,
             )
+        }
         }
     }
     // Önce kutlama (seviye/evrim/sınıf), sonra bekleyen Sistem istemi.
@@ -300,3 +304,6 @@ private fun ProvideLanguage(lang: Lang, content: @Composable () -> Unit) {
     }
     CompositionLocalProvider(*provided.toTypedArray(), content = content)
 }
+
+/** Geniş ekranda (tablet) okunabilir satır uzunluğu için içerik genişliği sınırı. */
+private val MAX_CONTENT_WIDTH = 680.dp

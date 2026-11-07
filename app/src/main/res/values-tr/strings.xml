@@ -25,11 +25,9 @@
     <string name="act_short">Perde %1$d</string>
     <string name="hp">HP</string>
     <string name="mp">MP</string>
-    <string name="tap_to_skip">Geçmek için dokun</string>
     <string name="back_to_title">Ana menüye dön</string>
 
     <string name="level_grade">Seviye %1$d · Kademe %2$s</string>
-    <string name="xp_progress">XP %1$d / %2$d</string>
     <string name="stamina">Dayanım</string>
     <string name="free_points">Serbest stat puanı: %1$d</string>
     <string name="stats">Statlar</string>
@@ -70,8 +68,6 @@
     <string name="msg_load_failed">Bu kayıt yüklenemedi.</string>
     <string name="msg_ironman_no_manual">Demir Mod\'da elle kayıt kapalıdır.</string>
 
-    <string name="skills_placeholder">Sistem sana Seviye 10\'da bir sınıf verdiğinde yeteneklerin burada görünecek.</string>
-    <string name="bag_placeholder">Envanter ve ekipman ilk ganimetlerle birlikte açılacak.</string>
     <string name="echo_header">YANKI</string>
     <string name="tap_to_continue">Devam etmek için dokun</string>
     <string name="classless">Sınıfsız</string>
@@ -105,7 +101,10 @@
     <string name="essence">Öz</string>
     <string name="essence_slots">Yuva: %1$d / %2$d</string>
     <string name="daily_steps">SET</string>
-    <string name="daily_streak">Seri: %1$d gün</string>
+    <plurals name="daily_streak">
+        <item quantity="one">Seri: %1$d gün</item>
+        <item quantity="other">Seri: %1$d gün</item>
+    </plurals>
     <string name="daily_only_you">Bu pencereyi yalnızca sen görüyorsun.</string>
     <string name="daily_done">Tamamlandı. Yarın görüşürüz.</string>
     <string name="daily_train">Bir set yap</string>
@@ -114,7 +113,6 @@
     <string name="daily_reward">Ödül: +1 serbest stat puanı (her 7 günlük seride +1 daha)</string>
     <string name="stamina_short">DYN</string>
     <string name="effort">Efor</string>
-    <string name="numbers">Sayılar</string>
     <string name="stance_all_out">Tam saldırı</string>
     <string name="stance_measured">Ölçülü</string>
     <string name="stance_defensive">Savunmacı</string>
@@ -138,20 +136,19 @@
     <string name="execution_title">%1$s yerde. Nasıl bitecek?</string>
     <string name="you_died">ÖLDÜN</string>
     <string name="return_checkpoint">Kayıt noktasına dön</string>
-    <string name="hub_slots">Kalan yuva: %1$d / %2$d · Tehlike %3$d</string>
     <string name="hub_camp">Kamp kur (günü bitir)</string>
     <string name="hub_hand">Fırsatlar</string>
-    <string name="hub_free">Serbest zaman</string>
     <string name="hub_explore">Keşfet</string>
     <string name="hub_train">Antrenman</string>
     <string name="hub_rest">Dinlen</string>
-    <string name="hub_gate">Kapı · Kademe %1$s · %2$s · %3$d gün kaldı</string>
-    <string name="hub_travel">Yolculuk</string>
+    <plurals name="hub_gate">
+        <item quantity="one">Kapı · Kademe %1$s · %2$s · %3$d gün kaldı</item>
+        <item quantity="other">Kapı · Kademe %1$s · %2$s · %3$d gün kaldı</item>
+    </plurals>
     <string name="map_line">Tehlike %1$d · %2$s · %3$d açık kapı</string>
     <string name="no_quests">Henüz görev yok.</string>
     <string name="legend">Efsane</string>
     <string name="daily_train_hub">Antrenman gün içinde: Hikaye → Serbest zaman → Antrenman.</string>
-    <string name="status_hidden">Görünen seviye %1$d · Dikkat %2$d · Yozlaşma %3$d</string>
     <string name="intel_log">Bilgi günlüğü</string>
     <string name="ally_line">%1$s · %2$s · Sv. %3$d · Can %4$d/%5$d</string>
     <string name="ally_down">%1$s · yerde</string>
@@ -184,8 +181,6 @@
     <string name="ng_plus">Yeni Oyun+</string>
     <string name="ng_plus_desc">Döngüyü hatırlayarak yeni bir Entegrasyon başlat. Tüm statlar +3.</string>
     <string name="ng_plus_unlocked">[YENİ OYUN+ AÇILDI]</string>
-    <string name="hub_tower">Kule · Kat %1$d · Sv. %2$d</string>
-    <string name="hub_tower_story">Kule · Kat %1$d · Sv. %2$d · ★</string>
 
     <string name="notifications">Bildirimler</string>
     <string name="notifications_desc">Oturumlar arasında nadir, isteğe bağlı uyarılar (ör. bir rakip seni Sıralama\'da geçti). Cihazında üretilir; hiçbir yere gönderilmez.</string>
@@ -229,7 +224,7 @@
     <string name="help_danger_term">Tehlike</string>
     <string name="help_danger">Bulunduğun bölgenin tehlike düzeyi (0–100). Yükseldikçe karşılaşmalar sertleşir ve kapılar daha sık açılır.</string>
     <string name="help_free_term">Keşfet · Antrenman · Dinlen</string>
-    <string name="help_free">Keşfet: bölgede bir olay ya da karşılaşma. Antrenman: biraz XP ve Günlük Görev ilerlemesi. Dinlen: canın ve manan %40 dolar, Dikkat biraz düşer.</string>
+    <string name="help_free" formatted="false">Keşfet: bölgede bir olay ya da karşılaşma. Antrenman: biraz XP ve Günlük Görev ilerlemesi. Dinlen: canın ve manan %40 dolar, Dikkat biraz düşer.</string>
     <string name="help_gates_term">Kapılar</string>
     <string name="help_gates">Açık zindan kapıları. Süresi dolan kapı taşar ve bölgeye zarar verir; içeri girip temizleyebilirsin.</string>
     <string name="help_tower_term">Kule ★</string>
@@ -237,7 +232,7 @@
     <string name="stance_all_out_desc">%30 daha fazla hasar verirsin, %25 daha fazla hasar alırsın. Dayanım yenilenmez.</string>
     <string name="stance_measured_desc">Dengeli. Her tur 5 Dayanım yenilenir.</string>
     <string name="stance_defensive_desc">%30 daha az hasar verirsin, %40 daha az hasar alırsın. Her tur 12 Dayanım yenilenir.</string>
-    <string name="effort_desc">Her efor kademesi saldırıya +%12 hasar ve +%5 isabet ekler; kademe başına 8 Dayanım harcar.</string>
+    <string name="effort_desc" formatted="false">Her efor kademesi saldırıya +%12 hasar ve +%5 isabet ekler; kademe başına 8 Dayanım harcar.</string>
     <string name="help_target_term">Hedef</string>
     <string name="help_target">Düşman kartına dokun: hedef olur. Uzun bas: gerçek statları ve zaafı.</string>
     <string name="help_actions_combat_term">Analiz · Ortam · Konuş</string>
@@ -292,4 +287,6 @@
     <string name="back">Geri</string>
     <string name="level_grade_short">Sv. %1$d · %2$s</string>
     <string name="loading_content">Dünya yükleniyor…</string>
+    <string name="a11y_choose">Seç</string>
+    <string name="a11y_dismiss">Kapat</string>
 </resources>

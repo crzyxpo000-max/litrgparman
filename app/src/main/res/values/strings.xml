@@ -28,12 +28,10 @@
     <string name="act_short">Act %1$d</string>
     <string name="hp">HP</string>
     <string name="mp">MP</string>
-    <string name="tap_to_skip">Tap to skip</string>
     <string name="back_to_title">Back to title</string>
 
     <!-- Status -->
     <string name="level_grade">Level %1$d · Grade %2$s</string>
-    <string name="xp_progress">XP %1$d / %2$d</string>
     <string name="stamina">Stamina</string>
     <string name="free_points">Free stat points: %1$d</string>
     <string name="stats">Stats</string>
@@ -75,8 +73,6 @@
     <string name="msg_load_failed">That save couldn\'t be loaded.</string>
     <string name="msg_ironman_no_manual">Manual saves are off in Ironman Mode.</string>
 
-    <string name="skills_placeholder">Your skills will show up here once the System grants you a class at Level 10.</string>
-    <string name="bag_placeholder">Inventory and gear arrive with the first loot drops.</string>
     <string name="echo_header">ECHO</string>
     <string name="tap_to_continue">Tap to continue</string>
     <string name="classless">Classless</string>
@@ -91,7 +87,7 @@
     <string name="rarity_line">Rarity: %1$s</string>
     <string name="evolves_into">Evolves at Lv. 10 into: %1$s</string>
     <string name="penalty_line">Cost: %1$s, permanent</string>
-    <string name="currency_line">%1$d Credits · %2$d Essence Crystals</string>
+    <string name="currency_line">Credits: %1$d · Essence Crystals: %2$d</string>
     <string name="inventory">Inventory</string>
     <string name="inventory_empty">Nothing here yet.</string>
     <string name="profession">Profession</string>
@@ -110,7 +106,10 @@
     <string name="essence">Essence</string>
     <string name="essence_slots">Slots: %1$d / %2$d</string>
     <string name="daily_steps">SET</string>
-    <string name="daily_streak">Streak: %1$d days</string>
+    <plurals name="daily_streak">
+        <item quantity="one">Streak: %1$d day</item>
+        <item quantity="other">Streak: %1$d days</item>
+    </plurals>
     <string name="daily_only_you">Only you can see this window.</string>
     <string name="daily_done">Complete. See you tomorrow.</string>
     <string name="daily_train">Do a set</string>
@@ -119,7 +118,6 @@
     <string name="daily_reward">Reward: +1 free stat point (+1 more every 7-day streak)</string>
     <string name="stamina_short">STA</string>
     <string name="effort">Effort</string>
-    <string name="numbers">Numbers</string>
     <string name="stance_all_out">All-out</string>
     <string name="stance_measured">Measured</string>
     <string name="stance_defensive">Defensive</string>
@@ -143,20 +141,19 @@
     <string name="execution_title">%1$s is down. How does it end?</string>
     <string name="you_died">YOU DIED</string>
     <string name="return_checkpoint">Return to checkpoint</string>
-    <string name="hub_slots">Slots left: %1$d / %2$d · Danger %3$d</string>
     <string name="hub_camp">Make camp (end the day)</string>
     <string name="hub_hand">Opportunities</string>
-    <string name="hub_free">Free time</string>
     <string name="hub_explore">Explore</string>
     <string name="hub_train">Train</string>
     <string name="hub_rest">Rest</string>
-    <string name="hub_gate">Gate · Grade %1$s · %2$s · %3$d days left</string>
-    <string name="hub_travel">Travel</string>
-    <string name="map_line">Danger %1$d · %2$s · %3$d open Gates</string>
+    <plurals name="hub_gate">
+        <item quantity="one">Gate · Grade %1$s · %2$s · %3$d day left</item>
+        <item quantity="other">Gate · Grade %1$s · %2$s · %3$d days left</item>
+    </plurals>
+    <string name="map_line">Danger %1$d · %2$s · Open Gates: %3$d</string>
     <string name="no_quests">No quests yet.</string>
     <string name="legend">Legend</string>
     <string name="daily_train_hub">Train during the day: Story → Free time → Train.</string>
-    <string name="status_hidden">Public level %1$d · Attention %2$d · Corruption %3$d</string>
     <string name="intel_log">Intel log</string>
     <string name="ally_line">%1$s · %2$s · Lv. %3$d · HP %4$d/%5$d</string>
     <string name="ally_down">%1$s · down</string>
@@ -189,8 +186,6 @@
     <string name="ng_plus">New Game+</string>
     <string name="ng_plus_desc">Start a new Integration remembering the Loop. All stats +3.</string>
     <string name="ng_plus_unlocked">[NEW GAME+ UNLOCKED]</string>
-    <string name="hub_tower">Spire · Floor %1$d · Lv. %2$d</string>
-    <string name="hub_tower_story">Spire · Floor %1$d · Lv. %2$d · ★</string>
 
     <string name="notifications">Notifications</string>
     <string name="notifications_desc">Rare, optional alerts between sessions (e.g. a rival passing you on the Ranking). Generated on your device; nothing is sent anywhere.</string>
@@ -234,7 +229,7 @@
     <string name="help_danger_term">Danger</string>
     <string name="help_danger">How dangerous your current area is (0–100). The higher it gets, the tougher the encounters and the more often Gates open.</string>
     <string name="help_free_term">Explore · Train · Rest</string>
-    <string name="help_free">Explore: an event or encounter in the area. Train: a bit of XP and Daily Quest progress. Rest: restores 40% of your HP and MP and lowers Attention a little.</string>
+    <string name="help_free" formatted="false">Explore: an event or encounter in the area. Train: a bit of XP and Daily Quest progress. Rest: restores 40% of your HP and MP and lowers Attention a little.</string>
     <string name="help_gates_term">Gates</string>
     <string name="help_gates">Open dungeon Gates. When a Gate\'s timer runs out it breaks and the area pays for it; go in and clear it first.</string>
     <string name="help_tower_term">Spire ★</string>
@@ -242,7 +237,7 @@
     <string name="stance_all_out_desc">Deal 30% more damage, take 25% more. No stamina recovery.</string>
     <string name="stance_measured_desc">Balanced. Recover 5 stamina each turn.</string>
     <string name="stance_defensive_desc">Deal 30% less damage, take 40% less. Recover 12 stamina each turn.</string>
-    <string name="effort_desc">Each effort level adds +12% damage and +5% to hit, and costs 8 stamina per level.</string>
+    <string name="effort_desc" formatted="false">Each effort level adds +12% damage and +5% to hit, and costs 8 stamina per level.</string>
     <string name="help_target_term">Targeting</string>
     <string name="help_target">Tap an enemy card to target it. Long-press for its true stats and weak spot.</string>
     <string name="help_actions_combat_term">Analyze · Environment · Talk</string>
@@ -290,11 +285,13 @@
 
     <string name="journal">Journal</string>
     <string name="tile_map_none">Opens once your days begin</string>
-    <string name="tile_quests">%1$d active</string>
+    <string name="tile_quests">Active: %1$d</string>
     <string name="tile_daily">%1$d / %2$d</string>
     <string name="tile_saves">Auto + 3 slots</string>
     <string name="tile_settings">Language, theme, text size</string>
     <string name="back">Back</string>
     <string name="level_grade_short">Lv. %1$d · %2$s</string>
     <string name="loading_content">Loading the world…</string>
+    <string name="a11y_choose">Choose</string>
+    <string name="a11y_dismiss">Dismiss</string>
 </resources>

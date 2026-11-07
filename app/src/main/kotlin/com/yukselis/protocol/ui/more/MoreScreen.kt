@@ -276,7 +276,7 @@ private fun MapSection(regions: List<RegionView>) {
                     color = if (r.current) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
                 )
                 Text(stringResource(R.string.map_line, r.danger, r.control, r.gates.size), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                r.gates.forEach { g -> Text(stringResource(R.string.hub_gate, g.grade, g.enemies, g.daysLeft), style = GameType.system, color = Color(0xFFFFA726)) }
+                r.gates.forEach { g -> Text(androidx.compose.ui.res.pluralStringResource(R.plurals.hub_gate, g.daysLeft, g.grade, g.enemies, g.daysLeft), style = GameType.system, color = Color(0xFFFFA726)) }
             }
         }
     }
@@ -328,7 +328,7 @@ private fun DailyPanel(daily: DailyView, onTrain: () -> Unit, inDayLoop: Boolean
             Text(stringResource(R.string.daily_reward), style = GameType.system, color = Color(0xFFFFD54F))
             Text(daily.description, style = GameType.system)
             StatBar(stringResource(R.string.daily_steps), daily.progress.toLong(), daily.steps.toLong(), Color(0xFF66BB6A), Modifier.padding(top = 6.dp))
-            Text(stringResource(R.string.daily_streak, daily.streak), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(androidx.compose.ui.res.pluralStringResource(R.plurals.daily_streak, daily.streak, daily.streak), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Text(stringResource(R.string.daily_only_you), style = GameType.system, color = EchoColor)
             when {
                 daily.completed -> Text(stringResource(R.string.daily_done), style = GameType.systemTitle, color = Color(0xFF66BB6A))
@@ -444,9 +444,8 @@ private fun NotificationToggle(
                     .putExtra(android.provider.Settings.EXTRA_APP_PACKAGE, context.packageName)
                     .addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK),
             )
-            android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU ->
-                launcher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
-            else -> onSettings { it.copy(notifications = true) }
+            // `permitted` 33 altında hep true; buraya yalnız Android 13+ gelir (lint ObsoleteSdkInt).
+            else -> launcher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
         }
     }
 }

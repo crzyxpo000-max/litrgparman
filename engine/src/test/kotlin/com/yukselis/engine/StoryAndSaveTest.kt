@@ -210,6 +210,14 @@ class SaveTest {
     }
 
     @Test
+    fun icerikten_silinen_olayin_ortasindaki_kayit_temizlenir() {
+        // QA P2-9: sanitize, artık var olmayan güncel olayı bırakır.
+        val s = engine.newGame("Ece", GameMode.NORMAL, seed = 4)
+        val stale = s.copy(dayState = s.dayState.copy(currentEvent = "boyle_bir_olay_yok"))
+        assertNull(engine.sanitize(stale).dayState.currentEvent)
+    }
+
+    @Test
     fun bozukOtomatikKayitOncekindenAcilir() {
         // QA P1-20: otomatik kayıt bozulursa (Demir Mod'da tek kayıt) bir önceki sağlam kayıttan açılır.
         val storage = InMemorySaveStorage()

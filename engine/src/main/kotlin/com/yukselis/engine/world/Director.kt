@@ -63,10 +63,14 @@ class Director(private val content: Content) {
         return e.condition?.test(state) ?: true
     }
 
+    /** Tohum koşulları kayıtta metin olarak durur; her gün yeniden ayrıştırılmasın diye önbellek (QA P2-8). */
+    private val seedConditions = java.util.concurrent.ConcurrentHashMap<String, Result<com.yukselis.engine.story.Condition>>()
+
     fun seedConditionHolds(state: WorldState, seed: Seed): Boolean {
         val raw = seed.condition ?: return true
         val focused = state.copy(focusNpc = seed.npc ?: state.focusNpc)
-        return runCatching { ContentParser.condition(YamlTree.parseObject(raw, "tohum koşulu"), content.endings).test(focused) }.getOrDefault(false)
+        val cond = seedConditions.getOrPut(raw) { runCatching { ContentParser.condition(YamlTree.parseObject(raw, "tohum koşulu"), content.endings) } }
+        return cond.getOrNull()?.let { runCatching { it.test(focused) }.getOrDefault(false) } ?: false
     }
 
     /** Hedef gerilim eğrisi: yükselen → zirve → nefes. Dikkat yükseldikçe eğri yukarı kayar. */
@@ -98,11 +102,10 @@ class Director(private val content: Content) {
     /** Kişisel bağ değeri: NPC'ye güven ve bağlılığın ortalaması (Aşama 5). */
     fun bondValue(state: WorldState, npc: String): Int = state.npcs[npc]?.relation?.let { (it.trust + it.bond) / 2 } ?: 0
 
-    /** Ana yay önceliği: vadesi gelmemiş ana yay olayları da öne çıkar. */
-    fun arcPriority(e: EventDef): Double = if (e.mainArcDay != null) 3.0 else 1.0
-
     fun score(state: WorldState, e: EventDef): Double =
-        e.weight * tensionFit(state, e) * freshness(state, e) * bond(state, e) * arcPriority(e)
+        // GDD'deki Öncelik_anayay çarpanı burada yok: ana yay düğümleri puanlanmaz, `forced` ile her zaman kazanır
+        // (eski arcPriority çarpanı adaylarda hep 1,0'dı; QA P2-7).
+        e.weight * tensionFit(state, e) * freshness(state, e) * bond(state, e)
 
     /** Havuzdan seçilebilir olaylar (tohum/eşik olayları ve zorunlular hariç), puanlarıyla. */
     fun candidates(state: WorldState): List<Pair<EventDef, Double>> =

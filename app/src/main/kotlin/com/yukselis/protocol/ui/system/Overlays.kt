@@ -1,5 +1,6 @@
 package com.yukselis.protocol.ui.system
 
+import androidx.compose.ui.semantics.Role
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.Spring
@@ -125,7 +126,8 @@ private fun OptionCard(option: PromptOptionView, onClick: () -> Unit) {
             .fillMaxWidth()
             .clip(shape)
             .border(1.5.dp, accent, shape)
-            .clickable(onClick = onClick)
+            // TalkBack dokununca ne olacağını söylesin (QA P2-3).
+            .clickable(onClickLabel = stringResource(R.string.a11y_choose), role = Role.Button, onClick = onClick)
             .semantics(mergeDescendants = true) {
                 contentDescription = (listOfNotNull(option.name, option.description, option.echoNote) + option.details).joinToString(" ")
             },
@@ -155,7 +157,7 @@ fun CelebrationOverlay(notices: List<NoticeView>, haptics: Boolean, onDismiss: (
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black.copy(alpha = 0.93f))
-            .clickable(onClick = onDismiss)
+            .clickable(onClickLabel = stringResource(R.string.a11y_dismiss), role = Role.Button, onClick = onDismiss)
             .safeDrawingPadding()
             .semantics { contentDescription = notices.joinToString(". ") { (listOf(it.title) + it.lines).joinToString(". ") } },
     ) {

@@ -390,6 +390,8 @@ class StoryEngine(val content: Content) {
         if (s.daily == null || s.daily?.templateId !in content.dailyTemplates) s = effects.newDaily(s).state
         if (s.sceneId != WorldState.HUB && s.sceneId !in content.scenes) s = s.copy(sceneId = if (s.regions.isNotEmpty()) WorldState.HUB else content.startScene)
         s = s.copy(seeds = s.seeds.filter { it.eventId in content.events }, dayState = s.dayState.copy(hand = s.dayState.hand.filter { it in content.events }))
+        // İçerikten silinmiş bir olayın ortasında alınmış kayıt (QA P2-9).
+        if (s.dayState.currentEvent != null && s.dayState.currentEvent !in content.events) s = s.copy(dayState = s.dayState.copy(currentEvent = null))
         // NPC'ler: tanımsızlar atılır, eksikler (eski kayıt) içerikten kurulur.
         val fresh = content.npcs.keys.filter { s.npcs[it]?.initialized != true }.toSet()
         s = npcEngine.ensure(s.copy(npcs = s.npcs.filterKeys { it in content.npcs }))

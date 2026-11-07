@@ -2,6 +2,7 @@ package com.yukselis.protocol.data
 
 import android.content.Context
 import android.content.res.AssetManager
+import androidx.core.content.edit
 import com.yukselis.engine.content.ContentSource
 import com.yukselis.engine.i18n.Lang
 import com.yukselis.engine.save.SaveStorage
@@ -69,7 +70,7 @@ class SettingsStore(context: Context) {
         prefs.getString(KEY_LANG, null)?.let { Lang.fromCode(it) } ?: Lang.fromCode(Locale.getDefault().language)
 
     fun setLanguage(lang: Lang) {
-        prefs.edit().putString(KEY_LANG, lang.code).apply()
+        prefs.edit { putString(KEY_LANG, lang.code) }
     }
 
     fun settings(): Settings = Settings(
@@ -85,17 +86,17 @@ class SettingsStore(context: Context) {
     )
 
     fun save(settings: Settings) {
-        prefs.edit()
-            .putBoolean(KEY_TYPEWRITER, settings.typewriter)
-            .putBoolean(KEY_HAPTICS, settings.haptics)
+        prefs.edit {
+            putBoolean(KEY_TYPEWRITER, settings.typewriter)
+            putBoolean(KEY_HAPTICS, settings.haptics)
             // Kaldırılan yapay zeka anlatıcı ayarının eski kaydı silinir (DECISIONS #97).
-            .remove(LEGACY_NARRATOR)
-            .putString(KEY_THEME, settings.theme.name)
-            .putBoolean(KEY_NOTIFICATIONS, settings.notifications)
-            .putString(KEY_TEXT_SIZE, settings.textSize.name)
-            .putBoolean(KEY_COMBAT_NUMBERS, settings.combatNumbers)
-            .putStringSet(KEY_SEEN_TIPS, settings.seenTips)
-            .apply()
+            remove(LEGACY_NARRATOR)
+            putString(KEY_THEME, settings.theme.name)
+            putBoolean(KEY_NOTIFICATIONS, settings.notifications)
+            putString(KEY_TEXT_SIZE, settings.textSize.name)
+            putBoolean(KEY_COMBAT_NUMBERS, settings.combatNumbers)
+            putStringSet(KEY_SEEN_TIPS, settings.seenTips)
+        }
     }
 
     // ---- Bildirimler (Aşama 9) ----
@@ -108,18 +109,18 @@ class SettingsStore(context: Context) {
     fun rivalWasAhead(): Boolean = prefs.getBoolean(KEY_RIVAL_AHEAD, true)
 
     fun setRivalWasAhead(ahead: Boolean) {
-        prefs.edit().putBoolean(KEY_RIVAL_AHEAD, ahead).apply()
+        prefs.edit { putBoolean(KEY_RIVAL_AHEAD, ahead) }
     }
 
     fun markNotified(millis: Long, key: String) {
-        prefs.edit().putLong(KEY_NOTIF_TIME, millis).putString(KEY_NOTIF_KEY, key).apply()
+        prefs.edit { putLong(KEY_NOTIF_TIME, millis); putString(KEY_NOTIF_KEY, key) }
     }
 
     /** Android 13+ izni reddedildi: bir daha kendiliğinden istenmez (ısrar yok). */
     fun notificationPermissionDenied(): Boolean = prefs.getBoolean(KEY_NOTIF_DENIED, false)
 
     fun setNotificationPermissionDenied(denied: Boolean) {
-        prefs.edit().putBoolean(KEY_NOTIF_DENIED, denied).apply()
+        prefs.edit { putBoolean(KEY_NOTIF_DENIED, denied) }
     }
 
     // ---- Aşama 7: oyunlar arası meta (Döngü sonu, New Game+) ----
@@ -139,11 +140,11 @@ class SettingsStore(context: Context) {
      * yeniden yüklenmesi iki kez sayılmaz); görülen sonlar ve New Game+ her seferinde birleşir.
      */
     fun recordEnding(gameSeed: Long, endingId: String, unlocksNewGamePlus: Boolean) {
-        prefs.edit()
-            .putStringSet(KEY_SEEDS, finishedSeeds() + gameSeed.toString())
-            .putStringSet(KEY_ENDINGS, endingsSeen() + endingId)
-            .putBoolean(KEY_NG_PLUS, newGamePlusUnlocked() || unlocksNewGamePlus)
-            .apply()
+        prefs.edit {
+            putStringSet(KEY_SEEDS, finishedSeeds() + gameSeed.toString())
+            putStringSet(KEY_ENDINGS, endingsSeen() + endingId)
+            putBoolean(KEY_NG_PLUS, newGamePlusUnlocked() || unlocksNewGamePlus)
+        }
     }
 
     private companion object {

@@ -76,6 +76,8 @@ fun TitleScreen(
         Text(
             text = stringResource(R.string.app_name),
             fontSize = 34.sp,
+            // Anlatı stilinin 27sp satır yüksekliği 34sp başlıkta iki satırı üst üste bindiriyordu (QA P2-2).
+            lineHeight = 42.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
             style = GameType.narration,

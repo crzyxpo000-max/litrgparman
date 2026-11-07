@@ -147,6 +147,8 @@ fun main(args: Array<String>) {
     // 4. Aynı / neredeyse aynı metin (≥50 karakter TR; 5 sözcüklük parçalarla Jaccard ≥0.6)
     val long = texts.filter { (it.tr?.length ?: 0) >= 50 }
     long.groupBy { normalize(it.tr!!) }.values.filter { it.size > 1 }.forEach { g ->
+        val scenes = g.map { it.file + " " + it.path.substringBefore(".paragraflar") }.toSet()
+        if (scenes.size == 1 && g.all { it.isParagraph }) add("Dışlayan koşullu kopya (aynı sahnede birebir aynı paragraf; `herhangi` kullan)", g.first().file + " " + g.first().path.substringBefore(".paragraflar"), "${g.size}× · ${short(g.first().tr, 80)}")
         add("Birebir aynı metin (TR)", g.joinToString(" | ") { "${it.file} ${it.path}" }, "${g.size}× · ${short(g.first().tr, 90)}")
     }
     val shingles = long.map { t -> normalize(t.tr!!).split(' ').windowed(5) { it.joinToString(" ") }.toSet() }
@@ -171,6 +173,15 @@ fun main(args: Array<String>) {
         val inert = opts.filter { o -> o.keys.none { it in consequential } || (o["etkiler"] as? JsonArray)?.isEmpty() == true && o.keys.intersect(consequential - "etkiler").isEmpty() }
         if (inert.size == opts.size) add("Sonucu olmayan seçim (tüm seçenekler aynı yere, hiçbirinin etkisi yok)", "$file $path", "${opts.size} seçenek → ${targets.first()}")
         else inert.forEach { o -> add("Etkisiz seçenek (kardeşleri etkili, aynı hedef)", "$file $path", "etiket: ${short(((o["etiket"] as? JsonObject)?.get("tr") as? JsonPrimitive)?.content, 60)}") }
+    }
+
+    // 5b. Kronik vaadi: kronik kesin olmayan bir geleceği anlatıyor gibi ve seçenek hiçbir bayrak koymuyor (QA P2-21; sezgisel).
+    val promise = Regex("hiç unutma|bir daha|o günden sonra|sonsuza|yıllarca|her yıl|ömrü boyunca|hiçbir zaman|never again|from then on|for years|forever")
+    for ((file, path, choice) in scan.choices) {
+        val k = (choice["kronik"] as? JsonObject) ?: continue
+        val tr = (k["tr"] as? JsonPrimitive)?.content.orEmpty(); val en = (k["en"] as? JsonPrimitive)?.content.orEmpty()
+        val sets = choice["etkiler"].toString().contains("\"bayrak\"")
+        if (!sets && (promise.containsMatchIn(tr.lowercase(TR)) || promise.containsMatchIn(en.lowercase()))) add("Kronik vaat ediyor, seçenek bayrak koymuyor (sezgisel)", "$file $path", short(tr, 100))
     }
 
     // 6. Konulup hiç okunmayan bayrak (motor kaynağındaki dizgeler de okuma sayılır)
@@ -218,6 +229,7 @@ fun main(args: Array<String>) {
         "Eksik/boş çeviri", "TR/EN uzunluk oranı aşırı (EN/TR <0.55 ya da >2.0)", "Düz yazılmış NPC adı", "İngilizcede metrik birim",
         "3 cümleyi aşan paragraf", "60 karakteri aşan seçenek", "Birebir aynı metin (TR)", "Neredeyse aynı metin (TR, Jaccard ≥0.6)",
         "Sonucu olmayan seçim (tüm seçenekler aynı yere, hiçbirinin etkisi yok)", "Etkisiz seçenek (kardeşleri etkili, aynı hedef)",
+        "Kronik vaat ediyor, seçenek bayrak koymuyor (sezgisel)", "Dışlayan koşullu kopya (aynı sahnede birebir aynı paragraf; `herhangi` kullan)",
         "Konulup hiç okunmayan bayrak", "Hiç tohumlanmayan yalnız-tohum olayı", "Kilitli seçeneği (gerekli) olmayan olay",
         "Ana NPC olayı ilişki/hafıza etkisi taşımıyor",
     )
