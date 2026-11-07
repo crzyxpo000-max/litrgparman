@@ -1,0 +1,28 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/.claude/hooks/icerik_dogrula.py\"",
+            "timeout": 180,
+            "statusMessage": "İçerik doğrulanıyor…"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/.claude/hooks/ilerleme_hatirlat.py\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}

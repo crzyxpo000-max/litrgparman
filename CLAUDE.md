@@ -38,6 +38,18 @@ scripts/check.sh                   # test + validateContent + simülatör denge 
 
 Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). `local.properties` git dışıdır.
 
+## Araçlar (.claude/)
+
+- **Alt ajanlar** (`.claude/agents/`): `tr-editor` (Türkçe üslup, salt okur), `en-localizer` (Kuzey Amerika İngilizcesi ve
+  GDD.en isimleri, salt okur), `continuity-checker` (bölüm akışı, bayraklar, NPC durumları; salt okur), `balance-analyst`
+  (simülatörü çalıştırıp önceki BALANCE.md ile karşılaştırır). Rapor verirler; düzeltmeyi ana oturum yapar.
+- **Yetenekler** (`.claude/skills/`): `/olay-yaz <bölüm> <konum> [konu]` (şemaya uygun iki dilli olay + doğrulama + iki
+  inceleme), `/oyun-testi [ekran]` (installDebug + adb ekran görüntüleri + inceleme), `/denge [n]` (balance-analyst özeti),
+  `/kalite` (check.sh + hata özeti ve öneriler).
+- **Kancalar** (`.claude/settings.json`, betikler `.claude/hooks/`): `content/` altında bir YAML düzenlenince
+  `:engine:validateContent` çalışır, hata varsa Claude'a bildirilir; oturum dururken kod/içerik değişmiş ama
+  `docs/PROGRESS.md` değişmemişse bir kez hatırlatılır. Kancalar hızlıdır: tam derleme ya da test içermez.
+
 ## Mimari (değişmez kurallar)
 
 - `engine/` saf Kotlin'dir; Android'e **asla** bağımlı olmaz. Tüm oyun mantığı burada.
