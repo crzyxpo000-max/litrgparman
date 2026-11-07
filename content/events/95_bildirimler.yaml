@@ -2,6 +2,7 @@
 # (story/Notifier.kt). Perdeden bağımsızdır; tekrar edebilir. Seyrek gelirler (uygulama en az iki günde bir gösterir).
 olaylar:
   - id: "bildirim_rakip"
+    konum: ["us"]
     yalniz_tohum: true
     tekrar: true
     etiketler: ["aras", "rakip", "siralama"]
@@ -74,6 +75,7 @@ olaylar:
             sonraki: "@akis"
 
   - id: "bildirim_goz"
+    konum: ["us"]
     yalniz_tohum: true
     tekrar: true
     etiketler: ["dikkat", "gozlemci"]
@@ -137,6 +139,7 @@ olaylar:
             sonraki: "@akis"
 
   - id: "bildirim_kapi"
+    konum: ["us"]
     yalniz_tohum: true
     tekrar: true
     etiketler: ["kapi", "tasma"]

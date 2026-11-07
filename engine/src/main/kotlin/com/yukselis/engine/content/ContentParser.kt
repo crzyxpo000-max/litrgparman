@@ -7,7 +7,10 @@ import com.yukselis.engine.combat.CombatSpec
 import com.yukselis.engine.combat.EnemyAttack
 import com.yukselis.engine.combat.EnemyDef
 import com.yukselis.engine.core.MoralAxis
+import com.yukselis.engine.world.ChapterDef
+import com.yukselis.engine.world.ChapterTable
 import com.yukselis.engine.world.ChoiceKind
+import com.yukselis.engine.world.OperationDef
 import com.yukselis.engine.world.DiceCheck
 import com.yukselis.engine.world.EventDef
 import com.yukselis.engine.world.FactionDef
@@ -96,6 +99,7 @@ object ContentParser {
     const val RANKING = "ranking.yaml"
     const val ENDINGS = "endings.yaml"
     const val TOWER = "tower.yaml"
+    const val CHAPTERS = "chapters.yaml"
 
     data class StoryFile(val start: String?, val scenes: List<Scene>)
 
@@ -139,6 +143,7 @@ object ContentParser {
         return Content(
             endings = endingTable,
             tower = obj(TOWER)?.let { (it["kule"] as? JsonObject)?.let(::parseTower) },
+            chapters = obj(CHAPTERS)?.let(::parseChapters) ?: ChapterTable(),
             paths = obj(ESSENCES)?.objectOf("yollar")?.map { (id, v) ->
                 val o = v.jsonObject
                 PathDef(id, ltext(o["ad"], "$id.ad"), ltext(o["aciklama"], "$id.aciklama"), o.strings("ozler"))
@@ -342,6 +347,7 @@ object ContentParser {
                 important = o.bool("onemli"),
                 seedOnly = o.bool("yalniz_tohum"),
                 entry = o.string("sahne") ?: own.firstOrNull()?.id ?: throw ContentFormatException("olay $id: 'sahne' eksik"),
+                location = o.strings("konum"),
             )
         }
         return events to scenes
@@ -361,6 +367,50 @@ object ContentParser {
         condition = o["kosul"]?.let { condition(it.jsonObject) },
         environment = o.string("ortam"),
     )
+
+    /** `chapters.yaml`: `uslar` (perde → üs bölgesi) ve `bolumler` listesi (DECISIONS #130). */
+    private fun parseChapters(o: JsonObject): ChapterTable {
+        val bases = (o["uslar"] as? JsonObject)?.map { (k, v) ->
+            (k.toIntOrNull() ?: throw ContentFormatException("chapters.uslar: '$k' perde numarası olmalı")) to v.str(k)
+        }?.toMap() ?: emptyMap()
+        val list = o.array("bolumler").mapIndexed { i, e ->
+            val c = e.jsonObject
+            val no = c.int("no") ?: throw ContentFormatException("chapters.bolumler[$i]: 'no' eksik")
+            val where = "bolum $no"
+            fun req(k: String) = c.int(k) ?: throw ContentFormatException("$where: '$k' eksik")
+            val ops = c.array("operasyon").map { x ->
+                when (x) {
+                    is JsonPrimitive -> OperationDef(LText.EMPTY, null, listOf(x.content))
+                    else -> x.jsonObject.let { op ->
+                        OperationDef(op["ad"]?.let { ltext(it, "$where.operasyon.ad") } ?: LText.EMPTY, op.string("bolge"), op.strings("olaylar"))
+                    }
+                }
+            }.let { raw ->
+                // Düz liste ("operasyon: [a, b]") tek operasyondur; nesneler ayrı seçeneklerdir.
+                if (raw.all { it.title == LText.EMPTY && it.region == null && it.events.size == 1 } && raw.size > 1) {
+                    listOf(OperationDef(LText.EMPTY, c.string("operasyon_bolge"), raw.flatMap { it.events }))
+                } else raw.map { if (it.region == null && c.string("operasyon_bolge") != null) it.copy(region = c.string("operasyon_bolge")) else it }
+            }
+            ChapterDef(
+                no = no,
+                act = req("perde"),
+                open = req("acilis"),
+                deadline = req("son_tarih"),
+                end = req("bitis"),
+                title = ltext(c["baslik"], "$where.baslik"),
+                goal = ltext(c["hedef"], "$where.hedef"),
+                threat = c["tehdit"]?.let { ltext(it, "$where.tehdit") } ?: LText.EMPTY,
+                brief = c.strings("brifing"),
+                operations = ops,
+                bottleneck = c.strings("darbogaz"),
+                bottleneckDay = c.int("darbogaz_gun"),
+                overflowEffects = c.array("tasma_etkiler").flatMap { effects(it.jsonObject, "$where.tasma_etkiler") },
+                overflowText = c["tasma"]?.let { ltext(it, "$where.tasma") } ?: LText.EMPTY,
+                earlyEntry = (c["erken"] as? JsonPrimitive)?.booleanOrNull ?: true,
+            )
+        }
+        return ChapterTable(list.sortedBy { it.no }, bases)
+    }
 
     private fun parseTower(o: JsonObject): TowerDef {
         val lvl = o["seviye"] as? JsonObject
@@ -656,6 +706,11 @@ object ContentParser {
                 "yozlasma_min" -> listOf(Condition.CorruptionAtLeast(value.int(key)))
                 "gizli_fark_min" -> listOf(Condition.HiddenGapAtLeast(value.int(key)))
                 "bolge" -> listOf(Condition.InRegion(value.str(key)))
+                "bolum" -> value.int(key).let { listOf(Condition.ChapterAtLeast(it), Condition.ChapterAtMost(it)) }
+                "bolum_min" -> listOf(Condition.ChapterAtLeast(value.int(key)))
+                "bolum_max" -> listOf(Condition.ChapterAtMost(value.int(key)))
+                "gorevde" -> listOf(Condition.OnMission(value.jsonPrimitive.booleanOrNull ?: true))
+                "gorev_turu" -> listOf(Condition.OnMission(true, value.str(key)))
                 "perde" -> listOf(Condition.InAct(value.int(key)))
                 "gun_min" -> listOf(Condition.DayAtLeast(value.int(key)))
                 "gun_max" -> listOf(Condition.DayAtMost(value.int(key)))
@@ -728,6 +783,7 @@ object ContentParser {
                         // Koşul ham metin olarak saklanır (kayda girer); vadesinde ayrıştırılır.
                         condition = t["kosul"]?.let { c -> condition(c.jsonObject); c.toString() },
                         npc = t.string("npc"),
+                        reminder = t["hatirlatma"]?.let { ltext(it, "$where.tohum.hatirlatma") },
                     )
                 },
             )

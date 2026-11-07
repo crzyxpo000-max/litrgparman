@@ -33,7 +33,14 @@ data class EventDef(
     /** Yalnızca tohumla ya da eşikle gelir; havuzdan rastgele seçilmez. */
     val seedOnly: Boolean = false,
     val entry: String,
-)
+    /**
+     * Konum (DECISIONS #130): `us` (üste gelir), bölge kimlikleri (yalnız o bölgeye giden görevde) ya da `*` (herhangi bir
+     * keşif görevinde). Boşsa `bolge`'den türetilir, o da yoksa `us`.
+     */
+    val location: List<String> = emptyList(),
+) {
+    val where: List<String> get() = location.ifEmpty { regions.ifEmpty { listOf(ChapterTable.BASE) } }
+}
 
 data class RegionDef(
     val id: String,
@@ -83,8 +90,18 @@ data class RegionState(
     val gates: List<Gate> = emptyList(),
 )
 
-/** Ertelenmiş sonuç: `dueDay` geldiğinde koşul (ham koşul metni) hâlâ doğruysa olay tetiklenir. */
-data class Seed(val eventId: String, val dueDay: Int, val condition: String? = null, val npc: String? = null)
+/**
+ * Ertelenmiş sonuç: `dueDay` geldiğinde koşul (ham koşul metni) hâlâ doğruysa olay tetiklenir.
+ * `origin`: tohumu eken olay; `reminder`: olayın başında bağlantıyı hatırlatan cümle (tohum etkisinin `hatirlatma`sı).
+ */
+data class Seed(
+    val eventId: String,
+    val dueDay: Int,
+    val condition: String? = null,
+    val npc: String? = null,
+    val origin: String? = null,
+    val reminder: LText? = null,
+)
 
 enum class QuestStatus(val key: String) {
     ACTIVE("basla"), DONE("tamam"), FAILED("basarisiz");
@@ -105,6 +122,13 @@ data class DayState(
     val recentTension: List<Int> = emptyList(),
     val recentTags: List<String> = emptyList(),
     val nextGateUid: Int = 1,
+    /**
+     * Zorunlu olay kilidi: bir olay, savaş ya da görev dönüşünden sonra oyuncu bir eylem yapmadan yeni zorunlu olay
+     * gelmez (arka arkaya en çok bir zorunlu olay; STORY_FLOW c/e).
+     */
+    val forcedLock: Boolean = false,
+    /** Süren olayın giriş sahnesinin başında gösterilen hatırlatma (tohumdan doğan olay). */
+    val reminder: LText? = null,
 )
 
 /** Seçeneğin türü: arayüzde önek ("[Gizle]", "[Açığa vur]", "[GÜÇ 40 · Önemsiz]"). */

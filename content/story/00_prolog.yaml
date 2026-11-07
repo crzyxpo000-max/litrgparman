@@ -199,7 +199,7 @@ sahneler:
       - id: "yabanciyi_koru"
         etiket: { tr: "Taş fırlat, fareyi yabancıdan uzaklaştır", en: "Throw a rock and draw the rat away from the stranger" }
         etkiler:
-          - tohum: { olay: "yabanci_minnet", gecikme: { min: 6, max: 12 }, kosul: { bayrak: "yabanci_korundu" } }
+          - tohum: { olay: "yabanci_minnet", gecikme: { min: 6, max: 12 }, kosul: { bayrak: "yabanci_korundu" }, hatirlatma: { tr: "İlk gün fareden kurtardığın yabancıyı hatırlıyor musun?", en: "Remember the stranger you saved from that rat on the first day?" } }
           - bayrak: "yabanci_korundu"
           - xp: 60
           - ahlak: { merhamet: 10 }
@@ -208,7 +208,7 @@ sahneler:
       - id: "kac"
         etiket: { tr: "Yabancıyı bırak, kaç", en: "Leave the stranger and run" }
         etkiler:
-          - tohum: { olay: "yabanci_geri_donus", gecikme: { min: 12, max: 20 }, kosul: { bayrak: "yabanci_birakildi" } }
+          - tohum: { olay: "yabanci_geri_donus", gecikme: { min: 12, max: 20 }, kosul: { bayrak: "yabanci_birakildi" }, hatirlatma: { tr: "İlk gün ağacın dibinde bıraktığın yabancıyı hatırlıyor musun?", en: "Remember the stranger you left at the foot of that tree on the first day?" } }
           - bayrak: "yabanci_birakildi"
           - ahlak: { merhamet: -10 }
           - egilim: { gizlilik: 1 }
@@ -250,7 +250,7 @@ sahneler:
         etkiler:
           - bayrak: "ilk_oldurme"
           - bayrak: "yabanci_korundu"
-          - tohum: { olay: "yabanci_minnet", gecikme: { min: 6, max: 12 }, kosul: { bayrak: "yabanci_korundu" } }
+          - tohum: { olay: "yabanci_minnet", gecikme: { min: 6, max: 12 }, kosul: { bayrak: "yabanci_korundu" }, hatirlatma: { tr: "İlk gün fareden kurtardığın yabancıyı hatırlıyor musun?", en: "Remember the stranger you saved from that rat on the first day?" } }
           - unvan: "ogreticinin_ilk_kani"
           - ahlak: { merhamet: 3 }
         sonraki: "ilk_gece"

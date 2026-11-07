@@ -534,6 +534,36 @@ object ContentValidator {
         }
         (content.scenes.keys - reachable).sorted().forEach { problems += "sahne $it: başlangıçtan ulaşılamıyor" }
 
+        // Bölüm yapısı (DECISIONS #130): bölümler, olay başvuruları, konumlar, üsler.
+        val table = content.chapters
+        if (!table.isEmpty) {
+            val validPlaces = content.regions.keys + com.yukselis.engine.world.ChapterTable.BASE + com.yukselis.engine.world.ChapterTable.ANYWHERE
+            table.bases.values.filter { it !in content.regions }.forEach { problems += "chapters.uslar: tanımsız bölge '$it'" }
+            var prevEnd = -1
+            table.chapters.forEach { ch ->
+                val where = "bolum ${ch.no}"
+                checkText(ch.title, "$where.baslik"); checkText(ch.goal, "$where.hedef")
+                if (ch.threat != LText.EMPTY) checkText(ch.threat, "$where.tehdit")
+                if (ch.overflowText != LText.EMPTY) checkText(ch.overflowText, "$where.tasma")
+                if (!(ch.open <= ch.deadline && ch.deadline <= ch.end)) problems += "$where: acilis ≤ son_tarih ≤ bitis olmalı"
+                if (ch.open != prevEnd + 1) problems += "$where: açılış (${ch.open}) önceki bölümün bitişinin (${prevEnd}) ertesi günü olmalı"
+                prevEnd = ch.end
+                if (ch.operations.isEmpty()) problems += "$where: operasyon yok"
+                ch.operations.forEach { op ->
+                    if (op.title != LText.EMPTY) checkText(op.title, "$where.operasyon.ad")
+                    op.region?.let { if (it !in content.regions) problems += "$where: operasyon bölgesi '$it' tanımsız" }
+                }
+                ch.operationEvents.forEach { if (it !in content.events) problems += "$where: tanımsız operasyon olayı '$it'" }
+                ch.overflowEffects.forEach { checkEffect(it, "$where.tasma_etkiler") }
+            }
+            content.events.values.forEach { ev ->
+                ev.location.filter { it !in validPlaces }.forEach { problems += "olay ${ev.id}: konum '$it' tanımsız (bölge, us ya da *)" }
+                if (ev.regions.isNotEmpty() && ev.location.isNotEmpty() && ev.location.none { it in ev.regions || it == com.yukselis.engine.world.ChapterTable.ANYWHERE }) {
+                    problems += "olay ${ev.id}: konum ${ev.location} bolge ${ev.regions} ile çelişiyor"
+                }
+            }
+        }
+
         return problems
     }
 }
@@ -545,7 +575,10 @@ data class FlagUsage(val read: Set<String>, val written: Set<String>)
 fun isEngineFlag(flag: String): Boolean =
     ENGINE_FLAG_PREFIXES.any { flag.startsWith(it) } || flag in ENGINE_FLAGS || flag in ENGINE_FLAGS_EXTRA
 
-private val ENGINE_FLAG_PREFIXES = listOf("yenildi_", "uyanis_", "olay_", "dikkat_esik_", "yozlasma_esik_", "_red_", "_zar_", "_sira_")
+/** Bu kadar ve daha uzun gecikmeli tohumun olayı bir hatırlatma cümlesiyle başlamalı (DECISIONS #130). */
+const val REMINDER_MIN_DELAY = 3
+
+private val ENGINE_FLAG_PREFIXES = listOf("yenildi_", "uyanis_", "olay_", "dikkat_esik_", "yozlasma_esik_", "_red_", "_zar_", "_sira_", "bolum_")
 private val ENGINE_FLAGS_EXTRA = setOf(com.yukselis.engine.npc.NpcEngine.FLAG_MOURNED)
 private val ENGINE_FLAGS = setOf(com.yukselis.engine.world.WorldEngine.DAILY_WIDE_FLAG)
 
@@ -606,10 +639,22 @@ fun contentWarnings(content: Content): List<String> {
     val seeded = content.scenes.values.flatMap { s -> s.choices.flatMap { c -> c.effects + (c.check?.failEffects ?: emptyList()) } }
         .plus(content.awakenings.flatMap { it.effects })
         .filterIsInstance<Effect.PlantSeed>().map { it.eventId }.toSet()
-    content.events.values.filter { it.seedOnly && it.id !in seeded && !it.id.startsWith("dikkat_") && !it.id.startsWith("esik_") && !it.id.startsWith("yozlasma_") && !it.id.startsWith("bildirim_") && content.tower?.storyFloors?.containsValue(it.id) != true }.forEach {
+    content.events.values.filter { it.seedOnly && it.id !in seeded && !it.id.startsWith("dikkat_") && !it.id.startsWith("esik_") && !it.id.startsWith("yozlasma_") && !it.id.startsWith("bildirim_") && content.tower?.storyFloors?.containsValue(it.id) != true &&
+            it.id !in content.chapters.managed && !it.id.startsWith(com.yukselis.engine.world.ChapterTable.ARRIVAL_PREFIX) }.forEach {
         warnings += "olay ${it.id}: yalnızca tohumla gelir ama hiçbir yerde tohumlanmıyor (ulaşılamaz)"
     }
     content.events.values.filter { it.repeatable.not() && it.dayMax < it.dayMin }.forEach { warnings += "olay ${it.id}: gün aralığı boş" }
+    // Bölüm yapısı: konumu yazılmamış olay ve hatırlatması olmayan tohum (genel cümleye düşer).
+    if (!content.chapters.isEmpty) {
+        content.events.values.filter { it.location.isEmpty() }.forEach { warnings += "olay ${it.id}: konum yazılmamış (bolge'den ya da us)" }
+        val plants = content.scenes.values.flatMap { s -> s.choices.flatMap { c -> c.effects + (c.check?.failEffects ?: emptyList()) } }
+            .filterIsInstance<Effect.PlantSeed>()
+        content.chapters.chapters.forEach { ch ->
+            (ch.brief + ch.bottleneck).filter { it !in content.events }.forEach { warnings += "bolum ${ch.no}: '$it' henüz yazılmadı" }
+        }
+        val missing = plants.filter { it.reminder == null && it.maxDelay >= REMINDER_MIN_DELAY }
+        if (missing.isNotEmpty()) warnings += "tohum: ${missing.size} tohum etkisinde hatirlatma yok (gecikme ≥ $REMINDER_MIN_DELAY; genel cümle kullanılır)"
+    }
     // Hatıra metni: İlişkiler ekranında görünmesi için NPC dosyasında ya da system.yaml'da (`hafiza_<id>`) metni olmalı.
     val memoryEffects = content.scenes.values.flatMap { sc -> sc.choices.flatMap { c -> c.effects + (c.check?.failEffects ?: emptyList()) } }
         .filterIsInstance<Effect.AddMemory>()

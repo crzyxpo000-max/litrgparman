@@ -10,6 +10,7 @@
 olaylar:
   # ================================================================== KAT 10 — VAPUR (E · Sistem sırrı: Kule bir kayıttır)
   - id: "kule_kat_10"
+    konum: ["kule_dibi"]
     agirlik: 1
     etiketler: ["kule", "hikaye_kati", "sistem_sirri"]
     gerilim: 3
@@ -252,7 +253,7 @@ olaylar:
           - id: "asagi"
             etiket: { tr: "Aşağı in, {yer:kule_dibi} seni bekliyor", en: "Head back down. {yer:kule_dibi} is waiting" }
             etkiler:
-              - tohum: { olay: "kule_dibi_tirmanicilar", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kule_dibi_tirmanicilar", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Onuncu kattaki akşam vapurundan beri {yer:kule_dibi} sana başka bakıyor.", en: "Since the evening ferry on the tenth floor, {yer:kule_dibi} has looked at you differently." } }
             sonraki: "@akis"
           - id: "yanki_konus"
             etiket: { tr: "{npc:yanki|e} söz ver: o gölgeyi birlikte okuyacaksınız", en: "Promise {npc:yanki} you'll read that shadow together" }
@@ -260,7 +261,7 @@ olaylar:
             etkiler:
               - iliski: { yanki: { guven: 5, baglilik: 4 } }
               - hafiza: { npc: "yanki", id: "olay:kule_kat_10", agirlik: 25 }
-              - tohum: { olay: "kule_dibi_tirmanicilar", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kule_dibi_tirmanicilar", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Onuncu kattaki akşam vapurundan beri {yer:kule_dibi} sana başka bakıyor.", en: "Since the evening ferry on the tenth floor, {yer:kule_dibi} has looked at you differently." } }
             sonraki: "@akis"
           - id: "deniz_konus"
             etiket: { tr: "{npc:deniz_arman|e} gölgesini sor: iyi misin?", en: "Ask {npc:deniz_arman} about the shadow: you okay?" }
@@ -268,7 +269,7 @@ olaylar:
             etkiler:
               - iliski: { deniz_arman: { guven: 5, saygi: 3 } }
               - ahlak: { insanlik: 2 }
-              - tohum: { olay: "kule_dibi_tirmanicilar", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kule_dibi_tirmanicilar", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Onuncu kattaki akşam vapurundan beri {yer:kule_dibi} sana başka bakıyor.", en: "Since the evening ferry on the tenth floor, {yer:kule_dibi} has looked at you differently." } }
             sonraki: "k10_deniz"
 
       - id: "k10_deniz"
@@ -319,6 +320,7 @@ olaylar:
 
   # ================================================================== KAT 20 — FENER (E → D · yeni tavan: Derin)
   - id: "kule_kat_20"
+    konum: ["kule_dibi"]
     agirlik: 1
     etiketler: ["kule", "hikaye_kati", "yeni_tavan"]
     gerilim: 3
@@ -562,13 +564,13 @@ olaylar:
             etkiler:
               - iliski: { aras_kurt: { saygi: 6, guven: -2 } }
               - ahlak: { duzen: -1 }
-              - tohum: { olay: "aras_kule_dovusu", gecikme: { min: 2, max: 5 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_kule_dovusu", gecikme: { min: 2, max: 5 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Yirminci kattaki fenerin tebeşir satırları {npc:aras_kurt|in} gözünden kaçmamış.", en: "The chalk lines at the twentieth-floor lighthouse didn't get past {npc:aras_kurt}." } }
             sonraki: "@akis"
           - id: "in"
             etiket: { tr: "Fenerden in, kayalığa yüz", en: "Climb down and swim back to the rocks" }
             etkiler:
               - ahlak: { insanlik: 1 }
-              - tohum: { olay: "aras_kule_dovusu", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_kule_dovusu", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Yirminci kattaki fenerin tebeşir satırları {npc:aras_kurt|in} gözünden kaçmamış.", en: "The chalk lines at the twentieth-floor lighthouse didn't get past {npc:aras_kurt}." } }
             sonraki: "@akis"
           - id: "yanki"
             etiket: { tr: "{npc:yanki|e} sor: okunmak acıttı mı?", en: "Ask {npc:yanki}: did getting read hurt?" }
@@ -588,7 +590,7 @@ olaylar:
             etkiler:
               - iliski: { yanki: { saygi: 3 } }
               - ahlak: { duzen: -1 }
-              - tohum: { olay: "aras_kule_dovusu", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_kule_dovusu", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Yirminci kattaki fenerin tebeşir satırları {npc:aras_kurt|in} gözünden kaçmamış.", en: "The chalk lines at the twentieth-floor lighthouse didn't get past {npc:aras_kurt}." } }
             sonraki: "@akis"
 
       - id: "k20_yenilgi"
@@ -618,6 +620,7 @@ olaylar:
 
   # ================================================================== KAT 30 — AYNA SALONU (D · Sistem sırrı: senin el yazın)
   - id: "kule_kat_30"
+    konum: ["kule_dibi"]
     agirlik: 1
     etiketler: ["kule", "hikaye_kati", "sistem_sirri", "yeni_tavan"]
     gerilim: 3
@@ -822,14 +825,14 @@ olaylar:
           - id: "in"
             etiket: { tr: "Bir süre orada dur, sonra in", en: "Stand there a while. Then go down" }
             etkiler:
-              - tohum: { olay: "kule_cam_mektup", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kule_cam_mektup", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Otuzuncu kattaki ayna salonu hâlâ aklında.", en: "You still think about that mirror hall on the thirtieth floor." } }
             sonraki: "@akis"
           - id: "deniz"
             etiket: { tr: "{npc:deniz_arman|e} gördüğünü anlat", en: "Tell {npc:deniz_arman} what you saw" }
             goster: { yoldas: "deniz_arman" }
             etkiler:
               - iliski: { deniz_arman: { guven: 5, baglilik: 4 } }
-              - tohum: { olay: "kule_cam_mektup", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kule_cam_mektup", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Otuzuncu kattaki ayna salonu hâlâ aklında.", en: "You still think about that mirror hall on the thirtieth floor." } }
             sonraki: "k30_deniz"
 
       - id: "k30_deniz"
@@ -853,7 +856,7 @@ olaylar:
           - id: "in"
             etiket: { tr: "İn", en: "Go down" }
             etkiler:
-              - tohum: { olay: "kule_cam_mektup", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kule_cam_mektup", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Otuzuncu kattaki ayna salonu hâlâ aklında.", en: "You still think about that mirror hall on the thirtieth floor." } }
             sonraki: "@akis"
           - id: "yanki"
             etiket: { tr: "{npc:yanki|e} söyle: \"Sana kızmıyorum.\"", en: "Tell {npc:yanki}: \"I'm not mad at you.\"" }
@@ -861,7 +864,7 @@ olaylar:
             etkiler:
               - iliski: { yanki: { guven: 7, baglilik: 3 } }
               - hafiza: { npc: "yanki", id: "olay:kule_kat_30", agirlik: 35 }
-              - tohum: { olay: "kule_cam_mektup", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kule_cam_mektup", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Otuzuncu kattaki ayna salonu hâlâ aklında.", en: "You still think about that mirror hall on the thirtieth floor." } }
             sonraki: "@akis"
 
       - id: "k30_yenilgi"
@@ -891,6 +894,7 @@ olaylar:
 
   # ================================================================== KAT 40 — DURMUŞ SAAT (D → C · yeni tavan + Sistem sırrı: Gün 0)
   - id: "kule_kat_40"
+    konum: ["kule_dibi"]
     agirlik: 1
     etiketler: ["kule", "hikaye_kati", "sistem_sirri", "yeni_tavan"]
     gerilim: 4
@@ -1145,7 +1149,7 @@ olaylar:
             etiket: { tr: "Aşağı in; bu iş sonraya kalsın", en: "Go down. That's a problem for later" }
             etkiler:
               - ahlak: { duzen: 1 }
-              - tohum: { olay: "yanki_kaynak_izi", gecikme: { min: 2, max: 4 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_kaynak_izi", gecikme: { min: 2, max: 4 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "Kırkıncı kattaki durmuş saatin döngüsü sende bir dikiş yeri bırakmış.", en: "The loop of that stopped clock on the fortieth floor left a seam in you." } }
             sonraki: "@akis"
           - id: "yanki"
             etiket: { tr: "{npc:yanki|e} bir dakika değil, ne kadar gerekiyorsa ver", en: "Give {npc:yanki} as long as it needs, not a minute" }
@@ -1153,7 +1157,7 @@ olaylar:
             etkiler:
               - iliski: { yanki: { guven: 6, baglilik: 5 } }
               - hafiza: { npc: "yanki", id: "olay:kule_kat_40", agirlik: 40 }
-              - tohum: { olay: "yanki_kaynak_izi", gecikme: { min: 1, max: 3 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_kaynak_izi", gecikme: { min: 1, max: 3 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "Kırkıncı kattaki durmuş saatin döngüsü sende bir dikiş yeri bırakmış.", en: "The loop of that stopped clock on the fortieth floor left a seam in you." } }
             sonraki: "k40_yanki"
           - id: "mert"
             etiket: { tr: "{npc:mert_kilic|e} döngü sayacını sor", en: "Ask {npc:mert_kilic} about the loop counter" }
@@ -1161,7 +1165,7 @@ olaylar:
             etkiler:
               - iliski: { mert_kilic: { guven: 5, saygi: 5 } }
               - itibar: { sessiz_ag: 4 }
-              - tohum: { olay: "yanki_kaynak_izi", gecikme: { min: 2, max: 4 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_kaynak_izi", gecikme: { min: 2, max: 4 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "Kırkıncı kattaki durmuş saatin döngüsü sende bir dikiş yeri bırakmış.", en: "The loop of that stopped clock on the fortieth floor left a seam in you." } }
             sonraki: "k40_mert"
 
       - id: "k40_yanki"
@@ -1218,6 +1222,7 @@ olaylar:
   # ================================================================== KAT 50 — EŞİK (C · Sistem sırrı: hasat edilmiş dünyalar; çok-evren geçidi)
   # Parti I'nin cok_evren_kapisi (AY 200) ile uyumlu: geçit burada "görülür", mührüne dokunulur; açılış ana yaydadır.
   - id: "kule_kat_50"
+    konum: ["kule_dibi"]
     agirlik: 1
     etiketler: ["kule", "hikaye_kati", "sistem_sirri", "cok_evren"]
     gerilim: 4
@@ -1437,7 +1442,7 @@ olaylar:
             etiket: { tr: "Kapıya son kez bak, aşağı in", en: "Look at the door one last time. Go down" }
             etkiler:
               - ahlak: { duzen: 1 }
-              - tohum: { olay: "kule_kopyalar", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "kule_kopyalar", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Ellinci kattaki eşikten döndüğünden beri merdivenler sessiz değil.", en: "The stairs haven't been quiet since you came back from the threshold on the fiftieth floor." } }
             kronik: { tr: "Kapının ardından geçen B kademesindeki varlığa son bir kez baktın ve aşağı indin; tavan yine yükselmişti.", en: "You took one last look at the Grade B thing passing beyond the door and went back down. The ceiling had risen again." }
             sonraki: "@akis"
           - id: "yanki"
@@ -1447,7 +1452,7 @@ olaylar:
               - iliski: { yanki: { guven: 8, baglilik: 6 } }
               - hafiza: { npc: "yanki", id: "olay:kule_kat_50", agirlik: 45 }
               - ahlak: { insanlik: -2, duzen: -1 }
-              - tohum: { olay: "kule_kopyalar", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "kule_kopyalar", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Ellinci kattaki eşikten döndüğünden beri merdivenler sessiz değil.", en: "The stairs haven't been quiet since you came back from the threshold on the fiftieth floor." } }
             kronik: { tr: "Kafandaki ses bir zamanlar bir eşiği olup olmadığını sorduğunda ona \"Senin eşiğin benim\" dedin.", en: "When the voice in your head wondered if it had ever had a threshold, you told it: \"I'm your threshold.\"" }
             sonraki: "@akis"
           - id: "aras"
@@ -1456,7 +1461,7 @@ olaylar:
             etkiler:
               - iliski: { aras_kurt: { saygi: 6, guven: 4 } }
               - ahlak: { duzen: -2 }
-              - tohum: { olay: "kule_kopyalar", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "kule_kopyalar", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Ellinci kattaki eşikten döndüğünden beri merdivenler sessiz değil.", en: "The stairs haven't been quiet since you came back from the threshold on the fiftieth floor." } }
             kronik: { tr: "Eşiğin önünde rakibine kapıyı gösterdin: asıl yarış şimdi başlıyordu.", en: "At the Threshold you pointed your rival at the door and declared the real race had only just begun." }
             sonraki: "@akis"
 
@@ -1491,6 +1496,7 @@ olaylar:
 
   # ================================================================== KAT 60 — YANIK ARŞİV (C → B · Sistem sırrı: her kaydın son satırı)
   - id: "kule_kat_60"
+    konum: ["kule_dibi"]
     agirlik: 1
     etiketler: ["kule", "hikaye_kati", "sistem_sirri", "yeni_tavan"]
     gerilim: 4
@@ -1729,7 +1735,7 @@ olaylar:
           - id: "in"
             etiket: { tr: "Aşağı in", en: "Go down" }
             etkiler:
-              - tohum: { olay: "kule_kopyalar", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kule_kopyalar", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Altmışıncı kattaki yanık arşivden çıktığından beri merdivenler sessiz değil.", en: "The stairs haven't been quiet since you came out of the burned archive on the sixtieth floor." } }
             sonraki: "@akis"
           - id: "mert"
             etiket: { tr: "Sayfaları {npc:mert_kilic|e} emanet et", en: "Trust the pages to {npc:mert_kilic}" }
@@ -1737,7 +1743,7 @@ olaylar:
             etkiler:
               - iliski: { mert_kilic: { guven: 7, saygi: 4 } }
               - itibar: { sessiz_ag: 4 }
-              - tohum: { olay: "kule_kopyalar", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kule_kopyalar", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Altmışıncı kattaki yanık arşivden çıktığından beri merdivenler sessiz değil.", en: "The stairs haven't been quiet since you came out of the burned archive on the sixtieth floor." } }
             sonraki: "@akis"
           - id: "elif"
             etiket: { tr: "{npc:elif_sari|e} dosyaların aslında ne olduğunu anlat", en: "Tell {npc:elif_sari} what the files really are" }
@@ -1745,7 +1751,7 @@ olaylar:
             etkiler:
               - iliski: { elif_sari: { guven: 6, baglilik: 4 } }
               - ahlak: { merhamet: 1 }
-              - tohum: { olay: "kule_kopyalar", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kule_kopyalar", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Altmışıncı kattaki yanık arşivden çıktığından beri merdivenler sessiz değil.", en: "The stairs haven't been quiet since you came out of the burned archive on the sixtieth floor." } }
             sonraki: "@akis"
 
       - id: "k60_yenilgi"
@@ -1774,6 +1780,7 @@ olaylar:
 
   # ================================================================== KAT 70 — TOHUMLUK (B · Sistem sırrı: hasat yok etmez, saklar)
   - id: "kule_kat_70"
+    konum: ["kule_dibi"]
     agirlik: 1
     etiketler: ["kule", "hikaye_kati", "sistem_sirri", "yeni_tavan"]
     gerilim: 4
@@ -1997,22 +2004,22 @@ olaylar:
           - id: "in"
             etiket: { tr: "Aşağı in", en: "Go down" }
             etkiler:
-              - tohum: { olay: "kule_kopyalar", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kule_kopyalar", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Yetmişinci kattaki tohumluktan döndüğünden beri merdivenler sessiz değil.", en: "The stairs haven't been quiet since you came back from the seed vault on the seventieth floor." } }
             sonraki: "@akis"
           - id: "deniz"
-            etiket: { tr: "{npc:deniz_arman|e} söz ver: kardeşini burada aramayacaksınız", en: "Promise {npc:deniz_arman} you'll never look for their sister here" }
+            etiket: { tr: "{npc:deniz_arman|e} söz ver: kardeşini burada aramayacağınız", en: "Promise {npc:deniz_arman} you'll never look for their sister here" }
             goster: { yoldas: "deniz_arman" }
             etkiler:
               - iliski: { deniz_arman: { guven: 6, baglilik: 6 } }
               - ahlak: { merhamet: 2 }
-              - tohum: { olay: "kule_kopyalar", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kule_kopyalar", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Yetmişinci kattaki tohumluktan döndüğünden beri merdivenler sessiz değil.", en: "The stairs haven't been quiet since you came back from the seed vault on the seventieth floor." } }
             sonraki: "@akis"
           - id: "elif"
             etiket: { tr: "{npc:elif_sari|e} sor: \"Onları uyandırabilir miyiz?\"", en: "Ask {npc:elif_sari}: \"Could we wake them?\"" }
             goster: { yoldas: "elif_sari" }
             etkiler:
               - iliski: { elif_sari: { guven: 5, saygi: 5 } }
-              - tohum: { olay: "kule_kopyalar", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kule_kopyalar", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Yetmişinci kattaki tohumluktan döndüğünden beri merdivenler sessiz değil.", en: "The stairs haven't been quiet since you came back from the seed vault on the seventieth floor." } }
             sonraki: "k70_elif"
 
       - id: "k70_elif"
@@ -2055,6 +2062,7 @@ olaylar:
 
   # ================================================================== KAT 80 — TERS GÖK (A · Sistem sırrı: kabul edilenler hasatçı olur)
   - id: "kule_kat_80"
+    konum: ["kule_dibi"]
     agirlik: 1
     etiketler: ["kule", "hikaye_kati", "sistem_sirri", "yeni_tavan", "kadimler"]
     gerilim: 4
@@ -2233,7 +2241,7 @@ olaylar:
           - id: "in"
             etiket: { tr: "Aşağı in", en: "Go down" }
             etkiler:
-              - tohum: { olay: "kule_gokten_inen", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kule_gokten_inen", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Sekseninci kattaki ters gökyüzünün altında gördüklerin bir cevap bekliyor.", en: "What you saw under that upside-down sky on the eightieth floor is still waiting on an answer." } }
             sonraki: "@akis"
           - id: "thessar"
             etiket: { tr: "Bunu {npc:thessar|e} soracağına yemin et", en: "Swear you'll ask {npc:thessar} about this" }
@@ -2241,7 +2249,7 @@ olaylar:
             etkiler:
               - iliski: { thessar: { saygi: 6, korku: 3 } }
               - bayrak: "kule_thessar_sorusu"
-              - tohum: { olay: "kule_gokten_inen", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kule_gokten_inen", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Sekseninci kattaki ters gökyüzünün altında gördüklerin bir cevap bekliyor.", en: "What you saw under that upside-down sky on the eightieth floor is still waiting on an answer." } }
             sonraki: "@akis"
           - id: "yanki"
             etiket: { tr: "{npc:yanki|e} söyle: \"Sen sınavı geçmeyeceksin. Biz geçeceğiz.\"", en: "Tell {npc:yanki}: \"You won't pass that exam. We will.\"" }
@@ -2249,7 +2257,7 @@ olaylar:
             etkiler:
               - iliski: { yanki: { guven: 6, saygi: 5 } }
               - hafiza: { npc: "yanki", id: "olay:kule_kat_80", agirlik: 35 }
-              - tohum: { olay: "kule_gokten_inen", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kule_gokten_inen", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Sekseninci kattaki ters gökyüzünün altında gördüklerin bir cevap bekliyor.", en: "What you saw under that upside-down sky on the eightieth floor is still waiting on an answer." } }
             sonraki: "@akis"
 
       - id: "k80_yenilgi"
@@ -2280,6 +2288,7 @@ olaylar:
   # ================================================================== KAT 90 — TASLAK (A → S · Sistem sırrı: önceki taşıyıcı)
   # Yankı'nın son sırrını (Parti F, yanki_son_sir) söylemez; yalnızca kapısını aralar.
   - id: "kule_kat_90"
+    konum: ["kule_dibi"]
     agirlik: 1
     etiketler: ["kule", "hikaye_kati", "sistem_sirri", "yeni_tavan", "yanki"]
     gerilim: 4
@@ -2515,7 +2524,7 @@ olaylar:
             etiket: { tr: "Sandalyeye oturmadan aşağı in", en: "Go down without sitting in the chair" }
             etkiler:
               - ahlak: { duzen: 1 }
-              - tohum: { olay: "kule_gokten_inen", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "kule_gokten_inen", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Doksanıncı kattaki taslaktan sonra gökyüzü sana daha yakın görünüyor.", en: "Since the draft on the ninetieth floor, the sky looks closer than it used to." } }
             sonraki: "@akis"
           - id: "yanki"
             etiket: { tr: "{npc:yanki|e} söyle: \"Kelimeleri bulduğunda buradayım.\"", en: "Tell {npc:yanki}: \"When you find the words, I'll be here.\"" }
@@ -2530,7 +2539,7 @@ olaylar:
             etkiler:
               - iliski: { deniz_arman: { guven: 8, baglilik: 6 } }
               - hafiza: { npc: "deniz_arman", id: "olay:kule_kat_90", agirlik: 40 }
-              - tohum: { olay: "kule_gokten_inen", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "kule_gokten_inen", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Doksanıncı kattaki taslaktan sonra gökyüzü sana daha yakın görünüyor.", en: "Since the draft on the ninetieth floor, the sky looks closer than it used to." } }
             sonraki: "@akis"
 
       - id: "k90_yenilgi"
@@ -2560,6 +2569,7 @@ olaylar:
   # ================================================================== KAT 100 — ZİRVE (S · Döngü'nün en büyük ipucu: zirve başlangıçtır)
   # Döngü sonu: degisken_min {kule_kat: 100}. Yankı'nın son sırrı Parti F'nin yanki_son_sir olayıdır (buradan tohumlanır).
   - id: "kule_kat_100"
+    konum: ["kule_dibi"]
     agirlik: 1
     etiketler: ["kule", "hikaye_kati", "sistem_sirri", "dongu"]
     gerilim: 4
@@ -2855,6 +2865,7 @@ olaylar:
   # ================================================================== TAKİP OLAYLARI (yalnızca tohumla; Kule'nin aşağıya sızan sonuçları)
   # ------------------------------------------------------------------ Kule Dibi'nin tırmanıcıları (kat 10'dan)
   - id: "kule_dibi_tirmanicilar"
+    konum: ["kule_dibi"]
     agirlik: 1
     etiketler: ["kule", "hakimiyet", "kule_dibi"]
     gerilim: 2
@@ -3002,7 +3013,7 @@ olaylar:
             goster: { npc_hayatta: "aras_kurt", bayrak_yok: "aras_cok_evren_yoldasi" }
             etkiler:
               - iliski: { aras_kurt: { saygi: 5, guven: -2 } }
-              - tohum: { olay: "aras_kule_dovusu", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_kule_dovusu", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Onuncu katın söylentisi yayıldığından beri Kule'ye her bakışında biri sana bakıyor gibi.", en: "Since the rumor about the tenth floor got around, every time you look at the Spire it feels like someone's looking back." } }
             sonraki: "@akis"
           - id: "deniz"
             etiket: { tr: "{npc:deniz_arman} ile gölgede otur", en: "Sit in the shade with {npc:deniz_arman}" }
@@ -3010,17 +3021,18 @@ olaylar:
             etkiler:
               - iliski: { deniz_arman: { guven: 4, baglilik: 3 } }
               - ahlak: { insanlik: 2 }
-              - tohum: { olay: "aras_kule_dovusu", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_kule_dovusu", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Onuncu katın söylentisi yayıldığından beri Kule'ye her bakışında biri sana bakıyor gibi.", en: "Since the rumor about the tenth floor got around, every time you look at the Spire it feels like someone's looking back." } }
             sonraki: "@akis"
           - id: "git"
             etiket: { tr: "Kule'ye son bir kez bak ve git", en: "Take one last look at the Spire and go" }
             etkiler:
               - ahlak: { duzen: 1 }
-              - tohum: { olay: "aras_kule_dovusu", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_kule_dovusu", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Onuncu katın söylentisi yayıldığından beri Kule'ye her bakışında biri sana bakıyor gibi.", en: "Since the rumor about the tenth floor got around, every time you look at the Spire it feels like someone's looking back." } }
             sonraki: "@akis"
 
   # ------------------------------------------------------------------ Cam mektup (kat 30'dan)
   - id: "kule_cam_mektup"
+    konum: ["us"]
     agirlik: 1
     etiketler: ["kule", "yanki", "gizem"]
     gerilim: 2
@@ -3079,7 +3091,7 @@ olaylar:
             etkiler:
               - iliski: { yanki: { baglilik: 5 } }
               - hafiza: { npc: "yanki", id: "olay:kule_cam_mektup", agirlik: 35 }
-              - tohum: { olay: "yanki_kaynak_izi", gecikme: { min: 2, max: 5 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_kaynak_izi", gecikme: { min: 2, max: 5 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "Camdaki el yazısının sözünü ettiği yanmış şeyin izi seni Kule'ye çekiyor.", en: "The burned thing that handwriting on the glass talked about is pulling you back to the Spire." } }
             sonraki: "@akis"
 
       - id: "kcam_cevap"
@@ -3091,7 +3103,7 @@ olaylar:
             etiket: { tr: "Pencereyi aç; sabah havası içeri dolsun", en: "Open the window. Let the morning in" }
             etkiler:
               - ahlak: { insanlik: 1 }
-              - tohum: { olay: "yanki_kaynak_izi", gecikme: { min: 2, max: 5 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_kaynak_izi", gecikme: { min: 2, max: 5 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "Camdaki el yazısının sözünü ettiği yanmış şeyin izi seni Kule'ye çekiyor.", en: "The burned thing that handwriting on the glass talked about is pulling you back to the Spire." } }
             sonraki: "@akis"
 
       - id: "kcam_mert"
@@ -3104,7 +3116,7 @@ olaylar:
             etkiler:
               - iliski: { mert_kilic: { baglilik: 4 } }
               - ahlak: { duzen: 1 }
-              - tohum: { olay: "yanki_kaynak_izi", gecikme: { min: 2, max: 5 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_kaynak_izi", gecikme: { min: 2, max: 5 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "Camdaki el yazısının sözünü ettiği yanmış şeyin izi seni Kule'ye çekiyor.", en: "The burned thing that handwriting on the glass talked about is pulling you back to the Spire." } }
             sonraki: "@akis"
 
       - id: "kcam_sil"
@@ -3118,11 +3130,12 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: -1 }
               - iliski: { yanki: { guven: -3 } }
-              - tohum: { olay: "yanki_kaynak_izi", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_kaynak_izi", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "Camdaki el yazısının sözünü ettiği yanmış şeyin izi seni Kule'ye çekiyor.", en: "The burned thing that handwriting on the glass talked about is pulling you back to the Spire." } }
             sonraki: "@akis"
 
   # ------------------------------------------------------------------ Kopyalar (kat 50–70'ten): Kule'nin kaydı inceliyor
   - id: "kule_kopyalar"
+    konum: ["kule_dibi"]
     agirlik: 1
     etiketler: ["kule", "kule_dibi", "ahlak", "kiyikent"]
     gerilim: 3
@@ -3240,7 +3253,7 @@ olaylar:
             etiket: { tr: "Bu gece tırmanma; yarın tırman", en: "Don't climb tonight. Climb tomorrow" }
             etkiler:
               - ahlak: { insanlik: 2 }
-              - tohum: { olay: "kule_cam_mektup", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kule_cam_mektup", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Merdivenden inen gri yüzsüzlerden beri geceleri tam uyuyamıyorsun.", en: "You haven't really slept through the night since those gray, faceless things came down the stairs." } }
             kronik: { tr: "Kule'nin bir hafıza olduğunu anladığın gece tırmanmadın; tırmanışı ertesi güne bıraktın.", en: "The night you understood the Spire was a memory, you didn't climb. You left the climb for the next day." }
             sonraki: "@akis"
           - id: "nobet"
@@ -3248,12 +3261,13 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 3 }
               - itibar: { siginak: 3, lonca: 3 }
-              - tohum: { olay: "kule_cam_mektup", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kule_cam_mektup", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Merdivenden inen gri yüzsüzlerden beri geceleri tam uyuyamıyorsun.", en: "You haven't really slept through the night since those gray, faceless things came down the stairs." } }
             kronik: { tr: "Kule'nin merdivenine nöbet koydun; yukarıdan inecek her şeyi önce bir insan karşılasın istedin.", en: "You set a watch on the Spire's stairs so that anything coming down would meet a human first." }
             sonraki: "@akis"
 
   # ------------------------------------------------------------------ Gökten inen gözcü (kat 80–90'dan)
   - id: "kule_gokten_inen"
+    konum: ["kule_dibi"]
     agirlik: 1
     etiketler: ["kule", "kadimler", "dikkat", "kule_dibi"]
     gerilim: 4
@@ -3401,19 +3415,19 @@ olaylar:
             etkiler:
               - iliski: { yanki: { guven: 6, baglilik: 4 } }
               - ahlak: { insanlik: -1 }
-              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 3, max: 7 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 3, max: 7 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Gökten inen adayın gecesinden beri ellinci katın ardı aklında.", en: "Since the night that candidate came down from the sky, you can't stop thinking about what's past the fiftieth floor." } }
             sonraki: "@akis"
           - id: "hazirlan"
             etiket: { tr: "Randevuya hazırlan", en: "Get ready for the appointment" }
             etkiler:
               - ahlak: { duzen: 2 }
               - gunluk: { antrenman: 1 }
-              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 3, max: 7 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 3, max: 7 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Gökten inen adayın gecesinden beri ellinci katın ardı aklında.", en: "Since the night that candidate came down from the sky, you can't stop thinking about what's past the fiftieth floor." } }
             sonraki: "@akis"
           - id: "aras"
             etiket: { tr: "{npc:aras_kurt|e} sor: \"Kapının öbür tarafına geliyor musun?\"", en: "Ask {npc:aras_kurt}: \"You coming through the door with me?\"" }
             goster: { npc_hayatta: "aras_kurt", bayrak: "cok_evren_acik" }
             etkiler:
               - iliski: { aras_kurt: { guven: 6, saygi: 4 } }
-              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Gökten inen adayın gecesinden beri ellinci katın ardı aklında.", en: "Since the night that candidate came down from the sky, you can't stop thinking about what's past the fiftieth floor." } }
             sonraki: "@akis"

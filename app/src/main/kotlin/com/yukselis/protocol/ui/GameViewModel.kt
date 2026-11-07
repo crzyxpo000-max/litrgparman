@@ -75,6 +75,8 @@ data class UiState(
     val message: UiMessage? = null,
     /** Son ekranı: epilog kartları (Aşama 7). */
     val ending: com.yukselis.engine.story.EndingView? = null,
+    /** Uzun aradan sonra açılan kayıtta dönüş özeti (DECISIONS #130). */
+    val recap: com.yukselis.engine.story.RecapView? = null,
     /** Döngü sonu görüldü: başlıkta New Game+ seçeneği. */
     val newGamePlusUnlocked: Boolean = false,
     /** Android 13+ bildirim izni reddedildi (bir daha kendiliğinden istenmez). */
@@ -323,6 +325,15 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
         show(state, emptyList())
         if (slot != SaveManager.AUTO) _ui.update { it.copy(message = UiMessage.LOADED) }
+        // Uzun bir aradan sonra dönülüyorsa: dünya durumundan ve önemli seçimlerden kısa bir özet.
+        val savedAt = app.saves.info(slot)?.savedAtMillis ?: 0L
+        if (savedAt > 0 && System.currentTimeMillis() - savedAt >= RECAP_AFTER_MS && !state.ended) {
+            _ui.update { it.copy(recap = app.engine.recap(state, it.lang)) }
+        }
+    }
+
+    fun dismissRecap() {
+        _ui.update { it.copy(recap = null) }
     }
 
     /** Uygulama arka plana alındığında MainActivity çağırır. */
@@ -407,3 +418,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         _ui.update { it.copy(slots = slots) }
     }
 }
+
+/** Dönüş özeti için en az bu kadar ara (2 gün). */
+private const val RECAP_AFTER_MS = 2L * 24 * 60 * 60 * 1000

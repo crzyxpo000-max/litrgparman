@@ -251,3 +251,32 @@ bildirim_rakip: { tr: "[{npc} Küresel Sıralama'da seni geçti.]", en: "[{npc} 
 bildirim_goz: { tr: "[{grade} kademesinden bir varlık seni fark etti.]", en: "[An entity of Grade {grade} has noticed you.]" }
 bildirim_kapi: { tr: "[{grade} kademesinden bir kapı taşmak üzere. Kalan süre: 1 gün.]", en: "[A Grade {grade} Gate is about to overflow. Time remaining: 1 day.]" }
 hafiza_siralama_atismasi: { tr: "Sıralamada seni geçince telsizden laf attın; güldü.", en: "When he passed you on the Ranking, you talked trash over the radio. He laughed." }
+# ---- Bölüm yapısı (DECISIONS #130) ----
+bolum_basladi: { tr: "[Bölüm {n} · {title}]", en: "[Chapter {n} · {title}]" }
+bolum_son_tarih: { tr: "[{title} · Son tarihe kalan gün: {n}]", en: "[{title} · Days until the deadline: {n}]" }
+bolum_tasti: { tr: "[Son tarih geçti: {title}. Geç kaldın.]", en: "[Deadline missed: {title}. You're late.]" }
+operasyon_basladi: { tr: "[Operasyon: {title}]", en: "[Operation: {title}]" }
+operasyon_bitti: { tr: "[Operasyon tamamlandı: {title}. Üsse dönülüyor.]", en: "[Operation complete: {title}. Returning to base.]" }
+darbogaz: { tr: "[{title} · Bölüm sonu]", en: "[{title} · End of chapter]" }
+usse_donus: { tr: "Üsse döndün: {region}", en: "Back at base: {region}" }
+gorev_yarida: { tr: "[Sistem seni geri çağırıyor. Görev yarıda kaldı.]", en: "[The System is recalling you. Mission aborted.]" }
+gorev_etiket_operasyon: { tr: "Operasyon · {region}", en: "Operation · {region}" }
+gorev_etiket_yan: { tr: "Görev · {region}", en: "Mission · {region}" }
+gorev_etiket_kesif: { tr: "Keşif · {region}", en: "Scouting · {region}" }
+bolum_evre_brifing: { tr: "Brifing", en: "Briefing" }
+bolum_evre_hazirlik: { tr: "Hazırlık", en: "Preparation" }
+bolum_evre_operasyon: { tr: "Operasyon", en: "Operation" }
+bolum_evre_sonrasi: { tr: "Sonrası", en: "Aftermath" }
+bolum_evre_bitti: { tr: "Ara günler", en: "Downtime" }
+tohum_hatirlatma: { tr: "Bir şey geri dönüyor. Aklına o gün geliyor: {olay}", en: "Something's circling back. You think of that day: {olay}" }
+gunluk_kacirildi_yumusak: { tr: "Günlük Görev tamamlanmadı. Görevde değildin; ceza yok.", en: "Daily Quest not completed. You weren't in the field, so no penalty." }
+ozet_baslik: { tr: "[Kaldığın yer]", en: "[Where you left off]" }
+ozet_bolum: { tr: "Bölüm {n} · {title}. Hedef: {goal}", en: "Chapter {n} · {title}. Objective: {goal}" }
+ozet_son_tarih: { tr: "Operasyona kalan gün: {n}.", en: "Days left before the operation: {n}." }
+ozet_operasyonda: { tr: "Operasyonun ortasındasın.", en: "You're in the middle of the operation." }
+ozet_sonrasi: { tr: "Operasyon geride kaldı. Bölümün bitmesine kalan gün: {n}.", en: "The operation's behind you. Days left in the chapter: {n}." }
+ozet_gorevde: { tr: "Üsten uzaktasın: {region}.", en: "You're away from base: {region}." }
+ozet_yalniz: { tr: "Yanında kimse yok.", en: "Nobody's with you." }
+ozet_yaninda: { tr: "Yanındakiler: {names}.", en: "With you: {names}." }
+ozet_fraksiyon: { tr: "Sana en çok güvenen kamp: {faction}.", en: "The camp that trusts you most: {faction}." }
+ozet_dikkat: { tr: "Dikkat {n}. Gözler üstünde.", en: "Attention {n}. Eyes are on you." }

@@ -36,8 +36,12 @@ class WorldTest {
     private fun atHub(seed: Long = 1): WorldState {
         var s = engine.newGame("T", GameMode.NORMAL, seed)
         s = s.copy(sceneId = "ilk_sabah", day = 1)
-        return engine.choose(s, "gune_basla", lang).state
+        return engine.throughBriefing(engine.choose(s, "gune_basla", lang).state)
     }
+
+    /** Bölüm yapısı: Kapı ve keşif bir görevde yapılır; üs bölgesinde bir keşif görevi başlatır. */
+    private fun field(s: WorldState): WorldState =
+        engine.hubAction(s, HubAction.Travel(s.region!!), lang).state.let { it.copy(dayState = it.dayState.copy(forcedLock = false)) }
 
     private fun event(id: String = "x", weight: Double = 2.0, tension: Int = 2, tags: List<String> = emptyList(), npcs: List<String> = emptyList()) =
         EventDef(id = id, weight = weight, tension = tension, tags = tags, npcs = npcs, card = LText("k", "c"), entry = "ilk_sabah")
@@ -151,7 +155,7 @@ class WorldTest {
 
     @Test
     fun `kapi kazanilinca kapanir ve ilk kapi kapatan verilir`() {
-        var s = atHub()
+        var s = field(atHub())
         val r = s.regions.getValue(s.region!!)
         s = s.copy(regions = s.regions + (r.id to r.copy(gates = listOf(Gate(7, Grade.F, listOf("igne_tavsan"), s.day, s.day + 3)))))
         s = s.copy(player = s.player.copy(level = 8, stats = s.player.stats.plus(Stat.STR, 10), unlockedGrade = Grade.F))
@@ -229,7 +233,7 @@ class WorldTest {
 
     @Test
     fun `kapi savasindan kacmak kapiyi kapatmaz`() {
-        var s = atHub().copy(vars = mapOf("_savas_kazanildi" to 1))
+        var s = field(atHub()).copy(vars = mapOf("_savas_kazanildi" to 1))
         val r = s.regions.getValue(s.region!!)
         s = s.copy(regions = s.regions + (r.id to r.copy(gates = listOf(Gate(5, Grade.F, listOf("diken_domuzu"), s.day, s.day + 3)))))
         s = engine.hubAction(s, HubAction.EnterGate(5), lang).state
@@ -252,7 +256,7 @@ class WorldTest {
 
     @Test
     fun `akistan acilan savas kaydedilip yuklenince surer`() {
-        var s = atHub()
+        var s = field(atHub())
         val r = s.regions.getValue(s.region!!)
         s = s.copy(regions = s.regions + (r.id to r.copy(gates = listOf(Gate(6, Grade.F, listOf("diken_domuzu"), s.day, s.day + 3)))))
         s = engine.hubAction(s, HubAction.EnterGate(6), lang).state
@@ -297,7 +301,7 @@ class WorldTest {
                             s.region?.let { s.regions[it] }?.gates?.forEach { add(HubAction.EnterGate(it.uid)) }
                         }
                     }
-                    s = engine.hubAction(s, actions.random(r), lang).state
+                    s = engine.hubAction(s, engine.legalOr(s, actions.random(r), r), lang).state
                 }
                 else -> {
                     val view = engine.view(s, lang)

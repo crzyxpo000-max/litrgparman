@@ -5,6 +5,7 @@
 olaylar:
   # ================================================================== ÇARŞIDAKİ MAHSURLAR
   - id: "carsi_mahsurlar"
+    konum: ["harabe_carsi"]
     perde: [1]
     bolge: ["harabe_carsi"]
     gun: { min: 4, max: 26 }
@@ -85,7 +86,7 @@ olaylar:
               - gorev: { carsi_mahsurlari: "basarisiz" }
               - degisken: { hayatta_kalan: -5 }
               - bayrak: "mahsurlar_birakildi"
-              - tohum: { olay: "mahsurlar_sonrasi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "mahsurlar_sonrasi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Kepenklerin ardında bulduğun o insanlar aklına düşüyor.", en: "You think of the people you found behind those shutters." } }
             sonraki: "@akis"
 
       - id: "carsi_mahsurlar_bakis"
@@ -295,7 +296,7 @@ olaylar:
               - bayrak: "mahsurlar_siginakta"
               - xp: 80
               - tohum: { olay: "elif_sahra_hastanesi", gecikme: { min: 0, max: 1 } }
-              - tohum: { olay: "mahsurlar_sonrasi", gecikme: { min: 4, max: 7 } }
+              - tohum: { olay: "mahsurlar_sonrasi", gecikme: { min: 4, max: 7 }, hatirlatma: { tr: "Kepenklerin ardında bulduğun o insanlar aklına düşüyor.", en: "You think of the people you found behind those shutters." } }
             sonraki: "@akis"
           - id: "askere"
             etiket: { tr: "Onları rampadaki askere götür; işe yararlar", en: "Take them to the soldier at the dock. They can work" }
@@ -309,7 +310,7 @@ olaylar:
               - bayrak: "mahsurlar_loncada"
               - xp: 80
               - tohum: { olay: "kaya_ilk_tanisma", gecikme: { min: 0, max: 1 } }
-              - tohum: { olay: "mahsurlar_sonrasi", gecikme: { min: 4, max: 7 } }
+              - tohum: { olay: "mahsurlar_sonrasi", gecikme: { min: 4, max: 7 }, hatirlatma: { tr: "Kepenklerin ardında bulduğun o insanlar aklına düşüyor.", en: "You think of the people you found behind those shutters." } }
             sonraki: "@akis"
           - id: "vaize"
             etiket: { tr: "Onları havuz başındaki vaize götür", en: "Take them to the preacher by the fountain" }
@@ -323,7 +324,7 @@ olaylar:
               - bayrak: "mahsurlar_yukselenlerde"
               - xp: 80
               - tohum: { olay: "vahit_vaaz", gecikme: { min: 0, max: 1 } }
-              - tohum: { olay: "mahsurlar_sonrasi", gecikme: { min: 4, max: 7 } }
+              - tohum: { olay: "mahsurlar_sonrasi", gecikme: { min: 4, max: 7 }, hatirlatma: { tr: "Kepenklerin ardında bulduğun o insanlar aklına düşüyor.", en: "You think of the people you found behind those shutters." } }
             sonraki: "@akis"
           - id: "kampa"
             etiket: { tr: "Onları kendi kampına al; kimseye borçlanmasınlar", en: "Bring them to your own camp. They owe nobody" }
@@ -336,7 +337,7 @@ olaylar:
               - bayrak: "mahsurlar_kampta"
               - xp: 80
               - gun: 1
-              - tohum: { olay: "mahsurlar_sonrasi", gecikme: { min: 4, max: 7 } }
+              - tohum: { olay: "mahsurlar_sonrasi", gecikme: { min: 4, max: 7 }, hatirlatma: { tr: "Kepenklerin ardında bulduğun o insanlar aklına düşüyor.", en: "You think of the people you found behind those shutters." } }
             sonraki: "@akis"
 
       - id: "carsi_mahsurlar_yenilgi"
@@ -370,7 +371,7 @@ olaylar:
               - gorev: { carsi_mahsurlari: "basarisiz" }
               - degisken: { hayatta_kalan: -3 }
               - bayrak: "mahsurlar_birakildi"
-              - tohum: { olay: "mahsurlar_sonrasi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "mahsurlar_sonrasi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Kepenklerin ardında bulduğun o insanlar aklına düşüyor.", en: "You think of the people you found behind those shutters." } }
             sonraki: "@akis"
 
       - id: "carsi_mahsurlar_kacis"
@@ -403,11 +404,12 @@ olaylar:
               - gorev: { carsi_mahsurlari: "basarisiz" }
               - degisken: { hayatta_kalan: -4 }
               - bayrak: "mahsurlar_birakildi"
-              - tohum: { olay: "mahsurlar_sonrasi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "mahsurlar_sonrasi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Kepenklerin ardında bulduğun o insanlar aklına düşüyor.", en: "You think of the people you found behind those shutters." } }
             sonraki: "@akis"
 
   # ------------------------------------------------------------------ mahsurların sonrası (tohum)
   - id: "mahsurlar_sonrasi"
+    konum: ["us"]
     perde: [1]
     agirlik: 1
     etiketler: ["kurtarma", "ahlak", "carsi"]
@@ -479,7 +481,7 @@ olaylar:
               - degisken: { hayatta_kalan: 1 }
               - bayrak_kaldir: "mahsurlar_yukselenlerde"
               - bayrak: "mahsurlar_siginakta"
-              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Vaizin elinden aldığın kadını beyazlılar unutmadı.", en: "The people in white haven't forgotten the woman you took from the preacher." } }
             sonraki: "@akis"
           - id: "suyu_paylas"
             etiket: { tr: "Bir gün boyunca çocuğun kovalarını sen taşı", en: "Carry the kid's buckets for a day" }
@@ -545,6 +547,7 @@ olaylar:
 
   # ================================================================== ÇÖP AVCISININ TEZGÂHI
   - id: "cop_avcisi_pazar"
+    konum: ["harabe_carsi"]
     perde: [1]
     bolge: ["harabe_carsi"]
     gun: { min: 3, max: 30 }
@@ -703,7 +706,7 @@ olaylar:
             etiket: { tr: "Kasanın yerini aklına yaz", en: "Memorize where the vault is" }
             etkiler:
               - ahlak: { duzen: 1 }
-              - tohum: { olay: "zindan_kasa", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "zindan_kasa", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Yürüyen merdivenin dibindeki tezgâhta duyduğun kasa aklından çıkmıyor.", en: "You can't shake the vault you heard about at the stall at the foot of the escalator." } }
             sonraki: "@akis"
           - id: "indirim"
             etiket: { tr: "Sırrın bedeli olarak bir iksir iste", en: "Ask for a potion as the price of silence" }
@@ -776,6 +779,7 @@ olaylar:
 
   # ================================================================== ÇARŞI ÇETESİ
   - id: "carsi_cetesi"
+    konum: ["harabe_carsi"]
     perde: [1]
     bolge: ["harabe_carsi"]
     gun: { min: 8, max: 24 }
@@ -814,7 +818,7 @@ olaylar:
               - kredi: -10
               - ahlak: { duzen: 2, merhamet: -2 }
               - bayrak: "cete_gisede"
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
           - id: "kadin"
             etiket: { tr: "Kadının ücretini de sen öde", en: "Pay the old woman's toll too" }
@@ -852,7 +856,7 @@ olaylar:
               - ahlak: { duzen: 1, merhamet: -1 }
               - bilgi: "cete_gercek_seviye"
               - bayrak: "cete_gisede"
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
 
       - id: "carsi_cetesi_comert"
@@ -867,7 +871,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 2 }
               - bayrak: "cete_gisede"
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
           - id: "oglan"
             etiket: { tr: "Oğlana burada ne aradığını sor", en: "Ask the kid what he's doing here" }
@@ -877,7 +881,7 @@ olaylar:
               - degisken: { hayatta_kalan: 1 }
               - itibar: { siginak: 2 }
               - bayrak: "cete_gisede"
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "carsi_cetesi_oglan"
           - id: "simdi_dagit"
             etiket: { tr: "Fişleri yırt, bariyeri devir", en: "Tear up the tickets and knock the gate over" }
@@ -920,7 +924,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: -2, duzen: 1 }
               - bayrak: "cete_gisede"
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
 
       - id: "carsi_cetesi_muhafiz"
@@ -939,7 +943,7 @@ olaylar:
               - bayrak: "cete_muhafiz"
               - tehlike: { harabe_carsi: -3 }
               - tohum: { olay: "kaya_ilk_tanisma", gecikme: { min: 1, max: 2 } }
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 4, max: 7 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 4, max: 7 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
           - id: "elife"
             etiket: { tr: "Onları yemek katındaki hekime yolla", en: "Send them to the food court doctor" }
@@ -951,7 +955,7 @@ olaylar:
               - bayrak: "cete_muhafiz"
               - tehlike: { harabe_carsi: -3 }
               - tohum: { olay: "elif_sahra_hastanesi", gecikme: { min: 1, max: 2 } }
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 4, max: 7 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 4, max: 7 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
           - id: "bana"
             etiket: { tr: "\"Ben doyururum. Benim için çalışacaksınız.\"", en: "\"I'll feed you. You work for me now.\"" }
@@ -962,7 +966,7 @@ olaylar:
               - bayrak: "cete_muhafiz"
               - bayrak: "cete_sana_bagli"
               - tehlike: { harabe_carsi: -4 }
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 4, max: 7 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 4, max: 7 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
 
       - id: "carsi_cetesi_ezme"
@@ -977,7 +981,7 @@ olaylar:
               - ahlak: { merhamet: 4, duzen: 2 }
               - efsane: "canavari_bagisladi"
               - bayrak: "cete_lideri_bagislandi"
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
           - id: "korku"
             etiket: { tr: "Lideri köprünün korkuluğundan sarkıt", en: "Dangle the boss over the skybridge railing" }
@@ -986,7 +990,7 @@ olaylar:
               - dikkat: 2
               - itibar: { lonca: 3, siginak: -3 }
               - bayrak: "cete_lideri_bagislandi"
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
           - id: "oglana"
             etiket: { tr: "Oğlanın borusunu düzelt, elinden al", en: "Turn the kid's pipe right way round. Take it" }
@@ -995,7 +999,7 @@ olaylar:
               - degisken: { hayatta_kalan: 1 }
               - bayrak: "cete_oglan_kurtuldu"
               - bayrak: "cete_lideri_bagislandi"
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
 
       - id: "carsi_cetesi_zafer"
@@ -1027,7 +1031,7 @@ olaylar:
               - degisken: { hayatta_kalan: -1 }
               - tehlike: { harabe_carsi: -4 }
               - bayrak: "cete_lideri_olduruldu"
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
           - id: "bagisla"
             etiket: { tr: "Bağışla; aldığı her şeyi geri versin", en: "Spare him. He gives back everything he took" }
@@ -1036,7 +1040,7 @@ olaylar:
               - efsane: "canavari_bagisladi"
               - tehlike: { harabe_carsi: -3 }
               - bayrak: "cete_lideri_bagislandi"
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
           - id: "teslim"
             etiket: { tr: "Onu rampadaki askere teslim et", en: "Hand him over to the soldier at the dock" }
@@ -1047,7 +1051,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 5, guven: 3 } }
               - tehlike: { harabe_carsi: -3 }
               - bayrak: "cete_loncaya_teslim"
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 4, max: 7 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 4, max: 7 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
           - id: "halk"
             etiket: { tr: "Kararı kuyruktakilere bırak", en: "Let the people in line decide" }
@@ -1072,7 +1076,7 @@ olaylar:
               - tehlike: { harabe_carsi: -3 }
               - bayrak: "cete_lideri_bagislandi"
               - bayrak: "cete_oglan_kurtuldu"
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
           - id: "kardesler"
             etiket: { tr: "Kardeşleri ayırma; ikisi birlikte gitsin", en: "Don't split the brothers. They leave together" }
@@ -1080,7 +1084,7 @@ olaylar:
               - ahlak: { merhamet: 4, duzen: -2 }
               - tehlike: { harabe_carsi: -3 }
               - bayrak: "cete_lideri_bagislandi"
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
 
       - id: "carsi_cetesi_yenilgi"
@@ -1096,7 +1100,7 @@ olaylar:
               - ahlak: { merhamet: -2, duzen: -1 }
               - stat: { wil: 1 }
               - bayrak: "cete_gisede"
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
           - id: "surun"
             etiket: { tr: "Sürünerek köprüden uzaklaş", en: "Crawl off the bridge" }
@@ -1104,7 +1108,7 @@ olaylar:
               - kredi: -15
               - ahlak: { duzen: 1 }
               - bayrak: "cete_gisede"
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 4, max: 7 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 4, max: 7 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
 
       - id: "carsi_cetesi_kacis"
@@ -1118,7 +1122,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 1, insanlik: 1 }
               - bayrak: "cete_gisede"
-              - tohum: { olay: "cete_hesabi", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "cete_hesabi", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
           - id: "baska_yol"
             etiket: { tr: "Çarşıda kendine başka bir yol bul", en: "Find yourself another way through the mall" }
@@ -1129,6 +1133,7 @@ olaylar:
 
   # ------------------------------------------------------------------ çetenin hesabı (tohum)
   - id: "cete_hesabi"
+    konum: ["us"]
     perde: [1]
     agirlik: 1
     etiketler: ["ahlak", "insan", "carsi"]
@@ -1275,7 +1280,7 @@ olaylar:
               - ahlak: { merhamet: 3, duzen: -2 }
               - iliski: { kaya_demir: { saygi: 4, guven: -4 } }
               - hafiza: { npc: "kaya_demir", id: "olay:cete_hesabi", agirlik: 15 }
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Gişecilerin hesabını gördüğün geceyi rampadaki asker de unutmadı.", en: "The soldier on the ramp hasn't forgotten the night you settled up with the toll crew." } }
             sonraki: "@akis"
           - id: "katki_ode"
             etiket: { tr: "Katkını öde; düzen düzendir", en: "Pay your contribution. Order is order" }
@@ -1379,6 +1384,7 @@ olaylar:
 
   # ================================================================== ECZANE
   - id: "eczane"
+    konum: ["harabe_carsi"]
     perde: [1]
     bolge: ["harabe_carsi"]
     gun: { min: 5, max: 22 }
@@ -1444,7 +1450,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: -3, duzen: 1 }
               - bayrak: "eczane_kaybedildi"
-              - tohum: { olay: "eczane_bedeli", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "eczane_bedeli", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Eczanedeki son dolabın hikâyesi bitmedi.", en: "The story of that last cabinet in the pharmacy isn't over." } }
             sonraki: "@akis"
 
       - id: "eczane_birlikte"
@@ -1463,7 +1469,7 @@ olaylar:
               - hafiza: { npc: "elif_sari", id: "olay:eczane", agirlik: 25 }
               - degisken: { hayatta_kalan: 4 }
               - bayrak: "eczane_hastaneye"
-              - tohum: { olay: "eczane_bedeli", gecikme: { min: 3, max: 5 } }
+              - tohum: { olay: "eczane_bedeli", gecikme: { min: 3, max: 5 }, hatirlatma: { tr: "Eczanedeki son dolabın hikâyesi bitmedi.", en: "The story of that last cabinet in the pharmacy isn't over." } }
             sonraki: "@akis"
           - id: "pay"
             etiket: { tr: "Kendine birkaç ağrı kesici iste", en: "Ask for a few painkillers for yourself" }
@@ -1474,7 +1480,7 @@ olaylar:
               - iliski: { elif_sari: { guven: 3, saygi: 2 } }
               - degisken: { hayatta_kalan: 3 }
               - bayrak: "eczane_hastaneye"
-              - tohum: { olay: "eczane_bedeli", gecikme: { min: 3, max: 5 } }
+              - tohum: { olay: "eczane_bedeli", gecikme: { min: 3, max: 5 }, hatirlatma: { tr: "Eczanedeki son dolabın hikâyesi bitmedi.", en: "The story of that last cabinet in the pharmacy isn't over." } }
             sonraki: "@akis"
 
       - id: "eczane_uyandi"
@@ -1523,7 +1529,7 @@ olaylar:
               - degisken: { hayatta_kalan: 4 }
               - bayrak: "eczane_hastaneye"
               - tohum: { olay: "elif_sahra_hastanesi", gecikme: { min: 0, max: 1 } }
-              - tohum: { olay: "eczane_bedeli", gecikme: { min: 3, max: 5 } }
+              - tohum: { olay: "eczane_bedeli", gecikme: { min: 3, max: 5 }, hatirlatma: { tr: "Eczanedeki son dolabın hikâyesi bitmedi.", en: "The story of that last cabinet in the pharmacy isn't over." } }
             sonraki: "@akis"
           - id: "kiz"
             etiket: { tr: "Kıza iki kalem ver, gerisini koğuşa götür", en: "Give the girl two pens. The rest goes to the ward" }
@@ -1535,7 +1541,7 @@ olaylar:
               - bayrak: "eczane_kiza"
               - bayrak: "eczane_hastaneye"
               - tohum: { olay: "elif_sahra_hastanesi", gecikme: { min: 0, max: 1 } }
-              - tohum: { olay: "eczane_bedeli", gecikme: { min: 3, max: 5 } }
+              - tohum: { olay: "eczane_bedeli", gecikme: { min: 3, max: 5 }, hatirlatma: { tr: "Eczanedeki son dolabın hikâyesi bitmedi.", en: "The story of that last cabinet in the pharmacy isn't over." } }
             sonraki: "@akis"
           - id: "sakla"
             etiket: { tr: "Bir kısmını kendine ayır", en: "Skim some off the top for yourself" }
@@ -1546,7 +1552,7 @@ olaylar:
               - hafiza: { npc: "elif_sari", id: "ilaci_sakladi", agirlik: -20 }
               - degisken: { hayatta_kalan: 2 }
               - bayrak: "eczane_saklandi"
-              - tohum: { olay: "eczane_bedeli", gecikme: { min: 3, max: 5 } }
+              - tohum: { olay: "eczane_bedeli", gecikme: { min: 3, max: 5 }, hatirlatma: { tr: "Eczanedeki son dolabın hikâyesi bitmedi.", en: "The story of that last cabinet in the pharmacy isn't over." } }
             sonraki: "@akis"
           - id: "sat"
             etiket: { tr: "Hepsini pazarcı kadına sat", en: "Sell the whole lot to the stall woman" }
@@ -1556,7 +1562,7 @@ olaylar:
               - itibar: { siginak: -4 }
               - degisken: { hayatta_kalan: -3 }
               - bayrak: "eczane_satildi"
-              - tohum: { olay: "eczane_bedeli", gecikme: { min: 3, max: 5 } }
+              - tohum: { olay: "eczane_bedeli", gecikme: { min: 3, max: 5 }, hatirlatma: { tr: "Eczanedeki son dolabın hikâyesi bitmedi.", en: "The story of that last cabinet in the pharmacy isn't over." } }
             sonraki: "@akis"
           - id: "secilmis"
             etiket: { tr: "Vaizin \"seçilmişlerine\" götür", en: "Bring it to the preacher's \"Chosen\"" }
@@ -1567,7 +1573,7 @@ olaylar:
               - iliski: { vahit: { guven: 6, saygi: 4 } }
               - degisken: { hayatta_kalan: -2 }
               - bayrak: "eczane_yukselenlere"
-              - tohum: { olay: "eczane_bedeli", gecikme: { min: 3, max: 5 } }
+              - tohum: { olay: "eczane_bedeli", gecikme: { min: 3, max: 5 }, hatirlatma: { tr: "Eczanedeki son dolabın hikâyesi bitmedi.", en: "The story of that last cabinet in the pharmacy isn't over." } }
             sonraki: "@akis"
 
       - id: "eczane_yenilgi"
@@ -1583,7 +1589,7 @@ olaylar:
               - bayrak: "eczane_kaybedildi"
               - bayrak: "cete_gisede"
               - degisken: { hayatta_kalan: -2 }
-              - tohum: { olay: "eczane_bedeli", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "eczane_bedeli", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Eczanedeki son dolabın hikâyesi bitmedi.", en: "The story of that last cabinet in the pharmacy isn't over." } }
             sonraki: "@akis"
           - id: "toparlan"
             etiket: { tr: "Kalkmaya çalış, yaralarına bak", en: "Try to get up. Check the damage" }
@@ -1592,7 +1598,7 @@ olaylar:
               - can: 10
               - bayrak: "eczane_kaybedildi"
               - degisken: { hayatta_kalan: -2 }
-              - tohum: { olay: "eczane_bedeli", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "eczane_bedeli", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Eczanedeki son dolabın hikâyesi bitmedi.", en: "The story of that last cabinet in the pharmacy isn't over." } }
             sonraki: "@akis"
 
       - id: "eczane_kacis"
@@ -1609,18 +1615,19 @@ olaylar:
               - iliski: { elif_sari: { guven: 3 } }
               - bayrak: "eczane_hastaneye"
               - tohum: { olay: "elif_sahra_hastanesi", gecikme: { min: 0, max: 1 } }
-              - tohum: { olay: "eczane_bedeli", gecikme: { min: 3, max: 5 } }
+              - tohum: { olay: "eczane_bedeli", gecikme: { min: 3, max: 5 }, hatirlatma: { tr: "Eczanedeki son dolabın hikâyesi bitmedi.", en: "The story of that last cabinet in the pharmacy isn't over." } }
             sonraki: "@akis"
           - id: "sir"
             etiket: { tr: "Kimseye söyleme; bir gün geri dönersin", en: "Tell nobody. You'll come back someday" }
             etkiler:
               - ahlak: { merhamet: -3, insanlik: -1 }
               - bayrak: "eczane_kaybedildi"
-              - tohum: { olay: "eczane_bedeli", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "eczane_bedeli", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Eczanedeki son dolabın hikâyesi bitmedi.", en: "The story of that last cabinet in the pharmacy isn't over." } }
             sonraki: "@akis"
 
   # ------------------------------------------------------------------ eczanenin bedeli (tohum)
   - id: "eczane_bedeli"
+    konum: ["us"]
     perde: [1]
     agirlik: 1
     etiketler: ["ahlak", "kaynak", "carsi"]
@@ -1673,7 +1680,7 @@ olaylar:
               - iliski: { elif_sari: { baglilik: 6, guven: 4 } }
               - hafiza: { npc: "elif_sari", id: "gece_kaldi", agirlik: 30 }
               - gun: 1
-              - tohum: { olay: "hastane_karantina", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "hastane_karantina", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "O ilacın bedeli olarak verdiğin koğuş gecesi geldi.", en: "The night on the ward you owe for that medicine is here." } }
             sonraki: "@akis"
           - id: "oglan_ziyaret"
             etiket: { tr: "Koğuştaki dokuz yaşındaki oğlana uğra", en: "Stop by the nine-year-old's cot" }
@@ -1752,7 +1759,7 @@ olaylar:
               - itibar: { yukselenler: -6, siginak: 3 }
               - iliski: { vahit: { guven: -8, saygi: -3 } }
               - degisken: { hayatta_kalan: 2 }
-              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "İlaç kutularını dağıttığın haberi beyazlıların kulağına gitmiş.", en: "Word of those medicine boxes you handed out has reached the people in white." } }
             sonraki: "@akis"
           - id: "kutsama"
             etiket: { tr: "Seçilmişlerin şükranını kabul et", en: "Accept the Chosen's gratitude" }
@@ -1876,6 +1883,7 @@ olaylar:
 
   # ================================================================== KAYIP EŞYA OFİSİ
   - id: "kayip_esya_ofisi"
+    konum: ["harabe_carsi"]
     perde: [1]
     bolge: ["harabe_carsi"]
     gun: { min: 6, max: 28 }
@@ -2000,7 +2008,7 @@ olaylar:
               - itibar: { sessiz_ag: 8 }
               - iliski: { mert_kilic: { saygi: 8, guven: 5 } }
               - hafiza: { npc: "mert_kilic", id: "olay:kayip_esya_ofisi", agirlik: 30 }
-              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kayıp eşya ofisinden çıkan defter istasyondaki radyocunun elinde.", en: "The notebook from the lost-and-found is in the station radio guy's hands now." } }
             sonraki: "@akis"
           - id: "vahite"
             etiket: { tr: "Defteri havuz başındaki vaize götür", en: "Take the ledger to the preacher at the fountain" }
@@ -2010,7 +2018,7 @@ olaylar:
               - itibar: { yukselenler: 8 }
               - iliski: { vahit: { saygi: 8, baglilik: 4 } }
               - hafiza: { npc: "vahit", id: "olay:kayip_esya_ofisi", agirlik: 25 }
-              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Kayıp eşya ofisinden çıkan defter havuz başındaki vaizin eline geçti.", en: "The notebook from the lost-and-found ended up with the preacher by the fountain." } }
             sonraki: "@akis"
           - id: "sayfayi_yirt"
             tur: "gizle"
@@ -2025,7 +2033,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 1, insanlik: -1 }
               - bilgi: "ayrilmis_etiket"
-              - tohum: { olay: "zindan_kasa", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "zindan_kasa", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Kayıp eşya ofisinden aldıkların seni bodrumdaki bankaya işaret ediyor.", en: "What you took from the lost-and-found keeps pointing you at the bank in the basement." } }
             sonraki: "@akis"
 
       - id: "kayip_esya_musteri"
@@ -2057,7 +2065,7 @@ olaylar:
             etiket: { tr: "Kartı al; banka bodrumda", en: "Take the card. The bank's in the basement" }
             etkiler:
               - ahlak: { duzen: -1 }
-              - tohum: { olay: "zindan_kasa", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "zindan_kasa", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Kayıp eşya ofisinden aldıkların seni bodrumdaki bankaya işaret ediyor.", en: "What you took from the lost-and-found keeps pointing you at the bank in the basement." } }
             sonraki: "@akis"
           - id: "rafa"
             etiket: { tr: "Kuryenin getirdiklerini raflara diz", en: "Shelve what the courier brought" }
@@ -2131,6 +2139,7 @@ olaylar:
 
   # ================================================================== SON TREN
   - id: "son_tren"
+    konum: ["kirik_istasyon"]
     perde: [1]
     bolge: ["kirik_istasyon"]
     gun: { min: 7, max: 25 }
@@ -2195,7 +2204,7 @@ olaylar:
               - itibar: { sessiz_ag: 4 }
               - iliski: { mert_kilic: { saygi: 5, guven: 3 } }
               - bilgi: "tren_dongusu"
-              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Hâlâ işleyen vagondaki anonsu istasyondaki radyocuya bırakmıştın.", en: "You left that announcement from the car that still runs with the radio guy at the station." } }
             sonraki: "@akis"
           - id: "birak"
             etiket: { tr: "Bırak gitsin; umut da bir şeydir", en: "Let it go. Hope's something, at least" }
@@ -2285,7 +2294,7 @@ olaylar:
               - ahlak: { duzen: 1 }
               - degisken: { hayatta_kalan: 4 }
               - bayrak: "tren_bosaltildi"
-              - tohum: { olay: "zindan_metro", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "zindan_metro", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Son vagondaki duvarda gördüğün kıpırtı aşağıdan geliyordu.", en: "The movement you saw in the wall of that last car was coming from below." } }
             sonraki: "son_tren_durdu"
 
       - id: "son_tren_durdu"
@@ -2400,11 +2409,12 @@ olaylar:
               - ahlak: { merhamet: 2 }
               - stat: { wil: 1 }
               - degisken: { hayatta_kalan: -2 }
-              - tohum: { olay: "zindan_metro", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "zindan_metro", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Son vagondaki duvarda gördüğün kıpırtı aşağıdan geliyordu.", en: "The movement you saw in the wall of that last car was coming from below." } }
             sonraki: "@akis"
 
   # ================================================================== SU BASKINI
   - id: "su_baskini"
+    konum: ["kirik_istasyon"]
     perde: [1]
     bolge: ["kirik_istasyon"]
     gun: { min: 10, max: 26 }
@@ -2656,7 +2666,7 @@ olaylar:
             etiket: { tr: "Tünelin dibindeki ışığı aklına yaz", en: "Make a note of the light down there" }
             etkiler:
               - ahlak: { duzen: 1 }
-              - tohum: { olay: "zindan_metro", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "zindan_metro", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Suyun altındaki tünelin dibinde gördüğün ışık hâlâ aklında.", en: "You're still thinking about the light you saw at the bottom of that flooded tunnel." } }
             sonraki: "@akis"
           - id: "kayaya_cevap"
             etiket: { tr: "Askerin gözünün içine bak: \"Emri çiğnedim. Yine çiğnerim.\"", en: "Look him in the eye: \"I broke it. I'd do it again.\"" }
@@ -2693,6 +2703,7 @@ olaylar:
 
   # ================================================================== ÖLÜ AVCININ PENCERESİ
   - id: "olu_avci_penceresi"
+    konum: ["us"]
     perde: [1]
     gun: { min: 9, max: 27 }
     agirlik: 4
@@ -2736,7 +2747,7 @@ olaylar:
               - ahlak: { insanlik: 4, merhamet: 2 }
               - gorev: { olu_avcinin_mesaji: "basla" }
               - bayrak: "olu_avci_kunyesi"
-              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Yol kenarındaki avcının künyesi hâlâ sende.", en: "You've still got the dog tags from the hunter by the side of the road." } }
             sonraki: "olu_avci_kapat"
           - id: "yagma"
             etiket: { tr: "Çantasını ve ganimetini al", en: "Take his pack and his loot" }
@@ -2782,7 +2793,7 @@ olaylar:
               - ahlak: { duzen: 2, insanlik: 1 }
               - gorev: { olu_avcinin_mesaji: "basla" }
               - bayrak: "olu_avci_kunyesi"
-              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Yol kenarındaki avcının künyesi hâlâ sende.", en: "You've still got the dog tags from the hunter by the side of the road." } }
             sonraki: "olu_avci_kapat"
           - id: "merte"
             etiket: { tr: "Satırı istasyondaki radyocuya götür", en: "Bring that line to the radio guy at the station" }
@@ -2794,8 +2805,8 @@ olaylar:
               - iliski: { mert_kilic: { saygi: 6, guven: 4, korku: 3 } }
               - gorev: { olu_avcinin_mesaji: "basla" }
               - bayrak: "olu_avci_kunyesi"
-              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "mert_kilic" } }
-              - tohum: { olay: "avci_kizi", gecikme: { min: 3, max: 5 } }
+              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Ölü avcının penceresindeki satırı istasyondaki radyocuya bırakmıştın.", en: "You left that line from the dead hunter's window with the radio guy at the station." } }
+              - tohum: { olay: "avci_kizi", gecikme: { min: 3, max: 5 }, hatirlatma: { tr: "Yol kenarındaki avcının künyesi hâlâ sende.", en: "You've still got the dog tags from the hunter by the side of the road." } }
             sonraki: "@akis"
           - id: "ezberle"
             etiket: { tr: "Satırı ezberle, katili bekle", en: "Memorize the line. Wait for the killer" }
@@ -2803,7 +2814,7 @@ olaylar:
               - ahlak: { duzen: 2, merhamet: -1 }
               - gorev: { olu_avcinin_mesaji: "basla" }
               - bayrak: "olu_avci_kunyesi"
-              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Yol kenarındaki avcının künyesi hâlâ sende.", en: "You've still got the dog tags from the hunter by the side of the road." } }
             sonraki: "olu_avci_pusu"
 
       - id: "olu_avci_kapat"
@@ -2883,7 +2894,7 @@ olaylar:
               - ahlak: { insanlik: 2 }
               - gorev: { olu_avcinin_mesaji: "basla" }
               - bayrak: "olu_avci_kunyesi"
-              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Yol kenarındaki avcının künyesi hâlâ sende.", en: "You've still got the dog tags from the hunter by the side of the road." } }
             sonraki: "@akis"
           - id: "tut"
             etiket: { tr: "Cebindeki künyeyi sık ve gidişini izle", en: "Grip the tags in your pocket. Watch him go" }
@@ -2899,7 +2910,7 @@ olaylar:
               - egilim: { gizlilik: 2 }
               - gorev: { olu_avcinin_mesaji: "basla" }
               - bayrak: "olu_avci_kunyesi"
-              - tohum: { olay: "avci_kizi", gecikme: { min: 3, max: 5 } }
+              - tohum: { olay: "avci_kizi", gecikme: { min: 3, max: 5 }, hatirlatma: { tr: "Yol kenarındaki avcının künyesi hâlâ sende.", en: "You've still got the dog tags from the hunter by the side of the road." } }
             sonraki: "@akis"
 
       - id: "olu_avci_itiraf"
@@ -2914,7 +2925,7 @@ olaylar:
               - gorev: { olu_avcinin_mesaji: "basla" }
               - bayrak: "olu_avci_kunyesi"
               - bayrak: "olu_avci_katil_bagislandi"
-              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Yol kenarındaki avcının künyesi hâlâ sende.", en: "You've still got the dog tags from the hunter by the side of the road." } }
             sonraki: "@akis"
           - id: "teslim"
             etiket: { tr: "Onu ölünün arkadaşlarına teslim et", en: "Turn him over to the dead man's crew" }
@@ -2925,7 +2936,7 @@ olaylar:
               - gorev: { olu_avcinin_mesaji: "basla" }
               - bayrak: "olu_avci_kunyesi"
               - bayrak: "olu_avci_katil_teslim"
-              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Yol kenarındaki avcının künyesi hâlâ sende.", en: "You've still got the dog tags from the hunter by the side of the road." } }
               - tohum: { olay: "kaya_ilk_tanisma", gecikme: { min: 0, max: 1 } }
             sonraki: "@akis"
           - id: "cevap"
@@ -2935,7 +2946,7 @@ olaylar:
               - stat: { wis: 1 }
               - gorev: { olu_avcinin_mesaji: "basla" }
               - bayrak: "olu_avci_kunyesi"
-              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Yol kenarındaki avcının künyesi hâlâ sende.", en: "You've still got the dog tags from the hunter by the side of the road." } }
             sonraki: "@akis"
 
       - id: "olu_avci_katil_zafer"
@@ -2954,7 +2965,7 @@ olaylar:
               - gorev: { olu_avcinin_mesaji: "basla" }
               - bayrak: "olu_avci_kunyesi"
               - bayrak: "olu_avci_katil_olduruldu"
-              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Yol kenarındaki avcının künyesi hâlâ sende.", en: "You've still got the dog tags from the hunter by the side of the road." } }
             sonraki: "@akis"
           - id: "affet"
             etiket: { tr: "Bırak gitsin; ama künyeyi sen al", en: "Let him go. But you take the tags" }
@@ -2963,7 +2974,7 @@ olaylar:
               - gorev: { olu_avcinin_mesaji: "basla" }
               - bayrak: "olu_avci_kunyesi"
               - bayrak: "olu_avci_katil_bagislandi"
-              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Yol kenarındaki avcının künyesi hâlâ sende.", en: "You've still got the dog tags from the hunter by the side of the road." } }
             sonraki: "@akis"
           - id: "kayaya"
             etiket: { tr: "Onu rampadaki askere götür", en: "March him to the soldier at the dock" }
@@ -2975,8 +2986,8 @@ olaylar:
               - gorev: { olu_avcinin_mesaji: "basla" }
               - bayrak: "olu_avci_kunyesi"
               - bayrak: "olu_avci_katil_teslim"
-              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 } }
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Yol kenarındaki avcının künyesi hâlâ sende.", en: "You've still got the dog tags from the hunter by the side of the road." } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Yol kenarındaki avcının hikâyesi rampadaki askere ulaştı.", en: "The story of the hunter by the side of the road made it to the soldier on the ramp." } }
             sonraki: "@akis"
 
       - id: "olu_avci_katil_yenilgi"
@@ -2991,7 +3002,7 @@ olaylar:
               - ahlak: { insanlik: 2, merhamet: 1 }
               - gorev: { olu_avcinin_mesaji: "basla" }
               - bayrak: "olu_avci_kunyesi"
-              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Yol kenarındaki avcının künyesi hâlâ sende.", en: "You've still got the dog tags from the hunter by the side of the road." } }
             sonraki: "@akis"
           - id: "son_cumle"
             etiket: { tr: "Senin için görev almamış; bunu aklına yaz", en: "Nobody hired him for you. Remember that" }
@@ -3013,7 +3024,7 @@ olaylar:
               - ahlak: { insanlik: 2 }
               - gorev: { olu_avcinin_mesaji: "basla" }
               - bayrak: "olu_avci_kunyesi"
-              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "avci_kizi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Yol kenarındaki avcının künyesi hâlâ sende.", en: "You've still got the dog tags from the hunter by the side of the road." } }
             sonraki: "@akis"
           - id: "git"
             etiket: { tr: "Bu senin işin değil; git", en: "Not your business. Go" }
@@ -3032,8 +3043,8 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 3, merhamet: -1 }
               - iliski: { kaya_demir: { guven: 6, saygi: 3 } }
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" } }
-              - tohum: { olay: "avci_kizi", gecikme: { min: 1, max: 2 } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Yol kenarındaki avcının hikâyesi rampadaki askere ulaştı.", en: "The story of the hunter by the side of the road made it to the soldier on the ramp." } }
+              - tohum: { olay: "avci_kizi", gecikme: { min: 1, max: 2 }, hatirlatma: { tr: "Yol kenarındaki avcının künyesi hâlâ sende.", en: "You've still got the dog tags from the hunter by the side of the road." } }
             sonraki: "@akis"
           - id: "satir"
             tur: "aciga_vur"
@@ -3044,8 +3055,8 @@ olaylar:
               - ahlak: { insanlik: 3, duzen: -2 }
               - iliski: { kaya_demir: { saygi: 6, korku: 5, guven: 2 } }
               - itibar: { lonca: 4 }
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" } }
-              - tohum: { olay: "avci_kizi", gecikme: { min: 1, max: 2 } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Yol kenarındaki avcının hikâyesi rampadaki askere ulaştı.", en: "The story of the hunter by the side of the road made it to the soldier on the ramp." } }
+              - tohum: { olay: "avci_kizi", gecikme: { min: 1, max: 2 }, hatirlatma: { tr: "Yol kenarındaki avcının künyesi hâlâ sende.", en: "You've still got the dog tags from the hunter by the side of the road." } }
             sonraki: "@akis"
           - id: "kiza"
             etiket: { tr: "Kıza dön; künye onun", en: "Turn to the girl. The tags are hers" }
@@ -3053,11 +3064,12 @@ olaylar:
               - bayrak: "olu_avci_kunye_verildi"
               - ahlak: { insanlik: 4, merhamet: 2 }
               - iliski: { kaya_demir: { saygi: 2 } }
-              - tohum: { olay: "avci_kizi", gecikme: { min: 0, max: 1 } }
+              - tohum: { olay: "avci_kizi", gecikme: { min: 0, max: 1 }, hatirlatma: { tr: "Yol kenarındaki avcının künyesi hâlâ sende.", en: "You've still got the dog tags from the hunter by the side of the road." } }
             sonraki: "@akis"
 
   # ------------------------------------------------------------------ avcının kızı (tohum)
   - id: "avci_kizi"
+    konum: ["us"]
     perde: [1]
     agirlik: 1
     etiketler: ["ahlak", "karsilasma"]
@@ -3198,6 +3210,7 @@ olaylar:
 
   # ================================================================== KAYA — İLK TANIŞMA (Lonca çekirdeği)
   - id: "kaya_ilk_tanisma"
+    konum: ["ogretici_orman", "harabe_carsi"]
     perde: [1]
     bolge: ["ogretici_orman", "harabe_carsi"]
     gun: { min: 5, max: 18 }
@@ -3286,7 +3299,7 @@ olaylar:
               - degisken: { kaya_tanidik: 1 }
               - ahlak: { duzen: -2 }
               - iliski: { kaya_demir: { saygi: -3 } }
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Rampadaki askerin gözü, tanıştığınız günden beri üstünde.", en: "The soldier on the ramp has had his eye on you since the day you met." } }
             sonraki: "@akis"
 
       - id: "kaya_ilk_tanisma_sinav"
@@ -3340,7 +3353,7 @@ olaylar:
               - itibar: { lonca: 10 }
               - iliski: { kaya_demir: { saygi: 6, baglilik: 6, guven: 3 } }
               - bayrak: "lonca_saflarinda"
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Rampadaki askerin gözü, tanıştığınız günden beri üstünde.", en: "The soldier on the ramp has had his eye on you since the day you met." } }
             sonraki: "@akis"
           - id: "reddet"
             etiket: { tr: "Teşekkür et, ama bandı geri ver", en: "Thank him, but hand the tape back" }
@@ -3349,7 +3362,7 @@ olaylar:
               - itibar: { lonca: 2 }
               - iliski: { kaya_demir: { saygi: 3, baglilik: -3 } }
               - hafiza: { npc: "kaya_demir", id: "rutbeyi_reddetti", agirlik: 25 }
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Rampadaki askerin gözü, tanıştığınız günden beri üstünde.", en: "The soldier on the ramp has had his eye on you since the day you met." } }
             sonraki: "@akis"
           - id: "elestir"
             etiket: { tr: "\"Aç bıraktığın adamlar ne olacak?\"", en: "\"And the people you're starving?\"" }
@@ -3365,7 +3378,7 @@ olaylar:
               - itibar: { lonca: 3, siginak: 3 }
               - iliski: { kaya_demir: { saygi: 3 }, elif_sari: { saygi: 3 } }
               - bayrak: "kaya_elif_koprusu"
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 3, max: 5 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 3, max: 5 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Rampadaki askerin gözü, tanıştığınız günden beri üstünde.", en: "The soldier on the ramp has had his eye on you since the day you met." } }
             sonraki: "@akis"
 
       - id: "kaya_ilk_tanisma_felsefe"
@@ -3382,7 +3395,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 6, guven: 4 } }
               - degisken: { hayatta_kalan: 2 }
               - bayrak: "lonca_muafiyet"
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 3, max: 5 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 3, max: 5 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Rampadaki askerin gözü, tanıştığınız günden beri üstünde.", en: "The soldier on the ramp has had his eye on you since the day you met." } }
             sonraki: "@akis"
           - id: "katil"
             etiket: { tr: "\"Haklısın.\" Bandı alıp koluna sar", en: "\"Fair.\" Take the tape and put it on" }
@@ -3391,7 +3404,7 @@ olaylar:
               - itibar: { lonca: 8 }
               - iliski: { kaya_demir: { saygi: 5, baglilik: 5 } }
               - bayrak: "lonca_saflarinda"
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Rampadaki askerin gözü, tanıştığınız günden beri üstünde.", en: "The soldier on the ramp has had his eye on you since the day you met." } }
             sonraki: "@akis"
           - id: "ayril"
             etiket: { tr: "\"Öyleyse senin bağıran sesin ben olmam.\"", en: "\"Then I won't be your loud voice.\"" }
@@ -3413,7 +3426,7 @@ olaylar:
               - itibar: { lonca: 6 }
               - iliski: { kaya_demir: { saygi: 3, baglilik: 3 } }
               - bayrak: "lonca_saflarinda"
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Rampadaki askerin gözü, tanıştığınız günden beri üstünde.", en: "The soldier on the ramp has had his eye on you since the day you met." } }
             sonraki: "@akis"
           - id: "birak"
             etiket: { tr: "Bandı bırak, git", en: "Leave the tape and go" }
@@ -3457,7 +3470,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 6, guven: 2 } }
               - degisken: { hayatta_kalan: 1 }
               - can: -10
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 3, max: 5 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 3, max: 5 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Rampadaki askerin gözü, tanıştığınız günden beri üstünde.", en: "The soldier on the ramp has had his eye on you since the day you met." } }
             sonraki: "@akis"
           - id: "kural"
             etiket: { tr: "Kuralı değiştirmesi için onu ikna et", en: "Talk him into changing the rule" }
@@ -3497,7 +3510,7 @@ olaylar:
               - ahlak: { duzen: 2 }
               - bilgi: "kaya_listesi"
               - gizle: 1
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Rampadaki askerin gözü, tanıştığınız günden beri üstünde.", en: "The soldier on the ramp has had his eye on you since the day you met." } }
             sonraki: "@akis"
           - id: "sor"
             etiket: { tr: "Çadıra gir, listeyi ona sor", en: "Walk into the tent and ask him about the list" }
@@ -3534,7 +3547,7 @@ olaylar:
               - bayrak: "lonca_saflarinda"
               - bayrak: "lonca_ikinci_adam"
               - dikkat: 2
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Rampadaki askerin gözü, tanıştığınız günden beri üstünde.", en: "The soldier on the ramp has had his eye on you since the day you met." } }
             sonraki: "@akis"
           - id: "reddet"
             etiket: { tr: "\"Kimsenin ikincisi olmam.\"", en: "\"I'm nobody's number two.\"" }
@@ -3542,7 +3555,7 @@ olaylar:
               - ahlak: { duzen: -3 }
               - iliski: { kaya_demir: { saygi: 4, guven: -3 } }
               - hafiza: { npc: "kaya_demir", id: "rutbeyi_reddetti", agirlik: 35 }
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Rampadaki askerin gözü, tanıştığınız günden beri üstünde.", en: "The soldier on the ramp has had his eye on you since the day you met." } }
             sonraki: "@akis"
           - id: "komuta"
             tur: "gosteris"
@@ -3556,7 +3569,7 @@ olaylar:
               - npc_iz: { kaya_demir: "yara_izi" }
               - bayrak: "lonca_saflarinda"
               - bayrak: "lonca_komutasi_alindi"
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Rampadaki askerin gözü, tanıştığınız günden beri üstünde.", en: "The soldier on the ramp has had his eye on you since the day you met." } }
             sonraki: "@akis"
 
       - id: "kaya_ilk_tanisma_yenilgi"
@@ -3570,7 +3583,7 @@ olaylar:
               - ahlak: { duzen: 2 }
               - iliski: { kaya_demir: { saygi: 4 } }
               - stat: { wil: 1 }
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 3, max: 5 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 3, max: 5 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Rampadaki askerin gözü, tanıştığınız günden beri üstünde.", en: "The soldier on the ramp has had his eye on you since the day you met." } }
             sonraki: "@akis"
           - id: "tasiyici"
             etiket: { tr: "Şimdilik taşıyıcı ol", en: "Take the hauler job for now" }
@@ -3591,18 +3604,19 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 2 }
               - iliski: { kaya_demir: { saygi: 2 } }
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Rampadaki askerin gözü, tanıştığınız günden beri üstünde.", en: "The soldier on the ramp has had his eye on you since the day you met." } }
             sonraki: "@akis"
           - id: "korku"
             etiket: { tr: "\"Korktum.\"", en: "\"I got scared.\"" }
             etkiler:
               - ahlak: { insanlik: 3 }
               - iliski: { kaya_demir: { guven: 5, saygi: 1 } }
-              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "kaya_gece_devriyesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Rampadaki askerin gözü, tanıştığınız günden beri üstünde.", en: "The soldier on the ramp has had his eye on you since the day you met." } }
             sonraki: "@akis"
 
   # ------------------------------------------------------------------ Kaya ile gece devriyesi (tohum)
   - id: "kaya_gece_devriyesi"
+    konum: ["us"]
     perde: [1]
     agirlik: 1
     etiketler: ["kamp", "lonca", "npc", "ahlak"]
@@ -3735,11 +3749,12 @@ olaylar:
               - ahlak: { insanlik: 2, duzen: -1 }
               - iliski: { kaya_demir: { saygi: 2, guven: -1 } }
               - bayrak: "kaya_elif_koprusu"
-              - tohum: { olay: "hastane_karantina", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "hastane_karantina", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Devriyede {npc:kaya_demir|e} anlattığın koğuş seni bekliyor.", en: "The ward you told {npc:kaya_demir} about on patrol is waiting on you." } }
             sonraki: "@akis"
 
   # ================================================================== ELİF — SAHRA HASTANESİ (Sığınak çekirdeği)
   - id: "elif_sahra_hastanesi"
+    konum: ["harabe_carsi"]
     perde: [1]
     bolge: ["harabe_carsi"]
     gun: { min: 4, max: 18 }
@@ -3825,7 +3840,7 @@ olaylar:
               - degisken: { elif_tanidik: 1 }
               - ahlak: { insanlik: -2, duzen: -1 }
               - iliski: { elif_sari: { saygi: -2 } }
-              - tohum: { olay: "hastane_karantina", gecikme: { min: 3, max: 5 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "hastane_karantina", gecikme: { min: 3, max: 5 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Yemek katındaki hastanede o ısırıklı adamın yatağı aklından çıkmadı.", en: "You haven't been able to forget the bed with the bitten man in that food-court hospital." } }
             sonraki: "@akis"
 
       - id: "elif_sahra_hastanesi_ameliyat"
@@ -3976,7 +3991,7 @@ olaylar:
               - bayrak: "karantina_oylandi"
               - bayrak: "karantina_nobeti"
               - gun: 1
-              - tohum: { olay: "hastane_karantina", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "hastane_karantina", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Yemek katındaki hastanede o ısırıklı adamın yatağı aklından çıkmadı.", en: "You haven't been able to forget the bed with the bitten man in that food-court hospital." } }
             sonraki: "elif_sahra_hastanesi_son"
           - id: "iceride"
             etiket: { tr: "İçeride kalsın diye oy ver", en: "Vote to keep him inside" }
@@ -3986,7 +4001,7 @@ olaylar:
               - iliski: { elif_sari: { guven: 3 } }
               - bayrak: "karantina_oylandi"
               - bayrak: "karantina_iceride"
-              - tohum: { olay: "hastane_karantina", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "hastane_karantina", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Yemek katındaki hastanede o ısırıklı adamın yatağı aklından çıkmadı.", en: "You haven't been able to forget the bed with the bitten man in that food-court hospital." } }
             sonraki: "elif_sahra_hastanesi_son"
           - id: "disarida"
             etiket: { tr: "Dışarı çıkarılsın diye oy ver", en: "Vote to put him outside" }
@@ -3996,7 +4011,7 @@ olaylar:
               - iliski: { elif_sari: { saygi: 2, guven: -4 } }
               - bayrak: "karantina_oylandi"
               - bayrak: "karantina_disarida"
-              - tohum: { olay: "hastane_karantina", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "hastane_karantina", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Yemek katındaki hastanede o ısırıklı adamın yatağı aklından çıkmadı.", en: "You haven't been able to forget the bed with the bitten man in that food-court hospital." } }
             sonraki: "elif_sahra_hastanesi_son"
           - id: "sor"
             etiket: { tr: "Hekime sor: \"Sen olsan ne yapardın?\"", en: "Ask the doctor: \"What would you do?\"" }
@@ -4018,7 +4033,7 @@ olaylar:
               - efsane: "yabancilari_iyilestirdi"
               - bayrak: "karantina_oylandi"
               - bayrak: "karantina_cozuldu"
-              - tohum: { olay: "hastane_karantina", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "hastane_karantina", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Yemek katındaki hastanede o ısırıklı adamın yatağı aklından çıkmadı.", en: "You haven't been able to forget the bed with the bitten man in that food-court hospital." } }
             sonraki: "elif_sahra_hastanesi_son"
 
       - id: "elif_sahra_hastanesi_fikir"
@@ -4037,7 +4052,7 @@ olaylar:
               - bayrak: "karantina_oylandi"
               - bayrak: "karantina_nobeti"
               - gun: 1
-              - tohum: { olay: "hastane_karantina", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "hastane_karantina", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Yemek katındaki hastanede o ısırıklı adamın yatağı aklından çıkmadı.", en: "You haven't been able to forget the bed with the bitten man in that food-court hospital." } }
             sonraki: "elif_sahra_hastanesi_son"
           - id: "lider"
             etiket: { tr: "\"Belki o lider sensin.\"", en: "\"Maybe you're the leader.\"" }
@@ -4047,7 +4062,7 @@ olaylar:
               - itibar: { siginak: 4 }
               - bayrak: "karantina_oylandi"
               - bayrak: "karantina_iceride"
-              - tohum: { olay: "hastane_karantina", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "hastane_karantina", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Yemek katındaki hastanede o ısırıklı adamın yatağı aklından çıkmadı.", en: "You haven't been able to forget the bed with the bitten man in that food-court hospital." } }
             sonraki: "elif_sahra_hastanesi_son"
           - id: "risk"
             etiket: { tr: "\"Ölmeni istemem. Dışarı çıksın.\"", en: "\"I don't want you dying. He goes out.\"" }
@@ -4056,7 +4071,7 @@ olaylar:
               - iliski: { elif_sari: { baglilik: 3, guven: -2 } }
               - bayrak: "karantina_oylandi"
               - bayrak: "karantina_disarida"
-              - tohum: { olay: "hastane_karantina", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "hastane_karantina", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Yemek katındaki hastanede o ısırıklı adamın yatağı aklından çıkmadı.", en: "You haven't been able to forget the bed with the bitten man in that food-court hospital." } }
             sonraki: "elif_sahra_hastanesi_son"
 
       - id: "elif_sahra_hastanesi_son"
@@ -4119,6 +4134,7 @@ olaylar:
 
   # ------------------------------------------------------------------ karantina (tohum)
   - id: "hastane_karantina"
+    konum: ["us"]
     perde: [1]
     agirlik: 1
     etiketler: ["siginak", "npc", "ahlak"]
@@ -4290,6 +4306,7 @@ olaylar:
 
   # ================================================================== VAHİT — VAAZ (Yükselenler çekirdeği)
   - id: "vahit_vaaz"
+    konum: ["us"]
     perde: [1]
     gun: { min: 7, max: 20 }
     agirlik: 6
@@ -4393,7 +4410,7 @@ olaylar:
               - bayrak: "vahit_vaazi_dinlendi"
               - ahlak: { duzen: 1 }
               - iliski: { vahit: { saygi: -2 } }
-              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Derme çatma kürsüdeki vaizin sözleri kamplara yayıldı.", en: "What that preacher said from his makeshift pulpit has spread through the camps." } }
             sonraki: "@akis"
 
       - id: "vahit_vaaz_sunu"
@@ -4416,7 +4433,7 @@ olaylar:
               - hafiza: { npc: "vahit", id: "kurbani_kurtardi", agirlik: -30 }
               - degisken: { hayatta_kalan: 1 }
               - bayrak: "yakit_kadin_kurtarildi"
-              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 2, max: 5 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 2, max: 5 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Derme çatma kürsüdeki vaizin sözleri kamplara yayıldı.", en: "What that preacher said from his makeshift pulpit has spread through the camps." } }
             sonraki: "@akis"
           - id: "payini_at"
             etiket: { tr: "Kendi payını çuvala at", en: "Toss your own share in the sack" }
@@ -4434,7 +4451,7 @@ olaylar:
               - itibar: { yukselenler: 8 }
               - iliski: { vahit: { baglilik: 5, saygi: 4 } }
               - bayrak: "secilmislere_katildi"
-              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 2, max: 5 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 2, max: 5 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Derme çatma kürsüdeki vaizin sözleri kamplara yayıldı.", en: "What that preacher said from his makeshift pulpit has spread through the camps." } }
             sonraki: "@akis"
           - id: "sola"
             tur: "gizle"
@@ -4443,7 +4460,7 @@ olaylar:
               - gizle: 3
               - ahlak: { insanlik: 3, merhamet: 2 }
               - iliski: { vahit: { saygi: -2 } }
-              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Derme çatma kürsüdeki vaizin sözleri kamplara yayıldı.", en: "What that preacher said from his makeshift pulpit has spread through the camps." } }
             sonraki: "@akis"
           - id: "hekime"
             etiket: { tr: "Soldakileri yemek katındaki hekime davet et", en: "Invite the left side to the food court doctor" }
@@ -4453,7 +4470,7 @@ olaylar:
               - itibar: { siginak: 4, yukselenler: -4 }
               - iliski: { vahit: { guven: -4 }, elif_sari: { guven: 3 } }
               - degisken: { hayatta_kalan: 2 }
-              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Derme çatma kürsüdeki vaizin sözleri kamplara yayıldı.", en: "What that preacher said from his makeshift pulpit has spread through the camps." } }
             sonraki: "@akis"
 
       - id: "vahit_vaaz_gul"
@@ -4471,7 +4488,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 2, duzen: -1 }
               - itibar: { yukselenler: -3 }
-              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Derme çatma kürsüdeki vaizin sözleri kamplara yayıldı.", en: "What that preacher said from his makeshift pulpit has spread through the camps." } }
             sonraki: "@akis"
           - id: "ozur"
             etiket: { tr: "Özür dile; korkmuş insanlarla alay edilmez", en: "Apologize. You don't mock scared people" }
@@ -4494,7 +4511,7 @@ olaylar:
               - ahlak: { merhamet: -2, duzen: -2 }
               - dikkat: 2
               - iliski: { vahit: { korku: 10, guven: -6 } }
-              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 2, max: 5 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 2, max: 5 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Derme çatma kürsüdeki vaizin sözleri kamplara yayıldı.", en: "What that preacher said from his makeshift pulpit has spread through the camps." } }
             sonraki: "@akis"
           - id: "inkar"
             tur: "gizle"
@@ -4509,7 +4526,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 1 }
               - iliski: { vahit: { saygi: 5, korku: 3 } }
-              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Derme çatma kürsüdeki vaizin sözleri kamplara yayıldı.", en: "What that preacher said from his makeshift pulpit has spread through the camps." } }
             sonraki: "@akis"
 
       - id: "vahit_vaaz_secilmis"
@@ -4527,7 +4544,7 @@ olaylar:
               - itibar: { yukselenler: 6 }
               - iliski: { vahit: { baglilik: 6, guven: 5 } }
               - bayrak: "secilmislere_katildi"
-              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Derme çatma kürsüdeki vaizin sözleri kamplara yayıldı.", en: "What that preacher said from his makeshift pulpit has spread through the camps." } }
             sonraki: "@akis"
           - id: "sina"
             etiket: { tr: "\"Önce sen. Dün gece ne dedi?\"", en: "\"You first. What did it say last night?\"" }
@@ -4543,7 +4560,7 @@ olaylar:
               - ahlak: { insanlik: 2, duzen: -1 }
               - gizle: 1
               - iliski: { vahit: { guven: -3 } }
-              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Derme çatma kürsüdeki vaizin sözleri kamplara yayıldı.", en: "What that preacher said from his makeshift pulpit has spread through the camps." } }
             sonraki: "@akis"
 
       - id: "vahit_vaaz_sina_yok"
@@ -4556,7 +4573,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 2 }
               - gizle: 1
-              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Derme çatma kürsüdeki vaizin sözleri kamplara yayıldı.", en: "What that preacher said from his makeshift pulpit has spread through the camps." } }
             sonraki: "@akis"
           - id: "kal"
             etiket: { tr: "Kal, dinlemeyi sürdür", en: "Stay. Keep listening" }
@@ -4581,7 +4598,7 @@ olaylar:
               - iliski: { vahit: { korku: 4, saygi: 6, guven: -8 } }
               - hafiza: { npc: "vahit", id: "olay:vahit_vaaz", agirlik: -30 }
               - degisken: { hayatta_kalan: 2 }
-              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Derme çatma kürsüdeki vaizin sözleri kamplara yayıldı.", en: "What that preacher said from his makeshift pulpit has spread through the camps." } }
             sonraki: "@akis"
           - id: "birak"
             etiket: { tr: "Yeter; bırak kendi gözleriyle görsünler", en: "That's enough. Let them see it for themselves" }
@@ -4608,7 +4625,7 @@ olaylar:
               - can: -5
               - ahlak: { duzen: 1 }
               - stat: { wil: 1 }
-              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Derme çatma kürsüdeki vaizin sözleri kamplara yayıldı.", en: "What that preacher said from his makeshift pulpit has spread through the camps." } }
             sonraki: "@akis"
           - id: "tasi_al"
             etiket: { tr: "Taşı al; bir gün ona geri vereceksin", en: "Pick up the rock. Someday you'll give it back" }
@@ -4633,7 +4650,7 @@ olaylar:
               - ahlak: { insanlik: 4, duzen: 2 }
               - itibar: { yukselenler: -4, siginak: 3 }
               - iliski: { vahit: { saygi: 4, guven: 3 } }
-              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Derme çatma kürsüdeki vaizin sözleri kamplara yayıldı.", en: "What that preacher said from his makeshift pulpit has spread through the camps." } }
             sonraki: "@akis"
           - id: "diz_coksun"
             etiket: { tr: "Bırak diz çöksün", en: "Let him kneel" }
@@ -4643,7 +4660,7 @@ olaylar:
               - itibar: { yukselenler: 8 }
               - iliski: { vahit: { baglilik: 8, korku: 4 } }
               - bayrak: "secilmislere_katildi"
-              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_yakit_listesi", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Derme çatma kürsüdeki vaizin sözleri kamplara yayıldı.", en: "What that preacher said from his makeshift pulpit has spread through the camps." } }
             sonraki: "@akis"
           - id: "dagit"
             etiket: { tr: "Kalabalığa dağılmalarını söyle", en: "Tell the crowd to break it up" }
@@ -4656,6 +4673,7 @@ olaylar:
 
   # ------------------------------------------------------------------ yakıt listesi (tohum)
   - id: "vahit_yakit_listesi"
+    konum: ["us"]
     perde: [1]
     agirlik: 1
     etiketler: ["yukselenler", "npc", "ahlak"]
@@ -4706,7 +4724,7 @@ olaylar:
               - iliski: { elif_sari: { guven: 4, saygi: 3 }, vahit: { guven: -6 } }
               - degisken: { hayatta_kalan: 4 }
               - gun: 1
-              - tohum: { olay: "hastane_karantina", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "hastane_karantina", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Yakıt listesindekileri hekime götürmüştün; koğuştan haber var.", en: "You took the people on the fuel list to the doctor. There's news from the ward." } }
             sonraki: "@akis"
           - id: "yuzles"
             etiket: { tr: "Kâğıdı al, onu bu gece bul", en: "Take the paper. Find him tonight" }
@@ -4730,7 +4748,7 @@ olaylar:
               - ahlak: { duzen: -1, insanlik: 2 }
               - itibar: { sessiz_ag: 5 }
               - iliski: { mert_kilic: { guven: 4, saygi: 3 } }
-              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "İstasyona götürdüğün yakıt listesinin sırrı çözülmeye başlamış.", en: "Somebody's started cracking the fuel list you took to the station." } }
             sonraki: "@akis"
 
       - id: "vahit_yakit_listesi_teselli_yok"
@@ -4827,6 +4845,7 @@ olaylar:
 
   # ================================================================== MERT — ŞİFRELİ MESAJ (Sessiz Ağ çekirdeği)
   - id: "mert_sifreli_mesaj"
+    konum: ["kirik_istasyon"]
     perde: [1]
     bolge: ["kirik_istasyon"]
     gun: { min: 8, max: 22 }
@@ -4944,7 +4963,7 @@ olaylar:
               - dikkat: 2
               - itibar: { sessiz_ag: 5 }
               - iliski: { mert_kilic: { baglilik: 6, guven: 4 } }
-              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kontrol odasındaki kayıt aklında dönüp duruyor.", en: "That recording from the control room keeps going around in your head." } }
             sonraki: "@akis"
           - id: "sil"
             tur: "gizle"
@@ -4953,7 +4972,7 @@ olaylar:
               - gizle: 2
               - ahlak: { duzen: 2 }
               - iliski: { mert_kilic: { saygi: 5, guven: 2 } }
-              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kontrol odasındaki kayıt aklında dönüp duruyor.", en: "That recording from the control room keeps going around in your head." } }
             sonraki: "@akis"
           - id: "yoldas"
             etiket: { tr: "Onu yanına al; sahada veri toplasın", en: "Bring him along. Let him collect data in the field" }
@@ -4965,7 +4984,7 @@ olaylar:
               - iliski: { mert_kilic: { baglilik: 8 } }
               - yoldas_katil: "mert_kilic"
               - bayrak: "mert_yoldas"
-              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 3, max: 5 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 3, max: 5 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kontrol odasındaki kayıt aklında dönüp duruyor.", en: "That recording from the control room keeps going around in your head." } }
             sonraki: "mert_sifreli_mesaj_katilim"
 
       - id: "mert_sifreli_mesaj_sahte"
@@ -4993,7 +5012,7 @@ olaylar:
             etiket: { tr: "Kıza göz kırp, çık", en: "Wink at the kid and leave" }
             etkiler:
               - ahlak: { duzen: -1 }
-              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kontrol odasındaki kayıt aklında dönüp duruyor.", en: "That recording from the control room keeps going around in your head." } }
             sonraki: "@akis"
 
       - id: "mert_sifreli_mesaj_coz"
@@ -5009,7 +5028,7 @@ olaylar:
               - ahlak: { duzen: -1, insanlik: 2 }
               - itibar: { sessiz_ag: 8 }
               - iliski: { mert_kilic: { baglilik: 5, guven: 4 } }
-              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kontrol odasındaki kayıt aklında dönüp duruyor.", en: "That recording from the control room keeps going around in your head." } }
             sonraki: "@akis"
           - id: "yay"
             etiket: { tr: "\"Bunu hekim de, asker de bilmeli.\"", en: "\"The doctor needs to hear this. The soldier too.\"" }
@@ -5028,7 +5047,7 @@ olaylar:
               - iliski: { mert_kilic: { baglilik: 8 } }
               - yoldas_katil: "mert_kilic"
               - bayrak: "mert_yoldas"
-              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 3, max: 5 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 3, max: 5 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kontrol odasındaki kayıt aklında dönüp duruyor.", en: "That recording from the control room keeps going around in your head." } }
             sonraki: "mert_sifreli_mesaj_katilim"
 
       - id: "mert_sifreli_mesaj_anten"
@@ -5068,7 +5087,7 @@ olaylar:
               - iliski: { mert_kilic: { guven: 8, saygi: 6, baglilik: 4 } }
               - bilgi: "baska_ogreticiler"
               - xp: 100
-              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kontrol odasındaki kayıt aklında dönüp duruyor.", en: "That recording from the control room keeps going around in your head." } }
             sonraki: "@akis"
           - id: "yoldas"
             etiket: { tr: "Telsizden seslen: \"Gel, sahaya çıkıyoruz.\"", en: "Tell him over the walkie: \"Come on. Field trip.\"" }
@@ -5081,7 +5100,7 @@ olaylar:
               - iliski: { mert_kilic: { baglilik: 8, guven: 4 } }
               - yoldas_katil: "mert_kilic"
               - bayrak: "mert_yoldas"
-              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 3, max: 5 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 3, max: 5 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kontrol odasındaki kayıt aklında dönüp duruyor.", en: "That recording from the control room keeps going around in your head." } }
             sonraki: "mert_sifreli_mesaj_katilim"
           - id: "isaret"
             etiket: { tr: "Antene istasyonun hoparlörünü de bağla", en: "Patch the station speakers into the antenna" }
@@ -5105,7 +5124,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 2 }
               - iliski: { mert_kilic: { guven: 3 } }
-              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 4, max: 6 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 4, max: 6 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kontrol odasındaki kayıt aklında dönüp duruyor.", en: "That recording from the control room keeps going around in your head." } }
             sonraki: "@akis"
           - id: "yine"
             etiket: { tr: "Eldiven bul, yarın yeniden dene", en: "Find gloves. Try again tomorrow" }
@@ -5132,7 +5151,7 @@ olaylar:
               - ahlak: { merhamet: 3, duzen: -3 }
               - iliski: { mert_kilic: { guven: 6, korku: -3 } }
               - itibar: { sessiz_ag: 3 }
-              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kontrol odasındaki kayıt aklında dönüp duruyor.", en: "That recording from the control room keeps going around in your head." } }
             sonraki: "@akis"
 
       - id: "mert_sifreli_mesaj_katilim"
@@ -5156,6 +5175,7 @@ olaylar:
 
   # ------------------------------------------------------------------ çözülen satır (tohum)
   - id: "mert_cozulen_satir"
+    konum: ["us"]
     perde: [1]
     agirlik: 1
     etiketler: ["sessiz_ag", "npc", "gizem", "anomali"]

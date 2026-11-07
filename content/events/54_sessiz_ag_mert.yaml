@@ -8,6 +8,7 @@
 olaylar:
   # ================================================================== SESSİZ AĞ · 1: frekans
   - id: "sessiz_ag_1_frekans"
+    konum: ["us"]
     perde: [2]
     gun: { min: 45, max: 125 }
     agirlik: 7
@@ -407,6 +408,7 @@ olaylar:
 
   # ================================================================== MERT · 2: kaynak parçası
   - id: "mert_kaynak_parcasi"
+    konum: ["us"]
     perde: [2]
     gun: { min: 55, max: 165 }
     kosul: { bayrak: "mert_ag_temasi" }
@@ -844,6 +846,7 @@ olaylar:
 
   # ================================================================== SESSİZ AĞ · 2: kaynak avı (zindan)
   - id: "sessiz_ag_2_kaynak_avi"
+    konum: ["us"]
     perde: [2]
     gun: { min: 85, max: 175 }
     kosul: { gorev: { zincir_sessiz_ag: "basla" } }
@@ -1260,6 +1263,7 @@ olaylar:
 
   # ================================================================== MERT · 3: takip
   - id: "mert_takip_edildi"
+    konum: ["us"]
     perde: [2, 3]
     gun: { min: 110, max: 205 }
     kosul: { bayrak: "mert_ag_temasi" }
@@ -1651,6 +1655,7 @@ olaylar:
 
   # ================================================================== SESSİZ AĞ · 3: Kule kodu
   - id: "sessiz_ag_3_kule_kodu"
+    konum: ["us"]
     perde: [3]
     gun: { min: 186, max: 275 }
     kosul: { gorev: { zincir_sessiz_ag: "basla" }, bayrak: ["sa_kaynak_avi_tamam", "kule_acik"] }
@@ -1942,6 +1947,7 @@ olaylar:
 
   # ================================================================== MERT · 4: Kadim teklifi
   - id: "mert_kadim_teklifi"
+    konum: ["us"]
     perde: [3]
     gun: { min: 190, max: 296 }
     kosul: { bayrak: "mert_ag_temasi" }
@@ -2394,6 +2400,7 @@ olaylar:
 
   # ================================================================== MERT · 4b: muhbirin izi (tohum)
   - id: "mert_muhbir_izi"
+    konum: ["us"]
     yalniz_tohum: true
     agirlik: 1
     etiketler: ["sessiz_ag", "npc", "kadim", "ihanet"]
@@ -2429,7 +2436,7 @@ olaylar:
               - degisken: { kadim_tehdit: -2 }
               - itibar: { sessiz_ag: 6 }
               - iliski: { mert_kilic: { guven: 12, baglilik: 8 }, yanki: { guven: 4 } }
-              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 8, max: 20 }, kosul: { gorev: { zincir_sessiz_ag: "basla" }, bayrak: "sa_kule_kodu_okundu" } }
+              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 8, max: 20 }, kosul: { gorev: { zincir_sessiz_ag: "basla" }, bayrak: "sa_kule_kodu_okundu" }, hatirlatma: { tr: "Saat başı giden mesaj seni {npc:mert_kilic|e} çıkarmıştı; o gün verdiğin kararı unutmadın.", en: "That hourly message led you to {npc:mert_kilic}. You haven't forgotten what you decided that day." } }
             kronik: { tr: "Kadimler'e satılmış {npc:mert_kilic|i} bütün bir gece konuşarak geri kazandın; sabaha karşı yeniden senin tarafındaydı.", en: "One long night of talking won back {npc:mert_kilic}, who'd been sold to the Ancients. By dawn he was on your side again." }
             sonraki: "mmi_donus"
           - id: "satin_al"
@@ -2443,7 +2450,7 @@ olaylar:
               - degisken: { kadim_tehdit: 3 }
               - itibar: { kadimler: -10, sessiz_ag: 8 }
               - iliski: { mert_kilic: { guven: 15, korku: -6 } }
-              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 8, max: 20 }, kosul: { gorev: { zincir_sessiz_ag: "basla" }, bayrak: "sa_kule_kodu_okundu" } }
+              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 8, max: 20 }, kosul: { gorev: { zincir_sessiz_ag: "basla" }, bayrak: "sa_kule_kodu_okundu" }, hatirlatma: { tr: "Saat başı giden mesaj seni {npc:mert_kilic|e} çıkarmıştı; o gün verdiğin kararı unutmadın.", en: "That hourly message led you to {npc:mert_kilic}. You haven't forgotten what you decided that day." } }
             kronik: { tr: "Kadimler'e sattığın {npc:mert_kilic|i} geri satın aldın; geri almanın bedeli satmaktan ağır oldu.", en: "You bought back {npc:mert_kilic}, whom you'd sold to the Ancients. The price was higher than what you got for him." }
             sonraki: "mmi_satin"
           - id: "surgun"
@@ -2459,7 +2466,7 @@ olaylar:
               - npc_gitti: "mert_kilic"
               - itibar: { sessiz_ag: 4 }
               - iliski: { mert_kilic: { guven: -20, korku: 10 } }
-              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 8, max: 20 }, kosul: { gorev: { zincir_sessiz_ag: "basla" }, bayrak: "sa_kule_kodu_okundu" } }
+              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 8, max: 20 }, kosul: { gorev: { zincir_sessiz_ag: "basla" }, bayrak: "sa_kule_kodu_okundu" }, hatirlatma: { tr: "Saat başı giden mesaj seni {npc:mert_kilic|e} çıkarmıştı; o gün verdiğin kararı unutmadın.", en: "That hourly message led you to {npc:mert_kilic}. You haven't forgotten what you decided that day." } }
             kronik: { tr: "{npc:mert_kilic|i} Sessiz Ağ'ın önünde ifşa edip {yer:kiyikent|den} sürdün; Ağ'ın kurucusu bileğinde bakır bileziği olmadan çekip gitti.", en: "You exposed {npc:mert_kilic} before the Quiet Network and exiled him from {yer:kiyikent}. The Network's founder walked out with his copper bracelet gone from his wrist." }
             sonraki: "mmi_surgun"
           - id: "infaz"
@@ -2482,7 +2489,7 @@ olaylar:
               - ahlak: { insanlik: -2, duzen: -1 }
               - degisken: { kadim_tehdit: 3 }
               - iliski: { yanki: { guven: -4 } }
-              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 8, max: 20 }, kosul: { gorev: { zincir_sessiz_ag: "basla" }, bayrak: "sa_kule_kodu_okundu" } }
+              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 8, max: 20 }, kosul: { gorev: { zincir_sessiz_ag: "basla" }, bayrak: "sa_kule_kodu_okundu" }, hatirlatma: { tr: "Saat başı giden mesaj seni {npc:mert_kilic|e} çıkarmıştı; o gün verdiğin kararı unutmadın.", en: "That hourly message led you to {npc:mert_kilic}. You haven't forgotten what you decided that day." } }
             kronik: { tr: "Muhbirin kim olduğunu bildin ve kılını kıpırdatmadın; Kadimler'e saat başı rapor gitmeye devam etti.", en: "You knew exactly who the informant was and did nothing. The Ancients kept getting their hourly report." }
             sonraki: "mmi_bekle"
           - id: "test_yanki"
@@ -2493,7 +2500,7 @@ olaylar:
               - ahlak: { duzen: -2, insanlik: 1 }
               - degisken: { kadim_tehdit: -3 }
               - iliski: { yanki: { guven: 4, saygi: 4 }, mert_kilic: { guven: 6 } }
-              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 8, max: 20 }, kosul: { gorev: { zincir_sessiz_ag: "basla" }, bayrak: "sa_kule_kodu_okundu" } }
+              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 8, max: 20 }, kosul: { gorev: { zincir_sessiz_ag: "basla" }, bayrak: "sa_kule_kodu_okundu" }, hatirlatma: { tr: "Saat başı giden mesaj seni {npc:mert_kilic|e} çıkarmıştı; o gün verdiğin kararı unutmadın.", en: "That hourly message led you to {npc:mert_kilic}. You haven't forgotten what you decided that day." } }
             kronik: { tr: "Kafandaki ses, kendisi hakkında kusursuz bir yalan uydurarak Kadimler'in testini geçti.", en: "The voice in your head passed the Ancients' test with a flawless lie about itself." }
             sonraki: "mmi_test"
           - id: "cek"
@@ -2505,7 +2512,7 @@ olaylar:
               - bayrak: "mert_teklifi_reddetti"
               - degisken: { kadim_tehdit: 3 }
               - iliski: { mert_kilic: { guven: 8, korku: -6 } }
-              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 8, max: 20 }, kosul: { gorev: { zincir_sessiz_ag: "basla" }, bayrak: "sa_kule_kodu_okundu" } }
+              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 8, max: 20 }, kosul: { gorev: { zincir_sessiz_ag: "basla" }, bayrak: "sa_kule_kodu_okundu" }, hatirlatma: { tr: "Saat başı giden mesaj seni {npc:mert_kilic|e} çıkarmıştı; o gün verdiğin kararı unutmadın.", en: "That hourly message led you to {npc:mert_kilic}. You haven't forgotten what you decided that day." } }
             kronik: { tr: "Çift taraflı ajanın {npc:mert_kilic|i} yakalanmadan bu işten çektin.", en: "You pulled {npc:mert_kilic}, your double agent, out before he got caught." }
             sonraki: "mmi_cekildi"
           - id: "devam"
@@ -2624,6 +2631,7 @@ olaylar:
 
   # ================================================================== SESSİZ AĞ · 4: Çekirdek haritası
   - id: "sessiz_ag_4_cekirdek_haritasi"
+    konum: ["us"]
     perde: [3]
     gun: { min: 245, max: 328 }
     kosul: { gorev: { zincir_sessiz_ag: "basla" }, bayrak: "sa_kule_kodu_okundu" }
@@ -2903,6 +2911,7 @@ olaylar:
 
   # ================================================================== SESSİZ AĞ · 5: arka kapı
   - id: "sessiz_ag_5_arka_kapi"
+    konum: ["us"]
     perde: [4]
     gun: { min: 332, max: 353 }
     kosul: { gorev: { zincir_sessiz_ag: "basla" }, bayrak: "sa_cekirdek_haritasi_tamam" }
@@ -3303,6 +3312,7 @@ olaylar:
 
   # ================================================================== MERT · 5: Kod Kırıcı
   - id: "mert_kod_kirici"
+    konum: ["us"]
     perde: [4]
     gun: { min: 335, max: 357 }
     kosul: { gorev: { zincir_sessiz_ag: "tamam" } }
@@ -3559,6 +3569,7 @@ olaylar:
 
   # ================================================================== MERT · son log (tohum)
   - id: "mert_son_log"
+    konum: ["us"]
     yalniz_tohum: true
     agirlik: 1
     etiketler: ["sessiz_ag", "npc", "nefes"]

@@ -6,6 +6,7 @@
 olaylar:
   # ================================================================== ANA YAY: ÇOK-EVREN GEÇİDİ (gün 200)
   - id: "cok_evren_kapisi"
+    konum: ["kule_dibi"]
     perde: [3]
     agirlik: 1
     etiketler: ["ana_yay", "cok_evren", "kule"]
@@ -390,6 +391,7 @@ olaylar:
 
   # ================================================================== BATIK TAKIMADA (Nehhalar · Hasat'ın aynası)
   - id: "batik_ilk_adim"
+    konum: ["batik_takimada"]
     perde: [3, 4]
     bolge: ["batik_takimada"]
     gun: { min: 200, max: 364 }
@@ -642,6 +644,7 @@ olaylar:
 
   # ------------------------------------------------------------------ SON FENER (önemli)
   - id: "batik_son_fener"
+    konum: ["batik_takimada"]
     perde: [3, 4]
     bolge: ["batik_takimada"]
     gun: { min: 200, max: 364 }
@@ -894,6 +897,7 @@ olaylar:
 
   # ------------------------------------------------------------------ TUZ ARŞİVİ
   - id: "batik_tuz_arsivi"
+    konum: ["batik_takimada"]
     perde: [3, 4]
     bolge: ["batik_takimada"]
     gun: { min: 200, max: 364 }
@@ -1107,6 +1111,7 @@ olaylar:
 
   # ------------------------------------------------------------------ SON BAŞAKÇI (boss · önemli)
   - id: "batik_son_basakci"
+    konum: ["batik_takimada"]
     perde: [3, 4]
     bolge: ["batik_takimada"]
     gun: { min: 200, max: 364 }
@@ -1387,6 +1392,7 @@ olaylar:
 
   # ------------------------------------------------------------------ TİLU (tohum: cok_evren_kapisi)
   - id: "batik_tilu"
+    konum: ["kule_dibi"]
     perde: [3, 4]
     agirlik: 1
     etiketler: ["cok_evren", "batik", "kurtarma"]
@@ -1578,6 +1584,7 @@ olaylar:
 
   # ================================================================== PİRİNÇ KERVAN (Tavvarlar · Vassal'ın aynası)
   - id: "kervan_tarti_carsisi"
+    konum: ["pirinc_kervan"]
     perde: [3, 4]
     bolge: ["pirinc_kervan"]
     gun: { min: 200, max: 364 }
@@ -1840,6 +1847,7 @@ olaylar:
 
   # ------------------------------------------------------------------ ONDALIK (önemli)
   - id: "kervan_ondalik"
+    konum: ["pirinc_kervan"]
     perde: [3, 4]
     bolge: ["pirinc_kervan"]
     gun: { min: 200, max: 364 }
@@ -2085,6 +2093,7 @@ olaylar:
 
   # ------------------------------------------------------------------ SAYMAN (yedi_taht_davet)
   - id: "kervan_sayman"
+    konum: ["pirinc_kervan"]
     perde: [3, 4]
     bolge: ["pirinc_kervan"]
     gun: { min: 200, max: 364 }
@@ -2258,6 +2267,7 @@ olaylar:
 
   # ------------------------------------------------------------------ BOŞ KEFE (boss · önemli)
   - id: "kervan_bos_kefe"
+    konum: ["pirinc_kervan"]
     perde: [3, 4]
     bolge: ["pirinc_kervan"]
     gun: { min: 200, max: 364 }
@@ -2572,6 +2582,7 @@ olaylar:
 
   # ================================================================== YEDİ TAHT (Kadim sarayı · Yükseliş'in aynası)
   - id: "taht_kabul_salonu"
+    konum: ["yedi_taht"]
     perde: [3, 4]
     bolge: ["yedi_taht"]
     gun: { min: 200, max: 364 }
@@ -2827,6 +2838,7 @@ olaylar:
 
   # ------------------------------------------------------------------ YEDİNCİ KOLTUK (önemli)
   - id: "taht_yedinci_koltuk"
+    konum: ["yedi_taht"]
     perde: [3, 4]
     bolge: ["yedi_taht"]
     gun: { min: 200, max: 364 }
@@ -3063,6 +3075,7 @@ olaylar:
 
   # ------------------------------------------------------------------ UYUYAN TANRILAR
   - id: "taht_uyuyan_tanrilar"
+    konum: ["yedi_taht"]
     perde: [3, 4]
     bolge: ["yedi_taht"]
     gun: { min: 200, max: 364 }
@@ -3237,6 +3250,7 @@ olaylar:
 
   # ------------------------------------------------------------------ VARİS DÜELLOSU (boss · önemli · tohum)
   - id: "taht_varis_duellosu"
+    konum: ["yedi_taht"]
     perde: [3, 4]
     agirlik: 1
     etiketler: ["cok_evren", "taht", "boss", "kadimler"]
@@ -3461,6 +3475,7 @@ olaylar:
 
   # ------------------------------------------------------------------ KESH'İN YEMİNİ (tohum: batik_son_basakci · basakci_sabah)
   - id: "batik_kesh_yemini"
+    konum: ["kule_dibi"]
     perde: [3, 4]
     agirlik: 1
     etiketler: ["cok_evren", "batik", "ordu"]

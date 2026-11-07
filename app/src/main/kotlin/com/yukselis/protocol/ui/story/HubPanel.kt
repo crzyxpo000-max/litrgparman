@@ -23,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -54,10 +55,29 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
             Text(stringResource(R.string.hub_danger, hub.danger), style = GameType.system, color = dangerColor(hub.danger))
             HelpButton(stringResource(R.string.help_hub), Glossary.hub())
         }
+        // Bölüm yapısı: görevdeysen nerede olduğun, üsteysen girilebilecek operasyon (DECISIONS #130).
+        hub.mission?.let { Text(it, style = GameType.system, color = MaterialTheme.colorScheme.tertiary) }
         TipCard("hub", stringResource(R.string.tip_hub))
         if (hub.mustCamp) {
             Button(onClick = { onAction(HubAction.Camp) }, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.hub_camp)) }
+            // Görevdeyken gün bitti: sahada kamp ya da üsse dönüş (dönüş yuva harcamaz).
+            if (hub.canReturn) {
+                OutlinedButton(onClick = { onAction(HubAction.ReturnToBase) }, modifier = Modifier.fillMaxWidth()) { Text("← " + stringResource(R.string.hub_return)) }
+            }
             return@Column
+        }
+        hub.operations.forEach { op ->
+            Button(onClick = { onAction(HubAction.EnterOperation(op.index)) }, modifier = Modifier.fillMaxWidth()) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(stringResource(R.string.hub_operation, op.title), maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    Text(
+                        pluralStringResource(R.plurals.hub_operation_days, op.daysLeft, op.region, op.daysLeft),
+                        style = GameType.system,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
+            }
         }
         if (hub.cards.isNotEmpty()) {
             Text(stringResource(R.string.hub_hand), style = GameType.system, color = MaterialTheme.colorScheme.primary)
@@ -68,7 +88,13 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
-                        Text(card.title, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(card.title, style = MaterialTheme.typography.bodyLarge)
+                            // Başka bölgede geçen olay: oynamak oraya bir görev başlatır.
+                            card.region?.let {
+                                Text(stringResource(R.string.hub_card_away, it), style = GameType.system, color = MaterialTheme.colorScheme.tertiary)
+                            }
+                        }
                         // Gerilim: ● sayısı
                         Text("●".repeat(card.tension), style = GameType.system, color = tensionColor(card.tension))
                     }
@@ -77,12 +103,16 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
         }
         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             val pad = PaddingValues(horizontal = 4.dp, vertical = 8.dp)
-            FilledTonalButton(onClick = { onAction(HubAction.Explore) }, contentPadding = pad, modifier = Modifier.weight(1f)) { OneLine(stringResource(R.string.hub_explore)) }
+            if (hub.canExplore) {
+                FilledTonalButton(onClick = { onAction(HubAction.Explore) }, contentPadding = pad, modifier = Modifier.weight(1f)) {
+                    OneLine(stringResource(R.string.hub_explore))
+                }
+            }
             FilledTonalButton(onClick = { onAction(HubAction.Train) }, contentPadding = pad, modifier = Modifier.weight(1f)) { OneLine(stringResource(R.string.hub_train)) }
             FilledTonalButton(onClick = { onAction(HubAction.Rest) }, contentPadding = pad, modifier = Modifier.weight(1f)) { OneLine(stringResource(R.string.hub_rest)) }
         }
         val tower = hub.tower
-        if (tower != null || hub.gates.isNotEmpty() || hub.travel.isNotEmpty()) {
+        if (tower != null || hub.gates.isNotEmpty() || hub.travel.isNotEmpty() || hub.canReturn) {
             Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 val pad = PaddingValues(horizontal = 4.dp, vertical = 8.dp)
                 tower?.let { t ->
@@ -98,6 +128,11 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
                 if (hub.travel.isNotEmpty()) {
                     OutlinedButton(onClick = { dialog = HubDialog.TRAVEL }, contentPadding = pad, modifier = Modifier.weight(1f)) {
                         OneLine(stringResource(R.string.hub_travel_btn) + " →")
+                    }
+                }
+                if (hub.canReturn) {
+                    OutlinedButton(onClick = { onAction(HubAction.ReturnToBase) }, contentPadding = pad, modifier = Modifier.weight(1f)) {
+                        OneLine("← " + stringResource(R.string.hub_return))
                     }
                 }
             }

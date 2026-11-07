@@ -285,7 +285,21 @@ private fun MapSection(regions: List<RegionView>) {
 /** Görevler ve efsane (tanıklı başarılar). */
 @Composable
 private fun JournalSection(journal: JournalView) {
-    Text(stringResource(R.string.quests), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
+    // Bölüm hedefi yan görevlerden ayrı (DECISIONS #130).
+    journal.chapter?.let { ch ->
+        Text(stringResource(R.string.chapter_goal_title), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
+        Column(modifier = Modifier.padding(vertical = 3.dp)) {
+            Text(stringResource(R.string.chapter_line, ch.no, ch.title), style = GameType.systemTitle)
+            Text(ch.goal, style = GameType.system)
+            if (ch.threat.isNotEmpty()) Text(ch.threat, style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(
+                ch.phase + " · " + androidx.compose.ui.res.pluralStringResource(R.plurals.chapter_days, ch.daysLeft, ch.daysLeft),
+                style = GameType.system,
+                color = MaterialTheme.colorScheme.tertiary,
+            )
+        }
+    }
+    Text(stringResource(R.string.side_quests), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
     if (journal.quests.isEmpty()) Text(stringResource(R.string.no_quests), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
     journal.quests.forEach { q ->
         val color = when (q.status) {

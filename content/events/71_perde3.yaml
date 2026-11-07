@@ -9,6 +9,7 @@
 olaylar:
   # ================================================================== YOL OLUŞUMU (ana yay, gün 260)
   - id: "yol_olusumu"
+    konum: ["us"]
     perde: [3]
     agirlik: 1
     etiketler: ["ana_yay", "yol", "oz", "yanki"]
@@ -896,6 +897,7 @@ olaylar:
   # Sıralama'nın İkincisi. Yönlendirme: buyuk_ihanet_iz (Mert/Kaya/dışarı) → buyuk_ihanet_kule (Thessar/Deniz/üst kat) →
   # buyuk_ihanet_ellinci (Aras/İkinci). npc listesi bilerek boş: ölen bir NPC ana yayı kapatmasın.
   - id: "buyuk_ihanet"
+    konum: ["eski_sehir"]
     perde: [3]
     agirlik: 1
     etiketler: ["ana_yay", "ihanet", "kasaba_cekirdegi"]
@@ -908,7 +910,7 @@ olaylar:
       - id: "buyuk_ihanet_1"
         yer: "kasaba_cekirdegi"
         paragraflar:
-          - { tr: "Altmış beş gün kaldı. Kadim gemisinin gölgesi bu sabah ilk kez {yer:kiyikent_liman|in} tamamını örttü; şehrin bütün kampları da Entegrasyon'dan bu yana ilk kez aynı odada oturmaya razı oldu. Oda {yer:kasaba_cekirdegi}: ortasında mavi bir kristal nabız gibi atıyor.", en: "Sixty-five days left. This morning the Ancient ship's shadow covered the entire waterfront for the first time, and every camp in the city agreed to sit in the same room for the first time since Integration: {yer:kasaba_cekirdegi}, with its blue crystal pulsing in the middle like a heartbeat." }
+          - { tr: "Hasata iki ay kaldı. Kadim gemisinin gölgesi bu sabah ilk kez {yer:kiyikent_liman|in} tamamını örttü; şehrin bütün kampları da Entegrasyon'dan bu yana ilk kez aynı odada oturmaya razı oldu. Oda {yer:kasaba_cekirdegi}: ortasında mavi bir kristal nabız gibi atıyor.", en: "Two months to the Harvest. This morning the Ancient ship's shadow covered the entire waterfront for the first time, and every camp in the city agreed to sit in the same room for the first time since Integration: {yer:kasaba_cekirdegi}, with its blue crystal pulsing in the middle like a heartbeat." }
           - metin: { tr: "{npc:elif_sari} masanın başına geçmiş, önüne bir yığın not koymuş. Uykusuzluktan gözleri kıpkırmızı, sesiyse sakin.", en: "{npc:elif_sari} sits at the head of the table behind a stack of notes, eyes red from no sleep, voice steady anyway." }
             kosul: { npc_hayatta: "elif_sari" }
           - metin: { tr: "{npc:kaya_demir} oturmayı reddedip sırtını duvara vermiş, ayakta bekliyor; iki adamı kapının iki yanına dikilmiş.", en: "{npc:kaya_demir} won't sit. He stands with his back to the wall and two of his people flanking the door." }
@@ -1402,7 +1404,7 @@ olaylar:
             kosul: { bayrak: "kaya_darbe_ortagi" }
           - metin: { tr: "Konsey'i uyarmıştın ama uyarın kâğıt üstünde kaldı. {npc:kaya_demir} ihbarı biliyor; sana bakarken gözlerinde öfke değil, hayal kırıklığı var. \"Önce bana gelebilirdin,\" diyor.", en: "You warned the Council. The warning stayed on paper. {npc:kaya_demir} knows you turned him in, and the look he gives you isn't anger. It's disappointment. \"You could've come to me first,\" he says." }
             kosul: { bayrak: "kaya_ihbar_edildi" }
-          - { tr: "\"Altmış beş gün,\" diyor. \"Bu masa altmış beş günde iki karar alabildi, ikisi de su tayınıyla ilgili. Bu şehri ben ayakta tutacağım. Senden diz çökmeni istemiyorum; yanımda durmanı istiyorum.\"", en: "\"Sixty-five days,\" he says. \"This table made two decisions in sixty-five days, and both of them were about water rationing. I'm going to hold this city. I'm not asking you to kneel. I'm asking you to stand next to me.\"" }
+          - { tr: "\"İki ay,\" diyor. \"Bu masa bunca zamanda iki karar alabildi, ikisi de su tayınıyla ilgili. Bu şehri ben ayakta tutacağım. Senden diz çökmeni istemiyorum; yanımda durmanı istiyorum.\"", en: "\"Two months,\" he says. \"All this time, this table made two decisions, and both of them were about water rationing. I'm going to hold this city. I'm not asking you to kneel. I'm asking you to stand next to me.\"" }
           - metin: { tr: "{npc:yanki}: dürüst bir adam. en tehlikelileri bunlardır.", en: "{npc:yanki}: an honest man. that's the most dangerous kind." }
             kosul: { bayrak: "yanki_bagi" }
         sezgiler:
@@ -1549,7 +1551,7 @@ olaylar:
         paragraflar:
           - { tr: "Ortalığa uzun bir sessizlik çöküyor. {npc:kaya_demir} önce sana, ardından kristaldeki mühre bakıp elini çekiyor. Mühür sönmüş, ışık yeniden maviye dönmüş.", en: "A long silence. {npc:kaya_demir} looks at you, then at the seal on the crystal. Then he pulls his hand back. The seal goes dark and the light turns blue." }
           - { tr: "Kapıya yürüyüp sürgüyü kendi eliyle açıyor. \"Silahları indirin,\" diyor adamlarına. İtiraz eden çıkmıyor: onu dinlemeye alışkınlar, seni dinlemeye de alışacaklar.", en: "He walks to the door and throws back the bolt himself. \"Stand down,\" he tells his people. Nobody argues. They're used to listening to him. They're going to get used to listening to you." }
-          - { tr: "Sana dönüyor: \"Bir şartım var. Altmış beş gün sonra bu şehir hâlâ ayaktaysa haklı çıkan sen ol, ben değil.\"", en: "\"One condition,\" he says, turning back to you. \"Sixty-five days from now, if this city's still standing, you be the one who was right. Not me.\"" }
+          - { tr: "Sana dönüyor: \"Bir şartım var. Hasat günü bu şehir hâlâ ayaktaysa haklı çıkan sen ol, ben değil.\"", en: "\"One condition,\" he says, turning back to you. \"Come Harvest day, if this city's still standing, you be the one who was right. Not me.\"" }
         secenekler:
           - id: "rutbe_kalsin"
             etiket: { tr: "\"Rütben kalsın. Bu gece hiç yaşanmadı.\"", en: "\"Keep your stripes. Tonight never happened.\"" }
@@ -2289,6 +2291,7 @@ olaylar:
 
   # ================================================================== İHANETİN ARDINDAN (tohum)
   - id: "ihanet_sonrasi"
+    konum: ["eski_sehir"]
     perde: [3]
     agirlik: 1
     etiketler: ["ihanet", "anma"]
@@ -2394,6 +2397,7 @@ olaylar:
 
   # ================================================================== PERDE 3 SONU (ana yay, gün 320)
   - id: "perde3_son"
+    konum: ["kiyikent_liman"]
     perde: [3]
     agirlik: 1
     etiketler: ["ana_yay", "kadimler", "filo"]
@@ -2600,6 +2604,7 @@ olaylar:
 
   # ================================================================== DİKKAT EŞİKLERİ (Perde 3, motor tohumlar)
   - id: "dikkat_75_p3"
+    konum: ["us"]
     perde: [3]
     agirlik: 1
     etiketler: ["dikkat", "kadimler"]
@@ -2720,6 +2725,7 @@ olaylar:
             sonraki: "@akis"
 
   - id: "dikkat_100_p3"
+    konum: ["us"]
     perde: [3]
     agirlik: 1
     etiketler: ["dikkat", "sistem"]
@@ -2849,6 +2855,7 @@ olaylar:
   # ================================================================== PERDE 3 KIYIKENT (Gün 181–330)
   # ---------------------------------------------------------------- Ordu: bayrağın altında
   - id: "p3_bayrak_altinda"
+    konum: ["kiyikent_liman", "kule_dibi", "sanayi"]
     perde: [3]
     bolge: ["kiyikent_liman", "kule_dibi", "sanayi"]
     gun: { min: 185, max: 310 }
@@ -2973,6 +2980,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Kule 50+ toplumu: Ellinciler
   - id: "p3_ellinciler"
+    konum: ["kule_dibi"]
     perde: [3]
     bolge: ["kule_dibi"]
     gun: { min: 190, max: 325 }
@@ -3106,6 +3114,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Küresel Sıralama'nın tepesi
   - id: "p3_siralama_zirvesi"
+    konum: ["kule_dibi", "tepe"]
     perde: [3]
     bolge: ["kule_dibi", "tepe"]
     gun: { min: 200, max: 325 }
@@ -3230,6 +3239,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Çok-evrenden dönenler
   - id: "p3_donenler"
+    konum: ["kule_dibi"]
     perde: [3]
     bolge: ["kule_dibi"]
     gun: { min: 205, max: 330 }
@@ -3372,6 +3382,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Körfezin leviatanı
   - id: "p3_korfez_leviatani"
+    konum: ["kiyikent_liman", "kordon"]
     perde: [3]
     bolge: ["kiyikent_liman", "kordon"]
     gun: { min: 181, max: 300 }
@@ -3504,6 +3515,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Kademe borsası (Sanayi)
   - id: "p3_kademe_borsasi"
+    konum: ["sanayi"]
     perde: [3]
     bolge: ["sanayi"]
     gun: { min: 181, max: 320 }
@@ -3598,6 +3610,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Kademe ailesi (Eski Şehir)
   - id: "p3_kademe_ailesi"
+    konum: ["eski_sehir"]
     perde: [3]
     bolge: ["eski_sehir"]
     gun: { min: 181, max: 330 }
@@ -3679,6 +3692,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Heykel
   - id: "p3_heykel"
+    konum: ["kiyikent_liman", "tepe"]
     perde: [3]
     bolge: ["kiyikent_liman", "tepe"]
     gun: { min: 195, max: 330 }
@@ -3788,6 +3802,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Kadim Pazarı
   - id: "p3_kadim_pazari"
+    konum: ["kiyikent_liman"]
     perde: [3]
     bolge: ["kiyikent_liman"]
     gun: { min: 190, max: 320 }
@@ -3883,6 +3898,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Kordon'u geri almak / tutmak
   - id: "p3_kordon_geri"
+    konum: ["kordon", "kiyikent_liman"]
     perde: [3]
     bolge: ["kordon", "kiyikent_liman"]
     gun: { min: 190, max: 325 }
@@ -4007,6 +4023,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Kapı fırtınası
   - id: "p3_kapi_firtinasi"
+    konum: ["sanayi", "kule_dibi", "eski_sehir"]
     perde: [3]
     bolge: ["sanayi", "kule_dibi", "eski_sehir"]
     gun: { min: 230, max: 330 }
@@ -4151,6 +4168,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Kordon akşamı (tohum: p3_kordon_geri)
   - id: "p3_kordon_aksami"
+    konum: ["kordon"]
     perde: [3, 4]
     agirlik: 1
     etiketler: ["kordon", "toplum", "savas"]
@@ -4282,6 +4300,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Ölçücü (tohum: p3_kapi_firtinasi · fırtına taşı)
   - id: "p3_firtina_olcucu"
+    konum: ["eski_sehir"]
     perde: [3, 4]
     agirlik: 1
     etiketler: ["kadimler", "kapi", "hakimiyet"]

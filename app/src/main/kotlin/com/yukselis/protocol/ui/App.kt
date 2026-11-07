@@ -35,6 +35,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
@@ -238,8 +239,25 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
         }
         }
     }
-    // Önce kutlama (seviye/evrim/sınıf), sonra bekleyen Sistem istemi.
-    if (ui.celebration.isNotEmpty()) {
+    // Uzun aradan sonra dönüş özeti; sonra kutlama (seviye/evrim/sınıf), sonra bekleyen Sistem istemi.
+    val recap = ui.recap
+    if (recap != null) {
+        com.yukselis.protocol.ui.components.AppAlertDialog(
+            onDismissRequest = viewModel::dismissRecap,
+            confirmButton = {
+                androidx.compose.material3.TextButton(onClick = viewModel::dismissRecap) { Text(stringResource(R.string.recap_continue)) }
+            },
+            title = { Text(recap.title) },
+            text = {
+                androidx.compose.foundation.layout.Column(
+                    verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(6.dp),
+                    modifier = Modifier.verticalScroll(androidx.compose.foundation.rememberScrollState()),
+                ) {
+                    recap.lines.forEach { Text(it, style = com.yukselis.protocol.ui.theme.GameType.system) }
+                }
+            },
+        )
+    } else if (ui.celebration.isNotEmpty()) {
         CelebrationOverlay(ui.celebration, ui.settings.haptics, viewModel::dismissCelebration)
     } else {
         scene.prompt?.let { p -> PromptOverlay(p, ui.settings.haptics) { option -> viewModel.resolvePrompt(p.kind, p.subject, option) } }

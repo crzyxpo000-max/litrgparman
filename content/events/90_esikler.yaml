@@ -6,6 +6,7 @@
 olaylar:
   # ------------------------------------------------------------------ ihanet
   - id: "esik_ihanet"
+    konum: ["us"]
     agirlik: 1
     etiketler: ["ihanet", "npc"]
     gerilim: 4
@@ -146,6 +147,7 @@ olaylar:
 
   # ------------------------------------------------------------------ kişisel görev (yoldaş)
   - id: "esik_kisisel"
+    konum: ["us"]
     agirlik: 1
     etiketler: ["kisisel", "npc"]
     gerilim: 2
@@ -167,7 +169,7 @@ olaylar:
               - ahlak: { insanlik: 4, merhamet: 2 }
               - kisisel_gorev: { "@": "basla" }
               - iliski: { "@": { guven: 8, baglilik: 5 } }
-              - tohum: { olay: "esik_kisisel_son", gecikme: { min: 3, max: 6 }, kosul: { yoldas: "@" }, npc: "@" }
+              - tohum: { olay: "esik_kisisel_son", gecikme: { min: 3, max: 6 }, kosul: { yoldas: "@" }, npc: "@", hatirlatma: { tr: "{npc:@|in} ricasını unutmadın.", en: "You haven't forgotten what {npc:@} asked of you." } }
             sonraki: "@akis"
           - id: "sonra"
             etiket: { tr: "\"Şimdi değil. Ama söz, döneceğiz buna.\"", en: "\"Not now. But I promise we'll come back to it.\"" }
@@ -175,7 +177,7 @@ olaylar:
               - ahlak: { duzen: 2 }
               - kisisel_gorev: { "@": "basla" }
               - iliski: { "@": { baglilik: -5 } }
-              - tohum: { olay: "esik_kisisel_son", gecikme: { min: 9, max: 14 }, kosul: { yoldas: "@" }, npc: "@" }
+              - tohum: { olay: "esik_kisisel_son", gecikme: { min: 9, max: 14 }, kosul: { yoldas: "@" }, npc: "@", hatirlatma: { tr: "{npc:@|in} ricasını unutmadın.", en: "You haven't forgotten what {npc:@} asked of you." } }
             sonraki: "@akis"
           - id: "red"
             etiket: { tr: "\"Kendi derdimiz bize yeter.\"", en: "\"We've got enough problems of our own.\"" }
@@ -186,6 +188,7 @@ olaylar:
             sonraki: "@akis"
 
   - id: "esik_kisisel_son"
+    konum: ["us"]
     agirlik: 1
     etiketler: ["kisisel", "npc"]
     gerilim: 3
@@ -260,6 +263,7 @@ olaylar:
 
   # ------------------------------------------------------------------ kaçış (yoldaş)
   - id: "esik_kacis"
+    konum: ["us"]
     agirlik: 1
     etiketler: ["korku", "npc"]
     gerilim: 2
@@ -319,6 +323,7 @@ olaylar:
 
   # ------------------------------------------------------------------ itaat (yoldaş)
   - id: "esik_itaat"
+    konum: ["us"]
     agirlik: 1
     etiketler: ["korku", "npc"]
     gerilim: 2
@@ -362,6 +367,7 @@ olaylar:
 
   # ------------------------------------------------------------------ rakiplik
   - id: "esik_rakip"
+    konum: ["us"]
     agirlik: 1
     etiketler: ["rakip", "duello", "npc"]
     gerilim: 3
@@ -464,6 +470,7 @@ olaylar:
 
   # ------------------------------------------------------------------ ayrılık (yoldaş)
   - id: "esik_ayrilik"
+    konum: ["us"]
     agirlik: 1
     etiketler: ["ayrilik", "npc"]
     gerilim: 2
@@ -506,6 +513,7 @@ olaylar:
 
   # ------------------------------------------------------------------ yalan ortaya çıktı
   - id: "esik_yalan"
+    konum: ["us"]
     agirlik: 1
     etiketler: ["yalan", "npc"]
     gerilim: 2

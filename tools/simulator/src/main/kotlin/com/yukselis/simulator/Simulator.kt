@@ -122,6 +122,12 @@ class Simulator(private val content: Content) {
 
     companion object {
         const val STEP_LIMIT = 250_000
+
+        /** Üste her yuvada ana operasyona girme olasılığı (son tarihten önce; gerçek oyuncu biraz hazırlanır). */
+        const val OP_EAGERNESS = 0.05
+
+        /** Keşif görevi en çok bu kadar gün sürer, sonra üsse dönülür. */
+        const val MISSION_DAYS = 3
         const val DEATH_LIMIT = 80
         val CHECKPOINTS = (1..12).map { it * 30 } + 365
         val ACT_ENDS = listOf(30, 180, 330, 365)
@@ -377,11 +383,54 @@ class Simulator(private val content: Content) {
         }
     }
 
+    /**
+     * Bölüm yapısı (DECISIONS #130): üste kart, antrenman, bir bölgeye keşif görevi ya da (son tarih yaklaşınca ya da
+     * hazır hissedince) ana operasyon; görevde keşif, Kapı, Kule ve bir süre sonra üsse dönüş.
+     */
+    private fun chapterAction(s: WorldState, hub: com.yukselis.engine.story.HubView, rng: Random, p: Profile?, cautious: Boolean): HubAction {
+        val towerWish = p?.tower ?: 0.35
+        val tower = content.tower
+        if (hub.atBase) {
+            if (hub.operations.isNotEmpty()) {
+                val left = hub.operations.first().daysLeft
+                if (left <= 1 || rng.nextDouble() < OP_EAGERNESS) return HubAction.EnterOperation(hub.operations[rng.nextInt(hub.operations.size)].index)
+            }
+            if (tower != null && s.hasFlag("kule_acik") && rng.nextDouble() < towerWish * 0.6) {
+                hub.travel.firstOrNull { it.id == tower.region }?.let { return HubAction.Travel(it.id) }
+            }
+            if (hub.cards.isNotEmpty() && rng.nextDouble() < 0.6) {
+                return HubAction.Card(hub.cards.maxBy { cardScore(it.id, p) + rng.nextDouble() }.id)
+            }
+            if (cautious || hub.travel.isEmpty()) return HubAction.Train
+            return if (rng.nextDouble() < 0.6) HubAction.Travel(hub.travel[rng.nextInt(hub.travel.size)].id) else HubAction.Train
+        }
+        hub.tower?.takeIf { !cautious }?.let { t ->
+            if (pl(s).level >= t.level && rng.nextDouble() < towerWish) return HubAction.ClimbTower
+        }
+        if (hub.cards.isNotEmpty() && rng.nextDouble() < 0.6) {
+            return HubAction.Card(hub.cards.maxBy { cardScore(it.id, p) + rng.nextDouble() }.id)
+        }
+        // Görev bir süre sürer; son tarih yaklaşınca ya da birkaç gün sonra üsse dönülür.
+        val away = s.day - (s.mission?.startDay ?: s.day)
+        val opSoon = engine.content.chapters.get(s.chapter)?.let { it.deadline - s.day <= 1 } == true
+        if (hub.canReturn && (opSoon || away >= MISSION_DAYS || rng.nextDouble() < 0.08)) return HubAction.ReturnToBase
+        if (cautious) return HubAction.Train
+        val r = rng.nextDouble()
+        return when {
+            hub.gates.isNotEmpty() && r < 0.25 -> HubAction.EnterGate(hub.gates.first().uid)
+            r < 0.9 -> HubAction.Explore
+            else -> HubAction.Train
+        }
+    }
+
+    private fun pl(s: WorldState) = s.player
+
     private fun hubAction(s: WorldState, rng: Random, p: Profile?, cautious: Boolean): HubAction {
         val hub = engine.view(s, lang).hub!!
         if (hub.mustCamp) return HubAction.Camp
         val pl = s.player
         if (pl.hp < pl.maxHp * 0.45) return HubAction.Rest
+        if (!hub.canExplore || !hub.atBase) return chapterAction(s, hub, rng, p, cautious)
         val towerWish = p?.tower ?: 0.35
         hub.tower?.takeIf { !cautious }?.let { t ->
             if (pl.level >= t.level && rng.nextDouble() < towerWish) return HubAction.ClimbTower

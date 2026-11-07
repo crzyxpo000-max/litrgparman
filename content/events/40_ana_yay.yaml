@@ -5,6 +5,7 @@
 olaylar:
   # ================================================================== KIRILMA (gün 12)
   - id: "kirilma"
+    konum: ["ogretici_orman"]
     perde: [1]
     agirlik: 1
     etiketler: ["ana_yay", "kirilma", "yanki", "kurtarma"]
@@ -299,7 +300,7 @@ olaylar:
               - iliski: { deniz_arman: { guven: 8, baglilik: 8 } }
               - hafiza: { npc: "deniz_arman", id: "olay:kirilma", agirlik: 50 }
               - degisken: { hayatta_kalan: 2 }
-              - tohum: { olay: "kamp_ates_basi", gecikme: { min: 2, max: 4 }, kosul: { yoldas: "deniz_arman" } }
+              - tohum: { olay: "kamp_ates_basi", gecikme: { min: 2, max: 4 }, kosul: { yoldas: "deniz_arman" }, hatirlatma: { tr: "Ağın düştüğü günden beri {npc:deniz_arman} sana başka türlü bakıyor.", en: "Ever since the web came down, {npc:deniz_arman} has looked at you differently." } }
             sonraki: "kirilma_deniz"
           - id: "gizle"
             tur: "gizle"
@@ -308,7 +309,7 @@ olaylar:
               - gizle: 6
               - ahlak: { insanlik: -2, duzen: 1 }
               - degisken: { hayatta_kalan: 2 }
-              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Ağı yırttığın günden beri içinde bir şey sınırını arıyor.", en: "Since the day you tore that web, something inside you has been testing its limits." } }
             sonraki: "@akis"
           - id: "aciga"
             tur: "aciga_vur"
@@ -318,7 +319,7 @@ olaylar:
               - ahlak: { duzen: -2, insanlik: -1 }
               - itibar: { lonca: 5, yukselenler: 3 }
               - degisken: { hayatta_kalan: 2 }
-              - tohum: { olay: "aras_ilk_yaris", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "aras_ilk_yaris", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Ağı kimin yırttığını artık bütün orman biliyor.", en: "The whole forest knows who tore that web open now." } }
             sonraki: "@akis"
 
       - id: "kirilma_deniz"
@@ -368,7 +369,7 @@ olaylar:
               - iliski: { deniz_arman: { guven: 6, baglilik: 10 } }
               - hafiza: { npc: "deniz_arman", id: "olay:kirilma", agirlik: 45 }
               - degisken: { hayatta_kalan: 2 }
-              - tohum: { olay: "kamp_ates_basi", gecikme: { min: 2, max: 4 }, kosul: { yoldas: "deniz_arman" } }
+              - tohum: { olay: "kamp_ates_basi", gecikme: { min: 2, max: 4 }, kosul: { yoldas: "deniz_arman" }, hatirlatma: { tr: "Ağın düştüğü günden beri {npc:deniz_arman} sana başka türlü bakıyor.", en: "Ever since the web came down, {npc:deniz_arman} has looked at you differently." } }
             sonraki: "@akis"
           - id: "yalniz"
             etiket: { tr: "Ayağa kalk, tek başına yola düş", en: "Get up and hit the road alone" }
@@ -376,11 +377,12 @@ olaylar:
               - ahlak: { insanlik: -2, duzen: 1 }
               - stat: { wil: 1 }
               - degisken: { hayatta_kalan: 1 }
-              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Ağı yırttığın günden beri içinde bir şey sınırını arıyor.", en: "Since the day you tore that web, something inside you has been testing its limits." } }
             sonraki: "@akis"
 
   # ================================================================== YENİ TAVAN (gün 24)
   - id: "yeni_tavan"
+    konum: ["ogretici_orman"]
     perde: [1]
     agirlik: 1
     etiketler: ["ana_yay", "yeni_tavan", "kadimler", "kademe"]
@@ -602,7 +604,7 @@ olaylar:
               - ahlak: { insanlik: -2, duzen: -2 }
               - itibar: { lonca: 6, yukselenler: 5 }
               - esya: { kemik_boynuz: 1 }
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Kemik taçtan kopardığın parçayı herkes gördü; sıralama da.", en: "Everybody saw the piece you broke off that bone crown. So did the ranking." } }
             sonraki: "yeni_tavan_sirt"
           - id: "gizle"
             tur: "gizle"
@@ -735,6 +737,7 @@ olaylar:
 
   # ================================================================== FİNAL: ÖĞRETİCİ BEKÇİSİ (gün 28)
   - id: "ogretici_bekci"
+    konum: ["ogretici_orman"]
     perde: [1]
     agirlik: 1
     etiketler: ["ana_yay", "boss", "final"]
@@ -1030,6 +1033,7 @@ olaylar:
 
   # ================================================================== DİKKAT 25 (motor tohumu)
   - id: "dikkat_25"
+    konum: ["us"]
     perde: [1]
     agirlik: 1
     etiketler: ["dikkat", "avci"]
@@ -1135,7 +1139,7 @@ olaylar:
               - ahlak: { merhamet: 4 }
               - bilgi: "aras_hizi"
               - iliski: { aras_kurt: { guven: -5, saygi: 5 } }
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Seni izleyenlerin fısıltısı sıralama tahtasına kadar ulaşmış.", en: "The whispers of the people watching you have made it all the way to the ranking board." } }
             sonraki: "dikkat_25_isimler"
           - id: "bitir"
             etiket: { tr: "İsimleri al, sonra işlerini bitir", en: "Get the names. Then finish it" }
@@ -1144,7 +1148,7 @@ olaylar:
               - unvan: "kardes_katili"
               - degisken: { hayatta_kalan: -1 }
               - bilgi: "aras_hizi"
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Seni izleyenlerin fısıltısı sıralama tahtasına kadar ulaşmış.", en: "The whispers of the people watching you have made it all the way to the ranking board." } }
             sonraki: "dikkat_25_isimler"
           - id: "mesaj"
             tur: "aciga_vur"
@@ -1186,7 +1190,7 @@ olaylar:
               - ahlak: { duzen: -2 }
               - bilgi: "aras_hizi"
               - iliski: { aras_kurt: { saygi: 6 } }
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Seni izleyenlerin fısıltısı sıralama tahtasına kadar ulaşmış.", en: "The whispers of the people watching you have made it all the way to the ranking board." } }
             sonraki: "@akis"
           - id: "birak"
             etiket: { tr: "Teşekkür et, bırak gitsinler", en: "Thank them and let them go" }
@@ -1207,7 +1211,7 @@ olaylar:
               - ahlak: { merhamet: 2 }
               - itibar: { lonca: 4, yukselenler: 4, sessiz_ag: 3 }
               - dikkat: 4
-              - tohum: { olay: "mert_sifreli_mesaj", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "mert_sifreli_mesaj", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Seni gözleyenlerden biri istasyondaki radyoculardan söz etmişti.", en: "One of the people watching you mentioned the radio crew at the station." } }
             sonraki: "@akis"
           - id: "uyar"
             etiket: { tr: "Gönderenlerine iletsin diye ona bir uyarı ver", en: "Give her a warning to pass along" }
@@ -1244,6 +1248,7 @@ olaylar:
 
   # ================================================================== DİKKAT 50 (motor tohumu)
   - id: "dikkat_50"
+    konum: ["us"]
     perde: [1]
     agirlik: 1
     etiketler: ["dikkat", "sistem", "yanki"]
@@ -1321,7 +1326,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 1 }
               - iliski: { yanki: { baglilik: 8 } }
-              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Sistem'in düzeltmesinden beri pencerelerin tam oturmuyor.", en: "Your windows haven't sat right since the System's correction." } }
             sonraki: "@akis"
           - id: "sus"
             etiket: { tr: "Hiçbir şey söyleme, yürü", en: "Say nothing. Walk" }
@@ -1342,7 +1347,7 @@ olaylar:
               - aciga_vur: true
               - ahlak: { duzen: -3 }
               - itibar: { yukselenler: 6, sessiz_ag: 6 }
-              - tohum: { olay: "mert_sifreli_mesaj", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "mert_sifreli_mesaj", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Havada yakaladığın yarım harf hâlâ aklında; birileri onu çözebilir.", en: "You're still thinking about that half a letter you caught out of the air. Somebody might be able to read it." } }
             sonraki: "@akis"
           - id: "kaybol"
             tur: "gizle"
@@ -1358,7 +1363,7 @@ olaylar:
               - ahlak: { insanlik: -2 }
               - iliski: { yanki: { guven: 6, saygi: 6 } }
               - xp: 120
-              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Sistem'in düzeltmesinden beri pencerelerin tam oturmuyor.", en: "Your windows haven't sat right since the System's correction." } }
             sonraki: "@akis"
 
       - id: "dikkat_50_yenilgi"
@@ -1436,6 +1441,7 @@ olaylar:
 
   # ================================================================== ZİNDAN: METRO KAPISI (istasyon)
   - id: "zindan_metro"
+    konum: ["kirik_istasyon"]
     perde: [1]
     bolge: ["kirik_istasyon"]
     gun: { min: 10, max: 26 }
@@ -1591,7 +1597,7 @@ olaylar:
               - itibar: { sessiz_ag: 6 }
               - iliski: { mert_kilic: { guven: 8, saygi: 4 } }
               - degisken: { hayatta_kalan: 1 }
-              - tohum: { olay: "mert_sifreli_mesaj", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "mert_sifreli_mesaj", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Raydaki kapıda yaşadıkların seni istasyonun kontrol odasına çekiyor.", en: "What happened at the Gate on the tracks keeps pulling you toward the station's control room." } }
             sonraki: "metro_makas"
           - id: "tasi"
             etiket: { tr: "Onu sırtına al, birlikte devam edin", en: "Put him on your back. Keep going together" }
@@ -1603,7 +1609,7 @@ olaylar:
               - itibar: { sessiz_ag: 8 }
               - iliski: { mert_kilic: { guven: 12, baglilik: 4 } }
               - degisken: { hayatta_kalan: 1 }
-              - tohum: { olay: "mert_sifreli_mesaj", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "mert_sifreli_mesaj", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Raydaki kapıda yaşadıkların seni istasyonun kontrol odasına çekiyor.", en: "What happened at the Gate on the tracks keeps pulling you toward the station's control room." } }
             sonraki: "metro_makas"
 
       - id: "metro_makas"
@@ -1787,6 +1793,7 @@ olaylar:
 
   # ================================================================== ZİNDAN: KASA DAİRESİ (çarşı)
   - id: "zindan_kasa"
+    konum: ["harabe_carsi"]
     perde: [1]
     bolge: ["harabe_carsi"]
     gun: { min: 12, max: 27 }
@@ -1822,7 +1829,7 @@ olaylar:
             etkiler:
               - kredi: -15
               - ahlak: { duzen: 2 }
-              - tohum: { olay: "carsi_cetesi", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "carsi_cetesi", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Kasa dairesinden çıktığını çarşıda birileri görmüş.", en: "Somebody at the mall saw you come out of that vault." } }
             sonraki: "kasa_lobi"
           - id: "kaldir"
             tur: "gosteris"
@@ -1936,7 +1943,7 @@ olaylar:
               - degisken: { hayatta_kalan: 1 }
               - itibar: { siginak: 5 }
               - iliski: { elif_sari: { guven: 6, saygi: 3 } }
-              - tohum: { olay: "elif_sahra_hastanesi", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "elif_sahra_hastanesi", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Kasa dairesinden hastaneye yolladığın kişi oraya varmış.", en: "The person you sent from the vault to the hospital made it there." } }
             sonraki: "kasa_ana"
           - id: "yaninda"
             etiket: { tr: "Yanında tut; içerisi dışarıdan güvenli", en: "Keep them close. It's safer in here than out there" }

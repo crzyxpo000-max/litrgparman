@@ -11,6 +11,7 @@
 olaylar:
   # ================================================================== ZİNCİR 1: ÇAĞRI
   - id: "yukselenler_1_cagri"
+    konum: ["us"]
     perde: [2]
     gun: { min: 45, max: 130 }
     agirlik: 8
@@ -595,6 +596,7 @@ olaylar:
 
   # ================================================================== ZİNCİR 2: YAKIT LİSTESİ
   - id: "yukselenler_2_yakit_listesi"
+    konum: ["tepe"]
     perde: [2]
     gun: { min: 80, max: 178 }
     kosul: { gorev: { zincir_yukselenler: "basla" } }
@@ -988,6 +990,7 @@ olaylar:
 
   # ================================================================== ZİNCİR 3: BÜYÜK AYİN
   - id: "yukselenler_3_ayin"
+    konum: ["tepe"]
     perde: [3]
     ana_yay: { gun: 220 }
     kosul: { gorev: { zincir_yukselenler: "basla" }, bayrak: "yukselenler_2_tamam" }
@@ -1396,6 +1399,7 @@ olaylar:
   # ================================================================== ZİNCİR 4: KURBAN
   # npc listesi bilerek boş: Vahit ölmüş olsa da zincir (On İkiler'le) sürer; Vahit'e özgü seçenekler goster ile.
   - id: "yukselenler_4_kurban"
+    konum: ["us"]
     perde: [3]
     ana_yay: { gun: 285 }
     kosul: { gorev: { zincir_yukselenler: "basla" }, bayrak: "yukselenler_3_tamam" }
@@ -1716,6 +1720,7 @@ olaylar:
   # ================================================================== ZİNCİR 5: MUTLAK SADAKAT
   # npc listesi bilerek boş (Vahit ölmüş olabilir). gorev tamam = Yükseliş sonunun zincir koşulu.
   - id: "yukselenler_5_mutlak_sadakat"
+    konum: ["tepe"]
     perde: [4]
     ana_yay: { gun: 340 }
     kosul: { gorev: { zincir_yukselenler: "basla" }, bayrak: "yukselenler_4_tamam" }
@@ -1955,6 +1960,7 @@ olaylar:
 
   # ================================================================== VAHİT 1: SEÇİLMİŞLER
   - id: "vahit_secilmisler"
+    konum: ["tepe"]
     perde: [2]
     gun: { min: 50, max: 165 }
     agirlik: 6
@@ -2212,6 +2218,7 @@ olaylar:
 
   # ================================================================== VAHİT 2: MUCİZE SINAVI
   - id: "vahit_mucize_sinavi"
+    konum: ["us"]
     perde: [2, 3]
     gun: { min: 110, max: 235 }
     kosul: { bayrak: "vahit_yakin_takip" }
@@ -2452,6 +2459,7 @@ olaylar:
   # Gerçek dünya durumundan gelir: gercek_hasat → vahit_hakli (hasadın ön seçim kanalı ona gerçekten konuşur);
   # aksi hâlde vahit_sahtekar. Her yol tam olarak birini koyar.
   - id: "vahit_maske_duser"
+    konum: ["us"]
     perde: [3]
     ana_yay: { gun: 245 }
     kosul: { bayrak: "vahit_yakin_takip" }
@@ -2798,6 +2806,7 @@ olaylar:
   # ================================================================== VAHİT 4: YÜKSELİŞ KAPISI
   # Yükseliş sonu: insanlik ≤ −70, zincir_yukselenler tamam, Vahit hayatta. Kapı açılırsa yukselis_kapisi_acildi.
   - id: "vahit_yukselis_kapisi"
+    konum: ["us"]
     perde: [4]
     ana_yay: { gun: 346 }
     kosul: { bayrak: "vahit_maskesi_dustu" }
@@ -3003,6 +3012,7 @@ olaylar:
   # Yalnızca Deniz Yükselenler'deyse. deniz_rakip_oldu → J'nin buyuk_ihanet'i Deniz'i hain seçebilir (ihanet_deniz J'nin).
   # deniz_yukselenlerden_dondu → Deniz Sığınak'a geçer (Parti F okur). Deniz'in ana yayı Parti F'nindir.
   - id: "deniz_yukselen_rakip"
+    konum: ["us"]
     perde: [2, 3]
     ana_yay: { gun: 150 }
     kosul: { npc_fraksiyon: { deniz_arman: "yukselenler" }, npc_hayatta: "deniz_arman" }
@@ -3284,6 +3294,7 @@ olaylar:
 
   # ================================================================== TOHUM: KAÇAK AİLE
   - id: "yukselenler_kacak_aile"
+    konum: ["us"]
     perde: [2, 3, 4]
     agirlik: 1
     yalniz_tohum: true
@@ -3453,6 +3464,7 @@ olaylar:
 
   # ================================================================== TOHUM: ON ÜÇ'ÜN SEÇİMİ
   - id: "on_ucuncu_secim"
+    konum: ["us"]
     perde: [3, 4]
     agirlik: 1
     yalniz_tohum: true

@@ -230,7 +230,10 @@ class EffectApplier(private val content: Content) {
     private fun plantSeed(state: WorldState, e: Effect.PlantSeed): Result {
         val rng = Rng(state.rngState)
         val delay = if (e.maxDelay > e.minDelay) rng.nextInt(e.minDelay, e.maxDelay) else e.minDelay
-        val seed = com.yukselis.engine.world.Seed(e.eventId, state.day + delay, e.condition, e.npc?.let { state.npcId(it) })
+        val seed = com.yukselis.engine.world.Seed(
+            e.eventId, state.day + delay, e.condition, e.npc?.let { state.npcId(it) },
+            origin = state.dayState.currentEvent, reminder = e.reminder,
+        )
         return Result(state.copy(seeds = state.seeds + seed, rngState = rng.state), emptyList())
     }
 
@@ -475,10 +478,17 @@ class EffectApplier(private val content: Content) {
             notices += Notice(NoticeKind.WARNING, texts.format("gunluk_kacirildi"))
         }
         if (old != null && !old.completed) {
-            val rng = Rng(s.rngState)
-            val penalty = rng.chance(PENALTY_CHANCE)
-            s = s.copy(rngState = rng.state, dailyStreak = 0, penaltyPending = s.penaltyPending || penalty)
-            notices += Notice(NoticeKind.WARNING, texts.format("gunluk_kacirildi"))
+            // Keşif/savaş/Kapı görevleri o gün görevde olmayı gerektirir (üste geçen gün yapılamaz): kaçırılınca ne
+            // seri kopar ne ceza gelir. Antrenman her yerde yapılabilir; ihmali eskisi gibi cezalıdır (QA P1-21).
+            val trainable = content.dailyTemplates[old.templateId]?.kind == com.yukselis.engine.story.PlayerActions.TRAINING
+            if (trainable) {
+                val rng = Rng(s.rngState)
+                val penalty = rng.chance(PENALTY_CHANCE)
+                s = s.copy(rngState = rng.state, dailyStreak = 0, penaltyPending = s.penaltyPending || penalty)
+                notices += Notice(NoticeKind.WARNING, texts.format("gunluk_kacirildi"))
+            } else {
+                notices += Notice(NoticeKind.SYSTEM, texts.format("gunluk_kacirildi_yumusak"))
+            }
         }
         val actBefore = s.act
         s = GameClock.advance(s, days)
@@ -494,7 +504,9 @@ class EffectApplier(private val content: Content) {
         if (templates.isEmpty()) return Result(state.copy(daily = null), emptyList())
         val rng = Rng(state.rngState)
         val t = templates[rng.nextInt(templates.size)]
-        val quest = DailyQuest(templateId = t.id, day = state.day, steps = t.steps)
+        // Bir günde 2–4 eylem hakkı var: keşif/savaş/Kapı görevi en çok 2 adım ister (QA P1-21).
+        val steps = if (t.kind == com.yukselis.engine.story.PlayerActions.TRAINING) t.steps else t.steps.coerceAtMost(MAX_FIELD_DAILY_STEPS)
+        val quest = DailyQuest(templateId = t.id, day = state.day, steps = steps)
         return Result(
             state.copy(daily = quest, rngState = rng.state),
             listOf(Notice(NoticeKind.QUEST, texts.formatL("gunluk_yeni", "title" to t.title), listOf(t.description))),
@@ -715,6 +727,8 @@ class EffectApplier(private val content: Content) {
         /** İtibar dalgası: A'ya d itibar → B'ye d · ilişki(A,B)/100 · 0,3. */
         const val RIPPLE = 0.3
 
+        /** Keşif/savaş/Kapı Günlük Görevinin en fazla adımı (QA P1-21). */
+        const val MAX_FIELD_DAILY_STEPS = 2
         const val STREAK_TITLE_WEEK = 7
         const val STREAK_TITLE_MONTH = 30
         const val TITLE_STREAK_WEEK = "disiplinli"

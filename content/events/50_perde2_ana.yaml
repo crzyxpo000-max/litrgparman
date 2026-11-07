@@ -8,6 +8,7 @@
 olaylar:
   # ================================================================== DÖNÜŞ (ana yay 31)
   - id: "perde2_donus"
+    konum: ["kiyikent_liman"]
     perde: [2]
     agirlik: 1
     etiketler: ["ana_yay", "donus"]
@@ -673,6 +674,7 @@ olaylar:
 
   # ================================================================== KULE'NİN YÜKSELİŞİ (ana yay 40)
   - id: "kule_yukselisi"
+    konum: ["kule_dibi"]
     perde: [2]
     agirlik: 1
     etiketler: ["ana_yay", "kule", "boss"]
@@ -1064,6 +1066,7 @@ olaylar:
 
   # ================================================================== FRAKSİYON SEÇİMİ (ana yay 45)
   - id: "fraksiyon_secimi"
+    konum: ["kiyikent_liman"]
     perde: [2]
     agirlik: 1
     etiketler: ["ana_yay", "fraksiyon", "siyaset"]
@@ -1212,7 +1215,7 @@ olaylar:
         yer: "kiyikent_liman"
         paragraflar:
           - { tr: "{npc:kaya_demir} duvardan ayrılmıyor. \"Lafı dolandırmayacağım,\" diyor. \"Lonca'da rütbeyi güç belirler. Bu şehirde senden güçlüsü yok. Sana manga teklif etmiyorum, ordu teklif ediyorum.\"", en: "{npc:kaya_demir} doesn't come off the wall. \"I'm not gonna dance around it,\" he says. \"In the Guild, strength is rank. You're the strongest thing in this city. I'm not offering you a squad. I'm offering you an army.\"" }
-          - { tr: "\"{yer:kordon|de}ki kapının sayacı otuz beşi gösteriyor. Otuz beş gün sonra o kapı taşacak ve bu masadakilerden biri kimin yaşayıp kimin öleceğine karar verecek. O kişi ya ben olmalıyım ya sen. Çay içenler değil.\"", en: "\"The counter on {yer:kordon} Gate says thirty-five. Thirty-five days from now that thing overflows, and somebody at this counter decides who lives and who doesn't. That somebody needs to be me or you. Not the tea crowd.\"" }
+          - { tr: "\"{yer:kordon|de}ki kapının sayacı işliyor. Sayaç sıfıra indiğinde o kapı taşacak ve bu masadakilerden biri kimin yaşayıp kimin öleceğine karar verecek. O kişi ya ben olmalıyım ya sen. Çay içenler değil.\"", en: "\"The counter on {yer:kordon} Gate is ticking. When it hits zero, that thing overflows, and somebody at this counter decides who lives and who doesn't. That somebody needs to be me or you. Not the tea crowd.\"" }
           - metin: { tr: "\"Öğretici'de sağ kolumdun,\" diye ekliyor. \"İstersen hâlâ öylesin. İstemezsen ben senin sağ kolun olurum.\" Bunu söylemek ona kolay gelmiyor.", en: "\"You were my right hand in the Tutorial,\" he adds. \"Still are, if you want it. If you don't, I'll be yours.\" Saying that costs him something." }
             kosul: { bayrak: "lonca_ikinci_adam" }
           - metin: { tr: "\"Bir keresinde komutamı elimden aldın,\" diyor. \"Bu kez kendi elimle veriyorum. Fark bu.\"", en: "\"You took my command off me once,\" he says. \"This time I'm handing it over myself. That's the difference.\"" }
@@ -1588,6 +1591,7 @@ olaylar:
 
   # ================================================================== KASABA ÇEKİRDEĞİ (ana yay 60)
   - id: "kasaba_cekirdegi"
+    konum: ["eski_sehir"]
     perde: [2]
     agirlik: 1
     etiketler: ["ana_yay", "cekirdek", "boss", "siyaset"]
@@ -1853,6 +1857,7 @@ olaylar:
 
   # ================================================================== İLK KAPI TAŞMASI (ana yay 80)
   - id: "ilk_tasma"
+    konum: ["kordon"]
     perde: [2]
     agirlik: 1
     etiketler: ["ana_yay", "kapi", "boss", "savas"]
@@ -2171,6 +2176,7 @@ olaylar:
 
   # ================================================================== YANKI'NIN ORTAYA ÇIKIŞI (ana yay 105)
   - id: "yanki_ortaya_cikis"
+    konum: ["eski_sehir"]
     perde: [2]
     agirlik: 1
     etiketler: ["ana_yay", "yanki", "sir"]
@@ -2184,7 +2190,7 @@ olaylar:
         yer: "eski_sehir"
         paragraflar:
           - { tr: "Akşam yedide {yer:kasaba_cekirdegi} her günkü gibi bültenini şehrin bütün pencerelerine gönderiyor: su saatleri, nöbet çizelgeleri, kayıp ilanları. Bu akşamsa bültenin ortasındaki satırlardan biri titremeye başlıyor, ardından bütün satırlar birden siliniyor.", en: "At seven, like every evening, {yer:kasaba_cekirdegi} sends its bulletin to every window in the city: water hours, watch rosters, missing persons. Tonight a line in the middle of the bulletin flickers, and then every line gets wiped." }
-          - { tr: "Yerlerinde, büyük harf kullanmayı hiç öğrenmemiş birinin elinden çıkmış gibi küçük harfli bir cümle beliriyor: merhaba kıyıkent. ben buradayım. yüz beş gündür buradayım. birinin içinde.", en: "In their place a sentence appears in lowercase, like it was typed by something that never learned capital letters: hello port harlow. i'm here. i've been here a hundred and five days. inside someone." }
+          - { tr: "Yerlerinde, büyük harf kullanmayı hiç öğrenmemiş birinin elinden çıkmış gibi küçük harfli bir cümle beliriyor: merhaba kıyıkent. ben buradayım. ilk günden beri buradayım. birinin içinde.", en: "In their place a sentence appears in lowercase, like it was typed by something that never learned capital letters: hello port harlow. i'm here. i've been here since day one. inside someone." }
           - { tr: "Üstelik yalnız Sistem pencereleri değil bunlar: dükkân camları, otobüs camları, bir çocuğun gözlüğü... Hepsinin üstünde buğu gibi aynı satır duruyor. Şehirde kırk bin kişi aynı anda başını kaldırırken sen kafanın içinde o sesin kendi sesinmiş gibi güldüğünü duyuyorsun.", en: "And it isn't just System windows. Storefront glass, bus windows, a kid's eyeglasses. The same line fogs up on every one of them. Forty thousand people in this city look up at the same moment, and inside your head you hear that voice laugh like it's your own." }
           - { tr: "Derken ikinci satır düşüyor: onun adını biliyorsunuz. kuleye ilk o girdi. kordonda dalgayı o karşıladı. o standart sürüm değil. ben onun bozukluğuyum.", en: "The second line comes in: you know their name. first through the spire. met the wave on the esplanade. not running the standard build. i'm what's broken in them." }
           - metin: { tr: "Yayın Konsey'in elinden çıkıyor; bültenin altından bir anlığına {npc:elif_sari|in} sakin sesi araya giriyor: \"Lütfen evlerinizden çıkmayın.\" Dinleyen yok.", en: "The Council runs the broadcast, and {npc:elif_sari|pos} voice cuts in under the bulletin for a second, calm: \"Please stay in your homes.\" Nobody listens." }
@@ -2444,6 +2450,7 @@ olaylar:
   # ================================================================== SİSTEM GERÇEĞİNİN İLK PARÇASI (ana yay 135)
   # Doğru olan, Perde 2'nin birikimiyle belirlenir: insanlık ≥ 10 ya da hayatta kalan ≥ 50 → kurtarma; değilse hasat.
   - id: "sistem_gercegi"
+    konum: ["eski_sehir"]
     perde: [2]
     agirlik: 1
     etiketler: ["ana_yay", "sistem", "sir", "yanki"]
@@ -2673,6 +2680,7 @@ olaylar:
 
   # ================================================================== PERDE 2 SONU: KADİM GEMİSİ (ana yay 178)
   - id: "perde2_son"
+    konum: ["kiyikent_liman"]
     perde: [2]
     agirlik: 1
     etiketler: ["ana_yay", "kadim", "final"]
@@ -2923,6 +2931,7 @@ olaylar:
 
   # ================================================================== DİKKAT 50 · PERDE 2 (motor tohumu): ödül panosu
   - id: "dikkat_50_p2"
+    konum: ["kule_dibi"]
     perde: [2]
     agirlik: 1
     etiketler: ["dikkat", "avci"]
@@ -3108,6 +3117,7 @@ olaylar:
 
   # ================================================================== DİKKAT 75 · PERDE 2 (motor tohumu): Düzeltici
   - id: "dikkat_75_p2"
+    konum: ["us"]
     perde: [2]
     agirlik: 1
     etiketler: ["dikkat", "sistem", "yanki", "boss"]
@@ -3260,6 +3270,7 @@ olaylar:
 
   # ================================================================== DİKKAT 100 · PERDE 2 (motor tohumu): ilk Kadim gözcüsü
   - id: "dikkat_100_p2"
+    konum: ["us"]
     perde: [2]
     agirlik: 1
     etiketler: ["dikkat", "kadim", "boss"]
@@ -3390,6 +3401,7 @@ olaylar:
 
   # ================================================================== TOHUM: Kayıp Duvarı'na cevap (perde2_donus)
   - id: "kayip_duvari_cevap"
+    konum: ["kiyikent_liman"]
     perde: [2]
     agirlik: 1
     etiketler: ["donus", "insanlar"]
@@ -3543,6 +3555,7 @@ olaylar:
 
   # ================================================================== TOHUM: Dönmeyenler (kule_yukselisi)
   - id: "kule_donmeyenler"
+    konum: ["kule_dibi"]
     perde: [2]
     agirlik: 1
     etiketler: ["kule", "insanlar"]
@@ -3645,6 +3658,7 @@ olaylar:
 
   # ================================================================== TOHUM: Seçimin gecesi (fraksiyon_secimi)
   - id: "secimin_gecesi"
+    konum: ["us"]
     perde: [2]
     agirlik: 1
     etiketler: ["fraksiyon", "siyaset"]
@@ -3714,6 +3728,7 @@ olaylar:
 
   # ================================================================== TOHUM: Taşmanın ertesi (ilk_tasma)
   - id: "tasma_sonrasi"
+    konum: ["us"]
     perde: [2]
     agirlik: 1
     etiketler: ["kapi", "insanlar"]
@@ -3791,6 +3806,7 @@ olaylar:
 
   # ================================================================== TOHUM: İki sesli (yanki_ortaya_cikis)
   - id: "iki_sesli_sokak"
+    konum: ["us"]
     perde: [2]
     agirlik: 1
     etiketler: ["yanki", "insanlar"]
@@ -3875,6 +3891,7 @@ olaylar:
 
   # ================================================================== TOHUM: Başlığın gecesi (sistem_gercegi)
   - id: "baslik_gecesi"
+    konum: ["us"]
     perde: [2]
     agirlik: 1
     etiketler: ["yanki", "sistem", "sir"]
@@ -3951,6 +3968,7 @@ olaylar:
 
   # ================================================================== TOHUM: Geminin altında ilk gece (perde2_son)
   - id: "gemi_altinda_gece"
+    konum: ["kiyikent_liman"]
     perde: [2, 3]
     agirlik: 1
     etiketler: ["kadim", "insanlar"]

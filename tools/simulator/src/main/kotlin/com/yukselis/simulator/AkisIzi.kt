@@ -64,6 +64,20 @@ fun main(args: Array<String>) {
                     action == "akis:ClimbTower" -> "kule"
                     else -> "diger"
                 }
+                val m = after.mission
+                val arrival = cur.startsWith(com.yukselis.engine.world.ChapterTable.ARRIVAL_PREFIX)
+                val own = when {
+                    m == null -> null
+                    arrival -> true
+                    m.kind == com.yukselis.engine.world.MissionKind.EXPLORE -> director.fitsLocation(after, e)
+                    // Görevin kendi olayı: kuyrukta bekleyen (varış sahnesi yoksa aynı adımda başlar) ya da bölümün operasyonu.
+                    else -> before.mission?.queue?.contains(cur) == true || action == "akis:Card:$cur" ||
+                        // Aynı adımda başlayan yan görev (varış sahnesi yoksa): kuyruğun tek olayı hemen açılır.
+                        (m.kind == com.yukselis.engine.world.MissionKind.SIDE && m.queue.isEmpty() &&
+                            before.mission?.let { it.kind != m.kind || it.region != m.region || it.startDay != m.startDay } != false) ||
+                        cur in (content.chapters.get(after.chapter)?.operationEvents ?: emptyList())
+                }
+                val fits = arrival || own == true || director.fitsLocation(after, e)
                 val score = if (reason == "kart") "%.3f".format(java.util.Locale.ROOT, director.score(before, e)) else "null"
                 val quests = after.quests.filterValues { it == QuestStatus.ACTIVE }.keys.sorted()
                 lines += buildString {
@@ -72,7 +86,9 @@ fun main(args: Array<String>) {
                     append(""""eylem":${q(action)},"gerilim":${e.tension},"hedef_gerilim":${director.desiredTension(before)},""")
                     append(""""onceki":${q(lastEvent)},"onceki_gerilim":$lastEventTension,"onceki_gun":$lastEventDay,"onceki_bolge":${q(lastEventRegion)},""")
                     append(""""arada_akis":$hubSince,"arada_savas":$combatSinceEvent,"savastan_hemen":${before.combat != null},""")
-                    append(""""aktif_gorev":${arr(quests)},"npc":${arr(e.npcs)}}""")
+                    append(""""aktif_gorev":${arr(quests)},"npc":${arr(e.npcs)},""")
+                    append(""""gorev":${q(m?.kind?.key)},"gorev_bolge":${q(m?.region)},"kendi":${own ?: "null"},"konum_uyar":$fits,""")
+                    append(""""bolum":${after.chapter},"evre":${q(after.chapterPhase.key)}}""")
                 }
                 lastEvent = cur
                 lastEventTension = e.tension

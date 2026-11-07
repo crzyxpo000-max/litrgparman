@@ -36,6 +36,7 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.yukselis.engine.story.ChoiceView
 import com.yukselis.engine.story.InsightView
@@ -134,6 +135,7 @@ fun StoryScreen(
 
     val skip = remember { MutableInteractionSource() }
     Column(modifier = modifier.fillMaxSize()) {
+        scene.chapter?.let { ChapterBar(it) }
         LazyColumn(
             state = listState,
             contentPadding = PaddingValues(horizontal = 20.dp, vertical = 12.dp),
@@ -224,6 +226,40 @@ fun StoryScreen(
         }
     }
 }
+
+/**
+ * Her zaman görünen bölüm satırı: "Bölüm N · Hedef · Kalan gün" (DECISIONS #130). Dokununca hedef tam açılır.
+ */
+@Composable
+private fun ChapterBar(line: com.yukselis.engine.world.ChapterLine) {
+    var open by rememberSaveable { mutableStateOf(false) }
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClickLabel = stringResource(R.string.a11y_chapter)) { open = !open }
+            .padding(horizontal = 20.dp, vertical = 6.dp),
+    ) {
+        Text(
+            text = stringResource(R.string.chapter_line, line.no, if (open) line.title + " — " + line.goal else line.goal),
+            style = GameType.system,
+            color = MaterialTheme.colorScheme.primary,
+            maxLines = if (open) 6 else 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.weight(1f),
+        )
+        Text(
+            androidx.compose.ui.res.pluralStringResource(R.plurals.chapter_days, line.daysLeft, line.daysLeft),
+            style = GameType.system,
+            color = if (line.daysLeft <= DEADLINE_WARN_DAYS) DeadlineColor else MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(start = 8.dp),
+        )
+    }
+    HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.25f))
+}
+
+private const val DEADLINE_WARN_DAYS = 3
+private val DeadlineColor = androidx.compose.ui.graphics.Color(0xFFFFA726)
 
 /**
  * Altta sabit eylem paneli: ekranın en fazla yarısını kaplar, sığmazsa kendi içinde kayar.

@@ -37,7 +37,7 @@ class NpcTest {
     private fun atHub(seed: Long = 1): WorldState {
         var s = engine.newGame("T", GameMode.NORMAL, seed)
         s = s.copy(sceneId = "ilk_sabah", day = 1)
-        return engine.choose(s, "gune_basla", lang).state
+        return engine.throughBriefing(engine.choose(s, "gune_basla", lang).state)
     }
 
     private fun apply(s: WorldState, vararg e: Effect) = engine.applyEffects(s, e.toList(), lang).state
@@ -418,7 +418,7 @@ class NpcTest {
                             hub.cards.isNotEmpty() && rng.nextBoolean() -> HubAction.Card(hub.cards[rng.nextInt(hub.cards.size)].id)
                             else -> listOf(HubAction.Explore, HubAction.Train, HubAction.Rest)[rng.nextInt(3)]
                         }
-                        engine.hubAction(s, action, lang).state
+                        engine.hubAction(s, engine.legalOr(s, action, kotlin.random.Random(rng.nextLong())), lang).state
                     }
                     else -> {
                         val choices = engine.view(s, lang).choices.filter { it.enabled }

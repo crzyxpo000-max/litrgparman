@@ -192,6 +192,12 @@ data class WorldState(
     val chronicle: List<ChronicleEntry> = emptyList(),
     /** Ulaşılan son (kaydedilmez; son sahnesinden türetilir). */
     val ending: String? = null,
+    // ---- Bölüm yapısı (v5, DECISIONS #130) ----
+    /** Süren bölüm; 0 = gün akışından önce (prolog). */
+    val chapter: Int = 0,
+    val chapterPhase: com.yukselis.engine.world.ChapterPhase = com.yukselis.engine.world.ChapterPhase.BRIEF,
+    /** Süren görev; null = üsteyiz. */
+    val mission: com.yukselis.engine.world.Mission? = null,
 ) {
     val act: Int get() = GameClock.actFor(day)
 

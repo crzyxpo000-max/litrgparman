@@ -25,6 +25,12 @@ sealed interface HubAction {
     data object Camp : HubAction
     /** Kule'nin bir sonraki katına çık (Aşama 7). */
     data object ClimbTower : HubAction
+
+    /** Bölümün ana operasyonuna gir (üste; `variant`: Bölüm 11'de iki dünyadan hangisi). */
+    data class EnterOperation(val variant: Int = 0) : HubAction
+
+    /** Keşif görevinden üsse dön. */
+    data object ReturnToBase : HubAction
 }
 
 /**
@@ -48,7 +54,9 @@ class WorldEngine(
      * (ana yay, vadesi gelen tohum) varsa hemen başlar; yoksa fırsat eli dağıtılır.
      */
     fun enterHub(state: WorldState): Result {
-        var s = effects.npc.ensure(state.copy(sceneId = WorldState.HUB, dayState = state.dayState.copy(currentEvent = null), focusNpc = null))
+        var s = effects.npc.ensure(
+            state.copy(sceneId = WorldState.HUB, dayState = state.dayState.copy(currentEvent = null, reminder = null), focusNpc = null),
+        )
         val notices = mutableListOf<Notice>()
         if (s.regions.isEmpty()) {
             val setup = setupWorld(s)
@@ -58,17 +66,270 @@ class WorldEngine(
         // Kuruyan tohumlar
         val withered = director.witheredSeeds(s)
         if (withered.isNotEmpty()) s = s.copy(seeds = s.seeds - withered.toSet())
+        if (chapterMode) return chapterHub(s, notices)
+        // Bölüm yapısı olmayan içerik (küçük test içerikleri): eski gün akışı.
         // Zorunlu olay: yuva harcamadan değil, bir yuva yerine gelir (kalmadıysa yine gelir: hikaye beklemez).
         director.forced(s)?.let { f ->
             if (f.seed != null) s = s.copy(seeds = s.seeds.filterNot { it == f.seed })
             // Zorunlu olay yuva harcamaz: eylemin yuvası zaten harcandı (DECISIONS #73).
-            val started = startEvent(s, f.eventId, consumeSlot = false, focus = f.seed?.npc)
+            val started = startEvent(s, f.eventId, consumeSlot = false, focus = f.seed?.npc, reminder = reminderOf(s, f.seed))
             return Result(started.state, notices + started.notices)
         }
-        val rng = Rng(s.rngState)
-        val hand = if (s.dayState.slotsLeft > 0) director.deal(s, rng) else emptyList()
-        s = s.copy(rngState = rng.state, dayState = s.dayState.copy(hand = hand))
-        return Result(s, notices)
+        return Result(dealHand(s), notices)
+    }
+
+    // ---------------------------------------------------------------- bölüm yapısı (DECISIONS #130)
+
+    private val chapters get() = content.chapters
+    private val chapterMode get() = !content.chapters.isEmpty
+
+    fun base(state: WorldState): String? = director.base(state)
+
+    /** Koşullu ana yay düğümleri (bölümün brifingi/operasyonu/darboğazı olmayanlar): bölümü ve operasyondan önce mi. */
+    private val arcNodes: List<Pair<EventDef, Pair<Int, Boolean>>> by lazy {
+        content.events.values.filter { it.mainArcDay != null && it.id !in chapters.managed }.mapNotNull { e ->
+            val ch = chapters.forDay(e.mainArcDay!!) ?: return@mapNotNull null
+            e to (ch.no to (e.mainArcDay <= ch.deadline))
+        }.sortedBy { it.first.mainArcDay }
+    }
+
+    private fun queued(s: WorldState, queue: List<String>): String? =
+        queue.firstOrNull { id -> content.events[id]?.let { director.eligibleQueued(s, it) } == true }
+
+    /**
+     * Üs ve görev akışı. Görevde: operasyon/yan görev kuyruğu, keşifte bölgenin olayları. Üste: bölüm ilerlemesi
+     * (brifing → operasyon → sonrası → darboğaz), koşullu ana yay düğümleri, tohumlar; ardından fırsat eli.
+     */
+    private fun chapterHub(state: WorldState, notices: MutableList<Notice>): Result {
+        var s = state
+        val home = base(s)
+        val m0 = s.mission
+        // Olay oyuncuyu başka bir bölgeye götürdü (`bolge` etkisi): o bölgeye bir keşif görevi başlar (varış sahnesiyle).
+        if (m0 == null && home != null && s.region != null && s.region != home && s.region in content.regions) {
+            val target = s.region!!
+            return beginMission(s.copy(region = home), MissionKind.EXPLORE, target, emptyList(), consumeSlot = false, notices = notices)
+        }
+        if (m0 != null && s.region != null && s.region != m0.region) {
+            s = if (m0.kind == MissionKind.EXPLORE && s.region == home) {
+                returnHome(s, auto = true, notices = notices)
+            } else {
+                s.copy(mission = m0.copy(region = s.region!!))
+            }
+        }
+        s.mission?.let { m ->
+            when (m.kind) {
+                MissionKind.OPERATION -> {
+                    val next = queued(s, m.queue)
+                    if (next != null) {
+                        val rest = m.queue.drop(m.queue.indexOf(next) + 1)
+                        val started = startEvent(s.copy(mission = m.copy(queue = rest)), next, consumeSlot = false)
+                        return Result(started.state, notices + started.notices)
+                    }
+                    // Operasyon bitti: sonrası üste.
+                    val title = chapterTitle(s)
+                    s = returnHome(s.copy(chapterPhase = ChapterPhase.AFTER), auto = true, notices = notices)
+                    notices += Notice(NoticeKind.QUEST, texts.formatL("operasyon_bitti", "title" to title))
+                }
+                MissionKind.SIDE -> {
+                    val next = queued(s, m.queue)
+                    if (next != null) {
+                        val seed = s.seeds.firstOrNull { it.eventId == next && it.dueDay <= s.day }
+                        val left = m.copy(queue = m.queue.drop(m.queue.indexOf(next) + 1))
+                        val started = startEvent(
+                            s.copy(mission = left, seeds = if (seed != null) s.seeds - seed else s.seeds), next,
+                            consumeSlot = false, focus = seed?.npc, reminder = reminderOf(s, seed),
+                        )
+                        return Result(started.state, notices + started.notices)
+                    }
+                    s = returnHome(s, auto = true, notices = notices)
+                }
+                MissionKind.EXPLORE -> {
+                    if (!s.dayState.forcedLock) {
+                        director.dueSeed(s)?.let { seed ->
+                            val started = startEvent(s.copy(seeds = s.seeds - seed), seed.eventId, consumeSlot = false, focus = seed.npc, reminder = reminderOf(s, seed))
+                            return Result(started.state, notices + started.notices)
+                        }
+                    }
+                    return Result(dealHand(s), notices)
+                }
+            }
+        }
+        // ---- üs ----
+        s = advanceChapter(s, notices)
+        baseForced(s, s.variable(OP_REQUEST_VAR))?.let { return Result(it.state, notices + it.notices) }
+        return Result(dealHand(s.copy(chapterPhase = phaseAfterChecks(s))), notices)
+    }
+
+    /** Brifingi biten bölüm hazırlığa geçer; darboğazı kalmayan bölüm biter. */
+    private fun phaseAfterChecks(s: WorldState): ChapterPhase {
+        val ch = chapters.get(s.chapter) ?: return s.chapterPhase
+        return when (s.chapterPhase) {
+            ChapterPhase.BRIEF -> if (ch.brief.none { pendingEvent(s, it) }) ChapterPhase.PREP else ChapterPhase.BRIEF
+            ChapterPhase.AFTER -> if ((ch.bottleneckDay ?: 0) <= s.day && ch.bottleneck.none { pendingEvent(s, it) } &&
+                arcNodes.none { (e, at) -> at.first == ch.no && !at.second && director.eligibleQueued(s, e) }
+            ) ChapterPhase.DONE else ChapterPhase.AFTER
+            else -> s.chapterPhase
+        }
+    }
+
+    private fun pendingEvent(s: WorldState, id: String): Boolean =
+        content.events[id]?.let { director.eligibleQueued(s, it) } == true
+
+    /**
+     * Üste zorunlu olan bir sonraki adım (yoksa null). Oyuncu bir eylem yapmadan arka arkaya ikinci zorunlu olay
+     * gelmez (`forcedLock`); operasyon isteği ve son tarih bunu beklemez. `request`: operasyon varyantı + 1.
+     */
+    private fun baseForced(state: WorldState, request: Int): Result? {
+        var s = state
+        val lock = s.dayState.forcedLock
+        val ch = chapters.get(s.chapter)
+        if (ch != null) {
+            if (s.chapterPhase == ChapterPhase.BRIEF && !lock) {
+                ch.brief.firstOrNull { pendingEvent(s, it) }?.let { return startHere(s, content.events.getValue(it)) }
+                // (yazılmamış brifing olayı atlanır: pendingEvent içerikte olmayanı false sayar)
+                s = s.copy(chapterPhase = ChapterPhase.PREP)
+            }
+            if (s.chapterPhase == ChapterPhase.AFTER && !lock) {
+                arcNodes.firstOrNull { (e, at) -> at.first == ch.no && !at.second && director.eligibleQueued(s, e) }
+                    ?.let { return startHere(s, it.first) }
+                if ((ch.bottleneckDay ?: 0) <= s.day) {
+                    val neck = ch.bottleneck.firstOrNull { pendingEvent(s, it) }
+                    s = s.copy(chapterPhase = ChapterPhase.DONE)
+                    if (neck != null) {
+                        val started = startHere(s, content.events.getValue(neck))
+                        return Result(started.state, listOf(Notice(NoticeKind.QUEST, texts.formatL("darbogaz", "title" to ch.title))) + started.notices)
+                    }
+                }
+            }
+            // Son tarih günü operasyon kendiliğinden başlar (taşma, son tarih geçince sabah işlenir).
+            val overdue = s.day >= ch.deadline
+            if ((s.chapterPhase == ChapterPhase.PREP || s.chapterPhase == ChapterPhase.BRIEF) && (request > 0 || overdue)) {
+                // Operasyon öncesi düğümler (ör. savaştan önceki gece) operasyondan önce gelir.
+                arcNodes.firstOrNull { (e, at) -> at.first == ch.no && at.second && director.eligibleQueued(s, e) }
+                    ?.let { return startHere(s, it.first) }
+                val variant = (request - 1).coerceIn(0, (ch.operations.size - 1).coerceAtLeast(0))
+                return startOperation(s.copy(vars = s.vars - OP_REQUEST_VAR), ch, variant)
+            }
+        }
+        if (lock) return if (s != state) Result(dealHand(s), emptyList()) else null
+        // Koşullu ana yay düğümleri: geçmiş bölümlerden kalan ya da bu bölümün operasyon öncesi (günü geldiyse).
+        arcNodes.firstOrNull { (e, at) ->
+            (at.first < s.chapter || (at.first == s.chapter && at.second && s.day >= e.mainArcDay!!)) && director.eligibleQueued(s, e)
+        }?.let { return startHere(s, it.first) }
+        director.dueSeed(s)?.let { seed ->
+            return startEvent(s.copy(seeds = s.seeds - seed), seed.eventId, consumeSlot = false, focus = seed.npc, reminder = reminderOf(s, seed))
+        }
+        // Başka bölgede geçen tohum uzun süre oynanmadıysa (hikaye ipliği kaybolmasın) oraya bir yan görev açılır.
+        director.dueElsewhere(s).firstOrNull { it.dueDay <= s.day - SEED_PATIENCE_DAYS }?.let { seed ->
+            content.events[seed.eventId]?.let { e -> missionRegionOf(s, e) }?.let { region ->
+                return beginMission(s, MissionKind.SIDE, region, listOf(seed.eventId), consumeSlot = false)
+            }
+        }
+        return if (s != state) Result(dealHand(s), emptyList()) else null
+    }
+
+    /** Üste zorunlu gelen düğüm: burada geçiyorsa hemen, başka bölgedeyse oraya bir yan görev (varış + olay). */
+    private fun startHere(s: WorldState, e: EventDef): Result {
+        if (director.fitsLocation(s, e)) return startEvent(s, e.id, consumeSlot = false)
+        val region = e.where.firstOrNull { it in content.regions && it != base(s) } ?: return startEvent(s, e.id, consumeSlot = false)
+        return beginMission(s, MissionKind.SIDE, region, listOf(e.id), consumeSlot = false)
+    }
+
+    /** Bölüm bittiyse ve sonrakinin açılış günü geldiyse sonraki bölüm açılır. */
+    private fun advanceChapter(state: WorldState, notices: MutableList<Notice>): WorldState {
+        var s = state
+        while (true) {
+            val next = chapters.next(s.chapter) ?: return s
+            val cur = chapters.get(s.chapter)
+            // Takılmaya karşı: bölüm sonundan epey sonra hâlâ bitmediyse yine de ilerlenir.
+            val stuck = cur != null && s.day > cur.end + STUCK_DAYS
+            if (s.day < next.open || (s.chapterPhase != ChapterPhase.DONE && !stuck && cur != null)) return s
+            s = s.copy(chapter = next.no, chapterPhase = ChapterPhase.BRIEF, vars = s.vars - OP_REQUEST_VAR)
+            notices += Notice(NoticeKind.QUEST, texts.formatL("bolum_basladi", "n" to LText("${next.no}", "${next.no}"), "title" to next.title), listOf(next.goal))
+        }
+    }
+
+    private fun chapterTitle(s: WorldState): LText = chapters.get(s.chapter)?.title ?: LText.EMPTY
+
+    /** Operasyon görevi: bölgeye yolculuk + varış, sonra operasyonun olayları sırayla. */
+    private fun startOperation(state: WorldState, ch: ChapterDef, variant: Int): Result {
+        val op = ch.operations.getOrNull(variant) ?: return Result(state.copy(chapterPhase = ChapterPhase.AFTER), emptyList())
+        val region = operationRegion(state, op)
+        val notices = mutableListOf(Notice(NoticeKind.QUEST, texts.formatL("operasyon_basladi", "title" to (if (op.title == LText.EMPTY) ch.title else op.title))))
+        return beginMission(state.copy(chapterPhase = ChapterPhase.OPERATION), MissionKind.OPERATION, region, op.events, consumeSlot = false, notices = notices, variant = variant)
+    }
+
+    fun operationRegion(state: WorldState, op: OperationDef): String =
+        op.region ?: op.events.firstNotNullOfOrNull { id -> content.events[id]?.where?.firstOrNull { it in content.regions } }
+            ?: base(state) ?: state.region ?: ""
+
+    /** Görev başlar: bölgeye geçilir, varış sahnesi (varsa ve üs bölgesi değilse) ilk sahnedir. */
+    private fun beginMission(
+        state: WorldState,
+        kind: MissionKind,
+        region: String,
+        queue: List<String>,
+        consumeSlot: Boolean,
+        notices: MutableList<Notice> = mutableListOf(),
+        variant: Int = 0,
+    ): Result {
+        var s = if (consumeSlot) spend(state) else state
+        s = s.copy(mission = Mission(kind, region, queue, s.day, variant), region = region)
+        val arrival = ChapterTable.ARRIVAL_PREFIX + region
+        if (region != base(s) && arrival in content.events) {
+            val started = startEvent(s, arrival, consumeSlot = false)
+            return Result(started.state, notices + started.notices)
+        }
+        if (region != base(s)) notices += Notice(NoticeKind.SYSTEM, texts.formatL("yolculuk", "region" to regionName(region)))
+        return chapterHub(s.copy(dayState = s.dayState.copy(forcedLock = true)), notices)
+    }
+
+    /** Üsse dönüş: görev biter, bölge üs olur. Kendiliğinden dönüşte (görev bitti) zorunlu olay kilidi kapalı kalır. */
+    private fun returnHome(state: WorldState, auto: Boolean, notices: MutableList<Notice>): WorldState {
+        val m = state.mission ?: return state
+        val home = base(state) ?: m.region
+        val visits = ChapterTable.VISIT_PREFIX + m.region
+        if (m.region != home) notices += Notice(NoticeKind.SYSTEM, texts.formatL("usse_donus", "region" to regionName(home)))
+        return state.copy(
+            mission = null,
+            region = home,
+            vars = state.vars + (visits to state.variable(visits) + 1),
+            dayState = state.dayState.copy(forcedLock = state.dayState.forcedLock || auto),
+        )
+    }
+
+    /** Tohumun hatırlatma cümlesi: tohum etkisindeki `hatirlatma`, yoksa onu eken olayın kart başlığından genel cümle. */
+    private fun reminderOf(state: WorldState, seed: Seed?): LText? {
+        seed ?: return null
+        seed.reminder?.let { return it }
+        if (!chapterMode) return null
+        val origin = seed.origin?.takeIf { it != seed.eventId }?.let { content.events[it] } ?: return null
+        return texts.formatL("tohum_hatirlatma", "olay" to origin.card)
+    }
+
+    private fun missionRegionOf(state: WorldState, e: EventDef): String? =
+        director.missionRegion(state, e) { r -> canTravel(state, r) && (e.regions.isEmpty() || r in e.regions) }
+
+    /** Fırsat eli: buraya uyan olaylar; üste ayrıca başka bölgelerde geçen görev kartları (vadesi gelmiş tohumlar önce). */
+    private fun dealHand(state: WorldState): WorldState {
+        if (state.dayState.slotsLeft <= 0 || state.mission?.kind == MissionKind.OPERATION) {
+            return state.copy(dayState = state.dayState.copy(hand = emptyList()))
+        }
+        val rng = Rng(state.rngState)
+        val hand = director.deal(state, rng).toMutableList()
+        if (chapterMode && state.mission == null) {
+            val elsewhere = director.dueElsewhere(state).map { it.eventId }.distinct()
+                .filter { id -> content.events[id]?.let { missionRegionOf(state, it) } != null }
+                .take(MISSION_CARDS)
+            hand += elsewhere
+            val more = MISSION_CARDS - elsewhere.size
+            if (more > 0) {
+                hand += director.deal(state, rng, n = more, anywhere = true) { e ->
+                    e.id !in hand && !director.fitsLocation(state, e) && missionRegionOf(state, e) != null
+                }
+            }
+        }
+        return state.copy(rngState = rng.state, dayState = state.dayState.copy(hand = hand.distinct()))
     }
 
     private fun setupWorld(state: WorldState): Result {
@@ -80,6 +341,11 @@ class WorldEngine(
             flags = state.flags + DAILY_WIDE_FLAG,
             publicLevel = state.player.level,
         )
+        // Bölüm yapısı: gün akışı Bölüm 1'in brifingiyle açılır (üs: perdenin üs bölgesi).
+        if (chapterMode) {
+            val first = chapters.forDay(s.day)
+            s = s.copy(chapter = first?.no ?: 1, chapterPhase = ChapterPhase.BRIEF, region = base(s) ?: s.region, mission = null)
+        }
         // NPC'ler ve Küresel Sıralama (Aşama 5)
         s = effects.npc.setupRanking(effects.npc.ensure(s))
         val day = startDay(s, advance = false)
@@ -136,6 +402,45 @@ class WorldEngine(
             dayState = s.dayState.copy(slotsLeft = slots, slotsTotal = slots, nextGateUid = uid, hand = emptyList()),
         )
         notices += Notice(NoticeKind.SYSTEM, texts.format("gun_basladi", "day" to s.day, "n" to slots))
+        if (chapterMode && advance) {
+            val d = deadlineCheck(s)
+            s = d.state
+            notices += d.notices
+        }
+        return Result(s, notices)
+    }
+
+    /**
+     * Son tarih (DECISIONS #130): operasyona girilmeden son tarih geçerse taşma yaşanır (tehlike, hayatta kalan, bayrak)
+     * ve oyuncu görevdeyse üsse çağrılır; operasyon o gün kendiliğinden başlar. Son üç gün her sabah uyarı.
+     */
+    private fun deadlineCheck(state: WorldState): Result {
+        var s = state
+        val ch = chapters.get(s.chapter) ?: return Result(s, emptyList())
+        val waiting = s.chapterPhase == ChapterPhase.BRIEF || s.chapterPhase == ChapterPhase.PREP
+        if (!waiting) return Result(s, emptyList())
+        val notices = mutableListOf<Notice>()
+        val left = ch.deadline - s.day
+        if (left in 0..DEADLINE_WARNING_DAYS) {
+            notices += Notice(NoticeKind.WARNING, texts.formatL("bolum_son_tarih", "title" to ch.title, "n" to LText("$left", "$left")))
+        }
+        val flag = ChapterTable.overflowFlag(ch.no)
+        if (left < 0 && !s.hasFlag(flag)) {
+            val region = ch.operations.firstOrNull()?.let { operationRegion(s, it) }
+            val list = listOfNotNull(
+                Effect.SetFlag(flag),
+                Effect.AddVar(SURVIVORS_VAR, ChapterTable.OVERFLOW_SURVIVORS),
+                region?.takeIf { it in s.regions }?.let { Effect.ShiftDanger(it, ChapterTable.OVERFLOW_DANGER) },
+            ) + ch.overflowEffects
+            val r = effects.applyAll(s, list)
+            s = r.state
+            notices += Notice(NoticeKind.WARNING, texts.formatL("bolum_tasti", "title" to ch.title), listOf(ch.overflowText).filter { it != LText.EMPTY })
+            notices += r.notices
+            if (s.mission != null && s.mission?.kind != MissionKind.OPERATION) {
+                notices += Notice(NoticeKind.WARNING, texts.format("gorev_yarida"))
+                s = returnHome(s, auto = false, notices = notices)
+            }
+        }
         return Result(s, notices)
     }
 
@@ -146,11 +451,34 @@ class WorldEngine(
         if (state.combat != null) throw ActionRejected("Savaş sürüyor")
         if (state.prompts.isNotEmpty()) throw ActionRejected("Önce Sistem istemi")
         val slots = state.dayState.slotsLeft
-        if (action != HubAction.Camp && slots <= 0) throw ActionRejected("Bugünün yuvaları bitti; kamp kur")
+        if (action != HubAction.Camp && action != HubAction.ReturnToBase && slots <= 0) throw ActionRejected("Bugünün yuvaları bitti; kamp kur")
+        if (chapterMode) checkChapterAction(state, action)
+        // Oyuncu bir eylem yaptı: zorunlu olay kilidi açılır.
+        val state = if (state.dayState.forcedLock) state.copy(dayState = state.dayState.copy(forcedLock = false)) else state
         return when (action) {
             is HubAction.Card -> {
                 if (action.eventId !in state.dayState.hand) throw ActionRejected("Bu kart elde yok")
-                startEvent(state, action.eventId, consumeSlot = true).toResult()
+                val e = content.events.getValue(action.eventId)
+                if (chapterMode && !director.fitsLocation(state, e)) {
+                    // Başka bir bölgede geçen olay: oraya bir yan görev (varış sahnesi + olay, sonra üsse dönüş).
+                    val region = missionRegionOf(state, e) ?: throw ActionRejected("Bu olaya şu an gidilemez")
+                    return beginMission(state, MissionKind.SIDE, region, listOf(e.id), consumeSlot = true)
+                }
+                val seed = state.seeds.firstOrNull { it.eventId == e.id && it.dueDay <= state.day }
+                startEvent(
+                    if (seed != null) state.copy(seeds = state.seeds - seed) else state, action.eventId, consumeSlot = true,
+                    focus = seed?.npc, reminder = reminderOf(state, seed),
+                ).toResult()
+            }
+            is HubAction.EnterOperation -> {
+                val r = spend(state).copy(vars = state.vars + (OP_REQUEST_VAR to action.variant + 1))
+                finishSlot(r, emptyList())
+            }
+            HubAction.ReturnToBase -> {
+                // Dönüş yolu yuva harcamaz: görevin yolculuğu gidişte ödendi (DECISIONS #130).
+                val notices = mutableListOf<Notice>()
+                val back = returnHome(state, auto = false, notices = notices)
+                finishSlot(back, notices)
             }
             HubAction.Explore -> explore(state)
             HubAction.Train -> train(state)
@@ -159,6 +487,61 @@ class WorldEngine(
             is HubAction.Travel -> travel(state, action.region)
             HubAction.Camp -> camp(state)
             HubAction.ClimbTower -> climbTower(state)
+        }
+    }
+
+    /** Bölüm yapısında eylemin yeri: keşif/Kapı/Kule görevde, operasyon ve yolculuk üste. */
+    private fun checkChapterAction(state: WorldState, action: HubAction) {
+        val m = state.mission
+        when (action) {
+            HubAction.Explore, is HubAction.EnterGate, HubAction.ClimbTower ->
+                if (m?.kind != MissionKind.EXPLORE) throw ActionRejected("Önce bir bölgeye git")
+            is HubAction.EnterOperation -> {
+                if (m != null) throw ActionRejected("Önce üsse dön")
+                if (operationChoices(state).none { it.first == action.variant }) throw ActionRejected("Şu an girilecek operasyon yok")
+            }
+            HubAction.ReturnToBase -> if (m == null || m.kind == MissionKind.OPERATION) throw ActionRejected("Üsse dönülecek görev yok")
+            is HubAction.Travel -> if (m != null) throw ActionRejected("Önce üsse dön")
+            else -> if (m?.kind == MissionKind.OPERATION) throw ActionRejected("Operasyon sürüyor")
+        }
+    }
+
+    /** Şu an geçerli akış eylemleri (testler, simülatör, arayüz denetimi). Kamp her zaman geçerlidir. */
+    fun legalActions(state: WorldState): List<HubAction> {
+        if (state.sceneId != WorldState.HUB || state.combat != null || state.prompts.isNotEmpty()) return emptyList()
+        if (state.dayState.slotsLeft <= 0) {
+            return listOfNotNull(HubAction.Camp, HubAction.ReturnToBase.takeIf { state.mission?.kind == MissionKind.EXPLORE })
+        }
+        val m = state.mission
+        return buildList {
+            state.dayState.hand.forEach { add(HubAction.Card(it)) }
+            if (m?.kind != MissionKind.OPERATION) { add(HubAction.Train); add(HubAction.Rest) }
+            if (!chapterMode) {
+                add(HubAction.Explore)
+                destinations(state).forEach { add(HubAction.Travel(it)) }
+                state.region?.let { state.regions[it] }?.gates?.forEach { add(HubAction.EnterGate(it.uid)) }
+                if (towerOpen(state)) add(HubAction.ClimbTower)
+            } else if (m == null) {
+                destinations(state).forEach { add(HubAction.Travel(it)) }
+                operationChoices(state).forEach { add(HubAction.EnterOperation(it.first)) }
+            } else if (m.kind == MissionKind.EXPLORE) {
+                add(HubAction.Explore)
+                state.region?.let { state.regions[it] }?.gates?.forEach { add(HubAction.EnterGate(it.uid)) }
+                if (towerOpen(state)) add(HubAction.ClimbTower)
+                add(HubAction.ReturnToBase)
+            }
+            add(HubAction.Camp)
+        }
+    }
+
+    /** Üste girilebilecek operasyonlar: (varyant, bölge). */
+    fun operationChoices(state: WorldState): List<Pair<Int, String>> {
+        if (!chapterMode || state.mission != null) return emptyList()
+        val ch = chapters.get(state.chapter) ?: return emptyList()
+        if (state.chapterPhase != ChapterPhase.PREP || !ch.earlyEntry) return emptyList()
+        return ch.operations.mapIndexedNotNull { i, op ->
+            if (op.events.none { id -> content.events[id]?.let { director.eligibleQueued(state, it) } == true }) null
+            else i to operationRegion(state, op)
         }
     }
 
@@ -212,9 +595,17 @@ class WorldEngine(
 
     /** Yolculuk: komşu ve koşulu tutan, bu perdede canlı bölgeler. */
     fun canTravel(state: WorldState, region: String): Boolean {
-        val here = state.region?.let { content.regions[it] } ?: return false
         val def = content.regions[region] ?: return false
+        if (chapterMode) return def.liveIn(state.act) && (def.condition?.test(state) ?: true)
+        val here = state.region?.let { content.regions[it] } ?: return false
         return region in here.neighbors && def.liveIn(state.act) && (def.condition?.test(state) ?: true)
+    }
+
+    /** Üsten gidilebilecek bölgeler (bölüm yapısı) ya da komşular (eski akış). */
+    fun destinations(state: WorldState): List<String> {
+        if (!chapterMode) return state.region?.let { content.regions[it] }?.neighbors?.filter { canTravel(state, it) } ?: emptyList()
+        if (state.mission != null) return emptyList()
+        return content.regions.keys.filter { canTravel(state, it) }
     }
 
     private fun Result.toResult() = this
@@ -223,7 +614,7 @@ class WorldEngine(
         state.copy(dayState = state.dayState.copy(slotsLeft = (state.dayState.slotsLeft - 1).coerceAtLeast(0)))
 
     /** Olayı başlatır: giriş sahnesine geçer, görüldü olarak işaretler, gerilim/etiket geçmişini yazar. */
-    fun startEvent(state: WorldState, eventId: String, consumeSlot: Boolean, focus: String? = null): Result {
+    fun startEvent(state: WorldState, eventId: String, consumeSlot: Boolean, focus: String? = null, reminder: LText? = null): Result {
         val e = content.events[eventId] ?: throw ActionRejected("Tanımsız olay: $eventId")
         var s0 = if (consumeSlot) spend(state) else state
         // Olaydaki NPC'lerle temas: tanınırlar, ihmal sayacı sıfırlanır. Odak: tohumun NPC'si ya da olayın ilk NPC'si.
@@ -239,6 +630,9 @@ class WorldEngine(
                 hand = emptyList(),
                 recentTension = (d.recentTension + e.tension).takeLast(Director.RECENT_TENSION),
                 recentTags = (d.recentTags + e.tags).takeLast(Director.RECENT_TAGS),
+                // Olaydan sonra oyuncu bir eylem yapmadan yeni zorunlu olay gelmez.
+                forcedLock = true,
+                reminder = reminder,
             ),
         )
         return Result(s, emptyList())
@@ -299,6 +693,10 @@ class WorldEngine(
     private fun travel(state: WorldState, region: String): Result {
         val here = state.region?.let { content.regions[it] }
         if (region !in content.regions) throw ActionRejected("Tanımsız bölge")
+        if (chapterMode) {
+            if (!canTravel(state, region)) throw ActionRejected("Bu bölgeye şu an gidilemez")
+            return beginMission(state, MissionKind.EXPLORE, region, emptyList(), consumeSlot = true)
+        }
         if (here != null && !canTravel(state, region)) throw ActionRejected("Bu bölgeye şu an gidilemez")
         val moved = spend(state).copy(region = region)
         return finishSlot(moved, listOf(Notice(NoticeKind.SYSTEM, texts.formatL("yolculuk", "region" to regionName(region)))))
@@ -382,6 +780,8 @@ class WorldEngine(
             s = r.state
             notices += r.notices
         }
+        // Savaşın hemen ardından zorunlu olay gelmez (STORY_FLOW c).
+        if (chapterMode) s = s.copy(dayState = s.dayState.copy(forcedLock = true))
         val hub = enterHub(s)
         return Result(hub.state, notices + hub.notices)
     }
@@ -391,6 +791,20 @@ class WorldEngine(
 
     companion object {
         const val DAILY_WIDE_FLAG = "gunluk_genis_gorevler"
+
+        /** Oyuncu üste "operasyona gir" dedi (varyant + 1); bir sonraki üs anında operasyon başlar. */
+        const val OP_REQUEST_VAR = "_operasyon_istegi"
+        const val SURVIVORS_VAR = "hayatta_kalan"
+        const val DEADLINE_WARNING_DAYS = 3
+
+        /** Bölüm sonundan bu kadar gün sonra hâlâ bitmemiş bölüm yine de ilerler (takılma koruması). */
+        const val STUCK_DAYS = 5
+
+        /** Üsteki fırsat elinde başka bölgede geçen görev kartı sayısı (en çok). */
+        const val MISSION_CARDS = 2
+
+        /** Başka bölgede geçen tohum bu kadar gün kart olarak bekledikten sonra yan görev olarak açılır. */
+        const val SEED_PATIENCE_DAYS = 6
         const val OVERFLOW_VAR = "kapi_tasma_sayisi"
         const val GATES_CLOSED_VAR = "kapatilan_kapi"
         const val PENDING_GATE_VAR = "_bekleyen_kapi"

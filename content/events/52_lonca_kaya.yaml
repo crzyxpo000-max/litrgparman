@@ -10,6 +10,7 @@
 olaylar:
   # ================================================================== KAYA — LONCA TEKLİFİ (P2)
   - id: "kaya_lonca_teklifi"
+    konum: ["sanayi"]
     perde: [2]
     gun: { min: 33, max: 80 }
     kosul: { bayrak: "perde2_basladi" }
@@ -411,6 +412,7 @@ olaylar:
 
   # ================================================================== ZİNCİR 1 — KURU HAVUZ KAPISI (P2)
   - id: "lonca_1_kapi_temizligi"
+    konum: ["sanayi"]
     perde: [2]
     gun: { min: 45, max: 150 }
     kosul: { bayrak: "perde2_basladi", itibar_min: { lonca: -15 }, bayrak_yok: "lonca_dusmani" }
@@ -788,6 +790,7 @@ olaylar:
 
   # ================================================================== KAYA — SERT DERS (P2)
   - id: "kaya_sert_ders"
+    konum: ["sanayi"]
     perde: [2]
     gun: { min: 95, max: 175 }
     kosul: { bayrak: "kaya_teklifi_goruldu" }
@@ -1143,6 +1146,7 @@ olaylar:
 
   # ================================================================== ZİNCİR 2 — MERDİVEN GÜNÜ (P2)
   - id: "lonca_2_rutbe"
+    konum: ["sanayi"]
     perde: [2]
     gun: { min: 95, max: 180 }
     kosul: { bayrak: "lonca_1_tamam", bayrak_yok: ["lonca_dusmani", "lonca_2_tamam"] }
@@ -1489,6 +1493,7 @@ olaylar:
 
   # ================================================================== ZİNCİR 3 — MAVİ ÇAPA (P3)
   - id: "lonca_3_rakip_bastirma"
+    konum: ["sanayi"]
     perde: [3]
     gun: { min: 181, max: 275 }
     kosul: { bayrak: "lonca_2_tamam", bayrak_yok: ["lonca_dusmani", "lonca_3_tamam"] }
@@ -1908,6 +1913,7 @@ olaylar:
 
   # ================================================================== ZİNCİR 4 — DEMİR YASA (P3)
   - id: "lonca_4_demir_yasa"
+    konum: ["sanayi"]
     perde: [3]
     gun: { min: 205, max: 318 }
     kosul: { bayrak: "lonca_3_tamam", bayrak_yok: ["lonca_dusmani", "lonca_4_tamam"] }
@@ -2151,6 +2157,7 @@ olaylar:
 
   # ================================================================== KAYA — DARBE GECESİ (P3, AY 292)
   - id: "kaya_darbe_gecesi"
+    konum: ["sanayi"]
     perde: [3]
     gun: { min: 240, max: 299 }
     ana_yay: { gun: 292 }
@@ -2564,6 +2571,7 @@ olaylar:
 
   # ================================================================== KAYA — SON SAVAŞIN GENERALİ (P4, AY 337)
   - id: "kaya_son_savas_generali"
+    konum: ["kordon"]
     perde: [4]
     gun: { min: 331, max: 341 }
     ana_yay: { gun: 337 }
@@ -2851,6 +2859,7 @@ olaylar:
 
   # ================================================================== ZİNCİR 5 — TAHT (P4, AY 346)
   - id: "lonca_5_taht"
+    konum: ["sanayi"]
     perde: [4]
     gun: { min: 331, max: 357 }
     ana_yay: { gun: 346 }
@@ -3148,6 +3157,7 @@ olaylar:
 
   # ================================================================== ÖRS'ÜN SOĞUK ODASI (tohum: lonca_2_rutbe · ors_kin)
   - id: "ors_soguk_oda"
+    konum: ["sanayi"]
     perde: [2, 3]
     agirlik: 1
     etiketler: ["lonca", "ahlak", "sanayi"]
@@ -3296,6 +3306,7 @@ olaylar:
 
   # ================================================================== SOĞUK FIRIN (tohum: kaya_darbe_gecesi · hapis)
   - id: "kaya_soguk_firin"
+    konum: ["sanayi"]
     perde: [3]
     agirlik: 1
     etiketler: ["lonca", "npc", "hapis"]

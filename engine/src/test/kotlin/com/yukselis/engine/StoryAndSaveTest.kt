@@ -115,6 +115,9 @@ class StoryEngineTest {
         assertEquals("Grab Devon's hand and hold on", morning.history.first().chosenLabel)
         // Yazılmış giriş dizisi biter, gün akışı (olay havuzu) başlar.
         s = engine.choose(s, "gune_basla", Lang.TR).state
+        // Bölüm yapısı: gün akışı Bölüm 1'in brifingiyle açılır (DECISIONS #130).
+        assertEquals("brifing_1_1", s.sceneId)
+        s = engine.throughBriefing(s)
         assertEquals(com.yukselis.engine.core.WorldState.HUB, s.sceneId)
         assertNotNull(engine.view(s, Lang.EN).hub)
         assertFalse(s.ended)

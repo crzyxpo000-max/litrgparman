@@ -1,0 +1,269 @@
+# Bölüm yapısı (docs/CHAPTERS.md, DECISIONS #130).
+# Her bölüm: Brifing (üs) → Hazırlık (serbest günler) → Ana operasyon (kilitli görev) → Sonrası (üs) → Darboğaz.
+# acilis: bölümün açıldığı gün · son_tarih: operasyonun en geç başladığı gün (geçerse taşma) · bitis: bölüm sonu.
+# brifing / darbogaz: ilk uygun olay. operasyon: sırayla açılan olaylar; nesne listesi = oyuncunun seçtiği seçenekler.
+# erken: false = tarihli operasyon (dünya olayı); son tarih günü kendiliğinden başlar, oyuncu erken giremez.
+# darbogaz_gun: darboğaz en erken bu gün gelir. tasma: son tarih kaçınca bildirimin satırı. Motorun her taşmada uyguladığı: bayrak bolum_<n>_tasti,
+# hayatta_kalan −3, operasyon bölgesinin tehlikesi +15; tasma_etkiler bunlara eklenir.
+
+uslar:
+  1: "ogretici_orman"
+  2: "kiyikent_liman"
+
+bolumler:
+  # ---- Perde 1 · Öğretici Katman ----
+  - no: 1
+    perde: 1
+    acilis: 0
+    son_tarih: 12
+    bitis: 12
+    baslik: { tr: "Sis Ağları", en: "The Fog Webs" }
+    hedef: { tr: "Öğretici Katman'da ayakta kal. Ormanın derinindeki ağlar her gün büyüyor.", en: "Stay alive in the Tutorial Layer. The webs deep in the forest grow every day." }
+    tehdit: { tr: "Kapalı bir orman, kıt kaynak, sisin içinde at büyüklüğünde bir şey.", en: "A sealed forest, scarce supplies, and something the size of a horse in the fog." }
+    brifing: ["brifing_1"]
+    operasyon: ["kirilma"]
+    darbogaz: ["darbogaz_1"]
+    tasma: { tr: "Sis ağları kampın kıyısına kadar indi. Bu sabah iki çadır boş.", en: "The fog webs crept down to the edge of camp. Two tents are empty this morning." }
+
+  - no: 2
+    perde: 1
+    acilis: 13
+    son_tarih: 24
+    bitis: 24
+    baslik: { tr: "Kemik Taç", en: "The Bone Crown" }
+    hedef: { tr: "Kampı ayakta tut. Mantar açıklığından gelen izler bir şeyin yaklaştığını söylüyor.", en: "Keep the camp standing. The tracks coming out of the mushroom clearing say something's on its way." }
+    tehdit: { tr: "Öğretici'de bir üst kademeden bir şey dolaşıyor.", en: "Something from a higher Grade is loose in the Tutorial." }
+    brifing: ["brifing_2"]
+    operasyon: ["deniz_son_secim", "yeni_tavan"]
+    darbogaz: ["darbogaz_2"]
+    tasma: { tr: "Boynuzlu gölge mantar açıklığından çıkıp kamp yoluna kadar indi; yolda kalanların hepsi geri dönmedi.", en: "The horned shadow left the mushroom clearing and came down the camp trail. Not everyone on it came back." }
+
+  - no: 3
+    perde: 1
+    acilis: 25
+    son_tarih: 28
+    bitis: 30
+    baslik: { tr: "Bekçi", en: "The Warden" }
+    hedef: { tr: "Çıkış Kapısı'na in. Öğretici, Bekçi'yi geçemeyenleri bırakmıyor.", en: "Go down to the Exit Gate. The Tutorial doesn't let go of anyone who can't get past the Warden." }
+    tehdit: { tr: "Öğretici Bekçisi: ölenlerin pencerelerinden örülmüş bir dev.", en: "The Tutorial Warden: a giant stitched together out of dead people's windows." }
+    brifing: ["brifing_3"]
+    operasyon: ["ogretici_bekci"]
+    darbogaz: []
+    tasma: { tr: "Kapı halkası daralıyor. Vadiye inen geçitte bekleyemeyenlerin izleri var.", en: "The Gate's ring is shrinking. In the pass down to the valley, you find the tracks of people who couldn't wait." }
+
+  # ---- Perde 2 · Entegre Dünya ----
+  - no: 4
+    perde: 2
+    erken: false
+    acilis: 31
+    son_tarih: 40
+    bitis: 45
+    baslik: { tr: "Dönüş", en: "Homecoming" }
+    hedef: { tr: "{yer:kiyikent|e} alış. Eski meydanın altındaki daire açılmak üzere.", en: "Get your bearings in {yer:kiyikent}. The circle under the old square is about to open." }
+    tehdit: { tr: "Dört kamp, bölünmüş bir şehir, yerin altından yükselen bir Kule.", en: "Four camps, a split city, and a Spire pushing up out of the ground." }
+    brifing: ["perde2_donus", "brifing_4"]
+    operasyon: ["kule_yukselisi"]
+    darbogaz: ["fraksiyon_secimi"]
+    tasma: { tr: "Kule senden önce yükseldi. Meydanın çevresindeki enkazdan çıkarılanların listesi uzun.", en: "The Spire came up without you. The list of people pulled out of the rubble around the square is long." }
+
+  - no: 5
+    perde: 2
+    erken: false
+    acilis: 46
+    son_tarih: 60
+    bitis: 66
+    baslik: { tr: "Kasaba Çekirdeği", en: "The Town Core" }
+    hedef: { tr: "{yer:eski_sehir|in} kalbi uyanıyor. Dört kamp da onu istiyor; senden önce davranacaklar.", en: "The heart of {yer:eski_sehir} is waking up. All four camps want it, and they won't wait for you." }
+    tehdit: { tr: "Meydanın altındaki kristal ve onu koruyan muhafız.", en: "The crystal under the square and the guardian standing over it." }
+    brifing: ["brifing_5"]
+    operasyon: ["kasaba_cekirdegi"]
+    darbogaz: ["darbogaz_5"]
+    tasma: { tr: "Muhafız uyandı ve meydana ilk kim adım attıysa onu ezdi. Kamplar ölülerini birbirine sayıyor.", en: "The guardian woke up and crushed whoever stepped into the square first. The camps are blaming each other for the dead." }
+
+  - no: 6
+    perde: 2
+    erken: false
+    acilis: 67
+    son_tarih: 80
+    bitis: 95
+    baslik: { tr: "İlk Taşma", en: "The First Overflow" }
+    hedef: { tr: "{yer:kordon|de}ki kapının sayacı sıfıra iniyor. Taştığı gün orada ol; o güne kadar şehri hazırla.", en: "The counter on the Gate on {yer:kordon} is running down to zero. Be there the day it spills, and get the city ready until then." }
+    tehdit: { tr: "{yer:kordon|de} kimsenin kapatamadığı bir kapı.", en: "A Gate on {yer:kordon} nobody's been able to close." }
+    brifing: ["brifing_6"]
+    operasyon: ["ilk_tasma"]
+    darbogaz: ["deniz_kardes_bulundu", "deniz_anma_kardes"]
+    tasma: { tr: "Deniz kapıya doğru çekildi ve sen yoktun. {yer:kordon|in} balkonlarında oturanların çoğu geri dönmedi.", en: "The sea pulled back toward the Gate and you weren't there. Most of the people on the balconies along {yer:kordon} never came back." }
+
+  - no: 7
+    perde: 2
+    acilis: 96
+    son_tarih: 105
+    bitis: 122
+    baslik: { tr: "Küçük Harfler", en: "In Lowercase" }
+    hedef: { tr: "{yer:kasaba_cekirdegi|in} bülteninde bir şey kıpırdıyor. Şehir fark etmeden önce sen fark et.", en: "Something's stirring in {yer:kasaba_cekirdegi|pos} bulletin. Notice it before the city does." }
+    tehdit: { tr: "Senin içinde olan şey, şehrin pencerelerinde konuşmaya hazırlanıyor.", en: "The thing inside you is getting ready to talk through the city's windows." }
+    brifing: ["brifing_7"]
+    operasyon: ["yanki_ortaya_cikis"]
+    darbogaz: ["darbogaz_7"]
+    tasma: { tr: "Bülten sen gelmeden okundu. Şehrin yarısı artık 'birinin içinde' cümlesini ezbere biliyor.", en: "The bulletin got read before you showed up. Half the city knows 'inside someone' by heart now." }
+
+  - no: 8
+    perde: 2
+    acilis: 123
+    son_tarih: 135
+    bitis: 150
+    baslik: { tr: "Başlık", en: "The Header" }
+    hedef: { tr: "Çekirdek'in altında bir merdiven var ve yalnız sana açılıyor. Kapanmadan in.", en: "There's a staircase under the Core, and it only opens for you. Go down before it closes." }
+    tehdit: { tr: "Sistem'in ne olduğuna dair ilk gerçek.", en: "The first real truth about what the System is." }
+    brifing: ["brifing_8"]
+    operasyon: ["sistem_gercegi"]
+    darbogaz: ["darbogaz_8"]
+    tasma: { tr: "Merdiven bir gece seni bekledi, sonra kendini kapattı. Ertesi sabah yeniden açıldığında basamaklar daha dardı.", en: "The staircase waited one night for you, then sealed itself. When it opened again the next morning, the steps were narrower." }
+
+  - no: 9
+    perde: 2
+    erken: false
+    acilis: 151
+    son_tarih: 178
+    bitis: 180
+    baslik: { tr: "Körfezin Üstündeki Gölge", en: "The Shadow Over the Bay" }
+    hedef: { tr: "Perde 2'nin son günleri. Gökyüzünde bir şey yaklaşıyor; şehri hazırla.", en: "The last days of Act 2. Something's closing in from the sky. Get the city ready." }
+    tehdit: { tr: "Bulutların üstünde bekleyen, gemi demeye fazla büyük bir şey.", en: "Something waiting above the clouds, too big to call a ship." }
+    brifing: ["brifing_9"]
+    operasyon: ["perde2_son"]
+    darbogaz: []
+    tasma: { tr: "Gölge körfeze sen hazır olmadan düştü. Liman o öğleden sonra kendi başının çaresine baktı.", en: "The shadow fell over the bay before you were ready. The harbor was on its own that afternoon." }
+
+  # ---- Perde 3 · Çok-evren ----
+  - no: 10
+    perde: 3
+    erken: false
+    acilis: 181
+    son_tarih: 200
+    bitis: 205
+    baslik: { tr: "Elli Katın Ardı", en: "Past the Fiftieth Floor" }
+    hedef: { tr: "Elçi indi. Kule'nin ellinci katında bir geçit açılmak üzere; ilk geçen sen ol.", en: "The Envoy has landed. A passage is about to open on the Spire's fiftieth floor. Be the first one through." }
+    tehdit: { tr: "Thessar'ın teklifleri ve Kule'de açılan çok-evren geçidi.", en: "Thessar's offers, and a multiverse passage opening in the Spire." }
+    brifing: ["thessar_inis", "brifing_10"]
+    operasyon: ["cok_evren_kapisi"]
+    darbogaz: ["darbogaz_10"]
+    tasma: { tr: "Geçit sensiz açıldı. İlk geçenlerin adları Küresel Sıralama'nın tepesinde, çoğunun yanında artık bir çarpı var.", en: "The passage opened without you. The first names through are at the top of the Global Ranking, and most of them have an X next to them now." }
+
+  - no: 11
+    perde: 3
+    acilis: 206
+    son_tarih: 225
+    bitis: 230
+    baslik: { tr: "İlk Dünya", en: "The First World" }
+    hedef: { tr: "Geçidin ardındaki dünyalardan biri hasat ediliyor. Hangisine gideceğini sen seç.", en: "One of the worlds past the passage is being harvested. You pick which one you go to." }
+    tehdit: { tr: "Başka bir türün son günleri: ya {yer:batik_takimada} ya {yer:pirinc_kervan}.", en: "Another species' last days: {yer:batik_takimada} or {yer:pirinc_kervan}." }
+    brifing: ["brifing_11"]
+    operasyon:
+      - ad: { tr: "Batık Takımada", en: "The Drowned Reach" }
+        bolge: "batik_takimada"
+        olaylar: ["batik_ilk_adim", "batik_son_fener", "batik_tuz_arsivi", "batik_son_basakci"]
+      - ad: { tr: "Pirinç Kervan", en: "The Brass Caravan" }
+        bolge: "pirinc_kervan"
+        olaylar: ["kervan_tarti_carsisi", "kervan_sayman", "kervan_ondalik", "kervan_bos_kefe"]
+    darbogaz: ["deniz_canavar_mi_tanri_mi", "deniz_anma_ayna"]
+    tasma: { tr: "Geçidin ardındaki dünyalardan biri sustu. Kimse hangisi olduğunu bilmiyor; sen biliyorsun.", en: "One of the worlds past the passage went quiet. Nobody knows which one. You do." }
+
+  - no: 12
+    perde: 3
+    acilis: 231
+    son_tarih: 260
+    bitis: 260
+    baslik: { tr: "Yol", en: "The Path" }
+    hedef: { tr: "Kavradığın Özler birbirine uzanıyor. Onları tek bir Yol'a bağlamaya hazır ol.", en: "The Essences you've grasped are reaching for each other. Get ready to bind them into a single Path." }
+    tehdit: { tr: "İçindeki güç, sen karar vermezsen kendi kararını verecek.", en: "If you don't decide, the power inside you will decide for itself." }
+    brifing: ["brifing_12"]
+    operasyon: ["yol_olusumu"]
+    darbogaz: []
+    tasma: { tr: "Özler sen hazır olmadan birbirine kenetlendi. Göğsündeki sızı bir haftadır geçmiyor.", en: "The Essences locked together before you were ready. The ache in your chest hasn't let up all week." }
+
+  - no: 13
+    perde: 3
+    erken: false
+    acilis: 261
+    son_tarih: 292
+    bitis: 292
+    baslik: { tr: "Kapı Fırtınası", en: "The Gate Storm" }
+    hedef: { tr: "Şehirde kapılar sıklaşıyor. Fırtına geldiğinde her mahalleye yetişemeyeceksin.", en: "Gates are coming faster across the city. When the storm hits, you won't reach every neighborhood." }
+    tehdit: { tr: "Aynı gece yedi kapı.", en: "Seven Gates in one night." }
+    brifing: ["brifing_13"]
+    operasyon: ["p3_kapi_firtinasi"]
+    darbogaz: ["darbogaz_13"]
+    tasma: { tr: "Fırtına sen yokken koptu. Sabah üç mahallenin adı haritadan silinmişti.", en: "The storm broke while you were gone. By morning, three neighborhoods were off the map." }
+
+  - no: 14
+    perde: 3
+    acilis: 293
+    son_tarih: 300
+    bitis: 305
+    baslik: { tr: "Ortak Masa", en: "The Common Table" }
+    hedef: { tr: "Dört kamp ilk kez aynı masada oturacak. Masada biri seni satmaya hazırlanıyor.", en: "For the first time, all four camps are sitting at one table. Someone at it is getting ready to sell you out." }
+    tehdit: { tr: "İçeriden gelen bir ihanet.", en: "A betrayal from the inside." }
+    brifing: ["brifing_14"]
+    operasyon: ["buyuk_ihanet"]
+    darbogaz: []
+    tasma: { tr: "Masa sensiz kuruldu ve sensiz dağıldı. Kimin kimi sattığını sonradan, başkalarından duyuyorsun.", en: "The table got set without you and broke up without you. You hear secondhand who sold out who." }
+
+  - no: 15
+    perde: 3
+    erken: false
+    acilis: 306
+    son_tarih: 320
+    bitis: 330
+    baslik: { tr: "Filo", en: "The Fleet" }
+    hedef: { tr: "Elçi hiçbir zaman ordu değildi. Ordu yolda; şehrin son hazırlığını yap.", en: "The Envoy was never the army. The army's on its way. Get the city through its last preparations." }
+    tehdit: { tr: "Ayın yanında beliren sayısız ışık.", en: "Countless lights appearing next to the moon." }
+    brifing: ["brifing_15"]
+    operasyon: ["perde3_son"]
+    darbogaz: []
+    tasma: { tr: "Filonun ilk ışığını şehir sensiz gördü. O gece paniği durduracak kimse yoktu.", en: "The city saw the fleet's first light without you. There was nobody to stop the panic that night." }
+
+  # ---- Perde 4 · Hasat ----
+  - no: 16
+    perde: 4
+    erken: false
+    acilis: 331
+    son_tarih: 342
+    bitis: 342
+    baslik: { tr: "Hasat Başlıyor", en: "The Harvest Begins" }
+    hedef: { tr: "Paneller sarardı ve gemiler iniyor. İstila geldiğinde şehrin yanında ol.", en: "The panels have gone yellow and the ships are coming down. Be at the city's side when the invasion hits." }
+    tehdit: { tr: "Kadim istilası.", en: "The Ancient invasion." }
+    brifing: ["perde4_acilis", "brifing_16"]
+    operasyon: ["kadim_istilasi"]
+    darbogaz: ["darbogaz_16"]
+    tasma: { tr: "Işık sütunları sen gelmeden indi. İlk saatte yukarı süzülenleri kimse durdurmadı.", en: "The pillars of light came down before you got there. In the first hour, nobody stopped the people floating up." }
+
+  - no: 17
+    perde: 4
+    erken: false
+    acilis: 343
+    son_tarih: 350
+    bitis: 352
+    baslik: { tr: "Kule'nin Altında", en: "Under the Spire" }
+    hedef: { tr: "{yer:kule_dibi|de} aşağı inen bir merdiven açıldı. Sistem'in Çekirdeği'ne in.", en: "A staircase going down has opened in {yer:kule_dibi}. Go down to the System's Core." }
+    tehdit: { tr: "Sistem Çekirdeği ve onu koruyan her şey.", en: "The System Core and everything guarding it." }
+    brifing: ["brifing_17"]
+    operasyon: ["cekirdege_yol"]
+    # Yol açıksa darboğaz Sistem Çekirdeği'nin kendisidir; açık değilse kapıda kalanların gecesi.
+    darbogaz: ["sistem_cekirdegi", "darbogaz_17"]
+    darbogaz_gun: 352
+    tasma: { tr: "Merdivenin ağzını başkaları tuttu. İnmek için önce onların arasından geçmen gerekecek.", en: "Somebody else took the mouth of the staircase. To go down, you'll have to get through them first." }
+
+  - no: 18
+    perde: 4
+    erken: false
+    acilis: 353
+    son_tarih: 358
+    bitis: 365
+    baslik: { tr: "Son Karar", en: "The Final Decision" }
+    hedef: { tr: "Bir yılın sonu. Pencere yalnız sana açılacak.", en: "The end of the year. The window will open for you alone." }
+    tehdit: { tr: "Hasat vakti.", en: "Harvest time." }
+    brifing: ["brifing_18"]
+    operasyon: ["son_karar"]
+    darbogaz: ["hasat_vakti"]
+    darbogaz_gun: 365
+    tasma: { tr: "Karar penceresi açıldı ve sen başka yerdeydin. Gökyüzü bekliyor; uzun beklemeyecek.", en: "The decision window opened and you were somewhere else. The sky is waiting. It won't wait long." }

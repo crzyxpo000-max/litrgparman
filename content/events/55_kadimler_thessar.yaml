@@ -19,6 +19,7 @@
 olaylar:
   # ================================================================== THESSAR'IN İNİŞİ (AY 181)
   - id: "thessar_inis"
+    konum: ["kiyikent_liman"]
     perde: [3]
     agirlik: 1
     etiketler: ["ana_yay", "kadimler", "thessar", "elcilik"]
@@ -437,6 +438,7 @@ olaylar:
 
   # ================================================================== ZİNCİR 1: SAYIM ÇADIRI
   - id: "kadimler_1_ticaret"
+    konum: ["kiyikent_liman"]
     perde: [3]
     gun: { min: 184, max: 235 }
     kosul: { bayrak: "thessar_indi" }
@@ -710,6 +712,7 @@ olaylar:
 
   # ================================================================== THESSAR: TİCARET MASASI
   - id: "thessar_ticaret_masasi"
+    konum: ["kiyikent_liman"]
     perde: [3]
     gun: { min: 198, max: 255 }
     kosul: { bayrak: "thessar_indi" }
@@ -971,6 +974,7 @@ olaylar:
 
   # ================================================================== ZİNCİR 2: VEL VERGİSİ
   - id: "kadimler_2_vergi"
+    konum: ["eski_sehir"]
     perde: [3]
     gun: { min: 212, max: 278 }
     kosul: { bayrak: "kadim_ticaret_acik", gorev: { zincir_kadimler: "basla" } }
@@ -1253,6 +1257,7 @@ olaylar:
 
   # ================================================================== THESSAR: BOYUNDURUK TEKLİFİ
   - id: "thessar_vassal_teklifi"
+    konum: ["kordon"]
     perde: [3]
     gun: { min: 226, max: 290 }
     kosul: { bayrak: "thessar_indi" }
@@ -1503,6 +1508,7 @@ olaylar:
 
   # ================================================================== ZİNCİR 3: MUHBİR
   - id: "kadimler_3_muhbir"
+    konum: ["kiyikent_liman"]
     perde: [3]
     gun: { min: 245, max: 305 }
     kosul: { gorev: { zincir_kadimler: "basla" }, bayrak: "kadim_vergi_odendi" }
@@ -1733,6 +1739,7 @@ olaylar:
 
   # ================================================================== THESSAR: İHANET FISILTISI
   - id: "thessar_ihanet_fisiltisi"
+    konum: ["kule_dibi"]
     perde: [3]
     gun: { min: 255, max: 312 }
     kosul: { bayrak: "thessar_indi", bayrak_yok: "thessar_ihanete_hazir" }
@@ -1972,6 +1979,7 @@ olaylar:
 
   # ================================================================== ZİNCİR 4: BOYUNDURUK SÖZLEŞMESİ
   - id: "kadimler_4_vassal_sozlesmesi"
+    konum: ["kordon"]
     perde: [3, 4]
     gun: { min: 285, max: 345 }
     kosul: { gorev: { zincir_kadimler: "basla" }, bayrak: "kadim_muhbiri" }
@@ -2130,6 +2138,7 @@ olaylar:
 
   # ================================================================== THESSAR: KIRIK MÜHÜR (tohum; ihanet anı)
   - id: "thessar_kirik_muhur"
+    konum: ["kiyikent_liman"]
     perde: [3, 4]
     agirlik: 1
     etiketler: ["kadimler", "thessar", "ihanet", "gece"]
@@ -2280,6 +2289,7 @@ olaylar:
 
   # ================================================================== ZİNCİR 5: TESLİM
   - id: "kadimler_5_teslim"
+    konum: ["eski_sehir"]
     perde: [4]
     gun: { min: 331, max: 356 }
     kosul: { gorev: { zincir_kadimler: "basla" }, esya: { antlasma_nushasi: 1 } }
@@ -2456,6 +2466,7 @@ olaylar:
   # Dallar: müttefik (thessar_ihanete_hazir ya da ihanet_thessar) → Budayıcı'ya karşı birlikte; vassal (kadim_vassal_imzalandi) → kan sınavı;
   # düşman (hiçbiri) → son boss `thessar_elci@oyuncu+5`.
   - id: "thessar_son_duello"
+    konum: ["kiyikent_liman"]
     perde: [4]
     agirlik: 1
     etiketler: ["ana_yay", "kadimler", "thessar", "boss", "final"]

@@ -27,6 +27,8 @@ import com.yukselis.engine.system.Stat
  */
 class StoryEngine(val content: Content) {
     companion object {
+        /** Dönüş özetinde gösterilen son kritik seçim sayısı. */
+        const val RECAP_CHOICES = 3
         const val MEMORY_SHOWN = 5
         private const val DENIZ = "deniz_arman"
         const val RANK_SHOWN = 10
@@ -74,7 +76,76 @@ class StoryEngine(val content: Content) {
         knowledge = state.knowledge.reversed().mapNotNull { id ->
             content.knowledge[id]?.let { KnowledgeView(text(it.name[lang], state, lang), text(it.description[lang], state, lang), it.kind) }
         },
+        chapter = content.chapters.get(state.chapter)?.let { ch ->
+            ChapterGoalView(
+                no = ch.no, title = text(ch.title[lang], state, lang), goal = text(ch.goal[lang], state, lang),
+                threat = text(ch.threat[lang], state, lang), daysLeft = chapterDaysLeft(state, ch),
+                phase = content.texts.format("bolum_evre_${state.chapterPhase.key}")[lang],
+            )
+        },
     )
+
+    // ---- Bölüm yapısı (DECISIONS #130) ----
+
+    /** Kalan gün: operasyon beklerken son tarihe, sonra bölüm sonuna. */
+    private fun chapterDaysLeft(state: WorldState, ch: com.yukselis.engine.world.ChapterDef): Int {
+        val waiting = state.chapterPhase == com.yukselis.engine.world.ChapterPhase.BRIEF ||
+            state.chapterPhase == com.yukselis.engine.world.ChapterPhase.PREP
+        return ((if (waiting) ch.deadline else ch.end) - state.day).coerceAtLeast(0)
+    }
+
+    /** Her zaman görünen "Bölüm N · Hedef · Kalan gün" satırı (gün akışından önce null). */
+    fun chapterLine(state: WorldState, lang: Lang): com.yukselis.engine.world.ChapterLine? {
+        val ch = content.chapters.get(state.chapter) ?: return null
+        val m = state.mission
+        val label = m?.let {
+            content.texts.formatL("gorev_etiket_${it.kind.key}", "region" to world.regionName(it.region))[lang]
+        }
+        return com.yukselis.engine.world.ChapterLine(
+            no = ch.no,
+            title = text(ch.title[lang], state, lang),
+            goal = text(ch.goal[lang], state, lang),
+            daysLeft = chapterDaysLeft(state, ch),
+            phase = state.chapterPhase,
+            onMission = m != null,
+            missionLabel = label,
+            isFinal = content.chapters.next(ch.no) == null,
+        )
+    }
+
+    /**
+     * Dönüş özeti (uzun aradan sonra): bölüm ve hedef, kalan gün, yanındakiler, öne çıkan fraksiyon, Dikkat ve son
+     * kritik seçimler (kronik). Metin şablonları `system.yaml` `ozet_*`.
+     */
+    fun recap(state: WorldState, lang: Lang): com.yukselis.engine.story.RecapView? {
+        val ch = content.chapters.get(state.chapter) ?: return null
+        val t = content.texts
+        fun f(key: String, vararg args: Pair<String, LText>) = text(t.formatL(key, *args)[lang], state, lang)
+        fun n(v: Int) = LText("$v", "$v")
+        val lines = mutableListOf<String>()
+        lines += f("ozet_bolum", "n" to n(ch.no), "title" to ch.title, "goal" to ch.goal)
+        val phase = state.chapterPhase
+        lines += when (phase) {
+            com.yukselis.engine.world.ChapterPhase.BRIEF, com.yukselis.engine.world.ChapterPhase.PREP ->
+                f("ozet_son_tarih", "n" to n(chapterDaysLeft(state, ch)))
+            com.yukselis.engine.world.ChapterPhase.OPERATION -> f("ozet_operasyonda")
+            else -> f("ozet_sonrasi", "n" to n(chapterDaysLeft(state, ch)))
+        }
+        state.mission?.takeIf { it.kind != com.yukselis.engine.world.MissionKind.OPERATION }?.let {
+            lines += f("ozet_gorevde", "region" to world.regionName(it.region))
+        }
+        val party = state.npcs.values.filter { it.companion && it.alive }.map { npcEngine.name(it.id) }
+        lines += if (party.isEmpty()) f("ozet_yalniz") else f("ozet_yaninda", "names" to LText(party.joinToString(", ") { it.tr }, party.joinToString(", ") { it.en }))
+        val leader = listOf("lonca", "sessiz_ag", "siginak", "yukselenler").maxByOrNull { state.reputation[it] ?: 0 }
+        if (leader != null && (state.reputation[leader] ?: 0) > 0) {
+            lines += f("ozet_fraksiyon", "faction" to (content.names.find(com.yukselis.engine.i18n.NameEntry.Kind.FACTION, leader)?.full ?: LText(leader, leader)))
+        }
+        if (state.attention >= 50) lines += f("ozet_dikkat", "n" to n(state.attention))
+        val recent = state.chronicle.sortedByDescending { it.day }.take(RECAP_CHOICES)
+        recent.mapNotNull { c -> content.scenes[c.scene]?.choices?.firstOrNull { it.id == c.choice }?.chronicle?.let { text(it[lang], state, lang) } }
+            .forEach { lines += "• $it" }
+        return com.yukselis.engine.story.RecapView(f("ozet_baslik"), lines)
+    }
 
     // ---- NPC'ler (Aşama 5) ----
 
@@ -156,21 +227,40 @@ class StoryEngine(val content: Content) {
     private fun hubView(state: WorldState, lang: Lang): HubView {
         val d = state.dayState
         val region = state.region
-        val here = region?.let { content.regions[it] }
         return HubView(
             day = state.day,
             slotsLeft = d.slotsLeft,
             slotsTotal = d.slotsTotal,
             regionName = region?.let { world.regionName(it)[lang] } ?: "",
             danger = region?.let { state.regions[it]?.danger } ?: 0,
-            cards = d.hand.mapNotNull { id -> content.events[id]?.let { CardView(id, text(it.card[lang], state, lang), it.tension) } },
+            cards = d.hand.mapNotNull { id ->
+                content.events[id]?.let { e ->
+                    val away = !content.chapters.isEmpty && state.mission == null && !world.director.fitsLocation(state, e)
+                    val where = if (away) e.where.firstOrNull { it in content.regions && world.canTravel(state, it) && it != world.base(state) } else null
+                    CardView(id, text(e.card[lang], state, lang), e.tension, where?.let { world.regionName(it)[lang] })
+                }
+            },
             gates = region?.let { state.regions[it] }?.gates?.map { gateView(it, state, lang) } ?: emptyList(),
-            travel = here?.neighbors?.filter { world.canTravel(state, it) }?.map { RegionLinkView(it, world.regionName(it)[lang]) } ?: emptyList(),
+            travel = world.destinations(state).map { RegionLinkView(it, world.regionName(it)[lang]) },
             mustCamp = d.slotsLeft <= 0,
             tower = content.tower?.takeIf { world.towerOpen(state) }?.let { t ->
                 val f = world.nextFloor(state)
                 TowerView(f, t.levelOf(f), f in t.storyFloors)
             },
+            atBase = state.mission == null,
+            mission = state.mission?.let { content.texts.formatL("gorev_etiket_${it.kind.key}", "region" to world.regionName(it.region))[lang] },
+            operations = world.operationChoices(state).mapNotNull { (i, region) ->
+                val ch = content.chapters.get(state.chapter) ?: return@mapNotNull null
+                val op = ch.operations[i]
+                OperationChoiceView(
+                    index = i,
+                    title = text((if (op.title == LText.EMPTY) ch.title else op.title)[lang], state, lang),
+                    region = world.regionName(region)[lang],
+                    daysLeft = (ch.deadline - state.day).coerceAtLeast(0),
+                )
+            },
+            canReturn = state.mission != null && state.mission.kind != com.yukselis.engine.world.MissionKind.OPERATION,
+            canExplore = content.chapters.isEmpty || state.mission?.kind == com.yukselis.engine.world.MissionKind.EXPLORE,
         )
     }
 
@@ -186,6 +276,11 @@ class StoryEngine(val content: Content) {
             val back = world.afterCombat(s)
             s = back.state
             notices += back.notices
+        } else if (state.combat != null && s.combat == null && !s.ended && s.variable(com.yukselis.engine.combat.CombatEngine.CTX_WON) == 1) {
+            // Hikaye savaşı kazanıldı: Günlük Görev "savaş" adımı (QA P1-21).
+            val d = effects.applyAll(s, listOf(Effect.DailyProgress("savas", 1)))
+            s = d.state
+            notices += d.notices
         }
         return Outcome(s, notices.map { noticeView(it, s, lang) })
     }
@@ -399,7 +494,36 @@ class StoryEngine(val content: Content) {
         if (DENIZ in fresh && (s.hasFlag("deniz_el_tutuldu") || s.hasFlag("deniz_bulundu"))) s = npcEngine.join(s, DENIZ).state
         // Gün akışına girmiş eski kayıtta Küresel Sıralama'nın avcıları yok: kurulur.
         if (s.regions.isNotEmpty() && s.hunters.isEmpty()) s = npcEngine.setupRanking(s)
+        s = migrateChapters(s)
         return s
+    }
+
+    /**
+     * v4 → v5 (bölüm yapısı): gün akışına girmiş ama bölümü olmayan kayıtta bölüm günden kurulur. Evre görülen
+     * olaylardan: operasyon görüldüyse darboğaza göre sonrası/bitti, değilse hazırlık (brifing görülmüş sayılır).
+     * Yarım görev olmaz: oyuncu üste açılır (olayın ortasındaysa olay sürer, bitince üsse dönülür).
+     */
+    fun migrateChapters(state: WorldState): WorldState {
+        val table = content.chapters
+        if (table.isEmpty || state.regions.isEmpty() || state.chapter != 0) return state
+        val ch = table.forDay(state.day) ?: return state
+        val seen = state.dayState.seen
+        val opSeen = ch.operationEvents.any { it in seen }
+        val neckSeen = ch.bottleneck.isEmpty() || ch.bottleneck.any { it in seen } || ch.operationEvents.any { it in ch.bottleneck && it in seen }
+        val phase = when {
+            opSeen && neckSeen -> com.yukselis.engine.world.ChapterPhase.DONE
+            opSeen -> com.yukselis.engine.world.ChapterPhase.AFTER
+            else -> com.yukselis.engine.world.ChapterPhase.PREP
+        }
+        val base = world.base(state) ?: state.region
+        val inEvent = state.sceneId != WorldState.HUB
+        return state.copy(
+            chapter = ch.no,
+            chapterPhase = phase,
+            mission = null,
+            // Olayın ortasında alınmış kayıtta bölge olay bitince üs olur; akıştaysa hemen.
+            region = if (inEvent) state.region else base,
+        )
     }
 
     fun allocate(state: WorldState, points: Map<Stat, Int>, lang: Lang): Outcome = outcome(actions.allocate(state, points), lang)
@@ -433,6 +557,7 @@ class StoryEngine(val content: Content) {
                 isEnding = false,
                 prompt = state.prompts.firstOrNull()?.let { promptView(it, state, lang) },
                 hub = hub,
+                chapter = chapterLine(state, lang),
             )
         }
         val scene = scene(state.sceneId)
@@ -477,11 +602,16 @@ class StoryEngine(val content: Content) {
             act = state.act,
             placeName = placeName(scene.place, lang),
             history = history,
-            current = passage(scene, state, lang),
+            current = passage(scene, state, lang).let { p ->
+                val ev = state.dayState.currentEvent?.let { content.events[it] }
+                val reminder = state.dayState.reminder
+                if (reminder != null && ev?.entry == scene.id) p.copy(paragraphs = listOf(text(reminder[lang], state, lang)) + p.paragraphs) else p
+            },
             choices = choices,
             isEnding = scene.isEnding,
             prompt = state.prompts.firstOrNull()?.let { promptView(it, state, lang) },
             opinions = opinions,
+            chapter = chapterLine(state, lang),
         )
     }
 

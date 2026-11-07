@@ -8,6 +8,7 @@
 olaylar:
   # ================================================================== DENİZ · P2: kardeş bulunur
   - id: "deniz_kardes_bulundu"
+    konum: ["kiyikent_liman"]
     perde: [2]
     ana_yay: { gun: 95 }
     agirlik: 1
@@ -1178,6 +1179,7 @@ olaylar:
 
   # ================================================================== DENİZ · P2 (anma): Deniz öldüyse kardeşi sen bulursun
   - id: "deniz_anma_kardes"
+    konum: ["kiyikent_liman"]
     perde: [2]
     ana_yay: { gun: 95 }
     kosul: { npc_olu: "deniz_arman" }
@@ -1249,6 +1251,7 @@ olaylar:
 
   # ================================================================== DENİZ · tohum: duvardaki ikinci şans
   - id: "deniz_kardes_cizimi"
+    konum: ["us"]
     perde: [2, 3]
     yalniz_tohum: true
     agirlik: 1
@@ -1426,6 +1429,7 @@ olaylar:
 
   # ================================================================== DENİZ · P3: canavar mı, tanrı mı (yayın kalbi)
   - id: "deniz_canavar_mi_tanri_mi"
+    konum: ["kiyikent_liman"]
     perde: [3]
     ana_yay: { gun: 225 }
     agirlik: 1
@@ -1725,6 +1729,7 @@ olaylar:
 
   # ================================================================== DENİZ · P3 (anma): ayna
   - id: "deniz_anma_ayna"
+    konum: ["kiyikent_liman"]
     perde: [3]
     ana_yay: { gun: 225 }
     kosul: { npc_olu: "deniz_arman" }
@@ -1817,6 +1822,7 @@ olaylar:
 
   # ================================================================== DENİZ · P4: son fedakârlık
   - id: "deniz_son_fedakarlik"
+    konum: ["kiyikent_liman"]
     perde: [4]
     ana_yay: { gun: 347 }
     agirlik: 1
@@ -2035,6 +2041,7 @@ olaylar:
 
   # ================================================================== DENİZ · P4 (anma): kimse araya girmediğinde
   - id: "deniz_anma_son"
+    konum: ["kiyikent_liman"]
     perde: [4]
     ana_yay: { gun: 347 }
     kosul: { npc_olu: "deniz_arman" }
@@ -2157,6 +2164,7 @@ olaylar:
 
   # ================================================================== DENİZ · tohum: vapurda veda (koda)
   - id: "deniz_vapur_vedasi"
+    konum: ["kiyikent_liman"]
     perde: [4]
     yalniz_tohum: true
     agirlik: 1
@@ -2223,6 +2231,7 @@ olaylar:
 
   # ================================================================== YANKI · P2–3: kaynak izi
   - id: "yanki_kaynak_izi"
+    konum: ["kule_dibi"]
     perde: [2, 3]
     gun: { min: 140, max: 270 }
     kosul: { bayrak: "yanki_bagi" }
@@ -2502,6 +2511,7 @@ olaylar:
 
   # ================================================================== YANKI · P3–4: son sır (Döngü)
   - id: "yanki_son_sir"
+    konum: ["us"]
     perde: [3, 4]
     gun: { min: 181, max: 365 }
     kosul: { degisken_min: { kule_kat: 100 }, bayrak: "yanki_bagi" }
@@ -2787,6 +2797,7 @@ olaylar:
 
   # ================================================================== YOZLAŞMA 50 (motor tohumu): yer aç
   - id: "yozlasma_50"
+    konum: ["us"]
     yalniz_tohum: true
     agirlik: 1
     etiketler: ["yanki", "yozlasma", "sistem"]
@@ -2829,7 +2840,7 @@ olaylar:
               - yozlasma: 3
               - bayrak: "yanki_ile_pazarlik"
               - iliski: { yanki: { guven: 8, baglilik: 4 } }
-              - tohum: { olay: "yozlasma_75", gecikme: { min: 4, max: 10 }, kosul: { yozlasma_min: 75, bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yozlasma_75", gecikme: { min: 4, max: 10 }, kosul: { yozlasma_min: 75, bayrak: "yanki_bagi" }, hatirlatma: { tr: "{npc:yanki} biraz daha yer istediği günden beri saatlerin eksik geliyor.", en: "Since the day {npc:yanki} asked for a little more room, you keep coming up short on hours." } }
             sonraki: "yz50_pazarlik"
           - id: "ver"
             etiket: { tr: "Yeri ona ver. Hız güzel şeydir", en: "Give it the room. Speed is nice" }
@@ -2838,7 +2849,7 @@ olaylar:
               - yozlasma: 8
               - stat: { agi: 8, int: 8 }
               - iliski: { yanki: { guven: 12, baglilik: 8 } }
-              - tohum: { olay: "yozlasma_75", gecikme: { min: 2, max: 6 }, kosul: { yozlasma_min: 75, bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yozlasma_75", gecikme: { min: 2, max: 6 }, kosul: { yozlasma_min: 75, bayrak: "yanki_bagi" }, hatirlatma: { tr: "{npc:yanki} biraz daha yer istediği günden beri saatlerin eksik geliyor.", en: "Since the day {npc:yanki} asked for a little more room, you keep coming up short on hours." } }
             sonraki: "yz50_ver"
           - id: "deniz"
             etiket: { tr: "{npc:deniz_arman|e} sesi anlat, bir çapa iste", en: "Tell {npc:deniz_arman} about it. Ask for an anchor" }
@@ -2878,14 +2889,14 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 1 }
               - stat: { wil: 4 }
-              - tohum: { olay: "yozlasma_75", gecikme: { min: 4, max: 10 }, kosul: { yozlasma_min: 75, bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yozlasma_75", gecikme: { min: 4, max: 10 }, kosul: { yozlasma_min: 75, bayrak: "yanki_bagi" }, hatirlatma: { tr: "{npc:yanki} biraz daha yer istediği günden beri saatlerin eksik geliyor.", en: "Since the day {npc:yanki} asked for a little more room, you keep coming up short on hours." } }
             sonraki: "@akis"
           - id: "kabul"
             etiket: { tr: "Bırak. Belki haklıdır", en: "Let it go. Maybe it's right" }
             etkiler:
               - ahlak: { insanlik: -3 }
               - iliski: { yanki: { guven: 6 } }
-              - tohum: { olay: "yozlasma_75", gecikme: { min: 3, max: 8 }, kosul: { yozlasma_min: 75, bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yozlasma_75", gecikme: { min: 3, max: 8 }, kosul: { yozlasma_min: 75, bayrak: "yanki_bagi" }, hatirlatma: { tr: "{npc:yanki} biraz daha yer istediği günden beri saatlerin eksik geliyor.", en: "Since the day {npc:yanki} asked for a little more room, you keep coming up short on hours." } }
             sonraki: "@akis"
 
       - id: "yz50_pazarlik"
@@ -2939,6 +2950,7 @@ olaylar:
 
   # ================================================================== YOZLAŞMA 75 (motor tohumu): virüs
   - id: "yozlasma_75"
+    konum: ["us"]
     yalniz_tohum: true
     agirlik: 1
     etiketler: ["yanki", "yozlasma", "sistem", "boss"]
@@ -3053,7 +3065,7 @@ olaylar:
               - bayrak: "yanki_ele_gecirdi"
               - yozlasma: 10
               - stat: { str: 20, agi: 20, int: 20 }
-              - tohum: { olay: "yanki_son_sir", gecikme: { min: 1, max: 4 }, kosul: { degisken_min: { kule_kat: 100 }, bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_son_sir", gecikme: { min: 1, max: 4 }, kosul: { degisken_min: { kule_kat: 100 }, bayrak: "yanki_bagi" }, hatirlatma: { tr: "Kayıp altı saatin sonunda bir sayaç işlemeye başlamıştı.", en: "At the end of those six missing hours, a counter started running." } }
               - iliski: { yanki: { guven: 10, baglilik: 10 } }
             kronik: { tr: "Kendi bedeninde yolcu olmayı kabul ettin; direksiyon artık sende değildi.", en: "You settled in as a passenger in your own body. You weren't the one driving anymore." }
             sonraki: "@akis"
@@ -3115,6 +3127,7 @@ olaylar:
 
   # ================================================================== ARAS · P2–3: Kule düellosu (ayna katı)
   - id: "aras_kule_dovusu"
+    konum: ["kule_dibi"]
     perde: [2, 3]
     gun: { min: 70, max: 230 }
     kosul: { bayrak: "kule_acik" }
@@ -3394,6 +3407,7 @@ olaylar:
 
   # ================================================================== ARAS · P3: çok-evren kapısı
   - id: "aras_cok_evren_kapisi"
+    konum: ["kule_dibi"]
     perde: [3]
     gun: { min: 200, max: 300 }
     kosul: { bayrak: ["cok_evren_acik", "aras_tanisildi"] }
@@ -3602,6 +3616,7 @@ olaylar:
 
   # ================================================================== ARAS · P4: S kademe insan
   - id: "aras_s_kademe"
+    konum: ["kule_dibi"]
     perde: [4]
     ana_yay: { gun: 339 }
     kosul: { bayrak: "aras_tanisildi" }
@@ -3790,6 +3805,7 @@ olaylar:
 
   # ================================================================== ARAS · tohum: zirve sabahı (koda)
   - id: "aras_zirve_sabahi"
+    konum: ["kule_dibi"]
     perde: [4]
     yalniz_tohum: true
     agirlik: 1

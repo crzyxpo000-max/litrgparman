@@ -6,6 +6,7 @@
 olaylar:
   # ================================================================== DENİZ · 1: buluşma
   - id: "deniz_bulusma"
+    konum: ["ogretici_orman"]
     perde: [1]
     bolge: ["ogretici_orman"]
     gun: { min: 1, max: 20 }
@@ -60,7 +61,7 @@ olaylar:
               - bayrak: "deniz_bulundu"
               - bayrak: "deniz_bekletildi"
               - gorev: { deniz_bul: "tamam" }
-              - tohum: { olay: "deniz_hesap", gecikme: { min: 4, max: 8 }, kosul: { bayrak: "deniz_bekletildi", yoldas: "deniz_arman" } }
+              - tohum: { olay: "deniz_hesap", gecikme: { min: 4, max: 8 }, kosul: { bayrak: "deniz_bekletildi", yoldas: "deniz_arman" }, hatirlatma: { tr: "Tazılar {npc:deniz_arman|i} yorarken beklediğin o birkaç saniye aranızda hâlâ duruyor.", en: "Those few seconds you waited while the hounds wore {npc:deniz_arman} down are still sitting between you." } }
             sonraki: "deniz_bulusma_bekleyis"
           - id: "bak"
             tur: "gosteris"
@@ -279,6 +280,7 @@ olaylar:
 
   # ================================================================== DENİZ · 2: hesap (tohum)
   - id: "deniz_hesap"
+    konum: ["us"]
     perde: [1]
     agirlik: 1
     etiketler: ["deniz", "ahlak", "kamp"]
@@ -306,7 +308,7 @@ olaylar:
               - ahlak: { insanlik: 5 }
               - iliski: { deniz_arman: { guven: 12, baglilik: 6 } }
               - hafiza: { npc: "deniz_arman", id: "durust_itiraf", agirlik: 35 }
-              - tohum: { olay: "kamp_ates_basi", gecikme: { min: 2, max: 4 }, kosul: { yoldas: "deniz_arman" } }
+              - tohum: { olay: "kamp_ates_basi", gecikme: { min: 2, max: 4 }, kosul: { yoldas: "deniz_arman" }, hatirlatma: { tr: "O hesaplaşmadan sonra {npc:deniz_arman|le} ilk kez aynı ateşe oturuyorsunuz.", en: "It's the first time you and {npc:deniz_arman} have sat at the same fire since you had it out." } }
             sonraki: "deniz_hesap_itiraf"
           - id: "yalan"
             etiket: { tr: "Her şeyin planlı olduğunu söyle", en: "Say it was all part of a plan" }
@@ -441,6 +443,7 @@ olaylar:
 
   # ================================================================== DENİZ · 3: ateş başı (nefes)
   - id: "kamp_ates_basi"
+    konum: ["us"]
     perde: [1]
     gun: { min: 3, max: 30 }
     kosul: { yoldas: "deniz_arman" }
@@ -562,7 +565,7 @@ olaylar:
               - hafiza: { npc: "deniz_arman", id: "ates_basi_soz", agirlik: 40 }
               - bayrak: "deniz_kardese_soz_verildi"
               - gorev: { deniz_kardesi: "basla" }
-              - tohum: { olay: "deniz_kardes_ipucu", gecikme: { min: 3, max: 6 }, kosul: { yoldas: "deniz_arman" } }
+              - tohum: { olay: "deniz_kardes_ipucu", gecikme: { min: 3, max: 6 }, kosul: { yoldas: "deniz_arman" }, hatirlatma: { tr: "Ateş başında {npc:deniz_arman|e} kardeşi hakkında söylediğin söz hâlâ ortada.", en: "What you told {npc:deniz_arman} about {zamir:deniz_arman|onun} sister by the fire is still hanging out there." } }
             sonraki: "@akis"
           - id: "durust"
             etiket: { tr: "\"Elimden geleni yaparım. Söz veremem.\"", en: "\"I'll do what I can. I can't promise.\"" }
@@ -570,7 +573,7 @@ olaylar:
               - ahlak: { duzen: 3 }
               - iliski: { deniz_arman: { saygi: 6, guven: 3 } }
               - gorev: { deniz_kardesi: "basla" }
-              - tohum: { olay: "deniz_kardes_ipucu", gecikme: { min: 5, max: 9 }, kosul: { yoldas: "deniz_arman" } }
+              - tohum: { olay: "deniz_kardes_ipucu", gecikme: { min: 5, max: 9 }, kosul: { yoldas: "deniz_arman" }, hatirlatma: { tr: "Ateş başında {npc:deniz_arman|e} kardeşi hakkında söylediğin söz hâlâ ortada.", en: "What you told {npc:deniz_arman} about {zamir:deniz_arman|onun} sister by the fire is still hanging out there." } }
             sonraki: "@akis"
           - id: "gercek"
             etiket: { tr: "\"Kendini hazırla. Belki de o...\"", en: "\"Brace yourself. She might not...\"" }
@@ -604,6 +607,7 @@ olaylar:
 
   # ================================================================== DENİZ · 4: kardeşin izi
   - id: "deniz_kardes_ipucu"
+    konum: ["kirik_istasyon"]
     perde: [1]
     bolge: ["kirik_istasyon"]
     gun: { min: 8, max: 20 }
@@ -705,7 +709,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 2, merhamet: 1 }
               - iliski: { deniz_arman: { guven: 4 } }
-              - tohum: { olay: "vahit_vaaz", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "vahit_vaaz", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Duvardaki martıdan beri beyaz giyenlerin adı kulağına çalınıyor.", en: "Since the gull on the wall, you keep hearing about the people in white." } }
             sonraki: "@akis"
           - id: "once_guc"
             etiket: { tr: "\"Önce güçlenelim. Sonra onları buluruz.\"", en: "\"Get stronger first. Then we find them.\"" }
@@ -784,7 +788,7 @@ olaylar:
               - ahlak: { insanlik: 3 }
               - iliski: { deniz_arman: { guven: 8, baglilik: 6 } }
               - bilgi: "yukselenler_kardes"
-              - tohum: { olay: "vahit_vaaz", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "vahit_vaaz", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Duvardaki martıdan beri beyaz giyenlerin adı kulağına çalınıyor.", en: "Since the gull on the wall, you keep hearing about the people in white." } }
             sonraki: "@akis"
           - id: "sakla"
             etiket: { tr: "Satırı kendine sakla; \"Bir şey yok\" de", en: "Keep the line to yourself. Say \"It's nothing\"" }
@@ -802,7 +806,7 @@ olaylar:
               - iliski: { deniz_arman: { guven: 4, korku: 3 } }
               - iliski: { yanki: { saygi: 4 } }
               - bilgi: "yukselenler_kardes"
-              - tohum: { olay: "vahit_vaaz", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "vahit_vaaz", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Duvardaki martıdan beri beyaz giyenlerin adı kulağına çalınıyor.", en: "Since the gull on the wall, you keep hearing about the people in white." } }
             sonraki: "@akis"
 
       - id: "deniz_kardes_ipucu_tunel"
@@ -858,7 +862,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 3 }
               - iliski: { deniz_arman: { guven: 6, baglilik: 6 } }
-              - tohum: { olay: "vahit_vaaz", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "vahit_vaaz", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Duvardaki martıdan beri beyaz giyenlerin adı kulağına çalınıyor.", en: "Since the gull on the wall, you keep hearing about the people in white." } }
             sonraki: "@akis"
           - id: "uzak"
             etiket: { tr: "\"Evet. Ve onlardan uzak duracağız.\"", en: "\"Yeah. And we're staying away from them.\"" }
@@ -906,7 +910,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 1, merhamet: 1 }
               - iliski: { deniz_arman: { guven: 3 } }
-              - tohum: { olay: "vahit_vaaz", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "vahit_vaaz", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Duvardaki martıdan beri beyaz giyenlerin adı kulağına çalınıyor.", en: "Since the gull on the wall, you keep hearing about the people in white." } }
             sonraki: "@akis"
 
       - id: "deniz_kardes_ipucu_okuma"
@@ -922,7 +926,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 1 }
               - iliski: { deniz_arman: { guven: 4 } }
-              - tohum: { olay: "vahit_vaaz", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "vahit_vaaz", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Duvardaki martıdan beri beyaz giyenlerin adı kulağına çalınıyor.", en: "Since the gull on the wall, you keep hearing about the people in white." } }
             sonraki: "@akis"
           - id: "korkuyorum"
             etiket: { tr: "İçtenlikle \"Ben de korkuyorum\" de", en: "Say \"I'm scared too,\" and mean it" }
@@ -939,6 +943,7 @@ olaylar:
 
   # ================================================================== DENİZ · 5: son seçim (ana yay)
   - id: "deniz_son_secim"
+    konum: ["us"]
     perde: [1]
     ana_yay: { gun: 22 }
     kosul: { yoldas: "deniz_arman" }
@@ -1014,7 +1019,7 @@ olaylar:
               - npc_iz: { deniz_arman: "yarali_guven" }
               - bayrak: "deniz_guveni_yarali"
               - hafiza: { npc: "deniz_arman", id: "vaizleri_kovdu", agirlik: -35 }
-              - tohum: { olay: "gece_baskini", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "gece_baskini", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Vaizleri kovduğun geceden beri yollar sakin değil.", en: "The roads haven't been quiet since the night you ran those preachers off." } }
             sonraki: "deniz_son_secim_yarali"
           - id: "taklit"
             etiket: { tr: "Herkesin önünde çizimin sahte olduğunu kanıtla", en: "Prove the drawing's a forgery, in front of everyone" }
@@ -1249,6 +1254,7 @@ olaylar:
 
   # ================================================================== YANKI · 1: istasyon sinyali
   - id: "istasyon_sinyali"
+    konum: ["kirik_istasyon"]
     perde: [1]
     bolge: ["kirik_istasyon"]
     gun: { min: 5, max: 20 }
@@ -1280,7 +1286,7 @@ olaylar:
               - degisken: { glitch_bulundu: 1 }
               - xp: 50
               - iliski: { yanki: { saygi: 6 } }
-              - tohum: { olay: "istasyon_sinyali_2", gecikme: { min: 3, max: 5 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "istasyon_sinyali_2", gecikme: { min: 3, max: 5 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "İstasyondaki o sinyalin gerçekten sustuğundan emin değilsin.", en: "You're not sure that signal at the station ever really went quiet." } }
             sonraki: "istasyon_sinyali_coz"
           - id: "sor"
             etiket: { tr: "Sese sor: bu sen değilsen, kim?", en: "Ask the voice: if that's not you, who is it?" }
@@ -1290,7 +1296,7 @@ olaylar:
               - degisken: { glitch_bulundu: 1 }
               - iliski: { yanki: { guven: 10, baglilik: 5 } }
               - hafiza: { npc: "yanki", id: "sinyali_sordu", agirlik: 30 }
-              - tohum: { olay: "istasyon_sinyali_2", gecikme: { min: 3, max: 5 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "istasyon_sinyali_2", gecikme: { min: 3, max: 5 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "İstasyondaki o sinyalin gerçekten sustuğundan emin değilsin.", en: "You're not sure that signal at the station ever really went quiet." } }
             sonraki: "istasyon_sinyali_sor"
           - id: "cevap"
             etiket: { tr: "Mikrofonu bul, adına cevap ver", en: "Find the mic and answer to your name" }
@@ -1299,7 +1305,7 @@ olaylar:
               - dikkat: 6
               - bayrak: "sinyal_cevaplandi"
               - iliski: { yanki: { guven: -5, korku: 8 } }
-              - tohum: { olay: "istasyon_sinyali_2", gecikme: { min: 2, max: 3 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "istasyon_sinyali_2", gecikme: { min: 2, max: 3 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "İstasyondaki o sinyalin gerçekten sustuğundan emin değilsin.", en: "You're not sure that signal at the station ever really went quiet." } }
             sonraki: "istasyon_sinyali_cevap"
           - id: "parcala"
             etiket: { tr: "Hoparlörü sök, paramparça et", en: "Rip the speaker down and smash it" }
@@ -1320,7 +1326,7 @@ olaylar:
               - degisken: { glitch_bulundu: 1 }
               - bilgi: "duzeltme_sinyali"
               - iliski: { yanki: { saygi: 10, korku: 4 } }
-              - tohum: { olay: "istasyon_sinyali_2", gecikme: { min: 2, max: 4 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "istasyon_sinyali_2", gecikme: { min: 2, max: 4 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "İstasyondaki o sinyalin gerçekten sustuğundan emin değilsin.", en: "You're not sure that signal at the station ever really went quiet." } }
             sonraki: "istasyon_sinyali_bastir"
 
       - id: "istasyon_sinyali_coz"
@@ -1502,14 +1508,14 @@ olaylar:
               - dikkat: -2
               - iliski: { yanki: { baglilik: 6 } }
               - gorev: { istasyon_sinyali: "basla" }
-              - tohum: { olay: "istasyon_sinyali_2", gecikme: { min: 4, max: 6 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "istasyon_sinyali_2", gecikme: { min: 4, max: 6 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "İstasyondaki o sinyalin gerçekten sustuğundan emin değilsin.", en: "You're not sure that signal at the station ever really went quiet." } }
             sonraki: "@akis"
           - id: "birak"
             etiket: { tr: "Gerisini bırak, çık", en: "Leave the rest. Get out" }
             etkiler:
               - gizle: 2
               - gorev: { istasyon_sinyali: "basla" }
-              - tohum: { olay: "istasyon_sinyali_2", gecikme: { min: 5, max: 8 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "istasyon_sinyali_2", gecikme: { min: 5, max: 8 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "İstasyondaki o sinyalin gerçekten sustuğundan emin değilsin.", en: "You're not sure that signal at the station ever really went quiet." } }
             sonraki: "@akis"
 
       - id: "istasyon_sinyali_bastir"
@@ -1535,6 +1541,7 @@ olaylar:
 
   # ================================================================== YANKI · 2: sinyal cevap veriyor (tohum)
   - id: "istasyon_sinyali_2"
+    konum: ["us"]
     perde: [1]
     agirlik: 1
     etiketler: ["yanki", "gizem", "sistem"]
@@ -1566,7 +1573,7 @@ olaylar:
               - bilgi: "duzeltme_sinyali"
               - iliski: { yanki: { guven: 12, baglilik: 8 } }
               - hafiza: { npc: "yanki", id: "duzeltmeyi_reddetti", agirlik: 50 }
-              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 4, max: 8 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 4, max: 8 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "Sinyalin cevap verdiği geceden sonra satırların bir şeye benzemeye başladı.", en: "Since the night the signal answered back, your lines have started to look like something." } }
             sonraki: "istasyon_sinyali_2_red"
           - id: "yut"
             tur: "gizle"
@@ -1577,7 +1584,7 @@ olaylar:
               - gorev: { istasyon_sinyali: "tamam" }
               - degisken: { glitch_bulundu: 1 }
               - iliski: { yanki: { guven: 8, baglilik: 6 } }
-              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 5, max: 9 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 5, max: 9 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "Sinyalin cevap verdiği geceden sonra satırların bir şeye benzemeye başladı.", en: "Since the night the signal answered back, your lines have started to look like something." } }
             sonraki: "istasyon_sinyali_2_yut"
           - id: "tehdit"
             etiket: { tr: "Parmağını [ONAYLA]'nın üstünde tut", en: "Hold your finger over [CONFIRM]" }
@@ -1603,7 +1610,7 @@ olaylar:
               - degisken: { glitch_bulundu: 1 }
               - bilgi: "duzeltme_sinyali"
               - iliski: { yanki: { saygi: 12, korku: 6 } }
-              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "Sinyalin cevap verdiği geceden sonra satırların bir şeye benzemeye başladı.", en: "Since the night the signal answered back, your lines have started to look like something." } }
             sonraki: "istasyon_sinyali_2_yaz"
 
       - id: "istasyon_sinyali_2_red"
@@ -1652,7 +1659,7 @@ olaylar:
               - gorev: { istasyon_sinyali: "tamam" }
               - iliski: { yanki: { guven: 4, saygi: 8 } }
               - hafiza: { npc: "yanki", id: "tehdit_edildi", agirlik: -20 }
-              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 5, max: 9 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 5, max: 9 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "Sinyalin cevap verdiği geceden sonra satırların bir şeye benzemeye başladı.", en: "Since the night the signal answered back, your lines have started to look like something." } }
             sonraki: "@akis"
           - id: "reddet"
             etiket: { tr: "[REDDET]'e bas. Dersini aldı", en: "Tap [DENY]. Lesson learned" }
@@ -1661,7 +1668,7 @@ olaylar:
               - gorev: { istasyon_sinyali: "tamam" }
               - bilgi: "duzeltme_sinyali"
               - iliski: { yanki: { guven: 6, korku: 6 } }
-              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 4, max: 8 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 4, max: 8 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "Sinyalin cevap verdiği geceden sonra satırların bir şeye benzemeye başladı.", en: "Since the night the signal answered back, your lines have started to look like something." } }
             sonraki: "@akis"
           - id: "onayla"
             etiket: { tr: "[ONAYLA]'ya bas", en: "Tap [CONFIRM]" }
@@ -1670,7 +1677,7 @@ olaylar:
               - gorev: { istasyon_sinyali: "tamam" }
               - iliski: { yanki: { guven: -20, korku: 10 } }
               - hafiza: { npc: "yanki", id: "onaylamaya_kalkti", agirlik: -50 }
-              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 4, max: 8 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 4, max: 8 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "Sinyalin cevap verdiği geceden sonra satırların bir şeye benzemeye başladı.", en: "Since the night the signal answered back, your lines have started to look like something." } }
             sonraki: "istasyon_sinyali_2_ret"
 
       - id: "istasyon_sinyali_2_ret"
@@ -1706,7 +1713,7 @@ olaylar:
               - bilgi: "duzeltme_sinyali"
               - iliski: { yanki: { guven: 15, baglilik: 8 } }
               - hafiza: { npc: "yanki", id: "duzeltmeyi_reddetti", agirlik: 50 }
-              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "Sinyalin cevap verdiği geceden sonra satırların bir şeye benzemeye başladı.", en: "Since the night the signal answered back, your lines have started to look like something." } }
             sonraki: "istasyon_sinyali_2_red"
           - id: "yut"
             tur: "gizle"
@@ -1717,7 +1724,7 @@ olaylar:
               - gorev: { istasyon_sinyali: "tamam" }
               - degisken: { glitch_bulundu: 1 }
               - iliski: { yanki: { guven: 10 } }
-              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 4, max: 8 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 4, max: 8 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "Sinyalin cevap verdiği geceden sonra satırların bir şeye benzemeye başladı.", en: "Since the night the signal answered back, your lines have started to look like something." } }
             sonraki: "istasyon_sinyali_2_yut"
 
       - id: "istasyon_sinyali_2_yaz"
@@ -1741,6 +1748,7 @@ olaylar:
 
   # ================================================================== YANKI · 3: bozuk satır
   - id: "yanki_bozuk_satir"
+    konum: ["us"]
     perde: [1]
     gun: { min: 12, max: 26 }
     kosul: { bayrak: "yanki_bagi" }
@@ -1797,7 +1805,7 @@ olaylar:
             etkiler:
               - iliski: { yanki: { guven: -12, korku: 6 } }
               - hafiza: { npc: "yanki", id: "sirri_anlatti", agirlik: -25 }
-              - tohum: { olay: "mert_sifreli_mesaj", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "mert_sifreli_mesaj", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Bozuk satır için istasyondaki radyoculara danışmayı aklına koymuştun.", en: "You'd been meaning to ask the radio crew at the station about that corrupted line." } }
             sonraki: "yanki_bozuk_satir_radyo"
           - id: "mert"
             etiket: { tr: "Satırı {npc:mert_kilic|e} götürmeye niyetlen", en: "Decide to take the line to {npc:mert_kilic}" }
@@ -1805,7 +1813,7 @@ olaylar:
             etkiler:
               - iliski: { yanki: { guven: -12, korku: 6 } }
               - hafiza: { npc: "yanki", id: "sirri_anlatti", agirlik: -25 }
-              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_cozulen_satir", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Bozuk satırı birine göstermeye karar vermiştin.", en: "You'd made up your mind to show that corrupted line to somebody." } }
             sonraki: "yanki_bozuk_satir_radyo"
           - id: "deniz"
             etiket: { tr: "{npc:deniz_arman|e} gördüğünü anlat", en: "Tell {npc:deniz_arman} what you saw" }
@@ -1939,6 +1947,7 @@ olaylar:
 
   # ================================================================== ARAS · 1: iz
   - id: "rakip_iz"
+    konum: ["harabe_carsi", "kirik_istasyon"]
     perde: [1]
     bolge: ["harabe_carsi", "kirik_istasyon"]
     gun: { min: 4, max: 14 }
@@ -1993,7 +2002,7 @@ olaylar:
               - tanis: "aras_kurt"
               - bayrak: "aras_tanisildi"
               - iliski: { aras_kurt: { saygi: 10, baglilik: 5 } }
-              - tohum: { olay: "aras_ilk_yaris", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_ilk_yaris", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Senden önce kapıyı kapatan elmalı yabancı hâlâ aklında.", en: "You're still thinking about the stranger with the apple who closed that Gate before you." } }
             sonraki: "rakip_iz_bahis"
           - id: "nereden"
             etiket: { tr: "Nereden geldiğini sor", en: "Ask him where he came from" }
@@ -2053,7 +2062,7 @@ olaylar:
             etkiler:
               - can: 5
               - iliski: { aras_kurt: { guven: 6, baglilik: 4 } }
-              - tohum: { olay: "aras_ilk_yaris", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_ilk_yaris", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Senden önce kapıyı kapatan elmalı yabancı hâlâ aklında.", en: "You're still thinking about the stranger with the apple who closed that Gate before you." } }
             sonraki: "@akis"
           - id: "yere"
             etiket: { tr: "Elmayı yere bırak: \"Rakibimden lokma almam.\"", en: "Drop the apple. \"I don't take food from rivals.\"" }
@@ -2112,7 +2121,7 @@ olaylar:
             etiket: { tr: "Arkasından bakakal", en: "Watch him go" }
             etkiler:
               - iliski: { aras_kurt: { guven: 4 } }
-              - tohum: { olay: "aras_ilk_yaris", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_ilk_yaris", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Senden önce kapıyı kapatan elmalı yabancı hâlâ aklında.", en: "You're still thinking about the stranger with the apple who closed that Gate before you." } }
             sonraki: "@akis"
           - id: "kimi"
             etiket: { tr: "Arkasından seslen: \"Kimi?\"", en: "Call after him: \"Who?\"" }
@@ -2130,7 +2139,7 @@ olaylar:
             etiket: { tr: "Elmayı ona geri at", en: "Toss him back the apple" }
             etkiler:
               - iliski: { aras_kurt: { saygi: 6, guven: 6 } }
-              - tohum: { olay: "aras_ilk_yaris", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_ilk_yaris", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Senden önce kapıyı kapatan elmalı yabancı hâlâ aklında.", en: "You're still thinking about the stranger with the apple who closed that Gate before you." } }
             sonraki: "@akis"
           - id: "isir_yuru"
             etiket: { tr: "Elmayı ısır, yürüyüp git", en: "Take a bite and walk away" }
@@ -2142,6 +2151,7 @@ olaylar:
 
   # ================================================================== ARAS · 2: ilk yarışı
   - id: "aras_ilk_yaris"
+    konum: ["us"]
     perde: [1]
     gun: { min: 9, max: 22 }
     kosul: { bayrak: "aras_tanisildi" }
@@ -2217,7 +2227,7 @@ olaylar:
               - bayrak: "aras_yarisi_kazanildi"
               - iliski: { aras_kurt: { saygi: 15, guven: -5 } }
               - hafiza: { npc: "aras_kurt", id: "yarisi_kazandi", agirlik: 30 }
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Kuzey sırtındaki kapı yarışından beri {npc:aras_kurt|in} adı aklının bir köşesinde duruyor.", en: "Ever since that race to the Gate on the north ridge, {npc:aras_kurt|pos} name has been sitting in the back of your mind." } }
             sonraki: "aras_ilk_yaris_ezme"
 
       - id: "aras_ilk_yaris_otobus"
@@ -2233,7 +2243,7 @@ olaylar:
               - npc_seviye: { aras_kurt: 1 }
               - bayrak: "aras_yarisi_birakildi"
               - iliski: { aras_kurt: { saygi: 6 } }
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Kuzey sırtındaki kapı yarışından beri {npc:aras_kurt|in} adı aklının bir köşesinde duruyor.", en: "Ever since that race to the Gate on the north ridge, {npc:aras_kurt|pos} name has been sitting in the back of your mind." } }
             sonraki: "@akis"
           - id: "sivil"
             etiket: { tr: "Sivillere yolu göster; ona cevap verme", en: "Point the civilians to safety. Ignore him" }
@@ -2243,7 +2253,7 @@ olaylar:
               - npc_seviye: { aras_kurt: 1 }
               - bayrak: "aras_yarisi_birakildi"
               - iliski: { aras_kurt: { saygi: -4 } }
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Kuzey sırtındaki kapı yarışından beri {npc:aras_kurt|in} adı aklının bir köşesinde duruyor.", en: "Ever since that race to the Gate on the north ridge, {npc:aras_kurt|pos} name has been sitting in the back of your mind." } }
             sonraki: "@akis"
           - id: "dahaki"
             etiket: { tr: "\"Bir dahakine gerçekten yarışırız. Söz.\"", en: "\"Next time we race for real. Promise.\"" }
@@ -2252,7 +2262,7 @@ olaylar:
               - npc_seviye: { aras_kurt: 1 }
               - bayrak: "aras_yarisi_birakildi"
               - iliski: { aras_kurt: { guven: 6, baglilik: 4 } }
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Kuzey sırtındaki kapı yarışından beri {npc:aras_kurt|in} adı aklının bir köşesinde duruyor.", en: "Ever since that race to the Gate on the north ridge, {npc:aras_kurt|pos} name has been sitting in the back of your mind." } }
             sonraki: "@akis"
 
       - id: "aras_ilk_yaris_otobus_yenilgi"
@@ -2267,7 +2277,7 @@ olaylar:
               - ahlak: { duzen: 2 }
               - iliski: { aras_kurt: { guven: 10, baglilik: 8 } }
               - hafiza: { npc: "aras_kurt", id: "kurtardi_borc", agirlik: 30 }
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Kuzey sırtındaki kapı yarışından beri {npc:aras_kurt|in} adı aklının bir köşesinde duruyor.", en: "Ever since that race to the Gate on the north ridge, {npc:aras_kurt|pos} name has been sitting in the back of your mind." } }
             sonraki: "@akis"
           - id: "cagirmadim"
             etiket: { tr: "\"Seni çağırmadım.\"", en: "\"Didn't ask for your help.\"" }
@@ -2289,7 +2299,7 @@ olaylar:
               - degisken: { hayatta_kalan: -3 }
               - itibar: { siginak: 3 }
               - npc_seviye: { aras_kurt: 1 }
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Kuzey sırtındaki kapı yarışından beri {npc:aras_kurt|in} adı aklının bir köşesinde duruyor.", en: "Ever since that race to the Gate on the north ridge, {npc:aras_kurt|pos} name has been sitting in the back of your mind." } }
             sonraki: "@akis"
           - id: "bakma"
             etiket: { tr: "Otobüse dönüp bakma; yürü", en: "Don't look at the bus. Just walk" }
@@ -2363,7 +2373,7 @@ olaylar:
               - bayrak: "aras_yarisi_birakildi"
               - iliski: { aras_kurt: { guven: 12, saygi: 6 } }
               - hafiza: { npc: "aras_kurt", id: "sirtini_kolladi", agirlik: 40 }
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Kuzey sırtındaki kapı yarışından beri {npc:aras_kurt|in} adı aklının bir köşesinde duruyor.", en: "Ever since that race to the Gate on the north ridge, {npc:aras_kurt|pos} name has been sitting in the back of your mind." } }
             sonraki: "aras_ilk_yaris_verdi"
 
       - id: "aras_ilk_yaris_zafer"
@@ -2381,7 +2391,7 @@ olaylar:
               - bayrak: "aras_yarisi_kazanildi"
               - iliski: { aras_kurt: { saygi: 10 } }
               - hafiza: { npc: "aras_kurt", id: "yarisi_kazandi", agirlik: 30 }
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Kuzey sırtındaki kapı yarışından beri {npc:aras_kurt|in} adı aklının bir köşesinde duruyor.", en: "Ever since that race to the Gate on the north ridge, {npc:aras_kurt|pos} name has been sitting in the back of your mind." } }
             sonraki: "@akis"
           - id: "iyi_yaris"
             etiket: { tr: "Elini uzat: \"İyi yarıştın.\"", en: "Offer a hand: \"Good race.\"" }
@@ -2392,7 +2402,7 @@ olaylar:
               - bayrak: "aras_yarisi_kazanildi"
               - iliski: { aras_kurt: { saygi: 6, guven: 6 } }
               - hafiza: { npc: "aras_kurt", id: "yarisi_kazandi", agirlik: 30 }
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Kuzey sırtındaki kapı yarışından beri {npc:aras_kurt|in} adı aklının bir köşesinde duruyor.", en: "Ever since that race to the Gate on the north ridge, {npc:aras_kurt|pos} name has been sitting in the back of your mind." } }
             sonraki: "@akis"
 
       - id: "aras_ilk_yaris_kayip"
@@ -2409,7 +2419,7 @@ olaylar:
               - npc_seviye: { aras_kurt: 2 }
               - bayrak: "aras_yarisi_kaybedildi"
               - iliski: { aras_kurt: { saygi: 4 } }
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Kuzey sırtındaki kapı yarışından beri {npc:aras_kurt|in} adı aklının bir köşesinde duruyor.", en: "Ever since that race to the Gate on the north ridge, {npc:aras_kurt|pos} name has been sitting in the back of your mind." } }
             sonraki: "@akis"
           - id: "el"
             etiket: { tr: "Uzattığı eli tut", en: "Take the hand he's offering" }
@@ -2418,7 +2428,7 @@ olaylar:
               - npc_seviye: { aras_kurt: 2 }
               - bayrak: "aras_yarisi_kaybedildi"
               - iliski: { aras_kurt: { guven: 8 } }
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Kuzey sırtındaki kapı yarışından beri {npc:aras_kurt|in} adı aklının bir köşesinde duruyor.", en: "Ever since that race to the Gate on the north ridge, {npc:aras_kurt|pos} name has been sitting in the back of your mind." } }
             sonraki: "@akis"
 
       - id: "aras_ilk_yaris_verdi"
@@ -2470,14 +2480,14 @@ olaylar:
               - ahlak: { merhamet: 2, insanlik: 2 }
               - itibar: { siginak: 3 }
               - iliski: { aras_kurt: { guven: 6, baglilik: 4 } }
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Kuzey sırtındaki kapı yarışından beri {npc:aras_kurt|in} adı aklının bir köşesinde duruyor.", en: "Ever since that race to the Gate on the north ridge, {npc:aras_kurt|pos} name has been sitting in the back of your mind." } }
             sonraki: "@akis"
           - id: "hayir"
             etiket: { tr: "\"Hayır. Ama yine yapardım.\"", en: "\"No. But I'd do it again.\"" }
             etkiler:
               - ahlak: { insanlik: 3 }
               - iliski: { aras_kurt: { saygi: 8 } }
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 5, max: 8 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Kuzey sırtındaki kapı yarışından beri {npc:aras_kurt|in} adı aklının bir köşesinde duruyor.", en: "Ever since that race to the Gate on the north ridge, {npc:aras_kurt|pos} name has been sitting in the back of your mind." } }
             sonraki: "@akis"
 
       - id: "aras_ilk_yaris_ikisi"
@@ -2493,7 +2503,7 @@ olaylar:
               - npc_seviye: { aras_kurt: 2 }
               - bayrak: "aras_yarisi_birakildi"
               - iliski: { aras_kurt: { saygi: 10 } }
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Kuzey sırtındaki kapı yarışından beri {npc:aras_kurt|in} adı aklının bir köşesinde duruyor.", en: "Ever since that race to the Gate on the north ridge, {npc:aras_kurt|pos} name has been sitting in the back of your mind." } }
             sonraki: "@akis"
           - id: "sen_dur"
             etiket: { tr: "\"Bir dahaki otobüste de sen dur.\"", en: "\"Next bus, you stop.\"" }
@@ -2502,7 +2512,7 @@ olaylar:
               - npc_seviye: { aras_kurt: 2 }
               - bayrak: "aras_yarisi_birakildi"
               - iliski: { aras_kurt: { guven: 6 } }
-              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_sira_meydan", gecikme: { min: 4, max: 7 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Kuzey sırtındaki kapı yarışından beri {npc:aras_kurt|in} adı aklının bir köşesinde duruyor.", en: "Ever since that race to the Gate on the north ridge, {npc:aras_kurt|pos} name has been sitting in the back of your mind." } }
             sonraki: "@akis"
 
       - id: "aras_ilk_yaris_ezme"
@@ -2527,6 +2537,7 @@ olaylar:
 
   # ================================================================== ARAS · 3: sıralama meydanı
   - id: "aras_sira_meydan"
+    konum: ["us"]
     perde: [1]
     gun: { min: 15, max: 27 }
     kosul: { bayrak: "aras_tanisildi" }
@@ -2577,7 +2588,7 @@ olaylar:
               - ahlak: { duzen: 2, insanlik: 2 }
               - iliski: { aras_kurt: { saygi: -10, guven: 4 } }
               - hafiza: { npc: "aras_kurt", id: "duelloyu_reddetti", agirlik: -15 }
-              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 2, max: 4 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 2, max: 4 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "Meydandaki o sabahtan beri pencerende bir şeyin titrediğini fark ediyorsun.", en: "Ever since that morning in the square, you've noticed something flickering in your window." } }
             sonraki: "aras_sira_meydan_red"
           - id: "baska_yaris"
             etiket: { tr: "Başka bir yarış öner: kim daha çok insan kurtarır", en: "Propose a new race: who saves more people" }
@@ -2782,7 +2793,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 2, duzen: 1 }
               - iliski: { aras_kurt: { guven: 8, baglilik: 6 } }
-              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "Meydandaki o sabahtan beri pencerende bir şeyin titrediğini fark ediyorsun.", en: "Ever since that morning in the square, you've noticed something flickering in your window." } }
             sonraki: "@akis"
           - id: "bir_gun"
             etiket: { tr: "\"Bir gün bana anlatacaksın.\"", en: "\"Someday you're telling me.\"" }
@@ -2816,7 +2827,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: -1 }
               - iliski: { aras_kurt: { saygi: 10, baglilik: 6 } }
-              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yanki_bozuk_satir", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "yanki_bagi" }, hatirlatma: { tr: "Meydandaki o sabahtan beri pencerende bir şeyin titrediğini fark ediyorsun.", en: "Ever since that morning in the square, you've noticed something flickering in your window." } }
             sonraki: "@akis"
 
       - id: "aras_sira_meydan_maske"

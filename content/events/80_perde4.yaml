@@ -7,6 +7,7 @@
 olaylar:
   # ================================================================== PERDE 4 AÇILIŞI (AY 331)
   - id: "perde4_acilis"
+    konum: ["us"]
     perde: [4]
     agirlik: 1
     etiketler: ["ana_yay", "hasat", "sistem"]
@@ -290,6 +291,7 @@ olaylar:
 
   # ================================================================== FRAKSİYONLARIN SON POZİSYONU (AY 336)
   - id: "fraksiyon_son_pozisyon"
+    konum: ["eski_sehir"]
     perde: [4]
     agirlik: 1
     etiketler: ["ana_yay", "fraksiyon", "siyaset"]
@@ -679,6 +681,7 @@ olaylar:
   # Sonuç: kadimler_yenildi (Vali yenilir) · kadim_anlasmasi (Thessar ya da Kadim itibarıyla antlaşma) · kiyikent_dustu (terk ya da iki yenilgi).
   # Destekler Vali savaşını kolaylaştırır: ihanet_thessar, bilgi filo_acigi, kaya_general, p4_yakit_kabul, ordu.
   - id: "kadim_istilasi"
+    konum: ["kiyikent_liman"]
     perde: [4]
     agirlik: 1
     etiketler: ["ana_yay", "boss", "istila", "kadim"]
@@ -1403,6 +1406,7 @@ olaylar:
   # ================================================================== ÇEKİRDEĞE YOL (AY 350)
   # Her yol `cekirdek_yolu_acik` koyar (giriş seçenekleri); Kapıcı savaşı yalnızca yolun nasıl açıldığını belirler.
   - id: "cekirdege_yol"
+    konum: ["kule_dibi"]
     perde: [4]
     agirlik: 1
     etiketler: ["ana_yay", "sistem", "boss"]
@@ -1690,6 +1694,7 @@ olaylar:
   # Her giriş seçeneği `sistem_cekirdegine_ulasildi` koyar ve F'nin `yanki_son_sir` olayını (Yankı yaşıyorsa) tohumlar.
   # Gerçek: gercek_hasat / gercek_kurtarma bayrağına göre; ikisinde de döngünün ipucu ("son erişim: bir önceki döngü").
   - id: "sistem_cekirdegi"
+    konum: ["sistem_cekirdegi"]
     perde: [4]
     agirlik: 1
     etiketler: ["ana_yay", "sistem", "sir", "boss"]
@@ -1983,6 +1988,7 @@ olaylar:
 
   # ================================================================== DİKKAT 100 · PERDE 4 (motor tohumlar)
   - id: "dikkat_100_p4"
+    konum: ["us"]
     perde: [4]
     agirlik: 1
     etiketler: ["dikkat", "kadim", "boss"]
@@ -2157,6 +2163,7 @@ olaylar:
   # ================================================================== PERDE 4 GENEL OLAYLARI
   # ---------------------------------------------------------------- Kadim Öncüsü (istila öncesi)
   - id: "p4_kadim_oncusu"
+    konum: ["eski_sehir", "kordon", "kule_dibi", "kiyikent_liman"]
     perde: [4]
     bolge: ["eski_sehir", "kordon", "kule_dibi", "kiyikent_liman"]
     gun: { min: 331, max: 341 }
@@ -2323,6 +2330,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Öncünün hesabı (tohum)
   - id: "p4_oncu_hesabi"
+    konum: ["us"]
     perde: [4]
     agirlik: 1
     etiketler: ["kadim", "tohum"]
@@ -2364,6 +2372,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Kuşatma ekmeği
   - id: "p4_kusatma_ekmegi"
+    konum: ["kiyikent_liman", "eski_sehir", "tepe"]
     perde: [4]
     bolge: ["kiyikent_liman", "eski_sehir", "tepe"]
     gun: { min: 332, max: 364 }
@@ -2486,6 +2495,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Son Kapı (S kademe)
   - id: "p4_son_kapi"
+    konum: ["kule_dibi", "sanayi", "kordon", "eski_sehir"]
     perde: [4]
     bolge: ["kule_dibi", "sanayi", "kordon", "eski_sehir"]
     gun: { min: 333, max: 357 }
@@ -2638,6 +2648,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Küresel Sıralama'nın tepesi
   - id: "p4_siralama_zirvesi"
+    konum: ["kule_dibi", "eski_sehir", "sanayi"]
     perde: [4]
     bolge: ["kule_dibi", "eski_sehir", "sanayi"]
     gun: { min: 334, max: 357 }
@@ -2776,6 +2787,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Veda mektupları
   - id: "p4_veda_mektuplari"
+    konum: ["eski_sehir", "kiyikent_liman", "tepe"]
     perde: [4]
     bolge: ["eski_sehir", "kiyikent_liman", "tepe"]
     gun: { min: 336, max: 360 }
@@ -2906,6 +2918,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Kaçış gemisi
   - id: "p4_kacis_gemisi"
+    konum: ["kiyikent_liman", "kordon"]
     perde: [4]
     bolge: ["kiyikent_liman", "kordon"]
     gun: { min: 335, max: 355 }
@@ -3056,6 +3069,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Kaçış gemisi kalkıyor (tohum)
   - id: "p4_kacis_gemisi_kalkis"
+    konum: ["us"]
     perde: [4]
     agirlik: 1
     etiketler: ["kacis", "tohum"]
@@ -3100,6 +3114,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Çocuk ordusu
   - id: "p4_cocuk_ordusu"
+    konum: ["sanayi", "tepe", "eski_sehir"]
     perde: [4]
     bolge: ["sanayi", "tepe", "eski_sehir"]
     gun: { min: 337, max: 357 }
@@ -3246,6 +3261,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Son yayın
   - id: "p4_son_yayin"
+    konum: ["us"]
     perde: [4]
     gun: { min: 338, max: 362 }
     agirlik: 2
@@ -3389,6 +3405,7 @@ olaylar:
 
   # ---------------------------------------------------------------- İstiladan sonra
   - id: "p4_yikik_kiyikent"
+    konum: ["us"]
     perde: [4]
     gun: { min: 343, max: 357 }
     agirlik: 3
@@ -3521,6 +3538,7 @@ olaylar:
 
   # ---------------------------------------------------------------- Son gece ateşi
   - id: "p4_son_gece_ates"
+    konum: ["us"]
     perde: [4]
     gun: { min: 345, max: 357 }
     kosul: { bayrak_yok: "p3_son_gece_yakinlar" }   # QA P1-14: Perde 3 son gecesini yakınlarla geçirdiysen ikinci ateş başı vedası gelmez

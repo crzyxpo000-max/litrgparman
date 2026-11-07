@@ -9,6 +9,7 @@ import com.yukselis.engine.npc.NpcStatus
 import com.yukselis.engine.npc.RelAxis
 import com.yukselis.engine.npc.Relation
 import kotlinx.serialization.json.doubleOrNull
+import kotlinx.serialization.json.booleanOrNull
 import com.yukselis.engine.combat.CombatState
 import com.yukselis.engine.combat.EnemyMemory
 import com.yukselis.engine.combat.EnemyState
@@ -78,7 +79,7 @@ data class SaveData(val state: WorldState, val savedAtMillis: Long)
  *    `iliski_deniz_guven` → Deniz'e Güven. Değişkenlerden silinir.
  */
 object SaveCodec {
-    const val VERSION = 4
+    const val VERSION = 5
 
     fun encode(state: WorldState, savedAtMillis: Long): String = buildJsonObject {
         put("v", VERSION)
@@ -169,7 +170,12 @@ object SaveCodec {
             }
         }
         putJsonArray("seeds") {
-            state.seeds.forEach { sd -> addJsonObject { put("e", sd.eventId); put("d", sd.dueDay); sd.condition?.let { put("c", it) }; sd.npc?.let { put("n", it) } } }
+            state.seeds.forEach { sd ->
+                addJsonObject {
+                    put("e", sd.eventId); put("d", sd.dueDay); sd.condition?.let { put("c", it) }; sd.npc?.let { put("n", it) }
+                    sd.origin?.let { put("o", it) }; sd.reminder?.let { put("r", encodeLText(it)) }
+                }
+            }
         }
         putJsonObject("dayState") {
             val d = state.dayState
@@ -179,6 +185,17 @@ object SaveCodec {
             putJsonArray("seen") { d.seen.sorted().forEach { add(it) } }
             putJsonArray("tension") { d.recentTension.forEach { add(it) } }
             putJsonArray("tags") { d.recentTags.forEach { add(it) } }
+            if (d.forcedLock) put("lock", true)
+            d.reminder?.let { put("rem", encodeLText(it)) }
+        }
+        // v5: bölüm yapısı
+        put("chapter", state.chapter)
+        put("phase", state.chapterPhase.key)
+        state.mission?.let { m ->
+            putJsonObject("mission") {
+                put("k", m.kind.key); put("r", m.region); put("d", m.startDay); put("var", m.variant)
+                putJsonArray("q") { m.queue.forEach { add(it) } }
+            }
         }
         putJsonObject("quests") { state.quests.toSortedMap().forEach { (k, v) -> put(k, v.key) } }
         put("attention", state.attention)
@@ -456,7 +473,7 @@ object SaveCodec {
             }?.toMap() ?: emptyMap(),
             seeds = (o["seeds"] as? JsonArray)?.mapNotNull { x ->
                 val sd = x.jsonObject
-                sd.string("e")?.let { Seed(it, sd.int("d") ?: 0, sd.string("c"), sd.string("n")) }
+                sd.string("e")?.let { Seed(it, sd.int("d") ?: 0, sd.string("c"), sd.string("n"), sd.string("o"), decodeLText(sd["r"])) }
             } ?: emptyList(),
             dayState = (o["dayState"] as? JsonObject)?.let { d ->
                 DayState(
@@ -468,8 +485,17 @@ object SaveCodec {
                     recentTension = (d["tension"] as? JsonArray)?.mapNotNull { it.jsonPrimitive.intOrNull } ?: emptyList(),
                     recentTags = d.strings("tags"),
                     nextGateUid = d.int("gate") ?: 1,
+                    forcedLock = (d["lock"] as? JsonPrimitive)?.booleanOrNull ?: false,
+                    reminder = decodeLText(d["rem"]),
                 )
             } ?: DayState(),
+            // v4 ve öncesi: bölüm 0 kalır; StoryEngine.sanitize günden ve görülen olaylardan bölümü kurar.
+            chapter = o.int("chapter") ?: 0,
+            chapterPhase = com.yukselis.engine.world.ChapterPhase.fromKey(o.string("phase")) ?: com.yukselis.engine.world.ChapterPhase.BRIEF,
+            mission = (o["mission"] as? JsonObject)?.let { m ->
+                val kind = com.yukselis.engine.world.MissionKind.fromKey(m.string("k")) ?: return@let null
+                com.yukselis.engine.world.Mission(kind, m.string("r") ?: return@let null, m.strings("q"), m.int("d") ?: 0, m.int("var") ?: 0)
+            },
             quests = (o["quests"] as? JsonObject)?.mapNotNull { (k, v) -> QuestStatus.fromKey(v.jsonPrimitive.contentOrNull)?.let { k to it } }?.toMap() ?: emptyMap(),
             attention = o.int("attention") ?: 0,
             corruption = o.int("corruption") ?: 0,

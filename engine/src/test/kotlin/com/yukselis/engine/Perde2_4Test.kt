@@ -29,7 +29,10 @@ class Perde2_4Test {
     private val content: Content = engine.content
     private val lang = Lang.TR
 
-    private val later = content.events.values.filter { e -> e.acts.any { it >= 2 } || e.id.startsWith("kule_kat_") }
+    // Bölüm yapısının yapısal sahneleri (brifing, darboğaz, varış; DECISIONS #130) olay kurallarından muaftır.
+    private val later = content.events.values.filter { e ->
+        (e.acts.any { it >= 2 } || e.id.startsWith("kule_kat_")) && listOf("brifing_", "darbogaz_", "varis_").none { e.id.startsWith(it) }
+    }
 
     private fun eventScenes(entry: String): Set<String> {
         val seen = mutableSetOf<String>()
@@ -228,7 +231,7 @@ class Perde2_4Test {
                     val action = if (flee) com.yukselis.engine.combat.CombatAction.Flee else engine.autoCombatAction(s)
                     runCatching { engine.combatAction(s, action, lang).state }.getOrElse { engine.combatAction(s, engine.autoCombatAction(s), lang).state }
                 }
-                s.sceneId == WorldState.HUB -> engine.hubAction(s, hubAction(s, rng, profile, cautious = s.day - lastDeathDay < 4), lang).state
+                s.sceneId == WorldState.HUB -> engine.hubAction(s, engine.legalOr(s, hubAction(s, rng, profile, cautious = s.day - lastDeathDay < 4), kotlin.random.Random(rng.nextLong())), lang).state
                 else -> engine.choose(s, pickChoice(s, rng, profile), lang).state
             }
             if (before.combat == null && s.combat != null) checkpoint = before

@@ -8,6 +8,7 @@
 olaylar:
   # ================================================================== KAYIPLAR DUVARI
   - id: "liman_kayiplar_duvari"
+    konum: ["kiyikent_liman"]
     perde: [2]
     bolge: ["kiyikent_liman"]
     gun: { min: 31, max: 120 }
@@ -376,6 +377,7 @@ olaylar:
 
   # ------------------------------------------------------------------ kayıplar duvarı: saklanan adam (tohum)
   - id: "kayiplar_mektup"
+    konum: ["kiyikent_liman"]
     perde: [2]
     agirlik: 1
     etiketler: ["kayip", "ahlak", "liman"]
@@ -511,6 +513,7 @@ olaylar:
 
   # ================================================================== BALIKHANE KARABORSASI
   - id: "liman_balikhane_karaborsa"
+    konum: ["kiyikent_liman"]
     perde: [2]
     bolge: ["kiyikent_liman"]
     gun: { min: 34, max: 170 }
@@ -944,6 +947,7 @@ olaylar:
 
   # ------------------------------------------------------------------ balıkhanenin hesabı (tohum)
   - id: "balikhane_hesap"
+    konum: ["kiyikent_liman"]
     perde: [2]
     agirlik: 1
     etiketler: ["karaborsa", "ahlak", "liman"]
@@ -1159,6 +1163,7 @@ olaylar:
 
   # ================================================================== YAN YATMIŞ VAPUR
   - id: "liman_yan_yatmis_vapur"
+    konum: ["kiyikent_liman"]
     perde: [2]
     bolge: ["kiyikent_liman"]
     gun: { min: 33, max: 110 }
@@ -1438,6 +1443,7 @@ olaylar:
 
   # ------------------------------------------------------------------ vapurun ilk seferi (tohum)
   - id: "vapur_ilk_sefer"
+    konum: ["kiyikent_liman"]
     perde: [2]
     agirlik: 1
     etiketler: ["vapur", "deniz", "liman"]
@@ -1617,6 +1623,7 @@ olaylar:
 
   # ================================================================== KARANTİNA GEMİSİ (Elif)
   - id: "liman_karantina_gemisi"
+    konum: ["kiyikent_liman"]
     perde: [2]
     bolge: ["kiyikent_liman"]
     gun: { min: 50, max: 170 }
@@ -1987,6 +1994,7 @@ olaylar:
 
   # ================================================================== KONTEYNER LABİRENTİ (keşif)
   - id: "liman_konteyner_labirenti"
+    konum: ["kiyikent_liman"]
     perde: [2]
     bolge: ["kiyikent_liman"]
     gun: { min: 31, max: 180 }
@@ -2188,6 +2196,7 @@ olaylar:
 
   # ================================================================== MENDİREKTEKİ ÇATLAK (taşmadan önce)
   - id: "kordon_kapi_catlagi"
+    konum: ["kordon"]
     perde: [2]
     bolge: ["kordon"]
     gun: { min: 50, max: 79 }
@@ -2428,6 +2437,7 @@ olaylar:
 
   # ================================================================== FENER BALIĞI ANA (keşif, boss)
   - id: "kordon_fener_baligi"
+    konum: ["kordon"]
     perde: [2]
     bolge: ["kordon"]
     gun: { min: 36, max: 180 }
@@ -2680,6 +2690,7 @@ olaylar:
 
   # ------------------------------------------------------------------ fener yavruları (tohum)
   - id: "fener_yavrulari"
+    konum: ["kordon"]
     perde: [2]
     agirlik: 1
     etiketler: ["deniz", "kordon", "ordu"]
@@ -2780,6 +2791,7 @@ olaylar:
 
   # ================================================================== FENERİN SESİ (Mert)
   - id: "kordon_fener_frekansi"
+    konum: ["kordon"]
     perde: [2]
     bolge: ["kordon"]
     gun: { min: 40, max: 170 }
@@ -2963,6 +2975,7 @@ olaylar:
 
   # ================================================================== ÜÇÜNCÜ KATTAKİ FENER (taşmadan sonra)
   - id: "kordon_son_balkon"
+    konum: ["kordon"]
     perde: [2]
     bolge: ["kordon"]
     gun: { min: 81, max: 180 }
@@ -3233,6 +3246,7 @@ olaylar:
 
   # ================================================================== KAİDE (Kordon tutulduysa)
   - id: "kordon_heykel"
+    konum: ["kordon"]
     perde: [2]
     bolge: ["kordon"]
     gun: { min: 85, max: 180 }
@@ -3376,6 +3390,7 @@ olaylar:
 
   # ================================================================== TUZLU SESSİZLİK (Kordon düştüyse)
   - id: "kordon_olu_bolge_seferi"
+    konum: ["kordon"]
     perde: [2]
     bolge: ["kordon"]
     gun: { min: 82, max: 180 }
@@ -3653,6 +3668,7 @@ olaylar:
 
   # ================================================================== ÇAKALLAR (Eski Şehir kapı avcıları; keşif)
   - id: "eski_sehir_kapi_avcilari"
+    konum: ["eski_sehir"]
     perde: [2]
     bolge: ["eski_sehir"]
     gun: { min: 38, max: 170 }
@@ -3870,6 +3886,7 @@ olaylar:
 
   # ------------------------------------------------------------------ Çakallar geri dönüyor (tohum)
   - id: "kapi_avcilari_donus"
+    konum: ["eski_sehir"]
     perde: [2]
     agirlik: 1
     etiketler: ["kapi", "eski_sehir", "ahlak"]
@@ -3986,6 +4003,7 @@ olaylar:
 
   # ================================================================== FIRININ ÖNÜ (Kasaba Çekirdeği kuralları)
   - id: "eski_sehir_ekmek_kuyrugu"
+    konum: ["eski_sehir"]
     perde: [2]
     bolge: ["eski_sehir"]
     gun: { min: 61, max: 180 }
@@ -4233,6 +4251,7 @@ olaylar:
 
   # ================================================================== SEVİYE BİRLER (Han'daki okul)
   - id: "eski_sehir_seviye_birler"
+    konum: ["eski_sehir"]
     perde: [2]
     bolge: ["eski_sehir"]
     gun: { min: 45, max: 180 }

@@ -23,7 +23,8 @@ class Perde1Test {
     private val content: Content = engine.content
     private val lang = Lang.TR
 
-    private val act1 = content.events.values.filter { 1 in it.acts && !it.id.startsWith("esik_") }
+    // Bölüm yapısının yapısal sahneleri (brifing, darboğaz, varış; DECISIONS #130) olay kurallarından muaftır.
+    private val act1 = content.events.values.filter { 1 in it.acts && !it.id.startsWith("esik_") && !it.id.startsWith("brifing_") && !it.id.startsWith("darbogaz_") && !it.id.startsWith("varis_") }
 
     /** Bir olayın kendi sahneleri (giriş sahnesinden olay içi geçişler). */
     private fun eventScenes(entry: String): Set<String> {
@@ -100,7 +101,9 @@ class Perde1Test {
         val reached = mutableSetOf<String>()
         var steps = 0
         // Aşama 7: Perde 1 sonu artık oyunun sonu değil; oynanış Perde 1 son sahnesinde (ya da Gün 30'u geçince) durur.
-        while (!s.ended && s.sceneId !in ACT1_FINALS && s.day <= 30 && steps++ < STEP_LIMIT) {
+        // Bölüm yapısı: son tarihten önce başlayıp günler süren bir olay (art arda yenilgi ve yeniden deneme) Bekçi'yi
+        // birkaç gün geciktirebilir; operasyon olay biter bitmez gelir (DECISIONS #130).
+        while (!s.ended && s.sceneId !in ACT1_FINALS && s.day <= ACT1_LIMIT && steps++ < STEP_LIMIT) {
             s.dayState.currentEvent?.let { reached += it }
             if (s.dead) break
             // Serbest puanları rastgele dağıt: stat koşullu seçenekler de denensin.
@@ -114,12 +117,12 @@ class Perde1Test {
                     engine.resolvePrompt(s, p.options[rng.nextInt(p.options.size)].id, lang, p.kind, p.subject).state
                 }
                 s.combat != null -> engine.combatAction(s, engine.autoCombatAction(s), lang).state
-                s.sceneId == WorldState.HUB -> engine.hubAction(s, hubAction(s, rng), lang).state
+                s.sceneId == WorldState.HUB -> engine.hubAction(s, engine.legalOr(s, hubAction(s, rng), kotlin.random.Random(rng.nextLong())), lang).state
                 else -> engine.choose(s, pickChoice(s, rng, style), lang).state
             }
         }
         s.dayState.currentEvent?.let { reached += it }
-        assertTrue("seed $seed: oynanış bitmedi (Gün ${s.day}, ${s.sceneId})", s.ended || s.dead || s.sceneId in ACT1_FINALS)
+        assertTrue("seed $seed: oynanış bitmedi (Gün ${s.day}, ${s.sceneId}, bölüm ${s.chapter} ${s.chapterPhase} görev ${s.mission} dönüş ${s.returnStack} bekçi görüldü ${"ogretici_bekci" in s.dayState.seen})", s.ended || s.dead || s.sceneId in ACT1_FINALS)
         return Run(s, reached + s.dayState.seen)
     }
 
@@ -193,6 +196,7 @@ class Perde1Test {
     companion object {
         const val RUNS = 500L
         val ACT1_FINALS = setOf("perde1_son", "perde1_son_yenilgi")
+        const val ACT1_LIMIT = 40
         const val STEP_LIMIT = 4000
     }
 }

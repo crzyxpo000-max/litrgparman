@@ -7,6 +7,7 @@
 olaylar:
   # ================================================================== OCAK BAŞINDA (Sanayi)
   - id: "sanayi_ocak_basi"
+    konum: ["sanayi"]
     perde: [2]
     bolge: ["sanayi"]
     gun: { min: 33, max: 150 }
@@ -345,6 +346,7 @@ olaylar:
 
   # ------------------------------------------------------------------ ocak çocukları (tohum)
   - id: "sanayi_ocak_cocuklari"
+    konum: ["sanayi"]
     perde: [2, 3]
     agirlik: 1
     etiketler: ["sanayi", "lonca", "ahlak"]
@@ -481,6 +483,7 @@ olaylar:
 
   # ================================================================== DİSİPLİN AVLUSU (Sanayi, önemli)
   - id: "sanayi_disiplin_meydani"
+    konum: ["sanayi"]
     perde: [2]
     bolge: ["sanayi"]
     gun: { min: 38, max: 160 }
@@ -941,6 +944,7 @@ olaylar:
 
   # ------------------------------------------------------------------ kaçak avcı (tohum)
   - id: "sanayi_kacak_avci"
+    konum: ["sanayi"]
     perde: [2, 3]
     agirlik: 1
     etiketler: ["sanayi", "lonca", "yoldas_adayi"]
@@ -1059,6 +1063,7 @@ olaylar:
 
   # ================================================================== KAPI İLANLARI (Sanayi, keşif)
   - id: "sanayi_kapi_ilanlari"
+    konum: ["sanayi"]
     perde: [2]
     bolge: ["sanayi"]
     gun: { min: 34, max: 175 }
@@ -1377,6 +1382,7 @@ olaylar:
 
   # ================================================================== KURAL ON İKİ: GREV (Sanayi, önemli)
   - id: "sanayi_grev"
+    konum: ["sanayi"]
     perde: [2]
     bolge: ["sanayi"]
     gun: { min: 50, max: 170 }
@@ -1745,6 +1751,7 @@ olaylar:
 
   # ================================================================== SIRALAMA TAHTASI (Sanayi)
   - id: "sanayi_siralama_tabelasi"
+    konum: ["sanayi"]
     perde: [2]
     bolge: ["sanayi"]
     gun: { min: 36, max: 175 }
@@ -1974,6 +1981,7 @@ olaylar:
 
   # ------------------------------------------------------------------ sokak efsanesi (tohum; birçok olay eker)
   - id: "sokak_efsanesi"
+    konum: ["us"]
     perde: [2, 3]
     agirlik: 1
     etiketler: ["efsane", "hakimiyet", "gizli_guc"]
@@ -2091,6 +2099,7 @@ olaylar:
 
   # ================================================================== BEŞİK SINAVI (Tepe, önemli)
   - id: "tepe_besik_sinavi"
+    konum: ["tepe"]
     perde: [2]
     bolge: ["tepe"]
     gun: { min: 40, max: 170 }
@@ -2517,6 +2526,7 @@ olaylar:
 
   # ------------------------------------------------------------------ beşik sınavının sonrası (tohum)
   - id: "tepe_sinav_sonrasi"
+    konum: ["us"]
     perde: [2, 3]
     agirlik: 1
     etiketler: ["tepe", "yukselenler", "ahlak"]
@@ -2632,6 +2642,7 @@ olaylar:
 
   # ================================================================== SAYIM GECESİ (Tepe, önemli)
   - id: "tepe_sayim_gecesi"
+    konum: ["tepe"]
     perde: [2]
     bolge: ["tepe"]
     gun: { min: 35, max: 175 }
@@ -2979,6 +2990,7 @@ olaylar:
 
   # ------------------------------------------------------------------ çatı arasının sonrası (tohum)
   - id: "tepe_cati_arasi_sonrasi"
+    konum: ["us"]
     perde: [2, 3]
     agirlik: 1
     etiketler: ["tepe", "yukselenler", "ahlak"]
@@ -3058,6 +3070,7 @@ olaylar:
 
   # ================================================================== DİNLEYİCİLER (Tepe)
   - id: "tepe_dinleyiciler"
+    konum: ["tepe"]
     perde: [2]
     bolge: ["tepe"]
     gun: { min: 38, max: 175 }
@@ -3227,6 +3240,7 @@ olaylar:
 
   # ================================================================== YAKIT DUVARI (Tepe; Deniz'in akıbetini okur)
   - id: "tepe_yakit_duvari"
+    konum: ["tepe"]
     perde: [2]
     bolge: ["tepe"]
     gun: { min: 34, max: 175 }
@@ -3413,6 +3427,7 @@ olaylar:
 
   # ================================================================== AVCI PAZARI (Kule Dibi, keşif)
   - id: "kule_dibi_avci_pazari"
+    konum: ["kule_dibi"]
     perde: [2]
     bolge: ["kule_dibi"]
     gun: { min: 41, max: 178 }
@@ -3553,6 +3568,7 @@ olaylar:
 
   # ================================================================== TIRMANIŞ KUYRUĞU (Kule Dibi, önemli)
   - id: "kule_dibi_tirmanis_kuyrugu"
+    konum: ["kule_dibi"]
     perde: [2]
     bolge: ["kule_dibi"]
     gun: { min: 42, max: 178 }
@@ -3796,6 +3812,7 @@ olaylar:
 
   # ------------------------------------------------------------------ Kule'den dönüş (tohum; kuyruk ve pazar)
   - id: "kule_dibi_donus"
+    konum: ["us"]
     perde: [2, 3]
     agirlik: 1
     etiketler: ["kule", "ahlak"]
@@ -3895,6 +3912,7 @@ olaylar:
 
   # ================================================================== GERİ DÖNMEYENLER (Kule Dibi)
   - id: "kule_dibi_geri_donmeyenler"
+    konum: ["kule_dibi"]
     perde: [2]
     bolge: ["kule_dibi"]
     gun: { min: 45, max: 178 }
@@ -4114,6 +4132,7 @@ olaylar:
 
   # ================================================================== SAHTE REKOR (Kule Dibi)
   - id: "kule_dibi_sahte_rekor"
+    konum: ["kule_dibi"]
     perde: [2]
     bolge: ["kule_dibi"]
     gun: { min: 48, max: 178 }

@@ -15,6 +15,7 @@
 olaylar:
   # ================================================================== SIĞINAK 1 — KONSEY (P2, AY 66)
   - id: "siginak_1_konsey"
+    konum: ["kiyikent_liman"]
     perde: [2]
     gun: { min: 50, max: 110 }
     ana_yay: { gun: 66 }
@@ -495,6 +496,7 @@ olaylar:
 
   # ================================================================== ELİF 1 — KONSEY OYLAMASI (P2; tohum + havuz)
   - id: "elif_konsey_oylamasi"
+    konum: ["kiyikent_liman"]
     perde: [2]
     gun: { min: 72, max: 175 }
     agirlik: 6
@@ -806,6 +808,7 @@ olaylar:
 
   # ================================================================== SIĞINAK 2 — SU SAVAŞLARI (P2, AY 122)
   - id: "siginak_2_su_savaslari"
+    konum: ["kiyikent_liman"]
     perde: [2]
     gun: { min: 100, max: 170 }
     ana_yay: { gun: 122 }
@@ -1231,6 +1234,7 @@ olaylar:
   # ================================================================== ELİF 2 — GECE NÖBETİ (P2–3; aşk yayı: elif_ask)
   # İnce tutulur, asla ilan edilmez: bir omuz, bir saat, bir çay. elif_ask yalnızca güven + bağlılık + merhametle açılır.
   - id: "elif_gece_nobeti"
+    konum: ["kiyikent_liman"]
     perde: [2, 3]
     gun: { min: 140, max: 250 }
     agirlik: 7
@@ -1600,6 +1604,7 @@ olaylar:
   # ================================================================== SIĞINAK 3 — TAHLİYE (P3, AY 205)
   # Elif bu noktadan sonra ölmüş olabilir (darbe); olay onu npc listesine almaz, Elif satırları koşulludur.
   - id: "siginak_3_tahliye"
+    konum: ["kiyikent_liman"]
     perde: [3]
     gun: { min: 190, max: 260 }
     ana_yay: { gun: 205 }
@@ -2023,6 +2028,7 @@ olaylar:
   # Lonca'nın şahinleri (Pala) Konsey'in son kalesine, Gümrük'teki hastaneye yürür. ihanet_kaya varsa bu, Parti J'nin büyük
   # ihanetinin ardından gelen gecedir; yoksa Pala Kaya'nın sessizliğine güvenerek kendi başına davranır. Tohum: tahliye, gece nöbeti.
   - id: "elif_lonca_darbesi"
+    konum: ["kiyikent_liman"]
     perde: [3]
     gun: { min: 232, max: 328 }
     agirlik: 7
@@ -2496,6 +2502,7 @@ olaylar:
 
   # ------------------------------------------------------------------ Pala'nın yargılanması (tohum)
   - id: "pala_yargilanmasi"
+    konum: ["kiyikent_liman"]
     perde: [3]
     agirlik: 1
     yalniz_tohum: true
@@ -2548,6 +2555,7 @@ olaylar:
   # ================================================================== SIĞINAK 4 — SON SIĞINAK (P3, AY 268)
   # Kuru havuzda Son Sığınak. Duvardaki çentikler: önceki döngüden kalan bir Sığınak (bilgi onceki_siginak; Döngü sonu ipucu).
   - id: "siginak_4_son_siginak"
+    konum: ["kiyikent_liman"]
     perde: [3]
     gun: { min: 250, max: 320 }
     ana_yay: { gun: 268 }
@@ -2872,6 +2880,7 @@ olaylar:
 
   # ================================================================== ELİF 4 — BARIŞ MASASI (P4, AY 333; elif_baskan · insan_ittifaki)
   - id: "elif_baris_masasi"
+    konum: ["kiyikent_liman"]
     perde: [4]
     gun: { min: 331, max: 341 }
     ana_yay: { gun: 333 }
@@ -3202,6 +3211,7 @@ olaylar:
 
   # ================================================================== ELİF 5 — SON GECE (P4, tohum; istila arifesi)
   - id: "elif_son_gece"
+    konum: ["kiyikent_liman"]
     perde: [4]
     agirlik: 1
     yalniz_tohum: true
@@ -3330,6 +3340,7 @@ olaylar:
 
   # ================================================================== SIĞINAK 5 — KALKAN YEMİNİ (P4, AY 339; zincir tamam)
   - id: "siginak_5_kalkan_yemini"
+    konum: ["kiyikent_liman"]
     perde: [4]
     gun: { min: 331, max: 356 }
     ana_yay: { gun: 339 }

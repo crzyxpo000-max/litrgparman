@@ -32,7 +32,8 @@ data class ChoiceView(
     val oneShot: Boolean = false,
 )
 
-data class CardView(val id: String, val title: String, val tension: Int)
+/** Fırsat eli kartı. `region`: başka bir bölgede geçen olay (oynamak o bölgeye bir yan görev başlatır). */
+data class CardView(val id: String, val title: String, val tension: Int, val region: String? = null)
 
 data class GateView(val uid: Int, val grade: String, val enemies: String, val daysLeft: Int)
 
@@ -51,7 +52,23 @@ data class HubView(
     val mustCamp: Boolean,
     /** Kule burada tırmanılabiliyorsa bir sonraki kat (Aşama 7). */
     val tower: TowerView? = null,
+    // ---- Bölüm yapısı (DECISIONS #130) ----
+    /** Üsteyiz (görev yok). Bölüm yapısı olmayan içerikte hep true. */
+    val atBase: Boolean = true,
+    /** Görevdeyken görev türü ve yeri ("Keşif · Kordon"). */
+    val mission: String? = null,
+    /** Üste: girilebilecek ana operasyon(lar). */
+    val operations: List<OperationChoiceView> = emptyList(),
+    /** Görevdeyken üsse dönülebilir. */
+    val canReturn: Boolean = false,
+    /** Gün akışında keşif / Kapı yapılabilir (görevdeyken). */
+    val canExplore: Boolean = true,
 )
+
+data class OperationChoiceView(val index: Int, val title: String, val region: String, val daysLeft: Int)
+
+/** Uzun aradan sonra dönüş özeti (dünya durumu ve önemli seçimler). */
+data class RecapView(val title: String, val lines: List<String>)
 
 data class TowerView(val floor: Int, val level: Int, val story: Boolean)
 
@@ -100,7 +117,11 @@ data class JournalView(
     val pendingSeeds: Int,
     /** Bilgi günlüğü: söylentiler, sırlar, gerçek seviyeler (en yeni önce). */
     val knowledge: List<KnowledgeView> = emptyList(),
+    /** Bölüm hedefi (Görevler ekranında yan görevlerden ayrı). */
+    val chapter: ChapterGoalView? = null,
 )
+
+data class ChapterGoalView(val no: Int, val title: String, val goal: String, val threat: String, val daysLeft: Int, val phase: String)
 
 /** Yoldaşın büyük seçimden önceki tek satırlık görüşü. `echo`: Yankı'nın sesi. */
 data class CompanionLineView(val npcName: String, val text: String, val favoredChoice: String?, val echo: Boolean)
@@ -163,6 +184,8 @@ data class SceneView(
     val hub: HubView? = null,
     /** Yanındakilerin görüşleri (Aşama 5). */
     val opinions: List<CompanionLineView> = emptyList(),
+    /** Her zaman görünen "Bölüm N · Hedef · Kalan gün" satırı (gün akışından önce null). */
+    val chapter: com.yukselis.engine.world.ChapterLine? = null,
 )
 
 /** `echo`: stat sezgisi değil, Yankı'nın sesi (öneksiz satır). */

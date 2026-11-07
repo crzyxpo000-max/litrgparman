@@ -130,6 +130,23 @@ sealed interface Condition {
         override fun test(state: WorldState) = state.region == region
     }
 
+    /** Bölüm koşulları (DECISIONS #130): `bolum` (tam), `bolum_min`, `bolum_max`. */
+    data class ChapterAtLeast(val no: Int) : Condition {
+        override fun test(state: WorldState) = state.chapter >= no
+    }
+
+    data class ChapterAtMost(val no: Int) : Condition {
+        override fun test(state: WorldState) = state.chapter <= no
+    }
+
+    /** `gorevde: true` görevdeyken, `gorevde: false` üsteyken tutar; `gorev_turu: operasyon|yan|kesif`. */
+    data class OnMission(val value: Boolean, val kind: String? = null) : Condition {
+        override fun test(state: WorldState): Boolean {
+            val m = state.mission
+            return if (!value) m == null else m != null && (kind == null || m.kind.key == kind)
+        }
+    }
+
     data class InAct(val act: Int) : Condition {
         override fun test(state: WorldState) = state.act == act
     }
@@ -308,7 +325,7 @@ sealed interface Effect {
     data class AddHp(val delta: Int) : Effect
     data class AddMp(val delta: Int) : Effect
     /** Ertelenmiş sonuç: `min..max` gün sonra, koşul (ham metin) hâlâ doğruysa olay tetiklenir. */
-    data class PlantSeed(val eventId: String, val minDelay: Int, val maxDelay: Int, val condition: String?, val npc: String? = null) : Effect
+    data class PlantSeed(val eventId: String, val minDelay: Int, val maxDelay: Int, val condition: String?, val npc: String? = null, val reminder: com.yukselis.engine.i18n.LText? = null) : Effect
     data class ShiftAttention(val delta: Int) : Effect
     data class ShiftCorruption(val delta: Int) : Effect
     /** [Açığa vur]: görünen seviye gerçek seviyeye çekilir; aradaki fark kadar Dikkat artar. */
@@ -455,6 +472,8 @@ data class Content(
     val tower: com.yukselis.engine.world.TowerDef? = null,
     /** Yollar: iki Öz'den doğan özgün güçler. */
     val paths: Map<String, com.yukselis.engine.system.PathDef> = emptyMap(),
+    /** Bölüm yapısı (`chapters.yaml`). Boşsa eski gün akışı (yalnız testlerdeki küçük içerikler). */
+    val chapters: com.yukselis.engine.world.ChapterTable = com.yukselis.engine.world.ChapterTable(),
 ) {
     /** Düşman tanımı; "id@seviye" ölçekli başvurudur. */
     fun enemy(ref: String): EnemyDef? = enemies[ref] ?: com.yukselis.engine.combat.EnemyScaling.parse(ref).let { (base, level) ->

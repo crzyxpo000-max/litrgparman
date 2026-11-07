@@ -1,0 +1,279 @@
+# Bölüm yapısı · Perde 1 (docs/CHAPTERS.md, DECISIONS #130): brifingler, darboğazlar ve varış sahneleri.
+# Bunlar yapısal sahnelerdir: motor kendisi açar (yalniz_tohum), mekanik etkileri yoktur; dünya durumunu anlatır.
+# Brifing: yeni tehdit + "önceki bölümde" satırları. Darboğaz: bölüm sonu, kim hayatta / kim küs / hangi kamp önde.
+# Varış: görevin ilk sahnesi (ilk gidiş `ziyaret_<bölge>` 0, sonrakiler ≥ 1).
+olaylar:
+  # ================================================================== Bölüm 1 · brifing
+  - id: "brifing_1"
+    konum: ["us"]
+    perde: [1]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["brifing"]
+    kart: { tr: "Ağlar", en: "The webs" }
+    sahne: "brifing_1_1"
+    sahneler:
+      - id: "brifing_1_1"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Kampın kıyısındaki ağaçlarda yeni iplikler var. Gece boyunca gerilmişler: bembeyaz, ince, her sabah biraz daha aşağıda.", en: "There are new threads on the trees at the edge of camp. They went up overnight: bone-white, thin, a little lower every morning." }
+          - { tr: "Avcılardan biri bıçağının ucuyla birine dokunuyor. Bıçak yapışıyor; adam onu kurtarmak için ayağını ağaca dayıyor. \"Her sabah biraz daha yakın,\" diyor. \"Ormanın derininde bir yuva var.\"", en: "One of the hunters touches one with the tip of his knife. The blade sticks. He has to brace a boot against the trunk to get it back. \"Closer every morning,\" he says. \"There's a nest somewhere deep in these woods.\"" }
+          - metin: { tr: "{npc:deniz_arman} ipliklere bakıp kollarını ovuşturuyor. \"Dün gece bir şey duydum,\" diyor alçak sesle. \"Tıkırtı gibi. Ağaçların tepesinden.\"", en: "{npc:deniz_arman} looks at the threads and rubs {zamir:deniz_arman|onun} arms. \"I heard something last night,\" {zamir:deniz_arman|o} says quietly. \"Like clicking. Up in the trees.\"" }
+            kosul: { yoldas: "deniz_arman" }
+          - metin: { tr: "Ateşin başında kimse adını bilmediğin yabancıdan söz etmiyor. Sen yine de onun sürüklenen dizinin toprakta bıraktığı izi düşünüyorsun.", en: "Nobody around the fire mentions the stranger whose name you never got. You keep thinking about that drag mark in the dirt anyway." }
+            kosul: { bayrak: "yabanci_birakildi" }
+          - { tr: "Sabah penceresi kısa. Sistem saat vermiyor, yalnızca bir yön gösteriyor: sisin en koyu olduğu yer.", en: "This morning's window is short. The System doesn't give you a time, just a direction: wherever the fog is thickest." }
+        bildirimler:
+          - tur: "gorev"
+            baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
+            satirlar:
+              - { tr: "Sisli Orman'daki yuva büyüyor. Olgunlaşmadan önce gücünü topla.", en: "The nest in Fogwood is growing. Build your strength before it matures." }
+        sezgiler:
+          - kosul: { stat: { per: 7 } }
+            metin: { tr: "İpliklerin hepsi aynı yöne gerilmiş: kuzeye, sisin içine. Bir şey avını kampa doğru değil, kamptan uzağa çekiyor.", en: "Every thread runs the same way: north, into the fog. Whatever spun them isn't reaching toward camp. It's pulling things away from it." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "sekiz göz. hepsi açık. hepsi aç.", en: "eight eyes. all open. all hungry." }
+        secenekler:
+          - id: "izle"
+            etiket: { tr: "İpliklerin uzandığı yöne bak", en: "Look where the threads lead" }
+            sonraki: "@akis"
+          - id: "ates"
+            etiket: { tr: "Ateşi büyüt, nöbet sırasını yeniden kur", en: "Build up the fire and redo the watch rotation" }
+            sonraki: "@akis"
+          - id: "bicak"
+            etiket: { tr: "Avcıya bıçağını kurtarmasında yardım et", en: "Help the hunter pry his knife loose" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 1 · darboğaz
+  - id: "darbogaz_1"
+    konum: ["us"]
+    perde: [1]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["darbogaz", "kamp"]
+    kart: { tr: "Ağdan sonra", en: "After the web" }
+    sahne: "darbogaz_1_1"
+    sahneler:
+      - id: "darbogaz_1_1"
+        yer: "ogretici_orman"
+        paragraflar:
+          - { tr: "Kampa döndüğünde ateş yanıyor ama başında oturan yok. Herkes ayakta, herkes sana bakıyor; kimse ilk soruyu sormak istemiyor.", en: "When you get back to camp the fire's going, but nobody's sitting at it. Everyone's on their feet, everyone's looking at you, and nobody wants to be the first to ask." }
+          - metin: { tr: "Ağın kenarındaki yaşlı kadın gelmedi. Çocuklardan biri onun yeşil yazmasını eline dolamış; bırakmıyor.", en: "The old woman from the edge of the web didn't make it. One of the kids has her green headscarf wrapped around their hand and won't let go of it." }
+            kosul: { bayrak: "kirilma_kayip" }
+          - metin: { tr: "Ağdan üç kişi çıkardın. Yaşlı kadın çocukları ateşin dibine oturtmuş, ikisinin de saçındaki iplikleri tek tek ayıklıyor. Arada bir başını kaldırıp sana bakıyor, sonra hemen işine dönüyor.", en: "You got three people out of that web. The old woman has the kids sitting right up by the fire and is picking the threads out of their hair, one strand at a time. Every so often she looks up at you, then goes right back to it." }
+            kosul: { bayrak_yok: "kirilma_kayip" }
+          - { tr: "Senin içindeyse bir şey yerinden oynamış. Elini kaldırdığında hareket bir an gecikiyor; sanki beden, sınırın öbür tarafından gelen bir emri tanımaya çalışıyor.", en: "Something inside you has shifted, though. When you raise a hand, the motion lags for half a beat, like your body's still trying to recognize an order that came from the other side of a limit." }
+          - metin: { tr: "Kamp kalabalıklaşmış. Ormandan kaçıp gelenler ateşin çevresinde yer kapmış; yüz kişiyi aşkın, çoğu hâlâ ayakta.", en: "The camp's filled up. People who ran out of the woods have staked out spots around the fire. More than a hundred of them, most still on their feet." }
+            kosul: { degisken_min: { hayatta_kalan: 65 } }
+          - metin: { tr: "Kamp dünkünden kalabalık değil. Kimse kimseye yerini sormuyor; boş kalan yerlerin kime ait olduğunu herkes biliyor.", en: "The camp's no bigger than yesterday. Nobody asks anybody whose spot is whose. Everybody knows who the empty ones belonged to." }
+            kosul: { degisken_min: { hayatta_kalan: 36 }, degisken_max: { hayatta_kalan: 64 } }
+          - metin: { tr: "Kamp ilk geceden bu yana yarı yarıya erimiş. Kalanlar ateşe sokulmuş, sırtlarını ağaçlara vermiş; her çıtırtıda irkiliyorlar.", en: "The camp's about half what it was on the first night. The ones who are left are packed in around the fire with their backs to the trees, jumping at every crackle." }
+            kosul: { degisken_max: { hayatta_kalan: 35 } }
+          - metin: { tr: "Ağ sen gelmeden önce kampın kıyısına kadar inmişti. Boş kalan iki çadırın önünden kimse geçmiyor.", en: "The web had reached the edge of camp before you got there. Nobody goes near the two tents that ended up empty." }
+            kosul: { bayrak: "bolum_1_tasti" }
+          - metin: { tr: "{npc:deniz_arman} seni görür görmez yanına geliyor, hiçbir şey söylemeden yarana bakıyor. Sonra kendi ceketini çıkarıp omzuna atıyor.", en: "{npc:deniz_arman} comes straight over the second {zamir:deniz_arman|o} sees you and checks your wound without a word. Then {zamir:deniz_arman|o} takes off {zamir:deniz_arman|onun} own jacket and throws it over your shoulders." }
+            kosul: { yoldas: "deniz_arman" }
+          - metin: { tr: "{npc:elif_sari|in} insanları yaralıları taşıyor; biri sedyeyi önünde durdurup sana da bakmalarını isteyip istemediğini soruyor.", en: "{npc:elif_sari|pos} people are carrying the wounded. One of them stops a stretcher in front of you and asks if you want to be looked at, too." }
+            kosul: { lider_fraksiyon: "siginak", npc_hayatta: "elif_sari" }
+          - metin: { tr: "{npc:kaya_demir|in} avcıları kampın çevresine yeni nöbet direkleri dikiyor. Biri sana başıyla selam veriyor; bu, onların dilinde neredeyse bir rütbe.", en: "{npc:kaya_demir|pos} hunters are driving new watch posts in around the camp. One of them gives you a nod. In their language, that's practically a promotion." }
+            kosul: { lider_fraksiyon: "lonca", npc_hayatta: "kaya_demir" }
+          - metin: { tr: "Ateşin öbür ucunda {npc:vahit|in} adamları alçak sesle dua ediyor. Dualarının içinde senin adın geçiyor; bunu sana sormadan yapmışlar.", en: "On the far side of the fire, {npc:vahit|pos} people are praying under their breath. Your name's in the prayer. Nobody asked you first." }
+            kosul: { lider_fraksiyon: "yukselenler", npc_hayatta: "vahit" }
+          - metin: { tr: "İstasyondan gelen telsiz cızırdıyor; {npc:mert_kilic} ağın düştüğünü çoktan duymuş, kimin düşürdüğünü de.", en: "The radio from the station crackles. {npc:mert_kilic} already heard the web came down, and who brought it down." }
+            kosul: { lider_fraksiyon: "sessiz_ag", npc_hayatta: "mert_kilic" }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "bir sınırı yırttın. ikimiz birlikte. bunu kimse sana veremezdi, ben de veremezdim. ama artık senin.", en: "you tore a limit. both of us together. nobody could've given you that, not even me. but it's yours now." }
+          - kosul: { dikkat_min: 25 }
+            metin: { tr: "Kampın kenarındaki birkaç kişi sana bakarken birbirine bir şey fısıldıyor. Bakışlarında minnetten çok hesap var.", en: "A few people at the edge of camp whisper to each other while they watch you. There's more calculation than gratitude in it." }
+            anlati: true
+        secenekler:
+          - id: "otur"
+            etiket: { tr: "Ateşin başına otur; ilk soruyu onlar sorsun", en: "Sit down at the fire and let them ask first" }
+            sonraki: "@akis"
+          - id: "anlat"
+            etiket: { tr: "Ağda ne olduğunu kısaca anlat", en: "Tell them what happened at the web, short version" }
+            sonraki: "@akis"
+          - id: "uzaklas"
+            etiket: { tr: "Kimseyle konuşmadan çadırına çekil", en: "Go to your tent without talking to anyone" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 2 · brifing
+  - id: "brifing_2"
+    konum: ["us"]
+    perde: [1]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["brifing"]
+    kart: { tr: "Sessiz açıklık", en: "The quiet clearing" }
+    sahne: "brifing_2_1"
+    sahneler:
+      - id: "brifing_2_1"
+        yer: "ogretici_orman"
+        paragraflar:
+          - metin: { tr: "Önceki bölümde ağı yırttın ve yaşlı kadını ağda bıraktın. Kamp bunu konuşmuyor, ama yazmalı çocuk her sabah ateşin senin oturduğun tarafına geçiyor.", en: "Last chapter, you tore that web open and left the old woman in it. The camp doesn't talk about it, but the kid with the headscarf moves to your side of the fire every morning." }
+            kosul: { bayrak: "kirilma_kayip" }
+          - metin: { tr: "Önceki bölümde ağı yırttın ve üç kişiyi birden çıkardın. O günden beri kamp sana \"sen\" demiyor; adını söylüyorlar, sanki adın bir işaretmiş gibi.", en: "Last chapter, you tore that web open and got all three of them out. Since then nobody calls you \"hey, you\" anymore. They use your name, like it's a landmark." }
+            kosul: { bayrak_yok: "kirilma_kayip" }
+          - { tr: "Bu sabah avcılar erken dönüyor, elleri boş. Mantar açıklığının çevresinde tek bir kuş yokmuş; böcekler bile susmuş. Dalların arasından geyik boyunda bir şey geçmiş; kabuklar omuz hizasında soyulmuş.", en: "The hunters come back early this morning, empty-handed. There wasn't a single bird around the mushroom clearing, they say. Even the bugs had gone quiet. Something deer-sized went through the branches; the bark's been rubbed off at shoulder height." }
+          - { tr: "Pencerende yeni bir şey yok, ama seviye sayacının yanındaki kademe harfi bir an titriyor, sonra yerine oturuyor. Sistem bir şeyi tartıyor.", en: "Nothing new in your window. But the Grade letter next to your level flickers for a second, then settles. The System's weighing something." }
+          - metin: { tr: "{npc:deniz_arman} izleri görünce yüzü değişiyor. \"Bu Öğretici'den değil,\" diyor. \"Buraya ait değil.\"", en: "{npc:deniz_arman|pos} face changes when {zamir:deniz_arman|o} sees the tracks. \"That's not from the Tutorial,\" {zamir:deniz_arman|o} says. \"That doesn't belong here.\"" }
+            kosul: { yoldas: "deniz_arman" }
+        bildirimler:
+          - tur: "gorev"
+            baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
+            satirlar:
+              - { tr: "Öğretici Katman'da kademesi bilinmeyen bir varlık dolaşıyor. Hazırlan.", en: "An entity of unknown Grade is moving through the Tutorial Layer. Prepare." }
+        sezgiler:
+          - kosul: { stat: { per: 9 } }
+            metin: { tr: "Kabuklar yalnızca soyulmamış; bazıları kemik gibi beyazlaşmış. Ne geçtiyse, dokunduğu her yerin rengini emmiş.", en: "The bark isn't just stripped. Some of it's gone white as bone. Whatever came through took the color out of everything it touched." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "üstümüzde bir harf var. bizim harfimizden büyük.", en: "there's a letter above ours. bigger than ours." }
+        secenekler:
+          - id: "izler"
+            etiket: { tr: "İzlerin derinliğine bak", en: "Check how deep the tracks go" }
+            sonraki: "@akis"
+          - id: "avcilar"
+            etiket: { tr: "Avcılara açıklığa bir süre gitmemelerini söyle", en: "Tell the hunters to stay away from the clearing for now" }
+            sonraki: "@akis"
+          - id: "sus"
+            etiket: { tr: "Bir şey söyleme; kampı tedirgin etme", en: "Don't say anything. No sense spooking the camp" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 2 · darboğaz
+  - id: "darbogaz_2"
+    konum: ["us"]
+    perde: [1]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["darbogaz", "kamp"]
+    kart: { tr: "Kemik taç", en: "The bone crown" }
+    sahne: "darbogaz_2_1"
+    sahneler:
+      - id: "darbogaz_2_1"
+        yer: "ogretici_orman"
+        paragraflar:
+          - metin: { tr: "Kemik taçlı şey açıklıkta yatıyor. Avcılar etrafında halka olmuş, kimse yaklaşmaya cesaret edemiyor. Boynuzlarındaki kemikler rüzgârsız havada hâlâ tıkırdıyor.", en: "The bone-crowned thing is lying in the clearing. The hunters stand around it in a ring, and nobody's brave enough to get close. The bones on its antlers are still clicking, and there's no wind." }
+            kosul: { bayrak: "yeni_tavan_kirildi" }
+          - metin: { tr: "Kemik taçlı şey sisin içine geri çekildi. Gidişini kimse görmedi; yalnızca kuşlar geri döndü, sonra da tek tek ötmeye başladı.", en: "The bone-crowned thing pulled back into the fog. Nobody saw it go. The birds just came back, and then one by one they started singing again." }
+            kosul: { bayrak_yok: "yeni_tavan_kirildi" }
+          - { tr: "Akşam kampta herkes aynı şeyi soruyor ama kimse yüksek sesle sormuyor: bunun bir üstü varsa, o neye benziyor?", en: "That night everyone in camp is asking the same thing, just not out loud: if there's something above that, what does it look like?" }
+          - metin: { tr: "{npc:deniz_arman} ateşin karşısında oturuyor, gözü alevde. Yanında olmasına alıştın; ne kadar alıştığını da şimdi, bir an onu kaybettiğini sandığında anladın.", en: "{npc:deniz_arman} is sitting across the fire with {zamir:deniz_arman|onun} eyes on the flames. You've gotten used to having {zamir:deniz_arman|onu} around. You only figured out how used to it you were when you thought, for a second, you'd lost {zamir:deniz_arman|onu}." }
+            kosul: { yoldas: "deniz_arman", bayrak_yok: "deniz_guveni_yarali" }
+          - metin: { tr: "{npc:deniz_arman|in} yeri boş. Beyaz giysili vaizlerle gitti; kardeşini bulacaklarına söz vermişler. Ateşin başında kimse onun adını anmıyor.", en: "{npc:deniz_arman|pos} spot is empty. {npc:deniz_arman} went off with the preachers in white, who swore they'd find {zamir:deniz_arman|onun} sister. Nobody at the fire says the name." }
+            kosul: { bayrak: "deniz_yukselenlere_gitti" }
+          - metin: { tr: "Aktarımda ayrı düştüğün kişiyi Öğretici boyunca hiç bulamadın. Artık bulamayacağını biliyorsun; Kapı açılmak üzere.", en: "You never did find the person you got split up from in the transfer. You know you won't now. The Gate's about to open." }
+            kosul: { bayrak: "deniz_hic_bulunmadi" }
+          - metin: { tr: "{npc:deniz_arman} sana bakmıyor. Sakladığın satır aranızda duruyor, ikiniz de görmezden gelmeye çalışıyorsunuz.", en: "{npc:deniz_arman} won't look at you. The line you kept from {zamir:deniz_arman|onu} is sitting right there between you, and you're both trying not to see it." }
+            kosul: { bayrak: "deniz_guveni_yarali", yoldas: "deniz_arman" }
+          - metin: { tr: "Boynuzlu gölge kamp yoluna kadar inmişti; yolda kalanların adını çocuklar bir dalın kabuğuna kazıyor.", en: "The horned shadow made it all the way down the camp trail. The kids are carving the names of the ones who were on it into a strip of bark." }
+            kosul: { bayrak: "bolum_2_tasti" }
+          - { tr: "Sistem gece yarısı tek satırlık bir pencere açıyor: [Öğretici Katman'ın kapanmasına az kaldı.] Kampta uyuyan yok.", en: "At midnight the System opens a one-line window: [The Tutorial Layer will close soon.] Nobody in camp is sleeping." }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "o şey bize bakmak için gönderilmişti. biri sırtın öbür yanından izliyordu. artık bizi biliyorlar.", en: "that thing was sent to look at us. someone was watching from the other side of the ridge. they know about us now." }
+          - kosul: { bayrak: "yeni_tavan_goruldu", stat: { per: 10 } }
+            metin: { tr: "Sırttaki gözlemciyi hatırlıyorsun. İnsan olmayan bir duruş; bekleyen, acele etmeyen.", en: "You remember the watcher on the ridge. Not a human way of standing. Waiting. In no hurry at all." }
+        secenekler:
+          - id: "nobet"
+            etiket: { tr: "Bu gece nöbeti sen tut", en: "Take the watch yourself tonight" }
+            sonraki: "@akis"
+          - id: "hazirla"
+            etiket: { tr: "Kampı Kapı'ya inmeye hazırla", en: "Start getting the camp ready to head down to the Gate" }
+            sonraki: "@akis"
+          - id: "dinlen"
+            etiket: { tr: "Ateşin yanına uzan, biraz uyumaya çalış", en: "Lie down by the fire and try to get some sleep" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 3 · brifing
+  - id: "brifing_3"
+    konum: ["us"]
+    perde: [1]
+    yalniz_tohum: true
+    gerilim: 3
+    etiketler: ["brifing"]
+    kart: { tr: "Çıkış yolu", en: "The way out" }
+    sahne: "brifing_3_1"
+    sahneler:
+      - id: "brifing_3_1"
+        yer: "ogretici_orman"
+        paragraflar:
+          - metin: { tr: "Önceki bölümde kemik taçlı şeyi yere serdin. Kampta artık kimse sana seviyeni sormuyor; sormaya korkuyorlar.", en: "Last chapter, you put the bone-crowned thing on the ground. Nobody in camp asks your level anymore. They're scared to." }
+            kosul: { bayrak: "yeni_tavan_kirildi" }
+          - metin: { tr: "Önceki bölümde bir üst kademenin ne olduğunu gördün ve ondan sağ çıktın.", en: "Last chapter, you saw what a higher Grade looks like and walked away from it alive." }
+            kosul: { bayrak_yok: "yeni_tavan_kirildi" }
+          - metin: { tr: "Sırttaki gözlemci hâlâ aklında.", en: "You still can't stop thinking about the watcher on the ridge." }
+            kosul: { bayrak: "yeni_tavan_goruldu" }
+          - { tr: "Bu sabah Sistem herkese aynı haritayı gösteriyor: kırık asfaltla dolu bir vadi, dibinde dönen bir ışık halkası. Çıkış Kapısı açılmış.", en: "This morning the System shows everybody the same map: a valley full of broken asphalt with a ring of light turning at the bottom. The Exit Gate has opened." }
+          - { tr: "Haritanın altında tek bir uyarı var: [Bekçi'yi geçemeyen, Öğretici'den çıkamaz.] Kampta birkaç kişi haritayı kapatıp bir daha açmıyor.", en: "There's one warning under the map: [Those who cannot pass the Warden cannot leave the Tutorial.] A few people in camp close the map and don't open it again." }
+          - metin: { tr: "{npc:deniz_arman} haritaya uzun uzun bakıyor. \"Çıkınca ne olacak?\" diye soruyor. Cevabı ikiniz de bilmiyorsunuz.", en: "{npc:deniz_arman} stares at the map for a long time. \"What happens once we're out?\" {zamir:deniz_arman|o} asks. Neither of you knows." }
+            kosul: { yoldas: "deniz_arman" }
+        bildirimler:
+          - tur: "gorev"
+            baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
+            satirlar:
+              - { tr: "Çıkış Kapısı açık. Kapı kapanmadan Bekçi'yi geç.", en: "The Exit Gate is open. Get past the Warden before it closes." }
+        sezgiler:
+          - kosul: { stat: { int: 9 } }
+            metin: { tr: "Vadiye inen tek yol otobüslerin arasındaki dar geçit. Kim önce inerse, arkadan gelenlerin yolunu o belirleyecek.", en: "The only way down into the valley is that narrow gap between the buses. Whoever goes first decides how it goes for everybody behind them." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "dışarıda daha çok pencere var. daha çok satır. daha çok sen.", en: "there are more windows out there. more lines. more you." }
+        secenekler:
+          - id: "harita"
+            etiket: { tr: "Haritayı ezberle", en: "Memorize the map" }
+            sonraki: "@akis"
+          - id: "kamp"
+            etiket: { tr: "Kampa kimin seninle ineceğini sor", en: "Ask the camp who's coming down with you" }
+            sonraki: "@akis"
+          - id: "yalniz"
+            etiket: { tr: "Kimseye bir şey söyleme; yolu önce sen gör", en: "Don't tell anyone. You'll see the road for yourself first" }
+            sonraki: "@akis"
+
+  # ================================================================== Varış · Harabe Çarşı
+  - id: "varis_harabe_carsi"
+    konum: ["harabe_carsi"]
+    perde: [1]
+    yalniz_tohum: true
+    tekrar: true
+    gerilim: 1
+    etiketler: ["varis"]
+    kart: { tr: "Çarşıya", en: "To the mall" }
+    sahne: "varis_harabe_carsi_1"
+    sahneler:
+      - id: "varis_harabe_carsi_1"
+        yer: "harabe_carsi"
+        paragraflar:
+          - metin: { tr: "Ormanın sonunda ağaçlar bir anda bitiyor; sanki biri haritayı yanlış yerinden katlamış. Karşında yarısı çökmüş bir alışveriş merkezi duruyor. Otoparkında otlar bel boyu, yürüyen merdivenleri tavana kadar sarmaşık sarmış.", en: "At the end of the forest the trees just stop, like someone folded the map in the wrong place. In front of you is a half-collapsed shopping mall. The weeds in the parking lot are waist-high, and ivy has climbed the escalators all the way to the ceiling." }
+            kosul: { degisken_max: { ziyaret_harabe_carsi: 0 } }
+          - metin: { tr: "Ormanın bittiği yerde otopark başlıyor. Çarşının kırık camlı girişi geçen seferki gibi duruyor; yine de bir şeyin yer değiştirdiğini hissediyorsun.", en: "Where the forest ends, the parking lot begins. The mall's broken glass doors look just like last time. You still get the feeling something's been moved." }
+            kosul: { degisken_min: { ziyaret_harabe_carsi: 1 } }
+          - { tr: "Yolda Sistem saatin kaç olduğunu söylemiyor. Gölgen ayaklarının dibinde; içerisi kararmadan ne yapacaksan yapman gerek.", en: "The System doesn't tell you what time it is on the way. Your shadow's right under your feet. Whatever you're doing in there, do it before it gets dark inside." }
+        secenekler:
+          - id: "gir"
+            etiket: { tr: "Çarşıya gir", en: "Go into the mall" }
+            sonraki: "@akis"
+
+  # ================================================================== Varış · Kırık İstasyon
+  - id: "varis_kirik_istasyon"
+    konum: ["kirik_istasyon"]
+    perde: [1]
+    yalniz_tohum: true
+    tekrar: true
+    gerilim: 1
+    etiketler: ["varis"]
+    kart: { tr: "İstasyona", en: "To the station" }
+    sahne: "varis_kirik_istasyon_1"
+    sahneler:
+      - id: "varis_kirik_istasyon_1"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - metin: { tr: "Raylara vardığında orman geride kalıyor. Paslı hatlar sisin içinde ikiye ayrılıyor, birinin sonunda yarı batık bir istasyon binası duruyor. Peronda devrilmiş bir tren yatıyor; vagonlarının camları kırık, içlerine su dolmuş.", en: "When you hit the tracks, the forest falls away behind you. The rusted rails split in two in the fog, and at the end of one sits a station house half sunk in the ground. A derailed train lies along the platform, windows smashed, the cars full of standing water." }
+            kosul: { degisken_max: { ziyaret_kirik_istasyon: 0 } }
+          - metin: { tr: "Rayları izleyip yine istasyona iniyorsun. Peronun ucundaki su biraz daha yükselmiş; devrik trenin ikinci vagonu artık tamamen dibe oturmuş.", en: "You follow the rails back down to the station. The water at the end of the platform has come up a little more. The derailed train's second car has settled all the way to the bottom now." }
+            kosul: { degisken_min: { ziyaret_kirik_istasyon: 1 } }
+          - metin: { tr: "İstasyon binasının çatısındaki antenden kesik kesik bir cızırtı geliyor. Biri hâlâ yayın yapıyor.", en: "There's a broken-up crackle coming off the antenna on the station roof. Somebody's still broadcasting." }
+            kosul: { npc_hayatta: "mert_kilic", bayrak_yok: "mert_istasyonu_bilinir" }
+        secenekler:
+          - id: "in"
+            etiket: { tr: "Perona in", en: "Go down to the platform" }
+            sonraki: "@akis"
