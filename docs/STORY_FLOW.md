@@ -383,3 +383,35 @@ payı değişmedi (Bölüm 9 %52 → %51, 13 %54 → %56, 15 %56 → %58; gürü
 keşfe ve savaşa gidiyor. Denge (1000 oynanış): hakimiyet %64,3, Kule 100'e ulaşan %63,4, sonlar %1–%40 içinde (Koruyucu
 %14,2).
 
+### Hızlı tırmanıştan sonra Kule'nin payı
+
+İnsan benzeri strateji, 20 oynanış; günlük özetteki `kule` sayacı (Kule ya da hızlı tırmanış eylemi). Bölüm 5–18'de kalan
+açık oynanış başına 42,3 gün. Bunun 24,7 günü Kule'ye çıkılan ve hikaye anı olmayan günler (%58). Öteki 17,6 gün keşif ve
+Kapı günleri.
+
+| Bölüm | Hikayesiz | Kule günü | Hikayesiz Kule günü | Açık (gün) |
+| ---: | ---: | ---: | ---: | ---: |
+| 7 | %53 | 5.2 | 2.4 | 4.3 |
+| 8 | %53 | 5.8 | 2.2 | 4.7 |
+| 9 | %51 | 7.5 | 3.2 | 4.7 |
+| 11 | %55 | 4.3 | 2.3 | 3.2 |
+| 12 | %55 | 7.5 | 3.8 | 6.1 |
+| 13 | %56 | 7.8 | 4.6 | 6.8 |
+| 14 | %63 | 1.9 | 1.2 | 3.5 |
+| 15 | %58 | 4.8 | 2.4 | 5.7 |
+
+### Elif denetimi
+
+100 oynanış (denge nüfusu; `AkisIzi` bitiş kaydı). `npcs/elif_sari.yaml` `yoldas: true`. Tek katılma noktası
+`elif_sahra_hastanesi` (Bölüm 1) son sahnesi: yoldaş yeri ve güven ≥ 12. Yoldaş olma oranı %6. Bu bilinçli bir seyreklik:
+Elif'in yayı Konsey'de geçer ve hiçbir yay düğümü ya da sonucu yoldaşlık istemez.
+- **Düğüm erişimi (oynanış başına):** `elif_sahra_hastanesi` %99, `siginak_1_konsey` %100, `elif_konsey_oylamasi` %100,
+  `elif_gece_nobeti` %100, `elif_lonca_darbesi` %100, `elif_baris_masasi` %49, `elif_son_gece` %46.
+- **Barış masası:** son iki düğüm Elif yaşıyorsa gelir. Demir Gece'de oynanışların %51'inde ölüyor (tasarım).
+- **Aşk yayı** (`elif_ask`, güven ve bağlılık ≥ 30–35 + merhamet ≥ 10): %12. 12 oynanışın 10'unda Elif hiç yoldaş olmamış.
+- **Barış sonucu:** `elif_baskan` %8 (8'in 6'sında yoldaş değil), `insan_ittifaki` %22. Diğer bayraklar: `elif_dostluk` %26,
+  `elif_mesafe` %42, `elif_konsey_basi` %34.
+- **Sonuç:** ulaşılamayan düğüm yok. En seyrek sonuçlar aşk yayı (%12) ve başkanlık (%8). İkisi de yoldaşlığa değil ilişki ve
+  itibar eşiklerine bağlı. Daha önceki "Elif hiç yoldaş olmuyor" tespiti 20 oynanışlık insan benzeri örnekten geliyordu ve
+  yanlıştı (doğrusu %6).
+

@@ -1,7 +1,7 @@
 # İlerleme
 
-Şu an: Kule hızlı tırmanış bitti; kat anları ölçümü ve Elif denetimi sürüyor. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
-Son commit: 0d67731 kamp kuralı (sonraki: hızlı tırmanış)
+Şu an: Kule hızlı tırmanış ve Elif denetimi bitti; Kule kat anı şablonları kullanıcı onayında. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
+Son commit: f2ad0be hızlı tırmanış (sonraki: Elif denetimi)
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
@@ -34,7 +34,9 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
       hikayesiz gün gürültü içinde
 - [x] Kule hızlı tırmanış: kademenin altındaki katlar tek yuvada, ödüller aynen; `KuleHizliTest` (DECISIONS #147).
       Hakimiyet %64,3; hikayesiz gün değişmedi
-- [ ] Kule kat anları (ölçüm ve şablon önerisi) ve Elif denetimi: sürüyor
+- [x] Elif denetimi: yoldaşlık %6 (tek katılma noktası, tasarım); hiçbir yay düğümü ya da sonucu yoldaşlık istemiyor; ulaşılamayan
+      düğüm yok (barış masası %49 çünkü Elif Demir Gece'de %51 ölüyor; aşk %12, başkanlık %8). STORY_FLOW "Elif denetimi"
+- [ ] Kule kat anları: kalan açığın %58'i Kule günü; şablon sayısı kullanıcı onayında
 
 ## Hikaye yapısı değişikliği — bölüm, üs ve görev  ✅ (2026-11-07)
 - [x] Adım 1: olay sırası kaydı (`:tools:simulator:akis`), teşhis `docs/STORY_FLOW.md`, sınıflandırma, plan `docs/CHAPTERS.md`
