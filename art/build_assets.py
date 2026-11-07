@@ -3,7 +3,6 @@
 Çalıştırma (Pillow gerekir):  python art/build_assets.py
 Çıktılar:
   app/src/main/res/mipmap-*/ic_launcher_{foreground,background,monochrome}.webp  (uyarlanabilir simge)
-  app/src/main/res/drawable-nodpi/logo_{tr,en}.webp                             (başlık ekranı logoları)
   fastlane/metadata/android/{tr-TR,en-US}/images/{icon,featureGraphic}.png         (Google Play)
   art/promo/preview/*.png                                                         (kontrol önizlemeleri)
 
@@ -129,48 +128,6 @@ def build_icon():
     sheet.convert("RGB").save(PREVIEW / "launcher_icon.png")
 
 
-# ---------------------------------------------------------------- başlık logoları
-LOGO_WIDTH = 960               # px; ekranda en çok ~320 dp genişlik (xxhdpi) için yeterli
-
-
-def save_logo(rgba: np.ndarray, name: str):
-    x0, y0, x1, y1 = bbox(rgba[..., 3], 0.02)
-    pad = 12
-    crop = rgba[max(0, y0 - pad):y1 + pad, max(0, x0 - pad):x1 + pad]
-    img = to_image(crop)
-    h = round(img.height * LOGO_WIDTH / img.width)
-    img = img.resize((LOGO_WIDTH, h), Image.LANCZOS)
-    out = RES / "drawable-nodpi"
-    out.mkdir(parents=True, exist_ok=True)
-    img.save(out / f"logo_{name}.webp", "WEBP", quality=85, method=6, alpha_quality=85)
-    # Logo yalnız koyu zeminde gösterilir (açık temada da koyu plaka içinde).
-    for label, color in (("siyah", (0, 0, 0)), ("plaka", (11, 16, 32))):
-        bgimg = Image.new("RGBA", img.size, color + (255,))
-        bgimg.alpha_composite(img)
-        bgimg.convert("RGB").save(PREVIEW / f"logo_{name}_{label}.png")
-    print(f"logo_{name}: {img.size}")
-
-
-def build_logos():
-    # TR: logo görselinin sağ yarısı saf siyah zeminde.
-    tr = load("logo_tr.jpg")[:, 1380:]
-    save_logo(unscreen(tr, (0, 0, 0), floor=0.03), "tr")
-    # EN: logo_en_protokoll.jpg'de yazım hatası var ("PROTOKOLL"); doğru yazılı logo afişin solundan alınır.
-    en = load("banner_en.jpg")[180:830, 140:1290]
-    rgba = unscreen(en, (8, 17, 31))
-    w = rgba.shape[1]
-    xx = np.arange(w)[None, :]
-    # Sağda logo ağaçların ve aydınlık gökyüzünün önünde durur (buğu alfası ≤ 0,26); orada eşik yükselir,
-    # çerçevenin parlak çizgileri (≥ 0,5) kalır. Solda zemin düz: düşük eşik ışıltıyı korur.
-    floor = 0.06 + 0.26 * np.clip((xx - 960) / 100, 0, 1)
-    rgba[..., 3] = np.clip((rgba[..., 3] - floor) / (1 - floor), 0, 1)
-    rgba[..., 3] *= np.clip((w - 20 - xx) / 40, 0, 1)
-    # Çerçevenin üstünde yalnız amblem (ok ve küçük pencere) kalır; yanlardaki ağaç buğusu silinir.
-    yy = np.arange(rgba.shape[0])[:, None]
-    rgba[..., 3] *= np.where((yy < 295) & ((xx < 400) | (xx > 745)), 0.0, 1.0)
-    save_logo(rgba, "en")
-
-
 # ---------------------------------------------------------------- Google Play
 def build_store():
     icon = Image.open(PROMO / "icon.jpg").convert("RGB").resize((512, 512), Image.LANCZOS)
@@ -188,5 +145,4 @@ def build_store():
 if __name__ == "__main__":
     PREVIEW.mkdir(parents=True, exist_ok=True)
     build_icon()
-    build_logos()
     build_store()

@@ -1,9 +1,6 @@
 package com.yukselis.protocol.ui.title
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import com.yukselis.protocol.ui.components.EchoLine
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.foundation.layout.Column
@@ -74,17 +71,13 @@ fun TitleScreen(
             .verticalScroll(rememberScrollState())
             .padding(24.dp),
     ) {
-        Spacer(Modifier.height(32.dp))
-        // Logo: uygulama içi dile göre (cihaz dili değil). Işıltılı logo siyahtan saydamlaştırıldı;
-        // başlık ekranı bu yüzden her temada koyu (App.kt, DECISIONS #150).
-        Image(
-            painter = painterResource(if (lang == Lang.TR) R.drawable.logo_tr else R.drawable.logo_en),
-            contentDescription = stringResource(R.string.app_name),
-            contentScale = ContentScale.Fit,
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .widthIn(max = 360.dp)
-                .fillMaxWidth(),
+        Spacer(Modifier.height(56.dp))
+        // Logo: kesik köşeli yazı, sola yaslı; Sistem'in açılış satırı altında.
+        Text(
+            text = stringResource(R.string.app_name),
+            style = GameType.heading.copy(fontSize = 40.sp, lineHeight = 42.sp),
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.fillMaxWidth(),
         )
         Spacer(Modifier.height(10.dp))
         Text(

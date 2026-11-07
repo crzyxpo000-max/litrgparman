@@ -1,9 +1,5 @@
 package com.yukselis.protocol.ui
 
-import android.app.Activity
-import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.platform.LocalView
-import androidx.core.view.WindowCompat
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -117,25 +113,11 @@ fun App(viewModel: GameViewModel) {
             LocalAppDensity provides scaled,
             LocalTips provides tips,
         ) {
-        val scene = ui.scene
-        val status = ui.status
-        val inGame = ui.inGame && scene != null && status != null
-        // Başlık ekranı her temada koyudur (DECISIONS #150): ışıltılı logo yalnız siyah zeminde doğru görünür.
-        // Seçilen tema oyun ekranlarına uygulanır.
-        val screenDark = dark || !inGame
-        val view = LocalView.current
-        if (!view.isInEditMode) {
-            SideEffect {
-                val window = (view.context as? Activity)?.window ?: return@SideEffect
-                WindowCompat.getInsetsController(window, view).apply {
-                    isAppearanceLightStatusBars = !screenDark
-                    isAppearanceLightNavigationBars = !screenDark
-                }
-            }
-        }
-        YukselisTheme(dark = screenDark) {
+        YukselisTheme(dark = dark) {
             Surface(color = MaterialTheme.colorScheme.background, modifier = Modifier.fillMaxSize()) {
-                if (inGame && scene != null && status != null) {
+                val scene = ui.scene
+                val status = ui.status
+                if (ui.inGame && scene != null && status != null) {
                     GameScaffold(ui, scene, status, viewModel)
                 } else {
                     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
