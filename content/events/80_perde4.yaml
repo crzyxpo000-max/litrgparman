@@ -3523,6 +3523,7 @@ olaylar:
   - id: "p4_son_gece_ates"
     perde: [4]
     gun: { min: 345, max: 357 }
+    kosul: { bayrak_yok: "p3_son_gece_yakinlar" }   # QA P1-14: Perde 3 son gecesini yakınlarla geçirdiysen ikinci ateş başı vedası gelmez
     agirlik: 2
     etiketler: ["nefes", "yoldas", "veda"]
     gerilim: 1
