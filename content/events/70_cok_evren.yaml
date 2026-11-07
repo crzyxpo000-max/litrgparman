@@ -170,7 +170,7 @@ olaylar:
             satirlar:
               - { tr: "Ilunnar · durum: hasat edildi.", en: "Ilunnar · status: harvested." }
               - { tr: "Tavvar Kervanı · durum: bağlı Katman.", en: "Tavvari Caravan · status: bonded Layer." }
-              - { tr: "Yedi Taht · durum: erişim davetle.", en: "Sevenfold Court · status: access by invitation." }
+              - { tr: "{yer:yedi_taht} · durum: erişim davetle.", en: "Sevenfold Court · status: access by invitation." }
         sezgiler:
           - kosul: { stat: { int: 140 } }
             metin: { tr: "Su kapısının yüzeyi tek yönlü değil; kırışıkların yarısı içeri, yarısı dışarı akıyor. Öbür taraftan biri geliyor.", en: "The water door's surface isn't one-way. Half the ripples flow in, half flow out. Somebody's coming from the other side." }
@@ -214,7 +214,7 @@ olaylar:
           - kosul: { stat: { per: 130 } }
             metin: { tr: "Çocuğun seviyesi yok; sıfır değil, düpedüz yok. Sistem başının üstünde hiçbir şey göstermiyor, sanki orada kimse durmuyormuş gibi.", en: "The kid has no level. Not zero. None. The System shows nothing over its head, like nobody's standing there at all." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "sistemi yok; toplanıp götürülmüş. bu çocuk hasattan geriye kalan şey. seni de gördü: ışıldıyorsun.", en: "no System. it's been collected. this kid is what's left after a harvest. and it saw you. you're glowing." }
+            metin: { tr: "sistemi yok; toplanıp götürülmüş. bu çocuk hasattan geriye kalan şey. seni de gördü: ışıldıyorsun.", en: "no system. it's been collected. this kid is what's left after a harvest. and it saw you. you're glowing." }
         secenekler:
           - id: "koru"
             etiket: { tr: "Çocukla silahların arasına geç", en: "Step between the kid and the guns" }
@@ -253,7 +253,7 @@ olaylar:
               - bayrak: "tilu_vuruldu"
               - ahlak: { merhamet: -8, insanlik: -4 }
               - itibar: { lonca: 3, siginak: -5 }
-            kronik: { tr: "Kule'nin ellinci katında bir çocuğun vurulmasını seyrettin. O gün Batık Takımada'nın çanları yas için çaldı.", en: "On the Spire's fiftieth floor, you watched a child get shot. The bells of the Drowned Reach rang for mourning that day." }
+            kronik: { tr: "Kule'nin ellinci katında bir çocuğun vurulmasını seyrettin. O gün {yer:batik_takimada|in} çanları yas için çaldı.", en: "On the Spire's fiftieth floor, you watched a child get shot. The bells of {yer:batik_takimada} rang for mourning that day." }
             sonraki: "gecit_vuruldu"
 
       - id: "gecit_korundu"
@@ -336,7 +336,7 @@ olaylar:
         paragraflar:
           - { tr: "Akşama doğru {yer:kule_dibi} pazar yerinden çok mahkeme salonunu andırıyor. Lonca'nın, Sığınak'ın, Sessiz Ağ'ın ve Yükselenler'in sözcüleri merdivenlerin dibinde bağrışıp duruyor: geçit kimin, kim geçecek, kim geçemeyecek?", en: "By evening, {yer:kule_dibi} looks less like a market and more like a courtroom. Spokespeople from the Guild, the Haven, the Quiet Network and the Ascended are shouting at each other at the foot of the stairs: whose gate is it, who goes through, who doesn't." }
           - { tr: "Derken biri seni görüyor, bağrışmalar kesiliyor. Kimse ağzını açmıyor ama herkes biliyor: bu meydanda geçitten geçip başka bir dünyanın havasını soluyan, üstelik yorgunluk nedir bilmiyormuş gibi görünen tek kişi sensin.", en: "Then somebody spots you, and the shouting stops. Nobody says it, but everybody knows: you're the only person in this plaza who went through that gate, breathed another world's air and doesn't look the least bit tired." }
-          - metin: { tr: "Kasaba Çekirdeği sana bağlı. Hiçbiri yüksek sesle söylemese de kararda son söz zaten sende.", en: "The Town Core is bound to you. Nobody says it out loud, but the last word on this was always going to be yours." }
+          - metin: { tr: "{yer:kasaba_cekirdegi} sana bağlı. Hiçbiri yüksek sesle söylemese de kararda son söz zaten sende.", en: "The Town Core is bound to you. Nobody says it out loud, but the last word on this was always going to be yours." }
             kosul: { bayrak: "cekirdek_oyuncu" }
           - metin: { tr: "Kalabalığın arasında siyah bir ceket kıpırdıyor. {npc:aras_kurt} sana değil, geçide bakıyor; ondan hiç görmediğin bir şey.", en: "A black jacket shifts in the crowd. {npc:aras_kurt} is looking at the gate, not at you. That's new for him." }
             kosul: { npc_hayatta: "aras_kurt", bayrak_yok: "aras_cok_evren_yoldasi" }
@@ -501,7 +501,7 @@ olaylar:
       - id: "batik_ilk_yanki"
         yer: "batik_takimada"
         paragraflar:
-          - { tr: "{npc:yanki}: çünkü dinleyecek kimse kalmadı. sistem burada işini bitirip toparlandı, gitti. ama bir şeyi unuttu.", en: "{npc:yanki}: because there's nobody left to listen. the System finished its job here, packed up and left. but it forgot something." }
+          - { tr: "{npc:yanki}: çünkü dinleyecek kimse kalmadı. sistem burada işini bitirip toparlandı, gitti. ama bir şeyi unuttu.", en: "{npc:yanki}: because there's nobody left to listen. the system finished its job here, packed up and left. but it forgot something." }
           - { tr: "Bir süre yalnız dalgaların ve çanların sesi duyuluyor. Sonra çok daha alçak bir satır beliriyor.", en: "For a while there's only the sound of waves and bells. Then a much quieter line." }
           - { tr: "{npc:yanki}: neyi unuttuğunu bilmiyorum. ama bilmek istemediğimi biliyorum. doğuda duman var; insana benzeyen şeyler.", en: "{npc:yanki}: i don't know what it forgot. but i know i don't want to know. there's smoke to the east. things that look like people." }
         secenekler:
@@ -826,7 +826,7 @@ olaylar:
           - tur: "yanki"
             baslik: { tr: "[k̷ayıt geri yüklendi: 204 varlık]", en: "[r̷ecord restored: 204 entities]" }
             satirlar:
-              - { tr: "kaynak: yetkisiz. sistem bunu fark edecek.", en: "source: unauthorized. the System will notice." }
+              - { tr: "kaynak: yetkisiz. sistem bunu fark edecek.", en: "source: unauthorized. the system will notice." }
         secenekler:
           - id: "tamam"
             etiket: { tr: "Bedeli ne olursa olsun, buna değdi", en: "Whatever it costs, it was worth it" }
@@ -1188,7 +1188,7 @@ olaylar:
               - bayrak: "batik_fener_dustu"
               - gorev: { cok_evren_batik: basarisiz }
               - ahlak: { merhamet: -10, insanlik: -3 }
-            kronik: { tr: "Son Fener'i Başakçı'ya bıraktın; Batık Takımada'nın son çanı arkandan sustu.", en: "You left the Last Light to the Gleaner, and behind you the last bell of the Drowned Reach went silent." }
+            kronik: { tr: "Son Fener'i Başakçı'ya bıraktın; {yer:batik_takimada|in} son çanı arkandan sustu.", en: "You left the Last Light to the Gleaner, and behind you the last bell of {yer:batik_takimada} went silent." }
             sonraki: "basakci_terk"
 
       - id: "basakci_yakalandi"
@@ -1277,7 +1277,7 @@ olaylar:
               - ahlak: { merhamet: 4, insanlik: 6 }
               - degisken: { kadim_tehdit: -3 }
               - xp_seviye: 100
-            kronik: { tr: "Son Başakçı'yı devirip topladığı iki yüz yıllık hasadı denize saldın. Batık Takımada'da ilk kez bir çan kendi isteğiyle çaldı.", en: "You brought down the Last Gleaner and let two hundred years of harvest go into the sea. For the first time, a bell in the Drowned Reach rang because it wanted to." }
+            kronik: { tr: "Son Başakçı'yı devirip topladığı iki yüz yıllık hasadı denize saldın. {yer:batik_takimada|de} ilk kez bir çan kendi isteğiyle çaldı.", en: "You brought down the Last Gleaner and let two hundred years of harvest go into the sea. For the first time, a bell in {yer:batik_takimada} rang because it wanted to." }
             sonraki: "basakci_sabah"
           - id: "yut"
             etiket: { tr: "Hepsini içine çek", en: "Pull every last one into yourself" }
@@ -1375,7 +1375,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 3 }
               - tohum: { olay: "batik_kesh_yemini", gecikme: { min: 5, max: 12 } }
-            kronik: { tr: "Batık Takımada'ya onların selamıyla veda ettin.", en: "You said goodbye to the Drowned Reach with their own greeting." }
+            kronik: { tr: "{yer:batik_takimada|e} onların selamıyla veda ettin.", en: "You said goodbye to {yer:batik_takimada} with their own greeting." }
             sonraki: "@akis"
           - id: "dunya"
             etiket: { tr: "Kendi dünyanı düşün; Gün 365 yaklaşıyor", en: "Think about your own world. About Day 365" }
@@ -1564,7 +1564,7 @@ olaylar:
         yer: "batik_takimada"
         paragraflar:
           - { tr: "Doğudaki sal köyünden biri sana el sallıyor, ardından bir başkası. Koca bir dünyadan geriye kalanlar sana el sallarken sen ne yapacağını bilemeden elini kaldırıyorsun.", en: "Somebody in the raft village out east waves at you. Then somebody else. The leftovers of a whole world are waving at you, and you lift your hand without really knowing what else to do." }
-          - metin: { tr: "Takımadaya ilk gelişin bu ve burada ilk gördüğün şey bir kavuşma oldu. Bu dünyada kavuşmanın ne kadar nadir olduğunu henüz bilmiyorsun.", en: "It's your first time in the Drowned Reach, and the first thing you saw here was a reunion. You don't know yet how rare that is in this world." }
+          - metin: { tr: "Takımadaya ilk gelişin bu ve burada ilk gördüğün şey bir kavuşma oldu. Bu dünyada kavuşmanın ne kadar nadir olduğunu henüz bilmiyorsun.", en: "It's your first time in {yer:batik_takimada}, and the first thing you saw here was a reunion. You don't know yet how rare that is in this world." }
             kosul: { bayrak_yok: "batik_varildi" }
         secenekler:
           - id: "bitir"
@@ -1604,7 +1604,7 @@ olaylar:
           - kosul: { stat: { per: 120 } }
             metin: { tr: "Derilerindeki pullar süs değil, defter: doğum, borç, evlilik, ölüm. Bazı pulların yeri boş; söküldükleri yerde ince, beyaz izler kalmış.", en: "The chits in their skin aren't decoration. They're a ledger: birth, debt, marriage, death. Some have gaps where chits used to be, thin white scars where they were pried out." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "sistem burada konuşuyor, ama başka biri adına. her satırın sonunda bir Kadim imzası var. birinin malı olmak neye benziyor, görmek istiyordun, değil mi?", en: "the System talks here. but on someone else's behalf. there's an Ancient signature at the end of every line. you wanted to see what being owned looks like, didn't you?" }
+            metin: { tr: "sistem burada konuşuyor, ama başka biri adına. her satırın sonunda bir Kadim imzası var. birinin malı olmak neye benziyor, görmek istiyordun, değil mi?", en: "the system talks here. but on someone else's behalf. there's an Ancient signature at the end of every line. you wanted to see what being owned looks like, didn't you?" }
         yoldas_tepkileri:
           - npc: "mert_kilic"
             kosul: { yoldas: "mert_kilic" }
@@ -1854,7 +1854,7 @@ olaylar:
       - id: "ondalik_1"
         yer: "pirinc_kervan"
         paragraflar:
-          - { tr: "Pirinç Kervan'da çalan çan değil terazi: binlerce kefe birden inip kalkıyor. Bugün ondalık günü ve Senet Kulesi'nin önündeki meydan aile aile dolmuş.", en: "It isn't the Brass Caravan's bells that ring, it's every scale aboard; thousands of pans rise and fall at once. Tithe Day. The square in front of the Bond Tower is packed, family by family." }
+          - { tr: "{yer:pirinc_kervan|de} çalan çan değil terazi: binlerce kefe birden inip kalkıyor. Bugün ondalık günü ve Senet Kulesi'nin önündeki meydan aile aile dolmuş.", en: "It isn't {yer:pirinc_kervan|pos} bells that ring, it's every scale aboard; thousands of pans rise and fall at once. Tithe Day. The square in front of the Bond Tower is packed, family by family." }
           - { tr: "Seçilme yaşına gelen gençler ön sırada dikiliyor; derilerindeki boş pul yuvaları parlatılmış. Ondalıkçı aralarında sessizce dolaşıp küçük terazisini her birinin önünde bir kez kaldırıyor.", en: "The kids who've come of age stand in the front row, the empty chit sockets in their skin polished bright. The Tithe-Taker walks between them in silence, raising its little scales once in front of each one." }
           - { tr: "Onuncu gencin önünde kefe aşağı iniyor. Seçilen, incecik bir kız; korkudan donmuş, gözlerini kalabalığın içindeki annesine dikmiş. Adı Ninu. Babası bir çığlık koparıyor ve kimse o çığlık için pul istemiyor.", en: "In front of the tenth kid, the pan sinks. A girl: skinny, terrified, eyes locked on her mother's face in the crowd. Ninu. Her father lets out a scream, and nobody charges him for it." }
           - metin: { tr: "Ondalıkçı seni, göğsündeki Kadim mührünü görüyor. Terazisini indirip bir memurun amirinin önünde eğildiği gibi hafifçe eğiliyor.", en: "The Tithe-Taker sees you. Sees the Ancient seal on your chest. It lowers its scales and dips toward you slightly, the way a clerk would to a supervisor." }
@@ -1923,7 +1923,7 @@ olaylar:
               - iliski: { yanki: { guven: 6, baglilik: 4 } }
               - itibar: { kadimler: -6 }
               - degisken: { kadim_tehdit: 2 }
-            kronik: { tr: "Pirinç Kervan'ın ondalık terazisini kafandaki sese bozdurdun; kefe o gün kimsenin önünde inmedi.", en: "You had the voice in your head break the Brass Caravan's tithe scale. That day the pan didn't sink for anyone." }
+            kronik: { tr: "{yer:pirinc_kervan|in} ondalık terazisini kafandaki sese bozdurdun; kefe o gün kimsenin önünde inmedi.", en: "You had the voice in your head break {yer:pirinc_kervan|pos} tithe scale. That day the pan didn't sink for anyone." }
             sonraki: "ondalik_bozuk"
 
       - id: "ondalik_yakalandi"
@@ -2050,7 +2050,7 @@ olaylar:
         yer: "pirinc_kervan"
         paragraflar:
           - { tr: "Gece Kesra seni Kervan'ın kıç güvertelerinde, makinelerin gürültüsünün sözleri yuttuğu yerde buluyor. Burada kimse pul ödemiyor, çünkü kimse bir şey duymuyor.", en: "That night, down on the Caravan's stern decks, where the roar of the engines swallows every word, Kesra finds you. Nobody pays chits down here, because nobody can hear." }
-          - { tr: "\"Onda birin nereye gittiğini biliyor musun?\" diye soruyor. \"Hizmetkâr falan olmuyorlar. Yedi Taht'ta seviyeleri sağılıyor, sonra bir Kadim'in derisinin altına yıldız diye gömülüyorlar. Kardeşim şu an birinin omzunda parlıyor.\"", en: "\"Do you know where the tithe goes?\" she asks. \"They don't become servants. In the Sevenfold Court they get milked for their levels and buried under some Ancient's skin as stars. My brother's shining on somebody's shoulder right now.\"" }
+          - { tr: "\"Onda birin nereye gittiğini biliyor musun?\" diye soruyor. \"Hizmetkâr falan olmuyorlar. {yer:yedi_taht|de} seviyeleri sağılıyor, sonra bir Kadim'in derisinin altına yıldız diye gömülüyorlar. Kardeşim şu an birinin omzunda parlıyor.\"", en: "\"Do you know where the tithe goes?\" she asks. \"They don't become servants. In {yer:yedi_taht} they get milked for their levels and buried under some Ancient's skin as stars. My brother's shining on somebody's shoulder right now.\"" }
           - { tr: "\"Senedin mühür makinesi Kervan'ın kalbinde,\" diyor. \"Biz kendimize Boş Kefe diyoruz, çünkü tartılacak hiçbir şeyimiz kalmadı. O makineyi kırmak istiyoruz. Seninle.\"", en: "\"The treaty's seal engine is in the Caravan's heart,\" she says. \"We call ourselves the Empty Pan, because we've got nothing left to weigh. We want to break it. With you.\"" }
           - metin: { tr: "Bakışı göğsündeki Kadim mührüne kayıp orada bir an takılıyor. \"Ya da sen onların adamısın,\" diyor. \"O zaman bunu anlattığıma pişman olacağım.\"", en: "Her eyes slide to the Ancient seal on your chest and stay there a second. \"Or you're one of theirs,\" she says. \"In which case I'm going to regret telling you this.\"" }
             kosul: { bayrak: "kervan_damgali" }
@@ -2062,7 +2062,7 @@ olaylar:
               - bayrak: "kervan_kefe_daveti"
               - ahlak: { duzen: 1 }
               - tohum: { olay: "kervan_bos_kefe", gecikme: { min: 2, max: 5 } }
-            kronik: { tr: "Pirinç Kervan'ın isyancılarına düşüneceğini söyledin; sen düşünürken onlar bekledi.", en: "You told the Brass Caravan's rebels you'd think about it, and they waited while you did." }
+            kronik: { tr: "{yer:pirinc_kervan|in} isyancılarına düşüneceğini söyledin; sen düşünürken onlar bekledi.", en: "You told {yer:pirinc_kervan|pos} rebels you'd think about it, and they waited while you did." }
             sonraki: "@akis"
           - id: "evet"
             etiket: { tr: "Ne zaman başlıyoruz?", en: "When do we start?" }
@@ -2071,7 +2071,7 @@ olaylar:
               - bayrak: "kervan_kefe_daveti"
               - ahlak: { duzen: -4, merhamet: 2 }
               - tohum: { olay: "kervan_bos_kefe", gecikme: { min: 1, max: 3 } }
-            kronik: { tr: "Pirinç Kervan'ın isyancılarına daha planlarını duymadan evet dedin.", en: "You said yes to the Brass Caravan's rebels before you'd even heard the plan." }
+            kronik: { tr: "{yer:pirinc_kervan|in} isyancılarına daha planlarını duymadan evet dedin.", en: "You said yes to {yer:pirinc_kervan|pos} rebels before you'd even heard the plan." }
             sonraki: "@akis"
           - id: "sayman"
             etiket: { tr: "Önce Sayman'ı dinlemek istiyorum", en: "I want to hear the Reckoner out first" }
@@ -2098,7 +2098,7 @@ olaylar:
       - id: "sayman_1"
         yer: "pirinc_kervan"
         paragraflar:
-          - { tr: "Senet Kulesi'nin tepesine çağrılıyorsun; davetiye tek bir pul, üstünde tek bir hece. Pirinç Kervan'a gelen er geç çağrılır, çünkü Sayman herkesi tartar.", en: "You get summoned to the top of the Bond Tower. The summons is a single chit with one syllable on it. Come to the Brass Caravan, and sooner or later you get called up; the Reckoner weighs everyone." }
+          - { tr: "Senet Kulesi'nin tepesine çağrılıyorsun; davetiye tek bir pul, üstünde tek bir hece. {yer:pirinc_kervan|e} gelen er geç çağrılır, çünkü Sayman herkesi tartar.", en: "You get summoned to the top of the Bond Tower. The summons is a single chit with one syllable on it. Come to {yer:pirinc_kervan}, and sooner or later you get called up; the Reckoner weighs everyone." }
           - { tr: "Sayman çok yaşlı bir Tavvar. Derisinde boş bir yer kalmamış; tepeden tırnağa pulla kaplı bu bedene Kervan'ın dört yüz yıllık bütün defteri yazılı.", en: "The Reckoner is a very old Tavvari. There isn't a bare inch on him. He's chits from crown to heel, the Caravan's entire four-hundred-year ledger written on his body." }
           - { tr: "Konuşmadan önce kolundan bir pul söküp masaya bırakıyor. Kan akmıyor; geride ince, beyaz bir izden başka bir şey kalmamış. \"Her sözün bir bedeli vardır,\" diyor. \"Seninle konuşmak için kendimden ödüyorum. Bunu bil.\"", en: "Before he speaks, he pries a chit off his own arm and sets it on the table. No blood, just a thin white scar. \"Every word has a price,\" he says. \"To talk to you, I pay out of myself. Know that.\"" }
         sezgiler:
@@ -2145,7 +2145,7 @@ olaylar:
           - { tr: "\"Dört yüz on iki yıl önce Kadimler bizi hasat etmeye geldi,\" diyor Sayman; her cümlesinde masaya bir pul daha düşüyor. \"Bizim de üç yüz altmış beş günümüz vardı. Savaşabilirdik. Ölürdük.\"", en: "\"Four hundred and twelve years ago, the Ancients came to harvest us,\" the Reckoner says, and a chit hits the table with every sentence. \"We had three hundred and sixty-five days too. We could have fought. We'd have died.\"" }
           - { tr: "\"Büyükannem onlara bir teklifte bulundu: bizi hasat etmek yerine sahiplensinler. Dünyamızı bir gemiye çevirdik, her kuşağın onda birini verdik; senedi de kendi sırtına yazdırdı. Kalan dokuzda biz yaşadık. Bin yıl sürerse bin yıl yaşarız.\"", en: "\"My grandmother made them an offer: own us instead of harvesting us. We turned our world into a ship, we gave a tenth of every generation, and she had the treaty written on her own back. On the other nine, we live. If it lasts a thousand years, we live a thousand years.\"" }
           - { tr: "\"Senin dünyana da bir elçi geldi,\" diyor. \"Bir senet getirecek; herkese getirirler. Ben sana o senedin neye benzediğini gösteriyorum: bize.\"", en: "\"An envoy has come to your world too,\" he says. \"He'll bring a treaty. They bring one to everyone. I'm showing you what that treaty looks like. It looks like us.\"" }
-          - metin: { tr: "\"Elçinizin adını biliyorum,\" diye ekliyor. \"{npc:thessar}. Raporları Yedi Taht'ta okunuyor ve senin adın da o raporlarda geçiyor.\"", en: "\"I know your envoy's name,\" he adds. \"{npc:thessar}. His reports are read in the Sevenfold Court. Your name is in those reports.\"" }
+          - metin: { tr: "\"Elçinizin adını biliyorum,\" diye ekliyor. \"{npc:thessar}. Raporları {yer:yedi_taht|de} okunuyor ve senin adın da o raporlarda geçiyor.\"", en: "\"I know your envoy's name,\" he adds. \"{npc:thessar}. His reports are read in {yer:yedi_taht}. Your name is in those reports.\"" }
             kosul: { bayrak: "thessar_indi" }
         yoldas_tepkileri:
           - npc: "mert_kilic"
@@ -2179,7 +2179,7 @@ olaylar:
       - id: "sayman_teklif"
         yer: "pirinc_kervan"
         paragraflar:
-          - { tr: "Sayman masaya iki şey koyuyor. Biri Kadim yazısıyla yazılmış, ışıktan bir şeritle bağlanmış mühürlü bir mektup. \"Yedi Taht'a giriş,\" diyor. \"Oraya davetsiz kimse giremez. Ben seni davet ettirebilirim.\"", en: "The Reckoner lays two things on the table. One is a sealed letter in Ancient script, tied with a ribbon of light. \"Entry to the Sevenfold Court,\" he says. \"No one gets in uninvited. I can get you invited.\"" }
+          - { tr: "Sayman masaya iki şey koyuyor. Biri Kadim yazısıyla yazılmış, ışıktan bir şeritle bağlanmış mühürlü bir mektup. \"{yer:yedi_taht|e} giriş,\" diyor. \"Oraya davetsiz kimse giremez. Ben seni davet ettirebilirim.\"", en: "The Reckoner lays two things on the table. One is a sealed letter in Ancient script, tied with a ribbon of light. \"Entry to {yer:yedi_taht},\" he says. \"No one gets in uninvited. I can get you invited.\"" }
           - { tr: "Öteki pirinç bir levha: bir ticaret yolu. \"Senin şehrinle Kervan arasında,\" diyor. \"Tahıl, ilaç, pirinç, mühendis. Kadimler onaylar; bizim üzerimizden yapılan her ticareti onaylarlar.\"", en: "The other is a brass plate: a trade route. \"Between your city and the Caravan,\" he says. \"Grain, medicine, brass, engineers. The Ancients will approve it. They approve any trade that runs through us.\"" }
           - { tr: "\"Karşılığında,\" diyor ve bu kez iki pul birden söküyor, \"Boş Kefe'yi durdur. Kesra'nın çocuklarını. Mührü kırarlarsa koruma biter, Kadimler de bizi bir gecede toplar. Özgürlük bizi öldürür.\"", en: "\"In exchange,\" he says, and this time he pries off two chits at once, \"stop the Empty Pan. Kesra's children. If they break the seal, the protection ends, and the Ancients collect us in a single night. Freedom will kill us.\"" }
         sezgiler:
@@ -2272,7 +2272,7 @@ olaylar:
       - id: "kefe_1"
         yer: "pirinc_kervan"
         paragraflar:
-          - { tr: "Kesra haberine tek bir pul bile eklememiş; yalnızca bir yer ve bir saat bildirmiş. Pirinç Kervan'ın kıç güvertelerine, makinelerin sözleri yuttuğu yere iniyorsun.", en: "When Kesra's message reaches you, she hasn't sent a single chit with it, just a place and a time. You go down to the Brass Caravan's stern decks, where the engines swallow every word." }
+          - { tr: "Kesra haberine tek bir pul bile eklememiş; yalnızca bir yer ve bir saat bildirmiş. {yer:pirinc_kervan|in} kıç güvertelerine, makinelerin sözleri yuttuğu yere iniyorsun.", en: "When Kesra's message reaches you, she hasn't sent a single chit with it, just a place and a time. You go down to {yer:pirinc_kervan|pos} stern decks, where the engines swallow every word." }
           - { tr: "Kırk Tavvar seni bekliyor, hepsinin derisinde sökülmüş pulların beyaz izleri var. Kesra ortalarında durmuş, elinde Kervan'ın kalbini gösteren bir çizim: dişliler, zincirler ve ortada, camın altında, bir Tavvar'ın sırtından yüzülmüş deri. Senet.", en: "Forty Tavvari are waiting, all of them marked with the white scars of pried-out chits. Kesra stands in the middle with a drawing of the Caravan's heart: gears, chains, and in the center, under glass, a hide taken off a Tavvari back. The treaty." }
           - { tr: "\"Mührü kırarsak senet biter,\" diyor. \"Kadimler gelir. Biz de Kervan'ı Karanlık Rota'ya, hiçbir Katman'ın uzanmadığı yere sürüp kaçacağız. Belki ölürüz. Ama onda birimizi vermeyiz.\"", en: "\"If we break the seal, the treaty's void,\" she says. \"The Ancients will come. We'll drive the Caravan onto the Dark Route, out where there are no Layers, and run. Maybe we die. But we don't hand over our tenth.\"" }
           - metin: { tr: "Kırk değil, yüzlerce kişi. Ondalıkçı'nın düştüğü günden beri güverteler dolup taşmış. Kalabalığın en önünde perdeli değil, altı parmaklı bir el sana bir pul uzatıyor: Ninu.", en: "Not forty. Hundreds. The decks have been filling up since the day the Tithe-Taker fell, and at the front of the crowd a six-fingered hand holds out a chit to you. Ninu." }
@@ -2301,7 +2301,7 @@ olaylar:
               - ahlak: { duzen: -6, merhamet: 2 }
               - itibar: { kadimler: -6 }
               - iliski: { yanki: { saygi: 3 } }
-            kronik: { tr: "Pirinç Kervan'ın isyancılarını geminin kalbine kendin götürdün.", en: "You led the Brass Caravan's rebels down into the heart of the ship yourself." }
+            kronik: { tr: "{yer:pirinc_kervan|in} isyancılarını geminin kalbine kendin götürdün.", en: "You led {yer:pirinc_kervan|pos} rebels down into the heart of the ship yourself." }
             sonraki: "kefe_kalp"
           - id: "oylama"
             tur: "gosteris"
@@ -2311,7 +2311,7 @@ olaylar:
               - aciga_vur: true
               - dikkat: 4
               - ahlak: { duzen: 2, insanlik: 4 }
-            kronik: { tr: "Pirinç Kervan halkına, dört yüz yılda ilk kez, hangi bedeli ödemek istediklerini sordun.", en: "For the first time in four hundred years, you asked the whole Brass Caravan what price they actually wanted to pay." }
+            kronik: { tr: "{yer:pirinc_kervan} halkına, dört yüz yılda ilk kez, hangi bedeli ödemek istediklerini sordun.", en: "For the first time in four hundred years, you asked the whole Brass Caravan what price they actually wanted to pay." }
             sonraki: "kefe_oylama"
           - id: "ihanet"
             etiket: { tr: "Sayman'a ve Kadimler'e haber ver", en: "Tip off the Reckoner and the Ancients" }
@@ -2320,14 +2320,14 @@ olaylar:
               - ahlak: { duzen: 8, merhamet: -6, insanlik: -3 }
               - itibar: { kadimler: 12 }
               - degisken: { kadim_tehdit: 4 }
-            kronik: { tr: "Boş Kefe'yi Kadimler'e ispiyonladın ve Pirinç Kervan'ın senedini kendi ellerinle korudun.", en: "You sold the Empty Pan out to the Ancients and kept the Brass Caravan's treaty intact with your own hands." }
+            kronik: { tr: "Boş Kefe'yi Kadimler'e ispiyonladın ve {yer:pirinc_kervan|in} senedini kendi ellerinle korudun.", en: "You sold the Empty Pan out to the Ancients and kept {yer:pirinc_kervan|pos} treaty intact with your own hands." }
             sonraki: "kefe_ihanet"
           - id: "ayril"
             etiket: { tr: "Bu sizin savaşınız; ben yokum", en: "This is your fight. Count me out" }
             etkiler:
               - bayrak: "kervan_isyan_yalniz"
               - ahlak: { duzen: 2, merhamet: -3 }
-            kronik: { tr: "Pirinç Kervan'ın isyancılarını kendi savaşlarıyla yalnız bıraktın.", en: "You left the Brass Caravan's rebels alone with their own war." }
+            kronik: { tr: "{yer:pirinc_kervan|in} isyancılarını kendi savaşlarıyla yalnız bıraktın.", en: "You left {yer:pirinc_kervan|pos} rebels alone with their own war." }
             sonraki: "kefe_ayril"
 
       - id: "kefe_oylama"
@@ -2363,7 +2363,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: -3 }
               - savas: { dusmanlar: ["muhurdar@oyuncu+6"], ortam: ["dar_gecit"], kazan: "kefe_zafer", kaybet: "kefe_yenilgi", kac: "kefe_kacis" }
-            kronik: { tr: "Dört yüz yıllık bir senedin bekçisiyle Pirinç Kervan'ın kalbinde dövüştün.", en: "You fought the guardian of a four-hundred-year-old treaty in the heart of the Brass Caravan." }
+            kronik: { tr: "Dört yüz yıllık bir senedin bekçisiyle {yer:pirinc_kervan|in} kalbinde dövüştün.", en: "You fought the guardian of a four-hundred-year-old treaty in the heart of {yer:pirinc_kervan}." }
           - id: "zincir"
             etiket: { tr: "Önce Kesra'nın gençleri zincirleri kessin", en: "Have Kesra's kids cut the chains first" }
             etkiler:
@@ -2395,7 +2395,7 @@ olaylar:
               - itibar: { kadimler: -15 }
               - degisken: { kadim_tehdit: -6 }
               - xp_seviye: 120
-            kronik: { tr: "Pirinç Kervan'ın dört yüz yıllık senedini kendi ellerinle yaktın. Sahipsiz kalan Tavvarlar Karanlık Rota'ya kendi başlarına açıldı.", en: "You burned the Brass Caravan's four-hundred-year-old treaty with your own hands. The Tavvari lost their owners and set out onto the Dark Route on their own." }
+            kronik: { tr: "{yer:pirinc_kervan|in} dört yüz yıllık senedini kendi ellerinle yaktın. Sahipsiz kalan Tavvarlar Karanlık Rota'ya kendi başlarına açıldı.", en: "You burned {yer:pirinc_kervan|pos} four-hundred-year-old treaty with your own hands. The Tavvari lost their owners and set out onto the Dark Route on their own." }
             sonraki: "kefe_ozgur"
           - id: "yeniden"
             etiket: { tr: "Senedi yeniden yaz; kendi adına", en: "Rewrite the treaty. In your own name" }
@@ -2409,7 +2409,7 @@ olaylar:
               - degisken: { kadim_tehdit: -3 }
               - ordu_kazan: 40
               - xp_seviye: 120
-            kronik: { tr: "Pirinç Kervan'ın senedini kırıp yerine kendi adını yazdın; Tavvarlar bir efendiden kurtulup ötekinin eline düştü.", en: "You broke the Brass Caravan's treaty and wrote your own name in its place. The Tavvari traded one master for another." }
+            kronik: { tr: "{yer:pirinc_kervan|in} senedini kırıp yerine kendi adını yazdın; Tavvarlar bir efendiden kurtulup ötekinin eline düştü.", en: "You broke {yer:pirinc_kervan|pos} treaty and wrote your own name in its place. The Tavvari traded one master for another." }
             sonraki: "kefe_sahip"
           - id: "parca"
             etiket: { tr: "Mührün kalbini sök; gücü senin olsun", en: "Rip out the seal's core. Its power is yours" }
@@ -2424,7 +2424,7 @@ olaylar:
               - itibar: { kadimler: -12 }
               - degisken: { kadim_tehdit: -5 }
               - xp_seviye: 150
-            kronik: { tr: "Pirinç Kervan'ı özgür bıraktın, ama mühür makinesinin kalbini kendi göğsünde taşıyıp götürdün.", en: "You set the Brass Caravan free, but you carried the seal engine's heart away in your own chest." }
+            kronik: { tr: "{yer:pirinc_kervan|i} özgür bıraktın, ama mühür makinesinin kalbini kendi göğsünde taşıyıp götürdün.", en: "You set {yer:pirinc_kervan} free, but you carried the seal engine's heart away in your own chest." }
             sonraki: "kefe_ozgur"
 
       - id: "kefe_ozgur"
@@ -2465,14 +2465,14 @@ olaylar:
             etiket: { tr: "Ondalık yok; yalnızca sadakat", en: "No tithe. Just loyalty" }
             etkiler:
               - ahlak: { merhamet: 4, duzen: 2 }
-            kronik: { tr: "Pirinç Kervan'ın sahibi olup ondalığı kaldırdın; Tavvarlar sana minnet mi duysun, senden mi korksun, bilemedi.", en: "You became the Brass Caravan's owner and abolished the tithe, and the Tavvari couldn't tell whether to be grateful or afraid." }
+            kronik: { tr: "{yer:pirinc_kervan|in} sahibi olup ondalığı kaldırdın; Tavvarlar sana minnet mi duysun, senden mi korksun, bilemedi.", en: "You became {yer:pirinc_kervan|pos} owner and abolished the tithe, and the Tavvari couldn't tell whether to be grateful or afraid." }
             sonraki: "@akis"
           - id: "ondalik"
             etiket: { tr: "Onda bir; bana, Kadimler'e değil", en: "A tenth. To me, not to the Ancients" }
             etkiler:
               - ahlak: { merhamet: -6, insanlik: -4, duzen: 4 }
               - ordu_kazan: 40
-            kronik: { tr: "Pirinç Kervan'ın ondalığını Kadimler'in elinden alıp kendi adına yazdın; onda bir artık senin ordunda yürüyordu.", en: "You took the Brass Caravan's tithe away from the Ancients and wrote it over to yourself. A tenth of them marched in your army now." }
+            kronik: { tr: "{yer:pirinc_kervan|in} ondalığını Kadimler'in elinden alıp kendi adına yazdın; onda bir artık senin ordunda yürüyordu.", en: "You took {yer:pirinc_kervan|pos} tithe away from the Ancients and wrote it over to yourself. A tenth of them marched in your army now." }
             sonraki: "@akis"
 
       - id: "kefe_ihanet"
@@ -2486,7 +2486,7 @@ olaylar:
             nadirlik: "epik"
             baslik: { tr: "[Unvan: Senedin Koruyucusu]", en: "[Title: Keeper of the Bond]" }
             satirlar:
-              - { tr: "Kadim Mülkiyet Dairesi hizmetinizi kaydetti. Yedi Taht'a davetiniz hazırlandı.", en: "The Ancient Office of Holdings has recorded your service. Your invitation to the Sevenfold Court has been prepared." }
+              - { tr: "Kadim Mülkiyet Dairesi hizmetinizi kaydetti. {yer:yedi_taht|e} davetiniz hazırlandı.", en: "The Ancient Office of Holdings has recorded your service. Your invitation to {yer:yedi_taht} has been prepared." }
         secenekler:
           - id: "izle"
             etiket: { tr: "Kesra'nın götürülüşünü izle", en: "Watch Kesra get taken" }
@@ -2497,7 +2497,7 @@ olaylar:
               - ahlak: { merhamet: -4, duzen: 3 }
               - xp_seviye: 80
               - tohum: { olay: "taht_kabul_salonu", gecikme: { min: 2, max: 5 } }
-            kronik: { tr: "Pirinç Kervan'ın isyancısı Kesra'yı Kadimler'e teslim ettin, karşılığında da Yedi Taht'a bir davet aldın.", en: "You handed the Brass Caravan's rebel Kesra to the Ancients and got an invitation to the Sevenfold Court for it." }
+            kronik: { tr: "{yer:pirinc_kervan|in} isyancısı Kesra'yı Kadimler'e teslim ettin, karşılığında da {yer:yedi_taht|e} bir davet aldın.", en: "You handed {yer:pirinc_kervan|pos} rebel Kesra to the Ancients and got an invitation to {yer:yedi_taht} for it." }
             sonraki: "@akis"
           - id: "kurtar"
             etiket: { tr: "Son anda Kesra'yı kefeden çek", en: "Pull Kesra off the pan at the last second" }
@@ -2522,7 +2522,7 @@ olaylar:
             etiket: { tr: "Sessizce uzaklaş", en: "Walk away without a word" }
             etkiler:
               - ahlak: { insanlik: -1 }
-            kronik: { tr: "Kurtardığın isyancının yüzüne bakamadan Pirinç Kervan'dan ayrıldın.", en: "You left the Brass Caravan unable to look the rebel you'd saved in the face." }
+            kronik: { tr: "Kurtardığın isyancının yüzüne bakamadan {yer:pirinc_kervan|den} ayrıldın.", en: "You left {yer:pirinc_kervan} unable to look the rebel you'd saved in the face." }
             sonraki: "@akis"
 
       - id: "kefe_yenilgi"
@@ -2539,7 +2539,7 @@ olaylar:
               - gorev: { cok_evren_kervan: basarisiz }
               - ahlak: { insanlik: 2, merhamet: 1 }
               - can: 60
-            kronik: { tr: "Pirinç Kervan'ın isyanı Mühürdar'ın önünde kırıldı; kırk isyancıdan yalnız on biri sağ kaldı.", en: "The Brass Caravan's uprising broke against the Sealwarden. Eleven of forty rebels lived." }
+            kronik: { tr: "{yer:pirinc_kervan|in} isyanı Mühürdar'ın önünde kırıldı; kırk isyancıdan yalnız on biri sağ kaldı.", en: "The Brass Caravan's uprising broke against the Sealwarden. Eleven of forty rebels lived." }
             sonraki: "@akis"
 
       - id: "kefe_kacis"
@@ -2567,7 +2567,7 @@ olaylar:
             etiket: { tr: "Kapıdan geç", en: "Go through the door" }
             etkiler:
               - ahlak: { insanlik: -1, duzen: 1 }
-            kronik: { tr: "Pirinç Kervan'ın kaderini kendi halkına bırakıp o gece kapıdan geçtin.", en: "You left the Brass Caravan's fate to its own people and walked out through the door that night." }
+            kronik: { tr: "{yer:pirinc_kervan|in} kaderini kendi halkına bırakıp o gece kapıdan geçtin.", en: "You left {yer:pirinc_kervan|pos} fate to its own people and walked out through the door that night." }
             sonraki: "@akis"
 
   # ================================================================== YEDİ TAHT (Kadim sarayı · Yükseliş'in aynası)
@@ -2841,7 +2841,7 @@ olaylar:
       - id: "koltuk_1"
         yer: "yedi_taht"
         paragraflar:
-          - { tr: "{npc:ulvenne} seni Yedi Taht'ın kalbine, taht salonuna götürüyor. Yarım ay biçiminde dizilmiş yedi koltuğun altısında birer Kadim oturuyor; her biri bir Hane'nin Sesi. Yedincisi boş.", en: "{npc:ulvenne} leads you into the heart of the Sevenfold Court: the throne room. Seven seats stand in a half-moon. On six sit Ancients, each one the Voice of a House. The seventh is empty." }
+          - { tr: "{npc:ulvenne} seni {yer:yedi_taht|in} kalbine, taht salonuna götürüyor. Yarım ay biçiminde dizilmiş yedi koltuğun altısında birer Kadim oturuyor; her biri bir Hane'nin Sesi. Yedincisi boş.", en: "{npc:ulvenne} leads you into the heart of {yer:yedi_taht}: the throne room. Seven seats stand in a half-moon. On six sit Ancients, each one the Voice of a House. The seventh is empty." }
           - { tr: "Boş koltuk ötekilere benzemiyor. Taştan değil, üst üste örülmüş binlerce ince, saydam pencereden yapılmış ve içinde bir şey bekliyor: bir dünya büyüklüğünde bir boşluk.", en: "The empty seat isn't like the others. It isn't stone. It's woven from thousands of thin, clear windows layered one over another, and something inside it is waiting: an emptiness the size of a world." }
           - { tr: "\"Yedinci koltuk bin yıldır boş,\" diyor {npc:ulvenne}. \"Bir dünyayı tek başına hasat edene verilir. Gün 365'te dünyanın hasadı kimin adına yazılırsa koltuk onun olacak. Bunun bir Kadim olması gerekmiyor.\"", en: "\"The seventh seat has been empty for a thousand years,\" {npc:ulvenne} says. \"It goes to whoever harvests a world single-handed. On Day 365, whoever your world's harvest is credited to will have it. That does not have to be an Ancient.\"" }
           - { tr: "Altı Ses aynı anda sana dönüyor. Odanın öbür ucunda {npc:ossiran} gülümsüyor; derisinde dördüncü dünyaya ayırdığı karanlık nabız gibi atıyor.", en: "All six Voices look at you at once. Across the room {npc:ossiran} is smiling, and the dark he's saved in his skin for a fourth world is throbbing like a pulse." }
@@ -2874,7 +2874,7 @@ olaylar:
               - bolge: "yedi_taht"
               - ahlak: { insanlik: -6 }
               - dikkat: 5
-            kronik: { tr: "Yedi Taht'ın boş koltuğuna oturdun ve bir dünyanın ağırlığını üstünde hissettin.", en: "You sat in the empty seat of the Sevenfold Court and felt a world's weight settle on you." }
+            kronik: { tr: "{yer:yedi_taht|in} boş koltuğuna oturdun ve bir dünyanın ağırlığını üstünde hissettin.", en: "You sat in the empty seat of {yer:yedi_taht} and felt a world's weight settle on you." }
             sonraki: "koltuk_otur"
           - id: "red"
             etiket: { tr: "Koltuğa sırtını dön", en: "Turn your back on the seat" }
@@ -2895,7 +2895,7 @@ olaylar:
               - ahlak: { duzen: 6, insanlik: -2 }
               - itibar: { kadimler: 10 }
               - degisken: { kadim_tehdit: 4 }
-            kronik: { tr: "Yedi Taht'ın siyasetine girdin ve dünyanı korumak için Kadimler'le pazarlık masasına oturdun.", en: "You stepped into the politics of the Sevenfold Court and sat down at the Ancients' bargaining table to protect your world." }
+            kronik: { tr: "{yer:yedi_taht|in} siyasetine girdin ve dünyanı korumak için Kadimler'le pazarlık masasına oturdun.", en: "You stepped into the politics of {yer:yedi_taht} and sat down at the Ancients' bargaining table to protect your world." }
             sonraki: "koltuk_pazarlik"
           - id: "kir"
             tur: "gosteris"
@@ -2910,7 +2910,7 @@ olaylar:
               - ahlak: { duzen: -8, insanlik: 4 }
               - itibar: { kadimler: -10 }
               - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 0, max: 1 } }
-            kronik: { tr: "Yedi Taht'ın bin yıllık boş koltuğunu kırıp parçasını talibinin yüzüne fırlattın.", en: "You broke the Sevenfold Court's thousand-year-old empty seat and threw a piece of it in its claimant's face." }
+            kronik: { tr: "{yer:yedi_taht|in} bin yıllık boş koltuğunu kırıp parçasını talibinin yüzüne fırlattın.", en: "You broke {yer:yedi_taht|pos} thousand-year-old empty seat and threw a piece of it in its claimant's face." }
             sonraki: "koltuk_kirildi"
 
       - id: "koltuk_otur"
@@ -2939,7 +2939,7 @@ olaylar:
               - itibar: { yukselenler: 8, kadimler: 4 }
               - degisken: { kadim_tehdit: 3 }
               - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 1, max: 2 } }
-            kronik: { tr: "Yedinci koltukta, hayatta kalan bütün insanlığın sana eğildiğini hissedecek kadar uzun oturdun. Yedi Taht da seni Dünya'nın hasadına ikinci talip olarak yazdı.", en: "You sat in the seventh seat long enough to feel every human left alive lean toward you. The Sevenfold Court wrote you down as the second claimant to Earth's harvest." }
+            kronik: { tr: "Yedinci koltukta, hayatta kalan bütün insanlığın sana eğildiğini hissedecek kadar uzun oturdun. {yer:yedi_taht} da seni Dünya'nın hasadına ikinci talip olarak yazdı.", en: "You sat in the seventh seat long enough to feel every human left alive lean toward you. The Sevenfold Court wrote you down as the second claimant to Earth's harvest." }
             sonraki: "koltuk_kalkis"
           - id: "kalk"
             etiket: { tr: "Kalk. Hemen", en: "Get up. Now" }
@@ -2962,13 +2962,13 @@ olaylar:
             etkiler:
               - ahlak: { duzen: -3 }
               - dikkat: 3
-            kronik: { tr: "Yedi Taht'ın varisine meydan okudun.", en: "You challenged the heir of the Sevenfold Court." }
+            kronik: { tr: "{yer:yedi_taht|in} varisine meydan okudun.", en: "You challenged the heir of {yer:yedi_taht}." }
             sonraki: "koltuk_son"
           - id: "sus"
             etiket: { tr: "Bir şey söyleme; yanından geç", en: "Say nothing. Walk past him" }
             etkiler:
               - ahlak: { duzen: 2 }
-            kronik: { tr: "Yedi Taht'ın varisinin yanından tek kelime etmeden geçtin.", en: "You walked past the heir of the Sevenfold Court without a word." }
+            kronik: { tr: "{yer:yedi_taht|in} varisinin yanından tek kelime etmeden geçtin.", en: "You walked past the heir of {yer:yedi_taht} without a word." }
             sonraki: "koltuk_son"
 
       - id: "koltuk_red"
@@ -2997,7 +2997,7 @@ olaylar:
             etiket: { tr: "Yarın", en: "Tomorrow" }
             etkiler:
               - ahlak: { duzen: -2 }
-            kronik: { tr: "Yedi Taht'ın varisinin düello davetini tek kelimeyle kabul ettin.", en: "You accepted the Sevenfold Court heir's challenge with one word." }
+            kronik: { tr: "{yer:yedi_taht|in} varisinin düello davetini tek kelimeyle kabul ettin.", en: "You accepted {yer:yedi_taht} heir's challenge with one word." }
             sonraki: "koltuk_son"
 
       - id: "koltuk_pazarlik"
@@ -3005,7 +3005,7 @@ olaylar:
         paragraflar:
           - { tr: "Altı Ses birbirine bakıyor. Derken Beşinci Taht'ın Sesi, çocuk boyunda ve bin yaşında bir Kadim, söz alıyor: \"Hasat pazarlık etmez. Ama talip eder.\"", en: "The six Voices look at each other. Then the Voice of the Fifth Throne, an Ancient the size of a child and a thousand years old, speaks: \"A crop does not bargain. But a claimant does.\"" }
           - { tr: "{npc:ulvenne} teklifi açıklıyor: {npc:ossiran|i} yenersen Dünya'nın hasadı bu döngüde 'talipsiz' kalacak. Kadimler yine gelecek, ama bir Kadim'in koltuğu için değil, bir anlaşma için.", en: "{npc:ulvenne} spells out the offer: beat {npc:ossiran}, and Earth's harvest stays 'unclaimed' this cycle. The Ancients will still come. But not for an Ancient's throne. For a treaty." }
-          - { tr: "Bir anlaşma; Pirinç Kervan'ın derisine yazılı olanlardan. Bunu kavradığını görüyorlar ve kimse ağzını açmıyor.", en: "A treaty. The kind written on the Brass Caravan's hide. They can see you realize it, and nobody says a word." }
+          - { tr: "Bir anlaşma; {yer:pirinc_kervan|in} derisine yazılı olanlardan. Bunu kavradığını görüyorlar ve kimse ağzını açmıyor.", en: "A treaty. The kind written on {yer:pirinc_kervan|pos} hide. They can see you realize it, and nobody says a word." }
           - metin: { tr: "\"Elçimiz {npc:thessar} dünyanla masaya oturacak,\" diyor {npc:ulvenne}. \"Bu salon, onun getireceği senedin altında senin imzanı görmek istiyor.\"", en: "\"Our envoy {npc:thessar} will sit down at the table with your world,\" {npc:ulvenne} says. \"This hall would like to see the treaty he brings carry your signature.\"" }
             kosul: { bayrak: "thessar_indi", bayrak_yok: "ihanet_thessar" }
         secenekler:
@@ -3016,7 +3016,7 @@ olaylar:
               - itibar: { kadimler: 6 }
               - degisken: { kadim_tehdit: 3 }
               - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 1, max: 3 } }
-            kronik: { tr: "Yedi Taht'la anlaştın: sen varisi yenecektin, onlar da karşılığında dünyanın hasadını bir senede çevirecekti.", en: "You cut a deal with the Sevenfold Court: you'd beat the heir, and in exchange they'd turn your world's harvest into a treaty." }
+            kronik: { tr: "{yer:yedi_taht|le} anlaştın: sen varisi yenecektin, onlar da karşılığında dünyanın hasadını bir senede çevirecekti.", en: "You cut a deal with {yer:yedi_taht}: you'd beat the heir, and in exchange they'd turn your world's harvest into a treaty." }
             sonraki: "koltuk_son"
           - id: "elci"
             etiket: { tr: "Elçinize söyleyin: imzalayan ben olacağım", en: "Tell your envoy I'll be the one who signs" }
@@ -3027,7 +3027,7 @@ olaylar:
               - iliski: { thessar: { saygi: 6, baglilik: 4 } }
               - degisken: { kadim_tehdit: 5 }
               - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 1, max: 3 } }
-            kronik: { tr: "Yedi Taht'a, dünyanın senedine imzayı senin atacağını bildirdin.", en: "You told the Sevenfold Court that you'd be the one to sign your world's treaty." }
+            kronik: { tr: "{yer:yedi_taht|e}, dünyanın senedine imzayı senin atacağını bildirdin.", en: "You told {yer:yedi_taht} that you'd be the one to sign your world's treaty." }
             sonraki: "koltuk_son"
           - id: "geri"
             etiket: { tr: "Sözünü geri al; senet yok", en: "Take it back. No treaty" }
@@ -3050,7 +3050,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 1 }
               - xp_seviye: 30
-            kronik: { tr: "Yedi Taht'ın hüküm salonuna hazırlandın.", en: "You got ready for the Sevenfold Court's Hall of Decree." }
+            kronik: { tr: "{yer:yedi_taht|in} hüküm salonuna hazırlandın.", en: "You got ready for {yer:yedi_taht|pos} Hall of Decree." }
             sonraki: "@akis"
           - id: "dunya"
             etiket: { tr: "Bir gece için dünyana dön", en: "Go home for one night" }
@@ -3155,7 +3155,7 @@ olaylar:
         yer: "yedi_taht"
         paragraflar:
           - { tr: "{npc:yanki}: bu bir tanrı. ya da bir tanrının kabuğu. içinde bin dünya var ve hiçbiri o değil.", en: "{npc:yanki}: it's a god. or a god's shell. there are a thousand worlds inside it, and none of them is it." }
-          - { tr: "{npc:yanki}: senin dünyanın sonlarından biri buna benziyor: sistemle birleşmek, tanrı olmak. bunu sana söylemem gerekiyordu, değil mi? işte söyledim.", en: "{npc:yanki}: one of your world's endings looks like this. merging with the System. becoming a god. i was supposed to tell you that, right? i told you." }
+          - { tr: "{npc:yanki}: senin dünyanın sonlarından biri buna benziyor: sistemle birleşmek, tanrı olmak. bunu sana söylemem gerekiyordu, değil mi? işte söyledim.", en: "{npc:yanki}: one of your world's endings looks like this. merging with the system. becoming a god. i was supposed to tell you that, right? i told you." }
         secenekler:
           - id: "bitir"
             etiket: { tr: "Onu bitir", en: "End it" }
@@ -3249,7 +3249,7 @@ olaylar:
       - id: "varis_1"
         yer: "yedi_taht"
         paragraflar:
-          - { tr: "Hüküm salonunun çağrısı pencerende bir mühür olarak beliriyor ve nerede olursan ol seni Kule'nin ellinci katına, oradan da Yedi Taht'a çekiyor. Salon yuvarlak ve bomboş; tavan yerine yıldızsız bir karanlık var.", en: "The Hall of Decree's summons shows up in your window as a seal, and wherever you are, it pulls you to the Spire's fiftieth floor and from there into the Sevenfold Court. The hall is round and empty. No ceiling, just a starless dark." }
+          - { tr: "Hüküm salonunun çağrısı pencerende bir mühür olarak beliriyor ve nerede olursan ol seni Kule'nin ellinci katına, oradan da {yer:yedi_taht|e} çekiyor. Salon yuvarlak ve bomboş; tavan yerine yıldızsız bir karanlık var.", en: "The Hall of Decree's summons shows up in your window as a seal, and wherever you are, it pulls you to the Spire's fiftieth floor and from there into {yer:yedi_taht}. The hall is round and empty. No ceiling, just a starless dark." }
           - { tr: "Duvarların yerinde altı taht, altı Ses var. Seyrediyorlar ama karışmayacaklar.", en: "Instead of walls, six thrones, six Voices. Watching. They won't step in." }
           - { tr: "{npc:ossiran} ortada duruyor. Derisinin altında üç dünyanın yıldızları dönüyor; dördüncüye ayrılan boşluk artık senin biçimini almış. \"Hasat,\" diyor, \"hasatçısına meydan okumaz. Bunu sana öğretmek benim için onur olacak.\"", en: "{npc:ossiran} stands in the middle. Three worlds' stars turn under his skin, and the space reserved for the fourth is shaped like you now. \"A crop,\" he says, \"does not challenge its harvester. It will be my honor to teach you that.\"" }
           - metin: { tr: "Altı Ses'ten biri, Beşinci Taht'ınki, sana belli belirsiz başını eğiyor: anlaşmanız hâlâ geçerli.", en: "One of the six Voices, the Fifth Throne's, dips its head at you, just slightly. Your deal still stands." }
@@ -3280,7 +3280,7 @@ olaylar:
               - bolge: "yedi_taht"
               - ahlak: { duzen: -3, merhamet: 1 }
               - savas: { dusmanlar: ["varis_ossiran@oyuncu+8"], kazan: "varis_zafer", kaybet: "varis_yenilgi", kac: "varis_kacis" }
-            kronik: { tr: "Yedi Taht'ın hüküm salonunda, altı tahtın önünde, dünyanı isteyen Kadim'le dövüştün.", en: "In the Sevenfold Court's Hall of Decree, before all six thrones, you fought the Ancient who wanted your world." }
+            kronik: { tr: "{yer:yedi_taht|in} hüküm salonunda, altı tahtın önünde, dünyanı isteyen Kadim'le dövüştün.", en: "In {yer:yedi_taht|pos} Hall of Decree, before all six thrones, you fought the Ancient who wanted your world." }
           - id: "oku"
             tur: "gosteris"
             etiket: { tr: "Gerçek seviyesini salona yüksek sesle oku", en: "Read his real level out loud to the hall" }
@@ -3291,7 +3291,7 @@ olaylar:
               - aciga_vur: true
               - ahlak: { duzen: -2, insanlik: 2 }
               - savas: { dusmanlar: ["varis_ossiran@oyuncu+5"], kazan: "varis_zafer", kaybet: "varis_yenilgi", kac: "varis_kacis" }
-            kronik: { tr: "Yedi Taht'ın varisinin gerçek seviyesini altı tahtın önünde yüksek sesle okudun; o tanrılığın ne kadarının ödünç olduğunu herkes duydu.", en: "You read the Sevenfold Court heir's real level out loud before all six thrones, and everyone heard how much of a god was borrowed." }
+            kronik: { tr: "{yer:yedi_taht|in} varisinin gerçek seviyesini altı tahtın önünde yüksek sesle okudun; o tanrılığın ne kadarının ödünç olduğunu herkes duydu.", en: "You read {yer:yedi_taht} heir's real level out loud before all six thrones, and everyone heard how much of a god was borrowed." }
           - id: "yanki"
             etiket: { tr: "{npc:yanki} içindeki üç dünyayı karıştırsın", en: "Have {npc:yanki} stir up the three worlds in him" }
             goster: { bayrak: "yanki_bagi" }
@@ -3301,7 +3301,7 @@ olaylar:
               - ahlak: { insanlik: -3, duzen: -2 }
               - iliski: { yanki: { guven: 6, baglilik: 4 } }
               - savas: { dusmanlar: ["varis_ossiran@oyuncu+4"], kazan: "varis_zafer", kaybet: "varis_yenilgi", kac: "varis_kacis" }
-            kronik: { tr: "Yedi Taht'ın varisinin içindeki üç dünyayı kafandaki sese birbirine düşürttün; bedelini ikiniz birlikte ödediniz.", en: "The voice in your head turned the three worlds inside the Sevenfold Court's heir against each other, and the two of you paid for it together." }
+            kronik: { tr: "{yer:yedi_taht|in} varisinin içindeki üç dünyayı kafandaki sese birbirine düşürttün; bedelini ikiniz birlikte ödediniz.", en: "The voice in your head turned the three worlds inside {yer:yedi_taht|pos} heir against each other, and the two of you paid for it together." }
           - id: "reddet"
             etiket: { tr: "Düelloyu reddet ve salondan çık", en: "Refuse the duel. Walk out of the hall" }
             etkiler:
@@ -3310,7 +3310,7 @@ olaylar:
               - ahlak: { duzen: 2, merhamet: -2 }
               - itibar: { kadimler: -5 }
               - degisken: { kadim_tehdit: 6 }
-            kronik: { tr: "Yedi Taht'ın varisiyle düelloya girmedin; {npc:ossiran} da dünyanı hasat listesine kendi adıyla yazdırdı.", en: "You refused the Sevenfold Court heir's duel, and {npc:ossiran} had your world entered on the harvest list under his own name." }
+            kronik: { tr: "{yer:yedi_taht|in} varisiyle düelloya girmedin; {npc:ossiran} da dünyanı hasat listesine kendi adıyla yazdırdı.", en: "You refused {yer:yedi_taht} heir's duel, and {npc:ossiran} had your world entered on the harvest list under his own name." }
             sonraki: "varis_ret"
 
       - id: "varis_zafer"
@@ -3341,7 +3341,7 @@ olaylar:
               - itibar: { kadimler: -15 }
               - degisken: { kadim_tehdit: -8 }
               - xp_seviye: 150
-            kronik: { tr: "Yedi Taht'ın varisini kendi sarayında öldürüp içinde taşıdığı üç dünyanın ışığını serbest bıraktın.", en: "You killed the Sevenfold Court's heir in his own palace and set free the light of the three worlds he carried." }
+            kronik: { tr: "{yer:yedi_taht|in} varisini kendi sarayında öldürüp içinde taşıdığı üç dünyanın ışığını serbest bıraktın.", en: "You killed {yer:yedi_taht|pos} heir in his own palace and set free the light of the three worlds he carried." }
             sonraki: "varis_son"
           - id: "bagisla"
             etiket: { tr: "Bağışla; yaşasın ve hatırlasın", en: "Spare him. Let him live and remember" }
@@ -3353,7 +3353,7 @@ olaylar:
               - itibar: { kadimler: -4 }
               - degisken: { kadim_tehdit: -4 }
               - xp_seviye: 120
-            kronik: { tr: "Yedi Taht'ın varisini yendin, sonra altı tahtın gözü önünde canını bağışladın.", en: "You beat the Sevenfold Court's heir, then spared his life with all six thrones watching." }
+            kronik: { tr: "{yer:yedi_taht|in} varisini yendin, sonra altı tahtın gözü önünde canını bağışladın.", en: "You beat {yer:yedi_taht|pos} heir, then spared his life with all six thrones watching." }
             sonraki: "varis_son"
           - id: "yut"
             etiket: { tr: "Üç dünyayı içine çek", en: "Pull the three worlds into yourself" }
@@ -3369,7 +3369,7 @@ olaylar:
               - itibar: { kadimler: 5, yukselenler: 8 }
               - degisken: { kadim_tehdit: -6 }
               - xp_seviye: 260
-            kronik: { tr: "Yedi Taht'ın varisini yenip hasat ettiği üç dünyayı içine çektin; altı taht seni ilk kez kendilerinden biri gibi selamladı.", en: "You beat the Sevenfold Court's heir and pulled the three worlds he'd harvested into yourself. For the first time, the six thrones saluted you like one of their own." }
+            kronik: { tr: "{yer:yedi_taht|in} varisini yenip hasat ettiği üç dünyayı içine çektin; altı taht seni ilk kez kendilerinden biri gibi selamladı.", en: "You beat {yer:yedi_taht|pos} heir and pulled the three worlds he'd harvested into yourself. For the first time, the six thrones saluted you like one of their own." }
             sonraki: "varis_son"
 
       - id: "varis_yenilgi"
@@ -3388,7 +3388,7 @@ olaylar:
               - ahlak: { insanlik: 2 }
               - degisken: { kadim_tehdit: 6 }
               - can: 60
-            kronik: { tr: "Yedi Taht'ın varisine yenildin. Dünyan onun hasat listesine yazıldı; seni kurtaran tek şey bir misafirlik kuralı oldu.", en: "You lost to the Sevenfold Court's heir. Your world went onto his harvest list, and the only thing that saved you was a rule about guests." }
+            kronik: { tr: "{yer:yedi_taht|in} varisine yenildin. Dünyan onun hasat listesine yazıldı; seni kurtaran tek şey bir misafirlik kuralı oldu.", en: "You lost to {yer:yedi_taht|pos} heir. Your world went onto his harvest list, and the only thing that saved you was a rule about guests." }
             sonraki: "@akis"
 
       - id: "varis_kacis"
@@ -3405,7 +3405,7 @@ olaylar:
               - gorev: { cok_evren_taht: basarisiz }
               - ahlak: { duzen: 1, merhamet: -2 }
               - degisken: { kadim_tehdit: 5 }
-            kronik: { tr: "Yedi Taht'ın hüküm salonundan kaçtın; arkandan gelen tek şey {npc:ossiran|in} sesiydi.", en: "You ran from the Sevenfold Court's Hall of Decree, and all that followed you down was {npc:ossiran|pos} voice." }
+            kronik: { tr: "{yer:yedi_taht|in} hüküm salonundan kaçtın; arkandan gelen tek şey {npc:ossiran|in} sesiydi.", en: "You ran from {yer:yedi_taht|pos} Hall of Decree, and all that followed you down was {npc:ossiran|pos} voice." }
             sonraki: "@akis"
 
       - id: "varis_ret"
@@ -3436,13 +3436,13 @@ olaylar:
             etkiler:
               - bolge: "kule_dibi"
               - ahlak: { insanlik: 2 }
-            kronik: { tr: "Dünyanın hasadını talipsiz bıraktırıp Yedi Taht'tan evine döndün.", en: "You came home from the Sevenfold Court having left your world's harvest unclaimed." }
+            kronik: { tr: "Dünyanın hasadını talipsiz bıraktırıp {yer:yedi_taht|den} evine döndün.", en: "You came home from {yer:yedi_taht} having left your world's harvest unclaimed." }
             sonraki: "@akis"
           - id: "koltuk"
             etiket: { tr: "Çıkmadan önce boş koltuğa son kez bak", en: "Take one last look at the empty seat" }
             etkiler:
               - ahlak: { insanlik: -2, duzen: 1 }
-            kronik: { tr: "Yedi Taht'tan ayrılmadan önce boş koltuğa son kez baktın; koltuk da sana baktı.", en: "Before leaving the Sevenfold Court, you took one last look at the empty seat. It looked back." }
+            kronik: { tr: "{yer:yedi_taht|den} ayrılmadan önce boş koltuğa son kez baktın; koltuk da sana baktı.", en: "Before leaving {yer:yedi_taht}, you took one last look at the empty seat. It looked back." }
             sonraki: "varis_koltuk"
 
       - id: "varis_koltuk"

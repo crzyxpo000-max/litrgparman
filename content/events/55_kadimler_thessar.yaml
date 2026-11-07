@@ -1180,8 +1180,10 @@ olaylar:
         paragraflar:
           - { tr: "Masaya eğiliyorsun. Uzun konuşmana gerek yok; şehrin taşıyabileceği payı, taşıyamayacağı payı ve Kadimler'in aradaki farktan ne kazanacağını tek tek saymak yeter. Okuyucu her cümlende yarığını biraz daha açıyor.", en: "You lean over the table. What you say isn't long. You lay out the share the city can carry, the share it can't, and exactly what the Ancients gain from the difference. After every sentence, the Reader opens its slit a little wider." }
           - { tr: "{npc:thessar} bir süre hesap yapıyor. Sonra meclis salonundaki herkesin önünde konuşuyor: \"Haklısın. Yarısı. Ayrıca teşekkür ederim; bir hasattan muhasebe dersi almak bin yılda bir olur.\"", en: "{npc:thessar} runs the math for a while. Then, in front of the whole chamber: \"You are right. Half. And thank you. A lesson in accounting from a harvest happens once in a thousand years.\"" }
-          - metin: { tr: "{npc:kaya_demir} alçaktan bir ıslık çalıyor. {npc:elif_sari} ilk kez gülümsüyor; yorgun ama içten.", en: "{npc:kaya_demir} lets out a low whistle. {npc:elif_sari} smiles for the first time. Tired, but real." }
+          - metin: { tr: "{npc:kaya_demir} alçaktan bir ıslık çalıyor.", en: "{npc:kaya_demir} lets out a low whistle." }
             kosul: { npc_hayatta: "kaya_demir" }
+          - metin: { tr: "{npc:elif_sari} ilk kez gülümsüyor; yorgun ama içten.", en: "{npc:elif_sari} smiles for the first time. Tired, but real." }
+            kosul: { npc_hayatta: "elif_sari" }
         secenekler:
           - id: "devam"
             etiket: { tr: "Teşekkürünü kabul et", en: "Accept his thanks" }

@@ -1027,7 +1027,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             val flag = "uyanis_${a.id}"
             if (s.hasFlag(flag) || !a.condition.test(s)) continue
             s = s.copy(flags = s.flags + flag)
-            notices += Notice(NoticeKind.ECHO, a.title, a.lines, Rarity.MYTHIC)
+            notices += Notice(NoticeKind.ECHO, a.title, a.visibleLines(s), Rarity.MYTHIC)
             val r = effects.applyAll(s, a.effects)
             s = r.state
             notices += r.notices

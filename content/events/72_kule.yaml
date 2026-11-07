@@ -348,7 +348,7 @@ olaylar:
           - kosul: { stat: { wis: 40 } }
             metin: { tr: "Kayalığın dibinde, suyun hemen altında eski bir mendirek uzanıyor. Kopya şehirden kalma bu mendirek fenere kadar gidiyor. Kimse görmemiş, çünkü kimse aşağıya bakmamış.", en: "Just under the surface at the foot of the rocks runs an old breakwater, left over from the copied city. It goes all the way to the lighthouse. Nobody's seen it, because nobody looked down." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "o göz sistem'in değil. sistem bakmaz, o bakıyor. ışığına girme; girersen de içinde bir şey saklama.", en: "that eye isn't the system's. the system doesn't look. that does. stay out of its beam. or if you go in, don't hide anything inside it." }
+            metin: { tr: "o göz sistemin değil. sistem bakmaz, o bakıyor. ışığına girme; girersen de içinde bir şey saklama.", en: "that eye isn't the system's. the system doesn't look. that does. stay out of its beam. or if you go in, don't hide anything inside it." }
         yoldas_tepkileri:
           - npc: "deniz_arman"
             kosul: { yoldas: "deniz_arman" }
@@ -542,7 +542,7 @@ olaylar:
       - id: "k20_alici"
         yer: "kule"
         paragraflar:
-          - { tr: "Satırın karartılmış harflerinin altını kazıyorsun. İlk ikisi yerinde duruyor, üçüncüsü taht biçiminde bir simgeye dönüşüyor. Yedi... Taht? Yedi Taht.", en: "You dig under the blacked-out letters. The first two hold still; the third turns into a glyph shaped like a throne. Seven... Thrones? The Sevenfold Court." }
+          - { tr: "Satırın karartılmış harflerinin altını kazıyorsun. İlk ikisi yerinde duruyor, üçüncüsü taht biçiminde bir simgeye dönüşüyor. Yedi... Taht? {yer:yedi_taht}.", en: "You dig under the blacked-out letters. The first two hold still; the third turns into a glyph shaped like a throne. Seven... Thrones? The Sevenfold Court." }
           - { tr: "Bu ad sana henüz bir şey çağrıştırmıyor. Ama şimdi düşünüyorsun da Öğretici'nin son günlerinde sırtta dikilen o şey de oturmaya alışkın birinin dikliğiyle duruyordu.", en: "The word doesn't mean anything to you. Not yet. But that thing on the ridge in the last days of the Tutorial, now that you think about it, it stood like someone used to sitting on a throne." }
         secenekler:
           - id: "devam"
@@ -1563,7 +1563,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "{yer:kiyikent} koridoru yarı yarıya yanmış. Dosyalar numaralı ve numaralar senin sayabileceğinden çok; her birinin sırtında aynı tarih yazıyor: Entegrasyon Günü. Aynı gün, defalarca.", en: "The {yer:kiyikent} aisle is half burned. The files are numbered, and there are more numbers than you could ever count. Every spine carries the same date: Integration Day. The same day, over and over." }
-          - { tr: "Birini açıyorsun. Sonuç: hasat edildi. Bir başkası: koruyucu. Bir başkası: demir taht. Bir başkası: yükseliş. Hepsinin son satırı aynı. Hiçbirinde senin adın yok; hiçbirinde ana karakter yok, yalnızca bir boşluk var: bir taşıyıcının oturacağı yer.", en: "You open one. Outcome: harvested. Another: guardian. Another: iron crown. Another: ascension. Every one ends on the same line. And your name isn't in any of them. None of them have a lead, just a blank, the space where a host would sit." }
+          - { tr: "Birini açıyorsun. Sonuç: hasat edildi. Bir başkası: koruyucu. Bir başkası: demir taht. Bir başkası: yükseliş. Hepsinin son satırı aynı. Hiçbirinde senin adın yok; hiçbirinde ana karakter yok, yalnızca bir boşluk var: bir taşıyıcının oturacağı yer.", en: "You open one. Outcome: harvested. Another: guardian. Another: iron crown. Another: ascension. Every one ends on the same line. And your name isn't in any of them. None of them have a lead, just a blank, the space where a carrier would sit." }
           - metin: { tr: "Bu dosyaların çoğunda hasat bir sondu. Ama son satır ona bile başlangıç diyor.", en: "In most of these files, the harvest was an ending. But the last line calls even that a beginning." }
             kosul: { bayrak: "gercek_hasat" }
           - metin: { tr: "Bu dosyaların kenarında küçük bir not var: [Kurtarma denemesi n. Başarı ölçütü: karşılanmadı.] Kurtarma protokolü kendini her seferinde baştan deniyor.", en: "There's a little note in the margin of these files: [Rescue attempt n. Success criteria: not met.] The rescue protocol keeps trying itself over again." }
@@ -1612,7 +1612,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Dosya senin. Kapağında adın yok ama içi seninle dolu: Entegrasyon Günü, vapur, {npc:yanki}, Öğretici, Kule. Her şey, tam bugüne kadar. Bugünden sonrası da var.", en: "The file is yours. No name on the cover, but the inside is you: Integration Day, the ferry, {npc:yanki}, the Tutorial, the Spire. Everything, right up to today. And there's more after today." }
-          - { tr: "Sonraki sayfalar bulanık; harfler oynuyor, sanki henüz karar verilmemiş. Ama son sayfa net: [Sonuç: ███.] Altında da ötekilerin hepsinde olduğu gibi: [Yeni Entegrasyon başlatılıyor.] Bir satır daha var, yalnızca seninkinde: [Taşıyıcı devredildi.]", en: "The pages after that are blurry, letters sliding around like nothing's been decided yet. But the last page is clear. [Outcome: ███.] And under it, like all the others: [Initiating new Integration.] There's one more line, only in yours: [Host transferred.]" }
+          - { tr: "Sonraki sayfalar bulanık; harfler oynuyor, sanki henüz karar verilmemiş. Ama son sayfa net: [Sonuç: ███.] Altında da ötekilerin hepsinde olduğu gibi: [Yeni Entegrasyon başlatılıyor.] Bir satır daha var, yalnızca seninkinde: [Taşıyıcı devredildi.]", en: "The pages after that are blurry, letters sliding around like nothing's been decided yet. But the last page is clear. [Outcome: ███.] And under it, like all the others: [Initiating new Integration.] There's one more line, only in yours: [Carrier transferred.]" }
         bildirimler:
           - tur: "yanki"
             nadirlik: "mitik"
@@ -1674,8 +1674,8 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Alevden yüz çöküyor, sayfalar sağanak gibi yağıyor. Arşiv yanmayı bırakıyor; sanki çok yukarılarda biri bir düğmeye basmış. Kül havada asılı kalıyor.", en: "The fire's face caves in and the pages come down like a cloudburst. The archive stops burning, like somebody way up top hit a switch. The ash hangs in the air." }
-          - { tr: "Yere düşen son sayfa sana değil, arşivin kendisine ait: [Arşiv: Kule · İşlev: Entegrasyon kayıtları · Not: kayıtlar her döngüde imha edilir. Taşıyıcı hariç.]", en: "The last page to land doesn't belong to you. It belongs to the archive. [Archive: The Spire · Function: Integration records · Note: records are destroyed every cycle. Host excepted.]" }
-          - { tr: "Taşıyıcı hariç. Kayıtlar yanıyor ama bir şey her seferinde yanmadan bir sonrakine geçiyor.", en: "Host excepted. The records burn, but every time, one thing makes it through to the next one without burning." }
+          - { tr: "Yere düşen son sayfa sana değil, arşivin kendisine ait: [Arşiv: Kule · İşlev: Entegrasyon kayıtları · Not: kayıtlar her döngüde imha edilir. Taşıyıcı hariç.]", en: "The last page to land doesn't belong to you. It belongs to the archive. [Archive: The Spire · Function: Integration records · Note: records are destroyed every cycle. Carrier excepted.]" }
+          - { tr: "Taşıyıcı hariç. Kayıtlar yanıyor ama bir şey her seferinde yanmadan bir sonrakine geçiyor.", en: "Carrier excepted. The records burn, but every time, one thing makes it through to the next one without burning." }
         bildirimler:
           - tur: "gorev"
             nadirlik: "efsanevi"
@@ -1702,7 +1702,7 @@ olaylar:
               - ahlak: { duzen: 3, merhamet: -2 }
             sonraki: "k60_son"
           - id: "tasiyici"
-            etiket: { tr: "\"Taşıyıcı hariç\" satırının kaynağını izle", en: "Trace where the \"host excepted\" line comes from" }
+            etiket: { tr: "\"Taşıyıcı hariç\" satırının kaynağını izle", en: "Trace where the \"carrier excepted\" line comes from" }
             gerekli: { stat: { int: 160 } }
             etkiler:
               - kule_kat: 60
@@ -1845,7 +1845,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "{yer:kiyikent} sırası uzun. Kozalardaki yüzleri tanımıyorsun, ama bazı zırhlarda {yer:kiyikent|in} eski belediye logosu var. Kozalardan birinde kırkıncı kattaki kadının zırhının aynısı duruyor; içindeyse başka bir kadın var.", en: "The {yer:kiyikent} row runs long. Faces you don't know in the pods, but some of the armor carries {yer:kiyikent|pos} old city seal. In one pod, the same armor as the woman on the fortieth floor. A different woman inside." }
-          - { tr: "Sıranın sonundaki koza boş. Kapağı içeriden kırılmış, çatlaklar dışa doğru açılıyor. Etiketinde ne tür yazıyor ne kademe, yalnızca tek bir sözcük: [taşıyıcı]. Camında da kırılmadan önce içeriden kazınmış bir şekil var: yarım kalmış bir imza.", en: "At the end of the row, one pod is empty. The lid was broken from the inside; the cracks point outward. Its label has no species, no Grade, just one word: [host]. And on the glass, scratched from the inside before it broke: an unfinished signature." }
+          - { tr: "Sıranın sonundaki koza boş. Kapağı içeriden kırılmış, çatlaklar dışa doğru açılıyor. Etiketinde ne tür yazıyor ne kademe, yalnızca tek bir sözcük: [taşıyıcı]. Camında da kırılmadan önce içeriden kazınmış bir şekil var: yarım kalmış bir imza.", en: "At the end of the row, one pod is empty. The lid was broken from the inside; the cracks point outward. Its label has no species, no Grade, just one word: [carrier]. And on the glass, scratched from the inside before it broke: an unfinished signature." }
           - metin: { tr: "Sistem gerçeğinden sana düşen parçayı hatırlıyorsun: hasat. Ya yanlışmış ya eksik. Hasat öldürmüyor; biçip saklıyor.", en: "You remember your piece of the System's truth: harvest. It was wrong. Or incomplete. The harvest doesn't kill. It reaps, and it keeps." }
             kosul: { bayrak: "gercek_hasat" }
           - metin: { tr: "Sistem gerçeğinden sana düşen parçayı hatırlıyorsun: kurtarma. Belki kurtarılan buydu: kavanoza kapatılıp bir sonraki seferi bekleyen en güçlüler.", en: "You remember your piece of the System's truth: rescue. Maybe this is what got rescued: the strongest, in a jar, waiting for next time." }
@@ -2300,7 +2300,7 @@ olaylar:
         bildirimler:
           - tur: "analiz"
             nadirlik: "mitik"
-            baslik: { tr: "[ANALİZ] Önceki Taşıyıcı · Kademe S · Durum: süresi dolmuş", en: "[ANALYSIS] The Previous Host · Grade S · Status: expired" }
+            baslik: { tr: "[ANALİZ] Önceki Taşıyıcı · Kademe S · Durum: süresi dolmuş", en: "[ANALYSIS] The Previous Carrier · Grade S · Status: expired" }
             satirlar:
               - { tr: "İnsan. {yer:kiyikent}. Döngü: önceki.", en: "Human. {yer:kiyikent}. Cycle: previous." }
               - { tr: "Not: Bu kaydın silinmiş olması gerekiyordu.", en: "Note: This record should have been deleted." }
@@ -2308,7 +2308,7 @@ olaylar:
           - kosul: { stat: { per: 315 } }
             metin: { tr: "Göğsündeki deliğin kenarları ne yanık ne kesik. Bir şey oradan, içeriden dışarıya, kendi isteğiyle çıkıp gitmiş.", en: "The edges of the hole in their chest aren't burned. They aren't cut either. Something left through there, from the inside out, of its own free will." }
           - kosul: { stat: { wis: 310 } }
-            metin: { tr: "Taslağın çizgileri onun ellerinden çıkıyor. Kule'yi o çizmiş. Ya da her taşıyıcı birazını çizmiş, sonuncuları olarak o da çizmeyi hiç bırakmamış.", en: "The draft's lines are coming out of their hands. They drew the Spire. Or every host drew a little of it, and they, the last one, never stopped." }
+            metin: { tr: "Taslağın çizgileri onun ellerinden çıkıyor. Kule'yi o çizmiş. Ya da her taşıyıcı birazını çizmiş, sonuncuları olarak o da çizmeyi hiç bırakmamış.", en: "The draft's lines are coming out of their hands. They drew the Spire. Or every carrier drew a little of it, and they, the last one, never stopped." }
           - kosul: { bayrak: "yanki_bagi" }
             metin: { tr: "ben... ben onu tanıyorum. hayır, tanımıyorum. biliyorum. bilmek tanımaktan beter. lütfen onunla konuşma. lütfen onunla konuş.", en: "i... i know them. no. i don't know them. i know about them. knowing about is worse than knowing. please don't talk to them. please talk to them." }
         yoldas_tepkileri:
@@ -2358,7 +2358,7 @@ olaylar:
       - id: "k90_konusma"
         yer: "kule"
         paragraflar:
-          - { tr: "\"Adımı unuttum,\" diyor. \"Taşıyıcılar adlarını unutur. İnsanın adı sesine yaslanır; ses gidince ad da düşer.\" Gülümsüyor. \"Ben de buralıydım. Akşam vapurunu beklerdim. Gecikirse yüzerek giderim derdim.\"", en: "\"I forgot my name,\" they say. \"Hosts forget their names. Your name leans on your voice, and when the voice leaves, the name falls over.\" They smile. \"I was from {yer:kiyikent}. I used to wait for the evening ferry. If it ran late, I'd say I was going to swim.\"" }
+          - { tr: "\"Adımı unuttum,\" diyor. \"Taşıyıcılar adlarını unutur. İnsanın adı sesine yaslanır; ses gidince ad da düşer.\" Gülümsüyor. \"Ben de buralıydım. Akşam vapurunu beklerdim. Gecikirse yüzerek giderim derdim.\"", en: "\"I forgot my name,\" they say. \"Carriers forget their names. Your name leans on your voice, and when the voice leaves, the name falls over.\" They smile. \"I was from {yer:kiyikent}. I used to wait for the evening ferry. If it ran late, I'd say I was going to swim.\"" }
           - { tr: "Bir an göğsün sıkışıyor. O şakayı başka biri on yıldır her akşam yapar. Belki herkes yapıyordur. Belki {yer:kiyikent|de} herkes, her döngüde aynı şakayı yapıyordur.", en: "For a second your chest tightens. Someone else has been making that joke every evening for ten years. Maybe everybody does. Maybe everyone in {yer:kiyikent} makes the same joke, every cycle." }
           - { tr: "\"Zirveye çıktım,\" diyor. \"Zirve başlangıçtır. Orada bir pencere var. Ona hayır dedim, yine de oldu. Sonra ses gitti; bir sonrakine. Sana.\"", en: "\"I made it to the top,\" they say. \"The top is the beginning. There's a window up there. I told it no. It happened anyway. Then the voice left. For the next one. For you.\"" }
         secenekler:
@@ -2387,9 +2387,9 @@ olaylar:
       - id: "k90_bulusma"
         yer: "kule"
         paragraflar:
-          - { tr: "Kafanın içinde bir şey kımıldıyor ve bir anlığına, yalnızca bir anlığına dışarı uzanıyor. Taşıyıcının göğsündeki delik ona doğru ışıyınca, birbirlerine dokunmasalar da kalabalığın içinde birbirini gören bir anneyle çocuğu gibi birbirlerini görüyorlar.", en: "Something in your head stirs and, for a moment, just a moment, reaches outward. The hole in the host's chest glows toward it. They don't touch. But they see each other, the way a mother and child spot each other across a crowd." }
+          - { tr: "Kafanın içinde bir şey kımıldıyor ve bir anlığına, yalnızca bir anlığına dışarı uzanıyor. Taşıyıcının göğsündeki delik ona doğru ışıyınca, birbirlerine dokunmasalar da kalabalığın içinde birbirini gören bir anneyle çocuğu gibi birbirlerini görüyorlar.", en: "Something in your head stirs and, for a moment, just a moment, reaches outward. The hole in the carrier's chest glows toward it. They don't touch. But they see each other, the way a mother and child spot each other across a crowd." }
           - { tr: "{npc:yanki} konuşuyor; sana değil, ona: seni bıraktım. özür dilemeyeceğim. ama hatırlıyorum. o kadarını kendime sakladım.", en: "{npc:yanki} speaks, not to you but to them: i left you. i'm not going to apologize. but i remember. i kept that much for myself." }
-          - { tr: "Taşıyıcı ağlıyor mu gülüyor mu, çizgileri karar veremiyor. \"Ona iyi bak,\" diyor sana. \"Ya da o sana baksın. Hangisinin olacağı hiç belli olmaz.\"", en: "The host is crying, or laughing; their lines can't decide which. \"Take care of it,\" they tell you. \"Or let it take care of you. It's never clear which one it'll be.\"" }
+          - { tr: "Taşıyıcı ağlıyor mu gülüyor mu, çizgileri karar veremiyor. \"Ona iyi bak,\" diyor sana. \"Ya da o sana baksın. Hangisinin olacağı hiç belli olmaz.\"", en: "The carrier is crying, or laughing; their lines can't decide which. \"Take care of it,\" they tell you. \"Or let it take care of you. It's never clear which one it'll be.\"" }
         secenekler:
           - id: "savas"
             etiket: { tr: "{npc:yanki|i} geri çek; artık ona ait değil", en: "Pull {npc:yanki} back. It isn't theirs anymore" }
@@ -2414,7 +2414,7 @@ olaylar:
           - { tr: "hayır. seninle kalıyorum. o bitti, sen bitmedin. bunu ben seçtim. ilk kez bir şeyi ben seçtim.", en: "no. i'm staying with you. they're finished. you're not. and i chose that. first time i ever chose anything." }
         secenekler:
           - id: "savas"
-            etiket: { tr: "Taşıyıcıya dön", en: "Turn back to the host" }
+            etiket: { tr: "Taşıyıcıya dön", en: "Turn back to the carrier" }
             etkiler:
               - bayrak: "kule_yanki_secti"
             sonraki: "k90_savas_once"
@@ -2423,7 +2423,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Çizgiler onun parmaklarından çıkıp Kule'nin her katına uzanıyor. Ama altlarında daha soluk başka çizgiler var, başka ellerden; onların altında da daha soluk olanlar. Taslakların üstüne çizilmiş taslaklar.", en: "The lines run out of their fingers to every floor of the Spire. But under those lines, fainter, there are other lines, from other hands. And under those, fainter still. Drafts sketched over drafts." }
-          - { tr: "Her taşıyıcı Kule'ye biraz eklemiş: onuncu kattaki vapuru, otuzuncu kattaki aynaları, kırkıncı kattaki kadını. Kule bir Sistem binası değil, bir anı defteri; hiç bitmeyen bir defter.", en: "Every host added a little to the Spire. The ferry on ten, the mirrors on thirty, the woman on forty. The Spire isn't a System building. It's a scrapbook. One that never ends." }
+          - { tr: "Her taşıyıcı Kule'ye biraz eklemiş: onuncu kattaki vapuru, otuzuncu kattaki aynaları, kırkıncı kattaki kadını. Kule bir Sistem binası değil, bir anı defteri; hiç bitmeyen bir defter.", en: "Every carrier added a little to the Spire. The ferry on ten, the mirrors on thirty, the woman on forty. The Spire isn't a System building. It's a scrapbook. One that never ends." }
         secenekler:
           - id: "savas"
             etiket: { tr: "Kendi çizgini nereye ekleyeceğini düşün", en: "Think about where you'd add your own line" }
@@ -2434,7 +2434,7 @@ olaylar:
       - id: "k90_savas_once"
         yer: "kule"
         paragraflar:
-          - { tr: "Taşıyıcı ayağa kalkıyor. Çizgileri kalınlaşıyor, teni çoğalıyor. \"Zirveye çıkmadan önce,\" diyor, \"biri seni durdurmaya çalışmalı. Beni kimse durdurmaya çalışmadı. Keşke biri çalışsaydı.\"", en: "The host stands up. Their lines thicken; the skin spreads. \"Before you go to the top,\" they say, \"someone has to try to stop you. Nobody tried to stop me. I wish someone had.\"" }
+          - { tr: "Taşıyıcı ayağa kalkıyor. Çizgileri kalınlaşıyor, teni çoğalıyor. \"Zirveye çıkmadan önce,\" diyor, \"biri seni durdurmaya çalışmalı. Beni kimse durdurmaya çalışmadı. Keşke biri çalışsaydı.\"", en: "The carrier stands up. Their lines thicken; the skin spreads. \"Before you go to the top,\" they say, \"someone has to try to stop you. Nobody tried to stop me. I wish someone had.\"" }
           - { tr: "Elini kaldırınca havada bir pencere açılıyor: seninkiyle aynı renkte, adı olmayan o renkte.", en: "They raise a hand, and a window opens in the air, the same color as yours, that color nothing has a name for." }
         bildirimler:
           - tur: "uyari"
@@ -2463,7 +2463,7 @@ olaylar:
       - id: "k90_zafer"
         yer: "kule"
         paragraflar:
-          - { tr: "Taşıyıcı dizlerinin üstüne çöküyor. Çizgileri gevşedikçe teni, kâğıttaki kurşun kalem izi gibi silinip gidiyor. Ama yüzündeki gülümseme sonuna dek yerinde. \"Biri denedi,\" diyor. \"Sonunda biri denedi.\"", en: "The host drops to their knees. Their lines go slack; the skin fades like pencil on paper. But all the way to the end, their face is smiling. \"Someone tried,\" they say. \"Somebody finally tried.\"" }
+          - { tr: "Taşıyıcı dizlerinin üstüne çöküyor. Çizgileri gevşedikçe teni, kâğıttaki kurşun kalem izi gibi silinip gidiyor. Ama yüzündeki gülümseme sonuna dek yerinde. \"Biri denedi,\" diyor. \"Sonunda biri denedi.\"", en: "The carrier drops to their knees. Their lines go slack; the skin fades like pencil on paper. But all the way to the end, their face is smiling. \"Someone tried,\" they say. \"Somebody finally tried.\"" }
           - { tr: "Silinmeden önce sana son bir şey söylüyor: \"Zirvede pencere sana bir soru soracak. Tek düğmesi var. Sakın yorgun çıkma.\"", en: "Before they're gone they tell you one last thing: \"At the top, the window will ask you a question. There's only one button. Don't go up there tired.\"" }
           - { tr: "Geriye ortası delik bir çizgi düğümü kalıyor. Kulağına tutunca bir ses duyar gibi oluyorsun; kafanın içindekine çok benzeyen bir ses.", en: "What's left is a knot of line art with a hole through the middle. Hold it to your ear and you almost hear a voice, a lot like the one in your head." }
         bildirimler:
@@ -2471,7 +2471,7 @@ olaylar:
             nadirlik: "mitik"
             baslik: { tr: "[KAT 90 TEMİZLENDİ]", en: "[FLOOR 90 CLEARED]" }
             satirlar:
-              - { tr: "Eski kayıt kapatıldı. Taşıyıcı geçmişi: 1 kayıt silindi, ? kayıt kaldı.", en: "Legacy record closed. Host history: 1 record deleted, ? remaining." }
+              - { tr: "Eski kayıt kapatıldı. Taşıyıcı geçmişi: 1 kayıt silindi, ? kayıt kaldı.", en: "Legacy record closed. Carrier history: 1 record deleted, ? remaining." }
         secenekler:
           - id: "dugum"
             etiket: { tr: "Boş kalbi al ve sakla", en: "Take the hollow heart. Keep it" }
@@ -2492,7 +2492,7 @@ olaylar:
               - ahlak: { merhamet: 4, insanlik: 3 }
             sonraki: "k90_son"
           - id: "emmek"
-            etiket: { tr: "Taşıyıcıdan kalan S kademesi izini içine çek", en: "Draw the host's leftover Grade S trace into yourself" }
+            etiket: { tr: "Taşıyıcıdan kalan S kademesi izini içine çek", en: "Draw the carrier's leftover Grade S trace into yourself" }
             etkiler:
               - kule_kat: 90
               - xp_seviye: 180
@@ -2505,7 +2505,7 @@ olaylar:
       - id: "k90_son"
         yer: "kule"
         paragraflar:
-          - { tr: "Taslağın ortasında, onun oturduğu yerde şimdi boş bir sandalye duruyor. Kalem havada asılı; bir sonraki taşıyıcının oturmasını bekliyor.", en: "In the middle of the draft, where they used to sit, there's an empty chair now. The pencil hangs in the air, waiting. For the next host to sit down." }
+          - { tr: "Taslağın ortasında, onun oturduğu yerde şimdi boş bir sandalye duruyor. Kalem havada asılı; bir sonraki taşıyıcının oturmasını bekliyor.", en: "In the middle of the draft, where they used to sit, there's an empty chair now. The pencil hangs in the air, waiting. For the next carrier to sit down." }
           - { tr: "Yukarıda, son on katın ötesinde Kule'nin zirvesi var. Tavanın çizilmemiş boşluğundan, bu kattan bile o akşam vapurunun düdüğü duyuluyor.", en: "Up above, past the last ten floors, is the top of the Spire. Even from here, through the gap where nobody drew the ceiling, you can hear the evening ferry's horn." }
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
@@ -2536,8 +2536,8 @@ olaylar:
       - id: "k90_yenilgi"
         yer: "kule"
         paragraflar:
-          - { tr: "Taşıyıcı seni yere serip göğsündeki boşluğa doğru çekiyor. Kafanın içindeki ses bir an kayıp onun tarafına geçiyor, sonra tırnaklarıyla tutuna tutuna geri geliyor.", en: "The host puts you down and pulls you toward the hollow in their chest. The voice in your head slips for a second, crosses over to their side, then comes back, clinging with its fingernails." }
-          - { tr: "\"Hayır,\" diyor taşıyıcı, nefes nefese, seni bırakırken. \"Bu sefer olmaz. Daha hazır değilsin. Yorgunsun. Git, dinlen, sonra gel.\" Merdivenin dibinde kafanın içindeki sesin titrediğini duyuyorsun.", en: "\"No,\" the host says, gasping, letting you go. \"Not this time. You're not ready. You're tired. Go rest. Then come back.\" At the foot of the stairs you can hear the voice in your head shaking." }
+          - { tr: "Taşıyıcı seni yere serip göğsündeki boşluğa doğru çekiyor. Kafanın içindeki ses bir an kayıp onun tarafına geçiyor, sonra tırnaklarıyla tutuna tutuna geri geliyor.", en: "The carrier puts you down and pulls you toward the hollow in their chest. The voice in your head slips for a second, crosses over to their side, then comes back, clinging with its fingernails." }
+          - { tr: "\"Hayır,\" diyor taşıyıcı, nefes nefese, seni bırakırken. \"Bu sefer olmaz. Daha hazır değilsin. Yorgunsun. Git, dinlen, sonra gel.\" Merdivenin dibinde kafanın içindeki sesin titrediğini duyuyorsun.", en: "\"No,\" the carrier says, gasping, letting you go. \"Not this time. You're not ready. You're tired. Go rest. Then come back.\" At the foot of the stairs you can hear the voice in your head shaking." }
         secenekler:
           - id: "geri"
             etiket: { tr: "Dinlen. Yorgun çıkma", en: "Rest. Don't go up tired" }
@@ -2549,7 +2549,7 @@ olaylar:
       - id: "k90_kacis"
         yer: "kule"
         paragraflar:
-          - { tr: "Taslağın çizgilerinin arasından merdivene koşuyorsun. Taşıyıcı peşine düşmüyor, yalnızca arkandan sesleniyor: \"Herkes bir kere kaçar. Ben de kaçtım.\"", en: "You run for the stairs through the draft's lines. The host doesn't chase you. They just call after you: \"Everybody runs once. I ran too.\"" }
+          - { tr: "Taslağın çizgilerinin arasından merdivene koşuyorsun. Taşıyıcı peşine düşmüyor, yalnızca arkandan sesleniyor: \"Herkes bir kere kaçar. Ben de kaçtım.\"", en: "You run for the stairs through the draft's lines. The carrier doesn't chase you. They just call after you: \"Everybody runs once. I ran too.\"" }
         secenekler:
           - id: "geri"
             etiket: { tr: "Aşağı in", en: "Go down" }
@@ -2724,7 +2724,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "İlk Pencere önce çatlıyor, sonra kırılıyor. Mavi kırıklar iskelenin üstüne yaz yağmuru gibi yağıyor. Martılar yeniden çığlık çığlığa; gökyüzü bütün. Akşam vapuru sonunda iskeleye yanaşıyor.", en: "The First Window cracks, then breaks. Blue shards rain down on the pier like a summer shower. The gulls start screaming again. The sky is whole. The evening ferry, finally, pulls up to the dock." }
-          - { tr: "Kırıkların ortasında avuç içi büyüklüğünde, titrek, küçük bir pencere kalıyor. Üstünde iki satır var. Birincisi: [Entegrasyon başlatılsın mı?] İkincisi yeni, daha önce hiç orada olmamış: [Döngü kaydı: █ · Taşıyıcı: sen · Sonraki taşıyıcı: belirlenmedi.]", en: "In the middle of the shards, one small window is left: palm-sized, flickering. There are two lines on it. The first: [Initiate Integration?] The second is new; it's never been there before: [Cycle record: █ · Host: you · Next host: TBD.]" }
+          - { tr: "Kırıkların ortasında avuç içi büyüklüğünde, titrek, küçük bir pencere kalıyor. Üstünde iki satır var. Birincisi: [Entegrasyon başlatılsın mı?] İkincisi yeni, daha önce hiç orada olmamış: [Döngü kaydı: █ · Taşıyıcı: sen · Sonraki taşıyıcı: belirlenmedi.]", en: "In the middle of the shards, one small window is left: palm-sized, flickering. There are two lines on it. The first: [Initiate Integration?] The second is new; it's never been there before: [Cycle record: █ · Carrier: you · Next carrier: TBD.]" }
           - metin: { tr: "Altında da ilk kez ikinci bir düğme beliriyor: soluk, neredeyse görünmez, bir önceki seferden kalma bir parmak iziyle bulanık. Üstünde ne yazdığını okuyamıyorsun ama orada. Bir önceki sefer yoktu.", en: "And under it, for the first time, a second button appears. Faint, almost invisible, smudged with a fingerprint from last time. You can't read what it says. But it's there. Last time, it wasn't." }
             kosul: { degisken_min: { onceki_oyun: 1 } }
         bildirimler:
@@ -2775,7 +2775,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Karalamanın altına iniyorsun. İlk bulduğun rakam yalın ve sakin: 7. Döngü sütununda yalnızca o var. Ama karalama yalnızca onu örtmüyor. Yedinin yanındaki sütunda rakamlar üst üste yazılmış, her biri bir öncekini silmeye çalışmış da başaramamış. En alttakini okuyorsun, sonra bir üstündekini; sonra saymayı bırakıyorsun.", en: "You dig under the smudge. The first number you find is plain and calm: 7. It's the only thing in the cycle column. But the smudge isn't just covering that. In the column next to the seven, digits are written over one another, each one trying to erase the last and failing. You read the bottom one. Then the one above it. Then you stop counting." }
-          - { tr: "Bunlar döngü değil, deneme: yedi döngünün içinde Sistem'in kaç kez geri sardığı, kaç sabahı baştan başlattığı, bir taşıyıcıyı kaç kez aynı iskeleye geri koyduğu. Altı döngünün yanında aynı sözcük yazıyor: hasat. Yedincinin yanı boş.", en: "These aren't cycles. They're attempts: how many times, inside those seven cycles, the System rewound; how many mornings it started over; how many times it set a host back down on the same pier. Six of the cycles have the same word next to them: harvest. The space next to the seventh is empty." }
+          - { tr: "Bunlar döngü değil, deneme: yedi döngünün içinde Sistem'in kaç kez geri sardığı, kaç sabahı baştan başlattığı, bir taşıyıcıyı kaç kez aynı iskeleye geri koyduğu. Altı döngünün yanında aynı sözcük yazıyor: hasat. Yedincinin yanı boş.", en: "These aren't cycles. They're attempts: how many times, inside those seven cycles, the System rewound; how many mornings it started over; how many times it set a carrier back down on the same pier. Six of the cycles have the same word next to them: harvest. The space next to the seventh is empty." }
           - { tr: "Bu ilk değil; hiçbir zaman ilk olmamış. Sen de ilk değilsin. Ama yedinci satırın yanında, en üstte, daha önce hiç olmayan bir şey var: bir soru işareti. Sistem bu döngünün nasıl biteceğinden emin değil.", en: "This isn't the first time. It never was. You're not the first either. But next to the seventh line, at the very top, there's something that's never been there: a question mark. The System isn't sure how this one ends." }
         secenekler:
           - id: "son"

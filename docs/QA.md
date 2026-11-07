@@ -50,31 +50,31 @@ Başka P0 bulunmadı: ulaşılamayan son yok, çıkmaz yok, kayıt kaybı yalnı
 ## P2 — cilalama
 
 **Arayüz / erişilebilirlik / performans**
-- [ ] P2-1 Tablette metin tam genişlik (~95 karakter/satır). — *App/StoryScreen* — İçeriği ~640dp ile sınırla ve ortala; geniş ekranda `NavigationRail`. — küçük
-- [ ] P2-2 Başlık ekranında ×1,3 yazıda "Yükseliş / Protokolü" satırları üst üste biniyor. — *başlık tipografisi lineHeight* — Satır yüksekliğini artır. — küçük
-- [ ] P2-3 Tıklanabilir kartlarda TalkBack eylem etiketi yok. — *ui/system/Overlays.kt:128, 158* — `onClickLabel` + `Role.Button`. — küçük
-- [ ] P2-4 Yapılandırma değişince (döndürme/yeniden boyut) daktilo efekti baştan başlıyor. — *StoryScreen `finished` durumu* — `rememberSaveable`. — küçük
-- [ ] P2-5 Her eylemde 12 görünüm modeli ana iş parçacığında kuruluyor (çoğu görünmüyor). — *GameViewModel.render* — Görünür sekmeninkini hemen, kalanları tembel/arka planda kur. — orta
-- [ ] P2-6 Lint uyarıları: `help_free` EN'de kaçışsız `40%`, 11 kullanılmayan kaynak, `ModifierParameter` (StoryScreen.kt:92), 6 PluralsCandidate. — küçük
+- [x] P2-1 Tablette metin tam genişlik (~95 karakter/satır). — *App/StoryScreen* — İçeriği ~640dp ile sınırla ve ortala; geniş ekranda `NavigationRail`. — küçük
+- [x] P2-2 Başlık ekranında ×1,3 yazıda "Yükseliş / Protokolü" satırları üst üste biniyor. — *başlık tipografisi lineHeight* — Satır yüksekliğini artır. — küçük
+- [x] P2-3 Tıklanabilir kartlarda TalkBack eylem etiketi yok. — *ui/system/Overlays.kt:128, 158* — `onClickLabel` + `Role.Button`. — küçük
+- [x] P2-4 Yapılandırma değişince (döndürme/yeniden boyut) daktilo efekti baştan başlıyor. — *StoryScreen `finished` durumu* — `rememberSaveable`. — küçük
+- [x] P2-5 Her eylemde 12 görünüm modeli ana iş parçacığında kuruluyor (çoğu görünmüyor). — *GameViewModel.render* — Görünür sekmeninkini hemen, kalanları tembel/arka planda kur. — orta
+- [x] P2-6 Lint uyarıları: `help_free` EN'de kaçışsız `40%`, 11 kullanılmayan kaynak, `ModifierParameter` (StoryScreen.kt:92), 6 PluralsCandidate. — küçük
 
 **Motor / kod**
-- [ ] P2-7 `Director.arcPriority` ölü kod (ana yay olayları adaylardan zaten dışlı). — küçük
-- [ ] P2-8 Tohum koşulu her gün YAML'dan yeniden ayrıştırılıyor (`Director.seedConditionHolds`). — önbellek — küçük
-- [ ] P2-9 `sanitize` `dayState.currentEvent`'i denetlemiyor (içerikten silinen olayın ortasında kayıt). — küçük
-- [ ] P2-10 `render` içindeki görünüm üreticileri try/catch dışında (bir görünüm istisnası çökertir). — küçük
-- [ ] P2-11 Koşul DSL'inde VEYA yok; birebir kopya paragraflar (ör. `buyuk_ihanet_kule` ¶7=¶8) bakım riski. — `herhangi: [...]` koşulu — orta
-- [ ] P2-12 Belgeler: CLAUDE.md kayıtları `*.yaml` diyor (gerçekte `*.json`); simülatörün gereksiz `-Xss4m`'i. — küçük
+- [x] P2-7 `Director.arcPriority` ölü kod (ana yay olayları adaylardan zaten dışlı). — küçük
+- [x] P2-8 Tohum koşulu her gün YAML'dan yeniden ayrıştırılıyor (`Director.seedConditionHolds`). — önbellek — küçük
+- [x] P2-9 `sanitize` `dayState.currentEvent`'i denetlemiyor (içerikten silinen olayın ortasında kayıt). — küçük
+- [x] P2-10 `render` içindeki görünüm üreticileri try/catch dışında (bir görünüm istisnası çökertir). — küçük
+- [x] P2-11 Koşul DSL'inde VEYA yok; birebir kopya paragraflar (ör. `buyuk_ihanet_kule` ¶7=¶8) bakım riski. — `herhangi: [...]` koşulu — orta
+- [x] P2-12 Belgeler: CLAUDE.md kayıtları `*.yaml` diyor (gerçekte `*.json`); simülatörün gereksiz `-Xss4m`'i. — küçük
 
 **İçerik ve üslup**
-- [ ] P2-13 Düz "Yankı/Echo" adı (35 yer; awakenings, enemies, knowledge, system) ve `son_nefes` Yankı satırı `yanki_bagi` koşulsuz. — belirteç + koşul — küçük
-- [ ] P2-14 EN metinlerde belirteç yerine düz yer adı ("The Esplanade", "The Ironworks", "{npc:yanki}'s"). — `{yer:…}`/`|pos`; validator'ı EN'e genişlet — küçük
-- [ ] P2-15 Terim tutarlılığı: "Grade" yazımı (Grade E / A-Grade / S grade), carrier/host, dünya sayısı (yüzlerce/bin/bin dört yüz), Yankı fısıltısında "Sistem/sistem". — küçük
-- [ ] P2-16 `son_hasat` her Demir Mod ölümüne "haddini aştın" diyor. — Dikkat koşullu iki sürüm — küçük
-- [ ] P2-17 Sonlarda küçük tutarsızlıklar: Koruyucu'da "başka hiçbir şey söylemeden" sonrası konuşma, Kod Kırıcı'da ölü paragraf, Demir Taht'ta Kadim dalı eksik, Yankı'nın son sözü üç sonda yok, arketip sırası sonla çelişebiliyor, `son_karar_1`/`son_koruyucu` aynı imge art arda. — küçük–orta
+- [x] P2-13 Düz "Yankı/Echo" adı (35 yer; awakenings, enemies, knowledge, system) ve `son_nefes` Yankı satırı `yanki_bagi` koşulsuz. — belirteç + koşul — küçük
+- [x] P2-14 EN metinlerde belirteç yerine düz yer adı ("The Esplanade", "The Ironworks", "{npc:yanki}'s"). — `{yer:…}`/`|pos`; validator'ı EN'e genişlet — küçük
+- [x] P2-15 Terim tutarlılığı: "Grade" yazımı (Grade E / A-Grade / S grade), carrier/host, dünya sayısı (yüzlerce/bin/bin dört yüz), Yankı fısıltısında "Sistem/sistem". — küçük
+- [x] P2-16 `son_hasat` her Demir Mod ölümüne "haddini aştın" diyor. — Dikkat koşullu iki sürüm — küçük
+- [x] P2-17 Sonlarda küçük tutarsızlıklar: Koruyucu'da "başka hiçbir şey söylemeden" sonrası konuşma, Kod Kırıcı'da ölü paragraf, Demir Taht'ta Kadim dalı eksik, Yankı'nın son sözü üç sonda yok, arketip sırası sonla çelişebiliyor, `son_karar_1`/`son_koruyucu` aynı imge art arda. — küçük–orta
 - [ ] P2-18 Kronik açılış iskeleti tekrarı (%20 aynı ilk iki sözcük; EN "On the night of" ×39); Döngü epilog kartlarında kalıp. — üslup partilerinde + epilog seçicisine "aynı açılışı yan yana koyma" — orta
-- [ ] P2-19 Küçük süreklilik: `ilk_kan›pencereyi_oku_ilk` yabancıyı düşürüyor, `gemi_bakis` koşulsuz geri çağrı, Kaya darbe gecesi zaman çizelgesi, `ihanet_kaya_1` kroniği herkese akıl hocası Kaya, Thessar/Mert/Aras EN pürüzleri (docs/qa/hikaye_b.md 2.3). — küçük
+- [x] P2-19 Küçük süreklilik: `ilk_kan›pencereyi_oku_ilk` yabancıyı düşürüyor, `gemi_bakis` koşulsuz geri çağrı, Kaya darbe gecesi zaman çizelgesi, `ihanet_kaya_1` kroniği herkese akıl hocası Kaya, Thessar/Mert/Aras EN pürüzleri (docs/qa/hikaye_b.md 2.3). — küçük
 - [ ] P2-20 3 cümleyi aşan paragraf 1.777, 60 karakteri aşan etiket 5 (TARAMA). — üslup partilerinde — orta
-- [ ] P2-21 `tools/qa/olay.py` bildirim koşullarını göstermiyor; taramaya kronik-vaat ve OR-kopya kuralları. — küçük
+- [x] P2-21 `tools/qa/olay.py` bildirim koşullarını göstermiyor; taramaya kronik-vaat ve OR-kopya kuralları. — küçük
 
 ## Ek: Parti 1 (Türkçe üslup) önce → sonra örnekleri
 
@@ -381,3 +381,25 @@ Onay (2026-11-07): **P0 + tüm P1.** Plan: (1) kod/arayüz/küçük içerik, (2)
 - Dalga 2 uygulandıktan sonra P1-14'ü bitir: `71_perde3` `perde3_son` › `yakinlar` seçeneğine `bayrak: "p3_son_gece_yakinlar"`.
 - Açık P1'ler: P1-5, P1-15, P1-16, P1-17 (üslup dalgalarıyla), P1-14 (yukarıdaki adım). Sonda tarama önce/sonra tablosu.
 - Not: eşzamanlı alt ajan sınırı 20.
+
+**Parti 5 (P2, 2026-11-08):**
+- Arayüz: P2-1 içerik en çok 680dp (tablet); P2-2 başlık satır yüksekliği; P2-3 tıklanabilir kartlarda `onClickLabel` +
+  rol; P2-4 daktilo durumu `rememberSaveable`.
+- Kod: P2-5 ölçüldü — `render` masaüstünde 0,32 ms, değişiklik gerekmedi; P2-7 ölü `arcPriority` kaldırıldı; P2-8 tohum
+  koşulu önbelleği; P2-9 `sanitize` silinmiş olayı temizler (test); P2-10 `render` istisnası çökertmez; P2-11 `herhangi`
+  (VEYA) koşulu (test) ve 12 kopya paragraf birleştirildi (71); uyanış satırları satır başı `kosul` alabiliyor
+  (`son_nefes` Yankı satırı artık yalnız bağ varken).
+- Lint (P2-6): 29 → 2 uyarı (kalan: `mipmap-anydpi-v26` — uyarlanabilir simge için gerekli; `OldTargetApi` — yayın
+  kararı). P2-12: CLAUDE.md kayıt uzantısı, simülatörde `-Xss4m` yok.
+- İçerik (iki ajan + düzeltmeler): P2-13 düz Yankı adı belirtece (awakenings, knowledge, system; tarama 35 → 21, kalanı
+  "deniz/ash" gibi yanlış pozitif ve belirteç çözülmeyen `sira_gizli`); P2-14 EN'de 117, TR'de 104 düz yer adı belirtece
+  (cümle başı "The Esplanade" ve "Kule Dibi'ne" gibi bileşik ekler — motor desteği olmadığından — düz kaldı); P2-15
+  terimler (Grade yazımı, carrier, Yankı'da küçük "sistem", dünya sayısı kanonu DECISIONS #129); P2-16 Demir Mod ölüm
+  sonu Dikkat'e göre iki sürüm; P2-17 Kod Kırıcı ölü paragrafı, Demir Taht Kadim dalı, üç sona Yankı'nın son sözü,
+  arketip sırası (Demir Taht → Tiran, Vassal → Kurtarıcı/pazarlık); P2-19 prolog yabancısı, `gemi_bakis` koşulu
+  (`kule_cephe_tutuldu`), EN pürüzleri; okuyucu notları: 55 Kaya/Elif paragrafı, 60 taşlı çanta, 60 oğlanın repliği.
+  9 ölü bayrak sonlara/epiloğa bağlandı (352 → 343).
+- P2-21: `olay.py` bildirim koşullarını gösteriyor; taramaya "kronik vaadi (sezgisel)" (23 aday, çoğu anlık sonuç) ve
+  "dışlayan koşullu kopya" (7 → 0) kuralları.
+- Açık: P2-18 (epilog seçicisinde aynı açılışlı kartları yan yana koymama — metinler çeşitlendirildi, kod kuralı yok),
+  P2-20 (3 cümleyi aşan paragraf; kılavuzun ulaçla bağlama tercihiyle çelişiyor, kabul), 343 ölü bayrak, USLUP Parti 9–10.

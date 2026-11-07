@@ -73,7 +73,13 @@ data class AwakeningDef(
     val lines: List<LText>,
     val condition: Condition,
     val effects: List<Effect>,
-)
+    /** Satır başına koşul (`{metin, kosul}`); null = her zaman. `lines` ile aynı uzunlukta ya da boş (QA P2-13). */
+    val lineConditions: List<Condition?> = emptyList(),
+) {
+    /** Bu durumda gösterilecek satırlar. */
+    fun visibleLines(state: com.yukselis.engine.core.WorldState): List<LText> =
+        lines.filterIndexed { i, _ -> lineConditions.getOrNull(i)?.test(state) ?: true }
+}
 
 // ---- Durum ----
 

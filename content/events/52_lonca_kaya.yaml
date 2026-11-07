@@ -822,7 +822,7 @@ olaylar:
           - kosul: { stat: { int: 45 } }
             metin: { tr: "Döküm'ün döküm çukurları yüz kişiyi alır. Lojmanlar'dan Döküm'e on iki dakikalık yol var, sürü ise on dört dakikada gelir.", en: "The Foundry's casting pits could hold a hundred people. It's twelve minutes from the houses to the Foundry. The swarm hits in fourteen." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "k̷imin öleceğini seçmek. sistem de bunu yapıyor, biliyorsun, hem de her gün. bu adam hiç değilse yüzüne söylüyor.", en: "c̷hoosing who dies. the System does that too, you know. every day. at least he says it to your face." }
+            metin: { tr: "k̷imin öleceğini seçmek. sistem de bunu yapıyor, biliyorsun, hem de her gün. bu adam hiç değilse yüzüne söylüyor.", en: "c̷hoosing who dies. the system does that too, you know. every day. at least he says it to your face." }
         yoldas_tepkileri:
           - npc: "deniz_arman"
             kosul: { yoldas: "deniz_arman" }
@@ -1163,7 +1163,7 @@ olaylar:
             kosul: { npc_hayatta: "kaya_demir" }
           - metin: { tr: "Haddehanenin balkonu boş. Lonca'nın subay konseyi onun yerine sıra sıra dizilmiş sandalyelere oturmuş; hepsinin gözü Örs'te.", en: "The mill's balcony is empty. The Guild's officer council sits in a row of chairs where he used to stand, and every one of them is looking at Anvil." }
             kosul: { npc_olu: "kaya_demir" }
-          - metin: { tr: "Zeminin altından Kasaba Çekirdeği'nin uğultusu yükseliyor. Lonca'nın rütbeleri artık Sistem'e işleniyor: kazanacağın basamak herkesin penceresinde adının yanında yazacak.", en: "The Town Core is humming under the floor. The Guild's ranks get written into the System now: whatever rung you win will show up next to your name in everybody's window." }
+          - metin: { tr: "Zeminin altından {yer:kasaba_cekirdegi|in} uğultusu yükseliyor. Lonca'nın rütbeleri artık Sistem'e işleniyor: kazanacağın basamak herkesin penceresinde adının yanında yazacak.", en: "The Town Core is humming under the floor. The Guild's ranks get written into the System now: whatever rung you win will show up next to your name in everybody's window." }
             kosul: { bayrak: "cekirdek_lonca" }
           - metin: { tr: "Kalabalığın arasında fısıltılar dolaşıyor: bozuk pencere, ikinci ses, Sistem'in bile okuyamadığı satırlar. Ama burada kimse bunları korkuyla değil, merakla söylüyor. Lonca'da anomali kusur sayılmaz, üstünlük sayılır.", en: "Whispers move through the crowd: the broken window, the second voice, lines even the System can't read. But here, nobody says them like they're scared. In the Guild, an anomaly isn't a defect. It's an edge." }
             kosul: { bayrak: "yanki_gorundu" }
@@ -1173,7 +1173,7 @@ olaylar:
           - kosul: { stat: { per: 60 } }
             metin: { tr: "Örs'ün görünen seviyesi gerçeğiyle aynı; o da şişirmiyor. Bu haddehanede rakamını şişirmeyen ikinci adam.", en: "Anvil's displayed level matches his real one. He doesn't pad either. He's the second man in this mill who doesn't." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "m̷erdiven. sistem'in de bir merdiveni var, sen onun basamaklarını üçer üçer çıkıyorsun. bu adamınki yalnızca daha kısa.", en: "l̷adder. the System has one too, and you take its rungs three at a time. this man's is just shorter." }
+            metin: { tr: "m̷erdiven. sistemin de bir merdiveni var, sen onun basamaklarını üçer üçer çıkıyorsun. bu adamınki yalnızca daha kısa.", en: "l̷adder. the system has one too, and you take its rungs three at a time. this man's is just shorter." }
         yoldas_tepkileri:
           - npc: "deniz_arman"
             kosul: { yoldas: "deniz_arman" }
@@ -1983,7 +1983,7 @@ olaylar:
             sonraki: "lonca_4_ilan"
           - id: "cekirdek"
             tur: "gosteris"
-            etiket: { tr: "Yasayı Kasaba Çekirdeği'ne kendi elinle yaz", en: "Write the law into the Town Core yourself" }
+            etiket: { tr: "Yasayı Kasaba Çekirdeği'ne kendi elinle yaz", en: "Write the law into {yer:kasaba_cekirdegi} yourself" }
             goster: { bayrak: "cekirdek_lonca" }
             gerekli: { stat: { int: 160 } }
             etkiler:
@@ -1994,7 +1994,7 @@ olaylar:
               - dikkat: 6
               - itibar: { lonca: 12, siginak: -6 }
               - iliski: { kaya_demir: { saygi: 8, korku: 6 }, yanki: { guven: 4 } }
-            kronik: { tr: "Kasaba Çekirdeği'ne Demir Yasa'yı kendi elinle yazdın; artık onu insanlar değil Sistem uygulayacaktı ve Sistem'e itiraz edilmezdi.", en: "With your own hand you wrote the Iron Law into the Town Core. From then on the System would enforce it, not people, and nobody appeals to the System." }
+            kronik: { tr: "Kasaba Çekirdeği'ne Demir Yasa'yı kendi elinle yazdın; artık onu insanlar değil Sistem uygulayacaktı ve Sistem'e itiraz edilmezdi.", en: "With your own hand you wrote the Iron Law into {yer:kasaba_cekirdegi}. From then on the System would enforce it, not people, and nobody appeals to the System." }
             sonraki: "lonca_4_sistem"
           - id: "yirt"
             etiket: { tr: "Taslağı al, gözünün önünde yırt", en: "Take the draft and tear it in front of him" }
@@ -2016,13 +2016,13 @@ olaylar:
       - id: "lonca_4_sistem"
         yer: "kasaba_cekirdegi"
         paragraflar:
-          - { tr: "Kasaba Çekirdeği'nin önünde elini ışığa daldırınca Sistem'in satırları parmaklarının arasından akmaya başlıyor. Demir Yasa'nın yedi maddesini birer birer yazdıkça her biri şehrin bütün pencerelerinde aynı anda beliriyor.", en: "In front of the Town Core, you push your hand into the light. The System's lines flow around your fingers, and you write the seven articles of the Iron Law one by one. Each one shows up in every window in the city at the same time." }
+          - { tr: "{yer:kasaba_cekirdegi|in} önünde elini ışığa daldırınca Sistem'in satırları parmaklarının arasından akmaya başlıyor. Demir Yasa'nın yedi maddesini birer birer yazdıkça her biri şehrin bütün pencerelerinde aynı anda beliriyor.", en: "In front of {yer:kasaba_cekirdegi}, you push your hand into the light. The System's lines flow around your fingers, and you write the seven articles of the Iron Law one by one. Each one shows up in every window in the city at the same time." }
           - { tr: "{yer:kiyikent|in} sokaklarında yüz binlerce insan aynı anda olduğu yerde kalıp önünde açılan pencereyi okuyor.", en: "On the streets of {yer:kiyikent}, hundreds of thousands of people stop at the same moment and read the window that just opened in front of them." }
         bildirimler:
           - tur: "sistem"
             baslik: { tr: "[Bölge yasası güncellendi: DEMİR YASA]", en: "[District law updated: IRON LAW]" }
             satirlar:
-              - { tr: "Yetki: Kasaba Çekirdeği · Yazan: {oyuncu}", en: "Authority: Town Core · Author: {oyuncu}" }
+              - { tr: "Yetki: {yer:kasaba_cekirdegi} · Yazan: {oyuncu}", en: "Authority: Town Core · Author: {oyuncu}" }
               - { tr: "Madde 7 yetkilisi: {oyuncu}", en: "Article 7 authority: {oyuncu}" }
           - tur: "yanki"
             baslik: { tr: "b̷unu sistemin diliyle yazdın.", en: "y̷ou wrote this in the system's language." }
@@ -2460,7 +2460,7 @@ olaylar:
       - id: "kaya_darbe_gecesi_kacis"
         yer: "sanayi"
         paragraflar:
-          - { tr: "Haddehaneden çıktığında {yer:sanayi|in} sokakları bomboş, kamyonların izleri çamurda {yer:kiyikent_liman|e} doğru uzanıyor. Darbe bu gece değil, Sistem'in geri sayımının altmış beşe düştüğü sabah, şafakla birlikte gelecek; plan öyle diyordu. Önünde birkaç gün var.", en: "When you come out of the mill {yer:sanayi} streets are empty, truck tracks in the mud running toward {yer:kiyikent_liman}. The coup isn't going down tonight. It's the morning the countdown hits sixty-five. The plan said so. You've got a few days." }
+          - { tr: "Haddehaneden çıktığında {yer:sanayi|in} sokakları bomboş, kamyonların izleri çamurda {yer:kiyikent_liman|e} doğru uzanıyor. Darbe bu gece değil, Sistem'in geri sayımının altmış beşe düştüğü sabah, şafakla birlikte gelecek; plan öyle diyordu. Önünde birkaç gün var.", en: "When you come out of the mill, the streets of {yer:sanayi} are empty, truck tracks in the mud running toward {yer:kiyikent_liman}. The coup isn't going down tonight. It's the morning the countdown hits sixty-five. The plan said so. You've got a few days." }
         secenekler:
           - id: "hazirlan"
             etiket: { tr: "O sabaha hazırlan", en: "Get ready for that morning" }
@@ -2504,7 +2504,7 @@ olaylar:
         yer: "sanayi"
         paragraflar:
           - { tr: "{npc:kaya_demir} ikinci kolun haritasını sana uzatıyor: Konsey binası, üç giriş, iki nöbetçi kulübesi, bir revir. Revirin üstüne biri kurşunkalemle küçük bir not düşmüş: 'Hekime dokunulmayacak.'", en: "{npc:kaya_demir} hands you the second column's map. The Council building, three entrances, two guard posts, an infirmary. Somebody's written a small note over the infirmary in pencil: 'Nobody touches the doctor.'" }
-          - { tr: "\"Altmış beşinci sabah,\" diyor. \"O güne kadar kimseye tek kelime yok.\" Elini uzatıyor; bu kez gerçekten uzatıyor.", en: "\"Sixty-five morning,\" he says. \"Not one word to anybody till then.\" He holds out his hand. This time he actually holds it out." }
+          - { tr: "\"Altmış beşinci sabah,\" diyor. \"O güne kadar kimseye tek kelime yok.\" Elini uzatıyor; bu kez gerçekten uzatıyor.", en: "\"Morning of sixty-five,\" he says. \"Not one word to anybody till then.\" He holds out his hand. This time he actually holds it out." }
         secenekler:
           - id: "sik"
             etiket: { tr: "Elini sık", en: "Shake his hand" }
@@ -2552,7 +2552,7 @@ olaylar:
       - id: "kaya_darbe_gecesi_kenarda"
         yer: "sanayi"
         paragraflar:
-          - { tr: "{npc:kaya_demir} başını sallıyor; hayal kırıklığı mı bu, rahatlama mı, çıkaramıyorsun. \"Hava durumu,\" diyor. \"Hep öyleydin zaten.\"", en: "{npc:kaya_demir} nods. Disappointment or relief, you can't tell which. \"Weather,\" he says. \"You always were.\"" }
+          - { tr: "{npc:kaya_demir} başını sallıyor; hayal kırıklığı mı bu, rahatlama mı, çıkaramıyorsun. \"Hava durumu,\" diyor. \"Hep öyleydin zaten.\"", en: "{npc:kaya_demir} nods. Disappointment or relief, you can't tell which. \"Fair-weather,\" he says. \"Always were.\"" }
           - { tr: "Haddehaneden çıkarken arkanda bir motor çalışıyor, ardından bir tane daha. Altmış beşinci sabaha dek her gece bu sesi duyacaksın.", en: "As you walk out of the mill, an engine starts behind you. Then another. Every night until the morning of sixty-five, the same sound." }
         secenekler:
           - id: "git"

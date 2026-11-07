@@ -1,7 +1,8 @@
 # Parti K2 — sonlar, OP MC türleri ve epilog kartları (docs/PERDE2_4.md §3 "Sonlar", "NPC kaderleri").
 # sonlar: koşullar sözleşme tablosundaki gibidir (testler sınar); son karar olayı (events/81_sonlar.yaml) yalnızca
 #   koşulu tutan sonları gösterir. hasat yedek sondur; Demir Mod ölümü (story/90_sistem.yaml son_hasat) da ona bağlı.
-# arketipler: ilk tutan gösterilir (tanrı → tiran → koruyucu → kurtarıcı).
+# arketipler: ilk tutan gösterilir (sona özgü sürümler → tanrı → tiran → koruyucu → kurtarıcı).
+#   QA P2-17: Demir Taht hep Tiran, Vassal kendi Kurtarıcı açıklamasıyla (merhametli hükümdar "kalkan" sayılmasın).
 # epilog: her NPC/fraksiyon için ilk tutan satır; son satır koşulsuzdur. Kart yalnızca tanışılmış NPC'ler için çıkar.
 #   Satırlar geçmiş zamanda, epilog sesiyle yazılır; `son:` koşulu ulaşılan sonu okur.
 # Fraksiyon adları metinde düz yazılır (kısaltmalar için: "Lonca", "the Guild"); NPC ve yer adları belirteçle.
@@ -87,6 +88,14 @@ sonlar:
     gizli: true
 
 arketipler:
+  tiran_taht:
+    ad: { tr: "Tiran", en: "The Tyrant" }
+    aciklama: { tr: "Düzeni her şeyin önüne koydun. Dünyayı kendi ölçünle hizaya soktun ve ona tek bir ses verdin: seninkini. Herkes güvendeydi, yeter ki sana boyun eğsin.", en: "You put order ahead of everything. You lined the world up to your own measurements and gave it one voice: yours. Everyone was safe, as long as they did what you said." }
+    kosul: { son: "demir_taht" }
+  kurtarici_vassal:
+    ad: { tr: "Kurtarıcı", en: "The Savior" }
+    aciklama: { tr: "Ne tanrı oldun ne tiran ne de bir kalkan. Kuralların kırılmayacağını anladığın gün onlarla pazarlığa oturdun; dünyayı kurtardın ama bedelini her yıl yeniden ödenecek bir borca bağladın.", en: "You never became a god, or a tyrant, or a shield. The day you saw the rules wouldn't break, you sat down and bargained with them. You saved the world, and signed its price over to a debt that comes due every year." }
+    kosul: { son: "vassal" }
   tanri:
     ad: { tr: "Tanrı", en: "The God" }
     aciklama: { tr: "Gücü insanlığın üstünde duran bir yer gibi gördün ve insanlığı geride bırakmaktan hiç çekinmedin. Sayıların seni değiştirdiğini kabullendin; bu değişimi kayıp değil, terfi saydın.", en: "You saw power as a place above humanity, and you never hesitated to leave humanity behind. You accepted that the numbers changed you, and you counted the change as a promotion, not a loss." }
@@ -282,7 +291,7 @@ epilog:
       - kosul: { npc_olu: "aras_kurt" }
         metin: { tr: "Zirveye senden önce varmak için koşan {npc:aras_kurt} yolda düştü. Küresel Sıralama adını hiç silmedi: listenin en dibinde, griye dönmüş, ama hâlâ orada.", en: "{npc:aras_kurt} raced to beat you to the top and fell along the way. The Global Ranking never took his name down. It's at the very bottom of the list, grayed out, but still there." }
       - kosul: { bayrak: "aras_s_kademe" }
-        metin: { tr: "S kademesine ulaşan ilk insan {npc:aras_kurt} oldu ve tarih kitapları onun adını seninkinden önce yazdı. Her yıl aynı gün sana bir kart yolluyor; kartta tek bir kelime var: \"Önce.\"", en: "{npc:aras_kurt} became the first human to reach S grade, and the history books wrote his name before yours. Every year, on the same day, he sends you a card. It has one word on it: \"First.\"" }
+        metin: { tr: "S kademesine ulaşan ilk insan {npc:aras_kurt} oldu ve tarih kitapları onun adını seninkinden önce yazdı. Her yıl aynı gün sana bir kart yolluyor; kartta tek bir kelime var: \"Önce.\"", en: "{npc:aras_kurt} became the first human to reach Grade S, and the history books wrote his name before yours. Every year, on the same day, he sends you a card. It has one word on it: \"First.\"" }
       - kosul: { bayrak: "aras_cok_evren_yoldasi", yoldas: "aras_kurt" }
         metin: { tr: "Çok-evrende sırtını sana emanet ettiği günden beri {npc:aras_kurt} seni geçmeye çalışmaktan vazgeçmedi; tek fark, artık ikinizin de aynı yöne koştuğunu kabul etmesi. Bir sonraki geçidi kimin önce açacağına hâlâ iddiaya giriyorsunuz.", en: "Ever since {npc:aras_kurt} trusted you with his back in the multiverse, he hasn't stopped trying to pass you. He just admits now that you're both running in the same direction. You two still bet on who'll open the next passage first." }
       - kosul: { bayrak: "aras_cok_evren_yoldasi" }
@@ -337,6 +346,8 @@ epilog:
         metin: { tr: "{npc:thessar} yeni tanrının önünde eğilen ilk Kadim oldu. Raporunda bunu yazmadı; yazsaydı Meclis inanmazdı.", en: "{npc:thessar} was the first of the Ancients to bow to the new god. He left that out of his report. The Conclave wouldn't have believed it anyway." }
       - kosul: { son: "ozgurluk" }
         metin: { tr: "Sistem'siz bir dünyanın haritalardan silinişini izledi {npc:thessar}. Giderken sana bir not bıraktı: \"Hasat edilemeyen bir tarla. Böylesini hiç görmemiştim.\"", en: "{npc:thessar} watched a world without the System fall off the charts. Before he left, he left you a note: \"A field that cannot be harvested. I had never seen one before.\"" }
+      - kosul: { bayrak: "thessar_bagislandi", npc_hayatta: "thessar" }
+        metin: { tr: "Önünde diz çöken {npc:thessar|i} ayağa kaldırdığın günden sonra Meclis'e tek bir rapor yazdı, bir daha da yazmadı. Rapor şu satırla bitiyordu: hesabı ben kapattım. İkisi aynı şey değil.", en: "After you pulled {npc:thessar} up off his knees, he wrote the Conclave one report and never wrote another. It ended on a single line: I closed the account. That is different." }
       - kosul: { bayrak: "kadimler_yenildi" }
         metin: { tr: "Yenik filosuyla evine dönen {npc:thessar} raporunu Meclis'e sundu. Rapor tek kelimeden ibaretti: senin adın.", en: "{npc:thessar} went home with his beaten fleet and delivered his report to the Conclave. It was one word long: your name." }
       - kosul: { son: "hasat" }
@@ -443,6 +454,10 @@ epilog:
         metin: { tr: "Kadimler Sistem'i olmayan bir dünyayı hasat edemedi. Dünya, onların haritalarında boş bir nokta olarak kaldı; yanında, kimin yazdığı belli olmayan bir not var: dokunma.", en: "The Ancients couldn't harvest a world with no System. Earth became an empty dot on their charts, and next to it someone, nobody's sure who, wrote a note: do not touch." }
       - kosul: { son: "kod_kirici" }
         metin: { tr: "Kadimler yeniden yazılan Sistem'in bütün çok-evrene yayıldığını görünce Meclis tarihinde ilk kez olağanüstü toplandı. Terazileri artık boşu tartıyor; düzeltmeye uğraşıyorlar ama beceremiyorlar.", en: "When the Ancients saw the rewritten System spreading across the whole multiverse, the Conclave called its first emergency session ever. Their scales weigh nothing now. They keep trying to fix that. They can't." }
+      - kosul: { bayrak: "kadim_teslim_tuzak" }
+        metin: { tr: "Kadim filosunu kendi yasalarının bir maddesi geri çekti. Meclis o maddeyi Defter'den silmek istiyor ama silmek için önce okuması gerek; her okuyuşta madde yeniden yürürlüğe giriyor.", en: "The Ancient fleet was pulled back by an article of their own law. The Conclave wants it struck from the Ledger, but to strike it they have to read it first, and every time they read it, it takes effect again." }
+      - kosul: { bayrak: "kadim_vergi_sahte" }
+        metin: { tr: "Meclis'in arşivinde, Dünya'nın sayfasının arasında içi boş bir cam kristal saklanıyor: muhasebeci bir ırka kesilen ilk sahte fatura. Kadimler o sayfayı her açtığında kristali bir kez daha tartıyor.", en: "In the Conclave's archive, tucked into Earth's page, there's a hollow glass crystal: the first forged invoice anyone ever passed to a race of accountants. Every time the Ancients open that page, they weigh it one more time." }
       - kosul: { bayrak: "kadimler_yenildi" }
         metin: { tr: "Kadimler istilada yenildi ve Dünya'yı haritalarında kırmızıyla işaretledi. Bir gün geri dönecekler; ama bu sefer kapıyı çalarak.", en: "The Ancients lost the invasion and marked Earth in red on their charts. They'll be back someday. But this time, they'll knock." }
       - kosul: { bayrak: "kadim_anlasmasi" }

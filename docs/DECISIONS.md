@@ -6,6 +6,7 @@ GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En 
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |
 | --- | --- | --- | --- |
+| 129 | Terim kanonu (QA P2-15): Kadimler'in hasat ettiği dünyaların Sistem sayımı **bin dört yüz on bir**dir (konuşmada "bin dört yüz"); anlatı ve Kadim ağzında yuvarlak "bin dünya / a thousand worlds" serbesttir, "yüzlerce dünya" kullanılmaz; Thessar'ın kendi payı 39 (#115). Yankı'nın taşıdığı kişi TR "taşıyıcı", EN yalnız "carrier" ("host" değil). EN kademe yazımı "Grade S" (ad), "an S-Grade hunter" (sıfat). Yankı fısıltısında TR "sistem" (kesmesiz: "sistemin"), EN "the system" küçük harfle | GDD'de sayı yok; "bin dünya" en sık (≈12), "bin dört yüz on bir" Sistem'in kesin sayımı, ikisi çelişmiyor; "yüzlerce" sayıyı küçülttüğü için çelişkiydi. | Yeni çok-evren içeriği yazılırken |
 | 128 | Prologda (`story/00_prolog.yaml`) ve uyanış satırlarında (`awakenings.yaml`) Yankı'nın sözleri tırnaklı ve büyük harfle yazılır; #101'deki küçük harf/tırnaksız kuralı bunlara uygulanmaz. Üslup ve QA araçları bunları sorun saymaz | Kullanıcı kararı: kasıtlı (ilk temasta ses henüz "ses"tir; uyanış anları yüksek sesle söylenir). | — |
 
 ## Arayüz sadeleştirme — 2026-11-07

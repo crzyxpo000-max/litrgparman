@@ -274,6 +274,10 @@ sahneler:
         kosul: { bayrak: "yabanci_korundu", bayrak_yok: "ilk_oldurme" }
       - metin: { tr: "Kurtardığın yabancı adını bile söyleyemeden uyuyakalıyor. Avucunun içinde, sana bıraktığı çakı duruyor.", en: "The stranger you saved falls asleep before they can tell you their name. In your palm is the pocketknife they left you." }
         kosul: { bayrak: "yabanci_korundu" }
+      - metin: { tr: "Pencereden başını kaldırdığında ağacın dibi boştu. Yabancı topallayarak sise karışmış; toprakta yalnızca sürüklenen dizinin bıraktığı uzun bir iz kalmış.", en: "When you looked up from the window, the foot of the tree was empty. The stranger had limped off into the fog. All that's left is one long drag mark in the dirt." }
+        kosul: { bayrak: "ilk_oldurme", bayrak_yok: "yabanci_korundu" }
+      - metin: { tr: "Seni kurtaran yabancı ateşin öbür ucunda dizini ovuşturuyor. Göz göze geldiğinizde yalnızca başını sallıyor; ona bir borcun olduğunu ikiniz de biliyorsunuz.", en: "The stranger who saved you sits at the far end of the fire, rubbing their knee. When your eyes meet, they just nod. You both know you owe them one." }
+        kosul: { bayrak_yok: ["ilk_oldurme", "yabanci_korundu", "yabanci_birakildi", "deniz_el_tutuldu"] }
       - metin: { tr: "Sen koşarken arkanda kalan çığlık bir yerde kesildi. Ne zaman kesildiğini hatırlamıyorsun; hatırlamak da istemiyorsun.", en: "The scream behind you stopped while you ran. You don't remember when. You don't want to." }
         kosul: { bayrak: "yabanci_birakildi" }
       - metin: { tr: "\"Annemler...\" diyor {npc:deniz_arman} ateşin öbür yanından, ama cümlenin gerisini getirmiyor.", en: "\"My folks,\" {npc:deniz_arman} says from across the fire, and doesn't finish the sentence." }

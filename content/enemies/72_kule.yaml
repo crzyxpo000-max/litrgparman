@@ -1365,7 +1365,7 @@ dusmanlar:
           bekleme: 3
           metin: { tr: "{dusman} kendi dünyasının güneşini, son kez, senin üstüne doğuruyor.", en: "{dusman} makes its home world's sun rise one last time, right on top of you." }
   kule_onceki_tasiyici:
-    ad: { tr: "Önceki Taşıyıcı", en: "The Previous Host" }
+    ad: { tr: "Önceki Taşıyıcı", en: "The Previous Carrier" }
     aciklama: { tr: "Doksanıncı katın taslak beyazlığında oturan, yarısı çizgi yarısı ten bir insan. Göğsünde bir delik var; tam bir sesin sığacağı büyüklükte. Bir zamanlar bir şey taşımış. Bir şey onu terk etmiş.", en: "A person sitting in the sketch-white of the ninetieth floor, half line drawing, half skin. There's a hole in their chest exactly big enough for a voice to fit through. They carried something once. Something left them." }
     kanca: { tr: "Beyazlığın ortasında oturan figür başını kaldırıyor ve sana değil, senin hemen arkana bakıyor. \"Demek seni buldu,\" diyor.", en: "The figure sitting in the middle of the white looks up, not at you but just past you. \"So it found you,\" they say." }
     seviye: 39
@@ -1418,10 +1418,10 @@ dusmanlar:
     boss: true
     fazlar:
       - esik: 70
-        metin: { tr: "Taşıyıcının çizgileri hızlanıyor; kalem görünmez bir elde, onu senden daha hızlı çiziyor.", en: "The host's lines speed up. An invisible hand is drawing them faster than you can move." }
+        metin: { tr: "Taşıyıcının çizgileri hızlanıyor; kalem görünmez bir elde, onu senden daha hızlı çiziyor.", en: "The carrier's lines speed up. An invisible hand is drawing them faster than you can move." }
         guclenme: { agi: 4, per: 3 }
       - esik: 40
-        metin: { tr: "Taşıyıcı kalkıyor. Çizgileri kalınlaşıyor, ten çoğalıyor; sanki kendini, son kez, tamamlamaya karar vermiş.", en: "The host stands up. Its lines thicken and the skin spreads, like it's decided to finish drawing itself, one last time." }
+        metin: { tr: "Taşıyıcı kalkıyor. Çizgileri kalınlaşıyor, ten çoğalıyor; sanki kendini, son kez, tamamlamaya karar vermiş.", en: "The carrier stands up. Its lines thicken and the skin spreads, like it's decided to finish drawing itself, one last time." }
         guclenme: { str: 5, agi: 5, wil: 5 }
         saldiri:
           id: "biz_de_hizliydik"
@@ -1434,7 +1434,7 @@ dusmanlar:
           bekleme: 3
           metin: { tr: "{dusman} bir an senden hızlı oluyor; ama hız, sende olduğu gibi, onda da bir şeyin bedeliymiş gibi duruyor.", en: "For a second {dusman} is faster than you. But the speed looks like it costs it something, the same way yours costs you." }
       - esik: 15
-        metin: { tr: "Göğsündeki delik büyüyor. Taşıyıcı ilk kez sana doğrudan bakıyor ve dudakları bir kelime biçimine giriyor; sesi yok, ama kelimeyi tanıyorsun. Bir isim. Senin kafanın içindekinin adı.", en: "The hole in its chest widens. For the first time, the host looks right at you, and its lips shape a word. No sound, but you know the word. A name. The name of the thing in your head." }
+        metin: { tr: "Göğsündeki delik büyüyor. Taşıyıcı ilk kez sana doğrudan bakıyor ve dudakları bir kelime biçimine giriyor; sesi yok, ama kelimeyi tanıyorsun. Bir isim. Senin kafanın içindekinin adı.", en: "The hole in its chest widens. For the first time, the carrier looks right at you, and its lips shape a word. No sound, but you know the word. A name. The name of the thing in your head." }
         guclenme: { int: 5, wil: 6, end: 4 }
         saldiri:
           id: "geri_ver"

@@ -100,7 +100,7 @@ olaylar:
             kosul: { degisken_min: { yol_yeri: 3 }, degisken_max: { yol_yeri: 3 }, ordu_min: 1 }
           - metin: { tr: "{yer:eski_sehir|in} damlarından birine çıkıyorsun; kiremitlerinin yarısı Entegrasyon'dan beri kayıp. Başını kaldırıp bakan yok. Burada doğacak şeyi bir sen göreceksin, bir de ay.", en: "You climb onto one of the rooftops in {yer:eski_sehir}, half its shingles missing since Integration. Nobody looks up. Whatever gets born here, only you and the moon are going to see it." }
             kosul: { degisken_min: { yol_yeri: 4 } }
-          - metin: { tr: "{npc:yanki} konuşmaya başlıyor ve bu kez susmuyor: öz bir kelimedir, dünyanın kendine verdiği adlardan biri. sen onlardan birkaçını ezberledin; şimdi onları bir cümlede birleştireceksin. sistem buna yol diyor. ben imza diyorum.", en: "{npc:yanki} starts talking, and this time it doesn't stop: an essence is a word. one of the names the world gave itself. you've memorized a few of them. now you're going to tie them into a sentence. the System calls that a path. i call it a signature." }
+          - metin: { tr: "{npc:yanki} konuşmaya başlıyor ve bu kez susmuyor: öz bir kelimedir, dünyanın kendine verdiği adlardan biri. sen onlardan birkaçını ezberledin; şimdi onları bir cümlede birleştireceksin. sistem buna yol diyor. ben imza diyorum.", en: "{npc:yanki} starts talking, and this time it doesn't stop: an essence is a word. one of the names the world gave itself. you've memorized a few of them. now you're going to tie them into a sentence. the system calls that a path. i call it a signature." }
             kosul: { bayrak: "yanki_bagi" }
           - metin: { tr: "herkesin yolu A kademesinde açılır; sistem bir cümleyi ancak o kadar kelime bilene emanet eder. seninki erken açıldı, çünkü sende benim kelimelerim de var. özür dilemiyorum, yalnızca haber veriyorum.", en: "everyone's path opens at A-Grade, because the system only trusts a sentence to somebody who knows that many words. yours opened early, because you've got my words in you too. i'm not apologizing. i'm just letting you know." }
             kosul: { bayrak: "yanki_bagi" }
@@ -654,7 +654,7 @@ olaylar:
           - { tr: "Yeniden kurulan beden eskisinden hem ağır hem sıcak. Parmaklarının arasından ince bir duman tütüyor; bastığın her yerde taş kararıp sertleşiyor.", en: "The body that rebuilds itself is heavier and hotter than the old one. Thin smoke curls up between your fingers, and everywhere you step, the stone darkens and hardens." }
           - metin: { tr: "Meydandaki halka geri çekiliyor. Kimi dua ediyor, kimi ağlıyor; ön sıradaki ihtiyarsa cenazedeymiş gibi yalnızca şapkasını çıkarıyor.", en: "The ring in the square pulls back. Somebody's praying, somebody's crying, and the old man up front just takes off his hat, like he's at a funeral." }
             kosul: { degisken_min: { yol_yeri: 3 }, degisken_max: { yol_yeri: 3 } }
-          - metin: { tr: "{npc:yanki|in} sesinde hayranlığa yakın bir şey var: kendini yaktın ve geri geldin. sistem bunu hata diye kaydetmeye çalışıyor; kayıt da yanıyor.", en: "{npc:yanki}, almost admiring: you burned yourself down and came back. the System's trying to log it as an error. the log's on fire too." }
+          - metin: { tr: "{npc:yanki|in} sesinde hayranlığa yakın bir şey var: kendini yaktın ve geri geldin. sistem bunu hata diye kaydetmeye çalışıyor; kayıt da yanıyor.", en: "{npc:yanki}, almost admiring: you burned yourself down and came back. the system's trying to log it as an error. the log's on fire too." }
             kosul: { bayrak: "yanki_bagi" }
         secenekler:
           - id: "sondur"
@@ -1003,11 +1003,7 @@ olaylar:
           - metin: { tr: "Koridordan düzenli, adım uydurmuş postal sesleri geliyor. Kapıdaki iki adam kanatları içeriden kapatıp sürgüyü çekmiş bile. {npc:kaya_demir} hiç acele etmeden masaya dönüyor.", en: "Boots in the corridor. Steady, in step. The two men at the door swing the doors shut from inside and throw the bolt. {npc:kaya_demir} turns back to the table, in no hurry at all." }
             kosul: { bayrak_yok: ["mert_kadimlere_satti", "kaya_devrildi"], bayrak: "kaya_darbe_hazirligi", npc_hayatta: "kaya_demir" }
           - metin: { tr: "Derken uzaktan bir boru sesi geliyor: {yer:kule_dibi|in} alarmı. Odadakiler birbirine bakıp aynı anda anlıyor: ihanet bu masada değil. Masa, gözleri yanlış yere çevirmek için kurulmuş.", en: "Then, far off, a horn: the {yer:kule_dibi} alarm. Everyone in the room looks at everyone else and gets it at the same time. The betrayal isn't at this table. This table was just here to keep everybody looking the wrong way." }
-            kosul: { bayrak_yok: "mert_kadimlere_satti", bayrak: "kaya_devrildi" }
-          - metin: { tr: "Derken uzaktan bir boru sesi geliyor: {yer:kule_dibi|in} alarmı. Odadakiler birbirine bakıp aynı anda anlıyor: ihanet bu masada değil. Masa, gözleri yanlış yere çevirmek için kurulmuş.", en: "Then, far off, a horn: the {yer:kule_dibi} alarm. Everyone in the room looks at everyone else and gets it at the same time. The betrayal isn't at this table. This table was just here to keep everybody looking the wrong way." }
-            kosul: { bayrak_yok: ["mert_kadimlere_satti", "kaya_devrildi"], npc_olu: "kaya_demir" }
-          - metin: { tr: "Derken uzaktan bir boru sesi geliyor: {yer:kule_dibi|in} alarmı. Odadakiler birbirine bakıp aynı anda anlıyor: ihanet bu masada değil. Masa, gözleri yanlış yere çevirmek için kurulmuş.", en: "Then, far off, a horn: the {yer:kule_dibi} alarm. Everyone in the room looks at everyone else and gets it at the same time. The betrayal isn't at this table. This table was just here to keep everybody looking the wrong way." }
-            kosul: { bayrak_yok: ["mert_kadimlere_satti", "kaya_devrildi", "kaya_darbe_hazirligi"], npc_hayatta: "kaya_demir" }
+            kosul: { herhangi: [{ bayrak_yok: "mert_kadimlere_satti", bayrak: "kaya_devrildi" }, { bayrak_yok: ["mert_kadimlere_satti", "kaya_devrildi"], npc_olu: "kaya_demir" }, { bayrak_yok: ["mert_kadimlere_satti", "kaya_devrildi", "kaya_darbe_hazirligi"], npc_hayatta: "kaya_demir" }] }
         secenekler:
           - id: "mert"
             etiket: { tr: "Telsiz sinyalinin peşine düş", en: "Chase down the radio signal" }
@@ -1056,33 +1052,15 @@ olaylar:
           - metin: { tr: "\"Kendi ırkıma ihanet etmeye geldim,\" diyor; sesi her zamanki kadar kibar, her zamanki kadar kusursuz. \"Bunu benden önce kimse yapmadı. Biraz acele edersen sonuncusu da ben olmam.\"", en: "\"I've come to betray my own kind,\" he says, voice as polite and flawless as ever. \"No one has ever done it before. If you hurry, I may not be the last.\"" }
             kosul: { bayrak: "thessar_ihanete_hazir", bayrak_yok: "ihanet_thessar" }
           - metin: { tr: "Işık sütunu boş meydana iniyor, bir şey arayıp bulamayınca geri çekiliyor. Kadimler bu gece birini bekliyordu. Beklenen buraya gelmedi, çünkü onun işi başka yerde.", en: "The column of light hits an empty square, searches for something, doesn't find it, and pulls back. The Ancients were expecting someone tonight. That someone didn't come here, because their job is somewhere else." }
-            kosul: { bayrak_yok: "thessar_ihanete_hazir" }
-          - metin: { tr: "Işık sütunu boş meydana iniyor, bir şey arayıp bulamayınca geri çekiliyor. Kadimler bu gece birini bekliyordu. Beklenen buraya gelmedi, çünkü onun işi başka yerde.", en: "The column of light hits an empty square, searches for something, doesn't find it, and pulls back. The Ancients were expecting someone tonight. That someone didn't come here, because their job is somewhere else." }
-            kosul: { bayrak: ["thessar_ihanete_hazir", "ihanet_thessar"] }
+            kosul: { herhangi: [{ bayrak_yok: "thessar_ihanete_hazir" }, { bayrak: ["thessar_ihanete_hazir", "ihanet_thessar"] }] }
           - metin: { tr: "{yer:tepe|den} bir ilahi yükseliyor: yüzlerce ağızdan tek bir ezgi, ritimli ve buyurgan. Yokuşta beyaz cüppeli bir kalabalık meşalelerle ilerliyor; aralarında iple birbirine bağlanmış insanlar var.", en: "A hymn rises from {yer:tepe}. Hundreds of voices, one tune, rhythmic and commanding. Up the slope, a crowd in white robes carries torches, and in the middle of them are people tied together with rope." }
-            kosul: { bayrak_yok: ["thessar_ihanete_hazir", "deniz_yukselenlerden_dondu"], bayrak: "deniz_yukselenlere_gitti", npc_hayatta: "deniz_arman" }
-          - metin: { tr: "{yer:tepe|den} bir ilahi yükseliyor: yüzlerce ağızdan tek bir ezgi, ritimli ve buyurgan. Yokuşta beyaz cüppeli bir kalabalık meşalelerle ilerliyor; aralarında iple birbirine bağlanmış insanlar var.", en: "A hymn rises from {yer:tepe}. Hundreds of voices, one tune, rhythmic and commanding. Up the slope, a crowd in white robes carries torches, and in the middle of them are people tied together with rope." }
-            kosul: { bayrak: ["deniz_yukselenlere_gitti", "thessar_ihanete_hazir", "ihanet_thessar"], bayrak_yok: "deniz_yukselenlerden_dondu", npc_hayatta: "deniz_arman" }
+            kosul: { herhangi: [{ bayrak_yok: ["thessar_ihanete_hazir", "deniz_yukselenlerden_dondu"], bayrak: "deniz_yukselenlere_gitti", npc_hayatta: "deniz_arman" }, { bayrak: ["deniz_yukselenlere_gitti", "thessar_ihanete_hazir", "ihanet_thessar"], bayrak_yok: "deniz_yukselenlerden_dondu", npc_hayatta: "deniz_arman" }] }
           - metin: { tr: "Kalabalığın başında tanıdık bir yüz yürüyor; kalkanı içten içe yanıyor, gözleri başka bir şeye dönmüş: {npc:deniz_arman}.", en: "At the head of the crowd, shield burning from the inside, eyes turned toward something else, walks a face you know: {npc:deniz_arman}." }
-            kosul: { bayrak_yok: ["thessar_ihanete_hazir", "deniz_yukselenlerden_dondu"], bayrak: "deniz_yukselenlere_gitti", npc_hayatta: "deniz_arman" }
-          - metin: { tr: "Kalabalığın başında tanıdık bir yüz yürüyor; kalkanı içten içe yanıyor, gözleri başka bir şeye dönmüş: {npc:deniz_arman}.", en: "At the head of the crowd, shield burning from the inside, eyes turned toward something else, walks a face you know: {npc:deniz_arman}." }
-            kosul: { bayrak: ["deniz_yukselenlere_gitti", "thessar_ihanete_hazir", "ihanet_thessar"], bayrak_yok: "deniz_yukselenlerden_dondu", npc_hayatta: "deniz_arman" }
+            kosul: { herhangi: [{ bayrak_yok: ["thessar_ihanete_hazir", "deniz_yukselenlerden_dondu"], bayrak: "deniz_yukselenlere_gitti", npc_hayatta: "deniz_arman" }, { bayrak: ["deniz_yukselenlere_gitti", "thessar_ihanete_hazir", "ihanet_thessar"], bayrak_yok: "deniz_yukselenlerden_dondu", npc_hayatta: "deniz_arman" }] }
           - metin: { tr: "Derken Kule'nin gövdesinde, çok yukarıda, ellinci katın hizasında bir kapı açılıyor. Dışarıdan açılmış gibi görünse de dışarıda kimse yok; kapıyı açan el içeriden açmış.", en: "Then, way up on the Spire's side, a door opens, level with the fiftieth floor. It looks like it was opened from outside, except nobody's out there. Whoever opened it did it from inside." }
-            kosul: { bayrak_yok: ["deniz_yukselenlere_gitti", "thessar_ihanete_hazir"] }
-          - metin: { tr: "Derken Kule'nin gövdesinde, çok yukarıda, ellinci katın hizasında bir kapı açılıyor. Dışarıdan açılmış gibi görünse de dışarıda kimse yok; kapıyı açan el içeriden açmış.", en: "Then, way up on the Spire's side, a door opens, level with the fiftieth floor. It looks like it was opened from outside, except nobody's out there. Whoever opened it did it from inside." }
-            kosul: { bayrak: ["thessar_ihanete_hazir", "ihanet_thessar"], bayrak_yok: "deniz_yukselenlere_gitti" }
-          - metin: { tr: "Derken Kule'nin gövdesinde, çok yukarıda, ellinci katın hizasında bir kapı açılıyor. Dışarıdan açılmış gibi görünse de dışarıda kimse yok; kapıyı açan el içeriden açmış.", en: "Then, way up on the Spire's side, a door opens, level with the fiftieth floor. It looks like it was opened from outside, except nobody's out there. Whoever opened it did it from inside." }
-            kosul: { bayrak_yok: "thessar_ihanete_hazir", bayrak: "deniz_yukselenlere_gitti", npc_olu: "deniz_arman" }
-          - metin: { tr: "Derken Kule'nin gövdesinde, çok yukarıda, ellinci katın hizasında bir kapı açılıyor. Dışarıdan açılmış gibi görünse de dışarıda kimse yok; kapıyı açan el içeriden açmış.", en: "Then, way up on the Spire's side, a door opens, level with the fiftieth floor. It looks like it was opened from outside, except nobody's out there. Whoever opened it did it from inside." }
-            kosul: { bayrak: ["deniz_yukselenlere_gitti", "thessar_ihanete_hazir", "ihanet_thessar"], npc_olu: "deniz_arman" }
-          - metin: { tr: "Derken Kule'nin gövdesinde, çok yukarıda, ellinci katın hizasında bir kapı açılıyor. Dışarıdan açılmış gibi görünse de dışarıda kimse yok; kapıyı açan el içeriden açmış.", en: "Then, way up on the Spire's side, a door opens, level with the fiftieth floor. It looks like it was opened from outside, except nobody's out there. Whoever opened it did it from inside." }
-            kosul: { bayrak_yok: "thessar_ihanete_hazir", bayrak: ["deniz_yukselenlere_gitti", "deniz_yukselenlerden_dondu"], npc_hayatta: "deniz_arman" }
-          - metin: { tr: "Derken Kule'nin gövdesinde, çok yukarıda, ellinci katın hizasında bir kapı açılıyor. Dışarıdan açılmış gibi görünse de dışarıda kimse yok; kapıyı açan el içeriden açmış.", en: "Then, way up on the Spire's side, a door opens, level with the fiftieth floor. It looks like it was opened from outside, except nobody's out there. Whoever opened it did it from inside." }
-            kosul: { bayrak: ["deniz_yukselenlere_gitti", "deniz_yukselenlerden_dondu", "thessar_ihanete_hazir", "ihanet_thessar"], npc_hayatta: "deniz_arman" }
+            kosul: { herhangi: [{ bayrak_yok: ["deniz_yukselenlere_gitti", "thessar_ihanete_hazir"] }, { bayrak: ["thessar_ihanete_hazir", "ihanet_thessar"], bayrak_yok: "deniz_yukselenlere_gitti" }, { bayrak_yok: "thessar_ihanete_hazir", bayrak: "deniz_yukselenlere_gitti", npc_olu: "deniz_arman" }, { bayrak: ["deniz_yukselenlere_gitti", "thessar_ihanete_hazir", "ihanet_thessar"], npc_olu: "deniz_arman" }, { bayrak_yok: "thessar_ihanete_hazir", bayrak: ["deniz_yukselenlere_gitti", "deniz_yukselenlerden_dondu"], npc_hayatta: "deniz_arman" }, { bayrak: ["deniz_yukselenlere_gitti", "deniz_yukselenlerden_dondu", "thessar_ihanete_hazir", "ihanet_thessar"], npc_hayatta: "deniz_arman" }] }
           - metin: { tr: "{npc:yanki} sesini kısıyor: o kapı ancak bir insan eliyle açılır. Kule bunu bize daha ilk gün söyledi.", en: "{npc:yanki}, hushed: that door only opens to a human hand. the Spire told us that on day one." }
-            kosul: { bayrak_yok: "thessar_ihanete_hazir", bayrak: "yanki_bagi" }
-          - metin: { tr: "{npc:yanki} sesini kısıyor: o kapı ancak bir insan eliyle açılır. Kule bunu bize daha ilk gün söyledi.", en: "{npc:yanki}, hushed: that door only opens to a human hand. the Spire told us that on day one." }
-            kosul: { bayrak: ["yanki_bagi", "thessar_ihanete_hazir", "ihanet_thessar"] }
+            kosul: { herhangi: [{ bayrak_yok: "thessar_ihanete_hazir", bayrak: "yanki_bagi" }, { bayrak: ["yanki_bagi", "thessar_ihanete_hazir", "ihanet_thessar"] }] }
         secenekler:
           - id: "thessar"
             etiket: { tr: "{npc:thessar|in} yanına koş", en: "Run to {npc:thessar}" }
@@ -2253,7 +2231,7 @@ olaylar:
       - id: "buyuk_ihanet_sonra"
         yer: "kasaba_cekirdegi"
         paragraflar:
-          - { tr: "Sabah {yer:kiyikent} üstüne gri ve sessiz iniyor. Kasaba Çekirdeği'nin önündeki meydan, gece olanları duymuş insanlarla dolu; bağıran yok, herkes fısıldaşıyor.", en: "Morning comes down over {yer:kiyikent} gray and quiet. The square in front of the Town Core is full of people who heard what happened last night. Nobody's yelling. Everybody's whispering." }
+          - { tr: "Sabah {yer:kiyikent} üstüne gri ve sessiz iniyor. {yer:kasaba_cekirdegi|in} önündeki meydan, gece olanları duymuş insanlarla dolu; bağıran yok, herkes fısıldaşıyor.", en: "Morning comes down over {yer:kiyikent} gray and quiet. The square in front of {yer:kasaba_cekirdegi} is full of people who heard what happened last night. Nobody's yelling. Everybody's whispering." }
           - metin: { tr: "Hainin durdurulduğunu herkes biliyor. Ama durdurulan bir ihanet yaşanmamış sayılmaz. İnsanlar birbirlerine eskisinden biraz daha uzun bakıyor.", en: "The traitor got stopped. Everybody knows that much. But stopping a betrayal doesn't mean it never happened. People look at each other a little longer than they used to." }
             kosul: { bayrak: "ihanet_onlendi" }
           - metin: { tr: "İhanet amacına ulaştı. Şehrin bir parçası bir daha geri gelmeyecek; meydandaki herkes bunu iliklerinde hissediyor.", en: "The betrayal went through. Part of the city isn't coming back, and everyone in the square can feel it in their bones." }
@@ -2438,7 +2416,7 @@ olaylar:
             kosul: { bayrak: "thessar_sigindi", npc_hayatta: "thessar" }
           - metin: { tr: "Işıklardan biri ötekilerden parlak: gümüş ve siyah. Kadim tacı takan bir insan ancak bu kadar parlayabilir.", en: "One of the lights is brighter than the rest. Silver and black. As bright as a human can shine wearing an Ancient crown." }
             kosul: { bayrak: "aras_kadimlere_gitti" }
-          - metin: { tr: "{yer:kordon|in} yeniden yakılan fenerleri körfez boyunca uzanıyor. Bir zamanlar düşmüş olan sahil şimdi şehrin ilk savunma hattı.", en: "The Esplanade's relit lanterns run all along the bay. A shoreline that fell once is now the city's first line of defense." }
+          - metin: { tr: "{yer:kordon|in} yeniden yakılan fenerleri körfez boyunca uzanıyor. Bir zamanlar düşmüş olan sahil şimdi şehrin ilk savunma hattı.", en: "The relit lanterns of {yer:kordon} run all along the bay. A shoreline that fell once is now the city's first line of defense." }
             kosul: { bayrak: "p3_kordon_geri_alindi" }
           - metin: { tr: "{npc:yanki} hiç olmadığı kadar alçak bir sesle fısıldıyor: bunu daha önce gördüm, tam da bunu. sonraki sahneyi de biliyorum. bu kez değiştirebilir miyiz, bilmiyorum. ama bu kez sen varsın.", en: "{npc:yanki}, quieter than it's ever been: i've seen this before. exactly this. i know the next scene too. i don't know if we can change it this time. but this time, you're here." }
             kosul: { bayrak: "yanki_bagi" }
@@ -2525,9 +2503,7 @@ olaylar:
           - { tr: "{yer:kiyikent_liman} meydanı sabaha kadar dolup taşıyor: avcılar, gönüllüler, bağladığın canavarlar, Kapı külünden kalkan şeyler. Hepsi sancağının altında, sıra sıra dizilmiş.", en: "The waterfront square fills up until dawn. Hunters, volunteers, monsters you've bound, things that rose from the ash of Gates; all of them under your banner, rank on rank." }
           - { tr: "Saymaya başlıyor, bir yerde vazgeçiyorsun. Bu gece sayıların önemi yok. Önemli olan, hiçbirinin gökyüzüne bakmaması; hepsinin gözü sende.", en: "You try to count them and give up somewhere along the way. Numbers don't matter tonight. What matters is that none of them are looking at the sky. They're all looking at you." }
           - metin: { tr: "Ön safta Demir Yemin'in eski askerleri var; darbe gecesinden beri ilk kez rütbelerini omuzlarına takmışlar.", en: "The front rank is old Iron Oath soldiers, wearing their stripes for the first time since the night of the coup." }
-            kosul: { bayrak: ["lonca_hakimiyeti", "ihanet_kaya"] }
-          - metin: { tr: "Ön safta Demir Yemin'in eski askerleri var; darbe gecesinden beri ilk kez rütbelerini omuzlarına takmışlar.", en: "The front rank is old Iron Oath soldiers, wearing their stripes for the first time since the night of the coup." }
-            kosul: { bayrak: ["lonca_hakimiyeti", "kaya_devrildi"], bayrak_yok: "ihanet_kaya" }
+            kosul: { herhangi: [{ bayrak: ["lonca_hakimiyeti", "ihanet_kaya"] }, { bayrak: ["lonca_hakimiyeti", "kaya_devrildi"], bayrak_yok: "ihanet_kaya" }] }
           - metin: { tr: "Ön safta Demir Yemin'in eski askerleri var; omuzlarındaki rütbeler bu gece için yeniden parlatılmış. Entegrasyon'dan beri Kapı'dan Kapı'ya dövüşen bu adamlar ilk kez tek bir sancağın altında bir arada duruyor.", en: "The front rank is old Iron Oath soldiers, their stripes on their shoulders, polished up again for tonight. For a year they fought Gate by Gate. This is the first time they've stood together under one banner." }
             kosul: { bayrak: "lonca_hakimiyeti", bayrak_yok: ["ihanet_kaya", "kaya_devrildi"] }
         secenekler:
@@ -3269,7 +3245,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Ellinci kattaki geçitten bir sefer ekibi dönüyor: on dört kişi gitmişti, dokuzu geri geliyor. Derileri tuzdan çatlamış, gözleri başka bir güneşe alışmış. İçlerinden birinin kolu artık insan kolu değil.", en: "An expedition comes back through the gate on the fiftieth floor: fourteen went, nine come back. Their skin's cracked from salt, their eyes used to another sun, and one of them's arm isn't a human arm anymore." }
-          - { tr: "Aralarında kimseye benzemeyen bir çocuk var: teni mercan renginde, parmakları perdeli. Ekip onu Batık Takımada'dan getirmiş. \"Bırakamazdık,\" diyor ekibin başındaki kadın. \"Dünyası boğuluyordu.\"", en: "There's a kid with them. Doesn't look like anybody: coral-colored skin, webbed fingers. The crew brought her back from the Drowned Reach. \"We couldn't leave her,\" says the woman leading them. \"Her whole world was drowning.\"" }
+          - { tr: "Aralarında kimseye benzemeyen bir çocuk var: teni mercan renginde, parmakları perdeli. Ekip onu {yer:batik_takimada|den} getirmiş. \"Bırakamazdık,\" diyor ekibin başındaki kadın. \"Dünyası boğuluyordu.\"", en: "There's a kid with them. Doesn't look like anybody: coral-colored skin, webbed fingers. The crew brought her back from {yer:batik_takimada}. \"We couldn't leave her,\" says the woman leading them. \"Her whole world was drowning.\"" }
           - { tr: "{yer:kule_dibi|in} kalabalığı geçidin önüne yığılmış. Biri \"Karantina!\" diye bağırıyor, öteki \"Canavar!\" diye. Derken biri çocuğa bir taş fırlatıyor.", en: "The {yer:kule_dibi} crowd has packed in around the gate. Somebody yells \"Quarantine!\" Somebody else yells \"Monster!\" Somebody throws a rock at the kid." }
           - metin: { tr: "{npc:elif_sari} elinde çantasıyla kalabalığı yararak geliyor. \"Kimse kimseye dokunmayacak,\" diyor. \"Önce muayene.\"", en: "{npc:elif_sari} pushes through the crowd, bag in hand. \"Nobody touches anybody,\" she says. \"Exams first.\"" }
             kosul: { npc_hayatta: "elif_sari" }
@@ -3323,7 +3299,7 @@ olaylar:
       - id: "p3_donenler_kol"
         yer: "kule"
         paragraflar:
-          - { tr: "Adamın kolundan bir şey kopup ayağa kalkıyor: mercandan ve kemikten, insan boyunda, ağzı olmayan bir şey. Batık Takımada onu kaçak bir yolcu gibi buraya yollamış; içi tuzlu bir açlıkla dolu.", en: "Something tears loose from the man's arm and stands up: coral and bone, human-sized, no mouth. The Drowned Reach sent it here like a stowaway. There's a salt-water hunger in it." }
+          - { tr: "Adamın kolundan bir şey kopup ayağa kalkıyor: mercandan ve kemikten, insan boyunda, ağzı olmayan bir şey. {yer:batik_takimada} onu kaçak bir yolcu gibi buraya yollamış; içi tuzlu bir açlıkla dolu.", en: "Something tears loose from the man's arm and stands up: coral and bone, human-sized, no mouth. The Drowned Reach sent it here like a stowaway. There's a salt-water hunger in it." }
           - { tr: "Adam yere yığılıyor ama nefes alıyor. Kalabalık çığlık çığlığa dağılırken şey, tanıdık bir şeye döner gibi çocuğa dönüyor.", en: "The man collapses, but he's breathing. The crowd scatters, screaming. The thing turns toward the kid, like it's turning toward something it knows." }
         secenekler:
           - id: "dov"
@@ -3640,7 +3616,7 @@ olaylar:
           - kosul: { stat: { cha: 180 } }
             metin: { tr: "Kızın öfkesi kural koymasından değil, ona kural koyan kimse olmamasından. Bir büyük arıyor.", en: "The girl isn't angry because she makes the rules. She's angry because nobody makes any for her. She's looking for a grown-up." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "sistem herkesi seviyesine göre sıralar, evleri de. bunu ona kimse yazmadı ama herkes okudu.", en: "the System ranks everybody by level. houses too. nobody wrote that into it, but everybody read it anyway." }
+            metin: { tr: "sistem herkesi seviyesine göre sıralar, evleri de. bunu ona kimse yazmadı ama herkes okudu.", en: "the system ranks everybody by level. houses too. nobody wrote that into it, but everybody read it anyway." }
         secenekler:
           - id: "kiz"
             etiket: { tr: "Kızla konuş: \"Benim de bir annem vardı.\"", en: "Talk to the girl: \"I had a mom too.\"" }

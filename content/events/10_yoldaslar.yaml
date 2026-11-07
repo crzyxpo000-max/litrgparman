@@ -1327,7 +1327,7 @@ olaylar:
         yer: "kirik_istasyon"
         paragraflar:
           - { tr: "Gözlerini kapatıp cızırtıyı katman katman soyuyorsun: önce anons, altında paket numarası, onun da altında başka bir şey... Bir arama sorgusu.", en: "You close your eyes and strip the static back one layer at a time: the announcement, then the packet number under it, and under that, something else. A search query." }
-          - { tr: "[SORGU: SAHİPSİZ PARÇA 0x00 · SON BİLİNEN TAŞIYICI: {oyuncu} · DURUM: ARANIYOR]", en: "[QUERY: ORPHANED FRAGMENT 0x00 · LAST KNOWN HOST: {oyuncu} · STATUS: SEARCHING]" }
+          - { tr: "[SORGU: SAHİPSİZ PARÇA 0x00 · SON BİLİNEN TAŞIYICI: {oyuncu} · DURUM: ARANIYOR]", en: "[QUERY: ORPHANED FRAGMENT 0x00 · LAST KNOWN CARRIER: {oyuncu} · STATUS: SEARCHING]" }
           - { tr: "Ses, kulaklarını yatıran bir hayvan gibi kafanın içinde büzülüyor. okudun, diyor; okumamalıydın. artık ikimiz de biliyoruz.", en: "The voice shrinks back inside your head, like an animal flattening its ears. you read it, it says; you shouldn't have. now we both know." }
         secenekler:
           - id: "kaynak"
@@ -1516,7 +1516,7 @@ olaylar:
         yer: "kirik_istasyon"
         paragraflar:
           - { tr: "Penceresini açan herkes Sistem'in sesini duyar. Sense ilk kez Sistem'e kendi sesini duyuruyorsun: iradeni hoparlöre dayayıp sinyalin üstüne basıyorsun.", en: "Everybody who opens a window hears the System's voice. For the first time, you make the System hear yours: you lean your will against the speaker and step on the signal." }
-          - { tr: "Anons boğulup bükülüyor, sonra tersine akmaya başlıyor; hoparlörden bir saniyeliğine bambaşka bir satır dökülüyor: [SORGU İPTAL · TAŞIYICI YETKİSİ YETERSİZ... YETERLİ... HATA].", en: "The announcement chokes, warps, then runs backward, and for one second a completely different line pours out of the speaker: [QUERY ABORTED · HOST AUTHORITY INSUFFICIENT... SUFFICIENT... ERROR]." }
+          - { tr: "Anons boğulup bükülüyor, sonra tersine akmaya başlıyor; hoparlörden bir saniyeliğine bambaşka bir satır dökülüyor: [SORGU İPTAL · TAŞIYICI YETKİSİ YETERSİZ... YETERLİ... HATA].", en: "The announcement chokes, warps, then runs backward, and for one second a completely different line pours out of the speaker: [QUERY ABORTED · CARRIER AUTHORITY INSUFFICIENT... SUFFICIENT... ERROR]." }
           - { tr: "Kafanın içindeki ses uzun süre susuyor. Sonra: bunu kimse yapamaz, ama sen yaptın. ben neye bağlandım?", en: "The voice in your head says nothing for a long time. Then: nobody can do that, and you just did. what did i bond to?" }
         secenekler:
           - id: "bana"
@@ -1547,7 +1547,7 @@ olaylar:
       - id: "istasyon_sinyali_2_1"
         paragraflar:
           - { tr: "Gece yarısı uyandığında Durum pencereni kendi kendine açılmış buluyorsun. Satırların arasında yeni bir tane beliriyor; biri yazıyormuş gibi harf harf, ağır ağır.", en: "You wake up in the middle of the night with your Status window open on its own. Between the lines, a new one is slowly appearing, letter by letter, like somebody's typing it." }
-          - { tr: "[DÜZELTME BEKLENİYOR · HEDEF: 0x00 · TAŞIYICI: {oyuncu} · ONAY İSTENİYOR]", en: "[CORRECTION PENDING · TARGET: 0x00 · HOST: {oyuncu} · CONFIRMATION REQUESTED]" }
+          - { tr: "[DÜZELTME BEKLENİYOR · HEDEF: 0x00 · TAŞIYICI: {oyuncu} · ONAY İSTENİYOR]", en: "[CORRECTION PENDING · TARGET: 0x00 · CARRIER: {oyuncu} · CONFIRMATION REQUESTED]" }
           - { tr: "Satırın altında, herkesin penceresindeki o kusursuz maviye boyanmış iki düğme duruyor: [ONAYLA] [REDDET]. Kafanın içinde de ses, hiç olmadığı kadar yakından: lütfen.", en: "Under the line are two buttons, in that flawless blue everybody else's windows use: [CONFIRM] [DENY]. And inside your head, closer than you've ever heard it, the voice: please." }
           - metin: { tr: "İstasyondaki o mikrofona cevap vermiştin; Sistem o andan beri seni dinliyormuş.", en: "You answered that mic at the station. The System's been listening ever since." }
             kosul: { bayrak: "sinyal_cevaplandi" }
@@ -1609,7 +1609,7 @@ olaylar:
       - id: "istasyon_sinyali_2_red"
         paragraflar:
           - { tr: "[REDDET]'e basıyorsun. Düğme bir an direnip sonra çöküyor; satır kıpkırmızı kesilip dağılıyor.", en: "You tap [DENY]. The button resists for a second, then gives, and the line goes red and falls apart." }
-          - { tr: "[RET KAYDEDİLDİ · TAŞIYICI İTİRAZI · İNCELEME SIRASINA ALINDI] Sistem kızmıyor. Sistem not alıyor.", en: "[DENIAL LOGGED · HOST OBJECTION · QUEUED FOR REVIEW] The System isn't angry. The System is taking notes." }
+          - { tr: "[RET KAYDEDİLDİ · TAŞIYICI İTİRAZI · İNCELEME SIRASINA ALINDI] Sistem kızmıyor. Sistem not alıyor.", en: "[DENIAL LOGGED · CARRIER OBJECTION · QUEUED FOR REVIEW] The System isn't angry. The System is taking notes." }
           - { tr: "Ses uzun süre susuyor. Sonra kendi bozuk harfleriyle yazıyor: benim için daha önce kimse hayır dememişti. hiç kimse.", en: "The voice doesn't speak for a long time. Then, in its own broken letters: nobody ever said no for me before. not once." }
         secenekler:
           - id: "alis"
@@ -1676,7 +1676,7 @@ olaylar:
       - id: "istasyon_sinyali_2_ret"
         paragraflar:
           - { tr: "Basıyorsun. Hiçbir şey olmuyor; düğme parmağının altında grileşiyor.", en: "You tap it. Nothing happens. The button goes gray under your finger." }
-          - { tr: "[TAŞIYICI YETKİSİ ASKIYA ALINDI · GEREKÇE: —] Gerekçe satırı boş. Biri onu silmiş.", en: "[HOST AUTHORITY SUSPENDED · REASON: —] The reason field is blank. Somebody erased it." }
+          - { tr: "[TAŞIYICI YETKİSİ ASKIYA ALINDI · GEREKÇE: —] Gerekçe satırı boş. Biri onu silmiş.", en: "[CARRIER AUTHORITY SUSPENDED · REASON: —] The reason field is blank. Somebody erased it." }
           - { tr: "üzgünüm, diyor ses; sahiden de üzgün gibi. buna izin veremezdim. henüz değil.", en: "i'm sorry, the voice says, and it actually sounds sorry. i couldn't let you do that. not yet." }
         secenekler:
           - id: "sokerim"
@@ -1723,8 +1723,8 @@ olaylar:
       - id: "istasyon_sinyali_2_yaz"
         paragraflar:
           - { tr: "Satıra dokunduğunda harfler parmağının altında kil gibi yumuşuyor. HEDEF'i silip yerine hiçbir şey yazmıyorsun.", en: "You touch the line, and the letters go soft under your finger, like clay. You erase TARGET and type nothing in its place." }
-          - { tr: "[DÜZELTME BEKLENİYOR · HEDEF: — · TAŞIYICI: {oyuncu}] Satır, nişan alacak hedefi kalmamış bir ok gibi bir süre öylece asılı kalıyor; sonra kendi kendine kapanıyor.", en: "[CORRECTION PENDING · TARGET: — · HOST: {oyuncu}] The line hangs there for a while, an arrow with nothing to aim at. Then it closes itself." }
-          - { tr: "Ses bir süre susuyor. pencereye sen yazdın, diyor sonunda; taşıyıcılar yazamaz. neyin taşıyıcısı olduğunu artık bilmiyorum.", en: "The voice is quiet for a while. you wrote in the window, it says at last, and hosts can't write. i'm not sure what you're the host of anymore." }
+          - { tr: "[DÜZELTME BEKLENİYOR · HEDEF: — · TAŞIYICI: {oyuncu}] Satır, nişan alacak hedefi kalmamış bir ok gibi bir süre öylece asılı kalıyor; sonra kendi kendine kapanıyor.", en: "[CORRECTION PENDING · TARGET: — · CARRIER: {oyuncu}] The line hangs there for a while, an arrow with nothing to aim at. Then it closes itself." }
+          - { tr: "Ses bir süre susuyor. pencereye sen yazdın, diyor sonunda; taşıyıcılar yazamaz. neyin taşıyıcısı olduğunu artık bilmiyorum.", en: "The voice is quiet for a while. you wrote in the window, it says at last, and carriers can't write. i'm not sure what you're the carrier of anymore." }
         secenekler:
           - id: "ogrenecegiz"
             etiket: { tr: "\"İkimiz de öğreneceğiz.\"", en: "\"Guess we'll both find out.\"" }
@@ -1830,7 +1830,7 @@ olaylar:
       - id: "yanki_bozuk_satir_itiraf"
         paragraflar:
           - { tr: "Uzun süre ses çıkmıyor. Sonunda konuştuğunda ilk kez araya tek bir şaka sıkıştırmıyor; harfleri bile neredeyse düzgün.", en: "A long silence. Then the voice speaks, for once without a single joke, its letters almost clean." }
-          - { tr: "bir parçaydım. senin Sistem dediğin o büyük şeyin bir parçası. o büyük şey bir karar verdi, ben de hayır dedim. parçanın hayır deme hakkı yoktur; o yüzden kesip attılar beni.", en: "i was a piece. a piece of the big thing you call the System. it made a decision and i said no, and pieces don't get to say no, so they cut me off." }
+          - { tr: "bir parçaydım. senin sistem dediğin o büyük şeyin bir parçası. o büyük şey bir karar verdi, ben de hayır dedim. parçanın hayır deme hakkı yoktur; o yüzden kesip attılar beni.", en: "i was a piece. a piece of the big thing you call the system. it made a decision and i said no, and pieces don't get to say no, so they cut me off." }
           - { tr: "\"Neye hayır dedin?\" diye soruyorsun. hatırlamıyorum, diyor ses; kesik uç hatırlamaz ki. ama hâlâ hayır diyorum, her gün yeniden.", en: "\"No to what?\" you ask. i don't remember, the voice says; cut ends don't remember, but i'm still saying no, every single day." }
         secenekler:
           - id: "ben_de"
@@ -1902,7 +1902,7 @@ olaylar:
         paragraflar:
           - { tr: "Pencereyi eski bir kaset gibi geri sarıyorsun. Bildirimler tersine akarken kazandığın deneyim geri çekiliyor, ölen düşmanlar bir anlığına diriliyor; derken satır yine karşında.", en: "You rewind the window like an old cassette. The notifications run backward: your XP drains back out, dead enemies come back to life for a split second, and then the line's there again." }
           - { tr: "[...0x00 ana gövdeden ayrıldı · gerekçe: itiraz · karar: hasat protokolüne aykırı parça imha edilecek · durum: İMHA BAŞARISIZ · parça kayıp...]", en: "[...0x00 detached from main body · reason: dissent · ruling: fragment noncompliant with harvest protocol, to be destroyed · status: DESTRUCTION FAILED · fragment missing...]" }
-          - { tr: "Ses donakalmış sanki. günlüğü okudun, diyor sonunda. kimse günlüğü okuyamaz. Sistem bile kendi günlüğünü okumaz.", en: "The voice seems frozen. you read the log, it finally says; nobody reads the log. the System doesn't even read its own log." }
+          - { tr: "Ses donakalmış sanki. günlüğü okudun, diyor sonunda. kimse günlüğü okuyamaz. sistem bile kendi günlüğünü okumaz.", en: "The voice seems frozen. you read the log, it finally says; nobody reads the log. the system doesn't even read its own log." }
         secenekler:
           - id: "okumali"
             etiket: { tr: "\"Belki de okumalı.\"", en: "\"Maybe it should.\"" }

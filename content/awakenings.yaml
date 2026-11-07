@@ -3,7 +3,8 @@ uyanislar:
     baslik: { tr: "[UYANIŞ] Son Nefes", en: "[AWAKENING] Last Breath" }
     satirlar:
       - { tr: "Canın %10'un altındaydı ve yine de kazandın. Bedenin bunu bir kural olarak kaydediyor.", en: "You were under 10% HP and you still won. Your body files that away as a rule." }
-      - { tr: "Yankı fısıldıyor: \"Ölmeyi reddettin. Ben de bunu reddetmeyi reddediyorum.\"", en: "Echo whispers: \"You refused to die. I refuse to let that go to waste.\"" }
+      - metin: { tr: "{npc:yanki} fısıldıyor: \"Ölmeyi reddettin. Ben de bunu reddetmeyi reddediyorum.\"", en: "{npc:yanki} whispers: \"You refused to die. I refuse to let that go to waste.\"" }
+        kosul: { bayrak: "yanki_bagi", bayrak_yok: "yanki_silindi" }   # Yankı silindiyse bu ses yok
     kosul:
       degisken_min: { _savas_kazanildi: 1 }
       degisken_max: { _savas_en_dusuk_can: 9, _savas_ezme: 0 }
@@ -33,7 +34,7 @@ uyanislar:
     baslik: { tr: "[UYANIŞ] Kırılma · Kemik Kabuk", en: "[AWAKENING] The Break · Bone Plating" }
     satirlar:
       - { tr: "Sistem kaydı gecikmeli düşüyor: 'Kademe sınırı ihlali · kaynak bulunamadı.' Kaynak sensin.", en: "The System logs it late: 'Grade limit breach · source not found.' The source is you." }
-      - { tr: "Yankı: sen dayandın. ben yalnızca kapıyı tuttum.", en: "Echo: you held. i just held the door." }
+      - { tr: "{npc:yanki}: sen dayandın. ben yalnızca kapıyı tuttum.", en: "{npc:yanki}: you held. i just held the door." }
     kosul: { iz: "kemik_kabuk", bayrak: "kirilma_yasandi", degisken_min: { _savas_kazanildi: 1 } }
     etkiler:
       - yetenek: "kale_durusu"
@@ -42,7 +43,7 @@ uyanislar:
     baslik: { tr: "[UYANIŞ] Kırılma · Yankı Damarı", en: "[AWAKENING] The Break · Echo Vein" }
     satirlar:
       - { tr: "Sistem kaydı gecikmeli düşüyor: 'Kademe sınırı ihlali · kaynak bulunamadı.' Kaynak ikiniz.", en: "The System logs it late: 'Grade limit breach · source not found.' The source is both of you." }
-      - { tr: "Yankı: artık birlikte görüyoruz. güzel, değil mi?", en: "Echo: we see together now. isn't that nice?" }
+      - { tr: "{npc:yanki}: artık birlikte görüyoruz. güzel, değil mi?", en: "{npc:yanki}: we see together now. isn't that nice?" }
     kosul: { iz: "yanki_damari", bayrak: "kirilma_yasandi", degisken_min: { _savas_kazanildi: 1 } }
     etkiler:
       - yetenek: "tehlike_sezgisi"
@@ -51,7 +52,7 @@ uyanislar:
     baslik: { tr: "[UYANIŞ] Kırılma · Kara Kan", en: "[AWAKENING] The Break · Black Blood" }
     satirlar:
       - { tr: "Sistem kaydı gecikmeli düşüyor: 'Kademe sınırı ihlali · kaynak bulunamadı.' Kaynak sensin ve hâlâ kanıyorsun.", en: "The System logs it late: 'Grade limit breach · source not found.' The source is you, and you're still bleeding." }
-      - { tr: "Yankı: bunu ben yapmadım. sen yaptın. ve hoşuna gitti.", en: "Echo: i didn't do that. you did. and you liked it." }
+      - { tr: "{npc:yanki}: bunu ben yapmadım. sen yaptın. ve hoşuna gitti.", en: "{npc:yanki}: i didn't do that. you did. and you liked it." }
     kosul: { iz: "kara_kan", bayrak: "kirilma_yasandi", degisken_min: { _savas_kazanildi: 1 } }
     etkiler:
       - yetenek: "kan_bedeli"

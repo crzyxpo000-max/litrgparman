@@ -73,7 +73,7 @@ olaylar:
               - ahlak: { merhamet: 5, insanlik: 2 }
               - itibar: { siginak: 6 }
               - iliski: { elif_sari: { guven: 5, saygi: 3 } }
-            kronik: { tr: "Konsey'in ilk işini karşılıksız üstlendin; {yer:kiyikent_liman|in} verebileceği bir yatak, bir tabak yemek ve bir oy sana yetti.", en: "You took the Council's first job for free. A bed, a plate, and a vote were all the Waterfront could give you, and that was enough." }
+            kronik: { tr: "Konsey'in ilk işini karşılıksız üstlendin; {yer:kiyikent_liman|in} verebileceği bir yatak, bir tabak yemek ve bir oy sana yetti.", en: "You took the Council's first job for free. A bed, a plate, and a vote were all {yer:kiyikent_liman} could give you, and that was enough." }
             sonraki: "siginak_1_konsey_mendirek"
           - id: "sart"
             etiket: { tr: "\"{yer:kordon|den} gelenler de içeri alınırsa olur.\"", en: "\"Only if {yer:kordon} people get let in.\"" }
@@ -352,7 +352,7 @@ olaylar:
               - gizle: 3
               - ahlak: { insanlik: 3, merhamet: 1 }
               - savas: { dusmanlar: ["mendirek_anasi@oyuncu+2", "mendirek_yavrusu@oyuncu-4", "mendirek_yavrusu@oyuncu-4"], ortam: ["su", "karanlik"], kazan: "siginak_1_konsey_zafer", kaybet: "siginak_1_konsey_yenilgi", kac: "siginak_1_konsey_kacis" }
-            kronik: { tr: "Mendireğe gece, kimse görmeden indin; {yer:kiyikent_liman} kahraman arayacaksa kendi balıkçılarına baksın istedin.", en: "You went down to the breakwater at night, unseen. If the Waterfront wanted heroes, you wanted it looking at its own fishermen." }
+            kronik: { tr: "Mendireğe gece, kimse görmeden indin; {yer:kiyikent_liman} kahraman arayacaksa kendi balıkçılarına baksın istedin.", en: "You went down to the breakwater at night, unseen. If {yer:kiyikent_liman} wanted heroes, you wanted it looking at its own fishermen." }
           - id: "balikcilar"
             etiket: { tr: "Balıkçıları yanına al; bu onların denizi", en: "Bring the fishermen in. It's their sea" }
             etkiler:
@@ -511,7 +511,7 @@ olaylar:
         paragraflar:
           - { tr: "Yedinci gişenin camının ardında bir mum yanıyor. İhtiyar hâkim dün gece orada, gözü kalkış panosundayken ölmüş. Kalbi için ilaç yokmuş; olsa da başkasına verirdi.", en: "There's a candle burning behind the glass of window seven. The old judge died there last night, looking up at the departures board. There was no medicine for her heart, and if there had been, she'd have given it to someone else." }
           - { tr: "Gece yarısı salon hıncahınç. Konsey'in bir başkana ihtiyacı var: {fraksiyon:lonca} karşısında tek bir muhatap istiyor, dokuz bin kişi de yedi gişeye birden bağıramaz. Biri panonun altına iri harflerle Rıza Reis'in önerisini yazmış: SEVİYE KARNESİ. Önce savaşan yer, sonra bakılan, en son bekleyen.", en: "The hall is packed at midnight. The Council needs a chair, because the {fraksiyon:lonca} wants one person to deal with, and nine thousand people can't yell at seven windows at once. Under the board, somebody has written Skipper Reese's proposal in block capitals: LEVEL RATIONS. Fighters eat first, then the cared-for, and whoever's left waits." }
-          - { tr: "Bütün gözler dördüncü gişede. {npc:elif_sari} başını iki yana sallıyor. \"Ben hekimim,\" diyor mikrofona. \"Hekim karar vermez, hakkında karar verilene bakar. Bunu daha önce de söylemiştim.\"", en: "Everybody's looking at window four. {npc:elif_sari} shakes her head. \"I'm a doctor,\" she says into the mic. \"Doctors don't decide. We take care of whoever got decided about. I've said that before.\"" }
+          - { tr: "Bütün gözler dördüncü gişede. {npc:elif_sari} başını iki yana sallıyor. \"Ben hekimim,\" diyor mikrofona. \"Hekim karar vermez, hakkında karar verilene bakar. Bunu daha önce de söylemiştim.\"", en: "Everybody's looking at window four. {npc:elif_sari} shakes her head. \"I'm a doctor,\" she says into the mic. \"Doctors don't decide. We take care of whoever the decisions land on. I've said that before.\"" }
           - metin: { tr: "Söylemişti: yemek katında, bir ısırık yüzünden, beyaz tahtanın önünde. Sen de oradaydın.", en: "She had. In the food court, over a bite wound, in front of a whiteboard. You were there." }
             kosul: { bayrak: "karantina_oylandi" }
           - metin: { tr: "Bir de kimsenin adını yüksek sesle anmadığı üçüncü bir aday var: salonun yarısı sana bakıyor.", en: "And there's a third candidate nobody's saying out loud. Half the hall is looking at you." }
@@ -527,7 +527,7 @@ olaylar:
             metin: { tr: "\"Seviyeye göre karne mi? Buna algoritma denmez, kast sistemi denir. Nereden mi biliyorum? O algoritmaları ben yazardım.\"", en: "\"Rations by level? That's not an algorithm, that's a caste system. You know how I know? I used to write those algorithms.\"" }
           - npc: "deniz_arman"
             kosul: { yoldas: "deniz_arman" }
-            metin: { tr: "\"Benim seviyem düşük. Kardeşiminki daha da düşüktü. Biz en son yerdik, değil mi?\"", en: "\"My level's low. My sister's was lower. We'd eat last, wouldn't we?\"" }
+            metin: { tr: "\"Benim seviyem düşük. Kardeşiminki daha da düşük. Biz en son yerdik, değil mi?\"", en: "\"My level's low. My sister's is even lower. We'd eat last, wouldn't we?\"" }
         secenekler:
           - id: "elif_aday"
             etiket: { tr: "{npc:elif_sari|i} çatıya çek: \"Aday sen ol.\"", en: "Pull {npc:elif_sari} up to the roof: \"You run.\"" }
@@ -790,7 +790,7 @@ olaylar:
               - ahlak: { merhamet: 2, insanlik: 3 }
               - iliski: { elif_sari: { guven: 4, baglilik: 2 } }
               - tohum: { olay: "elif_gece_nobeti", gecikme: { min: 45, max: 75 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: "elif_gece_nobeti_bitti" } }
-            kronik: { tr: "Sabaha karşı {yer:kiyikent_liman|in} uykusuz hekimine koğuşun bir saat bekleyebileceğini söyledin.", en: "Toward morning, you told the Waterfront's sleepless doctor the ward could wait an hour." }
+            kronik: { tr: "Sabaha karşı {yer:kiyikent_liman|in} uykusuz hekimine koğuşun bir saat bekleyebileceğini söyledin.", en: "Toward morning, you told {yer:kiyikent_liman|pos} sleepless doctor the ward could wait an hour." }
             sonraki: "@akis"
           - id: "is"
             etiket: { tr: "\"Konsey'in bir sonraki işi neyse, bana yaz.\"", en: "\"Whatever the Council's next job is, put me down.\"" }
@@ -836,7 +836,7 @@ olaylar:
           - kosul: { stat: { per: 55 } }
             metin: { tr: "{yer:eski_sehir|in} altından, sokakların değil taşların da altından su sesi geliyor. Bol su: durgun, eski, karanlık.", en: "Under {yer:eski_sehir}, under the stones and not the streets, you can hear water. A lot of it. Still, old, and dark." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "m̷avnanın zarlarının da bir eşya penceresi var. sistem üstüne 'bozuk' yazmış. ben 'bozuk' kelimesini çok iyi bilirim.", en: "t̷he barge's membranes have an item window. the System wrote \"broken\" on it. i know the word \"broken\" very well." }
+            metin: { tr: "m̷avnanın zarlarının da bir eşya penceresi var. sistem üstüne 'bozuk' yazmış. ben 'bozuk' kelimesini çok iyi bilirim.", en: "t̷he barge's membranes have an item window. the system wrote \"broken\" on it. i know the word \"broken\" very well." }
         yoldas_tepkileri:
           - npc: "elif_sari"
             kosul: { yoldas: "elif_sari" }
@@ -1150,7 +1150,7 @@ olaylar:
           - tur: "yanki"
             baslik: { tr: "[Tuzla Arıtma Ünitesi · Durum: İ̷nat]", en: "[Saltwater Desalination Unit · Status: S̷tubborn]" }
             satirlar:
-              - { tr: "sistem bunu düzeltmeye çalışacak. izin verme.", en: "the System's going to try to fix this. don't let it." }
+              - { tr: "sistem bunu düzeltmeye çalışacak. izin verme.", en: "the system's going to try to fix this. don't let it." }
         secenekler:
           - id: "bedava"
             etiket: { tr: "\"Bu su bedava. Herkese.\"", en: "\"This water's free. For everyone.\"" }
@@ -1344,7 +1344,7 @@ olaylar:
           - kosul: { stat: { end: 90 } }
             metin: { tr: "Senin kanın bu ateşi yakıp söndürür. Damarlarında dolaşan şey artık tam anlamıyla kan sayılmaz.", en: "Your blood would burn this fever out. What's running in your veins isn't exactly blood anymore." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "k̷ızın penceresi kararıyor. sistem onu çoktan bir satıra çevirdi. o satırı silmek mi istersin, okumak mı?", en: "t̷he girl's window is going dark. the System's already turned her into a line item. do you want to erase the line, or read it?" }
+            metin: { tr: "k̷ızın penceresi kararıyor. sistem onu çoktan bir satıra çevirdi. o satırı silmek mi istersin, okumak mı?", en: "t̷he girl's window is going dark. the system's already turned her into a line item. do you want to erase the line, or read it?" }
         secenekler:
           - id: "kan"
             tur: "gosteris"
@@ -2056,7 +2056,7 @@ olaylar:
             anlati: true
             metin: { tr: "Bir an aklına Gümrük'ün çatısı geliyor: şafak, bir omuz, bir saat. Sonra düşünmeyi bırakıp ayakkabılarını giyiyorsun.", en: "For a second you think about the Customs House roof. The dawn, a shoulder, an hour. Then you stop thinking and pull on your boots." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "i̷ki yer, tek sen. sistem bunu triyaj diye sunuyor. ben bir şey sunmuyorum, yalnızca izliyorum.", en: "t̷wo places. one you. the System is presenting this as triage. i'm not presenting anything. i'm just watching." }
+            metin: { tr: "i̷ki yer, tek sen. sistem bunu triyaj diye sunuyor. ben bir şey sunmuyorum, yalnızca izliyorum.", en: "t̷wo places. one you. the system is presenting this as triage. i'm not presenting anything. i'm just watching." }
         yoldas_tepkileri:
           - npc: "deniz_arman"
             kosul: { yoldas: "deniz_arman" }
@@ -2467,7 +2467,7 @@ olaylar:
               - ahlak: { duzen: 4, merhamet: 2 }
               - itibar: { siginak: 8, lonca: -6 }
               - iliski: { elif_sari: { saygi: 4 } }
-            kronik: { tr: "Demir Gece'yi püskürtüp Konsey'in kayıtlarına geçirdin; o gece artık {yer:kiyikent_liman|in} tarihinin bir parçasıydı.", en: "You beat back Iron Night and had it entered into the Council's record. That night was part of the Waterfront's history now." }
+            kronik: { tr: "Demir Gece'yi püskürtüp Konsey'in kayıtlarına geçirdin; o gece artık {yer:kiyikent_liman|in} tarihinin bir parçasıydı.", en: "You beat back Iron Night and had it entered into the Council's record. That night was part of {yer:kiyikent_liman|pos} history now." }
             sonraki: "@akis"
           - id: "kal"
             etiket: { tr: "\"Bu gece de buradayım.\"", en: "\"I'm here tonight, too.\"" }
@@ -2903,7 +2903,7 @@ olaylar:
           - kosul: { stat: { cha: 350 } }
             metin: { tr: "Masadakilerin hepsi bir şey bekliyor, ama ondan değil, senden. Onun sözünü sen söylersen masa dağılmaz.", en: "Everybody at the table is waiting for something, and it isn't from her. It's from you. If you say her words for her, the table holds." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "d̷ört fraksiyon, bir masa, bir hekim. sistem bu ihtimale pek şans tanımamış. ilginç olan da bu.", en: "f̷our factions, one table, one doctor. the System gave this outcome a low probability. that's what makes it interesting." }
+            metin: { tr: "d̷ört fraksiyon, bir masa, bir hekim. sistem bu ihtimale pek şans tanımamış. ilginç olan da bu.", en: "f̷our factions, one table, one doctor. the system gave this outcome a low probability. that's what makes it interesting." }
           - kosul: { bayrak: "elif_ask" }
             anlati: true
             metin: { tr: "Masanın başına geçmeden sana bakıyor; kısacık, yalnız senin fark edeceğin kadar.", en: "Before she takes the head of the table, she looks at you. Briefly. Just long enough that only you'd notice." }

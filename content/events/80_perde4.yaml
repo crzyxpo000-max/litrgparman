@@ -54,7 +54,7 @@ olaylar:
             metin: { tr: "\"Kırk bir gemi. Hangisi en büyükse o benim.\"", en: "\"Forty-one ships. Whichever one's biggest, that one's mine.\"" }
         secenekler:
           - id: "seslen"
-            etiket: { tr: "Kasaba Çekirdeği'ne koş, şehre seslen", en: "Run for the Town Core. Talk to the city" }
+            etiket: { tr: "Kasaba Çekirdeği'ne koş, şehre seslen", en: "Run for {yer:kasaba_cekirdegi}. Talk to the city" }
             etkiler:
               - bayrak: "hasat_basladi"
               - bayrak: "p4_acilis_konusma"
@@ -104,7 +104,7 @@ olaylar:
       - id: "p4_acilis_seslen"
         yer: "kasaba_cekirdegi"
         paragraflar:
-          - { tr: "Kasaba Çekirdeği'nin salonu hıncahınç dolu, herkes bir ağızdan konuşuyor. Sen içeri girince uğultu kesiliyor; yüzlerce baş, rüzgâr dönünce eğilen başaklar gibi sana çevriliyor.", en: "The Town Core's hall is packed to the walls, and everybody's talking at once. When you walk in, the noise dies. Hundreds of heads turn your way, like wheat when the wind shifts." }
+          - { tr: "{yer:kasaba_cekirdegi|in} salonu hıncahınç dolu, herkes bir ağızdan konuşuyor. Sen içeri girince uğultu kesiliyor; yüzlerce baş, rüzgâr dönünce eğilen başaklar gibi sana çevriliyor.", en: "The Town Core's hall is packed to the walls, and everybody's talking at once. When you walk in, the noise dies. Hundreds of heads turn your way, like wheat when the wind shifts." }
           - metin: { tr: "Avucunu üstüne koyar koymaz Çekirdek sana boyun eğiyor. Burası senin; yayın kanalı da şehrin bütün hoparlörleri de. Bir nefeste bütün {yer:kiyikent} seni dinlemeye başlıyor.", en: "The Core bows to you the moment you lay your palm on it. This is yours. The broadcast channel is yours, every loudspeaker in the city is yours. In one breath, {yer:kiyikent} is listening." }
             kosul: { bayrak: "cekirdek_oyuncu" }
           - metin: { tr: "{npc:elif_sari|in} konseyi mikrofonu sana uzatıyor, kimse oylama istemiyor. Bu sabah oya sunulmadan alınan tek karar bu.", en: "{npc:elif_sari|pos} council hands you the microphone. Nobody calls for a vote. It's the one decision this morning that doesn't need one." }
@@ -260,7 +260,7 @@ olaylar:
             kosul: { npc_hayatta: "elif_sari", iliski_max: { elif_sari: { baglilik: 59 } } }
           - metin: { tr: "{npc:elif_sari} gece yarısı yanına gelip tek söz etmeden başını omzuna yaslıyor. Otuz dört gün, diyor sonunda. İyi kullanırsak otuz dört gün çok uzun bir süre olabilir.", en: "{npc:elif_sari} finds you around midnight and leans her head on your shoulder without a word. Thirty-four days, she says finally. Thirty-four days can be a long time, if we use them right." }
             kosul: { npc_hayatta: "elif_sari", iliski_min: { elif_sari: { baglilik: 60 } } }
-          - { tr: "Dört kampın dördü de sana haberci yolluyor. Beş gün sonra herkes Kasaba Çekirdeği'nde toplanacak; bu şehrin nasıl öleceğine ya da nasıl yaşayacağına son kez karar vermek için.", en: "All four camps send runners to you. In five days, everyone gathers at the Town Core, one last time, to decide how this city dies or how it lives." }
+          - { tr: "Dört kampın dördü de sana haberci yolluyor. Beş gün sonra herkes Kasaba Çekirdeği'nde toplanacak; bu şehrin nasıl öleceğine ya da nasıl yaşayacağına son kez karar vermek için.", en: "All four camps send runners to you. In five days, everyone gathers at {yer:kasaba_cekirdegi}, one last time, to decide how this city dies or how it lives." }
         yoldas_tepkileri:
           - npc: "deniz_arman"
             kosul: { yoldas: "deniz_arman" }
@@ -612,7 +612,7 @@ olaylar:
       - id: "p4_fsp_muzakere"
         yer: "kasaba_cekirdegi"
         paragraflar:
-          - { tr: "Salon buz kesiyor. {npc:thessar|in} sureti şartları bir sözleşmenin maddelerini okur gibi tek tek sayıyor: Dünya biçilmeyecek. Dünya Yedi Taht'a bağlı bir Katman olacak. Her yıl nüfusun yüzde biri ondalık olarak teslim edilecek.", en: "The hall goes ice-cold. {npc:thessar|pos} projection counts out the terms one by one, like reading the clauses of a contract. Earth will not be reaped. Earth will become a Layer bound to the Sevenfold Court. Every year, one percent of the population will be handed over as a tithe." }
+          - { tr: "Salon buz kesiyor. {npc:thessar|in} sureti şartları bir sözleşmenin maddelerini okur gibi tek tek sayıyor: Dünya biçilmeyecek. Dünya {yer:yedi_taht|e} bağlı bir Katman olacak. Her yıl nüfusun yüzde biri ondalık olarak teslim edilecek.", en: "The hall goes ice-cold. {npc:thessar|pos} projection counts out the terms one by one, like reading the clauses of a contract. Earth will not be reaped. Earth will become a Layer bound to {yer:yedi_taht}. Every year, one percent of the population will be handed over as a tithe." }
           - { tr: "\"Yüzde bir,\" diyor, indirim yapıyormuş gibi. \"Ötekiler için bu sayı yüzde yüzdü.\" Sonra sana dönüyor. \"Bir de vali gerekir; senin türünden biri. Kim olacağını ikimiz de biliyoruz.\"", en: "\"One percent,\" he says, like he's offering a discount. \"For the others, the number was one hundred.\" Then he turns to you. \"And there must be a governor. One of your kind. We both know who that would be.\"" }
           - metin: { tr: "Konseyin masasından {npc:elif_sari} herkesin duyacağı kadar yüksek sesle konuşuyor: \"Bunu dinlemeye devam edersen seni bir daha tanıyamam.\"", en: "From the council's table, {npc:elif_sari} says it loud enough for the whole room: \"If you keep listening to this, I won't recognize you anymore.\"" }
             kosul: { npc_hayatta: "elif_sari" }
@@ -906,7 +906,7 @@ olaylar:
         paragraflar:
           - { tr: "Tek sıçrayışta ilk geminin altındasın. Gövdesine iki elinle yapışıyorsun; metal parmaklarının altında kâğıt gibi buruşuyor. Sonra çekiyorsun onu, gökyüzünden aşağı.", en: "One leap and you're under the first ship. You grab its hull with both hands, the metal crumples under your fingers like paper, and you pull. Out of the sky. Down." }
           - { tr: "Gemi körfeze çakılınca bütün liman bir saniyeliğine susuyor; ardından kıyıdaki on binlerce insan bir ağızdan haykırıyor. Maskeli sıralar ilk kez geri adım atıyor.", en: "The ship slams into the bay, and the whole harbor goes silent for a second. Then tens of thousands of people on the shore scream at once. The masked ranks, for the first time, take a step back." }
-          - { tr: "Kule Dibi'nin üstünde karanlık gemi inişini yarıda kesiyor, ön yüzündeki tek ışık sana dönüyor. Seni gördü; artık seni bekleyecek.", en: "Over {yer:kule_dibi}, the dark ship stops mid-descent. The single light on its face turns toward you. It saw you. Now it'll be waiting for you." }
+          - { tr: "{yer:kule_dibi|in} üstünde karanlık gemi inişini yarıda kesiyor, ön yüzündeki tek ışık sana dönüyor. Seni gördü; artık seni bekleyecek.", en: "Over {yer:kule_dibi}, the dark ship stops mid-descent. The single light on its face turns toward you. It saw you. Now it'll be waiting for you." }
         bildirimler:
           - tur: "sistem"
             baslik: { tr: "[DEĞERLENDİRME NOTU]", en: "[ASSESSMENT NOTE]" }
@@ -1199,7 +1199,7 @@ olaylar:
         yer: "kule_dibi"
         paragraflar:
           - { tr: "Kanal açılıyor; {npc:thessar|in} sesi savaşın ortasında kapısı kapalı bir oda kadar sakin. \"Vali bana bağlı değil,\" diyor. \"Ama Meclis'e bağlı ve Meclis her şeyden çok bir şeyi sever: düzgün bir hesabı. Sana bir hesap yazdım.\"", en: "The channel opens, and {npc:thessar|pos} voice is as calm as a closed room in the middle of the war. \"The Prefect does not answer to me,\" he says. \"But it answers to the Conclave, and the Conclave loves one thing above all others: a clean ledger. I have written you one.\"" }
-          - { tr: "Şartlar gözlerinin önünde bir Sistem penceresi gibi açılıyor. Dünya biçilmeyecek; Yedi Taht'a bağlı bir Katman olacak. Her yıl nüfusun yüzde biri ondalık verilecek. Kule'ye bir Kadim garnizonu yerleşecek. Bir de vali olacak: sen.", en: "The terms open in front of your eyes like a System window. Earth will not be reaped. Earth becomes a Layer bound to the Sevenfold Court. One percent of the population every year as tithe. An Ancient garrison in the Spire. And a governor: you." }
+          - { tr: "Şartlar gözlerinin önünde bir Sistem penceresi gibi açılıyor. Dünya biçilmeyecek; {yer:yedi_taht|e} bağlı bir Katman olacak. Her yıl nüfusun yüzde biri ondalık verilecek. Kule'ye bir Kadim garnizonu yerleşecek. Bir de vali olacak: sen.", en: "The terms open in front of your eyes like a System window. Earth will not be reaped. Earth becomes a Layer bound to {yer:yedi_taht}. One percent of the population every year as tithe. An Ancient garrison in the Spire. And a governor: you." }
           - { tr: "Meydandaki sütun hâlâ yanıyor, içindeki insanlar yükselmeye devam ediyor. Her saniye birkaçı daha ışığın içinde kayboluyor.", en: "In the plaza, the pillar is still burning. The people inside it are still rising. Every second, a few more disappear into the light." }
         sezgiler:
           - kosul: { stat: { wis: 320 } }
@@ -1251,7 +1251,7 @@ olaylar:
         paragraflar:
           - { tr: "Çekirdek'in tepesinde dalgalanan sancağı görünce Vali'nin gemisi ateşi kesiyor. Rampadan inen Vali seni süzüyor; ekininin kendiliğinden boyun eğdiğini gören bir çiftçi gibi.", en: "When it sees the banner flying over the Core, the Prefect's ship holds its fire. The Prefect comes down the ramp and looks you over, the way a farmer looks at a crop that bowed on its own." }
           - { tr: "\"Kadimlerin dostu,\" diyor, sözcüklerin tadına bakar gibi. \"Bir yıl boyunca bizimle ticaret yaptın, vergimizi ödedin, sözümüzü taşıdın. Meclis buna değer verir.\" Önüne bir Sistem penceresi açıyor: bir antlaşma.", en: "\"Friend of the Ancients,\" it says, tasting the words. \"For a year you traded with us, paid our levy, carried our word. The Conclave values that.\" It opens a System window in front of you: a treaty." }
-          - { tr: "Dünya biçilmeyecek, Yedi Taht'a bağlı bir Katman olacak. Her yıl yüzde bir. Bir de vali.", en: "Earth will not be reaped. It becomes a Layer bound to the Sevenfold Court. One percent every year. And a governor." }
+          - { tr: "Dünya biçilmeyecek, {yer:yedi_taht|e} bağlı bir Katman olacak. Her yıl yüzde bir. Bir de vali.", en: "Earth will not be reaped. It becomes a Layer bound to {yer:yedi_taht}. One percent every year. And a governor." }
         secenekler:
           - id: "imzala"
             etiket: { tr: "İmzala", en: "Sign" }
@@ -1296,7 +1296,7 @@ olaylar:
             kosul: { bayrak_yok: "p4_ondalik_yok" }
           - metin: { tr: "{npc:elif_sari} hastanenin kapısında duruyor, yüzüne bakmıyor. \"Bugün kimse ölmedi,\" diyor sonunda. \"Bunun bedelini kimin ödeyeceğini ikimiz de biliyoruz.\"", en: "{npc:elif_sari} stands in the hospital doorway. She doesn't look at you. \"Nobody died today,\" she finally says. \"We both know who's going to pay for that.\"" }
             kosul: { npc_hayatta: "elif_sari" }
-          - metin: { tr: "{npc:thessar} yanına geliyor; ilk kez bir dengi gibi. \"Meclis seni Yedi Taht'a çağıracak,\" diyor. \"Orada başını eğme. Benim türüm diz çökenleri değil, pazarlık edenleri hatırlar.\"", en: "{npc:thessar} comes to stand next to you, for the first time like an equal. \"The Conclave will summon you to the Sevenfold Court,\" he says. \"Do not bow your head there. My kind remembers those who bargain, not those who kneel.\"" }
+          - metin: { tr: "{npc:thessar} yanına geliyor; ilk kez bir dengi gibi. \"Meclis seni {yer:yedi_taht|e} çağıracak,\" diyor. \"Orada başını eğme. Benim türüm diz çökenleri değil, pazarlık edenleri hatırlar.\"", en: "{npc:thessar} comes to stand next to you, for the first time like an equal. \"The Conclave will summon you to {yer:yedi_taht},\" he says. \"Do not bow your head there. My kind remembers those who bargain, not those who kneel.\"" }
             kosul: { npc_hayatta: "thessar" }
         bildirimler:
           - tur: "sistem"
@@ -2918,7 +2918,7 @@ olaylar:
     sahneler:
       - id: "p4_kacis_1"
         paragraflar:
-          - { tr: "Limanın en ucunda, eski konteyner rıhtımında pirinçten bir gemi süzülüyor. Suya değmiyor; sudan tiksinircesine bir karış yukarıda asılı duruyor. Gövdesinde Pirinç Kervan'ın tartı işareti var.", en: "At the far end of the harbor, by the old container dock, a brass ship is floating. It isn't touching the water. It hangs a hand's width above it, like it can't stand to touch it. On its hull is the Brass Caravan's scale-mark." }
+          - { tr: "Limanın en ucunda, eski konteyner rıhtımında pirinçten bir gemi süzülüyor. Suya değmiyor; sudan tiksinircesine bir karış yukarıda asılı duruyor. Gövdesinde {yer:pirinc_kervan|in} tartı işareti var.", en: "At the far end of the harbor, by the old container dock, a brass ship is floating. It isn't touching the water. It hangs a hand's width above it, like it can't stand to touch it. On its hull is {yer:pirinc_kervan|pos} scale-mark." }
           - { tr: "Rampanın başında Kadimlere boyun eğmiş bir ırktan, dört kollu, nazik ve yorgun bir tüccar oturuyor; önünde bir terazi var. \"Üç yüz koltuk,\" diyor kırık dökük bir insan diliyle. \"Hasat'tan önce kalkıyoruz. Bedeli bir yıllık seviye. Ya da bir insan.\"", en: "A merchant sits at the top of the ramp, from a race that bent the knee to the Ancients: four-armed, polite, tired. A set of scales in front of it. \"Three hundred seats,\" it says in broken human speech. \"We leave before the Harvest. The price: a year of levels. Or a person.\"" }
           - { tr: "Rıhtıma bir kalabalık birikmiş; kucaklarında çocuklar, ellerinde valizler, seviye kayıtları. Kimse bir insan teklif etmiyor, en azından şimdilik.", en: "There's a crowd on the dock. Kids in their arms, suitcases, level records. Nobody's offered a person yet. Not yet." }
           - metin: { tr: "Beyazlılar kalabalığın arasında dolaşıp kimin yakıt, kimin yolcu olacağını fısıldaşıyor.", en: "People in white are moving through the crowd, whispering about who'll be fuel and who'll be a passenger." }
@@ -3335,7 +3335,7 @@ olaylar:
 
       - id: "p4_yayin_isim"
         paragraflar:
-          - { tr: "Bir liste isteyince teknisyenler sana Kasaba Çekirdeği'nin kayıtlarını getiriyor. Okumaya başlıyorsun: bir isim, bir isim daha… Saatler geçiyor. Jeneratörlerden birinin yakıtı bitince biri yenisini getiriyor.", en: "You ask for a list, and the techs hand you the Town Core's records. You start reading. One name, then another. Hours go by. One of the generators runs dry; somebody brings a new one." }
+          - { tr: "Bir liste isteyince teknisyenler sana {yer:kasaba_cekirdegi|in} kayıtlarını getiriyor. Okumaya başlıyorsun: bir isim, bir isim daha… Saatler geçiyor. Jeneratörlerden birinin yakıtı bitince biri yenisini getiriyor.", en: "You ask for a list, and the techs hand you {yer:kasaba_cekirdegi|pos} records. You start reading. One name, then another. Hours go by. One of the generators runs dry; somebody brings a new one." }
           - { tr: "Dünyanın başka şehirlerinde başka insanlar da mikrofonlarının başına geçip kendi listelerini okumaya koyuluyor. Gece yarısı olduğunda bütün kanallar isimlerle dolmuş. Sistem o gece tek bir bildirim bile yayınlamıyor.", en: "In other cities around the world, other people go to their own microphones and start reading their own lists. By midnight, names are being read on every channel. The System doesn't push a single notification all night." }
         secenekler:
           - id: "son_isim"

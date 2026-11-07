@@ -33,7 +33,7 @@ olaylar:
           - kosul: { stat: { per: 9 } }
             metin: { tr: "Ağın taşıyıcı ipi yaşlı kadının arkasındaki köke bağlı. O ip koparsa ağ çöker, dokuyucu da tam ortaya düşer.", en: "The web's anchor line is tied off on the root behind the old woman. Cut it and the whole web drops, and the Weaver comes down right in the middle of it." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "bu bir sınav değil. Sistem bu açıklığı baştan kayıp hanesine yazmış. birinin adı şimdiden griye dönüyor.", en: "this isn't a test. the System budgeted this clearing as a loss. somebody's name is already turning gray." }
+            metin: { tr: "bu bir sınav değil. sistem bu açıklığı baştan kayıp hanesine yazmış. birinin adı şimdiden griye dönüyor.", en: "this isn't a test. the system budgeted this clearing as a loss. somebody's name is already turning gray." }
         yoldas_tepkileri:
           - npc: "deniz_arman"
             kosul: { yoldas: "deniz_arman" }
@@ -193,7 +193,7 @@ olaylar:
             baslik: { tr: "[K̷ADEME SINIRI · YETKİSİZ ERİŞİM]", en: "[G̷RADE LIMIT · UNAUTHORIZED ACCESS]" }
             satirlar:
               - { tr: "sınır: F. talep: yok. gerekçe: biri ölecek.", en: "limit: F. request on file: none. justification: someone's about to die." }
-              - { tr: "bu satırı Sistem görmeyecek. ben gösterm█yeceğim.", en: "the System won't see this line. i w█n't let it." }
+              - { tr: "bu satırı sistem görmeyecek. ben gösterm█yeceğim.", en: "the system won't see this line. i w█n't let it." }
         secenekler:
           - id: "kemik"
             etiket: { tr: "Darbelerin hepsini al; kemiklerin dayansın", en: "Take the hits. All of them. Let your bones hold" }
@@ -651,7 +651,7 @@ olaylar:
           - tur: "yanki"
             baslik: { tr: "[d̷ış okuma tespit edildi]", en: "[e̷xternal read detected]" }
             satirlar:
-              - { tr: "okuyan: Sistem değil. daha eski.", en: "reader: not the System. older." }
+              - { tr: "okuyan: sistem değil. daha eski.", en: "reader: not the system. older." }
               - { tr: "seni bir kez okudular. bir dahakine not alacaklar.", en: "they read you once. next time they'll take notes." }
         sezgiler:
           - kosul: { stat: { per: 14 } }
@@ -1273,7 +1273,7 @@ olaylar:
           - kosul: { stat: { per: 14 } }
             metin: { tr: "Rünler her taramada bir harf daha yaklaşıyor. Yedi tarama, bilemedin sekiz.", en: "Every sweep, the runes get one letter closer. Seven sweeps. Maybe eight." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "b̷u bir düzeltme. Sistem kendi hatasını siliyor. hatanın ben mi sen mi olduğuna henüz karar vermedi.", en: "t̷his is a correction. the System's deleting its own bug. it hasn't decided yet whether the bug is me or you." }
+            metin: { tr: "b̷u bir düzeltme. sistem kendi hatasını siliyor. hatanın ben mi sen mi olduğuna henüz karar vermedi.", en: "t̷his is a correction. the systems deleting its own bug. it hasn't decided yet whether the bug is me or you." }
         yoldas_tepkileri:
           - npc: "deniz_arman"
             kosul: { yoldas: "deniz_arman" }
@@ -1448,7 +1448,7 @@ olaylar:
       - id: "metro_1"
         yer: "kirik_istasyon"
         paragraflar:
-          - { tr: "Kırık İstasyon'un en alt katında, raylara inen merdivenlerin dibinde havada bir ışık halkası dönüp duruyor. Kenarlarından soğuk bir hava akımıyla birlikte eski fren balatası kokusu sızıyor.", en: "On the Broken Station's lowest level, at the foot of the stairs down to the tracks, a ring of light hangs in the air, turning. A cold draft leaks out of its edges, along with the smell of old brake pads." }
+          - { tr: "{yer:kirik_istasyon|in} en alt katında, raylara inen merdivenlerin dibinde havada bir ışık halkası dönüp duruyor. Kenarlarından soğuk bir hava akımıyla birlikte eski fren balatası kokusu sızıyor.", en: "On the {yer:kirik_istasyon|pos} lowest level, at the foot of the stairs down to the tracks, a ring of light hangs in the air, turning. A cold draft leaks out of its edges, along with the smell of old brake pads." }
           - { tr: "Kapının ağzına tebeşirle çizilmiş bir okun altında üç isim var; biri karalanmış.", en: "Someone chalked an arrow at the mouth of the Gate, with three names under it. One's been scratched out." }
         bildirimler:
           - tur: "sistem"
@@ -1460,7 +1460,7 @@ olaylar:
           - kosul: { stat: { per: 9 } }
             metin: { tr: "Tebeşir taze, olsa olsa iki günlük. Karalanan ismin üstündeki çizgi titrek.", en: "The chalk's fresh. Two days old, tops. The line through the crossed-out name is shaky." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "kapılar Sistem'in yarım bıraktığı cümlelerdir. içeride hep bir virgül bekler.", en: "gates are sentences the System never finished. there's always a comma waiting inside." }
+            metin: { tr: "kapılar sistemin yarım bıraktığı cümlelerdir. içeride hep bir virgül bekler.", en: "gates are sentences the system never finished. there's always a comma waiting inside." }
         secenekler:
           - id: "gir"
             etiket: { tr: "Kapıdan geç", en: "Step through the Gate" }

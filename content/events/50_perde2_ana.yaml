@@ -40,7 +40,7 @@ olaylar:
           - tur: "uyari"
             baslik: { tr: "[KAPI UYARISI]", en: "[GATE WARNING]" }
             satirlar:
-              - { tr: "{yer:kordon} · kapı kademesi D · taşmaya 49 gün.", en: "The Esplanade · Gate grade D · 49 days to overflow." }
+              - { tr: "{yer:kordon} · kapı kademesi D · taşmaya 49 gün.", en: "Gate at {yer:kordon} · Grade D · 49 days to overflow." }
               - { tr: "Kapatılmayan kapılar taşar. Bu bir hatırlatmadır.", en: "Gates that stay open overflow. This is a courtesy reminder." }
         sezgiler:
           - kosul: { stat: { per: 22 } }
@@ -787,11 +787,13 @@ olaylar:
           - id: "savas"
             etiket: { tr: "Cepheyi bırak, habercinin üstüne yürü", en: "Drop the façade and walk at the herald" }
             etkiler:
+              - bayrak: "kule_cephe_tutuldu"
               - ahlak: { duzen: 1, insanlik: -1 }
               - savas: { dusmanlar: ["kule_habercisi@oyuncu+3"], ortam: ["tavan"], kazan: "kule_haberci_zafer", kaybet: "kule_haberci_yenilgi" }
           - id: "tut"
             etiket: { tr: "Son kişi çıkana kadar tut", en: "Hold it until the last person's out" }
             etkiler:
+              - bayrak: "kule_cephe_tutuldu"
               - bayrak: "kule_siviller_korundu"
               - degisken: { hayatta_kalan: 2 }
               - ahlak: { merhamet: 4 }
@@ -1281,7 +1283,7 @@ olaylar:
           - kosul: { stat: { per: 28 } }
             metin: { tr: "\"Sistem benimle konuşuyor\" derken gözleri bir an sola kayıyor. Ya yalan söylüyor ya da Sistem gerçekten solunda duruyor.", en: "When he says \"the System talks to me,\" his eyes flick left for half a second. Either he's lying, or the System really is standing on his left." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "sistem onunla konuşmuyor. ya da konuşuyor da ben duymuyorum. ikisi de iyiye işaret değil.", en: "the System doesn't talk to him. or it does and i can't hear it. neither one's good news." }
+            metin: { tr: "sistem onunla konuşmuyor. ya da konuşuyor da ben duymuyorum. ikisi de iyiye işaret değil.", en: "the system doesn't talk to him. or it does and i can't hear it. neither one's good news." }
         secenekler:
           - id: "katil"
             etiket: { tr: "Mumu yak; Yükselenler'e katıl", en: "Light the candle. Join the Ascended" }
@@ -1632,7 +1634,7 @@ olaylar:
         secenekler:
           - id: "yuru"
             etiket: { tr: "Meydanın ortasına yürü; muhafız senin", en: "Walk into the middle. The guardian's yours" }
-            kronik: { tr: "Kasaba Çekirdeği'nin muhafızına dört kampın gözü önünde tek başına yürüdün.", en: "You walked out to the Town Core's guardian alone, in front of all four camps." }
+            kronik: { tr: "{yer:kasaba_cekirdegi|in} muhafızına dört kampın gözü önünde tek başına yürüdün.", en: "You walked out to {yer:kasaba_cekirdegi|pos} guardian alone, in front of all four camps." }
             etkiler:
               - ahlak: { duzen: 3 }
               - dikkat: 3
@@ -1710,7 +1712,7 @@ olaylar:
         secenekler:
           - id: "siginak"
             etiket: { tr: "Çekirdeği Konsey'e bağla", en: "Bind the Core to the Council" }
-            kronik: { tr: "Kasaba Çekirdeği'ni Sığınak Konseyi'ne bağladın; {yer:eski_sehir} kararlarını oyla almaya başladı, ağır ağır ama hep birlikte.", en: "You bound the Town Core to the Haven Council. {yer:eski_sehir} started deciding everything by vote. Slowly, but together." }
+            kronik: { tr: "Kasaba Çekirdeği'ni Sığınak Konseyi'ne bağladın; {yer:eski_sehir} kararlarını oyla almaya başladı, ağır ağır ama hep birlikte.", en: "You bound {yer:kasaba_cekirdegi} to the Haven Council. {yer:eski_sehir} started deciding everything by vote. Slowly, but together." }
             etkiler:
               - bayrak: "cekirdek_siginak"
               - kontrol: { eski_sehir: "siginak" }
@@ -1723,7 +1725,7 @@ olaylar:
             sonraki: "cekirdek_son"
           - id: "lonca"
             etiket: { tr: "Çekirdeği Lonca'ya bağla", en: "Bind the Core to the Guild" }
-            kronik: { tr: "Kasaba Çekirdeği'ni Demir Lonca'ya bağladın; {yer:eski_sehir|in} sokaklarına nöbet kulübeleri dikildi, kapılarda sicil defterleri belirdi.", en: "You bound the Town Core to the Iron Guild. Guard booths went up on the streets of {yer:eski_sehir}, and ledgers showed up at every door." }
+            kronik: { tr: "Kasaba Çekirdeği'ni Demir Lonca'ya bağladın; {yer:eski_sehir|in} sokaklarına nöbet kulübeleri dikildi, kapılarda sicil defterleri belirdi.", en: "You bound {yer:kasaba_cekirdegi} to the Iron Guild. Guard booths went up on the streets of {yer:eski_sehir}, and ledgers showed up at every door." }
             etkiler:
               - bayrak: "cekirdek_lonca"
               - kontrol: { eski_sehir: "lonca" }
@@ -1735,7 +1737,7 @@ olaylar:
             sonraki: "cekirdek_son"
           - id: "yukselenler"
             etiket: { tr: "Çekirdeği Yükselenler'in sunağı yap", en: "Make the Core the Ascended's altar" }
-            kronik: { tr: "Kasaba Çekirdeği'ni Yükselenler'e verdin; kristalin çevresine beyaz örtüler serildi, haritanın üstünde iki liste belirdi ve ikincisinin başlığı yoktu.", en: "You gave the Town Core to the Ascended. White cloths went down around the crystal, and two lists went up over the map. The second one had no title." }
+            kronik: { tr: "Kasaba Çekirdeği'ni Yükselenler'e verdin; kristalin çevresine beyaz örtüler serildi, haritanın üstünde iki liste belirdi ve ikincisinin başlığı yoktu.", en: "You gave {yer:kasaba_cekirdegi} to the Ascended. White cloths went down around the crystal, and two lists went up over the map. The second one had no title." }
             etkiler:
               - bayrak: "cekirdek_yukselenler"
               - kontrol: { eski_sehir: "yukselenler" }
@@ -1747,7 +1749,7 @@ olaylar:
             sonraki: "cekirdek_son"
           - id: "sessiz_ag"
             etiket: { tr: "Kabloyu al; Sessiz Ağ çekirdeği açsın", en: "Take the cable. Let the Network crack it open" }
-            kronik: { tr: "Kasaba Çekirdeği'ni kimseye bağlamadın; {npc:mert_kilic|in} kablosunu taktın ve şehrin kalbi bir laboratuvar tezgâhına döndü.", en: "You didn't bind the Town Core to anyone. You plugged in {npc:mert_kilic|pos} cable, and the city's heart turned into a lab bench." }
+            kronik: { tr: "Kasaba Çekirdeği'ni kimseye bağlamadın; {npc:mert_kilic|in} kablosunu taktın ve şehrin kalbi bir laboratuvar tezgâhına döndü.", en: "You didn't bind {yer:kasaba_cekirdegi} to anyone. You plugged in {npc:mert_kilic|pos} cable, and the city's heart turned into a lab bench." }
             etkiler:
               - bayrak: "cekirdek_sessiz_ag"
               - kontrol: { eski_sehir: "sessiz_ag" }
@@ -1759,7 +1761,7 @@ olaylar:
           - id: "kendin"
             tur: "aciga_vur"
             etiket: { tr: "Elini kristale koy; şehir senin", en: "Put your hand on the crystal. The city's yours" }
-            kronik: { tr: "Kasaba Çekirdeği'ni kendine bağladın; {yer:kiyikent|in} kalbi avucunun altında attı ve dört kamp meydanı tek söz etmeden terk etti.", en: "You bound the Town Core to yourself. {yer:kiyikent|pos} heart beat under your palm, and the four camps left the square without a word." }
+            kronik: { tr: "Kasaba Çekirdeği'ni kendine bağladın; {yer:kiyikent|in} kalbi avucunun altında attı ve dört kamp meydanı tek söz etmeden terk etti.", en: "You bound {yer:kasaba_cekirdegi} to yourself. {yer:kiyikent|pos} heart beat under your palm, and the four camps left the square without a word." }
             etkiler:
               - aciga_vur: true
               - bayrak: "cekirdek_oyuncu"
@@ -1783,11 +1785,11 @@ olaylar:
           - tur: "sistem"
             baslik: { tr: "[Bağlantı devredildi]", en: "[Binding assigned]" }
             satirlar:
-              - { tr: "Kasaba Çekirdeği: Demir Lonca.", en: "Town Core: Iron Guild." }
+              - { tr: "{yer:kasaba_cekirdegi}: Demir Lonca.", en: "Town Core: Iron Guild." }
         secenekler:
           - id: "el"
             etiket: { tr: "Elini tut ve kalk", en: "Take his hand. Get up" }
-            kronik: { tr: "Kasaba Çekirdeği için dövüşürken düştün, Lonca da onu senin açtığın yaradan alıp götürdü. {npc:kaya_demir|in} elini tutup kalktın.", en: "You went down fighting for the Town Core, and the Guild took it through the opening you made. You took {npc:kaya_demir|pos} hand and got up." }
+            kronik: { tr: "{yer:kasaba_cekirdegi} için dövüşürken düştün, Lonca da onu senin açtığın yaradan alıp götürdü. {npc:kaya_demir|in} elini tutup kalktın.", en: "You went down fighting for {yer:kasaba_cekirdegi}, and the Guild took it through the opening you made. You took {npc:kaya_demir|pos} hand and got up." }
             etkiler:
               - bayrak: "cekirdek_lonca"
               - kontrol: { eski_sehir: "lonca" }
@@ -1798,7 +1800,7 @@ olaylar:
             sonraki: "cekirdek_son"
           - id: "kendin"
             etiket: { tr: "Elini itip kendi başına kalk", en: "Push his hand away. Get up on your own" }
-            kronik: { tr: "Kasaba Çekirdeği'ni Lonca'ya kaptırdın; {npc:kaya_demir|in} uzattığı eli itip kendi başına kalktın.", en: "You lost the Town Core to the Guild, pushed away the hand {npc:kaya_demir} offered and got up on your own." }
+            kronik: { tr: "Kasaba Çekirdeği'ni Lonca'ya kaptırdın; {npc:kaya_demir|in} uzattığı eli itip kendi başına kalktın.", en: "You lost {yer:kasaba_cekirdegi} to the Guild, pushed away the hand {npc:kaya_demir} offered and got up on your own." }
             etkiler:
               - bayrak: "cekirdek_lonca"
               - kontrol: { eski_sehir: "lonca" }
@@ -1833,7 +1835,7 @@ olaylar:
             sonraki: "@akis"
           - id: "dinle"
             etiket: { tr: "Kristale elini koy; şehrin nabzını dinle", en: "Put your hand on the crystal. Listen to the city's pulse" }
-            kronik: { tr: "Kasaba Çekirdeği'ne elini koyup şehrin nabzını dinledin; {yer:kordon|de}ki kapının ne kadar sabırsız olduğunu o gün öğrendin.", en: "You put your hand on the Town Core and listened to the city's pulse. That was the day you learned how impatient {yer:kordon} Gate had gotten." }
+            kronik: { tr: "Kasaba Çekirdeği'ne elini koyup şehrin nabzını dinledin; {yer:kordon|de}ki kapının ne kadar sabırsız olduğunu o gün öğrendin.", en: "You put your hand on {yer:kasaba_cekirdegi} and listened to the city's pulse. That was the day you learned how impatient {yer:kordon} Gate had gotten." }
             etkiler:
               - ahlak: { insanlik: -1, duzen: 1 }
               - stat: { wis: 1 }
@@ -1877,7 +1879,7 @@ olaylar:
             nadirlik: "efsanevi"
             baslik: { tr: "[KAPI TAŞMASI]", en: "[GATE OVERFLOW]" }
             satirlar:
-              - { tr: "{yer:kordon} · D kademe · taşma: %100.", en: "The Esplanade · grade D · overflow: 100%." }
+              - { tr: "{yer:kordon} · D kademe · taşma: %100.", en: "Gate at {yer:kordon} · Grade D · overflow: 100%." }
               - { tr: "Kapatılmayan kapılar taşar. Bunu söylemiştik.", en: "Gates that stay open overflow. We did mention this." }
         sezgiler:
           - kosul: { stat: { per: 40 } }
@@ -2021,7 +2023,7 @@ olaylar:
           - tur: "sistem"
             baslik: { tr: "[TAŞMA BASTIRILDI]", en: "[OVERFLOW CONTAINED]" }
             satirlar:
-              - { tr: "{yer:kordon}: kontrol değişti. Kayıplar: beklenenin altında.", en: "The Esplanade: control changed. Casualties: below projection." }
+              - { tr: "{yer:kordon}: kontrol değişti. Kayıplar: beklenenin altında.", en: "Control changed: {yer:kordon}. Casualties: below projection." }
               - { tr: "Tahminler güncelleniyor. Yeniden güncelleniyor.", en: "Updating projections. Updating them again." }
         secenekler:
           - id: "kalp"
@@ -2181,7 +2183,7 @@ olaylar:
       - id: "yanki_1"
         yer: "eski_sehir"
         paragraflar:
-          - { tr: "Akşam yedide Kasaba Çekirdeği her günkü gibi bültenini şehrin bütün pencerelerine gönderiyor: su saatleri, nöbet çizelgeleri, kayıp ilanları. Bu akşamsa bültenin ortasındaki satırlardan biri titremeye başlıyor, ardından bütün satırlar birden siliniyor.", en: "At seven, like every evening, the Town Core sends its bulletin to every window in the city: water hours, watch rosters, missing persons. Tonight a line in the middle of the bulletin flickers, and then every line gets wiped." }
+          - { tr: "Akşam yedide {yer:kasaba_cekirdegi} her günkü gibi bültenini şehrin bütün pencerelerine gönderiyor: su saatleri, nöbet çizelgeleri, kayıp ilanları. Bu akşamsa bültenin ortasındaki satırlardan biri titremeye başlıyor, ardından bütün satırlar birden siliniyor.", en: "At seven, like every evening, {yer:kasaba_cekirdegi} sends its bulletin to every window in the city: water hours, watch rosters, missing persons. Tonight a line in the middle of the bulletin flickers, and then every line gets wiped." }
           - { tr: "Yerlerinde, büyük harf kullanmayı hiç öğrenmemiş birinin elinden çıkmış gibi küçük harfli bir cümle beliriyor: merhaba kıyıkent. ben buradayım. yüz beş gündür buradayım. birinin içinde.", en: "In their place a sentence appears in lowercase, like it was typed by something that never learned capital letters: hello port harlow. i'm here. i've been here a hundred and five days. inside someone." }
           - { tr: "Üstelik yalnız Sistem pencereleri değil bunlar: dükkân camları, otobüs camları, bir çocuğun gözlüğü... Hepsinin üstünde buğu gibi aynı satır duruyor. Şehirde kırk bin kişi aynı anda başını kaldırırken sen kafanın içinde o sesin kendi sesinmiş gibi güldüğünü duyuyorsun.", en: "And it isn't just System windows. Storefront glass, bus windows, a kid's eyeglasses. The same line fogs up on every one of them. Forty thousand people in this city look up at the same moment, and inside your head you hear that voice laugh like it's your own." }
           - { tr: "Derken ikinci satır düşüyor: onun adını biliyorsunuz. kuleye ilk o girdi. kordonda dalgayı o karşıladı. o standart sürüm değil. ben onun bozukluğuyum.", en: "The second line comes in: you know their name. first through the spire. met the wave on the esplanade. not running the standard build. i'm what's broken in them." }
@@ -2776,7 +2778,9 @@ olaylar:
         yer: "kiyikent_liman"
         paragraflar:
           - { tr: "Rıhtımın ortasına yürüyorsun; herkes ya çömelmiş ya kaçışırken ayakta kalan bir tek sensin. Geminin kenarındaki ışık seni bulup üstünde duruyor.", en: "You walk out to the middle of the quay, the only one on your feet while everybody else crouches or runs. The light at the ship's edge finds you and stops." }
-          - { tr: "Işık ağırlaşıyor, omuzlarına bir dağ inmiş sanki. Dizlerin bir kez titriyor, sonra duruluyor; tıpkı Kule'nin yükseldiği sabah bir cepheyi tuttuğunda olduğu gibi.", en: "The light gets heavy, like a mountain settling on your shoulders. Your knees shake once and then quit shaking, same as the morning the Spire rose." }
+          - { tr: "Işık ağırlaşıyor, omuzlarına bir dağ inmiş sanki. Dizlerin bir kez titriyor, sonra duruluyor.", en: "The light gets heavy, like a mountain settling on your shoulders. Your knees shake once and then quit shaking." }
+          - metin: { tr: "Kule'nin yükseldiği sabah o cepheyi tuttuğunda da böyle olmuştu.", en: "Same as the morning the Spire rose, when you held up that façade." }
+            kosul: { bayrak: "kule_cephe_tutuldu" }
           - { tr: "Derken ışık geri çekiliyor. Kenarındaki parıltı bir kez yanıp sönüyor; göz mü kırptı, not mu aldı, bilemiyorsun. Ama bütün rıhtım bunu gördü.", en: "Then the light pulls back. The glow at its edge blinks once. A wink or a note being taken, you can't tell. But the whole quay saw it." }
         secenekler:
           - id: "devam"
@@ -2872,7 +2876,7 @@ olaylar:
           - { tr: "Akşam olduğunda gemi hâlâ yerinde. Güneş batmıyor, çünkü batacak güneş yok. Şehrin üstünde yedi köşeli bir gece başlıyor; bu gece üç gün sürecek.", en: "By evening the ship's still there. The sun doesn't set, because there's no sun to set. A seven-pointed night starts over the city, and this one's going to last three days." }
           - metin: { tr: "{yer:kordon|in} balkonlarında ışıklar yanıyor; senin koruduğun sahil bu gece bile kendi lambalarını yakmış.", en: "Lights are on along {yer:kordon|pos} balconies. The waterfront you held is burning its own lamps, even tonight." }
             kosul: { bayrak: "kordon_kurtarildi" }
-          - metin: { tr: "{yer:kordon} zifiri karanlık. Sular altındaki katlardan, köpüğün içinden küçük bacakların tıkırtısı geliyor; gölgenin altında daha da cüretkâr.", en: "The Esplanade's dark. From the drowned floors, inside the foam, comes the tick-tick-tick of little legs, braver under the shadow." }
+          - metin: { tr: "{yer:kordon} zifiri karanlık. Sular altındaki katlardan, köpüğün içinden küçük bacakların tıkırtısı geliyor; gölgenin altında daha da cüretkâr.", en: "It's dark on {yer:kordon}. From the drowned floors, inside the foam, comes the tick-tick-tick of little legs, braver under the shadow." }
             kosul: { bayrak: "kordon_dustu" }
           - metin: { tr: "Sistem bir hasat aracı ve hasatçı kapıda. Şehrin geri kalanı bunu bilmiyor ama sen biliyorsun; bilmek gölgeden de ağır.", en: "The System's a harvesting tool, and the harvester's at the door. The rest of the city doesn't know that. You do, and knowing is heavier than the shadow." }
             kosul: { bayrak: "gercek_hasat" }
@@ -3067,7 +3071,7 @@ olaylar:
         yer: "kule_dibi"
         paragraflar:
           - { tr: "{npc:yanki} panonun camına bir şey yapıyor: karakalem çizgiler bir an kıpırdanıyor ve yüz başka birine dönüşüyor. Kimsenin tanımadığı, hiç var olmamış birine.", en: "{npc:yanki} does something to the board's glass. The charcoal lines twitch for a second, and then the face is somebody else. Somebody nobody knows. Somebody who never existed." }
-          - { tr: "Avcılar önce ilana, sonra birbirlerine bakıp dağılıyor. Kafanın içinde {npc:yanki}: kolaydı. kâğıt sistem değil. keşke sistemde de bu kadar kolay olsa.", en: "The hunters look at the notice, then at each other, then drift off. Inside your head, {npc:yanki}: easy. paper isn't the System. wish the System were this easy." }
+          - { tr: "Avcılar önce ilana, sonra birbirlerine bakıp dağılıyor. Kafanın içinde {npc:yanki}: kolaydı. kâğıt sistem değil. keşke sistemde de bu kadar kolay olsa.", en: "The hunters look at the notice, then at each other, then drift off. Inside your head, {npc:yanki}: easy. paper isn't the system. wish the system were this easy." }
         secenekler:
           - id: "tamam"
             etiket: { tr: "Yürü; kimse arkandan gelmiyor", en: "Walk. Nobody's following" }
@@ -3278,7 +3282,7 @@ olaylar:
               - { tr: "Kademe: belirsiz. Tavsiye: belirsiz. Sistem bu varlığa yetkili değildir.", en: "Grade: unclear. Recommendation: unclear. The System has no authority over this entity." }
         sezgiler:
           - kosul: { stat: { per: 60 } }
-            metin: { tr: "Harita gövdesine yüzlerce dünya çizilmiş, hepsinin de üstü çizilmiş. Bir köşede bir körfez var; onun üstü henüz çizilmemiş.", en: "Hundreds of worlds are drawn on its map of a body, and every one is crossed out. In one corner there's a bay. Not crossed out yet." }
+            metin: { tr: "Harita gövdesine bin dünya çizilmiş, hepsinin de üstü çizilmiş. Bir köşede bir körfez var; onun üstü henüz çizilmemiş.", en: "A thousand worlds are drawn on its map of a body, and every one is crossed out. In one corner there's a bay. Not crossed out yet." }
           - kosul: { bayrak: "yanki_bagi" }
             metin: { tr: "dövüşme. lütfen. bu seninle aynı ölçekte değil. henüz değil.", en: "don't fight it. please. it's not on your scale. not yet." }
         secenekler:
@@ -3558,7 +3562,7 @@ olaylar:
           - kosul: { stat: { per: 45 } }
             metin: { tr: "Satırın arkasında yalnızca senin görebildiğin soluk bir alt satır var: [Konum: Kat 7. Durum: sıkışmış.] Ölçüm tamamlanmış, ama ölçülen hâlâ içeride.", en: "Behind the line there's a faint sub-line only you can see: [Location: Floor 7. Status: trapped.] The measurement's done, but the one measured is still in there." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "ölçüm tamamlandı demek öldü demek değil. sistem ölüme ölüm der. bu başka bir şey.", en: "measurement complete doesn't mean dead. the System calls death death. this is something else." }
+            metin: { tr: "ölçüm tamamlandı demek öldü demek değil. sistem ölüme ölüm der. bu başka bir şey.", en: "measurement complete doesn't mean dead. the system calls death death. this is something else." }
         secenekler:
           - id: "ara"
             etiket: { tr: "\"Burada bekle.\" Kapıdan gir; babasını ara", en: "\"Wait here.\" Go through the door. Find him" }

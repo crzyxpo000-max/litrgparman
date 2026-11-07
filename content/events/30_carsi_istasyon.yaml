@@ -671,7 +671,7 @@ olaylar:
           - { tr: "\"Yutuyorlar,\" diyor, havadan sudan konuşur gibi. \"Biri geçen gün kan kustu, ertesi gün iki seviye atladı. Şimdi hepsi ondan istiyor.\"", en: "\"They swallow 'em,\" she says, like she's talking about the weather. \"One of 'em puked blood the other day and jumped two levels by morning. Now they all want one.\"" }
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "ç̷ekirdek pil değil, mühür. yutan, kendini sistem'e biraz daha imzalatıyor. bunu sana kimse söylemeyecekti.", en: "a̷ core isn't a battery. it's a seal. whoever swallows one signs a little more of themselves over to the system. nobody was ever going to tell you that." }
+            metin: { tr: "ç̷ekirdek pil değil, mühür. yutan, kendini sisteme biraz daha imzalatıyor. bunu sana kimse söylemeyecekti.", en: "a̷ core isn't a battery. it's a seal. whoever swallows one signs a little more of themselves over to the system. nobody was ever going to tell you that." }
         secenekler:
           - id: "kime"
             etiket: { tr: "Vaizin nerede vaaz verdiğini sor", en: "Ask where the preacher holds his sermons" }
@@ -2144,7 +2144,7 @@ olaylar:
       - id: "son_tren_1"
         yer: "kirik_istasyon"
         paragraflar:
-          - { tr: "Kırık İstasyon'un üçüncü peronunda raylar uğuldamaya başlıyor. Derken tünelin karanlığından farları sönük, içi aydınlık, camları buğulanmış tek bir vagon süzülüp geliyor.", en: "The rails on the Broken Station's third platform start to hum. Then a single subway car glides out of the tunnel, headlights dark, lit up inside, its windows fogged." }
+          - { tr: "{yer:kirik_istasyon|in} üçüncü peronunda raylar uğuldamaya başlıyor. Derken tünelin karanlığından farları sönük, içi aydınlık, camları buğulanmış tek bir vagon süzülüp geliyor.", en: "The rails on the {yer:kirik_istasyon|pos} third platform start to hum. Then a single subway car glides out of the tunnel, headlights dark, lit up inside, its windows fogged." }
           - { tr: "Kapılar açılıyor. Hoparlörde bir kadın, Entegrasyon'dan önceki o bıkkın sesiyle anons ediyor: \"Sonraki durak: {yer:kiyikent_iskele|tam}. Kapılar kapanıyor, lütfen kapıdan uzak durunuz.\"", en: "The doors slide open. A woman's voice comes over the speaker in that bored, pre-Integration tone: \"Next stop: {yer:kiyikent_iskele|tam}. Stand clear of the closing doors, please.\"" }
           - { tr: "İçeride on bir kişi oturuyor: takım elbiseli bir adam, okul formalı iki çocuk, örgü ören yaşlı bir kadın... Sana yeni binmiş bir yolcuya bakar gibi bakıyorlar: önce hafif bir merak, ardından kayıtsızlık.", en: "Eleven people are sitting inside: a man in a suit, two kids in school uniforms, an old woman knitting. They look at you the way you look at somebody who just got on. A flicker of interest, then nothing." }
           - { tr: "Kapılar kapanınca vagon çıt çıkarmadan tünele geri dönüyor. Peron duvarına çentikler atılmış; biri günlerdir saymış: kırk dakikada bir.", en: "The doors close and the car slides back into the tunnel without a sound. The tally marks scratched into the platform wall say somebody's been counting for days: once every forty minutes." }
@@ -3953,7 +3953,7 @@ olaylar:
         paragraflar:
           - { tr: "Akşama doğru koğuşun ortasına bir beyaz tahta çekiyorlar. Tepesinde kalemle KONSEY yazıyor, altında çentik çentik oylar.", en: "Toward evening, somebody wheels a whiteboard into the middle of the ward. Across the top, in marker: COUNCIL. Under it, tally marks." }
           - { tr: "Bugünkü soru, kolunda kararan bir ısırık taşıyan adam: içeride mi kalacak, dışarı mı çıkarılacak? Isırık dönüşürse bütün koğuş tehlikeye girer; dışarıdaysa adam sabahı göremez.", en: "Tonight's question is the man with the darkening bite on his arm: does he stay inside, or go out. If the bite turns, the whole ward's at risk. Outside, he won't see morning." }
-          - { tr: "{npc:elif_sari} oy kullanmıyor. \"Ben hekimim. Hekim karar vermez, hakkında karar verilene bakar,\" diyor. Ama gözleri sende.", en: "{npc:elif_sari} doesn't vote. \"I'm the doctor, and doctors don't decide; we take care of whoever got decided about,\" she says. But her eyes are on you." }
+          - { tr: "{npc:elif_sari} oy kullanmıyor. \"Ben hekimim. Hekim karar vermez, hakkında karar verilene bakar,\" diyor. Ama gözleri sende.", en: "{npc:elif_sari} doesn't vote. \"I'm the doctor, and doctors don't decide; we take care of whoever the decisions land on,\" she says. But her eyes are on you." }
           - { tr: "Tahtanın köşesine biri yarı şaka bir ad yazmış: {fraksiyon:siginak}. Silen olmamış.", en: "In the corner of the board, somebody's written a name, half as a joke: {fraksiyon:siginak}. Nobody's erased it." }
         sezgiler:
           - kosul: { stat: { wis: 12 } }

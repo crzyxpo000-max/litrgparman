@@ -852,9 +852,11 @@ object ContentParser {
     private fun parseAwakening(id: String, o: JsonObject) = AwakeningDef(
         id = id,
         title = ltext(o["baslik"], "$id.baslik"),
-        lines = o.array("satirlar").map { ltext(it, "$id.satir") },
+        // Satır düz {tr, en} ya da koşullu {metin: {tr, en}, kosul: {…}} olabilir.
+        lines = o.array("satirlar").map { e -> (e as? JsonObject)?.get("metin")?.let { ltext(it, "$id.satir") } ?: ltext(e, "$id.satir") },
         condition = o["kosul"]?.let { condition(it.jsonObject) } ?: throw ContentFormatException("uyanış $id: 'kosul' eksik"),
         effects = o.array("etkiler").flatMap { effects(it.jsonObject, "uyanış $id") },
+        lineConditions = o.array("satirlar").map { e -> (e as? JsonObject)?.get("kosul")?.let { condition(it.jsonObject) } },
     )
 
     private fun ltext(e: JsonElement?, where: String): LText {

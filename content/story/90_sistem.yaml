@@ -52,19 +52,28 @@ sahneler:
         kosul: { perde: 2 }
       - metin: { tr: "Haber çok-evrenin geçitlerini bile aşıyor: Dünya'nın anomalisi düştü. Bir Kadim gemisinde biri rapor yazıp siliyor, sonra yeniden yazıyor, bu kez kısacık: beklendiği gibi.", en: "The news makes it through the multiverse passages: Earth's anomaly is down. On an Ancient ship, someone writes a report, deletes it, then writes it again in a single word: as expected." }
         kosul: { perde: 3 }
-      - metin: { tr: "Hasat'a yalnızca birkaç sabah kala düşüyorsun. Körfezin üstündeki filo beklemeyi sürdürüyor ama neyi beklediğinden artık emin değil; beklediği tek şey sendin.", en: "You fall with only a few mornings left before the Harvest. The fleet over the bay keeps waiting, though it's no longer sure what for. You were the only thing it was waiting on." }
+      - metin: { tr: "Hasat'ın son haftalarında düşüyorsun. Körfezin üstündeki filo beklemeyi sürdürüyor ama neyi beklediğinden artık emin değil; beklediği tek şey sendin.", en: "You fall in the last weeks before the Harvest. The fleet over the bay keeps waiting, though it's no longer sure what for. You were the only thing it was waiting on." }
         kosul: { perde: 4, bayrak_yok: "kadimler_yenildi" }
-      - metin: { tr: "Hasat'a yalnızca birkaç sabah kala düşüyorsun. Yendiğin filonun enkazı körfezin dibinde paslanıyor. Bu kez seni bekleyen bir gemi yok, gökyüzündeki sayaçtan başka. O da beklemiyor zaten; sayıp duruyor.", en: "You fall with only a few mornings left before the Harvest. The wreck of the fleet you beat is rusting at the bottom of the bay. No ship is waiting on you this time, only the counter in the sky. And it isn't waiting. It's just counting." }
+      - metin: { tr: "Hasat'ın son haftalarında düşüyorsun. Yendiğin filonun enkazı körfezin dibinde paslanıyor. Bu kez seni bekleyen bir gemi yok, gökyüzündeki sayaçtan başka. O da beklemiyor zaten; sayıp duruyor.", en: "You fall in the last weeks before the Harvest. The wreck of the fleet you beat is rusting at the bottom of the bay. No ship is waiting on you this time, only the counter in the sky. And it isn't waiting. It's just counting." }
         kosul: { perde: 4, bayrak: "kadimler_yenildi" }
       # Yanındakiler
       - metin: { tr: "{npc:deniz_arman|in} sesi çok uzaklardan geliyor; adını bir kez söylüyor, sonra bir kez daha. Cevap vermek istiyorsun ama pencere izin vermiyor.", en: "You hear {npc:deniz_arman|pos} voice from very far away, saying your name once, then once more. You want to answer. The window won't let you." }
         kosul: { yoldas: "deniz_arman" }
       - metin: { tr: "{npc:yanki} karanlığa son satırını yazıyor: haddini aştın. aşacağını biliyordum. yine de seninle gurur duydum. bunu kimseye söyleme.", en: "{npc:yanki} writes its last line into the dark: you overreached. i knew you would. i was proud of you anyway. don't tell anyone." }
-        kosul: { bayrak: "yanki_bagi" }
+        kosul: { bayrak: "yanki_bagi", dikkat_min: 70 }
+      - metin: { tr: "{npc:yanki} karanlığa son satırını yazıyor: yetmedi. bazen yetmez. elinden geleni yaptın, gördüm. yine de seninle gurur duydum. bunu kimseye söyleme.", en: "{npc:yanki} writes its last line into the dark: it wasn't enough. sometimes it isn't. you gave it everything, i saw. i was proud of you anyway. don't tell anyone." }
+        kosul: { bayrak: "yanki_bagi", dikkat_max: 69 }
       - { tr: "Pencerede kupkuru tek bir satır kalıyor: [Anomali kayboldu. Tür: İnsan. Değerlendirme: yetersiz.] Gün 365 geldiğinde Dünya'nın önünde duracak kimse olmayacak; Hasat da her zaman olduğu gibi tam vaktinde başlayacak.", en: "One dry line is left in the window: [Anomaly lost. Species: Human. Assessment: insufficient.] When Day 365 comes, there will be no one standing in front of Earth, and the Harvest will start on time, the way it always does." }
     bildirimler:
       - tur: "uyari"
+        kosul: { dikkat_min: 70 }
         baslik: { tr: "[SON: Hasat]", en: "[ENDING: The Harvest]" }
         satirlar:
           - { tr: "Demir Mod: ölüm kalıcıdır.", en: "Ironman Mode: death is permanent." }
           - { tr: "Haddini aşmak bir seçimdir. Bu da onun sonucu.", en: "Overreaching is a choice. This is what it costs." }
+      - tur: "uyari"
+        kosul: { dikkat_max: 69 }
+        baslik: { tr: "[SON: Hasat]", en: "[ENDING: The Harvest]" }
+        satirlar:
+          - { tr: "Demir Mod: ölüm kalıcıdır.", en: "Ironman Mode: death is permanent." }
+          - { tr: "Hayatta kalma eşiği karşılanmadı. Kayıt kapatıldı.", en: "Survival threshold not met. Record closed." }

@@ -584,7 +584,7 @@ fun flagUsage(content: Content): FlagUsage {
     content.fusions.forEach { cond(it.condition) }
     content.events.values.forEach { cond(it.condition) }
     content.dailyTemplates.values.forEach { cond(it.condition) }
-    content.awakenings.forEach { a -> cond(a.condition); a.effects.forEach { eff(it) } }
+    content.awakenings.forEach { a -> cond(a.condition); a.lineConditions.filterNotNull().forEach { cond(it) }; a.effects.forEach { eff(it) } }
     content.npcs.values.forEach { d ->
         cond(d.presentWhen)
         d.goals.forEach { g -> cond(g.condition); g.effects.forEach { eff(it) } }
