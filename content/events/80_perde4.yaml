@@ -964,27 +964,27 @@ olaylar:
             etiket: { tr: "Vali'nin karşısına çık", en: "Step up and face the Prefect" }
             etkiler:
               - ahlak: { merhamet: 2, insanlik: 2 }
-              - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu+5"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_yenilgi" }
+              - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu+3"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_yenilgi" }
           - id: "thessar_yarik"
             etiket: { tr: "{npc:thessar|in} açtığı yarıktan gir", en: "Go in through the crack {npc:thessar} opened" }
             goster: { bayrak: "ihanet_thessar", npc_hayatta: "thessar" }
             etkiler:
               - ahlak: { duzen: -2, insanlik: 2 }
               - iliski: { thessar: { guven: 10, baglilik: 8 } }
-              - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu+2"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_yenilgi" }
+              - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_yenilgi" }
           - id: "dikis"
             etiket: { tr: "Sütunun dibine, zırhın dikişine vur", en: "Hit the seam in its armor, at the pillar's base" }
             goster: { bilgi: "filo_acigi" }
             etkiler:
               - ahlak: { duzen: 2, insanlik: 1 }
-              - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu+2"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_yenilgi" }
+              - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_yenilgi" }
           - id: "kaya_topcu"
             etiket: { tr: "{npc:kaya_demir|in} topçusu Vali'yi yerine çivilesin", en: "Have {npc:kaya_demir|pos} artillery pin the Prefect down" }
             goster: { bayrak: "kaya_general" }
             etkiler:
               - ahlak: { duzen: 3, merhamet: -1 }
               - iliski: { kaya_demir: { saygi: 5 } }
-              - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu+3"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_yenilgi" }
+              - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu+1"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_yenilgi" }
           - id: "yakit_yak"
             etiket: { tr: "İçindeki bin kişinin yakıtını bir kerede yak", en: "Burn the thousand people's fuel in you all at once" }
             goster: { bayrak: "p4_yakit_kabul" }
@@ -992,7 +992,7 @@ olaylar:
               - ahlak: { insanlik: -6, merhamet: -3 }
               - yozlasma: 8
               - degisken: { hayatta_kalan: -2 }
-              - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu+1"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_yenilgi" }
+              - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu-1"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_yenilgi" }
           - id: "aras_once"
             etiket: { tr: "Önce {npc:aras_kurt}: bu hesap kapanacak", en: "{npc:aras_kurt} first. This account gets settled" }
             goster: { bayrak: "ihanet_aras", npc_hayatta: "aras_kurt" }
@@ -1013,14 +1013,14 @@ olaylar:
               - ahlak: { merhamet: 5, insanlik: 2 }
               - iliski: { aras_kurt: { saygi: 10, guven: 4 } }
               - npc_iz: { aras_kurt: "can_borcu" }
-              - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu+3"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_yenilgi" }
+              - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu+1"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_yenilgi" }
           - id: "bitir"
             etiket: { tr: "Bitir. Hainlerin ikinci şansı yok", en: "Finish it. Traitors don't get a second chance" }
             etkiler:
               - ahlak: { merhamet: -6, duzen: 3 }
               - npc_ol: "aras_kurt"
               - bayrak: "ihanet_onlendi"
-              - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu+3"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_yenilgi" }
+              - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu+1"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_yenilgi" }
 
       - id: "p4_istila_yenilgi"
         yer: "kule_dibi"
@@ -1044,7 +1044,7 @@ olaylar:
               - mana: 999999
               - ahlak: { merhamet: 2, insanlik: 3 }
               - degisken: { hayatta_kalan: -3 }
-              - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu-3"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_dusus" }
+              - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu-5"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_dusus" }
           - id: "geri_cekil"
             etiket: { tr: "Geri çekil; kalanları kurtar", en: "Fall back. Save who's left" }
             etkiler:
@@ -1270,7 +1270,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: -3, insanlik: 4 }
               - itibar: { kadimler: -10 }
-              - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu+5"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_yenilgi" }
+              - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu+3"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_yenilgi" }
           - id: "pazarlik"
             tur: "gosteris"
             etiket: { tr: "Vali'yi ikna et: ondalık yok", en: "Talk the Prefect down: no tithe" }

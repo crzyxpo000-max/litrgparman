@@ -82,7 +82,7 @@ NPC'lerin Perde 1 sonundaki olası durumlarını `content/npcs/<id>.yaml` ve `co
 | Kod Kırıcı | `kod_kirici` | `gorev: {zincir_sessiz_ag: tamam}`, `iliski_min: {yanki: {guven: 60}}`, `npc_hayatta: mert_kilic`, `bayrak_yok: yanki_silindi` |
 | Özgürlük | `ozgurluk` | `ahlak_max: {duzen: -60}`, `ahlak_min: {insanlik: 50}`, `bayrak: sistem_cekirdegine_ulasildi` |
 | Vassal | `vassal` | `iliski_min: {thessar: {baglilik: 50}}`, `degisken_min: {kadim_tehdit: 70}` |
-| Yalnız Avcı | `yalniz_avci` | `yoldas_sayisi_max: 0`, `kademe_min: S` |
+| Yalnız Avcı | `yalniz_avci` | `yoldas_sayisi_max: 0`, `kademe_min: S`, `bayrak: uye_yok` (QA P1-13) |
 | Hasat | `hasat` | yedek (`yedek: true`): hiçbir son tutmazsa; Demir Mod ölümü (`son_hasat`) da buraya bağlı |
 | Döngü (gizli) | `dongu` | `degisken_min: {kule_kat: 100, onceki_oyun: 1}`, `bayrak: yanki_son_sirri`, `gizli: true` |
 

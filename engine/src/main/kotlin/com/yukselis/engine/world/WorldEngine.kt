@@ -204,7 +204,7 @@ class WorldEngine(
         val region = state.region?.let { content.regions[it] }
         if (region == null || region.act <= 1 || '@' in ref) return ref
         val base = content.enemies[ref] ?: return ref
-        val world = Progression.worldLevel(state.day) * (if (gate) GATE_LEVEL_FACTOR else 1.0) * (1 + (state.regions[region.id]?.danger ?: 0) / 400.0)
+        val world = Progression.worldLevel(state.day) * (if (gate) GATE_LEVEL_FACTOR else REGION_LEVEL_FACTOR) * (1 + (state.regions[region.id]?.danger ?: 0) / 400.0)
         // Geride kalan oyuncu sıkışmasın: dünya, oyuncunun en fazla birkaç seviye üstüne çıkar (DECISIONS #111).
         val cap = state.player.level + if (gate) GATE_PLAYER_MARGIN else REGION_PLAYER_MARGIN
         return com.yukselis.engine.combat.EnemyScaling.ref(ref, minOf(world.toInt(), cap).coerceAtLeast(1))
@@ -261,7 +261,7 @@ class WorldEngine(
         }
         val def = s.region?.let { content.regions[it] }
         val danger = s.region?.let { s.regions[it]?.danger } ?: 0
-        val fight = def != null && def.enemies.isNotEmpty() && rng.chance(0.45 + danger / 300.0)
+        val fight = def != null && def.enemies.isNotEmpty() && rng.chance(EXPLORE_FIGHT_CHANCE + danger / 300.0)
         s = s.copy(rngState = rng.state)
         if (fight) {
             val n = if (rng.chance(0.3)) 2 else 1
@@ -324,7 +324,7 @@ class WorldEngine(
         var s = state.copy(player = p.copy(hp = (p.hp + p.maxHp / 2).coerceAtMost(p.maxHp), mp = p.maxMp))
         val notices = mutableListOf(Notice(NoticeKind.SYSTEM, texts.format("kamp")))
         // Göze batmayan her gece Dikkat biraz söner (DECISIONS #116).
-        if (s.day >= 30) s = effects.shiftAttention(s, -EffectApplier.ATTENTION_NIGHT_DECAY).state
+        if (s.day >= 30) s = effects.shiftAttention(s, -EffectApplier.nightDecay(s.attention)).state
         val day = startDay(s, advance = true)
         s = day.state
         notices += day.notices
@@ -398,6 +398,12 @@ class WorldEngine(
 
         /** Kapı düşmanları dünya seviyesinin bu katı. */
         const val GATE_LEVEL_FACTOR = 1.15
+
+        /** Perde 2+ bölge (keşif) düşmanları dünya seviyesinin bu katı: OP MC sıradan karşılaşmaları ezer (QA P1-10). */
+        const val REGION_LEVEL_FACTOR = 0.8
+
+        /** Keşifte savaş olasılığı tabanı (tehlikeyle artar). 0,45'te oynanış başına ~520 savaş çıkıyordu (QA P1-11). */
+        const val EXPLORE_FIGHT_CHANCE = 0.32
         const val REGION_PLAYER_MARGIN = 2
         const val GATE_PLAYER_MARGIN = 3
         const val FIRST_GATE_TITLE = "ilk_kapi_kapatan"

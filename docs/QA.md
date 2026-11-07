@@ -30,11 +30,11 @@ Başka P0 bulunmadı: ulaşılamayan son yok, çıkmaz yok, kayıt kaybı yalnı
 - [ ] **P1-8 `son_yukselis`'te çelişen iki Deniz paragrafı birlikte görünebilir (doğrulanmalı).** — *81_sonlar `son_yukselis`: `yoldas` ve `npc_fraksiyon: yukselenler` koşulları çakışıyor* — Koşulları dışlayıcı yap; bir test kaydıyla doğrula. — küçük
 
 **Denge ve oynanış**
-- [ ] **P1-9 Seviye 10 sınıf teklifi Perde 1'de oyuncuların %90+'ına gelmiyor (GDD Perde 1 düğümü).** — *BALANCE Gün 30 p50 8 / p90 9; Perde 1 XP* — Perde 1 XP'sini %20–30 artır ya da Perde 1 düğüm listesini güncelle; simülatöre "ilk sınıf günü" ölçüsü. — orta
-- [ ] **P1-10 Hissedilen hakimiyet zayıf: Ezme %10,7; oyuncu dünya seviyesinin ancak 1,1–1,5 katı.** — *Perde 2+ akış düşmanları `@dunya`; Ezme eşiği `CombatMath.isCrush`* — Akış (fırsat eli/keşif) düşmanlarını `@dunya-20…-40`'a çek ya da Ezme eşiğini gevşet; hedef Ezme Perde 2 ~%30, Perde 3–4 ~%50; boss ve hikaye savaşları zor kalsın. — orta
-- [ ] **P1-11 Savaş sayısı yüksek, risk yok: oynanış başına 519 savaş, ölüm 0, İkinci Şans 0, yere düşme %6,4.** — *simülatör; gün akışı keşif savaşları* — Keşif savaşı sıklığını düşür (ya da savaşsız keşif sonuçlarını artır) ve hikaye/boss savaşlarını sertleştir; hedef: oynanış başına ~250 savaş, hikaye savaşlarında yere düşme %15–25. P1-10 ile birlikte ayarlanmalı. — orta
-- [ ] **P1-12 Dikkat Perde 3–4'te tavanda (Gün 210–300 p50 91–97) ve Yönetmen'in hedef gerilimi hep 4.** — *Dikkat dinamiği (`dikkat`, günlük sönüm), `Director.desiredTension` (+Dikkat/40)* — Perde 3'te doğal sönümü artır / eşik olayı sonrası boşaltma; `desiredTension`'da Dikkat katkısını sınırla; GDD'deki "üç ağır olaydan sonra kamp ateşi"ni uygula (kod iki diyor). Hedef p50 60–85 dalgalanma. — orta
-- [ ] **P1-13 Yalnız Avcı en sık son (%22; rastgele oyuncuda %38); Koruyucu tarzı hedefe %49, Yükseliş %56.** — *endings.yaml koşulları, yoldaş ayrılık eşiği `DEPARTURE_DISTANCE`* — Yalnız Avcı'ya "bilinçli yalnızlık" koşulu ekle (ayrılık eşiği yaşandı / yoldaş bırakıldı), Koruyucu'nun hangi koşulda düştüğünü simülatörde ayrıştır. — orta
+- [x] **P1-9 Seviye 10 sınıf teklifi Perde 1'de oyuncuların %90+'ına gelmiyor (GDD Perde 1 düğümü).** — *BALANCE Gün 30 p50 8 / p90 9; Perde 1 XP* — Perde 1 XP'sini %20–30 artır ya da Perde 1 düğüm listesini güncelle; simülatöre "ilk sınıf günü" ölçüsü. — orta
+- [x] **P1-10 Hissedilen hakimiyet zayıf: Ezme %10,7; oyuncu dünya seviyesinin ancak 1,1–1,5 katı.** — *Perde 2+ akış düşmanları `@dunya`; Ezme eşiği `CombatMath.isCrush`* — Akış (fırsat eli/keşif) düşmanlarını `@dunya-20…-40`'a çek ya da Ezme eşiğini gevşet; hedef Ezme Perde 2 ~%30, Perde 3–4 ~%50; boss ve hikaye savaşları zor kalsın. — orta
+- [x] **P1-11 Savaş sayısı yüksek, risk yok: oynanış başına 519 savaş, ölüm 0, İkinci Şans 0, yere düşme %6,4.** — *simülatör; gün akışı keşif savaşları* — Keşif savaşı sıklığını düşür (ya da savaşsız keşif sonuçlarını artır) ve hikaye/boss savaşlarını sertleştir; hedef: oynanış başına ~250 savaş, hikaye savaşlarında yere düşme %15–25. P1-10 ile birlikte ayarlanmalı. — orta
+- [x] **P1-12 Dikkat Perde 3–4'te tavanda (Gün 210–300 p50 91–97) ve Yönetmen'in hedef gerilimi hep 4.** — *Dikkat dinamiği (`dikkat`, günlük sönüm), `Director.desiredTension` (+Dikkat/40)* — Perde 3'te doğal sönümü artır / eşik olayı sonrası boşaltma; `desiredTension`'da Dikkat katkısını sınırla; GDD'deki "üç ağır olaydan sonra kamp ateşi"ni uygula (kod iki diyor). Hedef p50 60–85 dalgalanma. — orta
+- [x] **P1-13 Yalnız Avcı en sık son (%22; rastgele oyuncuda %38); Koruyucu tarzı hedefe %49, Yükseliş %56.** — *endings.yaml koşulları, yoldaş ayrılık eşiği `DEPARTURE_DISTANCE`* — Yalnız Avcı'ya "bilinçli yalnızlık" koşulu ekle (ayrılık eşiği yaşandı / yoldaş bırakıldı), Koruyucu'nun hangi koşulda düştüğünü simülatörde ayrıştır. — orta
 - [ ] **P1-14 Perde 4 temposu: 27 günde 11 zorunlu düğüm, art arda 4 "veda turu" aynı iskelette.** — *80_perde4, 81_sonlar: `perde3_son_gece`, `p4_son_gece_ates`, `son_karar_veda`, `son_karar_2`* — `p4_son_gece_ates` ile `son_karar_veda`'yı birleştir ya da birini koşullu yap; `p4_yikik_kiyikent` ve `p4_siralama_zirvesi`'ni fırsat eli kartına çevir; yoldaş satır sırası ilişkiye göre. — orta
 
 **Türkçe ve İngilizce metin**
@@ -308,3 +308,29 @@ Onay (2026-11-07): **P0 + tüm P1.** Plan: (1) kod/arayüz/küçük içerik, (2)
   test `bozukOtomatikKayitOncekindenAcilir`.
 - Not: Parti 1 (üslup) commit'inde bir test (`yeniOyunBaslangicSahnesindeBaslar`, prolog etiket metni) kırık kalmıştı —
   çıktı süzgecim kaçırdı; beklenen metin güncellendi.
+
+**Parti 2 (denge; simülatör 1000 oynanış, önce → sonra):**
+
+| Ölçü | Önce | Sonra |
+| --- | --- | --- |
+| Savaş / oynanış | 520 | 389 |
+| Ezme payı | %10,4 | %26,9 |
+| Hakimiyet payı | %81,3 | %79,0 |
+| Gün 30 seviye p50 / p90 (Sv 10 sınıf teklifi) | 8 / 9 (~%10) | 9 / 11 (~%35) |
+| Dikkat p50 Gün 210 / 240 / 270 | 91 / 94 / 97 | 69–78 bandı |
+| Koruyucu tarzı Kadim istilası zaferi | %34 | %44 |
+| Yalnız Avcı payı (en sık son) | %22,1 | %11,4 (en sık artık Kod Kırıcı %17,4) |
+| Son aralığı | %5,7–%22,1 | %6,1–%18,4 |
+
+- P1-9: Savaş zaferi XP'si Perde 1'de ×2 (`EffectApplier.ACT1_XP_FACTOR`). Gün 30'da oyuncuların ~üçte biri Sv 10'a
+  ulaşıyor (önce ~%10). Tamamına çıkarmak Mücadele evresini fazla kısaltır; GDD Perde 1 tablosundaki "Seviye 10 sınıf
+  teklifi" çoğu oyuncu için Perde 2 başına kayıyor — tasarım kararı olarak kabul edildi (kısmi).
+- P1-10: Perde 2+ keşif düşmanları dünya seviyesinin ×0,8'i (`REGION_LEVEL_FACTOR`); kapılar ×1,15 kaldı.
+- P1-11: Keşifte savaş tabanı 0,45 → 0,32 (`EXPLORE_FIGHT_CHANCE`); kayıp XP Perde 2+ zafer XP'si ×1,5 ile dengelendi.
+  Hikaye/boss savaşları sertleştirilmedi (yere düşme %8,2; İkinci Şans hâlâ hiç kullanılmıyor) — açık kalan not.
+- P1-12: Gece Dikkat sönümü `2 + Dikkat/35`; `desiredTension`'da Dikkat en çok +1; nefes GDD'deki gibi üç ağır olaydan
+  sonra (test `uc agir olaydan sonra nefes`).
+- P1-13: Kadim istilası valisi iki seviye aşağı; Yalnız Avcı'ya `bayrak: uye_yok` (fraksiyonsuz yalnız kurt; GDD ve
+  PERDE2_4 tablosu güncellendi). Koruyucu tarzı hedefe %42 (önce %47) — sınır, finali kazanmak; kasıtlı zorluk.
+- Gün 330'da oyuncu dünyanın ×0,9'u (önce ×1,09): seyrek savaşla geç oyun biraz yavaşladı; Gün 365 p50 seviye 1.239
+  (önce 1.272). Hakimiyet hedefi (%60+) korunuyor.

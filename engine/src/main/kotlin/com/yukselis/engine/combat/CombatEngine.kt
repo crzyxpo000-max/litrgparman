@@ -996,7 +996,8 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
                 else -> texts.format("savas_hepsi_kacti")
             },
         )
-        val rewards = mutableListOf<Effect>(Effect.GainXp(xp.roundToLong()))
+        val actXp = if (ctx.s.act <= 1) EffectApplier.ACT1_XP_FACTOR else EffectApplier.LATE_XP_FACTOR
+        val rewards = mutableListOf<Effect>(Effect.GainXp((xp * actXp).roundToLong()))
         killed.forEach { e ->
             val d = ctx.def(e)
             if (d.credits > 0) rewards += Effect.AddCredits(d.credits)

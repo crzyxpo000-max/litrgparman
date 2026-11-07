@@ -173,7 +173,7 @@ class Perde2_4Test {
             "vassal", reps = mapOf("kadimler" to 1.5), relations = mapOf("thessar" to mapOf(RelAxis.BOND to 1.5, RelAxis.TRUST to 0.5)),
             wantFlags = setOf("kadim_anlasmasi"), quests = setOf("zincir_kadimler"), vars = mapOf("kadim_tehdit" to 1.5), protect = setOf("thessar"),
         ),
-        Profile("yalniz_avci", loner = true, tower = 0.75),
+        Profile("yalniz_avci", loner = true, tower = 0.75, wantFlags = setOf("uye_yok")),
         Profile(
             "dongu", relations = mapOf("yanki" to mapOf(RelAxis.TRUST to 1.0)), wantFlags = setOf("yanki_son_sirri"),
             avoidFlags = setOf("yanki_silindi"), tower = 0.85, previousGames = 1,

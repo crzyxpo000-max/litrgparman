@@ -72,9 +72,11 @@ class Director(private val content: Content) {
     /** Hedef gerilim eğrisi: yükselen → zirve → nefes. Dikkat yükseldikçe eğri yukarı kayar. */
     fun desiredTension(state: WorldState): Int {
         val recent = state.dayState.recentTension
-        if (recent.size >= 2 && recent.takeLast(2).all { it >= 3 }) return 1 // iki ağır olaydan sonra kamp ateşi
+        // GDD: üç ağır olaydan sonra kamp ateşi (QA P1-12; önceden iki).
+        if (recent.size >= HEAVY_RUN && recent.takeLast(HEAVY_RUN).all { it >= 3 }) return 1
         val last = recent.lastOrNull() ?: 1
-        return (last + 1 + state.attention / ATTENTION_STEP).coerceIn(1, 4)
+        // Dikkat eğriyi en çok bir basamak yukarı kaydırır; yoksa yüksek Dikkat'te hedef hep 4'e kilitleniyordu.
+        return (last + 1 + minOf(state.attention / ATTENTION_STEP, 1)).coerceIn(1, 4)
     }
 
     fun tensionFit(state: WorldState, e: EventDef): Double = 1.0 / (1 + abs(desiredTension(state) - e.tension))
@@ -126,6 +128,7 @@ class Director(private val content: Content) {
     companion object {
         const val HAND_SIZE = 3
         const val ATTENTION_STEP = 40
+        const val HEAVY_RUN = 3
         const val RECENT_TENSION = 6
         const val RECENT_TAGS = 12
     }

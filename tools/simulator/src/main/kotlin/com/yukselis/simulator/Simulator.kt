@@ -97,6 +97,12 @@ data class RunResult(
     val fightsTotal: Int = 0,
     val fightsDown: Int = 0,
     val secondChances: Int = 0,
+    /** Hedefli tarzın hedef sonu tutmadıysa, o sonun tutmayan alt koşulları (teşhis). */
+    val missedConditions: List<String> = emptyList(),
+    /** Perde 4 Kadim istilası kazanıldı mı (`kadimler_yenildi`). */
+    val invasionWon: Boolean = false,
+    /** Gün 340'taki seviye / dünya seviyesi oranı (final savaşına giriş gücü). */
+    val finalPowerRatio: Double = 0.0,
     /** Görülen olay kimlikleri (kapsam raporu). */
     val seenIds: Set<String> = emptySet(),
     /** Ölüm nedenleri: "kaynak:düşman" (kaynak: kesif/kapi/kule/hikaye). */
@@ -148,7 +154,7 @@ class Simulator(private val content: Content) {
                 "vassal", "vassal", reps = mapOf("kadimler" to 1.5), relations = mapOf("thessar" to mapOf(RelAxis.BOND to 1.5, RelAxis.TRUST to 0.5)),
                 wantFlags = setOf("kadim_anlasmasi"), quests = setOf("zincir_kadimler"), vars = mapOf("kadim_tehdit" to 1.5), protect = setOf("thessar"),
             ),
-            Profile("yalniz_avci", "yalniz_avci", loner = true, tower = 0.75),
+            Profile("yalniz_avci", "yalniz_avci", loner = true, tower = 0.75, wantFlags = setOf("uye_yok")),
             Profile(
                 "dongu", "dongu", relations = mapOf("yanki" to mapOf(RelAxis.TRUST to 1.0)), wantFlags = setOf("yanki_son_sirri"),
                 avoidFlags = setOf("yanki_silindi"), tower = 0.85, previousGames = 1,
@@ -268,6 +274,17 @@ class Simulator(private val content: Content) {
             crushShare = if (fights == 0) 0.0 else crushes.toDouble() / fights,
             towerFloor = s.variable("kule_kat"), events = s.dayState.seen.size, seenIds = s.dayState.seen,
             fightsTotal = combats, fightsDown = downs, secondChances = s.secondChances.size,
+            invasionWon = s.hasFlag("kadimler_yenildi"),
+            finalPowerRatio = (levels[330] ?: s.player.level).toDouble() / Progression.worldLevel(330),
+            missedConditions = p?.ending?.let { target ->
+                val def = engine.content.endings.endings[target]
+                if (def == null || engine.endingOf(s)?.id == target) emptyList()
+                else when (val c = def.condition) {
+                    is com.yukselis.engine.story.Condition.All -> c.conditions.filterNot { it.test(s) }.map { it.toString().take(80) }
+                    null -> emptyList()
+                    else -> if (c.test(s)) emptyList() else listOf(c.toString().take(80))
+                }
+            } ?: emptyList(),
             deathCauses = causes, deathGaps = gaps,
             ironDeath = s.ended && s.sceneId == com.yukselis.engine.story.Content.HARVEST_SCENE,
             stuck = if (s.ended) null else "sahne ${s.sceneId}, olay ${s.dayState.currentEvent}, gün ${s.day}, adım $steps, ölüm $deaths, savaş ${s.combat?.enemies?.map { it.id }}",

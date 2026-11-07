@@ -336,7 +336,7 @@ Perde geçişleri zaman ve olay temellidir: oyuncu yavaş ilerlerse dünya bekle
 | Kod Kırıcı | Oyuncu Sistem'i yeniden yazar, kuralları kendisi belirler | Sessiz Ağ zinciri tamam, Yankı güveni ≥ 60, Mert hayatta |
 | Özgürlük | Sistem yok edilir; tüm seviyeler sıfırlanır, insanlık zayıf ama özgür | Özgürlük ≥ 60, İnsanlık ≥ 50, Sistem çekirdeğine ulaşılmış |
 | Vassal | Kadimlerle anlaşma: Dünya hayatta ama boyunduruk altında | Thessar ile Bağlılık ≥ 50, kadim\_tehdit ≥ 70 |
-| Yalnız Avcı | Tüm yoldaşlar ölmüş ya da gitmiş; oyuncu çok-evrene tek başına çıkar | Aktif yoldaş = 0, oyuncu S kademe |
+| Yalnız Avcı | Tüm yoldaşlar ölmüş ya da gitmiş; oyuncu çok-evrene tek başına çıkar | Aktif yoldaş = 0, oyuncu S kademe, hiçbir fraksiyona katılmamış (`uye_yok`) |
 | Hasat | Kötü son: insanlık yeterince güçlenemez, Dünya hasat edilir | Gün 365'te hiçbir son koşulu sağlanmamış ya da Demir Mod ölümü |
 | Döngü (gizli) | Oyuncu Sistem'in bir döngü olduğunu öğrenir ve yeni bir Entegrasyon başlatır; New Game+ açılır | Tüm Kule katları + Yankı'nın son sırrı + en az bir önceki bitirilmiş oyun |
 

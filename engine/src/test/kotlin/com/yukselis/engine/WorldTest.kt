@@ -53,13 +53,18 @@ class WorldTest {
     }
 
     @Test
-    fun `iki agir olaydan sonra nefes`() {
-        val s = atHub().let { it.copy(dayState = it.dayState.copy(recentTension = listOf(3, 4))) }
+    fun `uc agir olaydan sonra nefes`() {
+        // GDD: üç ağır olaydan sonra kamp ateşi (QA P1-12).
+        val two = atHub().let { it.copy(dayState = it.dayState.copy(recentTension = listOf(3, 4))) }
+        assertEquals(4, director.desiredTension(two))
+        val s = atHub().let { it.copy(dayState = it.dayState.copy(recentTension = listOf(3, 4, 3))) }
         assertEquals(1, director.desiredTension(s))
         val calm = atHub().let { it.copy(dayState = it.dayState.copy(recentTension = listOf(1))) }
         assertEquals(2, director.desiredTension(calm))
         // Dikkat eğriyi yukarı iter.
         assertEquals(3, director.desiredTension(calm.copy(attention = 45)))
+        // Dikkat en çok bir basamak iter (tavanda hedef 4'e kilitlenmesin).
+        assertEquals(3, director.desiredTension(calm.copy(attention = 95)))
     }
 
     @Test

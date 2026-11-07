@@ -693,6 +693,18 @@ class EffectApplier(private val content: Content) {
 
         /** Her gece Dikkat bu kadar söner (göze batmayan bir gün). */
         const val ATTENTION_NIGHT_DECAY = 2
+
+        /** Dikkat yüksekken gece sönümü artar: her ATTENTION_DECAY_STEP puan için +1 (QA P1-12; tavana yapışmasın). */
+        const val ATTENTION_DECAY_STEP = 35
+
+        /**
+         * Savaş zaferi XP çarpanı perdeye göre (QA P1-9, P1-11): Perde 1'de ×2 ki Seviye 10 sınıf teklifi Öğretici
+         * içinde gelsin; Perde 2+'da ×1,5 ki seyrekleşen keşif savaşları ilerlemeyi yavaşlatmasın.
+         */
+        const val ACT1_XP_FACTOR = 2.0
+        const val LATE_XP_FACTOR = 1.5
+
+        fun nightDecay(attention: Int): Int = ATTENTION_NIGHT_DECAY + attention / ATTENTION_DECAY_STEP
         val CORRUPTION_THRESHOLDS = listOf(25, 50, 75, 100)
 
         /** Dikkat eşiği işareti: Perde 1'de eski ad (kayıt uyumu), sonra perde başına. */

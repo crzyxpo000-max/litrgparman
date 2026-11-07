@@ -70,6 +70,18 @@ object Report {
         sb.appendLine()
 
         // ---- Seviye eğrisi
+        sb.appendLine("Kadim istilası (Perde 4 finali) kazanma oranı ve Gün 330 güç oranı (oyuncu ÷ dünya) tarza göre: " +
+            results.groupBy { it.profile.removeSuffix(" (Demir)") }.toSortedMap().entries.joinToString(" · ") { (p, rs) ->
+                "$p ${pct(rs.count { it.invasionWon }.toDouble() / rs.size)} ×${String.format(Locale.ROOT, "%.2f", rs.map { it.finalPowerRatio }.average())}"
+            })
+        sb.appendLine()
+        sb.appendLine("Hedefe ulaşamayan tarzlarda tutmayan alt koşullar (en sık 3):")
+        sb.appendLine()
+        results.filter { it.missedConditions.isNotEmpty() }.groupBy { it.profile.removeSuffix(" (Demir)") }.toSortedMap().forEach { (p, rs) ->
+            val top = rs.flatMap { it.missedConditions }.groupingBy { it }.eachCount().entries.sortedByDescending { it.value }.take(3)
+            sb.appendLine("- **$p** (${rs.size}): " + top.joinToString(" · ") { "`${it.key}` ${it.value}" })
+        }
+        sb.appendLine()
         sb.appendLine("## Seviye eğrisi")
         sb.appendLine()
         sb.appendLine("| Gün | Dünya seviyesi | Oyuncu p10 | p50 | p90 | Kademe (p50) | NPC ort. (perde sonu) |")
