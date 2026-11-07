@@ -749,7 +749,7 @@ object ContentParser {
                 "bilgi" -> listOf(Condition.Knows(value.str(key)))
                 "npc_savasabilir" -> listOf(Condition.NpcCanFight(value.str(key)))
                 "lider_fraksiyon" -> listOf(Condition.TopReputation(value.str(key), LEADER_POOL))
-                "yoldas_yer" -> listOf(Condition.PartyRoom)
+                "yoldas_yer" -> listOf(if ((value as? kotlinx.serialization.json.JsonPrimitive)?.content == "false") Condition.NoPartyRoom else Condition.PartyRoom)
                 "gorunen_seviye_min" -> listOf(Condition.PublicLevelAtLeast(value.int(key)))
                 "gorunen_seviye_max" -> listOf(Condition.PublicLevelAtMost(value.int(key)))
                 "iz" -> listOf(Condition.HasTrait(value.str(key)))

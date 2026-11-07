@@ -49,6 +49,10 @@ fun main(args: Array<String>) {
             if (after.sceneId == WorldState.HUB && after.mission == null) dHand = maxOf(dHand, after.dayState.hand.size)
             if (after.mission != null) dMission = true
             if (action == "akis:ClimbTower" || action == "akis:FastClimb") dTower++
+            // Seçim kaydı (yay ve ölüm çözümlemesi): hangi olayın hangi sahnesinde hangi seçenek.
+            if (action.startsWith("secim:")) {
+                lines += """{"t":"secim","gun":${before.day},"olay":${q(before.dayState.currentEvent)},"sahne":${q(before.sceneId)},"secim":${q(action.removePrefix("secim:"))}}"""
+            }
             last = after
             after.npcs.values.filter { it.companion }.forEach { everCompanion += it.id }
             dPhase = before.chapterPhase.key; dChapter = before.chapter

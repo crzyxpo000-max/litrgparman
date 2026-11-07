@@ -238,6 +238,11 @@ sealed interface Condition {
                 com.yukselis.engine.system.Progression.companionCapacity(state.player.stats, state.player.grade)
     }
 
+    /** Yoldaş kapasitesi dolu (`yoldas_yer: false`). */
+    data object NoPartyRoom : Condition {
+        override fun test(state: WorldState) = !PartyRoom.test(state)
+    }
+
     data class PublicLevelAtLeast(val value: Int) : Condition {
         override fun test(state: WorldState) = state.publicLevel >= value
     }
