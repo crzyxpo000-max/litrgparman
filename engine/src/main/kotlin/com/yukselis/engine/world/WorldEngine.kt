@@ -107,7 +107,8 @@ class WorldEngine(
         // Olay oyuncuyu başka bir bölgeye götürdü (`bolge` etkisi): o bölgeye bir keşif görevi başlar (varış sahnesiyle).
         if (m0 == null && home != null && s.region != null && s.region != home && s.region in content.regions) {
             val target = s.region!!
-            return beginMission(s.copy(region = home), MissionKind.EXPLORE, target, emptyList(), consumeSlot = false, notices = notices)
+            // Yolculuğu olay kendisi anlattı: varış sahnesi yok.
+            return beginMission(s.copy(region = home), MissionKind.EXPLORE, target, emptyList(), consumeSlot = false, notices = notices, arrival = false)
         }
         if (m0 != null && s.region != null && s.region != m0.region) {
             s = if (m0.kind == MissionKind.EXPLORE && s.region == home) {
@@ -275,12 +276,17 @@ class WorldEngine(
         consumeSlot: Boolean,
         notices: MutableList<Notice> = mutableListOf(),
         variant: Int = 0,
+        arrival: Boolean = true,
     ): Result {
         var s = if (consumeSlot) spend(state) else state
         s = s.copy(mission = Mission(kind, region, queue, s.day, variant), region = region)
-        val arrival = ChapterTable.ARRIVAL_PREFIX + region
-        if (region != base(s) && arrival in content.events) {
-            val started = startEvent(s, arrival, consumeSlot = false)
+        val arrivalEvent = ChapterTable.ARRIVAL_PREFIX + region
+        // Varış sahnesi bölge başına günde bir kez (aynı gün ikinci gidişte yolculuk satırı yeter).
+        val arrivedToday = ARRIVAL_DAY_PREFIX + region
+        val fresh = s.vars[arrivedToday] != s.day
+        if (arrival && fresh && region != base(s) && arrivalEvent in content.events) {
+            s = s.copy(vars = s.vars + (arrivedToday to s.day))
+            val started = startEvent(s, arrivalEvent, consumeSlot = false)
             return Result(started.state, notices + started.notices)
         }
         if (region != base(s)) notices += Notice(NoticeKind.SYSTEM, texts.formatL("yolculuk", "region" to regionName(region)))
@@ -424,11 +430,12 @@ class WorldEngine(
         if (!waiting) return Result(s, emptyList())
         val notices = mutableListOf<Notice>()
         val left = ch.deadline - s.day
-        if (left in 0..DEADLINE_WARNING_DAYS) {
+        if (left in 0..DEADLINE_WARNING_DAYS && ch.earlyEntry) {
             notices += Notice(NoticeKind.WARNING, texts.formatL("bolum_son_tarih", "title" to ch.title, "n" to LText("$left", "$left")))
         }
         val flag = ChapterTable.overflowFlag(ch.no)
-        if (left < 0 && !s.hasFlag(flag)) {
+        // Tarihli operasyon oyuncunun seçemediği bir gündür: gecikmesi (zorunlu olaylar yüzünden) taşma sayılmaz.
+        if (left < 0 && !s.hasFlag(flag) && ch.earlyEntry) {
             val region = ch.operations.firstOrNull()?.let { operationRegion(s, it) }
             val list = listOfNotNull(
                 Effect.SetFlag(flag),
@@ -458,6 +465,12 @@ class WorldEngine(
         if (chapterMode) checkChapterAction(state, action)
         // Oyuncu bir eylem yaptı: zorunlu olay kilidi açılır.
         val state = if (state.dayState.forcedLock) state.copy(dayState = state.dayState.copy(forcedLock = false)) else state
+        // Bölüm açıldı ve brifing bekliyor: üsten ayrılan eylem (yolculuk, görev kartı, operasyon) önce brifingi açar.
+        if (chapterMode && state.mission == null && state.chapterPhase == ChapterPhase.BRIEF &&
+            (action is HubAction.Travel || action is HubAction.EnterOperation || action is HubAction.Card)
+        ) {
+            chapters.get(state.chapter)?.brief?.firstOrNull { pendingEvent(state, it) }?.let { return startHere(state, content.events.getValue(it)) }
+        }
         return when (action) {
             is HubAction.Card -> {
                 if (action.eventId !in state.dayState.hand) throw ActionRejected("Bu kart elde yok")
@@ -480,7 +493,7 @@ class WorldEngine(
             HubAction.ReturnToBase -> {
                 // Dönüş yolu yuva harcamaz: görevin yolculuğu gidişte ödendi (DECISIONS #130).
                 val notices = mutableListOf<Notice>()
-                val back = returnHome(state, auto = false, notices = notices)
+                val back = returnHome(state, auto = true, notices = notices)
                 finishSlot(back, notices)
             }
             HubAction.Explore -> explore(state)
@@ -808,6 +821,9 @@ class WorldEngine(
 
         /** Başka bölgede geçen tohum bu kadar gün kart olarak bekledikten sonra yan görev olarak açılır. */
         const val SEED_PATIENCE_DAYS = 6
+
+        /** Varış sahnesinin o gün oynandığı (bölge başına) değişken öneki. */
+        const val ARRIVAL_DAY_PREFIX = "_varis_gunu_"
         const val OVERFLOW_VAR = "kapi_tasma_sayisi"
         const val GATES_CLOSED_VAR = "kapatilan_kapi"
         const val PENDING_GATE_VAR = "_bekleyen_kapi"

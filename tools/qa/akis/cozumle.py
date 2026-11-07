@@ -136,7 +136,7 @@ for k in 'abcde':
     print(f'\n{k}) {cnt[k]}  (oynanış başına {cnt[k] / max(1, len(per_run)):.1f})')
     for w, n in why[k].most_common(6): print(f'   {n:5}  {w}')
     for e in ex[k][:4]: print('   ·', e)
-if cnt2 or any('gorev' in json.loads(l) for f in glob.glob(os.path.join(iz, '*.jsonl'))[:1] for l in list(open(f, encoding='utf-8'))[1:3] if l.strip()):
+if any('gorev' in r for f in glob.glob(os.path.join(iz, '*.jsonl'))[:1] for r in map(json.loads, list(open(f, encoding='utf-8'))[1:400]) if r.get('t') == 'olay'):
     print("\nGörev tabanlı (bölüm yapısı): a'", cnt2['a'], " b'", cnt2['b'], " d'", cnt2['d'])
     for k in 'ab':
         for e in ex2[k][:3]: print('   ·', k, e)

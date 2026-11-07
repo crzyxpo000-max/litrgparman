@@ -1,48 +1,39 @@
 {
  "runs": 20,
- "events": 11266,
+ "events": 10530,
  "counts": {
-  "d": 60,
-  "a": 125
+  "a": 109,
+  "d": 19
  },
  "mission_counts": {},
  "why": {
   "neden": {
-   "tohum": 1766,
-   "kart": 1046,
-   "diger": 645,
-   "ana_yay": 745,
-   "npc_esik": 204,
-   "dikkat_esik": 146,
-   "kule": 218,
-   "kesif": 22
-  },
-  "d": {
-   "ana yay gün 40": 9,
-   "ana yay gün 200": 3,
-   "ana yay gün 205": 3,
-   "ana yay gün 225": 9,
-   "ana yay gün 339": 5,
-   "ana yay gün 22": 1,
-   "ana yay gün 24": 1,
-   "ana yay gün 333": 4,
-   "ana yay gün 60": 2,
-   "ana yay gün 66": 2,
-   "ana yay gün 220": 6,
-   "ana yay gün 347": 6,
-   "ana yay gün 342": 3,
-   "ana yay gün 336": 2,
-   "ana yay gün 337": 1,
-   "ana yay gün 12": 1,
-   "ana yay gün 346": 2
+   "bolum": 1082,
+   "kart": 1118,
+   "diger": 501,
+   "tohum": 1156,
+   "dikkat_esik": 140,
+   "npc_esik": 178,
+   "kule": 555,
+   "ana_yay": 262,
+   "kesif": 19
   },
   "a": {
-   "tohum": 58,
-   "npc_esik": 7,
-   "kart": 38,
-   "dikkat_esik": 11,
-   "kule": 2,
-   "diger": 9
+   "kart": 41,
+   "tohum": 39,
+   "bolum": 15,
+   "npc_esik": 8,
+   "dikkat_esik": 6
+  },
+  "d": {
+   "ana yay gün 346": 2,
+   "ana yay gün 347": 4,
+   "ana yay gün 205": 3,
+   "ana yay gün 220": 5,
+   "ana yay gün 336": 1,
+   "ana yay gün 337": 1,
+   "ana yay gün 339": 2,
+   "ana yay gün 333": 1
   },
   "b": {},
   "c": {},
@@ -50,21 +41,21 @@
   "b_neden": {}
  },
  "examples": {
-  "d": [
-   "oynanış 0 (rastgele), Gün 40: ana yay `kule_yukselisi` (gün 40) `zincir_lonca` görevinin ortasına düştü",
-   "oynanış 0 (rastgele), Gün 200: ana yay `cok_evren_kapisi` (gün 200) `cok_evren_taht` görevinin ortasına düştü",
-   "oynanış 1 (rastgele), Gün 201: ana yay `cok_evren_kapisi` (gün 200) `cok_evren_taht` görevinin ortasına düştü",
-   "oynanış 1 (rastgele), Gün 201: ana yay `siginak_3_tahliye` (gün 205) `cok_evren_taht` görevinin ortasına düştü",
-   "oynanış 2 (rastgele), Gün 40: ana yay `kule_yukselisi` (gün 40) `zincir_lonca` görevinin ortasına düştü",
-   "oynanış 2 (rastgele), Gün 224: ana yay `deniz_canavar_mi_tanri_mi` (gün 225) `cok_evren_kervan` görevinin ortasına düştü"
-  ],
   "a": [
-   "oynanış 0 (rastgele), Gün 40: `zincir_lonca` görevi sürerken `hastane_karantina` (tohum, kiyikent_liman)",
-   "oynanış 0 (rastgele), Gün 55: `zincir_sessiz_ag` görevi sürerken `esik_rakip` (npc_esik, kiyikent_liman)",
-   "oynanış 0 (rastgele), Gün 200: `cok_evren_taht` görevi sürerken `thessar_ticaret_masasi` (kart, kiyikent_liman)",
-   "oynanış 0 (rastgele), Gün 202: `cok_evren_taht` görevi sürerken `dikkat_100_p3` (dikkat_esik, kiyikent_liman)",
-   "oynanış 0 (rastgele), Gün 350: `cekirdege_inis` görevi sürerken `deniz_vapur_vedasi` (tohum, kiyikent_liman)",
-   "oynanış 1 (rastgele), Gün 55: `zincir_yukselenler` görevi sürerken `mert_kaynak_parcasi` (tohum, kiyikent_liman)"
+   "oynanış 0 (rastgele), Gün 9: `deniz_kardesi` görevi sürerken `mert_sifreli_mesaj` (kart, kirik_istasyon)",
+   "oynanış 0 (rastgele), Gün 9: `deniz_kardesi` görevi sürerken `yabanci_minnet` (tohum, ogretici_orman)",
+   "oynanış 0 (rastgele), Gün 11: `deniz_kardesi` görevi sürerken `kirilma` (bolum, ogretici_orman)",
+   "oynanış 0 (rastgele), Gün 11: `deniz_kardesi` görevi sürerken `aras_ilk_yaris` (kart, ogretici_orman)",
+   "oynanış 0 (rastgele), Gün 42: `zincir_lonca` görevi sürerken `esik_rakip` (npc_esik, kiyikent_liman)",
+   "oynanış 0 (rastgele), Gün 42: `zincir_lonca` görevi sürerken `sanayi_disiplin_meydani` (kart, sanayi)"
+  ],
+  "d": [
+   "oynanış 1 (rastgele), Gün 355: ana yay `thessar_son_duello` (gün 346) `cekirdege_inis` görevinin ortasına düştü",
+   "oynanış 1 (rastgele), Gün 355: ana yay `deniz_son_fedakarlik` (gün 347) `cekirdege_inis` görevinin ortasına düştü",
+   "oynanış 2 (rastgele), Gün 202: ana yay `siginak_3_tahliye` (gün 205) `cok_evren_taht` görevinin ortasına düştü",
+   "oynanış 3 (vassal), Gün 203: ana yay `siginak_3_tahliye` (gün 205) `cok_evren_taht` görevinin ortasına düştü",
+   "oynanış 3 (vassal), Gün 352: ana yay `deniz_son_fedakarlik` (gün 347) `cekirdege_inis` görevinin ortasına düştü",
+   "oynanış 6 (yukselis), Gün 201: ana yay `siginak_3_tahliye` (gün 205) `cok_evren_taht` görevinin ortasına düştü"
   ],
   "b": [],
   "c": [],
@@ -73,161 +64,154 @@
  "per_run": [
   [
    "oynanış 0 (rastgele)",
-   541,
+   526,
    {
-    "d": 2,
-    "a": 5
+    "a": 10
    }
   ],
   [
    "oynanış 1 (rastgele)",
-   547,
+   522,
    {
-    "a": 8,
+    "a": 5,
     "d": 2
    }
   ],
   [
    "oynanış 2 (rastgele)",
-   514,
+   522,
    {
-    "d": 3,
-    "a": 6
+    "a": 3,
+    "d": 1
    }
   ],
   [
    "oynanış 3 (vassal)",
-   567,
+   519,
    {
-    "a": 14,
-    "d": 4
+    "a": 11,
+    "d": 2
    }
   ],
   [
    "oynanış 4 (ozgurluk)",
-   561,
+   518,
    {
-    "a": 6,
-    "d": 2
+    "a": 2
    }
   ],
   [
    "oynanış 5 (kod_kirici)",
-   556,
+   519,
    {
-    "a": 2,
-    "d": 1
-   }
-  ],
-  [
-   "oynanış 6 (yukselis)",
-   589,
-   {
-    "a": 7,
-    "d": 5
-   }
-  ],
-  [
-   "oynanış 7 (demir_taht (Demir))",
-   571,
-   {
-    "d": 3,
-    "a": 1
-   }
-  ],
-  [
-   "oynanış 8 (koruyucu)",
-   572,
-   {
-    "d": 5,
-    "a": 5
-   }
-  ],
-  [
-   "oynanış 9 (dongu)",
-   624,
-   {
-    "a": 3,
-    "d": 1
-   }
-  ],
-  [
-   "oynanış 10 (rastgele)",
-   555,
-   {
-    "a": 7,
-    "d": 2
-   }
-  ],
-  [
-   "oynanış 11 (rastgele)",
-   574,
-   {
-    "a": 15
-   }
-  ],
-  [
-   "oynanış 12 (rastgele)",
-   540,
-   {
-    "d": 5,
-    "a": 7
-   }
-  ],
-  [
-   "oynanış 13 (ozgurluk)",
-   531,
-   {
-    "a": 10,
-    "d": 4
-   }
-  ],
-  [
-   "oynanış 14 (kod_kirici)",
-   546,
-   {
-    "a": 7,
-    "d": 4
-   }
-  ],
-  [
-   "oynanış 15 (yukselis)",
-   570,
-   {
-    "a": 6,
-    "d": 7
-   }
-  ],
-  [
-   "oynanış 16 (demir_taht)",
-   557,
-   {
-    "a": 3,
-    "d": 3
-   }
-  ],
-  [
-   "oynanış 17 (koruyucu (Demir))",
-   569,
-   {
-    "d": 3,
     "a": 3
    }
   ],
   [
-   "oynanış 18 (dongu)",
-   598,
+   "oynanış 6 (yukselis)",
+   535,
    {
     "a": 8,
     "d": 3
    }
   ],
   [
-   "oynanış 19 (yalniz_avci)",
-   584,
+   "oynanış 7 (demir_taht (Demir))",
+   510,
+   {
+    "a": 6,
+    "d": 1
+   }
+  ],
+  [
+   "oynanış 8 (koruyucu)",
+   489,
+   {
+    "a": 4,
+    "d": 1
+   }
+  ],
+  [
+   "oynanış 9 (dongu)",
+   524,
+   {
+    "a": 11,
+    "d": 2
+   }
+  ],
+  [
+   "oynanış 10 (rastgele)",
+   525,
+   {
+    "a": 6
+   }
+  ],
+  [
+   "oynanış 11 (rastgele)",
+   518,
+   {
+    "a": 5,
+    "d": 3
+   }
+  ],
+  [
+   "oynanış 12 (rastgele)",
+   511,
+   {
+    "a": 8
+   }
+  ],
+  [
+   "oynanış 13 (ozgurluk)",
+   532,
+   {
+    "a": 6
+   }
+  ],
+  [
+   "oynanış 14 (kod_kirici)",
+   527,
+   {
+    "a": 3,
+    "d": 1
+   }
+  ],
+  [
+   "oynanış 15 (yukselis)",
+   507,
    {
     "a": 2,
     "d": 1
+   }
+  ],
+  [
+   "oynanış 16 (demir_taht)",
+   550,
+   {
+    "a": 3
+   }
+  ],
+  [
+   "oynanış 17 (koruyucu (Demir))",
+   489,
+   {
+    "a": 6
+   }
+  ],
+  [
+   "oynanış 18 (dongu)",
+   540,
+   {
+    "a": 6,
+    "d": 1
+   }
+  ],
+  [
+   "oynanış 19 (yalniz_avci)",
+   647,
+   {
+    "d": 1,
+    "a": 1
    }
   ]
  ]

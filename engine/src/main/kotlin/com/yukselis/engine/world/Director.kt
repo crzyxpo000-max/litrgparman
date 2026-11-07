@@ -91,7 +91,8 @@ class Director(private val content: Content) {
         state.seeds.filter { seed ->
             val event = content.events[seed.eventId]
             // Bölümün yönettiği olay (brifing/operasyon/darboğaz) tohumla gelmez: yeri bölüm tablosu (DECISIONS #134).
-            seed.eventId in content.chapters.managed ||
+            // Ana yay düğümü de tohumla erken gelmez: bölüm kuralıyla gelir.
+            seed.eventId in content.chapters.managed || (!content.chapters.isEmpty && event?.mainArcDay != null) ||
             seed.dueDay <= state.day && (
                 event == null || !seedConditionHolds(state, seed) || (!event.repeatable && event.id in state.dayState.seen) ||
                     !npcsAlive(state, event) || (seed.npc != null && state.npcs[seed.npc]?.alive == false)

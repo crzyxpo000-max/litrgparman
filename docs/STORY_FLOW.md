@@ -99,33 +99,41 @@ Görev penceresi ölçümü (eski a ve d, quests.yaml görevlerinin iki olayı a
 
 | | Önce | Sonra |
 | --- | ---: | ---: |
-| a | 332 | 125 |
-| d | 39 | 60 |
+| a | 332 | 109 |
+| d | 39 | 19 |
 
 Yeni yapıda kalan değerler kesinti değil. Fraksiyon zincirleri artık ayrı yan görevler; iki zincir olayı arasındaki
 günlerde üste olay olması tasarım gereği (Mass Effect 2 döngüsü). Görev içinde kesinti ölçen tanım (a ve d) ikisi için de
 0 veriyor.
+
+Bağımsız akış kontrolünün (ikinci ajan) bulduğu ve düzeltilen sorunlar: aynı gün tekrarlanan varış (725 → 0), "üsse
+dön"ün başka bölgeye yan göreve atması (121 → 0), ana yay düğümünün tohumla 60 gün erken gelmesi (8/20 oynanış → 0:
+`kaya_darbe_gecesi` artık Gün 292–293), tarihli operasyonda oyuncunun elinde olmayan taşma cezası (10 → 0), olay oyuncuyu
+taşıdıktan sonra gelen varış sahnesi, eski ana yay darboğazlarının asıl günleri (`darbogaz_gun` 45/95/225). Açık kalan:
+Perde 2–3'ün geç günlerinde havuz olayları tükendiği için serbest günler çoğunlukla keşif, Kapı ve Kule (olay değil savaş)
+ile geçiyor; içerik hacmi işi, yapı işi değil.
 
 Notlar:
 - **Olay sayısı:** oynanış başına ~560 olay başlangıcı var, bunun ~320'si varış sahnesi. Görevin ilk sahnesi varıştır; ayrı
   olay sayılmaz. Tekil olay ortalaması 241 (önce ~200): üste ve görevde olaylar daha düzenli tükeniyor.
 - **b:** konum kuralı (her olayın `konum`u), olayın `bolge` etkisinin görev başlatması ve bölüm açılırken üs bölgesine
   geçiş ile kapandı.
-- **c, e:** zorunlu olay kilidi (DECISIONS #133) ve son tarih tetiklemesinin oyuncu eylemini beklemesi ile kapandı.
+- **c, e:** zorunlu olay kilidi (DECISIONS #133), son tarih tetiklemesinin oyuncu eylemini beklemesi ve brifingin üsten
+  ayrılan eylemden önce açılması ile kapandı.
   Operasyon kuyruğunun ardışık olayları aynı görevin parçası sayılır.
 
 ### Denge (1000 oynanış, `docs/BALANCE.md`)
 
 | Ölçüt | Önce | Sonra |
 | --- | ---: | ---: |
-| Koruyucu / Demir Taht / Yükseliş / Kod Kırıcı | %12,7 / 7,2 / 6,3 / 17,2 | %10,9 / 7,5 / 6,7 / 18,2 |
-| Özgürlük / Vasal / Yalnız Avcı / Hasat / Döngü | %7,7 / 12,6 / 11,2 / 18,5 / 6,6 | %7,7 / 12,0 / 11,1 / 19,3 / 6,6 |
-| Hakimiyet payı | %78,9 | %63,9 (sınır %60) |
-| Ezme payı | %26,8 | %22,3 |
-| Oynanış başına savaş | 389 | 311 |
-| Kule 100. kata ulaşan | %91,3 | %59,4 |
+| Koruyucu / Demir Taht / Yükseliş / Kod Kırıcı | %12,7 / 7,2 / 6,3 / 17,2 | %10,3 / 7,9 / 6,7 / 20,7 |
+| Özgürlük / Vasal / Yalnız Avcı / Hasat / Döngü | %7,7 / 12,6 / 11,2 / 18,5 / 6,6 | %7,1 / 12,8 / 9,4 / 19,1 / 6,0 |
+| Hakimiyet payı | %78,9 | %63,4 (sınır %60) |
+| Ezme payı | %26,8 | %22,0 |
+| Oynanış başına savaş | 389 | 304 |
+| Kule 100. kata ulaşan | %91,3 | %59,2 |
 | Bitmeyen oynanış | 0 | 0 |
 
-Her son ulaşılabilir, dağılım en çok 2 puan kaydı. Hakimiyet sınırın üstünde, ama payı daraldı. Nedeni, üste geçen
+Her son ulaşılabilir, dağılım en çok 3,5 puan kaydı (Kod Kırıcı). Hakimiyet sınırın üstünde, ama payı daraldı. Nedeni, üste geçen
 günlerin savaşsız olması ve her görevin bir yolculuk yuvası harcaması. Hakimiyet %60'ın altına düşerse önce simülatörün
 görev süresine (`Simulator.MISSION_DAYS`) ve keşif savaş olasılığına bakılmalı.

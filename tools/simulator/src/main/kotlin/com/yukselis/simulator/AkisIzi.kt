@@ -51,6 +51,7 @@ fun main(args: Array<String>) {
                 val e = content.events.getValue(cur!!)
                 val seed = before.seeds.firstOrNull { it.eventId == cur && it.dueDay <= after.day }
                 val reason = when {
+                    cur in content.chapters.managed || cur.startsWith(com.yukselis.engine.world.ChapterTable.ARRIVAL_PREFIX) -> "bolum"
                     seed != null || (e.seedOnly && e.mainArcDay == null) -> when {
                         cur.startsWith("esik_") -> "npc_esik"
                         cur.startsWith("dikkat_") || cur.startsWith("yozlasma_") -> "dikkat_esik"
