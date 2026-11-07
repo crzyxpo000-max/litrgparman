@@ -403,3 +403,18 @@ Onay (2026-11-07): **P0 + tüm P1.** Plan: (1) kod/arayüz/küçük içerik, (2)
   "dışlayan koşullu kopya" (7 → 0) kuralları.
 - Açık: P2-18 (epilog seçicisinde aynı açılışlı kartları yan yana koymama — metinler çeşitlendirildi, kod kuralı yok),
   P2-20 (3 cümleyi aşan paragraf; kılavuzun ulaçla bağlama tercihiyle çelişiyor, kabul), 343 ölü bayrak, USLUP Parti 9–10.
+
+## Sıradaki iş (plan, 2026-11-07)
+
+**P1-21 · Günlük Görev: savaş/Kapı/keşif görevleri bir günde yapılamıyor.** `content/daily.yaml` geniş şablonlar
+(`gunluk_genis_gorevler`, gün döngüsüne girişte açılır) 3–4 adım istiyor; gün başına 2–4 eylem hakkı var
+(`Stats.kt` MIN_SLOTS/MAX_SLOTS), keşifte savaş şansı ~%32 (`WorldEngine` EXPLORE_FIGHT_CHANCE, P1-11 düşürdü),
+Kapı şansı 0.15–0.35. Kaçırılan görev seriyi sıfırlıyor ve Ceza Bölgesi riski getiriyor (`Effects.kt` ~473–481).
+1. Adım sayısını günün eylem hakkına bağla (`newDaily`: adim ≤ hak; savas/kapi 1–2, kesif 2'yi geçmesin).
+2. Hikaye savaşları ve bosslar dahil kazanılan her savaş `savas` sayılsın; Kapı keşfi/temizliği ikisi de `kapi`.
+3. O gün ulaşılamayan görevde (ör. bölgede Kapı yok, hak bitti) ceza verme; seri de kopmasın.
+4. Antrenman ipucunu görünür yap: gün döngüsünde Günlük Görev panelinden "Serbest zaman → Antrenman"a kısayol.
+5. Test (her şablon tek günde yapılabilir; ulaşılamayan görevde ceza yok) + simülatörde günlük tamamlama oranı
+   (rapora satır ekle; hedef ≥ %70) → check.sh → commit.
+
+Diğer açıklar: P2-18, P2-20 (kabul), 343 ölü bayrak, imzalı AAB (anahtar kullanıcıda).
