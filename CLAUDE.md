@@ -99,7 +99,9 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
   doğan olayın ilk paragrafı olur. Koşullar `bolum`, `bolum_min`, `bolum_max`, `gorevde`, `gorev_turu: operasyon|yan|kesif`.
   Erken girilebilen operasyonda kesin gün sayısı yazma. Bayrak öneki `bolum_` motorundur (`bolum_<n>_tasti`).
   **Saha kampı sahnesi** (`kamp: true`, DECISIONS #144, #146): `konum` bölge(ler), `npc` kampa gelen kişi(ler) (yoldaş ya da
-  güveni ≥ 10, tanışılmış, hain olmayan müttefik); keşif görevinde o bölgede gün sonu Kamp'ında oynanır (havuz/tohum/üs değil). Ölçüt "hikayesiz gün": `tools/qa/akis/serbest.py`, `bolge_acik.py`.
+  güveni ≥ 10, tanışılmış, hain olmayan müttefik); keşif görevinde o bölgede gün sonu Kamp'ında oynanır (havuz/tohum/üs değil).
+  **Kule kat anı** (DECISIONS #148): `etiketler: [kule_an, …]`, `konum: [kule_dibi]`, `yalniz_tohum`, `tekrar`, perde yok, bant
+  `kosul: { degisken_min/max: { kule_kat } }`; ilk temizleyen `kule_ilk_<kat>` (15/35/55/75/95). Motor: `WorldEngine.towerMoment`. Ölçüt "hikayesiz gün": `tools/qa/akis/serbest.py`, `bolge_acik.py`.
 - Belirteç kipleri: EN `{yer:x|b}` cümle başında büyük harf, `{fraksiyon:sessiz_ag|k}` "The"yi küçültür; EN'de "the
   {fraksiyon:siginak}" / "the {fraksiyon:lonca}". TR'de `names.yaml iyelik: true` olan bileşik ad n'li ek alır (Kule Dibi'ne).
 - Sınıflar: her eğilime 1 `temel`; `gizli` sınıfların `kosul` + `egilimler` (Yankı'nın önerisi) alanı; temel/gizli

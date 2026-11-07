@@ -415,3 +415,47 @@ Elif'in yayı Konsey'de geçer ve hiçbir yay düğümü ya da sonucu yoldaşlı
   itibar eşiklerine bağlı. Daha önceki "Elif hiç yoldaş olmuyor" tespiti 20 oynanışlık insan benzeri örnekten geliyordu ve
   yanlıştı (doğrusu %6).
 
+### Kule kat anları (DECISIONS #148)
+
+55 olay ve 5 unvan: `events/98_kule_an_a|b|c.yaml`, `feats/98_kule_an.yaml`, `titles/98_kule_an.yaml`. Dağılım: kestirme,
+tuzaklı hazine, yaralı rakip ve Sistem yorumu için bant başına birer varyasyon (4 × 10); Aras yarışı 10; ilk temizleyen 5.
+Hepsinin TR/EN incelemesi yapıldı. İnsan benzeri strateji, 20 oynanış: oynanış başına yaklaşık 25 kat anı ve 4,9 ilk
+temizleyen sahnesi. Hikayesiz gün payı:
+
+| Bölüm | 128 olaydan önce | Kat anlarından önce | Kat anlarından sonra |
+| ---: | ---: | ---: | ---: |
+| 1 | %12 | %12 | %12 |
+| 2 | %42 | %42 | %42 |
+| 3 | %35 | %35 | %35 |
+| 4 | %13 | %13 | %13 |
+| 5 | %43 | %39 | %32 |
+| 6 | %50 | %44 | %37 |
+| 7 | %74 | %53 | %44 |
+| 8 | %80 | %53 | %50 |
+| 9 | %71 | %51 | %46 |
+| 10 | %40 | %37 | %31 |
+| 11 | %72 | %55 | %49 |
+| 12 | %72 | %55 | %53 |
+| 13 | %72 | %56 | %50 |
+| 14 | %66 | %63 | %56 |
+| 15 | %85 | %58 | %52 |
+| 16 | %24 | %26 | %24 |
+| 17 | %28 | %34 | %27 |
+| 18 | %54 | %57 | %52 |
+
+Uzun bölümler (7–9, 11–15) %44–56 arasında kaldı; kullanıcı bunu kabul etti, ek içerik yazılmadı. Denge (1000 oynanış):
+hakimiyet %65,7; sonlar %1–%40 içinde (Koruyucu %14,4, Kod Kırıcı %20,2); Kule 100'e ulaşan %62,3.
+
+### Elif: Demir Gece'deki ölümün çözümlemesi
+
+100 oynanış, seçim kaydıyla (`AkisIzi` `secim`). Elif 51 oynanışta öldü:
+- **Evde kalmak (30):** saf seçim. Yalnız Lonca itibarı ≥ 30 iken görünür.
+- **İskele'ye koşmak (16):** Konsey kurtarılıyor, ardından iki seçenek de ölüm. Seçimden sonra kurtarma yolu yok ve olay
+  bunu önceden göstermiyor.
+- **Hastane ya da pusu savaşını kaybetmek (4):** Pala ve askerleri oyuncu seviyesine göre ölçekleniyor (`@oyuncu+2`). Güç
+  sonucu değiştirmiyor; savaş şansa kalıyor.
+- **Zar yok.** Uyarı yalnız hastane sahnesinde bir sezgi (oksijen tüpleri, ALG 200). Önceden hazırlık ancak
+  `demir_gece_plani` bilgisiyle pusu seçeneği.
+
+Önerilen değişiklik kullanıcı onayını bekliyor (PROGRESS).
+

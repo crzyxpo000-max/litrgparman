@@ -1,7 +1,7 @@
 # İlerleme
 
-Şu an: Kule hızlı tırmanış ve Elif denetimi bitti; Kule kat anı şablonları kullanıcı onayında. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
-Son commit: f2ad0be hızlı tırmanış (sonraki: Elif denetimi)
+Şu an: Kat anları ve Elif ikinci fırsatı bitti; Elif ölüm değişikliği kullanıcı onayında. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
+Son commit: 1a57ae1 kat anları (sonraki: belgeler)
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
@@ -36,7 +36,10 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
       Hakimiyet %64,3; hikayesiz gün değişmedi
 - [x] Elif denetimi: yoldaşlık %6 (tek katılma noktası, tasarım); hiçbir yay düğümü ya da sonucu yoldaşlık istemiyor; ulaşılamayan
       düğüm yok (barış masası %49 çünkü Elif Demir Gece'de %51 ölüyor; aşk %12, başkanlık %8). STORY_FLOW "Elif denetimi"
-- [ ] Kule kat anları: kalan açığın %58'i Kule günü; şablon sayısı kullanıcı onayında
+- [x] Kule kat anları: 55 olay + 5 unvan, ilk temizleyen ve Aras yarışı, 30 gün tekrar etmeme (DECISIONS #148);
+      hikayesiz gün 5–9 puan daha düştü; hakimiyet %65,7
+- [x] Elif ikinci yoldaşlık fırsatı (DECISIONS #149): yoldaşlık %6 → %68
+- [ ] Elif'in Demir Gece ölümü: çözümleme STORY_FLOW'da; değişiklik önerisi kullanıcı onayında
 
 ## Hikaye yapısı değişikliği — bölüm, üs ve görev  ✅ (2026-11-07)
 - [x] Adım 1: olay sırası kaydı (`:tools:simulator:akis`), teşhis `docs/STORY_FLOW.md`, sınıflandırma, plan `docs/CHAPTERS.md`
