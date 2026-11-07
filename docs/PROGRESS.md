@@ -1,7 +1,7 @@
 # İlerleme
 
-Şu an: Boş serbest günler: zaman atlama bitti; yeni olay sayısı kullanıcı onayını bekliyor. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
-Son commit: 48fb39c Tarihli operasyonlar (sonraki: zaman atlama)
+Şu an: Boş serbest günler: zaman atlama ve yeni üs olayları bitti; keşif günleri için karar kullanıcıda. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
+Son commit: 58c6808 zaman atlama (sonraki: yeni üs olayları)
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
@@ -17,8 +17,8 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - [x] Ölçüm: bölüm başına serbest gün, havuzun tükendiği gün, salt savaş payı (`tools/qa/akis/serbest.py`, STORY_FLOW)
 - [x] Antrenman / zaman atlama (`world/TimeSkip.kt`, `HubAction.Skip`, `events/96_zaman_atlama.yaml`, HubPanel
       diyaloğu, simülatör, `ZamanAtlamaTest`; DECISIONS #142)
-- [ ] Hâlâ salt savaş payı %35'i aşan bölümler için yeni olaylar (yoldaş/NPC sahneleri, 3–4 düğümlük yan zincirler):
-      bölüm başına sayı kullanıcı onayını bekliyor
+- [x] Yeni üs olayları (onaylı 23 + 12 takip düğümü; 6, 9, 12, 13, 14, 15. bölümler; TR/EN inceleme; DECISIONS #143)
+- [ ] Salt savaş günleri keşif görevinde geçiyor: keşif bölgesi olayları mı, simülatör keşif davranışı mı (kullanıcı kararı)
 
 ## Hikaye yapısı değişikliği — bölüm, üs ve görev  ✅ (2026-11-07)
 - [x] Adım 1: olay sırası kaydı (`:tools:simulator:akis`), teşhis `docs/STORY_FLOW.md`, sınıflandırma, plan `docs/CHAPTERS.md`

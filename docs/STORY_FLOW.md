@@ -236,3 +236,39 @@ oyuncu dünya seviyesinin gerisinde kalır. Kazanç yüzdeli XP'ye (Perde 1/2/3+
 **Sonuç:** zaman atlama boş günü kısaltan bir kolaylık. Açığı kapatmaz; kapatırsa güç eğrisini bozar. Açık yeni olaylarla
 kapanmalı. Öncelik salt savaş payı %35'i aşan 6, 9, 12, 13, 14, 15. Ardından 7 ve 8 gelir: havuzları her oynanışta
 tükeniyor, "ne olay ne savaş" payları %40'ın üstünde.
+
+### Sonrası (yeni üs olayları; DECISIONS #143)
+
+Kullanıcının onayladığı 23 olay ve yazım sırasında eklenen 12 takip düğümü yazıldı (`events/57_serbest_p2.yaml`,
+`73_serbest_p3a.yaml`, `74_serbest_p3b.yaml`): Bölüm 6, 9, 12, 13, 14 ve 15'te yoldaş/NPC sahneleri ve yan zincirler.
+Hepsi üste geçiyor. Bir oynanışta ortalama 21'i oynanıyor (en az 15, en çok 28).
+
+| Bölüm | Serbest gün (ort.) | Havuzun tükendiği gün (açılıştan, medyan) | Tükenen oynanış | Salt savaş günü | Ne olay ne savaş | Atlanan gün |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | 11.3 | 10 | 3/20 | %15 | %9 | %0 |
+| 2 | 11.2 | 9 | 14/20 | %28 | %10 | %2 |
+| 3 | 3.0 | 0 | 20/20 | %20 | %33 | %2 |
+| 4 | 9.7 | 12 | 4/20 | %15 | %8 | %0 |
+| 5 | 17.4 | 19 | 14/20 | %28 | %12 | %1 |
+| 6 | 13.8 | 28 | 10/20 | %36 | %24 | %2 |
+| 7 | 23.6 | 15 | 20/20 | %19 | %46 | %14 |
+| 8 | 25.4 | 16 | 20/20 | %28 | %39 | %21 |
+| 9 | 30.0 | 7 | 20/20 | %52 | %20 | %4 |
+| 10 | 22.1 | 23 | 5/20 | %30 | %15 | %1 |
+| 11 | 20.7 | 21 | 18/20 | %39 | %28 | %6 |
+| 12 | 29.9 | 18 | 19/20 | %44 | %26 | %4 |
+| 13 | 31.8 | 12 | 18/20 | %48 | %24 | %1 |
+| 14 | 12.6 | 10 | 18/20 | %33 | %36 | %9 |
+| 15 | 25.0 | 2 | 19/20 | %34 | %40 | %16 |
+| 16 | 11.8 | 10 | 6/20 | %22 | %14 | %0 |
+| 17 | 7.5 | 6 | 15/20 | %27 | %13 | %2 |
+| 18 | 4.6 | 0 | 16/20 | %40 | %29 | %2 |
+
+**Bulgu:** salt savaş payı neredeyse hiç değişmedi (Bölüm 9 %50 → %52, 12 %42 → %44, 13 %49 → %48). Havuzun tükendiği gün
+ise ileri kaydı (Bölüm 9: 0 → 7, 13: 0 → 12, 6: 12 → 28). "Ne olay ne savaş" payı düştü (Bölüm 9: %27 → %20,
+15: %38 → %40 gürültü içinde). Nedeni şu: salt savaş günlerinin **hepsi** görevde, keşifte geçiyor. 20 oynanışta Bölüm
+9'un 313 salt savaş gününün 313'ü, Bölüm 13'ün 302'sinin 302'si görevde. Üs olayları yalnız üste oynanır; boş üs
+günlerini doldurur ama keşif görevindeki savaş günlerine dokunamaz. Bu payı düşürmek için ya keşif bölgelerinde geçen
+olaylar gerekir (bölgede `kesif` olayları; keşif eylemi %50 olasılıkla bölgenin olayını çeker), ya da simülatörün keşif
+davranışı (görev süresi, keşifte savaş olasılığı) yeniden ele alınmalıdır. Karar kullanıcıda.
+

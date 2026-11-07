@@ -1,0 +1,897 @@
+# Serbest gün olayları — Perde 3 · Bölüm 14 (Ortak Masa, Gün 293–300) ve Bölüm 15 (Filo, Gün 306–320).
+# docs/STORY_FLOW.md "Boş serbest günler": üsteki boş günler için yoldaş/NPC sahneleri (bölüm başına 2).
+# Bölüm 14 sahneleri buyuk_ihanet'ten (Gün 300) önce gelir: masadaki gerilimi sezdirir, haini açık etmez; seçimler ihaneti
+# önceden durduramaz. Bölüm 15 sahneleri ihanetin ardından gelir ve kimin sattığına (ihanet_mert|kaya|deniz|aras|thessar,
+# ihanet_ikinci_sira), kimin kaldığına göre değişir.
+#   sb14_elif_oturma_plani (Elif: masanın oturma planı) · sb14_mert_tarama (Mert: masadan önce dinleme taraması)
+#   sb15_deniz_vapur (Deniz: iskelede, "canavar mı tanrı mı") · sb15_kaya_anahtar (Kaya: mendirekteki topların ikinci anahtarı)
+# Bu dosyanın bayrakları: flags/74_serbest_p3b.yaml (sb14_masa_aramasi'nı sb15_kaya_anahtar, sb14_mert_tarama'yı sb15_deniz_vapur okur).
+olaylar:
+  # ================================================================== OTURMA PLANI (Bölüm 14 · Elif)
+  - id: "sb14_elif_oturma_plani"
+    konum: ["us"]
+    perde: [3]
+    gun: { min: 293, max: 297 }
+    kosul: { bolum: 14, npc_hayatta: "elif_sari" }
+    agirlik: 6
+    etiketler: ["yoldas", "elif", "siginak", "ihanet"]
+    gerilim: 2
+    npc: ["elif_sari"]
+    kart: { tr: "Oturma planı", en: "The seating chart" }
+    sahne: "sb14_elif_oturma_plani_1"
+    sahneler:
+      - id: "sb14_elif_oturma_plani_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Gece yarısı çoktan geçmiş. Gümrük'teki koğuşta ışık bir tek {npc:elif_sari|in} masasında yanıyor. Bir hasta çizelgesini ters çevirip arkasına kurşunkalemle uzun bir masa çizmiş, çevresine de on dört küçük daire.", en: "It's well past midnight. In the ward at the Customs House, the only light still on is over {npc:elif_sari|pos} desk. She's flipped a patient chart face-down and penciled a long table on the back, with fourteen little circles around it." }
+          - { tr: "Dairelerin içine adların yalnızca ilk harflerini yazmış; kimini o kadar çok silip yeniden yazmış ki silgi kâğıdı yer yer inceltmiş. Seni görünce kalemi bırakmıyor. \"Gel,\" diyor. \"Ömrümde çok ameliyat masası hazırladım, yemek masası hiç hazırlamadım. Bu ikisinin arası bir şey çıktı.\"", en: "She's written only initials in the circles, and some of them she's erased and rewritten so many times the eraser's worn the paper thin. She doesn't put the pencil down when she sees you. \"Come here,\" she says. \"I've set up plenty of operating tables. Never a dinner table. This is somewhere in between.\"" }
+          - metin: { tr: "Kapının tam karşısındaki daireye {npc:kaya_demir|in} adının ilk harfini yazmış. {npc:kaya_demir|in} darbe planını {npc:elif_sari|e} sen ulaştırmıştın; yine de onu çağırmış. \"Onu dışarıda bırakmaktansa karşımda görmeyi yeğlerim,\" diyor, sen daha sormadan.", en: "In the circle dead across from the door, she's written the first letter of {npc:kaya_demir|pos} name. You're the one who brought her his coup plans, and she invited him anyway. \"I'd rather have him across from me than outside,\" she says, before you can even ask." }
+            kosul: { bayrak: "kaya_ihbar_edildi", npc_hayatta: "kaya_demir" }
+          - metin: { tr: "Koğuşun kapısında Demir Gece'den kalma yeni bir sürgü var. {npc:elif_sari} çizdiği masaya bakarken gözü arada bir o sürgüye kayıyor.", en: "There's a new bolt on the ward door, put in after the Iron Night. Every so often, while {npc:elif_sari} studies her table, her eyes slide over to it." }
+            kosul: { herhangi: [{ bayrak: "darbe_puskurtuldu" }, { bayrak: "darbe_uzlasma" }] }
+          - metin: { tr: "Masa {yer:kasaba_cekirdegi|de}, senin kendine bağladığın ışığın önünde kurulacak. \"Ev sahibi sensin,\" diyor {npc:elif_sari}. \"Bu da seni o odadaki herkesin ilk hedefi yapıyor. Biliyorsun, değil mi?\"", en: "The table's going up at {yer:kasaba_cekirdegi}, in front of the light you bound to yourself. \"You're the host,\" {npc:elif_sari} says. \"Which makes you everybody's first target in that room. You know that, right?\"" }
+            kosul: { bayrak: "cekirdek_oyuncu" }
+          - metin: { tr: "Çekirdek Konsey'in elinde; masayı kuran da, bozulursa hesabını verecek olan da o. \"Bir şey ters giderse o odadan çıkan herkes beni suçlar,\" diyor. \"Buna hazırım. Başka bir şeye hazır değilim.\"", en: "The Core belongs to the Council. {npc:elif_sari} is the one setting this table, and she's the one who'll answer for it if it breaks. \"If anything goes wrong, everybody who walks out of that room blames me,\" she says. \"I'm ready for that. I'm not ready for anything else.\"" }
+            kosul: { bayrak: "cekirdek_siginak" }
+          - { tr: "\"Davetiyende bir not varmış, duydum,\" diyor sesini alçaltarak. \"Arkanı duvara ver, diyormuş. Acilde arkam hep kapıya dönük çalışırdım; kim girerse girsin önce yarasına bakardım, sonra yüzüne. Şimdi de burada oturup on dört sandalyeden hangisinin duvara yakın olduğunu hesaplıyorum.\"", en: "\"I heard there was a note on your invitation,\" she says, lower. \"Keep your back to the wall. In the ER I always worked with my back to the door. Whoever came in, I looked at the wound first and the face second. Now here I am, figuring out which of fourteen chairs is closest to a wall.\"" }
+          - { tr: "Kalemi masanın ortasına bırakıyor. \"Sana tek bir şey soracağım: sen nereye oturmak istersin?\"", en: "She sets the pencil down in the middle of the table. \"I'm only going to ask you one thing. Where do you want to sit?\"" }
+        sezgiler:
+          - kosul: { stat: { per: 200 } }
+            metin: { tr: "Planda yalnızca bir sandalye üç kez silinip yeniden çizilmiş: kapının tam karşısındaki. Her seferinde içine başka bir harf yazılmış.", en: "Only one chair on the chart has been erased and redrawn three times: the one dead across from the door. A different initial every time." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "on dört daire çizmiş. benimkini unutmuş. olsun, ben ayakta beklerim. hep öyle yaptım.", en: "fourteen circles. she forgot mine. that's fine, i'll stand. i always have." }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Beni kapının yanına yazın. Kalkanı olan kapıda durur, bu kadar basit.\"", en: "\"Put me by the door. Whoever's got the shield stands at the door. It's that simple.\"" }
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "\"Bana sandalye çizme, doktor. Ben ayakta dururum; oturan adam geç kalkar.\"", en: "\"Don't draw me a chair, Doc. I stand. A guy sitting down gets up too slow.\"" }
+          - npc: "mert_kilic"
+            kosul: { yoldas: "mert_kilic" }
+            metin: { tr: "\"Köşe. Bana köşe lazım. İki duvar, sıfır kör nokta. Bu bir tercih değil, bu bir... protokol.\"", en: "\"Corner. I need a corner. Two walls, zero blind spots. That's not a preference, that's a... protocol.\"" }
+        secenekler:
+          - id: "kapi"
+            etiket: { tr: "\"Beni kapıyla masanın arasına koy.\"", en: "\"Put me between the door and the table.\"" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - iliski: { elif_sari: { guven: 5 } }
+              - hafiza: { npc: "elif_sari", id: "olay:sb14_elif_oturma_plani", agirlik: 30 }
+              - tohum: { olay: "sb14_elif_kayip_plan", gecikme: { min: 1, max: 2 }, kosul: { bolum: 14, gun_max: 299, npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Oturma planı o geceden beri {npc:elif_sari|in} önlüğünün cebindeydi.", en: "Since that night, the seating chart has been riding in {npc:elif_sari|pos} lab coat pocket." } }
+            sonraki: "sb14_elif_oturma_plani_kapi"
+          - id: "arama"
+            etiket: { tr: "\"Kapıda herkes aransın. Ben de, sen de.\"", en: "\"Everybody gets searched at the door. Me too. You too.\"" }
+            etkiler:
+              - ahlak: { duzen: 3, merhamet: -1 }
+              - bayrak: "sb14_masa_aramasi"
+              - iliski: { elif_sari: { saygi: 5 } }
+              - hafiza: { npc: "elif_sari", id: "olay:sb14_elif_oturma_plani", agirlik: 30 }
+              - tohum: { olay: "sb14_elif_kayip_plan", gecikme: { min: 1, max: 2 }, kosul: { bolum: 14, gun_max: 299, npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Oturma planı o geceden beri {npc:elif_sari|in} önlüğünün cebindeydi.", en: "Since that night, the seating chart has been riding in {npc:elif_sari|pos} lab coat pocket." } }
+            sonraki: "sb14_elif_oturma_plani_arama"
+          - id: "korku"
+            etiket: { tr: "\"Sandalyeleri boş ver. Sen kimden korkuyorsun?\"", en: "\"Forget the chairs. Who are you afraid of?\"" }
+            etkiler:
+              - iliski: { elif_sari: { guven: 3 } }
+            sonraki: "sb14_elif_oturma_plani_korku"
+          - id: "kal"
+            etiket: { tr: "Bir şey söyleme; sabaha kadar yanında otur", en: "Don't say anything. Sit with her till morning" }
+            goster: { bayrak: "elif_ask" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+              - iliski: { elif_sari: { baglilik: 6, guven: 4 } }
+              - hafiza: { npc: "elif_sari", id: "gece_kaldi", agirlik: 40 }
+            sonraki: "sb14_elif_oturma_plani_gece"
+
+      - id: "sb14_elif_oturma_plani_kapi"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "{npc:elif_sari} kapının yanındaki daireden bir harfi silip yerine senin adının ilk harfini yazıyor. Sonra kendi sandalyesini masanın öbür başına, tam karşına çekiyor.", en: "{npc:elif_sari} rubs a letter out of the circle by the door and writes the first letter of your name in its place. Then she moves her own chair to the far end of the table, straight across from you." }
+          - { tr: "\"Ben de buraya otururum,\" diyor. \"Bir şey olursa önce senin yüzünde göreceğim. Acilde de öyleydi; hastanın ne kadar kötü olduğunu monitör ötmeden hemşirenin yüzünden okurdum.\"", en: "\"And I'll sit here,\" she says. \"If something happens, I'll see it on your face first. Same as the ER. I could tell how bad a patient was from the nurse's face before the monitor ever went off.\"" }
+          - metin: { tr: "Görünen seviyenle bir kapıyı tutabileceğine herkes inanmaz. O inanıyor, neden inandığını da sormuyor.", en: "Not everybody would believe you can hold a door at the level you show. She does. She doesn't ask why." }
+            kosul: { gizli_fark_min: 1 }
+          - { tr: "Çizelgeyi katlayıp önlüğünün cebine sokuyor. \"Hadi git uyu,\" diyor. \"Ben uyumayacağım ama hiç değilse biri uyusun.\"", en: "She folds the chart and tucks it into her lab coat pocket. \"Go get some sleep,\" she says. \"I won't. But somebody should.\"" }
+        secenekler:
+          - id: "cik"
+            etiket: { tr: "Çıkarken sandalyelere bir kez daha bak", en: "Look at the chairs one more time on your way out" }
+            etkiler:
+              - xp_seviye: 6
+            sonraki: "@akis"
+
+      - id: "sb14_elif_oturma_plani_arama"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "{npc:elif_sari} uzun süre ağzını açmıyor. Kalemin ucuyla masanın kenarına her sandalye için küçük bir nokta koyup duruyor.", en: "{npc:elif_sari} doesn't say anything for a long time. She just taps little dots along the edge of the table with the pencil tip, one per chair." }
+          - { tr: "\"Herkesin üstünün arandığı bir masa masa olmaktan çıkar,\" diyor sonunda. \"Ama haklısın. Elinde bıçakla gelen hastayı bıçağı bırakmadan muayene etmem.\" Kâğıdın altına yeni bir satır ekliyor: Kapıda arama, istisnasız. Listenin başında senin adın var.", en: "\"A table where everybody gets frisked stops being a table,\" she says finally. \"But you're right. A patient walks in with a knife, I don't examine them till the knife's down.\" She adds a line at the bottom of the page: Search at the door, no exceptions. Your name's at the top of the list." }
+          - { tr: "\"Lonca buna bozulacak,\" diye ekliyor. \"Demir Yemin silahını kimseye teslim etmez. Etmezse kapıda bekler, o kadar.\"", en: "\"The Guild's going to hate this,\" she adds. \"The Iron Oath doesn't hand its weapons to anybody. If they won't, they wait at the door. That's it.\"" }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "beni kimse arayamaz. bunu ona söyleme.", en: "nobody can search me. don't tell her that." }
+        secenekler:
+          - id: "isaret"
+            etiket: { tr: "Listede adının yanına bir işaret koy", en: "Put a check mark next to your name on the list" }
+            etkiler:
+              - xp_seviye: 6
+            sonraki: "@akis"
+
+      - id: "sb14_elif_oturma_plani_korku"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "{npc:elif_sari} kalemi bırakıp iki parmağıyla gözlerini ovuşturuyor, bir süre de öyle kalıyor.", en: "{npc:elif_sari} puts the pencil down and presses two fingers into her eyes. She stays like that a while." }
+          - { tr: "\"Teşhis koymadan ilaç yazmam,\" diyor. \"Bir isim söylersem o masaya o isimle otururum; karşımdaki de bunu yüzümden okur. Ya yanılıyorsam? Ya o kişiyi bir şey yapmaya iten tam da bu olursa?\"", en: "\"I don't prescribe without a diagnosis,\" she says. \"If I say a name, I sit down at that table with that name in my head, and they'll read it right off my face. What if I'm wrong? What if that's exactly what pushes them into doing something?\"" }
+          - { tr: "Sonra çizelgeyi sana doğru çeviriyor. \"Sana verebileceğim tek şey şu: yüzlere bakma, ellere bak. İnsan yüzünü yıllarca eğitir. Ellerini eğiten olmaz.\"", en: "Then she turns the chart around to face you. \"Here's all I can give you. Don't watch faces. Watch hands. People spend years training their faces. Nobody trains their hands.\"" }
+        secenekler:
+          - id: "eller"
+            etiket: { tr: "\"Ellere bakarım.\"", en: "\"I'll watch the hands.\"" }
+            etkiler:
+              - bayrak: "sb14_elif_eller"
+              - xp_seviye: 6
+            sonraki: "@akis"
+
+      - id: "sb14_elif_oturma_plani_gece"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Yanındaki tabureyi çekip tek söz etmeden oturuyorsun. {npc:elif_sari} başını kaldırmıyor, ama kalemi tutan eli bir an duruyor.", en: "You pull up the stool next to her and sit without a word. {npc:elif_sari} doesn't look up, but the hand holding the pencil stops for a second." }
+          - { tr: "Saatler böyle geçip gidiyor. O daireleri silip yeniden çizerken sen koğuştan gelen öksürükleri sayıyorsun. Gün ağarırken çizelgeyi bırakıp başını omzuna yaslıyor; uyumuyor, yalnızca gözlerini kapatıyor.", en: "The hours slip by like that. She erases circles and draws them again; you count the coughs drifting in from the ward. When the sky starts going gray she sets the chart down and leans her head on your shoulder. She doesn't sleep. She just closes her eyes." }
+          - { tr: "\"Masada yanıma otur,\" diyor sonunda. \"Plan falan umurumda değil. Yanıma otur, yeter.\"", en: "\"Sit next to me at the table,\" she says at last. \"I don't care about the plan. Just sit next to me.\"" }
+        secenekler:
+          - id: "otur"
+            etiket: { tr: "\"Otururum.\"", en: "\"I will.\"" }
+            etkiler:
+              - xp_seviye: 6
+            sonraki: "@akis"
+
+  # ================================================================== TARAMA (Bölüm 14 · Mert)
+  - id: "sb14_mert_tarama"
+    konum: ["us"]
+    perde: [3]
+    gun: { min: 293, max: 297 }
+    kosul: { bolum: 14, npc_hayatta: "mert_kilic", bayrak_yok: "mert_surgun" }
+    agirlik: 6
+    etiketler: ["yoldas", "mert", "sessiz_ag", "ihanet"]
+    gerilim: 3
+    npc: ["mert_kilic"]
+    kart: { tr: "Tarama", en: "The sweep" }
+    sahne: "sb14_mert_tarama_1"
+    sahneler:
+      - id: "sb14_mert_tarama_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "{npc:mert_kilic} kapıyı çalmadan içeri dalıyor; sırtındaki çanta onu biraz öne eğmiş. Yarı açık fermuarın arasından anten uçları, kablolar, eski bir telsizin bantlanmış kulaklığı sarkıyor.", en: "{npc:mert_kilic} barges in without knocking, hunched a little under the bag on his back. Antenna tips, cables, and the taped-up earpiece of an old radio poke out of the half-open zipper." }
+          - { tr: "\"Sızıntı var,\" diyor, kapıyı daha kapatmadan. \"Kanıtım yok. Kanıtım yok ama sızıntı var; insan cereyanı nasıl hissederse öyle hissediyorum. Üç gündür Ağ'ın trafiği bir şeyin etrafından dolaşıyormuş gibi kıvrılıyor. Masadan önce her şeyi taramam lazım: davetiyeni, odanı, {yer:kasaba_cekirdegi|in} salonunu. Herkesi.\"", en: "\"There's a leak,\" he says, before the door's even shut. \"I don't have proof. I don't have proof, but there's a leak, I can feel it like a draft. For three days the Network's traffic has been bending, like it's routing around something. Before the table I need to sweep everything. Your invitation, your room, the hall at {yer:kasaba_cekirdegi}. Everybody.\"" }
+          - metin: { tr: "\"Kadimler bana teklif getirdiğinde hayır demiştim, hatırlıyor musun?\" Çantayı yere bırakırken elleri titriyor. \"Ben hayır dedim. Peki benden sonra kime gittiler? Teklif dediğin boşa gitmez; açan biri çıkana kadar kapı kapı dolaşır.\"", en: "\"When the Ancients brought me their offer, I said no. Remember?\" His hands shake as he sets the bag down. \"I said no. So who'd they go to next? An offer doesn't just go to waste. It goes door to door till somebody opens up.\"" }
+            kosul: { bayrak: "mert_teklifi_reddetti" }
+          - metin: { tr: "\"Kadimlere bu hafta da sahte telemetri yedirdim,\" diyor, gururunu saklayamadan. \"Masayla ilgili hiçbir şey sızmadı; sızan her şeyi ben yazdım. Ama bir kanal daha var. Benim olmayan bir kanal.\"", en: "\"Fed the Ancients another week of fake telemetry,\" he says, not quite hiding how proud he is. \"Nothing about the table's leaked. Everything that leaked, I wrote. But there's another channel. One that isn't mine.\"" }
+            kosul: { bayrak: "mert_cift_ajan" }
+          - metin: { tr: "Her zamankinden hızlı konuşuyor, her zamankinden çok gülüyor. Taramayı bu gece yapmak istiyor; \"Kalabalık sinyali bozar,\" diyor. Masada kimin nereye oturacağını da soruyor, \"Tarama için,\" diye ekleyerek.", en: "He's talking faster than usual, laughing more than usual. He wants to run the sweep tonight. \"Crowds mess with the signal,\" he says. He asks who's sitting where at the table, too. \"For the sweep,\" he adds." }
+            kosul: { bayrak_yok: "mert_oyuncu_satti" }
+          - metin: { tr: "Gözlerini senden kaçırıyor. Onu Kadim sözcüsüne sen teslim ettin; ikiniz de biliyorsunuz, ikiniz de söylemiyorsunuz. \"Bana ne sorduklarını sorma,\" diyor duvara bakarak. \"Bunu sen kurdun. Ben yalnızca tarama yapmak istiyorum. Hâlâ bir işe yaradığımı görmek istiyorum.\"", en: "He won't look at you. You're the one who handed him over to the Ancients' spokesman. You both know it, and neither of you says it. \"Don't ask what they ask me,\" he tells the wall. \"You set this up. I just want to run a sweep. I want to see I'm still good for something.\"" }
+            kosul: { bayrak: "mert_oyuncu_satti" }
+        sezgiler:
+          - kosul: { stat: { per: 200 } }
+            metin: { tr: "Gözlerinin altı mosmor. Ellerinin titremesi korkudan mı, uykusuzluktan mı, kestiremiyorsun; bu şehirde artık herkeste ikisi birden var.", en: "The skin under his eyes is purple. Whether his hands shake from fear or from no sleep, you can't tell. In this city, these days, everybody's got both." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "o aleti bana doğrultmasın. ne bulacağını ben bile bilmiyorum.", en: "don't let him point that thing at me. even i don't know what he'd find." }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Herkes derken? Beni de mi? ...Tamam. Beni de.\"", en: "\"Everybody? Me too? ...Okay. Me too.\"" }
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Hastalarımın yanında kimse kayıt cihazı açmayacak. Bunu baştan bilin.\"", en: "\"Nobody's turning on a recorder around my patients. Just so we're clear up front.\"" }
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "\"Bana mikrofon takmaya kalk da sonra kaç parmağın kalıyor, say.\"", en: "\"Try wiring me up and then count how many fingers you've got left.\"" }
+        secenekler:
+          - id: "herkes"
+            etiket: { tr: "\"Tara. Herkesi; beni de.\"", en: "\"Sweep it. Everybody. Me included.\"" }
+            etkiler:
+              - ahlak: { duzen: 2, merhamet: -1 }
+              - bayrak: "sb14_mert_tarama"
+              - iliski: { mert_kilic: { guven: 5 } }
+              - hafiza: { npc: "mert_kilic", id: "olay:sb14_mert_tarama", agirlik: 30 }
+              - tohum: { olay: "sb14_mert_salon", gecikme: { min: 1, max: 2 }, kosul: { bolum: 14, gun_max: 299, npc_hayatta: "mert_kilic", bayrak_yok: "mert_surgun" }, hatirlatma: { tr: "{npc:mert_kilic} Çekirdek salonunu taramaya gideli bir gün oldu.", en: "It's been a day since {npc:mert_kilic} went off to sweep the Core hall." } }
+            sonraki: "sb14_mert_tarama_herkes"
+          - id: "hayir"
+            etiket: { tr: "\"Masaya oturacağımız insanları dinlemeyeceğiz.\"", en: "\"We're not bugging the people we're sitting down with.\"" }
+            etkiler:
+              - ahlak: { merhamet: 2, duzen: -1 }
+              - iliski: { mert_kilic: { saygi: 3, guven: -2 } }
+            sonraki: "sb14_mert_tarama_hayir"
+          - id: "once_sen"
+            etiket: { tr: "Tarayıcıyı elinden al: \"Önce seni tarayalım.\"", en: "Take the scanner from him. \"Let's start with you.\"" }
+            etkiler:
+              - ahlak: { duzen: 1 }
+              - bayrak: "sb14_mert_tarandi"
+              - iliski: { mert_kilic: { korku: 4 } }
+              - hafiza: { npc: "mert_kilic", id: "olay:sb14_mert_tarama", agirlik: 30 }
+            sonraki: "sb14_mert_tarama_once_sen"
+          - id: "sahte"
+            etiket: { tr: "\"Onlara sahte bir oturma planı yedir.\"", en: "\"Feed them a fake seating chart.\"" }
+            goster: { bayrak: "mert_cift_ajan" }
+            etkiler:
+              - ahlak: { duzen: -1 }
+              - dikkat: 2
+              - iliski: { mert_kilic: { saygi: 5, guven: 3 } }
+            sonraki: "sb14_mert_tarama_sahte"
+
+      - id: "sb14_mert_tarama_herkes"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "{npc:mert_kilic} çantayı boşaltıp aletleri yatağının üstüne diziyor; her birinin yanında bir etiket, her etiketin üstünde bir tarih. Önce davetiyeyi tarıyor, sonra duvarları, en son da seni.", en: "{npc:mert_kilic} empties the bag and lays the gear out on your bed, a label next to each piece and a date on every label. He sweeps the invitation first, then the walls, then you." }
+          - metin: { tr: "Tarayıcı başına yaklaşınca çığlık atar gibi ötmeye başlıyor. {npc:mert_kilic} donup kalıyor; önce ekrana, sonra sana bakıyor. \"Yayın mı yapıyorsun sen? Yok, hayır... alıyorsun. Neyi aldığını bilmek istemiyorum,\" deyip cihazı kapatıyor. \"Bunu kayda geçirmiyorum. Bu da bir ilk.\"", en: "When the scanner gets near your head it starts shrieking. {npc:mert_kilic} freezes, looks at the screen, then at you. \"Are you broadcasting? No. No... you're receiving. I don't want to know what,\" he says, and shuts it off. \"I'm not logging that. That's a first.\"" }
+            kosul: { bayrak: "yanki_bagi" }
+          - metin: { tr: "Tarayıcı üstünden geçerken çıt çıkarmıyor. {npc:mert_kilic} kaşlarını çatıp ekrana bir süre bakıyor. \"Temizsin. Fazla temiz. İnsan dediğin bu kadar sessiz olmaz,\" diye mırıldanıp defterine bir şey yazıyor.", en: "The scanner doesn't make a sound passing over you. {npc:mert_kilic} frowns at the screen for a while. \"Clean. Too clean. People aren't this quiet,\" he mutters, and writes something in his notebook." }
+            kosul: { bayrak_yok: "yanki_bagi" }
+          - { tr: "\"Yarın Çekirdek salonunu tararım,\" diyor kapıdan çıkarken. \"Sonra masadakileri, birer birer. Sızıntı oradaysa bulurum. Bulamazsam... bulamazsam bu sefer sızıntı kablo değil, insan demektir.\"", en: "\"Tomorrow I sweep the Core hall,\" he says on his way out. \"Then everybody at the table, one at a time. If the leak's there, I'll find it. If I don't... if I don't, then this time the leak isn't a wire. It's a person.\"" }
+        secenekler:
+          - id: "kilitle"
+            etiket: { tr: "Arkasından kapıyı kilitle", en: "Lock the door behind him" }
+            etkiler:
+              - xp_seviye: 6
+            sonraki: "@akis"
+
+      - id: "sb14_mert_tarama_hayir"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "{npc:mert_kilic} ağzını açıp kapatıyor, sonra yeniden açıyor. \"Peki,\" diyor. \"Peki. Etik. Anladım. Ben de... tamam. Teklif ettiğimi kayda geçiriyorum; yarın biri çıkıp neden bulamadın demesin.\"", en: "{npc:mert_kilic} opens his mouth, closes it, opens it again. \"Okay,\" he says. \"Okay. Ethics. Got it. I'm... fine. I'm logging that I offered, so nobody asks me tomorrow why I didn't find it.\"" }
+          - { tr: "Çantayı sırtına alırken duraksıyor. \"Ağ'ı kurarken ilk kuralımız buydu, biliyor musun? Dostunu dinleme. O kuralı ben koymuştum. Sonra kıyamet koptu, ben de her şeyi dinlemeye başladım.\" Kısa bir gülüş. \"Bana kendi kuralımı hatırlattın. Bundan nefret ettim.\"", en: "He stops halfway through shouldering the bag. \"You know, when we started the Network, that was our first rule. Don't listen in on your friends. I wrote that rule. Then the world ended and I started listening to everything.\" A short laugh. \"You just reminded me of my own rule. I hate that.\"" }
+          - metin: { tr: "Kapıdan çıkarken omuzları biraz gevşemiş gibi. Rahatladı mı, hayal kırıklığına mı uğradı, kestiremiyorsun.", en: "His shoulders look a little looser on the way out. Relieved or disappointed, you can't tell." }
+        secenekler:
+          - id: "iyi_geceler"
+            etiket: { tr: "\"İyi geceler.\"", en: "\"Night.\"" }
+            etkiler:
+              - xp_seviye: 5
+            sonraki: "@akis"
+
+      - id: "sb14_mert_tarama_once_sen"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Tarayıcıyı elinden aldığında {npc:mert_kilic} bir an ne yapacağını bilemiyor. Sonra kollarını iki yana açıyor. \"Haklısın,\" diyor. \"Protokol. Tarayan da taranır. Çok doğru.\"", en: "When you take the scanner out of his hands, {npc:mert_kilic} doesn't know what to do for a second. Then he holds his arms out to the sides. \"You're right,\" he says. \"Protocol. The sweeper gets swept. Totally right.\"" }
+          - { tr: "Cihazı tepeden tırnağa üstünde gezdiriyorsun. Kemer tokasında kısa bir cızırtı, cebindeki eski telefonda bir tane daha; ikisi de kendi aletleri, ikisinin de etiketi var. Başka bir şey çıkmıyor.", en: "You run it over him head to toe. A short crackle at his belt buckle, another at the old phone in his pocket. Both his own gear, both labeled. Nothing else." }
+          - metin: { tr: "Dizüstü bilgisayar çantada kalıyor. Tarayıcıyı ona çevirdiğinde \"O kapalı,\" diyor {npc:mert_kilic}. \"Pili bitik. Haftalardır.\" Kapağı kapalı, ışığı sönük; yine de çantayı sırtına alırken gözü bir an ona kayıyor.", en: "The laptop stays in the bag. When you turn the scanner toward it, {npc:mert_kilic} says, \"That's off. Dead battery. Has been for weeks.\" The lid's shut and the light's out. Still, when he shoulders the bag, his eyes flick to it for a second." }
+          - metin: { tr: "Tarama bitince yüzüne tuhaf bir ferahlık yayılıyor. \"Kıyametten beri ilk kez biri benden şüphelendi, biliyor musun? Ve bu... iyi geldi. Demek ciddiye alınıyorum.\"", en: "When it's over, a strange kind of relief crosses his face. \"That's the first time since the end of the world anybody's suspected me, you know? And it feels... good? Means somebody takes me seriously.\"" }
+        secenekler:
+          - id: "geri_ver"
+            etiket: { tr: "Tarayıcıyı ona geri ver", en: "Hand the scanner back" }
+            etkiler:
+              - iliski: { mert_kilic: { saygi: 3 } }
+              - xp_seviye: 5
+            sonraki: "@akis"
+
+      - id: "sb14_mert_tarama_sahte"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "{npc:mert_kilic|in} yüzü bir anda aydınlanıyor. \"Sahte bir plan,\" diye tekrarlıyor, tadına bakar gibi. \"Kimin nereye oturacağını yanlış yazarız, Kadimler'in kulağına giden kanaldan yollarız. Masada kim gözünü yanlış sandalyeye dikerse...\"", en: "{npc:mert_kilic|pos} face lights up. \"A fake chart,\" he repeats, like he's tasting it. \"We write down the wrong seats and send it out on the channel that goes to the Ancients. Whoever's eyes go to the wrong chair at the table...\"" }
+          - { tr: "Çantadan buruşuk bir defter çıkarıp hemen çizmeye başlıyor; on dört daire, her birinde yanlış bir harf. \"Bu dahice. Bunu benim düşünmem lazımdı. Aslında düşünmüştüm, senin de düşünmeni bekliyordum.\" Kalem bir an havada duruyor. \"Tabii öteki kanal bunu da duyarsa, kimin yalan söylediğini onlar da anlar. Risk bu.\"", en: "He pulls a crumpled notebook out of the bag and starts drawing right away. Fourteen circles, a wrong letter in each one. \"That's genius. I should've thought of that. Actually I did think of it, I was waiting for you to think of it too.\" The pencil stops for a second. \"Course, if the other channel picks this up too, they'll figure out who's lying. That's the risk.\"" }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "yalanı yalanla avlamak. hoşuma gitti. bunu bana o öğretmedi, ben ona öğrettim.", en: "hunting a lie with a lie. i like it. he didn't teach me that. i taught him." }
+        secenekler:
+          - id: "gonder"
+            etiket: { tr: "\"Gönder.\"", en: "\"Send it.\"" }
+            etkiler:
+              - xp_seviye: 6
+            sonraki: "@akis"
+
+  # ================================================================== SON VAPUR (Bölüm 15 · Deniz)
+  - id: "sb15_deniz_vapur"
+    konum: ["us"]
+    perde: [3]
+    gun: { min: 306, max: 315 }
+    kosul: { bolum: 15, npc_hayatta: "deniz_arman", yoldas: "deniz_arman" }
+    agirlik: 6
+    etiketler: ["yoldas", "deniz", "ihanet", "filo"]
+    gerilim: 2
+    npc: ["deniz_arman"]
+    kart: { tr: "Son vapur", en: "The last ferry" }
+    sahne: "sb15_deniz_vapur_1"
+    sahneler:
+      - id: "sb15_deniz_vapur_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Limanın ucundaki eski vapur iskelesinde, paslı babaların arasına {npc:deniz_arman} oturmuş, ayaklarını suya sarkıtmış. Körfezin üstündeki ters kuleden ayın yanına uzanan ışık bu gece daha da kalınlaşmış, suyun yüzüne titrek bir yol çiziyor.", en: "Out at the end of the waterfront, on the old ferry pier, {npc:deniz_arman} is sitting between the rusted bollards with {zamir:deniz_arman|onun} feet hanging over the water. Tonight the beam running from the upside-down tower to the moon is thicker than ever, and it lays a shaky road across the water." }
+          - { tr: "Yanına oturunca bir süre ikiniz de konuşmuyorsunuz. Sonra {npc:deniz_arman} cebinden bayat bir tayın ekmeği çıkarıp ikiye bölüyor; yarısını sana veriyor, kalanını ufalayıp martılara atıyor. \"Simit kalmadı,\" diyor. \"Martılar da alıştı. Herkes her şeye alışıyor.\"", en: "When you sit down, neither of you says anything for a while. Then {npc:deniz_arman} pulls a stale ration roll out of a pocket and breaks it in half, hands you one piece and crumbles the other for the gulls. \"No more pretzels,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}. \"The gulls got used to it. Everybody gets used to everything.\"" }
+          # Deniz'in kendisi sattıysa (eve döndü ya da kurtarıldı; ikisinde de yoldaş)
+          - metin: { tr: "{yer:tepe|den} bu yana {npc:deniz_arman} kalkanını bir kez bile kuşanmış değil. Limandakiler hâlâ yan gözle bakıyor, çocuklar yanından geçerken annelerinin eteğine yapışıyor. \"Üç yüz on iki kişi,\" diyor suya bakarak. \"Her gece sayıyorum. Kaçının hâlâ bana selam verdiğini de sayıyorum. Daha ikiyi geçmedi.\"", en: "Since {yer:tepe}, {npc:deniz_arman} hasn't strapped on the shield once. People on the waterfront still look at {zamir:deniz_arman|onu} sideways; kids grab their moms' sleeves walking past. \"Three hundred twelve people,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}, eyes on the water. \"I count them every night. I count how many still say hi to me, too. Hasn't gotten past two.\"" }
+            kosul: { bayrak: "ihanet_deniz" }
+          # Başkası sattıysa
+          - metin: { tr: "\"{npc:mert_kilic},\" diyor bir süre sonra. \"Her şeyi kayda geçiren adam. Bizi de geçirmiş; üç yüz on iki kayıt, hepsi Kadimler'in elinde.\" Ekmeği avucunda sıkıyor. \"Ona kızamıyorum bile. Korkunca ne yapacağını hepimiz biliyorduk. Kimse bir şey yapmadı. Ben de.\"", en: "\"{npc:mert_kilic},\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s} after a while. \"The guy who logs everything. Logged us too. Three hundred twelve records, all in the Ancients' hands.\" {zamir:deniz_arman|o|b} squeeze{zamir:deniz_arman|s} the bread in {zamir:deniz_arman|onun} fist. \"I can't even be mad at him. We all knew what he'd do if he got scared. Nobody did anything. Me neither.\"" }
+            kosul: { bayrak: "ihanet_mert" }
+          - metin: { tr: "\"Masadan önce hepimizi taramak istemişti, hatırlıyor musun?\" diye ekliyor. \"Belki kendini bulmamızı istiyordu. Belki de yalnızca bulup bulamayacağımızı merak ediyordu.\"", en: "\"Remember how he wanted to sweep all of us before the table?\" {zamir:deniz_arman|o} add{zamir:deniz_arman|s}. \"Maybe he wanted us to find him. Or maybe he just wanted to know if we could.\"" }
+            kosul: { bayrak: ["ihanet_mert", "sb14_mert_tarama"] }
+          - metin: { tr: "\"{npc:kaya_demir|in} günün birinde böyle bir şey yapacağını hep bilirdim,\" diyor biraz sonra. \"Yaptı da. İşin garibi, yine de yanılmış olmayı isterdim. Sert adam, ama bu şehri benden bile çok seviyor.\"", en: "\"I always figured {npc:kaya_demir} would pull something like that one day,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s} after a while. \"And he did. Weird part is, I still wish I'd been wrong. He's a hard guy, but he loves this city even more than I do.\"" }
+            kosul: { bayrak: "ihanet_kaya" }
+          - metin: { tr: "\"{npc:aras_kurt},\" diyor, adı tükürür gibi. \"Ona hiç güvenmedim. Söyledim de; kimse dinlemedi, sen bile. Ellinci kattaki kapıyı kendi eliyle açmış.\" Sonra sesi yumuşuyor. \"Haklı çıkmak hiç bu kadar berbat hissettirmemişti.\"", en: "\"{npc:aras_kurt},\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}, as if spitting out the name. \"I never trusted him. I said so, too. Nobody listened. Not even you. He opened that door on the fiftieth floor with his own hand.\" Then, softer: \"Being right's never felt this crappy.\"" }
+            kosul: { bayrak: "ihanet_aras" }
+          - metin: { tr: "\"Sıralamadaki o ikinci adam,\" diyor bir ara. \"Adını bile bilmiyordum. İnsan en çok tanımadığı birine satılınca mı yanar, tanıdığına mı? Hâlâ karar veremedim.\"", en: "\"That number two on the Global Ranking,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s} after a while. \"I didn't even know his name. Does it hurt more getting sold out by a stranger, or by somebody you know? I still can't decide.\"" }
+            kosul: { bayrak: "ihanet_ikinci_sira" }
+          - metin: { tr: "\"Bir Kadim bizim tarafa geçti,\" diyor, hâlâ inanamıyormuş gibi. \"Masada hepimiz birbirimizden şüphelenirken satan biz değil, onlar çıktı. Kendi ırkını sattı. Sevineyim mi, korkayım mı, bilemiyorum.\"", en: "\"An Ancient came over to our side,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}, like {zamir:deniz_arman|o} still can't believe it. \"We were all sitting at that table suspecting each other, and it turned out the one who sold out was one of them. Sold out his own kind. I don't know if I should be happy or scared.\"" }
+            kosul: { bayrak: "ihanet_thessar" }
+          - metin: { tr: "\"Masa kuruldu, dağıldı,\" diyor bir süre sonra. \"Kim kimi sattı, belli bile olmadı. Bazen düşünüyorum da, belki hepimiz birazcık sattık.\"", en: "\"The table got set and then it broke up,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s} after a while. \"Nobody even figured out who sold out who. Sometimes I think maybe we all sold out a little.\"" }
+            kosul: { bayrak_yok: ["ihanet_deniz", "ihanet_mert", "ihanet_kaya", "ihanet_aras", "ihanet_ikinci_sira", "ihanet_thessar"] }
+          - metin: { tr: "\"Masada herkes önce bana baktı, biliyor musun?\" diye ekliyor. \"{yer:tepe|den} döneli aylar oldu ama gözlerdeki o soru hâlâ duruyor. Hain varsa odur, diyorlardı. Bu sefer değildim.\"", en: "\"Everybody at that table looked at me first, you know,\" {zamir:deniz_arman|o} add{zamir:deniz_arman|s}. \"It's been months since I came back from {yer:tepe}, and that question's still in their eyes. If there's a rat, it's got to be the one who did it before. Wasn't me this time.\"" }
+            kosul: { bayrak: "deniz_yukselenlerden_dondu", bayrak_yok: "ihanet_deniz" }
+          - { tr: "Sonra sana dönüyor; ışık yüzünün yarısını gümüşe boyamış. \"Bir keresinde sana sormuştum: canavara mı dönüşüyorsun, tanrıya mı? Filo geliyor, belki bir daha böyle oturamayız. Söyle hadi: hangisisin artık?\"", en: "Then {zamir:deniz_arman|o} turn{zamir:deniz_arman|s} to you, half {zamir:deniz_arman|onun} face painted silver by the beam. \"I asked you once. Are you turning into a monster or a god? The fleet's coming. Maybe we don't get to sit like this again. So tell me. Which one are you now?\"" }
+        sezgiler:
+          - kosul: { stat: { per: 200 } }
+            metin: { tr: "Kalkanı yanında değil. {npc:deniz_arman} onu ilk kez bir yerde unutmuş, ya da bilerek bırakmış.", en: "The shield isn't with {zamir:deniz_arman|onu}. For the first time, {npc:deniz_arman} has left it somewhere. Forgot it, or meant to." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "ona doğruyu söyle. ben söyleyemem. hiç değilse ikimizden biri onu hiç kandırmamış olsun.", en: "tell them the truth. i can't. at least let one of us be someone who never lied to them." }
+        secenekler:
+          - id: "bilmiyorum"
+            etiket: { tr: "\"Bilmiyorum. Ama öğrendiğimde ilk sen bileceksin.\"", en: "\"I don't know. But when I find out, you'll be the first to know.\"" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+              - bayrak: "sb15_deniz_soz"
+              - iliski: { deniz_arman: { guven: 6, baglilik: 4 } }
+              - hafiza: { npc: "deniz_arman", id: "olay:sb15_deniz_vapur", agirlik: 40 }
+              - tohum: { olay: "sb15_deniz_kalkan", gecikme: { min: 2, max: 4 }, kosul: { bolum: 15, gun_max: 319, yoldas: "deniz_arman" }, hatirlatma: { tr: "İskeledeki geceden sonra {npc:deniz_arman} birkaç gün ortalıkta pek görünmedi.", en: "After that night on the pier, {npc:deniz_arman} kept out of sight for a few days." } }
+            sonraki: "sb15_deniz_vapur_soz"
+          - id: "pencere"
+            etiket: { tr: "Pencereni yalnız ona aç; gerçek satırını göster", en: "Open your window for them alone. Show them your real line" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+              - bayrak: "sb15_deniz_pencere"
+              - iliski: { deniz_arman: { guven: 8, korku: 4 } }
+              - hafiza: { npc: "deniz_arman", id: "olay:sb15_deniz_vapur", agirlik: 40 }
+              - tohum: { olay: "sb15_deniz_kalkan", gecikme: { min: 2, max: 4 }, kosul: { bolum: 15, gun_max: 319, yoldas: "deniz_arman" }, hatirlatma: { tr: "İskeledeki geceden sonra {npc:deniz_arman} birkaç gün ortalıkta pek görünmedi.", en: "After that night on the pier, {npc:deniz_arman} kept out of sight for a few days." } }
+            sonraki: "sb15_deniz_vapur_pencere"
+          - id: "pusula"
+            etiket: { tr: "\"Pusulam sendin. Sen söyle, neyim?\"", en: "\"You were my compass. You tell me what I am.\"" }
+            goster: { hafiza: { deniz_arman: "pusula_oldu" } }
+            etkiler:
+              - ahlak: { insanlik: 3 }
+              - iliski: { deniz_arman: { baglilik: 8 } }
+              - hafiza: { npc: "deniz_arman", id: "olay:sb15_deniz_vapur", agirlik: 40 }
+              - tohum: { olay: "sb15_deniz_kalkan", gecikme: { min: 2, max: 4 }, kosul: { bolum: 15, gun_max: 319, yoldas: "deniz_arman" }, hatirlatma: { tr: "İskeledeki geceden sonra {npc:deniz_arman} birkaç gün ortalıkta pek görünmedi.", en: "After that night on the pier, {npc:deniz_arman} kept out of sight for a few days." } }
+            sonraki: "sb15_deniz_vapur_pusula"
+          - id: "sonra"
+            etiket: { tr: "\"Filodan sonra konuşuruz.\"", en: "\"We'll talk after the fleet.\"" }
+            etkiler:
+              - iliski: { deniz_arman: { guven: -3 } }
+            sonraki: "sb15_deniz_vapur_sonra"
+
+      - id: "sb15_deniz_vapur_soz"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "{npc:deniz_arman} yalan arar gibi uzun uzun yüzüne bakıyor. Bulamayınca omuzlarında bir şey çözülüyor.", en: "{npc:deniz_arman} studies your face for a long time, like {zamir:deniz_arman|o} {zamir:deniz_arman|is} looking for the lie. When {zamir:deniz_arman|o} can't find one, something in {zamir:deniz_arman|onun} shoulders lets go." }
+          - { tr: "\"Bilmiyorum, demek,\" diyor. \"Bu dünyada bunu söyleyebilen bir sen kaldın galiba. Herkes ne olduğundan emin: Yükselenler seçilmiş olduklarından, Kadimler sahibimiz olduklarından, Sistem de her şeyi ölçebildiğinden.\" Ekmeğin son kırıntısını suya atıyor. \"Tamam. İlk ben bileceğim. Bu sefer sözünü tut.\"", en: "\"I don't know, huh,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}. \"You might be the last person in this world who can say that. Everybody else is sure what they are. The Ascended are sure they're chosen, the Ancients are sure they own us, and the System's sure it can measure everything.\" {zamir:deniz_arman|o|b} toss the last crumb in the water. \"Okay. I get to know first. Keep your word this time.\"" }
+          - metin: { tr: "Kalkarken duraksıyor. \"{yer:tepe|de} sana sözünü tutmadın demiştim. Haksızlık ettim. Sen sözünü tutmadın diye olmadı hiçbiri; ben beklemeye korktuğum için oldu.\"", en: "{zamir:deniz_arman|o|b} pause{zamir:deniz_arman|s} on the way up. \"Back in {yer:tepe} I told you you'd broken your word. That wasn't fair. None of it happened because you broke your word. It happened because I was scared to wait.\"" }
+            kosul: { bayrak: "ihanet_deniz" }
+        secenekler:
+          - id: "don"
+            etiket: { tr: "İskeleden birlikte dönün", en: "Walk back off the pier together" }
+            etkiler:
+              - xp_seviye: 8
+            sonraki: "@akis"
+
+      - id: "sb15_deniz_vapur_pencere"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Pencereni açıp satırlarını ikinizin arasındaki karanlığa bırakıyorsun; görünen seviyeni değil, gerçeğini.", en: "You open your window and let the lines hang in the dark between you. Not the level you show people. The real one." }
+          - metin: { tr: "{npc:deniz_arman} rakamları bir kez okuyor, sonra bir daha. Dudakları kıpırdıyor, sayıyor. \"Bu kadar mıydı?\" diye fısıldıyor. \"Bunca zamandır bu kadar mı?\"", en: "{npc:deniz_arman} reads the numbers once, then again. {zamir:deniz_arman|onun|b} lips move; {zamir:deniz_arman|o} {zamir:deniz_arman|is} counting. \"This much?\" {zamir:deniz_arman|o} whisper{zamir:deniz_arman|s}. \"All this time, this much?\"" }
+            kosul: { gizli_fark_min: 1 }
+          - { tr: "Işık yüzüne vurunca bir an geri çekilip elini uzatıyor; pencerenin kenarına, kimsenin dokunamadığı o soğuk çizgiye dokunmaya çalışıyor, ama parmakları içinden geçiyor tabii. \"Canavar değilsin,\" diyor sonunda. \"Tanrı da değilsin. Tanrılar kimseye pencere açmaz.\"", en: "When the light hits {zamir:deniz_arman|onun} face, {zamir:deniz_arman|o} pull{zamir:deniz_arman|s} back. Then {zamir:deniz_arman|o} put{zamir:deniz_arman|s} out a hand toward the edge of the window, that cold line nobody can touch. {zamir:deniz_arman|onun|b} fingers go right through, of course. \"You're not a monster,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s} at last. \"You're not a god either. Gods don't open their window for anybody.\"" }
+        secenekler:
+          - id: "kapat"
+            etiket: { tr: "Pencereyi kapat", en: "Close the window" }
+            etkiler:
+              - xp_seviye: 8
+            sonraki: "@akis"
+
+      - id: "sb15_deniz_vapur_pusula"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "\"Ben mi?\" {npc:deniz_arman} önce şaşırıyor, sonra gülümsüyor; uzun zamandır yüzünde gördüğün ilk gerçek gülümseme bu. \"Pusula bir şeyin ne olduğunu söylemez ki. Yalnızca nerede olduğunu söyler.\"", en: "\"Me?\" {npc:deniz_arman} looks surprised, then smiles. It's the first real smile you've seen on {zamir:deniz_arman|onun} face in a long time. \"A compass doesn't tell you what something is. Just where it is.\"" }
+          - { tr: "Bir süre düşünüyor. \"Şuradasın: bir iskelede, elinde bayat ekmek, benim yanımda. Buradan bakınca ne canavara benziyorsun ne tanrıya.\" Tam o sırada bir martı inip ekmeğini elinden kapıyor. {npc:deniz_arman} kahkahayı basıyor. \"Ekmeğini martıya kaptıran birine benziyorsun.\"", en: "{zamir:deniz_arman|o|b} think{zamir:deniz_arman|s} about it. \"You're right here. On a pier, holding stale bread, next to me. From here you don't look like a monster or a god.\" Right then a gull swoops down and snatches the bread out of your hand. {npc:deniz_arman} bursts out laughing. \"You look like somebody who just got mugged by a seagull.\"" }
+        secenekler:
+          - id: "marti"
+            etiket: { tr: "Martının arkasından söylen", en: "Swear at the gull" }
+            etkiler:
+              - xp_seviye: 8
+            sonraki: "@akis"
+
+      - id: "sb15_deniz_vapur_sonra"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "{npc:deniz_arman} kısa, sessiz bir gülüş koyveriyor. \"Hep sonra,\" diyor. \"Vapuru da böyle kaçırırdık. Bir çay daha içelim, sonra koşarız. Hiç koşmadık.\"", en: "{npc:deniz_arman} lets out a short, quiet laugh. \"Always after,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}. \"That's how we used to miss the ferry. One more coffee, then we'll run for it. We never ran.\"" }
+          - { tr: "Kalkıp pantolonunun tozunu silkeliyor. \"Filodan sonra o zaman. Ama bunun söz olmadığını biliyorum. Söz olsa söylerdin.\"", en: "{zamir:deniz_arman|o|b} get{zamir:deniz_arman|s} up and brush off {zamir:deniz_arman|onun} pants. \"After the fleet, then. But I know that's not a promise. If it were, you'd have said so.\"" }
+        secenekler:
+          - id: "bak"
+            etiket: { tr: "Arkasından bak", en: "Watch {zamir:deniz_arman|onu} go" }
+            etkiler:
+              - xp_seviye: 5
+            sonraki: "@akis"
+
+  # ================================================================== İKİNCİ ANAHTAR (Bölüm 15 · Kaya)
+  - id: "sb15_kaya_anahtar"
+    konum: ["us"]
+    perde: [3]
+    gun: { min: 306, max: 315 }
+    # Kaya sağ ve şehirde: sürgün edilmemiş (Perde 2 sürgünü kaya_surgun; büyük ihanetteki sürgünün kendi bayrağı yok,
+    # o yüzden ihanet_kaya + ihanet_onlendi durumunda devrildi/affedildi/konseye_teslim'den biri aranır).
+    kosul:
+      bolum: 15
+      npc_hayatta: "kaya_demir"
+      bayrak_yok: "kaya_surgun"
+      herhangi: [{ bayrak_yok: "ihanet_kaya" }, { bayrak_yok: "ihanet_onlendi" }, { bayrak: "kaya_devrildi" }, { bayrak: "kaya_affedildi" }, { bayrak: "kaya_konseye_teslim" }]
+    agirlik: 6
+    etiketler: ["lonca", "kaya", "ihanet", "filo"]
+    gerilim: 3
+    npc: ["kaya_demir"]
+    kart: { tr: "İkinci anahtar", en: "The second key" }
+    sahne: "sb15_kaya_anahtar_1"
+    sahneler:
+      - id: "sb15_kaya_anahtar_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Mendireğin ucunda üç ağır top sıralanmış. Namluları körfeze, ters kulenin altındaki karanlık suya dönük; Lonca'nın topçuları bütün gün kızakları yağlayıp mermileri saymış. Akşamüstü rüzgârı barut ve tuz kokuyor.", en: "Three heavy guns sit at the end of the breakwater, barrels turned toward the bay and the dark water under the upside-down tower. The Guild's gunners have spent all day greasing the carriages and counting shells. The evening wind smells like powder and salt." }
+          # Kaya'nın durumu
+          - metin: { tr: "{npc:kaya_demir} ellerini arkasında kavuşturmuş, topların arasında dolaşıyor; her namluya bir kez, at okşar gibi dokunuyor. Seni görünce başıyla selam veriyor.", en: "{npc:kaya_demir} walks the line between the guns with his hands clasped behind his back, touching each barrel once, the way you'd pat a horse. He nods when he sees you." }
+            kosul: { bayrak_yok: ["ihanet_kaya", "kaya_hapiste", "kaya_konseye_teslim", "kaya_devrildi"] }
+          - metin: { tr: "{npc:kaya_demir} topların arasında dikiliyor, bilekleri önden kelepçeli, iki yanında birer nöbetçi. Bu topları kurabilecek tek adam o; şehir de bunu yutkunarak kabul etmiş. Seni görünce kelepçeli ellerini hafifçe kaldırıyor. Verebildiği selam bu kadar.", en: "{npc:kaya_demir} stands among the guns with his wrists cuffed in front of him and a guard on either side. He's the only man who can set up these guns, and the city's had to swallow that. When he sees you he lifts his cuffed hands a little. It's the best salute he can manage." }
+            kosul: { herhangi: [{ bayrak: "kaya_hapiste" }, { bayrak: "kaya_konseye_teslim" }] }
+          - metin: { tr: "{npc:kaya_demir} artık Lonca'nın başında değil. Omzundaki rütbe sökülmüş, yerinde iplik izleri kalmış. Topçular yine de ona bakıp ondan işaret bekliyor. Seni görünce hazır ola geçiyor; yarım saniye geç, ama geçiyor.", en: "{npc:kaya_demir} doesn't run the Guild anymore. The rank's been torn off his shoulder, leaving thread marks behind. The gunners still look to him anyway, waiting for his signal. When he sees you he comes to attention. Half a second late, but he does." }
+            kosul: { bayrak: "kaya_devrildi", bayrak_yok: "kaya_hapiste" }
+          - metin: { tr: "{npc:kaya_demir} topların arasında dolaşırken avucundaki yanık izini hep arkasında saklıyor. Çekirdek salonundaki geceden bu yana sana ilk kez sesini yükseltmeden \"Komutan\" diyor. Daha önce sana hiç böyle seslenmemişti.", en: "{npc:kaya_demir} walks the gun line, keeping the burned palm behind his back. For the first time since the night in the Core hall, he speaks to you without raising his voice: \"Commander.\" He's never called you that before." }
+            kosul: { bayrak: "kaya_affedildi" }
+          - metin: { tr: "\"Canımı sana borçlu olduğumu hiç söylemedin,\" diyor. \"Söylemedin diye ödemeyeceğim sanma.\"", en: "\"You never told me I owe you a life,\" he says. \"Doesn't mean I'm not paying it back.\"" }
+            kosul: { bayrak: "kaya_affedildi" }
+          - metin: { tr: "Demir Yasa'nın ikinci haftası. Mendireğin girişinde Demir Yemin'in nöbetçileri bekliyor, şehrin her köşesinde Lonca'nın bayrakları dalgalanıyor. {npc:kaya_demir} topların başında; şehrin yeni efendisi gibi değil, nöbetteki bir asker gibi duruyor. Seni görünce hiçbir şey olmamış gibi başıyla selam veriyor.", en: "Second week under the Iron Law. Iron Oath sentries wait at the foot of the breakwater, and Guild flags fly on every corner of the city. {npc:kaya_demir} stands at the head of the guns, not like the city's new master but like a soldier on watch. When he sees you he nods, like nothing ever happened." }
+            kosul: { bayrak: "ihanet_kaya", bayrak_yok: "ihanet_onlendi" }
+          - metin: { tr: "O gece onun yanında duran sendin. Topçular bunu biliyor; selamı ondan önce sana veriyorlar.", en: "You're the one who stood next to him that night. The gunners know it. They salute you before they salute him." }
+            kosul: { bayrak: "ihanet_kaya", bayrak_yok: "ihanet_onlendi", hafiza: { kaya_demir: "olay:buyuk_ihanet" } }
+          - metin: { tr: "\"Konsey beni yargılayacak,\" diyor. \"Filodan sonra. Önce toplarımı kurmamı istediler; asılacak adama bile iş buluyorlar.\" Kupkuru bir gülüş.", en: "\"The Council's going to try me,\" he says. \"After the fleet. First they want me to set up my guns. They'll even find work for a man they're about to hang.\" A bone-dry laugh." }
+            kosul: { bayrak: "kaya_konseye_teslim" }
+          # Kaya satmadıysa: masada olan biten
+          - metin: { tr: "\"Beni darbeden sen vazgeçirmiştin,\" diyor. \"İki hafta sonra başkası benim yapmadığımı yaptı. Demek ki sorun darbe değilmiş, masaymış. O masa ancak senin gibi biri ayaktayken duruyor.\"", en: "\"You talked me out of the coup,\" he says. \"Two weeks later somebody else did what I didn't. So the problem was never the coup. It was the table. That table only stays up while somebody like you is standing.\"" }
+            kosul: { bayrak: "kaya_darbeden_vazgecti", bayrak_yok: "ihanet_kaya" }
+          - metin: { tr: "\"Söyleyeyim de sonradan başkasından duyma,\" diyor, sesini hiç alçaltmadan. \"O sabah adamlarım koridordaydı. Sinyal başka köşeden gelmeseydi o masayı ben devirecektim. Sonra baktım, şehri satan biri var. Şehri tutmaya çalışan adamla şehri satan adam aynı gece aynı masaya oturmaz. Adamlarımı geri çektim.\"", en: "\"I'll tell you myself so you don't hear it from somebody else,\" he says, not lowering his voice at all. \"That morning my people were in the corridor. If that signal hadn't come out of another corner, I'd have flipped that table myself. Then I saw somebody was selling the city out. A man trying to hold the city and a man selling it don't sit at the same table on the same night. I pulled my people back.\"" }
+            kosul: { bayrak: ["kaya_darbe_hazirligi", "ihanet_mert"], bayrak_yok: ["ihanet_kaya", "kaya_darbeden_vazgecti"] }
+          - metin: { tr: "\"Bilgisayarlı çocuk,\" diyor başını sallayarak. \"Korkağın ihaneti en ucuzudur ama en pahalıya o patlar. Üç yüz on iki kayıt. Filo artık hangi kapıyı çalacağını biliyor.\"", en: "\"The computer kid,\" he says, shaking his head. \"A coward's betrayal comes cheapest and costs the most. Three hundred twelve records. Now the fleet knows which doors to knock on.\"" }
+            kosul: { bayrak: "ihanet_mert" }
+          - metin: { tr: "\"Kalkanlı arkadaşın,\" diyor ve bir süre susuyor. \"Asker düşmana ateş etmeyi öğrenir. Arkadaşına ateş etmeyi kimse öğretmez. Senin yerinde olmak istemezdim.\"", en: "\"Your friend with the shield,\" he says, and goes quiet a while. \"A soldier learns to shoot the enemy. Nobody teaches you how to shoot a friend. Wouldn't want to be in your boots.\"" }
+            kosul: { bayrak: "ihanet_deniz" }
+          - metin: { tr: "\"Sıralamadaki o velet,\" diyor. \"Ona ilk gün eline bir tüfek verip cepheye sürmek lazımdı. Ya adam olurdu ya ölürdü; ikisi de bundan iyiydi.\"", en: "\"That punk on the Global Ranking,\" he says. \"Somebody should've handed him a rifle on day one and shipped him to the front. He'd have grown up or died. Either one beats this.\"" }
+            kosul: { bayrak: "ihanet_aras" }
+          - metin: { tr: "\"Sıralamanın ikincisi,\" diyor. \"Adını bile duymamıştım. En tehlikelisi adını kimsenin bilmediği adamdır; her orduda böyledir.\"", en: "\"Number two on the Global Ranking,\" he says. \"Never even heard his name. The most dangerous man is always the one nobody's heard of. Every army's got one.\"" }
+            kosul: { bayrak: "ihanet_ikinci_sira" }
+          - metin: { tr: "\"Bir Kadim bizim tarafa geçmiş,\" diyor; sesinde zerre sevinç yok. \"Kendi ırkını satan yarın bizi de satar. Yine de bildiklerine ihtiyacımız var, kabul.\"", en: "\"An Ancient switched sides,\" he says, without a scrap of joy in it. \"A man who sells out his own kind will sell us out tomorrow. Still, we need what he knows. I'll give you that.\"" }
+            kosul: { bayrak: "ihanet_thessar" }
+          - metin: { tr: "\"Masa dağıldı, kimse kimseyi asmadı,\" diyor. \"Bunu hayra mı yorayım, bilmiyorum.\"", en: "\"The table broke up and nobody hanged anybody,\" he says. \"Don't know if I should take that as a good sign.\"" }
+            kosul: { bayrak_yok: ["ihanet_kaya", "ihanet_mert", "ihanet_deniz", "ihanet_aras", "ihanet_ikinci_sira", "ihanet_thessar"] }
+          - { tr: "Toplardan birinin kundağındaki çelik kutuyu açıp iki anahtar çıkarıyor. \"Ateşleme çift anahtarla çalışır,\" diyor. \"Bunu ben istedim; bir adamın kafası atınca şehrin yarısını havaya uçurmasın diye. Biri topçubaşında kalır. İkincisi...\" Anahtarı avucunda tartıyor. \"İkincisini kime vereceğine sen karar ver. Bu şehirde o kararı verebilecek başka kimse kalmadı.\"", en: "He opens the steel box on one gun's carriage and takes out two keys. \"The firing gear takes two keys,\" he says. \"I asked for that, so one guy losing his head can't blow up half the city. One stays with the gun chief. The second...\" He weighs it in his palm. \"You decide who gets the second. There's nobody else left in this city who can make that call.\"" }
+        sezgiler:
+          - kosul: { stat: { per: 200 } }
+            metin: { tr: "İki anahtarın dişleri aynı değil; biri yeni dövülmüş. Demek ikinci kilidi geçen hafta, Ortak Masa'dan sonra taktırmış.", en: "The two keys don't have the same teeth. One's freshly cut. So he had the second lock put in last week, after the Common Table." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "iki anahtar, iki el. insanlar birbirine güvenmemeyi demirden yapmışlar. bize de öyle bir şey lazımdı.", en: "two keys, two hands. humans built not trusting each other out of iron. we could've used one of those." }
+        yoldas_tepkileri:
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Bir anahtar için bu kadar tören... Ameliyathanede de böyleydi. Neşterleri kimse tek başına saymaz.\"", en: "\"All this ceremony for a key... The OR was the same. Nobody counts the scalpels alone.\"" }
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Bana verme. Ciddiyim. Ben kalkan tutarım, tetik değil.\"", en: "\"Don't give it to me. I'm serious. I hold shields, not triggers.\"" }
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "\"Bana ver. Ne? Zaten kimse vermiyor.\"", en: "\"Give it to me. What? Nobody ever does anyway.\"" }
+        secenekler:
+          - id: "kaya"
+            etiket: { tr: "İkinci anahtarı ona uzat: \"Sende kalsın.\"", en: "Hand him the second key. \"You keep it.\"" }
+            etkiler:
+              - ahlak: { insanlik: 1, merhamet: 1 }
+              - bayrak: "sb15_kaya_anahtar_kaya"
+              - tohum: { olay: "sb15_kaya_tatbikat", gecikme: { min: 2, max: 4 }, kosul: { bolum: 15, gun_max: 319, npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Mendirekteki toplar kurulalı birkaç gün oldu; ikinci anahtarın kimde olduğunu bütün liman biliyor.", en: "The guns on the breakwater have been set up a few days now, and the whole waterfront knows who has the second key." } }
+              - iliski: { kaya_demir: { guven: 8, baglilik: 6 } }
+              - hafiza: { npc: "kaya_demir", id: "olay:sb15_kaya_anahtar", agirlik: 40 }
+            sonraki: "sb15_kaya_anahtar_kaya"
+          - id: "konsey"
+            etiket: { tr: "\"Konsey'e. Kararı bir masa versin.\"", en: "\"The Council. Let a table decide.\"" }
+            goster: { herhangi: [{ bayrak_yok: "ihanet_kaya" }, { bayrak: "ihanet_onlendi" }] }
+            etkiler:
+              - ahlak: { duzen: 3 }
+              - bayrak: "sb15_kaya_anahtar_konsey"
+              - tohum: { olay: "sb15_kaya_tatbikat", gecikme: { min: 2, max: 4 }, kosul: { bolum: 15, gun_max: 319, npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Mendirekteki toplar kurulalı birkaç gün oldu; ikinci anahtarın kimde olduğunu bütün liman biliyor.", en: "The guns on the breakwater have been set up a few days now, and the whole waterfront knows who has the second key." } }
+              - itibar: { siginak: 2 }
+              - iliski: { kaya_demir: { guven: -3, saygi: 2 } }
+            sonraki: "sb15_kaya_anahtar_konsey"
+          - id: "ikisi"
+            etiket: { tr: "İki anahtarı da cebine koy", en: "Pocket both keys" }
+            etkiler:
+              - ahlak: { duzen: 2, insanlik: -2 }
+              - bayrak: "sb15_kaya_anahtar_oyuncu"
+              - tohum: { olay: "sb15_kaya_tatbikat", gecikme: { min: 2, max: 4 }, kosul: { bolum: 15, gun_max: 319, npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Mendirekteki toplar kurulalı birkaç gün oldu; ikinci anahtarın kimde olduğunu bütün liman biliyor.", en: "The guns on the breakwater have been set up a few days now, and the whole waterfront knows who has the second key." } }
+              - iliski: { kaya_demir: { korku: 5, saygi: 4 } }
+            sonraki: "sb15_kaya_anahtar_ikisi"
+
+      - id: "sb15_kaya_anahtar_kaya"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "{npc:kaya_demir} anahtara bir süre dokunmuyor. Sonra alıp boynundaki künyenin zincirine geçiriyor; anahtar künyeye çarptıkça tıkırdıyor.", en: "{npc:kaya_demir} doesn't touch the key for a moment. Then he takes it and threads it onto the chain of his dog tags. It clicks against them when he moves." }
+          - metin: { tr: "Nöbetçilerden biri itiraz edecek gibi oluyor; {npc:kaya_demir} ona dönüp bakmıyor bile. Kelepçeli bir adamın boynunda şehrin ateş anahtarı asılı. Bunun ne demek olduğunu ikiniz de biliyorsunuz.", en: "One of the guards looks ready to object. {npc:kaya_demir} doesn't even turn his head. The city's firing key is hanging around a cuffed man's neck, and you both know what that means." }
+            kosul: { herhangi: [{ bayrak: "kaya_hapiste" }, { bayrak: "kaya_konseye_teslim" }] }
+          - metin: { tr: "\"Darbe yapmış bir adama ateş anahtarı veriyorsun,\" diyor alçak sesle. \"Ya aptalsın ya da benden iyi bir komutansın. Hangisi olduğunu filo günü göreceğiz.\"", en: "\"You're handing a firing key to a man who pulled a coup,\" he says quietly. \"Either you're a fool or you're a better commander than me. We'll find out which on fleet day.\"" }
+            kosul: { bayrak: "ihanet_kaya" }
+          - metin: { tr: "\"Ortak Masa'dan beri kimse kimseye anahtar vermiyor,\" diyor. \"Sen veriyorsun. Bunu unutmam.\"", en: "\"Since the Common Table, nobody hands anybody a key,\" he says. \"You just did. I won't forget it.\"" }
+            kosul: { bayrak_yok: "ihanet_kaya" }
+          - metin: { tr: "\"Masada herkesi kapıda arattın, beni de,\" diye ekliyor. \"O gün kızmıştım. Şimdi anlıyorum: önce arayan, sonra güvenebilir.\"", en: "\"You had everybody searched at the door, me too,\" he adds. \"Ticked me off that day. Now I get it. You search first, then you can trust.\"" }
+            kosul: { bayrak: "sb14_masa_aramasi" }
+        secenekler:
+          - id: "toplar"
+            etiket: { tr: "Toplara son bir kez bak", en: "Take one last look at the guns" }
+            etkiler:
+              - xp_seviye: 8
+            sonraki: "@akis"
+
+      - id: "sb15_kaya_anahtar_konsey"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "{npc:kaya_demir|in} yüzünde bir şey kıpırdıyor; öfke değil, yorgunluk. \"Konsey,\" diyor. \"Filo tepemizdeyken oylama yapacaklar. Peki. Senin şehrin, senin kuralın.\"", en: "Something moves across {npc:kaya_demir|pos} face. Not anger. Tiredness. \"The Council,\" he says. \"They'll be taking a vote with the fleet over our heads. Fine. Your city, your rules.\"" }
+          - metin: { tr: "Anahtarı bir zarfa koyup mühürlüyor, üstüne {npc:elif_sari|in} adını yazıyor. \"Doktor sağlam kadındır,\" diye homurdanıyor. \"Söyle ona, çekmeceye koymasın. Boynuna assın.\"", en: "He seals the key in an envelope and writes {npc:elif_sari|pos} name on it. \"The doc's solid,\" he grumbles. \"Tell her not to stick it in a drawer. Wear it around her neck.\"" }
+            kosul: { npc_hayatta: "elif_sari" }
+          - metin: { tr: "Anahtarı bir zarfa koyup mühürlüyor, üstüne yalnızca \"Konsey\" yazıyor. \"Doktor sağ olsaydı ona verirdim,\" diyor. \"Şimdi kime gideceği belli değil. Masalar böyledir.\"", en: "He seals the key in an envelope and writes just \"Council\" on it. \"If the doc were alive, I'd give it to her,\" he says. \"Now who knows whose hands it ends up in. That's tables for you.\"" }
+            kosul: { npc_olu: "elif_sari" }
+          - metin: { tr: "\"Beni yargılayacak masaya bir de ateş anahtarı veriyorsun,\" diyor kelepçelerine bakarak. \"Bunda bir şaka var ama gülemiyorum.\"", en: "\"You're handing a firing key to the same table that's going to try me,\" he says, looking down at his cuffs. \"There's a joke in there somewhere. I can't find it funny.\"" }
+            kosul: { bayrak: "kaya_konseye_teslim" }
+        secenekler:
+          - id: "zarf"
+            etiket: { tr: "Zarfı Konsey'e kendin götür", en: "Take the envelope to the Council yourself" }
+            etkiler:
+              - xp_seviye: 6
+            sonraki: "@akis"
+
+      - id: "sb15_kaya_anahtar_ikisi"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "İki anahtarı birden cebine koyduğunda topçular göz göze geliyor. {npc:kaya_demir} uzun uzun yüzüne bakıyor.", en: "When you pocket both keys, the gunners trade looks. {npc:kaya_demir} studies your face for a long time." }
+          - { tr: "\"Çift anahtarı, bir adamın kafası atınca şehri uçurmasın diye istemiştim,\" diyor sonunda. \"Şimdi o tek adam sensin. Demek kafanın atmayacağına güveneceğiz. Hepimiz.\"", en: "\"I asked for two keys so one guy losing his head couldn't blow up the city,\" he says finally. \"Now you're that one guy. Guess we're all trusting you not to lose yours. Every one of us.\"" }
+          - metin: { tr: "\"Demir Yasa'nın yedinci maddesi,\" diye ekliyor. \"Her madde en güçlünün kararıyla askıya alınabilir. O satırı ben kazıttım. Senin cebinde görmek tuhaf doğrusu.\"", en: "\"Article seven of the Iron Law,\" he adds. \"Any article can be suspended by decision of the strongest. I had that line engraved myself. Strange, seeing it in your pocket.\"" }
+            kosul: { bayrak: "lonca_4_tamam" }
+          - metin: { tr: "{npc:yanki} keyifle mırıldanıyor: iki anahtar, tek cep. tam bize göre.", en: "{npc:yanki} hums, pleased: two keys, one pocket. just our size." }
+            kosul: { bayrak: "yanki_bagi" }
+        secenekler:
+          - id: "in"
+            etiket: { tr: "Mendirekten in", en: "Walk back down the breakwater" }
+            etkiler:
+              - xp_seviye: 6
+            sonraki: "@akis"
+
+  # ================================================================== DEVAM OLAYLARI (yalniz_tohum)
+  # sb14_elif_kayip_plan ← sb14_elif_oturma_plani (kapi, arama) · sb14_mert_salon ← sb14_mert_tarama (herkes)
+  # sb15_deniz_kalkan ← sb15_deniz_vapur (bilmiyorum, pencere, pusula) · sb15_kaya_tatbikat ← sb15_kaya_anahtar (üç seçenek)
+  # Bölüm 14 devamları Gün 299'dan, Bölüm 15 devamları Gün 319'dan sonra gelmez (masa ve filo öncesi).
+
+  # ------------------------------------------------------------------ Kayıp plan (Bölüm 14 · Elif)
+  - id: "sb14_elif_kayip_plan"
+    konum: ["us"]
+    perde: [3]
+    yalniz_tohum: true
+    kosul: { bolum: 14, gun_max: 299, npc_hayatta: "elif_sari" }
+    etiketler: ["yoldas", "elif", "siginak", "ihanet"]
+    gerilim: 3
+    npc: ["elif_sari"]
+    kart: { tr: "Kayıp plan", en: "The missing chart" }
+    sahne: "sb14_elif_kayip_plan_1"
+    sahneler:
+      - id: "sb14_elif_kayip_plan_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "{npc:elif_sari} sabah vizitesinin ortasında seni koğuşun kapısına çekip önlüğünün cebini ters çeviriyor. Cep bomboş.", en: "Halfway through morning rounds, {npc:elif_sari} pulls you over to the ward door and turns her lab coat pocket inside out. Empty." }
+          - { tr: "\"Çizelge yok,\" diyor alçak sesle. \"Gece masada uyuyakalmışım; yarım saat, bilemedin kırk dakika. Uyandığımda cebim boştu. Hasta dosyaları yerli yerinde, ilaç dolabına el sürülmemiş. Giden yalnızca o kâğıt.\"", en: "\"The chart's gone,\" she says quietly. \"I fell asleep at my desk last night. Half an hour, forty minutes tops. When I woke up my pocket was empty. Patient files right where I left them, nobody touched the med cabinet. The only thing missing is that piece of paper.\"" }
+          - { tr: "Koğuşta yirmi iki hasta, dört hemşire var; bir de bütün gece girip çıkan kamp habercileri. \"Kime baksam bana bakıyormuş gibi geliyor,\" diyor. \"Teşhis koyamıyorum. Hayatımda ilk kez.\"", en: "Twenty-two patients, four nurses, and all night long the camps' runners in and out. \"Whoever I look at, it feels like they're looking back,\" she says. \"I can't make the diagnosis. First time in my life.\"" }
+          - metin: { tr: "Kâğıdın altındaki satır da onunla birlikte gitti: Kapıda arama, istisnasız. Planı alan, kimin aranacağını da artık biliyor.", en: "The line at the bottom went with it, too: Search at the door, no exceptions. Whoever took the chart knows who's getting searched now." }
+            kosul: { bayrak: "sb14_masa_aramasi" }
+        sezgiler:
+          - kosul: { stat: { per: 200 } }
+            metin: { tr: "Önlüğün cebinde tek bir dikiş bile kopmamış. Kâğıdı çeken el aceleci değilmiş, sabırlıymış.", en: "Not a single stitch on that pocket is torn. Whoever pulled the paper out wasn't in a hurry. They were patient." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "kağıdı okumak için almadılar. senin nereye oturacağını bilmek için aldılar. ya da sen öyle san diye.", en: "they didn't take it to read it. they took it to know where you'd be sitting. or so you'd think." }
+        secenekler:
+          - id: "yeniden"
+            etiket: { tr: "Planı baştan çizin; yerleri bu kez yalnız ikiniz bilin", en: "Redraw it from scratch. This time only the two of you know the seats" }
+            etkiler:
+              - ahlak: { duzen: 1 }
+              - iliski: { elif_sari: { guven: 5 } }
+            sonraki: "sb14_elif_kayip_plan_yeni"
+          - id: "duyur"
+            etiket: { tr: "Planın çalındığını bütün kamplara duyur", en: "Tell every camp the chart's been stolen" }
+            etkiler:
+              - ahlak: { duzen: -1, insanlik: 1 }
+              - iliski: { elif_sari: { saygi: 2 } }
+            sonraki: "sb14_elif_kayip_plan_duyur"
+          - id: "birak"
+            etiket: { tr: "Bırak kalsın; masada kimin şaşırmadığına bak", en: "Let it go. At the table, watch who isn't surprised" }
+            etkiler:
+              - ahlak: { duzen: 1, merhamet: -1 }
+              - iliski: { elif_sari: { guven: -2, saygi: 3 } }
+            sonraki: "sb14_elif_kayip_plan_birak"
+
+      - id: "sb14_elif_kayip_plan_yeni"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Koğuşun deposuna kapanıp eski bir ilaç kutusunun arkasına yeni bir masa çiziyorsunuz. Bu kez bütün sandalyelerin yeri değişiyor, kapının karşısındaki de.", en: "You shut yourselves in the ward's supply closet and draw a new table on the back of an old medicine box. This time every chair moves. The one across from the door, too." }
+          - { tr: "\"Bu sefer hiçbir yere yazmıyorum,\" diyor {npc:elif_sari}, kutuyu sobanın ağzına sokarken. \"Ezberledim. Sen de ezberle; hekim ilaç dozunu nasıl ezberlerse öyle.\"", en: "\"This time I'm not writing it anywhere,\" {npc:elif_sari} says, feeding the box into the stove. \"I've got it memorized. You memorize it too. Like a doctor memorizes a dose.\"" }
+        secenekler:
+          - id: "ezberle"
+            etiket: { tr: "Yerleri bir kez daha içinden say", en: "Run through the seats one more time in your head" }
+            etkiler:
+              - xp_seviye: 5
+            sonraki: "@akis"
+
+      - id: "sb14_elif_kayip_plan_duyur"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Öğleye kalmadan haber bütün limanı dolaşıyor. Akşam kamplardan üç ayrı haberci geliyor, üçü de aynı şeyi soruyor: çalan kim? Bilen yok ama herkesin bir tahmini var ve tahminlerin hiçbiri ötekini tutmuyor.", en: "By noon the news has made it all over the waterfront. That evening three runners from three camps show up asking the same thing: who took it? Nobody knows, but everybody has a guess, and none of the guesses match." }
+          - { tr: "{npc:elif_sari} yorgun yorgun gülümsüyor. \"Masadan önce hepsini birbirinden şüphelendirdik,\" diyor. \"Belki de iyi oldu. Hiç değilse artık herkes sırtını duvara verecek.\"", en: "{npc:elif_sari} gives a tired smile. \"Now everybody suspects everybody before we even sit down,\" she says. \"Maybe that's not so bad. At least now they'll all keep their backs to the wall.\"" }
+        secenekler:
+          - id: "herkes"
+            etiket: { tr: "\"Herkes sırtını duvara versin.\"", en: "\"Everybody's back to the wall.\"" }
+            etkiler:
+              - xp_seviye: 5
+            sonraki: "@akis"
+
+      - id: "sb14_elif_kayip_plan_birak"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "\"Yani yem olarak mı kalsın?\" {npc:elif_sari} bir süre düşünüyor. \"Acilde buna gözlem derdik: tedaviyi ertelersin, belirtinin kendini göstermesini beklersin. Bazen de hasta ölür.\"", en: "\"So we leave it out there as bait?\" {npc:elif_sari} thinks about it. \"In the ER we called that observation. You hold off on treatment and wait for the symptom to show itself. Sometimes the patient dies.\"" }
+          - { tr: "Sonunda başını sallıyor. \"Peki. Masada yerini ararken bir an bile duraksamayan biri olursa...\" Cümlenin sonunu getirmiyor.", en: "Finally she nods. \"Fine. If anybody finds their seat at that table without hesitating for even a second...\" She doesn't finish the sentence." }
+        secenekler:
+          - id: "bekle"
+            etiket: { tr: "Masaya kadar bekle", en: "Wait for the table" }
+            etkiler:
+              - xp_seviye: 5
+            sonraki: "@akis"
+
+  # ------------------------------------------------------------------ Çekirdek salonu (Bölüm 14 · Mert)
+  - id: "sb14_mert_salon"
+    konum: ["us"]
+    perde: [3]
+    yalniz_tohum: true
+    kosul: { bolum: 14, gun_max: 299, npc_hayatta: "mert_kilic", bayrak_yok: "mert_surgun" }
+    etiketler: ["yoldas", "mert", "sessiz_ag", "ihanet"]
+    gerilim: 3
+    npc: ["mert_kilic"]
+    kart: { tr: "Çekirdeğin sesi", en: "The Core's voice" }
+    sahne: "sb14_mert_salon_1"
+    sahneler:
+      - id: "sb14_mert_salon_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Gece yarısına doğru {npc:mert_kilic} {yer:kasaba_cekirdegi|in} salonundan dönüyor; çantası omzunda, yüzü kül gibi.", en: "Close to midnight, {npc:mert_kilic} gets back from the hall at {yer:kasaba_cekirdegi}, bag on his shoulder, face gray as ash." }
+          - { tr: "\"Salon temiz,\" diyor. \"Masanın altında, sandalyelerde, duvarlarda hiçbir şey yok. Ama Çekirdek...\" El cihazının ekranını sana çeviriyor: düzgün, sakin, insanın içini ürperten bir dalga. \"Çekirdek yayın yapıyor. Hep yapıyormuş da bugüne kadar bakan olmamış. Frekansı hiçbir çizelgede yok. Üç gündür de bir şey ona cevap veriyor.\"", en: "\"The hall's clean,\" he says. \"Nothing under the table, nothing in the chairs, nothing in the walls. But the Core...\" He turns his handheld's screen toward you: a smooth, calm, skin-crawling wave. \"The Core's broadcasting. Always has been, turns out, nobody ever looked. The frequency isn't on any chart. And for three days, something's been answering it.\"" }
+          - { tr: "Parmağını tavana, körfezin üstünde asılı duran gemiye doğru kaldırıyor.", en: "He points at the ceiling, toward the ship hanging over the bay." }
+        sezgiler:
+          - kosul: { stat: { per: 200 } }
+            metin: { tr: "Ekrandaki dalgada her dokuzuncu tepe ötekilerden bir tık yüksek; saymak isteyen birine işaret bırakılmış gibi.", en: "Every ninth peak in the wave is a hair taller than the rest, like a mark left for somebody who wants to count." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "çekirdek konuşmaz, dinler. dinleyen bir şey cevap almaya başladıysa birisi ona soru sormuş demektir.", en: "the Core doesn't talk. it listens. if something that listens has started getting answers, somebody asked it a question." }
+        secenekler:
+          - id: "konsey"
+            etiket: { tr: "\"Konsey'e haber veriyoruz. Bu gece.\"", en: "\"We tell the Council. Tonight.\"" }
+            etkiler:
+              - ahlak: { duzen: 2 }
+              - iliski: { mert_kilic: { guven: -2 } }
+            sonraki: "sb14_mert_salon_konsey"
+          - id: "sakla"
+            etiket: { tr: "\"Masaya kadar ikimizin arasında kalsın.\"", en: "\"This stays between us till the table.\"" }
+            etkiler:
+              - ahlak: { duzen: -1 }
+              - iliski: { mert_kilic: { guven: 5 } }
+            sonraki: "sb14_mert_salon_sakla"
+          - id: "kes"
+            etiket: { tr: "\"Sinyali kesebilir misin?\"", en: "\"Can you cut the signal?\"" }
+            etkiler:
+              - iliski: { mert_kilic: { saygi: 2 } }
+            sonraki: "sb14_mert_salon_kes"
+
+      - id: "sb14_mert_salon_konsey"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Konsey'in nöbetçi üyesi ekrana uzun uzun bakıp \"Bu ne demek?\" diye soruyor. {npc:mert_kilic} anlatmaya girişiyor: frekans, genlik, taşıyıcı dalga... Adamın gözleri daha ikinci cümlede donup kalıyor.", en: "The Council member on night duty stares at the screen a long time and asks, \"What does it mean?\" {npc:mert_kilic} starts explaining. Frequency, amplitude, carrier wave... The guy's eyes glaze over by the second sentence." }
+          - { tr: "Sonunda deftere geçiyor: [Çekirdek'ten bilinmeyen yayın. Takip edilecek.] {npc:mert_kilic} dışarı çıkarken söyleniyor: \"Takip edilecek. Kıyamette en çok yazılan cümle.\"", en: "In the end it goes in the log: [Unknown transmission from the Core. To be monitored.] {npc:mert_kilic} mutters on the way out: \"To be monitored. Most-written sentence of the apocalypse.\"" }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Kaydın altına kendi adını da yaz", en: "Sign your name under the log entry too" }
+            etkiler:
+              - xp_seviye: 5
+            sonraki: "@akis"
+
+      - id: "sb14_mert_salon_sakla"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "{npc:mert_kilic} başını sallayıp kaydı şifreli bir klasöre atıyor. Klasörün adı yalnızca bir tarih: Gün 300.", en: "{npc:mert_kilic} nods and drops the recording into an encrypted folder. The folder's name is just a date: Day 300." }
+          - { tr: "\"İki kişinin bildiği sır sırdır,\" diyor. \"Üç kişinin bildiği sır sızıntıdır. Bunu Ağ'ın ilk gününde ben yazmıştım.\" Bir an duruyor. \"Gerçi masada on dört kişi olacak. Matematiği ben yapmadım.\"", en: "\"A secret two people know is a secret,\" he says. \"A secret three people know is a leak. I wrote that on the Network's first day.\" He pauses. \"Then again, there'll be fourteen people at that table. I didn't write the math.\"" }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "\"Gün 300.\"", en: "\"Day 300.\"" }
+            etkiler:
+              - xp_seviye: 5
+            sonraki: "@akis"
+
+      - id: "sb14_mert_salon_kes"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "{npc:mert_kilic} bir süre ekrana bakıyor. \"Belki kesebilirim. Ama şehrin kalkanı Çekirdeğin kristaline bağlı. Sesini kesersem nefesini de kesebilirim; bilmiyorum. Bilmediğim bir şeyin fişini çekmem.\"", en: "{npc:mert_kilic} stares at the screen a while. \"Maybe I could. But the city's shield runs on that crystal. Cut off its voice and I might cut off its air, too. I don't know. I don't pull the plug on things I don't understand.\"" }
+          - { tr: "Cihazı kapatıp çantasına koyuyor. \"Ama dinlerim. Masaya kadar her gece dinlerim. Cevap veren her neyse, bir gün ağzından bir şey kaçırır.\"", en: "He shuts the handheld off and puts it in the bag. \"But I'll listen. Every night till the table. Whatever's answering, one day it'll let something slip.\"" }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "\"Dinle.\"", en: "\"Listen, then.\"" }
+            etkiler:
+              - xp_seviye: 5
+            sonraki: "@akis"
+
+  # ------------------------------------------------------------------ Kalkan (Bölüm 15 · Deniz)
+  - id: "sb15_deniz_kalkan"
+    konum: ["us"]
+    perde: [3]
+    yalniz_tohum: true
+    kosul: { bolum: 15, gun_max: 319, npc_hayatta: "deniz_arman", yoldas: "deniz_arman" }
+    etiketler: ["yoldas", "deniz", "filo"]
+    gerilim: 2
+    npc: ["deniz_arman"]
+    kart: { tr: "Kalkan", en: "The shield" }
+    sahne: "sb15_deniz_kalkan_1"
+    sahneler:
+      - id: "sb15_deniz_kalkan_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Sabah mendireğin dibindeki çakıllıktan metal sesi geliyor: {npc:deniz_arman} kalkanını yeniden kuşanmış, mendirek bloklarına karşı vuruş çalışıyor.", en: "In the morning there's a ring of metal from the gravel beach under the breakwater. {npc:deniz_arman} has the shield back on and is working strikes against the concrete blocks." }
+          - metin: { tr: "{yer:tepe|den} bu yana ilk kez kuşanıyor. O gece {yer:tepe|de} yanan yakıtın isi kalkanın kenarında hâlâ duruyor; {npc:deniz_arman} onu silmemiş.", en: "First time since {yer:tepe}. The soot from the fuel that burned up there that night is still on the rim. {npc:deniz_arman} hasn't wiped it off." }
+            kosul: { bayrak: "ihanet_deniz" }
+          - metin: { tr: "Kalkanın kenarı çentik içinde. Her çentiğin bir hikâyesi var ve {npc:deniz_arman} hepsini ezbere biliyor.", en: "The rim's covered in nicks. Every one of them has a story, and {npc:deniz_arman} knows them all by heart." }
+            kosul: { bayrak_yok: "ihanet_deniz" }
+          - { tr: "Seni görünce kalkanı indiriyor. \"Filo günü bir yerde duracağım,\" diyor. \"Nerede duracağıma sen karar ver. Bir kere olsun bunu son dakikada değil, şimdi konuşalım.\"", en: "When {zamir:deniz_arman|o} see{zamir:deniz_arman|s} you, the shield comes down. \"Fleet day, I'm going to be standing somewhere,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}. \"You decide where. For once let's talk about it now, not at the last second.\"" }
+        sezgiler:
+          - kosul: { stat: { per: 200 } }
+            metin: { tr: "Kalkanı tutan sol kolu eskisinden bir parmak aşağıda duruyor; yorgunluktan mı, eski bir yaradan mı, kestiremiyorsun.", en: "The left arm holding the shield sits an inch lower than it used to. Fatigue or an old wound, you can't tell." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "yanında durmak istiyor. önünde değil. farkı bil.", en: "they want to stand beside you. not in front of you. know the difference." }
+        yoldas_tepkileri:
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Sol omzu iyileşmedi. Kimse sormuyor diye ben söylüyorum.\"", en: "\"That left shoulder never healed. Since nobody's asking, I'm telling.\"" }
+        secenekler:
+          - id: "yanimda"
+            etiket: { tr: "\"Yanımda dur. Önümde değil, yanımda.\"", en: "\"Stand next to me. Not in front of me. Next to me.\"" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+              - iliski: { deniz_arman: { baglilik: 6, guven: 4 } }
+            sonraki: "sb15_deniz_kalkan_yanimda"
+          - id: "cocuklar"
+            etiket: { tr: "\"Sığınaktaki çocukların kapısını tut.\"", en: "\"Hold the door at the Haven, where the kids are.\"" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - iliski: { deniz_arman: { saygi: 4, guven: 2 } }
+            sonraki: "sb15_deniz_kalkan_cocuklar"
+          - id: "idman"
+            etiket: { tr: "\"Önce bir tur. Bakalım kalkan beni hâlâ tutuyor mu.\"", en: "\"One round first. Let's see if that shield can still take me.\"" }
+            etkiler:
+              - iliski: { deniz_arman: { saygi: 3, korku: 2 } }
+            sonraki: "sb15_deniz_kalkan_idman"
+
+      - id: "sb15_deniz_kalkan_yanimda"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "{npc:deniz_arman} bir süre sana bakıp kalkanı sol koluna geri geçiriyor. \"Hep sen önden koşardın, ben de arkandan bağırırdım,\" diyor. \"Bu sefer aynı hizada koşarız.\"", en: "{npc:deniz_arman} looks at you a while, then slides the shield back onto {zamir:deniz_arman|onun} left arm. \"You always ran up front and I yelled after you,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}. \"This time we run side by side.\"" }
+          - metin: { tr: "\"{yer:tepe|de} karşında durmuştum,\" diye ekliyor. \"Bu sefer yanında duracağım. Aradaki farkı herkes görsün.\"", en: "\"Up in {yer:tepe} I stood against you,\" {zamir:deniz_arman|o} add{zamir:deniz_arman|s}. \"This time I'm standing with you. Let everybody see the difference.\"" }
+            kosul: { bayrak: "ihanet_deniz" }
+        secenekler:
+          - id: "hiza"
+            etiket: { tr: "\"Aynı hizada.\"", en: "\"Side by side.\"" }
+            etkiler:
+              - xp_seviye: 6
+            sonraki: "@akis"
+
+      - id: "sb15_deniz_kalkan_cocuklar"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "\"Çocuklar mı?\" {npc:deniz_arman|in} yüzünden bir gölge geçiyor; kardeşi kaybolduğunda on iki yaşındaydı. \"Tamam,\" diyor. \"O kapıdan kimse geçmez. Önce benden geçmesi gerekir.\"", en: "\"The kids?\" A shadow crosses {npc:deniz_arman|pos} face. {zamir:deniz_arman|onun|b} sister was twelve when she went missing. \"Okay,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}. \"Nobody gets through that door. Not before they get through me.\"" }
+          - { tr: "Kalkanı çakıllara dikip uzun zamandır ilk kez rahat bir nefes alıyor. Belki de en çok istediği iş buydu; sen söylemeden kendi ağzıyla isteyemezdi.", en: "{zamir:deniz_arman|o|b} plant{zamir:deniz_arman|s} the shield in the gravel and take{zamir:deniz_arman|s} the first easy breath in a long time. Maybe this was the job {zamir:deniz_arman|o} wanted most. {zamir:deniz_arman|o|b} just couldn't ask for it before you said it." }
+        secenekler:
+          - id: "omuz"
+            etiket: { tr: "Omzuna bir kez vur", en: "Clap {zamir:deniz_arman|onu} on the shoulder" }
+            etkiler:
+              - xp_seviye: 6
+            sonraki: "@akis"
+
+      - id: "sb15_deniz_kalkan_idman"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "İlk darbende kalkan inliyor, {npc:deniz_arman} iki adım geri kayıyor ama düşmüyor. İkincide çakıllara diz çöküyor. Üçüncüyü indirmeden duruyorsun.", en: "Your first hit makes the shield groan. {npc:deniz_arman} skids back two steps but stays up. On the second, {zamir:deniz_arman|o} drop{zamir:deniz_arman|s} to one knee in the gravel. You stop before the third." }
+          - metin: { tr: "Gücünün yarısını bile kullanmadığını ikiniz de biliyorsunuz.", en: "You didn't use half of what you've got. You both know it." }
+            kosul: { gizli_fark_min: 1 }
+          - { tr: "\"Tutuyor,\" diyor {npc:deniz_arman}, soluk soluğa gülerek. \"Seni tutuyor. Filoyu da tutar.\"", en: "\"It holds,\" {npc:deniz_arman} says, laughing, out of breath. \"It holds you. It'll hold the fleet.\"" }
+        secenekler:
+          - id: "kaldir"
+            etiket: { tr: "Elini uzatıp ayağa kaldır", en: "Give {zamir:deniz_arman|onu} a hand up" }
+            etkiler:
+              - xp_seviye: 6
+            sonraki: "@akis"
+
+  # ------------------------------------------------------------------ Gece alarmı (Bölüm 15 · Kaya)
+  - id: "sb15_kaya_tatbikat"
+    konum: ["us"]
+    perde: [3]
+    yalniz_tohum: true
+    kosul: { bolum: 15, gun_max: 319, npc_hayatta: "kaya_demir" }
+    etiketler: ["lonca", "kaya", "filo"]
+    gerilim: 3
+    npc: ["kaya_demir"]
+    kart: { tr: "Gece alarmı", en: "Night alarm" }
+    sahne: "sb15_kaya_tatbikat_1"
+    sahneler:
+      - id: "sb15_kaya_tatbikat_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Gece yarısı mendirekten bir düdük kopuyor: alarm. Körfezin karanlığında bir ışık ilerliyor, alçaktan ve ağır ağır. Topçular yerlerine koşmuş, namlular ışığa dönmüş.", en: "At midnight a whistle shrieks from the breakwater. Alarm. Out in the dark bay a light is moving, low and slow. The gunners have run to their posts, and the barrels have swung toward it." }
+          - { tr: "{npc:kaya_demir} dürbünü gözünden indirmeden konuşuyor: \"Ya keşif gemisi ya balıkçı teknesi. Otuz saniyede karar vermemiz lazım.\"", en: "{npc:kaya_demir} talks without lowering the binoculars. \"Scout ship or fishing boat. We've got thirty seconds to decide.\"" }
+          - metin: { tr: "İkinci anahtar onun boynunda, künyelerin arasında. Topçubaşı ilk anahtarı çoktan kilide sokmuş; ateş için {npc:kaya_demir|in} tek bir hareketi yeter.", en: "The second key's around his neck, between the dog tags. The gun chief already has the first one in the lock. One move from {npc:kaya_demir} and they fire." }
+            kosul: { bayrak: "sb15_kaya_anahtar_kaya" }
+          - metin: { tr: "İkinci anahtar Konsey'de. Haberci koşa koşa gitti, daha dönmedi; namlular hazır ama ateş edemiyor.", en: "The second key's with the Council. A runner took off for it and isn't back yet. The guns are ready and can't fire." }
+            kosul: { bayrak: "sb15_kaya_anahtar_konsey" }
+          - metin: { tr: "İki anahtar da senin cebinde. Bütün topçular sana bakıyor; {npc:kaya_demir} bile.", en: "Both keys are in your pocket. Every gunner's looking at you. Even {npc:kaya_demir}." }
+            kosul: { bayrak: "sb15_kaya_anahtar_oyuncu" }
+        sezgiler:
+          - kosul: { stat: { per: 200 } }
+            metin: { tr: "Işığın altından ritmik bir şapırtı geliyor.", en: "There's a rhythmic splashing under that light." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "gemi değil. ama bir gün olacak ve o gün bu kadar düşünmeye vaktin olmayacak.", en: "not a ship. but one day it will be, and that day you won't have this long to think." }
+        secenekler:
+          - id: "bekle"
+            etiket: { tr: "\"Ateş yok. Yaklaşsın.\"", en: "\"Hold fire. Let it come.\"" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - iliski: { kaya_demir: { saygi: 3 } }
+            sonraki: "sb15_kaya_tatbikat_bekle"
+          - id: "kaya_karar"
+            etiket: { tr: "\"Karar senin, başçavuş.\"", en: "\"Your call, Gunny.\"" }
+            etkiler:
+              - iliski: { kaya_demir: { guven: 5, baglilik: 3 } }
+            sonraki: "sb15_kaya_tatbikat_kaya"
+          - id: "ates"
+            etiket: { tr: "\"Uyarı atışı.\"", en: "\"Warning shot.\"" }
+            etkiler:
+              - ahlak: { merhamet: -1, duzen: 1 }
+              - iliski: { kaya_demir: { saygi: 2 } }
+            sonraki: "sb15_kaya_tatbikat_ates"
+
+      - id: "sb15_kaya_tatbikat_bekle"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Işık yaklaştıkça bir tekneye dönüşüyor: tahta bir balıkçı kayığı, içinde üç adam, bir yığın ağ. {yer:kordon|in} açıklarında kaçak avdan dönüyorlarmış; ellerini havaya kaldırıp avaz avaz bağırıyorlar. Topçulardan biri dizlerinin bağı çözülmüş gibi yere çöküyor.", en: "As the light gets closer it turns into a boat. A wooden fishing skiff, three men and a pile of nets, sneaking back from a night's poaching off {yer:kordon}. They've got their hands up and they're hollering. One of the gunners sits down hard, like his knees just quit." }
+          - { tr: "{npc:kaya_demir} dürbünü indiriyor. \"Filo günü bu otuz saniye olmayacak,\" diyor. \"Bunu bil.\"", en: "{npc:kaya_demir} lowers the binoculars. \"Fleet day, you won't get these thirty seconds,\" he says. \"Know that.\"" }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Balıkçıları rıhtıma çağır", en: "Wave the fishermen into the dock" }
+            etkiler:
+              - xp_seviye: 6
+            sonraki: "@akis"
+
+      - id: "sb15_kaya_tatbikat_kaya"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "{npc:kaya_demir} gözünü dürbünden ayırmadan elini kaldırıyor: bekleyin. Sonra kulağını rüzgâra veriyor. \"Kürek,\" diyor. \"Gemiler kürek çekmez.\" Eli iniyor, ardından namlular da ağır ağır.", en: "{npc:kaya_demir} raises a hand without taking his eyes off the binoculars. Hold. Then he turns his ear to the wind. \"Oars,\" he says. \"Ships don't row.\" His hand comes down, and the barrels slowly follow." }
+          - metin: { tr: "Künyelerin arasındaki anahtara bir kez olsun dokunmuyor.", en: "He never once touched the key between his dog tags." }
+            kosul: { bayrak: "sb15_kaya_anahtar_kaya" }
+          - { tr: "Kayıktaki üç balıkçı, ölümden bir ateş uzakta kaldıklarını hiçbir zaman öğrenmeyecek. Topçubaşı sana dönüp başıyla selam veriyor; selamın yarısı {npc:kaya_demir|e}.", en: "The three fishermen in that skiff will never know they came within one shot of the breakwater. The gun chief turns and nods to you. Half of that nod is for {npc:kaya_demir}." }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "\"İyi kulak.\"", en: "\"Good ears.\"" }
+            etkiler:
+              - xp_seviye: 6
+            sonraki: "@akis"
+
+      - id: "sb15_kaya_tatbikat_ates"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - metin: { tr: "Haberci anahtarla son anda, soluk soluğa yetişiyor.", en: "The runner makes it back with the key at the last second, gasping." }
+            kosul: { bayrak: "sb15_kaya_anahtar_konsey" }
+          - { tr: "Top gürleyince bütün liman uyanıyor. Mermi ışığın yirmi metre önünde suya düşüp köpükten bir sütun kaldırıyor. Işık bir anda sönüyor, karanlıktan biri ağız dolusu küfrediyor.", en: "The gun booms and the whole waterfront wakes up. The shell drops into the water twenty yards short of the light and throws up a column of foam. The light goes out, and somebody out in the dark lets loose a mouthful of profanity." }
+          - { tr: "Sabaha karşı üç balıkçı ıslak ağlarıyla Konsey'e şikâyete gidiyor. {npc:kaya_demir} omuz silkiyor: \"Uyarı atışı uyarır. İşini yaptı.\"", en: "Toward morning, three fishermen with soaked nets march off to complain to the Council. {npc:kaya_demir} shrugs. \"A warning shot warns. It did its job.\"" }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Balıkçıların ağlarını sen öde", en: "Pay for the fishermen's nets yourself" }
+            etkiler:
+              - xp_seviye: 6
+            sonraki: "@akis"
