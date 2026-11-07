@@ -69,6 +69,10 @@ class SystemTexts(private val texts: Map<String, LText>) {
             "operasyon_gunu" to setOf("title"),
             "son_tarih_uyari" to setOf("title", "n"),
             "bolum_tarihli" to setOf("day"),
+            // ---- Zaman atlama (DECISIONS #142) ----
+            "atlama_bitti" to setOf("day"),
+            "atlama_kesinti" to setOf("day"),
+            "atlama_odak_kapi" to emptySet(),
             // ---- Aşama 7 ----
             "kule_kat" to setOf("n", "level"),
             "kule_kat_temiz" to setOf("n"),

@@ -34,6 +34,9 @@ sealed interface HubAction {
 
     /** Bölümün bir hazırlık eylemini yap (üste, operasyondan önce). */
     data class Prepare(val id: String) : HubAction
+
+    /** Antrenman / zaman atlama: üste `days` günü bir odakla geçir (DECISIONS #142). */
+    data class Skip(val focus: SkipFocus, val days: Int) : HubAction
 }
 
 /**
@@ -507,6 +510,7 @@ class WorldEngine(
                 finishSlot(r, emptyList())
             }
             is HubAction.Prepare -> prepare(state, action.id)
+            is HubAction.Skip -> skip(state, action.focus, action.days)
             HubAction.ReturnToBase -> {
                 // Dönüş yolu yuva harcamaz: görevin yolculuğu gidişte ödendi (DECISIONS #130).
                 val notices = mutableListOf<Notice>()
@@ -540,6 +544,11 @@ class WorldEngine(
                 if (state.dayState.slotsLeft < pr.cost) throw ActionRejected("Bugün bu hazırlık için yeterli vakit yok")
             }
             is HubAction.Travel -> if (m != null) throw ActionRejected("Önce üsse dön")
+            is HubAction.Skip -> {
+                if (m != null) throw ActionRejected("Zaman atlama üste yapılır")
+                if (action.days < 1 || action.days > skipLimit(state)) throw ActionRejected("Bu kadar gün atlanamaz")
+                if (action.focus !in skipFoci(state)) throw ActionRejected("Bu odak şu an seçilemez")
+            }
             else -> if (m?.kind == MissionKind.OPERATION) throw ActionRejected("Operasyon sürüyor")
         }
     }
@@ -571,6 +580,112 @@ class WorldEngine(
             }
             add(HubAction.Camp)
         }
+    }
+
+    // ---------------------------------------------------------------- zaman atlama (DECISIONS #142)
+
+    /**
+     * Üste atlanabilecek en çok gün (0: atlama yok). Hazırlıkta operasyona [TimeSkip.SAFETY_DAYS] gün kalana kadar,
+     * sonrasında darboğaz gününe, bölüm bittiyse sonraki bölümün açılışına kadar. Brifing beklerken ve görevde yok.
+     */
+    fun skipLimit(state: WorldState): Int {
+        if (!chapterMode || state.mission != null || state.sceneId != WorldState.HUB) return 0
+        val ch = chapters.get(state.chapter) ?: return 0
+        val until = when (state.chapterPhase) {
+            ChapterPhase.PREP -> ch.deadline - TimeSkip.SAFETY_DAYS
+            ChapterPhase.AFTER -> ch.bottleneckDay ?: return 0
+            ChapterPhase.DONE -> chapters.next(ch.no)?.open ?: return 0
+            else -> return 0
+        }
+        return (until - state.day).coerceAtLeast(0)
+    }
+
+    /** Seçilebilir odaklar: her stat, kapı temizliği, (meslek varsa) meslek, her yaşayan yoldaş. */
+    fun skipFoci(state: WorldState): List<SkipFocus> = buildList {
+        com.yukselis.engine.system.Stat.entries.forEach { add(SkipFocus.Train(it)) }
+        add(SkipFocus.Gates)
+        if (state.player.profession != null) add(SkipFocus.Craft)
+        effects.npc.companions(state).forEach { add(SkipFocus.Companion(it.id)) }
+    }
+
+    /** Atlama sırasında hikaye bir şey bekliyor mu (ana yay düğümü): atlama durur. */
+    private fun storyWaiting(s: WorldState): Boolean =
+        arcNodes.any { (e, at) ->
+            (at.first < s.chapter || (at.first == s.chapter && at.second && s.day >= e.mainArcDay!!)) && director.eligibleQueued(s, e)
+        }
+
+    /**
+     * Günler tek tek geçer (NPC adımları, kapılar, son tarih denetimi). Günlük Görev bu günlerde cezasız atlanır
+     * (seri ne büyür ne kopar). Yeni bir tohumun vakti gelir ya da ana yay düğümü uyarsa atlama durur; ayrıca
+     * %25 olasılıkla bir havuz olayı araya girer. Kesintisiz atlama odağın özet olayıyla biter.
+     */
+    private fun skip(state: WorldState, focus: SkipFocus, days: Int): Result {
+        var s = state
+        val notices = mutableListOf<Notice>()
+        val rng = Rng(s.rngState)
+        val cut = if (rng.chance(TimeSkip.INTERRUPT_CHANCE)) rng.nextInt(1, days) else 0
+        val variant = rng.nextInt(TimeSkip.VARIANTS)
+        s = s.copy(rngState = rng.state)
+        val dueBefore = s.seeds.filter { it.dueDay <= s.day }.toSet()
+        var passed = 0
+        var seedStop: Seed? = null
+        var storyStop = false
+        while (passed < days) {
+            s.daily?.let { if (!it.completed) s = s.copy(daily = it.copy(completed = true)) }
+            if (s.day >= 30) s = effects.shiftAttention(s, -EffectApplier.nightDecay(s.attention)).state
+            val day = startDay(s, advance = true)
+            s = day.state
+            passed++
+            // Ara günlerin rutin bildirimleri (gün başladı, yeni Günlük Görev) gösterilmez; uyarılar kalır.
+            notices += if (passed == days) day.notices else day.notices.filter { it.kind == NoticeKind.WARNING }
+            val newSeed = (listOfNotNull(director.dueSeed(s)) + director.dueElsewhere(s)).firstOrNull { it !in dueBefore }
+            if (newSeed != null) { seedStop = newSeed; break }
+            if (storyWaiting(s)) { storyStop = true; break }
+            if (passed == cut) break
+        }
+        val home = base(s)
+        val gains = effects.applyAll(s, TimeSkip.effects(s, focus, passed, home))
+        s = gains.state
+        notices += gains.notices
+        if (focus == SkipFocus.Craft) s.player.profession?.let { prof ->
+            var p = prof.copy(xp = prof.xp + TimeSkip.CRAFT_XP_PER_DAY * passed)
+            while (p.xp >= Progression.professionXpToNext(p.level)) p = p.copy(xp = p.xp - Progression.professionXpToNext(p.level), level = p.level + 1)
+            if (p.level > prof.level) {
+                val name = content.professions[p.id]?.name ?: LText(p.id, p.id)
+                notices += Notice(NoticeKind.LEVEL_UP, texts.formatL("meslek_seviye", "name" to name, "level" to LText("${p.level}", "${p.level}")))
+            }
+            s = s.copy(player = s.player.copy(profession = p))
+        }
+        val p = s.player
+        s = s.copy(
+            player = p.copy(hp = p.maxHp, mp = p.maxMp),
+            vars = s.vars + mapOf(TimeSkip.DAYS_VAR to passed, TimeSkip.VARIANT_VAR to variant, TimeSkip.CUT_VAR to 0),
+        )
+        notices += Notice(NoticeKind.SYSTEM, texts.format("atlama_bitti", "day" to s.day))
+        val summary = texts.format("atlama_kesinti", "day" to s.day)
+        // Burada geçen tohum: hemen başlar, hatırlatmasının önüne atlamanın özeti gelir.
+        seedStop?.takeIf { seed -> content.events[seed.eventId]?.let { director.fitsLocation(s, it) } == true }?.let { seed ->
+            val own = reminderOf(s, seed)
+            val reminder = if (own == null) summary else LText(summary.tr + " " + own.tr, summary.en + " " + own.en)
+            val started = startEvent(s.copy(seeds = s.seeds - seed), seed.eventId, consumeSlot = false, focus = seed.npc, reminder = reminder)
+            return Result(started.state, notices + started.notices)
+        }
+        if (seedStop == null && !storyStop && passed == cut) {
+            val r2 = Rng(s.rngState)
+            val e = director.deal(s, r2, n = 1) { director.fitsLocation(s, it) }.firstOrNull()
+            s = s.copy(rngState = r2.state)
+            if (e != null) {
+                val started = startEvent(s, e, consumeSlot = false, reminder = summary)
+                return Result(started.state, notices + started.notices)
+            }
+        }
+        // Başka yerde bekleyen bir iş ya da ana yay düğümü: özet sahnesi "yarıda kaldı" satırıyla.
+        if (seedStop != null || storyStop) s = s.copy(vars = s.vars + (TimeSkip.CUT_VAR to 1))
+        val event = TimeSkip.summaryEvent(focus)
+        if (event !in content.events) return finishSlot(s, notices)
+        val focusNpc = (focus as? SkipFocus.Companion)?.npc
+        val started = startEvent(s, event, consumeSlot = false, focus = focusNpc)
+        return Result(started.state, notices + started.notices)
     }
 
     /** Şu an yapılabilecek hazırlıklar: üste, operasyon beklerken, yapılmamış ve koşulu tutan. */

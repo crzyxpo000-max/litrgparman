@@ -293,6 +293,15 @@ Ana hikaye kanıtlanmış bir yapıya oturur (ayrıntı `docs/CHAPTERS.md`, kara
   günlerde **hazırlık** yapılır (keşif, tahkimat, müttefik toplama): her biri bir bayrak bırakır ve operasyonu değiştirir
   (daha az kayıp, ek seçenek ya da avantajlı başlangıç). Yan görev operasyon gününde kesilmez; operasyondan önce oyun
   ayrı bir yuvaya kaydedilir.
+- **Antrenman / zaman atlama:** üste boş kalan günler bir odakla geçirilebilir: bir stat, kapı temizliği, meslek ya da
+  bir yoldaşla vakit. Oyuncu 1 günden (hazırlıkta) operasyona 2 gün kalana kadar dilediği kadar gün seçer; sonrasında
+  darboğaz gününe, bölüm bittiyse sonraki bölümün açılışına kadar. Günler tek tek geçer (NPC'ler, kapılar, son tarih).
+  Kazanç Günlük Görevden ve normal oynanıştan azdır: 3 günde 1 stat (Günlük Görev günde 1 serbest puan); günde seviye
+  XP'sinin Perde 1'de %25'i, Perde 2'de %50'si, Perde 3–4'te %100'ü (normal oynanış her perdede daha
+  hızlı); kapıda tehlike −3/gün ve 3 günde 1 Öz Kristali; meslekte günde 5 meslek XP'si; yoldaşla güven +1/gün (en çok +6)
+  ve 2 günde 1 bağlılık (en çok +2). Atlanan günlerin Günlük Görevi
+  cezasızdır (seri ne büyür ne kopar). %25 olasılıkla bir havuz olayı araya girer; yeni bir tohumun vakti gelince ya da
+  ana yay düğümü uyunca atlama durur. Kesintisiz atlama odağın kısa özet sahnesiyle biter.
 - Arayüzde her zaman "Bölüm N · Hedef · Kalan gün" satırı görünür; tohumdan doğan her olay bağlantıyı hatırlatan bir
   cümleyle başlar; uzun aradan sonra açılan oyunda kısa bir dönüş özeti gösterilir.
 

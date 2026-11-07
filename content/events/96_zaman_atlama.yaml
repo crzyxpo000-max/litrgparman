@@ -1,0 +1,113 @@
+# Zaman atlama özetleri (DECISIONS #142): üste "Antrenman / zaman atlama" eylemi kesintisiz biterse odağın özet olayı
+# açılır (world/TimeSkip.kt). Havuzdan gelmez. Değişkenler: _atlama_varyant (0–2: hangi paragraf), _atlama_gun (geçen gün),
+# _atlama_kesildi (1: başka yerde bekleyen bir iş atlamayı yarıda kesti). Kazançlar bildirim olarak gelir; metin sayı vermez.
+olaylar:
+  - id: "atlama_antrenman"
+    konum: ["*"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["atlama", "antrenman"]
+    gerilim: 1
+    kart: { tr: "Antrenman günleri", en: "Training days" }
+    sahne: "atlama_antrenman_1"
+    sahneler:
+      - id: "atlama_antrenman_1"
+        paragraflar:
+          - metin: { tr: "Her sabah aynı yerde, aynı hareketle başlıyorsun. İlk gün kasların itiraz ediyor, ertesi gün yalnızca söyleniyor, üçüncü gün sesini kesiyor. Akşamları ellerin titremeden kaşığı tutamıyorsun.", en: "Every morning starts in the same spot with the same drill. The first day your muscles object, the next day they just grumble, and by the third they've given up arguing. At night you can't hold a spoon without your hands shaking." }
+            kosul: { degisken_max: { _atlama_varyant: 0 } }
+          - metin: { tr: "Kampın arkasında kimsenin uğramadığı bir köşe bulup orayı kendine ayırıyorsun. Gelip geçenler önce bakıp gülüyor, sonra bakıp susuyor. Günler birbirine karışırken yalnız bedenin sayıyı tutuyor.", en: "You claim a corner behind camp that nobody else bothers with. People passing by laugh the first time they see you, then stop laughing. The days blur together; only your body keeps count." }
+            kosul: { degisken_min: { _atlama_varyant: 1 }, degisken_max: { _atlama_varyant: 1 } }
+          - metin: { tr: "Güneşten önce kalkıp karanlıkta ısınıyorsun. Öğleye doğru ter gözlerini yakıyor, gece yatarken ertesi günün hareketlerini kafanda bir kez daha çalışıyorsun. Uyku hiç bu kadar derin olmamıştı.", en: "You're up before the sun, warming up in the dark. By noon the sweat's stinging your eyes, and at night you run tomorrow's drills in your head one more time before you fall asleep. Sleep has never hit this hard." }
+            kosul: { degisken_min: { _atlama_varyant: 2 } }
+          - metin: { tr: "Bir sabah eski hareketin yarısında durup fark ediyorsun: ilk gün zorla yaptığını artık düşünmeden yapıyorsun.", en: "One morning you stop halfway through a drill and realize it: the thing you had to force on day one, you're doing now without thinking." }
+            kosul: { degisken_min: { _atlama_gun: 5 } }
+          - metin: { tr: "Programı bitiremeden haber geliyor: başka bir yerde biri seni bekliyor. Havluyu omzuna atıp toparlanıyorsun.", en: "Word reaches you before you can finish the program: someone, somewhere else, is waiting on you. You sling the towel over your shoulder and pack up." }
+            kosul: { degisken_min: { _atlama_kesildi: 1 } }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "sayıyorum ben de. sen yoruldukça büyüyorsun, büyüdükçe daha az yoruluyorsun. güzel bir kısır döngü bu.", en: "i'm counting too. the more you tire, the more you grow, and the more you grow, the less you tire. it's a nice little loop." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Güne dön", en: "Get back to the day" }
+            sonraki: "@akis"
+
+  - id: "atlama_kapi"
+    konum: ["*"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["atlama", "kapi"]
+    gerilim: 1
+    kart: { tr: "Kapı nöbeti", en: "Gate duty" }
+    sahne: "atlama_kapi_1"
+    sahneler:
+      - id: "atlama_kapi_1"
+        paragraflar:
+          - metin: { tr: "Üssün çevresinde açılan küçük kapıları tek tek dolaşıyorsun. Çoğu birkaç zavallı yaratık kusup sönüyor; birinin içinde yarım saat kalıp çıktığında güneşin yer değiştirdiğini görüyorsun.", en: "You make the rounds of the small Gates cracking open around base, one by one. Most of them cough up a few sorry creatures and fizzle out. In one you stay half an hour, and when you step back out the sun's moved across the sky." }
+            kosul: { degisken_max: { _atlama_varyant: 0 } }
+          - metin: { tr: "Nöbet çizelgesine adını yazdırıp gece vardiyalarını alıyorsun. Kapı ışığı çakınca ilk sen koşuyorsun, kapanınca son sen dönüyorsun. Sabahları üstündeki is kokusu sabunla da çıkmıyor.", en: "You put your name on the duty roster and take the night shifts. When a Gate flares, you're the first one running; when it closes, you're the last one back. In the mornings the smell of smoke won't wash off, soap or no soap." }
+            kosul: { degisken_min: { _atlama_varyant: 1 }, degisken_max: { _atlama_varyant: 1 } }
+          - metin: { tr: "Kapıların açıldığı yerleri haritaya işleyip aralarındaki düzeni arıyorsun. Bulduğun düzen sayesinde iki gün sonra bir kapı daha ışımadan onun başında bekliyorsun.", en: "You mark every spot where a Gate has opened on a map and look for the pattern. Two days later the pattern pays off: you're already standing there waiting when the next one lights up." }
+            kosul: { degisken_min: { _atlama_varyant: 2 } }
+          - metin: { tr: "Bir hafta dolmadan çevredekiler gece kapı ışığını görünce panikle değil, omuz silkerek karşılamaya başlıyor. \"O halleder\" diyorlar.", en: "Before the week's out, people around base stop panicking when a Gate lights up at night. They just shrug. \"They'll handle it,\" they say." }
+            kosul: { degisken_min: { _atlama_gun: 5 } }
+          - metin: { tr: "Son kapıyı kapatırken bir koşucu soluk soluğa yanına varıyor: başka bir yerde seni bekleyen bir iş var.", en: "You're closing the last Gate when a runner skids up, out of breath: there's a job waiting for you somewhere else." }
+            kosul: { degisken_min: { _atlama_kesildi: 1 } }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "küçük kapılar. küçük lokmalar. doymuyorum ama oyalanıyorum.", en: "little gates. little bites. it doesn't fill me up, but it keeps me busy." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Güne dön", en: "Get back to the day" }
+            sonraki: "@akis"
+
+  - id: "atlama_meslek"
+    konum: ["*"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["atlama", "meslek"]
+    gerilim: 1
+    kart: { tr: "Tezgâh başında", en: "At the workbench" }
+    sahne: "atlama_meslek_1"
+    sahneler:
+      - id: "atlama_meslek_1"
+        paragraflar:
+          - metin: { tr: "Günlerini tezgâhın başında geçiriyorsun. İlk denemeler çöpe gidiyor, sonrakiler kenara konuyor; nihayet biri eline tam oturuyor ve onu bırakmaya kıyamıyorsun.", en: "You spend your days at the workbench. The first attempts go in the trash, the next ones get set aside, and then one finally sits in your hand just right and you can't bring yourself to put it down." }
+            kosul: { degisken_max: { _atlama_varyant: 0 } }
+          - metin: { tr: "Üssün ustalarından birinin yanına çırak gibi oturup elinin nasıl döndüğünü izliyorsun. Az konuşan usta ancak ikinci gün sana aletleri uzatmaya başlıyor.", en: "You sit with one of the base's craftsmen like an apprentice and watch how their hands move. They don't say much. It's only on the second day that they start handing you the tools." }
+            kosul: { degisken_min: { _atlama_varyant: 1 }, degisken_max: { _atlama_varyant: 1 } }
+          - metin: { tr: "Malzemeleri ayırıp eski tariflerin kenarına kendi notlarını düşüyorsun. Her akşam ellerindeki yeni yanıkları sayıyorsun; sayı her gün biraz daha azalıyor.", en: "You sort your materials and scribble your own notes in the margins of the old recipes. Every night you count the new burns on your hands, and every day the count gets a little lower." }
+            kosul: { degisken_min: { _atlama_varyant: 2 } }
+          - metin: { tr: "Günler uzadıkça işin sesi değişiyor. Önceleri aletler sana direniyordu; şimdi ne istediğini sen söylemeden anlıyorlar.", en: "The longer it goes, the more the work starts to sound different. At first the tools fought you. Now they seem to know what you want before you do." }
+            kosul: { degisken_min: { _atlama_gun: 5 } }
+          - metin: { tr: "Elindeki işi bitiremeden kapı vuruluyor: başka bir yerde seni bekleyen bir mesele var. Aletleri bez parçasına sarıp kalkıyorsun.", en: "Somebody knocks before you can finish the piece in front of you: there's something waiting for you somewhere else. You wrap the tools in a rag and get up." }
+            kosul: { degisken_min: { _atlama_kesildi: 1 } }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Güne dön", en: "Get back to the day" }
+            sonraki: "@akis"
+
+  - id: "atlama_yoldas"
+    konum: ["*"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["atlama", "yoldas"]
+    gerilim: 1
+    kart: { tr: "Birlikte geçen günler", en: "Days together" }
+    sahne: "atlama_yoldas_1"
+    sahneler:
+      - id: "atlama_yoldas_1"
+        paragraflar:
+          - metin: { tr: "Günleri {npc:@|le} birlikte geçiriyorsun: sabah beraber antrenman, akşam aynı ateşin başında yemek. Konuşmak çoğu zaman gerekmiyor, ama konuştuğunuzda saatin nasıl geçtiğini anlamıyorsunuz.", en: "You spend the days with {npc:@}: training together in the morning, eating by the same fire at night. Most of the time you don't need to talk, and when you do, the hours just disappear." }
+            kosul: { degisken_max: { _atlama_varyant: 0 } }
+          - metin: { tr: "{npc:@} sana kendi bildiği bir şeyi öğretmeye kalkıyor, sen de ona kendininkini. İkiniz de beceriksiz çıkıyorsunuz ve buna ikiniz de gülüyorsunuz.", en: "{npc:@} decides to teach you something {zamir:@|o} knows, and you return the favor. You're both terrible at it, and you both end up laughing about it." }
+            kosul: { degisken_min: { _atlama_varyant: 1 }, degisken_max: { _atlama_varyant: 1 } }
+          - metin: { tr: "Üssün çevresinde {npc:@|le} uzun yürüyüşlere çıkıyorsunuz. Bir akşam {npc:@} hiç sormadığın halde eskiden anlatmadığı bir şeyi anlatıyor; sen de sözünü kesmiyorsun.", en: "You and {npc:@} take long walks around base. One evening, without you asking, {npc:@} tells you something {zamir:@|o} {zamir:@|has} never told you before, and you don't interrupt." }
+            kosul: { degisken_min: { _atlama_varyant: 2 } }
+          - metin: { tr: "Günler geçtikçe birbirinizin sessizliğini okumayı öğreniyorsunuz. Artık ne zaman yalnız kalmak istediğini sormadan biliyorsun.", en: "As the days go by, you learn to read each other's silences. You can tell now when {zamir:@|o} {zamir:@|is} after some time alone without having to ask." }
+            kosul: { degisken_min: { _atlama_gun: 5 } }
+          - metin: { tr: "Sonra haber geliyor: başka bir yerde bir iş seni bekliyor. {npc:@} omzunu sıvazlayıp \"Git hadi\" diyor, \"burada bekliyor olacağım.\"", en: "Then word comes: there's something waiting for you somewhere else. {npc:@} claps you on the shoulder. \"Go on,\" {zamir:@|o} {zamir:@|s}. \"I'll be right here.\"" }
+            kosul: { degisken_min: { _atlama_kesildi: 1 } }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Güne dön", en: "Get back to the day" }
+            sonraki: "@akis"

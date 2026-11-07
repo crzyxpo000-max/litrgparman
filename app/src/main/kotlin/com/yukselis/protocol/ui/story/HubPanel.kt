@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -25,9 +26,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.yukselis.engine.story.HubView
+import com.yukselis.engine.story.SkipFocusView
+import com.yukselis.engine.story.SkipView
+import com.yukselis.engine.world.SkipFocus
 import com.yukselis.engine.world.HubAction
 import com.yukselis.protocol.R
 import com.yukselis.protocol.ui.components.Glossary
@@ -35,7 +40,7 @@ import com.yukselis.protocol.ui.components.HelpButton
 import com.yukselis.protocol.ui.components.TipCard
 import com.yukselis.protocol.ui.theme.GameType
 
-private enum class HubDialog { GATES, TRAVEL, PREPARE }
+private enum class HubDialog { GATES, TRAVEL, PREPARE, SKIP }
 
 /**
  * Gün akışı, sabit alt panelde: üstte kalan eylem ve tehlike, sonra fırsat kartları, tek satır serbest eylem,
@@ -119,6 +124,12 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
             FilledTonalButton(onClick = { onAction(HubAction.Train) }, contentPadding = pad, modifier = Modifier.weight(1f)) { OneLine(stringResource(R.string.hub_train)) }
             FilledTonalButton(onClick = { onAction(HubAction.Rest) }, contentPadding = pad, modifier = Modifier.weight(1f)) { OneLine(stringResource(R.string.hub_rest)) }
         }
+        // Antrenman / zaman atlama (DECISIONS #142): boş günleri bir odakla geçirmek.
+        if (hub.skip != null) {
+            OutlinedButton(onClick = { dialog = HubDialog.SKIP }, modifier = Modifier.fillMaxWidth()) {
+                OneLine(stringResource(R.string.hub_skip) + " ⏩")
+            }
+        }
         val tower = hub.tower
         if (tower != null || hub.gates.isNotEmpty() || hub.travel.isNotEmpty() || hub.canReturn) {
             Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -183,6 +194,9 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
                 }
             }
         }
+        HubDialog.SKIP -> hub.skip?.let { sk ->
+            SkipDialog(sk, onDismiss = { dialog = null }) { focus, days -> dialog = null; onAction(HubAction.Skip(focus, days)) }
+        }
         null -> Unit
     }
     pending?.let { action ->
@@ -194,6 +208,56 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
             text = { Text(hub.deadlineWarning ?: "") },
         )
     }
+}
+
+/** Zaman atlama: odak (gruplu liste) ve gün sayısı (1…en çok). */
+@Composable
+private fun SkipDialog(skip: SkipView, onDismiss: () -> Unit, onStart: (SkipFocus, Int) -> Unit) {
+    var chosen by remember { mutableStateOf<SkipFocusView?>(null) }
+    var days by remember { mutableIntStateOf(minOf(3, skip.maxDays)) }
+    AppAlertDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = {
+            TextButton(onClick = { chosen?.let { onStart(it.focus, days) } }, enabled = chosen != null) {
+                Text(pluralStringResource(R.plurals.hub_skip_start, days, days))
+            }
+        },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } },
+        title = { Text(stringResource(R.string.hub_skip_title)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.verticalScroll(rememberScrollState())) {
+                Text(stringResource(R.string.hub_skip_info), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+                    OutlinedButton(onClick = { days-- }, enabled = days > 1) { Text("−") }
+                    Text(
+                        pluralStringResource(R.plurals.hub_skip_days, days, days),
+                        style = MaterialTheme.typography.titleMedium,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.weight(1f),
+                    )
+                    OutlinedButton(onClick = { days++ }, enabled = days < skip.maxDays) { Text("+") }
+                }
+                skip.foci.groupBy { it.group }.forEach { (group, items) ->
+                    Text(stringResource(skipGroupLabel(group)), style = GameType.system, color = MaterialTheme.colorScheme.primary)
+                    items.forEach { f ->
+                        val selected = chosen == f
+                        if (selected) {
+                            Button(onClick = { chosen = f }, modifier = Modifier.fillMaxWidth()) { Text("✓ " + f.name) }
+                        } else {
+                            OutlinedButton(onClick = { chosen = f }, modifier = Modifier.fillMaxWidth()) { Text(f.name) }
+                        }
+                    }
+                }
+            }
+        },
+    )
+}
+
+private fun skipGroupLabel(group: String): Int = when (group) {
+    "antrenman" -> R.string.hub_skip_group_train
+    "kapi" -> R.string.hub_skip_group_gates
+    "meslek" -> R.string.hub_skip_group_craft
+    else -> R.string.hub_skip_group_companion
 }
 
 @Composable

@@ -273,7 +273,17 @@ class StoryEngine(val content: Content) {
             deadlineWarning = if (world.deadlineRisk(state)) content.chapters.get(state.chapter)?.let { ch ->
                 text(content.texts.formatL("son_tarih_uyari", "title" to ch.title, "n" to LText("${(ch.deadline - state.day).coerceAtLeast(0)}", "${(ch.deadline - state.day).coerceAtLeast(0)}"))[lang], state, lang)
             } else null,
+            skip = world.skipLimit(state).takeIf { it > 0 && d.slotsLeft > 0 }?.let { max ->
+                SkipView(max, world.skipFoci(state).map { f -> SkipFocusView(f, f.key, skipFocusName(f, state, lang)) })
+            },
         )
+    }
+
+    private fun skipFocusName(f: com.yukselis.engine.world.SkipFocus, state: WorldState, lang: Lang): String = when (f) {
+        is com.yukselis.engine.world.SkipFocus.Train -> f.stat.label[lang]
+        com.yukselis.engine.world.SkipFocus.Gates -> content.texts.format("atlama_odak_kapi")[lang]
+        com.yukselis.engine.world.SkipFocus.Craft -> state.player.profession?.let { content.professions[it.id]?.name?.get(lang) } ?: ""
+        is com.yukselis.engine.world.SkipFocus.Companion -> text("{npc:${f.npc}}", state, lang)
     }
 
     // ---- Savaş ----

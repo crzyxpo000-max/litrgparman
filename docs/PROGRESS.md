@@ -1,7 +1,7 @@
 # İlerleme
 
-Şu an: Tamam — tüm aşamalar ve hikaye yapısı değişikliği bitti. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
-Son commit: 8472fd5 Aşama 6: Perde 1 dikey dilimi
+Şu an: Boş serbest günler: zaman atlama bitti; yeni olay sayısı kullanıcı onayını bekliyor. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
+Son commit: 48fb39c Tarihli operasyonlar (sonraki: zaman atlama)
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
@@ -10,6 +10,15 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - SDK: `local.properties` → `sdk.dir=C:/Users/alpar/AppData/Local/Android/Sdk` (git dışı).
 - Emülatör: `Medium_Phone_API_36.0` (`emulator -avd Medium_Phone_API_36.0`), adb ile kurulum.
 - OneDrive kilidi yüzünden lint ara sıra "dosya kullanılıyor" der: `./gradlew --stop` ve tekrar.
+
+## Tarihli operasyonlar ve boş serbest günler (2026-11-07)
+- [x] Tarihli operasyonlar sabit: geri sayım, hazırlık eylemleri (her tarihli bölüme 2–3), yan görev kesilmez, uyarı,
+      operasyon öncesi kayıt; `HazirlikTest` (DECISIONS #141)
+- [x] Ölçüm: bölüm başına serbest gün, havuzun tükendiği gün, salt savaş payı (`tools/qa/akis/serbest.py`, STORY_FLOW)
+- [x] Antrenman / zaman atlama (`world/TimeSkip.kt`, `HubAction.Skip`, `events/96_zaman_atlama.yaml`, HubPanel
+      diyaloğu, simülatör, `ZamanAtlamaTest`; DECISIONS #142)
+- [ ] Hâlâ salt savaş payı %35'i aşan bölümler için yeni olaylar (yoldaş/NPC sahneleri, 3–4 düğümlük yan zincirler):
+      bölüm başına sayı kullanıcı onayını bekliyor
 
 ## Hikaye yapısı değişikliği — bölüm, üs ve görev  ✅ (2026-11-07)
 - [x] Adım 1: olay sırası kaydı (`:tools:simulator:akis`), teşhis `docs/STORY_FLOW.md`, sınıflandırma, plan `docs/CHAPTERS.md`

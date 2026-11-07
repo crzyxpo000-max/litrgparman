@@ -31,8 +31,28 @@ fun main(args: Array<String>) {
         var combatSinceEvent = false
         fun q(v: String?) = if (v == null) "null" else "\"" + v.replace("\\", "\\\\").replace("\"", "\\\"") + "\""
         fun arr(l: Collection<String>) = l.joinToString(",", "[", "]") { q(it) }
+        // Gün özeti (serbest gün ölçümü): o gün başlayan olay (varış ve bölüm sahneleri hariç), biten savaş, üste görülen
+        // en büyük fırsat eli, görevde geçip geçmediği.
+        var dEvents = 0; var dFights = 0; var dHand = 0; var dMission = false; var dPhase = ""; var dChapter = 0
+        fun flushDay(day: Int, skipped: Boolean = false) {
+            lines += """{"t":"gunozet","gun":$day,"bolum":$dChapter,"evre":${q(dPhase)},"olay":$dEvents,"savas":$dFights,"el":$dHand,"gorevde":$dMission,"atla":$skipped}"""
+            dEvents = 0; dFights = 0; dHand = 0; dMission = false
+        }
         val r = sim.play(seed = 10_000L + i, profile = profile, onStep = { before, after, action ->
-            if (after.day != before.day) lines += """{"t":"gun","gun":${after.day},"perde":${after.act}}"""
+            if (after.sceneId == WorldState.HUB && after.mission == null) dHand = maxOf(dHand, after.dayState.hand.size)
+            if (after.mission != null) dMission = true
+            dPhase = before.chapterPhase.key; dChapter = before.chapter
+            if (before.combat != null && after.combat == null) dFights++
+            val ce = after.dayState.currentEvent
+            if (ce != null && ce != before.dayState.currentEvent && !ce.startsWith(com.yukselis.engine.world.ChapterTable.ARRIVAL_PREFIX) &&
+                ce !in content.chapters.managed && !ce.startsWith(com.yukselis.engine.world.TimeSkip.EVENT_PREFIX)) dEvents++
+            // Zaman atlama: atlamanın başladığı gün ve aradaki günler "atlanan" sayılır (olay/savaş yok).
+            val skip = action == "akis:Skip"
+            if (skip) {
+                for (d in before.day until after.day) { flushDay(d, skipped = true); dHand = 0 }
+                if (after.day != before.day) lines += """{"t":"gun","gun":${after.day},"perde":${after.act}}"""
+            }
+            if (after.day != before.day && !skip) { flushDay(before.day); lines += """{"t":"gun","gun":${after.day},"perde":${after.act}}""" }
             if (after.region != before.region) {
                 lines += """{"t":"bolge","gun":${after.day},"eski":${q(before.region)},"yeni":${q(after.region)},"eylem":${q(action)},"olay":${q(before.dayState.currentEvent)},"gorev_degisti":${before.mission != after.mission || before.chapter != after.chapter}}"""
             }

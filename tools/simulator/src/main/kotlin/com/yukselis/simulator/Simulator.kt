@@ -131,6 +131,10 @@ class Simulator(private val content: Content) {
 
         /** Üste her yuvada bir hazırlık yapma olasılığı (varsa). */
         const val PREP_WISH = 0.25
+
+        /** Üste fırsat eli boşken zaman atlamayı seçme olasılığı ve en çok atlanan gün (DECISIONS #142). */
+        const val SKIP_WISH = 0.1
+        const val SKIP_MAX_DAYS = 3
         const val DEATH_LIMIT = 80
         val CHECKPOINTS = (1..12).map { it * 30 } + 365
         val ACT_ENDS = listOf(30, 180, 330, 365)
@@ -405,6 +409,11 @@ class Simulator(private val content: Content) {
             }
             if (hub.cards.isNotEmpty() && rng.nextDouble() < 0.6) {
                 return HubAction.Card(hub.cards.maxBy { cardScore(it.id, p) + rng.nextDouble() }.id)
+            }
+            // Boş el: gerçek oyuncu sıkılınca zaman atlar (odak ve gün rastgele).
+            hub.skip?.takeIf { hub.cards.isEmpty() && rng.nextDouble() < SKIP_WISH }?.let { sk ->
+                val f = sk.foci[rng.nextInt(sk.foci.size)].focus
+                return HubAction.Skip(f, 1 + rng.nextInt(minOf(sk.maxDays, SKIP_MAX_DAYS)))
             }
             if (cautious || hub.travel.isEmpty()) return HubAction.Train
             return if (rng.nextDouble() < 0.6) HubAction.Travel(hub.travel[rng.nextInt(hub.travel.size)].id) else HubAction.Train

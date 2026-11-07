@@ -67,7 +67,15 @@ data class HubView(
     val preparations: List<PreparationView> = emptyList(),
     /** Üsten ayrılmak operasyonu geciktirebilir: dile çözülmüş uyarı (yoksa null). */
     val deadlineWarning: String? = null,
+    /** Üste: zaman atlama (en çok gün 0 ise yok; DECISIONS #142). */
+    val skip: SkipView? = null,
 )
+
+/** Zaman atlama seçenekleri: en çok gün ve odaklar (dile çözülmüş adlarla). */
+data class SkipView(val maxDays: Int, val foci: List<SkipFocusView>)
+
+/** `group`: antrenman | kapi | meslek | yoldas (arayüz gruplar). */
+data class SkipFocusView(val focus: com.yukselis.engine.world.SkipFocus, val group: String, val name: String)
 
 data class PreparationView(val id: String, val name: String, val description: String, val cost: Int, val enabled: Boolean)
 

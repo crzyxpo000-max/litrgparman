@@ -280,6 +280,15 @@ The main story runs on a proven structure (details in `docs/CHAPTERS.md`, decisi
   arrives"). Free days go to **preparation** (scouting, fortifying, rallying allies): each leaves a flag and changes the
   operation (fewer losses, an extra option or a better start). A side mission is never cut off on operation day, and the
   game saves to a separate slot right before the operation.
+- **Training / skipping time:** quiet days at base can be spent on one focus: a stat, clearing Gates, your profession,
+  or time with a companion. During preparation you pick anywhere from 1 day up to 2 days before the operation; after it,
+  up to the bottleneck day, and once the chapter is done, up to the next chapter's opening. Days still pass one at a
+  time (NPCs, Gates, deadlines). Gains are below the Daily Quest and normal play: 1 stat point every 3 days (the Daily
+  Quest gives a free point every day) and 25% / 50% / 100% of a level's XP per day in Act 1 / 2 / 3–4 (normal play
+  levels faster in every act); Gates give danger −3 a day and 1 Essence Crystal every 3 days; profession gives 5 profession XP a day; a companion gives +1 trust a
+  day (max +6) and +1 bond every 2 days (max +2). Skipped days' Daily Quests carry no penalty (the streak neither grows
+  nor breaks). There's a 25% chance a pool event interrupts; a newly due seed or a ready main-arc node stops the skip.
+  An uninterrupted skip ends with a short summary scene for that focus.
 - The UI always shows a "Chapter N · Objective · Days left" line; every seeded event opens with a reminder line; a short
   recap appears when you come back after a long break.
 

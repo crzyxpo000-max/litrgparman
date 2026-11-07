@@ -137,3 +137,102 @@ Notlar:
 Her son ulaşılabilir, dağılım en çok 3,5 puan kaydı (Kod Kırıcı). Hakimiyet sınırın üstünde, ama payı daraldı. Nedeni, üste geçen
 günlerin savaşsız olması ve her görevin bir yolculuk yuvası harcaması. Hakimiyet %60'ın altına düşerse önce simülatörün
 görev süresine (`Simulator.MISSION_DAYS`) ve keşif savaş olasılığına bakılmalı.
+
+## Boş serbest günler
+
+Ölçüm: `./gradlew :tools:simulator:akis --args="20 tools/qa/akis/iz_sonra"` ve `python tools/qa/akis/serbest.py tools/qa/akis/iz_sonra --md`
+(20 oynanış; kayıttaki `gunozet` satırları).
+
+- **Serbest gün:** bölümün brifing, hazırlık ya da bitti evresinde geçen gün. Operasyon ve sonrası sayılmaz.
+- **Havuzun tükendiği gün:** bölümün açılışından sayılır. O günden bölüm sonuna kadar üste fırsat eli hep boştur.
+  Medyan, yalnız havuzu tükenen oynanışlardan alınır.
+- **Salt savaş günü:** en az bir savaş ve hiç olay yok.
+- **Ne olay ne savaş:** yalnız dinlenme, antrenman, yolculuk ya da kamp.
+
+### Öncesi (zaman atlama yokken)
+
+| Bölüm | Serbest gün (ort.) | Havuzun tükendiği gün (açılıştan, medyan) | Tükenen oynanış | Salt savaş günü | Ne olay ne savaş |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | 10.2 | 11 | 3/20 | %10 | %11 |
+| 2 | 10.6 | 8 | 15/20 | %27 | %10 |
+| 3 | 3.0 | 0 | 20/20 | %30 | %15 |
+| 4 | 9.8 | 9 | 3/20 | %22 | %10 |
+| 5 | 18.9 | 17 | 11/20 | %31 | %14 |
+| 6 | 13.4 | 12 | 16/20 | %39 | %29 |
+| 7 | 23.6 | 15 | 20/20 | %23 | %57 |
+| 8 | 26.1 | 0 | 20/20 | %31 | %56 |
+| 9 | 30.1 | 0 | 20/20 | %61 | %30 |
+| 10 | 22.4 | 24 | 4/20 | %33 | %14 |
+| 11 | 17.0 | 21 | 17/20 | %34 | %39 |
+| 12 | 29.9 | 20 | 18/20 | %47 | %34 |
+| 13 | 31.7 | 0 | 17/20 | %59 | %31 |
+| 14 | 12.7 | 10 | 19/20 | %41 | %46 |
+| 15 | 24.9 | 0 | 20/20 | %45 | %51 |
+| 16 | 11.8 | 9 | 3/20 | %23 | %13 |
+| 17 | 7.5 | 6 | 16/20 | %31 | %11 |
+| 18 | 4.9 | 0 | 18/20 | %32 | %38 |
+
+Salt savaş payı %35'i aşan bölümler: 6, 9, 12, 13, 14, 15. Havuz en erken Bölüm 3, 8, 9, 13, 15 ve 18'de tükeniyor
+(açılış günü). Bu bölümlerin olayları ya operasyona bağlı ya da önceki bölümde tükenmiş.
+
+### Sonrası (zaman atlama; DECISIONS #142)
+
+"Atlanan gün": atlamayla geçen ve içinde olay ya da savaş olmayan günler. Havuzun tükendiği gün hesaplanırken atlanan
+günler çıkarılır. Ölçüm iki simülatör davranışıyla yapıldı.
+
+**Gerçekçi kullanım (simülatörün kalıcı ayarı):** üste el boşken %10 olasılıkla 1–3 gün atlanır. Denge testi (hakimiyet
+%60+) bu ayarla geçiyor: 200 oynanışta atlamasız %62, bu ayarla %61.
+
+| Bölüm | Serbest gün (ort.) | Havuzun tükendiği gün (açılıştan, medyan) | Tükenen oynanış | Salt savaş günü | Ne olay ne savaş | Atlanan gün |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | 11.3 | 10 | 3/20 | %15 | %9 | %0 |
+| 2 | 11.2 | 9 | 14/20 | %28 | %10 | %2 |
+| 3 | 3.0 | 0 | 20/20 | %20 | %33 | %2 |
+| 4 | 9.7 | 12 | 4/20 | %15 | %8 | %0 |
+| 5 | 17.4 | 19 | 14/20 | %28 | %12 | %1 |
+| 6 | 13.7 | 12 | 12/20 | %39 | %26 | %2 |
+| 7 | 23.9 | 16 | 20/20 | %15 | %47 | %16 |
+| 8 | 25.9 | 16 | 20/20 | %27 | %42 | %18 |
+| 9 | 30.0 | 0 | 19/20 | %50 | %27 | %9 |
+| 10 | 23.1 | 24 | 6/20 | %27 | %18 | %0 |
+| 11 | 21.1 | 20 | 19/20 | %33 | %32 | %9 |
+| 12 | 30.0 | 14 | 20/20 | %42 | %32 | %6 |
+| 13 | 31.8 | 0 | 19/20 | %49 | %30 | %6 |
+| 14 | 12.7 | 10 | 16/20 | %38 | %36 | %11 |
+| 15 | 25.1 | 0 | 20/20 | %37 | %38 | %18 |
+| 16 | 11.8 | 10 | 4/20 | %19 | %14 | %0 |
+| 17 | 7.9 | 4 | 15/20 | %28 | %12 | %3 |
+| 18 | 4.7 | 0 | 18/20 | %34 | %34 | %4 |
+
+Salt savaş payı %35'i aşan bölümler: 6, 9, 12, 13, 14, 15. Bu öncesiyle aynı liste.
+
+**Yoğun kullanım (deneme):** el boşken %50 olasılıkla 1–5 gün atlanır. O zamanki kazanç sabit 20 XP/gündü.
+
+| Bölüm | Serbest gün (ort.) | Havuzun tükendiği gün (açılıştan, medyan) | Tükenen oynanış | Salt savaş günü | Ne olay ne savaş | Atlanan gün |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | 11.2 | 10 | 4/20 | %10 | %8 | %11 |
+| 2 | 11.2 | 9 | 6/20 | %25 | %5 | %11 |
+| 3 | 3.0 | 1 | 17/20 | %30 | %8 | %18 |
+| 4 | 9.8 | 15 | 1/20 | %18 | %7 | %2 |
+| 5 | 18.3 | 18 | 8/20 | %25 | %11 | %5 |
+| 6 | 13.6 | 11 | 12/20 | %31 | %22 | %12 |
+| 7 | 23.9 | 7 | 17/20 | %12 | %19 | %51 |
+| 8 | 26.2 | 15 | 18/20 | %18 | %15 | %54 |
+| 9 | 30.1 | 1 | 19/20 | %33 | %15 | %44 |
+| 10 | 22.8 | 24 | 2/20 | %35 | %11 | %2 |
+| 11 | 20.1 | 19 | 13/20 | %23 | %21 | %27 |
+| 12 | 30.0 | 18 | 19/20 | %39 | %14 | %28 |
+| 13 | 31.6 | 0 | 18/20 | %37 | %18 | %35 |
+| 14 | 12.4 | 10 | 7/20 | %23 | %21 | %40 |
+| 15 | 25.0 | 0 | 19/20 | %23 | %17 | %55 |
+| 16 | 12.1 | 10 | 4/20 | %24 | %11 | %4 |
+| 17 | 7.9 | 6 | 15/20 | %25 | %10 | %6 |
+| 18 | 4.5 | 2 | 19/20 | %36 | %12 | %14 |
+
+Bu ayarla %35'i aşanlar 10, 12, 13, 18'e iner. Ama hakimiyet %43'e düşer: atlanan gün normal bir günden az güç verir,
+oyuncu dünya seviyesinin gerisinde kalır. Kazanç yüzdeli XP'ye (Perde 1/2/3+: %25/%50/%100) çıkınca bile %20 atlamada
+%58 oldu.
+
+**Sonuç:** zaman atlama boş günü kısaltan bir kolaylık. Açığı kapatmaz; kapatırsa güç eğrisini bozar. Açık yeni olaylarla
+kapanmalı. Öncelik salt savaş payı %35'i aşan 6, 9, 12, 13, 14, 15. Ardından 7 ve 8 gelir: havuzları her oynanışta
+tükeniyor, "ne olay ne savaş" payları %40'ın üstünde.
