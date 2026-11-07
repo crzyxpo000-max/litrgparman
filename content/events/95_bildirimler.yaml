@@ -12,16 +12,16 @@ olaylar:
     sahneler:
       - id: "bldr_rakip_1"
         paragraflar:
-          - { tr: "Pencere hiçbir uyarı vermeden önüne düşüyor; sanki saatlerdir göstermek için bekliyormuş. Küresel Sıralama'da senin adının hemen üstünde bir ad duruyor ve dün orada değildi.", en: "The window drops in front of you without warning, like it's been waiting hours to show you this. On the Global Ranking there's a name sitting right above yours, and it wasn't there yesterday." }
-          - { tr: "{npc:aras_kurt|tam}. Seviyesinin yanında küçük, yeşil bir ok var. Sistem bunu sana özellikle göstermek istemiş gibi.", en: "{npc:aras_kurt|tam}. There's a small green arrow next to the level, like the System wanted to make extra sure you saw it." }
-          - metin: { tr: "Bir saat sonra telsizinde tek bir cümle cızırdıyor; ses tanıdık: \"Uyandın mı? Ben çoktan yoldayım.\"", en: "An hour later a single line crackles over your radio, in a voice you know: \"You up yet? I'm already on the road.\"" }
+          - { tr: "Pencere hiç haber vermeden önüne düşüyor, sanki saatlerdir bunu göstermek için bekliyormuş. Küresel Sıralama'da adının hemen üstünde, dün orada olmayan bir ad duruyor.", en: "The window drops in front of you without warning, like it's been waiting hours to show you this. On the Global Ranking there's a name sitting right above yours, and it wasn't there yesterday." }
+          - { tr: "{npc:aras_kurt|tam}. Seviyesinin yanında küçük yeşil bir ok var; Sistem sanki özellikle görmeni istemiş.", en: "{npc:aras_kurt|tam}. There's a small green arrow next to the level, like the System wanted to make extra sure you saw it." }
+          - metin: { tr: "Bir saat sonra telsizinde tanıdık bir sesle tek bir cümle cızırdıyor: \"Uyandın mı? Ben çoktan yola çıktım.\"", en: "An hour later a single line crackles over your radio, in a voice you know: \"You up yet? I'm already on the road.\"" }
             kosul: { iliski_min: { aras_kurt: { saygi: 20 } } }
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "listede senin görünen seviyen var. gerçeği değil. istersen bu sabah düzeltebiliriz. istersen de bırak, hafife alsınlar.", en: "the list shows your public level. not the real one. we could fix that this morning. or let them underestimate you." }
+            metin: { tr: "listede görünen seviyen yazıyor, gerçeği değil. istersen bu sabah düzeltiriz. istersen de bırak, hafife alsınlar.", en: "the list shows your public level. not the real one. we could fix that this morning. or let them underestimate you." }
         secenekler:
           - id: "gecis"
-            etiket: { tr: "Pencereyi kapat ve bugün onu geç", en: "Close the window and pass him today" }
+            etiket: { tr: "Pencereyi kapat, bugün onu geç", en: "Close the window and pass him today" }
             etkiler:
               - xp_seviye: 15
               - ahlak: { duzen: -1 }
@@ -35,7 +35,7 @@ olaylar:
               - iliski: { aras_kurt: { saygi: 6, korku: 3 } }
             sonraki: "bldr_rakip_aciga"
           - id: "telsiz"
-            etiket: { tr: "Telsizi aç: \"Keyfini çıkar. Uzun sürmez.\"", en: "Key the radio: \"Enjoy it. Won't last.\"" }
+            etiket: { tr: "Telsizi aç: \"Keyfini çıkar, uzun sürmez.\"", en: "Key the radio: \"Enjoy it. Won't last.\"" }
             goster: { npc_hayatta: "aras_kurt" }
             etkiler:
               - ahlak: { merhamet: 1 }
@@ -51,7 +51,7 @@ olaylar:
 
       - id: "bldr_rakip_gecis"
         paragraflar:
-          - { tr: "Gün boyunca her savaşta o oku düşünüyorsun. Akşama doğru pencere bir kez daha açılıyor: iki ad yer değiştirmiş.", en: "All day, every fight, you're thinking about that arrow. Toward evening the window pops up one more time. The two names have traded places." }
+          - { tr: "Gün boyu her savaşta aklın o okta. Akşama doğru pencere bir kez daha açılıyor: iki ad yer değiştirmiş.", en: "All day, every fight, you're thinking about that arrow. Toward evening the window pops up one more time. The two names have traded places." }
         secenekler:
           - id: "tamam"
             etiket: { tr: "Pencereyi kapat", en: "Close the window" }
@@ -59,7 +59,7 @@ olaylar:
 
       - id: "bldr_rakip_aciga"
         paragraflar:
-          - { tr: "Liste titriyor; adın yukarı kayıyor, kayıyor, sonra bir yerde duruyor. Şehrin dört bir yanında, aynı anda, birileri pencerelerine bakıp susuyor.", en: "The list flickers. Your name slides up, and up, and then stops somewhere. All over the city, at the same moment, people look at their windows and go quiet." }
+          - { tr: "Liste titreşiyor; adın yukarı kaydıkça kayıyor, sonunda bir yerde duruyor. Aynı anda şehrin dört bir yanında birileri pencerelerine bakıp susup kalıyor.", en: "The list flickers. Your name slides up, and up, and then stops somewhere. All over the city, at the same moment, people look at their windows and go quiet." }
         secenekler:
           - id: "tamam"
             etiket: { tr: "Bırak baksınlar", en: "Let them look" }
@@ -67,7 +67,7 @@ olaylar:
 
       - id: "bldr_rakip_telsiz"
         paragraflar:
-          - { tr: "Telsiz bir süre sessiz. Sonra kısa, gerçek bir gülüş: \"Göreceğiz.\" Bağlantı kesiliyor.", en: "The radio stays quiet for a while. Then a short laugh, a real one: \"We'll see.\" The line goes dead." }
+          - { tr: "Telsiz bir süre susuyor. Sonra kısa, içten bir gülüş geliyor: \"Göreceğiz.\" Ardından bağlantı kesiliyor.", en: "The radio stays quiet for a while. Then a short laugh, a real one: \"We'll see.\" The line goes dead." }
         secenekler:
           - id: "tamam"
             etiket: { tr: "Telsizi kemerine as", en: "Clip the radio back on your belt" }
@@ -83,13 +83,13 @@ olaylar:
     sahneler:
       - id: "bldr_goz_1"
         paragraflar:
-          - { tr: "Etrafındaki her şey bir anlığına fazla sessizleşiyor. Durum pencerenin kenarında, dışarıdan değil içeriden çizilmiş gibi ince bir satır beliriyor: senin adın, bir de yanında hiç görmediğin bir işaret.", en: "For a second, everything around you goes too quiet. A thin line shows up on the edge of your status window, like it was scratched from the inside, not the outside: your name, and next to it a symbol you've never seen." }
-          - { tr: "Sistem penceresi açılmıyor. Bu kez açılmasına gerek yok; birinin seni okuduğunu, bir kitabın sayfasını çevirir gibi okuduğunu biliyorsun.", en: "No System window opens. This time it doesn't have to. You know someone is reading you, the way you'd turn a page in a book." }
+          - { tr: "Bir anlığına çevrendeki her şey olması gerekenden fazla sessizleşiyor. Durum pencerenin kenarında, dışarıdan değil de içeriden kazınmış gibi ince bir satır beliriyor: adın ve yanında hiç görmediğin bir işaret.", en: "For a second, everything around you goes too quiet. A thin line shows up on the edge of your status window, like it was scratched from the inside, not the outside: your name, and next to it a symbol you've never seen." }
+          - { tr: "Sistem penceresi açılmıyor; bu kez açılmasına gerek de yok. Birinin seni okuduğunu, kitap sayfası çevirir gibi okuduğunu biliyorsun.", en: "No System window opens. This time it doesn't have to. You know someone is reading you, the way you'd turn a page in a book." }
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "biri sayfayı açtı. kapatamam. ama ne okuyacağını seçebiliriz.", en: "someone opened the page. i can't close it. but we can choose what they read." }
+            metin: { tr: "biri sayfayı açtı, kapatamam. ama ne okuyacağını biz seçebiliriz.", en: "someone opened the page. i can't close it. but we can choose what they read." }
           - kosul: { stat: { per: 60 } }
-            metin: { tr: "İşaretin çizgileri yedi köşeli; Kadimlerin pullarında gördüğün biçime benziyor ama daha eski.", en: "The symbol has seven points. It looks like the marks on the Ancients' scales, only older." }
+            metin: { tr: "İşaret yedi köşeli; Kadimlerin pullarında gördüğün biçimi andırıyor ama ondan daha eski.", en: "The symbol has seven points. It looks like the marks on the Ancients' scales, only older." }
         secenekler:
           - id: "sil"
             etiket: { tr: "Penceredeki satırı elinle sil", en: "Wipe the line off the window" }
@@ -98,7 +98,7 @@ olaylar:
               - ahlak: { insanlik: 2 }
             sonraki: "bldr_goz_sil"
           - id: "bak"
-            etiket: { tr: "İşarete uzun uzun bak; geri bakıldığını bilsin", en: "Stare at the symbol. Let it know you're looking back" }
+            etiket: { tr: "İşarete uzun uzun bak; senin de ona baktığını bilsin", en: "Stare at the symbol. Let it know you're looking back" }
             etkiler:
               - dikkat: 4
               - stat: { wil: 1 }
@@ -114,7 +114,7 @@ olaylar:
 
       - id: "bldr_goz_sil"
         paragraflar:
-          - { tr: "Satır parmaklarının altında soğuk bir is gibi dağılıyor. Gün boyunca sırtında bir ağırlık var; akşama doğru o da gidiyor. Şimdilik.", en: "The line comes apart under your fingers like cold soot. All day there's a weight between your shoulder blades. By evening that's gone too. For now." }
+          - { tr: "Satır parmaklarının altında soğuk is gibi dağılıyor. Gün boyu kürek kemiklerinin arasında bir ağırlık taşıyorsun; akşama doğru o da kalkıyor. Şimdilik.", en: "The line comes apart under your fingers like cold soot. All day there's a weight between your shoulder blades. By evening that's gone too. For now." }
         secenekler:
           - id: "tamam"
             etiket: { tr: "Güne başla", en: "Start the day" }
@@ -122,7 +122,7 @@ olaylar:
 
       - id: "bldr_goz_bak"
         paragraflar:
-          - { tr: "İşaret bir an parlıyor, sonra sönüyor; bir göz kırpması gibi. Ne düşündüğünü bilmiyorsun ama biliyorsun ki artık seni unutmayacak.", en: "The symbol flares for a second, then goes dark, like a blink. You don't know what it thinks of you. You do know it won't forget you now." }
+          - { tr: "İşaret bir an parlayıp sönüyor, göz kırpar gibi. Senin hakkında ne düşündüğünü bilmiyorsun; bildiğin tek şey, artık seni unutmayacağı.", en: "The symbol flares for a second, then goes dark, like a blink. You don't know what it thinks of you. You do know it won't forget you now." }
         secenekler:
           - id: "tamam"
             etiket: { tr: "Güne başla", en: "Start the day" }
@@ -130,10 +130,10 @@ olaylar:
 
       - id: "bldr_goz_yanki"
         paragraflar:
-          - { tr: "{npc:yanki} uzun süre susuyor. Sonra: adı yok. benim de yok. bir zamanlar ikimizin de vardı.", en: "{npc:yanki} is quiet for a long time. Then: it has no name. neither do i. once, we both did." }
+          - { tr: "{npc:yanki} uzun süre susuyor, sonra fısıldıyor: adı yok. benim de yok. bir zamanlar ikimizin de vardı.", en: "{npc:yanki} is quiet for a long time. Then: it has no name. neither do i. once, we both did." }
         secenekler:
           - id: "tamam"
-            etiket: { tr: "Bunu bir kenara yaz", en: "File that away" }
+            etiket: { tr: "Bunu aklının bir köşesine yaz", en: "File that away" }
             sonraki: "@akis"
 
   - id: "bildirim_kapi"
@@ -146,8 +146,8 @@ olaylar:
     sahneler:
       - id: "bldr_kapi_1"
         paragraflar:
-          - { tr: "Sokakta bir köpek uluyor, sonra bir tane daha. Kapının dikişleri saatlerdir geriliyor; kenarlarından mavi değil, kırmızı bir ışık sızıyor.", en: "A dog starts howling in the street, then another. The Gate's seams have been stretching for hours, and the light leaking out the edges isn't blue anymore. It's red." }
-          - { tr: "Sistem kısa ve kuru: yarın bu saatte kapı taşacak. Kapı hâlâ açık; bugün içeri girmek senin elinde.", en: "The System keeps it short and dry: by this time tomorrow, the Gate overflows. It's still open. Going in today is up to you." }
+          - { tr: "Sokakta bir köpek uluyor, ardından bir başkası. Kapının dikişleri saatlerdir gerilmekte; kenarlarından artık mavi değil, kırmızı bir ışık sızıyor.", en: "A dog starts howling in the street, then another. The Gate's seams have been stretching for hours, and the light leaking out the edges isn't blue anymore. It's red." }
+          - { tr: "Sistem kısa ve kuru konuşuyor: yarın bu saatte kapı taşacak. Kapı henüz açık; bugün içeri girip girmemek senin elinde.", en: "The System keeps it short and dry: by this time tomorrow, the Gate overflows. It's still open. Going in today is up to you." }
         secenekler:
           - id: "uyar"
             etiket: { tr: "Önce mahalleyi uyar, sonra kapıya dön", en: "Warn the block first, then head back to the Gate" }
@@ -172,7 +172,7 @@ olaylar:
 
       - id: "bldr_kapi_uyar"
         paragraflar:
-          - { tr: "Kapı kapı dolaşıyorsun. Kimi bavulunu çoktan hazırlamış, kimi sana inanmıyor. Öğlene doğru sokak boşalıyor; geriye bir sen, bir de kırmızı ışık kalıyor.", en: "You go door to door. Some people already have a bag packed. Some don't believe you. By noon the street's empty, and it's just you and the red light." }
+          - { tr: "Kapı kapı dolaşıyorsun. Kimi bavulunu çoktan hazırlamış, kimi sana inanmıyor. Öğleye doğru sokak boşalıyor; geriye bir sen kalıyorsun, bir de kırmızı ışık.", en: "You go door to door. Some people already have a bag packed. Some don't believe you. By noon the street's empty, and it's just you and the red light." }
         secenekler:
           - id: "tamam"
             etiket: { tr: "Kapıya dön", en: "Head back to the Gate" }
@@ -180,7 +180,7 @@ olaylar:
 
       - id: "bldr_kapi_bekle"
         paragraflar:
-          - { tr: "Pencereni kapatıp bir çatıya çıkıyorsun. Taşma olduğunda sokakta çok şey olacak; bir kısmı satılabilir şeyler.", en: "You close the window and climb onto a roof. When it overflows there'll be a lot going on in that street, and some of it'll be worth money." }
+          - { tr: "Pencereni kapatıp bir çatıya tırmanıyorsun. Kapı taştığında sokak bir hayli hareketlenecek; ortaya dökülenlerin bir kısmı da para eder.", en: "You close the window and climb onto a roof. When it overflows there'll be a lot going on in that street, and some of it'll be worth money." }
         secenekler:
           - id: "tamam"
             etiket: { tr: "Beklemeye başla", en: "Settle in and wait" }
@@ -188,7 +188,7 @@ olaylar:
 
       - id: "bldr_kapi_dikis"
         paragraflar:
-          - { tr: "Dikişin en ince yeri kuzey kenarı; orası yırtılınca içeriden gelen ilk dalga ana caddeye akacak. Şimdi nerede durman gerektiğini biliyorsun.", en: "The thinnest part of the seam is the north edge. When that tears, the first wave out is going to pour straight onto the main drag. Now you know where to stand." }
+          - { tr: "Dikişin en ince yeri kuzey kenarı; orası yırtılınca içeriden taşan ilk dalga doğruca ana caddeye akacak. Artık nerede durman gerektiğini biliyorsun.", en: "The thinnest part of the seam is the north edge. When that tears, the first wave out is going to pour straight onto the main drag. Now you know where to stand." }
         secenekler:
           - id: "tamam"
             etiket: { tr: "Yerini al", en: "Take your spot" }

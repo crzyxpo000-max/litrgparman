@@ -17,17 +17,17 @@ olaylar:
     sahneler:
       - id: "esik_ihanet_1"
         paragraflar:
-          - { tr: "Akşam çökerken yolun kenarındaki gölge kımıldıyor. {npc:@} karanlıktan çıkıyor; yüzünde ne utanç var ne korku.", en: "As night falls, the shadow by the road moves. {npc:@} steps out of the dark. No shame on that face. No fear either." }
-          - { tr: "\"Hesap ortada,\" diyor {npc:@}. \"Sen yukarı tırmandıkça ben aşağıda kalıyorum. Artık değil.\"", en: "\"Do the math,\" {npc:@} says. \"Every rung you climb, I stay at the bottom. Not anymore.\"" }
-          - { tr: "Arkasındaki sis kıpırdıyor. Yalnız gelmemiş olabilir; ya da sen öyle sanmanı istiyor.", en: "The fog behind {zamir:@|onu} shifts. Maybe {zamir:@|o} didn't come alone. Or maybe that's what you're supposed to think." }
+          - { tr: "Akşam çökerken yol kenarındaki gölge kıpırdanıyor ve {npc:@} karanlıktan sıyrılıp çıkıyor. Yüzünde ne utanç var ne korku.", en: "As night falls, the shadow by the road moves. {npc:@} steps out of the dark. No shame on that face. No fear either." }
+          - { tr: "\"Hesap ortada,\" diyor {npc:@}. \"Sen yukarı tırmandıkça ben dipte kalıyorum. Artık kalmayacağım.\"", en: "\"Do the math,\" {npc:@} says. \"Every rung you climb, I stay at the bottom. Not anymore.\"" }
+          - { tr: "Arkasındaki sis dalgalanıyor. Yalnız gelmemiş olabilir; belki de senin öyle sanmanı istiyordur.", en: "The fog behind {zamir:@|onu} shifts. Maybe {zamir:@|o} didn't come alone. Or maybe that's what you're supposed to think." }
         sezgiler:
           - kosul: { stat: { per: 10 } }
-            metin: { tr: "Sisin içinde kimse yok. Ayak izleri tek kişilik.", en: "There's nobody in the fog. One set of footprints." }
+            metin: { tr: "Sisin içinde kimse yok; topraktaki ayak izleri tek kişiye ait.", en: "There's nobody in the fog. One set of footprints." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "B̷unu sen yaptın. Güveni sıfırın altına sen ittin. Şimdi ne olacak?", en: "Y̷ou did this. You pushed the trust below zero. So what now?" }
+            metin: { tr: "B̷unu sen yaptın, güveni sıfırın altına sen ittin. şimdi ne olacak?", en: "Y̷ou did this. You pushed the trust below zero. So what now?" }
         secenekler:
           - id: "savas"
-            etiket: { tr: "Silahını çek. Bunu burada bitir", en: "Draw. End this here" }
+            etiket: { tr: "Silahını çek, bu işi burada bitir", en: "Draw. End this here" }
             goster: { npc_savasabilir: "@" }
             etkiler:
               - ahlak: { duzen: 3, merhamet: -2 }
@@ -35,7 +35,7 @@ olaylar:
               - yoldas_ayril: "@"
               - savas: { dusmanlar: ["npc:@"], ortam: ["karanlik"], kazan: "esik_ihanet_zafer", kaybet: "esik_ihanet_yenilgi", kac: "esik_ihanet_kopus" }
           - id: "konus"
-            etiket: { tr: "Yaklaş. Onu konuşturmaya çalış", en: "Step closer. Keep the talk going" }
+            etiket: { tr: "Yaklaş, onu konuşturmaya çalış", en: "Step closer. Keep the talk going" }
             zar: { stat: "cha", zorluk: 14, tek: true, basarisiz: "esik_ihanet_kopus", basarisiz_etkiler: [{ npc_isaret: { "@": "hain" } }, { yoldas_ayril: "@" }, { iliski: { "@": { guven: -10 } } }] }
             etkiler:
               - ahlak: { merhamet: 5, insanlik: 3 }
@@ -43,7 +43,7 @@ olaylar:
               - hafiza: { npc: "@", id: "ihanetten_dondu", agirlik: 45 }
             sonraki: "esik_ihanet_barisma"
           - id: "birak"
-            etiket: { tr: "Kenara çekil. Gitmek istiyorsa gitsin", en: "Step aside. Whoever wants to leave can leave" }
+            etiket: { tr: "Kenara çekil; gidecekse gitsin", en: "Step aside. Whoever wants to leave can leave" }
             etkiler:
               - ahlak: { merhamet: 3, duzen: -2 }
               - npc_isaret: { "@": "hain" }
@@ -54,11 +54,11 @@ olaylar:
 
       - id: "esik_ihanet_zafer"
         paragraflar:
-          - metin: { tr: "Toz yatışıyor. Nefesin yerine geliyor; {npc:@} yerden kalkmaya çalışmıyor bile.", en: "The dust settles. Your breath comes back. {npc:@} doesn't even try to get up." }
+          - metin: { tr: "Toz yatışıp nefesin yerine gelirken {npc:@} yerden kalkmaya bile yeltenmiyor.", en: "The dust settles. Your breath comes back. {npc:@} doesn't even try to get up." }
             kosul: { npc_hayatta: "@" }
-          - metin: { tr: "Toz yatışıyor. {npc:@} artık hiçbir şey hesaplamayacak.", en: "The dust settles. {npc:@} won't be doing any more math." }
+          - metin: { tr: "Toz yatışıyor. {npc:@} bundan sonra hiçbir hesap yapmayacak.", en: "The dust settles. {npc:@} won't be doing any more math." }
             kosul: { npc_olu: "@" }
-          - { tr: "Bir zamanlar aynı yolu yürüyordunuz. Şimdi aranızdaki mesafe bir kılıç boyu ve bir ömür.", en: "Not long ago you walked the same road. Now the distance between you is one blade's length and a whole lifetime." }
+          - { tr: "Bir zamanlar aynı yolda yürüyordunuz. Şimdi aranızda bir kılıç boyu mesafe var, bir de koca bir ömür.", en: "Not long ago you walked the same road. Now the distance between you is one blade's length and a whole lifetime." }
         secenekler:
           - id: "yuru"
             etiket: { tr: "Arkana bakmadan yürü", en: "Walk away without looking back" }
@@ -67,7 +67,7 @@ olaylar:
               - npc_gitti: "@"
             sonraki: "@akis"
           - id: "son_soz"
-            etiket: { tr: "Son bir kez neden diye sor", en: "Ask one last time: why?" }
+            etiket: { tr: "Son bir kez nedenini sor", en: "Ask one last time: why?" }
             goster: { npc_hayatta: "@" }
             etkiler:
               - ahlak: { insanlik: 3 }
@@ -75,28 +75,28 @@ olaylar:
               - npc_gitti: "@"
             sonraki: "esik_ihanet_neden"
           - id: "gom"
-            etiket: { tr: "Onu toprağa ver. Bunu en azından hak ediyor", en: "Bury the body. That much is owed" }
+            etiket: { tr: "Onu toprağa ver; en azından bunu hak ediyor", en: "Bury the body. That much is owed" }
             goster: { npc_olu: "@" }
             etkiler:
               - ahlak: { insanlik: 3, merhamet: 1 }
             sonraki: "@akis"
       - id: "esik_ihanet_neden"
         paragraflar:
-          - { tr: "\"Çünkü sen hep bir adım öndeydin,\" diyor {npc:@}. \"Ve bir gün dönüp bakmayı bıraktın.\"", en: "\"Because you were always one step ahead,\" {npc:@} says. \"And one day you stopped looking back.\"" }
-          - { tr: "Cevap seni rahatlatmıyor. Belki de rahatlatması gerekmiyordu.", en: "The answer doesn't make you feel better. Maybe it was never supposed to." }
+          - { tr: "\"Çünkü hep bir adım öndeydin,\" diyor {npc:@}. \"Bir gün de dönüp arkana bakmaz oldun.\"", en: "\"Because you were always one step ahead,\" {npc:@} says. \"And one day you stopped looking back.\"" }
+          - { tr: "Aldığın cevap içini rahatlatmıyor. Belki de hiçbir zaman rahatlatmak için verilmemişti.", en: "The answer doesn't make you feel better. Maybe it was never supposed to." }
         secenekler:
           - id: "tamam"
-            etiket: { tr: "Bunu da taşı ve devam et", en: "Carry that too, and keep going" }
+            etiket: { tr: "Bunu da yüklen, yoluna devam et", en: "Carry that too, and keep going" }
             etkiler:
               - ahlak: { insanlik: 1 }
             sonraki: "@akis"
       - id: "esik_ihanet_yenilgi"
         paragraflar:
-          - { tr: "Yerdesin. {npc:@} üstünde duruyor; nefesi senin kadar hızlı.", en: "You're on the ground. {npc:@} stands over you, breathing as hard as you are." }
-          - { tr: "Son darbe gelmiyor. \"Bunu hatırla,\" diyor {npc:@} ve sisin içine kayboluyor.", en: "The last blow never comes. \"Remember this,\" {npc:@} says, and melts into the fog." }
+          - { tr: "Yere serilmişsin. Tepende dikilen {npc:@} de en az senin kadar soluk soluğa.", en: "You're on the ground. {npc:@} stands over you, breathing as hard as you are." }
+          - { tr: "Beklediğin son darbe inmiyor. \"Bunu unutma,\" diyor {npc:@} ve sisin içinde kayboluyor.", en: "The last blow never comes. \"Remember this,\" {npc:@} says, and melts into the fog." }
         secenekler:
           - id: "kalk"
-            etiket: { tr: "Kalk. Yarayı sar", en: "Get up. Bind the wound" }
+            etiket: { tr: "Kalk, yaranı sar", en: "Get up. Bind the wound" }
             etkiler:
               - ahlak: { duzen: -1 }
               - iliski: { "@": { saygi: -15 } }
@@ -111,7 +111,7 @@ olaylar:
             sonraki: "@akis"
       - id: "esik_ihanet_barisma"
         paragraflar:
-          - { tr: "Konuşuyorsunuz. Uzun uzun, dişlerinizi sıkarak. Sonunda {npc:@} silahını indiriyor.", en: "You talk. For a long time, through clenched teeth. Eventually {npc:@} lowers the weapon." }
+          - { tr: "Dişlerinizi sıkarak uzun uzun konuşuyorsunuz. Sonunda {npc:@} silahını indiriyor.", en: "You talk. For a long time, through clenched teeth. Eventually {npc:@} lowers the weapon." }
           - { tr: "\"Bunu bir daha yapma,\" diyor. Hanginize söylediği belli değil.", en: "\"Don't make me do this again,\" {zamir:@|o} say{zamir:@|s}. It's not clear which of you {zamir:@|o} mean{zamir:@|s}." }
         secenekler:
           - id: "el_uzat"
@@ -121,14 +121,14 @@ olaylar:
               - iliski: { "@": { baglilik: 10 } }
             sonraki: "@akis"
           - id: "mesafe"
-            etiket: { tr: "Mesafeni koru. Güven zamanla gelir", en: "Keep your distance. Trust takes time" }
+            etiket: { tr: "Mesafeni koru; güven zamanla gelir", en: "Keep your distance. Trust takes time" }
             etkiler:
               - ahlak: { duzen: 2 }
             sonraki: "@akis"
       - id: "esik_ihanet_kopus"
         paragraflar:
-          - { tr: "{npc:@} sana son bir kez bakıyor ve dönüp gidiyor. Ayak sesleri sisin içinde boğuluyor.", en: "{npc:@} gives you one last look, turns, and goes. The footsteps drown in the fog." }
-          - { tr: "Sistem bunu bir satırla geçiyor. Senin içinse bu gece uzun.", en: "The System logs it in a single line. For you, it's going to be a long night." }
+          - { tr: "{npc:@} sana son bir kez bakıp sırtını dönüyor. Ayak sesleri sisin içinde boğulup gidiyor.", en: "{npc:@} gives you one last look, turns, and goes. The footsteps drown in the fog." }
+          - { tr: "Sistem olanı tek satırla geçiştiriyor. Senin içinse uzun bir gece başlıyor.", en: "The System logs it in a single line. For you, it's going to be a long night." }
         secenekler:
           - id: "tamam"
             etiket: { tr: "Ateşi yeniden yak", en: "Get the fire going again" }
@@ -137,7 +137,7 @@ olaylar:
               - npc_gitti: "@"
             sonraki: "@akis"
           - id: "iz_sur"
-            etiket: { tr: "İzini aklına kazı. Bir gün lazım olacak", en: "Memorize the trail. You'll need it someday" }
+            etiket: { tr: "İzini aklına kazı; bir gün lazım olur", en: "Memorize the trail. You'll need it someday" }
             etkiler:
               - ahlak: { merhamet: -2 }
               - egilim: { gizlilik: 1 }
@@ -157,12 +157,12 @@ olaylar:
     sahneler:
       - id: "esik_kisisel_1"
         paragraflar:
-          - { tr: "{npc:@} bütün gün bir şey söyleyecekmiş gibi dolaştı. Akşam, ateşin karşısına oturuyor ve sonunda söylüyor.", en: "{npc:@} has been circling something all day. That night, across the fire, it finally comes out." }
-          - { tr: "Aslında biliyorsun; hep oradaydı, konuşmaların altında: {npc_hedef:@}. Şimdi ilk kez yüksek sesle söylüyor.", en: "You already knew, really. It was always there under every conversation: {npc_hedef:@}. Now {zamir:@|o} finally say{zamir:@|s} it out loud." }
-          - { tr: "\"Bunu yalnız yapamam,\" diyor. \"Yardım eder misin?\"", en: "\"I can't do this alone,\" {zamir:@|o} say{zamir:@|s}. \"Will you help?\"" }
+          - { tr: "{npc:@} bütün gün ağzında bir şey geveleyip durdu. Akşam ateşin karşısına oturunca sonunda içini döküyor.", en: "{npc:@} has been circling something all day. That night, across the fire, it finally comes out." }
+          - { tr: "Aslında biliyordun; bütün konuşmalarınızın altında hep o yatıyordu: {npc_hedef:@}. Şimdi ilk kez yüksek sesle söylüyor.", en: "You already knew, really. It was always there under every conversation: {npc_hedef:@}. Now {zamir:@|o} finally say{zamir:@|s} it out loud." }
+          - { tr: "\"Bunu tek başıma yapamam,\" diyor. \"Bana yardım eder misin?\"", en: "\"I can't do this alone,\" {zamir:@|o} say{zamir:@|s}. \"Will you help?\"" }
         secenekler:
           - id: "kabul"
-            etiket: { tr: "\"Ne gerekiyorsa. Birlikte.\"", en: "\"Whatever it takes. Together.\"" }
+            etiket: { tr: "\"Ne gerekiyorsa yaparız. Birlikte.\"", en: "\"Whatever it takes. Together.\"" }
             etkiler:
               - ahlak: { insanlik: 4, merhamet: 2 }
               - kisisel_gorev: { "@": "basla" }
@@ -178,7 +178,7 @@ olaylar:
               - tohum: { olay: "esik_kisisel_son", gecikme: { min: 9, max: 14 }, kosul: { yoldas: "@" }, npc: "@" }
             sonraki: "@akis"
           - id: "red"
-            etiket: { tr: "\"Kendi derdimiz yetiyor.\"", en: "\"We've got enough problems of our own.\"" }
+            etiket: { tr: "\"Kendi derdimiz bize yeter.\"", en: "\"We've got enough problems of our own.\"" }
             etkiler:
               - ahlak: { insanlik: -4, merhamet: -2 }
               - iliski: { "@": { baglilik: -20, guven: -5 } }
@@ -197,15 +197,15 @@ olaylar:
     sahneler:
       - id: "esik_kisisel_son_1"
         paragraflar:
-          - { tr: "Gün geldi. {npc:@} hazır; ellerinin titrediğini saklamaya çalışıyor ama beceremiyor.", en: "The day's here. {npc:@} is ready, trying to hide the shake in {zamir:@|onun} hands and not quite pulling it off." }
-          - { tr: "Bunca zamandır konuştuğunuz şey bu: {npc_hedef:@}. Aradaki son engel önünüzde duruyor ve kolay olmayacak.", en: "This is what all those talks were about: {npc_hedef:@}. The last thing in the way is right in front of you, and it won't be easy." }
+          - { tr: "Beklenen gün geldi. {npc:@} hazır; ellerinin titremesini saklamaya çalışsa da beceremiyor.", en: "The day's here. {npc:@} is ready, trying to hide the shake in {zamir:@|onun} hands and not quite pulling it off." }
+          - { tr: "Bunca zamandır konuştuğunuz şey işte bu: {npc_hedef:@}. Yoldaki son engel karşınızda duruyor ve aşması kolay olmayacak.", en: "This is what all those talks were about: {npc_hedef:@}. The last thing in the way is right in front of you, and it won't be easy." }
           - { tr: "\"Ben öne geçeyim,\" diyor {npc:@}. \"Bu benim işim.\"", en: "\"Let me go first,\" {npc:@} says. \"This one's mine.\"" }
         yoldas_tepkileri:
           - npc: "@"
             metin: { tr: "\"Yanımda olman yeter. Gerisini ben hallederim... galiba.\"", en: "\"Just be there. I'll handle the rest... I think.\"" }
         secenekler:
           - id: "one_gec"
-            etiket: { tr: "Öne sen geç; darbeyi sen al", en: "Take point yourself. Eat the hit" }
+            etiket: { tr: "Öne sen geç, darbeyi sen karşıla", en: "Take point yourself. Eat the hit" }
             etkiler:
               - ahlak: { merhamet: 4, insanlik: 2 }
               - can: -15
@@ -213,7 +213,7 @@ olaylar:
               - npc_odul: "@"
             sonraki: "esik_kisisel_son_tamam"
           - id: "guc"
-            etiket: { tr: "Gücünü saklama. Engeli ez geç", en: "Stop holding back. Flatten it" }
+            etiket: { tr: "Gücünü saklama, engeli ezip geç", en: "Stop holding back. Flatten it" }
             tur: "aciga_vur"
             etkiler:
               - ahlak: { duzen: 2 }
@@ -223,7 +223,7 @@ olaylar:
               - iliski: { "@": { korku: 5, saygi: 5 } }
             sonraki: "esik_kisisel_son_tamam"
           - id: "ona_birak"
-            etiket: { tr: "Ona bırak; arkasından yönlendir", en: "Let {zamir:@|onu} do it. Coach from behind" }
+            etiket: { tr: "İşi ona bırak, arkadan yol göster", en: "Let {zamir:@|onu} do it. Coach from behind" }
             zar: { stat: "cha", zorluk: 13, tek: true, basarisiz: "esik_kisisel_son_kayip", basarisiz_etkiler: [{ kisisel_gorev: { "@": "basarisiz" } }, { iliski: { "@": { baglilik: -10 } } }, { npc_iz: { "@": "yara_izi" } }] }
             etkiler:
               - ahlak: { insanlik: 5 }
@@ -233,18 +233,18 @@ olaylar:
             sonraki: "esik_kisisel_son_tamam"
       - id: "esik_kisisel_son_tamam"
         paragraflar:
-          - { tr: "Bitti. {npc:@} uzun süre hiçbir şey söylemiyor; sonra gülmeye başlıyor, gözleri ıslak.", en: "It's done. For a long time {npc:@} doesn't say a word. Then the laughter comes, eyes wet." }
-          - { tr: "\"Borçlandım,\" diyor. \"Ve bunu hiç ödeyemeyeceğim. Ödemek de istemiyorum.\"", en: "\"I owe you,\" {zamir:@|o} say{zamir:@|s}. \"And I'm never paying it back. Don't want to.\"" }
+          - { tr: "Bitti. {npc:@} uzun süre tek söz etmiyor; sonra gözleri dolu dolu gülmeye başlıyor.", en: "It's done. For a long time {npc:@} doesn't say a word. Then the laughter comes, eyes wet." }
+          - { tr: "\"Sana borçlandım,\" diyor. \"Bu borcu hiçbir zaman ödeyemeyeceğim. Ödemek de istemiyorum zaten.\"", en: "\"I owe you,\" {zamir:@|o} say{zamir:@|s}. \"And I'm never paying it back. Don't want to.\"" }
         secenekler:
           - id: "tamam"
-            etiket: { tr: "Omzuna hafifçe vur", en: "Clap a hand on that shoulder" }
+            etiket: { tr: "Omzuna dostça vur", en: "Clap a hand on that shoulder" }
             etkiler:
               - ahlak: { insanlik: 1 }
             sonraki: "@akis"
       - id: "esik_kisisel_son_kayip"
         paragraflar:
-          - { tr: "Olmadı. Engel {npc:@} için fazla geldi ve sen yeterince hızlı değildin.", en: "It didn't work. The obstacle was too much for {npc:@}, and you weren't fast enough." }
-          - { tr: "{npc:@} yarasını sarıyor ve sana bakmıyor. \"Benim hatam,\" diyor. İkiniz de bunun doğru olmadığını biliyorsunuz.", en: "{npc:@} binds the wound and won't meet your eyes. \"My fault.\" You both know that's not true." }
+          - { tr: "Olmadı. Engel {npc:@} için fazla ağır çıktı, sen de vaktinde yetişemedin.", en: "It didn't work. The obstacle was too much for {npc:@}, and you weren't fast enough." }
+          - { tr: "{npc:@} yarasını sararken gözünü senden kaçırıyor. \"Benim hatam,\" diyor ama ikiniz de bunun doğru olmadığının farkındasınız.", en: "{npc:@} binds the wound and won't meet your eyes. \"My fault.\" You both know that's not true." }
         secenekler:
           - id: "ozur"
             etiket: { tr: "Özür dile", en: "Apologize" }
@@ -271,11 +271,11 @@ olaylar:
     sahneler:
       - id: "esik_kacis_1"
         paragraflar:
-          - { tr: "Sabah {npc:@|in} yeri boş. Uyku tulumu katlanmış, ateşin yanına bir taşla tutturulmuş bir not bırakılmış.", en: "Come morning, {npc:@|pos} spot is empty. Bedroll folded. A note pinned under a rock by the fire." }
-          - { tr: "\"Senden korkuyorum. Bunu yüzüne söyleyemedim. Arama beni.\"", en: "\"I'm scared of you. I couldn't say it to your face. Don't come looking for me.\"" }
+          - { tr: "Sabah kalktığında {npc:@|in} yeri boş. Uyku tulumu katlanmış; ateşin yanında, bir taşın altına sıkıştırılmış bir not duruyor.", en: "Come morning, {npc:@|pos} spot is empty. Bedroll folded. A note pinned under a rock by the fire." }
+          - { tr: "\"Senden korkuyorum, bunu yüzüne söyleyemedim. Arama beni.\"", en: "\"I'm scared of you. I couldn't say it to your face. Don't come looking for me.\"" }
         secenekler:
           - id: "birak"
-            etiket: { tr: "Notu katla, cebine koy. Gitsin", en: "Fold the note, pocket it. Let it be" }
+            etiket: { tr: "Notu katlayıp cebine koy. Bırak gitsin", en: "Fold the note, pocket it. Let it be" }
             etkiler:
               - ahlak: { merhamet: 4, insanlik: 2 }
               - npc_isaret: { "@": "kacti" }
@@ -283,7 +283,7 @@ olaylar:
               - npc_gitti: "@"
             sonraki: "@akis"
           - id: "pesinden"
-            etiket: { tr: "İzleri takip et; konuşmanız lazım", en: "Follow the tracks. You two need to talk" }
+            etiket: { tr: "İzleri sür; konuşmanız gerek", en: "Follow the tracks. You two need to talk" }
             zar: { stat: "per", zorluk: 12, basarisiz: "@akis", basarisiz_etkiler: [{ npc_isaret: { "@": "kacti" } }, { npc_gitti: "@" }] }
             etkiler:
               - ahlak: { insanlik: 3 }
@@ -291,7 +291,7 @@ olaylar:
               - hafiza: { npc: "@", id: "kacinca_aradi", agirlik: 35 }
             sonraki: "esik_kacis_bulundu"
           - id: "tehdit"
-            etiket: { tr: "Bul ve geri getir. Kimse senden kaçmaz", en: "Hunt down and drag back. Nobody runs from you" }
+            etiket: { tr: "Bulup geri sürükle. Kimse senden kaçamaz", en: "Hunt down and drag back. Nobody runs from you" }
             etkiler:
               - ahlak: { merhamet: -6, duzen: 3 }
               - iliski: { "@": { korku: 15, guven: -20 } }
@@ -300,17 +300,17 @@ olaylar:
             sonraki: "@akis"
       - id: "esik_kacis_bulundu"
         paragraflar:
-          - { tr: "{npc:@} bir ağacın dibinde, dizlerini göğsüne çekmiş oturuyor. Seni görünce kaçmıyor; artık gücü kalmamış.", en: "{npc:@} is sitting at the base of a tree, knees pulled up tight. No running when you show up. Nothing left to run with." }
-          - { tr: "Silahını yere bırakıp yanına oturuyorsun. Bir süre ikiniz de konuşmuyorsunuz.", en: "You set your weapon down and sit close by. For a while neither of you says anything." }
+          - { tr: "{npc:@} bir ağacın dibine çökmüş, dizlerini göğsüne çekmiş. Seni görünce kaçmaya davranmıyor bile; kaçacak hâli kalmamış.", en: "{npc:@} is sitting at the base of a tree, knees pulled up tight. No running when you show up. Nothing left to run with." }
+          - { tr: "Silahını yere bırakıp yanına oturuyorsun. Bir süre ikinizin de ağzını bıçak açmıyor.", en: "You set your weapon down and sit close by. For a while neither of you says anything." }
         secenekler:
           - id: "geri_don"
-            etiket: { tr: "\"Benimle gel. Ama istersen.\"", en: "\"Come back with me. Only if you want to.\"" }
+            etiket: { tr: "\"Benimle dön. Ama yalnızca sen istersen.\"", en: "\"Come back with me. Only if you want to.\"" }
             etkiler:
               - ahlak: { merhamet: 3 }
               - iliski: { "@": { baglilik: 10 } }
             sonraki: "@akis"
           - id: "yollar"
-            etiket: { tr: "\"Burada ayrılalım. Kin yok.\"", en: "\"Let's split here. No hard feelings.\"" }
+            etiket: { tr: "\"Yollarımız burada ayrılsın. Kırgınlık yok.\"", en: "\"Let's split here. No hard feelings.\"" }
             etkiler:
               - ahlak: { insanlik: 2 }
               - iliski: { "@": { guven: 10 } }
@@ -330,28 +330,28 @@ olaylar:
     sahneler:
       - id: "esik_itaat_1"
         paragraflar:
-          - { tr: "{npc:@} önünde diz çöküyor. Bunu kimse istemedi; kendiliğinden yapıyor.", en: "{npc:@} kneels in front of you. Nobody asked for it." }
-          - { tr: "\"Ne istersen,\" diyor gözlerini yerden kaldırmadan. \"Ne dersen yaparım. Yeter ki bana döndüğün gün o şey olma.\"", en: "\"Whatever you want,\" {zamir:@|o} say{zamir:@|s}, eyes on the dirt. \"Anything you say. Just don't turn into that thing when you look at me.\"" }
+          - { tr: "{npc:@} önünde diz çöküyor. Kimse ondan bunu istemedi; kendi kendine yapıyor.", en: "{npc:@} kneels in front of you. Nobody asked for it." }
+          - { tr: "\"Ne istersen,\" diyor gözünü yerden ayırmadan. \"Ne dersen yaparım. Yeter ki bana bakarken o şeye dönüşme.\"", en: "\"Whatever you want,\" {zamir:@|o} say{zamir:@|s}, eyes on the dirt. \"Anything you say. Just don't turn into that thing when you look at me.\"" }
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "Korku sadakate benzer. Uzaktan.", en: "Fear looks a lot like loyalty. From a distance." }
+            metin: { tr: "korku uzaktan bakınca sadakate benzer.", en: "Fear looks a lot like loyalty. From a distance." }
         secenekler:
           - id: "kabul"
-            etiket: { tr: "\"İyi. O zaman dediğimi yap.\"", en: "\"Good. Then do as I say.\"" }
+            etiket: { tr: "\"Güzel. O zaman dediğimi yapacaksın.\"", en: "\"Good. Then do as I say.\"" }
             etkiler:
               - ahlak: { duzen: 5, insanlik: -5 }
               - npc_isaret: { "@": "itaatkar" }
               - iliski: { "@": { korku: 10, baglilik: 10 } }
             sonraki: "@akis"
           - id: "kaldir"
-            etiket: { tr: "Ayağa kaldır. \"Benden korkma.\"", en: "Pull {zamir:@|onu} up. \"Don't be afraid of me.\"" }
+            etiket: { tr: "Onu ayağa kaldır: \"Benden korkma.\"", en: "Pull {zamir:@|onu} up. \"Don't be afraid of me.\"" }
             etkiler:
               - ahlak: { merhamet: 5, insanlik: 4 }
               - iliski: { "@": { korku: -25, guven: 10 } }
               - hafiza: { npc: "@", id: "ayaga_kaldirdi", agirlik: 40 }
             sonraki: "@akis"
           - id: "kullan"
-            etiket: { tr: "Önden gönder; tehlikeli yolu o koklasın", en: "Send {zamir:@|onu} ahead to sniff out the danger" }
+            etiket: { tr: "Onu öne sür; tehlikeyi o koklasın", en: "Send {zamir:@|onu} ahead to sniff out the danger" }
             etkiler:
               - ahlak: { merhamet: -6, insanlik: -4 }
               - npc_isaret: { "@": "itaatkar" }
@@ -373,17 +373,17 @@ olaylar:
     sahneler:
       - id: "esik_rakip_1"
         paragraflar:
-          - { tr: "{npc:@} yolunu kesiyor; elinde silahı, yüzünde tuhaf bir saygı.", en: "{npc:@} blocks your path, weapon out, a strange kind of respect written all over that face." }
-          - { tr: "\"Herkes senden bahsediyor,\" diyor. \"Ben de görmek istiyorum. Sen ve ben. Şimdi.\"", en: "\"Everybody's talking about you,\" {zamir:@|o} say{zamir:@|s}. \"I want to see for myself. You and me. Right now.\"" }
+          - { tr: "{npc:@} elinde silahıyla yolunu kesiyor; yüzünde tuhaf bir saygı var.", en: "{npc:@} blocks your path, weapon out, a strange kind of respect written all over that face." }
+          - { tr: "\"Herkes senden bahsediyor,\" diyor. \"Ben de kendi gözümle görmek istiyorum. Sen ve ben, şimdi.\"", en: "\"Everybody's talking about you,\" {zamir:@|o} say{zamir:@|s}. \"I want to see for myself. You and me. Right now.\"" }
         secenekler:
           - id: "kabul"
-            etiket: { tr: "Kabul et. Kimin daha iyi olduğunu görelim", en: "Accept. Let's see who's better" }
+            etiket: { tr: "Kabul et; kim daha iyiymiş görelim", en: "Accept. Let's see who's better" }
             goster: { npc_savasabilir: "@" }
             etkiler:
               - ahlak: { duzen: 2 }
               - savas: { dusmanlar: ["npc:@"], ortam: [], kazan: "esik_rakip_zafer", kaybet: "esik_rakip_yenilgi", kac: "esik_rakip_kacis" }
           - id: "maske"
-            etiket: { tr: "Fısılda: \"Listedeki ben, gerçek ben değilim.\"", en: "Whisper: \"The me on the board isn't the real me.\"" }
+            etiket: { tr: "Fısılda: \"Listedeki ben gerçek ben değilim.\"", en: "Whisper: \"The me on the board isn't the real me.\"" }
             goster: { bilgi: "sirala_maske" }
             etkiler:
               - ahlak: { duzen: -2 }
@@ -392,13 +392,13 @@ olaylar:
               - hafiza: { npc: "@", id: "maskeyi_gordu", agirlik: 30 }
             sonraki: "esik_rakip_maske"
           - id: "reddet"
-            etiket: { tr: "\"Seninle dövüşmem için bir sebep yok.\"", en: "\"I've got no reason to fight you.\"" }
+            etiket: { tr: "\"Seninle dövüşmem için hiçbir sebep yok.\"", en: "\"I've got no reason to fight you.\"" }
             etkiler:
               - ahlak: { merhamet: 3 }
               - iliski: { "@": { saygi: -15, guven: 5 } }
             sonraki: "@akis"
           - id: "kucumse"
-            etiket: { tr: "Gül. \"Sen mi? Bana?\"", en: "Laugh. \"You? Against me?\"" }
+            etiket: { tr: "Gül: \"Sen mi? Bana karşı mı?\"", en: "Laugh. \"You? Against me?\"" }
             tur: "gosteris"
             etkiler:
               - ahlak: { insanlik: -3, merhamet: -2 }
@@ -407,8 +407,8 @@ olaylar:
             sonraki: "@akis"
       - id: "esik_rakip_maske"
         paragraflar:
-          - { tr: "{npc:@} bir an sana bakıyor; sonra yüzünden renk çekiliyor. Bir şey görmüş, ama ne gördüğünü kendine bile söyleyemiyor.", en: "{npc:@} stares at you for a beat. Then the color drains out. Something just got seen, and it can't even be put into words." }
-          - { tr: "\"Başka bir gün,\" diyor, silahını indirip geri çekilirken. \"Belki.\"", en: "\"Another day,\" {zamir:@|o} say{zamir:@|s}, lowering the weapon and backing off. \"Maybe.\"" }
+          - { tr: "{npc:@} bir an sana bakakalıyor, sonra yüzünün rengi çekiliyor. Bir şey görmüş ama ne gördüğünü kendine bile itiraf edemiyor.", en: "{npc:@} stares at you for a beat. Then the color drains out. Something just got seen, and it can't even be put into words." }
+          - { tr: "\"Başka bir gün,\" diyor silahını indirip geri çekilirken. \"Belki.\"", en: "\"Another day,\" {zamir:@|o} say{zamir:@|s}, lowering the weapon and backing off. \"Maybe.\"" }
         secenekler:
           - id: "tamam"
             etiket: { tr: "Gitmesine izin ver", en: "Let it go" }
@@ -417,17 +417,17 @@ olaylar:
             sonraki: "@akis"
       - id: "esik_rakip_zafer"
         paragraflar:
-          - metin: { tr: "{npc:@} yerde, nefes nefese. Sonra, inanılmaz biçimde, gülüyor.", en: "{npc:@} is down, gasping. And then, unbelievably, laughing." }
+          - metin: { tr: "{npc:@} yerde nefes nefese yatıyor. Derken akla hayale sığmayacak bir şey oluyor: gülmeye başlıyor.", en: "{npc:@} is down, gasping. And then, unbelievably, laughing." }
             kosul: { npc_hayatta: "@" }
-          - metin: { tr: "\"Tamam,\" diyor. \"Tamam. Şimdi anlıyorum.\"", en: "\"Okay,\" {zamir:@|o} say{zamir:@|s}. \"Okay. Now I get it.\"" }
+          - metin: { tr: "\"Tamam,\" diyor. \"Tamam, şimdi anladım.\"", en: "\"Okay,\" {zamir:@|o} say{zamir:@|s}. \"Okay. Now I get it.\"" }
             kosul: { npc_hayatta: "@" }
-          - metin: { tr: "Meydan okumayı {npc:@} istedi. Bedelini sen belirledin.", en: "{npc:@} asked for this fight. You set the price." }
+          - metin: { tr: "Meydan okuyan {npc:@} oldu; bedelini sen biçtin.", en: "{npc:@} asked for this fight. You set the price." }
             kosul: { npc_olu: "@" }
-          - metin: { tr: "Etraf sessiz. Seyredenler varsa, bundan sonra adını başka türlü anacaklar.", en: "Everything's quiet. If anyone was watching, they'll say your name differently from now on." }
+          - metin: { tr: "Ortalık sessiz. Seyreden biri varsa bundan sonra adını başka türlü anacak.", en: "Everything's quiet. If anyone was watching, they'll say your name differently from now on." }
             kosul: { npc_olu: "@" }
         secenekler:
           - id: "el"
-            etiket: { tr: "Elini uzat, kaldır", en: "Reach down and help {zamir:@|onu} up" }
+            etiket: { tr: "Elini uzatıp onu kaldır", en: "Reach down and help {zamir:@|onu} up" }
             goster: { npc_hayatta: "@" }
             etkiler:
               - ahlak: { insanlik: 3 }
@@ -440,11 +440,11 @@ olaylar:
             sonraki: "@akis"
       - id: "esik_rakip_yenilgi"
         paragraflar:
-          - { tr: "Toprağın tadını alıyorsun. {npc:@} yüzüne eğiliyor.", en: "You get a mouthful of dirt. {npc:@} leans down over you." }
-          - { tr: "\"Demek ki herkes abartıyormuş,\" diyor ve gidiyor. Ama gözlerinde bir hayal kırıklığı var; bunu bekleyen birinin değil.", en: "\"Guess everybody was exaggerating.\" Then {zamir:@|o} walk{zamir:@|s} away. But there's disappointment in those eyes. Not the look of someone who expected this." }
+          - { tr: "Ağzına toprak doluyor. {npc:@} yüzüne doğru eğiliyor.", en: "You get a mouthful of dirt. {npc:@} leans down over you." }
+          - { tr: "\"Demek herkes abartıyormuş,\" deyip uzaklaşıyor. Ama gözlerinde, bunu baştan beklemiş birinde görülmeyecek bir hayal kırıklığı var.", en: "\"Guess everybody was exaggerating.\" Then {zamir:@|o} walk{zamir:@|s} away. But there's disappointment in those eyes. Not the look of someone who expected this." }
         secenekler:
           - id: "kalk"
-            etiket: { tr: "Kalk. Daha çok çalış", en: "Get up. Train harder" }
+            etiket: { tr: "Kalk, daha sıkı çalış", en: "Get up. Train harder" }
             etkiler:
               - ahlak: { duzen: 2 }
               - iliski: { "@": { saygi: -20 } }
@@ -452,7 +452,7 @@ olaylar:
             sonraki: "@akis"
       - id: "esik_rakip_kacis"
         paragraflar:
-          - { tr: "Geri çekiliyorsun. {npc:@} peşinden gelmiyor; sadece seslenmekle yetiniyor.", en: "You back off. {npc:@} doesn't follow. Just yells after you." }
+          - { tr: "Geri çekiliyorsun. {npc:@} peşine düşmüyor, arkandan seslenmekle yetiniyor.", en: "You back off. {npc:@} doesn't follow. Just yells after you." }
           - { tr: "\"Kaçtığını herkese anlatacağım!\" Anlatacak da.", en: "\"I'm telling everybody you ran!\" And {zamir:@|o} will." }
         secenekler:
           - id: "tamam"
@@ -475,12 +475,12 @@ olaylar:
     sahneler:
       - id: "esik_ayrilik_1"
         paragraflar:
-          - { tr: "{npc:@} çantasını çoktan toplamış. Seni bekliyormuş.", en: "{npc:@} already has a pack ready. Was waiting for you." }
-          - { tr: "\"Yaptıklarını izledim,\" diyor. \"Bir kısmını anladım, bir kısmını asla anlamayacağım.\"", en: "\"I've been watching what you do,\" {zamir:@|o} say{zamir:@|s}. \"Some of it I get. Some of it I never will.\"" }
+          - { tr: "{npc:@} çantasını çoktan toplamış, seni bekliyormuş.", en: "{npc:@} already has a pack ready. Was waiting for you." }
+          - { tr: "\"Yaptıklarını izledim,\" diyor. \"Kimini anladım, kimini hiçbir zaman anlamayacağım.\"", en: "\"I've been watching what you do,\" {zamir:@|o} say{zamir:@|s}. \"Some of it I get. Some of it I never will.\"" }
           - { tr: "\"Bu yolda seninle yürüyemem.\"", en: "\"I can't walk this road with you.\"" }
         secenekler:
           - id: "ugurla"
-            etiket: { tr: "Uğurla. \"Kendine iyi bak.\"", en: "Say goodbye. \"Take care of yourself.\"" }
+            etiket: { tr: "Yolcu et: \"Kendine iyi bak.\"", en: "Say goodbye. \"Take care of yourself.\"" }
             etkiler:
               - ahlak: { insanlik: 3 }
               - iliski: { "@": { guven: 10 } }
@@ -517,11 +517,11 @@ olaylar:
     sahneler:
       - id: "esik_yalan_1"
         paragraflar:
-          - { tr: "{npc:@} karşına dikiliyor. Sesi sakin; sakin olmak için çok uğraşan birinin sakinliği.", en: "{npc:@} plants {zamir:@|kendi} in front of you. Voice calm. The kind of calm that takes real effort." }
-          - { tr: "\"Bana yalan söyledin. Biliyorum artık. Sadece neden diye soracağım ve bu sefer doğrusunu duymak istiyorum.\"", en: "\"You lied to me. I know now. I'm only going to ask why, and this time I want the truth.\"" }
+          - { tr: "{npc:@} karşına dikiliyor. Sesi sakin; ama sakin kalmak için dişini sıkan birinin sakinliği bu.", en: "{npc:@} plants {zamir:@|kendi} in front of you. Voice calm. The kind of calm that takes real effort." }
+          - { tr: "\"Bana yalan söyledin, artık biliyorum. Tek bir şey soracağım: neden? Bu sefer doğrusunu duymak istiyorum.\"", en: "\"You lied to me. I know now. I'm only going to ask why, and this time I want the truth.\"" }
         secenekler:
           - id: "itiraf"
-            etiket: { tr: "Her şeyi anlat. Bahane yok", en: "Tell the whole truth. No excuses" }
+            etiket: { tr: "Her şeyi anlat, bahane uydurma", en: "Tell the whole truth. No excuses" }
             etkiler:
               - ahlak: { insanlik: 5 }
               - iliski: { "@": { guven: 12, saygi: 5 } }
@@ -535,7 +535,7 @@ olaylar:
               - iliski: { "@": { guven: 5 } }
             sonraki: "@akis"
           - id: "omuz"
-            etiket: { tr: "\"Yaptım. Ne olmuş?\"", en: "\"Yeah, I did. So what?\"" }
+            etiket: { tr: "\"Evet, yaptım. Ne olmuş?\"", en: "\"Yeah, I did. So what?\"" }
             etkiler:
               - ahlak: { insanlik: -4, merhamet: -2 }
               - iliski: { "@": { guven: -10, korku: 5, saygi: -5 } }
