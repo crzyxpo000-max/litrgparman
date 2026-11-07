@@ -16,7 +16,7 @@ tanımındadır (2026-11-07); özet:
 | --- | --- |
 | 1 Otomatik ölçüm | **bitti** (2026-11-07) |
 | 2 Kod ve motor incelemesi | **bitti** (2026-11-07) |
-| 3 Hikaye ve oynanış örneklemesi | bekliyor |
+| 3 Hikaye ve oynanış örneklemesi | **bitti** (2026-11-07) |
 | 4 Rapor | bekliyor |
 | 5 Düzeltme | onay bekleyecek |
 
@@ -174,3 +174,24 @@ olasılık). Simülatörün `-Xss4m` ayarı gereksiz görünüyor (testler varsa
   ortalanmalı; büyük ekranda alt çubuk yerine `NavigationRail` düşünülebilir.
 - Ekran yönü değişince (tablet testinde yapılandırma değişti) daktilo efekti baştan başlıyor; metin zaten okunmuşsa
   rahatsız edici (küçük).
+
+## Adım 3 — Hikaye ve oynanış örneklemesi
+
+İki alt ajan (kullanıcı hızlandırmayı onayladı): A açılış dizisi, perde ana düğümleri, simülatörün en nadir/en sık
+olayları ve tarama işaretlerini; B sonları, epilog kartlarını ve 8 NPC'den birer yay düğümünü TR+EN okudu
+(`tools/qa/olay.py`). Ham raporlar: **docs/qa/hikaye_a.md** (P0 0 · P1 13 · P2 22) ve **docs/qa/hikaye_b.md**
+(P0 0 · P1 6). Örtüşenler Adım 4'te birleştirildi. Ana bulgular ana koordinatörce doğrulandı: çift stat öneki (motor
+`insightPrefix` + 95 metin "[XXX]" ile başlıyor), Kademe Kırma `seviye_min: 14` (Gün 24; Gün 30 p90 = 9), Seviye 10
+sınıf teklifi GDD'de Perde 1'de ama Gün 30 p90 = 9, `bekci_deniz_hat` 3. paragraf koşulsuz.
+
+**Genel yargı:** İskelet, motifler ve sonlar güçlü; EN yerelleştirme çok iyi; NPC sesleri iki dilde tutarlı. Zayıf
+yanlar: Perde 2–4 Türkçesi kılavuzdan geçmemiş, mekanik/metin uyuşmazlıkları (önek, erişilemeyen seçenek/eşik,
+önceden ilan edilen ölüm, karşılıksız kronik vaatleri), hissedilen hakimiyet sayılardaki hakimiyetin gerisinde,
+Perde 4 kendini tekrarlıyor.
+
+**Savaş ve ilerleme (simülatörle):** Oynanış başına ortalama **519 savaş**; yalnız %10,7'si Ezme, %6,4'ünde oyuncu
+yere düşüyor (yazılmış yenilgi/bayılma), İkinci Şans hiç kullanılmıyor, ölüm sıfır. Yani savaşlar ne tehlikeli ne de
+ezici: uzun bir orta yol — grind riski. Mücadele evresi Gün ~1–60 (Gün 30'da oyuncu dünyanın 0,4 katı), Gün 90'dan
+sonra p50 hep önde; Perde 2+ düşmanları dünya seviyesine ölçeklendiğinden oyuncu dünyanın ancak 1,1–1,5 katında
+kalıyor, ezme hissi gelmiyor. İmkânsız bölüm yok (çıkmaz 0, tüm sonlar erişilebilir); sıkıcı bölüm riski Perde 3
+(Dikkat tavanda, Yönetmen gerilimi 4'e kilitli) ve Perde 4 (11 zorunlu düğüm).
