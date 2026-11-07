@@ -1,4 +1,95 @@
-# Kalite Kontrol (QA) — çalışma defteri
+# Kalite Kontrol (QA) — rapor ve çalışma defteri
+
+## Özet
+
+1. Oyun **sağlam ve bitirilebilir**: 1000 simülasyonda çöken ya da takılan oynanış yok, 9 sonun hepsi %5–%22 bandında, kayıtlar savaş ortasında bile kayıpsız ve belirlenimci, eski sürüm kayıtlar açılıyor; check.sh ve lint (0 hata) temiz.
+2. Hikaye iskeleti, sonlar ve İngilizce yerelleştirme güçlü; NPC sesleri iki dilde tutarlı. Türkçede Perde 1 yeniden yazıldı, **Perde 2–4 hâlâ çeviri kokuyor**.
+3. **En kritik 1 — İlk "Devam et"/"Yeni oyun" dokunuşunda ana iş parçacığı 3,9 sn donuyor** (içerik ana iş parçacığında yükleniyor): düşük cihazda ANR ("uygulama yanıt vermiyor") riski.
+4. **En kritik 2 — OP MC hissi sayılarda var, oyunda zayıf:** oynanış başına 519 savaş, yalnız %10,7'si Ezme, ölüm riski sıfır; Perde 1'de oyuncuların %90'ı sınıf teklifini (Sv 10) ve Kademe Kırma'yı (Sv 14) hiç görmüyor; Dikkat Perde 3'te üç ay tavanda.
+5. **En kritik 3 — Görünür metin/mekanik hataları:** 95 sezgide çift önek ("[ALG] [ALG] …"), erişilemeyen `esik_itaat`, seçimden önce ilan edilen Deniz ölümü, gerçekleşmeyen sonuçları anlatan kronik satırları (352 bayrak hiç okunmuyor).
+
+Biçim: **[kimlik] açıklama** — *nerede* — öneri — büyüklük (küçük / orta / büyük). Kaynaklar: Adım 1–3 notları
+(aşağıda), docs/TARAMA.md, docs/BALANCE.md, docs/qa/hikaye_a.md, docs/qa/hikaye_b.md.
+
+## P0 — çökme, kayıt kaybı, ilerlemeyi engelleyen hata, ulaşılamayan son
+
+- [ ] **P0-1 İlk motor erişiminde 3,9 sn ana iş parçacığı donması (ANR riski).** — *app `YukselisApplication.engine` (`by lazy`), ilk `newGame`/`continueGame`* — Uygulama açılır açılmaz içeriği `Dispatchers.Default`'ta önceden yükle; yüklenene dek başlık düğmelerinde ilerleme göstergesi; motor çağrılarını ana iş parçacığından al. Ölç: Choreographer atlanan kare <10. — orta
+
+Başka P0 bulunmadı: ulaşılamayan son yok, çıkmaz yok, kayıt kaybı yalnız bozuk dosyada (P1-20).
+
+## P1 — denge, kırık dal, belirgin çeviri/yerelleştirme hatası, kötü arayüz deneyimi
+
+**Mekanik / metin uyuşmazlıkları**
+- [ ] **P1-1 Çift sezgi öneki: ~95 sezgi ekranda "[ALG] [ALG] …" (bir yerde "[BİL] [ALG]").** — *content/events 50_perde2_ana 25, 61_kiyikent_b 26, 71_perde3 22, 80_perde4 18, diğer 4; motor `StoryEngine.insightPrefix`* — Metin başındaki `[XXX] ` öneklerini (TR+EN) toplu sil; validator'a "stat koşullu sezgi `[` ile başlamaz" kuralı. — küçük
+- [ ] **P1-2 `esik_itaat` hiç tetiklenemez.** — *NpcEngine.thresholds: yoldaş + korku ≥60 + cesaret ≤3 + sadakat ≥6; tek aday Mert (cesaret 2, sadakat 5)* — Koşulu `sadakat ≥6 ya da bağlılık ≥40` yap veya Mert'e özel `esik_itaat_mert_kilic`; simülatörde görüldüğünü doğrula. — küçük
+- [ ] **P1-3 Kademe Kırma seçeneğine pratikte erişilemiyor.** — *40_ana_yay `yeni_tavan_1` `kir`: `seviye_min: 14`, Gün 24; Gün 30 p90 Sv 9* — Eşiği 7–8'e indir ya da stat/iz koşuluna çevir; simülatörde `yeni_tavan_kirma` oranını ölç (hedef %15–30). — küçük
+- [ ] **P1-4 Deniz'in ölümü seçimden önce ilan ediliyor.** — *40_ana_yay `bekci_deniz_hat` ¶3 "Yüzünü son görüşün bu oluyor"; `vazgec` Deniz'i yaşatıyor* — Cümleyi ölüm dalına (`bekci_cokus_deniz`) taşı ya da belirsizleştir. — küçük
+- [ ] **P1-5 Kronik satırları gerçekleşmeyen ya da henüz belli olmayan sonuçları anlatıyor; 352 bayrak hiç okunmuyor.** — *ör. `gemi_kule›ezberle`, `perde3_son_ordu›talim`, `ihanet_mert_konus›geri_cek`, `elif_konsey_oylamasi›zorlama`, `vmask_hakli›kir`, `akd_kopru›sebep`, `mkt_kacamak›tehdit`; liste docs/TARAMA.md* — Kronikleri yalnız kesinleşeni anlatacak biçimde yeniden yaz ya da vaadi tutan bayrak + koşullu satır ekle; savaşa bağlı kroniği `kazan` sahnesine taşı; taramaya "kronik vaat ediyor ama bayrak yok" kuralı. — büyük
+- [ ] **P1-6 Vassal sonu Thessar düğümündeki seçimleri yansıtmıyor (B tavanı, Defter Bekçisi, "örnek" maddesi).** — *55_kadimler_thessar `thessar_vassal_teklifi_*` → 81_sonlar `son_vassal`* — Madde seçimine bayrak koy; sona koşullu paragraf ve unvan satırı. — orta
+- [ ] **P1-7 Döngü sonu New Game+ ile çelişiyor ("önceki altı döngünün altısı da hasatla kapandı").** — *`son_dongu`, `yanki_son_sir` (ysr_1 sezgisi, ysr_sir)* — `onceki_oyun ≥1` için ayrı paragraf: önceki döngü oyuncunun bitirdiği sonla anılsın. — küçük
+- [ ] **P1-8 `son_yukselis`'te çelişen iki Deniz paragrafı birlikte görünebilir (doğrulanmalı).** — *81_sonlar `son_yukselis`: `yoldas` ve `npc_fraksiyon: yukselenler` koşulları çakışıyor* — Koşulları dışlayıcı yap; bir test kaydıyla doğrula. — küçük
+
+**Denge ve oynanış**
+- [ ] **P1-9 Seviye 10 sınıf teklifi Perde 1'de oyuncuların %90+'ına gelmiyor (GDD Perde 1 düğümü).** — *BALANCE Gün 30 p50 8 / p90 9; Perde 1 XP* — Perde 1 XP'sini %20–30 artır ya da Perde 1 düğüm listesini güncelle; simülatöre "ilk sınıf günü" ölçüsü. — orta
+- [ ] **P1-10 Hissedilen hakimiyet zayıf: Ezme %10,7; oyuncu dünya seviyesinin ancak 1,1–1,5 katı.** — *Perde 2+ akış düşmanları `@dunya`; Ezme eşiği `CombatMath.isCrush`* — Akış (fırsat eli/keşif) düşmanlarını `@dunya-20…-40`'a çek ya da Ezme eşiğini gevşet; hedef Ezme Perde 2 ~%30, Perde 3–4 ~%50; boss ve hikaye savaşları zor kalsın. — orta
+- [ ] **P1-11 Savaş sayısı yüksek, risk yok: oynanış başına 519 savaş, ölüm 0, İkinci Şans 0, yere düşme %6,4.** — *simülatör; gün akışı keşif savaşları* — Keşif savaşı sıklığını düşür (ya da savaşsız keşif sonuçlarını artır) ve hikaye/boss savaşlarını sertleştir; hedef: oynanış başına ~250 savaş, hikaye savaşlarında yere düşme %15–25. P1-10 ile birlikte ayarlanmalı. — orta
+- [ ] **P1-12 Dikkat Perde 3–4'te tavanda (Gün 210–300 p50 91–97) ve Yönetmen'in hedef gerilimi hep 4.** — *Dikkat dinamiği (`dikkat`, günlük sönüm), `Director.desiredTension` (+Dikkat/40)* — Perde 3'te doğal sönümü artır / eşik olayı sonrası boşaltma; `desiredTension`'da Dikkat katkısını sınırla; GDD'deki "üç ağır olaydan sonra kamp ateşi"ni uygula (kod iki diyor). Hedef p50 60–85 dalgalanma. — orta
+- [ ] **P1-13 Yalnız Avcı en sık son (%22; rastgele oyuncuda %38); Koruyucu tarzı hedefe %49, Yükseliş %56.** — *endings.yaml koşulları, yoldaş ayrılık eşiği `DEPARTURE_DISTANCE`* — Yalnız Avcı'ya "bilinçli yalnızlık" koşulu ekle (ayrılık eşiği yaşandı / yoldaş bırakıldı), Koruyucu'nun hangi koşulda düştüğünü simülatörde ayrıştır. — orta
+- [ ] **P1-14 Perde 4 temposu: 27 günde 11 zorunlu düğüm, art arda 4 "veda turu" aynı iskelette.** — *80_perde4, 81_sonlar: `perde3_son_gece`, `p4_son_gece_ates`, `son_karar_veda`, `son_karar_2`* — `p4_son_gece_ates` ile `son_karar_veda`'yı birleştir ya da birini koşullu yap; `p4_yikik_kiyikent` ve `p4_siralama_zirvesi`'ni fırsat eli kartına çevir; yoldaş satır sırası ilişkiye göre. — orta
+
+**Türkçe ve İngilizce metin**
+- [ ] **P1-15 Perde 2–4 Türkçesi USLUP'tan geçmedi (kılavuzun "kaçın" örnekleri birebir duruyor).** — *docs/USLUP.md Parti 2–10* — Üslup partilerini sürdür; sıra önerisi: 50_perde2_ana → 81_sonlar → 80_perde4 → 71_perde3 → kalanlar. — büyük
+- [ ] **P1-16 Türkçe dil hataları.** — *`bekci_cokus_deniz›yanki` "{npc:yanki} tek söz etmeden sustur onu"; `yanki_meydan` "bir sürü balık gibi"; `gecit_korundu` "kimse ona zorlamıyor"; "Hasatın" (5 yer); `fraksiyon_son_pozisyon` "steteskobu"* — Tek tek düzelt (Parti 2 beklemeden). — küçük
+- [ ] **P1-17 Bir yıldan kısa süren dünyada "yıllardır".** — *53_yukselenler_vahit 2188/2481/2542 (`vmask_1`, `vmask_oda›bak_sahte`), 52_lonca_kaya 2247; TR/EN farklı ("for months")* — "aylardır / Entegrasyon'dan beri". — küçük
+- [ ] **P1-18 EN bozuk cümle.** — *`deniz_son_secim_kalir_yarali` ("wider than it is."; "the fire" düşmüş)* — Cümleyi onar. — küçük
+
+**Arayüz ve kayıt**
+- [ ] **P1-19 360dp + yazı ×1,3: seçenek paneli ekranın yarısından fazlası, hikayeye ~4 satır kalıyor.** — *app `ActionDock` (StoryScreen)* — Dock'a en yüksek yükseklik (~%45) + kendi kaydırması; uzun etiketlerde yazı ölçeğini koru. — küçük
+- [ ] **P1-20 Bozuk otomatik kayıt sessizce kayboluyor; Demir Mod'da tek kayıt olduğundan oyun gider.** — *engine `SaveManager.load` null; app `FileSaveStorage.write` yedeksiz* — Yazmadan önce önceki kaydı `auto.prev.json`'a döndür; okuma başarısızsa yedekten aç ve kullanıcıya bildir. — küçük
+
+## P2 — cilalama
+
+**Arayüz / erişilebilirlik / performans**
+- [ ] P2-1 Tablette metin tam genişlik (~95 karakter/satır). — *App/StoryScreen* — İçeriği ~640dp ile sınırla ve ortala; geniş ekranda `NavigationRail`. — küçük
+- [ ] P2-2 Başlık ekranında ×1,3 yazıda "Yükseliş / Protokolü" satırları üst üste biniyor. — *başlık tipografisi lineHeight* — Satır yüksekliğini artır. — küçük
+- [ ] P2-3 Tıklanabilir kartlarda TalkBack eylem etiketi yok. — *ui/system/Overlays.kt:128, 158* — `onClickLabel` + `Role.Button`. — küçük
+- [ ] P2-4 Yapılandırma değişince (döndürme/yeniden boyut) daktilo efekti baştan başlıyor. — *StoryScreen `finished` durumu* — `rememberSaveable`. — küçük
+- [ ] P2-5 Her eylemde 12 görünüm modeli ana iş parçacığında kuruluyor (çoğu görünmüyor). — *GameViewModel.render* — Görünür sekmeninkini hemen, kalanları tembel/arka planda kur. — orta
+- [ ] P2-6 Lint uyarıları: `help_free` EN'de kaçışsız `40%`, 11 kullanılmayan kaynak, `ModifierParameter` (StoryScreen.kt:92), 6 PluralsCandidate. — küçük
+
+**Motor / kod**
+- [ ] P2-7 `Director.arcPriority` ölü kod (ana yay olayları adaylardan zaten dışlı). — küçük
+- [ ] P2-8 Tohum koşulu her gün YAML'dan yeniden ayrıştırılıyor (`Director.seedConditionHolds`). — önbellek — küçük
+- [ ] P2-9 `sanitize` `dayState.currentEvent`'i denetlemiyor (içerikten silinen olayın ortasında kayıt). — küçük
+- [ ] P2-10 `render` içindeki görünüm üreticileri try/catch dışında (bir görünüm istisnası çökertir). — küçük
+- [ ] P2-11 Koşul DSL'inde VEYA yok; birebir kopya paragraflar (ör. `buyuk_ihanet_kule` ¶7=¶8) bakım riski. — `herhangi: [...]` koşulu — orta
+- [ ] P2-12 Belgeler: CLAUDE.md kayıtları `*.yaml` diyor (gerçekte `*.json`); simülatörün gereksiz `-Xss4m`'i. — küçük
+
+**İçerik ve üslup**
+- [ ] P2-13 Düz "Yankı/Echo" adı (35 yer; awakenings, enemies, knowledge, system) ve `son_nefes` Yankı satırı `yanki_bagi` koşulsuz. — belirteç + koşul — küçük
+- [ ] P2-14 EN metinlerde belirteç yerine düz yer adı ("The Esplanade", "The Ironworks", "{npc:yanki}'s"). — `{yer:…}`/`|pos`; validator'ı EN'e genişlet — küçük
+- [ ] P2-15 Terim tutarlılığı: "Grade" yazımı (Grade E / A-Grade / S grade), carrier/host, dünya sayısı (yüzlerce/bin/bin dört yüz), Yankı fısıltısında "Sistem/sistem". — küçük
+- [ ] P2-16 `son_hasat` her Demir Mod ölümüne "haddini aştın" diyor. — Dikkat koşullu iki sürüm — küçük
+- [ ] P2-17 Sonlarda küçük tutarsızlıklar: Koruyucu'da "başka hiçbir şey söylemeden" sonrası konuşma, Kod Kırıcı'da ölü paragraf, Demir Taht'ta Kadim dalı eksik, Yankı'nın son sözü üç sonda yok, arketip sırası sonla çelişebiliyor, `son_karar_1`/`son_koruyucu` aynı imge art arda. — küçük–orta
+- [ ] P2-18 Kronik açılış iskeleti tekrarı (%20 aynı ilk iki sözcük; EN "On the night of" ×39); Döngü epilog kartlarında kalıp. — üslup partilerinde + epilog seçicisine "aynı açılışı yan yana koyma" — orta
+- [ ] P2-19 Küçük süreklilik: `ilk_kan›pencereyi_oku_ilk` yabancıyı düşürüyor, `gemi_bakis` koşulsuz geri çağrı, Kaya darbe gecesi zaman çizelgesi, `ihanet_kaya_1` kroniği herkese akıl hocası Kaya, Thessar/Mert/Aras EN pürüzleri (docs/qa/hikaye_b.md 2.3). — küçük
+- [ ] P2-20 3 cümleyi aşan paragraf 1.777, 60 karakteri aşan etiket 5 (TARAMA). — üslup partilerinde — orta
+- [ ] P2-21 `tools/qa/olay.py` bildirim koşullarını göstermiyor; taramaya kronik-vaat ve OR-kopya kuralları. — küçük
+
+## Ek: Parti 1 (Türkçe üslup) önce → sonra örnekleri
+
+> Kımıldadığını görmüyor bile. Elma bir anda senin elinde; onun çakısı hâlâ havada, boşluğu soyuyor.
+> → Kıpırdadığını bile görmüyor. Elma göz açıp kapayıncaya kadar senin elinde; onun çakısıysa hâlâ havada, boşluğu soyup duruyor.
+
+> Kapılar kapanıyor ve vagon tek bir ses çıkarmadan tünele geri dönüyor. Peron duvarındaki çentikler, birinin bunu günlerdir saydığını söylüyor: kırk dakikada bir.
+> → Kapılar kapanınca vagon çıt çıkarmadan tünele geri dönüyor. Peron duvarına çentikler atılmış; biri günlerdir saymış: kırk dakikada bir.
+
+> Haklıydın. Bu, beklediğin kadar iyi hissettirmiyor.
+> → Haklı çıktın ama haklı çıkmak umduğun kadar iyi gelmiyor.
+
+---
+
+## Çalışma defteri
 
 Bu dosya QA görevinin hafızasıdır: oturum kapanırsa buradan devam edilir. Adımlar ve kurallar kullanıcının görev
 tanımındadır (2026-11-07); özet:
@@ -17,7 +108,7 @@ tanımındadır (2026-11-07); özet:
 | 1 Otomatik ölçüm | **bitti** (2026-11-07) |
 | 2 Kod ve motor incelemesi | **bitti** (2026-11-07) |
 | 3 Hikaye ve oynanış örneklemesi | **bitti** (2026-11-07) |
-| 4 Rapor | bekliyor |
+| 4 Rapor | **bitti** (2026-11-07) — onay bekleniyor |
 | 5 Düzeltme | onay bekleyecek |
 
 Not: QA başlarken Türkçe üslup işinin (docs/USLUP.md) Parti 0 ve 1'i bitti ve commit edildi (`798d990`); Parti 2–10
