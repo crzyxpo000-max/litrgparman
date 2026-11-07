@@ -143,7 +143,7 @@ bolumler:
     bitis: 205
     baslik: { tr: "Elli Katın Ardı", en: "Past the Fiftieth Floor" }
     hedef: { tr: "Elçi indi. Kule'nin ellinci katında bir geçit açılmak üzere; ilk geçen sen ol.", en: "The Envoy has landed. A passage is about to open on the Spire's fiftieth floor. Be the first one through." }
-    tehdit: { tr: "Thessar'ın teklifleri ve Kule'de açılan çok-evren geçidi.", en: "Thessar's offers, and a multiverse passage opening in the Spire." }
+    tehdit: { tr: "{npc:thessar|in} teklifleri ve Kule'de açılan çok-evren geçidi.", en: "{npc:thessar|pos} offers, and a multiverse passage opening in the Spire." }
     brifing: ["thessar_inis", "brifing_10"]
     operasyon: ["cok_evren_kapisi"]
     darbogaz: ["darbogaz_10"]
@@ -166,7 +166,7 @@ bolumler:
         bolge: "pirinc_kervan"
         olaylar: ["kervan_tarti_carsisi", "kervan_sayman", "kervan_ondalik", "kervan_bos_kefe"]
     darbogaz: ["deniz_canavar_mi_tanri_mi", "deniz_anma_ayna"]
-    tasma: { tr: "Geçidin ardındaki dünyalardan biri sustu. Kimse hangisi olduğunu bilmiyor; sen biliyorsun.", en: "One of the worlds past the passage went quiet. Nobody knows which one. You do." }
+    tasma: { tr: "Geçidin ardındaki dünyalardan biri sustu. Kimse hangisi olduğunu bilmiyor.", en: "One of the worlds past the passage went quiet. Nobody knows which one." }
 
   - no: 12
     perde: 3
@@ -205,7 +205,7 @@ bolumler:
     son_tarih: 300
     bitis: 305
     baslik: { tr: "Ortak Masa", en: "The Common Table" }
-    hedef: { tr: "Dört kamp ilk kez aynı masada oturacak. Masada biri seni satmaya hazırlanıyor.", en: "For the first time, all four camps are sitting at one table. Someone at it is getting ready to sell you out." }
+    hedef: { tr: "Dört kamp ilk kez aynı masada oturacak. Masada biri seni satmaya hazırlanıyor.", en: "For the first time, all four camps are sitting at one table. Someone at that table is getting ready to sell you out." }
     tehdit: { tr: "İçeriden gelen bir ihanet.", en: "A betrayal from the inside." }
     brifing: ["brifing_14"]
     operasyon: ["buyuk_ihanet"]
@@ -235,7 +235,7 @@ bolumler:
     bitis: 342
     baslik: { tr: "Hasat Başlıyor", en: "The Harvest Begins" }
     hedef: { tr: "Paneller sarardı ve gemiler iniyor. İstila geldiğinde şehrin yanında ol.", en: "The panels have gone yellow and the ships are coming down. Be at the city's side when the invasion hits." }
-    tehdit: { tr: "Kadim istilası.", en: "The Ancient invasion." }
+    tehdit: { tr: "Kadim istilası.", en: "The Ancients' invasion." }
     brifing: ["perde4_acilis", "brifing_16"]
     operasyon: ["kadim_istilasi"]
     darbogaz: ["darbogaz_16"]
@@ -248,7 +248,7 @@ bolumler:
     son_tarih: 350
     bitis: 352
     baslik: { tr: "Kule'nin Altında", en: "Under the Spire" }
-    hedef: { tr: "{yer:kule_dibi|de} aşağı inen bir merdiven açıldı. Sistem'in Çekirdeği'ne in.", en: "A staircase going down has opened in {yer:kule_dibi}. Go down to the System's Core." }
+    hedef: { tr: "{yer:kule_dibi|de} aşağı inen bir merdiven açıldı. {yer:sistem_cekirdegi|e} in.", en: "A staircase going down has opened in {yer:kule_dibi}. Go down to {yer:sistem_cekirdegi}." }
     tehdit: { tr: "Sistem Çekirdeği ve onu koruyan her şey.", en: "The System Core and everything guarding it." }
     brifing: ["brifing_17"]
     operasyon: ["cekirdege_yol"]
@@ -264,7 +264,7 @@ bolumler:
     son_tarih: 358
     bitis: 365
     baslik: { tr: "Son Karar", en: "The Final Decision" }
-    hedef: { tr: "Bir yılın sonu. Pencere yalnız sana açılacak.", en: "The end of the year. The window will open for you alone." }
+    hedef: { tr: "Yılın sonu. Pencere yalnız sana açılacak.", en: "The end of the year. The window will open for you alone." }
     tehdit: { tr: "Hasat vakti.", en: "Harvest time." }
     brifing: ["brifing_18"]
     operasyon: ["son_karar"]

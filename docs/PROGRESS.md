@@ -1,6 +1,6 @@
 # İlerleme
 
-Şu an: Tamam — tüm aşamalar bitti. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
+Şu an: Tamam — tüm aşamalar ve hikaye yapısı değişikliği bitti. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
 Son commit: 8472fd5 Aşama 6: Perde 1 dikey dilimi
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
@@ -10,6 +10,16 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - SDK: `local.properties` → `sdk.dir=C:/Users/alpar/AppData/Local/Android/Sdk` (git dışı).
 - Emülatör: `Medium_Phone_API_36.0` (`emulator -avd Medium_Phone_API_36.0`), adb ile kurulum.
 - OneDrive kilidi yüzünden lint ara sıra "dosya kullanılıyor" der: `./gradlew --stop` ve tekrar.
+
+## Hikaye yapısı değişikliği — bölüm, üs ve görev  ✅ (2026-11-07)
+- [x] Adım 1: olay sırası kaydı (`:tools:simulator:akis`), teşhis `docs/STORY_FLOW.md`, sınıflandırma, plan `docs/CHAPTERS.md`
+- [x] Motor: `chapters.yaml` (17 bölüm + final), üs/görev (operasyon, yan, keşif), konum kuralı, zorunlu olay kilidi,
+      son tarih ve taşma, tarihli operasyonlar, ana yay bölüme bağlı, tohum hatırlatması, dönüş özeti; kayıt v5 + v4 geçişi
+- [x] İçerik: 255 olaya `konum`; brifing (18), darboğaz (9 yeni), varış (13 bölge); 252 tohum hatırlatması; TR/EN inceleme
+- [x] Arayüz: bölüm satırı, operasyon / üsse dön düğmeleri, görev kartı bölgesi, Görevler'de bölüm hedefi, dönüş özeti
+- [x] QA P1-21 (Günlük Görev) bu işle kapandı
+- [x] Doğrulama: görev tabanlı a, b, c, d, e = 0 (öncesi 332 / 1.490 / 370 / 39 / 574); 1000 oynanış: her son
+      ulaşılabilir, hakimiyet %63,9; DECISIONS #130–#139
 
 ## Aşama 9 — Denge ve yayın hazırlığı  ✅ (2026-11-06)
 Plan:

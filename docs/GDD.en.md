@@ -262,6 +262,23 @@ Each event is a data file: preconditions, weight, tags, text, and options. Each 
 
 Big choices don't hit right away; they hit later. A choice drops a seed into the queue: "in 12–20 days, if this is still true, fire this event." Example: leave an injured stranger behind in the tutorial, and on Day 40 that person shows up as an Ascended commander who remembers exactly what you did.
 
+### Chapter structure: base and missions
+
+The main story runs on a proven structure (details in `docs/CHAPTERS.md`, decisions DECISIONS #130–#139):
+
+- **Spine (branch and merge):** 17 chapters plus a finale (3 in Act 1, 6 each in Acts 2 and 3, 2 in Act 4). Every chapter
+  ends in a **bottleneck** scene everyone plays, whose content changes with the world state.
+- **Calendar (Persona-style):** each chapter has a main operation and a deadline. The days before it are free; the player
+  picks when to go in (world events are dated: the ship lands, the invasion starts). Missing a deadline doesn't end the game;
+  an overflow hits (danger, survivor rate, a permanent flag) and the operation starts anyway.
+- **Loop (Mass Effect 2-style):** at **base** (the Tutorial camp in Act 1, then the Haven) come character scenes, seed
+  payoffs, NPC thresholds, Global Ranking announcements, companion reactions and the opportunity hand. A **mission** is a
+  closed run of scenes that opens with travel and an arrival scene; inside it only the mission's own events play. Every
+  event has a location and never fires anywhere else; an event set elsewhere shows up at base as a mission card.
+- **Chapter rhythm:** Briefing → Preparation → Main operation → Aftermath → Bottleneck.
+- The UI always shows a "Chapter N · Objective · Days left" line; every seeded event opens with a reminder line; a short
+  recap appears when you come back after a long break.
+
 ### Story Director
 
 At every step the Director filters the eligible events, then scores them:

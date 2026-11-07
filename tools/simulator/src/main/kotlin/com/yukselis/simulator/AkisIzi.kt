@@ -34,7 +34,7 @@ fun main(args: Array<String>) {
         val r = sim.play(seed = 10_000L + i, profile = profile, onStep = { before, after, action ->
             if (after.day != before.day) lines += """{"t":"gun","gun":${after.day},"perde":${after.act}}"""
             if (after.region != before.region) {
-                lines += """{"t":"bolge","gun":${after.day},"eski":${q(before.region)},"yeni":${q(after.region)},"eylem":${q(action)},"olay":${q(before.dayState.currentEvent)}}"""
+                lines += """{"t":"bolge","gun":${after.day},"eski":${q(before.region)},"yeni":${q(after.region)},"eylem":${q(action)},"olay":${q(before.dayState.currentEvent)},"gorev_degisti":${before.mission != after.mission || before.chapter != after.chapter}}"""
             }
             if (before.combat == null && after.combat != null) {
                 lines += """{"t":"savas_bas","gun":${after.day},"eylem":${q(action)},"olay":${q(before.dayState.currentEvent)},"sahne":${q(before.sceneId)}}"""

@@ -3208,7 +3208,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 3 }
               - itibar: { siginak: 4, lonca: 4 }
-              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 4, max: 10 }, hatirlatma: { tr: "İlk Ona Masası'nda üstlendiğin yük ağırlaşmak üzere.", en: "The load you took on at the Top Ten table is about to get heavier." } }
+              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 4, max: 10 }, hatirlatma: { tr: "Sıralamanın tepesindeki masada üstlendiğin yük ağırlaşmak üzere.", en: "The load you took on at the table at the top of the ranking is about to get heavier." } }
             sonraki: "@akis"
           - id: "aras_pesinden"
             etiket: { tr: "{npc:aras_kurt|in} arkasından seslen: \"Yakışıyor.\"", en: "Call after {npc:aras_kurt}: \"Looks great on you.\"" }
@@ -3228,7 +3228,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 3, duzen: 2 }
               - degisken: { hayatta_kalan: 1 }
-              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 4, max: 10 }, hatirlatma: { tr: "İlk Ona Masası'nda üstlendiğin yük ağırlaşmak üzere.", en: "The load you took on at the Top Ten table is about to get heavier." } }
+              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 4, max: 10 }, hatirlatma: { tr: "Sıralamanın tepesindeki masada üstlendiğin yük ağırlaşmak üzere.", en: "The load you took on at the table at the top of the ranking is about to get heavier." } }
             sonraki: "@akis"
           - id: "kendiniz"
             etiket: { tr: "\"Kendiniz tutun. Size öğretirim.\"", en: "\"Hold it yourselves. I'll teach you how.\"" }
@@ -3669,7 +3669,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 3, merhamet: 1 }
               - ordu: { lonca_avcisi: 1 }
-              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 3, max: 9 }, hatirlatma: { tr: "Ters dönmüş evin ailesi yükünü seninle paylaşmayı unutmadı.", en: "The family from the upside-down house hasn't forgotten offering to share the load with you." } }
+              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 3, max: 9 }, hatirlatma: { tr: "Ters dönmüş evin ailesi yükü paylaşma teklifini unutmadı.", en: "The family from the upside-down house hasn't forgotten you offered to share the load." } }
             sonraki: "@akis"
 
       - id: "p3_aile_korku"

@@ -203,7 +203,8 @@ class WorldEngine(
             }
             // Son tarih günü operasyon kendiliğinden başlar (taşma, son tarih geçince sabah işlenir).
             val overdue = s.day >= ch.deadline
-            if ((s.chapterPhase == ChapterPhase.PREP || s.chapterPhase == ChapterPhase.BRIEF) && (request > 0 || overdue)) {
+            // Oyuncu istediyse hemen; son tarih geldiyse oyuncu bir eylem yaptıktan sonra (olayın hemen ardına düşmesin).
+            if ((s.chapterPhase == ChapterPhase.PREP || s.chapterPhase == ChapterPhase.BRIEF) && (request > 0 || (overdue && !lock))) {
                 // Operasyon öncesi düğümler (ör. savaştan önceki gece) operasyondan önce gelir.
                 arcNodes.firstOrNull { (e, at) -> at.first == ch.no && at.second && director.eligibleQueued(s, e) }
                     ?.let { return startHere(s, it.first) }
@@ -245,6 +246,8 @@ class WorldEngine(
             val stuck = cur != null && s.day > cur.end + STUCK_DAYS
             if (s.day < next.open || (s.chapterPhase != ChapterPhase.DONE && !stuck && cur != null)) return s
             s = s.copy(chapter = next.no, chapterPhase = ChapterPhase.BRIEF, vars = s.vars - OP_REQUEST_VAR)
+            // Yeni perdenin üssü (Öğretici kampı → Sığınak): üsteyken oyuncu oraya geçer.
+            if (s.mission == null) base(s)?.let { s = s.copy(region = it) }
             notices += Notice(NoticeKind.QUEST, texts.formatL("bolum_basladi", "n" to LText("${next.no}", "${next.no}"), "title" to next.title), listOf(next.goal))
         }
     }

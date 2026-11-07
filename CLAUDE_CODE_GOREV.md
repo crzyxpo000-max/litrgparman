@@ -244,6 +244,20 @@ Oyun tamamen çevrimdışı çalışır; tüm metinler önceden yazılmış içe
   - [ ] Simülatör ayrıca raporlar: perde başına oyuncu/NPC güç farkı, oyun süresinin "hakimiyet" evresindeki payı (hedef %60+), zaman içindeki Dikkat düzeyi, son dağılımı.
   - [ ] **Bildirimler:** oturumlar arasında nadir, isteğe bağlı Android bildirimleri ("[Aras Kurt Küresel Sıralama'da seni geçti.]"); her biri küçük bir olay açar. Android 13+ bildirim izni usulüne uygun (açıklama + istek, reddedilince ısrar etmemek) istenir.
 
+### Hikaye yapısı değişikliği — bölüm, üs ve görev (Aşama 9'dan sonra)
+
+Mekanikler, bayraklar, seçim sonuçları, NPC hafızası, OP MC sistemleri ve son koşulları değişmez; yalnız olayların ne
+zaman ve nerede geldiği değişir. Tasarım: `docs/CHAPTERS.md`; teşhis ve ölçüm: `docs/STORY_FLOW.md`; kararlar DECISIONS #130–#139.
+
+Kabul kriterleri:
+- 17 bölüm + final `content/chapters.yaml`'da; her bölümde brifing, operasyon, darboğaz (yazılmamış olay = doğrulayıcı uyarısı).
+- Üs/görev döngüsü, konum kuralı (her olayın `konum`u), zorunlu olay kilidi, son tarih ve taşma, tarihli operasyonlar.
+- Arayüzde bölüm satırı, Görevler'de bölüm hedefi, görev kartı bölgesi, "Üsse dön", dönüş özeti.
+- Tohumdan doğan her olay hatırlatma cümlesiyle başlar.
+- Kayıt v5; v4 kaydı doğru bölümde ve evrede açılır (`BolumTest`).
+- 20 oynanışlık olay sırası kaydında görev tabanlı a, b, d = 0 (STORY_FLOW öncesi/sonrası tablosu).
+- 1000 oynanış: her son ulaşılabilir, dağılım ciddi kaymaz, hakimiyet ≥ %60. `scripts/check.sh` geçer.
+
 ## 8. Bitiş
 
 Tüm aşamalar bittiğinde (ya da bir durma noktasında beklerken) kullanıcıya kısa bir rapor ver:

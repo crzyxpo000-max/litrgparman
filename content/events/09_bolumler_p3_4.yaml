@@ -1,0 +1,605 @@
+# Bölüm yapısı · Perde 3–4 (docs/CHAPTERS.md, DECISIONS #130): brifingler (10–18), darboğazlar (10, 13, 16, 17) ve
+# çok-evren dünyaları ile Sistem Çekirdeği'ne varış sahneleri. Yapısal sahnelerdir: motor açar, mekanik etkileri yoktur.
+olaylar:
+  # ================================================================== Bölüm 10 · brifing (thessar_inis'ten sonra)
+  - id: "brifing_10"
+    konum: ["us"]
+    perde: [3]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["brifing"]
+    kart: { tr: "Ellinci katın nabzı", en: "The fiftieth floor's pulse" }
+    sahne: "brifing_10_1"
+    sahneler:
+      - id: "brifing_10_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - metin: { tr: "Elçi indi. Önünde eğildin; şehir bunu gördü.", en: "The envoy has landed. You bowed to {zamir:thessar|onu}, and the city saw you do it." }
+            kosul: { bayrak: "thessar_inis_egildi" }
+          - metin: { tr: "Elçi indi. Ona saldırdın; kimin kazandığını şehir hâlâ tartışıyor.", en: "The envoy has landed. You went at {zamir:thessar|onu}, and the city's still arguing about who won." }
+            kosul: { bayrak: "thessar_inis_saldiri" }
+          - metin: { tr: "Elçi indi. Seni okumasına izin vermedin.", en: "The envoy has landed. You didn't let {zamir:thessar|onu} read you." }
+            kosul: { bayrak: "thessar_okuma_reddi", bayrak_yok: ["thessar_inis_egildi", "thessar_inis_saldiri"] }
+          - metin: { tr: "Elçi indi. Seni okumasına izin verdin; ne okuduğunu söylemedi.", en: "The envoy has landed. You let {zamir:thessar|onu} read you. {zamir:thessar|o|b} didn't say what {zamir:thessar|o} read." }
+            kosul: { bayrak: "thessar_okuma_izni", bayrak_yok: ["thessar_inis_egildi", "thessar_inis_saldiri"] }
+          - { tr: "Şimdi gözler Kule'de. Gövdesinde her gece bir ışık halkası beliriyor, kat kat tırmanıp ellinci katın hizasında sönüyor. Tırmanıcılar ellinci katın kapısının artık sıcak olduğunu anlatıyor.", en: "Now everybody's watching the Spire. Every night a ring of light shows up on it, climbs floor by floor, and goes out level with the fiftieth. Climbers say the fiftieth-floor door is warm to the touch now." }
+          - { tr: "{yer:kule_dibi} pazarında çok-evren haritaları satılmaya başlandı. Hiçbiri doğru değil; yine de herkes bir tane alıyor.", en: "People have started selling multiverse maps at the {yer:kule_dibi} market. None of them are right. Everybody buys one anyway." }
+        bildirimler:
+          - tur: "gorev"
+            baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
+            satirlar:
+              - { tr: "Kule'nin 50. katında katmanlar arası geçit Gün 200'de açılacak.", en: "An inter-layer passage opens on the Spire's 50th floor on Day 200." }
+        sezgiler:
+          - kosul: { bayrak_yok: "yanki_susturuldu" }
+            metin: { tr: "geçidin öbür yanında başka sistemler var. başka benler de olabilir. bakmak istiyorum. korkuyorum da.", en: "there are other systems past that passage. maybe other mes too. i want to look. i'm scared to, too." }
+          - kosul: { stat: { int: 120 } }
+            metin: { tr: "Işık halkasının tırmanma hızı her gece biraz artıyor. Geçit açılmayacak; patlayacak.", en: "The ring of light climbs a little faster every night. That passage isn't going to open. It's going to burst." }
+        secenekler:
+          - id: "kule"
+            etiket: { tr: "Bu gece ışık halkasını izle", en: "Watch the ring of light tonight" }
+            sonraki: "@akis"
+          - id: "thessar"
+            etiket: { tr: "Elçinin bu konuda ne dediğini öğren", en: "Find out what the envoy's said about it" }
+            sonraki: "@akis"
+          - id: "harita"
+            etiket: { tr: "Pazardaki haritalardan birine bak", en: "Look at one of the maps from the market" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 10 · darboğaz
+  - id: "darbogaz_10"
+    konum: ["us"]
+    perde: [3]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["darbogaz"]
+    kart: { tr: "Öbür tarafın kokusu", en: "The smell of the other side" }
+    sahne: "darbogaz_10_1"
+    sahneler:
+      - id: "darbogaz_10_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Geçitten döndüğünde {yer:kiyikent_liman|in} havası sana tuhaf geliyor; fazla tuzlu, fazla tanıdık. Elbiselerinde başka bir dünyanın kokusu var: ıslak taş, pirinç, yanmış tütsü.", en: "When you get back from the passage, the air on {yer:kiyikent_liman} feels off. Too salty, too familiar. Your clothes smell like another world: wet stone, brass, burned incense." }
+          - metin: { tr: "Geçidin anahtarı sende. Kimin geçeceğine sen karar veriyorsun; sabahtan beri kapında bir kuyruk var.", en: "The passage's key is yours. You decide who goes through, and there's been a line outside your door since morning." }
+            kosul: { bayrak: "gecit_oyuncunun" }
+          - metin: { tr: "Geçidi herkese açık bıraktın. İlk gün yüzlerce kişi geçti; kaçının döneceğini kimse bilmiyor.", en: "You left the passage open to everyone. Hundreds went through on the first day. Nobody knows how many are coming back." }
+            kosul: { bayrak: "gecit_herkese_acik" }
+          - metin: { tr: "Geçidin önüne bir denetim noktası kuruldu. Kâğıdı olan geçiyor; kâğıdı kimin dağıttığı ise ayrı bir kavga.", en: "There's a checkpoint in front of the passage now. If you've got papers, you go through. Who's handing out the papers is a whole separate fight." }
+            kosul: { bayrak: "gecit_denetimli" }
+          - metin: { tr: "Geçit sen gelmeden açıldı. Sıralamanın tepesindeki adların yanında artık çarpılar var.", en: "The passage opened before you got there. There are X's next to the names at the top of the ranking now." }
+            kosul: { bayrak: "bolum_10_tasti" }
+          - metin: { tr: "Körfezin üstündeki ters kuleden ince bir ışık sana doğru uzanıp sönüyor. {npc:thessar} seni izliyor; hangi gözle izlediğini kestiremiyorsun.", en: "A thin beam reaches toward you from the upside-down tower over the bay, then goes out. {npc:thessar} is watching you. You can't tell how." }
+            kosul: { npc_hayatta: "thessar", bayrak_yok: "thessar_dusman" }
+          - metin: { tr: "Körfezin üstündeki ters kule sessiz. {npc:thessar} artık sana düşman; {yer:kiyikent_liman|de}ki herkes bunu biliyor ve senin yanında durmaktan bir adım çekiniyor.", en: "The upside-down tower over the bay is quiet. {npc:thessar} is your enemy now. Everyone on {yer:kiyikent_liman} knows it, and they stand half a step farther from you because of it." }
+            kosul: { bayrak: "thessar_dusman" }
+          - metin: { tr: "{npc:aras_kurt} geçidin eşiğinde sana bir şey söylemişti. Sıralamada adınız yine alt alta.", en: "{npc:aras_kurt} said something to you at the threshold of the passage. Your names are stacked on the ranking again." }
+            kosul: { npc_hayatta: "aras_kurt", bayrak: "aras_tanisildi" }
+        sezgiler:
+          - kosul: { bayrak_yok: "yanki_susturuldu" }
+            metin: { tr: "orada başka bir yankı yoktu. iyi mi kötü mü bilmiyorum. yalnızız demek.", en: "there wasn't another echo out there. i don't know if that's good or bad. means we're alone." }
+        secenekler:
+          - id: "kuyruk"
+            etiket: { tr: "Kapındaki kalabalığa bir şey söyle", en: "Say something to the crowd at your door" }
+            sonraki: "@akis"
+          - id: "yika"
+            etiket: { tr: "Elbiselerini değiştir, öbür dünyanın kokusunu at", en: "Change your clothes and get the other world's smell off you" }
+            sonraki: "@akis"
+          - id: "gemi"
+            etiket: { tr: "Gemiye uzun uzun bak", en: "Take a long look at the ship" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 11 · brifing
+  - id: "brifing_11"
+    konum: ["us"]
+    perde: [3]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["brifing"]
+    kart: { tr: "İki dünya", en: "Two worlds" }
+    sahne: "brifing_11_1"
+    sahneler:
+      - id: "brifing_11_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Önceki bölümde Kule'nin ellinci katında çok-evren geçidi açıldı. Öbür taraftan dönenler iki dünyadan söz ediyor; ikisinde de saat işliyor.", en: "Last chapter, the multiverse passage opened on the Spire's fiftieth floor. The people coming back talk about two worlds, and in both of them, the clock is running." }
+          - { tr: "Birinde bütün bir takımada denize gömülüyor; çan kuleleri her dalgada kendiliğinden çalıyor. Ötekinde yıldızların arasında ilerleyen pirinçten bir gemi-şehir var; orada her şey tartılıyor, insanlar da.", en: "In one, a whole archipelago is sinking into the sea, and the bell towers ring on their own with every wave. In the other there's a brass ship-city sailing between the stars where everything gets weighed. People too." }
+          - { tr: "İkisi de hasat ediliyor. İkisine birden yetişemezsin.", en: "Both of them are being harvested. You can't get to both." }
+        bildirimler:
+          - tur: "gorev"
+            baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
+            satirlar:
+              - { tr: "Hasattaki iki katmandan birini seç: {yer:batik_takimada} ya da {yer:pirinc_kervan}. Son tarih: Gün 225.", en: "Choose one of the two layers under harvest: {yer:batik_takimada} or {yer:pirinc_kervan}. Deadline: Day 225." }
+        sezgiler:
+          - kosul: { bayrak_yok: "yanki_susturuldu" }
+            metin: { tr: "ikisi de bizim geleceğimiz. biri boğuluyor, biri satılıyor. hangisini görmek istersin?", en: "both of them are our future. one's drowning, one's being sold. which one do you want to see?" }
+          - kosul: { stat: { per: 150 } }
+            metin: { tr: "Dönenlerin ellerinde iki farklı iz var: biri tuz kabuğu, öteki pirinç tozu. İkisi de silinmiyor.", en: "The people who came back have two different marks on their hands: one salt crust, one brass dust. Neither one washes off." }
+        secenekler:
+          - id: "batik"
+            etiket: { tr: "{yer:batik_takimada|den} dönenlerle konuş", en: "Talk to the people back from {yer:batik_takimada}" }
+            sonraki: "@akis"
+          - id: "kervan"
+            etiket: { tr: "{yer:pirinc_kervan|den} dönenlerle konuş", en: "Talk to the people back from {yer:pirinc_kervan}" }
+            sonraki: "@akis"
+          - id: "dusun"
+            etiket: { tr: "Karar vermeden önce bir gece düşün", en: "Sleep on it before you decide" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 12 · brifing
+  - id: "brifing_12"
+    konum: ["us"]
+    perde: [3]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["brifing"]
+    kart: { tr: "Göğüsteki düğüm", en: "The knot in your chest" }
+    sahne: "brifing_12_1"
+    sahneler:
+      - id: "brifing_12_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - metin: { tr: "Önceki bölümde {yer:batik_takimada|e} gittin. Son başakçıyla aranızda geçenler hâlâ ellerindeki tuz kabuğunda duruyor.", en: "Last chapter, you went to {yer:batik_takimada}. Whatever happened between you and the last reaper is still there in the salt crust on your hands." }
+            kosul: { herhangi: [{ bayrak: "basakci_olduruldu" }, { bayrak: "basakci_saldi" }, { bayrak: "batik_hasat_yutuldu" }] }
+          - metin: { tr: "Önceki bölümde {yer:pirinc_kervan|e} gittin. Terazinin boş kefesinin önünde verdiğin karar, kervanın yıldızlar arasındaki yolunu değiştirdi.", en: "Last chapter, you went to {yer:pirinc_kervan}. What you decided at the empty scale pan changed the caravan's road through the stars." }
+            kosul: { herhangi: [{ bayrak: "kervan_ozgur" }, { bayrak: "kervan_sahibi" }, { bayrak: "kervan_isyan_basarisiz" }, { bayrak: "kervan_isyan_yalniz" }, { bayrak: "kervan_oylandi" }] }
+          - metin: { tr: "Yan yatmış vapurda {npc:deniz_arman|e} insan kalacağına söz verdin.", en: "On the capsized ferry, you promised {npc:deniz_arman} you'd stay human." }
+            kosul: { bayrak: "deniz_insan_sozu", npc_hayatta: "deniz_arman" }
+          - { tr: "Son günlerde göğsünde bir şey düğümleniyor. Kavradığın Özler gece uyurken birbirine uzanıyor; sabah kalktığında ellerinde ne olduğunu bilmediğin bir sıcaklık oluyor.", en: "Lately something's been knotting up in your chest. The Essences you've grasped reach for each other while you sleep, and when you wake up there's a warmth in your hands you can't name." }
+        bildirimler:
+          - tur: "gorev"
+            baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
+            satirlar:
+              - { tr: "Öz uyumu eşiğe yaklaşıyor. Yol oluşumu en geç Gün 260'ta gerçekleşecek.", en: "Essence alignment nearing threshold. Path formation will occur no later than Day 260." }
+        sezgiler:
+          - kosul: { bayrak_yok: "yanki_susturuldu" }
+            metin: { tr: "bunu ben yapmıyorum. ilk defa bir şeyi ben yapmıyorum. ilginç bir his.", en: "i'm not doing this. first time something's happening that i'm not doing. interesting feeling." }
+        secenekler:
+          - id: "dinle"
+            etiket: { tr: "Göğsündeki düğümü dinle", en: "Listen to the knot in your chest" }
+            sonraki: "@akis"
+          - id: "ertele"
+            etiket: { tr: "Şimdilik düşünme; daha çok iş var", en: "Don't think about it yet. There's too much to do" }
+            sonraki: "@akis"
+          - id: "sor"
+            etiket: { tr: "Yanındakilere bir şey hissedip hissetmediklerini sor", en: "Ask the people around you if they feel anything" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 13 · brifing
+  - id: "brifing_13"
+    konum: ["us"]
+    perde: [3]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["brifing"]
+    kart: { tr: "Sıklaşan kapılar", en: "Gates coming faster" }
+    sahne: "brifing_13_1"
+    sahneler:
+      - id: "brifing_13_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - metin: { tr: "Önceki bölümde Özlerin tek bir Yol'da birleşti ve bunu herkes gördü.", en: "Last chapter, your Essences came together into a single Path, and everybody saw it." }
+            kosul: { bayrak: "yol_tanikli" }
+          - metin: { tr: "Önceki bölümde Özlerin tek bir Yol'da birleşti. Kimse görmedi; sen gizledin.", en: "Last chapter, your Essences came together into a single Path. Nobody saw. You hid it." }
+            kosul: { bayrak: "yol_gizlendi" }
+          - metin: { tr: "Önceki bölümde Özlerin tek bir Yol'da birleşti. Dümeni o an {npc:yanki|e} bıraktın.", en: "Last chapter, your Essences came together into a single Path. You let {npc:yanki} take the wheel for that one." }
+            kosul: { bayrak: "yol_yankiya_birakildi" }
+          - { tr: "Şehirde kapılar sıklaşıyor. Eskiden haftada bir açılan kapılar şimdi her gün açılıyor; bazen aynı mahallede iki tane. Avcılar uyumadan bir kapıdan ötekine koşuyor.", en: "Gates are coming faster across the city. They used to open once a week. Now it's every day, sometimes two in the same neighborhood. Hunters run from one to the next without sleeping." }
+          - { tr: "{fraksiyon:sessiz_ag|in} telsizlerinde bir söylenti dolaşıyor: kapıların hepsi aynı ritimle atıyormuş, bir kalp gibi. Biri o kalbi büyütüyormuş.", en: "There's a rumor going around on {fraksiyon:sessiz_ag|k|pos} radios: all the Gates are pulsing to the same rhythm, like a heartbeat. Somebody's making that heart bigger." }
+        bildirimler:
+          - tur: "gorev"
+            baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
+            satirlar:
+              - { tr: "Kapı yoğunluğu artıyor. Eş zamanlı kapı olayı Gün 292'de bekleniyor.", en: "Gate density rising. Simultaneous Gate event expected on Day 292." }
+        sezgiler:
+          - kosul: { bayrak_yok: "yanki_susturuldu" }
+            metin: { tr: "biri kapıları çağırıyor. biri seni ölçmek istiyor. bu sefer bir mahalle değil, şehir.", en: "somebody's calling the gates. somebody wants to measure you. not a neighborhood this time. the city." }
+        secenekler:
+          - id: "kapilar"
+            etiket: { tr: "Bugünkü kapılara bak", en: "Check today's Gates" }
+            sonraki: "@akis"
+          - id: "ag"
+            etiket: { tr: "Ritim söylentisinin kaynağını sor", en: "Ask where the heartbeat rumor started" }
+            sonraki: "@akis"
+          - id: "hazirlik"
+            etiket: { tr: "Kamplara fırtınaya hazırlanmalarını söyle", en: "Tell the camps to get ready for a storm" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 13 · darboğaz
+  - id: "darbogaz_13"
+    konum: ["us"]
+    perde: [3]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["darbogaz"]
+    kart: { tr: "Fırtınadan sonra", en: "After the storm" }
+    sahne: "darbogaz_13_1"
+    sahneler:
+      - id: "darbogaz_13_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Fırtınanın ertesi günü şehir isli bir sessizliğe gömülü. Kapıların açıldığı yedi mahallede tebeşirle daireler çiziliyor; içine kimse basmıyor.", en: "The day after the storm, the city's sunk into a sooty quiet. In the seven neighborhoods where the Gates opened, people are chalking circles on the ground. Nobody steps inside them." }
+          - metin: { tr: "Fırtına sen yokken koptu. Üç mahallenin adı sabah haritadan silinmişti; telsizlerde o adları anan yok.", en: "The storm broke while you were gone. By morning three neighborhoods were off the map, and nobody on the radios says their names." }
+            kosul: { bayrak: "bolum_13_tasti" }
+          - metin: { tr: "Sancağının altındakiler gece boyunca kapıdan kapıya koştu. Bu sabah çoğu meydanda uyuyor, silahları kucaklarında.", en: "The people under your banner ran Gate to Gate all night. This morning most of them are asleep in the square with their weapons in their laps." }
+            kosul: { ordu_min: 1 }
+          - metin: { tr: "{npc:kaya_demir} artık Lonca'nın başında değil. {yer:sanayi|in} bacalarından yine duman çıkıyor, ama emirleri başka biri veriyor.", en: "{npc:kaya_demir} isn't running the Guild anymore. Smoke's coming out of {yer:sanayi} stacks again, but somebody else is giving the orders." }
+            kosul: { bayrak: "kaya_devrildi" }
+          - metin: { tr: "{npc:kaya_demir} darbeden vazgeçti. Telsizde sesi her zamankinden yorgun.", en: "{npc:kaya_demir} backed off the coup. {zamir:kaya_demir|onun|b} voice on the radio sounds more tired than usual." }
+            kosul: { bayrak: "kaya_darbeden_vazgecti" }
+          - metin: { tr: "Lonca'nın sözü artık şehrin sözü. Sokak köşelerinde yeni nöbet kulübeleri, kapılarda yeni defterler var.", en: "The Guild's word is the city's word now. New guard booths on the corners, new ledgers at the doors." }
+            kosul: { bayrak: "lonca_hakimiyeti" }
+          - metin: { tr: "Konsey çadırında {npc:elif_sari} yaralıların listesini okuyor. Listenin başında senin adın var: yaralı olarak değil, onları getiren olarak.", en: "In the Council tent, {npc:elif_sari} is reading out the list of the wounded. Your name's at the top, and not as one of the wounded. As the one who brought them in." }
+            kosul: { npc_hayatta: "elif_sari", lider_fraksiyon: "siginak" }
+        sezgiler:
+          - kosul: { bayrak_yok: "yanki_susturuldu" }
+            metin: { tr: "ölçüm tamamlandı. sonuç yukarıya gitti. bir sonraki soru daha zor olacak.", en: "measurement complete. the result went upstairs. the next question's going to be harder." }
+        secenekler:
+          - id: "daire"
+            etiket: { tr: "Tebeşir dairelerinden birinin başında dur", en: "Stand by one of the chalk circles" }
+            sonraki: "@akis"
+          - id: "uyu"
+            etiket: { tr: "Sen de biraz uyu", en: "Get some sleep yourself" }
+            sonraki: "@akis"
+          - id: "say"
+            etiket: { tr: "Kayıpları say", en: "Count the losses" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 14 · brifing
+  - id: "brifing_14"
+    konum: ["us"]
+    perde: [3]
+    yalniz_tohum: true
+    gerilim: 3
+    etiketler: ["brifing"]
+    kart: { tr: "Davetiye", en: "The invitation" }
+    sahne: "brifing_14_1"
+    sahneler:
+      - id: "brifing_14_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Önceki bölümde şehir kapı fırtınasını atlattı. Pencerende hâlâ o mahcup satır duruyor: [Dünya Katmanı'nın direnci beklentinin üstünde.]", en: "Last chapter, the city made it through the Gate storm. That sheepish line is still in your window: [Earth Layer resistance above expectations.]" }
+          - { tr: "Bu sabah dört kamptan dört ayrı haberci kapına geliyor, ellerinde aynı kâğıt: {yer:kasaba_cekirdegi|de} ortak bir masa kurulacak. Entegrasyon'dan bu yana ilk kez dört kamp aynı odada oturacak.", en: "This morning four runners from four camps come to your door with the same piece of paper: a common table is being set up at {yer:kasaba_cekirdegi}. For the first time since Integration, all four camps are going to sit in the same room." }
+          - { tr: "Davetiyenin altında el yazısıyla bir not var. İmza yok: \"Masaya gel. Ama arkanı duvara ver.\"", en: "There's a handwritten note at the bottom of the invitation. No signature: \"Come to the table. But keep your back to the wall.\"" }
+        bildirimler:
+          - tur: "gorev"
+            baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
+            satirlar:
+              - { tr: "Ortak Masa toplantısı. En geç Gün 300.", en: "Common Table meeting. No later than Day 300." }
+        sezgiler:
+          - kosul: { bayrak_yok: "yanki_susturuldu" }
+            metin: { tr: "masada biri seni satacak. kim olduğunu biliyorum sanıyorum. emin olmak istemiyorum.", en: "someone at that table is going to sell you out. i think i know who. i don't want to be sure." }
+          - kosul: { stat: { per: 200 } }
+            metin: { tr: "Notun mürekkebi davetiyeninkinden farklı. Biri davetiyeyi sana ulaşmadan önce eline almış.", en: "The ink on the note isn't the same as the invitation's. Someone got their hands on this before it got to you." }
+        secenekler:
+          - id: "kabul"
+            etiket: { tr: "Davetiyeyi katla, cebine koy", en: "Fold up the invitation and pocket it" }
+            sonraki: "@akis"
+          - id: "not"
+            etiket: { tr: "Notu kimin yazmış olabileceğini düşün", en: "Think about who could've written the note" }
+            sonraki: "@akis"
+          - id: "haberci"
+            etiket: { tr: "Habercilere masada kimin oturacağını sor", en: "Ask the runners who's sitting at the table" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 15 · brifing
+  - id: "brifing_15"
+    konum: ["us"]
+    perde: [3]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["brifing"]
+    kart: { tr: "Masadan sonra", en: "After the table" }
+    sahne: "brifing_15_1"
+    sahneler:
+      - id: "brifing_15_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - metin: { tr: "Önceki bölümde ortak masada ihaneti son anda önledin.", en: "Last chapter, you stopped the betrayal at the common table at the last second." }
+            kosul: { bayrak: "ihanet_onlendi" }
+          - metin: { tr: "Önceki bölümde ortak masada {npc:kaya_demir} seni sattı.", en: "Last chapter, at the common table, {npc:kaya_demir} sold you out." }
+            kosul: { bayrak: "ihanet_kaya", bayrak_yok: "ihanet_onlendi" }
+          - metin: { tr: "Önceki bölümde ortak masada {npc:mert_kilic} seni sattı.", en: "Last chapter, at the common table, {npc:mert_kilic} sold you out." }
+            kosul: { bayrak: "ihanet_mert", bayrak_yok: "ihanet_onlendi" }
+          - metin: { tr: "Önceki bölümde ortak masada {npc:aras_kurt} seni sattı.", en: "Last chapter, at the common table, {npc:aras_kurt} sold you out." }
+            kosul: { bayrak: "ihanet_aras", bayrak_yok: "ihanet_onlendi" }
+          - metin: { tr: "Önceki bölümde ortak masada {npc:deniz_arman} seni sattı.", en: "Last chapter, at the common table, {npc:deniz_arman} sold you out." }
+            kosul: { bayrak: "ihanet_deniz", bayrak_yok: "ihanet_onlendi" }
+          - metin: { tr: "Önceki bölümde ortak masada {npc:thessar} seni sattı; aslında hiç senin tarafında olmamıştı.", en: "Last chapter, at the common table, {npc:thessar} sold you out. {zamir:thessar|o|b} {zamir:thessar|was} never really on your side." }
+            kosul: { bayrak: "ihanet_thessar", bayrak_yok: "ihanet_onlendi" }
+          - metin: { tr: "Önceki bölümde ortak masa kuruldu ve dağıldı.", en: "Last chapter, the common table got set and then broke up." }
+            kosul: { bayrak_yok: ["ihanet_onlendi", "ihanet_kaya", "ihanet_mert", "ihanet_aras", "ihanet_deniz", "ihanet_thessar"] }
+          - { tr: "Ortak masadan bu yana körfezin üstündeki ters kule daha parlak. Geceleri gövdesinden yukarıya, ayın yanına doğru ince bir ışık yükseliyor; biri birini çağırıyor gibi.", en: "Since the common table, the upside-down tower over the bay has been glowing brighter. At night a thin beam rises off it toward the moon, like somebody calling somebody." }
+        bildirimler:
+          - tur: "gorev"
+            baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
+            satirlar:
+              - { tr: "Yörüngede bilinmeyen sayıda yaklaşan nesne. Tahmini görünürlük: Gün 320.", en: "Unknown number of objects approaching in orbit. Estimated visibility: Day 320." }
+        sezgiler:
+          - kosul: { bayrak_yok: "yanki_susturuldu" }
+            metin: { tr: "gemi bir elçiydi. elçiler yalnız gelmez. arkasından gelenleri çağırıyor.", en: "the ship was an envoy. envoys don't come alone. it's calling whoever's behind it." }
+        secenekler:
+          - id: "isik"
+            etiket: { tr: "Bu gece ışığın nereye uzandığına bak", en: "Watch where the beam goes tonight" }
+            sonraki: "@akis"
+          - id: "sehir"
+            etiket: { tr: "Şehri son hazırlığa çağır", en: "Call the city to its last preparations" }
+            sonraki: "@akis"
+          - id: "yalniz"
+            etiket: { tr: "Bir süre yalnız kal", en: "Be alone for a while" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 16 · brifing (perde4_acilis'ten sonra)
+  - id: "brifing_16"
+    konum: ["us"]
+    perde: [4]
+    yalniz_tohum: true
+    gerilim: 3
+    etiketler: ["brifing"]
+    kart: { tr: "Rampalar", en: "The ramps" }
+    sahne: "brifing_16_1"
+    sahneler:
+      - id: "brifing_16_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Önceki bölümde filo göründü; bu sabah da gökyüzündeki paneller sarardı. Gemilerin çoğu şehrin üstünde, bulutların hemen altında duruyor. Karınlarında kapalı rampalar var.", en: "Last chapter, the fleet came into view, and this morning the panels in the sky went yellow. Most of the ships are hanging over the city now, just under the clouds. There are closed ramps on their bellies." }
+          - { tr: "Şehirde herkes aynı şeyi yapıyor: bekliyor. Kimi kapısını çiviliyor, kimi bodrumuna su taşıyor, kimi eski fotoğraflarını yakıyor ki onlar almasın.", en: "Everybody in the city is doing the same thing: waiting. Some are nailing their doors shut, some are hauling water down to their basements, some are burning their old photos so they won't get taken." }
+          - metin: { tr: "Dört kamp son kez {yer:kasaba_cekirdegi|de} toplanacak. Hangi kampın sözünün geçeceği o masada belli olacak.", en: "The four camps are going to gather at {yer:kasaba_cekirdegi} one last time. Whose word carries will get decided at that table." }
+            kosul: { bayrak_yok: "olay_fraksiyon_son_pozisyon" }
+        bildirimler:
+          - tur: "gorev"
+            baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
+            satirlar:
+              - { tr: "Hasat filosunun iniş penceresi: Gün 342.", en: "Harvest fleet landing window: Day 342." }
+        sezgiler:
+          - kosul: { bayrak_yok: "yanki_susturuldu" }
+            metin: { tr: "on bir gün. her şey on bir gün. sonra ya biz oluruz ya onlar.", en: "eleven days. everything's eleven days. then it's either us or them." }
+        secenekler:
+          - id: "yuru"
+            etiket: { tr: "Şehrin içinde bir tur at", en: "Take a walk through the city" }
+            sonraki: "@akis"
+          - id: "kamp"
+            etiket: { tr: "Kendi kampının hazırlığına bak", en: "Check on your own camp's preparations" }
+            sonraki: "@akis"
+          - id: "gok"
+            etiket: { tr: "Rampalara bak; hangisinin önce açılacağını kestirmeye çalış", en: "Look at the ramps and try to guess which opens first" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 16 · darboğaz
+  - id: "darbogaz_16"
+    konum: ["us"]
+    perde: [4]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["darbogaz"]
+    kart: { tr: "Kül ve tuz", en: "Soot and salt" }
+    sahne: "darbogaz_16_1"
+    sahneler:
+      - id: "darbogaz_16_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - metin: { tr: "İstila geri püskürtüldü. Kırk bir geminin bir kısmı körfezin dibinde, bir kısmı adaların arasında tütüyor. {yer:kiyikent_liman|de} insanlar ağlamıyor; şaşkınlıktan ağlayamıyorlar.", en: "The invasion got driven back. Some of the forty-one ships are on the bottom of the bay, and some are smoking between the islands. People on {yer:kiyikent_liman} aren't crying. They're too stunned to." }
+            kosul: { bayrak: "kadimler_yenildi" }
+          - metin: { tr: "İstila durdu, çünkü bir anlaşma yapıldı. Gemiler havada bekliyor; ışık sütunları söndü. Kimse anlaşmanın bedelini yüksek sesle söylemiyor.", en: "The invasion stopped because a deal got made. The ships are waiting in the air and the light pillars are out. Nobody's saying out loud what the deal cost." }
+            kosul: { bayrak: "kadim_anlasmasi", bayrak_yok: "kadimler_yenildi" }
+          - metin: { tr: "{yer:kiyikent} düştü. {fraksiyon:siginak|den} geriye bir avuç çadır kaldı; ışık sütunları hâlâ şehrin üstünde, ama yukarı süzülecek kimse kalmadı.", en: "{yer:kiyikent} fell. All that's left of the {fraksiyon:siginak} is a handful of tents. The pillars of light are still over the city, but there's nobody left to float up." }
+            kosul: { bayrak: "kiyikent_dustu" }
+          - metin: { tr: "İstilanın ilk saatinde sen yoktun. Yukarı süzülenlerin adlarını çocuklar Kayıplar Duvarı'na yazıyor.", en: "You weren't there for the first hour of the invasion. Kids are writing the names of the ones who floated up on the Wall of the Missing." }
+            kosul: { bayrak: "bolum_16_tasti" }
+          - metin: { tr: "{npc:elif_sari} sağ. Konsey çadırının önünde oturuyor, iki eli de sargılı, yaralıları sırayla içeri alıyor.", en: "{npc:elif_sari} is alive. {zamir:elif_sari|o|b} is sitting outside the Council tent with both hands bandaged, taking the wounded in one at a time." }
+            kosul: { npc_hayatta: "elif_sari", bayrak_yok: "kiyikent_dustu" }
+          - metin: { tr: "{npc:elif_sari|in} çadırı boş. Masasının üstünde yarım kalmış bir liste duruyor.", en: "{npc:elif_sari|pos} tent is empty. There's a half-finished list on the table." }
+            kosul: { npc_olu: "elif_sari" }
+          - metin: { tr: "{npc:kaya_demir|in} sesi telsizde, her zamanki gibi kupkuru: \"Bitmedi. Bir kat daha var.\"", en: "{npc:kaya_demir|pos} voice comes over the radio, dry as ever: \"It's not over. There's one more floor.\"" }
+            kosul: { npc_hayatta: "kaya_demir" }
+          - { tr: "Akşamüstü Kule bir kez titriyor; deprem gibi değil, uzun bir uykudan uyanan bir kalbin ilk atışı gibi.", en: "Late in the afternoon the Spire shudders once. Not like an earthquake. Like the first beat of a heart waking up from a long sleep." }
+        sezgiler:
+          - kosul: { bayrak_yok: "yanki_susturuldu" }
+            metin: { tr: "kule bizi çağırıyor. aşağıya. çekirdeğe. hep bunu istemiştim, şimdi istemiyorum.", en: "the spire's calling us. down. to the core. i always wanted this. now i don't." }
+        secenekler:
+          - id: "liman"
+            etiket: { tr: "{yer:kiyikent_liman|i} baştan sona yürü", en: "Walk {yer:kiyikent_liman} end to end" }
+            sonraki: "@akis"
+          - id: "kule"
+            etiket: { tr: "Kule'ye bak", en: "Look at the Spire" }
+            sonraki: "@akis"
+          - id: "otur"
+            etiket: { tr: "Bir yere otur, nefesini topla", en: "Sit down somewhere and catch your breath" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 17 · brifing
+  - id: "brifing_17"
+    konum: ["us"]
+    perde: [4]
+    yalniz_tohum: true
+    gerilim: 3
+    etiketler: ["brifing"]
+    kart: { tr: "Merdivenin ağzı", en: "The mouth of the stairs" }
+    sahne: "brifing_17_1"
+    sahneler:
+      - id: "brifing_17_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - metin: { tr: "Önceki bölümde şehri istilaya karşı tuttun.", en: "Last chapter, you held the city against the invasion." }
+            kosul: { bayrak: "kadimler_yenildi" }
+          - metin: { tr: "Önceki bölümde istila bir anlaşmayla durdu.", en: "Last chapter, the invasion stopped with a deal." }
+            kosul: { bayrak: "kadim_anlasmasi", bayrak_yok: "kadimler_yenildi" }
+          - metin: { tr: "Önceki bölümde şehir düştü.", en: "Last chapter, the city fell." }
+            kosul: { bayrak: "kiyikent_dustu" }
+          - { tr: "Kule her gece biraz daha yüksek sesle atıyor. {yer:kule_dibi|in} taşları her sabah biraz daha içe çökmüş oluyor; çöken yerden mavi bir ışık sızıyor.", en: "Every night the Spire beats a little louder. Every morning the stones of {yer:kule_dibi} have caved in a little more, and blue light is leaking out where they sank." }
+          - { tr: "Herkes aynı şeyi söylüyor: altında bir şey var ve açılmak üzere. Kimse inmek istemiyor; herkes senin ineceğini düşünüyor.", en: "Everybody's saying the same thing: there's something under there, and it's about to open. Nobody wants to go down. Everybody figures you will." }
+        bildirimler:
+          - tur: "gorev"
+            baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
+            satirlar:
+              - { tr: "Çekirdek erişimi Gün 350'de açılacak.", en: "Core access opens on Day 350." }
+        sezgiler:
+          - kosul: { bayrak_yok: "yanki_susturuldu" }
+            metin: { tr: "orası benim geldiğim yer. ya da gideceğim yer. henüz bilmiyorum hangisi.", en: "that's where i came from. or where i'm going. i don't know which yet." }
+        secenekler:
+          - id: "kule"
+            etiket: { tr: "Çöken taşların kenarına git", en: "Go to the edge of the sunken stones" }
+            sonraki: "@akis"
+          - id: "yanindakiler"
+            etiket: { tr: "Yanındakilere kimin seninle ineceğini sor", en: "Ask the people with you who's coming down" }
+            sonraki: "@akis"
+          - id: "hazirlan"
+            etiket: { tr: "Hazırlan", en: "Get ready" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 17 · darboğaz (Çekirdeğe inilemediyse)
+  - id: "darbogaz_17"
+    konum: ["us"]
+    perde: [4]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["darbogaz"]
+    kart: { tr: "Kapalı merdiven", en: "The sealed stairs" }
+    sahne: "darbogaz_17_1"
+    sahneler:
+      - id: "darbogaz_17_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Merdivenin ağzı bir gece kendiliğinden kapandı. {yer:kule_dibi|in} taşları yeniden düzleşti; yalnız içinden hâlâ ince bir mavi ışık sızan bir çatlak kaldı.", en: "One night the mouth of the stairs closed on its own. The stones of {yer:kule_dibi} flattened out again. There's just one crack left, with a thin blue light still leaking out of it." }
+          - { tr: "Aşağıda ne olduğunu göremedin. Sistem'in sesi her zamankinden kısa: [Erişim reddedildi. Değerlendirme mevcut verilerle sürecek.]", en: "You never saw what's down there. The System's voice is shorter than ever: [Access denied. Assessment will proceed with available data.]" }
+          - metin: { tr: "Merdivenin ağzını başkaları tutmuştu. Aralarından geçmeye çalıştığın gece kimin kazandığını şehir hâlâ konuşuyor.", en: "Somebody else had taken the mouth of the stairs. The city's still talking about the night you tried to get through them, and who won." }
+            kosul: { bayrak: "bolum_17_tasti" }
+          - metin: { tr: "{npc:deniz_arman} çatlağın başında sana bakıyor. \"Belki iyi olmuştur,\" diyor. \"Belki bazı kapılar kapalı kalmalı.\"", en: "{npc:deniz_arman} looks at you from beside the crack. \"Maybe it's for the best,\" {zamir:deniz_arman|o} {zamir:deniz_arman|s}. \"Maybe some doors are supposed to stay shut.\"" }
+            kosul: { yoldas: "deniz_arman" }
+          - { tr: "Gökyüzündeki sayaç bir rakam daha düşüyor. Son karara az kaldı.", en: "The counter in the sky drops one more number. The final decision is close." }
+        sezgiler:
+          - kosul: { bayrak_yok: "yanki_susturuldu" }
+            metin: { tr: "inemedik. belki de bu bir cevaptır. bize sormadan verilmiş bir cevap.", en: "we didn't get down. maybe that's an answer. one they gave without asking us." }
+        secenekler:
+          - id: "catlak"
+            etiket: { tr: "Elini çatlağın üstüne koy", en: "Put your hand over the crack" }
+            sonraki: "@akis"
+          - id: "don"
+            etiket: { tr: "Arkanı dön, şehre dön", en: "Turn around and head back into the city" }
+            sonraki: "@akis"
+          - id: "bekle"
+            etiket: { tr: "Bir süre bekle; belki yeniden açılır", en: "Wait a while. Maybe it opens again" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 18 · brifing
+  - id: "brifing_18"
+    konum: ["us"]
+    perde: [4]
+    yalniz_tohum: true
+    gerilim: 3
+    etiketler: ["brifing"]
+    kart: { tr: "Son hafta", en: "The last week" }
+    sahne: "brifing_18_1"
+    sahneler:
+      - id: "brifing_18_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - metin: { tr: "Önceki bölümde {yer:sistem_cekirdegi|e} indin ve döndün. Gördüklerini kimseye tam anlatmadın.", en: "Last chapter, you went down to {yer:sistem_cekirdegi} and came back. You haven't told anyone all of what you saw." }
+            kosul: { bayrak: "sistem_cekirdegine_ulasildi" }
+          - metin: { tr: "Önceki bölümde Çekirdek'e inen merdiven sana kapandı.", en: "Last chapter, the stairs down to the Core closed on you." }
+            kosul: { bayrak_yok: "sistem_cekirdegine_ulasildi" }
+          - { tr: "Yılın son haftası. Şehirde her şey biraz yavaşladı; insanlar ağır ağır yürüyor, birbirine uzun uzun bakıyor. Kimse plan yapmıyor.", en: "The last week of the year. Everything in the city has slowed down a little. People walk slowly and look at each other for a long time. Nobody's making plans." }
+          - { tr: "Sistem'in pencereleri bu hafta neredeyse hiç açılmıyor. Açıldığında da tek bir satır var: [Değerlendirme sürüyor.]", en: "The System's windows barely open this week. When they do, there's only one line: [Assessment in progress.]" }
+        bildirimler:
+          - tur: "gorev"
+            baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
+            satirlar:
+              - { tr: "Son karar penceresi: Gün 358. Katman değerlendirmesi: Gün 365.", en: "Final decision window: Day 358. Layer assessment: Day 365." }
+        sezgiler:
+          - kosul: { bayrak_yok: "yanki_susturuldu" }
+            metin: { tr: "son hafta. ne istersen yap. ben buradayım. sonuna kadar.", en: "last week. do whatever you want. i'm here. all the way to the end." }
+        secenekler:
+          - id: "yuru"
+            etiket: { tr: "Şehri bir kez daha dolaş", en: "Walk the city one more time" }
+            sonraki: "@akis"
+          - id: "insanlar"
+            etiket: { tr: "Yanındakilerle bir akşam geçir", en: "Spend an evening with the people close to you" }
+            sonraki: "@akis"
+          - id: "yalniz"
+            etiket: { tr: "Bir gece yalnız kal", en: "Spend a night alone" }
+            sonraki: "@akis"
+
+  # ================================================================== Varış · {yer:batik_takimada}
+  - id: "varis_batik_takimada"
+    konum: ["batik_takimada"]
+    perde: [3, 4]
+    yalniz_tohum: true
+    tekrar: true
+    gerilim: 1
+    etiketler: ["varis"]
+    kart: { tr: "{yer:batik_takimada|e}", en: "To {yer:batik_takimada}" }
+    sahne: "varis_batik_takimada_1"
+    sahneler:
+      - id: "varis_batik_takimada_1"
+        yer: "batik_takimada"
+        paragraflar:
+          - metin: { tr: "Kule'nin ellinci katına tırmanıyor, geçidin dalgalanan yüzeyine elini uzatıyorsun. Öbür tarafa geçtiğin an tuzlu bir rüzgâr yüzüne çarpıyor.", en: "You climb to the Spire's fiftieth floor and reach for the rippling face of the passage. The second you're through, a salt wind hits you in the face." }
+            kosul: { herhangi: [{ gorev_turu: "yan" }, { gorev_turu: "kesif" }, { gorev_turu: "operasyon" }] }
+          - metin: { tr: "Dalgaların altında bir çan çalıyor, sonra bir tane daha. Takımada seni hatırlıyor.", en: "A bell rings under the waves, then another. The Reach remembers you." }
+            kosul: { degisken_min: { ziyaret_batik_takimada: 1 } }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Suya adım at", en: "Step into the water" }
+            sonraki: "@akis"
+
+  # ================================================================== Varış · {yer:pirinc_kervan}
+  - id: "varis_pirinc_kervan"
+    konum: ["pirinc_kervan"]
+    perde: [3, 4]
+    yalniz_tohum: true
+    tekrar: true
+    gerilim: 1
+    etiketler: ["varis"]
+    kart: { tr: "{yer:pirinc_kervan|e}", en: "To {yer:pirinc_kervan}" }
+    sahne: "varis_pirinc_kervan_1"
+    sahneler:
+      - id: "varis_pirinc_kervan_1"
+        yer: "pirinc_kervan"
+        paragraflar:
+          - { tr: "Kule'nin ellinci katına tırmanıyor, geçidin içinde pirinç renginde bir parıltıya doğru yürüyorsun. Ayağının altında taş bitip metal başlıyor; uzakta bir yerde dev bir terazinin kolları gıcırdıyor.", en: "You climb to the Spire's fiftieth floor and walk into the passage, toward a brass-colored glimmer. Under your feet the stone ends and metal starts. Somewhere far off, the arms of a giant scale creak." }
+          - metin: { tr: "Kapının bekçisi seni tanıyor; pullarından biri bir hece fısıldıyor: adın.", en: "The door warden knows you. One of its scales whispers a syllable: your name." }
+            kosul: { degisken_min: { ziyaret_pirinc_kervan: 1 } }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Güverteye çık", en: "Step out onto the deck" }
+            sonraki: "@akis"
+
+  # ================================================================== Varış · {yer:yedi_taht}
+  - id: "varis_yedi_taht"
+    konum: ["yedi_taht"]
+    perde: [3, 4]
+    yalniz_tohum: true
+    tekrar: true
+    gerilim: 1
+    etiketler: ["varis"]
+    kart: { tr: "{yer:yedi_taht|e}", en: "To {yer:yedi_taht}" }
+    sahne: "varis_yedi_taht_1"
+    sahneler:
+      - id: "varis_yedi_taht_1"
+        yer: "yedi_taht"
+        paragraflar:
+          - { tr: "Davet mektubunu geçidin yüzeyine bastırıyorsun. Kâğıt erimiyor, kapı oluyor: yüksek, altın, sessiz. Ardında uzun bir koridor uzanıyor; duvarlarında yedi koltuğun yedi gölgesi.", en: "You press the letter of invitation against the face of the passage. The paper doesn't melt. It becomes a door: tall, gold, silent. Behind it runs a long hallway with seven shadows of seven chairs on its walls." }
+          - metin: { tr: "Koridorun sonundaki muhafızlar bu kez seni durdurmuyor.", en: "The guards at the end of the hallway don't stop you this time." }
+            kosul: { degisken_min: { ziyaret_yedi_taht: 1 } }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Koridora gir", en: "Walk into the hallway" }
+            sonraki: "@akis"
+
+  # ================================================================== Varış · Sistem Çekirdeği
+  - id: "varis_sistem_cekirdegi"
+    konum: ["sistem_cekirdegi"]
+    perde: [4]
+    yalniz_tohum: true
+    tekrar: true
+    gerilim: 2
+    etiketler: ["varis"]
+    kart: { tr: "Çekirdek'e", en: "To the Core" }
+    sahne: "varis_sistem_cekirdegi_1"
+    sahneler:
+      - id: "varis_sistem_cekirdegi_1"
+        yer: "sistem_cekirdegi"
+        paragraflar:
+          - { tr: "Mavi merdiven aşağı, hep aşağı iniyor. Bir yerde basamakların sayısını unutuyorsun; bir yerde de kendi ayak seslerini. Sonunda merdiven bitiyor ve cam bir zemine basıyorsun.", en: "The blue staircase goes down and keeps going down. At some point you lose count of the steps. At some point you lose the sound of your own footsteps too. Then the stairs end and you're standing on a glass floor." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Eşiğe yürü", en: "Walk to the threshold" }
+            sonraki: "@akis"

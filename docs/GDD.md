@@ -271,7 +271,26 @@ Puan = Agirlik \cdot Gerilim_{uyumu} \cdot Tazelik \cdot Kisisel_{bag} \cdot Onc
 - **Gerilim uyumu:** hedef gerilim eğrisine (yükselen, zirve, nefes alma) uyan olaylar öne çıkar; ana gerilim kaynağı Anomali Dikkati'dir. Üç ağır savaştan sonra bir kamp ateşi sahnesi gelir.
 - **Tazelik:** yakın zamanda görülen etiketler cezalandırılır.
 - **Kişisel bağ:** oyuncunun ilişkisi yüksek NPC'leri içeren olaylar öne çıkar; böylece hikaye oyuncunun önemsediği kişiler etrafında döner.
-- **Ana yay önceliği:** zorunlu hikaye düğümleri zamanı gelince her zaman kazanır.
+- **Ana yay önceliği:** zorunlu hikaye düğümleri zamanı gelince her zaman kazanır. Bölüm yapısında ana yay puanlanmaz;
+  bölüm tablosu yönetir (aşağıda).
+
+### Bölüm yapısı: üs ve görev
+
+Ana hikaye kanıtlanmış bir yapıya oturur (ayrıntı `docs/CHAPTERS.md`, kararlar DECISIONS #130–#139):
+
+- **Omurga (dallan ve birleş):** 17 bölüm + final (Perde 1'de 3, Perde 2 ve 3'te 6'şar, Perde 4'te 2). Her bölüm herkesin
+  geçtiği bir **darboğaz** sahnesiyle biter; içeriği dünya durumuna göre değişir (kim hayatta, kim küs, hangi kamp önde).
+- **Takvim (Persona):** her bölümün bir ana operasyonu ve son tarihi vardır. O güne kadarki günler serbesttir; operasyona
+  girme zamanını oyuncu seçer (dünya olayları tarihlidir: gemi iner, istila başlar). Son tarih kaçarsa oyun bitmez; taşma
+  yaşanır (tehlike, hayatta kalan oranı, kalıcı bayrak) ve operasyon yine başlar.
+- **Döngü (Mass Effect 2):** **Üs** (Perde 1'de Öğretici kampı, sonra Sığınak): karakter sahneleri, tohum dönüşleri, NPC
+  eşikleri, Küresel Sıralama duyuruları, yoldaş tepkileri ve fırsat eli yalnız burada. **Görev:** kapalı bir sahne dizisi;
+  ilk sahnesi yolculuk ve varıştır, içindeyken yalnız göreve ait olaylar gelir. Her olayın konumu vardır ve başka yerde
+  tetiklenmez; başka bölgede geçen olay üste görev kartı olur.
+- **Bölüm ritmi:** Brifing (yeni tehdit, son tarih, "önceki bölümde") → Hazırlık → Ana operasyon → Sonrası → Darboğaz.
+  OP MC döngüsüyle eşleşir: brifing yeni tavan, hazırlık hakimiyet, operasyon mücadele ve kırılma.
+- Arayüzde her zaman "Bölüm N · Hedef · Kalan gün" satırı görünür; tohumdan doğan her olay bağlantıyı hatırlatan bir
+  cümleyle başlar; uzun aradan sonra açılan oyunda kısa bir dönüş özeti gösterilir.
 
 ## Dinamik karakterler
 

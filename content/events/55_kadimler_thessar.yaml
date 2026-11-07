@@ -407,7 +407,7 @@ olaylar:
               - ahlak: { duzen: 2, insanlik: -1 }
               - iliski: { thessar: { baglilik: 3 } }
               - xp_seviye: 30
-              - tohum: { olay: "kadimler_1_ticaret", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Elçinin indiği günden beri balık halinin önü değişti.", en: "The front of the fish hall hasn't been the same since the day the envoy came down." } }
+              - tohum: { olay: "kadimler_1_ticaret", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Elçinin indiği günden beri {npc:thessar} senin hamleni bekliyor.", en: "Since the envoy came down, {npc:thessar} has been waiting on your move." } }
               - tohum: { olay: "thessar_ticaret_masasi", gecikme: { min: 19, max: 28 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Elçinin indiği gün aranızda çizilen çizgi hâlâ orada.", en: "The line drawn between you the day the envoy came down is still there." } }
             kronik: { tr: "Elçiliğin kapısını açık tutup Kadimler'le ticarete izin verdin; {yer:kiyikent_liman} o gün alışverişe açıldı.", en: "You kept the embassy door open and let trade with the Ancients begin. That day {yer:kiyikent_liman} opened for business." }
             sonraki: "@akis"
@@ -419,7 +419,7 @@ olaylar:
               - ahlak: { duzen: 3, insanlik: 2 }
               - iliski: { thessar: { saygi: 5 } }
               - xp_seviye: 30
-              - tohum: { olay: "kadimler_1_ticaret", gecikme: { min: 5, max: 9 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Elçinin indiği günden beri balık halinin önü değişti.", en: "The front of the fish hall hasn't been the same since the day the envoy came down." } }
+              - tohum: { olay: "kadimler_1_ticaret", gecikme: { min: 5, max: 9 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Elçinin indiği günden beri {npc:thessar} senin hamleni bekliyor.", en: "Since the envoy came down, {npc:thessar} has been waiting on your move." } }
               - tohum: { olay: "thessar_ticaret_masasi", gecikme: { min: 19, max: 28 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Elçinin indiği gün aranızda çizilen çizgi hâlâ orada.", en: "The line drawn between you the day the envoy came down is still there." } }
             kronik: { tr: "Rıhtımın taşına bir çizgi çekip elçiye \"Bunun ötesi insanlarındır\" dedin; dört kampın hepsi bunu duydu.", en: "You scratched a line into the pier stone and told the Envoy everything past it belonged to people. All four camps heard you say it." }
             sonraki: "@akis"
@@ -431,7 +431,7 @@ olaylar:
               - ahlak: { duzen: -1, merhamet: 1 }
               - iliski: { thessar: { guven: 2 } }
               - xp_seviye: 30
-              - tohum: { olay: "kadimler_1_ticaret", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Elçinin indiği günden beri balık halinin önü değişti.", en: "The front of the fish hall hasn't been the same since the day the envoy came down." } }
+              - tohum: { olay: "kadimler_1_ticaret", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Elçinin indiği günden beri {npc:thessar} senin hamleni bekliyor.", en: "Since the envoy came down, {npc:thessar} has been waiting on your move." } }
               - tohum: { olay: "thessar_ticaret_masasi", gecikme: { min: 19, max: 28 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Elçinin indiği gün aranızda çizilen çizgi hâlâ orada.", en: "The line drawn between you the day the envoy came down is still there." } }
             kronik: { tr: "Elçinin inişinden sonra tek söz etmeden geri çekildin; ilk hamleyi Kadimler'e bıraktın.", en: "After the Envoy came down, you stepped back without a word and left the first move to the Ancients." }
             sonraki: "@akis"
@@ -1418,7 +1418,7 @@ olaylar:
               - itibar: { kadimler: 10, yukselenler: 6, siginak: -8, lonca: -6 }
               - iliski: { thessar: { baglilik: 12, guven: 6 } }
               - xp_seviye: 60
-              - tohum: { olay: "kadimler_2_vergi", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } }, hatirlatma: { tr: "Boyunduruk teklifini ilke olarak kabul ettiğin gün kapılara bir yaprak düşmüştü.", en: "The day you agreed to the yoke in principle, a leaf landed on the doors." } }
+              - tohum: { olay: "kadimler_2_vergi", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } }, hatirlatma: { tr: "Boyunduruk teklifini ilke olarak kabul ettiğin günü şehir unutmadı.", en: "The city hasn't forgotten the day you agreed to the yoke in principle." } }
               - tohum: { olay: "thessar_ihanet_fisiltisi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Boyunduruk teklifine verdiğin cevaptan sonra biri seninle gizlice konuşmak istiyor.", en: "After your answer to the yoke offer, someone wants to talk to you in private." } }
             kronik: { tr: "{yer:kordon|in} kırık iskelesinde Kadimler'in boyunduruk antlaşmasını ilke olarak kabul ettin; {yer:kiyikent|den} gelenlerin kimi bağırdı, kimi ağladı, kimi alkışladı.", en: "On {yer:kordon|pos} broken pier, you accepted the Ancients' vassal treaty in principle. Some of {yer:kiyikent} shouted, some wept, some clapped." }
             sonraki: "thessar_vassal_teklifi_kabul"

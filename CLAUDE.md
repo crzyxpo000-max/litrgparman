@@ -7,6 +7,7 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 
 ## Durum
 
+- **Hikaye yapısı değişikliği (bölüm, üs/görev, konum, son tarih; `docs/CHAPTERS.md`, `docs/STORY_FLOW.md`, DECISIONS #130–#139) bitti.**
 - **Aşama 9 (denge ve yayın) bitti; imzalama anahtarı ve Play Console kullanıcıda.** Aşama 0–7 tamam. Aşama 7: Perde 2–4 ve sonlar (`docs/PERDE2_4.md` içerik sözleşmesi: perdeler, bölgeler, ortak bayraklar, son koşulları, partiler).
 - Aşama 8 kaldırıldı. Aşama 6: Perde 1 dikey dilimi (`docs/PERDE1.md`; 48 olay, yeni açılış, zindanlar).
 - Aşama 5 tamam. Aşama 5: NPC sistemi (`npc/`: 4 eksen, hafıza, gündem, eşikler, ölüm, yoldaşlar, düello,
@@ -33,6 +34,7 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 ./gradlew :tools:uslup:run         # Türkçe üslup işi: HEAD'e göre yalnız tr değişti mi + üslup ölçümü (--ayrinti, --olcum, --ref)
 ./gradlew :tools:tarama:run        # içerik taraması → docs/TARAMA.md (QA; docs/QA.md)
 ./gradlew :tools:simulator:perf    # içerik yükleme / kayıt boyutu ölçümü
+./gradlew :tools:simulator:akis --args="20 tools/qa/akis/iz_sonra"   # olay sırası kaydı; çözümleme: python tools/qa/akis/cozumle.py <klasör>
 scripts/check.sh                   # test + validateContent + simülatör denge testi + assembleDebug + lint; her aşamanın sonunda geçmeli
 ```
 
@@ -75,7 +77,7 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 | `story` | İçerik modeli (`Model.kt`), `EffectApplier` (etkiler + tetikleyiciler), `PlayerActions` (istem, dağıtım, üretim, eşya, antrenman), `StoryEngine`, görünümler (`Views.kt`), `SystemTexts` |
 | `content` | `ContentParser` (YAML → `YamlTree`), `ContentLoader`, `ContentValidator` (+ `main`) |
 | `combat` | `CombatModel` (düşman/uyanış tanımları, `CombatState`, duruş, durumlar), `CombatMath` (GDD formülleri), `CombatEngine` (tur, yapay zeka, fazlar, infaz, zafer, ölüm, Ezme) |
-| `world` | `WorldModel` (olay/bölge/fraksiyon/başarı/görev tanımları, `RegionState`, `Gate`, `Seed`, `DayState`), `Director` (puanlama, zorunlu olaylar, fırsat eli), `WorldEngine` (gün döngüsü, akış eylemleri, kapılar) |
+| `world` | `WorldModel` (olay/bölge/fraksiyon/başarı/görev tanımları, `RegionState`, `Gate`, `Seed`, `DayState`), `Chapters` (bölüm tablosu, evre, görev), `Director` (puanlama, konum kuralı, tohumlar, fırsat eli), `WorldEngine` (gün döngüsü, üs/görev akışı, bölüm ilerlemesi, son tarih ve taşma, akış eylemleri, kapılar) |
 | `npc` | `NpcModel` (kişilik, ilişki, `NpcDef`, `NpcState`, hafıza, iz/bilgi/ordu/sıralama tanımları), `NpcEngine` (etkiler, günlük gündem, eşikler, tanık yorumu, görüşler, güce tepki, Küresel Sıralama, düello) |
 | `save` | `SaveCodec` (v4: kronik), `SaveManager` (auto + 3 slot, Demir Mod), `SaveStorage` |
 
@@ -86,6 +88,16 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Yerleşim: `names.yaml`, `titles.yaml`, `system.yaml`, `classes.yaml`, `skills.yaml`, `items.yaml`,
   `professions.yaml`, `essences.yaml`, `daily.yaml`, `story/*.yaml` (dosya adı sırasıyla). APK'ya assets olarak girer.
 - `story/90_sistem.yaml`: kesinti sahneleri (`ceza_bolgesi`); dönüş `"sonraki": "@geri"`.
+- **Bölüm yapısı** (`chapters.yaml`; DECISIONS #130–#139): `uslar` (perde → üs bölgesi) ve `bolumler` (`no, perde, acilis,
+  son_tarih, bitis, erken, baslik, hedef, tehdit, brifing[], operasyon[] ya da [{ad, bolge, olaylar}], darbogaz[],
+  darbogaz_gun, tasma, tasma_etkiler`). Her olayın **`konum`** etiketi vardır: `us`, bölge kimlikleri ya da `*`; yeni olay
+  yazarken zorunlu. Üste yalnız `us` ve üs bölgesindeki olaylar gelir; başka bölgede geçen olay görev kartı olur.
+  Yapısal sahneler `events/07–09_bolumler_*.yaml`: `brifing_<n>`, `darbogaz_<n>`, `varis_<bölge>` (görevin ilk sahnesi;
+  `ziyaret_<bölge>` değişkeni ilk/sonraki ziyareti ayırır). Tohum etkisinde **`hatirlatma {tr,en}`** (gecikme ≥ 3 ise yaz):
+  doğan olayın ilk paragrafı olur. Koşullar `bolum`, `bolum_min`, `bolum_max`, `gorevde`, `gorev_turu: operasyon|yan|kesif`.
+  Erken girilebilen operasyonda kesin gün sayısı yazma. Bayrak öneki `bolum_` motorundur (`bolum_<n>_tasti`).
+- Belirteç kipleri: EN `{yer:x|b}` cümle başında büyük harf, `{fraksiyon:sessiz_ag|k}` "The"yi küçültür; EN'de "the
+  {fraksiyon:siginak}" / "the {fraksiyon:lonca}". TR'de `names.yaml iyelik: true` olan bileşik ad n'li ek alır (Kule Dibi'ne).
 - Sınıflar: her eğilime 1 `temel`; `gizli` sınıfların `kosul` + `egilimler` (Yankı'nın önerisi) alanı; temel/gizli
   sınıfa tam 2 `evrim` (kademe E). Yetenekler: her eğilime tam 1 `benzersiz` yetenek (`egilim` alanıyla).
 - Anahtarlar Türkçe ASCII: `sahneler`, `paragraflar`, `bildirimler`, `secenekler`, `etiket`, `gerekli`,
@@ -177,6 +189,9 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Daha fazla: İlişkiler (4 eksen, durum, hatıralar, izler; dokununca ayrıntı) ve Küresel Sıralama; Günlük'te bilgi günlüğü.
   Hikaye'de yoldaş görüşleri, savaşta yoldaş satırları, Durum'da sıra/ordu/izler. Bildirim türü `yoldas` (pembe).
 - Gün akışında Hikaye sekmesi `HubPanel` gösterir (fırsat eli, serbest eylemler, kapılar, yolculuk, kamp); Harita ve Günlük Daha fazla'da.
+  Bölüm yapısında: üste operasyon düğmesi ve görev kartları (başka bölge), görevde keşif/Kapı/Kule ve "Üsse dön"; Hikaye'nin
+  üstünde her zaman `ChapterBar` ("Bölüm N · Hedef · Kalan gün"); Görevler'de bölüm hedefi yan görevlerden ayrı; dönüş özeti
+  `UiState.recap` (2 günden uzun aradan sonra).
 - Kaydırmayı azaltan düzen (DECISIONS #124–127): Hikaye yalnızca güncel sahne + alttaki sabit `ActionDock`; önceki sahneler alt
   sayfada. Daha fazla = karo ızgarası + alt sayfalar; Durum = 3 sekme. Semboller `components/Glossary.kt` (her ekranda (i)
   `HelpButton`, Daha fazla → Yardım); bir kerelik ipuçları `TipCard` (`Settings.seenTips`). Yazı boyutu `Settings.textSize`.

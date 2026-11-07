@@ -39,6 +39,8 @@ def quests_of(eid):
 
 def related(a, b):
     if a is None or b is None: return True
+    # Varış sahnesi görevin kendisidir; brifing ve darboğaz bölümün omurgasıdır.
+    if any(x.startswith(('varis_', 'brifing_', 'darbogaz_')) for x in (a, b)): return True
     va, vb = inv.get(a, {}), inv.get(b, {})
     if set(va.get('npc', [])) & set(vb.get('npc', [])): return True
     if b in va.get('seeds', []) or a in vb.get('seeds', []): return True
@@ -86,7 +88,8 @@ for f in sorted(glob.glob(os.path.join(iz, '*.jsonl'))):
         if yeni and r['t'] == 'bolge':
             # Görev başlatan/bitiren eylemler (yolculuk, görev kartı, operasyon, dönüş, kamp sonrası çağrı) ve olayın
             # kendi `bolge` etkisi (varış sahnesiyle görev başlatır) açıklanmış geçiştir.
-            if r['eylem'].startswith('akis:') and not any(r['eylem'].startswith(x) for x in OK_MOVES):
+            # Görevi başlatan/bitiren adım (zorunlu yan görev dahil) açıklanmış geçiştir.
+            if r['eylem'].startswith('akis:') and not r.get('gorev_degisti') and not any(r['eylem'].startswith(x) for x in OK_MOVES):
                 cnt2['b'] += 1
                 if len(ex2['b']) < 5: ex2['b'].append(f"{tag}, Gün {r['gun']}: {r['eylem']} bölgeyi {r['eski']} → {r['yeni']} yaptı")
             continue
@@ -94,6 +97,8 @@ for f in sorted(glob.glob(os.path.join(iz, '*.jsonl'))):
             cnt['b'] += 1; run['b'] += 1; why['b']['bölge olay etkisiyle değişti'] += 1
             if len(ex['b']) < 6: ex['b'].append(f"{tag}, Gün {r['gun']}: `{r['olay']}` bölgeyi {r['eski']} → {r['yeni']} yaptı (yolculuk sahnesi yok)")
     for r in events:
+        if r['olay'].startswith('varis_'):
+            continue  # varış sahnesi görevin ilk sahnesidir, ayrı olay sayılmaz
         eid, v = r['olay'], inv.get(r['olay'], {})
         w = in_window(r)
         if w and not related(eid, r['onceki']) and r['neden'] != 'ana_yay':
@@ -111,7 +116,8 @@ for f in sorted(glob.glob(os.path.join(iz, '*.jsonl'))):
         if r['neden'] == 'ana_yay' and w:
             cnt['d'] += 1; run['d'] += 1; why['d'][f"ana yay gün {r['ana_yay_gun']}"] += 1
             if len(ex['d']) < 6: ex['d'].append(f"{tag}, Gün {r['gun']}: ana yay `{eid}` (gün {r['ana_yay_gun']}) `{w[0]}` görevinin ortasına düştü")
-        if r['arada_akis'] == 0 and not r['savastan_hemen'] and r['onceki'] and not related(eid, r['onceki']):
+        # Aynı görevin (operasyon kuyruğu) ardışık olayları bağlamlıdır.
+        if r['arada_akis'] == 0 and not r['savastan_hemen'] and r['onceki'] and not related(eid, r['onceki']) and r.get('kendi') is not True:
             cnt['e'] += 1; run['e'] += 1; why['e'][r['neden']] += 1
             if len(ex['e']) < 6: ex['e'].append(f"{tag}, Gün {r['gun']}: `{r['onceki']}` → doğrudan `{eid}` ({r['neden']}; ortak NPC/tohum/görev yok)")
         why['neden'][r['neden']] += 1
