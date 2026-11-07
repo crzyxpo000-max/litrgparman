@@ -1,0 +1,32 @@
+# Kule kat anları (DECISIONS #148): ilk temizleyen unvanları (events/98_kule_an_c.yaml, kule_ilk_<kat>).
+# "İlk" unvanlarıdır: Aras önce geçerse (kule_ilk_<kat>_aras) oyuncuya verilmez.
+kule_ilk_kat_15:
+  ad: { tr: "İç Denizi İlk Geçen", en: "First Across the Inner Sea" }
+  aciklama: { tr: "Kule'nin on beşinci katındaki soğuk denizi senden önce geçen olmadı. Tuzu hâlâ dudaklarında.", en: "Nobody crossed the cold sea on the Spire's fifteenth floor before you did. You can still taste the salt." }
+  nadirlik: "nadir"
+  bonus: { end: 2, agi: 2 }
+  ilk: true
+kule_ilk_kat_35:
+  ad: { tr: "Saati İlk Geçen", en: "First Past the Clock" }
+  aciklama: { tr: "Otuz beşinci kattaki dişlilerin arasından ilk sen geçtin. O gün saat bir tik boyunca durdu.", en: "You were the first through the gears on the thirty-fifth floor. That day, the clock stopped for one tick." }
+  nadirlik: "epik"
+  bonus: { agi: 3, per: 3 }
+  ilk: true
+kule_ilk_kat_55:
+  ad: { tr: "Kalıntılardaki İlk İz", en: "First Tracks in the Ruins" }
+  aciklama: { tr: "Elli beşinci kattaki başka dünyaların molozuna ilk ayak izini sen bıraktın. Molozun sahipleri senden önce gelmişti, ama onlar geçemedi.", en: "You left the first footprints in the rubble of other worlds on the fifty-fifth floor. The rubble's owners got there before you. They just never made it through." }
+  nadirlik: "epik"
+  bonus: { wil: 4, wis: 3 }
+  ilk: true
+kule_ilk_kat_75:
+  ad: { tr: "Seradaki İlk Uyanık", en: "First Awake in the Greenhouse" }
+  aciklama: { tr: "Yetmiş beşinci kattaki kozaların arasından uyanık geçen ilk kişi sensin. Bekçiler adını listeye yazdı, ama makaslarını kaldırmadılar.", en: "You're the first to walk through the pods on the seventy-fifth floor awake. The keepers wrote your name on their list. They didn't raise their shears." }
+  nadirlik: "efsanevi"
+  bonus: { end: 5, wil: 5 }
+  ilk: true
+kule_ilk_kat_95:
+  ad: { tr: "Taslağa İlk Yazılan", en: "First Name in the Draft" }
+  aciklama: { tr: "Doksan beşinci katın bitmemiş çizgilerine ilk yazılan ad senin. Silgiyi kimin tuttuğunu hâlâ bilmiyorsun.", en: "Yours is the first name written into the unfinished lines of the ninety-fifth floor. You still don't know who's holding the eraser." }
+  nadirlik: "efsanevi"
+  bonus: { int: 6, per: 6, wis: 4 }
+  ilk: true
