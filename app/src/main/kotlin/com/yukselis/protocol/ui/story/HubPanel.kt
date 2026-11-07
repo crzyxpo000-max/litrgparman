@@ -132,6 +132,12 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
             }
         }
         val tower = hub.tower
+        // Hızlı tırmanış (DECISIONS #147): kademenin altındaki katlar tek yuvada; katları tek tek oynamak hep mümkün.
+        tower?.fastTo?.let { to ->
+            OutlinedButton(onClick = { onAction(HubAction.FastClimb) }, modifier = Modifier.fillMaxWidth()) {
+                OneLine(stringResource(R.string.hub_tower_fast, tower.floor, to), TowerColor)
+            }
+        }
         if (tower != null || hub.gates.isNotEmpty() || hub.travel.isNotEmpty() || hub.canReturn) {
             Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 val pad = PaddingValues(horizontal = 4.dp, vertical = 8.dp)

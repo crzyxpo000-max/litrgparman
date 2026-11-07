@@ -1,7 +1,7 @@
 # İlerleme
 
-Şu an: Boş serbest günler: 128 olay ve gevşek kamp kuralı bitti; hikayesiz gün hedefi için Kule katları kullanıcı kararında. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
-Son commit: 797a3ed 128 bölge olayı (sonraki: kamp kuralı)
+Şu an: Kule hızlı tırmanış bitti; kat anları ölçümü ve Elif denetimi sürüyor. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
+Son commit: 0d67731 kamp kuralı (sonraki: hızlı tırmanış)
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
@@ -32,7 +32,9 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
       tutmadı (kalan açık oynanış başına ~49 gün). Denge: hakimiyet %62,0, son dağılımı en çok 1,3 puan kaydı
 - [x] Kamp kuralı gevşetildi: güvenilen müttefik de kampa gelir (DECISIONS #146); kamp sahnesi 3,4 → 8,75/oynanış,
       hikayesiz gün gürültü içinde
-- [ ] Kalan açık (oynanış başına ~49 gün) için Kule katlarına hikaye anı: kullanıcı kararı
+- [x] Kule hızlı tırmanış: kademenin altındaki katlar tek yuvada, ödüller aynen; `KuleHizliTest` (DECISIONS #147).
+      Hakimiyet %64,3; hikayesiz gün değişmedi
+- [ ] Kule kat anları (ölçüm ve şablon önerisi) ve Elif denetimi: sürüyor
 
 ## Hikaye yapısı değişikliği — bölüm, üs ve görev  ✅ (2026-11-07)
 - [x] Adım 1: olay sırası kaydı (`:tools:simulator:akis`), teşhis `docs/STORY_FLOW.md`, sınıflandırma, plan `docs/CHAPTERS.md`

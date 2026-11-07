@@ -73,6 +73,8 @@ class SystemTexts(private val texts: Map<String, LText>) {
             "atlama_bitti" to setOf("day"),
             "atlama_kesinti" to setOf("day"),
             "atlama_odak_kapi" to emptySet(),
+            // ---- Hızlı tırmanış (DECISIONS #147) ----
+            "kule_hizli" to setOf("from", "to", "n", "damage"),
             // ---- Aşama 7 ----
             "kule_kat" to setOf("n", "level"),
             "kule_kat_temiz" to setOf("n"),

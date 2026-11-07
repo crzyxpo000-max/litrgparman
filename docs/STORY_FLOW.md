@@ -376,3 +376,10 @@ hakimiyet %62,0 (önce %63,4, sınır %60). Sonların payı en çok 1,3 puan kay
 
 Kalan en büyük kaldıraç Kule katları.
 
+### Kule hızlı tırmanış (DECISIONS #147)
+
+Kademenin altındaki katlar tek yuvada geçiliyor; ödüller aynen veriliyor. İnsan benzeri strateji, 20 oynanış: hikayesiz gün
+payı değişmedi (Bölüm 9 %52 → %51, 13 %54 → %56, 15 %56 → %58; gürültü içinde). Kule günleri kısaldı, ama boşalan yuvalar
+keşfe ve savaşa gidiyor. Denge (1000 oynanış): hakimiyet %64,3, Kule 100'e ulaşan %63,4, sonlar %1–%40 içinde (Koruyucu
+%14,2).
+

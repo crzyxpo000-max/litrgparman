@@ -657,7 +657,7 @@ fun contentWarnings(content: Content): List<String> {
     val seeded = content.scenes.values.flatMap { s -> s.choices.flatMap { c -> c.effects + (c.check?.failEffects ?: emptyList()) } }
         .plus(content.awakenings.flatMap { it.effects })
         .filterIsInstance<Effect.PlantSeed>().map { it.eventId }.toSet()
-    content.events.values.filter { it.seedOnly && it.id !in seeded && !it.id.startsWith("dikkat_") && !it.id.startsWith("esik_") && !it.id.startsWith("yozlasma_") && !it.id.startsWith("bildirim_") && !it.id.startsWith(com.yukselis.engine.world.TimeSkip.EVENT_PREFIX) && content.tower?.storyFloors?.containsValue(it.id) != true &&
+    content.events.values.filter { it.seedOnly && it.id !in seeded && !it.id.startsWith("dikkat_") && !it.id.startsWith("esik_") && !it.id.startsWith("yozlasma_") && !it.id.startsWith("bildirim_") && !it.id.startsWith(com.yukselis.engine.world.TimeSkip.EVENT_PREFIX) && it.id != com.yukselis.engine.world.WorldEngine.FAST_EVENT && content.tower?.storyFloors?.containsValue(it.id) != true &&
             it.id !in content.chapters.managed && !it.id.startsWith(com.yukselis.engine.world.ChapterTable.ARRIVAL_PREFIX) }.forEach {
         warnings += "olay ${it.id}: yalnızca tohumla gelir ama hiçbir yerde tohumlanmıyor (ulaşılamaz)"
     }

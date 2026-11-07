@@ -1,0 +1,35 @@
+# Kule hızlı tırmanış özeti (DECISIONS #147): kademenin altındaki katlar tek yuvada geçilince açılır (WorldEngine.fastClimb).
+# Havuzdan gelmez. İlk paragraf motorun özet satırıdır ([Kat a–b temizlendi …]); değişkenler: _kule_hizli_varyant (0–2),
+# _kule_hizli_son (çıkılan son kat).
+olaylar:
+  - id: "kule_hizli"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule", "hizli"]
+    gerilim: 1
+    kart: { tr: "Hızlı tırmanış", en: "Speed climb" }
+    sahne: "kule_hizli_1"
+    sahneler:
+      - id: "kule_hizli_1"
+        yer: "kule_dibi"
+        paragraflar:
+          - metin: { tr: "Katlar birbirine karışıyor. Kapı açılıyor, bir şey sana doğru atılıyor, sonra yerde kalıyor; bir sonraki merdivene çıkarken nefesin bile hızlanmamış oluyor.", en: "The floors blur together. A door opens, something lunges at you, then it's on the ground, and by the next stairwell you're not even breathing hard." }
+            kosul: { degisken_max: { _kule_hizli_varyant: 0 } }
+          - metin: { tr: "Merdivenleri saymayı bir yerde bırakıyorsun. Her kat bir öncekinden biraz daha tuhaf, biraz daha sessiz; sana dokunabilen tek bir şey bile çıkmıyor karşına.", en: "Somewhere along the way you stop counting stairs. Every floor is a little stranger and a little quieter than the last, and nothing on any of them can lay a hand on you." }
+            kosul: { degisken_min: { _kule_hizli_varyant: 1 }, degisken_max: { _kule_hizli_varyant: 1 } }
+          - metin: { tr: "Kule'nin bekçileri seni tanımaya başlamış gibi. Kimi kapının ardında bekliyor, kimi seni görünce geri çekiliyor; hangisi olursa olsun sonuç değişmiyor.", en: "The Spire's guardians seem to be getting to know you. Some wait behind the door, some back off when they see you coming. It ends the same way either way." }
+            kosul: { degisken_min: { _kule_hizli_varyant: 2 } }
+          - metin: { tr: "Aşağıda, Kule'nin dibindeki pazarda biri tahtaya yeni bir kat numarası yazıyor; tebeşiri bitmek üzere.", en: "Down at the market at the foot of the Spire, somebody's chalking a new floor number on the board, and the chalk's almost gone." }
+            kosul: { degisken_max: { _kule_hizli_son: 29 } }
+          - metin: { tr: "Bu yükseklikte Kule'nin pencerelerinden şehir görünmüyor artık; yalnızca bulutlar, bir de bulutların üstünde asılı duran başka bir şehrin silueti.", en: "This high up, the Spire's windows don't show the city anymore. Just clouds, and above the clouds, the outline of some other city hanging there." }
+            kosul: { degisken_min: { _kule_hizli_son: 30 }, degisken_max: { _kule_hizli_son: 69 } }
+          - metin: { tr: "Bu katlarda hava incelmiş, ışık bile ağır geliyor. Sistem pencerende bir satır yanıp sönüyor, sonra kendiliğinden siliniyor.", en: "The air's thin up here, and even the light feels heavy. A line flickers in your System window, then erases itself." }
+            kosul: { degisken_min: { _kule_hizli_son: 70 } }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "hiçbirini hatırlamayacaksın. ben hatırlayacağım. biri tutmalı bu kaydı.", en: "you won't remember any of them. i will. someone has to keep the record." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Bir sonraki merdivene bak", en: "Look up at the next stairwell" }
+            sonraki: "@akis"

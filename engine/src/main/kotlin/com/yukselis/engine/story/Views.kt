@@ -87,7 +87,8 @@ data class OperationChoiceView(val index: Int, val title: String, val region: St
 /** Uzun aradan sonra dönüş özeti (dünya durumu ve önemli seçimler). */
 data class RecapView(val title: String, val lines: List<String>)
 
-data class TowerView(val floor: Int, val level: Int, val story: Boolean)
+/** `fastTo`: hızlı tırmanışla çıkılabilecek son kat (yoksa null; DECISIONS #147). */
+data class TowerView(val floor: Int, val level: Int, val story: Boolean, val fastTo: Int? = null)
 
 // ---- Aşama 7: son ekranı ----
 

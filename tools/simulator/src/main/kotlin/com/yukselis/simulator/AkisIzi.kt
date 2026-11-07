@@ -37,14 +37,20 @@ fun main(args: Array<String>) {
         // en büyük fırsat eli, görevde geçip geçmediği.
         // Hikaye anı: o gün olay ya da Sistem isteminde bir seçim yapıldı (varış ve zaman atlama özeti hariç). Savaş, Ezme ile
         // biten tek satırlık savaş da, hikaye anı sayılmaz.
-        var dEvents = 0; var dFights = 0; var dHand = 0; var dMission = false; var dPhase = ""; var dChapter = 0; var dStory = false
+        var dEvents = 0; var dFights = 0; var dHand = 0; var dMission = false; var dPhase = ""; var dChapter = 0; var dStory = false; var dTower = 0
+        // Bitiş kaydı (yay düğümü erişimi, ör. Elif denetimi): son durum ve oynanış boyunca yoldaş olanlar.
+        var last: WorldState? = null
+        val everCompanion = mutableSetOf<String>()
         fun flushDay(day: Int, skipped: Boolean = false) {
-            lines += """{"t":"gunozet","gun":$day,"bolum":$dChapter,"evre":${q(dPhase)},"olay":$dEvents,"savas":$dFights,"el":$dHand,"gorevde":$dMission,"atla":$skipped,"hikaye":$dStory}"""
-            dEvents = 0; dFights = 0; dHand = 0; dMission = false; dStory = false
+            lines += """{"t":"gunozet","gun":$day,"bolum":$dChapter,"evre":${q(dPhase)},"olay":$dEvents,"savas":$dFights,"el":$dHand,"gorevde":$dMission,"atla":$skipped,"hikaye":$dStory,"kule":$dTower}"""
+            dEvents = 0; dFights = 0; dHand = 0; dMission = false; dStory = false; dTower = 0
         }
         val r = sim.play(seed = 10_000L + i, profile = profile, onStep = { before, after, action ->
             if (after.sceneId == WorldState.HUB && after.mission == null) dHand = maxOf(dHand, after.dayState.hand.size)
             if (after.mission != null) dMission = true
+            if (action == "akis:ClimbTower" || action == "akis:FastClimb") dTower++
+            last = after
+            after.npcs.values.filter { it.companion }.forEach { everCompanion += it.id }
             dPhase = before.chapterPhase.key; dChapter = before.chapter
             if (before.combat != null && after.combat == null) dFights++
             val ev = before.dayState.currentEvent
@@ -94,7 +100,7 @@ fun main(args: Array<String>) {
                     e.mainArcDay != null -> "ana_yay"
                     action.startsWith("akis:Card") -> "kart"
                     action == "akis:Explore" -> "kesif"
-                    action == "akis:ClimbTower" -> "kule"
+                    action == "akis:ClimbTower" || action == "akis:FastClimb" -> "kule"
                     else -> "diger"
                 }
                 val m = after.mission
@@ -135,6 +141,12 @@ fun main(args: Array<String>) {
             """{"t":"oynanis","no":$i,"profil":${q(r.profile)},"son":${q(r.ending)},"gun":${r.day}}""" + "\n" + lines.joinToString("\n") + "\n",
             Charsets.UTF_8,
         )
+        last?.let { s ->
+            val arcFlags = s.flags.filter { it.startsWith("elif_") || it in setOf("insan_ittifaki", "siginak_1_goruldu") }.sorted()
+            File(outDir, "%02d.jsonl".format(i)).appendText(
+                """{"t":"bitis","bayraklar":${arr(arcFlags)},"yoldas_olan":${arr(everCompanion.sorted())},"olu":${arr(s.npcs.values.filter { !it.alive }.map { it.id }.sorted())}}""" + "\n",
+            )
+        }
         println("  oynanış $i (${r.profile}): ${lines.count { it.startsWith("{\"t\":\"olay\"") }} olay, son ${r.ending}")
     }
 }

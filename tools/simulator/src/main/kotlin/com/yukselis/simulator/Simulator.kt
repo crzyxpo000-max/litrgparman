@@ -425,6 +425,8 @@ class Simulator(private val content: Content) {
             return if (rng.nextDouble() < 0.6) HubAction.Travel(hub.travel[rng.nextInt(hub.travel.size)].id) else HubAction.Train
         }
         hub.tower?.takeIf { !cautious }?.let { t ->
+            // Kademenin altındaki katlar varsa gerçek oyuncu hızlı tırmanışı seçer (DECISIONS #147).
+            if (t.fastTo != null && rng.nextDouble() < towerWish) return HubAction.FastClimb
             if (pl(s).level >= t.level && rng.nextDouble() < towerWish) return HubAction.ClimbTower
         }
         if (hub.cards.isNotEmpty() && rng.nextDouble() < 0.6) {

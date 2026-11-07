@@ -251,7 +251,7 @@ class StoryEngine(val content: Content) {
             mustCamp = d.slotsLeft <= 0,
             tower = content.tower?.takeIf { world.towerOpen(state) }?.let { t ->
                 val f = world.nextFloor(state)
-                TowerView(f, t.levelOf(f), f in t.storyFloors)
+                TowerView(f, t.levelOf(f), f in t.storyFloors, world.fastClimbRange(state)?.last)
             },
             atBase = state.mission == null,
             mission = state.mission?.let { content.texts.formatL("gorev_etiket_${it.kind.key}", "region" to world.regionName(it.region))[lang] },
