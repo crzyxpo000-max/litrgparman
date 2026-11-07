@@ -230,7 +230,8 @@ fun StoryScreen(
  */
 @Composable
 private fun ActionDock(resetKey: String, content: @Composable () -> Unit) {
-    val maxHeight = (LocalConfiguration.current.screenHeightDp * 0.5f).dp
+    // Küçük ekran + büyük yazıda dock hikayeyi boğmasın (QA P1-19): en çok ekranın %38'i, fazlası kendi içinde kayar.
+    val maxHeight = (LocalConfiguration.current.screenHeightDp * 0.38f).dp
     val scroll = remember(resetKey) { androidx.compose.foundation.ScrollState(0) }
     Surface(
         color = MaterialTheme.colorScheme.surface,

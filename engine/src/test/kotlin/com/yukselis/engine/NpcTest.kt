@@ -169,6 +169,15 @@ class NpcTest {
     }
 
     @Test
+    fun `korkak ama baglanmis yoldas itaat eder`() {
+        // QA P1-2: esik_itaat'a hiçbir yoldaş ulaşamıyordu (tek korkak yoldaş Mert'in sadakati 5).
+        var s = atHub()
+        s = withRelation(apply(s, Effect.JoinParty("mert_kilic")), "mert_kilic", Relation(fear = 70, bond = NpcEngine.OBEY_BOND + 5))
+        s = nextDay(s)
+        assertEquals("esik_itaat", s.seeds.single { it.npc == "mert_kilic" }.eventId)
+    }
+
+    @Test
     fun `degerleri uzaklasan yoldas ayrilir, digeri fraksiyon degistirir`() {
         var s = apply(atHub(), Effect.JoinParty("deniz_arman"))
         s = s.copy(morality = com.yukselis.engine.core.Morality(-60, 10, -60))

@@ -555,7 +555,10 @@ class NpcEngine(private val content: Content, private val effects: EffectApplier
         // Kişisel görev, kaçış ve itaat sahneleri yanında yürüyen birini anlatır: yalnızca yoldaşlarda.
         if (npc.companion && rel.bond >= 70 && once(ThresholdKind.PERSONAL)) s = plant(s, ThresholdKind.PERSONAL, def.id, 0, 1, null)
         if (npc.companion && rel.fear >= 60 && p[Trait.COURAGE] <= 3 && once(ThresholdKind.FLEE) && once(ThresholdKind.OBEY)) {
-            s = plant(s, if (p[Trait.LOYALTY] >= 6) ThresholdKind.OBEY else ThresholdKind.FLEE, def.id, 0, 1, null)
+            // İtaat: sadık ya da oyuncuya bağlanmış korkak boyun eğer; değilse kaçar. Yalnız sadakate bakınca
+            // hiçbir yoldaş itaat edemiyordu (QA P1-2: tek korkak yoldaş Mert'in sadakati 5).
+            val obeys = p[Trait.LOYALTY] >= 6 || rel.bond >= OBEY_BOND
+            s = plant(s, if (obeys) ThresholdKind.OBEY else ThresholdKind.FLEE, def.id, 0, 1, null)
         }
         if (rel.respect >= 60 && rel.trust <= 0 && once(ThresholdKind.RIVAL)) {
             s = update(plant(s, ThresholdKind.RIVAL, def.id, 1, 3, null), def.id) { it.copy(marks = it.marks + MARK_RIVAL) }
@@ -772,6 +775,8 @@ class NpcEngine(private val content: Content, private val effects: EffectApplier
         const val POWER_GAP = 5
         const val POWER_COOLDOWN = 7
         const val DEPARTURE_DISTANCE = 60
+        /** İtaat eşiği: sadakati düşük korkak yoldaş bu bağlılıkla da boyun eğer (QA P1-2). */
+        const val OBEY_BOND = 40
 
         const val EXEC_BRUTAL = "acimasiz"
         const val EXEC_SPARE = "bagisla"

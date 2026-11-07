@@ -22,6 +22,7 @@ fun main(args: Array<String>) {
             "--ref" -> ref = args.getOrNull(++i) ?: fail("--ref bir sürüm bekliyor")
             "--ayrinti" -> detail = true
             "--olcum" -> measure = true
+            "--kronik-en" -> Checker.allowKronikEn = true
             "-h", "--help" -> { println(HELP); return }
             else -> files += a.replace('\\', '/')
         }

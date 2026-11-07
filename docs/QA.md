@@ -13,17 +13,17 @@ Biçim: **[kimlik] açıklama** — *nerede* — öneri — büyüklük (küçü
 
 ## P0 — çökme, kayıt kaybı, ilerlemeyi engelleyen hata, ulaşılamayan son
 
-- [ ] **P0-1 İlk motor erişiminde 3,9 sn ana iş parçacığı donması (ANR riski).** — *app `YukselisApplication.engine` (`by lazy`), ilk `newGame`/`continueGame`* — Uygulama açılır açılmaz içeriği `Dispatchers.Default`'ta önceden yükle; yüklenene dek başlık düğmelerinde ilerleme göstergesi; motor çağrılarını ana iş parçacığından al. Ölç: Choreographer atlanan kare <10. — orta
+- [x] **P0-1 İlk motor erişiminde 3,9 sn ana iş parçacığı donması (ANR riski).** — *app `YukselisApplication.engine` (`by lazy`), ilk `newGame`/`continueGame`* — Uygulama açılır açılmaz içeriği `Dispatchers.Default`'ta önceden yükle; yüklenene dek başlık düğmelerinde ilerleme göstergesi; motor çağrılarını ana iş parçacığından al. Ölç: Choreographer atlanan kare <10. — orta
 
 Başka P0 bulunmadı: ulaşılamayan son yok, çıkmaz yok, kayıt kaybı yalnız bozuk dosyada (P1-20).
 
 ## P1 — denge, kırık dal, belirgin çeviri/yerelleştirme hatası, kötü arayüz deneyimi
 
 **Mekanik / metin uyuşmazlıkları**
-- [ ] **P1-1 Çift sezgi öneki: ~95 sezgi ekranda "[ALG] [ALG] …" (bir yerde "[BİL] [ALG]").** — *content/events 50_perde2_ana 25, 61_kiyikent_b 26, 71_perde3 22, 80_perde4 18, diğer 4; motor `StoryEngine.insightPrefix`* — Metin başındaki `[XXX] ` öneklerini (TR+EN) toplu sil; validator'a "stat koşullu sezgi `[` ile başlamaz" kuralı. — küçük
-- [ ] **P1-2 `esik_itaat` hiç tetiklenemez.** — *NpcEngine.thresholds: yoldaş + korku ≥60 + cesaret ≤3 + sadakat ≥6; tek aday Mert (cesaret 2, sadakat 5)* — Koşulu `sadakat ≥6 ya da bağlılık ≥40` yap veya Mert'e özel `esik_itaat_mert_kilic`; simülatörde görüldüğünü doğrula. — küçük
-- [ ] **P1-3 Kademe Kırma seçeneğine pratikte erişilemiyor.** — *40_ana_yay `yeni_tavan_1` `kir`: `seviye_min: 14`, Gün 24; Gün 30 p90 Sv 9* — Eşiği 7–8'e indir ya da stat/iz koşuluna çevir; simülatörde `yeni_tavan_kirma` oranını ölç (hedef %15–30). — küçük
-- [ ] **P1-4 Deniz'in ölümü seçimden önce ilan ediliyor.** — *40_ana_yay `bekci_deniz_hat` ¶3 "Yüzünü son görüşün bu oluyor"; `vazgec` Deniz'i yaşatıyor* — Cümleyi ölüm dalına (`bekci_cokus_deniz`) taşı ya da belirsizleştir. — küçük
+- [x] **P1-1 Çift sezgi öneki: ~95 sezgi ekranda "[ALG] [ALG] …" (bir yerde "[BİL] [ALG]").** — *content/events 50_perde2_ana 25, 61_kiyikent_b 26, 71_perde3 22, 80_perde4 18, diğer 4; motor `StoryEngine.insightPrefix`* — Metin başındaki `[XXX] ` öneklerini (TR+EN) toplu sil; validator'a "stat koşullu sezgi `[` ile başlamaz" kuralı. — küçük
+- [x] **P1-2 `esik_itaat` hiç tetiklenemez.** — *NpcEngine.thresholds: yoldaş + korku ≥60 + cesaret ≤3 + sadakat ≥6; tek aday Mert (cesaret 2, sadakat 5)* — Koşulu `sadakat ≥6 ya da bağlılık ≥40` yap veya Mert'e özel `esik_itaat_mert_kilic`; simülatörde görüldüğünü doğrula. — küçük
+- [x] **P1-3 Kademe Kırma seçeneğine pratikte erişilemiyor.** — *40_ana_yay `yeni_tavan_1` `kir`: `seviye_min: 14`, Gün 24; Gün 30 p90 Sv 9* — Eşiği 7–8'e indir ya da stat/iz koşuluna çevir; simülatörde `yeni_tavan_kirma` oranını ölç (hedef %15–30). — küçük
+- [x] **P1-4 Deniz'in ölümü seçimden önce ilan ediliyor.** — *40_ana_yay `bekci_deniz_hat` ¶3 "Yüzünü son görüşün bu oluyor"; `vazgec` Deniz'i yaşatıyor* — Cümleyi ölüm dalına (`bekci_cokus_deniz`) taşı ya da belirsizleştir. — küçük
 - [ ] **P1-5 Kronik satırları gerçekleşmeyen ya da henüz belli olmayan sonuçları anlatıyor; 352 bayrak hiç okunmuyor.** — *ör. `gemi_kule›ezberle`, `perde3_son_ordu›talim`, `ihanet_mert_konus›geri_cek`, `elif_konsey_oylamasi›zorlama`, `vmask_hakli›kir`, `akd_kopru›sebep`, `mkt_kacamak›tehdit`; liste docs/TARAMA.md* — Kronikleri yalnız kesinleşeni anlatacak biçimde yeniden yaz ya da vaadi tutan bayrak + koşullu satır ekle; savaşa bağlı kroniği `kazan` sahnesine taşı; taramaya "kronik vaat ediyor ama bayrak yok" kuralı. — büyük
 - [ ] **P1-6 Vassal sonu Thessar düğümündeki seçimleri yansıtmıyor (B tavanı, Defter Bekçisi, "örnek" maddesi).** — *55_kadimler_thessar `thessar_vassal_teklifi_*` → 81_sonlar `son_vassal`* — Madde seçimine bayrak koy; sona koşullu paragraf ve unvan satırı. — orta
 - [ ] **P1-7 Döngü sonu New Game+ ile çelişiyor ("önceki altı döngünün altısı da hasatla kapandı").** — *`son_dongu`, `yanki_son_sir` (ysr_1 sezgisi, ysr_sir)* — `onceki_oyun ≥1` için ayrı paragraf: önceki döngü oyuncunun bitirdiği sonla anılsın. — küçük
@@ -41,11 +41,11 @@ Başka P0 bulunmadı: ulaşılamayan son yok, çıkmaz yok, kayıt kaybı yalnı
 - [ ] **P1-15 Perde 2–4 Türkçesi USLUP'tan geçmedi (kılavuzun "kaçın" örnekleri birebir duruyor).** — *docs/USLUP.md Parti 2–10* — Üslup partilerini sürdür; sıra önerisi: 50_perde2_ana → 81_sonlar → 80_perde4 → 71_perde3 → kalanlar. — büyük
 - [ ] **P1-16 Türkçe dil hataları.** — *`bekci_cokus_deniz›yanki` "{npc:yanki} tek söz etmeden sustur onu"; `yanki_meydan` "bir sürü balık gibi"; `gecit_korundu` "kimse ona zorlamıyor"; "Hasatın" (5 yer); `fraksiyon_son_pozisyon` "steteskobu"* — Tek tek düzelt (Parti 2 beklemeden). — küçük
 - [ ] **P1-17 Bir yıldan kısa süren dünyada "yıllardır".** — *53_yukselenler_vahit 2188/2481/2542 (`vmask_1`, `vmask_oda›bak_sahte`), 52_lonca_kaya 2247; TR/EN farklı ("for months")* — "aylardır / Entegrasyon'dan beri". — küçük
-- [ ] **P1-18 EN bozuk cümle.** — *`deniz_son_secim_kalir_yarali` ("wider than it is."; "the fire" düşmüş)* — Cümleyi onar. — küçük
+- [x] **P1-18 EN bozuk cümle.** — *`deniz_son_secim_kalir_yarali` ("wider than it is."; "the fire" düşmüş)* — Cümleyi onar. — küçük
 
 **Arayüz ve kayıt**
-- [ ] **P1-19 360dp + yazı ×1,3: seçenek paneli ekranın yarısından fazlası, hikayeye ~4 satır kalıyor.** — *app `ActionDock` (StoryScreen)* — Dock'a en yüksek yükseklik (~%45) + kendi kaydırması; uzun etiketlerde yazı ölçeğini koru. — küçük
-- [ ] **P1-20 Bozuk otomatik kayıt sessizce kayboluyor; Demir Mod'da tek kayıt olduğundan oyun gider.** — *engine `SaveManager.load` null; app `FileSaveStorage.write` yedeksiz* — Yazmadan önce önceki kaydı `auto.prev.json`'a döndür; okuma başarısızsa yedekten aç ve kullanıcıya bildir. — küçük
+- [x] **P1-19 360dp + yazı ×1,3: seçenek paneli ekranın yarısından fazlası, hikayeye ~4 satır kalıyor.** — *app `ActionDock` (StoryScreen)* — Dock'a en yüksek yükseklik (~%45) + kendi kaydırması; uzun etiketlerde yazı ölçeğini koru. — küçük
+- [x] **P1-20 Bozuk otomatik kayıt sessizce kayboluyor; Demir Mod'da tek kayıt olduğundan oyun gider.** — *engine `SaveManager.load` null; app `FileSaveStorage.write` yedeksiz* — Yazmadan önce önceki kaydı `auto.prev.json`'a döndür; okuma başarısızsa yedekten aç ve kullanıcıya bildir. — küçük
 
 ## P2 — cilalama
 
@@ -109,7 +109,7 @@ tanımındadır (2026-11-07); özet:
 | 2 Kod ve motor incelemesi | **bitti** (2026-11-07) |
 | 3 Hikaye ve oynanış örneklemesi | **bitti** (2026-11-07) |
 | 4 Rapor | **bitti** (2026-11-07) — onay bekleniyor |
-| 5 Düzeltme | onay bekleyecek |
+| 5 Düzeltme | sürüyor — kullanıcı onayı: P0 + tüm P1 (2026-11-07) |
 
 Not: QA başlarken Türkçe üslup işinin (docs/USLUP.md) Parti 0 ve 1'i bitti ve commit edildi (`798d990`); Parti 2–10
 QA'dan sonraya kaldı. Ölçümler Parti 1 sonrası içerikle alındı.
@@ -286,3 +286,25 @@ ezici: uzun bir orta yol — grind riski. Mücadele evresi Gün ~1–60 (Gün 30
 sonra p50 hep önde; Perde 2+ düşmanları dünya seviyesine ölçeklendiğinden oyuncu dünyanın ancak 1,1–1,5 katında
 kalıyor, ezme hissi gelmiyor. İmkânsız bölüm yok (çıkmaz 0, tüm sonlar erişilebilir); sıkıcı bölüm riski Perde 3
 (Dikkat tavanda, Yönetmen gerilimi 4'e kilitli) ve Perde 4 (11 zorunlu düğüm).
+
+## Adım 5 — Düzeltme günlüğü
+
+Onay (2026-11-07): **P0 + tüm P1.** Plan: (1) kod/arayüz/küçük içerik, (2) denge P1-9..13 simülatörle,
+(3) yapısal hikaye P1-6, P1-7, P1-8, P1-14, (4) Perde 2–4 Türkçe üslup partileri (P1-15) — aynı geçişte kronik doğruluğu
+(P1-5) ve dil hataları (P1-16, P1-17); ortak brif `docs/qa/uslup_brief.md`, uslup aracı `--kronik-en` ile.
+
+**Parti 1 (kod + küçük içerik):**
+- P0-1: İçerik `GameViewModel.warmUp()` ile ilk kare çizildikten sonra `Dispatchers.Default`'ta yükleniyor; başlık
+  düğmeleri hazır olana dek kapalı ("Dünya yükleniyor…"). Emülatörde "Devam et" sonrası atlanan kare: 222 → 0. (Açılıştaki
+  ~60 karelik ilk kare maliyeti debug Compose'un kendisi; yüklemeyle ilgisiz.)
+- P1-1: 95 sezgiden "[ALG]/[PER]…" önekleri kaldırıldı; validator stat koşullu sezgide stat önekini hata sayıyor.
+- P1-2: İtaat eşiği `sadakat ≥6 ya da bağlılık ≥ OBEY_BOND (40)`; test `korkak ama baglanmis yoldas itaat eder`.
+- P1-3: Kademe Kırma `seviye_min` 14 → 6 (kayıp yazılmış yenilgi sahnesine gider).
+- P1-4: `bekci_deniz_hat` ölüm ilanı belirsizleştirildi (TR+EN).
+- P1-16 (Perde 1 kısmı): `bekci_cokus_deniz›yanki` etiketi düzeltildi; kalanlar üslup partilerinde.
+- P1-18: `deniz_son_secim_kalir_yarali` EN cümlesi onarıldı.
+- P1-19: `ActionDock` en yüksek yükseklik %50 → %38.
+- P1-20: `SaveManager.autosave` önceki sağlam kaydı `auto.prev`'e döndürüyor; otomatik kayıt bozuksa ondan açılıyor;
+  test `bozukOtomatikKayitOncekindenAcilir`.
+- Not: Parti 1 (üslup) commit'inde bir test (`yeniOyunBaslangicSahnesindeBaslar`, prolog etiket metni) kırık kalmıştı —
+  çıktı süzgecim kaçırdı; beklenen metin güncellendi.

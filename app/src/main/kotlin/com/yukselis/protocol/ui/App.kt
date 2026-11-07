@@ -86,6 +86,11 @@ private enum class Tab(val label: Int, val icon: ImageVector, val grant: String?
 @Composable
 fun App(viewModel: GameViewModel) {
     val ui by viewModel.ui.collectAsStateWithLifecycle()
+    // İlk kare çizildikten sonra içeriği arka planda yüklemeye başla (QA P0-1).
+    androidx.compose.runtime.LaunchedEffect(Unit) {
+        androidx.compose.runtime.withFrameNanos { }
+        viewModel.warmUp()
+    }
     ProvideLanguage(ui.lang) {
         val dark = when (ui.settings.theme) {
             ThemeMode.SYSTEM -> isSystemInDarkTheme()
@@ -117,6 +122,7 @@ fun App(viewModel: GameViewModel) {
                         onLanguage = viewModel::setLanguage,
                         theme = ui.settings.theme,
                         onTheme = { mode -> viewModel.updateSettings { it.copy(theme = mode) } },
+                        ready = ui.engineReady,
                     )
                 }
             }

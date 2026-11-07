@@ -50,6 +50,7 @@ fun TitleScreen(
     onLanguage: (Lang) -> Unit,
     theme: ThemeMode,
     onTheme: (ThemeMode) -> Unit,
+    ready: Boolean = true,
 ) {
     val defaultName = stringResource(R.string.default_player_name)
     var name by rememberSaveable { mutableStateOf("") }
@@ -89,7 +90,7 @@ fun TitleScreen(
 
         Spacer(Modifier.height(40.dp))
         if (autosave != null) {
-            Button(onClick = onContinue, modifier = Modifier.fillMaxWidth()) {
+            Button(onClick = onContinue, enabled = ready, modifier = Modifier.fillMaxWidth()) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(stringResource(R.string.continue_game))
                     Text(
@@ -136,9 +137,17 @@ fun TitleScreen(
         }
         val start = { onNewGame(name.ifBlank { defaultName }, ironman, newGamePlus && newGamePlusUnlocked) }
         if (autosave != null) {
-            OutlinedButton(onClick = start, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.start)) }
+            OutlinedButton(onClick = start, enabled = ready, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.start)) }
         } else {
-            Button(onClick = start, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.start)) }
+            Button(onClick = start, enabled = ready, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.start)) }
+        }
+        if (!ready) {
+            Text(
+                text = stringResource(R.string.loading_content),
+                style = GameType.system,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(top = 8.dp),
+            )
         }
 
         Spacer(Modifier.height(32.dp))

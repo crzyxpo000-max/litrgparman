@@ -99,6 +99,21 @@ class CheckerTest {
     }
 
     @Test
+    fun `kronik en yalniz izinle degisebilir`() {
+        val old = "secenekler:\n  - id: \"a\"\n    kronik: { tr: \"Kaçtın.\", en: \"You ran.\" }\n"
+        val new = "secenekler:\n  - id: \"a\"\n    kronik: { tr: \"Kaçıp gittin.\", en: \"You ran for it.\" }\n"
+        try {
+            assertTrue(errors(Checker.compare("a.yaml", old, new)).isNotEmpty())
+            Checker.allowKronikEn = true
+            assertEquals(emptyList<String>(), errors(Checker.compare("a.yaml", old, new)))
+            val para = "p:\n  - { tr: \"A.\", en: \"A.\" }\n"
+            assertTrue(errors(Checker.compare("a.yaml", para, para.replace("en: \"A.\"", "en: \"B.\""))).isNotEmpty())
+        } finally {
+            Checker.allowKronikEn = false
+        }
+    }
+
+    @Test
     fun `belirteç ayrıştırma`() {
         assertEquals(listOf("npc:@", "npc:deniz_arman", "oyuncu"), Checker.tokens("{oyuncu|in} {npc:deniz_arman|tam} {npc:@}"))
     }

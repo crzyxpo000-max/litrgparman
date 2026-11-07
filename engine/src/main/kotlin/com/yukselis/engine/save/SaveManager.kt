@@ -36,7 +36,14 @@ class SaveManager(
     private val storage: SaveStorage,
     private val now: () -> Long = System::currentTimeMillis,
 ) {
-    fun autosave(state: WorldState) = storage.write(AUTO, SaveCodec.encode(state, now()))
+    /**
+     * Otomatik kayıt. Yazmadan önce sağlam olan önceki otomatik kayıt [AUTO_PREV]'e döndürülür: dosya bir gün
+     * bozulursa (Demir Mod'da tek kayıt) oyun kaybolmaz, bir önceki adımdan açılır (QA P1-20).
+     */
+    fun autosave(state: WorldState) {
+        storage.read(AUTO)?.takeIf { runCatching { SaveCodec.decode(it) }.isSuccess }?.let { storage.write(AUTO_PREV, it) }
+        storage.write(AUTO, SaveCodec.encode(state, now()))
+    }
 
     fun save(slot: String, state: WorldState) {
         require(slot in MANUAL) { "Geçersiz slot: $slot" }
@@ -66,13 +73,19 @@ class SaveManager(
 
     fun allSlots(): List<Pair<String, SlotInfo?>> = (listOf(AUTO) + MANUAL).map { it to info(it) }
 
-    fun delete(slot: String) = storage.delete(slot)
+    fun delete(slot: String) {
+        storage.delete(slot)
+        if (slot == AUTO) storage.delete(AUTO_PREV)
+    }
 
     private fun read(slot: String): SaveData? =
         storage.read(slot)?.let { runCatching { SaveCodec.decode(it) }.getOrNull() }
+            ?: if (slot == AUTO) storage.read(AUTO_PREV)?.let { runCatching { SaveCodec.decode(it) }.getOrNull() } else null
 
     companion object {
         const val AUTO = "auto"
+        /** Bir önceki sağlam otomatik kayıt; yalnız otomatik kayıt okunamazsa kullanılır. */
+        const val AUTO_PREV = "auto.prev"
         val MANUAL = listOf("slot1", "slot2", "slot3")
     }
 }

@@ -44,7 +44,7 @@ class StoryEngineTest {
         assertEquals("Kıyıkent İskelesi", v.placeName)
         assertTrue(v.current.paragraphs.first().contains("Deniz"))
         assertEquals(3, v.choices.size)
-        assertEquals("Deniz'in elini sıkıca tut", v.choices.first().label)
+        assertEquals("Deniz'in elini sıkı sıkı tut", v.choices.first().label)
     }
 
     @Test
@@ -207,6 +207,26 @@ class SaveTest {
         val storage = InMemorySaveStorage()
         storage.write("slot1", "{bozuk")
         assertNull(SaveManager(storage).load("slot1"))
+    }
+
+    @Test
+    fun bozukOtomatikKayitOncekindenAcilir() {
+        // QA P1-20: otomatik kayıt bozulursa (Demir Mod'da tek kayıt) bir önceki sağlam kayıttan açılır.
+        val storage = InMemorySaveStorage()
+        val saves = SaveManager(storage)
+        val engine = this.engine
+        val first = engine.newGame("Ece", com.yukselis.engine.core.GameMode.IRONMAN, seed = 3)
+        saves.autosave(first)
+        saves.autosave(first.copy(day = 5))
+        storage.write(SaveManager.AUTO, "{bozuk")
+        val back = saves.load(SaveManager.AUTO)
+        assertEquals(0, back?.day)
+        assertEquals("Ece", saves.info(SaveManager.AUTO)?.playerName)
+        // Bozuk dosya bir sonraki otomatik kayıtta yedeğin üstüne yazılmaz.
+        saves.autosave(first.copy(day = 6))
+        assertEquals(0, SaveCodec.decode(storage.read(SaveManager.AUTO_PREV)!!).state.day)
+        saves.delete(SaveManager.AUTO)
+        assertNull(saves.load(SaveManager.AUTO))
     }
 }
 

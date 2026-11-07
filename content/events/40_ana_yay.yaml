@@ -439,7 +439,7 @@ olaylar:
             sonraki: "yeni_tavan_koru"
           - id: "kir"
             etiket: { tr: "Kademe Kırma'yı dene: ilk sen vur", en: "Go for a Gap Break. Hit it first" }
-            gerekli: { seviye_min: 14 }
+            gerekli: { seviye_min: 6 }
             etkiler:
               - bolge: "ogretici_orman"
               - ahlak: { duzen: -4, insanlik: -1 }
@@ -811,7 +811,7 @@ olaylar:
         paragraflar:
           - { tr: "{npc:deniz_arman} sen ağzını açamadan önüne geçiyor. \"Hat bende, çekirdek sende,\" diyor. \"Tıpkı vapurdaki gibi: sen hep önce inersin.\"", en: "{npc:deniz_arman} steps in front of you before you can say anything. \"I've got the line, you've got the core,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}. \"Just like the ferry: you always get off first.\"" }
           - { tr: "Bekçinin kollarındaki pencereler bıçak gibi sıralanıyor. {npc:deniz_arman|in} arkasında kalabalık, önünde dev var; arada eski, ezik bir kalkandan başka hiçbir şey yok.", en: "The windows on the Warden's arms fan out into blades. Behind {npc:deniz_arman}, the crowd; in front, the giant. Between them, nothing but one beat-up old shield." }
-          - { tr: "Omzunun üstünden bir kez dönüp bakıyor. \"Bak, tanıyamayacağım bir şeye dönüşme, tamam mı?\" Yüzünü son görüşün bu oluyor.", en: "{zamir:deniz_arman|b} glance{zamir:deniz_arman|s} back over {zamir:deniz_arman|onun} shoulder, just once. \"Hey, don't turn into something I wouldn't recognize, okay?\" It's the last time you see {zamir:deniz_arman|onun} face." }
+          - { tr: "Omzunun üstünden bir kez dönüp bakıyor. \"Bak, tanıyamayacağım bir şeye dönüşme, tamam mı?\" O yüzü bir daha böyle görüp görmeyeceğini bilmiyorsun.", en: "{zamir:deniz_arman|b} glance{zamir:deniz_arman|s} back over {zamir:deniz_arman|onun} shoulder, just once. \"Hey, don't turn into something I wouldn't recognize, okay?\" You don't know if you'll ever see {zamir:deniz_arman|onun} face like this again." }
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
             metin: { tr: "hesapladım. hat dayanır, o dayanmaz. koş.", en: "i ran the numbers. the line holds, they don't. run." }
@@ -863,7 +863,7 @@ olaylar:
               - gorev: { ogretici_cikis: "tamam" }
             sonraki: "perde1_son"
           - id: "yanki"
-            etiket: { tr: "{npc:yanki} tek söz etmeden sustur onu", en: "Shut {npc:yanki} up before it says a word" }
+            etiket: { tr: "{npc:yanki|i} daha tek söz etmeden sustur", en: "Shut {npc:yanki} up before it says a word" }
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - ahlak: { insanlik: 3 }

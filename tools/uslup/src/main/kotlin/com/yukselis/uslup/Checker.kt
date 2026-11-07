@@ -123,8 +123,19 @@ object Checker {
 
     private val trLiteral = Regex("\\btr:\\s*\"(?:[^\"\\\\]|\\\\.)*\"")
 
+    private val enLiteral = Regex("\\ben:\\s*\"(?:[^\"\\\\]|\\\\.)*\"")
+
+    /**
+     * Kronik satırlarında `en` de değişebilir (QA P1-5: kronik yalnız kesinleşeni anlatır; iki dil birlikte düzeltilir).
+     * `--kronik-en` ile açılır; belirteç kümesi yine korunmalı.
+     */
+    var allowKronikEn = false
+
     /** Satırdaki `tr: "..."` değerlerini maskeler; geri kalan her şey (en, anahtarlar, yorumlar) aynı kalmalı. */
-    fun maskTr(line: String) = trLiteral.replace(line, "tr: \"…\"")
+    fun maskTr(line: String): String {
+        val m = trLiteral.replace(line, "tr: \"…\"")
+        return if (allowKronikEn && "kronik:" in line) enLiteral.replace(m, "en: \"…\"") else m
+    }
 
     fun compare(file: String, oldText: String, newText: String): FileReport {
         val findings = mutableListOf<Finding>()
@@ -203,6 +214,9 @@ object Checker {
                     val p = if (path.isEmpty()) k else "$path.$k"
                     if (k == "tr" && ov is JsonPrimitive && nv is JsonPrimitive) {
                         pairs += Triple(p, ov.content, nv.content)
+                    } else if (k == "en" && allowKronikEn && ".kronik" in p && ov is JsonPrimitive && nv is JsonPrimitive) {
+                        if (tokens(ov.content) != tokens(nv.content)) findings += Finding(true, p, "kronik en belirteçleri değişmiş", nv.content)
+                        if (nv.content.isBlank()) findings += Finding(true, p, "kronik en boş", nv.content)
                     } else {
                         walk(ov, nv, p, findings, pairs)
                     }

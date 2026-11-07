@@ -46,6 +46,8 @@ enum class UiMessage { SAVED, LOADED, LOAD_FAILED, IRONMAN_NO_MANUAL, ACTION_FAI
 
 data class UiState(
     val lang: Lang,
+    /** İçerik yüklendi; başlık ekranının düğmeleri ancak o zaman açılır (QA P0-1). */
+    val engineReady: Boolean = false,
     val settings: Settings,
     val game: WorldState? = null,
     val scene: SceneView? = null,
@@ -101,7 +103,23 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         refreshSlots()
     }
 
+    private var warming = false
+
+    /**
+     * İçeriği (~6,6 MB YAML) arka planda yükler; ana iş parçacığı hazır olmadan motora dokunmaz (QA P0-1).
+     * Arayüz ilk kare çizildikten sonra çağırır: açılışla aynı anda yüklenince ilk kare yavaşlıyordu.
+     */
+    fun warmUp() {
+        if (warming) return
+        warming = true
+        viewModelScope.launch(Dispatchers.Default) {
+            runCatching { app.engine }.onFailure { Log.e(TAG, "İçerik yüklenemedi", it) }
+            _ui.update { it.copy(engineReady = true) }
+        }
+    }
+
     fun newGame(name: String, ironman: Boolean, newGamePlus: Boolean = false) {
+        if (!_ui.value.engineReady) return
         stopAuto()
         app.saves.clearCheckpoint()
         val mode = if (ironman) GameMode.IRONMAN else GameMode.NORMAL
@@ -296,6 +314,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun load(slot: String) {
+        if (!_ui.value.engineReady) return
         stopAuto()
         val state = app.saves.load(slot)?.let { runCatching { app.engine.sanitize(it) }.getOrNull() }
         if (state == null) {
