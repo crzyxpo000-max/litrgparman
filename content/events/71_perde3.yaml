@@ -857,7 +857,7 @@ olaylar:
               - gizle: 10
               - bayrak: "yol_gizlendi"
               - ahlak: { duzen: -2, insanlik: 1 }
-              - tohum: { olay: "p3_siralama_zirvesi", gecikme: { min: 4, max: 9 } }
+              - tohum: { olay: "p3_siralama_zirvesi", gecikme: { min: 4, max: 9 }, hatirlatma: { tr: "Yolun oluştuğu geceden beri sıralamanın tepesi seni konuşuyor.", en: "The top of the ranking has been talking about you since the night your Path formed." } }
             sonraki: "@akis"
           - id: "aciga"
             tur: "aciga_vur"
@@ -869,7 +869,7 @@ olaylar:
               - dikkat: 8
               - ahlak: { duzen: 2, insanlik: -2 }
               - itibar: { lonca: 6, yukselenler: 8, siginak: -2, sessiz_ag: 3 }
-              - tohum: { olay: "p3_siralama_zirvesi", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "p3_siralama_zirvesi", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Yolun oluştuğu geceden beri sıralamanın tepesi seni konuşuyor.", en: "The top of the ranking has been talking about you since the night your Path formed." } }
             sonraki: "@akis"
           - id: "deniz"
             etiket: { tr: "\"Hâlâ benim. Söz.\"", en: "\"Still me. I promise.\"" }
@@ -879,7 +879,7 @@ olaylar:
               - ahlak: { insanlik: 4, merhamet: 1 }
               - iliski: { deniz_arman: { guven: 10, baglilik: 8 } }
               - hafiza: { npc: "deniz_arman", id: "olay:yol_olusumu", agirlik: 40 }
-              - tohum: { olay: "p3_siralama_zirvesi", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "p3_siralama_zirvesi", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Yolun oluştuğu geceden beri sıralamanın tepesi seni konuşuyor.", en: "The top of the ranking has been talking about you since the night your Path formed." } }
             sonraki: "@akis"
           - id: "yanki_tesekkur"
             etiket: { tr: "{npc:yanki|e} teşekkür et", en: "Thank {npc:yanki}" }
@@ -888,7 +888,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: -1, merhamet: 2 }
               - iliski: { yanki: { guven: 10, baglilik: 6 } }
-              - tohum: { olay: "p3_siralama_zirvesi", gecikme: { min: 4, max: 9 } }
+              - tohum: { olay: "p3_siralama_zirvesi", gecikme: { min: 4, max: 9 }, hatirlatma: { tr: "Yolun oluştuğu geceden beri sıralamanın tepesi seni konuşuyor.", en: "The top of the ranking has been talking about you since the night your Path formed." } }
             sonraki: "@akis"
 
   # ================================================================== BÜYÜK İHANET (ana yay, gün 300)
@@ -1750,7 +1750,7 @@ olaylar:
               - bilgi: "hasat_defteri"
               - degisken: { kadim_tehdit: -12 }
               - iliski: { thessar: { saygi: 10, guven: -5, korku: 6 } }
-              - tohum: { olay: "ihanet_sonrasi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "ihanet_sonrasi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Ortak Masa'daki o günün ardından masada bir sandalye boş kaldı.", en: "After that day at the Common Table, one chair stayed empty." } }
             sonraki: "buyuk_ihanet_sonra"
 
       - id: "ihanet_thessar_yenilgi"
@@ -2261,7 +2261,7 @@ olaylar:
               - dikkat: 5
               - ahlak: { duzen: 3, insanlik: 3 }
               - itibar: { siginak: 4, lonca: 4, sessiz_ag: 4 }
-              - tohum: { olay: "ihanet_sonrasi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "ihanet_sonrasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Ortak Masa'daki o günün ardından masada bir sandalye boş kaldı.", en: "After that day at the Common Table, one chair stayed empty." } }
             sonraki: "@akis"
           - id: "sus"
             tur: "gizle"
@@ -2270,7 +2270,7 @@ olaylar:
             etkiler:
               - gizle: 6
               - ahlak: { duzen: -2 }
-              - tohum: { olay: "ihanet_sonrasi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "ihanet_sonrasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Ortak Masa'daki o günün ardından masada bir sandalye boş kaldı.", en: "After that day at the Common Table, one chair stayed empty." } }
             sonraki: "@akis"
           - id: "bayrak"
             etiket: { tr: "\"Bir daha olmayacak.\" Bayrağının altına çağır", en: "\"Never again.\" Call them under your banner" }
@@ -2278,7 +2278,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 4, merhamet: 1 }
               - ordu_kazan: 40
-              - tohum: { olay: "ihanet_sonrasi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "ihanet_sonrasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Ortak Masa'daki o günün ardından masada bir sandalye boş kaldı.", en: "After that day at the Common Table, one chair stayed empty." } }
             sonraki: "@akis"
           - id: "korfez"
             etiket: { tr: "Kimseye bir şey deme; körfeze bak", en: "Don't say anything. Look out at the bay" }
@@ -2286,7 +2286,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 2, merhamet: 1 }
               - iliski: { yanki: { guven: 4, baglilik: 4 } }
-              - tohum: { olay: "ihanet_sonrasi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "ihanet_sonrasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Ortak Masa'daki o günün ardından masada bir sandalye boş kaldı.", en: "After that day at the Common Table, one chair stayed empty." } }
             sonraki: "@akis"
 
   # ================================================================== İHANETİN ARDINDAN (tohum)
@@ -2328,7 +2328,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 3 }
               - itibar: { siginak: 2, lonca: 2, sessiz_ag: 2 }
-              - tohum: { olay: "p3_kordon_geri", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "p3_kordon_geri", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Boş sandalyeden sonra şehir kendine yeni bir iş buldu.", en: "After the empty chair, the city found itself something new to do." } }
             sonraki: "ihanet_sonrasi_2"
           - id: "otur"
             tur: "aciga_vur"
@@ -2498,7 +2498,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 4, insanlik: 4 }
               - degisken: { hayatta_kalan: 2 }
-              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 2, max: 6 } }
+              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 2, max: 6 }, hatirlatma: { tr: "Filonun ilk ışığını gördüğün geceden beri kapılar sıklaştı.", en: "Gates have been coming faster since the night you first saw the fleet's light." } }
             sonraki: "@akis"
 
       - id: "perde3_son_ordu"
@@ -2523,7 +2523,7 @@ olaylar:
             kronik: { tr: "Ordunu son bir gece için evlerine yolladın; sabah dönmelerini istedin ve onlara güvendin.", en: "You sent your army home for one last night. You asked them back by morning, and you trusted them to come." }
             etkiler:
               - ahlak: { merhamet: 4, insanlik: 2 }
-              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 2, max: 6 } }
+              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 2, max: 6 }, hatirlatma: { tr: "Filonun ilk ışığını gördüğün geceden beri kapılar sıklaştı.", en: "Gates have been coming faster since the night you first saw the fleet's light." } }
             sonraki: "@akis"
 
       - id: "perde3_son_gece"
@@ -2549,7 +2549,7 @@ olaylar:
             kronik: { tr: "Filonun göründüğü gece tek kelime etmeden gökyüzünü izledin; o sessizlik söyleyebileceğin her sözden uzun sürdü.", en: "The night the fleet appeared, you watched the sky without a word. That silence outlasted anything you could have said." }
             etkiler:
               - ahlak: { insanlik: 2, duzen: 1 }
-              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 2, max: 6 } }
+              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 2, max: 6 }, hatirlatma: { tr: "Filonun ilk ışığını gördüğün geceden beri kapılar sıklaştı.", en: "Gates have been coming faster since the night you first saw the fleet's light." } }
             sonraki: "@akis"
 
       - id: "perde3_son_kule"
@@ -2584,7 +2584,7 @@ olaylar:
             kronik: { tr: "Filoya bir kez bakıp şehrine indin; gözünü gökten çekip yere, insanlarına çevirdin.", en: "You took one look at the fleet and went back down to your city. You turned your eyes from the sky to the ground, and to your people." }
             etkiler:
               - ahlak: { insanlik: 3, merhamet: 2 }
-              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 2, max: 6 } }
+              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 2, max: 6 }, hatirlatma: { tr: "Filonun ilk ışığını gördüğün geceden beri kapılar sıklaştı.", en: "Gates have been coming faster since the night you first saw the fleet's light." } }
             sonraki: "@akis"
 
       - id: "perde3_son_kule_yanki"
@@ -2644,7 +2644,7 @@ olaylar:
               - ahlak: { insanlik: -2 }
               - iliski: { yanki: { guven: 6, saygi: 4 } }
               - degisken: { kadim_tehdit: -2 }
-              - tohum: { olay: "p3_siralama_zirvesi", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "p3_siralama_zirvesi", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Ölçücüye verdiğin rakamlar sıralamanın tepesine kadar gitmiş.", en: "The numbers you gave the measurer went all the way to the top of the ranking." } }
             sonraki: "dikkat_75_p3_yanlis"
           - id: "cetvel"
             etiket: { tr: "Cetvelini kır", en: "Break its measuring rod" }
@@ -2768,7 +2768,7 @@ olaylar:
               - gizle: 20
               - iliski: { yanki: { guven: -30, korku: 20 } }
               - hafiza: { npc: "yanki", id: "olay:dikkat_100_p3", agirlik: -70 }
-              - tohum: { olay: "p3_siralama_zirvesi", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "p3_siralama_zirvesi", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Sistem'in yamasından sonra sıralamanın tepesindekiler seni gözlerinden kaçırmıyor.", en: "Since the System's patch, the people at the top of the ranking haven't taken their eyes off you." } }
             sonraki: "dikkat_100_p3_ele_ver"
 
       - id: "dikkat_100_p3_zafer"
@@ -2904,7 +2904,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 10, guven: 6 } }
               - ordu_kazan: 30
               - bayrak: "p3_bayrak_kuruldu"
-              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 5, max: 12 } }
+              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 5, max: 12 }, hatirlatma: { tr: "Kapıdaki kuyruğun sorunu şehrin her yanına yayılmak üzere.", en: "The problem with the line at the Gate is about to spread all over the city." } }
             sonraki: "p3_bayrak_tore"
           - id: "reddet"
             etiket: { tr: "\"Bana ordu lazım değil. Evlerinize dönün.\"", en: "\"I don't need an army. Go home.\"" }
@@ -2948,7 +2948,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: -2, insanlik: -1 }
               - degisken: { kadim_tehdit: -2 }
-              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 5, max: 12 } }
+              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 5, max: 12 }, hatirlatma: { tr: "Kapıdaki kuyruğun sorunu şehrin her yanına yayılmak üzere.", en: "The problem with the line at the Gate is about to spread all over the city." } }
             sonraki: "@akis"
           - id: "muhbir_ac"
             tur: "aciga_vur"
@@ -2970,7 +2970,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 3, duzen: -1 }
               - ordu: { lonca_avcisi: 15 }
-              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 5, max: 12 } }
+              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 5, max: 12 }, hatirlatma: { tr: "Kapıdaki kuyruğun sorunu şehrin her yanına yayılmak üzere.", en: "The problem with the line at the Gate is about to spread all over the city." } }
             sonraki: "@akis"
           - id: "sert"
             etiket: { tr: "Kapıyı kapat. Bu kez kesin", en: "Shut the door. For real this time" }
@@ -3011,7 +3011,7 @@ olaylar:
               - ahlak: { merhamet: 5, duzen: -3 }
               - bayrak: "p3_ellinci_kiz"
               - dikkat: 3
-              - tohum: { olay: "p3_siralama_zirvesi", gecikme: { min: 6, max: 14 } }
+              - tohum: { olay: "p3_siralama_zirvesi", gecikme: { min: 6, max: 14 }, hatirlatma: { tr: "Ellinci kattaki kızla birlikte girdiğin kapı sıralamanın tepesine bir haber göndermiş.", en: "The door you went through with that girl on the fiftieth floor sent word to the top of the ranking." } }
             sonraki: "p3_ellinciler_ic"
           - id: "tabela"
             tur: "gosteris"
@@ -3100,7 +3100,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 4, insanlik: 4 }
               - itibar: { siginak: 5 }
-              - tohum: { olay: "p3_kademe_borsasi", gecikme: { min: 4, max: 10 } }
+              - tohum: { olay: "p3_kademe_borsasi", gecikme: { min: 4, max: 10 }, hatirlatma: { tr: "Ellinci kattakilerle bir gün geçirdiğinden beri kademelerin fiyatını merak ediyorsun.", en: "Since you spent a day with the fiftieth-floor crowd, you've been wondering what a Grade goes for." } }
             sonraki: "@akis"
           - id: "ortaya_cik"
             tur: "aciga_vur"
@@ -3208,7 +3208,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 3 }
               - itibar: { siginak: 4, lonca: 4 }
-              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 4, max: 10 } }
+              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 4, max: 10 }, hatirlatma: { tr: "İlk Ona Masası'nda üstlendiğin yük ağırlaşmak üzere.", en: "The load you took on at the Top Ten table is about to get heavier." } }
             sonraki: "@akis"
           - id: "aras_pesinden"
             etiket: { tr: "{npc:aras_kurt|in} arkasından seslen: \"Yakışıyor.\"", en: "Call after {npc:aras_kurt}: \"Looks great on you.\"" }
@@ -3228,7 +3228,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 3, duzen: 2 }
               - degisken: { hayatta_kalan: 1 }
-              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 4, max: 10 } }
+              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 4, max: 10 }, hatirlatma: { tr: "İlk Ona Masası'nda üstlendiğin yük ağırlaşmak üzere.", en: "The load you took on at the Top Ten table is about to get heavier." } }
             sonraki: "@akis"
           - id: "kendiniz"
             etiket: { tr: "\"Kendiniz tutun. Size öğretirim.\"", en: "\"Hold it yourselves. I'll teach you how.\"" }
@@ -3342,7 +3342,7 @@ olaylar:
               - bayrak: "p3_mercan_cocuk"
               - itibar: { siginak: 6 }
               - iliski: { elif_sari: { guven: 8, baglilik: 5 } }
-              - tohum: { olay: "p3_kademe_ailesi", gecikme: { min: 5, max: 12 } }
+              - tohum: { olay: "p3_kademe_ailesi", gecikme: { min: 5, max: 12 }, hatirlatma: { tr: "Geri dönenlerden birinin çocuğu aklından çıkmıyor.", en: "You can't get the kid of one of the returnees out of your head." } }
             sonraki: "@akis"
           - id: "geri"
             etiket: { tr: "Çocuğu kendi dünyasına geri gönder", en: "Send the kid back to her own world" }
@@ -3468,7 +3468,7 @@ olaylar:
               - ahlak: { merhamet: 5, insanlik: 2 }
               - itibar: { siginak: 6 }
               - efsane: "canavari_bagisladi"
-              - tohum: { olay: "p3_heykel", gecikme: { min: 4, max: 10 } }
+              - tohum: { olay: "p3_heykel", gecikme: { min: 4, max: 10 }, hatirlatma: { tr: "Körfezdeki sırtın hikâyesi taşa dönüşmüş.", en: "The story of the ridge in the bay has turned to stone." } }
             sonraki: "@akis"
 
       - id: "p3_leviatan_zafer"
@@ -3484,7 +3484,7 @@ olaylar:
               - degisken: { hayatta_kalan: 2 }
               - itibar: { siginak: 5 }
               - esya: { leviatan_pulu: 2 }
-              - tohum: { olay: "p3_heykel", gecikme: { min: 4, max: 10 } }
+              - tohum: { olay: "p3_heykel", gecikme: { min: 4, max: 10 }, hatirlatma: { tr: "Körfezdeki sırtın hikâyesi taşa dönüşmüş.", en: "The story of the ridge in the bay has turned to stone." } }
             sonraki: "@akis"
           - id: "ganimet"
             etiket: { tr: "Pulları ve kemikleri Lonca'ya sat", en: "Sell the scales and bones to the Guild" }
@@ -3510,7 +3510,7 @@ olaylar:
             etiket: { tr: "\"Geri gelecek. Ben de.\"", en: "\"It'll be back. So will I.\"" }
             etkiler:
               - ahlak: { duzen: 2 }
-              - tohum: { olay: "p3_heykel", gecikme: { min: 4, max: 10 } }
+              - tohum: { olay: "p3_heykel", gecikme: { min: 4, max: 10 }, hatirlatma: { tr: "Körfezdeki sırtın hikâyesi taşa dönüşmüş.", en: "The story of the ridge in the bay has turned to stone." } }
             sonraki: "@akis"
 
   # ---------------------------------------------------------------- Kademe borsası (Sanayi)
@@ -3563,7 +3563,7 @@ olaylar:
               - bayrak: "p3_borsa_ortagi"
               - itibar: { lonca: 6 }
               - iliski: { kaya_demir: { saygi: 6 } }
-              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 4, max: 10 } }
+              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 4, max: 10 }, hatirlatma: { tr: "Kademe Borsası'nın büyüyen işi şehre pahalıya patlayabilir.", en: "The Grade Exchange's growing business might cost the city dearly." } }
             sonraki: "@akis"
 
       - id: "p3_borsa_kapi"
@@ -3583,7 +3583,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 4, insanlik: 4 }
               - kredi: -300
-              - tohum: { olay: "p3_kademe_ailesi", gecikme: { min: 3, max: 9 } }
+              - tohum: { olay: "p3_kademe_ailesi", gecikme: { min: 3, max: 9 }, hatirlatma: { tr: "Kademe Borsası'ndaki o oğlan aklında.", en: "That boy from the Grade Exchange is on your mind." } }
             sonraki: "@akis"
 
       - id: "p3_borsa_kapanis"
@@ -3648,7 +3648,7 @@ olaylar:
             etiket: { tr: "Seni ilgilendirmez; yürü git", en: "Not your business. Keep walking" }
             etkiler:
               - ahlak: { merhamet: -2, duzen: -1 }
-              - tohum: { olay: "p3_heykel", gecikme: { min: 3, max: 9 } }
+              - tohum: { olay: "p3_heykel", gecikme: { min: 3, max: 9 }, hatirlatma: { tr: "Ters dönmüş evin önünden geçtiğin gün şehir seni başka bir yerde de gördü.", en: "The day you walked past the upside-down house, the city saw you somewhere else too." } }
             sonraki: "@akis"
 
       - id: "p3_aile_konus"
@@ -3669,7 +3669,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 3, merhamet: 1 }
               - ordu: { lonca_avcisi: 1 }
-              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 3, max: 9 } }
+              - tohum: { olay: "p3_kapi_firtinasi", gecikme: { min: 3, max: 9 }, hatirlatma: { tr: "Ters dönmüş evin ailesi yükünü seninle paylaşmayı unutmadı.", en: "The family from the upside-down house hasn't forgotten offering to share the load with you." } }
             sonraki: "@akis"
 
       - id: "p3_aile_korku"
@@ -3738,7 +3738,7 @@ olaylar:
             etiket: { tr: "Notları tek tek oku", en: "Read the notes, one by one" }
             etkiler:
               - ahlak: { merhamet: 4 }
-              - tohum: { olay: "p3_kadim_pazari", gecikme: { min: 3, max: 8 } }
+              - tohum: { olay: "p3_kadim_pazari", gecikme: { min: 3, max: 8 }, hatirlatma: { tr: "Heykelin dibindeki notlardan biri seni gece pazarına işaret ediyor.", en: "One of the notes at the foot of the statue points you to the night market." } }
             sonraki: "p3_heykel_notlar"
 
       - id: "p3_heykel_yikildi"
@@ -3852,7 +3852,7 @@ olaylar:
               - kredi: -800
               - esya: { gunes_kristali: 2 }
               - itibar: { kadimler: 5 }
-              - tohum: { olay: "p3_kordon_geri", gecikme: { min: 4, max: 10 } }
+              - tohum: { olay: "p3_kordon_geri", gecikme: { min: 4, max: 10 }, hatirlatma: { tr: "Yıl satan tezgâhın gecesinden sonra {yer:kordon|den} haber var.", en: "Since the night of the stall that sold years, there's news from {yer:kordon}." } }
             sonraki: "@akis"
 
       - id: "p3_pazar_terazi"
@@ -3893,7 +3893,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 3 }
               - itibar: { kadimler: -6, lonca: 3 }
-              - tohum: { olay: "p3_kordon_geri", gecikme: { min: 4, max: 10 } }
+              - tohum: { olay: "p3_kordon_geri", gecikme: { min: 4, max: 10 }, hatirlatma: { tr: "Yıl satan tezgâhın gecesinden sonra {yer:kordon|den} haber var.", en: "Since the night of the stall that sold years, there's news from {yer:kordon}." } }
             sonraki: "@akis"
 
   # ---------------------------------------------------------------- Kordon'u geri almak / tutmak
@@ -3958,7 +3958,7 @@ olaylar:
               - kontrol: { kordon: "siginak" }
               - itibar: { siginak: 6 }
               - iliski: { elif_sari: { guven: 3, saygi: 2 } }
-              - tohum: { olay: "p3_kordon_aksami", gecikme: { min: 5, max: 10 }, kosul: { bayrak: "p3_kordon_geri_alindi" } }
+              - tohum: { olay: "p3_kordon_aksami", gecikme: { min: 5, max: 10 }, kosul: { bayrak: "p3_kordon_geri_alindi" }, hatirlatma: { tr: "{yer:kordon|in} fenerleri yandığından beri sahil bir akşam hazırlıyor.", en: "Since the lanterns came back on along {yer:kordon}, the shore's been getting ready for an evening." } }
             sonraki: "@akis"
           - id: "karargah"
             etiket: { tr: "{yer:kordon|i} ordunun karargâhı yap", en: "Make {yer:kordon} your army's HQ" }
@@ -3970,7 +3970,7 @@ olaylar:
               - ordu_kazan: 20
               - itibar: { lonca: 5 }
               - iliski: { elif_sari: { guven: -3 } }
-              - tohum: { olay: "p3_kordon_aksami", gecikme: { min: 5, max: 10 }, kosul: { bayrak: "p3_kordon_geri_alindi" } }
+              - tohum: { olay: "p3_kordon_aksami", gecikme: { min: 5, max: 10 }, kosul: { bayrak: "p3_kordon_geri_alindi" }, hatirlatma: { tr: "{yer:kordon|in} fenerleri yandığından beri sahil bir akşam hazırlıyor.", en: "Since the lanterns came back on along {yer:kordon}, the shore's been getting ready for an evening." } }
             sonraki: "@akis"
 
       - id: "p3_kordon_fener"
@@ -3990,7 +3990,7 @@ olaylar:
               - kontrol: { kordon: "siginak" }
               - itibar: { siginak: 5 }
               - iliski: { elif_sari: { saygi: 2 } }
-              - tohum: { olay: "p3_kordon_aksami", gecikme: { min: 5, max: 10 }, kosul: { bayrak: "p3_kordon_geri_alindi" } }
+              - tohum: { olay: "p3_kordon_aksami", gecikme: { min: 5, max: 10 }, kosul: { bayrak: "p3_kordon_geri_alindi" }, hatirlatma: { tr: "{yer:kordon|in} fenerleri yandığından beri sahil bir akşam hazırlıyor.", en: "Since the lanterns came back on along {yer:kordon}, the shore's been getting ready for an evening." } }
             sonraki: "@akis"
           - id: "habercive"
             etiket: { tr: "Feneri habercinin eline geri ver", en: "Hand the lantern back to the runner" }
@@ -4000,7 +4000,7 @@ olaylar:
               - degisken: { hayatta_kalan: 3 }
               - kontrol: { kordon: "siginak" }
               - iliski: { elif_sari: { guven: 3, saygi: 2 } }
-              - tohum: { olay: "p3_kordon_aksami", gecikme: { min: 5, max: 10 }, kosul: { bayrak: "p3_kordon_geri_alindi" } }
+              - tohum: { olay: "p3_kordon_aksami", gecikme: { min: 5, max: 10 }, kosul: { bayrak: "p3_kordon_geri_alindi" }, hatirlatma: { tr: "{yer:kordon|in} fenerleri yandığından beri sahil bir akşam hazırlıyor.", en: "Since the lanterns came back on along {yer:kordon}, the shore's been getting ready for an evening." } }
             sonraki: "@akis"
 
       - id: "p3_kordon_yenilgi"
@@ -4097,7 +4097,7 @@ olaylar:
               - bilgi: "firtina_tasi"
               - degisken: { kadim_tehdit: -3 }
               - iliski: { thessar: { saygi: 3 } }
-              - tohum: { olay: "p3_firtina_olcucu", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "p3_firtina_olcucu", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Fırtınanın ardından cebine koyduğun taş sızlamaya başladı.", en: "The stone you pocketed after the storm has started to ache." } }
             sonraki: "p3_firtina_sabah"
           - id: "kir"
             etiket: { tr: "Taşı orada kır", en: "Smash the stone right there" }

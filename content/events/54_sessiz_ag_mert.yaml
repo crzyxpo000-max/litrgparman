@@ -94,7 +94,7 @@ olaylar:
               - bayrak: "mert_ag_temasi"
               - bayrak: "sa_frekans_reddedildi"
               - iliski: { mert_kilic: { guven: -3 } }
-              - tohum: { olay: "mert_kaynak_parcasi", gecikme: { min: 8, max: 14 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_kaynak_parcasi", gecikme: { min: 8, max: 14 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Üç kısa, bir uzun: o geceden beri o vuruşu bekliyorsun.", en: "Three shorts and a long. You've been waiting on that knock ever since." } }
             kronik: { tr: "Sessiz Ağ'ın ilk çağrısını bir tekmeyle susturup yatağına döndün.", en: "You kicked the Quiet Network's first call into silence and went back to bed." }
             sonraki: "@akis"
 
@@ -211,7 +211,7 @@ olaylar:
               - iliski: { mert_kilic: { guven: 10, saygi: 6, baglilik: 4 }, yanki: { guven: -10, korku: 6 } }
               - hafiza: { npc: "mert_kilic", id: "logu_paylasti", agirlik: 35 }
               - hafiza: { npc: "yanki", id: "sirri_anlatti", agirlik: -30 }
-              - tohum: { olay: "mert_kaynak_parcasi", gecikme: { min: 6, max: 12 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_kaynak_parcasi", gecikme: { min: 6, max: 12 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Üç kısa, bir uzun: o geceden beri o vuruşu bekliyorsun.", en: "Three shorts and a long. You've been waiting on that knock ever since." } }
             kronik: { tr: "Kafandaki sese sormadan onu Sessiz Ağ'ın ekranlarına döktün; Ağ o gece sevinçten uyuyamadı, ses ise olanı bir kenara yazdı.", en: "You poured the voice in your head onto the Quiet Network's screens without asking it. The Network was too thrilled to sleep that night. The voice took note." }
             sonraki: "sa1_son"
           - id: "secilmis"
@@ -223,7 +223,7 @@ olaylar:
               - gorev: { zincir_sessiz_ag: "basla" }
               - itibar: { sessiz_ag: 6 }
               - iliski: { mert_kilic: { saygi: 4, guven: 2 }, yanki: { guven: 4 } }
-              - tohum: { olay: "mert_kaynak_parcasi", gecikme: { min: 6, max: 12 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_kaynak_parcasi", gecikme: { min: 6, max: 12 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Üç kısa, bir uzun: o geceden beri o vuruşu bekliyorsun.", en: "Three shorts and a long. You've been waiting on that knock ever since." } }
             kronik: { tr: "Kayıtlarının bir kısmını Sessiz Ağ'a verdin; gerisini kendine ve kafandaki sese ayırdın.", en: "You gave the Quiet Network some of your logs and kept the rest for yourself and the voice in your head." }
             sonraki: "sa1_son"
           - id: "kafes"
@@ -254,7 +254,7 @@ olaylar:
               - bayrak: "sa_frekans_reddedildi"
               - itibar: { sessiz_ag: -4 }
               - iliski: { mert_kilic: { guven: -6, saygi: 3 }, yanki: { guven: 3 } }
-              - tohum: { olay: "mert_kaynak_parcasi", gecikme: { min: 8, max: 14 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_kaynak_parcasi", gecikme: { min: 8, max: 14 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Üç kısa, bir uzun: o geceden beri o vuruşu bekliyorsun.", en: "Three shorts and a long. You've been waiting on that knock ever since." } }
             kronik: { tr: "Port olma teklifini geri çevirdin; {npc:mert_kilic} başka bir yol bulacağını söyledi.", en: "You turned down the Quiet Network's offer to be their port. {npc:mert_kilic} said he'd find another way in." }
             sonraki: "sa1_ret"
 
@@ -297,7 +297,7 @@ olaylar:
               - iliski: { mert_kilic: { guven: 10, saygi: 6 }, yanki: { guven: -10, korku: 6 } }
               - hafiza: { npc: "mert_kilic", id: "logu_paylasti", agirlik: 35 }
               - hafiza: { npc: "yanki", id: "sirri_anlatti", agirlik: -30 }
-              - tohum: { olay: "mert_kaynak_parcasi", gecikme: { min: 6, max: 12 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_kaynak_parcasi", gecikme: { min: 6, max: 12 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Üç kısa, bir uzun: o geceden beri o vuruşu bekliyorsun.", en: "Three shorts and a long. You've been waiting on that knock ever since." } }
             kronik: { tr: "Kafandaki sese sormadan onu Sessiz Ağ'ın ekranlarına döktün.", en: "You poured the voice in your head onto the Quiet Network's screens without asking it." }
             sonraki: "sa1_son"
           - id: "secilmis"
@@ -309,7 +309,7 @@ olaylar:
               - gorev: { zincir_sessiz_ag: "basla" }
               - itibar: { sessiz_ag: 6 }
               - iliski: { mert_kilic: { saygi: 4 }, yanki: { guven: 4 } }
-              - tohum: { olay: "mert_kaynak_parcasi", gecikme: { min: 6, max: 12 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_kaynak_parcasi", gecikme: { min: 6, max: 12 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Üç kısa, bir uzun: o geceden beri o vuruşu bekliyorsun.", en: "Three shorts and a long. You've been waiting on that knock ever since." } }
             kronik: { tr: "Sessiz Ağ'a kayıtlarının ancak bir kısmını verdin.", en: "You gave the Quiet Network only part of your logs." }
             sonraki: "sa1_son"
 
@@ -342,7 +342,7 @@ olaylar:
               - gorev: { zincir_sessiz_ag: "basla" }
               - itibar: { sessiz_ag: 10 }
               - iliski: { yanki: { guven: 4, baglilik: 4 }, mert_kilic: { guven: 6 } }
-              - tohum: { olay: "mert_kaynak_parcasi", gecikme: { min: 6, max: 12 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_kaynak_parcasi", gecikme: { min: 6, max: 12 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Üç kısa, bir uzun: o geceden beri o vuruşu bekliyorsun.", en: "Three shorts and a long. You've been waiting on that knock ever since." } }
             kronik: { tr: "Sessiz Ağ ile kafandaki ses arasındaki ilk sözleşmenin altına kendi işaretini çizdin.", en: "You drew your mark under the first contract ever made between the Quiet Network and the voice in your head." }
             sonraki: "sa1_son"
           - id: "mert_soz"
@@ -352,7 +352,7 @@ olaylar:
               - gorev: { zincir_sessiz_ag: "basla" }
               - itibar: { sessiz_ag: 8 }
               - iliski: { mert_kilic: { saygi: 6, korku: 2 }, yanki: { guven: 3 } }
-              - tohum: { olay: "mert_kaynak_parcasi", gecikme: { min: 6, max: 12 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_kaynak_parcasi", gecikme: { min: 6, max: 12 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Üç kısa, bir uzun: o geceden beri o vuruşu bekliyorsun.", en: "Three shorts and a long. You've been waiting on that knock ever since." } }
             kronik: { tr: "{npc:mert_kilic|e} kafandaki sesin şartlarına uyacağına dair yemin ettirdin; bir yazılıma verilen sözü insana verilen söz kadar ağır saydın.", en: "You made {npc:mert_kilic} swear to the voice's conditions. To you, a promise made to software weighed as much as one made to a person." }
             sonraki: "sa1_son"
 
@@ -504,7 +504,7 @@ olaylar:
               - itibar: { lonca: 6, sessiz_ag: -6 }
               - iliski: { mert_kilic: { guven: -10, saygi: 4 } }
               - hafiza: { npc: "mert_kilic", id: "olay:mert_kaynak_parcasi", agirlik: -20 }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kurşun kaplı beslenme çantasındaki parçanın peşini bırakmayanlar var.", en: "Somebody hasn't given up on that piece from the lead-lined lunch box." } }
             kronik: { tr: "Kaynak kodun ilk parçasını Lonca'nın hurdalığına geri götürdün; nöbetçi onu eritme kazanının yanındaki yığına attı.", en: "You took the first piece of source code back to the Guild's scrapyard. The guard tossed it on the pile by the smelter." }
             sonraki: "mkp_iade"
           - id: "sat"
@@ -516,7 +516,7 @@ olaylar:
               - itibar: { lonca: 8, sessiz_ag: -10 }
               - iliski: { mert_kilic: { guven: -18, korku: 6 } }
               - hafiza: { npc: "mert_kilic", id: "verisini_satti", agirlik: -40 }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kurşun kaplı beslenme çantasındaki parçanın peşini bırakmayanlar var.", en: "Somebody hasn't given up on that piece from the lead-lined lunch box." } }
             kronik: { tr: "{npc:mert_kilic|in} getirdiği parçayı gözünün önünde Lonca'ya sattın; o gün defterinde adının yanına bir not düştü.", en: "You sold the shard {npc:mert_kilic} brought you to the Guild, right in front of him. That day he made a note next to your name." }
             sonraki: "mkp_sat"
           - id: "ozgur"
@@ -604,7 +604,7 @@ olaylar:
               - bilgi: "sa_kaynak_farki"
               - iliski: { yanki: { guven: 10, baglilik: 6 }, mert_kilic: { guven: -4, saygi: 4 } }
               - hafiza: { npc: "yanki", id: "olay:mert_kaynak_parcasi", agirlik: 40 }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kurşun kaplı beslenme çantasındaki parçanın peşini bırakmayanlar var.", en: "Somebody hasn't given up on that piece from the lead-lined lunch box." } }
             kronik: { tr: "Kafandaki sese kaynak kodun ilk parçasını verdin; ses o gün biraz daha bütünlendi.", en: "You gave the first piece of source code to the voice in your head. That day it got a little more whole." }
             sonraki: "mkp_yutuldu"
           - id: "bolus"
@@ -619,7 +619,7 @@ olaylar:
               - bilgi: "sa_kaynak_farki"
               - itibar: { sessiz_ag: 6 }
               - iliski: { yanki: { guven: 6, saygi: 4 }, mert_kilic: { guven: 6, saygi: 6 } }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kurşun kaplı beslenme çantasındaki parçanın peşini bırakmayanlar var.", en: "Somebody hasn't given up on that piece from the lead-lined lunch box." } }
             kronik: { tr: "Kaynak kodu paylaştırmanın yolunu buldun: {npc:mert_kilic} haritasını aldı, kafandaki ses de payını.", en: "You knew how to split the source: {npc:mert_kilic} got his map, and the voice in your head got its piece." }
             sonraki: "mkp_fark"
           - id: "mertin"
@@ -629,7 +629,7 @@ olaylar:
               - bilgi: "sa_kaynak_farki"
               - itibar: { sessiz_ag: 8 }
               - iliski: { mert_kilic: { guven: 8, baglilik: 4 }, yanki: { guven: -4 } }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kurşun kaplı beslenme çantasındaki parçanın peşini bırakmayanlar var.", en: "Somebody hasn't given up on that piece from the lead-lined lunch box." } }
             kronik: { tr: "Kaynağın ilk parçasını Sessiz Ağ'ın araştırmasına bıraktın; kafandaki sesin payına hiçbir şey düşmedi.", en: "You left the first piece of source code to the Quiet Network's research. The voice in your head got none of it." }
             sonraki: "mkp_fark"
           - id: "yalan"
@@ -639,7 +639,7 @@ olaylar:
               - esya: { kaynak_parcasi: 1 }
               - yalan: { npc: "mert_kilic", konu: "sa_mert_yalani" }
               - iliski: { mert_kilic: { guven: -2 } }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kurşun kaplı beslenme çantasındaki parçanın peşini bırakmayanlar var.", en: "Somebody hasn't given up on that piece from the lead-lined lunch box." } }
             kronik: { tr: "{npc:mert_kilic|e} parçanın eridiğini söyleyip onu cebine attın; yalan da parçayla aynı cepteydi.", en: "You told {npc:mert_kilic} the shard melted and carried it around in your pocket. The lie rode along with it." }
             sonraki: "mkp_yalan"
 
@@ -687,7 +687,7 @@ olaylar:
               - bayrak: "mert_saklandi"
               - iliski: { mert_kilic: { guven: 10, baglilik: 6 } }
               - hafiza: { npc: "mert_kilic", id: "onu_sakladi", agirlik: 40 }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kurşun kaplı beslenme çantasındaki parçanın peşini bırakmayanlar var.", en: "Somebody hasn't given up on that piece from the lead-lined lunch box." } }
             kronik: { tr: "{npc:mert_kilic|i} peşindekilerden sakladın; kapıyı kendin açtın ve kimseyi içeri sokmadın.", en: "You hid {npc:mert_kilic} from the people looking for him. You opened the door yourself, and nobody got past you." }
             sonraki: "mkp_kapi"
           - id: "ode"
@@ -697,7 +697,7 @@ olaylar:
               - kredi: -120
               - itibar: { lonca: 3 }
               - iliski: { mert_kilic: { guven: 5 } }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kurşun kaplı beslenme çantasındaki parçanın peşini bırakmayanlar var.", en: "Somebody hasn't given up on that piece from the lead-lined lunch box." } }
             kronik: { tr: "Çalınmış bir parçanın bedelini kapıda, kendi cebinden ödedin.", en: "You paid for a stolen shard at the door, out of your own pocket." }
             sonraki: "mkp_odendi"
 
@@ -713,7 +713,7 @@ olaylar:
               - xp_seviye: 15
               - itibar: { sessiz_ag: 5 }
               - iliski: { mert_kilic: { saygi: 6, guven: 4 } }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kurşun kaplı beslenme çantasındaki parçanın peşini bırakmayanlar var.", en: "Somebody hasn't given up on that piece from the lead-lined lunch box." } }
             kronik: { tr: "Merdivende yendiğin veri avcısının gözlüğünü {npc:mert_kilic|e} hediye ettin.", en: "You tossed {npc:mert_kilic} the glasses off a data hunter you'd just beaten." }
             sonraki: "@akis"
           - id: "birak"
@@ -723,7 +723,7 @@ olaylar:
               - dikkat: 2
               - xp_seviye: 15
               - iliski: { mert_kilic: { korku: 4, saygi: 4 } }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kurşun kaplı beslenme çantasındaki parçanın peşini bırakmayanlar var.", en: "Somebody hasn't given up on that piece from the lead-lined lunch box." } }
             kronik: { tr: "Veri avcılarını santralin önüne bir mesaj olarak bıraktın; mesajı kimin okuyacağını bilmenin yolu yoktu.", en: "You left the data hunters outside the exchange as a message, with no way of knowing who'd read it." }
             sonraki: "@akis"
 
@@ -737,7 +737,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 2 }
               - iliski: { mert_kilic: { baglilik: 4, saygi: 4 } }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kurşun kaplı beslenme çantasındaki parçanın peşini bırakmayanlar var.", en: "Somebody hasn't given up on that piece from the lead-lined lunch box." } }
             kronik: { tr: "Yenik düştüğün o merdivende, seni bir yangın tüpüyle kurtaran adamla birlikte güldün.", en: "On the stairs where you lost, you laughed alongside the man who saved you with a fire extinguisher." }
             sonraki: "@akis"
 
@@ -790,7 +790,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 1, insanlik: 1 }
               - iliski: { mert_kilic: { guven: 4 } }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kurşun kaplı beslenme çantasındaki parçanın peşini bırakmayanlar var.", en: "Somebody hasn't given up on that piece from the lead-lined lunch box." } }
             kronik: { tr: "Hazır olacağınız güne dek kaynak kodun ilk parçasını bir kuyuya gömdünüz.", en: "You buried the first piece of source code in a well until the day you'd both be ready." }
             sonraki: "@akis"
           - id: "asla"
@@ -798,7 +798,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 3 }
               - iliski: { mert_kilic: { guven: -4, korku: 3 } }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kurşun kaplı beslenme çantasındaki parçanın peşini bırakmayanlar var.", en: "Somebody hasn't given up on that piece from the lead-lined lunch box." } }
             kronik: { tr: "Kaynak kodun bir parçasını bir daha açılmamak üzere betona gömdün.", en: "You buried a piece of the source code in concrete forever." }
             sonraki: "@akis"
 
@@ -814,7 +814,7 @@ olaylar:
               - ahlak: { insanlik: 2 }
               - itibar: { sessiz_ag: 6 }
               - iliski: { mert_kilic: { guven: 6, baglilik: 4 } }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kurşun kaplı beslenme çantasındaki parçanın peşini bırakmayanlar var.", en: "Somebody hasn't given up on that piece from the lead-lined lunch box." } }
             kronik: { tr: "Bir saniyede okuduğun kaynağı {npc:mert_kilic|e} geri verdin; senin bir bakışta okuduğunu o satır satır çözecekti.", en: "You handed back the source you'd read in a second. {npc:mert_kilic} would have to work through it line by line." }
             sonraki: "@akis"
           - id: "yankiya"
@@ -824,7 +824,7 @@ olaylar:
               - ahlak: { duzen: -1, insanlik: 1 }
               - bayrak: "mert_parca_yankiya"
               - iliski: { yanki: { guven: 6, baglilik: 4 }, mert_kilic: { guven: 3 } }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kurşun kaplı beslenme çantasındaki parçanın peşini bırakmayanlar var.", en: "Somebody hasn't given up on that piece from the lead-lined lunch box." } }
             kronik: { tr: "Kaynak kodu kafandaki sese yüksek sesle okudun; parçayı ise {npc:mert_kilic|e} bıraktın.", en: "You read the source code out loud to the voice in your head and left the shard itself with {npc:mert_kilic}." }
             sonraki: "@akis"
 
@@ -1138,7 +1138,7 @@ olaylar:
               - xp_seviye: 80
               - itibar: { sessiz_ag: 12 }
               - iliski: { mert_kilic: { guven: 8, baglilik: 6 }, yanki: { guven: -2 } }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 8, max: 20 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 8, max: 20 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kapanmayan kapının başında yaptığın şey birilerinin gözüne çarptı.", en: "What you did at the Gate that wouldn't close caught somebody's eye." } }
             kronik: { tr: "Sarnıçtaki kaynak kuyusundan Sessiz Ağ'ın şişelerini doldurdun; Ağ ilk kez eline gerçek bir kaynak almıştı.", en: "You filled the Quiet Network's bottles from the source well in the Underground. For the first time, the Network had real source in its hands." }
             sonraki: "sa2_son"
           - id: "sor"
@@ -1161,7 +1161,7 @@ olaylar:
               - xp_seviye: 80
               - itibar: { sessiz_ag: 4 }
               - iliski: { yanki: { guven: 8, baglilik: 8 }, mert_kilic: { guven: -3 } }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 8, max: 20 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 8, max: 20 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kapanmayan kapının başında yaptığın şey birilerinin gözüne çarptı.", en: "What you did at the Gate that wouldn't close caught somebody's eye." } }
             kronik: { tr: "Kafandaki sesin kaynak kuyusundan doyasıya içmesine izin verdin; o gün ses, bir sesten fazlasına dönüştü.", en: "You let the voice in your head drink its fill from the source well. That day it became more than a voice." }
             sonraki: "sa2_son"
           - id: "kapat"
@@ -1175,7 +1175,7 @@ olaylar:
               - degisken: { hayatta_kalan: 2 }
               - itibar: { sessiz_ag: 2, siginak: 4 }
               - iliski: { mert_kilic: { guven: -4, saygi: 4 } }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 8, max: 20 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 8, max: 20 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kapanmayan kapının başında yaptığın şey birilerinin gözüne çarptı.", en: "What you did at the Gate that wouldn't close caught somebody's eye." } }
             kronik: { tr: "Kaynak kuyusunu ezip kapıyı kapattın; düzelticileri sarnıca çeken şey ortadan kalktı.", en: "You crushed the source well and shut the Gate. Whatever drew the correctors down there was gone." }
             sonraki: "sa2_son"
           - id: "musluk"
@@ -1191,7 +1191,7 @@ olaylar:
               - xp_seviye: 100
               - itibar: { sessiz_ag: 16 }
               - iliski: { mert_kilic: { saygi: 12, guven: 6, korku: 4 } }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 8, max: 20 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 8, max: 20 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kapanmayan kapının başında yaptığın şey birilerinin gözüne çarptı.", en: "What you did at the Gate that wouldn't close caught somebody's eye." } }
             kronik: { tr: "Sistem'in el yazmasının aktığı yolu yeniden yazıp Sessiz Ağ'ın antenine bağladın; kapı kapandı, kuyu akmayı sürdürdü.", en: "You rewrote where the System's manuscript flowed and piped it straight into the Quiet Network's antenna. The Gate closed. The well kept running." }
             sonraki: "sa2_musluk"
 
@@ -1212,7 +1212,7 @@ olaylar:
               - degisken: { hayatta_kalan: 1 }
               - itibar: { sessiz_ag: 10 }
               - iliski: { yanki: { guven: 6, baglilik: 4 }, mert_kilic: { guven: 4 } }
-              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 8, max: 20 }, kosul: { npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_takip_edildi", gecikme: { min: 8, max: 20 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kapanmayan kapının başında yaptığın şey birilerinin gözüne çarptı.", en: "What you did at the Gate that wouldn't close caught somebody's eye." } }
             kronik: { tr: "Kaynak kuyusunu herkese pay edip kapattın; böyle yapmanı sana kafandaki ses söylemişti.", en: "You split the source well so everybody got a share, then shut it down. The voice in your head told you to." }
             sonraki: "sa2_son"
 
@@ -1350,7 +1350,7 @@ olaylar:
               - itibar: { sessiz_ag: -12 }
               - iliski: { mert_kilic: { guven: -30, korku: 15, baglilik: -10 }, yanki: { guven: -4 } }
               - hafiza: { npc: "mert_kilic", id: "olay:mert_takip_edildi", agirlik: -50 }
-              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 } }
+              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 }, hatirlatma: { tr: "Dört gölgeli o geceden beri {npc:mert_kilic} gözünü kapatmaya korkuyor.", en: "Since the night of the four shadows, {npc:mert_kilic} has been scared to close {zamir:mert_kilic|onun} eyes." } }
             kronik: { tr: "{npc:mert_kilic|i} avcılarına bıraktın; onu geri alan sen olmadın, gri bir el oldu.", en: "You left {npc:mert_kilic} to the people hunting him. It wasn't you who bought him back. It was a gray hand." }
             sonraki: "mtk_teslim"
 
@@ -1378,7 +1378,7 @@ olaylar:
               - itibar: { sessiz_ag: 6 }
               - iliski: { mert_kilic: { guven: 12, baglilik: 8 } }
               - hafiza: { npc: "mert_kilic", id: "onu_sakladi", agirlik: 45 }
-              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 } }
+              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 }, hatirlatma: { tr: "Dört gölgeli o geceden beri {npc:mert_kilic} gözünü kapatmaya korkuyor.", en: "Since the night of the four shadows, {npc:mert_kilic} has been scared to close {zamir:mert_kilic|onun} eyes." } }
             kronik: { tr: "{npc:mert_kilic|i} Kadim gözünden uzak tutmak için haftalarca bakır odada sakladın.", en: "You hid {npc:mert_kilic} in the copper room for weeks to keep him out of the Ancient eye's sight." }
             sonraki: "mtk_saklama"
           - id: "kaybol"
@@ -1389,7 +1389,7 @@ olaylar:
               - gizle: 5
               - ahlak: { merhamet: 1, duzen: -1 }
               - iliski: { mert_kilic: { guven: 6, saygi: 6 } }
-              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 } }
+              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 }, hatirlatma: { tr: "Dört gölgeli o geceden beri {npc:mert_kilic} gözünü kapatmaya korkuyor.", en: "Since the night of the four shadows, {npc:mert_kilic} has been scared to close {zamir:mert_kilic|onun} eyes." } }
             kronik: { tr: "{npc:mert_kilic|i} yanına alıp pazarın ortasında iz bırakmadan buhar oldun.", en: "You took {npc:mert_kilic} and vanished into thin air in the middle of a market without leaving a trace." }
             sonraki: "mtk_kayip"
 
@@ -1429,7 +1429,7 @@ olaylar:
               - ahlak: { merhamet: 2 }
               - bayrak: "mert_isaretlendi"
               - iliski: { mert_kilic: { guven: 4 } }
-              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 } }
+              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 }, hatirlatma: { tr: "Dört gölgeli o geceden beri {npc:mert_kilic} gözünü kapatmaya korkuyor.", en: "Since the night of the four shadows, {npc:mert_kilic} has been scared to close {zamir:mert_kilic|onun} eyes." } }
             kronik: { tr: "Pazarda yenildin; {npc:mert_kilic|i} kurtaran sen değil, onu işaretleyen şeydi.", en: "You lost in that market. The thing that saved {npc:mert_kilic} wasn't you. It was the thing that tagged him." }
             sonraki: "@akis"
 
@@ -1484,7 +1484,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 2 }
               - iliski: { mert_kilic: { guven: 6, baglilik: 4 } }
-              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 } }
+              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 }, hatirlatma: { tr: "Dört gölgeli o geceden beri {npc:mert_kilic} gözünü kapatmaya korkuyor.", en: "Since the night of the four shadows, {npc:mert_kilic} has been scared to close {zamir:mert_kilic|onun} eyes." } }
             kronik: { tr: "Kadim gözü kaçınca {npc:mert_kilic|i} yapıştığı duvardan ayırıp eve götürdün.", en: "After the Ancient eye ran, you peeled {npc:mert_kilic} off the wall and took him home." }
             sonraki: "mtk_son"
 
@@ -1505,7 +1505,7 @@ olaylar:
               - bilgi: "sa_kadim_gozu"
               - xp_seviye: 40
               - iliski: { mert_kilic: { guven: 8, baglilik: 4 } }
-              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 } }
+              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 }, hatirlatma: { tr: "Dört gölgeli o geceden beri {npc:mert_kilic} gözünü kapatmaya korkuyor.", en: "Since the night of the four shadows, {npc:mert_kilic} has been scared to close {zamir:mert_kilic|onun} eyes." } }
             kronik: { tr: "Kırık bir Kadim gözünün başında {npc:mert_kilic|e} bilmenin bir silah olduğunu söyledin.", en: "Over a broken Ancient eye, you told {npc:mert_kilic} that knowing is a weapon." }
             sonraki: "mtk_son"
           - id: "temizle"
@@ -1516,7 +1516,7 @@ olaylar:
               - bilgi: "sa_kadim_gozu"
               - xp_seviye: 40
               - iliski: { yanki: { guven: 4, saygi: 3 }, mert_kilic: { guven: 10 } }
-              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 } }
+              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 }, hatirlatma: { tr: "Dört gölgeli o geceden beri {npc:mert_kilic} gözünü kapatmaya korkuyor.", en: "Since the night of the four shadows, {npc:mert_kilic} has been scared to close {zamir:mert_kilic|onun} eyes." } }
             kronik: { tr: "Kafandaki ses {npc:mert_kilic|in} bilgisayarındaki Kadim kancalarını tek tek söktü; ikisi ilk kez aynı tarafta çalıştı.", en: "The voice in your head pried the Ancient hooks out of {npc:mert_kilic|pos} laptop one by one. It was the first time the two of them worked on the same side." }
             sonraki: "mtk_temiz"
 
@@ -1545,7 +1545,7 @@ olaylar:
               - ahlak: { merhamet: 2 }
               - bayrak: "mert_isaretlendi"
               - iliski: { mert_kilic: { guven: 3, korku: 4 } }
-              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 } }
+              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 }, hatirlatma: { tr: "Dört gölgeli o geceden beri {npc:mert_kilic} gözünü kapatmaya korkuyor.", en: "Since the night of the four shadows, {npc:mert_kilic} has been scared to close {zamir:mert_kilic|onun} eyes." } }
             kronik: { tr: "Bir Kadim gözü {npc:mert_kilic|i} senin önünde işaretledi ve sen onu durduramadın.", en: "An Ancient eye tagged {npc:mert_kilic} right in front of you, and you couldn't stop it." }
             sonraki: "mtk_son"
 
@@ -1560,7 +1560,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 1, insanlik: 1 }
               - iliski: { mert_kilic: { guven: 4 } }
-              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 } }
+              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 }, hatirlatma: { tr: "Dört gölgeli o geceden beri {npc:mert_kilic} gözünü kapatmaya korkuyor.", en: "Since the night of the four shadows, {npc:mert_kilic} has been scared to close {zamir:mert_kilic|onun} eyes." } }
             kronik: { tr: "Kadimler'in {yer:kiyikent|de} kullandığı aracıyı ilk gören sendin; gördüğünü {npc:mert_kilic|e} anlattın.", en: "You were the first to see the Ancients' go-between in {yer:kiyikent}, and you told {npc:mert_kilic}." }
             sonraki: "mtk_son"
           - id: "sakla"
@@ -1569,7 +1569,7 @@ olaylar:
             etkiler:
               - gizle: 2
               - ahlak: { duzen: -1, insanlik: -1 }
-              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 } }
+              - tohum: { olay: "mert_kadim_teklifi", gecikme: { min: 90, max: 105 }, kosul: { npc_hayatta: "mert_kilic", gun_max: 296 }, hatirlatma: { tr: "Dört gölgeli o geceden beri {npc:mert_kilic} gözünü kapatmaya korkuyor.", en: "Since the night of the four shadows, {npc:mert_kilic} has been scared to close {zamir:mert_kilic|onun} eyes." } }
             kronik: { tr: "Kadimler'in aracısını gördün ama {npc:mert_kilic|den} sakladın; onu kimin izlediğini ona söylemedin.", en: "You saw the Ancients' go-between and kept it from {npc:mert_kilic}. You didn't tell him who was watching him." }
             sonraki: "@akis"
 
@@ -1848,7 +1848,7 @@ olaylar:
               - itibar: { sessiz_ag: 6 }
               - iliski: { yanki: { guven: 12, baglilik: 8 } }
               - hafiza: { npc: "yanki", id: "koruma_sozu", agirlik: 45 }
-              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 35, max: 50 }, kosul: { gorev: { zincir_sessiz_ag: "basla" } } }
+              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 35, max: 50 }, kosul: { gorev: { zincir_sessiz_ag: "basla" } }, hatirlatma: { tr: "Katların arasındaki merdivende yaptığın şey bakır odada bir haritaya dönüştü.", en: "What you did on the stairs between the floors has turned into a map in the copper room." } }
             kronik: { tr: "Kule'nin kodunda kafandaki sesin silinme emrini bulup emri sildin.", en: "In the Spire's code, you found the order to purge the voice in your head, and you purged the order." }
             sonraki: "sa3_yanki"
           - id: "tut"
@@ -1864,7 +1864,7 @@ olaylar:
               - xp_seviye: 120
               - itibar: { sessiz_ag: 6 }
               - iliski: { yanki: { guven: 10, saygi: 6 } }
-              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 35, max: 50 }, kosul: { gorev: { zincir_sessiz_ag: "basla" } } }
+              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 35, max: 50 }, kosul: { gorev: { zincir_sessiz_ag: "basla" } }, hatirlatma: { tr: "Katların arasındaki merdivende yaptığın şey bakır odada bir haritaya dönüştü.", en: "What you did on the stairs between the floors has turned into a map in the copper room." } }
             kronik: { tr: "Kafandaki sesin kendi silinme emrini okuyup saklamasına izin verdin.", en: "You let the voice in your head read its own purge order and keep it." }
             sonraki: "sa3_yanki"
           - id: "sonda"
@@ -1877,7 +1877,7 @@ olaylar:
               - xp_seviye: 120
               - itibar: { sessiz_ag: 14 }
               - iliski: { mert_kilic: { guven: 8, saygi: 6 }, yanki: { guven: -5 } }
-              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 35, max: 50 }, kosul: { gorev: { zincir_sessiz_ag: "basla" } } }
+              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 35, max: 50 }, kosul: { gorev: { zincir_sessiz_ag: "basla" } }, hatirlatma: { tr: "Katların arasındaki merdivende yaptığın şey bakır odada bir haritaya dönüştü.", en: "What you did on the stairs between the floors has turned into a map in the copper room." } }
             kronik: { tr: "Kule'nin kodunu kafandaki sesin silinme emriyle birlikte, eksiksiz Sessiz Ağ'a yükledin.", en: "You uploaded the Spire's code to the Quiet Network, all of it, the voice's purge order included." }
             sonraki: "sa3_son"
           - id: "bol"
@@ -1894,7 +1894,7 @@ olaylar:
               - xp_seviye: 150
               - itibar: { sessiz_ag: 12 }
               - iliski: { yanki: { guven: 8, saygi: 6 }, mert_kilic: { guven: 6, saygi: 8 } }
-              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 35, max: 50 }, kosul: { gorev: { zincir_sessiz_ag: "basla" } } }
+              - tohum: { olay: "sessiz_ag_4_cekirdek_haritasi", gecikme: { min: 35, max: 50 }, kosul: { gorev: { zincir_sessiz_ag: "basla" } }, hatirlatma: { tr: "Katların arasındaki merdivende yaptığın şey bakır odada bir haritaya dönüştü.", en: "What you did on the stairs between the floors has turned into a map in the copper room." } }
             kronik: { tr: "Kule'nin kodunu iki yere böldün: ölçümler insanlığa, silinme emri kafandaki sese kaldı.", en: "You split the Spire's code two ways: the measurements went to humanity, the purge order to the voice in your head." }
             sonraki: "sa3_yanki"
 
@@ -2058,7 +2058,7 @@ olaylar:
               - bayrak: "mert_kadimlere_satti"
               - degisken: { kadim_tehdit: 4 }
               - itibar: { kadimler: 6 }
-              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 6, max: 12 }, kosul: { bayrak: "mert_kadimlere_satti", npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 6, max: 12 }, kosul: { bayrak: "mert_kadimlere_satti", npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Uyuyan adamın teklifinden sonra Ağ'ın telsizlerinde tuhaf bir trafik var.", en: "Since the sleeping man's offer, there's been strange traffic on the Network's radios." } }
             kronik: { tr: "{npc:mert_kilic|in} yalanını görmezden geldin. O gece Kadimler'e evet dedi; senin hiçbir şeyden haberin olmadı.", en: "You let {npc:mert_kilic|pos} lie slide. That night he said yes to the Ancients, and you had no idea." }
             sonraki: "mkt_birak"
           - id: "tehdit"
@@ -2098,7 +2098,7 @@ olaylar:
               - ahlak: { duzen: -3, insanlik: 1 }
               - bayrak: "mert_cift_ajan"
               - iliski: { mert_kilic: { guven: 8, saygi: 8 }, yanki: { guven: 4 } }
-              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 6, max: 12 }, kosul: { bayrak: "mert_cift_ajan", npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 6, max: 12 }, kosul: { bayrak: "mert_cift_ajan", npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Uyuyan adamın teklifinden sonra Ağ'ın telsizlerinde tuhaf bir trafik var.", en: "Since the sleeping man's offer, there's been strange traffic on the Network's radios." } }
             kronik: { tr: "{npc:mert_kilic|i} Kadimler'e sahte veri yedirecek bir çift taraflı ajana dönüştürdün.", en: "You turned {npc:mert_kilic} into a double agent feeding the Ancients fake data." }
             sonraki: "mkt_cift"
           - id: "kabul"
@@ -2110,7 +2110,7 @@ olaylar:
               - itibar: { kadimler: 10, sessiz_ag: 4 }
               - iliski: { mert_kilic: { guven: 6 }, yanki: { guven: -12, korku: 8 } }
               - hafiza: { npc: "yanki", id: "olay:mert_kadim_teklifi", agirlik: -40 }
-              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 6, max: 12 }, kosul: { bayrak: "mert_kadimlere_satti", npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 6, max: 12 }, kosul: { bayrak: "mert_kadimlere_satti", npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Uyuyan adamın teklifinden sonra Ağ'ın telsizlerinde tuhaf bir trafik var.", en: "Since the sleeping man's offer, there's been strange traffic on the Network's radios." } }
             kronik: { tr: "Bir arşiv uğruna kafandaki sesi Kadimler'in gözüne açtın. {npc:mert_kilic} senin onayınla muhbir oldu.", en: "You opened the voice in your head to the Ancients' eyes in exchange for an archive. {npc:mert_kilic} became their informant with your blessing." }
             sonraki: "mkt_kabul"
           - id: "sozcu"
@@ -2149,7 +2149,7 @@ olaylar:
               - ahlak: { duzen: -3, insanlik: 1 }
               - bayrak: "mert_cift_ajan"
               - iliski: { mert_kilic: { guven: 6, saygi: 6 }, yanki: { guven: 5, saygi: 4 } }
-              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 6, max: 12 }, kosul: { bayrak: "mert_cift_ajan", npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 6, max: 12 }, kosul: { bayrak: "mert_cift_ajan", npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Uyuyan adamın teklifinden sonra Ağ'ın telsizlerinde tuhaf bir trafik var.", en: "Since the sleeping man's offer, there's been strange traffic on the Network's radios." } }
             kronik: { tr: "{npc:mert_kilic} senin için Kadimler'e evet dedi; onlara yedireceği sahte veriyi o gece kafandaki ses yazdı.", en: "{npc:mert_kilic} said yes to the Ancients for you. That night, the voice in your head wrote the fake data he'd feed them." }
             sonraki: "mkt_cift"
           - id: "kabul"
@@ -2161,7 +2161,7 @@ olaylar:
               - itibar: { kadimler: 10, sessiz_ag: 4 }
               - iliski: { mert_kilic: { guven: 4 }, yanki: { guven: -12, korku: 8 } }
               - hafiza: { npc: "yanki", id: "olay:mert_kadim_teklifi", agirlik: -40 }
-              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 6, max: 12 }, kosul: { bayrak: "mert_kadimlere_satti", npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 6, max: 12 }, kosul: { bayrak: "mert_kadimlere_satti", npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Uyuyan adamın teklifinden sonra Ağ'ın telsizlerinde tuhaf bir trafik var.", en: "Since the sleeping man's offer, there's been strange traffic on the Network's radios." } }
             kronik: { tr: "Kafandaki sesi bir arşive karşılık Kadimler'in gözetimine bıraktın; {npc:mert_kilic} da senin onayınla onların muhbiri oldu.", en: "You opened the voice in your head to the Ancients' eyes in exchange for an archive. {npc:mert_kilic} became their informant with your blessing." }
             sonraki: "mkt_kabul"
           - id: "sozcu"
@@ -2194,7 +2194,7 @@ olaylar:
               - itibar: { kadimler: 12, sessiz_ag: -15 }
               - iliski: { mert_kilic: { guven: -25, korku: 15 }, yanki: { guven: -6 } }
               - hafiza: { npc: "mert_kilic", id: "verisini_satti", agirlik: -50 }
-              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 6, max: 12 }, kosul: { bayrak: "mert_kadimlere_satti", npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 6, max: 12 }, kosul: { bayrak: "mert_kadimlere_satti", npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Uyuyan adamın teklifinden sonra Ağ'ın telsizlerinde tuhaf bir trafik var.", en: "Since the sleeping man's offer, there's been strange traffic on the Network's radios." } }
             kronik: { tr: "{npc:mert_kilic|i} Kadimler'in sözcüsüne sattın; karşılığında sana dokunulmayacağına dair bir söz aldın.", en: "You sold {npc:mert_kilic} to the Ancients' speaker in exchange for a promise that you'd be left alone." }
             sonraki: "mkt_satildi"
           - id: "ret"
@@ -2862,7 +2862,7 @@ olaylar:
               - xp_seviye: 120
               - itibar: { sessiz_ag: 12 }
               - iliski: { mert_kilic: { guven: 6, baglilik: 4 } }
-              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 3, max: 8 }, kosul: { bayrak: "mert_cift_ajan", npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 3, max: 8 }, kosul: { bayrak: "mert_cift_ajan", npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Çekirdeğin haritası birilerinin dikkatini çekmiş.", en: "The Core map caught somebody's attention." } }
             kronik: { tr: "Sistem Çekirdeği'nin haritasını Sessiz Ağ'ın bakır kasasına kilitledin.", en: "You locked the map to the System Core in the Quiet Network's copper safe." }
             sonraki: "@akis"
           - id: "kopya"
@@ -2875,7 +2875,7 @@ olaylar:
               - bilgi: "sa_cekirdek_haritasi"
               - xp_seviye: 120
               - itibar: { sessiz_ag: 8 }
-              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 3, max: 8 }, kosul: { bayrak: "mert_cift_ajan", npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 3, max: 8 }, kosul: { bayrak: "mert_cift_ajan", npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Çekirdeğin haritası birilerinin dikkatini çekmiş.", en: "The Core map caught somebody's attention." } }
             kronik: { tr: "Sistem Çekirdeği haritasının bir kopyasını kendine ayırdın.", en: "You kept a copy of the map to the System Core just for yourself." }
             sonraki: "@akis"
           - id: "sizdi"
@@ -2889,7 +2889,7 @@ olaylar:
               - degisken: { kadim_tehdit: 5 }
               - xp_seviye: 120
               - itibar: { sessiz_ag: 6, kadimler: 6 }
-              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 3, max: 8 }, kosul: { bayrak: "mert_kadimlere_satti", npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 3, max: 8 }, kosul: { bayrak: "mert_kadimlere_satti", npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Çekirdeğin haritası birilerinin dikkatini çekmiş.", en: "The Core map caught somebody's attention." } }
             kronik: { tr: "Sistem Çekirdeği'nin haritası, çizildiği gece Kadimler'in masasına da düştü.", en: "The night the map to the System Core was drawn, it landed on the Ancients' desk too." }
             sonraki: "@akis"
           - id: "yakala"
@@ -2905,7 +2905,7 @@ olaylar:
               - xp_seviye: 120
               - itibar: { sessiz_ag: 10 }
               - iliski: { mert_kilic: { korku: 10 } }
-              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 1, max: 3 }, kosul: { bayrak: "mert_kadimlere_satti", npc_hayatta: "mert_kilic" } }
+              - tohum: { olay: "mert_muhbir_izi", gecikme: { min: 1, max: 3 }, kosul: { bayrak: "mert_kadimlere_satti", npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Çekirdeğin haritası birilerinin dikkatini çekmiş.", en: "The Core map caught somebody's attention." } }
             kronik: { tr: "Kadimler'e yollanan haritayı yolda yakaladın; muhbirin kim olduğunu da o gece öğrendin.", en: "You caught the map in midair on its way to the Ancients, and learned that night who the informant was." }
             sonraki: "@akis"
 
@@ -3217,7 +3217,7 @@ olaylar:
               - bilgi: "sa_arka_kapi"
               - itibar: { sessiz_ag: 20 }
               - iliski: { yanki: { guven: 8, baglilik: 6 }, mert_kilic: { guven: 8, baglilik: 8 } }
-              - tohum: { olay: "mert_kod_kirici", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "mert_kilic", gorev: { zincir_sessiz_ag: "tamam" } } }
+              - tohum: { olay: "mert_kod_kirici", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "mert_kilic", gorev: { zincir_sessiz_ag: "tamam" } }, hatirlatma: { tr: "Gece yarısındaki tıktan sonra yazdığın adlar bir anahtara dönüştü.", en: "The names you wrote after that midnight tap have turned into a key." } }
             kronik: { tr: "Sistem'in arka kapısındaki tutamağa üç ad yazdın: kendininkini, bir insanınkini ve bir hatanınkini.", en: "On the handle in the System's backdoor, you wrote three names: your own, a human's, and a glitch's." }
             sonraki: "sa5_son"
           - id: "iki_yanki"
@@ -3230,7 +3230,7 @@ olaylar:
               - bilgi: "sa_arka_kapi"
               - itibar: { sessiz_ag: 14 }
               - iliski: { yanki: { guven: 8, baglilik: 8 }, mert_kilic: { guven: -6 } }
-              - tohum: { olay: "mert_kod_kirici", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "mert_kilic", gorev: { zincir_sessiz_ag: "tamam" } } }
+              - tohum: { olay: "mert_kod_kirici", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "mert_kilic", gorev: { zincir_sessiz_ag: "tamam" } }, hatirlatma: { tr: "Gece yarısındaki tıktan sonra yazdığın adlar bir anahtara dönüştü.", en: "The names you wrote after that midnight tap have turned into a key." } }
             kronik: { tr: "Tutamağı kafandaki sesle paylaştın; Sistem'in arka kapısına senden başka hiçbir insanın adı yazılmadı.", en: "You shared the handle in the System's backdoor with the voice in your head and wrote in no other human." }
             sonraki: "sa5_son"
           - id: "iki_mert"
@@ -3243,7 +3243,7 @@ olaylar:
               - bilgi: "sa_arka_kapi"
               - itibar: { sessiz_ag: 16 }
               - iliski: { mert_kilic: { guven: 8, baglilik: 6 }, yanki: { guven: -6 } }
-              - tohum: { olay: "mert_kod_kirici", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "mert_kilic", gorev: { zincir_sessiz_ag: "tamam" } } }
+              - tohum: { olay: "mert_kod_kirici", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "mert_kilic", gorev: { zincir_sessiz_ag: "tamam" } }, hatirlatma: { tr: "Gece yarısındaki tıktan sonra yazdığın adlar bir anahtara dönüştü.", en: "The names you wrote after that midnight tap have turned into a key." } }
             kronik: { tr: "Tutamağa yalnızca insanları yazdın: kendini ve {npc:mert_kilic|i}.", en: "On the handle in the System's backdoor you wrote only humans: yourself and {npc:mert_kilic}." }
             sonraki: "sa5_son"
           - id: "tek"
@@ -3256,7 +3256,7 @@ olaylar:
               - bilgi: "sa_arka_kapi"
               - itibar: { sessiz_ag: 6 }
               - iliski: { yanki: { guven: -8, korku: 6 }, mert_kilic: { guven: -10 } }
-              - tohum: { olay: "mert_kod_kirici", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "mert_kilic", gorev: { zincir_sessiz_ag: "tamam" } } }
+              - tohum: { olay: "mert_kod_kirici", gecikme: { min: 1, max: 3 }, kosul: { npc_hayatta: "mert_kilic", gorev: { zincir_sessiz_ag: "tamam" } }, hatirlatma: { tr: "Gece yarısındaki tıktan sonra yazdığın adlar bir anahtara dönüştü.", en: "The names you wrote after that midnight tap have turned into a key." } }
             kronik: { tr: "Sistem'in arka kapısındaki tutamağa kendi adından başkasını yazmadın.", en: "On the handle in the System's backdoor, you wrote only your own name." }
             sonraki: "sa5_son"
           - id: "muhurle"

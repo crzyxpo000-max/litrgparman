@@ -62,7 +62,7 @@ olaylar:
               - gorev: { hasat_savunmasi: "basla" }
               - ahlak: { duzen: 4, insanlik: 3 }
               - itibar: { siginak: 3, lonca: 2 }
-              - tohum: { olay: "p4_kusatma_ekmegi", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "p4_kusatma_ekmegi", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Hasatın ilk sabahı şehre seslendiğinden beri fırınların önü kalabalık.", en: "Since you called out to the city on the first morning of the Harvest, the lines at the bakeries have been long." } }
             kronik: { tr: "Hasat başladığında şehre ilk seslenen sen oldun. Geri sayımı o sabah herkes senin ağzından duydu.", en: "When the Harvest began, you were the first to speak to the city. That morning, everyone heard the countdown in your voice." }
             sonraki: "p4_acilis_seslen"
           - id: "meydan"
@@ -88,7 +88,7 @@ olaylar:
               - gorev: { hasat_savunmasi: "basla" }
               - gizle: 10
               - ahlak: { duzen: -3, merhamet: -1 }
-              - tohum: { olay: "p4_kadim_oncusu", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "p4_kadim_oncusu", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Hasatın ilk sabahı kalabalığın içinde bir şeyin izini sürmüştün.", en: "On the first morning of the Harvest, you'd picked up a trail in the crowd." } }
             kronik: { tr: "Herkes gökyüzüne bakakalmışken sen gemileri saydın, öncülerin nereye konduğunu ezberledin.", en: "While everyone else stared at the sky, you counted the ships and memorized where the Pathfinders touched down." }
             sonraki: "p4_acilis_golge"
           - id: "yanki"
@@ -286,7 +286,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 3 }
               - iliski: { deniz_arman: { guven: 6, baglilik: 4 } }
-              - tohum: { olay: "p4_son_gece_ates", gecikme: { min: 14, max: 20 } }
+              - tohum: { olay: "p4_son_gece_ates", gecikme: { min: 14, max: 20 }, hatirlatma: { tr: "Hasatın ilk günü iskelede geçen o saat hâlâ seninle.", en: "That hour on the pier on the first day of the Harvest is still with you." } }
             sonraki: "@akis"
 
   # ================================================================== FRAKSİYONLARIN SON POZİSYONU (AY 336)
@@ -468,7 +468,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 3, merhamet: 1 }
               - degisken: { hayatta_kalan: 1 }
-              - tohum: { olay: "p4_cocuk_ordusu", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "p4_cocuk_ordusu", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Son Masa'da verilen silah kararı bir fabrika avlusuna ulaştı.", en: "What got decided about weapons at the Last Table made it to a factory yard." } }
             sonraki: "p4_fsp_son"
 
       - id: "p4_fsp_kaz"
@@ -507,7 +507,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 5, merhamet: -5 }
               - ordu_kazan: 5
-              - tohum: { olay: "p4_cocuk_ordusu", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "p4_cocuk_ordusu", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Son Masa'da verilen silah kararı bir fabrika avlusuna ulaştı.", en: "What got decided about weapons at the Last Table made it to a factory yard." } }
             sonraki: "p4_fsp_son"
           - id: "kordon_feda"
             etiket: { tr: "Hattı daralt; {yer:kordon|i} feda et", en: "Shorten the line. Give up {yer:kordon}" }
@@ -660,7 +660,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 2 }
               - xp_seviye: 15
-              - tohum: { olay: "p4_veda_mektuplari", gecikme: { min: 1, max: 4 } }
+              - tohum: { olay: "p4_veda_mektuplari", gecikme: { min: 1, max: 4 }, hatirlatma: { tr: "Son Masa'dan herkes gittiğinde bir şey yarım kalmıştı.", en: "When everyone left the Last Table, something was left unfinished." } }
             sonraki: "@akis"
           - id: "tahliye_yardim"
             etiket: { tr: "Fener alayına katıl, yük taşı", en: "Join the procession. Carry what you can" }
@@ -674,7 +674,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: -1, duzen: 1 }
               - bolge: "kule_dibi"
-              - tohum: { olay: "p4_son_kapi", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "p4_son_kapi", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Son Masa'dan sonra gökyüzü bir kapıya hazırlanıyor.", en: "Since the Last Table, the sky has been getting ready for a Gate." } }
             sonraki: "@akis"
 
   # ================================================================== KADİM İSTİLASI (AY 342)
@@ -1181,7 +1181,7 @@ olaylar:
             etiket: { tr: "Ölüleri tek tek say", en: "Count the dead, one by one" }
             etkiler:
               - ahlak: { insanlik: 4, merhamet: 2 }
-              - tohum: { olay: "p4_yikik_kiyikent", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "p4_yikik_kiyikent", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "İstilanın ertesi sabahı geldi.", en: "The morning after the invasion is here." } }
             sonraki: "@akis"
           - id: "kule"
             etiket: { tr: "Kule'ye dön; daha bitmedi", en: "Back to the Spire. It isn't over" }
@@ -1245,7 +1245,7 @@ olaylar:
               - bayrak_kaldir: "p4_muzakere_kapisi"
               - ahlak: { duzen: -3, insanlik: 4 }
               - iliski: { thessar: { guven: -8, saygi: 6 } }
-              - tohum: { olay: "p4_yikik_kiyikent", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "p4_yikik_kiyikent", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "İstilanın ertesi sabahı geldi.", en: "The morning after the invasion is here." } }
             kronik: { tr: "Kadim antlaşmasını savaşın ortasında yırttın ve meydana geri döndün; kalemi bırakıp kılıcı seçtin.", en: "You tore up the Ancient treaty in the middle of the fighting and went back to the plaza. You put down the pen and picked up the sword." }
             sonraki: "p4_istila_2"
 
@@ -1315,14 +1315,14 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 3, merhamet: 2 }
               - iliski: { elif_sari: { guven: 4 } }
-              - tohum: { olay: "p4_yikik_kiyikent", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "p4_yikik_kiyikent", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "İstilanın ertesi sabahı geldi.", en: "The morning after the invasion is here." } }
             sonraki: "@akis"
           - id: "vali_gibi"
             etiket: { tr: "Bir vali gibi Çekirdek'e yürü", en: "Walk to the Core like a governor" }
             etkiler:
               - ahlak: { duzen: 4, insanlik: -3 }
               - itibar: { kadimler: 4, lonca: 2 }
-              - tohum: { olay: "p4_yikik_kiyikent", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "p4_yikik_kiyikent", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "İstilanın ertesi sabahı geldi.", en: "The morning after the invasion is here." } }
             sonraki: "@akis"
           - id: "yalniz"
             etiket: { tr: "Kimseyle konuşma; kıyıya in", en: "Don't talk to anyone. Go down to the water" }
@@ -1378,7 +1378,7 @@ olaylar:
               - degisken: { hayatta_kalan: -10, kadim_tehdit: 15 }
               - ahlak: { merhamet: 4, insanlik: 3 }
               - iliski: { elif_sari: { guven: 4 } }
-              - tohum: { olay: "p4_yikik_kiyikent", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "p4_yikik_kiyikent", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "İstilanın ertesi sabahı geldi.", en: "The morning after the invasion is here." } }
             sonraki: "@akis"
           - id: "intikam"
             etiket: { tr: "Kule'ye bak; intikam yemini et", en: "Look at the Spire. Swear revenge" }
@@ -1389,7 +1389,7 @@ olaylar:
               - degisken: { hayatta_kalan: -10, kadim_tehdit: 15 }
               - ahlak: { merhamet: -3, insanlik: -3 }
               - yozlasma: 4
-              - tohum: { olay: "p4_yikik_kiyikent", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "p4_yikik_kiyikent", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "İstilanın ertesi sabahı geldi.", en: "The morning after the invasion is here." } }
             sonraki: "@akis"
           - id: "kaya"
             etiket: { tr: "{npc:kaya_demir|in} yanına otur", en: "Sit down next to {npc:kaya_demir}" }
@@ -1483,7 +1483,7 @@ olaylar:
               - gorev: { cekirdege_inis: "basla" }
               - ahlak: { duzen: -4, insanlik: -2 }
               - dikkat: 10
-              - tohum: { olay: "p4_son_gece_ates", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "p4_son_gece_ates", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Merdivenin kilidini kırdığın geceden sonra birileri bir ateş yakmış.", en: "After the night you broke the lock on the stairs, somebody lit a fire." } }
             kronik: { tr: "Sistem'in kendi kilidini iradenle kırdın. O an Sistem'in sesi ilk kez şaşkın çıktı.", en: "You broke the System's own lock with sheer will, and for one moment the System's voice sounded confused for the first time." }
             sonraki: "p4_cyol_irade"
           - id: "mert_harita"
@@ -1636,7 +1636,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 2 }
               - xp_seviye: 30
-              - tohum: { olay: "p4_son_gece_ates", gecikme: { min: 1, max: 2 } }
+              - tohum: { olay: "p4_son_gece_ates", gecikme: { min: 1, max: 2 }, hatirlatma: { tr: "Merdivenin kilidini kırdığın geceden sonra birileri bir ateş yakmış.", en: "After the night you broke the lock on the stairs, somebody lit a fire." } }
             sonraki: "@akis"
           - id: "yanki_sor"
             etiket: { tr: "{npc:yanki|e} sor: neden hazır değilim?", en: "Ask {npc:yanki}: why am I not ready?" }
@@ -1672,7 +1672,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 2, duzen: 1 }
               - xp_seviye: 100
-              - tohum: { olay: "p4_son_gece_ates", gecikme: { min: 1, max: 2 } }
+              - tohum: { olay: "p4_son_gece_ates", gecikme: { min: 1, max: 2 }, hatirlatma: { tr: "Merdivenin kilidini kırdığın geceden sonra birileri bir ateş yakmış.", en: "After the night you broke the lock on the stairs, somebody lit a fire." } }
             sonraki: "@akis"
           - id: "esikte_kal"
             etiket: { tr: "Eşikte otur, satırları oku", en: "Sit on the threshold and read the lines" }
@@ -2062,7 +2062,7 @@ olaylar:
               - ahlak: { duzen: 3, insanlik: -3 }
               - degisken: { kadim_tehdit: 4 }
               - iliski: { thessar: { baglilik: 8, guven: 6 } }
-              - tohum: { olay: "p4_son_yayin", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "p4_son_yayin", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Meclis Makası'ndan sonra susan bir anten yeniden cızırdamaya başladı.", en: "After the Assembly's Shears, an antenna that had gone quiet started crackling again." } }
             sonraki: "p4_d100_thessar"
 
       - id: "p4_d100_silinme"
@@ -2213,7 +2213,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 5 }
               - degisken: { hayatta_kalan: 1 }
-              - tohum: { olay: "p4_oncu_hesabi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "p4_oncu_hesabi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Ölçenle karşılaştığın günden sonra bir not bekliyor.", en: "After the day you ran into the measurer, there's a note waiting." } }
             sonraki: "p4_oncu_kadin"
 
       - id: "p4_oncu_kadin"
@@ -2248,7 +2248,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: -2, insanlik: -1 }
               - bilgi: "oncu_defteri"
-              - tohum: { olay: "p4_oncu_hesabi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "p4_oncu_hesabi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Ölçenle karşılaştığın günden sonra bir not bekliyor.", en: "After the day you ran into the measurer, there's a note waiting." } }
             sonraki: "@akis"
 
       - id: "p4_oncu_esir"
@@ -2285,7 +2285,7 @@ olaylar:
               - bilgi: "oncu_defteri"
               - bilgi: "filo_acigi"
               - iliski: { thessar: { saygi: 5 } }
-              - tohum: { olay: "p4_oncu_hesabi", gecikme: { min: 4, max: 7 } }
+              - tohum: { olay: "p4_oncu_hesabi", gecikme: { min: 4, max: 7 }, hatirlatma: { tr: "Ölçenle karşılaştığın günden sonra bir not bekliyor.", en: "After the day you ran into the measurer, there's a note waiting." } }
             sonraki: "@akis"
 
       - id: "p4_oncu_sorgu"
@@ -2298,7 +2298,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 4, insanlik: 2 }
               - iliski: { thessar: { saygi: 4 } }
-              - tohum: { olay: "p4_oncu_hesabi", gecikme: { min: 4, max: 7 } }
+              - tohum: { olay: "p4_oncu_hesabi", gecikme: { min: 4, max: 7 }, hatirlatma: { tr: "Ölçenle karşılaştığın günden sonra bir not bekliyor.", en: "After the day you ran into the measurer, there's a note waiting." } }
             sonraki: "@akis"
           - id: "loncaya"
             etiket: { tr: "Esiri Lonca'ya teslim et", en: "Turn the prisoner over to the Guild" }
@@ -2423,7 +2423,7 @@ olaylar:
               - ahlak: { duzen: 4, merhamet: 2 }
               - itibar: { siginak: 3, lonca: 2 }
               - iliski: { kaya_demir: { guven: 4 } }
-              - tohum: { olay: "p4_yikik_kiyikent", gecikme: { min: 10, max: 14 }, kosul: { gun_min: 343 } }
+              - tohum: { olay: "p4_yikik_kiyikent", gecikme: { min: 10, max: 14 }, kosul: { gun_min: 343 }, hatirlatma: { tr: "Ekmek kuyruğunda gösterdiğin kamyonet şehrin işine yaradı.", en: "The truck you pointed out in the bread line came in handy for the city." } }
             sonraki: "p4_ekmek_kamyonet"
           - id: "firin"
             tur: "gosteris"
@@ -2555,7 +2555,7 @@ olaylar:
               - ahlak: { merhamet: 3, insanlik: 3 }
               - iliski: { aras_kurt: { guven: 10, baglilik: 8, saygi: -2 } }
               - npc_seviye: { aras_kurt: 20 }
-              - tohum: { olay: "p4_siralama_zirvesi", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "p4_siralama_zirvesi", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Son kapıda bıraktığın unvan sıralamayı değiştirdi.", en: "The title you left behind at the last Gate changed the ranking." } }
             sonraki: "p4_sonkapi_aras"
 
       - id: "p4_sonkapi_gunes"
@@ -2698,7 +2698,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 4, duzen: -1 }
               - iliski: { aras_kurt: { saygi: -6, guven: 4 } }
-              - tohum: { olay: "p4_son_yayin", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "p4_son_yayin", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Zirvede iki kişiyken reddettiğin şey bir yayına dönüştü.", en: "What you turned down when it was just the two of you at the top has turned into a broadcast." } }
             sonraki: "p4_sira_ret"
 
       - id: "p4_sira_zafer"
@@ -2822,7 +2822,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 3, duzen: 2 }
               - itibar: { siginak: 3 }
-              - tohum: { olay: "p4_son_gece_ates", gecikme: { min: 3, max: 8 } }
+              - tohum: { olay: "p4_son_gece_ates", gecikme: { min: 3, max: 8 }, hatirlatma: { tr: "Veda Postanesi'nde dizdiğin zarflardan biri sahibine ulaştı.", en: "One of the envelopes you sorted at the Farewell Post Office reached its owner." } }
             sonraki: "p4_veda_postaci"
           - id: "yanki"
             etiket: { tr: "{npc:yanki} için bir mektup yaz", en: "Write a letter for {npc:yanki}" }
@@ -2957,7 +2957,7 @@ olaylar:
               - degisken: { hayatta_kalan: 3 }
               - itibar: { siginak: 6 }
               - iliski: { elif_sari: { guven: 8, baglilik: 4 } }
-              - tohum: { olay: "p4_kacis_gemisi_kalkis", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "p4_kacis_gemisi_kalkis", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Üç yüz koltuğun kime gideceğine dair karar kalkış sabahına vardı.", en: "The call on who gets the three hundred seats has made it to the morning of departure." } }
             kronik: { tr: "Kaçış gemisinin üç yüz koltuğunu çocuklara ayırdın ve bedelini kendi seviyenden ödedin. Rampaya tırmanan küçük ayaklar senin bir yılını da yanlarında götürdü.", en: "You gave the escape ship's three hundred seats to kids and paid for them out of your own levels. A year of yours went up that ramp with them." }
             sonraki: "p4_kacis_cocuk"
           - id: "satis"
@@ -2967,7 +2967,7 @@ olaylar:
               - ahlak: { merhamet: -4, duzen: -2 }
               - degisken: { hayatta_kalan: -1 }
               - itibar: { kadimler: 3, siginak: -4 }
-              - tohum: { olay: "p4_kacis_gemisi_kalkis", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "p4_kacis_gemisi_kalkis", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Üç yüz koltuğun kime gideceğine dair karar kalkış sabahına vardı.", en: "The call on who gets the three hundred seats has made it to the morning of departure." } }
             kronik: { tr: "Koltukları terazinin insafına bıraktın. Rampaya güçlüler tırmandı, geride kalanlar rıhtımın kenarından baktı.", en: "You left the seats to the scales. The strong climbed the ramp while everyone else watched from the edge of the dock." }
             sonraki: "p4_kacis_satis"
           - id: "terazi"
@@ -2978,7 +2978,7 @@ olaylar:
               - ahlak: { duzen: 4, merhamet: 3 }
               - degisken: { hayatta_kalan: 2 }
               - iliski: { mert_kilic: { saygi: 4 } }
-              - tohum: { olay: "p4_kacis_gemisi_kalkis", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "p4_kacis_gemisi_kalkis", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Üç yüz koltuğun kime gideceğine dair karar kalkış sabahına vardı.", en: "The call on who gets the three hundred seats has made it to the morning of departure." } }
             kronik: { tr: "Kervan tüccarının parmağını kefenin altında yakalayıp rıhtımın ortasında herkese gösterdin. O gün terazi dürüst tarttı.", en: "You caught the Caravan merchant's finger under the pan and showed the whole dock. For once, the weighing was honest." }
             sonraki: "p4_kacis_terazi"
           - id: "batir"
@@ -3183,7 +3183,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 3, insanlik: 3 }
               - dikkat: 2
-              - tohum: { olay: "p4_son_gece_ates", gecikme: { min: 2, max: 6 } }
+              - tohum: { olay: "p4_son_gece_ates", gecikme: { min: 2, max: 6 }, hatirlatma: { tr: "On dört yaşındakilerin arasındaki tavalı kız seni unutmadı.", en: "The girl with the frying pan from the fourteen-year-olds hasn't forgotten you." } }
             kronik: { tr: "Bir fabrika avlusunda on dört yaşında bir kıza kızartma tavasıyla neler yapılabileceğini gösterdin; yüz kişilik sıra gülmekten iki büklüm oldu.", en: "In a factory yard, you showed a fourteen-year-old girl everything a frying pan can do, and a whole line of kids doubled over laughing." }
             sonraki: "p4_cocuk_tava"
 
@@ -3324,7 +3324,7 @@ olaylar:
               - gizle: 10
               - ahlak: { insanlik: 2, duzen: -2 }
               - iliski: { mert_kilic: { guven: 4 } }
-              - tohum: { olay: "p4_son_gece_ates", gecikme: { min: 2, max: 6 } }
+              - tohum: { olay: "p4_son_gece_ates", gecikme: { min: 2, max: 6 }, hatirlatma: { tr: "Mikrofonu bıraktığın gecenin sesi tepeye kadar çıkmış.", en: "The sound of the night you handed off the mic carried all the way up the hill." } }
             sonraki: "p4_yayin_baskasi"
 
       - id: "p4_yayin_aciga"
@@ -3463,7 +3463,7 @@ olaylar:
               - ahlak: { merhamet: 4 }
               - degisken: { hayatta_kalan: 2 }
               - iliski: { elif_sari: { guven: 6 } }
-              - tohum: { olay: "p4_son_gece_ates", gecikme: { min: 1, max: 4 } }
+              - tohum: { olay: "p4_son_gece_ates", gecikme: { min: 1, max: 4 }, hatirlatma: { tr: "Ertesi sabah kamptaki hastanede gördüklerin aklında.", en: "You're still thinking about what you saw at the camp hospital that morning after." } }
             sonraki: "p4_yikik_kamp"
 
       - id: "p4_yikik_evet"
@@ -3576,7 +3576,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 3, insanlik: 2 }
               - iliski: { deniz_arman: { guven: 4 }, elif_sari: { guven: 4 } }
-              - tohum: { olay: "p4_veda_mektuplari", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "p4_veda_mektuplari", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Son ateşin başında sorduğun soru eski postaneye kadar ulaştı.", en: "The question you asked at the last fire made it all the way to the old post office." } }
             sonraki: "p4_ates_sonra"
           - id: "yanki"
             etiket: { tr: "{npc:yanki} ile konuş; yalnızca onunla", en: "Talk to {npc:yanki}. Just to it" }

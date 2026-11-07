@@ -135,7 +135,7 @@ olaylar:
               - itibar: { siginak: -5 }
               - iliski: { elif_sari: { saygi: -3, baglilik: -2 } }
               - degisken: { lonca_golgesi: 2 }
-              - tohum: { olay: "elif_konsey_oylamasi", gecikme: { min: 10, max: 20 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "elif_konsey_oylamasi", gecikme: { min: 10, max: 20 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Konsey'in biletini aldığın günden beri yedinci gişe seni bekliyor.", en: "Since the day you took the Council's ticket, the seventh ticket window has been waiting on you." } }
             kronik: { tr: "Konsey'in biletini geri çevirdin; mendirek de her avın üçte biri de Lonca'ya kaldı.", en: "You turned down the Council's ticket. The breakwater went to the Guild, along with a third of every catch." }
             sonraki: "siginak_1_konsey_red"
 
@@ -395,7 +395,7 @@ olaylar:
               - itibar: { siginak: 4 }
               - degisken: { hayatta_kalan: 2 }
               - iliski: { elif_sari: { baglilik: 4, guven: 2 } }
-              - tohum: { olay: "elif_konsey_oylamasi", gecikme: { min: 6, max: 14 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "elif_konsey_oylamasi", gecikme: { min: 6, max: 14 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Konsey'in biletini aldığın günden beri yedinci gişe seni bekliyor.", en: "Since the day you took the Council's ticket, the seventh ticket window has been waiting on you." } }
             kronik: { tr: "Mendirek temizlenince ilk avı Gümrük'teki koğuşa ayırttın.", en: "Once the breakwater was clear, you had the first catch set aside for the ward in the Customs House." }
             sonraki: "@akis"
           - id: "kordon"
@@ -409,7 +409,7 @@ olaylar:
               - itibar: { siginak: 3 }
               - degisken: { hayatta_kalan: 3 }
               - iliski: { elif_sari: { guven: 3 } }
-              - tohum: { olay: "elif_konsey_oylamasi", gecikme: { min: 6, max: 14 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "elif_konsey_oylamasi", gecikme: { min: 6, max: 14 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Konsey'in biletini aldığın günden beri yedinci gişe seni bekliyor.", en: "Since the day you took the Council's ticket, the seventh ticket window has been waiting on you." } }
             kronik: { tr: "Mendireğin balığından tel örgünün dışındakilere, {yer:kordon|den} gelenlere de pay ayırttın.", en: "You had a share of the breakwater's fish set aside for the people outside the fence, too, the ones from {yer:kordon}." }
             sonraki: "@akis"
           - id: "cagir"
@@ -423,7 +423,7 @@ olaylar:
               - itibar: { siginak: 5 }
               - degisken: { hayatta_kalan: 2 }
               - iliski: { elif_sari: { saygi: 3 } }
-              - tohum: { olay: "elif_konsey_oylamasi", gecikme: { min: 6, max: 14 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "elif_konsey_oylamasi", gecikme: { min: 6, max: 14 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Konsey'in biletini aldığın günden beri yedinci gişe seni bekliyor.", en: "Since the day you took the Council's ticket, the seventh ticket window has been waiting on you." } }
             kronik: { tr: "Konsey'e bir dahaki işte de seni çağırmasını söyledin; artık çağıracakları biri vardı.", en: "You told the Council to call you for the next job, too. Now they had someone to call." }
             sonraki: "@akis"
 
@@ -444,7 +444,7 @@ olaylar:
               - ahlak: { insanlik: 3, merhamet: 1 }
               - itibar: { siginak: 4 }
               - iliski: { elif_sari: { guven: 3 } }
-              - tohum: { olay: "elif_konsey_oylamasi", gecikme: { min: 6, max: 14 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "elif_konsey_oylamasi", gecikme: { min: 6, max: 14 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Konsey'in biletini aldığın günden beri yedinci gişe seni bekliyor.", en: "Since the day you took the Council's ticket, the seventh ticket window has been waiting on you." } }
             kronik: { tr: "Mendirekte yenildin ve seni ağla çekip kurtaran balıkçılara teşekkür ettin; {yer:kiyikent_liman} o gün seni biraz daha sevdi.", en: "You lost on the breakwater and thanked the fishermen who netted you out. The Waterfront loved you a little more that day." }
             sonraki: "@akis"
           - id: "tek"
@@ -456,7 +456,7 @@ olaylar:
               - ahlak: { duzen: 2, insanlik: -1 }
               - itibar: { siginak: 2 }
               - iliski: { elif_sari: { saygi: 2, baglilik: -1 } }
-              - tohum: { olay: "elif_konsey_oylamasi", gecikme: { min: 6, max: 14 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "elif_konsey_oylamasi", gecikme: { min: 6, max: 14 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Konsey'in biletini aldığın günden beri yedinci gişe seni bekliyor.", en: "Since the day you took the Council's ticket, the seventh ticket window has been waiting on you." } }
             kronik: { tr: "Seni kurtaranlara bir dahaki sefere peşinden gelmemelerini söyledin.", en: "You told the people who'd saved you not to follow you down next time." }
             sonraki: "@akis"
 
@@ -478,7 +478,7 @@ olaylar:
               - ahlak: { merhamet: 2, duzen: 1 }
               - kredi: -100
               - iliski: { elif_sari: { guven: 3 } }
-              - tohum: { olay: "elif_konsey_oylamasi", gecikme: { min: 6, max: 14 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "elif_konsey_oylamasi", gecikme: { min: 6, max: 14 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Konsey'in biletini aldığın günden beri yedinci gişe seni bekliyor.", en: "Since the day you took the Council's ticket, the seventh ticket window has been waiting on you." } }
             kronik: { tr: "Mendireği Lonca bitirdi, faturayı sen ödedin; Konsey asıl kime borçlu olduğunu biliyordu.", en: "The Guild finished the breakwater and you paid the bill. The Council knew who it really owed." }
             sonraki: "@akis"
           - id: "bayrak"
@@ -490,7 +490,7 @@ olaylar:
               - xp_seviye: 10
               - ahlak: { duzen: -2, merhamet: 1 }
               - itibar: { siginak: 3, lonca: -4 }
-              - tohum: { olay: "elif_konsey_oylamasi", gecikme: { min: 6, max: 14 }, kosul: { npc_hayatta: "elif_sari" } }
+              - tohum: { olay: "elif_konsey_oylamasi", gecikme: { min: 6, max: 14 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Konsey'in biletini aldığın günden beri yedinci gişe seni bekliyor.", en: "Since the day you took the Council's ticket, the seventh ticket window has been waiting on you." } }
             kronik: { tr: "Lonca'nın bayrağını fenerden indirdin; Pala bunu bir hakaret olarak deftere yazdı.", en: "You pulled the Guild's flag off the harbor light. Cleaver wrote that down as an insult." }
             sonraki: "@akis"
 
@@ -781,7 +781,7 @@ olaylar:
               - ahlak: { merhamet: 3, insanlik: 2 }
               - iliski: { elif_sari: { baglilik: 5, guven: 3 } }
               - hafiza: { npc: "elif_sari", id: "gece_kaldi", agirlik: 20 }
-              - tohum: { olay: "elif_gece_nobeti", gecikme: { min: 45, max: 75 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: "elif_gece_nobeti_bitti" } }
+              - tohum: { olay: "elif_gece_nobeti", gecikme: { min: 45, max: 75 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: "elif_gece_nobeti_bitti" }, hatirlatma: { tr: "Yedinci gişedeki oylamadan sonra {npc:elif_sari} yükünü hiç bırakmadı.", en: "After the vote at the seventh ticket window, {npc:elif_sari} never once set the load down." } }
             kronik: { tr: "Konsey'in en uzun gecesinin sabahında hekimle birlikte koğuşu dolaştın.", en: "On the morning after the Council's longest night, you walked the ward with the doctor." }
             sonraki: "@akis"
           - id: "uyu"
@@ -791,7 +791,7 @@ olaylar:
               - xp_seviye: 20
               - ahlak: { merhamet: 2, insanlik: 3 }
               - iliski: { elif_sari: { guven: 4, baglilik: 2 } }
-              - tohum: { olay: "elif_gece_nobeti", gecikme: { min: 45, max: 75 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: "elif_gece_nobeti_bitti" } }
+              - tohum: { olay: "elif_gece_nobeti", gecikme: { min: 45, max: 75 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: "elif_gece_nobeti_bitti" }, hatirlatma: { tr: "Yedinci gişedeki oylamadan sonra {npc:elif_sari} yükünü hiç bırakmadı.", en: "After the vote at the seventh ticket window, {npc:elif_sari} never once set the load down." } }
             kronik: { tr: "Sabaha karşı {yer:kiyikent_liman|in} uykusuz hekimine koğuşun bir saat bekleyebileceğini söyledin.", en: "Toward morning, you told {yer:kiyikent_liman|pos} sleepless doctor the ward could wait an hour." }
             sonraki: "@akis"
           - id: "is"
@@ -802,7 +802,7 @@ olaylar:
               - ahlak: { duzen: 3, merhamet: 1 }
               - itibar: { siginak: 3 }
               - iliski: { elif_sari: { saygi: 3 } }
-              - tohum: { olay: "elif_gece_nobeti", gecikme: { min: 45, max: 75 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: "elif_gece_nobeti_bitti" } }
+              - tohum: { olay: "elif_gece_nobeti", gecikme: { min: 45, max: 75 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: "elif_gece_nobeti_bitti" }, hatirlatma: { tr: "Yedinci gişedeki oylamadan sonra {npc:elif_sari} yükünü hiç bırakmadı.", en: "After the vote at the seventh ticket window, {npc:elif_sari} never once set the load down." } }
             kronik: { tr: "Konsey'in her işine adını önceden yazdırdın.", en: "You put your name down for every job the Council had, in advance." }
             sonraki: "@akis"
 
@@ -1202,7 +1202,7 @@ olaylar:
               - ahlak: { merhamet: 5, insanlik: 2 }
               - itibar: { siginak: 6, yukselenler: 2 }
               - iliski: { elif_sari: { guven: 4, baglilik: 3 } }
-              - tohum: { olay: "elif_gece_nobeti", gecikme: { min: 12, max: 25 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: "elif_gece_nobeti_bitti" } }
+              - tohum: { olay: "elif_gece_nobeti", gecikme: { min: 12, max: 25 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: "elif_gece_nobeti_bitti" }, hatirlatma: { tr: "Su savaşlarında payları nasıl böldüğün gümrük binasının merdivenlerinde konuşuluyor.", en: "How you split the water during the water wars is the talk of the customs house steps." } }
             kronik: { tr: "Bidonları {yer:kiyikent_liman|in} tel örgüsünün dışına, {yer:kordon|e} ve {yer:tepe|in} eteğine kadar taşıdın.", en: "You hauled water past {yer:kiyikent_liman|pos} fence, out to {yer:kordon} and the foot of {yer:tepe}." }
             sonraki: "@akis"
           - id: "once_liman"
@@ -1214,7 +1214,7 @@ olaylar:
               - ahlak: { duzen: 3, merhamet: -2 }
               - itibar: { siginak: 4 }
               - iliski: { elif_sari: { guven: -2 } }
-              - tohum: { olay: "elif_gece_nobeti", gecikme: { min: 12, max: 25 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: "elif_gece_nobeti_bitti" } }
+              - tohum: { olay: "elif_gece_nobeti", gecikme: { min: 12, max: 25 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: "elif_gece_nobeti_bitti" }, hatirlatma: { tr: "Su savaşlarında payları nasıl böldüğün gümrük binasının merdivenlerinde konuşuluyor.", en: "How you split the water during the water wars is the talk of the customs house steps." } }
             kronik: { tr: "Suyu önce {yer:kiyikent_liman|e} ayırdın; tel örgünün dışındakilere ancak artan kalacaktı.", en: "You kept the water for {yer:kiyikent_liman} first. The people past the fence would get whatever was left." }
             sonraki: "@akis"
           - id: "kayit"
@@ -1227,7 +1227,7 @@ olaylar:
               - ahlak: { duzen: 5, merhamet: 1 }
               - itibar: { siginak: 5 }
               - iliski: { elif_sari: { saygi: 3 } }
-              - tohum: { olay: "elif_gece_nobeti", gecikme: { min: 12, max: 25 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: "elif_gece_nobeti_bitti" } }
+              - tohum: { olay: "elif_gece_nobeti", gecikme: { min: 12, max: 25 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: "elif_gece_nobeti_bitti" }, hatirlatma: { tr: "Su savaşlarında payları nasıl böldüğün gümrük binasının merdivenlerinde konuşuluyor.", en: "How you split the water during the water wars is the talk of the customs house steps." } }
             kronik: { tr: "{yer:kiyikent_liman|in} suyunun her litresini kayda geçirttin ve saklayanların cezalandırılacağını duyurdun.", en: "You had every liter of {yer:kiyikent_liman|pos} water logged and let it be known that hoarders would be punished." }
             sonraki: "@akis"
 
@@ -1432,7 +1432,7 @@ olaylar:
               - degisken: { hayatta_kalan: 2, lonca_golgesi: 1 }
               - ahlak: { duzen: 3, merhamet: 2 }
               - itibar: { siginak: 4, lonca: -5 }
-              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 80, max: 110 }, kosul: { perde: 3, bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] } }
+              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 80, max: 110 }, kosul: { perde: 3, bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Mavi ateşli o geceden beri {npc:elif_sari|in} koğuşu hiç tam uyumadı.", en: "Ever since the night of the blue fire, {npc:elif_sari|pos} ward has never really slept." } }
             kronik: { tr: "Lonca'nın {yer:kiyikent_liman|e} zehirli su sattığını belgeleyen fişi söküp cebine koydun; bunun hesabını Lonca'dan soracaktın.", en: "You peeled off the slip proving the Guild had sold {yer:kiyikent_liman} poisoned water and pocketed it. You meant to make the Guild answer for it." }
             sonraki: "elif_gece_nobeti_cokus"
           - id: "sus"
@@ -1997,7 +1997,7 @@ olaylar:
               - xp_seviye: 80
               - ahlak: { duzen: 2, merhamet: 1 }
               - itibar: { siginak: 6 }
-              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 20, max: 40 }, kosul: { perde: 3, bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] } }
+              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 20, max: 40 }, kosul: { perde: 3, bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Tahliye gecesinden beri Konsey ile Lonca arasındaki gerilim dinmedi.", en: "Since the night of the evacuation, things between the Council and the Guild haven't cooled off." } }
             kronik: { tr: "Lonca'nın bir darbe hazırladığını tahliye gecesi, daha kimse bilmezken öğrendin.", en: "On the night of the evacuation, you learned the Guild was planning a coup before anyone else knew." }
             sonraki: "@akis"
           - id: "kamp"
@@ -2009,7 +2009,7 @@ olaylar:
               - ahlak: { merhamet: 4, insanlik: 2 }
               - itibar: { siginak: 8 }
               - iliski: { elif_sari: { baglilik: 3 } }
-              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 25, max: 50 }, kosul: { perde: 3, bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] } }
+              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 25, max: 50 }, kosul: { perde: 3, bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Tahliye gecesinden beri Konsey ile Lonca arasındaki gerilim dinmedi.", en: "Since the night of the evacuation, things between the Council and the Guild haven't cooled off." } }
             kronik: { tr: "Tahliyeden sonraki geceyi on dört bin kişiye çadır kurarak geçirdin.", en: "You spent the night after the evacuation pitching tents for fourteen thousand people." }
             sonraki: "@akis"
           - id: "kayit"
@@ -2020,7 +2020,7 @@ olaylar:
               - degisken: { hayatta_kalan: 1 }
               - ahlak: { duzen: 4, merhamet: 2 }
               - itibar: { siginak: 7 }
-              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 25, max: 50 }, kosul: { perde: 3, bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] } }
+              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 25, max: 50 }, kosul: { perde: 3, bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Tahliye gecesinden beri Konsey ile Lonca arasındaki gerilim dinmedi.", en: "Since the night of the evacuation, things between the Council and the Guild haven't cooled off." } }
             kronik: { tr: "Tahliyede {yer:kiyikent_liman|e} gelen herkesin adını tek tek kaydettin; {yer:kiyikent|in} elindeki tek nüfus kütüğü artık o defterdi.", en: "You logged the name of every evacuee who reached {yer:kiyikent_liman}. That notebook was the only census {yer:kiyikent} had now." }
             sonraki: "@akis"
 
@@ -2303,7 +2303,7 @@ olaylar:
               - bayrak: "pala_yakalandi"
               - ahlak: { duzen: 5, merhamet: 2 }
               - itibar: { siginak: 5 }
-              - tohum: { olay: "pala_yargilanmasi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "pala_yargilanmasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Demir Gece'nin hesabı bekleme salonunda görülecek.", en: "The bill for the Iron Night comes due in the waiting room." } }
             kronik: { tr: "{npc:elif_sari|i} öldüren gecenin hesabını kanla değil, Konsey'in önünde sordun.", en: "You made the night that killed {npc:elif_sari} answer to the Council, not to your blade." }
             sonraki: "elif_lonca_darbesi_yas"
 
@@ -2374,7 +2374,7 @@ olaylar:
               - ahlak: { duzen: 5, merhamet: 2 }
               - itibar: { siginak: 5 }
               - iliski: { elif_sari: { saygi: 4, guven: 3 } }
-              - tohum: { olay: "pala_yargilanmasi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "pala_yargilanmasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Demir Gece'nin hesabı bekleme salonunda görülecek.", en: "The bill for the Iron Night comes due in the waiting room." } }
             kronik: { tr: "Demir Gece'nin elebaşını öldürmedin; Konsey'in önüne çıkardın.", en: "You didn't kill the man behind Iron Night. You put him in front of the Council." }
             sonraki: "elif_lonca_darbesi_sabah"
           - id: "oldur"
@@ -2409,7 +2409,7 @@ olaylar:
               - ahlak: { duzen: 5, merhamet: 2 }
               - itibar: { siginak: 5 }
               - iliski: { elif_sari: { saygi: 4 } }
-              - tohum: { olay: "pala_yargilanmasi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "pala_yargilanmasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Demir Gece'nin hesabı bekleme salonunda görülecek.", en: "The bill for the Iron Night comes due in the waiting room." } }
             kronik: { tr: "Demir Gece tek kurşun atılmadan bitti; elebaşı bıçağını yere bırakıp Konsey'e teslim oldu.", en: "Iron Night ended without a shot, and the man behind it laid down his own knife and surrendered to the Council." }
             sonraki: "elif_lonca_darbesi_sabah"
           - id: "eller"
@@ -2418,7 +2418,7 @@ olaylar:
               - bayrak: "pala_yakalandi"
               - ahlak: { insanlik: 4, merhamet: 1 }
               - iliski: { elif_sari: { baglilik: 6, guven: 3 } }
-              - tohum: { olay: "pala_yargilanmasi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "pala_yargilanmasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Demir Gece'nin hesabı bekleme salonunda görülecek.", en: "The bill for the Iron Night comes due in the waiting room." } }
             kronik: { tr: "Demir Gece bitince yaptığın ilk iş, bir hekimin titreyen ellerini tutmak oldu.", en: "When Iron Night was over, the first thing you did was hold a doctor's shaking hands." }
             sonraki: "elif_lonca_darbesi_sabah"
 
@@ -2449,7 +2449,7 @@ olaylar:
               - ahlak: { merhamet: 2, duzen: -1 }
               - itibar: { siginak: -4, lonca: 2 }
               - iliski: { elif_sari: { guven: -3 } }
-              - tohum: { olay: "pala_yargilanmasi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "pala_yargilanmasi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Demir Gece'nin hesabı bekleme salonunda görülecek.", en: "The bill for the Iron Night comes due in the waiting room." } }
             kronik: { tr: "Demir Gece'de Lonca'ya verdiğin ilaçları geri getireceğine söz verdin.", en: "On Iron Night you promised to bring back the medicine you'd handed the Guild." }
             sonraki: "@akis"
 
@@ -2849,7 +2849,7 @@ olaylar:
               - degisken: { hayatta_kalan: 2 }
               - ahlak: { merhamet: 3, insanlik: 3 }
               - itibar: { siginak: 6 }
-              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 3, max: 10 }, kosul: { perde: 3, npc_hayatta: "elif_sari", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] } }
+              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 3, max: 10 }, kosul: { perde: 3, npc_hayatta: "elif_sari", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Kuru havuzun kapısında verdiğin kararlar birilerini rahatsız etti.", en: "What you decided at the dry-dock gate rubbed somebody the wrong way." } }
             kronik: { tr: "Son Sığınak'a gireni kapıda tek tek kendin saydın; sayı tahtaya senin el yazınla geçti.", en: "You stood at the Last Haven's door and counted everyone in yourself. That number went on the board in your handwriting." }
             sonraki: "@akis"
           - id: "kural"
@@ -2861,7 +2861,7 @@ olaylar:
               - xp_seviye: 100
               - ahlak: { duzen: 5, merhamet: 1 }
               - itibar: { siginak: 6 }
-              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 3, max: 10 }, kosul: { perde: 3, npc_hayatta: "elif_sari", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] } }
+              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 3, max: 10 }, kosul: { perde: 3, npc_hayatta: "elif_sari", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Kuru havuzun kapısında verdiğin kararlar birilerini rahatsız etti.", en: "What you decided at the dry-dock gate rubbed somebody the wrong way." } }
             kronik: { tr: "Son Sığınak'ın kapı kurallarını sen yazdın: kim girecek, ne zaman, nasıl.", en: "You wrote the Last Haven's door rules: who gets in, when, and how." }
             sonraki: "@akis"
           - id: "disari"
@@ -2874,7 +2874,7 @@ olaylar:
               - xp_seviye: 100
               - ahlak: { merhamet: 5, insanlik: 2 }
               - itibar: { siginak: 4 }
-              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 3, max: 10 }, kosul: { perde: 3, npc_hayatta: "elif_sari", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] } }
+              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 3, max: 10 }, kosul: { perde: 3, npc_hayatta: "elif_sari", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Kuru havuzun kapısında verdiğin kararlar birilerini rahatsız etti.", en: "What you decided at the dry-dock gate rubbed somebody the wrong way." } }
             kronik: { tr: "Son Sığınak tamamlandığı gece içeride değil, kapının dışında kalanların yanında oturdun.", en: "On the night the Last Haven was finished, you didn't sit inside. You sat with the people left outside the door." }
             sonraki: "@akis"
 
@@ -3166,7 +3166,7 @@ olaylar:
               - bayrak: "baris_masasi_dagildi"
               - ahlak: { insanlik: -2, duzen: -1 }
               - iliski: { elif_sari: { baglilik: -4 } }
-              - tohum: { olay: "elif_son_gece", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "elif_sari", perde: 4 } }
+              - tohum: { olay: "elif_son_gece", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "elif_sari", perde: 4 }, hatirlatma: { tr: "Bavul arabalarından kurulan masanın gecesi {npc:elif_sari|in} aklında.", en: "{npc:elif_sari} keeps thinking about the night of that table built out of luggage carts." } }
             kronik: { tr: "İnsanlığın son barış masası dağılırken salondan çıkan son kişi sen olmadın.", en: "Humanity's last peace table fell apart, and you weren't the last one out of the room." }
             sonraki: "@akis"
           - id: "kal"
@@ -3175,7 +3175,7 @@ olaylar:
               - bayrak: "baris_masasi_dagildi"
               - ahlak: { insanlik: 3, merhamet: 1 }
               - iliski: { elif_sari: { baglilik: 3 } }
-              - tohum: { olay: "elif_son_gece", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "elif_sari", perde: 4 } }
+              - tohum: { olay: "elif_son_gece", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "elif_sari", perde: 4 }, hatirlatma: { tr: "Bavul arabalarından kurulan masanın gecesi {npc:elif_sari|in} aklında.", en: "{npc:elif_sari} keeps thinking about the night of that table built out of luggage carts." } }
             kronik: { tr: "Barış masası dağıldığında salonda bir hekimle kalıp tahtadaki BİR ORDU yazısına baktın.", en: "When the peace table fell apart, you stayed behind with a doctor and looked at the words ONE ARMY." }
             sonraki: "@akis"
 
@@ -3197,7 +3197,7 @@ olaylar:
               - ahlak: { merhamet: 3, duzen: 2 }
               - itibar: { siginak: 3 }
               - iliski: { elif_sari: { guven: 4, baglilik: 3 } }
-              - tohum: { olay: "elif_son_gece", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "elif_sari", perde: 4 } }
+              - tohum: { olay: "elif_son_gece", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "elif_sari", perde: 4 }, hatirlatma: { tr: "Bavul arabalarından kurulan masanın gecesi {npc:elif_sari|in} aklında.", en: "{npc:elif_sari} keeps thinking about the night of that table built out of luggage carts." } }
             kronik: { tr: "O barış masasını boşa çıkarmayacağına söz verdin.", en: "You promised that peace table would turn out to be something." }
             sonraki: "@akis"
           - id: "kurabiye"
@@ -3205,7 +3205,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 3 }
               - iliski: { elif_sari: { baglilik: 4 } }
-              - tohum: { olay: "elif_son_gece", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "elif_sari", perde: 4 } }
+              - tohum: { olay: "elif_son_gece", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "elif_sari", perde: 4 }, hatirlatma: { tr: "Bavul arabalarından kurulan masanın gecesi {npc:elif_sari|in} aklında.", en: "{npc:elif_sari} keeps thinking about the night of that table built out of luggage carts." } }
             kronik: { tr: "İnsanlığın barış masasından geriye kalan son kurabiye paketini bir hekime verdin.", en: "You gave a doctor the last pack of cookies left over from humanity's peace table." }
             sonraki: "@akis"
 

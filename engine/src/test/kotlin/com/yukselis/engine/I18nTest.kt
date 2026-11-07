@@ -132,4 +132,16 @@ class TokenResolverTest {
         assertEquals("Only English", t[Lang.TR])
         assertTrue(!t.isComplete)
     }
+
+    @Test
+    fun `iyelik ekli tamlama adlari n kaynastirmasiyla ek alir`() {
+        val s = com.yukselis.engine.i18n.TurkishSuffix
+        org.junit.Assert.assertEquals("Kule Dibi'ne", s.apply("Kule Dibi", com.yukselis.engine.i18n.TurkishSuffix.Case.DATIVE, possessive = true))
+        org.junit.Assert.assertEquals("Kasaba Çekirdeği'nde", s.apply("Kasaba Çekirdeği", com.yukselis.engine.i18n.TurkishSuffix.Case.LOCATIVE, possessive = true))
+        org.junit.Assert.assertEquals("Sığınak Konseyi'nden", s.apply("Sığınak Konseyi", com.yukselis.engine.i18n.TurkishSuffix.Case.ABLATIVE, possessive = true))
+        org.junit.Assert.assertEquals("Kule Dibi'ni", s.apply("Kule Dibi", com.yukselis.engine.i18n.TurkishSuffix.Case.ACCUSATIVE, possessive = true))
+        org.junit.Assert.assertEquals("Kasaba Çekirdeği'nin", s.apply("Kasaba Çekirdeği", com.yukselis.engine.i18n.TurkishSuffix.Case.GENITIVE, possessive = true))
+        org.junit.Assert.assertEquals("Deniz'e", s.apply("Deniz", com.yukselis.engine.i18n.TurkishSuffix.Case.DATIVE))
+    }
+
 }

@@ -315,7 +315,7 @@ olaylar:
               - iliski: { elif_sari: { guven: 3 } }
               - bayrak: "sanayi_cocuklar_odul"
               - xp_seviye: 10
-              - tohum: { olay: "sanayi_ocak_cocuklari", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "sanayi_ocak_cocuklari", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Ocak başındaki çıraklardan biri seni hâlâ arıyor.", en: "One of the apprentices from the forge is still looking for you." } }
             sonraki: "@akis"
           - id: "rapor"
             etiket: { tr: "Kusurlu çekirdekleri {npc:kaya_demir|e} raporla", en: "Report the faulty cores to {npc:kaya_demir}" }
@@ -325,7 +325,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 4, guven: 3 } }
               - bayrak: "sanayi_ocak_raporlandi"
               - xp_seviye: 15
-              - tohum: { olay: "sanayi_ocak_cocuklari", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "sanayi_ocak_cocuklari", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Ocak başındaki çıraklardan biri seni hâlâ arıyor.", en: "One of the apprentices from the forge is still looking for you." } }
             sonraki: "@akis"
           - id: "unutun"
             tur: "gizle"
@@ -408,7 +408,7 @@ olaylar:
               - ahlak: { merhamet: 2, duzen: 2 }
               - bayrak: "ocak_cocugu_ocakta"
               - xp_seviye: 10
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Körükçü çocuğun hikâyesi senin hikâyene karışmış.", en: "The bellows kid's story has gotten mixed up with yours." } }
             sonraki: "sanayi_ocak_cocuklari_usta"
           - id: "yolla"
             etiket: { tr: "Boruyu elinden al; eve gitmesini söyle", en: "Take the pipe. Tell him to go home" }
@@ -429,7 +429,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 2, duzen: 2 }
               - xp_seviye: 15
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Körükçü çocuğun hikâyesi senin hikâyene karışmış.", en: "The bellows kid's story has gotten mixed up with yours." } }
             sonraki: "@akis"
           - id: "adin"
             etiket: { tr: "Adını kullanmasına izin ver; korur onu", en: "Let him use your name. It'll protect him" }
@@ -438,7 +438,7 @@ olaylar:
               - dikkat: 2
               - xp_seviye: 15
               - bayrak: "ocak_cocugu_adini_tasir"
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Körükçü çocuğun hikâyesi senin hikâyene karışmış.", en: "The bellows kid's story has gotten mixed up with yours." } }
             sonraki: "@akis"
 
       - id: "sanayi_ocak_cocuklari_usta"
@@ -696,7 +696,7 @@ olaylar:
               - bayrak: "sanayi_subay_teslim"
               - bayrak: "sanayi_avci_kurtarildi"
               - xp_seviye: 30
-              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Lonca avlusundaki o avcı seni unutmadı.", en: "That hunter from the Guild yard hasn't forgotten you." } }
             kronik: { tr: "Disiplin subayını {npc:kaya_demir|e} teslim edip Lonca'dan kendi kuralını bir subaya da uygulamasını istedin.", en: "You turned the provost over to {npc:kaya_demir} and demanded the Guild hold an officer to its own rule." }
             sonraki: "@akis"
           - id: "cevir"
@@ -709,7 +709,7 @@ olaylar:
               - bayrak: "sanayi_subay_kirbaclandi"
               - bayrak: "sanayi_avci_kurtarildi"
               - xp_seviye: 30
-              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Lonca avlusundaki o avcı seni unutmadı.", en: "That hunter from the Guild yard hasn't forgotten you." } }
             kronik: { tr: "Çelik halatı subayın sırtına indirdin; o sabah avluda haklı olan değil, güçlü olan konuştu.", en: "You turned the cable on the provost. That day the yard didn't care who was right, only who was stronger." }
             sonraki: "@akis"
           - id: "siginak"
@@ -722,7 +722,7 @@ olaylar:
               - bayrak: "sanayi_avci_kurtarildi"
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 30
-              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Lonca avlusundaki o avcı seni unutmadı.", en: "That hunter from the Guild yard hasn't forgotten you." } }
             kronik: { tr: "Kaçak avcıyı ve kız kardeşini Lonca'nın avlusundan alıp Sığınak'a götürdün.", en: "You walked the deserter and his little sister out of the Guild yard and over to the Haven." }
             sonraki: "@akis"
           - id: "sizdir"
@@ -735,7 +735,7 @@ olaylar:
               - bayrak: "sanayi_defter_sizdi"
               - bayrak: "sanayi_avci_kurtarildi"
               - xp_seviye: 30
-              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Lonca avlusundaki o avcı seni unutmadı.", en: "That hunter from the Guild yard hasn't forgotten you." } }
             kronik: { tr: "Lonca ile {yer:tepe} arasındaki kaçak çekirdek defterini Sessiz Ağ'a sızdırdın.", en: "You leaked the Guild-to-Heights core-smuggling ledger to the Quiet Network." }
             sonraki: "@akis"
 
@@ -755,7 +755,7 @@ olaylar:
               - dikkat: 2
               - bayrak: "sanayi_avci_kirbaclandi"
               - xp_seviye: 25
-              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Lonca avlusundaki o avcı seni unutmadı.", en: "That hunter from the Guild yard hasn't forgotten you." } }
             kronik: { tr: "Lonca avlusunda on kırbacın onunu da sen vurdun.", en: "In the Guild yard, you swung all ten lashes yourself." }
             sonraki: "@akis"
           - id: "iskala"
@@ -766,7 +766,7 @@ olaylar:
               - ahlak: { merhamet: 3, duzen: -2 }
               - bayrak: "sanayi_avci_hafif"
               - xp_seviye: 25
-              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Lonca avlusundaki o avcı seni unutmadı.", en: "That hunter from the Guild yard hasn't forgotten you." } }
             kronik: { tr: "Halatı on kez indirdin, on kez de bile bile ıskaladın; avluya gerçek bir ceza gibi göründü.", en: "You brought the cable down ten times and missed on purpose ten times. To the yard, it looked like the real thing." }
             sonraki: "sanayi_disiplin_meydani_iskala"
           - id: "at"
@@ -834,7 +834,7 @@ olaylar:
               - efsane: "kapiyi_yalniz_kapatti"
               - bayrak: "sanayi_avci_kurtarildi"
               - xp_seviye: 40
-              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Lonca avlusundaki o avcı seni unutmadı.", en: "That hunter from the Guild yard hasn't forgotten you." } }
             kronik: { tr: "Öğlen çanından önce bir kapıyı tek başına kapatıp bir kaçağı Lonca'dan satın aldın.", en: "You closed a Gate solo before the noon bell and bought a deserter back from the Guild." }
             sonraki: "@akis"
           - id: "serbest_ikili"
@@ -846,7 +846,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 3 } }
               - bayrak: "sanayi_avci_kurtarildi"
               - xp_seviye: 40
-              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Lonca avlusundaki o avcı seni unutmadı.", en: "That hunter from the Guild yard hasn't forgotten you." } }
             kronik: { tr: "Bir kaçağı kendi borcunu ödeyen bir avcıya çevirdin.", en: "You turned a deserter into a hunter who paid off his own debt." }
             sonraki: "@akis"
           - id: "cep"
@@ -872,7 +872,7 @@ olaylar:
               - can: 15
               - bayrak: "sanayi_avci_kirbaclandi"
               - xp_seviye: 15
-              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Lonca avlusundaki o avcı seni unutmadı.", en: "That hunter from the Guild yard hasn't forgotten you." } }
             kronik: { tr: "Bir kaçak uğruna girdiğin silodan yenik çıktın; yine de senin sayende kırbacın yarısından kurtuldu.", en: "You went into the silo for a deserter and lost, and he still dodged half the lash because of you." }
             sonraki: "@akis"
           - id: "yarin"
@@ -882,7 +882,7 @@ olaylar:
               - itibar: { lonca: 2 }
               - bayrak: "sanayi_avci_kirbaclandi"
               - xp_seviye: 15
-              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Lonca avlusundaki o avcı seni unutmadı.", en: "That hunter from the Guild yard hasn't forgotten you." } }
             kronik: { tr: "Silodan yenik döndüğün akşam subayın yüzüne, ertesi gün yine gireceğini söyledin.", en: "The evening you came back from the silo beaten, you told the provost to his face you'd go back in tomorrow." }
             sonraki: "@akis"
 
@@ -905,7 +905,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: -3, duzen: 2 }
               - bayrak: "sanayi_avci_kirbaclandi"
-              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Lonca avlusundaki o avcı seni unutmadı.", en: "That hunter from the Guild yard hasn't forgotten you." } }
             kronik: { tr: "On kırbacı tek tek saydın ve parmağını kıpırdatmadın.", en: "You counted all ten lashes and did nothing." }
             sonraki: "@akis"
           - id: "git"
@@ -928,7 +928,7 @@ olaylar:
               - ahlak: { duzen: 2 }
               - itibar: { lonca: 2 }
               - bayrak: "sanayi_avci_hafif"
-              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Lonca avlusundaki o avcı seni unutmadı.", en: "That hunter from the Guild yard hasn't forgotten you." } }
             kronik: { tr: "On kırbacı üçe indirttin. Kuralı kırmadın, yalnızca eğip büktün.", en: "You talked ten lashes down to three. You didn't break the rule. You bent it." }
             sonraki: "@akis"
           - id: "iksir"
@@ -938,7 +938,7 @@ olaylar:
               - esya: { kucuk_iyilesme_iksiri: -1 }
               - ahlak: { merhamet: 3, insanlik: 1 }
               - bayrak: "sanayi_avci_hafif"
-              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sanayi_kacak_avci", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Lonca avlusundaki o avcı seni unutmadı.", en: "That hunter from the Guild yard hasn't forgotten you." } }
             kronik: { tr: "Revirde yatan bir kızın başucuna iksir bıraktın.", en: "You left a potion at the bedside of a girl in the infirmary." }
             sonraki: "@akis"
 
@@ -1013,7 +1013,7 @@ olaylar:
             etiket: { tr: "Yanında birini istemediğini söyle", en: "Tell him you don't take followers" }
             etkiler:
               - ahlak: { insanlik: -1 }
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Silodan dönen avcıyla aranızda geçenler bir hikâyeye dönmüş.", en: "What went on between you and the hunter who came back from the silo has turned into a story." } }
             sonraki: "@akis"
 
       - id: "sanayi_kacak_avci_yemin"
@@ -1031,7 +1031,7 @@ olaylar:
             etiket: { tr: "Ona ilk görevini ver: dinlen", en: "Give him his first order: get some sleep" }
             etkiler:
               - ahlak: { merhamet: 2 }
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Silodan dönen avcıyla aranızda geçenler bir hikâyeye dönmüş.", en: "What went on between you and the hunter who came back from the silo has turned into a story." } }
             sonraki: "@akis"
 
       - id: "sanayi_kacak_avci_kal"
@@ -1045,7 +1045,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 2, insanlik: 2 }
               - degisken: { hayatta_kalan: 1 }
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Silodan dönen avcıyla aranızda geçenler bir hikâyeye dönmüş.", en: "What went on between you and the hunter who came back from the silo has turned into a story." } }
             sonraki: "@akis"
 
       - id: "sanayi_kacak_avci_tepe"
@@ -1190,7 +1190,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 2 }
               - xp_seviye: 10
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Hamal aranan o kapıda olanlar unutulmamış.", en: "Nobody's forgotten what happened at that Gate where they wanted a porter." } }
             sonraki: "@akis"
 
       - id: "sanayi_kapi_ilanlari_katip_red"
@@ -1268,7 +1268,7 @@ olaylar:
               - xp_seviye: 30
               - ahlak: { merhamet: 3 }
               - iliski: { kaya_demir: { saygi: 2 } }
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Hamal aranan o kapıda olanlar unutulmamış.", en: "Nobody's forgotten what happened at that Gate where they wanted a porter." } }
             sonraki: "@akis"
           - id: "ders"
             etiket: { tr: "Lidere dön: \"Bir dahakine hamalına iyi bak\"", en: "Turn to the leader. \"Next time, treat your porter right\"" }
@@ -1277,7 +1277,7 @@ olaylar:
               - xp_seviye: 30
               - dikkat: 1
               - ahlak: { duzen: 1 }
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Hamal aranan o kapıda olanlar unutulmamış.", en: "Nobody's forgotten what happened at that Gate where they wanted a porter." } }
             sonraki: "@akis"
 
       - id: "sanayi_kapi_ilanlari_gizli_zafer"
@@ -1294,7 +1294,7 @@ olaylar:
               - xp_seviye: 30
               - gizle: 2
               - ahlak: { insanlik: 1 }
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Hamal aranan o kapıda olanlar unutulmamış.", en: "Nobody's forgotten what happened at that Gate where they wanted a porter." } }
             sonraki: "@akis"
           - id: "kiz"
             etiket: { tr: "Kıza göz kırp; o seni ele vermez", en: "Wink at the girl. She won't give you up" }
@@ -1303,7 +1303,7 @@ olaylar:
               - xp_seviye: 30
               - ahlak: { merhamet: 1, duzen: -1 }
               - bayrak: "sanayi_kiz_biliyor"
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Hamal aranan o kapıda olanlar unutulmamış.", en: "Nobody's forgotten what happened at that Gate where they wanted a porter." } }
             sonraki: "@akis"
 
       - id: "sanayi_kapi_ilanlari_tek_zafer"
@@ -1331,7 +1331,7 @@ olaylar:
               - xp_seviye: 35
               - efsane: "kapiyi_yalniz_kapatti"
               - ahlak: { merhamet: 2 }
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Hamal aranan o kapıda olanlar unutulmamış.", en: "Nobody's forgotten what happened at that Gate where they wanted a porter." } }
             sonraki: "@akis"
 
       - id: "sanayi_kapi_ilanlari_birak"
@@ -1344,7 +1344,7 @@ olaylar:
             etiket: { tr: "İlana bakmadan geç", en: "Walk past without looking at the notice" }
             etkiler:
               - ahlak: { insanlik: -1 }
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Hamal aranan o kapıda olanlar unutulmamış.", en: "Nobody's forgotten what happened at that Gate where they wanted a porter." } }
             sonraki: "@akis"
 
       - id: "sanayi_kapi_ilanlari_yenilgi"
@@ -1485,7 +1485,7 @@ olaylar:
               - bayrak: "sanayi_grev_ezildi"
               - degisken: { hayatta_kalan: -2 }
               - xp_seviye: 30
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "{yer:sanayi|de}ki grevi nasıl bitirdiğin ağızdan ağıza dolaşıyor.", en: "How you ended that strike at {yer:sanayi} is making the rounds." } }
             kronik: { tr: "Grevin elebaşlarını Lonca'nın icracılarına bıraktın; vinççi kadını kolundan tutup götürdüler.", en: "You handed the strike leaders over to the Guild's enforcers, and they dragged the crane operator off by the arm." }
             sonraki: "@akis"
           - id: "koru"
@@ -1523,7 +1523,7 @@ olaylar:
               - bayrak: "sanayi_grev_kazanildi"
               - degisken: { hayatta_kalan: 2 }
               - xp_seviye: 40
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "{yer:sanayi|de}ki grevi nasıl bitirdiğin ağızdan ağıza dolaşıyor.", en: "How you ended that strike at {yer:sanayi} is making the rounds." } }
             kronik: { tr: "Pazarlık masasında kural on ikiyi yırttırıp haddehanenin sırasızlarına tam tayınlarını geri kazandırdın.", en: "At the negotiating table you got Rule Twelve torn up and won the mill's unranked their full rations back." }
             sonraki: "@akis"
           - id: "is"
@@ -1568,7 +1568,7 @@ olaylar:
               - itibar: { lonca: 3, siginak: -2 }
               - bayrak: "sanayi_grev_ezildi"
               - xp_seviye: 25
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "{yer:sanayi|de}ki grevi nasıl bitirdiğin ağızdan ağıza dolaşıyor.", en: "How you ended that strike at {yer:sanayi} is making the rounds." } }
             kronik: { tr: "Grev kana bulanırken grevcileri yere yatırıp kimsenin ölmemesini sağladın.", en: "When the strike turned bloody, you put the strikers on the ground and made sure nobody died." }
             sonraki: "@akis"
           - id: "ac"
@@ -1646,7 +1646,7 @@ olaylar:
               - bayrak: "sanayi_grev_kazanildi"
               - degisken: { hayatta_kalan: 2 }
               - xp_seviye: 40
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "{yer:sanayi|de}ki grevi nasıl bitirdiğin ağızdan ağıza dolaşıyor.", en: "How you ended that strike at {yer:sanayi} is making the rounds." } }
             kronik: { tr: "Kural kalkana kadar bir gün bir gece barikattan inmedin; sonunda Lonca kural on ikiyi geri çekti.", en: "You held the rolling mill barricade for a day and a night, and the Guild withdrew Rule Twelve." }
             sonraki: "@akis"
           - id: "masa"
@@ -1679,7 +1679,7 @@ olaylar:
               - itibar: { lonca: -2 }
               - bayrak: "sanayi_grev_ezildi"
               - xp_seviye: 15
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "{yer:sanayi|de}ki grevi nasıl bitirdiğin ağızdan ağıza dolaşıyor.", en: "How you ended that strike at {yer:sanayi} is making the rounds." } }
             kronik: { tr: "Yenildiğin akşam Lonca'nın kapısına gidip vinççi kadını geri istedin.", en: "The evening you lost, you walked up to the Guild's door and demanded the crane operator back." }
             sonraki: "@akis"
 
@@ -1699,7 +1699,7 @@ olaylar:
               - bayrak: "sanayi_grev_kazanildi"
               - degisken: { hayatta_kalan: 3 }
               - xp_seviye: 40
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "{yer:sanayi|de}ki grevi nasıl bitirdiğin ağızdan ağıza dolaşıyor.", en: "How you ended that strike at {yer:sanayi} is making the rounds." } }
             kronik: { tr: "Kasaba Çekirdeği'nden kural on ikiyi sildin; o gün tayın herkese eşit dağıtıldı.", en: "You deleted Rule Twelve from {yer:kasaba_cekirdegi}, and that day rations went out equal for everybody." }
             sonraki: "@akis"
           - id: "yaz"
@@ -1737,7 +1737,7 @@ olaylar:
               - ahlak: { merhamet: 2, insanlik: 2 }
               - bayrak: "sanayi_grev_kanli"
               - degisken: { hayatta_kalan: -2 }
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "{yer:sanayi|de}ki grevi nasıl bitirdiğin ağızdan ağıza dolaşıyor.", en: "How you ended that strike at {yer:sanayi} is making the rounds." } }
             kronik: { tr: "Uzak kaldığın grevin iki ölüsü toprağa verilirken cenazenin en arkasında durdun.", en: "You stood at the very back at the funeral of the two who died in the strike you stayed out of." }
             sonraki: "@akis"
           - id: "yuru"
@@ -1835,7 +1835,7 @@ olaylar:
               - gizle: 2
               - ahlak: { insanlik: 1 }
               - xp_seviye: 10
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Tebeşirle yazılmış sıra tabelasının önünde yaptıkların anlatılıyor.", en: "People are telling what you did in front of that chalked ranking board." } }
             sonraki: "@akis"
           - id: "aksam"
             etiket: { tr: "Akşam onu talim sahasında yalnız yakala", en: "Catch him alone on the training ground tonight" }
@@ -1856,7 +1856,7 @@ olaylar:
               - gizle: 1
               - xp_seviye: 20
               - bayrak: "sanayi_seksen_sekiz_susturuldu"
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Tebeşirle yazılmış sıra tabelasının önünde yaptıkların anlatılıyor.", en: "People are telling what you did in front of that chalked ranking board." } }
             sonraki: "@akis"
 
       - id: "sanayi_siralama_tabelasi_aksam_yenilgi"
@@ -1909,7 +1909,7 @@ olaylar:
               - itibar: { siginak: 2, lonca: -2 }
               - iliski: { kaya_demir: { saygi: -1 } }
               - xp_seviye: 20
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Tebeşirle yazılmış sıra tabelasının önünde yaptıkların anlatılıyor.", en: "People are telling what you did in front of that chalked ranking board." } }
             sonraki: "@akis"
           - id: "geri"
             etiket: { tr: "Seksen Sekiz'e kestiği payları geri dağıttır", en: "Make Eighty-Eight pay back every cut he took" }
@@ -1919,7 +1919,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 2 } }
               - bayrak: "sanayi_seksen_sekiz_susturuldu"
               - xp_seviye: 20
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Tebeşirle yazılmış sıra tabelasının önünde yaptıkların anlatılıyor.", en: "People are telling what you did in front of that chalked ranking board." } }
             sonraki: "@akis"
           - id: "al"
             etiket: { tr: "Çift tayın senin hakkın; al ve otur", en: "Double rations are yours now. Take them, sit down" }
@@ -1942,7 +1942,7 @@ olaylar:
               - ahlak: { duzen: 1, merhamet: 1 }
               - xp_seviye: 15
               - bayrak: "sanayi_seksen_sekiz_susturuldu"
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Tebeşirle yazılmış sıra tabelasının önünde yaptıkların anlatılıyor.", en: "People are telling what you did in front of that chalked ranking board." } }
             sonraki: "@akis"
           - id: "yaz"
             etiket: { tr: "Tahtanın altına tebeşirle yaz: \"Pay yok.\"", en: "Chalk it under the board: \"No more cuts.\"" }
@@ -1952,7 +1952,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 2 } }
               - xp_seviye: 15
               - bayrak: "sanayi_seksen_sekiz_susturuldu"
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Tebeşirle yazılmış sıra tabelasının önünde yaptıkların anlatılıyor.", en: "People are telling what you did in front of that chalked ranking board." } }
             sonraki: "@akis"
 
       - id: "sanayi_siralama_tabelasi_aras"
@@ -1968,7 +1968,7 @@ olaylar:
             etkiler:
               - iliski: { aras_kurt: { saygi: 3 } }
               - xp_seviye: 10
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Tebeşirle yazılmış sıra tabelasının önünde yaptıkların anlatılıyor.", en: "People are telling what you did in front of that chalked ranking board." } }
             sonraki: "@akis"
           - id: "sessiz"
             tur: "gizle"
@@ -2026,7 +2026,7 @@ olaylar:
               - gizle: 3
               - ahlak: { insanlik: 1 }
               - xp_seviye: 10
-              - tohum: { olay: "sanayi_ocak_cocuklari", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "sanayi_cocuklar_odul" } }
+              - tohum: { olay: "sanayi_ocak_cocuklari", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "sanayi_cocuklar_odul" }, hatirlatma: { tr: "Varilin başında dinlediğin hikâye birinin kulağına daha gitmiş.", en: "The story you heard by the burning barrel got to one more set of ears." } }
             sonraki: "@akis"
           - id: "ben"
             tur: "aciga_vur"
@@ -2212,7 +2212,7 @@ olaylar:
               - dikkat: 3
               - bayrak: "tepe_sinav_bozuldu"
               - xp_seviye: 60
-              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
+              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 }, hatirlatma: { tr: "On iki yaşındaki çocuğun sınavı bitti, ama o gün bitmedi.", en: "The twelve-year-old's trial ended. That day didn't." } }
             kronik: { tr: "Beşik'i kapattın, {yer:tepe} önünde diz çöktü ve sen buna izin verdin.", en: "After you closed the Cradle, you let {yer:tepe} kneel to you." }
             sonraki: "@akis"
           - id: "in"
@@ -2225,7 +2225,7 @@ olaylar:
               - bayrak: "tepe_kiz_indirildi"
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 60
-              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
+              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 }, hatirlatma: { tr: "On iki yaşındaki çocuğun sınavı bitti, ama o gün bitmedi.", en: "The twelve-year-old's trial ended. That day didn't." } }
             kronik: { tr: "Beşik'i kapattın, kurdeleli kızı ve annesini {yer:tepe|den} indirdin.", en: "You closed the Cradle and walked the girl with the ribbon and her mother down off {yer:tepe}." }
             sonraki: "@akis"
           - id: "uyar"
@@ -2237,7 +2237,7 @@ olaylar:
               - bayrak: "tepe_sinav_bozuldu"
               - bayrak: "tepe_kiz_indirildi"
               - xp_seviye: 60
-              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
+              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 }, hatirlatma: { tr: "On iki yaşındaki çocuğun sınavı bitti, ama o gün bitmedi.", en: "The twelve-year-old's trial ended. That day didn't." } }
             kronik: { tr: "Kutsayıcının gözünün içine bakıp {yer:tepe|de} açılacak her Beşik'i kapatacağını söyledin.", en: "You looked the Anointer in the eye and told him you'd close every Cradle they opened in {yer:tepe}." }
             sonraki: "@akis"
 
@@ -2259,7 +2259,7 @@ olaylar:
               - bayrak: "tepe_sinav_bozuldu"
               - bayrak: "tepe_kiz_indirildi"
               - xp_seviye: 50
-              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
+              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 }, hatirlatma: { tr: "On iki yaşındaki çocuğun sınavı bitti, ama o gün bitmedi.", en: "The twelve-year-old's trial ended. That day didn't." } }
             kronik: { tr: "Kutsayıcıyı kendi Beşik'ine girmeye zorladın; kalabalık onun kapıya inişini seyretti.", en: "You forced the Anointer down into his own Cradle while the crowd watched him go." }
             sonraki: "@akis"
           - id: "aileler"
@@ -2272,7 +2272,7 @@ olaylar:
               - bayrak: "tepe_kiz_indirildi"
               - degisken: { hayatta_kalan: 2 }
               - xp_seviye: 50
-              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
+              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 }, hatirlatma: { tr: "On iki yaşındaki çocuğun sınavı bitti, ama o gün bitmedi.", en: "The twelve-year-old's trial ended. That day didn't." } }
             kronik: { tr: "Beşik sınavındaki hileyi ortaya çıkardın; {yer:tepe|in} aileleri çocuklarını alıp gitti.", en: "You exposed the Cradle trial, and the families of {yer:tepe} took their kids and left." }
             sonraki: "@akis"
           - id: "kapat"
@@ -2321,7 +2321,7 @@ olaylar:
               - ahlak: { insanlik: -2, duzen: 1 }
               - bayrak: "tepe_kiz_secilmis"
               - xp_seviye: 40
-              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
+              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 }, hatirlatma: { tr: "On iki yaşındaki çocuğun sınavı bitti, ama o gün bitmedi.", en: "The twelve-year-old's trial ended. That day didn't." } }
             kronik: { tr: "Beşik'ten çıkan kız Seçilmiş oldu; bunun ne demek olduğunu ona sen öğrettin.", en: "The girl came out of the Cradle one of the Chosen. You're the one who taught her what that means." }
             sonraki: "@akis"
           - id: "anne"
@@ -2330,7 +2330,7 @@ olaylar:
               - ahlak: { merhamet: 1, insanlik: 1 }
               - bayrak: "tepe_kiz_secilmis"
               - xp_seviye: 40
-              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
+              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 }, hatirlatma: { tr: "On iki yaşındaki çocuğun sınavı bitti, ama o gün bitmedi.", en: "The twelve-year-old's trial ended. That day didn't." } }
             kronik: { tr: "Kızı ittikten sonra annesinin yüzüne bakmaya kendini zorladın.", en: "After you pushed the girl, you made yourself look her mother in the face." }
             sonraki: "@akis"
 
@@ -2382,7 +2382,7 @@ olaylar:
               - ahlak: { merhamet: -5, insanlik: -3 }
               - bayrak: "tepe_kiz_yakit"
               - degisken: { hayatta_kalan: -1 }
-              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
+              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 }, hatirlatma: { tr: "On iki yaşındaki çocuğun sınavı bitti, ama o gün bitmedi.", en: "The twelve-year-old's trial ended. That day didn't." } }
             kronik: { tr: "Kurdeleli kızı yakıt evlerine götürürlerken arkasından bakıp kaldın.", en: "You watched them walk the girl with the ribbon down to the fuel houses." }
             sonraki: "@akis"
 
@@ -2403,7 +2403,7 @@ olaylar:
               - bayrak: "tepe_kiz_indirildi"
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 45
-              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
+              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 }, hatirlatma: { tr: "On iki yaşındaki çocuğun sınavı bitti, ama o gün bitmedi.", en: "The twelve-year-old's trial ended. That day didn't." } }
             kronik: { tr: "Yakıt ilan edilen kızla annesini {yer:tepe|den} Sığınak'a taşıdın.", en: "You carried a girl they'd declared fuel, and her mother, from {yer:tepe} down to the Haven." }
             sonraki: "@akis"
           - id: "kendin"
@@ -2417,7 +2417,7 @@ olaylar:
               - bayrak: "tepe_kiz_korumada"
               - dikkat: 1
               - xp_seviye: 45
-              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
+              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 }, hatirlatma: { tr: "On iki yaşındaki çocuğun sınavı bitti, ama o gün bitmedi.", en: "The twelve-year-old's trial ended. That day didn't." } }
             kronik: { tr: "Beşik'ten yakıt diye çıkan kızı kendi adının korumasına aldın.", en: "You put the girl who came out of the Cradle as fuel under the protection of your own name." }
             sonraki: "@akis"
 
@@ -2441,7 +2441,7 @@ olaylar:
               - bayrak: "tepe_sinav_bozuldu"
               - bayrak: "tepe_kiz_indirildi"
               - xp_seviye: 80
-              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
+              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 }, hatirlatma: { tr: "On iki yaşındaki çocuğun sınavı bitti, ama o gün bitmedi.", en: "The twelve-year-old's trial ended. That day didn't." } }
             kronik: { tr: "Beşik'ten bir kızla çıktın, gerçek seviyenle de {yer:tepe|in} muhafızlarını oldukları yere çiviledin.", en: "You came out of the Cradle with a girl on your back and froze {yer:tepe}' guards in place with your true level." }
             sonraki: "@akis"
           - id: "annesine"
@@ -2455,7 +2455,7 @@ olaylar:
               - bayrak: "tepe_kiz_indirildi"
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 80
-              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
+              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 }, hatirlatma: { tr: "On iki yaşındaki çocuğun sınavı bitti, ama o gün bitmedi.", en: "The twelve-year-old's trial ended. That day didn't." } }
             kronik: { tr: "Beşik'in bekçisini öldürdün ve kurdeleli kızı annesine geri verdin.", en: "You killed the Cradle's keeper and gave the girl with the ribbon back to her mother." }
             sonraki: "@akis"
           - id: "secilmis"
@@ -2467,7 +2467,7 @@ olaylar:
               - bayrak: "tepe_sinav_bozuldu"
               - bayrak: "tepe_kiz_secilmis"
               - xp_seviye: 80
-              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
+              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 }, hatirlatma: { tr: "On iki yaşındaki çocuğun sınavı bitti, ama o gün bitmedi.", en: "The twelve-year-old's trial ended. That day didn't." } }
             kronik: { tr: "Beşik'ten kurtardığın kızı Yükselenler'in Seçilmişleri arasına yazdırdın; onu böyle koruyabileceğini düşündün.", en: "You had the girl you saved from the Cradle written in among the Ascended's Chosen. You figured that was how to keep her safe." }
             sonraki: "@akis"
 
@@ -2485,7 +2485,7 @@ olaylar:
               - hafiza: { npc: "vahit", id: "kurbani_kurtardi", agirlik: 20 }
               - bayrak: "tepe_kiz_indirildi"
               - xp_seviye: 30
-              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
+              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 }, hatirlatma: { tr: "On iki yaşındaki çocuğun sınavı bitti, ama o gün bitmedi.", en: "The twelve-year-old's trial ended. That day didn't." } }
             kronik: { tr: "Beşik'te yenildin ama kızı yine de kucağında {yer:tepe|den} indirdin.", en: "You lost inside the Cradle, but you still carried the girl down off {yer:tepe}." }
             sonraki: "@akis"
           - id: "pazarlik"
@@ -2497,7 +2497,7 @@ olaylar:
               - iliski: { vahit: { saygi: 1 } }
               - bayrak: "tepe_kiz_secilmis"
               - xp_seviye: 30
-              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
+              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 }, hatirlatma: { tr: "On iki yaşındaki çocuğun sınavı bitti, ama o gün bitmedi.", en: "The twelve-year-old's trial ended. That day didn't." } }
             kronik: { tr: "Bir kız yakıt sayılmasın diye Kutsayıcının avucuna kredi saydın.", en: "You counted out credits to the Anointer so a girl wouldn't be counted as fuel." }
             sonraki: "@akis"
 
@@ -2514,7 +2514,7 @@ olaylar:
               - bayrak: "tepe_kiz_indirildi"
               - bayrak: "tepe_sinav_suruyor"
               - xp_seviye: 25
-              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 } }
+              - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 }, hatirlatma: { tr: "On iki yaşındaki çocuğun sınavı bitti, ama o gün bitmedi.", en: "The twelve-year-old's trial ended. That day didn't." } }
             kronik: { tr: "Bir kızı Beşik'ten kurtardın ama Beşik açık kaldı ve ertesi günün sırası çoktan birine yazılmıştı.", en: "You got one girl out of the Cradle, but the Cradle stayed open, and tomorrow's turn already had somebody's name on it." }
             sonraki: "@akis"
           - id: "don"
@@ -2736,7 +2736,7 @@ olaylar:
               - bayrak: "tepe_dede_kurtarildi"
               - degisken: { hayatta_kalan: 2 }
               - xp_seviye: 40
-              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Sayım gecesi çatı arasındaki dedeyi düşünmeden geçen gün olmadı.", en: "Not a day's gone by since the census night that you haven't thought of the old man in the attic." } }
             kronik: { tr: "Fenerin karanlık kaldığı gece bir dedeyle bir kızı {yer:tepe|den} indirdin.", en: "The night the lantern stayed dark, you got an old man and a girl down off {yer:tepe}." }
             sonraki: "@akis"
           - id: "kal"
@@ -2746,7 +2746,7 @@ olaylar:
               - bayrak: "tepe_dede_kurtarildi"
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 40
-              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Sayım gecesi çatı arasındaki dedeyi düşünmeden geçen gün olmadı.", en: "Not a day's gone by since the census night that you haven't thought of the old man in the attic." } }
             kronik: { tr: "Bir aileyi {yer:tepe|de}, sayımın hiç görmediği bir evde bıraktın.", en: "You left a family in {yer:tepe}, in a house the census never saw." }
             sonraki: "@akis"
 
@@ -2797,7 +2797,7 @@ olaylar:
               - degisken: { hayatta_kalan: 1 }
               - dikkat: 1
               - xp_seviye: 40
-              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Sayım gecesi çatı arasındaki dedeyi düşünmeden geçen gün olmadı.", en: "Not a day's gone by since the census night that you haven't thought of the old man in the attic." } }
             kronik: { tr: "{yer:tepe|in} sayımcıları senin önünde eğildi, bir ev de sayılmadan kaldı.", en: "The Heights' census team bowed to you, and one house went uncounted." }
             sonraki: "@akis"
 
@@ -2815,7 +2815,7 @@ olaylar:
               - bayrak: "tepe_dede_kurtarildi"
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 30
-              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Sayım gecesi çatı arasındaki dedeyi düşünmeden geçen gün olmadı.", en: "Not a day's gone by since the census night that you haven't thought of the old man in the attic." } }
             kronik: { tr: "Sayımcıya rüşvet verdin, yine de dedeyi o gece {yer:tepe|den} indirdin.", en: "You bribed the census taker, then got grandpa off {yer:tepe} that same night anyway." }
             sonraki: "@akis"
           - id: "her_ay"
@@ -2825,7 +2825,7 @@ olaylar:
               - bayrak: "tepe_dede_kurtarildi"
               - bayrak: "tepe_aylik_rusvet"
               - xp_seviye: 30
-              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Sayım gecesi çatı arasındaki dedeyi düşünmeden geçen gün olmadı.", en: "Not a day's gone by since the census night that you haven't thought of the old man in the attic." } }
             kronik: { tr: "Bir ailenin her ayki sayım bedelini kendi cebinden ödemeye söz verdin.", en: "You promised to pay off a family's census out of your own pocket, every month." }
             sonraki: "@akis"
 
@@ -2848,7 +2848,7 @@ olaylar:
               - bayrak: "tepe_defter_yandi"
               - degisken: { hayatta_kalan: 2 }
               - xp_seviye: 45
-              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Sayım gecesi çatı arasındaki dedeyi düşünmeden geçen gün olmadı.", en: "Not a day's gone by since the census night that you haven't thought of the old man in the attic." } }
             kronik: { tr: "{yer:tepe|in} sayım defterini sokağın ortasında ateşe verdin; içindeki adların hepsi kül oldu.", en: "You burned {yer:tepe}' census book in the middle of the street, every name in it gone to ash." }
             sonraki: "@akis"
           - id: "dede"
@@ -2859,7 +2859,7 @@ olaylar:
               - bayrak: "tepe_dede_kurtarildi"
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 45
-              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Sayım gecesi çatı arasındaki dedeyi düşünmeden geçen gün olmadı.", en: "Not a day's gone by since the census night that you haven't thought of the old man in the attic." } }
             kronik: { tr: "Muhafızları yere serdin ve yetmiş iki yaşında bir adamı {yer:tepe|den} indirdin.", en: "You put the guards down and walked a seventy-two-year-old man off {yer:tepe}." }
             sonraki: "@akis"
 
@@ -2875,7 +2875,7 @@ olaylar:
               - ahlak: { merhamet: 3, duzen: -2 }
               - bayrak: "tepe_dede_teslim"
               - xp_seviye: 20
-              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Sayım gecesi çatı arasındaki dedeyi düşünmeden geçen gün olmadı.", en: "Not a day's gone by since the census night that you haven't thought of the old man in the attic." } }
             kronik: { tr: "Yakıt evlerine götürülen yaşlı adamın ardından kapıya kadar yürüdün.", en: "You followed the old man they took all the way to the door of the fuel houses." }
             sonraki: "@akis"
           - id: "aile"
@@ -2885,7 +2885,7 @@ olaylar:
               - bayrak: "tepe_dede_teslim"
               - degisken: { hayatta_kalan: -1 }
               - xp_seviye: 20
-              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Sayım gecesi çatı arasındaki dedeyi düşünmeden geçen gün olmadı.", en: "Not a day's gone by since the census night that you haven't thought of the old man in the attic." } }
             kronik: { tr: "Dedeyi götürdükleri gece ailesinin yanında oturdun.", en: "The night they took grandpa, you sat with his family." }
             sonraki: "@akis"
 
@@ -2902,7 +2902,7 @@ olaylar:
               - bayrak: "tepe_dede_kurtarildi"
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 35
-              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Sayım gecesi çatı arasındaki dedeyi düşünmeden geçen gün olmadı.", en: "Not a day's gone by since the census night that you haven't thought of the old man in the attic." } }
             kronik: { tr: "Kırk yıl tarih öğretmiş bir adamı {yer:tepe|in} damlarından {yer:eski_sehir|e} taşıdın.", en: "You carried a man who'd taught history for forty years over {yer:tepe}' rooftops to {yer:eski_sehir}." }
             sonraki: "@akis"
           - id: "siginak"
@@ -2914,7 +2914,7 @@ olaylar:
               - bayrak: "tepe_dede_kurtarildi"
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 35
-              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Sayım gecesi çatı arasındaki dedeyi düşünmeden geçen gün olmadı.", en: "Not a day's gone by since the census night that you haven't thought of the old man in the attic." } }
             kronik: { tr: "{yer:tepe|den} kaçırdığın yaşlı adamı Sığınak'ın kapısına bıraktın.", en: "You left the old man you smuggled off {yer:tepe} at the Haven's door." }
             sonraki: "@akis"
 
@@ -2955,7 +2955,7 @@ olaylar:
               - degisken: { hayatta_kalan: 1 }
               - iliski: { vahit: { saygi: 1, guven: -1 } }
               - xp_seviye: 30
-              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Sayım gecesi çatı arasındaki dedeyi düşünmeden geçen gün olmadı.", en: "Not a day's gone by since the census night that you haven't thought of the old man in the attic." } }
             kronik: { tr: "Bir ailenin adını Yükselenler'in defterine kendi adının yanına yazdırdın.", en: "You had a family's name written next to yours in the Ascended's book." }
             sonraki: "@akis"
 
@@ -2974,7 +2974,7 @@ olaylar:
               - bayrak: "tepe_dede_teslim"
               - degisken: { hayatta_kalan: -1 }
               - xp_seviye: 30
-              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Sayım gecesi çatı arasındaki dedeyi düşünmeden geçen gün olmadı.", en: "Not a day's gone by since the census night that you haven't thought of the old man in the attic." } }
             kronik: { tr: "Yaşlı bir dedeyi Yükselenler'e teslim edip sayımla birlikte sonraki kapıya yürüdün.", en: "You handed a grandfather over to the Ascended and walked on to the next door with the census." }
             sonraki: "@akis"
           - id: "pisman"
@@ -2984,7 +2984,7 @@ olaylar:
               - bayrak: "tepe_dede_teslim"
               - degisken: { hayatta_kalan: -1 }
               - xp_seviye: 30
-              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "tepe_cati_arasi_sonrasi", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Sayım gecesi çatı arasındaki dedeyi düşünmeden geçen gün olmadı.", en: "Not a day's gone by since the census night that you haven't thought of the old man in the attic." } }
             kronik: { tr: "Dedeyi teslim ettikten sonra kapıda durup ailesine bir şey söylemek istedin; ağzından tek söz çıkmadı.", en: "After you gave grandpa up, you stopped in the doorway and tried to say something to his family. You couldn't." }
             sonraki: "@akis"
 
@@ -3052,7 +3052,7 @@ olaylar:
             etiket: { tr: "Başınla selam verip yürü", en: "Nod and keep walking" }
             etkiler:
               - ahlak: { insanlik: -1 }
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Tarih öğretmeniyle karşılaşman küçük bir anlatıya dönüşmüş.", en: "Your run-in with the history teacher has turned into a little tale." } }
             sonraki: "@akis"
 
       - id: "tepe_cati_arasi_sonrasi_ders"
@@ -3151,7 +3151,7 @@ olaylar:
             etkiler:
               - bayrak: "tepe_kayit_alindi"
               - xp_seviye: 20
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Sistem'i dinleyenlere söylediklerin {yer:tepe|den} aşağı inmiş.", en: "What you told the System's listeners made it down off {yer:tepe}." } }
             sonraki: "@akis"
           - id: "al"
             etiket: { tr: "Makarayı elinden al", en: "Take the reel out of his hands" }
@@ -3191,7 +3191,7 @@ olaylar:
               - itibar: { yukselenler: -2 }
               - iliski: { vahit: { guven: -2 } }
               - xp_seviye: 15
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Sistem'i dinleyenlere söylediklerin {yer:tepe|den} aşağı inmiş.", en: "What you told the System's listeners made it down off {yer:tepe}." } }
             sonraki: "@akis"
 
       - id: "tepe_dinleyiciler_sayac"
@@ -3206,7 +3206,7 @@ olaylar:
               - ahlak: { insanlik: 1 }
               - xp_seviye: 20
               - iliski: { vahit: { saygi: 1 } }
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Sistem'i dinleyenlere söylediklerin {yer:tepe|den} aşağı inmiş.", en: "What you told the System's listeners made it down off {yer:tepe}." } }
             sonraki: "@akis"
           - id: "mert"
             etiket: { tr: "Bunu {npc:mert_kilic|e} anlat", en: "Tell {npc:mert_kilic} about this" }
@@ -3291,7 +3291,7 @@ olaylar:
               - iliski: { vahit: { guven: -2 } }
               - bayrak: "tepe_duvar_boyandi"
               - xp_seviye: 20
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Yakıt duvarının önünde geçirdiğin gece anlatılmaya başlamış.", en: "People have started telling about the night you spent at the fuel wall." } }
             sonraki: "tepe_yakit_duvari_boya"
           - id: "deniz_sil"
             etiket: { tr: "Altın ismi duvardan kazı", en: "Scrape the gold name off the wall" }
@@ -3334,7 +3334,7 @@ olaylar:
               - ahlak: { insanlik: 2 }
               - bayrak: "tepe_duvar_kazindi"
               - xp_seviye: 15
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Yakıt duvarının önünde geçirdiğin gece anlatılmaya başlamış.", en: "People have started telling about the night you spent at the fuel wall." } }
             sonraki: "@akis"
           - id: "hepsi"
             etiket: { tr: "Bütün gece kazı; hepsi okunsun", en: "Scrape all night. Let every one be read" }
@@ -3345,7 +3345,7 @@ olaylar:
               - iliski: { vahit: { guven: -3, saygi: 1 } }
               - bayrak: "tepe_duvar_kazindi"
               - xp_seviye: 25
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Yakıt duvarının önünde geçirdiğin gece anlatılmaya başlamış.", en: "People have started telling about the night you spent at the fuel wall." } }
             sonraki: "@akis"
 
       - id: "tepe_yakit_duvari_boya"
@@ -3372,7 +3372,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 3, merhamet: 2 }
               - xp_seviye: 20
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Yakıt duvarının önünde geçirdiğin gece anlatılmaya başlamış.", en: "People have started telling about the night you spent at the fuel wall." } }
             sonraki: "@akis"
           - id: "bos"
             etiket: { tr: "Yeri boş bırak", en: "Leave the space empty" }
@@ -3422,7 +3422,7 @@ olaylar:
               - iliski: { deniz_arman: { guven: 3, saygi: 1 } }
               - ahlak: { merhamet: 1, insanlik: 1 }
               - xp_seviye: 15
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Yakıt duvarının önünde geçirdiğin gece anlatılmaya başlamış.", en: "People have started telling about the night you spent at the fuel wall." } }
             sonraki: "@akis"
 
   # ================================================================== AVCI PAZARI (Kule Dibi, keşif)
@@ -3515,7 +3515,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 2, duzen: 2 }
               - xp_seviye: 15
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Kule'nin gölgesindeki pazarda yaptıkların anlatılmaya başlamış.", en: "People have started telling what you did at the market in the Spire's shadow." } }
             sonraki: "@akis"
           - id: "tezgah"
             etiket: { tr: "Pazarın gözü önünde tezgâhı kapattır", en: "Shut his stall down, in front of the whole market" }
@@ -3542,7 +3542,7 @@ olaylar:
             etkiler:
               - xp_seviye: 20
               - degisken: { hayatta_kalan: 1 }
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Kule'nin gölgesindeki pazarda yaptıkların anlatılmaya başlamış.", en: "People have started telling what you did at the market in the Spire's shadow." } }
             sonraki: "@akis"
 
       - id: "kule_dibi_avci_pazari_dolas"
@@ -3557,7 +3557,7 @@ olaylar:
               - kredi: -10
               - ahlak: { merhamet: 2, insanlik: 1 }
               - xp_seviye: 10
-              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Kule'nin gölgesindeki pazarda bir kaskın sahibini sormuştun.", en: "At the market in the Spire's shadow, you asked about whoever owned that helmet." } }
               - bayrak: "kuledibi_kask_alindi"
             sonraki: "@akis"
           - id: "devam"
@@ -3625,7 +3625,7 @@ olaylar:
               - kredi: -100
               - ahlak: { merhamet: 1, duzen: 2 }
               - bayrak: "kuledibi_genc_tek"
-              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Tırmanış kuyruğundaki o beşinci kat bileti hâlâ aklında.", en: "You still think about that fifth-floor ticket from the climbing line." } }
             kronik: { tr: "Bir oğlanın Kule'ye giriş ücretini ödeyip kapıdan tek başına girmesine izin verdin.", en: "You paid a boy's way into the Spire and let him walk through the door alone." }
             sonraki: "@akis"
           - id: "eve"
@@ -3680,7 +3680,7 @@ olaylar:
               - bayrak: "kuledibi_genc_eslik"
               - degisken: { hayatta_kalan: 2 }
               - xp_seviye: 50
-              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Tırmanış kuyruğundaki o beşinci kat bileti hâlâ aklında.", en: "You still think about that fifth-floor ticket from the climbing line." } }
             kronik: { tr: "Beşinci kattan bir oğlanı hem annesinin hem kendi ilacıyla indirdin.", en: "You brought a boy down from Floor 5 with his mother's medicine, and his own." }
             sonraki: "@akis"
           - id: "ucret"
@@ -3691,7 +3691,7 @@ olaylar:
               - bayrak: "kuledibi_genc_eslik"
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 50
-              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Tırmanış kuyruğundaki o beşinci kat bileti hâlâ aklında.", en: "You still think about that fifth-floor ticket from the climbing line." } }
             kronik: { tr: "Bir oğlanı beşinci kattan sağ salim indirdin, ücretini de bir kristalle aldın.", en: "You got a boy down from Floor 5 alive and took your fee in crystal." }
             sonraki: "@akis"
 
@@ -3709,7 +3709,7 @@ olaylar:
               - bayrak: "kuledibi_genc_eslik"
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 20
-              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Tırmanış kuyruğundaki o beşinci kat bileti hâlâ aklında.", en: "You still think about that fifth-floor ticket from the climbing line." } }
             kronik: { tr: "Kule'de yenildin ama bir annenin ilacı için eksik kalan kristalleri kendi cebinden ödedin.", en: "You lost in the Spire, but you paid for the missing crystals in a mother's medicine out of your own pocket." }
             sonraki: "@akis"
           - id: "yarin"
@@ -3718,7 +3718,7 @@ olaylar:
               - ahlak: { duzen: 1, merhamet: 1 }
               - bayrak: "kuledibi_genc_eslik"
               - xp_seviye: 20
-              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Tırmanış kuyruğundaki o beşinci kat bileti hâlâ aklında.", en: "You still think about that fifth-floor ticket from the climbing line." } }
             kronik: { tr: "Yenildiğin gün bir oğlana ertesi gün yine birlikte tırmanacağınızı söyledin.", en: "The day you lost, you told a boy you'd climb again together tomorrow." }
             sonraki: "@akis"
 
@@ -3735,7 +3735,7 @@ olaylar:
               - bayrak: "kuledibi_kristal_getirildi"
               - degisken: { hayatta_kalan: 2 }
               - xp_seviye: 40
-              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Tırmanış kuyruğundaki o beşinci kat bileti hâlâ aklında.", en: "You still think about that fifth-floor ticket from the climbing line." } }
             kronik: { tr: "Bir oğlana annesinin ilacını getirdin, kılıcını da elinden aldın.", en: "You brought a boy his mother's medicine and took his sword away too." }
             sonraki: "@akis"
           - id: "kuyruk"
@@ -3748,8 +3748,8 @@ olaylar:
               - bayrak: "kuledibi_kristal_getirildi"
               - degisken: { hayatta_kalan: 3 }
               - xp_seviye: 60
-              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 } }
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Tırmanış kuyruğundaki o beşinci kat bileti hâlâ aklında.", en: "You still think about that fifth-floor ticket from the climbing line." } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Tırmanış kuyruğunda söylediklerin kulaktan kulağa geçmiş.", en: "What you said in the climbing line got passed along." } }
             kronik: { tr: "Bir gün boyunca Kule kuyruğundaki herkes için kristal taşıdın; kimse Lonca bekçilerine ücret ödemek zorunda kalmadı.", en: "For a whole day you hauled crystals down for everyone in the Spire line, so nobody had to pay the Guild's gatekeepers." }
             sonraki: "@akis"
 
@@ -3767,7 +3767,7 @@ olaylar:
               - iliski: { elif_sari: { guven: 3 } }
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 20
-              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Tırmanış kuyruğundaki o beşinci kat bileti hâlâ aklında.", en: "You still think about that fifth-floor ticket from the climbing line." } }
             kronik: { tr: "Kule'den çevirdiğin oğlanı annesiyle birlikte Sığınak'ın hekimlerine götürdün.", en: "You took the boy you turned away from the Spire, and his mother, to the Haven's doctors." }
             sonraki: "@akis"
           - id: "git"
@@ -3775,7 +3775,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: -3, duzen: 2 }
               - degisken: { hayatta_kalan: -1 }
-              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Tırmanış kuyruğundaki o beşinci kat bileti hâlâ aklında.", en: "You still think about that fifth-floor ticket from the climbing line." } }
             kronik: { tr: "Bir oğlanı Kule'den çevirdin ama annesinin ne olacağını sormadın.", en: "You turned a boy away from the Spire and never asked what happened to his mother." }
             sonraki: "@akis"
 
@@ -3796,7 +3796,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 2, guven: -1 } }
               - bayrak: "kuledibi_cocuk_ucretsiz"
               - xp_seviye: 30
-              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Tırmanış kuyruğundaki o beşinci kat bileti hâlâ aklında.", en: "You still think about that fifth-floor ticket from the climbing line." } }
             kronik: { tr: "Kule'nin kapısında gerçek seviyeni açtın ve bekçilere çocuklardan ücret almamayı kabul ettirdin.", en: "You opened your true level at the Spire's door and made the gatekeepers agree that kids wouldn't pay." }
             sonraki: "@akis"
           - id: "kaya"
@@ -3806,7 +3806,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 2, guven: 1 } }
               - bayrak: "kuledibi_genc_tek"
               - xp_seviye: 20
-              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Tırmanış kuyruğundaki o beşinci kat bileti hâlâ aklında.", en: "You still think about that fifth-floor ticket from the climbing line." } }
             kronik: { tr: "Kule kapısındaki ücretleri Lonca'nın başına şikâyet ettin; o arada oğlan içeri girdi.", en: "You took the Spire door fees up with the head of the Guild. Meanwhile, the boy went in." }
             sonraki: "@akis"
 
@@ -3842,7 +3842,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 1, insanlik: 1 }
               - xp_seviye: 10
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Kule'den dönen oğlanın teşekkürü küçük bir hikâyeye dönüşmüş.", en: "The thanks from the boy who came back down the Spire has turned into a little story." } }
             sonraki: "@akis"
           - id: "ara"
             etiket: { tr: "Kule'ye gir, oğlanı ara", en: "Go into the Spire and look for the boy" }
@@ -3965,7 +3965,7 @@ olaylar:
               - itibar: { lonca: 2 }
               - iliski: { kaya_demir: { saygi: 1 } }
               - bayrak: "kuledibi_ekip_tutuldu"
-              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "On ikinci kattaki adam için yaptığın şey karşılıksız kalmadı.", en: "What you did for the man on the twelfth floor didn't go unanswered." } }
             sonraki: "@akis"
           - id: "termos"
             etiket: { tr: "Termosunu sıcak çayla doldur, yanına otur", en: "Fill her thermos with hot tea and sit with her" }
@@ -3989,7 +3989,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 2, duzen: -1 }
               - xp_seviye: 10
-              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "On ikinci kattaki adam için yaptığın şey karşılıksız kalmadı.", en: "What you did for the man on the twelfth floor didn't go unanswered." } }
             sonraki: "@akis"
 
       - id: "kule_dibi_geri_donmeyenler_gercek"
@@ -4008,7 +4008,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 2, merhamet: -1 }
               - xp_seviye: 10
-              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "On ikinci kattaki adam için yaptığın şey karşılıksız kalmadı.", en: "What you did for the man on the twelfth floor didn't go unanswered." } }
             sonraki: "@akis"
 
       - id: "kule_dibi_geri_donmeyenler_kat"
@@ -4078,7 +4078,7 @@ olaylar:
               - bayrak: "kuledibi_koca_kurtarildi"
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 60
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "On ikinci kattaki adamın hikâyesi ağızdan ağıza dolaşıyor.", en: "The story of the man on the twelfth floor is getting passed around." } }
             sonraki: "@akis"
           - id: "aras"
             etiket: { tr: "Bıçağı ve siyah şeridi {npc:aras_kurt|e} geri götür", en: "Take the knife and black strip back to {npc:aras_kurt}" }
@@ -4089,7 +4089,7 @@ olaylar:
               - bayrak: "kuledibi_koca_kurtarildi"
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 60
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "On ikinci kattaki adamın hikâyesi ağızdan ağıza dolaşıyor.", en: "The story of the man on the twelfth floor is getting passed around." } }
             sonraki: "kule_dibi_geri_donmeyenler_aras"
 
       - id: "kule_dibi_geri_donmeyenler_aras"
@@ -4121,7 +4121,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 2, duzen: 1 }
               - xp_seviye: 20
-              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "kule_dibi_donus", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "On ikinci kattaki adam için yaptığın şey karşılıksız kalmadı.", en: "What you did for the man on the twelfth floor didn't go unanswered." } }
             sonraki: "@akis"
           - id: "sus"
             etiket: { tr: "Yanına otur, hiçbir şey söyleme", en: "Sit down next to her. Don't say anything" }
@@ -4222,7 +4222,7 @@ olaylar:
               - bayrak: "kuledibi_sahte_ifsa"
               - degisken: { hayatta_kalan: 2 }
               - xp_seviye: 30
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Yirminci kat iddiasını nasıl çözdüğün meydana yayılmış.", en: "How you handled that twentieth-floor claim has spread across the square." } }
             sonraki: "@akis"
           - id: "on_dort"
             etiket: { tr: "Onları on dördüncüye geri yolla; bıraktıkları üç kişiyi bulsunlar", en: "Send them back up to 14. Find the three they left" }
@@ -4231,7 +4231,7 @@ olaylar:
               - bayrak: "kuledibi_sahte_ifsa"
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 30
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Yirminci kat iddiasını nasıl çözdüğün meydana yayılmış.", en: "How you handled that twentieth-floor claim has spread across the square." } }
             sonraki: "@akis"
           - id: "cocuklar"
             etiket: { tr: "Çocuklara gerçek bir tırmanış dersi ver", en: "Give the kids a real climbing lesson" }
@@ -4243,7 +4243,7 @@ olaylar:
               - bayrak: "kuledibi_sahte_ifsa"
               - degisken: { hayatta_kalan: 3 }
               - xp_seviye: 40
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Yirminci kat iddiasını nasıl çözdüğün meydana yayılmış.", en: "How you handled that twentieth-floor claim has spread across the square." } }
             sonraki: "@akis"
 
       - id: "kule_dibi_sahte_rekor_yaris"
@@ -4263,7 +4263,7 @@ olaylar:
               - bayrak: "kuledibi_sahte_ifsa"
               - degisken: { hayatta_kalan: 2 }
               - xp_seviye: 50
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Yirminci kat iddiasını nasıl çözdüğün meydana yayılmış.", en: "How you handled that twentieth-floor claim has spread across the square." } }
             sonraki: "@akis"
           - id: "kurtar"
             etiket: { tr: "Kızıl Merdiven'i on dördüncü kattan kendin indir", en: "Go back up and bring the Red Ladder down yourself" }
@@ -4273,7 +4273,7 @@ olaylar:
               - bayrak: "kuledibi_sahte_ifsa"
               - degisken: { hayatta_kalan: 3 }
               - xp_seviye: 50
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Yirminci kat iddiasını nasıl çözdüğün meydana yayılmış.", en: "How you handled that twentieth-floor claim has spread across the square." } }
             sonraki: "@akis"
 
       - id: "kule_dibi_sahte_rekor_iceri"
@@ -4303,5 +4303,5 @@ olaylar:
               - degisken: { hayatta_kalan: 3 }
               - xp_seviye: 45
               - iliski: { aras_kurt: { saygi: 2 } }
-              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "sokak_efsanesi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Yirminci kat iddiasını nasıl çözdüğün meydana yayılmış.", en: "How you handled that twentieth-floor claim has spread across the square." } }
             sonraki: "@akis"

@@ -78,7 +78,7 @@ bolumler:
     brifing: ["brifing_5"]
     operasyon: ["kasaba_cekirdegi"]
     darbogaz: ["darbogaz_5"]
-    tasma: { tr: "Muhafız uyandı ve meydana ilk kim adım attıysa onu ezdi. Kamplar ölülerini birbirine sayıyor.", en: "The guardian woke up and crushed whoever stepped into the square first. The camps are blaming each other for the dead." }
+    tasma: { tr: "Muhafız uyandı ve meydana ilk kim adım attıysa onu ezdi. Kamplar ölülerini birbirinin hanesine yazıyor.", en: "The guardian woke up and crushed whoever stepped into the square first. The camps are blaming each other for the dead." }
 
   - no: 6
     perde: 2
@@ -87,12 +87,12 @@ bolumler:
     son_tarih: 80
     bitis: 95
     baslik: { tr: "İlk Taşma", en: "The First Overflow" }
-    hedef: { tr: "{yer:kordon|de}ki kapının sayacı sıfıra iniyor. Taştığı gün orada ol; o güne kadar şehri hazırla.", en: "The counter on the Gate on {yer:kordon} is running down to zero. Be there the day it spills, and get the city ready until then." }
+    hedef: { tr: "{yer:kordon|de}ki kapının sayacı sıfıra iniyor. Taştığı gün orada ol; o güne kadar şehri hazırla.", en: "{yer:kordon|b} Gate's counter is running down to zero. Be there the day it spills, and get the city ready until then." }
     tehdit: { tr: "{yer:kordon|de} kimsenin kapatamadığı bir kapı.", en: "A Gate on {yer:kordon} nobody's been able to close." }
     brifing: ["brifing_6"]
     operasyon: ["ilk_tasma"]
     darbogaz: ["deniz_kardes_bulundu", "deniz_anma_kardes"]
-    tasma: { tr: "Deniz kapıya doğru çekildi ve sen yoktun. {yer:kordon|in} balkonlarında oturanların çoğu geri dönmedi.", en: "The sea pulled back toward the Gate and you weren't there. Most of the people on the balconies along {yer:kordon} never came back." }
+    tasma: { tr: "Su kapıya doğru çekildi ve sen yoktun. {yer:kordon|in} balkonlarında oturanların çoğu geri dönmedi.", en: "The sea pulled back toward the Gate and you weren't there. Most of the people on the balconies along {yer:kordon} never came back." }
 
   - no: 7
     perde: 2
@@ -101,7 +101,7 @@ bolumler:
     bitis: 122
     baslik: { tr: "Küçük Harfler", en: "In Lowercase" }
     hedef: { tr: "{yer:kasaba_cekirdegi|in} bülteninde bir şey kıpırdıyor. Şehir fark etmeden önce sen fark et.", en: "Something's stirring in {yer:kasaba_cekirdegi|pos} bulletin. Notice it before the city does." }
-    tehdit: { tr: "Senin içinde olan şey, şehrin pencerelerinde konuşmaya hazırlanıyor.", en: "The thing inside you is getting ready to talk through the city's windows." }
+    tehdit: { tr: "İçindeki şey şehrin pencerelerinden konuşmaya hazırlanıyor.", en: "The thing inside you is getting ready to talk through the city's windows." }
     brifing: ["brifing_7"]
     operasyon: ["yanki_ortaya_cikis"]
     darbogaz: ["darbogaz_7"]
@@ -128,11 +128,11 @@ bolumler:
     bitis: 180
     baslik: { tr: "Körfezin Üstündeki Gölge", en: "The Shadow Over the Bay" }
     hedef: { tr: "Perde 2'nin son günleri. Gökyüzünde bir şey yaklaşıyor; şehri hazırla.", en: "The last days of Act 2. Something's closing in from the sky. Get the city ready." }
-    tehdit: { tr: "Bulutların üstünde bekleyen, gemi demeye fazla büyük bir şey.", en: "Something waiting above the clouds, too big to call a ship." }
+    tehdit: { tr: "Bulutların üstünde bekleyen, gemi denemeyecek kadar büyük bir şey.", en: "Something waiting above the clouds, too big to call a ship." }
     brifing: ["brifing_9"]
     operasyon: ["perde2_son"]
     darbogaz: []
-    tasma: { tr: "Gölge körfeze sen hazır olmadan düştü. Liman o öğleden sonra kendi başının çaresine baktı.", en: "The shadow fell over the bay before you were ready. The harbor was on its own that afternoon." }
+    tasma: { tr: "Gölge körfeze sen hazır olmadan düştü. {yer:kiyikent_liman} o öğleden sonra kendi başının çaresine baktı.", en: "The shadow fell over the bay before you were ready. The harbor was on its own that afternoon." }
 
   # ---- Perde 3 · Çok-evren ----
   - no: 10
@@ -191,7 +191,11 @@ bolumler:
     hedef: { tr: "Şehirde kapılar sıklaşıyor. Fırtına geldiğinde her mahalleye yetişemeyeceksin.", en: "Gates are coming faster across the city. When the storm hits, you won't reach every neighborhood." }
     tehdit: { tr: "Aynı gece yedi kapı.", en: "Seven Gates in one night." }
     brifing: ["brifing_13"]
-    operasyon: ["p3_kapi_firtinasi"]
+    # Fırtına bütün şehre aynı anda düşer: operasyon üsten (Liman) başlar, olay mahalleleri kendisi gezer.
+    operasyon:
+      - ad: { tr: "Kapı Fırtınası", en: "The Gate Storm" }
+        bolge: "kiyikent_liman"
+        olaylar: ["p3_kapi_firtinasi"]
     darbogaz: ["darbogaz_13"]
     tasma: { tr: "Fırtına sen yokken koptu. Sabah üç mahallenin adı haritadan silinmişti.", en: "The storm broke while you were gone. By morning, three neighborhoods were off the map." }
 

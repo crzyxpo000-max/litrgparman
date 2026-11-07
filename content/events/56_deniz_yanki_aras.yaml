@@ -181,7 +181,7 @@ olaylar:
               - npc_iz: { deniz_arman: "yarali_guven" }
               - iliski: { deniz_arman: { guven: -18, saygi: -6 } }
               - hafiza: { npc: "deniz_arman", id: "yalan_yakalandi", agirlik: -45 }
-              - tohum: { olay: "deniz_kardes_cizimi", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "deniz_arman" } }
+              - tohum: { olay: "deniz_kardes_cizimi", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "deniz_arman" }, hatirlatma: { tr: "Duvarlardaki martıların peşinden yürüdüğün günü unutmadın.", en: "You haven't forgotten the day you followed those gulls on the walls." } }
             kronik: { tr: "Martıları silerken {npc:deniz_arman|e} yakalandın ve bunu onu korumak diye açıkladın; aranızda bir şey kırıldı.", en: "{npc:deniz_arman} caught you erasing the sister's trail, and you called it protection. Something broke between you." }
             sonraki: "@akis"
           - id: "itiraf"
@@ -198,7 +198,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: -2, duzen: 1 }
               - gizle: 2
-              - tohum: { olay: "deniz_kardes_cizimi", gecikme: { min: 6, max: 12 }, kosul: { npc_hayatta: "deniz_arman" } }
+              - tohum: { olay: "deniz_kardes_cizimi", gecikme: { min: 6, max: 12 }, kosul: { npc_hayatta: "deniz_arman" }, hatirlatma: { tr: "Duvarlardaki martıların peşinden yürüdüğün günü unutmadın.", en: "You haven't forgotten the day you followed those gulls on the walls." } }
             kronik: { tr: "Martıları sildin, mavi tozu silkeleyip arkana bakmadan yürüdün.", en: "You wiped off the gulls, shook the blue dust from your hands and walked away without looking back." }
             sonraki: "@akis"
           - id: "pisman"
@@ -753,7 +753,7 @@ olaylar:
             goster: { npc_olu: "deniz_arman" }
             etkiler:
               - ahlak: { merhamet: 2, insanlik: 2 }
-              - tohum: { olay: "deniz_kardes_cizimi", gecikme: { min: 8, max: 15 }, kosul: { bayrak: "kardes_yukselenlerde" } }
+              - tohum: { olay: "deniz_kardes_cizimi", gecikme: { min: 8, max: 15 }, kosul: { bayrak: "kardes_yukselenlerde" }, hatirlatma: { tr: "Duvarlardaki martıların peşinden yürüdüğün günü unutmadın.", en: "You haven't forgotten the day you followed those gulls on the walls." } }
             kronik: { tr: "Seçilmişler Yurdu'nun penceresine bir tebeşir bırakıp çıktın; kız onu bir gün kullanır diye umdun.", en: "You left a chalk at a window in the Chosen's dormitory and walked out, hoping she'd use it someday." }
             sonraki: "@akis"
 
@@ -804,7 +804,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 1, merhamet: -1 }
               - bayrak: "kardes_yukselenlerde"
-              - tohum: { olay: "deniz_kardes_cizimi", gecikme: { min: 8, max: 15 }, kosul: { bayrak: "kardes_yukselenlerde" } }
+              - tohum: { olay: "deniz_kardes_cizimi", gecikme: { min: 8, max: 15 }, kosul: { bayrak: "kardes_yukselenlerde" }, hatirlatma: { tr: "Duvarlardaki martıların peşinden yürüdüğün günü unutmadın.", en: "You haven't forgotten the day you followed those gulls on the walls." } }
             kronik: { tr: "Seçilmişler'in kapısından atıldın ve pencerede bir martının silinişini izledin.", en: "You got thrown out of the Chosen's gate and watched a gull get wiped off a window." }
             sonraki: "@akis"
 
@@ -1111,8 +1111,8 @@ olaylar:
               - npc_fraksiyon: { deniz_arman: "yukselenler" }
               - bayrak: "deniz_tepede_kaldi"
               - iliski: { deniz_arman: { saygi: 6, baglilik: -4 } }
-              - tohum: { olay: "deniz_yukselen_rakip", gecikme: { min: 15, max: 35 }, kosul: { npc_fraksiyon: { deniz_arman: "yukselenler" } } }
-              - tohum: { olay: "deniz_kardes_cizimi", gecikme: { min: 8, max: 15 }, kosul: { bayrak: "kardes_yukselenlerde" } }
+              - tohum: { olay: "deniz_yukselen_rakip", gecikme: { min: 15, max: 35 }, kosul: { npc_fraksiyon: { deniz_arman: "yukselenler" } }, hatirlatma: { tr: "Martıların peşinden gittiğin günden beri {npc:deniz_arman|in} yolu senden ayrı.", en: "Since the day you followed the gulls, {npc:deniz_arman} has been walking a different road from yours." } }
+              - tohum: { olay: "deniz_kardes_cizimi", gecikme: { min: 8, max: 15 }, kosul: { bayrak: "kardes_yukselenlerde" }, hatirlatma: { tr: "Duvarlardaki martıların peşinden yürüdüğün günü unutmadın.", en: "You haven't forgotten the day you followed those gulls on the walls." } }
             kronik: { tr: "{npc:deniz_arman} kardeşini kollamak için gri şalı giydi; {yer:tepe|de} bir koruyucu mu kazandın, bir rakip mi, bunu ancak zaman gösterecekti.", en: "{npc:deniz_arman} put on the gray shawl to watch over the sister. You'd gained a guardian on {yer:tepe}, or a rival, and only time would say which." }
             sonraki: "@akis"
           - id: "yalniz"
@@ -1152,7 +1152,7 @@ olaylar:
               - itibar: { yukselenler: 6 }
               - npc_iz: { deniz_arman: "yarali_guven" }
               - iliski: { deniz_arman: { guven: -8, baglilik: -6 } }
-              - tohum: { olay: "deniz_yukselen_rakip", gecikme: { min: 10, max: 25 }, kosul: { npc_fraksiyon: { deniz_arman: "yukselenler" } } }
+              - tohum: { olay: "deniz_yukselen_rakip", gecikme: { min: 10, max: 25 }, kosul: { npc_fraksiyon: { deniz_arman: "yukselenler" } }, hatirlatma: { tr: "Martıların peşinden gittiğin günden beri {npc:deniz_arman|in} yolu senden ayrı.", en: "Since the day you followed the gulls, {npc:deniz_arman} has been walking a different road from yours." } }
             kronik: { tr: "Yasta bir arkadaşa, kardeşini yakan inancın haklı olabileceğini söyledin; {npc:deniz_arman|in} sana güveni o an yara aldı.", en: "You told a grieving friend the faith that burned the sister might be right, and {npc:deniz_arman|pos} trust in you took a wound right then." }
             sonraki: "@akis"
 
@@ -1245,7 +1245,7 @@ olaylar:
             etiket: { tr: "Bırak. Bu senin bulman gereken biri değil", en: "Let it go. She's not yours to find" }
             etkiler:
               - ahlak: { merhamet: -4, insanlik: -3 }
-              - tohum: { olay: "deniz_kardes_cizimi", gecikme: { min: 6, max: 12 } }
+              - tohum: { olay: "deniz_kardes_cizimi", gecikme: { min: 6, max: 12 }, hatirlatma: { tr: "{npc:deniz_arman|in} yerini alan o sessizlik geçmedi.", en: "The quiet that took {npc:deniz_arman|pos} place hasn't lifted." } }
             kronik: { tr: "Ölü bir arkadaşın kardeşini aramadın; martıları duvarlarda bırakıp yoluna gittin.", en: "You didn't look for a dead friend's sister. You left the gulls on the walls and went your own way." }
             sonraki: "@akis"
 
@@ -1504,7 +1504,7 @@ olaylar:
               - yozlasma: 6
               - iliski: { deniz_arman: { korku: 14, guven: -8 } }
               - iliski: { yanki: { guven: 8, baglilik: 6 } }
-              - tohum: { olay: "yozlasma_50", gecikme: { min: 1, max: 4 }, kosul: { yozlasma_min: 50, bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yozlasma_50", gecikme: { min: 1, max: 4 }, kosul: { yozlasma_min: 50, bayrak: "yanki_bagi" }, hatirlatma: { tr: "Vapurdaki o gece cevabı başkasına bıraktın; o başkası yer istiyor.", en: "That night on the ferry, you let someone else answer. Now that someone wants room." } }
             kronik: { tr: "Arkadaşının en önemli sorusunu kafandaki sese cevaplattın; {npc:deniz_arman} o gece içinde iki kişi olduğunu anladı.", en: "You let the voice in your head answer your friend's most important question, and that night {npc:deniz_arman} understood there were two of you in there." }
             sonraki: "dct_yanki"
           - id: "sal"
@@ -1714,7 +1714,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 3 }
               - iliski: { deniz_arman: { baglilik: 6, saygi: 4 } }
-              - tohum: { olay: "deniz_yukselen_rakip", gecikme: { min: 8, max: 20 }, kosul: { npc_fraksiyon: { deniz_arman: "yukselenler" } } }
+              - tohum: { olay: "deniz_yukselen_rakip", gecikme: { min: 8, max: 20 }, kosul: { npc_fraksiyon: { deniz_arman: "yukselenler" } }, hatirlatma: { tr: "Yan yatmış vapurda {npc:deniz_arman|le} konuştuklarınızın sırası geldi.", en: "It's time for what you and {npc:deniz_arman} talked about on the capsized ferry." } }
             kronik: { tr: "Yükselenler'de kalan arkadaşına o geceyi unutmayacağına söz verdin.", en: "You promised the friend who stayed with the Ascended that you'd remember that night." }
             sonraki: "@akis"
           - id: "uyar"
@@ -1723,7 +1723,7 @@ olaylar:
               - ahlak: { duzen: 3, merhamet: -2 }
               - npc_isaret: { deniz_arman: "rakip" }
               - iliski: { deniz_arman: { saygi: 6, guven: -8 } }
-              - tohum: { olay: "deniz_yukselen_rakip", gecikme: { min: 8, max: 20 }, kosul: { npc_fraksiyon: { deniz_arman: "yukselenler" } } }
+              - tohum: { olay: "deniz_yukselen_rakip", gecikme: { min: 8, max: 20 }, kosul: { npc_fraksiyon: { deniz_arman: "yukselenler" } }, hatirlatma: { tr: "Yan yatmış vapurda {npc:deniz_arman|le} konuştuklarınızın sırası geldi.", en: "It's time for what you and {npc:deniz_arman} talked about on the capsized ferry." } }
             kronik: { tr: "Vapurda en eski arkadaşına, karşına çıkarsa onu durduracağını söyledin; o andan sonra rakiptiniz.", en: "On the ferry you warned your oldest friend you'd stop them if they got in your way. From then on, you were rivals." }
             sonraki: "@akis"
 
@@ -1810,7 +1810,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: -3, duzen: 2 }
               - xp_seviye: 25
-              - tohum: { olay: "yanki_kaynak_izi", gecikme: { min: 2, max: 6 }, kosul: { bayrak: "yanki_bagi", bayrak_yok: "yanki_kaynagi_goruldu" } }
+              - tohum: { olay: "yanki_kaynak_izi", gecikme: { min: 2, max: 6 }, kosul: { bayrak: "yanki_bagi", bayrak_yok: "yanki_kaynagi_goruldu" }, hatirlatma: { tr: "Vapurda kimsenin sormadığı o soru seni Kule'ye götürüyor.", en: "That question nobody asked on the ferry is taking you to the Spire." } }
             kronik: { tr: "Yan yatmış vapurdan kalkıp Kule'ye yürüdün; arkanda boş bir bank kaldı.", en: "You got up from the capsized ferry and walked toward the Spire, and behind you, the bench stayed empty." }
             sonraki: "@akis"
           - id: "otur"
@@ -2306,7 +2306,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 2, merhamet: -1 }
               - iliski: { yanki: { guven: -4, baglilik: -4 } }
-              - tohum: { olay: "yozlasma_50", gecikme: { min: 3, max: 8 }, kosul: { yozlasma_min: 50, bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yozlasma_50", gecikme: { min: 3, max: 8 }, kosul: { yozlasma_min: 50, bayrak: "yanki_bagi" }, hatirlatma: { tr: "Kule'deki dikiş yerinden beri içinde biri daha geniş yer kaplıyor.", en: "Since that seam in the Spire, someone inside you has been taking up more room." } }
             kronik: { tr: "Kafandaki sesin evine açılan kapıyı kapalı bırakıp tırmanmaya devam ettin; o da bir şey sormadı.", en: "You left the door to the voice's home shut and kept climbing. It didn't ask why." }
             sonraki: "@akis"
 
@@ -2434,7 +2434,7 @@ olaylar:
               - ahlak: { duzen: 3, insanlik: 2 }
               - yozlasma: 6
               - iliski: { yanki: { guven: -10, korku: -6 } }
-              - tohum: { olay: "yozlasma_50", gecikme: { min: 2, max: 6 }, kosul: { yozlasma_min: 50, bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yozlasma_50", gecikme: { min: 2, max: 6 }, kosul: { yozlasma_min: 50, bayrak: "yanki_bagi" }, hatirlatma: { tr: "Kule'deki dikiş yerinden beri içinde biri daha geniş yer kaplıyor.", en: "Since that seam in the Spire, someone inside you has been taking up more room." } }
             kronik: { tr: "Kafandaki sesi teslim etmenin doğru olduğunu söyledin; ondan geriye kalan parça o günden sonra seni başka gözlerle izledi.", en: "You said handing over the voice in your head was the right call, and from then on, what was left of it watched you with different eyes." }
             sonraki: "@akis"
 
@@ -2569,7 +2569,7 @@ olaylar:
               - bayrak: "yanki_son_sirri"
               - bayrak: "yanki_butunlesti"
               - bilgi: "dongu_gercegi"
-              - tohum: { olay: "yozlasma_75", gecikme: { min: 1, max: 3 }, kosul: { yozlasma_min: 75, bayrak: "yanki_bagi" } }
+              - tohum: { olay: "yozlasma_75", gecikme: { min: 1, max: 3 }, kosul: { yozlasma_min: 75, bayrak: "yanki_bagi" }, hatirlatma: { tr: "Sayacın önünde {npc:yanki|e} söylediklerin bir gece başka bir yerde uyanmana yol açtı.", en: "What you told {npc:yanki} in front of the counter ended with you waking up somewhere else one night." } }
               - iliski: { yanki: { guven: 20, baglilik: 20 } }
             kronik: { tr: "Kafandaki sesle büsbütün birleştin; Döngü'nün sırrını öğrenmek yerine onun bir parçası oldun.", en: "You merged with the voice in your head completely. You didn't learn the Loop's secret. You became part of it." }
             sonraki: "ysr_birlesme"
@@ -3225,7 +3225,7 @@ olaylar:
               - xp_seviye: 40
               - iliski: { aras_kurt: { guven: 10, saygi: 6 } }
               - hafiza: { npc: "aras_kurt", id: "yerden_kaldirdi", agirlik: 40 }
-              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Otuzuncu kattaki o dövüşten bu yana {npc:aras_kurt|le} aranızdaki hesap kapanmadı.", en: "Since that fight on the thirtieth floor, things between you and {npc:aras_kurt} still aren't settled." } }
             kronik: { tr: "Kule'de {npc:aras_kurt|i} yendikten sonra elini uzattın; bekçiyi birlikte devirdiniz.", en: "You beat {npc:aras_kurt} in the Spire, then held out a hand, and you took the guardian down together." }
             sonraki: "@akis"
           - id: "kopru"
@@ -3246,7 +3246,7 @@ olaylar:
               - npc_isaret: { aras_kurt: "rakip" }
               - iliski: { aras_kurt: { saygi: 6, guven: -10 } }
               - hafiza: { npc: "aras_kurt", id: "yerde_birakti", agirlik: -40 }
-              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Otuzuncu kattaki o dövüşten bu yana {npc:aras_kurt|le} aranızdaki hesap kapanmadı.", en: "Since that fight on the thirtieth floor, things between you and {npc:aras_kurt} still aren't settled." } }
             kronik: { tr: "Kule'de {npc:aras_kurt|i} en kötü gecesinin önünde yerde bırakıp ödülü aldın.", en: "In the Spire you left {npc:aras_kurt} on the floor in front of his worst night and took the reward." }
             sonraki: "@akis"
 
@@ -3262,7 +3262,7 @@ olaylar:
               - ahlak: { merhamet: 5, insanlik: 4 }
               - bilgi: "aras_kopru"
               - iliski: { aras_kurt: { guven: 12, baglilik: 10 } }
-              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Otuzuncu kattaki o dövüşten bu yana {npc:aras_kurt|le} aranızdaki hesap kapanmadı.", en: "Since that fight on the thirtieth floor, things between you and {npc:aras_kurt} still aren't settled." } }
             kronik: { tr: "Sıralama'dan başka bir sebep bulması için {npc:aras_kurt|e} yardım etmeyi önerdin.", en: "You offered to help {npc:aras_kurt} find a reason besides the Ranking." }
             sonraki: "@akis"
           - id: "kos"
@@ -3274,7 +3274,7 @@ olaylar:
               - bayrak: "aras_ebedi_rakip"
               - npc_isaret: { aras_kurt: "rakip" }
               - iliski: { aras_kurt: { saygi: 10, baglilik: 6 } }
-              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Otuzuncu kattaki o dövüşten bu yana {npc:aras_kurt|le} aranızdaki hesap kapanmadı.", en: "Since that fight on the thirtieth floor, things between you and {npc:aras_kurt} still aren't settled." } }
             kronik: { tr: "Yarışın onun sebebi olmaya devam edeceğine {npc:aras_kurt|e} söz verdin; ebedi rakipler oldunuz.", en: "You promised {npc:aras_kurt} the race would keep being his reason, and you became eternal rivals." }
             sonraki: "@akis"
 
@@ -3290,7 +3290,7 @@ olaylar:
               - ahlak: { insanlik: 2, merhamet: 1 }
               - npc_seviye: { aras_kurt: 3 }
               - iliski: { aras_kurt: { guven: 8, saygi: 6 } }
-              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Otuzuncu kattaki o dövüşten bu yana {npc:aras_kurt|le} aranızdaki hesap kapanmadı.", en: "Since that fight on the thirtieth floor, things between you and {npc:aras_kurt} still aren't settled." } }
             kronik: { tr: "Kule'de {npc:aras_kurt|e} yenildin ve bunu hak ettiğini ona söyledin.", en: "You lost to {npc:aras_kurt} in the Spire and told him he'd earned it." }
             sonraki: "@akis"
           - id: "intikam"
@@ -3301,7 +3301,7 @@ olaylar:
               - npc_isaret: { aras_kurt: "rakip" }
               - bayrak: "aras_ebedi_rakip"
               - iliski: { aras_kurt: { saygi: 8 } }
-              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Otuzuncu kattaki o dövüşten bu yana {npc:aras_kurt|le} aranızdaki hesap kapanmadı.", en: "Since that fight on the thirtieth floor, things between you and {npc:aras_kurt} still aren't settled." } }
             kronik: { tr: "Kule'de {npc:aras_kurt|e} yenilince yüzüncü katta rövanş sözü verdin.", en: "You lost to {npc:aras_kurt} in the Spire and promised him a rematch on floor one hundred." }
             sonraki: "@akis"
 
@@ -3320,7 +3320,7 @@ olaylar:
               - bilgi: "aras_kopru"
               - xp_seviye: 40
               - iliski: { aras_kurt: { guven: 12, baglilik: 10 } }
-              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Otuzuncu kattaki o dövüşten bu yana {npc:aras_kurt|le} aranızdaki hesap kapanmadı.", en: "Since that fight on the thirtieth floor, things between you and {npc:aras_kurt} still aren't settled." } }
             kronik: { tr: "{npc:aras_kurt} ile en kötü gecelerinizi aynı aynada gördünüz; rekabetin altında bir dostluk filizlendi.", en: "You and {npc:aras_kurt} saw your worst nights in the same mirror, and under the rivalry, a friendship started." }
             sonraki: "@akis"
           - id: "gormedim"
@@ -3345,7 +3345,7 @@ olaylar:
               - ahlak: { insanlik: 3, duzen: 1 }
               - iliski: { aras_kurt: { guven: 8, baglilik: 6 } }
               - hafiza: { npc: "aras_kurt", id: "kurtardi_borc", agirlik: 40 }
-              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Otuzuncu kattaki o dövüşten bu yana {npc:aras_kurt|le} aranızdaki hesap kapanmadı.", en: "Since that fight on the thirtieth floor, things between you and {npc:aras_kurt} still aren't settled." } }
             kronik: { tr: "Ayna katında {npc:aras_kurt} seni merdivenlerden sürükleyerek kurtardı; ona bir borcun oldu.", en: "On the mirror floor {npc:aras_kurt} dragged you down the stairs to safety, and you owed him one." }
             sonraki: "@akis"
 
@@ -3360,7 +3360,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 2 }
               - iliski: { aras_kurt: { baglilik: 4 } }
-              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Otuzuncu kattaki o dövüşten bu yana {npc:aras_kurt|le} aranızdaki hesap kapanmadı.", en: "Since that fight on the thirtieth floor, things between you and {npc:aras_kurt} still aren't settled." } }
             kronik: { tr: "Kule'nin bir katını {npc:aras_kurt|e} bıraktın; o katı tek başına kazandı.", en: "You left a floor of the Spire to {npc:aras_kurt}, and he won it alone." }
             sonraki: "@akis"
 
@@ -3378,7 +3378,7 @@ olaylar:
               - unvan: "ebedi_rakip"
               - npc_seviye: { aras_kurt: 2 }
               - iliski: { aras_kurt: { saygi: 8, baglilik: 6 } }
-              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Otuzuncu kattaki o dövüşten bu yana {npc:aras_kurt|le} aranızdaki hesap kapanmadı.", en: "Since that fight on the thirtieth floor, things between you and {npc:aras_kurt} still aren't settled." } }
             kronik: { tr: "{npc:aras_kurt|e} sana yetişmesini söyledin ve aranızdaki yarış ebedi bir rekabete dönüştü.", en: "You told {npc:aras_kurt} to catch up, and the race between you turned into an eternal rivalry." }
             sonraki: "@akis"
           - id: "ozur"
@@ -3401,7 +3401,7 @@ olaylar:
               - ahlak: { merhamet: 3, insanlik: 3 }
               - xp_seviye: 40
               - iliski: { aras_kurt: { guven: 8, baglilik: 8 } }
-              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 60, max: 120 }, kosul: { bayrak: "cok_evren_acik", npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Otuzuncu kattaki o dövüşten bu yana {npc:aras_kurt|le} aranızdaki hesap kapanmadı.", en: "Since that fight on the thirtieth floor, things between you and {npc:aras_kurt} still aren't settled." } }
             kronik: { tr: "Sıralamanın her şey olmadığını {npc:aras_kurt|e} gösterdin; o da bunu bir köprüde değil, bir Kule katında öğrendi.", en: "You showed {npc:aras_kurt} the Ranking isn't everything. He learned it on a floor of the Spire instead of on a bridge." }
             sonraki: "@akis"
 
@@ -3481,7 +3481,7 @@ olaylar:
               - ahlak: { duzen: -2, merhamet: -2 }
               - npc_isaret: { aras_kurt: "rakip" }
               - iliski: { aras_kurt: { guven: -8, saygi: 4 } }
-              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Geçidin eşiğinde {npc:aras_kurt|le} aranızda geçen o an yeniden önüne çıkıyor.", en: "That moment with {npc:aras_kurt} at the threshold of the passage is coming back around." } }
             kronik: { tr: "Çok-evrenin kapısında {npc:aras_kurt|i} geride bıraktın; gözcüyle baş başa kaldı.", en: "At the gate to the multiverse you left {npc:aras_kurt} behind, alone with the scout." }
             sonraki: "ace_teklif"
 
@@ -3501,7 +3501,7 @@ olaylar:
               - bayrak: "aras_kadim_teklifi_reddedildi"
               - hafiza: { npc: "aras_kurt", id: "olay:aras_cok_evren_kapisi", agirlik: 60 }
               - xp_seviye: 60
-              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Geçidin eşiğinde {npc:aras_kurt|le} aranızda geçen o an yeniden önüne çıkıyor.", en: "That moment with {npc:aras_kurt} at the threshold of the passage is coming back around." } }
             kronik: { tr: "Çok-evrende {npc:aras_kurt} ile takım oldunuz; Sıralama ilk geçişi ikinizin adına birden yazdı.", en: "In the multiverse you and {npc:aras_kurt} became a team, and the Ranking logged the first crossing under both your names." }
             sonraki: "@akis"
 
@@ -3518,7 +3518,7 @@ olaylar:
               - unvan: "ebedi_rakip"
               - bayrak: "aras_kadim_teklifi_reddedildi"
               - iliski: { aras_kurt: { saygi: 8, baglilik: 6 } }
-              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Geçidin eşiğinde {npc:aras_kurt|le} aranızda geçen o an yeniden önüne çıkıyor.", en: "That moment with {npc:aras_kurt} at the threshold of the passage is coming back around." } }
             kronik: { tr: "Çok-evrene ilk sen geçtin, {npc:aras_kurt} bir saniye arkandan geldi; ebedi rakipler böyle selamlaştı.", en: "You crossed into the multiverse first and {npc:aras_kurt} came one second behind. That salute belonged to eternal rivals." }
             sonraki: "@akis"
 
@@ -3533,7 +3533,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 3, duzen: -1 }
               - iliski: { aras_kurt: { guven: 6 } }
-              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Geçidin eşiğinde {npc:aras_kurt|le} aranızda geçen o an yeniden önüne çıkıyor.", en: "That moment with {npc:aras_kurt} at the threshold of the passage is coming back around." } }
             kronik: { tr: "Çok-evrene ilk {npc:aras_kurt} geçti; sen de bir Kadim gözcüsünü ondan uzak tutmak için peşinden daldın.", en: "{npc:aras_kurt} crossed into the multiverse first, and you dove in after him to keep an Ancient scout away." }
             sonraki: "@akis"
           - id: "birak"
@@ -3543,7 +3543,7 @@ olaylar:
               - bayrak: "aras_kadim_teklifini_aldi"
               - bilgi: "aras_kadim_teklifi"
               - degisken: { kadim_tehdit: 3 }
-              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Geçidin eşiğinde {npc:aras_kurt|le} aranızda geçen o an yeniden önüne çıkıyor.", en: "That moment with {npc:aras_kurt} at the threshold of the passage is coming back around." } }
             kronik: { tr: "Bir Kadim gözcüsünün geçitte {npc:aras_kurt|in} peşine takılışını izledin ve onu durdurmadın.", en: "You watched an Ancient scout follow {npc:aras_kurt} through the gate and didn't stop it." }
             sonraki: "@akis"
 
@@ -3558,7 +3558,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 4, merhamet: 1 }
               - iliski: { aras_kurt: { baglilik: 10 } }
-              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Geçidin eşiğinde {npc:aras_kurt|le} aranızda geçen o an yeniden önüne çıkıyor.", en: "That moment with {npc:aras_kurt} at the threshold of the passage is coming back around." } }
             kronik: { tr: "{npc:aras_kurt} ile çok-evrene kısayolsuz, uzun yoldan girdiniz.", en: "You and {npc:aras_kurt} entered the multiverse the long way, no shortcuts." }
             sonraki: "ace_birlikte"
 
@@ -3573,7 +3573,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 3, insanlik: 2 }
               - iliski: { aras_kurt: { guven: 6, saygi: 4 } }
-              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Geçidin eşiğinde {npc:aras_kurt|le} aranızda geçen o an yeniden önüne çıkıyor.", en: "That moment with {npc:aras_kurt} at the threshold of the passage is coming back around." } }
             kronik: { tr: "{npc:aras_kurt|e} kimsenin artığı olmadığını söyledin; o da bunu kanıtlamaya karar verdi.", en: "You told {npc:aras_kurt} he was nobody's leftovers, and he decided to prove it." }
             sonraki: "@akis"
           - id: "dogru"
@@ -3582,7 +3582,7 @@ olaylar:
               - ahlak: { insanlik: -4, duzen: 2 }
               - npc_isaret: { aras_kurt: "rakip" }
               - iliski: { aras_kurt: { guven: -10, saygi: 6 } }
-              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Geçidin eşiğinde {npc:aras_kurt|le} aranızda geçen o an yeniden önüne çıkıyor.", en: "That moment with {npc:aras_kurt} at the threshold of the passage is coming back around." } }
             kronik: { tr: "{npc:aras_kurt|e} hep senin gölgende kalacağını söyledin ve onu kendine rakip ettin.", en: "You told {npc:aras_kurt} he'd always be in your shadow, and you made a rival of him." }
             sonraki: "@akis"
 
@@ -3600,7 +3600,7 @@ olaylar:
               - bilgi: "aras_kadim_teklifi"
               - degisken: { kadim_tehdit: 3 }
               - iliski: { aras_kurt: { guven: 2, saygi: 2 } }
-              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Geçidin eşiğinde {npc:aras_kurt|le} aranızda geçen o an yeniden önüne çıkıyor.", en: "That moment with {npc:aras_kurt} at the threshold of the passage is coming back around." } }
             kronik: { tr: "{npc:aras_kurt} bir Kadim'in kısayolunu cebine koydu; sen onu uyardın, o yine de koydu.", en: "{npc:aras_kurt} pocketed an Ancient's shortcut. You warned him, and he pocketed it anyway." }
             sonraki: "@akis"
           - id: "sus"
@@ -3610,7 +3610,7 @@ olaylar:
               - bayrak: "aras_kadim_teklifini_aldi"
               - bilgi: "aras_kadim_teklifi"
               - degisken: { kadim_tehdit: 4 }
-              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_s_kademe", gecikme: { min: 130, max: 150 }, kosul: { perde: 4, npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Geçidin eşiğinde {npc:aras_kurt|le} aranızda geçen o an yeniden önüne çıkıyor.", en: "That moment with {npc:aras_kurt} at the threshold of the passage is coming back around." } }
             kronik: { tr: "{npc:aras_kurt} bir Kadim'in kısayolunu alırken sesini çıkarmadın.", en: "You kept quiet while {npc:aras_kurt} took an Ancient's shortcut." }
             sonraki: "@akis"
 

@@ -382,7 +382,7 @@ olaylar:
             etkiler:
               - bayrak: "kayip_duvari_not"
               - ahlak: { insanlik: 3 }
-              - tohum: { olay: "kayip_duvari_cevap", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "kayip_duvari_cevap", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Dönüş günü bıraktığın not birine ulaştı.", en: "The note you left the day you came back reached someone." } }
             sonraki: "donus_kamplar"
           - id: "don"
             etiket: { tr: "Duvara sırtını dön; işin var", en: "Turn your back on the wall. You've got work" }
@@ -404,7 +404,7 @@ olaylar:
               - bayrak: "kayip_duvari_not"
               - ahlak: { merhamet: 3, insanlik: 2 }
               - iliski: { deniz_arman: { baglilik: 6, guven: 4 } }
-              - tohum: { olay: "kayip_duvari_cevap", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "kayip_duvari_cevap", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Dönüş günü bıraktığın not birine ulaştı.", en: "The note you left the day you came back reached someone." } }
             sonraki: "donus_kamplar"
           - id: "durust"
             etiket: { tr: "\"Bu duvar ona ulaşmaz. Onu başka yerde ararız.\"", en: "\"This wall won't reach her. We'll look somewhere else.\"" }
@@ -499,7 +499,7 @@ olaylar:
               - bayrak: "kayip_duvari_not"
               - ahlak: { insanlik: 4 }
               - itibar: { siginak: 2 }
-              - tohum: { olay: "kayip_duvari_cevap", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "kayip_duvari_cevap", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Dönüş günü bıraktığın not birine ulaştı.", en: "The note you left the day you came back reached someone." } }
             sonraki: "donus_kamplar"
           - id: "yuru"
             etiket: { tr: "Simidi cebine koy; martılar beklesin", en: "Pocket the pretzel. The gulls can wait" }
@@ -529,7 +529,7 @@ olaylar:
               - bayrak: "kayip_duvari_not"
               - ahlak: { duzen: 2, insanlik: 1 }
               - iliski: { deniz_arman: { guven: 3, baglilik: -2 } }
-              - tohum: { olay: "kayip_duvari_cevap", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "kayip_duvari_cevap", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Dönüş günü bıraktığın not birine ulaştı.", en: "The note you left the day you came back reached someone." } }
             sonraki: "donus_kamplar"
 
       - id: "donus_deniz_kavusma"
@@ -595,7 +595,7 @@ olaylar:
               - bayrak: "kayip_duvari_not"
               - ahlak: { merhamet: 2, duzen: -2 }
               - iliski: { deniz_arman: { baglilik: 5 } }
-              - tohum: { olay: "kayip_duvari_cevap", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "kayip_duvari_cevap", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Dönüş günü bıraktığın not birine ulaştı.", en: "The note you left the day you came back reached someone." } }
             sonraki: "donus_kamplar"
 
       # ---------------------------------------------------------------- Kamplar seni istiyor
@@ -669,7 +669,7 @@ olaylar:
               - aciga_vur: true
               - ahlak: { insanlik: -2, duzen: -1 }
               - itibar: { siginak: 2, lonca: 3, yukselenler: 3, sessiz_ag: 2 }
-              - tohum: { olay: "dikkat_50_p2", gecikme: { min: 4, max: 8 }, kosul: { dikkat_min: 35 } }
+              - tohum: { olay: "dikkat_50_p2", gecikme: { min: 4, max: 8 }, kosul: { dikkat_min: 35 }, hatirlatma: { tr: "Dönüş günü gösterdiğin şey birilerinin aklında kaldı.", en: "What you showed people the day you came back stuck with somebody." } }
             sonraki: "@akis"
 
   # ================================================================== KULE'NİN YÜKSELİŞİ (ana yay 40)
@@ -854,7 +854,7 @@ olaylar:
               - ahlak: { insanlik: -2, duzen: -1 }
               - itibar: { lonca: 4, yukselenler: 5, sessiz_ag: 3 }
               - xp_seviye: 40
-              - tohum: { olay: "kule_donmeyenler", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "kule_donmeyenler", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Kule'nin yükseldiği sabahtan beri kapısının önü hiç boşalmadı.", en: "The space in front of the Spire's door hasn't emptied out once since the morning it rose." } }
             sonraki: "kule_ilk_kat"
           - id: "nobet"
             etiket: { tr: "Kapının önünde dur; içeride kimse ölmesin", en: "Stand at the door. Nobody dies in there yet" }
@@ -864,7 +864,7 @@ olaylar:
               - ahlak: { merhamet: 3, duzen: 3 }
               - itibar: { siginak: 4, lonca: 2 }
               - xp_seviye: 30
-              - tohum: { olay: "kule_donmeyenler", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "kule_donmeyenler", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Kule'nin yükseldiği sabahtan beri kapısının önü hiç boşalmadı.", en: "The space in front of the Spire's door hasn't emptied out once since the morning it rose." } }
             sonraki: "kule_kapi_nobet"
           - id: "can"
             etiket: { tr: "Çanın bir parçasını al ve uzaklaş", en: "Take a piece of the bell and walk away" }
@@ -938,7 +938,7 @@ olaylar:
               - ahlak: { duzen: 1 }
               - stat: { wil: 1 }
               - iliski: { aras_kurt: { saygi: -3 } }
-              - tohum: { olay: "kule_donmeyenler", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "kule_donmeyenler", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Kule'nin yükseldiği sabahtan beri kapısının önü hiç boşalmadı.", en: "The space in front of the Spire's door hasn't emptied out once since the morning it rose." } }
             sonraki: "@akis"
           - id: "kirik"
             etiket: { tr: "Bir kırık al; bir dahaki sefere hatırlatsın", en: "Pocket a shard. Let it remind you next time" }
@@ -963,7 +963,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 2, insanlik: 2 }
               - iliski: { aras_kurt: { saygi: 2 } }
-              - tohum: { olay: "kule_donmeyenler", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "kule_donmeyenler", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Kule'nin yükseldiği sabahtan beri kapısının önü hiç boşalmadı.", en: "The space in front of the Spire's door hasn't emptied out once since the morning it rose." } }
             sonraki: "@akis"
           - id: "dis"
             etiket: { tr: "Dişlerini sık; ilk kat başkasının oldu", en: "Grit your teeth. Somebody else got the first floor" }
@@ -987,7 +987,7 @@ olaylar:
             etkiler:
               - gizle: 4
               - ahlak: { duzen: 1 }
-              - tohum: { olay: "kule_donmeyenler", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "kule_donmeyenler", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Kule'nin yükseldiği sabahtan beri kapısının önü hiç boşalmadı.", en: "The space in front of the Spire's door hasn't emptied out once since the morning it rose." } }
             sonraki: "@akis"
           - id: "yanki"
             etiket: { tr: "{npc:yanki|e} zirvede ne olduğunu sor", en: "Ask {npc:yanki} what's at the top" }
@@ -1008,7 +1008,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 1 }
               - iliski: { yanki: { guven: 3 } }
-              - tohum: { olay: "kule_donmeyenler", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "kule_donmeyenler", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Kule'nin yükseldiği sabahtan beri kapısının önü hiç boşalmadı.", en: "The space in front of the Spire's door hasn't emptied out once since the morning it rose." } }
             sonraki: "@akis"
 
       - id: "kule_aras_kazan"
@@ -1028,7 +1028,7 @@ olaylar:
               - npc_isaret: { aras_kurt: "rakip" }
               - xp_seviye: 40
               - dikkat: 5
-              - tohum: { olay: "kule_donmeyenler", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "kule_donmeyenler", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Kule'nin yükseldiği sabahtan beri kapısının önü hiç boşalmadı.", en: "The space in front of the Spire's door hasn't emptied out once since the morning it rose." } }
             sonraki: "@akis"
           - id: "el"
             etiket: { tr: "Elini uzat; ikinci kat ikinizin olsun", en: "Offer him your hand. Second floor's for both of you" }
@@ -1053,7 +1053,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 2 }
               - iliski: { aras_kurt: { saygi: 4, guven: 2 } }
-              - tohum: { olay: "kule_donmeyenler", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "kule_donmeyenler", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Kule'nin yükseldiği sabahtan beri kapısının önü hiç boşalmadı.", en: "The space in front of the Spire's door hasn't emptied out once since the morning it rose." } }
             sonraki: "@akis"
           - id: "hirs"
             etiket: { tr: "Bunu hatırla. Her katı hatırla", en: "Remember this. Remember every floor" }
@@ -1776,7 +1776,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 6, guven: -6 }, elif_sari: { korku: 6 }, yanki: { guven: 6, baglilik: 4 } }
               - dikkat: 8
               - xp_seviye: 70
-              - tohum: { olay: "dikkat_75_p2", gecikme: { min: 2, max: 5 }, kosul: { dikkat_min: 60 } }
+              - tohum: { olay: "dikkat_75_p2", gecikme: { min: 2, max: 5 }, kosul: { dikkat_min: 60 }, hatirlatma: { tr: "Kristale dokunduğun günden beri adın şehrin dışına da taşıyor.", en: "Since the day you put your hand on that crystal, your name's been carrying beyond the city." } }
             sonraki: "cekirdek_son"
 
       - id: "cekirdek_yenilgi"
@@ -2045,7 +2045,7 @@ olaylar:
               - esya: { tasma_kalbi: 1 }
               - dikkat: 5
               - xp_seviye: 120
-              - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Ters gelgitin gecesi {yer:kordon|in} hafızasından silinmedi.", en: "The night of the backwash hasn't faded from {yer:kordon|pos} memory." } }
             sonraki: "@akis"
           - id: "insanlar"
             etiket: { tr: "Kalbi cebine koy; yaralıların yanına git", en: "Pocket the heart. Go to the wounded" }
@@ -2061,7 +2061,7 @@ olaylar:
               - iliski: { elif_sari: { guven: 5 }, deniz_arman: { baglilik: 4 } }
               - esya: { tasma_kalbi: 1 }
               - xp_seviye: 110
-              - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Ters gelgitin gecesi {yer:kordon|in} hafızasından silinmedi.", en: "The night of the backwash hasn't faded from {yer:kordon|pos} memory." } }
             sonraki: "@akis"
           - id: "lonca"
             etiket: { tr: "{yer:kordon|i} Lonca'nın nöbetine teslim et", en: "Hand {yer:kordon} over to the Guild's watch" }
@@ -2077,7 +2077,7 @@ olaylar:
               - iliski: { kaya_demir: { guven: 5, saygi: 4 } }
               - esya: { tasma_kalbi: 1 }
               - xp_seviye: 110
-              - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Ters gelgitin gecesi {yer:kordon|in} hafızasından silinmedi.", en: "The night of the backwash hasn't faded from {yer:kordon|pos} memory." } }
             sonraki: "@akis"
 
       - id: "tasma_yenilgi"
@@ -2098,7 +2098,7 @@ olaylar:
               - degisken: { hayatta_kalan: -3, kadim_tehdit: 3 }
               - ahlak: { duzen: 2, merhamet: 1 }
               - stat: { wil: 2 }
-              - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Ters gelgitin gecesi {yer:kordon|in} hafızasından silinmedi.", en: "The night of the backwash hasn't faded from {yer:kordon|pos} memory." } }
             sonraki: "@akis"
           - id: "say"
             etiket: { tr: "Rıhtımdakileri tek tek say", en: "Count the people on the quay, one by one" }
@@ -2109,7 +2109,7 @@ olaylar:
               - tehlike: { kordon: 25 }
               - degisken: { hayatta_kalan: -2, kadim_tehdit: 3 }
               - ahlak: { insanlik: 3, merhamet: 2 }
-              - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Ters gelgitin gecesi {yer:kordon|in} hafızasından silinmedi.", en: "The night of the backwash hasn't faded from {yer:kordon|pos} memory." } }
             sonraki: "@akis"
 
       - id: "tasma_kacis"
@@ -2128,7 +2128,7 @@ olaylar:
               - degisken: { hayatta_kalan: -3, kadim_tehdit: 4 }
               - ahlak: { merhamet: 4 }
               - can: -25
-              - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Ters gelgitin gecesi {yer:kordon|in} hafızasından silinmedi.", en: "The night of the backwash hasn't faded from {yer:kordon|pos} memory." } }
             sonraki: "@akis"
           - id: "git"
             etiket: { tr: "Çatıdan çatıya, {yer:kiyikent_liman|e} kadar git", en: "Go roof to roof, all the way to {yer:kiyikent_liman}" }
@@ -2139,7 +2139,7 @@ olaylar:
               - tehlike: { kordon: 25 }
               - degisken: { hayatta_kalan: -5, kadim_tehdit: 5 }
               - ahlak: { merhamet: -4, duzen: 1 }
-              - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Ters gelgitin gecesi {yer:kordon|in} hafızasından silinmedi.", en: "The night of the backwash hasn't faded from {yer:kordon|pos} memory." } }
             sonraki: "@akis"
 
       - id: "tasma_geri"
@@ -2159,7 +2159,7 @@ olaylar:
               - degisken: { hayatta_kalan: -6, kadim_tehdit: 6 }
               - ahlak: { duzen: 3, insanlik: -3 }
               - itibar: { lonca: 4, siginak: -6 }
-              - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Ters gelgitin gecesi {yer:kordon|in} hafızasından silinmedi.", en: "The night of the backwash hasn't faded from {yer:kordon|pos} memory." } }
             sonraki: "@akis"
           - id: "tekne"
             etiket: { tr: "Bir tekne al; körfezden kurtarabildiğini topla", en: "Grab a boat. Pull whoever you can out of the bay" }
@@ -2171,7 +2171,7 @@ olaylar:
               - degisken: { hayatta_kalan: -3, kadim_tehdit: 5 }
               - ahlak: { merhamet: 4, duzen: -1 }
               - itibar: { siginak: 2 }
-              - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "tasma_sonrasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Ters gelgitin gecesi {yer:kordon|in} hafızasından silinmedi.", en: "The night of the backwash hasn't faded from {yer:kordon|pos} memory." } }
             sonraki: "@akis"
 
   # ================================================================== YANKI'NIN ORTAYA ÇIKIŞI (ana yay 105)
@@ -2425,7 +2425,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: -2, insanlik: 1 }
               - dikkat: 3
-              - tohum: { olay: "iki_sesli_sokak", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "iki_sesli_sokak", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Küçük harfli bültenin akşamından beri şehir o cümleyi unutmadı.", en: "The city hasn't forgotten that sentence since the night of the lowercase bulletin." } }
             sonraki: "@akis"
           - id: "elif"
             etiket: { tr: "{npc:elif_sari|in} notuna cevap ver: \"Gel.\"", en: "Answer {npc:elif_sari|pos} note: \"Come over.\"" }
@@ -2434,7 +2434,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 3, merhamet: 1 }
               - iliski: { elif_sari: { guven: 6, baglilik: 4 } }
-              - tohum: { olay: "iki_sesli_sokak", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "iki_sesli_sokak", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Küçük harfli bültenin akşamından beri şehir o cümleyi unutmadı.", en: "The city hasn't forgotten that sentence since the night of the lowercase bulletin." } }
             sonraki: "@akis"
           - id: "mert"
             etiket: { tr: "{npc:mert_kilic|e} kayıtları silmesini söyle", en: "Tell {npc:mert_kilic} to wipe the recordings" }
@@ -2444,7 +2444,7 @@ olaylar:
               - ahlak: { duzen: 2, insanlik: -1 }
               - gizle: 5
               - iliski: { mert_kilic: { guven: -3, saygi: 2 } }
-              - tohum: { olay: "iki_sesli_sokak", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "iki_sesli_sokak", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Küçük harfli bültenin akşamından beri şehir o cümleyi unutmadı.", en: "The city hasn't forgotten that sentence since the night of the lowercase bulletin." } }
             sonraki: "@akis"
 
   # ================================================================== SİSTEM GERÇEĞİNİN İLK PARÇASI (ana yay 135)
@@ -3020,7 +3020,7 @@ olaylar:
               - ahlak: { duzen: -3, insanlik: -1 }
               - itibar: { lonca: 4, yukselenler: 3 }
               - xp_seviye: 25
-              - tohum: { olay: "dikkat_75_p2", gecikme: { min: 3, max: 6 }, kosul: { dikkat_min: 70 } }
+              - tohum: { olay: "dikkat_75_p2", gecikme: { min: 3, max: 6 }, kosul: { dikkat_min: 70 }, hatirlatma: { tr: "Ödül panosundaki yüzün yerinde durmadı; birileri o yüzü tanımaya başladı.", en: "Your face didn't stay on that board. It got around, and people have started to recognize it." } }
             sonraki: "@akis"
           - id: "teslim"
             etiket: { tr: "Onları Lonca'nın nöbetine teslim et", en: "Turn them over to the Guild watch" }
@@ -3201,7 +3201,7 @@ olaylar:
               - ahlak: { duzen: -3 }
               - itibar: { yukselenler: 5, sessiz_ag: 5 }
               - xp_seviye: 80
-              - tohum: { olay: "dikkat_100_p2", gecikme: { min: 3, max: 7 }, kosul: { dikkat_min: 90 } }
+              - tohum: { olay: "dikkat_100_p2", gecikme: { min: 3, max: 7 }, kosul: { dikkat_min: 90 }, hatirlatma: { tr: "Adını bilen o yabancıdan sonra geceler daha uzun.", en: "Since that stranger who knew your name, the nights have felt longer." } }
             sonraki: "@akis"
 
       - id: "d75p2_sakla"
@@ -3342,7 +3342,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 1 }
               - xp_seviye: 60
-              - tohum: { olay: "dikkat_75_p2", gecikme: { min: 4, max: 8 }, kosul: { dikkat_min: 75 } }
+              - tohum: { olay: "dikkat_75_p2", gecikme: { min: 4, max: 8 }, kosul: { dikkat_min: 75 }, hatirlatma: { tr: "Seni ölçen o şeyin bıraktığı soğukluk hâlâ ensende.", en: "You can still feel the cold that thing left on the back of your neck when it measured you." } }
             sonraki: "@akis"
 
       - id: "d100p2_egil"
@@ -3354,7 +3354,7 @@ olaylar:
             etiket: { tr: "Kalk, dizlerinin tozunu silkele", en: "Get up and brush off your knees" }
             etkiler:
               - ahlak: { insanlik: 1 }
-              - tohum: { olay: "dikkat_75_p2", gecikme: { min: 4, max: 8 }, kosul: { dikkat_min: 75 } }
+              - tohum: { olay: "dikkat_75_p2", gecikme: { min: 4, max: 8 }, kosul: { dikkat_min: 75 }, hatirlatma: { tr: "Seni ölçen o şeyin bıraktığı soğukluk hâlâ ensende.", en: "You can still feel the cold that thing left on the back of your neck when it measured you." } }
             sonraki: "@akis"
 
       - id: "d100p2_saklan"
@@ -3463,7 +3463,7 @@ olaylar:
               - iliski: { elif_sari: { saygi: 4 }, deniz_arman: { baglilik: 4 } }
               - dikkat: 5
               - xp_seviye: 30
-              - tohum: { olay: "dikkat_50_p2", gecikme: { min: 2, max: 5 }, kosul: { dikkat_min: 45 } }
+              - tohum: { olay: "dikkat_50_p2", gecikme: { min: 2, max: 5 }, kosul: { dikkat_min: 45 }, hatirlatma: { tr: "Kayıplar Duvarı'ndaki notunun altına yazılanları okuyan tek kişi sen değilsin.", en: "You weren't the only one who read what got written under your note on the Wall of the Missing." } }
             sonraki: "kdc_vapur"
           - id: "vinc"
             etiket: { tr: "Lonca'dan iki vinç iste; birlikte yapın", en: "Ask the Guild for two cranes. Do it together" }
@@ -3628,7 +3628,7 @@ olaylar:
               - degisken: { hayatta_kalan: 2 }
               - itibar: { siginak: 4, sessiz_ag: 4, lonca: 2 }
               - xp_seviye: 20
-              - tohum: { olay: "dikkat_50_p2", gecikme: { min: 2, max: 5 }, kosul: { dikkat_min: 45 } }
+              - tohum: { olay: "dikkat_50_p2", gecikme: { min: 2, max: 5 }, kosul: { dikkat_min: 45 }, hatirlatma: { tr: "Kule'nin kapısındaki kalabalığa konuştuğun günden beri yüzün tanınıyor.", en: "Since the day you spoke to the crowd at the Spire door, people know your face." } }
             sonraki: "@akis"
 
       - id: "kd_yenilgi"
@@ -3704,7 +3704,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 3, duzen: -1 }
               - iliski: { mert_kilic: { guven: 4 }, vahit: { guven: -3 } }
-              - tohum: { olay: "kayip_duvari_cevap", gecikme: { min: 2, max: 4 }, kosul: { bayrak: "kayip_duvari_not" } }
+              - tohum: { olay: "kayip_duvari_cevap", gecikme: { min: 2, max: 4 }, kosul: { bayrak: "kayip_duvari_not" }, hatirlatma: { tr: "Seçim gecesi kapına kâğıt bırakan her kimse, işi bitmedi.", en: "Whoever left that paper at your door on the night of the choice isn't done." } }
             sonraki: "@akis"
           - id: "ruya"
             etiket: { tr: "Mürite su ver, evine yolla", en: "Give the follower some water. Send him home" }
@@ -3759,7 +3759,7 @@ olaylar:
               - ahlak: { insanlik: 3, duzen: -1 }
               - itibar: { siginak: 3, yukselenler: 2 }
               - iliski: { deniz_arman: { baglilik: 4 } }
-              - tohum: { olay: "dikkat_50_p2", gecikme: { min: 3, max: 6 }, kosul: { dikkat_min: 45 } }
+              - tohum: { olay: "dikkat_50_p2", gecikme: { min: 3, max: 6 }, kosul: { dikkat_min: 45 }, hatirlatma: { tr: "Dalgadan sonraki şenlikte yüzünü görenler unutmamış.", en: "The people who saw your face at the party after the wave haven't forgotten it." } }
             sonraki: "ts_sen"
           - id: "cocuk"
             etiket: { tr: "Tacı en küçük çocuğun başına koy", en: "Put the crown on the smallest kid's head" }
@@ -3847,7 +3847,7 @@ olaylar:
               - yozlasma: 3
               - itibar: { yukselenler: 4 }
               - iliski: { yanki: { guven: 6, baglilik: 4 } }
-              - tohum: { olay: "dikkat_75_p2", gecikme: { min: 3, max: 6 }, kosul: { dikkat_min: 65 } }
+              - tohum: { olay: "dikkat_75_p2", gecikme: { min: 3, max: 6 }, kosul: { dikkat_min: 65 }, hatirlatma: { tr: "Duvarlardaki küçük harfli yazılar seni arayanlara bir iz bırakmış.", en: "Those lowercase words on the walls left a trail for anyone looking for you." } }
             sonraki: "iss_yanki"
 
       - id: "iss_gencler"
@@ -4013,7 +4013,7 @@ olaylar:
               - ahlak: { duzen: -3, insanlik: -1 }
               - dikkat: 6
               - itibar: { kadimler: 3, lonca: 3 }
-              - tohum: { olay: "dikkat_100_p2", gecikme: { min: 1, max: 3 }, kosul: { dikkat_min: 95 } }
+              - tohum: { olay: "dikkat_100_p2", gecikme: { min: 1, max: 3 }, kosul: { dikkat_min: 95 }, hatirlatma: { tr: "Yedi köşeli gölgenin altındaki o gece gökyüzü sana bir kez fazla baktı.", en: "That night under the seven-sided shadow, the sky looked at you one time too many." } }
             sonraki: "gag_golge"
 
       - id: "gag_tekne"

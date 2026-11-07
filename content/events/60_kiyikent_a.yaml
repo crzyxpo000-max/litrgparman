@@ -93,7 +93,7 @@ olaylar:
               - ahlak: { merhamet: -4, insanlik: -2 }
               - bayrak: "kayip_balikhaneye"
               - tohum: { olay: "liman_balikhane_karaborsa", gecikme: { min: 0, max: 2 }, kosul: { bayrak_yok: "balikhane_goruldu" } }
-              - tohum: { olay: "kayiplar_mektup", gecikme: { min: 6, max: 12 } }
+              - tohum: { olay: "kayiplar_mektup", gecikme: { min: 6, max: 12 }, hatirlatma: { tr: "Kayıplar Duvarı'nda yardım ettiğin kadın seni unutmadı.", en: "The woman you helped at the Wall of the Missing hasn't forgotten you." } }
             kronik: { tr: "Kocasını arayan bir kadına kendin bakacağına onu karaborsaya yolladın.", en: "Instead of looking for yourself, you sent a woman hunting for her husband to the black market." }
             sonraki: "kayiplar_balikhane"
           - id: "deniz_not"
@@ -136,7 +136,7 @@ olaylar:
               - ahlak: { duzen: 2, insanlik: 3 }
               - bayrak: "kayip_gercek_soylendi"
               - itibar: { siginak: 2 }
-              - tohum: { olay: "kayiplar_mektup", gecikme: { min: 4, max: 9 } }
+              - tohum: { olay: "kayiplar_mektup", gecikme: { min: 4, max: 9 }, hatirlatma: { tr: "Kayıplar Duvarı'nda yardım ettiğin kadın seni unutmadı.", en: "The woman you helped at the Wall of the Missing hasn't forgotten you." } }
             kronik: { tr: "Bir kadına kocasının hem yaşadığını hem de ondan saklandığını söyledin; ikisini birden yüklenmek ona düştü.", en: "You told a woman her husband was alive and hiding from her, and she had to carry both at once." }
             sonraki: "kayiplar_son"
           - id: "yarim"
@@ -144,7 +144,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 3, duzen: -1 }
               - bayrak: "kayip_yarim_gercek"
-              - tohum: { olay: "kayiplar_mektup", gecikme: { min: 4, max: 9 } }
+              - tohum: { olay: "kayiplar_mektup", gecikme: { min: 4, max: 9 }, hatirlatma: { tr: "Kayıplar Duvarı'nda yardım ettiğin kadın seni unutmadı.", en: "The woman you helped at the Wall of the Missing hasn't forgotten you." } }
             kronik: { tr: "Bir kadına kocasının yaşadığını söyleyip gerisini yuttun.", en: "You told a woman her husband was alive and kept the rest of it to yourself." }
             sonraki: "kayiplar_son"
           - id: "olu"
@@ -152,7 +152,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: -4, duzen: 1, merhamet: -2 }
               - bayrak: "kayip_olu_dendi"
-              - tohum: { olay: "kayiplar_mektup", gecikme: { min: 6, max: 12 } }
+              - tohum: { olay: "kayiplar_mektup", gecikme: { min: 6, max: 12 }, hatirlatma: { tr: "Kayıplar Duvarı'nda yardım ettiğin kadın seni unutmadı.", en: "The woman you helped at the Wall of the Missing hasn't forgotten you." } }
             kronik: { tr: "Hâlâ nefes alan bir adam için bir kadına yas tutmasını söyledin.", en: "You told a woman to grieve a man who was still breathing." }
             sonraki: "kayiplar_son"
           - id: "soz"
@@ -163,7 +163,7 @@ olaylar:
               - bayrak: "kayip_soz"
               - bayrak: "kayip_gercek_soylendi"
               - gorev: { duvardaki_isim: "basla" }
-              - tohum: { olay: "kayiplar_mektup", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "kayiplar_mektup", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Kayıplar Duvarı'nda yardım ettiğin kadın seni unutmadı.", en: "The woman you helped at the Wall of the Missing hasn't forgotten you." } }
             kronik: { tr: "Bir yabancıya, saklanan kocasını bulup eve getireceğine söz verdin.", en: "In front of the Wall of the Missing you promised a stranger you'd bring her hiding husband home." }
             sonraki: "kayiplar_son"
 
@@ -191,7 +191,7 @@ olaylar:
               - itibar: { siginak: 5 }
               - gun: 1
               - bayrak: "kayip_gercek_soylendi"
-              - tohum: { olay: "kayiplar_mektup", gecikme: { min: 4, max: 9 } }
+              - tohum: { olay: "kayiplar_mektup", gecikme: { min: 4, max: 9 }, hatirlatma: { tr: "Kayıplar Duvarı'nda yardım ettiğin kadın seni unutmadı.", en: "The woman you helped at the Wall of the Missing hasn't forgotten you." } }
             kronik: { tr: "Sabaha kadar duvarın önünden ayrılmadın; yüzlerce insana kaybını kendi ağzınla söyledin.", en: "You spent the whole night at the Wall of the Missing telling hundreds of people their losses in your own voice." }
             sonraki: "kayiplar_son"
           - id: "konsey"
@@ -274,7 +274,7 @@ olaylar:
             etiket: { tr: "Onu sevinciyle baş başa bırak, uzaklaş", en: "Leave her with her joy and walk away" }
             etkiler:
               - ahlak: { merhamet: 1, insanlik: -1 }
-              - tohum: { olay: "kayiplar_mektup", gecikme: { min: 6, max: 12 } }
+              - tohum: { olay: "kayiplar_mektup", gecikme: { min: 6, max: 12 }, hatirlatma: { tr: "Kayıplar Duvarı'nda yardım ettiğin kadın seni unutmadı.", en: "The woman you helped at the Wall of the Missing hasn't forgotten you." } }
             kronik: { tr: "Bir kadını, doğruluğundan senin bile emin olmadığın bir sevinçle bırakıp gittin.", en: "You left a woman with a joy even you weren't sure was true." }
             sonraki: "kayiplar_son"
 
@@ -456,7 +456,7 @@ olaylar:
               - bayrak: "kayip_aile_birlesti"
               - itibar: { siginak: 3 }
               - xp_seviye: 35
-              - tohum: { olay: "liman_balikhane_karaborsa", gecikme: { min: 1, max: 4 }, kosul: { bayrak_yok: "balikhane_goruldu" } }
+              - tohum: { olay: "liman_balikhane_karaborsa", gecikme: { min: 1, max: 4 }, kosul: { bayrak_yok: "balikhane_goruldu" }, hatirlatma: { tr: "Ölüden alan adamın hikâyesi seni balıkhaneye çıkarıyor.", en: "The story of the man who took from the dead leads you to the fish market." } }
             kronik: { tr: "Ölülerden kristal toplayan bir adamı, unvanı başının üstünde asılıyken evine, karısının sofrasına götürdün.", en: "You sat a man who took crystals off the dead down at his wife's table with his title still hanging over his head." }
             sonraki: "mektup_son"
           - id: "maske"
@@ -479,7 +479,7 @@ olaylar:
               - bayrak: "kayip_koca_secti"
               - gorev: { duvardaki_isim: "tamam" }
               - xp_seviye: 25
-              - tohum: { olay: "liman_balikhane_karaborsa", gecikme: { min: 1, max: 4 }, kosul: { bayrak_yok: "balikhane_goruldu" } }
+              - tohum: { olay: "liman_balikhane_karaborsa", gecikme: { min: 1, max: 4 }, kosul: { bayrak_yok: "balikhane_goruldu" }, hatirlatma: { tr: "Ölüden alan adamın hikâyesi seni balıkhaneye çıkarıyor.", en: "The story of the man who took from the dead leads you to the fish market." } }
             kronik: { tr: "Saklanan bir adamın eline karısının yıpranmış fotoğrafını tutuşturup kararı ona bıraktın.", en: "You handed a hiding man his wife's worn-out photo and left the rest to him." }
             sonraki: "mektup_son"
           - id: "birak"
@@ -687,7 +687,7 @@ olaylar:
               - bayrak: "balikhane_ortak"
               - bayrak: "balikhane_pay"
               - itibar: { siginak: -3 }
-              - tohum: { olay: "balikhane_hesap", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "balikhane_hesap", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Balıkhanenin kantarında bıraktığın hesap kapanmadı.", en: "That business at the fish market scale isn't finished." } }
             kronik: { tr: "Neyin tartıldığını sormadan balıkhanenin kantarından pay almaya razı oldun.", en: "You agreed to take a cut off the fish hall scale without asking what was being weighed." }
             sonraki: "balikhane_ortaklik"
           - id: "neden"
@@ -753,7 +753,7 @@ olaylar:
               - ahlak: { merhamet: 3, duzen: 2, insanlik: 1 }
               - bilgi: "balikhane_kristal_kaynagi"
               - bayrak: "balikhane_kayit_defteri"
-              - tohum: { olay: "balikhane_hesap", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "balikhane_hesap", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Balıkhanenin kantarında bıraktığın hesap kapanmadı.", en: "That business at the fish market scale isn't finished." } }
             kronik: { tr: "Balıkhaneyi kapatmadın ama sattığı her kristalin karşısına bir ölünün adını yazdırdın.", en: "You didn't shut the fish hall down, but you made it write a dead person's name under every crystal it sold." }
             sonraki: "balikhane_defter"
           - id: "devral"
@@ -766,7 +766,7 @@ olaylar:
               - bayrak: "balikhane_pay"
               - itibar: { siginak: -5, yukselenler: 3 }
               - dikkat: 2
-              - tohum: { olay: "balikhane_hesap", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "balikhane_hesap", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Balıkhanenin kantarında bıraktığın hesap kapanmadı.", en: "That business at the fish market scale isn't finished." } }
             kronik: { tr: "Ölülerin kristalini satan balıkhaneyi kapatacağına el koyup kendine aldın.", en: "Instead of shutting down the fish hall that sold the dead, you took it for yourself." }
             sonraki: "balikhane_devral"
           - id: "lonca"
@@ -779,7 +779,7 @@ olaylar:
               - bilgi: "balikhane_kristal_kaynagi"
               - bayrak: "balikhane_ihbar_lonca"
               - bayrak: "balikhane_ihbar"
-              - tohum: { olay: "balikhane_hesap", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "balikhane_hesap", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Balıkhanenin kantarında bıraktığın hesap kapanmadı.", en: "That business at the fish market scale isn't finished." } }
             kronik: { tr: "Ölülerin kristal pazarını Demir Lonca'ya teslim ettin; Lonca orayı kapatmak yerine vergiye bağladı.", en: "You handed the dead men's crystal market to the Iron Guild, and the Guild didn't close it. It taxed it." }
             sonraki: "balikhane_ihbar_sahne"
           - id: "konsey"
@@ -792,7 +792,7 @@ olaylar:
               - bilgi: "balikhane_kristal_kaynagi"
               - bayrak: "balikhane_ihbar_siginak"
               - bayrak: "balikhane_ihbar"
-              - tohum: { olay: "balikhane_hesap", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "balikhane_hesap", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Balıkhanenin kantarında bıraktığın hesap kapanmadı.", en: "That business at the fish market scale isn't finished." } }
             kronik: { tr: "Ölülerin kristal pazarını Sığınak Konseyi'ne ihbar edip kapatılıp kapatılmamasını oylamaya bıraktın.", en: "You reported the dead men's crystal market to the Haven Council and left its closing to a vote." }
             sonraki: "balikhane_ihbar_sahne"
 
@@ -852,7 +852,7 @@ olaylar:
               - bayrak: "balikhane_kapatildi"
               - bayrak: "balikhane_stok_hastanede"
               - xp_seviye: 40
-              - tohum: { olay: "balikhane_hesap", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "balikhane_hesap", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Balıkhanenin kantarında bıraktığın hesap kapanmadı.", en: "That business at the fish market scale isn't finished." } }
             kronik: { tr: "Balıkhanenin iksirlerini, ateşli çocuklar ilacı orada bulsun diye Konsey'in hastanesine taşıdın.", en: "You hauled the fish hall's potions to the Council hospital so the feverish kids could find their medicine there." }
             sonraki: "@akis"
           - id: "dalgic"
@@ -863,7 +863,7 @@ olaylar:
               - bayrak: "balikhane_kapatildi"
               - bayrak: "balikhane_dalgiclara"
               - xp_seviye: 40
-              - tohum: { olay: "balikhane_hesap", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "balikhane_hesap", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Balıkhanenin kantarında bıraktığın hesap kapanmadı.", en: "That business at the fish market scale isn't finished." } }
             kronik: { tr: "Balıkhaneyi kapattın ama ölüleri sudan çıkaranları da aç bırakmadın.", en: "You shut down the fish hall and didn't let the people who pulled the dead out of the water go hungry for it." }
             sonraki: "@akis"
           - id: "el_koy"
@@ -876,7 +876,7 @@ olaylar:
               - itibar: { siginak: -4, lonca: 2 }
               - bayrak: "balikhane_kapatildi"
               - xp_seviye: 40
-              - tohum: { olay: "balikhane_hesap", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "balikhane_hesap", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Balıkhanenin kantarında bıraktığın hesap kapanmadı.", en: "That business at the fish market scale isn't finished." } }
             kronik: { tr: "Ölülerin pazarını kapatıp raflarını kendi çantana boşalttın.", en: "You closed the market of the dead and emptied its shelves into your own pack." }
             sonraki: "@akis"
 
@@ -1117,7 +1117,7 @@ olaylar:
               - ahlak: { insanlik: 2, merhamet: 1 }
               - itibar: { siginak: 3 }
               - degisken: { hayatta_kalan: 1 }
-              - tohum: { olay: "liman_kayiplar_duvari", gecikme: { min: 1, max: 3 }, kosul: { bayrak_yok: ["kayip_koca_yasiyor", "kayip_umut_verildi", "kayip_balikhaneye"] } }
+              - tohum: { olay: "liman_kayiplar_duvari", gecikme: { min: 1, max: 3 }, kosul: { bayrak_yok: ["kayip_koca_yasiyor", "kayip_umut_verildi", "kayip_balikhaneye"] }, hatirlatma: { tr: "Kantarın öbür kefesinde kalan kadın hâlâ aklında.", en: "You keep thinking about the woman left on the other side of that scale." } }
             kronik: { tr: "Bir karaborsanın kapısında, ölüler panosunun önünde, oğlunun haberini yeni almış bir annenin yanı başında durdun.", en: "At the door of a black market, next to a board of the dead, you stood with a mother who'd just found out about her son." }
             sonraki: "@akis"
 
@@ -1381,7 +1381,7 @@ olaylar:
               - bayrak: "vapur_lonca"
               - gorev: { vapuru_yuzdur: "tamam" }
               - xp_seviye: 30
-              - tohum: { olay: "vapur_ilk_sefer", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "vapur_ilk_sefer", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Yan yatmış akşam vapuru için verdiğin karar sonunda suya iniyor.", en: "What you decided about that capsized evening ferry is finally hitting the water." } }
             kronik: { tr: "Kaldırdığın vapuru, ambarına un değil avcı dolacağını bile bile Demir Lonca'ya verdin.", en: "You gave the ferry you'd raised to the Iron Guild, knowing its hold would fill with hunters, not bread." }
             sonraki: "vapur_son"
           - id: "konsey"
@@ -1393,7 +1393,7 @@ olaylar:
               - bayrak: "vapur_siginak"
               - gorev: { vapuru_yuzdur: "tamam" }
               - xp_seviye: 30
-              - tohum: { olay: "vapur_ilk_sefer", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "vapur_ilk_sefer", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Yan yatmış akşam vapuru için verdiğin karar sonunda suya iniyor.", en: "What you decided about that capsized evening ferry is finally hitting the water." } }
             kronik: { tr: "Vapuru adalardan erzak taşısın diye Sığınak Konseyi'ne verdin.", en: "You gave the ferry to the Haven Council to haul food in from the islands." }
             sonraki: "vapur_son"
           - id: "halk"
@@ -1404,7 +1404,7 @@ olaylar:
               - bayrak: "vapur_halk"
               - gorev: { vapuru_yuzdur: "tamam" }
               - xp_seviye: 30
-              - tohum: { olay: "vapur_ilk_sefer", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "vapur_ilk_sefer", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Yan yatmış akşam vapuru için verdiğin karar sonunda suya iniyor.", en: "What you decided about that capsized evening ferry is finally hitting the water." } }
             kronik: { tr: "Vapuru hiçbir fraksiyona vermedin; bileti olmayan da binsin diye kaptana bıraktın.", en: "You didn't give the ferry to any faction. You left it with the captain so people without a ticket could ride too." }
             sonraki: "vapur_son"
           - id: "benim"
@@ -1417,7 +1417,7 @@ olaylar:
               - bayrak: "vapur_oyuncu"
               - gorev: { vapuru_yuzdur: "tamam" }
               - xp_seviye: 30
-              - tohum: { olay: "vapur_ilk_sefer", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "vapur_ilk_sefer", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Yan yatmış akşam vapuru için verdiğin karar sonunda suya iniyor.", en: "What you decided about that capsized evening ferry is finally hitting the water." } }
             kronik: { tr: "Sudan çıkardığın vapuru kendine ayırdın; şehrin karşı yakaya ne zaman geçeceğine sen karar verdin.", en: "You kept the ferry you'd raised and decided for yourself when the city got to cross the sound." }
             sonraki: "vapur_son"
 
@@ -1608,7 +1608,7 @@ olaylar:
               - degisken: { hayatta_kalan: 3 }
               - bayrak: "vapur_sefer_tamam"
               - xp_seviye: 30
-              - tohum: { olay: "eski_sehir_ekmek_kuyrugu", gecikme: { min: 2, max: 5 }, kosul: { gun_min: 61 } }
+              - tohum: { olay: "eski_sehir_ekmek_kuyrugu", gecikme: { min: 2, max: 5 }, kosul: { gun_min: 61 }, hatirlatma: { tr: "Vapurun ilk seferinde karşı yakaya taşınanlar {yer:eski_sehir|in} kuyruklarına karışmış.", en: "The people carried across on the ferry's first run have joined the lines in {yer:eski_sehir}." } }
             sonraki: "@akis"
           - id: "kapi"
             etiket: { tr: "Ormandaki kapıya bir bak", en: "Take a look at the Gate in the woods" }
@@ -1757,7 +1757,7 @@ olaylar:
               - iliski: { elif_sari: { guven: 8, saygi: 4 }, kaya_demir: { saygi: 3, guven: -4 } }
               - hafiza: { npc: "elif_sari", id: "olay:liman_karantina_gemisi", agirlik: 40 }
               - bayrak: "karantina_korundu"
-              - tohum: { olay: "liman_balikhane_karaborsa", gecikme: { min: 1, max: 3 }, kosul: { bayrak_yok: "balikhane_goruldu" } }
+              - tohum: { olay: "liman_balikhane_karaborsa", gecikme: { min: 1, max: 3 }, kosul: { bayrak_yok: "balikhane_goruldu" }, hatirlatma: { tr: "Sarı bayraklı gemiden sonra limanın karanlık köşeleri seni tanıyor.", en: "Since the ship with the yellow flag, the dark corners of the harbor know who you are." } }
             kronik: { tr: "Rıhtımda, karantina gemisinin önünde tek başına nöbete oturdun; o gece kimse sarı bayrağa yaklaşamadı.", en: "You stood alone on the pier in front of the quarantine ship, and that night nobody came near the yellow flag." }
             sonraki: "karantina_koruma"
           - id: "cek"
@@ -1771,7 +1771,7 @@ olaylar:
               - iliski: { elif_sari: { saygi: 6, guven: 4 } }
               - hafiza: { npc: "elif_sari", id: "olay:liman_karantina_gemisi", agirlik: 30 }
               - bayrak: "karantina_tasindi"
-              - tohum: { olay: "liman_balikhane_karaborsa", gecikme: { min: 1, max: 3 }, kosul: { bayrak_yok: "balikhane_goruldu" } }
+              - tohum: { olay: "liman_balikhane_karaborsa", gecikme: { min: 1, max: 3 }, kosul: { bayrak_yok: "balikhane_goruldu" }, hatirlatma: { tr: "Sarı bayraklı gemiden sonra limanın karanlık köşeleri seni tanıyor.", en: "Since the ship with the yellow flag, the dark corners of the harbor know who you are." } }
             kronik: { tr: "Demir zincirini omzuna vurup karantina gemisini yüze yüze adaların koyuna kadar çektin.", en: "You swam the quarantine ship out to a cove in the islands with its anchor chain over your shoulder." }
             sonraki: "karantina_ada"
           - id: "triyaj"
@@ -2161,7 +2161,7 @@ olaylar:
               - bayrak: "cakallar_tanisildi"
               - bayrak: "cakallara_sandik"
               - xp_seviye: 20
-              - tohum: { olay: "eski_sehir_kapi_avcilari", gecikme: { min: 3, max: 8 } }
+              - tohum: { olay: "eski_sehir_kapi_avcilari", gecikme: { min: 3, max: 8 }, hatirlatma: { tr: "Konteyner labirentinde karşılaştığın Çakallar başka bir kapının peşinde.", en: "The Jackals you ran into in the container maze are chasing another Gate." } }
             sonraki: "konteyner_cakallar_son"
           - id: "paylas"
             etiket: { tr: "Aç ve herkese eşit dağıt", en: "Open it and split it evenly" }
@@ -2260,7 +2260,7 @@ olaylar:
               - itibar: { sessiz_ag: 4 }
               - iliski: { mert_kilic: { guven: 3, saygi: 3 } }
               - bilgi: "tasma_takvimi"
-              - tohum: { olay: "kordon_fener_frekansi", gecikme: { min: 1, max: 4 } }
+              - tohum: { olay: "kordon_fener_frekansi", gecikme: { min: 1, max: 4 }, hatirlatma: { tr: "Mendirekteki çatlağın başında {fraksiyon:sessiz_ag} da seninle aynı şeyi duymuş.", en: "At the crack in the breakwater, {fraksiyon:sessiz_ag} heard the same thing you did." } }
             kronik: { tr: "Sessiz Ağ'ın cihazını kapının ağzına kadar götürdün; iğne bir tarihin üstünde durdu.", en: "You carried the Quiet Network's gadget up to the mouth of the Gate before it broke, and the needle stopped on a date." }
             sonraki: "catlak_muhur"
           - id: "gec"
@@ -2431,7 +2431,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 1 }
               - xp_seviye: 35
-              - tohum: { olay: "kordon_fener_baligi", gecikme: { min: 2, max: 6 }, kosul: { bayrak_yok: "fenerci_olduruldu" } }
+              - tohum: { olay: "kordon_fener_baligi", gecikme: { min: 2, max: 6 }, kosul: { bayrak_yok: "fenerci_olduruldu" }, hatirlatma: { tr: "Mendirekteki çatlaktan beri {yer:kordon|in} geceleri sakin değil.", en: "Since the crack in the breakwater, nights on {yer:kordon} haven't been quiet." } }
             kronik: { tr: "{yer:kordon|i} taşmaya kendi bildiğin gibi hazırladın, sonra arkanda bıraktın.", en: "You got {yer:kordon} ready for the break your own way, and then you left." }
             sonraki: "@akis"
 
@@ -2493,7 +2493,7 @@ olaylar:
               - kredi: -30
               - itibar: { siginak: 2 }
               - degisken: { hayatta_kalan: 1 }
-              - tohum: { olay: "kordon_fener_baligi", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "kordon_fener_baligi", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Mendireğin ötesindeki ışık yeniden yanıyor.", en: "The light past the breakwater is burning again." } }
             sonraki: "fenerci_ev"
           - id: "lonca"
             etiket: { tr: "Lonca'dan bir motorbot iste", en: "Ask the Guild for a motor launch" }
@@ -2655,7 +2655,7 @@ olaylar:
               - esya: { fener_incisi: 1 }
               - efsane: "canavari_bagisladi"
               - xp_seviye: 80
-              - tohum: { olay: "fener_yavrulari", gecikme: { min: 6, max: 12 } }
+              - tohum: { olay: "fener_yavrulari", gecikme: { min: 6, max: 12 }, hatirlatma: { tr: "Mendireğin ötesindeki ışıktan geriye bir şey kaldı.", en: "That light past the breakwater left something behind." } }
             sonraki: "fenerci_son"
           - id: "al"
             etiket: { tr: "Bir avuç yumurtayı ceketine sarıp al", en: "Wrap a handful of eggs in your jacket. Take them" }
@@ -2668,7 +2668,7 @@ olaylar:
               - unvan: "fenerci_avcisi"
               - esya: { fener_incisi: 1 }
               - xp_seviye: 80
-              - tohum: { olay: "fener_yavrulari", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "fener_yavrulari", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Mendireğin ötesindeki ışıktan geriye bir şey kaldı.", en: "That light past the breakwater left something behind." } }
             sonraki: "fenerci_son"
 
       - id: "fenerci_son"
@@ -2901,7 +2901,7 @@ olaylar:
               - itibar: { sessiz_ag: 5 }
               - bayrak: "fener_kayit_mertte"
               - xp_seviye: 35
-              - tohum: { olay: "kordon_fener_baligi", gecikme: { min: 2, max: 5 }, kosul: { bayrak_yok: "fenerci_olduruldu" } }
+              - tohum: { olay: "kordon_fener_baligi", gecikme: { min: 2, max: 5 }, kosul: { bayrak_yok: "fenerci_olduruldu" }, hatirlatma: { tr: "Fenerin frekansında duyduğun ses seni yine {yer:kordon|e} çağırıyor.", en: "The sound you caught on the lighthouse frequency is calling you back to {yer:kordon}." } }
             sonraki: "frekans_son"
           - id: "cevap"
             etiket: { tr: "İkinci sese cevap ver", en: "Answer the second voice" }
@@ -3197,7 +3197,7 @@ olaylar:
               - ahlak: { insanlik: 2, duzen: 1 }
               - itibar: { siginak: 3 }
               - xp_seviye: 45
-              - tohum: { olay: "kordon_olu_bolge_seferi", gecikme: { min: 3, max: 8 }, kosul: { bayrak: "kordon_dustu" } }
+              - tohum: { olay: "kordon_olu_bolge_seferi", gecikme: { min: 3, max: 8 }, kosul: { bayrak: "kordon_dustu" }, hatirlatma: { tr: "Üçüncü kattaki fenerin bıraktığı işaret birilerine ulaşmış.", en: "The sign that third-floor lantern left behind has reached somebody." } }
             kronik: { tr: "Düşmüş {yer:kordon|in} ortasında bir sokağı temizleyip başına bir işaret bıraktın; artık oraya başkaları da taşınabilirdi.", en: "You cleared a street in the middle of the fallen Esplanade and left a mark at its head. Other people could move in there now." }
             sonraki: "@akis"
 
@@ -3212,7 +3212,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 2, merhamet: 1 }
               - xp_seviye: 30
-              - tohum: { olay: "kordon_heykel", gecikme: { min: 3, max: 8 }, kosul: { bayrak: "kordon_kurtarildi" } }
+              - tohum: { olay: "kordon_heykel", gecikme: { min: 3, max: 8 }, kosul: { bayrak: "kordon_kurtarildi" }, hatirlatma: { tr: "Üçüncü kattaki fenerin hatırası {yer:kordon|de} taşa dönüşüyor.", en: "The memory of that lantern on the third floor is turning to stone on {yer:kordon}." } }
             kronik: { tr: "Taşmayı atlatan {yer:kordon|de}, yaşlı bir kadınla bir kıskaç yavrusunu aynı lambanın altında yaşamaya bıraktın.", en: "On {yer:kordon} that held, you let an old woman and a crab pup live under the same lamp." }
             sonraki: "balkon_son"
 
@@ -3311,7 +3311,7 @@ olaylar:
               - itibar: { yukselenler: 6, siginak: -3 }
               - iliski: { vahit: { saygi: 5, guven: 3 } }
               - bayrak: "heykel_sunak"
-              - tohum: { olay: "kordon_son_balkon", gecikme: { min: 2, max: 6 } }
+              - tohum: { olay: "kordon_son_balkon", gecikme: { min: 2, max: 6 }, hatirlatma: { tr: "Kaidenin başında verdiğin karardan sonra {yer:kordon} biraz değişti.", en: "After what you decided at the pedestal, {yer:kordon} changed a little." } }
             kronik: { tr: "Kendi heykelinin önüne sunak kurulmasına izin verdin; {yer:kordon|de} o sunağa ilk çiçeği bir anne bıraktı.", en: "You let them build an altar in front of your own statue on {yer:kordon}, and the first flowers left on it came from a mother." }
             sonraki: "heykel_sunak_sahne"
           - id: "yik"
@@ -3654,7 +3654,7 @@ olaylar:
               - ahlak: { insanlik: 2, merhamet: 1 }
               - itibar: { siginak: 4 }
               - xp_seviye: 60
-              - tohum: { olay: "kordon_son_balkon", gecikme: { min: 2, max: 6 } }
+              - tohum: { olay: "kordon_son_balkon", gecikme: { min: 2, max: 6 }, hatirlatma: { tr: "Tuzlu sessizliğe yaptığın seferden sonra ailelerin yüzü aklından çıkmıyor.", en: "Since your run into the salt silence, you can't stop seeing the families' faces." } }
             kronik: { tr: "Düşmüş {yer:kordon|den} çıkardığın insanların aileleriyle sınırda, tuzun bittiği yerde durdun.", en: "You stood with the families of the people you'd brought out of the fallen Esplanade, right where the salt ended." }
             sonraki: "@akis"
           - id: "tamam2"
@@ -3831,7 +3831,7 @@ olaylar:
               - bayrak: "cakallar_ganimet_onlarda"
               - gunluk: { kapi: 1 }
               - xp_seviye: 50
-              - tohum: { olay: "kapi_avcilari_donus", gecikme: { min: 8, max: 15 } }
+              - tohum: { olay: "kapi_avcilari_donus", gecikme: { min: 8, max: 15 }, hatirlatma: { tr: "Hamamdaki kapıdan sonra Çakallar'ın adı sokaklarda dolaşıyor.", en: "Since the Gate in the bathhouse, the Jackals' name has been going around the streets." } }
             sonraki: "cakal_son"
           - id: "pay"
             etiket: { tr: "Hakkını al, yüzde beşi değil", en: "Take your fair share. Not five percent" }
@@ -3841,7 +3841,7 @@ olaylar:
               - kredi: 50
               - gunluk: { kapi: 1 }
               - xp_seviye: 50
-              - tohum: { olay: "kapi_avcilari_donus", gecikme: { min: 8, max: 15 } }
+              - tohum: { olay: "kapi_avcilari_donus", gecikme: { min: 8, max: 15 }, hatirlatma: { tr: "Hamamdaki kapıdan sonra Çakallar'ın adı sokaklarda dolaşıyor.", en: "Since the Gate in the bathhouse, the Jackals' name has been going around the streets." } }
             sonraki: "cakal_son"
           - id: "bayrak"
             etiket: { tr: "Onları sancağının altına al", en: "Take them under your banner" }
@@ -3852,7 +3852,7 @@ olaylar:
               - bayrak: "cakallar_sancakta"
               - gunluk: { kapi: 1 }
               - xp_seviye: 50
-              - tohum: { olay: "kapi_avcilari_donus", gecikme: { min: 8, max: 15 } }
+              - tohum: { olay: "kapi_avcilari_donus", gecikme: { min: 8, max: 15 }, hatirlatma: { tr: "Hamamdaki kapıdan sonra Çakallar'ın adı sokaklarda dolaşıyor.", en: "Since the Gate in the bathhouse, the Jackals' name has been going around the streets." } }
             sonraki: "cakal_son"
 
       - id: "cakal_lonca"
@@ -3866,7 +3866,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 1 }
               - xp_seviye: 20
-              - tohum: { olay: "kapi_avcilari_donus", gecikme: { min: 8, max: 15 } }
+              - tohum: { olay: "kapi_avcilari_donus", gecikme: { min: 8, max: 15 }, hatirlatma: { tr: "Hamamdaki kapıdan sonra Çakallar'ın adı sokaklarda dolaşıyor.", en: "Since the Gate in the bathhouse, the Jackals' name has been going around the streets." } }
             sonraki: "@akis"
 
       - id: "cakal_son"
@@ -4127,7 +4127,7 @@ olaylar:
               - ahlak: { merhamet: 3, duzen: 2 }
               - degisken: { hayatta_kalan: 2 }
               - bayrak: "ekmek_firin_buyudu"
-              - tohum: { olay: "eski_sehir_seviye_birler", gecikme: { min: 2, max: 6 } }
+              - tohum: { olay: "eski_sehir_seviye_birler", gecikme: { min: 2, max: 6 }, hatirlatma: { tr: "Fırının önündeki kuyrukta tanıştığın yüzlerin bir kısmı başka bir sırada bekliyor.", en: "Some of the faces you met in that bread line are waiting in another line now." } }
             kronik: { tr: "{yer:eski_sehir|in} son taş fırınına ellerinle ikinci bir ağız açtın; fırın artık iki katı ekmek çıkarabiliyordu.", en: "You opened a second mouth in {yer:eski_sehir|pos} last wood-fired oven with your bare hands, and now it could turn out twice the bread." }
             sonraki: "ekmek_firin"
 
@@ -4142,7 +4142,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 2, merhamet: 1 }
               - xp_seviye: 25
-              - tohum: { olay: "eski_sehir_seviye_birler", gecikme: { min: 1, max: 4 } }
+              - tohum: { olay: "eski_sehir_seviye_birler", gecikme: { min: 1, max: 4 }, hatirlatma: { tr: "Fırının önündeki kuyrukta tanıştığın yüzlerin bir kısmı başka bir sırada bekliyor.", en: "Some of the faces you met in that bread line are waiting in another line now." } }
             kronik: { tr: "Ekmek çalan bir kızın kardeşinin okuluna uğramaya söz verdin.", en: "You promised to visit the school where a bread thief's little brother learned to read his window." }
             sonraki: "@akis"
           - id: "git"
@@ -4170,7 +4170,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 1, insanlik: 2 }
               - xp_seviye: 35
-              - tohum: { olay: "eski_sehir_seviye_birler", gecikme: { min: 2, max: 6 } }
+              - tohum: { olay: "eski_sehir_seviye_birler", gecikme: { min: 2, max: 6 }, hatirlatma: { tr: "Fırının önündeki kuyrukta tanıştığın yüzlerin bir kısmı başka bir sırada bekliyor.", en: "Some of the faces you met in that bread line are waiting in another line now." } }
             kronik: { tr: "Başkasının cezasını üstlendin; bir çocuğun ensesindeki el senin omzuna kondu.", en: "You served someone else's sentence, and the hand on a child's neck moved to your shoulder." }
             sonraki: "@akis"
 
@@ -4211,7 +4211,7 @@ olaylar:
               - ahlak: { duzen: -1 }
               - iliski: { kaya_demir: { guven: -3 }, elif_sari: { saygi: 2 } }
               - xp_seviye: 30
-              - tohum: { olay: "eski_sehir_seviye_birler", gecikme: { min: 2, max: 6 } }
+              - tohum: { olay: "eski_sehir_seviye_birler", gecikme: { min: 2, max: 6 }, hatirlatma: { tr: "Fırının önündeki kuyrukta tanıştığın yüzlerin bir kısmı başka bir sırada bekliyor.", en: "Some of the faces you met in that bread line are waiting in another line now." } }
             kronik: { tr: "Kasaba Çekirdeği'ne, sahibinin kim olduğuna bakmadan, kendi kuralını gösterdin.", en: "You showed the Town Core a rule of your own, no matter whose Core it was." }
             sonraki: "@akis"
 
@@ -4230,7 +4230,7 @@ olaylar:
               - ahlak: { duzen: 1 }
               - iliski: { elif_sari: { saygi: 2 }, kaya_demir: { saygi: 2 } }
               - xp_seviye: 35
-              - tohum: { olay: "eski_sehir_seviye_birler", gecikme: { min: 2, max: 6 } }
+              - tohum: { olay: "eski_sehir_seviye_birler", gecikme: { min: 2, max: 6 }, hatirlatma: { tr: "Fırının önündeki kuyrukta tanıştığın yüzlerin bir kısmı başka bir sırada bekliyor.", en: "Some of the faces you met in that bread line are waiting in another line now." } }
             kronik: { tr: "Kasaba Çekirdeği'nin penceresine yazdığın kural {yer:eski_sehir|in} her sokağının başında aynı anda belirdi.", en: "The rule you wrote into the Town Core's window appeared at the head of every street in {yer:eski_sehir} at once." }
             sonraki: "@akis"
 
@@ -4346,7 +4346,7 @@ olaylar:
               - gun: 1
               - degisken: { hayatta_kalan: 2 }
               - xp_seviye: 40
-              - tohum: { olay: "kapi_avcilari_donus", gecikme: { min: 4, max: 9 }, kosul: { bayrak: "cakallar_tanisildi" } }
+              - tohum: { olay: "kapi_avcilari_donus", gecikme: { min: 4, max: 9 }, kosul: { bayrak: "cakallar_tanisildi" }, hatirlatma: { tr: "Seviye birlerin taş hanında söylediklerin kulaktan kulağa geçmiş.", en: "What you said at the old stone inn with the level ones has been passed along." } }
             kronik: { tr: "Bir gün boyunca seviye birlerin pencerelerini tek tek okudun; her birine kendi satırında saklı duran mesleği gösterdin.", en: "You spent a day reading the Level Ones' windows one by one, and showed each of them the profession hiding in their own line." }
             sonraki: "birler_son"
           - id: "git"
@@ -4369,7 +4369,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: -2, duzen: 1 }
               - xp_seviye: 30
-              - tohum: { olay: "kapi_avcilari_donus", gecikme: { min: 4, max: 9 }, kosul: { bayrak: "cakallar_tanisildi" } }
+              - tohum: { olay: "kapi_avcilari_donus", gecikme: { min: 4, max: 9 }, kosul: { bayrak: "cakallar_tanisildi" }, hatirlatma: { tr: "Seviye birlerin taş hanında söylediklerin kulaktan kulağa geçmiş.", en: "What you said at the old stone inn with the level ones has been passed along." } }
             kronik: { tr: "Bir çocuğa öldürmeyi öğrettin ve öğretmenine bunun gerekli olduğunu söyledin.", en: "You taught a kid to kill and told his teacher it was necessary." }
             sonraki: "birler_son"
           - id: "ozur"

@@ -224,7 +224,7 @@ olaylar:
               - ahlak: { merhamet: 6, duzen: -2 }
               - itibar: { siginak: 4, lonca: -3 }
               - dikkat: 3
-              - tohum: { olay: "batik_tilu", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "batik_tilu", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Geçitten gelen çocuk hâlâ Sığınak'ın çadırlarında.", en: "The kid who came through the passage is still in the Haven's tents." } }
             kronik: { tr: "Başka bir dünyadan gelen ilk yolcu bir çocuktu; sen de onunla insanların silahları arasına girdin.", en: "The first traveler from another world was a child, and you stood between it and humanity's guns." }
             sonraki: "gecit_korundu"
           - id: "bakis"
@@ -236,7 +236,7 @@ olaylar:
               - aciga_vur: true
               - ahlak: { merhamet: 4, duzen: 2 }
               - itibar: { lonca: 3, siginak: 3 }
-              - tohum: { olay: "batik_tilu", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "batik_tilu", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Geçitten gelen çocuk hâlâ Sığınak'ın çadırlarında.", en: "The kid who came through the passage is still in the Haven's tents." } }
             kronik: { tr: "Tek bakışınla koca bir avcı birliğine silah indirttin. O gün Kule'de kimse başka bir dünyadan gelmiş bir çocuğa ateş etmedi.", en: "One look from you and a whole squad of hunters lowered their guns. Nobody in the Spire shot a child from another world that day." }
             sonraki: "gecit_korundu"
           - id: "ag"
@@ -245,7 +245,7 @@ olaylar:
               - bayrak: "tilu_ag_teslim"
               - ahlak: { duzen: 3, merhamet: -3, insanlik: -1 }
               - itibar: { sessiz_ag: 6 }
-              - tohum: { olay: "batik_tilu", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "batik_tilu", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Geçitten gelen çocuk hâlâ Sığınak'ın çadırlarında.", en: "The kid who came through the passage is still in the Haven's tents." } }
             kronik: { tr: "Başka bir dünyadan gelen ilk çocuğu bir teknisyenin battaniyesine sarıp deney masasına yolladın.", en: "You wrapped the first child from another world in a tech's blanket and sent it off to a lab table." }
             sonraki: "gecit_ag"
           - id: "karisma"
@@ -349,7 +349,7 @@ olaylar:
               - ahlak: { duzen: -6, insanlik: 2 }
               - itibar: { sessiz_ag: 4, yukselenler: 3, lonca: -3 }
               - degisken: { kadim_tehdit: 3 }
-              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 2, max: 6 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 2, max: 6 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Ellinci katın ardındaki geçit için verdiğin karar {npc:aras_kurt|in} da kulağına gitmiş.", en: "What you decided about the passage past the fiftieth floor reached {npc:aras_kurt} too." } }
             kronik: { tr: "Geçidi herkese açık bıraktın. Aynı kapı artık hem insanları dışarı salıyor hem başka dünyaları içeri alıyordu.", en: "You left the gate open to everyone. The same door now let humans out and let other worlds in." }
             sonraki: "gecit_son"
           - id: "denetim"
@@ -359,7 +359,7 @@ olaylar:
               - ahlak: { duzen: 6, merhamet: -2 }
               - itibar: { lonca: 6, siginak: -2, sessiz_ag: -2 }
               - degisken: { kadim_tehdit: -2 }
-              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 2, max: 6 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 2, max: 6 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Ellinci katın ardındaki geçit için verdiğin karar {npc:aras_kurt|in} da kulağına gitmiş.", en: "What you decided about the passage past the fiftieth floor reached {npc:aras_kurt} too." } }
             kronik: { tr: "Geçide nöbetçi dikip izin kâğıdı şartı koydun; çok-evrene giden yol bir gümrük kapısına döndü.", en: "You put guards and permits on the gate. The road to the multiverse turned into a customs checkpoint." }
             sonraki: "gecit_son"
           - id: "benim"
@@ -369,7 +369,7 @@ olaylar:
               - ahlak: { duzen: 3, insanlik: -4 }
               - itibar: { lonca: -2, siginak: -2, sessiz_ag: -3, yukselenler: 2 }
               - dikkat: 5
-              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 2, max: 6 }, kosul: { npc_hayatta: "aras_kurt" } }
+              - tohum: { olay: "aras_cok_evren_kapisi", gecikme: { min: 2, max: 6 }, kosul: { npc_hayatta: "aras_kurt" }, hatirlatma: { tr: "Ellinci katın ardındaki geçit için verdiğin karar {npc:aras_kurt|in} da kulağına gitmiş.", en: "What you decided about the passage past the fiftieth floor reached {npc:aras_kurt} too." } }
             kronik: { tr: "Çok-evrenin kapısının anahtarını cebine koydun. İnsanlık başka dünyaları artık ancak senin anlatacaklarından tanıyabilecekti.", en: "You pocketed the key to the multiverse. From then on, humanity could only know other worlds through the stories you brought back." }
             sonraki: "gecit_son"
 
@@ -591,27 +591,27 @@ olaylar:
             etiket: { tr: "Suya, sonra alnına dokun", en: "Touch the water, then your forehead" }
             etkiler:
               - ahlak: { insanlik: 3, merhamet: 1 }
-              - tohum: { olay: "batik_son_fener", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "batik_son_fener", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Tuzlu kapıdan geçtiğin günden beri takımadada biri seni bekliyor.", en: "Ever since you came through the salt door, someone in the Reach has been waiting on you." } }
             sonraki: "batik_ilk_gece"
           - id: "tilu"
             etiket: { tr: "Tilu'nun güvende olduğunu söyle", en: "Tell her Tilu is safe" }
             goster: { bayrak: "tilu_korundu" }
             etkiler:
               - ahlak: { merhamet: 3 }
-              - tohum: { olay: "batik_son_fener", gecikme: { min: 1, max: 2 } }
+              - tohum: { olay: "batik_son_fener", gecikme: { min: 1, max: 2 }, hatirlatma: { tr: "Tuzlu kapıdan geçtiğin günden beri takımadada biri seni bekliyor.", en: "Ever since you came through the salt door, someone in the Reach has been waiting on you." } }
             sonraki: "batik_ilk_gece"
           - id: "ozur"
             etiket: { tr: "Kesh'in gözüne bak ve özür dile", en: "Look Kesh in the eye and apologize" }
             goster: { bayrak: "tilu_vuruldu" }
             etkiler:
               - ahlak: { insanlik: 5, merhamet: 2 }
-              - tohum: { olay: "batik_son_fener", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "batik_son_fener", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Tuzlu kapıdan geçtiğin günden beri takımadada biri seni bekliyor.", en: "Ever since you came through the salt door, someone in the Reach has been waiting on you." } }
             sonraki: "batik_ilk_gece"
           - id: "fener"
             etiket: { tr: "Sönüklerin nerede toplandığını sor", en: "Ask where the Dimmed gather" }
             etkiler:
               - ahlak: { duzen: 1 }
-              - tohum: { olay: "batik_son_fener", gecikme: { min: 1, max: 2 } }
+              - tohum: { olay: "batik_son_fener", gecikme: { min: 1, max: 2 }, hatirlatma: { tr: "Tuzlu kapıdan geçtiğin günden beri takımadada biri seni bekliyor.", en: "Ever since you came through the salt door, someone in the Reach has been waiting on you." } }
             sonraki: "batik_ilk_gece"
 
       - id: "batik_ilk_gece"
@@ -631,7 +631,7 @@ olaylar:
             etkiler:
               - dikkat: 3
               - ahlak: { duzen: -1 }
-              - tohum: { olay: "batik_tuz_arsivi", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "batik_tuz_arsivi", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Tuzlu kapının ardında gördüğün kubbe aklından çıkmıyor.", en: "You can't stop thinking about the dome you saw past the salt door." } }
             sonraki: "@akis"
           - id: "karart"
             tur: "gizle"
@@ -639,7 +639,7 @@ olaylar:
             etkiler:
               - gizle: 4
               - ahlak: { duzen: 1 }
-              - tohum: { olay: "batik_tuz_arsivi", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "batik_tuz_arsivi", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Tuzlu kapının ardında gördüğün kubbe aklından çıkmıyor.", en: "You can't stop thinking about the dome you saw past the salt door." } }
             sonraki: "@akis"
 
   # ------------------------------------------------------------------ SON FENER (önemli)
@@ -708,7 +708,7 @@ olaylar:
               - aciga_vur: true
               - dikkat: 5
               - ahlak: { merhamet: 3, insanlik: -2 }
-              - tohum: { olay: "batik_son_basakci", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "batik_son_basakci", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Son fenerin başında söylediklerin takımadada yankılanıyor.", en: "What you said at the last lighthouse is still echoing through the Reach." } }
             kronik: { tr: "Son Fener'in lambasını kendi manana bağladın. Bütün takımada iki yüz yıl sonra ilk kez aydınlandı; karanlıktaki şey de bunu gördü.", en: "You tied the Last Light's lamp to your own mana. For the first time in two hundred years the whole archipelago lit up, and the thing in the dark saw it too." }
             sonraki: "fener_lamba"
 
@@ -751,7 +751,7 @@ olaylar:
             etkiler:
               - bayrak: "batik_basakci_sozu"
               - ahlak: { merhamet: 4, duzen: -2 }
-              - tohum: { olay: "batik_son_basakci", gecikme: { min: 1, max: 4 } }
+              - tohum: { olay: "batik_son_basakci", gecikme: { min: 1, max: 4 }, hatirlatma: { tr: "Son fenerin başında söylediklerin takımadada yankılanıyor.", en: "What you said at the last lighthouse is still echoing through the Reach." } }
             kronik: { tr: "Hasat edilmiş bir dünyanın son bekçisine, Hasat'ın geride bıraktığı şeyi öldüreceğine söz verdin.", en: "You promised the last keeper of a harvested world that you'd kill the thing the Harvest left behind." }
             sonraki: "fener_soz"
           - id: "gorunur"
@@ -762,7 +762,7 @@ olaylar:
               - yozlasma: 6
               - ahlak: { merhamet: 4, insanlik: -3 }
               - iliski: { yanki: { guven: 8, baglilik: 5 } }
-              - tohum: { olay: "batik_son_basakci", gecikme: { min: 1, max: 2 } }
+              - tohum: { olay: "batik_son_basakci", gecikme: { min: 1, max: 2 }, hatirlatma: { tr: "Son fenerin başında söylediklerin takımadada yankılanıyor.", en: "What you said at the last lighthouse is still echoing through the Reach." } }
             kronik: { tr: "Kafandaki ses hasat edilmiş iki yüz kişiyi Sistem'in kayıtlarına yeniden yazdı. Birinci seviyeden başladılar; bir dünyanın sonunda başlayan ilk şey buydu.", en: "The voice in your head wrote two hundred harvested people back into the System's records. They started over at level one, and it was the first thing to begin at the end of that world." }
             sonraki: "fener_gorunur"
           - id: "mercek"
@@ -773,14 +773,14 @@ olaylar:
               - esya: { tuz_tableti: 3 }
               - oz_kristali: 30
               - xp_seviye: 25
-              - tohum: { olay: "batik_son_basakci", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "batik_son_basakci", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Son fenerin başında söylediklerin takımadada yankılanıyor.", en: "What you said at the last lighthouse is still echoing through the Reach." } }
             kronik: { tr: "Son Fener'in merceğini söküp götürdün. Hasat edilmiş bir dünyayı ikinci kez sen hasat ettin.", en: "You pried the lens out of the Last Light and took it with you. You were the one who harvested a harvested world a second time." }
             sonraki: "fener_soyuldu"
           - id: "hicbir"
             etiket: { tr: "Hiçbir şey vaat etme", en: "Promise nothing" }
             etkiler:
               - ahlak: { duzen: 3, merhamet: -3 }
-              - tohum: { olay: "batik_son_basakci", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "batik_son_basakci", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Son fenerin başında söylediklerin takımadada yankılanıyor.", en: "What you said at the last lighthouse is still echoing through the Reach." } }
             kronik: { tr: "Son Fener'in bekçisine hiçbir şey vaat etmedin, o da senden bir şey beklemedi. Aranızdaki sessizliği ikiniz de iyi tanıyordunuz.", en: "You promised the keeper of the Last Light nothing. She expected nothing back, and it was a silence you both knew." }
             sonraki: "fener_sessiz"
 
@@ -799,7 +799,7 @@ olaylar:
             etiket: { tr: "Salı kapıya sen it", en: "Push the raft to the door yourself" }
             etkiler:
               - ahlak: { merhamet: 2, insanlik: 2 }
-              - tohum: { olay: "batik_son_basakci", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "batik_son_basakci", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Son fenerin başında söylediklerin takımadada yankılanıyor.", en: "What you said at the last lighthouse is still echoing through the Reach." } }
             kronik: { tr: "Otuz yedi çocuğu taşıyan salı kendi ellerinle bir dünyadan ötekine ittin.", en: "With your own hands, you pushed a raft of thirty-seven children from one world into the next." }
             sonraki: "fener_gece"
 
@@ -866,7 +866,7 @@ olaylar:
             etiket: { tr: "Arşivin yerini sor", en: "Ask where the Archive is" }
             etkiler:
               - ahlak: { duzen: 1 }
-              - tohum: { olay: "batik_tuz_arsivi", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "batik_tuz_arsivi", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Son fenerde sorduğun arşiv seni bekliyor.", en: "The archive you asked about at the last lighthouse is waiting for you." } }
             kronik: { tr: "Bir dünyanın son bekçisinden vaat değil, bir adres aldın.", en: "From a world's last keeper you took an address, not a promise." }
             sonraki: "fener_gece"
 
@@ -1082,21 +1082,21 @@ olaylar:
               - ahlak: { duzen: -1, insanlik: 3 }
               - itibar: { siginak: 3, lonca: 3, sessiz_ag: 3, yukselenler: 3 }
               - xp_seviye: 30
-              - tohum: { olay: "batik_son_basakci", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "batik_son_basakci", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Tuz Arşivi'nde okuduklarından sonra takımadada saat daha hızlı işliyor.", en: "Since what you read in the Salt Archive, the clock in the Reach has been running faster." } }
             sonraki: "@akis"
           - id: "yaz"
             etiket: { tr: "Boş rafa kendi tabletini kazı", en: "Carve your own tablet for the empty shelf" }
             etkiler:
               - ahlak: { insanlik: 4, merhamet: 1 }
               - xp_seviye: 25
-              - tohum: { olay: "batik_son_basakci", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "batik_son_basakci", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Tuz Arşivi'nde okuduklarından sonra takımadada saat daha hızlı işliyor.", en: "Since what you read in the Salt Archive, the clock in the Reach has been running faster." } }
             sonraki: "arsiv_yaz"
           - id: "birak"
             etiket: { tr: "Her şeyi olduğu gibi bırak", en: "Leave everything the way it is" }
             etkiler:
               - ahlak: { duzen: 2 }
               - xp_seviye: 20
-              - tohum: { olay: "batik_son_basakci", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "batik_son_basakci", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Tuz Arşivi'nde okuduklarından sonra takımadada saat daha hızlı işliyor.", en: "Since what you read in the Salt Archive, the clock in the Reach has been running faster." } }
             sonraki: "@akis"
 
       - id: "arsiv_yaz"
@@ -1379,14 +1379,14 @@ olaylar:
             etiket: { tr: "Suya, sonra alnına dokun; veda et", en: "Touch the water, then your brow. Say goodbye" }
             etkiler:
               - ahlak: { insanlik: 3 }
-              - tohum: { olay: "batik_kesh_yemini", gecikme: { min: 5, max: 12 } }
+              - tohum: { olay: "batik_kesh_yemini", gecikme: { min: 5, max: 12 }, hatirlatma: { tr: "Son başakçının gününden beri {yer:batik_takimada} seni unutmadı.", en: "{yer:batik_takimada|b} hasn't forgotten you since the day of the last reaper." } }
             kronik: { tr: "{yer:batik_takimada|e} onların selamıyla veda ettin.", en: "You said goodbye to {yer:batik_takimada} with their own greeting." }
             sonraki: "@akis"
           - id: "dunya"
             etiket: { tr: "Kendi dünyanı düşün; Gün 365 yaklaşıyor", en: "Think about your own world. About Day 365" }
             etkiler:
               - ahlak: { duzen: 2 }
-              - tohum: { olay: "batik_kesh_yemini", gecikme: { min: 5, max: 12 } }
+              - tohum: { olay: "batik_kesh_yemini", gecikme: { min: 5, max: 12 }, hatirlatma: { tr: "Son başakçının gününden beri {yer:batik_takimada} seni unutmadı.", en: "{yer:batik_takimada|b} hasn't forgotten you since the day of the last reaper." } }
             kronik: { tr: "Hasat edilmiş bir dünyanın sabahında kendi dünyanın son gününü düşündün.", en: "On the morning of a harvested world, you thought about your own world's last day." }
             sonraki: "@akis"
 
@@ -1536,14 +1536,14 @@ olaylar:
               - esya: { nehha_cani: 1 }
               - bilgi: "basakci_cani"
               - ahlak: { merhamet: 1 }
-              - tohum: { olay: "batik_son_fener", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "batik_son_fener", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Eve giden çocuğun dünyası seni yeniden çağırıyor.", en: "The world of the kid who went home is calling you back." } }
             sonraki: "tilu_son"
           - id: "red"
             etiket: { tr: "Çan onun kalsın; yalnızca bilgiyi al", en: "Let her keep the bell. Just take the advice" }
             etkiler:
               - bilgi: "basakci_cani"
               - ahlak: { insanlik: 3 }
-              - tohum: { olay: "batik_son_fener", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "batik_son_fener", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Eve giden çocuğun dünyası seni yeniden çağırıyor.", en: "The world of the kid who went home is calling you back." } }
             sonraki: "tilu_son"
           - id: "goc"
             etiket: { tr: "Onları da Dünya'ya davet et", en: "Invite them both back to Earth" }
@@ -1551,7 +1551,7 @@ olaylar:
               - bilgi: "basakci_cani"
               - ahlak: { merhamet: 3, duzen: -2 }
               - itibar: { siginak: 3 }
-              - tohum: { olay: "batik_son_fener", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "batik_son_fener", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Eve giden çocuğun dünyası seni yeniden çağırıyor.", en: "The world of the kid who went home is calling you back." } }
             sonraki: "tilu_davet"
 
       - id: "tilu_davet"
@@ -1819,19 +1819,19 @@ olaylar:
             etiket: { tr: "Geleceğim", en: "I'll be there" }
             etkiler:
               - ahlak: { merhamet: 2 }
-              - tohum: { olay: "kervan_ondalik", gecikme: { min: 1, max: 2 } }
+              - tohum: { olay: "kervan_ondalik", gecikme: { min: 1, max: 2 }, hatirlatma: { tr: "Tartı Çarşısı'ndan beri kervanın terazileri sana başka türlü sallanıyor.", en: "Since the Weighing Bazaar, the caravan's scales swing differently for you." } }
             sonraki: "@akis"
           - id: "neden"
             etiket: { tr: "Neden bana söylüyorsun?", en: "Why are you telling me?" }
             etkiler:
               - ahlak: { duzen: 1 }
-              - tohum: { olay: "kervan_ondalik", gecikme: { min: 1, max: 2 } }
+              - tohum: { olay: "kervan_ondalik", gecikme: { min: 1, max: 2 }, hatirlatma: { tr: "Tartı Çarşısı'ndan beri kervanın terazileri sana başka türlü sallanıyor.", en: "Since the Weighing Bazaar, the caravan's scales swing differently for you." } }
             sonraki: "tarti_neden"
           - id: "ilgilenmez"
             etiket: { tr: "Bu benim işim değil", en: "Not my business" }
             etkiler:
               - ahlak: { merhamet: -2, duzen: 2 }
-              - tohum: { olay: "kervan_ondalik", gecikme: { min: 2, max: 4 } }
+              - tohum: { olay: "kervan_ondalik", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Tartı Çarşısı'ndan beri kervanın terazileri sana başka türlü sallanıyor.", en: "Since the Weighing Bazaar, the caravan's scales swing differently for you." } }
             sonraki: "@akis"
 
       - id: "tarti_neden"
@@ -2069,7 +2069,7 @@ olaylar:
               - bilgi: "ondalik_gercegi"
               - bayrak: "kervan_kefe_daveti"
               - ahlak: { duzen: 1 }
-              - tohum: { olay: "kervan_bos_kefe", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "kervan_bos_kefe", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Ondalık gününde verdiğin cevabın sırası geldi.", en: "It's time for the answer you gave on tithe day." } }
             kronik: { tr: "{yer:pirinc_kervan|in} isyancılarına düşüneceğini söyledin; sen düşünürken onlar bekledi.", en: "You told {yer:pirinc_kervan|pos} rebels you'd think about it, and they waited while you did." }
             sonraki: "@akis"
           - id: "evet"
@@ -2078,7 +2078,7 @@ olaylar:
               - bilgi: "ondalik_gercegi"
               - bayrak: "kervan_kefe_daveti"
               - ahlak: { duzen: -4, merhamet: 2 }
-              - tohum: { olay: "kervan_bos_kefe", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "kervan_bos_kefe", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Ondalık gününde verdiğin cevabın sırası geldi.", en: "It's time for the answer you gave on tithe day." } }
             kronik: { tr: "{yer:pirinc_kervan|in} isyancılarına daha planlarını duymadan evet dedin.", en: "You said yes to {yer:pirinc_kervan|pos} rebels before you'd even heard the plan." }
             sonraki: "@akis"
           - id: "sayman"
@@ -2202,7 +2202,7 @@ olaylar:
               - bayrak: "sayman_numune_mektubu"
               - ahlak: { duzen: 3, insanlik: -2 }
               - itibar: { kadimler: 3 }
-              - tohum: { olay: "taht_kabul_salonu", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "taht_kabul_salonu", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Saymanın verdiği mektup seni çağırıyor.", en: "The letter the counter gave you is calling." } }
             sonraki: "sayman_kefe"
           - id: "yazdir"
             tur: "gosteris"
@@ -2214,7 +2214,7 @@ olaylar:
               - ahlak: { duzen: -1, insanlik: 2 }
               - itibar: { kadimler: 2 }
               - dikkat: 3
-              - tohum: { olay: "taht_kabul_salonu", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "taht_kabul_salonu", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Saymanın verdiği mektup seni çağırıyor.", en: "The letter the counter gave you is calling." } }
             sonraki: "sayman_yazdi"
           - id: "ticaret"
             etiket: { tr: "Ticaret yolunu al; şehrin buna muhtaç", en: "Take the trade route. Your city needs it" }
@@ -2255,14 +2255,14 @@ olaylar:
               - bayrak: "kervan_kefe_daveti"
               - ahlak: { duzen: 4, merhamet: -2 }
               - itibar: { kadimler: 3 }
-              - tohum: { olay: "kervan_bos_kefe", gecikme: { min: 1, max: 4 } }
+              - tohum: { olay: "kervan_bos_kefe", gecikme: { min: 1, max: 4 }, hatirlatma: { tr: "Saymanla aranızdaki konuşma bir yere ve bir saate dönüştü.", en: "That talk with the counter has turned into a place and a time." } }
             sonraki: "@akis"
           - id: "red"
             etiket: { tr: "Pulu geri ver; söz yok", en: "Give the chit back. No promises" }
             etkiler:
               - bayrak: "kervan_kefe_daveti"
               - ahlak: { duzen: -2, insanlik: 1 }
-              - tohum: { olay: "kervan_bos_kefe", gecikme: { min: 1, max: 4 } }
+              - tohum: { olay: "kervan_bos_kefe", gecikme: { min: 1, max: 4 }, hatirlatma: { tr: "Saymanla aranızdaki konuşma bir yere ve bir saate dönüştü.", en: "That talk with the counter has turned into a place and a time." } }
             sonraki: "@akis"
 
   # ------------------------------------------------------------------ BOŞ KEFE (boss · önemli)
@@ -2506,7 +2506,7 @@ olaylar:
               - gorev: { cok_evren_kervan: tamam }
               - ahlak: { merhamet: -4, duzen: 3 }
               - xp_seviye: 80
-              - tohum: { olay: "taht_kabul_salonu", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "taht_kabul_salonu", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Boş Kefe'den sonra cebindeki mektup ısınmaya başladı.", en: "Since the Empty Pan, the letter in your pocket has started to get warm." } }
             kronik: { tr: "{yer:pirinc_kervan|in} isyancısı Kesra'yı Kadimler'e teslim ettin, karşılığında da {yer:yedi_taht|e} bir davet aldın.", en: "You handed {yer:pirinc_kervan|pos} rebel Kesra to the Ancients and got an invitation to {yer:yedi_taht} for it." }
             sonraki: "@akis"
           - id: "kurtar"
@@ -2518,7 +2518,7 @@ olaylar:
               - ahlak: { merhamet: 4, duzen: -2 }
               - itibar: { kadimler: -4 }
               - xp_seviye: 60
-              - tohum: { olay: "taht_kabul_salonu", gecikme: { min: 2, max: 5 } }
+              - tohum: { olay: "taht_kabul_salonu", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Boş Kefe'den sonra cebindeki mektup ısınmaya başladı.", en: "Since the Empty Pan, the letter in your pocket has started to get warm." } }
             kronik: { tr: "Boş Kefe'yi Kadimler'e sattın, sonra son anda liderini kefeden çektin.", en: "You sold the Empty Pan to the Ancients, then pulled its leader off the scale at the last second." }
             sonraki: "kefe_kesra_kurtuldu"
 
@@ -2774,7 +2774,7 @@ olaylar:
               - ahlak: { insanlik: -5, merhamet: -2 }
               - itibar: { kadimler: 6 }
               - stat: { wil: 5 }
-              - tohum: { olay: "taht_yedinci_koltuk", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "taht_yedinci_koltuk", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Kabul Salonu'ndaki kadehten sonra {npc:ulvenne} seni bir sonraki salona çağırıyor.", en: "After the cup in the Reception Hall, {npc:ulvenne} is calling you into the next room." } }
             sonraki: "salon_son"
           - id: "dok"
             etiket: { tr: "Kadehi pencereli zemine boşalt", en: "Pour it out onto the window floor" }
@@ -2782,7 +2782,7 @@ olaylar:
               - ahlak: { insanlik: 4, duzen: -3 }
               - itibar: { kadimler: -6 }
               - dikkat: 3
-              - tohum: { olay: "taht_yedinci_koltuk", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "taht_yedinci_koltuk", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Kabul Salonu'ndaki kadehten sonra {npc:ulvenne} seni bir sonraki salona çağırıyor.", en: "After the cup in the Reception Hall, {npc:ulvenne} is calling you into the next room." } }
             sonraki: "salon_son"
           - id: "kaldir"
             tur: "gosteris"
@@ -2791,7 +2791,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 1, insanlik: 1 }
               - itibar: { kadimler: 3 }
-              - tohum: { olay: "taht_yedinci_koltuk", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "taht_yedinci_koltuk", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Kabul Salonu'ndaki kadehten sonra {npc:ulvenne} seni bir sonraki salona çağırıyor.", en: "After the cup in the Reception Hall, {npc:ulvenne} is calling you into the next room." } }
             sonraki: "salon_kahkaha"
 
       - id: "salon_kahkaha"
@@ -2896,7 +2896,7 @@ olaylar:
               - unvan: "taht_reddeden"
               - ahlak: { insanlik: 8, duzen: -2 }
               - itibar: { kadimler: -5 }
-              - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Yedinci koltuğun önünde verdiğin cevap bir hükme dönüştü.", en: "The answer you gave in front of the seventh seat has turned into a ruling." } }
             kronik: { tr: "Kadimler sana bir tanrının koltuğunu gösterdi ve sen ona sırtını döndün.", en: "The Ancients showed you a god's seat, and you turned your back on it." }
             sonraki: "koltuk_red"
           - id: "pazarlik"
@@ -2921,7 +2921,7 @@ olaylar:
               - dikkat: 10
               - ahlak: { duzen: -8, insanlik: 4 }
               - itibar: { kadimler: -10 }
-              - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 0, max: 1 } }
+              - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 0, max: 1 }, hatirlatma: { tr: "Yedinci koltuğun önünde verdiğin cevap bir hükme dönüştü.", en: "The answer you gave in front of the seventh seat has turned into a ruling." } }
             kronik: { tr: "{yer:yedi_taht|in} bin yıllık boş koltuğunu kırıp parçasını talibinin yüzüne fırlattın.", en: "You broke {yer:yedi_taht|pos} thousand-year-old empty seat and threw a piece of it in its claimant's face." }
             sonraki: "koltuk_kirildi"
 
@@ -2950,7 +2950,7 @@ olaylar:
               - yozlasma: 10
               - itibar: { yukselenler: 8, kadimler: 4 }
               - degisken: { kadim_tehdit: 3 }
-              - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 1, max: 2 } }
+              - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 1, max: 2 }, hatirlatma: { tr: "Yedinci koltuğun önünde verdiğin cevap bir hükme dönüştü.", en: "The answer you gave in front of the seventh seat has turned into a ruling." } }
             kronik: { tr: "Yedinci koltukta, hayatta kalan bütün insanlığın sana eğildiğini hissedecek kadar uzun oturdun. {yer:yedi_taht} da seni Dünya'nın hasadına ikinci talip olarak yazdı.", en: "You sat in the seventh seat long enough to feel every human left alive lean toward you. The Sevenfold Court wrote you down as the second claimant to Earth's harvest." }
             sonraki: "koltuk_kalkis"
           - id: "kalk"
@@ -2959,7 +2959,7 @@ olaylar:
               - bayrak: "taht_koltuga_oturdu"
               - unvan: "yedinci_koltuk"
               - ahlak: { insanlik: 6 }
-              - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Yedinci koltuğun önünde verdiğin cevap bir hükme dönüştü.", en: "The answer you gave in front of the seventh seat has turned into a ruling." } }
             kronik: { tr: "Yedinci koltuğa oturdun, tanrı olmanın ne kadar kolay olduğunu görünce de hemen kalktın.", en: "You sat in the seventh seat, saw how easy it would be to become a god, and got up immediately." }
             sonraki: "koltuk_kalkis"
 
@@ -3027,7 +3027,7 @@ olaylar:
               - ahlak: { duzen: 4, insanlik: -3 }
               - itibar: { kadimler: 6 }
               - degisken: { kadim_tehdit: 3 }
-              - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Yedinci koltuğun önünde verdiğin cevap bir hükme dönüştü.", en: "The answer you gave in front of the seventh seat has turned into a ruling." } }
             kronik: { tr: "{yer:yedi_taht|le} anlaştın: sen varisi yenecektin, onlar da karşılığında dünyanın hasadını bir senede çevirecekti.", en: "You cut a deal with {yer:yedi_taht}: you'd beat the heir, and in exchange they'd turn your world's harvest into a treaty." }
             sonraki: "koltuk_son"
           - id: "elci"
@@ -3038,7 +3038,7 @@ olaylar:
               - itibar: { kadimler: 8 }
               - iliski: { thessar: { saygi: 6, baglilik: 4 } }
               - degisken: { kadim_tehdit: 5 }
-              - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Yedinci koltuğun önünde verdiğin cevap bir hükme dönüştü.", en: "The answer you gave in front of the seventh seat has turned into a ruling." } }
             kronik: { tr: "{yer:yedi_taht|e}, dünyanın senedine imzayı senin atacağını bildirdin.", en: "You told {yer:yedi_taht} that you'd be the one to sign your world's treaty." }
             sonraki: "koltuk_son"
           - id: "geri"
@@ -3047,7 +3047,7 @@ olaylar:
               - bayrak_kaldir: "taht_ittifak"
               - ahlak: { insanlik: 4, duzen: -3 }
               - itibar: { kadimler: -8 }
-              - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Yedinci koltuğun önünde verdiğin cevap bir hükme dönüştü.", en: "The answer you gave in front of the seventh seat has turned into a ruling." } }
             kronik: { tr: "Bir senedin ne demek olduğunu anladığın an Kadimler'in pazarlık masasından kalktın.", en: "You got up from the Ancients' bargaining table the moment you understood what a treaty meant." }
             sonraki: "koltuk_son"
 
@@ -3216,7 +3216,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 4, merhamet: 2 }
               - xp_seviye: 40
-              - tohum: { olay: "taht_yedinci_koltuk", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "taht_yedinci_koltuk", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Uyuyan tanrıların bahçesinden döndüğünden beri {yer:yedi_taht} seni bekliyor.", en: "{yer:yedi_taht|b} has been waiting for you since you came back from the garden of sleeping gods." } }
             sonraki: "bahce_ayril"
           - id: "al"
             etiket: { tr: "Kalan yıldızları içine çek", en: "Pull the leftover stars into yourself" }
@@ -3225,7 +3225,7 @@ olaylar:
               - yozlasma: 6
               - stat: { wis: 8, wil: 8 }
               - xp_seviye: 90
-              - tohum: { olay: "taht_yedinci_koltuk", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "taht_yedinci_koltuk", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Uyuyan tanrıların bahçesinden döndüğünden beri {yer:yedi_taht} seni bekliyor.", en: "{yer:yedi_taht|b} has been waiting for you since you came back from the garden of sleeping gods." } }
             sonraki: "bahce_ayril"
 
       - id: "bahce_ayril"
@@ -3239,13 +3239,13 @@ olaylar:
             etiket: { tr: "Kendi gücünü düşün", en: "Think about your own power" }
             etkiler:
               - ahlak: { insanlik: 2 }
-              - tohum: { olay: "taht_yedinci_koltuk", gecikme: { min: 1, max: 4 } }
+              - tohum: { olay: "taht_yedinci_koltuk", gecikme: { min: 1, max: 4 }, hatirlatma: { tr: "Uyuyan tanrıların bahçesinden döndüğünden beri {yer:yedi_taht} seni bekliyor.", en: "{yer:yedi_taht|b} has been waiting for you since you came back from the garden of sleeping gods." } }
             sonraki: "@akis"
           - id: "git"
             etiket: { tr: "Saraya dön", en: "Head back into the palace" }
             etkiler:
               - ahlak: { duzen: 1 }
-              - tohum: { olay: "taht_yedinci_koltuk", gecikme: { min: 1, max: 4 } }
+              - tohum: { olay: "taht_yedinci_koltuk", gecikme: { min: 1, max: 4 }, hatirlatma: { tr: "Uyuyan tanrıların bahçesinden döndüğünden beri {yer:yedi_taht} seni bekliyor.", en: "{yer:yedi_taht|b} has been waiting for you since you came back from the garden of sleeping gods." } }
             sonraki: "@akis"
 
   # ------------------------------------------------------------------ VARİS DÜELLOSU (boss · önemli · tohum)

@@ -131,7 +131,7 @@ olaylar:
               - iliski: { vahit: { baglilik: 8, saygi: 4 } }
               - xp_seviye: 30
               - bayrak: "yukselenler_ilk_yakit"
-              - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } } }
+              - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } }, hatirlatma: { tr: "Beyaz cübbeyle ilk karşılaştığın gün bir kalem kıpırdamaya başladı.", en: "The day you first faced the white robe, a pen started moving." } }
             kronik: { tr: "İlk yakıtını kendi ağzınla adlandırdın; halka o adı senin ardından bir ağızdan tekrarladı.", en: "You named your first fuel out loud, and the whole ring said the name back after you." }
             sonraki: "yuk1_isim"
           - id: "kendin"
@@ -145,7 +145,7 @@ olaylar:
               - itibar: { yukselenler: 12 }
               - iliski: { vahit: { saygi: 10, korku: 6 } }
               - bayrak: "yakit_reddi_goruldu"
-              - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } } }
+              - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } }, hatirlatma: { tr: "Beyaz cübbeyle ilk karşılaştığın gün bir kalem kıpırdamaya başladı.", en: "The day you first faced the white robe, a pen started moving." } }
             kronik: { tr: "Kendini ilk yakıtın olarak adlandırıp elini sarnıcın zarına soktun; Sistem seni yakmayı reddetti ve {yer:tepe} dilini yuttu.", en: "You named yourself as your first fuel and pushed your hand into the membrane. The System refused to burn you, and the whole hill went silent." }
             sonraki: "yuk1_kendin"
           - id: "ikircik"
@@ -156,7 +156,7 @@ olaylar:
               - itibar: { yukselenler: 3 }
               - iliski: { vahit: { guven: -4, saygi: 4 } }
               - bayrak: "yukselenler_ikircikli"
-              - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } } }
+              - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } }, hatirlatma: { tr: "Beyaz cübbeyle ilk karşılaştığın gün bir kalem kıpırdamaya başladı.", en: "The day you first faced the white robe, a pen started moving." } }
             kronik: { tr: "Kimseyi adlandırmadan beyazı giydin; {yer:tepe|in} peygamberi yalnızca gülümseyip merdivenin sabırlı olduğunu söyledi.", en: "You wore the white but named no one. The prophet just smiled and said the ladder was patient." }
             sonraki: "yuk1_ikircik"
           - id: "casus"
@@ -167,8 +167,8 @@ olaylar:
               - ahlak: { duzen: -3, insanlik: 1 }
               - iliski: { vahit: { guven: 3 } }
               - bayrak: "yukselenler_casus"
-              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 6, max: 12 } }
-              - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } } }
+              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 6, max: 12 }, hatirlatma: { tr: "Basamaklarda yaptıkların {yer:tepe|de} birilerine cesaret vermiş.", en: "What you did on those steps gave somebody on {yer:tepe} some nerve." } }
+              - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } }, hatirlatma: { tr: "Beyaz cübbeyle ilk karşılaştığın gün bir kalem kıpırdamaya başladı.", en: "The day you first faced the white robe, a pen started moving." } }
             kronik: { tr: "Maske niyetine beyaz giydin; {yer:tepe|in} sırları cebinde yokuştan aşağı indi.", en: "You wore the white like a mask, and the hill's secrets walked down in your pockets." }
             sonraki: "yuk1_casus"
           - id: "cik"
@@ -314,7 +314,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 4, duzen: -1 }
               - degisken: { hayatta_kalan: 1 }
-              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 4, max: 9 } }
+              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 4, max: 9 }, hatirlatma: { tr: "Basamaklarda yaptıkların {yer:tepe|de} birilerine cesaret vermiş.", en: "What you did on those steps gave somebody on {yer:tepe} some nerve." } }
             kronik: { tr: "{yer:tepe|de} senin adına yakılacak sarı yağmurluklu kadını gece yarısı bulup uyardın.", en: "In the middle of the night you found the woman in the yellow raincoat they meant to burn in your name, and warned her." }
             sonraki: "@akis"
 
@@ -369,7 +369,7 @@ olaylar:
               - itibar: { yukselenler: -6 }
               - iliski: { vahit: { korku: 4, guven: -4 } }
               - degisken: { hayatta_kalan: 3 }
-              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Basamaklarda yaptıkların {yer:tepe|de} birilerine cesaret vermiş.", en: "What you did on those steps gave somebody on {yer:tepe} some nerve." } }
             kronik: { tr: "{yer:tepe|den} inerken basamaklardakilere dönüp seslendin: \"Benimle inin.\"", en: "On your way down off the hill, you turned and called to the people on the steps: \"Come down with me.\"" }
             sonraki: "@akis"
           - id: "in"
@@ -439,7 +439,7 @@ olaylar:
               - ahlak: { insanlik: 2, duzen: -1 }
               - bilgi: "yakit_katkisi"
               - iliski: { vahit: { saygi: -2 } }
-              - tohum: { olay: "vahit_secilmisler", gecikme: { min: 6, max: 14 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_secilmisler", gecikme: { min: 6, max: 14 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Kül kâsesinin başında verdiğin cevabı {npc:vahit} unutmadı.", en: "{npc:vahit} hasn't forgotten the answer you gave over the bowl of ash." } }
             kronik: { tr: "Başını eğip yakıtın nasıl yandığını yakıtın kendisinden öğrendin.", en: "You kept your head down and learned how fuel burns from the fuel itself." }
             sonraki: "@akis"
           - id: "indir"
@@ -451,7 +451,7 @@ olaylar:
               - itibar: { yukselenler: -10, siginak: 3 }
               - iliski: { vahit: { guven: -8, korku: 6 } }
               - hafiza: { npc: "vahit", id: "kurbani_kurtardi", agirlik: -30 }
-              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Basamaklarda yaptıkların {yer:tepe|de} birilerine cesaret vermiş.", en: "What you did on those steps gave somebody on {yer:tepe} some nerve." } }
             kronik: { tr: "Yakıtın arasından kalkıp kırk kişiyi {yer:tepe|den} indirdin; peygamber önüne geçmeye cesaret edemedi.", en: "You stood up out of the fuel and led forty people off the hill. The prophet didn't dare stop you." }
             sonraki: "yuk1_kul_inis"
 
@@ -470,7 +470,7 @@ olaylar:
               - itibar: { yukselenler: 6 }
               - iliski: { vahit: { baglilik: 6 } }
               - unvan: "secilmislerin_secilmisi"
-              - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } } }
+              - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } }, hatirlatma: { tr: "Beyaz cübbeyle ilk karşılaştığın gün bir kalem kıpırdamaya başladı.", en: "The day you first faced the white robe, a pen started moving." } }
             kronik: { tr: "Peygamberin sırtından çıkardığı cübbeyi giyip Seçilmişlerin Seçilmişi oldun.", en: "You put on the prophet's own robe and became the Chosen of the Chosen." }
             sonraki: "@akis"
           - id: "kulu_sil"
@@ -482,7 +482,7 @@ olaylar:
               - iliski: { vahit: { guven: -2, saygi: 6 } }
               - degisken: { hayatta_kalan: 2 }
               - bayrak: "yakit_sarti"
-              - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } } }
+              - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } }, hatirlatma: { tr: "Beyaz cübbeyle ilk karşılaştığın gün bir kalem kıpırdamaya başladı.", en: "The day you first faced the white robe, a pen started moving." } }
             kronik: { tr: "Beyazı ancak basamaklardaki herkesin alnından kül silindikten sonra giydin.", en: "You only put on the white once every forehead on the steps had been wiped clean." }
             sonraki: "@akis"
           - id: "reddet"
@@ -570,7 +570,7 @@ olaylar:
               - itibar: { yukselenler: 10 }
               - iliski: { vahit: { baglilik: 8 } }
               - unvan: "secilmislerin_secilmisi"
-              - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } } }
+              - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } }, hatirlatma: { tr: "Beyaz cübbeyle ilk karşılaştığın gün bir kalem kıpırdamaya başladı.", en: "The day you first faced the white robe, a pen started moving." } }
             kronik: { tr: "Peygamberi kapında diz çöktürdükten sonra tepesine onun önünde çıktın.", en: "You had a prophet kneel at your door and then walked up his hill ahead of him." }
             sonraki: "@akis"
           - id: "sart"
@@ -581,7 +581,7 @@ olaylar:
               - itibar: { yukselenler: 4 }
               - iliski: { vahit: { guven: -2, saygi: 6 } }
               - bayrak: "yakit_sarti"
-              - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } } }
+              - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 20, max: 35 }, kosul: { gorev: { zincir_yukselenler: "basla" } }, hatirlatma: { tr: "Beyaz cübbeyle ilk karşılaştığın gün bir kalem kıpırdamaya başladı.", en: "The day you first faced the white robe, a pen started moving." } }
             kronik: { tr: "Yükselenler'e katılmanın bedeli olarak yakıt sırasının kaldırılmasını şart koştun.", en: "Your price for joining the Ascended was an end to the fuel line." }
             sonraki: "@akis"
           - id: "kalk"
@@ -709,7 +709,7 @@ olaylar:
               - bayrak: "yakit_defteri_sizdi"
               - bayrak: "yukselenler_2_tamam"
               - iliski: { vahit: { guven: 2 } }
-              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Kırmızı kalemli defterin bir kopyası artık yalnız sende değil.", en: "You're not the only one with a copy of that red-penned ledger anymore." } }
             kronik: { tr: "Yakıt defterini gece yarısı sayfa sayfa kopyaladın, kopyayı da gizlice {yer:tepe|den} kaçırdın.", en: "That night you copied the fuel ledger page by page and smuggled the copy off the hill." }
             sonraki: "yuk2_sizinti"
 
@@ -750,7 +750,7 @@ olaylar:
               - ahlak: { duzen: 4, insanlik: -3 }
               - dikkat: 2
               - itibar: { yukselenler: 4 }
-              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 4, max: 8 } }
+              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Kırmızı kalemli defterin bir kopyası artık yalnız sende değil.", en: "You're not the only one with a copy of that red-penned ledger anymore." } }
             kronik: { tr: "Defteri, içindeki her adı herkes okusun diye meydanın ortasına astırdın.", en: "You had the fuel ledger hung in the square, every name in it out where anyone could read it." }
             sonraki: "@akis"
 
@@ -1050,7 +1050,7 @@ olaylar:
               - bayrak: "ayin_alindi"
               - bayrak: "yukselenler_3_tamam"
               - iliski: { vahit: { baglilik: 10 } }
-              - tohum: { olay: "on_ucuncu_secim", gecikme: { min: 4, max: 9 }, kosul: { bayrak_yok: "on_ucuncu_kacti" } }
+              - tohum: { olay: "on_ucuncu_secim", gecikme: { min: 4, max: 9 }, kosul: { bayrak_yok: "on_ucuncu_kacti" }, hatirlatma: { tr: "Büyük Ayin'de halkanın ortasında olanlar On Üç'ün aklından çıkmıyor.", en: "Thirteen can't stop thinking about what happened in the middle of the circle at the Great Rite." } }
             kronik: { tr: "Halkanın ortasına geçip yüzlerce insanın katkısını tek başına aldın; o gece seviyeler üstüne şelale gibi boşaldı.", en: "At the Great Rite you took the contribution of hundreds of people alone. That night your levels came down like a waterfall." }
             sonraki: "yuk3_alis"
           - id: "dagit"
@@ -1062,7 +1062,7 @@ olaylar:
               - degisken: { hayatta_kalan: -6 }
               - bayrak: "yukselenler_3_tamam"
               - iliski: { vahit: { saygi: 6, baglilik: 6 } }
-              - tohum: { olay: "on_ucuncu_secim", gecikme: { min: 4, max: 9 }, kosul: { bayrak_yok: "on_ucuncu_kacti" } }
+              - tohum: { olay: "on_ucuncu_secim", gecikme: { min: 4, max: 9 }, kosul: { bayrak_yok: "on_ucuncu_kacti" }, hatirlatma: { tr: "Büyük Ayin'de halkanın ortasında olanlar On Üç'ün aklından çıkmıyor.", en: "Thirteen can't stop thinking about what happened in the middle of the circle at the Great Rite." } }
             kronik: { tr: "Ayinin katkısını kendine ayırmayıp Yükselenler'e dağıttın, onların yükselişini de halkanın dışından izledin.", en: "You didn't take the Great Rite's contribution for yourself. You handed it out to the Ascended and watched them rise from outside the ring." }
             sonraki: "yuk3_paylasim"
           - id: "kendini_yak"
@@ -1077,7 +1077,7 @@ olaylar:
               - bayrak: "ayin_kendini_yakti"
               - bayrak: "yukselenler_3_tamam"
               - iliski: { vahit: { korku: 10, saygi: 10 } }
-              - tohum: { olay: "on_ucuncu_secim", gecikme: { min: 4, max: 9 }, kosul: { bayrak_yok: "on_ucuncu_kacti" } }
+              - tohum: { olay: "on_ucuncu_secim", gecikme: { min: 4, max: 9 }, kosul: { bayrak_yok: "on_ucuncu_kacti" }, hatirlatma: { tr: "Büyük Ayin'de halkanın ortasında olanlar On Üç'ün aklından çıkmıyor.", en: "Thirteen can't stop thinking about what happened in the middle of the circle at the Great Rite." } }
             kronik: { tr: "Üç yüz kişinin önüne geçip sarnıcın zarına kendin yürüdün; zar seni sindiremedi, senden önce girenleri de geri kustu.", en: "You walked into the membrane ahead of three hundred people. It couldn't digest you, and it threw up the ones who'd gone in before you." }
             sonraki: "yuk3_kendini"
           - id: "durdur"
@@ -1275,7 +1275,7 @@ olaylar:
               - ahlak: { merhamet: 5, duzen: 1 }
               - degisken: { hayatta_kalan: 6 }
               - itibar: { siginak: 5 }
-              - tohum: { olay: "on_ucuncu_secim", gecikme: { min: 4, max: 9 }, kosul: { bayrak_yok: "on_ucuncu_kacti" } }
+              - tohum: { olay: "on_ucuncu_secim", gecikme: { min: 4, max: 9 }, kosul: { bayrak_yok: "on_ucuncu_kacti" }, hatirlatma: { tr: "Büyük Ayin'de halkanın ortasında olanlar On Üç'ün aklından çıkmıyor.", en: "Thirteen can't stop thinking about what happened in the middle of the circle at the Great Rite." } }
             kronik: { tr: "Ayin için getirilen üç yüz yakıtı gecenin karanlığında {yer:tepe|den} indirdin.", en: "You walked the Great Rite's three hundred fuel down off the hill in the middle of the night." }
             sonraki: "@akis"
           - id: "zar"
@@ -1385,7 +1385,7 @@ olaylar:
               - ahlak: { merhamet: 5, insanlik: 2 }
               - degisken: { hayatta_kalan: 8 }
               - itibar: { siginak: 4 }
-              - tohum: { olay: "on_ucuncu_secim", gecikme: { min: 4, max: 9 }, kosul: { bayrak_yok: "on_ucuncu_kacti" } }
+              - tohum: { olay: "on_ucuncu_secim", gecikme: { min: 4, max: 9 }, kosul: { bayrak_yok: "on_ucuncu_kacti" }, hatirlatma: { tr: "Büyük Ayin'de halkanın ortasında olanlar On Üç'ün aklından çıkmıyor.", en: "Thirteen can't stop thinking about what happened in the middle of the circle at the Great Rite." } }
             kronik: { tr: "Sığınak baskın yaparken yakıtın önünde siper oldun; o gece sarnıca tek kişi düşmedi.", en: "During the Haven raid you stood in front of the fuel. Not one person fell into the reservoir that night." }
             sonraki: "@akis"
           - id: "vahit"
@@ -1483,7 +1483,7 @@ olaylar:
               - itibar: { yukselenler: 6 }
               - degisken: { hayatta_kalan: -1 }
               - bayrak: "yukselenler_4_tamam"
-              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 3, max: 7 } }
+              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 3, max: 7 }, hatirlatma: { tr: "Kurban gecesinden sonra {yer:tepe|de} kapılar geceleri daha sık tıkırdıyor.", en: "Since the night of the offering, doors up on {yer:tepe} have been tapping more often after dark." } }
             kronik: { tr: "Seni seven bir kalp istendiğinde kalp kalptir deyip sana tapan bir yabancıyı seçtin.", en: "A heart's a heart, you figured, and picked a stranger who worshipped you." }
             sonraki: "yuk4_hayran"
           - id: "ret"
@@ -1808,7 +1808,7 @@ olaylar:
               - gorev: { zincir_yukselenler: "basarisiz" }
               - itibar: { yukselenler: -30, siginak: 6 }
               - degisken: { hayatta_kalan: 6 }
-              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 1, max: 3 } }
+              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Mutlak sadakatin gecesinden sonra {yer:tepe|de} kapılar yine tıkırdıyor.", en: "Since the night of absolute loyalty, doors up on {yer:tepe} are tapping again." } }
             kronik: { tr: "Merdivenin en üst basamağına varınca Son Ocak'ı söndürmek için elini zarın kenarına koydun.", en: "At the very top of the ladder, you laid your hand on the edge of the membrane to put out the Last Kiln." }
             sonraki: "yuk5_dagit"
 
@@ -2053,7 +2053,7 @@ olaylar:
               - ahlak: { insanlik: -4, duzen: 2 }
               - itibar: { yukselenler: 6 }
               - iliski: { vahit: { baglilik: 8 } }
-              - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 10, max: 20 }, kosul: { gorev: { zincir_yukselenler: "basla" } } }
+              - tohum: { olay: "yukselenler_2_yakit_listesi", gecikme: { min: 10, max: 20 }, kosul: { gorev: { zincir_yukselenler: "basla" } }, hatirlatma: { tr: "Rasathanedeki o çaydan sonra beyaz cübbe seni bekliyor.", en: "After that tea at the observatory, the white robe is waiting for you." } }
             kronik: { tr: "Bir zamanlar geri çevirdiğin beyaz cübbeyi peygamberin odasında çay içerken kabul ettin.", en: "Over tea in the prophet's room, you accepted the white robe you'd once refused." }
             sonraki: "@akis"
 
@@ -2072,7 +2072,7 @@ olaylar:
               - ahlak: { insanlik: -2, duzen: -1 }
               - bayrak: "vahit_yankiyi_biliyor"
               - iliski: { vahit: { baglilik: 8 }, yanki: { guven: -6 } }
-              - tohum: { olay: "vahit_mucize_sinavi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_mucize_sinavi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Kırmızı ışığı yanan mikrofonun önünde söylenenlerin hesabı soruluyor.", en: "Somebody's coming to collect on what was said in front of that hot mic." } }
             kronik: { tr: "{npc:yanki|in} sözlerinden birini {yer:tepe|in} peygamberine yüksek sesle okudun; artık o da biliyordu.", en: "You read one of {npc:yanki|pos} lines aloud to a prophet. Now he knew too." }
             sonraki: "@akis"
           - id: "koru"
@@ -2102,7 +2102,7 @@ olaylar:
               - ahlak: { insanlik: -2, duzen: 1 }
               - itibar: { yukselenler: 4 }
               - iliski: { vahit: { baglilik: 4 } }
-              - tohum: { olay: "vahit_mucize_sinavi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_mucize_sinavi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Kırmızı ışığı yanan mikrofonun önünde söylenenlerin hesabı soruluyor.", en: "Somebody's coming to collect on what was said in front of that hot mic." } }
             kronik: { tr: "Peygambere Sistem adına bir yalan söyledin, ardından bir tane daha ekledin.", en: "You told the prophet one lie in the System's name, then added another." }
             sonraki: "@akis"
           - id: "dur"
@@ -2127,7 +2127,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 1 }
               - bilgi: "yukari_kapi"
-              - tohum: { olay: "vahit_mucize_sinavi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_mucize_sinavi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Kırmızı ışığı yanan mikrofonun önünde söylenenlerin hesabı soruluyor.", en: "Somebody's coming to collect on what was said in front of that hot mic." } }
             kronik: { tr: "Bir peygamberin yukarı açılan kapıya dair sözlerini aklının bir köşesine yazdın.", en: "You filed away what a prophet told you about a door that opens upward." }
             sonraki: "@akis"
           - id: "gul"
@@ -2149,7 +2149,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 2 }
               - gizle: 2
-              - tohum: { olay: "vahit_mucize_sinavi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_mucize_sinavi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Kırmızı ışığı yanan mikrofonun önünde söylenenlerin hesabı soruluyor.", en: "Somebody's coming to collect on what was said in front of that hot mic." } }
             kronik: { tr: "Bir peygamberin sessizliğinde içini dökerken kendini yakaladın ve kaçtın.", en: "You caught yourself confessing into a prophet's silence, and you ran." }
             sonraki: "@akis"
           - id: "otur"
@@ -2175,7 +2175,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 2, insanlik: -1 }
               - iliski: { vahit: { guven: 8, baglilik: 4 } }
-              - tohum: { olay: "vahit_mucize_sinavi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_mucize_sinavi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Kırmızı ışığı yanan mikrofonun önünde söylenenlerin hesabı soruluyor.", en: "Somebody's coming to collect on what was said in front of that hot mic." } }
             kronik: { tr: "Bir peygambere tek bir satırlık mucizesine inandığını söyledin.", en: "You told a prophet you believed in his one-line miracle." }
             sonraki: "@akis"
           - id: "belki"
@@ -2212,7 +2212,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: -2, duzen: -1 }
               - iliski: { vahit: { guven: -4 } }
-              - tohum: { olay: "vahit_mucize_sinavi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_mucize_sinavi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Kırmızı ışığı yanan mikrofonun önünde söylenenlerin hesabı soruluyor.", en: "Somebody's coming to collect on what was said in front of that hot mic." } }
             kronik: { tr: "Bir peygamberi halka ışığının altında yalnız bıraktın.", en: "You left a prophet alone under his ring light." }
             sonraki: "@akis"
 
@@ -2267,7 +2267,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 3, merhamet: -4 }
               - iliski: { vahit: { guven: -6 } }
-              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 3, max: 8 } }
+              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 3, max: 8 }, hatirlatma: { tr: "Şafakta kapanacak kapının sabahından beri {yer:tepe|de} bazıları kaçmanın yolunu arıyor.", en: "Since the morning of the Gate that was supposed to close at dawn, some people up on {yer:tepe} have been looking for a way out." } }
             kronik: { tr: "Kehanet sınansın diye kenarda durdun; bedelini okulun avlusundakiler ödedi.", en: "You stood back and let a prophecy be tested. The people in the schoolyard paid for it." }
             sonraki: "vmuc_bekle"
           - id: "ifsa"
@@ -2514,7 +2514,7 @@ olaylar:
             etkiler:
               - bolge: "tepe"
               - ahlak: { duzen: 1, insanlik: 1 }
-              - tohum: { olay: "on_ucuncu_secim", gecikme: { min: 3, max: 8 }, kosul: { bayrak_yok: ["on_ucuncu_kacti", "on_ucuncu_yandi"] } }
+              - tohum: { olay: "on_ucuncu_secim", gecikme: { min: 3, max: 8 }, kosul: { bayrak_yok: ["on_ucuncu_kacti", "on_ucuncu_yandi"] }, hatirlatma: { tr: "Kubbedeki kilitli odanın kapısı açıldığından beri On Üç seni arıyor.", en: "Thirteen has been looking for you since the door to the locked room in the dome opened." } }
             kronik: { tr: "Dinleme Odası'nın kapısını bir mürite açtırdın; içeri ilk o baktı.", en: "You had a disciple open the door to the Listening Room. They were the first to look inside." }
             sonraki: "vmask_oda"
 
@@ -2622,7 +2622,7 @@ olaylar:
               - itibar: { yukselenler: 15 }
               - degisken: { hayatta_kalan: -3 }
               - iliski: { vahit: { baglilik: 12 } }
-              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 2, max: 6 } }
+              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 2, max: 6 }, hatirlatma: { tr: "Kubbedeki kilitli odadan sonra {yer:tepe|de} bazıları kaçmanın yolunu arıyor.", en: "Since the locked room in the dome, some people up on {yer:tepe} have been looking for a way out." } }
             kronik: { tr: "Peygamberin haklı olduğunu bütün {yer:tepe|e} kendi ağzınla ilan ettin.", en: "You announced to the whole hill, in your own voice, that the prophet had been right." }
             sonraki: "@akis"
 
@@ -3066,7 +3066,7 @@ olaylar:
               - itibar: { yukselenler: 8 }
               - bayrak: "deniz_kalkanin_oldu"
               - iliski: { deniz_arman: { baglilik: 6, guven: -4, korku: 4 } }
-              - tohum: { olay: "vahit_secilmisler", gecikme: { min: 2, max: 5 }, kosul: { npc_hayatta: "vahit" } }
+              - tohum: { olay: "vahit_secilmisler", gecikme: { min: 2, max: 5 }, kosul: { npc_hayatta: "vahit" }, hatirlatma: { tr: "Beyaz Kalkan'la meydanda karşılaştığınız gün {yer:tepe} seni de not etti.", en: "The day you faced the White Shield in the square, {yer:tepe} took note of you too." } }
             kronik: { tr: "Arkadaşının peşinden {yer:tepe|e} çıktın; Beyaz Kalkan o günden sonra senin kalkanın oldu.", en: "You followed your friend up to {yer:tepe}. From that day on, the White Shield was your shield." }
             sonraki: "drakip_teslim"
           - id: "guc"
@@ -3170,7 +3170,7 @@ olaylar:
               - ahlak: { duzen: -2, merhamet: 3 }
               - bayrak: "deniz_rakip_oldu"
               - iliski: { deniz_arman: { korku: 6, saygi: 6 } }
-              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 5, max: 10 } }
+              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 5, max: 10 }, hatirlatma: { tr: "Beyaz Kalkan'la meydandaki o günün sesi {yer:tepe|in} arka sokaklarına kadar ulaşmış.", en: "Word of that day in the square with the White Shield has made it into the back streets of {yer:tepe}." } }
             kronik: { tr: "Yendiğin arkadaşının beyaz cübbesini herkesin gözü önünde çıkardın; cübbesiz hâliyle yine de {yer:tepe|e} döndü.", en: "You stripped the white robe off your beaten friend in front of everyone. Robeless, they went back up the hill anyway." }
             sonraki: "@akis"
 
@@ -3256,7 +3256,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 4, duzen: -1 }
               - iliski: { deniz_arman: { guven: 6, saygi: 4 } }
-              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 3, max: 6 } }
+              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Beyaz Kalkan'la meydandaki o günün sesi {yer:tepe|in} arka sokaklarına kadar ulaşmış.", en: "Word of that day in the square with the White Shield has made it into the back streets of {yer:tepe}." } }
             kronik: { tr: "Beyaz Kalkan'dan {yer:tepe|den} tek bir aile istedin.", en: "You asked the White Shield for one family off the hill." }
             sonraki: "@akis"
           - id: "veda"
@@ -3351,7 +3351,7 @@ olaylar:
               - ahlak: { merhamet: 4, duzen: 1 }
               - itibar: { siginak: 3 }
               - degisken: { hayatta_kalan: 2 }
-              - tohum: { olay: "vahit_mucize_sinavi", gecikme: { min: 8, max: 16 }, kosul: { npc_hayatta: "vahit", bayrak: "vahit_yakin_takip" } }
+              - tohum: { olay: "vahit_mucize_sinavi", gecikme: { min: 8, max: 16 }, kosul: { npc_hayatta: "vahit", bayrak: "vahit_yakin_takip" }, hatirlatma: { tr: "Kapına kül getiren aileyi {yer:tepe} unutmadı.", en: "{yer:tepe|b} hasn't forgotten the family that brought ash to your door." } }
             kronik: { tr: "Gece karanlığında, arka sokaklardan geçirerek {yer:tepe|den} kaçan bir aileyi Sığınak'a ulaştırdın.", en: "You walked a family running from {yer:tepe} through the back alleys to the Haven in the middle of the night." }
             sonraki: "@akis"
 
@@ -3504,7 +3504,7 @@ olaylar:
               - degisken: { hayatta_kalan: 1 }
               - itibar: { yukselenler: -4 }
               - iliski: { vahit: { guven: -4 } }
-              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 6, max: 12 } }
+              - tohum: { olay: "yukselenler_kacak_aile", gecikme: { min: 6, max: 12 }, hatirlatma: { tr: "On Üç'e açtığın yol başkalarına da cesaret vermiş.", en: "The way out you opened for Thirteen gave other people nerve too." } }
             kronik: { tr: "On Üç'e kaçmasını söyledin ve yolu ona sen açtın.", en: "You told Thirteen to run, and you cleared the road for him." }
             sonraki: "@akis"
           - id: "yan"

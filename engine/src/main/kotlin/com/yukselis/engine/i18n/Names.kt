@@ -11,6 +11,8 @@ data class NameEntry(
     val short: LText,
     /** İngilizce zamir: he, she, they, it (DECISIONS #10: Deniz "they"). */
     val pronoun: String = "they",
+    /** Türkçe ad iyelik ekli tamlamayla bitiyor: hal eki n'li gelir (Kule Dibi'ne). */
+    val possessive: Boolean = false,
 ) {
     enum class Kind(val tokenKey: String) {
         NPC("npc"),
@@ -60,7 +62,8 @@ class TokenResolver(private val names: NameRegistry) {
                 val entry = lookup(kindKey, id) ?: return@replace "[?$kindKey:$id]"
                 if (wantsFull) entry.full[lang] else entry.short[lang]
             }
-            applyModifiers(base, mods, lang)
+            val possessive = kindKey != PLAYER && lookup(kindKey, id)?.possessive == true
+            applyModifiers(base, mods, lang, possessive)
         }
 
     /** Çözülemeyen belirteçleri döndürür; içerik doğrulayıcı kullanır. */
@@ -81,12 +84,19 @@ class TokenResolver(private val names: NameRegistry) {
         return names.find(kind, id)
     }
 
-    private fun applyModifiers(base: String, mods: List<String>, lang: Lang): String {
+    private fun applyModifiers(base: String, mods: List<String>, lang: Lang, possessive: Boolean = false): String {
         var result = base
         for (mod in mods) {
             result = when (lang) {
-                Lang.TR -> TurkishSuffix.Case.fromCode(mod)?.let { TurkishSuffix.apply(result, it) } ?: result
-                Lang.EN -> if (mod == "pos") EnglishGrammar.possessive(result) else result
+                Lang.TR -> TurkishSuffix.Case.fromCode(mod)?.let { TurkishSuffix.apply(result, it, possessive) } ?: result
+                // "b": cümle başında büyük harf ("the Esplanade" → "The Esplanade").
+                Lang.EN -> when (mod) {
+                    "pos" -> EnglishGrammar.possessive(result)
+                    "b" -> result.replaceFirstChar { it.uppercase() }
+                    // "k": cümle içinde artikel küçük ("The Quiet Network" → "the Quiet Network").
+                    "k" -> if (result.startsWith("The ")) "the " + result.substring(4) else result
+                    else -> result
+                }
             }
         }
         return result

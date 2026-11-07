@@ -1,0 +1,551 @@
+# Bölüm yapısı · Perde 2 (docs/CHAPTERS.md, DECISIONS #130): brifingler (4–9), darboğazlar (5, 7, 8) ve {yer:kiyikent}
+# bölgelerine varış sahneleri. Yapısal sahnelerdir: motor açar (yalniz_tohum), mekanik etkileri yoktur.
+# Varış: görevin ilk sahnesi. Yan görev/keşifte ilk gidiş (`ziyaret_<bölge>` 0) ya da sonraki; operasyonda bölümün satırı.
+olaylar:
+  # ================================================================== Bölüm 4 · brifing (perde2_donus'tan sonra)
+  - id: "brifing_4"
+    konum: ["us"]
+    perde: [2]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["brifing"]
+    kart: { tr: "Eski meydandaki daire", en: "The circle in the old square" }
+    sahne: "brifing_4_1"
+    sahneler:
+      - id: "brifing_4_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - metin: { tr: "Önceki bölümde Öğretici Bekçisi'ni geçtin ve kampını yanında getirdin. {yer:kiyikent_liman|in} rıhtımında, ormandan seninle çıkanlar hâlâ birbirinden ayrılmıyor.", en: "Last chapter, you got past the Tutorial Warden and brought your camp with you. Out on {yer:kiyikent_liman} docks, the people who came out of the forest with you still stick together." }
+            kosul: { bayrak: "bekci_topla" }
+          - metin: { tr: "Önceki bölümde Öğretici Bekçisi'ni tek başına geçtin. Kapıdan kimin çıktığını, kimin çıkamadığını sonradan duydun.", en: "Last chapter, you got past the Tutorial Warden alone. You heard later who made it out the Gate and who didn't." }
+            kosul: { bayrak: "bekci_yalniz" }
+          - metin: { tr: "Önceki bölümde Öğretici Bekçisi'ni kimseye görünmeden geçtin. Çıkışta seni gören olmadı; seni anlatan da.", en: "Last chapter, you got past the Tutorial Warden without anyone seeing. Nobody saw you come out, and nobody's telling stories about it." }
+            kosul: { bayrak: "bekci_golge" }
+          - { tr: "{yer:kiyikent} dört parçaya bölünmüş. {yer:kiyikent_liman|de} {fraksiyon:siginak} çadırları, {yer:sanayi|in} bacalarında {fraksiyon:lonca} bayrakları, {yer:tepe|de} beyazlar, telsizlerin cızırtısında {fraksiyon:sessiz_ag}. Herkes birbirine bakıyor, kimse ilk adımı atmıyor.", en: "{yer:kiyikent} has split four ways. The {fraksiyon:siginak} tents on {yer:kiyikent_liman}, the {fraksiyon:lonca} flags on the smokestacks of {yer:sanayi}, white robes up on {yer:tepe}, and {fraksiyon:sessiz_ag|k} somewhere in the radio static. Everybody's watching everybody, and nobody's making the first move." }
+          - { tr: "Bir de eski meydan var. Taşların ortasında, kimsenin çizmediği kusursuz bir daire beliriyor; her sabah biraz daha belirgin. Etrafında çadır kuran yok, ama herkes ona bakıp duruyor.", en: "And then there's the old square. In the middle of the paving stones, a perfect circle nobody drew is showing up, a little sharper every morning. Nobody's pitching a tent near it, but everybody keeps looking." }
+          - metin: { tr: "{npc:deniz_arman} rıhtımın kenarına oturmuş, karşı kıyıya bakıyor. \"Burası evimizdi,\" diyor. \"Şimdi kimin olduğuna karar veriyorlar.\"", en: "{npc:deniz_arman} is sitting on the edge of the dock, staring at the far shore. \"This was home,\" {zamir:deniz_arman|o} says. \"Now they're deciding whose it is.\"" }
+            kosul: { yoldas: "deniz_arman" }
+        bildirimler:
+          - tur: "gorev"
+            baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
+            satirlar:
+              - { tr: "Eski meydandaki yapı Gün 40'ta yüzeye çıkacak. O güne kadar şehri tanı.", en: "The structure under the old square surfaces on Day 40. Learn the city before then." }
+        sezgiler:
+          - kosul: { stat: { per: 12 } }
+            metin: { tr: "Dairenin çevresindeki taşlar ince ince titriyor; ayağının altında bir şey yukarı doğru tırmanıyor.", en: "The stones around the circle are trembling, just barely. Something under your feet is climbing." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "altında bir merdiven var. çok uzun bir merdiven. biri onu yukarıdan aşağı değil, aşağıdan yukarı kuruyor.", en: "there's a staircase under there. a very long one. someone's building it from the bottom up, not the top down." }
+        secenekler:
+          - id: "meydan"
+            etiket: { tr: "Meydana kadar yürü, daireye bak", en: "Walk up to the square and look at the circle" }
+            sonraki: "@akis"
+          - id: "kamplar"
+            etiket: { tr: "Önce kampların kim olduğunu öğren", en: "Find out who the camps are first" }
+            sonraki: "@akis"
+          - id: "liman"
+            etiket: { tr: "Bugün {yer:kiyikent_liman|de} kal, soluklan", en: "Stay on {yer:kiyikent_liman} today and catch your breath" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 5 · brifing
+  - id: "brifing_5"
+    konum: ["us"]
+    perde: [2]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["brifing"]
+    kart: { tr: "Beş dakika geri", en: "Five minutes slow" }
+    sahne: "brifing_5_1"
+    sahneler:
+      - id: "brifing_5_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - metin: { tr: "Önceki bölümde Kule yükseldi ve sen oradaydın. Meydanın çevresinden çıkarılanların çoğu senin sayende sağ.", en: "Last chapter, the Spire came up and you were there. Most of the people pulled out from around the square are alive because of you." }
+            kosul: { bayrak: "kule_siviller_korundu", bayrak_yok: "bolum_4_tasti" }
+          - metin: { tr: "Önceki bölümde Kule senden önce yükseldi. Meydana vardığında enkazdan insan çıkarıyorlardı.", en: "Last chapter, the Spire came up before you got there. When you reached the square, they were pulling people out of the rubble." }
+            kosul: { bayrak: "bolum_4_tasti" }
+          - metin: { tr: "Önceki bölümde Kule yükseldi ve sen onun kapısını tuttun. İlk tırmanıcılar senin önünden geçti.", en: "Last chapter, the Spire came up and you held its door. The first climbers went in past you." }
+            kosul: { bayrak_yok: ["kule_siviller_korundu", "bolum_4_tasti"] }
+          - metin: { tr: "Dört masadan birinin yanında oturmaya karar verdin. Artık sokakta seni gören, önce hangi kampın adamı olduğuna bakıyor.", en: "You picked one of the four tables to sit at. Now when people see you on the street, the first thing they check is whose camp you're with." }
+            kosul: { bayrak_yok: "uye_yok" }
+          - metin: { tr: "Dört masanın dördüne de hayır dedin. Bunun bir bedeli olacağını herkes biliyor; ne kadar olacağını henüz kimse bilmiyor.", en: "You said no to all four tables. Everybody knows that's going to cost something. Nobody knows how much yet." }
+            kosul: { bayrak: "uye_yok" }
+          - { tr: "{yer:eski_sehir|de}ki saat kulesi kırk yıl boyunca beş dakika geri çaldı. Bu hafta, kimse kurmadığı hâlde, tam vaktinde çalmaya başladı. Hükümet konağının önündeki meydanın taşları geceleri ısınıyor.", en: "The clock tower in {yer:eski_sehir} has run five minutes slow for forty years. This week it started striking right on time, and nobody wound it. At night, the stones in the square outside the old city hall run warm." }
+          - { tr: "Dört kamp da meydana gözcü yolladı. Konsey'in insanları bir şeyin uyandığını söylüyor; Lonca ona ilk dokunanın sahibi olacağını.", en: "All four camps have sent lookouts to the square. The Council's people say something's waking up. The Guild says whoever touches it first owns it." }
+        bildirimler:
+          - tur: "gorev"
+            baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
+            satirlar:
+              - { tr: "{yer:kasaba_cekirdegi} Gün 60'ta etkinleşecek. Sahibi o gün belirlenecek.", en: "{yer:kasaba_cekirdegi|b} activates on Day 60. Its owner will be decided that day." }
+        sezgiler:
+          - kosul: { stat: { int: 13 } }
+            metin: { tr: "Saat kulesinin doğru çalması bir uyarı değil, bir geri sayım. On ikiden sonra ne geleceğini merak ediyorsun.", en: "The clock striking right isn't a warning. It's a countdown. You wonder what comes after twelve." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "o kristal bir yönetim aracı. kim tutarsa şehir onun sesiyle konuşur. senin sesinle konuşsun isterdim.", en: "that crystal is an admin tool. whoever holds it, the city talks in their voice. i'd like it to talk in yours." }
+        secenekler:
+          - id: "kule"
+            etiket: { tr: "Saat kulesine bir göz at", en: "Go take a look at the clock tower" }
+            sonraki: "@akis"
+          - id: "kamp"
+            etiket: { tr: "Kendi kampının planını sor", en: "Ask what your camp's planning" }
+            sonraki: "@akis"
+          - id: "bekle"
+            etiket: { tr: "Bekle; meydan nasılsa seni bulacak", en: "Wait. The square's going to find you anyway" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 5 · darboğaz
+  - id: "darbogaz_5"
+    konum: ["us"]
+    perde: [2]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["darbogaz"]
+    kart: { tr: "Kristalin sesi", en: "The crystal's voice" }
+    sahne: "darbogaz_5_1"
+    sahneler:
+      - id: "darbogaz_5_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Akşam yedide şehrin bütün pencerelerine aynı bülten düşüyor. {yer:kasaba_cekirdegi} ilk kez konuşuyor: su saatleri, nöbet çizelgeleri, kayıp ilanları. Herkes bültenin altına bakıyor.", en: "At seven that evening, the same bulletin lands in every window in the city. {yer:kasaba_cekirdegi|b} is talking for the first time: water hours, watch rotations, missing-person notices. Everybody's looking at the bottom of it." }
+          - metin: { tr: "Ad {fraksiyon:siginak}. {yer:kiyikent_liman|de} ilk kez biri çadırların arasında yüksek sesle gülüyor. Öteki kamplarda kimse gülmüyor.", en: "The name is the {fraksiyon:siginak}. For the first time, somebody laughs out loud between the tents on {yer:kiyikent_liman}. Nobody's laughing in the other camps." }
+            kosul: { bayrak: "cekirdek_siginak" }
+          - metin: { tr: "Ad {fraksiyon:lonca}. Bültenin ilk maddesi sokağa çıkma saati. {yer:kiyikent_liman|de}ki çadırlarda kimse bir şey söylemiyor; herkes kendi saatini kuruyor.", en: "The name is the {fraksiyon:lonca}. The first item in the bulletin is a curfew. Nobody in the tents on {yer:kiyikent_liman} says a word. Everybody just sets their watch." }
+            kosul: { bayrak: "cekirdek_lonca" }
+          - metin: { tr: "Ad {fraksiyon:yukselenler}. Bültenin altına bir dua eklenmiş. {yer:kiyikent_liman|de} birkaç kişi çadırını toplayıp {yer:tepe|e} doğru yola çıkıyor.", en: "The name is {fraksiyon:yukselenler|k}. There's a prayer tacked on the end. A few people on {yer:kiyikent_liman} pack up their tents and head for {yer:tepe}." }
+            kosul: { bayrak: "cekirdek_yukselenler" }
+          - metin: { tr: "Ad yok. Bültenin altı boş; yalnızca küçük bir anten simgesi. Kimin konuştuğunu bilen yok, ama herkes {fraksiyon:sessiz_ag|in} sesini tanıyor.", en: "There's no name. The bottom of the bulletin is blank except for a little antenna icon. Nobody knows who's talking, but everybody recognizes {fraksiyon:sessiz_ag|k}." }
+            kosul: { bayrak: "cekirdek_sessiz_ag" }
+          - metin: { tr: "Ad senin adın. {yer:kiyikent_liman|de} insanlar telefonlarından başlarını kaldırıp sana bakıyor. Kimse ne diyeceğini bilmiyor.", en: "The name is yours. People on {yer:kiyikent_liman} look up from their phones at you. Nobody knows what to say." }
+            kosul: { bayrak: "cekirdek_oyuncu" }
+          - metin: { tr: "Konsey'in toplantı çadırında {npc:elif_sari} panodaki rakamları elle yeniden yazıyor. Seni görünce kalemi bırakmıyor, yalnızca başını sallıyor.", en: "In the Council tent, {npc:elif_sari} is rewriting the numbers on the board by hand. When {zamir:elif_sari|o} sees you, {zamir:elif_sari|o} doesn't put the marker down, just nods." }
+            kosul: { npc_hayatta: "elif_sari" }
+          - metin: { tr: "Meydanda muhafız uyandığında sen orada değildin. Kamplar ölülerini hâlâ birbirinin hanesine yazıyor.", en: "When the guardian woke up in the square, you weren't there. The camps are still putting their dead on each other's tab." }
+            kosul: { bayrak: "bolum_5_tasti" }
+          - metin: { tr: "{npc:kaya_demir} sana bir telsiz mesajı bırakmış: \"Kristali kimin tuttuğu umurumda değil. Kimin elinden alınacağı umurumda.\"", en: "{npc:kaya_demir} left you a radio message: \"I don't care who's holding the crystal. I care who it gets taken from.\"" }
+            kosul: { npc_hayatta: "kaya_demir", bayrak_yok: "cekirdek_lonca" }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "bülteni okudun mu? satır aralıkları çok geniş. bir şeyin sığacağı kadar geniş.", en: "did you read the bulletin? the line spacing is really wide. wide enough to fit something in." }
+          - kosul: { stat: { per: 14 } }
+            metin: { tr: "Bültenin saat damgası bir dakika ileride. Çekirdek şehrin saatini değil, kendi saatini tutuyor.", en: "The bulletin's timestamp is a minute fast. The Core isn't keeping the city's time. It's keeping its own." }
+        secenekler:
+          - id: "oku"
+            etiket: { tr: "Bülteni baştan sona oku", en: "Read the whole bulletin" }
+            sonraki: "@akis"
+          - id: "kampa"
+            etiket: { tr: "Kampların tepkisini görmek için {yer:kiyikent_liman|i} dolaş", en: "Walk {yer:kiyikent_liman} and see how the camps are taking it" }
+            sonraki: "@akis"
+          - id: "kapat"
+            etiket: { tr: "Pencereyi kapat; yarın düşünürsün", en: "Close the window. You'll think about it tomorrow" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 6 · brifing
+  - id: "brifing_6"
+    konum: ["us"]
+    perde: [2]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["brifing"]
+    kart: { tr: "Sayaç", en: "The counter" }
+    sahne: "brifing_6_1"
+    sahneler:
+      - id: "brifing_6_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - metin: { tr: "Önceki bölümde {yer:kasaba_cekirdegi} {fraksiyon:siginak|e} bağlandı. Bültenler artık oylama sonuçlarıyla başlıyor.", en: "Last chapter, {yer:kasaba_cekirdegi} went to the {fraksiyon:siginak}. The bulletins open with vote results now." }
+            kosul: { bayrak: "cekirdek_siginak" }
+          - metin: { tr: "Önceki bölümde {yer:kasaba_cekirdegi} {fraksiyon:lonca|e} bağlandı. Sokak köşelerinde nöbet kulübeleri bitiyor.", en: "Last chapter, {yer:kasaba_cekirdegi} went to the {fraksiyon:lonca}. Guard booths are popping up on street corners." }
+            kosul: { bayrak: "cekirdek_lonca" }
+          - metin: { tr: "Önceki bölümde {yer:kasaba_cekirdegi} {fraksiyon:yukselenler|e} bağlandı. Bültenler artık bir duayla bitiyor.", en: "Last chapter, {yer:kasaba_cekirdegi} went to {fraksiyon:yukselenler|k}. The bulletins end with a prayer now." }
+            kosul: { bayrak: "cekirdek_yukselenler" }
+          - metin: { tr: "Önceki bölümde {yer:kasaba_cekirdegi} {fraksiyon:sessiz_ag|in} eline geçti. Bültenlerin kimden geldiğini bilen yok.", en: "Last chapter, {yer:kasaba_cekirdegi} ended up with {fraksiyon:sessiz_ag|k}. Nobody knows who's actually sending the bulletins." }
+            kosul: { bayrak: "cekirdek_sessiz_ag" }
+          - metin: { tr: "Önceki bölümde {yer:kasaba_cekirdegi} sana bağlandı. Bültenin altındaki ad her akşam seninki.", en: "Last chapter, {yer:kasaba_cekirdegi} went to you. The name at the bottom of the bulletin is yours, every night." }
+            kosul: { bayrak: "cekirdek_oyuncu" }
+          - { tr: "Bu sabahki bültenin ilk satırı kırmızı: {yer:kordon|de}ki kapının sayacı on üç günü gösteriyor. Kimse o kapıyı kapatamadı; içine girenlerin hiçbiri geri gelmedi.", en: "This morning's bulletin leads with a red line: the counter on the Gate on {yer:kordon} shows thirteen days. Nobody's been able to close it. None of the people who went in came back out." }
+          - { tr: "{yer:kordon|in} balkonlarında hâlâ insanlar oturuyor. Kira soran yok, manzara bedava; kapının dönüşünü seyretmek de bir tür eğlence olmuş.", en: "People are still sitting out on the balconies along {yer:kordon}. The ocean view's free and nobody's collecting rent. Watching the Gate spin has turned into a kind of entertainment." }
+        bildirimler:
+          - tur: "gorev"
+            baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
+            satirlar:
+              - { tr: "{yer:kordon|de}ki kapı Gün 80'de taşacak. Taşma bölgesi: {yer:kordon} sahili.", en: "{yer:kordon|b} Gate overflows on Day 80. Overflow zone: {yer:kordon} shoreline." }
+        sezgiler:
+          - kosul: { stat: { int: 14 } }
+            metin: { tr: "Sayaç düz inmiyor; her sabah biraz daha hızlı iniyor. Kapı bir şey biriktiriyor.", en: "The counter isn't dropping evenly. It's dropping a little faster every morning. The Gate is saving something up." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "o kapı bir boşaltma vanası. içeride ne birikiyorsa, bir gün hepsini birden dökecek.", en: "that gate is a drain valve. whatever's building up inside, it's going to dump all of it at once." }
+        secenekler:
+          - id: "balkon"
+            etiket: { tr: "{yer:kordon|de}ki insanları uyarmanın bir yolunu düşün", en: "Figure out how to warn the people on {yer:kordon}" }
+            sonraki: "@akis"
+          - id: "hazirlan"
+            etiket: { tr: "On üç gün var; iyi kullan", en: "Thirteen days. Use them" }
+            sonraki: "@akis"
+          - id: "kamplar"
+            etiket: { tr: "Kampların taşmaya ne hazırladığını sor", en: "Ask what the camps are doing about the overflow" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 7 · brifing
+  - id: "brifing_7"
+    konum: ["us"]
+    perde: [2]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["brifing"]
+    kart: { tr: "Titreyen satır", en: "The flickering line" }
+    sahne: "brifing_7_1"
+    sahneler:
+      - id: "brifing_7_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - metin: { tr: "Önceki bölümde {yer:kordon|i} tuttun. Sahildeki apartmanlarda hâlâ ışık yanıyor; balkonlarda artık kimse kapıyı seyretmiyor.", en: "Last chapter, you held {yer:kordon}. The lights are still on in the beachfront buildings, and nobody's sitting out watching the Gate anymore." }
+            kosul: { bayrak: "kordon_kurtarildi" }
+          - metin: { tr: "Önceki bölümde {yer:kordon} düştü. Sahil artık bir canavar bölgesi; geceleri oradan gelen sesleri {yer:kiyikent_liman|den} duyabiliyorsun.", en: "Last chapter, {yer:kordon} fell. The shoreline's a monster zone now. At night you can hear it from {yer:kiyikent_liman}." }
+            kosul: { bayrak: "kordon_dustu" }
+          - metin: { tr: "{npc:deniz_arman} kardeşini buldu. O günden beri biraz daha hafif yürüyor.", en: "{npc:deniz_arman} found {zamir:deniz_arman|onun} sister. {zamir:deniz_arman|o|b} {zamir:deniz_arman|has} walked a little lighter ever since." }
+            kosul: { bayrak: "kardes_kurtarildi", npc_hayatta: "deniz_arman" }
+          - metin: { tr: "{npc:deniz_arman} kardeşini buldu, ama bulduğu şey yaşamıyordu. O günden beri martı çizmiyor.", en: "{npc:deniz_arman} found {zamir:deniz_arman|onun} sister, but not alive. {zamir:deniz_arman|o|b} {zamir:deniz_arman|has} stopped drawing gulls." }
+            kosul: { bayrak: "kardes_olu_bulundu", npc_hayatta: "deniz_arman" }
+          - metin: { tr: "Kayıplar Duvarı'nda {npc:deniz_arman|in} adının yanında hâlâ bir martı çizili. Altına kimse bir şey yazmıyor.", en: "There's still a gull drawn next to {npc:deniz_arman|pos} name on the Wall of the Missing. Nobody's written anything under it." }
+            kosul: { npc_olu: "deniz_arman" }
+          - { tr: "{yer:kasaba_cekirdegi|in} bülteni her akşam yedide geliyor. Son birkaç akşamdır satırlardan biri bir an titriyor, sonra düzeliyor. Fark eden az; fark edenler de bunu birbirlerine söylemiyor.", en: "{yer:kasaba_cekirdegi|pos|b} bulletin comes in every night at seven. For the last few nights, one of the lines flickers for a second, then straightens out. Not many people have noticed. The ones who have aren't telling each other." }
+          - { tr: "Sen fark ettin. Titreyen satır her seferinde senin pencerende biraz daha uzun kalıyor.", en: "You noticed. Every time, that flickering line stays in your window a little longer." }
+        bildirimler:
+          - tur: "gorev"
+            baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
+            satirlar:
+              - { tr: "Çekirdek bülteninde tanımsız bir süreç var. Kaynağı belirle.", en: "There's an unidentified process in the Core bulletin. Identify the source." }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "ben yapmıyorum. yani, henüz yapmıyorum. ama yapabilirim. herkese aynı anda.", en: "it's not me. well. not yet. but i could. to everyone at once." }
+          - kosul: { stat: { per: 15 } }
+            metin: { tr: "Titreyen satırda büyük harf yok. Hiçbirinde.", en: "There are no capital letters in the flickering line. Not one." }
+        secenekler:
+          - id: "bulten"
+            etiket: { tr: "Bu akşam bülteni {yer:kasaba_cekirdegi|in} önünde bekle", en: "Wait for tonight's bulletin outside {yer:kasaba_cekirdegi}" }
+            sonraki: "@akis"
+          - id: "sor"
+            etiket: { tr: "İçindeki sese doğrudan sor", en: "Ask the voice inside you straight out" }
+            sonraki: "@akis"
+          - id: "gormezden"
+            etiket: { tr: "Görmezden gel; daha önemli işler var", en: "Ignore it. There's more important stuff" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 7 · darboğaz
+  - id: "darbogaz_7"
+    konum: ["us"]
+    perde: [2]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["darbogaz"]
+    kart: { tr: "Şehrin bildiği", en: "What the city knows" }
+    sahne: "darbogaz_7_1"
+    sahneler:
+      - id: "darbogaz_7_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Ertesi sabah {yer:kiyikent_liman|de} herkes aynı cümleyi konuşuyor: birinin içinde. Kimin içinde olduğunu soranlar sana bakmadan soruyor.", en: "The next morning, everybody on {yer:kiyikent_liman} is talking about the same sentence: inside someone. The ones asking whose inside it is don't look at you while they ask." }
+          - metin: { tr: "Sen sahip çıktın. Kalabalığın önünde, o sesin seninle olduğunu söyledin. Şimdi insanlar yanından geçerken bir an duruyor; korkuyla merak arasında bir şey.", en: "You owned it. In front of the crowd, you said that voice was with you. Now people pause for half a second when they pass you, somewhere between scared and curious." }
+            kosul: { bayrak: "yanki_sahiplenildi" }
+          - metin: { tr: "İnkâr ettin. Şimdilik herkes sana inanıyor gibi; ama biri her akşam bülteni okurken gözünü senden ayırmıyor.", en: "You denied it. For now, everybody acts like they believe you. But every single night, somebody watches you the whole time they read the bulletin." }
+            kosul: { bayrak: "yanki_inkar_edildi" }
+          - metin: { tr: "Sesi susturdun. Bültenler yine düzgün. İçinde bir yer ise o günden beri garip biçimde sessiz.", en: "You shut the voice down. The bulletins are clean again. Something inside you, though, has been weirdly quiet ever since." }
+            kosul: { bayrak: "yanki_susturuldu" }
+          - metin: { tr: "Sen yetişemeden şehrin yarısı o cümleyi ezberledi. Duvarlara küçük harflerle yazıyorlar.", en: "Half the city had that sentence memorized before you got there. They're writing it on walls in lowercase." }
+            kosul: { bayrak: "bolum_7_tasti" }
+          - metin: { tr: "Konsey çadırında {npc:elif_sari} seni bir kenara çekiyor. \"Bana bir şey anlatmak istersen,\" diyor, \"kapım açık. Anlatmazsan da açık.\"", en: "In the Council tent, {npc:elif_sari} pulls you aside. \"If you ever want to tell me something,\" {zamir:elif_sari|o} says, \"my door's open. If you don't, it's still open.\"" }
+            kosul: { npc_hayatta: "elif_sari", iliski_min: { elif_sari: { guven: 40 } } }
+          - metin: { tr: "{yer:tepe|den} bir mürit geliyor, elinde katlanmış bir kâğıt. {npc:vahit} yazmış: \"Seçilmişlerin içinde ses olur. Gel, ne söylediğini birlikte dinleyelim.\"", en: "A disciple comes down from {yer:tepe} with a folded note. {npc:vahit} wrote it: \"The chosen carry voices. Come, let's listen to what yours is saying.\"" }
+            kosul: { npc_hayatta: "vahit", bayrak: "yanki_sahiplenildi" }
+          - metin: { tr: "{npc:mert_kilic} bir telsiz mesajı bırakmış: \"O satırların kaynak kodunu gördüm. Konuşmamız lazım. Yalnız.\"", en: "{npc:mert_kilic} left a radio message: \"I saw the source on those lines. We need to talk. Just us.\"" }
+            kosul: { npc_hayatta: "mert_kilic", iliski_min: { mert_kilic: { guven: 30 } } }
+        sezgiler:
+          - kosul: { bayrak_yok: "yanki_susturuldu" }
+            metin: { tr: "artık biliyorlar. ya da bildiklerini sanıyorlar. ikisi aynı şey değil. ikincisi daha tehlikeli.", en: "they know now. or they think they know. those aren't the same thing. the second one's more dangerous." }
+          - kosul: { dikkat_min: 50 }
+            metin: { tr: "{yer:kiyikent_liman|in} kenarında iki yabancı seni izliyor; hiçbirinin kampı belli değil.", en: "Two strangers at the edge of {yer:kiyikent_liman} are watching you. Neither of them is wearing any camp's colors." }
+            anlati: true
+        secenekler:
+          - id: "yuru"
+            etiket: { tr: "Başını dik tut, {yer:kiyikent_liman|i} bir uçtan öbür uca yürü", en: "Keep your head up and walk {yer:kiyikent_liman} end to end" }
+            sonraki: "@akis"
+          - id: "cekil"
+            etiket: { tr: "Bir süre gözden uzak dur", en: "Lie low for a while" }
+            sonraki: "@akis"
+          - id: "dinle"
+            etiket: { tr: "Ne konuştuklarını dinle", en: "Listen to what they're saying" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 8 · brifing
+  - id: "brifing_8"
+    konum: ["us"]
+    perde: [2]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["brifing"]
+    kart: { tr: "Uyanan kristal", en: "The crystal stirs" }
+    sahne: "brifing_8_1"
+    sahneler:
+      - id: "brifing_8_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - metin: { tr: "Önceki bölümde şehir senin içindeki sesi öğrendi ve sen ona sahip çıktın.", en: "Last chapter, the city found out about the voice inside you, and you owned it." }
+            kosul: { bayrak: "yanki_sahiplenildi" }
+          - metin: { tr: "Önceki bölümde şehir senin içindeki sesi öğrendi; sen inkâr ettin.", en: "Last chapter, the city found out about the voice inside you, and you denied it." }
+            kosul: { bayrak: "yanki_inkar_edildi" }
+          - metin: { tr: "Önceki bölümde içindeki sesi susturdun.", en: "Last chapter, you shut down the voice inside you." }
+            kosul: { bayrak: "yanki_susturuldu" }
+          - { tr: "Son günlerde {yer:kasaba_cekirdegi|in} kristali geceleri yanıp sönüyor. Yanına giden muhafızlar aynı şeyi anlatıyor: kristal birini arıyor. Kendilerine bakmıyor, onların arkasına bakıyor.", en: "For the last few nights, {yer:kasaba_cekirdegi|pos} crystal has been pulsing in the dark. The guards who go near it all say the same thing: it's looking for someone. Not at them. Past them." }
+          - { tr: "Senin pencerende ise yalnızca tek bir satır var, bir haftadır silinmiyor: [ERİŞİM İSTEĞİ BEKLEMEDE].", en: "In your window there's just one line, and it hasn't cleared all week: [ACCESS REQUEST PENDING]." }
+        bildirimler:
+          - tur: "gorev"
+            baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
+            satirlar:
+              - { tr: "Çekirdek bir yönetici adayı arıyor. Erişim isteği Gün 135'te kapanacak.", en: "The Core is looking for an admin candidate. The access request closes on Day 135." }
+        sezgiler:
+          - kosul: { bayrak_yok: "yanki_susturuldu" }
+            metin: { tr: "yönetici adayı. güzel unvan. altında ne yazdığını okumak istemezsin. ama okuyacaksın.", en: "admin candidate. nice title. you don't want to read what's written under it. you're going to anyway." }
+          - kosul: { stat: { int: 16 } }
+            metin: { tr: "İsteği kabul edersen Çekirdek sana bir şey gösterecek. Reddedersen de gösterecek; yalnızca daha geç.", en: "If you accept the request, the Core will show you something. If you refuse, it'll still show you. Just later." }
+        secenekler:
+          - id: "simdi"
+            etiket: { tr: "İsteğe bak; ama henüz dokunma", en: "Look at the request, but don't touch it yet" }
+            sonraki: "@akis"
+          - id: "muhafiz"
+            etiket: { tr: "Muhafızlara kristalin neyi aradığını sor", en: "Ask the guards what the crystal's looking for" }
+            sonraki: "@akis"
+          - id: "kapat"
+            etiket: { tr: "Pencereyi küçült; satır orada beklesin", en: "Minimize the window. Let the line wait" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 8 · darboğaz
+  - id: "darbogaz_8"
+    konum: ["us"]
+    perde: [2]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["darbogaz"]
+    kart: { tr: "Başlığın altında", en: "Under the header" }
+    sahne: "darbogaz_8_1"
+    sahneler:
+      - id: "darbogaz_8_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Merdivenden çıktığında şafak sökmüş. {yer:kiyikent_liman} her zamanki gibi uyanıyor: balıkçılar ağlarını topluyor, Konsey'in panosuna yeni rakamlar yazılıyor. Kimse senin ne gördüğünü bilmiyor.", en: "By the time you come up the stairs, it's dawn. {yer:kiyikent_liman|pos|b} waking up like always: fishermen hauling nets, new numbers going up on the Council board. Nobody knows what you saw." }
+          - metin: { tr: "Sen biliyorsun: bütün bunlar bir hasat. Sayılar, seviyeler, sıralama; hepsi bir terazinin kefesine konmuş.", en: "You do. All of this is a harvest. The numbers, the levels, the ranking, all of it's sitting on one side of a scale." }
+            kosul: { bayrak: "gercek_hasat" }
+          - metin: { tr: "Sen biliyorsun: bütün bunlar bir kurtarma girişimi. Kötü yazılmış, acımasız; ama birileri bu türü kurtarmaya çalışıyor.", en: "You do. All of this is a rescue attempt. Badly written, brutal. But somebody's trying to save this species." }
+            kosul: { bayrak: "gercek_kurtarma" }
+          - metin: { tr: "Merdivende seni gören oldu. Akşama kadar {yer:kiyikent_liman|de} yarım yamalak bir söylenti dolaşıyor: Çekirdek'in altına inip çıkan biri varmış.", en: "Somebody saw you on the stairs. By evening there's a half-baked rumor going around {yer:kiyikent_liman}: someone went down under the Core and came back up." }
+            kosul: { bayrak: "baslik_tanikli" }
+          - metin: { tr: "Merdiven seni bir gece beklemişti, sonra kapanmıştı. Ertesi gün indiğinde basamaklar daha dardı; çıkarken omzun duvara sürtündü.", en: "The staircase had waited one night for you, then sealed. When you went down the next day, the steps were narrower. Your shoulder scraped the wall coming back up." }
+            kosul: { bayrak: "bolum_8_tasti" }
+          - metin: { tr: "{fraksiyon:siginak} panosuna bakıyorsun: su, ekmek, ölüler. Gördüklerinden sonra rakamlar başka türlü okunuyor.", en: "You look at the {fraksiyon:siginak} board: water, bread, the dead. After what you saw, the numbers read differently." }
+            kosul: { lider_fraksiyon: "siginak" }
+          - metin: { tr: "{yer:sanayi|in} bacalarından duman yükseliyor. {fraksiyon:lonca} bu sabah da talim yapıyor; ne için hazırlandıklarını bilmeden.", en: "Smoke's going up from {yer:sanayi} stacks. The {fraksiyon:lonca} is drilling again this morning without knowing what they're drilling for." }
+            kosul: { lider_fraksiyon: "lonca" }
+          - metin: { tr: "{yer:tepe|den} ilahi sesleri geliyor. {fraksiyon:yukselenler} hasadı bir lütuf sanıyor. Belki de haklılar; düşüncesi bile midene oturuyor.", en: "Hymns are drifting down from {yer:tepe}. {fraksiyon:yukselenler} thinks the harvest is a blessing. Maybe they're right. Just the thought sits in your stomach like a stone." }
+            kosul: { lider_fraksiyon: "yukselenler" }
+          - metin: { tr: "Telsizinde kısa bir mesaj bekliyor: \"Aşağıda ne gördün?\" İmza yok. {fraksiyon:sessiz_ag} böyle sorar.", en: "There's a short message waiting on your radio: \"What did you see down there?\" No signature. That's how {fraksiyon:sessiz_ag|k} asks." }
+            kosul: { lider_fraksiyon: "sessiz_ag" }
+        sezgiler:
+          - kosul: { bayrak_yok: "yanki_susturuldu" }
+            metin: { tr: "şimdi anlıyor musun neden saklandım? bu dosyada benim adım da var. silinmiş satırların arasında.", en: "now do you get why i hid? my name's in that file too. between the deleted lines." }
+        secenekler:
+          - id: "anlat"
+            etiket: { tr: "Gördüklerini birine anlatmayı düşün", en: "Think about telling someone what you saw" }
+            sonraki: "@akis"
+          - id: "sakla"
+            etiket: { tr: "Şimdilik kendine sakla", en: "Keep it to yourself for now" }
+            sonraki: "@akis"
+          - id: "deniz"
+            etiket: { tr: "Bir süre denize bak", en: "Look at the water for a while" }
+            sonraki: "@akis"
+
+  # ================================================================== Bölüm 9 · brifing
+  - id: "brifing_9"
+    konum: ["us"]
+    perde: [2]
+    yalniz_tohum: true
+    gerilim: 2
+    etiketler: ["brifing"]
+    kart: { tr: "Yedi ışık", en: "Seven lights" }
+    sahne: "brifing_9_1"
+    sahneler:
+      - id: "brifing_9_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - metin: { tr: "Önceki bölümde Çekirdek'in altına indin ve Sistem'in bir hasat olduğunu gördün.", en: "Last chapter, you went down under the Core and saw that the System is a harvest." }
+            kosul: { bayrak: "gercek_hasat" }
+          - metin: { tr: "Önceki bölümde Çekirdek'in altına indin ve Sistem'in bir kurtarma girişimi olduğunu gördün.", en: "Last chapter, you went down under the Core and saw that the System is a rescue attempt." }
+            kosul: { bayrak: "gercek_kurtarma" }
+          - { tr: "Geceleri gökyüzünde, bulutların hemen üstünde yedi soluk ışık beliriyor. Yıldız değiller; yerlerinden kıpırdamıyorlar. Balıkçılar onlara bakmamak için ağlarını gün doğmadan topluyor.", en: "At night, seven faint lights show up in the sky, just above the clouds. They're not stars. They don't move. The fishermen pull in their nets before sunrise just so they don't have to look." }
+          - { tr: "Mavi panellerdeki sayaç her sabah biraz daha düşük. Panellerin hepsi aynı rakamı gösteriyor, ama son günlerde rakamın yanında bir simge belirdi: yedi köşeli bir şekil.", en: "The counter on the blue panels drops a little more every morning. They all show the same number, but lately there's a symbol next to it: a seven-sided shape." }
+          - metin: { tr: "{npc:deniz_arman} gece nöbetinde ışıkları sayıyor. \"Her gece biraz daha alçakta,\" diyor. \"Yaklaşıyorlar.\"", en: "{npc:deniz_arman} counts the lights on night watch. \"Lower every night,\" {zamir:deniz_arman|o} says. \"They're getting closer.\"" }
+            kosul: { yoldas: "deniz_arman" }
+        bildirimler:
+          - tur: "gorev"
+            baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
+            satirlar:
+              - { tr: "Gün 178'de yörüngeden bir yapı inecek. Şehri hazırla.", en: "On Day 178, a structure descends from orbit. Prepare the city." }
+        sezgiler:
+          - kosul: { bayrak_yok: "yanki_susturuldu" }
+            metin: { tr: "yedi köşe. yedi koltuk. biri bize bir sandalye çekiyor ama oturmamızı istemiyor.", en: "seven corners. seven seats. someone's pulling up a chair for us, and they don't want us sitting in it." }
+          - kosul: { stat: { per: 16 } }
+            metin: { tr: "Işıklar yerinden kıpırdamıyor, ama arada bir biri sönüp yanıyor. Sinyal veriyorlar; birbirlerine değil, aşağıya.", en: "The lights don't move, but every so often one blinks off and back on. They're signaling. Not to each other. Down here." }
+        secenekler:
+          - id: "liman"
+            etiket: { tr: "{yer:kiyikent_liman|i} gelecek şeye hazırlamaya başla", en: "Start getting {yer:kiyikent_liman} ready for what's coming" }
+            sonraki: "@akis"
+          - id: "isiklar"
+            etiket: { tr: "Bu gece ışıkları sen de say", en: "Count the lights yourself tonight" }
+            sonraki: "@akis"
+          - id: "kamplar"
+            etiket: { tr: "Kamplara ne bildiklerini sor", en: "Ask the camps what they know" }
+            sonraki: "@akis"
+
+  # ================================================================== Varış · {yer:kordon}
+  - id: "varis_kordon"
+    konum: ["kordon"]
+    perde: [2, 3, 4]
+    yalniz_tohum: true
+    tekrar: true
+    gerilim: 1
+    etiketler: ["varis"]
+    kart: { tr: "{yer:kordon|e}", en: "To {yer:kordon}" }
+    sahne: "varis_kordon_1"
+    sahneler:
+      - id: "varis_kordon_1"
+        yer: "kordon"
+        paragraflar:
+          - metin: { tr: "{yer:kiyikent_liman|den} {yer:kordon|e} sahil yolundan yürüyorsun. Bir yanında yan yatmış tekneler, öbür yanında boş kafeler; masaların üstünde hâlâ şeker paketleri duruyor. Körfezin ortasında kapı dönüyor, çevresindeki su ters yöne akıyor.", en: "You take the shore road from {yer:kiyikent_liman} to {yer:kordon}. Capsized boats on one side, empty cafés on the other, sugar packets still sitting on the tables. Out in the middle of the bay the Gate is spinning, and the water around it runs backward." }
+            kosul: { herhangi: [{ gorev_turu: "yan" }, { gorev_turu: "kesif" }], degisken_max: { ziyaret_kordon: 0 }, bayrak_yok: ["kordon_dustu", "kordon_kurtarildi"] }
+          - metin: { tr: "Sahil yolundan yine {yer:kordon|e} iniyorsun. Kafelerin masaları bir öncekinden biraz daha dağınık; kapı hâlâ körfezin ortasında dönüyor.", en: "You head down the shore road to {yer:kordon} again. The café tables are a little more scattered than last time. The Gate's still spinning out in the bay." }
+            kosul: { herhangi: [{ gorev_turu: "yan" }, { gorev_turu: "kesif" }], degisken_min: { ziyaret_kordon: 1 }, bayrak_yok: ["kordon_dustu", "kordon_kurtarildi"] }
+          - metin: { tr: "{yer:kordon|e} artık sahil yolundan inilmiyor; yol ikinci kafenin önünde kırılıp denize girmiş. Molozların arasından, balkonları bir zamanlar seyircilerle dolu apartmanlara doğru ilerliyorsun. Hiçbir pencerede ışık yok.", en: "You can't take the shore road down to {yer:kordon} anymore. It breaks off in front of the second café and runs into the sea. You pick your way through the rubble toward the buildings whose balconies used to be packed with spectators. There's no light in any window." }
+            kosul: { herhangi: [{ gorev_turu: "yan" }, { gorev_turu: "kesif" }], bayrak: "kordon_dustu" }
+          - metin: { tr: "Sahil yolundan {yer:kordon|e} iniyorsun. Körfezin ortasında artık kapı yok; yerinde yalnızca suyun üstünde hafif bir titreşim kalmış. Balkonlarda yeniden çamaşır asılı.", en: "You take the shore road down to {yer:kordon}. There's no Gate out in the bay anymore, just a faint shimmer on the water where it used to be. There's laundry hanging on the balconies again." }
+            kosul: { herhangi: [{ gorev_turu: "yan" }, { gorev_turu: "kesif" }], bayrak: "kordon_kurtarildi" }
+          - metin: { tr: "Görev seni {yer:kordon|e} getiriyor. Sahil yolunda rüzgâr tuz ve mazot kokuyor.", en: "The job brings you out to {yer:kordon}. The wind on the shore road smells like salt and diesel." }
+            kosul: { gorev_turu: "operasyon", bolum_min: 7 }
+          - metin: { tr: "Gece yarısına doğru {yer:kordon|e} varıyorsun. Balkonlarda hâlâ insanlar var; sayacın son saatlerini seyretmek için toplanmışlar, ellerinde termoslar. Kapının çevresindeki su her dakika biraz daha hızlı dönüyor.", en: "You reach {yer:kordon} a little before midnight. People are still out on the balconies with their thermoses, gathered to watch the counter's last hours. The water around the Gate turns a little faster every minute." }
+            kosul: { gorev_turu: "operasyon", bolum: 6 }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Sahile in", en: "Go down to the beach" }
+            sonraki: "@akis"
+
+  # ================================================================== Varış · {yer:eski_sehir}
+  - id: "varis_eski_sehir"
+    konum: ["eski_sehir"]
+    perde: [2, 3, 4]
+    yalniz_tohum: true
+    tekrar: true
+    gerilim: 1
+    etiketler: ["varis"]
+    kart: { tr: "{yer:eski_sehir|e}", en: "To {yer:eski_sehir}" }
+    sahne: "varis_eski_sehir_1"
+    sahneler:
+      - id: "varis_eski_sehir_1"
+        yer: "eski_sehir"
+        paragraflar:
+          - metin: { tr: "{yer:kiyikent_liman|den} yokuş yukarı, {yer:eski_sehir|in} dar sokaklarına tırmanıyorsun. Taş evlerin pencerelerinde çiçek saksıları hâlâ yerinde; biri her sabah sulamaya devam ediyor. Saat kulesi sokakların her köşesinden görünüyor.", en: "You climb uphill from {yer:kiyikent_liman} into the narrow streets of {yer:eski_sehir}. The flower boxes are still in the windows of the stone houses, and somebody keeps watering them every morning. You can see the clock tower from every corner." }
+            kosul: { herhangi: [{ gorev_turu: "yan" }, { gorev_turu: "kesif" }], degisken_max: { ziyaret_eski_sehir: 0 } }
+          - metin: { tr: "Yokuşu yine {yer:eski_sehir|e} çıkıyorsun. Saat kulesi tam vaktinde çalıyor; çiçek saksılarından biri bu sefer kurumuş.", en: "You take the hill up to {yer:eski_sehir} again. The clock tower strikes right on time. One of the flower boxes has dried out this time." }
+            kosul: { herhangi: [{ gorev_turu: "yan" }, { gorev_turu: "kesif" }], degisken_min: { ziyaret_eski_sehir: 1 } }
+          - metin: { tr: "Sokak köşelerindeki nöbet kulübelerinde {fraksiyon:lonca} askerleri geçenleri tek tek süzüyor.", en: "The {fraksiyon:lonca} soldiers in the booths on the street corners look over everyone who goes by, one at a time." }
+            kosul: { bayrak: "cekirdek_lonca", herhangi: [{ gorev_turu: "yan" }, { gorev_turu: "kesif" }] }
+          - metin: { tr: "{yer:eski_sehir|e} öğleye doğru varıyorsun. Hükümet konağının önündeki meydan dört kampın gözcüleriyle dolu; kimse kimseye yaklaşmıyor. Saat kulesinin akrebi on ikiye geliyor.", en: "You get to {yer:eski_sehir} around noon. The square in front of the old city hall is crawling with lookouts from all four camps, and nobody's getting close to anybody. The clock tower's hour hand is coming up on twelve." }
+            kosul: { gorev_turu: "operasyon", bolum: 5 }
+          - metin: { tr: "Akşam yediye doğru {yer:eski_sehir|e} varıyorsun. {yer:kasaba_cekirdegi|in} önünde bülteni bekleyen küçük bir kalabalık var; herkesin elinde telefonu.", en: "You get to {yer:eski_sehir} a little before seven. There's a small crowd outside {yer:kasaba_cekirdegi} waiting on the bulletin, every one of them with a phone out." }
+            kosul: { gorev_turu: "operasyon", bolum: 7 }
+          - metin: { tr: "Gece yarısını geçerken {yer:eski_sehir|e} çıkıyorsun. Sokaklar bomboş; yalnız {yer:kasaba_cekirdegi|in} kristali karanlıkta nabız gibi atıyor. Pencerendeki satır her atışta bir kez yanıp sönüyor.", en: "You head up to {yer:eski_sehir} after midnight. The streets are dead empty. Only {yer:kasaba_cekirdegi|pos} crystal is pulsing in the dark, and the line in your window blinks once with every beat." }
+            kosul: { gorev_turu: "operasyon", bolum: 8 }
+          - metin: { tr: "{yer:kasaba_cekirdegi|e} bu sabah dört kampın da arabaları gelmiş. Kapıda silah aranıyor; seninkini aramaya kimse cesaret edemiyor.", en: "Vehicles from all four camps have pulled up at {yer:kasaba_cekirdegi} this morning. They're checking for weapons at the door. Nobody's brave enough to check yours." }
+            kosul: { gorev_turu: "operasyon", bolum: 14 }
+          - metin: { tr: "Görev seni yokuş yukarı, {yer:eski_sehir|e} çıkarıyor.", en: "The job takes you uphill into {yer:eski_sehir}." }
+            kosul: { gorev_turu: "operasyon", herhangi: [{ bolum_max: 4 }, { bolum: 6 }, { bolum_min: 9, bolum_max: 13 }, { bolum_min: 15 }] }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Meydana yürü", en: "Walk on to the square" }
+            sonraki: "@akis"
+
+  # ================================================================== Varış · {yer:sanayi}
+  - id: "varis_sanayi"
+    konum: ["sanayi"]
+    perde: [2, 3, 4]
+    yalniz_tohum: true
+    tekrar: true
+    gerilim: 1
+    etiketler: ["varis"]
+    kart: { tr: "{yer:sanayi|e}", en: "To {yer:sanayi}" }
+    sahne: "varis_sanayi_1"
+    sahneler:
+      - id: "varis_sanayi_1"
+        yer: "sanayi"
+        paragraflar:
+          - metin: { tr: "Raylar boyunca {yer:sanayi|e} yürüyorsun. Yolun sonunda bacalar yükseliyor; dumanları gökyüzündeki mavi panellere kadar uzanıyor. Fabrika kapısının önünde {fraksiyon:lonca|in} nöbetçileri kimlik soruyor.", en: "You walk the tracks out to {yer:sanayi}. Smokestacks rise at the end of the line, their smoke reaching all the way up to the blue panels in the sky. At the factory gate, the {fraksiyon:lonca} sentries are checking IDs." }
+            kosul: { degisken_max: { ziyaret_sanayi: 0 } }
+          - metin: { tr: "Rayları izleyip yine {yer:sanayi|e} varıyorsun. Nöbetçiler seni tanıyor; biri kapıyı sormadan açıyor.", en: "You follow the tracks back to {yer:sanayi}. The sentries know you now. One opens the gate without asking." }
+            kosul: { degisken_min: { ziyaret_sanayi: 1 }, itibar_min: { lonca: 20 } }
+          - metin: { tr: "Rayları izleyip yine {yer:sanayi|e} varıyorsun. Nöbetçiler kimliğini bu kez de soruyor, bu kez de uzun uzun bakıyor.", en: "You follow the tracks back to {yer:sanayi}. The sentries ask for your ID again, and look at it for a long time again." }
+            kosul: { degisken_min: { ziyaret_sanayi: 1 }, itibar_max: { lonca: 19 } }
+          - { tr: "Ocakların uğultusu kulağının dibinde. Burada herkes bir şey üretiyor: kılıç, zırh, kapı ilanı. Duvardaki kara tahtada bu haftanın kotası yazılı.", en: "The roar of the forges is right in your ears. Everybody here is making something: blades, armor, Gate notices. The quota for the week is chalked on a blackboard on the wall." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "İçeri gir", en: "Go on in" }
+            sonraki: "@akis"
+
+  # ================================================================== Varış · {yer:tepe}
+  - id: "varis_tepe"
+    konum: ["tepe"]
+    perde: [2, 3, 4]
+    yalniz_tohum: true
+    tekrar: true
+    gerilim: 1
+    etiketler: ["varis"]
+    kart: { tr: "{yer:tepe|e}", en: "To {yer:tepe}" }
+    sahne: "varis_tepe_1"
+    sahneler:
+      - id: "varis_tepe_1"
+        yer: "tepe"
+        paragraflar:
+          - metin: { tr: "Merdivenli sokaklardan {yer:tepe|e} tırmanıyorsun. Yukarı çıktıkça evlerin kapıları beyaza boyanmış; her birinin üstünde altın yaldızla bir ad yazılı. Rüzgâr tütsü kokusu getiriyor.", en: "You climb the stepped streets up to {yer:tepe}. The higher you go, the more of the doors are painted white, each with a name lettered above it in gold. The wind smells like incense." }
+            kosul: { degisken_max: { ziyaret_tepe: 0 } }
+          - metin: { tr: "Merdivenli sokaklardan yine {yer:tepe|e} çıkıyorsun. Beyaz kapıların sayısı artmış; altın adlardan birkaçı kazınıp silinmiş.", en: "You take the stepped streets back up to {yer:tepe}. There are more white doors than last time, and a few of the gold names have been scraped off." }
+            kosul: { degisken_min: { ziyaret_tepe: 1 } }
+          - { tr: "Tepenin en üstünden bütün körfez görünüyor. Beyaz giysili müritler alçak sesle ilahi söylüyor; seni görünce susmuyorlar, sadece biraz daha yavaş söylüyorlar.", en: "From the top of the hill you can see the whole bay. Disciples in white are singing hymns under their breath. They don't stop when they see you. They just sing a little slower." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Mahalleye gir", en: "Head into the neighborhood" }
+            sonraki: "@akis"
+
+  # ================================================================== Varış · {yer:kule_dibi}
+  - id: "varis_kule_dibi"
+    konum: ["kule_dibi"]
+    perde: [2, 3, 4]
+    yalniz_tohum: true
+    tekrar: true
+    gerilim: 1
+    etiketler: ["varis"]
+    kart: { tr: "{yer:kule_dibi|e}", en: "To {yer:kule_dibi}" }
+    sahne: "varis_kule_dibi_1"
+    sahneler:
+      - id: "varis_kule_dibi_1"
+        yer: "kule_dibi"
+        paragraflar:
+          - metin: { tr: "Eski meydana vardığında Kule her yeri gölgesiyle örtüyor. Dibinde bir pazar kurulmuş: iksir satanlar, kat haritası satanlar, ölmüş tırmanıcıların eşyalarını satanlar. Herkes sırayla başını kaldırıp tepeye bakıyor.", en: "When you get to the old square, the Spire's shadow covers everything. A market's set up at its base: people selling potions, floor maps, the gear of climbers who didn't come back. Every so often, everybody looks up at the top." }
+            kosul: { herhangi: [{ gorev_turu: "yan" }, { gorev_turu: "kesif" }], degisken_max: { ziyaret_kule_dibi: 0 }, bayrak: "kule_acik" }
+          - metin: { tr: "{yer:kule_dibi|e} yine geldin. Pazar biraz daha kalabalık; tırmanış kuyruğu meydanın öbür ucuna kadar uzanıyor.", en: "You're back at {yer:kule_dibi}. The market's a little more crowded, and the line to climb runs to the far side of the square." }
+            kosul: { herhangi: [{ gorev_turu: "yan" }, { gorev_turu: "kesif" }], degisken_min: { ziyaret_kule_dibi: 1 }, bayrak: "kule_acik" }
+          - metin: { tr: "Eski meydana çıkıyorsun. Taşların ortasındaki daire bugün de yerinde; çevresinde kimse oyalanmıyor.", en: "You come out into the old square. The circle in the middle of the stones is still there today, and nobody's hanging around it." }
+            kosul: { herhangi: [{ gorev_turu: "yan" }, { gorev_turu: "kesif" }], bayrak_yok: "kule_acik" }
+          - metin: { tr: "Şafaktan önce eski meydana varıyorsun. Taşların ortasındaki daire artık el yakacak kadar sıcak; çevresindeki apartmanların camları kendi kendine titriyor.", en: "You reach the old square before dawn. The circle in the middle of the stones is hot enough to burn your hand now, and the windows of the buildings around it are rattling on their own." }
+            kosul: { gorev_turu: "operasyon", bolum: 4 }
+          - metin: { tr: "Gün doğmadan {yer:kule_dibi|e} varıyorsun. Pazar kapalı, tezgâhlar örtülü; bütün meydan susmuş, Kule'nin gövdesine bakıyor.", en: "You get to {yer:kule_dibi} before sunrise. The market's shut and the stalls are covered. The whole square has gone quiet, staring up at the body of the Spire." }
+            kosul: { gorev_turu: "operasyon", bolum: 10 }
+          - metin: { tr: "{yer:kule_dibi|e} vardığında meydan bomboş. Herkes bir yerlere sığınmış; yalnız taşların çöktüğü yerde mavi ışık yanıyor.", en: "When you reach {yer:kule_dibi}, the square is empty. Everybody's taken cover somewhere. There's only the blue light burning where the stones caved in." }
+            kosul: { gorev_turu: "operasyon", bolum: 17 }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Meydana gir", en: "Step into the square" }
+            sonraki: "@akis"

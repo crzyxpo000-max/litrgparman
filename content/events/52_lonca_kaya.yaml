@@ -71,8 +71,8 @@ olaylar:
               - itibar: { lonca: 10 }
               - iliski: { kaya_demir: { saygi: 4, baglilik: 6, guven: 3 } }
               - esya: { turuncu_yama: 1 }
-              - tohum: { olay: "lonca_1_kapi_temizligi", gecikme: { min: 3, max: 8 }, kosul: { bayrak_yok: "lonca_1_tamam" } }
-              - tohum: { olay: "kaya_sert_ders", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "lonca_1_kapi_temizligi", gecikme: { min: 3, max: 8 }, kosul: { bayrak_yok: "lonca_1_tamam" }, hatirlatma: { tr: "Haddehanedeki masadan sonra Lonca'nın sana bir işi var.", en: "After that table in the rolling mill, the Guild's got a job for you." } }
+              - tohum: { olay: "kaya_sert_ders", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Haddehanedeki masada {npc:kaya_demir|le} konuştuklarınız aklında.", en: "You still remember what you and {npc:kaya_demir} said at that table in the rolling mill." } }
             kronik: { tr: "{npc:kaya_demir|in} verdiği turuncu yamayı koluna diktin. Lonca'nın merdiveninde ilk basamağın buydu.", en: "You sewed {npc:kaya_demir|pos} orange patch onto your sleeve. It was the first rung on the Guild's ladder." }
             sonraki: "kaya_lonca_teklifi_pano"
           - id: "sozlesme"
@@ -86,8 +86,8 @@ olaylar:
               - ahlak: { duzen: -2, insanlik: -2 }
               - itibar: { lonca: 4 }
               - iliski: { kaya_demir: { saygi: 5, guven: -2 } }
-              - tohum: { olay: "lonca_1_kapi_temizligi", gecikme: { min: 3, max: 8 }, kosul: { bayrak_yok: "lonca_1_tamam" } }
-              - tohum: { olay: "kaya_sert_ders", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "lonca_1_kapi_temizligi", gecikme: { min: 3, max: 8 }, kosul: { bayrak_yok: "lonca_1_tamam" }, hatirlatma: { tr: "Haddehanedeki masadan sonra Lonca'nın sana bir işi var.", en: "After that table in the rolling mill, the Guild's got a job for you." } }
+              - tohum: { olay: "kaya_sert_ders", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Haddehanedeki masada {npc:kaya_demir|le} konuştuklarınız aklında.", en: "You still remember what you and {npc:kaya_demir} said at that table in the rolling mill." } }
             kronik: { tr: "{npc:kaya_demir|e} rütbe yerine fiyatını söyledin. Lonca da seni defterine asker olarak değil, kiralık silah olarak yazdı.", en: "You named {npc:kaya_demir} a price instead of taking a rank. The Guild wrote you into its ledger as a hired gun, not a soldier." }
             sonraki: "kaya_lonca_teklifi_sozlesme"
           - id: "ac"
@@ -102,8 +102,8 @@ olaylar:
               - ahlak: { duzen: 3, insanlik: -2 }
               - itibar: { lonca: 12 }
               - iliski: { kaya_demir: { saygi: 12, korku: 6 } }
-              - tohum: { olay: "lonca_1_kapi_temizligi", gecikme: { min: 3, max: 8 }, kosul: { bayrak_yok: "lonca_1_tamam" } }
-              - tohum: { olay: "kaya_sert_ders", gecikme: { min: 35, max: 55 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "lonca_1_kapi_temizligi", gecikme: { min: 3, max: 8 }, kosul: { bayrak_yok: "lonca_1_tamam" }, hatirlatma: { tr: "Haddehanedeki masadan sonra Lonca'nın sana bir işi var.", en: "After that table in the rolling mill, the Guild's got a job for you." } }
+              - tohum: { olay: "kaya_sert_ders", gecikme: { min: 35, max: 55 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Haddehanedeki masada {npc:kaya_demir|le} konuştuklarınız aklında.", en: "You still remember what you and {npc:kaya_demir} said at that table in the rolling mill." } }
             kronik: { tr: "Haddehanenin ortasında gerçek pencereni açtın. Lonca'nın merdivenine o gün alttan değil, tepeden baktın.", en: "You opened your real window in the middle of the rolling mill. That day you met the Guild's ladder from the top, not the bottom." }
             sonraki: "kaya_lonca_teklifi_acik"
           - id: "gizle"
@@ -119,8 +119,8 @@ olaylar:
               - ahlak: { duzen: 2 }
               - itibar: { lonca: 3 }
               - iliski: { kaya_demir: { saygi: -3 } }
-              - tohum: { olay: "lonca_1_kapi_temizligi", gecikme: { min: 3, max: 8 }, kosul: { bayrak_yok: "lonca_1_tamam" } }
-              - tohum: { olay: "kaya_sert_ders", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "lonca_1_kapi_temizligi", gecikme: { min: 3, max: 8 }, kosul: { bayrak_yok: "lonca_1_tamam" }, hatirlatma: { tr: "Haddehanedeki masadan sonra Lonca'nın sana bir işi var.", en: "After that table in the rolling mill, the Guild's got a job for you." } }
+              - tohum: { olay: "kaya_sert_ders", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Haddehanedeki masada {npc:kaya_demir|le} konuştuklarınız aklında.", en: "You still remember what you and {npc:kaya_demir} said at that table in the rolling mill." } }
             kronik: { tr: "Lonca'ya sıradan bir avcı kılığında girdin. Çavuşları sana tepeden baktı; sen sesini çıkarmadın.", en: "You walked into the Guild as an ordinary hunter. Its sergeants looked down on you, and you let them." }
             sonraki: "kaya_lonca_teklifi_gizli"
           - id: "konsey_hatti"
@@ -136,8 +136,8 @@ olaylar:
               - itibar: { lonca: 3, siginak: 5 }
               - iliski: { kaya_demir: { saygi: 4, guven: 2 }, elif_sari: { saygi: 4 } }
               - degisken: { hayatta_kalan: 2 }
-              - tohum: { olay: "lonca_1_kapi_temizligi", gecikme: { min: 5, max: 10 }, kosul: { bayrak_yok: "lonca_1_tamam" } }
-              - tohum: { olay: "kaya_sert_ders", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "lonca_1_kapi_temizligi", gecikme: { min: 5, max: 10 }, kosul: { bayrak_yok: "lonca_1_tamam" }, hatirlatma: { tr: "Haddehanedeki masadan sonra Lonca'nın sana bir işi var.", en: "After that table in the rolling mill, the Guild's got a job for you." } }
+              - tohum: { olay: "kaya_sert_ders", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Haddehanedeki masada {npc:kaya_demir|le} konuştuklarınız aklında.", en: "You still remember what you and {npc:kaya_demir} said at that table in the rolling mill." } }
             kronik: { tr: "{npc:kaya_demir|in} masasında Konsey'le ortak bir hat kurulmasını savundun. {yer:sanayi} ile {yer:kiyikent_liman} arasındaki sınır o gün biraz inceldi.", en: "At {npc:kaya_demir|pos} table you argued for a joint line with the Council. The border between {yer:sanayi} and {yer:kiyikent_liman} got a little thinner that day." }
             sonraki: "kaya_lonca_teklifi_pano"
           - id: "reddet"
@@ -150,7 +150,7 @@ olaylar:
               - ahlak: { duzen: -4, insanlik: 2 }
               - iliski: { kaya_demir: { saygi: 2, guven: -3 } }
               - hafiza: { npc: "kaya_demir", id: "rutbeyi_reddetti", agirlik: 30 }
-              - tohum: { olay: "kaya_sert_ders", gecikme: { min: 45, max: 65 }, kosul: { npc_hayatta: "kaya_demir" } }
+              - tohum: { olay: "kaya_sert_ders", gecikme: { min: 45, max: 65 }, kosul: { npc_hayatta: "kaya_demir" }, hatirlatma: { tr: "Haddehanedeki masada {npc:kaya_demir|le} konuştuklarınız aklında.", en: "You still remember what you and {npc:kaya_demir} said at that table in the rolling mill." } }
             kronik: { tr: "Yamayı {npc:kaya_demir|in} masasında, durduğu yerde bıraktın. O gün seni asker hanesine değil, hesaba katılacak kuvvetler hanesine yazdı.", en: "You left {npc:kaya_demir|pos} patch on the table. That day he stopped thinking of you as a soldier and started thinking of you as a force to plan around." }
             sonraki: "kaya_lonca_teklifi_red"
 
@@ -406,7 +406,7 @@ olaylar:
               - ahlak: { duzen: 1, insanlik: -1 }
               - degisken: { lonca_rutbe: 1 }
               - iliski: { kaya_demir: { saygi: 2, guven: 1 } }
-              - tohum: { olay: "lonca_1_kapi_temizligi", gecikme: { min: 6, max: 12 }, kosul: { bayrak_yok: "lonca_1_tamam" } }
+              - tohum: { olay: "lonca_1_kapi_temizligi", gecikme: { min: 6, max: 12 }, kosul: { bayrak_yok: "lonca_1_tamam" }, hatirlatma: { tr: "Haddehanedeki masadan sonra Lonca'nın sana bir işi var.", en: "After that table in the rolling mill, the Guild's got a job for you." } }
             kronik: { tr: "{npc:kaya_demir|in} askeri olmayı reddettin ama kapılarını kapatmaya razı oldun. Şimdilik aranızdaki tek köprü kapılardı.", en: "You wouldn't be {npc:kaya_demir|pos} soldier, but you'd close his Gates. For now, the Gates were all you had between you." }
             sonraki: "@akis"
 
@@ -652,7 +652,7 @@ olaylar:
               - xp_seviye: 30
               - esya: { kizak_kabugu: 1 }
               - bayrak: "lonca_1_tamam"
-              - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 } }
+              - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 }, hatirlatma: { tr: "Kuru havuzdaki kapıdan bu yana Lonca seni tartıyor.", en: "Since the Gate in the dry dock, the Guild has been sizing you up." } }
             kronik: { tr: "Kuru havuzdan düşen payını numaralı yeleklere dağıttın. O hafta Destek sütunundaki çarpıların yanına ilk kez kristal yazıldı.", en: "You split your cut of the dry dock loot among the numbered vests. That week, for the first time, the X's in the Support column had crystals written next to them." }
             sonraki: "@akis"
           - id: "kural"
@@ -665,7 +665,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 3, guven: 3 } }
               - xp_seviye: 30
               - bayrak: "lonca_1_tamam"
-              - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 } }
+              - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 }, hatirlatma: { tr: "Kuru havuzdaki kapıdan bu yana Lonca seni tartıyor.", en: "Since the Gate in the dry dock, the Guild has been sizing you up." } }
             kronik: { tr: "Ganimeti Lonca'nın kuralına göre, yetmişe otuz böldün; Defterdar da adını 'güvenilir' sütununa geçirdi.", en: "You split the dry dock loot by the Guild's rule. The Ledger wrote your name in her 'reliable' column." }
             sonraki: "@akis"
           - id: "hepsi"
@@ -678,7 +678,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 5, korku: 4, guven: -3 } }
               - xp_seviye: 30
               - bayrak: "lonca_1_tamam"
-              - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 } }
+              - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 }, hatirlatma: { tr: "Kuru havuzdaki kapıdan bu yana Lonca seni tartıyor.", en: "Since the Gate in the dry dock, the Guild has been sizing you up." } }
             kronik: { tr: "Kraliçeden ve havuzdan ne çıktıysa hepsine el koydun. Lonca'da bunu açgözlülük diye değil, güçlünün hakkı diye anlattılar.", en: "You took the whole dry dock haul. The Guild didn't tell it as greed. They told it as the strong taking what's theirs." }
             sonraki: "@akis"
           - id: "kurali_degistir"
@@ -693,7 +693,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 6 } }
               - xp_seviye: 30
               - bayrak: "lonca_1_tamam"
-              - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 } }
+              - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 }, hatirlatma: { tr: "Kuru havuzdaki kapıdan bu yana Lonca seni tartıyor.", en: "Since the Gate in the dry dock, the Guild has been sizing you up." } }
             kronik: { tr: "Lonca'nın katkı kuralına bir satır ekledin: kapıya giren taşıyıcı da bundan böyle ganimetten pay alacaktı.", en: "You added a line to the Guild's contribution rule: carriers who went through a Gate would get a share of the loot too." }
             sonraki: "@akis"
 
@@ -722,7 +722,7 @@ olaylar:
               - itibar: { lonca: 2, siginak: 3 }
               - iliski: { kaya_demir: { saygi: 4 } }
               - bayrak: "lonca_1_tamam"
-              - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 } }
+              - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 }, hatirlatma: { tr: "Kuru havuzdaki kapıdan bu yana Lonca seni tartıyor.", en: "Since the Gate in the dry dock, the Guild has been sizing you up." } }
             kronik: { tr: "Tek başına kapattığın kapının ganimetini numaralı yeleklere bıraktın; adın Lonca'da ilk kez bir yardım listesine geçti.", en: "You left the loot from the Gate you'd closed alone to the numbered vests. It was the first time your name showed up on a Guild charity list." }
             sonraki: "@akis"
           - id: "pano"
@@ -732,7 +732,7 @@ olaylar:
               - itibar: { lonca: 8 }
               - iliski: { kaya_demir: { saygi: 8, korku: 3 } }
               - bayrak: "lonca_1_tamam"
-              - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 } }
+              - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 }, hatirlatma: { tr: "Kuru havuzdaki kapıdan bu yana Lonca seni tartıyor.", en: "Since the Gate in the dry dock, the Guild has been sizing you up." } }
             kronik: { tr: "Kızak Kraliçesi'nin başı omzunda, {yer:sanayi|in} tam ortasından yürüdün. O yürüyüşü gören hiç kimse Lonca'nın merdiveninin tepesinde senden başkasını düşünemedi.", en: "You carried the Slipway Queen's head on your shoulder straight through the middle of {yer:sanayi}. Nobody who saw that walk could picture anyone else at the top of the Guild's ladder." }
             sonraki: "@akis"
 
@@ -752,7 +752,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 4 } }
               - bayrak: "lonca_1_tamam"
               - itibar: { lonca: 2 }
-              - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 } }
+              - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 }, hatirlatma: { tr: "Kuru havuzdaki kapıdan bu yana Lonca seni tartıyor.", en: "Since the Gate in the dry dock, the Guild has been sizing you up." } }
             kronik: { tr: "Kızak Kraliçesi seni yere serdi; ertesi sabah serumu söküp nöbete çıktın. Lonca'nın aklında yenilgin değil, bu kaldı.", en: "The queen in the dry dock put you down, and the next morning you pulled your IV and reported for watch. The Guild remembered that better than the loss." }
             sonraki: "@akis"
           - id: "isimler"
@@ -761,7 +761,7 @@ olaylar:
               - ahlak: { insanlik: 3, merhamet: 2 }
               - iliski: { kaya_demir: { guven: 4 } }
               - bayrak: "lonca_1_tamam"
-              - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 } }
+              - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 }, hatirlatma: { tr: "Kuru havuzdaki kapıdan bu yana Lonca seni tartıyor.", en: "Since the Gate in the dry dock, the Guild has been sizing you up." } }
             kronik: { tr: "Kuru havuzda ölen üç avcının adını sorup ezberledin; o adlar artık senin de yükündü.", en: "You asked for the names of the three hunters who died in the dry dock and learned them by heart. They were yours to carry now." }
             sonraki: "@akis"
 
@@ -784,7 +784,7 @@ olaylar:
               - itibar: { lonca: 1 }
               - degisken: { hayatta_kalan: 1 }
               - bayrak: "lonca_1_tamam"
-              - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 } }
+              - tohum: { olay: "lonca_2_rutbe", gecikme: { min: 25, max: 40 }, kosul: { bayrak: "lonca_1_tamam", gun_max: 180 }, hatirlatma: { tr: "Kuru havuzdaki kapıdan bu yana Lonca seni tartıyor.", en: "Since the Gate in the dry dock, the Guild has been sizing you up." } }
             kronik: { tr: "Kapıyı ağır mangaya bırakıp {yer:sanayi|in} trafosunu onardın. O gece Lojmanlar'da ışıklar senin sayende yandı.", en: "You left the dry dock Gate to the heavy squad and fixed the {yer:sanayi} transformer instead. That night, the lights in the company houses were on because of you." }
             sonraki: "@akis"
 
@@ -1092,7 +1092,7 @@ olaylar:
               - bayrak: "kaya_akil_hocasi"
               - unvan: "bascavusun_ogrencisi"
               - iliski: { kaya_demir: { baglilik: 10, guven: 6, saygi: 4 } }
-              - tohum: { olay: "lonca_1_kapi_temizligi", gecikme: { min: 2, max: 5 }, kosul: { bayrak_yok: "lonca_1_tamam" } }
+              - tohum: { olay: "lonca_1_kapi_temizligi", gecikme: { min: 2, max: 5 }, kosul: { bayrak_yok: "lonca_1_tamam" }, hatirlatma: { tr: "Lojmanlardaki o geceden sonra {npc:kaya_demir} sözünü tutuyor.", en: "After that night at the barracks, {npc:kaya_demir} is keeping {zamir:kaya_demir|onun} word." } }
             kronik: { tr: "Lojmanlar gecesinin şafağında {npc:kaya_demir|den} sana komuta etmeyi öğretmesini istedin. O gün sen onun öğrencisi oldun, o da senin akıl hocan.", en: "On the dawn after the company houses, you asked {npc:kaya_demir} to teach you how to command. That day you became a student, and he became a mentor." }
             sonraki: "@akis"
           - id: "ben_veririm"
@@ -1281,7 +1281,7 @@ olaylar:
               - itibar: { lonca: 8 }
               - degisken: { hayatta_kalan: -1 }
               - iliski: { kaya_demir: { saygi: 6, korku: 4 } }
-              - tohum: { olay: "ors_soguk_oda", gecikme: { min: 12, max: 22 }, kosul: { bayrak: "ors_kin" } }
+              - tohum: { olay: "ors_soguk_oda", gecikme: { min: 12, max: 22 }, kosul: { bayrak: "ors_kin" }, hatirlatma: { tr: "Merdiven Günü'nde yaptığın şey Lonca'nın defterine geçti.", en: "What you did on Ladder Day went into the Guild's books." } }
             kronik: { tr: "Örs'ün yamasını herkesin gözü önünde söktün. Lonca alkışladı; adamın çocuklarının ısıtmalı odası o hafta başkasına verildi.", en: "On Ladder Day you ripped Anvil's patch off in front of everyone. The Guild cheered, and that week his kids' heated room went to someone else." }
             sonraki: "lonca_2_son"
           - id: "reform"
@@ -1327,7 +1327,7 @@ olaylar:
               - ahlak: { duzen: 3, insanlik: -3 }
               - bayrak: "ors_kin"
               - itibar: { lonca: 4 }
-              - tohum: { olay: "ors_soguk_oda", gecikme: { min: 12, max: 22 }, kosul: { bayrak: "ors_kin" } }
+              - tohum: { olay: "ors_soguk_oda", gecikme: { min: 12, max: 22 }, kosul: { bayrak: "ors_kin" }, hatirlatma: { tr: "Merdiven Günü'nde yaptığın şey Lonca'nın defterine geçti.", en: "What you did on Ladder Day went into the Guild's books." } }
             kronik: { tr: "On bir subayı yerde bırakıp Pano'ya yürüdün. Lonca o yürüyüşü hayranlıkla, Örs ise kinle izledi.", en: "You left eleven officers on the floor and walked to the Board. The Guild remembered that walk with awe. Anvil remembered it with a grudge." }
             sonraki: "lonca_2_son"
 
@@ -1629,7 +1629,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 6, korku: 6 } }
               - xp_seviye: 80
               - bayrak: "lonca_3_tamam"
-              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
+              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 }, hatirlatma: { tr: "Tek Bayrak'tan sonra Lonca kurallarını çeliğe kazımaya hazırlanıyor.", en: "After the One Flag, the Guild is getting ready to carve its rules into steel." } }
             kronik: { tr: "Mavi Çapa'nın Reis'ini kendi mezat salonunda, avcılarının gözü önünde infaz ettin; o gece {yer:kiyikent_liman} başını öne eğdi.", en: "You executed the Blue Anchor's Harbormaster in his own auction hall, in front of his hunters. That night {yer:kiyikent_liman} bowed its head." }
             sonraki: "@akis"
           - id: "hapis"
@@ -1641,7 +1641,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 4, guven: 3 } }
               - xp_seviye: 70
               - bayrak: "lonca_3_tamam"
-              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
+              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 }, hatirlatma: { tr: "Tek Bayrak'tan sonra Lonca kurallarını çeliğe kazımaya hazırlanıyor.", en: "After the One Flag, the Guild is getting ready to carve its rules into steel." } }
             kronik: { tr: "Reis'i kendi zinciriyle bağlayıp Lonca'ya teslim ettin; Mavi Çapa dağıldı, Reis canını kurtardı ama haddehanenin hücresine girdi.", en: "You bound the Blue Anchor's Harbormaster in his own chain and handed him to the Guild. The Anchor broke up. The Harbormaster kept his life and lost his freedom." }
             sonraki: "@akis"
           - id: "yut"
@@ -1654,7 +1654,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 5, guven: -2 } }
               - xp_seviye: 80
               - bayrak: "lonca_3_tamam"
-              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
+              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 }, hatirlatma: { tr: "Tek Bayrak'tan sonra Lonca kurallarını çeliğe kazımaya hazırlanıyor.", en: "After the One Flag, the Guild is getting ready to carve its rules into steel." } }
             kronik: { tr: "Mavi Çapa'yı yendikten sonra dağıtmayıp kendi bayrağının altına aldın; o avcılar artık Lonca'nın değil, senindi.", en: "After you beat the Blue Anchor, you didn't break it up. You took it under your own banner. They became your hunters, not the Guild's." }
             sonraki: "@akis"
 
@@ -1691,7 +1691,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 4 } }
               - xp_seviye: 80
               - bayrak: "lonca_3_tamam"
-              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
+              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 }, hatirlatma: { tr: "Tek Bayrak'tan sonra Lonca kurallarını çeliğe kazımaya hazırlanıyor.", en: "After the One Flag, the Guild is getting ready to carve its rules into steel." } }
             kronik: { tr: "Yendiğin Reis'i kendi subayın yaptın; Mavi Çapa Lonca'ya katıldı ama selamını önce sana verdi.", en: "You made the Harbormaster you'd beaten one of your officers. The Blue Anchor joined the Guild, but it saluted you first." }
             sonraki: "@akis"
           - id: "limani_birak"
@@ -1704,7 +1704,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 2, guven: -2 } }
               - xp_seviye: 70
               - bayrak: "lonca_3_tamam"
-              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
+              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 }, hatirlatma: { tr: "Tek Bayrak'tan sonra Lonca kurallarını çeliğe kazımaya hazırlanıyor.", en: "After the One Flag, the Guild is getting ready to carve its rules into steel." } }
             kronik: { tr: "Düelloyu kazandın ama {yer:kiyikent_liman|i} Çapa'ya bıraktın; Tek Bayrak kâğıtta yazılı kaldı, {yer:kiyikent_liman|de} eski bayrak inmedi.", en: "You won the duel but left the docks to the Anchor. One Banner got written down on paper. Down on {yer:kiyikent_liman}, the old flag kept flying." }
             sonraki: "@akis"
 
@@ -1730,7 +1730,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 6, korku: 4 } }
               - xp_seviye: 90
               - bayrak: "lonca_3_tamam"
-              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
+              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 }, hatirlatma: { tr: "Tek Bayrak'tan sonra Lonca kurallarını çeliğe kazımaya hazırlanıyor.", en: "After the One Flag, the Guild is getting ready to carve its rules into steel." } }
             kronik: { tr: "Mavi Çapa'nın elli avcısının koluna turuncu yamayı diktirdin; o günden sonra Çapa'nın değil, senin askerlerindi.", en: "You had every one of the Blue Anchor's fifty hunters sew on the orange patch. From that day on they weren't the Anchor's. They were yours." }
             sonraki: "@akis"
           - id: "git"
@@ -1742,7 +1742,7 @@ olaylar:
               - itibar: { lonca: 8 }
               - xp_seviye: 80
               - bayrak: "lonca_3_tamam"
-              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
+              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 }, hatirlatma: { tr: "Tek Bayrak'tan sonra Lonca kurallarını çeliğe kazımaya hazırlanıyor.", en: "After the One Flag, the Guild is getting ready to carve its rules into steel." } }
             kronik: { tr: "Yamayı Mavi Çapa'nın kürsüsünde bırakıp çıktın; ertesi sabah {yer:kiyikent_liman|in} bütün avcıları haddehanenin önünde sıraya girmişti.", en: "You left the patch on the Blue Anchor's podium and walked out. The next morning, every hunter on {yer:kiyikent_liman} was lined up outside the rolling mill." }
             sonraki: "@akis"
 
@@ -1764,7 +1764,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 4, guven: -6 } }
               - xp_seviye: 70
               - bayrak: "lonca_3_tamam"
-              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
+              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 }, hatirlatma: { tr: "Tek Bayrak'tan sonra Lonca kurallarını çeliğe kazımaya hazırlanıyor.", en: "After the One Flag, the Guild is getting ready to carve its rules into steel." } }
             kronik: { tr: "Lonca'nın sahte ihbarını Pano'nun önünde açığa çıkardın; 'Pano'da yalan olmaz' kuralı ilk kez onu yazanların aleyhine işledi.", en: "You exposed the Guild's forged tip in front of the Board. The meritocracy's own rule, 'no lies on the Board,' worked against the people who wrote it for the first time." }
             sonraki: "lonca_3_adalet"
           - id: "koz"
@@ -1776,7 +1776,7 @@ olaylar:
               - itibar: { lonca: 4 }
               - xp_seviye: 70
               - bayrak: "lonca_3_tamam"
-              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
+              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 }, hatirlatma: { tr: "Tek Bayrak'tan sonra Lonca kurallarını çeliğe kazımaya hazırlanıyor.", en: "After the One Flag, the Guild is getting ready to carve its rules into steel." } }
             kronik: { tr: "Sahte ihbarı kimseye göstermedin, bir koz olarak cebine koydun; günü gelince masaya sürecektin.", en: "You didn't show the forged tip to anyone. You pocketed it as leverage, to play when the time came." }
             sonraki: "lonca_3_adalet"
           - id: "yalniz_suclu"
@@ -1789,7 +1789,7 @@ olaylar:
               - iliski: { kaya_demir: { saygi: 3 } }
               - xp_seviye: 70
               - bayrak: "lonca_3_tamam"
-              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
+              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 }, hatirlatma: { tr: "Tek Bayrak'tan sonra Lonca kurallarını çeliğe kazımaya hazırlanıyor.", en: "After the One Flag, the Guild is getting ready to carve its rules into steel." } }
             kronik: { tr: "On dört isimlik ihbardan yalnız gerçekten suçlu olan adamı tutukladın; Lonca bir loncayı yutamadı ama bir haini yakaladı.", en: "Out of fourteen names on the tip, you arrested only the one man who was actually guilty. The Guild didn't get to swallow a guild, but it did catch a traitor." }
             sonraki: "lonca_3_adalet"
 
@@ -1825,7 +1825,7 @@ olaylar:
               - degisken: { hayatta_kalan: 2 }
               - xp_seviye: 50
               - bayrak: "lonca_3_tamam"
-              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
+              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 }, hatirlatma: { tr: "Tek Bayrak'tan sonra Lonca kurallarını çeliğe kazımaya hazırlanıyor.", en: "After the One Flag, the Guild is getting ready to carve its rules into steel." } }
             kronik: { tr: "Mavi Çapa'yı kurtarmak için {npc:kaya_demir|in} yüzüne baka baka yalan söyledin; o yalanı artık sen taşıyacaktın.", en: "To save the Blue Anchor you lied to {npc:kaya_demir|pos} face. From then on, that lie was yours to carry." }
             sonraki: "@akis"
           - id: "itiraf"
@@ -1837,7 +1837,7 @@ olaylar:
               - iliski: { kaya_demir: { guven: 4, saygi: 4, baglilik: -4 } }
               - xp_seviye: 50
               - bayrak: "lonca_3_tamam"
-              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
+              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 }, hatirlatma: { tr: "Tek Bayrak'tan sonra Lonca kurallarını çeliğe kazımaya hazırlanıyor.", en: "After the One Flag, the Guild is getting ready to carve its rules into steel." } }
             kronik: { tr: "Mavi Çapa'yı senin uyardığını {npc:kaya_demir|e} açık açık söyledin; sana uzun uzun baktı, sonra 'Hiç değilse yalan söylemedin' dedi.", en: "You told {npc:kaya_demir} straight out that you'd warned the Blue Anchor. He stared at you a long time, then said, 'At least you didn't lie.'" }
             sonraki: "@akis"
 
@@ -1883,7 +1883,7 @@ olaylar:
               - itibar: { lonca: 2, siginak: 2 }
               - xp_seviye: 50
               - bayrak: "lonca_3_tamam"
-              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
+              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 }, hatirlatma: { tr: "Tek Bayrak'tan sonra Lonca kurallarını çeliğe kazımaya hazırlanıyor.", en: "After the One Flag, the Guild is getting ready to carve its rules into steel." } }
             kronik: { tr: "Mavi Çapa'nın Reis'ine yenilip onunla masaya oturdun; {yer:kiyikent_liman} Lonca'ya kendi şartlarıyla, bir anlaşmayla katıldı.", en: "The Blue Anchor's Harbormaster beat you, and you sat down at the table with him. The Waterfront joined the Guild by treaty, on its own terms." }
             sonraki: "@akis"
           - id: "intikam"
@@ -1907,7 +1907,7 @@ olaylar:
               - ordu: { lonca_avcisi: 10 }
               - xp_seviye: 50
               - bayrak: "lonca_3_tamam"
-              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 } }
+              - tohum: { olay: "lonca_4_demir_yasa", gecikme: { min: 15, max: 30 }, kosul: { bayrak: "lonca_3_tamam", perde: 3 }, hatirlatma: { tr: "Tek Bayrak'tan sonra Lonca kurallarını çeliğe kazımaya hazırlanıyor.", en: "After the One Flag, the Guild is getting ready to carve its rules into steel." } }
             kronik: { tr: "Mavi Çapa'ya iki kez yenildin ama sonunda inadın kazandı; {yer:kiyikent_liman|de} o gün sana 'suya iki kez giren subay' adını taktılar.", en: "The Blue Anchor beat you twice, and your stubbornness won anyway. That day on {yer:kiyikent_liman}, they started calling you 'the officer who went into the water twice.'" }
             sonraki: "@akis"
 
@@ -2062,7 +2062,7 @@ olaylar:
               - xp_seviye: 80
               - bayrak: "lonca_4_tamam"
               - bayrak: "lonca_5_acik"
-              - tohum: { olay: "kaya_darbe_gecesi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "kaya_demir", bayrak_yok: "kaya_devrildi", perde: 3 } }
+              - tohum: { olay: "kaya_darbe_gecesi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "kaya_demir", bayrak_yok: "kaya_devrildi", perde: 3 }, hatirlatma: { tr: "Demir Yasa'nın yedinci maddesi Lonca'nın içinde bir şeyi kıpırdattı.", en: "The seventh article of the Iron Law stirred something up inside the Guild." } }
             kronik: { tr: "Bir annenin elinden oğlunu alıp Kule nöbetine yazdın; Demir Yasa ilk gününden kimseyi ayırmadı.", en: "You took a boy out of his mother's hands and put him on Spire rotation. From day one, the Iron Law spared no one." }
             sonraki: "@akis"
           - id: "istisna"
@@ -2074,7 +2074,7 @@ olaylar:
               - xp_seviye: 80
               - bayrak: "lonca_4_tamam"
               - bayrak: "lonca_5_acik"
-              - tohum: { olay: "kaya_darbe_gecesi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "kaya_demir", bayrak_yok: "kaya_devrildi", perde: 3 } }
+              - tohum: { olay: "kaya_darbe_gecesi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "kaya_demir", bayrak_yok: "kaya_devrildi", perde: 3 }, hatirlatma: { tr: "Demir Yasa'nın yedinci maddesi Lonca'nın içinde bir şeyi kıpırdattı.", en: "The seventh article of the Iron Law stirred something up inside the Guild." } }
             kronik: { tr: "Yedinci maddeyi daha ilk gün kullanıp bir çocuğu muaf tuttun; şehir o gün yasanın tek gerçek istisnasının sen olduğunu öğrendi.", en: "You used article seven on the very first day to exempt a kid. That day the city learned the law had only one real exception: you." }
             sonraki: "@akis"
           - id: "nutuk"
@@ -2091,7 +2091,7 @@ olaylar:
               - xp_seviye: 100
               - bayrak: "lonca_4_tamam"
               - bayrak: "lonca_5_acik"
-              - tohum: { olay: "kaya_darbe_gecesi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "kaya_demir", bayrak_yok: "kaya_devrildi", perde: 3 } }
+              - tohum: { olay: "kaya_darbe_gecesi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "kaya_demir", bayrak_yok: "kaya_devrildi", perde: 3 }, hatirlatma: { tr: "Demir Yasa'nın yedinci maddesi Lonca'nın içinde bir şeyi kıpırdattı.", en: "The seventh article of the Iron Law stirred something up inside the Guild." } }
             kronik: { tr: "Seferberliğin ilk gününde meydana kendin seslendin; liste gönüllülerle öyle hızlı doldu ki o çocuğun adı en alta düştü.", en: "On the first day of the draft you called to the square yourself. The list filled with volunteers so fast that the kid's name sank to the bottom." }
             sonraki: "@akis"
 
@@ -2116,7 +2116,7 @@ olaylar:
               - xp_seviye: 80
               - bayrak: "lonca_4_tamam"
               - bayrak: "lonca_5_acik"
-              - tohum: { olay: "kaya_darbe_gecesi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "kaya_demir", bayrak_yok: "kaya_devrildi", perde: 3 } }
+              - tohum: { olay: "kaya_darbe_gecesi", gecikme: { min: 15, max: 30 }, kosul: { npc_hayatta: "kaya_demir", bayrak_yok: "kaya_devrildi", perde: 3 }, hatirlatma: { tr: "Demir Yasa'nın yedinci maddesi Lonca'nın içinde bir şeyi kıpırdattı.", en: "The seventh article of the Iron Law stirred something up inside the Guild." } }
             kronik: { tr: "Yırttığın Demir Yasa'yı {npc:kaya_demir|le} birlikte baştan yazdın; yedinci maddenin yırtılabilir köşesi artık en güçlünün değil, şehrin elindeydi.", en: "You tore up the Iron Law and rewrote it with {npc:kaya_demir}. From then on, article seven's tearable corner belonged to the city, not to the strongest." }
             sonraki: "@akis"
           - id: "cik"
@@ -2383,7 +2383,7 @@ olaylar:
               - ordu: { lonca_avcisi: 35 }
               - xp_seviye: 150
               - iliski: { kaya_demir: { korku: 6, guven: -4 } }
-              - tohum: { olay: "kaya_soguk_firin", gecikme: { min: 8, max: 14 }, kosul: { bayrak: "kaya_hapiste", npc_hayatta: "kaya_demir", perde: 3 } }
+              - tohum: { olay: "kaya_soguk_firin", gecikme: { min: 8, max: 14 }, kosul: { bayrak: "kaya_hapiste", npc_hayatta: "kaya_demir", perde: 3 }, hatirlatma: { tr: "Darbe arifesindeki soğuk fırın hâlâ aklında.", en: "You're still thinking about the cold furnace from the night before the coup." } }
             kronik: { tr: "{npc:kaya_demir|i} devirip haddehanenin soğuk fırınına kapattın; şafağı orada bekleyecekti, Lonca ise artık senindi.", en: "You toppled {npc:kaya_demir} and locked him in the mill's cold furnace. He'd wait out the dawn in there, and the Guild was yours." }
             sonraki: "kaya_darbe_gecesi_son"
           - id: "surgun"

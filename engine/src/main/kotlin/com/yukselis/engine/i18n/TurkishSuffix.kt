@@ -26,7 +26,11 @@ object TurkishSuffix {
         }
     }
 
-    fun apply(word: String, case: Case): String {
+    /**
+     * @param possessive ad iyelik ekli bir tamlamayla bitiyor (Kule Dibi, Kasaba Çekirdeği, Sığınak Konseyi): hal eki
+     *   zamir n'siyle gelir: Kule Dibi'ne, Çekirdeği'nde, Konseyi'nden (names.yaml `iyelik: true`).
+     */
+    fun apply(word: String, case: Case, possessive: Boolean = false): String {
         if (word.isBlank()) return word
         val lower = word.trim().lowercase(TR)
         val last = lower.last()
@@ -40,6 +44,17 @@ object TurkishSuffix {
             else -> "ü"
         }
         val d = if (last in VOICELESS) "t" else "d"
+        if (possessive && endsWithVowel) {
+            val p = when (case) {
+                Case.DATIVE -> "n$two"
+                Case.ACCUSATIVE -> "n$four"
+                Case.GENITIVE -> "n${four}n"
+                Case.LOCATIVE -> "nd$two"
+                Case.ABLATIVE -> "nd${two}n"
+                Case.INSTRUMENTAL -> "yl$two"
+            }
+            return "${word.trim()}'$p"
+        }
         val suffix = when (case) {
             Case.DATIVE -> if (endsWithVowel) "y$two" else two
             Case.ACCUSATIVE -> if (endsWithVowel) "y$four" else four

@@ -407,8 +407,8 @@ olaylar:
               - ahlak: { duzen: 2, insanlik: -1 }
               - iliski: { thessar: { baglilik: 3 } }
               - xp_seviye: 30
-              - tohum: { olay: "kadimler_1_ticaret", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "thessar" } }
-              - tohum: { olay: "thessar_ticaret_masasi", gecikme: { min: 19, max: 28 }, kosul: { npc_hayatta: "thessar" } }
+              - tohum: { olay: "kadimler_1_ticaret", gecikme: { min: 3, max: 6 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Elçinin indiği günden beri balık halinin önü değişti.", en: "The front of the fish hall hasn't been the same since the day the envoy came down." } }
+              - tohum: { olay: "thessar_ticaret_masasi", gecikme: { min: 19, max: 28 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Elçinin indiği gün aranızda çizilen çizgi hâlâ orada.", en: "The line drawn between you the day the envoy came down is still there." } }
             kronik: { tr: "Elçiliğin kapısını açık tutup Kadimler'le ticarete izin verdin; {yer:kiyikent_liman} o gün alışverişe açıldı.", en: "You kept the embassy door open and let trade with the Ancients begin. That day {yer:kiyikent_liman} opened for business." }
             sonraki: "@akis"
           - id: "cizgi"
@@ -419,8 +419,8 @@ olaylar:
               - ahlak: { duzen: 3, insanlik: 2 }
               - iliski: { thessar: { saygi: 5 } }
               - xp_seviye: 30
-              - tohum: { olay: "kadimler_1_ticaret", gecikme: { min: 5, max: 9 }, kosul: { npc_hayatta: "thessar" } }
-              - tohum: { olay: "thessar_ticaret_masasi", gecikme: { min: 19, max: 28 }, kosul: { npc_hayatta: "thessar" } }
+              - tohum: { olay: "kadimler_1_ticaret", gecikme: { min: 5, max: 9 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Elçinin indiği günden beri balık halinin önü değişti.", en: "The front of the fish hall hasn't been the same since the day the envoy came down." } }
+              - tohum: { olay: "thessar_ticaret_masasi", gecikme: { min: 19, max: 28 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Elçinin indiği gün aranızda çizilen çizgi hâlâ orada.", en: "The line drawn between you the day the envoy came down is still there." } }
             kronik: { tr: "Rıhtımın taşına bir çizgi çekip elçiye \"Bunun ötesi insanlarındır\" dedin; dört kampın hepsi bunu duydu.", en: "You scratched a line into the pier stone and told the Envoy everything past it belonged to people. All four camps heard you say it." }
             sonraki: "@akis"
           - id: "sessiz"
@@ -431,8 +431,8 @@ olaylar:
               - ahlak: { duzen: -1, merhamet: 1 }
               - iliski: { thessar: { guven: 2 } }
               - xp_seviye: 30
-              - tohum: { olay: "kadimler_1_ticaret", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "thessar" } }
-              - tohum: { olay: "thessar_ticaret_masasi", gecikme: { min: 19, max: 28 }, kosul: { npc_hayatta: "thessar" } }
+              - tohum: { olay: "kadimler_1_ticaret", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Elçinin indiği günden beri balık halinin önü değişti.", en: "The front of the fish hall hasn't been the same since the day the envoy came down." } }
+              - tohum: { olay: "thessar_ticaret_masasi", gecikme: { min: 19, max: 28 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Elçinin indiği gün aranızda çizilen çizgi hâlâ orada.", en: "The line drawn between you the day the envoy came down is still there." } }
             kronik: { tr: "Elçinin inişinden sonra tek söz etmeden geri çekildin; ilk hamleyi Kadimler'e bıraktın.", en: "After the Envoy came down, you stepped back without a word and left the first move to the Ancients." }
             sonraki: "@akis"
 
@@ -485,7 +485,7 @@ olaylar:
               - ahlak: { duzen: 4, insanlik: -3, merhamet: 2 }
               - itibar: { kadimler: 8, siginak: -2 }
               - iliski: { thessar: { baglilik: 6, guven: 4 } }
-              - tohum: { olay: "kadimler_2_vergi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } } }
+              - tohum: { olay: "kadimler_2_vergi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } }, hatirlatma: { tr: "Sayım çadırının önünde verdiğin karar kapılara yansıdı.", en: "What you decided in front of the census tent has shown up on the doors." } }
             kronik: { tr: "Kadim sayım çadırının önünde nöbet tuttun; o gün iki yüz kişi ilacını aldı, adını da Defter'e verdi.", en: "You stood guard at the Ancients' tally tent. Two hundred people got their medicine that day and gave their names to the Ledger." }
             sonraki: "kadimler_1_ticaret_nobet"
           - id: "sart"
@@ -498,7 +498,7 @@ olaylar:
               - degisken: { kadim_tehdit: 3, hayatta_kalan: 2 }
               - ahlak: { merhamet: 5, duzen: 2 }
               - iliski: { thessar: { saygi: 8, baglilik: 4 } }
-              - tohum: { olay: "kadimler_2_vergi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } } }
+              - tohum: { olay: "kadimler_2_vergi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } }, hatirlatma: { tr: "Sayım çadırının önünde verdiğin karar kapılara yansıdı.", en: "What you decided in front of the census tent has shown up on the doors." } }
             kronik: { tr: "Kadimler'le ilk ticaretin şartını sen koydun: çocukların adı Defter'e yazılmayacaktı.", en: "You set the terms of the first trade with the Ancients: no child's name would go into the Ledger." }
             sonraki: "kadimler_1_ticaret_sart"
           - id: "fiyat"
@@ -547,7 +547,7 @@ olaylar:
               - ahlak: { insanlik: -6, duzen: 3 }
               - itibar: { kadimler: 8 }
               - iliski: { thessar: { baglilik: 8, guven: 4 } }
-              - tohum: { olay: "kadimler_2_vergi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } } }
+              - tohum: { olay: "kadimler_2_vergi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } }, hatirlatma: { tr: "Sayım çadırının önünde verdiğin karar kapılara yansıdı.", en: "What you decided in front of the census tent has shown up on the doors." } }
             kronik: { tr: "Vel'in gerçek bedelini bildiğin hâlde sustun; o gün iki yüz kişi neye imza attığını bilmeden kaydoldu.", en: "You knew the real price of vel and kept quiet. Two hundred people signed up that day without knowing what they'd signed." }
             sonraki: "kadimler_1_ticaret_nobet"
           - id: "yik"
@@ -577,7 +577,7 @@ olaylar:
               - degisken: { kadim_tehdit: 4, hayatta_kalan: 2 }
               - ahlak: { merhamet: 4, duzen: 2 }
               - iliski: { thessar: { baglilik: 5, saygi: 3 } }
-              - tohum: { olay: "kadimler_2_vergi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } } }
+              - tohum: { olay: "kadimler_2_vergi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } }, hatirlatma: { tr: "Sayım çadırının önünde verdiğin karar kapılara yansıdı.", en: "What you decided in front of the census tent has shown up on the doors." } }
             kronik: { tr: "Gerçeği söyledin, sonra da kalanların sırasını korudun; Defter'e giren her isim neye yazıldığını bilerek girdi.", en: "You told the truth, then guarded the people who stayed anyway. Every name that went into the Ledger went in with its eyes open." }
             sonraki: "@akis"
           - id: "kes"
@@ -913,14 +913,14 @@ olaylar:
               - bayrak: "yedi_taht_davet"
               - ahlak: { duzen: 1 }
               - iliski: { thessar: { guven: 2 } }
-              - tohum: { olay: "thessar_vassal_teklifi", gecikme: { min: 20, max: 32 }, kosul: { npc_hayatta: "thessar" } }
+              - tohum: { olay: "thessar_vassal_teklifi", gecikme: { min: 20, max: 32 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Onuncu Sabır'daki masadan sonra {npc:thessar} bir teklif hazırlıyor.", en: "After the table at the Tenth Patience, {npc:thessar} has been preparing an offer." } }
             sonraki: "@akis"
           - id: "yak"
             etiket: { tr: "Yaprağı rüzgâra bırak", en: "Let the wind take the leaf" }
             etkiler:
               - ahlak: { insanlik: 2 }
               - iliski: { thessar: { saygi: 2, baglilik: -2 } }
-              - tohum: { olay: "thessar_vassal_teklifi", gecikme: { min: 20, max: 32 }, kosul: { npc_hayatta: "thessar" } }
+              - tohum: { olay: "thessar_vassal_teklifi", gecikme: { min: 20, max: 32 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Onuncu Sabır'daki masadan sonra {npc:thessar} bir teklif hazırlıyor.", en: "After the table at the Tenth Patience, {npc:thessar} has been preparing an offer." } }
             sonraki: "@akis"
 
       - id: "thessar_ticaret_masasi_davet"
@@ -936,7 +936,7 @@ olaylar:
               - ahlak: { duzen: 2, insanlik: -1 }
               - iliski: { thessar: { baglilik: 5 } }
               - xp_seviye: 25
-              - tohum: { olay: "thessar_vassal_teklifi", gecikme: { min: 20, max: 32 }, kosul: { npc_hayatta: "thessar" } }
+              - tohum: { olay: "thessar_vassal_teklifi", gecikme: { min: 20, max: 32 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Onuncu Sabır'daki masadan sonra {npc:thessar} bir teklif hazırlıyor.", en: "After the table at the Tenth Patience, {npc:thessar} has been preparing an offer." } }
             sonraki: "@akis"
           - id: "thael"
             tur: "gosteris"
@@ -948,7 +948,7 @@ olaylar:
               - ahlak: { duzen: -1, insanlik: 2 }
               - iliski: { thessar: { saygi: 10, baglilik: 6 } }
               - xp_seviye: 35
-              - tohum: { olay: "thessar_vassal_teklifi", gecikme: { min: 20, max: 32 }, kosul: { npc_hayatta: "thessar" } }
+              - tohum: { olay: "thessar_vassal_teklifi", gecikme: { min: 20, max: 32 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Onuncu Sabır'daki masadan sonra {npc:thessar} bir teklif hazırlıyor.", en: "After the table at the Tenth Patience, {npc:thessar} has been preparing an offer." } }
             sonraki: "thessar_ticaret_masasi_thael"
           - id: "red"
             etiket: { tr: "Daveti masada bırak", en: "Leave the invitation on the table" }
@@ -956,7 +956,7 @@ olaylar:
               - ahlak: { insanlik: 2, duzen: -1 }
               - iliski: { thessar: { saygi: 3, baglilik: -3 } }
               - xp_seviye: 25
-              - tohum: { olay: "thessar_vassal_teklifi", gecikme: { min: 20, max: 32 }, kosul: { npc_hayatta: "thessar" } }
+              - tohum: { olay: "thessar_vassal_teklifi", gecikme: { min: 20, max: 32 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Onuncu Sabır'daki masadan sonra {npc:thessar} bir teklif hazırlıyor.", en: "After the table at the Tenth Patience, {npc:thessar} has been preparing an offer." } }
             sonraki: "@akis"
 
       - id: "thessar_ticaret_masasi_thael"
@@ -1022,7 +1022,7 @@ olaylar:
               - ahlak: { duzen: 5, merhamet: -2 }
               - itibar: { kadimler: 6, lonca: -4 }
               - iliski: { thessar: { baglilik: 6, guven: 4 } }
-              - tohum: { olay: "kadimler_3_muhbir", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } } }
+              - tohum: { olay: "kadimler_3_muhbir", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } }, hatirlatma: { tr: "Mevsim payının nasıl ödendiğini {npc:thessar} unutmadı.", en: "{npc:thessar} hasn't forgotten how the season's share got paid." } }
             kronik: { tr: "Kadimler'in ilk mevsim payını kristalle ödedin; {yer:kiyikent} on günlük ısısını verdi ama tek bir insanını vermedi.", en: "You paid the Ancients' first season share in crystals. {yer:kiyikent} gave up ten days of heat, but not one of its people." }
             sonraki: "kadimler_2_vergi_kristal"
           - id: "kendin"
@@ -1036,7 +1036,7 @@ olaylar:
               - ahlak: { merhamet: 6, insanlik: -5 }
               - itibar: { siginak: 6, kadimler: 6 }
               - iliski: { thessar: { baglilik: 10, saygi: 6 }, yanki: { guven: -6 } }
-              - tohum: { olay: "kadimler_3_muhbir", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } } }
+              - tohum: { olay: "kadimler_3_muhbir", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } }, hatirlatma: { tr: "Mevsim payının nasıl ödendiğini {npc:thessar} unutmadı.", en: "{npc:thessar} hasn't forgotten how the season's share got paid." } }
             kronik: { tr: "Şehrin payını kendinle ödedin; bir Kadim Okuyucu'su seni üç gün boyunca okudu ve {yer:kiyikent|den} ne tek bir kristal gitti ne tek bir insan.", en: "You paid the city's share with yourself. For three days an Ancient Reader read you, and {yer:kiyikent} didn't lose a single crystal or a single person." }
             sonraki: "kadimler_2_vergi_kendin"
           - id: "liste"
@@ -1048,7 +1048,7 @@ olaylar:
               - ahlak: { merhamet: -10, duzen: 6, insanlik: -6 }
               - itibar: { yukselenler: 6, siginak: -12, kadimler: 10 }
               - iliski: { thessar: { baglilik: 8 }, elif_sari: { guven: -25, saygi: -10 } }
-              - tohum: { olay: "kadimler_3_muhbir", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } } }
+              - tohum: { olay: "kadimler_3_muhbir", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } }, hatirlatma: { tr: "Mevsim payının nasıl ödendiğini {npc:thessar} unutmadı.", en: "{npc:thessar} hasn't forgotten how the season's share got paid." } }
             kronik: { tr: "Kadimler'e kayıtlıların yüzde birini verdin; dört yüz insan katlanmış ışıktan bir merdivenle yukarı alındı.", en: "You gave the Ancients one percent of the entered. Four hundred people were taken up a stairway of folded light." }
             sonraki: "kadimler_2_vergi_liste"
           - id: "sahte"
@@ -1062,7 +1062,7 @@ olaylar:
               - ahlak: { duzen: -5, merhamet: 3 }
               - itibar: { sessiz_ag: 6 }
               - iliski: { thessar: { guven: 2 } }
-              - tohum: { olay: "kadimler_3_muhbir", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } } }
+              - tohum: { olay: "kadimler_3_muhbir", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } }, hatirlatma: { tr: "Mevsim payının nasıl ödendiğini {npc:thessar} unutmadı.", en: "{npc:thessar} hasn't forgotten how the season's share got paid." } }
             kronik: { tr: "Kadimler'e vergiyi içi boş cam kristallerle ödedin; muhasebeci bir ırka ilk sahte faturayı sen kestin.", en: "You paid the Ancients' tax with hollow glass. You were the first to stiff a whole species of accountants." }
             sonraki: "kadimler_2_vergi_sahte"
           - id: "yari"
@@ -1076,7 +1076,7 @@ olaylar:
               - ahlak: { duzen: 3, insanlik: -1 }
               - itibar: { lonca: 4, siginak: 4 }
               - iliski: { thessar: { saygi: 10, baglilik: 4 } }
-              - tohum: { olay: "kadimler_3_muhbir", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } } }
+              - tohum: { olay: "kadimler_3_muhbir", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } }, hatirlatma: { tr: "Mevsim payının nasıl ödendiğini {npc:thessar} unutmadı.", en: "{npc:thessar} hasn't forgotten how the season's share got paid." } }
             kronik: { tr: "Kadimler'in vergisini masada yarıya indirdin, elçi de sana teşekkür etti; meclis salonundaki herkes buna tanık oldu.", en: "You cut the Ancients' tax in half at the table, and the Envoy thanked you for it. Everyone in that council chamber saw it." }
             sonraki: "kadimler_2_vergi_yari"
           - id: "red"
@@ -1234,7 +1234,7 @@ olaylar:
               - ahlak: { insanlik: 3, duzen: -2 }
               - itibar: { siginak: 4 }
               - iliski: { thessar: { saygi: 3, guven: -4 } }
-              - tohum: { olay: "thessar_vassal_teklifi", gecikme: { min: 10, max: 20 }, kosul: { npc_hayatta: "thessar" } }
+              - tohum: { olay: "thessar_vassal_teklifi", gecikme: { min: 10, max: 20 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Mevsim payından sonra dört kamp yeniden yan yana durmak zorunda.", en: "After the season's share, the four camps have to stand side by side again." } }
             kronik: { tr: "Kadim yapraklarını {yer:eski_sehir|in} ortasında yaktırdın; dumanı körfezin üstündeki gemiye kadar yükseldi.", en: "You had the Ancient leaves burned in a bonfire in the middle of {yer:eski_sehir}. The smoke rose all the way to the ship over the bay." }
             sonraki: "@akis"
 
@@ -1251,7 +1251,7 @@ olaylar:
               - degisken: { hayatta_kalan: -3 }
               - ahlak: { insanlik: 3 }
               - iliski: { thessar: { saygi: -2 } }
-              - tohum: { olay: "thessar_vassal_teklifi", gecikme: { min: 10, max: 20 }, kosul: { npc_hayatta: "thessar" } }
+              - tohum: { olay: "thessar_vassal_teklifi", gecikme: { min: 10, max: 20 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Mevsim payından sonra dört kamp yeniden yan yana durmak zorunda.", en: "After the season's share, the four camps have to stand side by side again." } }
             kronik: { tr: "Vergiyi reddettiğin gece Kadim tazıları kayıtlıları kendileri topladı; sabah kaybolanları tek tek saydın.", en: "The night you refused the tax, the Ancient hounds collected the entered on their own. In the morning, you counted the missing one by one." }
             sonraki: "@akis"
 
@@ -1362,7 +1362,7 @@ olaylar:
               - ahlak: { insanlik: 8, duzen: -6 }
               - itibar: { lonca: 6, siginak: 4, kadimler: -20 }
               - iliski: { thessar: { baglilik: -20, saygi: 8, korku: 4, guven: -15 } }
-              - tohum: { olay: "thessar_ihanet_fisiltisi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar" } }
+              - tohum: { olay: "thessar_ihanet_fisiltisi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Boyunduruk teklifine verdiğin cevaptan sonra biri seninle gizlice konuşmak istiyor.", en: "After your answer to the yoke offer, someone wants to talk to you in private." } }
             kronik: { tr: "Kadimler'in boyunduruk antlaşmasını dört kampın önünde ikiye yırttın; o gün {yer:kiyikent|in} dört kampı ilk kez aynı şeyi haykırdı.", en: "You tore the Ancients' vassal treaty in two in front of all four camps. That day, for the first time, all four camps of {yer:kiyikent} shouted the same thing." }
             sonraki: "thessar_vassal_teklifi_yirtildi"
 
@@ -1418,8 +1418,8 @@ olaylar:
               - itibar: { kadimler: 10, yukselenler: 6, siginak: -8, lonca: -6 }
               - iliski: { thessar: { baglilik: 12, guven: 6 } }
               - xp_seviye: 60
-              - tohum: { olay: "kadimler_2_vergi", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } } }
-              - tohum: { olay: "thessar_ihanet_fisiltisi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar" } }
+              - tohum: { olay: "kadimler_2_vergi", gecikme: { min: 4, max: 8 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } }, hatirlatma: { tr: "Boyunduruk teklifini ilke olarak kabul ettiğin gün kapılara bir yaprak düşmüştü.", en: "The day you agreed to the yoke in principle, a leaf landed on the doors." } }
+              - tohum: { olay: "thessar_ihanet_fisiltisi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Boyunduruk teklifine verdiğin cevaptan sonra biri seninle gizlice konuşmak istiyor.", en: "After your answer to the yoke offer, someone wants to talk to you in private." } }
             kronik: { tr: "{yer:kordon|in} kırık iskelesinde Kadimler'in boyunduruk antlaşmasını ilke olarak kabul ettin; {yer:kiyikent|den} gelenlerin kimi bağırdı, kimi ağladı, kimi alkışladı.", en: "On {yer:kordon|pos} broken pier, you accepted the Ancients' vassal treaty in principle. Some of {yer:kiyikent} shouted, some wept, some clapped." }
             sonraki: "thessar_vassal_teklifi_kabul"
           - id: "red"
@@ -1432,7 +1432,7 @@ olaylar:
               - itibar: { siginak: 6, kadimler: -10 }
               - iliski: { thessar: { baglilik: -10, saygi: 6 } }
               - xp_seviye: 60
-              - tohum: { olay: "thessar_ihanet_fisiltisi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar" } }
+              - tohum: { olay: "thessar_ihanet_fisiltisi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Boyunduruk teklifine verdiğin cevaptan sonra biri seninle gizlice konuşmak istiyor.", en: "After your answer to the yoke offer, someone wants to talk to you in private." } }
             kronik: { tr: "Kadimler'in boyunduruk teklifini reddettin; elçi bunu bir müzakere pozisyonu olarak kaydetti.", en: "You refused the Ancients' vassal offer. The Envoy filed it as a negotiating position." }
             sonraki: "thessar_vassal_teklifi_red"
           - id: "ertele"
@@ -1443,7 +1443,7 @@ olaylar:
               - ahlak: { duzen: 1, merhamet: 1 }
               - iliski: { thessar: { guven: 2 } }
               - xp_seviye: 50
-              - tohum: { olay: "thessar_ihanet_fisiltisi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar" } }
+              - tohum: { olay: "thessar_ihanet_fisiltisi", gecikme: { min: 15, max: 25 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Boyunduruk teklifine verdiğin cevaptan sonra biri seninle gizlice konuşmak istiyor.", en: "After your answer to the yoke offer, someone wants to talk to you in private." } }
             kronik: { tr: "Boyunduruk teklifine ne evet dedin ne hayır; elçi bekleyecekti, Kadimler beklemeyi insanlardan iyi bilir.", en: "You didn't say yes or no to the vassal offer. The Envoy waited, and the Ancients are better at waiting than people are." }
             sonraki: "thessar_vassal_teklifi_ertele"
 
@@ -1580,7 +1580,7 @@ olaylar:
               - ahlak: { insanlik: 6, duzen: -4, merhamet: 2 }
               - itibar: { siginak: 6, sessiz_ag: 6, kadimler: -15 }
               - iliski: { thessar: { baglilik: -12, saygi: 5 } }
-              - tohum: { olay: "thessar_ihanet_fisiltisi", gecikme: { min: 12, max: 20 }, kosul: { npc_hayatta: "thessar" } }
+              - tohum: { olay: "thessar_ihanet_fisiltisi", gecikme: { min: 12, max: 20 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Ambardaki o geceden sonra biri seninle muhafızsız konuşmak istiyor.", en: "Since that night in the warehouse, someone wants to talk to you without the guards." } }
             kronik: { tr: "Kadimler'in muhbir ağını {yer:kiyikent|e} ifşa ettin; ertesi sabah kalabalık {yer:kiyikent_liman|de} o ambarın kapısını kırdığında içeride boş bir masadan başka şey yoktu.", en: "You exposed the Ancients' informant network to all of {yer:kiyikent}. When a crowd kicked in that warehouse door on {yer:kiyikent_liman} the next morning, there was nothing inside but an empty table." }
             sonraki: "kadimler_3_muhbir_ifsa"
 
@@ -1637,7 +1637,7 @@ olaylar:
               - ahlak: { merhamet: -8, duzen: 6, insanlik: -4 }
               - itibar: { kadimler: 10 }
               - iliski: { thessar: { baglilik: 8, guven: 6 } }
-              - tohum: { olay: "kadimler_4_vassal_sozlesmesi", gecikme: { min: 18, max: 28 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } } }
+              - tohum: { olay: "kadimler_4_vassal_sozlesmesi", gecikme: { min: 18, max: 28 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } }, hatirlatma: { tr: "Defterdeki isimler meselesi bir imzaya varıyor.", en: "The business with the names in the ledger is coming down to a signature." } }
             kronik: { tr: "Gün 365'te direnecek olanların listesini Kadimler için kendi elinle yazdın; her ad bir an parlayıp söndü.", en: "You wrote the Ancients a list of who would resist on Day 365, in your own hand. Every name glowed for a second, then went out." }
             sonraki: "kadimler_3_muhbir_yazildi"
           - id: "cift"
@@ -1650,7 +1650,7 @@ olaylar:
               - degisken: { kadim_tehdit: -3 }
               - ahlak: { duzen: -4, merhamet: 4 }
               - iliski: { thessar: { guven: 4, baglilik: 3 } }
-              - tohum: { olay: "kadimler_4_vassal_sozlesmesi", gecikme: { min: 18, max: 28 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } } }
+              - tohum: { olay: "kadimler_4_vassal_sozlesmesi", gecikme: { min: 18, max: 28 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } }, hatirlatma: { tr: "Defterdeki isimler meselesi bir imzaya varıyor.", en: "The business with the names in the ledger is coming down to a signature." } }
             kronik: { tr: "Kadimler'e verdiğin direnişçi listesini ölülerle ve hiç var olmamış insanlarla doldurdun; Defter hepsini sorgusuz kaydetti.", en: "You filled the Ancients' resistance list with the dead and people who never existed. The Ledger entered every one without a question." }
             sonraki: "kadimler_3_muhbir_cift"
           - id: "kendin"
@@ -1661,7 +1661,7 @@ olaylar:
               - degisken: { kadim_tehdit: 2 }
               - ahlak: { merhamet: 5, insanlik: 3, duzen: -2 }
               - iliski: { thessar: { saygi: 12, baglilik: 6 } }
-              - tohum: { olay: "kadimler_4_vassal_sozlesmesi", gecikme: { min: 18, max: 28 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } } }
+              - tohum: { olay: "kadimler_4_vassal_sozlesmesi", gecikme: { min: 18, max: 28 }, kosul: { npc_hayatta: "thessar", gorev: { zincir_kadimler: "basla" } }, hatirlatma: { tr: "Defterdeki isimler meselesi bir imzaya varıyor.", en: "The business with the names in the ledger is coming down to a signature." } }
             kronik: { tr: "Kadimler direnecek olanları sorduğunda yaprağa yalnız kendi adını yazdın; elçi o yaprağı Okuyucu'ya vermedi, kendi ceketine koydu.", en: "When the Ancients asked who would resist, you wrote only your own name on the leaf. The Envoy didn't hand it to the Reader. He tucked it inside his own coat." }
             sonraki: "kadimler_3_muhbir_kendin"
           - id: "ifsa"
@@ -1674,7 +1674,7 @@ olaylar:
               - ahlak: { insanlik: 6, duzen: -4, merhamet: 2 }
               - itibar: { siginak: 6, sessiz_ag: 6, kadimler: -15 }
               - iliski: { thessar: { baglilik: -12, saygi: 5 } }
-              - tohum: { olay: "thessar_ihanet_fisiltisi", gecikme: { min: 12, max: 20 }, kosul: { npc_hayatta: "thessar" } }
+              - tohum: { olay: "thessar_ihanet_fisiltisi", gecikme: { min: 12, max: 20 }, kosul: { npc_hayatta: "thessar" }, hatirlatma: { tr: "Ambardaki o geceden sonra biri seninle muhafızsız konuşmak istiyor.", en: "Since that night in the warehouse, someone wants to talk to you without the guards." } }
             kronik: { tr: "Kadimler'in muhbir yaprağını da elçinin kalemini de aynı gece kırdın; ertesi gün {yer:kiyikent|in} her köşesinde o ambar konuşuluyordu.", en: "You broke the Ancients' informant leaf and the Envoy's stylus on the same night. The next day, every corner of {yer:kiyikent} was talking about that warehouse." }
             sonraki: "kadimler_3_muhbir_ifsa"
 
@@ -1828,7 +1828,7 @@ olaylar:
               - ahlak: { duzen: -6, insanlik: 4, merhamet: 2 }
               - iliski: { thessar: { baglilik: 15, guven: 15 } }
               - xp_seviye: 80
-              - tohum: { olay: "thessar_kirik_muhur", gecikme: { min: 12, max: 20 }, kosul: { npc_hayatta: "thessar", bayrak_yok: "ihanet_thessar" } }
+              - tohum: { olay: "thessar_kirik_muhur", gecikme: { min: 12, max: 20 }, kosul: { npc_hayatta: "thessar", bayrak_yok: "ihanet_thessar" }, hatirlatma: { tr: "Muhafızsız o geceden sonra bir mühür çatlamak üzere.", en: "Since that night without the guards, a seal is about to crack." } }
             kronik: { tr: "Kendi ırkına ihanete hazırlanan bir Kadim'e söz verdin. O gece Kule Dibi'nde iki sapma aynı safa geçti.", en: "You gave your word to an Ancient getting ready to betray his own kind. That night on {yer:kule_dibi}, two deviations switched to the same side." }
             sonraki: "thessar_ihanet_fisiltisi_kabul"
           - id: "ikna"
@@ -1845,7 +1845,7 @@ olaylar:
               - ahlak: { duzen: -6, insanlik: 4 }
               - iliski: { thessar: { baglilik: 15, guven: 25, saygi: 6 } }
               - xp_seviye: 80
-              - tohum: { olay: "thessar_kirik_muhur", gecikme: { min: 12, max: 20 }, kosul: { npc_hayatta: "thessar", bayrak_yok: "ihanet_thessar" } }
+              - tohum: { olay: "thessar_kirik_muhur", gecikme: { min: 12, max: 20 }, kosul: { npc_hayatta: "thessar", bayrak_yok: "ihanet_thessar" }, hatirlatma: { tr: "Muhafızsız o geceden sonra bir mühür çatlamak üzere.", en: "Since that night without the guards, a seal is about to crack." } }
             kronik: { tr: "Sana güvenmeyen bir Kadim'i, sözlerinin gücüyle yine de seni seçmeye razı ettin.", en: "An Ancient who didn't trust you chose you anyway. Your words alone talked him into it." }
             sonraki: "thessar_ihanet_fisiltisi_kabul"
           - id: "sadakat"
@@ -2029,7 +2029,7 @@ olaylar:
               - itibar: { kadimler: 20, yukselenler: 8, siginak: -15, lonca: -12, sessiz_ag: -10 }
               - iliski: { thessar: { baglilik: 15, guven: 8 } }
               - xp_seviye: 120
-              - tohum: { olay: "kadimler_5_teslim", gecikme: { min: 30, max: 40 }, kosul: { npc_hayatta: "thessar", bayrak: "kadim_vassal_imzalandi" } }
+              - tohum: { olay: "kadimler_5_teslim", gecikme: { min: 30, max: 40 }, kosul: { npc_hayatta: "thessar", bayrak: "kadim_vassal_imzalandi" }, hatirlatma: { tr: "Deri üstündeki imzanın vadesi geldi.", en: "The signature on that hide has come due." } }
             kronik: { tr: "Kadimler'in boyunduruk antlaşmasını kendi kanınla imzaladın; aynı anda B kademesinin üstündeki herkesin penceresi titredi.", en: "You signed the Ancients' vassal treaty in your own blood. In that same moment, the window of everyone above Grade B flickered." }
             sonraki: "kadimler_4_vassal_sozlesmesi_imza"
           - id: "yumusat"
@@ -2047,7 +2047,7 @@ olaylar:
               - itibar: { kadimler: 15, siginak: -6, lonca: -6 }
               - iliski: { thessar: { baglilik: 12, saygi: 10 } }
               - xp_seviye: 120
-              - tohum: { olay: "kadimler_5_teslim", gecikme: { min: 30, max: 40 }, kosul: { npc_hayatta: "thessar", bayrak: "kadim_vassal_imzalandi" } }
+              - tohum: { olay: "kadimler_5_teslim", gecikme: { min: 30, max: 40 }, kosul: { npc_hayatta: "thessar", bayrak: "kadim_vassal_imzalandi" }, hatirlatma: { tr: "Deri üstündeki imzanın vadesi geldi.", en: "The signature on that hide has come due." } }
             kronik: { tr: "İmzadan önce antlaşmanın iki maddesini yeniden yazdırdın: \"örnek\" sözcüğü silindi, kademe tavanı B'den A'ya çıktı.", en: "Before signing, you got two articles of the treaty rewritten. The word \"samples\" vanished, and the grade ceiling rose from B to A." }
             sonraki: "kadimler_4_vassal_sozlesmesi_yumusak"
           - id: "zehir"
@@ -2060,7 +2060,7 @@ olaylar:
               - ahlak: { duzen: -6, insanlik: 5 }
               - iliski: { thessar: { baglilik: 10, guven: 10 } }
               - xp_seviye: 120
-              - tohum: { olay: "kadimler_5_teslim", gecikme: { min: 30, max: 40 }, kosul: { npc_hayatta: "thessar", bayrak: "kadim_sozlesme_zehirli" } }
+              - tohum: { olay: "kadimler_5_teslim", gecikme: { min: 30, max: 40 }, kosul: { npc_hayatta: "thessar", bayrak: "kadim_sozlesme_zehirli" }, hatirlatma: { tr: "Deri üstündeki imzanın vadesi geldi.", en: "The signature on that hide has come due." } }
             kronik: { tr: "Antlaşmaya elçinin el yazısıyla gizli bir madde katıp öyle imzaladın; Okuyucular hiçbir şey fark etmedi.", en: "You signed the treaty with a hidden clause slipped in, written in the Envoy's own hand. The Readers didn't notice a thing." }
             sonraki: "kadimler_4_vassal_sozlesmesi_zehir"
           - id: "yirt"

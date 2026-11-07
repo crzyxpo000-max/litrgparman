@@ -488,7 +488,10 @@ object ContentParser {
             group.map { (id, value) ->
                 val o = value.jsonObject
                 val full = ltext(o["ad"], "$id.ad")
-                NameEntry(id, kind, full, o["kisa_ad"]?.let { ltext(it, "$id.kisa_ad") } ?: full, o.string("zamir") ?: "they")
+                NameEntry(
+                    id, kind, full, o["kisa_ad"]?.let { ltext(it, "$id.kisa_ad") } ?: full, o.string("zamir") ?: "they",
+                    possessive = o.bool("iyelik"),
+                )
             }
         }
     }
