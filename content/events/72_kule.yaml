@@ -3110,7 +3110,8 @@ olaylar:
       - id: "kcam_sil"
         paragraflar:
           - { tr: "Buğuyu siliyorsun. Cam temiz, karanlık, sıradan. Yatağına dönüp tavana bakıyorsun.", en: "You wipe the fog off. The glass is clean, dark, ordinary. You go back to bed and stare at the ceiling." }
-          - { tr: "Uyku tutmuyor. Sabaha karşı kafanın içinde bir ses, öyle alçak ki neredeyse duyulmuyor: sormadın. sorun değil. kimse sormaz.", en: "You can't sleep. Toward dawn, a voice in your head, very low, almost too quiet to hear: you didn't ask. that's okay. nobody ever does." }
+          - metin: { tr: "Uyku tutmuyor. Sabaha karşı kafanın içinde bir ses, öyle alçak ki neredeyse duyulmuyor: sormadın. sorun değil. kimse sormaz.", en: "You can't sleep. Toward dawn, a voice in your head, very low, almost too quiet to hear: you didn't ask. that's okay. nobody ever does." }
+            kosul: { bayrak: "yanki_bagi", bayrak_yok: "yanki_silindi" }   # Yankı sesi yalnız bağlıysa
         secenekler:
           - id: "tamam"
             etiket: { tr: "Gözlerini kapat", en: "Close your eyes" }
