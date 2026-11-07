@@ -796,6 +796,11 @@ class WorldEngine(
         val last = range.first + done - 1
         s = s.copy(vars = s.vars + mapOf(FAST_VARIANT_VAR to Rng(s.rngState).nextInt(3), FAST_LAST_VAR to last))
         val summary = fastClimbNotice(range.first, last, hpBefore - s.player.hp)
+        // Kat anı varsa özet sahnesinin yerini alır; özet satırı anın ilk paragrafı olur (DECISIONS #148).
+        towerMoment(s, range.first..last)?.let { (st, id) ->
+            val started = startEvent(st, id, consumeSlot = false, reminder = summary.title)
+            return Result(started.state, kept + started.notices)
+        }
         if (FAST_EVENT !in content.events) return finishSlot(s, kept + summary)
         val started = startEvent(s, FAST_EVENT, consumeSlot = false, reminder = summary.title)
         return Result(started.state, kept + started.notices)
@@ -998,13 +1003,50 @@ class WorldEngine(
      * kapı türü Günlük Görev). Sonra akışa girilir.
      */
     fun afterCombat(state: WorldState): Result {
+        val floor = state.variable(PENDING_TOWER_VAR)
         val settled = settleCombat(state)
         var s = settled.state
         // Savaşın hemen ardından zorunlu olay gelmez (STORY_FLOW c).
         if (chapterMode) s = s.copy(dayState = s.dayState.copy(forcedLock = true))
+        // Kule katı geçildi: bazen bir kat anı (DECISIONS #148).
+        if (floor > 0 && s.variable(EffectApplier.TOWER_VAR) >= floor) {
+            towerMoment(s, floor..floor)?.let { (st, id) ->
+                val started = startEvent(st, id, consumeSlot = false)
+                return Result(started.state, settled.notices + started.notices)
+            }
+        }
         val hub = enterHub(s)
         return Result(hub.state, settled.notices + hub.notices)
     }
+
+    /**
+     * Kat anı (DECISIONS #148): geçilen katlar arasında yazılmış bir "ilk temizleyen" katı varsa onun sahnesi; yoksa günde
+     * en çok bir kez [TOWER_MOMENT_CHANCE] olasılıkla `kule_an` etiketli, koşulu tutan ve son [TOWER_MOMENT_COOLDOWN]
+     * günde görülmemiş bir varyasyon. Seçilen olay ve güncellenmiş durum (görülme günleri kaydedilir) ya da null.
+     */
+    fun towerMoment(state: WorldState, floors: IntRange): Pair<WorldState, String>? {
+        val first = floors.firstNotNullOfOrNull { f ->
+            (FIRST_CLEAR_PREFIX + f).takeIf { id -> id in content.events && id !in state.dayState.seen && director.eligible(state, content.events.getValue(id), anywhere = true) }
+        }
+        if (first != null) return markMoment(state, first) to first
+        if (state.variable(MOMENT_DAY_VAR) == state.day + 1) return null
+        val rng = Rng(state.rngState)
+        val roll = rng.chance(TOWER_MOMENT_CHANCE)
+        val s = state.copy(rngState = rng.state)
+        if (!roll) return null
+        val pool = content.events.values.filter { e ->
+            MOMENT_TAG in e.tags && director.eligible(s, e, anywhere = true) &&
+                s.variable(MOMENT_SEEN_PREFIX + e.id).let { seen -> seen == 0 || s.day - (seen - 1) >= TOWER_MOMENT_COOLDOWN }
+        }.sortedBy { it.id }
+        if (pool.isEmpty()) return null
+        val r2 = Rng(s.rngState)
+        val pick = pool[r2.nextInt(pool.size)]
+        return markMoment(s.copy(rngState = r2.state), pick.id) to pick.id
+    }
+
+    /** Kat anının görülme günü (gün + 1; 0 = hiç) ve o günün anı kaydedilir. */
+    private fun markMoment(state: WorldState, id: String): WorldState =
+        state.copy(vars = state.vars + mapOf(MOMENT_SEEN_PREFIX + id to state.day + 1, MOMENT_DAY_VAR to state.day + 1))
 
     /** Savaşın akışa dönmeden önceki kapanışı: kapı ya da Kule katı ödülü, savaş Günlük Görevi. */
     private fun settleCombat(state: WorldState): Result {
@@ -1082,6 +1124,14 @@ class WorldEngine(
         const val FAST_VARIANT_VAR = "_kule_hizli_varyant"
         const val FAST_LAST_VAR = "_kule_hizli_son"
         val FAST_CLIMB_QUIET = setOf(NoticeKind.SYSTEM, NoticeKind.QUEST, NoticeKind.WARNING)
+
+        /** Kat anları (DECISIONS #148). */
+        const val MOMENT_TAG = "kule_an"
+        const val FIRST_CLEAR_PREFIX = "kule_ilk_"
+        const val MOMENT_SEEN_PREFIX = "kule_an_gun_"
+        const val MOMENT_DAY_VAR = "_kule_an_gunu"
+        const val TOWER_MOMENT_CHANCE = 0.4
+        const val TOWER_MOMENT_COOLDOWN = 30
 
         /** Saha kampı sahnesi oynanıyor; bitince gece işlenecek. */
         const val CAMP_PENDING_VAR = "_kamp_sahnesi"
