@@ -334,3 +334,15 @@ Onay (2026-11-07): **P0 + tüm P1.** Plan: (1) kod/arayüz/küçük içerik, (2)
   PERDE2_4 tablosu güncellendi). Koruyucu tarzı hedefe %42 (önce %47) — sınır, finali kazanmak; kasıtlı zorluk.
 - Gün 330'da oyuncu dünyanın ×0,9'u (önce ×1,09): seyrek savaşla geç oyun biraz yavaşladı; Gün 365 p50 seviye 1.239
   (önce 1.272). Hakimiyet hedefi (%60+) korunuyor.
+
+**DURAKLATILDI (2026-11-07, kullanım limiti) — devam noktası:**
+- Çalışma kopyasında COMMIT EDİLMEMİŞ: dalga 1 üslup+kronik uygulaması (50, 51, 52, 53, 54, 56; 3.665 tr, uslup `--kronik-en` 0 hata,
+  validateContent temiz) + `80_perde4` `p4_son_gece_ates` koşulu + `flags/71_perde3.yaml` `p3_son_gece_yakinlar`.
+  Eski hâl HEAD'de (okuma denetimi `tools/qa/show.py` HEAD'le karşılaştırır) — denetim bitmeden commit etme.
+- Okuma denetimi bitenler: `tools/qa/is/R_51.json` (11), `R_52.json` (9), `R_56.json` (9) — süzüp `tools/qa/uslup_apply.py apply` ile uygula.
+  Yarım kalan/yeniden başlatılacak: R_50, R_53, R_54 (`docs/qa/okuma_brief.md`).
+- Sonra commit; ardından dalga 2 (60, 61, 70, 71+tower, 72; dilimler `tools/qa/dilim.py 6500 …`) ve dalga 3 (55, 80, 81,
+  endings.yaml, 90_esikler+95+story/90_sistem) yazarları `docs/qa/uslup_brief.md` ile; her dalgaya okuma denetimi.
+- Dalga 2 uygulandıktan sonra P1-14'ü bitir: `71_perde3` `perde3_son` › `yakinlar` seçeneğine `bayrak: "p3_son_gece_yakinlar"`.
+- Açık P1'ler: P1-5, P1-15, P1-16, P1-17 (üslup dalgalarıyla), P1-14 (yukarıdaki adım). Sonda tarama önce/sonra tablosu.
+- Not: eşzamanlı alt ajan sınırı 20.
