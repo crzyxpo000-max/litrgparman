@@ -34,10 +34,10 @@ savas:
   artis: { agi: 2, str: 1 }
   saldiri: { tr: "Gölge Hamlesi", en: "Afterimage Cut" }
   metin:
-    tr: "{npc} bir an orada, bir an değil. {dusman} hâlâ eski yerine dönmüşken bıçak çoktan işini bitirmiş oluyor."
+    tr: "{npc} bir an orada, bir an yok. {dusman} daha onun eski yerine dönerken bıçak işini bitirmiş bile."
     en: "{npc} is there, then he isn't. {dusman} is still turning toward where he used to be when the blade finishes the job."
   duello_metin:
-    tr: "{dusman} sırıtıyor: \"Sen de hızlısın, ha? Bakalım ne kadar.\" Sonra görüş alanından çıkıyor ve böğrüne soğuk bir şey giriyor."
+    tr: "{dusman} sırıtıyor: \"Sen de hızlısın, ha? Bakalım ne kadar.\" Derken gözden kayboluyor ve böğrüne soğuk bir şey giriyor."
     en: "{dusman} grins. \"You're fast too, huh? Let's see how fast.\" Then he's out of sight, and something cold finds your ribs."
 yay_dugumleri: [rakip_iz, aras_ilk_yaris, aras_sira_meydan, aras_kule_dovusu, aras_cok_evren_kapisi, aras_s_kademe, aras_zirve_sabahi]
 ilk_unvanlar:
@@ -49,33 +49,33 @@ gorusler:
     - { tr: "\"Bırak gitsin. Zayıfı ezmek kimseyi güçlü yapmaz, sadece yorar.\"", en: "\"Let it go. Stepping on the weak doesn't make you strong. Just makes you tired.\"" }
   merhamet-:
     - { tr: "\"Arkanı dönersen yarın bıçağı o saplar. Bitir işini.\"", en: "\"Turn your back and tomorrow you're the one with a knife in you. Finish it.\"" }
-    - { tr: "\"Sen yapmazsan ben yaparım. Ve sonra herkes bunu benim yaptığımı konuşur.\"", en: "\"If you won't, I will. And then everybody'll be talking about how I did it.\"" }
+    - { tr: "\"Sen yapmazsan ben yaparım. Sonra da herkes benim yaptığımı konuşur.\"", en: "\"If you won't, I will. And then everybody'll be talking about how I did it.\"" }
   duzen+:
     - { tr: "\"Peki, kurallarla oynayalım. Kurallarla da yenerim seni.\"", en: "\"Fine, we play by the rules. I'll beat you by the rules too.\"" }
   duzen-:
     - { tr: "\"Lonca mı, Konsey mi? İkisi de seni tasmaya bağlamak istiyor. Kimseye diz çökme.\"", en: "\"Guild, Council, whatever. They all want you on a leash. Don't kneel for anybody.\"" }
-    - { tr: "\"Kural koyanlar hiç zirvede durmamış insanlar.\"", en: "\"The people writing the rules have never been anywhere near the top.\"" }
+    - { tr: "\"Kuralları koyanlar zirveyi hiç görmemiş insanlar.\"", en: "\"The people writing the rules have never been anywhere near the top.\"" }
   insanlik+:
-    - { tr: "\"Bak, ben de canavar değilim. Daha değilim. Sen de olma, yoksa seni yenmenin tadı kalmaz.\"", en: "\"Look, I'm not a monster either. Not yet. Don't you become one, or beating you won't even be fun.\"" }
+    - { tr: "\"Bak, ben de canavar değilim. Henüz değilim. Sen de olma, yoksa seni yenmenin tadı kalmaz.\"", en: "\"Look, I'm not a monster either. Not yet. Don't you become one, or beating you won't even be fun.\"" }
   insanlik-:
     - { tr: "\"Sistem bize bir merdiven verdi. Basamaklara acıyan tepeye çıkamaz.\"", en: "\"The System gave us a ladder. You don't get to the top feeling sorry for the rungs.\"" }
 guc_tepkileri:
   hayranlik:
-    - { tr: "\"Tamam. Tamam! Bu çok iyiydi. Bir dahakine ben daha iyisini yaparım ama bu çok iyiydi.\"", en: "\"Okay. Okay! That was sick. I'm doing better next time, but that was sick.\"" }
+    - { tr: "\"Tamam. Tamam! Müthişti. Bir dahakine daha iyisini ben yaparım ama bu müthişti.\"", en: "\"Okay. Okay! That was sick. I'm doing better next time, but that was sick.\"" }
   endise:
     - { tr: "\"Aramızdaki fark artık seviye değil. Sen başka bir şeye dönüşüyorsun. Bunu sevmedim.\"", en: "\"The gap between us isn't levels anymore. You're turning into something else. I don't like it.\"" }
   kiskanclik:
     - { tr: "\"Sıralamaya baktım. Sabah baktım, öğlen baktım. Hâlâ oradasın. Benim yerimde.\"", en: "\"I checked the Ranking. This morning. Lunch. You're still up there. In my spot.\"" }
-    - { tr: "\"Bir gün geçeceğim seni. Bu bir tehdit değil, takvim.\"", en: "\"One day I pass you. That's not a threat. It's a schedule.\"" }
+    - { tr: "\"Bir gün seni geçeceğim. Tehdit değil bu, takvim.\"", en: "\"One day I pass you. That's not a threat. It's a schedule.\"" }
   bagimlilik:
     - { tr: "\"Sen olmasan kime karşı koşardım? Bunu bir daha sorma, cevabını sevmeyeceksin.\"", en: "\"Without you, who would I even be racing? Don't make me say that twice.\"" }
 hafizalar:
   yarista_hile: { tr: "Yarışta önüne dal tekmeledin. Bunu unutmayacak.", en: "You kicked a branch into his path during the race. He won't forget it." }
-  kurtardi_borc: { tr: "Hayatını kurtardı; sen ödeyeceğine söz verdin.", en: "He saved your life, and you swore you'd pay it back." }
+  kurtardi_borc: { tr: "Hayatını kurtardı; sen de borcunu ödeyeceğine söz verdin.", en: "He saved your life, and you swore you'd pay it back." }
   yerden_kaldirdi: { tr: "Düelloda onu yendin, sonra elini uzattın.", en: "You beat him in the duel, then offered him a hand." }
   duelloyu_reddetti: { tr: "Meydan okumasını geri çevirdin. Korktuğunu düşünüyor.", en: "You turned down his challenge. He thinks you were scared." }
-  yarisi_kazandi: { tr: "Kapıya ondan önce vardın. Sana bir daha olmayacağını söyledi.", en: "You beat him to the Gate. He told you that would never happen again." }
-  sirtini_kolladi: { tr: "Ona arkasını kolladın, karşılığında hiçbir şey istemedin. Bunu anlamadı.", en: "You watched his back and asked for nothing. He couldn't figure that out." }
+  yarisi_kazandi: { tr: "Kapıya ondan önce vardın. Bunun bir daha olmayacağını söyledi.", en: "You beat him to the Gate. He told you that would never happen again." }
+  sirtini_kolladi: { tr: "Arkasını kolladın, karşılığında hiçbir şey istemedin. Bunu bir türlü anlayamadı.", en: "You watched his back and asked for nothing. He couldn't figure that out." }
   yerde_birakti: { tr: "Düelloda onu yere serdin ve elini uzatmadın.", en: "You put him on the ground in a duel and didn't offer him a hand." }
 kisisel_odul:
   - unvan: "nefes_nefese"

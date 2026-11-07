@@ -3,8 +3,8 @@
 dusmanlar:
   mendirek_kiskaci:
     ad: { tr: "Mendirek Kıskacı", en: "Jetty Clawback" }
-    aciklama: { tr: "Bir köpek büyüklüğünde, kabuğu tuzla kabuk bağlamış bir yengeç. Kordon'un taşlarına yapışıp yaşıyor; sürü hâlinde, dalgalarla birlikte gelir.", en: "A crab the size of a dog, its shell crusted over with salt. It lives clamped to the rocks of the Esplanade and comes in with the waves, in packs." }
-    kanca: { tr: "Taşların arasından bir tıkırtı geliyor, sonra yüz tıkırtı daha.", en: "Something clicks between the rocks. Then a hundred more somethings." }
+    aciklama: { tr: "Köpek büyüklüğünde, kabuğunu tuz kaplamış bir yengeç. Kordon'un taşlarına yapışıp yaşar; dalgalarla birlikte, sürü hâlinde gelir.", en: "A crab the size of a dog, its shell crusted over with salt. It lives clamped to the rocks of the Esplanade and comes in with the waves, in packs." }
+    kanca: { tr: "Taşların arasından bir tıkırtı geliyor, ardından yüz tıkırtı daha.", en: "Something clicks between the rocks. Then a hundred more somethings." }
     seviye: 22
     can: 340
     statlar:
@@ -19,7 +19,7 @@ dusmanlar:
     davranis: "suru"
     zeki: false
     zaaf: "simsek"
-    zaaf_metin: { tr: "Tuzlu kabuk elektriği iyi iletir. Bir şimşek bütün sürüyü aynı anda kasar.", en: "Salt-crusted shell conducts like a wire. One lightning strike locks up the whole pack at once." }
+    zaaf_metin: { tr: "Tuz kaplı kabuk elektriği iyi iletir. Tek bir şimşek bütün sürüyü aynı anda kasar.", en: "Salt-crusted shell conducts like a wire. One lightning strike locks up the whole pack at once." }
     saldirilar:
       - id: "kiskac"
         ad: { tr: "Kıskaç", en: "Pincer" }
@@ -38,7 +38,7 @@ dusmanlar:
         etiketler: ["alan"]
         durum: { etki: "kor", sans: 0.35, sure: 1 }
         bekleme: 2
-        metin: { tr: "{dusman} ağzından yüzüne kaynar bir tuzlu su fışkırtıyor.", en: "{dusman} sprays a jet of scalding brine right in your face." }
+        metin: { tr: "{dusman} ağzından yüzüne kaynar tuzlu su fışkırtıyor.", en: "{dusman} sprays a jet of scalding brine right in your face." }
     xp: 520
     kredi: 18
     ganimet: { kiskac_kabugu: 0.6, kaya_tuzu: 0.4 }
@@ -46,8 +46,8 @@ dusmanlar:
     boss: false
   vapur_safra_yilani:
     ad: { tr: "Safra Yılanı", en: "Bilge Eel" }
-    aciklama: { tr: "Batık vapurların makine dairelerinde yaşayan, kolum kalınlığında, beş metre boyunda kaygan bir yılan balığı. Karanlıkta görür, suda daha da iyi.", en: "A slick eel as thick as a man's arm and sixteen feet long that lives in the engine rooms of sunken ferries. It sees in the dark. It sees even better underwater." }
-    kanca: { tr: "Makine dairesinin camında iki göz yanıyor, sonra kayboluyor.", en: "Two eyes light up behind the engine room porthole, then they're gone." }
+    aciklama: { tr: "Batık vapurların makine dairelerinde yaşayan, kol kalınlığında, beş metre boyunda kaygan bir yılan balığı. Karanlıkta görür, suyun içinde daha da iyi.", en: "A slick eel as thick as a man's arm and sixteen feet long that lives in the engine rooms of sunken ferries. It sees in the dark. It sees even better underwater." }
+    kanca: { tr: "Makine dairesinin lombozunda iki göz yanıyor, sonra yok oluyor.", en: "Two eyes light up behind the engine room porthole, then they're gone." }
     seviye: 23
     can: 300
     statlar:
@@ -62,7 +62,7 @@ dusmanlar:
     davranis: "agresif"
     zeki: false
     zaaf: "ates"
-    zaaf_metin: { tr: "Derisi kendi yağıyla kaplı. Bir kıvılcım yeter; yağ tutuşur ve yılan kendi derisinde yanar.", en: "Its skin is coated in its own oil. One spark is all it takes. The oil catches and the eel burns in its own hide." }
+    zaaf_metin: { tr: "Derisi kendi yağıyla kaplıdır. Bir kıvılcım yeter: yağ tutuşur, yılan balığı kendi derisinin içinde yanar.", en: "Its skin is coated in its own oil. One spark is all it takes. The oil catches and the eel burns in its own hide." }
     saldirilar:
       - id: "dolanma"
         ad: { tr: "Dolanma", en: "Coil" }
@@ -89,8 +89,8 @@ dusmanlar:
     boss: false
   konteyner_taklitci:
     ad: { tr: "Konteyner Taklitçisi", en: "Container Mimic" }
-    aciklama: { tr: "Kırmızı bir yük konteyneri; kapısının ardında kilit dili şeklinde sıra sıra çelik dişler. İçine bir ikmal sandığının ışığını yansıtıp bekler.", en: "A red shipping container with row after row of steel teeth shaped like lock bolts behind its doors. It reflects a supply drop's glow up out of itself and waits." }
-    kanca: { tr: "Kırmızı konteynerin kapısı, nefes alır gibi, aralanıp kapanıyor.", en: "The red container's door eases open and shut, like it's breathing." }
+    aciklama: { tr: "Kırmızı bir yük konteyneri; kapısının ardında kilit dili biçiminde sıra sıra çelik dişler. İçinden bir ikmal sandığının ışığını yansıtır ve bekler.", en: "A red shipping container with row after row of steel teeth shaped like lock bolts behind its doors. It reflects a supply drop's glow up out of itself and waits." }
+    kanca: { tr: "Kırmızı konteynerin kapısı nefes alır gibi aralanıp kapanıyor.", en: "The red container's door eases open and shut, like it's breathing." }
     seviye: 25
     can: 620
     statlar:
@@ -105,7 +105,7 @@ dusmanlar:
     davranis: "temkinli"
     zeki: true
     zaaf: "ses"
-    zaaf_metin: { tr: "İçi boş bir çelik kutu. Yüksek bir ses içinde çınlar ve onu sersemletir.", en: "It's a hollow steel box. A loud enough noise rings around inside it and leaves it dazed." }
+    zaaf_metin: { tr: "İçi boş bir çelik kutudur. Yüksek bir ses içinde çınlayıp onu sersemletir.", en: "It's a hollow steel box. A loud enough noise rings around inside it and leaves it dazed." }
     saldirilar:
       - id: "kilit_disleri"
         ad: { tr: "Kilit Dişleri", en: "Lockbolt Teeth" }
@@ -132,8 +132,8 @@ dusmanlar:
     boss: false
   hamam_buhar_hayaleti:
     ad: { tr: "Buhar Hayaleti", en: "Steam Wraith" }
-    aciklama: { tr: "Bir kapının hamamında, kaynar buhardan yoğrulmuş insan biçimli bir şey. Dokunduğu yeri haşlar, vurulduğu yerde dağılıp yeniden toplanır.", en: "A human-shaped thing kneaded together out of scalding steam inside a Gate's bathhouse. It scalds whatever it touches, and wherever you hit it, it scatters and pulls itself back together." }
-    kanca: { tr: "Buharın içinde bir şekil doğruluyor; yüzü yok, ama sana bakıyor.", en: "A shape stands up out of the steam. It has no face, but it's looking at you." }
+    aciklama: { tr: "Bir kapının hamamında, kaynar buhardan yoğrulmuş insan biçimli bir şey. Dokunduğu yeri haşlar; vurulduğu yerden dağılır, sonra yeniden toplanır.", en: "A human-shaped thing kneaded together out of scalding steam inside a Gate's bathhouse. It scalds whatever it touches, and wherever you hit it, it scatters and pulls itself back together." }
+    kanca: { tr: "Buharın içinde bir şekil doğruluyor; yüzü yok ama sana bakıyor.", en: "A shape stands up out of the steam. It has no face, but it's looking at you." }
     seviye: 24
     can: 260
     statlar:
@@ -148,7 +148,7 @@ dusmanlar:
     davranis: "suru"
     zeki: false
     zaaf: "buz"
-    zaaf_metin: { tr: "Buhar soğukta su olur. Bir buz büyüsü onu yere döker.", en: "Steam turns to water in the cold. One frost spell and it drops to the floor as a puddle." }
+    zaaf_metin: { tr: "Buhar soğukta suya döner. Tek bir buz büyüsü onu yere döker.", en: "Steam turns to water in the cold. One frost spell and it drops to the floor as a puddle." }
     saldirilar:
       - id: "haslama"
         ad: { tr: "Haşlama", en: "Scald" }
@@ -158,7 +158,7 @@ dusmanlar:
         etiketler: ["ates", "yakin"]
         durum: { etki: "yanma", sans: 0.4, sure: 2 }
         bekleme: 0
-        metin: { tr: "{dusman} sana sarılıyor ve derin kaynar suyla haşlanıyor.", en: "{dusman} wraps itself around you and your skin scalds like you fell into a pot." }
+        metin: { tr: "{dusman} sana sarılıyor; kaynar bir kazana düşmüşsün gibi derin haşlanıyor.", en: "{dusman} wraps itself around you and your skin scalds like you fell into a pot." }
       - id: "sis_perdesi"
         ad: { tr: "Sis Perdesi", en: "Steam Screen" }
         stat: "wis"
@@ -167,7 +167,7 @@ dusmanlar:
         etiketler: ["alan"]
         durum: { etki: "kor", sans: 0.5, sure: 2 }
         bekleme: 2
-        metin: { tr: "{dusman} dağılıyor ve bütün kubbeyi beyaz bir körlükle dolduruyor.", en: "{dusman} comes apart and fills the whole dome with white blindness." }
+        metin: { tr: "{dusman} dağılıp bütün kubbeyi beyaz bir körlükle dolduruyor.", en: "{dusman} comes apart and fills the whole dome with white blindness." }
     xp: 500
     kredi: 14
     ganimet: { cam_sise: 0.4, mavi_yosun: 0.4 }
@@ -175,8 +175,8 @@ dusmanlar:
     boss: false
   balikhane_kiralik_avci:
     ad: { tr: "Kiralık Avcı", en: "Hired Gun" }
-    aciklama: { tr: "Dağ yolundan inmiş, kristal karşılığı her işi yapan bir avcı. Zırhı yamalı, topuzu çok kullanılmış, kendine güveni seviyesinden büyük.", en: "A hunter who came down the mountain highway and does any job for crystals. Patched armor, a well-used mace, and more confidence than levels." }
-    kanca: { tr: "Kiralık avcı topuzunu omzuna yaslıyor ve seni baştan aşağı süzüyor.", en: "The hired gun props his mace on his shoulder and looks you up and down." }
+    aciklama: { tr: "Dağ yolundan inmiş, kristal karşılığında her işi yapan bir avcı. Zırhı yamalı, topuzu eskimiş; kendine güveni seviyesinden büyük.", en: "A hunter who came down the mountain highway and does any job for crystals. Patched armor, a well-used mace, and more confidence than levels." }
+    kanca: { tr: "Kiralık avcı topuzunu omzuna yaslayıp seni tepeden tırnağa süzüyor.", en: "The hired gun props his mace on his shoulder and looks you up and down." }
     seviye: 24
     can: 380
     statlar:
@@ -191,7 +191,7 @@ dusmanlar:
     davranis: "agresif"
     zeki: true
     zaaf: "zihin"
-    zaaf_metin: { tr: "Kristal için dövüşüyor, inanç için değil. Korkuttuğun an topuzunu indirir.", en: "He's fighting for crystals, not for a cause. Scare him and the mace comes down." }
+    zaaf_metin: { tr: "Kristal için dövüşür, inanç için değil. Onu korkuttuğun an topuzunu indirir.", en: "He's fighting for crystals, not for a cause. Scare him and the mace comes down." }
     saldirilar:
       - id: "topuz"
         ad: { tr: "Topuz Darbesi", en: "Mace Swing" }
@@ -218,8 +218,8 @@ dusmanlar:
     boss: false
   fenerci_ana:
     ad: { tr: "Fener Balığı Ana", en: "The Lamplighter" }
-    aciklama: { tr: "Kordon'un açığında yaşayan, bir vapur büyüklüğünde fener balığı. Alnındaki sapın ucunda eski fenerin ışığını taklit eden bir ışık sallanır; ağzında batırdığı kayıkların küpeşteleri diş gibi dizilidir.", en: "A ferry-sized anglerfish living off the Esplanade. The light dangling from the stalk on its forehead fakes the old lighthouse beam, and the gunwales of every boat it ever sank are lined up in its mouth like teeth." }
-    kanca: { tr: "Işığın altında su açılıyor ve bir vapur lombozu kadar solgun bir göz yükseliyor.", en: "Under the light the water opens, and a pale eye as big as a ferry porthole rises up." }
+    aciklama: { tr: "Kordon'un açıklarında yaşayan, vapur büyüklüğünde bir fener balığı. Alnındaki sapın ucunda eski fenerin ışığını taklit eden bir ışık sallanır; batırdığı kayıkların küpeşteleri ağzında diş gibi dizilidir.", en: "A ferry-sized anglerfish living off the Esplanade. The light dangling from the stalk on its forehead fakes the old lighthouse beam, and the gunwales of every boat it ever sank are lined up in its mouth like teeth." }
+    kanca: { tr: "Işığın altında su yarılıyor ve vapur lombozu kadar iri, solgun bir göz yükseliyor.", en: "Under the light the water opens, and a pale eye as big as a ferry porthole rises up." }
     seviye: 28
     can: 1800
     statlar:
@@ -234,7 +234,7 @@ dusmanlar:
     davranis: "agresif"
     zeki: true
     zaaf: "isik"
-    zaaf_metin: { tr: "Kendi ışığından başka ışık görmemiş bir göz. Gerçek bir parıltı onu kör eder ve sapı açıkta kalır.", en: "An eye that's never seen any light but its own. One real flash blinds it and leaves the stalk wide open." }
+    zaaf_metin: { tr: "Kendi ışığından başka ışık görmemiş bir gözdür. Gerçek bir parıltı onu kör eder, sapı açıkta kalır.", en: "An eye that's never seen any light but its own. One real flash blinds it and leaves the stalk wide open." }
     saldirilar:
       - id: "kayik_disleri"
         ad: { tr: "Kayık Dişleri", en: "Gunwale Teeth" }
@@ -253,7 +253,7 @@ dusmanlar:
         etiketler: ["isik", "zihin"]
         durum: { etki: "sersemleme", sans: 0.4, sure: 1 }
         bekleme: 2
-        metin: { tr: "{dusman} ışığını yüzüne sallıyor ve bir an iskeleyi, korkuluğu, akşam vapurunu görüyorsun; bacakların oraya yürümek istiyor.", en: "{dusman} swings its light in your face, and for a second you see the terminal, the railing, the evening ferry. Your legs want to walk there." }
+        metin: { tr: "{dusman} ışığını yüzünün önünde sallıyor; bir an iskeleyi, korkuluğu, akşam vapurunu görüyorsun. Bacakların oraya yürümek istiyor.", en: "{dusman} swings its light in your face, and for a second you see the terminal, the railing, the evening ferry. Your legs want to walk there." }
     xp: 2600
     kredi: 160
     ganimet: { fener_incisi: 0.3, canavar_cekirdegi: 1.0, buyuk_iyilesme_iksiri: 0.5 }
@@ -261,7 +261,7 @@ dusmanlar:
     boss: true
     fazlar:
       - esik: 70
-        metin: { tr: "Işık söndüğü yerde yeniden yanıyor, bu kez çok daha yakında. Suyun altında başka ışıklar kıpırdıyor: yuvasındaki yumurtalar.", en: "The light goes out and comes back on, much closer this time. Other lights stir underwater: the eggs in its nest." }
+        metin: { tr: "Işık sönüp yeniden yanıyor, bu kez çok daha yakında. Suyun altında başka ışıklar kıpırdıyor: yuvasındaki yumurtalar.", en: "The light goes out and comes back on, much closer this time. Other lights stir underwater: the eggs in its nest." }
         guclenme: { str: 4, wil: 3 }
         saldiri:
           id: "dalga"
@@ -272,9 +272,9 @@ dusmanlar:
           etiketler: ["fiziksel", "alan"]
           durum: { etki: "sersemleme", sans: 0.4, sure: 1 }
           bekleme: 2
-          metin: { tr: "{dusman} kuyruğunu suya vuruyor ve bir dip dalgası seni dibe çekiyor.", en: "{dusman} slaps its tail on the water, and an undertow drags you down." }
+          metin: { tr: "{dusman} kuyruğunu suya çarpıyor; bir dip akıntısı seni aşağı çekiyor.", en: "{dusman} slaps its tail on the water, and an undertow drags you down." }
       - esik: 40
-        metin: { tr: "Ağzından bir kayık daha dökülüyor; üstünde hâlâ birinin adı yazılı. Fener Balığı Ana yuvasının önüne geçiyor ve artık geri çekilmiyor.", en: "Another boat spills out of its mouth, someone's name still painted on the hull. The Lamplighter puts itself between you and its nest and won't back off anymore." }
+        metin: { tr: "Ağzından bir kayık daha dökülüyor; üstünde hâlâ birinin adı yazılı. Fener Balığı Ana yuvasının önüne geçiyor ve artık geri adım atmıyor.", en: "Another boat spills out of its mouth, someone's name still painted on the hull. The Lamplighter puts itself between you and its nest and won't back off anymore." }
         guclenme: { end: 5, agi: 4 }
         saldiri:
           id: "yutma"
@@ -285,9 +285,9 @@ dusmanlar:
           etiketler: ["fiziksel", "yakin"]
           durum: { etki: "korku", sans: 0.4, sure: 2 }
           bekleme: 3
-          metin: { tr: "{dusman} seni bütün olarak yutmaya çalışıyor; bir anlığına karanlıksın, tuzlu ve sıcak.", en: "{dusman} tries to swallow you whole. For a moment it's all dark, salty and hot." }
+          metin: { tr: "{dusman} seni bütünüyle yutmaya çalışıyor; bir anlığına her yer karanlık, tuzlu ve sıcak.", en: "{dusman} tries to swallow you whole. For a moment it's all dark, salty and hot." }
       - esik: 15
-        metin: { tr: "Işık titriyor ve bir an fener değil, bir kadının sesi gibi bir şey çıkarıyor: denizden, uzaktan, bir ninni. Sonra yeniden yanıyor, kırmızı.", en: "The light flickers, and for a moment it isn't a lighthouse but something like a woman's voice, far out at sea, singing a lullaby. Then it burns again, red." }
+        metin: { tr: "Işık titriyor ve bir an fener ışığı değil, bir kadının sesine benzer bir şey yayıyor: denizden, uzaklardan gelen bir ninni. Sonra yeniden yanıyor, bu kez kırmızı.", en: "The light flickers, and for a moment it isn't a lighthouse but something like a woman's voice, far out at sea, singing a lullaby. Then it burns again, red." }
         guclenme: { str: 5, wil: 5, int: 4 }
         saldiri:
           id: "kirmizi_fener"
@@ -301,8 +301,8 @@ dusmanlar:
           metin: { tr: "{dusman} ışığını kırmızıya çeviriyor ve suyun yüzeyi kaynamaya başlıyor.", en: "{dusman} turns its light red and the surface of the water starts to boil." }
   hamam_gobek_tasi:
     ad: { tr: "Göbek Taşı", en: "The Hearthstone" }
-    aciklama: { tr: "Bir kapının hamamının kalbi: bir yatak büyüklüğünde, kızıl, ortasında yürek gibi atan bir çatlak. Ayağa kalktığında bütün kubbeler terler.", en: "The heart of a Gate's bathhouse: a red-hot slab as big as a bed with a crack in the middle beating like a heart. When it stands up, every dome sweats." }
-    kanca: { tr: "En büyük kubbenin altında taş bir kez nefes alıyor ve ayağa kalkıyor.", en: "Under the biggest dome the stone takes one breath and stands up." }
+    aciklama: { tr: "Bir kapının hamamının kalbi: yatak büyüklüğünde, kızgın bir taş; ortasında yürek gibi atan bir çatlak var. Ayağa kalktığında bütün kubbeler terler.", en: "The heart of a Gate's bathhouse: a red-hot slab as big as a bed with a crack in the middle beating like a heart. When it stands up, every dome sweats." }
+    kanca: { tr: "En büyük kubbenin altında taş bir kez soluyup ayağa kalkıyor.", en: "Under the biggest dome the stone takes one breath and stands up." }
     seviye: 27
     can: 1600
     statlar:
@@ -317,7 +317,7 @@ dusmanlar:
     davranis: "agresif"
     zeki: false
     zaaf: "buz"
-    zaaf_metin: { tr: "Yüz yıldır sıcak. Bir buz darbesi çatlağını genişletir; ikincisi onu ortasından ikiye ayırır.", en: "It's been hot for a hundred years. One hit of frost widens the crack. A second splits it down the middle." }
+    zaaf_metin: { tr: "Yüz yıldır kızgın. Bir buz darbesi çatlağını genişletir, ikincisi onu ortadan ikiye ayırır.", en: "It's been hot for a hundred years. One hit of frost widens the crack. A second splits it down the middle." }
     saldirilar:
       - id: "kizgin_yumruk"
         ad: { tr: "Kızgın Yumruk", en: "Searing Fist" }
@@ -344,7 +344,7 @@ dusmanlar:
     boss: true
     fazlar:
       - esik: 70
-        metin: { tr: "Çatlak genişliyor ve içinden kızıl bir ışık sızıyor. Kurnalardaki su kaynamaya başlıyor.", en: "The crack widens and a red light seeps out of it. The water in the basins starts to boil." }
+        metin: { tr: "Çatlak genişliyor, içinden kızıl bir ışık sızıyor. Kurnalardaki su kaynamaya başlıyor.", en: "The crack widens and a red light seeps out of it. The water in the basins starts to boil." }
         guclenme: { str: 3, end: 3 }
         saldiri:
           id: "kaynar_kurna"
@@ -357,7 +357,7 @@ dusmanlar:
           bekleme: 2
           metin: { tr: "{dusman} bir kurnayı söküp üstüne boşaltıyor.", en: "{dusman} rips a basin off the wall and dumps it over you." }
       - esik: 40
-        metin: { tr: "Kubbeler terliyor; damlalar yere düşmeden buhara dönüyor. Taş daha hızlı, daha sıcak.", en: "The domes are sweating, and the drops turn to steam before they hit the floor. The stone's faster now. Hotter." }
+        metin: { tr: "Kubbeler terliyor; damlalar yere düşmeden buhara dönüşüyor. Taş artık daha hızlı, daha sıcak.", en: "The domes are sweating, and the drops turn to steam before they hit the floor. The stone's faster now. Hotter." }
         guclenme: { agi: 6, int: 4 }
         saldiri:
           id: "kizil_dalga"
@@ -368,9 +368,9 @@ dusmanlar:
           etiketler: ["fiziksel", "alan"]
           durum: { etki: "sersemleme", sans: 0.4, sure: 1 }
           bekleme: 3
-          metin: { tr: "{dusman} mermeri ikiye bölüyor ve kızıl bir sıcaklık dalgası seni duvara çarpıyor.", en: "{dusman} splits the marble floor and a wave of red heat slams you into the wall." }
+          metin: { tr: "{dusman} mermeri ikiye bölüyor; kızıl bir sıcaklık dalgası seni duvara çarpıyor.", en: "{dusman} splits the marble floor and a wave of red heat slams you into the wall." }
       - esik: 15
-        metin: { tr: "Çatlak bir yürek gibi hızla atıyor. Taş son bir kez, bütün sıcaklığını tek bir noktaya topluyor.", en: "The crack is beating fast now, like a heart. The stone gathers every bit of its heat into a single point." }
+        metin: { tr: "Çatlak bir yürek gibi hızla atıyor. Taş son kez bütün sıcaklığını tek bir noktada topluyor.", en: "The crack is beating fast now, like a heart. The stone gathers every bit of its heat into a single point." }
         guclenme: { str: 5, wil: 5 }
         saldiri:
           id: "son_kor"

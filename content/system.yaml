@@ -31,7 +31,7 @@ oz_kavrayis: { tr: "Öz kavrayışı: {name} +{n}", en: "Essence insight: {name}
 oz_baglama_teklifi: { tr: "{name} Öz'ü kavrandı. Bir yuvaya bağlansın mı?", en: "Essence of {name} grasped. Bind it to a slot?" }
 oz_baglandi: { tr: "Öz bağlandı: {name}", en: "Essence bound: {name}" }
 meslek_teklifi: { tr: "Meslek seçimi", en: "Choose a Profession" }
-meslek_teklifi_satir: { tr: "Hayatta kalmak yalnızca öldürmekle olmaz. Bir zanaat seç; ayrı seviye alır.", en: "Survival isn't just killing things. Pick a trade. It levels separately." }
+meslek_teklifi_satir: { tr: "Hayatta kalmak yalnızca öldürmekten ibaret değil. Bir zanaat seç; onun seviyesi ayrı ilerler.", en: "Survival isn't just killing things. Pick a trade. It levels separately." }
 meslek_secildi: { tr: "Meslek kazanıldı: {name}", en: "Profession acquired: {name}" }
 meslek_seviye: { tr: "{name} → Seviye {level}", en: "{name} → Level {level}" }
 uretildi: { tr: "Üretildi: {name} ×{n}", en: "Crafted: {name} ×{n}" }
@@ -42,7 +42,7 @@ gunluk_odul: { tr: "+{n} serbest stat puanı · +{xp} XP", en: "Free stat points
 gunluk_kacirildi: { tr: "Günlük Görev tamamlanmadı. Ceza protokolü değerlendiriliyor.", en: "Daily Quest failed. Penalty protocol under review." }
 kabul: { tr: "Kabul et", en: "Accept" }
 red: { tr: "Reddet", en: "Decline" }
-yanki_onerisi: { tr: "[{npc:yanki|in} önerisi] Koşul sağlanmadı. Ama ben sağlarım.", en: "[{npc:yanki|pos} suggestion] Condition not met. I'll meet it for you." }
+yanki_onerisi: { tr: "[{npc:yanki|in} önerisi] Koşul sağlanmadı. ama ben sağlarım.", en: "[{npc:yanki|pos} suggestion] Condition not met. I'll meet it for you." }
 benzersiz_yetenek: { tr: "[HATA] Yetki dışı yetenek ataması", en: "[ERR] Unauthorized skill assignment" }
 benzersiz_yetenek_satir: { tr: "Bu yetenek dünyada yalnızca bir kişide var. O kişi sensin.", en: "Only one person in the world has this skill. That's you." }
 sekme_yetenekler: { tr: "[Yetenek penceresi verildi]", en: "[Skills window granted]" }
@@ -72,17 +72,17 @@ savas_iyilesme: { tr: "+{n} HP", en: "+{n} HP" }
 savas_kalkan: { tr: "Kalkan: {n}", en: "Shield: {n}" }
 savas_analiz_basarili: { tr: "Analiz: {enemy}", en: "Analysis: {enemy}" }
 savas_analiz_satir: { tr: "Gerçek seviye {level} · HP {hp}", en: "True level {level} · HP {hp}" }
-savas_analiz_basarisiz: { tr: "Analiz başarısız. {enemy} fazla hızlı hareket ediyor.", en: "Analysis failed. {enemy} won't hold still long enough." }
-savas_ortam_vurdu: { tr: "Enkaz iniyor; {target} altında kalıyor.", en: "Debris comes down. {target} gets buried under it." }
+savas_analiz_basarisiz: { tr: "Analiz başarısız. {enemy} çok hızlı, yerinde durmuyor.", en: "Analysis failed. {enemy} won't hold still long enough." }
+savas_ortam_vurdu: { tr: "Enkaz çöküyor; {target} altında kalıyor.", en: "Debris comes down. {target} gets buried under it." }
 savas_konus_anlamiyor: { tr: "{enemy} seni anlamıyor. Ya da umursamıyor.", en: "{enemy} doesn't understand you. Or doesn't care." }
 savas_konus_basarisiz: { tr: "Sözlerin boşa gidiyor. {enemy} yine üstüne geliyor.", en: "Your words go nowhere. {enemy} keeps coming." }
 savas_konus_basarili: { tr: "{enemy} geri çekiliyor ve bir daha saldırmıyor.", en: "{enemy} backs off and doesn't come at you again." }
 savas_tehdit: { tr: "Gözlerinin içine bakıyorsun. {enemy} dayanamayıp kaçıyor.", en: "You lock eyes. {enemy} breaks and runs." }
-savas_kac_boss: { tr: "Kaçış yolu yok. Buradan çıkmanın tek yolu kazanmak.", en: "There's no way out. The only exit is through it." }
-savas_kac_basarili: { tr: "Kaçtın. Gurur sonra iyileşir.", en: "You got away. Pride heals later." }
+savas_kac_boss: { tr: "Kaçacak yer yok. Buradan ancak kazanarak çıkarsın.", en: "There's no way out. The only exit is through it." }
+savas_kac_basarili: { tr: "Kaçtın. Gururun yarası sonra kapanır.", en: "You got away. Pride heals later." }
 savas_kac_basarisiz: { tr: "Yolun kesildi. Kaçamadın.", en: "They cut you off. No escape." }
 savas_esya: { tr: "{item} kullanıyorsun.", en: "You use {item}." }
-savas_esya_firlat: { tr: "{item} fırlatıyorsun; {target} tam isabet alıyor.", en: "You hurl {item}. It catches {target} square." }
+savas_esya_firlat: { tr: "{item} fırlatıyorsun; {target} tam ortasından vuruluyor.", en: "You hurl {item}. It catches {target} square." }
 savas_infaz_teklif: { tr: "{enemy} yerde. İşi bitir.", en: "{enemy} is down. Finish it." }
 savas_dustu: { tr: "{enemy} yere yığılıyor.", en: "{enemy} hits the ground and stays there." }
 savas_faz: { tr: "{enemy}: Faz {n}", en: "{enemy}: Phase {n}" }
@@ -114,23 +114,23 @@ durum_kor: { tr: "Kör", en: "Blind" }
 durum_hizlanma: { tr: "Hızlanma", en: "Haste" }
 durum_kalkan: { tr: "Kalkan", en: "Shield" }
 ortam_tavan: { tr: "Tavanı çökert", en: "Bring the ceiling down" }
-ortam_tavan_metin: { tr: "Çatlak kirişe vuruyorsun. Tavan inliyor, sonra iniyor.", en: "You hit the cracked beam. The ceiling groans, then drops." }
+ortam_tavan_metin: { tr: "Çatlak kirişe vuruyorsun; tavan önce inliyor, sonra çöküyor.", en: "You hit the cracked beam. The ceiling groans, then drops." }
 ortam_su: { tr: "Suyu kullan", en: "Use the water" }
 ortam_su_metin: { tr: "Su birikintisini sıçratıyorsun; zemin bir anda kayganlaşıyor.", en: "You kick the standing water up and the floor turns slick in a heartbeat." }
 ortam_yanici: { tr: "Yanıcı olanı ateşle", en: "Light the flammables" }
-ortam_yanici_metin: { tr: "Bir kıvılcım yeter. Her şey tutuşuyor.", en: "One spark is all it takes. Everything catches." }
+ortam_yanici_metin: { tr: "Tek kıvılcım yetiyor; her şey tutuşuyor.", en: "One spark is all it takes. Everything catches." }
 ortam_karanlik: { tr: "Karanlığa çekil", en: "Pull back into the dark" }
 ortam_karanlik_metin: { tr: "Işığın dışına çıkıyorsun. Onlar seni göremiyor; sen onları görüyorsun.", en: "You step out of the light. They can't see you. You can see them." }
 ortam_dar_gecit: { tr: "Dar geçide çekil", en: "Fall back to the choke point" }
 ortam_dar_gecit_metin: { tr: "Sırtını dar geçide veriyorsun. Artık ikiden fazlası aynı anda gelemez.", en: "You back into the choke point. No more than two can come at you at once." }
 infaz_acimasiz: { tr: "Acımasız infaz", en: "Brutal execution" }
-infaz_acimasiz_aciklama: { tr: "Bir ders olsun. Merhamet −3, İnsanlık −2.", en: "Make an example of it. Mercy −3, Humanity −2." }
-infaz_acimasiz_metin: { tr: "Yavaş yapıyorsun. {enemy} bunu son anına kadar hissediyor.", en: "You take your time. {enemy} feels every second of it." }
+infaz_acimasiz_aciklama: { tr: "Herkese ders olsun. Merhamet −3, İnsanlık −2.", en: "Make an example of it. Mercy −3, Humanity −2." }
+infaz_acimasiz_metin: { tr: "Acele etmiyorsun. {enemy} son anına kadar her saniyesini hissediyor.", en: "You take your time. {enemy} feels every second of it." }
 infaz_temiz: { tr: "Temiz bitir", en: "Clean finish" }
 infaz_temiz_aciklama: { tr: "Tek darbe, gereksiz acı yok. Düzen +2.", en: "One blow, no wasted pain. Order +2." }
 infaz_temiz_metin: { tr: "Tek ve kesin bir darbe. {enemy} acı çekmiyor.", en: "One clean, certain blow. {enemy} never feels it." }
 infaz_bagisla: { tr: "Bağışla", en: "Spare it" }
-infaz_bagisla_aciklama: { tr: "Gitmesine izin ver. Merhamet +5. Zeki olanlar bunu hatırlar.", en: "Let it go. Mercy +5. The smart ones remember." }
+infaz_bagisla_aciklama: { tr: "Bırak gitsin. Merhamet +5. Zeki olanlar bunu hatırlar.", en: "Let it go. Mercy +5. The smart ones remember." }
 infaz_bagisla_metin: { tr: "Silahını indiriyorsun. {enemy} sürünerek uzaklaşıyor.", en: "You lower your weapon. {enemy} crawls away." }
 savas_hepsi_kacti: { tr: "Hepsi kaçtı. Kazanmadın ama kaybetmedin de.", en: "They all ran. Not a win, but not a loss either." }
 akis_basladi: { tr: "Öğretici Katman artık açık. Gün akışı başladı.", en: "The Tutorial Layer is wide open now. The day loop has begun." }
@@ -139,10 +139,10 @@ akis_kamp_vakti: { tr: "Hava kararıyor. Kamp kurma vakti.", en: "It's getting d
 gun_basladi: { tr: "Gün {day} · {n} yuva", en: "Day {day} · {n} slots" }
 kapi_tasti: { tr: "Kapı taşması: {region}. Canavarlar dışarı döküldü.", en: "Gate overflow: {region}. Monsters are spilling out." }
 kapi_acildi: { tr: "Yeni kapı açıldı: {region} · Kademe {grade}", en: "A new Gate opened: {region} · Grade {grade}" }
-kapiya_girildi: { tr: "Kapıdan içeri adım atıyorsun. Arkanda kapanıyor.", en: "You step through the Gate. It seals behind you." }
+kapiya_girildi: { tr: "Kapıdan içeri adım atıyorsun; kapı arkandan kapanıyor.", en: "You step through the Gate. It seals behind you." }
 kapi_kapandi: { tr: "Kapı kapandı.", en: "Gate closed." }
 kesif_karsilasma: { tr: "{region} sessiz değil. Bir şey seni fark etti.", en: "{region} isn't quiet. Something's noticed you." }
-kesif_sakin: { tr: "Keşif sakin geçti; elin boş dönmüyorsun.", en: "The scouting run is quiet, and you don't come back empty-handed." }
+kesif_sakin: { tr: "Keşif sakin geçti, eli boş da dönmüyorsun.", en: "The scouting run is quiet, and you don't come back empty-handed." }
 antrenman_yapildi: { tr: "Kasların yanıyor. İyi.", en: "Your muscles are on fire. Good." }
 dinlenildi: { tr: "Bir süre gözden uzak durup soluklanıyorsun.", en: "You lie low for a while and catch your breath." }
 yolculuk: { tr: "Yola çıktın: {region}", en: "You head out: {region}" }
@@ -155,7 +155,7 @@ zar_basarisiz: { tr: "Kontrol başarısız (%{n})", en: "Check failed ({n}%)" }
 dikkat_esik: { tr: "[Anomali Dikkati: {n}]", en: "[Anomaly Attention: {n}]" }
 dikkat_esik_25: { tr: "Bazıları ne kadar hızlı büyüdüğünü fark etmeye başladı.", en: "People are starting to notice how fast you're growing." }
 dikkat_esik_50: { tr: "Artık yalnızca insanlar bakmıyor. Sistem de bakıyor.", en: "It's not just people watching anymore. The System is too." }
-dikkat_esik_75: { tr: "Bir üst kademeden bir şey adını öğrendi.", en: "Something from a higher Grade has learned your name." }
+dikkat_esik_75: { tr: "Üst kademeden bir şey adını öğrendi.", en: "Something from a higher Grade has learned your name." }
 dikkat_esik_100: { tr: "Görünmez olmak artık bir seçenek değil.", en: "Staying invisible is no longer an option." }
 yozlasma: { tr: "[Yozlaşma: {n}]", en: "[Corruption: {n}]" }
 aciga_vuruldu: { tr: "Gerçek seviyen görüldü: {n}", en: "Your true level is out: {n}" }
@@ -174,7 +174,7 @@ eksen_baglilik: { tr: "Bağlılık", en: "Loyalty" }
 npc_oldu: { tr: "[{npc} öldü. Sistem kaydı kapattı.]", en: "[{npc} is dead. The System has closed the file.]" }
 yoldas_katildi: { tr: "[Yoldaş: {npc} artık seninle.]", en: "[Companion joined: {npc}]" }
 yoldas_ayrildi: { tr: "[Yoldaş ayrıldı: {npc}]", en: "[Companion left: {npc}]" }
-yoldas_dolu: { tr: "[Yoldaş kapasitesi dolu. {npc} yanında yürüyemez; önce Karizma ya da kademe.]", en: "[Party is full. {npc} can't travel with you. Raise your Charisma or your Grade first.]" }
+yoldas_dolu: { tr: "[Yoldaş kapasitesi dolu. {npc} yanında yürüyemez; önce Karizma ya da kademe yükselmeli.]", en: "[Party is full. {npc} can't travel with you. Raise your Charisma or your Grade first.]" }
 npc_fraksiyon: { tr: "[Söylenti: {npc} artık {faction} saflarında.]", en: "[Word is {npc} now runs with {faction}.]" }
 npc_iz: { tr: "{npc} üzerinde iz kaldı: {name}", en: "{npc} carries a mark now: {name}" }
 iz_kazanildi: { tr: "İz: {name}", en: "Mark gained: {name}" }
@@ -183,21 +183,21 @@ ordu_katildi: { tr: "[Ordu: +{n} {name}]", en: "[Army: +{n} {name}]" }
 yoldas_tepki: { tr: "{npc}", en: "{npc}" }
 npc_kademe: { tr: "[Sistem duyurusu: {npc} {grade} kademesine evrildi.]", en: "[System announcement: {npc} has evolved to Grade {grade}.]" }
 npc_ilk_unvan: { tr: "[Sistem duyurusu: {npc} '{title}' unvanını aldı. Senden önce.]", en: "[System announcement: {npc} has claimed '{title}'. Before you.]" }
-yalan_ortaya_cikti: { tr: "{npc} bir şeyi öğrendi. Ona söylediğin yalanı.", en: "{npc} found something out. The lie you told." }
+yalan_ortaya_cikti: { tr: "{npc} bir şey öğrendi: ona söylediğin yalanı.", en: "{npc} found something out. The lie you told." }
 sira_gecti: { tr: "[Küresel Sıralama: {npc} seni geçti.]", en: "[Global Ranking: {npc} has passed you.]" }
 sira_geride: { tr: "[Küresel Sıralama: {npc} artık senin gerisinde.]", en: "[Global Ranking: {npc} is now behind you.]" }
 sira_yukseldi: { tr: "[Küresel Sıralama: yeni yerin #{n}.]", en: "[Global Ranking: you're now #{n}.]" }
-sira_gizli: { tr: "Dünya senin görünen seviyeni görüyor. Yankı gerçek verini listeden saklıyor; gerçek yerin #{n}.", en: "The world sees your public level. Echo keeps your real data off the board. Your true spot: #{n}." }
-sira_acik: { tr: "Listede gördükleri, gerçekte olduğun yer.", en: "What they see on the board is what you are." }
+sira_gizli: { tr: "Dünya yalnız görünen seviyeni biliyor. Yankı asıl verini listeden saklıyor; gerçek yerin #{n}.", en: "The world sees your public level. Echo keeps your real data off the board. Your true spot: #{n}." }
+sira_acik: { tr: "Listede gördükleri yer, gerçekte durduğun yer.", en: "What they see on the board is what you are." }
 kisisel_gorev_ad: { tr: "Kişisel görev: {npc}", en: "Personal quest: {npc}" }
 savas_npc_kanca: { tr: "{npc} karşına dikiliyor, silahı hazır. Bu sefer şaka yok.", en: "{npc} squares up across from you. No jokes this time." }
 savas_koruma: { tr: "{enemy} yaralı olana atılıyor; araya girip darbeyi sen karşılıyorsun. {ally} hâlâ ayakta.", en: "{enemy} goes for the wounded one. You step in and eat the hit yourself. {ally} stays standing." }
-savas_yoldas_kalkan: { tr: "{ally} önüne geçiyor; aranıza bir koruma örülüyor.", en: "{ally} steps in front of you and throws up a guard." }
-savas_yoldas_sifa: { tr: "{ally} yaralarına el atıyor; acı geri çekiliyor.", en: "{ally} gets hands on your wounds. The pain backs off." }
+savas_yoldas_kalkan: { tr: "{ally} önüne geçip sana siper oluyor.", en: "{ally} steps in front of you and throws up a guard." }
+savas_yoldas_sifa: { tr: "{ally} ellerini yaralarına bastırıyor; acı geri çekiliyor.", en: "{ally} gets hands on your wounds. The pain backs off." }
 savas_yoldas_iskaladi: { tr: "{ally} saldırıyor ama {target} son anda kurtuluyor.", en: "{ally} swings, but {target} slips it at the last second." }
 savas_dusman_yoldas_iskaladi: { tr: "{enemy} yana dönüp saldırıyor; {ally} kıl payı sıyrılıyor.", en: "{enemy} turns and lunges. {ally} slips it by a hair." }
 savas_dusman_yoldasa: { tr: "{enemy} yana dönüp saldırıyor. Darbe yerini buluyor; {ally} sendeliyor.", en: "{enemy} turns and strikes. It connects. {ally} staggers." }
-savas_yoldas_dustu: { tr: "{ally} yere yığılıyor. Nefes alıyor ama bu savaşta yok artık.", en: "{ally} hits the ground. Still breathing, but out of this fight." }
+savas_yoldas_dustu: { tr: "{ally} yere yığılıyor. Nefes alıyor ama bu savaştan çıktı.", en: "{ally} hits the ground. Still breathing, but out of this fight." }
 hafiza_olay_iyi: { tr: "Hatırlıyor: {event}", en: "Remembers: {event}" }
 hafiza_olay_kotu: { tr: "Unutmadı: {event}", en: "Hasn't forgotten: {event}" }
 hafiza_basari: { tr: "Gözüyle gördü: {name}", en: "Saw it firsthand: {name}" }
@@ -205,7 +205,7 @@ hafiza_yalan_acik: { tr: "Yalanını biliyor: {name}", en: "Knows you lied: {nam
 hafiza_yalan_acik_genel: { tr: "Ona yalan söylediğini biliyor.", en: "Knows you lied to them." }
 hafiza_kisisel_tamam: { tr: "En çok ihtiyaç duyduğu an yanındaydın.", en: "You were there when it mattered most." }
 hafiza_savasta_dustu: { tr: "Senin yanında yere düştü.", en: "Went down fighting at your side." }
-hafiza_duelloda_yenildi: { tr: "Sana yenildi. Bunu taşıyor.", en: "Lost to you. Still carries it." }
+hafiza_duelloda_yenildi: { tr: "Sana yenildi; bunu hâlâ içinde taşıyor.", en: "Lost to you. Still carries it." }
 hafiza_duelloda_bagislandi: { tr: "Bitirebilirdin. Bitirmedin.", en: "You could have finished it. You didn't." }
 hafiza_guc_hayranlik: { tr: "Nasıl büyüdüğünü izledi ve hayran kaldı.", en: "Watched you grow and was in awe." }
 hafiza_guc_endise: { tr: "Neye dönüştüğünden korkuyor.", en: "Worries about what you're becoming." }
@@ -220,10 +220,10 @@ rol_koruma: { tr: "Koruma", en: "Guard" }
 rol_sifa: { tr: "Şifa", en: "Healer" }
 rol_menzil: { tr: "Menzil", en: "Ranged" }
 hafiza_ihanetten_dondu: { tr: "Sana ihanet etmeye geldi; sen onu konuşarak geri getirdin.", en: "Came to betray you. You talked them back." }
-hafiza_ihanette_birakildi: { tr: "İhanet ettiği gece onu durdurmadın bile.", en: "The night they turned on you, you didn't even try to stop them." }
+hafiza_ihanette_birakildi: { tr: "İhanet ettiği gece onu durdurmaya çalışmadın bile.", en: "The night they turned on you, you didn't even try to stop them." }
 hafiza_ihanet_sorgu: { tr: "Yenildikten sonra ona neden diye sordun.", en: "After it was over, you asked them why." }
 hafiza_rica_reddedildi: { tr: "Senden tek bir şey istedi. Reddettin.", en: "Asked you for one thing. You said no." }
-hafiza_kacinca_aradi: { tr: "Kaçtığında peşinden geldin; kızmadan.", en: "When they ran, you came after them. Not angry." }
+hafiza_kacinca_aradi: { tr: "Kaçtığında peşinden geldin, hem de kızmadan.", en: "When they ran, you came after them. Not angry." }
 hafiza_ayaga_kaldirdi: { tr: "Önünde diz çöktü; sen onu ayağa kaldırdın.", en: "They knelt in front of you. You pulled them back up." }
 hafiza_kucumsendi: { tr: "Meydan okudu; sen yüzüne güldün.", en: "They challenged you. You laughed in their face." }
 hafiza_ayrilirken_ugurladi: { tr: "Ayrılırken onu kin tutmadan uğurladın.", en: "When they left, you saw them off. No grudge." }
@@ -233,7 +233,7 @@ infaz_acimasiz_npc: { tr: "Öldür", en: "Kill" }
 infaz_acimasiz_npc_aciklama: { tr: "Bunun dönüşü yok. Merhamet −3, İnsanlık −2. Ölüm kalıcıdır.", en: "There's no coming back from this. Mercy −3, Humanity −2. Death is permanent." }
 infaz_acimasiz_npc_metin: { tr: "Bitiriyorsun. {enemy} son nefesinde bile gözlerini senden ayırmıyor.", en: "You finish it. Even on the last breath, {enemy} doesn't look away from you." }
 infaz_temiz_npc: { tr: "Dövüşü bitir", en: "End the fight" }
-infaz_temiz_npc_aciklama: { tr: "Kesin bir yenilgi; canını almadan. Düzen +2.", en: "A clear defeat, no killing blow. Order +2." }
+infaz_temiz_npc_aciklama: { tr: "Kesin yenilgi, ama can almadan. Düzen +2.", en: "A clear defeat, no killing blow. Order +2." }
 infaz_temiz_npc_metin: { tr: "Son darbe silahını elinden uçuruyor. {enemy} yerde kalıyor; yenildiğini ikiniz de biliyorsunuz.", en: "Your last strike sends the weapon flying. {enemy} stays down, and you both know it's over." }
 infaz_bagisla_npc: { tr: "Elini uzat", en: "Offer a hand" }
 infaz_bagisla_npc_aciklama: { tr: "Kazandın; bunu yüzüne vurma. Merhamet +5.", en: "You won. Don't rub it in. Mercy +5." }

@@ -3,31 +3,31 @@ bilgiler:
   pazarci_maskesi:
     tur: seviye
     ad: { tr: "Pazarcının yamalı seviyesi", en: "The stall woman's patched level" }
-    aciklama: { tr: "Yürüyen merdivenin dibindeki tezgâhın sahibi Seviye 9 görünüyor. Gerçeği 4.", en: "The woman running the stall under the escalator shows Level 9. She's really a 4." }
+    aciklama: { tr: "Yürüyen merdivenin dibindeki tezgâhın sahibi Seviye 9 görünüyor; gerçeği 4.", en: "The woman running the stall under the escalator shows Level 9. She's really a 4." }
   cete_gercek_seviye:
     tur: seviye
     ad: { tr: "Gişecinin gerçek seviyesi", en: "The toll man's real level" }
-    aciklama: { tr: "Cam köprüdeki gişeci kendini 8 gösteriyor; gerçeği 5. Kardeşi 2 ve borusunu ters tutuyor.", en: "The toll man on the skybridge shows an 8. He's a 5. His kid brother's a 2, and he holds his pipe backwards." }
+    aciklama: { tr: "Cam köprüdeki gişeci kendini 8 gösteriyor, gerçeği 5. Kardeşinin seviyesi 2; borusunu da ters tutuyor.", en: "The toll man on the skybridge shows an 8. He's a 5. His kid brother's a 2, and he holds his pipe backwards." }
   hasat_kotasi:
     tur: sir
     ad: { tr: "Hedef kalış oranı: %50", en: "Target retention: 50%" }
-    aciklama: { tr: "Kayıp Eşya ofisindeki defter, Öğretici Katman için bir hedef yazıyor: insanların yarısı kalacak. Sistem kaç kişinin öleceğini biliyordu.", en: "The ledger in the Lost & Found sets a target for the Tutorial Layer: half the people stay. The System knew how many would die." }
+    aciklama: { tr: "Kayıp Eşya ofisindeki defterde Öğretici Katman için bir hedef yazılı: insanların yarısı kalacak. Sistem kaç kişinin öleceğini biliyordu.", en: "The ledger in the Lost & Found sets a target for the Tutorial Layer: half the people stay. The System knew how many would die." }
   ayrilmis_etiket:
     tur: sir
     ad: { tr: "Sana ayrılmış etiket", en: "The tag with your name on it" }
-    aciklama: { tr: "Hasat defterinin son sayfasında adının yanında boş bir etiket var. Durum: okunamadı. Etiket: ayrıldı.", en: "On the ledger's last page, there's a blank tag next to your name. Status: unreadable. Tag: reserved." }
+    aciklama: { tr: "Hasat defterinin son sayfasında adının yanındaki etiket boş. Durum: okunamadı. Etiket: ayrıldı.", en: "On the ledger's last page, there's a blank tag next to your name. Status: unreadable. Tag: reserved." }
   eczane_yalani:
     tur: yalan
     ad: { tr: "{npc:elif_sari|e} ilaçları 'yanlış saydın' dedin", en: "You told {npc:elif_sari} she 'counted wrong'" }
-    aciklama: { tr: "Eczaneden kendine pay ayırdın, sonra onun saydığını inkâr ettin.", en: "You skimmed meds from the pharmacy, then told her she miscounted." }
+    aciklama: { tr: "Eczaneden kendine pay ayırdın, sonra da onun sayımını yalanladın.", en: "You skimmed meds from the pharmacy, then told her she miscounted." }
   elenen_aday:
     tur: sir
     ad: { tr: "Aday #0412 · düzeltildi", en: "Candidate #0412 · corrected" }
-    aciklama: { tr: "Sistem sapan adayları fark ediyor ve onları başka bir insana verilen bir görevle 'düzeltiyor'. Ödül: 200 kredi.", en: "The System notices candidates who deviate, then 'corrects' them by handing someone else a quest. Reward: 200 credits." }
+    aciklama: { tr: "Sistem yoldan sapan adayları fark edip başka birine verdiği bir görevle 'düzeltiyor'. Ödül: 200 kredi.", en: "The System notices candidates who deviate, then 'corrects' them by handing someone else a quest. Reward: 200 credits." }
   tren_dongusu:
     tur: sir
     ad: { tr: "Son trenin katkısı", en: "The last train's contribution" }
-    aciklama: { tr: "İstasyondaki vagon her turda bir yolcuyu bir kapı zarına bırakıyor. Sistem buna 'katkı' diyor ve teşekkür ediyor.", en: "Every loop, the car at the station drops one passenger into a Gate membrane. The System calls it a 'contribution' and says thank you." }
+    aciklama: { tr: "İstasyondaki vagon her turda yolculardan birini bir kapı zarına bırakıyor. Sistem buna 'katkı' deyip teşekkür ediyor.", en: "Every loop, the car at the station drops one passenger into a Gate membrane. The System calls it a 'contribution' and says thank you." }
   kaya_listesi:
     tur: soylenti
     ad: { tr: "Çekirdek, Yük, Ağız", en: "Core, Load, Mouths" }
@@ -35,7 +35,7 @@ bilgiler:
   vahit_isik_hilesi:
     tur: sir
     ad: { tr: "Göğün titreşimi", en: "The sky shimmer" }
-    aciklama: { tr: "Göğün panelleri bir bildirimden iki saniye önce titriyor. {npc:vahit} 'kehanetlerinde' oraya bakıyor olabilir. Ya da olmayabilir.", en: "The sky panels shimmer two seconds before every notice. {npc:vahit} might be watching for it when he 'prophesies.' Or he might not." }
+    aciklama: { tr: "Göğün panelleri bir bildirim gelmeden iki saniye önce titrer. {npc:vahit} 'kehanet' anlarında oraya bakıyor olabilir; belki de bakmıyordur.", en: "The sky panels shimmer two seconds before every notice. {npc:vahit} might be watching for it when he 'prophesies.' Or he might not." }
   vahit_ses_yalani:
     tur: yalan
     ad: { tr: "{npc:vahit|e} 'ses bana konuşuyor' dedin", en: "You told {npc:vahit} 'the voice talks to me'" }
@@ -47,12 +47,12 @@ bilgiler:
   geri_sayim:
     tur: sir
     ad: { tr: "365'ten geriye", en: "Counting down from 365" }
-    aciklama: { tr: "Göğün panelleri görünmeyen bir bantta her gün bir azalan bir sayı yayınlıyor. Entegrasyon'un bir son tarihi var.", en: "On a band nobody can see, the sky panels broadcast a number that drops by one every day. Integration has a deadline." }
+    aciklama: { tr: "Göğün panelleri görünmez bir bantta her gün bir eksilen bir sayı yayınlıyor. Demek Entegrasyon'un bir son tarihi var.", en: "On a band nobody can see, the sky panels broadcast a number that drops by one every day. Integration has a deadline." }
   baska_ogreticiler:
     tur: soylenti
     ad: { tr: "Başka bir Öğretici", en: "Another Tutorial" }
-    aciklama: { tr: "İstasyonun anteni başka bir Öğretici Katman'dan bir insan sesi yakaladı. Yalnız değiliz.", en: "The station antenna picked up a human voice from a different Tutorial Layer. We're not alone." }
+    aciklama: { tr: "İstasyonun anteni başka bir Öğretici Katman'dan gelen bir insan sesini yakaladı. Yalnız değiliz.", en: "The station antenna picked up a human voice from a different Tutorial Layer. We're not alone." }
   sistem_adresi:
     tur: sir
     ad: { tr: "Satırındaki adres", en: "The address in your line" }
-    aciklama: { tr: "{npc:mert_kilic} senin bozuk satırında Sistem'in içinde bir yerin adresini buldu. Ona baktığında penceren bir an [Kök Erişim · kilitli] dedi.", en: "{npc:mert_kilic} found an address inside the System hidden in your glitched line. When you looked at it, your window flashed [Root Access · locked]." }
+    aciklama: { tr: "{npc:mert_kilic} senin bozuk satırında Sistem'in içindeki bir yerin adresini buldu. Adrese baktığında penceren bir an [Kök Erişim · kilitli] dedi.", en: "{npc:mert_kilic} found an address inside the System hidden in your glitched line. When you looked at it, your window flashed [Root Access · locked]." }

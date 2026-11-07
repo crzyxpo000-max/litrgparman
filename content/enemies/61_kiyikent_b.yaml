@@ -2,8 +2,8 @@
 dusmanlar:
   erimis_cekirdek:
     ad: { tr: "Erimiş Çekirdek", en: "Molten Core" }
-    aciklama: { tr: "Ocakta dövülürken çatlayan bir kapı çekirdeğinden çıkan şey: mavi camdan bir iskelet, kaburgalarının arasında dönen sıvı demir. En yakın sıcaklığa atılır.", en: "What climbs out of a Gate core that cracks on the anvil: a skeleton of blue glass with liquid iron churning between its ribs. It goes for the nearest heat." }
-    kanca: { tr: "Örsün üstünde cam kaburgalar doğruluyor ve sıvı demir bir kalp gibi atmaya başlıyor.", en: "Glass ribs pull upright on the anvil, and the liquid iron starts beating like a heart." }
+    aciklama: { tr: "Ocakta dövülürken çatlayan bir kapı çekirdeğinden çıkan şey: mavi camdan bir iskelet, kaburgalarının arasında dönen sıvı demir. En yakın ısı kaynağına atılır.", en: "What climbs out of a Gate core that cracks on the anvil: a skeleton of blue glass with liquid iron churning between its ribs. It goes for the nearest heat." }
+    kanca: { tr: "Örsün üstünde cam kaburgalar doğruluyor; sıvı demir bir kalp gibi atmaya başlıyor.", en: "Glass ribs pull upright on the anvil, and the liquid iron starts beating like a heart." }
     seviye: 22
     can: 320
     statlar:
@@ -28,7 +28,7 @@ dusmanlar:
         etiketler: ["ates", "alan"]
         durum: { etki: "yanma", sans: 0.4, sure: 2 }
         bekleme: 0
-        metin: { tr: "{dusman} kaburgalarını silkiyor ve üstüne bir avuç sıvı demir sıçrıyor.", en: "{dusman} shakes its ribs, and a fistful of liquid iron spatters across you." }
+        metin: { tr: "{dusman} kaburgalarını silkeliyor; üstüne bir avuç sıvı demir sıçrıyor.", en: "{dusman} shakes its ribs, and a fistful of liquid iron spatters across you." }
       - id: "cam_pence"
         ad: { tr: "Cam Pençe", en: "Glass Claw" }
         stat: "agi"
@@ -46,7 +46,7 @@ dusmanlar:
         etiketler: ["ates", "alan"]
         durum: { etki: "yanma", sans: 0.5, sure: 3 }
         bekleme: 2
-        metin: { tr: "{dusman} göğsünü açıyor ve içindeki ocak bütün sıcaklığını üstüne boşaltıyor.", en: "{dusman} splits its chest open, and the furnace inside dumps all its heat on you." }
+        metin: { tr: "{dusman} göğsünü açıyor; içindeki ocak bütün sıcaklığını üstüne boşaltıyor.", en: "{dusman} splits its chest open, and the furnace inside dumps all its heat on you." }
     xp: 700
     kredi: 40
     ganimet: { canavar_cekirdegi: 1.0, canli_bakir: 0.5 }
@@ -54,8 +54,8 @@ dusmanlar:
     boss: false
   kazan_yutan:
     ad: { tr: "Kazan Yutan", en: "Boilerjaw" }
-    aciklama: { tr: "Batık bir şilebin makine dairesinde doğan bir kapı canavarı. Pas dişli, kömür gözlü; kazanından uzaklaşamaz ama yanına gelen her şeyi içine çeker.", en: "A Gate monster born in a sunken freighter's engine room. Rust teeth, coal eyes. It can't stray far from its boiler, but it drags in anything that comes close." }
-    kanca: { tr: "Kazanın kapağı yavaşça açılıyor ve içeriden iki kömür göz, ardından bir sıra pas dişi beliriyor.", en: "The boiler door swings slowly open. Two coal eyes appear inside, then a row of rust teeth." }
+    aciklama: { tr: "Batık bir şilebin makine dairesinde doğmuş bir kapı canavarı. Pas dişli, kömür gözlü; kazanından uzaklaşamaz ama yanına gelen her şeyi içine çeker.", en: "A Gate monster born in a sunken freighter's engine room. Rust teeth, coal eyes. It can't stray far from its boiler, but it drags in anything that comes close." }
+    kanca: { tr: "Kazanın kapağı ağır ağır açılıyor; içeride önce iki kömür göz, ardından bir sıra pas dişi beliriyor.", en: "The boiler door swings slowly open. Two coal eyes appear inside, then a row of rust teeth." }
     seviye: 28
     kademe: "E"
     can: 620
@@ -71,7 +71,7 @@ dusmanlar:
     davranis: "agresif"
     zeki: false
     zaaf: "simsek"
-    zaaf_metin: { tr: "Gövdesi su dolu bir kazan. Bir kıvılcım ya da şimşek içindeki buharı kaynatıp onu içinden patlatır.", en: "Its body is a boiler full of water. A spark or a lightning strike flashes the steam and blows it apart from the inside." }
+    zaaf_metin: { tr: "Gövdesi su dolu bir kazandır. Bir kıvılcım ya da şimşek içindeki buharı kaynatıp onu içten patlatır.", en: "Its body is a boiler full of water. A spark or a lightning strike flashes the steam and blows it apart from the inside." }
     saldirilar:
       - id: "pas_cene"
         ad: { tr: "Pas Çene", en: "Rust Jaw" }
@@ -107,7 +107,7 @@ dusmanlar:
     boss: false
   lonca_icracisi:
     ad: { tr: "Lonca İcracısı", en: "Guild Enforcer" }
-    aciklama: { tr: "Demir Lonca'nın kalkanlı, coplu düzen bekçisi. Kapılarda değil sokaklarda savaşmak için yetiştirilmiş; sırayla ve birlikte hareket eder.", en: "The Iron Guild's shield-and-baton muscle. Trained to fight in streets, not Gates. Moves in formation, together." }
+    aciklama: { tr: "Demir Lonca'nın kalkanlı, coplu düzen bekçisi. Kapılarda değil sokaklarda dövüşmek için yetiştirilmiştir; sıra hâlinde, birlikte hareket eder.", en: "The Iron Guild's shield-and-baton muscle. Trained to fight in streets, not Gates. Moves in formation, together." }
     kanca: { tr: "Kalkanlar birbirine kenetleniyor ve coplar aynı anda kalkanlara vuruyor: bir, iki, bir, iki.", en: "Shields lock edge to edge and the batons hit them in unison: one, two, one, two." }
     seviye: 24
     can: 360
@@ -123,7 +123,7 @@ dusmanlar:
     davranis: "temkinli"
     zeki: true
     zaaf: "zihin"
-    zaaf_metin: { tr: "Emir alarak dövüşüyor. Yüzbaşısının sesi kesilirse sıra bozulur.", en: "He fights on orders. Cut off his captain's voice and the formation falls apart." }
+    zaaf_metin: { tr: "Emirle dövüşür. Yüzbaşısının sesi kesilirse sıra dağılır.", en: "He fights on orders. Cut off his captain's voice and the formation falls apart." }
     saldirilar:
       - id: "cop"
         ad: { tr: "Cop Darbesi", en: "Baton Strike" }
@@ -133,7 +133,7 @@ dusmanlar:
         etiketler: ["fiziksel", "yakin"]
         durum: { etki: "sersemleme", sans: 0.2, sure: 1 }
         bekleme: 0
-        metin: { tr: "{dusman} copunu kısa ve sert bir yayla kafana indiriyor.", en: "{dusman} brings his baton down on your head in a short, hard arc." }
+        metin: { tr: "{dusman} copunu kısa, sert bir yayla kafana indiriyor.", en: "{dusman} brings his baton down on your head in a short, hard arc." }
       - id: "kalkan_hamlesi"
         ad: { tr: "Kalkan Hamlesi", en: "Shield Rush" }
         stat: "end"
@@ -158,7 +158,7 @@ dusmanlar:
     boss: false
   secilmis_muhafiz:
     ad: { tr: "Seçilmiş Muhafız", en: "Chosen Guard" }
-    aciklama: { tr: "Yükselenler'in beyaz giysili muhafızı. Beşik'ten bir yetenekle çıkmış ve o günden beri Sistem'in kendisini seçtiğine inanıyor.", en: "An Ascended guard in white. Came out of the Cradle with a skill and has believed ever since that the System picked him personally." }
+    aciklama: { tr: "Yükselenler'in beyaz giysili muhafızı. Beşik'ten bir yetenekle çıkmış; o günden beri Sistem'in bizzat kendisini seçtiğine inanır.", en: "An Ascended guard in white. Came out of the Cradle with a skill and has believed ever since that the System picked him personally." }
     kanca: { tr: "Beyaz giysili muhafız kılıcını çekiyor; kabzasındaki göz işareti hafifçe parlıyor.", en: "The guard in white draws his sword. The eye sigil on the hilt glows faintly." }
     seviye: 25
     can: 380
@@ -174,7 +174,7 @@ dusmanlar:
     davranis: "agresif"
     zeki: true
     zaaf: "isik"
-    zaaf_metin: { tr: "İnancıyla dövüşüyor. Güçlü bir ışık onu Sistem'in ona baktığına inandırır ve bir an duraklar.", en: "He fights on faith. A bright enough light convinces him the System is looking at him, and he freezes for a beat." }
+    zaaf_metin: { tr: "İnancıyla dövüşür. Güçlü bir ışık ona Sistem'in kendisine baktığını düşündürür ve bir an duraksar.", en: "He fights on faith. A bright enough light convinces him the System is looking at him, and he freezes for a beat." }
     saldirilar:
       - id: "kutsal_kesik"
         ad: { tr: "Kutsal Kesik", en: "Anointed Cut" }
@@ -193,7 +193,7 @@ dusmanlar:
         etiketler: ["zihin", "ses"]
         durum: { etki: "korku", sans: 0.35, sure: 2 }
         bekleme: 2
-        metin: { tr: "{dusman} sana parmağını uzatıp tek kelime söylüyor: \"Yakıt.\" Kelime içine işliyor.", en: "{dusman} points at you and says one word: \"Fuel.\" The word gets under your skin." }
+        metin: { tr: "{dusman} parmağıyla seni gösterip tek bir sözcük söylüyor: \"Yakıt.\" Sözcük içine işliyor.", en: "{dusman} points at you and says one word: \"Fuel.\" The word gets under your skin." }
     xp: 680
     kredi: 35
     ganimet: { kucuk_iyilesme_iksiri: 0.4, canli_bakir: 0.3 }
@@ -201,8 +201,8 @@ dusmanlar:
     boss: false
   sirali_avci:
     ad: { tr: "Sıralı Avcı", en: "Ranked Hunter" }
-    aciklama: { tr: "Küresel Sıralama'nın ilk yüzünde adı yazılı bir avcı. Sayısının bir kısmı unvandan, bir kısmı da kimsenin ona karşı çıkmamasından geliyor.", en: "A hunter whose name is on the Global Ranking's top hundred. Part of his number comes from a title. The rest comes from nobody ever pushing back." }
-    kanca: { tr: "Karanlık talim sahasında biri kılıcını omzuna yaslıyor ve gülüyor: \"Sayın büyüdü mü?\"", en: "Somebody on the dark training ground rests a sword on his shoulder and laughs. \"Your number grow up yet?\"" }
+    aciklama: { tr: "Küresel Sıralama'nın ilk yüzünde adı yazılı bir avcı. Sayısının bir kısmı unvanından, kalanı kimsenin ona karşı çıkmamasından gelir.", en: "A hunter whose name is on the Global Ranking's top hundred. Part of his number comes from a title. The rest comes from nobody ever pushing back." }
+    kanca: { tr: "Karanlık talim sahasında biri kılıcını omzuna yaslamış gülüyor: \"Sayın büyüdü mü?\"", en: "Somebody on the dark training ground rests a sword on his shoulder and laughs. \"Your number grow up yet?\"" }
     seviye: 26
     can: 400
     statlar:
@@ -217,7 +217,7 @@ dusmanlar:
     davranis: "agresif"
     zeki: true
     zaaf: "goz"
-    zaaf_metin: { tr: "Her vuruştan önce tahtadaki adını düşünür gibi bir an gözlerini kısıyor. O an açık.", en: "Before every swing he squints for a beat, like he's picturing his name on the board. That beat's an opening." }
+    zaaf_metin: { tr: "Her vuruştan önce, tahtadaki adını düşünüyormuş gibi bir an gözlerini kısar. O an açık verir.", en: "Before every swing he squints for a beat, like he's picturing his name on the board. That beat's an opening." }
     saldirilar:
       - id: "gosteris_kesigi"
         ad: { tr: "Gösteriş Kesiği", en: "Showboat Slash" }
@@ -226,7 +226,7 @@ dusmanlar:
         kat: 0.7
         etiketler: ["fiziksel", "yakin"]
         bekleme: 0
-        metin: { tr: "{dusman} kılıcını gereğinden geniş bir yayla, seyircisi varmış gibi savuruyor.", en: "{dusman} swings his sword in a wider arc than he needs, like there's an audience." }
+        metin: { tr: "{dusman} kılıcını, seyircisi varmış gibi gereğinden geniş bir yayla savuruyor.", en: "{dusman} swings his sword in a wider arc than he needs, like there's an audience." }
       - id: "kum_firlatma"
         ad: { tr: "Kum Fırlatma", en: "Sand Toss" }
         stat: "agi"
@@ -243,8 +243,8 @@ dusmanlar:
     boss: false
   besik_bekcisi:
     ad: { tr: "Beşik Bekçisi", en: "The Cradle Keeper" }
-    aciklama: { tr: "Tepe'deki Beşik kapısının sakini. Çocuk boyutunda kemiklerden örülmüş uzun kollu bir şey; Yükselenler onu çekirdekle besliyor, ya da beslemiyor.", en: "The thing that lives in the Heights' Cradle Gate. Long-armed, woven out of child-sized bones. The Ascended feed it cores. Or they don't." }
-    kanca: { tr: "Kuyunun dibindeki kemikler kıpırdıyor ve uzun, ince bir kol yukarı, sana doğru uzanıyor.", en: "The bones at the bottom of the well shift, and one long, thin arm reaches up toward you." }
+    aciklama: { tr: "Tepe'deki Beşik kapısının sakini. Çocuk boyu kemiklerden örülmüş, uzun kollu bir şey; Yükselenler onu çekirdekle besliyor, belki de beslemiyor.", en: "The thing that lives in the Heights' Cradle Gate. Long-armed, woven out of child-sized bones. The Ascended feed it cores. Or they don't." }
+    kanca: { tr: "Kuyunun dibindeki kemikler kıpırdıyor; uzun, ince bir kol yukarıya, sana doğru uzanıyor.", en: "The bones at the bottom of the well shift, and one long, thin arm reaches up toward you." }
     seviye: 24
     kademe: "E"
     can: 700
@@ -260,7 +260,7 @@ dusmanlar:
     davranis: "agresif"
     zeki: false
     zaaf: "ses"
-    zaaf_metin: { tr: "Ninni gibi bir uğultuyla avlanıyor. Yüksek bir ses ritmini bozar; bir an neyin peşinde olduğunu unutur.", en: "It hunts with a hum like a lullaby. A loud enough noise breaks the rhythm, and for a second it forgets what it was chasing." }
+    zaaf_metin: { tr: "Ninniye benzer bir uğultuyla avlanır. Yüksek bir ses ritmini bozar; bir an neyin peşinde olduğunu unutur.", en: "It hunts with a hum like a lullaby. A loud enough noise breaks the rhythm, and for a second it forgets what it was chasing." }
     saldirilar:
       - id: "uzun_kol"
         ad: { tr: "Uzun Kol", en: "Long Reach" }
@@ -279,7 +279,7 @@ dusmanlar:
         etiketler: ["ses", "zihin"]
         durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
         bekleme: 2
-        metin: { tr: "{dusman} bir ninni mırıldanıyor; çocukluğundan bir ses, göz kapakların ağırlaşıyor.", en: "{dusman} hums a lullaby, a sound out of your own childhood, and your eyelids get heavy." }
+        metin: { tr: "{dusman} bir ninni mırıldanıyor; çocukluğundan kalma bir ses. Göz kapakların ağırlaşıyor.", en: "{dusman} hums a lullaby, a sound out of your own childhood, and your eyelids get heavy." }
     xp: 1400
     kredi: 120
     ganimet: { canavar_cekirdegi: 1.0, kemik_boynuz: 0.5, buyuk_iyilesme_iksiri: 0.4 }
@@ -287,7 +287,7 @@ dusmanlar:
     boss: true
     fazlar:
       - esik: 70
-        metin: { tr: "Kuyunun duvarlarındaki kemikler gevşiyor ve bekçinin gövdesine katılıyor. Daha büyük, daha uzun; artık kuyunun ağzına uzanabiliyor.", en: "The bones in the well's walls come loose and join the keeper's body. Bigger, longer. Now it can reach the mouth of the well." }
+        metin: { tr: "Kuyunun duvarlarındaki kemikler gevşeyip bekçinin gövdesine katılıyor. Daha büyük, daha uzun; artık kuyunun ağzına erişebiliyor.", en: "The bones in the well's walls come loose and join the keeper's body. Bigger, longer. Now it can reach the mouth of the well." }
         guclenme: { str: 4, end: 3 }
         saldiri:
           id: "kemik_yagmuru"
@@ -300,7 +300,7 @@ dusmanlar:
           bekleme: 3
           metin: { tr: "{dusman} kuyunun duvarlarını sarsıyor; küçük kemikler üstüne yağmur gibi iniyor.", en: "{dusman} shakes the walls of the well, and small bones come down on you like rain." }
       - esik: 40
-        metin: { tr: "Bekçinin ninnisi değişiyor; artık senin değil, kapının ağzında bekleyen annelerin seslerini taklit ediyor.", en: "The keeper's lullaby changes. Now it isn't your voice it's mimicking. It's the mothers waiting at the mouth of the Gate." }
+        metin: { tr: "Bekçinin ninnisi değişiyor; artık senin sesini değil, kapının ağzında bekleyen annelerin seslerini taklit ediyor.", en: "The keeper's lullaby changes. Now it isn't your voice it's mimicking. It's the mothers waiting at the mouth of the Gate." }
         guclenme: { agi: 4, wil: 4 }
         saldiri:
           id: "anne_sesi"
@@ -313,7 +313,7 @@ dusmanlar:
           bekleme: 3
           metin: { tr: "{dusman} kuyunun dibinden bir anne sesiyle seni çağırıyor; bir an hangi yöne döneceğini bilemiyorsun.", en: "{dusman} calls to you from the bottom of the well in a mother's voice, and for a second you don't know which way to turn." }
       - esik: 15
-        metin: { tr: "Kemikler dağılmaya başlıyor. Bekçi son kez toplanıyor, kuyunun bütün karanlığını üstüne çekerek; artık ninni yok, yalnızca açlık.", en: "The bones start coming apart. The keeper pulls itself together one last time, dragging all the well's darkness over itself. No more lullaby. Just hunger." }
+        metin: { tr: "Kemikler dağılmaya başlıyor. Bekçi kuyunun bütün karanlığını üstüne çekerek son kez toparlanıyor; artık ninni yok, yalnızca açlık.", en: "The bones start coming apart. The keeper pulls itself together one last time, dragging all the well's darkness over itself. No more lullaby. Just hunger." }
         guclenme: { str: 4, agi: 3, end: 3 }
         saldiri:
           id: "son_sarilis"
@@ -324,4 +324,4 @@ dusmanlar:
           etiketler: ["fiziksel", "yakin", "karanlik"]
           durum: { etki: "sersemleme", sans: 0.45, sure: 1 }
           bekleme: 3
-          metin: { tr: "{dusman} bütün uzun kollarıyla sana sarılıyor ve sıkıyor; kemikler kemiklerine karşı gıcırdıyor.", en: "{dusman} wraps every long arm it has around you and squeezes. Bone grinds against bone." }
+          metin: { tr: "{dusman} bütün uzun kollarıyla sana sarılıp sıkıyor; kemikler kemiklerine sürtünüp gıcırdıyor.", en: "{dusman} wraps every long arm it has around you and squeezes. Bone grinds against bone." }

@@ -8,14 +8,14 @@ siniflar:
     yetenek: "agir_darbe"
   atici:
     ad: { tr: "Atıcı", en: "Marksman" }
-    aciklama: { tr: "Tehdidi yaklaşmadan bitirmeyi seçen birey. Mesafe, hayatta kalmanın en ucuz biçimidir.", en: "An individual who ends threats before they get close. Distance is the cheapest form of survival." }
+    aciklama: { tr: "Tehdidi daha yaklaşmadan bitiren birey. Mesafe hayatta kalmanın en ucuz yoludur.", en: "An individual who ends threats before they get close. Distance is the cheapest form of survival." }
     tur: "temel"
     egilim: "menzilli"
     artis: { per: 2, agi: 1 }
     yetenek: "alev_oku"
   buyu_ciragi:
     ad: { tr: "Büyü Çırağı", en: "Arcane Apprentice" }
-    aciklama: { tr: "Manayı ilk kez bilinçli olarak büken birey. Henüz çırak; Sistem sabırlı değildir.", en: "An individual who has bent mana on purpose for the first time. Still an apprentice. The System is not a patient teacher." }
+    aciklama: { tr: "Manayı ilk kez bilerek büken birey. Henüz çıraktır; Sistem ise sabırlı değildir.", en: "An individual who has bent mana on purpose for the first time. Still an apprentice. The System is not a patient teacher." }
     tur: "temel"
     egilim: "buyu"
     artis: { int: 2, wis: 1 }
@@ -29,21 +29,21 @@ siniflar:
     yetenek: "golge_adimi"
   siper:
     ad: { tr: "Siper", en: "Bulwark" }
-    aciklama: { tr: "Başkalarıyla tehlike arasına kendini koyan birey. Sistem bunu verimsiz ama takdire değer buluyor.", en: "An individual who puts themselves between others and danger. The System calls it inefficient. Admirable, but inefficient." }
+    aciklama: { tr: "Kendini başkalarıyla tehlikenin arasına koyan birey. Sistem bunu verimsiz ama takdire değer buluyor.", en: "An individual who puts themselves between others and danger. The System calls it inefficient. Admirable, but inefficient." }
     tur: "temel"
     egilim: "koruma"
     artis: { end: 2, str: 1, wil: 1 }
     yetenek: "kalkan_duvari"
   baglayici:
     ad: { tr: "Bağlayıcı", en: "Binder" }
-    aciklama: { tr: "Başka varlıklarla sözleşme kurup onları yanında savaştıran birey. Sözleşmenin ince yazıları sana ait değil.", en: "An individual who strikes contracts with other beings and fights beside them. You didn't write the fine print." }
+    aciklama: { tr: "Başka varlıklarla sözleşme yapıp onları yanında savaştıran birey. Sözleşmenin dipnotlarını sen yazmadın.", en: "An individual who strikes contracts with other beings and fights beside them. You didn't write the fine print." }
     tur: "temel"
     egilim: "cagirma"
     artis: { wis: 2, cha: 1, wil: 1 }
     yetenek: "ruh_pencesi"
   tamirci:
     ad: { tr: "Tamirci", en: "Tinker" }
-    aciklama: { tr: "Kıyamet sonrası hurdada fırsat gören birey. Kırık olan her şey bir parça, her parça bir çözüm.", en: "An individual who looks at post-apocalypse scrap and sees opportunity. Everything broken is a part. Every part is a solution." }
+    aciklama: { tr: "Kıyametten kalan hurdada fırsat gören birey. Kırık her şey bir parça, her parça bir çözümdür.", en: "An individual who looks at post-apocalypse scrap and sees opportunity. Everything broken is a part. Every part is a solution." }
     tur: "temel"
     egilim: "zanaat"
     artis: { int: 2, per: 1, agi: 1 }
@@ -57,7 +57,7 @@ siniflar:
     yetenek: "kan_bedeli"
   kapi_yiyen:
     ad: { tr: "Kapı Yiyen", en: "Gate Eater" }
-    aciklama: { tr: "Kendisinden güçlü bir kapı bossunu yalnız başına devirip artığını özümseyen birey. Sistem bu sonucu öngörmemişti.", en: "An individual who took down a stronger Gate boss alone and absorbed what was left. The System did not forecast this outcome." }
+    aciklama: { tr: "Kendinden güçlü bir kapı bossunu tek başına devirip artığını özümseyen birey. Sistem bu sonucu öngörmemişti.", en: "An individual who took down a stronger Gate boss alone and absorbed what was left. The System did not forecast this outcome." }
     tur: "gizli"
     kosul:
       degisken_min: { kapi_boss_solo_ust5: 1 }
@@ -117,7 +117,7 @@ siniflar:
     yetenek: "uyarlanma"
   bos_kalp:
     ad: { tr: "Boş Kalp", en: "Hollow Heart" }
-    aciklama: { tr: "İnsanlığını parça parça takas etmiş birey. Kalan boşluk, Sistem'e göre değerlendirilebilir bir alan.", en: "An individual who traded their humanity away piece by piece. The System considers the empty space usable capacity." }
+    aciklama: { tr: "İnsanlığını parça parça takas etmiş birey. Kalan boşluk Sistem'e göre değerlendirilebilecek bir alandır.", en: "An individual who traded their humanity away piece by piece. The System considers the empty space usable capacity." }
     tur: "nadir"
     kosul:
       ahlak_max: { insanlik: -20 }
@@ -125,7 +125,7 @@ siniflar:
     yetenek: "ruh_emme"
   kirici:
     ad: { tr: "Kırıcı", en: "Breaker" }
-    aciklama: { tr: "Yakın Muharip, kaba gücü sanata dönüştürdü. Önüne çıkan her şey iki parçaya ayrılmayı bekler.", en: "The Combatant has turned brute force into an art. Everything in your path is just waiting to be in two pieces." }
+    aciklama: { tr: "Yakın Muharip kaba gücü sanata dönüştürdü. Önüne çıkan her şey ikiye ayrılmayı bekler.", en: "The Combatant has turned brute force into an art. Everything in your path is just waiting to be in two pieces." }
     tur: "evrim"
     onceki: "yakin_muharip"
     kademe: "E"
@@ -134,7 +134,7 @@ siniflar:
     bonus: { str: 3, end: 2 }
   kilic_dansci:
     ad: { tr: "Kılıç Dansçısı", en: "Bladedancer" }
-    aciklama: { tr: "Vuruşlar akışa, akış ritme dönüştü. Sen dans ediyorsun; düşmanların sadece kanıyor.", en: "Strikes have become flow, flow has become rhythm. You dance. Your enemies just bleed." }
+    aciklama: { tr: "Vuruşlar akışa, akış ritme dönüştü. Sen dans ediyorsun, düşmanların yalnızca kanıyor.", en: "Strikes have become flow, flow has become rhythm. You dance. Your enemies just bleed." }
     tur: "evrim"
     onceki: "yakin_muharip"
     kademe: "E"
@@ -161,7 +161,7 @@ siniflar:
     bonus: { agi: 2, per: 2, int: 1 }
   kul_buyucusu:
     ad: { tr: "Kül Büyücüsü", en: "Cinder Mage" }
-    aciklama: { tr: "Çırak ateşi buldu ve ateş çırağı buldu. Geriye kalan her şey kül.", en: "The apprentice found fire, and fire found the apprentice. Everything else is ash." }
+    aciklama: { tr: "Çırak ateşi buldu, ateş de çırağı. Geriye kalan her şey kül.", en: "The apprentice found fire, and fire found the apprentice. Everything else is ash." }
     tur: "evrim"
     onceki: "buyu_ciragi"
     kademe: "E"
@@ -170,7 +170,7 @@ siniflar:
     bonus: { int: 4, wil: 1 }
   kural_bukucu:
     ad: { tr: "Kural Bükücü", en: "Rulebender" }
-    aciklama: { tr: "Fizik kurallarını tavsiye olarak okumaya başlayan büyücü. Sistem bu yorumu henüz yasaklamadı.", en: "A mage who has started treating the laws of physics as suggestions. The System hasn't banned the interpretation. Yet." }
+    aciklama: { tr: "Fizik kurallarını birer tavsiye gibi okumaya başlayan büyücü. Sistem bu yorumu henüz yasaklamadı.", en: "A mage who has started treating the laws of physics as suggestions. The System hasn't banned the interpretation. Yet." }
     tur: "evrim"
     onceki: "buyu_ciragi"
     kademe: "E"
@@ -179,7 +179,7 @@ siniflar:
     bonus: { int: 2, wis: 3 }
   gece_bicagi:
     ad: { tr: "Gece Bıçağı", en: "Nightknife" }
-    aciklama: { tr: "Karanlıkta görülmeyen, sadece hissedilen bir bıçak. Hissedildiğinde iş çoktan bitmiştir.", en: "A blade nobody sees in the dark, only feels. By then, the job's already done." }
+    aciklama: { tr: "Karanlıkta görülmeyen, yalnızca hissedilen bir bıçak. Hissedildiğinde iş çoktan bitmiştir.", en: "A blade nobody sees in the dark, only feels. By then, the job's already done." }
     tur: "evrim"
     onceki: "izsiz"
     kademe: "E"
@@ -197,7 +197,7 @@ siniflar:
     bonus: { agi: 2, wis: 2, per: 1 }
   burc:
     ad: { tr: "Burç", en: "Bastion" }
-    aciklama: { tr: "Siper artık bir kaleye dönüştü. Seni yıkmak için önce surları yıkmak gerek; surlar sensin.", en: "The Bulwark has become a fortress. To bring you down they'd have to breach the walls, and you are the walls." }
+    aciklama: { tr: "Siper kaleye dönüştü. Seni yıkmak için önce surları yıkmak gerekir; surlar da sensin.", en: "The Bulwark has become a fortress. To bring you down they'd have to breach the walls, and you are the walls." }
     tur: "evrim"
     onceki: "siper"
     kademe: "E"
@@ -233,7 +233,7 @@ siniflar:
     bonus: { wil: 3, cha: 2 }
   savas_muhendisi:
     ad: { tr: "Savaş Mühendisi", en: "Combat Engineer" }
-    aciklama: { tr: "Tamirci artık sadece tamir etmiyor; inşa ediyor, ve inşa ettiği şeyler ateş ediyor.", en: "The Tinker doesn't just fix things anymore. They build them, and the things they build shoot back." }
+    aciklama: { tr: "Tamirci artık yalnızca tamir etmiyor, inşa ediyor; inşa ettikleri de ateş ediyor.", en: "The Tinker doesn't just fix things anymore. They build them, and the things they build shoot back." }
     tur: "evrim"
     onceki: "tamirci"
     kademe: "E"
@@ -251,7 +251,7 @@ siniflar:
     bonus: { per: 3, int: 2 }
   lanetci:
     ad: { tr: "Lanetçi", en: "Hexer" }
-    aciklama: { tr: "Kendi kanını ödemekten sıkılan pazarlıkçı, faturayı başkalarına kesmeyi öğrendi.", en: "Tired of paying in their own blood, the Bloodbroker learned to send the bill to someone else." }
+    aciklama: { tr: "Kendi kanıyla ödemekten bıkan pazarlıkçı faturayı başkalarına kesmeyi öğrendi.", en: "Tired of paying in their own blood, the Bloodbroker learned to send the bill to someone else." }
     tur: "evrim"
     onceki: "kan_pazarlikcisi"
     kademe: "E"
@@ -269,7 +269,7 @@ siniflar:
     bonus: { wil: 3, end: 2 }
   boyut_oburu:
     ad: { tr: "Boyut Oburu", en: "Rift Glutton" }
-    aciklama: { tr: "Bir kapıyla doymadın. Her yeni kapı, seni biraz daha büyüten bir ziyafet.", en: "One Gate didn't fill you up. Every new one is a feast, and every feast makes you bigger." }
+    aciklama: { tr: "Bir kapıyla doymadın. Her yeni kapı seni biraz daha büyüten bir ziyafet.", en: "One Gate didn't fill you up. Every new one is a feast, and every feast makes you bigger." }
     tur: "evrim"
     onceki: "kapi_yiyen"
     kademe: "E"
@@ -278,7 +278,7 @@ siniflar:
     bonus: { end: 3, str: 3 }
   patron_avcisi:
     ad: { tr: "Patron Avcısı", en: "Bossbreaker" }
-    aciklama: { tr: "Sıradan düşmanlar seni artık sıkıyor. Senin ilgini sadece bir kapının en büyük canavarı çekiyor.", en: "Regular enemies bore you now. The only thing in a Gate worth your attention is the biggest thing in it." }
+    aciklama: { tr: "Sıradan düşmanlar artık seni sıkıyor; ilgini yalnızca bir kapının en büyük canavarı çekiyor.", en: "Regular enemies bore you now. The only thing in a Gate worth your attention is the biggest thing in it." }
     tur: "evrim"
     onceki: "kapi_yiyen"
     kademe: "E"
@@ -287,7 +287,7 @@ siniflar:
     bonus: { str: 4, per: 2 }
   bellek_sizintisi:
     ad: { tr: "Bellek Sızıntısı", en: "Memory Leak" }
-    aciklama: { tr: "Sen bir hatasın ve hatalar yayılır. Etrafındaki her şey biraz daha az kararlı.", en: "You're a bug, and bugs spread. Everything around you is a little less stable." }
+    aciklama: { tr: "Sen bir hatasın, hatalar da yayılır. Çevrendeki her şey biraz daha az kararlı.", en: "You're a bug, and bugs spread. Everything around you is a little less stable." }
     tur: "evrim"
     onceki: "sistem_hatasi"
     kademe: "E"
@@ -359,7 +359,7 @@ siniflar:
     bonus: { end: 3, cha: 2 }
   her_telden:
     ad: { tr: "Her Telden", en: "Jack of All Trades" }
-    aciklama: { tr: "Her işten biraz anlıyorsun ve bu, çoğu uzmanın yapamadığını yapmana yetiyor.", en: "You know a little about everything, and that's enough to do what most specialists can't." }
+    aciklama: { tr: "Her işten biraz anlıyorsun; bu da çoğu uzmanın yapamadığını yapmana yetiyor.", en: "You know a little about everything, and that's enough to do what most specialists can't." }
     tur: "evrim"
     onceki: "cok_yonlu"
     kademe: "E"

@@ -4,7 +4,7 @@
 # İngilizce metinde Deniz için "they" kullanılır (DECISIONS #10).
 id: deniz_arman
 aciklama:
-  tr: "{yer:kiyikent} vapurunda simidini martılarla paylaşan arkadaşın. Herkesi korumaya çalışıyor; kendisi hariç."
+  tr: "{yer:kiyikent} vapurunda simidini martılarla paylaşan arkadaşın. Herkesi korumaya çalışır, bir kendini korumaz."
   en: "Your friend from the {yer:kiyikent} ferry, the one who shares pretzels with the gulls. Tries to protect everybody. Except themselves."
 kisilik: { cesaret: 7, hirs: 4, vicdan: 8, sadakat: 9, supheci: 3 }
 degerler: { merhamet: 60, duzen: 10, insanlik: 70 }
@@ -39,7 +39,7 @@ gorusler:
     - { tr: "\"Onu orada bırakamayız. Biz böyle insanlar değiliz.\"", en: "\"We can't just leave them. That's not who we are.\"" }
     - { tr: "\"Bir dakika. Yardım edebiliriz, değil mi?\"", en: "\"Hang on. We could help, right?\"" }
   merhamet-:
-    - { tr: "\"Bazen... bazen herkesi kurtaramıyorsun. Biliyorum.\"", en: "\"Sometimes you can't save everybody. I know that.\"" }
+    - { tr: "\"Bazen... bazen herkesi kurtaramazsın. Biliyorum.\"", en: "\"Sometimes you can't save everybody. I know that.\"" }
   duzen+:
     - { tr: "\"Bir kural koyalım. Herkes payını alsın, kimse geride kalmasın.\"", en: "\"Let's set some ground rules. Everybody gets a share. Nobody gets left behind.\"" }
   duzen-:
@@ -51,21 +51,21 @@ gorusler:
     - { tr: "\"Hayatta kalmak için ne gerekiyorsa. Ama bunu sonra konuşacağız.\"", en: "\"Whatever it takes to survive. But we're talking about this later.\"" }
 guc_tepkileri:
   hayranlik:
-    - { tr: "\"Vay be. Vapurda simit kavgası kaybeden sen miydin?\"", en: "\"Damn. Weren't you the one who lost a pretzel fight on the ferry?\"" }
+    - { tr: "\"Vay be. Vapurda simit kavgasını kaybeden sen değil miydin?\"", en: "\"Damn. Weren't you the one who lost a pretzel fight on the ferry?\"" }
     - { tr: "\"Arkanda durmak güzel. Ama yine de bekle beni.\"", en: "\"It's nice being behind you. Just... wait up for me, okay?\"" }
   endise:
     - { tr: "\"Son zamanlarda gözlerin değişti. Bazen sana bakınca seni göremiyorum.\"", en: "\"Your eyes have changed lately. Sometimes I look at you and can't find you in there.\"" }
     - { tr: "\"Ne kadar güçlenirsen o kadar az uyuyorsun. Fark ettin mi?\"", en: "\"The stronger you get, the less you sleep. Have you noticed?\"" }
   kiskanclik:
-    - { tr: "\"Ben de çalışıyorum, biliyor musun. Her gün. Sadece... sen başka bir şeysin.\"", en: "\"I train too, you know. Every day. You're just... something else.\"" }
+    - { tr: "\"Ben de çalışıyorum, biliyor musun? Her gün. Ama sen... sen bambaşka bir şeysin.\"", en: "\"I train too, you know. Every day. You're just... something else.\"" }
   bagimlilik:
     - { tr: "\"Sen olmasan dün gece ölmüştüm. Gitme, olur mu?\"", en: "\"Without you I'd have died last night. Don't go anywhere, okay?\"" }
 hafizalar:
   yanki_anlatildi: { tr: "Kafandaki sesi ona sen anlattın; ilk duyan oydu.", en: "You told them about the voice in your head. They were the first to know." }
-  durust_itiraf: { tr: "Yalanı geç olmadan geri aldın. Bunu takdir etti.", en: "You took the lie back before it was too late. That counted for something." }
-  yalan_yakalandi: { tr: "Yalanını yüzüne yakaladı.", en: "Caught you lying, right to your face." }
+  durust_itiraf: { tr: "Yalanını iş işten geçmeden geri aldın; bunu takdir etti.", en: "You took the lie back before it was too late. That counted for something." }
+  yalan_yakalandi: { tr: "Yalan söylerken seni suçüstü yakaladı.", en: "Caught you lying, right to your face." }
   ates_basi_soz: { tr: "Ateşin başında kardeşini bulacağınıza söz verdin.", en: "By the fire, you promised you'd find their sister together." }
-  umudu_kirdi: { tr: "Kardeşi için kendini hazırlamasını söyledin. O gece hiç konuşmadı.", en: "You told them to brace for the worst about their sister. They didn't say a word all night." }
+  umudu_kirdi: { tr: "Kardeşi için kötü habere hazırlıklı olmasını söyledin. O gece ağzını açmadı.", en: "You told them to brace for the worst about their sister. They didn't say a word all night." }
   kardes_notu_gosterildi: { tr: "Kardeşinin notunu ona sen gösterdin.", en: "You were the one who showed them their sister's note." }
   notu_sildi_itiraf: { tr: "Kardeşinin notunu sakladığını itiraf ettin.", en: "You confessed you'd hidden their sister's note." }
   kalmasini_istedi: { tr: "Gitmemesini istedin. Kaldı.", en: "You asked them not to go. They stayed." }
@@ -75,9 +75,9 @@ hafizalar:
   gidis_sarildi: { tr: "Giderken ona sarıldın.", en: "You hugged them goodbye." }
   gidis_uyarildi: { tr: "Giderken onu uyardın: o insanlar kimseyi kurtarmaz.", en: "You warned them on the way out: those people don't save anyone." }
   gidis_soz: { tr: "Bir gün ikisini de oradan çıkaracağına söz verdin.", en: "You swore you'd walk them both out of there someday." }
-  arkasini_dondu: { tr: "Giderken arkanı döndün. Gidişini izlemedin.", en: "When they left, you turned your back. You didn't watch them go." }
+  arkasini_dondu: { tr: "O giderken sırtını döndün, ardından bakmadın.", en: "When they left, you turned your back. You didn't watch them go." }
   el_tutuldu: { tr: "Aktarımda elini bırakmadın.", en: "You didn't let go of their hand during the transfer." }
-  tazilar_bekledi: { tr: "Tazılar onu sıkıştırırken bekledin.", en: "You waited while the hounds had them cornered." }
-  tazilardan_kurtardi: { tr: "Tazıların arasına senin için daldın. O da bunu yaptı.", en: "You dove into the hounds for them. They'd have done the same." }
+  tazilar_bekledi: { tr: "Tazılar onu köşeye sıkıştırırken öylece bekledin.", en: "You waited while the hounds had them cornered." }
+  tazilardan_kurtardi: { tr: "Onu kurtarmak için tazıların arasına daldın. O da senin için aynısını yapardı.", en: "You dove into the hounds for them. They'd have done the same." }
 kisisel_odul:
   - unvan: "omuz_omuza"

@@ -4,7 +4,7 @@
 # Kişilik: hırs 8 → güven çökerse ihanet; cesaret 8 → korkudan kaçmaz; düzen 80 → düzensiz bir oyuncudan kopar.
 id: kaya_demir
 aciklama:
-  tr: "Demir Lonca'nın lideri, yirmi yıl üniforma giymiş eski bir asker. Kıyamete ilk hazır olan oydu; şimdi şehrin geri kalanını da hazır etmeye kararlı, isteseler de istemeseler de."
+  tr: "Demir Lonca'nın lideri; yirmi yıl üniforma giymiş eski bir asker. Kıyamete herkesten önce o hazırdı. Şimdi şehrin geri kalanını da hazırlamaya kararlı, isteseler de istemeseler de."
   en: "Head of the Iron Guild, a retired Marine gunnery sergeant with twenty years in uniform. He was ready for the end of the world before anyone else. Now he's getting the rest of the city ready, whether they like it or not."
 kisilik: { cesaret: 8, hirs: 8, vicdan: 4, sadakat: 7, supheci: 6 }
 degerler: { merhamet: -20, duzen: 80, insanlik: 20 }
@@ -34,22 +34,22 @@ savas:
   artis: { str: 2, end: 1 }
   saldiri: { tr: "Süngü Disiplini", en: "Bayonet Drill" }
   metin:
-    tr: "{npc} hiç acele etmeden adım alıyor; kısa, ekonomik iki vuruş. {dusman} üçüncüsünü göremiyor."
+    tr: "{npc} hiç acele etmeden öne çıkıp kısa, ölçülü iki darbe indiriyor. {dusman} üçüncüsünü göremiyor bile."
     en: "{npc} steps in without hurrying. Two short, economical strikes. {dusman} never sees the third."
   duello_metin:
-    tr: "{dusman} sana talimdeymişsin gibi geliyor: soğuk, sabırlı, açığını bekleyerek. Açık verdiğin an kemiğine kadar iniyor."
+    tr: "{dusman} talimdeymiş gibi üstüne geliyor: soğuk, sabırlı, açık vermeni bekliyor. Açık verdiğin anda darbesi kemiğe dayanıyor."
     en: "{dusman} comes at you like this is a drill: cold, patient, waiting for you to open up. The second you do, he hits bone."
 yay_dugumleri: [kaya_ilk_tanisma, kaya_lonca_teklifi, kaya_sert_ders, kaya_darbe_gecesi, kaya_son_savas_generali]
 ilk_unvanlar:
   - { unvan: ilk_bekci_deviren, seviye: 18 }
 gorusler:
   merhamet+:
-    - { tr: "\"Yaralıları bırakırsan yarın kimse senin için siper almaz. Topla onları.\"", en: "\"Leave the wounded and tomorrow nobody takes a bullet for you. Pick 'em up.\"" }
+    - { tr: "\"Yaralıları bırakırsan yarın kimse senin için kurşun yemez. Topla onları.\"", en: "\"Leave the wounded and tomorrow nobody takes a bullet for you. Pick 'em up.\"" }
   merhamet-:
-    - { tr: "\"Herkesi taşıyamazsın asker. Yükünü hafiflet, yoksa hepiniz batarsınız.\"", en: "\"You can't carry everybody, kid. Drop some weight or you all go under.\"" }
-    - { tr: "\"Acımak lüks. Bu hafta lüksümüz yok.\"", en: "\"Pity's a luxury. We're fresh out this week.\"" }
+    - { tr: "\"Herkesi taşıyamazsın, asker. Yükünü hafiflet, yoksa hepiniz batarsınız.\"", en: "\"You can't carry everybody, kid. Drop some weight or you all go under.\"" }
+    - { tr: "\"Acımak lükstür. Bu hafta o lüksümüz yok.\"", en: "\"Pity's a luxury. We're fresh out this week.\"" }
   duzen+:
-    - { tr: "\"Zincirsiz komuta olmaz. Biri karar verecek, gerisi uygulayacak. Bugün o biri sensin.\"", en: "\"No chain of command, no command. Somebody decides, everybody else executes. Today that somebody's you.\"" }
+    - { tr: "\"Emir komuta zinciri yoksa komuta da yoktur. Biri karar verir, gerisi uygular. Bugün karar veren sensin.\"", en: "\"No chain of command, no command. Somebody decides, everybody else executes. Today that somebody's you.\"" }
     - { tr: "\"Kural koy, kuralı çiğneyeni cezalandır. Gerisi kendiliğinden gelir.\"", en: "\"Set the rule. Punish whoever breaks it. The rest takes care of itself.\"" }
   duzen-:
     - { tr: "\"Bazen emri yırtıp atarsın. Ben de bir kere yaptım. Pişman değilim.\"", en: "\"Sometimes you tear up the orders. I did it once. Don't regret it.\"" }
@@ -59,17 +59,17 @@ gorusler:
     - { tr: "\"Sistem sana bir silah verdi. Silaha vicdan sorulmaz; kullanılır.\"", en: "\"The System handed you a weapon. Nobody asks a weapon how it feels. You use it.\"" }
 guc_tepkileri:
   hayranlik:
-    - { tr: "\"Yirmi yıl asker yetiştirdim. Senin gibisini görmedim. Bu bir iltifat değil, tespit.\"", en: "\"Twenty years I spent training troops. Never seen one like you. That's not a compliment. That's an assessment.\"" }
+    - { tr: "\"Yirmi yıl asker yetiştirdim, senin gibisini görmedim. Bu iltifat değil, tespit.\"", en: "\"Twenty years I spent training troops. Never seen one like you. That's not a compliment. That's an assessment.\"" }
   endise:
-    - { tr: "\"Sınırsız güç, emir komuta zinciri olmayan bir tank gibidir. Kimse direksiyonda değilse ezer geçer.\"", en: "\"Power with no chain of command is a tank with nobody at the wheel. It just rolls over whatever's in front of it.\"" }
+    - { tr: "\"Sınırsız güç, emir komuta zinciri olmayan tanka benzer. Başında kimse yoksa önüne çıkanı ezip geçer.\"", en: "\"Power with no chain of command is a tank with nobody at the wheel. It just rolls over whatever's in front of it.\"" }
     - { tr: "\"Sana kim 'dur' diyecek, hiç düşündün mü? Çünkü ben artık diyemiyorum.\"", en: "\"Ever wonder who gets to tell you to stand down? Because I can't anymore.\"" }
   kiskanclik:
-    - { tr: "\"Bu şehri ben ayakta tuttum. Sen geldin, herkes sana bakıyor. Neyse. Neyse.\"", en: "\"I'm the one who kept this city standing. You show up and every head turns. Whatever. Whatever.\"" }
+    - { tr: "\"Bu şehri ben ayakta tuttum. Sen geldin, bütün gözler sana döndü. Neyse. Neyse.\"", en: "\"I'm the one who kept this city standing. You show up and every head turns. Whatever. Whatever.\"" }
   bagimlilik:
-    - { tr: "\"Kuzey hattı senin çıkmana bağlı. Senin. Planım bu kadar. Utanç verici, biliyorum.\"", en: "\"The north line holds if you show up. That's it. That's the whole plan. Embarrassing, I know.\"" }
+    - { tr: "\"Kuzey hattının tutması senin gelmene bağlı. Senin. Bütün planım bu. Utanç verici, biliyorum.\"", en: "\"The north line holds if you show up. That's it. That's the whole plan. Embarrassing, I know.\"" }
 hafizalar:
   rutbeyi_reddetti: { tr: "Lonca'da rütbe teklif etti; reddettin. Bunu unutmadı.", en: "He offered you rank in the Guild and you turned it down. He hasn't forgotten." }
-  emri_cignedi: { tr: "Verdiği emri çiğnedin ve haklı çıktın. Bu onu ikinciden daha çok rahatsız etti.", en: "You broke his order and turned out to be right. That bothered him more than the insubordination." }
+  emri_cignedi: { tr: "Emrini çiğnedin ve haklı çıktın. Haklı çıkman onu itaatsizliğinden de çok rahatsız etti.", en: "You broke his order and turned out to be right. That bothered him more than the insubordination." }
   hatti_tuttu: { tr: "Kuzey hattı çökerken onun yanında durdun.", en: "You held the line next to him when the north wall started to give." }
 kisisel_odul:
   - unvan: "demir_yemin"

@@ -3,15 +3,15 @@
 dusmanlar:
   isaretli_muhafiz:
     ad: { tr: "İşaretli Muhafız", en: "Marked Warden" }
-    aciklama: { tr: "Yükselenler'in Seçilmişler Yurdu'nu bekleyen muhafızlarından biri. Göğsündeki işaret deriye dikilmemiş, yakılmış; Sistem penceresi hep yarı açık, ilahi okur gibi kendi kendine fısıldıyor.", en: "One of the wardens the Ascended keep on the Chosen's dormitory. The mark on his chest wasn't stitched into cloth; it was burned into skin. His System window hangs half open, murmuring to itself like a hymn." }
-    kanca: { tr: "Kapının önündeki iki gri figür aynı anda başını kaldırıyor. \"Seçilmişler ziyaretçi kabul etmez,\" diyor biri, sesi tatlı ve boş.", en: "The two gray figures at the door lift their heads at the same moment. \"The Chosen don't take visitors,\" one of them says, voice sweet and empty." }
+    aciklama: { tr: "Yükselenler'in Seçilmişler Yurdu'nu bekleyen muhafızlarından biri. Göğsündeki işaret deriye dikilmemiş, dağlanmıştır; Sistem penceresi hep yarı açıktır, ilahi okur gibi kendi kendine fısıldar.", en: "One of the wardens the Ascended keep on the Chosen's dormitory. The mark on his chest wasn't stitched into cloth; it was burned into skin. His System window hangs half open, murmuring to itself like a hymn." }
+    kanca: { tr: "Kapının önündeki iki gri figür aynı anda başını kaldırıyor. \"Seçilmişler ziyaretçi kabul etmez,\" diyor biri; sesi tatlı ve bomboş.", en: "The two gray figures at the door lift their heads at the same moment. \"The Chosen don't take visitors,\" one of them says, voice sweet and empty." }
     seviye: 32
     can: 560
     statlar: { str: 30, agi: 22, end: 30, int: 14, wis: 18, per: 20, wil: 34, cha: 16 }
     davranis: "suru"
     zeki: true
     zaaf: "zihin"
-    zaaf_metin: { tr: "İnançları onları ayakta tutuyor. Peygamberlerinin sözlerindeki çatlağa dokunan bir cümle, kılıçtan daha derine iner.", en: "Faith is what's holding them up. One sentence that finds the crack in their Prophet's words cuts deeper than a blade." }
+    zaaf_metin: { tr: "İnançları onları ayakta tutar. Peygamberlerinin sözlerindeki çatlağa dokunan tek bir cümle kılıçtan derine işler.", en: "Faith is what's holding them up. One sentence that finds the crack in their Prophet's words cuts deeper than a blade." }
     saldirilar:
       - id: "ilahi_darbe"
         ad: { tr: "İlahi Darbe", en: "Hymnstrike" }
@@ -20,7 +20,7 @@ dusmanlar:
         kat: 0.7
         etiketler: ["fiziksel", "yakin"]
         bekleme: 0
-        metin: { tr: "{dusman} bir ilahinin tek hecesini söylüyor ve sopası tam o hecenin vurgusunda kaburgalarına iniyor.", en: "{dusman} sings a single syllable of a hymn, and the staff lands on your ribs right on the downbeat." }
+        metin: { tr: "{dusman} bir ilahinin tek hecesini söylüyor; sopası tam o hecenin vurgusunda kaburgalarına iniyor.", en: "{dusman} sings a single syllable of a hymn, and the staff lands on your ribs right on the downbeat." }
       - id: "secilmis_kalkani"
         ad: { tr: "Seçilmişin Kalkanı", en: "The Chosen's Shield" }
         stat: "wil"
@@ -38,15 +38,15 @@ dusmanlar:
 
   kordon_lesyiyen:
     ad: { tr: "Kordon Leşyiyeni", en: "Esplanade Scavenger" }
-    aciklama: { tr: "Kordon düştükten sonra kumsaldan çıkan, yarısı yengeç yarısı martı bir şey. Kabuğunun üstünde eski plaj şemsiyelerinin yırtık kumaşları sallanıyor; düşenlerin üstünde yaşıyor.", en: "Something half crab, half gull that crawled up off the beach after the Esplanade fell. Torn beach-umbrella canvas flaps on its shell. It lives on whatever the fall left behind." }
-    kanca: { tr: "Kumun altından bir kabuk kabarıyor; üstünde, rüzgârda çırpınan çizgili bir plaj şemsiyesi.", en: "A shell heaves up out of the sand, a striped beach umbrella flapping on top of it in the wind." }
+    aciklama: { tr: "Kordon düştükten sonra kumsaldan çıkan, yarı yengeç yarı martı bir yaratık. Kabuğunda eski plaj şemsiyelerinin yırtık kumaşları sallanır; düşenlerden geriye kalanla beslenir.", en: "Something half crab, half gull that crawled up off the beach after the Esplanade fell. Torn beach-umbrella canvas flaps on its shell. It lives on whatever the fall left behind." }
+    kanca: { tr: "Kumun altından bir kabuk kabarıyor; tepesinde çizgili bir plaj şemsiyesi rüzgârda çırpınıyor.", en: "A shell heaves up out of the sand, a striped beach umbrella flapping on top of it in the wind." }
     seviye: 30
     can: 520
     statlar: { str: 32, agi: 20, end: 34, int: 6, wis: 10, per: 24, wil: 16, cha: 2 }
     davranis: "agresif"
     zeki: false
     zaaf: "ates"
-    zaaf_metin: { tr: "Kabuğu tuzlu su ve yosunla örülü; kuruyunca çatlıyor. Ateş onu bir kabuk değil bir fırın yapar.", en: "Its shell is woven from salt water and kelp, and it cracks when it dries. Fire turns that shell from armor into an oven." }
+    zaaf_metin: { tr: "Kabuğu tuzlu su ve yosundan örülüdür; kuruyunca çatlar. Ateş o kabuğu zırh olmaktan çıkarıp fırına çevirir.", en: "Its shell is woven from salt water and kelp, and it cracks when it dries. Fire turns that shell from armor into an oven." }
     saldirilar:
       - id: "kiskac"
         ad: { tr: "Paslı Kıskaç", en: "Rusted Pincer" }
@@ -56,7 +56,7 @@ dusmanlar:
         etiketler: ["fiziksel", "yakin"]
         durum: { etki: "kanama", sans: 0.4, sure: 2 }
         bekleme: 0
-        metin: { tr: "{dusman} bir iskele demirinden dövülmüş gibi duran kıskacını bacağına kapatıyor.", en: "{dusman} clamps a pincer that looks forged out of a pier railing onto your leg." }
+        metin: { tr: "{dusman} iskele demirinden dövülmüşe benzeyen kıskacını bacağına kapatıyor.", en: "{dusman} clamps a pincer that looks forged out of a pier railing onto your leg." }
       - id: "marti_cigligi"
         ad: { tr: "Martı Çığlığı", en: "Gull Shriek" }
         stat: "wil"
@@ -65,7 +65,7 @@ dusmanlar:
         etiketler: ["ses", "alan"]
         durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
         bekleme: 2
-        metin: { tr: "{dusman} başını kaldırıp yüz martının sesiyle bağırıyor; kulakların çınlıyor.", en: "{dusman} throws its head back and screams with the voice of a hundred gulls. Your ears ring." }
+        metin: { tr: "{dusman} başını kaldırıp yüz martının sesiyle çığlık atıyor; kulakların çınlıyor.", en: "{dusman} throws its head back and screams with the voice of a hundred gulls. Your ears ring." }
     xp: 820
     kredi: 40
     ganimet: { canavar_cekirdegi: 0.8 }
@@ -74,15 +74,15 @@ dusmanlar:
 
   aras_kurt_golge:
     ad: { tr: "Siyah Ceketli Rakip", en: "The Rival in the Black Jacket" }
-    aciklama: { tr: "Senin hızında yükselen tek insan, bu kez tüm gücüyle. Bıçağı bir an önünde, bir an arkanda; vurmaktan çok seni ölçüyor.", en: "The only human climbing as fast as you are, going all out this time. His blade is in front of you one second, behind you the next. He isn't just hitting you. He's measuring you." }
-    kanca: { tr: "Ceketini çıkarıp atıyor ve sırıtıyor. \"Bu sefer kimse saymayacak. Bu sefer gerçek.\"", en: "He shrugs off the jacket, tosses it, and grins. \"Nobody's counting this time. This time it's real.\"" }
+    aciklama: { tr: "Senin hızında yükselen tek insan, bu kez bütün gücüyle karşında. Bıçağı bir an önünde, bir an arkanda; vurmaktan çok seni ölçüyor.", en: "The only human climbing as fast as you are, going all out this time. His blade is in front of you one second, behind you the next. He isn't just hitting you. He's measuring you." }
+    kanca: { tr: "Ceketini çıkarıp bir kenara atıyor, sırıtıyor. \"Bu sefer kimse saymayacak. Bu sefer gerçek.\"", en: "He shrugs off the jacket, tosses it, and grins. \"Nobody's counting this time. This time it's real.\"" }
     seviye: 40
     can: 700
     statlar: { str: 34, agi: 48, end: 30, int: 20, wis: 20, per: 38, wil: 32, cha: 24 }
     davranis: "temkinli"
     zeki: true
     zaaf: "goz"
-    zaaf_metin: { tr: "Hep sağdan açıyor; sol omzunu kolluyor. Bir kez o açığı görürsen her hamlesinden önce oraya bakan gözlerini de görürsün.", en: "He always opens from the right and guards that left shoulder. Spot the gap once and you'll catch his eyes flicking to it before every move." }
+    zaaf_metin: { tr: "Hep sağdan açar, sol omzunu kollar. O açığı bir kez gördün mü, her hamlesinden önce gözlerinin oraya kaydığını da görürsün.", en: "He always opens from the right and guards that left shoulder. Spot the gap once and you'll catch his eyes flicking to it before every move." }
     saldirilar:
       - id: "art_goruntu"
         ad: { tr: "Ardıl Görüntü", en: "Afterimage" }
@@ -92,7 +92,7 @@ dusmanlar:
         etiketler: ["fiziksel", "yakin"]
         durum: { etki: "kanama", sans: 0.4, sure: 2 }
         bekleme: 0
-        metin: { tr: "{dusman} önünde duruyor; sonra hâlâ önünde duran şey yalnızca bir görüntü ve asıl bıçak çoktan böğründe.", en: "{dusman} is standing right in front of you. Then the thing in front of you is just an image, and the real blade's already in your side." }
+        metin: { tr: "{dusman} tam önünde duruyor; sonra önünde duranın yalnızca bir görüntü olduğunu anlıyorsun, asıl bıçak çoktan böğründe.", en: "{dusman} is standing right in front of you. Then the thing in front of you is just an image, and the real blade's already in your side." }
       - id: "takvim"
         ad: { tr: "Takvim", en: "On Schedule" }
         stat: "per"
@@ -101,7 +101,7 @@ dusmanlar:
         etiketler: ["delici"]
         durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
         bekleme: 2
-        metin: { tr: "{dusman} senin bir sonraki adımını senden önce biliyor. Oraya bastığında bıçak zaten bekliyor.", en: "{dusman} knows your next step before you do. When you plant your foot, the blade's already waiting there." }
+        metin: { tr: "{dusman} bir sonraki adımını senden önce biliyor. Ayağını bastığın yerde bıçak zaten bekliyor.", en: "{dusman} knows your next step before you do. When you plant your foot, the blade's already waiting there." }
       - id: "gece_yarisi"
         ad: { tr: "Gece Yarısı", en: "Midnight" }
         stat: "agi"
@@ -109,25 +109,25 @@ dusmanlar:
         kat: 1.0
         etiketler: ["karanlik", "yakin"]
         bekleme: 4
-        metin: { tr: "{dusman} bir an duruyor; gözlerinde köprü korkulukları, aşağıda kara su. Sonra o gecenin bütün ağırlığıyla üstüne geliyor.", en: "{dusman} stops for a heartbeat. There's a bridge railing in his eyes and black water below. Then he comes at you with the whole weight of that night." }
+        metin: { tr: "{dusman} bir an duraksıyor; gözlerinde köprü korkulukları, aşağıda kapkara su. Sonra o gecenin bütün ağırlığıyla üstüne geliyor.", en: "{dusman} stops for a heartbeat. There's a bridge railing in his eyes and black water below. Then he comes at you with the whole weight of that night." }
     xp: 2400
     kredi: 0
     etiketler: ["insan", "rakip"]
     boss: true
     fazlar:
       - esik: 70
-        metin: { tr: "Bıçağını bir elinden öbürüne atıyor ve gülüyor. \"Isınıyoruz,\" diyor. \"Sen de saklıyorsun, değil mi? Hadi, çıkar.\"", en: "He flips the knife from one hand to the other and grins. \"We're just warming up,\" he says. \"You're holding back too, right? Come on. Show me.\"" }
+        metin: { tr: "Bıçağını bir elinden öbürüne atıp gülüyor. \"Daha ısınıyoruz,\" diyor. \"Sen de bir şeyler saklıyorsun, değil mi? Hadi, çıkar ortaya.\"", en: "He flips the knife from one hand to the other and grins. \"We're just warming up,\" he says. \"You're holding back too, right? Come on. Show me.\"" }
         guclenme: { agi: 4 }
       - esik: 40
-        metin: { tr: "Kanını siliyor ve gülüyor; ilk kez gerçekten gülüyor. \"Tamam. Şimdi anladım. Bu sefer ben de saklamayacağım.\"", en: "He wipes the blood off and laughs, really laughs, for the first time. \"Okay. Now I get it. This time I'm not holding back either.\"" }
+        metin: { tr: "Kanını silip gülüyor; ilk kez gerçekten gülüyor. \"Tamam. Şimdi anladım. Bu sefer ben de saklamayacağım.\"", en: "He wipes the blood off and laughs, really laughs, for the first time. \"Okay. Now I get it. This time I'm not holding back either.\"" }
         guclenme: { agi: 6, per: 4 }
       - esik: 15
-        metin: { tr: "Nefesi kesik kesik. Gözleri sıralamaya kayıyor, sonra sana; ikisi arasındaki farkı ölçmeyi bırakmış.", en: "His breathing's coming in pieces. His eyes flick to the Ranking, then to you. He's stopped measuring the gap between the two." }
+        metin: { tr: "Kesik kesik soluyor. Gözleri önce sıralamaya kayıyor, sonra sana; aradaki farkı ölçmeyi bırakmış.", en: "His breathing's coming in pieces. His eyes flick to the Ranking, then to you. He's stopped measuring the gap between the two." }
         guclenme: { str: 4, wil: 6 }
 
   ayna_bekcisi:
     ad: { tr: "Ayna Bekçisi", en: "The Mirror Warden" }
-    aciklama: { tr: "Kule'nin otuzuncu katını bekleyen, yüzü yerine ayna taşıyan uzun bir figür. Karşısına çıkan herkese hayatının en kötü gecesini gösteriyor; sonra o geceyle dövüşüyor.", en: "A tall figure guarding the Spire's thirtieth floor, a mirror where its face should be. It shows everyone who faces it the worst night of their life. Then it fights them with that night." }
+    aciklama: { tr: "Kule'nin otuzuncu katını bekleyen, yüzü yerine ayna taşıyan uzun bir figür. Karşısına çıkan herkese hayatının en kötü gecesini gösterir, sonra o geceyle dövüşür.", en: "A tall figure guarding the Spire's thirtieth floor, a mirror where its face should be. It shows everyone who faces it the worst night of their life. Then it fights them with that night." }
     kanca: { tr: "Katın ortasında bir ayna doğruluyor. İçinde kendi yüzünü değil, unutmaya çalıştığın bir odayı görüyorsun.", en: "A mirror stands up in the middle of the floor. You don't see your face in it. You see a room you've been trying to forget." }
     seviye: 38
     can: 820
@@ -135,7 +135,7 @@ dusmanlar:
     davranis: "temkinli"
     zeki: true
     zaaf: "isik"
-    zaaf_metin: { tr: "Gösterdiği gece yalnızca karanlıkta tam görünür. Doğrudan ışık camını bulanıklaştırır ve anılar kayar.", en: "The night it shows you is only whole in the dark. Direct light fogs the glass, and the memories slide off." }
+    zaaf_metin: { tr: "Gösterdiği gece yalnızca karanlıkta bütünüyle görünür. Doğrudan ışık camı buğulandırır, anılar kayıp gider.", en: "The night it shows you is only whole in the dark. Direct light fogs the glass, and the memories slide off." }
     saldirilar:
       - id: "en_kotu_gece"
         ad: { tr: "En Kötü Gece", en: "Worst Night" }
@@ -145,7 +145,7 @@ dusmanlar:
         etiketler: ["zihin", "karanlik"]
         durum: { etki: "korku", sans: 0.45, sure: 2 }
         bekleme: 1
-        metin: { tr: "{dusman} aynasını çeviriyor ve o gece yeniden oluyor; bu kez hiçbir şeyi değiştiremeyeceğini bilerek izliyorsun.", en: "{dusman} tilts the mirror and that night happens again. This time you watch it knowing you can't change a thing." }
+        metin: { tr: "{dusman} aynasını çeviriyor ve o gece yeniden yaşanıyor; bu kez hiçbir şeyi değiştiremeyeceğini bilerek izliyorsun.", en: "{dusman} tilts the mirror and that night happens again. This time you watch it knowing you can't change a thing." }
       - id: "cam_kirigi"
         ad: { tr: "Cam Kırığı", en: "Shatter" }
         stat: "agi"
@@ -154,7 +154,7 @@ dusmanlar:
         etiketler: ["fiziksel", "alan"]
         durum: { etki: "kanama", sans: 0.4, sure: 2 }
         bekleme: 0
-        metin: { tr: "{dusman} aynanın kenarını kırıp parçaları bir sürü gibi üstüne salıyor.", en: "{dusman} snaps the edge off its mirror and sends the shards at you like a swarm." }
+        metin: { tr: "{dusman} aynanın kenarını kırıp parçaları sürü hâlinde üstüne salıyor.", en: "{dusman} snaps the edge off its mirror and sends the shards at you like a swarm." }
     xp: 2000
     kredi: 120
     ganimet: { canavar_cekirdegi: 1.0 }
@@ -162,26 +162,26 @@ dusmanlar:
     boss: true
     fazlar:
       - esik: 70
-        metin: { tr: "Ayna titriyor ve gösterdiği gece bir saat ileri sarılıyor; en kötü kısmına.", en: "The mirror shivers, and the night it's showing fast-forwards an hour, to the worst part." }
+        metin: { tr: "Ayna titriyor; gösterdiği gece bir saat ileri sarılıyor, en kötü yerine.", en: "The mirror shivers, and the night it's showing fast-forwards an hour, to the worst part." }
         guclenme: { wil: 4 }
       - esik: 40
-        metin: { tr: "Ayna ikiye bölünüyor; artık iki geceyi aynı anda gösteriyor: seninkini ve yanındakinin.", en: "The mirror splits in two. Now it's showing two nights at once: yours, and the one beside you." }
+        metin: { tr: "Ayna ikiye bölünüyor ve artık iki geceyi birden gösteriyor: seninkini ve yanındakininkini.", en: "The mirror splits in two. Now it's showing two nights at once: yours, and the one beside you." }
         guclenme: { int: 6, wil: 6 }
       - esik: 15
-        metin: { tr: "Kırık camların her biri ayrı bir anı gösteriyor ve hepsi aynı anda konuşuyor.", en: "Every broken shard shows a different memory, and all of them talk at once." }
+        metin: { tr: "Kırık camların her biri ayrı bir anıyı gösteriyor; hepsi aynı anda konuşuyor.", en: "Every broken shard shows a different memory, and all of them talk at once." }
         guclenme: { agi: 4, int: 4 }
 
   duzeltme_infazcisi:
     ad: { tr: "Düzeltme İnfazcısı", en: "Correction Executor" }
-    aciklama: { tr: "Sistem'in kendi kodundan dökülmüş, insan biçimli beyaz bir boşluk. Görevi tek: kayıp parçaları bulmak ve ana gövdeye iade etmek. İade edilenlerden geriye hiçbir şey kalmıyor.", en: "A man-shaped white blank poured out of the System's own code. It has one job: find missing pieces and return them to the main body. Nothing that gets returned comes back out." }
-    kanca: { tr: "Duvardaki satırlar bir anda beyaza kesiyor. Beyazın içinden yüzü olmayan bir şey çıkıyor ve sesi senin penceren gibi konuşuyor: [Parça 0x00 tespit edildi.]", en: "The lines on the wall go white all at once. Something faceless steps out of the white, and its voice talks like your own window: [Fragment 0x00 detected.]" }
+    aciklama: { tr: "Sistem'in kendi kodundan dökülmüş, insan biçimli beyaz bir boşluk. Tek görevi kayıp parçaları bulup ana gövdeye iade etmektir. İade edilenlerden geriye hiçbir şey kalmaz.", en: "A man-shaped white blank poured out of the System's own code. It has one job: find missing pieces and return them to the main body. Nothing that gets returned comes back out." }
+    kanca: { tr: "Duvardaki satırlar birden bembeyaz kesiliyor. Beyazın içinden yüzsüz bir şey çıkıyor; sesi senin pencerenin sesi gibi: [Parça 0x00 tespit edildi.]", en: "The lines on the wall go white all at once. Something faceless steps out of the white, and its voice talks like your own window: [Fragment 0x00 detected.]" }
     seviye: 40
     can: 760
     statlar: { str: 32, agi: 34, end: 32, int: 44, wis: 30, per: 36, wil: 36, cha: 4 }
     davranis: "agresif"
     zeki: true
     zaaf: "simsek"
-    zaaf_metin: { tr: "Kusursuz çalışıyor; kusurlu olan her şeye karşı. Ani bir akım, bir şimşek ya da kopuk bir hat kodunu bozar ve onu bir anlığına dondurur.", en: "It runs flawlessly, against everything that doesn't. A sudden surge, a lightning strike, a live wire scrambles its code and freezes it for a beat." }
+    zaaf_metin: { tr: "Kusursuz çalışır, kusurlu olan her şeye karşı. Ani bir akım, bir şimşek ya da kopuk bir hat kodunu bozar ve onu bir anlığına dondurur.", en: "It runs flawlessly, against everything that doesn't. A sudden surge, a lightning strike, a live wire scrambles its code and freezes it for a beat." }
     saldirilar:
       - id: "iade"
         ad: { tr: "İade", en: "Return to Sender" }
@@ -191,7 +191,7 @@ dusmanlar:
         etiketler: ["zihin", "glitch"]
         durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
         bekleme: 1
-        metin: { tr: "{dusman} elini göğsüne bastırıyor ve içinde bir şey çekiliyor, kancaya takılmış gibi; ana gövdeye doğru.", en: "{dusman} presses a hand to your chest, and something inside you gets yanked, like a hook caught in it, back toward the main body." }
+        metin: { tr: "{dusman} elini göğsüne bastırıyor; içindeki bir şey, kancaya takılmış gibi ana gövdeye doğru çekiliyor.", en: "{dusman} presses a hand to your chest, and something inside you gets yanked, like a hook caught in it, back toward the main body." }
       - id: "beyaz_satir"
         ad: { tr: "Beyaz Satır", en: "Blank Line" }
         stat: "agi"
@@ -200,7 +200,7 @@ dusmanlar:
         etiketler: ["isik", "yakin"]
         durum: { etki: "kor", sans: 0.35, sure: 2 }
         bekleme: 0
-        metin: { tr: "{dusman} havaya bir satır çiziyor; satır bomboş ve bembeyaz; o beyazlık derini kesiyor.", en: "{dusman} draws a line in the air. It's empty and blinding white, and the white cuts." }
+        metin: { tr: "{dusman} havaya bir satır çiziyor; bomboş, bembeyaz bir satır. O beyazlık derini kesiyor.", en: "{dusman} draws a line in the air. It's empty and blinding white, and the white cuts." }
     xp: 2200
     kredi: 0
     etiketler: ["sistem", "elit"]
@@ -213,20 +213,20 @@ dusmanlar:
         metin: { tr: "[Kaynak doğrulanamadı. İade yetkisi yükseltiliyor.] İnfazcının gövdesine ikinci bir beyaz kol çiziliyor.", en: "[Source unverified. Escalating return authority.] A second white arm draws itself onto the executor's body." }
         guclenme: { int: 6, agi: 4 }
       - esik: 15
-        metin: { tr: "[Ana gövdeyle bağlantı zayıflıyor.] İnfazcı bir an duraksıyor; sanki kendisi de bir yerden koparılmaktan korkuyormuş gibi.", en: "[Connection to main body degrading.] The executor hesitates, like it's scared of getting torn loose itself." }
+        metin: { tr: "[Ana gövdeyle bağlantı zayıflıyor.] İnfazcı bir an duraksıyor; sanki kendisi de bir yerden koparılmaktan korkuyor.", en: "[Connection to main body degrading.] The executor hesitates, like it's scared of getting torn loose itself." }
         guclenme: { wil: 6, end: 4 }
 
   yanki_golgesi:
     ad: { tr: "Yankı'nın Gölgesi", en: "Echo's Shadow" }
-    aciklama: { tr: "Kendi pencerenin içinde, bozuk harflerden örülmüş, senin boyunda ve senin duruşunda bir şey. Yüzü yok; yüzünün olması gereken yerde senin yüzünü deniyor.", en: "Inside your own window, something your height and your posture, woven from corrupted letters. It has no face. Where a face should be, it's trying yours on." }
-    kanca: { tr: "Pencerendeki satırlar akmayı bırakıyor ve birbirine yapışıyor; bir göğüs, iki kol, sonra senin omuzlarının kavisi.", en: "The lines in your window stop scrolling and stick together: a chest, two arms, then the exact slope of your shoulders." }
+    aciklama: { tr: "Kendi pencerenin içinde, bozuk harflerden örülmüş, senin boyunda, senin duruşunda bir şey. Yüzü yok; yüzün olması gereken yerde seninkini deniyor.", en: "Inside your own window, something your height and your posture, woven from corrupted letters. It has no face. Where a face should be, it's trying yours on." }
+    kanca: { tr: "Pencerendeki satırlar akmayı bırakıp birbirine yapışıyor: bir göğüs, iki kol, sonra senin omuzlarının kavisi.", en: "The lines in your window stop scrolling and stick together: a chest, two arms, then the exact slope of your shoulders." }
     seviye: 42
     can: 880
     statlar: { str: 36, agi: 36, end: 36, int: 46, wis: 30, per: 40, wil: 46, cha: 20 }
     davranis: "agresif"
     zeki: true
     zaaf: "zihin"
-    zaaf_metin: { tr: "Kendi adını bilmiyor; seninkini ödünç alıyor. Kim olduğunu yüksek sesle söylediğin her an, ödünç aldığı şey elinden kayıyor.", en: "It doesn't know its own name, so it's borrowing yours. Every time you say out loud who you are, what it borrowed slips out of its hands." }
+    zaaf_metin: { tr: "Kendi adını bilmez; seninkini ödünç alır. Kim olduğunu yüksek sesle her söyleyişinde ödünç aldığı şey elinden kayar.", en: "It doesn't know its own name, so it's borrowing yours. Every time you say out loud who you are, what it borrowed slips out of its hands." }
     saldirilar:
       - id: "odunc_el"
         ad: { tr: "Ödünç El", en: "Borrowed Hand" }
@@ -236,7 +236,7 @@ dusmanlar:
         etiketler: ["zihin", "karanlik"]
         durum: { etki: "korku", sans: 0.4, sure: 2 }
         bekleme: 1
-        metin: { tr: "{dusman} senin elini kaldırıyor; kendi elinin, kendi yüzüne doğru geldiğini izliyorsun.", en: "{dusman} raises your hand. You watch your own hand coming for your own face." }
+        metin: { tr: "{dusman} senin elini kaldırıyor; kendi elinin kendi yüzüne doğru geldiğini izliyorsun.", en: "{dusman} raises your hand. You watch your own hand coming for your own face." }
       - id: "bozuk_satir"
         ad: { tr: "B█zuk Satır", en: "C█rrupted Line" }
         stat: "int"
@@ -245,33 +245,33 @@ dusmanlar:
         etiketler: ["glitch"]
         durum: { etki: "sersemleme", sans: 0.35, sure: 1 }
         bekleme: 0
-        metin: { tr: "{dusman} statlarından birini siliyor ve bir an o stat hiç olmamış gibi yere yığılıyorsun.", en: "{dusman} erases one of your stats, and for a heartbeat you fold like it never existed." }
+        metin: { tr: "{dusman} statlarından birini siliyor; bir an, o stat hiç var olmamış gibi yere yığılıyorsun.", en: "{dusman} erases one of your stats, and for a heartbeat you fold like it never existed." }
     xp: 2600
     kredi: 0
     etiketler: ["sistem", "yanki"]
     boss: true
     fazlar:
       - esik: 70
-        metin: { tr: "Gölge senin sesinle konuşmaya başlıyor. bu bizim bedenimiz, diyor. ben sadece daha iyi kullanıyorum.", en: "The shadow starts talking in your voice. this is our body, it says. i just use it better." }
+        metin: { tr: "Gölge senin sesinle konuşmaya başlıyor: bu bizim bedenimiz, diyor, ben onu yalnızca daha iyi kullanıyorum.", en: "The shadow starts talking in your voice. this is our body, it says. i just use it better." }
         guclenme: { wil: 6, int: 4 }
       - esik: 40
         metin: { tr: "Pencerendeki statların yarısı gölgenin göğsüne akıyor; artık senden biraz daha güçlü.", en: "Half the stats in your window drain into the shadow's chest. Now it's a little stronger than you." }
         guclenme: { str: 4, agi: 4 }
       - esik: 15
-        metin: { tr: "Harfler dökülüyor; altında başka bir yüzün izi beliriyor. Senin değil. Çok eskiden, başka bir gökyüzünün altında birinin.", en: "The letters start shedding. Underneath, the outline of another face shows through. Not yours. Someone's, a long time ago, under a different sky." }
+        metin: { tr: "Harfler dökülüyor; altından başka bir yüzün izi beliriyor. Senin değil. Çok eskiden, başka bir göğün altında yaşamış birinin.", en: "The letters start shedding. Underneath, the outline of another face shows through. Not yours. Someone's, a long time ago, under a different sky." }
         guclenme: { wil: 6, end: 4 }
 
   onceki_anomali:
     ad: { tr: "İlk Anomali", en: "The First Anomaly" }
-    aciklama: { tr: "İlk döngünün kahramanından geriye kalan iz: kendi Kule'sinin tepesine çıkmış, Çekirdek'e hayır demiş ve parçalanmış biri. Senin silahlarını, senin duruşunu, senin sınıfının bir eski sürümünü kullanıyor.", en: "What's left of the first cycle's hero: someone who climbed their own Spire, said no to the Core, and got torn apart for it. It fights with your weapons, your stance, an older build of your own class." }
-    kanca: { tr: "Kırık bir pencere açılıyor; üstünde tarih yok, yalnızca bir sayaç: [DÖNGÜ 7]. Pencerenin arkasından biri sana doğru yürüyor ve yürüyüşünü tanıyorsun.", en: "A broken window opens. No date on it, just a counter: [CYCLE 7]. Someone walks toward you from behind it, and you know that walk." }
+    aciklama: { tr: "İlk döngünün kahramanından geriye kalan iz: kendi Kule'sinin tepesine çıkmış, Çekirdek'e hayır demiş ve bu yüzden parçalanmış biri. Senin silahlarını, senin duruşunu, sınıfının eski bir sürümünü kullanır.", en: "What's left of the first cycle's hero: someone who climbed their own Spire, said no to the Core, and got torn apart for it. It fights with your weapons, your stance, an older build of your own class." }
+    kanca: { tr: "Kırık bir pencere açılıyor; üstünde tarih yok, yalnızca bir sayaç: [DÖNGÜ 7]. Pencerenin ardından biri sana doğru yürüyor ve o yürüyüşü tanıyorsun.", en: "A broken window opens. No date on it, just a counter: [CYCLE 7]. Someone walks toward you from behind it, and you know that walk." }
     seviye: 45
     can: 1000
     statlar: { str: 42, agi: 42, end: 40, int: 42, wis: 40, per: 42, wil: 50, cha: 30 }
     davranis: "temkinli"
     zeki: true
     zaaf: "zihin"
-    zaaf_metin: { tr: "Son cümlesini hâlâ tekrarlıyor: hayır. O kelimeye onunla birlikte söylemek, ona bir düşman değil bir eş gibi yaklaşmak demek.", en: "It's still repeating its last word: no. Saying that word with it, instead of at it, means meeting it as an equal, not an enemy." }
+    zaaf_metin: { tr: "Son sözünü hâlâ yineliyor: hayır. O sözü ona karşı değil onunla birlikte söylemek, ona düşman gibi değil bir eş gibi yaklaşmak demektir.", en: "It's still repeating its last word: no. Saying that word with it, instead of at it, means meeting it as an equal, not an enemy." }
     saldirilar:
       - id: "eski_surum"
         ad: { tr: "Eski Sürüm", en: "Legacy Build" }
@@ -296,26 +296,26 @@ dusmanlar:
     boss: true
     fazlar:
       - esik: 70
-        metin: { tr: "İlk anomali duruşunu değiştiriyor; senin bir sonraki evriminin duruşuna.", en: "The first anomaly shifts its stance, into the stance of your next evolution." }
+        metin: { tr: "İlk anomali duruşunu değiştiriyor: senin bir sonraki evriminin duruşuna geçiyor.", en: "The first anomaly shifts its stance, into the stance of your next evolution." }
         guclenme: { str: 4, agi: 4 }
       - esik: 40
-        metin: { tr: "Sayaç titriyor: [DÖNGÜ 7... 8]. İlk anomali duraksıyor; gözleri senden ayrılıyor ve altı döngüdür ilk defa sayaca bakıyor.", en: "The counter flickers: [CYCLE 7... 8]. The first anomaly falters. Its eyes leave you, and for the first time in six cycles it's looking at the counter." }
+        metin: { tr: "Sayaç titriyor: [DÖNGÜ 7... 8]. İlk anomali duraksıyor; gözlerini senden ayırıp altı döngüdür ilk kez sayaca bakıyor.", en: "The counter flickers: [CYCLE 7... 8]. The first anomaly falters. Its eyes leave you, and for the first time in six cycles it's looking at the counter." }
         guclenme: { wil: 8 }
       - esik: 15
-        metin: { tr: "Yorgun bir sesle, senin sesine çok benzeyen bir sesle fısıldıyor: ben de buraya kadar gelmiştim.", en: "In a tired voice, a voice a lot like yours, it whispers: i made it this far too." }
+        metin: { tr: "Yorgun, seninkine çok benzeyen bir sesle fısıldıyor: ben de buraya kadar gelmiştim.", en: "In a tired voice, a voice a lot like yours, it whispers: i made it this far too." }
         guclenme: { int: 6, wil: 6 }
 
   hasat_avcisi:
     ad: { tr: "Hasat Avcısı", en: "The Harvest Hunter" }
-    aciklama: { tr: "Hasat başladığında Sistem'in kendi elinden salınan şey: hesaba uymayan değerleri silmek için yapılmış, insan boyunun iki katı, çatlak bir saat kadranı gibi parlayan bir av köpeği. Yalnızca bir hedefi var ve o hedef sensin.", en: "The thing the System lets off its own leash once the Harvest begins: built to delete values that don't fit the math, twice a man's height, a hunting hound glowing like a cracked clock face. It has exactly one target, and the target is you." }
-    kanca: { tr: "Gökyüzündeki geri sayım bir an duruyor. Saniyelerin arasındaki boşluktan bir şey düşüyor; yere değdiği yerde asfalt saate dönüyor.", en: "The countdown in the sky stops for a beat. Something drops through the gap between two seconds, and where it lands, the asphalt turns into clockwork." }
+    aciklama: { tr: "Hasat başladığında Sistem'in kendi elinden salıverdiği şey: hesaba uymayan değerleri silmek için yapılmış, insan boyunun iki katı, çatlak bir saat kadranı gibi parlayan bir av köpeği. Tek bir hedefi vardır ve o hedef sensin.", en: "The thing the System lets off its own leash once the Harvest begins: built to delete values that don't fit the math, twice a man's height, a hunting hound glowing like a cracked clock face. It has exactly one target, and the target is you." }
+    kanca: { tr: "Gökyüzündeki geri sayım bir an duruyor. İki saniyenin arasındaki boşluktan bir şey düşüyor; yere değdiği yerde asfalt saat çarkına dönüşüyor.", en: "The countdown in the sky stops for a beat. Something drops through the gap between two seconds, and where it lands, the asphalt turns into clockwork." }
     seviye: 45
     can: 1100
     statlar: { str: 48, agi: 40, end: 44, int: 36, wis: 30, per: 44, wil: 44, cha: 4 }
     davranis: "agresif"
     zeki: true
     zaaf: "karanlik"
-    zaaf_metin: { tr: "Saati sayar; sayamadığı tek şey hesabın dışında kalanlardır. Biri araya girdiğinde, beklemediği bir değer gibi, bir an tökezler.", en: "It counts time. The one thing it can't count is what falls outside the math. When someone steps in it didn't expect, it stumbles, like a value it never accounted for." }
+    zaaf_metin: { tr: "Zamanı sayar; sayamadığı tek şey hesabın dışında kalandır. Biri araya girdiğinde, hesaba katmadığı bir değer gibi, bir an tökezler.", en: "It counts time. The one thing it can't count is what falls outside the math. When someone steps in it didn't expect, it stumbles, like a value it never accounted for." }
     saldirilar:
       - id: "son_saniye"
         ad: { tr: "Son Saniye", en: "Last Second" }
@@ -325,7 +325,7 @@ dusmanlar:
         etiketler: ["fiziksel", "yakin"]
         durum: { etki: "kanama", sans: 0.45, sure: 3 }
         bekleme: 0
-        metin: { tr: "{dusman} bir saniyenin içinden geçip arkana çıkıyor; dişleri sen dönmeden omzunda.", en: "{dusman} steps through a single second and comes out behind you. Its teeth are in your shoulder before you finish turning." }
+        metin: { tr: "{dusman} bir saniyenin içinden geçip arkana çıkıyor; sen dönmeden dişleri omzunda.", en: "{dusman} steps through a single second and comes out behind you. Its teeth are in your shoulder before you finish turning." }
       - id: "hasat_saati"
         ad: { tr: "Hasat Saati", en: "Harvest Hour" }
         stat: "int"
@@ -334,17 +334,17 @@ dusmanlar:
         etiketler: ["zihin", "alan"]
         durum: { etki: "korku", sans: 0.4, sure: 2 }
         bekleme: 3
-        metin: { tr: "{dusman} başını kaldırıp uluyor ve gökyüzündeki geri sayım senin kalp atışına geçiyor. Her atışta biraz daha az kalıyor.", en: "{dusman} throws its head back and howls, and the countdown in the sky syncs to your heartbeat. Every beat, there's a little less left." }
+        metin: { tr: "{dusman} başını kaldırıp uluyor; gökyüzündeki geri sayım senin kalp atışına ayak uyduruyor. Her atışta biraz daha az kalıyor.", en: "{dusman} throws its head back and howls, and the countdown in the sky syncs to your heartbeat. Every beat, there's a little less left." }
     xp: 3600
     kredi: 0
     etiketler: ["sistem", "hasat"]
     boss: true
     fazlar:
       - esik: 70
-        metin: { tr: "Avcı kadranını sana çeviriyor; akrep senin yaşını, yelkovan kalan gününü gösteriyor.", en: "The hunter turns its clock face on you. The hour hand shows your age. The minute hand, the days you have left." }
+        metin: { tr: "Avcı kadranını sana çeviriyor: akrep yaşını, yelkovan kalan günlerini gösteriyor.", en: "The hunter turns its clock face on you. The hour hand shows your age. The minute hand, the days you have left." }
         guclenme: { per: 6 }
       - esik: 40
-        metin: { tr: "Kadranın camı çatlıyor; içinden akrep ve yelkovan gibi iki yeni bacak çıkıyor. Artık daha hızlı ve artık durmuyor.", en: "The glass on its face cracks, and two new legs unfold out of it like clock hands. It's faster now, and it isn't stopping." }
+        metin: { tr: "Kadranın camı çatlıyor; içinden akrep ve yelkovan gibi iki yeni bacak çıkıyor. Artık daha hızlı ve durmak bilmiyor.", en: "The glass on its face cracks, and two new legs unfold out of it like clock hands. It's faster now, and it isn't stopping." }
         guclenme: { agi: 8, str: 4 }
       - esik: 15
         metin: { tr: "[Hedef silinemedi. Değer hesaba yeniden ekleniyor.] Avcı titriyor; Sistem kendi hesabıyla tartışıyor.", en: "[Target could not be deleted. Re-adding value to the math.] The hunter shudders. The System is arguing with its own arithmetic." }

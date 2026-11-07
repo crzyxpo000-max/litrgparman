@@ -8,8 +8,8 @@
 dusmanlar:
   kadim_defter_askeri:
     ad: { tr: "Defter Askeri", en: "Ledger Soldier" }
-    aciklama: { tr: "Kadimler'in sıradan piyadesi. Neredeyse üç metre boyunda, dizleri geriye doğru hafifçe bükülen bir gövde; zırhı cilalanıp seramik kadar sertleştirilmiş defter yapraklarından. Kılıcı kâğıt kadar ince ve açtığı her yara bir çentik gibi düzgün.", en: "The Ancients' rank-and-file infantry. Nearly ten feet of body with knees that bend slightly backward, armored in ledger pages lacquered hard as ceramic. Its blade is thin as a sheet of paper, and every wound it leaves is as neat as a tally mark." }
-    kanca: { tr: "Defter Askeri kılıcını kaldırıyor ve zırhının yaprakları bir kitabın sayfaları gibi hışırdayarak açılıyor. Her yaprakta bir sütun isim var; bazılarının üstü çizilmiş.", en: "The Ledger Soldier raises its blade, and the pages of its armor riffle open like a book. Every page holds a column of names. Some are crossed out." }
+    aciklama: { tr: "Kadimler'in sıradan piyadesi. Neredeyse üç metre boyunda, dizleri hafifçe geriye bükülen bir gövde; zırhı, cilalanıp seramik sertliğine getirilmiş defter yapraklarından. Kılıcı kâğıt kadar incedir, açtığı her yara bir çentik kadar düzgün.", en: "The Ancients' rank-and-file infantry. Nearly ten feet of body with knees that bend slightly backward, armored in ledger pages lacquered hard as ceramic. Its blade is thin as a sheet of paper, and every wound it leaves is as neat as a tally mark." }
+    kanca: { tr: "Defter Askeri kılıcını kaldırıyor; zırhının yaprakları kitap sayfaları gibi hışırdayarak açılıyor. Her yaprakta bir sütun isim var, bazılarının üstü çizilmiş.", en: "The Ledger Soldier raises its blade, and the pages of its armor riffle open like a book. Every page holds a column of names. Some are crossed out." }
     seviye: 40
     can: 760
     statlar:
@@ -24,7 +24,7 @@ dusmanlar:
     davranis: "agresif"
     zeki: true
     zaaf: "ates"
-    zaaf_metin: { tr: "Zırhı ne kadar cilalı olursa olsun hâlâ kâğıt. Ateş yaprakları kıvırır; kıvrılan her yaprağın altında çıplak, gri bir deri kalır.", en: "However hard the lacquer, the armor is still paper. Fire curls the pages, and under every curled page there's bare gray skin." }
+    zaaf_metin: { tr: "Zırhı ne kadar cilalı olsa da sonuçta kâğıttır. Ateş yaprakları kıvırır; kıvrılan her yaprağın altında çıplak, gri bir deri kalır.", en: "However hard the lacquer, the armor is still paper. Fire curls the pages, and under every curled page there's bare gray skin." }
     saldirilar:
       - id: "sayim_kesigi"
         ad: { tr: "Sayım Kesiği", en: "Tally Cut" }
@@ -34,7 +34,7 @@ dusmanlar:
         etiketler: ["fiziksel", "yakin"]
         durum: { etki: "kanama", sans: 0.35, sure: 2 }
         bekleme: 0
-        metin: { tr: "{dusman} kâğıt inceliğindeki kılıcını üstüne çekiyor; açılan yara cetvelle çizilmiş kadar düz.", en: "{dusman} draws its paper-thin blade across you. The cut it leaves is straight as a ruled line." }
+        metin: { tr: "{dusman} kâğıt inceliğindeki kılıcını üstünden çekiyor; açılan yara cetvelle çizilmiş gibi düz.", en: "{dusman} draws its paper-thin blade across you. The cut it leaves is straight as a ruled line." }
       - id: "kayit_darbesi"
         ad: { tr: "Kayıt Darbesi", en: "Entry Strike" }
         stat: "wil"
@@ -43,7 +43,7 @@ dusmanlar:
         etiketler: ["zihin", "yakin"]
         durum: { etki: "sersemleme", sans: 0.25, sure: 1 }
         bekleme: 2
-        metin: { tr: "{dusman} kabzayı göğsüne vuruyor ve bir an Durum pencerende adının yanında yabancı bir sütun beliriyor: [Kaydedildi].", en: "{dusman} drives the pommel into your chest, and for a second a foreign column opens next to your name in your Status window: [Entered]." }
+        metin: { tr: "{dusman} kabzayı göğsüne indiriyor ve bir an Durum pencerende adının yanında yabancı bir sütun beliriyor: [Kaydedildi].", en: "{dusman} drives the pommel into your chest, and for a second a foreign column opens next to your name in your Status window: [Entered]." }
     xp: 7600
     kredi: 60
     ganimet: { defter_yapragi: 0.6, vel_damlasi: 0.15 }
@@ -52,8 +52,8 @@ dusmanlar:
 
   kadim_orakci:
     ad: { tr: "Hasat Orakçısı", en: "Harvest Sickle" }
-    aciklama: { tr: "Kadim saflarının kanat avcısı. Kolları dirseğin ötesinde bir eklem daha bükülüyor ve her birinin ucunda bir hilal bıçak var. Hasat edilmiş dünyalarda kaçanları toplamak için yetiştirilmiş.", en: "The flankers of the Ancient line. Its arms bend at one more joint past the elbow, and each one ends in a crescent blade. Bred to round up whatever runs on a world being harvested." }
-    kanca: { tr: "Bir hilal, göz ucunda bir kez parlıyor. Hasat Orakçısı yere değmeden yan tarafına geçmiş bile; kollarını iki orak gibi açıyor.", en: "A crescent flashes once at the edge of your vision. The Harvest Sickle is already at your flank without touching the ground, arms spreading like a pair of scythes." }
+    aciklama: { tr: "Kadim saflarının kanat avcısı. Kolları dirseğin ötesinde bir eklem daha bükülür, her birinin ucunda hilal biçimli bir bıçak vardır. Hasat edilen dünyalarda kaçanları toplamak için yetiştirilmiştir.", en: "The flankers of the Ancient line. Its arms bend at one more joint past the elbow, and each one ends in a crescent blade. Bred to round up whatever runs on a world being harvested." }
+    kanca: { tr: "Göz ucunda bir hilal bir kez parlıyor. Hasat Orakçısı yere değmeden yanına geçmiş bile; kollarını iki orak gibi açıyor.", en: "A crescent flashes once at the edge of your vision. The Harvest Sickle is already at your flank without touching the ground, arms spreading like a pair of scythes." }
     seviye: 42
     can: 700
     statlar:
@@ -68,7 +68,7 @@ dusmanlar:
     davranis: "agresif"
     zeki: false
     zaaf: "delici"
-    zaaf_metin: { tr: "Hızlı olmak için hafif yapılmış. Kabuğu oraklarının dibinde incecik; oraya saplanan bir uç, kolu bir menteşe gibi kilitler.", en: "Built light so it can be fast. The shell where the sickles meet the arm is thin as a fingernail, and a point driven in there locks the joint like a jammed hinge." }
+    zaaf_metin: { tr: "Hızlı olsun diye hafif yapılmıştır. Kabuğu, orakların kola bağlandığı yerde incecik; oraya saplanan bir uç kolu menteşe gibi kilitler.", en: "Built light so it can be fast. The shell where the sickles meet the arm is thin as a fingernail, and a point driven in there locks the joint like a jammed hinge." }
     saldirilar:
       - id: "hilal_bicisi"
         ad: { tr: "Hilal Biçişi", en: "Crescent Reap" }
@@ -78,7 +78,7 @@ dusmanlar:
         etiketler: ["fiziksel", "yakin"]
         durum: { etki: "kanama", sans: 0.45, sure: 2 }
         bekleme: 0
-        metin: { tr: "{dusman} iki orağı birden, bir tarlayı biçer gibi alçaktan savuruyor.", en: "{dusman} swings both sickles low and wide, like it's cutting a field." }
+        metin: { tr: "{dusman} iki orağını birden, tarla biçer gibi alçaktan savuruyor.", en: "{dusman} swings both sickles low and wide, like it's cutting a field." }
       - id: "hasat_donusu"
         ad: { tr: "Hasat Dönüşü", en: "Harvest Turn" }
         stat: "str"
@@ -86,7 +86,7 @@ dusmanlar:
         kat: 0.9
         etiketler: ["fiziksel", "alan"]
         bekleme: 2
-        metin: { tr: "{dusman} kendi etrafında bir kez dönüyor ve oraklar, çevresindeki her şeyi aynı yükseklikten kesen bir çember çiziyor.", en: "{dusman} spins once, and the sickles draw a circle that cuts everything around it at exactly the same height." }
+        metin: { tr: "{dusman} kendi çevresinde bir kez dönüyor; oraklar, etrafındaki her şeyi aynı yükseklikten kesen bir çember çiziyor.", en: "{dusman} spins once, and the sickles draw a circle that cuts everything around it at exactly the same height." }
     xp: 8400
     kredi: 55
     ganimet: { defter_yapragi: 0.4 }
@@ -95,8 +95,8 @@ dusmanlar:
 
   kadim_muhafiz:
     ad: { tr: "Elçilik Muhafızı", en: "Embassy Warden" }
-    aciklama: { tr: "Elçileri korumak için değil, izlemek için yanlarına verilen ağır zırhlı Kadim. Kalkanı, mühürlenmiş bir defterin kapağı; içini yalnızca Meclis açabilir.", en: "A heavily armored Ancient assigned to an envoy, not to protect him but to watch him. Its shield is the cover of a sealed ledger, and only the Conclave can open it." }
-    kanca: { tr: "Elçilik Muhafızı kalkanını yere dikiyor. Taş, mühürlü kapağın altında çatırdıyor; muhafız sana değil, arkandaki bir şeye bakıyor gibi.", en: "The Embassy Warden plants its shield. The stone cracks under the sealed cover, and the Warden seems to be looking not at you, but at something behind you." }
+    aciklama: { tr: "Elçileri korumak için değil, gözetlemek için yanlarına verilen ağır zırhlı Kadim. Kalkanı mühürlü bir defterin kapağıdır; içini yalnızca Meclis açabilir.", en: "A heavily armored Ancient assigned to an envoy, not to protect him but to watch him. Its shield is the cover of a sealed ledger, and only the Conclave can open it." }
+    kanca: { tr: "Elçilik Muhafızı kalkanını yere dikiyor. Mühürlü kapağın altında taş çatırdıyor; muhafız sana değil, arkandaki bir şeye bakıyor gibi.", en: "The Embassy Warden plants its shield. The stone cracks under the sealed cover, and the Warden seems to be looking not at you, but at something behind you." }
     seviye: 44
     can: 1100
     statlar:
@@ -111,7 +111,7 @@ dusmanlar:
     davranis: "temkinli"
     zeki: true
     zaaf: "simsek"
-    zaaf_metin: { tr: "Kalkanın kapağını kapalı tutan mühür metal ve canlı; şimşek mühürde düğümlenip kalkanı bir an kendiliğinden açtırır.", en: "The seal holding the shield shut is metal, and it's alive. Lightning knots up in it and pops the cover open for a heartbeat." }
+    zaaf_metin: { tr: "Kalkanın kapağını kapalı tutan mühür hem metal hem canlıdır; şimşek mühürde düğümlenir ve kalkanı bir anlığına kendiliğinden açtırır.", en: "The seal holding the shield shut is metal, and it's alive. Lightning knots up in it and pops the cover open for a heartbeat." }
     saldirilar:
       - id: "muhur_darbesi"
         ad: { tr: "Mühür Darbesi", en: "Seal Bash" }
@@ -130,7 +130,7 @@ dusmanlar:
         etiketler: ["zihin", "alan"]
         durum: { etki: "korku", sans: 0.35, sure: 2 }
         bekleme: 3
-        metin: { tr: "{dusman} kalkanın kapağına bir kez vuruyor. Ses kulağına değil, kemiklerine ulaşıyor ve kemiklerin bunu bir hüküm gibi dinliyor.", en: "{dusman} raps once on the shield's cover. The sound doesn't reach your ears. It reaches your bones, and your bones hear it as a verdict." }
+        metin: { tr: "{dusman} kalkanın kapağına bir kez vuruyor. Ses kulaklarına değil kemiklerine ulaşıyor; kemiklerin onu bir hüküm gibi dinliyor.", en: "{dusman} raps once on the shield's cover. The sound doesn't reach your ears. It reaches your bones, and your bones hear it as a verdict." }
     xp: 10000
     kredi: 80
     ganimet: { defter_yapragi: 0.7 }
@@ -139,7 +139,7 @@ dusmanlar:
 
   kadim_okuyucu:
     ad: { tr: "Okuyucu", en: "Reader" }
-    aciklama: { tr: "Yüzü olmayan, yalnızca dikey bir yarığı olan ince bir Kadim. Seni okur: statlarını, seviyeni, yalan söyleyip söylemediğini. Okuduğu satırlar senin pencerende griye döner.", en: "A thin Ancient with no face, only a single vertical slit. It reads you: your stats, your level, whether you're lying. Whatever it reads goes gray in your own window." }
+    aciklama: { tr: "Yüzü olmayan, yalnızca dikey bir yarığı bulunan ince bir Kadim. Seni okur: statlarını, seviyeni, yalan söyleyip söylemediğini. Okuduğu satırlar senin pencerende griye döner.", en: "A thin Ancient with no face, only a single vertical slit. It reads you: your stats, your level, whether you're lying. Whatever it reads goes gray in your own window." }
     kanca: { tr: "Okuyucu'nun yarığı açılıyor. Durum pencerendeki satırlar birer birer griye dönüyor; biri onları senden önce okuyor.", en: "The Reader's slit opens. The lines in your Status window go gray one by one. Somebody's reading them before you do." }
     seviye: 45
     can: 640
@@ -155,7 +155,7 @@ dusmanlar:
     davranis: "temkinli"
     zeki: true
     zaaf: "karanlik"
-    zaaf_metin: { tr: "Yalnızca okunabilen şeyi görür. Karanlık, yani okunmayan her satır, onun için bir duvar değil bir uçurum; içine düşer.", en: "It only sees what can be read. To a Reader, darkness, any line that won't read, isn't a wall. It's a cliff, and it falls in." }
+    zaaf_metin: { tr: "Yalnızca okunabileni görür. Karanlık, yani okunmayan her satır, onun için duvar değil uçurumdur; içine düşer.", en: "It only sees what can be read. To a Reader, darkness, any line that won't read, isn't a wall. It's a cliff, and it falls in." }
     saldirilar:
       - id: "okuma"
         ad: { tr: "Okuma", en: "The Reading" }
@@ -183,8 +183,8 @@ dusmanlar:
 
   kadim_sayim_tazisi:
     ad: { tr: "Sayım Tazısı", en: "Tally Hound" }
-    aciklama: { tr: "Hasat edilmiş bir dünyanın av hayvanlarından yetiştirilmiş, gözsüz, uzun bacaklı bir köpek. Kalp atışlarını sayar; sürüsü saydığı sayı tamamlanana kadar durmaz.", en: "An eyeless, long-legged hound bred from the game animals of some harvested world. It counts heartbeats, and the pack doesn't stop until the count comes out right." }
-    kanca: { tr: "Sayım Tazıları sessizce yayılıyor. Kafalarını eğmiş, dinliyorlar; senin kalbini sayıyorlar.", en: "The Tally Hounds fan out without a sound, heads low, listening. They're counting your heartbeat." }
+    aciklama: { tr: "Hasat edilmiş bir dünyanın av hayvanlarından yetiştirilmiş, gözsüz, uzun bacaklı bir köpek. Kalp atışlarını sayar; sürü, saydığı sayı tamamlanana dek durmaz.", en: "An eyeless, long-legged hound bred from the game animals of some harvested world. It counts heartbeats, and the pack doesn't stop until the count comes out right." }
+    kanca: { tr: "Sayım Tazıları sessizce yayılıyor. Başlarını eğmiş dinliyorlar; senin kalp atışlarını sayıyorlar.", en: "The Tally Hounds fan out without a sound, heads low, listening. They're counting your heartbeat." }
     seviye: 38
     can: 560
     statlar:
@@ -199,7 +199,7 @@ dusmanlar:
     davranis: "suru"
     zeki: false
     zaaf: "ses"
-    zaaf_metin: { tr: "Kalp sayarak avlanıyor. Ani, sağır edici bir ses sayımı bozar; sürü baştan saymak zorunda kalır.", en: "It hunts by counting hearts. A sudden, deafening noise wrecks the count, and the pack has to start over." }
+    zaaf_metin: { tr: "Kalp sayarak avlanır. Ani, sağır edici bir ses sayımı bozar; sürü baştan saymak zorunda kalır.", en: "It hunts by counting hearts. A sudden, deafening noise wrecks the count, and the pack has to start over." }
     saldirilar:
       - id: "nabiz_isirigi"
         ad: { tr: "Nabız Isırığı", en: "Pulse Bite" }
@@ -218,7 +218,7 @@ dusmanlar:
         etiketler: ["ses", "alan"]
         durum: { etki: "korku", sans: 0.3, sure: 2 }
         bekleme: 3
-        metin: { tr: "{dusman} başını kaldırıp uluyor ve uluma bir sayıya dönüşüyor. Kalbin, istemeden, o sayıya uymaya başlıyor.", en: "{dusman} throws its head back and howls, and the howl becomes a count. Without meaning to, your heart starts keeping time with it." }
+        metin: { tr: "{dusman} başını kaldırıp uluyor; uluma bir sayıya dönüşüyor. Kalbin istemeden o sayıya ayak uyduruyor.", en: "{dusman} throws its head back and howls, and the howl becomes a count. Without meaning to, your heart starts keeping time with it." }
     xp: 6000
     kredi: 0
     ganimet: { defter_yapragi: 0.2 }
@@ -227,8 +227,8 @@ dusmanlar:
 
   kadim_kanca_teknesi:
     ad: { tr: "Kanca Teknesi", en: "Hook Skiff" }
-    aciklama: { tr: "Kadim gemilerinden kopup yere inen, yarı makine yarı canlı bir çıkarma teknesi. Altından zincirli kancalar sarkar; kıyıya tutunur, karnını açar ve askerlerini boşaltır.", en: "A landing craft that breaks off the Ancient ships and drops to the ground, half machine and half alive. Chained hooks hang from its belly. It grabs the shore, opens up, and empties its soldiers out." }
-    kanca: { tr: "Gökyüzünden bir gölge iniyor. Kanca Teknesi'nin zincirleri rıhtıma saplanıyor ve teknenin karnı bir ağız gibi açılmaya başlıyor.", en: "A shadow drops out of the sky. The Hook Skiff's chains bite into the pier, and its belly starts to open like a mouth." }
+    aciklama: { tr: "Kadim gemilerinden kopup yere inen, yarı makine yarı canlı bir çıkarma teknesi. Altından zincirli kancalar sarkar; kıyıya tutunur, karnını açıp askerlerini boşaltır.", en: "A landing craft that breaks off the Ancient ships and drops to the ground, half machine and half alive. Chained hooks hang from its belly. It grabs the shore, opens up, and empties its soldiers out." }
+    kanca: { tr: "Gökyüzünden bir gölge iniyor. Kanca Teknesi'nin zincirleri rıhtıma saplanıyor, teknenin karnı bir ağız gibi açılmaya başlıyor.", en: "A shadow drops out of the sky. The Hook Skiff's chains bite into the pier, and its belly starts to open like a mouth." }
     seviye: 46
     can: 1300
     statlar:
@@ -243,7 +243,7 @@ dusmanlar:
     davranis: "agresif"
     zeki: false
     zaaf: "ruzgar"
-    zaaf_metin: { tr: "Havada asılı durmak için bütün gövdesiyle dengede. Sert bir rüzgâr onu yana yatırır; yatan tekne kancalarını bırakmak zorunda kalır.", en: "It hangs in the air by balancing its whole body. A hard wind tips it sideways, and a tipped skiff has to let go of its hooks." }
+    zaaf_metin: { tr: "Havada asılı kalabilmek için bütün gövdesiyle denge kurar. Sert bir rüzgâr onu yana yatırır; yatan tekne kancalarını bırakmak zorunda kalır.", en: "It hangs in the air by balancing its whole body. A hard wind tips it sideways, and a tipped skiff has to let go of its hooks." }
     saldirilar:
       - id: "kanca_zinciri"
         ad: { tr: "Kanca Zinciri", en: "Hook Chain" }
@@ -261,7 +261,7 @@ dusmanlar:
         kat: 0.9
         etiketler: ["fiziksel", "alan"]
         bekleme: 3
-        metin: { tr: "{dusman} karnını açıyor ve içinden Defter Askerleri yağıyor; inerken kılıçları zaten çekili.", en: "{dusman} opens its belly, and Ledger Soldiers rain out of it, blades already drawn on the way down." }
+        metin: { tr: "{dusman} karnını açıyor; içinden Defter Askerleri yağıyor, inerken kılıçları çoktan çekilmiş.", en: "{dusman} opens its belly, and Ledger Soldiers rain out of it, blades already drawn on the way down." }
     xp: 11000
     kredi: 120
     ganimet: { defter_yapragi: 1.0, canli_bakir: 0.5 }
@@ -270,8 +270,8 @@ dusmanlar:
 
   kadim_budayici:
     ad: { tr: "Budayıcı", en: "The Pruner" }
-    aciklama: { tr: "Meclis'in sapmaları budamak için gönderdiği Kadim. Elçilerden de eski; derisindeki çentikler dünya değil, budadığı kişilerin sayısı. Hiç kırpmadığı tek bir gözü var: budadığı şeyi görmek zorunda.", en: "The Ancient the Conclave sends to prune deviations. Older than any envoy. The notches on its skin aren't worlds; they're the people it has pruned. It has one eye it never closes, because it has to see what it cuts." }
-    kanca: { tr: "Hava bir makasın iki ağzı gibi kapanıyor. Budayıcı oradaydı; hep oradaydı. Tek gözü açık, sana bakıyor ve seni bir dalın fazlası gibi tartıyor.", en: "The air closes like the two blades of a pair of shears. The Pruner was there. It was always there. Its one eye is open, and it's weighing you like an extra branch." }
+    aciklama: { tr: "Meclis'in sapmaları budamak için gönderdiği Kadim; elçilerden bile eski. Derisindeki çentikler dünyaları değil, budadığı kişileri sayar. Hiç kırpmadığı tek bir gözü vardır: budadığı şeyi görmek zorundadır.", en: "The Ancient the Conclave sends to prune deviations. Older than any envoy. The notches on its skin aren't worlds; they're the people it has pruned. It has one eye it never closes, because it has to see what it cuts." }
+    kanca: { tr: "Hava bir makasın iki ağzı gibi kapanıyor. Budayıcı oradaydı; hep oradaydı. Tek gözü açık, sana bakıyor ve seni fazladan bir dal gibi tartıyor.", en: "The air closes like the two blades of a pair of shears. The Pruner was there. It was always there. Its one eye is open, and it's weighing you like an extra branch." }
     seviye: 50
     can: 2400
     statlar:
@@ -286,7 +286,7 @@ dusmanlar:
     davranis: "agresif"
     zeki: true
     zaaf: "goz"
-    zaaf_metin: { tr: "Budadığı şeyi görmek zorunda; tek gözünü asla kapatmaz. O gözü kör eden, Budayıcı'yı bir dalı nereden keseceğini bilmeyen yaşlı bir bahçıvana çevirir.", en: "It has to see what it prunes, so it never closes that one eye. Blind it, and the Pruner becomes an old gardener who doesn't know where to cut." }
+    zaaf_metin: { tr: "Budadığı şeyi görmek zorunda olduğundan tek gözünü asla kapatmaz. O gözü kör etmek, Budayıcı'yı dalı nereden keseceğini bilemeyen yaşlı bir bahçıvana çevirir.", en: "It has to see what it prunes, so it never closes that one eye. Blind it, and the Pruner becomes an old gardener who doesn't know where to cut." }
     saldirilar:
       - id: "budama"
         ad: { tr: "Budama", en: "The Cut" }
@@ -296,7 +296,7 @@ dusmanlar:
         etiketler: ["fiziksel", "yakin"]
         durum: { etki: "kanama", sans: 0.45, sure: 3 }
         bekleme: 0
-        metin: { tr: "{dusman} makas kollarını bir kez kapatıyor. Kesik, bir dalın gövdeden ayrıldığı yerdeki gibi temiz.", en: "{dusman} snaps its shear-arms shut once. The cut is clean, like where a branch comes off the trunk." }
+        metin: { tr: "{dusman} makas kollarını bir kez kapatıyor. Kesik, dalın gövdeden ayrıldığı yer kadar temiz.", en: "{dusman} snaps its shear-arms shut once. The cut is clean, like where a branch comes off the trunk." }
       - id: "fazla_dal"
         ad: { tr: "Fazla Dal", en: "Surplus Growth" }
         stat: "wil"
@@ -305,7 +305,7 @@ dusmanlar:
         etiketler: ["zihin", "menzilli"]
         durum: { etki: "korku", sans: 0.4, sure: 2 }
         bekleme: 2
-        metin: { tr: "{dusman} gözünü sana dikiyor ve bir an kendini onun gördüğü gibi görüyorsun: ağaca ait olmayan, kesilmesi gereken bir şey.", en: "{dusman} fixes its eye on you, and for a second you see yourself the way it does: something that doesn't belong on the tree. Something that needs cutting." }
+        metin: { tr: "{dusman} gözünü sana dikiyor; bir an kendini onun gördüğü gibi görüyorsun: ağaca ait olmayan, kesilmesi gereken bir şey.", en: "{dusman} fixes its eye on you, and for a second you see yourself the way it does: something that doesn't belong on the tree. Something that needs cutting." }
     xp: 30000
     kredi: 400
     ganimet: { budayici_gozu: 1.0, defter_yapragi: 1.0, vel_damlasi: 1.0 }
@@ -313,7 +313,7 @@ dusmanlar:
     boss: true
     fazlar:
       - esik: 70
-        metin: { tr: "Budayıcı geri çekiliyor ve derisindeki çentiklerden biri kendi kendine kazınıyor. Yeni bir çentik: senin adına açılmış. Henüz dolmamış.", en: "The Pruner steps back, and one of the notches on its skin carves itself fresh. A new mark, opened in your name. Not filled in yet." }
+        metin: { tr: "Budayıcı geri çekiliyor; derisindeki çentiklerden biri kendiliğinden kazınıyor. Senin adına açılmış yeni bir çentik. Henüz dolmamış.", en: "The Pruner steps back, and one of the notches on its skin carves itself fresh. A new mark, opened in your name. Not filled in yet." }
         guclenme: { str: 6, per: 6 }
         saldiri:
           id: "centik_acma"
@@ -326,7 +326,7 @@ dusmanlar:
           bekleme: 3
           metin: { tr: "{dusman} senin çentiğini kazırken aynı çizgiyi senin derinde de açıyor.", en: "{dusman} carves your mark into its skin, and the same line opens in yours." }
       - esik: 40
-        metin: { tr: "Makas kolları ikiye ayrılıyor; dört ağız, dört yön. Budayıcı artık seni değil, etrafındaki her şeyi budayarak sana ulaşıyor.", en: "Its shear-arms split in two. Four blades, four directions. The Pruner isn't cutting at you anymore; it's cutting everything around you to get to you." }
+        metin: { tr: "Makas kolları ikiye ayrılıyor: dört ağız, dört yön. Budayıcı artık seni değil, çevrendeki her şeyi budayarak sana ulaşıyor.", en: "Its shear-arms split in two. Four blades, four directions. The Pruner isn't cutting at you anymore; it's cutting everything around you to get to you." }
         guclenme: { agi: 8, str: 4 }
         saldiri:
           id: "dort_agiz"
@@ -336,7 +336,7 @@ dusmanlar:
           kat: 0.9
           etiketler: ["fiziksel", "alan"]
           bekleme: 2
-          metin: { tr: "{dusman} dört makasını birden kapatıyor ve aradaki havada kalan her şey yere dökülüyor.", en: "{dusman} snaps all four blades at once, and everything caught in the air between them falls to the ground in pieces." }
+          metin: { tr: "{dusman} dört makasını birden kapatıyor; aralarındaki havada kalan her şey parça parça yere dökülüyor.", en: "{dusman} snaps all four blades at once, and everything caught in the air between them falls to the ground in pieces." }
       - esik: 15
         metin: { tr: "Tek göz kanlanıyor ama kapanmıyor. Budayıcı ilk kez konuşuyor, kuru ve yorgun: \"Meclis bir dal için iki budayıcı göndermez. Gönderecek.\"", en: "The single eye floods red, but it doesn't close. The Pruner speaks for the first time, dry and tired: \"The Conclave never sends two pruners for one branch. It will now.\"" }
         guclenme: { str: 6, end: 6, wil: 6 }
@@ -349,12 +349,12 @@ dusmanlar:
           etiketler: ["zihin", "karanlik"]
           durum: { etki: "sersemleme", sans: 0.4, sure: 1 }
           bekleme: 3
-          metin: { tr: "{dusman} makaslarını yere saplıyor. Altında, seni tutan şey her neyse onun kökü kesiliyor ve bir an duramıyorsun.", en: "{dusman} drives its shears into the ground. Whatever holds you up, its root gets cut, and for a moment you can't stand." }
+          metin: { tr: "{dusman} makaslarını yere saplıyor. Seni ayakta tutan şey her neyse kökünden kesiliyor; bir an duramıyorsun.", en: "{dusman} drives its shears into the ground. Whatever holds you up, its root gets cut, and for a moment you can't stand." }
 
   thessar_elci:
     ad: { tr: "Defterin Eli", en: "Hand of the Ledger" }
-    aciklama: { tr: "Elçi, elçiliği bıraktığında. Kalemini bir kılıç gibi tutuyor, derisindeki otuz dokuz dünya bir zırh gibi parlıyor. Savaşmıyor; seni kaydediyor, sonra kaydı kapatıyor.", en: "The Envoy, once he stops being an envoy. He holds his stylus like a sword, and the thirty-nine worlds on his skin shine like armor. He doesn't fight you. He enters you into the record, and then he closes the entry." }
-    kanca: { tr: "Elçi zincirli kalemini havaya kaldırıyor. Aranızdaki boşluk bir sayfa gibi düzleşiyor ve o sayfanın üstüne, en tepeye, senin adın yazılıyor.", en: "The Envoy lifts his chained stylus. The space between you flattens out like a page, and at the very top of that page, your name gets written." }
+    aciklama: { tr: "Elçi, elçiliği bıraktığında. Kalemini kılıç gibi tutar, derisindeki otuz dokuz dünya zırh gibi parlar. Savaşmaz; seni kaydeder, sonra kaydı kapatır.", en: "The Envoy, once he stops being an envoy. He holds his stylus like a sword, and the thirty-nine worlds on his skin shine like armor. He doesn't fight you. He enters you into the record, and then he closes the entry." }
+    kanca: { tr: "Elçi zincirli kalemini havaya kaldırıyor. Aranızdaki boşluk sayfa gibi düzleşiyor ve o sayfanın en tepesine senin adın yazılıyor.", en: "The Envoy lifts his chained stylus. The space between you flattens out like a page, and at the very top of that page, your name gets written." }
     seviye: 50
     can: 2600
     statlar:
@@ -369,7 +369,7 @@ dusmanlar:
     davranis: "temkinli"
     zeki: true
     zaaf: "karanlik"
-    zaaf_metin: { tr: "Bütün gücü okumaya dayanıyor: okuyamadığını kaydedemez, kaydedemediğini silemez. Senin içindeki okunmayan karanlık onun defterinde bir mürekkep lekesi; büyüdükçe elinden kayıyor.", en: "Everything he has runs on reading. What he can't read, he can't record, and what he can't record, he can't erase. The unreadable dark in you is an ink blot in his ledger, and the bigger it gets, the more you slip through his fingers." }
+    zaaf_metin: { tr: "Bütün gücü okumaya dayanır: okuyamadığını kaydedemez, kaydedemediğini silemez. Senin içindeki okunmayan karanlık onun defterinde bir mürekkep lekesidir; leke büyüdükçe sen elinden kayarsın.", en: "Everything he has runs on reading. What he can't read, he can't record, and what he can't record, he can't erase. The unreadable dark in you is an ink blot in his ledger, and the bigger it gets, the more you slip through his fingers." }
     saldirilar:
       - id: "katman_hukmu"
         ad: { tr: "Katman Hükmü", en: "Layer Decree" }
@@ -379,7 +379,7 @@ dusmanlar:
         etiketler: ["zihin", "menzilli"]
         durum: { etki: "sersemleme", sans: 0.3, sure: 1 }
         bekleme: 0
-        metin: { tr: "{dusman} iki parmağını kaldırıyor. Bulunduğun yer katlanıyor; kemiklerin, yanlış yazılmış bir satır gibi düzeltilmeye çalışılıyor.", en: "{dusman} lifts two fingers. The space you're standing in folds, and your bones get corrected like a typo." }
+        metin: { tr: "{dusman} iki parmağını kaldırıyor. Durduğun yer katlanıyor; kemiklerin yanlış yazılmış bir satır gibi düzeltilmeye çalışılıyor.", en: "{dusman} lifts two fingers. The space you're standing in folds, and your bones get corrected like a typo." }
       - id: "kayit_kapatma"
         ad: { tr: "Kaydı Kapatma", en: "Closing the Entry" }
         stat: "int"
@@ -396,7 +396,7 @@ dusmanlar:
     boss: true
     fazlar:
       - esik: 70
-        metin: { tr: "Elçi ceketinin düğmelerini çözüyor. Altında derisi değil, satırlar var; otuz dokuz dünyanın son günleri, küçük, düzgün harflerle. \"Kırkıncı sayfa senin,\" diyor iki sesiyle.", en: "The Envoy unbuttons his coat. Under it there isn't skin, there are lines: the last days of thirty-nine worlds in small, tidy handwriting. \"The fortieth page is yours,\" he says in both his voices." }
+        metin: { tr: "Elçi ceketinin düğmelerini çözüyor. Altında deri değil, satırlar var: otuz dokuz dünyanın son günleri, küçük, düzgün harflerle. \"Kırkıncı sayfa senin,\" diyor iki sesiyle.", en: "The Envoy unbuttons his coat. Under it there isn't skin, there are lines: the last days of thirty-nine worlds in small, tidy handwriting. \"The fortieth page is yours,\" he says in both his voices." }
         guclenme: { int: 8, wil: 6 }
         saldiri:
           id: "otuz_dokuz_dunya"
@@ -407,9 +407,9 @@ dusmanlar:
           etiketler: ["zihin", "alan"]
           durum: { etki: "kor", sans: 0.4, sure: 2 }
           bekleme: 3
-          metin: { tr: "{dusman} derisindeki dünyaları birer birer okuyor ve her biri, son gününün ışığıyla gözlerini yakarak üstüne düşüyor.", en: "{dusman} reads the worlds off his skin one by one, and each of them falls on you in the light of its last day, burning out your eyes." }
+          metin: { tr: "{dusman} derisindeki dünyaları birer birer okuyor; her biri son gününün ışığıyla gözlerini yakarak üstüne düşüyor.", en: "{dusman} reads the worlds off his skin one by one, and each of them falls on you in the light of its last day, burning out your eyes." }
       - esik: 40
-        metin: { tr: "Elçinin ikinci sesi birinciye yetişiyor. Artık iki kişi konuşuyor ve ikisi de aynı şeyi söylemiyor: biri seni siliyor, öbürü seni ezberliyor.", en: "The Envoy's second voice catches up with the first. Now there are two of him talking, and they're not saying the same thing. One is erasing you. The other is memorizing you." }
+        metin: { tr: "Elçinin ikinci sesi birincisine yetişiyor. Artık iki kişi konuşuyor ve ikisi aynı şeyi söylemiyor: biri seni siliyor, öbürü ezberliyor.", en: "The Envoy's second voice catches up with the first. Now there are two of him talking, and they're not saying the same thing. One is erasing you. The other is memorizing you." }
         guclenme: { agi: 8, per: 6 }
         saldiri:
           id: "cift_ses"
@@ -422,7 +422,7 @@ dusmanlar:
           bekleme: 2
           metin: { tr: "{dusman} iki sesiyle aynı anda konuşuyor ve iki hüküm, yarım nefes arayla, aynı kemiği iki kez kırıyor.", en: "{dusman} speaks in both voices at once, and two verdicts, half a breath apart, break the same bone twice." }
       - esik: 15
-        metin: { tr: "Kalemin ucu kırılıyor. Elçi kırık ucu bir an inceliyor; sonra mürekkebi kendi derisinden, otuz dokuzuncu dünyanın satırından alıyor. \"Hesap kapanır,\" diyor. Ama sesi ilk kez titriyor.", en: "The stylus tip snaps. The Envoy studies the broken nib for a moment, then draws ink from his own skin, from the line of the thirty-ninth world. \"The account closes,\" he says. But for the first time, his voice shakes." }
+        metin: { tr: "Kalemin ucu kırılınca Elçi kırık ucu bir an inceliyor, sonra mürekkebi kendi derisinden, otuz dokuzuncu dünyanın satırından alıyor. \"Hesap kapanır,\" diyor; ama sesi ilk kez titriyor.", en: "The stylus tip snaps. The Envoy studies the broken nib for a moment, then draws ink from his own skin, from the line of the thirty-ninth world. \"The account closes,\" he says. But for the first time, his voice shakes." }
         guclenme: { wil: 10, end: 6 }
         saldiri:
           id: "hesap_kapanir"

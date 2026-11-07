@@ -212,8 +212,8 @@ sözcükten fazlasını tek seferde almaz.
 | 6 | `70_cok_evren`, `71_perde3` | 24.700 | **bitti** |
 | 7 | `72_kule`, `tower.yaml` | 11.700 | **bitti** |
 | 8 | `80_perde4`, `81_sonlar`, `endings.yaml`, `story/90_sistem` | 19.300 | **bitti** |
-| 9 | `npcs/*`, `traits`, `knowledge*`, `ranking`, `army`, `quests*`, `feats*`, `regions`, `factions` | ~6.000 | bekliyor |
-| 10 | `enemies*` (bestiyer dahil), `items*`, `skills`, `classes`, `titles*`, `awakenings*`, `essences`, `professions`, `daily`, `system.yaml` | ~25.000 | bekliyor |
+| 9 | `npcs/*`, `traits`, `knowledge*`, `ranking`, `army`, `quests*`, `feats*`, `regions`, `factions` | ~6.000 | **bitti** |
+| 10 | `enemies*` (bestiyer dahil), `items*`, `skills`, `classes`, `titles*`, `awakenings*`, `essences`, `professions`, `daily`, `system.yaml` | ~25.000 | **bitti** |
 
 **Parti 1 notu (2026-11-07):** 1.774 `tr` değeri yeniden yazıldı (9 dilim ajanı; dilimler çıktıyı `{satır, tr}` JSON'u
 olarak verdi, birleştirme tek elden yapıldı). Ardından 5 bağımsız okuyucu dosyaların tamamını eski/yeni/EN yan yana
@@ -228,6 +228,11 @@ sistem sahneleri ve Kule (~13.000 `tr`) 33 yazar dilimi + her dosyaya bir okuyuc
 uygulandı). Aynı geçişte kronikler "yalnız kesinleşeni anlat" ilkesiyle TR+EN düzeltildi (`tools/uslup --kronik-en`).
 Briefler: `docs/qa/uslup_brief.md`, `docs/qa/okuma_brief.md`; araçlar `tools/qa/`. Tüm içerik ölçümü (19.254 `tr`):
 noktalı virgül >1 216→15 · art arda 3 -yor 303→62 · kısa cümle dizisi 1.616→1.262 · "Bu, " 24→1. Kalan: Parti 9–10.
+
+**Parti 9–10 notu (2026-11-08):** NPC dosyaları, izler, bilgiler, görevler, başarılar, unvanlar, düşmanlar ve bestiyer,
+eşyalar, yetenekler, sınıflar, uyanışlar, Özler, meslekler, Günlük Görev ve `system.yaml` (~1.560 `tr`) 7 yazar + 4 okuyucu
+ile (`docs/qa/uslup_brief_ansiklopedik.md`); 53 okuma bulgusu uygulandı. Adlar (`ad`) değişmedi. **Elden geçirme bitti:**
+tüm içerik (19.266 `tr`) için noktalı virgül >1 216→2 · art arda 3 -yor 303→48 · kısa cümle dizisi 1.616→1.231.
 
 ### 7.3 Parti akışı
 

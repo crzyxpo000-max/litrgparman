@@ -2,7 +2,7 @@ uyanislar:
   son_nefes:
     baslik: { tr: "[UYANIŞ] Son Nefes", en: "[AWAKENING] Last Breath" }
     satirlar:
-      - { tr: "Canın %10'un altındaydı ve yine de kazandın. Bedenin bunu bir kural olarak kaydediyor.", en: "You were under 10% HP and you still won. Your body files that away as a rule." }
+      - { tr: "Canın %10'un altındaydı, yine de kazandın. Bedenin bunu bir kural olarak kaydediyor.", en: "You were under 10% HP and you still won. Your body files that away as a rule." }
       - metin: { tr: "{npc:yanki} fısıldıyor: \"Ölmeyi reddettin. Ben de bunu reddetmeyi reddediyorum.\"", en: "{npc:yanki} whispers: \"You refused to die. I refuse to let that go to waste.\"" }
         kosul: { bayrak: "yanki_bagi", bayrak_yok: "yanki_silindi" }   # Yankı silindiyse bu ses yok
     kosul:
@@ -14,7 +14,7 @@ uyanislar:
   kirik_tavan:
     baslik: { tr: "[UYANIŞ] Kırık Tavan", en: "[AWAKENING] Broken Ceiling" }
     satirlar:
-      - { tr: "Kademe sınırı bir duvar değilmiş. Bir kapıymış ve sen onu tekmeyle açtın.", en: "The Grade limit wasn't a wall. It was a door, and you kicked it open." }
+      - { tr: "Kademe sınırı bir duvar değil, bir kapıymış; sen de onu tekmeyle açtın.", en: "The Grade limit wasn't a wall. It was a door, and you kicked it open." }
       - { tr: "Bir sonraki evriminde gizli bir yol daha açılacak.", en: "A hidden path will open at your next evolution." }
     kosul:
       degisken_min: { _savas_kademe_farki: 1 }
@@ -52,7 +52,7 @@ uyanislar:
     baslik: { tr: "[UYANIŞ] Kırılma · Kara Kan", en: "[AWAKENING] The Break · Black Blood" }
     satirlar:
       - { tr: "Sistem kaydı gecikmeli düşüyor: 'Kademe sınırı ihlali · kaynak bulunamadı.' Kaynak sensin ve hâlâ kanıyorsun.", en: "The System logs it late: 'Grade limit breach · source not found.' The source is you, and you're still bleeding." }
-      - { tr: "{npc:yanki}: bunu ben yapmadım. sen yaptın. ve hoşuna gitti.", en: "{npc:yanki}: i didn't do that. you did. and you liked it." }
+      - { tr: "{npc:yanki}: bunu ben yapmadım, sen yaptın. üstelik hoşuna gitti.", en: "{npc:yanki}: i didn't do that. you did. and you liked it." }
     kosul: { iz: "kara_kan", bayrak: "kirilma_yasandi", degisken_min: { _savas_kazanildi: 1 } }
     etkiler:
       - yetenek: "kan_bedeli"

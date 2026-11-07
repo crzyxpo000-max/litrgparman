@@ -4,7 +4,7 @@
 # Kişilik: hırs 8 + sadakat 4 → güveni çökerse ihanet; vicdan 5 → kendi ırkına ihanet yolu açık. Savaş bloğu son düello içindir.
 id: thessar
 aciklama:
-  tr: "Kadimler'in Dünya'ya gönderdiği elçi. Dünya'yı bir ülke olarak değil, bir hasat tarlası olarak görüyor ve bunu söylemekten çekinmiyor. Kibarlığı, bir çiftçinin ineğine gösterdiği kibarlık."
+  tr: "Kadimler'in Dünya'ya gönderdiği elçi. Dünya'yı bir ülke değil, hasat bekleyen bir tarla olarak görür ve bunu söylemekten çekinmez. Kibarlığı, çiftçinin ineğine gösterdiği kibarlıktır."
   en: "The envoy the Ancients sent to Earth. He sees the planet as a crop, not a country, and doesn't bother pretending otherwise. His manners are the manners of a rancher talking to his cattle."
 kisilik: { cesaret: 7, hirs: 8, vicdan: 5, sadakat: 4, supheci: 8 }
 degerler: { merhamet: -30, duzen: 90, insanlik: -80 }
@@ -30,20 +30,20 @@ savas:
   artis: { wil: 2, int: 1 }
   saldiri: { tr: "Katman Hükmü", en: "Layer Decree" }
   metin:
-    tr: "{npc} yalnızca iki parmağını kaldırıyor. {dusman} bulunduğu yerde katlanıyor, sanki uzay onu yanlış yazılmış bir satır gibi silmiş."
+    tr: "{npc} yalnızca iki parmağını kaldırıyor. {dusman} olduğu yerde katlanıp gidiyor; uzay onu yanlış yazılmış bir satır gibi silmiş sanki."
     en: "{npc} lifts two fingers. That's all. {dusman} folds in on itself, like space just deleted a typo."
   duello_metin:
-    tr: "{dusman} sana bakmaya bile tenezzül etmiyor. Etrafındaki hava ağırlaşıyor, kemiklerin onun iradesine boyun eğmeye başlıyor."
+    tr: "{dusman} yüzüne bakmaya bile tenezzül etmiyor. Çevrendeki hava ağırlaşıyor ve kemiklerin onun iradesi önünde bükülmeye başlıyor."
     en: "{dusman} doesn't even bother looking at you. The air goes thick, and your bones start bending to his will."
 yay_dugumleri: [thessar_inis, thessar_ticaret_masasi, thessar_vassal_teklifi, thessar_ihanet_fisiltisi, thessar_kirik_muhur, thessar_son_duello]
 gorusler:
   merhamet+:
-    - { tr: "\"Bağışla. Canlı mal ölüsünden daha değerlidir. Bu merhamet değil; muhasebe.\"", en: "\"Spare it. Live stock is worth more than dead stock. That isn't mercy. That's accounting.\"" }
+    - { tr: "\"Bağışla. Canlı mal ölüsünden değerlidir. Merhamet değil bu; muhasebe.\"", en: "\"Spare it. Live stock is worth more than dead stock. That isn't mercy. That's accounting.\"" }
   merhamet-:
-    - { tr: "\"Türünüz duygularına çok fazla oy hakkı tanıyor. Kes ve devam et.\"", en: "\"Your species gives its feelings far too many votes. Cut it and move on.\"" }
+    - { tr: "\"Türünüz duygularına fazlasıyla söz hakkı tanıyor. Kes ve yoluna devam et.\"", en: "\"Your species gives its feelings far too many votes. Cut it and move on.\"" }
   duzen+:
-    - { tr: "\"Nihayet. Bir yasa. Belki de sizin türünüz eğitilebilir.\"", en: "\"At last. A law. Perhaps your species is trainable after all.\"" }
-    - { tr: "\"Bin dünya gördüm. Ayakta kalanların hepsinin tek bir sesi vardı. Ses ol.\"", en: "\"I have seen a thousand worlds. Every one that survived spoke with a single voice. Be that voice.\"" }
+    - { tr: "\"Nihayet bir yasa. Belki de türünüz eğitilebilir.\"", en: "\"At last. A law. Perhaps your species is trainable after all.\"" }
+    - { tr: "\"Bin dünya gördüm. Ayakta kalanların hepsi tek bir sesle konuşuyordu. O ses sen ol.\"", en: "\"I have seen a thousand worlds. Every one that survived spoke with a single voice. Be that voice.\"" }
   duzen-:
     - { tr: "\"Onların kuralları seni küçük tutmak için var. Benimkiler ise en azından dürüst.\"", en: "\"Their rules exist to keep you small. Mine, at least, are honest about it.\"" }
   insanlik+:
@@ -52,17 +52,17 @@ gorusler:
     - { tr: "\"Kabuğunu bırak. Altında ne olduğunu ikimiz de merak ediyoruz.\"", en: "\"Shed the shell. We are both curious what lies beneath it.\"" }
 guc_tepkileri:
   hayranlik:
-    - { tr: "\"Etkileyici. Bir insan için. Bunu raporuma yazacağım ve kimse inanmayacak.\"", en: "\"Impressive. For a human. I will put it in my report, and no one will believe it.\"" }
+    - { tr: "\"Etkileyici. Bir insan için, elbette. Raporuma yazacağım ve kimse inanmayacak.\"", en: "\"Impressive. For a human. I will put it in my report, and no one will believe it.\"" }
   endise:
     - { tr: "\"Sen bir sapmasın. Sapmalar ya yükseltilir ya budanır. Henüz karar verilmedi.\"", en: "\"You are a deviation. Deviations are either promoted or pruned. That decision has not been made.\"" }
     - { tr: "\"Bin yıllık hesabı bir yılda bozuyorsun. Meclis bu tür şeylerden hoşlanmaz.\"", en: "\"You are ruining a thousand-year projection in a single year. The Conclave does not enjoy that sort of thing.\"" }
   kiskanclik:
-    - { tr: "\"Benim türüm bu eşiğe dokuz nesilde ulaştı. Sen dokuz ayda. Bu... uygunsuz.\"", en: "\"My kind reached this threshold in nine generations. You did it in nine months. This is... improper.\"" }
+    - { tr: "\"Benim türüm bu eşiğe dokuz nesilde ulaştı. Sense dokuz ayda. Bu... uygunsuz.\"", en: "\"My kind reached this threshold in nine generations. You did it in nine months. This is... improper.\"" }
   bagimlilik:
-    - { tr: "\"Benim görevim artık sana bağlı. Bunu yüksek sesle söylemekten hoşlanmıyorum. Unut duyduğunu.\"", en: "\"My mission now depends on you. I do not enjoy saying that out loud. Forget you heard it.\"" }
+    - { tr: "\"Görevim artık sana bağlı. Bunu yüksek sesle söylemekten hoşlanmıyorum. Unut duyduğunu.\"", en: "\"My mission now depends on you. I do not enjoy saying that out loud. Forget you heard it.\"" }
 hafizalar:
   bas_egmedi: { tr: "Onu ilk selamladığında başını eğmedin.", en: "You didn't bow when he first greeted you." }
-  teklifi_dinledi: { tr: "Antlaşma teklifini sonuna kadar dinledin, sözünü kesmeden.", en: "You heard out his treaty offer all the way to the end, without interrupting." }
+  teklifi_dinledi: { tr: "Antlaşma teklifini sözünü kesmeden sonuna kadar dinledin.", en: "You heard out his treaty offer all the way to the end, without interrupting." }
   elcisini_oldurdu: { tr: "Kadim öncülerinden birini öldürdün. Raporuna yazdı.", en: "You killed one of the Ancient vanguard. He wrote it in his report." }
 kisisel_odul:
   - unvan: "kadim_konugu"

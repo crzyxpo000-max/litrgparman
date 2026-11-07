@@ -1,7 +1,7 @@
 yetenekler:
   agir_darbe:
     ad: { tr: "Ağır Darbe", en: "Heavy Blow" }
-    aciklama: { tr: "Bütün ağırlığını tek bir vuruşa ver. Zarif değil, ama işe yarıyor.", en: "Put your whole weight behind one swing. Not elegant. Effective." }
+    aciklama: { tr: "Bütün ağırlığını tek bir vuruşa verirsin. Zarif değildir ama iş görür.", en: "Put your whole weight behind one swing. Not elegant. Effective." }
     tur: "aktif"
     nadirlik: "siradan"
     maliyet: { dayanim: 8 }
@@ -29,7 +29,7 @@ yetenekler:
     etiketler: ["menzilli", "ates", "ok"]
   enerji_mermisi:
     ad: { tr: "Enerji Mermisi", en: "Mana Bolt" }
-    aciklama: { tr: "Ham manayı sıkıştırıp hedefe fırlatır. Büyünün en kaba hâli, ama hiç ıskalamaz gibi davranır.", en: "Compresses raw mana and hurls it. Magic at its crudest, but it acts like it never misses." }
+    aciklama: { tr: "Ham manayı sıkıştırıp hedefe fırlatır. Büyünün en kaba hâlidir ama hiç ıskalamazmış gibi davranır.", en: "Compresses raw mana and hurls it. Magic at its crudest, but it acts like it never misses." }
     tur: "aktif"
     nadirlik: "siradan"
     maliyet: { mp: 6 }
@@ -42,7 +42,7 @@ yetenekler:
     etiketler: ["buyu", "saf"]
   golge_adimi:
     ad: { tr: "Gölge Adımı", en: "Shadow Step" }
-    aciklama: { tr: "Yakındaki bir gölgeye girip hedefin arkasından çıkarsın. Gelen darbe de seninle birlikte gelir.", en: "Slip into a nearby shadow and come out behind your target, blade first." }
+    aciklama: { tr: "Yakındaki bir gölgeye girip hedefin arkasından çıkarsın. Darbe de seninle birlikte gelir.", en: "Slip into a nearby shadow and come out behind your target, blade first." }
     tur: "aktif"
     nadirlik: "nadir"
     maliyet: { dayanim: 8 }
@@ -55,7 +55,7 @@ yetenekler:
     etiketler: ["hareket", "golge", "gizlilik"]
   kalkan_duvari:
     ad: { tr: "Kalkan Duvarı", en: "Shield Wall" }
-    aciklama: { tr: "Önüne görünmez bir duvar örer. Arkasında durmak, önünde durmaktan çok daha sağlıklıdır.", en: "Raises an invisible wall in front of you. Standing behind it beats standing in front of it." }
+    aciklama: { tr: "Önüne görünmez bir duvar örer. Arkasında durmak önünde durmaktan çok daha sağlıklıdır.", en: "Raises an invisible wall in front of you. Standing behind it beats standing in front of it." }
     tur: "aktif"
     nadirlik: "siradan"
     maliyet: { dayanim: 10 }
@@ -69,7 +69,7 @@ yetenekler:
     etiketler: ["koruma", "kalkan"]
   ruh_pencesi:
     ad: { tr: "Ruh Pençesi", en: "Spirit Claw" }
-    aciklama: { tr: "Bağlı olduğun yarı saydam bir yaratığı kısa süreliğine çağırıp düşmana saldırtır.", en: "Briefly calls up a half-transparent bound beast and sics it on the enemy." }
+    aciklama: { tr: "Bağlı olduğun yarı saydam bir yaratığı kısa bir süre için çağırır, düşmanın üstüne salar.", en: "Briefly calls up a half-transparent bound beast and sics it on the enemy." }
     tur: "aktif"
     nadirlik: "siradan"
     maliyet: { mp: 10 }
@@ -82,7 +82,7 @@ yetenekler:
     etiketler: ["cagirma", "ruh"]
   dogaclama_tuzak:
     ad: { tr: "Doğaçlama Tuzak", en: "Jury-Rigged Trap" }
-    aciklama: { tr: "Elindeki hurdadan bir tuzak kurarsın. Sistem yapıyı onaylamıyor ama çalıştığını kabul ediyor.", en: "Builds a trap out of whatever junk you're holding. The System disapproves of the design. It admits it works." }
+    aciklama: { tr: "Eldeki hurdadan bir tuzak kurarsın. Sistem yapıyı onaylamaz ama çalıştığını kabul eder.", en: "Builds a trap out of whatever junk you're holding. The System disapproves of the design. It admits it works." }
     tur: "aktif"
     nadirlik: "siradan"
     maliyet: { dayanim: 6 }
@@ -108,7 +108,7 @@ yetenekler:
     etiketler: ["karanlik", "kan"]
   kapi_agzi:
     ad: { tr: "Kapı Ağzı", en: "Gatemaw" }
-    aciklama: { tr: "Yuttuğun kapıların artığı yumruğunda açılır. Daha önce bir boss yemiş olan şey, sıradan düşmandan korkmaz.", en: "The leftovers of every Gate you've swallowed open up in your fist. Something that's eaten a boss isn't scared of mooks." }
+    aciklama: { tr: "Yuttuğun kapılardan kalan artık yumruğunda açılır. Bir kez boss yemiş olan şey sıradan düşmandan korkmaz.", en: "The leftovers of every Gate you've swallowed open up in your fist. Something that's eaten a boss isn't scared of mooks." }
     tur: "aktif"
     nadirlik: "epik"
     maliyet: { dayanim: 12 }
@@ -120,7 +120,7 @@ yetenekler:
     etiketler: ["kapi", "yakin", "fiziksel"]
   bozuk_paket:
     ad: { tr: "Bozuk Paket", en: "Corrupt Packet" }
-    aciklama: { tr: "Hedefe Sistem'in kendisinin bile okuyamadığı bir veri yığını gönderir. Hedef bir süre ne olduğunu anlamaz.", en: "Sends the target a chunk of data even the System can't parse. For a moment, neither can they." }
+    aciklama: { tr: "Hedefe Sistem'in bile okuyamadığı bir veri yığını gönderir. Hedef bir süre neye uğradığını şaşırır.", en: "Sends the target a chunk of data even the System can't parse. For a moment, neither can they." }
     tur: "aktif"
     nadirlik: "epik"
     maliyet: { mp: 9 }
@@ -133,7 +133,7 @@ yetenekler:
     etiketler: ["glitch", "buyu"]
   agit:
     ad: { tr: "Ağıt", en: "Lament" }
-    aciklama: { tr: "Kaybettiklerin için yükselen bir ses. Duyan her düşman, kendi kaybedeceklerini hatırlar.", en: "A voice raised for the ones you lost. Every enemy who hears it remembers what they stand to lose." }
+    aciklama: { tr: "Kaybettiklerin için yükselen bir ses. Onu duyan her düşman kendi kaybedeceklerini hatırlar.", en: "A voice raised for the ones you lost. Every enemy who hears it remembers what they stand to lose." }
     tur: "aktif"
     nadirlik: "epik"
     maliyet: { mp: 10 }
@@ -156,7 +156,7 @@ yetenekler:
     etiketler: ["kritik", "ilk_vurus", "goz"]
   sifa_dokunusu:
     ad: { tr: "Şifa Dokunuşu", en: "Mending Touch" }
-    aciklama: { tr: "Avucunda ılık bir ışık toplanır ve yaraları kapatır. Merhamet, Sistem'e göre de bir kaynaktır.", en: "Warm light gathers in your palm and closes wounds. Turns out the System counts mercy as a resource, too." }
+    aciklama: { tr: "Avucunda ılık bir ışık toplanıp yaraları kapatır. Sistem'e göre merhamet de bir kaynaktır.", en: "Warm light gathers in your palm and closes wounds. Turns out the System counts mercy as a resource, too." }
     tur: "aktif"
     nadirlik: "nadir"
     maliyet: { mp: 10 }
@@ -169,7 +169,7 @@ yetenekler:
     etiketler: ["sifa", "isik"]
   uyarlanma:
     ad: { tr: "Uyarlanma", en: "Adapt" }
-    aciklama: { tr: "Aynı düşmanla geçen her tur, ona karşı direncini biraz artırır. Hiçbir şeyde en iyi değilsin; her şeye alışırsın.", en: "Each round against the same enemy raises your resistance to it a little. You're the best at nothing. You get used to everything." }
+    aciklama: { tr: "Aynı düşmanla geçen her tur ona karşı direncini biraz artırır. Hiçbir şeyde en iyi değilsin ama her şeye alışırsın.", en: "Each round against the same enemy raises your resistance to it a little. You're the best at nothing. You get used to everything." }
     tur: "pasif"
     nadirlik: "nadir"
     stat: "wis"
@@ -179,7 +179,7 @@ yetenekler:
     etiketler: ["denge", "direnc"]
   ruh_emme:
     ad: { tr: "Ruh Emme", en: "Soul Siphon" }
-    aciklama: { tr: "Verdiğin hasarın bir kısmı can olarak sana döner. Her kademede, insanlar yüzüne bakmakta biraz daha zorlanır.", en: "Part of the damage you deal flows back to you as health. Every Grade, people find it a little harder to look you in the eye." }
+    aciklama: { tr: "Verdiğin hasarın bir kısmı can olarak sana döner. Her kademede insanlar yüzüne bakmakta biraz daha zorlanır.", en: "Part of the damage you deal flows back to you as health. Every Grade, people find it a little harder to look you in the eye." }
     tur: "aktif"
     nadirlik: "epik"
     maliyet: { mp: 8 }
@@ -192,7 +192,7 @@ yetenekler:
     etiketler: ["karanlik", "can_emme", "ruh"]
   ruzgar_adimi:
     ad: { tr: "Rüzgar Adımı", en: "Wind Step" }
-    aciklama: { tr: "Bir rüzgar dalgasına binip bir an için iki kat hızlı hareket edersin.", en: "Ride a gust of wind and move twice as fast for a moment." }
+    aciklama: { tr: "Bir rüzgâr dalgasına binip bir anlığına iki kat hızlı hareket edersin.", en: "Ride a gust of wind and move twice as fast for a moment." }
     tur: "aktif"
     nadirlik: "siradan"
     maliyet: { dayanim: 6 }
@@ -205,7 +205,7 @@ yetenekler:
     etiketler: ["hareket", "ruzgar"]
   ilk_yardim:
     ad: { tr: "İlk Yardım", en: "First Aid" }
-    aciklama: { tr: "Bir bez, biraz baskı ve bolca küfür. Sistem bunu da yetenek sayıyor.", en: "A rag, some pressure, and a lot of swearing. The System counts that as a skill." }
+    aciklama: { tr: "Bir bez, biraz bastırma, bolca küfür. Sistem bunu da yetenekten sayıyor.", en: "A rag, some pressure, and a lot of swearing. The System counts that as a skill." }
     tur: "aktif"
     nadirlik: "siradan"
     maliyet: { dayanim: 5 }
@@ -218,7 +218,7 @@ yetenekler:
     etiketler: ["sifa", "hayatta_kalma"]
   ikinci_soluk:
     ad: { tr: "İkinci Soluk", en: "Second Wind" }
-    aciklama: { tr: "Canın yarının altına düştüğünde bir kez Dayanım yenilenir. Vücudun pes etmeyi henüz öğrenmedi.", en: "Once per fight, when you drop below half health, your Stamina refills. Your body hasn't learned how to quit yet." }
+    aciklama: { tr: "Canın yarının altına düşünce Dayanım bir kez yenilenir. Bedenin pes etmeyi daha öğrenmedi.", en: "Once per fight, when you drop below half health, your Stamina refills. Your body hasn't learned how to quit yet." }
     tur: "pasif"
     nadirlik: "siradan"
     stat: "end"
@@ -228,7 +228,7 @@ yetenekler:
     etiketler: ["hayatta_kalma", "dayanim"]
   tehlike_sezgisi:
     ad: { tr: "Tehlike Sezgisi", en: "Danger Sense" }
-    aciklama: { tr: "Ensendeki tüyler, tuzaklardan ve pusulardan bir an önce haber verir.", en: "The hair on the back of your neck warns you about traps and ambushes a beat early." }
+    aciklama: { tr: "Ensendeki tüyler tuzağı da pusuyu da bir an önceden haber verir.", en: "The hair on the back of your neck warns you about traps and ambushes a beat early." }
     tur: "pasif"
     nadirlik: "nadir"
     stat: "per"
@@ -238,7 +238,7 @@ yetenekler:
     etiketler: ["algi", "tuzak"]
   dehset_maskesi:
     ad: { tr: "Dehşet Maskesi", en: "Mask of Dread" }
-    aciklama: { tr: "Yüzün bir anlığına, düşmanlarının en kötü kâbusuna dönüşür. Her kademede maske biraz daha zor çıkar.", en: "For a moment your face becomes your enemies' worst nightmare. Every Grade, the mask gets a little harder to take off." }
+    aciklama: { tr: "Yüzün bir anlığına düşmanlarının en kötü kâbusuna dönüşür. Her kademede maske biraz daha zor çıkar.", en: "For a moment your face becomes your enemies' worst nightmare. Every Grade, the mask gets a little harder to take off." }
     tur: "aktif"
     nadirlik: "epik"
     maliyet: { mp: 12 }
@@ -265,7 +265,7 @@ yetenekler:
     etiketler: ["hareket", "uzay"]
   golge_avi:
     ad: { tr: "Gölge Avı", en: "Shadow Hunt" }
-    aciklama: { tr: "Gölgeler seninle birlikte avlanır. Hedef kaçabilir, ama gölgesi kaçamaz.", en: "The shadows hunt alongside you. The target can run. Its shadow can't." }
+    aciklama: { tr: "Gölgeler seninle birlikte avlanır. Hedef kaçabilir ama gölgesi kaçamaz.", en: "The shadows hunt alongside you. The target can run. Its shadow can't." }
     tur: "aktif"
     nadirlik: "epik"
     maliyet: { dayanim: 14 }
@@ -291,7 +291,7 @@ yetenekler:
     etiketler: ["menzilli", "ates", "alan"]
   kor_mizrak:
     ad: { tr: "Kor Mızrak", en: "Ember Lance" }
-    aciklama: { tr: "Alev oku sıkışıp beyaz kora döner. Zırhı delip içeride yanmaya devam eder.", en: "The flame compresses into a white-hot lance. It punches through armor and keeps burning on the inside." }
+    aciklama: { tr: "Alev oku sıkışıp beyaz kora döner. Zırhı delip içeride yanmayı sürdürür.", en: "The flame compresses into a white-hot lance. It punches through armor and keeps burning on the inside." }
     tur: "aktif"
     nadirlik: "epik"
     maliyet: { mp: 12 }
@@ -317,7 +317,7 @@ yetenekler:
     etiketler: ["yakin", "fiziksel", "alan"]
   zirh_yaran:
     ad: { tr: "Zırh Yaran", en: "Armor Splitter" }
-    aciklama: { tr: "Darbe en zayıf ek yerini bulur ve zırhı ikiye ayırır. Altındaki de pek dayanıklı değildir.", en: "The blow finds the weakest seam and splits the armor wide open. Whatever's under it isn't much tougher." }
+    aciklama: { tr: "Darbe en zayıf ek yerini bulup zırhı ikiye ayırır. Altındaki de pek dayanıklı sayılmaz.", en: "The blow finds the weakest seam and splits the armor wide open. Whatever's under it isn't much tougher." }
     tur: "aktif"
     nadirlik: "epik"
     maliyet: { dayanim: 12 }
@@ -330,7 +330,7 @@ yetenekler:
     etiketler: ["yakin", "fiziksel", "delici"]
   kale_durusu:
     ad: { tr: "Kale Duruşu", en: "Fortress Stance" }
-    aciklama: { tr: "Ayaklarını yere kökler, kendini bir surun içine kapatırsın. Hareket etmezsin; ama kimse seni hareket ettiremez.", en: "You root your feet and wall yourself in. You don't move. Neither does anything that hits you." }
+    aciklama: { tr: "Ayaklarını yere kök gibi salar, kendini bir surun içine kapatırsın. Yerinden kıpırdamazsın ama kimse de seni kıpırdatamaz.", en: "You root your feet and wall yourself in. You don't move. Neither does anything that hits you." }
     tur: "aktif"
     nadirlik: "epik"
     maliyet: { dayanim: 15 }
@@ -343,7 +343,7 @@ yetenekler:
     etiketler: ["koruma", "kalkan"]
   yansitici_kalkan:
     ad: { tr: "Yansıtıcı Kalkan", en: "Reflecting Shield" }
-    aciklama: { tr: "Kalkan darbeyi emer ve bir kısmını geldiği yere iade eder. Kibar bir ret mektubu gibi.", en: "The shield soaks the hit and returns part of it to sender. Like a polite rejection letter." }
+    aciklama: { tr: "Kalkan darbeyi emip bir kısmını geldiği yere iade eder; kibar bir ret mektubu gibi.", en: "The shield soaks the hit and returns part of it to sender. Like a polite rejection letter." }
     tur: "aktif"
     nadirlik: "epik"
     maliyet: { dayanim: 12 }
@@ -381,7 +381,7 @@ yetenekler:
     etiketler: ["buyu", "kristal", "delici", "buz"]
   kuyruklu_yildiz_atisi:
     ad: { tr: "Kuyruklu Yıldız Atışı", en: "Comet Shot" }
-    aciklama: { tr: "Koşarken atılan, rüzgarla hızlanan, alevle biten bir ok. İndiği yerde krater kalır.", en: "An arrow fired at a dead sprint, driven by wind, finished in fire. It leaves a crater where it lands." }
+    aciklama: { tr: "Koşarken atılan, rüzgârla hızlanan, alevle biten bir ok. İndiği yerde bir krater kalır.", en: "An arrow fired at a dead sprint, driven by wind, finished in fire. It leaves a crater where it lands." }
     tur: "aktif"
     nadirlik: "efsanevi"
     maliyet: { mp: 18 }
@@ -408,7 +408,7 @@ yetenekler:
     etiketler: ["koruma", "sifa", "isik", "kaynasma"]
   sessiz_infaz:
     ad: { tr: "Sessiz İnfaz", en: "Silent Execution" }
-    aciklama: { tr: "Gölgeden çıkar, bütün ağırlığınla tek darbe vurursun. Çoğu hedef ne olduğunu hiç öğrenmez.", en: "Out of the shadows, one strike with everything you've got. Most targets never find out what happened." }
+    aciklama: { tr: "Gölgeden çıkıp bütün ağırlığınla tek bir darbe indirirsin. Hedeflerin çoğu neye uğradığını hiç öğrenmez.", en: "Out of the shadows, one strike with everything you've got. Most targets never find out what happened." }
     tur: "aktif"
     nadirlik: "efsanevi"
     maliyet: { dayanim: 16 }
@@ -421,7 +421,7 @@ yetenekler:
     etiketler: ["golge", "yakin", "gizlilik", "kaynasma"]
   kemik_kiran:
     ad: { tr: "Kemik Kıran", en: "Bonebreaker" }
-    aciklama: { tr: "Sesi, hedefin kaç kemiği olduğunu hatırlatır. Artık bir eksik.", en: "The sound reminds the target how many bones it has. One fewer, now." }
+    aciklama: { tr: "Sesi hedefe kaç kemiği olduğunu hatırlatır; artık bir eksik.", en: "The sound reminds the target how many bones it has. One fewer, now." }
     tur: "aktif"
     nadirlik: "nadir"
     maliyet: { dayanim: 12 }
@@ -434,7 +434,7 @@ yetenekler:
     etiketler: ["yakin", "fiziksel"]
   celik_kasirga:
     ad: { tr: "Çelik Kasırga", en: "Steel Cyclone" }
-    aciklama: { tr: "Kendi etrafında dönen bir bıçak fırtınası olursun. Yanına yaklaşmak tavsiye edilmez.", en: "You become a spinning storm of steel. Getting close is not recommended." }
+    aciklama: { tr: "Kendi çevresinde dönen bir bıçak fırtınasına dönüşürsün. Yanına yaklaşmak hiç önerilmez.", en: "You become a spinning storm of steel. Getting close is not recommended." }
     tur: "aktif"
     nadirlik: "nadir"
     maliyet: { dayanim: 14 }
@@ -472,7 +472,7 @@ yetenekler:
     etiketler: ["menzilli", "ok", "simsek", "alan"]
   kul_firtinasi:
     ad: { tr: "Kül Fırtınası", en: "Cinderstorm" }
-    aciklama: { tr: "Sıcak kül ve kıvılcımdan bir girdap çağırır. Geride ne kalırsa, o da yanmaktadır.", en: "Summons a whirlwind of hot ash and sparks. Whatever's left behind is still on fire." }
+    aciklama: { tr: "Sıcak külden ve kıvılcımdan bir girdap çağırır. Geride ne kalırsa o da yanar.", en: "Summons a whirlwind of hot ash and sparks. Whatever's left behind is still on fire." }
     tur: "aktif"
     nadirlik: "nadir"
     maliyet: { mp: 16 }
@@ -485,7 +485,7 @@ yetenekler:
     etiketler: ["buyu", "ates", "alan"]
   yercekimi_dugumu:
     ad: { tr: "Yerçekimi Düğümü", en: "Gravity Knot" }
-    aciklama: { tr: "Hedefin etrafında yerçekimini düğümlersin. Bir süre kendi ağırlığının altında ezilir.", en: "You tie gravity in a knot around the target. For a while, it's crushed under its own weight." }
+    aciklama: { tr: "Hedefin çevresinde yerçekimini düğümlersin; hedef bir süre kendi ağırlığının altında ezilir.", en: "You tie gravity in a knot around the target. For a while, it's crushed under its own weight." }
     tur: "aktif"
     nadirlik: "nadir"
     maliyet: { mp: 14 }
@@ -498,7 +498,7 @@ yetenekler:
     etiketler: ["buyu", "yercekimi", "kural"]
   sessiz_kesik:
     ad: { tr: "Sessiz Kesik", en: "Silent Cut" }
-    aciklama: { tr: "Kimse duymaz. Hedef bile, ta ki kan akmaya başlayana kadar.", en: "Nobody hears it. Not even the target, until the bleeding starts." }
+    aciklama: { tr: "Kimse duymaz; kan akmaya başlayana kadar hedef bile.", en: "Nobody hears it. Not even the target, until the bleeding starts." }
     tur: "aktif"
     nadirlik: "nadir"
     maliyet: { dayanim: 10 }
@@ -511,7 +511,7 @@ yetenekler:
     etiketler: ["gizlilik", "bicak"]
   sis_perdesi:
     ad: { tr: "Sis Perdesi", en: "Fog Veil" }
-    aciklama: { tr: "Etrafa yoğun bir sis yayılır. Sen yolunu bilirsin; onlar bilmez.", en: "A thick fog rolls out around you. You know the way. They don't." }
+    aciklama: { tr: "Çevreye yoğun bir sis yayılır. Sen yolunu bilirsin, onlar bilmez.", en: "A thick fog rolls out around you. You know the way. They don't." }
     tur: "aktif"
     nadirlik: "nadir"
     maliyet: { mp: 12 }
@@ -550,7 +550,7 @@ yetenekler:
     etiketler: ["koruma", "ses", "provokasyon"]
   suru_salinimi:
     ad: { tr: "Sürü Salınımı", en: "Release the Swarm" }
-    aciklama: { tr: "Bağlı olduğun yüzlerce küçük yaratığı aynı anda salarsın. Isırıkları tek tek önemsiz, toplamda ölümcüldür.", en: "You let loose hundreds of tiny bound creatures at once. One bite is nothing. A thousand is a death sentence." }
+    aciklama: { tr: "Bağlı olduğun yüzlerce küçük yaratığı birden salarsın. Isırıkları tek tek önemsizdir ama toplamı öldürür.", en: "You let loose hundreds of tiny bound creatures at once. One bite is nothing. A thousand is a death sentence." }
     tur: "aktif"
     nadirlik: "nadir"
     maliyet: { mp: 16 }
@@ -576,7 +576,7 @@ yetenekler:
     etiketler: ["cagirma", "ruh", "koruma"]
   taret_kur:
     ad: { tr: "Taret Kur", en: "Deploy Turret" }
-    aciklama: { tr: "Hurdadan, mana çekirdeğinden ve inatçılıktan bir taret çatarsın. Sana sadık, düşmana acımasız.", en: "You slap together a turret from scrap, a mana core and pure stubbornness. Loyal to you, merciless to them." }
+    aciklama: { tr: "Hurdadan, mana çekirdeğinden ve inattan bir taret çatarsın. Sana sadıktır, düşmana acımasız.", en: "You slap together a turret from scrap, a mana core and pure stubbornness. Loyal to you, merciless to them." }
     tur: "aktif"
     nadirlik: "nadir"
     maliyet: { dayanim: 12 }
@@ -601,7 +601,7 @@ yetenekler:
     etiketler: ["zanaat", "tuzak", "alan"]
   curume_laneti:
     ad: { tr: "Çürüme Laneti", en: "Rot Hex" }
-    aciklama: { tr: "Hedefin içinde yavaş, sabırlı bir çürüme başlatır. Acelen yoksa en verimli yolu budur.", en: "Starts a slow, patient rot inside the target. If you're not in a hurry, it's the most efficient way there is." }
+    aciklama: { tr: "Hedefin içinde yavaş, sabırlı bir çürüme başlatır. Acelen yoksa en verimli yol budur.", en: "Starts a slow, patient rot inside the target. If you're not in a hurry, it's the most efficient way there is." }
     tur: "aktif"
     nadirlik: "nadir"
     maliyet: { mp: 12 }
@@ -627,7 +627,7 @@ yetenekler:
     etiketler: ["karanlik", "kan", "delici"]
   yarik_sindirimi:
     ad: { tr: "Yarık Sindirimi", en: "Rift Digestion" }
-    aciklama: { tr: "Yediğin kapıların enerjisini yumruğunda patlatırsın. Sindirim sistemi artık bir silah.", en: "You detonate the energy of every Gate you've eaten through your fist. Your digestive tract is now a weapon." }
+    aciklama: { tr: "Yediğin kapıların enerjisini yumruğunda patlatırsın. Sindirim sistemin artık bir silah.", en: "You detonate the energy of every Gate you've eaten through your fist. Your digestive tract is now a weapon." }
     tur: "aktif"
     nadirlik: "epik"
     maliyet: { dayanim: 14 }
@@ -639,7 +639,7 @@ yetenekler:
     etiketler: ["kapi", "yakin", "uzay"]
   faz_kiran:
     ad: { tr: "Faz Kıran", en: "Phase Breaker" }
-    aciklama: { tr: "Bossların faz geçişlerini sezip tam o anda vurursun. Yeni formuna alışmaya fırsat bulamaz.", en: "You sense a boss's phase shift and hit it right at the seam. It never gets to settle into its new form." }
+    aciklama: { tr: "Bossların faz geçişini sezip tam o anda vurursun; boss yeni formuna alışmaya fırsat bulamaz.", en: "You sense a boss's phase shift and hit it right at the seam. It never gets to settle into its new form." }
     tur: "aktif"
     nadirlik: "epik"
     maliyet: { dayanim: 16 }
@@ -665,7 +665,7 @@ yetenekler:
     etiketler: ["glitch", "buyu", "alan"]
   yetki_yukseltme:
     ad: { tr: "Yetki Yükseltme", en: "Privilege Escalation" }
-    aciklama: { tr: "Kendine kısa süreliğine sahip olmaman gereken izinler verirsin. Sistem fark edene kadar iki kat hızlısın.", en: "You grant yourself permissions you shouldn't have. Until the System notices, you're twice as fast." }
+    aciklama: { tr: "Kısa bir süre için kendine, sahip olmaman gereken izinler verirsin. Sistem fark edene kadar iki kat hızlısın.", en: "You grant yourself permissions you shouldn't have. Until the System notices, you're twice as fast." }
     tur: "aktif"
     nadirlik: "epik"
     maliyet: { mp: 15 }
@@ -742,7 +742,7 @@ yetenekler:
     etiketler: ["sifa"]
   paylasilan_aci:
     ad: { tr: "Paylaşılan Acı", en: "Shared Pain" }
-    aciklama: { tr: "Gelen acıyı bölüşen bir kalkan örersin. Yük bölününce hafifler; Sistem bunu matematik olarak da onaylıyor.", en: "You weave a shield that splits incoming pain. A burden shared is a burden halved. The System checked the math." }
+    aciklama: { tr: "Gelen acıyı paylaştıran bir kalkan örersin. Bölünen yük hafifler; Sistem bunu matematik olarak da onaylıyor.", en: "You weave a shield that splits incoming pain. A burden shared is a burden halved. The System checked the math." }
     tur: "aktif"
     nadirlik: "nadir"
     maliyet: { mp: 12 }
@@ -777,7 +777,7 @@ yetenekler:
     etiketler: ["denge"]
   ruh_senedi:
     ad: { tr: "Ruh Senedi", en: "Soul Lien" }
-    aciklama: { tr: "Hedefin ruhuna bir borç senedi bağlarsın. Her yarası, faiziyle birlikte sana ödenir.", en: "You slap a lien on the target's soul. Every wound it takes gets paid out to you, with interest." }
+    aciklama: { tr: "Hedefin ruhuna bir borç senedi bağlarsın. Aldığı her yara sana faiziyle ödenir.", en: "You slap a lien on the target's soul. Every wound it takes gets paid out to you, with interest." }
     tur: "aktif"
     nadirlik: "epik"
     maliyet: { mp: 12 }
@@ -789,7 +789,7 @@ yetenekler:
     etiketler: ["karanlik", "can_emme", "ruh"]
   bos_bakis:
     ad: { tr: "Boş Bakış", en: "Hollow Gaze" }
-    aciklama: { tr: "Gözlerinde hiçbir şey yok. Bakan, o hiçliğin kendisini de yutacağını anlar.", en: "There's nothing behind your eyes. Whatever looks into them understands the nothing will swallow it too." }
+    aciklama: { tr: "Gözlerinde hiçbir şey yok; bakan, o hiçliğin kendisini de yutacağını anlar.", en: "There's nothing behind your eyes. Whatever looks into them understands the nothing will swallow it too." }
     tur: "aktif"
     nadirlik: "epik"
     maliyet: { mp: 10 }
@@ -802,7 +802,7 @@ yetenekler:
     etiketler: ["karanlik", "zihin"]
   fay_hatti:
     ad: { tr: "Fay Hattı", en: "Fault Line" }
-    aciklama: { tr: "Yumruğun yere değdiği yerden bir çatlak açılır ve önündeki her şeyi ikiye böler. Sistem bunun nasıl olduğunu kaydedemedi.", en: "Your fist hits the ground and a crack runs out, splitting everything in front of you. The System failed to log how." }
+    aciklama: { tr: "Yumruğunun yere değdiği noktadan bir çatlak açılıp önündeki her şeyi ikiye böler. Sistem bunun nasıl olduğunu kaydedemedi.", en: "Your fist hits the ground and a crack runs out, splitting everything in front of you. The System failed to log how." }
     tur: "aktif"
     nadirlik: "benzersiz"
     stat: "str"
@@ -855,7 +855,7 @@ yetenekler:
     bekleme: 3
   son_hat:
     ad: { tr: "Son Hat", en: "Last Line" }
-    aciklama: { tr: "Arkandakilere ulaşmak isteyen önce senden geçmek zorunda. Bu kalkan o kural yüzünden kırılmaz.", en: "Anything that wants the people behind you has to go through you first. That rule is why this shield doesn't break." }
+    aciklama: { tr: "Arkandakilere ulaşmak isteyen önce senden geçmek zorundadır. Bu kalkan o kural sayesinde kırılmaz.", en: "Anything that wants the people behind you has to go through you first. That rule is why this shield doesn't break." }
     tur: "aktif"
     nadirlik: "benzersiz"
     stat: "end"
@@ -882,7 +882,7 @@ yetenekler:
     bekleme: 5
   kaynak_el:
     ad: { tr: "Kaynak El", en: "Source Hand" }
-    aciklama: { tr: "Dokunduğun eşyanın satırlarını görürsün ve birini değiştirebilirsin. Sistem buna hile der; sen zanaat.", en: "You can see the lines of code on anything you touch, and you can change one. The System calls it cheating. You call it craft." }
+    aciklama: { tr: "Dokunduğun eşyanın satırlarını görür, birini değiştirebilirsin. Sistem buna hile der, sen zanaat.", en: "You can see the lines of code on anything you touch, and you can change one. The System calls it cheating. You call it craft." }
     tur: "pasif"
     nadirlik: "benzersiz"
     stat: "int"
@@ -906,7 +906,7 @@ yetenekler:
     bekleme: 3
   son_nefes:
     ad: { tr: "Son Nefes", en: "Last Breath" }
-    aciklama: { tr: "Canın azaldıkça vuruşların sertleşir. Ölümün kıyısında en tehlikeli halindesin.", en: "The lower your HP, the harder you hit. You're most dangerous on the edge of dying." }
+    aciklama: { tr: "Canın azaldıkça vuruşların sertleşir. Ölümün kıyısında en tehlikeli hâline gelirsin.", en: "The lower your HP, the harder you hit. You're most dangerous on the edge of dying." }
     tur: "aktif"
     nadirlik: "efsanevi"
     maliyet: { dayanim: 10 }

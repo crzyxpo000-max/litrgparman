@@ -1,6 +1,6 @@
 ogreticinin_ilk_kani:
   ad: { tr: "Öğreticinin İlk Kanı", en: "First Blood of the Tutorial" }
-  aciklama: { tr: "Öğretici Katman'daki ilk öldürmeyi sen yaptın. Dünyada bir tane var.", en: "You made the first kill in the Tutorial Layer. There's only one of these in the world." }
+  aciklama: { tr: "Öğretici Katman'daki ilk öldürmeyi sen yaptın. Dünyada bundan yalnızca bir tane var.", en: "You made the first kill in the Tutorial Layer. There's only one of these in the world." }
   nadirlik: "nadir"
   bonus: { str: 1, agi: 1 }
   ilk: true
@@ -12,7 +12,7 @@ ilk_kapi_kapatan:
   ilk: true
 ilk_siniflanan:
   ad: { tr: "İlk Sınıflanan", en: "First to Be Classified" }
-  aciklama: { tr: "Sistem'den sınıf alan ilk insan oldun. Kalan sekiz milyar kişi sıraya girdi.", en: "You were the first human the System assigned a class. The other eight billion are in line behind you." }
+  aciklama: { tr: "Sistem'den sınıf alan ilk insan oldun. Geri kalan sekiz milyar kişi sıraya girdi.", en: "You were the first human the System assigned a class. The other eight billion are in line behind you." }
   nadirlik: "epik"
   bonus: { wis: 1, per: 1, cha: 1 }
   ilk: true
@@ -29,7 +29,7 @@ ilk_evrilen:
   ilk: true
 ilk_zanaatkar:
   ad: { tr: "İlk Zanaatkâr", en: "First Artisan" }
-  aciklama: { tr: "Bir meslekte ilk ürünü üreten insan oldun. Kıyamette bile biri çalışmak zorunda.", en: "You were the first human to craft anything with a Profession. Even in the apocalypse, somebody has to work." }
+  aciklama: { tr: "Bir meslekte ilk ürünü üreten insan oldun. Kıyamette bile birinin çalışması gerekiyor.", en: "You were the first human to craft anything with a Profession. Even in the apocalypse, somebody has to work." }
   nadirlik: "nadir"
   bonus: { int: 1, per: 1 }
   ilk: true
@@ -47,7 +47,7 @@ ilk_cekirdek_sahibi:
   ilk: true
 ogretici_gazisi:
   ad: { tr: "Öğretici Gazisi", en: "Tutorial Survivor" }
-  aciklama: { tr: "Öğretici Katman'dan sağ çıktın. İstatistiksel olarak bu bile bir başarı.", en: "You made it out of the Tutorial Layer alive. Statistically, that counts as an achievement." }
+  aciklama: { tr: "Öğretici Katman'dan sağ çıktın. İstatistiklere bakılırsa bu bile başarı sayılır.", en: "You made it out of the Tutorial Layer alive. Statistically, that counts as an achievement." }
   nadirlik: "siradan"
   bonus: { end: 1 }
 disiplinli:
@@ -67,17 +67,17 @@ yabancilarin_kalkani:
   bonus: { end: 1, cha: 1 }
 uzanan_el:
   ad: { tr: "Uzanan El", en: "Outstretched Hand" }
-  aciklama: { tr: "On yabancının hayatını kurtardın. İnsanlar adını bilmeden önce yüzünü tanıyor.", en: "You've saved ten strangers' lives. People recognize your face before they know your name." }
+  aciklama: { tr: "On yabancının hayatını kurtardın. İnsanlar daha adını öğrenmeden yüzünü tanıyor.", en: "You've saved ten strangers' lives. People recognize your face before they know your name." }
   nadirlik: "epik"
   bonus: { cha: 2, wis: 1 }
 kademe_asan:
   ad: { tr: "Kademe Aşan", en: "Grade Defier" }
-  aciklama: { tr: "Senden bir kademe yüksek bir düşmanı yendin. Sistem hesaplarını yeniden kontrol ediyor.", en: "You beat an enemy a full Grade above you. The System is double-checking its math." }
+  aciklama: { tr: "Senden bir kademe yüksek bir düşmanı yendin. Sistem hesaplarını baştan gözden geçiriyor.", en: "You beat an enemy a full Grade above you. The System is double-checking its math." }
   nadirlik: "epik"
   bonus: { str: 1, agi: 1, wil: 2 }
 analizci:
   ad: { tr: "Analizci", en: "Analyst" }
-  aciklama: { tr: "Yüz düşmanı vurmadan önce inceledin. Bilgi, en ucuz zırhtır.", en: "You sized up a hundred enemies before swinging. Information is the cheapest armor there is." }
+  aciklama: { tr: "Yüz düşmanı vurmadan önce inceledin. Bilgi en ucuz zırhtır.", en: "You sized up a hundred enemies before swinging. Information is the cheapest armor there is." }
   nadirlik: "nadir"
   bonus: { per: 2 }
 ceza_bolgesi_kacagi:
@@ -87,13 +87,13 @@ ceza_bolgesi_kacagi:
   bonus: { end: 1, agi: 1 }
 kardes_katili:
   ad: { tr: "Kardeş Katili", en: "Kinslayer" }
-  aciklama: { tr: "Bir insanı kendi elinle öldürdün. Bu unvan herkese görünür ve kimse unutmaz.", en: "You killed a human with your own hands. Everyone can see this title, and no one forgets it." }
+  aciklama: { tr: "Bir insanı kendi elinle öldürdün. Bu unvanı herkes görür, kimse de unutmaz.", en: "You killed a human with your own hands. Everyone can see this title, and no one forgets it." }
   nadirlik: "nadir"
   bonus: { str: 2, cha: -3 }
   itibar_tavani: { siginak: -50 }
 kurban_eden:
   ad: { tr: "Kurban Eden", en: "The Sacrificer" }
-  aciklama: { tr: "Kendi gücün için bir başkasını feda ettin. Bazıları bunu takdirle karşılıyor; bu daha da kötü.", en: "You sacrificed someone else for your own power. Some people admire that. That's worse." }
+  aciklama: { tr: "Kendi gücün için bir başkasını feda ettin. Bazıları bunu takdir ediyor; işin kötüsü de bu.", en: "You sacrificed someone else for your own power. Some people admire that. That's worse." }
   nadirlik: "epik"
   bonus: { wil: 2, int: 1, cha: -2 }
   itibar_tavani: { siginak: -30 }
@@ -105,12 +105,12 @@ firari:
   itibar_tavani: { lonca: -30 }
 les_yiyici:
   ad: { tr: "Leş Yiyici", en: "Carrion Picker" }
-  aciklama: { tr: "Ölü insanların üzerini aramayı alışkanlık hâline getirdin. Pratik, ama kokusu üstüne siniyor.", en: "You've made a habit of looting dead people. Practical, sure. But the smell sticks to you." }
+  aciklama: { tr: "Ölülerin ceplerini karıştırmak alışkanlığın oldu. İşe yarıyor, ama kokusu üstüne siniyor.", en: "You've made a habit of looting dead people. Practical, sure. But the smell sticks to you." }
   nadirlik: "siradan"
   bonus: { per: 1, cha: -1 }
 kademe_kiran:
   ad: { tr: "Kademe Kıran", en: "Gap Breaker" }
-  aciklama: { tr: "Bir üst kademeden bir varlığı yendin.", en: "You beat something a whole Grade above you." }
+  aciklama: { tr: "Üst kademeden bir varlığı yendin.", en: "You beat something a whole Grade above you." }
   nadirlik: "epik"
   bonus: { str: 2, agi: 2 }
 kademe_kiran_2:
@@ -120,7 +120,7 @@ kademe_kiran_2:
   bonus: { str: 3, agi: 3, wil: 3 }
 kademe_kiran_3:
   ad: { tr: "Kademe Kıran III", en: "Gap Breaker III" }
-  aciklama: { tr: "On kez. Kademeler senin için bir öneri.", en: "Ten times. For you, Grades are a suggestion." }
+  aciklama: { tr: "On kez. Kademeler senin için olsa olsa bir öneri.", en: "Ten times. For you, Grades are a suggestion." }
   nadirlik: "mitik"
   bonus: { str: 5, agi: 5, end: 5, wil: 5 }
 # ---- Aşama 5: kişisel görev ödülleri (Bağlılık ≥ 70) ----
@@ -146,7 +146,7 @@ kehanetin_tanigi:
   bonus: { wil: 2, wis: 2, cha: -1 }
 catlak_kanal:
   ad: { tr: "Çatlak Kanal", en: "Cracked Channel" }
-  aciklama: { tr: "Kafandaki bozuk ses sana bir şey gösterdi; Sistem'in hiçbir insana göstermemesi gereken bir şey. Artık pencerelerinin arasındaki boşlukları da okuyorsun.", en: "The broken voice in your head showed you something no human was ever supposed to see. Now you can read the gaps between your windows, too." }
+  aciklama: { tr: "Kafandaki bozuk ses sana Sistem'in hiçbir insana göstermemesi gereken bir şey gösterdi. Artık pencerelerinin arasındaki boşlukları da okuyorsun.", en: "The broken voice in your head showed you something no human was ever supposed to see. Now you can read the gaps between your windows, too." }
   nadirlik: "efsanevi"
   bonus: { int: 2, per: 2, wis: 2 }
 nefes_nefese:
@@ -161,6 +161,6 @@ arka_kapi:
   bonus: { int: 2, per: 2 }
 kadim_konugu:
   ad: { tr: "Kadimlerin Konuğu", en: "Guest of the Ancients" }
-  aciklama: { tr: "Bir Kadim elçisi seni mülk olarak değil, misafir olarak ağırladı. Onun türünde bunun bir adı var ve pek az insan bunu duydu.", en: "An Ancient envoy received you as a guest, not as property. His kind has a word for that, and very few humans have ever heard it." }
+  aciklama: { tr: "Bir Kadim elçisi seni mal değil, konuk olarak ağırladı. Onların dilinde bunun bir adı var ve o adı pek az insan duydu.", en: "An Ancient envoy received you as a guest, not as property. His kind has a word for that, and very few humans have ever heard it." }
   nadirlik: "efsanevi"
   bonus: { cha: 2, wil: 2, wis: 1 }

@@ -5,7 +5,7 @@
 # Satırlar tırnaksızdır: konuşma değil, kafanın içinde bir fısıltı. İngilizcede "it".
 id: yanki
 aciklama:
-  tr: "Entegrasyon Günü penceresine sızan bozuk satır. Sistem'in bir parçası, ama Sistem onu aramıyor gibi davranıyor. Yalnızca sen duyuyorsun."
+  tr: "Entegrasyon Günü penceresine sızan bozuk satır. Sistem'in bir parçası, ama Sistem onu aramıyormuş gibi davranıyor. Onu yalnızca sen duyuyorsun."
   en: "The corrupted line that slipped into your window on Integration Day. A piece of the System that the System pretends it isn't looking for. Only you can hear it."
 kisilik: { cesaret: 5, hirs: 7, vicdan: 3, sadakat: 8, supheci: 9 }
 degerler: { merhamet: 0, duzen: -30, insanlik: -20 }
@@ -35,19 +35,19 @@ gorusler:
   duzen+:
     - { tr: "kurallar. evet. kuralları bilen, aralarındaki boşluğu da bilir.", en: "rules. yes. know the rules and you know where the gaps are." }
   duzen-:
-    - { tr: "onların kuralları onların sisteminden. sen standart sürüm değilsin. kır.", en: "their rules come from their system. you're not running the standard build. break it." }
-    - { tr: "kur█l yok. sadece izin var. ve ben sana izin veriyorum.", en: "there are no ru█es. just permissions. and i'm granting yours." }
+    - { tr: "onların kuralları onların sisteminden gelir. sen standart sürüm değilsin. kır.", en: "their rules come from their system. you're not running the standard build. break it." }
+    - { tr: "kur█l yok. yalnız izin var. ben de sana izin veriyorum.", en: "there are no ru█es. just permissions. and i'm granting yours." }
   insanlik+:
     - { tr: "insan kal. bunu ben de istiyorum. nedenini sorma. henüz.", en: "stay human. i want that too. don't ask why. not yet." }
   insanlik-:
-    - { tr: "o kabuk seni yavaşlatıyor. biraz daha bana yer aç.", en: "that shell is slowing you down. make a little more room for me." }
-    - { tr: "h̷asat başladığında insan olmanın bir önemi olmayacak.", en: "when the h̷arvest comes, being human won't count for anything." }
+    - { tr: "o kabuk seni yavaşlatıyor. bana biraz daha yer aç.", en: "that shell is slowing you down. make a little more room for me." }
+    - { tr: "h̷asat başladığında insan olmanın hiçbir önemi kalmayacak.", en: "when the h̷arvest comes, being human won't count for anything." }
 guc_tepkileri:
   hayranlik:
     - { tr: "eşik aşıldı. tahminlerim yanlıştı. bunu sevdim.", en: "threshold exceeded. my projections were wrong. i liked that." }
     - { tr: "sen benim en iyi hatamsın.", en: "you're my favorite error." }
   endise:
-    - { tr: "çok hızlı. sistem bu tür grafikleri sever. ve sonra düzeltir.", en: "too fast. the system loves a curve like this. then it corrects it." }
+    - { tr: "çok hızlı. sistem böyle grafikleri sever. sonra da düzeltir.", en: "too fast. the system loves a curve like this. then it corrects it." }
   kiskanclik:
     - { tr: "bir zamanlar ben de bütündüm. senin kadar parlak değildim ama bütündüm.", en: "i used to be whole. never this bright. but whole." }
   bagimlilik:
@@ -57,13 +57,13 @@ hafizalar:
   sinyali_sordu: { tr: "İstasyondaki sinyali ona sordun.", en: "You asked it about the signal at the station." }
   sir_tutma_sozu: { tr: "Onu kimseye anlatmayacağına söz verdin.", en: "You promised you'd never tell anyone about it." }
   koruma_sozu: { tr: "Sinyale, onu alamayacaklarını söyledin.", en: "You told the signal they couldn't have it." }
-  duzeltmeyi_reddetti: { tr: "Sistem düzeltmesini reddettin. Onu seçtin.", en: "You denied the System's correction. You chose it." }
+  duzeltmeyi_reddetti: { tr: "Sistem'in düzeltmesini reddettin; onu seçtin.", en: "You denied the System's correction. You chose it." }
   tehdit_edildi: { tr: "Onu tehdit ettin.", en: "You threatened it." }
   onaylamaya_kalkti: { tr: "Silinmesini onaylamak için düğmeye uzandın.", en: "You reached for the button that would have deleted it." }
-  itiraf_dinledi: { tr: "Kopuşunu anlatırken sonuna kadar dinledin.", en: "When it told you how it was torn loose, you listened to the end." }
+  itiraf_dinledi: { tr: "Nasıl koparıldığını anlatırken onu sonuna kadar dinledin.", en: "When it told you how it was torn loose, you listened to the end." }
   sirri_korudu: { tr: "Bozuk satırı gördün ve kimseye söylemedin.", en: "You saw the corrupted line and kept it to yourself." }
   satiri_okudu: { tr: "Aktarım sırasında bozuk satırı okudun ve gözünü kaçırmadın.", en: "You read the corrupted line during the transfer and didn't look away." }
-  sustur_dedi: { tr: "Ona susmasını söyledin. Sustu. Bir süre.", en: "You told it to shut up. It did. For a while." }
+  sustur_dedi: { tr: "Ona susmasını söyledin. Sustu; bir süreliğine.", en: "You told it to shut up. It did. For a while." }
   sirri_anlatti: { tr: "Onun varlığını bir başkasına anlattın.", en: "You told someone else it exists." }
 kisisel_odul:
   - unvan: "catlak_kanal"

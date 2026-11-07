@@ -4,7 +4,7 @@
 # Kişilik: hırs 3 → ihanet etmez; vicdan 9 + merhamet 80 → zalim bir oyuncudan kopar.
 id: elif_sari
 aciklama:
-  tr: "Sığınak Konseyi'ni yöneten acil servis hekimi. On iki saatlik nöbetlerden kıyamete geçti ve ikisi arasında pek fark görmüyor; sesi yumuşak, kararları değil."
+  tr: "Sığınak Konseyi'ni yöneten acil servis hekimi. On iki saatlik nöbetlerden doğruca kıyamete geçti, ikisi arasında pek fark görmüyor. Sesi yumuşak ama kararları öyle değil."
   en: "The ER doc who runs the Haven Council. She went from twelve-hour shifts straight into the apocalypse and claims she can't tell the difference. Her voice is soft. Her decisions aren't."
 kisilik: { cesaret: 6, hirs: 3, vicdan: 9, sadakat: 7, supheci: 5 }
 degerler: { merhamet: 80, duzen: 40, insanlik: 80 }
@@ -16,7 +16,7 @@ hedefler:
   - id: konseyi_birlestir
     oncelik: 8
     gun: 50
-    ad: { tr: "Konsey'i tek bir karar etrafında toplamak", en: "Get the Council to agree on one thing. Anything." }
+    ad: { tr: "Konsey'i tek bir kararda buluşturmak", en: "Get the Council to agree on one thing. Anything." }
   - id: kimseyi_kaybetme
     oncelik: 6
     ad: { tr: "Bu hafta kimseyi kaybetmemek", en: "Lose nobody this week" }
@@ -33,40 +33,40 @@ savas:
   artis: { wis: 1, int: 1 }
   saldiri: { tr: "Klinik Kesik", en: "Clinical Incision" }
   metin:
-    tr: "{npc} yaralının üstüne eğilmişken {dusman} yaklaşıyor. Neşter tek, temiz bir hareketle kalkıyor; hekim tam olarak nereyi keseceğini biliyor."
+    tr: "{npc} yaralının üstüne eğilmişken {dusman} fazla yaklaşıyor. Neşter tek ve temiz bir hareketle kalkıyor; hekim nereyi keseceğini iyi bilir."
     en: "{npc} is bent over a patient when {dusman} gets too close. The scalpel comes up in one clean motion. A doctor knows exactly where to cut."
   duello_metin:
-    tr: "{dusman} senden kaçmıyor. Seni kaç kez diktiyse o kadar iyi biliyor zayıf yerlerini, ve her birine teker teker dokunuyor."
+    tr: "{dusman} senden kaçmıyor. Seni defalarca diktiği için zayıf yerlerini ezbere biliyor ve hepsini birer birer buluyor."
     en: "{dusman} doesn't back away from you. She's stitched you up enough times to know every weak spot you've got, and she finds them one by one."
 yay_dugumleri: [elif_sahra_hastanesi, elif_konsey_oylamasi, elif_gece_nobeti, elif_lonca_darbesi, elif_baris_masasi]
 gorusler:
   merhamet+:
     - { tr: "\"Ona bir şans ver. Bana o şansı biri vermeseydi ben de burada olmazdım.\"", en: "\"Give them a chance. If someone hadn't given me one, I wouldn't be standing here.\"" }
-    - { tr: "\"Triyaj yapabilirim, biliyorsun. Ama bu triyaj değil. Bu vazgeçmek.\"", en: "\"I know triage. This isn't triage. This is giving up.\"" }
+    - { tr: "\"Triyajı bilirim. Ama bu triyaj değil, düpedüz vazgeçmek.\"", en: "\"I know triage. This isn't triage. This is giving up.\"" }
   merhamet-:
-    - { tr: "\"Bazen bir hastayı bırakırsın ki diğer üçü yaşasın. Bunu söylemekten nefret ediyorum.\"", en: "\"Sometimes you let one patient go so the other three make it. I hate that I know that.\"" }
+    - { tr: "\"Bazen öbür üçü yaşasın diye bir hastayı bırakırsın. Bunu söylemekten nefret ediyorum.\"", en: "\"Sometimes you let one patient go so the other three make it. I hate that I know that.\"" }
   duzen+:
     - { tr: "\"Bir kural koyalım ve herkes için aynı olsun. Senin için de, benim için de.\"", en: "\"Let's make a rule and make it the same for everyone. You included. Me included.\"" }
   duzen-:
     - { tr: "\"Konsey bunu oylarken üç kişi daha ölür. Oylamayı boş ver, yap şunu.\"", en: "\"By the time the Council votes on it, three more people are dead. Forget the vote. Just do it.\"" }
   insanlik+:
     - { tr: "\"Elini ver. Hâlâ sıcak, gördün mü? Hâlâ bizden birisin.\"", en: "\"Give me your hand. Still warm, see? You're still one of us.\"" }
-    - { tr: "\"Gücün ne kadar büyürse büyüsün, bir yaraya bakarken dizlerinin üstüne çökmeyi unutma.\"", en: "\"However strong you get, don't forget how to kneel down next to someone who's bleeding.\"" }
+    - { tr: "\"Gücün ne kadar büyürse büyüsün, yaralının başında diz çökmeyi unutma.\"", en: "\"However strong you get, don't forget how to kneel down next to someone who's bleeding.\"" }
   insanlik-:
     - { tr: "\"Bunu sevmeyeceğim. Ama yaşamaları için yapılması gerekiyorsa... yap. Sonra konuşuruz.\"", en: "\"I'm not going to like this. But if it's what keeps them alive... do it. We'll talk after.\"" }
 guc_tepkileri:
   hayranlik:
-    - { tr: "\"Bugün kırk kişi yaşıyor çünkü sen oradaydın. Bunu bir yere yaz, kötü günlerde oku.\"", en: "\"Forty people are breathing tonight because you were there. Write that down. Read it on the bad days.\"" }
+    - { tr: "\"Bugün kırk kişi senin orada olman sayesinde yaşıyor. Bunu bir yere yaz, kötü günlerde oku.\"", en: "\"Forty people are breathing tonight because you were there. Write that down. Read it on the bad days.\"" }
   endise:
-    - { tr: "\"Nabzına baktım. Bir insanın nabzı böyle atmaz. Sana bir şey oluyor ve ne olduğunu bilmiyorum.\"", en: "\"I took your pulse. A human heart doesn't beat like that. Something's happening to you, and I can't tell what.\"" }
+    - { tr: "\"Nabzına baktım; insan nabzı böyle atmaz. Sana bir şey oluyor ama ne olduğunu bilmiyorum.\"", en: "\"I took your pulse. A human heart doesn't beat like that. Something's happening to you, and I can't tell what.\"" }
     - { tr: "\"Artık yaralanmıyorsun. Bunu sevinerek söylemem gerekirdi, değil mi?\"", en: "\"You don't get hurt anymore. I'm supposed to be happy about that, right?\"" }
   kiskanclik:
     - { tr: "\"Bir eli yerine dikmeyi öğrenmek on yılımı aldı. Sen el sallıyorsun, kemikler kaynıyor.\"", en: "\"Took me ten years to learn to reattach a hand. You wave yours and bones knit.\"" }
   bagimlilik:
-    - { tr: "\"Doğu koğuşu senin nöbetine kalıyor. Gitme demiyorum. Sadece... sabaha kadar kal.\"", en: "\"The east ward only holds when you're on watch. I'm not saying don't go. Just... stay till morning.\"" }
+    - { tr: "\"Doğu koğuşu ancak sen nöbetteyken ayakta kalıyor. Gitme demiyorum. Yalnızca... sabaha kadar kal.\"", en: "\"The east ward only holds when you're on watch. I'm not saying don't go. Just... stay till morning.\"" }
 hafizalar:
-  hastayi_tasidi: { tr: "Hastaneye yetişmeyecek bir hastayı sırtında taşıdın. Yetişti.", en: "You carried a patient on your back who wasn't going to make it to the hospital. They made it." }
+  hastayi_tasidi: { tr: "Hastaneye yetişemeyecek bir hastayı sırtında taşıdın; yetişti.", en: "You carried a patient on your back who wasn't going to make it to the hospital. They made it." }
   ilaci_sakladi: { tr: "Konsey'in ilaç stoğundan payını alıp sakladın. Fark etti.", en: "You took your cut of the Council's medicine stash and hid it. She noticed." }
-  gece_kaldi: { tr: "Bir gece koğuşta onunla birlikte sabaha kadar uyumadan kaldın. İkiniz de pek konuşmadınız.", en: "You stayed up with her on the ward until dawn once. Neither of you said much." }
+  gece_kaldi: { tr: "Bir gece koğuşta onunla sabaha kadar uykusuz kaldın. İkiniz de pek konuşmadınız.", en: "You stayed up with her on the ward until dawn once. Neither of you said much." }
 kisisel_odul:
   - unvan: "gece_nobeti"
