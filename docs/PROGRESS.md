@@ -11,6 +11,13 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - Emülatör: `Medium_Phone_API_36.0` (`emulator -avd Medium_Phone_API_36.0`), adb ile kurulum.
 - OneDrive kilidi yüzünden lint ara sıra "dosya kullanılıyor" der: `./gradlew --stop` ve tekrar.
 
+## Sanat entegrasyonu (2026-11-07)
+- [x] Uyarlanabilir simge (art/promo/icon.jpg; amblem 46 dp, güvenli alan betikte denetlenir), tek renkli katman, bildirim simgesi
+- [x] Başlık ekranı: uygulama içi dile göre logo (logo_tr / logo_en WebP); başlık ekranı her temada koyu (DECISIONS #150)
+- [x] Google Play: icon.png 512 ve featureGraphic.png 1024×500 (fastlane tr-TR, en-US)
+- [x] Kaynaklar `art/promo/`, üretim `art/build_assets.py` (Pillow)
+- [ ] Doğru yazılı EN logo (logoEN.jpg'de "PROTOKOLL"); şimdilik EN afişten alındı
+
 ## Arayüz kimliği "Kırık pencere" (2026-11-07)
 - [x] Üç yön önerisi ve taslak görseller (`docs/UI_DIRECTION.md`, `docs/ui/`); kullanıcı A + C birleşimini seçti
 - [x] Tokenlar tek yerde (`ui/theme/Theme.kt`), gömülü OFL yazılar ve Ayarlar → Lisanslar, tek koyu tema (AMOLED birleşti)
