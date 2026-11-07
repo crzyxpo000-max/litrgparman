@@ -103,15 +103,26 @@ class Director(private val content: Content) {
 
     /** Ölen NPC'nin yay düğümleri kapanır: olayın NPC'lerinden biri ölüyse olay gelmez (ölüm kalıcıdır). */
     /**
-     * Saha kampı sahnesi (DECISIONS #144): keşif görevindeyken bu bölgeye etiketli, koşulu tutan ve bütün NPC'leri
-     * yanındaki yoldaş olan kamp olayları (ağırlıklı seçim için puanıyla).
+     * Saha kampı sahnesi (DECISIONS #144, #146): keşif görevindeyken bu bölgeye etiketli, koşulu tutan ve bütün NPC'leri
+     * o gece kampa gelebilen kamp olayları.
      */
-    fun campScenes(state: WorldState, companions: Set<String>): List<EventDef> {
+    fun campScenes(state: WorldState): List<EventDef> {
         val m = state.mission ?: return emptyList()
         if (m.kind != MissionKind.EXPLORE) return emptyList()
         return content.events.values.filter { e ->
-            e.camp && m.region in e.where && e.npcs.isNotEmpty() && e.npcs.all { it in companions } && eligible(state, e)
+            e.camp && m.region in e.where && e.npcs.isNotEmpty() && e.npcs.all { canJoinCamp(state, it) } && eligible(state, e)
         }.sortedBy { it.id }
+    }
+
+    /**
+     * Kampa kim gelebilir (DECISIONS #146): yoldaş her zaman; yoldaş olmayan bir müttefik de tanışılmışsa, yaşıyorsa,
+     * şehirden gitmemişse, hain işareti yoksa ve güveni en az [CAMP_TRUST_MIN] ise o gece kampa uğrar.
+     */
+    fun canJoinCamp(state: WorldState, id: String): Boolean {
+        val n = state.npcs[id] ?: return false
+        if (n.status != com.yukselis.engine.npc.NpcStatus.ACTIVE) return false
+        if (n.companion) return true
+        return n.known && CAMP_BETRAYER_MARK !in n.marks && n.relation.trust >= CAMP_TRUST_MIN
     }
 
     fun npcsAlive(state: WorldState, e: EventDef): Boolean = e.npcs.all { state.npcs[it]?.alive != false }
@@ -197,6 +208,10 @@ class Director(private val content: Content) {
 
     companion object {
         const val HAND_SIZE = 3
+
+        /** Yoldaş olmayan bir müttefikin kampa gelmesi için en az güven (DECISIONS #146). */
+        const val CAMP_TRUST_MIN = 10
+        const val CAMP_BETRAYER_MARK = "hain"
         const val ATTENTION_STEP = 40
         const val HEAVY_RUN = 3
         const val RECENT_TENSION = 6

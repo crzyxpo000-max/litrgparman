@@ -358,3 +358,21 @@ alıp daha az XP veriyordu. Yeni olayların `xp_seviye` ödülleri 1,5 katına �
 hakimiyet %62,0 (önce %63,4, sınır %60). Sonların payı en çok 1,3 puan kaydı (Demir Taht %7,9 → %6,6). Hepsi
 %1–%40 içinde. Kule 100'e ulaşan %59,2 → %51,5. Bitmeyen oynanış 0.
 
+### Kamp kuralı gevşetildi (DECISIONS #146)
+
+**Teşhis:** kamp kaydına göre (`AkisIzi` `kamp`, 20 oynanış) keşifte oynanış başına yaklaşık 200 saha kampı kuruluyor.
+- Bunların %52'sinde hiç yoldaş yok.
+- Elif hiçbir oynanışta yoldaş olmuyor: 5 kamp sahnesi hiç oynanamıyordu.
+- Aras ancak bazı oynanışlarda yoldaş.
+
+**Yeni kural:** yoldaş olmayan bir müttefik de kampa gelir. Şartlar: tanışılmış, yaşıyor, gitmemiş, "hain" işareti yok, güven
+≥ 10.
+
+**Sonuç (insan benzeri, 20 oynanış):**
+- Oynanan kamp sahnesi oynanış başına 3,4'ten 8,75'e çıktı; 23 sahnenin 22'si oynanıyor.
+- Hikayesiz gün payı gürültü içinde kaldı (Bölüm 9 %53 → %52, 6 %47 → %44, 18 %36 → %50, küçük örnek). 23 sahne 11 bölüme
+  dağılınca bölüm başına yarım gün ediyor.
+- Denge (1000 oynanış): hakimiyet %62,2. Sonlar %1–%40 içinde (Kod Kırıcı %20,9 → %17,8, Hasat %19,7 → %21,1).
+
+Kalan en büyük kaldıraç Kule katları.
+

@@ -54,6 +54,11 @@ fun main(args: Array<String>) {
             if (ce != null && ce != before.dayState.currentEvent && !ce.startsWith(com.yukselis.engine.world.ChapterTable.ARRIVAL_PREFIX) &&
                 ce !in content.chapters.managed && !ce.startsWith(com.yukselis.engine.world.TimeSkip.EVENT_PREFIX)) dEvents++
             // Zaman atlama: atlamanın başladığı gün ve aradaki günler "atlanan" sayılır (olay/savaş yok).
+            // Kamp anı (saha kampı sahnesi ölçümü): nerede, görevde mi, yanındaki yoldaşlar, sahne oynandı mı.
+            if (action == "akis:Camp") {
+                val comp = before.npcs.values.filter { it.companion && it.alive }.map { it.id }
+                lines += """{"t":"kamp","gun":${before.day},"bolum":${before.chapter},"bolge":${q(before.region)},"gorev":${q(before.mission?.kind?.name)},"yoldaslar":${arr(comp)},"sahne":${q(after.dayState.currentEvent?.takeIf { after.variable(com.yukselis.engine.world.WorldEngine.CAMP_PENDING_VAR) > 0 })}}"""
+            }
             val skip = action == "akis:Skip"
             if (skip) {
                 for (d in before.day until after.day) { flushDay(d, skipped = true); dHand = 0 }

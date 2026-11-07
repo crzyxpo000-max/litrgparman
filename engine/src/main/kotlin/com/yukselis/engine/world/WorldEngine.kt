@@ -902,11 +902,10 @@ class WorldEngine(
     }
 
     private fun camp(state: WorldState): Result {
-        // Saha kampı (DECISIONS #144): keşif görevinde yanındaki bir yoldaşla bu bölgeye ait kısa bir sahne gece
-        // inmeden oynanır; sahne bitince gece işlenir (enterHub → CAMP_PENDING_VAR).
+        // Saha kampı (DECISIONS #144, #146): keşif görevinde, kampa gelen bir yoldaş ya da müttefikle bu bölgeye ait kısa
+        // bir sahne gece inmeden oynanır; sahne bitince gece işlenir (enterHub → CAMP_PENDING_VAR).
         if (chapterMode && state.mission?.kind == MissionKind.EXPLORE && state.variable(CAMP_PENDING_VAR) == 0) {
-            val companions = effects.npc.companions(state).map { it.id }.toSet()
-            val scenes = director.campScenes(state, companions)
+            val scenes = director.campScenes(state)
             if (scenes.isNotEmpty()) {
                 val rng = Rng(state.rngState)
                 val pick = scenes[rng.nextInt(scenes.size)]

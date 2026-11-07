@@ -32,11 +32,20 @@ class SahaKampiTest {
     private val engine = StoryEngine(content)
     private val lang = Lang.TR
 
-    private fun inField(companion: Boolean, mission: MissionKind? = MissionKind.EXPLORE, region: String = "kordon"): WorldState {
+    private fun inField(
+        companion: Boolean,
+        mission: MissionKind? = MissionKind.EXPLORE,
+        region: String = "kordon",
+        trust: Int = 0,
+        known: Boolean = true,
+        marks: Set<String> = emptySet(),
+        status: com.yukselis.engine.npc.NpcStatus = com.yukselis.engine.npc.NpcStatus.ACTIVE,
+    ): WorldState {
         var s = engine.newGame("T", GameMode.NORMAL, 5)
         s = engine.throughBriefing(engine.choose(s.copy(sceneId = "ilk_sabah", day = 1), "gune_basla", lang).state)
         s = engine.world.enterHub(s).state
-        val deniz = s.npcs.getValue("deniz_arman").copy(companion = companion, status = com.yukselis.engine.npc.NpcStatus.ACTIVE)
+        val deniz = s.npcs.getValue("deniz_arman").copy(companion = companion, status = status, known = known, marks = marks,
+            relation = com.yukselis.engine.npc.Relation(trust = trust))
         return s.copy(
             day = 70, chapter = 6, chapterPhase = ChapterPhase.PREP, region = region, seeds = emptyList(),
             mission = mission?.let { Mission(it, region, emptyList(), 70) },
@@ -63,8 +72,23 @@ class SahaKampiTest {
     }
 
     @Test
-    fun `yoldaş yoksa, başka bölgede ya da üsteyken kamp sahnesi gelmez`() {
-        for (s in listOf(inField(companion = false), inField(companion = true, region = "eski_sehir"), inField(companion = true, mission = null))) {
+    fun `güvenilen müttefik yoldaş olmasa da kampa gelir`() {
+        val camp = engine.hubAction(inField(companion = false, trust = 10), HubAction.Camp, lang).state
+        assertEquals("test_kamp", camp.dayState.currentEvent)
+    }
+
+    @Test
+    fun `güvensiz, tanışılmamış, hain, giden ya da başka bölgede, üsteyken kamp sahnesi gelmez`() {
+        val cases = listOf(
+            inField(companion = false, trust = 9),
+            inField(companion = false, trust = 50, known = false),
+            inField(companion = false, trust = 50, marks = setOf("hain")),
+            inField(companion = false, trust = 50, status = com.yukselis.engine.npc.NpcStatus.GONE),
+            inField(companion = true, status = com.yukselis.engine.npc.NpcStatus.GONE),
+            inField(companion = true, region = "eski_sehir"),
+            inField(companion = true, mission = null),
+        )
+        for (s in cases) {
             val after = engine.hubAction(s, HubAction.Camp, lang).state
             assertNotEquals("test_kamp", after.dayState.currentEvent)
             assertEquals(0, after.variable(WorldEngine.CAMP_PENDING_VAR))
@@ -76,6 +100,6 @@ class SahaKampiTest {
         val s = inField(companion = true).copy(dayState = inField(true).dayState.copy(slotsLeft = 3))
         val pool = engine.world.director.candidates(s).map { it.first.id }
         assertFalse("test_kamp" in pool)
-        assertTrue(engine.world.director.campScenes(s, setOf("deniz_arman")).any { it.id == "test_kamp" })
+        assertTrue(engine.world.director.campScenes(s).any { it.id == "test_kamp" })
     }
 }
