@@ -40,3 +40,12 @@ tasks.register<JavaExec>("perf") {
     workingDir = rootProject.projectDir
     jvmArgs("-Dstdout.encoding=UTF-8", "-Dstderr.encoding=UTF-8")
 }
+
+// Olay sırası kaydı (docs/STORY_FLOW.md): ./gradlew :tools:simulator:akis --args="20"
+tasks.register<JavaExec>("akis") {
+    group = "verification"
+    classpath = sourceSets["main"].runtimeClasspath
+    mainClass.set("com.yukselis.simulator.AkisIziKt")
+    workingDir = rootProject.projectDir
+    jvmArgs("-Dstdout.encoding=UTF-8", "-Dstderr.encoding=UTF-8")
+}

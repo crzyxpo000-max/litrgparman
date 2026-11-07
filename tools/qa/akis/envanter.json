@@ -1,0 +1,11780 @@
+{
+"deniz_bulusma": {
+"file": "10_yoldaslar.yaml",
+"perde": [
+1
+],
+"bolge": [
+"ogretici_orman"
+],
+"gun_min": 1,
+"gun_max": 20,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"deniz_arman"
+],
+"tags": [
+"deniz",
+"karsilasma",
+"kesif"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "ogretici_orman",
+"places": [
+"ogretici_orman"
+],
+"n_scenes": 8,
+"quests": [
+"deniz_bul"
+],
+"quest_cond": [],
+"seeds": [
+"deniz_hesap"
+],
+"delays": {
+"deniz_hesap": [
+4,
+8
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"deniz_bekletildi",
+"deniz_bulundu",
+"deniz_yankiyi_biliyor"
+]
+},
+"deniz_hesap": {
+"file": "10_yoldaslar.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [
+"deniz_arman"
+],
+"tags": [
+"deniz",
+"ahlak",
+"kamp"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 6,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kamp_ates_basi"
+],
+"delays": {
+"kamp_ates_basi": [
+2,
+4
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"deniz_yalani_yakaladi",
+"deniz_yankiyi_biliyor"
+]
+},
+"kamp_ates_basi": {
+"file": "10_yoldaslar.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": 3,
+"gun_max": 30,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"deniz_arman"
+],
+"tags": [
+"kamp",
+"nefes",
+"deniz"
+],
+"gerilim": 1,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 5,
+"quests": [
+"deniz_kardesi"
+],
+"quest_cond": [],
+"seeds": [
+"deniz_kardes_ipucu"
+],
+"delays": {
+"deniz_kardes_ipucu": [
+3,
+6
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"deniz_kardese_soz_verildi"
+]
+},
+"deniz_kardes_ipucu": {
+"file": "10_yoldaslar.yaml",
+"perde": [
+1
+],
+"bolge": [
+"kirik_istasyon"
+],
+"gun_min": 8,
+"gun_max": 20,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"deniz_arman"
+],
+"tags": [
+"deniz",
+"gizem",
+"kesif"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kirik_istasyon",
+"places": [
+"kirik_istasyon"
+],
+"n_scenes": 10,
+"quests": [
+"deniz_kardesi"
+],
+"quest_cond": [],
+"seeds": [
+"vahit_vaaz"
+],
+"delays": {
+"vahit_vaaz": [
+1,
+3
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"kardes_izi_bulundu",
+"kardes_notu_saklandi"
+]
+},
+"deniz_son_secim": {
+"file": "10_yoldaslar.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 22,
+"tohum": false,
+"npc": [
+"deniz_arman"
+],
+"tags": [
+"deniz",
+"ana_yay",
+"yukselenler"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 8,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"gece_baskini"
+],
+"delays": {
+"gece_baskini": [
+2,
+4
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"deniz_guveni_yarali",
+"deniz_yukselenlere_gitti"
+]
+},
+"istasyon_sinyali": {
+"file": "10_yoldaslar.yaml",
+"perde": [
+1
+],
+"bolge": [
+"kirik_istasyon"
+],
+"gun_min": 5,
+"gun_max": 20,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"yanki"
+],
+"tags": [
+"yanki",
+"gizem",
+"kesif"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kirik_istasyon",
+"places": [
+"kirik_istasyon"
+],
+"n_scenes": 10,
+"quests": [
+"istasyon_sinyali"
+],
+"quest_cond": [],
+"seeds": [
+"istasyon_sinyali_2"
+],
+"delays": {
+"istasyon_sinyali_2": [
+3,
+5
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"sinyal_cevaplandi",
+"sinyal_susturuldu",
+"yanki_bagi",
+"yanki_ile_konusuldu"
+]
+},
+"istasyon_sinyali_2": {
+"file": "10_yoldaslar.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [
+"yanki"
+],
+"tags": [
+"yanki",
+"gizem",
+"sistem"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 7,
+"quests": [
+"istasyon_sinyali"
+],
+"quest_cond": [],
+"seeds": [
+"yanki_bozuk_satir"
+],
+"delays": {
+"yanki_bozuk_satir": [
+4,
+8
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"yanki_bagi",
+"yanki_ile_konusuldu"
+]
+},
+"yanki_bozuk_satir": {
+"file": "10_yoldaslar.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": 12,
+"gun_max": 26,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"yanki"
+],
+"tags": [
+"yanki",
+"gizem",
+"sistem"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 7,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"mert_cozulen_satir",
+"mert_sifreli_mesaj"
+],
+"delays": {
+"mert_sifreli_mesaj": [
+1,
+3
+],
+"mert_cozulen_satir": [
+2,
+4
+]
+},
+"fights": 0,
+"flags_need": [
+"yanki_bagi"
+],
+"flags_set": [
+"yanki_ile_konusuldu"
+]
+},
+"rakip_iz": {
+"file": "10_yoldaslar.yaml",
+"perde": [
+1
+],
+"bolge": [
+"harabe_carsi",
+"kirik_istasyon"
+],
+"gun_min": 4,
+"gun_max": 14,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"aras_kurt"
+],
+"tags": [
+"rakip",
+"aras",
+"karsilasma"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 7,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"aras_ilk_yaris"
+],
+"delays": {
+"aras_ilk_yaris": [
+3,
+6
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"aras_tanisildi"
+]
+},
+"aras_ilk_yaris": {
+"file": "10_yoldaslar.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": 9,
+"gun_max": 22,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"aras_kurt"
+],
+"tags": [
+"rakip",
+"aras",
+"kapi"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 14,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"aras_sira_meydan"
+],
+"delays": {
+"aras_sira_meydan": [
+4,
+7
+]
+},
+"fights": 4,
+"flags_need": [
+"aras_tanisildi"
+],
+"flags_set": [
+"aras_yarisi_birakildi",
+"aras_yarisi_kaybedildi",
+"aras_yarisi_kazanildi"
+]
+},
+"aras_sira_meydan": {
+"file": "10_yoldaslar.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": 15,
+"gun_max": 27,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"aras_kurt"
+],
+"tags": [
+"rakip",
+"aras",
+"siralama",
+"duello"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"yanki_bozuk_satir"
+],
+"delays": {
+"yanki_bozuk_satir": [
+2,
+4
+]
+},
+"fights": 2,
+"flags_need": [
+"aras_tanisildi"
+],
+"flags_set": [
+"yanki_bagi"
+]
+},
+"yarali_avci": {
+"file": "20_orman.yaml",
+"perde": [
+1
+],
+"bolge": [
+"ogretici_orman",
+"kirik_istasyon"
+],
+"gun_min": 2,
+"gun_max": 30,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"ahlak",
+"karsilasma",
+"kurtarma"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 10,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"avci_haberi"
+],
+"delays": {
+"avci_haberi": [
+4,
+8
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"avci_birakildi",
+"avci_kurtarildi",
+"avci_ucret",
+"avci_yagmalandi"
+]
+},
+"avci_haberi": {
+"file": "20_orman.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"karsilasma",
+"tohum",
+"ahlak"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"gece_baskini",
+"olu_avci_penceresi"
+],
+"delays": {
+"olu_avci_penceresi": [
+1,
+3
+],
+"gece_baskini": [
+2,
+5
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"avci_dusman"
+]
+},
+"yabanci_geri_donus": {
+"file": "20_orman.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"tohum",
+"ahlak",
+"intikam"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 10,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"gece_baskini",
+"vahit_vaaz"
+],
+"delays": {
+"vahit_vaaz": [
+2,
+4
+],
+"gece_baskini": [
+2,
+5
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"yabanci_affetti",
+"yabanci_dusman",
+"yabanci_tapiyor"
+]
+},
+"yabanci_minnet": {
+"file": "20_orman.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"tohum",
+"minnet",
+"kurtarma"
+],
+"gerilim": 1,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"elif_sahra_hastanesi",
+"isaretli_agaclar",
+"kaya_ilk_tanisma"
+],
+"delays": {
+"isaretli_agaclar": [
+1,
+3
+],
+"elif_sahra_hastanesi": [
+1,
+2
+],
+"kaya_ilk_tanisma": [
+1,
+2
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"minnet_grubu"
+]
+},
+"kayip_cocuk": {
+"file": "20_orman.yaml",
+"perde": [
+1
+],
+"bolge": [
+"ogretici_orman"
+],
+"gun_min": 2,
+"gun_max": 16,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kurtarma",
+"ahlak",
+"kesif"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "ogretici_orman",
+"places": [
+"ogretici_orman"
+],
+"n_scenes": 10,
+"quests": [
+"sisteki_cocuk"
+],
+"quest_cond": [],
+"seeds": [
+"vahit_vaaz"
+],
+"delays": {
+"vahit_vaaz": [
+1,
+3
+]
+},
+"fights": 4,
+"flags_need": [],
+"flags_set": [
+"cocuk_kayboldu",
+"cocuk_kurtarildi",
+"tavsan_bagislandi",
+"tavsan_yendi"
+]
+},
+"zehirli_bereket": {
+"file": "20_orman.yaml",
+"perde": [
+1
+],
+"bolge": [
+"ogretici_orman"
+],
+"gun_min": 3,
+"gun_max": 20,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"ahlak",
+"kaynak",
+"kesif"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "ogretici_orman",
+"places": [
+"ogretici_orman"
+],
+"n_scenes": 11,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"gece_baskini"
+],
+"delays": {
+"gece_baskini": [
+1,
+3
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"bereket_bebek",
+"bereket_kamp",
+"bereket_saklandi",
+"bereket_uyarildi"
+]
+},
+"isaretli_agaclar": {
+"file": "20_orman.yaml",
+"perde": [
+1
+],
+"bolge": [
+"ogretici_orman"
+],
+"gun_min": 4,
+"gun_max": 22,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"gizem",
+"kesif",
+"tuzak"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "ogretici_orman",
+"places": [
+"ogretici_orman"
+],
+"n_scenes": 7,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"mert_sifreli_mesaj"
+],
+"delays": {
+"mert_sifreli_mesaj": [
+1,
+3
+]
+},
+"fights": 4,
+"flags_need": [],
+"flags_set": [
+"ag_mesaji_birakildi",
+"dokuyucu_olduruldu"
+]
+},
+"gece_baskini": {
+"file": "20_orman.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": 6,
+"gun_max": 26,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"savas",
+"kurtarma",
+"ahlak",
+"gece"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 11,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kaya_ilk_tanisma"
+],
+"delays": {
+"kaya_ilk_tanisma": [
+1,
+2
+]
+},
+"fights": 3,
+"flags_need": [],
+"flags_set": [
+"baskin_cocuklar",
+"baskin_kacti"
+]
+},
+"siralama_gunu": {
+"file": "20_orman.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": 6,
+"gun_max": 10,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"sistem",
+"siralama",
+"gizli_guc"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"rakip_iz",
+"vahit_vaaz"
+],
+"delays": {
+"rakip_iz": [
+1,
+3
+],
+"vahit_vaaz": [
+1,
+3
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"sirala_acildi",
+"sirala_gizlendi"
+]
+},
+"sahte_seviye": {
+"file": "20_orman.yaml",
+"perde": [
+1
+],
+"bolge": [
+"harabe_carsi"
+],
+"gun_min": 12,
+"gun_max": 26,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"ahlak",
+"gizli_guc",
+"hakimiyet"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "harabe_carsi",
+"places": [
+"harabe_carsi"
+],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"carsi_cetesi"
+],
+"delays": {
+"carsi_cetesi": [
+2,
+4
+]
+},
+"fights": 0,
+"flags_need": [
+"kirilma_yasandi"
+],
+"flags_set": [
+"sahte_dost",
+"sahte_ifsa",
+"sahte_kacti",
+"sahte_ortak"
+]
+},
+"carsi_mahsurlar": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [
+"harabe_carsi"
+],
+"gun_min": 4,
+"gun_max": 26,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kurtarma",
+"ahlak",
+"carsi"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "harabe_carsi",
+"places": [
+"harabe_carsi"
+],
+"n_scenes": 11,
+"quests": [
+"carsi_mahsurlari"
+],
+"quest_cond": [],
+"seeds": [
+"elif_sahra_hastanesi",
+"kaya_ilk_tanisma",
+"mahsurlar_sonrasi",
+"vahit_vaaz"
+],
+"delays": {
+"mahsurlar_sonrasi": [
+3,
+6
+],
+"elif_sahra_hastanesi": [
+0,
+1
+],
+"kaya_ilk_tanisma": [
+0,
+1
+],
+"vahit_vaaz": [
+0,
+1
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"mahsur_anne_toparlandi",
+"mahsur_gorevli_yarali",
+"mahsur_kadin_sirtta",
+"mahsur_kaptan_kaldi",
+"mahsur_kaptan_tanindi",
+"mahsurlar_birakildi",
+"mahsurlar_kampta",
+"mahsurlar_kurtarildi",
+"mahsurlar_loncada",
+"mahsurlar_siginakta",
+"mahsurlar_yukselenlerde"
+]
+},
+"mahsurlar_sonrasi": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kurtarma",
+"ahlak",
+"carsi"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 3,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"elif_sahra_hastanesi",
+"vahit_yakit_listesi"
+],
+"delays": {
+"elif_sahra_hastanesi": [
+0,
+1
+],
+"vahit_yakit_listesi": [
+2,
+4
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"mahsurlar_siginakta"
+]
+},
+"cop_avcisi_pazar": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [
+"harabe_carsi"
+],
+"gun_min": 3,
+"gun_max": 30,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"ticaret",
+"karsilasma",
+"carsi"
+],
+"gerilim": 1,
+"onemli": false,
+"tekrar": false,
+"entry_place": "harabe_carsi",
+"places": [
+"harabe_carsi"
+],
+"n_scenes": 8,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"vahit_vaaz",
+"zindan_kasa"
+],
+"delays": {
+"vahit_vaaz": [
+1,
+2
+],
+"zindan_kasa": [
+1,
+3
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"carsi_cetesi": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [
+"harabe_carsi"
+],
+"gun_min": 8,
+"gun_max": 24,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"ahlak",
+"insan",
+"carsi"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "harabe_carsi",
+"places": [
+"harabe_carsi"
+],
+"n_scenes": 10,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"cete_hesabi",
+"elif_sahra_hastanesi",
+"kaya_ilk_tanisma"
+],
+"delays": {
+"cete_hesabi": [
+3,
+6
+],
+"kaya_ilk_tanisma": [
+1,
+2
+],
+"elif_sahra_hastanesi": [
+1,
+2
+]
+},
+"fights": 3,
+"flags_need": [],
+"flags_set": [
+"cete_dagitildi",
+"cete_gisede",
+"cete_lideri_bagislandi",
+"cete_lideri_olduruldu",
+"cete_loncaya_teslim",
+"cete_muhafiz",
+"cete_oglan_kurtuldu",
+"cete_sana_bagli"
+]
+},
+"cete_hesabi": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"ahlak",
+"insan",
+"carsi"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"elif_sahra_hastanesi",
+"kaya_gece_devriyesi",
+"kaya_ilk_tanisma"
+],
+"delays": {
+"elif_sahra_hastanesi": [
+0,
+1
+],
+"kaya_ilk_tanisma": [
+0,
+1
+],
+"kaya_gece_devriyesi": [
+2,
+4
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"cete_gisede",
+"cete_loncaya_teslim"
+]
+},
+"eczane": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [
+"harabe_carsi"
+],
+"gun_min": 5,
+"gun_max": 22,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"ahlak",
+"kaynak",
+"carsi"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "harabe_carsi",
+"places": [
+"harabe_carsi"
+],
+"n_scenes": 6,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"eczane_bedeli",
+"elif_sahra_hastanesi"
+],
+"delays": {
+"eczane_bedeli": [
+2,
+4
+],
+"elif_sahra_hastanesi": [
+0,
+1
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"cete_gisede",
+"eczane_hastaneye",
+"eczane_kaybedildi",
+"eczane_kiza",
+"eczane_saklandi",
+"eczane_satildi",
+"eczane_yukselenlere"
+]
+},
+"eczane_bedeli": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"ahlak",
+"kaynak",
+"carsi"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"elif_sahra_hastanesi",
+"hastane_karantina",
+"kaya_ilk_tanisma",
+"vahit_yakit_listesi"
+],
+"delays": {
+"hastane_karantina": [
+2,
+4
+],
+"elif_sahra_hastanesi": [
+0,
+1
+],
+"vahit_yakit_listesi": [
+2,
+4
+],
+"kaya_ilk_tanisma": [
+0,
+1
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"cete_gisede"
+]
+},
+"kayip_esya_ofisi": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [
+"harabe_carsi"
+],
+"gun_min": 6,
+"gun_max": 28,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"gizem",
+"ahlak",
+"carsi"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "harabe_carsi",
+"places": [
+"harabe_carsi"
+],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"elif_sahra_hastanesi",
+"mert_cozulen_satir",
+"vahit_yakit_listesi",
+"zindan_kasa"
+],
+"delays": {
+"elif_sahra_hastanesi": [
+0,
+1
+],
+"mert_cozulen_satir": [
+2,
+4
+],
+"vahit_yakit_listesi": [
+2,
+4
+],
+"zindan_kasa": [
+2,
+5
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"kayip_esya_yagmalandi",
+"kayip_etiket_yakildi",
+"kayip_umut_yalani"
+]
+},
+"son_tren": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [
+"kirik_istasyon"
+],
+"gun_min": 7,
+"gun_max": 25,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"gizem",
+"kurtarma",
+"istasyon"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kirik_istasyon",
+"places": [
+"kirik_istasyon"
+],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"elif_sahra_hastanesi",
+"mert_cozulen_satir",
+"mert_sifreli_mesaj",
+"zindan_metro"
+],
+"delays": {
+"mert_cozulen_satir": [
+2,
+4
+],
+"zindan_metro": [
+1,
+3
+],
+"elif_sahra_hastanesi": [
+0,
+1
+],
+"mert_sifreli_mesaj": [
+0,
+1
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"tren_bosaltildi"
+]
+},
+"su_baskini": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [
+"kirik_istasyon"
+],
+"gun_min": 10,
+"gun_max": 26,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kurtarma",
+"ahlak",
+"istasyon"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kirik_istasyon",
+"places": [
+"kirik_istasyon"
+],
+"n_scenes": 7,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"elif_sahra_hastanesi",
+"kaya_ilk_tanisma",
+"zindan_metro"
+],
+"delays": {
+"zindan_metro": [
+1,
+3
+],
+"elif_sahra_hastanesi": [
+0,
+1
+],
+"kaya_ilk_tanisma": [
+0,
+1
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"su_avci_boguldu",
+"su_duvar_yikildi",
+"su_genc_kayboldu",
+"su_herkes_kurtuldu",
+"su_once_avci",
+"su_once_siviller"
+]
+},
+"olu_avci_penceresi": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": 9,
+"gun_max": 27,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"gizem",
+"ahlak",
+"anomali"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 11,
+"quests": [
+"olu_avcinin_mesaji"
+],
+"quest_cond": [],
+"seeds": [
+"avci_kizi",
+"kaya_gece_devriyesi",
+"kaya_ilk_tanisma",
+"mert_cozulen_satir"
+],
+"delays": {
+"avci_kizi": [
+2,
+4
+],
+"mert_cozulen_satir": [
+2,
+4
+],
+"kaya_ilk_tanisma": [
+0,
+1
+],
+"kaya_gece_devriyesi": [
+2,
+4
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"olu_avci_katil_bagislandi",
+"olu_avci_katil_olduruldu",
+"olu_avci_katil_teslim",
+"olu_avci_kunye_verildi",
+"olu_avci_kunyesi",
+"olu_avci_yagmalandi"
+]
+},
+"avci_kizi": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"ahlak",
+"karsilasma"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 4,
+"quests": [
+"olu_avcinin_mesaji"
+],
+"quest_cond": [],
+"seeds": [
+"elif_sahra_hastanesi",
+"kaya_ilk_tanisma",
+"mert_sifreli_mesaj"
+],
+"delays": {
+"elif_sahra_hastanesi": [
+0,
+1
+],
+"kaya_ilk_tanisma": [
+0,
+1
+],
+"mert_sifreli_mesaj": [
+0,
+1
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"avci_kizi_teselli"
+]
+},
+"kaya_ilk_tanisma": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [
+"ogretici_orman",
+"harabe_carsi"
+],
+"gun_min": 5,
+"gun_max": 18,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"kaya_demir"
+],
+"tags": [
+"kamp",
+"lonca",
+"npc",
+"karsilasma"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 11,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"elif_sahra_hastanesi",
+"kaya_gece_devriyesi"
+],
+"delays": {
+"kaya_gece_devriyesi": [
+4,
+7
+],
+"elif_sahra_hastanesi": [
+0,
+1
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"kaya_elif_koprusu",
+"kaya_kampi_bilinir",
+"kaya_sinavi_komuta",
+"kaya_sinavi_yalniz",
+"lonca_ikinci_adam",
+"lonca_komutasi_alindi",
+"lonca_muafiyet",
+"lonca_saflarinda"
+]
+},
+"kaya_gece_devriyesi": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [
+"kaya_demir"
+],
+"tags": [
+"kamp",
+"lonca",
+"npc",
+"ahlak"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"hastane_karantina"
+],
+"delays": {
+"hastane_karantina": [
+2,
+4
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"kaya_elif_koprusu",
+"lonca_muafiyet"
+]
+},
+"elif_sahra_hastanesi": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [
+"harabe_carsi"
+],
+"gun_min": 4,
+"gun_max": 18,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"elif_sari"
+],
+"tags": [
+"kamp",
+"siginak",
+"npc",
+"karsilasma"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "harabe_carsi",
+"places": [
+"harabe_carsi"
+],
+"n_scenes": 10,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"eczane",
+"hastane_karantina"
+],
+"delays": {
+"hastane_karantina": [
+3,
+5
+],
+"eczane": [
+0,
+2
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"elif_anomaliyi_biliyor",
+"elif_hastanesi_bilinir",
+"elif_yoldas",
+"karantina_cozuldu",
+"karantina_disarida",
+"karantina_iceride",
+"karantina_nobeti",
+"karantina_oylandi"
+]
+},
+"hastane_karantina": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [
+"elif_sari"
+],
+"tags": [
+"siginak",
+"npc",
+"ahlak"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"su_baskini"
+],
+"delays": {
+"su_baskini": [
+0,
+2
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": []
+},
+"vahit_vaaz": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": 7,
+"gun_max": 20,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"vahit"
+],
+"tags": [
+"kamp",
+"yukselenler",
+"npc",
+"karsilasma"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"vahit_yakit_listesi"
+],
+"delays": {
+"vahit_yakit_listesi": [
+3,
+6
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"secilmislere_katildi",
+"vahit_vaazi_dinlendi",
+"yakit_kadin_kurtarildi"
+]
+},
+"vahit_yakit_listesi": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [
+"vahit"
+],
+"tags": [
+"yukselenler",
+"npc",
+"ahlak"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"hastane_karantina",
+"mert_cozulen_satir"
+],
+"delays": {
+"hastane_karantina": [
+2,
+4
+],
+"mert_cozulen_satir": [
+1,
+3
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"vahit_ifsa_edildi",
+"yakit_listesi_yakildi"
+]
+},
+"mert_sifreli_mesaj": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [
+"kirik_istasyon"
+],
+"gun_min": 8,
+"gun_max": 22,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"mert_kilic"
+],
+"tags": [
+"kamp",
+"sessiz_ag",
+"npc",
+"gizem"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kirik_istasyon",
+"places": [
+"kirik_istasyon"
+],
+"n_scenes": 9,
+"quests": [
+"mert_anteni"
+],
+"quest_cond": [],
+"seeds": [
+"istasyon_sinyali",
+"mert_cozulen_satir"
+],
+"delays": {
+"mert_cozulen_satir": [
+2,
+4
+],
+"istasyon_sinyali": [
+1,
+2
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"mert_istasyonu_bilinir",
+"mert_yoldas",
+"telsizler_satildi"
+]
+},
+"mert_cozulen_satir": {
+"file": "30_carsi_istasyon.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [
+"mert_kilic"
+],
+"tags": [
+"sessiz_ag",
+"npc",
+"gizem",
+"anomali"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 2,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"istasyon_sinyali"
+],
+"delays": {
+"istasyon_sinyali": [
+0,
+2
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"mert_yoldas",
+"sessiz_ag_sirri"
+]
+},
+"kirilma": {
+"file": "40_ana_yay.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 12,
+"tohum": false,
+"npc": [
+"yanki"
+],
+"tags": [
+"ana_yay",
+"kirilma",
+"yanki",
+"kurtarma"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "ogretici_orman",
+"places": [
+"ogretici_orman"
+],
+"n_scenes": 13,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"aras_ilk_yaris",
+"elif_sahra_hastanesi",
+"kamp_ates_basi",
+"yanki_bozuk_satir"
+],
+"delays": {
+"elif_sahra_hastanesi": [
+1,
+2
+],
+"kamp_ates_basi": [
+2,
+4
+],
+"yanki_bozuk_satir": [
+1,
+3
+],
+"aras_ilk_yaris": [
+2,
+4
+]
+},
+"fights": 6,
+"flags_need": [],
+"flags_set": [
+"kirilma_kayip",
+"kirilma_yasandi"
+]
+},
+"yeni_tavan": {
+"file": "40_ana_yay.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 24,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"yeni_tavan",
+"kadimler",
+"kademe"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "ogretici_orman",
+"places": [
+"ogretici_orman"
+],
+"n_scenes": 12,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"aras_sira_meydan",
+"yanki_bozuk_satir"
+],
+"delays": {
+"aras_sira_meydan": [
+1,
+3
+],
+"yanki_bozuk_satir": [
+1,
+2
+]
+},
+"fights": 3,
+"flags_need": [],
+"flags_set": [
+"deniz_hic_bulunmadi",
+"yeni_tavan_goruldu",
+"yeni_tavan_kirildi"
+]
+},
+"ogretici_bekci": {
+"file": "40_ana_yay.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 28,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"boss",
+"final"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "ogretici_kapi",
+"places": [
+"ogretici_kapi"
+],
+"n_scenes": 6,
+"quests": [
+"ogretici_cikis"
+],
+"quest_cond": [],
+"seeds": [
+"dikkat_50"
+],
+"delays": {
+"dikkat_50": [
+1,
+2
+]
+},
+"fights": 6,
+"flags_need": [],
+"flags_set": [
+"bekci_golge",
+"bekci_topla",
+"bekci_yalniz",
+"deniz_hatti_tuttu"
+]
+},
+"dikkat_25": {
+"file": "40_ana_yay.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"dikkat",
+"avci"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"aras_sira_meydan",
+"mert_sifreli_mesaj"
+],
+"delays": {
+"aras_sira_meydan": [
+2,
+4
+],
+"mert_sifreli_mesaj": [
+2,
+4
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": []
+},
+"dikkat_50": {
+"file": "40_ana_yay.yaml",
+"perde": [
+1
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [
+"yanki"
+],
+"tags": [
+"dikkat",
+"sistem",
+"yanki"
+],
+"gerilim": 4,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 7,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"mert_sifreli_mesaj",
+"yanki_bozuk_satir"
+],
+"delays": {
+"yanki_bozuk_satir": [
+1,
+3
+],
+"mert_sifreli_mesaj": [
+1,
+3
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"dikkat50_kurban"
+]
+},
+"zindan_metro": {
+"file": "40_ana_yay.yaml",
+"perde": [
+1
+],
+"bolge": [
+"kirik_istasyon"
+],
+"gun_min": 10,
+"gun_max": 26,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kapi",
+"zindan",
+"kesif"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kirik_istasyon",
+"places": [
+"kirik_istasyon"
+],
+"n_scenes": 16,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"mert_sifreli_mesaj"
+],
+"delays": {
+"mert_sifreli_mesaj": [
+2,
+4
+]
+},
+"fights": 7,
+"flags_need": [],
+"flags_set": [
+"metro_ekip_goruldu",
+"metro_kurtarildi",
+"metro_tasindi"
+]
+},
+"zindan_kasa": {
+"file": "40_ana_yay.yaml",
+"perde": [
+1
+],
+"bolge": [
+"harabe_carsi"
+],
+"gun_min": 12,
+"gun_max": 27,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kapi",
+"zindan",
+"kesif"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": "harabe_carsi",
+"places": [
+"harabe_carsi"
+],
+"n_scenes": 10,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"carsi_cetesi",
+"elif_sahra_hastanesi"
+],
+"delays": {
+"carsi_cetesi": [
+2,
+5
+],
+"elif_sahra_hastanesi": [
+1,
+3
+]
+},
+"fights": 6,
+"flags_need": [],
+"flags_set": [
+"kasa_cocuk_kurtarildi",
+"kasa_sifre"
+]
+},
+"perde2_donus": {
+"file": "50_perde2_ana.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 31,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"donus"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_iskele",
+"places": [
+"kiyikent_iskele",
+"kiyikent_liman"
+],
+"n_scenes": 18,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"dikkat_50_p2",
+"kayip_duvari_cevap"
+],
+"delays": {
+"kayip_duvari_cevap": [
+3,
+6
+],
+"dikkat_50_p2": [
+4,
+8
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"deniz_anildi",
+"deniz_bulundu",
+"deniz_donuste_bulundu",
+"deniz_yankiyi_biliyor",
+"donus_gizlendi",
+"donus_iskele_kurtarildi",
+"donus_liman_yaratigi",
+"kayip_duvari_not",
+"perde2_basladi"
+]
+},
+"kule_yukselisi": {
+"file": "50_perde2_ana.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 40,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"kule",
+"boss"
+],
+"gerilim": 4,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule_dibi",
+"places": [
+"kule",
+"kule_dibi"
+],
+"n_scenes": 13,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kule_donmeyenler"
+],
+"delays": {
+"kule_donmeyenler": [
+3,
+6
+]
+},
+"fights": 4,
+"flags_need": [],
+"flags_set": [
+"kule_acik",
+"kule_cephe_tutuldu",
+"kule_gizli_tirmanis",
+"kule_ilk_adim",
+"kule_kapi_nobeti",
+"kule_siviller_korundu"
+]
+},
+"fraksiyon_secimi": {
+"file": "50_perde2_ana.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 45,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"fraksiyon",
+"siyaset"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 13,
+"quests": [
+"zincir_lonca",
+"zincir_sessiz_ag",
+"zincir_siginak",
+"zincir_yukselenler"
+],
+"quest_cond": [],
+"seeds": [
+"secimin_gecesi"
+],
+"delays": {
+"secimin_gecesi": [
+1,
+2
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"lonca_kordon_hatti",
+"secim_dort_masa",
+"uye_lonca",
+"uye_sessiz_ag",
+"uye_siginak",
+"uye_yok",
+"uye_yukselenler"
+]
+},
+"kasaba_cekirdegi": {
+"file": "50_perde2_ana.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 60,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"cekirdek",
+"boss",
+"siyaset"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "eski_sehir",
+"places": [
+"eski_sehir"
+],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"dikkat_75_p2"
+],
+"delays": {
+"dikkat_75_p2": [
+2,
+5
+]
+},
+"fights": 4,
+"flags_need": [],
+"flags_set": [
+"cekirdek_lonca",
+"cekirdek_oyuncu",
+"cekirdek_sessiz_ag",
+"cekirdek_siginak",
+"cekirdek_yukselenler"
+]
+},
+"ilk_tasma": {
+"file": "50_perde2_ana.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 80,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"kapi",
+"boss",
+"savas"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kordon",
+"places": [
+"kiyikent_liman",
+"kordon"
+],
+"n_scenes": 7,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"tasma_sonrasi"
+],
+"delays": {
+"tasma_sonrasi": [
+2,
+4
+]
+},
+"fights": 6,
+"flags_need": [],
+"flags_set": [
+"kordon_dustu",
+"kordon_kurtarildi",
+"tasma_apartman",
+"tasma_komuta",
+"tasma_tekne"
+]
+},
+"yanki_ortaya_cikis": {
+"file": "50_perde2_ana.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 105,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"yanki",
+"sir"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "eski_sehir",
+"places": [
+"eski_sehir"
+],
+"n_scenes": 7,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"iki_sesli_sokak"
+],
+"delays": {
+"iki_sesli_sokak": [
+1,
+3
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"yanki_gorundu",
+"yanki_inkar_edildi",
+"yanki_sahiplenildi",
+"yanki_susturuldu"
+]
+},
+"sistem_gercegi": {
+"file": "50_perde2_ana.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 135,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"sistem",
+"sir",
+"yanki"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kasaba_cekirdegi",
+"places": [
+"kasaba_cekirdegi"
+],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"baslik_gecesi"
+],
+"delays": {
+"baslik_gecesi": [
+1,
+2
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"baslik_tanikli",
+"gercek_hasat",
+"gercek_kurtarma"
+]
+},
+"perde2_son": {
+"file": "50_perde2_ana.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 178,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"kadim",
+"final"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_iskele",
+"kiyikent_liman",
+"kule"
+],
+"n_scenes": 7,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"gemi_altinda_gece"
+],
+"delays": {
+"gemi_altinda_gece": [
+1,
+1
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"kadim_gemisi_goruldu"
+]
+},
+"dikkat_50_p2": {
+"file": "50_perde2_ana.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"dikkat",
+"avci"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule_dibi",
+"places": [
+"kule_dibi"
+],
+"n_scenes": 8,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"dikkat_75_p2"
+],
+"delays": {
+"dikkat_75_p2": [
+3,
+6
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": []
+},
+"dikkat_75_p2": {
+"file": "50_perde2_ana.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"dikkat",
+"sistem",
+"yanki",
+"boss"
+],
+"gerilim": 4,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 6,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"dikkat_100_p2"
+],
+"delays": {
+"dikkat_100_p2": [
+3,
+7
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"dikkat75_kurban"
+]
+},
+"dikkat_100_p2": {
+"file": "50_perde2_ana.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"dikkat",
+"kadim",
+"boss"
+],
+"gerilim": 4,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 6,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"dikkat_75_p2"
+],
+"delays": {
+"dikkat_75_p2": [
+4,
+8
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": []
+},
+"kayip_duvari_cevap": {
+"file": "50_perde2_ana.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"donus",
+"insanlar"
+],
+"gerilim": 1,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kiyikent_iskele",
+"places": [
+"kiyikent_iskele",
+"kiyikent_liman"
+],
+"n_scenes": 6,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"dikkat_50_p2"
+],
+"delays": {
+"dikkat_50_p2": [
+2,
+5
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"vapur_dogrultuldu"
+]
+},
+"kule_donmeyenler": {
+"file": "50_perde2_ana.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kule",
+"insanlar"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule_dibi",
+"places": [
+"kule",
+"kule_dibi"
+],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"dikkat_50_p2"
+],
+"delays": {
+"dikkat_50_p2": [
+2,
+5
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"kule_baba_kurtarildi"
+]
+},
+"secimin_gecesi": {
+"file": "50_perde2_ana.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"fraksiyon",
+"siyaset"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 1,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kayip_duvari_cevap"
+],
+"delays": {
+"kayip_duvari_cevap": [
+2,
+4
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"kayip_duvari_not"
+]
+},
+"tasma_sonrasi": {
+"file": "50_perde2_ana.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kapi",
+"insanlar"
+],
+"gerilim": 1,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 2,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"dikkat_50_p2"
+],
+"delays": {
+"dikkat_50_p2": [
+3,
+6
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"iki_sesli_sokak": {
+"file": "50_perde2_ana.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [
+"yanki"
+],
+"tags": [
+"yanki",
+"insanlar"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"dikkat_75_p2"
+],
+"delays": {
+"dikkat_75_p2": [
+3,
+6
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"baslik_gecesi": {
+"file": "50_perde2_ana.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [
+"yanki"
+],
+"tags": [
+"yanki",
+"sistem",
+"sir"
+],
+"gerilim": 1,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"gemi_altinda_gece": {
+"file": "50_perde2_ana.yaml",
+"perde": [
+2,
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kadim",
+"insanlar"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman",
+"tepe"
+],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"dikkat_100_p2"
+],
+"delays": {
+"dikkat_100_p2": [
+1,
+3
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"siginak_1_konsey": {
+"file": "51_siginak_elif.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": 50,
+"gun_max": 110,
+"ana_yay": 66,
+"tohum": false,
+"npc": [
+"elif_sari"
+],
+"tags": [
+"siginak",
+"zincir",
+"konsey",
+"npc"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_iskele",
+"places": [
+"kiyikent_iskele",
+"kiyikent_liman"
+],
+"n_scenes": 10,
+"quests": [
+"zincir_siginak"
+],
+"quest_cond": [],
+"seeds": [
+"elif_konsey_oylamasi"
+],
+"delays": {
+"elif_konsey_oylamasi": [
+10,
+20
+]
+},
+"fights": 4,
+"flags_need": [],
+"flags_set": [
+"balikcilar_savasti",
+"konsey_kalkan_sart",
+"kordon_kapisi_acildi",
+"kordon_kapisi_aralandi",
+"lonca_sozlesmesi_yirtildi",
+"mendirek_ezildi",
+"mendirek_gizli",
+"mendirek_loncaya",
+"mendirek_temizlendi",
+"oyuncu_konsey_payi",
+"pano_dogru",
+"siginak_1_bitti",
+"siginak_1_goruldu",
+"siginak_1_red"
+]
+},
+"elif_konsey_oylamasi": {
+"file": "51_siginak_elif.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": 72,
+"gun_max": 175,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"elif_sari"
+],
+"tags": [
+"siginak",
+"konsey",
+"npc",
+"ahlak"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_iskele",
+"places": [
+"kiyikent_iskele"
+],
+"n_scenes": 7,
+"quests": [
+"zincir_siginak"
+],
+"quest_cond": [],
+"seeds": [
+"elif_gece_nobeti"
+],
+"delays": {
+"elif_gece_nobeti": [
+45,
+75
+]
+},
+"fights": 0,
+"flags_need": [
+"siginak_1_goruldu"
+],
+"flags_set": [
+"elif_anomaliyi_biliyor",
+"elif_konsey_basi",
+"elif_oylamasi_bitti",
+"konsey_danisma",
+"nobet_cizelgesi",
+"oyuncu_konsey_koltugu",
+"riza_konsey_basi",
+"seviye_karnesi",
+"siginak_1_bitti"
+]
+},
+"siginak_2_su_savaslari": {
+"file": "51_siginak_elif.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": 100,
+"gun_max": 170,
+"ana_yay": 122,
+"tohum": false,
+"npc": [
+"elif_sari"
+],
+"tags": [
+"siginak",
+"zincir",
+"su",
+"lonca"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_iskele",
+"places": [
+"eski_sehir",
+"kiyikent_iskele",
+"kiyikent_liman",
+"sanayi"
+],
+"n_scenes": 10,
+"quests": [],
+"quest_cond": [
+"zincir_siginak"
+],
+"seeds": [
+"elif_gece_nobeti"
+],
+"delays": {
+"elif_gece_nobeti": [
+12,
+25
+]
+},
+"fights": 3,
+"flags_need": [
+"siginak_1_bitti"
+],
+"flags_set": [
+"pala_kini",
+"sarnic_acildi",
+"sarnic_dilegi",
+"siginak_2_bitti",
+"su_bekcisi",
+"su_istasyonu_basildi",
+"su_karnesi",
+"su_lonca_anlasmasi",
+"su_paylasildi",
+"tuzdan_su"
+]
+},
+"elif_gece_nobeti": {
+"file": "51_siginak_elif.yaml",
+"perde": [
+2,
+3
+],
+"bolge": [],
+"gun_min": 140,
+"gun_max": 250,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"elif_sari"
+],
+"tags": [
+"siginak",
+"npc",
+"hastane",
+"nefes"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"elif_lonca_darbesi"
+],
+"delays": {
+"elif_lonca_darbesi": [
+80,
+110
+]
+},
+"fights": 0,
+"flags_need": [
+"elif_oylamasi_bitti"
+],
+"flags_set": [
+"ates_cekildi",
+"dogu_tanki_muhurlendi",
+"ece_yasadi",
+"elif_anomaliyi_biliyor",
+"elif_ask",
+"elif_dostluk",
+"elif_gece_nobeti_bitti",
+"elif_mesafe",
+"lonca_kuyu_fisi"
+]
+},
+"siginak_3_tahliye": {
+"file": "51_siginak_elif.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": 190,
+"gun_max": 260,
+"ana_yay": 205,
+"tohum": false,
+"npc": [],
+"tags": [
+"siginak",
+"zincir",
+"kadimler",
+"kurtarma"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"eski_sehir",
+"kiyikent_iskele",
+"kiyikent_liman",
+"kordon"
+],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [
+"zincir_siginak"
+],
+"seeds": [
+"elif_lonca_darbesi"
+],
+"delays": {
+"elif_lonca_darbesi": [
+20,
+40
+]
+},
+"fights": 5,
+"flags_need": [
+"siginak_2_bitti"
+],
+"flags_set": [
+"hasat_sutunu_yikildi",
+"ihtiyar_tasindi",
+"iskele_terk",
+"kadim_listesi_verildi",
+"orneklenenler",
+"siginak_3_bitti",
+"son_sefer_yapildi",
+"tahliye_herkes",
+"tahliye_lonca",
+"tahliye_once_cocuklar",
+"tahliye_once_savascilar",
+"tepeye_yuruyenler",
+"thessar_seni_olctu"
+]
+},
+"elif_lonca_darbesi": {
+"file": "51_siginak_elif.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": 232,
+"gun_max": 328,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"elif_sari"
+],
+"tags": [
+"siginak",
+"lonca",
+"npc",
+"darbe"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_iskele",
+"kiyikent_liman"
+],
+"n_scenes": 13,
+"quests": [
+"zincir_siginak"
+],
+"quest_cond": [],
+"seeds": [
+"pala_yargilanmasi"
+],
+"delays": {
+"pala_yargilanmasi": [
+2,
+4
+]
+},
+"fights": 3,
+"flags_need": [
+"siginak_1_goruldu"
+],
+"flags_set": [
+"darbe_basarili",
+"darbe_puskurtuldu",
+"darbe_uzlasma",
+"elif_darbe_yasandi",
+"konsey_kurtarildi",
+"pala_olduruldu",
+"pala_yakalandi"
+]
+},
+"pala_yargilanmasi": {
+"file": "51_siginak_elif.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"siginak",
+"lonca",
+"konsey",
+"ahlak"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_iskele",
+"places": [
+"kiyikent_iskele"
+],
+"n_scenes": 1,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"pala_kazida",
+"pala_olduruldu",
+"pala_surgun"
+]
+},
+"siginak_4_son_siginak": {
+"file": "51_siginak_elif.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": 250,
+"gun_max": 320,
+"ana_yay": 268,
+"tohum": false,
+"npc": [],
+"tags": [
+"siginak",
+"zincir",
+"kazi",
+"sir"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 8,
+"quests": [],
+"quest_cond": [
+"zincir_siginak"
+],
+"seeds": [
+"elif_lonca_darbesi"
+],
+"delays": {
+"elif_lonca_darbesi": [
+3,
+10
+]
+},
+"fights": 2,
+"flags_need": [
+"siginak_3_bitti"
+],
+"flags_set": [
+"besinci_cizgi",
+"eski_kalkanlar",
+"kaya_oyuldu",
+"oda_muhurlendi",
+"siginak_4_bitti",
+"son_siginak_herkes",
+"son_siginak_kadim",
+"son_siginak_kura",
+"son_siginak_kuruldu",
+"son_siginak_savascilar",
+"uyuyan_bekci"
+]
+},
+"elif_baris_masasi": {
+"file": "51_siginak_elif.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": 331,
+"gun_max": 341,
+"ana_yay": 333,
+"tohum": false,
+"npc": [
+"elif_sari"
+],
+"tags": [
+"siginak",
+"npc",
+"ittifak",
+"fraksiyon"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_iskele",
+"places": [
+"kiyikent_iskele"
+],
+"n_scenes": 8,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"elif_son_gece"
+],
+"delays": {
+"elif_son_gece": [
+3,
+6
+]
+},
+"fights": 0,
+"flags_need": [
+"siginak_1_goruldu"
+],
+"flags_set": [
+"baris_masasi_dagildi",
+"elif_baskan",
+"insan_ittifaki",
+"kadim_masada",
+"kurul_ittifaki",
+"masa_lonca_komuta",
+"masa_ortak_kurul",
+"masa_tek_ses",
+"oyuncu_ittifak_basi",
+"yakit_listeleri_yakildi"
+]
+},
+"elif_son_gece": {
+"file": "51_siginak_elif.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [
+"elif_sari"
+],
+"tags": [
+"siginak",
+"npc",
+"nefes",
+"veda"
+],
+"gerilim": 1,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 4,
+"quests": [
+"zincir_siginak"
+],
+"quest_cond": [],
+"seeds": [
+"siginak_5_kalkan_yemini"
+],
+"delays": {
+"siginak_5_kalkan_yemini": [
+0,
+1
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"elif_anomaliyi_biliyor",
+"siginak_4_bitti"
+]
+},
+"siginak_5_kalkan_yemini": {
+"file": "51_siginak_elif.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": 331,
+"gun_max": 356,
+"ana_yay": 339,
+"tohum": false,
+"npc": [],
+"tags": [
+"siginak",
+"zincir",
+"yemin",
+"kadimler"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman",
+"kordon"
+],
+"n_scenes": 6,
+"quests": [
+"zincir_siginak"
+],
+"quest_cond": [
+"zincir_siginak"
+],
+"seeds": [],
+"delays": {},
+"fights": 2,
+"flags_need": [
+"siginak_4_bitti"
+],
+"flags_set": [
+"kalkan_gucu_alindi",
+"kalkan_ters_cevrildi",
+"kalkan_yemini",
+"kalkan_yeminsiz"
+]
+},
+"kaya_lonca_teklifi": {
+"file": "52_lonca_kaya.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": 33,
+"gun_max": 80,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"kaya_demir"
+],
+"tags": [
+"lonca",
+"npc",
+"karsilasma",
+"sanayi"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "sanayi",
+"places": [
+"sanayi"
+],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kaya_sert_ders",
+"lonca_1_kapi_temizligi"
+],
+"delays": {
+"lonca_1_kapi_temizligi": [
+3,
+8
+],
+"kaya_sert_ders": [
+40,
+60
+]
+},
+"fights": 0,
+"flags_need": [
+"perde2_basladi"
+],
+"flags_set": [
+"kaya_sag_kol",
+"kaya_teklifi_goruldu",
+"kaya_teklifi_kabul",
+"kaya_teklifi_sozlesme",
+"lonca_hafife_aldi",
+"lonca_muafiyet",
+"lonca_siginak_hatti"
+]
+},
+"lonca_1_kapi_temizligi": {
+"file": "52_lonca_kaya.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": 45,
+"gun_max": 150,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"lonca",
+"kapi",
+"zincir",
+"sanayi"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "sanayi",
+"places": [
+"sanayi"
+],
+"n_scenes": 9,
+"quests": [
+"zincir_lonca"
+],
+"quest_cond": [],
+"seeds": [
+"lonca_2_rutbe"
+],
+"delays": {
+"lonca_2_rutbe": [
+25,
+40
+]
+},
+"fights": 12,
+"flags_need": [
+"perde2_basladi"
+],
+"flags_set": [
+"havuz_yalniz_temizlendi",
+"lonca_1_tamam",
+"lonca_yuk_korundu",
+"lonca_yuk_onde",
+"lonca_yuk_payi"
+]
+},
+"kaya_sert_ders": {
+"file": "52_lonca_kaya.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": 95,
+"gun_max": 175,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"kaya_demir"
+],
+"tags": [
+"lonca",
+"npc",
+"ahlak",
+"tasma"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "sanayi",
+"places": [
+"sanayi"
+],
+"n_scenes": 11,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"lonca_1_kapi_temizligi"
+],
+"delays": {
+"lonca_1_kapi_temizligi": [
+2,
+5
+]
+},
+"fights": 5,
+"flags_need": [
+"kaya_teklifi_goruldu"
+],
+"flags_set": [
+"kaya_akil_hocasi",
+"kaya_doktrin_kirildi",
+"kaya_rakip_gordu",
+"lojmanlar_kurtarildi",
+"lojmanlar_yandi",
+"sert_ders_emir_cignendi",
+"sert_ders_emre_uyuldu"
+]
+},
+"lonca_2_rutbe": {
+"file": "52_lonca_kaya.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": 95,
+"gun_max": 180,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"lonca",
+"zincir",
+"duello",
+"sanayi"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "sanayi",
+"places": [
+"sanayi"
+],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"ors_soguk_oda"
+],
+"delays": {
+"ors_soguk_oda": [
+12,
+22
+]
+},
+"fights": 1,
+"flags_need": [
+"lonca_1_tamam"
+],
+"flags_set": [
+"lonca_2_tamam",
+"lonca_merdiven_reddi",
+"lonca_rutbe_reformu",
+"ors_borclu",
+"ors_kin"
+]
+},
+"lonca_3_rakip_bastirma": {
+"file": "52_lonca_kaya.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": 181,
+"gun_max": 275,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"lonca",
+"zincir",
+"ahlak",
+"liman"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "sanayi",
+"places": [
+"kiyikent_liman",
+"sanayi"
+],
+"n_scenes": 12,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"lonca_4_demir_yasa"
+],
+"delays": {
+"lonca_4_demir_yasa": [
+15,
+30
+]
+},
+"fights": 4,
+"flags_need": [
+"lonca_2_tamam"
+],
+"flags_set": [
+"capa_adalet",
+"capa_ezildi",
+"capa_kacti",
+"capa_reisi_infaz",
+"capa_yutuldu",
+"kaya_sirri_elde",
+"lonca_3_tamam",
+"lonca_dusmani"
+]
+},
+"lonca_4_demir_yasa": {
+"file": "52_lonca_kaya.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": 205,
+"gun_max": 318,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"lonca",
+"zincir",
+"ahlak",
+"yasa"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "sanayi",
+"places": [
+"kasaba_cekirdegi",
+"kule_dibi",
+"sanayi"
+],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kaya_darbe_gecesi"
+],
+"delays": {
+"kaya_darbe_gecesi": [
+15,
+30
+]
+},
+"fights": 0,
+"flags_need": [
+"lonca_3_tamam"
+],
+"flags_set": [
+"demir_yasa_muafiyet",
+"demir_yasa_sert",
+"demir_yasa_sistemde",
+"demir_yasa_yururlukte",
+"kaya_yasa_yirtildi",
+"lonca_4_tamam",
+"lonca_5_acik",
+"lonca_yasa_reddedildi"
+]
+},
+"kaya_darbe_gecesi": {
+"file": "52_lonca_kaya.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": 240,
+"gun_max": 299,
+"ana_yay": 292,
+"tohum": false,
+"npc": [
+"kaya_demir"
+],
+"tags": [
+"lonca",
+"npc",
+"ahlak",
+"darbe"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "sanayi",
+"places": [
+"kiyikent_liman",
+"sanayi"
+],
+"n_scenes": 12,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kaya_soguk_firin"
+],
+"delays": {
+"kaya_soguk_firin": [
+8,
+14
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"kaya_akil_hocasi",
+"kaya_darbe_hazirligi",
+"kaya_darbe_ortagi",
+"kaya_darbeden_vazgecti",
+"kaya_devrildi",
+"kaya_hapiste",
+"kaya_ihbar_edildi",
+"kaya_surgun",
+"kaya_yemin_etti",
+"lonca_5_acik",
+"lonca_hakimiyeti"
+]
+},
+"kaya_son_savas_generali": {
+"file": "52_lonca_kaya.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": 331,
+"gun_max": 341,
+"ana_yay": 337,
+"tohum": false,
+"npc": [
+"kaya_demir"
+],
+"tags": [
+"lonca",
+"npc",
+"savas",
+"ordu"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kordon",
+"places": [
+"kordon"
+],
+"n_scenes": 8,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"kaya_devrildi",
+"kaya_general",
+"kaya_hapiste",
+"kaya_selam_tam",
+"lonca_5_acik",
+"lonca_hakimiyeti"
+]
+},
+"lonca_5_taht": {
+"file": "52_lonca_kaya.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": 331,
+"gun_max": 357,
+"ana_yay": 346,
+"tohum": false,
+"npc": [],
+"tags": [
+"lonca",
+"zincir",
+"taht",
+"ahlak"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "sanayi",
+"places": [
+"sanayi"
+],
+"n_scenes": 7,
+"quests": [
+"zincir_lonca"
+],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 1,
+"flags_need": [
+"lonca_5_acik"
+],
+"flags_set": [
+"kaya_akil_hocasi",
+"kaya_devrildi",
+"kaya_hapiste",
+"kaya_selam_tam",
+"kaya_surgun",
+"lonca_cozuldu",
+"lonca_hakimiyeti",
+"lonca_kayaya_birakildi"
+]
+},
+"ors_soguk_oda": {
+"file": "52_lonca_kaya.yaml",
+"perde": [
+2,
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"lonca",
+"ahlak",
+"sanayi"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "sanayi",
+"places": [
+"kiyikent_liman",
+"sanayi"
+],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"ors_borclu"
+]
+},
+"kaya_soguk_firin": {
+"file": "52_lonca_kaya.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [
+"kaya_demir"
+],
+"tags": [
+"lonca",
+"npc",
+"hapis"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "sanayi",
+"places": [
+"sanayi"
+],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"kaya_firin_plani"
+]
+},
+"yukselenler_1_cagri": {
+"file": "53_yukselenler_vahit.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": 45,
+"gun_max": 130,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"vahit"
+],
+"tags": [
+"yukselenler",
+"zincir",
+"npc",
+"ahlak"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [
+"tepe"
+],
+"n_scenes": 14,
+"quests": [
+"zincir_yukselenler"
+],
+"quest_cond": [],
+"seeds": [
+"vahit_secilmisler",
+"yukselenler_2_yakit_listesi",
+"yukselenler_kacak_aile"
+],
+"delays": {
+"yukselenler_2_yakit_listesi": [
+20,
+35
+],
+"yukselenler_kacak_aile": [
+6,
+12
+],
+"vahit_secilmisler": [
+6,
+14
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"sarnic_yemini",
+"vahit_yakin_takip",
+"yakit_reddi_goruldu",
+"yakit_sarti",
+"yukselenler_casus",
+"yukselenler_ikircikli",
+"yukselenler_ilk_yakit",
+"yukselenler_reddedildi"
+]
+},
+"yukselenler_2_yakit_listesi": {
+"file": "53_yukselenler_vahit.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": 80,
+"gun_max": 178,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"vahit"
+],
+"tags": [
+"yukselenler",
+"zincir",
+"npc",
+"ahlak"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "tepe",
+"places": [
+"tepe"
+],
+"n_scenes": 10,
+"quests": [
+"zincir_yukselenler"
+],
+"quest_cond": [
+"zincir_yukselenler"
+],
+"seeds": [
+"yukselenler_kacak_aile"
+],
+"delays": {
+"yukselenler_kacak_aile": [
+3,
+7
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"on_ucuncu_cizildi",
+"on_ucuncu_kacti",
+"yakit_defteri_bozuldu",
+"yakit_defteri_sizdi",
+"yakit_gonulluler",
+"yakit_listesi_imzalandi",
+"yakit_mahkumlar",
+"yukselenler_2_tamam"
+]
+},
+"yukselenler_3_ayin": {
+"file": "53_yukselenler_vahit.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 220,
+"tohum": false,
+"npc": [
+"vahit"
+],
+"tags": [
+"yukselenler",
+"zincir",
+"npc",
+"ahlak",
+"savas"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "tepe",
+"places": [
+"tepe"
+],
+"n_scenes": 11,
+"quests": [
+"zincir_yukselenler"
+],
+"quest_cond": [
+"zincir_yukselenler"
+],
+"seeds": [
+"on_ucuncu_secim"
+],
+"delays": {
+"on_ucuncu_secim": [
+4,
+9
+]
+},
+"fights": 8,
+"flags_need": [
+"yukselenler_2_tamam"
+],
+"flags_set": [
+"ayin_alindi",
+"ayin_kendini_yakti",
+"sarnic_kapandi",
+"yukselenler_3_tamam"
+]
+},
+"yukselenler_4_kurban": {
+"file": "53_yukselenler_vahit.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 285,
+"tohum": false,
+"npc": [],
+"tags": [
+"yukselenler",
+"zincir",
+"ahlak"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [
+"tepe"
+],
+"n_scenes": 10,
+"quests": [
+"zincir_yukselenler"
+],
+"quest_cond": [
+"zincir_yukselenler"
+],
+"seeds": [
+"yukselenler_kacak_aile"
+],
+"delays": {
+"yukselenler_kacak_aile": [
+3,
+7
+]
+},
+"fights": 2,
+"flags_need": [
+"yukselenler_3_tamam"
+],
+"flags_set": [
+"deniz_kurbandan_kurtuldu",
+"deniz_ocakta",
+"deniz_oyuncu_oldurdu",
+"deniz_rakip_oldu",
+"kurban_kendisi",
+"on_ucuncu_kurban",
+"vahit_ocaktan_cekildi",
+"yukselenler_4_tamam"
+]
+},
+"yukselenler_5_mutlak_sadakat": {
+"file": "53_yukselenler_vahit.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 340,
+"tohum": false,
+"npc": [],
+"tags": [
+"yukselenler",
+"zincir",
+"ahlak",
+"ana_yay"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "tepe",
+"places": [
+"tepe"
+],
+"n_scenes": 7,
+"quests": [
+"zincir_yukselenler"
+],
+"quest_cond": [
+"zincir_yukselenler"
+],
+"seeds": [
+"yukselenler_kacak_aile"
+],
+"delays": {
+"yukselenler_kacak_aile": [
+1,
+3
+]
+},
+"fights": 1,
+"flags_need": [
+"yukselenler_4_tamam"
+],
+"flags_set": [
+"sarnic_kapandi",
+"yukselenler_oyuncuya_bagli",
+"yukselenler_yakitsiz",
+"yukselis_sadakati"
+]
+},
+"vahit_secilmisler": {
+"file": "53_yukselenler_vahit.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": 50,
+"gun_max": 165,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"vahit"
+],
+"tags": [
+"yukselenler",
+"npc",
+"vahit"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "tepe",
+"places": [
+"tepe"
+],
+"n_scenes": 7,
+"quests": [
+"zincir_yukselenler"
+],
+"quest_cond": [],
+"seeds": [
+"vahit_mucize_sinavi",
+"yukselenler_2_yakit_listesi"
+],
+"delays": {
+"yukselenler_2_yakit_listesi": [
+10,
+20
+],
+"vahit_mucize_sinavi": [
+15,
+30
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"vahit_yakin_takip",
+"vahit_yankiyi_biliyor"
+]
+},
+"vahit_mucize_sinavi": {
+"file": "53_yukselenler_vahit.yaml",
+"perde": [
+2,
+3
+],
+"bolge": [],
+"gun_min": 110,
+"gun_max": 235,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"vahit"
+],
+"tags": [
+"yukselenler",
+"npc",
+"vahit",
+"kapi",
+"savas"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"yukselenler_kacak_aile"
+],
+"delays": {
+"yukselenler_kacak_aile": [
+3,
+8
+]
+},
+"fights": 7,
+"flags_need": [
+"vahit_yakin_takip"
+],
+"flags_set": [
+"mucize_calindi",
+"vahit_borclu",
+"vahit_itibar_sarsildi",
+"vahit_mucizesi_verildi"
+]
+},
+"vahit_maske_duser": {
+"file": "53_yukselenler_vahit.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 245,
+"tohum": false,
+"npc": [
+"vahit"
+],
+"tags": [
+"yukselenler",
+"npc",
+"vahit",
+"sir"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [
+"tepe"
+],
+"n_scenes": 10,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"on_ucuncu_secim",
+"yukselenler_kacak_aile"
+],
+"delays": {
+"on_ucuncu_secim": [
+3,
+8
+],
+"yukselenler_kacak_aile": [
+2,
+6
+]
+},
+"fights": 1,
+"flags_need": [
+"vahit_yakin_takip"
+],
+"flags_set": [
+"secici_yetkisi",
+"vahit_affedildi",
+"vahit_hakli",
+"vahit_kacti",
+"vahit_kanaldan_koptu",
+"vahit_kukla",
+"vahit_maskesi_dustu",
+"vahit_sahtekar",
+"vahit_sirri_saklandi"
+]
+},
+"vahit_yukselis_kapisi": {
+"file": "53_yukselenler_vahit.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 346,
+"tohum": false,
+"npc": [
+"vahit"
+],
+"tags": [
+"yukselenler",
+"npc",
+"vahit",
+"ana_yay",
+"son"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [
+"tepe"
+],
+"n_scenes": 6,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"yukselenler_kacak_aile"
+],
+"delays": {
+"yukselenler_kacak_aile": [
+1,
+2
+]
+},
+"fights": 1,
+"flags_need": [
+"vahit_maskesi_dustu"
+],
+"flags_set": [
+"yukselis_kapisi_acildi",
+"yukselis_kapisi_muhurlendi"
+]
+},
+"deniz_yukselen_rakip": {
+"file": "53_yukselenler_vahit.yaml",
+"perde": [
+2,
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 150,
+"tohum": false,
+"npc": [
+"deniz_arman"
+],
+"tags": [
+"deniz",
+"yukselenler",
+"npc",
+"duello"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"vahit_secilmisler",
+"yukselenler_kacak_aile"
+],
+"delays": {
+"vahit_secilmisler": [
+2,
+5
+],
+"yukselenler_kacak_aile": [
+5,
+10
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"deniz_kalkanin_oldu",
+"deniz_oyuncu_oldurdu",
+"deniz_rakip_oldu",
+"deniz_yukselenlerden_dondu"
+]
+},
+"yukselenler_kacak_aile": {
+"file": "53_yukselenler_vahit.yaml",
+"perde": [
+2,
+3,
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"yukselenler",
+"ahlak",
+"gece"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 7,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"vahit_mucize_sinavi"
+],
+"delays": {
+"vahit_mucize_sinavi": [
+8,
+16
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"vahit_yakin_takip"
+]
+},
+"on_ucuncu_secim": {
+"file": "53_yukselenler_vahit.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"yukselenler",
+"ahlak"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 3,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"yukselenler_kacak_aile"
+],
+"delays": {
+"yukselenler_kacak_aile": [
+6,
+12
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"on_ucuncu_adini_aldi",
+"on_ucuncu_kacti",
+"on_ucuncu_yandi",
+"on_ucuncu_yaninda"
+]
+},
+"sessiz_ag_1_frekans": {
+"file": "54_sessiz_ag_mert.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": 45,
+"gun_max": 125,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"mert_kilic"
+],
+"tags": [
+"sessiz_ag",
+"gizem",
+"npc",
+"anomali"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 11,
+"quests": [
+"zincir_sessiz_ag"
+],
+"quest_cond": [],
+"seeds": [
+"mert_kaynak_parcasi"
+],
+"delays": {
+"mert_kaynak_parcasi": [
+8,
+14
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"mert_ag_temasi",
+"sa_frekans_reddedildi",
+"sa_yanki_onayi",
+"sa_yanki_teslim"
+]
+},
+"mert_kaynak_parcasi": {
+"file": "54_sessiz_ag_mert.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": 55,
+"gun_max": 165,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"mert_kilic"
+],
+"tags": [
+"sessiz_ag",
+"npc",
+"gizem",
+"anomali"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 14,
+"quests": [
+"zincir_sessiz_ag"
+],
+"quest_cond": [],
+"seeds": [
+"mert_takip_edildi"
+],
+"delays": {
+"mert_takip_edildi": [
+40,
+60
+]
+},
+"fights": 1,
+"flags_need": [
+"mert_ag_temasi"
+],
+"flags_set": [
+"mert_parca_loncaya",
+"mert_parca_yankiya",
+"mert_saklandi"
+]
+},
+"sessiz_ag_2_kaynak_avi": {
+"file": "54_sessiz_ag_mert.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": 85,
+"gun_max": 175,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"mert_kilic"
+],
+"tags": [
+"sessiz_ag",
+"zindan",
+"kapi",
+"anomali"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 12,
+"quests": [
+"zincir_sessiz_ag"
+],
+"quest_cond": [
+"zincir_sessiz_ag"
+],
+"seeds": [
+"mert_takip_edildi"
+],
+"delays": {
+"mert_takip_edildi": [
+8,
+20
+]
+},
+"fights": 3,
+"flags_need": [],
+"flags_set": [
+"sa2_geri_cekildi",
+"sa_kaynak_avi_tamam",
+"sa_sarnic_avci_kurtarildi"
+]
+},
+"mert_takip_edildi": {
+"file": "54_sessiz_ag_mert.yaml",
+"perde": [
+2,
+3
+],
+"bolge": [],
+"gun_min": 110,
+"gun_max": 205,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"mert_kilic"
+],
+"tags": [
+"sessiz_ag",
+"npc",
+"takip",
+"kadim"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 14,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"mert_kadim_teklifi"
+],
+"delays": {
+"mert_kadim_teklifi": [
+90,
+105
+]
+},
+"fights": 2,
+"flags_need": [
+"mert_ag_temasi"
+],
+"flags_set": [
+"mert_isaretlendi",
+"mert_saklandi",
+"mert_teslim_edildi",
+"mert_yoldas"
+]
+},
+"sessiz_ag_3_kule_kodu": {
+"file": "54_sessiz_ag_mert.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": 186,
+"gun_max": 275,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"mert_kilic"
+],
+"tags": [
+"sessiz_ag",
+"kule",
+"zindan",
+"anomali"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 8,
+"quests": [
+"zincir_sessiz_ag"
+],
+"quest_cond": [
+"zincir_sessiz_ag"
+],
+"seeds": [
+"sessiz_ag_4_cekirdek_haritasi"
+],
+"delays": {
+"sessiz_ag_4_cekirdek_haritasi": [
+35,
+50
+]
+},
+"fights": 3,
+"flags_need": [
+"kule_acik",
+"sa_kaynak_avi_tamam"
+],
+"flags_set": [
+"mert_kule_tirmandi",
+"sa3_geri_cekildi",
+"sa_kule_kodu_okundu",
+"sa_kule_kodu_yanki"
+]
+},
+"mert_kadim_teklifi": {
+"file": "54_sessiz_ag_mert.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": 190,
+"gun_max": 296,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"mert_kilic"
+],
+"tags": [
+"sessiz_ag",
+"npc",
+"kadim",
+"ihanet"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 15,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"mert_muhbir_izi"
+],
+"delays": {
+"mert_muhbir_izi": [
+6,
+12
+]
+},
+"fights": 1,
+"flags_need": [
+"mert_ag_temasi"
+],
+"flags_set": [
+"mert_cift_ajan",
+"mert_kadimlere_satti",
+"mert_oyuncu_satti",
+"mert_teklifi_reddetti"
+]
+},
+"mert_muhbir_izi": {
+"file": "54_sessiz_ag_mert.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [
+"mert_kilic"
+],
+"tags": [
+"sessiz_ag",
+"npc",
+"kadim",
+"ihanet"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 9,
+"quests": [
+"zincir_sessiz_ag"
+],
+"quest_cond": [],
+"seeds": [
+"sessiz_ag_4_cekirdek_haritasi"
+],
+"delays": {
+"sessiz_ag_4_cekirdek_haritasi": [
+8,
+20
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"mert_cift_ajan",
+"mert_ihaneti_onlendi",
+"mert_infaz_edildi",
+"mert_surgun",
+"mert_teklifi_reddetti",
+"sa_kule_kodu_okundu"
+]
+},
+"sessiz_ag_4_cekirdek_haritasi": {
+"file": "54_sessiz_ag_mert.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": 245,
+"gun_max": 328,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"sessiz_ag",
+"anomali",
+"kusatma",
+"sistem"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 8,
+"quests": [],
+"quest_cond": [
+"zincir_sessiz_ag"
+],
+"seeds": [
+"mert_muhbir_izi"
+],
+"delays": {
+"mert_muhbir_izi": [
+3,
+8
+]
+},
+"fights": 1,
+"flags_need": [
+"sa_kule_kodu_okundu"
+],
+"flags_set": [
+"mert_cift_ajan",
+"mert_kadimlere_satti",
+"sa_cekirdek_haritasi_tamam",
+"sa_harita_sizdi",
+"sa_telsizci_oldu"
+]
+},
+"sessiz_ag_5_arka_kapi": {
+"file": "54_sessiz_ag_mert.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": 332,
+"gun_max": 353,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"sessiz_ag",
+"zindan",
+"sistem",
+"anomali"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 12,
+"quests": [
+"zincir_sessiz_ag"
+],
+"quest_cond": [
+"zincir_sessiz_ag"
+],
+"seeds": [
+"mert_kod_kirici"
+],
+"delays": {
+"mert_kod_kirici": [
+1,
+3
+]
+},
+"fights": 6,
+"flags_need": [
+"sa_cekirdek_haritasi_tamam"
+],
+"flags_set": [
+"sa5_geri_cekildi",
+"sa5_kopya_geri",
+"sa_arka_kapi_acildi",
+"sa_arka_kapi_muhurlendi",
+"sa_mert_kapida",
+"sa_tutamak_yalniz"
+]
+},
+"mert_kod_kirici": {
+"file": "54_sessiz_ag_mert.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": 335,
+"gun_max": 357,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"mert_kilic"
+],
+"tags": [
+"sessiz_ag",
+"npc",
+"sistem",
+"son"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 8,
+"quests": [],
+"quest_cond": [
+"zincir_sessiz_ag"
+],
+"seeds": [
+"mert_son_log"
+],
+"delays": {
+"mert_son_log": [
+1,
+1
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"kod_kirici_anahtari",
+"mert_anahtar_tek"
+]
+},
+"mert_son_log": {
+"file": "54_sessiz_ag_mert.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [
+"mert_kilic"
+],
+"tags": [
+"sessiz_ag",
+"npc",
+"nefes"
+],
+"gerilim": 1,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 2,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"thessar_inis": {
+"file": "55_kadimler_thessar.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 181,
+"tohum": false,
+"npc": [
+"thessar"
+],
+"tags": [
+"ana_yay",
+"kadimler",
+"thessar",
+"elcilik"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 12,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kadimler_1_ticaret",
+"thessar_ticaret_masasi"
+],
+"delays": {
+"kadimler_1_ticaret": [
+3,
+6
+],
+"thessar_ticaret_masasi": [
+19,
+28
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"thessar_dusman",
+"thessar_indi",
+"thessar_inis_egildi",
+"thessar_inis_saldiri",
+"thessar_okuma_izni",
+"thessar_okuma_reddi"
+]
+},
+"kadimler_1_ticaret": {
+"file": "55_kadimler_thessar.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": 184,
+"gun_max": 235,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"thessar"
+],
+"tags": [
+"kadimler",
+"zincir",
+"ticaret"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 9,
+"quests": [
+"zincir_kadimler"
+],
+"quest_cond": [],
+"seeds": [
+"kadimler_2_vergi"
+],
+"delays": {
+"kadimler_2_vergi": [
+15,
+25
+]
+},
+"fights": 2,
+"flags_need": [
+"thessar_indi"
+],
+"flags_set": [
+"kadim_ticaret_acik",
+"kadim_ticaret_kosullu",
+"kadim_ticaret_reddedildi"
+]
+},
+"thessar_ticaret_masasi": {
+"file": "55_kadimler_thessar.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": 198,
+"gun_max": 255,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"thessar"
+],
+"tags": [
+"kadimler",
+"thessar",
+"ticaret",
+"elcilik"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 10,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"thessar_vassal_teklifi"
+],
+"delays": {
+"thessar_vassal_teklifi": [
+20,
+32
+]
+},
+"fights": 0,
+"flags_need": [
+"thessar_indi"
+],
+"flags_set": [
+"ticaret_masasi_okundu",
+"ticaret_masasi_reddedildi",
+"yedi_taht_davet"
+]
+},
+"kadimler_2_vergi": {
+"file": "55_kadimler_thessar.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": 212,
+"gun_max": 278,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"thessar"
+],
+"tags": [
+"kadimler",
+"zincir",
+"vergi"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "eski_sehir",
+"places": [
+"eski_sehir",
+"kiyikent_liman"
+],
+"n_scenes": 9,
+"quests": [
+"zincir_kadimler"
+],
+"quest_cond": [
+"zincir_kadimler"
+],
+"seeds": [
+"kadimler_3_muhbir",
+"thessar_vassal_teklifi"
+],
+"delays": {
+"kadimler_3_muhbir": [
+15,
+25
+],
+"thessar_vassal_teklifi": [
+10,
+20
+]
+},
+"fights": 1,
+"flags_need": [
+"kadim_ticaret_acik"
+],
+"flags_set": [
+"kadim_vergi_kendisi",
+"kadim_vergi_listesi",
+"kadim_vergi_odendi",
+"kadim_vergi_reddedildi",
+"kadim_vergi_sahte",
+"thessar_dusman"
+]
+},
+"thessar_vassal_teklifi": {
+"file": "55_kadimler_thessar.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": 226,
+"gun_max": 290,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"thessar"
+],
+"tags": [
+"kadimler",
+"thessar",
+"antlasma",
+"elcilik"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kordon",
+"places": [
+"kordon"
+],
+"n_scenes": 9,
+"quests": [
+"zincir_kadimler"
+],
+"quest_cond": [],
+"seeds": [
+"kadimler_2_vergi",
+"thessar_ihanet_fisiltisi"
+],
+"delays": {
+"thessar_ihanet_fisiltisi": [
+15,
+25
+],
+"kadimler_2_vergi": [
+4,
+8
+]
+},
+"fights": 0,
+"flags_need": [
+"thessar_indi"
+],
+"flags_set": [
+"thessar_dusman",
+"vassal_ornek_silindi",
+"vassal_teklifi_ertelendi",
+"vassal_teklifi_kabul",
+"vassal_teklifi_red"
+]
+},
+"kadimler_3_muhbir": {
+"file": "55_kadimler_thessar.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": 245,
+"gun_max": 305,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"thessar"
+],
+"tags": [
+"kadimler",
+"zincir",
+"muhbir"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 8,
+"quests": [
+"zincir_kadimler"
+],
+"quest_cond": [
+"zincir_kadimler"
+],
+"seeds": [
+"kadimler_4_vassal_sozlesmesi",
+"thessar_ihanet_fisiltisi"
+],
+"delays": {
+"thessar_ihanet_fisiltisi": [
+12,
+20
+],
+"kadimler_4_vassal_sozlesmesi": [
+18,
+28
+]
+},
+"fights": 0,
+"flags_need": [
+"kadim_vergi_odendi"
+],
+"flags_set": [
+"kadim_agi_ifsa",
+"kadim_muhbir_cift",
+"kadim_muhbiri",
+"thessar_dusman"
+]
+},
+"thessar_ihanet_fisiltisi": {
+"file": "55_kadimler_thessar.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": 255,
+"gun_max": 312,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"thessar"
+],
+"tags": [
+"kadimler",
+"thessar",
+"ihanet",
+"gece"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kule_dibi",
+"places": [
+"kule_dibi"
+],
+"n_scenes": 7,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"thessar_kirik_muhur"
+],
+"delays": {
+"thessar_kirik_muhur": [
+12,
+20
+]
+},
+"fights": 0,
+"flags_need": [
+"thessar_indi"
+],
+"flags_set": [
+"thessar_dusman",
+"thessar_ihanete_hazir",
+"thessar_ihbar_edildi",
+"thessar_pencere_goruldu",
+"thessar_sadakat_secildi",
+"thessar_yalniz_birakildi"
+]
+},
+"kadimler_4_vassal_sozlesmesi": {
+"file": "55_kadimler_thessar.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [],
+"gun_min": 285,
+"gun_max": 345,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"thessar"
+],
+"tags": [
+"kadimler",
+"zincir",
+"antlasma"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kordon",
+"places": [
+"kordon"
+],
+"n_scenes": 5,
+"quests": [
+"zincir_kadimler"
+],
+"quest_cond": [
+"zincir_kadimler"
+],
+"seeds": [
+"kadimler_5_teslim"
+],
+"delays": {
+"kadimler_5_teslim": [
+30,
+40
+]
+},
+"fights": 0,
+"flags_need": [
+"kadim_muhbiri"
+],
+"flags_set": [
+"kadim_sozlesme_yirtildi",
+"kadim_sozlesme_yumusak",
+"kadim_sozlesme_zehirli",
+"kadim_vassal_imzalandi",
+"thessar_dusman"
+]
+},
+"thessar_kirik_muhur": {
+"file": "55_kadimler_thessar.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [
+"thessar"
+],
+"tags": [
+"kadimler",
+"thessar",
+"ihanet",
+"gece"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"ihanet_thessar",
+"thessar_muhru_alindi",
+"thessar_teslim_edildi"
+]
+},
+"kadimler_5_teslim": {
+"file": "55_kadimler_thessar.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": 331,
+"gun_max": 356,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"thessar"
+],
+"tags": [
+"kadimler",
+"zincir",
+"teslim",
+"hasat"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kasaba_cekirdegi",
+"places": [
+"kasaba_cekirdegi"
+],
+"n_scenes": 6,
+"quests": [
+"zincir_kadimler"
+],
+"quest_cond": [
+"zincir_kadimler"
+],
+"seeds": [],
+"delays": {},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"kadim_teslim_reddedildi",
+"kadim_teslim_tamam",
+"kadim_teslim_tuzak",
+"thessar_dusman"
+]
+},
+"thessar_son_duello": {
+"file": "55_kadimler_thessar.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 346,
+"tohum": false,
+"npc": [
+"thessar"
+],
+"tags": [
+"ana_yay",
+"kadimler",
+"thessar",
+"boss",
+"final"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 13,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 7,
+"flags_need": [
+"thessar_indi"
+],
+"flags_set": [
+"budayici_yenildi",
+"ihanet_thessar",
+"kadim_sozlesme_yirtildi",
+"thessar_bagislandi",
+"thessar_muhru_alindi",
+"thessar_muttefik",
+"thessar_olduruldu",
+"thessar_ortak",
+"thessar_yenildi"
+]
+},
+"deniz_kardes_bulundu": {
+"file": "56_deniz_yanki_aras.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 95,
+"tohum": false,
+"npc": [
+"deniz_arman"
+],
+"tags": [
+"deniz",
+"ana_yay",
+"yukselenler"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_iskele",
+"kiyikent_liman",
+"kordon",
+"tepe"
+],
+"n_scenes": 30,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"deniz_kardes_cizimi",
+"deniz_yukselen_rakip"
+],
+"delays": {
+"deniz_kardes_cizimi": [
+4,
+8
+],
+"deniz_yukselen_rakip": [
+15,
+35
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"deniz_ayri",
+"deniz_bulundu",
+"deniz_intikam",
+"deniz_kardes_bulundu",
+"deniz_kendi_karari",
+"deniz_tepede_kaldi",
+"deniz_yukselenlerden_dondu",
+"kardes_emanet",
+"kardes_kurtarildi",
+"kardes_olu_bulundu",
+"kardes_sakli_p2",
+"kardes_yukselenlerde"
+]
+},
+"deniz_anma_kardes": {
+"file": "56_deniz_yanki_aras.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 95,
+"tohum": false,
+"npc": [],
+"tags": [
+"deniz",
+"ana_yay",
+"anma"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 1,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"deniz_kardes_cizimi"
+],
+"delays": {
+"deniz_kardes_cizimi": [
+6,
+12
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"deniz_kardes_cizimi": {
+"file": "56_deniz_yanki_aras.yaml",
+"perde": [
+2,
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"deniz",
+"tohum",
+"yukselenler"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [
+"kiyikent_liman",
+"tepe"
+],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"deniz_kardes_bulundu",
+"kardes_kurtarildi"
+]
+},
+"deniz_canavar_mi_tanri_mi": {
+"file": "56_deniz_yanki_aras.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 225,
+"tohum": false,
+"npc": [
+"deniz_arman"
+],
+"tags": [
+"deniz",
+"ana_yay",
+"nefes"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_iskele",
+"places": [
+"kiyikent_iskele"
+],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"deniz_yukselen_rakip",
+"yozlasma_50"
+],
+"delays": {
+"yozlasma_50": [
+1,
+4
+],
+"deniz_yukselen_rakip": [
+8,
+20
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"deniz_ayri",
+"deniz_insan_sozu",
+"deniz_yukselenlerden_dondu",
+"yanki_bagi"
+]
+},
+"deniz_anma_ayna": {
+"file": "56_deniz_yanki_aras.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 225,
+"tohum": false,
+"npc": [],
+"tags": [
+"deniz",
+"ana_yay",
+"anma",
+"nefes"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_iskele",
+"places": [
+"kiyikent_iskele"
+],
+"n_scenes": 3,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"yanki_kaynak_izi"
+],
+"delays": {
+"yanki_kaynak_izi": [
+2,
+6
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"deniz_insan_sozu",
+"yanki_bagi"
+]
+},
+"deniz_son_fedakarlik": {
+"file": "56_deniz_yanki_aras.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 347,
+"tohum": false,
+"npc": [
+"deniz_arman"
+],
+"tags": [
+"deniz",
+"ana_yay",
+"boss"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 7,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"deniz_vapur_vedasi"
+],
+"delays": {
+"deniz_vapur_vedasi": [
+1,
+2
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"deniz_fedakarlik",
+"deniz_fedakarlik_onlendi"
+]
+},
+"deniz_anma_son": {
+"file": "56_deniz_yanki_aras.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 347,
+"tohum": false,
+"npc": [],
+"tags": [
+"deniz",
+"ana_yay",
+"anma",
+"boss"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"deniz_vapur_vedasi"
+],
+"delays": {
+"deniz_vapur_vedasi": [
+1,
+2
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": []
+},
+"deniz_vapur_vedasi": {
+"file": "56_deniz_yanki_aras.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"deniz",
+"nefes",
+"veda"
+],
+"gerilim": 1,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kiyikent_iskele",
+"places": [
+"kiyikent_iskele"
+],
+"n_scenes": 1,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"yanki_son_sir"
+],
+"delays": {
+"yanki_son_sir": [
+1,
+2
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"yanki_bagi"
+]
+},
+"yanki_kaynak_izi": {
+"file": "56_deniz_yanki_aras.yaml",
+"perde": [
+2,
+3
+],
+"bolge": [],
+"gun_min": 140,
+"gun_max": 270,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"yanki"
+],
+"tags": [
+"yanki",
+"gizem",
+"sistem",
+"kule"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kule",
+"places": [
+"kule"
+],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"yozlasma_50"
+],
+"delays": {
+"yozlasma_50": [
+3,
+8
+]
+},
+"fights": 1,
+"flags_need": [
+"yanki_bagi"
+],
+"flags_set": [
+"yanki_bagi",
+"yanki_kaynagi_goruldu"
+]
+},
+"yanki_son_sir": {
+"file": "56_deniz_yanki_aras.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [],
+"gun_min": 181,
+"gun_max": 365,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"yanki"
+],
+"tags": [
+"yanki",
+"gizem",
+"sistem",
+"dongu"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 10,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"yozlasma_75"
+],
+"delays": {
+"yozlasma_75": [
+1,
+3
+]
+},
+"fights": 1,
+"flags_need": [
+"yanki_bagi"
+],
+"flags_set": [
+"yanki_bagi",
+"yanki_butunlesti",
+"yanki_silindi",
+"yanki_sirri_okundu",
+"yanki_sirri_zorla",
+"yanki_son_sirri"
+]
+},
+"yozlasma_50": {
+"file": "56_deniz_yanki_aras.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [
+"yanki"
+],
+"tags": [
+"yanki",
+"yozlasma",
+"sistem"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 6,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"yozlasma_75"
+],
+"delays": {
+"yozlasma_75": [
+4,
+10
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"yanki_bagi",
+"yanki_geri_itildi",
+"yanki_ile_pazarlik"
+]
+},
+"yozlasma_75": {
+"file": "56_deniz_yanki_aras.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [
+"yanki"
+],
+"tags": [
+"yanki",
+"yozlasma",
+"sistem",
+"boss"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 6,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"yanki_son_sir"
+],
+"delays": {
+"yanki_son_sir": [
+1,
+4
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"yanki_bagi",
+"yanki_ele_gecirdi",
+"yanki_geri_itildi",
+"yanki_silindi"
+]
+},
+"aras_kule_dovusu": {
+"file": "56_deniz_yanki_aras.yaml",
+"perde": [
+2,
+3
+],
+"bolge": [],
+"gun_min": 70,
+"gun_max": 230,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"aras_kurt"
+],
+"tags": [
+"aras",
+"rakip",
+"kule",
+"duello"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kule",
+"places": [
+"kule"
+],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"aras_cok_evren_kapisi"
+],
+"delays": {
+"aras_cok_evren_kapisi": [
+60,
+120
+]
+},
+"fights": 2,
+"flags_need": [
+"kule_acik"
+],
+"flags_set": [
+"aras_ebedi_rakip",
+"aras_gecesi_goruldu",
+"aras_kule_birakildi",
+"aras_kule_kazanildi",
+"aras_kule_ortak",
+"aras_tanisildi",
+"cok_evren_acik"
+]
+},
+"aras_cok_evren_kapisi": {
+"file": "56_deniz_yanki_aras.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": 200,
+"gun_max": 300,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"aras_kurt"
+],
+"tags": [
+"aras",
+"rakip",
+"cok_evren",
+"kule"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kule",
+"places": [
+"kule"
+],
+"n_scenes": 7,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"aras_s_kademe"
+],
+"delays": {
+"aras_s_kademe": [
+130,
+150
+]
+},
+"fights": 0,
+"flags_need": [
+"aras_tanisildi",
+"cok_evren_acik"
+],
+"flags_set": [
+"aras_cok_evren_yoldasi",
+"aras_ebedi_rakip",
+"aras_kadim_teklifi_reddedildi",
+"aras_kadim_teklifini_aldi"
+]
+},
+"aras_s_kademe": {
+"file": "56_deniz_yanki_aras.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 339,
+"tohum": false,
+"npc": [
+"aras_kurt"
+],
+"tags": [
+"aras",
+"ana_yay",
+"rakip",
+"siralama"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kule_dibi",
+"places": [
+"kule_dibi"
+],
+"n_scenes": 6,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"aras_zirve_sabahi"
+],
+"delays": {
+"aras_zirve_sabahi": [
+1,
+2
+]
+},
+"fights": 2,
+"flags_need": [
+"aras_tanisildi"
+],
+"flags_set": [
+"aras_s_kademe"
+]
+},
+"aras_zirve_sabahi": {
+"file": "56_deniz_yanki_aras.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [
+"aras_kurt"
+],
+"tags": [
+"aras",
+"nefes"
+],
+"gerilim": 1,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule_dibi",
+"places": [
+"kule_dibi"
+],
+"n_scenes": 1,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"deniz_vapur_vedasi"
+],
+"delays": {
+"deniz_vapur_vedasi": [
+1,
+2
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"liman_kayiplar_duvari": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [
+"kiyikent_liman"
+],
+"gun_min": 31,
+"gun_max": 120,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kayip",
+"ahlak",
+"liman"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 10,
+"quests": [
+"duvardaki_isim"
+],
+"quest_cond": [],
+"seeds": [
+"kayiplar_mektup",
+"liman_balikhane_karaborsa"
+],
+"delays": {
+"liman_balikhane_karaborsa": [
+0,
+2
+],
+"kayiplar_mektup": [
+6,
+12
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"deniz_annesi_bekliyor",
+"deniz_annesi_bildi",
+"kayip_balikhaneye",
+"kayip_duvar_okundu",
+"kayip_gercek_soylendi",
+"kayip_koca_yasiyor",
+"kayip_olu_dendi",
+"kayip_soz",
+"kayip_umut_verildi",
+"kayip_yarim_gercek"
+]
+},
+"kayiplar_mektup": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kayip",
+"ahlak",
+"liman"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 3,
+"quests": [
+"duvardaki_isim"
+],
+"quest_cond": [],
+"seeds": [
+"liman_balikhane_karaborsa"
+],
+"delays": {
+"liman_balikhane_karaborsa": [
+1,
+4
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"kayip_aile_birlesti",
+"kayip_koca_birakildi",
+"kayip_koca_secti",
+"kayip_maske",
+"mektup_kadin_geldi"
+]
+},
+"liman_balikhane_karaborsa": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [
+"kiyikent_liman"
+],
+"gun_min": 34,
+"gun_max": 170,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"karaborsa",
+"ahlak",
+"liman",
+"hakimiyet"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 13,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"balikhane_hesap"
+],
+"delays": {
+"balikhane_hesap": [
+5,
+10
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"balikhane_dalgiclara",
+"balikhane_ele_gecirildi",
+"balikhane_goruldu",
+"balikhane_ihbar",
+"balikhane_ihbar_lonca",
+"balikhane_ihbar_siginak",
+"balikhane_kapatildi",
+"balikhane_kayit_defteri",
+"balikhane_korkutuldu",
+"balikhane_ortak",
+"balikhane_pay",
+"balikhane_stok_hastanede"
+]
+},
+"balikhane_hesap": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"karaborsa",
+"ahlak",
+"liman"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 7,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"liman_kayiplar_duvari"
+],
+"delays": {
+"liman_kayiplar_duvari": [
+1,
+3
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"balikhane_dalgic_mezar",
+"balikhane_kapatildi",
+"balikhane_kayit_defteri"
+]
+},
+"liman_yan_yatmis_vapur": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [
+"kiyikent_liman"
+],
+"gun_min": 33,
+"gun_max": 110,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"vapur",
+"hakimiyet",
+"liman"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 9,
+"quests": [
+"vapuru_yuzdur"
+],
+"quest_cond": [],
+"seeds": [
+"vapur_ilk_sefer"
+],
+"delays": {
+"vapur_ilk_sefer": [
+5,
+10
+]
+},
+"fights": 3,
+"flags_need": [],
+"flags_set": [
+"vapur_dogrultuldu",
+"vapur_halk",
+"vapur_lonca",
+"vapur_oyuncu",
+"vapur_siginak"
+]
+},
+"vapur_ilk_sefer": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"vapur",
+"deniz",
+"liman"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 7,
+"quests": [
+"fenerciyi_avla"
+],
+"quest_cond": [],
+"seeds": [
+"eski_sehir_ekmek_kuyrugu"
+],
+"delays": {
+"eski_sehir_ekmek_kuyrugu": [
+2,
+5
+]
+},
+"fights": 5,
+"flags_need": [],
+"flags_set": [
+"fenerci_olduruldu",
+"vapur_sefer_tamam"
+]
+},
+"liman_karantina_gemisi": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [
+"kiyikent_liman"
+],
+"gun_min": 50,
+"gun_max": 170,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"elif_sari"
+],
+"tags": [
+"siginak",
+"ahlak",
+"liman",
+"salgin"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 11,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"liman_balikhane_karaborsa"
+],
+"delays": {
+"liman_balikhane_karaborsa": [
+1,
+3
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"karantina_batti",
+"karantina_bir_cocuk",
+"karantina_herkes_yanki",
+"karantina_korundu",
+"karantina_patlayici_atildi",
+"karantina_tasindi",
+"karantina_triyaj"
+]
+},
+"liman_konteyner_labirenti": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [
+"kiyikent_liman"
+],
+"gun_min": 31,
+"gun_max": 180,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kesif",
+"ganimet",
+"liman",
+"hakimiyet"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 8,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"eski_sehir_kapi_avcilari"
+],
+"delays": {
+"eski_sehir_kapi_avcilari": [
+3,
+8
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"cakallar_hafife_aldi",
+"cakallar_tanisildi",
+"cakallara_sandik",
+"konteyner_lonca_tuzak",
+"konteyner_uyarildi"
+]
+},
+"kordon_kapi_catlagi": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [
+"kordon"
+],
+"gun_min": 50,
+"gun_max": 79,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kapi",
+"kordon",
+"ahlak",
+"gizem"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kordon",
+"places": [
+"kordon"
+],
+"n_scenes": 6,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kordon_fener_baligi",
+"kordon_fener_frekansi"
+],
+"delays": {
+"kordon_fener_frekansi": [
+1,
+4
+],
+"kordon_fener_baligi": [
+2,
+6
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"kordon_balikci_ikna",
+"kordon_barikat",
+"kordon_muhur_yumruklandi",
+"kordon_tahliye",
+"kordon_zorla_tahliye"
+]
+},
+"kordon_fener_baligi": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [
+"kordon"
+],
+"gun_min": 36,
+"gun_max": 180,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kesif",
+"deniz",
+"kordon",
+"boss"
+],
+"gerilim": 4,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kordon",
+"places": [
+"kordon"
+],
+"n_scenes": 10,
+"quests": [
+"fenerciyi_avla"
+],
+"quest_cond": [],
+"seeds": [
+"fener_yavrulari",
+"kordon_fener_baligi"
+],
+"delays": {
+"kordon_fener_baligi": [
+4,
+8
+],
+"fener_yavrulari": [
+6,
+12
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"fener_yumurtalar_alindi",
+"fener_yumurtalar_birakildi",
+"fener_yumurtalar_ezildi",
+"fenerci_olduruldu"
+]
+},
+"fener_yavrulari": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"deniz",
+"kordon",
+"ordu"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kordon",
+"places": [
+"kordon"
+],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"fener_yavrulari_bagli"
+]
+},
+"kordon_fener_frekansi": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [
+"kordon"
+],
+"gun_min": 40,
+"gun_max": 170,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"mert_kilic"
+],
+"tags": [
+"sessiz_ag",
+"gizem",
+"kordon"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kordon",
+"places": [
+"kordon"
+],
+"n_scenes": 8,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kordon_fener_baligi"
+],
+"delays": {
+"kordon_fener_baligi": [
+2,
+5
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"fener_cevap_verildi",
+"fener_kayit_mertte",
+"fener_kirildi",
+"fener_yukselenlere"
+]
+},
+"kordon_son_balkon": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [
+"kordon"
+],
+"gun_min": 81,
+"gun_max": 180,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kordon",
+"ahlak",
+"kayip"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kordon",
+"places": [
+"kordon"
+],
+"n_scenes": 10,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kordon_heykel",
+"kordon_olu_bolge_seferi"
+],
+"delays": {
+"kordon_olu_bolge_seferi": [
+3,
+8
+],
+"kordon_heykel": [
+3,
+8
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"balkon_oglu_bildi",
+"balkon_sokak_temiz",
+"balkon_tasindi",
+"balkon_yavru_kaldi",
+"kordon_dustu",
+"kordon_kurtarildi"
+]
+},
+"kordon_heykel": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [
+"kordon"
+],
+"gun_min": 85,
+"gun_max": 180,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kordon",
+"hakimiyet",
+"efsane"
+],
+"gerilim": 1,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kordon",
+"places": [
+"kordon"
+],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kordon_son_balkon"
+],
+"delays": {
+"kordon_son_balkon": [
+2,
+6
+]
+},
+"fights": 0,
+"flags_need": [
+"kordon_kurtarildi"
+],
+"flags_set": [
+"heykel_isimler",
+"heykel_kabul",
+"heykel_sunak",
+"heykel_yikildi"
+]
+},
+"kordon_olu_bolge_seferi": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [
+"kordon"
+],
+"gun_min": 82,
+"gun_max": 180,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kesif",
+"kurtarma",
+"kordon",
+"ahlak"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kordon",
+"places": [
+"kordon"
+],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kordon_son_balkon"
+],
+"delays": {
+"kordon_son_balkon": [
+2,
+6
+]
+},
+"fights": 4,
+"flags_need": [
+"kordon_dustu"
+],
+"flags_set": [
+"olu_bolge_gec",
+"olu_bolge_herkes",
+"olu_bolge_ikisi",
+"olu_bolge_kasa"
+]
+},
+"eski_sehir_kapi_avcilari": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [
+"eski_sehir"
+],
+"gun_min": 38,
+"gun_max": 170,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kesif",
+"kapi",
+"hakimiyet",
+"eski_sehir"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": "eski_sehir",
+"places": [
+"eski_sehir"
+],
+"n_scenes": 8,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kapi_avcilari_donus"
+],
+"delays": {
+"kapi_avcilari_donus": [
+8,
+15
+]
+},
+"fights": 4,
+"flags_need": [],
+"flags_set": [
+"cakallar_ganimet_onlarda",
+"cakallar_ihbar",
+"cakallar_ogrendi",
+"cakallar_onunde",
+"cakallar_sancakta",
+"cakallar_tanisildi",
+"cakallar_tasiyici"
+]
+},
+"kapi_avcilari_donus": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kapi",
+"eski_sehir",
+"ahlak"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "eski_sehir",
+"places": [
+"eski_sehir"
+],
+"n_scenes": 3,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 1,
+"flags_need": [],
+"flags_set": []
+},
+"eski_sehir_ekmek_kuyrugu": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [
+"eski_sehir"
+],
+"gun_min": 61,
+"gun_max": 180,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"cekirdek",
+"ahlak",
+"eski_sehir"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "eski_sehir",
+"places": [
+"eski_sehir"
+],
+"n_scenes": 7,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"eski_sehir_seviye_birler"
+],
+"delays": {
+"eski_sehir_seviye_birler": [
+2,
+6
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"ekmek_firin_buyudu",
+"ekmek_kural_kirildi",
+"ekmek_kurali_cocuk",
+"ekmek_kurali_sert"
+]
+},
+"eski_sehir_seviye_birler": {
+"file": "60_kiyikent_a.yaml",
+"perde": [
+2
+],
+"bolge": [
+"eski_sehir"
+],
+"gun_min": 45,
+"gun_max": 180,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"sistem",
+"ahlak",
+"eski_sehir"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": false,
+"entry_place": "eski_sehir",
+"places": [
+"eski_sehir"
+],
+"n_scenes": 6,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kapi_avcilari_donus"
+],
+"delays": {
+"kapi_avcilari_donus": [
+4,
+9
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"cakallar_tanisildi",
+"seviye_birler_ders",
+"seviye_birler_korunuyor",
+"seviye_birler_mahzen_bos",
+"seviye_birler_vurus"
+]
+},
+"sanayi_ocak_basi": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2
+],
+"bolge": [
+"sanayi"
+],
+"gun_min": 33,
+"gun_max": 150,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"sanayi",
+"lonca",
+"hakimiyet"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "sanayi",
+"places": [
+"sanayi"
+],
+"n_scenes": 12,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"sanayi_ocak_cocuklari"
+],
+"delays": {
+"sanayi_ocak_cocuklari": [
+3,
+6
+]
+},
+"fights": 5,
+"flags_need": [
+"perde2_basladi"
+],
+"flags_set": [
+"sanayi_cocuklar_odul",
+"sanayi_ocak_ezme",
+"sanayi_ocak_gizli",
+"sanayi_ocak_kurtarildi",
+"sanayi_ocak_raporlandi",
+"sanayi_ocak_yandi",
+"sanayi_usta_yarali"
+]
+},
+"sanayi_ocak_cocuklari": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2,
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"sanayi",
+"lonca",
+"ahlak"
+],
+"gerilim": 1,
+"onemli": false,
+"tekrar": false,
+"entry_place": "sanayi",
+"places": [
+"sanayi"
+],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"sokak_efsanesi"
+],
+"delays": {
+"sokak_efsanesi": [
+4,
+8
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"ocak_cocugu_adini_tasir",
+"ocak_cocugu_egitildi",
+"ocak_cocugu_loncada",
+"ocak_cocugu_ocakta",
+"ocak_cocugu_okulda"
+]
+},
+"sanayi_disiplin_meydani": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2
+],
+"bolge": [
+"sanayi"
+],
+"gun_min": 38,
+"gun_max": 160,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"sanayi",
+"lonca",
+"ahlak"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "sanayi",
+"places": [
+"sanayi"
+],
+"n_scenes": 13,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"sanayi_kacak_avci"
+],
+"delays": {
+"sanayi_kacak_avci": [
+4,
+8
+]
+},
+"fights": 2,
+"flags_need": [
+"perde2_basladi"
+],
+"flags_set": [
+"sanayi_avci_hafif",
+"sanayi_avci_kirbaclandi",
+"sanayi_avci_kurtarildi",
+"sanayi_avci_siginakta",
+"sanayi_avci_yaninda",
+"sanayi_defter_sizdi",
+"sanayi_kardes_siginakta",
+"sanayi_subay_kirbaclandi",
+"sanayi_subay_sirri",
+"sanayi_subay_teslim"
+]
+},
+"sanayi_kacak_avci": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2,
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"sanayi",
+"lonca",
+"yoldas_adayi"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "sanayi",
+"places": [
+"sanayi"
+],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"sokak_efsanesi"
+],
+"delays": {
+"sokak_efsanesi": [
+3,
+7
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"kacak_avci_yaninda",
+"kacak_avci_yukselenlerde",
+"sanayi_subay_teslim"
+]
+},
+"sanayi_kapi_ilanlari": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2
+],
+"bolge": [
+"sanayi"
+],
+"gun_min": 34,
+"gun_max": 175,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"sanayi",
+"kapi",
+"hakimiyet",
+"kesif"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "sanayi",
+"places": [
+"sanayi"
+],
+"n_scenes": 12,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"sokak_efsanesi"
+],
+"delays": {
+"sokak_efsanesi": [
+4,
+8
+]
+},
+"fights": 5,
+"flags_need": [
+"perde2_basladi"
+],
+"flags_set": [
+"sanayi_ekip_olu",
+"sanayi_ekip_uyarildi",
+"sanayi_hamal",
+"sanayi_hamal_gizli",
+"sanayi_kiz_biliyor"
+]
+},
+"sanayi_grev": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2
+],
+"bolge": [
+"sanayi"
+],
+"gun_min": 50,
+"gun_max": 170,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"sanayi",
+"lonca",
+"ahlak",
+"fraksiyon"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "sanayi",
+"places": [
+"sanayi"
+],
+"n_scenes": 10,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"sokak_efsanesi"
+],
+"delays": {
+"sokak_efsanesi": [
+3,
+7
+]
+},
+"fights": 2,
+"flags_need": [
+"perde2_basladi"
+],
+"flags_set": [
+"sanayi_grev_ezildi",
+"sanayi_grev_kanli",
+"sanayi_grev_kazanildi",
+"sanayi_grev_uzlasma"
+]
+},
+"sanayi_siralama_tabelasi": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2
+],
+"bolge": [
+"sanayi"
+],
+"gun_min": 36,
+"gun_max": 175,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"sanayi",
+"siralama",
+"hakimiyet",
+"gizli_guc"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "sanayi",
+"places": [
+"sanayi"
+],
+"n_scenes": 8,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"sokak_efsanesi"
+],
+"delays": {
+"sokak_efsanesi": [
+4,
+8
+]
+},
+"fights": 1,
+"flags_need": [
+"perde2_basladi"
+],
+"flags_set": [
+"sanayi_bahis_kazanildi",
+"sanayi_seksen_sekiz_susturuldu"
+]
+},
+"sokak_efsanesi": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2,
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"efsane",
+"hakimiyet",
+"gizli_guc"
+],
+"gerilim": 1,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kiyikent",
+"places": [
+"kiyikent"
+],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"sanayi_ocak_cocuklari"
+],
+"delays": {
+"sanayi_ocak_cocuklari": [
+3,
+6
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"sanayi_cocuklar_odul"
+]
+},
+"tepe_besik_sinavi": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2
+],
+"bolge": [
+"tepe"
+],
+"gun_min": 40,
+"gun_max": 170,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"vahit"
+],
+"tags": [
+"tepe",
+"yukselenler",
+"ahlak",
+"kurtarma"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "tepe",
+"places": [
+"tepe"
+],
+"n_scenes": 11,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"tepe_sinav_sonrasi"
+],
+"delays": {
+"tepe_sinav_sonrasi": [
+5,
+9
+]
+},
+"fights": 4,
+"flags_need": [
+"perde2_basladi"
+],
+"flags_set": [
+"tepe_kiz_indirildi",
+"tepe_kiz_korumada",
+"tepe_kiz_secilmis",
+"tepe_kiz_yakit",
+"tepe_kutsayici_besikte",
+"tepe_sinav_bozuldu",
+"tepe_sinav_suruyor"
+]
+},
+"tepe_sinav_sonrasi": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2,
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"tepe",
+"yukselenler",
+"ahlak"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kiyikent",
+"places": [
+"kiyikent",
+"tepe"
+],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"tepe_kiz_indirildi"
+]
+},
+"tepe_sayim_gecesi": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2
+],
+"bolge": [
+"tepe"
+],
+"gun_min": 35,
+"gun_max": 175,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"tepe",
+"yukselenler",
+"ahlak",
+"gizli_guc"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "tepe",
+"places": [
+"tepe"
+],
+"n_scenes": 11,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"tepe_cati_arasi_sonrasi"
+],
+"delays": {
+"tepe_cati_arasi_sonrasi": [
+5,
+10
+]
+},
+"fights": 2,
+"flags_need": [
+"perde2_basladi"
+],
+"flags_set": [
+"tepe_aile_muaf",
+"tepe_aylik_rusvet",
+"tepe_dede_kurtarildi",
+"tepe_dede_teslim",
+"tepe_defter_yandi"
+]
+},
+"tepe_cati_arasi_sonrasi": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2,
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"tepe",
+"yukselenler",
+"ahlak"
+],
+"gerilim": 1,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kiyikent",
+"places": [
+"kiyikent"
+],
+"n_scenes": 2,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"sokak_efsanesi"
+],
+"delays": {
+"sokak_efsanesi": [
+3,
+6
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"tepe_dinleyiciler": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2
+],
+"bolge": [
+"tepe"
+],
+"gun_min": 38,
+"gun_max": 175,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"vahit"
+],
+"tags": [
+"tepe",
+"yukselenler",
+"yanki",
+"gizem",
+"kesif"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "tepe",
+"places": [
+"tepe"
+],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"sokak_efsanesi"
+],
+"delays": {
+"sokak_efsanesi": [
+4,
+8
+]
+},
+"fights": 0,
+"flags_need": [
+"perde2_basladi"
+],
+"flags_set": [
+"tepe_kayit_alindi"
+]
+},
+"tepe_yakit_duvari": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2
+],
+"bolge": [
+"tepe"
+],
+"gun_min": 34,
+"gun_max": 175,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"tepe",
+"yukselenler",
+"anma",
+"deniz"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "tepe",
+"places": [
+"tepe"
+],
+"n_scenes": 6,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"sokak_efsanesi"
+],
+"delays": {
+"sokak_efsanesi": [
+3,
+7
+]
+},
+"fights": 0,
+"flags_need": [
+"perde2_basladi"
+],
+"flags_set": [
+"tepe_deniz_adi_silindi",
+"tepe_duvar_boyandi",
+"tepe_duvar_kazindi"
+]
+},
+"kule_dibi_avci_pazari": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2
+],
+"bolge": [
+"kule_dibi"
+],
+"gun_min": 41,
+"gun_max": 178,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kule",
+"pazar",
+"hakimiyet",
+"kesif"
+],
+"gerilim": 1,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule_dibi",
+"places": [
+"kule_dibi"
+],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kule_dibi_donus",
+"sokak_efsanesi"
+],
+"delays": {
+"sokak_efsanesi": [
+4,
+8
+],
+"kule_dibi_donus": [
+4,
+8
+]
+},
+"fights": 0,
+"flags_need": [
+"kule_acik"
+],
+"flags_set": [
+"kuledibi_kask_alindi"
+]
+},
+"kule_dibi_tirmanis_kuyrugu": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2
+],
+"bolge": [
+"kule_dibi"
+],
+"gun_min": 42,
+"gun_max": 178,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kule",
+"ahlak",
+"kurtarma"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kule_dibi",
+"places": [
+"kule",
+"kule_dibi"
+],
+"n_scenes": 7,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kule_dibi_donus",
+"sokak_efsanesi"
+],
+"delays": {
+"kule_dibi_donus": [
+4,
+8
+],
+"sokak_efsanesi": [
+3,
+6
+]
+},
+"fights": 2,
+"flags_need": [
+"kule_acik"
+],
+"flags_set": [
+"kuledibi_cocuk_ucretsiz",
+"kuledibi_genc_eslik",
+"kuledibi_genc_eve",
+"kuledibi_genc_tek",
+"kuledibi_genc_vurdu",
+"kuledibi_kristal_getirildi"
+]
+},
+"kule_dibi_donus": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2,
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kule",
+"ahlak"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kiyikent",
+"places": [
+"kiyikent",
+"kule"
+],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"sokak_efsanesi"
+],
+"delays": {
+"sokak_efsanesi": [
+3,
+6
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": []
+},
+"kule_dibi_geri_donmeyenler": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2
+],
+"bolge": [
+"kule_dibi"
+],
+"gun_min": 45,
+"gun_max": 178,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"aras_kurt"
+],
+"tags": [
+"kule",
+"kurtarma",
+"anma"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule_dibi",
+"places": [
+"kule",
+"kule_dibi"
+],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kule_dibi_donus",
+"sokak_efsanesi"
+],
+"delays": {
+"kule_dibi_donus": [
+3,
+6
+],
+"sokak_efsanesi": [
+3,
+6
+]
+},
+"fights": 1,
+"flags_need": [
+"kule_acik"
+],
+"flags_set": [
+"kuledibi_ekip_tutuldu",
+"kuledibi_koca_kurtarildi"
+]
+},
+"kule_dibi_sahte_rekor": {
+"file": "61_kiyikent_b.yaml",
+"perde": [
+2
+],
+"bolge": [
+"kule_dibi"
+],
+"gun_min": 48,
+"gun_max": 178,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kule",
+"siralama",
+"hakimiyet",
+"gizli_guc"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule_dibi",
+"places": [
+"kule",
+"kule_dibi"
+],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"sokak_efsanesi"
+],
+"delays": {
+"sokak_efsanesi": [
+3,
+6
+]
+},
+"fights": 1,
+"flags_need": [
+"kule_acik"
+],
+"flags_set": [
+"kuledibi_sahte_ifsa"
+]
+},
+"cok_evren_kapisi": {
+"file": "70_cok_evren.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 200,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"cok_evren",
+"kule"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kule_dibi",
+"places": [
+"kule",
+"kule_dibi"
+],
+"n_scenes": 12,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"aras_cok_evren_kapisi",
+"batik_tilu"
+],
+"delays": {
+"batik_tilu": [
+2,
+5
+],
+"aras_cok_evren_kapisi": [
+2,
+6
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"cok_evren_acik",
+"gecit_denetimli",
+"gecit_herkese_acik",
+"gecit_ilk_giren",
+"gecit_oyuncunun",
+"tilu_ag_teslim",
+"tilu_korundu",
+"tilu_vuruldu"
+]
+},
+"batik_ilk_adim": {
+"file": "70_cok_evren.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [
+"batik_takimada"
+],
+"gun_min": 200,
+"gun_max": 364,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"cok_evren",
+"batik",
+"kesif"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "batik_takimada",
+"places": [
+"batik_takimada"
+],
+"n_scenes": 9,
+"quests": [
+"cok_evren_batik"
+],
+"quest_cond": [],
+"seeds": [
+"batik_son_fener",
+"batik_tuz_arsivi"
+],
+"delays": {
+"batik_son_fener": [
+1,
+3
+],
+"batik_tuz_arsivi": [
+2,
+5
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"batik_tanri_sanildi",
+"batik_varildi"
+]
+},
+"batik_son_fener": {
+"file": "70_cok_evren.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [
+"batik_takimada"
+],
+"gun_min": 200,
+"gun_max": 364,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"cok_evren",
+"batik",
+"ahlak"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "batik_takimada",
+"places": [
+"batik_takimada"
+],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"batik_son_basakci",
+"batik_tuz_arsivi"
+],
+"delays": {
+"batik_son_basakci": [
+1,
+3
+],
+"batik_tuz_arsivi": [
+1,
+3
+]
+},
+"fights": 0,
+"flags_need": [
+"batik_varildi"
+],
+"flags_set": [
+"batik_basakci_sozu",
+"batik_cocuklar_dunyada",
+"batik_fener_goruldu",
+"batik_fener_soyuldu",
+"batik_gorunur",
+"batik_lamba_yakildi"
+]
+},
+"batik_tuz_arsivi": {
+"file": "70_cok_evren.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [
+"batik_takimada"
+],
+"gun_min": 200,
+"gun_max": 364,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"cok_evren",
+"batik",
+"kesif",
+"sir"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": "batik_takimada",
+"places": [
+"batik_takimada"
+],
+"n_scenes": 10,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"batik_son_basakci"
+],
+"delays": {
+"batik_son_basakci": [
+2,
+5
+]
+},
+"fights": 2,
+"flags_need": [
+"batik_varildi"
+],
+"flags_set": []
+},
+"batik_son_basakci": {
+"file": "70_cok_evren.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [
+"batik_takimada"
+],
+"gun_min": 200,
+"gun_max": 364,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"cok_evren",
+"batik",
+"boss"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "batik_takimada",
+"places": [
+"batik_takimada"
+],
+"n_scenes": 9,
+"quests": [
+"cok_evren_batik"
+],
+"quest_cond": [],
+"seeds": [
+"batik_kesh_yemini"
+],
+"delays": {
+"batik_kesh_yemini": [
+5,
+12
+]
+},
+"fights": 5,
+"flags_need": [
+"batik_fener_goruldu"
+],
+"flags_set": [
+"basakci_olduruldu",
+"basakci_saldi",
+"batik_fener_dustu",
+"batik_gorunur",
+"batik_hasat_yutuldu"
+]
+},
+"batik_tilu": {
+"file": "70_cok_evren.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"cok_evren",
+"batik",
+"kurtarma"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule_dibi",
+"places": [
+"batik_takimada",
+"kule_dibi"
+],
+"n_scenes": 8,
+"quests": [
+"cok_evren_batik"
+],
+"quest_cond": [],
+"seeds": [
+"batik_son_fener"
+],
+"delays": {
+"batik_son_fener": [
+1,
+3
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"batik_varildi",
+"tilu_ag_tutsak",
+"tilu_eve_dondu"
+]
+},
+"kervan_tarti_carsisi": {
+"file": "70_cok_evren.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [
+"pirinc_kervan"
+],
+"gun_min": 200,
+"gun_max": 364,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"cok_evren",
+"kervan",
+"kesif"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "pirinc_kervan",
+"places": [
+"pirinc_kervan"
+],
+"n_scenes": 12,
+"quests": [
+"cok_evren_kervan"
+],
+"quest_cond": [],
+"seeds": [
+"kervan_ondalik"
+],
+"delays": {
+"kervan_ondalik": [
+1,
+2
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"kervan_damgali",
+"kervan_muhur_ezildi",
+"kervan_tartilamadi",
+"kervan_varildi"
+]
+},
+"kervan_ondalik": {
+"file": "70_cok_evren.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [
+"pirinc_kervan"
+],
+"gun_min": 200,
+"gun_max": 364,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"cok_evren",
+"kervan",
+"ahlak",
+"kadimler"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "pirinc_kervan",
+"places": [
+"pirinc_kervan"
+],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kervan_bos_kefe",
+"kervan_sayman"
+],
+"delays": {
+"kervan_bos_kefe": [
+2,
+5
+],
+"kervan_sayman": [
+1,
+2
+]
+},
+"fights": 3,
+"flags_need": [
+"kervan_varildi"
+],
+"flags_set": [
+"kervan_kefe_daveti",
+"ninu_muaf",
+"ninu_saklandi",
+"ninu_teslim",
+"ondalik_bozuldu",
+"ondalikci_olduruldu"
+]
+},
+"kervan_sayman": {
+"file": "70_cok_evren.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [
+"pirinc_kervan"
+],
+"gun_min": 200,
+"gun_max": 364,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"cok_evren",
+"kervan",
+"kadimler",
+"siyaset"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "pirinc_kervan",
+"places": [
+"pirinc_kervan"
+],
+"n_scenes": 6,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kervan_bos_kefe",
+"taht_kabul_salonu"
+],
+"delays": {
+"taht_kabul_salonu": [
+2,
+5
+],
+"kervan_bos_kefe": [
+1,
+4
+]
+},
+"fights": 0,
+"flags_need": [
+"kervan_varildi"
+],
+"flags_set": [
+"kervan_kefe_daveti",
+"kervan_ticaret",
+"sayman_numune_mektubu",
+"sayman_soz",
+"yedi_taht_davet"
+]
+},
+"kervan_bos_kefe": {
+"file": "70_cok_evren.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [
+"pirinc_kervan"
+],
+"gun_min": 200,
+"gun_max": 364,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"cok_evren",
+"kervan",
+"boss",
+"kadimler"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "pirinc_kervan",
+"places": [
+"pirinc_kervan"
+],
+"n_scenes": 11,
+"quests": [
+"cok_evren_kervan"
+],
+"quest_cond": [],
+"seeds": [
+"taht_kabul_salonu"
+],
+"delays": {
+"taht_kabul_salonu": [
+2,
+5
+]
+},
+"fights": 2,
+"flags_need": [
+"kervan_kefe_daveti"
+],
+"flags_set": [
+"kervan_isyan_basarisiz",
+"kervan_isyan_yalniz",
+"kervan_muhur_korundu",
+"kervan_oylandi",
+"kervan_ozgur",
+"kervan_sahibi",
+"yedi_taht_davet"
+]
+},
+"taht_kabul_salonu": {
+"file": "70_cok_evren.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [
+"yedi_taht"
+],
+"gun_min": 200,
+"gun_max": 364,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"cok_evren",
+"taht",
+"kadimler",
+"siyaset"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": "yedi_taht",
+"places": [
+"yedi_taht"
+],
+"n_scenes": 10,
+"quests": [
+"cok_evren_taht"
+],
+"quest_cond": [],
+"seeds": [
+"taht_yedinci_koltuk"
+],
+"delays": {
+"taht_yedinci_koltuk": [
+1,
+3
+]
+},
+"fights": 0,
+"flags_need": [
+"yedi_taht_davet"
+],
+"flags_set": [
+"taht_egildi",
+"taht_egilmedi",
+"taht_hafife_alindi",
+"taht_ondalik_icildi",
+"taht_varildi",
+"taht_yanki_gizli"
+]
+},
+"taht_yedinci_koltuk": {
+"file": "70_cok_evren.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [
+"yedi_taht"
+],
+"gun_min": 200,
+"gun_max": 364,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"cok_evren",
+"taht",
+"kadimler",
+"ahlak"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "yedi_taht",
+"places": [
+"yedi_taht"
+],
+"n_scenes": 7,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"taht_varis_duellosu"
+],
+"delays": {
+"taht_varis_duellosu": [
+1,
+3
+]
+},
+"fights": 0,
+"flags_need": [
+"taht_varildi"
+],
+"flags_set": [
+"taht_ittifak",
+"taht_koltuga_oturdu",
+"taht_reddedildi",
+"taht_talip"
+]
+},
+"taht_uyuyan_tanrilar": {
+"file": "70_cok_evren.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [
+"yedi_taht"
+],
+"gun_min": 200,
+"gun_max": 364,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"cok_evren",
+"taht",
+"kesif",
+"sir"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "yedi_taht",
+"places": [
+"yedi_taht"
+],
+"n_scenes": 7,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"taht_yedinci_koltuk"
+],
+"delays": {
+"taht_yedinci_koltuk": [
+1,
+3
+]
+},
+"fights": 0,
+"flags_need": [
+"taht_varildi"
+],
+"flags_set": [
+"uyuyan_tanri_bitirildi"
+]
+},
+"taht_varis_duellosu": {
+"file": "70_cok_evren.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"cok_evren",
+"taht",
+"boss",
+"kadimler"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "yedi_taht",
+"places": [
+"kule_dibi",
+"yedi_taht"
+],
+"n_scenes": 7,
+"quests": [
+"cok_evren_taht"
+],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 3,
+"flags_need": [],
+"flags_set": [
+"ossiran_bagislandi",
+"ossiran_olduruldu",
+"ossiran_yutuldu",
+"varis_duellosu_reddedildi",
+"varis_yenilgisi"
+]
+},
+"batik_kesh_yemini": {
+"file": "70_cok_evren.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"cok_evren",
+"batik",
+"ordu"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule",
+"places": [
+"batik_takimada",
+"kule"
+],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"nehha_yemini"
+]
+},
+"yol_olusumu": {
+"file": "71_perde3.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 260,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"yol",
+"oz",
+"yanki"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent",
+"places": [
+"kiyikent"
+],
+"n_scenes": 24,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p3_siralama_zirvesi"
+],
+"delays": {
+"p3_siralama_zirvesi": [
+4,
+9
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"yol_gizlendi",
+"yol_olustu",
+"yol_tanikli",
+"yol_yankiya_birakildi"
+]
+},
+"buyuk_ihanet": {
+"file": "71_perde3.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 300,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"ihanet",
+"kasaba_cekirdegi"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kasaba_cekirdegi",
+"places": [
+"eski_sehir",
+"kasaba_cekirdegi",
+"kule",
+"kule_dibi",
+"tepe"
+],
+"n_scenes": 31,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"ihanet_sonrasi"
+],
+"delays": {
+"ihanet_sonrasi": [
+3,
+6
+]
+},
+"fights": 19,
+"flags_need": [],
+"flags_set": [
+"aras_kadimlere_gitti",
+"darbede_elif_korundu",
+"deniz_acisi_bitirildi",
+"deniz_geri_dondu",
+"deniz_oyuncu_oldurdu",
+"ihanet_aras",
+"ihanet_deniz",
+"ihanet_ikinci_sira",
+"ihanet_kaya",
+"ihanet_mert",
+"ihanet_onlendi",
+"ihanet_thessar",
+"kaya_affedildi",
+"kaya_devrildi",
+"kaya_konseye_teslim",
+"lonca_hakimiyeti",
+"mert_cift_ajan",
+"mert_listesi_teslim",
+"thessar_sigindi",
+"thessar_teslim_edildi"
+]
+},
+"ihanet_sonrasi": {
+"file": "71_perde3.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"ihanet",
+"anma"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kasaba_cekirdegi",
+"places": [
+"kasaba_cekirdegi",
+"kiyikent_liman"
+],
+"n_scenes": 3,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p3_kordon_geri"
+],
+"delays": {
+"p3_kordon_geri": [
+3,
+7
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"perde3_son": {
+"file": "71_perde3.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 320,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"kadimler",
+"filo"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent_liman",
+"kule"
+],
+"n_scenes": 6,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p3_kapi_firtinasi"
+],
+"delays": {
+"p3_kapi_firtinasi": [
+2,
+6
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"p3_son_gece_yakinlar"
+]
+},
+"dikkat_75_p3": {
+"file": "71_perde3.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"dikkat",
+"kadimler"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p3_siralama_zirvesi"
+],
+"delays": {
+"p3_siralama_zirvesi": [
+2,
+5
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": []
+},
+"dikkat_100_p3": {
+"file": "71_perde3.yaml",
+"perde": [
+3
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"dikkat",
+"sistem"
+],
+"gerilim": 4,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p3_siralama_zirvesi"
+],
+"delays": {
+"p3_siralama_zirvesi": [
+2,
+5
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": []
+},
+"p3_bayrak_altinda": {
+"file": "71_perde3.yaml",
+"perde": [
+3
+],
+"bolge": [
+"kiyikent_liman",
+"kule_dibi",
+"sanayi"
+],
+"gun_min": 185,
+"gun_max": 310,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"kaya_demir"
+],
+"tags": [
+"ordu",
+"hakimiyet"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p3_kapi_firtinasi"
+],
+"delays": {
+"p3_kapi_firtinasi": [
+5,
+12
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"p3_bayrak_kuruldu"
+]
+},
+"p3_ellinciler": {
+"file": "71_perde3.yaml",
+"perde": [
+3
+],
+"bolge": [
+"kule_dibi"
+],
+"gun_min": 190,
+"gun_max": 325,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kule",
+"toplum",
+"hakimiyet"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule",
+"places": [
+"kule"
+],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p3_kademe_borsasi",
+"p3_siralama_zirvesi"
+],
+"delays": {
+"p3_siralama_zirvesi": [
+6,
+14
+],
+"p3_kademe_borsasi": [
+4,
+10
+]
+},
+"fights": 0,
+"flags_need": [
+"kule_acik"
+],
+"flags_set": [
+"p3_ellinci_kapi_acildi",
+"p3_ellinci_kiz",
+"p3_ellinci_oda"
+]
+},
+"p3_siralama_zirvesi": {
+"file": "71_perde3.yaml",
+"perde": [
+3
+],
+"bolge": [
+"kule_dibi",
+"tepe"
+],
+"gun_min": 200,
+"gun_max": 325,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"aras_kurt"
+],
+"tags": [
+"siralama",
+"hakimiyet"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [
+"tepe"
+],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p3_kapi_firtinasi"
+],
+"delays": {
+"p3_kapi_firtinasi": [
+4,
+10
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"p3_ilk_on_lideri",
+"p3_zirve_gizli"
+]
+},
+"p3_donenler": {
+"file": "71_perde3.yaml",
+"perde": [
+3
+],
+"bolge": [
+"kule_dibi"
+],
+"gun_min": 205,
+"gun_max": 330,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"elif_sari"
+],
+"tags": [
+"cok_evren",
+"karantina"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule",
+"places": [
+"kule"
+],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p3_kademe_ailesi"
+],
+"delays": {
+"p3_kademe_ailesi": [
+5,
+12
+]
+},
+"fights": 1,
+"flags_need": [
+"cok_evren_acik"
+],
+"flags_set": [
+"p3_mercan_cocuk"
+]
+},
+"p3_korfez_leviatani": {
+"file": "71_perde3.yaml",
+"perde": [
+3
+],
+"bolge": [
+"kiyikent_liman",
+"kordon"
+],
+"gun_min": 181,
+"gun_max": 300,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"deniz",
+"hakimiyet",
+"kesif"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [
+"kiyikent_liman",
+"kordon"
+],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p3_heykel"
+],
+"delays": {
+"p3_heykel": [
+4,
+10
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"p3_leviatan_kurtarildi"
+]
+},
+"p3_kademe_borsasi": {
+"file": "71_perde3.yaml",
+"perde": [
+3
+],
+"bolge": [
+"sanayi"
+],
+"gun_min": 181,
+"gun_max": 320,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"kaya_demir"
+],
+"tags": [
+"ekonomi",
+"sanayi",
+"kademe"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [
+"sanayi"
+],
+"n_scenes": 3,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p3_kademe_ailesi",
+"p3_kapi_firtinasi"
+],
+"delays": {
+"p3_kapi_firtinasi": [
+4,
+10
+],
+"p3_kademe_ailesi": [
+3,
+9
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"p3_borsa_denetim",
+"p3_borsa_ortagi"
+]
+},
+"p3_kademe_ailesi": {
+"file": "71_perde3.yaml",
+"perde": [
+3
+],
+"bolge": [
+"eski_sehir"
+],
+"gun_min": 181,
+"gun_max": 330,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"aile",
+"kademe",
+"eski_sehir"
+],
+"gerilim": 1,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [
+"eski_sehir"
+],
+"n_scenes": 3,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p3_heykel",
+"p3_kapi_firtinasi"
+],
+"delays": {
+"p3_heykel": [
+3,
+9
+],
+"p3_kapi_firtinasi": [
+3,
+9
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"p3_heykel": {
+"file": "71_perde3.yaml",
+"perde": [
+3
+],
+"bolge": [
+"kiyikent_liman",
+"tepe"
+],
+"gun_min": 195,
+"gun_max": 330,
+"ana_yay": null,
+"tohum": false,
+"npc": [
+"vahit"
+],
+"tags": [
+"efsane",
+"hakimiyet",
+"yukselenler"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p3_kadim_pazari"
+],
+"delays": {
+"p3_kadim_pazari": [
+3,
+8
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"p3_kadim_pazari": {
+"file": "71_perde3.yaml",
+"perde": [
+3
+],
+"bolge": [
+"kiyikent_liman"
+],
+"gun_min": 190,
+"gun_max": 320,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kadimler",
+"karaborsa"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [
+"kiyikent_liman"
+],
+"n_scenes": 3,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p3_kordon_geri"
+],
+"delays": {
+"p3_kordon_geri": [
+4,
+10
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"p3_kordon_geri": {
+"file": "71_perde3.yaml",
+"perde": [
+3
+],
+"bolge": [
+"kordon",
+"kiyikent_liman"
+],
+"gun_min": 190,
+"gun_max": 325,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"ordu",
+"kordon",
+"savas"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [
+"kordon"
+],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p3_kordon_aksami"
+],
+"delays": {
+"p3_kordon_aksami": [
+5,
+10
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"p3_kordon_geri_alindi"
+]
+},
+"p3_kapi_firtinasi": {
+"file": "71_perde3.yaml",
+"perde": [
+3
+],
+"bolge": [
+"sanayi",
+"kule_dibi",
+"eski_sehir"
+],
+"gun_min": 230,
+"gun_max": 330,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kapi",
+"savas",
+"hakimiyet"
+],
+"gerilim": 4,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [
+"kiyikent_liman",
+"sanayi"
+],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p3_firtina_olcucu"
+],
+"delays": {
+"p3_firtina_olcucu": [
+3,
+7
+]
+},
+"fights": 3,
+"flags_need": [],
+"flags_set": []
+},
+"p3_kordon_aksami": {
+"file": "71_perde3.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kordon",
+"toplum",
+"savas"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kordon",
+"places": [
+"kordon"
+],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 2,
+"flags_need": [],
+"flags_set": []
+},
+"p3_firtina_olcucu": {
+"file": "71_perde3.yaml",
+"perde": [
+3,
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kadimler",
+"kapi",
+"hakimiyet"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": "eski_sehir",
+"places": [
+"eski_sehir"
+],
+"n_scenes": 8,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 3,
+"flags_need": [],
+"flags_set": []
+},
+"kule_kat_10": {
+"file": "72_kule.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kule",
+"hikaye_kati",
+"sistem_sirri"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule",
+"places": [
+"kule"
+],
+"n_scenes": 13,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kule_dibi_tirmanicilar"
+],
+"delays": {
+"kule_dibi_tirmanicilar": [
+1,
+3
+]
+},
+"fights": 3,
+"flags_need": [],
+"flags_set": [
+"kule_kayit_durduruldu",
+"kule_kayit_okundu"
+]
+},
+"kule_kat_20": {
+"file": "72_kule.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kule",
+"hikaye_kati",
+"yeni_tavan"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule",
+"places": [
+"kule"
+],
+"n_scenes": 13,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"aras_kule_dovusu"
+],
+"delays": {
+"aras_kule_dovusu": [
+2,
+5
+]
+},
+"fights": 4,
+"flags_need": [],
+"flags_set": [
+"kule_alici_yedi",
+"kule_derin_birakildi",
+"kule_derin_yenildi"
+]
+},
+"kule_kat_30": {
+"file": "72_kule.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kule",
+"hikaye_kati",
+"sistem_sirri",
+"yeni_tavan"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule",
+"places": [
+"kule"
+],
+"n_scenes": 11,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kule_cam_mektup"
+],
+"delays": {
+"kule_cam_mektup": [
+1,
+3
+]
+},
+"fights": 3,
+"flags_need": [],
+"flags_set": [
+"kule_cam_erken_okundu",
+"kule_cam_mektup_alindi",
+"kule_yuzuk_soruldu"
+]
+},
+"kule_kat_40": {
+"file": "72_kule.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kule",
+"hikaye_kati",
+"sistem_sirri",
+"yeni_tavan"
+],
+"gerilim": 4,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule",
+"places": [
+"kule"
+],
+"n_scenes": 14,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"yanki_kaynak_izi"
+],
+"delays": {
+"yanki_kaynak_izi": [
+2,
+4
+]
+},
+"fights": 3,
+"flags_need": [],
+"flags_set": [
+"kule_kadin_konustu",
+"kule_kadina_soz",
+"kule_kum_saati",
+"kule_rozet_alindi",
+"kule_saat_dinlendi",
+"yanki_bagi"
+]
+},
+"kule_kat_50": {
+"file": "72_kule.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kule",
+"hikaye_kati",
+"sistem_sirri",
+"cok_evren"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kule",
+"places": [
+"kule"
+],
+"n_scenes": 9,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kule_kopyalar"
+],
+"delays": {
+"kule_kopyalar": [
+2,
+4
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"kule_esik_gomuldu",
+"kule_esik_nobeti"
+]
+},
+"kule_kat_60": {
+"file": "72_kule.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kule",
+"hikaye_kati",
+"sistem_sirri",
+"yeni_tavan"
+],
+"gerilim": 4,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule",
+"places": [
+"kule"
+],
+"n_scenes": 11,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kule_kopyalar"
+],
+"delays": {
+"kule_kopyalar": [
+1,
+3
+]
+},
+"fights": 3,
+"flags_need": [],
+"flags_set": [
+"kule_dosyalar_kurtarildi",
+"kule_son_sayfa_saklandi",
+"kule_son_sayfa_yirtildi",
+"kule_tasiyici_izi"
+]
+},
+"kule_kat_70": {
+"file": "72_kule.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kule",
+"hikaye_kati",
+"sistem_sirri",
+"yeni_tavan"
+],
+"gerilim": 4,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule",
+"places": [
+"kule"
+],
+"n_scenes": 12,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kule_kopyalar"
+],
+"delays": {
+"kule_kopyalar": [
+1,
+3
+]
+},
+"fights": 3,
+"flags_need": [],
+"flags_set": [
+"kule_damar_izlendi",
+"kule_tohumluk_adlandi",
+"kule_tohumluk_uyandi"
+]
+},
+"kule_kat_80": {
+"file": "72_kule.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kule",
+"hikaye_kati",
+"sistem_sirri",
+"yeni_tavan",
+"kadimler"
+],
+"gerilim": 4,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule",
+"places": [
+"kule"
+],
+"n_scenes": 8,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kule_gokten_inen"
+],
+"delays": {
+"kule_gokten_inen": [
+1,
+3
+]
+},
+"fights": 3,
+"flags_need": [],
+"flags_set": [
+"kule_kabul_damgasi",
+"kule_thessar_sorusu",
+"kule_ucuncu_yol"
+]
+},
+"kule_kat_90": {
+"file": "72_kule.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kule",
+"hikaye_kati",
+"sistem_sirri",
+"yeni_tavan",
+"yanki"
+],
+"gerilim": 4,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule",
+"places": [
+"kule"
+],
+"n_scenes": 11,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kule_gokten_inen",
+"yanki_kaynak_izi"
+],
+"delays": {
+"kule_gokten_inen": [
+2,
+4
+],
+"yanki_kaynak_izi": [
+1,
+2
+]
+},
+"fights": 3,
+"flags_need": [],
+"flags_set": [
+"kule_taslaga_cizildi",
+"kule_yanki_secti",
+"yanki_bagi"
+]
+},
+"kule_kat_100": {
+"file": "72_kule.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kule",
+"hikaye_kati",
+"sistem_sirri",
+"dongu"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kule",
+"places": [
+"kule"
+],
+"n_scenes": 10,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"yanki_son_sir"
+],
+"delays": {
+"yanki_son_sir": [
+1,
+2
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": [
+"kule_dongu_sayisi",
+"kule_zirve_hayir",
+"yanki_bagi"
+]
+},
+"kule_dibi_tirmanicilar": {
+"file": "72_kule.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kule",
+"hakimiyet",
+"kule_dibi"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule_dibi",
+"places": [
+"kule_dibi"
+],
+"n_scenes": 6,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"aras_kule_dovusu"
+],
+"delays": {
+"aras_kule_dovusu": [
+3,
+6
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"kule_tirmanici_egitildi"
+]
+},
+"kule_cam_mektup": {
+"file": "72_kule.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kule",
+"yanki",
+"gizem"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"yanki_kaynak_izi"
+],
+"delays": {
+"yanki_kaynak_izi": [
+2,
+5
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"kule_cama_cevap",
+"yanki_bagi"
+]
+},
+"kule_kopyalar": {
+"file": "72_kule.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kule",
+"kule_dibi",
+"ahlak",
+"kiyikent"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kule_dibi",
+"places": [
+"kule_dibi"
+],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"kule_cam_mektup"
+],
+"delays": {
+"kule_cam_mektup": [
+1,
+3
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"kule_gokten_inen": {
+"file": "72_kule.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kule",
+"kadimler",
+"dikkat",
+"kule_dibi"
+],
+"gerilim": 4,
+"onemli": false,
+"tekrar": false,
+"entry_place": "kule_dibi",
+"places": [
+"kule_dibi"
+],
+"n_scenes": 7,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"aras_cok_evren_kapisi"
+],
+"delays": {
+"aras_cok_evren_kapisi": [
+3,
+7
+]
+},
+"fights": 1,
+"flags_need": [],
+"flags_set": [
+"cok_evren_acik"
+]
+},
+"perde4_acilis": {
+"file": "80_perde4.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 331,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"hasat",
+"sistem"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent",
+"places": [
+"kasaba_cekirdegi",
+"kiyikent"
+],
+"n_scenes": 6,
+"quests": [
+"hasat_savunmasi"
+],
+"quest_cond": [],
+"seeds": [
+"p4_kadim_oncusu",
+"p4_kusatma_ekmegi",
+"p4_son_gece_ates"
+],
+"delays": {
+"p4_kusatma_ekmegi": [
+2,
+5
+],
+"p4_kadim_oncusu": [
+1,
+3
+],
+"p4_son_gece_ates": [
+14,
+20
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"hasat_basladi",
+"p4_acilis_konusma",
+"p4_acilis_meydan",
+"p4_oncu_iz",
+"p4_sikiyonetim"
+]
+},
+"fraksiyon_son_pozisyon": {
+"file": "80_perde4.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 336,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"fraksiyon",
+"siyaset"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kasaba_cekirdegi",
+"places": [
+"kasaba_cekirdegi",
+"tepe"
+],
+"n_scenes": 10,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p4_cocuk_ordusu",
+"p4_son_kapi",
+"p4_veda_mektuplari"
+],
+"delays": {
+"p4_cocuk_ordusu": [
+1,
+3
+],
+"p4_veda_mektuplari": [
+1,
+4
+],
+"p4_son_kapi": [
+1,
+3
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"p4_birlesik_cephe",
+"p4_cephe_lonca",
+"p4_cephe_sessiz_ag",
+"p4_cephe_siginak",
+"p4_cephe_yukselenler",
+"p4_komuta_oyuncu",
+"p4_kordon_feda",
+"p4_muzakere_kapisi",
+"p4_tahliye",
+"p4_yakit_kabul",
+"p4_yanki_isini"
+]
+},
+"kadim_istilasi": {
+"file": "80_perde4.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 342,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"boss",
+"istila",
+"kadim"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent_liman",
+"places": [
+"kiyikent",
+"kiyikent_liman",
+"kule_dibi",
+"tepe"
+],
+"n_scenes": 17,
+"quests": [
+"hasat_savunmasi"
+],
+"quest_cond": [],
+"seeds": [
+"p4_yikik_kiyikent"
+],
+"delays": {
+"p4_yikik_kiyikent": [
+1,
+3
+]
+},
+"fights": 11,
+"flags_need": [],
+"flags_set": [
+"ihanet_onlendi",
+"kadim_anlasmasi",
+"kadimler_yenildi",
+"kiyikent_dustu",
+"p4_istila_ordu",
+"p4_ondalik_yok",
+"p4_vali_bagislandi",
+"p4_vali_infaz"
+]
+},
+"cekirdege_yol": {
+"file": "80_perde4.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 350,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"sistem",
+"boss"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kule_dibi",
+"places": [
+"kule_dibi"
+],
+"n_scenes": 8,
+"quests": [
+"cekirdege_inis"
+],
+"quest_cond": [],
+"seeds": [
+"p4_son_gece_ates"
+],
+"delays": {
+"p4_son_gece_ates": [
+1,
+3
+]
+},
+"fights": 3,
+"flags_need": [],
+"flags_set": [
+"cekirdek_yolu_acik",
+"p4_cekirdek_yalniz"
+]
+},
+"sistem_cekirdegi": {
+"file": "80_perde4.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 352,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"sistem",
+"sir",
+"boss"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "sistem_cekirdegi",
+"places": [
+"kule_dibi",
+"sistem_cekirdegi"
+],
+"n_scenes": 8,
+"quests": [
+"cekirdege_inis"
+],
+"quest_cond": [],
+"seeds": [
+"yanki_son_sir"
+],
+"delays": {
+"yanki_son_sir": [
+1,
+2
+]
+},
+"fights": 2,
+"flags_need": [
+"cekirdek_yolu_acik"
+],
+"flags_set": [
+"p4_cekirdek_dili",
+"p4_cekirdek_kok_erisim",
+"p4_cekirdek_kovuldu",
+"p4_yankiya_borc",
+"sistem_cekirdegine_ulasildi"
+]
+},
+"dikkat_100_p4": {
+"file": "80_perde4.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"dikkat",
+"kadim",
+"boss"
+],
+"gerilim": 4,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p4_son_yayin"
+],
+"delays": {
+"p4_son_yayin": [
+2,
+4
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": []
+},
+"p4_kadim_oncusu": {
+"file": "80_perde4.yaml",
+"perde": [
+4
+],
+"bolge": [
+"eski_sehir",
+"kordon",
+"kule_dibi",
+"kiyikent_liman"
+],
+"gun_min": 331,
+"gun_max": 341,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kadim",
+"kesif",
+"istila"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 6,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p4_oncu_hesabi"
+],
+"delays": {
+"p4_oncu_hesabi": [
+3,
+6
+]
+},
+"fights": 3,
+"flags_need": [],
+"flags_set": [
+"p4_oncu_olduruldu"
+]
+},
+"p4_oncu_hesabi": {
+"file": "80_perde4.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kadim",
+"tohum"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 1,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"p4_kusatma_ekmegi": {
+"file": "80_perde4.yaml",
+"perde": [
+4
+],
+"bolge": [
+"kiyikent_liman",
+"eski_sehir",
+"tepe"
+],
+"gun_min": 332,
+"gun_max": 364,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kusatma",
+"sivil",
+"ahlak"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p4_yikik_kiyikent"
+],
+"delays": {
+"p4_yikik_kiyikent": [
+10,
+14
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"p4_ekmek_paylasildi"
+]
+},
+"p4_son_kapi": {
+"file": "80_perde4.yaml",
+"perde": [
+4
+],
+"bolge": [
+"kule_dibi",
+"sanayi",
+"kordon",
+"eski_sehir"
+],
+"gun_min": 333,
+"gun_max": 357,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kapi",
+"boss",
+"hakimiyet"
+],
+"gerilim": 4,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p4_siralama_zirvesi"
+],
+"delays": {
+"p4_siralama_zirvesi": [
+2,
+5
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": []
+},
+"p4_siralama_zirvesi": {
+"file": "80_perde4.yaml",
+"perde": [
+4
+],
+"bolge": [
+"kule_dibi",
+"eski_sehir",
+"sanayi"
+],
+"gun_min": 334,
+"gun_max": 357,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"siralama",
+"rakip",
+"hakimiyet"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p4_son_yayin"
+],
+"delays": {
+"p4_son_yayin": [
+2,
+5
+]
+},
+"fights": 2,
+"flags_need": [],
+"flags_set": []
+},
+"p4_veda_mektuplari": {
+"file": "80_perde4.yaml",
+"perde": [
+4
+],
+"bolge": [
+"eski_sehir",
+"kiyikent_liman",
+"tepe"
+],
+"gun_min": 336,
+"gun_max": 360,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"veda",
+"nefes",
+"yoldas"
+],
+"gerilim": 1,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p4_son_gece_ates"
+],
+"delays": {
+"p4_son_gece_ates": [
+3,
+8
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"p4_kacis_gemisi": {
+"file": "80_perde4.yaml",
+"perde": [
+4
+],
+"bolge": [
+"kiyikent_liman",
+"kordon"
+],
+"gun_min": 335,
+"gun_max": 355,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"kacis",
+"ahlak",
+"cok_evren"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p4_kacis_gemisi_kalkis"
+],
+"delays": {
+"p4_kacis_gemisi_kalkis": [
+2,
+4
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"p4_kacis_cocuklar",
+"p4_kacis_durduruldu",
+"p4_kacis_satis"
+]
+},
+"p4_kacis_gemisi_kalkis": {
+"file": "80_perde4.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kacis",
+"tohum"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 1,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"p4_cocuk_ordusu": {
+"file": "80_perde4.yaml",
+"perde": [
+4
+],
+"bolge": [
+"sanayi",
+"tepe",
+"eski_sehir"
+],
+"gun_min": 337,
+"gun_max": 357,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"ahlak",
+"ordu",
+"lonca"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p4_son_gece_ates"
+],
+"delays": {
+"p4_son_gece_ates": [
+2,
+6
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"p4_cocuklar_cepheye",
+"p4_cocuklar_egitildi",
+"p4_cocuklar_korundu"
+]
+},
+"p4_son_yayin": {
+"file": "80_perde4.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": 338,
+"gun_max": 362,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"yayin",
+"sessiz_ag",
+"aciga_vur"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p4_son_gece_ates"
+],
+"delays": {
+"p4_son_gece_ates": [
+2,
+6
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"p4_yayin_aciga",
+"p4_yayin_sessiz"
+]
+},
+"p4_yikik_kiyikent": {
+"file": "80_perde4.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": 343,
+"gun_max": 357,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"istila_sonrasi",
+"sivil",
+"yas"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p4_son_gece_ates"
+],
+"delays": {
+"p4_son_gece_ates": [
+1,
+4
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"p4_son_gece_ates": {
+"file": "80_perde4.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": 345,
+"gun_max": 357,
+"ana_yay": null,
+"tohum": false,
+"npc": [],
+"tags": [
+"nefes",
+"yoldas",
+"veda"
+],
+"gerilim": 1,
+"onemli": false,
+"tekrar": false,
+"entry_place": null,
+"places": [],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"p4_veda_mektuplari"
+],
+"delays": {
+"p4_veda_mektuplari": [
+1,
+3
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"son_karar": {
+"file": "81_sonlar.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 358,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"son",
+"final"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent",
+"places": [
+"hasat",
+"kiyikent",
+"kule",
+"sistem_cekirdegi"
+],
+"n_scenes": 12,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"hasat_son_hafta_siper",
+"hasat_son_hafta_tirmanis",
+"hasat_son_hafta_veda",
+"son_veda_yuruyusu"
+]
+},
+"hasat_vakti": {
+"file": "81_sonlar.yaml",
+"perde": [
+4
+],
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": 365,
+"tohum": false,
+"npc": [],
+"tags": [
+"ana_yay",
+"son",
+"final"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": false,
+"entry_place": "kiyikent",
+"places": [
+"kiyikent"
+],
+"n_scenes": 1,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": [
+"hasat_son_hafta_siper",
+"hasat_son_hafta_veda"
+]
+},
+"esik_ihanet": {
+"file": "90_esikler.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"ihanet",
+"npc"
+],
+"gerilim": 4,
+"onemli": true,
+"tekrar": true,
+"entry_place": null,
+"places": [],
+"n_scenes": 6,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 1,
+"flags_need": [],
+"flags_set": []
+},
+"esik_kisisel": {
+"file": "90_esikler.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kisisel",
+"npc"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": true,
+"entry_place": null,
+"places": [],
+"n_scenes": 1,
+"quests": [],
+"quest_cond": [],
+"seeds": [
+"esik_kisisel_son"
+],
+"delays": {
+"esik_kisisel_son": [
+3,
+6
+]
+},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"esik_kisisel_son": {
+"file": "90_esikler.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kisisel",
+"npc"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": true,
+"entry_place": null,
+"places": [],
+"n_scenes": 3,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"esik_kacis": {
+"file": "90_esikler.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"korku",
+"npc"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": true,
+"entry_place": null,
+"places": [],
+"n_scenes": 2,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"esik_itaat": {
+"file": "90_esikler.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"korku",
+"npc"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": true,
+"entry_place": null,
+"places": [],
+"n_scenes": 1,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"esik_rakip": {
+"file": "90_esikler.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"rakip",
+"duello",
+"npc"
+],
+"gerilim": 3,
+"onemli": true,
+"tekrar": true,
+"entry_place": null,
+"places": [],
+"n_scenes": 5,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 1,
+"flags_need": [],
+"flags_set": []
+},
+"esik_ayrilik": {
+"file": "90_esikler.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"ayrilik",
+"npc"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": true,
+"entry_place": null,
+"places": [],
+"n_scenes": 1,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"esik_yalan": {
+"file": "90_esikler.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"yalan",
+"npc"
+],
+"gerilim": 2,
+"onemli": true,
+"tekrar": true,
+"entry_place": null,
+"places": [],
+"n_scenes": 1,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"bildirim_rakip": {
+"file": "95_bildirimler.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [
+"aras_kurt"
+],
+"tags": [
+"aras",
+"rakip",
+"siralama"
+],
+"gerilim": 2,
+"onemli": false,
+"tekrar": true,
+"entry_place": null,
+"places": [],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"bildirim_goz": {
+"file": "95_bildirimler.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"dikkat",
+"gozlemci"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": true,
+"entry_place": null,
+"places": [],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+},
+"bildirim_kapi": {
+"file": "95_bildirimler.yaml",
+"perde": null,
+"bolge": [],
+"gun_min": null,
+"gun_max": null,
+"ana_yay": null,
+"tohum": true,
+"npc": [],
+"tags": [
+"kapi",
+"tasma"
+],
+"gerilim": 3,
+"onemli": false,
+"tekrar": true,
+"entry_place": null,
+"places": [],
+"n_scenes": 4,
+"quests": [],
+"quest_cond": [],
+"seeds": [],
+"delays": {},
+"fights": 0,
+"flags_need": [],
+"flags_set": []
+}
+}

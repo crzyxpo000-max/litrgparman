@@ -172,7 +172,15 @@ class Simulator(private val content: Content) {
         }
     }
 
-    fun play(seed: Long, profile: Profile, onCombatStart: ((WorldState) -> Unit)? = null): RunResult {
+    /**
+     * @param onStep her adımdan sonra (önceki durum, yeni durum, eylem) — olay sırası kaydı (docs/STORY_FLOW.md) için.
+     */
+    fun play(
+        seed: Long,
+        profile: Profile,
+        onCombatStart: ((WorldState) -> Unit)? = null,
+        onStep: ((WorldState, WorldState, String) -> Unit)? = null,
+    ): RunResult {
         val rng = Random(seed)
         val p = profile.takeIf { it.ending != null }
         var s = engine.newGame("Sim", if (profile.ironman) GameMode.IRONMAN else GameMode.NORMAL, seed, previousGames = profile.previousGames)
@@ -227,21 +235,33 @@ class Simulator(private val content: Content) {
                 s = engine.allocate(s, mapOf(allocationStat(s, rng, p) to s.player.freePoints), lang).state
             }
             val before = s
+            var actionName = ""
             s = when {
                 s.prompts.isNotEmpty() -> {
                     val pv = engine.view(s, lang).prompt!!
                     val opt = pv.options.firstOrNull { it.id != PromptKind.DECLINE } ?: pv.options.first()
+                    actionName = "istem"
                     engine.resolvePrompt(s, (if (rng.nextDouble() < 0.7) opt else pv.options[rng.nextInt(pv.options.size)]).id, lang, pv.kind, pv.subject).state
                 }
                 s.combat != null -> {
                     val c = s.combat!!
                     val flee = c.spec.flee == WorldState.HUB && s.player.hp * 100 < s.player.maxHp * 35
                     val action = if (flee) CombatAction.Flee else engine.autoCombatAction(s)
+                    actionName = "savas"
                     runCatching { engine.combatAction(s, action, lang).state }.getOrElse { engine.combatAction(s, engine.autoCombatAction(s), lang).state }
                 }
-                s.sceneId == WorldState.HUB -> engine.hubAction(s, hubAction(s, rng, p, s.day - lastDeathDay < 4), lang).state
-                else -> engine.choose(s, pickChoice(s, rng, profile), lang).state
+                s.sceneId == WorldState.HUB -> {
+                    val a = hubAction(s, rng, p, s.day - lastDeathDay < 4)
+                    actionName = "akis:" + a.toString().substringBefore('(').let { n -> if (a is HubAction.Card) "Card:${a.eventId}" else n }
+                    engine.hubAction(s, a, lang).state
+                }
+                else -> {
+                    val c = pickChoice(s, rng, profile)
+                    actionName = "secim:$c"
+                    engine.choose(s, c, lang).state
+                }
             }
+            onStep?.invoke(before, s, actionName)
             if (before.combat == null && s.combat != null) {
                 onCombatStart?.invoke(s)
                 checkpoint = before

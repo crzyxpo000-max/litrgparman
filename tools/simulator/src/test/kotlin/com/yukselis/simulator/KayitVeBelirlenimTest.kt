@@ -22,7 +22,7 @@ class KayitVeBelirlenimTest {
         var checked = 0
         val failures = mutableListOf<String>()
         for (i in 0 until 6) {
-            sim.play(seed = 70_000L + i, profile = Simulator.populationProfile(i)) { s ->
+            sim.play(seed = 70_000L + i, profile = Simulator.populationProfile(i), onCombatStart = { s ->
                 val back = SaveCodec.decode(SaveCodec.encode(s, 0L)).state
                 checked++
                 if (back != s && failures.size < 5) {
@@ -32,7 +32,7 @@ class KayitVeBelirlenimTest {
                     }.map { it.name }
                     failures += "tohum ${70_000L + i} gün ${s.day} sahne ${s.sceneId}: farklı alanlar $diff"
                 }
-            }
+            })
         }
         assertTrue("Hiç savaş başı denetlenmedi", checked > 100)
         assertTrue("Kayıt geri yüklemesi kayıplı:\n" + failures.joinToString("\n"), failures.isEmpty())

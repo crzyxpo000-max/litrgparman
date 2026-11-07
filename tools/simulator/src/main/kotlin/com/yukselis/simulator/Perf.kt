@@ -21,7 +21,7 @@ fun main() {
     var mid: WorldState? = null
     val t0 = System.nanoTime()
     var steps = 0
-    sim.play(seed = 4242L, profile = Simulator.populationProfile(3)) { s -> steps++; if (mid == null && s.day >= 180) mid = s }
+    sim.play(seed = 4242L, profile = Simulator.populationProfile(3), onCombatStart = { s -> steps++; if (mid == null && s.day >= 180) mid = s })
     val playMs = (System.nanoTime() - t0) / 1_000_000
     println("Tam oynanış (simülatör, savaş başlangıcı sayısı $steps): $playMs ms")
     mid?.let { s ->

@@ -1,0 +1,337 @@
+{
+ "runs": 20,
+ "events": 4638,
+ "counts": {
+  "b": 1490,
+  "c": 370,
+  "e": 574,
+  "a": 332,
+  "d": 39
+ },
+ "why": {
+  "b": {
+   "bölge olay etkisiyle değişti": 352,
+   "bölgeli olay, yeri başka": 103,
+   "bölgesiz olay, giriş yeri başka": 1035
+  },
+  "neden": {
+   "kart": 1528,
+   "tohum": 1271,
+   "npc_esik": 196,
+   "ana_yay": 735,
+   "dikkat_esik": 149,
+   "kesif": 100,
+   "kule": 653,
+   "diger": 6
+  },
+  "b_neden": {
+   "tohum": 477,
+   "ana_yay": 513,
+   "kart": 137,
+   "diger": 3,
+   "dikkat_esik": 8
+  },
+  "c": {
+   "gerilim ≥3 olaydan hemen sonra · tohum": 225,
+   "gerilim ≥3 olaydan hemen sonra · dikkat_esik": 113,
+   "gerilim ≥3 olaydan hemen sonra · npc_esik": 32
+  },
+  "e": {
+   "tohum": 321,
+   "npc_esik": 54,
+   "ana_yay": 69,
+   "dikkat_esik": 130
+  },
+  "a": {
+   "tohum": 120,
+   "kart": 142,
+   "kesif": 13,
+   "dikkat_esik": 20,
+   "npc_esik": 18,
+   "kule": 19
+  },
+  "d": {
+   "ana yay gün 205": 5,
+   "ana yay gün 12": 8,
+   "ana yay gün 268": 1,
+   "ana yay gün 333": 6,
+   "ana yay gün 336": 4,
+   "ana yay gün 337": 4,
+   "ana yay gün 339": 1,
+   "ana yay gün 225": 3,
+   "ana yay gün 220": 5,
+   "ana yay gün 260": 1,
+   "ana yay gün 245": 1
+  }
+ },
+ "examples": {
+  "b": [
+   "oynanış 0 (rastgele), Gün 12: `kirilma` bölgeyi kirik_istasyon → ogretici_orman yaptı (yolculuk sahnesi yok)",
+   "oynanış 0 (rastgele), Gün 24: `yeni_tavan` bölgeyi kirik_istasyon → ogretici_orman yaptı (yolculuk sahnesi yok)",
+   "oynanış 0 (rastgele), Gün 31: `ogretici_bekci` bölgeyi harabe_carsi → kiyikent_liman yaptı (yolculuk sahnesi yok)",
+   "oynanış 0 (rastgele), Gün 33: `kaya_lonca_teklifi` bölgeyi kiyikent_liman → sanayi yaptı (yolculuk sahnesi yok)",
+   "oynanış 0 (rastgele), Gün 45: `yukselenler_1_cagri` bölgeyi kule_dibi → tepe yaptı (yolculuk sahnesi yok)",
+   "oynanış 0 (rastgele), Gün 69: `kule_dibi_tirmanicilar` bölgeyi kordon → kule_dibi yaptı (yolculuk sahnesi yok)",
+   "oynanış 0 (rastgele), Gün 5: `su_baskini` (tohum) yeri `kirik_istasyon`, oyuncu `harabe_carsi` bölgesinde",
+   "oynanış 0 (rastgele), Gün 7: `zindan_metro` (tohum) yeri `kirik_istasyon`, oyuncu `harabe_carsi` bölgesinde",
+   "oynanış 0 (rastgele), Gün 9: `mert_sifreli_mesaj` (tohum) yeri `kirik_istasyon`, oyuncu `harabe_carsi` bölgesinde",
+   "oynanış 0 (rastgele), Gün 12: `kirilma` (ana_yay) yeri `ogretici_orman`, oyuncu `kirik_istasyon` bölgesinde",
+   "oynanış 0 (rastgele), Gün 24: `yeni_tavan` (ana_yay) yeri `ogretici_orman`, oyuncu `kirik_istasyon` bölgesinde",
+   "oynanış 0 (rastgele), Gün 33: `kaya_lonca_teklifi` (kart) yeri `sanayi`, oyuncu `kiyikent_liman` bölgesinde"
+  ],
+  "c": [
+   "oynanış 0 (rastgele), Gün 5: `hastane_karantina` (gerilim 3) biter bitmez `su_baskini` (tohum)",
+   "oynanış 0 (rastgele), Gün 7: `kaya_ilk_tanisma` (gerilim 3) biter bitmez `yabanci_minnet` (tohum)",
+   "oynanış 0 (rastgele), Gün 13: `aras_sira_meydan` (gerilim 4) biter bitmez `dikkat_25` (dikkat_esik)",
+   "oynanış 0 (rastgele), Gün 14: `esik_kisisel_son` (gerilim 3) biter bitmez `mert_cozulen_satir` (tohum)",
+   "oynanış 0 (rastgele), Gün 31: `perde2_donus` (gerilim 3) biter bitmez `dikkat_50` (dikkat_esik)",
+   "oynanış 0 (rastgele), Gün 40: `kule_yukselisi` (gerilim 4) biter bitmez `sanayi_ocak_cocuklari` (tohum)"
+  ],
+  "e": [
+   "oynanış 0 (rastgele), Gün 7: `yabanci_minnet` → doğrudan `zindan_metro` (tohum; ortak NPC/tohum/görev yok)",
+   "oynanış 0 (rastgele), Gün 11: `eczane_bedeli` → doğrudan `esik_kisisel` (npc_esik; ortak NPC/tohum/görev yok)",
+   "oynanış 0 (rastgele), Gün 13: `mahsurlar_sonrasi` → doğrudan `aras_sira_meydan` (tohum; ortak NPC/tohum/görev yok)",
+   "oynanış 0 (rastgele), Gün 14: `esik_kisisel_son` → doğrudan `mert_cozulen_satir` (tohum; ortak NPC/tohum/görev yok)",
+   "oynanış 0 (rastgele), Gün 31: `ogretici_bekci` → doğrudan `perde2_donus` (ana_yay; ortak NPC/tohum/görev yok)",
+   "oynanış 0 (rastgele), Gün 31: `perde2_donus` → doğrudan `dikkat_50` (dikkat_esik; ortak NPC/tohum/görev yok)"
+  ],
+  "a": [
+   "oynanış 0 (rastgele), Gün 18: `istasyon_sinyali` görevi sürerken `cete_hesabi` (tohum, kirik_istasyon)",
+   "oynanış 0 (rastgele), Gün 20: `istasyon_sinyali` görevi sürerken `zehirli_bereket` (kart, ogretici_orman)",
+   "oynanış 0 (rastgele), Gün 20: `istasyon_sinyali` görevi sürerken `isaretli_agaclar` (kart, ogretici_orman)",
+   "oynanış 0 (rastgele), Gün 46: `zincir_sessiz_ag` görevi sürerken `kule_dibi_donus` (tohum, tepe)",
+   "oynanış 0 (rastgele), Gün 46: `zincir_sessiz_ag` görevi sürerken `tepe_sayim_gecesi` (kart, tepe)",
+   "oynanış 0 (rastgele), Gün 46: `zincir_sessiz_ag` görevi sürerken `tepe_besik_sinavi` (kart, tepe)"
+  ],
+  "d": [
+   "oynanış 0 (rastgele), Gün 205: ana yay `siginak_3_tahliye` (gün 205) `cok_evren_batik` görevinin ortasına düştü",
+   "oynanış 1 (rastgele), Gün 12: ana yay `kirilma` (gün 12) `olu_avcinin_mesaji` görevinin ortasına düştü",
+   "oynanış 1 (rastgele), Gün 268: ana yay `siginak_4_son_siginak` (gün 268) `cok_evren_taht` görevinin ortasına düştü",
+   "oynanış 1 (rastgele), Gün 333: ana yay `elif_baris_masasi` (gün 333) `zincir_sessiz_ag` görevinin ortasına düştü",
+   "oynanış 1 (rastgele), Gün 336: ana yay `fraksiyon_son_pozisyon` (gün 336) `zincir_siginak` görevinin ortasına düştü",
+   "oynanış 1 (rastgele), Gün 337: ana yay `kaya_son_savas_generali` (gün 337) `zincir_siginak` görevinin ortasına düştü"
+  ]
+ },
+ "per_run": [
+  [
+   "oynanış 0 (rastgele)",
+   223,
+   {
+    "b": 74,
+    "c": 18,
+    "e": 22,
+    "a": 8,
+    "d": 1
+   }
+  ],
+  [
+   "oynanış 1 (rastgele)",
+   218,
+   {
+    "b": 87,
+    "e": 29,
+    "a": 13,
+    "c": 20,
+    "d": 5
+   }
+  ],
+  [
+   "oynanış 2 (rastgele)",
+   301,
+   {
+    "b": 80,
+    "e": 19,
+    "a": 23,
+    "d": 2,
+    "c": 10
+   }
+  ],
+  [
+   "oynanış 3 (vassal)",
+   303,
+   {
+    "b": 76,
+    "a": 23,
+    "e": 19,
+    "c": 13,
+    "d": 1
+   }
+  ],
+  [
+   "oynanış 4 (ozgurluk)",
+   288,
+   {
+    "b": 64,
+    "c": 11,
+    "e": 20,
+    "a": 12,
+    "d": 2
+   }
+  ],
+  [
+   "oynanış 5 (kod_kirici)",
+   218,
+   {
+    "b": 73,
+    "c": 20,
+    "e": 30,
+    "a": 12,
+    "d": 2
+   }
+  ],
+  [
+   "oynanış 6 (yukselis)",
+   218,
+   {
+    "b": 66,
+    "a": 9,
+    "e": 31,
+    "d": 2,
+    "c": 19
+   }
+  ],
+  [
+   "oynanış 7 (demir_taht (Demir))",
+   229,
+   {
+    "b": 70,
+    "e": 33,
+    "a": 28,
+    "c": 24,
+    "d": 1
+   }
+  ],
+  [
+   "oynanış 8 (koruyucu)",
+   266,
+   {
+    "b": 71,
+    "e": 27,
+    "c": 18,
+    "a": 17,
+    "d": 2
+   }
+  ],
+  [
+   "oynanış 9 (dongu)",
+   215,
+   {
+    "b": 86,
+    "a": 21,
+    "c": 20,
+    "e": 33,
+    "d": 2
+   }
+  ],
+  [
+   "oynanış 10 (rastgele)",
+   211,
+   {
+    "b": 65,
+    "c": 23,
+    "e": 34,
+    "a": 20,
+    "d": 1
+   }
+  ],
+  [
+   "oynanış 11 (rastgele)",
+   229,
+   {
+    "b": 82,
+    "e": 25,
+    "a": 12,
+    "c": 15,
+    "d": 2
+   }
+  ],
+  [
+   "oynanış 12 (rastgele)",
+   210,
+   {
+    "b": 77,
+    "e": 27,
+    "c": 18,
+    "a": 6,
+    "d": 1
+   }
+  ],
+  [
+   "oynanış 13 (ozgurluk)",
+   199,
+   {
+    "b": 67,
+    "e": 34,
+    "c": 20,
+    "a": 14,
+    "d": 1
+   }
+  ],
+  [
+   "oynanış 14 (kod_kirici)",
+   217,
+   {
+    "b": 72,
+    "a": 14,
+    "c": 16,
+    "e": 26,
+    "d": 2
+   }
+  ],
+  [
+   "oynanış 15 (yukselis)",
+   216,
+   {
+    "b": 72,
+    "c": 24,
+    "e": 33,
+    "a": 15,
+    "d": 4
+   }
+  ],
+  [
+   "oynanış 16 (demir_taht)",
+   212,
+   {
+    "b": 76,
+    "a": 18,
+    "c": 16,
+    "e": 25,
+    "d": 1
+   }
+  ],
+  [
+   "oynanış 17 (koruyucu (Demir))",
+   212,
+   {
+    "b": 78,
+    "c": 20,
+    "e": 32,
+    "a": 16,
+    "d": 2
+   }
+  ],
+  [
+   "oynanış 18 (dongu)",
+   231,
+   {
+    "b": 82,
+    "c": 22,
+    "e": 36,
+    "a": 23,
+    "d": 3
+   }
+  ],
+  [
+   "oynanış 19 (yalniz_avci)",
+   222,
+   {
+    "b": 72,
+    "a": 28,
+    "e": 39,
+    "d": 2,
+    "c": 23
+   }
+  ]
+ ]
+}
