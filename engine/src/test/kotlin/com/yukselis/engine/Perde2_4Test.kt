@@ -104,7 +104,8 @@ class Perde2_4Test {
             val choices = scenes.flatMap { content.scenes[it]?.choices ?: emptyList() }
             // Tohumla gelen devam olayları zaten bir sonucun kendisidir: koşullu ve tohum kuralından muaf.
             // Perde 4'te başlayan olayların tohumu olgunlaşacak zaman bulamaz: tohum kuralından muaf (DECISIONS #111).
-            val followUp = e.seedOnly && !e.id.startsWith("kule_kat_")
+            // Saha kampı sahneleri kısa karakter anlarıdır: tohum kuralından muaf (DECISIONS #144).
+            val followUp = (e.seedOnly && !e.id.startsWith("kule_kat_")) || e.camp
             val late = (e.mainArcDay ?: e.dayMin) >= 331
             if (!followUp && choices.none { it.requires != null || it.showWhen != null }) problems += "${e.id}: koşullu seçenek yok"
             if (e.id !in RULE_EXEMPT) {

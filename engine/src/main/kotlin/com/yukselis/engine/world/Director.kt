@@ -102,6 +102,18 @@ class Director(private val content: Content) {
     data class Forced(val eventId: String, val seed: Seed?)
 
     /** Ölen NPC'nin yay düğümleri kapanır: olayın NPC'lerinden biri ölüyse olay gelmez (ölüm kalıcıdır). */
+    /**
+     * Saha kampı sahnesi (DECISIONS #144): keşif görevindeyken bu bölgeye etiketli, koşulu tutan ve bütün NPC'leri
+     * yanındaki yoldaş olan kamp olayları (ağırlıklı seçim için puanıyla).
+     */
+    fun campScenes(state: WorldState, companions: Set<String>): List<EventDef> {
+        val m = state.mission ?: return emptyList()
+        if (m.kind != MissionKind.EXPLORE) return emptyList()
+        return content.events.values.filter { e ->
+            e.camp && m.region in e.where && e.npcs.isNotEmpty() && e.npcs.all { it in companions } && eligible(state, e)
+        }.sortedBy { it.id }
+    }
+
     fun npcsAlive(state: WorldState, e: EventDef): Boolean = e.npcs.all { state.npcs[it]?.alive != false }
 
     private fun eligibleIgnoringDay(state: WorldState, e: EventDef): Boolean {
@@ -158,7 +170,7 @@ class Director(private val content: Content) {
     /** Havuzdan seçilebilir olaylar (tohum/eşik olayları ve zorunlular hariç), puanlarıyla. */
     fun candidates(state: WorldState, anywhere: Boolean = false): List<Pair<EventDef, Double>> =
         content.events.values
-            .filter { !it.seedOnly && it.mainArcDay == null && it.id !in content.chapters.managed && eligible(state, it, anywhere) }
+            .filter { !it.seedOnly && !it.camp && it.mainArcDay == null && it.id !in content.chapters.managed && eligible(state, it, anywhere) }
             .sortedBy { it.id }
             .map { it to score(state, it) }
 

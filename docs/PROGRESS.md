@@ -1,7 +1,7 @@
 # İlerleme
 
-Şu an: Boş serbest günler: zaman atlama ve yeni üs olayları bitti; keşif günleri için karar kullanıcıda. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
-Son commit: 58c6808 zaman atlama (sonraki: yeni üs olayları)
+Şu an: Boş serbest günler: hikayesiz gün ölçütü ve saha kampı sahneleri bitti; bölge olayı sayısı kullanıcı onayında. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
+Son commit: 4c1c564 yeni üs olayları (sonraki: ölçüt ve saha kampı)
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
@@ -18,7 +18,9 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - [x] Antrenman / zaman atlama (`world/TimeSkip.kt`, `HubAction.Skip`, `events/96_zaman_atlama.yaml`, HubPanel
       diyaloğu, simülatör, `ZamanAtlamaTest`; DECISIONS #142)
 - [x] Yeni üs olayları (onaylı 23 + 12 takip düğümü; 6, 9, 12, 13, 14, 15. bölümler; TR/EN inceleme; DECISIONS #143)
-- [ ] Salt savaş günleri keşif görevinde geçiyor: keşif bölgesi olayları mı, simülatör keşif davranışı mı (kullanıcı kararı)
+- [x] Kullanıcı kararı: bölge olayları. Ölçüt "hikayesiz gün" oldu, simülatöre insan benzeri strateji eklendi, motora saha kampı
+      sahneleri (`kamp: true`) geldi; `SahaKampiTest` (DECISIONS #144)
+- [ ] Bölge başına olay ve kamp sahnesi sayısı kullanıcı onayını bekliyor (STORY_FLOW "Yeni ölçüt")
 
 ## Hikaye yapısı değişikliği — bölüm, üs ve görev  ✅ (2026-11-07)
 - [x] Adım 1: olay sırası kaydı (`:tools:simulator:akis`), teşhis `docs/STORY_FLOW.md`, sınıflandırma, plan `docs/CHAPTERS.md`

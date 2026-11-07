@@ -11,7 +11,8 @@ import java.io.File
  * Olay sırası kaydı (docs/STORY_FLOW.md teşhisi): N oynanışta her olay başlangıcını, bölge değişimini, savaşı ve kampı
  * neden ve bağlamıyla JSON satırı olarak yazar. Çözümleme `tools/qa/akis/cozumle.py`.
  *
- * Kullanım: `./gradlew :tools:simulator:akis --args="20"` → `tools/qa/akis/iz/<n>.jsonl`
+ * Kullanım: `./gradlew :tools:simulator:akis --args="20"` → `tools/qa/akis/iz/<n>.jsonl`; üçüncü argüman `insan` →
+ * insan benzeri gün akışı (Profile.human).
  */
 fun main(args: Array<String>) {
     val runs = args.getOrNull(0)?.toIntOrNull() ?: 20
@@ -20,8 +21,9 @@ fun main(args: Array<String>) {
     val content = ContentLoader.load(DirectoryContentSource(File("content")))
     val sim = Simulator(content)
     val director = Director(content)
+    val human = args.getOrNull(2) == "insan"
     for (i in 0 until runs) {
-        val profile = Simulator.populationProfile(i)
+        val profile = Simulator.populationProfile(i).copy(human = human)
         val lines = mutableListOf<String>()
         var lastEvent: String? = null
         var lastEventTension = 0
@@ -33,16 +35,21 @@ fun main(args: Array<String>) {
         fun arr(l: Collection<String>) = l.joinToString(",", "[", "]") { q(it) }
         // Gün özeti (serbest gün ölçümü): o gün başlayan olay (varış ve bölüm sahneleri hariç), biten savaş, üste görülen
         // en büyük fırsat eli, görevde geçip geçmediği.
-        var dEvents = 0; var dFights = 0; var dHand = 0; var dMission = false; var dPhase = ""; var dChapter = 0
+        // Hikaye anı: o gün olay ya da Sistem isteminde bir seçim yapıldı (varış ve zaman atlama özeti hariç). Savaş, Ezme ile
+        // biten tek satırlık savaş da, hikaye anı sayılmaz.
+        var dEvents = 0; var dFights = 0; var dHand = 0; var dMission = false; var dPhase = ""; var dChapter = 0; var dStory = false
         fun flushDay(day: Int, skipped: Boolean = false) {
-            lines += """{"t":"gunozet","gun":$day,"bolum":$dChapter,"evre":${q(dPhase)},"olay":$dEvents,"savas":$dFights,"el":$dHand,"gorevde":$dMission,"atla":$skipped}"""
-            dEvents = 0; dFights = 0; dHand = 0; dMission = false
+            lines += """{"t":"gunozet","gun":$day,"bolum":$dChapter,"evre":${q(dPhase)},"olay":$dEvents,"savas":$dFights,"el":$dHand,"gorevde":$dMission,"atla":$skipped,"hikaye":$dStory}"""
+            dEvents = 0; dFights = 0; dHand = 0; dMission = false; dStory = false
         }
         val r = sim.play(seed = 10_000L + i, profile = profile, onStep = { before, after, action ->
             if (after.sceneId == WorldState.HUB && after.mission == null) dHand = maxOf(dHand, after.dayState.hand.size)
             if (after.mission != null) dMission = true
             dPhase = before.chapterPhase.key; dChapter = before.chapter
             if (before.combat != null && after.combat == null) dFights++
+            val ev = before.dayState.currentEvent
+            if (action.startsWith("secim:") && (ev == null || (!ev.startsWith(com.yukselis.engine.world.ChapterTable.ARRIVAL_PREFIX) && !ev.startsWith(com.yukselis.engine.world.TimeSkip.EVENT_PREFIX)))) dStory = true
+            if (action.startsWith("istem") || action.startsWith("sistem")) dStory = true
             val ce = after.dayState.currentEvent
             if (ce != null && ce != before.dayState.currentEvent && !ce.startsWith(com.yukselis.engine.world.ChapterTable.ARRIVAL_PREFIX) &&
                 ce !in content.chapters.managed && !ce.startsWith(com.yukselis.engine.world.TimeSkip.EVENT_PREFIX)) dEvents++

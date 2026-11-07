@@ -72,6 +72,11 @@ class WorldEngine(
         // Kuruyan tohumlar
         val withered = director.witheredSeeds(s)
         if (withered.isNotEmpty()) s = s.copy(seeds = s.seeds - withered.toSet())
+        // Saha kampı sahnesi bitti: ertelenen gece şimdi işlenir.
+        if (s.variable(CAMP_PENDING_VAR) > 0 && s.combat == null) {
+            val n = night(s.copy(vars = s.vars - CAMP_PENDING_VAR))
+            return Result(n.state, notices + n.notices)
+        }
         if (chapterMode) return chapterHub(s, notices)
         // Bölüm yapısı olmayan içerik (küçük test içerikleri): eski gün akışı.
         // Zorunlu olay: yuva harcamadan değil, bir yuva yerine gelir (kalmadıysa yine gelir: hikaye beklemez).
@@ -897,6 +902,23 @@ class WorldEngine(
     }
 
     private fun camp(state: WorldState): Result {
+        // Saha kampı (DECISIONS #144): keşif görevinde yanındaki bir yoldaşla bu bölgeye ait kısa bir sahne gece
+        // inmeden oynanır; sahne bitince gece işlenir (enterHub → CAMP_PENDING_VAR).
+        if (chapterMode && state.mission?.kind == MissionKind.EXPLORE && state.variable(CAMP_PENDING_VAR) == 0) {
+            val companions = effects.npc.companions(state).map { it.id }.toSet()
+            val scenes = director.campScenes(state, companions)
+            if (scenes.isNotEmpty()) {
+                val rng = Rng(state.rngState)
+                val pick = scenes[rng.nextInt(scenes.size)]
+                val s = state.copy(rngState = rng.state, vars = state.vars + (CAMP_PENDING_VAR to 1))
+                return startEvent(s, pick.id, consumeSlot = false)
+            }
+        }
+        return night(state)
+    }
+
+    /** Gece: kamp dinlenmesi, Dikkat sönmesi, yeni gün. */
+    private fun night(state: WorldState): Result {
         val p = state.player
         var s = state.copy(player = p.copy(hp = (p.hp + p.maxHp / 2).coerceAtMost(p.maxHp), mp = p.maxMp))
         val notices = mutableListOf(Notice(NoticeKind.SYSTEM, texts.format("kamp")))
@@ -990,6 +1012,9 @@ class WorldEngine(
 
         /** Varış sahnesinin o gün oynandığı (bölge başına) değişken öneki. */
         const val ARRIVAL_DAY_PREFIX = "_varis_gunu_"
+
+        /** Saha kampı sahnesi oynanıyor; bitince gece işlenecek. */
+        const val CAMP_PENDING_VAR = "_kamp_sahnesi"
         const val OVERFLOW_VAR = "kapi_tasma_sayisi"
         const val GATES_CLOSED_VAR = "kapatilan_kapi"
         const val PENDING_GATE_VAR = "_bekleyen_kapi"

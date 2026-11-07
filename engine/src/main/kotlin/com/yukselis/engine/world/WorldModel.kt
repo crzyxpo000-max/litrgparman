@@ -32,6 +32,11 @@ data class EventDef(
     val important: Boolean = false,
     /** Yalnızca tohumla ya da eşikle gelir; havuzdan rastgele seçilmez. */
     val seedOnly: Boolean = false,
+    /**
+     * Saha kampı sahnesi (DECISIONS #144): yalnız keşif görevinde, o bölgede, günün sonundaki kamp anında gelir; `npc`
+     * listesindeki herkes yoldaş olmalı. Havuzdan, tohumdan ya da üste gelmez.
+     */
+    val camp: Boolean = false,
     val entry: String,
     /**
      * Konum (DECISIONS #130): `us` (üste gelir), bölge kimlikleri (yalnız o bölgeye giden görevde) ya da `*` (herhangi bir

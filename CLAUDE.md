@@ -98,6 +98,8 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
   `ziyaret_<bölge>` değişkeni ilk/sonraki ziyareti ayırır). Tohum etkisinde **`hatirlatma {tr,en}`** (gecikme ≥ 3 ise yaz):
   doğan olayın ilk paragrafı olur. Koşullar `bolum`, `bolum_min`, `bolum_max`, `gorevde`, `gorev_turu: operasyon|yan|kesif`.
   Erken girilebilen operasyonda kesin gün sayısı yazma. Bayrak öneki `bolum_` motorundur (`bolum_<n>_tasti`).
+  **Saha kampı sahnesi** (`kamp: true`, DECISIONS #144): `konum` bölge(ler), `npc` yoldaş(lar); keşif görevinde o bölgede
+  gün sonu Kamp'ında oynanır (havuz/tohum/üs değil). Ölçüt "hikayesiz gün": `tools/qa/akis/serbest.py`, `bolge_acik.py`.
 - Belirteç kipleri: EN `{yer:x|b}` cümle başında büyük harf, `{fraksiyon:sessiz_ag|k}` "The"yi küçültür; EN'de "the
   {fraksiyon:siginak}" / "the {fraksiyon:lonca}". TR'de `names.yaml iyelik: true` olan bileşik ad n'li ek alır (Kule Dibi'ne).
 - Sınıflar: her eğilime 1 `temel`; `gizli` sınıfların `kosul` + `egilimler` (Yankı'nın önerisi) alanı; temel/gizli

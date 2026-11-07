@@ -70,6 +70,11 @@ data class Profile(
     /** Kararsızlık: seçimlerin bu oranı rastgele (gerçek oyuncu gürültüsü). */
     val noise: Double = 0.25,
     val ironman: Boolean = false,
+    /**
+     * İnsan benzeri gün akışı (yalnız ölçüm; denge nüfusu kullanmaz): üste önce kartlar, sonra keşif, antrenman,
+     * dinlenme ve zaman atlama dengeli. Görevdeki davranış ve görev süresi aynıdır (docs/STORY_FLOW.md).
+     */
+    val human: Boolean = false,
 )
 
 data class RunResult(
@@ -264,7 +269,7 @@ class Simulator(private val content: Content) {
                     runCatching { engine.combatAction(s, action, lang).state }.getOrElse { engine.combatAction(s, engine.autoCombatAction(s), lang).state }
                 }
                 s.sceneId == WorldState.HUB -> {
-                    val a = hubAction(s, rng, p, s.day - lastDeathDay < 4)
+                    val a = hubAction(s, rng, p, s.day - lastDeathDay < 4, profile.human)
                     actionName = "akis:" + a.toString().substringBefore('(').let { n -> if (a is HubAction.Card) "Card:${a.eventId}" else n }
                     engine.hubAction(s, a, lang).state
                 }
@@ -394,7 +399,7 @@ class Simulator(private val content: Content) {
      * Bölüm yapısı (DECISIONS #130): üste kart, antrenman, bir bölgeye keşif görevi ya da (son tarih yaklaşınca ya da
      * hazır hissedince) ana operasyon; görevde keşif, Kapı, Kule ve bir süre sonra üsse dönüş.
      */
-    private fun chapterAction(s: WorldState, hub: com.yukselis.engine.story.HubView, rng: Random, p: Profile?, cautious: Boolean): HubAction {
+    private fun chapterAction(s: WorldState, hub: com.yukselis.engine.story.HubView, rng: Random, p: Profile?, cautious: Boolean, human: Boolean = false): HubAction {
         val towerWish = p?.tower ?: 0.35
         val tower = content.tower
         if (hub.atBase) {
@@ -407,6 +412,7 @@ class Simulator(private val content: Content) {
             if (tower != null && s.hasFlag("kule_acik") && rng.nextDouble() < towerWish * 0.6) {
                 hub.travel.firstOrNull { it.id == tower.region }?.let { return HubAction.Travel(it.id) }
             }
+            if (human) return humanBase(hub, rng, p, cautious)
             if (hub.cards.isNotEmpty() && rng.nextDouble() < 0.6) {
                 return HubAction.Card(hub.cards.maxBy { cardScore(it.id, p) + rng.nextDouble() }.id)
             }
@@ -439,12 +445,27 @@ class Simulator(private val content: Content) {
 
     private fun pl(s: WorldState) = s.player
 
-    private fun hubAction(s: WorldState, rng: Random, p: Profile?, cautious: Boolean): HubAction {
+    /** İnsan benzeri üs: kartların çoğu oynanır; boş elde keşif, antrenman, dinlenme ve zaman atlama dengeli. */
+    private fun humanBase(hub: com.yukselis.engine.story.HubView, rng: Random, p: Profile?, cautious: Boolean): HubAction {
+        if (hub.cards.isNotEmpty() && rng.nextDouble() < 0.9) return HubAction.Card(hub.cards.maxBy { cardScore(it.id, p) + rng.nextDouble() }.id)
+        val r = rng.nextDouble()
+        hub.skip?.takeIf { r < 0.2 }?.let { sk ->
+            return HubAction.Skip(sk.foci[rng.nextInt(sk.foci.size)].focus, 1 + rng.nextInt(minOf(sk.maxDays, SKIP_MAX_DAYS)))
+        }
+        return when {
+            r < 0.4 -> HubAction.Train
+            r < 0.5 -> HubAction.Rest
+            !cautious && hub.travel.isNotEmpty() -> HubAction.Travel(hub.travel[rng.nextInt(hub.travel.size)].id)
+            else -> HubAction.Train
+        }
+    }
+
+    private fun hubAction(s: WorldState, rng: Random, p: Profile?, cautious: Boolean, human: Boolean = false): HubAction {
         val hub = engine.view(s, lang).hub!!
         if (hub.mustCamp) return HubAction.Camp
         val pl = s.player
         if (pl.hp < pl.maxHp * 0.45) return HubAction.Rest
-        if (!hub.canExplore || !hub.atBase) return chapterAction(s, hub, rng, p, cautious)
+        if (!hub.canExplore || !hub.atBase) return chapterAction(s, hub, rng, p, cautious, human)
         val towerWish = p?.tower ?: 0.35
         hub.tower?.takeIf { !cautious }?.let { t ->
             if (pl.level >= t.level && rng.nextDouble() < towerWish) return HubAction.ClimbTower

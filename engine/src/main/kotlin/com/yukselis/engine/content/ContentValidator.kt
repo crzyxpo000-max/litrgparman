@@ -567,6 +567,14 @@ object ContentValidator {
                 ch.preparations.groupBy { it.id }.filterValues { it.size > 1 }.keys.forEach { problems += "$where: hazırlık '$it' iki kez" }
             }
             content.events.values.forEach { ev ->
+                // Saha kampı sahnesi (DECISIONS #144): bir bölgeye etiketli, yoldaşla, havuz dışı.
+                if (ev.camp) {
+                    if (ev.location.isEmpty() || ev.location.any { it == com.yukselis.engine.world.ChapterTable.BASE || it == com.yukselis.engine.world.ChapterTable.ANYWHERE }) {
+                        problems += "olay ${ev.id}: kamp sahnesinin konumu bölge(ler) olmalı (us ya da * değil)"
+                    }
+                    if (ev.npcs.isEmpty()) problems += "olay ${ev.id}: kamp sahnesinin npc listesi boş (yanındaki yoldaş)"
+                    if (ev.seedOnly || ev.mainArcDay != null) problems += "olay ${ev.id}: kamp sahnesi tohumla ya da ana yayla gelmez"
+                }
                 ev.location.filter { it !in validPlaces }.forEach { problems += "olay ${ev.id}: konum '$it' tanımsız (bölge, us ya da *)" }
                 if (ev.regions.isNotEmpty() && ev.location.isNotEmpty() && ev.location.none { it in ev.regions || it == com.yukselis.engine.world.ChapterTable.ANYWHERE }) {
                     problems += "olay ${ev.id}: konum ${ev.location} bolge ${ev.regions} ile çelişiyor"

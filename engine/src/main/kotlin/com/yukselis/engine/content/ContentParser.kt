@@ -346,6 +346,7 @@ object ContentParser {
                 card = ltext(o["kart"], "$id.kart"),
                 important = o.bool("onemli"),
                 seedOnly = o.bool("yalniz_tohum"),
+                camp = o.bool("kamp"),
                 entry = o.string("sahne") ?: own.firstOrNull()?.id ?: throw ContentFormatException("olay $id: 'sahne' eksik"),
                 location = o.strings("konum"),
             )

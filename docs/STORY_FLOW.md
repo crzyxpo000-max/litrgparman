@@ -272,3 +272,39 @@ günlerini doldurur ama keşif görevindeki savaş günlerine dokunamaz. Bu pay�
 olaylar gerekir (bölgede `kesif` olayları; keşif eylemi %50 olasılıkla bölgenin olayını çeker), ya da simülatörün keşif
 davranışı (görev süresi, keşifte savaş olasılığı) yeniden ele alınmalıdır. Karar kullanıcıda.
 
+### Yeni ölçüt: hikayesiz gün (DECISIONS #144)
+
+**Hikayesiz gün:** o gün hiçbir olayda ya da Sistem isteminde seçim yapılmamış. Varış sahnesi ve zaman atlama özeti
+sayılmaz. Savaş, Ezme ile biten tek satırlık savaş da, hikaye anı değildir. Hedef: hiçbir bölümde serbest günlerin
+%35'inden fazlası hikayesiz olmasın. "Salt savaş günü" tabloda kalır, ama artık hedef değil.
+
+**Simülatör doğrulaması:** denge nüfusunun gün akışı, el boşalınca üsten çoğunlukla ayrılıyor. Serbest günlerin %89'u
+görevde geçiyor. İnsan benzeri strateji (`Profile.human`, `:tools:simulator:akis --args="20 <klasör> insan"`) yalnız
+ölçüm içindir: üste kartların %90'ını oynar, boş elde %40 antrenman, %10 dinlenme, %20 zaman atlama, kalanında keşif.
+Görevdeki davranış ve görev süresi aynı kalır (kullanıcı kararı). Görevde geçen gün payı %83'e iniyor; fark küçük, çünkü
+görev bir kez başlayınca süresi aynı. İnsan benzeri stratejiyle (20 oynanış):
+
+| Bölüm | Serbest gün (ort.) | Havuzun tükendiği gün (açılıştan, medyan) | Tükenen oynanış | Salt savaş günü | Ne olay ne savaş | Atlanan gün | Hikayesiz gün |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | 10.7 | 12 | 1/20 | %11 | %5 | %7 | %12 |
+| 2 | 11.2 | 5 | 19/20 | %30 | %12 | %14 | %43 |
+| 3 | 3.0 | 0 | 18/20 | %37 | %18 | %13 | %35 |
+| 4 | 9.4 | 8 | 1/20 | %11 | %4 | %4 | %13 |
+| 5 | 18.8 | 17 | 17/20 | %30 | %13 | %8 | %42 |
+| 6 | 13.8 | 12 | 16/20 | %39 | %17 | %4 | %50 |
+| 7 | 24.9 | 8 | 19/20 | %16 | %36 | %29 | %73 |
+| 8 | 26.6 | 16 | 20/20 | %26 | %33 | %30 | %80 |
+| 9 | 30.1 | 6 | 20/20 | %52 | %19 | %8 | %71 |
+| 10 | 21.9 | 20 | 6/20 | %29 | %14 | %4 | %40 |
+| 11 | 19.6 | 19 | 17/20 | %29 | %29 | %20 | %70 |
+| 12 | 30.0 | 16 | 19/20 | %42 | %26 | %9 | %72 |
+| 13 | 31.6 | 4 | 19/20 | %47 | %23 | %8 | %72 |
+| 14 | 12.6 | 9 | 17/20 | %29 | %30 | %20 | %65 |
+| 15 | 25.1 | 2 | 19/20 | %33 | %31 | %27 | %85 |
+| 16 | 11.7 | 10 | 6/20 | %21 | %7 | %2 | %24 |
+| 17 | 7.5 | 3 | 19/20 | %26 | %18 | %2 | %28 |
+| 18 | 4.7 | 0 | 18/20 | %33 | %29 | %6 | %52 |
+
+Bölge bazında açık `python tools/qa/akis/bolge_acik.py <klasör>` ile alınır. Açığın %40–60'ı Kule Dibi'nde: Kule
+oradan tırmanılıyor ve her kat bir savaş günü. Hedefe inmek için oynanış başına yaklaşık 85 hikaye günü daha gerekiyor.
+
