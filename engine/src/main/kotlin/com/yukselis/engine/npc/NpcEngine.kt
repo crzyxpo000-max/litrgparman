@@ -1,5 +1,6 @@
 package com.yukselis.engine.npc
 
+import com.yukselis.engine.story.NoticeMoment
 import com.yukselis.engine.core.MoralAxis
 import com.yukselis.engine.core.Morality
 import com.yukselis.engine.core.Rng
@@ -659,7 +660,7 @@ class NpcEngine(private val content: Content, private val effects: EffectApplier
             }
         }
         if (announce && before > 0 && rank < before && rank <= TOP_ANNOUNCE) {
-            notices += Notice(NoticeKind.SYSTEM, texts.format("sira_yukseldi", "n" to rank))
+            notices += Notice(NoticeKind.SYSTEM, texts.format("sira_yukseldi", "n" to rank), moment = NoticeMoment.RANK_UP, from = before, to = rank)
         }
         // Fraksiyon tepkileri yalnızca duyurulan değişimlerde (kurulumda ilk sıra "tırmanış" sayılmaz).
         if (announce) {

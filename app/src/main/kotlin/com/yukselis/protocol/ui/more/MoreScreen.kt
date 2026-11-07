@@ -11,9 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
+import com.yukselis.protocol.ui.components.Button
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
+import com.yukselis.protocol.ui.components.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -27,6 +27,7 @@ import com.yukselis.engine.i18n.Lang
 import com.yukselis.engine.save.SaveManager
 import com.yukselis.engine.save.SlotInfo
 import com.yukselis.protocol.R
+import com.yukselis.protocol.ui.theme.Game
 import com.yukselis.protocol.data.Settings
 import com.yukselis.protocol.data.ThemeMode
 import com.yukselis.protocol.ui.components.SectionTitle
@@ -190,6 +191,7 @@ fun MoreScreen(
                         onSettings { it.copy(combatNumbers = on) }
                     }
                     NotificationToggle(settings.notifications, notificationDenied, onSettings, onNotificationPermission)
+                    LicensesRow()
                 }
                 MorePage.HELP -> HelpPage(onResetTips = { onSettings { it.copy(seenTips = emptySet()) } })
             }
@@ -276,7 +278,7 @@ private fun MapSection(regions: List<RegionView>) {
                     color = if (r.current) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
                 )
                 Text(stringResource(R.string.map_line, r.danger, r.control, r.gates.size), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                r.gates.forEach { g -> Text(androidx.compose.ui.res.pluralStringResource(R.plurals.hub_gate, g.daysLeft, g.grade, g.enemies, g.daysLeft), style = GameType.system, color = Color(0xFFFFA726)) }
+                r.gates.forEach { g -> Text(androidx.compose.ui.res.pluralStringResource(R.plurals.hub_gate, g.daysLeft, g.grade, g.enemies, g.daysLeft), style = GameType.system, color = Game.colors.amber) }
             }
         }
     }
@@ -304,8 +306,8 @@ private fun JournalSection(journal: JournalView) {
     journal.quests.forEach { q ->
         val color = when (q.status) {
             QuestStatus.ACTIVE -> MaterialTheme.colorScheme.onSurface
-            QuestStatus.DONE -> Color(0xFF66BB6A)
-            QuestStatus.FAILED -> Color(0xFFEF5350)
+            QuestStatus.DONE -> Game.colors.success
+            QuestStatus.FAILED -> Game.colors.danger
         }
         Column(modifier = Modifier.padding(vertical = 3.dp)) {
             Text(q.name, style = GameType.systemTitle, color = color)
@@ -321,7 +323,7 @@ private fun JournalSection(journal: JournalView) {
         Text(stringResource(R.string.intel_log), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
         journal.knowledge.forEach { k ->
             Column(modifier = Modifier.padding(vertical = 3.dp)) {
-                Text(k.name, style = GameType.systemTitle, color = Color(0xFF26A69A))
+                Text(k.name, style = GameType.systemTitle, color = Game.colors.system)
                 Text(k.description, style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
@@ -338,14 +340,14 @@ private fun DailyPanel(daily: DailyView, onTrain: () -> Unit, inDayLoop: Boolean
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
             Text(stringResource(R.string.daily_quest), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            Text(daily.title, style = GameType.systemTitle, color = Color(0xFF66BB6A))
-            Text(stringResource(R.string.daily_reward), style = GameType.system, color = Color(0xFFFFD54F))
+            Text(daily.title, style = GameType.systemTitle, color = Game.colors.success)
+            Text(stringResource(R.string.daily_reward), style = GameType.system, color = Game.colors.amber)
             Text(daily.description, style = GameType.system)
-            StatBar(stringResource(R.string.daily_steps), daily.progress.toLong(), daily.steps.toLong(), Color(0xFF66BB6A), Modifier.padding(top = 6.dp))
+            StatBar(stringResource(R.string.daily_steps), daily.progress.toLong(), daily.steps.toLong(), Game.colors.success, Modifier.padding(top = 6.dp))
             Text(androidx.compose.ui.res.pluralStringResource(R.plurals.daily_streak, daily.streak, daily.streak), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Text(stringResource(R.string.daily_only_you), style = GameType.system, color = EchoColor)
             when {
-                daily.completed -> Text(stringResource(R.string.daily_done), style = GameType.systemTitle, color = Color(0xFF66BB6A))
+                daily.completed -> Text(stringResource(R.string.daily_done), style = GameType.systemTitle, color = Game.colors.success)
                 daily.trainable && !inDayLoop -> Button(onClick = onTrain, modifier = Modifier.padding(top = 6.dp)) { Text(stringResource(R.string.daily_train)) }
                 daily.trainable -> Text(stringResource(R.string.daily_train_hub), style = GameType.system, color = MaterialTheme.colorScheme.outline)
                 else -> Text(stringResource(R.string.daily_in_story), style = GameType.system, color = MaterialTheme.colorScheme.outline)
@@ -418,7 +420,6 @@ fun ThemePicker(current: ThemeMode, onPick: (ThemeMode) -> Unit, modifier: Modif
                 ThemeMode.SYSTEM to R.string.theme_system,
                 ThemeMode.LIGHT to R.string.theme_light,
                 ThemeMode.DARK to R.string.theme_dark,
-                ThemeMode.AMOLED to R.string.theme_amoled,
             ).forEach { (mode, label) ->
                 val padding = PaddingValues(horizontal = 4.dp, vertical = 8.dp)
                 if (mode == current) {

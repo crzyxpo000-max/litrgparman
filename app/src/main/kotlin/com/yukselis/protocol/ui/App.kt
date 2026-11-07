@@ -1,5 +1,9 @@
 package com.yukselis.protocol.ui
 
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.HorizontalDivider
 import android.content.res.Configuration
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
@@ -49,6 +53,7 @@ import com.yukselis.engine.i18n.Lang
 import com.yukselis.engine.story.SceneView
 import com.yukselis.engine.story.StatusView
 import com.yukselis.protocol.R
+import com.yukselis.protocol.ui.theme.Game
 import com.yukselis.protocol.data.ThemeMode
 import com.yukselis.protocol.ui.components.CenteredNote
 import com.yukselis.protocol.ui.components.StatBar
@@ -97,7 +102,7 @@ fun App(viewModel: GameViewModel) {
         val dark = when (ui.settings.theme) {
             ThemeMode.SYSTEM -> isSystemInDarkTheme()
             ThemeMode.LIGHT -> false
-            ThemeMode.DARK, ThemeMode.AMOLED -> true
+            ThemeMode.DARK -> true
         }
         val density = LocalDensity.current
         val tips = Tips(ui.settings.seenTips) { id -> viewModel.updateSettings { it.copy(seenTips = it.seenTips + id) } }
@@ -108,13 +113,14 @@ fun App(viewModel: GameViewModel) {
             LocalAppDensity provides scaled,
             LocalTips provides tips,
         ) {
-        YukselisTheme(dark = dark, amoled = ui.settings.theme == ThemeMode.AMOLED) {
+        YukselisTheme(dark = dark) {
             Surface(color = MaterialTheme.colorScheme.background, modifier = Modifier.fillMaxSize()) {
                 val scene = ui.scene
                 val status = ui.status
                 if (ui.inGame && scene != null && status != null) {
                     GameScaffold(ui, scene, status, viewModel)
                 } else {
+                    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
                     TitleScreen(
                         lang = ui.lang,
                         autosave = ui.autosave,
@@ -126,6 +132,7 @@ fun App(viewModel: GameViewModel) {
                         onTheme = { mode -> viewModel.updateSettings { it.copy(theme = mode) } },
                         ready = ui.engineReady,
                     )
+                    }
                 }
             }
         }
@@ -169,7 +176,7 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
             // Sekme çubuğu gezinmedir, okuma değil: oyun içi yazı boyutu onu büyütmez (etiketler kesilmesin).
             val d = LocalDensity.current
             CompositionLocalProvider(LocalDensity provides Density(d.density, d.fontScale / ui.settings.textSize.scale)) {
-            NavigationBar {
+            NavigationBar(containerColor = Game.colors.panel, tonalElevation = 0.dp) {
                 tabs.forEach { t ->
                     NavigationBarItem(
                         selected = active == t,
@@ -178,6 +185,13 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
                             viewModel.clearActionNotices()
                         },
                         icon = { Icon(t.icon, contentDescription = null) },
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = Game.colors.system,
+                            selectedTextColor = Game.colors.system,
+                            indicatorColor = Game.colors.system.copy(alpha = 0.14f),
+                            unselectedIconColor = Game.colors.muted,
+                            unselectedTextColor = Game.colors.muted,
+                        ),
                         label = { Text(stringResource(t.label), maxLines = 1, overflow = TextOverflow.Ellipsis) },
                     )
                 }
@@ -268,12 +282,12 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
 /** Üst bilgi: gün, yer ve HP/MP çubukları. */
 @Composable
 private fun Header(scene: SceneView, status: StatusView) {
-    Surface(color = MaterialTheme.colorScheme.surface, tonalElevation = 2.dp) {
+    Surface(color = MaterialTheme.colorScheme.background) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .statusBarsPadding()
-                .padding(horizontal = 16.dp, vertical = 8.dp),
+                .padding(start = 16.dp, end = 16.dp, top = 8.dp),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
@@ -286,15 +300,17 @@ private fun Header(scene: SceneView, status: StatusView) {
                 )
                 Text(
                     text = stringResource(R.string.level_grade_short, status.level, status.grade.name),
-                    style = GameType.system,
+                    style = GameType.systemTitle,
                     color = MaterialTheme.colorScheme.primary,
                 )
             }
             // Can ve mana yan yana: hikayeye bir satır daha kalır.
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.padding(top = 6.dp)) {
-                StatBar(stringResource(R.string.hp), status.hp.toLong(), status.maxHp.toLong(), Color(0xFFEF5350), Modifier.weight(1f))
-                StatBar(stringResource(R.string.mp), status.mp.toLong(), status.maxMp.toLong(), Color(0xFF42A5F5), Modifier.weight(1f))
+                StatBar(stringResource(R.string.hp), status.hp.toLong(), status.maxHp.toLong(), Game.colors.danger, Modifier.weight(1f))
+                StatBar(stringResource(R.string.mp), status.mp.toLong(), status.maxMp.toLong(), Game.colors.system, Modifier.weight(1f))
             }
+            Spacer(Modifier.height(8.dp))
+            HorizontalDivider(color = Game.colors.line)
         }
     }
 }

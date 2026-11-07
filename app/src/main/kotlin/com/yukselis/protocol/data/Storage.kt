@@ -42,8 +42,8 @@ class FileSaveStorage(private val dir: File) : SaveStorage {
     }
 }
 
-/** Tema seçimi; SYSTEM cihaz ayarını izler, AMOLED saf siyah koyu temadır. */
-enum class ThemeMode { SYSTEM, LIGHT, DARK, AMOLED }
+/** Tema seçimi; SYSTEM cihaz ayarını izler. Koyu tema zemini saf siyahtır (AMOLED ayrı bir seçenek değil). */
+enum class ThemeMode { SYSTEM, LIGHT, DARK }
 
 data class Settings(
     val typewriter: Boolean = true,
@@ -77,7 +77,7 @@ class SettingsStore(context: Context) {
         typewriter = prefs.getBoolean(KEY_TYPEWRITER, true),
         haptics = prefs.getBoolean(KEY_HAPTICS, true),
         theme = prefs.getString(KEY_THEME, null)
-            ?.let { name -> ThemeMode.entries.firstOrNull { it.name == name } } ?: ThemeMode.SYSTEM,
+            ?.let { name -> if (name == LEGACY_AMOLED) ThemeMode.DARK else ThemeMode.entries.firstOrNull { it.name == name } } ?: ThemeMode.SYSTEM,
         notifications = prefs.getBoolean(KEY_NOTIFICATIONS, false),
         textSize = prefs.getString(KEY_TEXT_SIZE, null)
             ?.let { name -> TextSize.entries.firstOrNull { it.name == name } } ?: TextSize.MEDIUM,
@@ -157,6 +157,9 @@ class SettingsStore(context: Context) {
         const val KEY_HAPTICS = "haptics"
         const val LEGACY_NARRATOR = "narrator"
         const val KEY_THEME = "theme"
+
+        /** Eski ayrı AMOLED seçeneği: artık koyu temanın kendisi. */
+        const val LEGACY_AMOLED = "AMOLED"
         const val KEY_NOTIFICATIONS = "notifications"
         const val KEY_TEXT_SIZE = "text_size"
         const val KEY_COMBAT_NUMBERS = "combat_numbers"

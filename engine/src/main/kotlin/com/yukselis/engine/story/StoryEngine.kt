@@ -984,6 +984,9 @@ class StoryEngine(val content: Content) {
         title = text(notice.title[lang], state, lang),
         lines = notice.lines.map { text(it[lang], state, lang) },
         rarity = notice.rarity,
+        moment = notice.moment,
+        from = notice.from,
+        to = notice.to,
     )
 
     private fun placeName(placeId: String?, lang: Lang): String? =

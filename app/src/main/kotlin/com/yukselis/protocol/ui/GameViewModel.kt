@@ -240,6 +240,12 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         _ui.update { it.copy(actionNotices = emptyList()) }
     }
 
+    /** Yalnız hata ayıklama: örnek büyük an (MainActivity `demo_moment`). */
+    fun demoMoment(kind: String) {
+        val list = com.yukselis.protocol.ui.system.MomentDemo.notices(kind, _ui.value.lang)
+        if (list.isNotEmpty()) _ui.update { it.copy(celebration = list) }
+    }
+
     fun dismissCelebration() {
         _ui.update { it.copy(celebration = emptyList()) }
     }
@@ -366,12 +372,15 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         _ui.update { it.copy(actionNotices = emptyList(), celebration = celebrations(notices)) }
     }
 
-    /** Büyük an (seviye, evrim, sınıf) varsa, o anın yetenek/unvan/Yankı bildirimleri de aynı karta girer. */
+    /**
+     * Büyük an (seviye, evrim, sınıf, Benzersiz yetenek, sıralama, sınır kırılması) varsa, o anın yetenek/unvan/Yankı
+     * bildirimleri de aynı karta girer.
+     */
     private fun celebrations(notices: List<NoticeView>): List<NoticeView> {
-        val big = setOf(NoticeKind.LEVEL_UP, NoticeKind.EVOLUTION, NoticeKind.CLASS)
-        if (notices.none { it.kind in big }) return emptyList()
-        val shown = big + setOf(NoticeKind.SKILL, NoticeKind.TITLE, NoticeKind.ECHO)
-        return notices.filter { it.kind in shown }.sortedBy { if (it.kind in big) 0 else 1 }
+        val big = notices.filter { com.yukselis.protocol.ui.system.momentOf(it) != null }
+        if (big.isEmpty()) return emptyList()
+        val shown = setOf(NoticeKind.SKILL, NoticeKind.TITLE, NoticeKind.ECHO)
+        return big + notices.filter { it !in big && it.kind in shown }
     }
 
     private fun render(state: WorldState, notices: List<NoticeView>, advanceTurn: Boolean) {

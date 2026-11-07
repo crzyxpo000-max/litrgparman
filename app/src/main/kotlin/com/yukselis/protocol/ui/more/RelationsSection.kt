@@ -23,7 +23,7 @@ import com.yukselis.engine.story.NpcView
 import com.yukselis.engine.story.RankingView
 import com.yukselis.engine.story.RelationsView
 import com.yukselis.protocol.R
-import com.yukselis.protocol.ui.theme.CompanionColor
+import com.yukselis.protocol.ui.theme.Game
 import com.yukselis.protocol.ui.theme.EchoColor
 import com.yukselis.protocol.ui.theme.GameType
 
@@ -49,7 +49,7 @@ private fun NpcCard(n: NpcView) {
         Column(modifier = Modifier.padding(10.dp)) {
             val nameColor = when {
                 !n.alive -> MaterialTheme.colorScheme.outline
-                n.companion -> CompanionColor
+                n.companion -> Game.colors.companion
                 else -> MaterialTheme.colorScheme.onSurface
             }
             Text("${n.fullName} · ${stringResource(R.string.npc_level, n.level, n.gradeName)}", style = GameType.systemTitle, color = nameColor)
@@ -63,7 +63,7 @@ private fun NpcCard(n: NpcView) {
             if (open) {
                 Text(n.description, style = GameType.system, modifier = Modifier.padding(top = 6.dp))
                 n.goal?.let { Text(stringResource(R.string.npc_goal, it), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant) }
-                if (n.traits.isNotEmpty()) Text(stringResource(R.string.npc_traits, n.traits.joinToString(", ")), style = GameType.system, color = Color(0xFFAB47BC))
+                if (n.traits.isNotEmpty()) Text(stringResource(R.string.npc_traits, n.traits.joinToString(", ")), style = GameType.system, color = Game.colors.violet)
                 if (n.memories.isNotEmpty()) {
                     Text(stringResource(R.string.npc_memories), style = GameType.system, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 4.dp))
                     n.memories.forEach { Text("· $it", style = GameType.system) }
@@ -76,8 +76,8 @@ private fun NpcCard(n: NpcView) {
 @Composable
 private fun Axis(label: String, value: Int, modifier: Modifier) {
     val color = when {
-        value >= 40 -> Color(0xFF66BB6A)
-        value <= -40 -> Color(0xFFEF5350)
+        value >= 40 -> Game.colors.success
+        value <= -40 -> Game.colors.danger
         else -> MaterialTheme.colorScheme.onSurface
     }
     Column(modifier = modifier) {
@@ -94,7 +94,7 @@ fun RankingSection(view: RankingView) {
     view.rows.forEach { r ->
         val color = when {
             r.you -> MaterialTheme.colorScheme.primary
-            r.npc -> CompanionColor
+            r.npc -> Game.colors.companion
             else -> MaterialTheme.colorScheme.onSurface
         }
         Row(modifier = Modifier.fillMaxWidth().padding(vertical = 1.dp)) {

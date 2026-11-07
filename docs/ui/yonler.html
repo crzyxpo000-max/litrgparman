@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arayüz yönleri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600&family=Literata:opsz,wght@7..72,400;7..72,500&family=JetBrains+Mono:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,400&family=Martian+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --board:#E9E7E2; --ink:#1F1E1B; --muted:#5E5B54; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--board); color:var(--ink); font-family:Inter, system-ui, sans-serif; }
+  main { max-width:1120px; margin:0 auto; padding:32px 16px 56px; }
+  section { display:grid; grid-template-columns:260px 1fr; gap:28px; padding:28px 0; border-top:1px solid #CFCBC2; }
+  section:first-of-type { border-top:0; }
+  .about h2 { font-size:22px; font-weight:500; margin:0 0 6px; }
+  .about p { font-size:14px; line-height:1.55; color:var(--muted); margin:0 0 14px; max-width:34ch; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+  .chip { width:34px; height:34px; border-radius:6px; border:1px solid rgba(0,0,0,.12); }
+  .type { font-size:13px; line-height:1.6; color:var(--muted); }
+  .type b { color:var(--ink); font-weight:500; }
+  .phones { display:flex; gap:22px; flex-wrap:wrap; }
+  .phone { width:300px; border-radius:30px; padding:9px; background:#26252A; }
+  .screen { height:620px; border-radius:22px; overflow:hidden; position:relative; display:flex; flex-direction:column; }
+  .cap { font-size:12px; color:var(--muted); text-align:center; margin-top:8px; }
+  @media (max-width:760px){ section{ grid-template-columns:1fr; } .phone{ width:100%; max-width:320px; } }
+
+  /* ---------- A · Holografik ---------- */
+  .a { background:#060A12; color:#DCE6F2; }
+  .a .bar { font-family:'Chakra Petch'; font-weight:500; font-size:12px; padding:14px 16px 10px; display:flex; justify-content:space-between; color:#8BE9FF; border-bottom:1px solid #16263B; }
+  .a .bar span:last-child { color:#FFB547; }
+  .a .body { padding:16px; display:flex; flex-direction:column; gap:14px; flex:1; }
+  .a .narr { font-family:Literata; font-size:15px; line-height:1.65; margin:0; }
+  .a .win { position:relative; background:#0D1626; padding:12px 13px 13px; clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px); }
+  .a .win::before { content:""; position:absolute; inset:0; padding:1px; background:#3FD3FF; clip-path:inherit; -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; }
+  .a .win::after { content:""; position:absolute; inset:0; background:repeating-linear-gradient(0deg,rgba(139,233,255,.045) 0 1px,transparent 1px 3px); pointer-events:none; }
+  .a .wt { font-family:'Chakra Petch'; font-weight:600; font-size:12px; letter-spacing:.14em; color:#8BE9FF; }
+  .a .wb { font-family:'JetBrains Mono'; font-size:12px; line-height:1.6; margin-top:6px; color:#C6D4E4; }
+  .a .wb em { font-style:normal; color:#FFB547; }
+  .a .echo { font-family:'JetBrains Mono'; font-size:12.5px; line-height:1.6; color:#FF3DCB; text-shadow:-1px 0 rgba(255,61,203,.0), 1.5px 0 #2C6BFF55; }
+  .a .dock { margin-top:auto; display:flex; flex-direction:column; gap:8px; }
+  .a .btn { font-family:Literata; font-size:14px; padding:11px 12px; border:1px solid #1F3550; color:#DCE6F2; background:#0A1220; }
+  /* A anı */
+  .a.moment { justify-content:center; align-items:center; background:#060A12; }
+  .a .tear { position:absolute; left:0; right:0; height:3px; background:#FF3DCB; opacity:.7; }
+  .a .big { width:252px; text-align:center; padding:22px 14px; }
+  .a .lv { font-family:'Chakra Petch'; font-weight:600; font-size:64px; line-height:1; color:#fff; }
+  .a .lvs { font-family:'Chakra Petch'; font-weight:500; font-size:16px; color:#6F8299; text-decoration:line-through; text-decoration-color:#FF3DCB; }
+  .a .err { font-family:'JetBrains Mono'; font-size:12px; color:#FFB547; margin:12px 0 4px; }
+
+  /* ---------- B · Kodeks ---------- */
+  .b { background:#1C1210; color:#EADFC8; }
+  .b .bar { font-family:Cinzel; font-weight:500; font-size:12.5px; padding:16px 18px 12px; display:flex; justify-content:space-between; color:#C9A04E; border-bottom:1px solid #3B2A22; }
+  .b .bar span:last-child { font-family:'EB Garamond'; font-style:italic; font-size:14px; color:#D9907F; }
+  .b .body { padding:18px; display:flex; flex-direction:column; gap:14px; flex:1; }
+  .b .narr { font-family:'EB Garamond'; font-size:17.5px; line-height:1.55; margin:0; }
+  .b .narr::first-letter { font-family:Cinzel; font-size:58px; float:left; line-height:.78; padding:6px 7px 0 0; color:#C9A04E; }
+  .b .plate { border:1px solid #C9A04E; outline:1px solid #C9A04E; outline-offset:3px; margin:4px; padding:11px 12px; background:#24171383; }
+  .b .pt { font-family:Cinzel; font-size:12px; color:#C9A04E; letter-spacing:.06em; }
+  .b .pb { font-family:'EB Garamond'; font-variant:small-caps; font-size:16px; line-height:1.45; color:#A9C1D3; margin-top:4px; letter-spacing:.02em; }
+  .b .note { font-family:'EB Garamond'; font-style:italic; font-size:16px; color:#B79AE0; margin-left:28px; transform:rotate(-1.2deg); border-left:1px solid #5B4778; padding-left:10px; }
+  .b .dock { margin-top:auto; display:flex; flex-direction:column; gap:8px; }
+  .b .btn { font-family:'EB Garamond'; font-size:16px; padding:10px 12px; border-bottom:1px solid #4A3528; color:#EADFC8; }
+  .b .btn::before { content:"❧ "; color:#C9A04E; }
+  /* B anı */
+  .b.moment { justify-content:center; align-items:center; text-align:center; }
+  .b .seal { width:128px; height:128px; border-radius:50%; background:#8E2420; margin:0 auto; display:flex; align-items:center; justify-content:center; box-shadow:inset 0 0 0 6px #7A1D1A, inset 0 0 0 8px #B4473F; position:relative; }
+  .b .seal span { font-family:Cinzel; font-weight:600; font-size:46px; color:#F2D9A2; }
+  .b .crack { position:absolute; width:2px; height:150px; background:#1C1210; transform:rotate(24deg); }
+  .b .mt { font-family:Cinzel; font-size:15px; color:#C9A04E; margin-top:22px; }
+  .b .ms { font-family:'EB Garamond'; font-size:17px; line-height:1.5; margin:8px 26px 0; }
+  .b .burn { font-family:'EB Garamond'; font-variant:small-caps; color:#A9C1D3; text-decoration:line-through; text-decoration-color:#C9603A; }
+
+  /* ---------- C · Kırık Terminal ---------- */
+  .c { background:#0D1511; color:#E6E3D6; }
+  .c .bar { font-family:'Martian Mono'; font-size:11px; padding:14px 16px 10px; display:flex; justify-content:space-between; color:#FFB000; border-bottom:1px dashed #2B3A31; }
+  .c .body { padding:16px; display:flex; flex-direction:column; gap:14px; flex:1; }
+  .c .narr { font-family:'Source Serif 4'; font-size:15.5px; line-height:1.65; margin:0; }
+  .c .blk { border-left:2px solid #FFB000; padding:2px 0 2px 10px; font-family:'Martian Mono'; font-size:11px; line-height:1.7; }
+  .c .blk .h { color:#FFB000; }
+  .c .blk .d { color:#8E9A90; }
+  .c .blk .r { color:#FF6B5B; }
+  .c .inv { font-family:'Martian Mono'; font-size:11.5px; line-height:1.6; background:#E6E3D6; color:#0D1511; padding:4px 7px; box-shadow:3px 0 0 #FF4FD8; align-self:flex-start; }
+  .c .dock { margin-top:auto; display:flex; flex-direction:column; gap:6px; font-family:'Martian Mono'; font-size:11.5px; }
+  .c .btn { padding:9px 4px; color:#E6E3D6; }
+  .c .btn b { color:#FFB000; font-weight:500; }
+  /* C anı */
+  .c.moment { padding:22px 18px; font-family:'Martian Mono'; font-size:11px; line-height:1.75; }
+  .c .junk { color:#3E5446; word-break:break-all; }
+  .c .ok { color:#7BD88F; }
+  .c .no { color:#FF6B5B; }
+  .c .huge { font-size:56px; line-height:1.05; color:#FFB000; margin:10px 0 2px; font-weight:500; }
+  .c .clean { margin-top:auto; background:#E6E3D6; color:#0D1511; padding:10px; font-size:12px; }
+</style>
+</head>
+<body>
+<main>
+
+<section>
+  <div class="about">
+    <h2>A · Soğuk holografik arayüz</h2>
+    <p>Oyuncu Sistem'in penceresinin içinde. Kesik köşeli cam paneller, tek bir buz mavisi. Yankı bu düzene sızan tek yanlış renk.</p>
+    <div class="chips">
+      <div class="chip" style="background:#060A12"></div><div class="chip" style="background:#0D1626"></div>
+      <div class="chip" style="background:#8BE9FF"></div><div class="chip" style="background:#FFB547"></div><div class="chip" style="background:#FF3DCB"></div>
+    </div>
+    <div class="type"><b>Chakra Petch</b> başlık ve sayı<br><b>Literata</b> anlatı<br><b>JetBrains Mono</b> Sistem metni</div>
+  </div>
+  <div class="phones">
+    <div><div class="phone"><div class="screen a">
+      <div class="bar"><span>Bölüm 9 · Gemi inişi</span><span>6 gün</span></div>
+      <div class="body">
+        <p class="narr">Liman sustu. Martılar bile. Gökyüzündeki gölge bir bulut değil; kenarları fazla düzgün, fazla sabırlı.</p>
+        <div class="win"><div class="wt">[ SİSTEM ] ANALİZ</div>
+          <div class="wb">Hedef: Kadim gemisi<br>Kademe: <em>S?</em><br>Tehdit: ölçüm aralığı dışında</div></div>
+        <div class="echo">bu gemi seni tanıyor. ben de onu tanıyorum.</div>
+        <div class="dock"><div class="btn">İskeleyi boşalt</div><div class="btn">Gemiye bak, gözünü kaçırma</div></div>
+      </div>
+    </div></div><div class="cap">Hikaye ve Sistem kartı</div></div>
+    <div><div class="phone"><div class="screen a moment">
+      <div class="tear" style="top:31%"></div><div class="tear" style="top:63%;height:1px"></div>
+      <div class="win big"><div class="wt">[ SİSTEM ] SEVİYE</div>
+        <div class="err">HATA: görünen değer gerçek değeri gizliyor</div>
+        <div class="lvs">Seviye 31</div>
+        <div class="lv">58</div>
+        <div class="wb" style="margin-top:10px">Yüzdelik: ilk %0,001<br>Gizlenen fark: 27 seviye</div></div>
+    </div></div><div class="cap">Sınır kırılması: gerçek seviye açığa çıkar</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="about">
+    <h2>B · Mühürlü kodeks</h2>
+    <p>Sistem insanlıktan eski bir kitap. Oyuncu her seçimle ona bir satır ekler; Sistem gümüş, yabancı bir yazıyla, Yankı kenar notu olarak konuşur.</p>
+    <div class="chips">
+      <div class="chip" style="background:#1C1210"></div><div class="chip" style="background:#EADFC8"></div>
+      <div class="chip" style="background:#C9A04E"></div><div class="chip" style="background:#8E2420"></div><div class="chip" style="background:#A9C1D3"></div><div class="chip" style="background:#B79AE0"></div>
+    </div>
+    <div class="type"><b>EB Garamond</b> anlatı, Sistem küçük harf düzeninde<br><b>Cinzel</b> yalnız bölüm başlığı ve mühür</div>
+  </div>
+  <div class="phones">
+    <div><div class="phone"><div class="screen b">
+      <div class="bar"><span>Bölüm IX</span><span>inişe altı gün</span></div>
+      <div class="body">
+        <p class="narr">Liman sustu. Martılar bile. Gökyüzündeki gölge bir bulut değil; kenarları fazla düzgün, fazla sabırlı.</p>
+        <div class="plate"><div class="pt">Kodeks şerh düşer</div>
+          <div class="pb">Kadim gemisi. Kademesi yazılamadı. Tehdit, sayfanın kenarından taşıyor.</div></div>
+        <div class="note">bu gemi seni tanıyor. ben de onu tanıyorum.</div>
+        <div class="dock"><div class="btn">İskeleyi boşalt</div><div class="btn">Gemiye bak, gözünü kaçırma</div></div>
+      </div>
+    </div></div><div class="cap">Hikaye ve Sistem levhası</div></div>
+    <div><div class="phone"><div class="screen b moment">
+      <div class="seal"><div class="crack"></div><span>58</span></div>
+      <div class="mt">Mühür kırıldı</div>
+      <p class="ms">Kodeks seni otuz bir diye yazmıştı. <span class="burn">Otuz bir.</span> Sayfa yanıyor; altından elli sekiz çıkıyor.</p>
+      <p class="ms" style="font-style:italic;color:#B79AE0;font-size:16px">sana yalan söylediler. ben söylemedim.</p>
+    </div></div><div class="cap">Sınır kırılması: mühür çatlar, sayfa yanar</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="about">
+    <h2>C · Kırık terminal</h2>
+    <p>Sistem bir işletim sistemi, oyuncu içinde çalışan bir süreç. Kahraman bir hata; Yankı o hatanın sesi. En sade, en hızlı, küçük ekranda en okunur yön.</p>
+    <div class="chips">
+      <div class="chip" style="background:#0D1511"></div><div class="chip" style="background:#E6E3D6"></div>
+      <div class="chip" style="background:#FFB000"></div><div class="chip" style="background:#7BD88F"></div><div class="chip" style="background:#FF6B5B"></div><div class="chip" style="background:#FF4FD8"></div>
+    </div>
+    <div class="type"><b>Source Serif 4</b> anlatı<br><b>Martian Mono</b> arayüz ve Sistem</div>
+  </div>
+  <div class="phones">
+    <div><div class="phone"><div class="screen c">
+      <div class="bar"><span>&gt; bölüm 9: gemi inişi</span><span>t−6 gün</span></div>
+      <div class="body">
+        <p class="narr">Liman sustu. Martılar bile. Gökyüzündeki gölge bir bulut değil; kenarları fazla düzgün, fazla sabırlı.</p>
+        <div class="blk"><div class="h">&gt; sistem analiz</div>
+          <div><span class="d">hedef ...... </span>kadim gemisi</div>
+          <div><span class="d">kademe ..... </span><span class="r">S? [ölçülemedi]</span></div></div>
+        <div class="inv">bu gemi seni tanıyor. ben de onu tanıyorum.</div>
+        <div class="dock"><div class="btn"><b>1</b>  İskeleyi boşalt</div><div class="btn"><b>2</b>  Gemiye bak, gözünü kaçırma</div></div>
+      </div>
+    </div></div><div class="cap">Hikaye ve Sistem bloğu</div></div>
+    <div><div class="phone"><div class="screen c moment">
+      <div class="junk">sv▒_31 #&gt;&gt; 0x3F ¶¶ görünen=31 ░▒ ölç▓m_aral▒ğı ⌁⌁ 0xFF<br>&gt; sistem analiz ▒▒▒ hed▓f ...... ¶<br>k▒deme ..... E ▓ D ▓ C ▓ B ▓ A ▓ S ▓ ▓ ▓<br>░░░░ yüzdel▒k taşt▒ ░░░░ 0x00000<br>sv_kontrol(oyuncu) → ▓▓▓▓▓▓▓▓▓▓▓</div>
+      <div style="height:10px"></div>
+      <div class="no">! beklenmeyen değer: seviye</div>
+      <div><span class="no">- görünen  31</span></div>
+      <div><span class="ok">+ gerçek   58</span></div>
+      <div class="huge">58</div>
+      <div style="color:#8E9A90">fark 27 · yüzdelik ilk 0,001</div>
+      <div class="clean">kimse bu sayıyı görmemeliydi. şimdi sen gördün.</div>
+    </div></div><div class="cap">Sınır kırılması: ekran çöker, Yankı temiz satıra yazar</div></div>
+  </div>
+</section>
+
+</main>
+</body>
+</html>

@@ -11,6 +11,14 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - Emülatör: `Medium_Phone_API_36.0` (`emulator -avd Medium_Phone_API_36.0`), adb ile kurulum.
 - OneDrive kilidi yüzünden lint ara sıra "dosya kullanılıyor" der: `./gradlew --stop` ve tekrar.
 
+## Arayüz kimliği "Kırık pencere" (2026-11-07)
+- [x] Üç yön önerisi ve taslak görseller (`docs/UI_DIRECTION.md`, `docs/ui/`); kullanıcı A + C birleşimini seçti
+- [x] Tokenlar tek yerde (`ui/theme/Theme.kt`), gömülü OFL yazılar ve Ayarlar → Lisanslar, tek koyu tema (AMOLED birleşti)
+- [x] Ekranlar: başlık, üst çubuk, bölüm satırı, Sistem kartı, Yankı satırı, seçenekler, Durum, savaş, istem kartları
+- [x] Büyük anlar: seviye, evrim, sınıf, Benzersiz yetenek, Küresel Sıralama, sınır kırılması (motor: `Notice.moment/from/to`)
+- [x] Emülatör görüntüleri: TR/EN, 360dp telefon ve 800dp tablet, en büyük yazı boyutu ve açık tema (DECISIONS #147–#148)
+- [ ] TalkBack ile cihazda dinleme denemesi (ağaçta açıklamalar var; gerçek okuyucuyla denenmedi)
+
 ## Tarihli operasyonlar ve boş serbest günler (2026-11-07)
 - [x] Tarihli operasyonlar sabit: geri sayım, hazırlık eylemleri (her tarihli bölüme 2–3), yan görev kesilmez, uyarı,
       operasyon öncesi kayıt; `HazirlikTest` (DECISIONS #141)

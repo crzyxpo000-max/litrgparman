@@ -30,10 +30,11 @@ import com.yukselis.engine.story.SkillView
 import com.yukselis.engine.story.SkillsView
 import com.yukselis.engine.system.SkillType
 import com.yukselis.protocol.R
+import com.yukselis.protocol.ui.theme.Game
 import com.yukselis.protocol.ui.components.SectionTitle
 import com.yukselis.protocol.ui.components.StatBar
 import com.yukselis.protocol.ui.theme.GameType
-import com.yukselis.protocol.ui.theme.rarityColor
+import com.yukselis.protocol.ui.theme.rarityColorOf
 
 /** Yetenekler: sınıf başlığı ve yetenek listesi. Uzun basmak ayrıntı kartını açar. */
 @Composable
@@ -64,7 +65,7 @@ fun SkillsScreen(view: SkillsView, modifier: Modifier = Modifier) {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun SkillRow(skill: SkillView, onLongPress: () -> Unit) {
-    val color = rarityColor(skill.rarity)
+    val color = rarityColorOf(skill.rarity)
     Surface(
         color = MaterialTheme.colorScheme.surfaceVariant,
         shape = MaterialTheme.shapes.small,
@@ -109,16 +110,16 @@ private fun SkillDetail(skill: SkillView, onDismiss: () -> Unit) {
     AppAlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) } },
-        title = { Text(skill.name, color = rarityColor(skill.rarity)) },
+        title = { Text(skill.name, color = rarityColorOf(skill.rarity)) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(skill.description, style = GameType.narrationPast)
                 Text(stringResource(R.string.rarity_line, skill.rarityName), style = GameType.system)
                 costText(skill)?.let { Text(it, style = GameType.system) }
                 if (skill.evolutions.isNotEmpty()) {
-                    Text(stringResource(R.string.evolves_into, skill.evolutions.joinToString(" / ")), style = GameType.system, color = Color(0xFFFFA726))
+                    Text(stringResource(R.string.evolves_into, skill.evolutions.joinToString(" / ")), style = GameType.system, color = Game.colors.amber)
                 }
-                skill.penalty?.let { Text(stringResource(R.string.penalty_line, it), style = GameType.system, color = Color(0xFFEF5350)) }
+                skill.penalty?.let { Text(stringResource(R.string.penalty_line, it), style = GameType.system, color = Game.colors.danger) }
             }
         },
     )

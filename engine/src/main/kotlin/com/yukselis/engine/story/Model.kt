@@ -47,7 +47,18 @@ data class Notice(
     val title: LText,
     val lines: List<LText> = emptyList(),
     val rarity: Rarity? = null,
+    /** Arayüzün kendine ait bir ekranla göstereceği büyük an (yoksa null). */
+    val moment: NoticeMoment? = null,
+    /** Anın önceki ve yeni değeri (sıra, görünen/gerçek seviye); arayüz farkı gösterir. */
+    val from: Int? = null,
+    val to: Int? = null,
 )
+
+/**
+ * Seviye/evrim/sınıf dışındaki büyük anlar (arayüz kimliği, DECISIONS #147): Küresel Sıralama'da yükselme ve
+ * sınırın kırılması (gizli seviyenin açığa çıkması, Ezme).
+ */
+enum class NoticeMoment { RANK_UP, REVEAL, CRUSH }
 
 /** Güvenli koşul dili; betik çalıştırma yoktur. */
 sealed interface Condition {

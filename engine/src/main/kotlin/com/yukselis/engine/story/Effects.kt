@@ -194,7 +194,7 @@ class EffectApplier(private val content: Content) {
         val a = shiftAttention(s, 5 + 2 * gap)
         // NPC'ler artık gerçek seviyeye tepki verir; sıralama güncellenir.
         val n = npc.onReveal(a.state, gap)
-        return Result(n.state, listOf(Notice(NoticeKind.WARNING, texts.format("aciga_vuruldu", "n" to state.player.level))) + a.notices + n.notices)
+        return Result(n.state, listOf(Notice(NoticeKind.WARNING, texts.format("aciga_vuruldu", "n" to state.player.level), moment = NoticeMoment.REVEAL, from = state.publicLevel, to = state.player.level)) + a.notices + n.notices)
     }
 
     private fun feat(state: WorldState, id: String): Result {
@@ -289,6 +289,8 @@ class EffectApplier(private val content: Content) {
                     texts.format("serbest_puan", "n" to gained),
                     texts.format("can_mana_yenilendi"),
                 ),
+                from = startLevel,
+                to = p.level,
             )
         }
         var next = state.copy(player = p)

@@ -37,6 +37,9 @@ sealed interface HubAction {
 
     /** Antrenman / zaman atlama: üste `days` günü bir odakla geçir (DECISIONS #142). */
     data class Skip(val focus: SkipFocus, val days: Int) : HubAction
+
+    /** Kule: kademenin altındaki katları tek yuvada, toplu çözümle geç (DECISIONS #147). */
+    data object FastClimb : HubAction
 }
 
 /**
@@ -529,6 +532,7 @@ class WorldEngine(
             is HubAction.Travel -> travel(state, action.region)
             HubAction.Camp -> camp(state)
             HubAction.ClimbTower -> climbTower(state)
+            HubAction.FastClimb -> fastClimb(state)
         }
     }
 
@@ -536,7 +540,7 @@ class WorldEngine(
     private fun checkChapterAction(state: WorldState, action: HubAction) {
         val m = state.mission
         when (action) {
-            HubAction.Explore, is HubAction.EnterGate, HubAction.ClimbTower ->
+            HubAction.Explore, is HubAction.EnterGate, HubAction.ClimbTower, HubAction.FastClimb ->
                 if (m?.kind != MissionKind.EXPLORE) throw ActionRejected("Önce bir bölgeye git")
             is HubAction.EnterOperation -> {
                 if (m != null) throw ActionRejected("Önce üsse dön")
@@ -750,8 +754,61 @@ class WorldEngine(
         t.storyFloors[floor]?.let { eventId ->
             if (eventId in content.events) return startEvent(state, eventId, consumeSlot = true)
         }
-        val band = t.band(floor) ?: throw ActionRejected("Kat $floor için bant yok")
+        val started = floorFight(spend(state), floor)
+        return resolvedNow(started.state, started.notices)
+    }
+
+    /**
+     * Hızlı tırmanışla geçilebilecek katlar (DECISIONS #147): bir sonraki kattan başlayıp hikaye katına ya da oyuncunun
+     * kademesine denk/üstündeki kata kadar. En az [FAST_CLIMB_MIN] kat yoksa null.
+     */
+    fun fastClimbRange(state: WorldState): IntRange? {
+        val t = content.tower ?: return null
+        if (!towerOpen(state)) return null
+        val from = nextFloor(state)
+        var to = from - 1
+        while (to + 1 <= t.floors && (to + 1) !in t.storyFloors && Grade.forLevel(t.levelOf(to + 1)) < state.player.grade) to++
+        return (from..to).takeIf { to - from + 1 >= FAST_CLIMB_MIN }
+    }
+
+    /**
+     * Hızlı tırmanış: katlar tek tek, aynı savaş ve ödül kurallarıyla çözülür (Ezme), yalnız hepsi tek yuvaya sığar.
+     * Ezilmeyen bir kat çıkarsa orada normal savaş başlar. Sonunda kısa özet sahnesi.
+     */
+    private fun fastClimb(state: WorldState): Result {
+        val range = fastClimbRange(state) ?: throw ActionRejected("Hızlı tırmanılacak kat yok")
         var s = spend(state)
+        val hpBefore = s.player.hp
+        val kept = mutableListOf<Notice>()
+        var done = 0
+        for (floor in range) {
+            val started = floorFight(s, floor)
+            if (started.state.combat != null) {
+                // Ezilmeyen kat: normal savaş (o ana kadarki katların özeti bildirim olarak).
+                val note = if (done > 0) listOf(fastClimbNotice(range.first, range.first + done - 1, hpBefore - started.state.player.hp)) else emptyList()
+                return Result(started.state, kept + note + started.notices)
+            }
+            val settled = settleCombat(started.state)
+            s = settled.state
+            kept += (started.notices + settled.notices).filter { it.kind !in FAST_CLIMB_QUIET }
+            done++
+        }
+        val last = range.first + done - 1
+        s = s.copy(vars = s.vars + mapOf(FAST_VARIANT_VAR to Rng(s.rngState).nextInt(3), FAST_LAST_VAR to last))
+        val summary = fastClimbNotice(range.first, last, hpBefore - s.player.hp)
+        if (FAST_EVENT !in content.events) return finishSlot(s, kept + summary)
+        val started = startEvent(s, FAST_EVENT, consumeSlot = false, reminder = summary.title)
+        return Result(started.state, kept + started.notices)
+    }
+
+    private fun fastClimbNotice(from: Int, to: Int, damage: Int): Notice =
+        Notice(NoticeKind.QUEST, texts.format("kule_hizli", "from" to from, "to" to to, "n" to (to - from + 1), "damage" to damage.coerceAtLeast(0)))
+
+    /** Bir Kule katının savaşını başlatır (yuva harcamaz): bant düşmanları, kat seviyesi, kat satırı. */
+    private fun floorFight(state: WorldState, floor: Int): Result {
+        val t = content.tower ?: throw ActionRejected("Kule yok")
+        val band = t.band(floor) ?: throw ActionRejected("Kat $floor için bant yok")
+        var s = state
         val rng = Rng(s.rngState)
         val level = t.levelOf(floor)
         val n = if (floor % 5 == 0) 1 else rng.nextInt(1, 3)
@@ -760,7 +817,7 @@ class WorldEngine(
         s = s.copy(rngState = rng.state, vars = s.vars + (PENDING_TOWER_VAR to floor))
         val notices = mutableListOf(Notice(NoticeKind.QUEST, texts.format("kule_kat", "n" to floor, "level" to level), listOfNotNull(line)))
         val started = combat.start(s, CombatSpec(enemies, environment = band.environment, win = WorldState.HUB, flee = WorldState.HUB, lose = WorldState.HUB))
-        return resolvedNow(started.state, notices + started.notices)
+        return Result(started.state, notices + started.notices)
     }
 
     /**
@@ -941,6 +998,16 @@ class WorldEngine(
      * kapı türü Günlük Görev). Sonra akışa girilir.
      */
     fun afterCombat(state: WorldState): Result {
+        val settled = settleCombat(state)
+        var s = settled.state
+        // Savaşın hemen ardından zorunlu olay gelmez (STORY_FLOW c).
+        if (chapterMode) s = s.copy(dayState = s.dayState.copy(forcedLock = true))
+        val hub = enterHub(s)
+        return Result(hub.state, settled.notices + hub.notices)
+    }
+
+    /** Savaşın akışa dönmeden önceki kapanışı: kapı ya da Kule katı ödülü, savaş Günlük Görevi. */
+    private fun settleCombat(state: WorldState): Result {
         var s = state
         val notices = mutableListOf<Notice>()
         val gateUid = s.variable(PENDING_GATE_VAR)
@@ -980,10 +1047,7 @@ class WorldEngine(
             s = r.state
             notices += r.notices
         }
-        // Savaşın hemen ardından zorunlu olay gelmez (STORY_FLOW c).
-        if (chapterMode) s = s.copy(dayState = s.dayState.copy(forcedLock = true))
-        val hub = enterHub(s)
-        return Result(hub.state, notices + hub.notices)
+        return Result(s, notices)
     }
 
     fun regionName(id: String): LText =
@@ -1011,6 +1075,13 @@ class WorldEngine(
 
         /** Varış sahnesinin o gün oynandığı (bölge başına) değişken öneki. */
         const val ARRIVAL_DAY_PREFIX = "_varis_gunu_"
+
+        /** Hızlı tırmanış (DECISIONS #147): en az kat, özet olayı, değişkenler, toplu çözümde susturulan bildirimler. */
+        const val FAST_CLIMB_MIN = 2
+        const val FAST_EVENT = "kule_hizli"
+        const val FAST_VARIANT_VAR = "_kule_hizli_varyant"
+        const val FAST_LAST_VAR = "_kule_hizli_son"
+        val FAST_CLIMB_QUIET = setOf(NoticeKind.SYSTEM, NoticeKind.QUEST, NoticeKind.WARNING)
 
         /** Saha kampı sahnesi oynanıyor; bitince gece işlenecek. */
         const val CAMP_PENDING_VAR = "_kamp_sahnesi"

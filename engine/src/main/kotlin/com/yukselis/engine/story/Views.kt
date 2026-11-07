@@ -15,6 +15,9 @@ data class NoticeView(
     val title: String,
     val lines: List<String>,
     val rarity: Rarity?,
+    val moment: NoticeMoment? = null,
+    val from: Int? = null,
+    val to: Int? = null,
 )
 
 data class ChoiceView(

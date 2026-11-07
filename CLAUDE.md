@@ -189,7 +189,12 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Kayıt: her seçimden ve her Sistem eyleminden sonra ve `onStop`'ta otomatik; dosyalar `files/saves/*.json`, Auto Backup kapsamında.
 - Kendini açan arayüz: Yetenekler ve Çanta sekmeleri `StatusView.tabs` içinde yoksa gizlidir.
 - Tam ekran kartlar `ui/system/Overlays.kt`: önce kutlama (seviye/evrim/sınıf), sonra bekleyen istem.
-- Tema: Sistem · Açık · Koyu · AMOLED (saf siyah).
+- Tema: Sistem · Açık · Koyu (koyu temanın zemini saf siyah; ayrı AMOLED seçeneği yok, DECISIONS #148).
+- **Görsel kimlik "Kırık pencere"** (DECISIONS #147): renk/yazı/şekil/hareket tokenları yalnız `ui/theme/Theme.kt`'de
+  (`Game.colors`, `GameType`, `GameShapes`, `GameMotion`, `LocalReduceMotion`). Ekranda sabit `Color(0x…)` yazma.
+  Sistem penceresi `Modifier.systemWindow()`, Yankı satırı `EchoLine` (`ui/components/Window.kt`); `Button`/`OutlinedButton`
+  bu paketten gelir (kesik köşe). Büyük anlar `ui/system/Overlays.kt` (motorda `Notice.moment/from/to`); hata ayıklama
+  derlemesinde `adb shell am start -f 0x20000000 -n com.yukselis.protocol/.MainActivity --es demo_moment level|evolution|unique|rank|breach`.
 - Daha fazla: İlişkiler (4 eksen, durum, hatıralar, izler; dokununca ayrıntı) ve Küresel Sıralama; Günlük'te bilgi günlüğü.
   Hikaye'de yoldaş görüşleri, savaşta yoldaş satırları, Durum'da sıra/ordu/izler. Bildirim türü `yoldas` (pembe).
 - Gün akışında Hikaye sekmesi `HubPanel` gösterir (fırsat eli, serbest eylemler, kapılar, yolculuk, kamp); Harita ve Günlük Daha fazla'da.

@@ -74,6 +74,8 @@ class PlayerActions(private val content: Content, private val effects: EffectApp
                 NoticeKind.EVOLUTION,
                 texts.formatL("evrim_tamam", "name" to className, "grade" to LText(grade.name, grade.name)),
                 listOf(texts.format("genel_evrim_aciklama", "n" to Progression.GENERIC_EVOLUTION_BONUS)),
+                from = grade.ordinal - 1,
+                to = grade.ordinal,
             )
         } else {
             val def = content.classes[optionId] ?: throw ActionRejected("Tanımsız evrim: $optionId")
@@ -86,6 +88,8 @@ class PlayerActions(private val content: Content, private val effects: EffectApp
                 NoticeKind.EVOLUTION,
                 texts.formatL("evrim_tamam", "name" to def.name, "grade" to LText(grade.name, grade.name)),
                 listOf(def.description),
+                from = grade.ordinal - 1,
+                to = grade.ordinal,
             )
             def.skill?.let {
                 val g = effects.grantSkill(s, it)

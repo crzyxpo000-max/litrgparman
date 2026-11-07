@@ -27,9 +27,19 @@ class MainActivity : ComponentActivity() {
 
     /** Bildirime dokunuldu: oyun açılır, bildirimin olayı bir sonraki gün akışında gelir. */
     private fun handleNotification(intent: android.content.Intent?) {
+        // Hata ayıklama derlemesi: büyük anı örnek bildirimlerle göster (ekran görüntüsü; adb ile --es demo_moment level).
+        val debuggable = applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE != 0
+        intent?.getStringExtra(DEMO_MOMENT)?.takeIf { debuggable }?.let {
+            intent.removeExtra(DEMO_MOMENT)
+            viewModel.demoMoment(it)
+        }
         val note = intent?.getStringExtra(com.yukselis.protocol.data.Notifications.EXTRA_NOTE) ?: return
         intent.removeExtra(com.yukselis.protocol.data.Notifications.EXTRA_NOTE)
         viewModel.openFromNotification(note)
+    }
+
+    private companion object {
+        const val DEMO_MOMENT = "demo_moment"
     }
 
     override fun onStop() {

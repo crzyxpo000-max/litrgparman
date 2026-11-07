@@ -1,5 +1,10 @@
 package com.yukselis.protocol.ui.status
 
+import com.yukselis.protocol.ui.components.systemWindow
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.unit.sp
 import com.yukselis.protocol.ui.components.AppAlertDialog
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,11 +19,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
+import com.yukselis.protocol.ui.components.Button
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
+import com.yukselis.protocol.ui.components.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -43,12 +48,13 @@ import com.yukselis.engine.story.StatLine
 import com.yukselis.engine.story.StatusView
 import com.yukselis.engine.system.Stat
 import com.yukselis.protocol.R
+import com.yukselis.protocol.ui.theme.Game
 import com.yukselis.protocol.ui.components.SectionTitle
 import com.yukselis.protocol.ui.components.StatBar
 import com.yukselis.protocol.ui.components.SystemCard
 import com.yukselis.protocol.ui.theme.EchoColor
 import com.yukselis.protocol.ui.theme.GameType
-import com.yukselis.protocol.ui.theme.rarityColor
+import com.yukselis.protocol.ui.theme.rarityColorOf
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.runtime.mutableIntStateOf
@@ -77,17 +83,26 @@ fun StatusScreen(
     Column(modifier = modifier.fillMaxSize()) {
         // Her sekmede görünen kısa özet.
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(start = 20.dp, end = 8.dp, top = 12.dp)) {
+            // Seviye büyük bir sayı olarak durur; görünen seviye (dünyanın gördüğü) altında soluk.
+            Text(
+                text = "${status.level}",
+                style = GameType.numeral,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier
+                    .padding(end = 14.dp)
+                    .clearAndSetSemantics { },
+            )
             Column(modifier = Modifier.weight(1f)) {
-                Text(status.playerName, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                Text(status.playerName, style = GameType.heading)
                 Text(
                     text = listOfNotNull(stringResource(R.string.level_grade, status.level, status.grade.name), status.className).joinToString(" · "),
-                    style = GameType.systemTitle,
+                    style = GameType.systemTitle.copy(fontSize = 12.sp, letterSpacing = 0.4.sp),
                     color = MaterialTheme.colorScheme.primary,
                 )
                 Text(
                     text = stringResource(R.string.humanity_percentile, formatPercent(status.humanityTopPercent)),
                     style = GameType.system,
-                    color = EchoColor,
+                    color = Game.colors.amber,
                 )
             }
             HelpButton(stringResource(R.string.help_status), Glossary.status())
@@ -148,15 +163,15 @@ private fun StatsTab(status: StatusView, pending: MutableMap<Stat, Int>, spent: 
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         if (status.evolutionPending) {
-            Text(stringResource(R.string.evolution_pending), style = GameType.system, color = Color(0xFFFFA726), modifier = Modifier.padding(top = 4.dp))
+            Text(stringResource(R.string.evolution_pending), style = GameType.system, color = Game.colors.amber, modifier = Modifier.padding(top = 4.dp))
         }
 
         Spacer(Modifier.height(12.dp))
-        StatBar(stringResource(R.string.hp), status.hp.toLong(), status.maxHp.toLong(), Color(0xFFEF5350))
+        StatBar(stringResource(R.string.hp), status.hp.toLong(), status.maxHp.toLong(), Game.colors.danger)
         Spacer(Modifier.height(6.dp))
-        StatBar(stringResource(R.string.mp), status.mp.toLong(), status.maxMp.toLong(), Color(0xFF42A5F5))
+        StatBar(stringResource(R.string.mp), status.mp.toLong(), status.maxMp.toLong(), Game.colors.system)
         Spacer(Modifier.height(6.dp))
-        StatBar("XP", status.xp, status.xpToNext, Color(0xFFFFD54F))
+        StatBar("XP", status.xp, status.xpToNext, Game.colors.amber)
         Spacer(Modifier.height(6.dp))
         Text(
             text = "${stringResource(R.string.stamina)}: ${status.stamina}",
@@ -170,7 +185,7 @@ private fun StatsTab(status: StatusView, pending: MutableMap<Stat, Int>, spent: 
             Text(
                 text = stringResource(R.string.free_points, left),
                 style = GameType.system,
-                color = Color(0xFFFFD54F),
+                color = Game.colors.amber,
                 modifier = Modifier.padding(bottom = 8.dp),
             )
         }
@@ -205,7 +220,7 @@ private fun StatsTab(status: StatusView, pending: MutableMap<Stat, Int>, spent: 
                 style = GameType.system,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
-            status.essences.forEach { Text(it, style = GameType.systemTitle, color = Color(0xFFFFA726)) }
+            status.essences.forEach { Text(it, style = GameType.systemTitle, color = Game.colors.amber) }
         }
     }
 }
@@ -219,7 +234,7 @@ private fun TitlesTab(status: StatusView) {
         }
         status.titles.forEach { title ->
             Column(modifier = Modifier.padding(bottom = 10.dp)) {
-                Text(title.name, style = GameType.systemTitle, color = rarityColor(title.rarity))
+                Text(title.name, style = GameType.systemTitle, color = rarityColorOf(title.rarity))
                 Text(title.description, style = GameType.system, color = MaterialTheme.colorScheme.onSurface)
             }
         }
@@ -228,7 +243,7 @@ private fun TitlesTab(status: StatusView) {
             SectionTitle(stringResource(R.string.traits))
             status.traits.forEach { t ->
                 Column(modifier = Modifier.padding(bottom = 10.dp)) {
-                    Text(t.name, style = GameType.systemTitle, color = rarityColor(t.rarity))
+                    Text(t.name, style = GameType.systemTitle, color = rarityColorOf(t.rarity))
                     Text(t.description, style = GameType.system, color = MaterialTheme.colorScheme.onSurface)
                 }
             }
@@ -243,7 +258,7 @@ private fun MoralityTab(status: StatusView) {
         // OP MC: NPC'lerin gördüğü seviye, Dikkat ve Yozlaşma.
         SectionTitle(stringResource(R.string.status_hidden_title), Modifier.padding(top = 0.dp))
         Text(stringResource(R.string.status_public, status.publicLevel), style = GameType.system, color = MaterialTheme.colorScheme.onSurface)
-        StatBar(stringResource(R.string.status_attention), status.attention.toLong(), 100, Color(0xFFFF7043), Modifier.padding(top = 6.dp), labelWidth = 96)
+        StatBar(stringResource(R.string.status_attention), status.attention.toLong(), 100, Game.colors.danger, Modifier.padding(top = 6.dp), labelWidth = 96)
         StatBar(stringResource(R.string.status_corruption), status.corruption.toLong(), 100, EchoColor, Modifier.padding(top = 4.dp), labelWidth = 96)
         if (status.publicRank > 0) {
             Text(stringResource(R.string.status_rank, status.publicRank), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 6.dp))
@@ -280,18 +295,18 @@ private fun StatCell(
     allocating: Boolean,
     modifier: Modifier = Modifier,
 ) {
-    Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small, modifier = modifier) {
+    Box(modifier = modifier.systemWindow(accent = Game.colors.line, cut = 8)) {
         Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(line.abbr, style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary)
-                    Text(line.label, style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    // Uzun adlar (Dayanıklılık) dar hücrede bölünmesin: orantılı yazı, tek satır.
+                    Text(line.label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 }
                 Text(
                     text = if (added > 0) "${line.value + added}" else "${line.value}",
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = if (added > 0) Color(0xFFFFD54F) else MaterialTheme.colorScheme.onSurface,
+                    style = GameType.heading.copy(fontSize = 24.sp, lineHeight = 28.sp),
+                    color = if (added > 0) Game.colors.amber else MaterialTheme.colorScheme.onSurface,
                 )
             }
             if (allocating) {

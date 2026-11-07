@@ -378,6 +378,8 @@ Perde geçişleri zaman ve olay temellidir: oyuncu yavaş ilerlerse dünya bekle
 
 Oyun Android telefonda dikey ekranda, tek elle oynanacak şekilde tasarlanır ve bir LitRPG romanının sayfasını okuyormuş hissi verir: anlatı düzyazı olarak akar, Sistem bildirimleri ise kendi kartlarında renk, titreşim ve kısa animasyonla gelir. Tablette metin sütunu ortalanır, yan panelde durum özeti açık kalır.
 
+**Görsel kimlik: "Kırık pencere".** Sistem kusursuz bir cam penceredir: kesik köşeler, tek bir buz mavisi, soluk tarama çizgileri; başlıklar ve sayılar köşeli bir yazıyla, Sistem'in sesi tek aralıklı yazıyla, anlatı uzun okuma için yapılmış bir serifle yazılır. Kahraman bu pencerenin ölçemediği bir hatadır ve Yankı o hatanın sesidir: Yankı'nın satırları pencerenin içinde değil, ters renkli ve kaymış bir şerit olarak araya sızar. Büyük anların her biri kendi ekranındadır: seviye atlarken pencere açılır ve sayı sayar, evrimde yeni kademe harfi eskisinin yerine oturur, Benzersiz yetenekte pencere beyaz-altına döner, Küresel Sıralama'da eski sıranın üstü çizilir. Sınır kırıldığında (gerçek seviye açığa çıktığında ya da bir savaş Ezmeyle bittiğinde) ekran bir an çöker ve Sistem `görünen` ile `gerçek` arasındaki farkı yazmak zorunda kalır. Koyu temanın zemini saf siyahtır.
+
 **Örnek ekran (telefon, Hikaye sekmesi)**
 
 ```text

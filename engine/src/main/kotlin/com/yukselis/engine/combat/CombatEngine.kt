@@ -1,5 +1,6 @@
 package com.yukselis.engine.combat
 
+import com.yukselis.engine.story.NoticeMoment
 import com.yukselis.engine.core.GameMode
 import com.yukselis.engine.core.MoralAxis
 import com.yukselis.engine.core.Rng
@@ -178,7 +179,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         }
         if (crush) {
             ctx.c = ctx.c.copy(enemies = ctx.c.enemies.map { it.copy(hp = 0) }, kills = enemies.size)
-            ctx.notices += Notice(NoticeKind.SYSTEM, texts.formatL("ezme", "enemies" to names), listOf(texts.format("ezme_satir")))
+            ctx.notices += Notice(NoticeKind.SYSTEM, texts.formatL("ezme", "enemies" to names), listOf(texts.format("ezme_satir")), moment = NoticeMoment.CRUSH)
             finishWin(ctx, crushed = true)
             return ctx.done()
         }

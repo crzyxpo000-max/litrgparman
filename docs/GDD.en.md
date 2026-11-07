@@ -378,6 +378,8 @@ Act changes are driven by time and events: if the player dawdles, the world does
 
 The game is built for one-handed play in portrait on an Android phone and should feel like reading a page of a LitRPG novel: narration flows as prose, while System notifications arrive on their own cards with color, haptics, and a short animation. On tablets the text column is centered and a side panel keeps the status summary open.
 
+**Visual identity: "Broken Window."** The System is a flawless glass window: clipped corners, a single ice-blue accent, faint scan lines. Headings and numbers use an angular display face, the System's voice is monospaced, and narration is set in a serif built for long reading. The hero is an error the window can't measure, and the Echo is that error's voice: its lines don't sit inside the window but bleed in as an inverted, shifted strip. Every big moment gets its own screen. On a level up the window opens and the number counts up; on an evolution the new grade letter takes the old one's place; a Unique skill turns the window white-gold; on the Global Ranking the old rank is struck through. When a limit breaks (your true level comes out, or a fight ends in a Crush), the screen briefly crashes and the System is forced to print the difference between `public` and `true`. The dark theme's background is pure black.
+
 **Sample screen (phone, Story tab)**
 
 ```text

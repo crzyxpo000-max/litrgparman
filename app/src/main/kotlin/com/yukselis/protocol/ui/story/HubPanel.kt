@@ -9,10 +9,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
+import com.yukselis.protocol.ui.components.Button
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
+import com.yukselis.protocol.ui.components.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -35,6 +35,7 @@ import com.yukselis.engine.story.SkipView
 import com.yukselis.engine.world.SkipFocus
 import com.yukselis.engine.world.HubAction
 import com.yukselis.protocol.R
+import com.yukselis.protocol.ui.theme.Game
 import com.yukselis.protocol.ui.components.Glossary
 import com.yukselis.protocol.ui.components.HelpButton
 import com.yukselis.protocol.ui.components.TipCard
@@ -279,19 +280,20 @@ private fun ListDialog(title: String, onDismiss: () -> Unit, content: @Composabl
     )
 }
 
-private val TowerColor = Color(0xFFAB47BC)
-private val GateColor = Color(0xFFFFA726)
+private val TowerColor: Color @Composable get() = Game.colors.violet
+private val GateColor: Color @Composable get() = Game.colors.amber
 
-private fun tensionColor(t: Int) = when (t) {
-    1 -> Color(0xFF66BB6A)
-    2 -> Color(0xFFFFD54F)
-    3 -> Color(0xFFFFA726)
-    else -> Color(0xFFEF5350)
+/** Dört basamaklı ölçek: sakin → tehlikeli. */
+@Composable
+private fun scaleColor(step: Int): Color = when (step) {
+    1 -> Game.colors.success
+    2 -> Game.colors.system
+    3 -> Game.colors.amber
+    else -> Game.colors.danger
 }
 
-private fun dangerColor(d: Int) = when {
-    d < 25 -> Color(0xFF66BB6A)
-    d < 50 -> Color(0xFFFFD54F)
-    d < 75 -> Color(0xFFFFA726)
-    else -> Color(0xFFEF5350)
-}
+@Composable
+private fun tensionColor(t: Int) = scaleColor(t)
+
+@Composable
+private fun dangerColor(d: Int) = scaleColor(d / 25 + 1)

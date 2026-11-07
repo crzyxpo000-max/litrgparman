@@ -1,5 +1,8 @@
 package com.yukselis.protocol.ui.title
 
+import androidx.compose.foundation.layout.widthIn
+import com.yukselis.protocol.ui.components.EchoLine
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,9 +15,9 @@ import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
+import com.yukselis.protocol.ui.components.Button
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
+import com.yukselis.protocol.ui.components.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -60,37 +63,38 @@ fun TitleScreen(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
+            // Tablette başlık ekranı tek bir okunur sütun kalır.
+            .widthIn(max = 560.dp)
             .fillMaxSize()
             .safeDrawingPadding()
             .imePadding()
             .verticalScroll(rememberScrollState())
             .padding(24.dp),
     ) {
-        Spacer(Modifier.height(48.dp))
-        Text(
-            text = "[ ${stringResource(R.string.system_header)} ]",
-            style = GameType.system,
-            color = MaterialTheme.colorScheme.primary,
-        )
-        Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(56.dp))
+        // Logo: kesik köşeli yazı, sola yaslı; Sistem'in açılış satırı altında.
         Text(
             text = stringResource(R.string.app_name),
-            fontSize = 34.sp,
-            // Anlatı stilinin 27sp satır yüksekliği 34sp başlıkta iki satırı üst üste bindiriyordu (QA P2-2).
-            lineHeight = 42.sp,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
-            style = GameType.narration,
+            style = GameType.heading.copy(fontSize = 40.sp, lineHeight = 42.sp),
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.fillMaxWidth(),
         )
-        Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(10.dp))
+        Text(
+            text = "[ ${stringResource(R.string.system_header).uppercase(LocalConfiguration.current.locales[0])} ] " + stringResource(R.string.system_online),
+            style = GameType.systemTitle.copy(fontSize = 12.sp),
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.fillMaxWidth(),
+        )
+        Spacer(Modifier.height(14.dp))
         Text(
             text = stringResource(R.string.tagline),
             style = GameType.narration,
-            textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.fillMaxWidth(),
         )
 
-        Spacer(Modifier.height(40.dp))
+        Spacer(Modifier.height(36.dp))
         if (autosave != null) {
             Button(onClick = onContinue, enabled = ready, modifier = Modifier.fillMaxWidth()) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -152,7 +156,13 @@ fun TitleScreen(
             )
         }
 
-        Spacer(Modifier.height(32.dp))
+        Spacer(Modifier.height(24.dp))
+        // Yankı açılışta bir kez konuşur: kayıt varsa geri dönüşü, yoksa uyanışı fark eder.
+        EchoLine(
+            stringResource(if (autosave != null) R.string.title_echo_back else R.string.title_echo_new),
+            modifier = Modifier.align(Alignment.Start),
+        )
+        Spacer(Modifier.height(24.dp))
         LanguagePicker(lang, onLanguage)
         ThemePicker(theme, onTheme)
         Spacer(Modifier.height(16.dp))

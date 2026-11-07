@@ -18,10 +18,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
+import com.yukselis.protocol.ui.components.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
+import com.yukselis.protocol.ui.components.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -48,8 +48,12 @@ import com.yukselis.engine.world.HubAction
 import com.yukselis.protocol.R
 import com.yukselis.protocol.ui.components.SystemCard
 import com.yukselis.protocol.ui.theme.GameType
-import com.yukselis.protocol.ui.theme.InsightColor
-import com.yukselis.protocol.ui.theme.EchoColor
+import com.yukselis.protocol.ui.theme.Game
+import com.yukselis.protocol.ui.components.EchoLine
+import com.yukselis.protocol.ui.components.leftRule
+import com.yukselis.protocol.ui.components.systemWindow
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.Alignment
@@ -238,11 +242,11 @@ private fun ChapterBar(line: com.yukselis.engine.world.ChapterLine) {
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClickLabel = stringResource(R.string.a11y_chapter)) { open = !open }
-            .padding(horizontal = 20.dp, vertical = 6.dp),
+            .padding(horizontal = 20.dp, vertical = 8.dp),
     ) {
         Text(
             text = stringResource(R.string.chapter_line, line.no, if (open) line.title + " — " + line.goal else line.goal),
-            style = GameType.system,
+            style = GameType.systemTitle.copy(fontSize = 12.sp, letterSpacing = 0.4.sp, fontWeight = FontWeight.Medium),
             color = MaterialTheme.colorScheme.primary,
             maxLines = if (open) 6 else 1,
             overflow = TextOverflow.Ellipsis,
@@ -250,16 +254,16 @@ private fun ChapterBar(line: com.yukselis.engine.world.ChapterLine) {
         )
         Text(
             line.countdown ?: androidx.compose.ui.res.pluralStringResource(R.plurals.chapter_days, line.daysLeft, line.daysLeft),
-            style = GameType.system,
-            color = if (line.daysLeft <= DEADLINE_WARN_DAYS) DeadlineColor else MaterialTheme.colorScheme.onSurfaceVariant,
+            style = GameType.systemTitle.copy(fontSize = 12.sp, letterSpacing = 0.4.sp, fontWeight = FontWeight.Medium),
+            // Geri sayım her zaman kehribar: gün saymak Sistem'in uyarısıdır; son günlerde kızıla döner.
+            color = if (line.daysLeft <= DEADLINE_WARN_DAYS) Game.colors.danger else Game.colors.amber,
             modifier = Modifier.padding(start = 8.dp),
         )
     }
-    HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.25f))
+    HorizontalDivider(color = Game.colors.line)
 }
 
 private const val DEADLINE_WARN_DAYS = 3
-private val DeadlineColor = androidx.compose.ui.graphics.Color(0xFFFFA726)
 
 /**
  * Altta sabit eylem paneli: ekranın en fazla yarısını kaplar, sığmazsa kendi içinde kayar.
@@ -271,11 +275,10 @@ private fun ActionDock(resetKey: String, content: @Composable () -> Unit) {
     val maxHeight = (LocalConfiguration.current.screenHeightDp * 0.38f).dp
     val scroll = remember(resetKey) { androidx.compose.foundation.ScrollState(0) }
     Surface(
-        color = MaterialTheme.colorScheme.surface,
-        tonalElevation = 3.dp,
-        shadowElevation = 8.dp,
+        color = MaterialTheme.colorScheme.background,
         modifier = Modifier.fillMaxWidth(),
     ) {
+        HorizontalDivider(color = Game.colors.line)
         Column(
             modifier = Modifier
                 .heightIn(max = maxHeight)
@@ -305,19 +308,19 @@ private fun PastPassage(passage: PassageView) {
     }
 }
 
-/** Yoldaşların görüşü: ad + tek satır; Yankı'nınki kendi renginde. */
+/** Yoldaşların görüşü: ad + tek satır. Yankı'nınki ters video bir satırdır. */
 @Composable
 private fun Opinions(lines: List<com.yukselis.engine.story.CompanionLineView>) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(6.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .drawBehind { drawRect(com.yukselis.protocol.ui.theme.CompanionColor, size = Size(3.dp.toPx(), size.height)) }
-            .padding(start = 12.dp),
-    ) {
+    val companion = Game.colors.companion
+    Column(verticalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth()) {
         lines.forEach {
-            val color = if (it.echo) EchoColor else com.yukselis.protocol.ui.theme.CompanionColor
-            Text("${it.npcName}: ${it.text}", style = GameType.system, color = color)
+            if (it.echo) EchoLine(it.text)
+            else Text(
+                "${it.npcName}: ${it.text}",
+                style = GameType.system,
+                color = companion,
+                modifier = Modifier.fillMaxWidth().leftRule(companion).padding(start = 12.dp),
+            )
         }
     }
 }
@@ -325,15 +328,11 @@ private fun Opinions(lines: List<com.yukselis.engine.story.CompanionLineView>) {
 /** Pasif Sistem sezgisi: yalnızca oyuncunun gördüğü satırlar; tek aralıklı, renkli, sol çizgili. */
 @Composable
 private fun Insights(lines: List<InsightView>) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(6.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .drawBehind { drawRect(InsightColor, size = Size(3.dp.toPx(), size.height)) }
-            .padding(start = 12.dp),
-    ) {
+    val system = Game.colors.system
+    Column(verticalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth()) {
         lines.forEach {
-            Text(it.text, style = GameType.system.copy(fontStyle = FontStyle.Italic), color = if (it.echo) EchoColor else InsightColor)
+            if (it.echo) EchoLine(it.text)
+            else Text(it.text, style = GameType.system, color = system, modifier = Modifier.fillMaxWidth().leftRule(system).padding(start = 12.dp))
         }
     }
 }
@@ -366,13 +365,12 @@ private fun Choices(choices: List<ChoiceView>, onChoose: (String) -> Unit) {
             OutlinedButton(
                 onClick = { onChoose(choice.id) },
                 enabled = choice.enabled,
-                shape = RoundedCornerShape(8.dp),
                 contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Row(modifier = Modifier.fillMaxWidth()) {
                     choice.kindTag?.let {
-                        Text(text = "$it ", style = GameType.system, color = com.yukselis.protocol.ui.theme.EchoColor)
+                        Text(text = "$it ", style = GameType.system, color = Game.colors.echo)
                     }
                     choice.requirementTag?.let {
                         Text(
@@ -381,13 +379,18 @@ private fun Choices(choices: List<ChoiceView>, onChoose: (String) -> Unit) {
                             color = if (choice.enabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                     }
-                    Text(text = choice.label, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
+                    Text(
+                        text = choice.label,
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = if (choice.enabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.weight(1f),
+                    )
                     // Görünür olasılık: tek seferlik (kırmızı) / yeniden denenebilir (beyaz).
                     choice.odds?.let {
                         Text(
                             text = " " + stringResource(R.string.odds_fmt, it),
                             style = GameType.system,
-                            color = if (choice.oneShot) androidx.compose.ui.graphics.Color(0xFFEF5350) else MaterialTheme.colorScheme.onSurface,
+                            color = if (choice.oneShot) Game.colors.danger else MaterialTheme.colorScheme.onSurface,
                         )
                     }
                 }
@@ -410,7 +413,7 @@ private fun EndingContent(ending: com.yukselis.engine.story.EndingView?) {
 /** Epilog kartları: son, OP MC türü, NPC akıbetleri, fraksiyonlar, en kritik 5 seçim (Aşama 7). */
 @Composable
 private fun EndingCards(e: com.yukselis.engine.story.EndingView) {
-    val gold = androidx.compose.ui.graphics.Color(0xFFFFC107)
+    val gold = Game.colors.unique
     Text(text = stringResource(R.string.ending_label, e.name), style = GameType.systemTitle, color = gold)
     Text(text = e.summary, style = GameType.narration)
     Text(text = stringResource(R.string.ending_stats, e.level, e.grade, e.day), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -444,7 +447,7 @@ private fun EpilogueSection(title: String) {
 
 @Composable
 private fun EpilogueCardView(title: String, body: String) {
-    androidx.compose.material3.Card(modifier = Modifier.fillMaxWidth()) {
+    Column(modifier = Modifier.fillMaxWidth().systemWindow(accent = Game.colors.line)) {
         Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(text = title, style = GameType.system, color = MaterialTheme.colorScheme.primary)
             if (body.isNotEmpty()) Text(text = body, style = GameType.narration)

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kırık pencere</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600&family=Literata:opsz,wght@7..72,400;7..72,500&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gece:#070B14; --panel:#0E1626; --cizgi:#1A2B42; --metin:#DCE6F2; --soluk:#8394AB;
+    --buz:#8BE9FF; --kenar:#3FD3FF; --kehribar:#FFB547; --kizil:#FF5A5F; --yanki:#FF3DCB;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#E6E4DF; color:#1F1E1B; font-family:Inter, system-ui, sans-serif; }
+  main { max-width:1080px; margin:0 auto; padding:32px 16px 56px; }
+  header { display:grid; grid-template-columns:1fr auto; gap:24px; align-items:end; margin-bottom:28px; }
+  header h1 { font-family:'Chakra Petch'; font-weight:600; font-size:30px; margin:0 0 6px; }
+  header p { margin:0; font-size:14px; line-height:1.6; color:#5E5B54; max-width:62ch; }
+  .tokens { display:flex; gap:6px; }
+  .tok { width:30px; height:30px; border-radius:5px; border:1px solid rgba(0,0,0,.12); }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:28px 22px; }
+  .phone { width:290px; margin:0 auto; border-radius:30px; padding:9px; background:#26252A; }
+  .s { height:600px; border-radius:22px; overflow:hidden; position:relative; display:flex; flex-direction:column; background:var(--gece); color:var(--metin); }
+  .cap { font-size:12.5px; color:#5E5B54; text-align:center; margin-top:9px; }
+
+  /* ortak parçalar */
+  .bar { font-family:'Chakra Petch'; font-weight:500; font-size:12px; padding:14px 16px 10px; display:flex; justify-content:space-between; color:var(--buz); border-bottom:1px solid var(--cizgi); }
+  .bar .gun { color:var(--kehribar); }
+  .body { padding:15px 16px; display:flex; flex-direction:column; gap:13px; flex:1; min-height:0; }
+  .narr { font-family:Literata; font-size:15px; line-height:1.66; margin:0; }
+  .win { position:relative; background:var(--panel); padding:11px 13px 12px; clip-path:polygon(11px 0,100% 0,100% calc(100% - 11px),calc(100% - 11px) 100%,0 100%,0 11px); }
+  .win::before { content:""; position:absolute; inset:0; padding:1px; background:var(--kenar); clip-path:inherit; -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; }
+  .win::after { content:""; position:absolute; inset:0; background:repeating-linear-gradient(0deg,rgba(139,233,255,.04) 0 1px,transparent 1px 3px); pointer-events:none; }
+  .wt { font-family:'Chakra Petch'; font-weight:600; font-size:11.5px; letter-spacing:.14em; color:var(--buz); }
+  .mono { font-family:'JetBrains Mono'; font-size:11.5px; line-height:1.65; color:#C6D4E4; }
+  .k { color:var(--kehribar); }
+  .r { color:var(--kizil); }
+  .d { color:var(--soluk); }
+  .yanki { font-family:'JetBrains Mono'; font-size:11.5px; line-height:1.55; background:#F1EDF6; color:#1A0F1E; padding:4px 8px; box-shadow:3px 0 0 var(--yanki), -1px 0 0 #2C6BFF; align-self:flex-start; max-width:100%; }
+  .dock { margin-top:auto; display:flex; flex-direction:column; gap:7px; }
+  .btn { font-family:Literata; font-size:14px; padding:10px 12px; border:1px solid var(--cizgi); background:#0A1220; color:var(--metin); }
+  .btn.lock { color:var(--soluk); }
+  .btn.lock span { font-family:'JetBrains Mono'; font-size:11px; color:var(--kehribar); float:right; }
+  .meter { height:6px; background:#121E31; position:relative; }
+  .meter i { position:absolute; inset:0 auto 0 0; display:block; }
+  .tabs { display:flex; justify-content:space-around; border-top:1px solid var(--cizgi); padding:10px 0 12px; font-family:'Chakra Petch'; font-size:11.5px; color:var(--soluk); }
+  .tabs .on { color:var(--buz); }
+
+  /* başlık */
+  .title { justify-content:center; padding:0 22px; gap:26px; }
+  .logo { font-family:'Chakra Petch'; font-weight:600; font-size:36px; line-height:1.02; color:#fff; letter-spacing:.01em; }
+  .logo small { display:block; font-weight:500; font-size:13px; letter-spacing:.32em; color:var(--buz); margin-top:10px; }
+  .menu .row { font-family:Literata; font-size:15px; padding:10px 0; border-bottom:1px solid var(--cizgi); display:flex; justify-content:space-between; }
+  .menu .row:last-child { border-bottom:0; }
+  .menu .row span { font-family:'JetBrains Mono'; font-size:11px; color:var(--soluk); align-self:center; }
+
+  /* durum */
+  .lvl { display:flex; align-items:baseline; gap:10px; }
+  .lvl b { font-family:'Chakra Petch'; font-weight:600; font-size:46px; line-height:1; color:#fff; }
+  .lvl span { font-family:'JetBrains Mono'; font-size:11px; color:var(--soluk); line-height:1.5; }
+  .stats { display:grid; grid-template-columns:1fr 1fr; gap:4px 16px; }
+  .stats div { display:flex; justify-content:space-between; font-family:'JetBrains Mono'; font-size:12px; border-bottom:1px solid #132238; padding:5px 0; }
+  .stats b { font-family:'Chakra Petch'; font-weight:600; font-size:14px; color:#fff; }
+
+  /* savaş */
+  .foe { font-family:'Chakra Petch'; font-weight:600; font-size:20px; color:#fff; }
+  .log { font-family:'JetBrains Mono'; font-size:11.5px; line-height:1.75; }
+  .acts { display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:auto; }
+  .acts div { font-family:'Chakra Petch'; font-weight:500; font-size:13px; padding:11px 10px; border:1px solid var(--cizgi); background:#0A1220; }
+  .acts div small { display:block; font-family:'JetBrains Mono'; font-weight:400; font-size:10.5px; color:var(--soluk); margin-top:2px; }
+
+  /* seviye */
+  .moment { justify-content:center; align-items:center; padding:20px; }
+  .open { width:100%; }
+  .big { font-family:'Chakra Petch'; font-weight:600; font-size:72px; line-height:1; color:#fff; margin:10px 0 4px; }
+  .rows div { display:flex; justify-content:space-between; font-family:'JetBrains Mono'; font-size:12px; padding:5px 0; border-bottom:1px solid #132238; }
+  .rows div:nth-child(-n+2) { color:var(--buz); }
+  .rows div:nth-child(-n+2) b { color:var(--kehribar); }
+  .rows b { font-weight:500; }
+
+  /* kırılma */
+  .breach { padding:18px 16px; gap:12px; }
+  .junk { font-family:'JetBrains Mono'; font-size:11px; line-height:1.7; color:#2E4A63; word-break:break-all; }
+  .tear { position:absolute; left:0; right:0; background:var(--yanki); }
+  .broken { transform:translateX(5px); }
+  .broken::before { background:var(--yanki) !important; }
+  .diff div { font-family:'JetBrains Mono'; font-size:12.5px; line-height:1.7; }
+  @media (max-width:640px){ header{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div>
+    <h1>Kırık pencere</h1>
+    <p>A ile C'nin birleşimi. Sistem kusursuz bir pencere: cam panel, kesik köşe, tek bir buz mavisi. Kahraman bu pencerenin ölçemediği bir hata. Yankı ve sınır kırılması, terminalin bozulma diliyle bu kusursuzluğu deler. Sakin kalan her şey, o anlar çarpsın diye sakin.</p>
+  </div>
+  <div class="tokens">
+    <div class="tok" style="background:#070B14" title="gece"></div><div class="tok" style="background:#0E1626" title="panel"></div>
+    <div class="tok" style="background:#8BE9FF" title="buz"></div><div class="tok" style="background:#FFB547" title="kehribar"></div>
+    <div class="tok" style="background:#FF5A5F" title="kızıl"></div><div class="tok" style="background:#FF3DCB" title="yankı"></div>
+  </div>
+</header>
+
+<div class="grid">
+
+  <div><div class="phone"><div class="s title">
+    <div class="logo">Yükseliş<br>Protokolü<small>sistem çevrimiçi</small></div>
+    <div class="win menu">
+      <div class="row">Devam et <span>gün 214</span></div>
+      <div class="row">Yeni oyun</div>
+      <div class="row">Döngü <span>2. kez</span></div>
+      <div class="row">Ayarlar</div>
+    </div>
+    <div class="yanki">yine mi buradayız. iyi. bu sefer daha hızlı.</div>
+  </div></div><div class="cap">Başlık</div></div>
+
+  <div><div class="phone"><div class="s">
+    <div class="bar"><span>Bölüm 9 · Gemi inişi</span><span class="gun">Gemi inişine 6 gün</span></div>
+    <div class="body">
+      <p class="narr">Liman sustu. Martılar bile. Gökyüzündeki gölge bir bulut değil; kenarları fazla düzgün, fazla sabırlı.</p>
+      <div class="win"><div class="wt">[ SİSTEM ] ANALİZ</div>
+        <div class="mono" style="margin-top:6px">Hedef: Kadim gemisi<br>Kademe: <span class="k">S?</span><br>Tehdit: <span class="r">ölçüm aralığı dışında</span></div></div>
+      <div class="yanki">bu gemi seni tanıyor. ben de onu.</div>
+      <div class="dock">
+        <div class="btn">İskeleyi boşalt</div>
+        <div class="btn">Gemiye bak, gözünü kaçırma</div>
+        <div class="btn lock">Gemiye seslen <span>[KAR 40]</span></div>
+      </div>
+    </div>
+    <div class="tabs"><span class="on">Hikaye</span><span>Durum</span><span>Yetenekler</span><span>Daha fazla</span></div>
+  </div></div><div class="cap">Hikaye ve Sistem kartı</div></div>
+
+  <div><div class="phone"><div class="s">
+    <div class="bar"><span>Durum</span><span class="gun">Küresel 37.</span></div>
+    <div class="body">
+      <div class="lvl"><b>48</b><span>Gölge Bıçağı · Kademe C<br>görünen seviye 31</span></div>
+      <div>
+        <div class="mono d" style="display:flex;justify-content:space-between"><span>can</span><span>1.240 / 1.380</span></div>
+        <div class="meter"><i style="width:90%;background:var(--kizil)"></i></div>
+        <div class="mono d" style="display:flex;justify-content:space-between;margin-top:6px"><span>mana</span><span>410 / 560</span></div>
+        <div class="meter"><i style="width:73%;background:var(--buz)"></i></div>
+      </div>
+      <div class="stats">
+        <div><span>Güç</span><b>62</b></div><div><span>Çeviklik</span><b>88</b></div>
+        <div><span>Dayanıklılık</span><b>51</b></div><div><span>Zeka</span><b>40</b></div>
+        <div><span>Bilgelik</span><b>33</b></div><div><span>Algı</span><b>71</b></div>
+        <div><span>İrade</span><b>58</b></div><div><span>Karizma</span><b>29</b></div>
+      </div>
+      <div class="win" style="margin-top:auto"><div class="wt">[ SİSTEM ] YÜZDELİK</div>
+        <div class="mono" style="margin-top:5px">İnsanlığın ilk <span class="k">%0,4</span>'ü<br><span class="d">gerçek değer gizleniyor</span></div></div>
+    </div>
+    <div class="tabs"><span>Hikaye</span><span class="on">Durum</span><span>Yetenekler</span><span>Daha fazla</span></div>
+  </div></div><div class="cap">Durum</div></div>
+
+  <div><div class="phone"><div class="s">
+    <div class="bar"><span>Kapı · Kademe B</span><span class="gun">Tur 4</span></div>
+    <div class="body">
+      <div>
+        <div class="foe">Liman Leviathanı</div>
+        <div class="meter" style="margin-top:8px"><i style="width:38%;background:var(--kizil)"></i></div>
+        <div class="mono d" style="margin-top:4px">faz 2 · zırh kırıldı</div>
+      </div>
+      <div class="log">
+        <div><span class="d">›</span> Gölge adımı. Arkasındasın.</div>
+        <div><span class="d">›</span> Kritik vuruş <span class="k">2.140</span></div>
+        <div><span class="d">›</span> Leviathan dalgayı çağırıyor.</div>
+        <div><span class="d">›</span> Can <span class="r">−310</span></div>
+      </div>
+      <div class="yanki">sol yüzgeci. üç kez aynı yere.</div>
+      <div class="acts">
+        <div>Saldır<small>tek hedef</small></div>
+        <div>Gölge adımı<small>12 mana</small></div>
+        <div>Savun<small>duruş</small></div>
+        <div>Kaç<small>%30</small></div>
+      </div>
+    </div>
+  </div></div><div class="cap">Savaş</div></div>
+
+  <div><div class="phone"><div class="s moment">
+    <div class="win open">
+      <div class="wt">[ SİSTEM ] SEVİYE ATLADIN</div>
+      <div class="big">48</div>
+      <div class="mono d" style="margin-bottom:10px">47'den · 3 serbest puan</div>
+      <div class="rows">
+        <div><span>Çeviklik</span><b>86 → 88</b></div>
+        <div><span>Algı</span><b>70 → 71</b></div>
+        <div><span>Can</span><b>1.310 → 1.380</b></div>
+        <div><span>Mana</span><b>540 → 560</b></div>
+      </div>
+      <div class="mono" style="margin-top:12px;color:var(--buz)">Dokun: puanları dağıt</div>
+    </div>
+  </div></div><div class="cap">Seviye atlama: pencere açılır, kazançlar sırayla yanar</div></div>
+
+  <div><div class="phone"><div class="s breach">
+    <div class="tear" style="top:118px;height:2px"></div><div class="tear" style="top:262px;height:1px;opacity:.6"></div>
+    <div class="junk">[ S▓STEM ] SEV▒YE ⌁ görünen=31 ¶ 0x3F<br>yüzdel▒k taşt▒ ░░ 0x00000 ░░ ölç▓m<br>kademe E ▓ D ▓ C ▓ B ▓ A ▓ S ▓ ▓ ▓</div>
+    <div class="win broken"><div class="wt" style="color:var(--yanki)">[ SİSTEM ] HATA</div>
+      <div class="mono" style="margin-top:5px">Beklenmeyen değer: seviye</div>
+      <div class="diff" style="margin-top:6px">
+        <div class="r">− görünen  31</div>
+        <div style="color:#7BD88F">+ gerçek   58</div>
+      </div></div>
+    <div class="big" style="text-align:center;margin:6px 0">58</div>
+    <div class="yanki" style="align-self:stretch;text-align:center;font-size:12px;padding:9px">kimse bu sayıyı görmemeliydi. şimdi sen gördün.</div>
+  </div></div><div class="cap">Sınır kırılması: pencere çatlar, Yankı temiz satıra yazar</div></div>
+
+</div>
+</main>
+</body>
+</html>

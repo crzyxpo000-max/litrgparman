@@ -1,5 +1,7 @@
 package com.yukselis.protocol.ui.combat
 
+import com.yukselis.protocol.ui.components.systemWindow
+import androidx.compose.ui.unit.sp
 import com.yukselis.protocol.ui.components.AppAlertDialog
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -25,10 +27,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
+import com.yukselis.protocol.ui.components.Button
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
+import com.yukselis.protocol.ui.components.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -50,6 +52,7 @@ import com.yukselis.engine.story.CombatView
 import com.yukselis.engine.story.EnemyView
 import com.yukselis.engine.story.NoticeView
 import com.yukselis.protocol.R
+import com.yukselis.protocol.ui.theme.Game
 import com.yukselis.protocol.ui.components.StatBar
 import com.yukselis.protocol.ui.components.SystemCard
 import com.yukselis.protocol.ui.theme.EchoColor
@@ -91,15 +94,15 @@ fun CombatScreen(
             Text(
                 text = if (a.down) stringResource(R.string.ally_down, a.name) else stringResource(R.string.ally_line, a.name, a.role, a.level, a.hp, a.maxHp),
                 style = GameType.system,
-                color = if (a.down) MaterialTheme.colorScheme.outline else com.yukselis.protocol.ui.theme.CompanionColor,
+                color = if (a.down) MaterialTheme.colorScheme.outline else Game.colors.companion,
             )
         }
         if (combat.allies.isNotEmpty()) Spacer(Modifier.height(6.dp))
 
         // Oyuncu: Dayanım, durumlar, duruş, efor
-        StatBar(stringResource(R.string.stamina_short), combat.stamina.toLong(), combat.maxStamina.toLong(), Color(0xFF66BB6A))
+        StatBar(stringResource(R.string.stamina_short), combat.stamina.toLong(), combat.maxStamina.toLong(), Game.colors.success)
         if (combat.playerStatuses.isNotEmpty()) {
-            Text(combat.playerStatuses.joinToString(" · "), style = GameType.system, color = Color(0xFFFF7043))
+            Text(combat.playerStatuses.joinToString(" · "), style = GameType.system, color = Game.colors.danger)
         }
         // Duruş ve efor tek satırda: dokununca açıklamalı seçim penceresi açılır.
         Row(
@@ -130,7 +133,7 @@ fun CombatScreen(
                 Column {
                     Text(l.prose, style = GameType.narrationPast, color = MaterialTheme.colorScheme.onBackground)
                     val n = l.numbers
-                    if (showNumbers && n != null) Text(n, style = GameType.system, color = Color(0xFFFFD54F))
+                    if (showNumbers && n != null) Text(n, style = GameType.system, color = Game.colors.amber)
                 }
             }
             items(notices) { SystemCard(it) }
@@ -212,7 +215,6 @@ private fun TacticsDialog(stance: Stance, effort: Int, onAction: (CombatAction) 
                     val selected = st == stance
                     OutlinedButton(
                         onClick = { onAction(CombatAction.SetStance(st)) },
-                        shape = RoundedCornerShape(12.dp),
                         border = BorderStroke(if (selected) 2.dp else 1.dp, if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline),
                         modifier = Modifier.fillMaxWidth(),
                     ) {
@@ -249,33 +251,36 @@ private fun stanceLabel(s: Stance) = when (s) {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun EnemyCard(e: EnemyView, selected: Boolean, onSelect: () -> Unit, onDetail: () -> Unit) {
-    val shape = RoundedCornerShape(6.dp)
     val accent = when {
         !e.alive -> MaterialTheme.colorScheme.outline
-        e.boss -> Color(0xFFEF5350)
+        e.boss -> Game.colors.danger
         selected -> MaterialTheme.colorScheme.primary
         else -> MaterialTheme.colorScheme.outline
     }
-    Surface(
-        color = MaterialTheme.colorScheme.surfaceVariant,
-        shape = shape,
+    // Düşman da bir Sistem penceresidir: seçili olan buz mavisi, boss kızıl kenarlı.
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .border(if (selected && e.alive) 2.dp else 1.dp, accent, shape)
+            .systemWindow(accent = accent, cut = 8)
             .combinedClickable(onClick = onSelect, onLongClick = onDetail),
     ) {
-        Column(modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)) {
+        Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(e.name, style = GameType.systemTitle, color = accent, modifier = Modifier.weight(1f))
+                Text(
+                    e.name,
+                    style = GameType.heading.copy(fontSize = 17.sp, lineHeight = 22.sp),
+                    color = if (e.alive) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.outline,
+                    modifier = Modifier.weight(1f),
+                )
                 Text(stringResource(R.string.enemy_level, e.level, e.gradeName), style = GameType.system)
             }
-            StatBar(stringResource(R.string.hp), e.hp.toLong(), e.maxHp.toLong(), Color(0xFFEF5350), Modifier.padding(top = 2.dp))
+            StatBar(stringResource(R.string.hp), e.hp.toLong(), e.maxHp.toLong(), Game.colors.danger, Modifier.padding(top = 2.dp))
             val extra = listOfNotNull(
                 if (e.boss && e.phase > 0) stringResource(R.string.boss_phase, e.phase) else null,
                 e.statuses.joinToString(" · ").ifEmpty { null },
                 e.weakness?.let { stringResource(R.string.weakness_short) },
             )
-            if (extra.isNotEmpty()) Text(extra.joinToString(" · "), style = GameType.system, color = Color(0xFFFFA726))
+            if (extra.isNotEmpty()) Text(extra.joinToString(" · "), style = GameType.system, color = Game.colors.amber)
         }
     }
 }
@@ -290,9 +295,9 @@ private fun EnemyDetail(e: EnemyView, onDismiss: () -> Unit) {
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(e.description, style = GameType.narrationPast)
                 // OP MC: gerçek statlar her zaman görünür.
-                Text(stringResource(R.string.true_stats), style = GameType.system, color = EchoColor)
+                Text(stringResource(R.string.true_stats), style = GameType.system, color = Game.colors.echo)
                 Text(e.stats.joinToString("  ") { "${it.abbr} ${it.value}" }, style = GameType.system)
-                Text(e.weakness ?: stringResource(R.string.weakness_unknown), style = GameType.system, color = Color(0xFFFFA726))
+                Text(e.weakness ?: stringResource(R.string.weakness_unknown), style = GameType.system, color = Game.colors.amber)
             }
         },
     )
@@ -343,7 +348,7 @@ private fun GridButton(label: Int, enabled: Boolean, modifier: Modifier, primary
 @Composable
 private fun ExecutionPanel(enemy: String, options: List<Pair<String, Pair<String, String>>>, onPick: (String) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.padding(top = 4.dp)) {
-        Text(stringResource(R.string.execution_title, enemy), style = GameType.systemTitle, color = Color(0xFFEF5350), fontWeight = FontWeight.Bold)
+        Text(stringResource(R.string.execution_title, enemy), style = GameType.systemTitle, color = Game.colors.danger, fontWeight = FontWeight.Bold)
         options.forEach { (id, label) ->
             OutlinedButton(onClick = { onPick(id) }, modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.fillMaxWidth()) {
@@ -359,7 +364,7 @@ private fun ExecutionPanel(enemy: String, options: List<Pair<String, Pair<String
 private fun DeathPanel(onCheckpoint: () -> Unit) {
     Box(modifier = Modifier.fillMaxWidth().padding(top = 8.dp), contentAlignment = Alignment.Center) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(stringResource(R.string.you_died), style = GameType.systemTitle, color = Color(0xFFEF5350))
+            Text(stringResource(R.string.you_died), style = GameType.systemTitle, color = Game.colors.danger)
             Button(onClick = onCheckpoint, modifier = Modifier.padding(top = 6.dp)) { Text(stringResource(R.string.return_checkpoint)) }
         }
     }

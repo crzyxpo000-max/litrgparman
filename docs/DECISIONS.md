@@ -33,6 +33,15 @@ Ayrıntı: `docs/CHAPTERS.md` (bölüm planı), `docs/STORY_FLOW.md` (teşhis ve
 | 129 | Terim kanonu (QA P2-15): Kadimler'in hasat ettiği dünyaların Sistem sayımı **bin dört yüz on bir**dir (konuşmada "bin dört yüz"); anlatı ve Kadim ağzında yuvarlak "bin dünya / a thousand worlds" serbesttir, "yüzlerce dünya" kullanılmaz; Thessar'ın kendi payı 39 (#115). Yankı'nın taşıdığı kişi TR "taşıyıcı", EN yalnız "carrier" ("host" değil). EN kademe yazımı "Grade S" (ad), "an S-Grade hunter" (sıfat). Yankı fısıltısında TR "sistem" (kesmesiz: "sistemin"), EN "the system" küçük harfle | GDD'de sayı yok; "bin dünya" en sık (≈12), "bin dört yüz on bir" Sistem'in kesin sayımı, ikisi çelişmiyor; "yüzlerce" sayıyı küçülttüğü için çelişkiydi. | Yeni çok-evren içeriği yazılırken |
 | 128 | Prologda (`story/00_prolog.yaml`) ve uyanış satırlarında (`awakenings.yaml`) Yankı'nın sözleri tırnaklı ve büyük harfle yazılır; #101'deki küçük harf/tırnaksız kuralı bunlara uygulanmaz. Üslup ve QA araçları bunları sorun saymaz | Kullanıcı kararı: kasıtlı (ilk temasta ses henüz "ses"tir; uyanış anları yüksek sesle söylenir). | — |
 
+## Arayüz kimliği "Kırık pencere" — 2026-11-07
+
+Ayrıntı: `docs/UI_DIRECTION.md` (üç yön ve seçim), taslak `docs/ui/a_c_birlesim.html`. Tokenlar tek yerde: `ui/theme/Theme.kt`.
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 147 | **Görsel kimlik: A + C birleşimi.** Sistem kusursuz bir cam pencere: sol üst ve sağ alt köşesi kesik (`windowCut`), tek buz mavisi vurgu, %4 tarama çizgisi. Yankı bu düzene sızan tek "yanlış" şey: ters video satır ve macenta kanal kayması (`EchoLine`). Yazılar uygulamaya gömülü, hepsi OFL: Literata (anlatı), JetBrains Mono (Sistem), Chakra Petch (başlık ve sayı); lisanslar `assets/licenses/` ve Ayarlar → Lisanslar. Büyük anlar kendi ekranında: seviye (pencere açılır, sayı sayar, satırlar sırayla yanar), evrim (eski kademe → yeni harf), sınıf, Benzersiz yetenek (beyaz-altın pencere, tek ışık geçişi), Küresel Sıralama (eski sıranın üstü çizili, ▲ fark), sınır kırılması (gerçek seviyenin açığa çıkması ve Ezme: ekran bozuk karakterlerle çöker, sonra `− görünen / + gerçek` farkı). Motor bunları `Notice.moment`, `from`, `to` ile işaretler. Cihazda animasyonlar kapalıysa her şey hareketsiz ve son haliyle gelir; bozulma katmanı ekran okuyucudan gizlidir, anın tamamı tek bir duyuru olarak okunur | Kullanıcının seçimi (üç yön arasından, taslak görselle). Oyunun üst kuralı (kahraman bir anomali, Yankı ona bağlı) arayüzde de görünsün: Sistem soğuk ve kusursuz, anomali onu bozar. | Oyuncu geri bildirimi; okuma süresi uzun oturumlarda yorucu bulunursa tarama çizgisi kaldırılır. |
+| 148 | **Tek koyu tema.** Ayrı AMOLED seçeneği kaldırıldı. Koyu temada zemin saf siyah, paneller gece mavisi. Kayıtlı eski "AMOLED" ayarı koyu tema olarak okunur | Kullanıcı: koyu ve AMOLED tek seçenek olsun. Android ekranın AMOLED olup olmadığını güvenilir biçimde bildirmiyor; saf siyah zemin AMOLED'de pikselleri kapatır, LCD'de gece mavisinden ayırt edilmez. | — |
+
 ## Arayüz sadeleştirme — 2026-11-07
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |

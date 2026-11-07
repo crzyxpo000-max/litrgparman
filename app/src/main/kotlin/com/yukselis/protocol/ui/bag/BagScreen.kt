@@ -9,9 +9,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
+import com.yukselis.protocol.ui.components.Button
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
+import com.yukselis.protocol.ui.components.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,11 +25,12 @@ import com.yukselis.engine.story.ItemView
 import com.yukselis.engine.story.NoticeView
 import com.yukselis.engine.story.RecipeView
 import com.yukselis.protocol.R
+import com.yukselis.protocol.ui.theme.Game
 import com.yukselis.protocol.ui.components.SectionTitle
 import com.yukselis.protocol.ui.components.StatBar
 import com.yukselis.protocol.ui.components.SystemCard
 import com.yukselis.protocol.ui.theme.GameType
-import com.yukselis.protocol.ui.theme.rarityColor
+import com.yukselis.protocol.ui.theme.rarityColorOf
 
 /** Çanta: para, envanter (kullanılabilir eşyalar), meslek ve üretim. */
 @Composable
@@ -50,7 +51,7 @@ fun BagScreen(
             Text(
                 text = stringResource(R.string.currency_line, bag.credits, bag.crystals),
                 style = GameType.systemTitle,
-                color = Color(0xFFFFD54F),
+                color = Game.colors.amber,
             )
             SectionTitle(stringResource(R.string.inventory))
             if (bag.items.isEmpty()) Text(stringResource(R.string.inventory_empty), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -64,7 +65,7 @@ fun BagScreen(
                 Text(stringResource(R.string.no_profession), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
             } else {
                 Text(stringResource(R.string.profession_level, professionName, bag.professionLevel), style = GameType.systemTitle)
-                StatBar("XP", bag.professionXp.toLong(), bag.professionXpToNext.toLong(), Color(0xFF66BB6A), Modifier.padding(top = 4.dp, bottom = 4.dp))
+                StatBar("XP", bag.professionXp.toLong(), bag.professionXpToNext.toLong(), Game.colors.success, Modifier.padding(top = 4.dp, bottom = 4.dp))
             }
         }
         items(bag.recipes, key = { "r-${it.id}" }) { RecipeRow(it, bag.professionLevel) { onCraft(it.id) } }
@@ -76,7 +77,7 @@ private fun ItemRow(item: ItemView, onUse: () -> Unit) {
     Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small, modifier = Modifier.fillMaxWidth()) {
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(12.dp)) {
             Column(modifier = Modifier.weight(1f)) {
-                Text("${item.name} ×${item.count}", style = GameType.systemTitle, color = rarityColor(item.rarity))
+                Text("${item.name} ×${item.count}", style = GameType.systemTitle, color = rarityColorOf(item.rarity))
                 Text(item.description, style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             if (item.usable) OutlinedButton(onClick = onUse) { Text(stringResource(R.string.use)) }
@@ -96,7 +97,7 @@ private fun RecipeRow(recipe: RecipeView, level: Int, onCraft: () -> Unit) {
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 if (level < recipe.minLevel) {
-                    Text(stringResource(R.string.requires_level, recipe.minLevel), style = GameType.system, color = Color(0xFFEF5350))
+                    Text(stringResource(R.string.requires_level, recipe.minLevel), style = GameType.system, color = Game.colors.danger)
                 }
             }
             Button(onClick = onCraft, enabled = recipe.craftable) { Text(stringResource(R.string.craft)) }

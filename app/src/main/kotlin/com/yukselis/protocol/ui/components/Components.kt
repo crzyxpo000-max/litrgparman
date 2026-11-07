@@ -32,40 +32,41 @@ import com.yukselis.protocol.R
 import com.yukselis.protocol.ui.theme.GameType
 import com.yukselis.protocol.ui.theme.glitch
 import com.yukselis.protocol.ui.theme.noticeColor
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 
-/** Sistem bildirim kartı: köşeli çerçeve, renkli kenar, tek aralıklı yazı. */
+/**
+ * Sistem bildirim kartı: kesik köşeli pencere, türün renginde kenar, tek aralıklı yazı.
+ * Yankı'nın bildirimi pencere değildir: ters video bir blok olarak araya sızar.
+ */
 @Composable
 fun SystemCard(notice: NoticeView, modifier: Modifier = Modifier) {
     val accent = noticeColor(notice.kind, notice.rarity)
-    val shape = RoundedCornerShape(6.dp)
     val spoken = (listOf(notice.title) + notice.lines).joinToString(" ") { if (it.endsWith(".")) it else "$it." }
+    val locale = LocalConfiguration.current.locales[0]
+    if (notice.kind == NoticeKind.ECHO) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(2.dp),
+            modifier = modifier.semantics(mergeDescendants = true) { contentDescription = spoken },
+        ) {
+            EchoLine(glitch(notice.title), style = GameType.system.copy(fontWeight = FontWeight.Medium))
+            notice.lines.forEach { EchoLine(it) }
+        }
+        return
+    }
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .clip(shape)
-            .background(accent.copy(alpha = 0.08f))
-            .border(1.5.dp, accent.copy(alpha = 0.8f), shape)
-            .padding(horizontal = 14.dp, vertical = 10.dp)
+            .systemWindow(accent = accent.copy(alpha = 0.85f))
+            .padding(horizontal = 14.dp, vertical = 11.dp)
             .semantics(mergeDescendants = true) { contentDescription = spoken },
     ) {
-        Text(
-            text = when (notice.kind) {
-                NoticeKind.ECHO -> "[ ${glitch(stringResource(R.string.echo_header))} ]"
-                NoticeKind.COMPANION -> "[ ${stringResource(R.string.companion_header)} ]"
-                else -> "[ ${stringResource(R.string.system_header)} ]"
-            },
-            style = GameType.system,
-            color = accent.copy(alpha = 0.8f),
-        )
-        Spacer(Modifier.height(4.dp))
-        val echo = notice.kind == NoticeKind.ECHO
-        Text(text = if (echo) glitch(notice.title) else notice.title, style = GameType.systemTitle, color = accent)
+        val header = if (notice.kind == NoticeKind.COMPANION) stringResource(R.string.companion_header) else stringResource(R.string.system_header)
+        Text(text = "[ ${header.uppercase(locale)} ]", style = GameType.systemTitle.copy(fontSize = 11.sp), color = accent)
+        Spacer(Modifier.height(5.dp))
+        Text(text = notice.title, style = GameType.systemTitle, color = MaterialTheme.colorScheme.onSurface)
         notice.lines.forEach { line ->
-            Text(
-                text = line,
-                style = GameType.system,
-                color = if (echo) accent.copy(alpha = 0.85f) else MaterialTheme.colorScheme.onSurface,
-            )
+            Text(text = line, style = GameType.system, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.88f))
         }
     }
 }
@@ -94,10 +95,11 @@ fun StatBar(
             progress = { fraction },
             color = color,
             trackColor = color.copy(alpha = 0.18f),
+            gapSize = 0.dp,
+            drawStopIndicator = {},
             modifier = Modifier
                 .weight(1f)
-                .height(6.dp)
-                .clip(RoundedCornerShape(3.dp)),
+                .height(6.dp),
         )
         Spacer(Modifier.width(8.dp))
         Text(
@@ -112,11 +114,10 @@ fun StatBar(
 
 @Composable
 fun SectionTitle(text: String, modifier: Modifier = Modifier) {
-    // Türkçede i → İ olmalı; büyük harfe çevirirken seçili dilin yerel ayarı kullanılır.
-    val locale = LocalConfiguration.current.locales[0]
+    // Bölüm başlığı: büyük harf değil, kesik köşeli başlık yazısı (DECISIONS: arayüz kimliği).
     Text(
-        text = text.uppercase(locale),
-        style = GameType.systemTitle,
+        text = text,
+        style = GameType.heading.copy(fontSize = 17.sp),
         color = MaterialTheme.colorScheme.primary,
         modifier = modifier.padding(top = 20.dp, bottom = 8.dp),
     )
