@@ -23,7 +23,7 @@ olaylar:
         paragraflar:
           - { tr: "Kopya sokağın otobüs durağında biri oturuyor. Bu katta insan görmeyeli epey oldu, ama siyah ceketi uzaktan tanıyorsun: {npc:aras_kurt} çakısıyla elma dilimliyor, gözünü de durağın tabelasından ayırmıyor.", en: "Someone's sitting in the bus shelter on the copied street. You haven't seen a person on this floor in a long time, but you'd know that black jacket anywhere: {npc:aras_kurt}, slicing an apple with his pocketknife, eyes glued to the route sign." }
           - { tr: "\"Tabeladaki durakların hepsi bir harf kaymış,\" diyor. \"Sokaklar da öyle. Merdiven dört blok ötede, ama hangi dört blok olduğunu kimse bilmiyor.\"", en: "\"Every stop on this sign is off by one letter,\" he says. \"Streets too. The stairs are four blocks over, but nobody knows which four.\"" }
-          - { tr: "Son dilimi ağzına atıp ayağa kalkıyor. \"Yarışalım mı? Kim önce varırsa katın ödülü onun, Sıralama'daki yeri de.\"", en: "He pops the last slice in his mouth and stands up. \"Race you? First one there gets the floor's reward. And the spot on the Ranking.\"" }
+          - { tr: "Son dilimi ağzına atıp ayağa kalkıyor. \"Yarışalım mı? Kim önce varırsa katın ödülü onun, Küresel Sıralama'daki yeri de.\"", en: "He pops the last slice in his mouth and stands up. \"Race you? First one there gets the floor's reward. And the spot on the Global Ranking.\"" }
         sezgiler:
           - kosul: { stat: { per: 22 } }
             metin: { tr: "Çakıyı tutan eli sakin, ama dizi durmadan sallanıyor. Bu yarışı senden çok o istiyor.", en: "The hand on the knife is steady, but his knee won't stop bouncing. He wants this race more than you do." }
@@ -47,7 +47,7 @@ olaylar:
               - hafiza: { npc: "aras_kurt", id: "olay:kule_an_aras_0", agirlik: 10 }
             sonraki: "kaa0_kazan"
           - id: "yuru"
-            etiket: { tr: "Yarışma; onunla yürü", en: "Skip the race. Walk with him" }
+            etiket: { tr: "Yarışmayı bırak, onunla yürü", en: "Skip the race. Walk with him" }
             etkiler:
               - npc_seviye: { aras_kurt: 2 }
               - iliski: { aras_kurt: { guven: 4, baglilik: 2 } }
@@ -58,11 +58,11 @@ olaylar:
       - id: "kaa0_kazan"
         yer: "kule"
         paragraflar:
-          - { tr: "Merdivenin ilk basamağına sen varıyorsun, o bir nefes arkandan geliyor. Ellerini dizlerine dayayıp soluklanırken gülmeye başlıyor.", en: "You hit the first stair. He's one breath behind you. He braces his hands on his knees to catch his breath, and starts to laugh." }
-          - { tr: "\"Bir dahakine tabelaları ben okurum,\" diyerek elmanın koçanını omzunun üstünden fırlatıyor. Koçan kaldırımda iki kez sekip gözden kayboluyor; Kule kendi çöpünü kendi topluyor.", en: "\"Next time, I'm reading the signs,\" he says, and flicks the apple core over his shoulder. It bounces twice on the sidewalk and disappears. The Spire picks up its own trash." }
+          - { tr: "Merdivenin ilk basamağına sen varıyorsun. {npc:aras_kurt} bir nefes arkandan geliyor; ellerini dizlerine dayayıp soluklanırken gülmeye başlıyor.", en: "You hit the first stair. {npc:aras_kurt} is one breath behind you. He braces his hands on his knees to catch his breath, and starts to laugh." }
+          - { tr: "\"Bu kez şanslıydın; sıradaki yarışta tabelaları ben okurum,\" diyerek elmanın koçanını omzunun üstünden fırlatıyor. Koçan kaldırımda iki kez sekip gözden kayboluyor; Kule kendi çöpünü kendi topluyor.", en: "\"You got lucky. Next race, I'm reading the signs,\" he says, and flicks the apple core over his shoulder. It bounces twice on the sidewalk and disappears. The Spire picks up its own trash." }
         secenekler:
           - id: "el"
-            etiket: { tr: "Elini uzatıp onu doğrult", en: "Give him a hand up" }
+            etiket: { tr: "Elini uzat, ayağa kalkmasına yardım et", en: "Give him a hand up" }
             etkiler:
               - iliski: { aras_kurt: { baglilik: 1 } }
             sonraki: "@akis"
@@ -73,8 +73,8 @@ olaylar:
       - id: "kaa0_kaybet"
         yer: "kule"
         paragraflar:
-          - { tr: "Üçüncü köşede bir tabela seni yanlış sokağa sokuyor. Geri döndüğünde {npc:aras_kurt} çoktan merdivenin başına kurulmuş, çakısıyla tırnaklarını temizliyor.", en: "At the third corner a sign sends you down the wrong street. By the time you double back, {npc:aras_kurt} is already parked at the top of the stairs, cleaning his nails with the pocketknife." }
-          - { tr: "\"Bir harf,\" diyor. \"Bir harf kaydı diye kaybettin. Akşam Sıralama'ya bakmayı unutma.\"", en: "\"One letter,\" he says. \"You lost by one letter. Don't forget to check the Ranking tonight.\"" }
+          - { tr: "Üçüncü köşede bir tabela seni yanlış sokağa sokuyor. Geri döndüğünde {npc:aras_kurt} çoktan merdivenin başına kurulmuş, çakısıyla tırnaklarını temizliyor.", en: "At the third corner a sign sends you down the wrong street. By the time you double back, {npc:aras_kurt} is already parked at the stairs, cleaning his nails with the pocketknife." }
+          - { tr: "\"Bir harf,\" diyor. \"Bir harf kaydı diye kaybettin. Akşam Küresel Sıralama'ya bakmayı unutma.\"", en: "\"One letter,\" he says. \"You lost by one letter. Don't forget to check the Global Ranking tonight.\"" }
         secenekler:
           - id: "soz"
             etiket: { tr: "\"Bir dahakine.\"", en: "\"Next time.\"" }
@@ -89,7 +89,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Bir süre yan yana yürüyorsunuz. Pastanenin camına asılı siparişin önünde ikiniz de duruyorsunuz: teslim saati akşam yedi, almaya gelen olmamış.", en: "You walk side by side for a while. You both stop in front of the order taped to the bakery window: pickup at seven p.m. Nobody ever came for it." }
-          - { tr: "{npc:aras_kurt} bir şey diyecek gibi oluyor, sonra vazgeçiyor. \"Sıkıldım,\" deyip koşmaya başlıyor; merdivenin başına varınca dönüp seni bekliyor, belki de ilk kez.", en: "{npc:aras_kurt} looks like he's about to say something, then doesn't. \"I'm bored,\" he says, and takes off running. At the top of the stairs he turns around and waits for you. Maybe for the first time ever." }
+          - { tr: "{npc:aras_kurt} bir şey diyecek gibi oluyor, sonra vazgeçiyor. \"Sıkıldım,\" deyip koşmaya başlıyor; merdivenin başına varınca dönüp seni bekliyor, belki de ilk kez.", en: "{npc:aras_kurt} looks like he's about to say something, then doesn't. \"I'm bored,\" he says, and takes off running. At the stairs he turns around and waits for you. Maybe for the first time ever." }
         secenekler:
           - id: "yetis"
             etiket: { tr: "Acele etmeden yanına yürü", en: "Take your time walking up to him" }
@@ -111,7 +111,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Sandal bu kez boş değil. {npc:aras_kurt} içinde bağdaş kurmuş, sırılsıklam Sistem bildirimini kürek niyetine suya daldırıp çekiyor; bir arpa boyu yol aldığı yok.", en: "This time the rowboat isn't empty. {npc:aras_kurt} sits cross-legged in it, dipping the soggy System notice into the water like a paddle. He isn't getting anywhere." }
-          - { tr: "\"Merdiven şu tarafta,\" diyor ufku göstererek. \"Bir kilometre var, belki daha fazla. Sandal da tek kişilik.\" Su göğsüne kadar çıkmış, soğuğu kemiklerine işliyor.", en: "\"Stairs are that way,\" he says, pointing at the horizon. \"Half a mile, maybe more. And the boat seats one.\" The water's up to your chest, and the cold is getting into your bones." }
+          - { tr: "\"Merdiven şu tarafta,\" diyor ufku göstererek. \"Bir kilometre var, belki daha fazla. Sandal da tek kişilik.\" Sen göğsüne kadar sudasın; soğuk kemiklerine işliyor.", en: "\"Stairs are that way,\" he says, pointing at the horizon. \"Over half a mile, maybe more. And the boat seats one.\" The water's up to your chest, and the cold is getting into your bones." }
           - metin: { tr: "Uzakta, merdivenin üstünde bir Sistem tabelası yanıp sönüyor: [Kat 15 · İlk geçiş: boş]. {npc:aras_kurt} da görmüş; gözünü oradan ayırmıyor.", en: "Far off, over the stairs, a System sign blinks: [Floor 15 · First clear: open]. {npc:aras_kurt} has seen it too. He can't take his eyes off it." }
             kosul: { degisken_max: { kule_kat: 14 } }
         sezgiler:
@@ -121,7 +121,7 @@ olaylar:
             metin: { tr: "dipteki ışık az önce sandalın altından geçti. o fark etmedi. sen ettin.", en: "the light down deep just passed under the boat. he didn't notice. you did." }
         secenekler:
           - id: "yuz"
-            etiket: { tr: "Yüz; sandaldan önce var", en: "Swim for it. Beat the boat" }
+            etiket: { tr: "Yüzerek sandaldan önce var", en: "Swim for it. Beat the boat" }
             zar: { stat: "end", zorluk: 46, basarisiz: "kaa1_kaybet", basarisiz_etkiler: [{ can: -8 }, { npc_seviye: { aras_kurt: 2 } }, { iliski: { aras_kurt: { guven: 2, baglilik: 3 } } }, { hafiza: { npc: "aras_kurt", id: "olay:kule_an_aras_1", agirlik: 10 } }] }
             etkiler:
               - can: -8
@@ -150,30 +150,30 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "İlk basamağa sen tutunuyorsun, üstünden tuzlu sular süzülüyor. {npc:aras_kurt} arkandan geliyor; sandalı bırakmış, yarı yüzüp yarı küfrederek.", en: "You're the one who grabs the first stair, salt water pouring off you. {npc:aras_kurt} comes in behind you, boat abandoned, half swimming, half swearing." }
-          - { tr: "Basamağa çıkıp ceketini sıkınca ceketten bir avuç deniz akıyor. \"Bunu unutmayacağım,\" diyor. Kin mi hayranlık mı, sesinden çıkaramıyorsun.", en: "He hauls himself up and wrings out his jacket, and a handful of sea runs out of it. \"I won't forget this,\" he says. Grudge or admiration, you can't tell from his voice." }
+          - { tr: "Basamağa çıkıp ceketini sıkınca içinden bir avuç deniz akıyor. \"Bunu unutmayacağım,\" diyor. Kin mi hayranlık mı, sesinden çıkaramıyorsun.", en: "He hauls himself up and wrings out his jacket, and a handful of sea runs out of it. \"I won't forget this,\" he says. Grudge or admiration, you can't tell from his voice." }
           - metin: { tr: "Tepedeki tabela hâlâ yanıp sönüyor: [Kat 15 · İlk geçiş: boş]. Arada birkaç kat kaldı, ikiniz de biliyorsunuz.", en: "The sign up top is still blinking: [Floor 15 · First clear: open]. A few floors to go, and you both know it." }
             kosul: { degisken_max: { kule_kat: 14 } }
         secenekler:
           - id: "devam"
-            etiket: { tr: "Islak ıslak merdivene tırman", en: "Climb the stairs, still dripping" }
+            etiket: { tr: "Sırılsıklam merdivene tırman", en: "Climb the stairs, still dripping" }
             sonraki: "@akis"
 
       - id: "kaa1_kaybet"
         yer: "kule"
         paragraflar:
           - { tr: "Yolun yarısında soğuk bacaklarını kilitliyor. Tam batmak üzereyken bir el yakana yapışıp seni sandala çekiyor: {npc:aras_kurt}.", en: "Halfway there, the cold locks up your legs. Just as you start to go under, a hand grabs your collar and hauls you into the boat. {npc:aras_kurt}." }
-          - { tr: "Bir süre hiçbir şey demeden ıslak bildirimle kürek çekiyor. Merdivene bir kulaç kala ayağa kalkıp atlıyor ve ilk basamağa senden önce basıyor. \"Kurtarmak başka,\" diyor dönüp, \"yarış başka.\"", en: "For a while he paddles with the soggy notice and doesn't say a word. One stroke from the stairs he stands up, jumps, and his foot hits the first stair before yours. \"Saving you's one thing,\" he says, turning around. \"The race is another.\"" }
+          - { tr: "Bir süre hiçbir şey demeden ıslak bildirimle kürek çekiyor. Merdivene bir kulaç kala ayağa kalkıp atlıyor ve ilk basamağa senden önce basıyor. \"Kurtarmak başka,\" diyor dönüp, \"yarış başka.\"", en: "For a while he paddles with the soggy notice and doesn't say a word. One stroke from the stairs he stands up, jumps, and his foot hits the first stair before yours. \"Saving you is one thing,\" he says, turning around. \"The race is another.\"" }
           - metin: { tr: "Merdivenin üstündeki tabelada bir satır değişiyor: [Kat 15 · İlk geçiş: {npc:aras_kurt|tam} · beklemede]. Sen titremeyi bırakana kadar o çoktan yukarıda olacak.", en: "On the sign above the stairs, a line changes: [Floor 15 · First clear: {npc:aras_kurt|tam} · pending]. By the time you've stopped shivering, he'll be long gone up there." }
             kosul: { degisken_max: { kule_kat: 14 } }
         secenekler:
           - id: "devam_ilk"
-            etiket: { tr: "Dişlerin takırdayarak peşinden çık", en: "Teeth chattering, follow him up" }
+            etiket: { tr: "Dişlerin takırdaya takırdaya peşinden çık", en: "Teeth chattering, follow him up" }
             goster: { degisken_max: { kule_kat: 14 } }
             etkiler:
               - bayrak: "kule_ilk_15_aras"
             sonraki: "@akis"
           - id: "devam"
-            etiket: { tr: "Dişlerin takırdayarak peşinden çık", en: "Teeth chattering, follow him up" }
+            etiket: { tr: "Dişlerin takırdaya takırdaya peşinden çık", en: "Teeth chattering, follow him up" }
             goster: { degisken_min: { kule_kat: 15 } }
             sonraki: "@akis"
 
@@ -181,7 +181,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Sandala binip ellerinizle kürek çekiyorsunuz, bir yanda sen, öbür yanda o. Dipteki ışık iki kez altınızdan geçiyor; ikiniz de ağzınızı açmıyorsunuz.", en: "You climb in and paddle with your hands, you on one side, him on the other. Twice the light from the deep passes under you. Neither of you says a thing." }
-          - { tr: "Merdivene bir kulaç kala sırıtıp ayağa kalkıyor. \"Ortaklık buraya kadar,\" deyip atlıyor, ilk basamak onun oluyor. Ardından dönüp sana elini uzatıyor.", en: "One stroke from the stairs he grins and stands up. \"Partnership ends here,\" he says, and jumps. The first stair's his. Then he turns around and holds out a hand." }
+          - { tr: "Merdivenin dibine yaklaşınca sırıtıp ayağa kalkıyor. \"Ortaklık buraya kadar,\" deyip atlıyor, ilk basamak onun oluyor. Ardından dönüp sana elini uzatıyor.", en: "Near the foot of the stairs he grins and stands up. \"Partnership ends here,\" he says, and jumps. The first stair's his. Then he turns around and holds out a hand." }
           - metin: { tr: "Merdivenin üstündeki tabelada bir satır değişiyor: [Kat 15 · İlk geçiş: {npc:aras_kurt|tam} · beklemede]. Uzattığı el hâlâ havada.", en: "On the sign above the stairs, a line changes: [Floor 15 · First clear: {npc:aras_kurt|tam} · pending]. His hand is still out." }
             kosul: { degisken_max: { kule_kat: 14 } }
         secenekler:
@@ -247,7 +247,7 @@ olaylar:
       - id: "kaa2_kazan"
         yer: "kule"
         paragraflar:
-          - { tr: "Merdivenin ışığına ilk sen çıkıyorsun. Ardından camların arasından {npc:aras_kurt} beliriyor; hangisi olduğunu bir an yine kestiremiyorsun, ta ki yansımaları teker teker sönüp geriye yalnız o kalana dek.", en: "You make it into the stairway light first. Then {npc:aras_kurt} steps out of the glass, and for a second you still can't tell which one he is, until his reflections go out one by one and there's just him." }
+          - { tr: "Merdivenin ışığına ilk sen çıkıyorsun. Ardından camların arasından {npc:aras_kurt} beliriyor; hangisinin o olduğunu bir an yine kestiremiyorsun; yansımaları teker teker sönüp geriye yalnız o kalıncaya kadar.", en: "You make it into the stairway light first. Then {npc:aras_kurt} steps out of the glass, and for a second you still can't tell which one he is, until his reflections go out one by one and there's just him." }
           - { tr: "\"Camlar senin tarafını tuttu,\" diyor. Yüzünü bir kez daha cama çeviriyor, ama yansıması ona bakmıyor.", en: "\"The glass took your side,\" he says. He turns to the pane one more time. His reflection doesn't look back at him." }
         secenekler:
           - id: "devam"
@@ -258,7 +258,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Yansımanın peşine takılıyorsun, ama izlediğin onunki değil, seninki çıkıyor. Yarım an erken davranan yansıman seni bir camın tam ortasına bindiriyor.", en: "You chase the reflection, but it turns out to be yours, not his. Your reflection, half a beat early, walks you face-first into the middle of a pane." }
-          - { tr: "Cam daha çınlarken {npc:aras_kurt|in} sesi merdivenin başından geliyor: \"Kendine fazla güvendin. Bunu ben de yapıyorum, biliyor musun?\"", en: "While the glass is still ringing, {npc:aras_kurt|pos} voice comes from the top of the stairs. \"You trusted yourself too much. I do that too, you know.\"" }
+          - { tr: "Cam daha çınlarken {npc:aras_kurt|in} sesi merdivenin başından geliyor: \"Kendine fazla güvendin. Bunu ben de yapıyorum, biliyor musun?\"", en: "While the glass is still ringing, {npc:aras_kurt|pos} voice comes from the stairs. \"You trusted yourself too much. I do that too, you know.\"" }
         secenekler:
           - id: "devam"
             etiket: { tr: "Burnunu ovuşturup merdivene yürü", en: "Rub your nose and head for the stairs" }
@@ -267,8 +267,8 @@ olaylar:
       - id: "kaa2_seslen"
         yer: "kule"
         paragraflar:
-          - { tr: "\"Soldan üçüncü cam!\" diye bağırıyorsun. Duraksayıp sana bakıyor, sonra yansımasının geçtiği camdan geçiyor ve merdivene ilk o varıyor.", en: "\"Third pane on the left!\" you shout. He stops and looks at you, then goes through the pane his reflection did, and he's first to the stairs." }
-          - { tr: "Bekliyor. Yanına vardığında gözleri sende değil, yerde. \"Neden?\" diye soruyor; cevabını beklemeden basamakları çıkmaya başlıyor, ama yanında yürüyebileceğin kadar ağır.", en: "He waits. When you get there, he's looking at the floor, not at you. \"Why?\" he asks. He starts up the stairs before you can answer, but slowly. Slow enough for you to walk beside him." }
+          - { tr: "\"Soldan üçüncü cam!\" diye bağırıyorsun. Duraksayıp sana bakıyor, sonra yansımasının girdiği camdan geçiyor ve merdivene ilk o varıyor.", en: "\"Third pane on the left!\" you shout. He stops and looks at you, then goes through the pane his reflection did, and he's first to the stairs." }
+          - { tr: "Bekliyor. Yanına vardığında gözleri sende değil, yerde. \"Neden?\" diye soruyor; cevabını beklemeden basamakları çıkmaya başlıyor, ama yanında yürüyebileceğin kadar yavaş.", en: "He waits. When you get there, he's looking at the floor, not at you. \"Why?\" he asks. He starts up the stairs before you can answer, but slowly. Slow enough for you to walk beside him." }
         secenekler:
           - id: "devam"
             etiket: { tr: "Yanında yürü", en: "Walk beside him" }
@@ -300,7 +300,7 @@ olaylar:
             metin: { tr: "saat senin nabzını aldı. onunkini de. ikiniz aynı sayıda atıyorsunuz ve bundan hiç hoşlanmıyorum.", en: "the clock took your pulse. his too. you're both beating on the same count, and i don't like it at all." }
         secenekler:
           - id: "atil"
-            etiket: { tr: "Tik sesinde boşluğa atıl", en: "Lunge for the gap on the tick" }
+            etiket: { tr: "Tikle birlikte boşluğa atıl", en: "Lunge for the gap on the tick" }
             zar: { stat: "agi", zorluk: 76, basarisiz: "kaa3_kaybet", basarisiz_etkiler: [{ can: -15 }, { npc_seviye: { aras_kurt: 3 } }, { iliski: { aras_kurt: { baglilik: 2 } } }, { hafiza: { npc: "aras_kurt", id: "olay:kule_an_aras_3", agirlik: 10 } }] }
             etkiler:
               - xp_seviye: 5
@@ -327,7 +327,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Tik! Omzunla boşluğa dalıyorsun. Dişli arkandan kapanırken kolunu sıyırıp geçiyor, o kadar; öbür tarafta yalnızsın.", en: "Tick! You throw your shoulder into the gap. The gear closes behind you and grazes your sleeve, nothing more. On the other side, you're alone." }
-          - { tr: "Bir tur sonra, bir saat mi bir dakika mı belli değil, {npc:aras_kurt} da geçiyor. Sesinde öfke yok, yalnızca hesap var: \"Bir tik. Seni bir tikle kaçırdım. Bunu bir yere yazdım.\"", en: "One turn later, whether it's an hour or a minute you can't say, {npc:aras_kurt} comes through. No anger in his voice, just math. \"One tick. I missed you by one tick. I'm writing that down.\"" }
+          - { tr: "Bir tur sonra, bir saat mi bir dakika mı belli değil, {npc:aras_kurt} da geçiyor. Sesinde öfke yok, yalnızca hesap var: \"Bir tik. Bir tik farkla yetişemedim. Bunu bir yere yazıyorum.\"", en: "One turn later, whether it's an hour or a minute you can't say, {npc:aras_kurt} comes through. No anger in his voice, just math. \"One tick. You beat me by one tick. I'm writing that down.\"" }
           - metin: { tr: "Dişlinin yüzündeki yazı yerli yerinde: [Kat 35 · İlk geçiş: boş]. Aranızdaki fark artık bir tik değil, birkaç kat.", en: "The writing on the gear is right where it was: [Floor 35 · First clear: open]. The gap between you isn't one tick anymore. It's a few floors." }
             kosul: { degisken_max: { kule_kat: 34 } }
         secenekler:
@@ -339,7 +339,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Tik! Boşluk açılıp kapanıyor; geçen {npc:aras_kurt} oluyor, sen bu yakada kalıyorsun. Dişlinin pirinç dişleri burnunun dibinden geçiyor.", en: "Tick! The gap opens and shuts, and {npc:aras_kurt} is the one who makes it. You're left on this side, the gear's brass teeth sliding past an inch from your nose." }
-          - { tr: "Bir tur bekliyorsun. Saatin içinde bir tur, kalbinin tik sesini taklit ettiği bitmek bilmeyen bir süre demek. Boşluk yeniden açıldığında karşıda kimse yok; dişlinin yüzünde yalnızca taze bir çentik duruyor.", en: "You wait a turn. Inside the clock, a turn is an endless stretch of your heart copying the ticking. When the gap opens again there's nobody on the other side, just a fresh notch cut into the face of the gear." }
+          - { tr: "Bir tur bekliyorsun. Saatin içinde bir tur, kalbin tikleri taklit ede ede geçen sonu gelmez bir süre demek. Boşluk yeniden açıldığında karşıda kimse yok; dişlinin yüzünde yalnızca taze bir çentik duruyor.", en: "You wait a turn. Inside the clock, a turn is an endless stretch, your heart mimicking the ticking. When the gap opens again there's nobody on the other side, just a fresh notch cut into the face of the gear." }
           - metin: { tr: "Çentiğin yanındaki yazı değişmiş: [Kat 35 · İlk geçiş: {npc:aras_kurt|tam} · beklemede].", en: "The writing next to the notch has changed: [Floor 35 · First clear: {npc:aras_kurt|tam} · pending]." }
             kosul: { degisken_max: { kule_kat: 34 } }
         secenekler:
@@ -435,7 +435,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Kanatlar ondan kopup sana dönüyor. Pençeler sırtını yararken bağıramıyorsun bile; çığlığın da öbür sesler gibi bu katta kalıyor.", en: "The wings peel off him and turn on you. Claws open up your back, and you can't even scream. Your scream stays on this floor with all the other sound." }
-          - { tr: "Kanatlıyı yere serdiğinde {npc:aras_kurt} çoktan merdivenin başında, kollarını kavuşturmuş sana bakıyor. Bunu onun için mi yaptın, yoksa beceriksizlikten mi; gözleri bunu soruyor.", en: "By the time you've put it down, {npc:aras_kurt} is already at the top of the stairs, arms crossed, looking at you. Did you do that for him, or did you just screw up? His eyes are asking." }
+          - { tr: "Kanatlıyı yere serdiğinde {npc:aras_kurt} çoktan merdivenin başında, kollarını kavuşturmuş sana bakıyor. Gözleri soruyor: bunu onun için mi yaptın, yoksa beceriksizlikten mi?", en: "By the time you've put it down, {npc:aras_kurt} is already at the stairs, arms crossed, looking at you. Did you do that for him, or did you just screw up? His eyes are asking." }
           - { tr: "Ses geri geldiğinde ilk duyduğun onun sesi oluyor: \"Kazandım. Ama sayılmaz.\"", en: "When sound comes back, his voice is the first thing you hear. \"I won. Doesn't count, though.\"" }
         secenekler:
           - id: "devam"
@@ -445,7 +445,7 @@ olaylar:
       - id: "kaa4_dur"
         yer: "kule"
         paragraflar:
-          - { tr: "Peşinden yetişip omzunu yakalıyorsun. Kıpırdama, diyorsun dudaklarınla; ikiniz de taş kesiliyorsunuz.", en: "You catch up and grab his shoulder. Don't move, you mouth. You both go still as stone." }
+          - { tr: "Ona yetişip omzunu yakalıyorsun. Kıpırdama, diyorsun dudaklarınla; ikiniz de taş kesiliyorsunuz.", en: "You catch up and grab his shoulder. Don't move, you mouth. You both go still as stone." }
           - { tr: "Kanatlar başınızın üstünde dönüyor, kalpleriniz yavaşladıkça çember genişliyor ve sonunda karanlığa çekiliyor. Merdivene adım adım, yan yana yürüyorsunuz.", en: "The wings circle over your heads, and the circle widens as your hearts slow, until finally it pulls back into the dark. You walk to the stairs side by side, one step at a time." }
           - { tr: "Ses geri gelince {npc:aras_kurt} uzun bir nefes veriyor. \"Kalbini nasıl susturdun?\" diye soruyor. \"Benimki susmaz. Hiç susmadı.\"", en: "When sound comes back, {npc:aras_kurt} lets out a long breath. \"How'd you shut your heart up?\" he asks. \"Mine won't. It never has.\"" }
         secenekler:
@@ -468,13 +468,13 @@ olaylar:
       - id: "kaa5_1"
         yer: "kule"
         paragraflar:
-          - { tr: "Molozun arasında {npc:aras_kurt|i} buluyorsun, ama koşmuyor. Yabancı kemiklerin çember hâlinde sardığı sönmüş ateşin başına çömelmiş, avucunda bir tutam kül.", en: "You find {npc:aras_kurt} in the rubble, and he isn't running. He's crouched by the dead fire that the alien bones sit circled around, a pinch of ash in his palm." }
-          - { tr: "\"Sonuna kadar birlikte beklemişler,\" diyor sana dönmeden. \"Kimse kimseyi geçmemiş. Ne aptallık, değil mi?\" Sesi aptallık der gibi çıkmıyor.", en: "\"They waited it out together, all the way to the end,\" he says without turning around. \"Nobody passed anybody. How dumb is that, right?\" He doesn't sound like he thinks it's dumb." }
+          - { tr: "Molozun arasında {npc:aras_kurt|i} buluyorsun, ama koşmuyor. Yabancı kemiklerin çember hâlinde sardığı sönmüş ateşin başına çömelmiş, avucunda bir tutam kül.", en: "You find {npc:aras_kurt} in the rubble, and he isn't running. He's crouched by the dead fire ringed with alien bones, a pinch of ash in his palm." }
+          - { tr: "\"Sonuna kadar birlikte beklemişler,\" diyor sana dönmeden. \"Kimse kimseyi geçmemiş. Ne aptallık, değil mi?\" Sesi bunu aptallık sayan birinin sesine benzemiyor.", en: "\"They waited it out together, all the way to the end,\" he says without turning around. \"Nobody passed anybody. What a dumb way to go, right?\" He doesn't sound like he thinks it's dumb." }
           - metin: { tr: "Uzaktaki merdivenin üstünde, yabancı alfabeli dükkân tabelasının yanında Sistem'in kendi tabelası parlıyor: [Kat 55 · İlk geçiş: boş].", en: "Over the far stairs, next to the shop sign in another alphabet, the System's own sign glows: [Floor 55 · First clear: open]." }
             kosul: { degisken_max: { kule_kat: 54 } }
         sezgiler:
           - kosul: { stat: { per: 135 } }
-            metin: { tr: "Kemiklerden birinin parmağına siyah bir kumaş şerit dolanmış, askerî bir yama gibi. Gözleri oraya takılıp kalmış.", en: "Wrapped around one of the finger bones is a black strip of cloth, like a military patch. His eyes are stuck on it." }
+            metin: { tr: "Kemiklerden birinin parmağına siyah bir kumaş şerit dolanmış, askerî bir yama gibi. {npc:aras_kurt|in} gözleri oraya takılıp kalmış.", en: "Wrapped around one of the finger bones is a black strip of cloth, like a military patch. {npc:aras_kurt|pos} eyes are stuck on it." }
           - kosul: { bayrak: "yanki_bagi" }
             metin: { tr: "yarışı bırakmış. bu ona hiç benzemiyor. küllerin içinde kendine benzeyen bir şey gördü.", en: "he's dropped the race. that's nothing like him. he saw something in the ashes that looked like him." }
         secenekler:
@@ -507,7 +507,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Merdivene varıp dönüyorsun. {npc:aras_kurt} hâlâ ateşin başında; avucundaki külü yavaşça yere döküp ellerini pantolonuna siliyor, sonra kalkıyor.", en: "You reach the stairs and turn around. {npc:aras_kurt} is still by the fire. He pours the ash slowly back onto the ground, wipes his hands on his pants, and stands." }
-          - { tr: "Yanına geldiğinde yüzü yine her zamanki yüzü. \"Bu sayılmaz,\" diyor. \"Ama yine de kazandın; Sıralama kimin neden kazandığına bakmıyor.\"", en: "When he gets to you, his face is his usual face again. \"That doesn't count,\" he says. \"But you won anyway. The Ranking doesn't care why.\"" }
+          - { tr: "Yanına geldiğinde yüzü yine her zamanki gibi. \"Bu sayılmaz,\" diyor. \"Yine de kazandın; Küresel Sıralama kimin neden kazandığına bakmıyor.\"", en: "When he gets to you, his face is his usual face again. \"That doesn't count,\" he says. \"But you won anyway. The Global Ranking doesn't care why.\"" }
           - metin: { tr: "Tabeladaki boş satır hâlâ seni bekliyor: [Kat 55 · İlk geçiş: boş].", en: "The empty line on the sign is still waiting for you: [Floor 55 · First clear: open]." }
             kosul: { degisken_max: { kule_kat: 54 } }
         secenekler:
@@ -518,9 +518,9 @@ olaylar:
       - id: "kaa5_kaybet"
         yer: "kule"
         paragraflar:
-          - { tr: "Arkanda moloz kayıyor. {npc:aras_kurt} çakılan bir kibrit gibi tutuşmuş; rüzgâr gibi yanından geçerken omzuna bir şaplak indiriyor.", en: "Behind you, rubble shifts. {npc:aras_kurt} has caught like a struck match. He blows past you and slaps your shoulder on the way." }
-          - { tr: "\"Sağ ol,\" diyor merdivenin başından. \"Bir an unutmuştum.\" Neyi unuttuğunu söylemiyor; sormana fırsat bırakmadan yukarı çıkıyor.", en: "\"Thanks,\" he says from the top of the stairs. \"Forgot for a second.\" He doesn't say what he forgot, and he's gone up before you can ask." }
-          - metin: { tr: "Tabelada bir satır değişiyor: [Kat 55 · İlk geçiş: {npc:aras_kurt|tam} · beklemede]. Yanındaki yabancı alfabeli tabela, o satırı okuyamıyormuş gibi sönük kalıyor.", en: "A line on the sign changes: [Floor 55 · First clear: {npc:aras_kurt|tam} · pending]. The sign in the other alphabet beside it stays dim, like it can't read that line." }
+          - { tr: "Arkanda moloz kayıyor. {npc:aras_kurt} çakılmış bir kibrit gibi tutuşmuş; rüzgâr gibi yanından geçerken omzuna bir şaplak indiriyor.", en: "Behind you, rubble shifts. {npc:aras_kurt} has caught like a struck match. He blows past you and slaps your shoulder on the way." }
+          - { tr: "\"Sağ ol,\" diyor merdivenin başından. \"Bir an unutmuştum.\" Neyi unuttuğunu söylemiyor; sormana fırsat bırakmadan yukarı çıkıyor.", en: "\"Thanks,\" he says from the stairs. \"Forgot for a second.\" He doesn't say what he forgot, and he's gone up before you can ask." }
+          - metin: { tr: "Tabelada bir satır değişiyor: [Kat 55 · İlk geçiş: {npc:aras_kurt|tam} · beklemede]. Yanındaki yabancı alfabeli tabela o satırı okuyamıyormuş gibi sönük kalıyor.", en: "A line on the sign changes: [Floor 55 · First clear: {npc:aras_kurt|tam} · pending]. The sign in the other alphabet beside it stays dim, like it can't read that line." }
             kosul: { degisken_max: { kule_kat: 54 } }
         secenekler:
           - id: "devam_ilk"
@@ -538,7 +538,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Yanına çömeliyorsun. Bir süre ikiniz de küllerin içinde kalmış dört kollu bir bebeğe bakıyorsunuz; onu oraya kimin bıraktığını sormuyorsunuz.", en: "You crouch down beside him. For a while you both look at a four-armed doll left in the ashes. Neither of you asks who left it there." }
-          - { tr: "Derken ayağa fırlıyor. \"Kusura bakma,\" diyor, çoktan koşarken, \"takvim.\" Merdivene ilk o varıyor, ama basamakta durup sana el sallıyor ve yüzü bir anlığına bir çocuğun yüzüne dönüyor.", en: "Then he springs to his feet. \"Sorry,\" he says, already running. \"Schedule.\" He's first to the stairs, but he stops on the step and waves at you, and for a second his face is a kid's face." }
+          - { tr: "Derken ayağa fırlıyor. \"Kusura bakma,\" diyor, çoktan koşarken, \"takvim.\" Merdivene ilk o varıyor, ama basamakta durup sana el sallıyor ve yüzü anlığına bir çocuğun yüzüne dönüyor.", en: "Then he springs to his feet. \"Sorry,\" he says, already running. \"Schedule.\" He's first to the stairs, but he stops on the step and waves at you, and for a second his face is a kid's face." }
           - metin: { tr: "Tabelada bir satır değişiyor: [Kat 55 · İlk geçiş: {npc:aras_kurt|tam} · beklemede].", en: "A line on the sign changes: [Floor 55 · First clear: {npc:aras_kurt|tam} · pending]." }
             kosul: { degisken_max: { kule_kat: 54 } }
         secenekler:
@@ -568,8 +568,8 @@ olaylar:
       - id: "kaa6_1"
         yer: "kule"
         paragraflar:
-          - { tr: "Raflar arasındaki koridor alevden bir tünele dönmüş. Ağzına mendil bağlamış olan {npc:aras_kurt} öbür ucu gösteriyor: merdiven, alevlerin ardında titreyen bir gölge.", en: "The aisle between the shelves has turned into a tunnel of fire. {npc:aras_kurt}, a bandanna tied over his mouth, points at the far end: the stairs, a shadow wavering behind the flames." }
-          - { tr: "\"Bu kez bahse girelim,\" diyor. \"Beş kristal. Kaybeden öder, kazanan da Sıralama'da bir basamak çıkar.\" Uzattığı avuçta Öz Kristalleri ateşin ışığında kızıl kızıl parlıyor.", en: "\"Let's make it interesting this time,\" he says. \"Five crystals. Loser pays, and the winner moves up a spot on the Ranking.\" In his outstretched palm, the Essence Crystals glow red in the firelight." }
+          - { tr: "Raflar arasındaki koridor alevden bir tünele dönmüş. Ağzına mendil bağlamış olan {npc:aras_kurt} öbür ucu gösteriyor: merdiven, alevlerin ardında titreyen bir gölge.", en: "The aisle between the shelves has turned into a tunnel of fire. {npc:aras_kurt}, a bandana tied over his mouth, points at the far end: the stairs, a shadow wavering behind the flames." }
+          - { tr: "\"Bu kez bahse girelim,\" diyor. \"Beş kristal. Kaybeden öder, kazanan da Küresel Sıralama'da bir basamak çıkar.\" Uzattığı avuçta Öz Kristalleri ateşin ışığında kızıl kızıl parlıyor.", en: "\"Let's make it interesting this time,\" he says. \"Five crystals. Loser pays, and the winner moves up a spot on the Global Ranking.\" In his outstretched palm, the Essence Crystals glow red in the firelight." }
         sezgiler:
           - kosul: { stat: { per: 175 } }
             metin: { tr: "Alevler soldaki raflarda ağır ağır yanıyor. Sağdakiler çoktan okunmuş; geriye yalnızca soğumuş kül kalmış.", en: "The flames are working slowly through the shelves on the left. The ones on the right have already been read. There's nothing left of them but cold ash." }
@@ -606,7 +606,7 @@ olaylar:
       - id: "kaa6_kazan"
         yer: "kule"
         paragraflar:
-          - { tr: "Merdivenin dibine ilk sen varıyorsun, üstün başın kül içinde. Bir nefes sonra {npc:aras_kurt} alevlerin arasından fırlıyor; mendili delinmiş, kaşlarının yarısı yanıp gitmiş.", en: "You reach the foot of the stairs first, covered in ash. A breath later {npc:aras_kurt} bursts out of the flames, bandanna burned through, half his eyebrows gone." }
+          - { tr: "Merdivenin dibine ilk sen varıyorsun, üstün başın kül içinde. Bir nefes sonra {npc:aras_kurt} alevlerin arasından fırlıyor; mendili delinmiş, kaşlarının yarısı yanıp gitmiş.", en: "You reach the foot of the stairs first, covered in ash. A breath later {npc:aras_kurt} bursts out of the flames, bandana burned through, half his eyebrows gone." }
           - { tr: "Kristalleri avucuna tek tek sayıyor, beşinciyi bırakmadan önce bir an tutuyor. \"Söz sözdür,\" diyor. \"Ama kaşlarımın hesabını da bir gün senden soracağım.\"", en: "He counts the crystals into your palm one at a time, and holds on to the fifth for a second before letting go. \"A bet's a bet,\" he says. \"But someday you're paying me back for the eyebrows.\"" }
         secenekler:
           - id: "devam"
@@ -617,7 +617,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Alevlerin ortasında bir raf çöküp yolunu kesiyor. Dolanıp merdivene vardığında {npc:aras_kurt} basamağa oturmuş, avucunu açmış bekliyor.", en: "Halfway through, a shelf collapses across your path. By the time you get around it, {npc:aras_kurt} is sitting on the stairs, palm open, waiting." }
-          - { tr: "\"Beş,\" diyor. Kristalleri sayarken başka tek kelime etmiyor; yalnızca sonuncusunu ışığa tutup göz kırpıyor. \"Ateş bugün benim tarafımı tuttu.\"", en: "\"Five,\" he says. He doesn't say another word while he counts them, just holds the last one up to the light and winks. \"Fire took my side today.\"" }
+          - { tr: "\"Beş,\" diyor. Kristalleri sayarken başka tek kelime etmiyor; yalnızca sonuncusunu ışığa tutup göz kırpıyor. \"Ateş bugün bana kıyak geçti.\"", en: "\"Five,\" he says. He doesn't say another word while he counts them, just holds the last one up to the light and winks. \"Fire did me a solid today.\"" }
         secenekler:
           - id: "devam"
             etiket: { tr: "Yanığını ovuşturup merdivene çık", en: "Rub your burns and take the stairs" }
@@ -649,8 +649,8 @@ olaylar:
       - id: "kaa7_1"
         yer: "kule"
         paragraflar:
-          - { tr: "Sıraların arasından makas sesi geliyor: kırp, kırp. {npc:aras_kurt} bir kozanın arkasına sinmiş, sana el ediyor.", en: "The snip of shears comes from between the rows. Snip. Snip. {npc:aras_kurt} is crouched behind a pod, waving you over." }
-          - { tr: "\"Bekçiyi izledim,\" diye fısıldıyor. \"Sıraları dolaşıp en yavaş olanı biçiyor, hep en yavaşı. Merdiven sıraların sonunda.\" Sırıtıyor, ama gözleri gülmüyor. \"Yani bu kez yarışın gerçekten bir kaybedeni olacak.\"", en: "\"I've been watching the keeper,\" he whispers. \"It walks the rows and cuts the slowest one. Always the slowest. The stairs are at the end of the rows.\" He grins, but his eyes don't. \"So this time the race has a real loser.\"" }
+          - { tr: "Sıraların arasından makas sesi geliyor: çıt, çıt. {npc:aras_kurt} bir kozanın arkasına sinmiş, sana el ediyor.", en: "The snip of shears comes from between the rows. Snip. Snip. {npc:aras_kurt} is crouched behind a pod, waving you over." }
+          - { tr: "\"Bekçiyi izledim,\" diye fısıldıyor. \"Sıraları dolaşıp hep en yavaş olanı biçiyor; merdiven de sıraların sonunda.\" Sırıtıyor ama gözleri gülmüyor: \"Yani bu kez yarışın gerçekten bir kaybedeni olacak.\"", en: "\"I've been watching the keeper,\" he whispers. \"It walks the rows and always cuts the slowest one. The stairs are at the end of the rows.\" He grins, but his eyes don't. \"So this time the race has a real loser.\"" }
           - metin: { tr: "Sıraların sonunda, merdivenin üstündeki kozanın etiketinde başka bir yazı var: [Kat 75 · İlk geçiş: boş].", en: "At the end of the rows, on the label of the pod over the stairs, the writing is different: [Floor 75 · First clear: open]." }
             kosul: { degisken_max: { kule_kat: 74 } }
         sezgiler:
@@ -710,7 +710,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Makas sırtını buluyor. Yara derin değil, ama ılık seranın havasında kan kokusu hemen yayılıyor ve uyuyan kozalar bir an kıpırdanıyor.", en: "The shears find your back. The cut isn't deep, but in the warm greenhouse air the smell of blood spreads fast, and the sleeping pods stir for a second." }
-          - { tr: "Bekçiyi yere serdiğinde {npc:aras_kurt} merdivenin başında, nefes nefese. \"Yavaş olan sendin,\" diyor. Buna inanıp inanmadığı yüzünden okunmuyor.", en: "When you've put the keeper down, {npc:aras_kurt} is at the top of the stairs, out of breath. \"You were the slow one,\" he says. Whether he believes that, you can't read on his face." }
+          - { tr: "Bekçiyi yere serdiğinde {npc:aras_kurt} merdivenin başında, nefes nefese. \"Yavaş olan sendin,\" diyor. Buna inanıp inanmadığı yüzünden okunmuyor.", en: "When you've put the keeper down, {npc:aras_kurt} is at the stairs, out of breath. \"You were the slow one,\" he says. Whether he believes it, you can't tell from his face." }
           - metin: { tr: "Kozanın etiketindeki satır değişiyor: [Kat 75 · İlk geçiş: {npc:aras_kurt|tam} · beklemede].", en: "The line on the pod's label changes: [Floor 75 · First clear: {npc:aras_kurt|tam} · pending]." }
             kosul: { degisken_max: { kule_kat: 74 } }
         secenekler:
@@ -751,8 +751,8 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Merdivenin bir sonraki parçası boşlukta asılı; aradaki uçurum yıldızlarla dolu. {npc:aras_kurt} kenarın tam ucunda durmuş, aşağıya, yani yıldızlara bakıyor.", en: "The next section of stairs hangs in empty space, and the drop in between is full of stars. {npc:aras_kurt} stands at the very edge, looking down. Down, meaning at the stars." }
-          - { tr: "\"Bugün yarış yok,\" diyor. \"Cesaret var. Kenardan kim daha geriden atlarsa Sıralama onun.\" Kenardan üç adım geri çekiliyor, ardından iki adım daha.", en: "\"No race today,\" he says. \"Nerve. Whoever jumps from farther back gets the Ranking.\" He takes three steps back from the edge. Then two more." }
-          - { tr: "Aşağıda, yıldızların arasında Dünya küçücük ve mavi. Buradan düşen Kule'nin dibine değil, oraya düşer.", en: "Down among the stars, Earth is small and blue. Fall from here and you don't land at the foot of the Spire. You land there." }
+          - { tr: "\"Bugün yarış yok,\" diyor. \"Cesaret var. Kim kenardan daha geriden atlarsa Küresel Sıralama onun.\" Kenardan üç adım geri çekiliyor, ardından iki adım daha.", en: "\"No race today,\" he says. \"Nerve. Whoever jumps from farther back gets the Global Ranking.\" He takes three steps back from the edge. Then two more." }
+          - { tr: "Aşağıda, yıldızların arasında Dünya küçücük ve mavi. Buradan düşen Kule'nin dibine değil, o maviliğe düşer.", en: "Down among the stars, Earth is small and blue. Fall from here and you don't land at the foot of the Spire. You land there." }
         sezgiler:
           - kosul: { stat: { per: 285 } }
             metin: { tr: "Yerçekimi burada bir tavsiye: kenarın dibinde zayıf, geride güçlü. Geriden atlayan daha ağır düşer.", en: "Gravity's a suggestion here: weak right at the edge, strong farther back. Jump from farther back and you fall heavier." }
@@ -787,7 +787,7 @@ olaylar:
       - id: "kaa8_kazan"
         yer: "kule"
         paragraflar:
-          - { tr: "Karşıdaki basamağa ilk sen konuyorsun; altındaki yıldızlar bir an sallanıp duruluyor. {npc:aras_kurt} da arkandan atlayıp nefes nefese yanına yuvarlanıyor.", en: "You land on the far stairs first, and the stars beneath you sway for a moment before they settle. {npc:aras_kurt} jumps after you and tumbles down beside you, out of breath." }
+          - { tr: "Karşıdaki basamağa ilk sen konuyorsun; altındaki yıldızlar bir an sallanıp yatışıyor. {npc:aras_kurt} da arkandan atlayıp nefes nefese yanına yuvarlanıyor.", en: "You land on the far stairs first, and the stars beneath you sway for a moment before they settle. {npc:aras_kurt} jumps after you and tumbles down beside you, out of breath." }
           - { tr: "Bir süre sırtüstü yatıp tepedeki Kule'ye, yani aşağıya bakıyorsunuz. \"Deliymişsin,\" diyor sonunda. \"Bunu biliyordum, ama bu kadarını bilmiyordum.\"", en: "For a while you both lie on your backs, looking up at the Spire, which is to say down. \"You're crazy,\" he says finally. \"I knew that. I didn't know it was this bad.\"" }
         secenekler:
           - id: "devam"
@@ -877,8 +877,8 @@ olaylar:
       - id: "kaa9_kazan"
         yer: "kule"
         paragraflar:
-          - { tr: "Kalemi sen kapıyorsun. Parmakların değer değmez kalem kendiliğinden yazmaya başlıyor ve tabelanın boş satırına senin adın beyaz çizgilerle işleniyor.", en: "You grab the pencil. The second your fingers touch it, it starts writing on its own, and your name scratches itself into the blank line in white." }
-          - { tr: "{npc:aras_kurt} adının harflerini teker teker izliyor. \"Taslak,\" diyor sonunda. \"Burada her şey taslak, yani silinebilir.\" Gülümsüyor, ama gülümsemesine bu kez bir yorgunluk karışmış.", en: "{npc:aras_kurt} watches the letters of your name go down one at a time. \"Draft,\" he says finally. \"Everything up here's a draft. Means it can be erased.\" He smiles, but this time there's something tired in it." }
+          - { tr: "Kalemi sen kapıyorsun. Parmakların değer değmez kalem kendiliğinden yazmaya başlıyor ve tabelanın boş satırına adın beyaz çizgilerle işleniyor.", en: "You grab the pencil. The second your fingers touch it, it starts writing on its own, and your name scratches itself into the blank line in white." }
+          - { tr: "{npc:aras_kurt} senin adının harflerini teker teker izliyor. \"Taslak,\" diyor sonunda. \"Burada her şey taslak, yani silinebilir.\" Gülüyor, ama bu kez içine bir yorgunluk karışmış.", en: "{npc:aras_kurt} watches the letters of your name go down one at a time. \"Draft,\" he says finally. \"Everything up here's a draft. Means it can be erased.\" He smiles, but this time there's something tired in it." }
           - metin: { tr: "Başlıktaki boşluk doluyor: [Kat 95 · İlk geçiş: ayrıldı].", en: "The blank in the heading fills in: [Floor 95 · First clear: reserved]." }
             kosul: { degisken_max: { kule_kat: 94 } }
         secenekler:
@@ -908,7 +908,7 @@ olaylar:
       - id: "kaa9_ver"
         yer: "kule"
         paragraflar:
-          - { tr: "Kalemi havadan alıp ona uzatıyorsun. {npc:aras_kurt} elindekine uzun uzun bakıyor, sanki uzattığın kalem değil de bıçakmış gibi.", en: "You pluck the pencil out of the air and hold it out to him. {npc:aras_kurt} stares at your hand for a long time, like it's a knife and not a pencil." }
+          - { tr: "Kalemi havadan alıp ona uzatıyorsun. {npc:aras_kurt} uzattığın kaleme uzun uzun bakıyor; sanki kalem değil, bıçakmış.", en: "You pluck the pencil out of the air and hold it out to him. {npc:aras_kurt} stares at the pencil in your hand for a long time, like it's a knife and not a pencil." }
           - { tr: "Sonunda alıp kendi adını yazıyor, bir an bekledikten sonra altına daha küçük harflerle bir satır ekliyor: senin adın. \"İlk olan ilktir,\" diyor kalemi yerine asarken. \"Ama listenin ikinci satırını da kimseye vermem.\"", en: "Finally he takes it and writes his own name. He waits a second, then adds a line underneath in smaller letters: your name. \"First is first,\" he says, hanging the pencil back in the air. \"But I'm not giving the second line to anybody else either.\"" }
           - metin: { tr: "Başlıktaki boşluk doluyor: [Kat 95 · İlk geçiş: {npc:aras_kurt|tam} · beklemede].", en: "The blank in the heading fills in: [Floor 95 · First clear: {npc:aras_kurt|tam} · pending]." }
             kosul: { degisken_max: { kule_kat: 94 } }
@@ -938,15 +938,15 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "On beşinci katın sonundaki merdivenin dibinde su çekiliyor ve yüzeyde bir Sistem penceresi açılıyor. Camı ıslak, harfleri tuzdan kabarmış.", en: "At the foot of the stairs at the end of the fifteenth floor, the water pulls back and a System window opens on the surface. Its glass is wet, the letters crusted with salt." }
-          - metin: { tr: "Aşağıda, {yer:kule_dibi} pazarında biri tahtaya tebeşirle kat numaralarını yazıyor. Senin adın o tahtada henüz yok; duyuru giderse olacak.", en: "Down at the market in {yer:kule_dibi}, somebody's chalking floor numbers on a board. Your name isn't up there yet. It will be, if the announcement goes out." }
+          - metin: { tr: "Aşağıda, {yer:kule_dibi} pazarında biri tahtaya tebeşirle kat numaralarını yazıyor. Adın o tahtada henüz yok; duyuru yapılırsa olacak.", en: "Down at the market in {yer:kule_dibi}, somebody's chalking floor numbers on a board. Your name isn't up there yet. It will be, if the announcement goes out." }
             kosul: { bayrak_yok: "kule_ilk_15_aras" }
           - metin: { tr: "Pencerede senin adın yok.", en: "Your name isn't on it." }
             kosul: { bayrak: "kule_ilk_15_aras" }
           - metin: { tr: "Merdivenin ilk basamağında {npc:aras_kurt} oturuyor, ayaklarını suya sarkıtmış. \"İki gündür buraya inip seni bekliyorum,\" diyor pencereyi başıyla göstererek. \"Yüzünü görmek istedim.\"", en: "{npc:aras_kurt} is sitting on the first stair, feet dangling in the water. \"I've been coming back down here two days running to wait for you,\" he says, nodding at the window. \"Wanted to see your face.\"" }
             kosul: { bayrak: "kule_ilk_15_aras", npc_hayatta: "aras_kurt", bayrak_yok: ["ihanet_aras", "aras_kadimlere_gitti"] }
-          - metin: { tr: "Onun adının altına Sistem küçük harflerle bir not düşmüş: [Durum: öldü.] Kat onu hâlâ hatırlıyor; Kule kimseyi unutmuyor.", en: "Under his name, the System has added a note in small print: [Status: deceased.] The floor still remembers him. The Spire doesn't forget anybody." }
+          - metin: { tr: "{npc:aras_kurt|in} adının altına Sistem küçük harflerle bir not düşmüş: [Durum: öldü.] Kat onu hâlâ hatırlıyor; Kule kimseyi unutmuyor.", en: "Under {npc:aras_kurt|pos} name, the System has added a note in small print: [Status: deceased.] The floor still remembers him. The Spire doesn't forget anybody." }
             kosul: { bayrak: "kule_ilk_15_aras", npc_olu: "aras_kurt" }
-          - metin: { tr: "O ad artık başka bir şeyin adı, ama kayıt ilk günkü gibi duruyor. Kule ihaneti kayda geçirmiyor; yalnızca kimin önce vardığını yazıyor.", en: "That name stands for something else now, but the record's the same as the day it was written. The Spire doesn't log betrayals. Just who got there first." }
+          - metin: { tr: "{npc:aras_kurt|in} adı artık başka bir şeyin adı, ama kayıt ilk günkü gibi duruyor. Kule ihaneti kayda geçirmiyor; yalnızca kimin önce vardığını yazıyor.", en: "{npc:aras_kurt|pos} name stands for something else now, but the record's the same as the day it was written. The Spire doesn't log betrayals. Just who got there first." }
             kosul: { bayrak: "kule_ilk_15_aras", npc_hayatta: "aras_kurt", herhangi: [{ bayrak: "ihanet_aras" }, { bayrak: "aras_kadimlere_gitti" }] }
         bildirimler:
           - tur: "sistem"
@@ -965,7 +965,7 @@ olaylar:
           - kosul: { bayrak: "yanki_bagi", bayrak_yok: "kule_ilk_15_aras" }
             metin: { tr: "sistem soruyor. sistem hiç sormaz. tuzak değilse sınavdır.", en: "the system's asking. the system never asks. if it's not a trap, it's a test." }
           - kosul: { bayrak: ["yanki_bagi", "kule_ilk_15_aras"] }
-            metin: { tr: "adı orada diye bir şey değişmedi. kat seni tanıyor. o tabela tanımıyor.", en: "his name being up there doesn't change anything. the floor knows you. the sign doesn't." }
+            metin: { tr: "onun adının orada olması hiçbir şeyi değiştirmedi. kat seni tanıyor. pencere tanımıyor.", en: "his name being up there doesn't change anything. the floor knows you. the window doesn't." }
         secenekler:
           - id: "duyur"
             etiket: { tr: "Duyurulsun; bırak herkes bilsin", en: "Let it go out. Let everybody know" }
@@ -1034,7 +1034,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Pencerenin köşesine dokunuyorsun. Sistem bir an duraksayıp satırı yeniden yazıyor: [İlk geçiş: Bilinmeyen.]", en: "You touch the corner of the window. The System hesitates, then rewrites the line: [First clear: Unknown.]" }
-          - { tr: "O akşam pazardaki tahtaya bir soru işareti yazılıyor. Avcılar kimin olduğunu tartışıyor; biri {fraksiyon:lonca} diyor, biri bir hayalet.", en: "That evening, a question mark goes up on the board at the market. Hunters argue over who it was. Somebody says the {fraksiyon:lonca}, somebody says a ghost." }
+          - { tr: "O akşam pazardaki tahtada senin yerine bir soru işareti duruyor. Avcılar kimin işi olduğunu tartışıyor; biri {fraksiyon:lonca} diyor, biri bir hayalet.", en: "That evening, a question mark sits on the board at the market where your name would be. Hunters argue over who it was. Somebody says the {fraksiyon:lonca}, somebody says a ghost." }
         secenekler:
           - id: "devam"
             etiket: { tr: "Soru işaretine bakıp gülümse", en: "Smile at the question mark" }
@@ -1044,7 +1044,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "{npc:aras_kurt} ayaklarını sudan çekip silkeliyor, sonra kalkıyor.", en: "{npc:aras_kurt} pulls his feet out of the water, shakes them off and stands up." }
-          - { tr: "Merdivene yürürken arkandan sesi geliyor: \"Bir sonraki ilk daha yukarıda. Orada da seni bekleyeceğim.\"", en: "As you head for the stairs, his voice follows you. \"Next first is higher up. I'll be waiting for you there too.\"" }
+          - { tr: "Merdivene yürürken arkandan sesi geliyor: \"Sıradaki ilk geçiş daha yukarıda. Orada da seni bekleyeceğim.\"", en: "As you head for the stairs, his voice follows you. \"The next first is higher up. I'll be waiting for you there too.\"" }
         secenekler:
           - id: "devam"
             etiket: { tr: "Merdivene çık", en: "Take the stairs" }
@@ -1068,9 +1068,9 @@ olaylar:
             kosul: { bayrak_yok: "kule_ilk_35_aras" }
           - metin: { tr: "{npc:aras_kurt} dişlinin dibinde, sırtını pirince vermiş, kazınmış adının altına çakısıyla bir çentik daha atıyor. \"Bu senin,\" diyor. \"İkinci. Saydığımı söylemiştim.\"", en: "{npc:aras_kurt} is at the foot of the gear, back against the brass, notching one more mark under his carved name with the pocketknife. \"That one's you,\" he says. \"Second. Told you I was counting.\"" }
             kosul: { bayrak: "kule_ilk_35_aras", npc_hayatta: "aras_kurt", bayrak_yok: ["ihanet_aras", "aras_kadimlere_gitti"] }
-          - metin: { tr: "Pirince kazınmış adın yanına Sistem bir çentik daha eklemiş, sonuncusunu: [Durum: öldü.] Saat onun için durmuyor; durması gerekirmiş gibi bir an takılıyor yalnızca.", en: "Next to the name carved into the brass, the System has added one more notch, the last: [Status: deceased.] The clock doesn't stop for him. It just catches for a moment, like it ought to." }
+          - metin: { tr: "Pirince kazınmış {npc:aras_kurt|in} adının yanına Sistem bir çentik daha eklemiş, sonuncusunu: [Durum: öldü.] Saat onun için durmuyor; durması gerekirmiş gibi bir an takılıyor yalnızca.", en: "Next to {npc:aras_kurt|pos} name carved into the brass, the System has added one more notch, the last: [Status: deceased.] The clock doesn't stop for him. It just catches for a moment, like it ought to." }
             kosul: { bayrak: "kule_ilk_35_aras", npc_olu: "aras_kurt" }
-          - metin: { tr: "Pirince kazınmış o ad yerinde duruyor. Saat ihaneti saymıyor, yalnızca tikleri sayıyor; o tikte önce o geçmiş.", en: "That name is still cut into the brass. The clock doesn't count betrayals, only ticks, and on that tick he got through first." }
+          - metin: { tr: "Pirince kazınmış {npc:aras_kurt|in} adı yerinde duruyor. Saat ihaneti saymıyor, yalnızca tikleri sayıyor; o tikte önce geçen o.", en: "{npc:aras_kurt|pos} name is still cut into the brass. The clock doesn't count betrayals, only ticks, and on that tick he got through first." }
             kosul: { bayrak: "kule_ilk_35_aras", npc_hayatta: "aras_kurt", herhangi: [{ bayrak: "ihanet_aras" }, { bayrak: "aras_kadimlere_gitti" }] }
         bildirimler:
           - tur: "sistem"
@@ -1148,7 +1148,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Tik doluyor. Adın pirince kazınırken saatin bütün dişlileri aynı anda bir diş ilerliyor ve ses katları aşıp {yer:kule_dibi} meydanına kadar iniyor.", en: "The tick runs out. As your name is cut into the brass, every gear in the clock moves forward one tooth at the same time, and the sound carries down through the floors all the way to {yer:kule_dibi}." }
-          - { tr: "Aşağıda, saat kulesi olmayan bir şehirde herkes aynı anda başını kaldırıyor. Akşam pazardaki tahtada biri adının yanına tebeşirle küçük bir saat çizmiş.", en: "Down below, in a city with no clock tower, everyone looks up at the same moment. By evening, someone at the market has chalked a little clock next to your name on the board." }
+          - { tr: "Aşağıda, saat kulesi olmayan bir şehirde herkes hep birlikte başını kaldırıyor. Akşam pazardaki tahtada biri adının yanına tebeşirle küçük bir saat çizmiş.", en: "Down below, in a city with no clock tower, everyone looks up at the same moment. By evening, someone at the market has chalked a little clock next to your name on the board." }
         secenekler:
           - id: "devam"
             etiket: { tr: "Bir sonraki dişliye yürü", en: "Move on to the next gear" }
@@ -1157,7 +1157,7 @@ olaylar:
       - id: "ki35_gizle"
         yer: "kule"
         paragraflar:
-          - { tr: "Tik dolmadan pencereyi kapatıyorsun. Saat bir an takılıyor, sonra kaldığı yerden dönmeyi sürdürüyor; dişlinin yüzündeki boşluk boş kalıyor.", en: "You close the window before the tick runs out. The clock catches for a moment, then goes on turning where it left off, and the gap on the gear's face stays empty." }
+          - { tr: "Tik dolmadan pencereyi kapatıyorsun. Saat bir an takılıyor, sonra kaldığı yerden dönmeyi sürdürüyor; dişlinin yüzündeki aralık boş kalıyor.", en: "You close the window before the tick runs out. The clock catches for a moment, then goes on turning where it left off, and the gap on the gear's face stays empty." }
           - { tr: "Aşağıda kimse bir şey duymuyor. Yalnızca {yer:kule_dibi} pazarındaki yaşlı bir tamirci, tezgâhındaki bütün saatlerin bir tik geri kaldığına yemin ediyor.", en: "Down below, nobody hears a thing. Only an old repairman at the market in {yer:kule_dibi} swears that every watch on his table just fell one tick behind." }
         secenekler:
           - id: "devam"
@@ -1187,14 +1187,14 @@ olaylar:
       - id: "ki55_1"
         yer: "kule"
         paragraflar:
-          - { tr: "Elli beşinci katın sonunda, kırık Sistem pencerelerinden oluşan yığının dibinde yeni bir pencere açılıyor. Yığındakilerin hepsi başka bir dilde; bu, senin dilinde.", en: "At the end of the fifty-fifth floor, at the foot of the pile of broken System windows, a new window opens. Every one in the pile is in a different language. This one is in yours." }
+          - { tr: "Elli beşinci katın sonunda, kırık Sistem pencerelerinden oluşan yığının dibinde yeni bir pencere açılıyor. Yığındakilerin hepsi başka bir dilde; bu ise senin dilinde.", en: "At the end of the fifty-fifth floor, at the foot of the pile of broken System windows, a new window opens. Every one in the pile is in a different language. This one is in yours." }
           - metin: { tr: "Yığındaki her pencere, dili ne olursa olsun, aynı satırla bitiyor. Seninkinin son satırı henüz yazılmamış; imleç yanıp sönüyor.", en: "Every window in the pile ends on the same line, whatever the language. The last line of yours hasn't been written yet. The cursor's blinking." }
             kosul: { bayrak_yok: "kule_ilk_55_aras" }
-          - metin: { tr: "{npc:aras_kurt} yığının yanında, kemiklerin çevrelediği sönmüş ateşin başında oturuyor. \"Bu kez ben bekledim,\" diyor, \"senin gelmeni.\" Avucundaki külü yere dökerken ekliyor: \"Önce geçtim, ama tek başına geçmek düşündüğüm gibi değilmiş.\"", en: "{npc:aras_kurt} is sitting by the pile, at the dead fire the bones are circled around. \"This time I waited,\" he says. \"For you.\" He pours the ash from his palm onto the ground. \"I got through first. Getting through alone wasn't what I thought it'd be.\"" }
+          - metin: { tr: "{npc:aras_kurt} yığının yanında, kemiklerin çevrelediği sönmüş ateşin başında oturuyor. \"Bu kez ben bekledim,\" diyor, \"senin gelmeni.\" Avucundaki külü yere dökerken ekliyor: \"Önce geçtim, ama tek başına geçmek düşündüğüm gibi değilmiş.\"", en: "{npc:aras_kurt} is sitting by the pile, at the dead fire ringed with bones. \"This time I waited,\" he says. \"For you.\" He pours the ash from his palm onto the ground. \"I got through first. Getting through alone wasn't what I thought it'd be.\"" }
             kosul: { bayrak: "kule_ilk_55_aras", npc_hayatta: "aras_kurt", bayrak_yok: ["ihanet_aras", "aras_kadimlere_gitti"] }
-          - metin: { tr: "Onun adının yazılı olduğu pencere de yığına karışmış, harfleri öbürleri gibi kırılmış. Son satırı da öbürleriyle aynı.", en: "The window with his name on it has joined the pile, its letters broken like the rest. Its last line is the same as all the others." }
+          - metin: { tr: "{npc:aras_kurt|in} adının yazılı olduğu pencere de yığına karışmış, harfleri öbürleri gibi kırılmış. Son satırı da öbürleriyle aynı.", en: "The window with {npc:aras_kurt|pos} name on it has joined the pile, its letters broken like the rest. Its last line is the same as all the others." }
             kosul: { bayrak: "kule_ilk_55_aras", npc_olu: "aras_kurt" }
-          - metin: { tr: "Onun adının yazılı olduğu pencere yığının en üstünde duruyor, harfleri kırılmamış. Kule kimin kime ne yaptığını tutmuyor; yalnızca kimin geçtiğini tutuyor.", en: "The window with his name sits on top of the pile, its letters unbroken. The Spire doesn't keep track of who did what to whom. Just who made it through." }
+          - metin: { tr: "{npc:aras_kurt|in} adının yazılı olduğu pencere yığının en üstünde duruyor, harfleri kırılmamış. Kule kimin kime ne yaptığını tutmuyor; yalnızca kimin geçtiğini tutuyor.", en: "The window with {npc:aras_kurt|pos} name sits on top of the pile, its letters unbroken. The Spire doesn't keep track of who did what to whom. Just who made it through." }
             kosul: { bayrak: "kule_ilk_55_aras", npc_hayatta: "aras_kurt", herhangi: [{ bayrak: "ihanet_aras" }, { bayrak: "aras_kadimlere_gitti" }] }
         bildirimler:
           - tur: "sistem"
@@ -1227,14 +1227,14 @@ olaylar:
             sonraki: "ki55_duyur"
           - id: "gizle"
             tur: "gizle"
-            etiket: { tr: "Pencereyi yığına at; kimse okumasın", en: "Toss the window on the pile. Let nobody read it" }
+            etiket: { tr: "Pencereyi yığına at; kimse okumasın", en: "Toss the window on the pile so nobody can read it" }
             goster: { bayrak_yok: "kule_ilk_55_aras" }
             etkiler:
               - gizle: 4
               - xp_seviye: 4
             sonraki: "ki55_gizle"
           - id: "otur"
-            etiket: { tr: "Ateşin başına, yanına otur", en: "Sit down next to him by the fire" }
+            etiket: { tr: "Yanına, ateşin başına otur", en: "Sit down next to him by the fire" }
             goster: { bayrak: "kule_ilk_55_aras", npc_hayatta: "aras_kurt", bayrak_yok: ["ihanet_aras", "aras_kadimlere_gitti"] }
             etkiler:
               - iliski: { aras_kurt: { guven: 4, baglilik: 3 } }
@@ -1312,13 +1312,13 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Yetmiş beşinci katın sonundaki merdivenin önünde makas sesi kesiliyor. Bekçiler sıraların arasında durmuş; merdivenin üstündeki kozanın etiketinde bir Sistem penceresi açılıyor.", en: "At the stairs at the end of the seventy-fifth floor, the snipping stops. The keepers have halted between the rows, and on the label of the pod above the stairs, a System window opens." }
-          - metin: { tr: "Bekçilerin yüzsüz başları sana dönmüş. Duyurursan adın etikete yazılacak; bu katta adı yazılı olmanın ne demek olduğunu ise yalnızca kozalar biliyor.", en: "The keepers' faceless heads have turned toward you. Announce it and your name goes on the label. What it means to have your name written on this floor, only the pods know." }
+          - metin: { tr: "Bekçilerin yüzsüz başları sana dönmüş. Duyurursan adın etikete yazılacak; bu katta adının yazılı olmasının ne demek olduğunu ise yalnızca kozalar biliyor.", en: "The keepers' faceless heads have turned toward you. Announce it and your name goes on the label. What it means to have your name written on this floor, only the pods know." }
             kosul: { bayrak_yok: "kule_ilk_75_aras" }
-          - metin: { tr: "{npc:aras_kurt} merdivenin dibinde, sırtını bir kozaya vermiş bekliyor; siyah ceketi omzunda. \"İlk benim,\" diyor, ama sesinde zafer yok. \"Bekçiler adımı bir listeye yazdı. Ne listesi olduğunu söylemediler.\"", en: "{npc:aras_kurt} is waiting at the foot of the stairs, his back against a pod, black jacket over his shoulder. \"First's mine,\" he says, but there's no victory in it. \"The keepers put my name on a list. They didn't say what list.\"" }
+          - metin: { tr: "{npc:aras_kurt} merdivenin dibinde, sırtını bir kozaya vermiş bekliyor; siyah ceketi omzunda. \"İlk benim,\" diyor ama sesinde zafer yok. \"Bekçiler adımı bir listeye yazdı; ne listesi olduğunu söylemediler.\"", en: "{npc:aras_kurt} is waiting at the foot of the stairs, his back against a pod, black jacket over his shoulder. \"First's mine,\" he says, but there's no victory in it. \"The keepers put my name on a list. They didn't say what list.\"" }
             kosul: { bayrak: "kule_ilk_75_aras", npc_hayatta: "aras_kurt", bayrak_yok: ["ihanet_aras", "aras_kadimlere_gitti"] }
-          - metin: { tr: "Etiketteki adın yanına bekçilerden biri küçük bir işaret çizmiş: biçilmiş bir sap. Altında Sistem'in notu var: [Durum: öldü.]", en: "Next to the name on the label, one of the keepers has drawn a small mark: a cut stalk. Under it, the System's note: [Status: deceased.]" }
+          - metin: { tr: "Etiketteki {npc:aras_kurt|in} adının yanına bekçilerden biri küçük bir işaret çizmiş: biçilmiş bir sap. Altında Sistem'in notu var: [Durum: öldü.]", en: "Next to {npc:aras_kurt|pos} name on the label, one of the keepers has drawn a small mark: a cut stalk. Under it, the System's note: [Status: deceased.]" }
             kosul: { bayrak: "kule_ilk_75_aras", npc_olu: "aras_kurt" }
-          - metin: { tr: "Etiketteki ad yerli yerinde. Bekçiler onu listeden silmemiş; burada kimse silinmez, yalnızca biçilir.", en: "The name on the label is right where it was. The keepers haven't crossed it off. Nobody gets crossed off up here. They just get cut." }
+          - metin: { tr: "Etiketteki {npc:aras_kurt|in} adı yerli yerinde. Bekçiler onu listeden silmemiş; burada kimse silinmez, yalnızca biçilir.", en: "{npc:aras_kurt|pos} name on the label is right where it was. The keepers haven't crossed it off. Nobody gets crossed off up here. They just get cut." }
             kosul: { bayrak: "kule_ilk_75_aras", npc_hayatta: "aras_kurt", herhangi: [{ bayrak: "ihanet_aras" }, { bayrak: "aras_kadimlere_gitti" }] }
         bildirimler:
           - tur: "sistem"
@@ -1405,7 +1405,7 @@ olaylar:
       - id: "ki75_gizle"
         yer: "kule"
         paragraflar:
-          - { tr: "Kozaların arasında, uyuyanlar kadar kıpırtısız duruyorsun. Pencere bir süre bekleyip kapanıyor, bekçiler de makaslarını yeniden açıyor: kırp, kırp.", en: "You stand among the pods, as still as the sleepers. The window waits a while, then closes, and the keepers open their shears again. Snip. Snip." }
+          - { tr: "Kozaların arasında, uyuyanlar kadar kıpırtısız duruyorsun. Pencere bir süre bekleyip kapanıyor, bekçiler de makaslarını yeniden açıyor: çıt, çıt.", en: "You stand among the pods, as still as the sleepers. The window waits a while, then closes, and the keepers open their shears again. Snip. Snip." }
           - { tr: "Etiket boş kalıyor. Aşağıda kimse yetmiş beşinci katın geçildiğini bilmiyor; bekçiler biliyor, ama onlar kimseyle konuşmaz.", en: "The label stays blank. Down below, nobody knows the seventy-fifth floor's been cleared. The keepers know, but they don't talk to anybody." }
         secenekler:
           - id: "devam"
@@ -1438,11 +1438,11 @@ olaylar:
           - { tr: "Doksan beşinci katın sonunda, çizilmemiş tavanın altında havada asılı kalem kendiliğinden kıpırdıyor. Izgaranın üstüne beyaz çizgilerle bir Sistem penceresi çiziyor; köşeleri henüz kapanmamış.", en: "At the end of the ninety-fifth floor, under the ceiling nobody drew, the pencil hanging in midair moves on its own. It sketches a System window onto the grid in white lines, its corners not quite closed." }
           - metin: { tr: "Kalem satırın başında bekliyor. Duyurursan adını kalın çizgilerle mürekkebe çekecek; yoksa satır bu kattaki her şey gibi boş kalacak.", en: "The pencil waits at the start of the line. Announce it, and it'll ink your name in heavy strokes. Otherwise the line stays blank, like everything else on this floor." }
             kosul: { bayrak_yok: "kule_ilk_95_aras" }
-          - metin: { tr: "Pencerenin altında, ızgaranın üstünde bağdaş kurmuş {npc:aras_kurt} oturuyor, adının harflerini parmağıyla izliyor. \"Hâlâ taslak,\" diyor. \"Bunca yol geldim, adım hâlâ taslak.\"", en: "{npc:aras_kurt} sits cross-legged on the grid under the window, tracing the letters of his name with a finger. \"Still a draft,\" he says. \"All this way, and my name's still a draft.\"" }
+          - metin: { tr: "Pencerenin altında, ızgaranın üstünde bağdaş kurmuş {npc:aras_kurt}, adının harflerini parmağıyla izliyor. \"Hâlâ taslak,\" diyor. \"Bunca yol geldim, adım hâlâ taslak.\"", en: "{npc:aras_kurt} sits cross-legged on the grid under the window, tracing the letters of his name with a finger. \"Still a draft,\" he says. \"All this way, and my name's still a draft.\"" }
             kosul: { bayrak: "kule_ilk_95_aras", npc_hayatta: "aras_kurt", bayrak_yok: ["ihanet_aras", "aras_kadimlere_gitti"] }
-          - metin: { tr: "Onun adının harfleri silik; biri üstünden silgiyle geçmiş, ama sonuna kadar silmeye kıyamamış gibi. Altında yarım bir not var: [Durum: ].", en: "The letters of his name are faint, like someone went over them with an eraser and couldn't bring themselves to finish. Under it, a half-finished note: [Status: ]." }
+          - metin: { tr: "{npc:aras_kurt|in} adının harfleri silik; biri üstünden silgiyle geçmiş, ama sonuna kadar silmeye kıyamamış gibi. Altında yarım bir not var: [Durum: ].", en: "The letters of {npc:aras_kurt|pos} name are faint, like someone went over them with an eraser and couldn't bring themselves to finish. Under it, a half-finished note: [Status: ]." }
             kosul: { bayrak: "kule_ilk_95_aras", npc_olu: "aras_kurt" }
-          - metin: { tr: "Onun adının harfleri kalın, mürekkeple çekilmiş. Bu katta bitmiş tek şey o satır ve üstünde ne yaptığına dair hiçbir iz yok.", en: "The letters of his name are heavy, inked in. That line's the only finished thing on this floor, and there's no trace on it of what he did." }
+          - metin: { tr: "{npc:aras_kurt|in} adının harfleri kalın, mürekkeple çekilmiş. Bu katta bitmiş tek şey o satır ve üstünde ne yaptığını gösteren hiçbir iz yok.", en: "The letters of {npc:aras_kurt|pos} name are heavy, inked in. That line's the only finished thing on this floor, and there's no trace on it of what he did." }
             kosul: { bayrak: "kule_ilk_95_aras", npc_hayatta: "aras_kurt", herhangi: [{ bayrak: "ihanet_aras" }, { bayrak: "aras_kadimlere_gitti" }] }
         bildirimler:
           - tur: "sistem"
@@ -1522,7 +1522,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Kalem adını kalın çizgilerle mürekkebe çekiyor. O satır bu katta bitmiş ilk şey oluyor; çevresindeki taslak çizgiler bir an ona doğru eğiliyor.", en: "The pencil inks your name in heavy strokes. That line becomes the first finished thing on this floor, and the sketched lines around it lean toward it for a moment." }
-          - { tr: "Aşağıda duyuru her pencerede aynı anda beliriyor. {fraksiyon:lonca} adını kutlarken {fraksiyon:yukselenler} acil toplantıya oturuyor; {yer:kule_dibi} pazarındaki tahtaya ise kimse bir şey yazmaya cesaret edemiyor.", en: "Down below, the announcement appears in every window at once. The {fraksiyon:lonca} celebrates your name, {fraksiyon:yukselenler|k} call an emergency meeting, and at the market in {yer:kule_dibi} nobody dares write anything on the board." }
+          - { tr: "Aşağıda duyuru her pencerede aynı anda beliriyor. {fraksiyon:lonca} seni kutlarken {fraksiyon:yukselenler} acil toplantıya oturuyor; {yer:kule_dibi} pazarındaki tahtaya ise kimse bir şey yazmaya cesaret edemiyor.", en: "Down below, the announcement appears in every window at once. The {fraksiyon:lonca} throws a party in your honor while {fraksiyon:yukselenler|k} call an emergency meeting, and at the market in {yer:kule_dibi} nobody dares write anything on the board." }
         secenekler:
           - id: "devam"
             etiket: { tr: "Mürekkebin kurumasını bekleme, yürü", en: "Don't wait for the ink to dry. Go" }
@@ -1532,7 +1532,7 @@ olaylar:
         yer: "kule"
         paragraflar:
           - { tr: "Kalemi havada tutuyorsun. Ucu satıra değmek için titriyor, sonra vazgeçip yeniden asılı kalıyor.", en: "You hold the pencil still in midair. Its tip quivers, wanting to touch the line, then gives up and goes back to hanging there." }
-          - { tr: "Pencere köşeleri kapanmadan siliniyor. Bu kattaki her şey gibi senin geçişin de taslak kalıyor; bilen yalnızca sensin, bir de kalem.", en: "The window erases itself before its corners ever close. Like everything on this floor, your clear stays a draft. The only ones who know are you and the pencil." }
+          - { tr: "Pencerenin köşeleri kapanmadan kendini siliyor. Bu kattaki her şey gibi senin geçişin de taslak kalıyor; bilen yalnızca sensin, bir de kalem.", en: "The window erases itself before its corners ever close. Like everything on this floor, your clear stays a draft. The only ones who know are you and the pencil." }
         secenekler:
           - id: "devam"
             etiket: { tr: "Kalemi bırak, merdivene yürü", en: "Let go of the pencil and head for the stairs" }
