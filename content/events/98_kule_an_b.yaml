@@ -1,0 +1,1725 @@
+# Kule kat anları (DECISIONS #148), parti B: `rakip` (yaralı tırmanıcı) ve `yorum` (Sistem'in kuru yorumu), bant başına birer
+# varyasyon (0–9 = tower.yaml bantları). Havuzdan gelmez: motor kat temizlenince `kule_an` etiketli olaylardan birini seçer
+# (WorldEngine.towerMoment). Hızlı tırmanışta ilk paragraf motorun özet satırıdır; tırmanış yeniden anlatılmaz.
+# Rakip: yardım (merhamet, fraksiyon itibarı) · bırak · soy. Soygun yalnızken ÇEV zarıdır: başarı görülmeden kristal ve
+# merhamet −; başarısızlıkta görülür (`efsane: kule_soygunu`, feats/98_kule_an.yaml). Yanında yoldaş varken soygun her zaman
+# görülür (yoldaşlar tanıktır; witnessFeat onlara hatıra yazar). Zorluk bandın oyuncu seviyesine göre (≈ hikaye katlarının ölçeği).
+olaylar:
+  # ================================================================== RAKİP 0 · Kat 1–9 · Kıyıkent'in Yankısı
+  - id: "kule_an_rakip_0"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "rakip"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 1 }, degisken_max: { kule_kat: 9 } }
+    kart: { tr: "Durağın altındaki çaylak", en: "The rookie under the bus shelter" }
+    sahne: "kule_an_rakip_0"
+    sahneler:
+      - id: "kule_an_rakip_0"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Seçim afişli duvarın dibindeki otobüs durağı çökmüş. Asfalt hâlâ dalgalanıyor; bir asfalt ağzı az önce burada bir şey yutmaya çalışmış. Durağın çelik iskeletinin altında Lonca kolluğu takmış genç bir avcı yatıyor, sol bacağı demirle kaldırımın arasında kalmış.", en: "The bus shelter by the election-poster wall has caved in. The asphalt is still rippling; an asphalt maw tried to swallow something here not long ago. Under the shelter's steel frame lies a young hunter with a Guild armband, his left leg pinned between the metal and the curb." }
+          - { tr: "Yanında ağzı bağlı bir çuval duruyor; içi bu katın Öz Kristalleriyle dolu, bir kişinin taşıyabileceğinden fazla. Seni görünce dişlerini sıkıp gülümsemeye çalışıyor: \"Lonca'ya tek başıma çıktığımı söyleme, olur mu?\"", en: "Next to him sits a tied-off sack stuffed with this floor's Essence Crystals, more than one person could carry. When he sees you, he grits his teeth and tries to smile. \"Don't tell the Guild I came up alone, okay?\"" }
+        sezgiler:
+          - kosul: { stat: { per: 25 } }
+            metin: { tr: "Durağın çevresindeki asfalt hâlâ yumuşak. Ağız ölmemiş, yalnızca sindiriyor.", en: "The asphalt around the shelter is still soft. The maw isn't dead. It's digesting." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "çocuk sayılır. çuvalı kendinden ağır. ikisinden birini taşıyabilirsin.", en: "he's practically a kid. the sack weighs more than he does. you could carry one of them." }
+        yoldas_tepkileri:
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Kaval kemiği kırık ama temiz kırılmış. İskeleti kaldırırsan atel yaparım.\"", en: "\"Shinbone's broken, but it's a clean break. Get that frame off him and I'll splint it.\"" }
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Bu durak... bizim sokağın durağı bu. Otobüs numarası bile aynı.\"", en: "\"That's... that's our stop. Even the bus number's the same.\"" }
+        secenekler:
+          - id: "kaldir"
+            etiket: { tr: "İskeleti kaldır, bacağını kurtar", en: "Lift the frame and free his leg" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - itibar: { lonca: 2 }
+              - xp_seviye: 3
+              - can: -5
+            sonraki: "kule_an_rakip_0_yardim"
+          - id: "soy"
+            etiket: { tr: "Gözü tavana takılıyken çuvalı usulca çek", en: "Ease the sack away while he's staring at the ceiling" }
+            goster: { yoldas_sayisi_max: 0 }
+            zar: { stat: "agi", zorluk: 33, tek: false, basarisiz: "kule_an_rakip_0_goruldu", basarisiz_etkiler: [{ oz_kristali: 3 }, { ahlak: { merhamet: -3 } }, { itibar: { lonca: -2 } }, { efsane: "kule_soygunu" }] }
+            etkiler:
+              - oz_kristali: 3
+              - ahlak: { merhamet: -3 }
+            sonraki: "kule_an_rakip_0_soygun"
+          - id: "soy_yoldas"
+            etiket: { tr: "Yanındakilere aldırmadan çuvalı omzuna at", en: "Ignore your company and sling the sack over your shoulder" }
+            goster: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+            etkiler:
+              - oz_kristali: 3
+              - ahlak: { merhamet: -3 }
+              - itibar: { lonca: -2 }
+              - efsane: "kule_soygunu"
+            sonraki: "kule_an_rakip_0_goruldu"
+          - id: "birak"
+            etiket: { tr: "Çuvala da ona da dokunma, yoluna devam et", en: "Leave him and the sack alone. Keep moving" }
+            etkiler:
+              - ahlak: { merhamet: -1 }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_0_yardim"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Çelik iskeleti iki elinle kavrayıp kaldırıyorsun. Demir inleyerek bükülürken kaldırımın kenarı kolunu sıyırıyor. Genç avcı bacağını çekip kurtarınca sırtüstü yığılıp gülmeye başlıyor.", en: "You grab the steel frame with both hands and lift. The metal groans as it bends, and the edge of the curb scrapes your arm. The young hunter drags his leg free, flops onto his back, and starts laughing." }
+          - { tr: "\"Lonca'ya söyleyeceğim,\" diyor, çuvalı topallaya topallaya sürüklerken. \"Tek başıma çıktığımı değil, seni.\"", en: "\"I'm telling the Guild,\" he says, limping off with the sack in tow. \"Not that I came up alone. About you.\"" }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Merdivene varana kadar onu gözünle izle", en: "Watch him until he makes the stairs" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_0_soygun"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Çuval kaldırımın üstünden sessizce kayıp geliyor. Genç avcının gözü tavana boyanmış gökte, dudakları kıpır kıpır bir şeyler sayıyor; belki adımlarını, belki nefesini.", en: "The sack slides across the curb without a sound. The young hunter has his eyes on the painted sky, lips moving as he counts something. Steps, maybe. Breaths." }
+          - { tr: "Aşağı indiğinde çuvalın yokluğunu asfalt ağzına yazacak. Kimse ona aksini söylemeyecek.", en: "When he gets down, he'll blame the missing sack on the asphalt maw. Nobody's going to tell him different." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Çuvalı sırtla, merdivene yürü", en: "Shoulder the sack and head for the stairs" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_0_goruldu"
+        yer: "kule"
+        paragraflar:
+          - metin: { tr: "Çuvalı daha kaldırımdan kaldırmadan köşede ikinci bir Lonca kolluğu beliriyor: elinde iki matara, yüzünde arkadaşını bulmuş birinin sevinci. Gözü çuvala, oradan sana kayınca o sevinç yüzünde donup kalıyor.", en: "A second Guild armband comes around the corner before you've even lifted the sack off the curb, two canteens in hand and the relief of somebody who just found his buddy all over his face. When his eyes go from the sack to you, the relief freezes there." }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "Çocuk tek kelime etmeden dönüp merdivene koşuyor. Akşama kalmaz, {yer:kule_dibi|in} tebeşir tahtasında kat numarasının yanına senin adın da yazılır.", en: "The kid turns and sprints for the stairs without a word. By evening, your name will be up on the chalkboard at {yer:kule_dibi}, right next to the floor number." }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "Çuvalı omzuna attığında yerdeki genç avcı başını çevirip yanındakilere bakıyor. Bakışında yardım dilenmek yok, yüzleri ezberliyor. Aşağı indiğinde kime neyi anlatacağını şimdiden biliyor.", en: "When you sling the sack over your shoulder, the kid on the ground turns his head to look at the people with you. He isn't begging them for help. He's memorizing faces. He already knows who he'll tell what, once he's back down." }
+            kosul: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Bizim sokakta, bizim durakta... Bunu gerçekten yaptın.\"", en: "\"On our street. At our bus stop... You really just did that.\"" }
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Bacağına atel yapacağım. Sen de o çuvalı taşırken yüzüme bakma.\"", en: "\"I'm splinting his leg. And don't look at me while you carry that sack.\"" }
+          - npc: "mert_kilic"
+            kosul: { yoldas: "mert_kilic" }
+            metin: { tr: "\"Kayda geçti, biliyorsun. Çocuğun kaydına değil, benimkine. Ben unutmam.\"", en: "\"That's on the record, you know. Not his. Mine. I don't forget things.\"" }
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "\"Fena değil. Ama bir dahaki sefere arkanda tanık bırakma, amatörlük bu.\"", en: "\"Not bad. Next time, don't leave witnesses. That's amateur hour.\"" }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Çuvalı sırtla, bakışlara aldırmadan yürü", en: "Shoulder the sack and walk past the stares" }
+            sonraki: "@akis"
+
+  # ================================================================== RAKİP 1 · Kat 11–19 · İçerideki Deniz
+  - id: "kule_an_rakip_1"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "rakip"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 11 }, degisken_max: { kule_kat: 19 } }
+    kart: { tr: "Küreksiz sandal", en: "The oarless boat" }
+    sahne: "kule_an_rakip_1"
+    sahneler:
+      - id: "kule_an_rakip_1"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Küreksiz sandalın kenarına Sığınak şeritli bir kadın tutunmuş, belden aşağısı suyun içinde. Böğründe bir tuz kancasının açtığı yarıktan sızan kan suyun yüzünde ince bir duman gibi dağılıyor.", en: "A woman wearing a Haven armband is hanging onto the side of the oarless rowboat, in the water from the waist down. Blood from a gash in her side, where a salt hook caught her, spreads across the surface like thin smoke." }
+          - { tr: "Dipte bir ışık yanıp sönüyor; her nefeste su biraz daha kabarıp kadının çenesine yaklaşıyor. Kemerine bağlı meşin kese suyun altında sallanıyor, ağırlığından dolu olduğu belli.", en: "Down deep, a light pulses, and with every breath the water swells a little closer to her chin. A leather pouch tied to her belt sways under the surface, heavy enough that it's obviously full." }
+          - { tr: "\"Beni sandala çekebilir misin?\" diyor, dişleri birbirine vura vura. \"Kendim çıkamıyorum. Üç kere denedim.\"", en: "\"Can you get me into the boat?\" she says, teeth chattering. \"I can't do it myself. I tried. Three times.\"" }
+        sezgiler:
+          - kosul: { stat: { per: 32 } }
+            metin: { tr: "Kesenin bağı tek bir düğüm. Su altında, tek hamlede çözülür.", en: "The pouch is tied with a single knot. Underwater, one tug would undo it." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "su yükseliyor. o sandala ya kadın sığar ya kese. ikisini birden çıkaramazsın, değil mi?", en: "the water's rising. that boat fits her or the pouch. you can't get both out. can you?" }
+        yoldas_tepkileri:
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Yara derin değil, onu öldürecek olan soğuk. Önce sudan çıkar, sonra dikerim.\"", en: "\"The wound's not deep. The cold's what'll kill her. Get her out of the water and I'll stitch her up.\"" }
+        secenekler:
+          - id: "cek"
+            etiket: { tr: "Suya gir, onu sandala it", en: "Get in the water and boost her into the boat" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - itibar: { siginak: 3 }
+              - xp_seviye: 3
+              - can: -10
+            sonraki: "kule_an_rakip_1_yardim"
+          - id: "soy"
+            etiket: { tr: "Onu sandala iterken keseyi sessizce çöz", en: "Boost her in, and quietly slip the pouch loose" }
+            goster: { yoldas_sayisi_max: 0 }
+            zar: { stat: "agi", zorluk: 40, tek: false, basarisiz: "kule_an_rakip_1_goruldu", basarisiz_etkiler: [{ oz_kristali: 3 }, { ahlak: { merhamet: -3 } }, { itibar: { siginak: -2 } }, { efsane: "kule_soygunu" }] }
+            etkiler:
+              - oz_kristali: 3
+              - ahlak: { merhamet: -3 }
+            sonraki: "kule_an_rakip_1_soygun"
+          - id: "soy_yoldas"
+            etiket: { tr: "Onu sandala it, keseyi de açıkça al", en: "Boost her in, and take the pouch in plain sight" }
+            goster: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+            etkiler:
+              - oz_kristali: 3
+              - ahlak: { merhamet: -3 }
+              - itibar: { siginak: -2 }
+              - efsane: "kule_soygunu"
+            sonraki: "kule_an_rakip_1_goruldu"
+          - id: "birak"
+            etiket: { tr: "Sandalı ona bırak, sen yüzerek geç", en: "Leave her the boat. Swim on past" }
+            etkiler:
+              - ahlak: { merhamet: -1 }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_1_yardim"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Buz gibi suya girip kadını belinden kavrıyor, sandalın içine itiyorsun. Su göğsünü öyle sıkıştırıyor ki nefesin bir an kesiliyor.", en: "You wade into the ice-cold water, get an arm around her waist, and shove her up into the boat. The water clamps down on your chest so hard you can't breathe for a second." }
+          - { tr: "Kadın sandalın dibine yığılınca keseyi kemerinden çözüp sana uzatıyor. Almadığını görünce yerine bağlıyor: \"Sığınak bunu unutmaz. Ben de unutmam.\"", en: "She collapses in the bottom of the boat, unties the pouch, and holds it out. When she sees you won't take it, she ties it back on. \"The Haven won't forget this. Neither will I.\"" }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Sandalı merdivene doğru it", en: "Push the boat toward the stairs" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_1_soygun"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kadını sandala iterken elin bir an kemerine uğruyor. Düğüm suyun altında hiç bağlanmamış gibi açılıyor, kese avucuna ağır ve soğuk düşüyor.", en: "As you boost her into the boat, your hand makes a quick stop at her belt. Underwater, the knot comes apart like it was never tied, and the pouch drops into your palm, heavy and cold." }
+          - { tr: "Kadın sandalın dibine yığılıp iki kez teşekkür ediyor, dişleri hâlâ birbirine vururken. Kesenin yokluğunu ancak merdivende fark edecek; dibe battığını sanacak.", en: "She collapses in the bottom of the boat and thanks you twice, teeth still chattering. She won't notice the pouch is gone until the stairs, and she'll figure it sank." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Keseyi cebine at, merdivene yüz", en: "Pocket the pouch and swim for the stairs" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_1_goruldu"
+        yer: "kule"
+        paragraflar:
+          - metin: { tr: "Düğüm tam çözülürken dipteki ışık yeniden parlıyor, suyu baştan aşağı aydınlatıyor. Kadın aşağı bakıyor: önce kemerine, sonra kesesine, en son kesenin üstündeki eline.", en: "Right as the knot gives, the light down deep flares again and lights the water top to bottom. She looks down: at her belt, at her pouch, and at your hand on it." }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "Sandalın dibinden titreyen sesi geliyor: \"Teşekkür ederim. Yüzünü de gördüm.\" Sığınak'a dönen herkes gibi o da anlatacak; bu tür hikâyeler {yer:kule_dibi|de} çabuk yayılır.", en: "Her voice shakes from the bottom of the boat. \"Thank you. I saw your face, too.\" She'll tell it the way everyone who makes it back to the Haven tells things, and stories like that travel fast at {yer:kule_dibi}." }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "Kadını sandala itip keseyi gözünün önünde kemerinden kesiyorsun. Ne kadın susuyor ne yanındakiler; o sandalda kurulan cümleler aşağıya senden önce inecek.", en: "You boost her into the boat and cut the pouch off her belt right in front of her. She doesn't stay quiet, and neither does your company. What gets said in that boat will make it downstairs before you do." }
+            kosul: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Önce kurtardın, sonra cebini boşalttın. Sence hangisini hatırlayacak?\"", en: "\"You saved her, then you emptied her pockets. Which part do you think she'll remember?\"" }
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Yarasını ben dikeceğim. Keseyi geri vermeyeceksen benden uzak dur.\"", en: "\"I'll stitch her up. If you're not giving that pouch back, stay away from me.\"" }
+          - npc: "mert_kilic"
+            kosul: { yoldas: "mert_kilic" }
+            metin: { tr: "\"Sığınak'ın kayıtlarına düştü bu. Benimkine de.\"", en: "\"That's going in the Haven's records. Mine, too.\"" }
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "\"Kurtarıp soymak. Bunu ben bile akıl etmemiştim.\"", en: "\"Save 'em, then rob 'em. Even I never thought of that one.\"" }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Sandalın yanından sessizce yüzüp uzaklaş", en: "Swim quietly away from the boat" }
+            sonraki: "@akis"
+
+  # ================================================================== RAKİP 2 · Kat 21–29 · Cam
+  - id: "kule_an_rakip_2"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "rakip"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 21 }, degisken_max: { kule_kat: 29 } }
+    kart: { tr: "Cam zemindeki sınav", en: "A test on the glass floor" }
+    sahne: "kule_an_rakip_2"
+    sahneler:
+      - id: "kule_an_rakip_2"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Cam zeminin ortasında belinde Yükselenlerin beyaz kuşağıyla bir kadın yüzüstü yatıyor. Boynunda iki küçük delik var; bir cam örümceğin zehri onu taş kesmiş.", en: "A woman lies facedown in the middle of the glass floor, the white sash of the Ascended at her waist. There are two small punctures in her neck. Glass spider venom has turned her to stone." }
+          - { tr: "Asıl tuhaf olan yansıması: camın içindeki kadın hâlâ dövüşüyor, kılıcını savuruyor, görünmeyen bir şeyden kaçıyor. Kristalleri çevresine saçılmış, camın üstünde parıldıyor.", en: "The strange part is her reflection. The woman in the glass is still fighting, swinging her sword, ducking something you can't see. Her crystals are scattered around her, glittering on the glass." }
+          - { tr: "Dudakları güçlükle kıpırdıyor: \"Bu bir sınav. Sınavda yardım istenmez.\" Ardından, daha kısık: \"Ama... beni sırtüstü çevirir misin?\"", en: "Her lips barely move. \"This is a test. You don't ask for help on a test.\" Then, quieter: \"But... could you turn me over?\"" }
+        sezgiler:
+          - kosul: { stat: { per: 40 } }
+            metin: { tr: "Camın altında, bir alt katta üç tırmanıcı dinleniyor. Başlarını kaldırsalar seni görürler.", en: "Under the glass, one floor down, three climbers are taking a break. If they looked up, they'd see you." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "taş kesilmeye sınav diyor. yansıması ondan akıllı; o kaçıyor.", en: "she's calling getting turned to stone a test. her reflection's smarter. it's running." }
+        yoldas_tepkileri:
+          - npc: "mert_kilic"
+            kosul: { yoldas: "mert_kilic" }
+            metin: { tr: "\"Cam örümcek zehri altı saat sürer. Altı saat cam zeminde yüzüstü. İnanç dediğin bu herhalde.\"", en: "\"Glass spider venom lasts six hours. Six hours facedown on a glass floor. I guess that's what faith looks like.\"" }
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "\"Yükselenler. Yardım istemiyorlarsa etme; sonra sana borçlu kalmaktan nefret ederler.\"", en: "\"The Ascended. If they don't ask for help, don't give it. They hate owing you afterward.\"" }
+        secenekler:
+          - id: "cevir"
+            etiket: { tr: "Onu sırtüstü çevir, kristallerini toplayıp eline ver", en: "Turn her over, gather her crystals, put them in her hand" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - itibar: { yukselenler: 2 }
+              - xp_seviye: 4
+            sonraki: "kule_an_rakip_2_yardim"
+          - id: "soy"
+            etiket: { tr: "Saçılan kristalleri çabucak cebine doldur", en: "Quickly pocket the scattered crystals" }
+            goster: { yoldas_sayisi_max: 0 }
+            zar: { stat: "agi", zorluk: 50, tek: false, basarisiz: "kule_an_rakip_2_goruldu", basarisiz_etkiler: [{ oz_kristali: 3 }, { ahlak: { merhamet: -3 } }, { itibar: { yukselenler: -2 } }, { efsane: "kule_soygunu" }] }
+            etkiler:
+              - oz_kristali: 3
+              - ahlak: { merhamet: -3 }
+            sonraki: "kule_an_rakip_2_soygun"
+          - id: "soy_yoldas"
+            etiket: { tr: "Yanındakilerin önünde kristalleri topla, cebine at", en: "Scoop up the crystals in front of your company" }
+            goster: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+            etkiler:
+              - oz_kristali: 3
+              - ahlak: { merhamet: -3 }
+              - itibar: { yukselenler: -2 }
+              - efsane: "kule_soygunu"
+            sonraki: "kule_an_rakip_2_goruldu"
+          - id: "birak"
+            etiket: { tr: "Sınavına saygı göster, dokunmadan geç", en: "Respect her test. Walk on by" }
+            etkiler:
+              - ahlak: { duzen: 1 }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_2_yardim"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kadını sırtüstü çevirip kristalleri tek tek topluyor, avucuna bırakıyorsun. Parmakları kapanmıyor ama gözleri seni izliyor.", en: "You turn her onto her back and gather her crystals one by one, setting them in her palm. Her fingers won't close, but her eyes follow you." }
+          - { tr: "Camın derinliğindeki yansıması bir an dövüşmeyi bırakıp sana dönüyor, başıyla selam veriyor. Kadın bunu göremiyor; gördüğünü ona söylemiyorsun.", en: "Down in the glass, her reflection stops fighting for a second, turns toward you, and nods. She can't see it. You don't tell her you did." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Zehrin geçmesini beklemesi için onu yalnız bırak", en: "Leave her to wait out the venom" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_2_soygun"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kristaller camın üstünden avucuna tıngırdamadan akıyor. Kadının gözü camın derinliğindeki yansımasında; seni değil, dövüşün nasıl biteceğini izliyor.", en: "The crystals slide off the glass into your palm without a clink. Her eyes are on her reflection deep in the glass. She's not watching you. She's watching to see how the fight ends." }
+          - { tr: "Aşağıdaki üç tırmanıcı başını kaldırmıyor. Kadın kristallerinin yokluğunu altı saat sonra, zehir çözülünce fark edecek ve onu da sınavın bir parçası sayacak.", en: "The three climbers below never look up. She'll notice her crystals are gone six hours from now, when the venom wears off, and she'll count it as part of the test." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Yansımana bakmadan camın üstünden geç", en: "Cross the glass without looking at your reflection" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_2_goruldu"
+        yer: "kule"
+        paragraflar:
+          - metin: { tr: "Son kristale uzanırken ayaklarının altında bir kıpırtı görüyorsun: aşağıdaki katta üç tırmanıcı başını kaldırmış, camın içinden sana bakıyor. Biri ötekilere gösteriyor; parmağı önce kadını, sonra seni işaret ediyor.", en: "As you reach for the last crystal, something moves under your feet. On the floor below, three climbers are looking up through the glass at you. One of them points it out to the others: first at her, then at you." }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "Cam her şeyi iki yönlü gösterir. {yer:kule_dibi|e} indiklerinde anlatacakları hikâyede yüzün de apaçık olacak.", en: "Glass shows everything both ways. When they get back down to {yer:kule_dibi}, your face will come through clear in the story they tell." }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "Kristalleri yanındakilerin gözü önünde topluyorsun. Cam zemindeki bütün yansımalarınız o anı tekrar tekrar oynuyor; taş kesilmiş kadın da görüyor, zehir gözlerine dokunmamış.", en: "You scoop up the crystals right in front of your company. Down in the glass floor, all your reflections replay the moment over and over. The woman who's been turned to stone sees it too; the venom never touched her eyes." }
+            kosul: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Kıpırdayamayan birinden çalmak... Camdaki yansımaların bile utandı.\"", en: "\"Stealing from somebody who can't move... Even your reflections looked embarrassed.\"" }
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Panzehir yanımda. Ona vereceğim. Sen yürü.\"", en: "\"I've got the antidote. I'm giving it to her. You keep walking.\"" }
+          - npc: "mert_kilic"
+            kosul: { yoldas: "mert_kilic" }
+            metin: { tr: "\"Bu kat her şeyi iki yönlü gösteriyor, biliyorsun. Saklanacak yer yok.\"", en: "\"This floor shows everything both ways, you know. Nowhere to hide.\"" }
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "\"Yükselenler bunu duyunca alkışlar. Soyulanın kendi adamları olduğunu öğrenene kadar.\"", en: "\"The Ascended'll applaud when they hear. Right up until they find out it was one of theirs.\"" }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Yansımalarının ardından camdan uzaklaş", en: "Follow your reflections off the glass" }
+            sonraki: "@akis"
+
+  # ================================================================== RAKİP 3 · Kat 31–39 · Saat
+  - id: "kule_an_rakip_3"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "rakip"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 31 }, degisken_max: { kule_kat: 39 } }
+    kart: { tr: "Dişlilerin arasında", en: "Caught in the gears" }
+    sahne: "kule_an_rakip_3"
+    sahneler:
+      - id: "kule_an_rakip_3"
+        yer: "kule"
+        paragraflar:
+          - { tr: "İki dişlinin arasına omzunda Sessiz Ağ'ın gri pelerini olan bir adam sıkışmış; sol botu bir dişlinin çentiklerine geçmiş. Her tik sesinde dişli bir diş daha dönüyor, botu da bir parmak daha içeri çekiyor.", en: "A man is wedged between two gears, the gray cloak of the Quiet Network on his shoulders, his left boot caught in a gear's teeth. On every tick the gear turns one more tooth and drags the boot a finger's width deeper." }
+          - { tr: "Telaşlı değil; dudakları tik sesleriyle birlikte kıpırdıyor. \"Kırk bir tik kaldı,\" diyor seni duyunca. \"Orada dikilmeye devam edersen otuz dokuz.\"", en: "He's not panicking. His lips move in time with the ticks. \"Forty-one ticks left,\" he says when he hears you. \"Thirty-nine if you keep standing there.\"" }
+          - { tr: "Sırtı sana dönük, başını çeviremiyor. Kemerinin arkasında kilitli bir kristal kutusu, omzunda da ışığı yanıp sönen bir kayıt taşı asılı.", en: "His back is to you, and he can't turn his head. Hanging off the back of his belt: a locked crystal case. On his shoulder: a recording stone with a blinking light." }
+        sezgiler:
+          - kosul: { stat: { per: 55 } }
+            metin: { tr: "Kayıt taşının ışığı tiklerle aynı ritimde yanıp sönüyor. Kayıt yapıp yapmadığını buradan anlamak zor.", en: "The stone's light blinks in rhythm with the ticks. From here, it's hard to tell whether it's recording." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "otuz sekiz. otuz yedi. bak, ben de saymaya başladım. senin yüzünden.", en: "thirty-eight. thirty-seven. look, now i'm counting too. that's on you." }
+        yoldas_tepkileri:
+          - npc: "mert_kilic"
+            kosul: { yoldas: "mert_kilic" }
+            metin: { tr: "\"Ağ'ın adamı. Kayıt taşı açık mı kapalı mı, buradan çıkaramıyorum. Açıksa her şeyi Ağ'a akıtıyordur.\"", en: "\"Network man. I can't tell from here if that stone's on or off. If it's on, it's feeding everything back to the Network.\"" }
+        secenekler:
+          - id: "sikistir"
+            etiket: { tr: "Silahını dişlerin arasına sok, çarkı durdur", en: "Jam your weapon in the teeth and stop the wheel" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - itibar: { sessiz_ag: 3 }
+              - xp_seviye: 4
+              - can: -10
+            sonraki: "kule_an_rakip_3_yardim"
+          - id: "soy"
+            etiket: { tr: "Taşın ışığı sönükken kutuyu kemerinden kopar", en: "Snap the case off his belt while the light is dark" }
+            goster: { yoldas_sayisi_max: 0 }
+            zar: { stat: "agi", zorluk: 65, tek: false, basarisiz: "kule_an_rakip_3_goruldu", basarisiz_etkiler: [{ oz_kristali: 3 }, { ahlak: { merhamet: -3 } }, { itibar: { sessiz_ag: -2 } }, { efsane: "kule_soygunu" }] }
+            etkiler:
+              - oz_kristali: 3
+              - ahlak: { merhamet: -3 }
+            sonraki: "kule_an_rakip_3_soygun"
+          - id: "soy_yoldas"
+            etiket: { tr: "Yanındakilerin önünde kutuyu kemerinden kopar", en: "Snap the case off his belt in front of your company" }
+            goster: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+            etkiler:
+              - oz_kristali: 3
+              - ahlak: { merhamet: -3 }
+              - itibar: { sessiz_ag: -2 }
+              - efsane: "kule_soygunu"
+            sonraki: "kule_an_rakip_3_goruldu"
+          - id: "birak"
+            etiket: { tr: "Çarkı onun hesabına bırak", en: "Leave the gear to his math" }
+            etkiler:
+              - ahlak: { merhamet: -1 }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_3_yardim"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Silahını iki dişin arasına sokuyorsun. Çark bir sonraki tikte takılıp inlerken bütün kat bir anlığına titriyor; dişlerin gerginliği kollarından omuzlarına vuruyor.", en: "You ram your weapon between two teeth. The wheel catches on the next tick and groans, and the whole floor shudders for a second. The strain of the teeth runs up your arms into your shoulders." }
+          - { tr: "Adam botunu çekip kurtarınca ilk iş kayıt taşına dokunup bir şeyler fısıldıyor. \"Ağ'a yazdım,\" diyor. \"Adını değil, ne yaptığını.\"", en: "Once he drags his boot free, the first thing he does is touch the recording stone and whisper something. \"Logged it with the Network,\" he says. \"Not your name. What you did.\"" }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Silahını dişlerin arasından çek, yürü", en: "Pull your weapon out of the teeth and go" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_3_soygun"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kutu tek bir çekişte kemerden kopuyor. Adam o sırada tik saydığından kemerinin hafiflediğini duymuyor bile; omzundaki taş karanlık kalıyor.", en: "The case comes off his belt in one tug. He's busy counting ticks and doesn't even notice his belt getting lighter. The stone on his shoulder stays dark." }
+          - { tr: "Arkandan sesi geliyor: \"Otuz bir. Hâlâ orada mısın?\" Cevap vermiyorsun. Botundan kurtulmanın yolunu kendisi bulacak, kutusunu ise bulamayacak.", en: "His voice follows you. \"Thirty-one. You still there?\" You don't answer. He'll figure out how to get out of that boot on his own. He won't figure out where his case went." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Dişliler bir sonraki boşluğu açınca geç", en: "Slip through when the gears open the next gap" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_3_goruldu"
+        yer: "kule"
+        paragraflar:
+          - metin: { tr: "Kutu kemerden koptuğu anda omzundaki taşın ışığı kırmızıya dönüyor. Adam başını çeviremese de o sesi tanıyor: \"Kayıtta,\" diyor sakin sakin. \"Görüntü, ses, yüz. Ağ'a gitti bile.\"", en: "The second the case comes off, the stone on his shoulder goes red. He can't turn his head, but he knows that sound. \"Recorded,\" he says, calm as anything. \"Picture, sound, face. Already on its way to the Network.\"" }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "Sessiz Ağ bilgiyi satmaz ama işine gelince sızdırır. {yer:kule_dibi|de} birileri bu kaydı bu akşam izleyecek.", en: "The Quiet Network doesn't sell information, but it leaks it when that suits them. Somebody at {yer:kule_dibi} is going to watch this tonight." }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "Kutuyu yanındakilerin önünde koparıyorsun. Adam hiçbir şey görmüyor ama sesleri duyuyor; yanındakilerin her sözünü tik tik aklına yazıyor.", en: "You snap the case off in front of your company. He can't see a thing, but he hears every word they say and files each one away, tick by tick." }
+            kosul: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+        yoldas_tepkileri:
+          - npc: "mert_kilic"
+            kosul: { yoldas: "mert_kilic" }
+            metin: { tr: "\"Ağ'ın adamından çaldın. Bunu benden saklayamazdın zaten; Ağ'dan hiç saklayamazsın.\"", en: "\"You stole from a Network man. You couldn't have hidden that from me anyway, and you'll never hide it from the Network.\"" }
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Adam tik sayıyordu, sen de kristal saydın.\"", en: "\"He was counting ticks. You were counting crystals.\"" }
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Botunu ben keseceğim. Ayağı kurtulsun, gerisi senin vicdanına kalsın.\"", en: "\"I'll cut him out of the boot. His foot gets saved. The rest is on your conscience.\"" }
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "\"Saatin içinde soygun. Zamanlaman iyiydi, o kadarını söyleyeyim.\"", en: "\"A robbery inside a clock. I'll give you this much: good timing.\"" }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Tik seslerine karışıp dişlilerin arasından çık", en: "Lose yourself in the ticking and get out through the gears" }
+            sonraki: "@akis"
+
+  # ================================================================== RAKİP 4 · Kat 41–49 · Sessizlik
+  - id: "kule_an_rakip_4"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "rakip"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 41 }, degisken_max: { kule_kat: 49 } }
+    kart: { tr: "Sağır kurt", en: "The deaf wolf" }
+    sahne: "kule_an_rakip_4"
+    sahneler:
+      - id: "kule_an_rakip_4"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Karanlıkta, sırtını duvara vermiş bir kadın kılıcını önündeki boşluğa savuruyor. Kulaklarından ince bir kan sızmış; bu kat ondan sesi değil, işitmeyi almış.", en: "In the dark, a woman with her back against the wall is swinging her sword at the empty air in front of her. Thin trails of blood have run from her ears. This floor didn't take the sound from her. It took her hearing." }
+          - { tr: "Lonca'nın yaşlı kurtlarından biri: kolunda üç gümüş şerit, ayaklarının dibinde ağzı açık bir kristal torbası. Her esintide kılıcı o yöne dönüyor, havadaki en küçük kıpırtıyı teninden okuyor.", en: "She's one of the Guild's old wolves: three silver stripes on her sleeve, an open crystal bag at her feet. Every draft swings her blade that way. She's reading the slightest stir in the air through her skin." }
+          - { tr: "Seni ne duyabiliyor ne görebiliyor. Ama yaklaştıkça kılıcın ucu ağır ağır sana dönüyor.", en: "She can't hear you. Can't see you. But the closer you get, the more the point of her sword drifts your way." }
+        sezgiler:
+          - kosul: { stat: { per: 90 } }
+            metin: { tr: "Kolundaki şeritlerin yanında bir yetenek simgesi parlıyor: dokunduğu kişinin Sistem kaydını okuyabiliyor.", en: "Next to the stripes on her sleeve, a skill icon glows: she can read the System profile of anyone she touches." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "duvarlar sus diyor. o zaten susmuş. sen de sus. elinle konuş.", en: "the walls say hush. she already has. you hush too. talk with your hands." }
+        yoldas_tepkileri:
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"İki kulak zarı birden patlamış. İyileşir, ama bu katta değil.\"", en: "\"Both eardrums are ruptured. They'll heal, but not on this floor.\"" }
+        secenekler:
+          - id: "avuc"
+            etiket: { tr: "Kılıcın altından geç, avucuna parmağınla yaz", en: "Slip under her blade and trace words on her palm" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - itibar: { lonca: 3 }
+              - xp_seviye: 4
+              - can: -10
+            sonraki: "kule_an_rakip_4_yardim"
+          - id: "soy"
+            etiket: { tr: "Havayı kıpırdatmadan torbaya uzan", en: "Reach for the bag without stirring the air" }
+            goster: { yoldas_sayisi_max: 0 }
+            zar: { stat: "agi", zorluk: 95, tek: false, basarisiz: "kule_an_rakip_4_goruldu", basarisiz_etkiler: [{ oz_kristali: 4 }, { ahlak: { merhamet: -3 } }, { itibar: { lonca: -2 } }, { efsane: "kule_soygunu" }] }
+            etkiler:
+              - oz_kristali: 4
+              - ahlak: { merhamet: -3 }
+            sonraki: "kule_an_rakip_4_soygun"
+          - id: "soy_yoldas"
+            etiket: { tr: "Yanındakilerin önünde torbayı ayağının dibinden al", en: "Take the bag from her feet in front of your company" }
+            goster: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+            etkiler:
+              - oz_kristali: 4
+              - ahlak: { merhamet: -3 }
+              - itibar: { lonca: -2 }
+              - efsane: "kule_soygunu"
+            sonraki: "kule_an_rakip_4_goruldu"
+          - id: "birak"
+            etiket: { tr: "Onu kılıcıyla baş başa bırak", en: "Leave her alone with her sword" }
+            etkiler:
+              - ahlak: { merhamet: -1 }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_4_yardim"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kılıcın ilk savuruşu omzunu sıyırıyor; ikincisinde sen çoktan altına girip bileğini yakalamışsın. Avucunu açıp parmağınla harf harf yazıyorsun: dost. merdiven. benimle.", en: "Her first swing grazes your shoulder. By the second, you're already under it with her wrist in your grip. You open her hand and trace letters into her palm: friend. stairs. with me." }
+          - { tr: "Kadının yüzü önce geriliyor, sonra gevşiyor; dokunduğun an kim olduğunu okumuş. Kılıcını indirip senin avucuna tek bir kelime yazıyor: borçluyum.", en: "Her face tightens, then relaxes. The second you touched her, she read who you were. She lowers her sword and traces two words into your palm: owe you." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Onu elinden tutup merdivene götür", en: "Lead her to the stairs by the hand" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_4_soygun"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Nefesini tutup torbaya santim santim yaklaşıyorsun. Kılıcın ucu başının üstünden geçip öbür yana dönüyor; kadın seni değil, katın kendi esintisini kovalıyor.", en: "Holding your breath, you inch toward the bag. Her blade passes over your head and swings the other way. She's not chasing you. She's chasing the floor's own drafts." }
+          - { tr: "Torba elinde, karanlığın içine geri çekiliyorsun. Kadın ancak merdivende, torbasını yokladığında anlayacak ve bu katın ondan bir şey daha aldığını sanacak.", en: "Bag in hand, you back away into the dark. She won't know until the stairs, when she pats for her bag, and she'll figure this floor took one more thing from her." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Karanlığın içinde sessizce uzaklaş", en: "Slip away into the dark" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_4_goruldu"
+        yer: "kule"
+        paragraflar:
+          - metin: { tr: "Torbayı kaldırırken bileğin kadının çizmesine değiyor. Bir anda eli bileğine kenetleniyor ve sen kurtulana kadar kaydını okumuş bile: adını, seviyeni, sınıfını.", en: "As you lift the bag, your wrist brushes her boot. Her hand clamps on before you can pull away, and by the time you're loose, she's already read your profile: name, level, class." }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "Seni bırakıyor; artık görmesine gerek yok. \"Biliyorum seni,\" diyor, kendi sesini duyamadığından fazla yüksek. Lonca'nın yaşlı kurtları birbirine her şeyi anlatır.", en: "She lets you go. She doesn't need to see you anymore. \"I know you,\" she says, too loud, because she can't hear herself. The Guild's old wolves tell each other everything." }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "Torbayı yanındakilerin önünde alıyorsun. Kadın hiçbir şey duymuyor; ama içlerinden biri onu sakinleştirmek için koluna dokununca o dokunuştan her şeyi okuyor: kiminle olduğunu, torbasını kimin aldığını.", en: "You take the bag right in front of your company. She can't hear a thing, but when one of them touches her arm to calm her down, she reads it all through that touch: who they're with, and who took her bag." }
+            kosul: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+        yoldas_tepkileri:
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Koluna ben dokundum. Her şeyi bilsin istedim.\"", en: "\"I'm the one who touched her arm. I wanted her to know everything.\"" }
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Duyamayan birinden çaldın. Keşke şu an aklımdan geçenleri duyabilseydi.\"", en: "\"You stole from someone who can't even hear. I wish she could hear what I'm thinking right now.\"" }
+          - npc: "mert_kilic"
+            kosul: { yoldas: "mert_kilic" }
+            metin: { tr: "\"Dokunarak kayıt okuyan bir Lonca gazisi. Yarın bütün Lonca bilecek.\"", en: "\"A Guild vet who reads profiles by touch. By tomorrow the whole Guild's going to know.\"" }
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "\"Sağır, kör, yine de kim olduğunu biliyor. Lonca'nın kurtları böyledir işte.\"", en: "\"Deaf, blind, and she still knows exactly who you are. That's the Guild's old wolves for you.\"" }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Torbayı al, kılıcın menzilinden çık", en: "Take the bag and get out of her sword's reach" }
+            sonraki: "@akis"
+
+  # ================================================================== RAKİP 5 · Kat 51–59 · Başka Dünyaların Kalıntıları
+  - id: "kule_an_rakip_5"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "rakip"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 51 }, degisken_max: { kule_kat: 59 } }
+    kart: { tr: "Yedinci tırmanıcı", en: "The seventh climber" }
+    sahne: "kule_an_rakip_5"
+    sahneler:
+      - id: "kule_an_rakip_5"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kabuklu, kıvrık molozun ortasında bir çember var: sönmüş bir fenerin çevresine oturmuş altı Sığınak tırmanıcısı, hepsi ölü. Yedincisi yaşıyor; bacakları adını bilmediğin renkte bir kemerin altında kalmış.", en: "In the middle of the shelled, curled rubble, there's a circle: six Haven climbers sitting around a dead lantern, all of them gone. The seventh is alive, legs pinned under an arch in a color you don't have a name for." }
+          - { tr: "Elinde altı künye sıkıyor. \"Künyeleri aşağı indir,\" diyor. \"Ailelerine. Fenerin yanındaki çanta da onların; içindekiler Sığınak'a, geride kalanlara gidecek.\"", en: "He's clutching six dog tags. \"Get the tags down there,\" he says. \"To their families. The bag by the lantern is theirs too. What's in it goes to the Haven, to the ones they left behind.\"" }
+          - { tr: "Sözünü bitiremeden başı göğsüne düşüyor; acıdan bayılmış. Duvarın dibindeki yabancı kemikler de aynı çemberi kurmuş, bu kat sonuna kadar birlikte bekleyenleri hep aynı biçimde diziyor.", en: "He passes out before he can finish, head dropping to his chest. The alien bones at the foot of the wall sit in the same circle; this floor arranges everyone who waits it out together the same way." }
+        sezgiler:
+          - kosul: { stat: { per: 130 } }
+            metin: { tr: "Ölülerden birinin kemerinde küçük bir haberleşme kristali hâlâ ışıldıyor. Hat açık.", en: "On one of the dead climbers' belts, a small comm crystal is still glowing. The line's open." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "altı künye. altı aile. bir çanta. bu katta sayılar hiçbir zaman tutmuyor.", en: "six tags. six families. one bag. the numbers never add up on this floor." }
+        yoldas_tepkileri:
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Ölüleri sonra düşünürüz. Önce yaşayanı çıkaralım.\"", en: "\"We can think about the dead later. Let's get the living one out first.\"" }
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Künyeleri ben taşırım. İzin ver, ben taşıyayım.\"", en: "\"I'll carry the tags. Let me carry them.\"" }
+        secenekler:
+          - id: "kurtar"
+            etiket: { tr: "Kemeri kaldır; onu, künyeleri ve çantayı taşı", en: "Lift the arch, and carry him, the tags and the bag" }
+            etkiler:
+              - ahlak: { merhamet: 2, insanlik: 1 }
+              - itibar: { siginak: 3 }
+              - xp_seviye: 5
+              - can: -20
+            sonraki: "kule_an_rakip_5_yardim"
+          - id: "soy"
+            etiket: { tr: "Fenerin yanındaki çantayı sessizce al", en: "Quietly take the bag from beside the lantern" }
+            goster: { yoldas_sayisi_max: 0 }
+            zar: { stat: "agi", zorluk: 135, tek: false, basarisiz: "kule_an_rakip_5_goruldu", basarisiz_etkiler: [{ oz_kristali: 4 }, { ahlak: { merhamet: -3 } }, { itibar: { siginak: -2 } }, { efsane: "kule_soygunu" }] }
+            etkiler:
+              - oz_kristali: 4
+              - ahlak: { merhamet: -3 }
+            sonraki: "kule_an_rakip_5_soygun"
+          - id: "soy_yoldas"
+            etiket: { tr: "Yanındakilerin önünde çantayı sırtına geçir", en: "Sling the bag on your back in front of your company" }
+            goster: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+            etkiler:
+              - oz_kristali: 4
+              - ahlak: { merhamet: -3 }
+              - itibar: { siginak: -2 }
+              - efsane: "kule_soygunu"
+            sonraki: "kule_an_rakip_5_goruldu"
+          - id: "birak"
+            etiket: { tr: "Onu ölülerinin arasında bırak", en: "Leave him with his dead" }
+            etkiler:
+              - ahlak: { merhamet: -1 }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_5_yardim"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Omzunu kemerin altına verip itiyorsun; yabancı taş, hiçbir dünyanın taşına benzemeyen bir ağırlıkla kemiklerine bastırıyor. Adam ayıldığında sırtındasın: künyeler boynunda, çanta senin omzunda.", en: "You get your shoulder under the arch and heave. The alien stone bears down on your bones with a weight no stone from any world should have. When he comes to, he's on your back, the tags around his neck, the bag over your shoulder." }
+          - { tr: "Merdivenin başında, ölülerden birinin kemerinden aldığın haberleşme kristali çatırdıyor: \"Ekip yedi, duyuyor musunuz?\" Adam kristali ağzına götürüp yalnızca \"Biri geldi,\" diyor, sonra ağlamaya başlıyor.", en: "At the top of the stairs, the comm crystal you took off one of the dead men's belts crackles. \"Team Seven, do you copy?\" He lifts it to his mouth and just says, \"Somebody came,\" and then he starts to cry." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Onu aşağıdan gelen ekibe teslim et", en: "Hand him off to the team coming up" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_5_soygun"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Çantayı fenerin yanından alıp sırtına geçiriyorsun. Çemberde kimse kıpırdamıyor, bayılan adam da. Yabancı kalıntılar çantanın içinde birbirine sürtünüp bilmediğin bir dilde şıngırdıyor.", en: "You pick up the bag from beside the lantern and sling it on your back. Nobody in the circle moves, and neither does the man who passed out. Inside the bag, the alien relics rub together and clink in a language you don't know." }
+          - { tr: "Adam ayıldığında künyeleri hâlâ elinde bulacak, çantayı ise hiç bulamayacak. Bu katta kaybolan şeyin peşine kimse düşmez.", en: "When he comes to, he'll still have the tags in his hands. He'll never find the bag. Nobody goes looking for things lost on this floor." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Çemberin önünden başını çevirerek geç", en: "Walk past the circle with your head turned" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_5_goruldu"
+        yer: "kule"
+        paragraflar:
+          - metin: { tr: "Çantayı kaldırdığın anda ölülerden birinin kemerindeki kristal çatırdıyor: \"Ekip yedi? Bir hareket görüyoruz. Kim var orada?\" Kristalin yüzünde küçük bir göz açılmış; Sığınak'ın üssü görüntüyü bütün çıplaklığıyla alıyor.", en: "The moment you lift the bag, the crystal on one of the dead men's belts crackles. \"Team Seven? We've got movement. Who's there?\" A tiny eye has opened on the crystal's face, and the Haven's base is getting all of it, nothing hidden." }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "Sığınak bu kaydı saklamayacak. Ölülerinin çantasını kimin aldığını bu gece bütün {yer:kule_dibi} bilecek.", en: "The Haven isn't going to sit on this. By tonight, all of {yer:kule_dibi} will know who took their dead's bag." }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "Çantayı yanındakilerin önünde sırtına geçiriyorsun. O anda ölülerden birinin kemerindeki kristal çatırdayıp bir göz açıyor; Sığınak'ın üssü yanındakilerin yüzündeki ifadeyi de seninkiyle birlikte görüyor.", en: "You sling the bag on your back right in front of your company. That's when the crystal on one of the dead men's belts crackles and opens an eye, and the Haven's base sees the looks on their faces along with yours." }
+            kosul: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Ölülerin çantası, {oyuncu}. Ölülerin.\"", en: "\"That's the dead's bag, {oyuncu}. The dead's.\"" }
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Adamı ben çıkaracağım, künyeleri de ben indireceğim. Sen o çantayla yanıma yaklaşma.\"", en: "\"I'll get him out. I'll carry the tags down, too. You keep that bag away from me.\"" }
+          - npc: "mert_kilic"
+            kosul: { yoldas: "mert_kilic" }
+            metin: { tr: "\"Hat açıktı. Söyledim mi? Söylemedim. Keşke söyleseydim.\"", en: "\"The line was open. Did I say so? No. I wish I had.\"" }
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "\"Ölülerden çalmak... O çizgiyi ben bile geçmedim.\"", en: "\"Stealing from the dead... Even I never crossed that line.\"" }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kristalin gözünden uzaklaş", en: "Get away from the crystal's eye" }
+            sonraki: "@akis"
+
+  # ================================================================== RAKİP 6 · Kat 61–69 · Yanık Arşiv
+  - id: "kule_an_rakip_6"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "rakip"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 61 }, degisken_max: { kule_kat: 69 } }
+    kart: { tr: "Kendi kaydını arayan", en: "Looking for her own record" }
+    sahne: "kule_an_rakip_6"
+    sahneler:
+      - id: "kule_an_rakip_6"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Yanan rafların arasında, alevlerin tam ortasında diz çökmüş bir kadın sayfaları tek tek çevirip okuyor. Elleri yanmış, parmak uçları kömür karası; yine de okumayı bırakmıyor.", en: "Between the burning shelves, right in the flames, a woman is kneeling and turning pages one by one. Her hands are burned, her fingertips charcoal-black, and she still won't stop reading." }
+          - { tr: "Sessiz Ağ'ın arşivcilerinden biri; gri pelerininin eteği tutuşmuş, farkında değil. \"Kendi kaydımı arıyorum,\" diyor başını kaldırmadan. \"Burada bir yerde. Yanmadan bulmam lazım.\"", en: "She's one of the Quiet Network's archivists. The hem of her gray cloak has caught fire, and she hasn't noticed. \"I'm looking for my own record,\" she says without looking up. \"It's here somewhere. I have to find it before it burns.\"" }
+          - { tr: "Dizinin dibinde ağzı açık bir alet çantası duruyor: kristaller, mühürler, kül tutmuş bir defter.", en: "An open kit sits by her knee: crystals, seals, a notebook gone gray with ash." }
+        sezgiler:
+          - kosul: { stat: { per: 170 } }
+            metin: { tr: "Havada süzülen kül tanecikleri düşerken harfe dönüşüyor. Bu kat okumakla kalmıyor, yazıyor da.", en: "The flakes of ash drifting down turn into letters as they fall. This floor doesn't just read. It writes." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "kaydını bulursa ne yazdığını okuyacak. bazı şeyler yanarken daha iyi.", en: "if she finds her record, she'll read what it says. some things are better off burning." }
+        yoldas_tepkileri:
+          - npc: "mert_kilic"
+            kosul: { yoldas: "mert_kilic" }
+            metin: { tr: "\"Ağ'ın arşivcisi, hem de kendi dosyasını arıyor. Ondan tehlikeli okur olmaz.\"", en: "\"A Network archivist, hunting for her own file. There's no more dangerous reader.\"" }
+        secenekler:
+          - id: "cek"
+            etiket: { tr: "Pelerinini söndür, onu alevlerden sürükle", en: "Smother her cloak and drag her out of the fire" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - itibar: { sessiz_ag: 3 }
+              - xp_seviye: 5
+              - can: -25
+            sonraki: "kule_an_rakip_6_yardim"
+          - id: "soy"
+            etiket: { tr: "O okurken çantayı ateşin içinden çek", en: "Pull the kit out of the fire while she reads" }
+            goster: { yoldas_sayisi_max: 0 }
+            zar: { stat: "agi", zorluk: 175, tek: false, basarisiz: "kule_an_rakip_6_goruldu", basarisiz_etkiler: [{ oz_kristali: 4 }, { ahlak: { merhamet: -3 } }, { itibar: { sessiz_ag: -2 } }, { efsane: "kule_soygunu" }] }
+            etkiler:
+              - oz_kristali: 4
+              - ahlak: { merhamet: -3 }
+            sonraki: "kule_an_rakip_6_soygun"
+          - id: "soy_yoldas"
+            etiket: { tr: "Yanındakilerin önünde çantayı alevlerden al", en: "Take the kit out of the flames in front of your company" }
+            goster: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+            etkiler:
+              - oz_kristali: 4
+              - ahlak: { merhamet: -3 }
+              - itibar: { sessiz_ag: -2 }
+              - efsane: "kule_soygunu"
+            sonraki: "kule_an_rakip_6_goruldu"
+          - id: "birak"
+            etiket: { tr: "Onu kendi kaydıyla baş başa bırak", en: "Leave her alone with her record" }
+            etkiler:
+              - ahlak: { merhamet: -1 }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_6_yardim"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Pelerinini avuçlarınla söndürüp kadını kollarından kavrıyorsun; o ise sayfalarına sarılmış, bırakmıyor. Rafların arasından geçerken alevler sırtını yalıyor.", en: "You smother her cloak with your palms and grab her by the arms. She's hugging her pages and won't let go. The flames lick at your back as you haul her between the shelves." }
+          - { tr: "Merdivenin dibinde kadın elindeki yarı yanık sayfaya bakıyor: yazan onun adı değil, başkasının. \"Bir dahaki sefere,\" diyor, sayfayı kemerine sokarken. \"Ağ seni unutmaz. Bunu da bir yere yazarım.\"", en: "At the foot of the stairs she looks at the half-burned page in her hand. Not her name. Somebody else's. \"Next time,\" she says, tucking it into her belt. \"The Network won't forget you. I'll write this down somewhere, too.\"" }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Sırtındaki külü silkele, yoluna dön", en: "Brush the ash off your back and get going" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_6_soygun"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Çantayı alevlerin arasından çekip alıyorsun. Kadının gözü elindeki sayfada, dudakları bir adı heceliyor. Kül tanecikleri omzuna düşüp harfe dönüşemeden sönüyor.", en: "You pull the kit out of the flames. Her eyes are on the page in her hand, lips sounding out a name. Flakes of ash land on your shoulder and burn out before they can become letters." }
+          - { tr: "Arkanda hâlâ sayfa çevirdiğini duyuyorsun. Çantasını ancak işi bitince arayacak; o zamana kadar onu da bu katın yaktığını sanacak.", en: "Behind you, you can still hear her turning pages. She won't look for the kit until she's done, and by then she'll figure the floor burned it too." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Rafların arasından dumana karış", en: "Disappear into the smoke between the shelves" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_6_goruldu"
+        yer: "kule"
+        paragraflar:
+          - metin: { tr: "Çantayı kaldırdığın anda tavandaki külden bir parça kopup kadının kucağına düşüyor; düşerken harflere dönüşüyor, harfler de bir cümle kuruyor. Kadın onu okuyor: neyin alındığını, kimin aldığını.", en: "The moment you lift the kit, a flake of ash breaks off the ceiling and drops into her lap, turning into letters on the way down. The letters make a sentence. She reads it: what was taken, and who took it." }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "Başını kaldırıp sana bakıyor, gözleri ateşten parlıyor. \"Arşiv yazdı,\" diyor. \"Şimdi de ben Ağ'a yazacağım.\"", en: "She looks up at you, eyes bright with the fire. \"The archive wrote it down,\" she says. \"Now I'll write it to the Network.\"" }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "Çantayı yanındakilerin önünde alıyorsun. Tavandan dökülen kül, onların şaşkın yüzlerini, senin elini ve çantayı tek tek harfe döküp kadının kucağına bırakıyor.", en: "You take the kit right in front of your company. The ash spilling off the ceiling spells it all out, their shocked faces, your hand, the kit, then drops the letters into her lap." }
+            kosul: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+        yoldas_tepkileri:
+          - npc: "mert_kilic"
+            kosul: { yoldas: "mert_kilic" }
+            metin: { tr: "\"Ağ'dan birinden, hem de arşivcisinden çaldın. Ağ'ın tarihine geçti bile.\"", en: "\"From a Network archivist, of all people. That's already in the Network's history books.\"" }
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Kadın yanıyordu. Sen çantaya baktın.\"", en: "\"She was on fire. You looked at the bag.\"" }
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Ellerini sarmam lazım. Çekil önümden.\"", en: "\"I need to wrap her hands. Out of my way.\"" }
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "\"Kendi kaydını arayan birini soydun. Seninki de bu katta bir yerde, unutma.\"", en: "\"You robbed someone looking for her own record. Yours is up here somewhere too, don't forget.\"" }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kül harflere dönüşmeden oradan uzaklaş", en: "Get away before the ash turns into more letters" }
+            sonraki: "@akis"
+
+  # ================================================================== RAKİP 7 · Kat 71–79 · Tohumluk
+  - id: "kule_an_rakip_7"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "rakip"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 71 }, degisken_max: { kule_kat: 79 } }
+    kart: { tr: "Kozadan kaçan", en: "The one who crawled out of a pod" }
+    sahne: "kule_an_rakip_7"
+    sahneler:
+      - id: "kule_an_rakip_7"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Sıraların arasında, yarı yarıya kristale gömülmüş bir adam sürünüyor. Bekçiler onu kozaya koymaya başlamış ama bitirememişler: bacakları dizine kadar billurlaşmış, gerisi can havliyle dışarı çıkmış.", en: "Between the rows, a man half-encased in crystal is crawling. The keepers started putting him in a pod and didn't finish. His legs are crystallized up to the knee; the rest of him clawed its way out on sheer panic." }
+          - { tr: "Göğsünde Lonca'nın kırmızı nişanı, kemerinde ağzı bağlı bir kese. Kozanın uykusu hâlâ üstünde; başı birkaç saniyede bir öne düşüyor, her seferinde kendini zorla uyandırıyor.", en: "The Guild's red insignia on his chest, a tied pouch on his belt. The pod's sleep is still on him. Every few seconds his head drops, and every time he forces himself awake." }
+          - { tr: "Uzaklardan makas sesi geliyor: kırp, kırp. \"Gelmeden,\" diyor adam, gözleri kapanırken. \"Onlar gelmeden beni bir yere sürükle.\"", en: "Far off, the shears: snip, snip. \"Before they get here,\" he says, eyes falling shut. \"Drag me somewhere before they get here.\"" }
+        sezgiler:
+          - kosul: { stat: { per: 220 } }
+            metin: { tr: "Kristal dizlerinden yukarı ağır ağır tırmanıyor. Bir saate kalmaz, belini bulur.", en: "The crystal is creeping slowly up past his knees. Within the hour, it'll reach his waist." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "uyuyor, uyanıyor, uyuyor. kozalar sabırlıdır. sen de sabırlı olursan kese senin.", en: "asleep, awake, asleep. the pods are patient. be patient too, and the pouch is yours." }
+        yoldas_tepkileri:
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "\"Lonca'dan. Tanıyorum onu, Küresel Sıralama'da elli altıncıydı. Şimdi kozadan kaçmış herhangi biri.\"", en: "\"Guild guy. I know him. He was fifty-sixth on the Global Ranking. Now he's just some guy who ran from a pod.\"" }
+        secenekler:
+          - id: "kir"
+            etiket: { tr: "Bacaklarındaki kristali kır, onu sırtla", en: "Break the crystal off his legs and carry him" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - itibar: { lonca: 3 }
+              - xp_seviye: 6
+              - can: -30
+            sonraki: "kule_an_rakip_7_yardim"
+          - id: "soy"
+            etiket: { tr: "Başı öne düştüğünde keseyi kemerinden çöz", en: "Untie the pouch when his head drops" }
+            goster: { yoldas_sayisi_max: 0 }
+            zar: { stat: "agi", zorluk: 225, tek: false, basarisiz: "kule_an_rakip_7_goruldu", basarisiz_etkiler: [{ oz_kristali: 5 }, { ahlak: { merhamet: -3 } }, { itibar: { lonca: -2 } }, { efsane: "kule_soygunu" }] }
+            etkiler:
+              - oz_kristali: 5
+              - ahlak: { merhamet: -3 }
+            sonraki: "kule_an_rakip_7_soygun"
+          - id: "soy_yoldas"
+            etiket: { tr: "Yanındakilerin önünde keseyi kemerinden çöz", en: "Untie the pouch from his belt in front of your company" }
+            goster: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+            etkiler:
+              - oz_kristali: 5
+              - ahlak: { merhamet: -3 }
+              - itibar: { lonca: -2 }
+              - efsane: "kule_soygunu"
+            sonraki: "kule_an_rakip_7_goruldu"
+          - id: "birak"
+            etiket: { tr: "Bekçiler gelmeden sıraların arasından sıvış", en: "Slip off through the rows before the keepers come" }
+            etkiler:
+              - ahlak: { merhamet: -1 }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_7_yardim"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kristali yumruğunla kırıyorsun; her darbede kopan parçalar keskin bir çınlamayla avucunu kesiyor. Sonunda bacakları serbest kalınca adamı sırtına alıp makas sesinin tersine yürüyorsun.", en: "You break the crystal with your fist. Every shard rings sharp as it cracks and slices your palm. When his legs are finally free, you get him on your back and walk away from the sound of the shears." }
+          - { tr: "Merdivenin başında adam bir anlığına tamamen uyanıyor. \"Lonca'da adını söyleyeceğim,\" diyor, \"beni kozadan çıkaranın adını.\" Sonra yeniden uykuya dalıyor, bu kez rahat.", en: "At the top of the stairs he wakes all the way up for a second. \"I'm saying your name at the Guild,\" he says. \"The name of who pulled me out of a pod.\" Then he's out again, peaceful this time." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Onu merdivenin dibine yatır", en: "Lay him down at the foot of the stairs" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_7_soygun"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Başı öne düştüğü anda düğümü çözüyorsun; kese avucuna kayarken adamın soluğu bile değişmiyor. Bir sonraki uyanışında yalnızca makas sesini duyuyor, seni değil.", en: "The second his head drops, you work the knot loose. The pouch slides into your palm, and his breathing doesn't even change. Next time he wakes, all he hears is the shears. Not you." }
+          - { tr: "Merdivene yürürken arkandan kendi kendine söylendiğini duyuyorsun: \"Gelmeden... gelmeden.\" Kesesini aradığında onu da bekçilerin aldığını sanacak.", en: "Heading for the stairs, you hear him muttering behind you. \"Before they get here... before they get here.\" When he reaches for his pouch, he'll figure the keepers took that too." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Makas sesinin uzağından merdivene yürü", en: "Head for the stairs, away from the shears" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_7_goruldu"
+        yer: "kule"
+        paragraflar:
+          - metin: { tr: "Düğüm tam çözülürken adamın gözleri açılıyor; onu kozanın uykusundan uyandıran, kemerindeki hafiflik olmuş. Elini keseye uzatıyor, ama kristal bacakları yerinden kıpırdamasına izin vermiyor.", en: "Right as the knot gives, his eyes open. It wasn't the pod's sleep letting go; it was the weight leaving his belt that woke him. He reaches for the pouch, but his crystal legs won't let him move." }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "\"Seni gördüm,\" diyor, sesi uykuyla öfke arasında. \"Buradan çıkarsam... çıkacağım. Lonca'ya anlatacağım.\" Makas sesi yaklaşıyor ama söyleyişinden belli, çıkacak.", en: "\"I saw you,\" he says, voice somewhere between sleep and fury. \"If I get out of here... when I get out, I'm telling the Guild.\" The shears are getting closer, but the way he says it, he's getting out." }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "Keseyi yanındakilerin önünde çözüyorsun. Adamın gözleri bir an açılıp yanındakilere takılıyor; uykuya dönerken dudakları onların adlarını sayıyor.", en: "You untie the pouch in front of your company. His eyes open for a moment and catch on them. As he sinks back into sleep, his lips are listing their names." }
+            kosul: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+        yoldas_tepkileri:
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "\"Elli altıncıyı soydun. Sıralamada onun yerini istiyorsan bundan kolay yollar var.\"", en: "\"You robbed number fifty-six. If you want his spot on the board, there are easier ways.\"" }
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Onu buradan ben çıkaracağım. Sen keseni say.\"", en: "\"I'm getting him out of here. You count your pouch.\"" }
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Kozadan yeni kaçmış birini... Bekçilerden ne farkın kaldı?\"", en: "\"Someone who just crawled out of a pod... How are you any different from the keepers?\"" }
+          - npc: "mert_kilic"
+            kosul: { yoldas: "mert_kilic" }
+            metin: { tr: "\"Umarım kese ağırdır. Bunun bedelini biri ödeyecek, büyük ihtimalle de sen.\"", en: "\"Hope that pouch is heavy. Somebody's paying for this, and odds are it's you.\"" }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kozaların arasından hızla uzaklaş", en: "Get away through the pods, fast" }
+            sonraki: "@akis"
+
+  # ================================================================== RAKİP 8 · Kat 81–89 · Ters Gök
+  - id: "kule_an_rakip_8"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "rakip"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 81 }, degisken_max: { kule_kat: 89 } }
+    kart: { tr: "Yıldızların üstünde bir ip", en: "A rope over the stars" }
+    sahne: "kule_an_rakip_8"
+    sahneler:
+      - id: "kule_an_rakip_8"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Ters gökte, zeminin bittiği yerde bir ip gerili: bir ucu yıldızların üstünde sallanan bir kadına, öbür ucu Kule'nin direklerinden birine bağlı. Kadın aşağıdaki boşlukta, Dünya'nın küçücük mavisinin üstünde ağır ağır dönüyor.", en: "On the upside-down sky, where the floor gives out, a rope runs taut: one end tied to a woman dangling over the stars, the other to one of the Spire's spars. She's turning slowly in the void below, above the tiny blue of Earth." }
+          - { tr: "Sığınak'ın gözcülerinden biri; bir kolu kırık, öbürüyle ipe sarılmış. Sırt çantası direğin çivisine takılı kalmış, ipin bağlandığı yerin bir karış ötesinde.", en: "She's one of the Haven's scouts, one arm broken, the other locked around the rope. Her pack is hooked on a nail in the spar, a hand's width from where the rope is tied." }
+          - { tr: "\"Çekebilir misin?\" diye sesleniyor. \"Yerçekimi az önce fikir değiştirdi, ben değiştiremedim.\"", en: "\"Can you pull me up?\" she calls. \"Gravity changed its mind a minute ago. Nobody told me.\"" }
+        sezgiler:
+          - kosul: { stat: { per: 280 } }
+            metin: { tr: "İp sağlam, düğüm de. Çanta direkten alınsa kadın hiçbir şey hissetmez.", en: "The rope's solid, and so is the knot. If the pack came off the spar, she'd never feel a thing." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "aşağı bakma. aşağısı dünya. dünya yukarı bakmıyor.", en: "don't look down. down is earth. earth isn't looking up." }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Aşağıda Dünya var. {yer:kiyikent} şuralarda bir yerde. Çek onu, ne olur.\"", en: "\"That's Earth down there. {yer:kiyikent} is somewhere right about there. Pull her up, please.\"" }
+        secenekler:
+          - id: "cek"
+            etiket: { tr: "İpi kavra, onu ters gökten yukarı çek", en: "Grab the rope and haul her up out of the sky" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - itibar: { siginak: 3 }
+              - xp_seviye: 6
+              - can: -30
+            sonraki: "kule_an_rakip_8_yardim"
+          - id: "soy"
+            etiket: { tr: "İpe dokunmadan çantayı çividen kurtar", en: "Lift the pack off the nail without touching the rope" }
+            goster: { yoldas_sayisi_max: 0 }
+            zar: { stat: "agi", zorluk: 285, tek: false, basarisiz: "kule_an_rakip_8_goruldu", basarisiz_etkiler: [{ oz_kristali: 5 }, { ahlak: { merhamet: -3 } }, { itibar: { siginak: -2 } }, { efsane: "kule_soygunu" }] }
+            etkiler:
+              - oz_kristali: 5
+              - ahlak: { merhamet: -3 }
+            sonraki: "kule_an_rakip_8_soygun"
+          - id: "soy_yoldas"
+            etiket: { tr: "Yanındakilerin önünde çantayı çividen al", en: "Take the pack off the nail in front of your company" }
+            goster: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+            etkiler:
+              - oz_kristali: 5
+              - ahlak: { merhamet: -3 }
+              - itibar: { siginak: -2 }
+              - efsane: "kule_soygunu"
+            sonraki: "kule_an_rakip_8_goruldu"
+          - id: "birak"
+            etiket: { tr: "İpin dayanacağına güven, yürü", en: "Trust the rope to hold and walk on" }
+            etkiler:
+              - ahlak: { merhamet: -1 }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_8_yardim"
+        yer: "kule"
+        paragraflar:
+          - { tr: "İpi iki elinle kavrayıp çekiyorsun. Her kulaçta yerçekimi kararsızca yön değiştiriyor; ip kimi zaman hafifliyor, kimi zaman kollarını koparacak kadar ağırlaşıyor.", en: "You grab the rope with both hands and haul. With every pull, gravity can't decide which way it's going: sometimes the rope goes light, sometimes it gets heavy enough to rip your arms off." }
+          - { tr: "Kadın direğin dibine yığılınca ilk iş çantasını çividen alıp göğsüne bastırıyor. \"Sığınak'a döndüğümde,\" diyor, \"beni yıldızların arasından kimin çektiğini anlatacağım.\"", en: "When she collapses at the base of the spar, the first thing she does is take her pack off the nail and hug it to her chest. \"When I get back to the Haven,\" she says, \"I'm telling them who pulled me out of the stars.\"" }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kırık kolunu sar, onu direğin dibinde bırak", en: "Splint her broken arm and leave her by the spar" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_8_soygun"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Çantayı çividen kaldırıyorsun; ip titremiyor, düğüm kıpırdamıyor. Kadın aşağıda dönmeyi sürdürüyor, yüzü Dünya'ya dönük.", en: "You lift the pack off the nail. The rope doesn't tremble; the knot doesn't budge. She keeps turning down there, face toward Earth." }
+          - { tr: "\"Orada mısın?\" diye sesleniyor. Yerçekimi bir dahaki sefere fikir değiştirdiğinde kendi başına çıkacak; çıktığında da çantasını direkte bulamayacak.", en: "\"You still there?\" she calls. The next time gravity changes its mind, she'll climb out on her own. When she does, her pack won't be on the spar." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Çantayı sırtla, direklerin arasından geç", en: "Shoulder the pack and cross between the spars" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_8_goruldu"
+        yer: "kule"
+        paragraflar:
+          - metin: { tr: "Çanta çividen kurtulduğu anda yerçekimi yine fikir değiştiriyor; kadın ip boyunca bir anlığına yukarı savrulup seninle yüz yüze geliyor. Ters dönmüş gözleri önce çantaya, sonra sana bakıyor.", en: "The second the pack comes off the nail, gravity changes its mind again. She swings up the rope for a moment and comes face-to-face with you, her upside-down eyes going from the pack to you." }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "Yeniden boşluğa düşerken bağırıyor: \"Yüzünü gördüm! Ters de olsa gördüm!\" Sığınak'ın gözcüleri raporlarından hiçbir şeyi eksik bırakmaz.", en: "As she drops back into the void, she yells, \"I saw your face! Upside down, but I saw it!\" The Haven's scouts never leave anything out of a report." }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "Çantayı yanındakilerin önünde çividen alıyorsun. Kadın ters dönmüş bir dünyanın içinden, aşağıdan her şeyi görüyor; yanındakilerin sesi yıldızların arasından ona kadar iniyor.", en: "You take the pack off the nail right in front of your company. From below, from inside an upside-down world, she sees all of it, and their voices carry all the way down to her among the stars." }
+            kosul: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"İpte sallanan birinden... Hem de altında Dünya varken.\"", en: "\"From somebody hanging on a rope... With Earth right there under her.\"" }
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"İpi ben çekeceğim. Sen çantayı taşı, madem o kadar önemli.\"", en: "\"I'll pull the rope. You carry the pack, since it's so important.\"" }
+          - npc: "mert_kilic"
+            kosul: { yoldas: "mert_kilic" }
+            metin: { tr: "\"Gözcüler her şeyi rapor eder. Yarın sabah Sığınak'ta adın okunur.\"", en: "\"Scouts report everything. Your name gets read out at the Haven tomorrow morning.\"" }
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "\"Bu yükseklikte soygun. Burada kimse yok sandın, değil mi? Her zaman biri vardır.\"", en: "\"A robbery this high up. You figured nobody's up here, right? There's always somebody.\"" }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Ters gökten, direklerin gölgesine çekil", en: "Pull back off the sky into the shadow of the spars" }
+            sonraki: "@akis"
+
+  # ================================================================== RAKİP 9 · Kat 91–99 · Taslak
+  - id: "kule_an_rakip_9"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "rakip"]
+    gerilim: 2
+    kosul: { degisken_min: { kule_kat: 91 }, degisken_max: { kule_kat: 99 } }
+    kart: { tr: "Yarı silinmiş", en: "Half erased" }
+    sahne: "kule_an_rakip_9"
+    sahneler:
+      - id: "kule_an_rakip_9"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Taslak katın ortasında yarısı çizgiye dönmüş bir kadın oturuyor: sol kolu da yüzünün yarısı da beyaz kalem darbelerinden ibaret. Belinde Yükselenlerin altın kuşağı var; adı Küresel Sıralama'nın ilk onundan hiç düşmemiş biri.", en: "In the middle of the sketched-out floor, a woman sits half turned to lines. Her left arm and half her face are nothing but white pencil strokes. The gold sash of the Ascended is at her waist; her name has never dropped out of the Global Ranking's top ten." }
+          - { tr: "Havada asılı kalem ağır ağır ona doğru süzülüyor, değdiği her yeri biraz daha siliyor. \"Burada çizilen kalır,\" diyor kadın, kalan dudaklarıyla. \"Silinen de gider. Beni yeniden çizebilir misin?\"", en: "The pencil hanging in midair drifts slowly toward her, and every place it touches gets a little more erased. \"What's drawn up here stays,\" she says with what's left of her lips. \"What's erased goes. Can you draw me back in?\"" }
+          - { tr: "Yanında henüz silinmemiş tek eşyası duruyor: ağzına kadar kristal dolu bir heybe. Bu yükseklikte öyle bir heybe, bir şehrin bir yıllık payına bedel.", en: "Beside her sits the one thing that hasn't been erased yet: a saddlebag stuffed with crystals. This high up, a bag like that is worth a city's share for a year." }
+        sezgiler:
+          - kosul: { stat: { per: 345 } }
+            metin: { tr: "Kalem yalnızca silmiyor; arada bir durup katın aşağısına bir şey çiziyor. Burada olan her şey bir alt katın taslağına işleniyor.", en: "The pencil doesn't only erase. Now and then it stops and sketches something on the floor below. Everything that happens here gets worked into the draft of a lower floor." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "silinmek ölmekten kötüdür. ölenin hiç değilse bir kaydı kalır.", en: "being erased is worse than dying. the dead at least leave a record." }
+        yoldas_tepkileri:
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "\"Onu tanıyorum. Sıralamada hep bir basamak üstümdeydi. Silinip gitmesi işime gelirdi... ama böyle değil.\"", en: "\"I know her. She was always one spot above me on the board. Her getting erased would suit me fine... Just not like this.\"" }
+        secenekler:
+          - id: "ciz"
+            etiket: { tr: "Kalemi havadan kap, onu yeniden çiz", en: "Grab the pencil out of the air and draw her back in" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - itibar: { yukselenler: 3 }
+              - xp_seviye: 8
+              - can: -40
+            sonraki: "kule_an_rakip_9_yardim"
+          - id: "soy"
+            etiket: { tr: "Kalem onunla uğraşırken heybeyi al", en: "Take the bag while the pencil's busy with her" }
+            goster: { yoldas_sayisi_max: 0 }
+            zar: { stat: "agi", zorluk: 355, tek: false, basarisiz: "kule_an_rakip_9_goruldu", basarisiz_etkiler: [{ oz_kristali: 5 }, { ahlak: { merhamet: -3 } }, { itibar: { yukselenler: -2 } }, { efsane: "kule_soygunu" }] }
+            etkiler:
+              - oz_kristali: 5
+              - ahlak: { merhamet: -3 }
+            sonraki: "kule_an_rakip_9_soygun"
+          - id: "soy_yoldas"
+            etiket: { tr: "Yanındakilerin önünde heybeyi omzuna at", en: "Sling the bag over your shoulder in front of your company" }
+            goster: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+            etkiler:
+              - oz_kristali: 5
+              - ahlak: { merhamet: -3 }
+              - itibar: { yukselenler: -2 }
+              - efsane: "kule_soygunu"
+            sonraki: "kule_an_rakip_9_goruldu"
+          - id: "birak"
+            etiket: { tr: "Kalemi de onu da kendi taslağına bırak", en: "Leave her and the pencil to their draft" }
+            etkiler:
+              - ahlak: { merhamet: -1 }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_9_yardim"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kalemi havadan kapıyorsun; elinde kıpırdanıp kendi çizgisini çekmeye çalışıyor, parmaklarının derisini siliyor. Dişini sıkıp önce kadının eksik kolunu, sonra yüzünün öbür yarısını çizgi çizgi tamamlıyorsun.", en: "You snatch the pencil out of the air. It squirms in your grip, trying to draw its own lines, and erases the skin off your fingertips. Gritting your teeth, you fill her in stroke by stroke: first the missing arm, then the other half of her face." }
+          - { tr: "Çizdiğin yüz tam onunki değil, biraz da senin elinden çıkma. Kadın parmaklarını yüzünde gezdirip uzun süre susuyor. \"Yükselenler bunu duyacak,\" diyor sonunda. \"Beni kimin çizdiğini.\"", en: "The face you drew isn't quite hers; some of it came from your hand. She runs her fingers over it and doesn't say anything for a long time. \"The Ascended will hear about this,\" she says finally. \"About who drew me.\"" }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kalemi havaya geri bırak", en: "Let the pencil go back into the air" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_9_soygun"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Heybeyi omzuna atıyorsun. Kalem kadının yüzünden bir çizgi daha siliyor; kadın gözlerini ona dikmiş, kıpırdamaya korkuyor, sana hiç bakmıyor.", en: "You sling the bag over your shoulder. The pencil erases one more line from her face. Her eyes are locked on it, too scared to move, and she never looks at you." }
+          - { tr: "Bu kez kalemin ucu katın aşağısına dönmüyor, hiçbir şey çizmiyor. Heybenin yokluğunu kimse çizmeyecek; taslakta bir boşluk daha olacak, o kadar.", en: "This time the pencil's tip doesn't turn to the floor below. It doesn't sketch a thing. Nobody's going to draw the missing bag; it'll just be one more blank in the draft." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Taslağın çizgileri arasından yürü", en: "Walk on between the lines of the draft" }
+            sonraki: "@akis"
+
+      - id: "kule_an_rakip_9_goruldu"
+        yer: "kule"
+        paragraflar:
+          - metin: { tr: "Heybeyi kaldırdığın anda kalem kadını bırakıp sana dönüyor, ucunu katın aşağısına indirip hızlı hızlı bir şey çiziyor. Bir alt katın taslağında heybeyi omzuna atan bir siluet beliriyor: senin yürüyüşün, senin omuzların.", en: "The moment you lift the bag, the pencil leaves her and turns toward you, drops its tip to the floor below, and starts sketching fast. In the draft of the floor beneath you, a figure appears slinging a bag over its shoulder: your walk, your shoulders." }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "O katı bundan sonra tırmanan herkes seni görecek; Kule kimin ne yaptığını unutmaz. Kadın da kalan yarım yüzüyle seni ezberliyor.", en: "Everyone who climbs that floor from now on will see you. The Spire never forgets who did what. And with the half a face she has left, she's memorizing you too." }
+            kosul: { yoldas_sayisi_max: 0 }
+          - metin: { tr: "Heybeyi yanındakilerin önünde alıyorsun. Kalem bir an duruyor, sonra ucunu aşağı indirip hepinizi çiziyor: heybeyi omzuna atan seni ve yüzlerini çeviren yanındakileri.", en: "You take the bag right in front of your company. The pencil pauses, then drops its tip and sketches all of you: you slinging the bag over your shoulder, and the people with you turning their faces away." }
+            kosul: { herhangi: [{ yoldas: "deniz_arman" }, { yoldas: "elif_sari" }, { yoldas: "mert_kilic" }, { yoldas: "aras_kurt" }] }
+        yoldas_tepkileri:
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "\"Bir basamak üstümdeki kadını soydun. Silinmeye bırakmak yetmedi mi?\"", en: "\"You robbed the woman one spot above me. Wasn't leaving her to get erased enough?\"" }
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Bir insan silinip gidiyordu. Sen heybeyi kurtardın.\"", en: "\"A person was getting erased. And you saved the bag.\"" }
+          - npc: "elif_sari"
+            kosul: { yoldas: "elif_sari" }
+            metin: { tr: "\"Kalemi ben tutarım. Elimin derisi gitsin, umurumda değil. Sen git buradan.\"", en: "\"I'll hold the pencil. I don't care if it takes the skin off my hands. Just go.\"" }
+          - npc: "mert_kilic"
+            kosul: { yoldas: "mert_kilic" }
+            metin: { tr: "\"Kule bunu kaydetti, hem de taslağa. Taslaktaki her şey çoğaltılıyor.\"", en: "\"The Spire logged that. In the draft, no less. Everything in the draft gets copied.\"" }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Çizildiğin kata bakmadan yukarı yürü", en: "Head up without looking at the floor you were drawn into" }
+            sonraki: "@akis"
+
+  # ================================================================== YORUM 0 · Kat 1–9 · Kıyıkent'in Yankısı
+  - id: "kule_an_yorum_0"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "yorum"]
+    gerilim: 1
+    kosul: { degisken_min: { kule_kat: 1 }, degisken_max: { kule_kat: 9 } }
+    kart: { tr: "Benzerlik oranı", en: "Accuracy rating" }
+    sahne: "kule_an_yorum_0"
+    sahneler:
+      - id: "kule_an_yorum_0"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kopya sokağın köşesinde durup adı bir harf kaymış tabelaya bakıyorsun. Sistem pencere açmadan önce bir an duraksıyor, ne diyeceğini tartıyormuş gibi.", en: "You stop at a corner of the copied street and look at a sign whose name is off by one letter. The System hesitates before it opens a window, like it's weighing what to say." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[KAT DEĞERLENDİRMESİ]", en: "[FLOOR ASSESSMENT]" }
+            satirlar:
+              - { tr: "Konum: {yer:kiyikent} (kopya). Benzerlik oranı: %99,7.", en: "Location: {yer:kiyikent} (copy). Accuracy: 99.7%." }
+              - { tr: "Bilinen hata: sokak adları. Düzeltme planlanmamıştır.", en: "Known issue: street names. No fix is scheduled." }
+              - { tr: "Not: Bu katı temizleme süreniz, gerçek mahallenizde yolunuzu bulma sürenizden kısadır.", en: "Note: Your clear time on this floor is shorter than the time it takes you to find your way around your actual neighborhood." }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "hata değil. biri bu şehri ezberden çizmiş. ezber de hep bir harf kayar.", en: "it's not a bug. somebody drew this city from memory, and memory always slips a letter." }
+        secenekler:
+          - id: "duzelt"
+            etiket: { tr: "Bir çakıl bul, tabeladaki harfi düzelt", en: "Find a pebble and fix the letter on the sign" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+            sonraki: "kule_an_yorum_0_a"
+          - id: "itiraz"
+            etiket: { tr: "\"Kendi mahallemde yolumu kaybetmem.\"", en: "\"I don't get lost in my own neighborhood.\"" }
+            etkiler:
+              - xp_seviye: 3
+            sonraki: "kule_an_yorum_0_b"
+
+      - id: "kule_an_yorum_0_a"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Çakıl taşıyla tabeladaki harfi kazıyıp doğrusunu yazıyorsun. Bir anlığına sokak gerçekten senin sokağın gibi görünüyor.", en: "You scratch out the letter with a pebble and write the right one in. For a second, the street actually looks like your street." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[DÜZELTME]", en: "[CORRECTION]" }
+            satirlar:
+              - { tr: "Düzeltme kaydedildi. Bir sonraki kopyada geri alınacaktır.", en: "Correction logged. It will be reverted in the next copy." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Düzelttiğin tabelaya son bir kez bak", en: "Take one last look at the sign you fixed" }
+            sonraki: "@akis"
+
+      - id: "kule_an_yorum_0_b"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Sözlerin boş sokakta yankılanıyor. Sistem uzun süre cevap vermiyor; derken pencerenin köşesinde küçük bir satır beliriyor.", en: "Your words echo down the empty street. The System doesn't answer for a while. Then a small line shows up in the corner of the window." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[İTİRAZ]", en: "[OBJECTION]" }
+            satirlar:
+              - { tr: "İtiraz kaydedildi. Gerçek mahallenizde ortalama kaybolma süreniz: 0 dakika.", en: "Objection logged. Your average time lost in your actual neighborhood: 0 minutes." }
+              - { tr: "Kopya sokakta kaybolma süreniz: ölçülüyor.", en: "Your time lost on the copied street: measuring." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Ölçsün; merdiveni bul", en: "Let it measure. Find the stairs" }
+            sonraki: "@akis"
+
+  # ================================================================== YORUM 1 · Kat 11–19 · İçerideki Deniz
+  - id: "kule_an_yorum_1"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "yorum"]
+    gerilim: 1
+    kosul: { degisken_min: { kule_kat: 11 }, degisken_max: { kule_kat: 19 } }
+    kart: { tr: "Cankurtaran yok", en: "No lifeguard on duty" }
+    sahne: "kule_an_yorum_1"
+    sahneler:
+      - id: "kule_an_yorum_1"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Göğsüne kadar suyun içinde yürürken dipten bir ışık yükselip sönüyor. Tam o sırada önünde ıslak, buğulu bir Sistem penceresi açılıyor.", en: "You're wading chest-deep when a light rises from the deep and goes out. Right then, a damp, fogged-up System window opens in front of you." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[GÜVENLİK BİLGİLENDİRMESİ]", en: "[SAFETY NOTICE]" }
+            satirlar:
+              - { tr: "Su sıcaklığı: 9 °C. Derinlik: tanımsız.", en: "Water temperature: 48 °F. Depth: undefined." }
+              - { tr: "Bu katta cankurtaran bulunmamaktadır. Hiçbir zaman bulunmamıştır.", en: "There is no lifeguard on duty on this floor. There never has been." }
+              - { tr: "Yüzme performansınız ortalamanın üstündedir. Ortalama: boğuldu.", en: "Your swimming performance is above average. Average: drowned." }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "o ortalamada kaç kişi var, sorma. sorarsan söyler.", en: "don't ask how many people are in that average. ask, and it'll tell you." }
+        secenekler:
+          - id: "dal"
+            etiket: { tr: "Dibe dal, ışığın nereden geldiğine bak", en: "Dive and see where the light's coming from" }
+            etkiler:
+              - can: -5
+              - xp_seviye: 4
+            sonraki: "kule_an_yorum_1_a"
+          - id: "sor"
+            etiket: { tr: "\"Ortalamaya kimler giriyor?\" diye sor", en: "Ask, \"Who's in the average?\"" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+            sonraki: "kule_an_yorum_1_b"
+
+      - id: "kule_an_yorum_1_a"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Nefesini tutup dalıyorsun. İndikçe su kararıyor, soğuk kemiklerine işliyor; ışık ise hep aynı uzaklıkta kalıyor, ne yaklaşıyor ne uzaklaşıyor.", en: "You take a breath and dive. The water gets darker the deeper you go and the cold gets into your bones, but the light stays the same distance away, never closer, never farther." }
+          - { tr: "Yüzeye çıktığında ciğerlerin yanıyor. Pencere hâlâ orada, seni bekliyor.", en: "When you surface, your lungs are burning. The window's still there, waiting for you." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[ARAMA SONUCU]", en: "[SEARCH RESULT]" }
+            satirlar:
+              - { tr: "Dip bulunamadı. Arama 41 saniye sonra durduruldu. Lütfen nefes alınız.", en: "Bottom not found. Search halted after 41 seconds. Please breathe." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Nefesini topla, merdivene yüz", en: "Catch your breath and swim for the stairs" }
+            sonraki: "@akis"
+
+      - id: "kule_an_yorum_1_b"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Pencere bir an kararıyor. Ardından satırlar akmaya başlıyor: sayılar, tarihler, yer adları; hiçbirinde insan adı yok.", en: "The window goes dark for a second. Then lines start scrolling: numbers, dates, place names. No people's names anywhere." }
+          - { tr: "Liste bitmek bilmiyor. Sen kapatana kadar akmayı sürdürüyor.", en: "The list doesn't end. It keeps scrolling until you close it." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[TALEP]", en: "[REQUEST]" }
+            satirlar:
+              - { tr: "Talep alındı. Ortalamaya dahil olanlar: sayfa 1 / ████.", en: "Request received. Included in average: page 1 of ████." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Pencereyi kapat, suyun içinde yürümeyi sürdür", en: "Close the window and keep wading" }
+            sonraki: "@akis"
+
+  # ================================================================== YORUM 2 · Kat 21–29 · Cam
+  - id: "kule_an_yorum_2"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "yorum"]
+    gerilim: 1
+    kosul: { degisken_min: { kule_kat: 21 }, degisken_max: { kule_kat: 29 } }
+    kart: { tr: "Yansıma sayımı", en: "Reflection count" }
+    sahne: "kule_an_yorum_2"
+    sahneler:
+      - id: "kule_an_yorum_2"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Cam koridorda durduğunda yansımaların da duruyor, biri hariç. O biri yarım an sonra, seni taklit etmeyi unutmuş gibi telaşla duruyor.", en: "When you stop in the glass hallway, your reflections stop too. All but one. That one stops half a beat later, in a hurry, like it forgot it was supposed to copy you." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[ENVANTER: YANSIMALAR]", en: "[INVENTORY: REFLECTIONS]" }
+            satirlar:
+              - { tr: "Görünür yansıma: 14.", en: "Visible reflections: 14." }
+              - { tr: "Size ait olan: 13.", en: "Belonging to you: 13." }
+              - { tr: "Kalan 1 yansıma için sorumluluk kabul edilmez.", en: "No responsibility is accepted for the remaining 1." }
+        sezgiler:
+          - kosul: { stat: { per: 45 } }
+            metin: { tr: "On dördüncü yansıma senin gibi giyinmiş, ama saçını öbür yandan ayırmış.", en: "The fourteenth reflection is dressed like you, but it parts its hair on the other side." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "on dördüncüyü ben saymıyorum. sen de sayma.", en: "i'm not counting the fourteenth. don't you count it either." }
+        secenekler:
+          - id: "kir"
+            etiket: { tr: "On dördüncünün durduğu yere yumruğunu indir", en: "Put your fist through where the fourteenth is standing" }
+            etkiler:
+              - egilim: { yakin_dovus: 1 }
+            sonraki: "kule_an_yorum_2_a"
+          - id: "say"
+            etiket: { tr: "Kıpırdamadan, baştan yeniden say", en: "Don't move. Count again from the top" }
+            etkiler:
+              - egilim: { gizlilik: 1 }
+            sonraki: "kule_an_yorum_2_b"
+
+      - id: "kule_an_yorum_2_a"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Yumruğun camın içindeki yabancı yansımanın yüzüne iniyor. Cam çatlamıyor bile; yalnızca bütün kat bir çan gibi tek bir notada uğulduyor.", en: "Your fist comes down on the stranger's face in the glass. The glass doesn't even crack. The whole floor just hums on a single note, like a bell." }
+          - { tr: "Uğultu dinince yansımalarını yeniden sayıyorsun.", en: "When the hum dies down, you count your reflections again." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[HASAR RAPORU]", en: "[DAMAGE REPORT]" }
+            satirlar:
+              - { tr: "Kule'ye verilen hasar: 0. Size: önemsiz.", en: "Damage to the Spire: 0. To you: negligible." }
+              - { tr: "Görünür yansıma: 15.", en: "Visible reflections: 15." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Sayı daha da artmadan buradan çık", en: "Get out of here before the count goes up again" }
+            sonraki: "@akis"
+
+      - id: "kule_an_yorum_2_b"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Yalnızca gözlerini oynatarak baştan sayıyorsun. On iki, on üç... On dördüncünün durduğu yerde camda bir parmak izi kalmış, içeriden bastırılmış.", en: "Without moving anything but your eyes, you count again from the start. Twelve, thirteen... Where the fourteenth was, there's a fingerprint on the glass, pressed from the inside." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[ENVANTER: YANSIMALAR]", en: "[INVENTORY: REFLECTIONS]" }
+            satirlar:
+              - { tr: "Görünür yansıma: 13. Hata giderildi.", en: "Visible reflections: 13. Error resolved." }
+              - { tr: "Hiçbir şey görmediniz.", en: "You did not see anything." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Hiçbir şey görmemiş gibi yürü", en: "Walk on like you didn't see a thing" }
+            sonraki: "@akis"
+
+  # ================================================================== YORUM 3 · Kat 31–39 · Saat
+  - id: "kule_an_yorum_3"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "yorum"]
+    gerilim: 1
+    kosul: { degisken_min: { kule_kat: 31 }, degisken_max: { kule_kat: 39 } }
+    kart: { tr: "Saat ayarı", en: "Setting the clock" }
+    sahne: "kule_an_yorum_3"
+    sahneler:
+      - id: "kule_an_yorum_3"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Dişlilerin arasındaki boşluk bir tikle kayarken Sistem penceresinin köşesindeki saat birden donuyor. Ardından yeni bir pencere açılıyor, altında iki düğmeyle.", en: "As the gap between the gears slides over with a tick, the clock in the corner of your System window suddenly freezes. Then a new window opens, with two buttons at the bottom." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[YEREL SAAT]", en: "[LOCAL TIME]" }
+            satirlar:
+              - { tr: "Yerel saat: 18:52. Bu katta yerel saat her zaman 18:52'dir.", en: "Local time: 6:52 PM. On this floor, local time is always 6:52 PM." }
+              - { tr: "Saatinizi yerel saate uydurmak ister misiniz?", en: "Would you like to sync your clock to local time?" }
+              - { tr: "[Evet] [Evet]", en: "[Yes] [Yes]" }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "iki düğme de evet. sistem şaka yapmaz. demek ki bu şaka değil.", en: "both buttons say yes. the system doesn't joke. so this isn't a joke." }
+        secenekler:
+          - id: "evet"
+            etiket: { tr: "Soldaki Evet'e bas", en: "Press the Yes on the left" }
+            etkiler:
+              - ahlak: { duzen: 1 }
+            sonraki: "kule_an_yorum_3_a"
+          - id: "it"
+            etiket: { tr: "İkisine de basma, pencereyi elinle it", en: "Press neither. Shove the window away" }
+            etkiler:
+              - ahlak: { duzen: -1 }
+            sonraki: "kule_an_yorum_3_b"
+
+      - id: "kule_an_yorum_3_a"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Düğmeye basınca saatin 18:52'ye dönüp orada kalıyor. Nabzın bir an duraksıyor, sonra tik seslerine uyup yeniden atmaya başlıyor.", en: "When you press it, your clock rolls over to 6:52 PM and stays there. Your pulse skips a beat, then falls in with the ticking and starts again." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[YEREL SAAT]", en: "[LOCAL TIME]" }
+            satirlar:
+              - { tr: "Eşitleme tamamlandı. Kat dışında saatiniz yeniden akacaktır. Büyük ihtimalle.", en: "Sync complete. Your clock will resume outside this floor. Most likely." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Saatine bir daha bakma", en: "Don't check your clock again" }
+            sonraki: "@akis"
+
+      - id: "kule_an_yorum_3_b"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Pencereyi itiyorsun. Dişlilerin arasına sıkışıp bir tik boyunca eziliyor, sonra yeniden önünde beliriyor; bu kez tek bir düğmeyle.", en: "You shove the window, and it gets caught between the gears and crushed for one tick, then pops back up in front of you. This time there's only one button." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[YEREL SAAT]", en: "[LOCAL TIME]" }
+            satirlar:
+              - { tr: "Seçim süresi doldu. Varsayılan seçenek uygulandı: Evet.", en: "Selection timed out. Default option applied: Yes." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Omuz silk, dişlilerin arasından geç", en: "Shrug it off and slip through the gears" }
+            sonraki: "@akis"
+
+  # ================================================================== YORUM 4 · Kat 41–49 · Sessizlik
+  - id: "kule_an_yorum_4"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "yorum"]
+    gerilim: 1
+    kosul: { degisken_min: { kule_kat: 41 }, degisken_max: { kule_kat: 49 } }
+    kart: { tr: "Sessiz mod", en: "Silent mode" }
+    sahne: "kule_an_yorum_4"
+    sahneler:
+      - id: "kule_an_yorum_4"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Sessizliğin içinde bir pencere açılıyor; kenarları titremiyor, açılış sesi gelmiyor. Harfler bile parmak uçlarında yürüyormuş gibi birer birer beliriyor.", en: "A window opens in the silence. The edges don't flicker, and there's no chime. Even the letters seem to tiptoe onto the screen, one at a time." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[SESSİZ MOD ETKİN]", en: "[SILENT MODE ON]" }
+            satirlar:
+              - { tr: "Bu bildirimi okuyorsanız lütfen daha sessiz okuyunuz.", en: "If you are reading this notification, please read it more quietly." }
+              - { tr: "Kalp atışınız şu an duyulabilir düzeydedir.", en: "Your heartbeat is currently audible." }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "kalbin gerçekten gürültülü. ben hep duyuyorum, hiç söylemedim.", en: "your heart really is loud. i always hear it. i just never said." }
+        secenekler:
+          - id: "kis"
+            etiket: { tr: "Nefesini tut, kalbini yavaşlatmaya çalış", en: "Hold your breath and try to slow your heart" }
+            etkiler:
+              - egilim: { gizlilik: 1 }
+              - gizle: 2
+            sonraki: "kule_an_yorum_4_a"
+          - id: "konus"
+            etiket: { tr: "Bilerek, yüksek sesle bir şey söyle", en: "Say something out loud, on purpose" }
+            etkiler:
+              - dikkat: 2
+            sonraki: "kule_an_yorum_4_b"
+
+      - id: "kule_an_yorum_4_a"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Nefesini tutup kalp atışlarını saymaya başlıyorsun; her sayışta biraz daha seyrekleşiyorlar. Pencere bir süre bekliyor.", en: "You hold your breath and start counting your heartbeats, and with every count they come a little farther apart. The window waits for a while." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[SESSİZ MOD ETKİN]", en: "[SILENT MODE ON]" }
+            satirlar:
+              - { tr: "Teşekkür ederiz. Kalp atışınız hâlâ duyulabilir düzeydedir, ama daha kibar.", en: "Thank you. Your heartbeat is still audible. But more polite." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kalbini kısık tutarak yürü", en: "Keep your heartbeat down and move" }
+            sonraki: "@akis"
+
+      - id: "kule_an_yorum_4_b"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Ağzını açıp bir şey söylüyorsun, ne söylediğini kendin bile duymuyorsun. Ama karşı duvarda, tebeşirle yazılmış binlerce \"sus\" yazısının arasına yenisi ekleniyor; tebeşir tozu hâlâ havada.", en: "You open your mouth and say something. You can't even hear what. But on the wall across from you, among the thousands of chalked \"hush\"es, a new one appears, chalk dust still hanging in the air." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[KURAL İHLALİ]", en: "[RULE VIOLATION]" }
+            satirlar:
+              - { tr: "İhlal kaydedildi. Yaptırım: yok. Şimdilik.", en: "Violation logged. Penalty: none. For now." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Yeni yazıya sırtını dön", en: "Turn your back on the new writing" }
+            sonraki: "@akis"
+
+  # ================================================================== YORUM 5 · Kat 51–59 · Başka Dünyaların Kalıntıları
+  - id: "kule_an_yorum_5"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "yorum"]
+    gerilim: 1
+    kosul: { degisken_min: { kule_kat: 51 }, degisken_max: { kule_kat: 59 } }
+    kart: { tr: "Kapanış indirimi", en: "Closing sale" }
+    sahne: "kule_an_yorum_5"
+    sahneler:
+      - id: "kule_an_yorum_5"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Molozun arasında başka bir alfabeyle yazılmış bir dükkân tabelası duruyor; harfleri kabuklu, kıvrık, böcek bacağı gibi. Sen daha sormadan Sistem çeviriyi açıyor.", en: "In the rubble stands a shop sign in another alphabet, its letters shelled and curled like insect legs. Before you can even ask, the System pops up a translation." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[OTOMATİK ÇEVİRİ]", en: "[AUTO-TRANSLATE]" }
+            satirlar:
+              - { tr: "\"Kapanış indirimi. Her şey gitmeli.\"", en: "\"Closing sale. Everything must go.\"" }
+              - { tr: "Dükkân sahibinin durumu: hasat edildi.", en: "Shop owner status: harvested." }
+              - { tr: "İndirim geçerliliğini korumaktadır.", en: "The sale is still on." }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "her şey gitti zaten. tabelanın haberi yok. tabelalar hep en son öğrenir.", en: "everything's already gone. the sign doesn't know. signs are always the last to find out." }
+        secenekler:
+          - id: "dogrult"
+            etiket: { tr: "Tabelayı doğrult, önünde bir an dur", en: "Straighten the sign and stand before it a moment" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+            sonraki: "kule_an_yorum_5_a"
+          - id: "al"
+            etiket: { tr: "Raftan bir şey al: \"İndirimdeydi.\"", en: "Grab something off the shelf. \"It was on sale.\"" }
+            etkiler:
+              - oz_kristali: 1
+              - ahlak: { insanlik: -1 }
+            sonraki: "kule_an_yorum_5_b"
+
+      - id: "kule_an_yorum_5_a"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Tabelayı molozdan kaldırıp dik koyuyor, önünde başını eğiyorsun. Böcek bacağına benzeyen harfler bir an ışıldayıp sönüyor.", en: "You lift the sign out of the rubble, stand it upright, and bow your head in front of it. The insect-leg letters glow for a second, then go dark." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[JEST ANALİZİ]", en: "[GESTURE ANALYSIS]" }
+            satirlar:
+              - { tr: "Saygı jesti tanımlanamadı. Hedef türün jest sözlüğü arşivlenmiştir.", en: "Gesture of respect not recognized. The target species' gesture dictionary has been archived." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Arşivlenmiş bir dünyanın önünden ayrıl", en: "Walk away from an archived world" }
+            sonraki: "@akis"
+
+      - id: "kule_an_yorum_5_b"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Raftan kabuğu sedef gibi parlayan bir kutu alıyorsun; içinde bir avuç kristal tıngırdıyor. Tezgâhın arkasında kimse yok, olmayacak da.", en: "You take a box off the shelf, its shell shining like mother-of-pearl, and a handful of crystals rattle inside. There's nobody behind the counter. There never will be." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[İŞLEM]", en: "[TRANSACTION]" }
+            satirlar:
+              - { tr: "İşlem onaylandı. Satıcı: yok. Tutar: 0. Fiş: düzenlenmedi.", en: "Transaction approved. Seller: none. Amount: 0. Receipt: not issued." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kutuyu cebine koy, yürü", en: "Pocket the box and keep moving" }
+            sonraki: "@akis"
+
+  # ================================================================== YORUM 6 · Kat 61–69 · Yanık Arşiv
+  - id: "kule_an_yorum_6"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "yorum"]
+    gerilim: 1
+    kosul: { degisken_min: { kule_kat: 61 }, degisken_max: { kule_kat: 69 } }
+    kart: { tr: "Ayrılmış raf", en: "Reserved shelf" }
+    sahne: "kule_an_yorum_6"
+    sahneler:
+      - id: "kule_an_yorum_6"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Rafların arasında yürürken alevler yol veriyor, yanmak için sırasını bekleyen dosyalar kenara çekiliyor. Önünde boş bir raf beliriyor; üstünde ne kül var ne etiket.", en: "As you walk between the shelves, the flames make way, and files waiting their turn to burn shift aside. An empty shelf appears in front of you. No ash on it. No label." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[ARŞİV HİZMETLERİ]", en: "[ARCHIVE SERVICES]" }
+            satirlar:
+              - { tr: "Kaydınız bu arşivde bulunamadı.", en: "Your record was not found in this archive." }
+              - { tr: "Sizin için bir raf ayrılmıştır.", en: "A shelf has been reserved for you." }
+              - { tr: "Raf yanmaya hazırdır.", en: "The shelf is ready to burn." }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "kaydın yok. bu iyi bir şey. sanırım iyi bir şey.", en: "you don't have a record. that's good. i think that's good." }
+        secenekler:
+          - id: "bos"
+            etiket: { tr: "Rafı boş bırak, arkana bakmadan geç", en: "Leave the shelf empty and walk past without looking back" }
+            etkiler:
+              - gizle: 3
+            sonraki: "kule_an_yorum_6_a"
+          - id: "yaz"
+            etiket: { tr: "Yanık bir sayfa bul, rafa ilk satırını kendin yaz", en: "Find a scorched page and write your first line yourself" }
+            etkiler:
+              - dikkat: 2
+              - xp_seviye: 3
+            sonraki: "kule_an_yorum_6_b"
+
+      - id: "kule_an_yorum_6_a"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Rafın önünden geçip gidiyorsun. Arkanda alevler yeniden kapanıyor; boş raf yanmadan dumanın içinde kayboluyor.", en: "You walk on past the shelf. Behind you the flames close back in, and the empty shelf disappears into the smoke, unburned." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[ARŞİV HİZMETLERİ]", en: "[ARCHIVE SERVICES]" }
+            satirlar:
+              - { tr: "Raf boş bırakıldı. Boş raflar daha geç yanar.", en: "Shelf left empty. Empty shelves burn later." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Dumanın içinden yürü", en: "Walk on through the smoke" }
+            sonraki: "@akis"
+
+      - id: "kule_an_yorum_6_b"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Yarısı yanmış bir sayfanın boş köşesine parmağınla bir satır yazıp rafa koyuyorsun. Sayfa tutuşmuyor; alevler onu okuyormuş gibi çevresinde dolanıyor.", en: "On the blank corner of a half-burned page, you write a line with your fingertip and set it on the shelf. The page doesn't catch. The flames circle it like they're reading it." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[ARŞİV HİZMETLERİ]", en: "[ARCHIVE SERVICES]" }
+            satirlar:
+              - { tr: "Kayıt başlatıldı. Yazar: siz. Arşiv sizi artık tanıyor.", en: "Record started. Author: you. The archive knows you now." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Alevler okurken uzaklaş", en: "Leave while the flames are still reading" }
+            sonraki: "@akis"
+
+  # ================================================================== YORUM 7 · Kat 71–79 · Tohumluk
+  - id: "kule_an_yorum_7"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "yorum"]
+    gerilim: 1
+    kosul: { degisken_min: { kule_kat: 71 }, degisken_max: { kule_kat: 79 } }
+    kart: { tr: "Örnek değerlendirmesi", en: "Specimen evaluation" }
+    sahne: "kule_an_yorum_7"
+    sahneler:
+      - id: "kule_an_yorum_7"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kristal kozaların arasından geçerken birinin camında kendi yansımanı görüyorsun: boş bir koza, tam senin boyunda. İstemediğin hâlde Sistem bir değerlendirme penceresi açıyor.", en: "Walking between the crystal pods, you catch your reflection in one pod's glass: an empty pod, exactly your height. The System opens an evaluation window, though you didn't ask for one." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[ÖRNEK DEĞERLENDİRMESİ]", en: "[SPECIMEN EVALUATION]" }
+            satirlar:
+              - { tr: "Tür: insan. Kademe: uygun. Kozaya uyum: yüksek.", en: "Species: human. Grade: eligible. Pod compatibility: high." }
+              - { tr: "Genel not: A+.", en: "Overall rating: A+." }
+              - { tr: "Hasat önerilmez. Henüz.", en: "Harvest not recommended. Yet." }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "a artı. hiç bu kadar yüksek not almamıştın. keşke başka bir sınavda alsaydın.", en: "a-plus. you've never scored this high. too bad it's on this test." }
+        secenekler:
+          - id: "ret"
+            etiket: { tr: "Boş kozanın camına vur: \"Hayır, teşekkürler.\"", en: "Rap on the empty pod's glass. \"No, thanks.\"" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+            sonraki: "kule_an_yorum_7_a"
+          - id: "not"
+            etiket: { tr: "Sistem'e sen not ver: \"C eksi.\"", en: "Grade the System back: \"C-minus.\"" }
+            etkiler:
+              - dikkat: 2
+            sonraki: "kule_an_yorum_7_b"
+
+      - id: "kule_an_yorum_7_a"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Parmak eklemlerinle camı tıklatıyorsun. Koza içeriden boğuk bir tıkırtıyla karşılık veriyor; içinde kimse yok, ama biri cevap vermiş.", en: "You rap your knuckles on the glass. The pod answers from inside with a muffled tap. There's nobody in it, but something answered." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[ÖRNEK DEĞERLENDİRMESİ]", en: "[SPECIMEN EVALUATION]" }
+            satirlar:
+              - { tr: "Ret kaydedildi. Retler hasada dahil edilmez.", en: "Refusal logged. Refusals are not factored into the harvest." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kozanın önünden çekil", en: "Step away from the pod" }
+            sonraki: "@akis"
+
+      - id: "kule_an_yorum_7_b"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Sesin seranın nemli havasında yayılıyor. Uzaklardaki makas sesi bir an kesiliyor; bekçilerden biri başını kaldırıp senin tarafına bakıyor.", en: "Your voice carries through the damp greenhouse air. Far off, the snip of shears stops for a second; one of the keepers lifts its head and looks your way." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[GERİ BİLDİRİM]", en: "[FEEDBACK]" }
+            satirlar:
+              - { tr: "Geri bildiriminiz için teşekkür ederiz. Değerlendirmeniz değerlendirmeye alınmıştır.", en: "Thank you for your feedback. Your evaluation has been taken under evaluation." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Bekçi gözünü ayırmadan uzaklaş", en: "Move off while the keeper's still watching" }
+            sonraki: "@akis"
+
+  # ================================================================== YORUM 8 · Kat 81–89 · Ters Gök
+  - id: "kule_an_yorum_8"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "yorum"]
+    gerilim: 1
+    kosul: { degisken_min: { kule_kat: 81 }, degisken_max: { kule_kat: 89 } }
+    kart: { tr: "Manzara noktası", en: "Scenic viewpoint" }
+    sahne: "kule_an_yorum_8"
+    sahneler:
+      - id: "kule_an_yorum_8"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Ters gökte yürürken ayaklarının altında Dünya'yı görüyorsun: küçük, mavi, çevresi kıpırtısız gemilerle sarılı. Sistem bir turist broşürünün sıcaklığıyla bir rehber penceresi açıyor.", en: "Walking on the upside-down sky, you can see Earth under your feet: small, blue, ringed with ships that don't move. The System opens a guide window with all the warmth of a tourist brochure." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[MANZARA NOKTASI]", en: "[SCENIC VIEWPOINT]" }
+            satirlar:
+              - { tr: "Aşağıda: Dünya. Ölçek: 1/1.", en: "Below: Earth. Scale: 1:1." }
+              - { tr: "Çevresindeki nesneler: ilgi alanınız dışındadır.", en: "Surrounding objects: not of interest." }
+              - { tr: "Bu katta düşme yönü kullanıcı tercihine bırakılmıştır.", en: "On this floor, the direction of falling is left to user preference." }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "gemileri sayma. saydıkça çoğalıyorlar.", en: "don't count the ships. they multiply when you count them." }
+        secenekler:
+          - id: "yukari"
+            etiket: { tr: "Düşme yönü olarak \"yukarı\"yı seç", en: "Pick \"up\" as your falling direction" }
+            etkiler:
+              - can: -10
+              - xp_seviye: 4
+            sonraki: "kule_an_yorum_8_a"
+          - id: "ort"
+            etiket: { tr: "Elini aşağı uzat, Dünya'yı avucunla ört", en: "Reach down and cover Earth with your palm" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+            sonraki: "kule_an_yorum_8_b"
+
+      - id: "kule_an_yorum_8_a"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Tercihini yaptığın anda dünya ters dönüyor; midene yumruk yemiş gibi oluyorsun, dizlerin Kule'nin direklerine çarpıyor. Ama ayakların bu kez yerde.", en: "The second you make your pick, the world flips. It's like taking a punch to the gut, and your knees slam into the Spire's spars. But this time your feet are on the floor." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[TERCİH]", en: "[PREFERENCE]" }
+            satirlar:
+              - { tr: "Tercih kaydedildi. Yukarı: geçici olarak onaylandı.", en: "Preference saved. Up: temporarily approved." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Geçici yukarıya güvenip yürü", en: "Trust the temporary up and keep walking" }
+            sonraki: "@akis"
+
+      - id: "kule_an_yorum_8_b"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Elini aşağı uzatıyorsun; avucun Dünya'yı da çevresindeki gemileri de bütünüyle örtüyor. Bir an aşağıda yıldızlardan başka hiçbir şey kalmıyor.", en: "You reach down, and your palm covers Earth and every ship around it. For a moment there's nothing down there at all but stars." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[MANZARA NOKTASI]", en: "[SCENIC VIEWPOINT]" }
+            satirlar:
+              - { tr: "Görüş alanından kaldırıldı. Gezegen hâlâ oradadır.", en: "Removed from view. The planet is still there." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Elini çek, gemilere bakmadan yürü", en: "Pull your hand back. Don't look at the ships" }
+            sonraki: "@akis"
+
+  # ================================================================== YORUM 9 · Kat 91–99 · Taslak
+  - id: "kule_an_yorum_9"
+    konum: ["kule_dibi"]
+    yalniz_tohum: true
+    tekrar: true
+    etiketler: ["kule_an", "yorum"]
+    gerilim: 1
+    kosul: { degisken_min: { kule_kat: 91 }, degisken_max: { kule_kat: 99 } }
+    kart: { tr: "Boşluğu doldurun", en: "Fill in the blank" }
+    sahne: "kule_an_yorum_9"
+    sahneler:
+      - id: "kule_an_yorum_9"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Taslak katın ortasında, havada asılı duran kalemin hemen altında bir Sistem penceresi açılıyor. Satırlarının yarısı yazılmış, yarısı boş.", en: "In the middle of the sketched-out floor, right under the pencil hanging in the air, a System window opens. Half its lines are written; half are blank." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[KAT TEMİZLENDİ]", en: "[FLOOR CLEARED]" }
+            satirlar:
+              - { tr: "Tebrikler, ________.", en: "Congratulations, ________." }
+              - { tr: "Lütfen boşluğu doldurunuz.", en: "Please fill in the blank." }
+              - { tr: "Not: Bu katta yazılan her şey aşağıdaki katlara işlenir.", en: "Note: Everything written on this floor gets worked into the floors below." }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "adını yazarsan kalem onu bir daha bırakmaz.", en: "write your name and the pencil will never let it go." }
+        secenekler:
+          - id: "yaz"
+            etiket: { tr: "Kalemi al, boşluğa adını yaz", en: "Take the pencil and write your name in the blank" }
+            etkiler:
+              - dikkat: 3
+            sonraki: "kule_an_yorum_9_a"
+          - id: "bos"
+            etiket: { tr: "Boşluğu boş bırak", en: "Leave the blank blank" }
+            etkiler:
+              - gizle: 3
+            sonraki: "kule_an_yorum_9_b"
+
+      - id: "kule_an_yorum_9_a"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kalemi havadan alıp adını boşluğa yazıyorsun. Harfler kâğıda değil, katın kendisine işleniyor; aşağıda bir yerde, bir alt katın taslağında aynı ad beliriyor.", en: "You take the pencil out of the air and write your name in the blank. The letters don't go onto paper. They go into the floor itself, and somewhere below, in the draft of a lower floor, the same name appears." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[KAT TEMİZLENDİ]", en: "[FLOOR CLEARED]" }
+            satirlar:
+              - { tr: "Ad kaydedildi. Tebrikler, {oyuncu}.", en: "Name saved. Congratulations, {oyuncu}." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Kalemi havaya geri bırak, yürü", en: "Let the pencil back into the air and move on" }
+            sonraki: "@akis"
+
+      - id: "kule_an_yorum_9_b"
+        yer: "kule"
+        paragraflar:
+          - { tr: "Kalemi olduğu yerde bırakıp pencereyi kapatıyorsun. Boşluk, hiç yazılmamış olmanın inadıyla katın çizgileri arasında asılı kalıyor.", en: "You leave the pencil where it is and close the window. The blank stays hanging between the floor's lines with all the stubbornness of something never written." }
+        bildirimler:
+          - tur: "sistem"
+            baslik: { tr: "[KAT TEMİZLENDİ]", en: "[FLOOR CLEARED]" }
+            satirlar:
+              - { tr: "Boşluk kabul edildi. Bu katta en kalıcı şey boşluklardır.", en: "Blank accepted. On this floor, blanks are the most permanent thing there is." }
+        secenekler:
+          - id: "devam"
+            etiket: { tr: "Boşluğu arkanda bırak", en: "Leave the blank behind you" }
+            sonraki: "@akis"
