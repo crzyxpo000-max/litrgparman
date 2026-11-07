@@ -2485,6 +2485,7 @@ olaylar:
             etiket: { tr: "Bu geceyi yanındakilerle geçir", en: "Spend tonight with the people closest to you" }
             kronik: { tr: "O geceyi orduyla ya da kalabalıkla değil, bir çatıda geçirdin; savaş bir gece bekleyebilirdi.", en: "You didn't spend that night with an army or a crowd. You spent it on a rooftop. The war could wait one night." }
             etkiler:
+              - bayrak: "p3_son_gece_yakinlar"   # QA P1-14: Perde 4 ateş başı vedası tekrarlanmasın
               - ahlak: { insanlik: 4, merhamet: 2 }
             sonraki: "perde3_son_gece"
           - id: "kule"
