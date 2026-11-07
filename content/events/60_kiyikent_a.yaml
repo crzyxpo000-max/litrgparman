@@ -1895,7 +1895,10 @@ olaylar:
         yer: "kiyikent_liman"
         paragraflar:
           - { tr: "Yirmi sekiz hastayı botlarla karaya taşıyorsunuz. {npc:elif_sari} listesinde her birini tek tek imzalarken eli bir kez bile titremiyor. Titremeyi en sona saklamış.", en: "You ferry twenty-eight patients ashore in boats. {npc:elif_sari} signs each one off her list, and her hand doesn't shake once. She saves the shaking for last." }
-          - { tr: "En kötü üçü ambarda kalıyor; resim yapan oğlan da aralarında. Son kayığa binerken oğlan çizdiği vapuru sana uzatıyor. \"Bunu kaldırmışsın,\" diyor. \"Herkes anlatıyor.\"", en: "The worst three stay in the hold. The boy with the drawing is one of them. As you climb into the last boat, he hands you the ferry he drew. \"You lifted this,\" he says. \"Everybody talks about it.\"" }
+          - metin: { tr: "En kötü üçü ambarda kalıyor; resim yapan oğlan da aralarında. Son kayığa binerken oğlan çizdiği vapuru sana uzatıyor. \"Bunu kaldırmışsın,\" diyor. \"Herkes anlatıyor.\"", en: "The worst three stay in the hold. The boy with the drawing is one of them. As you climb into the last boat, he hands you the ferry he drew. \"You lifted this,\" he says. \"Everybody talks about it.\"" }
+            kosul: { bayrak: "vapur_dogrultuldu" }
+          - metin: { tr: "En kötü üçü ambarda kalıyor; resim yapan oğlan da aralarında. Son kayığa binerken oğlan çizdiği vapuru sana uzatıyor. \"Bunu sen al,\" diyor. \"Ben nasılsa bir daha çizerim.\"", en: "The worst three stay in the hold. The boy with the drawing is one of them. As you climb into the last boat, he hands you the ferry he drew. \"You keep it,\" he says. \"I can always draw another one.\"" }
+            kosul: { bayrak_yok: "vapur_dogrultuldu" }
           - { tr: "Şafakta gemi batıyor. Suyun altından bir kez mavi bir ışık yükseliyor, sonra bir daha hiç.", en: "At dawn the ship goes down. A blue light rises from under the water, once, and then never again." }
         secenekler:
           - id: "resim"
