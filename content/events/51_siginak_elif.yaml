@@ -1435,7 +1435,7 @@ olaylar:
               - degisken: { hayatta_kalan: 2, lonca_golgesi: 1 }
               - ahlak: { duzen: 3, merhamet: 2 }
               - itibar: { siginak: 4, lonca: -5 }
-              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 80, max: 110 }, kosul: { perde: 3, bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Mavi ateşli o geceden beri {npc:elif_sari|in} koğuşu hiç tam uyumadı.", en: "Ever since the night of the blue fire, {npc:elif_sari|pos} ward has never really slept." } }
+              - tohum: { olay: "elif_demir_gece_uyari", gecikme: { min: 80, max: 110 }, kosul: { perde: 3, bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Mavi ateşli o geceden beri {npc:elif_sari|in} koğuşu hiç tam uyumadı.", en: "Ever since the night of the blue fire, {npc:elif_sari|pos} ward has never really slept." } }
             kronik: { tr: "Lonca'nın {yer:kiyikent_liman|e} zehirli su sattığını belgeleyen fişi söküp cebine koydun; bunun hesabını Lonca'dan soracaktın.", en: "You peeled off the slip proving the Guild had sold {yer:kiyikent_liman} poisoned water and pocketed it. You meant to make the Guild answer for it." }
             sonraki: "elif_gece_nobeti_cokus"
           - id: "sus"
@@ -2000,7 +2000,7 @@ olaylar:
               - xp_seviye: 80
               - ahlak: { duzen: 2, merhamet: 1 }
               - itibar: { siginak: 6 }
-              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 20, max: 40 }, kosul: { perde: 3, bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Tahliye gecesinden beri Konsey ile Lonca arasındaki gerilim dinmedi.", en: "Since the night of the evacuation, things between the Council and the Guild haven't cooled off." } }
+              - tohum: { olay: "elif_demir_gece_uyari", gecikme: { min: 20, max: 40 }, kosul: { perde: 3, bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Tahliye gecesinden beri Konsey ile Lonca arasındaki gerilim dinmedi.", en: "Since the night of the evacuation, things between the Council and the Guild haven't cooled off." } }
             kronik: { tr: "Lonca'nın bir darbe hazırladığını tahliye gecesi, daha kimse bilmezken öğrendin.", en: "On the night of the evacuation, you learned the Guild was planning a coup before anyone else knew." }
             sonraki: "@akis"
           - id: "kamp"
@@ -2012,7 +2012,7 @@ olaylar:
               - ahlak: { merhamet: 4, insanlik: 2 }
               - itibar: { siginak: 8 }
               - iliski: { elif_sari: { baglilik: 3 } }
-              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 25, max: 50 }, kosul: { perde: 3, bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Tahliye gecesinden beri Konsey ile Lonca arasındaki gerilim dinmedi.", en: "Since the night of the evacuation, things between the Council and the Guild haven't cooled off." } }
+              - tohum: { olay: "elif_demir_gece_uyari", gecikme: { min: 25, max: 50 }, kosul: { perde: 3, bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Tahliye gecesinden beri Konsey ile Lonca arasındaki gerilim dinmedi.", en: "Since the night of the evacuation, things between the Council and the Guild haven't cooled off." } }
             kronik: { tr: "Tahliyeden sonraki geceyi on dört bin kişiye çadır kurarak geçirdin.", en: "You spent the night after the evacuation pitching tents for fourteen thousand people." }
             sonraki: "@akis"
           - id: "kayit"
@@ -2023,7 +2023,7 @@ olaylar:
               - degisken: { hayatta_kalan: 1 }
               - ahlak: { duzen: 4, merhamet: 2 }
               - itibar: { siginak: 7 }
-              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 25, max: 50 }, kosul: { perde: 3, bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Tahliye gecesinden beri Konsey ile Lonca arasındaki gerilim dinmedi.", en: "Since the night of the evacuation, things between the Council and the Guild haven't cooled off." } }
+              - tohum: { olay: "elif_demir_gece_uyari", gecikme: { min: 25, max: 50 }, kosul: { perde: 3, bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Tahliye gecesinden beri Konsey ile Lonca arasındaki gerilim dinmedi.", en: "Since the night of the evacuation, things between the Council and the Guild haven't cooled off." } }
             kronik: { tr: "Tahliyede {yer:kiyikent_liman|e} gelen herkesin adını tek tek kaydettin; {yer:kiyikent|in} elindeki tek nüfus kütüğü artık o defterdi.", en: "You logged the name of every evacuee who reached {yer:kiyikent_liman}. That notebook was the only census {yer:kiyikent} had now." }
             sonraki: "@akis"
 
@@ -2035,7 +2035,7 @@ olaylar:
     perde: [3]
     gun: { min: 232, max: 328 }
     agirlik: 7
-    kosul: { bayrak: "siginak_1_goruldu", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }
+    kosul: { bayrak: ["siginak_1_goruldu", "demir_gece_uyarildi"], bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }
     etiketler: ["siginak", "lonca", "npc", "darbe"]
     gerilim: 4
     npc: ["elif_sari"]
@@ -2046,7 +2046,7 @@ olaylar:
       - id: "elif_lonca_darbesi_1"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "Gece ikide kapın yumruk yağmuruna tutuluyor. Gelen Başhemşire Nurhan; önlüğünün üstüne bir mont geçirmiş, soluk soluğa: \"Gümrük'ü sardılar. Lonca... Başlarında Pala var. Teslim olmazsak gaz atacaklarmış.\"", en: "At two in the morning somebody pounds on your door. It's Nora, the head nurse, a parka thrown on over her scrubs, out of breath. \"They've surrounded the Customs House. The Guild. Cleaver's leading them. They say if we don't surrender, they'll gas us out.\"" }
+          - { tr: "Gece ikide kapın yumruk yağmuruna tutuluyor. Gelen Başhemşire Nurhan; önlüğünün üstüne mont geçirmiş, soluk soluğa: \"Gümrük'ü sardılar. Başlarında Pala var, teslim olmazsak gaz atacaklarmış.\"", en: "At two in the morning somebody pounds on your door. It's Nora, the head nurse, a parka thrown on over her scrubs, out of breath. \"They've surrounded the Customs House. The Guild. Cleaver's leading them. They say if we don't surrender, they'll gas us out.\"" }
           - metin: { tr: "{npc:kaya_demir|in} darbesinden beri {yer:kiyikent_liman|de} Konsey'e tek bir yer kaldı: Gümrük'teki koğuş. {npc:elif_sari} ne ilaç deposunu veriyor ne de yaralı Konsey nöbetçilerini. Pala bu gece işi bitirmeye gelmiş.", en: "Since {npc:kaya_demir|pos} coup, the Council has held exactly one place on {yer:kiyikent_liman}: the ward in the Customs House. {npc:elif_sari} refuses to hand over the medicine stores or the wounded Council guards. Cleaver came tonight to finish it." }
             kosul: { bayrak: "ihanet_kaya" }
           - metin: { tr: "Lonca'nın şahinleri Konsey'i bu gece alma kararını vermiş. {npc:kaya_demir} ne evet demiş ne hayır; Pala'ya onun susması yetmiş.", en: "The Guild's hawks decided tonight was the night to take the Council. {npc:kaya_demir} didn't say yes. He didn't say no. For Cleaver, his silence was enough." }
@@ -2056,6 +2056,11 @@ olaylar:
           - { tr: "Tam o sırada {yer:kiyikent_iskele} tarafından da silah sesleri geliyor; Konsey üyeleri bu gece orada toplanmıştı. İki ayrı yer, iki ayrı yön, tek bir gece.", en: "At the same time, gunfire starts up from the direction of the {yer:kiyikent_iskele}, where the Council was meeting tonight. Two places, two directions, one night." }
           - metin: { tr: "{npc:elif_sari} çantasını çoktan kapıp kapıdan çıkmış bile. \"Hastalarım,\" demekle yetinip koşmaya başlıyor; seni beklemiyor.", en: "{npc:elif_sari} has already grabbed her bag and is out the door. \"My patients,\" is all she says, and she starts running. She doesn't wait for you." }
             kosul: { yoldas: "elif_sari" }
+          - { tr: "Hesap basit ve acımasız: Gümrük'te {npc:elif_sari} hastalarıyla neredeyse yalnız, İskele'de Konsey. İkisine birden yetişmek kolay olmayacak; hangisine koşarsan öbürünü geride bırakmayı göze alıyorsun.", en: "The math is simple and cruel: at the Customs House, {npc:elif_sari} is all but alone with her patients; at the {yer:kiyikent_iskele}, the Council. Getting to both won't be easy. Whichever way you run, you're choosing what to leave behind." }
+          - metin: { tr: "İsteğin üzerine Gümrük'ün kapısında iki Konsey nöbetçisi var. Bir süre dayanırlar; ne kadar, kimse bilmiyor.", en: "At your request, two Council guards are posted at the Customs House door. They'll hold for a while. How long, nobody knows." }
+            kosul: { bayrak: "demir_gece_nobet" }
+          - metin: { tr: "{npc:elif_sari|e} verdiğin fişek aklına geliyor. Yakarsa {yer:kiyikent_liman|in} her yerinden görünür.", en: "You remember the flare you gave {npc:elif_sari}. If she lights it, it'll be seen from anywhere on {yer:kiyikent_liman}." }
+            kosul: { bayrak: "demir_gece_isaret" }
         sezgiler:
           - kosul: { bilgi: "demir_gece_plani" }
             metin: { tr: "Bunun geleceğini biliyordun. Pala'nın kolu Gümrük'e balık halinin arkasından dolanacak: dar, karanlık, tek çıkışlı bir sokak.", en: "You knew this was coming. Cleaver's column will hit the Customs House by way of the alley behind the fish market. It's narrow, dark, and has one way out." }
@@ -2107,9 +2112,10 @@ olaylar:
             kronik: { tr: "Demir Gece'nin planını önceden bildiğinden Pala'nın önünü daha hastaneye varmadan yolda kestin.", en: "Because you knew Iron Night's plan ahead of time, you met Cleaver on the road before he ever reached the hospital." }
             sonraki: "elif_lonca_darbesi_pusu"
           - id: "evde"
-            etiket: { tr: "Evde kal. Bu gece Lonca'nın gecesi.", en: "Stay home. Tonight belongs to the Guild." }
+            etiket: { tr: "Evde kal: gücünü sakla, Lonca'nın listesine girme", en: "Stay home: keep your power hidden, stay off the Guild's list" }
             goster: { itibar_min: { lonca: 30 } }
             etkiler:
+              - gizle: 6
               - npc_ol: "elif_sari"
               - bayrak: "elif_darbe_yasandi"
               - bayrak: "darbe_basarili"
@@ -2127,7 +2133,7 @@ olaylar:
           - { tr: "Gümrük binasının önünde yirmi Lonca adamı hilal gibi dizilmiş; ellerinde kepenkten kalkanlar, tarım ilacı tüplerinden bozma gaz bombaları. İçeriden pencerelere sedyeler, dolaplar, karyola iskeletleri dayanmış.", en: "Twenty Guild men stand in a half-moon in front of the Customs House, holding storefront-shutter shields and gas bombs rigged out of crop-duster canisters. The windows are barricaded from inside with gurneys, cabinets, bed frames." }
           - { tr: "İkinci katın pencerelerinden birinde {npc:elif_sari} duruyor; elinde yangın tüpü, yüzü kireç gibi ama kılını kıpırdatmıyor. Pala seni görünce, yağmura bakan bir postacı gibi içini çekiyor.", en: "{npc:elif_sari} is standing in one of the second-floor windows with a fire extinguisher in her hands, her face dead white, not moving an inch. When Cleaver sees you he sighs, like a mailman looking at the rain." }
           - { tr: "\"İlaçları da kaçakları da verin, kimse ölmez,\" diye sesleniyor yukarıya, ama gözü sende. \"Bu gece fatura gecesi. Biz faturayı hep keseriz, bilirsin.\"", en: "\"Hand over the meds and the runaways and nobody dies,\" he calls up to the window, but his eyes are on you. \"Tonight's a billing night. We always send the bill, you know that.\"" }
-          - metin: { tr: "Arkanda Rıza Reis'le Konsey nöbetçileri var; buraya gelirken İskele'de kurtardıkların. Yaşlı kaptan av tüfeğini doldururken \"Geç kalmadık,\" diyor. \"Bu sefer geç kalmadık.\"", en: "Skipper Reese and the Council guards are behind you, the ones you sprang at the Terminal on the way. The old captain is loading a shotgun. \"We're not late,\" he says. \"Not this time.\"" }
+          - metin: { tr: "Arkanda Rıza Reis'le Konsey nöbetçileri var; buraya gelirken İskele'de kurtardıkların. Yaşlı kaptan av tüfeğini doldururken \"Geç kalmadık,\" diyor. \"Bu sefer geç kalmadık.\"", en: "Skipper Reese and the Council guards are behind you, the ones you freed at the Terminal on the way. The old captain is loading a shotgun. \"We're not late,\" he says. \"Not this time.\"" }
             kosul: { bayrak: "konsey_kurtarildi" }
           - metin: { tr: "Pala'nın göğsünde, Pınarbaşı'nın turnikesinden sökülmüş küçük bir ekran madalya gibi asılı duruyor.", en: "There's a little screen hanging on Cleaver's chest, pried off the Pinewell turnstile. He wears it like a medal." }
             kosul: { bayrak: "pala_kini" }
@@ -2141,7 +2147,7 @@ olaylar:
             etiket: { tr: "Kapının önüne geç ve savaş", en: "Get in front of the door and fight" }
             etkiler:
               - ahlak: { merhamet: 3, duzen: 1 }
-              - savas: { dusmanlar: ["pala@oyuncu+2", "demir_gece_askeri@oyuncu-2", "demir_gece_askeri@oyuncu-2"], ortam: ["yanici", "karanlik"], kazan: "elif_lonca_darbesi_zafer", kaybet: "elif_lonca_darbesi_bedel", kac: "elif_lonca_darbesi_bedel" }
+              - savas: { dusmanlar: ["pala@dunya+15", "demir_gece_askeri@dunya-5", "demir_gece_askeri@dunya-5"], ortam: ["yanici", "karanlik"], kazan: "elif_lonca_darbesi_zafer", kaybet: "elif_lonca_darbesi_bedel", kac: "elif_lonca_darbesi_bedel" }
             kronik: { tr: "Gümrük'ün kapısını sırtına alıp Pala'nın adamlarına karşı durdun.", en: "With the Customs House door at your back, you took on Cleaver's men." }
           - id: "silah"
             tur: "gosteris"
@@ -2182,7 +2188,7 @@ olaylar:
             etiket: { tr: "Sokağı kapat ve savaş", en: "Seal off the alley and fight" }
             etkiler:
               - ahlak: { duzen: 3, merhamet: 1 }
-              - savas: { dusmanlar: ["pala@oyuncu+1", "demir_gece_askeri@oyuncu-3"], ortam: ["dar_gecit", "karanlik"], kazan: "elif_lonca_darbesi_zafer", kaybet: "elif_lonca_darbesi_bedel", kac: "elif_lonca_darbesi_bedel" }
+              - savas: { dusmanlar: ["pala@dunya+10", "demir_gece_askeri@dunya-10"], ortam: ["dar_gecit", "karanlik"], kazan: "elif_lonca_darbesi_zafer", kaybet: "elif_lonca_darbesi_bedel", kac: "elif_lonca_darbesi_bedel" }
             kronik: { tr: "Hastaneye tek adam varmasın diye Pala'nın koluyla balık halinin arkasındaki dar sokakta çarpıştın.", en: "So no one would reach the hospital, you took on Cleaver's column in the narrow alley behind the fish market." }
           - id: "geri_don"
             etiket: { tr: "\"Dön, Pala. Bu gece kimse ölmesin.\"", en: "\"Turn around, Cleaver. Nobody dies tonight.\"" }
@@ -2200,8 +2206,38 @@ olaylar:
           - { tr: "İş çabuk bitiyor; bu adamlar senin karşında gölge bile sayılmaz. Rıza Reis'in bağlarını çözerken ihtiyar kaptan kolunu yakalıyor. \"Bu gözdağıydı,\" diyor. \"Asıl iş Gümrük'te.\"", en: "It doesn't take long. Next to you, these men aren't even shadows. As you cut Skipper Reese loose, the old captain grabs your arm. \"This was just for show,\" he says. \"The real job is at the Customs House.\"" }
           - { tr: "Pencereden dışarı bakınca görüyorsun: {yer:kiyikent_liman|in} öbür ucunda, Gümrük binasının üstüne turuncu bir ışık yükseliyor.", en: "You look out the window. At the far end of {yer:kiyikent_liman}, an orange light is rising over the Customs House." }
         secenekler:
+          - id: "nobetle"
+            etiket: { tr: "Nöbetçiler kapıyı tutarken Gümrük'e koş", en: "Run for the Customs House while the guards hold the door" }
+            goster: { bayrak: "demir_gece_nobet" }
+            etkiler:
+              - bayrak: "konsey_kurtarildi"
+              - ahlak: { merhamet: 3, duzen: 2 }
+              - itibar: { siginak: 4 }
+            kronik: { tr: "Konsey'i İskele'de çözdün; Gümrük'ün kapısını ise koyduğun nöbetçiler sen gelene kadar tuttu.", en: "You cut the Council loose at the Terminal, and the guards you'd posted held the Customs House door until you got there." }
+            sonraki: "elif_lonca_darbesi_hastane"
+          - id: "fisek"
+            etiket: { tr: "Fişeği görür görmez çatılardan Gümrük'e atla", en: "The second you see the flare, take the rooftops" }
+            goster: { bayrak: "demir_gece_isaret" }
+            gerekli: { stat: { agi: 150 } }
+            etkiler:
+              - bayrak: "konsey_kurtarildi"
+              - dikkat: 4
+              - ahlak: { merhamet: 3 }
+              - itibar: { siginak: 4 }
+            kronik: { tr: "Gümrük'ün üstünde bir fişek yandı; Konsey'i çözüp çatılardan oraya yetiştin.", en: "A flare went up over the Customs House. You cut the Council loose and made it there across the rooftops." }
+            sonraki: "elif_lonca_darbesi_hastane"
+          - id: "catilar"
+            etiket: { tr: "Çatılardan Gümrük'e atla", en: "Take the rooftops to the Customs House" }
+            gerekli: { stat: { agi: 250 } }
+            etkiler:
+              - bayrak: "konsey_kurtarildi"
+              - dikkat: 6
+              - ahlak: { merhamet: 3, duzen: 2 }
+              - itibar: { siginak: 6 }
+            kronik: { tr: "Konsey'i çözdükten sonra çatılardan Gümrük'e uçar gibi gittin; Demir Gece iki cephesini de kaybetti.", en: "After you freed the Council, you all but flew across the rooftops to the Customs House. The Iron Night lost on both fronts." }
+            sonraki: "elif_lonca_darbesi_hastane"
           - id: "kos"
-            etiket: { tr: "Gümrük'e koş", en: "Run for the Customs House" }
+            etiket: { tr: "Yine de Gümrük'e koş", en: "Run for the Customs House anyway" }
             etkiler:
               - npc_ol: "elif_sari"
               - bayrak: "konsey_kurtarildi"
@@ -2223,6 +2259,27 @@ olaylar:
           - { tr: "Gaz bombalarından biri ikinci kattaki camı kırınca içeriden bir öksürük dalgası yükseliyor. Sen Pala'yla boğuşurken Gümrük'ün kapısı açılıyor ve {npc:elif_sari} dışarı çıkıyor; kucağında, yüzüne ıslak bez kapatılmış bir çocuk.", en: "A gas bomb smashes a second-floor window and a wave of coughing rises inside. While you're grappling with Cleaver, the Customs House door opens and {npc:elif_sari} comes out with a kid in her arms and a wet rag over the kid's face." }
           - { tr: "Pala'nın adamlarından genç ve korkmuş biri tetiğe basıyor. Silah sesi sokakta yankılanırken {npc:elif_sari}, çocuk hâlâ kucağında, merdivenlerin ortasına oturuveriyor; biraz soluklanmak ister gibi.", en: "One of Cleaver's men, young and terrified, pulls the trigger. The shot echoes down the street, and {npc:elif_sari} sits down in the middle of the steps with the kid still in her arms, like she just needed a minute's rest." }
         secenekler:
+          - id: "seviye"
+            tur: "aciga_vur"
+            etiket: { tr: "Gerçek seviyeni aç; kurşundan önce orada ol", en: "Reveal your real level and beat the bullet there" }
+            goster: { gizli_fark_min: 1 }
+            etkiler:
+              - aciga_vur: true
+              - bayrak: "demir_gece_seviye"
+              - dikkat: 8
+              - ahlak: { merhamet: 3, insanlik: -1 }
+              - iliski: { elif_sari: { korku: 3, saygi: 4 } }
+            kronik: { tr: "Demir Gece'de gerçek seviyeni herkesin önünde açtın; kurşun {npc:elif_sari|e} değil sana çarptı.", en: "On the Iron Night you showed everyone your true level, and the bullet hit you instead of {npc:elif_sari}." }
+            sonraki: "elif_lonca_darbesi_son_an"
+          - id: "kalkan"
+            etiket: { tr: "Kurşunun önüne kendini at", en: "Throw yourself in front of the bullet" }
+            gerekli: { stat: { end: 250 } }
+            etkiler:
+              - can: -40
+              - ahlak: { merhamet: 4, insanlik: 2 }
+              - iliski: { elif_sari: { baglilik: 6 } }
+            kronik: { tr: "Gümrük'ün merdivenlerinde kurşunun önüne geçtin; {npc:elif_sari} o gece de hastalarını dikti.", en: "On the Customs House steps you stepped in front of the bullet, and {npc:elif_sari} went on stitching her patients that night." }
+            sonraki: "elif_lonca_darbesi_son_an"
           - id: "kos"
             etiket: { tr: "Ona koş", en: "Run to her" }
             etkiler:
@@ -2238,6 +2295,36 @@ olaylar:
             kronik: { tr: "Merdivenlere koşmadan önce tetiği çeken çocuğu yere serdin.", en: "On Iron Night, you put down the boy who pulled the trigger first. Then you ran for the steps." }
             sonraki: "elif_lonca_darbesi_olum"
 
+      - id: "elif_lonca_darbesi_son_an"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Kurşun havada asılı kalmış gibi geliyor; belki de sen o kadar hızlısın. Bir adımda merdivendesin, ikincisinde {npc:elif_sari|in} önünde. Kurşun omzuna çarpıp yere düşüyor: ezik, sıcak bir metal parçası.", en: "The bullet seems to hang in the air. Or maybe you're just that fast. One step and you're on the stairs, the next and you're in front of {npc:elif_sari}. The bullet hits your shoulder and drops to the ground, a flattened, hot scrap of metal." }
+          - metin: { tr: "Sokak susuyor. Pala'nın adamları silahlarını indiriyor; biri pencerende yanan sayıyı fısıltıyla okuyor, öbürü geri geri çekiliyor.", en: "The street goes silent. Cleaver's men lower their guns. One of them whispers the number burning in your status window. Another starts backing away." }
+            kosul: { bayrak: "demir_gece_seviye" }
+          - { tr: "{npc:elif_sari} çocuğu sıkıca tutmuş, sana bakıyor; nefesi kesik kesik. \"Kanıyorsun,\" diyor sonunda, sesi titremeden. \"Otur. Bu merdivenler benim koğuşum sayılır.\"", en: "{npc:elif_sari} is holding the kid tight, staring at you, her breath coming short. \"You're bleeding,\" she says at last, and her voice doesn't shake. \"Sit down. These steps count as my ward.\"" }
+        sezgiler:
+          - kosul: { bayrak: ["yanki_bagi", "demir_gece_seviye"] }
+            metin: { tr: "işte bu yüzden saklıyordun. ve işte bu yüzden artık saklayamazsın.", en: "this is why you were hiding it. and this is why you can't anymore." }
+        secenekler:
+          - id: "konsey"
+            etiket: { tr: "Pala'yı Konsey'e teslim et", en: "Turn Cleaver over to the Council" }
+            etkiler:
+              - bayrak: "pala_yakalandi"
+              - ahlak: { duzen: 3, merhamet: 1 }
+              - itibar: { siginak: 5 }
+              - iliski: { elif_sari: { saygi: 4, guven: 4 } }
+              - tohum: { olay: "pala_yargilanmasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Demir Gece'nin hesabı bekleme salonunda görülecek.", en: "The bill for the Iron Night comes due in the waiting room." } }
+            kronik: { tr: "Kurşunu üstlendiğin gecenin sabahı Pala'yı Konsey'e teslim ettin.", en: "The morning after you took the bullet, you turned Cleaver over to the Council." }
+            sonraki: "elif_lonca_darbesi_sabah"
+          - id: "otur"
+            etiket: { tr: "Merdivene otur; dikişi ona bırak", en: "Sit on the steps and let her stitch you" }
+            etkiler:
+              - bayrak: "pala_yakalandi"
+              - ahlak: { insanlik: 3 }
+              - iliski: { elif_sari: { baglilik: 6, guven: 4 } }
+              - tohum: { olay: "pala_yargilanmasi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "Demir Gece'nin hesabı bekleme salonunda görülecek.", en: "The bill for the Iron Night comes due in the waiting room." } }
+            kronik: { tr: "Demir Gece'nin sonunda Gümrük'ün merdivenlerinde oturup omzunu {npc:elif_sari|e} diktirdin.", en: "When the Iron Night was over, you sat on the Customs House steps and let {npc:elif_sari} stitch up your shoulder." }
+            sonraki: "elif_lonca_darbesi_sabah"
       - id: "elif_lonca_darbesi_olum"
         yer: "kiyikent_liman"
         paragraflar:
@@ -2257,10 +2344,23 @@ olaylar:
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
             metin: { tr: "s̷ayamadığım bir şey bitti. nasıl kaydedilir, bilmiyorum. kaydetmeyeceğim de.", en: "s̷omething i couldn't count just ended. i don't know how to log that. i'm not going to." }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Daha geçen hafta onunla...\" Cümleyi bitirmiyor; kalkanını merdivenin dibine bırakıp {npc:elif_sari|in} yanına oturuyor.", en: "\"Just last week I was with her...\" {zamir:deniz_arman|o|b} {zamir:deniz_arman|does}n't finish. {zamir:deniz_arman|o|b} put{zamir:deniz_arman|s} {zamir:deniz_arman|onun} shield down at the foot of the steps and sit{zamir:deniz_arman|s} down beside her." }
+          - npc: "mert_kilic"
+            kosul: { yoldas: "mert_kilic" }
+            metin: { tr: "\"Kayda geçireceğim,\" diyor, sesi çatlayarak. \"Her şeyi. Kim tetiğe bastı, kim emir verdi. Hepsini.\"", en: "\"I'm logging it,\" he says, his voice cracking. \"All of it. Who pulled the trigger, who gave the order. Every bit of it.\"" }
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "Bir süre hiçbir şey söylemiyor. Sonra kılıcını çekip kapıya asılı Lonca sancağını ikiye biçiyor, kimseye bakmadan.", en: "For a while he says nothing. Then he draws his sword and cuts the Guild banner on the door in two, without looking at anyone." }
         secenekler:
           - id: "bant"
             etiket: { tr: "Bandı kendin yapıştır; yanına bir bardak su bırak", en: "Put the tape on yourself. Leave a glass of water" }
             etkiler:
+              - hafiza: { npc: "deniz_arman", id: "elif_kaybi", agirlik: 6 }
+              - hafiza: { npc: "mert_kilic", id: "elif_kaybi", agirlik: 6 }
+              - hafiza: { npc: "aras_kurt", id: "elif_kaybi", agirlik: 3 }
               - bayrak: "elif_darbe_yasandi"
               - esya: { elif_nesteri: 1 }
               - ahlak: { insanlik: 5, merhamet: 2 }
@@ -2270,14 +2370,20 @@ olaylar:
           - id: "pala"
             etiket: { tr: "Neşteri sıkıp Pala'yı bul", en: "Grip the scalpel and find Cleaver" }
             etkiler:
+              - hafiza: { npc: "deniz_arman", id: "elif_kaybi", agirlik: 6 }
+              - hafiza: { npc: "mert_kilic", id: "elif_kaybi", agirlik: 6 }
+              - hafiza: { npc: "aras_kurt", id: "elif_kaybi", agirlik: 3 }
               - bayrak: "elif_darbe_yasandi"
               - esya: { elif_nesteri: 1 }
               - ahlak: { merhamet: -4, duzen: -2 }
-              - savas: { dusmanlar: ["pala@oyuncu"], ortam: ["karanlik"], kazan: "elif_lonca_darbesi_intikam", kaybet: "elif_lonca_darbesi_yas", kac: "elif_lonca_darbesi_yas" }
+              - savas: { dusmanlar: ["pala@dunya"], ortam: ["karanlik"], kazan: "elif_lonca_darbesi_intikam", kaybet: "elif_lonca_darbesi_yas", kac: "elif_lonca_darbesi_yas" }
             kronik: { tr: "{npc:elif_sari|in} neşterini avucunda sıkıp Pala'nın peşine düştün.", en: "You closed your fist around {npc:elif_sari|pos} scalpel and went after Cleaver." }
           - id: "kogus"
             etiket: { tr: "Koğuşa gir; hastalar bekliyor", en: "Go into the ward. The patients are waiting" }
             etkiler:
+              - hafiza: { npc: "deniz_arman", id: "elif_kaybi", agirlik: 6 }
+              - hafiza: { npc: "mert_kilic", id: "elif_kaybi", agirlik: 6 }
+              - hafiza: { npc: "aras_kurt", id: "elif_kaybi", agirlik: 3 }
               - bayrak: "elif_darbe_yasandi"
               - esya: { elif_nesteri: 1 }
               - degisken: { hayatta_kalan: 2 }
@@ -2342,16 +2448,30 @@ olaylar:
         yer: "kiyikent_liman"
         paragraflar:
           - { tr: "Bütün gece {yer:kiyikent_liman|den} sesler geliyor: önce silah, ardından cam, sonra bir süre hiçbir şey. Pencerenin önünde oturup hiçbirine gitmiyorsun.", en: "All night, sounds come off {yer:kiyikent_liman}: gunfire, then glass, then nothing for a while. You sit at the window and don't go to any of them." }
-          - { tr: "Sabah {yer:kiyikent_liman} Lonca bayraklarıyla uyanıyor. Kalkış panosunun en alt satırında tek bir şey yazılı: DÜN ÖLEN 1. Gümrük'ün merdivenlerinde bir hekim yatıyor; neşteri elinde, arkasındaki kapı hâlâ kapalı.", en: "The Waterfront wakes up under Guild flags. The bottom line of the departures board says one thing: DEAD YESTERDAY 1. A doctor is lying on the Customs House steps with her scalpel in her hand, and the door behind her is still shut." }
+          - { tr: "Sabah {yer:kiyikent_liman} Lonca bayraklarıyla uyanıyor. Kalkış panosunun en alt satırında tek bir şey yazılı: DÜN ÖLEN 1. Gümrük'ün merdivenlerinde bir hekim yatıyor; neşteri elinde, arkasındaki kapı hâlâ kapalı.", en: "{yer:kiyikent_liman|b} wakes up under Guild flags. The bottom line of the departures board says one thing: DEAD YESTERDAY 1. A doctor is lying on the Customs House steps with her scalpel in her hand, and the door behind her is still shut." }
+          - { tr: "Sokağında tek kapı kırılmamış. Lonca'nın adamları gece yarısı kapına kadar gelmiş, kimin oturduğunu görünce geri dönmüş; gerçek seviyeni gören olmamış. Sabah komşuların sana çay getiriyor ama hiçbiri gözünün içine bakmıyor.", en: "No door on your street was kicked in. Around midnight the Guild men came to your door, saw who lived there, and turned back. Nobody saw your real level. In the morning your neighbors bring you tea, and not one of them looks you in the eye." }
         bildirimler:
           - tur: "sistem"
             baslik: { tr: "[{npc:elif_sari|tam} · Durum: Öldü]", en: "[{npc:elif_sari|tam} · Status: Deceased]" }
             satirlar:
-              - { tr: "Bölge kontrolü değişti: {yer:kiyikent_liman} · Demir Lonca.", en: "Zone control changed: The Waterfront · Iron Guild." }
+              - { tr: "Bölge kontrolü değişti: {yer:kiyikent_liman} · Demir Lonca.", en: "Zone control changed: {yer:kiyikent_liman|b} · Iron Guild." }
+        yoldas_tepkileri:
+          - npc: "deniz_arman"
+            kosul: { yoldas: "deniz_arman" }
+            metin: { tr: "\"Evdeydin,\" diyor. Soru değil.", en: "\"You were home,\" {zamir:deniz_arman|o} say{zamir:deniz_arman|s}. It isn't a question." }
+          - npc: "mert_kilic"
+            kosul: { yoldas: "mert_kilic" }
+            metin: { tr: "\"Lonca'nın telsizini bütün gece dinledim. Senin adın bir kez bile geçmedi. Bunu nasıl başardığını sormayacağım.\"", en: "\"I listened to the Guild's radio all night. Your name didn't come up once. I'm not going to ask how you managed that.\"" }
+          - npc: "aras_kurt"
+            kosul: { yoldas: "aras_kurt" }
+            metin: { tr: "\"Kazanmak için bazen kapını kapatırsın,\" diyor. \"Ama bunu bir daha yaparsan seninle yarışmam.\"", en: "\"Sometimes you shut your door to win,\" he says. \"Do it again and I'm done racing you.\"" }
         secenekler:
           - id: "bak"
             etiket: { tr: "Merdivenlere git ve bak", en: "Go to the steps and look" }
             etkiler:
+              - hafiza: { npc: "deniz_arman", id: "elif_evde_kaldi", agirlik: -8 }
+              - hafiza: { npc: "mert_kilic", id: "elif_evde_kaldi", agirlik: -6 }
+              - hafiza: { npc: "aras_kurt", id: "elif_evde_kaldi", agirlik: -4 }
               - xp_seviye: 20
               - ahlak: { insanlik: 2 }
             kronik: { tr: "Sabah olunca, gece gitmediğin merdivenlere gidip baktın.", en: "On the morning after Iron Night, you went and looked at the steps you hadn't gone to." }
@@ -2359,6 +2479,9 @@ olaylar:
           - id: "donme"
             etiket: { tr: "Pencereden dön", en: "Turn away from the window" }
             etkiler:
+              - hafiza: { npc: "deniz_arman", id: "elif_evde_kaldi", agirlik: -8 }
+              - hafiza: { npc: "mert_kilic", id: "elif_evde_kaldi", agirlik: -6 }
+              - hafiza: { npc: "aras_kurt", id: "elif_evde_kaldi", agirlik: -4 }
               - xp_seviye: 20
               - ahlak: { insanlik: -3, merhamet: -1 }
             kronik: { tr: "Demir Gece'nin sabahı pencereden dönüp o merdivenlere bakmadın.", en: "On the morning after Iron Night, you turned away from the window and didn't look at those steps." }
@@ -2857,7 +2980,7 @@ olaylar:
               - degisken: { hayatta_kalan: 2 }
               - ahlak: { merhamet: 3, insanlik: 3 }
               - itibar: { siginak: 6 }
-              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 3, max: 10 }, kosul: { perde: 3, npc_hayatta: "elif_sari", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Kuru havuzun kapısında verdiğin kararlar birilerini rahatsız etti.", en: "What you decided at the dry-dock gate rubbed somebody the wrong way." } }
+              - tohum: { olay: "elif_demir_gece_uyari", gecikme: { min: 3, max: 10 }, kosul: { perde: 3, npc_hayatta: "elif_sari", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Kuru havuzun kapısında verdiğin kararlar birilerini rahatsız etti.", en: "What you decided at the dry-dock gate rubbed somebody the wrong way." } }
             kronik: { tr: "Son Sığınak'a gireni kapıda tek tek kendin saydın; sayı tahtaya senin el yazınla geçti.", en: "You stood at the Last Haven's door and counted everyone in yourself. That number went on the board in your handwriting." }
             sonraki: "@akis"
           - id: "kural"
@@ -2869,7 +2992,7 @@ olaylar:
               - xp_seviye: 100
               - ahlak: { duzen: 5, merhamet: 1 }
               - itibar: { siginak: 6 }
-              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 3, max: 10 }, kosul: { perde: 3, npc_hayatta: "elif_sari", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Kuru havuzun kapısında verdiğin kararlar birilerini rahatsız etti.", en: "What you decided at the dry-dock gate rubbed somebody the wrong way." } }
+              - tohum: { olay: "elif_demir_gece_uyari", gecikme: { min: 3, max: 10 }, kosul: { perde: 3, npc_hayatta: "elif_sari", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Kuru havuzun kapısında verdiğin kararlar birilerini rahatsız etti.", en: "What you decided at the dry-dock gate rubbed somebody the wrong way." } }
             kronik: { tr: "Son Sığınak'ın kapı kurallarını sen yazdın: kim girecek, ne zaman, nasıl.", en: "You wrote the Last Haven's door rules: who gets in, when, and how." }
             sonraki: "@akis"
           - id: "disari"
@@ -2882,7 +3005,7 @@ olaylar:
               - xp_seviye: 100
               - ahlak: { merhamet: 5, insanlik: 2 }
               - itibar: { siginak: 4 }
-              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 3, max: 10 }, kosul: { perde: 3, npc_hayatta: "elif_sari", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Kuru havuzun kapısında verdiğin kararlar birilerini rahatsız etti.", en: "What you decided at the dry-dock gate rubbed somebody the wrong way." } }
+              - tohum: { olay: "elif_demir_gece_uyari", gecikme: { min: 3, max: 10 }, kosul: { perde: 3, npc_hayatta: "elif_sari", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Kuru havuzun kapısında verdiğin kararlar birilerini rahatsız etti.", en: "What you decided at the dry-dock gate rubbed somebody the wrong way." } }
             kronik: { tr: "Son Sığınak tamamlandığı gece içeride değil, kapının dışında kalanların yanında oturdun.", en: "On the night the Last Haven was finished, you didn't sit inside. You sat with the people left outside the door." }
             sonraki: "@akis"
 

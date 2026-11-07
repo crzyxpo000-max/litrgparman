@@ -1,7 +1,7 @@
 # İlerleme
 
-Şu an: Kat anları ve Elif ikinci fırsatı bitti; Elif ölüm değişikliği kullanıcı onayında. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
-Son commit: 1a57ae1 kat anları (sonraki: belgeler)
+Şu an: Kat anları, Elif ikinci fırsatı ve Demir Gece değişikliği bitti. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
+Son commit: 47b43a6 kat anları belgeleri (sonraki: Demir Gece)
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
@@ -39,7 +39,9 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - [x] Kule kat anları: 55 olay + 5 unvan, ilk temizleyen ve Aras yarışı, 30 gün tekrar etmeme (DECISIONS #148);
       hikayesiz gün 5–9 puan daha düştü; hakimiyet %65,7
 - [x] Elif ikinci yoldaşlık fırsatı (DECISIONS #149): yoldaşlık %6 → %68
-- [ ] Elif'in Demir Gece ölümü: çözümleme STORY_FLOW'da; değişiklik önerisi kullanıcı onayında
+- [x] Demir Gece: uyarı ve hazırlık, açık tehlike, "evde kal" ikilemi, İskele yolu hazırlık/güce bağlı, Pala dünya seviyesine,
+      son şans; yoldaş tepkileri, hafızalar, Yas Tutan bağı; `DemirGeceTest` (DECISIONS #150). 54/100 ölüm, hepsi görünen
+      seçimden ya da hazırlık/güç eksikliğinden (STORY_FLOW)
 
 ## Hikaye yapısı değişikliği — bölüm, üs ve görev  ✅ (2026-11-07)
 - [x] Adım 1: olay sırası kaydı (`:tools:simulator:akis`), teşhis `docs/STORY_FLOW.md`, sınıflandırma, plan `docs/CHAPTERS.md`

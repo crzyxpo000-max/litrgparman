@@ -146,7 +146,7 @@ fun main(args: Array<String>) {
             Charsets.UTF_8,
         )
         last?.let { s ->
-            val arcFlags = s.flags.filter { it.startsWith("elif_") || it in setOf("insan_ittifaki", "siginak_1_goruldu") }.sorted()
+            val arcFlags = s.flags.filter { it.startsWith("elif_") || it.startsWith("demir_gece_") || it in setOf("insan_ittifaki", "siginak_1_goruldu", "konsey_kurtarildi") }.sorted()
             File(outDir, "%02d.jsonl".format(i)).appendText(
                 """{"t":"bitis","bayraklar":${arr(arcFlags)},"yoldas_olan":${arr(everCompanion.sorted())},"olu":${arr(s.npcs.values.filter { !it.alive }.map { it.id }.sorted())}}""" + "\n",
             )

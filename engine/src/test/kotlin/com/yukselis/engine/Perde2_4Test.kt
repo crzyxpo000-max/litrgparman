@@ -353,6 +353,7 @@ class Perde2_4Test {
             "zincir_siginak" to "siginak_", "zincir_lonca" to "lonca_", "zincir_yukselenler" to "yukselenler_",
             "zincir_sessiz_ag" to "sessiz_ag_", "zincir_kadimler" to "kadimler_",
         )
-        val RULE_EXEMPT = setOf("son_karar", "hasat_vakti")
+        // elif_demir_gece_uyari: Demir Gece'nin yapısal uyarı düğümü (hazırlık seçenekleri; tohum yerine bayrak bırakır).
+        val RULE_EXEMPT = setOf("son_karar", "hasat_vakti", "elif_demir_gece_uyari")
     }
 }

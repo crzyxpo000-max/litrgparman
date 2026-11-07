@@ -15,7 +15,8 @@ olaylar:
       - id: "elif_yoldas_konsey_1"
         paragraflar:
           - { tr: "{npc:elif_sari} Gümrük'ün merdivenlerinde seni bekliyor; elinde koğuşun anahtarı, kimseye vermediği o paslı anahtar. Oylamadan beri ilk kez önlüğünü çıkarmış.", en: "{npc:elif_sari} is waiting for you on the Customs House steps, holding the ward key, the rusty one she never hands to anybody. It's the first time since the vote she's taken off her lab coat." }
-          - { tr: "\"Nurhan koğuşu benden iyi yönetir,\" diyor. \"Bunu ona hiç söylemedim; söylersem gidebileceğimi anlarım diye korktum.\" Anahtarı avucunda tartıyor. \"Dışarıda yaralanan sensin. Ben de dışarıdaysam en azından seni yolda dikerim.\"", en: "\"Nora runs the ward better than I do,\" she says. \"I never told her, because then I'd have to admit I could leave.\" She weighs the key in her palm. \"You're the one getting hurt out there. If I'm out there too, at least I can stitch you up on the road.\"" }
+          - { tr: "\"Nurhan koğuşu benden iyi yönetir,\" diyor. \"Bunu ona hiç söylemedim; söylersem gidebileceğimi kabul etmiş olurum diye korktum.\"", en: "\"Nora runs the ward better than I do,\" she says. \"I never told her. I was afraid that if I said it out loud, I'd have to admit I could leave.\"" }
+          - { tr: "Anahtarı avucunda tartıyor. \"Dışarıda yaralanan sensin. Ben de dışarıdaysam en azından seni yolda dikerim.\"", en: "She weighs the key in her palm. \"You're the one getting hurt out there. If I'm out there too, at least I can stitch you up on the road.\"" }
           - metin: { tr: "Yanındakilerin sayısını görünce yüzü düşüyor; yine de teklifini geri almıyor.", en: "Her face falls when she counts the people already at your side. She doesn't take the offer back, though." }
             kosul: { yoldas_yer: false }
         sezgiler:
@@ -34,14 +35,14 @@ olaylar:
               - bayrak: "elif_yoldas_teklif"
             sonraki: "elif_yoldas_konsey_evet"
           - id: "konsey"
-            etiket: { tr: "\"Konsey'in sana benden çok ihtiyacı var.\"", en: "\"The Council needs you more than I do.\"" }
+            etiket: { tr: "\"Yanımdan çok Konsey'de lazımsın.\"", en: "\"The Council needs you more than I do.\"" }
             etkiler:
               - iliski: { elif_sari: { saygi: 4, baglilik: -2 } }
               - itibar: { siginak: 2 }
               - bayrak: "elif_yoldas_teklif"
             sonraki: "elif_yoldas_konsey_hayir"
           - id: "yer_yok"
-            etiket: { tr: "\"Yanımda yer yok. Ama bu anahtarı unutma.\"", en: "\"There's no room with me. But hang on to that key.\"" }
+            etiket: { tr: "\"Yanımda yer yok. Ama anahtarı elinden bırakma.\"", en: "\"No room in my party right now. Hang on to that key.\"" }
             goster: { yoldas_yer: false }
             etkiler:
               - iliski: { elif_sari: { guven: 2 } }
@@ -49,7 +50,7 @@ olaylar:
             sonraki: "elif_yoldas_konsey_hayir"
       - id: "elif_yoldas_konsey_evet"
         paragraflar:
-          - { tr: "Anahtarı Nurhan'a uzatırken eli bir an havada kalıyor, sonra bırakıyor. Başhemşire hiçbir şey sormadan anahtarı önlüğünün cebine atıp \"Geç kalma,\" diyor, ikinizin birden yüzüne bakmadan.", en: "When she holds the key out to Nora, her hand hangs there a second, then lets go. The head nurse pockets it without a single question. \"Don't be late,\" she says, without looking at either of you." }
+          - { tr: "Anahtarı Nurhan'a uzatırken eli bir an havada kalıyor, sonra anahtarı bırakıyor. Başhemşire hiçbir şey sormadan anahtarı önlüğünün cebine atıp \"Geç kalma,\" diyor, ikinizin birden yüzüne bakmadan.", en: "When she holds the key out to Nora, her hand hangs there a second, then lets go. The head nurse pockets it without a single question. \"Don't be late,\" she says, without looking at either of you." }
           - { tr: "{npc:elif_sari} çantasını omzuna atıyor. \"Kuralım şu,\" diyor. \"Ben 'dur' dersem durursun. Tartışmayı sonra yaparız.\"", en: "{npc:elif_sari} slings her bag over her shoulder. \"Here's my rule,\" she says. \"I say stop, you stop. We can argue about it later.\"" }
         secenekler:
           - id: "tamam"
@@ -57,7 +58,7 @@ olaylar:
             sonraki: "@akis"
       - id: "elif_yoldas_konsey_hayir"
         paragraflar:
-          - { tr: "Anahtarı yeniden avucuna kapatıp başını sallıyor. \"Haklısın,\" diyor. \"Sadece birinin sormasını istemiştim.\" Merdivenleri çıkarken arkasına bir kez bakıyor, o kadar.", en: "She closes her hand around the key again and nods. \"You're right,\" she says. \"I just wanted somebody to ask.\" She looks back once on her way up the stairs. That's all." }
+          - { tr: "Anahtarı yeniden avucuna kapatıp başını sallıyor. \"Haklısın,\" diyor. \"Yalnız birinin sormasını istemiştim.\" Merdivenleri çıkarken arkasına bir kez bakıyor, o kadar.", en: "She closes her hand around the key again and nods. \"You're right,\" she says. \"I just wanted somebody to ask.\" She looks back once on her way up the stairs. That's all." }
         secenekler:
           - id: "tamam"
             etiket: { tr: "Koğuşun ışığının yanmasını bekle", en: "Wait for the ward light to come on" }
@@ -75,8 +76,9 @@ olaylar:
     sahneler:
       - id: "elif_yoldas_darbe_1"
         paragraflar:
-          - { tr: "Demir Gece'nin üstünden birkaç gün geçmiş. {npc:elif_sari} Gümrük'ün kırık camlarına naylon gererken seni görünce elindeki zımbayı bırakıyor.", en: "A few days have gone by since the Iron Night. {npc:elif_sari} is stretching plastic over the Customs House's broken windows, and when she sees you she puts the staple gun down." }
-          - { tr: "\"O gece kapıda sen olmasaydın bu camların arkasında kimse kalmazdı,\" diyor. \"Bir daha olursa yine gelirsin, biliyorum. Ama ya gelemezsen?\" Cebinden bir rulo sargı bezi çıkarıp sana uzatıyor. \"Bundan sonra ben de yanında olayım. Koğuş beni bekleyebilir; sen bekleyemezsin.\"", en: "\"If you hadn't been at that door, there'd be nobody left behind these windows,\" she says. \"If it happens again, I know you'll come. But what if you can't?\" She pulls a roll of gauze from her pocket and holds it out. \"From now on, let me be there with you. The ward can wait for me. You can't.\"" }
+          - { tr: "Demir Gece'nin üstünden birkaç gün geçmiş. {npc:elif_sari} Gümrük'ün kırık camlarına naylon gererken seni görünce elindeki zımbayı bırakıyor.", en: "A few days have gone by since the Iron Night. {npc:elif_sari} is stretching plastic over the broken windows of the Customs House, and when she sees you she puts the staple gun down." }
+          - { tr: "\"O gece kapıda sen olmasaydın bu camların arkasında kimse kalmazdı,\" diyor. \"Bir daha olursa yine gelirsin, biliyorum. Ama ya gelemezsen?\"", en: "\"If you hadn't been at that door, there'd be nobody left behind these windows,\" she says. \"If it happens again, I know you'll come. But what if you can't?\"" }
+          - { tr: "Cebinden bir rulo sargı bezi çıkarıp sana uzatıyor. \"Bundan sonra ben de yanında olayım. Koğuş beni bekleyebilir; sen bekleyemezsin.\"", en: "She pulls a roll of gauze from her pocket and holds it out. \"From now on, let me be there with you. The ward can wait. You can't.\"" }
           - metin: { tr: "Yanındakilerin sayısını görünce sargıyı geri çekmiyor ama gözünü kaçırıyor.", en: "She sees how many are already with you. She doesn't pull the gauze back, but she looks away." }
             kosul: { yoldas_yer: false }
         sezgiler:
@@ -117,7 +119,7 @@ olaylar:
             sonraki: "@akis"
       - id: "elif_yoldas_darbe_hayir"
         paragraflar:
-          - { tr: "Başını sallıyor, zımbayı yeniden eline alıyor. \"Peki,\" diyor. \"O zaman sen de bir dahaki sefere zamanında gel.\" Sesinde kırgınlık yok; yorgunluk var yalnızca.", en: "She nods and picks the staple gun back up. \"Fine,\" she says. \"Then next time, you get here on time.\" There's no hurt in her voice. Just tired." }
+          - { tr: "Başını sallıyor, zımbayı yeniden eline alıyor. \"Peki,\" diyor. \"O zaman sen de bir dahaki sefere zamanında gel.\" Sesinde kırgınlık yok; yorgunluk var yalnızca.", en: "She nods and picks the staple gun back up. \"Fine,\" she says. \"Then next time, you get here on time.\" There's no hurt in her voice, only exhaustion." }
         secenekler:
           - id: "tamam"
             etiket: { tr: "Bir naylonun ucundan tut", en: "Grab the other end of the plastic" }

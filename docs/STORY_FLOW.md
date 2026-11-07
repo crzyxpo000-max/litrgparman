@@ -457,5 +457,22 @@ hakimiyet %65,7; sonlar %1–%40 içinde (Koruyucu %14,4, Kod Kırıcı %20,2); 
 - **Zar yok.** Uyarı yalnız hastane sahnesinde bir sezgi (oksijen tüpleri, ALG 200). Önceden hazırlık ancak
   `demir_gece_plani` bilgisiyle pusu seçeneği.
 
-Önerilen değişiklik kullanıcı onayını bekliyor (PROGRESS).
+Değişiklik DECISIONS #150 ile uygulandı; sonuç aşağıda.
+
+### Elif: Demir Gece değişikliğinden sonra (DECISIONS #150)
+
+100 oynanış (denge nüfusu). Uyarısız Demir Gece: 0 (önce 20). Uyarı sahnesi %100. Hazırlık seçimleri: hiçbiri 35, Lonca'yı
+izleme 29, fişek 25, nöbetçi 11. Elif 54 oynanışta öldü; ölüm oranı için hedef yok. Her ölümün nedeni:
+
+| Ölüm | Oynanış | Neden |
+| --- | ---: | --- |
+| Evde kaldı | 37 (22 hazırlıksız, 11 fişekli, 4 nöbetçili) | Görünen seçim |
+| İskele, sonra "Yine de koş" / Reis'i sırtla | 13 | Hazırlık ya da güç yok (fişek ÇEV ≥ 150, çatılar ÇEV ≥ 250); 2 oynanışta nöbetçi vardı ama ölüm seçeneği seçildi |
+| İskele / hastane, savaş kaybı, son şans yok | 4 | Güç yok (gizli seviye farkı da DAY ≥ 250 de yok) |
+
+Düğüm erişimi: sahra hastanesi %99, Konsey oylaması %100, gece nöbeti %100, uyarı %100, Demir Gece %100, barış masası
+%46, son gece %45, ikinci yoldaşlık teklifi %94 (Demir Gece sonrası sürümü %0, çünkü Konsey sürümü önce geliyor). Aşk yayı
+%16, başkanlık %6, insan ittifakı %24, Elif yoldaş %68, Konsey kurtarıldı %36, son şans (seviye açığa) %1.
+
+Denge (1000 oynanış): hakimiyet %65,9; sonlar %1–%40 içinde (Kod Kırıcı %20,5, Hasat %18,5, Koruyucu %14,3).
 

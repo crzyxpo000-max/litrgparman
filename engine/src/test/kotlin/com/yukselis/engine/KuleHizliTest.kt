@@ -66,7 +66,9 @@ class KuleHizliTest {
         val fast = engine.hubAction(s, HubAction.FastClimb, lang).state
         assertEquals(39, fast.variable(EffectApplier.TOWER_VAR))
         assertEquals(3, fast.dayState.slotsLeft)
-        assertEquals(WorldEngine.FAST_EVENT, fast.dayState.currentEvent)
+        // Özet sahnesi ya da (DECISIONS #148) onun yerini alan bir kat anı / ilk temizleyen sahnesi; özet satırı ilk paragraf.
+        val ev = fast.dayState.currentEvent!!
+        assertTrue(ev, ev == WorldEngine.FAST_EVENT || ev.startsWith(WorldEngine.FIRST_CLEAR_PREFIX) || ev.startsWith("kule_an_"))
         assertEquals(s.player.hp, fast.player.hp)
         val summary = engine.view(fast, lang).current.paragraphs.first()
         assertTrue(summary, summary.contains("Kat 31–39") && summary.contains("kat: 9") && summary.contains("hasar: 0"))

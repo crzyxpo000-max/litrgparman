@@ -1,0 +1,107 @@
+# Demir Gece'den önce uyarı ve hazırlık (DECISIONS #150). Ana yay düğümü (Bölüm 12, Gün 236+) ya da Demir Gece'yi eskiden
+# tohumlayan seçimlerin tohumu; her seçimi Demir Gece'yi 2–4 gün sonraya tohumlar.
+# Demir Gece (elif_lonca_darbesi) bu sahne görülmeden gelmez (demir_gece_uyarildi). Hazırlıklar gecenin seçeneklerini açar:
+# demir_gece_nobet (Gümrük'e nöbetçi: İskele'den sonra yetişme), demir_gece_isaret (fişek: İskele'den sonra, yeterince hızlıysan
+# yetişme), bilgi demir_gece_plani (balık halinde pusu).
+olaylar:
+  - id: "elif_demir_gece_uyari"
+    konum: ["kiyikent_liman"]
+    perde: [3]
+    gun: { min: 232, max: 328 }
+    ana_yay: { gun: 236 }
+    kosul: { bayrak: "siginak_1_goruldu", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi", "demir_gece_uyarildi"], npc_hayatta: "elif_sari" }
+    etiketler: ["siginak", "lonca", "npc", "darbe"]
+    gerilim: 3
+    npc: ["elif_sari"]
+    kart: { tr: "Şerit metre", en: "The tape measure" }
+    sahne: "elif_demir_gece_uyari_1"
+    sahneler:
+      - id: "elif_demir_gece_uyari_1"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Gümrük'ün önünden geçerken iki Lonca adamı görüyorsun. Biri şerit metreyle kapının genişliğini ölçüyor, öbürü pencereleri tek tek sayıp deftere yazıyor.", en: "Walking past the Customs House, you spot two Guild men. One is sizing up the door with a tape measure; the other is counting the windows one by one and writing the number in a notebook." }
+          - { tr: "{npc:elif_sari} eşikte kollarını kavuşturmuş, adamları izliyor; inanmak isteyen birinin sesiyle \"Hastaneye kimse saldırmaz,\" diyor, sana olduğu kadar kendine de. \"Lonca'nın yarısının yarası bu koğuşta dikildi.\"", en: "{npc:elif_sari} stands in the doorway with her arms crossed, watching them. \"Nobody attacks a hospital,\" she tells you, and partly herself. \"Half the Guild got stitched up on this ward.\" She sounds like someone who wants to believe it." }
+          - metin: { tr: "Pala'nın planını zaten biliyorsun: bugün ölçtükleri kapı, o gece kıracakları kapı.", en: "You already know Cleaver's plan. The door they're measuring today is the door they'll break down that night." }
+            kosul: { bilgi: "demir_gece_plani" }
+          - metin: { tr: "Konsey bu ara {yer:kiyikent_iskele|de} toplanıyor; orası Gümrük'ün tam öbür ucunda.", en: "These days the Council meets at the {yer:kiyikent_iskele}, at the opposite end of {yer:kiyikent_liman} from the Customs House." }
+        sezgiler:
+          - kosul: { stat: { per: 150 } }
+            metin: { tr: "Şeridin ucu kapıda değil; pencerenin altındaki oksijen tüplerinin yerinde duruyor.", en: "The end of the tape isn't at the door. It's at the spot under the window where the oxygen tanks are kept." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "kapıyı ölçen, kapıyı kıracaktır. bunu sen de biliyorsun, o da biliyor.", en: "whoever measures a door means to break it. you know that. so does she." }
+        secenekler:
+          - id: "nobet"
+            etiket: { tr: "Konsey'den Gümrük'e nöbetçi iste", en: "Ask the Council to post guards at the Customs House" }
+            gerekli: { itibar_min: { siginak: 20 } }
+            etkiler:
+              - bayrak: "demir_gece_uyarildi"
+              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 2, max: 4 }, kosul: { perde: 3, npc_hayatta: "elif_sari", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Gümrük'ün pervazındaki tebeşir çarpısı hâlâ yerinde.", en: "The chalk X on the Customs House doorframe is still there." } }
+              - bayrak: "demir_gece_nobet"
+              - itibar: { siginak: -2 }
+              - iliski: { elif_sari: { guven: 3 } }
+            sonraki: "elif_demir_gece_uyari_nobet"
+          - id: "isaret"
+            etiket: { tr: "{npc:elif_sari|e} bir işaret fişeği ver", en: "Give {npc:elif_sari} a signal flare" }
+            etkiler:
+              - bayrak: "demir_gece_uyarildi"
+              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 2, max: 4 }, kosul: { perde: 3, npc_hayatta: "elif_sari", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Gümrük'ün pervazındaki tebeşir çarpısı hâlâ yerinde.", en: "The chalk X on the Customs House doorframe is still there." } }
+              - bayrak: "demir_gece_isaret"
+              - iliski: { elif_sari: { guven: 2, baglilik: 2 } }
+            sonraki: "elif_demir_gece_uyari_isaret"
+          - id: "izle"
+            etiket: { tr: "Lonca'nın adamlarını gece boyu izle", en: "Shadow the Guild men through the night" }
+            zar: { stat: "per", zorluk: 160, tek: true, basarisiz: "elif_demir_gece_uyari_kayip", basarisiz_etkiler: [{ bayrak: "demir_gece_uyarildi" }, { tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 2, max: 4 }, kosul: { perde: 3, npc_hayatta: "elif_sari", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Gümrük'ün pervazındaki tebeşir çarpısı hâlâ yerinde.", en: "The chalk X on the Customs House doorframe is still there." } } }] }
+            etkiler:
+              - bayrak: "demir_gece_uyarildi"
+              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 2, max: 4 }, kosul: { perde: 3, npc_hayatta: "elif_sari", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Gümrük'ün pervazındaki tebeşir çarpısı hâlâ yerinde.", en: "The chalk X on the Customs House doorframe is still there." } }
+              - bilgi: "demir_gece_plani"
+              - ahlak: { duzen: -1 }
+              - iliski: { elif_sari: { saygi: 2 } }
+            sonraki: "elif_demir_gece_uyari_izle"
+          - id: "gec"
+            etiket: { tr: "Haklı olduğuna inan; üstüne gitme", en: "Believe she's right and let it go" }
+            etkiler:
+              - bayrak: "demir_gece_uyarildi"
+              - tohum: { olay: "elif_lonca_darbesi", gecikme: { min: 2, max: 4 }, kosul: { perde: 3, npc_hayatta: "elif_sari", bayrak_yok: ["kaya_devrildi", "elif_darbe_yasandi"] }, hatirlatma: { tr: "Gümrük'ün pervazındaki tebeşir çarpısı hâlâ yerinde.", en: "The chalk X on the Customs House doorframe is still there." } }
+              - iliski: { elif_sari: { saygi: 2 } }
+            sonraki: "elif_demir_gece_uyari_gec"
+      - id: "elif_demir_gece_uyari_nobet"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Rıza Reis isteğini dinlerken bıyığını çekiştiriyor. \"Konsey'in zaten adamı yok,\" diye söyleniyor, ama akşama iki nöbetçi Gümrük'ün kapısında. {npc:elif_sari} onlara çay götürüyor; sana bakmıyor, yine de teşekkür ettiği belli.", en: "Skipper Reese tugs at his mustache while you ask. \"The Council doesn't have the people to spare,\" he grumbles, but by evening two guards are posted at the Customs House door. {npc:elif_sari} brings them tea. She doesn't look at you, but you can tell she's grateful." }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Nöbetçilere selam verip geç", en: "Nod to the guards and move on" }
+            sonraki: "@akis"
+      - id: "elif_demir_gece_uyari_isaret"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Fişeği avucuna bırakınca {npc:elif_sari} fişeğe bir süre bakıyor, sonra önlüğünün iç cebine sokuyor. \"Yakarsam,\" diyor, \"gelirsin.\" Soru değil.", en: "When you put the flare in her hand, {npc:elif_sari} looks at it a while, then tucks it into the inside pocket of her lab coat. \"If I light it,\" she says, \"you'll come.\" It isn't a question." }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "\"Gelirim.\"", en: "\"I'll come.\"" }
+            sonraki: "@akis"
+      - id: "elif_demir_gece_uyari_izle"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Gece yarısından sonra adamlar balık halinin arkasındaki depoya giriyor. Kapı aralığından Pala'nın sesini duyuyorsun: hangi gece, kaç kişi, hangi yoldan. Şafak sökerken planın tamamı kafanda; kimsenin seni görmediğinden de eminsin.", en: "After midnight the men slip into a warehouse behind the fish market. Through the gap in the door you hear Cleaver's voice: which night, how many men, which way in. By dawn the whole plan is in your head, and you're sure nobody saw you." }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Planı aklında tutup eve dön", en: "Keep the plan in your head and head home" }
+            sonraki: "@akis"
+      - id: "elif_demir_gece_uyari_kayip"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "Balık halinin ara sokaklarında adamların izini kaybediyorsun. Bir köşeyi dönünce karşına yalnızca ıslak taşlar ve bir kedi çıkıyor; adamlar sanki suya karışmış.", en: "You lose them in the alleys around the fish market. You turn a corner and there's nothing but wet stone and a cat. It's like the men dissolved into the water." }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Eli boş dön", en: "Head back empty-handed" }
+            sonraki: "@akis"
+      - id: "elif_demir_gece_uyari_gec"
+        yer: "kiyikent_liman"
+        paragraflar:
+          - { tr: "{npc:elif_sari} başını sallayıp içeri giriyor. Lonca adamları şeridi sarıp defteri kapatıyor; biri giderken kapının pervazına tebeşirle küçük bir çarpı çiziyor.", en: "{npc:elif_sari} nods and goes inside. The Guild men reel in the tape and close the notebook. On his way out, one of them chalks a small X on the doorframe." }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Çarpıya bir süre bak", en: "Stare at the X for a while" }
+            sonraki: "@akis"

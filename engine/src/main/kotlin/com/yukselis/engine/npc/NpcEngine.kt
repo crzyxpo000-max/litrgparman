@@ -185,8 +185,9 @@ class NpcEngine(private val content: Content, private val effects: EffectApplier
         var s = update(state, id) { it.copy(status = NpcStatus.DEAD, companion = false) }
         // Yay düğümleri kapanır: bu NPC'ye bağlı tohumlar atılır (olaylar Yönetmen'de elenir).
         s = s.copy(seeds = s.seeds.filterNot { it.npc == id || content.events[it.eventId]?.npcs?.contains(id) == true })
-        // Yas Tutan: yoldaşın ölümünden sonra 3 gün savaşmadan yas (gizli sınıf koşulu).
-        if (npc.companion) s = s.copy(vars = s.vars + (VAR_MOURNING to s.day + 1))
+        // Yas Tutan: bir yoldaşın ya da bağlı olunan birinin (bağlılık ≥ MOURN_BOND) ölümünden sonra 3 gün savaşmadan yas
+        // (gizli sınıf koşulu; DECISIONS #150).
+        if (npc.companion || npc.relation.bond >= MOURN_BOND) s = s.copy(vars = s.vars + (VAR_MOURNING to s.day + 1))
         // Ölenin kişisel görevi yarım kalır.
         if (s.quests[personalQuestId(id)] == QuestStatus.ACTIVE) s = s.copy(quests = s.quests + (personalQuestId(id) to QuestStatus.FAILED))
         val notices = if (npc.known) listOf(Notice(NoticeKind.WARNING, texts.formatL("npc_oldu", "npc" to fullName(id)))) else emptyList()
@@ -752,6 +753,9 @@ class NpcEngine(private val content: Content, private val effects: EffectApplier
         const val VAR_LAST_FIGHT = "_son_savas_gunu"
         const val FLAG_MOURNED = "yas_tutuldu"
         const val MOURNING_DAYS = 3
+
+        /** Yoldaş olmasa da ölümü yas başlatan bağlılık eşiği. */
+        const val MOURN_BOND = 30
         const val RANK_FLAG_PREFIX = "_sira_"
         const val TOP_ANNOUNCE = 10
 
