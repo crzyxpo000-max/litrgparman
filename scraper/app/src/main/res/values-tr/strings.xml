@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Novel EPUB</string>
+    <string name="url_label">Roman ya da bölüm adresi</string>
+    <string name="url_hint">https://www.royalroad.com/fiction/…</string>
+    <string name="paste">Yapıştır</string>
+    <string name="fetch">Romanı getir</string>
+    <string name="site_detected">Site: %1$s</string>
+    <string name="site_generic">Bu site için özel ayrıştırıcı yok; genel okuyucu kullanılacak.</string>
+    <string name="generic_title">Genel okuyucu ayarları</string>
+    <string name="generic_help">Uygulamanın tahmin etmesi için alanı boş bırakın. Bölüm bağlantısı seçicisi yoksa adres 1. bölüm olmalı; uygulama \"Sonraki\" bağlantılarını izler.</string>
+    <string name="generic_chapter_links">Bölüm bağlantısı seçicisi (bu sayfada)</string>
+    <string name="generic_content">Bölüm metni seçicisi</string>
+    <string name="generic_chapter_title">Bölüm başlığı seçicisi</string>
+    <string name="generic_next">Sonraki bölüm bağlantısı seçicisi</string>
+    <string name="generic_remove">Silinecekler seçicisi (reklam, duyuru)</string>
+    <string name="generic_novel_title">Kitap adı</string>
+    <string name="generic_author">Yazar</string>
+    <string name="generic_language">Dil kodu (en, tr…)</string>
+    <string name="generic_max">En fazla bölüm</string>
+    <string name="by_author">Yazar: %1$s</string>
+    <string name="crawl_mode">Bölümler \"Sonraki\" bağlantıları izlenerek bulunacak.</string>
+    <string name="range_from">İlk</string>
+    <string name="range_to">Son</string>
+    <string name="range_invalid">1 ile %1$d arasında bir aralık seçin.</string>
+    <string name="download">EPUB indir</string>
+    <string name="cancel">İptal</string>
+    <string name="progress_known">Bölüm %1$d / %2$d</string>
+    <string name="progress_crawl">Bölüm %1$d</string>
+    <string name="from_cache">(önbellekten)</string>
+    <string name="writing_epub">EPUB yazılıyor…</string>
+    <string name="loading_info">Roman sayfası okunuyor…</string>
+    <string name="done_title">EPUB hazır</string>
+    <string name="save">Kaydet…</string>
+    <string name="open">Aç</string>
+    <string name="share">Paylaş</string>
+    <string name="saved">Kaydedildi.</string>
+    <string name="save_failed">Kaydedilemedi: %1$s</string>
+    <string name="no_reader">Bu cihazda EPUB açan bir uygulama yok.</string>
+    <string name="error_title">Bir sorun çıktı</string>
+    <string name="error_cancelled">İndirme iptal edildi. İnen bölümler önbellekte; yeniden indirilmez.</string>
+    <string name="error_resume_hint">Şimdiye kadar inen bölümler önbellekte; kaldığı yerden sürdürmek için yeniden İndir\'e dokunun.</string>
+    <string name="invalid_url">Geçerli bir http(s) adresi girin.</string>
+    <string name="settings">Ayarlar</string>
+    <string name="settings_delay">İstekler arası bekleme (saniye)</string>
+    <string name="settings_delay_help">Sitelere nazik davranın: aynı anda tek istek, arada bu kadar bekleme.</string>
+    <string name="settings_user_agent">User-Agent</string>
+    <string name="settings_author_notes">Royal Road yazar notlarını ekle</string>
+    <string name="settings_clear_cache">Bölüm önbelleğini temizle (%1$s)</string>
+    <string name="settings_cache_cleared">Önbellek temizlendi.</string>
+    <string name="close">Kapat</string>
+    <string name="reset">Sıfırla</string>
+    <string name="start_over">Yeni indirme</string>
+    <string name="description_more">Devamı</string>
+    <string name="description_less">Daha az</string>
+    <string name="cover">Kapak</string>
+    <string name="personal_use">Erişiminiz olan hikayeleri çevrimdışı okumak içindir. Sitelerin kurallarına ve yazarların haklarına saygı gösterin.</string>
+    <plurals name="chapter_count">
+        <item quantity="one">Bölüm sayısı: %1$d</item>
+        <item quantity="other">Bölüm sayısı: %1$d</item>
+    </plurals>
+    <plurals name="done_body">
+        <item quantity="one">%1$s · bölüm sayısı: %2$d</item>
+        <item quantity="other">%1$s · bölüm sayısı: %2$d</item>
+    </plurals>
+</resources>

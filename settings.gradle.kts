@@ -16,3 +16,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "yukselis-protokolu"
 include(":engine", ":app", ":tools:simulator")
+
+// Ayrı uygulama: webnovel → EPUB indirici (oyundan bağımsız; bkz. scraper/README.md).
+include(":scraper:core", ":scraper:app")

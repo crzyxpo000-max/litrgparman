@@ -20,6 +20,11 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 - **Tasarımın üst kuralı:** GDD'deki "OP MC tasarımı" bölümü (DECISIONS #19). Kahraman bir anomalidir; Yankı ona bağlıdır.
 - **Tüm geliştirme planı ve kabul kriterleri:** `CLAUDE_CODE_GOREV.md`. Güncel durum: `docs/PROGRESS.md`.
 
+## Ayrı uygulama: Novel EPUB (`scraper/`)
+
+Oyundan bağımsız küçük bir Android uygulaması (webnovel → EPUB): `:scraper:core` (saf Kotlin/JVM) ve `:scraper:app` (Compose).
+Oyun kuralları ona uygulanmaz; ayrıntı `scraper/README.md`. Komutlar: `./gradlew :scraper:core:test :scraper:app:assembleDebug`.
+
 ## Komutlar
 
 ```bash

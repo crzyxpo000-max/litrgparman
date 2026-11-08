@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Novel EPUB</string>
+    <string name="url_label">Novel or chapter URL</string>
+    <string name="url_hint">https://www.royalroad.com/fiction/…</string>
+    <string name="paste">Paste</string>
+    <string name="fetch">Fetch novel</string>
+    <string name="site_detected">Site: %1$s</string>
+    <string name="site_generic">No dedicated parser for this site; using the generic reader.</string>
+    <string name="generic_title">Generic reader settings</string>
+    <string name="generic_help">Leave a field blank to let the app guess. Without a chapter link selector, the URL must be chapter 1 and the app follows \"Next\" links.</string>
+    <string name="generic_chapter_links">Chapter link selector (on this page)</string>
+    <string name="generic_content">Chapter text selector</string>
+    <string name="generic_chapter_title">Chapter title selector</string>
+    <string name="generic_next">Next-chapter link selector</string>
+    <string name="generic_remove">Remove selector (ads, notices)</string>
+    <string name="generic_novel_title">Book title</string>
+    <string name="generic_author">Author</string>
+    <string name="generic_language">Language code (en, tr…)</string>
+    <string name="generic_max">Max chapters</string>
+    <string name="by_author">by %1$s</string>
+    <string name="crawl_mode">Chapters will be found by following \"Next\" links.</string>
+    <string name="range_from">From</string>
+    <string name="range_to">To</string>
+    <string name="range_invalid">Choose a range between 1 and %1$d.</string>
+    <string name="download">Download EPUB</string>
+    <string name="cancel">Cancel</string>
+    <string name="progress_known">Chapter %1$d of %2$d</string>
+    <string name="progress_crawl">Chapter %1$d</string>
+    <string name="from_cache">(cached)</string>
+    <string name="writing_epub">Writing EPUB…</string>
+    <string name="loading_info">Reading the novel page…</string>
+    <string name="done_title">EPUB ready</string>
+    <string name="save">Save to…</string>
+    <string name="open">Open</string>
+    <string name="share">Share</string>
+    <string name="saved">Saved.</string>
+    <string name="save_failed">Could not save: %1$s</string>
+    <string name="no_reader">No app on this device opens EPUB files.</string>
+    <string name="error_title">Something went wrong</string>
+    <string name="error_cancelled">Download cancelled. Chapters already downloaded are cached and will not be fetched again.</string>
+    <string name="error_resume_hint">Chapters downloaded so far are cached; tap Download again to resume.</string>
+    <string name="invalid_url">Enter a valid http(s) address.</string>
+    <string name="settings">Settings</string>
+    <string name="settings_delay">Delay between requests (seconds)</string>
+    <string name="settings_delay_help">Be gentle with the sites: one request at a time, with this pause in between.</string>
+    <string name="settings_user_agent">User-Agent</string>
+    <string name="settings_author_notes">Include Royal Road author notes</string>
+    <string name="settings_clear_cache">Clear chapter cache (%1$s)</string>
+    <string name="settings_cache_cleared">Cache cleared.</string>
+    <string name="close">Close</string>
+    <string name="reset">Reset</string>
+    <string name="start_over">New download</string>
+    <string name="description_more">More</string>
+    <string name="description_less">Less</string>
+    <string name="cover">Cover</string>
+    <string name="personal_use">For offline reading of stories you have access to. Respect each site\'s terms and the authors\' rights.</string>
+    <plurals name="chapter_count">
+        <item quantity="one">%1$d chapter</item>
+        <item quantity="other">%1$d chapters</item>
+    </plurals>
+    <plurals name="done_body">
+        <item quantity="one">%1$s · %2$d chapter</item>
+        <item quantity="other">%1$s · %2$d chapters</item>
+    </plurals>
+</resources>
