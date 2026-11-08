@@ -57,11 +57,13 @@ import com.romanarsiv.presentation.UiMessage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(viewModel: MainViewModel) {
+fun MainScreen(viewModel: MainViewModel, initialCrashReport: String? = null) {
     val query by viewModel.query.collectAsStateWithLifecycle()
     val searchState by viewModel.searchState.collectAsStateWithLifecycle()
     val downloadState by viewModel.downloadState.collectAsStateWithLifecycle()
     val pending by viewModel.pendingSource.collectAsStateWithLifecycle()
+    val challengeUrl by viewModel.challengeUrl.collectAsStateWithLifecycle()
+    var crashReport by rememberSaveable { mutableStateOf(initialCrashReport) }
 
     val snackbarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
@@ -150,6 +152,11 @@ fun MainScreen(viewModel: MainViewModel) {
     (downloadState as? DownloadState.Loading)?.let { loading ->
         ProgressDialog(loading, onCancel = viewModel::cancelDownload)
     }
+
+    // İlerleme penceresinin üstünde açılır.
+    challengeUrl?.let { url -> ChallengeDialog(url, onResult = viewModel::onChallengeResult) }
+
+    crashReport?.let { report -> CrashReportDialog(report, onDismiss = { crashReport = null }) }
 }
 
 @Composable

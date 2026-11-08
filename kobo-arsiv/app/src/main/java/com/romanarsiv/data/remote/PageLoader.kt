@@ -19,8 +19,13 @@ interface PageLoader {
 /**
  * Jsoup tabanlı yükleyici: site başına istek aralığı, zaman aşımı ve geçici hatalarda yeniden deneme.
  * Karakter kodlaması HTTP başlığından ya da `<meta charset>`'tan Jsoup tarafından çözülür.
+ *
+ * [userAgent] ve [cookies] Android'de WebView'den gelir: tarayıcı doğrulamasını (Cloudflare vb.) geçen
+ * WebView'in çerezleri ve aynı User-Agent ile Jsoup istekleri de kabul edilir.
  */
 class JsoupPageLoader(
+    private val userAgent: () -> String = { USER_AGENT },
+    private val cookies: (url: String) -> String? = { null },
     private val requestDelayMs: Long = AppConfig.REQUEST_DELAY_MS,
     private val timeoutMs: Int = 20_000,
     private val maxAttempts: Int = 3,
@@ -34,17 +39,23 @@ class JsoupPageLoader(
         for (attempt in 1..maxAttempts) {
             throttle(UrlUtils.hostOf(url) ?: url)
             try {
-                return@withContext Jsoup.connect(url)
-                    .userAgent(USER_AGENT)
-                    .header("Accept", "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8")
+                val connection = Jsoup.connect(url)
+                    .userAgent(userAgent())
+                    .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
                     .header("Accept-Language", "tr-TR,tr;q=0.9,en-US;q=0.7,en;q=0.6")
+                    .header("Upgrade-Insecure-Requests", "1")
+                    .header("Sec-Fetch-Dest", "document")
+                    .header("Sec-Fetch-Mode", "navigate")
+                    .header("Sec-Fetch-Site", "none")
+                    .header("Sec-Fetch-User", "?1")
                     .timeout(timeoutMs)
                     .followRedirects(true)
                     .maxBodySize(10 * 1024 * 1024)
-                    .get()
+                cookies(url)?.takeIf { it.isNotBlank() }?.let { connection.header("Cookie", it) }
+                return@withContext connection.get()
             } catch (e: HttpStatusException) {
-                // 4xx kalıcıdır (429 hariç); yeniden denemenin anlamı yok.
-                if (e.statusCode in 400..499 && e.statusCode != 429) throw e
+                // 4xx kalıcıdır (429 hariç). 503 çoğunlukla bot korumasıdır; beklemek yerine tarayıcı yedeğine düşülür.
+                if ((e.statusCode in 400..499 && e.statusCode != 429) || e.statusCode == 503) throw e
                 lastError = e
             } catch (e: IOException) {
                 lastError = e

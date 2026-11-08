@@ -6,6 +6,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.romanarsiv.ArchiverApp
+import com.romanarsiv.data.remote.ChallengeBroker
+import com.romanarsiv.data.remote.ChallengeDeclinedException
+import com.romanarsiv.data.remote.ChallengeRequiredException
 import com.romanarsiv.data.remote.UrlUtils
 import com.romanarsiv.domain.model.ArchiveProgress
 import com.romanarsiv.domain.model.ArchiveResult
@@ -50,7 +53,13 @@ sealed interface UiMessage {
 class MainViewModel(
     private val searchNovel: SearchNovelUseCase,
     private val archiveNovel: ArchiveNovelUseCase,
+    private val challengeBroker: ChallengeBroker,
 ) : ViewModel() {
+
+    /** Kullanıcının tarayıcıda geçmesi gereken doğrulama sayfası; yoksa null. */
+    val challengeUrl: StateFlow<String?> = challengeBroker.pendingUrl
+
+    fun onChallengeResult(solved: Boolean) = challengeBroker.complete(solved)
 
     private val _query = MutableStateFlow("")
     val query: StateFlow<String> = _query.asStateFlow()
@@ -88,7 +97,7 @@ class MainViewModel(
                 SearchState.Success(results)
             } catch (e: CancellationException) {
                 throw e
-            } catch (e: Exception) {
+            } catch (e: Throwable) {
                 SearchState.Error(describe(e))
             }
         }
@@ -126,7 +135,7 @@ class MainViewModel(
             } catch (e: CancellationException) {
                 _downloadState.value = DownloadState.Idle
                 throw e
-            } catch (e: Exception) {
+            } catch (e: Throwable) {
                 val message = describe(e)
                 _downloadState.value = DownloadState.Error(message)
                 _messages.send(UiMessage.Failed(message))
@@ -140,19 +149,29 @@ class MainViewModel(
         _downloadState.value = DownloadState.Idle
     }
 
-    private fun describe(e: Exception): String = when (e) {
+    private fun describe(e: Throwable): String = when (e) {
         is UnknownHostException -> "İnternet bağlantısı yok ya da site bulunamadı."
         is SocketTimeoutException -> "Sunucu zamanında yanıt vermedi."
         is SSLException -> "Güvenli bağlantı kurulamadı."
-        is HttpStatusException -> "Sunucu ${e.statusCode} hatası döndürdü."
-        else -> e.message?.takeIf { it.isNotBlank() } ?: e.javaClass.simpleName
+        is HttpStatusException -> {
+            val host = UrlUtils.hostOf(e.url) ?: e.url
+            if (e.statusCode == 403 || e.statusCode == 503) {
+                "$host erişimi reddetti (HTTP ${e.statusCode}). Site otomatik erişimi engelliyor olabilir."
+            } else {
+                "$host HTTP ${e.statusCode} hatası döndürdü."
+            }
+        }
+        is ChallengeRequiredException -> "${e.message}. Doğrulama sayfası geçilemedi."
+        is ChallengeDeclinedException -> e.message ?: "Doğrulama tamamlanmadı."
+        is OutOfMemoryError -> "Bellek yetmedi; kitap çok büyük olabilir."
+        else -> e.message?.takeIf { it.isNotBlank() }?.let { "$it (${e.javaClass.simpleName})" } ?: e.javaClass.simpleName
     }
 
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val app = this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as ArchiverApp
-                MainViewModel(app.container.searchNovel, app.container.archiveNovel)
+                MainViewModel(app.container.searchNovel, app.container.archiveNovel, app.container.challengeBroker)
             }
         }
     }

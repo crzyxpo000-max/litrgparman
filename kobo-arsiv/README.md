@@ -70,10 +70,25 @@ Harici kütüphane yok: `epublib-core` 2011'den beri güncellenmiyor ve Android'
 başlık sayfası ve her bölüm için bir XHTML. Tüm dosyalar UTF-8; Türkçe harfler varlığa çevrilmeden ham
 kalır. Paragraflar `koboSpan` ile sarılır (`EpubGenerator(kepub = false)` ile kapatılabilir).
 
+### 403 / bot koruması
+
+Sayfalar önce Jsoup ile istenir. Site 403 ya da 503 döndürürse (Cloudflare, DDoS-Guard …) aynı sayfa
+ekran dışı bir **WebView** (gerçek Chromium) ile açılır; doğrulama çoğunlukla kendiliğinden geçer.
+Geçmezse tam ekran bir tarayıcı penceresi açılır: doğrulamayı geçip **Devam**'a dokunun. Alınan
+çerezler ve WebView'in User-Agent'ı sonraki Jsoup isteklerinde kullanılır; site yine reddederse o
+site için her sayfa WebView ile açılır (daha yavaş ama çalışır). Vazgeç'e basılırsa indirme durur.
+
+### Çökme kaydı
+
+Yakalanmamış bir hata olursa yığın izi `files/son_cokme.txt`'ye yazılır ve bir sonraki açılışta
+kopyalanabilir bir pencerede gösterilir.
+
+**Not:** Android'in düzenli ifade motoru ICU'dur; `(?U)`, `(?u)`, `\p{Cntrl}` gibi JVM'de çalışan
+söz dizimleri telefonda çöker. `RegexAndroidSafetyTest` kaynakta bunları arar.
+
 ## Bilinen sınırlar
 
-- JavaScript ile içerik yükleyen siteler (Jsoup JS çalıştırmaz) ve giriş/Cloudflare doğrulaması
-  isteyen sayfalar kazınamaz.
+- Giriş (oturum açma) isteyen sayfalar kazınamaz.
 - Arama motorları otomatik istekleri zaman zaman doğrulama sayfasına yönlendirir; o durumda URL'yi
   doğrudan yapıştırın.
 - Bir bölümü birden çok sayfaya bölen siteler için yalnızca ilk sayfa alınır.

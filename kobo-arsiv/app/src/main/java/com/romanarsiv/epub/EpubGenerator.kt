@@ -74,7 +74,7 @@ class EpubGenerator(
         val date = DateTimeFormatter.ISO_LOCAL_DATE.format(now.atOffset(ZoneOffset.UTC))
 
         val entries = chapters.mapIndexed { i, ch ->
-            val id = "ch%04d".format(i + 1)
+            val id = "ch" + (i + 1).toString().padStart(4, '0')
             ChapterEntry(id = id, href = "text/$id.xhtml", title = clean(ch.title).trim().ifEmpty { "Bölüm ${i + 1}" }, chapter = ch)
         }
 

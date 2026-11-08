@@ -15,9 +15,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+        // Yalnızca ilk açılışta oku (döndürmede kaybolmasın diye MainScreen saklar).
+        val crashReport = if (savedInstanceState == null) CrashLog.takeLast(this) else null
         setContent {
             ArchiverTheme {
-                MainScreen(viewModel)
+                MainScreen(viewModel, crashReport)
             }
         }
     }

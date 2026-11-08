@@ -22,23 +22,29 @@ object ChapterExtractor {
     /** Bu kadar uzun ana metni olan sayfa "dizin" değil "bölüm" sayfasıdır. */
     const val CHAPTER_PAGE_CHARS = 1200
 
+    // DİKKAT: Android'in düzenli ifade motoru (ICU) gömülü `(?U)` / `(?u)` bayraklarını desteklemez ve
+    // sınıf yüklenirken çöker. Büyük/küçük harf için yalnızca RegexOption.IGNORE_CASE kullan
+    // (Kotlin bunu Unicode farkında yapar: "BÖLÜM" = "bölüm"). RegexAndroidSafetyTest bunu denetler.
     private val CHAPTER_WORD = "(?:bölüm|bolum|chapter|chap|ch|kısım|kisim|episode|ep|part|parça|parca)"
 
     private val TEXT_CHAPTER_PATTERNS = listOf(
-        Regex("(?iU)(?<![\\p{L}])$CHAPTER_WORD\\.?\\s*[-:#]?\\s*(\\d{1,5})"),
-        Regex("(?iU)(\\d{1,5})\\s*\\.?\\s*(?:bölüm|bolum)(?![\\p{L}])"),
+        Regex("(?<![\\p{L}])$CHAPTER_WORD\\.?\\s*[-:#]?\\s*(\\d{1,5})", RegexOption.IGNORE_CASE),
+        Regex("(\\d{1,5})\\s*\\.?\\s*(?:bölüm|bolum)(?![\\p{L}])", RegexOption.IGNORE_CASE),
     )
 
     private val HREF_CHAPTER_PATTERN =
-        Regex("(?i)(?:chapter|bolum|b%c3%b6l%c3%bcm|bölüm|chap|ch|episode|ep|part|kisim)[-_/]?(\\d{1,5})(?!\\d)")
+        Regex("(?:chapter|bolum|b%c3%b6l%c3%bcm|bölüm|chap|ch|episode|ep|part|kisim)[-_/]?(\\d{1,5})(?!\\d)", RegexOption.IGNORE_CASE)
 
     private val NEXT_TEXT = Regex(
-        "(?iU)^\\s*(?:sonraki(?:\\s+(?:bölüm|bolum|sayfa))?|ileri|devam(?:ı|i)?|next(?:\\s+(?:chapter|page|part))?)\\s*[»›>→]*\\s*$",
+        "^\\s*(?:sonraki(?:\\s+(?:bölüm|bolum|sayfa))?|ileri|devam(?:ı|i)?|next(?:\\s+(?:chapter|page|part))?)\\s*[»›>→]*\\s*$",
+        RegexOption.IGNORE_CASE,
     )
+    private val NEXT_ATTR = Regex("(?:^|[\\s_-])(?:next|sonraki)(?:$|[\\s_-])")
     private val NEXT_ARROWS = setOf("»", "›", ">", ">>", "→", "»»")
-    private val PREV_TEXT = Regex("(?iU)(önceki|onceki|geri|prev|previous|«|‹|←)")
+    private val PREV_TEXT = Regex("(önceki|onceki|geri|prev|previous|«|‹|←)", RegexOption.IGNORE_CASE)
     private val NAV_TEXT = Regex(
-        "(?iU)^\\s*[«‹←]?\\s*(?:önceki|onceki|sonraki|ileri|geri|next|prev|previous|içindekiler|icindekiler|index|table of contents|bölüm listesi)(?:\\s+(?:bölüm|bolum|sayfa|chapter|page))?\\s*[»›→]?\\s*$",
+        "^\\s*[«‹←]?\\s*(?:önceki|onceki|sonraki|ileri|geri|next|prev|previous|içindekiler|icindekiler|index|table of contents|bölüm listesi)(?:\\s+(?:bölüm|bolum|sayfa|chapter|page))?\\s*[»›→]?\\s*$",
+        RegexOption.IGNORE_CASE,
     )
 
     private val KNOWN_CONTENT_SELECTORS = listOf(
@@ -106,8 +112,13 @@ object ChapterExtractor {
     fun chapterNumberFromHref(url: String): Int? =
         HREF_CHAPTER_PATTERN.find(url.substringAfter("://").substringAfter('/'))?.groupValues?.get(1)?.toIntOrNull()
 
+    private val CHAPTER_TEXT = Regex(
+        "(?<![\\p{L}])(?:bölüm|bolum|chapter|prolog|prologue|epilog|epilogue|önsöz|onsoz)(?![\\p{L}])",
+        RegexOption.IGNORE_CASE,
+    )
+
     private fun looksLikeChapterText(text: String): Boolean =
-        text.length in 2..160 && Regex("(?iU)(?<![\\p{L}])(?:bölüm|bolum|chapter|prolog|prologue|epilog|epilogue|önsöz|onsoz)(?![\\p{L}])").containsMatchIn(text)
+        text.length in 2..160 && CHAPTER_TEXT.containsMatchIn(text)
 
     /** Siteler listeyi çoğunlukla en yeniden eskiye dizer; numaralar azalıyorsa ters çevir. */
     private fun orderAscending(links: List<ChapterLink>): List<ChapterLink> {
@@ -140,7 +151,7 @@ object ChapterExtractor {
             val text = a.text().trim()
             val attrs = (a.className() + " " + a.id() + " " + a.attr("title") + " " + a.attr("aria-label")).lowercase()
             val byText = NEXT_TEXT.matches(text) || text in NEXT_ARROWS
-            val byAttr = Regex("(?:^|[\\s_-])(?:next|sonraki)(?:$|[\\s_-])").containsMatchIn(attrs) &&
+            val byAttr = NEXT_ATTR.containsMatchIn(attrs) &&
                 !PREV_TEXT.containsMatchIn(text) && text.length < 40
             if (byText || byAttr) accept(a.absUrl("href"))?.let { return it }
         }

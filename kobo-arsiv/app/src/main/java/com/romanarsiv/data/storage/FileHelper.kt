@@ -53,7 +53,7 @@ class FileHelper(private val context: Context) : EpubStorage {
         /** Dosya sistemi için güvenli ad; Türkçe harfler korunur, yasak karakterler `_` olur. */
         fun kepubFileName(bookTitle: String): String {
             val base = bookTitle
-                .replace(Regex("[\\\\/:*?\"<>|\\p{Cntrl}]"), "_")
+                .replace(Regex("[\\\\/:*?\"<>|\\u0000-\\u001F\\u007F]"), "_")
                 .replace(Regex("\\s+"), " ")
                 .trim()
                 .trim('.', ' ')
