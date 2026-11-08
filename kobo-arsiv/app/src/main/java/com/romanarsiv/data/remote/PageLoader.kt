@@ -1,0 +1,72 @@
+package com.romanarsiv.data.remote
+
+import com.romanarsiv.domain.AppConfig
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
+import org.jsoup.HttpStatusException
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import java.io.IOException
+
+/** HTML sayfası getirir. Testlerde sahte bir uygulamayla değiştirilir. */
+interface PageLoader {
+    suspend fun load(url: String): Document
+}
+
+/**
+ * Jsoup tabanlı yükleyici: site başına istek aralığı, zaman aşımı ve geçici hatalarda yeniden deneme.
+ * Karakter kodlaması HTTP başlığından ya da `<meta charset>`'tan Jsoup tarafından çözülür.
+ */
+class JsoupPageLoader(
+    private val requestDelayMs: Long = AppConfig.REQUEST_DELAY_MS,
+    private val timeoutMs: Int = 20_000,
+    private val maxAttempts: Int = 3,
+) : PageLoader {
+
+    private val mutex = Mutex()
+    private val lastRequestAt = HashMap<String, Long>()
+
+    override suspend fun load(url: String): Document = withContext(Dispatchers.IO) {
+        var lastError: IOException? = null
+        for (attempt in 1..maxAttempts) {
+            throttle(UrlUtils.hostOf(url) ?: url)
+            try {
+                return@withContext Jsoup.connect(url)
+                    .userAgent(USER_AGENT)
+                    .header("Accept", "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8")
+                    .header("Accept-Language", "tr-TR,tr;q=0.9,en-US;q=0.7,en;q=0.6")
+                    .timeout(timeoutMs)
+                    .followRedirects(true)
+                    .maxBodySize(10 * 1024 * 1024)
+                    .get()
+            } catch (e: HttpStatusException) {
+                // 4xx kalıcıdır (429 hariç); yeniden denemenin anlamı yok.
+                if (e.statusCode in 400..499 && e.statusCode != 429) throw e
+                lastError = e
+            } catch (e: IOException) {
+                lastError = e
+            }
+            delay(1_000L * attempt * attempt)
+        }
+        throw lastError ?: IOException("Sayfa alınamadı: $url")
+    }
+
+    private suspend fun throttle(host: String) {
+        val wait = mutex.withLock {
+            val now = System.currentTimeMillis()
+            val last = lastRequestAt[host] ?: 0L
+            val next = maxOf(now, last + requestDelayMs)
+            lastRequestAt[host] = next
+            next - now
+        }
+        if (wait > 0) delay(wait)
+    }
+
+    companion object {
+        const val USER_AGENT =
+            "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36"
+    }
+}
