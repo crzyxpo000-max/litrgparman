@@ -22,6 +22,12 @@ class FetchResult(
     val contentType: String?,
 ) {
     /** Parses the body as HTML. Jsoup picks the charset from the header or the page's meta tag. */
+    fun text(): String {
+        val charset = contentType?.let { CHARSET.find(it)?.groupValues?.get(1) }
+            ?.let { runCatching { charset(it) }.getOrNull() } ?: Charsets.UTF_8
+        return String(body, charset)
+    }
+
     fun document(): Document {
         val charset = contentType?.let { CHARSET.find(it)?.groupValues?.get(1) }
             ?.takeIf { runCatching { charset(it) }.isSuccess }
@@ -36,6 +42,7 @@ class FetchResult(
 /** The site answered with an error status that retrying did not fix. */
 class HttpStatusException(val url: String, val status: Int) : IOException(
     when (status) {
+        401 -> "HTTP 401 for $url. The API key is missing or wrong."
         403, 503 -> "HTTP $status for $url. The site refused the request (often a Cloudflare check)."
         404 -> "HTTP 404 for $url. The page does not exist."
         429 -> "HTTP 429 for $url. Too many requests; increase the delay between requests."
@@ -43,8 +50,8 @@ class HttpStatusException(val url: String, val status: Int) : IOException(
     },
 )
 
-fun interface Fetcher {
-    suspend fun get(url: String): FetchResult
+interface Fetcher {
+    suspend fun get(url: String, headers: Map<String, String> = emptyMap()): FetchResult
 }
 
 /**
@@ -63,13 +70,14 @@ class OkHttpFetcher(
         .followRedirects(true)
         .build()
 
-    override suspend fun get(url: String): FetchResult {
+    override suspend fun get(url: String, headers: Map<String, String>): FetchResult {
         var attempt = 0
         while (true) {
             val request = Request.Builder()
                 .url(url)
                 .header("User-Agent", userAgent)
                 .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/*;q=0.8,*/*;q=0.7")
+                .apply { headers.forEach { (k, v) -> header(k, v) } }
                 .build()
             val outcome = try {
                 client.newCall(request).await().use { response ->

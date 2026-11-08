@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -38,6 +39,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Switch
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -58,16 +61,19 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import com.novelepub.app.AppSettings
 import com.novelepub.app.Busy
 import com.novelepub.app.MainViewModel
+import com.novelepub.app.Mode
 import com.novelepub.app.R
 import com.novelepub.app.UiState
 import com.novelepub.core.Cover
 import com.novelepub.core.GenericConfig
+import com.novelepub.core.SearchResult
 import kotlinx.coroutines.launch
 import java.io.File
 
@@ -108,18 +114,26 @@ fun MainScreen(vm: MainViewModel, state: UiState) {
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            UrlSection(vm, state)
-
-            if (state.isGeneric && state.novel == null) {
-                GenericPanel(state.generic, enabled = state.busy == null, onChange = vm::onGenericChange)
+            if (state.novel == null) {
+                ModeTabs(state.mode, enabled = state.busy == null, onChange = vm::onModeChange)
             }
 
-            if (state.novel == null || state.busy == Busy.LOADING_INFO) {
-                Button(
-                    onClick = vm::fetchInfo,
-                    enabled = state.busy == null && state.url.isNotBlank(),
-                    modifier = Modifier.fillMaxWidth(),
-                ) { Text(stringResource(R.string.fetch)) }
+            if (state.novel == null && state.mode == Mode.SEARCH) {
+                SearchSection(vm, state, hasWebSearch = vm.settings.hasWebSearch)
+            } else {
+                UrlSection(vm, state)
+
+                if (state.isGeneric && state.novel == null) {
+                    GenericPanel(state.generic, enabled = state.busy == null, onChange = vm::onGenericChange)
+                }
+
+                if (state.novel == null || state.busy == Busy.LOADING_INFO) {
+                    Button(
+                        onClick = vm::fetchInfo,
+                        enabled = state.busy == null && state.url.isNotBlank(),
+                        modifier = Modifier.fillMaxWidth(),
+                    ) { Text(stringResource(R.string.fetch)) }
+                }
             }
 
             if (state.busy == Busy.LOADING_INFO) {
@@ -131,6 +145,9 @@ fun MainScreen(vm: MainViewModel, state: UiState) {
 
             state.novel?.let { novel ->
                 NovelCard(state)
+                if (state.siteName == null && !novel.isCrawl && state.result == null && state.busy == null) {
+                    TextButton(onClick = vm::switchToCrawl) { Text(stringResource(R.string.use_crawl)) }
+                }
                 if (state.result == null) {
                     if (!novel.isCrawl) RangeFields(state, vm)
                     DownloadSection(state, vm)
@@ -166,6 +183,76 @@ fun MainScreen(vm: MainViewModel, state: UiState) {
             vm.clearCache()
             scope.launch { snackbar.showSnackbar(context.getString(R.string.settings_cache_cleared)) }
         }, onDismiss = { showSettings = false })
+    }
+}
+
+@Composable
+private fun ModeTabs(mode: Mode, enabled: Boolean, onChange: (Mode) -> Unit) {
+    TabRow(selectedTabIndex = mode.ordinal) {
+        Tab(selected = mode == Mode.SEARCH, enabled = enabled, onClick = { onChange(Mode.SEARCH) }, text = { Text(stringResource(R.string.mode_search)) })
+        Tab(selected = mode == Mode.URL, enabled = enabled, onClick = { onChange(Mode.URL) }, text = { Text(stringResource(R.string.mode_url)) })
+    }
+}
+
+@Composable
+private fun SearchSection(vm: MainViewModel, state: UiState, hasWebSearch: Boolean) {
+    OutlinedTextField(
+        value = state.query,
+        onValueChange = vm::onQueryChange,
+        label = { Text(stringResource(R.string.search_label)) },
+        singleLine = true,
+        enabled = state.busy == null,
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+        keyboardActions = KeyboardActions(onSearch = { vm.search() }),
+        modifier = Modifier.fillMaxWidth(),
+    )
+    Button(
+        onClick = vm::search,
+        enabled = state.busy == null && state.query.isNotBlank(),
+        modifier = Modifier.fillMaxWidth(),
+    ) { Text(stringResource(R.string.search_button)) }
+    if (!hasWebSearch) {
+        Text(stringResource(R.string.search_only_rr), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+    if (state.busy == Busy.SEARCHING) {
+        LinearProgressIndicator(Modifier.fillMaxWidth())
+        Text(stringResource(R.string.searching), style = MaterialTheme.typography.bodySmall)
+    }
+    state.searchErrors.forEach { (provider, message) ->
+        Text(
+            stringResource(R.string.search_provider_error, provider, message),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.error,
+        )
+    }
+    val results = state.searchResults ?: return
+    if (results.isEmpty() && state.busy == null) {
+        Text(stringResource(R.string.search_no_results))
+    }
+    results.forEach { result ->
+        SearchResultCard(result, enabled = state.busy == null, onClick = { vm.pickResult(result) })
+    }
+}
+
+@Composable
+private fun SearchResultCard(result: SearchResult, enabled: Boolean, onClick: () -> Unit) {
+    Card(onClick = onClick, enabled = enabled, modifier = Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text(result.title, style = MaterialTheme.typography.titleSmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
+            Text(
+                result.host + " · " + (result.siteName?.let { stringResource(R.string.result_dedicated, it) } ?: stringResource(R.string.result_generic)),
+                style = MaterialTheme.typography.labelMedium,
+                color = if (result.siteName != null) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            if (result.snippet.isNotBlank()) {
+                Text(result.snippet, style = MaterialTheme.typography.bodySmall, maxLines = 3, overflow = TextOverflow.Ellipsis)
+            }
+            Text(
+                stringResource(R.string.found_by, result.provider),
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
     }
 }
 
@@ -389,6 +476,8 @@ private fun SettingsDialog(settings: AppSettings, cacheBytes: Long, onClearCache
     var delay by remember { mutableStateOf(settings.delaySeconds.toString()) }
     var userAgent by remember { mutableStateOf(settings.userAgent) }
     var notes by remember { mutableStateOf(settings.includeAuthorNotes) }
+    var braveKey by remember { mutableStateOf(settings.braveApiKey) }
+    var searxUrl by remember { mutableStateOf(settings.searxUrl) }
     var cacheCleared by remember { mutableStateOf(false) }
 
     AlertDialog(
@@ -410,6 +499,23 @@ private fun SettingsDialog(settings: AppSettings, cacheBytes: Long, onClearCache
                     label = { Text(stringResource(R.string.settings_user_agent)) },
                     maxLines = 3,
                 )
+                Text(stringResource(R.string.settings_search_title), style = MaterialTheme.typography.titleSmall)
+                Text(stringResource(R.string.settings_search_help), style = MaterialTheme.typography.bodySmall)
+                OutlinedTextField(
+                    value = braveKey,
+                    onValueChange = { braveKey = it },
+                    label = { Text(stringResource(R.string.settings_brave_key)) },
+                    singleLine = true,
+                    visualTransformation = PasswordVisualTransformation(),
+                )
+                OutlinedTextField(
+                    value = searxUrl,
+                    onValueChange = { searxUrl = it },
+                    label = { Text(stringResource(R.string.settings_searx)) },
+                    placeholder = { Text("https://searx.example.org") },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri),
+                )
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(stringResource(R.string.settings_author_notes), Modifier.weight(1f))
                     Switch(checked = notes, onCheckedChange = { notes = it })
@@ -424,6 +530,8 @@ private fun SettingsDialog(settings: AppSettings, cacheBytes: Long, onClearCache
                 settings.delaySeconds = delay.toFloatOrNull() ?: AppSettings.DEFAULT_DELAY_SECONDS
                 settings.userAgent = userAgent
                 settings.includeAuthorNotes = notes
+                settings.braveApiKey = braveKey
+                settings.searxUrl = searxUrl
                 onDismiss()
             }) { Text(stringResource(R.string.close)) }
         },

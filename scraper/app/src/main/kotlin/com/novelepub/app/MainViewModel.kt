@@ -14,6 +14,12 @@ import com.novelepub.core.NovelInfo
 import com.novelepub.core.NovelSource
 import com.novelepub.core.OkHttpFetcher
 import com.novelepub.core.Progress
+import com.novelepub.core.BraveSearch
+import com.novelepub.core.RoyalRoadSearch
+import com.novelepub.core.SearchProvider
+import com.novelepub.core.SearchResult
+import com.novelepub.core.SearchService
+import com.novelepub.core.SearxSearch
 import com.novelepub.core.Sources
 import com.novelepub.core.epubFileName
 import kotlinx.coroutines.CancellationException
@@ -29,9 +35,17 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import java.io.File
 import java.security.MessageDigest
 
-enum class Busy { LOADING_INFO, DOWNLOADING, WRITING }
+enum class Busy { SEARCHING, LOADING_INFO, DOWNLOADING, WRITING }
+
+enum class Mode { SEARCH, URL }
 
 data class UiState(
+    val mode: Mode = Mode.SEARCH,
+    val query: String = "",
+    /** Null until a search has run. */
+    val searchResults: List<SearchResult>? = null,
+    /** Provider name → error, for search providers that failed. */
+    val searchErrors: Map<String, String> = emptyMap(),
     val url: String = "",
     /** Name of the dedicated parser for [url], or null when the generic reader is used. */
     val siteName: String? = null,
@@ -83,6 +97,40 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    fun onModeChange(mode: Mode) = _state.update { it.copy(mode = mode) }
+
+    fun onQueryChange(query: String) = _state.update { it.copy(query = query) }
+
+    fun search() {
+        val query = state.value.query.trim()
+        if (query.isEmpty()) return
+        launchWork(Busy.SEARCHING) {
+            val outcome = SearchService(searchProviders()).search(query, fetcher())
+            _state.update { it.copy(searchResults = outcome.results, searchErrors = outcome.errors) }
+        }
+    }
+
+    /** The user chose a search result: read that page as the novel. */
+    fun pickResult(result: SearchResult) {
+        if (state.value.busy != null) return
+        _state.update { UiState(mode = Mode.URL, query = it.query, searchResults = it.searchResults, searchErrors = it.searchErrors) }
+        onUrlChange(result.url)
+        fetchInfo()
+    }
+
+    /** For a guessed chapter list that looks wrong: read chapter 1 and follow "next" links instead. */
+    fun switchToCrawl() = _state.update { s ->
+        val novel = s.novel ?: return@update s
+        val first = novel.chapters.firstOrNull() ?: return@update s
+        s.copy(novel = novel.copy(chapters = emptyList(), crawlFrom = first.url), rangeFrom = "1", rangeTo = "")
+    }
+
+    private fun searchProviders(): List<SearchProvider> = buildList {
+        settings.braveApiKey.takeIf { it.isNotBlank() }?.let { add(BraveSearch(it)) }
+        settings.searxUrl.takeIf { it.isNotBlank() }?.let { add(SearxSearch(it)) }
+        add(RoyalRoadSearch())
+    }
+
     fun onGenericChange(config: GenericConfig) = _state.update { it.copy(generic = config) }
 
     fun onRangeChange(from: String, to: String) = _state.update {
@@ -91,10 +139,15 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     fun dismissError() = _state.update { it.copy(error = null, errorCancelled = false) }
 
-    /** Back to an empty form, keeping the URL. */
+    /** Back to an empty form, keeping the URL and the last search. */
     fun startOver() {
         job?.cancel()
-        _state.update { UiState(url = it.url, siteName = it.siteName, generic = it.generic) }
+        _state.update {
+            UiState(
+                mode = it.mode, query = it.query, searchResults = it.searchResults, searchErrors = it.searchErrors,
+                url = it.url, siteName = it.siteName, generic = it.generic,
+            )
+        }
     }
 
     fun fetchInfo() {
@@ -195,7 +248,8 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     private fun sourceFor(url: String): NovelSource =
-        Sources.forUrl(url, settings.includeAuthorNotes) ?: GenericSource(state.value.generic)
+        Sources.forUrl(url, settings.includeAuthorNotes)
+            ?: GenericSource(state.value.generic, pageDelayMs = (settings.delaySeconds * 1000).toLong())
 
     private fun fetcher() = OkHttpFetcher(userAgent = settings.userAgent)
 

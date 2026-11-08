@@ -9,14 +9,29 @@ page at a time with a delay between requests.
 
 ## Use
 
-1. Paste a novel URL (or share a page from the browser to the app).
-2. **Fetch novel** reads the title, author, cover and chapter list.
+1. **Search** tab: type the novel's title. The app lists the pages it found, one card per site
+   (sites with a dedicated parser first). Tap one. Or, in the **URL** tab, paste an address
+   (or share a page from the browser to the app) and tap **Fetch novel**.
+2. The app reads the title, author, cover and chapter list.
 3. Pick a chapter range, then **Download EPUB**.
 4. **Save to…** (any folder or cloud provider through the system picker), **Open** in a reader app, or **Share**.
 
 Downloaded chapters are cached per novel. A cancelled or failed download resumes where it stopped, and
 later downloads of the same novel (for example, after new chapters come out) only fetch new chapters.
 Settings: delay between requests, User-Agent, Royal Road author notes, clear cache.
+
+## Search
+
+| Provider | Needs | Notes |
+| --- | --- | --- |
+| Royal Road site search | nothing | Always on. |
+| [Brave Search API](https://brave.com/search/api/) | your API key (Settings) | Whole web. Brave asks for a card; a small monthly credit is free. |
+| [SearXNG](https://docs.searxng.org/) | instance address (Settings) | Whole web. The instance must allow `format=json` (most public ones do not; a self-hosted one does). |
+
+Google is not used: its Custom Search JSON API is closed to new customers and shuts down on
+2027-01-01, and scraping google.com is against its terms. Providers run in parallel; results are
+merged, duplicates and book shops/wikis/social sites dropped (`SearchService.NOT_READABLE`), and a
+failing provider is shown as an error line without hiding the others' results.
 
 ## Sites
 
@@ -28,8 +43,11 @@ Settings: delay between requests, User-Agent, Royal Road author notes, clear cac
 Generic reader fields (blank = guess):
 
 - **Chapter link selector**: run on the URL's page to build the chapter list, e.g. `ul.chapter-list a`.
-  Without it, the URL must be chapter 1, and the app follows "Next" links until there are none, a link
-  repeats, or **Max chapters** is reached.
+  Blank: the app looks for the biggest group of chapter-like links ("Chapter 12", "Bölüm 3",
+  `.../chapter-12`). Paginated lists are followed (a "next" link or the page after the active one), and
+  newest-first lists are reversed. If the page has no such list, or is itself a chapter, the app
+  follows "Next" links from it until there are none, a link repeats, or **Max chapters** is reached.
+  When a guessed list looks wrong, **Start from the first chapter and follow "Next" links** switches to that.
 - **Chapter text**: e.g. `#chapter-content`. The guess is the element with the most paragraph text.
 - **Chapter title**, **Next-chapter link** (guess: `rel=next` or a link that says "Next" / "Sonraki").
 - **Remove**: junk inside the text, e.g. `.ads, .chapter-nav`.
@@ -43,7 +61,7 @@ challenge pages (they fail with an HTTP 403/503 message).
 
 | Module | Contents |
 | --- | --- |
-| `scraper/core` | Pure Kotlin/JVM: `Fetcher` (OkHttp, retries, Retry-After), `NovelSource`, `RoyalRoadSource`, `GenericSource`, `ContentCleaner` (jsoup → XHTML), `EpubWriter` (EPUB 3 + NCX, streamed), `NovelDownloader` (rate limit, cache, crawl). |
+| `scraper/core` | Pure Kotlin/JVM: `Fetcher` (OkHttp, retries, Retry-After), `Search` (providers, `SearchService`), `NovelSource`, `RoyalRoadSource`, `GenericSource`, `ContentCleaner` (jsoup → XHTML), `EpubWriter` (EPUB 3 + NCX, streamed), `NovelDownloader` (rate limit, cache, crawl). |
 | `scraper/app` | Compose UI and `MainViewModel` only. English and Turkish strings. |
 
 Adding a site: implement `SiteSource` in `core` (see `RoyalRoadSource`), add it to `Sources.sites`, and add

@@ -1,5 +1,7 @@
 package com.novelepub.core
 
+import kotlinx.coroutines.delay
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 
@@ -8,7 +10,10 @@ import org.jsoup.nodes.Element
  * a blank selector falls back to a heuristic.
  */
 data class GenericConfig(
-    /** Selects chapter links on the start page. Blank = crawl: the start URL is chapter 1, follow "next" links. */
+    /**
+     * Selects chapter links on the start page. Blank = guess: a list of chapter-like links if the page has one,
+     * otherwise the start URL is chapter 1 and "next" links are followed.
+     */
     val chapterLinkSelector: String = "",
     /** Chapter title inside a chapter page. Blank = first h1/h2, then the page title. */
     val titleSelector: String = "",
@@ -23,9 +28,15 @@ data class GenericConfig(
     val language: String = "en",
     /** Safety limit for crawl mode. */
     val maxChapters: Int = 3000,
+    /** Safety limit for paginated chapter lists. */
+    val maxTocPages: Int = 100,
 )
 
-class GenericSource(private val config: GenericConfig) : NovelSource {
+/**
+ * Reads sites without a dedicated parser.
+ * @param pageDelayMs pause between the pages of a paginated chapter list.
+ */
+class GenericSource(private val config: GenericConfig, private val pageDelayMs: Long = 1_000) : NovelSource {
     override val id = "generic"
     override val name = "Generic"
 
@@ -37,25 +48,54 @@ class GenericSource(private val config: GenericConfig) : NovelSource {
         val cover = metaContent(doc, "og:image", "twitter:image")?.let { doc.resolve(it) }
         val description = metaContent(doc, "og:description", "description").orEmpty()
 
-        if (config.chapterLinkSelector.isBlank()) {
-            return NovelInfo(
-                title = title, author = author, url = page.url, description = description,
-                coverUrl = cover, language = config.language, crawlFrom = page.url,
-            )
+        val chapters = if (config.chapterLinkSelector.isBlank() && looksLikeChapter(doc)) {
+            emptyList() // a chapter page: crawl from here, ignoring sidebars of chapter links
+        } else {
+            collectToc(doc, fetcher)
         }
-        val chapters = doc.select(config.chapterLinkSelector).mapNotNull { el ->
-            val link = if (el.tagName() == "a") el else el.selectFirst("a[href]") ?: return@mapNotNull null
-            val href = link.absUrl("href").ifBlank { return@mapNotNull null }
-            ChapterRef(title = link.text().trim().ifEmpty { "Chapter" }, url = href.substringBefore('#'))
-        }.distinctBy { it.url }
-        if (chapters.isEmpty()) {
+        if (chapters.isEmpty() && config.chapterLinkSelector.isNotBlank()) {
             throw IllegalStateException("The chapter link selector \"${config.chapterLinkSelector}\" matched no links.")
         }
         return NovelInfo(
             title = title, author = author, url = page.url, description = description,
-            coverUrl = cover, language = config.language, chapters = chapters,
+            coverUrl = cover, language = config.language,
+            chapters = chapters,
+            crawlFrom = if (chapters.isEmpty()) page.url else null,
         )
     }
+
+    /** Chapter links of this page and of the following pages of a paginated list, oldest chapter first. */
+    private suspend fun collectToc(first: Document, fetcher: Fetcher): List<ChapterRef> {
+        val all = LinkedHashMap<String, ChapterRef>()
+        val visited = hashSetOf(first.location())
+        var doc = first
+        var pages = 1
+        while (true) {
+            val before = all.size
+            // Later pages may hold only the last one or two chapters.
+            chapterLinks(doc, minLinks = if (pages == 1) 3 else 1).forEach { all.putIfAbsent(it.url, it) }
+            if (all.size == before) break
+            val next = tocNextPage(doc) ?: break
+            if (!visited.add(next) || pages >= config.maxTocPages) break
+            delay(pageDelayMs)
+            doc = fetcher.get(next).document()
+            pages++
+        }
+        return oldestFirst(all.values.toList())
+    }
+
+    private fun chapterLinks(doc: Document, minLinks: Int): List<ChapterRef> {
+        if (config.chapterLinkSelector.isBlank()) return guessChapterLinks(doc, minLinks)
+        return doc.select(config.chapterLinkSelector).mapNotNull { el ->
+            val link = if (el.tagName() == "a") el else el.selectFirst("a[href]") ?: return@mapNotNull null
+            val href = link.absUrl("href").ifBlank { return@mapNotNull null }
+            ChapterRef(title = link.text().trim().ifEmpty { "Chapter" }, url = href.substringBefore('#'))
+        }.distinctBy { it.url }
+    }
+
+    /** A page with a lot of story text and a "next" link is a chapter, not a table of contents. */
+    private fun looksLikeChapter(doc: Document): Boolean =
+        paragraphScore(guessContent(doc)) >= 1_500 && findNext(doc) != null
 
     override suspend fun fetchChapter(ref: ChapterRef, fetcher: Fetcher): Chapter {
         val page = fetcher.get(ref.url)
@@ -100,6 +140,65 @@ class GenericSource(private val config: GenericConfig) : NovelSource {
     }
 
     companion object {
+        private val CHAPTER_TEXT = Regex("""(?i)(^|[^\p{L}])(chapter|chap|ch|bölüm|bolum|episode|ep|part|kısım)\.?\s*[-#:]?\s*(\d+)""")
+        private val LEADING_NUMBER = Regex("""^\s*(\d+)\s*[-.:)]""")
+        private val CHAPTER_HREF = Regex("""(?i)(?<![a-z])(chapter|chap|bolum|episode|ch)[-_/]?(\d+)""")
+        private val CONTAINERS = setOf("ul", "ol", "tbody", "table", "nav", "section", "dl")
+        private val PAGE_NEXT = Regex("""(?i)^(next|next page|›|»|>|>>|sonraki|sonraki sayfa)$""")
+        private val PAGINATION = ".pagination, .pager, .page-nav, .nav-links, .wp-pagenavi, [class*=paginat]"
+
+        /**
+         * The biggest group of chapter-like links ("Chapter 12", "Bölüm 3", ".../chapter-12") on the page.
+         * Links are grouped by their nearest list-like container, so "latest chapter" buttons and
+         * previous/next links do not count. Fewer than [minLinks] links = no chapter list.
+         */
+        fun guessChapterLinks(doc: Document, minLinks: Int = 3): List<ChapterRef> {
+            val pageHost = doc.location().toHttpUrlOrNull()?.host
+            val links = doc.select("a[href]").filter { a ->
+                val href = a.absUrl("href")
+                val host = href.toHttpUrlOrNull()?.host ?: return@filter false
+                (pageHost == null || host == pageHost) &&
+                    (CHAPTER_TEXT.containsMatchIn(a.text()) || LEADING_NUMBER.containsMatchIn(a.text()) || CHAPTER_HREF.containsMatchIn(href))
+            }
+            val best = links.groupBy { container(it) }.values
+                .map { group -> group.map { ChapterRef(it.text().trim().ifEmpty { "Chapter" }, it.absUrl("href").substringBefore('#')) }.distinctBy { it.url } }
+                .maxByOrNull { it.size } ?: return emptyList()
+            return if (best.size >= minLinks) best else emptyList()
+        }
+
+        private fun container(a: Element): Element =
+            a.parents().firstOrNull { it.tagName() in CONTAINERS || (it.tagName() == "div" && it.childrenSize() >= 3) }
+                ?: a.parent() ?: a
+
+        /** Lists that show the newest chapter first are reversed. */
+        fun oldestFirst(chapters: List<ChapterRef>): List<ChapterRef> {
+            val numbers = chapters.mapNotNull { chapterNumber(it) }
+            return if (numbers.size >= 2 && numbers.first() > numbers.last()) chapters.reversed() else chapters
+        }
+
+        private fun chapterNumber(ref: ChapterRef): Int? =
+            (CHAPTER_TEXT.find(ref.title)?.groupValues?.get(3)
+                ?: LEADING_NUMBER.find(ref.title)?.groupValues?.get(1)
+                ?: CHAPTER_HREF.find(ref.url)?.groupValues?.get(2))?.toIntOrNull()
+
+        /** The next page of a paginated chapter list: a "next" link or the page after the current one. */
+        fun tocNextPage(doc: Document): String? {
+            for (box in doc.select(PAGINATION)) {
+                box.select("a[href]").firstOrNull { a ->
+                    a.attr("rel").contains("next", ignoreCase = true) ||
+                        PAGE_NEXT.matches((a.text().ifBlank { a.attr("title").ifBlank { a.attr("aria-label") } }).trim())
+                }?.let { return it.absUrl("href").takeIf { u -> u.startsWith("http") } }
+                val current = box.selectFirst(".active, .current, [aria-current]")?.text()?.trim()?.toIntOrNull() ?: continue
+                box.select("a[href]").firstOrNull { it.text().trim() == (current + 1).toString() }
+                    ?.let { return it.absUrl("href").takeIf { u -> u.startsWith("http") } }
+            }
+            return doc.selectFirst("head link[rel=next][href]")?.absUrl("href")?.takeIf { it.startsWith("http") }
+        }
+
+        private fun paragraphScore(el: Element): Int =
+            el.children().filter { it.tagName() == "p" }.sumOf { it.text().length } +
+                (if (el.select("> br").size >= 3) el.ownText().length else 0)
+
         private val NEXT_LABEL = Regex("""^(next( chapter| chap)?|sonraki( bölüm)?|›|»|>|→|>>)(\s|$)|next chapter|sonraki bölüm""")
 
         /** The element whose direct paragraphs and line-broken text hold the most characters. */
@@ -108,12 +207,8 @@ class GenericSource(private val config: GenericConfig) : NovelSource {
             var best: Element = body
             var bestScore = 0
             for (el in body.select("article, main, section, div, td")) {
-                var score = 0
-                for (child in el.children()) {
-                    if (child.tagName() == "p") score += child.text().length
-                }
-                // Text separated by <br> directly inside the element.
-                if (el.select("> br").size >= 3) score += el.ownText().length
+                // Paragraph text, plus text separated by <br> directly inside the element.
+                val score = paragraphScore(el)
                 if (score > bestScore) {
                     bestScore = score
                     best = el

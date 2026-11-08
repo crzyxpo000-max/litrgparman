@@ -14,15 +14,17 @@ fun fixtureDoc(name: String, url: String): Document = Jsoup.parse(fixture(name),
 /** Serves canned pages; records every requested URL. */
 class FakeFetcher(private val pages: Map<String, String>) : Fetcher {
     val requests = ArrayList<String>()
-    override suspend fun get(url: String): FetchResult {
+    val headers = ArrayList<Map<String, String>>()
+    override suspend fun get(url: String, headers: Map<String, String>): FetchResult {
         requests += url
+        this.headers += headers
         val body = pages[url] ?: throw HttpStatusException(url, 404)
         return FetchResult(url, body.toByteArray(), "text/html; charset=utf-8")
     }
 }
 
 class FailingFetcher : Fetcher {
-    override suspend fun get(url: String): FetchResult = throw IOException("offline")
+    override suspend fun get(url: String, headers: Map<String, String>): FetchResult = throw IOException("offline")
 }
 
 /** Throws if [xml] is not well-formed XML. */

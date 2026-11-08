@@ -42,6 +42,9 @@ class MainActivity : ComponentActivity() {
         if (intent?.action != Intent.ACTION_SEND) return
         val text = intent.getStringExtra(Intent.EXTRA_TEXT) ?: return
         val url = Regex("https?://\\S+").find(text)?.value ?: return
-        if (viewModel.state.value.busy == null) viewModel.onUrlChange(url)
+        if (viewModel.state.value.busy == null) {
+            viewModel.onModeChange(Mode.URL)
+            viewModel.onUrlChange(url)
+        }
     }
 }

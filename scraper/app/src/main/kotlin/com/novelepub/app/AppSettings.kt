@@ -22,6 +22,18 @@ class AppSettings(context: Context) {
         get() = prefs.getBoolean("author_notes", false)
         set(value) = prefs.edit { putBoolean("author_notes", value) }
 
+    /** The user's own Brave Search API key; blank = Brave is not used. */
+    var braveApiKey: String
+        get() = prefs.getString("brave_key", "").orEmpty()
+        set(value) = prefs.edit { putString("brave_key", value.trim()) }
+
+    /** Address of a SearXNG instance with JSON output; blank = not used. */
+    var searxUrl: String
+        get() = prefs.getString("searx_url", "").orEmpty()
+        set(value) = prefs.edit { putString("searx_url", value.trim()) }
+
+    val hasWebSearch: Boolean get() = braveApiKey.isNotBlank() || searxUrl.isNotBlank()
+
     fun genericConfig(host: String): GenericConfig? {
         val json = prefs.getString("generic:$host", null) ?: return null
         return runCatching {
