@@ -1,5 +1,6 @@
 package com.romanarsiv.domain.repository
 
+import com.romanarsiv.domain.model.ChapterRef
 import com.romanarsiv.domain.model.NovelChapter
 import com.romanarsiv.domain.model.NovelSource
 
@@ -8,18 +9,19 @@ interface NovelRepository {
     suspend fun search(query: String): List<NovelSource>
 
     /**
-     * Kaynağın bölümlerini sırayla kazır.
-     * [onChapter] her bölüm indirildikten sonra çağrılır: 1 tabanlı sıra, toplam (dizin sayfasından
-     * biliniyorsa; "sonraki" zincirinde 0) ve başlık.
-     * İndirilemeyen bölümler atlanır; hiç bölüm çıkmazsa hata fırlatılır.
+     * Kaynağın bölümlerini okuma sırasıyla tespit eder (seçim listesi için).
+     * Dizin sayfasında yalnızca bağlantılar toplanır; "sonraki" zincirinde bölümler tespit sırasında
+     * indirilir ([ChapterRef.preloaded]). [onFound] bulunan bölüm sayısı her arttığında çağrılır.
+     * Hiç bölüm bulunamazsa hata fırlatır.
      */
-    suspend fun fetchChapters(
+    suspend fun listChapters(
         source: NovelSource,
-        onChapter: suspend (index: Int, total: Int, title: String) -> Unit = { _, _, _ -> },
-    ): ChapterFetchResult
-}
+        onFound: suspend (count: Int) -> Unit = {},
+    ): List<ChapterRef>
 
-data class ChapterFetchResult(
-    val chapters: List<NovelChapter>,
-    val skipped: Int,
-)
+    /**
+     * Tek bir bölümü indirir. Okunabilir metin yoksa ya da sayfa alınamadıysa null (atlanır).
+     * [position] 1 tabanlı sıra; başlık bulunamazsa "Bölüm [position]" kullanılır.
+     */
+    suspend fun fetchChapter(ref: ChapterRef, position: Int): NovelChapter?
+}

@@ -13,6 +13,7 @@ import com.romanarsiv.data.repository.NovelRepositoryImpl
 import com.romanarsiv.data.storage.FileHelper
 import com.romanarsiv.domain.repository.NovelRepository
 import com.romanarsiv.domain.usecase.ArchiveNovelUseCase
+import com.romanarsiv.domain.usecase.DetectChaptersUseCase
 import com.romanarsiv.domain.usecase.SearchNovelUseCase
 import com.romanarsiv.epub.EpubGenerator
 
@@ -46,5 +47,6 @@ class AppContainer(context: Context) {
     private val generator = EpubGenerator(kepub = true)
 
     val searchNovel = SearchNovelUseCase(repository)
+    val detectChapters = DetectChaptersUseCase(repository)
     val archiveNovel = ArchiveNovelUseCase(repository, generator, storage)
 }

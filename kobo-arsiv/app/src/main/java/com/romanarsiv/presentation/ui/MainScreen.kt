@@ -1,5 +1,6 @@
 package com.romanarsiv.presentation.ui
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -36,6 +39,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -47,9 +52,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.romanarsiv.R
-import com.romanarsiv.domain.AppConfig
 import com.romanarsiv.domain.model.ArchiveProgress
 import com.romanarsiv.domain.model.NovelSource
+import com.romanarsiv.presentation.DetectState
 import com.romanarsiv.presentation.DownloadState
 import com.romanarsiv.presentation.MainViewModel
 import com.romanarsiv.presentation.SearchState
@@ -61,7 +66,8 @@ fun MainScreen(viewModel: MainViewModel, initialCrashReport: String? = null) {
     val query by viewModel.query.collectAsStateWithLifecycle()
     val searchState by viewModel.searchState.collectAsStateWithLifecycle()
     val downloadState by viewModel.downloadState.collectAsStateWithLifecycle()
-    val pending by viewModel.pendingSource.collectAsStateWithLifecycle()
+    val detectState by viewModel.detectState.collectAsStateWithLifecycle()
+    val selection by viewModel.selection.collectAsStateWithLifecycle()
     val challengeUrl by viewModel.challengeUrl.collectAsStateWithLifecycle()
     var crashReport by rememberSaveable { mutableStateOf(initialCrashReport) }
 
@@ -72,21 +78,64 @@ fun MainScreen(viewModel: MainViewModel, initialCrashReport: String? = null) {
     LaunchedEffect(Unit) {
         viewModel.messages.collect { message ->
             val text = when (message) {
-                is UiMessage.Saved -> context.getString(
-                    R.string.saved_success,
-                    message.result.fileName,
-                    message.result.chapterCount,
-                )
+                is UiMessage.Saved -> if (message.result.skippedChapters > 0) {
+                    context.getString(
+                        R.string.saved_success_skipped,
+                        message.result.fileName,
+                        message.result.chapterCount,
+                        message.result.skippedChapters,
+                    )
+                } else {
+                    context.getString(R.string.saved_success, message.result.fileName, message.result.chapterCount)
+                }
                 is UiMessage.Failed -> context.getString(R.string.error_prefix, message.message)
             }
             snackbarHostState.showSnackbar(text, withDismissAction = true, duration = SnackbarDuration.Long)
         }
     }
 
+    val currentSelection = selection
+    BackHandler(enabled = currentSelection != null) { viewModel.closeSelection() }
+
     Scaffold(
-        topBar = { TopAppBar(title = { Text(stringResource(R.string.app_name)) }) },
+        topBar = {
+            if (currentSelection != null) {
+                TopAppBar(
+                    title = { Text(stringResource(R.string.select_title)) },
+                    navigationIcon = {
+                        IconButton(onClick = viewModel::closeSelection) {
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.back))
+                        }
+                    },
+                )
+            } else {
+                TopAppBar(title = { Text(stringResource(R.string.app_name)) })
+            }
+        },
+        bottomBar = {
+            if (currentSelection != null) SelectionBottomBar(currentSelection, onDownload = viewModel::startDownload)
+        },
         snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { padding ->
+        if (currentSelection != null) {
+            SelectionContent(
+                state = currentSelection,
+                actions = remember(viewModel) {
+                    SelectionActions(
+                        onToggle = viewModel::toggleChapter,
+                        onSelectAll = viewModel::selectAll,
+                        onSelectNone = viewModel::selectNone,
+                        onInvert = viewModel::invertSelection,
+                        onSelectRange = viewModel::selectRange,
+                        onBookTitleChange = viewModel::onBookTitleChange,
+                        onFileNameChange = viewModel::onFileNameChange,
+                        onResetFileName = viewModel::resetFileName,
+                    )
+                },
+                modifier = Modifier.padding(padding),
+            )
+            return@Scaffold
+        }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -140,13 +189,8 @@ fun MainScreen(viewModel: MainViewModel, initialCrashReport: String? = null) {
         }
     }
 
-    pending?.let { source ->
-        ConfirmDialog(
-            source = source,
-            initialTitle = viewModel.suggestedTitle(source),
-            onConfirm = viewModel::startDownload,
-            onDismiss = viewModel::dismissPending,
-        )
+    (detectState as? DetectState.Loading)?.let { loading ->
+        DetectDialog(loading, onCancel = viewModel::cancelDetection)
     }
 
     (downloadState as? DownloadState.Loading)?.let { loading ->
@@ -198,36 +242,28 @@ private fun SourceList(sources: List<NovelSource>, onClick: (NovelSource) -> Uni
 }
 
 @Composable
-private fun ConfirmDialog(
-    source: NovelSource,
-    initialTitle: String,
-    onConfirm: (String) -> Unit,
-    onDismiss: () -> Unit,
-) {
-    var title by rememberSaveable(source.url) { mutableStateOf(initialTitle) }
+private fun DetectDialog(state: DetectState.Loading, onCancel: () -> Unit) {
     AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text(stringResource(R.string.confirm_title)) },
+        onDismissRequest = {},
+        properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false),
+        title = { Text(stringResource(R.string.detect_title)) },
         text = {
             Column {
-                Text(source.siteName, style = MaterialTheme.typography.labelMedium)
-                Spacer(Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = title,
-                    onValueChange = { title = it },
-                    singleLine = true,
-                    label = { Text(stringResource(R.string.confirm_book_title)) },
+                Text(state.source.siteName, style = MaterialTheme.typography.labelMedium)
+                Spacer(Modifier.height(12.dp))
+                Text(
+                    if (state.found > 0) {
+                        stringResource(R.string.detect_found, state.found)
+                    } else {
+                        stringResource(R.string.progress_detecting)
+                    },
                 )
-                Spacer(Modifier.height(8.dp))
-                Text(stringResource(R.string.confirm_author, AppConfig.AUTHOR_NAME), style = MaterialTheme.typography.bodySmall)
+                Spacer(Modifier.height(12.dp))
+                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             }
         },
-        confirmButton = {
-            TextButton(onClick = { onConfirm(title) }, enabled = title.isNotBlank()) {
-                Text(stringResource(R.string.confirm_start))
-            }
-        },
-        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } },
+        confirmButton = {},
+        dismissButton = { TextButton(onClick = onCancel) { Text(stringResource(R.string.cancel)) } },
     )
 }
 

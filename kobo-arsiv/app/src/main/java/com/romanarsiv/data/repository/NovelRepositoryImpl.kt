@@ -6,9 +6,9 @@ import com.romanarsiv.data.remote.PageLoader
 import com.romanarsiv.data.remote.SearchProvider
 import com.romanarsiv.data.remote.UrlUtils
 import com.romanarsiv.domain.AppConfig
+import com.romanarsiv.domain.model.ChapterRef
 import com.romanarsiv.domain.model.NovelChapter
 import com.romanarsiv.domain.model.NovelSource
-import com.romanarsiv.domain.repository.ChapterFetchResult
 import com.romanarsiv.domain.repository.NovelRepository
 import org.jsoup.nodes.Document
 import java.io.IOException
@@ -49,40 +49,41 @@ class NovelRepositoryImpl(
 
     private fun isNoise(host: String): Boolean = NOISE_HOSTS.any { host == it || host.endsWith(".$it") }
 
-    // ------------------------------------------------------------------ bölümler
+    // ------------------------------------------------------------------ bölüm tespiti
 
-    override suspend fun fetchChapters(
+    override suspend fun listChapters(
         source: NovelSource,
-        onChapter: suspend (index: Int, total: Int, title: String) -> Unit,
-    ): ChapterFetchResult {
+        onFound: suspend (count: Int) -> Unit,
+    ): List<ChapterRef> {
         val first = loader.load(source.url)
         val links = ChapterExtractor.findChapterLinks(first)
         val textLength = ChapterExtractor.mainTextLength(first)
         val isChapterPage = textLength >= ChapterExtractor.CHAPTER_PAGE_CHARS
 
-        val result = when {
+        val refs = when {
             // Dizin sayfası ya da bölüm listesini (seçme kutusu) içeren bir bölüm sayfası.
             links.size >= 2 && (!isChapterPage || ChapterExtractor.listContainsPage(links, first.location())) ->
-                fetchFromList(first, links, followIndexPagination = !isChapterPage, onChapter = onChapter)
-            // Tek bir bölüm: "sonraki" bağlantılarını izle.
-            textLength >= ChapterExtractor.MIN_CHAPTER_CHARS -> fetchChain(first, onChapter)
-            links.isNotEmpty() -> fetchFromList(first, links, followIndexPagination = true, onChapter = onChapter)
-            else -> ChapterFetchResult(emptyList(), 0)
+                listFromIndex(first, links, followIndexPagination = !isChapterPage, onFound = onFound)
+            // Tek bir bölüm: "sonraki" bağlantılarını izle (metinler bu sırada indirilir).
+            textLength >= ChapterExtractor.MIN_CHAPTER_CHARS -> listFromChain(first, onFound)
+            links.isNotEmpty() -> listFromIndex(first, links, followIndexPagination = true, onFound = onFound)
+            else -> emptyList()
         }
-        if (result.chapters.isEmpty()) {
+        if (refs.isEmpty()) {
             throw IOException("Bu sayfada bölüm bağlantısı ya da okunabilir metin bulunamadı.")
         }
-        return result
+        return refs
     }
 
-    private suspend fun fetchFromList(
+    private suspend fun listFromIndex(
         first: Document,
         initialLinks: List<ChapterLink>,
         followIndexPagination: Boolean,
-        onChapter: suspend (Int, Int, String) -> Unit,
-    ): ChapterFetchResult {
+        onFound: suspend (Int) -> Unit,
+    ): List<ChapterRef> {
         val all = LinkedHashMap<String, ChapterLink>()
         initialLinks.forEach { all.putIfAbsent(UrlUtils.normalize(it.url), it) }
+        onFound(all.size)
 
         // Bölüm listesi birden çok dizin sayfasına bölünmüş olabilir (?page=2 ...).
         if (followIndexPagination) {
@@ -98,34 +99,15 @@ class NovelRepositoryImpl(
                 }
                 val added = ChapterExtractor.findChapterLinks(page).count { all.putIfAbsent(UrlUtils.normalize(it.url), it) == null }
                 if (added == 0) break
+                onFound(all.size)
                 next = ChapterExtractor.findNextLink(page)
                 pages++
             }
         }
 
-        val links = sortIfFullyNumbered(all.values.toList()).take(maxChapters)
-        val firstKey = UrlUtils.normalize(first.location())
-        val chapters = ArrayList<NovelChapter>(links.size)
-        var skipped = 0
-        links.forEachIndexed { i, link ->
-            val doc = if (UrlUtils.normalize(link.url) == firstKey) {
-                first
-            } else {
-                try {
-                    loader.load(link.url)
-                } catch (_: IOException) {
-                    null
-                }
-            }
-            val chapter = doc?.let { ChapterExtractor.extractChapter(it, link.text, "Bölüm ${i + 1}") }
-            if (chapter == null) {
-                skipped++
-            } else {
-                chapters += chapter
-                onChapter(i + 1, links.size, chapter.title)
-            }
-        }
-        return ChapterFetchResult(chapters, skipped)
+        return sortIfFullyNumbered(all.values.toList())
+            .take(maxChapters)
+            .mapIndexed { i, link -> ChapterRef(url = link.url, title = link.text.ifBlank { "Bölüm ${i + 1}" }) }
     }
 
     /** Birden çok dizin sayfası ters sırada birleşmiş olabilir; her bağlantının tekil numarası varsa numaraya göre diz. */
@@ -135,34 +117,38 @@ class NovelRepositoryImpl(
         return links.sortedBy { it.number }
     }
 
-    private suspend fun fetchChain(
-        first: Document,
-        onChapter: suspend (Int, Int, String) -> Unit,
-    ): ChapterFetchResult {
-        val chapters = ArrayList<NovelChapter>()
+    private suspend fun listFromChain(first: Document, onFound: suspend (Int) -> Unit): List<ChapterRef> {
+        val refs = ArrayList<ChapterRef>()
         val visited = HashSet<String>()
-        var skipped = 0
         var doc = first
-        while (chapters.size < maxChapters) {
+        while (refs.size < maxChapters) {
             visited += UrlUtils.normalize(doc.location())
-            val chapter = ChapterExtractor.extractChapter(doc, null, "Bölüm ${chapters.size + 1}")
-            if (chapter == null) {
-                // Zincirin sonunda çoğunlukla metinsiz bir "son" ya da dizin sayfası olur.
-                break
-            }
-            chapters += chapter
-            onChapter(chapters.size, 0, chapter.title)
+            // Zincirin sonunda çoğunlukla metinsiz bir "son" ya da dizin sayfası olur.
+            val chapter = ChapterExtractor.extractChapter(doc, null, "Bölüm ${refs.size + 1}") ?: break
+            refs += ChapterRef(url = doc.location(), title = chapter.title, preloaded = chapter)
+            onFound(refs.size)
 
             val next = ChapterExtractor.findNextLink(doc) ?: break
             if (UrlUtils.normalize(next) in visited) break
             doc = try {
                 loader.load(next)
             } catch (_: IOException) {
-                skipped++
                 break
             }
         }
-        return ChapterFetchResult(chapters, skipped)
+        return refs
+    }
+
+    // ------------------------------------------------------------------ bölüm indirme
+
+    override suspend fun fetchChapter(ref: ChapterRef, position: Int): NovelChapter? {
+        ref.preloaded?.let { return it }
+        val doc = try {
+            loader.load(ref.url)
+        } catch (_: IOException) {
+            return null
+        }
+        return ChapterExtractor.extractChapter(doc, ref.title, "Bölüm $position")
     }
 
     private companion object {

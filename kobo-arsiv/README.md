@@ -26,27 +26,37 @@ Android Studio'da `kobo-arsiv/` klasörünü ayrı bir proje olarak açın. `loc
 
 1. Roman adını yazıp **Ara**'ya basın (DuckDuckGo, olmazsa Bing). Kopyanın adresini biliyorsanız
    dizin ya da 1. bölüm URL'sini doğrudan arama kutusuna yapıştırın; arama yapılmaz.
-2. Listeden bir kaynağa dokunun, kitap adını onaylayın.
-3. İlerleme penceresi bölüm bölüm ilerler; bitince Snackbar dosya adını gösterir.
+2. Listeden bir kaynağa dokunun. Bölümler tespit edilir ve **seçim ekranı** açılır:
+   - bölümleri tek tek işaretleyin ya da **İlk – Son** alanlarına numara yazıp **Aralığı seç**'e basın
+     (ör. 1–50 = ilk cilt); **Tümü / Hiçbiri / Tersine çevir** de var;
+   - **Kitap adı** EPUB'ın içindeki başlıktır; **Dosya adı** İndirilenler'deki addır. Dosya adı kitap
+     adından önerilir, elle değiştirince bağımsız kalır (**Öner** ile geri döner). Uzantı yazmazsanız
+     `.kepub.epub` eklenir; `.epub` yazarsanız düz EPUB adı korunur.
+3. **İndir**'e basın. Yalnızca seçilen bölümler indirilir; bitince Snackbar dosya adını gösterir.
+   Seçim ekranı açık kalır, başka bir aralığı ayrı dosya olarak da indirebilirsiniz.
 4. Dosyayı USB ile Kobo'nun kök klasörüne kopyalayın. `.kepub.epub` uzantısı sayesinde Kobo kepub
    motorunu kullanır (sayfa sayımı, okuma istatistikleri).
+
+Not: Sayfa bir bölümün kendisiyse ("sonraki" zinciri) bölüm listesi önceden bilinemez; tespit sırasında
+bölümler sırayla okunur, bu yüzden bu adım dizin sayfasına göre daha uzun sürer.
 
 ## Mimari
 
 ```
 com.romanarsiv
 ├── domain/            saf Kotlin: modeller, depo arayüzleri, kullanım durumları, AppConfig
-│   ├── model/         NovelSource, NovelChapter, ArchiveProgress, ArchiveResult
+│   ├── model/         NovelSource, ChapterRef, NovelChapter, ArchiveProgress, ArchiveResult
 │   ├── repository/    NovelRepository, EpubStorage
-│   └── usecase/       SearchNovelUseCase, ArchiveNovelUseCase (channelFlow ile ilerleme)
+│   ├── usecase/       SearchNovelUseCase, DetectChaptersUseCase, ArchiveNovelUseCase (channelFlow)
+│   └── FileNames      dosya adı önerisi ve temizleme (.kepub.epub)
 ├── data/
 │   ├── remote/        PageLoader (Jsoup, site başına istek aralığı, yeniden deneme),
 │   │                  SearchProvider (DuckDuckGo HTML, Bing), ChapterExtractor (sezgiler), UrlUtils
 │   ├── repository/    NovelRepositoryImpl (dizin modu / "sonraki" zinciri)
 │   └── storage/       FileHelper (MediaStore → Download/…kepub.epub)
 ├── epub/              EpubGenerator (EPUB 3 + NCX, UTF-8, koboSpan)
-├── presentation/      MainViewModel (StateFlow: SearchState, DownloadState; Channel: UiMessage)
-│   └── ui/            MainScreen (Compose: arama, LazyColumn, onay, ilerleme penceresi, Snackbar)
+├── presentation/      MainViewModel (StateFlow: SearchState, DetectState, SelectionState, DownloadState)
+│   └── ui/            MainScreen (arama), SelectionScreen (bölüm seçimi, adlar), Dialogs (doğrulama, çökme)
 └── di/                AppContainer (elle bağımlılık enjeksiyonu)
 ```
 

@@ -11,13 +11,13 @@ import kotlinx.coroutines.withContext
 import java.io.IOException
 
 /**
- * EPUB'ı MediaStore ile `Download/` klasörüne `KitapAdi.kepub.epub` adıyla yazar (API 29+, izin gerekmez).
+ * EPUB'ı MediaStore ile `Download/` klasörüne verilen adla yazar (API 29+, izin gerekmez).
+ * Ad kuralları (`.kepub.epub`, yasak karakterler) [com.romanarsiv.domain.FileNames]'tedir.
  * Yazma sürerken dosya `IS_PENDING` ile gizli tutulur; yarım dosya başka uygulamalara görünmez.
  */
 class FileHelper(private val context: Context) : EpubStorage {
 
-    override suspend fun save(bookTitle: String, bytes: ByteArray): SavedFile = withContext(Dispatchers.IO) {
-        val fileName = kepubFileName(bookTitle)
+    override suspend fun save(fileName: String, bytes: ByteArray): SavedFile = withContext(Dispatchers.IO) {
         val resolver = context.contentResolver
         val collection = MediaStore.Downloads.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
 
@@ -48,18 +48,5 @@ class FileHelper(private val context: Context) : EpubStorage {
 
     companion object {
         const val EPUB_MIME = "application/epub+zip"
-        private const val KEPUB_SUFFIX = ".kepub.epub"
-
-        /** Dosya sistemi için güvenli ad; Türkçe harfler korunur, yasak karakterler `_` olur. */
-        fun kepubFileName(bookTitle: String): String {
-            val base = bookTitle
-                .replace(Regex("[\\\\/:*?\"<>|\\u0000-\\u001F\\u007F]"), "_")
-                .replace(Regex("\\s+"), " ")
-                .trim()
-                .trim('.', ' ')
-                .take(120)
-                .ifEmpty { "Kitap" }
-            return base + KEPUB_SUFFIX
-        }
     }
 }

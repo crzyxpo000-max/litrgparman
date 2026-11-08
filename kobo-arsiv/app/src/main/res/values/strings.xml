@@ -9,11 +9,26 @@
     <string name="search_intro">Romanın adını yazıp arayın; bir kaynağa dokunduğunuzda bölümler toplanır ve Kobo için EPUB olarak İndirilenler klasörüne kaydedilir.</string>
     <string name="searching">Aranıyor…</string>
 
-    <string name="confirm_title">EPUB oluştur</string>
     <string name="confirm_book_title">Kitap adı</string>
     <string name="confirm_author">Yazar: %1$s</string>
-    <string name="confirm_start">İndir</string>
     <string name="cancel">Vazgeç</string>
+
+    <string name="detect_title">Bölümler tespit ediliyor</string>
+    <string name="detect_found">%1$d bölüm bulundu…</string>
+
+    <string name="select_title">Bölümleri seç</string>
+    <string name="select_file_name">Dosya adı</string>
+    <string name="select_file_hint">İndirilenler\'e bu adla kaydedilir. Kobo için .kepub.epub uzantısı önerilir.</string>
+    <string name="select_file_reset">Öner</string>
+    <string name="select_range_from">İlk</string>
+    <string name="select_range_to">Son</string>
+    <string name="select_range_apply">Aralığı seç</string>
+    <string name="select_all">Tümü</string>
+    <string name="select_none">Hiçbiri</string>
+    <string name="select_invert">Tersine çevir</string>
+    <string name="select_count">%1$d / %2$d bölüm seçili</string>
+    <string name="select_download">İndir (%1$d bölüm)</string>
+    <string name="back">Geri</string>
 
     <string name="progress_title">Arşivleniyor</string>
     <string name="progress_detecting">Bölüm bağlantıları tespit ediliyor…</string>
@@ -31,5 +46,6 @@
     <string name="crash_close">Kapat</string>
 
     <string name="saved_success">Başarıyla kaydedildi: İndirilenler/%1$s (%2$d bölüm)</string>
+    <string name="saved_success_skipped">Kaydedildi: İndirilenler/%1$s (%2$d bölüm, %3$d bölüm indirilemedi)</string>
     <string name="error_prefix">Hata: %1$s</string>
 </resources>
