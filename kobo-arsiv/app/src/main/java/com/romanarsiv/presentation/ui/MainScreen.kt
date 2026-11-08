@@ -1,6 +1,15 @@
 package com.romanarsiv.presentation.ui
 
+import android.Manifest
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,6 +52,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
@@ -54,11 +64,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.romanarsiv.R
 import com.romanarsiv.domain.model.ArchiveProgress
 import com.romanarsiv.domain.model.NovelSource
-import com.romanarsiv.presentation.DetectState
-import com.romanarsiv.presentation.DownloadState
+import com.romanarsiv.background.DetectState
+import com.romanarsiv.background.DownloadState
+import com.romanarsiv.background.UiMessage
 import com.romanarsiv.presentation.MainViewModel
 import com.romanarsiv.presentation.SearchState
-import com.romanarsiv.presentation.UiMessage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -74,6 +84,20 @@ fun MainScreen(viewModel: MainViewModel, initialCrashReport: String? = null) {
     val snackbarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
     val keyboard = LocalSoftwareKeyboardController.current
+
+    // Android 13+: arka plan ilerleme/sonuç bildirimleri için izin; ilk uzun işte bir kez sorulur.
+    val notificationPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {}
+    var askedNotifications by rememberSaveable { mutableStateOf(false) }
+    val ensureNotificationPermission = {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && !askedNotifications &&
+            ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+        ) {
+            askedNotifications = true
+            notificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
+    val moveToBackground = { context.findActivity()?.moveTaskToBack(true); Unit }
+    var showHidden by rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         viewModel.messages.collect { message ->
@@ -113,7 +137,12 @@ fun MainScreen(viewModel: MainViewModel, initialCrashReport: String? = null) {
             }
         },
         bottomBar = {
-            if (currentSelection != null) SelectionBottomBar(currentSelection, onDownload = viewModel::startDownload)
+            if (currentSelection != null) {
+                SelectionBottomBar(currentSelection, onDownload = {
+                    ensureNotificationPermission()
+                    viewModel.startDownload()
+                })
+            }
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { padding ->
@@ -180,21 +209,30 @@ fun MainScreen(viewModel: MainViewModel, initialCrashReport: String? = null) {
                 }
                 is SearchState.Error -> Hint(stringResource(R.string.error_prefix, s.message), isError = true)
                 is SearchState.Success ->
-                    if (s.results.isEmpty()) {
+                    if (s.results.isEmpty() && s.hidden.isEmpty()) {
                         Hint(stringResource(R.string.search_empty))
                     } else {
-                        SourceList(s.results, onClick = viewModel::selectSource)
+                        SourceList(
+                            sources = s.results,
+                            hidden = s.hidden,
+                            showHidden = showHidden,
+                            onToggleHidden = { showHidden = !showHidden },
+                            onClick = { source ->
+                                ensureNotificationPermission()
+                                viewModel.selectSource(source)
+                            },
+                        )
                     }
             }
         }
     }
 
     (detectState as? DetectState.Loading)?.let { loading ->
-        DetectDialog(loading, onCancel = viewModel::cancelDetection)
+        DetectDialog(loading, onCancel = viewModel::cancelDetection, onBackground = moveToBackground)
     }
 
     (downloadState as? DownloadState.Loading)?.let { loading ->
-        ProgressDialog(loading, onCancel = viewModel::cancelDownload)
+        ProgressDialog(loading, onCancel = viewModel::cancelDownload, onBackground = moveToBackground)
     }
 
     // İlerleme penceresinin üstünde açılır.
@@ -214,35 +252,87 @@ private fun Hint(text: String, isError: Boolean = false) {
 }
 
 @Composable
-private fun SourceList(sources: List<NovelSource>, onClick: (NovelSource) -> Unit) {
+private fun SourceList(
+    sources: List<NovelSource>,
+    hidden: List<NovelSource>,
+    showHidden: Boolean,
+    onToggleHidden: () -> Unit,
+    onClick: (NovelSource) -> Unit,
+) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(bottom = 16.dp),
     ) {
-        items(sources, key = { it.url }) { source ->
-            Card(onClick = { onClick(source) }, modifier = Modifier.fillMaxWidth()) {
-                Column(Modifier.padding(12.dp)) {
-                    Text(source.title, style = MaterialTheme.typography.titleMedium, maxLines = 2, overflow = TextOverflow.Ellipsis)
-                    Text(source.siteName, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
-                    if (source.snippet.isNotBlank()) {
-                        Spacer(Modifier.height(4.dp))
-                        Text(source.snippet, style = MaterialTheme.typography.bodySmall, maxLines = 3, overflow = TextOverflow.Ellipsis)
-                    }
+        if (sources.isEmpty()) {
+            item(key = "empty") { Hint(stringResource(R.string.search_empty_novel)) }
+        }
+        items(sources, key = { "n:" + it.url }) { source -> SourceCard(source, dimmed = false, onClick = onClick) }
+        if (hidden.isNotEmpty()) {
+            item(key = "hidden-toggle") {
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        source.url,
+                        stringResource(R.string.hidden_results, hidden.size),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.weight(1f),
                     )
+                    TextButton(onClick = onToggleHidden) {
+                        Text(stringResource(if (showHidden) R.string.hidden_hide else R.string.hidden_show))
+                    }
                 }
+            }
+            if (showHidden) {
+                item(key = "hidden-header") {
+                    Text(stringResource(R.string.hidden_header), style = MaterialTheme.typography.labelLarge)
+                }
+                items(hidden, key = { "h:" + it.url }) { source -> SourceCard(source, dimmed = true, onClick = onClick) }
             }
         }
     }
 }
 
 @Composable
-private fun DetectDialog(state: DetectState.Loading, onCancel: () -> Unit) {
+private fun SourceCard(source: NovelSource, dimmed: Boolean, onClick: (NovelSource) -> Unit) {
+    Card(
+        onClick = { onClick(source) },
+        modifier = Modifier.fillMaxWidth().alpha(if (dimmed) 0.6f else 1f),
+    ) {
+        Column(Modifier.padding(12.dp)) {
+            Text(source.title, style = MaterialTheme.typography.titleMedium, maxLines = 2, overflow = TextOverflow.Ellipsis)
+            Text(source.siteName, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+            if (source.snippet.isNotBlank()) {
+                Spacer(Modifier.height(4.dp))
+                Text(source.snippet, style = MaterialTheme.typography.bodySmall, maxLines = 3, overflow = TextOverflow.Ellipsis)
+            }
+            Text(
+                source.url,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+        }
+    }
+}
+
+private tailrec fun Context.findActivity(): Activity? = when (this) {
+    is Activity -> this
+    is ContextWrapper -> baseContext.findActivity()
+    else -> null
+}
+
+@Composable
+private fun BackgroundHint() {
+    Spacer(Modifier.height(12.dp))
+    Text(
+        stringResource(R.string.background_hint),
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
+}
+
+@Composable
+private fun DetectDialog(state: DetectState.Loading, onCancel: () -> Unit, onBackground: () -> Unit) {
     AlertDialog(
         onDismissRequest = {},
         properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false),
@@ -260,15 +350,16 @@ private fun DetectDialog(state: DetectState.Loading, onCancel: () -> Unit) {
                 )
                 Spacer(Modifier.height(12.dp))
                 LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+                BackgroundHint()
             }
         },
-        confirmButton = {},
+        confirmButton = { TextButton(onClick = onBackground) { Text(stringResource(R.string.background_button)) } },
         dismissButton = { TextButton(onClick = onCancel) { Text(stringResource(R.string.cancel)) } },
     )
 }
 
 @Composable
-private fun ProgressDialog(state: DownloadState.Loading, onCancel: () -> Unit) {
+private fun ProgressDialog(state: DownloadState.Loading, onCancel: () -> Unit, onBackground: () -> Unit) {
     val progress = state.progress
     AlertDialog(
         onDismissRequest = {},
@@ -302,9 +393,10 @@ private fun ProgressDialog(state: DownloadState.Loading, onCancel: () -> Unit) {
                 } else {
                     LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
                 }
+                BackgroundHint()
             }
         },
-        confirmButton = {},
+        confirmButton = { TextButton(onClick = onBackground) { Text(stringResource(R.string.background_button)) } },
         dismissButton = { TextButton(onClick = onCancel) { Text(stringResource(R.string.cancel)) } },
     )
 }

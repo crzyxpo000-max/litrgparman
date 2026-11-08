@@ -29,17 +29,22 @@ class NovelRepositoryImpl(
             return listOf(NovelSource(url, UrlUtils.hostOf(url) ?: url, ChapterExtractor.pageTitle(doc)))
         }
 
+        // Önce roman sitelerini öne çıkaran sorgu, sonra kullanıcının yazdığı haliyle.
+        val variants = listOf("$query novel oku", query)
         val results = LinkedHashMap<String, NovelSource>()
         var firstError: IOException? = null
-        for (provider in providers) {
-            try {
-                provider.parse(loader.load(provider.searchUrl(query)))
-                    .filterNot { isNoise(it.siteName) }
-                    .forEach { results.putIfAbsent(UrlUtils.normalize(it.url), it) }
-            } catch (e: IOException) {
-                if (firstError == null) firstError = e
+        search@ for (provider in providers) {
+            for (variant in variants) {
+                try {
+                    provider.parse(loader.load(provider.searchUrl(variant)))
+                        .filterNot { isNoise(it.siteName) }
+                        .forEach { results.putIfAbsent(UrlUtils.normalize(it.url), it) }
+                } catch (e: IOException) {
+                    if (firstError == null) firstError = e
+                    continue@search // bu motor engelliyorsa diğer sorguyu deneme, sonraki motora geç
+                }
+                if (results.size >= ENOUGH_RESULTS) break@search
             }
-            if (results.size >= ENOUGH_RESULTS) break
         }
         if (results.isEmpty() && firstError != null) {
             throw IOException("Arama yapılamadı: ${firstError.message ?: firstError.javaClass.simpleName}", firstError)
@@ -152,7 +157,7 @@ class NovelRepositoryImpl(
     }
 
     private companion object {
-        const val ENOUGH_RESULTS = 15
+        const val ENOUGH_RESULTS = 30
 
         /** Metin barındırmayan, sonuçları kirleten siteler. */
         val NOISE_HOSTS = listOf(

@@ -24,8 +24,10 @@ Android Studio'da `kobo-arsiv/` klasörünü ayrı bir proje olarak açın. `loc
 
 ## Kullanım
 
-1. Roman adını yazıp **Ara**'ya basın (DuckDuckGo, olmazsa Bing). Kopyanın adresini biliyorsanız
-   dizin ya da 1. bölüm URL'sini doğrudan arama kutusuna yapıştırın; arama yapılmaz.
+1. Roman adını yazıp **Ara**'ya basın (DuckDuckGo, olmazsa Bing; "… novel oku" sorgusu da denenir).
+   Yalnızca **roman siteleri** listelenir (bkz. "Roman sitesi filtresi"); elenenler "n sonuç gizlendi ·
+   Göster" ile açılabilir. Kopyanın adresini biliyorsanız dizin ya da 1. bölüm URL'sini doğrudan arama
+   kutusuna yapıştırın; arama ve filtre yapılmaz.
 2. Listeden bir kaynağa dokunun. Bölümler tespit edilir ve **seçim ekranı** açılır:
    - bölümleri tek tek işaretleyin ya da **İlk – Son** alanlarına numara yazıp **Aralığı seç**'e basın
      (ör. 1–50 = ilk cilt); **Tümü / Hiçbiri / Tersine çevir** de var;
@@ -34,6 +36,9 @@ Android Studio'da `kobo-arsiv/` klasörünü ayrı bir proje olarak açın. `loc
      `.kepub.epub` eklenir; `.epub` yazarsanız düz EPUB adı korunur.
 3. **İndir**'e basın. Yalnızca seçilen bölümler indirilir; bitince Snackbar dosya adını gösterir.
    Seçim ekranı açık kalır, başka bir aralığı ayrı dosya olarak da indirebilirsiniz.
+   **Arka planda çalışır:** tespit ve indirme sürerken uygulamadan çıkabilir (ya da **Arka plana al**),
+   ekranı kapatabilirsiniz; ilerleme bildirimde görünür (**İptal** düğmesiyle). İş bitince bildirim gelir;
+   tespit bittiyse bildirime dokununca seçim ekranı açılır. Site doğrulama isterse bildirim sizi çağırır.
 4. Dosyayı USB ile Kobo'nun kök klasörüne kopyalayın. `.kepub.epub` uzantısı sayesinde Kobo kepub
    motorunu kullanır (sayfa sayımı, okuma istatistikleri).
 
@@ -55,6 +60,7 @@ com.romanarsiv
 │   ├── repository/    NovelRepositoryImpl (dizin modu / "sonraki" zinciri)
 │   └── storage/       FileHelper (MediaStore → Download/…kepub.epub)
 ├── epub/              EpubGenerator (EPUB 3 + NCX, UTF-8, koboSpan)
+├── background/        ArchiveJobs (uzun işler), ArchiveService (ön plan hizmeti), ArchiveNotifications
 ├── presentation/      MainViewModel (StateFlow: SearchState, DetectState, SelectionState, DownloadState)
 │   └── ui/            MainScreen (arama), SelectionScreen (bölüm seçimi, adlar), Dialogs (doğrulama, çökme)
 └── di/                AppContainer (elle bağımlılık enjeksiyonu)
@@ -87,6 +93,23 @@ ekran dışı bir **WebView** (gerçek Chromium) ile açılır; doğrulama çoğ
 Geçmezse tam ekran bir tarayıcı penceresi açılır: doğrulamayı geçip **Devam**'a dokunun. Alınan
 çerezler ve WebView'in User-Agent'ı sonraki Jsoup isteklerinde kullanılır; site yine reddederse o
 site için her sayfa WebView ile açılır (daha yavaş ama çalışır). Vazgeç'e basılırsa indirme durur.
+
+### Roman sitesi filtresi (`domain/NovelSiteFilter`)
+
+Sezgisel puan, eşik 2: bilinen roman/fanfik siteleri (Wattpad, Royal Road, Webnovel, AO3 …) +10;
+alan adında `novel`, `wuxia`, `fanfic`, `fiction`, `hikaye` +4; adres yolunda `bolum`, `chapter`,
+`novel`, `/oku` … +2; başlıkta `bölüm`, `chapter`, `novel`, `oku` … +2 (özette +1); başlıkta `izle`,
+`dizi`, `fragman`, `fiyat` … −4 (özette −2). Ansiklopedi, kitap mağazası, sözlük, TV/video siteleri
+doğrudan elenir. Bilinen roman siteleri listenin üstüne çıkar.
+
+### Arka plan (`background/`)
+
+`ArchiveJobs` uygulama ömrü boyunca yaşayan bir kapsamda koşar (ViewModel değil), böylece ekran
+kapanınca iş durmaz. İş başlayınca `ArchiveService` (ön plan hizmeti, tür `dataSync`) açılır: süreci
+canlı tutar, ilerleme bildirimini günceller, ekran kapalıyken ağ için kısmi uyanıklık kilidi (en çok
+3 saat) tutar ve iş bitince kendini kapatır. Android 13+ bildirim izni ilk uzun işte istenir; izin
+verilmese de iş sürer, yalnızca bildirim görünmez. Android 15'in dataSync sınırı (günde 6 saat)
+dolarsa iş iptal edilir.
 
 ### Çökme kaydı
 

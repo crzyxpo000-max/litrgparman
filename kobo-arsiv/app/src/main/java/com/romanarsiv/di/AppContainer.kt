@@ -3,6 +3,8 @@ package com.romanarsiv.di
 import android.content.Context
 import android.webkit.CookieManager
 import android.webkit.WebSettings
+import com.romanarsiv.background.ArchiveJobs
+import com.romanarsiv.background.ArchiveService
 import com.romanarsiv.data.remote.BingSearchProvider
 import com.romanarsiv.data.remote.ChallengeBroker
 import com.romanarsiv.data.remote.DuckDuckGoSearchProvider
@@ -49,4 +51,11 @@ class AppContainer(context: Context) {
     val searchNovel = SearchNovelUseCase(repository)
     val detectChapters = DetectChaptersUseCase(repository)
     val archiveNovel = ArchiveNovelUseCase(repository, generator, storage)
+
+    /** Ekran kapansa da süren işler; iş başlayınca ön plan hizmeti açılır. */
+    val archiveJobs = ArchiveJobs(
+        detectChapters = detectChapters,
+        archiveNovel = archiveNovel,
+        onWorkStarted = { ArchiveService.start(app) },
+    )
 }

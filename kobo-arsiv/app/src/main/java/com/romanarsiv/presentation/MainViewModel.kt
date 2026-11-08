@@ -6,52 +6,35 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.romanarsiv.ArchiverApp
+import com.romanarsiv.background.ArchiveJobs
+import com.romanarsiv.background.DetectResult
+import com.romanarsiv.background.DetectState
+import com.romanarsiv.background.DownloadState
+import com.romanarsiv.background.UiMessage
+import com.romanarsiv.background.describeError
 import com.romanarsiv.data.remote.ChallengeBroker
-import com.romanarsiv.data.remote.ChallengeDeclinedException
-import com.romanarsiv.data.remote.ChallengeRequiredException
 import com.romanarsiv.data.remote.UrlUtils
 import com.romanarsiv.domain.FileNames
-import com.romanarsiv.domain.model.ArchiveProgress
-import com.romanarsiv.domain.model.ArchiveResult
 import com.romanarsiv.domain.model.ChapterRef
 import com.romanarsiv.domain.model.NovelSource
-import com.romanarsiv.domain.usecase.ArchiveEvent
-import com.romanarsiv.domain.usecase.ArchiveNovelUseCase
-import com.romanarsiv.domain.usecase.DetectChaptersUseCase
 import com.romanarsiv.domain.usecase.SearchNovelUseCase
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.jsoup.HttpStatusException
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
-import javax.net.ssl.SSLException
 
 sealed interface SearchState {
     data object Idle : SearchState
     data object Loading : SearchState
-    data class Success(val results: List<NovelSource>) : SearchState
+
+    /** [results] roman siteleri; [hidden] filtrenin eledikleri (istenirse gösterilir). */
+    data class Success(val results: List<NovelSource>, val hidden: List<NovelSource> = emptyList()) : SearchState
     data class Error(val message: String) : SearchState
-}
-
-/** Bölüm tespiti (kaynağa dokunulduktan sonra, seçim ekranından önce). */
-sealed interface DetectState {
-    data object Idle : DetectState
-    data class Loading(val source: NovelSource, val found: Int) : DetectState
-}
-
-sealed interface DownloadState {
-    data object Idle : DownloadState
-    data class Loading(val source: NovelSource, val progress: ArchiveProgress) : DownloadState
-    data class Success(val result: ArchiveResult) : DownloadState
-    data class Error(val message: String) : DownloadState
 }
 
 /** Bölüm seçim ekranı. [selected] 0 tabanlı sıra numaralarıdır. */
@@ -71,16 +54,13 @@ data class SelectionState(
     fun selectedChapters(): List<ChapterRef> = chapters.filterIndexed { i, _ -> i in selected }
 }
 
-/** Tek seferlik bildirimler (Snackbar). */
-sealed interface UiMessage {
-    data class Saved(val result: ArchiveResult) : UiMessage
-    data class Failed(val message: String) : UiMessage
-}
-
+/**
+ * Arama ve seçim ekranı burada; uzun işler (tespit, indirme) [ArchiveJobs]'ta koşar ki uygulama
+ * arka plana alınsa ya da ekran kapansa da sürsün. Bu sınıf yalnızca onların durumunu yansıtır.
+ */
 class MainViewModel(
     private val searchNovel: SearchNovelUseCase,
-    private val detectChapters: DetectChaptersUseCase,
-    private val archiveNovel: ArchiveNovelUseCase,
+    private val jobs: ArchiveJobs,
     private val challengeBroker: ChallengeBroker,
 ) : ViewModel() {
 
@@ -95,25 +75,24 @@ class MainViewModel(
     private val _searchState = MutableStateFlow<SearchState>(SearchState.Idle)
     val searchState: StateFlow<SearchState> = _searchState.asStateFlow()
 
-    private val _detectState = MutableStateFlow<DetectState>(DetectState.Idle)
-    val detectState: StateFlow<DetectState> = _detectState.asStateFlow()
+    val detectState: StateFlow<DetectState> = jobs.detectState
+    val downloadState: StateFlow<DownloadState> = jobs.downloadState
+    val messages: Flow<UiMessage> = jobs.messages
 
     private val _selection = MutableStateFlow<SelectionState?>(null)
     val selection: StateFlow<SelectionState?> = _selection.asStateFlow()
 
-    private val _downloadState = MutableStateFlow<DownloadState>(DownloadState.Idle)
-    val downloadState: StateFlow<DownloadState> = _downloadState.asStateFlow()
-
-    private val _messages = Channel<UiMessage>(Channel.BUFFERED)
-    val messages: Flow<UiMessage> = _messages.receiveAsFlow()
-
     private var lastSearchedQuery = ""
     private var searchJob: Job? = null
-    private var detectJob: Job? = null
-    private var downloadJob: Job? = null
 
-    private val busy: Boolean
-        get() = _downloadState.value is DownloadState.Loading || _detectState.value is DetectState.Loading
+    init {
+        // Tespit uygulama arka plandayken bitmiş olabilir: ekran geri gelince seçim ekranını aç.
+        viewModelScope.launch {
+            jobs.detectResult.filterNotNull().collect {
+                jobs.consumeDetectResult()?.let(::openSelection)
+            }
+        }
+    }
 
     // ------------------------------------------------------------------ arama
 
@@ -123,64 +102,47 @@ class MainViewModel(
 
     fun search() {
         val q = _query.value.trim()
-        if (q.isEmpty() || busy) return
+        if (q.isEmpty() || jobs.isBusy) return
         searchJob?.cancel()
         searchJob = viewModelScope.launch {
             _searchState.value = SearchState.Loading
             _searchState.value = try {
                 val results = searchNovel(q)
                 lastSearchedQuery = q
-                SearchState.Success(results)
+                SearchState.Success(results.novelSites, results.hidden)
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Throwable) {
-                SearchState.Error(describe(e))
+                SearchState.Error(describeError(e))
             }
         }
     }
 
     // ------------------------------------------------------------------ bölüm tespiti
 
-    /** Kaynağa dokunuldu: bölümleri tespit et, sonra seçim ekranını aç. */
+    /** Kaynağa dokunuldu: bölümleri arka planda tespit et; bitince seçim ekranı açılır. */
     fun selectSource(source: NovelSource) {
-        if (busy) return
-        detectJob?.cancel()
-        detectJob = viewModelScope.launch {
-            _detectState.value = DetectState.Loading(source, 0)
-            try {
-                val chapters = detectChapters(source) { found -> _detectState.value = DetectState.Loading(source, found) }
-                val title = suggestedTitle(source)
-                _selection.value = SelectionState(
-                    source = source,
-                    chapters = chapters,
-                    selected = chapters.indices.toSet(),
-                    bookTitle = title,
-                    fileName = FileNames.suggest(title),
-                )
-            } catch (e: CancellationException) {
-                throw e
-            } catch (e: Throwable) {
-                _messages.send(UiMessage.Failed(describe(e)))
-            } finally {
-                _detectState.value = DetectState.Idle
-            }
-        }
+        if (jobs.isBusy) return
+        val title = lastSearchedQuery.takeIf { it.isNotBlank() && !UrlUtils.isHttpUrl(it) } ?: source.title
+        jobs.detect(source, title)
     }
 
-    fun cancelDetection() {
-        detectJob?.cancel()
-        detectJob = null
-        _detectState.value = DetectState.Idle
-    }
+    fun cancelDetection() = jobs.cancelDetection()
 
-    /** Önerilen kitap adı: aranan roman adı; arama bir URL ise sayfa başlığı. */
-    private fun suggestedTitle(source: NovelSource): String =
-        lastSearchedQuery.takeIf { it.isNotBlank() && !UrlUtils.isHttpUrl(it) } ?: source.title
+    private fun openSelection(result: DetectResult) {
+        _selection.value = SelectionState(
+            source = result.source,
+            chapters = result.chapters,
+            selected = result.chapters.indices.toSet(),
+            bookTitle = result.suggestedTitle,
+            fileName = FileNames.suggest(result.suggestedTitle),
+        )
+    }
 
     // ------------------------------------------------------------------ seçim ekranı
 
     fun closeSelection() {
-        if (_downloadState.value is DownloadState.Loading) return
+        if (jobs.downloadState.value is DownloadState.Loading) return
         _selection.value = null
     }
 
@@ -214,58 +176,11 @@ class MainViewModel(
 
     fun startDownload() {
         val s = _selection.value ?: return
-        if (!s.canDownload || busy) return
-        downloadJob?.cancel()
-        downloadJob = viewModelScope.launch {
-            val chapters = s.selectedChapters()
-            _downloadState.value = DownloadState.Loading(
-                s.source,
-                ArchiveProgress.FetchingChapter(0, chapters.size, chapters.first().title),
-            )
-            try {
-                archiveNovel(chapters, s.bookTitle, s.fileName).collect { event ->
-                    when (event) {
-                        is ArchiveEvent.Progress -> _downloadState.value = DownloadState.Loading(s.source, event.progress)
-                        is ArchiveEvent.Completed -> {
-                            _downloadState.value = DownloadState.Success(event.result)
-                            _messages.send(UiMessage.Saved(event.result))
-                        }
-                    }
-                }
-            } catch (e: CancellationException) {
-                _downloadState.value = DownloadState.Idle
-                throw e
-            } catch (e: Throwable) {
-                val message = describe(e)
-                _downloadState.value = DownloadState.Error(message)
-                _messages.send(UiMessage.Failed(message))
-            }
-        }
+        if (!s.canDownload) return
+        jobs.download(s.source, s.selectedChapters(), s.bookTitle, s.fileName)
     }
 
-    fun cancelDownload() {
-        downloadJob?.cancel()
-        downloadJob = null
-        _downloadState.value = DownloadState.Idle
-    }
-
-    private fun describe(e: Throwable): String = when (e) {
-        is UnknownHostException -> "İnternet bağlantısı yok ya da site bulunamadı."
-        is SocketTimeoutException -> "Sunucu zamanında yanıt vermedi."
-        is SSLException -> "Güvenli bağlantı kurulamadı."
-        is HttpStatusException -> {
-            val host = UrlUtils.hostOf(e.url) ?: e.url
-            if (e.statusCode == 403 || e.statusCode == 503) {
-                "$host erişimi reddetti (HTTP ${e.statusCode}). Site otomatik erişimi engelliyor olabilir."
-            } else {
-                "$host HTTP ${e.statusCode} hatası döndürdü."
-            }
-        }
-        is ChallengeRequiredException -> "${e.message}. Doğrulama sayfası geçilemedi."
-        is ChallengeDeclinedException -> e.message ?: "Doğrulama tamamlanmadı."
-        is OutOfMemoryError -> "Bellek yetmedi; kitap çok büyük olabilir."
-        else -> e.message?.takeIf { it.isNotBlank() }?.let { "$it (${e.javaClass.simpleName})" } ?: e.javaClass.simpleName
-    }
+    fun cancelDownload() = jobs.cancelDownload()
 
     companion object {
         internal fun rangeIndices(from: Int, to: Int, size: Int): Set<Int> {
@@ -279,7 +194,7 @@ class MainViewModel(
             initializer {
                 val app = this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as ArchiverApp
                 val c = app.container
-                MainViewModel(c.searchNovel, c.detectChapters, c.archiveNovel, c.challengeBroker)
+                MainViewModel(c.searchNovel, c.archiveJobs, c.challengeBroker)
             }
         }
     }

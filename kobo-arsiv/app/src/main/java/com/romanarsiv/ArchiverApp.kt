@@ -1,6 +1,7 @@
 package com.romanarsiv
 
 import android.app.Application
+import com.romanarsiv.background.ArchiveNotifications
 import com.romanarsiv.di.AppContainer
 
 class ArchiverApp : Application() {
@@ -10,6 +11,7 @@ class ArchiverApp : Application() {
     override fun onCreate() {
         super.onCreate()
         CrashLog.install(this)
+        ArchiveNotifications.createChannels(this)
         container = AppContainer(this)
     }
 }

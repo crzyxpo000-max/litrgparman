@@ -15,8 +15,8 @@ android {
         // MediaStore.Downloads (İndirilenler klasörüne izinsiz yazma) Android 10 / API 29 ile geldi.
         minSdk = 29
         targetSdk = 36
-        versionCode = 3
-        versionName = "1.1.0"
+        versionCode = 4
+        versionName = "1.2.0"
     }
 
     buildTypes {
@@ -48,6 +48,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    // Arka plandaki iş bittiğinde uygulama ön planda mı (Snackbar) yoksa değil mi (bildirim)?
+    implementation(libs.androidx.lifecycle.process)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.activity.compose)
 
