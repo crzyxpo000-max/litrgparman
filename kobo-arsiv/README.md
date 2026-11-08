@@ -100,14 +100,17 @@ Sezgisel puan, eşik 2: bilinen roman/fanfik siteleri (Wattpad, Royal Road, Webn
 alan adında `novel`, `wuxia`, `fanfic`, `fiction`, `hikaye` +4; adres yolunda `bolum`, `chapter`,
 `novel`, `/oku` … +2; başlıkta `bölüm`, `chapter`, `novel`, `oku` … +2 (özette +1); başlıkta `izle`,
 `dizi`, `fragman`, `fiyat` … −4 (özette −2). Ansiklopedi, kitap mağazası, sözlük, TV/video siteleri
-doğrudan elenir. Bilinen roman siteleri listenin üstüne çıkar.
+doğrudan elenir. Manga/manhwa/webtoon/anime siteleri, wiki'ler (Fandom, `/wiki/` yolları) ve
+veritabanı/dizin siteleri (NovelUpdates, MyAnimeList …) da elenir. Bilinen roman siteleri listenin
+üstüne çıkar.
 
 ### Arka plan (`background/`)
 
 `ArchiveJobs` uygulama ömrü boyunca yaşayan bir kapsamda koşar (ViewModel değil), böylece ekran
 kapanınca iş durmaz. İş başlayınca `ArchiveService` (ön plan hizmeti, tür `dataSync`) açılır: süreci
 canlı tutar, ilerleme bildirimini günceller, ekran kapalıyken ağ için kısmi uyanıklık kilidi (en çok
-3 saat) tutar ve iş bitince kendini kapatır. Android 13+ bildirim izni ilk uzun işte istenir; izin
+3 saat) tutar ve iş bitince kendini kapatır. İndirme bitince (uygulama açık olsa da) "İndirme
+bitti" bildirimi gönderilir. Android 13+ bildirim izni ilk uzun işte istenir; izin
 verilmese de iş sürer, yalnızca bildirim görünmez. Android 15'in dataSync sınırı (günde 6 saat)
 dolarsa iş iptal edilir.
 

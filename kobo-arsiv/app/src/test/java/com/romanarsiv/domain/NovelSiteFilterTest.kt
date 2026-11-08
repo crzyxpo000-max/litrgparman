@@ -35,6 +35,19 @@ class NovelSiteFilterTest {
     }
 
     @Test
+    fun `manga, webtoon, wiki ve dizin siteleri elenir`() {
+        assertFalse(NovelSiteFilter.isNovelSite(src("https://mangadex.org/title/1/x", "X - Read Chapter 1")))
+        assertFalse(NovelSiteFilter.isNovelSite(src("https://mangakakalot.example/x", "X Chapter 12")))
+        assertFalse(NovelSiteFilter.isNovelSite(src("https://ornek.com/manga/x/bolum-3", "X 3. Bölüm Oku")))
+        assertFalse(NovelSiteFilter.isNovelSite(src("https://novelsitesi.com/x", "X Manhwa 5. Bölüm")))
+        assertFalse(NovelSiteFilter.isNovelSite(src("https://x.fandom.com/wiki/Karakter", "Karakter | X Wiki")))
+        assertFalse(NovelSiteFilter.isNovelSite(src("https://www.novelupdates.com/series/x/", "X - Novel Updates")))
+        assertFalse(NovelSiteFilter.isNovelSite(src("https://ornek.org/wiki/X", "X romanı")))
+        // Roman siteleri etkilenmez
+        assertTrue(NovelSiteFilter.isNovelSite(src("https://novelsitesi.com/x/bolum-3", "X 3. Bölüm Oku")))
+    }
+
+    @Test
     fun `arama sonuçları süzülür, bilinen roman siteleri üste çıkar, URL araması süzülmez`() = runTest {
         val all = listOf(
             src("https://www.kitapyurdu.com/kitap/x", "Kitap"),

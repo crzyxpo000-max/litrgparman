@@ -89,8 +89,8 @@ class ArchiveService : Service() {
     private fun appInForeground(): Boolean =
         ProcessLifecycleOwner.get().lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)
 
+    /** İndirme bitince her durumda bildirim (uygulama açık olsa da). */
     private fun notifyDownloadResult(state: DownloadState) {
-        if (appInForeground()) return // Snackbar zaten gösteriyor.
         val (title, text) = when (state) {
             is DownloadState.Success -> getString(R.string.notif_saved_title) to
                 getString(R.string.saved_success, state.result.fileName, state.result.chapterCount)
