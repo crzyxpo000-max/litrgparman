@@ -1,5 +1,6 @@
 package com.romanarsiv.data.remote
 
+import com.romanarsiv.domain.AppException
 import android.annotation.SuppressLint
 import android.content.Context
 import android.webkit.CookieManager
@@ -18,7 +19,6 @@ import org.json.JSONArray
 import org.jsoup.HttpStatusException
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import java.io.IOException
 import kotlin.coroutines.resume
 
 /**
@@ -63,7 +63,7 @@ class WebViewPageLoader(
                 }
 
                 override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
-                    if (request.isForMainFrame) state.error = error.description?.toString() ?: "Bağlantı hatası"
+                    if (request.isForMainFrame) state.error = error.description?.toString() ?: "net error"
                 }
             }
             view.stopLoading()
@@ -73,7 +73,7 @@ class WebViewPageLoader(
             var challenge = false
             while (true) {
                 delay(POLL_MS)
-                state.error?.let { throw IOException("Sayfa açılamadı: $it") }
+                state.error?.let { throw AppException(AppException.Reason.PAGE_FAILED, it) }
                 if (state.finished) {
                     challenge = isChallenge(view.eval(PROBE_JS))
                     if (!challenge) {
@@ -85,7 +85,7 @@ class WebViewPageLoader(
                 if (System.currentTimeMillis() > deadline) {
                     view.stopLoading()
                     if (challenge || state.mainStatus in FallbackPageLoader.BLOCK_CODES) throw ChallengeRequiredException(url)
-                    throw IOException("Sayfa zamanında yüklenmedi: ${UrlUtils.hostOf(url) ?: url}")
+                    throw AppException(AppException.Reason.PAGE_TIMEOUT, UrlUtils.hostOf(url) ?: url)
                 }
             }
 
@@ -93,7 +93,7 @@ class WebViewPageLoader(
             // Tanınmayan bir doğrulama sayfası da olabilir: kullanıcıya gösterilsin.
             if (state.mainStatus in FallbackPageLoader.BLOCK_CODES) throw ChallengeRequiredException(url)
             if (state.mainStatus >= 400) {
-                throw HttpStatusException("Tarayıcıda da HTTP ${state.mainStatus}", state.mainStatus, finalUrl)
+                throw HttpStatusException("HTTP ${state.mainStatus} (browser)", state.mainStatus, finalUrl)
             }
             val html = view.eval("document.documentElement.outerHTML")
             CookieManager.getInstance().flush()

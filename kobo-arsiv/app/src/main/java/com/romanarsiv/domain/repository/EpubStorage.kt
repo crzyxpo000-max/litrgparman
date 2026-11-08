@@ -9,4 +9,5 @@ interface EpubStorage {
     suspend fun save(fileName: String, bytes: ByteArray): SavedFile
 }
 
-data class SavedFile(val fileName: String, val location: String)
+/** [uri] dosyanın açılıp paylaşılabileceği içerik adresidir (Android: MediaStore); bilinmiyorsa null. */
+data class SavedFile(val fileName: String, val location: String, val uri: String? = null)

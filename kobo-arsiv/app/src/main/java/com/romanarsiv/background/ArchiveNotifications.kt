@@ -17,13 +17,18 @@ import com.romanarsiv.R
 import com.romanarsiv.data.remote.UrlUtils
 import com.romanarsiv.domain.model.ArchiveProgress
 
-/** Arka plan işinin bildirimleri: süren iş (ön plan hizmeti) ve sonuç. */
+/** Arka plan işinin bildirimleri: süren işler (ön plan hizmeti) ve her indirmenin sonucu. */
 object ArchiveNotifications {
     const val CHANNEL_PROGRESS = "arsivleme"
     const val CHANNEL_RESULT = "sonuc"
     const val ID_PROGRESS = 1
-    const val ID_RESULT = 2
+    const val ID_DETECT_RESULT = 2
+    private const val ID_RESULT_BASE = 1000
 
+    /** Bildirime dokununca İndirilenler sekmesi açılsın. */
+    const val EXTRA_OPEN_DOWNLOADS = "com.romanarsiv.extra.OPEN_DOWNLOADS"
+
+    /** Kanal adları dil değişince de güncellensin diye her açılışta ve dil değişiminde çağrılır. */
     fun createChannels(context: Context) {
         val manager = context.getSystemService(NotificationManager::class.java) ?: return
         manager.createNotificationChannel(
@@ -39,10 +44,14 @@ object ArchiveNotifications {
         )
     }
 
-    private fun openApp(context: Context): PendingIntent = PendingIntent.getActivity(
+    fun resultId(taskId: Long): Int = ID_RESULT_BASE + (taskId % 100_000).toInt()
+
+    private fun openApp(context: Context, downloads: Boolean): PendingIntent = PendingIntent.getActivity(
         context,
-        0,
-        Intent(context, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
+        if (downloads) 2 else 0,
+        Intent(context, MainActivity::class.java)
+            .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            .putExtra(EXTRA_OPEN_DOWNLOADS, downloads),
         PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
     )
 
@@ -53,8 +62,10 @@ object ArchiveNotifications {
         PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
     )
 
-    /** Süren işin bildirimi; doğrulama bekleniyorsa kullanıcıyı uygulamaya çağırır. */
-    fun progress(context: Context, detect: DetectState, download: DownloadState, challengeUrl: String?): Notification {
+    /** Süren işlerin tek bildirimi; doğrulama bekleniyorsa kullanıcıyı uygulamaya çağırır. */
+    fun progress(context: Context, detect: DetectState, tasks: List<DownloadTask>, challengeUrl: String?): Notification {
+        val running = tasks.filter { it.status == DownloadStatus.RUNNING }
+        val queued = tasks.count { it.status == DownloadStatus.QUEUED }
         val builder = NotificationCompat.Builder(context, CHANNEL_PROGRESS)
             .setSmallIcon(R.drawable.ic_stat_book)
             .setOngoing(true)
@@ -62,49 +73,67 @@ object ArchiveNotifications {
             .setSilent(true)
             .setCategory(NotificationCompat.CATEGORY_PROGRESS)
             .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
-            .setContentIntent(openApp(context))
-            .addAction(0, context.getString(R.string.cancel), cancelAction(context))
+            .setContentIntent(openApp(context, downloads = running.isNotEmpty() || queued > 0))
+            .addAction(0, context.getString(R.string.cancel_all), cancelAction(context))
 
         when {
-            download is DownloadState.Loading -> {
-                builder.setContentTitle(context.getString(R.string.notif_downloading, download.bookTitle))
-                when (val p = download.progress) {
-                    is ArchiveProgress.FetchingChapter -> {
-                        builder.setContentText(context.getString(R.string.progress_chapter, p.index, p.total))
-                        builder.setSubText(p.title.take(60))
-                        builder.setProgress(p.total.coerceAtLeast(1), p.index, false)
-                    }
-                    ArchiveProgress.BuildingEpub -> builder.setContentText(context.getString(R.string.progress_building)).setProgress(0, 0, true)
-                    ArchiveProgress.Saving -> builder.setContentText(context.getString(R.string.progress_saving)).setProgress(0, 0, true)
-                    ArchiveProgress.DetectingChapters -> builder.setContentText(context.getString(R.string.progress_detecting)).setProgress(0, 0, true)
-                }
+            running.size == 1 -> {
+                val task = running.first()
+                builder.setContentTitle(context.getString(R.string.notif_downloading, task.bookTitle))
+                builder.setContentText(progressLine(context, task.progress))
+                if (queued > 0) builder.setSubText(context.getString(R.string.notif_queued, queued))
+                val p = task.progress
+                if (p is ArchiveProgress.FetchingChapter && p.total > 0) builder.setProgress(p.total, p.index, false)
+                else builder.setProgress(0, 0, true)
+            }
+            running.size > 1 -> {
+                builder.setContentTitle(context.getString(R.string.notif_downloading_many, running.size))
+                val style = NotificationCompat.InboxStyle()
+                running.forEach { style.addLine("${it.bookTitle} · ${progressLine(context, it.progress)}") }
+                if (queued > 0) style.setSummaryText(context.getString(R.string.notif_queued, queued))
+                builder.setStyle(style)
+                builder.setContentText(running.joinToString(" · ") { it.bookTitle })
+                val total = running.sumOf { it.requestedChapters }
+                val done = running.sumOf { (it.progress as? ArchiveProgress.FetchingChapter)?.index ?: it.requestedChapters }
+                builder.setProgress(total.coerceAtLeast(1), done.coerceAtMost(total), false)
             }
             detect is DetectState.Loading -> {
                 builder.setContentTitle(context.getString(R.string.detect_title))
                 builder.setContentText(
-                    if (detect.found > 0) context.getString(R.string.detect_found, detect.found) else detect.source.siteName,
+                    if (detect.found > 0) context.resources.getQuantityString(R.plurals.detect_found, detect.found, detect.found) else detect.source.siteName,
                 )
                 builder.setProgress(0, 0, true)
             }
+            queued > 0 -> builder.setContentTitle(context.getString(R.string.notif_queued, queued))
             else -> builder.setContentTitle(context.getString(R.string.app_name))
         }
 
         if (challengeUrl != null) {
             // Doğrulama yalnızca uygulama içinde geçilebilir: dikkat çekecek metin.
             builder.setContentText(context.getString(R.string.notif_challenge, UrlUtils.hostOf(challengeUrl) ?: challengeUrl))
+            builder.setContentIntent(openApp(context, downloads = false))
             builder.setSilent(false).setOnlyAlertOnce(false)
         }
         return builder.build()
     }
 
-    fun result(context: Context, title: String, text: String): Notification =
+    fun progressLine(context: Context, progress: ArchiveProgress?): String = when (progress) {
+        is ArchiveProgress.FetchingChapter ->
+            if (progress.total > 0) context.getString(R.string.progress_chapter, progress.index, progress.total)
+            else context.getString(R.string.progress_chapter_open, progress.index)
+        ArchiveProgress.BuildingEpub -> context.getString(R.string.progress_building)
+        ArchiveProgress.Saving -> context.getString(R.string.progress_saving)
+        ArchiveProgress.DetectingChapters, null -> context.getString(R.string.progress_starting)
+    }
+
+    fun result(context: Context, title: String, text: String, downloads: Boolean): Notification =
         NotificationCompat.Builder(context, CHANNEL_RESULT)
             .setSmallIcon(R.drawable.ic_stat_book)
             .setContentTitle(title)
             .setContentText(text)
             .setStyle(NotificationCompat.BigTextStyle().bigText(text))
             .setAutoCancel(true)
-            .setContentIntent(openApp(context))
+            .setContentIntent(openApp(context, downloads))
             .build()
 
     /** Android 13+ bildirim izni yoksa sessizce vazgeçer (iş yine sürer). */

@@ -12,16 +12,21 @@ import com.romanarsiv.data.remote.FallbackPageLoader
 import com.romanarsiv.data.remote.JsoupPageLoader
 import com.romanarsiv.data.remote.WebViewPageLoader
 import com.romanarsiv.data.repository.NovelRepositoryImpl
+import com.romanarsiv.data.storage.DownloadHistoryFile
 import com.romanarsiv.data.storage.FileHelper
 import com.romanarsiv.domain.repository.NovelRepository
 import com.romanarsiv.domain.usecase.ArchiveNovelUseCase
 import com.romanarsiv.domain.usecase.DetectChaptersUseCase
 import com.romanarsiv.domain.usecase.SearchNovelUseCase
 import com.romanarsiv.epub.EpubGenerator
+import com.romanarsiv.settings.AppPreferences
+import java.io.File
 
 /** Elle bağımlılık enjeksiyonu; tek uygulama, tek ekran için Hilt'e gerek yok. */
 class AppContainer(context: Context) {
     private val app = context.applicationContext
+
+    val preferences = AppPreferences(app)
 
     /** WebView doğrulama sayfasını arayüze taşır. */
     val challengeBroker = ChallengeBroker()
@@ -56,6 +61,9 @@ class AppContainer(context: Context) {
     val archiveJobs = ArchiveJobs(
         detectChapters = detectChapters,
         archiveNovel = archiveNovel,
+        history = DownloadHistoryFile(File(app.filesDir, "indirilenler.json")),
         onWorkStarted = { ArchiveService.start(app) },
+        maxParallel = { preferences.current.maxParallel },
+        author = { preferences.current.authorName.trim().ifEmpty { com.romanarsiv.domain.AppConfig.AUTHOR_NAME } },
     )
 }

@@ -14,4 +14,6 @@ data class ArchiveResult(
     val location: String,
     val chapterCount: Int,
     val skippedChapters: Int,
+    /** Açma/paylaşma için içerik adresi (MediaStore); bilinmiyorsa null. */
+    val uri: String? = null,
 )

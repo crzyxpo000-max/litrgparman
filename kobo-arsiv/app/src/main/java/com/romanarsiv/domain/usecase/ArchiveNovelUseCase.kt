@@ -13,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.withContext
-import java.io.IOException
+import com.romanarsiv.domain.AppException
 
 sealed interface ArchiveEvent {
     data class Progress(val progress: ArchiveProgress) : ArchiveEvent
@@ -36,7 +36,7 @@ class ArchiveNovelUseCase(
         fileName: String,
         author: String = AppConfig.AUTHOR_NAME,
     ): Flow<ArchiveEvent> = channelFlow {
-        require(chapters.isNotEmpty()) { "En az bir bölüm seçin." }
+        require(chapters.isNotEmpty()) { "No chapters selected." }
         val title = bookTitle.trim().ifEmpty { "Kitap" }
 
         val fetched = ArrayList<NovelChapter>(chapters.size)
@@ -46,7 +46,7 @@ class ArchiveNovelUseCase(
             if (chapter == null) skipped++ else fetched += chapter
             send(ArchiveEvent.Progress(ArchiveProgress.FetchingChapter(i + 1, chapters.size, chapter?.title ?: ref.title)))
         }
-        if (fetched.isEmpty()) throw IOException("Seçilen bölümlerin hiçbiri indirilemedi.")
+        if (fetched.isEmpty()) throw AppException(AppException.Reason.NOTHING_DOWNLOADED)
 
         send(ArchiveEvent.Progress(ArchiveProgress.BuildingEpub))
         val bytes = withContext(Dispatchers.Default) { generator.generate(fetched, title, author) }
@@ -61,6 +61,7 @@ class ArchiveNovelUseCase(
                     location = saved.location,
                     chapterCount = fetched.size,
                     skippedChapters = skipped,
+                    uri = saved.uri,
                 ),
             ),
         )

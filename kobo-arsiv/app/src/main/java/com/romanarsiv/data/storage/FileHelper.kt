@@ -1,5 +1,6 @@
 package com.romanarsiv.data.storage
 
+import com.romanarsiv.domain.AppException
 import android.content.ContentValues
 import android.content.Context
 import android.os.Environment
@@ -8,7 +9,6 @@ import com.romanarsiv.domain.repository.EpubStorage
 import com.romanarsiv.domain.repository.SavedFile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.io.IOException
 
 /**
  * EPUB'ı MediaStore ile `Download/` klasörüne verilen adla yazar (API 29+, izin gerekmez).
@@ -28,10 +28,10 @@ class FileHelper(private val context: Context) : EpubStorage {
             put(MediaStore.MediaColumns.IS_PENDING, 1)
         }
 
-        val uri = resolver.insert(collection, values) ?: throw IOException("İndirilenler klasöründe dosya oluşturulamadı.")
+        val uri = resolver.insert(collection, values) ?: throw AppException(AppException.Reason.FILE_CREATE_FAILED)
         try {
             resolver.openOutputStream(uri, "w")?.use { it.write(bytes) }
-                ?: throw IOException("Dosyaya yazılamadı.")
+                ?: throw AppException(AppException.Reason.FILE_WRITE_FAILED)
             resolver.update(uri, ContentValues().apply { put(MediaStore.MediaColumns.IS_PENDING, 0) }, null, null)
         } catch (e: Exception) {
             resolver.delete(uri, null, null)
@@ -43,7 +43,7 @@ class FileHelper(private val context: Context) : EpubStorage {
             if (c.moveToFirst()) c.getString(0) else null
         } ?: fileName
 
-        SavedFile(fileName = actualName, location = "${Environment.DIRECTORY_DOWNLOADS}/$actualName")
+        SavedFile(fileName = actualName, location = "${Environment.DIRECTORY_DOWNLOADS}/$actualName", uri = uri.toString())
     }
 
     companion object {

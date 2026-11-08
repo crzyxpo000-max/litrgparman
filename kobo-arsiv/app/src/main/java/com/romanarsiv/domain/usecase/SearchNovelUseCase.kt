@@ -13,7 +13,7 @@ data class SearchResults(
 class SearchNovelUseCase(private val repository: NovelRepository) {
     suspend operator fun invoke(query: String): SearchResults {
         val trimmed = query.trim()
-        require(trimmed.isNotEmpty()) { "Arama metni boş olamaz." }
+        require(trimmed.isNotEmpty()) { "Empty search query." }
         val results = repository.search(trimmed)
         // Doğrudan URL yapıştırıldıysa kullanıcı siteyi zaten seçmiştir: süzme.
         if (isUrl(trimmed)) return SearchResults(results, emptyList())

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Türkçe. Varsayılan (İngilizce): values/strings.xml. Yeni metin = iki dosyaya birden. -->
+<resources>
+    <!-- Sekmeler -->
+    <string name="tab_search">Ara</string>
+    <string name="tab_downloads">İndirilenler</string>
+    <string name="tab_settings">Ayarlar</string>
+
+    <!-- Arama -->
+    <string name="search_hint">Roman adı ya da bölüm/dizin URL\'si</string>
+    <string name="search_button">Ara</string>
+    <string name="clear">Temizle</string>
+    <string name="search_intro_title">Bir roman bulun</string>
+    <string name="search_intro">Romanın adını yazıp arayın. Bir kaynağa dokunduğunuzda bölümler toplanır; istediklerinizi seçin, Kobo için EPUB olarak İndirilenler klasörüne kaydedilsin.</string>
+    <string name="searching">Aranıyor…</string>
+    <string name="search_empty_title">Sonuç yok</string>
+    <string name="search_empty">Başka bir yazımla deneyin ya da romanın URL\'sini doğrudan arama kutusuna yapıştırın.</string>
+    <string name="search_empty_novel">Roman sitesi bulunamadı.</string>
+    <string name="search_result_count">Bulunan kaynak: %1$d</string>
+    <string name="hidden_results">%1$d sonuç roman sitesi olmadığı için gizlendi.</string>
+    <string name="hidden_show">Göster</string>
+    <string name="hidden_hide">Gizle</string>
+    <string name="hidden_header">Roman sitesi olmayabilecek sonuçlar</string>
+
+    <!-- Bölüm tespiti -->
+    <string name="detect_title">Bölümler tespit ediliyor</string>
+
+    <!-- Seçim -->
+    <string name="select_title">Bölümleri seç</string>
+    <string name="confirm_book_title">Kitap adı</string>
+    <string name="confirm_author">Yazar: %1$s</string>
+    <string name="select_file_name">Dosya adı</string>
+    <string name="select_file_hint">İndirilenler\'e bu adla kaydedilir. Kobo için .kepub.epub uzantısı önerilir.</string>
+    <string name="select_file_reset">Öner</string>
+    <string name="select_range_from">İlk</string>
+    <string name="select_range_to">Son</string>
+    <string name="select_range_apply">Aralığı seç</string>
+    <string name="select_all">Tümü</string>
+    <string name="select_none">Hiçbiri</string>
+    <string name="select_invert">Tersine çevir</string>
+    <string name="select_count">%1$d / %2$d bölüm seçili</string>
+    <string name="download_queued">İndirilenlere eklendi: %1$s</string>
+    <string name="back">Geri</string>
+    <string name="cancel">Vazgeç</string>
+    <string name="cancel_all">Tümünü iptal et</string>
+
+    <!-- İndirilenler -->
+    <string name="downloads_empty_title">Henüz indirme yok</string>
+    <string name="downloads_empty">Bir roman arayın, bölümleri seçip İndir\'e dokunun. Birden fazla indirme aynı anda sürebilir; hepsi burada görünür.</string>
+    <string name="downloads_go_search">Roman bul</string>
+    <string name="downloads_active">Sürenler (%1$d)</string>
+    <string name="downloads_finished">Bitenler</string>
+    <string name="downloads_clear">Bitenleri temizle</string>
+    <string name="downloads_done_skipped">%1$d bölüm, %2$d atlandı</string>
+    <string name="downloads_remove">Listeden kaldır</string>
+    <string name="downloads_delete_file">Dosyayı sil</string>
+    <string name="status_queued">Sırada bekliyor…</string>
+    <string name="status_failed">Başarısız</string>
+    <string name="status_cancelled">İptal edildi</string>
+    <string name="action_open">Aç</string>
+    <string name="action_share">Paylaş</string>
+    <string name="action_retry">Yeniden dene</string>
+    <string name="action_show">Göster</string>
+    <string name="more">Diğer</string>
+    <string name="no_reader">Bu cihazda EPUB açabilen bir uygulama yok.</string>
+    <string name="delete_title">Dosya silinsin mi?</string>
+    <string name="delete_text">%1$s İndirilenler klasöründen silinecek.</string>
+    <string name="delete_confirm">Sil</string>
+    <string name="delete_done">Dosya silindi.</string>
+    <string name="delete_failed">Dosya silinemedi. Zaten silinmiş ya da başka bir uygulamaya ait olabilir.</string>
+
+    <!-- İlerleme -->
+    <string name="progress_starting">Başlıyor…</string>
+    <string name="progress_chapter">Bölüm %1$d / %2$d</string>
+    <string name="progress_chapter_open">Bölüm %1$d (sonraki bağlantılar izleniyor)</string>
+    <string name="progress_building">EPUB oluşturuluyor…</string>
+    <string name="progress_saving">İndirilenler klasörüne kaydediliyor…</string>
+
+    <!-- Doğrulama / çökme -->
+    <string name="challenge_title">%1$s doğrulaması</string>
+    <string name="challenge_continue">Devam</string>
+    <string name="challenge_hint">Site tarayıcı doğrulaması istiyor. Sayfa açılınca (gerekirse kutucuğu işaretleyin) romanın sayfasını görüyorsanız Devam\'a dokunun.</string>
+    <string name="crash_title">Uygulama son seferde kapandı</string>
+    <string name="crash_hint">Aşağıdaki kaydı kopyalayıp iletirseniz nedeni bulunabilir.</string>
+    <string name="crash_copy">Kopyala</string>
+    <string name="crash_close">Kapat</string>
+
+    <!-- Bildirimler -->
+    <string name="channel_progress">Süren indirmeler</string>
+    <string name="channel_progress_desc">Bölüm tespiti ve indirmeler sürerken ilerlemeyi gösterir.</string>
+    <string name="channel_result">İndirme sonuçları</string>
+    <string name="channel_result_desc">Her indirme bittiğinde ya da başarısız olduğunda haber verir.</string>
+    <string name="notif_downloading">İndiriliyor: %1$s</string>
+    <string name="notif_downloading_many">%1$d indirme sürüyor</string>
+    <string name="notif_queued">Sırada %1$d indirme</string>
+    <string name="notif_challenge">%1$s doğrulama istiyor; dokunun ve doğrulamayı geçin.</string>
+    <string name="notif_saved_title">İndirme bitti</string>
+    <string name="notif_failed_title">İndirme başarısız: %1$s</string>
+    <string name="notif_detected_title">Bölümler hazır</string>
+    <string name="notif_detected_text">%1$d bölüm bulundu. Seçmek için dokunun.</string>
+    <string name="saved_success">Kaydedildi: İndirilenler/%1$s (%2$d bölüm)</string>
+    <string name="saved_success_skipped">Kaydedildi: İndirilenler/%1$s (%2$d bölüm, %3$d bölüm indirilemedi)</string>
+    <string name="error_prefix">Hata: %1$s</string>
+
+    <!-- Hatalar -->
+    <string name="err_no_internet">İnternet bağlantısı yok ya da site bulunamadı.</string>
+    <string name="err_timeout">Sunucu zamanında yanıt vermedi.</string>
+    <string name="err_ssl">Güvenli bağlantı kurulamadı.</string>
+    <string name="err_http_blocked">%1$s erişimi reddetti (HTTP %2$d). Site otomatik erişimi engelliyor olabilir.</string>
+    <string name="err_http">%1$s bir HTTP %2$d hatası döndürdü.</string>
+    <string name="err_challenge_required">%1$s tarayıcı doğrulaması istiyor; doğrulama sayfası geçilemedi.</string>
+    <string name="err_challenge_declined">%1$s doğrulaması tamamlanmadı; site tarayıcı dışından erişime izin vermiyor.</string>
+    <string name="err_search_failed">Arama yapılamadı: %1$s</string>
+    <string name="err_no_chapters">Bu sayfada bölüm bağlantısı ya da okunabilir metin bulunamadı.</string>
+    <string name="err_nothing_downloaded">Seçilen bölümlerin hiçbiri indirilemedi.</string>
+    <string name="err_file_create">İndirilenler klasöründe dosya oluşturulamadı.</string>
+    <string name="err_file_write">Dosyaya yazılamadı.</string>
+    <string name="err_page_failed">Sayfa açılamadı: %1$s</string>
+    <string name="err_page_timeout">Sayfa zamanında yüklenmedi: %1$s</string>
+    <string name="err_memory">Bellek yetmedi; kitap çok büyük olabilir.</string>
+
+    <!-- Ayarlar -->
+    <string name="settings_appearance">Görünüm</string>
+    <string name="settings_theme">Tema</string>
+    <string name="theme_system">Sistem</string>
+    <string name="theme_light">Aydınlık</string>
+    <string name="theme_dark">Gece</string>
+    <string name="settings_amoled">Saf siyah (AMOLED)</string>
+    <string name="amoled_auto">Otomatik</string>
+    <string name="amoled_on">Açık</string>
+    <string name="amoled_off">Kapalı</string>
+    <string name="amoled_detected_oled">Bu ekran OLED/AMOLED görünüyor.</string>
+    <string name="amoled_detected_lcd">Bu ekran LCD görünüyor.</string>
+    <string name="amoled_state_black">Gece modu şu an saf siyah kullanıyor.</string>
+    <string name="amoled_state_gray">Gece modu şu an koyu gri kullanıyor.</string>
+    <string name="amoled_state_light">Şu an aydınlık tema açık; bu ayar gece modunda geçerlidir.</string>
+    <string name="settings_dynamic">Duvar kağıdı renkleri</string>
+    <string name="settings_dynamic_help">Uygulamanın renklerini duvar kağıdınızdan alır (Material You).</string>
+    <string name="settings_language">Dil</string>
+    <string name="language_system">Sistem</string>
+    <string name="settings_language_help">Sistem, telefonun dilini izler: Türkçeyse Türkçe, değilse İngilizce.</string>
+    <string name="settings_downloads">İndirme</string>
+    <string name="settings_parallel">Aynı anda indirme</string>
+    <string name="settings_parallel_help">Fazlası sırada bekler. Aynı sitedeki indirmeler yine sırayla istek atar; site yorulmaz.</string>
+    <string name="settings_author">EPUB yazar adı</string>
+    <string name="settings_author_help">Her yeni EPUB\'a yazar olarak yazılır.</string>
+    <string name="settings_storage">Depolama</string>
+    <string name="settings_storage_help">Kitaplar telefonun İndirilenler klasörüne kaydedilir. USB ile Kobo\'nun kök klasörüne kopyalayın; .kepub.epub uzantısı sayesinde Kobo kepub motorunu kullanır.</string>
+    <string name="settings_version">Sürüm %1$s</string>
+    <plurals name="select_download">
+        <item quantity="one">İndir (%1$d bölüm)</item>
+        <item quantity="other">İndir (%1$d bölüm)</item>
+    </plurals>
+    <plurals name="downloads_meta">
+        <item quantity="one">%1$s · %2$d bölüm</item>
+        <item quantity="other">%1$s · %2$d bölüm</item>
+    </plurals>
+    <plurals name="downloads_done">
+        <item quantity="one">%1$d bölüm</item>
+        <item quantity="other">%1$d bölüm</item>
+    </plurals>
+    <plurals name="detect_found">
+        <item quantity="one">%1$d bölüm bulundu…</item>
+        <item quantity="other">%1$d bölüm bulundu…</item>
+    </plurals>
+    <plurals name="detect_found_site">
+        <item quantity="one">%1$s · %2$d bölüm bulundu</item>
+        <item quantity="other">%1$s · %2$d bölüm bulundu</item>
+    </plurals>
+</resources>

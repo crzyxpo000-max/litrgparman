@@ -9,15 +9,16 @@ import com.romanarsiv.ArchiverApp
 import com.romanarsiv.background.ArchiveJobs
 import com.romanarsiv.background.DetectResult
 import com.romanarsiv.background.DetectState
-import com.romanarsiv.background.DownloadState
+import com.romanarsiv.background.DownloadTask
 import com.romanarsiv.background.UiMessage
-import com.romanarsiv.background.describeError
 import com.romanarsiv.data.remote.ChallengeBroker
 import com.romanarsiv.data.remote.UrlUtils
 import com.romanarsiv.domain.FileNames
 import com.romanarsiv.domain.model.ChapterRef
 import com.romanarsiv.domain.model.NovelSource
 import com.romanarsiv.domain.usecase.SearchNovelUseCase
+import com.romanarsiv.settings.AppPreferences
+import com.romanarsiv.settings.UiPrefs
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
@@ -34,7 +35,7 @@ sealed interface SearchState {
 
     /** [results] roman siteleri; [hidden] filtrenin eledikleri (istenirse gösterilir). */
     data class Success(val results: List<NovelSource>, val hidden: List<NovelSource> = emptyList()) : SearchState
-    data class Error(val message: String) : SearchState
+    data class Error(val error: Throwable) : SearchState
 }
 
 /** Bölüm seçim ekranı. [selected] 0 tabanlı sıra numaralarıdır. */
@@ -54,6 +55,9 @@ data class SelectionState(
     fun selectedChapters(): List<ChapterRef> = chapters.filterIndexed { i, _ -> i in selected }
 }
 
+/** Alt gezinme çubuğunun sekmeleri. */
+enum class Tab { SEARCH, DOWNLOADS, SETTINGS }
+
 /**
  * Arama ve seçim ekranı burada; uzun işler (tespit, indirme) [ArchiveJobs]'ta koşar ki uygulama
  * arka plana alınsa ya da ekran kapansa da sürsün. Bu sınıf yalnızca onların durumunu yansıtır.
@@ -62,7 +66,19 @@ class MainViewModel(
     private val searchNovel: SearchNovelUseCase,
     private val jobs: ArchiveJobs,
     private val challengeBroker: ChallengeBroker,
+    private val preferences: AppPreferences,
 ) : ViewModel() {
+
+    val prefs: StateFlow<UiPrefs> = preferences.prefs
+
+    fun updatePrefs(change: (UiPrefs) -> UiPrefs) = preferences.update(change)
+
+    private val _tab = MutableStateFlow(Tab.SEARCH)
+    val tab: StateFlow<Tab> = _tab.asStateFlow()
+
+    fun selectTab(tab: Tab) {
+        _tab.value = tab
+    }
 
     /** Kullanıcının tarayıcıda geçmesi gereken doğrulama sayfası; yoksa null. */
     val challengeUrl: StateFlow<String?> = challengeBroker.pendingUrl
@@ -76,7 +92,7 @@ class MainViewModel(
     val searchState: StateFlow<SearchState> = _searchState.asStateFlow()
 
     val detectState: StateFlow<DetectState> = jobs.detectState
-    val downloadState: StateFlow<DownloadState> = jobs.downloadState
+    val tasks: StateFlow<List<DownloadTask>> = jobs.tasks
     val messages: Flow<UiMessage> = jobs.messages
 
     private val _selection = MutableStateFlow<SelectionState?>(null)
@@ -102,7 +118,7 @@ class MainViewModel(
 
     fun search() {
         val q = _query.value.trim()
-        if (q.isEmpty() || jobs.isBusy) return
+        if (q.isEmpty()) return
         searchJob?.cancel()
         searchJob = viewModelScope.launch {
             _searchState.value = SearchState.Loading
@@ -113,7 +129,7 @@ class MainViewModel(
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Throwable) {
-                SearchState.Error(describeError(e))
+                SearchState.Error(e)
             }
         }
     }
@@ -122,7 +138,7 @@ class MainViewModel(
 
     /** Kaynağa dokunuldu: bölümleri arka planda tespit et; bitince seçim ekranı açılır. */
     fun selectSource(source: NovelSource) {
-        if (jobs.isBusy) return
+        if (jobs.isDetecting) return
         val title = lastSearchedQuery.takeIf { it.isNotBlank() && !UrlUtils.isHttpUrl(it) } ?: source.title
         jobs.detect(source, title)
     }
@@ -142,7 +158,6 @@ class MainViewModel(
     // ------------------------------------------------------------------ seçim ekranı
 
     fun closeSelection() {
-        if (jobs.downloadState.value is DownloadState.Loading) return
         _selection.value = null
     }
 
@@ -174,13 +189,20 @@ class MainViewModel(
 
     // ------------------------------------------------------------------ indirme
 
-    fun startDownload() {
-        val s = _selection.value ?: return
-        if (!s.canDownload) return
-        jobs.download(s.source, s.selectedChapters(), s.bookTitle, s.fileName)
+    /** Seçimi İndirilenler kuyruğuna ekler; seçim ekranı açık kalır (başka bir aralık da eklenebilir). */
+    fun startDownload(): Boolean {
+        val s = _selection.value ?: return false
+        if (!s.canDownload) return false
+        return jobs.download(s.source, s.selectedChapters(), s.bookTitle, s.fileName) != null
     }
 
-    fun cancelDownload() = jobs.cancelDownload()
+    fun cancelDownload(id: Long) = jobs.cancelDownload(id)
+
+    fun retryDownload(id: Long) = jobs.retry(id)
+
+    fun removeDownload(id: Long) = jobs.remove(id)
+
+    fun clearFinished() = jobs.clearFinished()
 
     companion object {
         internal fun rangeIndices(from: Int, to: Int, size: Int): Set<Int> {
@@ -194,7 +216,7 @@ class MainViewModel(
             initializer {
                 val app = this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as ArchiverApp
                 val c = app.container
-                MainViewModel(c.searchNovel, c.archiveJobs, c.challengeBroker)
+                MainViewModel(c.searchNovel, c.archiveJobs, c.challengeBroker, c.preferences)
             }
         }
     }

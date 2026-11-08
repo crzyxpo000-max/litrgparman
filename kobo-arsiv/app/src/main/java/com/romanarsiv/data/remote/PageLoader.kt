@@ -1,5 +1,6 @@
 package com.romanarsiv.data.remote
 
+import com.romanarsiv.domain.AppException
 import com.romanarsiv.domain.AppConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -62,7 +63,7 @@ class JsoupPageLoader(
             }
             delay(1_000L * attempt * attempt)
         }
-        throw lastError ?: IOException("Sayfa alınamadı: $url")
+        throw lastError ?: AppException(AppException.Reason.PAGE_FAILED, url)
     }
 
     private suspend fun throttle(host: String) {

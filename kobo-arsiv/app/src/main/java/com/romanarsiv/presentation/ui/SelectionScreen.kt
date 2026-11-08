@@ -9,12 +9,15 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -31,13 +34,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.romanarsiv.R
-import com.romanarsiv.domain.AppConfig
 import com.romanarsiv.presentation.SelectionState
 
 /** Seçim ekranının eylemleri; ViewModel fonksiyonlarına bağlanır. */
@@ -53,7 +56,7 @@ class SelectionActions(
 )
 
 @Composable
-fun SelectionContent(state: SelectionState, actions: SelectionActions, modifier: Modifier = Modifier) {
+fun SelectionContent(state: SelectionState, authorName: String, actions: SelectionActions, modifier: Modifier = Modifier) {
     val keyboard = LocalSoftwareKeyboardController.current
     val total = state.chapters.size
     var rangeFrom by rememberSaveable(state.source.url) { mutableStateOf("1") }
@@ -64,8 +67,8 @@ fun SelectionContent(state: SelectionState, actions: SelectionActions, modifier:
         contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp),
     ) {
         item(key = "fields") {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text(state.source.siteName, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+            ElevatedCard(Modifier.fillMaxWidth()) {
+            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 OutlinedTextField(
                     value = state.bookTitle,
                     onValueChange = actions.onBookTitleChange,
@@ -88,10 +91,11 @@ fun SelectionContent(state: SelectionState, actions: SelectionActions, modifier:
                     },
                 )
                 Text(
-                    stringResource(R.string.confirm_author, AppConfig.AUTHOR_NAME),
+                    stringResource(R.string.confirm_author, authorName),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
+            }
             }
         }
 
@@ -124,10 +128,14 @@ fun SelectionContent(state: SelectionState, actions: SelectionActions, modifier:
                         enabled = total > 0,
                     ) { Text(stringResource(R.string.select_range_apply)) }
                 }
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    TextButton(onClick = actions.onSelectAll) { Text(stringResource(R.string.select_all)) }
-                    TextButton(onClick = actions.onSelectNone) { Text(stringResource(R.string.select_none)) }
-                    TextButton(onClick = actions.onInvert) { Text(stringResource(R.string.select_invert)) }
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.padding(top = 4.dp),
+                ) {
+                    AssistChip(onClick = actions.onSelectAll, label = { Text(stringResource(R.string.select_all)) })
+                    AssistChip(onClick = actions.onSelectNone, label = { Text(stringResource(R.string.select_none)) })
+                    AssistChip(onClick = actions.onInvert, label = { Text(stringResource(R.string.select_invert)) })
                 }
                 Text(
                     stringResource(R.string.select_count, state.selectedCount, total),
@@ -162,13 +170,15 @@ fun SelectionContent(state: SelectionState, actions: SelectionActions, modifier:
 @Composable
 fun SelectionBottomBar(state: SelectionState, onDownload: () -> Unit) {
     Surface(tonalElevation = 3.dp) {
-        Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
+        Column(Modifier.fillMaxWidth().navigationBarsPadding().padding(horizontal = 16.dp, vertical = 8.dp)) {
             Button(
                 onClick = onDownload,
                 enabled = state.canDownload,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().height(52.dp),
             ) {
-                Text(stringResource(R.string.select_download, state.selectedCount))
+                androidx.compose.material3.Icon(AppIcons.Download, contentDescription = null)
+                Spacer(Modifier.width(8.dp))
+                Text(pluralStringResource(R.plurals.select_download, state.selectedCount, state.selectedCount))
             }
             Spacer(Modifier.height(4.dp))
         }

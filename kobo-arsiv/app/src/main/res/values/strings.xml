@@ -1,69 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- English (default). Turkish: values-tr/strings.xml. Add every new string to both files. -->
 <resources>
-    <color name="launcher_background">#2E5E4E</color>
+    <string name="app_name" translatable="false">Roman Arşivi</string>
 
-    <string name="app_name">Roman Arşivi</string>
-    <string name="search_hint">Roman adı ya da doğrudan bölüm/dizin URL\'si</string>
-    <string name="search_button">Ara</string>
-    <string name="search_empty">Sonuç bulunamadı. Başka bir arama deneyin ya da URL\'yi doğrudan yapıştırın.</string>
-    <string name="search_intro">Romanın adını yazıp arayın; bir kaynağa dokunduğunuzda bölümler toplanır ve Kobo için EPUB olarak İndirilenler klasörüne kaydedilir.</string>
-    <string name="searching">Aranıyor…</string>
+    <!-- Tabs -->
+    <string name="tab_search">Search</string>
+    <string name="tab_downloads">Downloads</string>
+    <string name="tab_settings">Settings</string>
 
-    <string name="confirm_book_title">Kitap adı</string>
-    <string name="confirm_author">Yazar: %1$s</string>
-    <string name="cancel">Vazgeç</string>
+    <!-- Search -->
+    <string name="search_hint">Novel title, or a chapter/index URL</string>
+    <string name="search_button">Search</string>
+    <string name="clear">Clear</string>
+    <string name="search_intro_title">Find a novel</string>
+    <string name="search_intro">Type the novel\'s title and search. Tap a source to collect its chapters, pick the ones you want, and they are saved as a Kobo-ready EPUB in your Downloads folder.</string>
+    <string name="searching">Searching…</string>
+    <string name="search_empty_title">No results</string>
+    <string name="search_empty">Try a different spelling, or paste the novel\'s URL straight into the search box.</string>
+    <string name="search_empty_novel">No novel sites found.</string>
+    <string name="search_result_count">Sources found: %1$d</string>
+    <string name="hidden_results">%1$d results were hidden because they don\'t look like novel sites.</string>
+    <string name="hidden_show">Show</string>
+    <string name="hidden_hide">Hide</string>
+    <string name="hidden_header">Results that may not be novel sites</string>
 
-    <string name="detect_title">Bölümler tespit ediliyor</string>
-    <string name="detect_found">%1$d bölüm bulundu…</string>
+    <!-- Chapter detection -->
+    <string name="detect_title">Finding chapters</string>
 
-    <string name="select_title">Bölümleri seç</string>
-    <string name="select_file_name">Dosya adı</string>
-    <string name="select_file_hint">İndirilenler\'e bu adla kaydedilir. Kobo için .kepub.epub uzantısı önerilir.</string>
-    <string name="select_file_reset">Öner</string>
-    <string name="select_range_from">İlk</string>
-    <string name="select_range_to">Son</string>
-    <string name="select_range_apply">Aralığı seç</string>
-    <string name="select_all">Tümü</string>
-    <string name="select_none">Hiçbiri</string>
-    <string name="select_invert">Tersine çevir</string>
-    <string name="select_count">%1$d / %2$d bölüm seçili</string>
-    <string name="select_download">İndir (%1$d bölüm)</string>
-    <string name="back">Geri</string>
+    <!-- Selection -->
+    <string name="select_title">Choose chapters</string>
+    <string name="confirm_book_title">Book title</string>
+    <string name="confirm_author">Author: %1$s</string>
+    <string name="select_file_name">File name</string>
+    <string name="select_file_hint">Saved under this name in Downloads. The .kepub.epub extension is recommended for Kobo.</string>
+    <string name="select_file_reset">Suggest</string>
+    <string name="select_range_from">First</string>
+    <string name="select_range_to">Last</string>
+    <string name="select_range_apply">Select range</string>
+    <string name="select_all">All</string>
+    <string name="select_none">None</string>
+    <string name="select_invert">Invert</string>
+    <string name="select_count">%1$d of %2$d chapters selected</string>
+    <string name="download_queued">Added to Downloads: %1$s</string>
+    <string name="back">Back</string>
+    <string name="cancel">Cancel</string>
+    <string name="cancel_all">Cancel all</string>
 
-    <string name="progress_title">Arşivleniyor</string>
-    <string name="progress_detecting">Bölüm bağlantıları tespit ediliyor…</string>
-    <string name="progress_chapter">Bölüm %1$d / %2$d</string>
-    <string name="progress_chapter_open">Bölüm %1$d (sonraki bağlantılar izleniyor)</string>
-    <string name="progress_building">EPUB oluşturuluyor…</string>
-    <string name="progress_saving">İndirilenler klasörüne kaydediliyor…</string>
+    <!-- Downloads -->
+    <string name="downloads_empty_title">No downloads yet</string>
+    <string name="downloads_empty">Search for a novel, pick its chapters and tap Download. Several downloads can run at the same time; you\'ll find them all here.</string>
+    <string name="downloads_go_search">Find a novel</string>
+    <string name="downloads_active">In progress (%1$d)</string>
+    <string name="downloads_finished">Finished</string>
+    <string name="downloads_clear">Clear finished</string>
+    <string name="downloads_done_skipped">%1$d chapters, %2$d skipped</string>
+    <string name="downloads_remove">Remove from list</string>
+    <string name="downloads_delete_file">Delete file</string>
+    <string name="status_queued">Waiting in queue…</string>
+    <string name="status_failed">Failed</string>
+    <string name="status_cancelled">Cancelled</string>
+    <string name="action_open">Open</string>
+    <string name="action_share">Share</string>
+    <string name="action_retry">Retry</string>
+    <string name="action_show">Show</string>
+    <string name="more">More</string>
+    <string name="no_reader">No app on this device can open EPUB files.</string>
+    <string name="delete_title">Delete file?</string>
+    <string name="delete_text">%1$s will be deleted from your Downloads folder.</string>
+    <string name="delete_confirm">Delete</string>
+    <string name="delete_done">File deleted.</string>
+    <string name="delete_failed">The file could not be deleted. It may already be gone, or another app owns it.</string>
 
-    <string name="challenge_title">%1$s doğrulaması</string>
-    <string name="challenge_continue">Devam</string>
-    <string name="challenge_hint">Site tarayıcı doğrulaması istiyor. Sayfa açılınca (gerekirse kutucuğu işaretleyin) romanın sayfasını görüyorsanız Devam\'a dokunun.</string>
-    <string name="crash_title">Uygulama son seferde kapandı</string>
-    <string name="crash_hint">Aşağıdaki kaydı kopyalayıp iletirseniz nedeni bulunabilir.</string>
-    <string name="crash_copy">Kopyala</string>
-    <string name="crash_close">Kapat</string>
+    <!-- Progress -->
+    <string name="progress_starting">Starting…</string>
+    <string name="progress_chapter">Chapter %1$d of %2$d</string>
+    <string name="progress_chapter_open">Chapter %1$d (following \"next\" links)</string>
+    <string name="progress_building">Building EPUB…</string>
+    <string name="progress_saving">Saving to Downloads…</string>
 
-    <string name="channel_progress">Süren arşivleme</string>
-    <string name="channel_progress_desc">Bölüm tespiti ve indirme sürerken ilerlemeyi gösterir.</string>
-    <string name="channel_result">Arşivleme sonuçları</string>
-    <string name="channel_result_desc">Uygulama arka plandayken biten işlerin sonucu.</string>
-    <string name="notif_downloading">Arşivleniyor: %1$s</string>
-    <string name="notif_challenge">%1$s doğrulama istiyor; dokunun ve doğrulamayı geçin.</string>
-    <string name="notif_saved_title">İndirme bitti</string>
-    <string name="notif_failed_title">İndirme başarısız</string>
-    <string name="notif_detected_title">Bölümler hazır</string>
-    <string name="notif_detected_text">%1$d bölüm bulundu. Seçmek için dokunun.</string>
-    <string name="background_hint">Uygulamadan çıkabilirsiniz; iş arka planda sürer ve bildirimden izlenir.</string>
-    <string name="background_button">Arka plana al</string>
-    <string name="hidden_results">%1$d sonuç roman sitesi olmadığı için gizlendi.</string>
-    <string name="hidden_show">Göster</string>
-    <string name="hidden_hide">Gizle</string>
-    <string name="hidden_header">Roman sitesi olmayabilecek sonuçlar</string>
-    <string name="search_empty_novel">Roman sitesi bulunamadı.</string>
+    <!-- Site check / crash -->
+    <string name="challenge_title">%1$s check</string>
+    <string name="challenge_continue">Continue</string>
+    <string name="challenge_hint">This site wants a browser check. When the page loads (tick the box if asked) and you can see the novel\'s page, tap Continue.</string>
+    <string name="crash_title">The app closed unexpectedly last time</string>
+    <string name="crash_hint">Copy the log below and send it along so the cause can be found.</string>
+    <string name="crash_copy">Copy</string>
+    <string name="crash_close">Close</string>
 
-    <string name="saved_success">Başarıyla kaydedildi: İndirilenler/%1$s (%2$d bölüm)</string>
-    <string name="saved_success_skipped">Kaydedildi: İndirilenler/%1$s (%2$d bölüm, %3$d bölüm indirilemedi)</string>
-    <string name="error_prefix">Hata: %1$s</string>
+    <!-- Notifications -->
+    <string name="channel_progress">Downloads in progress</string>
+    <string name="channel_progress_desc">Shows progress while chapters are found and downloaded.</string>
+    <string name="channel_result">Download results</string>
+    <string name="channel_result_desc">Lets you know when each download finishes or fails.</string>
+    <string name="notif_downloading">Downloading: %1$s</string>
+    <string name="notif_downloading_many">%1$d downloads in progress</string>
+    <string name="notif_queued">%1$d waiting in queue</string>
+    <string name="notif_challenge">%1$s wants a check. Tap to open it.</string>
+    <string name="notif_saved_title">Download finished</string>
+    <string name="notif_failed_title">Download failed: %1$s</string>
+    <string name="notif_detected_title">Chapters ready</string>
+    <string name="notif_detected_text">%1$d chapters found. Tap to choose.</string>
+    <string name="saved_success">Saved: Downloads/%1$s (%2$d chapters)</string>
+    <string name="saved_success_skipped">Saved: Downloads/%1$s (%2$d chapters, %3$d could not be downloaded)</string>
+    <string name="error_prefix">Error: %1$s</string>
+
+    <!-- Errors -->
+    <string name="err_no_internet">No internet connection, or the site could not be found.</string>
+    <string name="err_timeout">The server did not respond in time.</string>
+    <string name="err_ssl">A secure connection could not be made.</string>
+    <string name="err_http_blocked">%1$s refused access (HTTP %2$d). The site may block automated access.</string>
+    <string name="err_http">%1$s returned an HTTP %2$d error.</string>
+    <string name="err_challenge_required">%1$s wants a browser check that could not be passed.</string>
+    <string name="err_challenge_declined">The %1$s check was not completed; the site does not allow access outside a browser.</string>
+    <string name="err_search_failed">Search failed: %1$s</string>
+    <string name="err_no_chapters">No chapter links or readable text were found on this page.</string>
+    <string name="err_nothing_downloaded">None of the selected chapters could be downloaded.</string>
+    <string name="err_file_create">The file could not be created in Downloads.</string>
+    <string name="err_file_write">The file could not be written.</string>
+    <string name="err_page_failed">The page could not be opened: %1$s</string>
+    <string name="err_page_timeout">The page did not load in time: %1$s</string>
+    <string name="err_memory">Ran out of memory; the book may be too large.</string>
+
+    <!-- Settings -->
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_theme">Theme</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="settings_amoled">Pure black (AMOLED)</string>
+    <string name="amoled_auto">Auto</string>
+    <string name="amoled_on">On</string>
+    <string name="amoled_off">Off</string>
+    <string name="amoled_detected_oled">This screen looks like OLED/AMOLED.</string>
+    <string name="amoled_detected_lcd">This screen looks like LCD.</string>
+    <string name="amoled_state_black">Dark mode uses true black right now.</string>
+    <string name="amoled_state_gray">Dark mode uses dark gray right now.</string>
+    <string name="amoled_state_light">Light theme is on right now; this applies in dark mode.</string>
+    <string name="settings_dynamic">Wallpaper colors</string>
+    <string name="settings_dynamic_help">Take the app\'s colors from your wallpaper (Material You).</string>
+    <string name="settings_language">Language</string>
+    <string name="language_system">System</string>
+    <string name="settings_language_help">System follows your phone\'s language: Turkish if it is Turkish, English otherwise.</string>
+    <string name="settings_downloads">Downloads</string>
+    <string name="settings_parallel">Simultaneous downloads</string>
+    <string name="settings_parallel_help">The rest wait in the queue. Downloads from the same site still take turns, so the site is not flooded.</string>
+    <string name="settings_author">EPUB author name</string>
+    <string name="settings_author_help">Written into every new EPUB as its author.</string>
+    <string name="settings_storage">Storage</string>
+    <string name="settings_storage_help">Books are saved to your phone\'s Downloads folder. Copy them to the Kobo\'s root folder over USB; the .kepub.epub extension makes Kobo use its kepub engine.</string>
+    <string name="settings_version">Version %1$s</string>
+    <plurals name="select_download">
+        <item quantity="one">Download (%1$d chapter)</item>
+        <item quantity="other">Download (%1$d chapters)</item>
+    </plurals>
+    <plurals name="downloads_meta">
+        <item quantity="one">%1$s · %2$d chapter</item>
+        <item quantity="other">%1$s · %2$d chapters</item>
+    </plurals>
+    <plurals name="downloads_done">
+        <item quantity="one">%1$d chapter</item>
+        <item quantity="other">%1$d chapters</item>
+    </plurals>
+    <plurals name="detect_found">
+        <item quantity="one">%1$d chapter found…</item>
+        <item quantity="other">%1$d chapters found…</item>
+    </plurals>
+    <plurals name="detect_found_site">
+        <item quantity="one">%1$s · %2$d chapter found</item>
+        <item quantity="other">%1$s · %2$d chapters found</item>
+    </plurals>
 </resources>

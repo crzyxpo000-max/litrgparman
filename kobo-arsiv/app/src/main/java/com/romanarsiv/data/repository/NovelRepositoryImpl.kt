@@ -1,5 +1,6 @@
 package com.romanarsiv.data.repository
 
+import com.romanarsiv.domain.AppException
 import com.romanarsiv.data.remote.ChapterExtractor
 import com.romanarsiv.data.remote.ChapterLink
 import com.romanarsiv.data.remote.PageLoader
@@ -47,7 +48,7 @@ class NovelRepositoryImpl(
             }
         }
         if (results.isEmpty() && firstError != null) {
-            throw IOException("Arama yapılamadı: ${firstError.message ?: firstError.javaClass.simpleName}", firstError)
+            throw AppException(AppException.Reason.SEARCH_FAILED, firstError.message ?: firstError.javaClass.simpleName, firstError)
         }
         return results.values.toList()
     }
@@ -75,7 +76,7 @@ class NovelRepositoryImpl(
             else -> emptyList()
         }
         if (refs.isEmpty()) {
-            throw IOException("Bu sayfada bölüm bağlantısı ya da okunabilir metin bulunamadı.")
+            throw AppException(AppException.Reason.NO_CHAPTERS_FOUND)
         }
         return refs
     }

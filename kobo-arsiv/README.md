@@ -20,7 +20,7 @@ Android Studio'da `kobo-arsiv/` klasörünü ayrı bir proje olarak açın. `loc
 (`sdk.dir=…`) git dışıdır. En düşük Android sürümü 10 (API 29): İndirilenler'e izinsiz yazmak için
 `MediaStore.Downloads` gerekir.
 
-**Yazar adı:** `app/src/main/java/com/romanarsiv/domain/AppConfig.kt` → `AUTHOR_NAME`. Kendi adınızı yazın.
+**Yazar adı:** Ayarlar → İndirme → **EPUB yazar adı** (varsayılanı `domain/AppConfig.kt` → `AUTHOR_NAME`).
 
 ## Kullanım
 
@@ -34,16 +34,36 @@ Android Studio'da `kobo-arsiv/` klasörünü ayrı bir proje olarak açın. `loc
    - **Kitap adı** EPUB'ın içindeki başlıktır; **Dosya adı** İndirilenler'deki addır. Dosya adı kitap
      adından önerilir, elle değiştirince bağımsız kalır (**Öner** ile geri döner). Uzantı yazmazsanız
      `.kepub.epub` eklenir; `.epub` yazarsanız düz EPUB adı korunur.
-3. **İndir**'e basın. Yalnızca seçilen bölümler indirilir; bitince Snackbar dosya adını gösterir.
-   Seçim ekranı açık kalır, başka bir aralığı ayrı dosya olarak da indirebilirsiniz.
-   **Arka planda çalışır:** tespit ve indirme sürerken uygulamadan çıkabilir (ya da **Arka plana al**),
-   ekranı kapatabilirsiniz; ilerleme bildirimde görünür (**İptal** düğmesiyle). İş bitince bildirim gelir;
-   tespit bittiyse bildirime dokununca seçim ekranı açılır. Site doğrulama isterse bildirim sizi çağırır.
+3. **İndir**'e basın. İndirme **İndirilenler** sekmesine eklenir; açılır pencere yoktur, ekran
+   kilitlenmez. Seçim ekranı açık kalır: başka bir aralığı (ya da başka bir romanı) hemen ekleyebilirsiniz.
+   - **Aynı anda birden fazla indirme** sürer (varsayılan 3, Ayarlar'da 1–5); fazlası **sırada** bekler.
+     Aynı siteden indirmeler yine site başına istek aralığıyla sırayla istek atar.
+   - Her satırda ilerleme çubuğu ve o anki bölüm; **×** ile tek tek iptal. Bitenlerde **Aç**, **Paylaş**,
+     ⋮ menüsünde **Listeden kaldır** / **Dosyayı sil**; başarısız ya da iptal edilenlerde **Yeniden dene**.
+   - Biten indirmelerin listesi kalıcıdır (`files/indirilenler.json`); uygulama yeniden açılınca görünür.
+   - Bölüm tespiti de pencere açmaz: arama ekranının üstünde bir kartta sürer (Vazgeç düğmesiyle).
+   **Arka planda çalışır:** uygulamadan çıkabilir, ekranı kapatabilirsiniz; tek bir bildirim tüm süren
+   indirmeleri gösterir (**Tümünü iptal et**). Her indirme bitince ayrı bildirim gelir; dokununca
+   İndirilenler açılır. Site doğrulama isterse bildirim sizi çağırır.
 4. Dosyayı USB ile Kobo'nun kök klasörüne kopyalayın. `.kepub.epub` uzantısı sayesinde Kobo kepub
    motorunu kullanır (sayfa sayımı, okuma istatistikleri).
 
 Not: Sayfa bir bölümün kendisiyse ("sonraki" zinciri) bölüm listesi önceden bilinemez; tespit sırasında
 bölümler sırayla okunur, bu yüzden bu adım dizin sayfasına göre daha uzun sürer.
+
+## Görünüm ve dil
+
+- **Tema:** Sistem · Aydınlık · Gece (Ayarlar → Görünüm). Android 12+'da duvar kağıdı renkleri (Material You)
+  açılıp kapatılabilir.
+- **Saf siyah (AMOLED):** Otomatik · Açık · Kapalı. Otomatikte ekran OLED görünüyorsa gece modu saf siyah,
+  değilse koyu gri olur. Android'de ekran türünü söyleyen bir API yok; `settings/ScreenInfo.kt` iki işarete
+  bakar: always-on display desteği (`config_dozeAlwaysOnDisplayAvailable`) ve HDR destekli panel. Algılanan
+  tür Ayarlar'da yazar; yanılırsa elle seçin.
+- **Dil:** Sistem · Türkçe · English. Sistem, telefon Türkçeyse Türkçe, değilse İngilizcedir. Seçim
+  uygulama içinde anında uygulanır (Activity yeniden oluşur; bildirimler ve kanal adları da o dilde).
+  Metinler `res/values/strings.xml` (İngilizce, varsayılan) ve `res/values-tr/strings.xml` (Türkçe);
+  yeni metin iki dosyaya birden yazılır. Hata metinleri de buradadır: veri katmanı dile bağlı olmayan
+  `AppException(reason)` fırlatır, `background/ErrorMessages.kt` onu seçili dile çevirir.
 
 ## Mimari
 
@@ -58,11 +78,14 @@ com.romanarsiv
 │   ├── remote/        PageLoader (Jsoup, site başına istek aralığı, yeniden deneme),
 │   │                  SearchProvider (DuckDuckGo HTML, Bing), ChapterExtractor (sezgiler), UrlUtils
 │   ├── repository/    NovelRepositoryImpl (dizin modu / "sonraki" zinciri)
-│   └── storage/       FileHelper (MediaStore → Download/…kepub.epub)
+│   └── storage/       FileHelper (MediaStore → Download/…kepub.epub), DownloadHistoryFile (İndirilenler listesi)
 ├── epub/              EpubGenerator (EPUB 3 + NCX, UTF-8, koboSpan)
-├── background/        ArchiveJobs (uzun işler), ArchiveService (ön plan hizmeti), ArchiveNotifications
-├── presentation/      MainViewModel (StateFlow: SearchState, DetectState, SelectionState, DownloadState)
-│   └── ui/            MainScreen (arama), SelectionScreen (bölüm seçimi, adlar), Dialogs (doğrulama, çökme)
+├── background/        ArchiveJobs (tespit + indirme kuyruğu, paralel), ArchiveService (ön plan hizmeti),
+│                      ArchiveNotifications, JobStates (DownloadTask, DownloadHistory)
+├── settings/          AppPreferences (tema, AMOLED, dil, paralel indirme, yazar), ScreenInfo (OLED tahmini)
+├── presentation/      MainViewModel (StateFlow: Tab, SearchState, DetectState, SelectionState, görevler)
+│   └── ui/            MainScreen (sekmeler + arama), DownloadsScreen, SettingsScreen, SelectionScreen,
+│                      Dialogs (doğrulama, çökme), Theme (aydınlık/gece/saf siyah), AppIcons, FileActions
 └── di/                AppContainer (elle bağımlılık enjeksiyonu)
 ```
 
