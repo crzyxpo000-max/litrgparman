@@ -53,8 +53,10 @@ class Perde1Test {
             if (entry.choices.size < 3) problems += "${e.id}: giriş sahnesinde ${entry.choices.size} seçenek (en az 3)"
             val choices = eventScenes(e.entry).flatMap { content.scenes[it]?.choices ?: emptyList() }
             if (choices.none { it.requires != null || it.showWhen != null }) problems += "${e.id}: koşullu seçenek yok"
-            if (choices.none { c -> c.allEffects().any { it is Effect.PlantSeed } }) problems += "${e.id}: tohum eken seçenek yok"
-            if (choices.none { c -> c.allEffects().any { it is Effect.ShiftRelation } }) problems += "${e.id}: NPC ilişki eksenini değiştiren seçenek yok"
+            // NPC'siz keşif olayları (Paket 3, `kesif` etiketli bölge anları) tohum ve ilişki kuralından muaf: kısa yer anları.
+            val exploration = "kesif" in e.tags && e.npcs.isEmpty() && e.id.startsWith("k1_")
+            if (!exploration && choices.none { c -> c.allEffects().any { it is Effect.PlantSeed } }) problems += "${e.id}: tohum eken seçenek yok"
+            if (!exploration && choices.none { c -> c.allEffects().any { it is Effect.ShiftRelation } }) problems += "${e.id}: NPC ilişki eksenini değiştiren seçenek yok"
         }
         assertTrue(problems.joinToString("\n"), problems.isEmpty())
         // Bütçe: Deniz, Yankı ve Aras'ın en az 3 yay düğümü Perde 1'de yazılı; 2 çok odalı zindan.

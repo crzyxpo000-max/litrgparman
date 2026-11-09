@@ -57,7 +57,9 @@ class Asama7MotorTest {
 
     @Test
     fun `dunya seviyesi perdelerle yukselir`() {
-        assertEquals(20.0, Progression.worldLevel(30), 0.01)
+        // Paket 3 rampası: Gün 30'da eğrinin yarısı, Gün 50'den itibaren tam eğri.
+        assertEquals(10.0, Progression.worldLevel(30), 0.01)
+        assertEquals(20.0 * Math.pow(1.0385, 20.0 / 3.0), Progression.worldLevel(50), 0.01)
         assertTrue(Progression.worldLevel(180) in 120.0..145.0)
         assertTrue(Progression.worldLevel(330) in 800.0..950.0)
         assertEquals(Grade.C, Grade.forLevel(Progression.worldLevel(180).toInt()))
@@ -96,12 +98,14 @@ class Asama7MotorTest {
 class Asama7GoreliSeviyeTest {
     @Test
     fun `goreli seviye savas basinda cozulur`() {
-        assertEquals("kanal_faresi@20", EnemyScaling.resolve("kanal_faresi@dunya", 30, 100))
-        assertEquals("kanal_faresi@22", EnemyScaling.resolve("kanal_faresi@dunya+10", 30, 100))
+        // Paket 3 rampası: Gün 30'da dünya seviyesi 10 (DECISIONS #164).
+        assertEquals("kanal_faresi@10", EnemyScaling.resolve("kanal_faresi@dunya", 30, 100))
+        assertEquals("kanal_faresi@11", EnemyScaling.resolve("kanal_faresi@dunya+10", 30, 100))
         assertEquals("kanal_faresi@12", EnemyScaling.resolve("kanal_faresi@oyuncu+5", 100, 7))
         assertEquals("kanal_faresi@4", EnemyScaling.resolve("kanal_faresi@oyuncu-3", 100, 7))
         assertEquals("kanal_faresi@50", EnemyScaling.resolve("kanal_faresi@50", 100, 7))
-        assertEquals("kanal_faresi@13", EnemyScaling.resolve("kanal_faresi@dunya", 30, 7))
+        assertEquals("kanal_faresi@10", EnemyScaling.resolve("kanal_faresi@dunya", 30, 7))
+        assertEquals("kanal_faresi@13", EnemyScaling.resolve("kanal_faresi@dunya", 60, 7))
         assertEquals("kanal_faresi", EnemyScaling.baseId("kanal_faresi@dunya+10"))
         assertTrue(EnemyScaling.isRelative("x@oyuncu"))
     }

@@ -209,6 +209,11 @@ class Director(private val content: Content) {
     companion object {
         const val HAND_SIZE = 3
 
+        /** Perde 1'de el 2 kart (Paket 3, DECISIONS #163): Öğretici günleri 27 olayla tıka basa doluydu. */
+        const val HAND_SIZE_ACT1 = 2
+
+        fun handSize(state: WorldState): Int = if (state.act <= 1) HAND_SIZE_ACT1 else HAND_SIZE
+
         /** Yoldaş olmayan bir müttefikin kampa gelmesi için en az güven (DECISIONS #146). */
         const val CAMP_TRUST_MIN = 10
         const val CAMP_BETRAYER_MARK = "hain"

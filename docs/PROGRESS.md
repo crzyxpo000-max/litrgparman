@@ -1,8 +1,8 @@
 # İlerleme
 
-Şu an: İnceleme (`docs/INCELEME_AKIS.md`), Paket 1 (hikaye kopuklukları) ve Paket 2 (ilk saat) bitti. Sıradaki: Paket 3 ritim (kısa plan + onay).
+Şu an: İnceleme (`docs/INCELEME_AKIS.md`), Paket 1 (hikaye), Paket 2 (ilk saat) ve Paket 3 (ritim) bitti. Sıradaki: Paket 4 sistem çıkarma (kısa plan + onay).
 Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
-Son commit: 8f4abe6 Paket 1 (sonraki: Paket 2)
+Son commit: c9cb51b Paket 2 (sonraki: Paket 3)
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
@@ -24,7 +24,10 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
       ödüller tek kartta, 3. savaştan sonra Taktik; operasyon onay penceresi (tehdit/oyuncu seviyesi, hazırlıklar, yoldaş görüşleri, uyarı),
       biten bölümün günleri kendiliğinden geçer, zaman atlama Perde 2+; ilişki satırı sayısız ve birleşik; prolog tek saat; Durum/Daha
       fazla kendini açar; savaş ekranı Perde 1'de 5 düğme. `Paket2Test`; emülatörde ilk 20 dakika yeniden oynandı
-- [ ] Paket 3 — ritim (varış yalnız ilk ziyaret, yolculuk eylem harcamaz, Perde 1 keşif olayları ×6, Bölüm 1 yoğunluğu)
+- [x] **Paket 3 — ritim** (DECISIONS #161–#165): varış sahnesi yalnız ilk ziyarette (242 → 10/oynanış), yolculuk eylem harcamaz,
+      Perde 1'de el 2 kart, dünya seviyesi Gün 30–50 rampası (Gün 30–39 kayıp %57 → %41), 6 yeni Perde 1 keşif olayı
+      (`events/31_kesif_p1.yaml`, TR/EN incelemeli) + 4 mevcut olaya `kesif` etiketi, cozumle.py düzeltmesi; `Paket3Test`;
+      ölçüm tablosu STORY_FLOW "Paket 2 ve Paket 3 sonrası". Açık: Perde 2 açılış hikaye savaşlarında kayıp ~%50
 - [ ] Paket 4 — sistem çıkarma (meslek/Kredi kapalı, Yozlaşma → Dikkat, ordu/bilgi günlüğü kendini açan arayüz)
 - [ ] Paket 5 — arayüz incelemesi (`docs/UI_REVIEW.md`, emülatör görüntüleri `docs/ui-review/`)
 

@@ -94,8 +94,8 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
   Tarihli (`erken: false`) operasyonun en az 2 hazırlığı olmalı; bayrak `hazirlik_<id>` (motor öneki), operasyon sahnesinde
   ek seçenek `goster: { bayrak: "hazirlik_<id>" }`. Kayıt yuvası `operasyon`: operasyon öncesi otomatik kayıt. Her olayın **`konum`** etiketi vardır: `us`, bölge kimlikleri ya da `*`; yeni olay
   yazarken zorunlu. Üste yalnız `us` ve üs bölgesindeki olaylar gelir; başka bölgede geçen olay görev kartı olur.
-  Yapısal sahneler `events/07–09_bolumler_*.yaml`: `brifing_<n>`, `darbogaz_<n>`, `varis_<bölge>` (görevin ilk sahnesi;
-  `ziyaret_<bölge>` değişkeni ilk/sonraki ziyareti ayırır). Tohum etkisinde **`hatirlatma {tr,en}`** (gecikme ≥ 3 ise yaz):
+  Yapısal sahneler `events/07–09_bolumler_*.yaml`: `brifing_<n>`, `darbogaz_<n>`, `varis_<bölge>` (yalnız bölgeye ilk gidişte;
+  `ziyaret_<bölge>` değişkeni sayar; sonraki gidişler tek satır bildirim, DECISIONS #161). Yolculuk eylem harcamaz (#162); Perde 1'de el 2 kart (#163). Tohum etkisinde **`hatirlatma {tr,en}`** (gecikme ≥ 3 ise yaz):
   doğan olayın ilk paragrafı olur. Koşullar `bolum`, `bolum_min`, `bolum_max`, `gorevde`, `gorev_turu: operasyon|yan|kesif`.
   Erken girilebilen operasyonda kesin gün sayısı yazma. Bayrak öneki `bolum_` motorundur (`bolum_<n>_tasti`).
   **Saha kampı sahnesi** (`kamp: true`, DECISIONS #144, #146): `konum` bölge(ler), `npc` kampa gelen kişi(ler) (yoldaş ya da
@@ -173,7 +173,8 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - İçerik değiştikten sonra `:engine:validateContent` ve `:engine:test` çalıştır (ContentFilesTest gerçek içeriği doğrular).
 
 - **Aşama 7:** düşman başvurusu `"id@120"` (sabit seviye), `"id@dunya"`/`"@dunya+20"` (dünya seviyesi ±%, `Progression.worldLevel`),
-  `"id@oyuncu+5"` (oyuncu seviyesi ±n); ölçekleme `combat/EnemyScaling.kt`. Perde 2+ bölge düşmanları ve kapılar dünya seviyesine ölçeklenir.
+  `"id@oyuncu+5"` (oyuncu seviyesi ±n); ölçekleme `combat/EnemyScaling.kt`. Perde 2+ bölge düşmanları ve kapılar dünya seviyesine ölçeklenir
+  (`Progression.worldLevel`: Gün 30'da eğrinin yarısı, Gün 50'ye doğru tam eğri; DECISIONS #164).
   Etkiler `xp_seviye n` (seviye XP'sinin %n'i; Perde 2+ ödüllerinde sabit `xp` yerine), `kule_kat n`, `yol id`. Koşullar `kademe_min`,
   `ordu_min` (birlik sayısı), `yoldas_sayisi_max`, `oz`, `yol`, `son_uygun`, `hicbir_son`, `son` (epilog). Seçenekte `kronik {tr,en}`
   (son ekranındaki kritik seçim kartı; önemli olayların seçeneklerinde zorunlu) ve `kronik_agirlik`.

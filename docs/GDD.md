@@ -61,7 +61,7 @@ Oyuncunun stat büyümesi **üsteldir** (Günlük Görev serisi, Benzersiz yeten
 - **Kendini açan arayüz:** Yetenekler, Çanta, Harita ve sonra Anomali / Kök Erişim sekmeleri Sistem onları verene kadar gizlidir; her biri kendi bildirimiyle gelir ("[Envanter verildi]").
 - **Pasif Sistem sezgisi:** yüksek statlar sahnelere özel satırlar ekler (yukarıda).
 - **Gösteriş seçenekleri:** yüksek statlar "[GÜÇ 40 · Önemsiz] Kapıyı menteşesinden sök" gibi sorunu tarzla çözen seçenekler gösterir. Yeniden denenebilir (beyaz) ve tek seferlik (kırmızı) kontroller görünür olasılıklarla kalır, ama çoğunlukla sosyal ve ahlaki kontrollerde kullanılır.
-- **Fırsat eli:** serbest zamanda 3 rastgele olay kartı gösterilir; oyuncu birini seçer.
+- **Fırsat eli:** serbest zamanda 3 rastgele olay kartı gösterilir (Perde 1'de 2; DECISIONS #163); oyuncu birini seçer.
 - **İki savaş modu:**
   - **Gerçek savaş** (denkler ve bosslar): taktik; her turda duruş (tam saldırı / ölçülü / savunmacı) ve Dayanım taahhüdü; düzyazıyla anlatılır, sayılar istenirse görünür; boss, zeki düşman ve NPC düellosu oyuncunun seçtiği bir **infaz** hamlesiyle biter, sıradan düşman tek satırla düşer (DECISIONS #157). Taktik (duruş, efor) ve Ortam ilk üç savaştan sonra açılır.
   - **Ezme:** oyuncunun açıkça üstün olduğu sıradan düşmanlar tek, şık bir satırla otomatik çözülür. Kasılma (grind) yoktur.
@@ -285,7 +285,7 @@ Ana hikaye kanıtlanmış bir yapıya oturur (ayrıntı `docs/CHAPTERS.md`, kara
   yaşanır (tehlike, hayatta kalan oranı, kalıcı bayrak) ve operasyon yine başlar.
 - **Döngü (Mass Effect 2):** **Üs** (Perde 1'de Öğretici kampı, sonra Sığınak): karakter sahneleri, tohum dönüşleri, NPC
   eşikleri, Küresel Sıralama duyuruları, yoldaş tepkileri ve fırsat eli yalnız burada. **Görev:** kapalı bir sahne dizisi;
-  ilk sahnesi yolculuk ve varıştır, içindeyken yalnız göreve ait olaylar gelir. Her olayın konumu vardır ve başka yerde
+  bir bölgeye ilk gidişte yolculuk ve varış sahnesiyle açılır, sonraki gidişlerde tek satırlık yolculuk bildirimiyle (DECISIONS #161); yolculuk eylem harcamaz (#162); içindeyken yalnız göreve ait olaylar gelir. Her olayın konumu vardır ve başka yerde
   tetiklenmez; başka bölgede geçen olay üste görev kartı olur.
 - **Bölüm ritmi:** Brifing (yeni tehdit, son tarih, "önceki bölümde") → Hazırlık → Ana operasyon → Sonrası → Darboğaz.
   OP MC döngüsüyle eşleşir: brifing yeni tavan, hazırlık hakimiyet, operasyon mücadele ve kırılma.

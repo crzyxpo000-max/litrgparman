@@ -345,9 +345,10 @@ class WorldEngine(
         var s = if (consumeSlot) spend(state) else state
         s = s.copy(mission = Mission(kind, region, queue, s.day, variant), region = region)
         val arrivalEvent = ChapterTable.ARRIVAL_PREFIX + region
-        // Varış sahnesi bölge başına günde bir kez (aynı gün ikinci gidişte yolculuk satırı yeter).
+        // Varış sahnesi yalnız bölgeye İLK gidişte (Paket 3, DECISIONS #161); sonraki gidişlerde tek satır yolculuk
+        // bildirimi yeter. Aynı gün ikinci gidişte de sahne yok.
         val arrivedToday = ARRIVAL_DAY_PREFIX + region
-        val fresh = s.vars[arrivedToday] != s.day
+        val fresh = s.vars[arrivedToday] != s.day && s.variable(ChapterTable.VISIT_PREFIX + region) == 0
         if (arrival && fresh && region != base(s) && arrivalEvent in content.events) {
             s = s.copy(vars = s.vars + (arrivedToday to s.day))
             val started = startEvent(s, arrivalEvent, consumeSlot = false)
@@ -389,7 +390,7 @@ class WorldEngine(
             return state.copy(dayState = state.dayState.copy(hand = emptyList()))
         }
         val rng = Rng(state.rngState)
-        val hand = director.deal(state, rng).toMutableList()
+        val hand = director.deal(state, rng, n = Director.handSize(state)).toMutableList()
         if (chapterMode && state.mission == null) {
             val elsewhere = director.dueElsewhere(state).map { it.eventId }.distinct()
                 .filter { id -> content.events[id]?.let { missionRegionOf(state, it) } != null }
@@ -1057,7 +1058,8 @@ class WorldEngine(
         if (region !in content.regions) throw ActionRejected("Tanımsız bölge")
         if (chapterMode) {
             if (!canTravel(state, region)) throw ActionRejected("Bu bölgeye şu an gidilemez")
-            return beginMission(state, MissionKind.EXPLORE, region, emptyList(), consumeSlot = true)
+            // Yolculuk eylem harcamaz (Paket 3, DECISIONS #162): 2 eylemlik günde yol günü yemesin; dönüş zaten bedava.
+            return beginMission(state, MissionKind.EXPLORE, region, emptyList(), consumeSlot = false)
         }
         if (here != null && !canTravel(state, region)) throw ActionRejected("Bu bölgeye şu an gidilemez")
         val moved = spend(state).copy(region = region)

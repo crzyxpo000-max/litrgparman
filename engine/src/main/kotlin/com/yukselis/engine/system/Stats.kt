@@ -120,8 +120,14 @@ object Progression {
      */
     fun worldLevel(day: Int): Double {
         val floor = ((day - 30).coerceAtLeast(0) / 3.0).coerceAtMost(100.0)
-        return 20.0 * 1.0385.pow(floor)
+        // Perde 2 girişi rampası (Paket 3, DECISIONS #164): Gün 30'da oyuncu p50 Sv. 9 iken dünya 20'ye sıçrıyordu
+        // (Gün 30–39 savaş kaybı %44). Gün 30'da yarısı (10), Gün 50'de tam eğri; sonrası değişmez.
+        val ramp = (WORLD_RAMP_START + (day - 30) / WORLD_RAMP_DAYS).coerceIn(WORLD_RAMP_START, 1.0)
+        return 20.0 * 1.0385.pow(floor) * ramp
     }
+
+    const val WORLD_RAMP_START = 0.5
+    const val WORLD_RAMP_DAYS = 40.0
 
     /** Gün içi olay/eylem yuvası sayısı: 2–4 (GDD: Gün döngüsü). */
     const val MIN_SLOTS = 2

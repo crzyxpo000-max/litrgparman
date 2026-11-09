@@ -476,3 +476,45 @@ Düğüm erişimi: sahra hastanesi %99, Konsey oylaması %100, gece nöbeti %100
 
 Denge (1000 oynanış): hakimiyet %65,9; sonlar %1–%40 içinde (Kod Kırıcı %20,5, Hasat %18,5, Koruyucu %14,3).
 
+### Paket 2 ve Paket 3 sonrası (DECISIONS #156–#165)
+
+Ölçüm: `:tools:simulator:akis --args="20 <klasör> insan"`; önce = Paket 2 sonrası (`iz_p3_once`), sonra = Paket 3 (`iz_p3_sonra`).
+Paket 2'nin "biten bölümün günleri kendiliğinden geçer" kuralı (#158) boş günleri sayımdan düşürdüğü için hikayesiz gün payları
+bir önceki tablodan (%44–57) belirgin biçimde aşağıda; Paket 3'ün kendi etkisi önce/sonra sütunlarında.
+
+| Ölçüt | Önce | Sonra |
+| --- | ---: | ---: |
+| Varış sahnesi / oynanış | 242 | **10** (yalnız ilk ziyaret, #161) |
+| Gün 30–39 savaş kaybı | %57 | **%41** (Keşfet %36 → %23, Kapı %67 → %39; hikaye savaşları ~%50 kaldı) |
+| Bölüm 1 / 2 / 3 olay (oynanış başına) | 27,4 / 18,1 / 3,8 | 32,1 / 21,8 / 2,5 (yolculuk bedava: oyuncu daha çok bölgeye çıkıyor) |
+| Yeni Perde 1 keşif olayı (`k1_*`) / oynanış | 0 | 6,2 |
+| cozumle b' (konum uyumsuz) | 308 (atlama özetleri) | 0 |
+
+| Bölüm | Hikayesiz gün önce | sonra |
+| ---: | ---: | ---: |
+| 1 | %6 | %2 |
+| 2 | %24 | %24 |
+| 3 | %32 | %28 |
+| 4 | %11 | %15 |
+| 5 | %20 | %23 |
+| 6 | %32 | %25 |
+| 7 | %27 | %27 |
+| 8 | %26 | %23 |
+| 9 | %34 | %33 |
+| 10 | %22 | %24 |
+| 11 | %27 | %31 |
+| 12 | %34 | %37 |
+| 13 | %37 | %35 |
+| 14 | %32 | %26 |
+| 15 | %28 | %28 |
+| 16 | %17 | %16 |
+| 17 | %17 | %26 |
+| 18 | %34 | %50 |
+
+Notlar:
+- Bölüm 1'de el 2 karta inmesine rağmen olay sayısı arttı: yolculuk eylem harcamayınca insan benzeri strateji Çarşı/İstasyon'a daha
+  sık çıkıyor ve yeni keşif olaylarını çekiyor. Olaylar artık kampta yığılmak yerine bölgelerde dağılıyor; Bölüm 1 hikayesiz gün %2.
+- Gün 30–39 kaybının kalan kısmı Perde 2 açılış olaylarının hikaye savaşlarında (`eski_sehir_kapi_avcilari` %55,
+  `liman_yan_yatmis_vapur` %50, `kordon_fener_baligi` %70): düşmanlar `@dunya+10..20` ya da birden çok; yenilgi bayılma/yenilgi
+  sahnesidir, ölüm değil. Hedef (%30) için bu olayların düşman başvurularına bakılmalı; Paket 3 kapsamı dışında bırakıldı.
+- Bölüm 17–18'deki artış küçük örnekten (4–7 gün) kaynaklı gürültü.

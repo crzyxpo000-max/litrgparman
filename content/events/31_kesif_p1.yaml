@@ -1,0 +1,1243 @@
+# Paket 3 — Perde 1 keşif olayları (Harabe Çarşı · Kırık İstasyon). "Keşfet" eylemi `kesif` etiketli olay çeker.
+# NPC'siz, küçük insan hikâyeleri, yerin kendisi ve Sistem'in garip pencereleri. Bayraklar: flags/31_kesif_p1.yaml (önek k1_).
+# Takip olayı (yalniz_tohum): k1_vitrin_sonrasi.
+olaylar:
+  # ================================================================== VİTRİNDEKİ AİLE (çarşı)
+  - id: "k1_vitrindeki_aile"
+    konum: ["harabe_carsi"]
+    perde: [1]
+    bolge: ["harabe_carsi"]
+    gun: { min: 2, max: 26 }
+    agirlik: 1
+    etiketler: ["kesif", "insan", "carsi"]
+    gerilim: 2
+    kart: { tr: "Vitrindeki aile", en: "The family in the window" }
+    sahne: "k1_vitrin_1"
+    sahneler:
+      - id: "k1_vitrin_1"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "{yer:harabe_carsi|in} giriş katında, büyük mağazanın köşe vitrini yeniden döşenmiş: sofra kurulu, tabaklar dizili, ortada yarıya inmiş bir mum yanıyor. Masanın başında dört manken oturuyor; bir adam, bir kadın, iki çocuk.", en: "On the ground floor of the {yer:harabe_carsi}, the department store's corner window has been redone: a dinner table, plates laid out, a half-burned candle in the middle. Four dummies sit around it. A man, a woman, two kids." }
+          - { tr: "Camın ardında buruşuk gömlekli, orta yaşlı bir adam kadın mankenin peruğunu tarıyor. Seni görünce elini sallayıp içeri çağırıyor; ev sahibi gibi. \"Tam yemek saatinde geldin,\" diyor, \"bir tabak daha koyarız.\"", en: "Behind the glass, a middle-aged man in a wrinkled shirt is combing the woman dummy's wig. He sees you and waves you in like a host. \"You made it right at dinnertime,\" he says. \"We'll set another plate.\"" }
+          - { tr: "Mankenler sıradan mağaza malı: boyalı yüzler, eklem yerleri gevşek. Yalnız en küçüğünün çenesinde taze bir çatlak var; boyalı gözleri de ıslak gibi parlıyor.", en: "The dummies are ordinary store stock, painted faces, loose joints. Except the smallest one has a fresh crack along its jaw, and its painted eyes have a wet shine." }
+        sezgiler:
+          - kosul: { stat: { per: 8 } }
+            metin: { tr: "Küçük mankenin boyun ekleminde sürtünme izi var. Bu sabah başı başka yöne bakıyormuş.", en: "There's a fresh scuff on the small dummy's neck joint. Its head was facing a different way this morning." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "dört plastik, bir et. et konuşuyor, plastik dinliyor. hangisi daha yalnız, karar veremedim.", en: "four plastic, one meat. the meat talks, the plastic listens. i can't decide which one's lonelier." }
+        secenekler:
+          - id: "otur"
+            etiket: { tr: "Sofraya otur; bir öğün onunla kal", en: "Sit down. Stay for one dinner" }
+            etkiler:
+              - ahlak: { insanlik: 3, merhamet: 2 }
+              - xp: 20
+            sonraki: "k1_vitrin_sofra"
+          - id: "gercek"
+            etiket: { tr: "Mankenlerin gerçekte ne olduğunu ona anlat", en: "Tell him what the dummies really are" }
+            zar: { stat: "cha", zorluk: 12, tek: true, basarisiz: "k1_vitrin_ofke", basarisiz_etkiler: [{ ahlak: { duzen: 1 } }, { bayrak: "k1_vitrin_kovuldu" }] }
+            etkiler:
+              - ahlak: { duzen: 2, insanlik: 1 }
+              - bayrak: "k1_vitrin_gercek"
+            sonraki: "k1_vitrin_gercek"
+          - id: "iz"
+            etiket: { tr: "Küçük mankenin boynundaki izi ona göster", en: "Show him the mark on the small one's neck" }
+            gerekli: { stat: { per: 8 } }
+            etkiler:
+              - ahlak: { duzen: 2, insanlik: 2 }
+              - bayrak: "k1_vitrin_gercek"
+              - xp: 10
+            sonraki: "k1_vitrin_gercek"
+          - id: "kir"
+            etiket: { tr: "Küçük mankeni kır; uyanmadan", en: "Smash the small one before it wakes" }
+            etkiler:
+              - ahlak: { duzen: 3, merhamet: -3 }
+              - bayrak: "k1_vitrin_kirildi"
+              - xp: 25
+            sonraki: "k1_vitrin_kirik"
+          - id: "izle"
+            etiket: { tr: "Camın ardından bak, karışma", en: "Watch through the glass. Don't get involved" }
+            etkiler:
+              - ahlak: { insanlik: -1 }
+            sonraki: "@akis"
+
+      - id: "k1_vitrin_sofra"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Boş tabaklara boş kepçeyle yemek koyuyor, oğlunun okulunu anlatıyor, karısının üst kattaki parfümeride çalıştığını söylüyor. \"Kızım da iştahsız bugünlerde,\" diyor en küçüğünü göstererek; ama ona hiç bakmıyor, tabağını bile bakmadan dolduruyor.", en: "He ladles nothing onto empty plates, talks about his son's school, says his wife works the perfume counter upstairs. \"My daughter's off her food these days,\" he says, nodding at the smallest one. But he never looks at it. He fills its plate without looking." }
+          - { tr: "Mum biraz daha inince gözüne çarpıyor: küçük mankenin eli kucağındaydı, şimdi masanın üstünde. Adam baktığın yere bakıp sesini alçaltıyor: \"Bazen kıpırdıyor. Biliyorum. Ama ben ona baktığım sürece duruyor, anlıyor musun? Baktığım sürece.\"", en: "By the time the candle burns down another inch, you notice it: the small dummy's hand was in its lap. Now it's on the table. The man follows your eyes and drops his voice. \"Sometimes it moves. I know. But as long as I'm looking, it stays put. You understand? As long as I'm looking.\"" }
+          - { tr: "Gözlerinin altı morarmış. Kaç gündür uyumadığını sormuyorsun; cevabı yüzünde yazılı.", en: "The skin under his eyes is bruised purple. You don't ask how many nights it's been. The answer's written on his face." }
+        secenekler:
+          - id: "nobet"
+            etiket: { tr: "Bu gece nöbeti sen tut; o uyusun", en: "Take tonight's watch. Let him sleep" }
+            etkiler:
+              - ahlak: { merhamet: 4, insanlik: 2 }
+              - egilim: { koruma: 1 }
+              - can: -5
+              - bayrak: "k1_vitrin_nobet"
+              - xp: 30
+            sonraki: "k1_vitrin_nobet"
+          - id: "gercek"
+            etiket: { tr: "Gerçeği söyle: o senin kızın değil", en: "Say it plainly: that isn't your daughter" }
+            zar: { stat: "cha", zorluk: 12, tek: true, basarisiz: "k1_vitrin_ofke", basarisiz_etkiler: [{ ahlak: { duzen: 1 } }, { bayrak: "k1_vitrin_kovuldu" }] }
+            etkiler:
+              - ahlak: { duzen: 2, insanlik: 1 }
+              - bayrak: "k1_vitrin_gercek"
+            sonraki: "k1_vitrin_gercek"
+          - id: "kalk"
+            etiket: { tr: "Yemek için teşekkür et, kalk", en: "Thank him for dinner and go" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+            sonraki: "@akis"
+
+      - id: "k1_vitrin_nobet"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Adam masanın altına kıvrılıp daha lafını bitirmeden uyuyakalıyor. Gece boyunca gözünü küçük mankenden ayırmıyorsun. Mum sönüyor, cam soğuyor, bir kez bir eklemin gıcırdadığını duyuyorsun ama bakışını kaçırmıyorsun.", en: "He curls up under the table and is out before he's finished talking. All night you keep your eyes on the small dummy. The candle dies, the glass goes cold, once you hear a joint creak, but you don't look away." }
+          - { tr: "Şafakta boyalı gözler yine kuru boya. Adam uyanınca uzun uzun sana bakıyor; sonra parfümeri tezgâhından getirdiği iki temiz şişeyi uzatıyor. \"Burada bundan başka vereceğim bir şey yok.\"", en: "At dawn the painted eyes are dry paint again. When the man wakes he looks at you a long moment, then hands you two clean bottles from the perfume counter. \"It's all I've got here to give.\"" }
+        secenekler:
+          - id: "al"
+            etiket: { tr: "Şişeleri al, yola çık", en: "Take the bottles and move on" }
+            etkiler:
+              - esya: { cam_sise: 2 }
+            sonraki: "@akis"
+          - id: "gun_isigi"
+            etiket: { tr: "Ona gün ışığında uyumayı öğret; gece sen gelemezsin", en: "Teach him to sleep in daylight. You can't come every night" }
+            etkiler:
+              - ahlak: { duzen: 2, insanlik: 1 }
+              - esya: { cam_sise: 2 }
+              - xp: 10
+            sonraki: "@akis"
+
+      - id: "k1_vitrin_gercek"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Tarağı masaya bırakıyor. \"Biliyorum,\" diyor; sesi beklediğinden sakin. \"İlk günden beri biliyorum. Vitrin dolu görünsün diye dizdim onları; hurdacılar içinde biri var sansın diye. Sonra alıştım.\"", en: "He sets the comb down on the table. \"I know,\" he says, calmer than you expected. \"I've known since day one. I set them up so the window would look lived in, so the scrappers would think somebody's home. Then I got used to them.\"" }
+          - { tr: "Küçük mankene ilk kez doğrudan bakıyor. \"Onu nereden aldığımı hatırlamıyorum. Öbür üçünü hatırlıyorum, onu hatırlamıyorum.\" Yutkunuyor. \"Bu gece kalsınlar. Sabah karar veririm.\"", en: "For the first time he looks straight at the small one. \"I don't remember where I got that one. I remember the other three. Not that one.\" He swallows. \"Let them stay tonight. I'll decide in the morning.\"" }
+        secenekler:
+          - id: "sabah"
+            etiket: { tr: "Sabah uğrayacağını söyle", en: "Tell him you'll stop by in the morning" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - xp: 25
+              - tohum: { olay: "k1_vitrin_sonrasi", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "k1_vitrin_gercek" }, hatirlatma: { tr: "Vitrinde sofra kuran adam aklına geliyor; sabah karar vereceğini söylemişti.", en: "You think of the man who set the dinner table in the window. He said he'd decide in the morning." } }
+            sonraki: "@akis"
+          - id: "birlikte"
+            etiket: { tr: "Yalnız bırakma; mankenleri birlikte çıkarın", en: "Don't leave him to it. Carry the dummies out together" }
+            etkiler:
+              - ahlak: { duzen: 2, merhamet: 2 }
+              - bayrak: "k1_vitrin_bosaltildi"
+              - esya: { hurda: 1 }
+              - xp: 30
+              - tohum: { olay: "k1_vitrin_sonrasi", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "k1_vitrin_gercek" }, hatirlatma: { tr: "Vitrini birlikte boşalttığın adam aklına geliyor.", en: "You think of the man whose window you emptied out together." } }
+            sonraki: "k1_vitrin_tasima"
+
+      - id: "k1_vitrin_tasima"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Önce üçünü yükleme rampasının arkasındaki konteynere taşıyorsunuz; küçüğü adam kendisi kaldırıyor, kucağında, bir çocuk gibi. Konteynerin kenarında duraksıyor, sonra bırakıyor. Düşerken içinden plastik değil, ıslak bir hışırtı geliyor.", en: "You carry the three to the dumpster behind the loading dock. The man lifts the small one himself, in his arms, like a child. He hesitates at the rim, then lets go. On the way down it makes a sound that isn't plastic: a wet rustle." }
+          - { tr: "Geri dönünce vitrinin camına içeriden bir karton asıyor: BOŞ. \"Hurdacılar gelirse gelsin,\" diyor. \"Birileriyle konuşmam lazım; gerçek birileriyle.\"", en: "Back at the window, he tapes a sheet of cardboard to the inside of the glass: EMPTY. \"Let the scrappers come,\" he says. \"I need to talk to somebody. Somebody real.\"" }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Yemek katındaki hastaneyi tarif et", en: "Point him toward the food court hospital" }
+            etkiler:
+              - ahlak: { merhamet: 1 }
+              - itibar: { siginak: 2 }
+            sonraki: "@akis"
+          - id: "git"
+            etiket: { tr: "Başını salla, yola devam et", en: "Nod and move on" }
+            etkiler: []
+            sonraki: "@akis"
+
+      - id: "k1_vitrin_ofke"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Tarak kafanın yanından geçip cama çarpıyor. \"Çocuklarımın önünde!\" diye bağırıyor. \"Çık! Çık buradan!\" Geri çekilirken küçük mankenin başı bir parmak genişliğinde sana dönüyor; adam görmüyor, adam sana bakıyor.", en: "The comb whips past your head and cracks against the glass. \"In front of my kids!\" he yells. \"Get out! Get out of here!\" As you back off, the small dummy's head turns a finger's width toward you. He doesn't see it. He's looking at you." }
+        secenekler:
+          - id: "git"
+            etiket: { tr: "Kapıyı çekip git", en: "Pull the door shut behind you and go" }
+            etkiler:
+              - ahlak: { insanlik: -1 }
+            sonraki: "@akis"
+          - id: "disardan"
+            etiket: { tr: "Geceyi camın dışında geçir; o görmesin, sen gör", en: "Spend the night outside the glass. He won't see you. You'll see it" }
+            etkiler:
+              - ahlak: { merhamet: 3 }
+              - can: -5
+              - bayrak: "k1_vitrin_nobet"
+              - xp: 20
+            sonraki: "k1_vitrin_disardan"
+
+      - id: "k1_vitrin_disardan"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Sütunun dibine çömelip camın ardındaki küçük gölgeye bakıyorsun. Gece yarısına doğru adam masanın altında uyuyakalıyor; manken bir kez omzunu oynatıyor, bakışın altında yine donuyor.", en: "You crouch at the foot of a pillar and watch the small shape behind the glass. Around midnight the man falls asleep under the table. The dummy rolls one shoulder, then freezes again under your stare." }
+          - { tr: "Sabah adam camı siliyor, seni görmüyor ya da görmezden geliyor. Tarağı yerden alıp kadının peruğuna dönüyor.", en: "In the morning he wipes down the glass. He doesn't see you, or pretends not to. He picks the comb up off the floor and goes back to the woman's wig." }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Yola çık", en: "Move on" }
+            etkiler: []
+            sonraki: "@akis"
+
+      - id: "k1_vitrin_kirik"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Darbeyle kafa çenesinden ikiye ayrılıyor. İçi boş değil: ıslak, gri bir lif yumağı kesilmiş kök gibi seğiriyor, sonra yavaşlıyor. Adamın çığlığı camı titretiyor.", en: "The head splits along the jaw. It isn't hollow: a wet, gray bundle of fibers twitches like a cut root, then slows. The man's scream rattles the glass." }
+          - { tr: "Dizlerinin üstüne çöküp parçaları topluyor. \"Kızımdı,\" diyor, sonra kendini düzeltiyor: \"Kızım gibiydi.\" Avucundaki kıpırdayan lifleri görmüyor ya da görmek istemiyor.", en: "He drops to his knees gathering the pieces. \"That was my daughter,\" he says, then corrects himself. \"She was like my daughter.\" He doesn't see the fibers moving in his palm. Or doesn't want to." }
+        secenekler:
+          - id: "goster"
+            etiket: { tr: "Avucundaki lifleri göster: bu bir kız değildi", en: "Show him what's in his hand. This was never a girl" }
+            etkiler:
+              - ahlak: { duzen: 2, insanlik: -1 }
+              - xp: 15
+            sonraki: "@akis"
+          - id: "ozur"
+            etiket: { tr: "Özür dile, parçaları toplamasına yardım et", en: "Apologize. Help him pick up the pieces" }
+            etkiler:
+              - ahlak: { merhamet: 3, insanlik: 2 }
+              - xp: 15
+            sonraki: "@akis"
+          - id: "hepsi"
+            etiket: { tr: "Öbür üçünü de kır; iş bitsin", en: "Smash the other three too. Be done with it" }
+            etkiler:
+              - ahlak: { duzen: 2, merhamet: -4 }
+              - dikkat: 1
+              - esya: { hurda: 1 }
+              - xp: 20
+            sonraki: "@akis"
+
+  # ------------------------------------------------------------------ vitrincinin sonrası (tohum)
+  - id: "k1_vitrin_sonrasi"
+    konum: ["us"]
+    perde: [1]
+    agirlik: 1
+    etiketler: ["kesif", "insan", "carsi"]
+    gerilim: 1
+    yalniz_tohum: true
+    kart: { tr: "Vitrinci", en: "The window dresser" }
+    sahne: "k1_vitrin_sonrasi_1"
+    sahneler:
+      - id: "k1_vitrin_sonrasi_1"
+        paragraflar:
+          - metin: { tr: "Kampın kenarına market arabası iten bir adam yaklaşıyor. Buruşuk gömleği aynı, gözlerinin altındaki mor biraz solmuş. Araba boş; ne manken var içinde ne de peruk.", en: "A man pushing a shopping cart comes up to the edge of camp. Same wrinkled shirt, the purple under his eyes faded a little. The cart's empty. No dummies, no wigs." }
+            kosul: { bayrak: "k1_vitrin_bosaltildi" }
+          - metin: { tr: "Kampın kenarına market arabası iten bir adam yaklaşıyor. Buruşuk gömleği aynı. Arabanın dibinde, katlanmış bir masa örtüsünün üstünde üç peruk duruyor; dördüncüsü yok.", en: "A man pushing a shopping cart comes up to the edge of camp. Same wrinkled shirt. At the bottom of the cart, on a folded tablecloth, lie three wigs. Not a fourth." }
+            kosul: { bayrak_yok: "k1_vitrin_bosaltildi" }
+          - { tr: "\"Vitrin işinden anlarım,\" diyor, girizgâh falan yapmadan. \"Bir kampı yarım kilometre öteden kalabalık gösteririm. Hurdacılar dolu görünen yere girmez. Yemek karşılığı.\"", en: "\"I know window work,\" he says, no preamble. \"I can make a camp look full from a quarter mile out. Scrappers don't hit a place that looks crowded. I'd work for meals.\"" }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "plastikle konuşmayı bıraktı, seninle konuşuyor. ilerleme sayılır herhalde.", en: "he stopped talking to plastic and started talking to you. progress, i suppose." }
+        secenekler:
+          - id: "al"
+            etiket: { tr: "Kampa al; sahte kalabalık da kalabalıktır", en: "Take him in. A fake crowd is still a crowd" }
+            etkiler:
+              - ahlak: { merhamet: 2, insanlik: 1 }
+              - degisken: { hayatta_kalan: 1 }
+              - bayrak: "k1_vitrinci_kampta"
+              - xp: 20
+            sonraki: "@akis"
+          - id: "hastane"
+            etiket: { tr: "Yemek katındaki hastaneye yönlendir; orada iş çok", en: "Send him to the food court hospital. Plenty of work there" }
+            etkiler:
+              - ahlak: { duzen: 1 }
+              - itibar: { siginak: 2 }
+              - xp: 15
+            sonraki: "@akis"
+          - id: "nobetli"
+            etiket: { tr: "Bir şartla al: gece nöbetine de duracak", en: "Take him in on one condition: he stands night watch too" }
+            gerekli: { stat: { cha: 8 } }
+            etkiler:
+              - ahlak: { duzen: 2, merhamet: 1 }
+              - degisken: { hayatta_kalan: 1 }
+              - bayrak: "k1_vitrinci_kampta"
+              - xp: 20
+            sonraki: "@akis"
+          - id: "geri"
+            etiket: { tr: "Geri çevir; bir ağız daha besleyemezsin", en: "Turn him away. You can't feed another mouth" }
+            etkiler:
+              - ahlak: { merhamet: -2 }
+            sonraki: "@akis"
+
+  # ================================================================== TEK YÖNE İŞLEYEN MERDİVEN (çarşı)
+  - id: "k1_tek_yon_merdiven"
+    konum: ["harabe_carsi"]
+    perde: [1]
+    bolge: ["harabe_carsi"]
+    gun: { min: 3, max: 28 }
+    agirlik: 1
+    etiketler: ["kesif", "anomali", "carsi"]
+    gerilim: 1
+    kart: { tr: "Tek yöne işleyen merdiven", en: "The one-way escalator" }
+    sahne: "k1_merdiven_1"
+    sahneler:
+      - id: "k1_merdiven_1"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "İkinci kattan üçüncüye çıkan yürüyen merdiven çalışıyor. Çarşıdaki tek çalışan şey bu; yalnız yukarı, yalnız öğle saatinde, bir uğultuyla. Üçüncü katın ağzı çelik yangın kepengiyle kapalı, basamaklar kepengin altındaki el genişliğinde aralıktan içeri kayıp kayboluyor.", en: "The escalator from the second floor to the third is running. It's the only thing in the mall that still does: up only, around noon only, with a hum. The third-floor landing is sealed by a steel fire shutter, and the steps slide under it through a hand-wide gap and vanish." }
+          - { tr: "Basamaklara şunlar bırakılmış: bir çakmak, tek bir çocuk ayakkabısı, köşesi kıvrık bir fotoğraf. Yandaki sütuna tebeşirle yazılmış: YUKARI VERİR, AŞAĞI VERMEZ. BAZEN.", en: "On the steps: a lighter, a single kid's shoe, a photo with a bent corner. Chalked on the pillar beside it: TAKES THINGS UP. DOESN'T BRING THEM DOWN. SOMETIMES." }
+          - { tr: "En alt basamağın üstünde bir Sistem penceresi asılı: [Taşıma hattı 3B · Durum: kısmi · Ücret: bir eşya]. Küreğini kucaklamış bir kız anlatıyor: babası geçen hafta basamağa bir konserve koymuş, ertesi gün inen merdivenden bir anahtar gelmiş. Babasının anahtarı değil.", en: "A System window hangs over the bottom step: [Transit line 3B · Status: partial · Fare: one item]. A girl hugging a shovel tells you her dad put a can of food on the step last week, and the next day a key came down the other escalator. Not her dad's key." }
+        sezgiler:
+          - kosul: { stat: { int: 8 } }
+            metin: { tr: "Pencere bir tüccar penceresine benziyor ama satıcı adı yok. Bu Sistem'in kendi arayüzü, kiralanmış bir vitrin değil.", en: "The window looks like a vendor window, but there's no vendor name. This is the System's own interface, not a rented storefront." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "yukarıda biri var sanıyorsun. yukarıda yalnızca yukarı var. ama basamağa koyduğun her şeyi sayıyor.", en: "you think there's somebody up there. there's only up, up there. but it counts every single thing you put on that step." }
+        secenekler:
+          - id: "hurda"
+            etiket: { tr: "Basamağa bir parça hurda koy, bekle", en: "Set a piece of scrap on the step and wait" }
+            gerekli: { esya: { hurda: 1 } }
+            zar: { stat: "per", zorluk: 11, tek: true, basarisiz: "k1_merdiven_bos", basarisiz_etkiler: [{ esya: { hurda: -1 } }] }
+            etkiler:
+              - esya: { hurda: -1 }
+              - xp: 20
+            sonraki: "k1_merdiven_karsilik"
+          - id: "sok"
+            etiket: { tr: "Kontrol panelini sök, bakırını al", en: "Pry off the control panel and strip the copper" }
+            zar: { stat: "int", zorluk: 12, tek: true, basarisiz: "k1_merdiven_sok", basarisiz_etkiler: [{ can: -10 }] }
+            etkiler:
+              - esya: { canli_bakir: 2 }
+              - egilim: { zanaat: 1 }
+              - ahlak: { duzen: -2 }
+              - bayrak: "k1_merdiven_sokuldu"
+              - xp: 20
+            sonraki: "k1_merdiven_bakir"
+          - id: "kepenk"
+            tur: "gosteris"
+            etiket: { tr: "Kepengi omuzla kaldır, üçüncü kata bak", en: "Shoulder the shutter up and look at the third floor" }
+            goster: { bayrak: "kirilma_yasandi" }
+            gerekli: { stat: { str: 15 } }
+            etkiler:
+              - dikkat: 2
+              - bayrak: "k1_ucuncu_kat_goruldu"
+              - xp: 40
+            sonraki: "k1_merdiven_ucuncu_kat"
+          - id: "anahtar"
+            etiket: { tr: "Kıza inen anahtarı sor", en: "Ask the girl about the key that came down" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+              - bayrak: "k1_anahtar_117"
+              - xp: 15
+            sonraki: "k1_merdiven_anahtar"
+
+      - id: "k1_merdiven_karsilik"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Hurda parçası basamakla birlikte kepengin altına kayıp gidiyor. Pencere bir kez titreşiyor: [Eşya alındı.] Sonra uğultu kesiliyor; öğle bitti.", en: "The scrap rides the step up under the shutter and is gone. The window flickers once: [Item received.] Then the hum dies. Noon's over." }
+          - { tr: "Hemen gitmiyorsun. İnen merdivenin ölü basamaklarını tek tek yoklarken, tırabzan oluğuna sıkışmış iki cam şişe buluyorsun; mantarları yerinde, içleri tertemiz. Tebeşir yazısı haklıymış: bazen.", en: "You don't leave right away. Working your way down the dead steps of the down escalator, you find two glass bottles wedged in the handrail groove, corked, spotless. The chalk was right. Sometimes." }
+        secenekler:
+          - id: "al"
+            etiket: { tr: "Şişeleri al", en: "Take the bottles" }
+            etkiler:
+              - esya: { cam_sise: 2 }
+            sonraki: "@akis"
+          - id: "kiza"
+            etiket: { tr: "Birini kıza ver; babasının konservesinin karşılığı", en: "Give one to the girl. For her dad's can" }
+            etkiler:
+              - esya: { cam_sise: 1 }
+              - ahlak: { merhamet: 2 }
+              - xp: 10
+            sonraki: "@akis"
+
+      - id: "k1_merdiven_bos"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Hurda parçası kepengin altına kayıp gidiyor; pencere yalnızca [Eşya alındı. Teşekkür ederiz.] diyor. İnen merdiveni arşınlayıp tırabzanı yokluyorsun ama hiçbir şey yok.", en: "The scrap slides under the shutter and is gone, and all the window says is [Item received. Thank you.] You pace the down escalator and feel along the handrail. Nothing." }
+          - { tr: "Küreğini kucaklamış kız omuz silkiyor. \"Babam da iki gün bekledi,\" diyor. \"Üçüncü gün geldi anahtar.\"", en: "The girl with the shovel shrugs. \"My dad waited two days too,\" she says. \"The key came on the third.\"" }
+        secenekler:
+          - id: "bekle"
+            etiket: { tr: "Bir gün bekle, sabah tekrar bak", en: "Wait a day. Check again in the morning" }
+            etkiler:
+              - gun: 1
+              - esya: { kaya_tuzu: 1 }
+              - xp: 15
+            sonraki: "k1_merdiven_sabah"
+          - id: "birak"
+            etiket: { tr: "Boş ver; hurda hurdadır", en: "Forget it. Scrap's scrap" }
+            etkiler: []
+            sonraki: "@akis"
+
+      - id: "k1_merdiven_sabah"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Sabah inen merdivenin dibinde küçük, gri bir tuz kesesi duruyor; sanki birinin cebinden düşmüş gibi. Hurdaya karşılık tuz. Takas mı bu, yoksa alay mı, kestiremiyorsun.", en: "In the morning there's a small gray pouch of salt at the foot of the down escalator, like it fell out of somebody's pocket. Salt for scrap. You can't tell if it's a trade or a joke." }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Keseyi al, yola çık", en: "Pocket it and move on" }
+            etkiler: []
+            sonraki: "@akis"
+
+      - id: "k1_merdiven_bakir"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Paneli söktüğün anda uğultu kesiliyor; basamaklar olduğu yerde donuyor, pencere sönüyor. Elinde iki kol boyu canlı bakır var, hâlâ ılık.", en: "The second the panel comes off, the hum stops. The steps freeze mid-stride and the window goes dark. You're holding two arm-lengths of live copper, still warm." }
+          - { tr: "Küreğini kucaklamış kız bir basamaklara, bir sana bakıyor. \"Artık anahtar da gelmez,\" diyor; soru değil bu.", en: "The girl with the shovel looks at the steps, then at you. \"Now the key won't come either,\" she says. It isn't a question." }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Bakırı çantana koy", en: "Pack the copper and go" }
+            etkiler: []
+            sonraki: "@akis"
+          - id: "tuz"
+            etiket: { tr: "Kıza elindekinden bir şey ver", en: "Give the girl something from your pack" }
+            gerekli: { esya: { hurda: 1 } }
+            etkiler:
+              - esya: { hurda: -1 }
+              - ahlak: { merhamet: 2 }
+            sonraki: "@akis"
+
+      - id: "k1_merdiven_sok"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Panelin ikinci vidası gevşerken bir elektrik çarpması kolunu omzuna kadar uyuşturuyor. Yere düştüğünde pencere üstünde parlıyor: [Bakım erişimi: reddedildi.] Merdiven işlemeye devam ediyor; düşürdüğün tornavidayı da yukarı taşıyor.", en: "As the panel's second screw comes loose, a jolt numbs your arm to the shoulder. From the floor you watch the window flash above you: [Maintenance access: denied.] The escalator keeps running, carrying your dropped screwdriver up with it." }
+        secenekler:
+          - id: "tekrar"
+            etiket: { tr: "Kalk, eldiven giy, bir daha dene", en: "Get up, pull on a glove, try again" }
+            gerekli: { stat: { int: 9 } }
+            etkiler:
+              - esya: { canli_bakir: 1 }
+              - egilim: { zanaat: 1 }
+              - ahlak: { duzen: -2 }
+              - bayrak: "k1_merdiven_sokuldu"
+              - xp: 15
+            sonraki: "k1_merdiven_bakir"
+          - id: "vazgec"
+            etiket: { tr: "Vazgeç; bu makine sana ait değil", en: "Let it go. This machine isn't yours" }
+            etkiler:
+              - ahlak: { duzen: 1 }
+            sonraki: "@akis"
+
+      - id: "k1_merdiven_ucuncu_kat"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Kepenk omzunun altında inliyor, bir karış, iki karış yükseliyor. Üçüncü katta ışık yok ama görmek için ışık gerekmiyor: basamaklara bırakılan her şey mozaik zemine sıra sıra dizilmiş. Çakmaklar, ayakkabılar, fotoğraflar, konserve kutuları; her birinin üstünde kâğıt bir etiket, etiketlerde birer ad.", en: "The shutter groans under your shoulder and rises a few inches, then a foot. There's no light on the third floor, but you don't need any: everything ever set on the steps is lined up in rows on the tile. Lighters, shoes, photos, cans of food. Every one has a paper tag, and every tag has a name." }
+          - { tr: "Sıraların dibinde bir pencere asılı: [Teşhir alanı · Ziyaretçi: 1 · Lütfen dokunmayın.]", en: "A window hangs at the end of the rows: [Display area · Visitors: 1 · Please do not touch.]" }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "ziyaretçi sayısı bir. sen. bunu ilk kez yazdı; ben olsam elimi kepengin altından çekerdim.", en: "visitors: one. you. first time it's ever printed that. i'd pull my hand out from under that shutter if i were you." }
+        secenekler:
+          - id: "al"
+            etiket: { tr: "Bir şey al; etiketler umurunda değil", en: "Take something. The tags aren't your problem" }
+            etkiler:
+              - esya: { kucuk_iyilesme_iksiri: 1 }
+              - dikkat: 1
+              - ahlak: { duzen: -2 }
+              - bayrak: "k1_ucuncu_kat_alindi"
+            sonraki: "@akis"
+          - id: "indir"
+            etiket: { tr: "Kepengi indir; hiçbir şeye dokunma", en: "Lower the shutter. Touch nothing" }
+            etkiler:
+              - ahlak: { duzen: 2 }
+            sonraki: "@akis"
+
+      - id: "k1_merdiven_anahtar"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Kız anahtarı cebinden çıkarıp uzatıyor: pirinç, küçük, üstünde kazılı bir numara: 117. \"Burada hiçbir şeyi açmıyor,\" diyor. \"Babam her kapıda denedi.\" Anahtarın sırtında soluk bir etiket var: İSTASYON · EMANET.", en: "She digs the key out of her pocket and holds it up: brass, small, a number stamped on it: 117. \"It doesn't open anything here,\" she says. \"Dad tried every door.\" On the back, a faded label: STATION · LOCKERS." }
+          - { tr: "\"Al,\" diyor. \"Konservenin karşılığı bu kadarsa, bize yaramaz.\"", en: "\"Take it,\" she says. \"If that's what a can of food buys, it's no good to us.\"" }
+        secenekler:
+          - id: "al"
+            etiket: { tr: "Anahtarı al; istasyonda denersin", en: "Take the key. You'll try it at the station" }
+            etkiler: []
+            sonraki: "@akis"
+          - id: "karsilik"
+            etiket: { tr: "Karşılığında kıza bir şey bırak", en: "Leave the girl something for it" }
+            gerekli: { esya: { hurda: 1 } }
+            etkiler:
+              - esya: { hurda: -1 }
+              - ahlak: { duzen: 1, merhamet: 1 }
+            sonraki: "@akis"
+
+  # ================================================================== YÜKSEK SKOR TABLOSU (çarşı, Bölüm 2+)
+  - id: "k1_skor_tablosu"
+    konum: ["harabe_carsi"]
+    perde: [1]
+    bolge: ["harabe_carsi"]
+    gun: { min: 8, max: 28 }
+    kosul: { bolum_min: 2 }
+    agirlik: 1
+    etiketler: ["kesif", "anomali", "carsi"]
+    gerilim: 2
+    kart: { tr: "Yüksek skor tablosu", en: "High score table" }
+    sahne: "k1_skor_1"
+    sahneler:
+      - id: "k1_skor_1"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Üst kattaki oyun salonu zifiri karanlık; yalnız bir araba yarışı kabini ışıl ışıl yanıyor. Ekranda araba yok. YÜKSEK SKORLAR başlığının altında sekiz ad, her adın yanında bir sayı.", en: "The arcade on the top floor is pitch dark except for one racing cabinet, lit up bright. There are no cars on the screen. Under HIGH SCORES: eight names, a number beside each." }
+          - { tr: "Kabinin önüne üç çocukla bir avcı birikmiş. Avcı kendi adını gösteriyor, yanında 9 yazıyor; \"Ben on dördüm,\" diyor, kimseyi inandırmayan bir sesle. Sayılar skor değil, seviye.", en: "Three kids and a hunter are crowded around the cabinet. The hunter points at his own name, the number beside it a 9; \"I'm a fourteen,\" he says, in a voice that convinces nobody. Those aren't scores. They're levels." }
+          - { tr: "Yedinci satır göz kırpıyor, sonra sabitleniyor: {oyuncu}. Çocuklardan biri yanındaki sayıyı hecelemeye çalışıyor; avcı önce ekrana, sonra sana bakıyor.", en: "The seventh line blinks, then settles: {oyuncu}. One of the kids tries to sound out the number beside it. The hunter looks at the screen, then at you." }
+          - metin: { tr: "O sayı herkesin gördüğü seviyen değil. Avcının bakışı ekranla senin aranda gidip geliyor.", en: "That number isn't the level everyone sees. The hunter's eyes go back and forth between the screen and you." }
+            kosul: { gizli_fark_min: 3 }
+        sezgiler:
+          - kosul: { stat: { int: 9 } }
+            metin: { tr: "Kabine güç gelmiyor; fişi duvardan sökülmüş, kablo yerde. Ekran kendi kendine yanıyor.", en: "The cabinet isn't getting power. The plug's been pulled, the cord's on the floor. The screen is lit on its own." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "yüksek skor. ne tatlı. seni yedinci sıraya yazdı; sıralamanın neye göre olduğunu sorsana.", en: "high scores. how cute. it put you seventh. ask it what the ranking's based on." }
+        secenekler:
+          - id: "kir"
+            etiket: { tr: "Ekranı kır", en: "Smash the screen" }
+            zar: { stat: "str", zorluk: 11, tek: true, basarisiz: "k1_skor_kivilcim", basarisiz_etkiler: [{ dikkat: 1 }] }
+            etkiler:
+              - ahlak: { duzen: -2, insanlik: 1 }
+              - bayrak: "k1_skor_kirildi"
+              - xp: 20
+            sonraki: "k1_skor_karanlik"
+          - id: "omuz"
+            tur: "aciga_vur"
+            etiket: { tr: "Omuz silk; okusunlar", en: "Shrug. Let them read it" }
+            goster: { gizli_fark_min: 3 }
+            etkiler:
+              - aciga_vur: true
+              - dikkat: 2
+              - itibar: { lonca: 2 }
+              - bayrak: "k1_skor_goruldu"
+              - xp: 20
+            sonraki: "k1_skor_bakislar"
+          - id: "oyun"
+            tur: "gizle"
+            etiket: { tr: "\"Oyun bozuk\" de; çocukların dikkatini dağıt", en: "Call it a glitched game. Get the kids looking elsewhere" }
+            etkiler:
+              - gizle: 2
+              - ahlak: { duzen: -1 }
+              - xp: 15
+            sonraki: "k1_skor_oyun"
+          - id: "ezber"
+            etiket: { tr: "Tabloyu ezberle: sekiz ad, sekiz gerçek seviye", en: "Memorize the table. Eight names, eight real levels" }
+            gerekli: { stat: { int: 8 } }
+            etkiler:
+              - ahlak: { duzen: 1 }
+              - bayrak: "k1_skor_ezber"
+              - xp: 25
+            sonraki: "k1_skor_ezber"
+
+      - id: "k1_skor_karanlik"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Cam örümcek ağı gibi çatlıyor, ışık son bir kez titreyip sönüyor. Salon bir anda kapkaranlık; çocuklardan biri ağlamaya başlıyor.", en: "The glass spiderwebs, the light shivers once and dies. The arcade drops into black, and one of the kids starts crying." }
+          - { tr: "Avcının sesi karanlıktan geliyor: \"Bu çarşıdaki tek dürüst şeydi o.\" Kimse karşılık vermiyor; ne sen ne çocuklar.", en: "The hunter's voice comes out of the dark. \"That was the only honest thing in this mall.\" Nobody answers him. Not you, not the kids." }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Çocukları ışığa çıkar", en: "Walk the kids back to the light" }
+            etkiler:
+              - ahlak: { merhamet: 1 }
+            sonraki: "@akis"
+          - id: "cam"
+            etiket: { tr: "Cam kırıklarından işe yarayanları topla", en: "Pick the useful glass out of the wreck" }
+            etkiler:
+              - esya: { cam_sise: 1, hurda: 1 }
+            sonraki: "@akis"
+
+      - id: "k1_skor_kivilcim"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Yumruğun cama değmeden kabin kıvılcım saçıyor; kolun geri tepiyor. Ekranda bir satır beliriyor: [Kayıt korunuyor.] Ardından tablo hiçbir şey olmamış gibi yerine dönüyor; yedinci satırda adın.", en: "Your fist never reaches the glass. The cabinet throws a spark and your arm snaps back. A line appears on the screen: [Record protected.] Then the table comes back like nothing happened, your name on line seven." }
+          - { tr: "Üç çocuk ve avcı denediğini görmüş. Avcı ağır ağır başını sallıyor; ne düşündüğü yüzünden okunuyor.", en: "Three kids and a hunter watched you try. The hunter slowly shakes his head, and you can read exactly what he's thinking." }
+        secenekler:
+          - id: "tekrar"
+            etiket: { tr: "Kabloyu kökünden kopar", en: "Tear the cable out at the root" }
+            gerekli: { stat: { str: 10 } }
+            etkiler:
+              - ahlak: { duzen: -2 }
+              - bayrak: "k1_skor_kirildi"
+              - xp: 15
+            sonraki: "k1_skor_karanlik"
+          - id: "yuru"
+            etiket: { tr: "Elini ovuştur, çık", en: "Rub your hand and walk out" }
+            etkiler:
+              - ahlak: { insanlik: -1 }
+            sonraki: "@akis"
+
+      - id: "k1_skor_bakislar"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Avcı sayıyı ikinci kez okuyor, üçüncü kez okuyor. Sonra geri çekiliyor; bir adım, iki adım. Çocuklar neyin değiştiğini anlamıyor ama onun yüzünü görüyor.", en: "The hunter reads the number a second time, a third. Then he steps back. One step, two. The kids don't understand what changed, but they see his face." }
+          - { tr: "\"Rampadakiler bunu bilmiyor, değil mi?\" diyor. Cevap vermene gerek kalmıyor; soru değil bu, teklif.", en: "\"The crew at the loading dock doesn't know this, do they?\" he says. You don't have to answer. It isn't a question. It's an offer." }
+        secenekler:
+          - id: "soyle"
+            etiket: { tr: "\"Söyle istersen.\"", en: "\"Tell them if you want.\"" }
+            etkiler:
+              - ahlak: { duzen: 2 }
+              - dikkat: 1
+              - itibar: { lonca: 2 }
+            sonraki: "@akis"
+          - id: "sus"
+            etiket: { tr: "\"Sakla. Karşılığında ben de senin dokuzunu saklarım.\"", en: "\"Keep it quiet. I'll keep your nine quiet too.\"" }
+            etkiler:
+              - ahlak: { duzen: -1, insanlik: 1 }
+              - itibar: { sessiz_ag: 2 }
+            sonraki: "@akis"
+
+      - id: "k1_skor_oyun"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "\"Oyun bozuk,\" diyorsun, \"skorları karıştırmış.\" Çocukları öbür kabinlere sürüyorsun; birinin direksiyonu hâlâ dönüyor, ikisi onunla oyalanıyor. Üçüncüsü, küçük bir kız, yerinden kımıldamıyor: \"Ama senin adın da var.\"", en: "\"The game's busted,\" you say. \"Scrambled the scores.\" You herd the kids toward the other cabinets; one steering wheel still turns, and two of them get busy with it. The third, a little girl, doesn't move: \"But your name's up there too.\"" }
+          - { tr: "Avcı seni dinlemiyor; ekranda kendi dokuzuna bakıyor. Kimseye bir şey söylemeyeceğini sen de biliyorsun, o da.", en: "The hunter isn't listening to you. He's staring at his own nine on the screen. He won't be telling anybody, and you both know it." }
+        secenekler:
+          - id: "kiz"
+            etiket: { tr: "Kıza göz kırp: \"Benimki de bozuk.\"", en: "Wink at the girl. \"Mine's busted too.\"" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+            sonraki: "@akis"
+          - id: "git"
+            etiket: { tr: "Cevap verme, çık", en: "Don't answer. Leave" }
+            etkiler:
+              - ahlak: { insanlik: -1 }
+            sonraki: "@akis"
+
+      - id: "k1_skor_ezber"
+        yer: "harabe_carsi"
+        paragraflar:
+          - { tr: "Adları birer birer okuyorsun. Dördünü tanıyorsun: rampadakilerden ikisi, hastaneden biri, köprüdeki gişeci. Dördünü tanımıyorsun; bunlardan birinin yanında öbürlerinin iki katı bir sayı duruyor: 41.", en: "You read the names one by one. Four you know: two from the loading dock, one from the hospital, the toll man from the skybridge. Four you don't, and beside one of those sits a number twice the size of the rest: 41." }
+          - { tr: "Sekizinci satırın altında, listenin bittiği yerde bir çizgi daha var; adı yok, sayısı yok. Yalnız bir tire.", en: "Under the eighth line, where the list ends, there's one more row. No name, no number. Just a dash." }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "dokuzuncu satır boş değil, bekliyor. kimi beklediğini sorma bana.", en: "the ninth line isn't empty. it's waiting. don't ask me who for." }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Adları aklına yaz, çık", en: "File the names away and leave" }
+            etkiler: []
+            sonraki: "@akis"
+          - id: "radyocu"
+            etiket: { tr: "Listeyi istasyondaki radyoculara anlat", en: "Pass the list to the radio crew at the station" }
+            goster: { bayrak: "mert_istasyonu_bilinir" }
+            etkiler:
+              - itibar: { sessiz_ag: 3 }
+              - ahlak: { duzen: 1 }
+            sonraki: "@akis"
+
+  # ================================================================== BATIK VAGONDAKİ ÇOCUK (istasyon)
+  - id: "k1_batik_vagon"
+    konum: ["kirik_istasyon"]
+    perde: [1]
+    bolge: ["kirik_istasyon"]
+    gun: { min: 2, max: 26 }
+    agirlik: 1
+    etiketler: ["kesif", "kurtarma", "istasyon"]
+    gerilim: 3
+    kart: { tr: "Batık vagondaki çocuk", en: "The kid in the sunken car" }
+    sahne: "k1_vagon_1"
+    sahneler:
+      - id: "k1_vagon_1"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "{yer:kirik_istasyon|in} birinci peronunda raylar göğüs hizasında suyun altında. Bir vagon yan yatmış, kapıları açık, camlarından kahverengi su içeri dolup boşalıyor. Suyun yüzü kıpırdıyor; derken bir çocuğun başı çıkıyor, nefesini kesik kesik alıp yeniden dalıyor.", en: "At the {yer:kirik_istasyon|pos} first platform, the tracks sit under chest-deep water. A car lies on its side, doors open, brown water sloshing in and out of its windows. The surface stirs, then a kid's head breaks through, grabs a ragged breath, and goes under again." }
+          - { tr: "Saydığın dördüncü dalış bu. Peronda kuru giysileri katlanmış, yanında da bir genç kız ceketi. Çocuk bir daha çıkınca morarmış dudaklarıyla bağırıyor: \"Telefonu! Ablamın telefonu orada. İçinde sesli mesajı var!\"", en: "That's the fourth dive by your count. His dry clothes are folded on the platform next to a teenage girl's jacket. When he surfaces again, he shouts through blue lips: \"The phone! My sister's phone is in there. Her voicemail's on it!\"" }
+          - { tr: "Vagonun su altındaki tavanı boyunca uzun, yosunlu bir sırt kayıyor. Çocuk görmüyor; ona arkasını dönmüş.", en: "Along the car's submerged roof, a long, moss-covered back is sliding. The kid doesn't see it. He's facing the other way." }
+        sezgiler:
+          - kosul: { stat: { per: 8 } }
+            metin: { tr: "Tavanda kayan şey yosun değil, sırt. Çocuğun her dalışında bir koltuk daha yaklaşmış.", en: "The thing sliding along the roof isn't moss. It's a back. It's moved a seat closer with every dive." }
+          - kosul: { stat: { end: 9 } }
+            metin: { tr: "Su buz gibi, dört derece olsa olsa. Çocuğun dudakları mor; iki dalış daha ya kalbi durur ya kolları.", en: "That water's forty degrees, maybe. His lips are blue. Two more dives and either his heart quits or his arms do." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "ölü bir ses için diri bir çocuk. hesap bu. hesabı kim yapıyor peki, sen mi?", en: "a living kid for a dead voice. that's the math. who's doing the math, though. you?" }
+        secenekler:
+          - id: "dal"
+            etiket: { tr: "Sen dal; çocuğu perona çek", en: "You dive. Get the kid onto the platform" }
+            zar: { stat: "end", zorluk: 12, tek: true, basarisiz: "k1_vagon_bogulma", basarisiz_etkiler: [{ can: -15 }] }
+            etkiler:
+              - ahlak: { merhamet: 4 }
+              - can: -5
+              - bayrak: "k1_telefon_bulundu"
+              - xp: 30
+            sonraki: "k1_vagon_telefon"
+          - id: "sirtli"
+            etiket: { tr: "Suya in, sırtlıyı vagondan uzaklaştır", en: "Get in the water. Draw the mossback off the car" }
+            etkiler:
+              - ahlak: { merhamet: 3, duzen: 1 }
+              - savas: { dusmanlar: ["yosun_sirtli"], ortam: ["su", "karanlik"], kazan: "k1_vagon_temiz", kaybet: "k1_vagon_yenilgi", kac: "k1_vagon_yenilgi" }
+          - id: "firlat"
+            tur: "gosteris"
+            etiket: { tr: "Sırtlıyı kuyruğundan tutup perona fırlat", en: "Grab the mossback by the tail and hurl it onto the platform" }
+            goster: { bayrak: "kirilma_yasandi" }
+            gerekli: { stat: { str: 15 } }
+            etkiler:
+              - ahlak: { merhamet: 3, duzen: 1 }
+              - dikkat: 2
+              - degisken: { k1_telefon_cocukta: 1 }
+              - xp: 35
+            sonraki: "k1_vagon_temiz"
+          - id: "tut"
+            etiket: { tr: "Çocuğu kolundan yakala: artık yeter", en: "Grab the kid's arm. That's enough" }
+            zar: { stat: "cha", zorluk: 12, tek: true, basarisiz: "k1_vagon_direnis", basarisiz_etkiler: [{ can: -4 }] }
+            etkiler:
+              - ahlak: { merhamet: 3, duzen: 2 }
+              - bayrak: "k1_cocuk_kurtarildi"
+              - xp: 25
+            sonraki: "k1_vagon_vazgecti"
+          - id: "yuru"
+            etiket: { tr: "Yürü; ablası ölmüş, çocuk da ölecek", en: "Walk on. The sister's dead, and the kid's next" }
+            etkiler:
+              - ahlak: { merhamet: -5, insanlik: -2 }
+              - degisken: { hayatta_kalan: -1 }
+            sonraki: "@akis"
+
+      - id: "k1_vagon_telefon"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - metin: { tr: "Soğuk, göğsüne yumruk gibi iniyor. Vagonun içinde koltukların arasından sürünürken yosunlu sırt bir dalga gibi yanından geçiyor; sana değmiyor, bu kez değmiyor. Makinist kabininin kapısına sıkışmış telefonu parmaklarınla söküp yüzeye fırlıyorsun.", en: "The cold hits your chest like a fist. Crawling between the seats inside the car, the mossy back rolls past you like a wave. It doesn't touch you. Not this time. You pry the phone out of the cab door where it's wedged and kick for the surface." }
+            kosul: { degisken_max: { k1_telefon_cocukta: 0 } }
+          - { tr: "Çocuk telefonu iki eliyle tutuyor, yaralı bir kuş gibi. Ekran kara, içine su dolmuş. \"Kurutursam çalışır,\" diyor; sana değil, kendine.", en: "The kid holds the phone in both hands like a wounded bird. The screen is dead, water behind the glass. \"It'll work if I dry it,\" he says, not to you. To himself." }
+        secenekler:
+          - id: "tuz"
+            etiket: { tr: "Tuz kesesine gömüp kurutmayı göster", en: "Show him how to dry it in rock salt" }
+            gerekli: { esya: { kaya_tuzu: 1 } }
+            etkiler:
+              - esya: { kaya_tuzu: -1 }
+              - ahlak: { insanlik: 2 }
+              - bayrak: "k1_telefon_kurtuldu"
+              - xp: 15
+            sonraki: "@akis"
+          - id: "yavas"
+            etiket: { tr: "Yavaşça söyle: belki hiç çalmayacak", en: "Tell him gently: it might never play" }
+            etkiler:
+              - ahlak: { insanlik: 2, duzen: 1 }
+            sonraki: "@akis"
+          - id: "umut"
+            etiket: { tr: "Bırak umut etsin", en: "Let him hope" }
+            etkiler:
+              - ahlak: { merhamet: 1 }
+            sonraki: "@akis"
+
+      - id: "k1_vagon_temiz"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Sırtlı son bir kez çırpınıp tünelin karanlığına doğru sürükleniyor; su yosun ve kan kokuyor. Çocuk bu arada bir kez daha dalmış; çıktığında avucunda telefon, yüzünde ne gülümseme var ne gözyaşı, yalnız bitkinlik.", en: "The mossback thrashes once more and drifts off toward the dark of the tunnel. The water smells like moss and blood. The kid dove one more time while you fought. He comes up with the phone in his fist, no smile, no tears, just exhaustion." }
+          - { tr: "Onu perona çekip ceketi sırtına örtüyorsun. Dişleri birbirine vuruyor. \"Gördün mü?\" diyor. \"Aldım.\"", en: "You haul him onto the platform and wrap the jacket around him. His teeth are chattering. \"See?\" he says. \"Got it.\"" }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Isınana kadar yanında kal", en: "Stay with him till he warms up" }
+            etkiler:
+              - ahlak: { merhamet: 2, insanlik: 1 }
+              - bayrak: "k1_telefon_bulundu"
+              - degisken: { k1_telefon_cocukta: 1 }
+              - xp: 35
+            sonraki: "k1_vagon_telefon"
+          - id: "git"
+            etiket: { tr: "Başını okşa, yoluna devam et", en: "Ruffle his hair and move on" }
+            etkiler:
+              - bayrak: "k1_telefon_bulundu"
+              - xp: 30
+            sonraki: "@akis"
+
+      - id: "k1_vagon_yenilgi"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Yosunlu kütle seni rayların dibine bastırıyor; ciğerlerine su doluyor. Son hissettiğin, bileğine kenetlenen küçük, soğuk bir el.", en: "The mossy bulk pins you to the rail bed and water floods your lungs. The last thing you feel is a small, cold hand clamping around your wrist." }
+          - { tr: "Peronda öksürerek kendine geliyorsun. Çocuk yanına çömelmiş, ıslak saçlarından su damlıyor. \"Seni çıkardım,\" diyor. \"Telefonu çıkaramadım.\" Sırtlı yine vagonun tavanında, bekliyor.", en: "You come to on the platform, coughing. The kid is crouched beside you, water dripping off his hair. \"I got you out,\" he says. \"Couldn't get the phone.\" The mossback is back on the car's roof, waiting." }
+        secenekler:
+          - id: "tekrar"
+            etiket: { tr: "Doğrul, suya bir daha in", en: "Get up. Go back in" }
+            etkiler:
+              - can: 10
+              - ahlak: { merhamet: 2 }
+              - savas: { dusmanlar: ["yosun_sirtli"], ortam: ["su", "karanlik"], kazan: "k1_vagon_temiz", kaybet: "k1_vagon_yenilgi", kac: "k1_vagon_yenilgi" }
+          - id: "ikna"
+            etiket: { tr: "Ona bak: \"Sen beni çıkardın. Yeter bu kadarı.\"", en: "Look at him. \"You got me out. That's enough.\"" }
+            etkiler:
+              - ahlak: { insanlik: 2, merhamet: 1 }
+              - bayrak: "k1_cocuk_kurtarildi"
+              - xp: 15
+            sonraki: "@akis"
+          - id: "git"
+            etiket: { tr: "Kalk, uzaklaş; su kazandı", en: "Get up and walk away. The water won" }
+            etkiler:
+              - ahlak: { merhamet: -2 }
+            sonraki: "@akis"
+
+      - id: "k1_vagon_bogulma"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Soğuk, nefesini daha dalmadan alıyor. Koltukların arasında yönünü yitiriyorsun; hangi taraf yukarı, hangi taraf cam, bilmiyorsun. Yosunlu bir şey bacağına sürtünüyor.", en: "The cold takes your breath before you're even under. Between the seats you lose your bearings. Which way is up, which way is glass, you don't know. Something mossy brushes your leg." }
+          - { tr: "Seni yüzeye çıkaran çocuk oluyor. Peronda yan yana öksürürken sana bakmıyor bile; gözü vagonda. \"Beşinci dalışım,\" diyor. \"Senin ilk.\"", en: "It's the kid who drags you to the surface. Coughing side by side on the platform, he doesn't even look at you. His eyes are on the car. \"That was my fifth dive,\" he says. \"Your first.\"" }
+        secenekler:
+          - id: "sirtli"
+            etiket: { tr: "Önce şu sırtlıyı hallet, sonra telefonu", en: "Deal with the mossback first. Then the phone" }
+            etkiler:
+              - ahlak: { merhamet: 2, duzen: 1 }
+              - savas: { dusmanlar: ["yosun_sirtli"], ortam: ["su", "karanlik"], kazan: "k1_vagon_temiz", kaybet: "k1_vagon_yenilgi", kac: "k1_vagon_yenilgi" }
+          - id: "tut"
+            etiket: { tr: "Elini onun koluna koy: ikinize de yeter", en: "Put a hand on his arm. You've both had enough" }
+            etkiler:
+              - ahlak: { merhamet: 2, insanlik: 2 }
+              - bayrak: "k1_cocuk_kurtarildi"
+              - xp: 15
+            sonraki: "k1_vagon_vazgecti"
+          - id: "git"
+            etiket: { tr: "Islak giysilerinle uzaklaş", en: "Walk off in your wet clothes" }
+            etkiler:
+              - ahlak: { merhamet: -2 }
+            sonraki: "@akis"
+
+      - id: "k1_vagon_direnis"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Çocuk eline sertçe diş geçirip kurtuluyor. \"Sen bilmezsin!\" diye bağırıp yeniden dalıyor. Tavandaki sırt bu kez ona doğru kayıyor; kıpırtısı suyun yüzünde okunuyor.", en: "The kid bites your hand and twists free, and he bites deep. \"You don't know!\" he yells, and dives again. This time the back on the roof slides toward him. You can read its wake on the surface." }
+        secenekler:
+          - id: "sirtli"
+            etiket: { tr: "Peşinden suya in; sırtlıyı üstüne çek", en: "Go in after him. Draw the mossback onto yourself" }
+            etkiler:
+              - ahlak: { merhamet: 4 }
+              - savas: { dusmanlar: ["yosun_sirtli"], ortam: ["su", "karanlik"], kazan: "k1_vagon_temiz", kaybet: "k1_vagon_yenilgi", kac: "k1_vagon_yenilgi" }
+          - id: "bagir"
+            etiket: { tr: "Suya taş at, sırtlının dikkatini dağıt", en: "Throw rocks to distract the mossback" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - bayrak: "k1_cocuk_daldi"
+              - degisken: { k1_telefon_cocukta: 1 }
+              - xp: 15
+            sonraki: "k1_vagon_taslar"
+          - id: "git"
+            etiket: { tr: "Arkanı dön; seçimini yaptı", en: "Turn your back. He made his choice" }
+            etkiler:
+              - ahlak: { merhamet: -3, insanlik: -1 }
+              - bayrak: "k1_cocuk_daldi"
+            sonraki: "@akis"
+
+      - id: "k1_vagon_taslar"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Peronun kenarındaki moloz parçalarını sırtlının üstüne yağdırıyorsun. Kütle bir an duraksıyor, sonra sana doğru dönüyor; çocuk o aralıkta çıkıyor, ellerinde telefon.", en: "You rain chunks of rubble from the platform edge down on the mossback. The bulk hesitates, then turns toward you, and in that gap the kid comes up with the phone in his hands." }
+          - { tr: "Onu rayların kenarından çekip alıyorsun. Sırtlı peronun dibinde bir süre dolanıp tünele çekiliyor. Çocuk ölü telefonu göğsüne bastırmış, titriyor.", en: "You drag him clear of the rails. The mossback circles below the platform for a while, then withdraws into the tunnel. The kid is shaking, the dead phone pressed to his chest." }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Ceketi sırtına ört", en: "Wrap the jacket around him" }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - bayrak: "k1_telefon_bulundu"
+              - xp: 20
+            sonraki: "k1_vagon_telefon"
+
+      - id: "k1_vagon_vazgecti"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Önce direniyor, sonra kolu gevşiyor. Perona oturup ceketi omuzlarına çekiyor; ablasının ceketi, kolları ona uzun geliyor. \"Son mesajını dinlemedim,\" diyor. \"Meşguldüm.\"", en: "He fights you, then his arm goes slack. He sits on the platform and pulls the jacket over his shoulders. His sister's jacket, the sleeves too long on him. \"I never listened to her last message,\" he says. \"I was busy.\"" }
+          - { tr: "Vagonun tavanındaki sırt bir süre daha kayıp duruyor, sonra tünele çekiliyor. Çocuk arkasından bakmıyor bile.", en: "The back on the car's roof slides around a while longer, then pulls back into the tunnel. The kid doesn't even watch it go." }
+        secenekler:
+          - id: "mesaj"
+            etiket: { tr: "Ona sor: sence mesajda ne diyordu?", en: "Ask him: what does he think it said?" }
+            etkiler:
+              - ahlak: { insanlik: 3 }
+              - xp: 10
+            sonraki: "@akis"
+          - id: "hastane"
+            etiket: { tr: "Isınsın diye çarşıdaki hastaneye yolla", en: "Send him to the hospital at the mall to warm up" }
+            etkiler:
+              - ahlak: { duzen: 1, merhamet: 1 }
+              - itibar: { siginak: 2 }
+            sonraki: "@akis"
+
+  # ================================================================== SEFER TAHTASI (istasyon)
+  - id: "k1_sefer_tahtasi"
+    konum: ["kirik_istasyon"]
+    perde: [1]
+    bolge: ["kirik_istasyon"]
+    gun: { min: 2, max: 24 }
+    agirlik: 1
+    etiketler: ["kesif", "anomali", "istasyon"]
+    gerilim: 2
+    kart: { tr: "Sefer tahtası", en: "The departures board" }
+    sahne: "k1_tahta_1"
+    sahneler:
+      - id: "k1_tahta_1"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Ana holün sefer tahtası kendi kendine çalışıyor. Eski usul kanatlı tahta; harfler takır takır dönüp yerine oturuyor. Yalnız varış yerleri yazmıyor artık. KALKIŞ sütununda insan adları var, yanlarında saatler.", en: "The departures board in the main hall is running by itself. An old split-flap board, letters clattering over and settling. Only it isn't showing destinations anymore. The DEPARTURES column is full of people's names, times beside them." }
+          - { tr: "Altında on kadar kişi dikiliyor, kimse konuşmuyor. Bir satırda 14:40 yazıyor, duvar saatinde 14:12; bir kadın aynı cümleyi tekrarlıyor: \"Kocamın adı bu. Çarşıda o, çarşıda.\"", en: "A dozen people stand under it, nobody talking. One line says 2:40, and the wall clock reads 2:12. A woman keeps repeating the same sentence: \"That's my husband's name. He's at the mall. He's at the mall.\"" }
+          - { tr: "Bazı satırların yanında RÖTAR yazıyor, bir tanesinin yanında İPTAL. Tahta bir daha takırdıyor; yeni bir ad oturuyor.", en: "Some lines read DELAYED. One reads CANCELED. The board clatters again, and a new name settles into place." }
+        sezgiler:
+          - kosul: { stat: { int: 9 } }
+            metin: { tr: "Sütun başlığının altında, küçücük, eski bir yazı daha var: Katkı. Tahta kalkış demiyor aslında.", en: "Under the column header there's another word, tiny and old: Contribution. The board isn't saying departures at all." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "senin satırın da var. saati boş. her gün bakıyorum, hep boş. bunu iltifat sanma.", en: "you've got a line too. no time next to it. i check every day and it's always blank. don't take that as a compliment." }
+        secenekler:
+          - id: "kos"
+            etiket: { tr: "Kadınla çarşıya koş; kocasını bul", en: "Run to the mall with the woman. Find her husband" }
+            zar: { stat: "agi", zorluk: 11, tek: true, basarisiz: "k1_tahta_gec", basarisiz_etkiler: [{ can: -8 }, { bayrak: "k1_tahta_uyarilan_yarali" }] }
+            etkiler:
+              - ahlak: { merhamet: 4, duzen: 1 }
+              - degisken: { hayatta_kalan: 1 }
+              - bayrak: "k1_tahta_iptal"
+              - xp: 35
+            sonraki: "k1_tahta_vaktinde"
+          - id: "bekle"
+            etiket: { tr: "Tahtanın altında kal; sıradaki adı bekle", en: "Stay under the board. Wait for the next name" }
+            etkiler:
+              - ahlak: { duzen: 1 }
+            sonraki: "k1_tahta_cocuk"
+          - id: "katki"
+            etiket: { tr: "Alt yazıyı yüksek sesle oku: bu bir kalkış tahtası değil", en: "Read the small print out loud. This isn't a departures board" }
+            gerekli: { stat: { int: 9 } }
+            etkiler:
+              - ahlak: { duzen: 2, insanlik: 1 }
+              - itibar: { sessiz_ag: 2 }
+              - xp: 20
+            sonraki: "k1_tahta_katki"
+          - id: "sok"
+            etiket: { tr: "Tahtayı sök; kimse bunu okumasın", en: "Tear the board down. Nobody should read this" }
+            zar: { stat: "str", zorluk: 12, tek: true, basarisiz: "k1_tahta_kivilcim", basarisiz_etkiler: [{ can: -10 }, { itibar: { siginak: -2 } }] }
+            etkiler:
+              - ahlak: { duzen: 2, insanlik: -1 }
+              - itibar: { siginak: 2, sessiz_ag: -2 }
+              - esya: { canli_bakir: 1 }
+              - bayrak: "k1_tahta_sokuldu"
+              - xp: 25
+            sonraki: "k1_tahta_sokuldu"
+          - id: "kendi"
+            etiket: { tr: "Kendi satırını ara", en: "Look for your own line" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+              - bayrak: "k1_tahta_kendi"
+              - xp: 20
+            sonraki: "k1_tahta_kendi"
+
+      - id: "k1_tahta_vaktinde"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Bir buçuk kilometre yolu yirmi dakikada alıyorsunuz; kadın yarı yolda düşüyor, sen onu yürütüp duruyorsun. Adamı cam köprünün başında, tam çatlak bölüme adım atmak üzereyken buluyorsunuz. Sen bağırınca duruyor; bir saniye sonra basacağı cam parçası dokuz metre aşağıdaki mozaiğe çakılıyor.", en: "You cover the mile in twenty minutes; the woman goes down halfway there and you keep her moving. You find the man at the mouth of the skybridge, one step from the cracked section. He stops when you shout, and a second later the pane he would have stepped on drops thirty feet onto the tile below." }
+          - { tr: "İstasyona döndüğünüzde adamın satırının yanında artık İPTAL yazıyor. Kadın kocasının koluna yapışmış, tahtaya bakmıyor. Adamsa bakıyor; uzun uzun.", en: "When you get back to the station, his line reads CANCELED. The woman is clamped onto her husband's arm, not looking at the board. He is, though. For a long time." }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "İkisini de kalabalıktan uzaklaştır", en: "Steer them both away from the crowd" }
+            etkiler:
+              - ahlak: { merhamet: 1 }
+            sonraki: "@akis"
+          - id: "adam"
+            etiket: { tr: "Adama sor: ne yapacaktın o köprüde?", en: "Ask the man: what were you doing on that bridge?" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+              - xp: 10
+            sonraki: "@akis"
+
+      - id: "k1_tahta_gec"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Nefesin yetmiyor; kadın da arkada kalıyor. Çarşıya vardığında saat 14:43. Adamı cam köprünün altında buluyorsun: döşemeyle birlikte dokuz metre düşmüş, bacağı ters dönmüş, ama soluyor ve küfrediyor. Yaşayanlar küfreder.", en: "Your lungs give out before the mile does, and the woman falls behind. You reach the mall at 2:43. You find the man under the skybridge: he went thirty feet down with the floor, his leg bent the wrong way, but he's breathing and swearing. The living swear." }
+          - { tr: "Onu sırtına alıp istasyona taşıyorsun. Tahtadaki satırı değişmiş: RÖTAR.", en: "You carry him back to the station on your back. His line on the board has changed: DELAYED." }
+        secenekler:
+          - id: "hastane"
+            etiket: { tr: "Onu yemek katındaki hastaneye taşı", en: "Haul him to the food court hospital" }
+            etkiler:
+              - ahlak: { merhamet: 3, duzen: 1 }
+              - itibar: { siginak: 3 }
+              - xp: 20
+            sonraki: "@akis"
+          - id: "kadina"
+            etiket: { tr: "Kadına bırak; sen yeterince taşıdın", en: "Leave him with his wife. You've carried enough" }
+            etkiler:
+              - ahlak: { merhamet: 1 }
+              - xp: 15
+            sonraki: "@akis"
+
+      - id: "k1_tahta_cocuk"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Tahta yarım saat sessiz kalıyor. Sonra takırdıyor; yeni satırda bir çocuk adı var, yanında 15:05. Kalabalığın arasından bir kadın çığlık atıp sekiz yaşında bir oğlanı kucağına çekiyor. Çocuk ne olduğunu anlamıyor, annesinin yüzüne bakıyor.", en: "The board stays quiet for half an hour. Then it clatters, and the new line has a child's name on it, 3:05 beside it. A woman in the crowd screams and snatches up a boy of about eight. The kid doesn't understand. He's looking at his mother's face." }
+          - { tr: "Duvar saati 14:48. Hol, peronlar, merdivenler; tehlike her yerden gelebilir, hiçbir yerden de gelmeyebilir.", en: "The wall clock says 2:48. The hall, the platforms, the stairs. Danger could come from anywhere, or nowhere at all." }
+        secenekler:
+          - id: "gise"
+            etiket: { tr: "Anneyle çocuğu gişeye kapat; önünde sen dur", en: "Lock mother and son in the ticket booth. Stand in front of it" }
+            etkiler:
+              - ahlak: { merhamet: 3, duzen: 2 }
+              - egilim: { koruma: 1 }
+              - bayrak: "k1_tahta_cocuk_korundu"
+              - degisken: { hayatta_kalan: 1 }
+              - xp: 30
+            sonraki: "k1_tahta_gise"
+          - id: "kac"
+            etiket: { tr: "Anneye söyle: oğlunu al, istasyondan çık", en: "Tell the mother: take your son and get out of the station" }
+            etkiler:
+              - ahlak: { merhamet: 2, duzen: -1 }
+              - xp: 15
+            sonraki: "@akis"
+          - id: "izle"
+            etiket: { tr: "Uzaktan izle; ne olacağını öğrenmek istiyorsun", en: "Watch from a distance. You want to know what happens" }
+            etkiler:
+              - ahlak: { merhamet: -3, insanlik: -2 }
+              - xp: 20
+            sonraki: "k1_tahta_izle"
+
+      - id: "k1_tahta_gise"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Gişenin camlı kapısını üstlerine kapatıp önüne dikiliyorsun. Saat 15:00 olduğunda holün ışıkları titriyor; 15:03 geldiğinde tavandan bir kablo kopup çocuğun bir dakika önce durduğu yere çarpıyor, kıvılcımlar mozaiğe saçılıyor.", en: "You shut the booth's glass door on them and plant yourself in front of it. At 3:00 the hall lights flicker. At 3:03 a cable tears loose from the ceiling and whips down exactly where the boy was standing a minute ago. Sparks skitter across the tile." }
+          - { tr: "15:05 geldiğinde hiçbir şey olmuyor. Bir dakika sonra tahta takırdıyor: İPTAL. Camın ardında anne çocuğun saçlarına yüzünü gömmüş, sarsılıyor.", en: "At 3:05, nothing happens. At 3:06 the board clatters: CANCELED. Behind the glass the mother has her face buried in the boy's hair, shaking." }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Kapıyı aç", en: "Open the door" }
+            etkiler: []
+            sonraki: "@akis"
+          - id: "kablo"
+            etiket: { tr: "Kopan kabloyu kes, bakırını al", en: "Cut down the dead cable and take the copper" }
+            etkiler:
+              - esya: { canli_bakir: 1 }
+            sonraki: "@akis"
+
+      - id: "k1_tahta_izle"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Anne çocuğu kucağında holün ortasında dönüp duruyor; nereye kaçacağını bilmiyor. Saat 15:03 olduğunda tavandan kopan bir kablo on adım ötesine çarpıyor, kıvılcımlar saçılıyor. Kadın çığlık atıp merdivene koşuyor.", en: "The mother turns in circles in the middle of the hall with the boy in her arms, no idea which way to run. At 3:03 a cable tears loose from the ceiling and lands ten paces from them, throwing sparks. She screams and bolts for the stairs." }
+          - { tr: "15:05 geldiğinde hiçbir şey olmuyor. Bir dakika sonra tahta: İPTAL. Sen bir sütunun dibinden izlemiştin; kimse sana bakmıyor, bu da bir çeşit yargı.", en: "At 3:05, nothing happens. At 3:06 the board: CANCELED. You watched from the base of a pillar. Nobody's looking at you, which is a kind of verdict." }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Sütundan ayrıl", en: "Leave the pillar" }
+            etkiler: []
+            sonraki: "@akis"
+
+      - id: "k1_tahta_sokuldu"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Tahta çerçevesinden kopunca kanatlar bir sağanak gibi yere boşalıyor: harfler, sayılar, yarım adlar. Kalabalık ikiye bölünüyor; biri \"Tek uyarımızdı o!\" diye bağırıyor, bir başkası ilk kez derin bir nefes alıyor.", en: "When the board tears free of its frame, the flaps come down in a shower: letters, numbers, half-names. The crowd splits; somebody yells \"That was our only warning!\" and somebody else takes their first deep breath." }
+          - { tr: "Çerçevenin arkasında bir kol boyu canlı bakır var. Sökülen kanatlardan biri ayağının dibine düşüyor; üstünde adının ilk harfi.", en: "Behind the frame there's an arm's length of live copper. One of the fallen flaps lands at your feet. It carries the first letter of your name." }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Kanadı cebine koy, git", en: "Pocket the flap and go" }
+            etkiler: []
+            sonraki: "@akis"
+          - id: "topla"
+            etiket: { tr: "Kanatları sahiplerine geri ver", en: "Hand people the flaps that carry their names" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+              - xp: 10
+            sonraki: "@akis"
+
+      - id: "k1_tahta_kivilcim"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Çerçeveyi kavradığın anda bir çarpma seni geriye fırlatıyor. Tahta takırdıyor, hiçbir şey olmamış gibi yeni bir ad oturuyor. Yerden kalkarken kalabalığın bakışı üstünde; birkaçı yardıma geliyor, çoğu gelmiyor.", en: "The moment you grab the frame, a jolt throws you backward. The board clatters, and a new name settles in like nothing happened. As you pick yourself up, the crowd is watching. A few come to help. Most don't." }
+          - { tr: "\"Bize kalan tek uyarıyı kırmak istedin,\" diyor yaşlı bir adam. Ne haklı ne haksız; yalnız korkmuş.", en: "\"You tried to break the only warning we've got left,\" an old man says. He isn't right and he isn't wrong. He's just scared." }
+        secenekler:
+          - id: "tekrar"
+            etiket: { tr: "Kabloları kes, bir daha dene", en: "Cut the wiring and try again" }
+            gerekli: { stat: { int: 9 } }
+            etkiler:
+              - ahlak: { duzen: 2, insanlik: -1 }
+              - itibar: { sessiz_ag: -2 }
+              - esya: { canli_bakir: 1 }
+              - bayrak: "k1_tahta_sokuldu"
+              - xp: 20
+            sonraki: "k1_tahta_sokuldu"
+          - id: "vazgec"
+            etiket: { tr: "Elini çek; tahta onların", en: "Step back. The board's theirs" }
+            etkiler:
+              - ahlak: { insanlik: 1 }
+            sonraki: "@akis"
+
+      - id: "k1_tahta_kendi"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Satırları tek tek tarıyorsun. Adın en altta, ötekilerden biraz daha soluk harflerle duruyor: {oyuncu}. Yanında saat yok.", en: "You scan the lines one by one. Your name is at the very bottom in letters a shade fainter than the rest: {oyuncu}. No time next to it." }
+          - { tr: "Durum sütununda ne RÖTAR yazıyor ne İPTAL; kanatlar iki yazının arasında yarım dönmüş, öyle asılı kalmış.", en: "The status flap isn't on DELAYED and it isn't on CANCELED. It's stuck halfway between the two, hanging." }
+          - { tr: "Yanındaki adam da aynı satıra bakıyor. \"Senin mi o?\" diye soruyor. \"Niye saatin yok?\"", en: "The man beside you is looking at the same line. \"That you?\" he asks. \"How come you got no time?\"" }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "yarım dönmüş kanat. tam da öyle hissettiriyorsun bana. ne giden ne kalan.", en: "a flap stuck halfway. that's exactly what you feel like from in here. not leaving, not staying." }
+        secenekler:
+          - id: "sakla"
+            tur: "gizle"
+            etiket: { tr: "\"Benim değil. Benzer bir ad.\"", en: "\"Not me. Similar name.\"" }
+            etkiler:
+              - gizle: 1
+              - ahlak: { duzen: -1 }
+            sonraki: "@akis"
+          - id: "oku"
+            etiket: { tr: "Yüksek sesle oku: \"Rötardayım galiba.\"", en: "Read it out loud. \"Guess I'm delayed.\"" }
+            etkiler:
+              - dikkat: 1
+              - ahlak: { insanlik: 1 }
+            sonraki: "@akis"
+
+      - id: "k1_tahta_katki"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "\"Katkı,\" diye okuyorsun yüksek sesle başlığın altındaki küçük yazıyı. \"Kalkış değil bu, katkı. Sizi uyarmıyor, hesap kesiyor.\" Hol bir anda sessizleşiyor; tahtanın takırtısı bile duruyor.", en: "\"Contribution,\" you read out loud, the small print under the header. \"This isn't departures. It's contributions. It isn't warning you, it's billing you.\" The hall goes quiet all at once; even the board stops clattering." }
+          - { tr: "Yaşlı bir adam öne çıkıyor. \"Hesap kesiyorsa,\" diyor, \"ödemeyi reddetmek de var.\" Kadın kocasının adına bakıyor, sonra sana; aynı soruyu soran iki çift göz.", en: "An old man steps forward. \"If it's a bill,\" he says, \"we can refuse to pay.\" The woman looks at her husband's name, then at you. Two pairs of eyes asking the same question." }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "doğru okudun. şimdi ne yapacağını da doğru seç; hesap senin satırına da işliyor.", en: "you read it right. now choose right too. the bill runs on your line as well." }
+        secenekler:
+          - id: "sok"
+            etiket: { tr: "Tahtayı sök; faturayı kimse okumasın", en: "Tear the board down. Nobody reads this bill" }
+            zar: { stat: "str", zorluk: 12, tek: true, basarisiz: "k1_tahta_kivilcim", basarisiz_etkiler: [{ can: -10 }, { itibar: { siginak: -2 } }] }
+            etkiler:
+              - ahlak: { duzen: 2, insanlik: -1 }
+              - itibar: { siginak: 2, sessiz_ag: -2 }
+              - esya: { canli_bakir: 1 }
+              - bayrak: "k1_tahta_sokuldu"
+              - xp: 25
+            sonraki: "k1_tahta_sokuldu"
+          - id: "kos"
+            etiket: { tr: "Kadınla çarşıya koş; ödemeyi reddedin", en: "Run to the mall with the woman. Refuse to pay" }
+            zar: { stat: "agi", zorluk: 11, tek: true, basarisiz: "k1_tahta_gec", basarisiz_etkiler: [{ can: -8 }, { bayrak: "k1_tahta_uyarilan_yarali" }] }
+            etkiler:
+              - ahlak: { merhamet: 4, duzen: 1 }
+              - degisken: { hayatta_kalan: 1 }
+              - bayrak: "k1_tahta_iptal"
+              - xp: 35
+            sonraki: "k1_tahta_vaktinde"
+          - id: "yeter"
+            etiket: { tr: "Bildiğini söyledin; gerisi onların", en: "You've told them what you know. The rest is theirs" }
+            etkiler:
+              - ahlak: { duzen: 1 }
+            sonraki: "@akis"
+
+  # ================================================================== EMANET DOLAPLARI (istasyon, Bölüm 2+)
+  - id: "k1_emanet_dolaplari"
+    konum: ["kirik_istasyon"]
+    perde: [1]
+    bolge: ["kirik_istasyon"]
+    gun: { min: 8, max: 28 }
+    kosul: { bolum_min: 2 }
+    agirlik: 1
+    etiketler: ["kesif", "ahlak", "istasyon"]
+    gerilim: 2
+    kart: { tr: "Emanet dolapları", en: "The lockers" }
+    sahne: "k1_dolap_1"
+    sahneler:
+      - id: "k1_dolap_1"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Holün altındaki emanet salonu: duvar boyu gri çelik dolaplar, çoğu çoktan kırılmış. Üç hurdacı bir levyeyle sırayı aşağıdan yukarıya doğru temizliyor; 112, 113, 114 derken pas ve menteşe sesi geliyor.", en: "The locker hall under the concourse: gray steel lockers along the wall, most of them long since broken open. Three scrappers are working the row with a crowbar, 112, 113, 114, with a shriek of rust and hinges." }
+          - { tr: "117'nin önünde bir kadın oturuyor, sırtı kapağa dayalı, kolları iki yana açılmış. \"Benim,\" diyor hurdacılara, sana, kimseye; anahtarı yok, \"Oğlumun çizimleri var içinde.\" Hurdacılardan biri omuz silkiyor: \"Kırarsak yarısı bizim. Kural bu.\"", en: "A woman sits in front of 117, her back against the door, arms spread across it. \"It's mine,\" she says, to the scrappers, to you, to nobody; she has no key, \"my son's drawings are in there.\" One of the scrappers shrugs: \"We crack it, half's ours. That's the rule.\"" }
+          - { tr: "Her dolabın üstünde küçük bir Sistem penceresi asılı. Kırılanlarda tek bir çizgi var: [Sahip: —]. 117'nin üstündeki satır farklı: [Sahip: hayatta].", en: "A small System window hangs over every locker. On the broken ones it's a single line: [Owner: —]. The line over 117 is different: [Owner: alive]." }
+        sezgiler:
+          - kosul: { stat: { per: 8 } }
+            metin: { tr: "Kadın pencereyi okumuyor, kapağa bakıyor. Sahip olarak kendini sanıyor; oysa dolabı kiralayan oğlu olabilir.", en: "The woman isn't reading the window. She's looking at the door. She thinks she's the owner, but the one who rented the locker could be her son." }
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "kilidi kırmak kolay. kırmadan içinde ne olduğunu bilmek daha kolay. ikisini de yapmayabilirsin, biliyorsun.", en: "breaking the lock is easy. knowing what's inside without breaking it is easier. you could also do neither, you know." }
+        secenekler:
+          - id: "anahtar"
+            etiket: { tr: "Cebindeki anahtarı çıkar: 117", en: "Take the key from your pocket: 117" }
+            goster: { bayrak: "k1_anahtar_117" }
+            etkiler:
+              - ahlak: { merhamet: 3, insanlik: 2 }
+              - bayrak: "k1_dolap_acildi"
+              - xp: 30
+            sonraki: "k1_dolap_acildi"
+          - id: "levye"
+            etiket: { tr: "Levyeyi al; kapağı kadın için kır", en: "Take the crowbar. Crack it open for her" }
+            zar: { stat: "str", zorluk: 12, tek: true, basarisiz: "k1_dolap_siki", basarisiz_etkiler: [{ can: -8 }] }
+            etkiler:
+              - ahlak: { merhamet: 2, duzen: -1 }
+              - bayrak: "k1_dolap_acildi"
+              - xp: 25
+            sonraki: "k1_dolap_acildi"
+          - id: "pencere"
+            etiket: { tr: "Kadına pencereyi oku: sahibi hayatta", en: "Read her the window: the owner is alive" }
+            gerekli: { stat: { per: 8 } }
+            etkiler:
+              - ahlak: { merhamet: 3, insanlik: 2 }
+              - bayrak: "k1_dolap_sahibi_soylendi"
+              - xp: 25
+            sonraki: "k1_dolap_hayatta"
+          - id: "yarisi"
+            etiket: { tr: "Hurdacılara: kırın, yarısı sizin; kadın razı olursa", en: "Tell the scrappers: crack it, half's yours. If she agrees" }
+            etkiler:
+              - ahlak: { duzen: 2, merhamet: -1 }
+              - bayrak: "k1_dolap_paylasildi"
+              - xp: 15
+            sonraki: "k1_dolap_yarisi"
+          - id: "katil"
+            etiket: { tr: "Sıraya gir; dolapların yarısını sen kır", en: "Get in line. Crack half the lockers yourself" }
+            etkiler:
+              - ahlak: { merhamet: -3, duzen: -2 }
+              - esya: { hurda: 2 }
+              - kredi: 10
+              - itibar: { siginak: -2 }
+              - bayrak: "k1_dolap_yagma"
+              - xp: 15
+            sonraki: "k1_dolap_yagma"
+
+      - id: "k1_dolap_acildi"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Kapak açılıyor. İçinde küçük bir okul çantası, çantada mum boya çizimleri: bir ev, bir köpek, kocaman bir güneş. Çizimlerin altında Entegrasyon'dan üç gün sonrasına tarihli bir not: \"Anne, iskeleye gidiyorum. Sal kalkıyormuş. Burada bekleme.\"", en: "The door swings open. Inside, a small school backpack full of crayon drawings: a house, a dog, an enormous sun. Under the drawings, a note dated three days after Integration: \"Mom, I'm going to the pier. There's a raft leaving. Don't wait here.\"" }
+          - { tr: "Kadın notu okuyor, bir daha okuyor. Sonra yere oturup çizimleri kucağına yığıyor; ağlamıyor, gülmüyor, yalnızca nefes alıyor. Pencere üstünde hâlâ yanıyor: [Sahip: hayatta].", en: "The woman reads the note, then reads it again. She sits down on the floor and piles the drawings in her lap. Not crying, not laughing. Just breathing. The window still glows above her: [Owner: alive]." }
+        secenekler:
+          - id: "pencere"
+            etiket: { tr: "Ona pencereyi göster: oğlun yaşıyor", en: "Show her the window. Your son's alive" }
+            etkiler:
+              - ahlak: { merhamet: 3, insanlik: 2 }
+              - bayrak: "k1_dolap_sahibi_soylendi"
+              - xp: 10
+            sonraki: "@akis"
+          - id: "iskele"
+            etiket: { tr: "İskelenin yolunu tarif et; yol tehlikeli, uyar", en: "Give her directions to the pier. Warn her about the road" }
+            etkiler:
+              - ahlak: { duzen: 1, merhamet: 1 }
+            sonraki: "@akis"
+          - id: "git"
+            etiket: { tr: "Onu çizimleriyle bırak", en: "Leave her with the drawings" }
+            etkiler: []
+            sonraki: "@akis"
+
+      - id: "k1_dolap_siki"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Levye menteşeden kayıp çeliğe sürtüyor; avucun yarılıyor. Hurdacılardan biri gülüyor: \"Kolay sanıyordun.\" Kadın kanlı avcunu görünce ayağa kalkıp kapaktan çekiliyor: \"Bırak, onlar kırsın. Yarısı neyse ne.\"", en: "The crowbar skids off the hinge and scrapes down the steel, and your palm splits open. One of the scrappers laughs: \"Thought it'd be easy.\" The woman sees your bloody palm and gets up off the door: \"Stop. Let them do it. They can have their half.\"" }
+        secenekler:
+          - id: "tekrar"
+            etiket: { tr: "Elini sar, levyeyi menteşeye yeniden oturt", en: "Wrap your hand. Set the bar on the hinge again" }
+            gerekli: { stat: { str: 10 } }
+            etkiler:
+              - ahlak: { merhamet: 2 }
+              - bayrak: "k1_dolap_acildi"
+              - xp: 20
+            sonraki: "k1_dolap_acildi"
+          - id: "yarisi"
+            etiket: { tr: "Levyeyi geri ver; kırsınlar", en: "Hand the bar back. Let them crack it" }
+            etkiler:
+              - ahlak: { duzen: 1 }
+              - bayrak: "k1_dolap_paylasildi"
+              - xp: 10
+            sonraki: "k1_dolap_yarisi"
+
+      - id: "k1_dolap_yarisi"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Kapak tek vuruşta açılıyor. Hurdacılar çantayı silkeliyor; bir kol saati, bir avuç bozukluk yere düşüyor. Saati alıyorlar, bozukluğa bakmıyorlar bile. Çizimler ve bir not kadında kalıyor; not, oğlunun iskeleye gittiğini yazıyor.", en: "The door gives on the first blow. The scrappers shake out the backpack, and a wristwatch and a handful of change hit the floor. They take the watch and don't even glance at the coins. The drawings and a note stay with the woman. The note says her son went to the pier." }
+          - { tr: "\"Kural kuraldır,\" diyor levyeli olan, saati bileğine takarken. Kadın çizimleri göğsüne bastırmış; saat umurunda değil.", en: "\"Rule's a rule,\" says the one with the crowbar, strapping the watch onto his wrist. The woman has the drawings pressed to her chest. She couldn't care less about the watch." }
+        secenekler:
+          - id: "pencere"
+            etiket: { tr: "Kadına pencereyi oku: sahibi hayatta", en: "Read her the window: the owner's alive" }
+            etkiler:
+              - ahlak: { merhamet: 2, insanlik: 2 }
+              - bayrak: "k1_dolap_sahibi_soylendi"
+              - xp: 10
+            sonraki: "@akis"
+          - id: "tamam"
+            etiket: { tr: "Bozuklukları topla, yola çık", en: "Scoop up the change and move on" }
+            etkiler:
+              - kredi: 3
+            sonraki: "@akis"
+
+      - id: "k1_dolap_hayatta"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Parmağınla gösteriyorsun: öbür dolaplarda tire var, bunda \"hayatta\" yazıyor. Kadın pencereye bakıyor, sonra sana. \"Ben hayattayım zaten,\" diyor; sonra anlıyor. Dolabı kiralayan o değil.", en: "You point it out: the other lockers show a dash, this one says \"alive.\" The woman looks at the window, then at you. \"Well, I'm alive,\" she says, and then it lands. She isn't the one who rented the locker." }
+          - { tr: "Kapaktan çekiliyor. Hurdacılar levyeyi kaldırıyor ama o artık dönüp bakmıyor; içindeki çizimlerin bir anda hiçbir önemi kalmamış. \"İskele hangi tarafta?\" diye soruyor sana.", en: "She steps away from the door. The scrappers raise the crowbar, but she doesn't turn to look anymore. Whatever's inside stopped mattering. \"Which way's the pier?\" she asks you." }
+        secenekler:
+          - id: "tarif"
+            etiket: { tr: "Yolu tarif et; tehlikeleri de say", en: "Give her directions, dangers included" }
+            etkiler:
+              - ahlak: { duzen: 1, merhamet: 1 }
+            sonraki: "@akis"
+          - id: "cizimler"
+            etiket: { tr: "Önce çizimleri al; hurdacılardan iste", en: "Get the drawings out first. Ask the scrappers" }
+            etkiler:
+              - ahlak: { merhamet: 2, insanlik: 1 }
+              - itibar: { lonca: -1 }
+              - xp: 10
+            sonraki: "@akis"
+
+      - id: "k1_dolap_yagma"
+        yer: "kirik_istasyon"
+        paragraflar:
+          - { tr: "Levye elinde sıranın öbür ucundan başlıyorsun. Her kapağın ardında başka bir hayat: bir spor çantası, bir düğün albümü, kapağı açık bir öğle yemeği kutusu, kokusu çoktan gitmiş. Üstlerindeki pencereler aynı tireyi tekrarlıyor: [Sahip: —].", en: "Crowbar in hand, you start from the far end of the row. A different life behind every door: a gym bag, a wedding album, a lunchbox with the lid open, the smell long gone. The windows above them all repeat the same dash: [Owner: —]." }
+          - { tr: "117'nin önündeki kadın sana bakmıyor. Hurdacılar ise sana artık kendilerinden biriymişsin gibi bakıyor.", en: "The woman at 117 won't look at you. The scrappers do. You're one of them now, as far as they're concerned." }
+        secenekler:
+          - id: "tamam"
+            etiket: { tr: "Payını al, git", en: "Take your cut and go" }
+            etkiler: []
+            sonraki: "@akis"
+          - id: "album"
+            etiket: { tr: "Düğün albümünü bir kenara koy; biri gelir belki", en: "Set the wedding album aside. Somebody might come for it" }
+            etkiler:
+              - ahlak: { insanlik: 2 }
+            sonraki: "@akis"

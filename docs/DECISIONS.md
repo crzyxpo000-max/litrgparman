@@ -2,6 +2,16 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Oyuncu gözüyle inceleme, Paket 3: ritim — 2026-11-10
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 161 | **Varış sahnesi yalnız ilk ziyarette.** `beginMission`, `ziyaret_<bölge>` ≥ 1 ise `varis_<bölge>` olayını açmaz; tek satır `yolculuk` bildirimiyle gün akışına geçer. İçerikteki "sonraki ziyaret" paragrafları durur ama görünmez. | 20 oynanışta oynanış başına 242 varış sahnesi; her biri bir dokunuş ve aynı iki paragraf. | Bölgeye uzun aradan sonra dönüşte kısa bir "yeniden" satırı istenirse (`ziyaret` ve gün farkı). |
+| 162 | **Yolculuk eylem harcamaz** (`travel`, `consumeSlot = false`); dönüş zaten bedavaydı (#131). Kart/yan görev yolculuğu olayın kendisiyle ödenir, değişmedi. Kabul edilen risk: üs ↔ bölge gidip gelerek el tazeleme; kartlar ağırlıklı ve tekrar ettiği için kazanım küçük. | 2 eylemlik günde yolculuk günü yiyordu (Gün 1'de Çarşı'ya varınca "kamp vakti"). | Simülatörde hakimiyet %70'i aşarsa ya da el tazeleme oyuncu geri bildiriminde çıkarsa. |
+| 163 | **Perde 1'de fırsat eli 2 kart** (`Director.handSize`; Perde 2+ 3). | Bölüm 1'de 12 güne 27 olay + 7 varış + 11 savaş; Gün 6 ve 12'de tek günde 5–6 olay. | Bölüm 1–3 hikayesiz gün %35'i aşarsa. |
+| 164 | **Dünya seviyesi rampası.** `Progression.worldLevel` Gün 30'da eğrinin yarısı (10), Gün 50'ye kadar doğrusal olarak tam eğriye çıkar (`WORLD_RAMP_START` 0,5, `WORLD_RAMP_DAYS` 40); Gün 50 sonrası değişmez. | Gün 30'da oyuncu p50 Sv. 9, dünya 20: Gün 30–39 savaş kaybı %57 (BALANCE, akış kaydı). | Gün 30–39 kayıp hâlâ > %30 ise `kiyikent_liman` düşmanlarına yerel ölçek; hakimiyet %70'i aşarsa rampa kısalır. |
+| 165 | **Perde 1 keşif olayları:** `events/31_kesif_p1.yaml` (3 Harabe Çarşı + 3 Kırık İstasyon, `kesif` etiketli), ayrıca `cop_avcisi_pazar`, `kayip_esya_ofisi`, `son_tren`, `su_baskini` `kesif` etiketi aldı. | `30_carsi_istasyon.yaml`'da hiç `kesif` olayı yoktu: Çarşı'da Keşfet yalnız Kaya Tuzu veriyordu. | — |
+
 ## Oyuncu gözüyle inceleme, Paket 2: ilk saat — 2026-11-10
 
 Kullanıcı kararları (INCELEME_AKIS §5 soruları): ceza kurallı, infaz yalnız boss/zeki, operasyon onay penceresi, menü yönlendirmeleri ve

@@ -126,7 +126,8 @@ for f in sorted(glob.glob(os.path.join(iz, '*.jsonl'))):
                 cnt2['a'] += 1
                 if r['neden'] == 'ana_yay': cnt2['d'] += 1
                 if len(ex2['a']) < 5: ex2['a'].append(f"{tag}, Gün {r['gun']}: {r['gorev']}/{r['gorev_bolge']} içinde `{eid}` ({r['neden']})")
-            if not r['konum_uyar']:
+            # Zaman atlama / sakin gün özetleri (konum "*") yolculuk değildir: konum sayımına girmez.
+            if not r['konum_uyar'] and not eid.startswith('atlama_'):
                 cnt2['b'] += 1
                 if len(ex2['b']) < 5: ex2['b'].append(f"{tag}, Gün {r['gun']}: `{eid}` ({r['neden']}) konumu uymuyor; yer {r['gorev_bolge'] or 'üs'}")
     per_run.append((tag, len(events), dict(run)))
