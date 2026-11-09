@@ -2412,13 +2412,14 @@ olaylar:
         yer: "eski_sehir"
         paragraflar:
           - { tr: "Gözlerini kapatıp içindeki o sesi, omzunla bir kapıyı kapatır gibi aşağı itiyorsun. Şehrin bütün camlarındaki satırlar aynı anda kırılıyor; bir çocuğun gözlüğü hafifçe çıtırdıyor.", en: "You close your eyes and push that voice down inside you, like shouldering a door shut. The lines on every pane of glass in the city break at the same moment. A tiny crack from a kid's eyeglasses." }
-          - { tr: "Kafanın içine ilk kez sessizlik çöküyor. Yüz beş günün ardından orada yalnızsın ve bu yalnızlık beklediğinden çok daha soğuk.", en: "It's quiet in your head for the first time. For the first time in a hundred and five days you're alone in there, and it's a lot colder than you expected." }
+          - { tr: "Kafanın içine ilk kez sessizlik çöküyor. Yüz günü aşkın süredir orada hiç yalnız olmadın; bu yalnızlık beklediğinden çok daha soğuk.", en: "It's quiet in your head for the first time. For the first time in over a hundred days you're alone in there, and it's a lot colder than you expected." }
           - { tr: "Derken çok uzaklardan bir fısıltı geliyor: tamam. tamam. anladım. buradayım.", en: "Then, from very far off, a whisper: okay. okay. got it. i'm here." }
         secenekler:
           - id: "birak"
             etiket: { tr: "Kapıyı biraz arala; geri gelsin", en: "Crack the door a little. Let it back" }
             kronik: { tr: "{npc:yanki|i} iradenle susturdun, sonra kapıyı aralayıp geri gelmesine izin verdin; dizginlerin kimde olduğu o gün belli oldu.", en: "You crushed {npc:yanki} with your will, then cracked the door and let it back in. That day made it clear who was in charge." }
             etkiler:
+              - bayrak_kaldir: "yanki_susturuldu"
               - ahlak: { merhamet: 2, duzen: 1 }
               - iliski: { yanki: { guven: 4, baglilik: 4 } }
             sonraki: "yanki_sonuc"
@@ -2485,7 +2486,7 @@ olaylar:
     gerilim: 3
     ana_yay: { gun: 135 }
     onemli: true
-    kart: { tr: "Başlık", en: "The header" }
+    kart: { tr: "Çekirdek'in Altı", en: "Beneath the Core" }
     sahne: "baslik_1"
     sahneler:
       - id: "baslik_1"
@@ -2723,7 +2724,7 @@ olaylar:
         paragraflar:
           - { tr: "Öğle güneşi bir anda sönüveriyor. Martılar havada donup kalıyor; ardından hepsi birden, tek çığlık atmadan karaya doğru kanat çırpıyor.", en: "The noon sun goes out like somebody hit a switch. The gulls freeze in midair, and then all of them at once, without a sound, fly inland." }
           - { tr: "Körfezin üstünde bir şey asılı duruyor. Gemi demeye fazla büyük, şehir demeye fazla sessiz: sivri ucu denize dönük, tabanı bulutlara gömülü, ters çevrilmiş bir kule. Tabanının yedi köşesinden ince bir ışık sızıyor; gölgesi bütün körfezi, yan yatmış vapuru, {yer:kordon|i} ve Kule'nin ilk elli katını örtmüş.", en: "Something is hanging over the bay. Too big to call a ship, too quiet to call a city: a tower turned upside down, its point aimed at the water, its base lost in the clouds. A thin light leaks from the seven corners of that base, and its shadow covers the whole bay, the capsized ferry, {yer:kordon} and the first fifty floors of the Spire." }
-          - { tr: "Gökyüzündeki mavi paneller yüz yetmiş sekiz gündür ilk kez hep birlikte yön değiştiriyor. Öğretmen içeri girince dönen bir sınıf gibi, hepsi ona dönüyor.", en: "For the first time in a hundred and seventy-eight days, every blue panel in the sky turns at once. They all face it, the way a classroom turns when the teacher walks in." }
+          - { tr: "Gökyüzündeki mavi paneller yarım yıla yakın sürede ilk kez hep birlikte yön değiştiriyor. Öğretmen içeri girince dönen bir sınıf gibi, hepsi ona dönüyor.", en: "For the first time in close to half a year, every blue panel in the sky turns at once. They all face it, the way a classroom turns when the teacher walks in." }
           - metin: { tr: "Başlıktaki yedi köşeli mühür bu; aynı biçim, aynı ışık. Çiftçi tarlasına bakmaya gelmiş.", en: "The seven-pointed seal from the header. Same shape. Same light. The farmer's come to look at the field." }
             kosul: { bayrak: "gercek_hasat" }
           - metin: { tr: "Başlıktaki not aklına düşüyor: katmanı hasatçılara kapat. İşte kapının ağzındalar ve kapı henüz kapanmadı.", en: "The note under the header comes back to you: seal the layer against harvesters. They're standing in the doorway. The door isn't shut yet." }

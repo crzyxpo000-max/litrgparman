@@ -3,6 +3,9 @@
 # Son karar (358) ve son sahneleri Parti K2'nindir; sistem_cekirdegi @akis'e döner ve F'nin yanki_son_sir olayını tohumlar.
 # Ana yay olaylarının `npc` listesi boştur: ölen bir NPC Perde 4'ün ana düğümlerini kapatmasın. NPC'ler koşullu paragraflarla girer.
 # İstila sonuçları: kadimler_yenildi (Koruyucu) · kadim_anlasmasi (Vassal) · kiyikent_dustu. Çekirdek: cekirdek_yolu_acik, sistem_cekirdegine_ulasildi.
+# Karar (süreklilik denetimi): `cekirdek_yolu_acik` yalnız eşiğe varınca (p4_cyol_esik seçenekleri) konur; Kapıcı'yı geçemeyen (p4_cyol_geri)
+# bayrağı almaz, böylece Bölüm 17 darboğazı darbogaz_17 ("kapalı merdiven") ve brifing_18'in "merdiven sana kapandı" satırı gerçekten gelir.
+# kiyikent_dustu'da üs sahneleri (09_bolumler_p3_4: darbogaz_16, brifing_17, darbogaz_17, brifing_18) Tepe'deki kamptan anlatılır.
 # Düşmanlar content/enemies/80_perde4.yaml (istila_*, cekirdek_*, p4_*). İngilizcede Deniz "they" ({zamir:deniz_arman|…}), Yankı "it".
 olaylar:
   # ================================================================== PERDE 4 AÇILIŞI (AY 331)
@@ -109,7 +112,9 @@ olaylar:
           - metin: { tr: "Avucunu üstüne koyar koymaz Çekirdek sana boyun eğiyor. Burası senin; yayın kanalı da şehrin bütün hoparlörleri de. Bir nefeste bütün {yer:kiyikent} seni dinlemeye başlıyor.", en: "The Core bows to you the moment you lay your palm on it. This is yours. The broadcast channel is yours, every loudspeaker in the city is yours. In one breath, {yer:kiyikent} is listening." }
             kosul: { bayrak: "cekirdek_oyuncu" }
           - metin: { tr: "{npc:elif_sari|in} konseyi mikrofonu sana uzatıyor, kimse oylama istemiyor. Bu sabah oya sunulmadan alınan tek karar bu.", en: "{npc:elif_sari|pos} council hands you the microphone. Nobody calls for a vote. It's the one decision this morning that doesn't need one." }
-            kosul: { bayrak: "cekirdek_siginak" }
+            kosul: { bayrak: "cekirdek_siginak", npc_hayatta: "elif_sari" }
+          - metin: { tr: "Konsey mikrofonu sana uzatıyor; masanın başında {npc:elif_sari|in} boş sandalyesi duruyor. Kimse oylama istemiyor. Bu sabah oya sunulmadan alınan tek karar bu.", en: "The Council hands you the microphone. {npc:elif_sari|pos} empty chair sits at the head of the table. Nobody calls for a vote. It's the one decision this morning that doesn't need one." }
+            kosul: { bayrak: "cekirdek_siginak", npc_olu: "elif_sari" }
           - metin: { tr: "Lonca'nın nöbetçileri kanalı sana açıp kapının önüne çekiliyor. Bir yıl önce bu salonda rütbeler sayılırdı; bugün sayılan tek şey saniyeler.", en: "The Guild's sentries open the channel for you and step back to the door. A year ago they counted ranks in this hall. Today they're counting seconds." }
             kosul: { bayrak: "cekirdek_lonca" }
           - metin: { tr: "Beyazlılar ilahiyi yarıda kesiyor. Kanal artık senin; onların gözünde bir mucize konuşmaya karar vermiş.", en: "The people in white cut their hymn off mid-verse. The channel is yours. To them, it means a miracle has decided to speak." }
@@ -1415,7 +1420,8 @@ olaylar:
             sonraki: "@akis"
 
   # ================================================================== ÇEKİRDEĞE YOL (AY 350)
-  # Her yol `cekirdek_yolu_acik` koyar (giriş seçenekleri); Kapıcı savaşı yalnızca yolun nasıl açıldığını belirler.
+  # Giriş seçenekleri yalnız görevi başlatır; `cekirdek_yolu_acik` eşiğe varınca (p4_cyol_esik) konur. Kapıcı'yı geçemeyen
+  # (p4_cyol_geri → @akis) bayrağı almaz: 352'de sistem_cekirdegi yerine darbogaz_17 gelir ve merdiven kapanır.
   - id: "cekirdege_yol"
     konum: ["kule_dibi"]
     perde: [4]
@@ -1469,7 +1475,6 @@ olaylar:
           - id: "birlikte"
             etiket: { tr: "Kapıyı sen aç; yanındakiler arkanda", en: "You open the door. Your people follow behind" }
             etkiler:
-              - bayrak: "cekirdek_yolu_acik"
               - gorev: { cekirdege_inis: "basla" }
               - ahlak: { duzen: 3, insanlik: 2 }
               - iliski: { deniz_arman: { guven: 5 }, elif_sari: { guven: 4 } }
@@ -1478,7 +1483,6 @@ olaylar:
           - id: "yalniz"
             etiket: { tr: "Yalnız in; bu senin işin", en: "Go down alone. This is your job" }
             etkiler:
-              - bayrak: "cekirdek_yolu_acik"
               - bayrak: "p4_cekirdek_yalniz"
               - gorev: { cekirdege_inis: "basla" }
               - ahlak: { insanlik: -3, duzen: -2 }
@@ -1490,7 +1494,6 @@ olaylar:
             etiket: { tr: "Merdivenin Sistem kilidini iradenle kır", en: "Break the stairs' System lock with sheer will" }
             gerekli: { stat: { wil: 330 } }
             etkiler:
-              - bayrak: "cekirdek_yolu_acik"
               - gorev: { cekirdege_inis: "basla" }
               - ahlak: { duzen: -4, insanlik: -2 }
               - dikkat: 10
@@ -1501,7 +1504,6 @@ olaylar:
             etiket: { tr: "Kilidi okuduğun sırayla aç", en: "Open the lock in the sequence you read" }
             goster: { bayrak: "hazirlik_merdiven_kilit" }
             etkiler:
-              - bayrak: "cekirdek_yolu_acik"
               - gorev: { cekirdege_inis: "basla" }
               - ahlak: { duzen: -4, insanlik: -2 }
               - dikkat: 10
@@ -1512,7 +1514,6 @@ olaylar:
             etiket: { tr: "{npc:mert_kilic|in} haritasını aç; yol orada", en: "Open {npc:mert_kilic|pos} map. The way is on it" }
             goster: { npc_hayatta: "mert_kilic", bayrak_yok: "ihanet_mert" }
             etkiler:
-              - bayrak: "cekirdek_yolu_acik"
               - gorev: { cekirdege_inis: "basla" }
               - ahlak: { duzen: -2, insanlik: 2 }
               - itibar: { sessiz_ag: 5 }
@@ -1523,7 +1524,6 @@ olaylar:
             etiket: { tr: "{npc:yanki} yolu göstersin; onun evi", en: "Let {npc:yanki} lead. This is its home" }
             goster: { bayrak: "yanki_bagi" }
             etkiler:
-              - bayrak: "cekirdek_yolu_acik"
               - gorev: { cekirdege_inis: "basla" }
               - ahlak: { insanlik: -3 }
               - iliski: { yanki: { guven: 6, baglilik: 6 } }
@@ -1651,7 +1651,7 @@ olaylar:
         yer: "kule_dibi"
         paragraflar:
           - { tr: "Meydanın kenarında kırık bir banka oturmuşsun. Merdivenin ışığı her şeyin üstüne mavi bir nabız gibi vuruyor. Kapıcıyı geçemedin ama aşağıdaki şey, her neyse, seni hâlâ çağırıyor.", en: "You sit on a broken bench at the edge of the plaza. The light from the stairs beats over everything like a blue pulse. You didn't get past the Doorwarden. But whatever's down there is still calling you." }
-          - { tr: "Sistem kupkuru bir satır bırakıyor: [Çekirdek erişimi askıda değil. Anomali dilediği zaman inebilir.] Sonra, aklına yeni gelmiş gibi: [İki gün içinde inmesi önerilir.]", en: "The System leaves a dry little line: [Core access not suspended. Anomaly may descend at will.] Then, like an afterthought: [Descent within two days is recommended.]" }
+          - { tr: "Sistem kupkuru bir satır bırakıyor: [Çekirdek erişimi yeniden değerlendiriliyor. Anomali hazır değil.] Sonra, aklına yeni gelmiş gibi: [Pencere iki gün daha açık kalabilir. Garanti verilmez.]", en: "The System leaves a dry little line: [Core access under re-evaluation. Anomaly found not ready.] Then, like an afterthought: [The window may stay open two more days. No guarantees.]" }
         secenekler:
           - id: "bekle"
             etiket: { tr: "İki gün var; hazırlan", en: "Two days. Get ready" }
@@ -1692,6 +1692,7 @@ olaylar:
           - id: "geri_cik"
             etiket: { tr: "Yukarı çık; iki gün sonra dön", en: "Go back up. Come back in two days" }
             etkiler:
+              - bayrak: "cekirdek_yolu_acik"
               - ahlak: { insanlik: 2, duzen: 1 }
               - xp_seviye: 100
               - tohum: { olay: "p4_son_gece_ates", gecikme: { min: 1, max: 2 }, hatirlatma: { tr: "Merdivenin kilidini kırdığın geceden beri bir yıl önceki o ilk ateş aklında.", en: "Since the night you broke the lock on the stairs, you keep thinking about that first fire a year ago." } }
@@ -1699,6 +1700,7 @@ olaylar:
           - id: "esikte_kal"
             etiket: { tr: "Eşikte otur, satırları oku", en: "Sit on the threshold and read the lines" }
             etkiler:
+              - bayrak: "cekirdek_yolu_acik"
               - ahlak: { insanlik: -3 }
               - xp_seviye: 100
               - bilgi: "cekirdek_kaydi"
@@ -1707,6 +1709,7 @@ olaylar:
             etiket: { tr: "{npc:deniz_arman|in} elini tut; birlikte bak", en: "Take {npc:deniz_arman|pos} hand. Look at it together" }
             goster: { yoldas: "deniz_arman" }
             etkiler:
+              - bayrak: "cekirdek_yolu_acik"
               - ahlak: { insanlik: 4 }
               - xp_seviye: 100
               - iliski: { deniz_arman: { guven: 6, baglilik: 6 } }

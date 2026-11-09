@@ -201,7 +201,17 @@ data class WorldState(
 ) {
     val act: Int get() = GameClock.actFor(day)
 
-    fun hasFlag(flag: String): Boolean = flag in flags
+    /**
+     * Bayrak koşulu. Tek istisna Yankı bağı: `yanki_susturuldu` (oyuncu Yankı'yı iradesiyle susturdu, Bölüm 7) ya da
+     * `yanki_silindi` (Yankı silindi) varken `yanki_bagi` koşulu YANLIŞ döner. İçerikte Yankı'nın bütün sözleri
+     * `bayrak: yanki_bagi` ile yazıldığından (700+ satır) susturulmuş Yankı böylece hiçbir sahnede konuşmaz;
+     * `bayrak_yok: yanki_bagi` paragrafları ("kafanın içi sessiz") ise o zaman görünür. Bağın kurulmuş olduğunu
+     * sormak gerekirse `yanki_susturuldu` / `yanki_silindi` bayraklarına doğrudan bakılır.
+     */
+    fun hasFlag(flag: String): Boolean = when (flag) {
+        ECHO_BOND -> ECHO_BOND in flags && ECHO_SILENCED !in flags && ECHO_DELETED !in flags
+        else -> flag in flags
+    }
 
     fun variable(key: String): Int = vars[key] ?: 0
 
@@ -211,6 +221,10 @@ data class WorldState(
     fun npcId(id: String): String? = if (id == "@") focusNpc else id
 
     companion object {
+        /** Yankı bağı ve onu kapatan bayraklar (bkz. hasFlag). */
+        const val ECHO_BOND = "yanki_bagi"
+        const val ECHO_SILENCED = "yanki_susturuldu"
+        const val ECHO_DELETED = "yanki_silindi"
         const val HISTORY_LIMIT = 12
         const val PLAYER_CLAIM = "oyuncu"
         const val TAB_SKILLS = "yetenekler"

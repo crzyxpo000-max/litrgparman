@@ -153,6 +153,9 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Sistem metni yer tutucusu olarak kimliksiz `{npc}` serbesttir (belirteç değil).
 - **Yankı'nın sesi:** Yankı'nın kendi sözleri her yerde küçük harfle ve tırnaksız yazılır (fısıltı); anlatı "{npc:yanki}" ile atfeder.
   Yankı adı da her yerde belirteçle (`{npc:yanki|e}` → Yankı'ya). Doğrulayıcı düz yazılmış NPC adlarını uyarır.
+  **Susturulmuş Yankı:** `yanki_susturuldu` (Bölüm 7, kapı kapalı tutulursa) ya da `yanki_silindi` varken motor `bayrak: yanki_bagi`
+  koşulunu yanlış sayar (`WorldState.hasFlag`); Yankı'nın her sözü `bayrak: yanki_bagi` ile yazılır, ek koşul gerekmez.
+  `bayrak_yok: yanki_bagi` paragrafı "kafanın içi sessiz" anlamına gelir. Bağın kurulup kurulmadığını sormak gerekirse bu iki bayrağa bak.
 - Sezgide `anlati: true`: Sistem/Yankı sesi olmayan koşullu anlatı satırı; paragrafların sonuna düz metin olarak eklenir.
 - Koşul `lider_fraksiyon: f` (lonca/sessiz_ag/siginak/yukselenler arasında en yüksek itibar; eşik `itibar_min` ile), `npc_gitti: id`,
   `bayrak`/`bayrak_yok` liste alabilir (`bayrak_yok: [a, b]` = hiçbiri). VEYA: `herhangi: [{…}, {…}]` (birini tutması yeter; kopya paragraf yazma).

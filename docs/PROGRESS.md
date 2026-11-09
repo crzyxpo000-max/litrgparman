@@ -1,7 +1,8 @@
 # İlerleme
 
-Şu an: Kat anları, Elif ikinci fırsatı ve Demir Gece değişikliği bitti. Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
-Son commit: 47b43a6 kat anları belgeleri (sonraki: Demir Gece)
+Şu an: Oyuncu gözüyle inceleme (`docs/INCELEME_AKIS.md`) bitti; Paket 1 (hikaye kopuklukları) bitti. Sıradaki: Paket 2 ilk saat (kısa plan + onay).
+Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
+Son commit: 54dbd14 sanat entegrasyonu (sonraki: Paket 1)
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
@@ -10,6 +11,19 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - SDK: `local.properties` → `sdk.dir=C:/Users/alpar/AppData/Local/Android/Sdk` (git dışı).
 - Emülatör: `Medium_Phone_API_36.0` (`emulator -avd Medium_Phone_API_36.0`), adb ile kurulum.
 - OneDrive kilidi yüzünden lint ara sıra "dosya kullanılıyor" der: `./gradlew --stop` ve tekrar.
+
+## Oyuncu gözüyle inceleme ve sadeleştirme paketleri (2026-11-09)
+- [x] İnceleme: `docs/INCELEME_AKIS.md` (akış kaydı 10 oynanış, emülatörde ilk 20 dakika, continuity-checker + yeni oyuncu ajanı;
+      70 kavramlık envanter, 30 öneri, 8 soru). Kullanıcı kararları: ceza kurallı, meslek/Kredi kapanır, Yozlaşma Dikkat'e,
+      operasyon onay penceresi, infaz yalnız boss, varış yalnız ilk ziyaret, ordu/bilgi günlüğü kendini açan arayüz
+- [x] **Paket 1 — hikaye kopuklukları** (DECISIONS #151–#155): susturulmuş Yankı motor kuralı (`YankiSusturmaTest`), `cekirdek_yolu_acik`
+      eşikte (darbogaz_17 ulaşılır), Kıyıkent düştü dalı (Tepe), Bölüm 11 darboğazında dünya seçimi, Kordon akıbeti, Bölüm 12 gerekçesi,
+      Bekçi yenilgisi (`bekci_yenilgi`), Bölüm 8 adı "Çekirdek'in Altı", brifing_8 merdiven, Bölüm 7 yedek satırları, sabit gün sayıları,
+      bölüm hedefi tek metin. TR/EN inceleme düzeltmeleri uygulandı; check.sh ve 1000 oynanış simülatörü (BALANCE.md)
+- [ ] Paket 2 — ilk saat (ceza kuralı, savaş ekranı kademeli, ödül kartları, operasyon onayı, Durum/Daha fazla kendini açma)
+- [ ] Paket 3 — ritim (varış yalnız ilk ziyaret, yolculuk eylem harcamaz, Perde 1 keşif olayları ×6, Bölüm 1 yoğunluğu)
+- [ ] Paket 4 — sistem çıkarma (meslek/Kredi kapalı, Yozlaşma → Dikkat, ordu/bilgi günlüğü kendini açan arayüz)
+- [ ] Paket 5 — arayüz incelemesi (`docs/UI_REVIEW.md`, emülatör görüntüleri `docs/ui-review/`)
 
 ## Sanat entegrasyonu (2026-11-07)
 - [x] Uyarlanabilir simge (art/promo/icon.jpg; amblem 46 dp, güvenli alan betikte denetlenir), tek renkli katman, bildirim simgesi

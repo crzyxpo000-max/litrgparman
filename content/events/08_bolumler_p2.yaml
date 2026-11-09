@@ -16,11 +16,21 @@ olaylar:
         yer: "kiyikent_liman"
         paragraflar:
           - metin: { tr: "Önceki bölümde Öğretici Bekçisi'ni geçtin ve kampını yanında getirdin. {yer:kiyikent_liman|in} rıhtımında, ormandan seninle çıkanlar hâlâ birbirinden ayrılmıyor.", en: "Last chapter, you got past the Tutorial Warden and brought your camp with you. Out on {yer:kiyikent_liman} docks, the people who came out of the forest with you still stick together." }
-            kosul: { bayrak: "bekci_topla" }
+            kosul: { bayrak: "bekci_topla", bayrak_yok: "bekci_yenilgi" }
           - metin: { tr: "Önceki bölümde Öğretici Bekçisi'ni tek başına geçtin. Kapıdan kimin çıktığını, kimin çıkamadığını sonradan duydun.", en: "Last chapter, you got past the Tutorial Warden alone. You heard later who made it out the Gate and who didn't." }
-            kosul: { bayrak: "bekci_yalniz" }
+            kosul: { bayrak: "bekci_yalniz", bayrak_yok: "bekci_yenilgi" }
           - metin: { tr: "Önceki bölümde Öğretici Bekçisi'ni kimseye görünmeden geçtin. Çıkışta seni gören olmadı; seni anlatan da.", en: "Last chapter, you got past the Tutorial Warden without anyone seeing. Nobody saw you come out, and nobody's telling stories about it." }
-            kosul: { bayrak: "bekci_golge" }
+            kosul: { bayrak: "bekci_golge", bayrak_yok: "bekci_yenilgi" }
+          - metin: { tr: "Önceki bölümde Öğretici Bekçisi'ni geçtin; hattı kimseye bırakmadın, dar boğaza yanındakilerle birlikte girdin. Kapı'dan omuz omuza çıktınız.", en: "Last chapter, you got past the Tutorial Warden. You didn't leave the line to anyone; you went into the choke point with the people beside you and came out the Gate shoulder to shoulder." }
+            kosul: { bayrak_yok: ["bekci_topla", "bekci_yalniz", "bekci_golge", "bekci_yenilgi"] }
+          - metin: { tr: "Önceki bölümde Öğretici Bekçisi seni asfalta yapıştırdı; Bekçi'yi başkası devirdi. Kapı'dan kendi ayaklarınla geçmedin, seni sürüklediler.", en: "Last chapter, the Tutorial Warden planted you in the asphalt, and somebody else took it down. You didn't walk through the Gate on your own feet. You got dragged." }
+            kosul: { bayrak: "bekci_yenilgi" }
+          - metin: { tr: "Gökyüzündeki satırda {npc:aras_kurt|in} adı vardı, seninki değil. Rıhtımda kulağına çalınan ilk ad da onunki.", en: "The line in the sky had {npc:aras_kurt|pos} name on it, not yours. His is also the first name you hear on the docks." }
+            kosul: { bayrak: "bekci_yenilgi", npc_hayatta: "aras_kurt" }
+          - metin: { tr: "{npc:deniz_arman} o boğazda kaldı. Hattı tuttu, sen çekirdeğe koştun; Kapı'dan iki kişinin yüküyle geçtin. {yer:kiyikent_liman|de} rıhtıma her baktığında gözün onun kalkanını arıyor.", en: "{npc:deniz_arman} stayed in that choke point. {zamir:deniz_arman|b} held the line while you ran for the core, and you walked through the Gate carrying the weight of two people. Every time you look at the dock on {yer:kiyikent_liman}, you're looking for {zamir:deniz_arman|onun} shield." }
+            kosul: { bayrak: "deniz_hatti_tuttu" }
+          - metin: { tr: "{npc:deniz_arman} bu şehre seninle dönmedi. Yan yatmış vapura bakarken aklına ilk o düşüyor; dönecek birinin değil, dönmeyecek birinin yüzü.", en: "{npc:deniz_arman} didn't come back to this city with you. Looking at the capsized ferry, the first thing you think of is {npc:deniz_arman}: not a face that's coming back, but one that isn't." }
+            kosul: { npc_olu: "deniz_arman", bayrak_yok: "deniz_hatti_tuttu" }
           - { tr: "{yer:kiyikent} dört parçaya bölünmüş. {yer:kiyikent_liman|de} {fraksiyon:siginak} çadırları, {yer:sanayi|in} bacalarında {fraksiyon:lonca} bayrakları, {yer:tepe|de} beyazlar, telsizlerin cızırtısında {fraksiyon:sessiz_ag}. Herkes birbirine bakıyor, kimse ilk adımı atmıyor.", en: "{yer:kiyikent} has split four ways. The {fraksiyon:siginak} tents on {yer:kiyikent_liman}, the {fraksiyon:lonca} flags on the smokestacks of {yer:sanayi}, white robes up on {yer:tepe}, and {fraksiyon:sessiz_ag|k} somewhere in the radio static. Everybody's watching everybody, and nobody's making the first move." }
           - { tr: "Bir de eski meydan var. Taşların ortasında, kimsenin çizmediği kusursuz bir daire beliriyor; her sabah biraz daha belirgin. Etrafında çadır kuran yok, ama herkes ona bakıp duruyor.", en: "And then there's the old square. In the middle of the paving stones, a perfect circle nobody drew is showing up, a little sharper every morning. Nobody's pitching a tent near it, but everybody keeps looking." }
           - metin: { tr: "{npc:deniz_arman} rıhtımın kenarına oturmuş, karşı kıyıya bakıyor. \"Burası evimizdi,\" diyor. \"Şimdi kimin olduğuna karar veriyorlar.\"", en: "{npc:deniz_arman} is sitting on the edge of the dock, staring at the far shore. \"This was home,\" {zamir:deniz_arman|o} says. \"Now they're deciding whose it is.\"" }
@@ -64,7 +74,7 @@ olaylar:
             kosul: { bayrak: "kule_siviller_korundu", bayrak_yok: "bolum_4_tasti" }
           - metin: { tr: "Önceki bölümde Kule senden önce yükseldi. Meydana vardığında enkazdan insan çıkarıyorlardı.", en: "Last chapter, the Spire came up before you got there. When you reached the square, they were pulling people out of the rubble." }
             kosul: { bayrak: "bolum_4_tasti" }
-          - metin: { tr: "Önceki bölümde Kule yükseldi ve sen onun kapısını tuttun. İlk tırmanıcılar senin önünden geçti.", en: "Last chapter, the Spire came up and you held its door. The first climbers went in past you." }
+          - metin: { tr: "Önceki bölümde Kule yükseldi ve sen oradaydın. Meydan o geceyi hâlâ konuşuyor; kimin ne yaptığını herkes başka anlatıyor.", en: "Last chapter, the Spire came up and you were there. The square's still talking about that night, and everybody tells it a little differently." }
             kosul: { bayrak_yok: ["kule_siviller_korundu", "bolum_4_tasti"] }
           - metin: { tr: "Dört masadan birinin yanında oturmaya karar verdin. Artık sokakta seni gören, önce hangi kampın adamı olduğuna bakıyor.", en: "You picked one of the four tables to sit at. Now when people see you on the street, the first thing they check is whose camp you're with." }
             kosul: { bayrak_yok: "uye_yok" }
@@ -163,7 +173,7 @@ olaylar:
             kosul: { bayrak: "cekirdek_sessiz_ag" }
           - metin: { tr: "Önceki bölümde {yer:kasaba_cekirdegi} sana bağlandı. Bültenin altındaki ad her akşam seninki.", en: "Last chapter, {yer:kasaba_cekirdegi} went to you. The name at the bottom of the bulletin is yours, every night." }
             kosul: { bayrak: "cekirdek_oyuncu" }
-          - { tr: "Bu sabahki bültenin ilk satırı kırmızı: {yer:kordon|de}ki kapının sayacı on üç günü gösteriyor. Kimse o kapıyı kapatamadı; içine girenlerin hiçbiri geri gelmedi.", en: "This morning's bulletin leads with a red line: the counter on the Gate on {yer:kordon} shows thirteen days. Nobody's been able to close it. None of the people who went in came back out." }
+          - { tr: "Bu sabahki bültenin ilk satırı kırmızı: {yer:kordon|de}ki kapının sayacı iki haftadan azını gösteriyor. Kimse o kapıyı kapatamadı; içine girenlerin hiçbiri geri gelmedi.", en: "This morning's bulletin leads with a red line: the counter on the Gate on {yer:kordon} is down to less than two weeks. Nobody's been able to close it. None of the people who went in came back out." }
           - { tr: "{yer:kordon|in} balkonlarında hâlâ insanlar oturuyor. Kira soran yok, manzara bedava; kapının dönüşünü seyretmek de bir tür eğlence olmuş.", en: "People are still sitting out on the balconies along {yer:kordon}. The ocean view's free and nobody's collecting rent. Watching the Gate spin has turned into a kind of entertainment." }
         bildirimler:
           - tur: "gorev"
@@ -253,6 +263,8 @@ olaylar:
             kosul: { bayrak: "yanki_inkar_edildi" }
           - metin: { tr: "Sesi susturdun. Bültenler yine düzgün. İçinde bir yer ise o günden beri garip biçimde sessiz.", en: "You shut the voice down. The bulletins are clean again. Something inside you, though, has been weirdly quiet ever since." }
             kosul: { bayrak: "yanki_susturuldu" }
+          - metin: { tr: "Ne sahip çıktın ne inkâr ettin. Sesi herkes duydu, senin cevabını kimse; şimdi boşluğu kendi hikâyeleriyle dolduruyorlar.", en: "You didn't claim it and you didn't deny it. Everybody heard the voice and nobody heard your answer, so now they're filling in the blank with stories of their own." }
+            kosul: { bayrak: "yanki_gorundu", bayrak_yok: ["yanki_sahiplenildi", "yanki_inkar_edildi", "yanki_susturuldu"] }
           - metin: { tr: "Sen yetişemeden şehrin yarısı o cümleyi ezberledi. Duvarlara küçük harflerle yazıyorlar.", en: "Half the city had that sentence memorized before you got there. They're writing it on walls in lowercase." }
             kosul: { bayrak: "bolum_7_tasti" }
           - metin: { tr: "Konsey çadırında {npc:elif_sari} seni bir kenara çekiyor. \"Bana bir şey anlatmak istersen,\" diyor, \"kapım açık. Anlatmazsan da açık.\"", en: "In the Council tent, {npc:elif_sari} pulls you aside. \"If you ever want to tell me something,\" {zamir:elif_sari|o} says, \"my door's open. If you don't, it's still open.\"" }
@@ -297,8 +309,11 @@ olaylar:
             kosul: { bayrak: "yanki_inkar_edildi" }
           - metin: { tr: "Önceki bölümde içindeki sesi susturdun.", en: "Last chapter, you shut down the voice inside you." }
             kosul: { bayrak: "yanki_susturuldu" }
+          - metin: { tr: "Önceki bölümde şehir senin içindeki sesi öğrendi; sen ne sahip çıktın ne inkâr ettin. Soru hâlâ havada.", en: "Last chapter, the city found out about the voice inside you, and you neither claimed it nor denied it. The question's still hanging." }
+            kosul: { bayrak: "yanki_gorundu", bayrak_yok: ["yanki_sahiplenildi", "yanki_inkar_edildi", "yanki_susturuldu"] }
           - { tr: "Son günlerde {yer:kasaba_cekirdegi|in} kristali geceleri yanıp sönüyor. Yanına giden muhafızlar aynı şeyi anlatıyor: kristal birini arıyor. Kendilerine bakmıyor, onların arkasına bakıyor.", en: "For the last few nights, {yer:kasaba_cekirdegi|pos} crystal has been pulsing in the dark. The guards who go near it all say the same thing: it's looking for someone. Not at them. Past them." }
-          - { tr: "Senin pencerende ise yalnızca tek bir satır var, bir haftadır silinmiyor: [ERİŞİM İSTEĞİ BEKLEMEDE].", en: "In your window there's just one line, and it hasn't cleared all week: [ACCESS REQUEST PENDING]." }
+          - { tr: "Kristalin yarığından, hükümet konağının temellerine inen beyaz bir merdivenin ilk basamakları seçiliyor. Muhafızlardan biri ayağını uzatmış; basamak ayağını su gibi içinden geçirmiş. Sen yaklaşınca aynı basamak taş kesiliyor: merdiven yalnız seni bekliyor.", en: "Through the crack in the crystal you can make out the first steps of a white staircase running down under the old city hall's foundations. One of the guards tried putting a foot on it, and the step let him through like water. When you come close, the same step turns solid as stone: it's waiting for you and nobody else." }
+          - { tr: "Senin pencerende ise yalnızca tek bir satır var, bir haftadır silinmiyor: [ERİŞİM İSTEĞİ BEKLEMEDE · HEDEF: BAŞLIK]. Başlık, Sistem'in bütün satırlarının üstünde duran ilk dosya olmalı; şimdiye dek kimseye açılmamış.", en: "In your window there's just one line, and it hasn't cleared all week: [ACCESS REQUEST PENDING · TARGET: HEADER]. The header has to be the System's first file, the one sitting above every line it has ever written, and nobody's been allowed to open it." }
         bildirimler:
           - tur: "gorev"
             baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }

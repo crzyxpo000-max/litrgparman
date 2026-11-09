@@ -258,7 +258,10 @@ olaylar:
       - id: "brifing_14_1"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "Önceki bölümde şehir kapı fırtınasını atlattı. Pencerende hâlâ o mahcup satır duruyor: [Dünya Katmanı'nın direnci beklentinin üstünde.]", en: "Last chapter, the city made it through the Gate storm. That sheepish line is still in your window: [Earth Layer resistance above expectations.]" }
+          - metin: { tr: "Önceki bölümde şehir kapı fırtınasını atlattı. Pencerende hâlâ o mahcup satır duruyor: [Dünya Katmanı'nın direnci beklentinin üstünde.]", en: "Last chapter, the city made it through the Gate storm. That sheepish line is still in your window: [Earth Layer resistance above expectations.]" }
+            kosul: { bayrak_yok: "bolum_13_tasti" }
+          - metin: { tr: "Önceki bölümde kapı fırtınası sen yokken koptu; üç mahalle haritadan silindi. Pencerende duran satır bu kez mahcup değil, kupkuru: [Dünya Katmanı'nın direnci beklenti düzeyinde.]", en: "Last chapter, the Gate storm broke while you were gone, and three neighborhoods came off the map. The line in your window isn't sheepish this time. It's bone-dry: [Earth Layer resistance within expectations.]" }
+            kosul: { bayrak: "bolum_13_tasti" }
           - { tr: "Bu sabah dört kamptan dört ayrı haberci kapına geliyor, ellerinde aynı kâğıt: {yer:kasaba_cekirdegi|de} ortak bir masa kurulacak. Entegrasyon'dan bu yana ilk kez dört kamp aynı odada oturacak.", en: "This morning four runners from four camps come to your door with the same piece of paper: a common table is being set up at {yer:kasaba_cekirdegi}. For the first time since Integration, all four camps are going to sit in the same room." }
           - { tr: "Davetiyenin altında el yazısıyla bir not var. İmza yok: \"Masaya gel. Ama arkanı duvara ver.\"", en: "There's a handwritten note at the bottom of the invitation. No signature: \"Come to the table. But keep your back to the wall.\"" }
         bildirimler:
@@ -355,7 +358,7 @@ olaylar:
               - { tr: "Operasyon tarihi sabit: Gün 342. Erken giriş yok; o güne kadar hazırlık yap.", en: "The operation date is fixed: Day 342. No early entry. Use the time to prepare." }
         sezgiler:
           - kosul: { bayrak_yok: "yanki_susturuldu" }
-            metin: { tr: "on bir gün. her şey on bir gün. sonra ya biz oluruz ya onlar.", en: "eleven days. everything's eleven days. then it's either us or them." }
+            metin: { tr: "günler kaldı. her şey birkaç güne sığacak. sonra ya biz oluruz ya onlar.", en: "only days left. everything fits into a handful of days. then it's either us or them." }
         secenekler:
           - id: "yuru"
             etiket: { tr: "Şehrin içinde bir tur at", en: "Take a walk through the city" }
@@ -383,17 +386,25 @@ olaylar:
           - metin: { tr: "İstila geri püskürtüldü. Kırk bir geminin bir kısmı körfezin dibinde, bir kısmı adaların arasında tütüyor. {yer:kiyikent_liman|de} insanlar ağlamıyor; şaşkınlıktan ağlayamıyorlar.", en: "The invasion got driven back. Some of the forty-one ships are on the bottom of the bay, and some are smoking between the islands. People on {yer:kiyikent_liman} aren't crying. They're too stunned to." }
             kosul: { bayrak: "kadimler_yenildi" }
           - metin: { tr: "İstila durdu, çünkü bir anlaşma yapıldı. Gemiler havada bekliyor; ışık sütunları söndü. Kimse anlaşmanın bedelini yüksek sesle söylemiyor.", en: "The invasion stopped because a deal got made. The ships are waiting in the air and the light pillars are out. Nobody's saying out loud what the deal cost." }
-            kosul: { bayrak: "kadim_anlasmasi", bayrak_yok: "kadimler_yenildi" }
+            kosul: { bayrak: "kadim_anlasmasi", bayrak_yok: ["kadimler_yenildi", "kiyikent_dustu"] }
           - metin: { tr: "{yer:kiyikent} düştü. {fraksiyon:siginak|den} geriye bir avuç çadır kaldı; ışık sütunları hâlâ şehrin üstünde, ama yukarı süzülecek kimse kalmadı.", en: "{yer:kiyikent} fell. All that's left of the {fraksiyon:siginak} is a handful of tents. The pillars of light are still over the city, but there's nobody left to float up." }
+            kosul: { bayrak: "kiyikent_dustu", bayrak_yok: ["kadimler_yenildi", "kadim_anlasmasi"] }
+          - metin: { tr: "İstila geldi, geçti; şehir ne olduğunu hâlâ anlamaya çalışıyor. Gemiler yerli yerinde, gökyüzü sarı. İnsanlar birbirine kaç kişi kaldığını soruyor, kimse sayıyı bilmiyor.", en: "The invasion came and went, and the city's still trying to work out what happened. The ships are right where they were, and the sky's still yellow. People keep asking each other how many are left. Nobody knows the number." }
+            kosul: { bayrak_yok: ["kadimler_yenildi", "kadim_anlasmasi", "kiyikent_dustu"] }
+          - metin: { tr: "{yer:tepe|in} sırtından bakınca {yer:kiyikent_liman} artık bir başkasının şehri: iskelede yedi köşeli yıldızlar, rıhtımda maskeli devriyeler, yanmış vapurun yanında suya eğilmiş bir gemi. Kampta kimse ağlamıyor; ağlamaya sıra gelmedi daha.", en: "From the ridge of {yer:tepe}, {yer:kiyikent_liman} is somebody else's city now. Seven-pointed stars on the pier, masked patrols on the docks, a ship bent over the water beside the burned-out ferry. Nobody in the camp is crying. Nobody's gotten around to it yet." }
             kosul: { bayrak: "kiyikent_dustu" }
           - metin: { tr: "İstilanın ilk saatinde sen yoktun. Yukarı süzülenlerin adlarını çocuklar Kayıplar Duvarı'na yazıyor.", en: "You weren't there for the first hour of the invasion. Kids are writing the names of the ones who floated up on the Wall of the Missing." }
             kosul: { bayrak: "bolum_16_tasti" }
           - metin: { tr: "{npc:elif_sari} sağ. Konsey çadırının önünde oturuyor, iki eli de sargılı, yaralıları sırayla içeri alıyor.", en: "{npc:elif_sari} is alive. {zamir:elif_sari|o|b} is sitting outside the Council tent with both hands bandaged, taking the wounded in one at a time." }
             kosul: { npc_hayatta: "elif_sari", bayrak_yok: "kiyikent_dustu" }
+          - metin: { tr: "{npc:elif_sari} sağ. Yanık okulun avlusuna kurulan hastanenin kapısında oturuyor, iki eli de sargılı; yaralıları sırayla içeri alıyor, çıkanları saymıyor.", en: "{npc:elif_sari} is alive. {zamir:elif_sari|o|b} is sitting at the door of the hospital set up in the burned-out schoolyard, both hands bandaged, taking the wounded in one at a time and not counting the ones who come out." }
+            kosul: { npc_hayatta: "elif_sari", bayrak: "kiyikent_dustu" }
           - metin: { tr: "{npc:elif_sari|in} çadırı boş. Masasının üstünde yarım kalmış bir liste duruyor.", en: "{npc:elif_sari|pos} tent is empty. There's a half-finished list on the table." }
             kosul: { npc_olu: "elif_sari" }
           - metin: { tr: "{npc:kaya_demir|in} sesi telsizde, her zamanki gibi kupkuru: \"Bitmedi. Bir kat daha var.\"", en: "{npc:kaya_demir|pos} voice comes over the radio, dry as ever: \"It's not over. There's one more floor.\"" }
-            kosul: { npc_hayatta: "kaya_demir" }
+            kosul: { npc_hayatta: "kaya_demir", bayrak_yok: "kiyikent_dustu" }
+          - metin: { tr: "{npc:kaya_demir} kampın üst ucunda, sırtı şehre dönük oturuyor. Telsizi kapalı; konuşacak cephe kalmadı. Seni görünce Kule'yi çenesiyle gösteriyor, sesi her zamanki gibi kupkuru: \"Bitmedi. Bir kat daha var.\"", en: "{npc:kaya_demir} is sitting at the top end of the camp with his back to the city. The radio's off. There's no front left to talk to. When he sees you, he jerks his chin at the Spire, dry as ever: \"It's not over. There's one more floor.\"" }
+            kosul: { npc_hayatta: "kaya_demir", bayrak: "kiyikent_dustu" }
           - { tr: "Akşamüstü Kule bir kez titriyor; deprem gibi değil, uzun bir uykudan uyanan bir kalbin ilk atışı gibi.", en: "Late in the afternoon the Spire shudders once. Not like an earthquake. Like the first beat of a heart waking up from a long sleep." }
         sezgiler:
           - kosul: { bayrak_yok: "yanki_susturuldu" }
@@ -401,6 +412,11 @@ olaylar:
         secenekler:
           - id: "liman"
             etiket: { tr: "{yer:kiyikent_liman|i} baştan sona yürü", en: "Walk {yer:kiyikent_liman} end to end" }
+            goster: { bayrak_yok: "kiyikent_dustu" }
+            sonraki: "@akis"
+          - id: "kamp"
+            etiket: { tr: "Kampı baştan sona yürü; aşağıdaki şehre bakma", en: "Walk the camp end to end. Don't look down at the city" }
+            goster: { bayrak: "kiyikent_dustu" }
             sonraki: "@akis"
           - id: "kule"
             etiket: { tr: "Kule'ye bak", en: "Look at the Spire" }
@@ -425,11 +441,19 @@ olaylar:
           - metin: { tr: "Önceki bölümde şehri istilaya karşı tuttun.", en: "Last chapter, you held the city against the invasion." }
             kosul: { bayrak: "kadimler_yenildi" }
           - metin: { tr: "Önceki bölümde istila bir anlaşmayla durdu.", en: "Last chapter, the invasion stopped with a deal." }
-            kosul: { bayrak: "kadim_anlasmasi", bayrak_yok: "kadimler_yenildi" }
+            kosul: { bayrak: "kadim_anlasmasi", bayrak_yok: ["kadimler_yenildi", "kiyikent_dustu"] }
           - metin: { tr: "Önceki bölümde şehir düştü.", en: "Last chapter, the city fell." }
+            kosul: { bayrak: "kiyikent_dustu", bayrak_yok: ["kadimler_yenildi", "kadim_anlasmasi"] }
+          - metin: { tr: "Önceki bölümde istila geldi, geçti; şehir hâlâ sayım yapıyor.", en: "Last chapter, the invasion came and went. The city's still counting." }
+            kosul: { bayrak_yok: ["kadimler_yenildi", "kadim_anlasmasi", "kiyikent_dustu"] }
+          - metin: { tr: "Kule her gece biraz daha yüksek sesle atıyor. {yer:kule_dibi|in} taşları her sabah biraz daha içe çökmüş oluyor; çöken yerden mavi bir ışık sızıyor.", en: "Every night the Spire beats a little louder. Every morning the stones of {yer:kule_dibi} have caved in a little more, and blue light is leaking out where they sank." }
+            kosul: { bayrak_yok: "kiyikent_dustu" }
+          - metin: { tr: "Kule her gece biraz daha yüksek sesle atıyor; {yer:tepe|den} bile duyuluyor. Aşağıda {yer:kule_dibi} artık Kadimler'in elinde; kampın dürbünüyle taşların çöktüğünü görüyorsun: çöken yerden mavi bir ışık sızıyor, devriyeler o ışığa yaklaşmıyor.", en: "Every night the Spire beats a little louder. You can hear it all the way up on {yer:tepe}. Down below, through the camp's binoculars, you watch the stones of {yer:kule_dibi} cave in, in ground the Ancients hold. Blue light leaks out where they sank, and the patrols won't go anywhere near it." }
             kosul: { bayrak: "kiyikent_dustu" }
-          - { tr: "Kule her gece biraz daha yüksek sesle atıyor. {yer:kule_dibi|in} taşları her sabah biraz daha içe çökmüş oluyor; çöken yerden mavi bir ışık sızıyor.", en: "Every night the Spire beats a little louder. Every morning the stones of {yer:kule_dibi} have caved in a little more, and blue light is leaking out where they sank." }
-          - { tr: "Herkes aynı şeyi söylüyor: altında bir şey var ve açılmak üzere. Kimse inmek istemiyor; herkes senin ineceğini düşünüyor.", en: "Everybody's saying the same thing: there's something under there, and it's about to open. Nobody wants to go down. Everybody figures you will." }
+          - metin: { tr: "Herkes aynı şeyi söylüyor: altında bir şey var ve açılmak üzere. Kimse inmek istemiyor; herkes senin ineceğini düşünüyor.", en: "Everybody's saying the same thing: there's something under there, and it's about to open. Nobody wants to go down. Everybody figures you will." }
+            kosul: { bayrak_yok: "kiyikent_dustu" }
+          - metin: { tr: "Kampta herkes aynı şeyi söylüyor: altında bir şey var ve açılmak üzere. İnmek için önce işgal altındaki şehrin içinden geçmek gerek; kimse bunu istemiyor, herkes senin yapacağını düşünüyor.", en: "Everybody in the camp is saying the same thing: there's something under there, and it's about to open. To get down to it, somebody has to cross the occupied city first. Nobody wants to. Everybody figures you will." }
+            kosul: { bayrak: "kiyikent_dustu" }
         bildirimler:
           - tur: "gorev"
             baslik: { tr: "[Bölüm hedefi]", en: "[Chapter objective]" }
@@ -442,6 +466,11 @@ olaylar:
         secenekler:
           - id: "kule"
             etiket: { tr: "Çöken taşların kenarına git", en: "Go to the edge of the sunken stones" }
+            goster: { bayrak_yok: "kiyikent_dustu" }
+            sonraki: "@akis"
+          - id: "durbun"
+            etiket: { tr: "Dürbünü al, çöken taşlara uzun uzun bak", en: "Take the binoculars and watch the sunken stones for a long while" }
+            goster: { bayrak: "kiyikent_dustu" }
             sonraki: "@akis"
           - id: "yanindakiler"
             etiket: { tr: "Yanındakilere kimin seninle ineceğini sor", en: "Ask the people with you who's coming down" }
@@ -463,12 +492,17 @@ olaylar:
       - id: "darbogaz_17_1"
         yer: "kiyikent_liman"
         paragraflar:
-          - { tr: "Merdivenin ağzı bir gece kendiliğinden kapandı. {yer:kule_dibi|in} taşları yeniden düzleşti; yalnız içinden hâlâ ince bir mavi ışık sızan bir çatlak kaldı.", en: "One night the mouth of the stairs closed on its own. The stones of {yer:kule_dibi} flattened out again. There's just one crack left, with a thin blue light still leaking out of it." }
+          - metin: { tr: "Merdivenin ağzı bir gece kendiliğinden kapandı. {yer:kule_dibi|in} taşları yeniden düzleşti; yalnız içinden hâlâ ince bir mavi ışık sızan bir çatlak kaldı.", en: "One night the mouth of the stairs closed on its own. The stones of {yer:kule_dibi} flattened out again. There's just one crack left, with a thin blue light still leaking out of it." }
+            kosul: { bayrak_yok: "kiyikent_dustu" }
+          - metin: { tr: "Merdivenin ağzı bir gece kendiliğinden kapandı. {yer:tepe|den} bakarken aşağıdaki mavi ışığın söndüğünü gördün; sabah dürbünle baktığında {yer:kule_dibi|in} taşları yeniden düzleşmişti, yalnız ince bir çatlaktan hâlâ ışık sızıyordu. Devriyeler çatlağın çevresine şerit çekmiş.", en: "One night the mouth of the stairs closed on its own. From {yer:tepe}, you watched the blue light down there go out. By morning, through the binoculars, the stones of {yer:kule_dibi} had flattened out again, with just one thin crack still leaking light. The patrols have taped off the ground around it." }
+            kosul: { bayrak: "kiyikent_dustu" }
           - { tr: "Aşağıda ne olduğunu göremedin. Sistem'in sesi her zamankinden kısa: [Erişim reddedildi. Değerlendirme mevcut verilerle sürecek.]", en: "You never saw what's down there. The System's voice is shorter than ever: [Access denied. Assessment will proceed with available data.]" }
           - metin: { tr: "Merdivenin ağzını başkaları tutmuştu. Aralarından geçmeye çalıştığın gece kimin kazandığını şehir hâlâ konuşuyor.", en: "Somebody else had taken the mouth of the stairs. The city's still talking about the night you tried to get through them, and who won." }
             kosul: { bayrak: "bolum_17_tasti" }
           - metin: { tr: "{npc:deniz_arman} çatlağın başında sana bakıyor. \"Belki iyi olmuştur,\" diyor. \"Belki bazı kapılar kapalı kalmalı.\"", en: "{npc:deniz_arman} looks at you from beside the crack. \"Maybe it's for the best,\" {zamir:deniz_arman|o} {zamir:deniz_arman|s}. \"Maybe some doors are supposed to stay shut.\"" }
-            kosul: { yoldas: "deniz_arman" }
+            kosul: { yoldas: "deniz_arman", bayrak_yok: "kiyikent_dustu" }
+          - metin: { tr: "{npc:deniz_arman} kampın kenarında yanına geliyor, aşağıdaki çatlağa bakıyor. \"Belki iyi olmuştur,\" diyor. \"Belki bazı kapılar kapalı kalmalı.\"", en: "{npc:deniz_arman} comes to stand beside you at the edge of the camp and looks down at the crack. \"Maybe it's for the best,\" {zamir:deniz_arman|o} {zamir:deniz_arman|s}. \"Maybe some doors are supposed to stay shut.\"" }
+            kosul: { yoldas: "deniz_arman", bayrak: "kiyikent_dustu" }
           - { tr: "Gökyüzündeki sayaç bir rakam daha düşüyor. Son karara az kaldı.", en: "The counter in the sky drops one more number. The final decision is close." }
         sezgiler:
           - kosul: { bayrak_yok: "yanki_susturuldu" }
@@ -476,12 +510,32 @@ olaylar:
         secenekler:
           - id: "catlak"
             etiket: { tr: "Elini çatlağın üstüne koy", en: "Put your hand over the crack" }
+            goster: { bayrak_yok: "kiyikent_dustu" }
+            etkiler:
+              - gorev: { cekirdege_inis: "basarisiz" }
+            sonraki: "@akis"
+          - id: "catlak_uzak"
+            etiket: { tr: "Çatlağa son bir kez bak, sonra dürbünü indir", en: "Look at the crack one last time, then lower the binoculars" }
+            goster: { bayrak: "kiyikent_dustu" }
+            etkiler:
+              - gorev: { cekirdege_inis: "basarisiz" }
             sonraki: "@akis"
           - id: "don"
             etiket: { tr: "Arkanı dön, şehre dön", en: "Turn around and head back into the city" }
+            goster: { bayrak_yok: "kiyikent_dustu" }
+            etkiler:
+              - gorev: { cekirdege_inis: "basarisiz" }
+            sonraki: "@akis"
+          - id: "don_kamp"
+            etiket: { tr: "Arkanı dön, kampa dön", en: "Turn around and head back into the camp" }
+            goster: { bayrak: "kiyikent_dustu" }
+            etkiler:
+              - gorev: { cekirdege_inis: "basarisiz" }
             sonraki: "@akis"
           - id: "bekle"
             etiket: { tr: "Bir süre bekle; belki yeniden açılır", en: "Wait a while. Maybe it opens again" }
+            etkiler:
+              - gorev: { cekirdege_inis: "basarisiz" }
             sonraki: "@akis"
 
   # ================================================================== Bölüm 18 · brifing
@@ -501,7 +555,10 @@ olaylar:
             kosul: { bayrak: "sistem_cekirdegine_ulasildi" }
           - metin: { tr: "Önceki bölümde Çekirdek'e inen merdiven sana kapandı.", en: "Last chapter, the stairs down to the Core closed on you." }
             kosul: { bayrak_yok: "sistem_cekirdegine_ulasildi" }
-          - { tr: "Yılın son haftası. Şehirde her şey biraz yavaşladı; insanlar ağır ağır yürüyor, birbirine uzun uzun bakıyor. Kimse plan yapmıyor.", en: "The last week of the year. Everything in the city has slowed down a little. People walk slowly and look at each other for a long time. Nobody's making plans." }
+          - metin: { tr: "Yılın son haftası. Şehirde her şey biraz yavaşladı; insanlar ağır ağır yürüyor, birbirine uzun uzun bakıyor. Kimse plan yapmıyor.", en: "The last week of the year. Everything in the city has slowed down a little. People walk slowly and look at each other for a long time. Nobody's making plans." }
+            kosul: { bayrak_yok: "kiyikent_dustu" }
+          - metin: { tr: "Yılın son haftası. {yer:tepe|de}ki kampta her şey biraz yavaşladı; insanlar çadırların arasında ağır ağır yürüyor, birbirine uzun uzun bakıyor. Aşağıda, işgal altındaki şehirde sütunlar hâlâ yanıyor; kimse plan yapmıyor.", en: "The last week of the year. Everything in the camp on {yer:tepe} has slowed down a little. People walk slowly between the tents and look at each other for a long time. Down in the occupied city, the pillars are still burning. Nobody's making plans." }
+            kosul: { bayrak: "kiyikent_dustu" }
           - { tr: "Sistem'in pencereleri bu hafta neredeyse hiç açılmıyor. Açıldığında da tek bir satır var: [Değerlendirme sürüyor.]", en: "The System's windows barely open this week. When they do, there's only one line: [Assessment in progress.]" }
         bildirimler:
           - tur: "gorev"
@@ -515,6 +572,11 @@ olaylar:
         secenekler:
           - id: "yuru"
             etiket: { tr: "Şehri bir kez daha dolaş", en: "Walk the city one more time" }
+            goster: { bayrak_yok: "kiyikent_dustu" }
+            sonraki: "@akis"
+          - id: "yuru_kamp"
+            etiket: { tr: "Kampı bir kez daha dolaş", en: "Walk the camp one more time" }
+            goster: { bayrak: "kiyikent_dustu" }
             sonraki: "@akis"
           - id: "insanlar"
             etiket: { tr: "Yanındakilerle bir akşam geçir", en: "Spend an evening with the people close to you" }

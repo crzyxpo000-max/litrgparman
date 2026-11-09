@@ -2,6 +2,19 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Oyuncu gözüyle inceleme, Paket 1: hikaye kopuklukları — 2026-11-09
+
+İnceleme ve plan: `docs/INCELEME_AKIS.md` (oyuncu yolculuğu, karmaşıklık envanteri, beş paket). Kullanıcı kararları belgenin 5. bölümündeki
+sorulara verildi; Paket 1 bu kararların hikaye ayağıdır.
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 151 | **Susturulmuş Yankı konuşmaz.** `WorldState.hasFlag("yanki_bagi")`, `yanki_susturuldu` ya da `yanki_silindi` varken yanlış döner; öteki bayraklar etkilenmez (`YankiSusturmaTest`). `yanki_sustur` sahnesinin "Kapıyı biraz arala" seçeneği bayrağı kaldırır (`bayrak_kaldir`). | Yankı'nın 700'ü aşkın satırı yalnız `bayrak: yanki_bagi` ile koşullu; susturma yalnız yapısal sahnelerde gözetiliyordu. Tek tek koşul eklemek yerine motor kuralı. | Yankı bağının "kurulmuş olması" ayrı bir koşul olarak gerekirse (`yanki_susturuldu`/`yanki_silindi` ile sorulur). |
+| 152 | **Çekirdeğe yol bayrağı eşikte konur.** `cekirdek_yolu_acik` artık `cekirdege_yol` giriş seçeneklerinde değil, Kapıcı'yı geçip eşiğe varan `p4_cyol_esik` seçeneklerinde konur. Kapıcı'yı geçemeyen `p4_cyol_geri` → `@akis`; Gün 352'de `darbogaz_17` ("merdiven kapandı") gelir, brifing_18'in ilgili satırı görünür. `darbogaz_17` seçenekleri `cekirdege_inis` görevini `basarisiz` yapar. | `darbogaz_17` ve brifing_18 satırı ulaşılamazdı (1000 oynanışta 0). | Simülatörde Çekirdek'e inemeyen pay %5'i aşarsa Kapıcı ölçeği. |
+| 153 | **Kıyıkent düştüyse üs sahneleri Tepe'den anlatılır.** `darbogaz_16`, `brifing_17`, `darbogaz_17`, `brifing_18`'de Liman'ı varsayan paragraf ve seçenekler `bayrak_yok: kiyikent_dustu`; Tepe kampı/dürbün karşılıkları `bayrak: kiyikent_dustu`. `kadimler_yenildi` / `kadim_anlasmasi` / `kiyikent_dustu` satırları karşılıklı dışlanır, üçü de yokken nötr satır. Kaya'nın telsizi ve Elif'in konseyi (`cekirdek_siginak`) için ölüm/düşüş karşılıkları. Not: Bölüm 16–18 tarihli (`erken: false`) olduğundan #140 gereği taşma uygulanmaz; `bolum_16_tasti` / `bolum_17_tasti` satırları içerikte durur ama gelmez (zararsız, bilinçli). | Üs `kiyikent_liman` Kadim'in elindeyken "Liman'ı yürü", "iskelede tekne" satırları çelişiyordu. | Üs bölgesinin düşmesi başka perdelere taşınırsa. |
+| 154 | **Bölüm 11 darboğazı dünya seçimini anar.** `deniz_canavar_mi_tanri_mi` ve `deniz_anma_ayna`'ya Batık (`batik_varildi`, `batik_fener_dustu`, `batik_hasat_yutuldu`, `batik_cocuklar_dunyada`) ve Kervan (`kervan_ozgur`, `kervan_sahibi`, `kervan_isyan_basarisiz`, `kervan_varildi`, `ninu_teslim`) sonuçları için koşullu paragraflar; ikisi de yoksa "bir dünya sustu". Bölüm 6 darboğazı Kordon'un akıbetini (`kordon_kurtarildi` / `kordon_dustu`) anar. Bölüm 12 girişi Thessar / antlaşma durumuna göre hikaye gerekçesi verir. | Bölümün tek büyük seçimi darboğazda yoktu. | — |
+| 155 | **Bekçi yenilgisi ve Bölüm 8 adı.** Yeni bayrak `bekci_yenilgi` (`perde1_son_yenilgi` çıkışı); brifing_4 yenilgi, Aras'ın adı, Deniz'in hatta ölümü (`deniz_hatti_tuttu`) ve `vazgec` yolu için ayrı satırlar. Bölüm 8 adı "Başlık / The Header" → **"Çekirdek'in Altı / Beneath the Core"**; brifing_8 merdiveni ve "Başlık" dosyasını hazırlar. Bölüm 7'nin `kes`/`sor` sonuçları (`yanki_gorundu`) darboğaz_7 ve brifing_8'de satır alır. Bölüm hedefi bildirimleri `chapters.yaml hedef` ile aynı cümle (Bölüm 1–3). Erken girilebilen sahnelerdeki sabit gün sayıları yumuşatıldı. brifing_5 varsayılan satırı nötr; brifing_14 `bolum_13_tasti` karşılığı. | Süreklilik denetimi bulguları (INCELEME_AKIS §2.2). | — |
+
 ## Hikaye yapısı: bölümler, üs ve görev — 2026-11-07
 
 Ayrıntı: `docs/CHAPTERS.md` (bölüm planı), `docs/STORY_FLOW.md` (teşhis ve öncesi/sonrası ölçüm).

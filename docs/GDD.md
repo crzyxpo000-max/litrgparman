@@ -336,7 +336,7 @@ NPC'ler senaryo kuklası değil, kendi hedefleri, korkuları ve hafızası olan 
 | Kaya Demir | Demir Lonca lideri, eski asker | Akıl hocası · Oyuncunun devirdiği diktatör · Son savaşta müttefik general |
 | Elif Sarı | Sığınak Konseyi'nin hekim lideri | Konsey başkanı ve barış sonu anahtarı · Lonca darbesinde ölür · Oyuncuyla aşk yayı |
 | Vahit | Yükselenler'in peygamberi; Sistem'le konuştuğunu söyler | Sahtekar çıkar · Gerçekten haklı çıkar · Oyuncunun ellerinde Yükseliş sonunun kapısı |
-| Yankı | Sistem'in hatalı bir parçası; Entegrasyon Günü oyuncuya bağlanır ve ona ayrıcalıklı, bozuk bir Sistem verir; yalnızca oyuncuya fısıldayan ses | Sistem'in kaynağını açan rehber · Oyuncuyu ele geçirmeye çalışan virüs · Silinir |
+| Yankı | Sistem'in hatalı bir parçası; Entegrasyon Günü oyuncuya bağlanır ve ona ayrıcalıklı, bozuk bir Sistem verir; yalnızca oyuncuya fısıldayan ses. Oyuncu onu Bölüm 7'de susturabilir; susturulmuş ya da silinmiş Yankı hiçbir sahnede konuşmaz (DECISIONS #151) | Sistem'in kaynağını açan rehber · Oyuncuyu ele geçirmeye çalışan virüs · Susturulur · Silinir |
 | Aras Kurt | Oyuncuyla aynı hızda yükselen gizemli rakip | Ebedi rakip · Çok-evren yoldaşı · Oyuncu yerine "S kademe insan" olan kişi |
 | Mert Kılıç | Sessiz Ağ'ın araştırmacısı | Kod Kırıcı sonunun anahtarı · Kadimler'e satılan muhbir |
 | Elçi Thessar | Kadimler'in Dünya elçisi | Vassal sonu ortağı · Kendi ırkına ihanet eden müttefik · Son boss |
