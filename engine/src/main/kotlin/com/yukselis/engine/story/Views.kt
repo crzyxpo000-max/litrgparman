@@ -82,7 +82,24 @@ data class SkipFocusView(val focus: com.yukselis.engine.world.SkipFocus, val gro
 
 data class PreparationView(val id: String, val name: String, val description: String, val cost: Int, val enabled: Boolean)
 
-data class OperationChoiceView(val index: Int, val title: String, val region: String, val daysLeft: Int)
+/**
+ * Üste girilebilecek ana operasyon ve onay penceresi bilgisi (Paket 2): tehdit ve oyuncu seviyesi, hazırlıkların durumu,
+ * yoldaş görüşleri, büyük farkta Sistem uyarısı. `emphasized` yanlışsa düğme vurgusuz (açılış günü ya da büyük fark).
+ */
+data class OperationChoiceView(
+    val index: Int,
+    val title: String,
+    val region: String,
+    val daysLeft: Int,
+    val threatLevel: Int = 0,
+    val playerLevel: Int = 0,
+    val preparations: List<PreparationStatusView> = emptyList(),
+    val opinions: List<String> = emptyList(),
+    val warning: String? = null,
+    val emphasized: Boolean = true,
+)
+
+data class PreparationStatusView(val name: String, val done: Boolean)
 
 /** Uzun aradan sonra dönüş özeti (dünya durumu ve önemli seçimler). */
 data class RecapView(val title: String, val lines: List<String>)
@@ -270,6 +287,19 @@ data class StatusView(
     val armyPower: Int = 0,
     /** Küresel Sıralama: dünyanın gördüğü sıra. */
     val publicRank: Int = 0,
+    // ---- Kendini açan arayüz (Paket 2): ilgili sistem oyuna girmeden bölüm görünmez ----
+    /** Gizli ölçüler (Dikkat, görünen seviye, sıra): ilk Dikkat eşiği, görünen seviye ayrışması ya da Perde 2. */
+    val showHidden: Boolean = true,
+    /** Küresel Sıralama karosu: `siralama_gunu` görüldü ya da Perde 2. */
+    val showRank: Boolean = true,
+    /** İlişkiler karosu: tanışılmış bir NPC var. */
+    val showRelations: Boolean = true,
+    /** Harita karosu: Perde 2'den itibaren (Perde 1'de üç bölge, Yolculuk penceresi yeter). */
+    val showMap: Boolean = true,
+    /** Ordu satırı: ilk birlik. */
+    val showArmy: Boolean = true,
+    /** Bilgi günlüğü: ilk gizli bilgi. */
+    val showKnowledge: Boolean = true,
 )
 
 data class SkillView(
@@ -399,6 +429,8 @@ data class CombatView(
     val extraActions: Int,
     val dead: Boolean,
     val allies: List<AllyView> = emptyList(),
+    /** Taktik (duruş, efor) ve Ortam açıldı mı: üçüncü tamamlanan savaştan ya da Perde 2'den itibaren (Paket 2). */
+    val tacticsUnlocked: Boolean = true,
 )
 
 data class AllyView(val name: String, val level: Int, val hp: Int, val maxHp: Int, val down: Boolean, val role: String)

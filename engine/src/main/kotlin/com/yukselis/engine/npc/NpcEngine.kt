@@ -156,15 +156,17 @@ class NpcEngine(private val content: Content, private val effects: EffectApplier
         return EffectApplier.Result(s, listOf(relationNotice(id, clean)))
     }
 
+    /**
+     * İlişki değişimi tek satır ve sayısız: "Deniz: sana daha çok güveniyor, bağı güçlendi" (Paket 2). Aynı sahnedeki
+     * değişimler `group` ile birleştirilir (StoryEngine.collapse); sayılar İlişkiler ekranında.
+     */
     private fun relationNotice(id: String, deltas: Map<RelAxis, Int>): Notice {
-        fun part(a: RelAxis, d: Int): LText {
-            val label = texts.format("eksen_${a.key}")
-            val sign = if (d > 0) "+$d" else "−${-d}"
-            return LText("${label.tr} $sign", "${label.en} $sign")
-        }
-        val parts = RelAxis.entries.filter { (deltas[it] ?: 0) != 0 }.map { part(it, deltas.getValue(it)) }
-        val joined = LText(parts.joinToString(" · ") { it.tr }, parts.joinToString(" · ") { it.en })
-        return Notice(NoticeKind.COMPANION, texts.formatL("iliski_degisti", "npc" to name(id), "changes" to joined))
+        val parts = RelAxis.entries.filter { (deltas[it] ?: 0) != 0 }
+            .map { a -> texts.format("bag_${a.key}_" + if (deltas.getValue(a) > 0) "arti" else "eksi") }
+        val joined = LText(parts.joinToString(", ") { it.tr }, parts.joinToString(", ") { it.en })
+        val n = name(id)
+        val sep = com.yukselis.engine.story.StoryEngine.RELATION_SEP
+        return Notice(NoticeKind.COMPANION, LText(n.tr + sep + joined.tr, n.en + sep + joined.en), group = "iliski:$id")
     }
 
     /** Hatıra ekler (aynı kimlik varsa ağırlığı büyük olanla değiştirir); sınır aşılırsa en zayıf solan silinir. */

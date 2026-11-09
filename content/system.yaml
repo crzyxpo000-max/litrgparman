@@ -39,7 +39,7 @@ kullanildi: { tr: "Kullanıldı: {name}", en: "Used: {name}" }
 gunluk_yeni: { tr: "Günlük Görev: {title}", en: "Daily Quest: {title}" }
 gunluk_tamam: { tr: "Günlük Görev tamamlandı", en: "Daily Quest complete" }
 gunluk_odul: { tr: "+{n} serbest stat puanı · +{xp} XP", en: "Free stat points +{n} · +{xp} XP" }
-gunluk_kacirildi: { tr: "Günlük Görev tamamlanmadı. Ceza protokolü değerlendiriliyor.", en: "Daily Quest failed. Penalty protocol under review." }
+gunluk_kacirildi: { tr: "Günlük Görev tamamlanmadı. Seri sıfırlandı.", en: "Daily Quest not completed. Streak reset." }
 kabul: { tr: "Kabul et", en: "Accept" }
 red: { tr: "Reddet", en: "Decline" }
 yanki_onerisi: { tr: "[{npc:yanki|in} önerisi] Koşul sağlanmadı. ama ben sağlarım.", en: "[{npc:yanki|pos} suggestion] Condition not met. I'll meet it for you." }
@@ -133,10 +133,10 @@ infaz_bagisla: { tr: "Bağışla", en: "Spare it" }
 infaz_bagisla_aciklama: { tr: "Bırak gitsin. Merhamet +5. Zeki olanlar bunu hatırlar.", en: "Let it go. Mercy +5. The smart ones remember." }
 infaz_bagisla_metin: { tr: "Silahını indiriyorsun. {enemy} sürünerek uzaklaşıyor.", en: "You lower your weapon. {enemy} crawls away." }
 savas_hepsi_kacti: { tr: "Hepsi kaçtı. Kazanmadın ama kaybetmedin de.", en: "They all ran. Not a win, but not a loss either." }
-akis_basladi: { tr: "Öğretici Katman artık açık. Gün akışı başladı.", en: "The Tutorial Layer is wide open now. The day loop has begun." }
+akis_basladi: { tr: "Öğretici Katman artık açık. Gün senin.", en: "The Tutorial Layer is wide open now. The day is yours." }
 akis_metin: { tr: "Gün {day}. {region}. Bugün ne yapacaksın?", en: "Day {day}. {region}. What's the plan?" }
 akis_kamp_vakti: { tr: "Hava kararıyor. Kamp kurma vakti.", en: "It's getting dark. Time to make camp." }
-gun_basladi: { tr: "Gün {day} · {n} yuva", en: "Day {day} · {n} slots" }
+gun_basladi: { tr: "Gün {day} · {n} eylem", en: "Day {day} · {n} actions" }
 kapi_tasti: { tr: "Kapı taşması: {region}. Canavarlar dışarı döküldü.", en: "Gate overflow: {region}. Monsters are spilling out." }
 kapi_acildi: { tr: "Yeni kapı açıldı: {region} · Kademe {grade}", en: "A new Gate opened: {region} · Grade {grade}" }
 kapiya_girildi: { tr: "Kapıdan içeri adım atıyorsun; kapı arkandan kapanıyor.", en: "You step through the Gate. It seals behind you." }
@@ -152,7 +152,7 @@ secenek_gizle: { tr: "[Gizle]", en: "[Conceal]" }
 secenek_aciga_vur: { tr: "[Açığa vur]", en: "[Reveal]" }
 zar_basarili: { tr: "Kontrol başarılı (%{n})", en: "Check passed ({n}%)" }
 zar_basarisiz: { tr: "Kontrol başarısız (%{n})", en: "Check failed ({n}%)" }
-dikkat_esik: { tr: "[Anomali Dikkati: {n}]", en: "[Anomaly Attention: {n}]" }
+dikkat_esik: { tr: "[Dikkat: {n}]", en: "[Attention: {n}]" }
 dikkat_esik_25: { tr: "Bazıları ne kadar hızlı büyüdüğünü fark etmeye başladı.", en: "People are starting to notice how fast you're growing." }
 dikkat_esik_50: { tr: "Artık yalnızca insanlar bakmıyor. Sistem de bakıyor.", en: "It's not just people watching anymore. The System is too." }
 dikkat_esik_75: { tr: "Üst kademeden bir şey adını öğrendi.", en: "Something from a higher Grade has learned your name." }
@@ -289,3 +289,23 @@ atlama_kesinti: { tr: "Günler aynı düzenle akıp gidiyordu: sabah iş, akşam
 kule_hizli: { tr: "[Kat {from}–{to} temizlendi · kat: {n} · hasar: {damage}]", en: "[Floors {from}–{to} cleared · {n} floors · {damage} damage]" }
 atlama_odak_kapi: { tr: "Kapı temizliği", en: "Gate clearing" }
 bolum_tarihli: { tr: "[Operasyon tarihi sabit: Gün {day}. Erken giriş yok. O güne kadar hazırlan.]", en: "[Operation date is fixed: Day {day}. No early entry. Prepare until then.]" }
+
+# ---- Paket 2: ilk saat (DECISIONS #156–#160) ----
+gunluk_kacirildi_deneme: { tr: "Günlük Görev tamamlanmadı. Deneme süresi: ilk üç gün ceza yok.", en: "Daily Quest not completed. Grace period: no penalty for the first three days." }
+gunluk_deneme_satir: { tr: "İlk üç gün deneme süresi; kaçırırsan ceza yok.", en: "The first three days are a grace period. Miss it and nothing happens." }
+bag_guven_arti: { tr: "sana daha çok güveniyor", en: "trusts you more" }
+bag_guven_eksi: { tr: "sana daha az güveniyor", en: "trusts you less" }
+bag_saygi_arti: { tr: "sana saygısı arttı", en: "respects you more" }
+bag_saygi_eksi: { tr: "sana saygısı azaldı", en: "respects you less" }
+bag_korku_arti: { tr: "senden biraz daha korkuyor", en: "is a little more afraid of you" }
+bag_korku_eksi: { tr: "senden daha az korkuyor", en: "is less afraid of you" }
+bag_baglilik_arti: { tr: "bağı güçlendi", en: "feels closer to you" }
+bag_baglilik_eksi: { tr: "bağı gevşedi", en: "feels more distant" }
+savas_son_darbe: { tr: "{enemy} yere yığılıyor ve bir daha kalkmıyor.", en: "{enemy} goes down and stays down." }
+taktik_acildi: { tr: "[Taktik açıldı: duruş, efor ve ortam artık senin elinde.]", en: "[Tactics unlocked: stance, effort and the environment are yours to use now.]" }
+operasyon_gorus_cesur: { tr: "{npc}: \"Hazırım. Sen söyle, yürüyelim.\"", en: "{npc}: \"I'm ready. Say the word and we go.\"" }
+operasyon_gorus_temkinli: { tr: "{npc}: \"Bir iki gün daha güçlensek fena olmaz.\"", en: "{npc}: \"Wouldn't hurt to get a day or two stronger first.\"" }
+operasyon_gorus_uyari: { tr: "{npc}: \"Bu seviyeyle mi? Bekleyelim; oradaki şey bizi yer.\"", en: "{npc}: \"At this level? Let's wait. That thing out there will eat us alive.\"" }
+operasyon_gorus_cesur_uyari: { tr: "{npc}: \"Erken, biliyorum. Yine de arkandayım.\"", en: "{npc}: \"It's early, I know. I've still got your back.\"" }
+operasyon_onay_uyari: { tr: "[Uyarı: tehdit Sv. {n}, sen Sv. {m}. Kayıp olasılığı yüksek.]", en: "[Warning: threat Lv. {n}, you Lv. {m}. High chance of loss.]" }
+bolum_sakin_gunler: { tr: "Bölüm bitti; {n} sakin gün geçti. Yeni bir şey kıpırdıyor.", en: "The chapter is over. {n} quiet days pass, and something new is stirring." }

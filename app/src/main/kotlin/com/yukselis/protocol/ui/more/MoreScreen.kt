@@ -36,6 +36,7 @@ import com.yukselis.protocol.ui.theme.EchoColor
 import com.yukselis.engine.story.DailyView
 import com.yukselis.engine.story.JournalView
 import com.yukselis.engine.story.RegionView
+import com.yukselis.engine.story.StatusView
 import com.yukselis.engine.world.QuestStatus
 import com.yukselis.engine.story.NoticeView
 import com.yukselis.protocol.ui.components.SystemCard
@@ -89,13 +90,20 @@ fun MoreScreen(
     modifier: Modifier = Modifier,
     onNotificationPermission: (Boolean) -> Unit = {},
     notificationDenied: Boolean = false,
+    status: StatusView? = null,
 ) {
     var page by rememberSaveable { mutableStateOf<MorePage?>(null) }
     // Sistem geri tuşu önce alt sayfayı kapatır.
     BackHandler(enabled = page != null) { page = null }
     val inDayLoop = map.isNotEmpty()
+    // Karolar kendini açar (Paket 2): Harita Perde 2'de, İlişkiler ilk tanışmada, Sıralama ilk sıralama gününde.
+    val showMap = status?.showMap ?: true
+    val showRelations = status?.showRelations ?: true
+    val showRank = status?.showRank ?: true
+    val showKnowledge = status?.showKnowledge ?: true
 
-    val current = page
+    // Açık alt sayfa artık gizlendiyse (örn. yükleme sonrası) karo ızgarası gösterilir.
+    val current = page?.takeUnless { it == MorePage.MAP && !showMap || it == MorePage.RELATIONS && !showRelations || it == MorePage.RANKING && !showRank }
     if (current == null) {
         Column(
             modifier = modifier
@@ -107,9 +115,11 @@ fun MoreScreen(
             notices.forEach { SystemCard(it) }
             TipCard("more", stringResource(R.string.tip_more))
             val tiles = buildList {
-                add(Tile(MorePage.MAP, Icons.Filled.Place, stringResource(R.string.map),
-                    if (map.isEmpty()) stringResource(R.string.tile_map_none) else map.firstOrNull { it.current }?.name ?: "",
-                    enabled = inDayLoop))
+                if (showMap) {
+                    add(Tile(MorePage.MAP, Icons.Filled.Place, stringResource(R.string.map),
+                        if (map.isEmpty()) stringResource(R.string.tile_map_none) else map.firstOrNull { it.current }?.name ?: "",
+                        enabled = inDayLoop))
+                }
                 daily?.let {
                     add(Tile(MorePage.DAILY, Icons.Filled.DateRange, stringResource(R.string.daily_quest),
                         if (it.completed) stringResource(R.string.daily_done) else stringResource(R.string.tile_daily, it.progress, it.steps)))
@@ -118,11 +128,11 @@ fun MoreScreen(
                     add(Tile(MorePage.JOURNAL, Icons.AutoMirrored.Filled.List, stringResource(R.string.journal),
                         stringResource(R.string.tile_quests, it.quests.count { q -> q.status == QuestStatus.ACTIVE })))
                 }
-                relations?.let {
+                relations?.takeIf { showRelations }?.let {
                     add(Tile(MorePage.RELATIONS, Icons.Filled.Face, stringResource(R.string.relationships),
                         stringResource(R.string.party_line, it.companions, it.capacity)))
                 }
-                ranking?.takeIf { inDayLoop }?.let {
+                ranking?.takeIf { inDayLoop && showRank }?.let {
                     add(Tile(MorePage.RANKING, Icons.Filled.Star, stringResource(R.string.ranking), "#${it.publicRank} / ${it.total}"))
                 }
                 add(Tile(MorePage.SAVES, Icons.Filled.Check, stringResource(R.string.saves), stringResource(R.string.tile_saves)))
@@ -160,7 +170,7 @@ fun MoreScreen(
                     notices.forEach { SystemCard(it, Modifier.padding(vertical = 4.dp)) }
                     daily?.let { DailyPanel(it, onTrain, inDayLoop) }
                 }
-                MorePage.JOURNAL -> journal?.let { JournalSection(it) }
+                MorePage.JOURNAL -> journal?.let { JournalSection(it, showKnowledge) }
                 MorePage.RELATIONS -> relations?.let { RelationsSection(it) }
                 MorePage.RANKING -> ranking?.let { RankingSection(it) }
                 MorePage.SAVES -> {
@@ -286,7 +296,7 @@ private fun MapSection(regions: List<RegionView>) {
 
 /** Görevler ve efsane (tanıklı başarılar). */
 @Composable
-private fun JournalSection(journal: JournalView) {
+private fun JournalSection(journal: JournalView, showKnowledge: Boolean) {
     // Bölüm hedefi yan görevlerden ayrı (DECISIONS #130).
     journal.chapter?.let { ch ->
         Text(stringResource(R.string.chapter_goal_title), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
@@ -318,8 +328,8 @@ private fun JournalSection(journal: JournalView) {
         Text(stringResource(R.string.legend), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
         journal.legend.forEach { Text("${it.name} ×${it.count}", style = GameType.system) }
     }
-    // OP MC bilgi günlüğü: söylentiler, sırlar, gerçek seviyeler.
-    if (journal.knowledge.isNotEmpty()) {
+    // OP MC bilgi günlüğü: söylentiler, sırlar, gerçek seviyeler (ilk bilgiyle açılır).
+    if (showKnowledge && journal.knowledge.isNotEmpty()) {
         Text(stringResource(R.string.intel_log), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
         journal.knowledge.forEach { k ->
             Column(modifier = Modifier.padding(vertical = 3.dp)) {

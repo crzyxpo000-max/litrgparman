@@ -108,7 +108,10 @@ class NpcTest {
         assertEquals(30, a.relation.respect)
         assertEquals(5, a.relation.fear)
         assertTrue(a.known)
-        assertTrue(o.notices.any { it.title.contains("Respect +10") })
+        // Paket 2: sayısız tek satır ("Ash: respects you more, is a little more afraid of you").
+        val line = o.notices.first { it.title.contains("respects you more") }
+        assertTrue(line.title.contains("afraid"))
+        assertTrue(o.notices.none { it.title.contains("+10") })
     }
 
     @Test

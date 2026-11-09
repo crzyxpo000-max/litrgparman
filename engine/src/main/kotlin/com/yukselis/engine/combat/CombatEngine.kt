@@ -547,8 +547,14 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             val def = ctx.def(e)
             ctx.c = ctx.c.copy(kills = ctx.c.kills + 1)
             if (ctx.c.living.isEmpty()) {
-                ctx.c = ctx.c.copy(pendingExecution = uid)
-                ctx.notices += Notice(NoticeKind.WARNING, capitalize(texts.formatL("savas_infaz_teklif", "enemy" to proseName(def))))
+                // İnfaz seçimi yalnız boss, zeki düşman ve NPC düellosunda (Paket 2); sıradan düşman tek satırla düşer,
+                // zafer checkVictory ile hemen gelir.
+                if (def.boss || def.intelligent || npcIdOf(e.id) != null) {
+                    ctx.c = ctx.c.copy(pendingExecution = uid)
+                    ctx.notices += Notice(NoticeKind.WARNING, capitalize(texts.formatL("savas_infaz_teklif", "enemy" to proseName(def))))
+                } else {
+                    ctx.log(texts.formatL("savas_son_darbe", "enemy" to proseName(def)))
+                }
             } else {
                 ctx.log(texts.formatL("savas_dustu", "enemy" to proseName(def)))
             }
@@ -989,14 +995,11 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         val target = ctx.c.spec.win
         ctx.s = ctx.s.copy(combat = null, sceneId = target, ended = content.scenes[target]?.isEnding ?: false)
 
-        ctx.notices += Notice(
-            NoticeKind.SYSTEM,
-            when {
-                crushed -> texts.format("ezme_zafer")
-                beaten -> texts.format("savas_zafer")
-                else -> texts.format("savas_hepsi_kacti")
-            },
-        )
+        val victoryTitle = when {
+            crushed -> texts.format("ezme_zafer")
+            beaten -> texts.format("savas_zafer")
+            else -> texts.format("savas_hepsi_kacti")
+        }
         val actXp = if (ctx.s.act <= 1) EffectApplier.ACT1_XP_FACTOR else EffectApplier.LATE_XP_FACTOR
         val rewards = mutableListOf<Effect>(Effect.GainXp((xp * actXp).roundToLong()))
         killed.forEach { e ->
@@ -1004,7 +1007,16 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
             if (d.credits > 0) rewards += Effect.AddCredits(d.credits)
             d.loot.forEach { (item, chance) -> if (item in content.items && ctx.rng.chance(chance)) rewards += Effect.AddItem(item, 1) }
         }
+        // Ödüller tek kartta (Paket 2): "+335 XP", "+3 Kredi", "+1 Sis Postu" satırları zafer kartının içine; seviye,
+        // sekme ve öteki bildirimler ayrı kalır.
+        val before = ctx.notices.size
         ctx.applyEffects(rewards)
+        val added = ctx.notices.subList(before, ctx.notices.size).toList()
+        val (rewardLines, rest) = added.partition { it.kind == NoticeKind.SYSTEM && it.lines.isEmpty() && it.moment == null && it.title.tr.startsWith("+") }
+        ctx.notices.subList(before, ctx.notices.size).clear()
+        ctx.notices += Notice(NoticeKind.SYSTEM, victoryTitle, rewardLines.map { it.title })
+        ctx.notices += rest
+        countFight(ctx)
 
         if (gapBreak > 0) {
             ctx.addVar(VAR_GAP_BREAKS, 1)
@@ -1036,8 +1048,15 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         return Result(s, notices)
     }
 
+    /** Savaş sayacı (Paket 2): üçüncü savaştan sonra Taktik ve Ortam açılır; arayüz `CombatView.tacticsUnlocked` okur. */
+    private fun countFight(ctx: Ctx) {
+        ctx.addVar(VAR_FIGHTS, 1)
+        if (ctx.s.variable(VAR_FIGHTS) == TACTICS_UNLOCK_FIGHTS) ctx.notices += Notice(NoticeKind.SYSTEM, texts.format("taktik_acildi"))
+    }
+
     private fun leave(ctx: Ctx, scene: String) {
         ctx.over = true
+        countFight(ctx)
         ctx.s = ctx.s.copy(combat = null, sceneId = scene, ended = content.scenes[scene]?.isEnding ?: false)
     }
 
@@ -1099,6 +1118,9 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         const val BASIC_MULT = 1.0
         val MAGIC_STATS = setOf(Stat.INT, Stat.WIS, Stat.WIL)
 
+        /** Tamamlanan savaş sayısı (zafer, yenilgi, kaçış). */
+        const val VAR_FIGHTS = "savas_sayisi"
+        const val TACTICS_UNLOCK_FIGHTS = 3
         const val EXEC_BRUTAL = "acimasiz"
         const val EXEC_CLEAN = "temiz"
         const val EXEC_SPARE = "bagisla"

@@ -1,8 +1,8 @@
 # İlerleme
 
-Şu an: Oyuncu gözüyle inceleme (`docs/INCELEME_AKIS.md`) bitti; Paket 1 (hikaye kopuklukları) bitti. Sıradaki: Paket 2 ilk saat (kısa plan + onay).
+Şu an: İnceleme (`docs/INCELEME_AKIS.md`), Paket 1 (hikaye kopuklukları) ve Paket 2 (ilk saat) bitti. Sıradaki: Paket 3 ritim (kısa plan + onay).
 Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
-Son commit: 54dbd14 sanat entegrasyonu (sonraki: Paket 1)
+Son commit: 8f4abe6 Paket 1 (sonraki: Paket 2)
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
@@ -20,7 +20,10 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
       eşikte (darbogaz_17 ulaşılır), Kıyıkent düştü dalı (Tepe), Bölüm 11 darboğazında dünya seçimi, Kordon akıbeti, Bölüm 12 gerekçesi,
       Bekçi yenilgisi (`bekci_yenilgi`), Bölüm 8 adı "Çekirdek'in Altı", brifing_8 merdiven, Bölüm 7 yedek satırları, sabit gün sayıları,
       bölüm hedefi tek metin. TR/EN inceleme düzeltmeleri uygulandı; check.sh ve 1000 oynanış simülatörü (BALANCE.md)
-- [ ] Paket 2 — ilk saat (ceza kuralı, savaş ekranı kademeli, ödül kartları, operasyon onayı, Durum/Daha fazla kendini açma)
+- [x] **Paket 2 — ilk saat** (DECISIONS #156–#160): Günlük Görev deneme süresi ve Ceza Bölgesi yalnız üste; infaz yalnız boss/zeki,
+      ödüller tek kartta, 3. savaştan sonra Taktik; operasyon onay penceresi (tehdit/oyuncu seviyesi, hazırlıklar, yoldaş görüşleri, uyarı),
+      biten bölümün günleri kendiliğinden geçer, zaman atlama Perde 2+; ilişki satırı sayısız ve birleşik; prolog tek saat; Durum/Daha
+      fazla kendini açar; savaş ekranı Perde 1'de 5 düğme. `Paket2Test`; emülatörde ilk 20 dakika yeniden oynandı
 - [ ] Paket 3 — ritim (varış yalnız ilk ziyaret, yolculuk eylem harcamaz, Perde 1 keşif olayları ×6, Bölüm 1 yoğunluğu)
 - [ ] Paket 4 — sistem çıkarma (meslek/Kredi kapalı, Yozlaşma → Dikkat, ordu/bilgi günlüğü kendini açan arayüz)
 - [ ] Paket 5 — arayüz incelemesi (`docs/UI_REVIEW.md`, emülatör görüntüleri `docs/ui-review/`)

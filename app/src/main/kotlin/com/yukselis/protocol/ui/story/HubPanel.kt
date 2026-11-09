@@ -1,7 +1,9 @@
 package com.yukselis.protocol.ui.story
 
 import com.yukselis.protocol.ui.components.AppAlertDialog
+import com.yukselis.protocol.ui.components.systemWindow
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -30,6 +32,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.yukselis.engine.story.HubView
+import com.yukselis.engine.story.OperationChoiceView
 import com.yukselis.engine.story.SkipFocusView
 import com.yukselis.engine.story.SkipView
 import com.yukselis.engine.world.SkipFocus
@@ -52,6 +55,8 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
     var dialog by remember { mutableStateOf<HubDialog?>(null) }
     // Operasyon yaklaşırken üsten ayrılan eylem önce onay ister (DECISIONS #141).
     var pending by remember { mutableStateOf<HubAction?>(null) }
+    // Operasyon düğmesi önce onay penceresi açar: tehdit, seviye, hazırlıklar, yoldaş görüşleri, uyarı (Paket 2).
+    var confirmOp by remember { mutableStateOf<OperationChoiceView?>(null) }
     val leave: (HubAction) -> Unit = { a -> if (hub.deadlineWarning != null) pending = a else onAction(a) }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -75,19 +80,8 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
             }
             return@Column
         }
-        hub.operations.forEach { op ->
-            Button(onClick = { onAction(HubAction.EnterOperation(op.index)) }, modifier = Modifier.fillMaxWidth()) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(stringResource(R.string.hub_operation, op.title), maxLines = 1, overflow = TextOverflow.Ellipsis)
-                    Text(
-                        pluralStringResource(R.plurals.hub_operation_days, op.daysLeft, op.region, op.daysLeft),
-                        style = GameType.system,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                }
-            }
-        }
+        // Vurgulu operasyon (süre daralıyor, seviye yeterli) üstte; vurgusuz olan Fırsatlar'ın altına iner (Paket 2).
+        hub.operations.filter { it.emphasized }.forEach { op -> OperationButton(op) { confirmOp = op } }
         if (hub.preparations.isNotEmpty()) {
             OutlinedButton(onClick = { dialog = HubDialog.PREPARE }, modifier = Modifier.fillMaxWidth()) {
                 Text(pluralStringResource(R.plurals.hub_prepare_n, hub.preparations.size, hub.preparations.size), color = MaterialTheme.colorScheme.tertiary)
@@ -115,6 +109,7 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
                 }
             }
         }
+        hub.operations.filter { !it.emphasized }.forEach { op -> OperationButton(op) { confirmOp = op } }
         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             val pad = PaddingValues(horizontal = 4.dp, vertical = 8.dp)
             if (hub.canExplore) {
@@ -215,6 +210,88 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
             text = { Text(hub.deadlineWarning ?: "") },
         )
     }
+    confirmOp?.let { op ->
+        OperationConfirmDialog(
+            op = op,
+            onConfirm = { confirmOp = null; onAction(HubAction.EnterOperation(op.index)) },
+            onDismiss = { confirmOp = null },
+        )
+    }
+}
+
+/** Operasyon düğmesi: vurgulu (dolu) ya da vurgusuz (çerçeveli); iki satır: ad, bölge · kalan gün. */
+@Composable
+private fun OperationButton(op: OperationChoiceView, onClick: () -> Unit) {
+    val content: @Composable () -> Unit = {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(stringResource(R.string.hub_operation, op.title), maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text(
+                pluralStringResource(R.plurals.hub_operation_days, op.daysLeft, op.region, op.daysLeft),
+                style = GameType.system,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+        }
+    }
+    if (op.emphasized) {
+        Button(onClick = onClick, modifier = Modifier.fillMaxWidth()) { content() }
+    } else {
+        OutlinedButton(onClick = onClick, modifier = Modifier.fillMaxWidth()) { content() }
+    }
+}
+
+/**
+ * Operasyon onayı: tehdit ve oyuncu seviyesi (fark ≥ 3 ise tehdit kızıl), hazırlıkların durumu, yoldaş görüşleri,
+ * büyük farkta Sistem uyarısı. Onay = operasyona giriş; Vazgeç = üste dönüş.
+ */
+@Composable
+private fun OperationConfirmDialog(op: OperationChoiceView, onConfirm: () -> Unit, onDismiss: () -> Unit) {
+    val gap = op.threatLevel - op.playerLevel
+    AppAlertDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = { TextButton(onClick = onConfirm) { Text(stringResource(R.string.op_confirm_enter)) } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } },
+        title = { Text(op.title) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.verticalScroll(rememberScrollState())) {
+                Text(
+                    stringResource(R.string.op_confirm_threat, op.threatLevel),
+                    style = GameType.systemTitle,
+                    color = if (gap >= 3) Game.colors.danger else MaterialTheme.colorScheme.onSurface,
+                )
+                Text(stringResource(R.string.op_confirm_you, op.playerLevel), style = GameType.systemTitle, color = MaterialTheme.colorScheme.onSurface)
+                if (op.preparations.isNotEmpty()) {
+                    Text(
+                        stringResource(R.string.op_confirm_preparations),
+                        style = GameType.system,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(top = 4.dp),
+                    )
+                    op.preparations.forEach { p ->
+                        Text(
+                            (if (p.done) "✓ " else "○ ") + p.name,
+                            style = GameType.system,
+                            color = if (p.done) Game.colors.success else MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                }
+                if (op.opinions.isNotEmpty()) {
+                    Text(
+                        stringResource(R.string.op_confirm_opinions),
+                        style = GameType.system,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(top = 4.dp),
+                    )
+                    op.opinions.forEach { Text(it, style = GameType.system, color = Game.colors.companion) }
+                }
+                op.warning?.let { w ->
+                    Box(modifier = Modifier.fillMaxWidth().padding(top = 6.dp).systemWindow(accent = Game.colors.danger, cut = 8)) {
+                        Text(w, style = GameType.system, color = Game.colors.danger, modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp))
+                    }
+                }
+            }
+        },
+    )
 }
 
 /** Zaman atlama: odak (gruplu liste) ve gün sayısı (1…en çok). */

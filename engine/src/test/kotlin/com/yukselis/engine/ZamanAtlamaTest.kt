@@ -114,7 +114,7 @@ class ZamanAtlamaTest {
         var st = chapter4(35, noCut())
         val str = st.player.stats[Stat.STR]
         repeat(3) { i ->
-            st = st.copy(sceneId = WorldState.HUB, day = 30, dayState = st.dayState.copy(slotsLeft = 4, forcedLock = false), rngState = noCut(100L * (i + 1)))
+            st = st.copy(sceneId = WorldState.HUB, day = 35, dayState = st.dayState.copy(slotsLeft = 4, forcedLock = false), rngState = noCut(100L * (i + 1)))
             st = engine.hubAction(st, HubAction.Skip(SkipFocus.Train(Stat.STR), 1), lang).state
         }
         assertEquals(str + 1, st.player.stats[Stat.STR])

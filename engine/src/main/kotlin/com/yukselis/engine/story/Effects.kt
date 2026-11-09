@@ -483,7 +483,11 @@ class EffectApplier(private val content: Content) {
             // Keşif/savaş/Kapı görevleri o gün görevde olmayı gerektirir (üste geçen gün yapılamaz): kaçırılınca ne
             // seri kopar ne ceza gelir. Antrenman her yerde yapılabilir; ihmali eskisi gibi cezalıdır (QA P1-21).
             val trainable = content.dailyTemplates[old.templateId]?.kind == com.yukselis.engine.story.PlayerActions.TRAINING
-            if (trainable) {
+            if (trainable && s.day <= PENALTY_GRACE_DAYS) {
+                // Deneme süresi (Paket 2): ilk üç gün ne ceza ne seri; tek bir Sistem satırı.
+                notices += Notice(NoticeKind.SYSTEM, texts.format("gunluk_kacirildi_deneme"))
+            } else if (trainable) {
+                // Ceza yalnız seri ve bir Ceza Bölgesi şansı; sahne yalnız üs/kamp anında açılır (WorldEngine.enterHub).
                 val rng = Rng(s.rngState)
                 val penalty = rng.chance(PENALTY_CHANCE)
                 s = s.copy(rngState = rng.state, dailyStreak = 0, penaltyPending = s.penaltyPending || penalty)
@@ -511,7 +515,8 @@ class EffectApplier(private val content: Content) {
         val quest = DailyQuest(templateId = t.id, day = state.day, steps = steps)
         return Result(
             state.copy(daily = quest, rngState = rng.state),
-            listOf(Notice(NoticeKind.QUEST, texts.formatL("gunluk_yeni", "title" to t.title), listOf(t.description))),
+            listOf(Notice(NoticeKind.QUEST, texts.formatL("gunluk_yeni", "title" to t.title),
+                listOf(t.description) + if (state.day in 1..PENALTY_GRACE_DAYS) listOf(texts.format("gunluk_deneme_satir")) else emptyList())),
         )
     }
 
@@ -741,6 +746,9 @@ class EffectApplier(private val content: Content) {
 
         /** İhmal edilen Günlük Görevde Ceza Bölgesi'ne ışınlanma olasılığı (DECISIONS #23). */
         const val PENALTY_CHANCE = 0.5
+
+        /** Günlük Görev deneme süresi: bu güne kadar (dahil) ihmal cezasız ve serisiz (Paket 2, kullanıcı kararı). */
+        const val PENALTY_GRACE_DAYS = 3
 
         fun declinedFlag(kind: PromptKind, subject: String) = "_red_${kind.key}_$subject"
     }

@@ -248,6 +248,7 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
                 onBackToTitle = viewModel::backToTitle,
                 onNotificationPermission = viewModel::onNotificationPermission,
                 notificationDenied = ui.notificationDenied,
+                status = status,
                 modifier = content,
             )
         }

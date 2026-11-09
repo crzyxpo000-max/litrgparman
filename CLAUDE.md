@@ -162,8 +162,12 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Türkçe noktalama: İngilizce kalıbı ", ve" kullanma; Türkçede "ve"den önce virgül konmaz.
 - Başarısız zar (`basarisiz`) sessizce `@akis`'e dönmesin; kısa bir başarısızlık sahnesi yaz. Tohum olayı bölge/gün tanımaz:
   belirli bir yeri anlatan açılışı koşullu yaz ya da bölgeye geliş satırı ekle.
-- Sahnede `sezgiler`: [{`kosul`, `metin`}] → pasif Sistem sezgisi; stat koşullu satır "[ALG]" öneki alır, öneksiz satır Yankı'nın sesidir.
-- Bildirim türleri: sistem, durum, analiz, seviye, unvan, gorev, uyari, yetenek, evrim, sinif, `yanki` (bozuk yazı).
+- Sahnede `sezgiler`: [{`kosul`, `metin`}] → pasif Sistem sezgisi; stat koşullu satır turkuaz çizgiyle gösterilir (önek yok; kilit etiketi "[ALG 6]" ile karışmasın), öneksiz/koşulsuz satır Yankı'nın sesidir (`InsightView.echo`).
+- Bildirim türleri: sistem, durum, analiz, seviye, unvan, gorev, uyari, yetenek, evrim, sinif, `yanki` (bozuk yazı). Aynı `Notice.group` değerini taşıyan
+  bildirimler (bir NPC'nin bir sahnedeki ilişki değişimleri) `StoryEngine.collapse` ile tek karta iner; ilişki satırı sayısızdır (`bag_*` metinleri).
+  Savaş ödülleri (XP, Kredi, ganimet) zafer kartının satırlarıdır; infaz seçimi yalnız boss/zeki/NPC düellosunda; `savas_sayisi` değişkeni 3'te Taktik'i açar.
+  Günlük Görev: ilk 3 gün deneme (`EffectApplier.PENALTY_GRACE_DAYS`); Ceza Bölgesi yalnız `WorldEngine.enterHub`'da (üs ya da keşif kampı), sahne kesmez.
+  Biten bölümün boş günleri `restUntilNextChapter` ile geçer; zaman atlama Perde 2'den itibaren.
 - Eğilimler: yakin_dovus, menzilli, buyu, gizlilik, koruma, cagirma, zanaat, karanlik. Fraksiyonlar: siginak, lonca, yukselenler, sessiz_ag, kadimler.
 - `gerekli` karşılanmazsa seçenek görünür ama kilitlidir ve "[ALG 6]" etiketi alır; `goster` karşılanmazsa gizlenir.
 - İçerik değiştikten sonra `:engine:validateContent` ve `:engine:test` çalıştır (ContentFilesTest gerçek içeriği doğrular).
@@ -192,7 +196,9 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Türkçe büyük harf dönüşümünde yerel ayar kullan (`uppercase(locale)`): i → İ.
 - Türkçe metinde sayıya ek getirme ("Aşama 4'te" sayıya göre değişir); "Aşama %d ile" gibi eksiz kalıp kullan.
 - Kayıt: her seçimden ve her Sistem eyleminden sonra ve `onStop`'ta otomatik; dosyalar `files/saves/*.json`, Auto Backup kapsamında.
-- Kendini açan arayüz: Yetenekler ve Çanta sekmeleri `StatusView.tabs` içinde yoksa gizlidir.
+- Kendini açan arayüz: Yetenekler ve Çanta sekmeleri `StatusView.tabs` içinde yoksa gizlidir. `StatusView.showHidden/showRank/showRelations/showMap/showArmy/showKnowledge`
+  Durum'un gizli ölçülerini ve Daha fazla karolarını ilgili sistem oyuna girene kadar gizler; `CombatView.tacticsUnlocked` yanlışken savaş ekranı
+  Saldır · Savun · Analiz · Kaç · Otomatik'e iner (Taktik, Ortam, Dayanım yok). Operasyon düğmesi onay penceresi açar (`OperationChoiceView`).
 - Tam ekran kartlar `ui/system/Overlays.kt`: önce kutlama (seviye/evrim/sınıf), sonra bekleyen istem.
 - Tema: Sistem · Açık · Koyu (koyu temanın zemini saf siyah; ayrı AMOLED seçeneği yok, DECISIONS #148).
 - **Görsel kimlik "Kırık pencere"** (DECISIONS #147): renk/yazı/şekil/hareket tokenları yalnız `ui/theme/Theme.kt`'de

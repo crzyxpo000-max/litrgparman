@@ -129,8 +129,6 @@ sahneler:
         baslik: { tr: "Durum penceresi açıldı", en: "Status window unlocked" }
         satirlar:
           - { tr: "{oyuncu} · Seviye 1 · Sınıfsız · Kademe F", en: "{oyuncu} · Level 1 · Classless · Grade F" }
-          - { tr: "Öğretici süresi: 30 gün", en: "Tutorial time remaining: 30 days" }
-          - { tr: "İpucu: Statlarını Durum sekmesinde görebilirsin.", en: "Tip: Check the Status tab to see your stats." }
       - tur: "uyari"
         nadirlik: "nadir"
         baslik: { tr: "Gizli satır tespit edildi", en: "Hidden line detected" }
@@ -141,7 +139,6 @@ sahneler:
         baslik: { tr: "Günlük Görev açıldı", en: "Daily Quest unlocked" }
         satirlar:
           - { tr: "Bu pencereyi yalnızca sen görürsün. Başkalarına sorma; bilmezler.", en: "This window is visible to you alone. Don't ask anyone else. They don't know." }
-          - { tr: "Ayrıntılar: Daha fazla → Günlük Görev.", en: "Details: More → Daily Quest." }
     secenekler:
       - id: "dinle"
         etiket: { tr: "Gözlerini kapa, sesleri dinle", en: "Close your eyes and listen" }
@@ -305,8 +302,8 @@ sahneler:
   - id: "ilk_sabah"
     yer: "ogretici_orman"
     paragraflar:
-      - { tr: "Sabah olunca Sistem yeni bir pencere açıyor: Öğretici Katman'da 29 gün kaldı.", en: "When morning comes, the System opens a new window: 29 days left in the Tutorial Layer." }
-      - { tr: "Çıkış Kapısı'na giden yol uzun. Her gün eline birkaç saat geçecek; onları nasıl harcayacağın sana kalmış.", en: "The road to the Exit Gate is long. Every day you get a few hours, and how you spend them is up to you." }
+      - { tr: "Sabah olunca Sistem tek bir kuru satır bırakıyor: [Çıkış Kapısı · henüz açılmadı].", en: "When morning comes, the System leaves a single dry line: [Exit Gate · not yet open]." }
+      - { tr: "Çıkış Kapısı'na giden yol uzun. Her sabah kampta önüne birkaç fırsat çıkacak; birini seç, günün geri kalanını nasıl harcayacağın sana kalmış.", en: "The road to the Exit Gate is long. Every morning there'll be a few opportunities waiting at camp. Pick one; how you spend the rest of the day is up to you." }
     bildirimler:
       - tur: "uyari"
         baslik: { tr: "Bir tohum ekildi", en: "A seed has been planted" }

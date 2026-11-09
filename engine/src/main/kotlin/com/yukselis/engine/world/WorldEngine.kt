@@ -80,6 +80,13 @@ class WorldEngine(
             val n = night(s.copy(vars = s.vars - CAMP_PENDING_VAR))
             return Result(n.state, notices + n.notices)
         }
+        // Ceza Bölgesi (Paket 2): ihmal edilen Günlük Görev yalnız üs ya da keşif kampı anında, bir oyuncu eyleminden sonra
+        // açılır; operasyonu, yan görevi ya da bir sahneyi asla kesmez. Dönüş `@geri` ile gün akışına.
+        if (s.penaltyPending && s.combat == null && Content.PENALTY_SCENE in content.scenes &&
+            (s.mission == null || s.mission.kind == MissionKind.EXPLORE) && !s.dayState.forcedLock
+        ) {
+            return Result(s.copy(sceneId = Content.PENALTY_SCENE, returnStack = s.returnStack + WorldState.HUB, penaltyPending = false), notices)
+        }
         if (chapterMode) return chapterHub(s, notices)
         // Bölüm yapısı olmayan içerik (küçük test içerikleri): eski gün akışı.
         // Zorunlu olay: yuva harcamadan değil, bir yuva yerine gelir (kalmadıysa yine gelir: hikaye beklemez).
@@ -172,7 +179,42 @@ class WorldEngine(
         // ---- üs ----
         s = advanceChapter(s, notices)
         baseForced(s, s.variable(OP_REQUEST_VAR))?.let { return Result(it.state, notices + it.notices) }
-        return Result(dealHand(s.copy(chapterPhase = phaseAfterChecks(s))), notices)
+        val dealt = dealHand(s.copy(chapterPhase = phaseAfterChecks(s)))
+        // Bölüm erken bitti ve üste yapacak bir şey kalmadı: sakin günler sonraki bölümün açılışına kadar kendiliğinden
+        // geçer (Paket 2, kullanıcı kararı). Vadesi gelen tohum ya da ana yay düğümü atlamayı durdurur.
+        if (dealt.chapterPhase == ChapterPhase.DONE && dealt.dayState.hand.isEmpty()) {
+            restUntilNextChapter(dealt, notices)?.let { return it }
+        }
+        return Result(dealt, notices)
+    }
+
+    /**
+     * Bitmiş bölümün kalan günleri: her gün tek tek geçer (NPC'ler, kapılar, Günlük Görev cezasız), yalnız uyarılar kalır.
+     * Yeni bir tohumun vakti gelir ya da ana yay düğümü uyarsa durur; en az bir gün geçtiyse özet satırıyla akışa döner.
+     */
+    internal fun restUntilNextChapter(state: WorldState, notices: MutableList<Notice>): Result? {
+        val next = chapters.next(state.chapter) ?: return null
+        if (state.day >= next.open) return null
+        if (director.dueSeed(state) != null || director.dueElsewhere(state).isNotEmpty() || storyWaiting(state)) return null
+        var s = state
+        var passed = 0
+        val dueBefore = s.seeds.filter { it.dueDay <= s.day }.toSet()
+        while (s.day < next.open) {
+            s.daily?.let { if (!it.completed) s = s.copy(daily = it.copy(completed = true)) }
+            if (s.day >= 30) s = effects.shiftAttention(s, -EffectApplier.nightDecay(s.attention)).state
+            val day = startDay(s, advance = true)
+            s = day.state
+            passed++
+            notices += day.notices.filter { it.kind == NoticeKind.WARNING }
+            val newSeed = (listOfNotNull(director.dueSeed(s)) + director.dueElsewhere(s)).firstOrNull { it !in dueBefore }
+            if (newSeed != null || storyWaiting(s)) break
+        }
+        if (passed == 0) return null
+        val p = s.player
+        s = s.copy(player = p.copy(hp = p.maxHp, mp = p.maxMp))
+        notices += Notice(NoticeKind.SYSTEM, texts.format("bolum_sakin_gunler", "n" to passed))
+        val hub = enterHub(s)
+        return Result(hub.state, notices + hub.notices)
     }
 
     /** Brifingi biten bölüm hazırlığa geçer; darboğazı kalmayan bölüm biter. */
@@ -599,6 +641,8 @@ class WorldEngine(
      */
     fun skipLimit(state: WorldState): Int {
         if (!chapterMode || state.mission != null || state.sceneId != WorldState.HUB) return 0
+        // Perde 1'de zaman atlama yok (Paket 2): Öğretici günleri dolu; biten bölümün günleri kendiliğinden geçer.
+        if (state.act <= 1) return 0
         val ch = chapters.get(state.chapter) ?: return 0
         val until = when (state.chapterPhase) {
             ChapterPhase.PREP -> ch.deadline - TimeSkip.SAFETY_DAYS
@@ -733,6 +777,78 @@ class WorldEngine(
         }
     }
 
+    /** Operasyon onay penceresi için bilgi (Paket 2): tehdit seviyesi, hazırlıklar, yoldaş görüşleri. */
+    data class OperationInfo(
+        val threatLevel: Int,
+        val playerLevel: Int,
+        /** Hazırlık adı → yapıldı mı. */
+        val preparations: List<Pair<LText, Boolean>>,
+        /** Yoldaşların tek satırlık görüşü (dile çözülmemiş). */
+        val opinions: List<LText>,
+        /** Seviye farkı büyükse Sistem uyarısı. */
+        val warning: LText?,
+        /** Düğme vurgulu mu: açılış gününden sonra ve fark küçükken. */
+        val emphasized: Boolean,
+    )
+
+    fun operationInfo(state: WorldState, variant: Int): OperationInfo? {
+        val ch = chapters.get(state.chapter) ?: return null
+        val op = ch.operations.getOrNull(variant) ?: return null
+        val playerLevel = state.player.level
+        val threat = operationThreatLevel(state, op)
+        val gap = threat - playerLevel
+        val danger = gap >= OPERATION_WARN_GAP
+        val lvl = { n: Int -> LText("$n", "$n") }
+        val opinions = effects.npc.companions(state).mapNotNull { npc ->
+            val def = content.npcs[npc.id] ?: return@mapNotNull null
+            val brave = def.personality[com.yukselis.engine.npc.Trait.COURAGE] >= BRAVE_COURAGE
+            val key = when {
+                danger && brave -> "operasyon_gorus_cesur_uyari"
+                danger -> "operasyon_gorus_uyari"
+                brave -> "operasyon_gorus_cesur"
+                else -> "operasyon_gorus_temkinli"
+            }
+            texts.formatL(key, "npc" to effects.npc.name(npc.id))
+        }
+        return OperationInfo(
+            threatLevel = threat,
+            playerLevel = playerLevel,
+            preparations = ch.preparations.map { it.name to state.hasFlag(it.flag) },
+            opinions = opinions,
+            warning = if (danger) texts.formatL("operasyon_onay_uyari", "n" to lvl(threat), "m" to lvl(playerLevel)) else null,
+            emphasized = state.day > ch.open && !danger,
+        )
+    }
+
+    /**
+     * Operasyonun tehdit seviyesi: olaylarının sahnelerinde (giriş sahnesinden seçeneklerle ulaşılan) savaşların en
+     * yüksek düşman seviyesi; savaş yoksa dünya seviyesi. Göreli başvurular ("@oyuncu+5", "@dunya") şimdiki duruma çözülür.
+     */
+    fun operationThreatLevel(state: WorldState, op: OperationDef): Int {
+        var best = 0
+        for (id in op.events) {
+            val e = content.events[id] ?: continue
+            val seen = mutableSetOf<String>()
+            val queue = ArrayDeque(listOf(e.entry))
+            while (queue.isNotEmpty() && seen.size < THREAT_SCAN_SCENES) {
+                val sid = queue.removeFirst()
+                if (!seen.add(sid)) continue
+                val sc = content.scenes[sid] ?: continue
+                for (c in sc.choices) {
+                    (c.effects + (c.check?.failEffects ?: emptyList())).filterIsInstance<Effect.StartCombat>().forEach { f ->
+                        f.spec.enemies.forEach { ref ->
+                            val resolved = com.yukselis.engine.combat.EnemyScaling.resolve(ref, state.day, state.player.level)
+                            combat.enemyDef(resolved, state)?.let { best = maxOf(best, it.level) }
+                        }
+                    }
+                    c.next?.let { if (it != WorldState.HUB && it != Content.RETURN) queue.addLast(it) }
+                    c.check?.failNext?.let { queue.addLast(it) }
+                }
+            }
+        }
+        return if (best > 0) best else Progression.worldLevel(state.day).toInt().coerceAtLeast(1)
+    }
+
     // ---------------------------------------------------------------- Kule (Aşama 7)
 
     /** Kule burada ve şimdi tırmanılabilir mi? */
@@ -851,7 +967,7 @@ class WorldEngine(
     fun destinations(state: WorldState): List<String> {
         if (!chapterMode) return state.region?.let { content.regions[it] }?.neighbors?.filter { canTravel(state, it) } ?: emptyList()
         if (state.mission != null) return emptyList()
-        return content.regions.keys.filter { canTravel(state, it) }
+        return content.regions.keys.filter { it != state.region && canTravel(state, it) }
     }
 
     private fun Result.toResult() = this
@@ -1096,6 +1212,10 @@ class WorldEngine(
         content.names.find(com.yukselis.engine.i18n.NameEntry.Kind.PLACE, id)?.full ?: LText(id, id)
 
     companion object {
+        /** Operasyon onayı: tehdit oyuncudan bu kadar seviye üstteyse Sistem uyarısı (Paket 2). */
+        const val OPERATION_WARN_GAP = 3
+        const val BRAVE_COURAGE = 7
+        const val THREAT_SCAN_SCENES = 40
         const val DAILY_WIDE_FLAG = "gunluk_genis_gorevler"
 
         /** Oyuncu üste "operasyona gir" dedi (varyant + 1); bir sonraki üs anında operasyon başlar. */

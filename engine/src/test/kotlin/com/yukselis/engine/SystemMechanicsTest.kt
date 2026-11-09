@@ -248,25 +248,22 @@ class SystemMechanicsTest {
 
     @Test
     fun `gun gecince yeni gunluk uretilir ve ihmal seri sifirlar`() {
-        var s = fresh().copy(dailyStreak = 4)
+        // Deneme süresinden (Gün 1–3) sonra: ihmal seriyi sıfırlar.
+        var s = fresh().copy(dailyStreak = 4, day = 5)
         s = apply(s, Effect.AdvanceDays(1))
-        assertEquals(1, s.daily!!.day)
+        assertEquals(6, s.daily!!.day)
         assertEquals(0, s.dailyStreak)
     }
 
     @Test
-    fun `ceza kancasi ceza bolgesine goturur ve geri doner`() {
+    fun `ceza kancasi hikaye sahnesini kesmez`() {
+        // Paket 2: Ceza Bölgesi yalnız üs/kamp anında açılır (Paket2Test); bir sahneden ötekine geçişte asla.
         val start = fresh()
         val firstChoice = engine.view(start, lang).choices.first { it.enabled }.id
         val pending = start.copy(penaltyPending = true)
-        var s = engine.choose(pending, firstChoice, lang).state
-        assertEquals(Content.PENALTY_SCENE, s.sceneId)
-        assertFalse(s.penaltyPending)
-        val returnTo = s.returnStack.last()
-        s = engine.choose(s, "dayan", lang).state
-        assertEquals(returnTo, s.sceneId)
-        assertTrue(s.returnStack.isEmpty())
-        assertTrue(s.player.hp >= 1)
+        val s = engine.choose(pending, firstChoice, lang).state
+        assertTrue(s.sceneId != Content.PENALTY_SCENE)
+        assertTrue(s.penaltyPending)
     }
 
     @Test
@@ -359,13 +356,14 @@ class SystemMechanicsTest {
     }
 
     @Test
-    fun `pasif sezgi yuksek statta onekiyle gorunur`() {
+    fun `pasif sezgi yuksek statta oneksiz gorunur`() {
         val base = fresh().copy(sceneId = "ilk_canavar")
         assertTrue(engine.view(base, lang).current.insights.isEmpty())
         val sharp = apply(base, Effect.AddStat(Stat.PER, 1), Effect.SetFlag("yanki_bagi"))
         val insights = engine.view(sharp, Lang.EN).current.insights
         assertEquals(2, insights.size)
-        assertTrue(insights[0].text.startsWith("[PER] "))
+        // Paket 2: stat sezgisi "[PER]" öneki almaz (kilit etiketiyle karışıyordu); arayüz turkuaz çizgiyle ayırır.
+        assertFalse(insights[0].text.startsWith("["))
         assertFalse(insights[0].echo)
         assertTrue(insights[1].text.startsWith("[Sewer Rat"))
         assertTrue(insights[1].echo)

@@ -63,7 +63,7 @@ Oyuncunun stat büyümesi **üsteldir** (Günlük Görev serisi, Benzersiz yeten
 - **Gösteriş seçenekleri:** yüksek statlar "[GÜÇ 40 · Önemsiz] Kapıyı menteşesinden sök" gibi sorunu tarzla çözen seçenekler gösterir. Yeniden denenebilir (beyaz) ve tek seferlik (kırmızı) kontroller görünür olasılıklarla kalır, ama çoğunlukla sosyal ve ahlaki kontrollerde kullanılır.
 - **Fırsat eli:** serbest zamanda 3 rastgele olay kartı gösterilir; oyuncu birini seçer.
 - **İki savaş modu:**
-  - **Gerçek savaş** (denkler ve bosslar): taktik; her turda duruş (tam saldırı / ölçülü / savunmacı) ve Dayanım taahhüdü; düzyazıyla anlatılır, sayılar istenirse görünür; oyuncunun seçtiği bir **infaz** hamlesiyle biter.
+  - **Gerçek savaş** (denkler ve bosslar): taktik; her turda duruş (tam saldırı / ölçülü / savunmacı) ve Dayanım taahhüdü; düzyazıyla anlatılır, sayılar istenirse görünür; boss, zeki düşman ve NPC düellosu oyuncunun seçtiği bir **infaz** hamlesiyle biter, sıradan düşman tek satırla düşer (DECISIONS #157). Taktik (duruş, efor) ve Ortam ilk üç savaştan sonra açılır.
   - **Ezme:** oyuncunun açıkça üstün olduğu sıradan düşmanlar tek, şık bir satırla otomatik çözülür. Kasılma (grind) yoktur.
 - **Yoldaş tepkileri:** büyük seçimlerden önce yoldaşlar kişiliklerine ve ilişkilerine göre tek satırlık görüş bildirir. Oyuncunun büyüyen gücüne de hayranlık, endişe, kıskançlık ya da bağımlılıkla tepki verirler. Deniz'in yayı "arkadaşımın bir canavara ya da tanrıya dönüşmesini izlemek" olur.
 - **Bilgi günlüğü:** öğrenilen söylentiler, sırlar ve gerçek seviyeler diyalog seçeneklerini açar; NPC'lere söylenen yalanlar onların hafızasına girer ve sonra ortaya çıkabilir.
@@ -177,7 +177,7 @@ Sınıf ayrıca bir **Meslek** ağacından bağımsızdır: Simyacı, Demirci, R
 
 ### Günlük Görev ve ekonomi
 
-- **Günlük Görev:** her oyun günü Sistem dünyaya özgü bir görev verir (kampın suyunu taşı, sınırı dolaş, 3 kapı kapat; spor salonu sayı listeleri değil). Tamamlamak +1 serbest stat (her 7 günlük seri +1 daha); görmezden gelmek "Durmuş Saat"e ışınlanma riski (DECISIONS #98). **Günlük Görev yalnızca oyuncudadır** (bkz. OP MC tasarımı).
+- **Günlük Görev:** her oyun günü Sistem dünyaya özgü bir görev verir (kampın suyunu taşı, sınırı dolaş, 3 kapı kapat; spor salonu sayı listeleri değil). Tamamlamak +1 serbest stat (her 7 günlük seri +1 daha); görmezden gelmek "Durmuş Saat"e ışınlanma riski (DECISIONS #98). İlk üç gün deneme süresidir (ceza ve seri kaybı yok); ceza yalnız gün sonunda görev tamamlanmadıysa işlenir ve Durmuş Saat yalnız üs ya da keşif kampı anında açılır, hiçbir sahneyi kesmez (DECISIONS #156). **Günlük Görev yalnızca oyuncudadır** (bkz. OP MC tasarımı).
 - **Para:** Kredi (Sistem mağazası, ticaret) ve Öz Kristali (evrim, yetenek kaynaştırma).
 - **Ekipman:** 8 yuva, nadirlik renkleri, set bonusları; Meslek ile yükseltilir.
 
@@ -293,7 +293,8 @@ Ana hikaye kanıtlanmış bir yapıya oturur (ayrıntı `docs/CHAPTERS.md`, kara
   günlerde **hazırlık** yapılır (keşif, tahkimat, müttefik toplama): her biri bir bayrak bırakır ve operasyonu değiştirir
   (daha az kayıp, ek seçenek ya da avantajlı başlangıç). Yan görev operasyon gününde kesilmez; operasyondan önce oyun
   ayrı bir yuvaya kaydedilir.
-- **Antrenman / zaman atlama:** üste boş kalan günler bir odakla geçirilebilir: bir stat, kapı temizliği, meslek ya da
+- **Operasyon onayı:** erken girilebilen operasyonun düğmesi bir onay penceresi açar: tehdit ve oyuncu seviyesi, hazırlıkların durumu, yoldaş görüşleri; fark üç seviye ve üstündeyse Sistem uyarısı. Açılış gününde ve büyük farkta düğme vurgusuzdur. Bölüm erken biter ve üste yapılacak bir şey kalmazsa kalan günler sonraki bölümün açılışına kadar kendiliğinden geçer (DECISIONS #158).
+- **Antrenman / zaman atlama** (Perde 2'den itibaren): üste boş kalan günler bir odakla geçirilebilir: bir stat, kapı temizliği, meslek ya da
   bir yoldaşla vakit. Oyuncu 1 günden (hazırlıkta) operasyona 2 gün kalana kadar dilediği kadar gün seçer; sonrasında
   darboğaz gününe, bölüm bittiyse sonraki bölümün açılışına kadar. Günler tek tek geçer (NPC'ler, kapılar, son tarih).
   Kazanç Günlük Görevden ve normal oynanıştan azdır: 3 günde 1 stat (Günlük Görev günde 1 serbest puan); günde seviye

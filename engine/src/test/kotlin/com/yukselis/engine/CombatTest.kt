@@ -120,10 +120,11 @@ class CombatTest {
     }
 
     @Test
-    fun `son dusman dusunce infaz secilir`() {
-        var s = start(player(4, seed = 4), spec("kanal_faresi"))
+    fun `son dusman dusunce infaz yalniz zeki dusmanda secilir`() {
+        // Zeki düşman (Çöp Avcısı, temkinli; kaçan değil): son darbe infaz seçimini açar (Paket 2).
+        var s = start(player(14, seed = 4), spec("cop_avcisi"))
         var n = 0
-        while (s.combat?.pendingExecution == null && s.combat != null && n++ < 100) {
+        while (s.combat?.pendingExecution == null && s.combat != null && n++ < 200) {
             s = engine.combatAction(s, CombatAction.Attack(0), lang).state
         }
         assertNotNull(s.combat?.pendingExecution)
@@ -135,10 +136,30 @@ class CombatTest {
         val mercy = s.morality.mercy
         s = engine.combatAction(s, CombatAction.Execute(CombatEngine.EXEC_BRUTAL), lang).state
         assertNull(s.combat)
-        // Akılsız canavarın (fare) infazı ahlakı kaydırmaz (DECISIONS #113); sayaç yine artar.
-        assertEquals(mercy, s.morality.mercy)
+        // Zeki düşmanın acımasız infazı merhameti kaydırır (DECISIONS #113); sayaç artar.
+        assertEquals(mercy - 3, s.morality.mercy)
         assertEquals(1, s.variable("acimasiz_infaz"))
+        assertTrue(s.hasFlag("yenildi_cop_avcisi"))
+    }
+
+    @Test
+    fun `siradan dusmanda infaz sorulmaz ve odul tek kartta gelir`() {
+        var s = start(player(4, seed = 4), spec("kanal_faresi"))
+        var n = 0
+        var lastNotices = emptyList<com.yukselis.engine.story.NoticeView>()
+        while (s.combat != null && n++ < 100) {
+            assertNull(s.combat?.pendingExecution)
+            val o = engine.combatAction(s, CombatAction.Attack(0), lang)
+            s = o.state
+            lastNotices = o.notices
+        }
+        assertNull(s.combat)
         assertTrue(s.hasFlag("yenildi_kanal_faresi"))
+        // Zafer kartı XP satırını içinde taşır; ayrı "+n XP" kartı yok.
+        val victory = lastNotices.first { it.lines.any { l -> l.contains("XP") } }
+        assertTrue(lastNotices.none { it.title.startsWith("+") })
+        assertEquals(1, s.variable(CombatEngine.VAR_FIGHTS))
+        assertTrue(victory.lines.isNotEmpty())
     }
 
     @Test

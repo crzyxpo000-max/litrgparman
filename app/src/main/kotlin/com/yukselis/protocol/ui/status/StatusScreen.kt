@@ -255,19 +255,23 @@ private fun TitlesTab(status: StatusView) {
 @Composable
 private fun MoralityTab(status: StatusView) {
     Column {
-        // OP MC: NPC'lerin gördüğü seviye, Dikkat ve Yozlaşma.
-        SectionTitle(stringResource(R.string.status_hidden_title), Modifier.padding(top = 0.dp))
-        Text(stringResource(R.string.status_public, status.publicLevel), style = GameType.system, color = MaterialTheme.colorScheme.onSurface)
-        StatBar(stringResource(R.string.status_attention), status.attention.toLong(), 100, Game.colors.danger, Modifier.padding(top = 6.dp), labelWidth = 96)
-        StatBar(stringResource(R.string.status_corruption), status.corruption.toLong(), 100, EchoColor, Modifier.padding(top = 4.dp), labelWidth = 96)
-        if (status.publicRank > 0) {
-            Text(stringResource(R.string.status_rank, status.publicRank), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 6.dp))
-        }
-        if (status.armyPower > 0) {
-            Text(stringResource(R.string.status_army, status.armyPower), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        // OP MC: NPC'lerin gördüğü seviye, Dikkat ve Yozlaşma. Bölüm kendini açar (Paket 2): ilk gizleme/Dikkat'e kadar yok.
+        if (status.showHidden) {
+            SectionTitle(stringResource(R.string.status_hidden_title), Modifier.padding(top = 0.dp))
+            Text(stringResource(R.string.status_public, status.publicLevel), style = GameType.system, color = MaterialTheme.colorScheme.onSurface)
+            StatBar(stringResource(R.string.status_attention), status.attention.toLong(), 100, Game.colors.danger, Modifier.padding(top = 6.dp), labelWidth = 96)
+            if (status.corruption > 0) {
+                StatBar(stringResource(R.string.status_corruption), status.corruption.toLong(), 100, EchoColor, Modifier.padding(top = 4.dp), labelWidth = 96)
+            }
+            if (status.showRank && status.publicRank > 0) {
+                Text(stringResource(R.string.status_rank, status.publicRank), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 6.dp))
+            }
+            if (status.showArmy && status.armyPower > 0) {
+                Text(stringResource(R.string.status_army, status.armyPower), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
         }
 
-        SectionTitle(stringResource(R.string.morality))
+        SectionTitle(stringResource(R.string.morality), if (status.showHidden) Modifier else Modifier.padding(top = 0.dp))
         MoralityBar(stringResource(R.string.cruelty), stringResource(R.string.mercy), status.mercy)
         MoralityBar(stringResource(R.string.freedom), stringResource(R.string.order), status.order)
         MoralityBar(stringResource(R.string.power), stringResource(R.string.humanity), status.humanity)

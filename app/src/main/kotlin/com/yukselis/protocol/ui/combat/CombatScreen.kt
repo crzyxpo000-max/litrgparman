@@ -99,8 +99,11 @@ fun CombatScreen(
         }
         if (combat.allies.isNotEmpty()) Spacer(Modifier.height(6.dp))
 
-        // Oyuncu: Dayanım, durumlar, duruş, efor
-        StatBar(stringResource(R.string.stamina_short), combat.stamina.toLong(), combat.maxStamina.toLong(), Game.colors.success)
+        // Oyuncu: Dayanım, durumlar, duruş, efor. Kademeli açılış (Paket 2): Perde 1'in ilk savaşlarında
+        // Taktik, Dayanım ve Ortam gizlidir; yalnız Saldır · Savun · Analiz · Kaç · Otomatik görünür.
+        if (combat.tacticsUnlocked) {
+            StatBar(stringResource(R.string.stamina_short), combat.stamina.toLong(), combat.maxStamina.toLong(), Game.colors.success)
+        }
         if (combat.playerStatuses.isNotEmpty()) {
             Text(combat.playerStatuses.joinToString(" · "), style = GameType.system, color = Game.colors.danger)
         }
@@ -110,12 +113,16 @@ fun CombatScreen(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth().padding(top = 2.dp),
         ) {
-            AssistChip(
-                onClick = { tactics = true },
-                label = { Text(stringResource(R.string.tactics_line, stringResource(stanceLabel(combat.stance)), combat.effort), maxLines = 1) },
-                leadingIcon = { Text(stringResource(R.string.tactics), style = GameType.system, color = MaterialTheme.colorScheme.primary) },
-                modifier = Modifier.weight(1f, fill = false),
-            )
+            if (combat.tacticsUnlocked) {
+                AssistChip(
+                    onClick = { tactics = true },
+                    label = { Text(stringResource(R.string.tactics_line, stringResource(stanceLabel(combat.stance)), combat.effort), maxLines = 1) },
+                    leadingIcon = { Text(stringResource(R.string.tactics), style = GameType.system, color = MaterialTheme.colorScheme.primary) },
+                    modifier = Modifier.weight(1f, fill = false),
+                )
+            } else {
+                Spacer(Modifier.weight(1f))
+            }
             HelpButton(stringResource(R.string.help_combat), Glossary.combat())
         }
         TipCard("combat", stringResource(R.string.tip_combat))
@@ -160,7 +167,7 @@ fun CombatScreen(
 
     detail?.let { uid -> combat.enemies.firstOrNull { it.uid == uid }?.let { EnemyDetail(it) { detail = null } } }
 
-    if (tactics) TacticsDialog(combat.stance, combat.effort, onAction) { tactics = false }
+    if (tactics && combat.tacticsUnlocked) TacticsDialog(combat.stance, combat.effort, onAction) { tactics = false }
 
     when (picker) {
         Picker.SKILL -> PickerDialog(
@@ -316,21 +323,45 @@ private fun ActionGrid(
     onToggleAuto: () -> Unit,
 ) {
     val enabled = !auto
+    if (combat.tacticsUnlocked) {
+        // Tam düzen: 3×3 ızgara, kullanılamayan eylemler gri.
+        Column(verticalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.padding(top = 4.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                GridButton(R.string.action_attack, enabled, Modifier.weight(1f), primary = true, onClick = onAttack)
+                GridButton(R.string.action_skill, enabled && combat.skills.isNotEmpty(), Modifier.weight(1f)) { onPick(Picker.SKILL) }
+                GridButton(R.string.action_defend, enabled, Modifier.weight(1f), onClick = onDefend)
+            }
+            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                GridButton(R.string.action_analyze, enabled, Modifier.weight(1f), onClick = onAnalyze)
+                GridButton(R.string.action_environment, enabled && combat.environment.any { !it.used }, Modifier.weight(1f)) { onPick(Picker.ENV) }
+                GridButton(R.string.action_talk, enabled && targetIntelligent, Modifier.weight(1f)) { onPick(Picker.TALK) }
+            }
+            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                GridButton(R.string.action_item, enabled && combat.items.isNotEmpty() && !combat.minorUsed, Modifier.weight(1f)) { onPick(Picker.ITEM) }
+                GridButton(R.string.action_flee, enabled, Modifier.weight(1f), onClick = onFlee)
+                GridButton(if (auto) R.string.auto_stop else R.string.auto_turn, true, Modifier.weight(1f), onClick = onToggleAuto)
+            }
+        }
+        return
+    }
+    // Kademeli düzen (ilk savaşlar): Ortam yok; Yetenek, Eşya ve Konuş yalnız kullanılabiliyorsa görünür.
+    // Çekirdek: Saldır · Savun · Analiz · Kaç · Otomatik. Düğmeler ikişer sıralanır.
+    val buttons = buildList<@Composable (Modifier) -> Unit> {
+        add { m -> GridButton(R.string.action_attack, enabled, m, primary = true, onClick = onAttack) }
+        add { m -> GridButton(R.string.action_defend, enabled, m, onClick = onDefend) }
+        if (combat.skills.isNotEmpty()) add { m -> GridButton(R.string.action_skill, enabled, m) { onPick(Picker.SKILL) } }
+        add { m -> GridButton(R.string.action_analyze, enabled, m, onClick = onAnalyze) }
+        if (targetIntelligent) add { m -> GridButton(R.string.action_talk, enabled, m) { onPick(Picker.TALK) } }
+        if (combat.items.isNotEmpty() && !combat.minorUsed) add { m -> GridButton(R.string.action_item, enabled, m) { onPick(Picker.ITEM) } }
+        add { m -> GridButton(R.string.action_flee, enabled, m, onClick = onFlee) }
+        add { m -> GridButton(if (auto) R.string.auto_stop else R.string.auto_turn, true, m, onClick = onToggleAuto) }
+    }
     Column(verticalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.padding(top = 4.dp)) {
-        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            GridButton(R.string.action_attack, enabled, Modifier.weight(1f), primary = true, onClick = onAttack)
-            GridButton(R.string.action_skill, enabled && combat.skills.isNotEmpty(), Modifier.weight(1f)) { onPick(Picker.SKILL) }
-            GridButton(R.string.action_defend, enabled, Modifier.weight(1f), onClick = onDefend)
-        }
-        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            GridButton(R.string.action_analyze, enabled, Modifier.weight(1f), onClick = onAnalyze)
-            GridButton(R.string.action_environment, enabled && combat.environment.any { !it.used }, Modifier.weight(1f)) { onPick(Picker.ENV) }
-            GridButton(R.string.action_talk, enabled && targetIntelligent, Modifier.weight(1f)) { onPick(Picker.TALK) }
-        }
-        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            GridButton(R.string.action_item, enabled && combat.items.isNotEmpty() && !combat.minorUsed, Modifier.weight(1f)) { onPick(Picker.ITEM) }
-            GridButton(R.string.action_flee, enabled, Modifier.weight(1f), onClick = onFlee)
-            GridButton(if (auto) R.string.auto_stop else R.string.auto_turn, true, Modifier.weight(1f), onClick = onToggleAuto)
+        buttons.chunked(2).forEach { row ->
+            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                row.forEach { b -> b(Modifier.weight(1f)) }
+                if (row.size == 1) Spacer(Modifier.weight(1f))
+            }
         }
     }
 }

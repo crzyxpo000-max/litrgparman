@@ -52,6 +52,8 @@ data class Notice(
     /** Anın önceki ve yeni değeri (sıra, görünen/gerçek seviye); arayüz farkı gösterir. */
     val from: Int? = null,
     val to: Int? = null,
+    /** Aynı sahnede birleştirilen bildirimler (ör. bir NPC'nin ilişki değişimleri): aynı grup tek karta iner. */
+    val group: String? = null,
 )
 
 /**

@@ -27,6 +27,10 @@ import com.yukselis.engine.system.Stat
  */
 class StoryEngine(val content: Content) {
     companion object {
+        /** İlişki bildiriminde NPC adı ile değişim listesi arasındaki ayraç (NpcEngine.relationNotice ile aynı). */
+        const val RELATION_SEP = ": "
+        /** Gizli ölçüler Durum'da bu Dikkat düzeyinden itibaren görünür (ilk eşik). */
+        const val HIDDEN_ATTENTION = 25
         /** Dönüş özetinde gösterilen son kritik seçim sayısı. */
         const val RECAP_CHOICES = 3
         const val MEMORY_SHOWN = 5
@@ -50,7 +54,7 @@ class StoryEngine(val content: Content) {
 
     fun hubAction(state: WorldState, action: com.yukselis.engine.world.HubAction, lang: Lang): Outcome {
         val r = world.act(state, action)
-        return Outcome(r.state, r.notices.map { noticeView(it, r.state, lang) })
+        return Outcome(r.state, views(r.notices, r.state, lang))
     }
 
     fun map(state: WorldState, lang: Lang): List<RegionView> {
@@ -258,11 +262,18 @@ class StoryEngine(val content: Content) {
             operations = world.operationChoices(state).mapNotNull { (i, region) ->
                 val ch = content.chapters.get(state.chapter) ?: return@mapNotNull null
                 val op = ch.operations[i]
+                val info = world.operationInfo(state, i)
                 OperationChoiceView(
                     index = i,
                     title = text((if (op.title == LText.EMPTY) ch.title else op.title)[lang], state, lang),
                     region = world.regionName(region)[lang],
                     daysLeft = (ch.deadline - state.day).coerceAtLeast(0),
+                    threatLevel = info?.threatLevel ?: 0,
+                    playerLevel = state.player.level,
+                    preparations = info?.preparations?.map { (n, done) -> PreparationStatusView(text(n[lang], state, lang), done) } ?: emptyList(),
+                    opinions = info?.opinions?.map { text(it[lang], state, lang) } ?: emptyList(),
+                    warning = info?.warning?.let { text(it[lang], state, lang) },
+                    emphasized = info?.emphasized ?: true,
                 )
             },
             canReturn = state.mission != null && state.mission.kind != com.yukselis.engine.world.MissionKind.OPERATION,
@@ -304,7 +315,7 @@ class StoryEngine(val content: Content) {
             s = d.state
             notices += d.notices
         }
-        return Outcome(s, notices.map { noticeView(it, s, lang) })
+        return Outcome(s, views(notices, s, lang))
     }
 
     /** Zar kontrolünün görünür olasılığı (yüzde): P(d20 + stat ≥ zorluk). */
@@ -318,7 +329,7 @@ class StoryEngine(val content: Content) {
     /** Savaşı doğrudan başlatır (olay motoru ve testler için; hikayede `savas` etkisi kullanılır). */
     fun startCombat(state: WorldState, spec: com.yukselis.engine.combat.CombatSpec, lang: Lang): Outcome {
         val r = combat.start(state, spec)
-        return Outcome(r.state, r.notices.map { noticeView(it, r.state, lang) })
+        return Outcome(r.state, views(r.notices, r.state, lang))
     }
 
     /** Otomatik tur için önerilen eylem. */
@@ -380,6 +391,7 @@ class StoryEngine(val content: Content) {
             )
         }
         return CombatView(
+            tacticsUnlocked = state.act >= 2 || state.variable(CombatEngine.VAR_FIGHTS) >= CombatEngine.TACTICS_UNLOCK_FIGHTS,
             round = c.round,
             enemies = enemies,
             stamina = c.stamina,
@@ -559,7 +571,35 @@ class StoryEngine(val content: Content) {
     /** Etkileri doğrudan uygular (testler ve ileride olay motoru için). */
     fun applyEffects(state: WorldState, list: List<Effect>, lang: Lang): Outcome = outcome(effects.applyAll(state, list), lang)
 
-    private fun outcome(r: EffectApplier.Result, lang: Lang) = Outcome(r.state, r.notices.map { noticeView(it, r.state, lang) })
+    /**
+     * Bildirimler ekrana: aynı `group` değerini taşıyanlar (bir NPC'nin aynı sahnedeki ilişki değişimleri) tek karta iner;
+     * değişim listeleri virgülle birleştirilir, tekrarlar atılır (Paket 2: "[BAĞ] Deniz · Güven +15" kartları yerine tek satır).
+     */
+    private fun views(notices: List<Notice>, state: WorldState, lang: Lang): List<NoticeView> = collapse(notices).map { noticeView(it, state, lang) }
+
+    internal fun collapse(notices: List<Notice>): List<Notice> {
+        if (notices.none { it.group != null }) return notices
+        val out = mutableListOf<Notice>()
+        val index = mutableMapOf<String, Int>()
+        fun merge(a: String, b: String): String {
+            val headA = a.substringBefore(RELATION_SEP)
+            val restA = a.substringAfter(RELATION_SEP, "")
+            val restB = b.substringAfter(RELATION_SEP, "")
+            val parts = (restA.split(", ") + restB.split(", ")).filter { it.isNotBlank() }.distinct()
+            return headA + RELATION_SEP + parts.joinToString(", ")
+        }
+        for (n in notices) {
+            val g = n.group
+            if (g == null) { out += n; continue }
+            val at = index[g]
+            if (at == null) { index[g] = out.size; out += n; continue }
+            val prev = out[at]
+            out[at] = prev.copy(title = LText(merge(prev.title.tr, n.title.tr), merge(prev.title.en, n.title.en)), lines = prev.lines + n.lines)
+        }
+        return out
+    }
+
+    private fun outcome(r: EffectApplier.Result, lang: Lang) = Outcome(r.state, views(r.notices, r.state, lang))
 
     // ---- Hikaye ----
 
@@ -681,7 +721,7 @@ class StoryEngine(val content: Content) {
             // Savaş başlar; sahne, savaş bitince kazan/kaybet/kaç sahnesine geçer.
             val started = combat.start(next, fight.spec)
             val notices = checkNotices + applied.notices + started.notices
-            return Outcome(started.state, notices.map { noticeView(it, started.state, lang) })
+            return Outcome(started.state, views(notices, started.state, lang))
         }
         var nextId = if (success) choice.next else (choice.check?.failNext ?: choice.next)
         if (nextId == Content.RETURN) {
@@ -690,12 +730,7 @@ class StoryEngine(val content: Content) {
         }
         val extra = mutableListOf<Notice>()
         if (nextId != null) {
-            // Ceza kancası: ihmal edilen Günlük Görev, bir sonraki geçişte Ceza Bölgesi'ne götürür.
-            val endingTarget = nextId != WorldState.HUB && scene(nextId).isEnding
-            if (next.penaltyPending && !endingTarget && Content.PENALTY_SCENE in content.scenes && nextId != Content.PENALTY_SCENE) {
-                next = next.copy(returnStack = next.returnStack + nextId, penaltyPending = false)
-                nextId = Content.PENALTY_SCENE
-            }
+            // Ceza Bölgesi hikaye sahnesini kesmez: ihmal edilen Günlük Görev yalnız üs/kamp anında işlenir (WorldEngine.enterHub).
             if (nextId == WorldState.HUB) {
                 // Olay bitti: gün akışına dön (zorunlu olay varsa hemen başlar).
                 val hub = world.enterHub(next)
@@ -705,7 +740,7 @@ class StoryEngine(val content: Content) {
                 next = next.copy(sceneId = nextId, ended = scene(nextId).isEnding)
             }
         }
-        return Outcome(next, (checkNotices + applied.notices + extra).map { noticeView(it, next, lang) })
+        return Outcome(next, views(checkNotices + applied.notices + extra, next, lang))
     }
 
     /**
@@ -772,6 +807,12 @@ class StoryEngine(val content: Content) {
             traits = p.traits.mapNotNull { id -> content.traits[id]?.let { TitleLine(it.name[lang], text(it.description[lang], state, lang), Rarity.EPIC) } },
             armyPower = npcEngine.armyPower(state),
             publicRank = state.variable(com.yukselis.engine.npc.NpcEngine.VAR_RANK),
+            showHidden = state.act >= 2 || state.attention >= HIDDEN_ATTENTION || state.publicLevel != p.level || state.flags.any { it.startsWith("dikkat_esik_") },
+            showRank = state.act >= 2 || state.hasFlag("olay_siralama_gunu"),
+            showRelations = state.npcs.values.any { it.known },
+            showMap = state.act >= 2,
+            showArmy = npcEngine.armyPower(state) > 0,
+            showKnowledge = state.knowledge.isNotEmpty(),
         )
     }
 
@@ -967,16 +1008,16 @@ class StoryEngine(val content: Content) {
         insights = scene.insights
             .filter { !it.narration && it.condition.test(state) }
             .map { i ->
-                val prefix = insightPrefix(i.condition, lang)
-                InsightView(listOfNotNull(prefix, text(i.text[lang], state, lang)).joinToString(" "), echo = prefix == null)
+                // Stat koşullu sezgi "[ALG]" öneki almaz (Paket 2): kilit etiketi "[ALG 6]" ile karışıyordu; arayüz
+                // turkuaz çizgiyle ayırır. Öneksiz satır Yankı'nın sesidir.
+                InsightView(text(i.text[lang], state, lang), echo = !isStatGate(i.condition))
             },
     )
 
-    /** "[ALG]" gibi önek: sezginin stat koşulundan. */
-    private fun insightPrefix(c: Condition, lang: Lang): String? = when (c) {
-        is Condition.StatAtLeast -> "[${c.stat.abbr[lang]}]"
-        is Condition.All -> c.conditions.firstNotNullOfOrNull { insightPrefix(it, lang) }
-        else -> null
+    private fun isStatGate(c: Condition): Boolean = when (c) {
+        is Condition.StatAtLeast -> true
+        is Condition.All -> c.conditions.any { isStatGate(it) }
+        else -> false
     }
 
     private fun noticeView(notice: Notice, state: WorldState, lang: Lang) = NoticeView(
