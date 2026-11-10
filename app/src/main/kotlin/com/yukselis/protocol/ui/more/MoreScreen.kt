@@ -374,6 +374,7 @@ private fun SlotRow(slot: String, info: SlotInfo?, canSave: Boolean, onSave: () 
         SaveManager.OPERATION -> stringResource(R.string.slot_operation)
         else -> stringResource(R.string.slot_n, SaveManager.MANUAL.indexOf(slot) + 1)
     }
+    var confirm by androidx.compose.runtime.remember(slot) { mutableStateOf<SlotConfirm?>(null) }
     Surface(
         color = MaterialTheme.colorScheme.surfaceVariant,
         shape = MaterialTheme.shapes.small,
@@ -389,14 +390,33 @@ private fun SlotRow(slot: String, info: SlotInfo?, canSave: Boolean, onSave: () 
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
+            // Dolu slota kaydetmek ve yüklemek geri alınamaz: önce onay (UI_REVIEW B2, B3).
             if (canSave) {
-                OutlinedButton(onClick = onSave) { Text(stringResource(R.string.save)) }
+                OutlinedButton(onClick = { if (info != null) confirm = SlotConfirm.SAVE else onSave() }) { Text(stringResource(R.string.save)) }
                 Spacer(Modifier.width(8.dp))
             }
-            Button(onClick = onLoad, enabled = info != null) { Text(stringResource(R.string.load)) }
+            Button(onClick = { confirm = SlotConfirm.LOAD }, enabled = info != null) { Text(stringResource(R.string.load)) }
         }
     }
+    val pending = confirm
+    if (pending != null && info != null) {
+        val summary = stringResource(R.string.continue_summary, info.playerName, info.level, info.day)
+        val saving = pending == SlotConfirm.SAVE
+        com.yukselis.protocol.ui.components.AppAlertDialog(
+            onDismissRequest = { confirm = null },
+            confirmButton = {
+                androidx.compose.material3.TextButton(onClick = { confirm = null; if (saving) onSave() else onLoad() }) {
+                    Text(stringResource(if (saving) R.string.confirm_overwrite_ok else R.string.confirm_load_ok))
+                }
+            },
+            dismissButton = { androidx.compose.material3.TextButton(onClick = { confirm = null }) { Text(stringResource(R.string.cancel)) } },
+            title = { Text(stringResource(if (saving) R.string.confirm_overwrite_title else R.string.confirm_load_title)) },
+            text = { Text(stringResource(if (saving) R.string.confirm_overwrite else R.string.confirm_load, name, summary)) },
+        )
+    }
 }
+
+private enum class SlotConfirm { SAVE, LOAD }
 
 @Composable
 fun LanguagePicker(current: Lang, onPick: (Lang) -> Unit, modifier: Modifier = Modifier) {

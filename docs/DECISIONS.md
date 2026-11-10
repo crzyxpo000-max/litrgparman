@@ -2,6 +2,14 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Paket 5: arayüz incelemesi düzeltmeleri — 2026-11-10
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 170 | **Hikaye metni ekranın ana unsuru; seçenekler metnin devamı.** Sabit seçenek paneli (#124–127, ekranın %38'i) kalktı: seçenekler ve üs fırsat kartları sahne metninin altında aynı kaydırmada. Seçenek düğmesi kompakt: etiket (koşul, tür, olasılık) üstte ayrı küçük satır, metin tam genişlik, tek satıra sığmazsa bir boy küçülür, kesilmez. 5'ten fazla seçenek: ilk 4 (açık olanlar önce) + "Diğer seçenekler (n)". Üste rutin eylemler (Keşfet, Antrenman, Dinlen, Kule, Kapılar, Yolculuk, Üsse dön, Zaman atla) tek biçimli, yana kayan ayrı çubukta. Seçenekler ekran altında kalırsa "seçenekler aşağıda ▾" işareti. | UI_REVIEW A1–A5: 360dp'de anlatı %30, panel %38; üs ekranının üst yarısı boştu; uzun etiket seçenek metnini 4 satıra bölüyordu. | Oyuncu geri bildirimi "seçeneği bulmak için kaydırıyorum" derse kısa sahnelerde seçenekleri alta yasla. |
+| 171 | **Geri alınamaz işlemler onay ister; geri tuşu oyundan düşürmez.** Kayıt varken Yeni oyun, dolu slota Kaydet ve Yükle onay penceresi açar. Geri tuşu: açık alt sayfa → Hikaye sekmesi → "çıkmak için bir kez daha" (2 sn). | UI_REVIEW B1–B4: üç işlem onaysız veri kaybına yol açıyordu; geri tuşu her ekrandan uygulamadan çıkıyordu. | — |
+| 172 | **Denetim etiketlerinde yazı ölçeği tavanı** (`CappedFontScale`): alt sekmeler 1.0, savaş düğmeleri ve başlık logosu 1.3. Okuma metni (anlatı, seçenek, Sistem kartı) cihaz ölçeğini tam izler. | UI_REVIEW C1–C4: ölçek 2.0'da sekmeler "Hik…", düğmeler "Yetene", logo "Yükse/liş" diye bölünüyordu. Sekme ve düğmeler ikonla/konumla tanınır; okunması gereken metin değil. | Erişilebilirlik denetiminde sekme etiketleri küçük bulunursa yalnız ikon + seçili sekmede etiket. |
+
 ## Oyuncu gözüyle inceleme, Paket 4: sistem çıkarma — 2026-11-10
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |

@@ -76,11 +76,14 @@ import com.yukselis.protocol.ui.components.LocalTips
 import com.yukselis.protocol.ui.components.Localized
 import com.yukselis.protocol.ui.components.TipCard
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import androidx.compose.foundation.layout.Box
 
 /**
  * Hikaye sekmesi: ekranda yalnızca güncel sahne durur (daktilo efektiyle yazılır, dokununca tamamlanır).
- * Seçenekler ya da gün akışı eylemleri altta sabit bir panelde: aramak için kaydırmak gerekmez.
- * Önceki sahneler üstteki düğmeyle açılan bir sayfada okunur.
+ * Hikaye metni ekranın ana unsurudur (Paket 5, UI_REVIEW A1–A4): seçenekler ve fırsat kartları sabit panelde değil,
+ * metnin altında aynı kaydırmada gelir. Altta yalnız ince bir çubuk kalır: gün akışının rutin eylemleri, "metni göster"
+ * ya da son ekranının düğmesi. Önceki sahneler üstteki düğmeyle açılan bir sayfada okunur.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -136,17 +139,19 @@ fun StoryScreen(
     val listState = rememberLazyListState()
     LaunchedEffect(passageKey) { listState.scrollToItem(0) }
     var showHistory by rememberSaveable { mutableStateOf(false) }
+    val hubUi = rememberHubUi()
+    val hubScene = scene.hub
 
     val skip = remember { MutableInteractionSource() }
     Column(modifier = modifier.fillMaxSize()) {
         scene.chapter?.let { ChapterBar(it) }
+        Box(modifier = Modifier.weight(1f).fillMaxWidth()) {
         LazyColumn(
             state = listState,
             contentPadding = PaddingValues(horizontal = 20.dp, vertical = 12.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp),
             modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth()
+                .fillMaxSize()
                 .clickable(interactionSource = skip, indication = null) { finished = true },
         ) {
             if (scene.history.isNotEmpty()) {
@@ -188,22 +193,49 @@ fun StoryScreen(
             if (finished && scene.isEnding) {
                 item(key = "ending-$passageKey") { EndingContent(ending) }
             }
-        }
-
-        ActionDock(resetKey = passageKey) {
-            val hub = scene.hub
-            when {
-                !finished -> TextButton(onClick = { finished = true }, modifier = Modifier.fillMaxWidth()) {
-                    Text(stringResource(R.string.show_all_text), style = GameType.system)
+            // Seçenekler ve fırsat kartları metnin devamıdır: okuyup kaydırınca gelir.
+            if (finished && !scene.isEnding) {
+                if (hubScene != null) {
+                    item(key = "hub-$passageKey") { HubStory(hubScene, hubUi, hubAct) }
+                } else if (scene.choices.isNotEmpty()) {
+                    item(key = "choices-$passageKey") { Choices(scene.choices, passageKey, choose) }
                 }
-                scene.isEnding -> Button(onClick = onBackToTitle, modifier = Modifier.fillMaxWidth()) {
-                    Text(stringResource(R.string.back_to_title))
-                }
-                hub != null -> HubPanel(hub, hubAct)
-                else -> Choices(scene.choices, choose)
             }
         }
+        // Seçenekler ekranın altında kaldıysa küçük bir işaret: dokununca oraya kayar.
+        val more = finished && !scene.isEnding && listState.canScrollForward
+        if (more) {
+            val scope = androidx.compose.runtime.rememberCoroutineScope()
+            val scrim = MaterialTheme.colorScheme.background.copy(alpha = 0.88f)
+            Text(
+                text = stringResource(if (hubScene != null) R.string.more_below else R.string.choices_below),
+                style = GameType.system,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 6.dp)
+                    .drawBehind { drawRect(scrim) }
+                    .clickable { scope.launch { listState.animateScrollToItem(listState.layoutInfo.totalItemsCount - 1) } }
+                    .padding(horizontal = 14.dp, vertical = 6.dp),
+            )
+        }
+        }
+
+        when {
+            !finished -> ActionDock {
+                TextButton(onClick = { finished = true }, modifier = Modifier.fillMaxWidth()) {
+                    Text(stringResource(R.string.show_all_text), style = GameType.system)
+                }
+            }
+            scene.isEnding -> ActionDock {
+                Button(onClick = onBackToTitle, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.back_to_title)) }
+            }
+            // Rutin eylemler (Keşfet, Antrenman, Dinlen, Kule, Kapılar, Yolculuk, Zaman atla) hikaye seçeneklerinden ayrı.
+            hubScene != null -> ActionDock { HubActionBar(hubScene, hubUi, hubAct) }
+            else -> Unit
+        }
     }
+    hubScene?.let { HubDialogs(it, hubUi, hubAct) }
 
     if (showHistory) {
         ModalBottomSheet(onDismissRequest = { showHistory = false }, sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)) {
@@ -265,26 +297,15 @@ private fun ChapterBar(line: com.yukselis.engine.world.ChapterLine) {
 
 private const val DEADLINE_WARN_DAYS = 3
 
-/**
- * Altta sabit eylem paneli: ekranın en fazla yarısını kaplar, sığmazsa kendi içinde kayar.
- * Başparmağın ulaştığı yerde durur; metin üstte serbestçe okunur.
- */
+/** Altta ince eylem çubuğu: rutin eylemler, "metni göster" ya da son düğmesi. Hikaye seçenekleri burada durmaz. */
 @Composable
-private fun ActionDock(resetKey: String, content: @Composable () -> Unit) {
-    // Küçük ekran + büyük yazıda dock hikayeyi boğmasın (QA P1-19): en çok ekranın %38'i, fazlası kendi içinde kayar.
-    val maxHeight = (LocalConfiguration.current.screenHeightDp * 0.38f).dp
-    val scroll = remember(resetKey) { androidx.compose.foundation.ScrollState(0) }
+private fun ActionDock(content: @Composable () -> Unit) {
     Surface(
         color = MaterialTheme.colorScheme.background,
         modifier = Modifier.fillMaxWidth(),
     ) {
         HorizontalDivider(color = Game.colors.line)
-        Column(
-            modifier = Modifier
-                .heightIn(max = maxHeight)
-                .verticalScroll(scroll)
-                .padding(horizontal = 16.dp, vertical = 10.dp),
-        ) { content() }
+        Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) { content() }
     }
 }
 
@@ -350,8 +371,12 @@ private fun AppearingCard(notice: NoticeView) {
 }
 
 @Composable
-private fun Choices(choices: List<ChoiceView>, onChoose: (String) -> Unit) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+private fun Choices(choices: List<ChoiceView>, key: String, onChoose: (String) -> Unit) {
+    // Beşten fazla seçenek: ilk dördü görünür (açık olanlar önce), kalanı "Diğer seçenekler" altında katlı (UI_REVIEW A2).
+    var expanded by rememberSaveable(key) { mutableStateOf(false) }
+    val ordered = if (choices.size > FOLD_OVER) choices.filter { it.enabled } + choices.filter { !it.enabled } else choices
+    val shown = if (choices.size > FOLD_OVER && !expanded) ordered.take(FOLD_SHOW) else ordered
+    Column(verticalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth()) {
         // Etiketli seçenek ilk kez çıktığında tek satırlık ipucu; (i) her zaman açıklar.
         val tagged = choices.any { it.requirementTag != null || it.odds != null || it.kindTag != null }
         if (tagged) {
@@ -361,43 +386,65 @@ private fun Choices(choices: List<ChoiceView>, onChoose: (String) -> Unit) {
                 HelpButton(stringResource(R.string.help_story), Glossary.story())
             }
         }
-        choices.forEach { choice ->
-            OutlinedButton(
-                onClick = { onChoose(choice.id) },
-                enabled = choice.enabled,
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
-                modifier = Modifier.fillMaxWidth(),
-            ) {
+        shown.forEach { choice -> ChoiceButton(choice) { onChoose(choice.id) } }
+        if (choices.size > FOLD_OVER && !expanded) {
+            TextButton(onClick = { expanded = true }, modifier = Modifier.fillMaxWidth()) {
+                Text(stringResource(R.string.other_choices, choices.size - FOLD_SHOW), style = GameType.system)
+            }
+        }
+    }
+}
+
+/**
+ * Kompakt seçenek düğmesi (UI_REVIEW A3, C1): etiketler (tür, koşul, olasılık) metnin üstünde ayrı küçük satır, metin tam
+ * genişlikte. Metin tek satıra sığmazsa bir boy küçülür; hiçbir zaman kesilmez.
+ */
+@Composable
+private fun ChoiceButton(choice: ChoiceView, onClick: () -> Unit) {
+    OutlinedButton(
+        onClick = onClick,
+        enabled = choice.enabled,
+        contentPadding = PaddingValues(horizontal = 14.dp, vertical = 8.dp),
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            if (choice.kindTag != null || choice.requirementTag != null || choice.odds != null) {
                 Row(modifier = Modifier.fillMaxWidth()) {
-                    choice.kindTag?.let {
-                        Text(text = "$it ", style = GameType.system, color = Game.colors.echo)
-                    }
-                    choice.requirementTag?.let {
-                        Text(
-                            text = "$it ",
-                            style = GameType.system,
-                            color = if (choice.enabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                    }
                     Text(
-                        text = choice.label,
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = if (choice.enabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
+                        text = listOfNotNull(choice.kindTag, choice.requirementTag).joinToString(" "),
+                        style = GameType.system.copy(fontSize = 12.sp, lineHeight = 16.sp),
+                        color = when {
+                            !choice.enabled -> MaterialTheme.colorScheme.onSurfaceVariant
+                            choice.kindTag != null -> Game.colors.echo
+                            else -> MaterialTheme.colorScheme.primary
+                        },
                         modifier = Modifier.weight(1f),
                     )
                     // Görünür olasılık: tek seferlik (kırmızı) / yeniden denenebilir (beyaz).
                     choice.odds?.let {
                         Text(
-                            text = " " + stringResource(R.string.odds_fmt, it),
-                            style = GameType.system,
+                            text = stringResource(R.string.odds_fmt, it),
+                            style = GameType.system.copy(fontSize = 12.sp, lineHeight = 16.sp),
                             color = if (choice.oneShot) Game.colors.danger else MaterialTheme.colorScheme.onSurface,
                         )
                     }
                 }
             }
+            val base = MaterialTheme.typography.bodyLarge
+            var small by remember(choice.label) { mutableStateOf(false) }
+            Text(
+                text = choice.label,
+                style = if (small) base.copy(fontSize = base.fontSize * 0.88f, lineHeight = base.lineHeight * 0.88f) else base,
+                color = if (choice.enabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
+                onTextLayout = { if (!small && it.lineCount > 1) small = true },
+                modifier = Modifier.fillMaxWidth(),
+            )
         }
     }
 }
+
+private const val FOLD_OVER = 5
+private const val FOLD_SHOW = 4
 
 @Composable
 private fun EndingContent(ending: com.yukselis.engine.story.EndingView?) {

@@ -53,3 +53,14 @@ fun AppAlertDialog(
         text = text?.let { t -> { Localized(t) } },
     )
 }
+
+/**
+ * Denetim etiketleri (alt sekmeler, savaş düğmeleri, başlık logosu) için yazı ölçeği tavanı (UI_REVIEW C2–C4): cihaz
+ * ölçeği 2.0 olsa da bu metinler en çok [max] katına büyür; okuma metni (anlatı, seçenekler) etkilenmez.
+ */
+@Composable
+fun CappedFontScale(max: Float = 1.3f, content: @Composable () -> Unit) {
+    val d = LocalDensity.current
+    if (d.fontScale <= max) content()
+    else CompositionLocalProvider(LocalDensity provides androidx.compose.ui.unit.Density(d.density, max), content = content)
+}

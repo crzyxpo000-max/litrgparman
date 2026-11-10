@@ -82,6 +82,9 @@ import kotlinx.coroutines.launch
 import java.util.Locale
 
 /** `grant`: Sistem'in vermesi gereken sekme (kendini açan arayüz); null ise her zaman açık. */
+private const val BACK_EXIT_WINDOW_MS = 2000L
+private const val NAV_MAX_FONT_SCALE = 1.0f
+
 private enum class Tab(val label: Int, val icon: ImageVector, val grant: String? = null) {
     STORY(R.string.tab_story, Icons.Filled.Home),
     STATUS(R.string.tab_status, Icons.Filled.Person),
@@ -169,13 +172,35 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
     // Verilmemiş bir sekme seçili kaldıysa (ör. eski kayıt yüklendi) Hikaye gösterilir.
     val active = if (tab in tabs) tab else Tab.STORY
 
+    // Geri tuşu (UI_REVIEW B4): başka sekmedeyse Hikaye'ye döner; Hikaye'de ilk basış uyarır, 2 sn içinde ikincisi çıkar.
+    // (Daha fazla'nın alt sayfası kendi geri işleyicisiyle önce kapanır.)
+    val exitHint = stringResource(R.string.back_again_to_exit)
+    var lastBack by remember { mutableStateOf(0L) }
+    val context = LocalContext.current
+    androidx.activity.compose.BackHandler {
+        val now = android.os.SystemClock.elapsedRealtime()
+        when {
+            active != Tab.STORY -> tab = Tab.STORY
+            now - lastBack < BACK_EXIT_WINDOW_MS -> {
+                var c: android.content.Context? = context
+                while (c is android.content.ContextWrapper && c !is android.app.Activity) c = c.baseContext
+                (c as? android.app.Activity)?.finish()
+            }
+            else -> {
+                lastBack = now
+                scope.launch { snackbar.showSnackbar(exitHint, duration = androidx.compose.material3.SnackbarDuration.Short) }
+            }
+        }
+    }
+
     Box(modifier = Modifier.fillMaxSize()) {
     Scaffold(
         topBar = { Header(scene, status) },
         bottomBar = {
             // Sekme çubuğu gezinmedir, okuma değil: oyun içi yazı boyutu onu büyütmez (etiketler kesilmesin).
+            // Cihaz yazı ölçeği de en çok NAV_MAX_FONT_SCALE: "Hik…", "Dur…" diye kesilmesin (UI_REVIEW C2).
             val d = LocalDensity.current
-            CompositionLocalProvider(LocalDensity provides Density(d.density, d.fontScale / ui.settings.textSize.scale)) {
+            CompositionLocalProvider(LocalDensity provides Density(d.density, (d.fontScale / ui.settings.textSize.scale).coerceAtMost(NAV_MAX_FONT_SCALE))) {
             NavigationBar(containerColor = Game.colors.panel, tonalElevation = 0.dp) {
                 tabs.forEach { t ->
                     NavigationBarItem(
@@ -192,7 +217,7 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
                             unselectedIconColor = Game.colors.muted,
                             unselectedTextColor = Game.colors.muted,
                         ),
-                        label = { Text(stringResource(t.label), maxLines = 1, overflow = TextOverflow.Ellipsis) },
+                        label = { Text(stringResource(t.label), maxLines = 1, softWrap = false, overflow = TextOverflow.Visible, style = MaterialTheme.typography.labelSmall) },
                     )
                 }
             }

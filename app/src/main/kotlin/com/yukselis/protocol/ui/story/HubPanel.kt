@@ -10,9 +10,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.verticalScroll
 import com.yukselis.protocol.ui.components.Button
-import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import com.yukselis.protocol.ui.components.OutlinedButton
 import androidx.compose.material3.Text
@@ -44,20 +45,32 @@ import com.yukselis.protocol.ui.components.HelpButton
 import com.yukselis.protocol.ui.components.TipCard
 import com.yukselis.protocol.ui.theme.GameType
 
-private enum class HubDialog { GATES, TRAVEL, PREPARE, SKIP }
+internal enum class HubDialog { GATES, TRAVEL, PREPARE, SKIP }
+
+/** Gün akışının pencere durumu: hikaye bölümü (kartlar) ve eylem çubuğu aynı pencereleri açar. */
+class HubUi {
+    internal var dialog by mutableStateOf<HubDialog?>(null)
+
+    /** Operasyon yaklaşırken üsten ayrılan eylem önce onay ister (DECISIONS #141). */
+    internal var pending by mutableStateOf<HubAction?>(null)
+
+    /** Operasyon düğmesi önce onay penceresi açar: tehdit, seviye, hazırlıklar, yoldaş görüşleri, uyarı (Paket 2). */
+    internal var confirmOp by mutableStateOf<OperationChoiceView?>(null)
+}
+
+@Composable
+fun rememberHubUi(): HubUi = remember { HubUi() }
+
+private fun leave(hub: HubView, ui: HubUi, onAction: (HubAction) -> Unit, a: HubAction) {
+    if (hub.deadlineWarning != null) ui.pending = a else onAction(a)
+}
 
 /**
- * Gün akışı, sabit alt panelde: üstte kalan eylem ve tehlike, sonra fırsat kartları, tek satır serbest eylem,
- * tek satır Kule / Kapılar / Yolculuk. Kapı ve yolculuk listeleri ayrı pencerede açılır; panel kısa kalır.
+ * Gün akışının hikaye bölümü (Paket 5, UI_REVIEW A4): sahne metninin altında, aynı kaydırmada. Kalan eylem ve tehlike,
+ * operasyon, hazırlıklar ve fırsat kartları. Rutin eylemler burada değil, alttaki [HubActionBar]'da.
  */
 @Composable
-fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
-    var dialog by remember { mutableStateOf<HubDialog?>(null) }
-    // Operasyon yaklaşırken üsten ayrılan eylem önce onay ister (DECISIONS #141).
-    var pending by remember { mutableStateOf<HubAction?>(null) }
-    // Operasyon düğmesi önce onay penceresi açar: tehdit, seviye, hazırlıklar, yoldaş görüşleri, uyarı (Paket 2).
-    var confirmOp by remember { mutableStateOf<OperationChoiceView?>(null) }
-    val leave: (HubAction) -> Unit = { a -> if (hub.deadlineWarning != null) pending = a else onAction(a) }
+fun HubStory(hub: HubView, ui: HubUi, onAction: (HubAction) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
@@ -72,18 +85,11 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
         // Bölüm yapısı: görevdeysen nerede olduğun, üsteysen girilebilecek operasyon (DECISIONS #130).
         hub.mission?.let { Text(it, style = GameType.system, color = MaterialTheme.colorScheme.tertiary) }
         TipCard("hub", stringResource(R.string.tip_hub))
-        if (hub.mustCamp) {
-            Button(onClick = { onAction(HubAction.Camp) }, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.hub_camp)) }
-            // Görevdeyken gün bitti: sahada kamp ya da üsse dönüş (dönüş yuva harcamaz).
-            if (hub.canReturn) {
-                OutlinedButton(onClick = { onAction(HubAction.ReturnToBase) }, modifier = Modifier.fillMaxWidth()) { Text("← " + stringResource(R.string.hub_return)) }
-            }
-            return@Column
-        }
+        if (hub.mustCamp) return@Column
         // Vurgulu operasyon (süre daralıyor, seviye yeterli) üstte; vurgusuz olan Fırsatlar'ın altına iner (Paket 2).
-        hub.operations.filter { it.emphasized }.forEach { op -> OperationButton(op) { confirmOp = op } }
+        hub.operations.filter { it.emphasized }.forEach { op -> OperationButton(op) { ui.confirmOp = op } }
         if (hub.preparations.isNotEmpty()) {
-            OutlinedButton(onClick = { dialog = HubDialog.PREPARE }, modifier = Modifier.fillMaxWidth()) {
+            OutlinedButton(onClick = { ui.dialog = HubDialog.PREPARE }, modifier = Modifier.fillMaxWidth()) {
                 Text(pluralStringResource(R.plurals.hub_prepare_n, hub.preparations.size, hub.preparations.size), color = MaterialTheme.colorScheme.tertiary)
             }
         }
@@ -91,7 +97,7 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
             Text(stringResource(R.string.hub_hand), style = GameType.system, color = MaterialTheme.colorScheme.primary)
             hub.cards.forEach { card ->
                 OutlinedButton(
-                    onClick = { if (card.region != null) leave(HubAction.Card(card.id)) else onAction(HubAction.Card(card.id)) },
+                    onClick = { if (card.region != null) leave(hub, ui, onAction, HubAction.Card(card.id)) else onAction(HubAction.Card(card.id)) },
                     contentPadding = PaddingValues(horizontal = 14.dp, vertical = 10.dp),
                     modifier = Modifier.fillMaxWidth(),
                 ) {
@@ -109,83 +115,86 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
                 }
             }
         }
-        hub.operations.filter { !it.emphasized }.forEach { op -> OperationButton(op) { confirmOp = op } }
-        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            val pad = PaddingValues(horizontal = 4.dp, vertical = 8.dp)
-            if (hub.canExplore) {
-                FilledTonalButton(onClick = { onAction(HubAction.Explore) }, contentPadding = pad, modifier = Modifier.weight(1f)) {
-                    OneLine(stringResource(R.string.hub_explore))
-                }
-            }
-            FilledTonalButton(onClick = { onAction(HubAction.Train) }, contentPadding = pad, modifier = Modifier.weight(1f)) { OneLine(stringResource(R.string.hub_train)) }
-            FilledTonalButton(onClick = { onAction(HubAction.Rest) }, contentPadding = pad, modifier = Modifier.weight(1f)) { OneLine(stringResource(R.string.hub_rest)) }
-        }
-        // Antrenman / zaman atlama (DECISIONS #142): boş günleri bir odakla geçirmek.
-        if (hub.skip != null) {
-            OutlinedButton(onClick = { dialog = HubDialog.SKIP }, modifier = Modifier.fillMaxWidth()) {
-                OneLine(stringResource(R.string.hub_skip) + " ⏩")
-            }
-        }
-        val tower = hub.tower
-        // Hızlı tırmanış (DECISIONS #147): kademenin altındaki katlar tek yuvada; katları tek tek oynamak hep mümkün.
-        tower?.fastTo?.let { to ->
-            OutlinedButton(onClick = { onAction(HubAction.FastClimb) }, modifier = Modifier.fillMaxWidth()) {
-                OneLine(stringResource(R.string.hub_tower_fast, tower.floor, to), TowerColor)
-            }
-        }
-        if (tower != null || hub.gates.isNotEmpty() || hub.travel.isNotEmpty() || hub.canReturn) {
-            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                val pad = PaddingValues(horizontal = 4.dp, vertical = 8.dp)
-                tower?.let { t ->
-                    OutlinedButton(onClick = { onAction(HubAction.ClimbTower) }, contentPadding = pad, modifier = Modifier.weight(1f)) {
-                        OneLine(stringResource(if (t.story) R.string.hub_tower_short_story else R.string.hub_tower_short, t.floor), TowerColor)
-                    }
-                }
-                if (hub.gates.isNotEmpty()) {
-                    OutlinedButton(onClick = { dialog = HubDialog.GATES }, contentPadding = pad, modifier = Modifier.weight(1f)) {
-                        OneLine(stringResource(R.string.hub_gates_n, hub.gates.size), GateColor)
-                    }
-                }
-                if (hub.travel.isNotEmpty()) {
-                    OutlinedButton(onClick = { dialog = HubDialog.TRAVEL }, contentPadding = pad, modifier = Modifier.weight(1f)) {
-                        OneLine(stringResource(R.string.hub_travel_btn) + " →")
-                    }
-                }
-                if (hub.canReturn) {
-                    OutlinedButton(onClick = { onAction(HubAction.ReturnToBase) }, contentPadding = pad, modifier = Modifier.weight(1f)) {
-                        OneLine("← " + stringResource(R.string.hub_return))
-                    }
-                }
-            }
-        }
+        hub.operations.filter { !it.emphasized }.forEach { op -> OperationButton(op) { ui.confirmOp = op } }
     }
+}
 
-    when (dialog) {
+/**
+ * Rutin eylem çubuğu (UI_REVIEW A4, A5): Keşfet, Antrenman, Dinlen, Kule, Kapılar, Yolculuk, Üsse dön, Zaman atla tek
+ * biçimde, tek satırda; sığmazsa yana kayar. Gün bittiyse yalnız Kamp (ve görevdeyse Üsse dön).
+ */
+@Composable
+fun HubActionBar(hub: HubView, ui: HubUi, onAction: (HubAction) -> Unit) {
+    if (hub.mustCamp) {
+        Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth()) {
+            Button(onClick = { onAction(HubAction.Camp) }, modifier = Modifier.weight(1f)) { OneLine(stringResource(R.string.hub_camp)) }
+            // Görevdeyken gün bitti: sahada kamp ya da üsse dönüş (dönüş yuva harcamaz).
+            if (hub.canReturn) {
+                OutlinedButton(onClick = { onAction(HubAction.ReturnToBase) }, modifier = Modifier.weight(1f)) { OneLine("← " + stringResource(R.string.hub_return)) }
+            }
+        }
+        return
+    }
+    val tower = hub.tower
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+    ) {
+        if (hub.canExplore) Chip(stringResource(R.string.hub_explore)) { onAction(HubAction.Explore) }
+        Chip(stringResource(R.string.hub_train)) { onAction(HubAction.Train) }
+        Chip(stringResource(R.string.hub_rest)) { onAction(HubAction.Rest) }
+        tower?.let { t ->
+            Chip(stringResource(if (t.story) R.string.hub_tower_short_story else R.string.hub_tower_short, t.floor)) { onAction(HubAction.ClimbTower) }
+            // Hızlı tırmanış (DECISIONS #147): kademenin altındaki katlar tek yuvada; katları tek tek oynamak hep mümkün.
+            t.fastTo?.let { to -> Chip(stringResource(R.string.hub_tower_fast, t.floor, to)) { onAction(HubAction.FastClimb) } }
+        }
+        if (hub.gates.isNotEmpty()) Chip(stringResource(R.string.hub_gates_n, hub.gates.size)) { ui.dialog = HubDialog.GATES }
+        if (hub.travel.isNotEmpty()) Chip(stringResource(R.string.hub_travel_btn) + " →") { ui.dialog = HubDialog.TRAVEL }
+        if (hub.canReturn) Chip("← " + stringResource(R.string.hub_return)) { onAction(HubAction.ReturnToBase) }
+        // Antrenman / zaman atlama (DECISIONS #142): boş günleri bir odakla geçirmek.
+        if (hub.skip != null) Chip(stringResource(R.string.hub_skip) + " ⏩") { ui.dialog = HubDialog.SKIP }
+    }
+}
+
+/** Eylem çubuğu düğmesi: tek biçim (kesik köşe çerçeve), en az 48dp yüksek, tek satır. */
+@Composable
+private fun Chip(label: String, onClick: () -> Unit) {
+    OutlinedButton(
+        onClick = onClick,
+        contentPadding = PaddingValues(horizontal = 14.dp, vertical = 8.dp),
+        modifier = Modifier.heightIn(min = 48.dp),
+    ) { Text(label, maxLines = 1, softWrap = false) }
+}
+
+/** Gün akışının pencereleri: kapılar, yolculuk, hazırlık, zaman atlama, son tarih uyarısı, operasyon onayı. */
+@Composable
+fun HubDialogs(hub: HubView, ui: HubUi, onAction: (HubAction) -> Unit) {
+    when (ui.dialog) {
         HubDialog.GATES -> ListDialog(
             title = stringResource(R.string.hub_gates_title),
-            onDismiss = { dialog = null },
+            onDismiss = { ui.dialog = null },
         ) {
             hub.gates.forEach { g ->
-                OutlinedButton(onClick = { dialog = null; onAction(HubAction.EnterGate(g.uid)) }, modifier = Modifier.fillMaxWidth()) {
-                    Text(androidx.compose.ui.res.pluralStringResource(R.plurals.hub_gate, g.daysLeft, g.grade, g.enemies, g.daysLeft), style = GameType.system, color = GateColor)
+                OutlinedButton(onClick = { ui.dialog = null; onAction(HubAction.EnterGate(g.uid)) }, modifier = Modifier.fillMaxWidth()) {
+                    Text(pluralStringResource(R.plurals.hub_gate, g.daysLeft, g.grade, g.enemies, g.daysLeft), style = GameType.system, color = GateColor)
                 }
             }
         }
         HubDialog.TRAVEL -> ListDialog(
             title = stringResource(R.string.hub_travel_title),
-            onDismiss = { dialog = null },
+            onDismiss = { ui.dialog = null },
         ) {
             hub.travel.forEach { r ->
-                OutlinedButton(onClick = { dialog = null; leave(HubAction.Travel(r.id)) }, modifier = Modifier.fillMaxWidth()) { Text("→ ${r.name}") }
+                OutlinedButton(onClick = { ui.dialog = null; leave(hub, ui, onAction, HubAction.Travel(r.id)) }, modifier = Modifier.fillMaxWidth()) { Text("→ ${r.name}") }
             }
         }
         HubDialog.PREPARE -> ListDialog(
             title = stringResource(R.string.hub_prepare_title),
-            onDismiss = { dialog = null },
+            onDismiss = { ui.dialog = null },
         ) {
             hub.preparations.forEach { p ->
                 OutlinedButton(
-                    onClick = { dialog = null; onAction(HubAction.Prepare(p.id)) },
+                    onClick = { ui.dialog = null; onAction(HubAction.Prepare(p.id)) },
                     enabled = p.enabled,
                     modifier = Modifier.fillMaxWidth(),
                 ) {
@@ -197,24 +206,24 @@ fun HubPanel(hub: HubView, onAction: (HubAction) -> Unit) {
             }
         }
         HubDialog.SKIP -> hub.skip?.let { sk ->
-            SkipDialog(sk, onDismiss = { dialog = null }) { focus, days -> dialog = null; onAction(HubAction.Skip(focus, days)) }
+            SkipDialog(sk, onDismiss = { ui.dialog = null }) { focus, days -> ui.dialog = null; onAction(HubAction.Skip(focus, days)) }
         }
         null -> Unit
     }
-    pending?.let { action ->
+    ui.pending?.let { action ->
         AppAlertDialog(
-            onDismissRequest = { pending = null },
-            confirmButton = { TextButton(onClick = { pending = null; onAction(action) }) { Text(stringResource(R.string.hub_leave_anyway)) } },
-            dismissButton = { TextButton(onClick = { pending = null }) { Text(stringResource(R.string.cancel)) } },
+            onDismissRequest = { ui.pending = null },
+            confirmButton = { TextButton(onClick = { ui.pending = null; onAction(action) }) { Text(stringResource(R.string.hub_leave_anyway)) } },
+            dismissButton = { TextButton(onClick = { ui.pending = null }) { Text(stringResource(R.string.cancel)) } },
             title = { Text(stringResource(R.string.hub_deadline_title)) },
             text = { Text(hub.deadlineWarning ?: "") },
         )
     }
-    confirmOp?.let { op ->
+    ui.confirmOp?.let { op ->
         OperationConfirmDialog(
             op = op,
-            onConfirm = { confirmOp = null; onAction(HubAction.EnterOperation(op.index)) },
-            onDismiss = { confirmOp = null },
+            onConfirm = { ui.confirmOp = null; onAction(HubAction.EnterOperation(op.index)) },
+            onDismiss = { ui.confirmOp = null },
         )
     }
 }

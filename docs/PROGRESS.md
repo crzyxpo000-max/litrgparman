@@ -1,6 +1,6 @@
 # İlerleme
 
-Şu an: İnceleme (`docs/INCELEME_AKIS.md`), Paket 1 (hikaye), Paket 2 (ilk saat), Paket 3 (ritim) ve Paket 4 (sistem çıkarma) bitti. Sıradaki: Paket 5 arayüz incelemesi (önce rapor, sonra seçim).
+Şu an: İnceleme (`docs/INCELEME_AKIS.md`), Paket 1 (hikaye), Paket 2 (ilk saat), Paket 3 (ritim), Paket 4 (sistem çıkarma) ve Paket 5 (arayüz incelemesi + seçilen düzeltmeler) bitti.
 Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
 Son commit: fde916d Paket 3 (sonraki: Paket 4 commit'i)
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
@@ -32,8 +32,10 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
       Öz Kristali tek para birimi (110 kredi etkisi → kristal, 40 ödeme `oz_kristali_min` kilidi, anlatı uyarlandı), Yozlaşma Dikkat'e
       katıldı (122 etki, 8 koşul, ceza yetenekleri/izler Dikkat), Ordu ve Bilgi günlüğü kalıcı kendini açma; Çanta/Durum/Yardım sade;
       `Paket4Test`
-- [ ] Paket 5 — arayüz incelemesi (önce rapor `docs/UI_REVIEW.md`, sonra kullanıcı seçer)
-- [ ] Paket 5 — arayüz incelemesi (`docs/UI_REVIEW.md`, emülatör görüntüleri `docs/ui-review/`)
+- [x] **Paket 5 — arayüz incelemesi** (`docs/UI_REVIEW.md`, görüntüler `docs/ui-review/`, araçlar `tools/qa/ui/`, `:tools:simulator:fixtures`):
+      rapor (4 P0, 18 P1, 19 P2) + seçilen düzeltmeler (DECISIONS #170–#172): onay pencereleri (yeni oyun, kaydet, yükle), geri tuşu,
+      seçenekler metnin altında + "Diğer seçenekler" katlaması + kompakt seçenek düğmesi, üs eylem çubuğu, büyük yazı tavanları.
+      Açık: A6 ve kalan P1/P2'ler (E1–E3 bölüm/son kartları, B5 yükleme süresi, G1–G2 erişilebilirlik etiketleri, F1–F2 terimler)
 
 ## Sanat entegrasyonu (2026-11-07)
 - [x] Uyarlanabilir simge (art/promo/icon.jpg; amblem 46 dp, güvenli alan betikte denetlenir), tek renkli katman, bildirim simgesi

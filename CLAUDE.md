@@ -218,10 +218,17 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
   Bölüm yapısında: üste operasyon düğmesi ve görev kartları (başka bölge), görevde keşif/Kapı/Kule ve "Üsse dön"; Hikaye'nin
   üstünde her zaman `ChapterBar` ("Bölüm N · Hedef · Kalan gün"); Görevler'de bölüm hedefi yan görevlerden ayrı; dönüş özeti
   `UiState.recap` (2 günden uzun aradan sonra).
-- Kaydırmayı azaltan düzen (DECISIONS #124–127): Hikaye yalnızca güncel sahne + alttaki sabit `ActionDock`; önceki sahneler alt
+- Hikaye düzeni (DECISIONS #170; #124–127'nin sabit seçenek panelinin yerine): Hikaye yalnızca güncel sahne; **seçenekler ve fırsat
+  kartları metnin altında aynı kaydırmada** (`Choices`/`ChoiceButton`: etiket üst satırda, 5'ten fazlası "Diğer seçenekler" altında;
+  `HubStory`). Alttaki ince `ActionDock` yalnız rutin eylem çubuğu (`HubActionBar`), "metni göster" ve son düğmesi. Önceki sahneler alt
   sayfada. Daha fazla = karo ızgarası + alt sayfalar; Durum = 3 sekme. Semboller `components/Glossary.kt` (her ekranda (i)
   `HelpButton`, Daha fazla → Yardım); bir kerelik ipuçları `TipCard` (`Settings.seenTips`). Yazı boyutu `Settings.textSize`.
 - **Türkçe üslup:** hikaye metni yazarken/düzeltirken `docs/USLUP.md` (kılavuz + parti planı ve ilerleme durumu).
+- Geri alınamaz işlem onay ister (DECISIONS #171): kayıt varken Yeni oyun, dolu slota Kaydet, Yükle. Geri tuşu: alt sayfa → Hikaye sekmesi →
+  "çıkmak için tekrar bas" (`GameScaffold`). Denetim etiketlerinde yazı ölçeği tavanı `CappedFontScale` (sekmeler 1.0, savaş düğmeleri ve
+  logo 1.3; DECISIONS #172); okuma metnine tavan konmaz.
+- Arayüz incelemesi araçları: `:tools:simulator:fixtures` (anlık kayıt üretir), `tools/qa/ui/cap.py`, `s_all.py` (koşul matrisi görüntüleri →
+  `docs/ui-review/`), rapor `docs/UI_REVIEW.md`.
 - **Diyalog/alt sayfa:** `AlertDialog` değil `AppAlertDialog` kullan; `ModalBottomSheet` içeriğini `Localized {}` ile sar
   (yoksa pencere cihaz dilinde ve ölçeksiz yazıyla açılır).
 - Savaş varken Hikaye sekmesi `CombatScreen` gösterir; savaş başında Normal modda `checkpoint` kaydı yazılır.

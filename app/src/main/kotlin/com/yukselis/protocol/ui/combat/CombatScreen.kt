@@ -370,10 +370,16 @@ private fun ActionGrid(
 private fun GridButton(label: Int, enabled: Boolean, modifier: Modifier, primary: Boolean = false, onClick: () -> Unit) {
     val padding = PaddingValues(horizontal = 4.dp, vertical = 8.dp)
     if (primary) {
-        Button(onClick = onClick, enabled = enabled, contentPadding = padding, modifier = modifier) { Text(stringResource(label), maxLines = 1) }
+        Button(onClick = onClick, enabled = enabled, contentPadding = padding, modifier = modifier) { GridLabel(label) }
     } else {
-        OutlinedButton(onClick = onClick, enabled = enabled, contentPadding = padding, modifier = modifier) { Text(stringResource(label), maxLines = 1) }
+        OutlinedButton(onClick = onClick, enabled = enabled, contentPadding = padding, modifier = modifier) { GridLabel(label) }
     }
+}
+
+/** Düğme etiketi: büyük yazıda kesilmesin diye ölçeği en çok 1.3 (UI_REVIEW C3). */
+@Composable
+private fun GridLabel(label: Int) {
+    com.yukselis.protocol.ui.components.CappedFontScale { Text(stringResource(label), maxLines = 1, softWrap = false) }
 }
 
 @Composable

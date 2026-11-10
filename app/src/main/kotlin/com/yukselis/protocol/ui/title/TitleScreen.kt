@@ -73,12 +73,15 @@ fun TitleScreen(
     ) {
         Spacer(Modifier.height(56.dp))
         // Logo: kesik köşeli yazı, sola yaslı; Sistem'in açılış satırı altında.
-        Text(
-            text = stringResource(R.string.app_name),
-            style = GameType.heading.copy(fontSize = 40.sp, lineHeight = 42.sp),
-            color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.fillMaxWidth(),
-        )
+        // Logo büyük yazıda sözcük ortasından bölünmesin (UI_REVIEW C4): ölçeği en çok 1.3.
+        com.yukselis.protocol.ui.components.CappedFontScale {
+            Text(
+                text = stringResource(R.string.app_name),
+                style = GameType.heading.copy(fontSize = 40.sp, lineHeight = 42.sp),
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
         Spacer(Modifier.height(10.dp))
         Text(
             text = "[ ${stringResource(R.string.system_header).uppercase(LocalConfiguration.current.locales[0])} ] " + stringResource(R.string.system_online),
@@ -142,8 +145,23 @@ fun TitleScreen(
             }
         }
         val start = { onNewGame(name.ifBlank { defaultName }, ironman, newGamePlus && newGamePlusUnlocked) }
+        // Kayıt varken yeni oyun otomatik kaydın üstüne yazar: önce onay (UI_REVIEW B1).
+        var confirmNew by rememberSaveable { mutableStateOf(false) }
+        if (confirmNew && autosave != null) {
+            com.yukselis.protocol.ui.components.AppAlertDialog(
+                onDismissRequest = { confirmNew = false },
+                confirmButton = {
+                    androidx.compose.material3.TextButton(onClick = { confirmNew = false; start() }) { Text(stringResource(R.string.confirm_new_game_ok)) }
+                },
+                dismissButton = { androidx.compose.material3.TextButton(onClick = { confirmNew = false }) { Text(stringResource(R.string.cancel)) } },
+                title = { Text(stringResource(R.string.confirm_new_game_title)) },
+                text = {
+                    Text(stringResource(R.string.confirm_new_game, stringResource(R.string.continue_summary, autosave.playerName, autosave.level, autosave.day)))
+                },
+            )
+        }
         if (autosave != null) {
-            OutlinedButton(onClick = start, enabled = ready, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.start)) }
+            OutlinedButton(onClick = { confirmNew = true }, enabled = ready, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.start)) }
         } else {
             Button(onClick = start, enabled = ready, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.start)) }
         }

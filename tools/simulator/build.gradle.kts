@@ -49,3 +49,12 @@ tasks.register<JavaExec>("akis") {
     workingDir = rootProject.projectDir
     jvmArgs("-Dstdout.encoding=UTF-8", "-Dstderr.encoding=UTF-8")
 }
+
+// Arayüz incelemesi için kayıt üretici (docs/UI_REVIEW.md): ./gradlew :tools:simulator:fixtures --args="build/ui-fixtures 11"
+tasks.register<JavaExec>("fixtures") {
+    group = "verification"
+    classpath = sourceSets["main"].runtimeClasspath
+    mainClass.set("com.yukselis.simulator.FixturesKt")
+    workingDir = rootProject.projectDir
+    jvmArgs("-Dstdout.encoding=UTF-8", "-Dstderr.encoding=UTF-8")
+}
