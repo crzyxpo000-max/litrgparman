@@ -170,7 +170,7 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
 
     val tabs = Tab.entries.filter { it.grant == null || it.grant in status.tabs }
     // Verilmemiş bir sekme seçili kaldıysa (ör. eski kayıt yüklendi) Hikaye gösterilir.
-    val active = if (tab in tabs) tab else Tab.STORY
+    val active = if (tab in tabs && !scene.isEnding) tab else Tab.STORY
 
     // Geri tuşu (UI_REVIEW B4): başka sekmedeyse Hikaye'ye döner; Hikaye'de ilk basış uyarır, 2 sn içinde ikincisi çıkar.
     // (Daha fazla'nın alt sayfası kendi geri işleyicisiyle önce kapanır.)
@@ -195,8 +195,10 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
 
     Box(modifier = Modifier.fillMaxSize()) {
     Scaffold(
-        topBar = { Header(scene, status) },
+        // Son ekranı tam ekrandır (UI_REVIEW E1): üst şerit ve sekmeler gizli; çıkış "Ana menüye dön".
+        topBar = { if (!scene.isEnding) Header(scene, status) else Spacer(Modifier.statusBarsPadding()) },
         bottomBar = {
+            if (!scene.isEnding) {
             // Sekme çubuğu gezinmedir, okuma değil: oyun içi yazı boyutu onu büyütmez (etiketler kesilmesin).
             // Cihaz yazı ölçeği de en çok NAV_MAX_FONT_SCALE: "Hik…", "Dur…" diye kesilmesin (UI_REVIEW C2).
             val d = LocalDensity.current
@@ -220,6 +222,7 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
                         label = { Text(stringResource(t.label), maxLines = 1, softWrap = false, overflow = TextOverflow.Visible, style = MaterialTheme.typography.labelSmall) },
                     )
                 }
+            }
             }
             }
         },

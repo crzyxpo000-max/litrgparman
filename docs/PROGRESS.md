@@ -35,7 +35,8 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - [x] **Paket 5 — arayüz incelemesi** (`docs/UI_REVIEW.md`, görüntüler `docs/ui-review/`, araçlar `tools/qa/ui/`, `:tools:simulator:fixtures`):
       rapor (4 P0, 18 P1, 19 P2) + seçilen düzeltmeler (DECISIONS #170–#172): onay pencereleri (yeni oyun, kaydet, yükle), geri tuşu,
       seçenekler metnin altında + "Diğer seçenekler" katlaması + kompakt seçenek düğmesi, üs eylem çubuğu, büyük yazı tavanları.
-      Açık: A6 ve kalan P1/P2'ler (E1–E3 bölüm/son kartları, B5 yükleme süresi, G1–G2 erişilebilirlik etiketleri, F1–F2 terimler)
+      Kalan P1'ler de yapıldı (DECISIONS #173–#176): bölüm açılış/kapanış kartı, tam ekran son, "Nefes"/"Görevler" terimleri, eşya
+      açıklamaları, anahtar satırları, paralel içerik ayrıştırma (yükleme 8 → 4,4 sn; hedef 3 sn sağlanmadı). Açık: A6 ve P2'ler
 
 ## Sanat entegrasyonu (2026-11-07)
 - [x] Uyarlanabilir simge (art/promo/icon.jpg; amblem 46 dp, güvenli alan betikte denetlenir), tek renkli katman, bildirim simgesi

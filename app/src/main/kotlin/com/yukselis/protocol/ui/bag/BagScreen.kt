@@ -56,7 +56,8 @@ fun BagScreen(
             SectionTitle(stringResource(R.string.inventory))
             if (bag.items.isEmpty()) Text(stringResource(R.string.inventory_empty), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
-        items(bag.items, key = { "i-${it.id}" }) { ItemRow(it) { onUse(it.id) } }
+        // Kullanılabilir eşyalar üstte (UI_REVIEW D2).
+        items(bag.items.sortedByDescending { it.usable }, key = { "i-${it.id}" }) { ItemRow(it) { onUse(it.id) } }
 
         // Meslek bölümü yalnız motor bir meslek adı veriyorsa (sistem kapalıyken hiç görünmez).
         val professionName = bag.professionName
@@ -78,6 +79,8 @@ private fun ItemRow(item: ItemView, onUse: () -> Unit) {
             Column(modifier = Modifier.weight(1f)) {
                 Text("${item.name} ×${item.count}", style = GameType.systemTitle, color = rarityColorOf(item.rarity))
                 Text(item.description, style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                // Kullan düğmesi olmayan eşya neye yaradığını söyler.
+                if (!item.usable) Text(stringResource(R.string.item_trade_hint), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.75f))
             }
             if (item.usable) OutlinedButton(onClick = onUse) { Text(stringResource(R.string.use)) }
         }

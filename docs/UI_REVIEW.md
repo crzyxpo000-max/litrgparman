@@ -225,6 +225,16 @@ etiketin sonunda `_sonra` ile: `docs/ui-review/<ekran>__<koşul>_sonra.png` (4 k
 | C3 | Düzeltildi | Savaş düğmesi etiketleri ölçek tavanı 1.3: "Yetenek", "Otomatik" tam. Günlük alanı değişmedi. | `savas_taktik__tr_small_dark_f2` | `savas_taktik__tr_small_dark_f2_sonra` |
 | C4 | Düzeltildi | Başlık logosu ölçek tavanı 1.3: sözcük bölünmüyor, Devam et ilk ekranda. | `baslik__tr_small_dark_f2`, `baslik__tr_small_dark_f2xl` | `baslik__tr_small_dark_f2_sonra` |
 
+| B5 | Kısmen | İçerik dosyaları paralel ayrıştırılıyor: "Dünya yükleniyor" yaklaşık 8 sn → 4,4 sn (son ölçüm 4,3 / 4,2 / 4,3; emülatör, debug). Hedef 3 sn'nin altı sağlanmadı. | `baslik__tr_small_dark_n` | `baslik__tr_small_dark_n_sonra` |
+| D2 | Düzeltildi | Mesleklere atıf yapan 4 açıklama yeniden yazıldı; kullanılabilir eşya üstte; diğerlerinde "Takasta ve hikaye seçimlerinde işe yarar". | `sekme_bag__tr_small_dark_n` | `sekme_bag__tr_small_dark_n_sonra` |
+| E1 | Düzeltildi (kısmen) | Son ekranı tam ekran: üst şerit, bölüm çubuğu ve sekmeler gizli, son adı büyük başlık. Epilog kartları hâlâ tek kaydırma (sırayla açılan kartlar yapılmadı). | `son__tr_small_dark_n`, `son_k1`–`_k4` | aynı adlar `_sonra` |
+| E2 | Düzeltildi | Brifingin ilk sahnesinde bölüm açılış kartı: numara, ad, hedef, son tarih. | `brifing_1__tr_small_dark_n`, `brifing_4__…` | aynı adlar `_sonra` |
+| E3 | Düzeltildi (sade) | Darboğazın ilk sahnesinde kapanış kartı: bölüm adı ve gün. Seçim özeti ve sonraki bölümün adı yok (motor verisi gerekir). | `darbogaz_2__tr_small_dark_n` | `darbogaz_2__tr_small_dark_n_sonra` |
+| F1 | Düzeltildi | Defter karosu TR'de "Görevler". | `sekme_more__tr_small_dark_n` | `sekme_more__tr_small_dark_n_sonra` |
+| F2 | Düzeltildi | Savaş kaynağı TR'de "Nefes" (NFS); Dayanıklılık (DAY) ile karışmıyor. | `savas_taktik__tr_small_dark_n` | `savas_taktik__tr_small_dark_n_sonra` |
+| G1 | Düzeltildi | Metni tamamlayan dokunuş etiketli ve yalnız metin yazılırken etkin; etiketsiz dokunulabilir öğe ölçümü hikaye, savaş, Ayarlar ve Daha fazla ekranlarında 0 (başlıkta ad alanı ve dil/tema düğmeleri sayımda kaldı). | — | `build/ui-dumps/p1_sonra.json` ölçümü |
+| G2 | Düzeltildi | Ayarlar ve başlıktaki anahtar satırları tek düğüm ve tek dokunma hedefi (satırın tamamı). | `dahafazla_ayarlar__tr_small_dark_n` | `dahafazla_ayarlar__tr_small_dark_n_sonra` |
+
 Doğrulama: `s_flow.py` (geri tuşu Hikaye ve Durum'da oyunda kalıyor; Kaydet/Yükle/Yeni oyun onay penceresi açıyor), `scripts/check.sh`.
 
 Düzeltmeden sonra görülen ve açık kalanlar:

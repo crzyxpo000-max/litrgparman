@@ -22,6 +22,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -124,24 +125,30 @@ fun TitleScreen(
         )
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .toggleable(value = ironman, role = androidx.compose.ui.semantics.Role.Switch, onValueChange = { ironman = it })
+                .padding(vertical = 12.dp),
         ) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(stringResource(R.string.ironman_mode), style = MaterialTheme.typography.bodyLarge)
                 Text(stringResource(R.string.ironman_desc), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
-            Switch(checked = ironman, onCheckedChange = { ironman = it })
+            Switch(checked = ironman, onCheckedChange = null)
         }
         if (newGamePlusUnlocked) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .toggleable(value = newGamePlus, role = androidx.compose.ui.semantics.Role.Switch, onValueChange = { newGamePlus = it })
+                    .padding(bottom = 12.dp),
             ) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(stringResource(R.string.ng_plus), style = MaterialTheme.typography.bodyLarge)
                     Text(stringResource(R.string.ng_plus_desc), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
-                Switch(checked = newGamePlus, onCheckedChange = { newGamePlus = it })
+                Switch(checked = newGamePlus, onCheckedChange = null)
             }
         }
         val start = { onNewGame(name.ifBlank { defaultName }, ironman, newGamePlus && newGamePlusUnlocked) }

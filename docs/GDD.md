@@ -63,7 +63,7 @@ Oyuncunun stat büyümesi **üsteldir** (Günlük Görev serisi, Benzersiz yeten
 - **Gösteriş seçenekleri:** yüksek statlar "[GÜÇ 40 · Önemsiz] Kapıyı menteşesinden sök" gibi sorunu tarzla çözen seçenekler gösterir. Yeniden denenebilir (beyaz) ve tek seferlik (kırmızı) kontroller görünür olasılıklarla kalır, ama çoğunlukla sosyal ve ahlaki kontrollerde kullanılır.
 - **Fırsat eli:** serbest zamanda 3 rastgele olay kartı gösterilir (Perde 1'de 2; DECISIONS #163); oyuncu birini seçer.
 - **İki savaş modu:**
-  - **Gerçek savaş** (denkler ve bosslar): taktik; her turda duruş (tam saldırı / ölçülü / savunmacı) ve Dayanım taahhüdü; düzyazıyla anlatılır, sayılar istenirse görünür; boss, zeki düşman ve NPC düellosu oyuncunun seçtiği bir **infaz** hamlesiyle biter, sıradan düşman tek satırla düşer (DECISIONS #157). Taktik (duruş, efor) ve Ortam ilk üç savaştan sonra açılır.
+  - **Gerçek savaş** (denkler ve bosslar): taktik; her turda duruş (tam saldırı / ölçülü / savunmacı) ve Nefes taahhüdü; düzyazıyla anlatılır, sayılar istenirse görünür; boss, zeki düşman ve NPC düellosu oyuncunun seçtiği bir **infaz** hamlesiyle biter, sıradan düşman tek satırla düşer (DECISIONS #157). Taktik (duruş, efor) ve Ortam ilk üç savaştan sonra açılır.
   - **Ezme:** oyuncunun açıkça üstün olduğu sıradan düşmanlar tek, şık bir satırla otomatik çözülür. Kasılma (grind) yoktur.
 - **Yoldaş tepkileri:** büyük seçimlerden önce yoldaşlar kişiliklerine ve ilişkilerine göre tek satırlık görüş bildirir. Oyuncunun büyüyen gücüne de hayranlık, endişe, kıskançlık ya da bağımlılıkla tepki verirler. Deniz'in yayı "arkadaşımın bir canavara ya da tanrıya dönüşmesini izlemek" olur.
 - **Bilgi günlüğü:** öğrenilen söylentiler, sırlar ve gerçek seviyeler diyalog seçeneklerini açar; NPC'lere söylenen yalanlar onların hafızasına girer ve sonra ortaya çıkabilir.
@@ -115,7 +115,7 @@ Karakter gücü beş katmandan oluşur: statlar, seviye ve kademe, sınıf, yete
 | --- | --- | --- |
 | Güç | GÜÇ | Fiziksel hasar, taşıma, bazı kapıları zorla açma |
 | Çeviklik | ÇEV | İnisiyatif, kaçınma, kritik şansı |
-| Dayanıklılık | DAY | Can (HP), fiziksel direnç, Dayanım |
+| Dayanıklılık | DAY | Can (HP), fiziksel direnç, Nefes (savaş kaynağı; eski adı Dayanım, DECISIONS #174) |
 | Zeka | ZEK | Büyü hasarı, mana havuzu, bulmaca çözümleri |
 | Bilgelik | BİL | Mana yenilenmesi, büyü direnci, Öz kavrayışı |
 | Algı | ALG | İsabet, kritik hasar, gizli nesne/tuzak/yalan fark etme |

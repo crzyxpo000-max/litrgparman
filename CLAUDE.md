@@ -204,7 +204,7 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Kayıt: her seçimden ve her Sistem eyleminden sonra ve `onStop`'ta otomatik; dosyalar `files/saves/*.json`, Auto Backup kapsamında.
 - Kendini açan arayüz: Yetenekler ve Çanta sekmeleri `StatusView.tabs` içinde yoksa gizlidir. `StatusView.showHidden/showRank/showRelations/showMap/showArmy/showKnowledge`
   Durum'un gizli ölçülerini ve Daha fazla karolarını ilgili sistem oyuna girene kadar gizler; `CombatView.tacticsUnlocked` yanlışken savaş ekranı
-  Saldır · Savun · Analiz · Kaç · Otomatik'e iner (Taktik, Ortam, Dayanım yok). Operasyon düğmesi onay penceresi açar (`OperationChoiceView`).
+  Saldır · Savun · Analiz · Kaç · Otomatik'e iner (Taktik, Ortam, Nefes yok). Operasyon düğmesi onay penceresi açar (`OperationChoiceView`).
 - Tam ekran kartlar `ui/system/Overlays.kt`: önce kutlama (seviye/evrim/sınıf), sonra bekleyen istem.
 - Tema: Sistem · Açık · Koyu (koyu temanın zemini saf siyah; ayrı AMOLED seçeneği yok, DECISIONS #148).
 - **Görsel kimlik "Kırık pencere"** (DECISIONS #147): renk/yazı/şekil/hareket tokenları yalnız `ui/theme/Theme.kt`'de
@@ -227,6 +227,9 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Geri alınamaz işlem onay ister (DECISIONS #171): kayıt varken Yeni oyun, dolu slota Kaydet, Yükle. Geri tuşu: alt sayfa → Hikaye sekmesi →
   "çıkmak için tekrar bas" (`GameScaffold`). Denetim etiketlerinde yazı ölçeği tavanı `CappedFontScale` (sekmeler 1.0, savaş düğmeleri ve
   logo 1.3; DECISIONS #172); okuma metnine tavan konmaz.
+- Bölüm kartları ve son (DECISIONS #173): `brifing_<n>_1` sahnesinde açılış, `darbogaz_<n>_1` sahnesinde kapanış kartı (`ChapterCard`,
+  sahne kimliğinden tanınır: bu adlandırmayı bozma); son ekranı tam ekrandır (üst şerit ve sekmeler gizli). TR terimler (#174): savaş kaynağı
+  "Nefes" (NFS), defter karosu "Görevler"; "Dayanım" ve tek başına "Günlük" yazma. İçerik dosyaları paralel ayrıştırılır (#175).
 - Arayüz incelemesi araçları: `:tools:simulator:fixtures` (anlık kayıt üretir), `tools/qa/ui/cap.py`, `s_all.py` (koşul matrisi görüntüleri →
   `docs/ui-review/`), rapor `docs/UI_REVIEW.md`.
 - **Diyalog/alt sayfa:** `AlertDialog` değil `AppAlertDialog` kullan; `ModalBottomSheet` içeriğini `Localized {}` ile sar

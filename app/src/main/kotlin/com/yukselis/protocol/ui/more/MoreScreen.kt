@@ -43,6 +43,7 @@ import com.yukselis.protocol.ui.components.SystemCard
 import androidx.compose.ui.graphics.Color
 import com.yukselis.protocol.ui.theme.GameType
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.size
@@ -498,14 +499,18 @@ private fun NotificationToggle(
 
 @Composable
 private fun ToggleRow(label: String, description: String?, checked: Boolean, enabled: Boolean, onChange: (Boolean) -> Unit) {
+    // Satırın tamamı tek anahtar: ekran okuyucu etiketi durumla birlikte okur, dokunma alanı satır kadar (UI_REVIEW G2).
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .toggleable(value = checked, enabled = enabled, role = androidx.compose.ui.semantics.Role.Switch, onValueChange = onChange)
+            .padding(vertical = 9.dp),
     ) {
         Column(modifier = Modifier.weight(1f)) {
             Text(label, style = MaterialTheme.typography.bodyLarge)
             description?.let { Text(it, style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant) }
         }
-        Switch(checked = checked, onCheckedChange = onChange, enabled = enabled)
+        Switch(checked = checked, onCheckedChange = null, enabled = enabled)
     }
 }

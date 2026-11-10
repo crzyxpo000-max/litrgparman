@@ -103,6 +103,27 @@ object ContentParser {
 
     data class StoryFile(val start: String?, val scenes: List<Scene>)
 
+    /** Sırayı koruyan paralel dönüşüm; hata, ayrıştırıcının kendi istisnasıyla çıkar. */
+    private fun <T, R> parallelMap(items: List<T>, f: (T) -> R): List<R> {
+        val threads = Runtime.getRuntime().availableProcessors().coerceIn(1, MAX_PARSE_THREADS)
+        if (items.size < 2 || threads < 2) return items.map(f)
+        val pool = java.util.concurrent.Executors.newFixedThreadPool(threads)
+        try {
+            val futures = items.map { item -> pool.submit(java.util.concurrent.Callable { f(item) }) }
+            return futures.map { fut ->
+                try {
+                    fut.get()
+                } catch (e: java.util.concurrent.ExecutionException) {
+                    throw e.cause ?: e
+                }
+            }
+        } finally {
+            pool.shutdown()
+        }
+    }
+
+    private const val MAX_PARSE_THREADS = 4
+
     fun load(
         storyFiles: List<String>,
         namesJson: String,
@@ -114,8 +135,9 @@ object ContentParser {
         // Sonlar tablosu olaylardan önce kurulur: `son_uygun` koşulları ona bağlanır, tablo sonra doldurulur.
         val endingTable = EndingTable()
         EndingTable.current = endingTable
-        val stories = storyFiles.map { parseStory(it) }
-        val eventPacks = eventFiles.map { parseEvents(it) }
+        // Dosyalar birbirinden bağımsızdır: çekirdek sayısı kadar iş parçacığında ayrıştırılır (UI_REVIEW B5, açılış süresi).
+        val stories = parallelMap(storyFiles) { parseStory(it) }
+        val eventPacks = parallelMap(eventFiles) { parseEvents(it) }
         val scenes = stories.flatMap { it.scenes } + eventPacks.flatMap { it.second }
         val duplicates = scenes.groupBy { it.id }.filterValues { it.size > 1 }.keys
         if (duplicates.isNotEmpty()) throw ContentFormatException("Aynı kimliğe sahip sahneler: $duplicates")
@@ -127,7 +149,7 @@ object ContentParser {
         val profRoot = obj(PROFESSIONS)
         val names = NameRegistry(parseNames(namesJson))
         val texts = SystemTexts(obj(SYSTEM)?.map { (k, v) -> k to ltext(v, "system.$k") }?.toMap() ?: emptyMap())
-        val npcs = npcFiles.map { parseNpc(YamlTree.parseObject(it, "npc")) }.also { list ->
+        val npcs = parallelMap(npcFiles) { parseNpc(YamlTree.parseObject(it, "npc")) }.also { list ->
             val dup = list.groupBy { it.id }.filterValues { it.size > 1 }.keys
             if (dup.isNotEmpty()) throw ContentFormatException("Aynı kimliğe sahip NPC'ler: $dup")
         }.associateBy { it.id }

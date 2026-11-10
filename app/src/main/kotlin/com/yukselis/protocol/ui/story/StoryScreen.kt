@@ -144,7 +144,7 @@ fun StoryScreen(
 
     val skip = remember { MutableInteractionSource() }
     Column(modifier = modifier.fillMaxSize()) {
-        scene.chapter?.let { ChapterBar(it) }
+        if (!scene.isEnding) scene.chapter?.let { ChapterBar(it) }
         Box(modifier = Modifier.weight(1f).fillMaxWidth()) {
         LazyColumn(
             state = listState,
@@ -152,7 +152,7 @@ fun StoryScreen(
             verticalArrangement = Arrangement.spacedBy(14.dp),
             modifier = Modifier
                 .fillMaxSize()
-                .clickable(interactionSource = skip, indication = null) { finished = true },
+                .clickable(interactionSource = skip, indication = null, enabled = !finished, onClickLabel = stringResource(R.string.a11y_skip_text)) { finished = true },
         ) {
             if (scene.history.isNotEmpty()) {
                 item(key = "earlier") {
@@ -166,6 +166,15 @@ fun StoryScreen(
             // Son seçimin sonuçları (XP, seviye atlama, unvan) yeni pasajdan önce gösterilir.
             itemsIndexed(freshNotices, key = { i, _ -> "fresh-$passageKey-$i" }) { _, notice ->
                 AppearingCard(notice)
+            }
+
+            val chapterLine = scene.chapter
+            if (chapterLine != null) {
+                val id = scene.current.sceneId
+                when {
+                    CHAPTER_OPEN.matches(id) -> item(key = "chapter-open-$passageKey") { ChapterCard(chapterLine, opening = true, day = scene.day) }
+                    CHAPTER_CLOSE.matches(id) -> item(key = "chapter-close-$passageKey") { ChapterCard(chapterLine, opening = false, day = scene.day) }
+                }
             }
 
             item(key = "text-$passageKey") {
@@ -296,6 +305,38 @@ private fun ChapterBar(line: com.yukselis.engine.world.ChapterLine) {
 }
 
 private const val DEADLINE_WARN_DAYS = 3
+private val CHAPTER_OPEN = Regex("brifing_\\d+_1")
+private val CHAPTER_CLOSE = Regex("darbogaz_\\d+_1")
+
+/**
+ * Bölüm açılış ve kapanış kartı (UI_REVIEW E2, E3): brifingin ve darboğazın ilk sahnesinde, metinden önce. Açılışta bölüm
+ * numarası, adı, hedefi ve son tarih; kapanışta bölüm adı ve gün.
+ */
+@Composable
+private fun ChapterCard(line: com.yukselis.engine.world.ChapterLine, opening: Boolean, day: Int) {
+    val accent = if (opening) Game.colors.amber else Game.colors.muted
+    Column(modifier = Modifier.fillMaxWidth().systemWindow(accent = accent)) {
+        Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text(
+                text = stringResource(if (opening) R.string.chapter_open else R.string.chapter_close, line.no).uppercase(LocalConfiguration.current.locales[0]),
+                style = GameType.systemTitle.copy(fontSize = 12.sp, letterSpacing = 1.2.sp),
+                color = accent,
+            )
+            Text(text = line.title, style = GameType.heading.copy(fontSize = 26.sp, lineHeight = 30.sp), color = MaterialTheme.colorScheme.onBackground)
+            if (opening) {
+                Text(text = line.goal, style = GameType.narration, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(
+                    text = stringResource(R.string.chapter_deadline) + ": " +
+                        (line.countdown ?: androidx.compose.ui.res.pluralStringResource(R.plurals.chapter_days, line.daysLeft, line.daysLeft)),
+                    style = GameType.system,
+                    color = if (line.daysLeft <= DEADLINE_WARN_DAYS) Game.colors.danger else Game.colors.amber,
+                )
+            } else {
+                Text(text = stringResource(R.string.chapter_day, day), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+        }
+    }
+}
 
 /** Altta ince eylem çubuğu: rutin eylemler, "metni göster" ya da son düğmesi. Hikaye seçenekleri burada durmaz. */
 @Composable
@@ -461,7 +502,7 @@ private fun EndingContent(ending: com.yukselis.engine.story.EndingView?) {
 @Composable
 private fun EndingCards(e: com.yukselis.engine.story.EndingView) {
     val gold = Game.colors.unique
-    Text(text = stringResource(R.string.ending_label, e.name), style = GameType.systemTitle, color = gold)
+    Text(text = stringResource(R.string.ending_label, e.name), style = GameType.heading.copy(fontSize = 30.sp, lineHeight = 34.sp), color = gold)
     Text(text = e.summary, style = GameType.narration)
     Text(text = stringResource(R.string.ending_stats, e.level, e.grade, e.day), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
     e.archetype?.let { name ->
