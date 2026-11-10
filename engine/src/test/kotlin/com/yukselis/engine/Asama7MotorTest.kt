@@ -93,9 +93,68 @@ class Asama7MotorTest {
         assertEquals(5, top.size)
         assertEquals(listOf(20, 40, 60, 80, 90), top.map { it.day })
     }
+
+    @Test
+    fun `sabit kademeli basvuru olceklenir ve kimligi korur`() {
+        // DECISIONS #177: "@oyuncu±n%" çözülünce oyuncunun kademesini taşır; seviye S'in altına inse de kademe S kalır.
+        val pinned = content.enemy("kanal_faresi@765^S")!!
+        assertEquals("kanal_faresi@765^S", pinned.id)
+        assertEquals(765, pinned.level)
+        assertEquals(Grade.S, pinned.grade)
+        assertEquals(Grade.A, content.enemy("kanal_faresi@765")!!.grade)
+        assertEquals(pinned.maxHp, content.enemy("kanal_faresi@765")!!.maxHp)
+    }
+
+    @Test
+    fun `vali savasinin destekleri yuzdelidir ve ikinci deneme en kolayidir`() {
+        // Sv. 850'de ±5 seviye hiçbir şey değiştirmiyordu (kazanma %48 → %51); destekler yüzdeyle çalışır.
+        val refs = content.scenes.values.flatMap { it.choices }.flatMap { it.effects }
+            .filterIsInstance<com.yukselis.engine.story.Effect.StartCombat>()
+            .flatMap { it.spec.enemies }.filter { it.startsWith("istila_hasat_valisi@") }
+        assertTrue("Vali savaşı bulunamadı", refs.size >= 8)
+        val offsets = refs.map { r ->
+            assertTrue("Yüzdesiz Vali başvurusu: $r", r.endsWith("%"))
+            r.substringAfter("@oyuncu").removeSuffix("%").toInt()
+        }
+        assertEquals("Desteksiz yüzleşme oyuncunun seviyesinde", 0, offsets.max())
+        assertTrue("Destekler en az %10 indirir", offsets.filter { it != 0 && it != -5 }.all { it <= -10 })
+        assertEquals("İkinci deneme en kolay savaş", -30, offsets.min())
+        val retry = content.scenes.getValue("p4_istila_yenilgi").choices.first { it.id == "tekrar" }.effects
+            .filterIsInstance<com.yukselis.engine.story.Effect.StartCombat>().single().spec.enemies.single()
+        assertEquals("istila_hasat_valisi@oyuncu-30%", retry)
+    }
 }
 
 class Asama7GoreliSeviyeTest {
+    @Test
+    fun `yuzdeli oyuncu basvurusu oyuncunun kademesinde kalir`() {
+        // DECISIONS #177: Sv. 850'de −%10 → 765; kademe sabitlenmese düşman A'ya iner ve kademe farkı savaşı bitirir.
+        assertEquals("kanal_faresi@765^S", EnemyScaling.resolve("kanal_faresi@oyuncu-10%", 342, 850))
+        assertEquals("kanal_faresi@850^S", EnemyScaling.resolve("kanal_faresi@oyuncu+0%", 342, 850))
+        assertEquals("kanal_faresi@559^A", EnemyScaling.resolve("kanal_faresi@oyuncu-30%", 342, 798))
+        // Yukarı yönde de: Sv. 798 oyuncunun +%5'i 838 (S) olurdu; kademe A kalır.
+        assertEquals("kanal_faresi@838^A", EnemyScaling.resolve("kanal_faresi@oyuncu+5%", 342, 798))
+        assertEquals("kanal_faresi" to 765, EnemyScaling.parse("kanal_faresi@765^S"))
+        assertEquals(Grade.S, EnemyScaling.pinnedGrade("kanal_faresi@765^S"))
+        assertNull(EnemyScaling.pinnedGrade("kanal_faresi@765"))
+        assertNull(EnemyScaling.pinnedGrade("kanal_faresi"))
+        assertEquals("kanal_faresi", EnemyScaling.baseId("kanal_faresi@765^S"))
+        // Çözülmüş başvuru yeniden çözülünce değişmez (kayıttan yüklenen savaş).
+        assertEquals("kanal_faresi@765^S", EnemyScaling.resolve("kanal_faresi@765^S", 342, 900))
+    }
+
+    @Test
+    fun `yuzde eki yalniz oyuncu basvurusunda gecerlidir`() {
+        assertTrue(EnemyScaling.validSuffix("x@oyuncu-10%"))
+        assertTrue(EnemyScaling.validSuffix("x@oyuncu+0%"))
+        assertTrue(EnemyScaling.isRelative("x@oyuncu-10%"))
+        assertTrue(EnemyScaling.validSuffix("x@oyuncu-5"))
+        assertTrue(!EnemyScaling.validSuffix("x@dunya-10%"))
+        assertTrue(!EnemyScaling.validSuffix("x@oyuncu%"))
+        // Sabit kademeli biçimi yalnız motor üretir; içerikte yazılamaz.
+        assertTrue(!EnemyScaling.validSuffix("x@765^S"))
+    }
+
     @Test
     fun `goreli seviye savas basinda cozulur`() {
         // Paket 3 rampası: Gün 30'da dünya seviyesi 10 (DECISIONS #164).

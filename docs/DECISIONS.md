@@ -2,6 +2,13 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Final dengesi: Vali savaşı — 2026-11-10
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 177 | **Yüzdeli oyuncu başvurusu `@oyuncu±n%` ve Vali savaşının destekleri.** `EnemyScaling.resolve` `@oyuncu-10%` biçimini oyuncunun seviyesinin yüzdesine ve **oyuncunun kademesine** çözer (çözülmüş biçim `id@765^S`; yalnız motor üretir, içerikte yazılamaz). Kadim istilasında Vali: desteksiz `+0%`, Aras'tan sonra `-5%`, Kaya'nın topçusu `-12%`, Thessar'ın yarığı ve zırhın dikişi `-20%`, yakıt `-25%`, ikinci deneme `-30%`. Eski `@oyuncu±n` biçimi ve öteki savaşlar değişmedi. | Ölçüm (Vali savaşına gelen 163 gerçek durum × 20 savaş): `+3` %48, `+0` %49, `-5` %51. Sv. 850'de birkaç seviye %1'den az stat demek; bölümler boyunca kazanılan destekler ve ikinci deneme savaşı değiştirmiyordu. Kademe sabitlenmezse Sv. 800–888 oyuncuda −%10 Vali'yi S'in altına düşürüyor, kademe farkı (×2 / ×0,5) kazanmayı %99'a çıkarıyordu. Yeni oranlar: %49 · %56 · %63 · %73 · %77 · %83. | Perde 3–4'ün öteki `@oyuncu±n` savaşları (ör. `cekirdek_kapicisi` +4 / ikinci deneme +1) aynı sorunu taşır: yeniden deneme indirimi orada da etkisiz. Sv. 700'ün altında gelen oyuncu Vali'yi %7–20 yener (neden ölçülmedi). |
+| 178 | **Simülatör botu savaşın arkasını görür.** `Simulator.choiceScore` ileri bakışı, `sonraki`'si olmayan savaş seçiminde zafer sahnesinden (`savas.kazan`) sürdürür; son sahnesi denetimi de aynı sahneye bakar. Savaşın zorluğu puana girmez: bot kolay desteği değil, tarzına uyan seçeneği seçer. | Bot savaşın ardındaki bayrağı (ör. `kadimler_yenildi`, `lonca_hakimiyeti`) göremiyordu: Koruyucu tarzı Vali'ye yenilince 16'da 0 kez yeniden denedi, hep geri çekildi. 1000 oynanış, önce → sonra: Koruyucu hedefe ulaşma %45,5 → %73,9 (istila kazanma %47,7 → %81,8; #177 tek başına %48,9), Demir Taht %56,8 → %77,3; öteki tarzlar ±6 puan; son dağılımı %6,6–%17,7, hakimiyet %70,6. | Bot desteği olan oyuncunun desteği seçeceğini varsaymıyor; gerçek oyuncuda istila oranı daha yüksek olabilir. Yenilgi sahnesine (`kaybet`) hiç bakılmıyor. |
+
 ## Paket 5: arayüz incelemesi düzeltmeleri — 2026-11-10
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |

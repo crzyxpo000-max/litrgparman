@@ -353,10 +353,18 @@ class Simulator(private val content: Content) {
         else -> 0.0
     }
 
+    /**
+     * Seçimin ardından gelen sahne. Savaş açan seçimin `sonraki`'si yoktur: oyuncu savaşa kazanmak için girer, bu yüzden
+     * ileri bakış zafer sahnesinden sürer. Bu olmadan bot savaşın arkasındaki ödülü (ör. `kadimler_yenildi`) göremiyor,
+     * yenilgiden sonra "bir kez daha" yerine hep geri çekiliyordu (DECISIONS #178).
+     */
+    private fun ChoiceDef.sceneAhead(): String? = next ?: effects.filterIsInstance<Effect.StartCombat>().firstOrNull()?.spec?.win
+
     private fun choiceScore(c: ChoiceDef, p: Profile, depth: Int = 2): Double {
-        c.next?.let { n -> content.endings.forScene(n)?.let { return if (it.id == p.ending) 1e6 else -1e3 } }
+        val after = c.sceneAhead()
+        after?.let { n -> content.endings.forScene(n)?.let { return if (it.id == p.ending) 1e6 else -1e3 } }
         val own = c.effects.sumOf { effectScore(it, p) }
-        val ahead = if (depth <= 0) 0.0 else c.next?.let { content.scenes[it] }?.choices
+        val ahead = if (depth <= 0) 0.0 else after?.let { content.scenes[it] }?.choices
             ?.maxOfOrNull { choiceScore(it, p, depth - 1) }?.coerceAtLeast(0.0) ?: 0.0
         return own + 0.9 * ahead
     }

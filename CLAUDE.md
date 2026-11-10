@@ -173,7 +173,8 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - İçerik değiştikten sonra `:engine:validateContent` ve `:engine:test` çalıştır (ContentFilesTest gerçek içeriği doğrular).
 
 - **Aşama 7:** düşman başvurusu `"id@120"` (sabit seviye), `"id@dunya"`/`"@dunya+20"` (dünya seviyesi ±%, `Progression.worldLevel`),
-  `"id@oyuncu+5"` (oyuncu seviyesi ±n); ölçekleme `combat/EnemyScaling.kt`. Perde 2+ bölge düşmanları ve kapılar dünya seviyesine ölçeklenir
+  `"id@oyuncu+5"` (oyuncu seviyesi ±n), `"id@oyuncu-10%"` (oyuncu seviyesinin ±%n'i, oyuncunun kademesinde; Perde 3–4'te destek ve
+  yeniden deneme indirimi bununla yazılır, ±n seviye o seviyelerde etkisizdir, DECISIONS #177); ölçekleme `combat/EnemyScaling.kt`. Perde 2+ bölge düşmanları ve kapılar dünya seviyesine ölçeklenir
   (`Progression.worldLevel`: Gün 30'da eğrinin yarısı, Gün 50'ye doğru tam eğri; DECISIONS #164).
   Etkiler `xp_seviye n` (seviye XP'sinin %n'i; Perde 2+ ödüllerinde sabit `xp` yerine), `kule_kat n`, `yol id`. Koşullar `kademe_min`,
   `ordu_min` (birlik sayısı), `yoldas_sayisi_max`, `oz`, `yol`, `son_uygun`, `hicbir_son`, `son` (epilog). Seçenekte `kronik {tr,en}`

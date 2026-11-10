@@ -12,6 +12,17 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - Emülatör: `Medium_Phone_API_36.0` (`emulator -avd Medium_Phone_API_36.0`), adb ile kurulum.
 - OneDrive kilidi yüzünden lint ara sıra "dosya kullanılıyor" der: `./gradlew --stop` ve tekrar.
 
+## Final dengesi: Vali savaşı (2026-11-10)
+- [x] Ölçüm: 400 oynanışlık akış izi + Vali savaşına gelen 163 durumun 20'şer kez yeniden oynatılması. Düşük "istila kazanma oranı"
+      çoğu tarzda müzakere/terk seçimi; Vali savaşının kendisi %48 ve destekler ile ikinci deneme bunu değiştirmiyordu (±3–8 seviye).
+- [x] Düzeltme (DECISIONS #177): `@oyuncu±n%` başvurusu (oyuncunun kademesinde; `EnemyScaling`), Vali savaşının 9 başvurusu yüzdeli:
+      desteksiz %49 · Kaya %63 · Thessar/dikiş %73 · yakıt %77 · ikinci deneme %83. Testler `Asama7MotorTest`.
+- [x] Simülatör botu (DECISIONS #178): seçim puanı savaşın zafer sahnesinden ileri bakar; bot yenilgiden sonra yeniden dener.
+      `docs/BALANCE.md` 1000 oynanışla yeniden üretildi: Koruyucu hedefe ulaşma %45,5 → %73,9, Demir Taht %56,8 → %77,3,
+      son dağılımı %6,6–%17,7, hakimiyet %70,6; `DengeTest` geçiyor.
+- [ ] Açık: Perde 3–4'ün öteki `@oyuncu±n` yeniden deneme indirimleri aynı biçimde etkisiz (dokunulmadı). Sv. 700'ün altında
+      istilaya gelen oyuncu Vali'yi nadiren yener (neden ölçülmedi). Emülatörde istila oynanmadı.
+
 ## Oyuncu gözüyle inceleme ve sadeleştirme paketleri (2026-11-09)
 - [x] İnceleme: `docs/INCELEME_AKIS.md` (akış kaydı 10 oynanış, emülatörde ilk 20 dakika, continuity-checker + yeni oyuncu ajanı;
       70 kavramlık envanter, 30 öneri, 8 soru). Kullanıcı kararları: ceza kurallı, meslek/Kredi kapanır, Yozlaşma Dikkat'e,

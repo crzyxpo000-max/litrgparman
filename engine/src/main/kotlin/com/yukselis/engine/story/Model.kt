@@ -500,7 +500,7 @@ data class Content(
 ) {
     /** Düşman tanımı; "id@seviye" ölçekli başvurudur. */
     fun enemy(ref: String): EnemyDef? = enemies[ref] ?: com.yukselis.engine.combat.EnemyScaling.parse(ref).let { (base, level) ->
-        if (level == null) null else enemies[base]?.let { com.yukselis.engine.combat.EnemyScaling.scale(it, level) }
+        if (level == null) null else enemies[base]?.let { com.yukselis.engine.combat.EnemyScaling.scale(it, level, com.yukselis.engine.combat.EnemyScaling.pinnedGrade(ref)) }
     }
 
     companion object {

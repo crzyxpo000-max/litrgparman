@@ -109,7 +109,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
     fun enemyDef(id: String, state: WorldState): EnemyDef? {
         content.enemies[id]?.let { return it }
         // Ölçekli başvuru: "id@seviye" (Aşama 7).
-        EnemyScaling.parse(id).let { (base, level) -> if (level != null) return content.enemies[base]?.let { EnemyScaling.scale(it, level) } }
+        EnemyScaling.parse(id).let { (base, level) -> if (level != null) return content.enemies[base]?.let { EnemyScaling.scale(it, level, EnemyScaling.pinnedGrade(id)) } }
         if (!id.startsWith(com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX)) return null
         val npcId = id.removePrefix(com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX)
         val d = content.npcs[npcId] ?: return null

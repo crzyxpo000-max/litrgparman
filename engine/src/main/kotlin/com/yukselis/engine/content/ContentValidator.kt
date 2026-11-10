@@ -97,7 +97,7 @@ object ContentValidator {
                             id.startsWith(com.yukselis.engine.npc.NpcEngine.ENEMY_PREFIX) ->
                                 if (npcId != Content.FOCUS && content.npcs[npcId]?.combat == null) problems += "$where: '$id' için NPC ya da savaş bloğu yok"
                             com.yukselis.engine.combat.EnemyScaling.baseId(id) !in content.enemies -> problems += "$where: tanımsız düşman '$id'"
-                            !com.yukselis.engine.combat.EnemyScaling.validSuffix(id) -> problems += "$where: geçersiz seviye eki '$id' (sayı, dunya±n ya da oyuncu±n)"
+                            !com.yukselis.engine.combat.EnemyScaling.validSuffix(id) -> problems += "$where: geçersiz seviye eki '$id' (sayı, dunya±n, oyuncu±n ya da oyuncu±n%)"
                         }
                     }
                     listOfNotNull(e.spec.win, e.spec.lose, e.spec.flee).forEach {
