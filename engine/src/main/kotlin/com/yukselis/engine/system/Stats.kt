@@ -69,6 +69,12 @@ object Progression {
     /** Meslek teklifi seviyesi (GDD açık bırakıyor; DECISIONS #21). */
     const val PROFESSION_OFFER_LEVEL = 5
 
+    // Paket 4 (DECISIONS #166–#168): meslek/üretim ve Kredi kapalı (Öz Kristali tek para birimi), Yozlaşma Dikkat'e katıldı.
+    // Kod duruyor, anahtarlar kapalı: eski kayıtlar açılır, içerik anahtarları ayrıştırılır ama etkisizdir.
+    const val PROFESSIONS_ENABLED = false
+    const val CREDITS_ENABLED = false
+    const val CORRUPTION_ENABLED = false
+
     const val SKILL_MAX_LEVEL = 10
 
     /** Yetenek seviyesi için gereken kullanım XP'si: 4 · L (1→10 toplam 180). */

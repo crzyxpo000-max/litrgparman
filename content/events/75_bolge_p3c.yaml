@@ -81,7 +81,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: -3, merhamet: -2 }
               - bayrak: "bl13_police_ortak"
-              - kredi: 300
+              - oz_kristali: 12
               - tohum: { olay: "bl13_kd_police_liste", gecikme: { min: 2, max: 4 }, kosul: { bolum: 13, gun_max: 291 }, hatirlatma: { tr: "Poliçecinin masasından aldığın pay cebinde ağırlaşıyor.", en: "The cut you took from the policy table is getting heavy in your pocket." } }
             sonraki: "bl13_kd_police_pay"
           - id: "gec"
@@ -124,7 +124,7 @@ olaylar:
           - id: "tut"
             etiket: { tr: "Kasayı al; fırtına gecesi işe yarar", en: "Take the cashbox. It'll come in handy on storm night" }
             etkiler:
-              - kredi: 200
+              - oz_kristali: 8
               - ahlak: { insanlik: -1 }
             sonraki: "@akis"
 

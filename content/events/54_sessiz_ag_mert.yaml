@@ -512,7 +512,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: -3, merhamet: -2 }
               - bayrak: "mert_parca_loncaya"
-              - kredi: 300
+              - oz_kristali: 12
               - itibar: { lonca: 8, sessiz_ag: -10 }
               - iliski: { mert_kilic: { guven: -18, korku: 6 } }
               - hafiza: { npc: "mert_kilic", id: "verisini_satti", agirlik: -40 }
@@ -561,24 +561,24 @@ olaylar:
 
       - id: "mkp_sat"
         paragraflar:
-          - { tr: "Hurdalığın ustabaşı parçayı teraziye koyup ıslık çalıyor, sonra kasadan üç yüz kredi sayıyor. \"Bundan başka varsa getir,\" diyor. \"Kim getirirse getirsin.\"", en: "The scrapyard foreman sets the shard on a scale, whistles, and counts three hundred credits out of the till. \"Got more like this, bring 'em,\" he says. \"Don't care who brings 'em.\"" }
+          - { tr: "Hurdalığın ustabaşı parçayı teraziye koyup ıslık çalıyor, sonra kasadan on iki kristal sayıyor. \"Bundan başka varsa getir,\" diyor. \"Kim getirirse getirsin.\"", en: "The scrapyard foreman sets the shard on a scale, whistles, and counts twelve crystals out of the till. \"Got more like this, bring 'em,\" he says. \"Don't care who brings 'em.\"" }
           - { tr: "{npc:mert_kilic} hurdalığın tel örgüsünün ardından izliyor. Gözlerinde öfke yok; Öğretici'de de yoktu. Defterini çıkarıp bir şey yazıyor, sonra cebine geri koyuyor.", en: "{npc:mert_kilic} watches from behind the scrapyard fence. There's no anger in his eyes. There wasn't any in the Tutorial, either. He takes out his notebook, writes something down, and puts it away." }
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
             metin: { tr: "beni de satar mısın? bir gün? yalnızca merak ettim. cevap verme.", en: "would you sell me too? someday? just curious. don't answer." }
         secenekler:
           - id: "say"
-            etiket: { tr: "Kredileri say", en: "Count the credits" }
+            etiket: { tr: "Kristalleri say", en: "Count the crystals" }
             etkiler:
               - ahlak: { insanlik: -1 }
               - iliski: { yanki: { guven: -4 } }
-            kronik: { tr: "Kaynak kodun ilk parçasının parasını, ustabaşından sonra bir de sen tek tek saydın.", en: "You counted out the price of the first piece of source code, one credit at a time." }
+            kronik: { tr: "Kaynak kodun ilk parçasının parasını, ustabaşından sonra bir de sen tek tek saydın.", en: "You counted out the price of the first piece of source code, one crystal at a time." }
             sonraki: "@akis"
           - id: "pay"
             etiket: { tr: "Yarısını {npc:mert_kilic|e} uzat", en: "Hold out half to {npc:mert_kilic}" }
             etkiler:
               - ahlak: { merhamet: 1, duzen: -1 }
-              - kredi: -150
+              - oz_kristali: -6
               - iliski: { mert_kilic: { guven: 3 } }
             kronik: { tr: "Sattığın parçanın parasının yarısını {npc:mert_kilic|e} uzattın; satılan şey bununla geri gelmedi.", en: "You held out half the money to {npc:mert_kilic}. It didn't buy the shard back." }
             sonraki: "@akis"
@@ -599,7 +599,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - ahlak: { insanlik: -1, duzen: -2 }
-              - yozlasma: 3
+              - dikkat: 3
               - bayrak: "mert_parca_yankiya"
               - bilgi: "sa_kaynak_farki"
               - iliski: { yanki: { guven: 10, baglilik: 6 }, mert_kilic: { guven: -4, saygi: 4 } }
@@ -614,7 +614,7 @@ olaylar:
             gerekli: { stat: { int: 45 } }
             etkiler:
               - ahlak: { insanlik: 1, duzen: -1 }
-              - yozlasma: 2
+              - dikkat: 2
               - bayrak: "mert_parca_yankiya"
               - bilgi: "sa_kaynak_farki"
               - itibar: { sessiz_ag: 6 }
@@ -692,9 +692,10 @@ olaylar:
             sonraki: "mkp_kapi"
           - id: "ode"
             etiket: { tr: "Kapıdakilere parçanın bedelini öde", en: "Pay the men at the door for the shard" }
+            gerekli: { oz_kristali_min: 5 }
             etkiler:
               - ahlak: { duzen: 2, merhamet: 1 }
-              - kredi: -120
+              - oz_kristali: -5
               - itibar: { lonca: 3 }
               - iliski: { mert_kilic: { guven: 5 } }
               - tohum: { olay: "mert_takip_edildi", gecikme: { min: 40, max: 60 }, kosul: { npc_hayatta: "mert_kilic" }, hatirlatma: { tr: "Kurşun kaplı beslenme çantasındaki parçanın peşini bırakmayanlar var.", en: "Somebody hasn't given up on that piece from the lead-lined lunch box." } }
@@ -756,7 +757,7 @@ olaylar:
 
       - id: "mkp_odendi"
         paragraflar:
-          - { tr: "Avcılar kredileri sayarken gözlükleri bir an daha üstünde oyalanıyor. \"Patron memnun kalır,\" diyor biri. \"Ama bu adamın arkasında kimin durduğunu bu işteki herkese anlatacağım.\"", en: "The hunters count the credits, their glasses lingering on you a beat longer. \"Boss'll be happy,\" one says. \"But I'm telling everybody in the business who's standing behind this guy.\"" }
+          - { tr: "Avcılar kristalleri sayarken gözlükleri bir an daha üstünde oyalanıyor. \"Patron memnun kalır,\" diyor biri. \"Ama bu adamın arkasında kimin durduğunu bu işteki herkese anlatacağım.\"", en: "The hunters count the crystals, their glasses lingering on you a beat longer. \"Boss'll be happy,\" one says. \"But I'm telling everybody in the business who's standing behind this guy.\"" }
         secenekler:
           - id: "soyle"
             tur: "aciga_vur"
@@ -1154,7 +1155,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - ahlak: { insanlik: -2, duzen: -2 }
-              - yozlasma: 4
+              - dikkat: 4
               - bayrak: "sa_kaynak_avi_tamam"
               - esya: { kaynak_parcasi: 1 }
               - unvan: "kaynak_avcisi"
@@ -1204,7 +1205,7 @@ olaylar:
             etiket: { tr: "Dediğini yap: şişeler, bir yudum, sonra kapat", en: "Do what it said. Bottles, a sip, then shut it" }
             etkiler:
               - ahlak: { merhamet: 2, insanlik: 2 }
-              - yozlasma: 2
+              - dikkat: 2
               - bayrak: "sa_kaynak_avi_tamam"
               - esya: { kaynak_parcasi: 2 }
               - unvan: "kaynak_avcisi"
@@ -1346,7 +1347,7 @@ olaylar:
               - ahlak: { merhamet: -8, insanlik: -3 }
               - bayrak: "mert_teslim_edildi"
               - bayrak: "mert_isaretlendi"
-              - kredi: 200
+              - oz_kristali: 8
               - itibar: { sessiz_ag: -12 }
               - iliski: { mert_kilic: { guven: -30, korku: 15, baglilik: -10 }, yanki: { guven: -4 } }
               - hafiza: { npc: "mert_kilic", id: "olay:mert_takip_edildi", agirlik: -50 }
@@ -1467,7 +1468,7 @@ olaylar:
             gerekli: { iliski_min: { yanki: { guven: 30 } } }
             etkiler:
               - ahlak: { duzen: -2 }
-              - yozlasma: 2
+              - dikkat: 2
               - bilgi: "sa_kadim_gozu"
               - iliski: { yanki: { guven: 6, saygi: 6 }, mert_kilic: { korku: 6, saygi: 4 } }
             kronik: { tr: "Kafandaki sesin bir Kadim gözüne karşılık bakmasına izin verdin; o göz bakılmaya alışkın değildi.", en: "You let the voice in your head look back at an Ancient eye. That eye wasn't used to being looked at." }
@@ -1610,7 +1611,7 @@ olaylar:
       - id: "mtk_teslim"
         paragraflar:
           - { tr: "Kolunu çekince {npc:mert_kilic} bir an kalabalığın ortasında kalakalıp sana bakıyor; gözlüklüler iki yanına geçmiş bile. Hiç bağırmıyor, yalnızca götürülürken defterini ceketinin içine sokuyor.", en: "You pull your arm free. For a second {npc:mert_kilic} just stands there in the crowd, looking at you. The glasses guys move in on either side. He doesn't yell. On his way out, he just tucks his notebook inside his jacket." }
-          - { tr: "Uzun olan da acele etmeden peşlerinden yürüyor. Avucundaki kredi kesesi tuhaf biçimde ağır geliyor.", en: "The tall one walks after them. No hurry. The pouch of credits in your hand is weirdly heavy." }
+          - { tr: "Uzun olan da acele etmeden peşlerinden yürüyor. Avucundaki kristal kesesi tuhaf biçimde ağır geliyor.", en: "The tall one walks after them. No hurry. The pouch of crystals in your hand is weirdly heavy." }
           - { tr: "İki gün sonra yayıncı kız seni santralin kapısında durduruyor. Sesi buz gibi: \"Döndü. Tek parça hâlinde. Biri borcunu ödemiş. Kim olduğunu söylemiyor; yalnızca gri bir şey olduğunu söyledi.\"", en: "Two days later, the streamer kid stops you at the exchange door. \"He's back,\" she says, ice cold. \"In one piece. Somebody paid off his debt. He won't say who. But it was something gray. He said that much.\"" }
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
@@ -1627,7 +1628,7 @@ olaylar:
             etiket: { tr: "{npc:mert_kilic|in} kapısını çal ve özür dile", en: "Knock on his door and apologize" }
             etkiler:
               - ahlak: { merhamet: 2, insanlik: 2 }
-              - kredi: -200
+              - oz_kristali: -8
               - iliski: { mert_kilic: { guven: 8 } }
             kronik: { tr: "Sattığın adamın kapısını çalıp özür diledin, parayı da geri verdin. Parayı aldı.", en: "You knocked on the door of the man you'd sold, apologized, and gave the money back. He took the money." }
             sonraki: "@akis"
@@ -1856,7 +1857,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - ahlak: { insanlik: -2, duzen: -1 }
-              - yozlasma: 3
+              - dikkat: 3
               - bayrak: "sa_kule_kodu_okundu"
               - bayrak: "sa_kule_kodu_yanki"
               - bilgi: "sa_kule_kodu"
@@ -2441,12 +2442,13 @@ olaylar:
             sonraki: "mmi_donus"
           - id: "satin_al"
             etiket: { tr: "Gri sözcüye git, onu geri satın al", en: "Go to the gray speaker. Buy him back" }
+            gerekli: { oz_kristali_min: 20 }
             goster: { bayrak: "mert_oyuncu_satti" }
             etkiler:
               - ahlak: { merhamet: 3, insanlik: 3 }
               - bayrak_kaldir: "mert_kadimlere_satti"
               - bayrak: "mert_ihaneti_onlendi"
-              - kredi: -500
+              - oz_kristali: -20
               - degisken: { kadim_tehdit: 3 }
               - itibar: { kadimler: -10, sessiz_ag: 8 }
               - iliski: { mert_kilic: { guven: 15, korku: -6 } }
@@ -2541,7 +2543,7 @@ olaylar:
 
       - id: "mmi_satin"
         paragraflar:
-          - { tr: "Otelin lobisinde gri pelerin kredileri saymaya bile tenezzül etmiyor. \"Sattığınızı geri almak,\" diyor senin sesinle. \"Ne kadar insanca. Ne kadar pahalı.\" Bir kartı yırttığı anda {npc:mert_kilic|in} bilgisayarındaki gri mühür kararıyor.", en: "In the hotel lobby, the gray cloak doesn't even count the credits. \"Buying back what you sold,\" it says in your voice. \"How human. How expensive.\" It tears a card in half, and the gray seal on {npc:mert_kilic|pos} laptop goes dark at the same instant." }
+          - { tr: "Otelin lobisinde gri pelerin kristalleri saymaya bile tenezzül etmiyor. \"Sattığınızı geri almak,\" diyor senin sesinle. \"Ne kadar insanca. Ne kadar pahalı.\" Bir kartı yırttığı anda {npc:mert_kilic|in} bilgisayarındaki gri mühür kararıyor.", en: "In the hotel lobby, the gray cloak doesn't even count the crystals. \"Buying back what you sold,\" it says in your voice. \"How human. How expensive.\" It tears a card in half, and the gray seal on {npc:mert_kilic|pos} laptop goes dark at the same instant." }
           - { tr: "Santrale döndüğünde {npc:mert_kilic|i} kapıda seni beklerken buluyorsun. \"Biliyorum,\" diyor. \"Beni sattığını zaten biliyordum. Geri aldığını da şimdi öğrendim.\" Bir süre susuyor. \"Defterimde iki satır var, yan yana. Hangisine inanacağımı bilemiyorum.\"", en: "When you get back to the exchange, {npc:mert_kilic} is waiting at the door. \"I know,\" he says. \"I knew you sold me. I just found out you bought me back.\" He's quiet a moment. \"Those two lines sit side by side in my notebook. I don't know which one to believe.\"" }
         secenekler:
           - id: "ikinci"
@@ -2681,7 +2683,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - ahlak: { insanlik: -4, merhamet: -3 }
-              - yozlasma: 6
+              - dikkat: 6
               - iliski: { yanki: { guven: -15, korku: 12 } }
               - hafiza: { npc: "yanki", id: "tehdit_edildi", agirlik: -45 }
             kronik: { tr: "Kafandaki sesi geldiği yerin haritasını çizmeye zorladın; ses çizdi, ama o günü tehdit edildiği gün diye belleğine kazıdı.", en: "You forced the voice in your head to map the place it came from. It did, and it filed that day away as the day you threatened it." }
@@ -2725,7 +2727,7 @@ olaylar:
             gerekli: { iliski_min: { yanki: { guven: 40 } } }
             etkiler:
               - ahlak: { duzen: -2, insanlik: 1 }
-              - yozlasma: 2
+              - dikkat: 2
               - iliski: { yanki: { guven: 10, baglilik: 8 } }
               - hafiza: { npc: "yanki", id: "olay:sessiz_ag_4_cekirdek_haritasi", agirlik: 50 }
             kronik: { tr: "Sistem Çekirdeği'nin kapısını kimin açacağına kafandaki ses karar versin dedin.", en: "You left it to the voice in your head to decide who opens the door to the System Core." }
@@ -3090,7 +3092,7 @@ olaylar:
             gerekli: { iliski_min: { yanki: { guven: 50 } } }
             etkiler:
               - ahlak: { duzen: -3, insanlik: -1 }
-              - yozlasma: 4
+              - dikkat: 4
               - unvan: "kok_bekcisini_kiran"
               - xp_seviye: 150
               - iliski: { yanki: { guven: 8, baglilik: 6 } }
@@ -3123,7 +3125,7 @@ olaylar:
             gerekli: { iliski_min: { yanki: { guven: 50 } } }
             etkiler:
               - ahlak: { duzen: -3, insanlik: -1 }
-              - yozlasma: 4
+              - dikkat: 4
               - unvan: "kok_bekcisini_kiran"
               - xp_seviye: 150
               - iliski: { yanki: { guven: 8, baglilik: 6 } }
@@ -3161,7 +3163,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - ahlak: { duzen: -2 }
-              - yozlasma: 5
+              - dikkat: 5
               - unvan: "kok_bekcisini_kiran"
               - xp_seviye: 120
               - iliski: { yanki: { guven: 6, saygi: 6 } }
@@ -3460,7 +3462,7 @@ olaylar:
             etiket: { tr: "İmzayı zorla al", en: "Take the signature by force" }
             etkiler:
               - ahlak: { insanlik: -6, merhamet: -4 }
-              - yozlasma: 8
+              - dikkat: 8
               - iliski: { yanki: { guven: -15, korku: 12 } }
               - hafiza: { npc: "yanki", id: "tehdit_edildi", agirlik: -50 }
               - tohum: { olay: "mert_son_log", gecikme: { min: 1, max: 1 }, kosul: { npc_hayatta: "mert_kilic" } }

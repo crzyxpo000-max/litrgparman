@@ -62,7 +62,8 @@ class EffectApplier(private val content: Content) {
         is Effect.GrantSkill -> grantSkill(state, effect.skillId)
         is Effect.SkillXp -> skillXp(state, effect.skillId, effect.amount)
         is Effect.AddItem -> addItem(state, effect.itemId, effect.count)
-        is Effect.AddCredits -> {
+        // Paket 4 (DECISIONS #167): Kredi kapalı; etki ve ganimet sessizce yutulur, bakiye değişmez.
+        is Effect.AddCredits -> if (!Progression.CREDITS_ENABLED) Result(state, emptyList()) else {
             val p = state.player
             val base = state.withPlayer { it.copy(credits = (p.credits + effect.amount).coerceAtLeast(0)) }
             val tab = if (effect.amount > 0) unlockTab(base, WorldState.TAB_BAG) else Result(base, emptyList())
@@ -80,7 +81,8 @@ class EffectApplier(private val content: Content) {
         is Effect.StartCombat -> Result(state, emptyList())
         is Effect.PlantSeed -> plantSeed(state, effect)
         is Effect.ShiftAttention -> shiftAttention(state, effect.delta)
-        is Effect.ShiftCorruption -> shiftCorruption(state, effect.delta)
+        // Paket 4 (DECISIONS #168): Yozlaşma Dikkat'e katıldı; `yozlasma n` etkisi 1:1 Dikkat artırır (tek ölçek).
+        is Effect.ShiftCorruption -> if (Progression.CORRUPTION_ENABLED) shiftCorruption(state, effect.delta) else shiftAttention(state, effect.delta)
         Effect.Reveal -> reveal(state)
         is Effect.Feat -> feat(state, effect.featId)
         is Effect.SetQuest -> setQuest(state, effect.questId, effect.status)
@@ -366,10 +368,12 @@ class EffectApplier(private val content: Content) {
         var p = state.player.copy(skills = state.player.skills + SkillState(skillId))
         val lines = mutableListOf(def.description)
         var corruption = state.corruption
+        var attentionDelta = 0
         if (def.penalty.isNotEmpty()) {
             p = applyPenalty(p, def.penalty)
             lines += texts.formatL("ceza_yetenegi", "penalty" to statList(def.penalty))
-            corruption = (corruption + PENALTY_CORRUPTION).coerceAtMost(100)
+            // Paket 4 (DECISIONS #168): ceza yetenekleri doğrudan Dikkat artırır.
+            if (Progression.CORRUPTION_ENABLED) corruption = (corruption + PENALTY_CORRUPTION).coerceAtMost(100) else attentionDelta = PENALTY_ATTENTION
         }
         val claimed = if (def.rarity == com.yukselis.engine.system.Rarity.UNIQUE) {
             state.firstClaims + (WorldState.UNIQUE_CLAIM_PREFIX + skillId to WorldState.PLAYER_CLAIM)
@@ -377,9 +381,10 @@ class EffectApplier(private val content: Content) {
             state.firstClaims
         }
         val tab = unlockTab(state.copy(player = p, firstClaims = claimed, corruption = corruption), WorldState.TAB_SKILLS)
+        val att = shiftAttention(tab.state, attentionDelta)
         return Result(
-            tab.state,
-            listOf(Notice(NoticeKind.SKILL, texts.formatL("yetenek_kazanildi", "name" to def.name), lines, def.rarity)) + tab.notices,
+            att.state,
+            listOf(Notice(NoticeKind.SKILL, texts.formatL("yetenek_kazanildi", "name" to def.name), lines, def.rarity)) + tab.notices + att.notices,
         )
     }
 
@@ -544,6 +549,8 @@ class EffectApplier(private val content: Content) {
     // ---- Tetikleyiciler ----
 
     private fun offerProfession(state: WorldState): Result {
+        // Paket 4 (DECISIONS #166): meslek sistemi kapalı; teklif hiç gelmez (`meslek_teklifi` etkisi de).
+        if (!Progression.PROFESSIONS_ENABLED) return Result(state, emptyList())
         if (state.player.profession != null || content.professions.isEmpty() || state.prompts.any { it.kind == PromptKind.PROFESSION }) {
             return Result(state, emptyList())
         }
@@ -567,7 +574,7 @@ class EffectApplier(private val content: Content) {
             if (options.isNotEmpty()) enqueue(SystemPrompt(PromptKind.CLASS_OFFER, options), Notice(NoticeKind.CLASS, texts.format("sinif_teklifi")))
         }
 
-        if (p.level >= Progression.PROFESSION_OFFER_LEVEL) {
+        if (Progression.PROFESSIONS_ENABLED && p.level >= Progression.PROFESSION_OFFER_LEVEL) {
             val r = offerProfession(s)
             s = r.state
             notices += r.notices
@@ -730,6 +737,9 @@ class EffectApplier(private val content: Content) {
         fun attentionFlag(threshold: Int, act: Int): String = if (act <= 1) "dikkat_esik_$threshold" else "dikkat_esik_${threshold}_p$act"
         const val FEAT_ATTENTION = 2
         const val PENALTY_CORRUPTION = 10
+
+        /** Paket 4: ceza yeteneği kazanıldığında Dikkat artışı (Yozlaşma yerine). */
+        const val PENALTY_ATTENTION = 10
 
         /** İtibar dalgası: A'ya d itibar → B'ye d · ilişki(A,B)/100 · 0,3. */
         const val RIPPLE = 0.3

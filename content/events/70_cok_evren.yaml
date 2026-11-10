@@ -706,7 +706,6 @@ olaylar:
             etkiler:
               - bolge: "batik_takimada"
               - bayrak: "batik_fener_goruldu"
-              - kredi: -150
               - ahlak: { merhamet: 5, insanlik: 2 }
             kronik: { tr: "Son Fener'in çocuklarına kendi erzakını dağıttın; çantan boşaldı, küçük eller doldu.", en: "You handed your own rations out to the children of the Last Light until your pack was empty and their hands were full." }
             sonraki: "fener_bekci"
@@ -772,7 +771,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - bayrak: "batik_gorunur"
-              - yozlasma: 6
+              - dikkat: 6
               - ahlak: { merhamet: 4, insanlik: -3 }
               - iliski: { yanki: { guven: 8, baglilik: 5 } }
               - tohum: { olay: "batik_son_basakci", gecikme: { min: 1, max: 2 }, hatirlatma: { tr: "Son Fener'in başında söylediklerin takımadada yankılanıyor.", en: "What you said at the Last Lighthouse is still echoing through the Reach." } }
@@ -1306,7 +1305,7 @@ olaylar:
               - gorev: { cok_evren_batik: tamam }
               - esya: { basakci_cekirdegi: 1 }
               - ahlak: { insanlik: -12, merhamet: -6 }
-              - yozlasma: 8
+              - dikkat: 8
               - xp_seviye: 220
               - stat: { str: 8, end: 8, wil: 8 }
               - itibar: { yukselenler: 6, siginak: -6 }
@@ -1322,7 +1321,7 @@ olaylar:
               - gorev: { cok_evren_batik: tamam }
               - esya: { basakci_cekirdegi: 1 }
               - ahlak: { merhamet: 8, duzen: -3 }
-              - yozlasma: 5
+              - dikkat: 5
               - iliski: { yanki: { guven: 8, baglilik: 6 } }
               - xp_seviye: 120
             kronik: { tr: "Son Başakçı'yı devirip topladığı seviyeleri hasat edilmiş bir halka geri dağıttın. Sönükler iki yüz yıl sonra yeniden sayılır oldu.", en: "You brought down the Last Gleaner and handed what it had collected back to a harvested people. Two hundred years later, the Dimmed started being counted again." }
@@ -1641,12 +1640,13 @@ olaylar:
             sonraki: "tarti_terazi"
           - id: "pazarlik"
             etiket: { tr: "Bir tezgâhtan söz pulu almaya çalış", en: "Try to buy word-chits off a stall" }
-            zar: { stat: "cha", zorluk: 380, tek: false, basarisiz: "tarti_kazik", basarisiz_etkiler: [{ kredi: -200 }] }
+            gerekli: { oz_kristali_min: 4 }
+            zar: { stat: "cha", zorluk: 380, tek: false, basarisiz: "tarti_kazik", basarisiz_etkiler: [{ oz_kristali: -8 }] }
             etkiler:
               - bayrak: "kervan_varildi"
               - gorev: { cok_evren_kervan: basla }
               - esya: { pirinc_pul: 20 }
-              - kredi: -100
+              - oz_kristali: -4
             sonraki: "tarti_terazi"
           - id: "agirlik"
             tur: "gosteris"
@@ -1673,7 +1673,7 @@ olaylar:
       - id: "tarti_kazik"
         yer: "pirinc_kervan"
         paragraflar:
-          - { tr: "Tezgâhtaki Tavvar önce kredilerine, sonra sana, sonra yine kredilerine bakıyor. Pazarlığın ilk cümlesinde ona yirmi pul borçlanmışsın, ikincisinde kırk.", en: "The Tavvari at the stall looks at your credits, then at you, then back at the credits. Your first sentence of haggling cost you twenty chits. Your second cost forty." }
+          - { tr: "Tezgâhtaki Tavvar önce kesendeki kristallere, sonra sana, sonra yine kristallere bakıyor. Pazarlığın ilk cümlesinde ona yirmi pul borçlanmışsın, ikincisinde kırk.", en: "The Tavvari at the stall looks at your crystals, then at you, then back at the crystals. Your first sentence of haggling cost you twenty chits. Your second cost forty." }
           - { tr: "Kalabalıktan birkaç kişi gülüyor. Burada konuşmayı bilmeyen, ne kadar güçlü olursa olsun yoksuldur.", en: "A few people in the crowd laugh. Here, somebody who doesn't know how to talk is poor, no matter how strong they are." }
         secenekler:
           - id: "ode"
@@ -1939,7 +1939,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - bayrak: "ondalik_bozuldu"
-              - yozlasma: 4
+              - dikkat: 4
               - ahlak: { duzen: -8, merhamet: 4 }
               - iliski: { yanki: { guven: 6, baglilik: 4 } }
               - itibar: { kadimler: -6 }
@@ -2442,7 +2442,7 @@ olaylar:
               - gorev: { cok_evren_kervan: tamam }
               - esya: { muhur_parcasi: 3 }
               - ahlak: { insanlik: -6, duzen: -2 }
-              - yozlasma: 6
+              - dikkat: 6
               - stat: { int: 10, wil: 10 }
               - itibar: { kadimler: -12 }
               - degisken: { kadim_tehdit: -5 }
@@ -2960,7 +2960,7 @@ olaylar:
               - bayrak: "taht_talip"
               - unvan: "yedinci_koltuk"
               - ahlak: { insanlik: -15, merhamet: -4 }
-              - yozlasma: 10
+              - dikkat: 10
               - itibar: { yukselenler: 8, kadimler: 4 }
               - degisken: { kadim_tehdit: 3 }
               - tohum: { olay: "taht_varis_duellosu", gecikme: { min: 1, max: 2 }, hatirlatma: { tr: "Yedinci koltuğun önünde verdiğin cevap bir hükme dönüştü.", en: "The answer you gave in front of the seventh seat has turned into a ruling." } }
@@ -3235,7 +3235,7 @@ olaylar:
             etiket: { tr: "Kalan yıldızları içine çek", en: "Pull the leftover stars into yourself" }
             etkiler:
               - ahlak: { insanlik: -8 }
-              - yozlasma: 6
+              - dikkat: 6
               - stat: { wis: 8, wil: 8 }
               - xp_seviye: 90
               - tohum: { olay: "taht_yedinci_koltuk", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Uyuyan tanrıların bahçesinden döndüğünden beri {yer:yedi_taht} seni bekliyor.", en: "{yer:yedi_taht|b} has been waiting for you since you came back from the garden of sleeping gods." } }
@@ -3324,7 +3324,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - bolge: "yedi_taht"
-              - yozlasma: 5
+              - dikkat: 5
               - ahlak: { insanlik: -3, duzen: -2 }
               - iliski: { yanki: { guven: 6, baglilik: 4 } }
               - savas: { dusmanlar: ["varis_ossiran@oyuncu+4"], kazan: "varis_zafer", kaybet: "varis_yenilgi", kac: "varis_kacis" }
@@ -3391,7 +3391,7 @@ olaylar:
               - gorev: { cok_evren_taht: tamam }
               - esya: { ossiran_tac_parcasi: 1 }
               - ahlak: { insanlik: -14, merhamet: -6 }
-              - yozlasma: 10
+              - dikkat: 10
               - stat: { str: 10, int: 10, wil: 10 }
               - itibar: { kadimler: 5, yukselenler: 8 }
               - degisken: { kadim_tehdit: -6 }
@@ -3565,7 +3565,7 @@ olaylar:
             goster: { bayrak: "batik_hasat_yutuldu" }
             etkiler:
               - ahlak: { merhamet: -6, insanlik: -5 }
-              - yozlasma: 3
+              - dikkat: 3
             sonraki: "kesh_benim"
           - id: "sok"
             tur: "gosteris"
@@ -3574,7 +3574,7 @@ olaylar:
             gerekli: { stat: { wil: 300 } }
             etkiler:
               - stat: { str: -3, end: -3, wil: -3 }
-              - yozlasma: -4
+              - dikkat: -4
               - dikkat: 4
               - ahlak: { merhamet: 6, insanlik: 4 }
             sonraki: "kesh_sokum"
@@ -3659,7 +3659,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - stat: { wil: -4, per: -2 }
-              - yozlasma: -3
+              - dikkat: -3
               - ahlak: { merhamet: 6, insanlik: 4 }
               - iliski: { yanki: { guven: 6, baglilik: 6 } }
             sonraki: "kesh_oru_don"
@@ -3669,7 +3669,7 @@ olaylar:
             gerekli: { stat: { wil: 300 } }
             etkiler:
               - stat: { str: -3, end: -3, wil: -3 }
-              - yozlasma: -4
+              - dikkat: -4
               - dikkat: 3
               - ahlak: { merhamet: 5, insanlik: 2 }
             sonraki: "kesh_oru_don"

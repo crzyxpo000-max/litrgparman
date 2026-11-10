@@ -1,8 +1,8 @@
 # İlerleme
 
-Şu an: İnceleme (`docs/INCELEME_AKIS.md`), Paket 1 (hikaye), Paket 2 (ilk saat) ve Paket 3 (ritim) bitti. Sıradaki: Paket 4 sistem çıkarma (kısa plan + onay).
+Şu an: İnceleme (`docs/INCELEME_AKIS.md`), Paket 1 (hikaye), Paket 2 (ilk saat), Paket 3 (ritim) ve Paket 4 (sistem çıkarma) bitti. Sıradaki: Paket 5 arayüz incelemesi (önce rapor, sonra seçim).
 Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
-Son commit: c9cb51b Paket 2 (sonraki: Paket 3)
+Son commit: fde916d Paket 3 (sonraki: Paket 4 commit'i)
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
@@ -28,7 +28,11 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
       Perde 1'de el 2 kart, dünya seviyesi Gün 30–50 rampası (Gün 30–39 kayıp %57 → %41), 6 yeni Perde 1 keşif olayı
       (`events/31_kesif_p1.yaml`, TR/EN incelemeli) + 4 mevcut olaya `kesif` etiketi, cozumle.py düzeltmesi; `Paket3Test`;
       ölçüm tablosu STORY_FLOW "Paket 2 ve Paket 3 sonrası". Açık: Perde 2 açılış hikaye savaşlarında kayıp ~%50
-- [ ] Paket 4 — sistem çıkarma (meslek/Kredi kapalı, Yozlaşma → Dikkat, ordu/bilgi günlüğü kendini açan arayüz)
+- [x] **Paket 4 — sistem çıkarma** (DECISIONS #166–#169): meslek/üretim ve Kredi kapalı (`Progression.*_ENABLED`, kod durur),
+      Öz Kristali tek para birimi (110 kredi etkisi → kristal, 40 ödeme `oz_kristali_min` kilidi, anlatı uyarlandı), Yozlaşma Dikkat'e
+      katıldı (122 etki, 8 koşul, ceza yetenekleri/izler Dikkat), Ordu ve Bilgi günlüğü kalıcı kendini açma; Çanta/Durum/Yardım sade;
+      `Paket4Test`
+- [ ] Paket 5 — arayüz incelemesi (önce rapor `docs/UI_REVIEW.md`, sonra kullanıcı seçer)
 - [ ] Paket 5 — arayüz incelemesi (`docs/UI_REVIEW.md`, emülatör görüntüleri `docs/ui-review/`)
 
 ## Sanat entegrasyonu (2026-11-07)

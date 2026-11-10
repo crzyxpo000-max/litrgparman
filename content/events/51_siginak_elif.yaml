@@ -208,7 +208,7 @@ olaylar:
             etiket: { tr: "\"Pazarlık pazarlıktır.\"", en: "\"A deal's a deal.\"" }
             etkiler:
               - ahlak: { duzen: 2, merhamet: -1 }
-              - kredi: 150
+              - oz_kristali: 6
               - iliski: { elif_sari: { guven: -2 } }
             kronik: { tr: "Pazarlığın pazarlık olduğunu söyleyip payının tamamını aldın; Konsey'in kalkanı artık bir ortaktı.", en: "You said a deal's a deal and took your full cut. The Council's shield was a partner now." }
             sonraki: "siginak_1_konsey_mendirek"
@@ -470,13 +470,14 @@ olaylar:
         secenekler:
           - id: "ode"
             etiket: { tr: "\"Faturayı ben öderim.\"", en: "\"I'll cover the bill.\"" }
+            gerekli: { oz_kristali_min: 4 }
             etkiler:
               - bayrak: "siginak_1_bitti"
               - bayrak: "mendirek_loncaya"
               - degisken: { lonca_golgesi: 1 }
               - xp_seviye: 10
               - ahlak: { merhamet: 2, duzen: 1 }
-              - kredi: -100
+              - oz_kristali: -4
               - iliski: { elif_sari: { guven: 3 } }
               - tohum: { olay: "elif_konsey_oylamasi", gecikme: { min: 6, max: 14 }, kosul: { npc_hayatta: "elif_sari" }, hatirlatma: { tr: "Konsey'in biletini aldığın günden beri yedinci gişe seni bekliyor.", en: "Since the day you took the Council's ticket, the seventh ticket window has been waiting on you." } }
             kronik: { tr: "Mendireği Lonca bitirdi, faturayı sen ödedin; Konsey asıl kime borçlu olduğunu biliyordu.", en: "The Guild finished the breakwater and you paid the bill. The Council knew who it really owed." }

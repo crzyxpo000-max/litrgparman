@@ -154,6 +154,7 @@ class PlayerActions(private val content: Content, private val effects: EffectApp
     }
 
     fun craft(state: WorldState, recipeId: String): EffectApplier.Result {
+        if (!Progression.PROFESSIONS_ENABLED) throw ActionRejected("Meslek sistemi kapalı (Paket 4)")
         val recipe = content.recipes[recipeId] ?: throw ActionRejected("Tanımsız tarif: $recipeId")
         val prof = state.player.profession
         if (prof?.id != recipe.profession) throw ActionRejected("Bu tarif için ${recipe.profession} gerekli")

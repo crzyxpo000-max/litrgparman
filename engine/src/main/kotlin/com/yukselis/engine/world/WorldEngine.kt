@@ -658,7 +658,7 @@ class WorldEngine(
     fun skipFoci(state: WorldState): List<SkipFocus> = buildList {
         com.yukselis.engine.system.Stat.entries.forEach { add(SkipFocus.Train(it)) }
         add(SkipFocus.Gates)
-        if (state.player.profession != null) add(SkipFocus.Craft)
+        if (Progression.PROFESSIONS_ENABLED && state.player.profession != null) add(SkipFocus.Craft)
         effects.npc.companions(state).forEach { add(SkipFocus.Companion(it.id)) }
     }
 

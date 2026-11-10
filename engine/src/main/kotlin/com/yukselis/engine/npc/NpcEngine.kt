@@ -242,15 +242,19 @@ class NpcEngine(private val content: Content, private val effects: EffectApplier
         var stats = state.player.stats
         (def.statBonus.entries + def.statPenalty.entries).forEach { (st, d) -> stats = stats.plus(st, d) }
         val p = state.player.copy(traits = state.player.traits + trait, stats = stats)
-        val s = state.copy(player = p.copy(hp = p.hp.coerceAtMost(p.maxHp), mp = p.mp.coerceAtMost(p.maxMp)), corruption = (state.corruption + def.corruption).coerceIn(0, 100))
-        return EffectApplier.Result(s, listOf(Notice(NoticeKind.ECHO, texts.formatL("iz_kazanildi", "name" to def.name), listOf(def.description))))
+        val base = state.copy(player = p.copy(hp = p.hp.coerceAtMost(p.maxHp), mp = p.mp.coerceAtMost(p.maxMp)))
+        // Paket 4 (DECISIONS #168): izin "yozlaşması" artık Dikkat'e yazılır (tek ölçek).
+        val s = if (Progression.CORRUPTION_ENABLED) EffectApplier.Result(base.copy(corruption = (base.corruption + def.corruption).coerceIn(0, 100)), emptyList())
+        else effects.shiftAttention(base, def.corruption)
+        return EffectApplier.Result(s.state, listOf(Notice(NoticeKind.ECHO, texts.formatL("iz_kazanildi", "name" to def.name), listOf(def.description))) + s.notices)
     }
 
     private fun learn(state: WorldState, id: String): EffectApplier.Result {
         val def = content.knowledge[id] ?: error("Tanımsız bilgi: $id")
         if (id in state.knowledge) return r(state)
         return EffectApplier.Result(
-            state.copy(knowledge = state.knowledge + id),
+            // İlk gizli bilgi Bilgi günlüğünü kalıcı açar (Paket 4, DECISIONS #169).
+            state.copy(knowledge = state.knowledge + id, vars = state.vars + (WorldState.UI_KNOWLEDGE_VAR to 1)),
             listOf(Notice(NoticeKind.ANALYZE, texts.formatL("bilgi_eklendi", "name" to def.name), listOf(def.description))),
         )
     }
@@ -273,7 +277,9 @@ class NpcEngine(private val content: Content, private val effects: EffectApplier
         if (count == 0) return r(state)
         val n = ((state.player.army[unit] ?: 0) + count).coerceAtLeast(0)
         val army = if (n == 0) state.player.army - unit else state.player.army + (unit to n)
-        val s = state.copy(player = state.player.copy(army = army))
+        // İlk çağrı Ordu bölümünü kalıcı açar (Paket 4, DECISIONS #169).
+        val vars = if (count > 0) state.vars + (WorldState.UI_ARMY_VAR to 1) else state.vars
+        val s = state.copy(player = state.player.copy(army = army), vars = vars)
         val notices = if (count > 0) listOf(Notice(NoticeKind.SYSTEM, texts.formatL("ordu_katildi", "name" to def.name, "n" to LText("$count", "$count")))) else emptyList()
         return EffectApplier.Result(s, notices)
     }

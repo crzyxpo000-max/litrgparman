@@ -551,7 +551,7 @@ olaylar:
               - bayrak: "p4_yakit_kabul"
               - ahlak: { insanlik: -9, merhamet: -7 }
               - xp_seviye: 90
-              - yozlasma: 10
+              - dikkat: 10
               - degisken: { hayatta_kalan: -4 }
               - itibar: { yukselenler: 6, siginak: -8 }
               - iliski: { vahit: { baglilik: 10 }, deniz_arman: { guven: -10 } }
@@ -606,7 +606,7 @@ olaylar:
             etkiler:
               - bayrak: "p4_yanki_isini"
               - ahlak: { insanlik: -3, duzen: -2 }
-              - yozlasma: 5
+              - dikkat: 5
               - iliski: { yanki: { guven: 8, baglilik: 6 } }
             sonraki: "p4_fsp_son"
           - id: "loncayla_paylas"
@@ -1009,7 +1009,7 @@ olaylar:
             goster: { bayrak: "p4_yakit_kabul" }
             etkiler:
               - ahlak: { insanlik: -6, merhamet: -3 }
-              - yozlasma: 8
+              - dikkat: 8
               - degisken: { hayatta_kalan: -2 }
               - savas: { dusmanlar: ["istila_hasat_valisi@oyuncu-1"], ortam: ["tavan"], kazan: "p4_istila_zafer", kaybet: "p4_istila_yenilgi" }
           - id: "aras_once"
@@ -1137,7 +1137,7 @@ olaylar:
               - unvan: "vali_deviren"
               - xp_seviye: 280
               - ahlak: { insanlik: -6, merhamet: -2 }
-              - yozlasma: 6
+              - dikkat: 6
               - degisken: { kadim_tehdit: -22, hayatta_kalan: 5 }
               - esya: { hasat_cekirdegi: 1 }
             sonraki: "p4_istila_kapanis"
@@ -1404,7 +1404,7 @@ olaylar:
               - kontrol: { kiyikent_liman: "kadimler", kordon: "kadimler" }
               - degisken: { hayatta_kalan: -10, kadim_tehdit: 15 }
               - ahlak: { merhamet: -3, insanlik: -3 }
-              - yozlasma: 4
+              - dikkat: 4
               - tohum: { olay: "p4_yikik_kiyikent", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "İstilanın gecesinde yaptıkların şehrin dilinde.", en: "What you did the night of the invasion is on everybody's lips." } }
             sonraki: "@akis"
           - id: "kaya"
@@ -1858,7 +1858,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - ahlak: { insanlik: -4 }
-              - yozlasma: 6
+              - dikkat: 6
               - iliski: { yanki: { guven: 8, baglilik: 8 } }
             sonraki: "p4_scek_gizli"
           - id: "cik"
@@ -2068,7 +2068,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - gizle: 40
-              - yozlasma: 8
+              - dikkat: 8
               - ahlak: { insanlik: -4 }
               - iliski: { yanki: { guven: 6, baglilik: 6 } }
             sonraki: "p4_d100_silinme"
@@ -2182,7 +2182,7 @@ olaylar:
               - degisken: { hayatta_kalan: -3, kadim_tehdit: 5 }
               - ahlak: { insanlik: -2, merhamet: -1 }
               - gizle: 20
-              - yozlasma: 4
+              - dikkat: 4
             sonraki: "@akis"
 
   # ================================================================== PERDE 4 GENEL OLAYLARI
@@ -3072,7 +3072,7 @@ olaylar:
             etiket: { tr: "Tüccardan fazlasını geri iste", en: "Make the merchant pay back the extra" }
             etkiler:
               - ahlak: { duzen: 2, merhamet: 1 }
-              - kredi: 2000
+              - oz_kristali: 30
             sonraki: "@akis"
 
       - id: "p4_kacis_durdur"

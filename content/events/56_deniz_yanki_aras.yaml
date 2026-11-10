@@ -77,7 +77,7 @@ olaylar:
             gerekli: { iliski_min: { yanki: { guven: 30 } } }
             etkiler:
               - ahlak: { insanlik: -2, duzen: -2 }
-              - yozlasma: 3
+              - dikkat: 3
               - dikkat: 3
               - bilgi: "kardes_yakit_listesi"
               - iliski: { yanki: { guven: 6, baglilik: 4 } }
@@ -904,10 +904,11 @@ olaylar:
             sonraki: "dkb_karar"
           - id: "simit"
             etiket: { tr: "Limandan üç simit bul; martılara da bir tane", en: "Find three pretzels at the docks. One more for the gulls" }
+            gerekli: { oz_kristali_min: 1 }
             goster: { npc_hayatta: "deniz_arman" }
             etkiler:
               - ahlak: { insanlik: 5, merhamet: 2 }
-              - kredi: -20
+              - oz_kristali: -1
               - iliski: { deniz_arman: { baglilik: 10, guven: 6 } }
             kronik: { tr: "Kıyametin ortasında bir iskelede üç kişi simit yedi ve martılara pay ayırdı.", en: "In the middle of the apocalypse, three people ate pretzels on a pier and saved some for the gulls." }
             sonraki: "dkb_karar"
@@ -1229,7 +1230,7 @@ olaylar:
             gerekli: { iliski_min: { yanki: { guven: 30 } } }
             etkiler:
               - ahlak: { insanlik: -2, duzen: -2 }
-              - yozlasma: 3
+              - dikkat: 3
               - dikkat: 3
               - bilgi: "kardes_yakit_listesi"
               - iliski: { yanki: { guven: 6, baglilik: 4 } }
@@ -1343,9 +1344,10 @@ olaylar:
             sonraki: "dkb_iz"
           - id: "bekle"
             etiket: { tr: "Kapının önüne bir simit bırak ve bekle", en: "Leave a pretzel by the door and wait" }
+            gerekli: { oz_kristali_min: 1 }
             etkiler:
               - ahlak: { merhamet: 2, duzen: 1 }
-              - kredi: -5
+              - oz_kristali: -1
             kronik: { tr: "Kapının önüne bir simit bırakıp bekledin; bir çocuğu ürkütmeden yaklaşmayı denedin.", en: "You left a pretzel by your door and waited, trying to get close to a kid without scaring her off." }
             sonraki: "dkb_iz"
 
@@ -1525,10 +1527,10 @@ olaylar:
             goster: { bayrak: ["yanki_bagi", "deniz_yankiyi_biliyor"] }
             etkiler:
               - ahlak: { insanlik: -6, duzen: -2 }
-              - yozlasma: 6
+              - dikkat: 6
               - iliski: { deniz_arman: { korku: 14, guven: -8 } }
               - iliski: { yanki: { guven: 8, baglilik: 6 } }
-              - tohum: { olay: "yozlasma_50", gecikme: { min: 1, max: 4 }, kosul: { yozlasma_min: 50, bayrak: "yanki_bagi" }, hatirlatma: { tr: "Vapurdaki o gece cevabı başkasına bıraktın; o başkası yer istiyor.", en: "That night on the ferry, you let someone else answer. Now that someone wants room." } }
+              - tohum: { olay: "yozlasma_50", gecikme: { min: 1, max: 4 }, kosul: { dikkat_min: 50, bayrak: "yanki_bagi" }, hatirlatma: { tr: "Vapurdaki o gece cevabı başkasına bıraktın; o başkası yer istiyor.", en: "That night on the ferry, you let someone else answer. Now that someone wants room." } }
             kronik: { tr: "Arkadaşının en önemli sorusunu kafandaki sese cevaplattın; {npc:deniz_arman} o gece içinde iki kişi olduğunu anladı.", en: "You let the voice in your head answer your friend's most important question, and that night {npc:deniz_arman} understood there were two of you in there." }
             sonraki: "dct_yanki"
           - id: "sal"
@@ -1689,7 +1691,7 @@ olaylar:
             etiket: { tr: "Ağzını geri al; {npc:yanki|e} sınır çiz", en: "Take your mouth back. Draw a line with {npc:yanki}" }
             etkiler:
               - ahlak: { insanlik: 5, duzen: 2 }
-              - yozlasma: -4
+              - dikkat: -4
               - iliski: { deniz_arman: { guven: 6 } }
               - iliski: { yanki: { guven: -6, saygi: 6 } }
             kronik: { tr: "Kafandaki sese ağzının sınırını çizdin; {npc:deniz_arman} o sınırın kendisi için çizildiğini biliyordu.", en: "You drew a line for the voice in your head: not your mouth. {npc:deniz_arman} knew that line was drawn for {zamir:deniz_arman|onu}." }
@@ -1698,7 +1700,7 @@ olaylar:
             etiket: { tr: "\"Haklı ama. İkimiz de anomaliyiz.\"", en: "\"It's not wrong, though. We're both the anomaly.\"" }
             etkiler:
               - ahlak: { insanlik: -5, duzen: -2 }
-              - yozlasma: 3
+              - dikkat: 3
               - iliski: { deniz_arman: { korku: 8, baglilik: -6 } }
               - iliski: { yanki: { guven: 6, baglilik: 6 } }
             kronik: { tr: "En eski arkadaşına 'biz' dedin ve o 'biz'in içinde {npc:deniz_arman} yoktu.", en: "You said 'we' to your oldest friend, and {npc:deniz_arman} wasn't part of that 'we.'" }
@@ -1927,7 +1929,7 @@ olaylar:
             gerekli: { iliski_min: { yanki: { guven: 60 } } }
             etkiler:
               - ahlak: { merhamet: 4, insanlik: 2 }
-              - yozlasma: 4
+              - dikkat: 4
               - bayrak: "deniz_fedakarlik_onlendi"
               - iliski: { yanki: { guven: 10, baglilik: 10 } }
               - iliski: { deniz_arman: { guven: 6 } }
@@ -2125,7 +2127,7 @@ olaylar:
             gerekli: { iliski_min: { yanki: { guven: 60 } } }
             etkiler:
               - ahlak: { merhamet: 2, duzen: -2 }
-              - yozlasma: 4
+              - dikkat: 4
               - iliski: { yanki: { guven: 10, baglilik: 10 } }
             kronik: { tr: "Ölü arkadaşının bir zamanlar tuttuğu hattı bu kez kafandaki ses tuttu ve orada bir parçasını bıraktı.", en: "This time the line your dead friend once held was held by the voice in your head, and it left a piece of itself there." }
             sonraki: "das_yanki"
@@ -2299,7 +2301,7 @@ olaylar:
             etiket: { tr: "Kapıyı aç, {npc:yanki} kaynağını okusun", en: "Open the door. Let {npc:yanki} read its source" }
             etkiler:
               - ahlak: { duzen: -3, insanlik: -2 }
-              - yozlasma: 5
+              - dikkat: 5
               - dikkat: 4
               - bayrak: "yanki_kaynagi_goruldu"
               - bilgi: "yanki_kaynak"
@@ -2344,7 +2346,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 2, merhamet: -1 }
               - iliski: { yanki: { guven: -4, baglilik: -4 } }
-              - tohum: { olay: "yozlasma_50", gecikme: { min: 3, max: 8 }, kosul: { yozlasma_min: 50, bayrak: "yanki_bagi" }, hatirlatma: { tr: "Kule'deki dikiş yerinden beri içinde biri daha geniş yer kaplıyor.", en: "Since that seam in the Spire, someone inside you has been taking up more room." } }
+              - tohum: { olay: "yozlasma_50", gecikme: { min: 3, max: 8 }, kosul: { dikkat_min: 50, bayrak: "yanki_bagi" }, hatirlatma: { tr: "Kule'deki dikiş yerinden beri içinde biri daha geniş yer kaplıyor.", en: "Since that seam in the Spire, someone inside you has been taking up more room." } }
             kronik: { tr: "Kafandaki sesin evine açılan kapıyı kapalı bırakıp tırmanmaya devam ettin; o da bir şey sormadı.", en: "You left the door to the voice's home shut and kept climbing. It didn't ask why." }
             sonraki: "@akis"
 
@@ -2377,7 +2379,7 @@ olaylar:
             etiket: { tr: "Kenara çekil, iadeyi yapsın", en: "Step aside. Let it make the return" }
             etkiler:
               - ahlak: { duzen: 5, insanlik: 3 }
-              - yozlasma: -10
+              - dikkat: -10
               - iliski: { yanki: { guven: -35, korku: 20, baglilik: -20 } }
               - hafiza: { npc: "yanki", id: "onaylamaya_kalkti", agirlik: -60 }
             kronik: { tr: "Kafandaki sesi Sistem'in infazcısına bırakmak için kenara çekildin; {npc:yanki} parça parça kurtuldu ve bunu hiç unutmadı.", en: "You stepped aside so the System's executor could take the voice in your head. {npc:yanki} got away in pieces and never forgot it." }
@@ -2394,7 +2396,7 @@ olaylar:
             etiket: { tr: "Parçayı ona ver: \"Senin. Al.\"", en: "Give it the shard: \"It's yours. Take it.\"" }
             etkiler:
               - ahlak: { merhamet: 3, duzen: -2 }
-              - yozlasma: 3
+              - dikkat: 3
               - unvan: "kaynagi_goren"
               - xp_seviye: 60
               - iliski: { yanki: { guven: 12, baglilik: 10 } }
@@ -2470,9 +2472,9 @@ olaylar:
             etiket: { tr: "\"Doğrusu buydu.\"", en: "\"It was the right call.\"" }
             etkiler:
               - ahlak: { duzen: 3, insanlik: 2 }
-              - yozlasma: 6
+              - dikkat: 6
               - iliski: { yanki: { guven: -10, korku: -6 } }
-              - tohum: { olay: "yozlasma_50", gecikme: { min: 2, max: 6 }, kosul: { yozlasma_min: 50, bayrak: "yanki_bagi" }, hatirlatma: { tr: "Kule'deki dikiş yerinden beri içinde biri daha geniş yer kaplıyor.", en: "Since that seam in the Spire, someone inside you has been taking up more room." } }
+              - tohum: { olay: "yozlasma_50", gecikme: { min: 2, max: 6 }, kosul: { dikkat_min: 50, bayrak: "yanki_bagi" }, hatirlatma: { tr: "Kule'deki dikiş yerinden beri içinde biri daha geniş yer kaplıyor.", en: "Since that seam in the Spire, someone inside you has been taking up more room." } }
             kronik: { tr: "Kafandaki sesi teslim etmenin doğru olduğunu söyledin; ondan geriye kalan parça o günden sonra seni başka gözlerle izledi.", en: "You said handing over the voice in your head was the right call, and from then on, what was left of it watched you with different eyes." }
             sonraki: "@akis"
 
@@ -2486,7 +2488,7 @@ olaylar:
             etiket: { tr: "\"Haklısın. Açalım, ama önden ben gireceğim.\"", en: "\"Fair. We open it. But I go first.\"" }
             etkiler:
               - ahlak: { merhamet: 2, duzen: 1 }
-              - yozlasma: 3
+              - dikkat: 3
               - bayrak: "yanki_kaynagi_goruldu"
               - bilgi: "yanki_kaynak"
               - iliski: { yanki: { guven: 10, saygi: 4 } }
@@ -2603,11 +2605,11 @@ olaylar:
             etiket: { tr: "\"Bütün olmak istiyordun. Gel, tamamen gel.\"", en: "\"You wanted to be whole. Come in. All the way.\"" }
             etkiler:
               - ahlak: { insanlik: -10, duzen: -3 }
-              - yozlasma: 12
+              - dikkat: 12
               - bayrak: "yanki_son_sirri"
               - bayrak: "yanki_butunlesti"
               - bilgi: "dongu_gercegi"
-              - tohum: { olay: "yozlasma_75", gecikme: { min: 1, max: 3 }, kosul: { yozlasma_min: 75, bayrak: "yanki_bagi" }, hatirlatma: { tr: "Sayacın önünde {npc:yanki|e} söylediklerin bir gece başka bir yerde uyanmana yol açtı.", en: "What you told {npc:yanki} in front of the counter ended with you waking up somewhere else one night." } }
+              - tohum: { olay: "yozlasma_75", gecikme: { min: 1, max: 3 }, kosul: { dikkat_min: 75, bayrak: "yanki_bagi" }, hatirlatma: { tr: "Sayacın önünde {npc:yanki|e} söylediklerin bir gece başka bir yerde uyanmana yol açtı.", en: "What you told {npc:yanki} in front of the counter ended with you waking up somewhere else one night." } }
               - iliski: { yanki: { guven: 20, baglilik: 20 } }
             kronik: { tr: "Kafandaki sesle büsbütün birleştin; Döngü'nün sırrını öğrenmek yerine onun bir parçası oldun.", en: "You merged with the voice in your head completely. You didn't learn the Loop's secret. You became part of it." }
             sonraki: "ysr_birlesme"
@@ -2864,10 +2866,10 @@ olaylar:
         secenekler:
           - id: "it"
             etiket: { tr: "Onu iradenle sınırına kadar geri it", en: "Shove it back. With your will, all the way" }
-            zar: { stat: "wil", zorluk: 22, tek: true, basarisiz: "yz50_kayma", basarisiz_etkiler: [{ yozlasma: 4 }, { iliski: { yanki: { saygi: 4 } } }] }
+            zar: { stat: "wil", zorluk: 22, tek: true, basarisiz: "yz50_kayma", basarisiz_etkiler: [{ dikkat: 4 }, { iliski: { yanki: { saygi: 4 } } }] }
             etkiler:
               - ahlak: { insanlik: 4, duzen: 2 }
-              - yozlasma: -8
+              - dikkat: -8
               - bayrak: "yanki_geri_itildi"
               - iliski: { yanki: { guven: -6, saygi: 8 } }
             sonraki: "yz50_geri"
@@ -2875,26 +2877,26 @@ olaylar:
             etiket: { tr: "Pazarlık et: geceler onun, gündüzler senin", en: "Cut a deal: nights are its, days are yours" }
             etkiler:
               - ahlak: { duzen: 3, insanlik: -3 }
-              - yozlasma: 3
+              - dikkat: 3
               - bayrak: "yanki_ile_pazarlik"
               - iliski: { yanki: { guven: 8, baglilik: 4 } }
-              - tohum: { olay: "yozlasma_75", gecikme: { min: 4, max: 10 }, kosul: { yozlasma_min: 75, bayrak: "yanki_bagi" }, hatirlatma: { tr: "{npc:yanki} biraz daha yer istediği günden beri saatlerin eksik geliyor.", en: "Since the day {npc:yanki} asked for a little more room, you keep coming up short on hours." } }
+              - tohum: { olay: "yozlasma_75", gecikme: { min: 4, max: 10 }, kosul: { dikkat_min: 75, bayrak: "yanki_bagi" }, hatirlatma: { tr: "{npc:yanki} biraz daha yer istediği günden beri saatlerin eksik geliyor.", en: "Since the day {npc:yanki} asked for a little more room, you keep coming up short on hours." } }
             sonraki: "yz50_pazarlik"
           - id: "ver"
             etiket: { tr: "Yeri ona ver. Hız güzel şeydir", en: "Give it the room. Speed is nice" }
             etkiler:
               - ahlak: { insanlik: -6, duzen: -2 }
-              - yozlasma: 8
+              - dikkat: 8
               - stat: { agi: 8, int: 8 }
               - iliski: { yanki: { guven: 12, baglilik: 8 } }
-              - tohum: { olay: "yozlasma_75", gecikme: { min: 2, max: 6 }, kosul: { yozlasma_min: 75, bayrak: "yanki_bagi" }, hatirlatma: { tr: "{npc:yanki} biraz daha yer istediği günden beri saatlerin eksik geliyor.", en: "Since the day {npc:yanki} asked for a little more room, you keep coming up short on hours." } }
+              - tohum: { olay: "yozlasma_75", gecikme: { min: 2, max: 6 }, kosul: { dikkat_min: 75, bayrak: "yanki_bagi" }, hatirlatma: { tr: "{npc:yanki} biraz daha yer istediği günden beri saatlerin eksik geliyor.", en: "Since the day {npc:yanki} asked for a little more room, you keep coming up short on hours." } }
             sonraki: "yz50_ver"
           - id: "deniz"
             etiket: { tr: "{npc:deniz_arman|e} sesi anlat, bir çapa iste", en: "Tell {npc:deniz_arman} about it. Ask for an anchor" }
             goster: { yoldas: "deniz_arman", bayrak: "deniz_yankiyi_biliyor" }
             etkiler:
               - ahlak: { insanlik: 5 }
-              - yozlasma: -5
+              - dikkat: -5
               - iliski: { deniz_arman: { guven: 8, baglilik: 6 } }
               - iliski: { yanki: { guven: -4 } }
             sonraki: "yz50_capa"
@@ -2927,14 +2929,14 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 1 }
               - stat: { wil: 4 }
-              - tohum: { olay: "yozlasma_75", gecikme: { min: 4, max: 10 }, kosul: { yozlasma_min: 75, bayrak: "yanki_bagi" }, hatirlatma: { tr: "{npc:yanki} biraz daha yer istediği günden beri saatlerin eksik geliyor.", en: "Since the day {npc:yanki} asked for a little more room, you keep coming up short on hours." } }
+              - tohum: { olay: "yozlasma_75", gecikme: { min: 4, max: 10 }, kosul: { dikkat_min: 75, bayrak: "yanki_bagi" }, hatirlatma: { tr: "{npc:yanki} biraz daha yer istediği günden beri saatlerin eksik geliyor.", en: "Since the day {npc:yanki} asked for a little more room, you keep coming up short on hours." } }
             sonraki: "@akis"
           - id: "kabul"
             etiket: { tr: "Bırak. Belki haklıdır", en: "Let it go. Maybe it's right" }
             etkiler:
               - ahlak: { insanlik: -3 }
               - iliski: { yanki: { guven: 6 } }
-              - tohum: { olay: "yozlasma_75", gecikme: { min: 3, max: 8 }, kosul: { yozlasma_min: 75, bayrak: "yanki_bagi" }, hatirlatma: { tr: "{npc:yanki} biraz daha yer istediği günden beri saatlerin eksik geliyor.", en: "Since the day {npc:yanki} asked for a little more room, you keep coming up short on hours." } }
+              - tohum: { olay: "yozlasma_75", gecikme: { min: 3, max: 8 }, kosul: { dikkat_min: 75, bayrak: "yanki_bagi" }, hatirlatma: { tr: "{npc:yanki} biraz daha yer istediği günden beri saatlerin eksik geliyor.", en: "Since the day {npc:yanki} asked for a little more room, you keep coming up short on hours." } }
             sonraki: "@akis"
 
       - id: "yz50_pazarlik"
@@ -3024,7 +3026,7 @@ olaylar:
             etiket: { tr: "Bırak sürsün. Yoruldun", en: "Let it drive. You're tired" }
             etkiler:
               - ahlak: { insanlik: -12, duzen: -3 }
-              - yozlasma: 10
+              - dikkat: 10
               - iliski: { yanki: { guven: 15, baglilik: 15 } }
             kronik: { tr: "Bedenini kafandaki sese teslim ettin; o günden sonra ikinizden hangisinin konuştuğunu kimse tam kestiremedi.", en: "You handed your body over to the voice in your head, and after that nobody could ever quite tell which of you was talking." }
             sonraki: "yz75_ele"
@@ -3033,7 +3035,7 @@ olaylar:
             gerekli: { iliski_min: { yanki: { guven: 50 } } }
             etkiler:
               - ahlak: { merhamet: 4, insanlik: 4 }
-              - yozlasma: -10
+              - dikkat: -10
               - iliski: { yanki: { guven: 8, saygi: 10 } }
             kronik: { tr: "Bedenini ele geçiren sese kim olduğunu hatırlattın; o da utanıp geri çekildi.", en: "You reminded the voice taking over your body who it was, and it backed off, ashamed." }
             sonraki: "yz75_korku"
@@ -3041,7 +3043,7 @@ olaylar:
             etiket: { tr: "Kendi adını yüksek sesle, durmadan söyle", en: "Say your own name out loud. Keep saying it" }
             etkiler:
               - ahlak: { insanlik: 6, duzen: 2 }
-              - yozlasma: -6
+              - dikkat: -6
               - iliski: { yanki: { korku: 6, saygi: 6 } }
             kronik: { tr: "Şafak vakti bir kapı yarasının altında kendi adını yüz kez söyledin; ad senin kaldı.", en: "You said your own name a hundred times at dawn under a Gate's scar, and the name stayed yours." }
             sonraki: "yz75_isim"
@@ -3049,7 +3051,7 @@ olaylar:
             etiket: { tr: "Onu sil, bütün kökleriyle", en: "Delete it. Roots and all" }
             etkiler:
               - ahlak: { duzen: 4, insanlik: 5 }
-              - yozlasma: -25
+              - dikkat: -25
               - iliski: { yanki: { korku: 20 } }
             kronik: { tr: "Bedenini ele geçirmeye kalkan sesi kökünden silmeye karar verdin.", en: "You decided to rip the voice that tried to take your body out by the roots." }
             sonraki: "yz75_sil"
@@ -3063,7 +3065,7 @@ olaylar:
             etiket: { tr: "\"Bir daha olmayacak. Bu sefer seni affediyorum.\"", en: "\"It won't happen again. And this time, I forgive you.\"" }
             etkiler:
               - ahlak: { merhamet: 5, insanlik: 2 }
-              - yozlasma: -12
+              - dikkat: -12
               - bayrak: "yanki_geri_itildi"
               - xp_seviye: 80
               - iliski: { yanki: { guven: 10, baglilik: 6 } }
@@ -3073,7 +3075,7 @@ olaylar:
             etiket: { tr: "Sınırları sertleştir, ona bir daha güvenme", en: "Harden your borders. Never trust it again" }
             etkiler:
               - ahlak: { duzen: 4, merhamet: -2 }
-              - yozlasma: -15
+              - dikkat: -15
               - bayrak: "yanki_geri_itildi"
               - xp_seviye: 80
               - iliski: { yanki: { guven: -12, korku: 10 } }
@@ -3091,7 +3093,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 4, duzen: -2 }
               - bayrak: "yanki_ele_gecirdi"
-              - yozlasma: 5
+              - dikkat: 5
               - stat: { wil: 15 }
               - iliski: { yanki: { saygi: 6, korku: 4 } }
             kronik: { tr: "Kafandaki ses bedenini kısmen ele geçirdi; sen de direksiyonu her fırsatta geri çekmeye ant içtin.", en: "The voice in your head took over part of your body, and you swore to grab the wheel back every chance you got." }
@@ -3101,7 +3103,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: -10 }
               - bayrak: "yanki_ele_gecirdi"
-              - yozlasma: 10
+              - dikkat: 10
               - stat: { str: 20, agi: 20, int: 20 }
               - tohum: { olay: "yanki_son_sir", gecikme: { min: 1, max: 4 }, kosul: { degisken_min: { kule_kat: 100 }, bayrak: "yanki_bagi" }, hatirlatma: { tr: "Kayıp altı saatin sonunda bir sayaç işlemeye başlamıştı.", en: "At the end of those six missing hours, a counter started running." } }
               - iliski: { yanki: { guven: 10, baglilik: 10 } }
@@ -3117,7 +3119,7 @@ olaylar:
             etiket: { tr: "\"O zaman onu birlikte zincirleriz.\"", en: "\"Then we chain it up together.\"" }
             etkiler:
               - ahlak: { merhamet: 4, duzen: 2 }
-              - yozlasma: -5
+              - dikkat: -5
               - bayrak: "yanki_geri_itildi"
               - iliski: { yanki: { guven: 12, baglilik: 8 } }
             kronik: { tr: "Kafandaki sesle birlikte, onun içindeki aç şeyi zincire vurmaya karar verdiniz.", en: "You and the voice in your head decided to chain up the hungry thing inside it, together." }

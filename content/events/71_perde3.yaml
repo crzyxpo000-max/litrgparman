@@ -474,7 +474,7 @@ olaylar:
               - unvan: "ilk_yol_acan"
               - xp_seviye: 200
               - ahlak: { duzen: -4, insanlik: -3 }
-              - yozlasma: 5
+              - dikkat: 5
               - iliski: { yanki: { guven: 12, baglilik: 10 } }
             sonraki: "yol_olusumu_yankinin_yolu"
 
@@ -523,7 +523,7 @@ olaylar:
               - unvan: "ilk_yol_acan"
               - xp_seviye: 200
               - ahlak: { duzen: -4, insanlik: -3 }
-              - yozlasma: 5
+              - dikkat: 5
               - iliski: { yanki: { guven: 12, baglilik: 10 } }
             sonraki: "yol_olusumu_yankinin_yolu"
           - id: "geri_cekil"
@@ -617,7 +617,7 @@ olaylar:
               - unvan: "ilk_yol_acan"
               - xp_seviye: 220
               - ahlak: { insanlik: -6, duzen: -3 }
-              - yozlasma: 8
+              - dikkat: 8
               - iliski: { yanki: { guven: 15, baglilik: 15 } }
               - hafiza: { npc: "yanki", id: "olay:yol_olusumu", agirlik: 70 }
             sonraki: "yol_olusumu_yankinin_yolu"
@@ -761,7 +761,7 @@ olaylar:
             kronik: { tr: "Dünyaların arasındaki karanlıkta oyalanıp oradaki fısıltılara kulak verdin.", en: "You lingered in the dark between worlds and listened to what whispered there." }
             etkiler:
               - ahlak: { insanlik: -3 }
-              - yozlasma: 4
+              - dikkat: 4
               - bilgi: "bosluk_fisiltisi"
             sonraki: "yol_olusumu_son"
           - id: "geri_don"
@@ -1900,7 +1900,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 6, insanlik: 3 }
               - can: -800
-              - yozlasma: 4
+              - dikkat: 4
               - bayrak: "ihanet_onlendi"
               - bayrak_kaldir: "deniz_yukselenlere_gitti"
               - npc_fraksiyon: { deniz_arman: "siginak" }
@@ -2091,7 +2091,7 @@ olaylar:
               - ahlak: { insanlik: -4, duzen: 1 }
               - bayrak: "ihanet_onlendi"
               - esya: { catlak_odunc_tac: 1 }
-              - yozlasma: 5
+              - dikkat: 5
               - iliski: { aras_kurt: { saygi: 5, guven: -10 } }
               - npc_gitti: "aras_kurt"
             sonraki: "buyuk_ihanet_sonra"
@@ -3069,10 +3069,11 @@ olaylar:
             sonraki: "p3_ellinciler_acilis"
           - id: "kiz_birak"
             etiket: { tr: "Kızı Kat'a bırak; odasının parasını sen öde", en: "Leave the girl on the Floor. You pay for her room" }
+            gerekli: { oz_kristali_min: 20 }
             goster: { bayrak: "p3_ellinci_kiz" }
             etkiler:
               - ahlak: { merhamet: 3, duzen: 1 }
-              - kredi: -500
+              - oz_kristali: -20
             sonraki: "@akis"
 
       - id: "p3_ellinciler_acilis"
@@ -3496,7 +3497,7 @@ olaylar:
             etiket: { tr: "Pulları ve kemikleri Lonca'ya sat", en: "Sell the scales and bones to the Guild" }
             etkiler:
               - ahlak: { merhamet: -2, duzen: 2 }
-              - kredi: 3000
+              - oz_kristali: 30
               - esya: { leviatan_pulu: 4 }
               - itibar: { lonca: 5 }
             sonraki: "@akis"
@@ -3534,7 +3535,7 @@ olaylar:
     sahneler:
       - id: "p3_borsa_1"
         paragraflar:
-          - { tr: "{yer:sanayi|de}ki eski tekstil fabrikasının avlusunda bir kara tahta asılı, üstüne tebeşirle fiyatlar yazılmış: [D'den C'ye taşıma: 4000 kredi. C'den B'ye: 20 000. Garanti yok.] Önünde bir kuyruk.", en: "In the yard of the old textile mill in {yer:sanayi} hangs a chalkboard with prices on it: [Carry D to C: 4,000 credits. C to B: 20,000. No guarantees.] There's a line under it." }
+          - { tr: "{yer:sanayi|de}ki eski tekstil fabrikasının avlusunda bir kara tahta asılı, üstüne tebeşirle fiyatlar yazılmış: [D'den C'ye taşıma: kırk kristal. C'den B'ye: iki yüz. Garanti yok.] Önünde bir kuyruk.", en: "In the yard of the old textile mill in {yer:sanayi} hangs a chalkboard with prices on it: [Carry D to C: 40 crystals. C to B: 200. No guarantees.] There's a line under it." }
           - { tr: "Kademe Borsası şöyle işliyor: yüksek kademeli avcılar parası olanı kapılara götürüp canavarları yarı ölü bırakıyor, son darbeyi de müşteriye vurduruyor. Müşteri seviye atlıyor. Bazen.", en: "That's how the Grade Exchange works: high-Grade hunters take paying customers into Gates, beat the monsters half to death, and let the customer land the killing blow. Customer levels up. Sometimes." }
           - { tr: "Kuyruğun önünde bir baba oğlunu kolundan tutmuş. On altı yaşındaki oğlan D kademesi; korkudan beti benzi atmış. Baba önce tahtaya, sonra cüzdanına bakıyor.", en: "At the front of the line, a dad's holding his son by the arm. The kid's sixteen, D-Grade, pale with fear. The dad looks at the board, then at his wallet." }
           - metin: { tr: "Tahtanın yanında borsanın sahibi bekliyor: Lonca yeleği giymiş bir adam. {npc:kaya_demir|in} izni olmadan burada tek bir tezgâh açılamayacağını o da biliyor.", en: "The Exchange's owner, a guy in a Guild vest, is waiting by the board. No stall opens out here without {npc:kaya_demir|pos} say-so, and he knows it." }
@@ -3565,7 +3566,7 @@ olaylar:
             etiket: { tr: "Borsaya ortak ol; bu iş büyüyebilir", en: "Buy into the Exchange. This could get big" }
             etkiler:
               - ahlak: { merhamet: -3, insanlik: -2, duzen: 2 }
-              - kredi: 4000
+              - oz_kristali: 30
               - bayrak: "p3_borsa_ortagi"
               - itibar: { lonca: 6 }
               - iliski: { kaya_demir: { saygi: 6 } }
@@ -3586,9 +3587,10 @@ olaylar:
             sonraki: "@akis"
           - id: "firin"
             etiket: { tr: "Tazıyı kendin bitir; oğlanı bir fırına götür", en: "Finish the hound yourself. Walk the kid to a bakery" }
+            gerekli: { oz_kristali_min: 12 }
             etkiler:
               - ahlak: { merhamet: 4, insanlik: 4 }
-              - kredi: -300
+              - oz_kristali: -12
               - tohum: { olay: "p3_kademe_ailesi", gecikme: { min: 3, max: 9 }, hatirlatma: { tr: "Kademe Borsası'ndaki o oğlan aklında.", en: "That boy from the Grade Exchange is on your mind." } }
             sonraki: "@akis"
 
@@ -3776,7 +3778,7 @@ olaylar:
             etiket: { tr: "Kollarını açık tut", en: "Keep your arms open" }
             etkiler:
               - ahlak: { insanlik: -3 }
-              - yozlasma: 3
+              - dikkat: 3
               - ordu_kazan: 15
             sonraki: "@akis"
           - id: "indir"
@@ -3853,12 +3855,19 @@ olaylar:
             sonraki: "p3_pazar_kaos"
           - id: "al"
             etiket: { tr: "Güneş ışığı dolu kristallerden al", en: "Buy some of the sunlight crystals" }
+            gerekli: { oz_kristali_min: 30 }
             etkiler:
               - ahlak: { duzen: 1, insanlik: -1 }
-              - kredi: -800
+              - oz_kristali: -30
               - esya: { gunes_kristali: 2 }
               - itibar: { kadimler: 5 }
               - tohum: { olay: "p3_kordon_geri", gecikme: { min: 4, max: 10 }, hatirlatma: { tr: "Yıl satan tezgâhın gecesinden sonra {yer:kordon|den} haber var.", en: "Since the night of the stall that sold years, there's news from {yer:kordon}." } }
+            sonraki: "@akis"
+          - id: "gec"
+            etiket: { tr: "Kuyruğa girme; pazardan geç", en: "Skip the line. Walk on through the market" }
+            etkiler:
+              - ahlak: { insanlik: -1 }
+            kronik: { tr: "Yıl satan terazinin önünden durmadan geçtin; kuyruktaki gençler arkandan bakmadı bile.", en: "You walked past the scale that bought years without stopping. The kids in line didn't even look up." }
             sonraki: "@akis"
 
       - id: "p3_pazar_terazi"

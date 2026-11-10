@@ -576,9 +576,10 @@ olaylar:
         secenekler:
           - id: "pazarlik"
             etiket: { tr: "Pazarlık et", en: "Haggle" }
-            zar: { stat: "cha", zorluk: 12, tek: false, basarisiz: "cop_avcisi_pazar_pazarlik_yok", basarisiz_etkiler: [{ kredi: -5 }] }
+            gerekli: { oz_kristali_min: 1 }
+            zar: { stat: "cha", zorluk: 12, tek: false, basarisiz: "cop_avcisi_pazar_pazarlik_yok", basarisiz_etkiler: [{ oz_kristali: -1 }] }
             etkiler:
-              - kredi: -10
+              - oz_kristali: -1
               - esya: { kucuk_iyilesme_iksiri: 2 }
             sonraki: "@akis"
           - id: "takas"
@@ -593,7 +594,7 @@ olaylar:
             gerekli: { esya: { canavar_cekirdegi: 1 } }
             etkiler:
               - esya: { canavar_cekirdegi: -1 }
-              - kredi: 30
+              - oz_kristali: 1
             sonraki: "cop_avcisi_pazar_cekirdek"
           - id: "blof"
             etiket: { tr: "Gerçek seviyesini kulağına fısılda", en: "Whisper her real level in her ear" }
@@ -620,9 +621,10 @@ olaylar:
             sonraki: "cop_avcisi_pazar_hurdacik"
           - id: "anahtarlik"
             etiket: { tr: "{npc:deniz_arman} için o vapur anahtarlığını al", en: "Buy {npc:deniz_arman} that ferry keychain" }
+            gerekli: { oz_kristali_min: 1 }
             goster: { yoldas: "deniz_arman" }
             etkiler:
-              - kredi: -5
+              - oz_kristali: -1
               - ahlak: { insanlik: 2 }
               - iliski: { deniz_arman: { baglilik: 6, guven: 3 } }
             sonraki: "cop_avcisi_pazar_anahtarlik"
@@ -635,7 +637,7 @@ olaylar:
       - id: "cop_avcisi_pazar_pazarlik_yok"
         yer: "harabe_carsi"
         paragraflar:
-          - { tr: "Kadın fiyattan tek kredi indirmiyor. Üstüne bir de pazarlık ettiğin için beş kredi \"oturma ücreti\" istiyor.", en: "She doesn't knock a single credit off. Instead she charges you five for \"sitting time.\"" }
+          - { tr: "Kadın fiyattan kıl payı bile inmiyor. Üstüne bir de pazarlık ettiğin için bir kristal \"oturma ücreti\" istiyor.", en: "She doesn't knock a thing off the price. Instead she charges you a crystal for \"sitting time.\"" }
           - { tr: "\"Bu çarşıda zaman da satılık,\" diyor. Hurdacık onaylar gibi tıkırdıyor.", en: "\"Time's for sale in this mall too,\" she says, and the Tinkerling clicks like it agrees." }
         secenekler:
           - id: "ode"
@@ -686,7 +688,7 @@ olaylar:
             etiket: { tr: "Madem öyle, fiyatı yükselt", en: "If that's the case, raise your price" }
             zar: { stat: "cha", zorluk: 11, tek: true, basarisiz: "cop_avcisi_pazar_fiyat_yok" }
             etkiler:
-              - kredi: 15
+              - oz_kristali: 1
               - ahlak: { merhamet: -2 }
             sonraki: "@akis"
           - id: "satma"
@@ -814,16 +816,18 @@ olaylar:
         secenekler:
           - id: "ode"
             etiket: { tr: "Ücreti öde, geç", en: "Pay the toll and walk through" }
+            gerekli: { oz_kristali_min: 1 }
             etkiler:
-              - kredi: -10
+              - oz_kristali: -1
               - ahlak: { duzen: 2, merhamet: -2 }
               - bayrak: "cete_gisede"
               - tohum: { olay: "cete_hesabi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
             sonraki: "@akis"
           - id: "kadin"
             etiket: { tr: "Kadının ücretini de sen öde", en: "Pay the old woman's toll too" }
+            gerekli: { oz_kristali_min: 1 }
             etkiler:
-              - kredi: -20
+              - oz_kristali: -1
               - ahlak: { merhamet: 4, duzen: 1 }
             sonraki: "carsi_cetesi_comert"
           - id: "dagit"
@@ -850,9 +854,10 @@ olaylar:
           - id: "izle"
             tur: "gizle"
             etiket: { tr: "Kuyruğa gir, başını eğ, izle", en: "Get in line, keep your head down, and watch" }
+            gerekli: { oz_kristali_min: 1 }
             etkiler:
               - gizle: 2
-              - kredi: -10
+              - oz_kristali: -1
               - ahlak: { duzen: 1, merhamet: -1 }
               - bilgi: "cete_gercek_seviye"
               - bayrak: "cete_gisede"
@@ -1096,7 +1101,7 @@ olaylar:
           - id: "fis"
             etiket: { tr: "Fişi sakla; bir gün geri getireceksin", en: "Keep the stub. You'll bring it back someday" }
             etkiler:
-              - kredi: -15
+              - oz_kristali: -1
               - ahlak: { merhamet: -2, duzen: -1 }
               - stat: { wil: 1 }
               - bayrak: "cete_gisede"
@@ -1105,7 +1110,7 @@ olaylar:
           - id: "surun"
             etiket: { tr: "Sürünerek köprüden uzaklaş", en: "Crawl off the bridge" }
             etkiler:
-              - kredi: -15
+              - oz_kristali: -1
               - ahlak: { duzen: 1 }
               - bayrak: "cete_gisede"
               - tohum: { olay: "cete_hesabi", gecikme: { min: 4, max: 7 }, hatirlatma: { tr: "Cam köprüdeki gişeyi unutmadın; gişeyi tutanlar da seni unutmadı.", en: "You haven't forgotten the toll on the glass bridge. The people who ran it haven't forgotten you, either." } }
@@ -1192,7 +1197,7 @@ olaylar:
             goster: { bayrak: "cete_lideri_olduruldu" }
             etkiler:
               - ahlak: { merhamet: -8, insanlik: -5 }
-              - yozlasma: 2
+              - dikkat: 2
               - dikkat: 1
               - itibar: { siginak: -5, yukselenler: 3 }
             sonraki: "@akis"
@@ -1284,9 +1289,10 @@ olaylar:
             sonraki: "@akis"
           - id: "katki_ode"
             etiket: { tr: "Katkını öde; düzen düzendir", en: "Pay your contribution. Order is order" }
+            gerekli: { oz_kristali_min: 1 }
             goster: { bayrak: "cete_loncaya_teslim" }
             etkiler:
-              - kredi: -10
+              - oz_kristali: -1
               - ahlak: { duzen: 4, merhamet: -2 }
               - itibar: { lonca: 4 }
             sonraki: "@akis"
@@ -1517,7 +1523,7 @@ olaylar:
             metin: { tr: "\"Kıza bir kalem ver, gerisi koğuşa. Annesine sonra ben bakarım.\"", en: "\"Give the girl one pen. The rest goes to the ward. I'll check on her mom after.\"" }
           - npc: "mert_kilic"
             kosul: { yoldas: "mert_kilic" }
-            metin: { tr: "\"Bu çarşının en değerli parası artık bu. Kredi değil, bu. Not ediyorum.\"", en: "\"That's the real currency in this mall now. Not credits. That. I'm writing that down.\"" }
+            metin: { tr: "\"Bu çarşının en değerli parası artık bu. Kristal değil, bu. Not ediyorum.\"", en: "\"That's the real currency in this mall now. Not crystals. That. I'm writing that down.\"" }
         secenekler:
           - id: "hastane"
             etiket: { tr: "Hepsini hekimin koğuşuna götür", en: "Take all of it to the doctor's ward" }
@@ -1558,7 +1564,7 @@ olaylar:
             etiket: { tr: "Hepsini pazarcı kadına sat", en: "Sell the whole lot to the stall woman" }
             etkiler:
               - ahlak: { merhamet: -8, insanlik: -4 }
-              - kredi: 60
+              - oz_kristali: 2
               - itibar: { siginak: -4 }
               - degisken: { hayatta_kalan: -3 }
               - bayrak: "eczane_satildi"
@@ -1726,18 +1732,19 @@ olaylar:
             sonraki: "@akis"
           - id: "kiza_kalem"
             etiket: { tr: "Kıza tezgâhtan bir kalem satın al", en: "Buy the girl one pen off the stall" }
+            gerekli: { oz_kristali_min: 1 }
             goster: { bayrak: "eczane_satildi" }
             etkiler:
-              - kredi: -25
+              - oz_kristali: -1
               - ahlak: { merhamet: 4, insanlik: 2 }
               - degisken: { hayatta_kalan: 1 }
             sonraki: "@akis"
           - id: "geri_satin"
             etiket: { tr: "Bütün kutuları geri al, koğuşa götür", en: "Buy back every box. Take it to the ward" }
             goster: { bayrak: "eczane_satildi" }
-            gerekli: { stat: { cha: 12 } }
+            gerekli: { stat: { cha: 12 }, oz_kristali_min: 2 }
             etkiler:
-              - kredi: -50
+              - oz_kristali: -2
               - ahlak: { merhamet: 6, insanlik: 3 }
               - itibar: { siginak: 6 }
               - iliski: { elif_sari: { guven: 4, saygi: 4 } }
@@ -1923,7 +1930,7 @@ olaylar:
             etiket: { tr: "Ölülerin artık işine yaramaz; topla", en: "The dead don't need it anymore. Clean it out" }
             etkiler:
               - ahlak: { insanlik: -6, merhamet: -3 }
-              - kredi: 35
+              - oz_kristali: 1
               - esya: { kucuk_iyilesme_iksiri: 1, ates_sisesi: 1 }
               - bayrak: "kayip_esya_yagmalandi"
             sonraki: "kayip_esya_musteri"
@@ -2051,7 +2058,7 @@ olaylar:
             etiket: { tr: "Aldıklarını rafa geri koy", en: "Put back what you took" }
             etkiler:
               - ahlak: { insanlik: 4, duzen: 2 }
-              - kredi: -35
+              - oz_kristali: -1
               - bayrak_kaldir: "kayip_esya_yagmalandi"
             sonraki: "@akis"
 
@@ -2083,14 +2090,14 @@ olaylar:
             etiket: { tr: "Kalk. Ders alındı", en: "Get up. Lesson learned" }
             etkiler:
               - ahlak: { insanlik: 2 }
-              - kredi: -40
+              - oz_kristali: -2
               - bayrak_kaldir: "kayip_esya_yagmalandi"
             sonraki: "@akis"
           - id: "etiket"
             etiket: { tr: "Kendi etiketini rafta bırak", en: "Leave your own tag on the shelf" }
             etkiler:
               - ahlak: { duzen: 2 }
-              - kredi: -40
+              - oz_kristali: -2
               - bayrak_kaldir: "kayip_esya_yagmalandi"
             sonraki: "@akis"
 
@@ -2106,9 +2113,10 @@ olaylar:
               - ahlak: { insanlik: -1 }
             sonraki: "@akis"
           - id: "bagisla"
-            etiket: { tr: "Kredilerin yarısını gişedeki kuyruğa dağıt", en: "Hand half the credits out to the toll line" }
+            etiket: { tr: "Kristallerinden bir kısmını gişedeki kuyruğa dağıt", en: "Hand some of your crystals out to the toll line" }
+            gerekli: { oz_kristali_min: 1 }
             etkiler:
-              - kredi: -15
+              - oz_kristali: -1
               - ahlak: { merhamet: 3, insanlik: 2 }
               - itibar: { siginak: 2 }
             sonraki: "@akis"
@@ -2754,7 +2762,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: -4, merhamet: -2 }
               - esya: { kucuk_iyilesme_iksiri: 1, canavar_cekirdegi: 1 }
-              - kredi: 25
+              - oz_kristali: 1
               - bayrak: "olu_avci_yagmalandi"
             sonraki: "olu_avci_yagma"
           - id: "pusu"
@@ -2779,7 +2787,7 @@ olaylar:
       - id: "olu_avci_satir"
         paragraflar:
           - { tr: "Satır öyle soluk ki okumak için gözlerini kısıyorsun. [Aday #0412 · Sapma: tespit edildi · Düzeltme: harici görev atandı.]", en: "The line's so faint you have to squint. [Candidate #0412 · Deviation: detected · Correction: external quest assigned.]" }
-          - { tr: "Altında bir satır daha var: [Atanan: yakındaki avcı · Ödül: 200 kredi · Durum: tamamlandı, teslim bekleniyor.] Sistem bu adamı fark etmiş, onu öldürsün diye de bir başkasına iş vermiş.", en: "Under it, one more: [Assigned to: nearby hunter · Reward: 200 credits · Status: complete, pending turn-in.] The System noticed this man. Then it hired somebody else to kill him." }
+          - { tr: "Altında bir satır daha var: [Atanan: yakındaki avcı · Ödül: 8 Öz Kristali · Durum: tamamlandı, teslim bekleniyor.] Sistem bu adamı fark etmiş, onu öldürsün diye de bir başkasına iş vermiş.", en: "Under it, one more: [Assigned to: nearby hunter · Reward: 8 Essence Crystals · Status: complete, pending turn-in.] The System noticed this man. Then it hired somebody else to kill him." }
           - { tr: "Bu adamın penceresi de seninki gibi bozulmuş muydu, bilmiyorsun. Ama Sistem'in gözüne takılan birinin neye dönüştüğünü artık biliyorsun: bir göreve.", en: "You don't know if his window glitched like yours did. But now you know what somebody becomes once they get noticed: a quest." }
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
@@ -2854,7 +2862,7 @@ olaylar:
             etiket: { tr: "Ganimeti bırak, görevi kimin verdiğini sor", en: "Drop the loot. Ask him who gave him the quest" }
             etkiler:
               - esya: { kucuk_iyilesme_iksiri: -1, canavar_cekirdegi: -1 }
-              - kredi: -25
+              - oz_kristali: -1
               - ahlak: { insanlik: 2, duzen: 1 }
               - bilgi: "elenen_aday"
             sonraki: "olu_avci_itiraf"
@@ -2884,8 +2892,8 @@ olaylar:
 
       - id: "olu_avci_odul"
         paragraflar:
-          - { tr: "Parmakları cesede değdiği anda penceresinden bir zil sesi yükseliyor; kazanan bir oyun makinesinin çıkardığı o ses. [200 kredi · Teşekkür ederiz. Katkınız not edildi.]", en: "The second his fingers touch the body, a chime comes out of his window, the sound a slot machine makes when it pays out. [200 credits · Thank you. Your contribution has been noted.]" }
-          - { tr: "Adam ağlamaya başlıyor. Kredilerini sayıyor, bir daha sayıyor, sonra ölünün yüzüne bir kez bile bakmadan çekip gidiyor.", en: "The man starts crying. He counts the credits, then counts them again, and leaves without looking at the dead man's face even once." }
+          - { tr: "Parmakları cesede değdiği anda penceresinden bir zil sesi yükseliyor; kazanan bir oyun makinesinin çıkardığı o ses. [8 Öz Kristali · Teşekkür ederiz. Katkınız not edildi.]", en: "The second his fingers touch the body, a chime comes out of his window, the sound a slot machine makes when it pays out. [8 Essence Crystals · Thank you. Your contribution has been noted.]" }
+          - { tr: "Adam ağlamaya başlıyor. Kristalleri sayıyor, bir daha sayıyor, sonra ölünün yüzüne bir kez bile bakmadan çekip gidiyor.", en: "The man starts crying. He counts the crystals, then counts them again, and leaves without looking at the dead man's face even once." }
         secenekler:
           - id: "kunye"
             etiket: { tr: "Gittikten sonra künyeyi al", en: "After he's gone, take the tags" }
@@ -2916,7 +2924,7 @@ olaylar:
       - id: "olu_avci_itiraf"
         paragraflar:
           - { tr: "Adam boruyu bırakıp yere çöküyor. \"Bir sabah uyandım, penceremde bir görev duruyordu,\" diyor. \"Adı, yeri, ödülü... Neden diye sormadım; Sistem'e soru sorulmaz.\"", en: "The man drops the pipe and sinks to the ground. \"I woke up one morning and there was a quest on my window,\" he says. \"His name, his location, the reward, and I didn't ask why, because you don't ask the System.\"" }
-          - { tr: "\"İki çocuğum var,\" diyor. \"İki yüz kredi on günlük yemek demek. Sen olsan ne yapardın?\"", en: "\"I've got two kids,\" he says. \"Two hundred credits is ten days of food. What would you have done?\"" }
+          - { tr: "\"İki çocuğum var,\" diyor. \"Sekiz kristal on günlük yemek demek. Sen olsan ne yapardın?\"", en: "\"I've got two kids,\" he says. \"Eight crystals is ten days of food. What would you have done?\"" }
         secenekler:
           - id: "affet"
             etiket: { tr: "Git. Çocuklarına bak", en: "Go. Take care of your kids" }
@@ -2952,7 +2960,7 @@ olaylar:
       - id: "olu_avci_katil_zafer"
         paragraflar:
           - { tr: "Adam yerde yatıyor, boru elinden fersah fersah uzağa savrulmuş. Penceresi hâlâ açık, görev hâlâ parlıyor: teslim bekleniyor.", en: "The man's on the ground, the pipe a mile out of reach. His window's still open, and the quest's still glowing: pending turn-in." }
-          - { tr: "\"Sistem verdi bana!\" diye bağırıyor. \"İki yüz kredi! Ne yapsaydım, ne yapsaydım?\"", en: "\"The System gave it to me!\" he yells. \"Two hundred credits! What was I supposed to do, what was I supposed to do?\"" }
+          - { tr: "\"Sistem verdi bana!\" diye bağırıyor. \"Sekiz kristal! Ne yapsaydım, ne yapsaydım?\"", en: "\"The System gave it to me!\" he yells. \"Eight crystals! What was I supposed to do, what was I supposed to do?\"" }
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
             metin: { tr: "o̷ bir alet. aleti kırmak eli durdurmaz. ama yine de kırmak isteyebilirsin; anlarım.", en: "h̷e's a tool. breaking the tool doesn't stop the hand. you might want to break it anyway. i'd get that." }
@@ -2961,7 +2969,7 @@ olaylar:
             etiket: { tr: "Onu öldür; görevini sen kapat", en: "Kill him. Close out his quest yourself" }
             etkiler:
               - ahlak: { merhamet: -7, insanlik: -4, duzen: 2 }
-              - yozlasma: 2
+              - dikkat: 2
               - gorev: { olu_avcinin_mesaji: "basla" }
               - bayrak: "olu_avci_kunyesi"
               - bayrak: "olu_avci_katil_olduruldu"
@@ -3180,7 +3188,7 @@ olaylar:
 
       - id: "avci_kizi_ofke"
         paragraflar:
-          - { tr: "Anlatıyorsun: gizli satırı, görevi, iki yüz krediyi, zil sesini. Kızın yüzündeki yas ağır ağır başka bir şeye dönüşüyor; daha soğuk, daha dimdik bir şeye.", en: "You tell her: the hidden line, the quest, the two hundred credits, the chime. The grief on her face slowly turns into something else, something colder, something that stands up straighter." }
+          - { tr: "Anlatıyorsun: gizli satırı, görevi, sekiz kristali, zil sesini. Kızın yüzündeki yas ağır ağır başka bir şeye dönüşüyor; daha soğuk, daha dimdik bir şeye.", en: "You tell her: the hidden line, the quest, the eight crystals, the chime. The grief on her face slowly turns into something else, something colder, something that stands up straighter." }
           - { tr: "\"Demek onu kimse öldürmedi. Sistem öldürdü, o adam yalnızca eliydi,\" diyor, künyeyi sıkarak. \"Sen bunu nasıl gördün? Sende ne varsa ben de ondan istiyorum.\"", en: "\"So nobody killed him, the System did, and some guy was just the hand,\" she says, squeezing the tags. \"How did you even see that? Whatever you are, I want some.\"" }
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
@@ -4656,7 +4664,7 @@ olaylar:
             etiket: { tr: "Bırak diz çöksün", en: "Let him kneel" }
             etkiler:
               - ahlak: { insanlik: -5, duzen: 3 }
-              - yozlasma: 2
+              - dikkat: 2
               - itibar: { yukselenler: 8 }
               - iliski: { vahit: { baglilik: 8, korku: 4 } }
               - bayrak: "secilmislere_katildi"
@@ -4736,7 +4744,7 @@ olaylar:
             goster: { bayrak: "secilmislere_katildi" }
             etkiler:
               - ahlak: { merhamet: -8, insanlik: -6 }
-              - yozlasma: 3
+              - dikkat: 3
               - itibar: { yukselenler: 10 }
               - iliski: { vahit: { baglilik: 8, guven: 6 } }
               - degisken: { hayatta_kalan: -4 }
@@ -4931,7 +4939,7 @@ olaylar:
               - tanis: "mert_kilic"
               - bayrak: "mert_istasyonu_bilinir"
               - ahlak: { duzen: 3, insanlik: -3 }
-              - kredi: 30
+              - oz_kristali: 1
               - itibar: { lonca: 6, sessiz_ag: -8 }
               - iliski: { mert_kilic: { guven: -15, korku: 8 }, kaya_demir: { guven: 4 } }
               - hafiza: { npc: "mert_kilic", id: "olay:mert_sifreli_mesaj", agirlik: -35 }
@@ -5138,10 +5146,10 @@ olaylar:
         yer: "kirik_istasyon"
         paragraflar:
           - { tr: "Ertesi sabah turuncu bantlı dört avcı kontrol odasının kapısını kırıyor. Telsizler, aküler, sinyal panelleri bir alışveriş arabasına yükleniyor; {npc:mert_kilic} elleri başının üstünde, köşede dikiliyor.", en: "The next morning, four hunters in orange armbands kick in the control room door. Radios, batteries, signal panels, all of it gets loaded into a shopping cart. {npc:mert_kilic} stands in the corner with his hands on his head." }
-          - { tr: "Arabayı iten avcılardan biri sana bir kese kredi uzatıyor. {npc:mert_kilic} sana bakıyor; gözlerinde öfke yok. Yalnızca kafasında bir yere not düşüyor.", en: "One of the hunters pushing the cart hands you a pouch of credits. {npc:mert_kilic} looks at you, and there's no anger in it. He's just making a note, in his head." }
+          - { tr: "Arabayı iten avcılardan biri sana bir avuç kristal uzatıyor. {npc:mert_kilic} sana bakıyor; gözlerinde öfke yok. Yalnızca kafasında bir yere not düşüyor.", en: "One of the hunters pushing the cart hands you a handful of crystals. {npc:mert_kilic} looks at you, and there's no anger in it. He's just making a note, in his head." }
         secenekler:
           - id: "omuz"
-            etiket: { tr: "Krediyi cebine koy", en: "Pocket the credits" }
+            etiket: { tr: "Kristalleri cebine koy", en: "Pocket the crystals" }
             etkiler:
               - ahlak: { insanlik: -2, duzen: 1 }
             sonraki: "@akis"

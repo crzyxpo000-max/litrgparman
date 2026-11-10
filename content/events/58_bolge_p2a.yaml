@@ -28,7 +28,7 @@ olaylar:
         yer: "kule_dibi"
         paragraflar:
           - { tr: "Kule'nin kapısındaki Lonca gişesi bu sabah bomboş. Camı açık kalmış, defteri bile yerinde yok; iki nöbetçi şafakta {yer:eski_sehir|e}, saat kulesinin dibindeki meydana çağrılmış.", en: "The Guild booth at the Spire's door is empty this morning. The window's hanging open and even the ledger's gone. Both guards got called off to {yer:eski_sehir} at dawn, to the square under the clock tower." }
-          - { tr: "Gişenin önünde otuz kişi kadar birikmiş: okul çantasına ip sarmış çocuklar, cebinde borç senedi taşıyanlar, kocasının kat numarasını avucuna yazmış bir kadın. Yirmi kredilik kat parasını bugün isteyen yok; Kule ilk kez bedava.", en: "About thirty people have bunched up out front: kids with rope wrapped around their school backpacks, folks with IOUs in their pockets, a woman with her husband's floor number written on her palm. Nobody's collecting the twenty credits a floor today. For the first time, the Spire is free." }
+          - { tr: "Gişenin önünde otuz kişi kadar birikmiş: okul çantasına ip sarmış çocuklar, cebinde borç senedi taşıyanlar, kocasının kat numarasını avucuna yazmış bir kadın. Kat başına bir kristali bugün isteyen yok; Kule ilk kez bedava.", en: "About thirty people have bunched up out front: kids with rope wrapped around their school backpacks, folks with IOUs in their pockets, a woman with her husband's floor number written on her palm. Nobody's collecting the crystal a floor today. For the first time, the Spire is free." }
           - { tr: "Kapının önüne çaycı Sabri Amca çamaşır ipi germiş, ipin ortasında da kollarını açmış duruyor. \"Para zulümdü, biliyorum!\" diye bağırıyor. \"Ama içeri çocuk sokmayan tek şey de oydu!\"", en: "Sal, the old guy who runs the tea cart by the door, has strung a clothesline across the entrance and is standing in the middle of it with his arms spread. \"The fee was a crime, I know it!\" he's yelling. \"It was also the only thing keeping kids out!\"" }
           - metin: { tr: "Halkanı gören çaycının yüzü bir an aydınlanıyor. \"Lonca'dan biri, şükür! Nöbetçileriniz nerede evlat?\"", en: "The tea man spots your Guild ring and his face lights up for a second. \"Guild! Thank God. Where are your guards, kid?\"" }
             kosul: { bayrak: "uye_lonca" }
@@ -913,13 +913,13 @@ olaylar:
     agirlik: 6
     etiketler: ["kesif", "kule", "yanki", "dikkat"]
     gerilim: 3
-    kart: { tr: "Beş yüz kredi", en: "Five hundred credits" }
+    kart: { tr: "Yirmi kristal", en: "Twenty crystals" }
     sahne: "bl7_kd_ses_avcilari_1"
     sahneler:
       - id: "bl7_kd_ses_avcilari_1"
         yer: "kule_dibi"
         paragraflar:
-          - { tr: "Avcı pazarının ilan tahtasında bu sabah imzasız bir kâğıt asılı: İÇİNDE SES TAŞIYANI GETİRENE BEŞ YÜZ KREDİ. Altına biri küçük harflerle eklemiş: birinin içinde.", en: "There's an unsigned notice on the hunter market's board this morning: 500 CREDITS FOR WHOEVER BRINGS IN THE ONE CARRYING THE VOICE. Somebody's added underneath, in lowercase: inside someone." }
+          - { tr: "Avcı pazarının ilan tahtasında bu sabah imzasız bir kâğıt asılı: İÇİNDE SES TAŞIYANI GETİRENE YİRMİ KRİSTAL. Altına biri küçük harflerle eklemiş: birinin içinde.", en: "There's an unsigned notice on the hunter market's board this morning: 20 CRYSTALS FOR WHOEVER BRINGS IN THE ONE CARRYING THE VOICE. Somebody's added underneath, in lowercase: inside someone." }
           - { tr: "Kuyruk boyunca üç kişi dolaşıyor. Birinin elinde eski bir el telsizi var, antenine çatlak bir kapı çekirdeği sarılmış; telsiz kimin yanına gelse cızırdıyor, bazılarının yanında boğuk boğuk ötüyor.", en: "Three people are working their way down the line. One of them is carrying an old walkie-talkie with a cracked Gate core wired to the antenna. It crackles at everybody it passes, and next to some people it lets out a muffled whine." }
           - { tr: "Telsiz şimdi on bir yaşlarında bir oğlanın önünde susmak bilmiyor. Çocuğun penceresi Kule'de aldığı bir yaradan beri takılıyor, bunu herkes biliyor. Avcıların umurunda bile değil; çocuğu kolundan sürüklüyorlar.", en: "Right now it won't shut up in front of a boy about eleven. His window's been glitching ever since he got hurt in the Spire, and everybody knows it. The hunters don't care. They're dragging him off by the arm." }
           - metin: { tr: "Bülten gecesi o sesin seninle olduğunu herkesin önünde söylemiştin. Avcılardan biri seni görünce duraksıyor, ama arkadaşları ilandaki rakama bakıp yürümeye devam ediyor.", en: "On the night of the bulletin, you told everybody that voice was with you. One of the hunters falters when he sees you, but his buddies glance at the number on the notice and keep walking." }
@@ -939,7 +939,7 @@ olaylar:
             metin: { tr: "\"Penceresi yaralı olan çocuğu sürüklüyorlar. O yarayı ben diktim.\"", en: "\"That's the kid with the injured window they're dragging. I stitched that wound myself.\"" }
           - npc: "aras_kurt"
             kosul: { yoldas: "aras_kurt" }
-            metin: { tr: "\"Beş yüz mü? Bana sorsalar bin derdim. Sen ucuz gidiyorsun.\"", en: "\"Five hundred? If they'd asked me, I'd have said a thousand. You're going cheap.\"" }
+            metin: { tr: "\"Yirmi mi? Bana sorsalar kırk derdim. Sen ucuz gidiyorsun.\"", en: "\"Twenty? If they'd asked me, I'd have said forty. You're going cheap.\"" }
           - npc: "deniz_arman"
             kosul: { yoldas: "deniz_arman" }
             metin: { tr: "\"Senin yerine o çocuğu götürüyorlar. Bunu biliyorsun, değil mi?\"", en: "\"They're taking that kid instead of you. You know that, right?\"" }
@@ -995,7 +995,7 @@ olaylar:
         yer: "kule_dibi"
         paragraflar:
           - { tr: "Telsiz sana yirmi adım kala çığlığı basıyor; çekirdek antenin ucunda kıvılcımlar saçıp kararıyor. Avcıların ikisi geri çekiliyor.", en: "Twenty paces out, the radio starts screaming. The core sparks at the tip of the antenna and goes dark. Two of the hunters back off." }
-          - { tr: "Liderleri kalıyor, bir sana bakıyor, bir ilan tahtasına. Sonra kâğıdı söküp buruşturuyor. \"Beş yüz kredi seni taşımaya yetmez,\" diyor ve çocuğun kolunu bırakıyor.", en: "Their leader stays. He looks at you, then at the board. Then he tears down the notice and wads it up. \"Five hundred credits isn't enough to carry you,\" he says, and lets go of the kid's arm." }
+          - { tr: "Liderleri kalıyor, bir sana bakıyor, bir ilan tahtasına. Sonra kâğıdı söküp buruşturuyor. \"Yirmi kristal seni taşımaya yetmez,\" diyor ve çocuğun kolunu bırakıyor.", en: "Their leader stays. He looks at you, then at the board. Then he tears down the notice and wads it up. \"Twenty crystals isn't enough to carry you,\" he says, and lets go of the kid's arm." }
           - { tr: "Çocuk gitmiyor. Pazarın ortasında durmuş, sana kocaman açılmış gözlerle bakıyor.", en: "The kid doesn't run. He just stands in the middle of the market, staring at you with huge eyes." }
         secenekler:
           - id: "soyle"
@@ -1120,7 +1120,7 @@ olaylar:
         paragraflar:
           - { tr: "Pazarın arkasında, kırık bir otobüs durağının altında çocuklar halka olmuş. Ortada Efe oturuyor; önüne ekmek, şeker, iki küçük kristal bırakmışlar. Biri ona penceresini açtırmış, takılan satıra bakıyor; öbürleri nefesini tutmuş bekliyor.", en: "Behind the market, under a busted bus shelter, a bunch of kids have formed a circle. Eli's sitting in the middle with bread, candy, and two little crystals laid out in front of him. One kid has him open his window and is staring at the glitching line while the rest hold their breath." }
           - { tr: "\"Ses ne diyor?\" diye soruyor içlerinden en küçüğü. Efe gözlerini kısıp bir süre susuyor, ardından ciddi ciddi uyduruyor: \"Yarın yağmur yağmayacak diyor.\" Çocuklar inanıyor.", en: "\"What's the voice saying?\" asks the littlest one. Eli squints and stays quiet a while, then makes something up with a perfectly straight face. \"It says it's not gonna rain tomorrow.\" The kids buy it." }
-          - metin: { tr: "Sağ kaşının üstünde taze bir dikiş var. Avcılar onu {yer:eski_sehir|de} bir gece tutup bırakmışlar; ses çıkmayınca beş yüz krediyi alamamışlar.", en: "There's fresh stitching over his right eyebrow. The hunters held him one night in {yer:eski_sehir} and let him go. No voice, no five hundred credits." }
+          - metin: { tr: "Sağ kaşının üstünde taze bir dikiş var. Avcılar onu {yer:eski_sehir|de} bir gece tutup bırakmışlar; ses çıkmayınca yirmi kristali alamamışlar.", en: "There's fresh stitching over his right eyebrow. The hunters held him one night in {yer:eski_sehir} and let him go. No voice, no twenty crystals." }
             kosul: { bayrak: "bl7_efe_goturuldu" }
           - { tr: "Tezgâhçı kadınlardan biri seni kenara çekiyor. \"Bu gece başka bir ekip gelecekmiş,\" diyor. \"Bunlar telsizle değil, zincirle geliyor.\"", en: "One of the women who work the stalls pulls you aside. \"Word is another crew's coming tonight,\" she says. \"These ones don't bring a radio. They bring chains.\"" }
         sezgiler:
@@ -1810,7 +1810,7 @@ olaylar:
           - { tr: "Mendireğin başında üç yabancı belirmiş. Birinin elinde antenine kapı çekirdeği sarılmış bir telsiz var; ilan buraya da ulaşmış demek.", en: "Three strangers have turned up at the head of the breakwater. One of them is carrying a walkie-talkie with a Gate core wired to the antenna. So the notice made it down here too." }
         sezgiler:
           - kosul: { stat: { per: 40 } }
-            metin: { tr: "Telsizin çekirdeği taze ve iri. Bu ekip ilandaki beş yüz krediyi değil, daha fazlasını kovalıyor.", en: "That core on the radio is fresh, and big. This crew is chasing more than the five hundred on the notice." }
+            metin: { tr: "Telsizin çekirdeği taze ve iri. Bu ekip ilandaki yirmi kristali değil, daha fazlasını kovalıyor.", en: "That core on the radio is fresh, and big. This crew is chasing more than the twenty on the notice." }
           - kosul: { bayrak: "yanki_bagi", bayrak_yok: "yanki_susturuldu" }
             metin: { tr: "çocuklar tekerlemeyi yanlış söylüyor. birinin içinde değil, birinin yanında olmalıydı. ama o zaman kafiye bozulurdu.", en: "the kids have the rhyme wrong. it's not inside someone, it's beside someone. but then it wouldn't scan." }
         yoldas_tepkileri:
@@ -1933,7 +1933,7 @@ olaylar:
       - id: "bl7_kr_yusuf_ben"
         yer: "kordon"
         paragraflar:
-          - { tr: "Telsiz sana on adım kala çığlığı basıyor, çekirdeği çatlayıp kararıyor. Avcılar birbirine bakıyor; beş yüz kredi için seninle uğraşmaya kimse gönüllü değil.", en: "Ten paces out, the radio starts screaming, and the core cracks and goes dark. The hunters look at each other. Nobody's volunteering to take you on for five hundred credits." }
+          - { tr: "Telsiz sana on adım kala çığlığı basıyor, çekirdeği çatlayıp kararıyor. Avcılar birbirine bakıyor; yirmi kristal için seninle uğraşmaya kimse gönüllü değil.", en: "Ten paces out, the radio starts screaming, and the core cracks and goes dark. The hunters look at each other. Nobody's volunteering to take you on for twenty crystals." }
           - { tr: "Gidiyorlar. Arkalarında çocuklar tekerlemeyi yeniden söylemeye başlıyor; bu kez ip her dönüşte seni gösteriyor.", en: "They leave. Behind them, the kids start up the rhyme again, and this time every turn of the rope points at you." }
         secenekler:
           - id: "son"

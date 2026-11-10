@@ -206,7 +206,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - ahlak: { insanlik: -2 }
-              - yozlasma: 2
+              - dikkat: 2
               - iliski: { yanki: { guven: 4 } }
               - bilgi: "duvar_ayrilmis_uc"
             kronik: { tr: "Kimsenin okuyamadığı üç satıra eğildin ve orada kendi etiketini tanıdın.", en: "At the Wall of the Missing you looked at the three lines no one could read, and recognized your own tag." }
@@ -464,7 +464,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - ahlak: { merhamet: 4, insanlik: -2 }
-              - yozlasma: 3
+              - dikkat: 3
               - iliski: { yanki: { guven: 5, baglilik: 3 } }
               - bayrak: "kayip_maske"
               - bayrak: "kayip_aile_birlesti"
@@ -592,7 +592,7 @@ olaylar:
             gerekli: { esya: { canavar_cekirdegi: 1 } }
             etkiler:
               - esya: { canavar_cekirdegi: -1 }
-              - kredi: 60
+              - oz_kristali: 2
               - ahlak: { duzen: -1, insanlik: -1 }
               - bayrak: "balikhane_goruldu"
             kronik: { tr: "Balıkhanenin kantarına ilk önce satıcı olarak yanaştın.", en: "You stepped up to the fish hall scale as a seller first." }
@@ -683,7 +683,7 @@ olaylar:
             etiket: { tr: "Kabul et; onda üçünü al", en: "Take the deal. Three in ten" }
             etkiler:
               - ahlak: { merhamet: -4, insanlik: -4 }
-              - kredi: 80
+              - oz_kristali: 3
               - bayrak: "balikhane_ortak"
               - bayrak: "balikhane_pay"
               - itibar: { siginak: -3 }
@@ -760,7 +760,7 @@ olaylar:
             etiket: { tr: "Burası artık benim; kantar bana çalışır", en: "This place is mine now. The scale works for me" }
             etkiler:
               - ahlak: { merhamet: -4, insanlik: -5, duzen: -2 }
-              - kredi: 120
+              - oz_kristali: 5
               - bilgi: "balikhane_kristal_kaynagi"
               - bayrak: "balikhane_ele_gecirildi"
               - bayrak: "balikhane_pay"
@@ -870,7 +870,7 @@ olaylar:
             etiket: { tr: "Stoklara el koy; ganimet kazananındır", en: "Seize the stock. Spoils go to the winner" }
             etkiler:
               - ahlak: { insanlik: -4, merhamet: -3 }
-              - kredi: 90
+              - oz_kristali: 4
               - oz_kristali: 4
               - esya: { buyuk_iyilesme_iksiri: 2 }
               - itibar: { siginak: -4, lonca: 2 }
@@ -1009,7 +1009,6 @@ olaylar:
             goster: { bayrak: "balikhane_pay" }
             etkiler:
               - ahlak: { merhamet: 4, insanlik: 3 }
-              - kredi: -40
               - iliski: { yanki: { saygi: 2 } }
               - xp_seviye: 25
             kronik: { tr: "Ölülerden aldığın paydan bir kristali, içinde oğlunu tanıyan anneye geri verdin.", en: "Out of the cut you made off the dead, you gave one crystal back to a mother who recognized her son in it." }
@@ -1019,7 +1018,7 @@ olaylar:
             goster: { bayrak: "balikhane_pay" }
             etkiler:
               - ahlak: { duzen: 2, merhamet: -2, insanlik: -2 }
-              - kredi: 20
+              - oz_kristali: 1
             kronik: { tr: "Bir anneye oğlunun kristalini maliyetine sattın ve iyilik ettiğini sandın.", en: "You sold a mother her son's crystal at cost, and you thought you were doing her a favor." }
             sonraki: "hesap_anne"
           - id: "kapat_simdi"
@@ -1072,9 +1071,10 @@ olaylar:
         secenekler:
           - id: "is"
             etiket: { tr: "Dalgıçlara iş ver: ölüleri gömmek için çıkarsınlar", en: "Give the divers work: haul the dead out for burial" }
+            gerekli: { oz_kristali_min: 2 }
             etkiler:
               - ahlak: { merhamet: 4, insanlik: 3 }
-              - kredi: -50
+              - oz_kristali: -2
               - itibar: { siginak: 4 }
               - bayrak: "balikhane_dalgic_mezar"
               - xp_seviye: 45
@@ -1745,7 +1745,7 @@ olaylar:
             gerekli: { stat: { int: 35 } }
             etkiler:
               - ahlak: { merhamet: 4, insanlik: -3 }
-              - yozlasma: 4
+              - dikkat: 4
               - iliski: { yanki: { guven: 5, baglilik: 3 }, elif_sari: { korku: 10, saygi: 5 } }
             kronik: { tr: "Karantina gemisinde bir çocuğun kristalini {npc:yanki|e} yedirdin; çocuk kurtuldu.", en: "On the quarantine ship you fed a child's crystal to {npc:yanki}, and the child lived." }
             sonraki: "karantina_yanki"
@@ -1800,7 +1800,7 @@ olaylar:
             etiket: { tr: "Hepsini boşalt, otuz bir kişinin hepsini", en: "Drain them all. All thirty-one" }
             etkiler:
               - ahlak: { merhamet: 5, insanlik: -5 }
-              - yozlasma: 10
+              - dikkat: 10
               - iliski: { yanki: { guven: 6, baglilik: 6 }, elif_sari: { korku: 15, saygi: 5 } }
               - hafiza: { npc: "elif_sari", id: "olay:liman_karantina_gemisi", agirlik: 25 }
               - degisken: { hayatta_kalan: 3 }
@@ -2151,7 +2151,7 @@ olaylar:
               - ahlak: { duzen: 1, merhamet: -1 }
               - esya: { buyuk_iyilesme_iksiri: 2 }
               - oz_kristali: 4
-              - kredi: 60
+              - oz_kristali: 2
               - xp_seviye: 20
             sonraki: "@akis"
           - id: "cakallara"
@@ -2488,9 +2488,10 @@ olaylar:
             sonraki: "fenerci_yuzus"
           - id: "durdur"
             etiket: { tr: "Oğlanı durdur, bu gece evine erzak götür", en: "Stop the kid. Bring food home for him tonight" }
+            gerekli: { oz_kristali_min: 1 }
             etkiler:
               - ahlak: { merhamet: 4, duzen: 1 }
-              - kredi: -30
+              - oz_kristali: -1
               - itibar: { siginak: 2 }
               - degisken: { hayatta_kalan: 1 }
               - tohum: { olay: "kordon_fener_baligi", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Mendireğin ötesindeki ışık yeniden yanıyor.", en: "The light past the breakwater is burning again." } }
@@ -2907,7 +2908,7 @@ olaylar:
             etiket: { tr: "İkinci sese cevap ver", en: "Answer the second voice" }
             etkiler:
               - bilgi: "fener_geri_sayim"
-              - yozlasma: 3
+              - dikkat: 3
               - iliski: { yanki: { guven: -6, korku: 4 }, mert_kilic: { saygi: 3 } }
               - bayrak: "fener_cevap_verildi"
               - xp_seviye: 35
@@ -3506,7 +3507,7 @@ olaylar:
             goster: { bayrak: "olu_bolge_kasa" }
             etkiler:
               - ahlak: { merhamet: -3, insanlik: -3 }
-              - kredi: 150
+              - oz_kristali: 6
               - gun: 1
               - bayrak: "olu_bolge_gec"
             kronik: { tr: "Çatıdakilere gitmeden önce otel kasasından payını aldın; düşmüş {yer:kordon|de} çatıya ancak ertesi sabah çıkabildin.", en: "In the fallen Esplanade you took your cut of the hotel safe before going up to the roof, and you didn't reach the roof until the next morning." }
@@ -3572,7 +3573,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - ahlak: { merhamet: 4, insanlik: -3 }
-              - yozlasma: 4
+              - dikkat: 4
               - iliski: { yanki: { guven: 4, baglilik: 2 } }
               - degisken: { hayatta_kalan: 4 }
               - bayrak: "olu_bolge_herkes"
@@ -3590,7 +3591,7 @@ olaylar:
         yer: "kordon"
         paragraflar:
           - { tr: "Çatıya ertesi sabah çıkıyorsun. On bir yüz sana dönüyor. Battaniyenin üstünde yatan on ikinci adam yok; battaniyede yalnızca tuz ve bir çift ayakkabı kalmış.", en: "You reach the roof the next morning. Eleven faces turn toward you. The twelfth, the man on the blanket, is gone. There's nothing on the blanket but salt and a pair of shoes." }
-          - { tr: "Kimse ağzını açmıyor. Çantandaki kredilerin ağırlığını sırtında hissediyorsun.", en: "Nobody says anything. You can feel the weight of the credits in your pack." }
+          - { tr: "Kimse ağzını açmıyor. Çantandaki kristallerin ağırlığını sırtında hissediyorsun.", en: "Nobody says anything. You can feel the weight of the crystals in your pack." }
         secenekler:
           - id: "inis"
             etiket: { tr: "On bir kişiyi indir", en: "Bring the eleven down" }
@@ -3604,7 +3605,7 @@ olaylar:
         yer: "kordon"
         paragraflar:
           - { tr: "Tuz kabuğunun sınırına vardığınızda aileler koşarak geliyor. Fotoğraflar yere düşüyor; artık kimsenin fotoğrafa ihtiyacı kalmamış.", en: "When you reach the edge of the salt crust, the families run. Photos fall on the ground. Nobody needs a photo anymore." }
-          - metin: { tr: "Lonca ekibi çantaları dolu, arkadan geliyor. Başlarındaki, ailelerin önünde, herkesin göreceği biçimde kasadan çıkma bir desteyi sana uzatıyor.", en: "The Guild crew comes up behind you with full packs. Their leader holds out a wad from the safe to you, in front of the families, where everybody can see." }
+          - metin: { tr: "Lonca ekibi çantaları dolu, arkadan geliyor. Başlarındaki, ailelerin önünde, herkesin göreceği biçimde kasadan çıkma bir avuç kristali sana uzatıyor.", en: "The Guild crew comes up behind you with full packs. Their leader holds out a handful of crystals from the safe to you, in front of the families, where everybody can see." }
             kosul: { bayrak: "olu_bolge_kasa", bayrak_yok: "olu_bolge_gec" }
           - metin: { tr: "Sırtında otelin kasası var; menteşeleriyle birlikte koca kasa. Lonca ekibi onu omzunda görünce uzun süre dili tutulmuş kalıyor.", en: "The hotel safe is on your back. The whole safe, hinges and all. The Guild crew sees it on your shoulder and can't say anything for a long time." }
             kosul: { bayrak: "olu_bolge_ikisi" }
@@ -3629,17 +3630,17 @@ olaylar:
             kronik: { tr: "Düşmüş {yer:kordon|den} hem insanları hem kasayı çıkardın ve kasayı Lonca'ya teslim ettin.", en: "You brought both the people and the safe out of the fallen Esplanade, and handed the safe over to the Guild." }
             sonraki: "@akis"
           - id: "al"
-            etiket: { tr: "Desteyi al", en: "Take the wad" }
+            etiket: { tr: "Kristalleri al", en: "Take the crystals" }
             goster: { bayrak: "olu_bolge_kasa", bayrak_yok: "olu_bolge_gec" }
             etkiler:
               - ahlak: { insanlik: -3, merhamet: -1 }
-              - kredi: 100
+              - oz_kristali: 4
               - itibar: { lonca: 2, siginak: -3 }
               - xp_seviye: 60
             kronik: { tr: "Kurtardığın insanların ailelerinin önünde Lonca'dan otel kasasının payını aldın.", en: "In front of the families of the people you'd saved, you took your share of the hotel safe from the Guild." }
             sonraki: "@akis"
           - id: "reddet"
-            etiket: { tr: "Desteyi geri it", en: "Push the wad back" }
+            etiket: { tr: "Kristalleri geri it", en: "Push the crystals back" }
             goster: { bayrak: "olu_bolge_kasa", bayrak_yok: "olu_bolge_gec" }
             etkiler:
               - ahlak: { insanlik: 3, duzen: -1 }
@@ -3663,7 +3664,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: -1 }
               - xp_seviye: 40
-            kronik: { tr: "Düşmüş {yer:kordon|den} dönerken çantandaki kredilerin ağırlığı omuzlarına çöktü.", en: "Walking out of the fallen Esplanade, you felt the weight of the credits in your pack settle on your shoulders." }
+            kronik: { tr: "Düşmüş {yer:kordon|den} dönerken çantandaki kristallerin ağırlığı omuzlarına çöktü.", en: "Walking out of the fallen Esplanade, you felt the weight of the crystals in your pack settle on your shoulders." }
             sonraki: "@akis"
 
   # ================================================================== ÇAKALLAR (Eski Şehir kapı avcıları; keşif)
@@ -3838,7 +3839,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 3 }
               - esya: { hamam_kristali: 1 }
-              - kredi: 50
+              - oz_kristali: 2
               - gunluk: { kapi: 1 }
               - xp_seviye: 50
               - tohum: { olay: "kapi_avcilari_donus", gecikme: { min: 8, max: 15 }, hatirlatma: { tr: "Hamamdaki kapıdan sonra Çakallar'ın adı sokaklarda dolaşıyor.", en: "Since the Gate in the bathhouse, the Jackals' name has been going around the streets." } }
@@ -4054,9 +4055,10 @@ olaylar:
         secenekler:
           - id: "ode"
             etiket: { tr: "Ekmeklerin parasını öde, kız gitsin", en: "Pay for the bread. Let her go" }
+            gerekli: { oz_kristali_min: 1 }
             etkiler:
               - ahlak: { merhamet: 4, duzen: -1 }
-              - kredi: -20
+              - oz_kristali: -1
               - itibar: { siginak: 2 }
             kronik: { tr: "{yer:eski_sehir|in} fırınında bir kızın çaldığı üç somunun parasını sen ödedin; kurala ise dokunmadın.", en: "At the {yer:eski_sehir} bakery you paid for the three loaves a girl stole, and the rule stayed exactly where it was." }
             sonraki: "ekmek_ode"

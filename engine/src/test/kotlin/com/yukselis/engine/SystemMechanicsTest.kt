@@ -213,6 +213,8 @@ class SystemMechanicsTest {
 
     @Test
     fun `meslek teklifi seviye 5te gelir ve simyaci iksir uretir`() {
+        // Paket 4: meslek sistemi kapalı (Progression.PROFESSIONS_ENABLED); eski davranış anahtar açılınca sınanır.
+        org.junit.Assume.assumeTrue(Progression.PROFESSIONS_ENABLED)
         var s = apply(fresh(), Effect.GainXp(xpForLevel(5)))
         assertTrue(s.prompts.any { it.kind == PromptKind.PROFESSION })
         s = engine.resolvePrompt(s, "simyaci", lang).state

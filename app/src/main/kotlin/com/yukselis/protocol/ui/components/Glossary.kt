@@ -40,7 +40,6 @@ object Glossary {
         stringResource(R.string.help_grade_term) to stringResource(R.string.help_grade),
         stringResource(R.string.help_public_term) to stringResource(R.string.help_public),
         stringResource(R.string.help_attention_term) to stringResource(R.string.help_attention),
-        stringResource(R.string.help_corruption_term) to stringResource(R.string.help_corruption),
         stringResource(R.string.help_points_term) to stringResource(R.string.help_points),
         stringResource(R.string.help_morality_term) to stringResource(R.string.help_morality),
     )

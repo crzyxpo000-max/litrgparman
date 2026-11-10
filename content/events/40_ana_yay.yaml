@@ -533,7 +533,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - gizle: 10
-              - yozlasma: 4
+              - dikkat: 4
               - ahlak: { merhamet: 3, insanlik: -3 }
               - iliski: { yanki: { guven: 6, baglilik: 4 } }
               - degisken: { hayatta_kalan: 1 }
@@ -1107,7 +1107,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - gizle: 4
-              - yozlasma: 2
+              - dikkat: 2
               - iliski: { yanki: { guven: 4 } }
             sonraki: "@akis"
 
@@ -1179,9 +1179,10 @@ olaylar:
           - { tr: "\"En çok kim ödüyor, biliyor musun? Siyah ceketli biri. Senin kadar hızlı.\"", en: "\"Want to know who's paying the most? Guy in a black jacket. Guy as fast as you.\"" }
         secenekler:
           - id: "ode"
-            etiket: { tr: "Susmaları için kredi ver", en: "Pay them to keep quiet" }
+            etiket: { tr: "Susmaları için kristal ver", en: "Pay them to keep quiet" }
+            gerekli: { oz_kristali_min: 1 }
             etkiler:
-              - kredi: -20
+              - oz_kristali: -1
               - gizle: 8
               - ahlak: { duzen: -1 }
             sonraki: "@akis"
@@ -1242,7 +1243,7 @@ olaylar:
           - id: "kalk"
             etiket: { tr: "Kâğıdı buruştur, kalk", en: "Crumple it up and get moving" }
             etkiler:
-              - kredi: -20
+              - oz_kristali: -1
               - gizle: 5
               - stat: { wil: 1 }
             sonraki: "@akis"
@@ -1311,7 +1312,7 @@ olaylar:
               - bayrak: "dikkat50_kurban"
               - ahlak: { merhamet: -10, insanlik: -6 }
               - gizle: 20
-              - yozlasma: 6
+              - dikkat: 6
               - degisken: { hayatta_kalan: -2 }
               - iliski: { yanki: { guven: 8, saygi: 6 } }
             sonraki: "dikkat_50_kurban"
@@ -1568,7 +1569,7 @@ olaylar:
             etiket: { tr: "Çantasını al, onu bırak", en: "Take his pack. Leave him" }
             etkiler:
               - ahlak: { merhamet: -8, insanlik: -4 }
-              - kredi: 30
+              - oz_kristali: 1
               - esya: { buyuk_iyilesme_iksiri: 1 }
               - degisken: { hayatta_kalan: -1 }
             sonraki: "metro_makas"
@@ -1783,12 +1784,12 @@ olaylar:
           - { tr: "Son hatırladığın bir anons sesi. Gözünü açtığında peronun soğuk betonunda yatıyorsun; Kapı seni bayat bir lokma gibi geri tükürmüş.", en: "The last thing you remember is an announcement. When you open your eyes you're on the platform's cold concrete. The Gate spat you back out like a stale bite." }
           - metin: { tr: "Radyocu da yanı başında; Kapı ikinizi birden tükürmüş. \"En azından birlikteyiz,\" diyor öksürerek.", en: "The radio guy is lying next to you. The Gate spat you both out. \"At least we're together,\" he says, coughing." }
             kosul: { bayrak: "metro_tasindi" }
-          - { tr: "Cebindeki kredilerin bir kısmı eksik. Kapı payını almış.", en: "Some of the credits in your pocket are gone. The Gate took its cut." }
+          - { tr: "Kesendeki kristallerden biri eksik. Kapı payını almış.", en: "One of the crystals in your pouch is gone. The Gate took its cut." }
         secenekler:
           - id: "kalk"
             etiket: { tr: "Kalk. Bir dahaki sefere", en: "Get up. Next time" }
             etkiler:
-              - kredi: -15
+              - oz_kristali: -1
               - tehlike: { kirik_istasyon: 5 }
             sonraki: "@akis"
 
@@ -1808,7 +1809,7 @@ olaylar:
         yer: "harabe_carsi"
         paragraflar:
           - { tr: "Çarşının alt katında bir banka şubesinin vitrini paramparça. İçeride kasa dairesinin çelik kapısı ortada yok; yerinde bir ışık halkası dönüyor.", en: "On the mall's lower level, the front of a bank branch is smashed in. Inside, the vault's steel door is gone. In its place, a ring of light, turning." }
-          - { tr: "Önünde, yıkık gişelerin arkasına dört çöp avcısı barikat kurmuş. Biri bir kartona şöyle yazmış: GEÇİŞ 15 KREDİ. PAZARLIK YOK.", en: "In front of it, behind the wrecked teller windows, four scrappers have thrown up a barricade. One wrote on a piece of cardboard: ENTRY 15 CREDITS. NO HAGGLING." }
+          - { tr: "Önünde, yıkık gişelerin arkasına dört çöp avcısı barikat kurmuş. Biri bir kartona şöyle yazmış: GEÇİŞ BİR KRİSTAL. PAZARLIK YOK.", en: "In front of it, behind the wrecked teller windows, four scrappers have thrown up a barricade. One wrote on a piece of cardboard: ENTRY: ONE CRYSTAL. NO HAGGLING." }
           - { tr: "\"İçeride ne var bilmiyoruz,\" diyor içlerinden biri. \"Ama bilmediğimizin parasını alırız.\"", en: "\"Don't know what's in there,\" one of them says. \"But we charge for what we don't know.\"" }
         bildirimler:
           - tur: "sistem"
@@ -1823,12 +1824,13 @@ olaylar:
         yoldas_tepkileri:
           - npc: "deniz_arman"
             kosul: { yoldas: "deniz_arman" }
-            metin: { tr: "\"On beş kredi, öyle mi? Bırak ben konuşayım.\"", en: "\"Fifteen credits, huh? Let me do the talking.\"" }
+            metin: { tr: "\"Koca bir kristal, öyle mi? Bırak ben konuşayım.\"", en: "\"A whole crystal, huh? Let me do the talking.\"" }
         secenekler:
           - id: "ode"
             etiket: { tr: "Ücreti öde", en: "Pay the fee" }
+            gerekli: { oz_kristali_min: 1 }
             etkiler:
-              - kredi: -15
+              - oz_kristali: -1
               - ahlak: { duzen: 2 }
               - tohum: { olay: "carsi_cetesi", gecikme: { min: 2, max: 5 }, hatirlatma: { tr: "Kasa dairesinden çıktığını çarşıda birileri görmüş.", en: "Somebody at the mall saw you come out of that vault." } }
             sonraki: "kasa_lobi"
@@ -1845,7 +1847,6 @@ olaylar:
             etiket: { tr: "Bırak, pazarlığı {npc:deniz_arman} yapsın", en: "Let {npc:deniz_arman} do the haggling" }
             goster: { yoldas: "deniz_arman" }
             etkiler:
-              - kredi: -5
               - iliski: { deniz_arman: { saygi: 6, baglilik: 3 } }
             sonraki: "kasa_lobi"
           - id: "dovus"
@@ -1919,7 +1920,7 @@ olaylar:
             etiket: { tr: "Önce kiralık kasaları boşalt", en: "Clean out the deposit boxes first" }
             etkiler:
               - ahlak: { merhamet: -5, insanlik: -2 }
-              - kredi: 40
+              - oz_kristali: 2
               - esya: { hurda: 2 }
               - degisken: { hayatta_kalan: -1 }
             sonraki: "kasa_ana"
@@ -2015,7 +2016,7 @@ olaylar:
             etkiler:
               - oz_kristali: 3
               - esya: { canavar_cekirdegi: 1, kepenk_disi: 1, mana_iksiri: 1 }
-              - kredi: 40
+              - oz_kristali: 2
               - xp: 250
               - gunluk: { kapi: 1 }
             sonraki: "@akis"
@@ -2024,7 +2025,7 @@ olaylar:
             etkiler:
               - oz_kristali: 3
               - esya: { canavar_cekirdegi: 1, kepenk_disi: 2, mana_iksiri: 1 }
-              - kredi: 40
+              - oz_kristali: 2
               - xp: 250
               - gunluk: { kapi: 1 }
               - dikkat: 3
@@ -2035,7 +2036,7 @@ olaylar:
             etkiler:
               - oz_kristali: 3
               - esya: { canavar_cekirdegi: 1, kepenk_disi: 1, mana_iksiri: 1 }
-              - kredi: 10
+              - oz_kristali: 1
               - xp: 250
               - gunluk: { kapi: 1 }
               - ahlak: { merhamet: 3 }
@@ -2064,7 +2065,7 @@ olaylar:
           - id: "kalk"
             etiket: { tr: "Suyu al, kalk", en: "Take the water. Get up" }
             etkiler:
-              - kredi: -15
+              - oz_kristali: -1
               - can: 10
               - tehlike: { harabe_carsi: 5 }
             sonraki: "@akis"

@@ -811,8 +811,8 @@ class StoryEngine(val content: Content) {
             showRank = state.act >= 2 || state.hasFlag("olay_siralama_gunu"),
             showRelations = state.npcs.values.any { it.known },
             showMap = state.act >= 2,
-            showArmy = npcEngine.armyPower(state) > 0,
-            showKnowledge = state.knowledge.isNotEmpty(),
+            showArmy = npcEngine.armyPower(state) > 0 || state.variable(WorldState.UI_ARMY_VAR) > 0,
+            showKnowledge = state.knowledge.isNotEmpty() || state.variable(WorldState.UI_KNOWLEDGE_VAR) > 0,
         )
     }
 
@@ -845,7 +845,8 @@ class StoryEngine(val content: Content) {
 
     fun bag(state: WorldState, lang: Lang): BagView {
         val p = state.player
-        val prof = p.profession
+        // Paket 4 (DECISIONS #166): meslek kapalı; eski kayıttaki meslek de arayüzde görünmez.
+        val prof = if (Progression.PROFESSIONS_ENABLED) p.profession else null
         val recipes = if (prof == null) {
             emptyList()
         } else {

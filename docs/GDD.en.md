@@ -53,7 +53,7 @@ The MC's stat growth is **exponential** (Daily Quest streaks, the Unique skill, 
 
 - **Global Ranking:** a live leaderboard of humanity's strongest (the MC, Ash Wolfe, Marcus Stone, procedural hunters). NPCs climb it off-screen, and the System announces the changes. Guilds, the Ascended, and rivals react to the MC's rank.
 - **Hidden vs. Revealed Power:** the MC has a **true level** and a **public level**. [Conceal] options keep Attention low and set up "they underestimated me" payoffs; [Reveal] options earn fear, respect, and recruitment offers but raise Attention. NPCs react to the public level until the reveal.
-- **Anomaly Attention:** the main tension meter, replacing "you might lose." Fast growth and reveals raise it; thresholds trigger hunters, System "corrections," Ancient envoys, and rivals. A separate **Corruption** meter tracks dark and cursed skills.
+- **Anomaly Attention:** the main tension meter, replacing "you might lose." It is the **single meter** (Package 4, DECISIONS #168: the old Corruption meter folded into Attention; dark or cursed powers, penalty skills, and traits raise Attention directly). Fast growth and reveals raise it; thresholds trigger hunters, System "corrections," Ancient envoys, and rivals. A separate **Corruption** meter tracks dark and cursed skills.
 - **Witnesses and Legend:** feats done in front of NPCs spread as rumors and turn into titles and faction reactions. The same feat reads differently per faction (the Haven Council fears a massacre; the Iron Guild admires it).
 - **Gap Breaking:** the Grade-gap damage rule still applies to the world, but beating an enemy a Grade above you grants huge XP, a "Gap Breaker" title chain, and a shot at a Unique skill.
 - **Army:** summons and followers that scale with the MC (shadow soldiers, tamed beasts, or a guild, depending on class), so the power fantasy works at scale in Acts 3–4.
@@ -162,6 +162,7 @@ Hidden class examples:
 - **Hunter's Eye** — kill 50 enemies with a first-strike crit.
 
 Class is separate from the **Profession** tree: Alchemist, Blacksmith, Runesmith, Chef, Cartographer. Professions level on their own and produce gear, potions, and maps.
+**Package 4 (DECISIONS #166): the Profession/crafting system is switched off.** Definitions and code remain (`professions.yaml`, `Progression.PROFESSIONS_ENABLED`); the player is never offered one and the Bag has no crafting.
 
 ### Skills
 
@@ -180,8 +181,8 @@ Class is separate from the **Profession** tree: Alchemist, Blacksmith, Runesmith
 ### Daily Quest and economy
 
 - **Daily Quest:** every in-game day the System assigns a world-grounded task (haul the camp's water, walk the border, close 3 gates; never gym rep counts). Finish it for +1 free stat point (plus one more for every 7-day streak); skip it and risk being pulled into the Stopped Hour (DECISIONS #98). **Only the MC has the Daily Quest** (see OP MC design).
-- **Currency:** Credits (System shop, trading) and Essence Crystals (evolutions, skill fusion).
-- **Gear:** 8 slots, rarity colors, set bonuses; upgraded through Professions.
+- **Currency:** **Essence Crystals** only (evolutions, skill fusion, story payments; condition `oz_kristali_min`). Credits were removed (Package 4, DECISIONS #167): story payments were converted to crystals (roughly 25 Credits = 1 crystal).
+- **Gear:** 8 slots, rarity colors, set bonuses (no upgrades while Professions are off).
 
 ## Combat system
 
@@ -446,7 +447,7 @@ The game is built for one-handed play in portrait on an Android phone and should
 | Essence | Ateş · Uzay · Ölüm · Koruma · Yıkım · Zaman · Avlanma · Yankı | Fire · Space · Death · Warding · Ruin · Time · the Hunt · Echo |
 | Ending | Koruyucu · Demir Taht · Yükseliş · Kod Kırıcı · Özgürlük | The Guardian · The Iron Crown · Ascension · Codebreaker · Liberation |
 | Ending | Vassal · Yalnız Avcı · Hasat · Döngü | Vassal · Lone Hunter · The Harvest · The Loop |
-| Currency | Kredi · Öz Kristali | Credits · Essence Crystals |
+| Currency | Öz Kristali (Kredi kaldırıldı) | Essence Crystals (Credits removed) |
 | Units | 10 km koşu · 100 şınav · kg · °C | 6-mile run · 100 push-ups · lb · °F |
 
 ## Technical architecture and data schema

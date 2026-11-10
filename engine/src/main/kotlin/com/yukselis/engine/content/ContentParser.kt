@@ -292,7 +292,7 @@ object ContentParser {
         personality = o["kisilik"]?.jsonObject?.map { (k, v) ->
             (com.yukselis.engine.npc.Trait.fromKey(k) ?: throw ContentFormatException("iz $id: bilinmeyen kişilik '$k'")) to v.int("$id.kisilik.$k")
         }?.toMap() ?: emptyMap(),
-        corruption = o.int("yozlasma") ?: 0,
+        corruption = o.int("dikkat") ?: o.int("yozlasma") ?: 0, // Paket 4: iz Dikkat artırır; eski anahtar da okunur
     )
 
     private fun parseRanking(o: JsonObject): com.yukselis.engine.npc.RankingDef {
@@ -722,6 +722,7 @@ object ContentParser {
                 "dikkat_min" -> listOf(Condition.AttentionAtLeast(value.int(key)))
                 "dikkat_max" -> listOf(Condition.AttentionAtMost(value.int(key)))
                 "yozlasma_min" -> listOf(Condition.CorruptionAtLeast(value.int(key)))
+                "oz_kristali_min" -> listOf(Condition.CrystalsAtLeast(value.int(key)))
                 "gizli_fark_min" -> listOf(Condition.HiddenGapAtLeast(value.int(key)))
                 "bolge" -> listOf(Condition.InRegion(value.str(key)))
                 "bolum" -> value.int(key).let { listOf(Condition.ChapterAtLeast(it), Condition.ChapterAtMost(it)) }

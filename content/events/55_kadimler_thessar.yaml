@@ -291,7 +291,7 @@ olaylar:
             etiket: { tr: "İzin ver, okusun", en: "Let him read you" }
             etkiler:
               - bayrak: "thessar_okuma_izni"
-              - yozlasma: 3
+              - dikkat: 3
               - dikkat: 5
               - ahlak: { insanlik: -4, duzen: 2 }
               - iliski: { thessar: { baglilik: 8, guven: 6 }, yanki: { guven: -8 } }
@@ -309,7 +309,7 @@ olaylar:
             etiket: { tr: "{npc:yanki|den} ona sahte bir okuma vermesini iste", en: "Have {npc:yanki} feed him a fake reading" }
             goster: { bayrak: "yanki_bagi" }
             etkiler:
-              - yozlasma: 2
+              - dikkat: 2
               - yalan: { npc: "thessar", konu: "sahte_okuma_yalani" }
               - ahlak: { duzen: -3, insanlik: 1 }
               - iliski: { yanki: { guven: 10, baglilik: 6 }, thessar: { saygi: 2 } }
@@ -752,7 +752,7 @@ olaylar:
             etiket: { tr: "Bir saatini sat, okusun", en: "Sell him the hour. Let him read" }
             etkiler:
               - bayrak: "ticaret_masasi_okundu"
-              - yozlasma: 4
+              - dikkat: 4
               - dikkat: 4
               - degisken: { kadim_tehdit: 4 }
               - ahlak: { insanlik: -4, duzen: 2 }
@@ -802,7 +802,7 @@ olaylar:
             etiket: { tr: "\"O zaman oku. Hesabını bitir\"", en: "\"Then read. Finish your math\"" }
             etkiler:
               - bayrak: "ticaret_masasi_okundu"
-              - yozlasma: 4
+              - dikkat: 4
               - dikkat: 4
               - degisken: { kadim_tehdit: 4 }
               - ahlak: { insanlik: -4, duzen: 2 }
@@ -830,7 +830,7 @@ olaylar:
             etiket: { tr: "Bırak baksın; ne bulduğunu öğren", en: "Let him look. Find out what he found" }
             etkiler:
               - bilgi: "defterdeki_ilk_anomali"
-              - yozlasma: 3
+              - dikkat: 3
               - ahlak: { insanlik: -2, duzen: 1 }
               - iliski: { thessar: { baglilik: 6, guven: 5 }, yanki: { guven: -10, korku: 6 } }
             sonraki: "thessar_ticaret_masasi_ilk_sayfa"
@@ -1030,7 +1030,7 @@ olaylar:
             etkiler:
               - bayrak: "kadim_vergi_odendi"
               - bayrak: "kadim_vergi_kendisi"
-              - yozlasma: 6
+              - dikkat: 6
               - dikkat: 6
               - degisken: { kadim_tehdit: 6, hayatta_kalan: 1 }
               - ahlak: { merhamet: 6, insanlik: -5 }

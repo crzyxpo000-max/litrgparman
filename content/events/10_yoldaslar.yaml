@@ -662,7 +662,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 2, duzen: -2 }
               - bolge: "kirik_istasyon"
-              - yozlasma: 3
+              - dikkat: 3
               - dikkat: 3
               - iliski: { yanki: { guven: 8, baglilik: 4 } }
               - bilgi: "kardes_notu"
@@ -1580,7 +1580,7 @@ olaylar:
             etiket: { tr: "Sese izin ver; satırı yutsun, izi silsin", en: "Let the voice eat the line and wipe the trail" }
             etkiler:
               - gizle: 8
-              - yozlasma: 3
+              - dikkat: 3
               - gorev: { istasyon_sinyali: "tamam" }
               - degisken: { glitch_bulundu: 1 }
               - iliski: { yanki: { guven: 8, baglilik: 6 } }
@@ -1673,7 +1673,7 @@ olaylar:
           - id: "onayla"
             etiket: { tr: "[ONAYLA]'ya bas", en: "Tap [CONFIRM]" }
             etkiler:
-              - yozlasma: 5
+              - dikkat: 5
               - gorev: { istasyon_sinyali: "tamam" }
               - iliski: { yanki: { guven: -20, korku: 10 } }
               - hafiza: { npc: "yanki", id: "onaylamaya_kalkti", agirlik: -50 }
@@ -1720,7 +1720,7 @@ olaylar:
             etiket: { tr: "Satırı yutmasına izin ver", en: "Let it eat the line" }
             etkiler:
               - gizle: 8
-              - yozlasma: 3
+              - dikkat: 3
               - gorev: { istasyon_sinyali: "tamam" }
               - degisken: { glitch_bulundu: 1 }
               - iliski: { yanki: { guven: 10 } }
@@ -1790,7 +1790,7 @@ olaylar:
             zar: { stat: "wil", zorluk: 13, tek: true, basarisiz: "yanki_bozuk_satir_direnc", basarisiz_etkiler: [{ iliski: { yanki: { guven: -8 } } }, { can: -15 }] }
             etkiler:
               - bilgi: "yanki_parcasi"
-              - yozlasma: 4
+              - dikkat: 4
               - iliski: { yanki: { guven: -10, korku: 10, saygi: 8 } }
             sonraki: "yanki_bozuk_satir_zorla"
           - id: "gormedim"
@@ -1920,7 +1920,7 @@ olaylar:
           - id: "goster"
             etiket: { tr: "\"Seni kestikleri yeri gösterebilirim.\"", en: "\"I could show you where they cut you.\"" }
             etkiler:
-              - yozlasma: 3
+              - dikkat: 3
               - iliski: { yanki: { guven: 10, baglilik: 6 } }
             sonraki: "@akis"
 

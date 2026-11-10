@@ -1065,7 +1065,7 @@ olaylar:
             etiket: { tr: "{npc:yanki|den} saatin bir dişlisini bozmasını iste", en: "Ask {npc:yanki} to jam one of the clock's gears" }
             goster: { bayrak: "yanki_bagi" }
             etkiler:
-              - yozlasma: 3
+              - dikkat: 3
               - iliski: { yanki: { guven: 4, baglilik: 5 } }
               - ahlak: { insanlik: -2 }
               - savas: { dusmanlar: ["kule_saat_ustasi@oyuncu+3"], ortam: ["dar_gecit"], kazan: "k40_zafer", kaybet: "k40_yenilgi", kac: "k40_kacis" }
@@ -2344,7 +2344,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - iliski: { yanki: { guven: 8, baglilik: 4 } }
-              - yozlasma: 3
+              - dikkat: 3
               - ahlak: { insanlik: -2, duzen: -2 }
             sonraki: "k90_bulusma"
           - id: "cizgi"
@@ -2506,7 +2506,7 @@ olaylar:
               - kule_kat: 90
               - xp_seviye: 180
               - bilgi: "kule_onceki_tasiyici"
-              - yozlasma: 6
+              - dikkat: 6
               - stat: { wil: 4, int: 4 }
               - ahlak: { insanlik: -6, merhamet: -2 }
             sonraki: "k90_son"
@@ -2725,7 +2725,7 @@ olaylar:
             etkiler:
               - iliski: { yanki: { guven: 8, baglilik: 6, saygi: 5 } }
               - hafiza: { npc: "yanki", id: "olay:kule_kat_100", agirlik: 60 }
-              - yozlasma: 4
+              - dikkat: 4
               - ahlak: { insanlik: -3, duzen: -3 }
               - savas: { dusmanlar: ["kule_ilk_pencere@oyuncu+6"], ortam: ["su"], kazan: "k100_zafer", kaybet: "k100_yenilgi", kac: "k100_kacis" }
             kronik: { tr: "Kafanın içindeki sesle tek bir bozuk satır gibi dövüşmeye karar verdin; Sistem'in ne silebileceği ne okuyabileceği bir satır olmayı umdun.", en: "At the summit you chose to fight beside the voice in your head as a single corrupted line, hoping to be one the System could neither delete nor read." }

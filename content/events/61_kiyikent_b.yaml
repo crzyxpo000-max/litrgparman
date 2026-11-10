@@ -470,10 +470,11 @@ olaylar:
         secenekler:
           - id: "pesinden"
             etiket: { tr: "Peşinden git; bir öğün ısmarla", en: "Go after him. Buy him a meal" }
+            gerekli: { oz_kristali_min: 1 }
             etkiler:
               - ahlak: { merhamet: 3 }
               - iliski: { elif_sari: { saygi: 1 } }
-              - kredi: -10
+              - oz_kristali: -1
             sonraki: "@akis"
           - id: "birak"
             etiket: { tr: "Bırak gitsin; seninle ölmesinden iyidir", en: "Let him go. Better than dying with you" }
@@ -1079,8 +1080,8 @@ olaylar:
         paragraflar:
           - { tr: "Eski gümrük ambarının duvarı baştan başa ilanlarla kaplı. Her kâğıtta bir kapı var: yeri, kademesi, ödülü, en altta da küçük harflerle Lonca'nın payı.", en: "The wall of the old bonded warehouse is papered end to end with notices. Every sheet is a Gate: location, Grade, payout, and down at the bottom in fine print, the Guild's cut." }
           - { tr: "Tam önünde dört kişilik bir ekip bir ilanı koparıyor: kanalda batmış şilepteki D kademe kapı. Liderleri yüksek sesle konuşuyor; başının üstündeki sayıyı herkes görsün diye pencere ayarını açık bırakmış.", en: "A four-person crew is tearing down a notice right in front of you: a D-Grade Gate inside the freighter sunk in the canal. Their leader's talking loud, and he's left his window setting on public so everybody can see the number over his head." }
-          - { tr: "Gözü sana takılınca başının üstündeki sayıya bakıp sırıtıyor. \"Hamal lazım,\" diyor. \"Çantaları taşırsın, çeneni kapalı tutarsın. Günlüğü beş kredi.\"", en: "His eyes land on you. He checks the number over your head and grins. \"We need a porter,\" he says. \"You carry the packs and keep your mouth shut. Five credits a day.\"" }
-          - metin: { tr: "İlanların yarısı artık kapı için değil, Kule için: \"Beşinci kata kadar eşlik, kat başı on kredi.\" Şehrin yarısının gözü yukarıda.", en: "Half the notices aren't Gates anymore. They're the Spire. \"Escort to Floor 5, ten credits a floor.\" Half the city's looking up." }
+          - { tr: "Gözü sana takılınca başının üstündeki sayıya bakıp sırıtıyor. \"Hamal lazım,\" diyor. \"Çantaları taşırsın, çeneni kapalı tutarsın. Günlüğü bir kristal.\"", en: "His eyes land on you. He checks the number over your head and grins. \"We need a porter,\" he says. \"You carry the packs and keep your mouth shut. One crystal a day.\"" }
+          - metin: { tr: "İlanların yarısı artık kapı için değil, Kule için: \"Beşinci kata kadar eşlik, kat başı bir kristal.\" Şehrin yarısının gözü yukarıda.", en: "Half the notices aren't Gates anymore. They're the Spire. \"Escort to Floor 5, one crystal a floor.\" Half the city's looking up." }
             kosul: { bayrak: "kule_acik" }
           - metin: { tr: "Duvarın tepesinde {yer:kasaba_cekirdegi|in} mavi panosu yanıyor; Lonca'nın onayladığı kapılar orada, onaylamadıkları burada, kâğıtta.", en: "Across the top of the wall {yer:kasaba_cekirdegi|pos} blue board is lit up. The Gates the Guild approved go up there. The ones it didn't stay down here, on paper." }
             kosul: { bayrak: "cekirdek_lonca" }
@@ -1092,7 +1093,7 @@ olaylar:
           - kosul: { stat: { per: 50 } }
             metin: { tr: "Liderin sayısının üçte biri bir unvandan geliyor. Kılıcı tutuşuna bakılırsa o sayının yarısını bile hak etmiyor.", en: "A third of the leader's number comes from a title. The way he holds that sword doesn't earn half of it." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "beş kredi. sana. bir ağzım olsaydı şimdi kahkahayı basardım.", en: "five credits. for you. if i had a mouth i'd be laughing." }
+            metin: { tr: "bir kristal. sana. bir ağzım olsaydı şimdi kahkahayı basardım.", en: "one crystal. for you. if i had a mouth i'd be laughing." }
         yoldas_tepkileri:
           - npc: "deniz_arman"
             kosul: { yoldas: "deniz_arman" }
@@ -1165,7 +1166,7 @@ olaylar:
       - id: "sanayi_kapi_ilanlari_uyari"
         yer: "sanayi"
         paragraflar:
-          - { tr: "Lider kahkahayı basıyor. \"Hamal kademe okuyor! Beş kredilik adam bize kapı dersi veriyor!\"", en: "The leader cracks up. \"The porter reads Grades now! Five-credit porter's giving us a lesson on Gates!\"" }
+          - { tr: "Lider kahkahayı basıyor. \"Hamal kademe okuyor! Bir kristallik hamal bize kapı dersi veriyor!\"", en: "The leader cracks up. \"The porter reads Grades now! One-crystal porter's giving us a lesson on Gates!\"" }
           - { tr: "Ekipteki en genç kız gülmüyor. Bir fotoğrafa, bir sana, sonra yine fotoğrafa bakıyor; ama ağzını açmıyor.", en: "The youngest one on the crew doesn't laugh. She looks at the photo, then at you, then at the photo again. But she doesn't say anything." }
         secenekler:
           - id: "devam"
@@ -1256,7 +1257,7 @@ olaylar:
           - id: "tam"
             etiket: { tr: "Kapı ödülünün tamamını al", en: "Take the whole Gate payout" }
             etkiler:
-              - kredi: 120
+              - oz_kristali: 5
               - xp_seviye: 30
               - iliski: { kaya_demir: { saygi: 2 } }
               - ahlak: { duzen: 1, merhamet: -1 }
@@ -1264,7 +1265,7 @@ olaylar:
           - id: "paylas"
             etiket: { tr: "Ödülü ekiple paylaş; kıza bir iksir ısmarla", en: "Split the pay with the crew. Buy the girl a potion" }
             etkiler:
-              - kredi: 40
+              - oz_kristali: 2
               - xp_seviye: 30
               - ahlak: { merhamet: 3 }
               - iliski: { kaya_demir: { saygi: 2 } }
@@ -1273,7 +1274,7 @@ olaylar:
           - id: "ders"
             etiket: { tr: "Lidere dön: \"Bir dahakine hamalına iyi bak\"", en: "Turn to the leader. \"Next time, treat your porter right\"" }
             etkiler:
-              - kredi: 80
+              - oz_kristali: 3
               - xp_seviye: 30
               - dikkat: 1
               - ahlak: { duzen: 1 }
@@ -1285,12 +1286,12 @@ olaylar:
         paragraflar:
           - { tr: "Zincirlerin gölgesinden çıkıp çıkıp vuruyorsun; kazan yutan onu neyin parçaladığını göremeden suya devriliyor. Son anda lider titreyen kılıcıyla ona bir kez dokunuyor.", en: "You hit it from the shadows of the chains, again and again, and the Boilerjaw goes down in the water without ever seeing what tore it apart. At the last second the leader, sword shaking, pokes it once." }
           - { tr: "Ambarın önüne çıktığınızda hikâye çoktan değişmiş: kazan yutanı lider tek başına devirmiş. Kâtip deftere onun adını yazıyor, lider de Küresel Sıralama'da bir basamak yükseliyor.", en: "Outside the warehouse, the story's already changed. The leader took down the Boilerjaw single-handed. The clerk writes his name in the ledger, and he climbs one rung on the Global Ranking." }
-          - { tr: "Sana beş kredi uzatıyor. En genç kız ise hiçbir şey uzatmıyor; bildiği bir şey var ama dilini tutuyor.", en: "He hands you five credits. The youngest one doesn't hand you anything. She knows something, and she isn't saying it." }
+          - { tr: "Sana tek bir kristal uzatıyor. En genç kız ise hiçbir şey uzatmıyor; bildiği bir şey var ama dilini tutuyor.", en: "He hands you a single crystal. The youngest one doesn't hand you anything. She knows something, and she isn't saying it." }
         secenekler:
           - id: "gulumse"
-            etiket: { tr: "Beş krediyi alıp gülümse", en: "Take the five credits and smile" }
+            etiket: { tr: "Kristali alıp gülümse", en: "Take the crystal and smile" }
             etkiler:
-              - kredi: 5
+              - oz_kristali: 1
               - xp_seviye: 30
               - gizle: 2
               - ahlak: { insanlik: 1 }
@@ -1299,7 +1300,7 @@ olaylar:
           - id: "kiz"
             etiket: { tr: "Kıza göz kırp; o seni ele vermez", en: "Wink at the girl. She won't give you up" }
             etkiler:
-              - kredi: 5
+              - oz_kristali: 1
               - xp_seviye: 30
               - ahlak: { merhamet: 1, duzen: -1 }
               - bayrak: "sanayi_kiz_biliyor"
@@ -1318,7 +1319,7 @@ olaylar:
           - id: "odul"
             etiket: { tr: "Ödülü alıp imzanı at", en: "Collect the payout and sign for it" }
             etkiler:
-              - kredi: 150
+              - oz_kristali: 6
               - xp_seviye: 35
               - efsane: "kapiyi_yalniz_kapatti"
               - iliski: { kaya_demir: { saygi: 3 } }
@@ -1327,7 +1328,7 @@ olaylar:
           - id: "ekip"
             etiket: { tr: "Ödülün bir kısmını ekibe bırak", en: "Leave some of the payout for the crew" }
             etkiler:
-              - kredi: 90
+              - oz_kristali: 4
               - xp_seviye: 35
               - efsane: "kapiyi_yalniz_kapatti"
               - ahlak: { merhamet: 2 }
@@ -1497,9 +1498,10 @@ olaylar:
             sonraki: "sanayi_grev_masa"
           - id: "tayin"
             etiket: { tr: "Tayınlarını kendi payından ver; işe dönsünler", en: "Pay their rations out of your own cut. Back to work" }
+            gerekli: { oz_kristali_min: 2 }
             etkiler:
               - ahlak: { merhamet: 3, duzen: 2 }
-              - kredi: -50
+              - oz_kristali: -2
               - itibar: { lonca: 3, siginak: 1 }
               - bayrak: "sanayi_grev_uzlasma"
               - degisken: { hayatta_kalan: 1 }
@@ -1883,7 +1885,7 @@ olaylar:
             etiket: { tr: "Maskeni indirip tahtaya bak", en: "Drop the mask and look at the board" }
             etkiler:
               - aciga_vur: true
-              - kredi: 200
+              - oz_kristali: 8
               - dikkat: 2
               - itibar: { lonca: 2 }
               - bayrak: "sanayi_bahis_kazanildi"
@@ -1973,9 +1975,10 @@ olaylar:
           - id: "sessiz"
             tur: "gizle"
             etiket: { tr: "Kâtibe seni görmediğini söylet", en: "Have the clerk say he never saw you" }
+            gerekli: { oz_kristali_min: 1 }
             etkiler:
               - gizle: 2
-              - kredi: -10
+              - oz_kristali: -1
               - iliski: { aras_kurt: { saygi: -1 } }
             sonraki: "@akis"
 
@@ -1994,7 +1997,7 @@ olaylar:
         yer: "kiyikent"
         paragraflar:
           - { tr: "Bir akşam, ateş yanan bir varilin başında yarım düzine avcıya hikâye anlatan bir adama denk geliyorsun. Hikâyenin kahramanının adı yok; ona Görünmeyen diyorlar.", en: "One evening, at a burn barrel, you come across a man telling stories to half a dozen hunters. The hero of the story doesn't have a name. They just call them the Nobody." }
-          - metin: { tr: "\"Hamaldı,\" diyor adam. \"Beş krediye çanta taşıyordu. Kazan yutan çıkınca ekip lideri altına kaçırdı; hamal karanlığa daldı, kazan yutan da bir daha çıkmadı. Lider hâlâ onun sayesinde sıralamada.\"", en: "\"He was a porter,\" the man says. \"Hauling packs for five credits. When the Boilerjaw came out, the crew boss wet himself. The porter walked into the dark, and the Boilerjaw never came back out. That crew boss is still on the Ranking because of that porter.\"" }
+          - metin: { tr: "\"Hamaldı,\" diyor adam. \"Günlüğü bir kristale çanta taşıyordu. Kazan yutan çıkınca ekip lideri altına kaçırdı; hamal karanlığa daldı, kazan yutan da bir daha çıkmadı. Lider hâlâ onun sayesinde sıralamada.\"", en: "\"He was a porter,\" the man says. \"Hauling packs for one crystal a day. When the Boilerjaw came out, the crew boss wet himself. The porter walked into the dark, and the Boilerjaw never came back out. That crew boss is still on the Ranking because of that porter.\"" }
             kosul: { bayrak: "sanayi_hamal_gizli" }
           - metin: { tr: "\"Çığlık atan bir çekirdeği çıplak eliyle sıktı,\" diyor bir başkası. \"Avucu yandı, gözümün önünde iyileşti. Ocak sırasındaki demirci kadın da yemin billah ediyor.\"", en: "\"Squeezed a screaming core in his bare hand,\" somebody else says. \"Burned his palm and it healed right in front of me. The smith on the forge row swears to it.\"" }
             kosul: { bayrak: "sanayi_ocak_ezme" }
@@ -2046,9 +2049,10 @@ olaylar:
               - xp_seviye: 15
             sonraki: "sokak_efsanesi_ekle"
           - id: "sustur"
-            etiket: { tr: "Hikâyeciye kredi ver; başka bir hikâye anlatsın", en: "Pay the storyteller to tell a different story" }
+            etiket: { tr: "Hikâyeciye bir kristal ver; başka bir hikâye anlatsın", en: "Pay the storyteller a crystal to tell a different story" }
+            gerekli: { oz_kristali_min: 1 }
             etkiler:
-              - kredi: -20
+              - oz_kristali: -1
               - gizle: 4
               - ahlak: { duzen: 1 }
             sonraki: "@akis"
@@ -2490,15 +2494,16 @@ olaylar:
             sonraki: "@akis"
           - id: "pazarlik"
             etiket: { tr: "Kutsayıcıyla pazarlık et: kız yakıt sayılmasın", en: "Bargain with the Anointer: she isn't fuel" }
+            gerekli: { oz_kristali_min: 2 }
             etkiler:
               - ahlak: { duzen: 2, merhamet: 1 }
-              - kredi: -40
+              - oz_kristali: -2
               - itibar: { yukselenler: 1 }
               - iliski: { vahit: { saygi: 1 } }
               - bayrak: "tepe_kiz_secilmis"
               - xp_seviye: 30
               - tohum: { olay: "tepe_sinav_sonrasi", gecikme: { min: 5, max: 9 }, hatirlatma: { tr: "On iki yaşındaki çocuğun sınavı bitti, ama o gün bitmedi.", en: "The twelve-year-old's trial ended. That day didn't." } }
-            kronik: { tr: "Bir kız yakıt sayılmasın diye Kutsayıcının avucuna kredi saydın.", en: "You counted out credits to the Anointer so a girl wouldn't be counted as fuel." }
+            kronik: { tr: "Bir kız yakıt sayılmasın diye Kutsayıcının avucuna kristal saydın.", en: "You counted out crystals to the Anointer so a girl wouldn't be counted as fuel." }
             sonraki: "@akis"
 
       - id: "tepe_besik_sinavi_kacis"
@@ -2776,11 +2781,12 @@ olaylar:
               - savas: { dusmanlar: ["secilmis_muhafiz@dunya", "secilmis_muhafiz@dunya"], ortam: ["karanlik", "dar_gecit"], kazan: "tepe_sayim_gecesi_zafer", kaybet: "tepe_sayim_gecesi_yenilgi", kac: "tepe_sayim_gecesi_yenilgi" }
             kronik: { tr: "Bir ailenin kapısında, sayıma gelen Yükselenler muhafızlarıyla dövüştün.", en: "On census night you fought the Ascended's guards in a family's doorway." }
           - id: "rusvet"
-            etiket: { tr: "Seçilmişe kredi sıkıştır; bu evi saymasın", en: "Slip the Chosen some credits. Skip this house" }
+            etiket: { tr: "Seçilmişe kristal sıkıştır; bu evi saymasın", en: "Slip the Chosen a couple of crystals. Skip this house" }
+            gerekli: { oz_kristali_min: 2 }
             etkiler:
               - ahlak: { duzen: -2, merhamet: 1 }
-              - kredi: -40
-            kronik: { tr: "Yaşlı bir adamın hayatını {yer:tepe|in} sayımcısından kırk krediye satın aldın.", en: "You bought an old man's life from {yer:tepe}' census taker for forty credits." }
+              - oz_kristali: -2
+            kronik: { tr: "Yaşlı bir adamın hayatını {yer:tepe|in} sayımcısından iki kristale satın aldın.", en: "You bought an old man's life from {yer:tepe}' census taker for two crystals." }
             sonraki: "tepe_sayim_gecesi_rusvet"
 
       - id: "tepe_sayim_gecesi_egildi"
@@ -2804,7 +2810,7 @@ olaylar:
       - id: "tepe_sayim_gecesi_rusvet"
         yer: "tepe"
         paragraflar:
-          - { tr: "Seçilmiş kredileri saymadan cebine indiriyor. \"Bu ay,\" diyor. \"Gelecek ay fener yine gelir. Sen de yine burada olursun, değil mi?\"", en: "The Chosen pockets the credits without counting them. \"This month,\" he says. \"Next month the lantern comes back. And you'll be here again, right?\"" }
+          - { tr: "Seçilmiş iki kristali bakmadan bile cebine indiriyor. \"Bu ay,\" diyor. \"Gelecek ay fener yine gelir. Sen de yine burada olursun, değil mi?\"", en: "The Chosen pockets the two crystals without even looking at them. \"This month,\" he says. \"Next month the lantern comes back. And you'll be here again, right?\"" }
           - { tr: "Gidiyorlar. Kadın kapıyı kapatıp sırtını dayıyor ve yere kayıyor; oracıkta sessiz sessiz ağlıyor.", en: "They leave. The woman shuts the door, puts her back to it and slides down. On the floor, she cries without a sound." }
         secenekler:
           - id: "in"
@@ -3485,8 +3491,9 @@ olaylar:
             sonraki: "kule_dibi_avci_pazari_ezber"
           - id: "al"
             etiket: { tr: "Bir harita al, ne olur ne olmaz", en: "Buy a map. Just in case" }
+            gerekli: { oz_kristali_min: 1 }
             etkiler:
-              - kredi: -15
+              - oz_kristali: -1
               - esya: { sahte_kat_haritasi: 1 }
             sonraki: "kule_dibi_avci_pazari_dolas"
           - id: "merhem"
@@ -3548,13 +3555,14 @@ olaylar:
       - id: "kule_dibi_avci_pazari_dolas"
         yer: "kule_dibi"
         paragraflar:
-          - { tr: "Pazarın içinde dolaşıyorsun. Bir tezgâhta çekirdek kristali tartılıyor, bir başkasında Kule'nin üçüncü katından çıktığı söylenen çatlak bir kask satılıyor: on kredi, içinde hâlâ birinin saçı var.", en: "You wander the market. At one stall they're weighing core crystals. At another they're selling a cracked helmet that supposedly came off Floor 3. Ten credits, and there's still somebody's hair inside." }
+          - { tr: "Pazarın içinde dolaşıyorsun. Bir tezgâhta çekirdek kristali tartılıyor, bir başkasında Kule'nin üçüncü katından çıktığı söylenen çatlak bir kask satılıyor: bir kristal, içinde hâlâ birinin saçı var.", en: "You wander the market. At one stall they're weighing core crystals. At another they're selling a cracked helmet that supposedly came off Floor 3. One crystal, and there's still somebody's hair inside." }
           - { tr: "Pazarın sonunda Kule'nin taşına yaslanmış bir duvar var, tebeşirle yazılmış isimlerle dolu. En üstte bir başlık: Geri dönmeyenler.", en: "At the end of the market there's a wall leaning against the Spire's stone, covered in chalked names. Above them, a heading: The Unreturned." }
         secenekler:
           - id: "kask"
             etiket: { tr: "Kaskı satın al, sahibini bulmaya çalış", en: "Buy the helmet. Try to find its owner" }
+            gerekli: { oz_kristali_min: 1 }
             etkiler:
-              - kredi: -10
+              - oz_kristali: -1
               - ahlak: { merhamet: 2, insanlik: 1 }
               - xp_seviye: 10
               - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Kule'nin gölgesindeki pazarda bir kaskın sahibini sormuştun.", en: "At the market in the Spire's shadow, you asked about whoever owned that helmet." } }
@@ -3583,10 +3591,10 @@ olaylar:
       - id: "kule_dibi_tirmanis_kuyrugu_1"
         yer: "kule_dibi"
         paragraflar:
-          - { tr: "Kule'nin kapısındaki kuyruk meydanın yarısına kadar uzanıyor. Kapıda iki Lonca bekçisi kat başına yirmi kredi alıyor; parası olmayan sırasını başkasına satıyor.", en: "There's a line at the Spire's door stretching halfway across the plaza. Two Guild gatekeepers stand at the door charging twenty credits a floor. Whoever can't pay sells their spot to somebody who can." }
+          - { tr: "Kule'nin kapısındaki kuyruk meydanın yarısına kadar uzanıyor. Kapıda iki Lonca bekçisi tırmanış için kristal sayıyor; kristali olmayan sırasını başkasına satıyor.", en: "There's a line at the Spire's door stretching halfway across the plaza. Two Guild gatekeepers stand at the door taking crystals for the climb. Whoever can't pay sells their spot to somebody who can." }
           - { tr: "Kuyruğun ortasında on altı yaşlarında bir oğlan paslı bir kılıç tutuyor. Öbür elindeki kâğıtta bir hekimin el yazısı var: Akciğer çürümesi. Beşinci kat kristaliyle yapılan ilaç. Fiyat: dört kristal.", en: "In the middle of the line, a boy about sixteen is holding a rusty sword. The paper in his other hand is in a doctor's handwriting: Lung rot. Medicine made from Floor 5 crystals. Price: four crystals." }
           - { tr: "Seviyesi 6. Beşinci katta 6. seviyeden birinin ne kadar dayanacağını Kule Dibi'nde herkes bilir; çocuğun kendisinden başka.", en: "He's Level 6. Everybody at {yer:kule_dibi} knows how long a Level 6 lasts on Floor 5. Everybody except him." }
-          - metin: { tr: "Kasaba Çekirdeği Lonca'nın elinde; kapının üstündeki pencere içeri giren herkesin seviyesini, ödediği krediyi ve dönme ihtimalini yazıyor. Oğlanın satırında bir yüzde var: %11.", en: "The Town Core belongs to the Guild, and the window over the door lists everybody going in: level, credits paid, odds of coming back. There's a percentage on the boy's line: 11%." }
+          - metin: { tr: "Kasaba Çekirdeği Lonca'nın elinde; kapının üstündeki pencere içeri giren herkesin seviyesini, ödediği kristali ve dönme ihtimalini yazıyor. Oğlanın satırında bir yüzde var: %11.", en: "The Town Core belongs to the Guild, and the window over the door lists everybody going in: level, crystals paid, odds of coming back. There's a percentage on the boy's line: 11%." }
             kosul: { bayrak: "cekirdek_lonca" }
           - metin: { tr: "Lonca halkanı görünce bekçiler seni kuyruğu beklemeden doğrudan kapıya çağırıyor.", en: "The gatekeepers spot your Guild ring and wave you straight up to the door, past the whole line." }
             kosul: { bayrak: "uye_lonca" }
@@ -3605,8 +3613,9 @@ olaylar:
         secenekler:
           - id: "eslik"
             etiket: { tr: "Ücretini öde, onunla birlikte çık", en: "Pay his fee and climb with him" }
+            gerekli: { oz_kristali_min: 4 }
             etkiler:
-              - kredi: -100
+              - oz_kristali: -4
               - ahlak: { merhamet: 5, insanlik: 1 }
             kronik: { tr: "Annesine ilaç arayan on altı yaşında bir oğlanla birlikte Kule'ye tırmandın.", en: "You climbed the Spire with a sixteen-year-old looking for his mother's medicine." }
             sonraki: "kule_dibi_tirmanis_kuyrugu_kule"
@@ -3621,8 +3630,9 @@ olaylar:
             sonraki: "kule_dibi_tirmanis_kuyrugu_kendin"
           - id: "ode"
             etiket: { tr: "Ücretini öde; yolunu kendisi bulsun", en: "Pay his fee. Let him find his own way" }
+            gerekli: { oz_kristali_min: 4 }
             etkiler:
-              - kredi: -100
+              - oz_kristali: -4
               - ahlak: { merhamet: 1, duzen: 2 }
               - bayrak: "kuledibi_genc_tek"
               - tohum: { olay: "kule_dibi_donus", gecikme: { min: 4, max: 8 }, hatirlatma: { tr: "Tırmanış kuyruğundaki o beşinci kat bileti hâlâ aklında.", en: "You still think about that fifth-floor ticket from the climbing line." } }
@@ -3703,9 +3713,10 @@ olaylar:
         secenekler:
           - id: "tamamla"
             etiket: { tr: "Eksik iki kristali kendi cebinden tamamla", en: "Cover the two missing crystals out of your own pocket" }
+            gerekli: { oz_kristali_min: 2 }
             etkiler:
               - ahlak: { merhamet: 3 }
-              - kredi: -60
+              - oz_kristali: -2
               - bayrak: "kuledibi_genc_eslik"
               - degisken: { hayatta_kalan: 1 }
               - xp_seviye: 20
@@ -3959,8 +3970,9 @@ olaylar:
             sonraki: "kule_dibi_geri_donmeyenler_gercek"
           - id: "ekip"
             etiket: { tr: "Lonca'dan bir arama ekibi kirala", en: "Hire a Guild search crew" }
+            gerekli: { oz_kristali_min: 3 }
             etkiler:
-              - kredi: -80
+              - oz_kristali: -3
               - ahlak: { merhamet: 2, duzen: 2 }
               - itibar: { lonca: 2 }
               - iliski: { kaya_demir: { saygi: 1 } }

@@ -93,7 +93,7 @@ olaylar:
             etiket: { tr: "Komisyoncuya eğil: \"Benim payım ne?\"", en: "Lean on the broker. \"What's my cut?\"" }
             etkiler:
               - ahlak: { merhamet: -2, insanlik: -1 }
-              - kredi: 60
+              - oz_kristali: 2
               - bayrak: "bl9_kat_pay"
               - tohum: { olay: "bl9_kat_son", gecikme: { min: 2, max: 3 }, kosul: { bolum: 9, gun_max: 177 }, hatirlatma: { tr: "{yer:kule_dibi|de} komisyoncunun tezgâhı o günden beri bir gün bile boş kalmadı.", en: "The broker's stall in {yer:kule_dibi} hasn't been empty a single day since." } }
             sonraki: "bl9_kat_fiyati_gitti"
@@ -172,7 +172,7 @@ olaylar:
       - id: "bl9_kat_fiyati_gitti"
         yer: "kule_dibi"
         paragraflar:
-          - metin: { tr: "Komisyoncu kartı alıp avucuna altmış kredi sayıyor. \"Ortaklığımıza,\" diyor göz kırparak. \"Senin gibi biri kuyruğun başında durunca müşteri kendiliğinden geliyor.\"", en: "The broker takes the card and counts sixty credits into your palm. \"To the partnership,\" he says with a wink. \"Somebody like you standing near the line, the customers just show up.\"" }
+          - metin: { tr: "Komisyoncu kartı alıp avucuna iki kristal sayıyor. \"Ortaklığımıza,\" diyor göz kırparak. \"Senin gibi biri kuyruğun başında durunca müşteri kendiliğinden geliyor.\"", en: "The broker takes the card and counts two crystals into your palm. \"To the partnership,\" he says with a wink. \"Somebody like you standing near the line, the customers just show up.\"" }
             kosul: { bayrak: "bl9_kat_pay" }
           - { tr: "Eskortlar bıçaklarını kınlarına sokup aileyi Kule'nin kapısına doğru yürütüyor. Nine her adımda bastonunu bir taşa vuruyor, baba bir kez bile arkasına bakmıyor.", en: "The escorts sheathe their knives and walk the family to the Spire's door. The grandmother's cane clacks on every stone. The father doesn't look back once." }
           - { tr: "Kapıdan girmeden oğlan dönüp sana el sallıyor. Kule'nin karanlığı onları ağır ağır yutuyor.", en: "Right before the door the boy turns around and waves at you. The dark inside the Spire swallows them, slow." }
@@ -623,7 +623,7 @@ olaylar:
           - id: "sat"
             etiket: { tr: "Çekirdeği pazarda sat", en: "Sell the core in the market" }
             etkiler:
-              - kredi: 80
+              - oz_kristali: 3
               - bayrak: "bl9_bekci_olduruldu"
               - bayrak: "bl9_bekci_satildi"
               - tehlike: { kule_dibi: -3 }

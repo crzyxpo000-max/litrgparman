@@ -52,7 +52,6 @@ import com.yukselis.protocol.ui.theme.Game
 import com.yukselis.protocol.ui.components.SectionTitle
 import com.yukselis.protocol.ui.components.StatBar
 import com.yukselis.protocol.ui.components.SystemCard
-import com.yukselis.protocol.ui.theme.EchoColor
 import com.yukselis.protocol.ui.theme.GameType
 import com.yukselis.protocol.ui.theme.rarityColorOf
 import androidx.compose.material3.Tab
@@ -255,14 +254,11 @@ private fun TitlesTab(status: StatusView) {
 @Composable
 private fun MoralityTab(status: StatusView) {
     Column {
-        // OP MC: NPC'lerin gördüğü seviye, Dikkat ve Yozlaşma. Bölüm kendini açar (Paket 2): ilk gizleme/Dikkat'e kadar yok.
+        // OP MC: NPC'lerin gördüğü seviye ve Dikkat (Yozlaşma Dikkat'e katıldı, Paket 4). Bölüm kendini açar (Paket 2): ilk gizleme/Dikkat'e kadar yok.
         if (status.showHidden) {
             SectionTitle(stringResource(R.string.status_hidden_title), Modifier.padding(top = 0.dp))
             Text(stringResource(R.string.status_public, status.publicLevel), style = GameType.system, color = MaterialTheme.colorScheme.onSurface)
             StatBar(stringResource(R.string.status_attention), status.attention.toLong(), 100, Game.colors.danger, Modifier.padding(top = 6.dp), labelWidth = 96)
-            if (status.corruption > 0) {
-                StatBar(stringResource(R.string.status_corruption), status.corruption.toLong(), 100, EchoColor, Modifier.padding(top = 4.dp), labelWidth = 96)
-            }
             if (status.showRank && status.publicRank > 0) {
                 Text(stringResource(R.string.status_rank, status.publicRank), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 6.dp))
             }

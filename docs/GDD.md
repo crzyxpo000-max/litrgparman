@@ -51,7 +51,7 @@ Oyuncunun stat büyümesi **üsteldir** (Günlük Görev serisi, Benzersiz yeten
 
 - **Küresel Sıralama:** insanlığın en güçlülerinin canlı listesi (oyuncu, Aras Kurt, Kaya Demir, prosedürel avcılar). NPC'ler ekran dışında tırmanır; Sistem değişiklikleri duyurur. Loncalar, Yükselenler ve rakipler oyuncunun sırasına tepki verir.
 - **Gizli ve Açık Güç:** oyuncunun bir **gerçek seviyesi** ve bir **görünen seviyesi** vardır. [Gizle] seçenekleri Dikkat'i düşük tutar ve "beni hafife aldılar" anlarını açar; [Açığa vur] seçenekleri korku, saygı ve katılım teklifleri getirir ama Dikkat'i artırır. NPC'ler açığa vurulana kadar görünen seviyeye tepki verir.
-- **Anomali Dikkati:** "kaybedebilirsin" yerine ana gerilim ölçeği. Hızlı büyüme ve açığa vurmalar onu artırır; eşikler avcıları, Sistem "düzeltmelerini", Kadim elçilerini ve rakipleri tetikler. Karanlık ve lanetli yetenekler için ayrı bir **Yozlaşma** ölçeği vardır.
+- **Anomali Dikkati:** "kaybedebilirsin" yerine ana gerilim ölçeği; **tek ölçek** (Paket 4, DECISIONS #168: eski Yozlaşma ölçeği Dikkat'e katıldı; karanlık/lanetli güç kullanımı, ceza yetenekleri ve izler doğrudan Dikkat artırır). Hızlı büyüme ve açığa vurmalar onu artırır; eşikler avcıları, Sistem "düzeltmelerini", Kadim elçilerini ve rakipleri tetikler. Karanlık ve lanetli yetenekler için ayrı bir **Yozlaşma** ölçeği vardır.
 - **Tanıklar ve Efsane:** NPC'lerin önünde yapılan başarılar söylenti olarak yayılır, unvanlara ve fraksiyon tepkilerine dönüşür. Aynı başarı her fraksiyonda farklı okunur (Sığınak bir katliamdan korkar, Demir Lonca hayranlık duyar).
 - **Kademe Kırma:** kademe farkı hasar kuralı dünya için geçerli kalır; ama bir üst kademedeki düşmanı yenmek büyük XP, bir "Kademe Kıran" unvan zinciri ve Benzersiz yetenek şansı verir.
 - **Ordu:** oyuncuyla birlikte ölçeklenen çağrılar ve takipçiler (sınıfa göre gölge askerler, evcilleştirilmiş canavarlar ya da bir lonca); güç fantezisi Perde 3–4'te büyük ölçekte çalışır.
@@ -160,6 +160,7 @@ Gizli sınıf örnekleri:
 - **Avcı'nın Gözü** — 50 düşmanı ilk vuruşta kritikle öldürmek.
 
 Sınıf ayrıca bir **Meslek** ağacından bağımsızdır: Simyacı, Demirci, Rün Ustası, Aşçı, Kartograf. Meslekler ayrı seviye alır ve ekipman, iksir, harita gibi kaynaklar üretir.
+**Paket 4 (DECISIONS #166): Meslek/üretim sistemi kapalıdır.** Tanımlar ve kod durur (`professions.yaml`, `Progression.PROFESSIONS_ENABLED`), oyuncuya teklif gelmez, Çanta'da üretim yoktur.
 
 ### Yetenekler
 
@@ -178,8 +179,8 @@ Sınıf ayrıca bir **Meslek** ağacından bağımsızdır: Simyacı, Demirci, R
 ### Günlük Görev ve ekonomi
 
 - **Günlük Görev:** her oyun günü Sistem dünyaya özgü bir görev verir (kampın suyunu taşı, sınırı dolaş, 3 kapı kapat; spor salonu sayı listeleri değil). Tamamlamak +1 serbest stat (her 7 günlük seri +1 daha); görmezden gelmek "Durmuş Saat"e ışınlanma riski (DECISIONS #98). İlk üç gün deneme süresidir (ceza ve seri kaybı yok); ceza yalnız gün sonunda görev tamamlanmadıysa işlenir ve Durmuş Saat yalnız üs ya da keşif kampı anında açılır, hiçbir sahneyi kesmez (DECISIONS #156). **Günlük Görev yalnızca oyuncudadır** (bkz. OP MC tasarımı).
-- **Para:** Kredi (Sistem mağazası, ticaret) ve Öz Kristali (evrim, yetenek kaynaştırma).
-- **Ekipman:** 8 yuva, nadirlik renkleri, set bonusları; Meslek ile yükseltilir.
+- **Para:** yalnız **Öz Kristali** (evrim, yetenek kaynaştırma, hikayedeki ödemeler; koşul `oz_kristali_min`). Kredi kaldırıldı (Paket 4, DECISIONS #167): hikayedeki ödemeler kristale çevrildi (yaklaşık 25 Kredi = 1 kristal).
+- **Ekipman:** 8 yuva, nadirlik renkleri, set bonusları (Meslek kapalı olduğu için yükseltme yok).
 
 ## Savaş sistemi
 
@@ -299,7 +300,7 @@ Ana hikaye kanıtlanmış bir yapıya oturur (ayrıntı `docs/CHAPTERS.md`, kara
   darboğaz gününe, bölüm bittiyse sonraki bölümün açılışına kadar. Günler tek tek geçer (NPC'ler, kapılar, son tarih).
   Kazanç Günlük Görevden ve normal oynanıştan azdır: 3 günde 1 stat (Günlük Görev günde 1 serbest puan); günde seviye
   XP'sinin Perde 1'de %25'i, Perde 2'de %50'si, Perde 3–4'te %100'ü (normal oynanış her perdede daha
-  hızlı); kapıda tehlike −3/gün ve 3 günde 1 Öz Kristali; meslekte günde 5 meslek XP'si; yoldaşla güven +1/gün (en çok +6)
+  hızlı); kapıda tehlike −3/gün ve 3 günde 1 Öz Kristali; (meslek odağı Paket 4 ile kapalı); yoldaşla güven +1/gün (en çok +6)
   ve 2 günde 1 bağlılık (en çok +2). Atlanan günlerin Günlük Görevi
   cezasızdır (seri ne büyür ne kopar). %25 olasılıkla bir havuz olayı araya girer; yeni bir tohumun vakti gelince ya da
   ana yay düğümü uyunca atlama durur. Kesintisiz atlama odağın kısa özet sahnesiyle biter.

@@ -2404,7 +2404,7 @@ olaylar:
               - ahlak: { insanlik: -4, duzen: -2 }
               - itibar: { yukselenler: 5, sessiz_ag: 5, lonca: -3 }
               - iliski: { yanki: { guven: 12, baglilik: 10 } }
-              - yozlasma: 4
+              - dikkat: 4
               - dikkat: 8
             sonraki: "yanki_sonuc"
 
@@ -2539,7 +2539,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: -3 }
               - iliski: { yanki: { guven: 8, baglilik: 6 } }
-              - yozlasma: 3
+              - dikkat: 3
             sonraki: "baslik_oda"
           - id: "ac"
             tur: "gosteris"
@@ -2702,7 +2702,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: -5, merhamet: -2 }
               - itibar: { yukselenler: 6 }
-              - yozlasma: 4
+              - dikkat: 4
               - stat: { wil: 2 }
               - tohum: { olay: "baslik_gecesi", gecikme: { min: 1, max: 2 } }
             sonraki: "@akis"
@@ -2879,7 +2879,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: -1, merhamet: 2 }
               - iliski: { yanki: { guven: 8, baglilik: 6 } }
-              - yozlasma: 3
+              - dikkat: 3
             sonraki: "gemi_son"
 
       - id: "gemi_kule"
@@ -2987,7 +2987,7 @@ olaylar:
         yer: "kule_dibi"
         paragraflar:
           - { tr: "Bir çocuk elinde buruşuk bir kâğıtla sana koşuyor: \"Bu sen misin?\" Kâğıt Kule Dibi'ndeki ödül panosundan koparılmış. Yol boyunca insanların bakışları üstünde bir saniye fazla oyalanıyor; panoya vardığında nedenini anlıyorsun.", en: "A kid runs up holding a crumpled sheet of paper: \"Hey, is this you?\" It's been torn off the bounty board at {yer:kule_dibi}. On the way over, people look at you a second too long, and by the time you reach the board you know why." }
-          - { tr: "Kule'nin dibindeki avcı pazarında ödül panosu dediğin, eski bir otobüs durağının camı. Camın tam ortasında yüzün duruyor; özensiz bir karakalem, ama düpedüz sen. Altında: ANOMALİ. CANLI. 5.000 KREDİ. ÖLÜ: 0.", en: "The bounty board at the hunters' market under the Spire is an old bus-shelter panel. Dead center is your face. A lousy charcoal sketch, but you. Under it: ANOMALY. ALIVE. 5,000 CREDITS. DEAD: 0." }
+          - { tr: "Kule'nin dibindeki avcı pazarında ödül panosu dediğin, eski bir otobüs durağının camı. Camın tam ortasında yüzün duruyor; özensiz bir karakalem, ama düpedüz sen. Altında: ANOMALİ. CANLI. OTUZ KRİSTAL. ÖLÜ: 0.", en: "The bounty board at the hunters' market under the Spire is an old bus-shelter panel. Dead center is your face. A lousy charcoal sketch, but you. Under it: ANOMALY. ALIVE. 30 CRYSTALS. DEAD: 0." }
           - { tr: "Panonun önünde üç kişi dikiliyor: uzun namlulu tüfekler, dürbünler, el yapımı ağ atarlar. Üçü de seni çoktan fark etmiş, üçü de görmemiş gibi yapıyor.", en: "Three people are standing in front of the board: long rifles, scopes, homemade net launchers. All three spotted you a while ago. All three are pretending they didn't." }
         bildirimler:
           - tur: "analiz"
@@ -3024,10 +3024,10 @@ olaylar:
               - ahlak: { duzen: 1 }
             sonraki: "d50p2_gizle"
           - id: "pazarlik"
-            etiket: { tr: "\"Beni getirene beş bin mi? Ben altı veririm.\"", en: "\"Five grand to bring me in? I'll pay six.\"" }
-            gerekli: { stat: { cha: 40 } }
+            etiket: { tr: "\"Beni getirene otuz mu? Ben kırk veririm.\"", en: "\"Thirty crystals to bring me in? I'll pay forty.\"" }
+            gerekli: { stat: { cha: 40 }, oz_kristali_min: 2 }
             etkiler:
-              - kredi: -60
+              - oz_kristali: -2
               - gizle: 8
               - ahlak: { duzen: -3, insanlik: -1 }
             sonraki: "d50p2_pazarlik"
@@ -3036,7 +3036,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - gizle: 12
-              - yozlasma: 3
+              - dikkat: 3
               - ahlak: { insanlik: -2 }
               - iliski: { yanki: { guven: 4, saygi: 3 } }
             sonraki: "d50p2_yanki"
@@ -3108,7 +3108,7 @@ olaylar:
       - id: "d50p2_pazarlik"
         yer: "kule_dibi"
         paragraflar:
-          - { tr: "Avcılar birbirine bakıyor. Derken en yaşlıları gülmeye başlıyor: \"Altı mı? Şu an bu şehirde altı bin kredisi olan bir tek sen varsın. Peki, senin için çalışırız.\"", en: "The hunters look at each other. Then the oldest laughs. \"Six? You're the only person in this city with six grand right now. Sure. We'll work for you.\"" }
+          - { tr: "Avcılar birbirine bakıyor. Derken en yaşlıları gülmeye başlıyor: \"Kırk mı? Şu an bu şehirde kırk kristali olan bir tek sen varsın. Peki, senin için çalışırız.\"", en: "The hunters look at each other. Then the oldest laughs. \"Forty? You're the only person in this city with forty crystals right now. Sure. We'll work for you.\"" }
           - { tr: "İlanı indirip yerine başka birinin yüzünü asıyorlar; kimin olduğunu sormuyorsun. Ertesi sabah üçü de senin paranla senin peşindekileri izlemeye koyulmuş.", en: "They pull the notice and put up somebody else's face. You don't ask whose. Next morning all three of them are on your payroll, watching whoever's watching you." }
         secenekler:
           - id: "tamam"
@@ -3133,7 +3133,7 @@ olaylar:
       - id: "d50p2_yenilgi"
         yer: "kule_dibi"
         paragraflar:
-          - { tr: "Çelik ağ üstüne kapanırken bir dipçik şakağına iniyor. Kendine geldiğinde ellerin bağlı, bir kamyonetin kasasında Kule'ye doğru götürülüyorsun.", en: "The steel net drops over you and a rifle butt comes down on your temple. When you come to you're in the bed of a pickup with your hands tied, rolling toward the Spire." }
+          - { tr: "Çelik ağ üstüne kapanırken bir dipçik şakağına iniyor. Kendine geldiğinde ellerin bağlı, ceplerin boşaltılmış; bir kamyonetin kasasında Kule'ye doğru götürülüyorsun.", en: "The steel net drops over you and a rifle butt comes down on your temple. When you come to you're in the bed of a pickup, hands tied and pockets emptied, rolling toward the Spire." }
           - { tr: "İpler seni ancak bir dakika kadar tutabiliyor, sonra kopuveriyor. Kamyonet bir duvara dalıyor; avcılar ellerinde boş ip uçlarıyla, dönüp dönüp sana bakarak kaçıyor.", en: "The ropes hold you for about a minute. Then they snap. The pickup goes into a wall, and the hunters run, holding the loose ends of rope and staring back at you." }
         secenekler:
           - id: "kalk"
@@ -3141,14 +3141,14 @@ olaylar:
             etkiler:
               - ahlak: { duzen: -1 }
               - stat: { wil: 1 }
-              - kredi: -30
+              - oz_kristali: -1
             sonraki: "@akis"
 
       - id: "d50p2_kacis"
         yer: "kule_dibi"
         paragraflar:
           - { tr: "Tezgâhların arasından fırlayıp bir çadırın brandasını yararak kaçıyorsun. Arkanda bir ağ boşa patlıyor.", en: "You bolt between the stalls and slash straight through a tent's tarp. Behind you a net goes off and hits nothing." }
-          - { tr: "Ertesi sabah ilana bir satır eklenmiş: \"Kaçıyor. Fiyat: 7.000.\"", en: "Next morning there's a new line on the notice: \"Runs. Price: 7,000.\"" }
+          - { tr: "Ertesi sabah ilana bir satır eklenmiş: \"Kaçıyor. Fiyat: elli kristal.\"", en: "Next morning there's a new line on the notice: \"Runs. Price: 50 crystals.\"" }
         secenekler:
           - id: "tamam"
             etiket: { tr: "Bunu iltifat say", en: "Take it as a compliment" }
@@ -3199,7 +3199,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - gizle: 25
-              - yozlasma: 6
+              - dikkat: 6
               - can: -30
               - ahlak: { insanlik: -3 }
               - iliski: { yanki: { guven: 8, baglilik: 6 } }
@@ -3217,7 +3217,7 @@ olaylar:
             etkiler:
               - bayrak: "dikkat75_kurban"
               - gizle: 30
-              - yozlasma: 8
+              - dikkat: 8
               - degisken: { hayatta_kalan: -2 }
               - ahlak: { merhamet: -10, insanlik: -6 }
               - iliski: { yanki: { guven: 6, saygi: 6 } }
@@ -3369,7 +3369,7 @@ olaylar:
             goster: { bayrak: "yanki_bagi" }
             etkiler:
               - gizle: 20
-              - yozlasma: 5
+              - dikkat: 5
               - ahlak: { duzen: -1 }
               - iliski: { yanki: { guven: 5, baglilik: 4 } }
             sonraki: "d100p2_saklan"
@@ -3886,7 +3886,7 @@ olaylar:
             etkiler:
               - aciga_vur: true
               - ahlak: { insanlik: -3, duzen: -2 }
-              - yozlasma: 3
+              - dikkat: 3
               - itibar: { yukselenler: 4 }
               - iliski: { yanki: { guven: 6, baglilik: 4 } }
               - tohum: { olay: "dikkat_75_p2", gecikme: { min: 3, max: 6 }, kosul: { dikkat_min: 65 }, hatirlatma: { tr: "Duvarlardaki küçük harfli yazılar seni arayanlara bir iz bırakmış.", en: "Those lowercase words on the walls left a trail for anyone looking for you." } }

@@ -134,6 +134,11 @@ sealed interface Condition {
         override fun test(state: WorldState) = state.corruption >= value
     }
 
+    /** Paket 4 (DECISIONS #167): Öz Kristali tek para birimi; ödeme seçenekleri `oz_kristali_min` ile kilitlenir. */
+    data class CrystalsAtLeast(val value: Int) : Condition {
+        override fun test(state: WorldState) = state.player.essenceCrystals >= value
+    }
+
     /** Gerçek seviye − görünen seviye ≥ n ("beni hafife aldılar"). */
     data class HiddenGapAtLeast(val value: Int) : Condition {
         override fun test(state: WorldState) = state.player.level - state.publicLevel >= value

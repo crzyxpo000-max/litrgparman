@@ -13,7 +13,7 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 - Aşama 5 tamam. Aşama 5: NPC sistemi (`npc/`: 4 eksen, hafıza, gündem, eşikler, ölüm, yoldaşlar, düello,
   Küresel Sıralama, yoldaş görüşleri, güce tepkiler, bilgi günlüğü, yalanlar, izler, Ordu modeli).
 - Aşama 0–4: Aşama 4: içerik YAML, olay havuzu, Hikaye Yönetmeni, tohumlar, gün döngüsü, bölgeler/kapılar,
-  fraksiyon matrisi, bayrak kaydı, görevler, OP MC (Dikkat, Yozlaşma, gizli/görünen seviye, efsane, zar, gösteriş, fırsat eli).
+  fraksiyon matrisi, bayrak kaydı, görevler, OP MC (Dikkat, gizli/görünen seviye, efsane, zar, gösteriş, fırsat eli).
 - Aşama 3: savaş (`combat/`, 20 düşman, savaş ekranı).
 - **Aşama 0, 1 ve 2:** Motor, kayıt (v2), i18n, içerik doğrulayıcı, Compose ekranları, prolog demosu;
   Sistem mekanikleri (eğilim, sınıf, kademe/evrim, yetenek, unvan, meslek, Öz, Günlük Görev) ve OP MC çekirdeği.
@@ -116,8 +116,8 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
   - İngilizce iyelik: `|pos` → Devon's
   - `{yer:kiyikent}`, `{oyuncu}` (oyuncu adı, ek alabilir: `{oyuncu|in}`)
 - Etkiler: `bayrak`, `bayrak_kaldir`, `degisken`, `ahlak` (merhamet/duzen/insanlik), `itibar`, `xp`, `gun`, `stat`, `unvan`,
-  `egilim` {eğilim: n}, `yetenek` id, `yetenek_xp` {id: n}, `esya` {id: n}, `kredi` n, `oz_kristali` n, `oz` {öz: n},
-  `gunluk` {antrenman|kesif|savas|kapi: n}, `meslek_teklifi` true, `can` n, `mana` n, `arayuz` yetenekler|canta|harita.
+  `egilim` {eğilim: n}, `yetenek` id, `yetenek_xp` {id: n}, `esya` {id: n}, `oz_kristali` n (tek para birimi; `kredi` kaldırıldı), `oz` {öz: n},
+  `gunluk` {antrenman|kesif|savas|kapi: n}, `can` n, `mana` n, `arayuz` yetenekler|canta|harita. (`meslek_teklifi` yazma: meslek kapalı.)
 - Koşullar: `stat`, `bayrak`, `bayrak_yok`, `degisken_min`, `ahlak_min`, `ahlak_max`, `seviye_min`, `egilim_min`,
   `yetenek`, `unvan`, `sinif`, `esya`, `itibar_min`. Birden çok anahtar = VE.
 - Savaş: seçenekte `{"savas": {"dusmanlar": [...], "ortam": [tavan|su|yanici|karanlik|dar_gecit], "kazan": sahne, "kaybet": sahne?, "kac": sahne?}}`;
@@ -129,8 +129,8 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
   yalniz_tohum, ana_yay{gun}, tekrar, kart, sahne, sahneler`. Olayın son seçenekleri `"sonraki": "@akis"`.
 - Diğer dünya dosyaları: `regions.yaml` (`baslangic`, `bolgeler`), `factions.yaml` (ilişki matrisi), `feats.yaml` (tanıklı başarılar),
   `quests.yaml`, `flags.yaml` (**her bayrak burada tanımlı olmalı**; motorun koyduğu `yenildi_ uyanis_ olay_ dikkat_esik_ _red_ _zar_` önekleri hariç).
-- Yeni etkiler: `tohum {olay, gecikme{min,max}, kosul}`, `dikkat n`, `gizle n`, `yozlasma n`, `aciga_vur true`, `efsane id`,
-  `gorev {id: basla|tamam|basarisiz}`, `bolge id`, `tehlike {bolge: n}`. Yeni koşullar: `dikkat_min/max`, `yozlasma_min`,
+- Yeni etkiler: `tohum {olay, gecikme{min,max}, kosul}`, `dikkat n`, `gizle n`, `aciga_vur true`, `efsane id`,
+  `gorev {id: basla|tamam|basarisiz}`, `bolge id`, `tehlike {bolge: n}`. Yeni koşullar: `dikkat_min/max`, `oz_kristali_min`,
   `gizli_fark_min`, `bolge`, `perde`, `gun_min/max`, `gorev {id: durum}`, `itibar_max`. Belirteç `{fraksiyon:id}`.
 - Seçenek alanları: `tur: gizle|aciga_vur|gosteris`, `zar {stat, zorluk, tek, basarisiz, basarisiz_etkiler}`.
 - `validateContent` uyarıları (⚠) derlemeyi durdurmaz: set edilmeyen bayrak, ulaşılamayan tohum olayı, ahlak oynatmayan önemli seçim.
@@ -182,7 +182,12 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
   hikaye katı olayları `yalniz_tohum`). Sonlar `endings.yaml` (`sonlar`, `arketipler`, `epilog.npc`, `epilog.fraksiyon`; her son
   sahnesi bir sona bağlı olmalı; tam bir `yedek` son). Yollar `essences.yaml` `yollar`.
 - Parça dosyalar: `enemies/`, `items/`, `awakenings/`, `titles/` (ayrıca `flags/`, `quests/`, `knowledge/`, `feats/`).
-- Eşik olayları: Dikkat `dikkat_<n>_p<perde>` (eşikler her perdede yeniden kurulur; Perde 1'de `dikkat_<n>`), Yozlaşma `yozlasma_<n>` (bir kez).
+- Eşik olayları: Dikkat `dikkat_<n>_p<perde>` (eşikler her perdede yeniden kurulur; Perde 1'de `dikkat_<n>`).
+- **Paket 4 — kapatılan sistemler (DECISIONS #166–#169):** meslek/üretim ve Kredi kapalı (`Progression.PROFESSIONS_ENABLED/CREDITS_ENABLED`; kod durur,
+  içerikte `kredi`/`meslek_teklifi` yazılmaz, Öz Kristali tek para birimi, ödeme seçeneği `gerekli: { oz_kristali_min: k }`). Yozlaşma yok
+  (`CORRUPTION_ENABLED`): `yozlasma n` yazma, `dikkat n` yaz; ceza yetenekleri (`EffectApplier.PENALTY_ATTENTION`) ve izler (`traits.yaml dikkat`)
+  Dikkat artırır; Yankı yay düğümleri `yozlasma_50/75` içerik tohumuyla `dikkat_min` koşuluna bağlı. Ordu ve Bilgi günlüğü ilk `ordu`/`bilgi`
+  etkisiyle kalıcı açılır (`WorldState.UI_ARMY_VAR/UI_KNOWLEDGE_VAR`).
 - New Game+: `StoryEngine.newGame(…, previousGames, newGamePlus)` → değişken `onceki_oyun`, bayrak `yeni_dongu`; meta uygulama ayarlarında.
 
 - **Aşama 9:** `tools/simulator` (engine'i kullanan JVM aracı; `DengeTest` 200 oynanışla son dağılımı %1–%40, hakimiyet %60+ sınar).

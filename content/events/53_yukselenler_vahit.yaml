@@ -281,7 +281,7 @@ olaylar:
             etiket: { tr: "Bırak diz çöksünler", en: "Let them kneel" }
             etkiler:
               - ahlak: { insanlik: -4, duzen: 3 }
-              - yozlasma: 2
+              - dikkat: 2
               - itibar: { yukselenler: 6 }
               - iliski: { vahit: { baglilik: 6 } }
             kronik: { tr: "Yüzlerce insan önünde diz çöktü; sen hiçbirini kaldırmadın.", en: "Hundreds of people knelt in front of you, and you didn't tell them to stand." }
@@ -1043,7 +1043,7 @@ olaylar:
             etiket: { tr: "Halkanın ortasına geç, katkıyı al", en: "Step into the middle of the ring. Receive it" }
             etkiler:
               - ahlak: { insanlik: -15, merhamet: -6 }
-              - yozlasma: 8
+              - dikkat: 8
               - xp_seviye: 150
               - itibar: { yukselenler: 15 }
               - degisken: { hayatta_kalan: -6 }
@@ -1516,7 +1516,7 @@ olaylar:
             etiket: { tr: "Adını unut. Bilerek", en: "Forget his name. On purpose" }
             etkiler:
               - ahlak: { insanlik: -4, duzen: 2 }
-              - yozlasma: 4
+              - dikkat: 4
               - iliski: { yanki: { guven: -6 } }
             kronik: { tr: "On Üç'ün sana emanet ettiği tek şeyi, adını, bilerek unuttun.", en: "Thirteen trusted you with one thing, his name, and you forgot it on purpose." }
             sonraki: "@akis"
@@ -1612,7 +1612,7 @@ olaylar:
             etiket: { tr: "Onu zara it", en: "Push {zamir:deniz_arman|onu} into the membrane" }
             etkiler:
               - ahlak: { merhamet: -15, insanlik: -15 }
-              - yozlasma: 10
+              - dikkat: 10
               - npc_ol: "deniz_arman"
               - unvan: "kurban_eden"
               - xp_seviye: 120
@@ -1671,7 +1671,7 @@ olaylar:
             etiket: { tr: "Sorma. Kalp kalptir", en: "Don't ask. A heart's a heart" }
             etkiler:
               - ahlak: { insanlik: -3, merhamet: -2 }
-              - yozlasma: 3
+              - dikkat: 3
             kronik: { tr: "Sana tapan bir yabancıyı Ocak'a yolladın ve adını hiç öğrenmedin.", en: "You sent a stranger who worshipped you into the Kiln and never learned her name." }
             sonraki: "@akis"
 
@@ -1770,7 +1770,7 @@ olaylar:
               - ahlak: { insanlik: -20, duzen: 6, merhamet: -6 }
               - gorev: { zincir_yukselenler: "tamam" }
               - xp_seviye: 200
-              - yozlasma: 10
+              - dikkat: 10
               - itibar: { yukselenler: 20 }
               - degisken: { hayatta_kalan: -8 }
               - bayrak: "yukselis_sadakati"
@@ -1860,7 +1860,7 @@ olaylar:
             etiket: { tr: "Bırak diz çökmüş kalsınlar", en: "Let them stay on their knees" }
             etkiler:
               - ahlak: { insanlik: -4, duzen: 4 }
-              - yozlasma: 4
+              - dikkat: 4
               - unvan: "sesin_ta_kendisi"
             kronik: { tr: "On bir bin kişiyi sabaha kadar dizlerinin üstünde bıraktın; hiçbiri kalkmaya cesaret edemedi.", en: "You left eleven thousand people on their knees until morning. Not one of them dared get up." }
             sonraki: "@akis"
@@ -2584,7 +2584,7 @@ olaylar:
             etiket: { tr: "Yetkiyi al", en: "Take the authority" }
             etkiler:
               - ahlak: { insanlik: -12, duzen: 4 }
-              - yozlasma: 6
+              - dikkat: 6
               - bayrak: "secici_yetkisi"
               - iliski: { vahit: { korku: 10, baglilik: 10 }, yanki: { guven: -10 } }
             kronik: { tr: "Ön seçim yetkisini peygamberden devraldın; o günden sonra hasadın listelerini senin elin yazdı.", en: "You took the Harvest's pre-selection authority out of the prophet's hands. From then on, your hand wrote the lists." }
@@ -3160,7 +3160,7 @@ olaylar:
               - npc_ol: "deniz_arman"
               - unvan: "kardes_katili"
               - bayrak: "deniz_oyuncu_oldurdu"
-              - yozlasma: 6
+              - dikkat: 6
               - itibar: { yukselenler: -10 }
             kronik: { tr: "En eski arkadaşını {yer:eski_sehir|in} meydanında, kırık saatin altında öldürdün.", en: "You killed your oldest friend in the {yer:eski_sehir} square, under the broken clock." }
             sonraki: "@akis"

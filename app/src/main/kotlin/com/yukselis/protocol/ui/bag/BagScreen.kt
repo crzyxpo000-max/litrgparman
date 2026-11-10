@@ -32,7 +32,7 @@ import com.yukselis.protocol.ui.components.SystemCard
 import com.yukselis.protocol.ui.theme.GameType
 import com.yukselis.protocol.ui.theme.rarityColorOf
 
-/** Çanta: para, envanter (kullanılabilir eşyalar), meslek ve üretim. */
+/** Çanta: Öz Kristali, envanter (kullanılabilir eşyalar). Meslek/üretim kapalı (Paket 4, DECISIONS #166); eski kayıtta meslek varsa motor zaten vermez. */
 @Composable
 fun BagScreen(
     bag: BagView,
@@ -49,7 +49,7 @@ fun BagScreen(
         items(notices.size) { SystemCard(notices[it]) }
         item {
             Text(
-                text = stringResource(R.string.currency_line, bag.credits, bag.crystals),
+                text = stringResource(R.string.currency_crystals, bag.crystals),
                 style = GameType.systemTitle,
                 color = Game.colors.amber,
             )
@@ -58,17 +58,16 @@ fun BagScreen(
         }
         items(bag.items, key = { "i-${it.id}" }) { ItemRow(it) { onUse(it.id) } }
 
-        item {
-            SectionTitle(stringResource(R.string.profession))
-            val professionName = bag.professionName
-            if (professionName == null) {
-                Text(stringResource(R.string.no_profession), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            } else {
+        // Meslek bölümü yalnız motor bir meslek adı veriyorsa (sistem kapalıyken hiç görünmez).
+        val professionName = bag.professionName
+        if (professionName != null) {
+            item {
+                SectionTitle(stringResource(R.string.profession))
                 Text(stringResource(R.string.profession_level, professionName, bag.professionLevel), style = GameType.systemTitle)
                 StatBar("XP", bag.professionXp.toLong(), bag.professionXpToNext.toLong(), Game.colors.success, Modifier.padding(top = 4.dp, bottom = 4.dp))
             }
+            items(bag.recipes, key = { "r-${it.id}" }) { RecipeRow(it, bag.professionLevel) { onCraft(it.id) } }
         }
-        items(bag.recipes, key = { "r-${it.id}" }) { RecipeRow(it, bag.professionLevel) { onCraft(it.id) } }
     }
 }
 

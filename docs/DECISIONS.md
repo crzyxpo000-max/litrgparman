@@ -2,6 +2,15 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Oyuncu gözüyle inceleme, Paket 4: sistem çıkarma — 2026-11-10
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 166 | **Meslek/üretim kapalı, kod duruyor.** `Progression.PROFESSIONS_ENABLED = false`: Sv. 5 teklifi ve `meslek_teklifi` etkisi istem açmaz, `craft` reddedilir, zaman atlama meslek odağı yok, Çanta'da meslek bölümü ve üretim görünmez (eski kayıttaki meslek de). `professions.yaml`, tarifler ve `ProfessionState` kayıt alanı durur. | Oyuncu gözüyle incelemede meslek ilk saatte anlamsız bir kavramdı; üretim hiçbir hikaye seçimine bağlanmıyordu. | Üretim bir hikaye düğümüne (Perde 3 kuşatma hazırlığı gibi) bağlanırsa anahtar açılır. |
+| 167 | **Kredi kaldırıldı; Öz Kristali tek para birimi.** `CREDITS_ENABLED = false`: `kredi` etkisi ve düşman kredisi sessizce yutulur (bildirim yok), Çanta yalnız kristal gösterir. İçerikte 110 `kredi` etkisi `oz_kristali`ne çevrildi (≈25 Kredi = 1 kristal, en az 1, en çok 30); 61 ödeme seçeneği elden geçirildi: 40 gönüllü ödeme `gerekli: { oz_kristali_min: k }` ile kilitlenir (yeni koşul `Condition.CrystalsAtLeast`), 17 yenilgi/iade kaybı kilitsiz kalır, 4'ü (erzak/ekmek vermek, Deniz'in pazarlığı) bedelsiz oldu. Her ödeme sahnesinde kilitsiz bir çıkış var (`p3_pazar_1`'e "pazardan geç" eklendi). 189 düşman `kredi` alanı silindi; anlatıdaki "kredi" sözcükleri kristale uyarlandı. | İki para birimi vardı ve Kredi hiçbir Sistem mağazasına bağlanmamıştı; oyuncu neye harcadığını bilmiyordu. | Kristal enflasyonu: simülatörde ödeme seçeneklerinin kilitli kalma oranı > %50 ya da kristal bakiyesi Perde 2 sonunda > 60 ise ölçek değişir. |
+| 168 | **Yozlaşma Dikkat'e katıldı (tek ölçek).** `CORRUPTION_ENABLED = false`: `yozlasma n` etkisi 1:1 `shiftAttention`, içerikte 122 satır `dikkat` oldu, 8 `yozlasma_min` koşulu `dikkat_min`. Ceza yetenekleri Dikkat +10 (`PENALTY_ATTENTION`), izler (`traits.yaml dikkat`) Dikkat artırır. Motorun Yozlaşma eşik tohumu çalışmaz; Yankı yay düğümleri `yozlasma_50`/`yozlasma_75` zaten içerik tohumuyla geliyor, şimdi `dikkat_min: 50/75`. `WorldState.corruption` alanı ve `[Yozlaşma: n]` metni durur, Durum çubuğu ve Yardım maddesi kalktı. | İki gerilim ölçeği oyuncuya aynı şeyi iki kez söylüyordu; Yozlaşma yalnız iki olay tetikliyordu. | `dikkat_min: 75` ile Yankı'nın "Kayıp altı saat" düğümü oynanışların < %10'unda geliyorsa eşik 60'a iner. |
+| 169 | **Ordu ve Bilgi günlüğü kalıcı kendini açma.** İlk `ordu`/`ordu_kazan` (birlik > 0) `_ui_ordu`, ilk `bilgi` `_ui_bilgi` değişkenini koyar; `StatusView.showArmy/showKnowledge` bu değişkenlere de bakar, birlik biterse bölüm kapanmaz. | Paket 2'de bölüm sayılarla açılıyordu (ordu gücü > 0); birlikler ölünce bölüm kaybolabiliyordu. | — |
+
 ## Oyuncu gözüyle inceleme, Paket 3: ritim — 2026-11-10
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |

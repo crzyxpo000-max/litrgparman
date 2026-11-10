@@ -236,8 +236,9 @@ olaylar:
         secenekler:
           - id: "al"
             etiket: { tr: "Açık artırmaya gir, çanı sen al", en: "Get in on the auction. Buy the bell yourself" }
+            gerekli: { oz_kristali_min: 20 }
             etkiler:
-              - kredi: -500
+              - oz_kristali: -20
               - ahlak: { merhamet: 2 }
               - bayrak: "bl11_can_alindi"
             sonraki: "bl11_kule_dibi_can_al"
@@ -315,8 +316,9 @@ olaylar:
         secenekler:
           - id: "al"
             etiket: { tr: "Kurtarıcıya dön, çanı satın al", en: "Turn back to the salvager and buy the bell" }
+            gerekli: { oz_kristali_min: 20 }
             etkiler:
-              - kredi: -500
+              - oz_kristali: -20
               - ahlak: { merhamet: 2 }
               - bayrak: "bl11_can_alindi"
             sonraki: "bl11_kule_dibi_can_al"
@@ -795,8 +797,9 @@ olaylar:
             sonraki: "bl11_kule_dibi_hamallar_kabul"
           - id: "ode"
             etiket: { tr: "Bugünkü farkı kendi cebinden öde", en: "Cover today's difference out of your own pocket" }
+            gerekli: { oz_kristali_min: 12 }
             etkiler:
-              - kredi: -300
+              - oz_kristali: -12
               - ahlak: { merhamet: 2 }
               - xp_seviye: 9
             sonraki: "@akis"
@@ -916,7 +919,7 @@ olaylar:
           - id: "tat"
             etiket: { tr: "Bir kalıp al, sen de yala", en: "Buy a cake and lick it yourself" }
             etkiler:
-              - yozlasma: 2
+              - dikkat: 2
               - ahlak: { insanlik: -1 }
             sonraki: "bl11_sanayi_tuz_kazani_tat"
           - id: "aras"
@@ -981,7 +984,7 @@ olaylar:
           - id: "bitir"
             etiket: { tr: "Kalıbı sonuna kadar bitir", en: "Finish the whole cake" }
             etkiler:
-              - yozlasma: 2
+              - dikkat: 2
               - xp_seviye: 12
             sonraki: "@akis"
 
@@ -1076,7 +1079,6 @@ olaylar:
           - id: "ekmek"
             etiket: { tr: "Kuyruğa kendi ekmeğini dağıt; kimse adını vermesin", en: "Hand out bread of your own. Nobody gives up a name" }
             etkiler:
-              - kredi: -300
               - ahlak: { merhamet: 2, insanlik: 1 }
               - bayrak: "bl11_kutuk_bos"
             sonraki: "bl11_kordon_pul_yazici_ekmek"
@@ -1318,7 +1320,7 @@ olaylar:
         paragraflar:
           - { tr: "{yer:eski_sehir|in} dar bir sokağında, kubbesi çökmüş eski bir hamamın önünde mahallenin çocukları toplanmış. İçeriden bir ses geliyor: dalgaların inip kalkışına uyan, sözleri anlaşılmayan, uzun ve ağır bir türkü.", en: "On a narrow street in {yer:eski_sehir}, the neighborhood kids have gathered outside an old bathhouse with a caved-in dome. A voice is coming from inside: a long, heavy song that rises and falls like waves, the words impossible to make out." }
           - { tr: "\"Hamamda hayalet var,\" diyor çocuklardan biri, gözleri parlayarak. \"Penceresi yok. Sayısı yok. Annem yaklaşma dedi.\"", en: "\"There's a ghost in the bathhouse,\" one of the kids says, eyes shining. \"It doesn't have a window. Doesn't have a number. My mom said stay away.\"" }
-          - { tr: "Sokağın başından dört avcı çıkageliyor. En öndeki, Lonca'nın ilan tahtasından kopardığı bir kâğıdı sallıyor: [Tanımsız varlık. Seviye okunamıyor. Ödül: 800 kredi.] \"Geçitten bir şey sızmış,\" diyor. \"{yer:kule_dibi|de} birinin rengini emmiş. Bu da onlardan.\"", en: "Four hunters come around the corner at the top of the street. The one in front is waving a sheet he tore off the Guild bounty board: [Unidentified entity. Level unreadable. Reward: 800 credits.] \"Something leaked through the passage,\" he says. \"Sucked the color out of somebody down at {yer:kule_dibi}. This is one of those.\"" }
+          - { tr: "Sokağın başından dört avcı çıkageliyor. En öndeki, Lonca'nın ilan tahtasından kopardığı bir kâğıdı sallıyor: [Tanımsız varlık. Seviye okunamıyor. Ödül: otuz kristal.] \"Geçitten bir şey sızmış,\" diyor. \"{yer:kule_dibi|de} birinin rengini emmiş. Bu da onlardan.\"", en: "Four hunters come around the corner at the top of the street. The one in front is waving a sheet he tore off the Guild bounty board: [Unidentified entity. Level unreadable. Reward: 30 crystals.] \"Something leaked through the passage,\" he says. \"Sucked the color out of somebody down at {yer:kule_dibi}. This is one of those.\"" }
           - metin: { tr: "O türküyü tanıyorsun. {yer:batik_takimada|de} her dalga vurduğunda çan kuleleri aynı ezgiyi çalıyordu.", en: "You know that song. In {yer:batik_takimada}, every time a wave hit, the bell towers rang that same tune." }
             kosul: { bayrak: "batik_varildi" }
           - metin: { tr: "{yer:kule_dibi|de}ki gri adamı sen dağıtmıştın. Bu ses ona hiç benzemiyor: o soru soruyordu, bu türkü söylüyor.", en: "You're the one who dealt with the gray man at {yer:kule_dibi}. This voice sounds nothing like it. That thing asked questions. This one sings." }
@@ -1377,7 +1379,7 @@ olaylar:
         yer: "eski_sehir"
         paragraflar:
           - { tr: "Kapının mermer eşiğine çıkıp kollarını kavuşturuyorsun. Avcılar duruyor. En öndeki ilan kâğıdına, sonra sana, sonra da başının üstündeki satıra bakıyor.", en: "You step up onto the marble threshold and fold your arms. The hunters stop. The one in front looks at his bounty sheet, then at you, then at the line over your head." }
-          - { tr: "\"Sekiz yüz kredi,\" diyor. \"Senin için hiçbir şey, biliyorum. Bizim için bir aylık ekmek.\" Kâğıdı katlayıp cebine sokuyor, ama sokağın başına çekildikten sonra da gözünü kapıdan ayırmıyor.", en: "\"Eight hundred credits,\" he says. \"Nothing to you, I get it. A month of bread for us.\" He folds the sheet and pockets it, but even after they fall back to the top of the street, he doesn't take his eyes off the door." }
+          - { tr: "\"Otuz kristal,\" diyor. \"Senin için hiçbir şey, biliyorum. Bizim için bir aylık ekmek.\" Kâğıdı katlayıp cebine sokuyor, ama sokağın başına çekildikten sonra da gözünü kapıdan ayırmıyor.", en: "\"Thirty crystals,\" he says. \"Nothing to you, I get it. A month of bread for us.\" He folds the sheet and pockets it, but even after they fall back to the top of the street, he doesn't take his eyes off the door." }
           - { tr: "Arkandaki türkü bir an susuyor, sonra yeniden başlıyor. Bu kez daha alçak sesle.", en: "Behind you the song stops for a moment, then starts up again. Softer this time." }
         secenekler:
           - id: "bekle"
@@ -1518,7 +1520,7 @@ olaylar:
             etiket: { tr: "Adını kendi pencerene yaz; yükü sen taşı", en: "Write his name into your own window. Carry the weight yourself" }
             goster: { bayrak: "yanki_bagi", bayrak_yok: "yanki_susturuldu" }
             etkiler:
-              - yozlasma: 2
+              - dikkat: 2
               - ahlak: { merhamet: 2 }
               - iliski: { elif_sari: { guven: 3, korku: 2 } }
               - bayrak: "bl11_soluk_kurtuldu"
@@ -1862,8 +1864,9 @@ olaylar:
         secenekler:
           - id: "satin"
             etiket: { tr: "Kızın elindeki bütün desteleri satın al", en: "Buy every stack the girl has" }
+            gerekli: { oz_kristali_min: 16 }
             etkiler:
-              - kredi: -400
+              - oz_kristali: -16
               - ahlak: { duzen: 1 }
               - tohum: { olay: "bl14_us_kendi_el_yazin", gecikme: { min: 1, max: 2 }, kosul: { bolum: 14, gun_max: 299 }, hatirlatma: { tr: "{yer:kule_dibi|den} aldığın desteleri bir gece boyunca okudun. Sabah kapının altında başka bir kâğıt vardı.", en: "You spent a whole night reading the stacks from {yer:kule_dibi}. In the morning there was another piece of paper under your door." } }
             sonraki: "bl14_kule_dibi_takvim_satin"

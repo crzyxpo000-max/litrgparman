@@ -30,7 +30,7 @@ olaylar:
           - kosul: { stat: { per: 7 } }
             metin: { tr: "Yaranın kenarları parçalanmış ama atardamar sağlam. Kanama durursa yürür; bir saat içinde durmazsa yürüyemez.", en: "The edges are ragged, but the artery's intact. Stop the bleeding and she walks; leave it an hour and she won't." }
           - kosul: { bayrak: "yanki_bagi" }
-            metin: { tr: "çantada üç günlük erzak, bir harita, on beş kredi. ölürse hepsi senin. ben yalnızca sayıyorum.", en: "three days of food in that pack, a map, fifteen credits. if she dies, it's all yours. i'm just counting." }
+            metin: { tr: "çantada üç günlük erzak, bir harita, bir öz kristali. ölürse hepsi senin. ben yalnızca sayıyorum.", en: "three days of food in that pack, a map, one essence crystal. if she dies, it's all yours. i'm just counting." }
         yoldas_tepkileri:
           - npc: "deniz_arman"
             metin: { tr: "\"Onu burada bırakmıyoruz. Bana öyle bakma, bırakmıyoruz.\"", en: "\"We're not leaving her. Don't look at me like that, we're not.\"" }
@@ -72,7 +72,7 @@ olaylar:
             etiket: { tr: "Çantayı alıp git", en: "Take the bag and go" }
             etkiler:
               - ahlak: { merhamet: -12, insanlik: -5 }
-              - kredi: 15
+              - oz_kristali: 1
               - esya: { kirmizi_ot: 2, kizarmis_et: 2 }
               - egilim: { karanlik: 2 }
               - bayrak: "avci_yagmalandi"
@@ -174,7 +174,7 @@ olaylar:
             etiket: { tr: "Kurtarmanın bedelini hemen iste", en: "Ask for your fee. Right now" }
             etkiler:
               - ahlak: { merhamet: -4, duzen: 2 }
-              - kredi: 15
+              - oz_kristali: 1
               - bayrak: "avci_kurtarildi"
               - bayrak: "avci_ucret"
               - tohum: { olay: "avci_haberi", gecikme: { min: 3, max: 6 }, kosul: { bayrak: "avci_kurtarildi" }, hatirlatma: { tr: "Ormanda bulduğun yaralı avcının yüzü hâlâ gözünün önünde.", en: "You can still see the face of that wounded hunter from the woods." } }
@@ -273,7 +273,7 @@ olaylar:
             etiket: { tr: "Çantayı al; artık kimsenin değil", en: "Take the pack. It's nobody's now" }
             etkiler:
               - ahlak: { merhamet: -2 }
-              - kredi: 15
+              - oz_kristali: 1
               - esya: { kirmizi_ot: 2 }
             sonraki: "@akis"
           - id: "gom"
@@ -349,7 +349,7 @@ olaylar:
             goster: { bayrak: "avci_kurtarildi" }
             etkiler:
               - ahlak: { merhamet: -4 }
-              - kredi: 15
+              - oz_kristali: 1
               - bilgi: "avci_ortagi"
               - tohum: { olay: "olu_avci_penceresi", gecikme: { min: 1, max: 3 }, hatirlatma: { tr: "Yaralı avcıyla aranızdaki borç hâlâ kapanmadı.", en: "That debt with the wounded hunter still isn't settled." } }
             sonraki: "@akis"
@@ -366,7 +366,7 @@ olaylar:
             goster: { bayrak: "avci_yagmalandi" }
             etkiler:
               - ahlak: { insanlik: 4, merhamet: 3 }
-              - kredi: -15
+              - oz_kristali: -1
               - itibar: { lonca: 2 }
             sonraki: "avci_haberi_iade"
           - id: "inkar"
@@ -461,7 +461,7 @@ olaylar:
             etiket: { tr: "Çantayı ver; bu gecelik utanç yeter", en: "Hand over the bag. Enough shame for one night" }
             etkiler:
               - ahlak: { insanlik: 3, duzen: 1 }
-              - kredi: -15
+              - oz_kristali: -1
             sonraki: "avci_haberi_iade"
 
       - id: "avci_haberi_tehdit"
@@ -473,7 +473,7 @@ olaylar:
             etiket: { tr: "Çantayı yine de geri ver", en: "Give the bag back anyway" }
             etkiler:
               - ahlak: { merhamet: 4 }
-              - kredi: -15
+              - oz_kristali: -1
               - itibar: { lonca: 2 }
               - iliski: { kaya_demir: { saygi: 3 } }
             sonraki: "@akis"
@@ -533,7 +533,7 @@ olaylar:
             etiket: { tr: "Elinde kalanla yola devam et", en: "Move on with whatever you've got left" }
             etkiler:
               - ahlak: { duzen: -1 }
-              - kredi: -10
+              - oz_kristali: -1
               - bayrak: "avci_dusman"
             sonraki: "@akis"
 
@@ -1193,7 +1193,7 @@ olaylar:
             etiket: { tr: "Ödül iste; bu riske bedavaya girmedin", en: "Ask for a reward. You didn't risk it for free" }
             etkiler:
               - ahlak: { merhamet: -4, duzen: 2 }
-              - kredi: 10
+              - oz_kristali: 1
               - degisken: { hayatta_kalan: 2 }
               - gorev: { sisteki_cocuk: "tamam" }
             sonraki: "@akis"
@@ -2418,7 +2418,7 @@ olaylar:
             etiket: { tr: "Ona ortaklık teklif et; payını al", en: "Offer him a partnership. Take a cut" }
             etkiler:
               - ahlak: { merhamet: -8, duzen: -3 }
-              - kredi: 40
+              - oz_kristali: 2
               - itibar: { siginak: -3 }
               - bayrak: "sahte_ortak"
               - tohum: { olay: "carsi_cetesi", gecikme: { min: 2, max: 4 }, hatirlatma: { tr: "On dokuzuncu seviyeyi taklit eden adamın arkasında başkaları da varmış.", en: "The guy faking level nineteen had other people behind him." } }
@@ -2494,7 +2494,7 @@ olaylar:
             etiket: { tr: "Yerine otur; ücreti artık sen topla", en: "Take his seat. You collect the fee now" }
             etkiler:
               - ahlak: { merhamet: -10, duzen: 2, insanlik: -4 }
-              - kredi: 60
+              - oz_kristali: 2
               - itibar: { siginak: -5, yukselenler: 3 }
               - dikkat: 3
               - iliski: { vahit: { saygi: 5 } }
@@ -2527,7 +2527,7 @@ olaylar:
             etiket: { tr: "Yerine otur; ücreti artık sen topla", en: "Take his seat. You collect the fee now" }
             etkiler:
               - ahlak: { merhamet: -10, duzen: 2, insanlik: -4 }
-              - kredi: 60
+              - oz_kristali: 2
               - itibar: { siginak: -5, yukselenler: 3 }
               - dikkat: 3
               - iliski: { vahit: { saygi: 5 } }
@@ -2669,7 +2669,7 @@ olaylar:
             etiket: { tr: "Son anda vazgeç; konservesini geri ver", en: "Back out. Give the old woman her can back" }
             etkiler:
               - ahlak: { merhamet: 4, insanlik: 2 }
-              - kredi: -40
+              - oz_kristali: -2
               - itibar: { siginak: 2 }
               - bayrak_kaldir: "sahte_ortak"
             sonraki: "@akis"

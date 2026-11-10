@@ -1004,7 +1004,7 @@ class CombatEngine(private val content: Content, private val effects: EffectAppl
         val rewards = mutableListOf<Effect>(Effect.GainXp((xp * actXp).roundToLong()))
         killed.forEach { e ->
             val d = ctx.def(e)
-            if (d.credits > 0) rewards += Effect.AddCredits(d.credits)
+            if (Progression.CREDITS_ENABLED && d.credits > 0) rewards += Effect.AddCredits(d.credits)
             d.loot.forEach { (item, chance) -> if (item in content.items && ctx.rng.chance(chance)) rewards += Effect.AddItem(item, 1) }
         }
         // Ödüller tek kartta (Paket 2): "+335 XP", "+3 Kredi", "+1 Sis Postu" satırları zafer kartının içine; seviye,

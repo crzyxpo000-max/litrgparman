@@ -1138,7 +1138,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: -3, duzen: -2 }
               - esya: { hurda: 2 }
-              - kredi: 10
+              - oz_kristali: 1
               - itibar: { siginak: -2 }
               - bayrak: "k1_dolap_yagma"
               - xp: 15
@@ -1204,7 +1204,7 @@ olaylar:
           - id: "tamam"
             etiket: { tr: "Bozuklukları topla, yola çık", en: "Scoop up the change and move on" }
             etkiler:
-              - kredi: 3
+              - oz_kristali: 1
             sonraki: "@akis"
 
       - id: "k1_dolap_hayatta"
