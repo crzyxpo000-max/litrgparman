@@ -34,6 +34,7 @@ import com.zincir.Dinlenme
 import com.zincir.mantik.Bicim
 import com.zincir.mantik.Ilerleme
 import com.zincir.mantik.Program
+import com.zincir.mantik.Saglik
 import com.zincir.mantik.SetDegeri
 import com.zincir.mantik.Sira
 import com.zincir.veri.Ayarlar
@@ -67,6 +68,7 @@ private fun AntrenmanOzeti(vm: AnaViewModel, a: Ayarlar) {
     val hareketler by vm.hareketler.collectAsStateWithLifecycle()
     val seanslar by vm.seanslar.collectAsStateWithLifecycle()
     val sonAgirlik by vm.sonAgirlikGunu.collectAsStateWithLifecycle()
+    val saatEgzersizleri by vm.saatEgzersizleri.collectAsStateWithLifecycle()
     val haftaIndex = Program.haftaIndex(a.baslangicGunu, bugun)
     val siradaki = Sira.isAt(a.siraIndex)
     val hafif = a.hafifHaftaIndex == haftaIndex
@@ -119,6 +121,19 @@ private fun AntrenmanOzeti(vm: AnaViewModel, a: Ayarlar) {
         }
 
         Bolum("Kardiyo" + if (siradaki.kod == Tur.KARDIYO) " · sıradaki" else "")
+        // Saatte kaydedilmiş, henüz buraya işlenmemiş kardiyo varsa tek dokunuşla kaydetmeyi öner.
+        // Kendiliğinden kaydedilmez: sıra ancak sen onaylayınca ilerler.
+        val oneriler = Saglik.kardiyoOnerileri(
+            saatEgzersizleri[bugun].orEmpty(),
+            seanslar.filter { it.gun == bugun && it.tur == Tur.KARDIYO && it.tamamlandi }.mapNotNull { it.sureDk },
+        )
+        oneriler.forEach { e ->
+            Not("Saatinde ${if (dunSecili) "dün" else "bugün"} ${e.sureDk} dk ${e.tur} kaydı var.", baslik = "Saatten öneri")
+            Bosluk(8.dp)
+            DoluDugme("${e.sureDk} dk ${e.tur} · kardiyo olarak kaydet", Modifier.fillMaxWidth()) { vm.kardiyoKaydet(e.tur, e.sureDk) }
+            Bosluk(16.dp)
+        }
+        if (oneriler.isNotEmpty()) Etiket("Ya da elle gir")
         Text("Hedef 30–40 dk.", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Bosluk()
         Secim(BaslangicVerisi.KARDIYO_TURLERI, kardiyoTuru) { kardiyoTuru = it }

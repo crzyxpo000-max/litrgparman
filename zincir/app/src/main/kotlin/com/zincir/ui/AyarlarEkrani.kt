@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -292,7 +293,7 @@ private fun AnaAyarlar(vm: AnaViewModel, a: Ayarlar, onGeri: () -> Unit, onAltSa
 
         Bosluk(32.dp)
         Text(
-            "Zincir 1.2 · Veri yalnızca bu telefonda durur. Hesap, sunucu, reklam ve analitik yoktur.",
+            "Zincir 1.3 · Veri yalnızca bu telefonda durur. Hesap, sunucu, reklam ve analitik yoktur.",
             style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
     }
@@ -571,7 +572,7 @@ private fun SaatVerisiAyari(vm: AnaViewModel) {
     }
 
     Text(
-        "Saatinin adım ve uyku verisini telefondaki Health Connect'ten okur; elle giriş yine kalır. " +
+        "Saatinin adım, uyku ve kardiyo verisini telefondaki Health Connect'ten okur; elle giriş yine kalır. " +
             "Veri telefondan çıkmaz. Huawei Sağlık için arada Health Sync gibi bir köprü uygulama gerekir.",
         style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
     )
@@ -600,6 +601,12 @@ private fun SaatVerisiAyari(vm: AnaViewModel) {
                 Bosluk(8.dp)
                 Text(ozet ?: "Henüz okunmadı.", style = MaterialTheme.typography.bodyMedium)
                 MetinDugme("Şimdi yeniden oku") { vm.saglikEsitle() }
+                // Sonradan eklenen bir veri türü (örneğin egzersiz) için izin henüz verilmemiş olabilir.
+                val verilen by produceState<Set<String>?>(null, ozet) { value = SaglikBaglantisi.verilenIzinler(context) }
+                if (verilen?.containsAll(SaglikBaglantisi.IZINLER) == false) {
+                    Not("Bazı veri türleri için izin eksik (kardiyo önerisi egzersiz iznini ister).")
+                    MetinDugme("Eksik izinleri ver") { izinIste.launch(SaglikBaglantisi.IZINLER) }
+                }
             }
         }
     }

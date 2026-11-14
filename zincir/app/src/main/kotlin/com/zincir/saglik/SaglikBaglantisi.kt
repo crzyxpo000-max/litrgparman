@@ -6,11 +6,13 @@ import androidx.health.connect.client.HealthConnectClient
 import androidx.health.connect.client.PermissionController
 import androidx.health.connect.client.permission.HealthPermission
 import androidx.health.connect.client.records.ActiveCaloriesBurnedRecord
+import androidx.health.connect.client.records.ExerciseSessionRecord
 import androidx.health.connect.client.records.SleepSessionRecord
 import androidx.health.connect.client.records.StepsRecord
 import androidx.health.connect.client.request.AggregateRequest
 import androidx.health.connect.client.request.ReadRecordsRequest
 import androidx.health.connect.client.time.TimeRangeFilter
+import com.zincir.mantik.EgzersizOturumu
 import com.zincir.mantik.SaatVerisi
 import com.zincir.mantik.Saglik
 import com.zincir.mantik.UykuOturumu
@@ -29,9 +31,23 @@ object SaglikBaglantisi {
     private val ADIM = HealthPermission.getReadPermission(StepsRecord::class)
     private val UYKU = HealthPermission.getReadPermission(SleepSessionRecord::class)
     private val KALORI = HealthPermission.getReadPermission(ActiveCaloriesBurnedRecord::class)
+    private val EGZERSIZ = HealthPermission.getReadPermission(ExerciseSessionRecord::class)
 
     /** İstenen izinler: yalnızca okuma. */
-    val IZINLER: Set<String> = setOf(ADIM, UYKU, KALORI)
+    val IZINLER: Set<String> = setOf(ADIM, UYKU, KALORI, EGZERSIZ)
+
+    /** Kardiyo sayılan egzersiz türleri ve Türkçe adları. Ağırlık, yoga gibi türler kardiyo önerisi olmaz. */
+    private fun kardiyoAdi(tur: Int): String? = when (tur) {
+        ExerciseSessionRecord.EXERCISE_TYPE_WALKING, ExerciseSessionRecord.EXERCISE_TYPE_HIKING -> "Yürüyüş"
+        ExerciseSessionRecord.EXERCISE_TYPE_RUNNING, ExerciseSessionRecord.EXERCISE_TYPE_RUNNING_TREADMILL -> "Koşu"
+        ExerciseSessionRecord.EXERCISE_TYPE_BIKING, ExerciseSessionRecord.EXERCISE_TYPE_BIKING_STATIONARY -> "Bisiklet"
+        ExerciseSessionRecord.EXERCISE_TYPE_ELLIPTICAL -> "Eliptik"
+        ExerciseSessionRecord.EXERCISE_TYPE_STAIR_CLIMBING, ExerciseSessionRecord.EXERCISE_TYPE_STAIR_CLIMBING_MACHINE -> "Merdiven"
+        ExerciseSessionRecord.EXERCISE_TYPE_ROWING, ExerciseSessionRecord.EXERCISE_TYPE_ROWING_MACHINE -> "Kürek"
+        ExerciseSessionRecord.EXERCISE_TYPE_SWIMMING_POOL, ExerciseSessionRecord.EXERCISE_TYPE_SWIMMING_OPEN_WATER -> "Yüzme"
+        ExerciseSessionRecord.EXERCISE_TYPE_OTHER_WORKOUT -> "Diğer kardiyo"
+        else -> null
+    }
 
     private fun tercih(context: Context) = context.getSharedPreferences("zincir_saglik", Context.MODE_PRIVATE)
 
@@ -67,7 +83,7 @@ object SaglikBaglantisi {
         return dene { HealthConnectClient.getOrCreate(context).permissionController.getGrantedPermissions() } ?: emptySet()
     }
 
-    /** Bir günün adım, uyku ve aktif kalori verisini okur. Health Connect yoksa ya da hiç izin yoksa null. */
+    /** Bir günün adım, uyku, aktif kalori ve kardiyo egzersizi verisini okur. Health Connect yoksa ya da hiç izin yoksa null. */
     suspend fun gunuOku(context: Context, gun: Long): SaatVerisi? {
         val izinler = verilenIzinler(context)
         if (izinler.isEmpty()) return null
@@ -93,6 +109,11 @@ object SaglikBaglantisi {
             Saglik.uykuSaati(oturumlar.map { UykuOturumu(it.startTime, it.endTime, it.endZoneOffset) }, gun, bolge)
         } else null
 
-        return SaatVerisi(adim, uyku, aktifKcal)
+        val egzersizler = if (EGZERSIZ in izinler) dene {
+            val oturumlar = istemci.readRecords(ReadRecordsRequest(ExerciseSessionRecord::class, gunAraligi)).records
+            Saglik.egzersizler(oturumlar.mapNotNull { o -> kardiyoAdi(o.exerciseType)?.let { EgzersizOturumu(it, o.startTime, o.endTime) } })
+        } else null
+
+        return SaatVerisi(adim, uyku, aktifKcal, egzersizler ?: emptyList())
     }
 }

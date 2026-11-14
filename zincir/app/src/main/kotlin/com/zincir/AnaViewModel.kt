@@ -10,6 +10,7 @@ import com.zincir.bildirim.GermeMotoru
 import com.zincir.bildirim.Titresim
 import com.zincir.mantik.Bicim
 import com.zincir.mantik.Program
+import com.zincir.mantik.SaatEgzersizi
 import com.zincir.mantik.Saglik
 import com.zincir.saglik.SaglikBaglantisi
 import com.zincir.veri.Ayarlar
@@ -117,6 +118,9 @@ class AnaViewModel(app: Application) : AndroidViewModel(app) {
     /** Saatin bildirdiği aktif kalori, güne göre. Yalnızca bilgi içindir; kalori hakkına eklenmez, kaydedilmez. */
     private val _saatKalorisi = MutableStateFlow<Map<Long, Int>>(emptyMap())
     val saatKalorisi: StateFlow<Map<Long, Int>> = _saatKalorisi
+    /** Saatte kaydedilmiş kardiyo egzersizleri, güne göre. Yalnızca öneri olarak gösterilir. */
+    private val _saatEgzersizleri = MutableStateFlow<Map<Long, List<SaatEgzersizi>>>(emptyMap())
+    val saatEgzersizleri: StateFlow<Map<Long, List<SaatEgzersizi>>> = _saatEgzersizleri
     /** Son eşitlemenin özeti (Ayarlar'da gösterilir). */
     private val _saglikOzeti = MutableStateFlow<String?>(null)
     val saglikOzeti: StateFlow<String?> = _saglikOzeti
@@ -129,6 +133,7 @@ class AnaViewModel(app: Application) : AndroidViewModel(app) {
         val context = getApplication<Application>()
         if (!SaglikBaglantisi.acik(context)) {
             _saatKalorisi.value = emptyMap()
+            _saatEgzersizleri.value = emptyMap()
             return@calistir
         }
         val bugun = _gercekBugun.value
@@ -139,11 +144,13 @@ class AnaViewModel(app: Application) : AndroidViewModel(app) {
             val (adim, uyku) = Saglik.birlestir(mevcut.adim, mevcut.uykuSaat, okunan)
             if (adim != mevcut.adim || uyku != mevcut.uykuSaat) depo.gunDegistir(g) { it.copy(adim = adim, uykuSaat = uyku) }
             okunan.aktifKcal?.takeIf { it > 0 }?.let { kcal -> _saatKalorisi.value = _saatKalorisi.value + (g to kcal) }
+            _saatEgzersizleri.value = _saatEgzersizleri.value + (g to okunan.egzersizler)
             if (g == bugun) {
                 ozet = "Bugün okunan: " + listOfNotNull(
                     okunan.adim?.let { "${Bicim.tam(it)} adım" },
                     okunan.uykuSaat?.let { "${Bicim.ondalik(it)} sa uyku" },
                     okunan.aktifKcal?.let { "${Bicim.tam(it)} kcal aktif" },
+                    okunan.egzersizler.takeIf { it.isNotEmpty() }?.let { e -> e.joinToString(", ") { "${it.sureDk} dk ${it.tur}" } },
                 ).ifEmpty { listOf("veri yok (saat henüz eşitlenmemiş olabilir)") }.joinToString(" · ")
             }
         }

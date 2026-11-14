@@ -5,7 +5,7 @@ program haftanın günlerine değil **sıraya** göre ilerler; atladığın gün
 
 - Tamamen çevrimdışı. Hesap, sunucu, reklam, analitik yok. İnternet izni istemez.
   (İstediği izinler: bildirim, titreşim, tam zamanlı alarm, ön plan servisi, işlemciyi uyanık tutma, açılışta alarmları yeniden kurma;
-  isteğe bağlı olarak Health Connect'ten adım, uyku ve aktif kalori okuma.)
+  isteğe bağlı olarak Health Connect'ten adım, uyku, aktif kalori ve egzersiz okuma.)
 - Arayüz Türkçe, ondalık ayırıcı virgül.
 - Veri yalnızca telefonda durur (Google hesabına da yedeklenmez). Yedeği sen alırsın: Ayarlar › Yedekleme.
 
@@ -185,7 +185,7 @@ Yedek dosyası düz metindir (JSON); bir metin düzenleyiciyle açıp içine bak
 ### Saat verisi (Health Connect, isteğe bağlı)
 
 Varsayılan olarak **kapalıdır**. Ayarlar › Saat verisi › "Adım ve uykuyu saatten al" ile açılır; Health Connect'in izin penceresi gelir
-(yalnızca okuma: adım, uyku, aktif kalori).
+(yalnızca okuma: adım, uyku, aktif kalori, egzersiz).
 
 - Health Connect, Android'in telefondaki ortak sağlık veri deposudur. Zincir oradan yalnızca okur; veri telefondan çıkmaz, internet gerekmez.
 - **Huawei saat için köprü gerekir:** Huawei Sağlık, Health Connect'e kendisi yazmıyor (Veri paylaşımı ve yetkilendirme listesinde yok).
@@ -195,6 +195,9 @@ Varsayılan olarak **kapalıdır**. Ayarlar › Saat verisi › "Adım ve uykuyu
   - **Adım:** büyük olan kalır (elle girdiğin daha büyük değer ezilmez).
   - **Uyku:** uyandığın güne yazılır; yalnızca boşsa dolar (elle girdiğin değer ezilmez). Aynı uyku iki kaynaktan gelirse iki kez sayılmaz.
   - **Aktif kalori:** Bugün ekranında yalnızca bilgi olarak görünür; kalori hakkına eklenmez ve kaydedilmez.
+  - **Kardiyo:** saatte kaydettiğin 10 dakikadan uzun yürüyüş, koşu, bisiklet, eliptik gibi egzersizler Antrenman › Kardiyo bölümünde
+    "Saatten öneri" olarak çıkar; tek dokunuşla kardiyo olarak kaydedersin. Kendiliğinden kaydedilmez (sıra ancak sen onaylayınca ilerler).
+    Sonradan eklenen egzersiz izni için Ayarlar › Saat verisi › "Eksik izinleri ver".
 - Kapatmak için aynı anahtarı kapat; izni tamamen geri almak için Health Connect › Uygulama izinleri › Zincir.
 
 ### Diğer

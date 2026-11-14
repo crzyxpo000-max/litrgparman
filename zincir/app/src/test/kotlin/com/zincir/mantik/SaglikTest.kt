@@ -64,4 +64,28 @@ class SaglikTest {
         assertEquals(4000 to null, Saglik.birlestir(4000, null, SaatVerisi(null, null, null)))
         assertEquals(0 to null, Saglik.birlestir(0, null, SaatVerisi(0, 0.0, 0)))
     }
+
+    @Test
+    fun `saatteki egzersizler kardiyo listesine cevrilir`() {
+        val yuruyus = EgzersizOturumu("Yürüyüş", an(2, 9, 0, dakka), an(2, 9, 35, dakka))
+        val kopya = EgzersizOturumu("Yürüyüş", an(2, 9, 1, dakka), an(2, 9, 35, dakka))   // aynı egzersiz, ikinci kaynak
+        val kisa = EgzersizOturumu("Bisiklet", an(2, 12, 0, dakka), an(2, 12, 6, dakka))   // 10 dakikadan kısa
+        val bisiklet = EgzersizOturumu("Bisiklet", an(2, 18, 0, dakka), an(2, 18, 40, dakka))
+        assertEquals(
+            listOf(SaatEgzersizi("Yürüyüş", 35), SaatEgzersizi("Bisiklet", 40)),
+            Saglik.egzersizler(listOf(bisiklet, kopya, kisa, yuruyus)),
+        )
+    }
+
+    @Test
+    fun `zaten kaydedilmis kardiyo yeniden onerilmez`() {
+        val saatte = listOf(SaatEgzersizi("Yürüyüş", 35), SaatEgzersizi("Bisiklet", 40))
+        assertEquals(saatte, Saglik.kardiyoOnerileri(saatte, emptyList()))
+        // 35 dk'lık kayıt var (1 dk fark aynı sayılır): yalnızca bisiklet önerilir.
+        assertEquals(listOf(SaatEgzersizi("Bisiklet", 40)), Saglik.kardiyoOnerileri(saatte, listOf(36)))
+        assertEquals(emptyList<SaatEgzersizi>(), Saglik.kardiyoOnerileri(saatte, listOf(40, 35)))
+        // Aynı süreli iki egzersizden biri kaydedildiyse diğeri hâlâ önerilir.
+        val ikiz = listOf(SaatEgzersizi("Yürüyüş", 30), SaatEgzersizi("Yürüyüş", 30))
+        assertEquals(1, Saglik.kardiyoOnerileri(ikiz, listOf(30)).size)
+    }
 }
