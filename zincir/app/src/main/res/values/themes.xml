@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Arayüzü Compose çizer; bu yalnızca açılış anındaki pencere arka planıdır. -->
+    <color name="pencere">#FFFFFF</color>
+    <style name="Theme.Zincir" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/pencere</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>
