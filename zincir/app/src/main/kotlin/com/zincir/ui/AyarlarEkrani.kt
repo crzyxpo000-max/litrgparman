@@ -32,6 +32,7 @@ import com.zincir.bildirim.Bildirimler
 import com.zincir.mantik.Bicim
 import com.zincir.mantik.Kilo
 import com.zincir.mantik.Sira
+import com.zincir.saglik.SaglikBaglantisi
 import com.zincir.veri.Ayarlar
 import com.zincir.veri.EgerPlan
 import com.zincir.veri.Germe
@@ -266,6 +267,9 @@ private fun AnaAyarlar(vm: AnaViewModel, a: Ayarlar, onGeri: () -> Unit, onAltSa
             Uyari("Bildirim izni kapalı.", "Telefonun Ayarlar › Uygulamalar › Zincir › Bildirimler bölümünden izin ver.")
         }
 
+        Bolum("Saat verisi (Health Connect)")
+        SaatVerisiAyari(vm)
+
         Bolum("Görünüm")
         val temalar = listOf("Sistem", "Açık", "Koyu")
         Secim(temalar, temalar[a.tema.coerceIn(0, 2)]) { secilen -> vm.ayarlariDegistir { it.copy(tema = temalar.indexOf(secilen)) } }
@@ -288,7 +292,7 @@ private fun AnaAyarlar(vm: AnaViewModel, a: Ayarlar, onGeri: () -> Unit, onAltSa
 
         Bosluk(32.dp)
         Text(
-            "Zincir 1.1 · Veri yalnızca bu telefonda durur. Hesap, sunucu, reklam ve analitik yoktur.",
+            "Zincir 1.2 · Veri yalnızca bu telefonda durur. Hesap, sunucu, reklam ve analitik yoktur.",
             style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
     }
@@ -540,5 +544,67 @@ private fun PlanlariDuzenle(vm: AnaViewModel, onGeri: () -> Unit) {
             alanlar = listOf(Alan("Plan", p.metin, AlanTuru.UZUN_METIN)),
             dogrula = { d -> if (d[0].isBlank()) "Plan boş olamaz." else null },
         ) { d -> kapsam.launch { vm.dao.egerPlanYaz(p.copy(metin = d[0].trim())) } }
+    }
+}
+
+/**
+ * Health Connect'ten adım ve uyku okuma anahtarı. Açılınca Health Connect'in izin penceresi gelir.
+ * Huawei Sağlık Health Connect'e kendisi yazmadığı için arada bir köprü uygulama (Health Sync) gerekir.
+ */
+@Composable
+private fun SaatVerisiAyari(vm: AnaViewModel) {
+    val context = LocalContext.current
+    val durum = remember { SaglikBaglantisi.durum(context) }
+    var acik by remember { mutableStateOf(SaglikBaglantisi.acik(context)) }
+    var mesaj by remember { mutableStateOf<String?>(null) }
+    val ozet by vm.saglikOzeti.collectAsStateWithLifecycle()
+
+    val izinIste = rememberLauncherForActivityResult(SaglikBaglantisi.izinSozlesmesi()) { verilen ->
+        if (verilen.isEmpty()) {
+            mesaj = "İzin verilmedi. Health Connect'te Zincir için adım ve uyku okuma iznini açabilirsin."
+        } else {
+            SaglikBaglantisi.acikYap(context, true)
+            acik = true
+            mesaj = null
+            vm.saglikEsitle()
+        }
+    }
+
+    Text(
+        "Saatinin adım ve uyku verisini telefondaki Health Connect'ten okur; elle giriş yine kalır. " +
+            "Veri telefondan çıkmaz. Huawei Sağlık için arada Health Sync gibi bir köprü uygulama gerekir.",
+        style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
+    when (durum) {
+        SaglikBaglantisi.Durum.YOK -> {
+            Bosluk()
+            Not("Bu telefonda Health Connect bulunamadı.")
+        }
+        SaglikBaglantisi.Durum.GUNCELLEME_GEREK -> {
+            Bosluk()
+            Not("Health Connect'in güncellenmesi gerekiyor (Play Store).")
+        }
+        SaglikBaglantisi.Durum.HAZIR -> {
+            AnahtarSatiri("Adım ve uykuyu saatten al", acik, alt = "Adımda büyük olan kalır; uyku yalnızca boşsa dolar") { yeni ->
+                if (yeni) {
+                    izinIste.launch(SaglikBaglantisi.IZINLER)
+                } else {
+                    SaglikBaglantisi.acikYap(context, false)
+                    acik = false
+                    mesaj = null
+                    vm.saglikEsitle()
+                }
+            }
+            Cizgi()
+            if (acik) {
+                Bosluk(8.dp)
+                Text(ozet ?: "Henüz okunmadı.", style = MaterialTheme.typography.bodyMedium)
+                MetinDugme("Şimdi yeniden oku") { vm.saglikEsitle() }
+            }
+        }
+    }
+    mesaj?.let {
+        Bosluk(8.dp)
+        Not(it)
     }
 }

@@ -8,7 +8,10 @@ import com.zincir.bildirim.Bildirimler
 import com.zincir.bildirim.GermeCalisma
 import com.zincir.bildirim.GermeMotoru
 import com.zincir.bildirim.Titresim
+import com.zincir.mantik.Bicim
 import com.zincir.mantik.Program
+import com.zincir.mantik.Saglik
+import com.zincir.saglik.SaglikBaglantisi
 import com.zincir.veri.Ayarlar
 import com.zincir.veri.Depo
 import com.zincir.veri.Germe
@@ -107,6 +110,44 @@ class AnaViewModel(app: Application) : AndroidViewModel(app) {
             _bugun.value = g
         }
         calistir { depo.siraGuncelle(g) }
+        saglikEsitle()
+    }
+
+    // ---- Saat verisi (Health Connect; Ayarlar'dan açılırsa)
+    /** Saatin bildirdiği aktif kalori, güne göre. Yalnızca bilgi içindir; kalori hakkına eklenmez, kaydedilmez. */
+    private val _saatKalorisi = MutableStateFlow<Map<Long, Int>>(emptyMap())
+    val saatKalorisi: StateFlow<Map<Long, Int>> = _saatKalorisi
+    /** Son eşitlemenin özeti (Ayarlar'da gösterilir). */
+    private val _saglikOzeti = MutableStateFlow<String?>(null)
+    val saglikOzeti: StateFlow<String?> = _saglikOzeti
+
+    /**
+     * Dünün ve bugünün adım/uyku verisini Health Connect'ten okuyup günlük kayda işler.
+     * Adımda büyük olan kalır, uyku yalnızca boşsa dolar (elle girilen değer ezilmez). Kapalıysa hiçbir şey yapmaz.
+     */
+    fun saglikEsitle() = calistir {
+        val context = getApplication<Application>()
+        if (!SaglikBaglantisi.acik(context)) {
+            _saatKalorisi.value = emptyMap()
+            return@calistir
+        }
+        val bugun = _gercekBugun.value
+        var ozet: String? = "Health Connect'ten veri okunamadı. İzinleri ve köprü uygulamayı kontrol et."
+        for (g in listOf(bugun - 1, bugun)) {
+            val okunan = SaglikBaglantisi.gunuOku(context, g) ?: continue
+            val mevcut = dao.gun(g) ?: GunKaydi(g)
+            val (adim, uyku) = Saglik.birlestir(mevcut.adim, mevcut.uykuSaat, okunan)
+            if (adim != mevcut.adim || uyku != mevcut.uykuSaat) depo.gunDegistir(g) { it.copy(adim = adim, uykuSaat = uyku) }
+            okunan.aktifKcal?.takeIf { it > 0 }?.let { kcal -> _saatKalorisi.value = _saatKalorisi.value + (g to kcal) }
+            if (g == bugun) {
+                ozet = "Bugün okunan: " + listOfNotNull(
+                    okunan.adim?.let { "${Bicim.tam(it)} adım" },
+                    okunan.uykuSaat?.let { "${Bicim.ondalik(it)} sa uyku" },
+                    okunan.aktifKcal?.let { "${Bicim.tam(it)} kcal aktif" },
+                ).ifEmpty { listOf("veri yok (saat henüz eşitlenmemiş olabilir)") }.joinToString(" · ")
+            }
+        }
+        _saglikOzeti.value = ozet
     }
 
     /** Bugün ekranındaki "‹ Dün | Bugün ›" geçişi. */

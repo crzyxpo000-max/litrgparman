@@ -34,7 +34,8 @@ Saf kurallar `mantik/` (testli), tablolar `veri/`, ekranlar `ui/`; program veris
 Kurallar (kullanıcının): sıra 14 adımlık dairedir ve hafta hesabı kullanmaz, yalnızca "Adım" gün bitince kendiliğinden geçer, atlama
 yalnızca Kardiyo/Adım'da; zincir uyarısı son ağırlık seansından 3/5 tam gün sonra; sayaç son 7 gün; haftalık ortalama/özet Pzt–Paz;
 kayıtlar `LocalDate` (epochDay) ile; zamanlayıcılar `elapsedRealtime` farkıyla (dinlenme: tam alarm, germe: ön plan servisi);
-grafik kütüphanesi eklenmez (Canvas). Tablo şeması değişirse `Veritabani.version` artırılıp migration yazılır (telefonda veri var).
+grafik kütüphanesi eklenmez (Canvas); Health Connect okuması isteğe bağlıdır (`saglik/`, varsayılan kapalı, yalnızca doldurur:
+adımda büyük olan, uyku boşsa; saat kalorisi yalnızca bilgi, kalori hedefine/hakkına dokunmaz). Tablo şeması değişirse `Veritabani.version` artırılıp migration yazılır (telefonda veri var).
 
 ## Komutlar
 

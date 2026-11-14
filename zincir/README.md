@@ -4,7 +4,8 @@ Kişisel antrenman, beslenme ve esneklik takip uygulaması (Android). Asıl işi
 program haftanın günlerine değil **sıraya** göre ilerler; atladığın gün sırayı bozmaz.
 
 - Tamamen çevrimdışı. Hesap, sunucu, reklam, analitik yok. İnternet izni istemez.
-  (İstediği izinler: bildirim, titreşim, tam zamanlı alarm, ön plan servisi, işlemciyi uyanık tutma, açılışta alarmları yeniden kurma.)
+  (İstediği izinler: bildirim, titreşim, tam zamanlı alarm, ön plan servisi, işlemciyi uyanık tutma, açılışta alarmları yeniden kurma;
+  isteğe bağlı olarak Health Connect'ten adım, uyku ve aktif kalori okuma.)
 - Arayüz Türkçe, ondalık ayırıcı virgül.
 - Veri yalnızca telefonda durur (Google hesabına da yedeklenmez). Yedeği sen alırsın: Ayarlar › Yedekleme.
 
@@ -181,6 +182,21 @@ Yedek dosyası düz metindir (JSON); bir metin düzenleyiciyle açıp içine bak
 - Bazı telefonlar (Xiaomi, Oppo, bazı Samsung ayarları) arka plandaki uygulamaları agresif biçimde durdurur. Bildirim gelmiyorsa
   telefonun Ayarlar › Uygulamalar › Zincir › Pil bölümünden "Kısıtlama yok"u seç.
 
+### Saat verisi (Health Connect, isteğe bağlı)
+
+Varsayılan olarak **kapalıdır**. Ayarlar › Saat verisi › "Adım ve uykuyu saatten al" ile açılır; Health Connect'in izin penceresi gelir
+(yalnızca okuma: adım, uyku, aktif kalori).
+
+- Health Connect, Android'in telefondaki ortak sağlık veri deposudur. Zincir oradan yalnızca okur; veri telefondan çıkmaz, internet gerekmez.
+- **Huawei saat için köprü gerekir:** Huawei Sağlık, Health Connect'e kendisi yazmıyor (Veri paylaşımı ve yetkilendirme listesinde yok).
+  Araya Health Sync gibi bir uygulama girer: Huawei Sağlık → Health Sync → Health Connect → Zincir. Köprü uygulama kendi işini internet
+  üzerinden yapar; Zincir yine çevrimdışıdır.
+- Uygulama her öne geldiğinde dünün ve bugünün verisi okunur:
+  - **Adım:** büyük olan kalır (elle girdiğin daha büyük değer ezilmez).
+  - **Uyku:** uyandığın güne yazılır; yalnızca boşsa dolar (elle girdiğin değer ezilmez). Aynı uyku iki kaynaktan gelirse iki kez sayılmaz.
+  - **Aktif kalori:** Bugün ekranında yalnızca bilgi olarak görünür; kalori hakkına eklenmez ve kaydedilmez.
+- Kapatmak için aynı anahtarı kapat; izni tamamen geri almak için Health Connect › Uygulama izinleri › Zincir.
+
 ### Diğer
 
 - **Planımı hatırla:** Bugün ekranındaki düğme, eğer-o zaman planlarını tek dokunuşla gösterir (liste Ayarlar'da düzenlenir).
@@ -223,6 +239,7 @@ zincir/
     │   │   ├── Depo.kt           yazma işlemleri
     │   │   └── Yedek.kt          JSON dışa/içe aktarma
     │   ├── ui/                   ekranlar ve ortak parçalar (Tema.kt, Bilesenler.kt, Grafik.kt…)
+    │   ├── saglik/               Health Connect'ten okuma (isteğe bağlı) ve izin açıklama sayfası
     │   └── bildirim/             hatırlatmalar, dinlenme alarmı, germe motoru ve ön plan servisi, titreşim
     └── test/kotlin/com/zincir/
         ├── mantik/               sıra, zincir uyarısı, ilerleme, %80 kuralı, haftalık ortalama testleri
@@ -240,7 +257,8 @@ yoksa uygulama eski veriyle açılmaz. Emin değilsen önce yedek al.
 
 ## 7. Bilinen sınırlar
 
-- Adım sayısı elle girilir. Health Connect bağlantısı bilerek ilk sürümde yok; her şey oturduktan sonra ayrı bir adım olarak eklenebilir.
+- Health Connect okuması gerçek telefonda ve gerçek köprü uygulamayla henüz denenmedi; test ortamı yalnızca birleştirme kurallarını
+  (adımda büyük olan, uykunun güne atanması) doğrular. Açmazsan adım ve uyku eskisi gibi elle girilir.
 - "Bugün", telefonun o anki saat dilimine göre belirlenir. Uçuşla saat dilimi değişince gün bir kez erken ya da geç dönebilir;
   kayıtlar yerel tarihle saklandığı için eski günler kaymaz, gerekirse "‹ Dün" ile önceki güne yazabilirsin.
 - Zamanlayıcıların kilitli ekranda haber vermesi (alarm, ön plan servisi, titreşim) gerçek telefonda denenmelidir; test ortamı

@@ -15,8 +15,8 @@ android {
         applicationId = "com.zincir"
         minSdk = 26
         targetSdk = 36
-        versionCode = 2
-        versionName = "1.1"
+        versionCode = 3
+        versionName = "1.2"
     }
 
     buildTypes {
@@ -70,6 +70,9 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
+
+    // Health Connect: saatten gelen adım ve uykuyu telefondaki ortak depodan okumak için (internet gerektirmez).
+    implementation(libs.androidx.health.connect)
 
     testImplementation(libs.junit)
     // Ekran testleri: uygulamayı telefon olmadan, bilgisayarda açıp dokunur.

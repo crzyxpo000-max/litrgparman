@@ -51,6 +51,7 @@ fun BugunEkrani(vm: AnaViewModel, onAyarlar: () -> Unit, onSekme: (Int) -> Unit)
     val hareketler by vm.hareketler.collectAsStateWithLifecycle()
     val sonAgirlik by vm.sonAgirlikGunu.collectAsStateWithLifecycle()
     val planlar by vm.egerPlanlar.collectAsStateWithLifecycle()
+    val saatKalorisi by vm.saatKalorisi.collectAsStateWithLifecycle()
 
     val isi = Sira.isAt(a.siraIndex)
     val yarinIcin = a.siraGunu > gercekBugun   // bugün bir şey tamamlandı; sıradaki iş yarının işi
@@ -169,6 +170,14 @@ fun BugunEkrani(vm: AnaViewModel, onAyarlar: () -> Unit, onSekme: (Int) -> Unit)
         HedefSatiri("Kalori", Bicim.tam(kcal.toInt()), "${Bicim.tam(a.kaloriHedef)} kcal", (kcal / a.kaloriHedef).toFloat(), Modifier.clickable { onSekme(2) })
         HedefSatiri("Protein", Bicim.tam(protein.toInt()), "${a.proteinMin}–${a.proteinMax} g", (protein / a.proteinMin).toFloat(), Modifier.clickable { onSekme(2) })
         HedefSatiri("Adım", Bicim.tam(gun.adim), "${Bicim.tam(a.adimMin)}–${Bicim.tam(a.adimMax)}", gun.adim.toFloat() / a.adimMin)
+        saatKalorisi[bugun]?.let { kcal ->
+            // Saatin yakım tahmini kabadır: yalnızca bilgi. Kalori hakkına eklenmez.
+            Text(
+                "Saat: ${Bicim.tam(kcal)} kcal aktif yakım (bilgi içindir; kalori hakkına eklenmez).",
+                style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(bottom = 8.dp),
+            )
+        }
         CizgiDugme("Adım gir", Modifier.fillMaxWidth()) { adimDialog = true }
         Bosluk(8.dp)
         HedefSatiri("Su", Bicim.ondalik(gun.suMl / 1000.0, 2), "${Bicim.ondalik(a.suHedefMl / 1000.0, 2)} L", gun.suMl.toFloat() / a.suHedefMl)
