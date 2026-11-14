@@ -13,6 +13,10 @@ object Bicim {
     fun ondalik(d: Double, hane: Int = 1): String =
         NumberFormat.getNumberInstance(TR).apply { maximumFractionDigits = hane; minimumFractionDigits = 0 }.format(d)
 
+    /** Vücut ağırlığı: her zaman tek ondalık. 94.0 → "94,0" */
+    fun kilo(d: Double): String =
+        NumberFormat.getNumberInstance(TR).apply { maximumFractionDigits = 1; minimumFractionDigits = 1 }.format(d)
+
     /** 2250 → "2.250" */
     fun tam(n: Int): String = NumberFormat.getIntegerInstance(TR).format(n)
 

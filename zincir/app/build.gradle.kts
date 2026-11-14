@@ -37,6 +37,13 @@ android {
     testOptions {
         // Birim testlerinde Android sınıfları çağrılırsa hata yerine varsayılan değer dönsün.
         unitTests.isReturnDefaultValues = true
+        // Ekran testleri (Robolectric) uygulamanın kaynak dosyalarına ihtiyaç duyar.
+        unitTests.isIncludeAndroidResources = true
+        unitTests.all {
+            // Ekran görüntüsü alabilmek için gerçek çizim motoru kullanılsın.
+            it.systemProperty("robolectric.graphicsMode", "NATIVE")
+            it.systemProperty("robolectric.pixelCopyRenderMode", "hardware")
+        }
     }
 }
 
@@ -65,4 +72,9 @@ dependencies {
     ksp(libs.androidx.room.compiler)
 
     testImplementation(libs.junit)
+    // Ekran testleri: uygulamayı telefon olmadan, bilgisayarda açıp dokunur.
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.test.ext.junit)
+    testImplementation(libs.androidx.compose.ui.test.junit4)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 }

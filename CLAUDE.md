@@ -25,6 +25,13 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 Oyundan bağımsız küçük bir Android uygulaması (webnovel → EPUB): `:scraper:core` (saf Kotlin/JVM) ve `:scraper:app` (Compose).
 Oyun kuralları ona uygulanmaz; ayrıntı `scraper/README.md`. Komutlar: `./gradlew :scraper:core:test :scraper:app:assembleDebug`.
 
+## Ayrı uygulama: Zincir (`zincir/`)
+
+Oyundan bağımsız kişisel antrenman/beslenme takip uygulaması (Compose + Room, çevrimdışı, arayüz Türkçe). Kendi Gradle
+projesidir; kök derlemeye dahil **değildir** ve oyun kuralları ona uygulanmaz. Ayrıntı `zincir/README.md`.
+Komutlar: `cd zincir && ./gradlew test assembleDebug lintDebug` (`local.properties` içinde `sdk.dir` gerekir).
+Saf kurallar `mantik/` (testli), tablolar `veri/`, ekranlar `ui/`; program verisi `BaslangicVerisi.kt` ile veritabanına yazılır.
+
 ## Komutlar
 
 ```bash

@@ -374,3 +374,44 @@ fun EkraniAcikTut() {
         onDispose { view.keepScreenOn = false }
     }
 }
+
+/** Uzun bir listeden tek seçim yapılan pencere. */
+@Composable
+fun ListeDialog(baslik: String, secenekler: List<String>, onKapat: () -> Unit, onSec: (String) -> Unit) {
+    AlertDialog(
+        onDismissRequest = onKapat, shape = RectangleShape,
+        containerColor = MaterialTheme.colorScheme.background, tonalElevation = 0.dp,
+        title = { Text(baslik, style = MaterialTheme.typography.headlineSmall) },
+        text = {
+            Column(Modifier.heightIn(max = 440.dp).verticalScroll(rememberScrollState())) {
+                secenekler.forEach { s ->
+                    Box(
+                        Modifier.fillMaxWidth().heightIn(min = 56.dp).clickable { onSec(s); onKapat() }.padding(vertical = 8.dp),
+                        contentAlignment = Alignment.CenterStart,
+                    ) { Text(s, style = MaterialTheme.typography.titleMedium) }
+                    Cizgi()
+                }
+            }
+        },
+        confirmButton = {},
+        dismissButton = { TextButton(onClick = onKapat) { Text("Vazgeç", style = MaterialTheme.typography.labelLarge) } },
+    )
+}
+
+/** Köşeli onay kutusu satırı (kontrol listeleri için). */
+@Composable
+fun OnaySatiri(metin: String, isaretli: Boolean, modifier: Modifier = Modifier, onDegis: (Boolean) -> Unit) {
+    Row(
+        modifier.fillMaxWidth().heightIn(min = 56.dp).clickable(role = Role.Checkbox) { onDegis(!isaretli) }.padding(vertical = 10.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Box(
+            Modifier.size(28.dp)
+                .background(if (isaretli) MaterialTheme.colorScheme.onBackground else Color.Transparent)
+                .border(2.dp, MaterialTheme.colorScheme.onBackground),
+            contentAlignment = Alignment.Center,
+        ) { if (isaretli) Text("✓", color = MaterialTheme.colorScheme.background, style = MaterialTheme.typography.titleMedium) }
+        Spacer(Modifier.width(14.dp))
+        Text(metin, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
+    }
+}

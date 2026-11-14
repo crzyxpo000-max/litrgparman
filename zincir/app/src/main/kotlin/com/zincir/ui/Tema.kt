@@ -36,6 +36,7 @@ private val KoyuMetin = Color(0xFFF2F2F2)
 private val KoyuGriMetin = Color(0xFFA6A6A6)
 private val KoyuCizgi = Color(0xFF3A3A3A)
 private val KoyuKutu = Color(0xFF161616)
+private val KoyuBant = Color(0xFF2B2B2B)
 private val VurguKoyu = Color(0xFFFF5247)
 
 private val AcikRenkler = lightColorScheme(
@@ -56,7 +57,7 @@ private val KoyuRenkler = darkColorScheme(
     secondary = KoyuMetin, onSecondary = KoyuZemin, secondaryContainer = KoyuKutu, onSecondaryContainer = KoyuMetin,
     tertiary = KoyuMetin, onTertiary = KoyuZemin, tertiaryContainer = KoyuKutu, onTertiaryContainer = KoyuMetin,
     background = KoyuZemin, onBackground = KoyuMetin, surface = KoyuZemin, onSurface = KoyuMetin,
-    surfaceVariant = KoyuKutu, onSurfaceVariant = KoyuGriMetin, surfaceTint = KoyuZemin,
+    surfaceVariant = KoyuBant, onSurfaceVariant = KoyuGriMetin, surfaceTint = KoyuZemin,
     surfaceContainerLowest = KoyuZemin, surfaceContainerLow = KoyuKutu, surfaceContainer = KoyuKutu,
     surfaceContainerHigh = KoyuKutu, surfaceContainerHighest = KoyuKutu,
     outline = KoyuMetin, outlineVariant = KoyuCizgi,

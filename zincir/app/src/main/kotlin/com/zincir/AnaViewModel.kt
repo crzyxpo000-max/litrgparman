@@ -90,7 +90,12 @@ class AnaViewModel(app: Application) : AndroidViewModel(app) {
     val kacamaklar: StateFlow<List<Kacamak>> = haftaBasi.flatMapLatest { dao.kacamaklarAkisi(it, it + 6) }.durum(emptyList())
 
     init {
-        calistir { depo.hazirla(_bugun.value) }
+        calistir {
+            depo.hazirla(_bugun.value)
+            // Alarmlar uygulama güncellenince ya da durdurulunca silinir: her açılışta yeniden kur.
+            dao.ayarlar()?.let { Bildirimler.planla(getApplication(), it) }
+            ogunHatirlatmasiniKur()
+        }
     }
 
     private fun calistir(blok: suspend () -> Unit): Job = viewModelScope.launch { blok() }

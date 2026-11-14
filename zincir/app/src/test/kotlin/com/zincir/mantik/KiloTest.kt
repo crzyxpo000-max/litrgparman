@@ -104,6 +104,7 @@ class KiloTest {
     fun `bicim virgul kullanir`() {
         assertEquals("82,5", Bicim.ondalik(82.5))
         assertEquals("80", Bicim.ondalik(80.0))
+        assertEquals("94,0", Bicim.kilo(94.0))
         assertEquals("2.250", Bicim.tam(2250))
         assertEquals("−0,6", Bicim.fark(-0.6))
         assertEquals("+0,3", Bicim.fark(0.3))
