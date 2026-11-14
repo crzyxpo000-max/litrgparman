@@ -63,6 +63,7 @@ private fun haftaNotu(haftaIndex: Int): String =
 @Composable
 private fun AntrenmanOzeti(vm: AnaViewModel, a: Ayarlar) {
     val bugun by vm.bugun.collectAsStateWithLifecycle()
+    val dunSecili by vm.dunSecili.collectAsStateWithLifecycle()
     val hareketler by vm.hareketler.collectAsStateWithLifecycle()
     val seanslar by vm.seanslar.collectAsStateWithLifecycle()
     val sonAgirlik by vm.sonAgirlikGunu.collectAsStateWithLifecycle()
@@ -76,6 +77,10 @@ private fun AntrenmanOzeti(vm: AnaViewModel, a: Ayarlar) {
 
     Sayfa {
         EkranBasligi("Antrenman", ust = if (haftaIndex >= 0) "Hafta ${haftaIndex + 1}" else "Program başlamadı")
+        if (dunSecili) {
+            Bosluk()
+            Not("Kayıtlar düne (${Bicim.tarih(bugun)}) yazılıyor. Değiştirmek için Bugün sekmesinin üstündeki geçişi kullan.")
+        }
         Bosluk(16.dp)
         Not(ISINMA, baslik = "Isınma")
         Bosluk()
@@ -162,7 +167,9 @@ private fun setYazisi(h: Hareket, kg: Double, tekrar: Int): String = when {
 @Composable
 private fun AktifSeans(vm: AnaViewModel, a: Ayarlar, seans: Seans) {
     EkraniAcikTut()
+    ZamanlayiciIzinleri() // dinlenme bitişinde kilitliyken de haber verebilmek için (ilk kullanımda sorar)
     val bugun by vm.bugun.collectAsStateWithLifecycle()
+    val dunSecili by vm.dunSecili.collectAsStateWithLifecycle()
     val hareketler by vm.hareketler.collectAsStateWithLifecycle()
     val setler by vm.aktifSetler.collectAsStateWithLifecycle()
     val sonAgirlik by vm.sonAgirlikGunu.collectAsStateWithLifecycle()
@@ -180,7 +187,7 @@ private fun AktifSeans(vm: AnaViewModel, a: Ayarlar, seans: Seans) {
 
     Column(Modifier.fillMaxSize()) {
         Sayfa(Modifier.weight(1f)) {
-            EkranBasligi("Seans ${seans.tur}", ust = if (seans.kisaMod) "15 dakika modu · ilk 2 hareket" else Bicim.tarih(bugun))
+            EkranBasligi("Seans ${seans.tur}", ust = if (seans.kisaMod) "15 dakika modu · ilk 2 hareket" else gunBasligi(bugun, dunSecili))
             Bosluk(16.dp)
             Not(ISINMA, baslik = "Isınma")
             Bosluk()

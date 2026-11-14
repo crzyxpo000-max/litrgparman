@@ -44,7 +44,9 @@ fun IlerlemeEkrani(vm: AnaViewModel, onGozden: () -> Unit) {
     val hareketAdlari by vm.kayitliHareketAdlari.collectAsStateWithLifecycle()
     val kapsam = rememberCoroutineScope()
 
-    val buHafta = Program.haftaIndex(a.baslangicGunu, bugun)
+    val dunSecili by vm.dunSecili.collectAsStateWithLifecycle()
+    // Haftalık ortalama ve özet takvim haftasına göredir: Pazartesi–Pazar.
+    val buHafta = Program.takvimHaftaIndex(a.baslangicGunu, bugun)
     val haftalar = remember(kilolar, a.baslangicGunu) { Kilo.haftalikOrtalamalar(kilolar.map { Tarti(it.gun, it.deger) }, a.baslangicGunu) }
     val buHaftaOrt = haftalar.firstOrNull { it.index == buHafta }
     val fark = Kilo.fark(haftalar, buHafta)
@@ -70,7 +72,7 @@ fun IlerlemeEkrani(vm: AnaViewModel, onGozden: () -> Unit) {
         Bosluk(8.dp)
         val kiloDeger = Bicim.coz(kilo)
         DoluDugme(
-            if (bugunku == null) "Bugünkü tartıyı kaydet" else "Bugünkü tartıyı güncelle (${Bicim.kilo(bugunku.deger)} kg)",
+            (if (dunSecili) "Dünkü" else "Bugünkü") + if (bugunku == null) " tartıyı kaydet" else " tartıyı güncelle (${Bicim.kilo(bugunku.deger)} kg)",
             Modifier.fillMaxWidth(), etkin = kiloDeger != null && kiloDeger in 30.0..300.0,
         ) { vm.olcumKaydet(Tur.KILO, kiloDeger!!) }
 
@@ -93,7 +95,7 @@ fun IlerlemeEkrani(vm: AnaViewModel, onGozden: () -> Unit) {
             CizgiGrafik(
                 noktalar = kilolar.map { Nokta(it.gun, it.deger) },
                 // Haftalık ortalama, haftanın ortasındaki güne çizilir.
-                cizgi = haftalar.map { Nokta(a.baslangicGunu + it.index * 7L + 3, it.ortalama) },
+                cizgi = haftalar.map { Nokta(Program.takvimHaftaBasi(a.baslangicGunu) + it.index * 7L + 3, it.ortalama) },
                 birim = "kg", noktaAdi = "tartı", cizgiAdi = "hafta ort.",
                 bant = a.hedefKiloAlt..a.hedefKiloUst,
                 bantAdi = "hedef ${Bicim.ondalik(a.hedefKiloAlt)}–${Bicim.ondalik(a.hedefKiloUst)}",
@@ -156,16 +158,20 @@ fun IlerlemeEkrani(vm: AnaViewModel, onGozden: () -> Unit) {
 
         // ---- Haftalık özet
         Bolum("Haftalık özet")
-        val haftaBasi = Program.haftaBasi(a.baslangicGunu, bugun) + haftaKayma * 7L
+        val haftaBasi = Program.takvimHaftaBasi(bugun) + haftaKayma * 7L
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             KareDugme("‹") { haftaKayma-- }
             Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
-                    if (haftaKayma == 0) "Bu hafta" else "Hafta ${Program.haftaIndex(a.baslangicGunu, haftaBasi) + 1}",
+                    when (haftaKayma) {
+                        0 -> "Bu hafta"
+                        -1 -> "Geçen hafta"
+                        else -> "${-haftaKayma} hafta önce"
+                    },
                     style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center,
                 )
                 Text(
-                    "${Bicim.kisaTarih(haftaBasi)} – ${Bicim.kisaTarih(haftaBasi + 6)}",
+                    "Pzt ${Bicim.kisaTarih(haftaBasi)} – Paz ${Bicim.kisaTarih(haftaBasi + 6)}",
                     style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }

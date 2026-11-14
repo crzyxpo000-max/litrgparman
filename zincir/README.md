@@ -4,6 +4,7 @@ Kişisel antrenman, beslenme ve esneklik takip uygulaması (Android). Asıl işi
 program haftanın günlerine değil **sıraya** göre ilerler; atladığın gün sırayı bozmaz.
 
 - Tamamen çevrimdışı. Hesap, sunucu, reklam, analitik yok. İnternet izni istemez.
+  (İstediği izinler: bildirim, titreşim, tam zamanlı alarm, ön plan servisi, işlemciyi uyanık tutma, açılışta alarmları yeniden kurma.)
 - Arayüz Türkçe, ondalık ayırıcı virgül.
 - Veri yalnızca telefonda durur (Google hesabına da yedeklenmez). Yedeği sen alırsın: Ayarlar › Yedekleme.
 
@@ -128,7 +129,7 @@ Yedek dosyası düz metindir (JSON); bir metin düzenleyiciyle açıp içine bak
 
 | Sekme | Ne yapar |
 | --- | --- |
-| **Bugün** | Sıradaki iş (Seans A/B, Kardiyo, Yalnızca adım), uçuş günü anahtarı, uyku girişi, günlük hedefler, haftalık seans sayacı, zincir uyarısı |
+| **Bugün** | Dün/Bugün geçişi, zincir uyarısı, sıradaki iş (Seans A/B, Kardiyo, Yalnızca adım), "Planımı hatırla", uçuş günü anahtarı, son 7 gün sayacı, uyku girişi, günlük hedefler |
 | **Antrenman** | Set set kg/tekrar kaydı, önceki değerler, dinlenme sayacı (bitince titreşim), "makine yok" alternatifi, kardiyo kaydı |
 | **Beslenme** | Tek dokunuşla "planlandığı gibi yedim", gramla hızlı ekleme, haftalık kaçamak sayacı, bilgi kartları |
 | **Esneklik** | Kendiliğinden ilerleyen 10 dakikalık germe zamanlayıcısı, haftalık sayaç, aylık ölçüm |
@@ -137,13 +138,27 @@ Yedek dosyası düz metindir (JSON); bir metin düzenleyiciyle açıp içine bak
 
 ### Sıra kuralları
 
-- Döngü 14 adımdır: A, Kardiyo, B, Adım, A, Kardiyo, Adım; sonra B, Kardiyo, A, Adım, B, Kardiyo, Adım.
-- Sıra yalnızca iş **yapılınca** ilerler. Yapmadığın seans ertesi gün yine karşına çıkar.
-- "Yalnızca adım" günü, o gün geçince kendiliğinden biter.
-- "Hafta", program başlangıç tarihinden sayılan 7 günlük dilimdir.
-- Ağırlık seansının günü yapılmadan geçerse Bugün ekranında kırmızı uyarı çıkar: "İki seansı üst üste kaçırma."
-  Uçuş günleri ve seansı yarına kaydırdığın günler kaçırılmış sayılmaz.
-- Sıra kayarsa: **Ayarlar › Program › Sıradaki iş**'ten elle düzeltebilirsin; Bugün'deki "Bu adımı atla" da bir adım ilerletir.
+- Sıra 14 adımlık tek bir dairedir: A, Kardiyo, B, Adım, A, Kardiyo, Adım, B, Kardiyo, A, Adım, B, Kardiyo, Adım; 14. adımdan sonra 1'e döner.
+  Sıranın haftayla ya da haftanın günleriyle ilgisi yoktur.
+- Sıra kendiliğinden ilerlemez: A, B ve Kardiyo ancak yapılınca geçilir. Tek istisna "Yalnızca adım"dır; o gün bitince tamamlanmış sayılır.
+- Aynı gün birden fazla adım tamamlanabilir. Bir işi bitirince sıradaki iş "yarın için" diye görünür ama istersen hemen yapabilirsin.
+- "Bu adımı atla" yalnızca Kardiyo ve Adım'da çıkar (yoğun uçuş haftasında ağırlık seansı bloke olmasın). Ağırlık seansı atlanmaz.
+- Sıra kayarsa **Ayarlar › Program › Sıradaki iş**'ten elle düzeltebilirsin.
+
+### Zincir uyarısı ve sayaç
+
+- Son ağırlık seansından sonra **3 tam gün** geçtiyse Bugün ekranında uyarı, **5 tam gün** geçtiyse belirgin (içi dolu kırmızı) uyarı çıkar.
+  "Tam gün", seans günü ve henüz bitmemiş bugün sayılmadan aradaki günlerdir: Pazartesi seans yaptıysan uyarı Cuma, belirgin uyarı Pazar çıkar.
+  Uçuş günleri de sayılır. Eşikler `mantik/Sira.kt` içindeki `UYARI_GUN` ve `BELIRGIN_GUN` sabitleridir.
+- "Son 7 günde ağırlık seansı" sayacı takvim haftası değil, bugün dahil son 7 gündür.
+
+### Günler ve haftalar
+
+- **‹ Dün | Bugün ›:** Bugün ekranının en üstündeki geçiş. Gece yarısından sonra yaptığın girişleri önceki güne yazmak için "‹ Dün"ü seç;
+  o sırada bütün sekmelerdeki girişler (öğün, su, adım, seans, tartı, germe) düne kaydedilir. Gün değişince seçim kendiliğinden "Bugün"e döner.
+- Bütün kayıtlar saat damgasıyla değil **yerel tarihle** saklanır. Türkiye'den Bangladeş'e geçince eski kayıtlar başka güne kaymaz.
+- Takvime göre hesaplananlar: ilk 2 hafta 2 set kuralı ve 8 haftada bir hafif hafta (program başlangıç tarihinden gün sayarak);
+  haftalık kilo ortalaması, haftalık özet, germe ve kaçamak sayaçları (Pazartesi–Pazar).
 
 ### Antrenman kuralları
 
@@ -152,6 +167,26 @@ Yedek dosyası düz metindir (JSON); bir metin düzenleyiciyle açıp içine bak
 - Son ağırlık seansının üzerinden 7 günden fazla geçtiyse önerilen ağırlıklar son değerlerin %80'idir.
 - Her 8 haftada bir hafif hafta önerilir (set sayısı yarıya iner); uygulayıp uygulamamak sana kalır.
 - 15 dakika modu yalnızca ilk 2 hareketi gösterir; bitirince seans sayılır.
+
+### Zamanlayıcılar
+
+- Dinlenme ve germe sayaçları saniye saymaz; bitiş anı ile telefonun kesintisiz saati (`SystemClock.elapsedRealtime`) arasındaki farkı gösterir.
+  Telefon kilitlense ya da uygulama arka plana atılsa da süre şaşmaz.
+- **Dinlenme:** bitiş anına tam zamanlı alarm kurulur. Uygulama ekrandaysa telefon titrer; ekran kilitli ya da uygulama arka plandaysa
+  titreşimli "Dinlenme bitti" bildirimi gelir.
+- **Germe:** rutin boyunca bir ön plan servisi çalışır (bildirim çubuğunda kalan süre görünür). Ekranı kilitlesen de adım geçişlerinde telefon titrer,
+  rutin bitince bildirim gelir.
+- İzinler ilk kullanımda sorulur: bildirim izni (Android 13+). Tam zamanlı alarm izni Android 13+ sürümlerde kendiliğinden verilir;
+  yalnızca Android 12'de kapalıysa ayar sayfası açılır.
+- Bazı telefonlar (Xiaomi, Oppo, bazı Samsung ayarları) arka plandaki uygulamaları agresif biçimde durdurur. Bildirim gelmiyorsa
+  telefonun Ayarlar › Uygulamalar › Zincir › Pil bölümünden "Kısıtlama yok"u seç.
+
+### Diğer
+
+- **Planımı hatırla:** Bugün ekranındaki düğme, eğer-o zaman planlarını tek dokunuşla gösterir (liste Ayarlar'da düzenlenir).
+- Sayı girişlerinde virgül de nokta da yazabilirsin; ekranda her zaman virgül görünür.
+- Grafikler ek kütüphane olmadan, doğrudan Compose Canvas ile çizilir (`ui/Grafik.kt`).
+- Koyu temada zemin tam siyahtır (#000000).
 
 ### Öneriler yalnızca öneridir
 
@@ -177,7 +212,7 @@ zincir/
     │   ├── MainActivity.kt       tek pencere, alt sekmeler
     │   ├── AnaViewModel.kt       ekranların canlı verisi, zamanlayıcılar
     │   ├── mantik/               saf kurallar (Android'e bağlı değil, testli)
-    │   │   ├── Sira.kt           döngü, zincir uyarısı, program haftaları, set sayısı
+    │   │   ├── Sira.kt           14 adımlık sıra, zincir uyarısı, son 7 gün sayacı, hafta hesapları, set sayısı
     │   │   ├── Ilerleme.kt       ilerleme kuralı, %80 dönüş kuralı
     │   │   ├── Kilo.kt           haftalık ortalama, ayar önerileri
     │   │   └── Bicim.kt          sayı ve tarih biçimleri (virgül)
@@ -188,9 +223,10 @@ zincir/
     │   │   ├── Depo.kt           yazma işlemleri
     │   │   └── Yedek.kt          JSON dışa/içe aktarma
     │   ├── ui/                   ekranlar ve ortak parçalar (Tema.kt, Bilesenler.kt, Grafik.kt…)
-    │   └── bildirim/             yerel hatırlatmalar ve titreşim
+    │   └── bildirim/             hatırlatmalar, dinlenme alarmı, germe motoru ve ön plan servisi, titreşim
     └── test/kotlin/com/zincir/
-        ├── mantik/               sıra, ilerleme, %80 kuralı, haftalık ortalama testleri
+        ├── mantik/               sıra, zincir uyarısı, ilerleme, %80 kuralı, haftalık ortalama testleri
+        ├── ZamanlayiciTesti.kt   germe sayacı (telefon uyuyup uyanınca dahil) ve dinlenme alarmı testleri
         └── EkranTesti.kt         uygulamayı telefonsuz açıp temel akışları deneyen test
 ```
 
@@ -205,6 +241,9 @@ yoksa uygulama eski veriyle açılmaz. Emin değilsen önce yedek al.
 ## 7. Bilinen sınırlar
 
 - Adım sayısı elle girilir. Health Connect bağlantısı bilerek ilk sürümde yok; her şey oturduktan sonra ayrı bir adım olarak eklenebilir.
-- "Bugün", telefonun saat dilimine göre belirlenir. Uçuşla saat dilimi değişince gün bir kez erken ya da geç dönebilir; sıra bundan bozulmaz.
+- "Bugün", telefonun o anki saat dilimine göre belirlenir. Uçuşla saat dilimi değişince gün bir kez erken ya da geç dönebilir;
+  kayıtlar yerel tarihle saklandığı için eski günler kaymaz, gerekirse "‹ Dün" ile önceki güne yazabilirsin.
+- Zamanlayıcıların kilitli ekranda haber vermesi (alarm, ön plan servisi, titreşim) gerçek telefonda denenmelidir; test ortamı
+  yalnızca alarmın doğru ana kurulduğunu ve bildirimin gönderildiğini doğrular.
 - Ekran testi, içinde yazı kutusu olan pencereleri (adım girişi, hızlı ekleme gramı, ayar pencereleri) açmaz: test aracı
   (Robolectric) bu pencerelerde takılıyor. Bu pencereleri telefonda elle denemek gerekir.

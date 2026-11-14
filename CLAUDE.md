@@ -31,6 +31,10 @@ Oyundan bağımsız kişisel antrenman/beslenme takip uygulaması (Compose + Roo
 projesidir; kök derlemeye dahil **değildir** ve oyun kuralları ona uygulanmaz. Ayrıntı `zincir/README.md`.
 Komutlar: `cd zincir && ./gradlew test assembleDebug lintDebug` (`local.properties` içinde `sdk.dir` gerekir).
 Saf kurallar `mantik/` (testli), tablolar `veri/`, ekranlar `ui/`; program verisi `BaslangicVerisi.kt` ile veritabanına yazılır.
+Kurallar (kullanıcının): sıra 14 adımlık dairedir ve hafta hesabı kullanmaz, yalnızca "Adım" gün bitince kendiliğinden geçer, atlama
+yalnızca Kardiyo/Adım'da; zincir uyarısı son ağırlık seansından 3/5 tam gün sonra; sayaç son 7 gün; haftalık ortalama/özet Pzt–Paz;
+kayıtlar `LocalDate` (epochDay) ile; zamanlayıcılar `elapsedRealtime` farkıyla (dinlenme: tam alarm, germe: ön plan servisi);
+grafik kütüphanesi eklenmez (Canvas). Tablo şeması değişirse `Veritabani.version` artırılıp migration yazılır (telefonda veri var).
 
 ## Komutlar
 

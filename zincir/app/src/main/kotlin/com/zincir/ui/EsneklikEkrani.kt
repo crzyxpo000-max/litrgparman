@@ -9,7 +9,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import android.os.SystemClock
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableLongStateOf
+import kotlinx.coroutines.delay
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.zincir.AnaViewModel
-import com.zincir.GermeCalisma
+import com.zincir.bildirim.GermeCalisma
 import com.zincir.mantik.Bicim
 import com.zincir.veri.Olcum
 import com.zincir.veri.Tur
@@ -39,6 +43,7 @@ fun EsneklikEkrani(vm: AnaViewModel) {
     }
 
     val bugun by vm.bugun.collectAsStateWithLifecycle()
+    val dunSecili by vm.dunSecili.collectAsStateWithLifecycle()
     val gun by vm.gun.collectAsStateWithLifecycle()
     val germeler by vm.germeler.collectAsStateWithLifecycle()
     val sonGunler by vm.sonGunler.collectAsStateWithLifecycle()
@@ -58,11 +63,11 @@ fun EsneklikEkrani(vm: AnaViewModel) {
             Text("Bu hafta germe günü", style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
             Text("$haftaGun/${a.haftalikGermeHedef}", style = MaterialTheme.typography.displaySmall)
         }
-        HedefSatiri("Bugün", "${gun.germeDk}", "${a.germeHedefDk} dk", gun.germeDk.toFloat() / a.germeHedefDk)
+        HedefSatiri(if (dunSecili) "Dün" else "Bugün", "${gun.germeDk}", "${a.germeHedefDk} dk", gun.germeDk.toFloat() / a.germeHedefDk)
         Bosluk()
         DoluDugme("Başlat · ${(toplamSn + 59) / 60} dk", Modifier.fillMaxWidth(), etkin = germeler.isNotEmpty()) { vm.germeBaslat(germeler) }
         Text(
-            "Rutin kendiliğinden ilerler. Geçişlerde telefon titrer; ekran kapanmaz.",
+            "Rutin kendiliğinden ilerler. Geçişlerde telefon titrer; ekran kapanmaz. Ekranı kilitlesen de sürer.",
             style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(top = 8.dp),
         )
@@ -110,20 +115,29 @@ fun EsneklikEkrani(vm: AnaViewModel) {
     }
 }
 
-/** Çalışan rutin: büyük geri sayım. Süreyi ViewModel sayar; bu ekran yalnızca gösterir. */
+/**
+ * Çalışan rutin: büyük geri sayım. Süreyi GermeMotoru yönetir; burada kalan süre, adımın bitiş anı ile
+ * SystemClock.elapsedRealtime farkından hesaplanır (telefon kilitlenip açılsa da doğru kalır).
+ */
 @Composable
 private fun GermeZamanlayici(vm: AnaViewModel, c: GermeCalisma) {
     EkraniAcikTut()
-    val adim = c.adimlar[c.index]
-    val toplamMs = c.adimlar.sumOf { it.sureSn } * 1000L
-    val gecenMs = c.adimlar.take(c.index).sumOf { it.sureSn } * 1000L + (adim.sureSn * 1000L - c.kalanMs)
+    ZamanlayiciIzinleri() // ekran kilitliyken geçişlerde haber verebilmek için (ilk kullanımda sorar)
+    var simdi by remember { mutableLongStateOf(SystemClock.elapsedRealtime()) }
+    LaunchedEffect(Unit) {
+        while (true) {
+            simdi = SystemClock.elapsedRealtime()
+            delay(100)
+        }
+    }
+    val adim = c.adim
 
     Column(Modifier.fillMaxSize().padding(horizontal = Kenar).padding(top = 28.dp, bottom = 20.dp)) {
         if (c.bitti) {
             Etiket("Germe")
             Text("Tamamlandı.", style = MaterialTheme.typography.displayMedium)
             Bosluk(8.dp)
-            Text("${(toplamMs / 60_000)} dakika bugüne kaydedildi.", style = MaterialTheme.typography.bodyLarge)
+            Text("${(c.toplamMs + 59_999) / 60_000} dakika kaydedildi.", style = MaterialTheme.typography.bodyLarge)
             Spacer(Modifier.weight(1f))
             DoluDugme("Kapat", Modifier.fillMaxWidth()) { vm.germeKapat() }
             return@Column
@@ -139,9 +153,9 @@ private fun GermeZamanlayici(vm: AnaViewModel, c: GermeCalisma) {
         )
 
         Spacer(Modifier.weight(1f))
-        Text(Bicim.sayac(ceil(c.kalanMs / 1000.0).toInt()), style = MaterialTheme.typography.displayLarge)
+        Text(Bicim.sayac(ceil(c.kalanMs(simdi) / 1000.0).toInt()), style = MaterialTheme.typography.displayLarge)
         Bosluk(8.dp)
-        IlerlemeCizgisi(gecenMs.toFloat() / toplamMs)
+        IlerlemeCizgisi(c.gecenMs(simdi).toFloat() / c.toplamMs)
         Bosluk(8.dp)
         val sonraki = c.adimlar.getOrNull(c.index + 1)
         Text(
@@ -151,7 +165,7 @@ private fun GermeZamanlayici(vm: AnaViewModel, c: GermeCalisma) {
         Spacer(Modifier.weight(1f))
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            if (c.duraklatildi) DoluDugme("Devam", Modifier.weight(1f)) { vm.germeDuraklat(false) }
+            if (c.duraklatmaKalanMs != null) DoluDugme("Devam", Modifier.weight(1f)) { vm.germeDuraklat(false) }
             else CizgiDugme("Duraklat", Modifier.weight(1f)) { vm.germeDuraklat(true) }
             CizgiDugme("Geç", Modifier.weight(1f)) { vm.germeAtla() }
         }

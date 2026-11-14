@@ -34,6 +34,22 @@ object Bicim {
         }
     }
 
+    /**
+     * Ondalık giriş kutusuna yazılan metni düzeltir: nokta virgüle çevrilir (ekranda hep virgül görünür),
+     * rakam ve tek bir virgül dışındaki her şey atılır. "82.5" → "82,5"
+     */
+    fun ondalikGirdi(metin: String): String {
+        val sb = StringBuilder()
+        var virgulVar = false
+        for (c in metin) {
+            when {
+                c.isDigit() -> sb.append(c)
+                (c == ',' || c == '.') && !virgulVar -> { sb.append(','); virgulVar = true }
+            }
+        }
+        return sb.toString()
+    }
+
     /** Kullanıcının yazdığı sayıyı çözer; virgül de nokta da kabul edilir. */
     fun coz(metin: String): Double? = metin.trim().replace(',', '.').toDoubleOrNull()
 

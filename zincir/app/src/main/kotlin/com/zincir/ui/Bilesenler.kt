@@ -140,6 +140,23 @@ fun MetinDugme(metin: String, modifier: Modifier = Modifier, renk: Color = Mater
     ) { Text(metin, style = MaterialTheme.typography.titleSmall, color = renk, textDecoration = TextDecoration.Underline) }
 }
 
+/** Pencerelerin (dialog) ince çerçevesi: koyu temada tam siyah zemin üstünde pencere ayrışsın. */
+@Composable
+fun Modifier.pencereCercevesi(): Modifier = border(1.dp, MaterialTheme.colorScheme.onBackground)
+
+/** Belirgin uyarı: içi dolu vurgu rengi. Yalnızca en ciddi durumda (zincir kopmak üzere) kullanılır. */
+@Composable
+fun BelirginUyari(baslik: String, metin: String, modifier: Modifier = Modifier) {
+    Column(modifier.fillMaxWidth().background(MaterialTheme.colorScheme.error).padding(20.dp)) {
+        Text(baslik, style = MaterialTheme.typography.headlineLarge, color = MaterialTheme.colorScheme.onError)
+        Spacer(Modifier.height(8.dp))
+        Text(metin, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onError)
+    }
+}
+
+/** Kayıt gününün başlıkta görünen adı: "Dün" seçiliyse başına "Dün · " gelir. */
+fun gunBasligi(gun: Long, dunSecili: Boolean): String = (if (dunSecili) "Dün · " else "") + Bicim.tarih(gun)
+
 /** Uyarı kutusu: uygulamadaki tek renkli öğe. */
 @Composable
 fun Uyari(baslik: String, metin: String? = null, modifier: Modifier = Modifier) {
@@ -208,7 +225,8 @@ fun SayiGirisi(
         KareDugme("−") { onDegis(Bicim.giris(max(0.0, (Bicim.coz(deger) ?: 0.0) - adim))) }
         OutlinedTextField(
             value = deger,
-            onValueChange = { yeni -> onDegis(yeni.filter { it.isDigit() || (ondalik && (it == ',' || it == '.')) }.take(6)) },
+            // Ondalık alanlarda nokta da virgül de kabul edilir; kutuda her zaman virgül görünür.
+            onValueChange = { yeni -> onDegis((if (ondalik) Bicim.ondalikGirdi(yeni) else yeni.filter { it.isDigit() }).take(7)) },
             modifier = Modifier.weight(1f).padding(horizontal = 8.dp),
             singleLine = true, shape = RectangleShape,
             label = { Text(etiket) },
@@ -300,7 +318,7 @@ fun FormDialog(
     val degerler = remember { mutableStateListOf<String>().apply { addAll(alanlar.map { it.deger }) } }
     var hata by remember { mutableStateOf<String?>(null) }
     AlertDialog(
-        onDismissRequest = onKapat, shape = RectangleShape,
+        onDismissRequest = onKapat, shape = RectangleShape, modifier = Modifier.pencereCercevesi(),
         containerColor = MaterialTheme.colorScheme.background, tonalElevation = 0.dp,
         title = { Text(baslik, style = MaterialTheme.typography.headlineSmall) },
         text = {
@@ -315,7 +333,11 @@ fun FormDialog(
                         }
                     } else {
                         OutlinedTextField(
-                            value = degerler[i], onValueChange = { degerler[i] = it; hata = null },
+                            value = degerler[i],
+                            onValueChange = {
+                                degerler[i] = if (alan.tur == AlanTuru.ONDALIK) Bicim.ondalikGirdi(it) else it
+                                hata = null
+                            },
                             label = { Text(alan.etiket) }, shape = RectangleShape, modifier = Modifier.fillMaxWidth(),
                             singleLine = alan.tur != AlanTuru.UZUN_METIN,
                             textStyle = MaterialTheme.typography.bodyLarge,
@@ -356,7 +378,7 @@ fun FormDialog(
 @Composable
 fun OnayDialog(baslik: String, metin: String, onayMetni: String, onKapat: () -> Unit, onOnay: () -> Unit) {
     AlertDialog(
-        onDismissRequest = onKapat, shape = RectangleShape,
+        onDismissRequest = onKapat, shape = RectangleShape, modifier = Modifier.pencereCercevesi(),
         containerColor = MaterialTheme.colorScheme.background, tonalElevation = 0.dp,
         title = { Text(baslik, style = MaterialTheme.typography.headlineSmall) },
         text = { Text(metin, style = MaterialTheme.typography.bodyLarge) },
@@ -379,7 +401,7 @@ fun EkraniAcikTut() {
 @Composable
 fun ListeDialog(baslik: String, secenekler: List<String>, onKapat: () -> Unit, onSec: (String) -> Unit) {
     AlertDialog(
-        onDismissRequest = onKapat, shape = RectangleShape,
+        onDismissRequest = onKapat, shape = RectangleShape, modifier = Modifier.pencereCercevesi(),
         containerColor = MaterialTheme.colorScheme.background, tonalElevation = 0.dp,
         title = { Text(baslik, style = MaterialTheme.typography.headlineSmall) },
         text = {
@@ -414,4 +436,27 @@ fun OnaySatiri(metin: String, isaretli: Boolean, modifier: Modifier = Modifier, 
         Spacer(Modifier.width(14.dp))
         Text(metin, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
     }
+}
+
+/** Salt okunur liste penceresi ("Planımı hatırla" gibi). */
+@Composable
+fun BilgiDialog(baslik: String, satirlar: List<String>, onKapat: () -> Unit, bosMetin: String = "Liste boş.") {
+    AlertDialog(
+        onDismissRequest = onKapat, shape = RectangleShape, modifier = Modifier.pencereCercevesi(),
+        containerColor = MaterialTheme.colorScheme.background, tonalElevation = 0.dp,
+        title = { Text(baslik, style = MaterialTheme.typography.headlineSmall) },
+        text = {
+            Column(Modifier.heightIn(max = 480.dp).verticalScroll(rememberScrollState())) {
+                if (satirlar.isEmpty()) Text(bosMetin, style = MaterialTheme.typography.bodyLarge)
+                satirlar.forEachIndexed { i, satir ->
+                    Row(Modifier.fillMaxWidth().padding(vertical = 12.dp)) {
+                        Text("${i + 1}", style = MaterialTheme.typography.titleLarge, modifier = Modifier.width(32.dp))
+                        Text(satir, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
+                    }
+                    Cizgi()
+                }
+            }
+        },
+        confirmButton = { TextButton(onClick = onKapat) { Text("Tamam", style = MaterialTheme.typography.labelLarge) } },
+    )
 }

@@ -13,4 +13,10 @@ class ZincirUygulamasi : Application() {
         super.onCreate()
         Bildirimler.kanalOlustur(this)
     }
+
+    companion object {
+        /** Uygulama ekranda ve açık mı? Zamanlayıcı bitince titreşimi ekran mı, bildirim mi yapacak buna göre seçilir. */
+        @Volatile
+        var onPlanda: Boolean = false
+    }
 }

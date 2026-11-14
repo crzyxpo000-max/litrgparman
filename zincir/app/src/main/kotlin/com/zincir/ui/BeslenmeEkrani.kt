@@ -42,6 +42,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 fun BeslenmeEkrani(vm: AnaViewModel) {
     val a = vm.ayarlar.collectAsStateWithLifecycle().value ?: return
     val bugun by vm.bugun.collectAsStateWithLifecycle()
+    val dunSecili by vm.dunSecili.collectAsStateWithLifecycle()
     val ogunler by vm.ogunler.collectAsStateWithLifecycle()
     val yemekler by vm.yemekler.collectAsStateWithLifecycle()
     val yiyecekler by vm.yiyecekler.collectAsStateWithLifecycle()
@@ -68,7 +69,7 @@ fun BeslenmeEkrani(vm: AnaViewModel) {
     }
 
     Sayfa {
-        EkranBasligi("Beslenme", ust = Bicim.tarih(bugun))
+        EkranBasligi("Beslenme", ust = gunBasligi(bugun, dunSecili))
         Bosluk(8.dp)
         HedefSatiri("Kalori", Bicim.tam(kcal.toInt()), "${Bicim.tam(a.kaloriHedef)} kcal", (kcal / a.kaloriHedef).toFloat())
         HedefSatiri("Protein", Bicim.tam(protein.toInt()), "${a.proteinMin}–${a.proteinMax} g", (protein / a.proteinMin).toFloat())
@@ -226,7 +227,7 @@ private fun HizliEkleDialog(yiyecekler: List<Yiyecek>, onKapat: () -> Unit, onEk
     }
 
     AlertDialog(
-        onDismissRequest = onKapat, shape = RectangleShape,
+        onDismissRequest = onKapat, shape = RectangleShape, modifier = Modifier.pencereCercevesi(),
         containerColor = MaterialTheme.colorScheme.background, tonalElevation = 0.dp,
         title = { Text(y?.ad ?: "Hızlı ekle", style = MaterialTheme.typography.headlineSmall) },
         text = {

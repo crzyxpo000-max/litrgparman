@@ -47,15 +47,16 @@ private val KONTROL_LISTESI = listOf(
 @Composable
 fun GozdenGecirmeEkrani(vm: AnaViewModel, onGeri: () -> Unit) {
     val a = vm.ayarlar.collectAsStateWithLifecycle().value ?: return
-    val bugun by vm.bugun.collectAsStateWithLifecycle()
+    val bugun by vm.gercekBugun.collectAsStateWithLifecycle()
     val kilolar by vm.kilolar.collectAsStateWithLifecycle()
     val seanslar by vm.seanslar.collectAsStateWithLifecycle()
     val sonGunler by vm.sonGunler.collectAsStateWithLifecycle()
     val sonYemekler by vm.sonYemekler.collectAsStateWithLifecycle()
     val kapsam = rememberCoroutineScope()
 
-    val haftaBasi = Program.haftaBasi(a.baslangicGunu, bugun)
-    val buHafta = Program.haftaIndex(a.baslangicGunu, bugun)
+    // Gözden geçirme takvim haftasına göredir: Pazartesi–Pazar.
+    val haftaBasi = Program.takvimHaftaBasi(bugun)
+    val buHafta = Program.takvimHaftaIndex(a.baslangicGunu, bugun)
     val kayit by remember(haftaBasi) { vm.dao.gozdenAkisi(haftaBasi) }.collectAsStateWithLifecycle(null)
     val g = kayit ?: HaftaGozden(haftaBasi)
     val isaretler = g.isaretler.split(",").mapNotNull { it.toIntOrNull() }.toSet()
@@ -68,7 +69,7 @@ fun GozdenGecirmeEkrani(vm: AnaViewModel, onGeri: () -> Unit) {
         MetinDugme("‹ Geri", onClick = onGeri)
         EkranBasligi(
             "Haftalık gözden geçirme",
-            ust = "Hafta ${buHafta + 1} · ${Bicim.kisaTarih(haftaBasi)} – ${Bicim.kisaTarih(haftaBasi + 6)} · yaklaşık 10 dk",
+            ust = "Pzt ${Bicim.kisaTarih(haftaBasi)} – Paz ${Bicim.kisaTarih(haftaBasi + 6)} · yaklaşık 10 dk",
         )
 
         Bolum("Bu haftanın özeti", ust = 20.dp)

@@ -5,6 +5,13 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Zamanlayıcı bitişi: ekran kilitliyken de tam zamanında haber vermek için. -->
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" android:maxSdkVersion="32" />
+    <!-- Germe rutini: ekran kapansa da süren ön plan servisi ve işlemciyi uyanık tutan kilit. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <!-- allowBackup kapalı: veri Google hesabına yedeklenmez; yedek Ayarlar'dan JSON olarak alınır. -->
     <application
@@ -35,6 +42,16 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <!-- Germe rutini sürerken çalışan ön plan servisi (bildirim çubuğunda kalan süreyi gösterir). -->
+        <service
+            android:name=".bildirim.GermeServisi"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Germe rutini zamanlayicisi: adim gecislerinde titresim" />
+        </service>
 
         <!-- Yedek dosyasını başka uygulamalarla paylaşabilmek için. -->
         <provider

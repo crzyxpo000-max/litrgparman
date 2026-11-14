@@ -5,7 +5,10 @@ import kotlin.math.roundToInt
 
 data class Tarti(val gun: Long, val kg: Double)
 
-/** Bir program haftasının tartı ortalaması. [index] 0 = ilk hafta; başlangıçtan önceki haftalar eksi. */
+/**
+ * Bir takvim haftasının (Pazartesi–Pazar) tartı ortalaması.
+ * [index] 0 = program başlangıcının içinde olduğu hafta; daha önceki haftalar eksi.
+ */
 data class HaftaOrt(val index: Int, val ortalama: Double, val adet: Int)
 
 /** Ayar önerileri. Yalnızca öneridir; uygulama hedefi kendiliğinden değiştirmez. */
@@ -22,9 +25,9 @@ object Kilo {
     /** Kalori hedefi bunun altına ayarlanamaz. */
     const val KALORI_TABAN = 1800
 
-    /** Tartıları program haftalarına böler ve her haftanın ortalamasını alır (haftaya göre sıralı). */
+    /** Tartıları takvim haftalarına (Pazartesi–Pazar) böler ve her haftanın ortalamasını alır (haftaya göre sıralı). */
     fun haftalikOrtalamalar(tartilar: List<Tarti>, baslangic: Long): List<HaftaOrt> =
-        tartilar.groupBy { Program.haftaIndex(baslangic, it.gun) }
+        tartilar.groupBy { Program.takvimHaftaIndex(baslangic, it.gun) }
             .map { (index, liste) -> HaftaOrt(index, liste.map { it.kg }.average(), liste.size) }
             .sortedBy { it.index }
 
@@ -37,7 +40,7 @@ object Kilo {
 
     /**
      * Ayar önerileri. Değerlendirilen hafta: bitmiş son hafta ya da en az 3 tartısı olan içinde bulunulan hafta.
-     * [buHafta]: bugünün program haftası (index).
+     * [buHafta]: bugünün takvim haftası (index).
      */
     fun oneriler(haftalar: List<HaftaOrt>, buHafta: Int, baslangicKilo: Double): List<Oneri> {
         val son = haftalar.lastOrNull { it.index in 0..buHafta && (it.index < buHafta || it.adet >= 3) }

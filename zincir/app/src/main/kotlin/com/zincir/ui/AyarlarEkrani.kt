@@ -288,7 +288,7 @@ private fun AnaAyarlar(vm: AnaViewModel, a: Ayarlar, onGeri: () -> Unit, onAltSa
 
         Bosluk(32.dp)
         Text(
-            "Zincir 1.0 · Veri yalnızca bu telefonda durur. Hesap, sunucu, reklam ve analitik yoktur.",
+            "Zincir 1.1 · Veri yalnızca bu telefonda durur. Hesap, sunucu, reklam ve analitik yoktur.",
             style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
     }

@@ -6,14 +6,14 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class KiloTest {
-    private val bas = 20780L
+    private val bas = 20780L // 23 Kasım 2026, Pazartesi
 
     /** Her haftaya verilen ortalamayla 7 tartı yazar. */
     private fun haftalar(vararg ortalamalar: Double): List<HaftaOrt> =
         ortalamalar.mapIndexed { i, o -> HaftaOrt(i, o, 7) }
 
     @Test
-    fun `haftalik ortalama program haftasina gore hesaplanir`() {
+    fun `haftalik ortalama takvim haftasina gore hesaplanir`() {
         val tartilar = listOf(
             Tarti(bas, 96.0), Tarti(bas + 1, 95.0), Tarti(bas + 6, 95.6),   // 1. hafta
             Tarti(bas + 7, 95.0), Tarti(bas + 9, 94.0),                      // 2. hafta
@@ -26,6 +26,18 @@ class KiloTest {
         assertEquals(94.5, h[1].ortalama, 0.001)
         assertEquals(-1.0333, Kilo.fark(h, 1)!!, 0.001)
         assertNull("önceki hafta yoksa fark yok", Kilo.fark(h, 0))
+    }
+
+    @Test
+    fun `haftalar pazartesiden pazara sayilir`() {
+        // Program Çarşamba başlasa bile hafta Pazartesi başlar: Pazar ile ertesi Pazartesi ayrı haftalardır.
+        val carsamba = bas + 2
+        val h = Kilo.haftalikOrtalamalar(
+            listOf(Tarti(bas, 96.0), Tarti(bas + 6, 95.0), Tarti(bas + 7, 94.0)), carsamba,
+        )
+        assertEquals(listOf(0, 1), h.map { it.index })
+        assertEquals(95.5, h[0].ortalama, 0.001)
+        assertEquals(94.0, h[1].ortalama, 0.001)
     }
 
     @Test
@@ -110,6 +122,10 @@ class KiloTest {
         assertEquals("+0,3", Bicim.fark(0.3))
         assertEquals(82.5, Bicim.coz("82,5")!!, 0.0001)
         assertEquals(82.5, Bicim.coz("82.5")!!, 0.0001)
+        // Nokta yazılsa da kutuda virgül görünür; ikinci ayırıcı ve harfler atılır.
+        assertEquals("82,5", Bicim.ondalikGirdi("82.5"))
+        assertEquals("82,5", Bicim.ondalikGirdi("82,5"))
+        assertEquals("1,25", Bicim.ondalikGirdi("1.2.5 kg"))
         assertEquals("1:32", Bicim.sayac(92))
         assertEquals(450, Bicim.cozSaat("07:30"))
     }

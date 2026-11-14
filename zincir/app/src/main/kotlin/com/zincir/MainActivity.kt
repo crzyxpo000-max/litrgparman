@@ -37,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.zincir.bildirim.Bildirimler
 import com.zincir.mantik.Bicim
 import com.zincir.ui.AntrenmanEkrani
 import com.zincir.ui.AyarlarEkrani
@@ -66,7 +67,15 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
+        ZincirUygulamasi.onPlanda = true
+        Bildirimler.zamanlayiciBildirimleriniKaldir(this)
         vm.gunuYenile()
+    }
+
+    override fun onPause() {
+        // Ekran kilitlenince ya da başka uygulamaya geçilince: zamanlayıcı bitişini artık bildirim haber verir.
+        ZincirUygulamasi.onPlanda = false
+        super.onPause()
     }
 }
 

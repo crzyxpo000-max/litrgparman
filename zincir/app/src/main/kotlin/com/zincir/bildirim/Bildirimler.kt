@@ -9,7 +9,9 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.AudioAttributes
 import android.os.Build
+import android.os.VibrationAttributes
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
@@ -36,17 +38,61 @@ import java.time.ZonedDateTime
  */
 object Bildirimler {
     private const val KANAL = "hatirlatma"
+    /** Zamanlayıcı bitişi: yüksek öncelikli, titreşimli. */
+    const val KANAL_ZAMANLAYICI = "zamanlayici"
+    /** Germe sürerken duran sessiz bildirim. */
+    const val KANAL_GERME = "germe"
     const val TARTI = "com.zincir.TARTI"
     const val GERME = "com.zincir.GERME"
     const val OGUN = "com.zincir.OGUN"
+    const val DINLENME = "com.zincir.DINLENME"
+
+    const val ID_DINLENME = 10
+    const val ID_GERME_BITTI = 11
+    const val ID_GERME_SURUYOR = 12
 
     /** Gece bu saatler arasında öğün hatırlatması gösterilmez. */
     private val SESSIZ_BASLANGIC: LocalTime = LocalTime.of(23, 0)
     private val SESSIZ_BITIS: LocalTime = LocalTime.of(7, 0)
 
     fun kanalOlustur(context: Context) {
-        val kanal = NotificationChannel(KANAL, "Hatırlatmalar", NotificationManager.IMPORTANCE_DEFAULT)
-        context.getSystemService(NotificationManager::class.java).createNotificationChannel(kanal)
+        val yonetici = context.getSystemService(NotificationManager::class.java)
+        yonetici.createNotificationChannel(NotificationChannel(KANAL, "Hatırlatmalar", NotificationManager.IMPORTANCE_DEFAULT))
+        yonetici.createNotificationChannel(
+            NotificationChannel(KANAL_ZAMANLAYICI, "Zamanlayıcı bitişi", NotificationManager.IMPORTANCE_HIGH).apply {
+                enableVibration(true)
+                vibrationPattern = longArrayOf(0, 500, 250, 500)
+            }
+        )
+        yonetici.createNotificationChannel(NotificationChannel(KANAL_GERME, "Germe sürüyor", NotificationManager.IMPORTANCE_LOW))
+    }
+
+    // ---- Dinlenme sayacı: bitiş anına tam zamanlı alarm
+
+    /** Tam zamanlı alarm kurulabiliyor mu? (Android 12–12L'de kullanıcı izni kapatmış olabilir.) */
+    fun tamAlarmVar(context: Context): Boolean =
+        Build.VERSION.SDK_INT < 31 || context.getSystemService(AlarmManager::class.java).canScheduleExactAlarms()
+
+    /**
+     * Dinlenme süresinin bittiği ana alarm kurar. [bitis] SystemClock.elapsedRealtime cinsindendir.
+     * Ekran kilitli ya da uygulama arka plandaysa alarm [HatirlatmaAlici]'yı uyandırır ve bildirim + titreşim gelir.
+     */
+    fun dinlenmeAlarmiKur(context: Context, bitis: Long) {
+        val am = context.getSystemService(AlarmManager::class.java)
+        val pi = niyet(context, DINLENME)
+        if (tamAlarmVar(context)) am.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, bitis, pi)
+        else am.setAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, bitis, pi) // izin yoksa yaklaşık alarm
+    }
+
+    fun dinlenmeAlarminiIptalEt(context: Context) {
+        iptal(context, DINLENME)
+        NotificationManagerCompat.from(context).cancel(ID_DINLENME)
+    }
+
+    /** Uygulama öne gelince: görevini tamamlamış zamanlayıcı bildirimlerini kaldır. */
+    fun zamanlayiciBildirimleriniKaldir(context: Context) {
+        NotificationManagerCompat.from(context).cancel(ID_DINLENME)
+        NotificationManagerCompat.from(context).cancel(ID_GERME_BITTI)
     }
 
     fun izinVar(context: Context): Boolean =
@@ -92,13 +138,15 @@ object Bildirimler {
 
     fun sessizSaat(simdi: LocalTime = LocalTime.now()): Boolean = simdi >= SESSIZ_BASLANGIC || simdi < SESSIZ_BITIS
 
-    fun goster(context: Context, id: Int, baslik: String, metin: String) {
+    fun goster(context: Context, id: Int, baslik: String, metin: String, kanal: String = KANAL) {
         if (!izinVar(context)) return
         val ac = PendingIntent.getActivity(
             context, 0, Intent(context, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
-        val bildirim = NotificationCompat.Builder(context, KANAL)
+        val bildirim = NotificationCompat.Builder(context, kanal)
+            .setPriority(if (kanal == KANAL_ZAMANLAYICI) NotificationCompat.PRIORITY_HIGH else NotificationCompat.PRIORITY_DEFAULT)
+            .setCategory(if (kanal == KANAL_ZAMANLAYICI) NotificationCompat.CATEGORY_ALARM else NotificationCompat.CATEGORY_REMINDER)
             .setSmallIcon(R.drawable.ic_bildirim)
             .setContentTitle(baslik)
             .setContentText(metin)
@@ -117,6 +165,13 @@ object Bildirimler {
 /** Alarm çalınca ya da telefon yeniden başlayınca Android bu sınıfı çağırır. */
 class HatirlatmaAlici : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
+        if (intent.action == Bildirimler.DINLENME) {
+            // Uygulama öndeyse titreşimi ekran kendisi yapar; değilse bildirim (titreşimli kanal) haber verir.
+            if (!ZincirUygulamasi.onPlanda) {
+                Bildirimler.goster(context, Bildirimler.ID_DINLENME, "Dinlenme bitti", "Sıradaki sete geç.", Bildirimler.KANAL_ZAMANLAYICI)
+            }
+            return
+        }
         val bekleyen = goAsync() // veritabanı okuması bitene kadar alıcıyı açık tut
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -155,26 +210,31 @@ class HatirlatmaAlici : BroadcastReceiver() {
     }
 }
 
-/** Kısa titreşim (set dinlenmesi bitti, germe geçişi). */
+/**
+ * Titreşim (set dinlenmesi bitti, germe geçişi). "Alarm" kullanımıyla istenir: Android, arka plandaki
+ * uygulamaların sıradan titreşimlerini yok sayar, alarm titreşimlerine izin verir.
+ */
 object Titresim {
-    fun titret(context: Context, milisaniye: Long = 400) {
-        val titrestirici: Vibrator? = if (Build.VERSION.SDK_INT >= 31) {
-            context.getSystemService(VibratorManager::class.java)?.defaultVibrator
-        } else {
-            @Suppress("DEPRECATION")
-            context.getSystemService(Vibrator::class.java)
-        }
-        titrestirici?.vibrate(VibrationEffect.createOneShot(milisaniye, VibrationEffect.DEFAULT_AMPLITUDE))
-    }
+    fun titret(context: Context, milisaniye: Long = 400) =
+        calistir(context, VibrationEffect.createOneShot(milisaniye, VibrationEffect.DEFAULT_AMPLITUDE))
 
-    /** İki kısa vuruş: rutin bitti. */
-    fun cift(context: Context) {
-        val titrestirici: Vibrator? = if (Build.VERSION.SDK_INT >= 31) {
-            context.getSystemService(VibratorManager::class.java)?.defaultVibrator
+    /** Üç vuruş: rutin bitti. */
+    fun cift(context: Context) = calistir(context, VibrationEffect.createWaveform(longArrayOf(0, 300, 200, 300, 200, 600), -1))
+
+    private fun calistir(context: Context, etki: VibrationEffect) {
+        val titrestirici: Vibrator = (
+            if (Build.VERSION.SDK_INT >= 31) {
+                context.getSystemService(VibratorManager::class.java)?.defaultVibrator
+            } else {
+                @Suppress("DEPRECATION")
+                context.getSystemService(Vibrator::class.java)
+            }
+            ) ?: return
+        if (Build.VERSION.SDK_INT >= 33) {
+            titrestirici.vibrate(etki, VibrationAttributes.createForUsage(VibrationAttributes.USAGE_ALARM))
         } else {
             @Suppress("DEPRECATION")
-            context.getSystemService(Vibrator::class.java)
+            titrestirici.vibrate(etki, AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ALARM).build())
         }
-        titrestirici?.vibrate(VibrationEffect.createWaveform(longArrayOf(0, 300, 200, 300, 200, 600), -1))
     }
 }

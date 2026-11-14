@@ -1,5 +1,6 @@
 package com.zincir
 
+import android.Manifest
 import android.graphics.Bitmap
 import android.os.Handler
 import android.os.Looper
@@ -75,7 +76,7 @@ class EkranTesti {
         FileOutputStream(File(klasor, "$ad.png")).use { resim.compress(Bitmap.CompressFormat.PNG, 100, it) }
     }
 
-    /** Programın 4. haftasındaymış gibi örnek veri yazar. Seans A dünden beri bekliyor. */
+    /** Programın 4. haftasındaymış gibi örnek veri yazar. Son ağırlık seansı 5 gün önce; sırada Seans A var. */
     private suspend fun ornekVeriYaz() {
         val dao = depo.dao
         depo.ayarlariDegistir { it.copy(baslangicGunu = bugun - 24, siraIndex = 0, siraGunu = bugun - 1) }
@@ -88,7 +89,7 @@ class EkranTesti {
         depo.olcumKaydet(Tur.ESNEKLIK, bugun - 5, 14.0)
         // Geçmiş Seans A kayıtları: son seansta ilk hareketin tüm setleri 12 tekrar (ilerleme önerisi çıkmalı).
         val hareketler = dao.hareketler("A")
-        listOf(17L to 40.0, 10L to 45.0, 3L to 50.0).forEach { (once, kg) ->
+        listOf(17L to 40.0, 10L to 45.0, 5L to 50.0).forEach { (once, kg) ->
             val id = dao.seansEkle(Seans(gun = bugun - once, tur = Tur.A, tamamlandi = true))
             hareketler.forEachIndexed { i, h ->
                 repeat(2) { s -> dao.setEkle(SetKaydi(seansId = id, hareketId = h.id, hareketAdi = h.ad, setNo = s + 1, kg = if (h.agirlikli) kg / (i + 1) else 0.0, tekrar = if (i == 0) 12 else 10)) }
@@ -107,6 +108,9 @@ class EkranTesti {
      */
     @Test
     fun `uygulama acilir ve temel akislar calisir`() {
+        // Bildirim izni verilmiş say (izin penceresi test ortamında açılamaz).
+        shadowOf(kural.activity.application).grantPermissions(Manifest.permission.POST_NOTIFICATIONS)
+
         // 1) İlk açılış: başlangıç verisi yazılmış olmalı.
         bekle("Seans A")
         kural.onNodeWithText("Program başlangıcı", substring = true).assertExists()
@@ -141,12 +145,36 @@ class EkranTesti {
         bekle("Kardiyoyu kaydet")
         cek("05-antrenman")
 
-        // Seans bitti: sıra Kardiyo'ya geçti, Bugün "tamam" diyor, haftalık sayaç arttı.
+        // Seans bitti: sıra Kardiyo'ya geçti; aynı gün sıradaki iş de yapılabilir; son 7 gün sayacı arttı.
         runBlocking { assertEquals(1, depo.dao.ayarlar()!!.siraIndex) }
         sekme("Bugün")
-        bekle("Seans A tamam.")
+        bekle("Bugün yapıldı: Seans A")
         bekle("2/3")
-        cek("06-bugun-tamam")
+        assertEquals(0, kural.onAllNodesWithText("İki seansı üst üste kaçırma.").fetchSemanticsNodes().size)
+        cek("06-bugun-yapildi")
+
+        // Kardiyo atlanabilir; ağırlık seansı atlanamaz.
+        tikla("Bu adımı atla")
+        bekle("yapılmadan sıradaki işe")
+        tikla("Atla", kaydir = false)
+        bekle("Seans B")
+        runBlocking { assertEquals(2, depo.dao.ayarlar()!!.siraIndex) }
+        assertEquals(0, kural.onAllNodesWithText("Bu adımı atla").fetchSemanticsNodes().size)
+
+        // "Planımı hatırla" tek dokunuşla açılır.
+        tikla("Planımı hatırla")
+        bekle("Eğer canım tatlı isterse")
+        tikla("Tamam", kaydir = false)
+
+        // "‹ Dün": girişler önceki güne yazılır.
+        tikla("‹ Dün", kaydir = false)
+        bekle("düne (")
+        tikla("+500 ml")
+        kural.waitUntil(15_000) { runBlocking { depo.dao.gun(bugun - 1)?.suMl == 3000 } }
+        runBlocking { assertEquals(500, depo.dao.gun(bugun)!!.suMl) }
+        cek("06b-dun")
+        tikla("Bugün ›", kaydir = false)
+        bekle("Bugün yapıldı: Seans A")
 
         // 4) Beslenme: öğünü tek dokunuşla işaretle; hızlı ekleme listesi açılır.
         sekme("Beslenme")
@@ -195,7 +223,7 @@ class EkranTesti {
         tikla("‹ Ayarlar")
         tikla("Koyu")
         tikla("‹ Geri")
-        bekle("Seans A tamam.")
+        bekle("Bugün yapıldı: Seans A")
         cek("14-bugun-koyu")
         sekme("İlerleme")
         bekle("Sabah, aç karnına.")
@@ -211,7 +239,7 @@ class EkranTesti {
             assertEquals(0, dao.setSayisi(1))
             Yedek.iceAktar(depo.db, json)
             assertEquals(2250, dao.ayarlar()!!.kaloriHedef)
-            assertEquals(1, dao.ayarlar()!!.siraIndex)
+            assertEquals(2, dao.ayarlar()!!.siraIndex)
             assertEquals(setOnce, dao.setSayisi(1))
             // Geçersiz dosya reddedilir ve hiçbir şeyi değiştirmez.
             assertTrue(runCatching { Yedek.iceAktar(depo.db, "{\"uygulama\":\"baska\"}") }.isFailure)
