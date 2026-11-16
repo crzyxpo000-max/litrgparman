@@ -18,6 +18,7 @@ import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.upvotesaver.core.NotSignedInException
 import com.upvotesaver.core.Progress
+import com.upvotesaver.core.RedgifsSignedOutException
 import kotlinx.coroutines.sync.withLock
 import java.io.File
 import java.io.IOException
@@ -29,27 +30,50 @@ class SyncWorker(context: Context, params: WorkerParameters) : CoroutineWorker(c
     override suspend fun doWork(): Result {
         val settings = Graph.settings
         val mode = inputData.getString(KEY_MODE) ?: MODE_AUTO
-        // Redgifs links need no Reddit account; everything else does.
-        if (mode != MODE_LINKS && !settings.signedIn) return Result.success()
+        val redgifsMode = mode == MODE_LINKS || mode == MODE_RG_NEW || mode == MODE_RG_FULL
+        if (mode == MODE_AUTO && !settings.signedIn && !settings.redgifsSignedIn) return Result.success()
+        if (!redgifsMode && mode != MODE_AUTO && !settings.signedIn) return Result.success()
         // Runs started from the screen may take long; a foreground notification keeps them alive.
         // (Not allowed for the background schedule, which only does short checks.)
         if (mode != MODE_AUTO) runCatching { setForeground(foregroundInfo()) }
         return Graph.syncLock.withLock {
             try {
-                if (mode == MODE_LINKS) {
-                    val ids = takeLinks(applicationContext)
-                    return@withLock Result.success(data(Graph.redgifsSaver(applicationContext) { setProgressAsync(data(it)) }.save(ids)))
+                var total = Progress()
+                fun report(p: Progress) {
+                    setProgressAsync(data(Progress(total.scanned + p.scanned, total.saved + p.saved, total.failed + p.failed)))
                 }
-                val engine = Graph.engine(applicationContext) { setProgressAsync(data(it)) }
-                val result = when (mode) {
-                    MODE_FULL -> engine.sync(settings.username, full = true)
-                    MODE_IMPORT -> engine.import(importFile(applicationContext).takeIf { it.exists() }?.readLines().orEmpty())
-                    else -> engine.sync(settings.username, full = false)
+                fun add(p: Progress) {
+                    total = Progress(total.scanned + p.scanned, total.saved + p.saved, total.failed + p.failed)
+                }
+                val saver = Graph.redgifsSaver(applicationContext, ::report)
+                when (mode) {
+                    MODE_LINKS -> add(saver.save(takeLinks(applicationContext)))
+                    MODE_RG_NEW -> add(saver.syncLikes(full = false))
+                    MODE_RG_FULL -> add(saver.syncLikes(full = true))
+                    MODE_FULL -> add(Graph.engine(applicationContext, ::report).sync(settings.username, full = true))
+                    MODE_IMPORT -> add(
+                        Graph.engine(applicationContext, ::report)
+                            .import(importFile(applicationContext).takeIf { it.exists() }?.readLines().orEmpty()),
+                    )
+                    MODE_NEW -> add(Graph.engine(applicationContext, ::report).sync(settings.username, full = false))
+                    else -> {
+                        // The schedule: Reddit upvotes and Redgifs likes, whichever is signed in.
+                        if (settings.signedIn) add(Graph.engine(applicationContext, ::report).sync(settings.username, full = false))
+                        if (settings.redgifsSignedIn) {
+                            try {
+                                add(saver.syncLikes(full = false))
+                            } catch (e: RedgifsSignedOutException) {
+                                // The token expired; the app asks to sign in again when it is opened.
+                            }
+                        }
+                    }
                 }
                 settings.lastSyncMs = System.currentTimeMillis()
-                Result.success(data(result))
+                Result.success(data(total))
             } catch (e: NotSignedInException) {
                 Result.failure(workDataOf(KEY_SIGNED_OUT to true))
+            } catch (e: RedgifsSignedOutException) {
+                Result.failure(workDataOf(KEY_RG_SIGNED_OUT to true))
             } catch (e: IOException) {
                 if (mode == MODE_AUTO) Result.retry() else Result.failure(workDataOf(KEY_ERROR to (e.message ?: "network error")))
             }
@@ -80,6 +104,9 @@ class SyncWorker(context: Context, params: WorkerParameters) : CoroutineWorker(c
         const val MODE_FULL = "full"
         const val MODE_IMPORT = "import"
         const val MODE_LINKS = "links"
+        const val MODE_RG_NEW = "rg_new"
+        const val MODE_RG_FULL = "rg_full"
+        const val KEY_RG_SIGNED_OUT = "rg_signed_out"
         const val WORK_LINKS = "links"
         const val WORK_AUTO = "auto"
         const val WORK_MANUAL = "manual"
@@ -115,7 +142,7 @@ class SyncWorker(context: Context, params: WorkerParameters) : CoroutineWorker(c
         fun schedule(context: Context) {
             val settings = Graph.settings
             val work = WorkManager.getInstance(context)
-            if (!settings.signedIn || settings.intervalMinutes <= 0) {
+            if ((!settings.signedIn && !settings.redgifsSignedIn) || settings.intervalMinutes <= 0) {
                 work.cancelUniqueWork(WORK_AUTO)
                 return
             }

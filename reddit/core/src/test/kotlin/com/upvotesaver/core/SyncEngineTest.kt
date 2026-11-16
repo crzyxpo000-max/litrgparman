@@ -198,6 +198,54 @@ class SyncEngineTest {
         assertTrue(File(tmp.root, "work").list()!!.isEmpty())
     }
 
+    private fun rgGif(id: String) = """{"id":"$id","userName":"u","likes":7,"duration":3.5,"hasAudio":true,"urls":{"hd":"${url("/img/$id.mp4")}","thumbnail":"${url("/img/$id.jpg")}"}}"""
+
+    @Test
+    fun `liked clips are read with the user's token and only new ones are saved`() = runBlocking {
+        var userToken: String? = "user-token"
+        val seen = mutableListOf<String?>()
+        routes["/redgifs/v2/feeds/liked?page=1&count=40"] = { r -> seen += r.getHeader("Authorization"); ok("""{"page":1,"pages":2,"gifs":[${rgGif("l1")},${rgGif("l2")}]}""") }
+        routes["/redgifs/v2/feeds/liked?page=2&count=40"] = { ok("""{"page":2,"pages":2,"gifs":[${rgGif("l3")}]}""") }
+        val http = Http(userAgent = { "test" }, baseBackoffMs = 1)
+        val redgifs = Redgifs(http, url("/redgifs").trimEnd('/'), userToken = { userToken }, onUserTokenRejected = { userToken = null })
+        fun saver() = RedgifsSaver(http, store, { file, name -> saved[name] = file.readText() }, File(tmp.root, "work"), redgifs)
+
+        assertEquals(3, saver().syncLikes(full = true).saved)
+        assertEquals("Bearer user-token", seen.first())
+        assertEquals("image:/img/l3.mp4", saved["redgifs_u_l3.mp4"])
+
+        // Next check: one new like on top; the second page is not read again.
+        saved.clear(); hits.clear()
+        routes["/redgifs/v2/feeds/liked?page=1&count=40"] = { ok("""{"page":1,"pages":2,"gifs":[${rgGif("l0")},${rgGif("l1")}]}""") }
+        routes["/redgifs/v2/feeds/liked?page=2&count=40"] = { ok("""{"page":2,"pages":2,"gifs":[${rgGif("l2")}]}""") }
+        saver().syncLikes(full = false)
+        assertEquals(setOf("redgifs_u_l0.mp4"), saved.keys)
+        saver().syncLikes(full = false)
+        assertTrue("/redgifs/v2/feeds/liked?page=2&count=40" !in hits.drop(1).dropWhile { it != "/redgifs/v2/feeds/liked?page=1&count=40" })
+
+        // A rejected token ends the sign-in instead of looping.
+        routes["/redgifs/v2/feeds/liked?page=1&count=40"] = { MockResponse().setResponseCode(401) }
+        val error = runCatching { saver().syncLikes(full = false) }.exceptionOrNull()
+        assertTrue(error is RedgifsSignedOutException)
+        assertNull(userToken)
+    }
+
+    @Test
+    fun `niches and their clips are listed with a temporary token`() = runBlocking {
+        route("/redgifs/v2/auth/temporary", """{"token":"tok"}""")
+        route("/redgifs/v2/niches/search?order=subscribers&page=1&count=30", """{"niches":[{"id":"cats","name":"Cats","gifs":120,"subscribers":9000,"thumbnail":"t"}]}""")
+        route("/redgifs/v2/niches/search?order=best_match&page=1&count=30&query=dog", """{"niches":[]}""")
+        route("/redgifs/v2/niches/cats/gifs?count=40&page=1&order=best", """{"page":1,"pages":3,"gifs":[${rgGif("N1")},{"id":"broken"}]}""")
+        val redgifs = Redgifs(Http(userAgent = { "test" }, baseBackoffMs = 1), url("/redgifs").trimEnd('/'))
+
+        assertEquals(listOf(RedgifsNiche("cats", "Cats", 120, 9000, "t")), redgifs.niches(""))
+        assertTrue(redgifs.niches(" dog ").isEmpty())
+        val page = redgifs.nicheGifs("cats", "best", 1)
+        assertEquals(listOf("n1"), page.gifs.map { it.id })
+        assertEquals(7, page.gifs[0].likes)
+        assertTrue(page.hasMore)
+    }
+
     @Test
     fun `authorize url carries the scopes and redirect`() {
         val auth = RedditAuth(Http({ "t" }), "cid", "upvotesaver://auth")

@@ -7,6 +7,7 @@ import com.upvotesaver.core.PostStore
 import com.upvotesaver.core.Progress
 import com.upvotesaver.core.RedditApi
 import com.upvotesaver.core.RedditAuth
+import com.upvotesaver.core.Redgifs
 import com.upvotesaver.core.RedgifsSaver
 import com.upvotesaver.core.Session
 import com.upvotesaver.core.SyncEngine
@@ -35,12 +36,24 @@ object Graph {
         "android:com.upvotesaver:v${BuildInfo.VERSION} (by /u/$user)"
     })
 
+    /** Redgifs traffic uses the browser's User-Agent, the one its sign-in token was issued to. */
+    lateinit var redgifsUserAgent: String
+        private set
+    val redgifsHttp = Http(userAgent = { redgifsUserAgent })
+    val redgifs = Redgifs(
+        http = redgifsHttp,
+        userToken = { settings.redgifsToken },
+        onUserTokenRejected = { settings.redgifsToken = null },
+    )
+
     /** Only one run at a time, whether started by hand or by the schedule. */
     val syncLock = Mutex()
 
     fun init(context: Context) {
         settings = Settings(context)
         store = PostStore(File(context.filesDir, "posts.jsonl"))
+        redgifsUserAgent = runCatching { android.webkit.WebSettings.getDefaultUserAgent(context) }
+            .getOrDefault("Mozilla/5.0 (Linux; Android) Mobile")
     }
 
     fun auth() = RedditAuth(http, settings.clientId, REDIRECT_URI)
@@ -58,7 +71,8 @@ object Graph {
     )
 
     fun redgifsSaver(context: Context, onProgress: (Progress) -> Unit) = RedgifsSaver(
-        http = http,
+        http = redgifsHttp,
+        redgifs = redgifs,
         store = store,
         sink = MediaStoreSink(context.applicationContext),
         workDir = File(context.cacheDir, "work"),

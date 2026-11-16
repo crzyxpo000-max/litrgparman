@@ -15,6 +15,20 @@ Page links (`redgifs.com/watch/<id>`, `/ifr/<id>`) and direct file links are rec
 A Reddit post link cannot be used: reading a Reddit post needs the API access described below.
 Redgifs ties its temporary token to the device's network address and User-Agent, so the lookup and the download must come from the same connection.
 
+## Redgifs account and niches
+
+- **Sign in to Redgifs** opens the Redgifs site in an in-app browser. Sign in with email/user name and password
+  (Google sign-in is refused inside apps). The app never sees the password: it notes the bearer token the site
+  itself sends to `api.redgifs.com` and keeps it only if `GET /v1/me` accepts it.
+- **Check for new likes / Download all my likes** read `GET /v2/feeds/liked` and save each clip once.
+  The automatic schedule checks likes too.
+- The token expires. While the app is open the site is loaded out of sight so a refreshed token is picked up;
+  in the background a rejected token stops the likes check until the app is opened (or you sign in again).
+- **Browse niches**: search niches (`GET /v2/niches/search`; blank = most followed), open one, sort its clips
+  (most liked, hot, trending, newest: `GET /v2/niches/{id}/gifs`), tick the ones you want and download.
+
+These routes are the ones the Redgifs site uses; they are not publicly documented and may change.
+
 ## Setup for Reddit upvotes (once)
 
 Since November 2025 Reddit requires approval before a new app may use its API (Responsible Builder Policy);
@@ -57,8 +71,8 @@ Text posts, plain links, and hosts without a Reddit copy (for example YouTube) a
 
 | Module | Contents |
 | --- | --- |
-| `reddit/core` | Pure Kotlin/JVM: `Http` (OkHttp, retries), `RedditAuth` + `Session` (OAuth, token refresh), `RedditApi`, `MediaResolver` + `DashStreams`, `Redgifs` + `RedgifsLinks` + `RedgifsSaver`, `VotesCsv`, `PostStore` (JSON-lines log), `SyncEngine`. |
-| `reddit/app` | Compose UI, `MainViewModel`, `SyncWorker` (WorkManager: schedule and foreground runs), `MediaStoreSink`, `AndroidMuxer` (MediaExtractor → MediaMuxer). English and Turkish strings. |
+| `reddit/core` | Pure Kotlin/JVM: `Http` (OkHttp, retries), `RedditAuth` + `Session` (OAuth, token refresh), `RedditApi`, `MediaResolver` + `DashStreams`, `Redgifs` + `RedgifsLinks` + `RedgifsSaver` (links, likes, niches), `VotesCsv`, `PostStore` (JSON-lines log), `SyncEngine`. |
+| `reddit/app` | Compose UI, `MainViewModel`, `SyncWorker` (WorkManager: schedule and foreground runs), `RedgifsUi` (in-app sign-in, niche browser), `MediaStoreSink`, `AndroidMuxer` (MediaExtractor → MediaMuxer). English and Turkish strings. |
 
 ## Commands
 

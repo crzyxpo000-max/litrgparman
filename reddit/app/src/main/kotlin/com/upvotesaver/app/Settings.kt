@@ -35,6 +35,18 @@ class Settings(context: Context) : TokenStore {
         get() = prefs.getLong("last_sync", 0)
         set(value) = prefs.edit { putLong("last_sync", value) }
 
+    /** The Redgifs user token captured from the in-app sign-in; null when signed out or expired. */
+    var redgifsToken: String?
+        get() = prefs.getString("rg_token", null)
+        set(value) = prefs.edit { putString("rg_token", value) }
+
+    /** The Redgifs user name; stays set when the token expires so the app can ask to sign in again. */
+    var redgifsUser: String
+        get() = prefs.getString("rg_user", "").orEmpty()
+        set(value) = prefs.edit { putString("rg_user", value) }
+
+    val redgifsSignedIn: Boolean get() = redgifsToken != null
+
     val signedIn: Boolean get() = load() != null && username.isNotEmpty()
 
     override fun load(): Tokens? {

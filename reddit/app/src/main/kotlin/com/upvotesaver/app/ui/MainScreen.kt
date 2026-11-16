@@ -79,6 +79,15 @@ fun MainScreen(viewModel: MainViewModel, state: UiState) {
         }
     }
 
+    // Android 13+: ask for the notification permission so a long run can show its progress notification.
+    val askNotifications = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {}
+    val start: (() -> Unit) -> Unit = { action ->
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) askNotifications.launch(Manifest.permission.POST_NOTIFICATIONS)
+        action()
+    }
+    if (state.redgifsLogin) RedgifsLoginDialog(viewModel)
+    state.niches?.let { NicheDialog(viewModel, it) }
+
     Scaffold(
         topBar = { TopAppBar(title = { Text(stringResource(R.string.app_name)) }) },
         snackbarHost = { SnackbarHost(snackbar) },
@@ -88,14 +97,31 @@ fun MainScreen(viewModel: MainViewModel, state: UiState) {
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
+            if (state.running) item { RunningCard(viewModel, state) }
+            item { RedgifsCard(viewModel, state, start) }
             item { LinkCard(viewModel, state) }
+            if (state.signedIn || state.redgifsSignedIn) item { AutoCard(viewModel, state) }
             if (!state.signedIn) {
                 item { SetupCard(viewModel, state, onOpen = { url -> openUrl(context, url, viewModel) }) }
             } else {
-                item { SyncCard(viewModel, state) }
-                item { AutoCard(viewModel, state) }
+                item { SyncCard(viewModel, state, start) }
             }
-            item { Text(stringResource(R.string.recent_title), style = MaterialTheme.typography.titleMedium) }
+            item {
+                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text(stringResource(R.string.recent_title), style = MaterialTheme.typography.titleMedium)
+                    Text(
+                        stringResource(
+                            R.string.stats,
+                            state.counts[Status.DONE] ?: 0, state.counts[Status.FAILED] ?: 0, state.counts[Status.SKIPPED] ?: 0,
+                        ),
+                        style = MaterialTheme.typography.bodySmall,
+                    )
+                    val last = if (state.lastSyncMs == 0L) stringResource(R.string.never)
+                    else DateUtils.getRelativeTimeSpanString(state.lastSyncMs, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS).toString()
+                    Text(stringResource(R.string.last_sync, last), style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.files_location), style = MaterialTheme.typography.bodySmall)
+                }
+            }
             if (state.recent.isEmpty()) {
                 item { Text(stringResource(R.string.recent_empty), style = MaterialTheme.typography.bodyMedium) }
             }
@@ -176,14 +202,25 @@ private fun SetupCard(viewModel: MainViewModel, state: UiState, onOpen: (String)
     }
 }
 
+/** Progress of a run started from the screen (Reddit or Redgifs), with a way to stop it. */
 @Composable
-private fun SyncCard(viewModel: MainViewModel, state: UiState) {
-    // Android 13+: ask for the notification permission so a long run can show its progress notification.
-    val askNotifications = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {}
-    fun start(action: () -> Unit) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) askNotifications.launch(Manifest.permission.POST_NOTIFICATIONS)
-        action()
+private fun RunningCard(viewModel: MainViewModel, state: UiState) {
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            LinearProgressIndicator(Modifier.fillMaxWidth())
+            val p = state.progress
+            Text(
+                if (p == null) stringResource(R.string.waiting_network)
+                else stringResource(R.string.running, p.scanned, p.saved, p.failed),
+                style = MaterialTheme.typography.bodyMedium,
+            )
+            OutlinedButton(onClick = viewModel::cancel) { Text(stringResource(R.string.cancel)) }
+        }
     }
+}
+
+@Composable
+private fun SyncCard(viewModel: MainViewModel, state: UiState, start: (() -> Unit) -> Unit) {
     val pickCsv = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri != null) start { viewModel.importCsv(uri) }
     }
@@ -193,16 +230,7 @@ private fun SyncCard(viewModel: MainViewModel, state: UiState) {
                 Text(stringResource(R.string.signed_in_as, state.username), Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
                 TextButton(onClick = viewModel::signOut) { Text(stringResource(R.string.sign_out)) }
             }
-            if (state.running) {
-                LinearProgressIndicator(Modifier.fillMaxWidth())
-                val p = state.progress
-                Text(
-                    if (p == null) stringResource(R.string.waiting_network)
-                    else stringResource(R.string.running, p.scanned, p.saved, p.failed),
-                    style = MaterialTheme.typography.bodyMedium,
-                )
-                OutlinedButton(onClick = viewModel::cancel) { Text(stringResource(R.string.cancel)) }
-            } else {
+            if (!state.running) {
                 Button(onClick = { start(viewModel::syncNow) }, Modifier.fillMaxWidth()) { Text(stringResource(R.string.sync_now)) }
                 OutlinedButton(onClick = { start(viewModel::scanAll) }, Modifier.fillMaxWidth()) { Text(stringResource(R.string.scan_all)) }
                 OutlinedButton(
@@ -212,17 +240,6 @@ private fun SyncCard(viewModel: MainViewModel, state: UiState) {
                 ) { Text(stringResource(R.string.import_csv)) }
                 Text(stringResource(R.string.scan_all_hint), style = MaterialTheme.typography.bodySmall)
             }
-            Text(
-                stringResource(
-                    R.string.stats,
-                    state.counts[Status.DONE] ?: 0, state.counts[Status.FAILED] ?: 0, state.counts[Status.SKIPPED] ?: 0,
-                ),
-                style = MaterialTheme.typography.bodyMedium,
-            )
-            val last = if (state.lastSyncMs == 0L) stringResource(R.string.never)
-            else DateUtils.getRelativeTimeSpanString(state.lastSyncMs, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS).toString()
-            Text(stringResource(R.string.last_sync, last), style = MaterialTheme.typography.bodySmall)
-            Text(stringResource(R.string.files_location), style = MaterialTheme.typography.bodySmall)
         }
     }
 }
