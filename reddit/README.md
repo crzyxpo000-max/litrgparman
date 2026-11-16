@@ -51,6 +51,8 @@ The app asks for the scopes `identity` (your user name), `history` (your upvoted
 - **Automatic download**: a background check every 15 minutes to once a day (Android may delay it), optionally only on Wi-Fi.
 
 Files go to `Pictures/UpvoteSaver` and `Movies/UpvoteSaver`, named `subreddit_postid_title`.
+With **Hide from gallery** on they go to `Download/UpvoteSaver` instead, which holds a `.nomedia` marker so gallery
+apps skip it; files saved earlier are moved there (and moved back when the switch is turned off).
 Each post is handled once; a failed download is retried on the next runs, three times in total.
 
 ## What is saved

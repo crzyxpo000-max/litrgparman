@@ -55,6 +55,9 @@ data class UiState(
     val running: Boolean = false,
     /** Redgifs links are being downloaded. */
     val linksRunning: Boolean = false,
+    val hideFromGallery: Boolean = false,
+    /** Saved files are being moved after the setting changed. */
+    val moving: Boolean = false,
     /** Null while a started run waits for the network. */
     val progress: Progress? = null,
     val counts: Map<Status, Int> = emptyMap(),
@@ -70,6 +73,17 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     init {
         refresh()
+        viewModelScope.launch {
+            WorkManager.getInstance(app).getWorkInfosForUniqueWorkFlow(SyncWorker.WORK_MOVE).collect { infos ->
+                val info = infos.firstOrNull()
+                val was = _state.value.moving
+                val now = info != null && !info.state.isFinished
+                _state.update { it.copy(moving = now) }
+                if (was && !now && info?.state == WorkInfo.State.FAILED) {
+                    show(Message(R.string.error_generic, info.outputData.getString(SyncWorker.KEY_ERROR).orEmpty()))
+                }
+            }
+        }
         viewModelScope.launch {
             WorkManager.getInstance(app).getWorkInfosForUniqueWorkFlow(SyncWorker.WORK_LINKS).collect { infos ->
                 _state.update { it.copy(linksRunning = infos.any { i -> !i.state.isFinished }) }
@@ -127,6 +141,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             username = settings.username,
             intervalMinutes = settings.intervalMinutes,
             wifiOnly = settings.wifiOnly,
+            hideFromGallery = settings.hideFromGallery,
             counts = Graph.store.counts(),
             recent = Graph.store.recent(50),
             lastSyncMs = settings.lastSyncMs,
@@ -212,6 +227,13 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     fun setInterval(minutes: Int) {
         settings.intervalMinutes = minutes
         SyncWorker.schedule(getApplication())
+        refresh()
+    }
+
+    /** New downloads follow the setting at once; the files saved so far are moved in the background. */
+    fun setHideFromGallery(value: Boolean) {
+        settings.hideFromGallery = value
+        SyncWorker.relocate(getApplication())
         refresh()
     }
 

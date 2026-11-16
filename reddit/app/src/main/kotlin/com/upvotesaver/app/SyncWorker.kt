@@ -30,6 +30,17 @@ class SyncWorker(context: Context, params: WorkerParameters) : CoroutineWorker(c
     override suspend fun doWork(): Result {
         val settings = Graph.settings
         val mode = inputData.getString(KEY_MODE) ?: MODE_AUTO
+        if (mode == MODE_MOVE) {
+            runCatching { setForeground(foregroundInfo()) }
+            return Graph.syncLock.withLock {
+                try {
+                    MediaStoreSink(applicationContext, settings).relocate()
+                    Result.success()
+                } catch (e: Exception) {
+                    Result.failure(workDataOf(KEY_ERROR to (e.message ?: e.javaClass.simpleName)))
+                }
+            }
+        }
         val redgifsMode = mode == MODE_LINKS || mode == MODE_RG_NEW || mode == MODE_RG_FULL
         if (mode == MODE_AUTO && !settings.signedIn && !settings.redgifsSignedIn) return Result.success()
         if (!redgifsMode && mode != MODE_AUTO && !settings.signedIn) return Result.success()
@@ -105,6 +116,8 @@ class SyncWorker(context: Context, params: WorkerParameters) : CoroutineWorker(c
         const val MODE_IMPORT = "import"
         const val MODE_LINKS = "links"
         const val MODE_RG_NEW = "rg_new"
+        const val MODE_MOVE = "move"
+        const val WORK_MOVE = "move"
         const val MODE_RG_FULL = "rg_full"
         const val KEY_RG_SIGNED_OUT = "rg_signed_out"
         const val WORK_LINKS = "links"
@@ -130,6 +143,12 @@ class SyncWorker(context: Context, params: WorkerParameters) : CoroutineWorker(c
                 .setInputData(workDataOf(KEY_MODE to MODE_LINKS))
                 .build()
             WorkManager.getInstance(context).enqueueUniqueWork(WORK_LINKS, ExistingWorkPolicy.APPEND_OR_REPLACE, request)
+        }
+
+        /** Moves the files saved so far to match the "hide from gallery" setting. */
+        fun relocate(context: Context) {
+            val request = OneTimeWorkRequestBuilder<SyncWorker>().setInputData(workDataOf(KEY_MODE to MODE_MOVE)).build()
+            WorkManager.getInstance(context).enqueueUniqueWork(WORK_MOVE, ExistingWorkPolicy.REPLACE, request)
         }
 
         private fun takeLinks(context: Context): List<String> = synchronized(this) {

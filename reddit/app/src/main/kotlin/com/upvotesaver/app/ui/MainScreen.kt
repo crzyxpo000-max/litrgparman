@@ -104,6 +104,7 @@ fun MainScreen(viewModel: MainViewModel, state: UiState) {
             item { RedgifsCard(viewModel, state, start) }
             item { LinkCard(viewModel, state) }
             if (state.signedIn || state.redgifsSignedIn) item { AutoCard(viewModel, state) }
+            item { StorageCard(viewModel, state) }
             if (!state.signedIn) {
                 item { SetupCard(viewModel, state, onOpen = { url -> openUrl(context, url, viewModel) }) }
             } else {
@@ -122,7 +123,6 @@ fun MainScreen(viewModel: MainViewModel, state: UiState) {
                     val last = if (state.lastSyncMs == 0L) stringResource(R.string.never)
                     else DateUtils.getRelativeTimeSpanString(state.lastSyncMs, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS).toString()
                     Text(stringResource(R.string.last_sync, last), style = MaterialTheme.typography.bodySmall)
-                    Text(stringResource(R.string.files_location), style = MaterialTheme.typography.bodySmall)
                 }
             }
             if (state.recent.isEmpty()) {
@@ -243,6 +243,27 @@ private fun SyncCard(viewModel: MainViewModel, state: UiState, start: (() -> Uni
                 ) { Text(stringResource(R.string.import_csv)) }
                 Text(stringResource(R.string.scan_all_hint), style = MaterialTheme.typography.bodySmall)
             }
+        }
+    }
+}
+
+/** Where files go, and the switch that keeps them out of gallery apps. */
+@Composable
+private fun StorageCard(viewModel: MainViewModel, state: UiState) {
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(stringResource(R.string.hide_title), Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
+                Switch(checked = state.hideFromGallery, onCheckedChange = viewModel::setHideFromGallery, enabled = !state.moving)
+            }
+            if (state.moving) {
+                LinearProgressIndicator(Modifier.fillMaxWidth())
+                Text(stringResource(R.string.hide_moving), style = MaterialTheme.typography.bodySmall)
+            }
+            Text(
+                stringResource(if (state.hideFromGallery) R.string.hide_on else R.string.files_location),
+                style = MaterialTheme.typography.bodySmall,
+            )
         }
     }
 }

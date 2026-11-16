@@ -31,6 +31,11 @@ class Settings(context: Context) : TokenStore {
         get() = prefs.getBoolean("wifi_only", true)
         set(value) = prefs.edit { putBoolean("wifi_only", value) }
 
+    /** Save to a folder that gallery apps skip instead of Pictures/Movies. */
+    var hideFromGallery: Boolean
+        get() = prefs.getBoolean("hide_from_gallery", false)
+        set(value) = prefs.edit { putBoolean("hide_from_gallery", value) }
+
     var lastSyncMs: Long
         get() = prefs.getLong("last_sync", 0)
         set(value) = prefs.edit { putLong("last_sync", value) }

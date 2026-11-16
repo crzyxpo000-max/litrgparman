@@ -64,7 +64,7 @@ object Graph {
         api = api(),
         http = http,
         store = store,
-        sink = MediaStoreSink(context.applicationContext),
+        sink = MediaStoreSink(context.applicationContext, settings),
         muxer = AndroidMuxer,
         workDir = File(context.cacheDir, "work"),
         onProgress = onProgress,
@@ -74,7 +74,7 @@ object Graph {
         http = redgifsHttp,
         redgifs = redgifs,
         store = store,
-        sink = MediaStoreSink(context.applicationContext),
+        sink = MediaStoreSink(context.applicationContext, settings),
         workDir = File(context.cacheDir, "work"),
         onProgress = onProgress,
     )
