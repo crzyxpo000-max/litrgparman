@@ -176,6 +176,7 @@ class RedgifsSaver(
 
     /** Saves the clips with these ids (from shared links or picked in a niche). */
     suspend fun save(ids: List<String>): Progress = withContext(Dispatchers.IO) {
+        progress = Progress()
         for (id in ids) {
             // A clip that was already saved is not downloaded again.
             if (store.get(key(id))?.status == Status.DONE) {
@@ -193,6 +194,7 @@ class RedgifsSaver(
      * [full] reads every page; otherwise it stops at the first page with nothing new.
      */
     suspend fun syncLikes(full: Boolean): Progress = withContext(Dispatchers.IO) {
+        progress = Progress()
         var page = 1
         while (true) {
             val result = redgifs.liked(page)
