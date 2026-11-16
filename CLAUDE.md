@@ -25,6 +25,11 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 Oyundan bağımsız küçük bir Android uygulaması (webnovel → EPUB): `:scraper:core` (saf Kotlin/JVM) ve `:scraper:app` (Compose).
 Oyun kuralları ona uygulanmaz; ayrıntı `scraper/README.md`. Komutlar: `./gradlew :scraper:core:test :scraper:app:assembleDebug`.
 
+## Ayrı uygulama: Upvote Saver (`reddit/`)
+
+Oyundan bağımsız ikinci küçük Android uygulaması (Reddit'te beğenilen medyayı indirir): `:reddit:core` (saf Kotlin/JVM) ve `:reddit:app` (Compose, WorkManager).
+Oyun kuralları ona uygulanmaz; ayrıntı `reddit/README.md`. Komutlar: `./gradlew :reddit:core:test :reddit:app:assembleDebug`.
+
 ## Komutlar
 
 ```bash

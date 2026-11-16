@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Upvote Saver</string>
+
+    <string name="setup_title">Reddit hesabını bağla</string>
+    <string name="setup_steps">1. Reddit\'in uygulama sayfasını aç ve “create another app” seçeneğine dokun.\n2. Tür olarak “installed app” seç, istediğin adı ver.\n3. Aşağıdaki yönlendirme adresini “redirect uri” alanına yapıştır.\n4. Uygulamayı oluştur, adının altında görünen kimliği buradaki alana kopyala.</string>
+    <string name="open_reddit_apps">Reddit\'in uygulama sayfasını aç</string>
+    <string name="redirect_uri">Yönlendirme adresi</string>
+    <string name="copy">Kopyala</string>
+    <string name="copied">Kopyalandı</string>
+    <string name="client_id">Uygulama kimliği (client ID)</string>
+    <string name="sign_in">Reddit ile giriş yap</string>
+    <string name="signing_in">Giriş yapılıyor…</string>
+    <string name="sign_out">Çıkış yap</string>
+    <string name="signed_in_as">Giriş yapıldı: u/%s</string>
+    <string name="error_no_browser">Giriş sayfasını açacak bir tarayıcı bulunamadı.</string>
+    <string name="error_auth_denied">Reddit erişim vermedi (%s).</string>
+    <string name="error_auth_state">Giriş yanıtı bu istekle eşleşmedi. Yeniden dene.</string>
+    <string name="error_generic">Bir sorun oluştu: %s</string>
+    <string name="error_signed_out">Reddit bu girişi artık kabul etmiyor. Yeniden giriş yap.</string>
+
+    <string name="sync_now">Yeni beğenileri denetle</string>
+    <string name="scan_all">Tüm geçmiş beğenileri tara</string>
+    <string name="scan_all_hint">Reddit yaklaşık son 1.000 beğenini listeler. Daha eskileri için reddit.com/settings/data-request adresinden verilerini iste ve içindeki post_votes.csv dosyasını içe aktar.</string>
+    <string name="import_csv">post_votes.csv içe aktar</string>
+    <string name="import_empty">Bu dosyada beğenilmiş gönderi bulunamadı.</string>
+    <string name="cancel">İptal</string>
+    <string name="running">Çalışıyor… %1$d denetlendi, %2$d kaydedildi, %3$d başarısız</string>
+    <string name="waiting_network">Ağ bağlantısı bekleniyor…</string>
+    <string name="stats">%1$d kaydedildi · %2$d başarısız · %3$d gönderide kaydedilecek bir şey yok</string>
+    <string name="last_sync">Son denetim: %s</string>
+    <string name="never">hiç</string>
+    <string name="files_location">Dosyalar Pictures/UpvoteSaver ve Movies/UpvoteSaver klasörlerine kaydedilir.</string>
+
+    <string name="auto_title">Otomatik indirme</string>
+    <string name="interval_off">Kapalı</string>
+    <string name="interval_15m">15 dk</string>
+    <string name="interval_1h">1 saat</string>
+    <string name="interval_6h">6 saat</string>
+    <string name="interval_24h">Günlük</string>
+    <string name="auto_hint">Tam zamanı Android belirler; pil tasarrufu için denetimi geciktirebilir.</string>
+    <string name="wifi_only">Yalnızca Wi-Fi ile</string>
+
+    <string name="recent_title">Son gönderiler</string>
+    <string name="recent_empty">Henüz bir şey yok.</string>
+    <string name="status_done">Kaydedildi (%d)</string>
+    <string name="status_failed">Başarısız</string>
+    <string name="status_skipped">Kaydedilecek bir şey yok</string>
+
+    <string name="channel_sync">İndirmeler</string>
+    <string name="notification_title">Beğenilen medya kaydediliyor</string>
+</resources>

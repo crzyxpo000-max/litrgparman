@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Upvote Saver</string>
+
+    <string name="setup_title">Connect your Reddit account</string>
+    <string name="setup_steps">1. Open Reddit\'s app page and choose “create another app”.\n2. Pick the type “installed app” and give it any name.\n3. Paste the redirect URI below into “redirect uri”.\n4. Create the app, then copy the ID shown under its name into the field here.</string>
+    <string name="open_reddit_apps">Open Reddit\'s app page</string>
+    <string name="redirect_uri">Redirect URI</string>
+    <string name="copy">Copy</string>
+    <string name="copied">Copied</string>
+    <string name="client_id">App ID (client ID)</string>
+    <string name="sign_in">Sign in with Reddit</string>
+    <string name="signing_in">Signing in…</string>
+    <string name="sign_out">Sign out</string>
+    <string name="signed_in_as">Signed in as u/%s</string>
+    <string name="error_no_browser">No browser found to open the sign-in page.</string>
+    <string name="error_auth_denied">Reddit did not grant access (%s).</string>
+    <string name="error_auth_state">The sign-in answer did not match this request. Try again.</string>
+    <string name="error_generic">Something went wrong: %s</string>
+    <string name="error_signed_out">Reddit no longer accepts this sign-in. Sign in again.</string>
+
+    <string name="sync_now">Check for new upvotes</string>
+    <string name="scan_all">Scan all past upvotes</string>
+    <string name="scan_all_hint">Reddit lists about your last 1,000 upvotes. For older ones, request your data at reddit.com/settings/data-request and import post_votes.csv from it.</string>
+    <string name="import_csv">Import post_votes.csv</string>
+    <string name="import_empty">No upvoted posts found in that file.</string>
+    <string name="cancel">Cancel</string>
+    <string name="running">Working… %1$d checked, %2$d saved, %3$d failed</string>
+    <string name="waiting_network">Waiting for a network connection…</string>
+    <string name="stats">%1$d saved · %2$d failed · %3$d with nothing to save</string>
+    <string name="last_sync">Last check: %s</string>
+    <string name="never">never</string>
+    <string name="files_location">Files go to Pictures/UpvoteSaver and Movies/UpvoteSaver.</string>
+
+    <string name="auto_title">Automatic download</string>
+    <string name="interval_off">Off</string>
+    <string name="interval_15m">15 min</string>
+    <string name="interval_1h">1 hour</string>
+    <string name="interval_6h">6 hours</string>
+    <string name="interval_24h">Daily</string>
+    <string name="auto_hint">Android decides the exact time and may delay checks to save battery.</string>
+    <string name="wifi_only">Only on Wi-Fi</string>
+
+    <string name="recent_title">Recent posts</string>
+    <string name="recent_empty">Nothing yet.</string>
+    <string name="status_done">Saved (%d)</string>
+    <string name="status_failed">Failed</string>
+    <string name="status_skipped">Nothing to save</string>
+
+    <string name="channel_sync">Downloads</string>
+    <string name="notification_title">Saving upvoted media</string>
+</resources>
