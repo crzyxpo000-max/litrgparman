@@ -176,7 +176,15 @@ class RedgifsSaver(
 
     /** Saves the clips with these ids (from shared links or picked in a niche). */
     suspend fun save(ids: List<String>): Progress = withContext(Dispatchers.IO) {
-        for (id in ids) saveOne(id) { redgifs.clip(id) }
+        for (id in ids) {
+            // A clip that was already saved is not downloaded again.
+            if (store.get(key(id))?.status == Status.DONE) {
+                progress = progress.copy(scanned = progress.scanned + 1)
+                onProgress(progress)
+            } else {
+                saveOne(id) { redgifs.clip(id) }
+            }
+        }
         progress
     }
 

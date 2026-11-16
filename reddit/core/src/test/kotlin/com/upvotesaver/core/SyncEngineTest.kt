@@ -195,6 +195,12 @@ class SyncEngineTest {
         assertEquals("image:/img/abc.mp4", saved["redgifs_maker_abc.mp4"])
         assertEquals("https://www.redgifs.com/watch/abc", store.get("rg_abc")?.permalink)
         assertEquals("clip no longer exists", store.get("rg_gone")?.note)
+
+        // Asking for the same clip again does not download it a second time.
+        saved.clear(); hits.clear()
+        val again = saver.save(listOf("abc"))
+        assertEquals(0, again.saved)
+        assertTrue(saved.isEmpty() && hits.isEmpty())
         assertTrue(File(tmp.root, "work").list()!!.isEmpty())
     }
 

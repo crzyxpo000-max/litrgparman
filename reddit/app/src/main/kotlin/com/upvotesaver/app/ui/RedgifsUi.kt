@@ -70,6 +70,7 @@ import com.upvotesaver.app.R
 import com.upvotesaver.app.UiState
 import com.upvotesaver.core.Redgifs
 import com.upvotesaver.core.RedgifsGif
+import com.upvotesaver.core.Status
 
 private const val REDGIFS_URL = "https://www.redgifs.com/"
 
@@ -308,6 +309,9 @@ private fun GifRow(gif: RedgifsGif, selected: Boolean, onToggle: () -> Unit) {
                     if (gif.hasAudio) " · " + stringResource(R.string.gif_sound) else "",
                 style = MaterialTheme.typography.bodySmall,
             )
+            if (Graph.store.get("rg_${gif.id}")?.status == Status.DONE) {
+                Text(stringResource(R.string.gif_saved), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+            }
         }
         Checkbox(checked = selected, onCheckedChange = { onToggle() })
     }
