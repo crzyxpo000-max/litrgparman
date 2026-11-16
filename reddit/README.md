@@ -7,7 +7,18 @@ in this repository (its own `applicationId`, `com.upvotesaver`) and shares only 
 Only Reddit's official OAuth API is used, with your own app registration. Follow Reddit's API terms;
 the app is meant for one person's own upvotes.
 
-## Setup (once)
+## Redgifs links (no account needed)
+
+Paste a Redgifs link into the **Redgifs link** card, or use **Share** in another app and pick Upvote Saver.
+The clip's HD file (with sound) is saved as `redgifs_<poster>_<id>.mp4` in `Movies/UpvoteSaver`.
+Page links (`redgifs.com/watch/<id>`, `/ifr/<id>`) and direct file links are recognised; several links in one text all download.
+A Reddit post link cannot be used: reading a Reddit post needs the API access described below.
+Redgifs ties its temporary token to the device's network address and User-Agent, so the lookup and the download must come from the same connection.
+
+## Setup for Reddit upvotes (once)
+
+Since November 2025 Reddit requires approval before a new app may use its API (Responsible Builder Policy);
+until the request is approved, sign-in does not work.
 
 1. On the phone open <https://www.reddit.com/prefs/apps> and choose **create another app**.
 2. Type: **installed app**. Name: anything. Redirect URI: `upvotesaver://auth`.
@@ -46,7 +57,7 @@ Text posts, plain links, and hosts without a Reddit copy (for example YouTube) a
 
 | Module | Contents |
 | --- | --- |
-| `reddit/core` | Pure Kotlin/JVM: `Http` (OkHttp, retries), `RedditAuth` + `Session` (OAuth, token refresh), `RedditApi`, `MediaResolver` + `DashStreams`, `Redgifs`, `VotesCsv`, `PostStore` (JSON-lines log), `SyncEngine`. |
+| `reddit/core` | Pure Kotlin/JVM: `Http` (OkHttp, retries), `RedditAuth` + `Session` (OAuth, token refresh), `RedditApi`, `MediaResolver` + `DashStreams`, `Redgifs` + `RedgifsLinks` + `RedgifsSaver`, `VotesCsv`, `PostStore` (JSON-lines log), `SyncEngine`. |
 | `reddit/app` | Compose UI, `MainViewModel`, `SyncWorker` (WorkManager: schedule and foreground runs), `MediaStoreSink`, `AndroidMuxer` (MediaExtractor → MediaMuxer). English and Turkish strings. |
 
 ## Commands

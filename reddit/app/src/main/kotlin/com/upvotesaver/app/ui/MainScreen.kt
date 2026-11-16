@@ -43,7 +43,11 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -84,18 +88,20 @@ fun MainScreen(viewModel: MainViewModel, state: UiState) {
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
+            item { LinkCard(viewModel, state) }
             if (!state.signedIn) {
                 item { SetupCard(viewModel, state, onOpen = { url -> openUrl(context, url, viewModel) }) }
             } else {
                 item { SyncCard(viewModel, state) }
                 item { AutoCard(viewModel, state) }
-                item { Text(stringResource(R.string.recent_title), style = MaterialTheme.typography.titleMedium) }
-                if (state.recent.isEmpty()) {
-                    item { Text(stringResource(R.string.recent_empty), style = MaterialTheme.typography.bodyMedium) }
-                }
-                items(state.recent, key = { it.id }) { record ->
-                    PostRow(record, onClick = { openUrl(context, "https://www.reddit.com${record.permalink}", viewModel) })
-                }
+            }
+            item { Text(stringResource(R.string.recent_title), style = MaterialTheme.typography.titleMedium) }
+            if (state.recent.isEmpty()) {
+                item { Text(stringResource(R.string.recent_empty), style = MaterialTheme.typography.bodyMedium) }
+            }
+            items(state.recent, key = { it.id }) { record ->
+                val url = if (record.permalink.startsWith("http")) record.permalink else "https://www.reddit.com${record.permalink}"
+                PostRow(record, onClick = { openUrl(context, url, viewModel) })
             }
         }
     }
@@ -109,12 +115,37 @@ private fun openUrl(context: Context, url: String, viewModel: MainViewModel) {
     }
 }
 
+/** Paste a Redgifs link (or share one to the app) to save the clip with its sound. Needs no account. */
+@Composable
+private fun LinkCard(viewModel: MainViewModel, state: UiState) {
+    var text by rememberSaveable { mutableStateOf("") }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text(stringResource(R.string.links_title), style = MaterialTheme.typography.titleMedium)
+            Text(stringResource(R.string.links_hint), style = MaterialTheme.typography.bodySmall)
+            OutlinedTextField(
+                value = text,
+                onValueChange = { text = it },
+                label = { Text(stringResource(R.string.links_field)) },
+                maxLines = 3,
+                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false),
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Button(onClick = { if (viewModel.saveLinks(text)) text = "" }, enabled = text.isNotBlank()) {
+                Text(stringResource(R.string.links_download))
+            }
+            if (state.linksRunning) LinearProgressIndicator(Modifier.fillMaxWidth())
+        }
+    }
+}
+
 @Composable
 private fun SetupCard(viewModel: MainViewModel, state: UiState, onOpen: (String) -> Unit) {
     val context = LocalContext.current
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Text(stringResource(R.string.setup_title), style = MaterialTheme.typography.titleLarge)
+            Text(stringResource(R.string.setup_approval), style = MaterialTheme.typography.bodySmall)
             Text(stringResource(R.string.setup_steps), style = MaterialTheme.typography.bodyMedium)
             OutlinedButton(onClick = { onOpen(REDDIT_APPS_URL) }) { Text(stringResource(R.string.open_reddit_apps)) }
             Row(verticalAlignment = Alignment.CenterVertically) {

@@ -35,7 +35,12 @@ class MainActivity : ComponentActivity() {
         viewModel.refresh()
     }
 
+    /** Reddit's sign-in redirect, or text shared from another app (a Redgifs link). */
     private fun handleRedirect(intent: Intent?) {
+        if (intent?.action == Intent.ACTION_SEND) {
+            intent.getStringExtra(Intent.EXTRA_TEXT)?.let { viewModel.saveLinks(it) }
+            return
+        }
         val uri = intent?.data ?: return
         if (intent.action == Intent.ACTION_VIEW && uri.scheme == "upvotesaver") viewModel.onAuthRedirect(uri)
     }

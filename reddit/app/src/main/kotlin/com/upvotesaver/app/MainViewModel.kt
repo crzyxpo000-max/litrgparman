@@ -8,6 +8,7 @@ import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.upvotesaver.core.PostRecord
 import com.upvotesaver.core.Progress
+import com.upvotesaver.core.RedgifsLinks
 import com.upvotesaver.core.Status
 import com.upvotesaver.core.VotesCsv
 import kotlinx.coroutines.CancellationException
@@ -30,6 +31,8 @@ data class UiState(
     val intervalMinutes: Int = 60,
     val wifiOnly: Boolean = true,
     val running: Boolean = false,
+    /** Redgifs links are being downloaded. */
+    val linksRunning: Boolean = false,
     /** Null while a started run waits for the network. */
     val progress: Progress? = null,
     val counts: Map<Status, Int> = emptyMap(),
@@ -45,6 +48,12 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     init {
         refresh()
+        viewModelScope.launch {
+            WorkManager.getInstance(app).getWorkInfosForUniqueWorkFlow(SyncWorker.WORK_LINKS).collect { infos ->
+                _state.update { it.copy(linksRunning = infos.any { i -> !i.state.isFinished }) }
+                refresh()
+            }
+        }
         viewModelScope.launch {
             WorkManager.getInstance(app).getWorkInfosForUniqueWorkFlow(SyncWorker.WORK_MANUAL).collect { infos ->
                 val info = infos.firstOrNull()
@@ -67,6 +76,21 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 refresh()
             }
         }
+    }
+
+    /**
+     * Downloads the Redgifs clips linked in [text] (pasted, or shared from another app).
+     * Returns false when the text has no Redgifs link.
+     */
+    fun saveLinks(text: String): Boolean {
+        val ids = RedgifsLinks.ids(text)
+        if (ids.isEmpty()) {
+            show(Message(if ("reddit.com" in text || "redd.it" in text) R.string.links_reddit else R.string.links_none))
+            return false
+        }
+        SyncWorker.saveLinks(getApplication(), ids)
+        show(Message(R.string.links_started, ids.size.toString()))
+        return true
     }
 
     /** Re-reads settings and the post log (the background schedule may have changed them). */

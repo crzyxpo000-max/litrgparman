@@ -7,6 +7,7 @@ import com.upvotesaver.core.PostStore
 import com.upvotesaver.core.Progress
 import com.upvotesaver.core.RedditApi
 import com.upvotesaver.core.RedditAuth
+import com.upvotesaver.core.RedgifsSaver
 import com.upvotesaver.core.Session
 import com.upvotesaver.core.SyncEngine
 import kotlinx.coroutines.sync.Mutex
@@ -52,6 +53,14 @@ object Graph {
         store = store,
         sink = MediaStoreSink(context.applicationContext),
         muxer = AndroidMuxer,
+        workDir = File(context.cacheDir, "work"),
+        onProgress = onProgress,
+    )
+
+    fun redgifsSaver(context: Context, onProgress: (Progress) -> Unit) = RedgifsSaver(
+        http = http,
+        store = store,
+        sink = MediaStoreSink(context.applicationContext),
         workDir = File(context.cacheDir, "work"),
         onProgress = onProgress,
     )

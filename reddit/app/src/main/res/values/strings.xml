@@ -2,6 +2,15 @@
 <resources>
     <string name="app_name">Upvote Saver</string>
 
+    <string name="links_title">Redgifs link</string>
+    <string name="links_hint">Paste a Redgifs link, or use “Share” in another app and pick Upvote Saver. The clip is saved with its sound. No account needed.</string>
+    <string name="links_field">Link</string>
+    <string name="links_download">Download</string>
+    <string name="links_started">Download started (%s).</string>
+    <string name="links_none">No Redgifs link found in that text.</string>
+    <string name="links_reddit">That is a Reddit link. Reddit posts cannot be read until Reddit approves the app; open the clip on Redgifs and share it from there.</string>
+    <string name="setup_approval">Automatic download of your upvotes needs Reddit\'s approval for API access first.</string>
+
     <string name="setup_title">Connect your Reddit account</string>
     <string name="setup_steps">1. Open Reddit\'s app page and choose “create another app”.\n2. Pick the type “installed app” and give it any name.\n3. Paste the redirect URI below into “redirect uri”.\n4. Create the app, then copy the ID shown under its name into the field here.</string>
     <string name="open_reddit_apps">Open Reddit\'s app page</string>

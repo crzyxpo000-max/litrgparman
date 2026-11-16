@@ -28,13 +28,18 @@ class SyncWorker(context: Context, params: WorkerParameters) : CoroutineWorker(c
 
     override suspend fun doWork(): Result {
         val settings = Graph.settings
-        if (!settings.signedIn) return Result.success()
         val mode = inputData.getString(KEY_MODE) ?: MODE_AUTO
+        // Redgifs links need no Reddit account; everything else does.
+        if (mode != MODE_LINKS && !settings.signedIn) return Result.success()
         // Runs started from the screen may take long; a foreground notification keeps them alive.
         // (Not allowed for the background schedule, which only does short checks.)
         if (mode != MODE_AUTO) runCatching { setForeground(foregroundInfo()) }
         return Graph.syncLock.withLock {
             try {
+                if (mode == MODE_LINKS) {
+                    val ids = takeLinks(applicationContext)
+                    return@withLock Result.success(data(Graph.redgifsSaver(applicationContext) { setProgressAsync(data(it)) }.save(ids)))
+                }
                 val engine = Graph.engine(applicationContext) { setProgressAsync(data(it)) }
                 val result = when (mode) {
                     MODE_FULL -> engine.sync(settings.username, full = true)
@@ -74,6 +79,8 @@ class SyncWorker(context: Context, params: WorkerParameters) : CoroutineWorker(c
         const val MODE_NEW = "new"
         const val MODE_FULL = "full"
         const val MODE_IMPORT = "import"
+        const val MODE_LINKS = "links"
+        const val WORK_LINKS = "links"
         const val WORK_AUTO = "auto"
         const val WORK_MANUAL = "manual"
         private const val CHANNEL = "sync"
@@ -85,6 +92,24 @@ class SyncWorker(context: Context, params: WorkerParameters) : CoroutineWorker(c
 
         /** Post ids waiting for an import run (too many to pass as work input). */
         fun importFile(context: Context) = File(context.filesDir, "import_ids.txt")
+
+        private fun linkFile(context: Context) = File(context.filesDir, "link_ids.txt")
+
+        /** Queues Redgifs clips for download; a run that is already going is followed by another. */
+        fun saveLinks(context: Context, ids: List<String>) {
+            synchronized(this) { linkFile(context).appendText(ids.joinToString("\n", postfix = "\n")) }
+            val request = OneTimeWorkRequestBuilder<SyncWorker>()
+                .setConstraints(Constraints(NetworkType.CONNECTED))
+                .setInputData(workDataOf(KEY_MODE to MODE_LINKS))
+                .build()
+            WorkManager.getInstance(context).enqueueUniqueWork(WORK_LINKS, ExistingWorkPolicy.APPEND_OR_REPLACE, request)
+        }
+
+        private fun takeLinks(context: Context): List<String> = synchronized(this) {
+            val file = linkFile(context)
+            if (!file.exists()) return emptyList()
+            file.readLines().filter { it.isNotBlank() }.distinct().also { file.delete() }
+        }
 
         /** Turns the periodic check on or off according to the settings. */
         fun schedule(context: Context) {
@@ -111,6 +136,7 @@ class SyncWorker(context: Context, params: WorkerParameters) : CoroutineWorker(c
 
         fun cancel(context: Context) {
             WorkManager.getInstance(context).cancelUniqueWork(WORK_MANUAL)
+            WorkManager.getInstance(context).cancelUniqueWork(WORK_LINKS)
         }
     }
 }

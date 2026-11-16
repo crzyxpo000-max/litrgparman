@@ -173,6 +173,32 @@ class SyncEngineTest {
     }
 
     @Test
+    fun `redgifs links are found in shared text`() {
+        val text = "look https://www.redgifs.com/watch/HappyCat?rel=x and https://v3.redgifs.com/ifr/sadDog, " +
+            "https://media.redgifs.com/BigBird-mobile.mp4 https://i.redgifs.com/i/tinyfox.jpg https://redgifs.com/watch/happycat " +
+            "https://www.reddit.com/r/a/s/xyz https://notredgifs.com/watch/nope https://www.redgifs.com/users/someone"
+        assertEquals(listOf("happycat", "saddog", "bigbird", "tinyfox"), RedgifsLinks.ids(text))
+    }
+
+    @Test
+    fun `shared redgifs clip is saved under the poster's name and a missing one is recorded`() = runBlocking {
+        route("/redgifs/v2/auth/temporary", """{"token":"tok"}""")
+        route("/redgifs/v2/gifs/abc", """{"gif":{"userName":"maker","urls":{"sd":"${url("/img/abc-mobile.mp4")}","hd":"${url("/img/abc.mp4")}"}}}""")
+        val http = Http(userAgent = { "test" }, baseBackoffMs = 1)
+        val saver = RedgifsSaver(http, store, { file, name -> saved[name] = file.readText() }, File(tmp.root, "work"),
+            Redgifs(http, url("/redgifs").trimEnd('/')))
+
+        val result = saver.save(listOf("abc", "gone"))
+
+        assertEquals(1, result.saved)
+        assertEquals(1, result.failed)
+        assertEquals("image:/img/abc.mp4", saved["redgifs_maker_abc.mp4"])
+        assertEquals("https://www.redgifs.com/watch/abc", store.get("rg_abc")?.permalink)
+        assertEquals("clip no longer exists", store.get("rg_gone")?.note)
+        assertTrue(File(tmp.root, "work").list()!!.isEmpty())
+    }
+
+    @Test
     fun `authorize url carries the scopes and redirect`() {
         val auth = RedditAuth(Http({ "t" }), "cid", "upvotesaver://auth")
         assertEquals(
