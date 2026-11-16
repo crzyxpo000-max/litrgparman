@@ -85,7 +85,10 @@ fun MainScreen(viewModel: MainViewModel, state: UiState) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) askNotifications.launch(Manifest.permission.POST_NOTIFICATIONS)
         action()
     }
-    if (state.redgifsLogin) RedgifsLoginDialog(viewModel)
+    if (state.redgifsLogin) {
+        RedgifsLoginScreen(viewModel)
+        return
+    }
     state.niches?.let { NicheDialog(viewModel, it) }
 
     Scaffold(
