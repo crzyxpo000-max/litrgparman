@@ -136,6 +136,7 @@ private fun row(vararg parts: java.awt.Component) = JPanel(FlowLayout(FlowLayout
 private class DownloadTab(private val app: App) {
     private val account = JLabel()
     private val signIn = JButton(t("Sign in to Redgifs", "Redgifs'e giriş yap")).apply { addActionListener { app.signIn() } }
+    private val signedIn = JButton(t("I have signed in", "Giriş yaptım")).apply { addActionListener { app.confirmSignIn() } }
     private val signOut = JButton(t("Sign out", "Çıkış yap")).apply { addActionListener { app.signOut() } }
     private val newLikes = JButton(t("Check for new likes", "Yeni beğenileri denetle")).apply { addActionListener { app.syncLikes(false) } }
     private val allLikes = JButton(t("Download all my likes", "Tüm beğenilerimi indir")).apply { addActionListener { app.syncLikes(true) } }
@@ -158,7 +159,7 @@ private class DownloadTab(private val app: App) {
         val top = JPanel().apply {
             layout = BoxLayout(this, BoxLayout.Y_AXIS)
             border = BorderFactory.createEmptyBorder(8, 8, 4, 8)
-            add(row(account, signIn, signOut))
+            add(row(account, signIn, signedIn, signOut))
             add(row(newLikes, allLikes))
             add(row(JLabel(t("Redgifs link:", "Redgifs bağlantısı:")), link, send))
             add(row(counts))
@@ -187,7 +188,9 @@ private class DownloadTab(private val app: App) {
             else -> t("Not signed in", "Giriş yapılmadı")
         }
         signOut.isVisible = s.user.isNotEmpty()
-        signIn.isVisible = !app.signedIn
+        val waiting = app.signInWaiting != null
+        signIn.isVisible = !app.signedIn && !waiting
+        signedIn.isVisible = waiting
         newLikes.isEnabled = s.user.isNotEmpty()
         allLikes.isEnabled = s.user.isNotEmpty()
         val c = app.store.counts()

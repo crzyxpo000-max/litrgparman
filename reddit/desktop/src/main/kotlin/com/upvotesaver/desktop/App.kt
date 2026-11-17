@@ -9,6 +9,7 @@ import com.upvotesaver.core.RedgifsLinks
 import com.upvotesaver.core.RedgifsSaver
 import com.upvotesaver.core.RedgifsSignedOutException
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -136,12 +137,41 @@ class App(val dir: File = DesktopSettings.dataDir()) {
         summary(saver().save(ids))
     }
 
-    /** Opens the browser for the user to sign in to Redgifs. */
+    /** Set while the sign-in browser is open; the window then offers a "I have signed in" button. */
+    @Volatile
+    var signInWaiting: CompletableDeferred<Unit>? = null
+        private set
+
+    /** The user says the sign-in is done (for browsers that keep running after their window is closed). */
+    fun confirmSignIn() { signInWaiting?.complete(Unit) }
+
+    /**
+     * Sign-in in two steps. First an ordinary browser window, with nothing attached, where the user
+     * signs in and then closes the window. Then the same profile is opened briefly to read the token
+     * the site now uses.
+     */
     fun signIn() = run {
-        onStatus(t("Sign in to Redgifs in the browser window. It closes by itself.", "Açılan tarayıcıda Redgifs'e giriş yap. Pencere kendiliğinden kapanır."), true)
-        val token = login.capture(headless = false, userAgent = null, timeoutMs = 15 * 60_000L, accept = ::accept)
+        val waiting = CompletableDeferred<Unit>()
+        val process = login.open()
+        signInWaiting = waiting
+        onChanged()
+        onStatus(t("Sign in to Redgifs in the browser, then close the browser window.",
+            "Tarayıcıda Redgifs'e giriş yap, sonra tarayıcı penceresini kapat."), true)
+        try {
+            while (process.isAlive && !waiting.isCompleted) delay(500)
+            // Give the browser a moment to write its session before it is closed for good.
+            if (process.isAlive) { delay(3_000); process.destroy() }
+        } finally {
+            signInWaiting = null
+            if (process.isAlive) process.destroy()
+            onChanged()
+        }
+        delay(1_500)
+        onStatus(t("Reading the sign-in… (a browser window opens for a moment)", "Giriş okunuyor… (bir tarayıcı penceresi kısa süre açılır)"), true)
+        val token = login.capture(headless = false, userAgent = null, timeoutMs = 60_000L, accept = ::accept)
         if (token != null) t("Signed in as ${settings.user}.", "Giriş yapıldı: ${settings.user}.")
-        else t("Sign-in was not completed.", "Giriş tamamlanmadı.")
+        else t("No sign-in was found. Sign in, close the browser window and try again.",
+            "Giriş bulunamadı. Giriş yap, tarayıcı penceresini kapat ve yeniden dene.")
     }
 
     fun signOut() {
@@ -175,12 +205,12 @@ class App(val dir: File = DesktopSettings.dataDir()) {
         Regex("\"sub\"\\s*:\\s*\"([^\"]*)\"").find(payload)?.groupValues?.get(1)
     }.getOrNull()
 
-    /** Loads the site out of sight in the browser profile so its refreshed token is picked up. */
+    /** Opens the site briefly in the browser profile so its refreshed token is picked up. */
     private suspend fun refreshSignIn(): Boolean {
         if (settings.user.isEmpty()) return false
         onStatus(t("Refreshing the Redgifs sign-in…", "Redgifs oturumu yenileniyor…"), true)
         return runCatching {
-            login.capture(headless = true, userAgent = settings.userAgent, timeoutMs = 45_000L, accept = ::accept)
+            login.capture(headless = false, userAgent = null, timeoutMs = 45_000L, accept = ::accept)
         }.getOrNull() != null
     }
 

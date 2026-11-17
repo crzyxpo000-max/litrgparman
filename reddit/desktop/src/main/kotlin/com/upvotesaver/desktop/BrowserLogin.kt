@@ -38,6 +38,23 @@ class BrowserLogin(
     private val startUrl: String = "https://www.redgifs.com/",
     private val extraArgs: List<String> = emptyList(),
 ) {
+    private fun executable(): String = browserPath()?.takeIf { it.isNotBlank() } ?: findBrowser()
+        ?: throw IOException(t("No browser found. Set its path in Settings.", "Tarayıcı bulunamadı. Ayarlar'dan yolunu gir."))
+
+    /**
+     * Opens the site in an ordinary browser window on the app's profile, with nothing attached to it,
+     * for the user to sign in (site checks such as Cloudflare's see a normal browser). The session
+     * stays in the profile; [capture] reads its token afterwards.
+     */
+    fun open(): Process {
+        profileDir.mkdirs()
+        val args = listOf(
+            executable(), "--user-data-dir=${profileDir.absolutePath}", "--no-first-run", "--no-default-browser-check",
+            "--disable-background-mode",
+        ) + extraArgs + startUrl
+        return ProcessBuilder(args).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.DISCARD).start()
+    }
+
     /**
      * Opens the browser and waits until [accept] takes one of the tokens seen, the browser is
      * closed, or [timeoutMs] passes. [headless] runs it out of sight (to refresh an existing sign-in).
@@ -48,13 +65,12 @@ class BrowserLogin(
         timeoutMs: Long,
         accept: suspend (BrowserToken) -> Boolean,
     ): BrowserToken? = withContext(Dispatchers.IO) {
-        val exe = browserPath()?.takeIf { it.isNotBlank() } ?: findBrowser()
-            ?: throw IOException(t("No browser found. Set its path in Settings.", "Tarayıcı bulunamadı. Ayarlar'dan yolunu gir."))
+        val exe = executable()
         profileDir.mkdirs()
         val portFile = File(profileDir, "DevToolsActivePort").also { it.delete() }
         val args = mutableListOf(
             exe, "--remote-debugging-port=0", "--remote-allow-origins=*", "--user-data-dir=${profileDir.absolutePath}",
-            "--no-first-run", "--no-default-browser-check",
+            "--no-first-run", "--no-default-browser-check", "--disable-background-mode",
         )
         if (headless) {
             args += "--headless=new"

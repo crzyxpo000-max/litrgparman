@@ -74,9 +74,11 @@ Text posts, plain links, and hosts without a Reddit copy (for example YouTube) a
 The Redgifs part of the app for Windows: paste a link, download your likes, browse niches. Swing window over the
 same `reddit/core`; Reddit upvotes are not included (they need Reddit's API approval).
 
-- **Sign-in** starts Edge, Chrome or Brave with a profile folder of its own and its debugging interface, and
-  notes the bearer token the Redgifs site sends to its API (`BrowserLogin`). The window closes once a signed-in
-  token is seen. An expired token is refreshed by loading the site out of sight in that same profile.
+- **Sign-in** has two steps (`BrowserLogin`). First Edge, Chrome or Brave opens as an ordinary window on a
+  profile folder of the app's own, with nothing attached, so site checks (Cloudflare) see a normal browser; the
+  user signs in and closes the window. Then the same profile is opened briefly with the browser's debugging
+  interface, and the bearer token the Redgifs site sends to its API is noted. An expired token is refreshed the
+  same way (a browser window appears for a moment).
 - **Likes** are checked on the chosen interval while the app runs; closing the window keeps it in the system tray
   when the interval is on. **Start with Windows** writes a launcher into the user's Startup folder.
 - Files go to `Videos\UpvoteSaver` (changeable); **Hide the download folder** sets the Windows hidden attribute.
