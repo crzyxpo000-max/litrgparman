@@ -21,4 +21,4 @@ include(":engine", ":app", ":tools:simulator")
 include(":scraper:core", ":scraper:app")
 
 // Ayrı uygulama: Reddit beğenilerini indirici (oyundan bağımsız; bkz. reddit/README.md).
-include(":reddit:core", ":reddit:app")
+include(":reddit:core", ":reddit:app", ":reddit:desktop")

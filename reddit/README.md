@@ -25,7 +25,7 @@ Redgifs ties its temporary token to the device's network address and User-Agent,
 - The token expires. While the app is open the site is loaded out of sight so a refreshed token is picked up;
   in the background a rejected token stops the likes check until the app is opened (or you sign in again).
 - **Browse niches**: search niches (`GET /v2/niches/search`; blank = most followed), open one, sort its clips
-  (most liked, hot, trending, newest: `GET /v2/niches/{id}/gifs`), tick the ones you want and download.
+  (most liked, hot, newest: `GET /v2/niches/{id}/gifs`), tick the ones you want and download.
 
 These routes are the ones the Redgifs site uses; they are not publicly documented and may change.
 
@@ -69,6 +69,22 @@ Each post is handled once; a failed download is retried on the next runs, three 
 
 Text posts, plain links, and hosts without a Reddit copy (for example YouTube) are marked "nothing to save".
 
+## Windows app (`reddit/desktop`)
+
+The Redgifs part of the app for Windows: paste a link, download your likes, browse niches. Swing window over the
+same `reddit/core`; Reddit upvotes are not included (they need Reddit's API approval).
+
+- **Sign-in** starts Edge, Chrome or Brave with a profile folder of its own and its debugging interface, and
+  notes the bearer token the Redgifs site sends to its API (`BrowserLogin`). The window closes once a signed-in
+  token is seen. An expired token is refreshed by loading the site out of sight in that same profile.
+- **Likes** are checked on the chosen interval while the app runs; closing the window keeps it in the system tray
+  when the interval is on. **Start with Windows** writes a launcher into the user's Startup folder.
+- Files go to `Videos\UpvoteSaver` (changeable); **Hide the download folder** sets the Windows hidden attribute.
+- Data (settings, download log, browser profile): `%APPDATA%\UpvoteSaver`.
+
+`reddit/desktop/package-windows.sh` builds `reddit/desktop/build/UpvoteSaver-windows.zip`: the jar, an Eclipse
+Temurin 21 JRE for Windows and `UpvoteSaver.bat`. Unzip and double-click the `.bat`; no Java install needed.
+
 ## Layout
 
 | Module | Contents |
@@ -79,6 +95,8 @@ Text posts, plain links, and hosts without a Reddit copy (for example YouTube) a
 ## Commands
 
 ```bash
+./gradlew :reddit:desktop:test       # browser sign-in test (needs a Chromium-family browser, else skipped)
+reddit/desktop/package-windows.sh    # Windows zip
 ./gradlew :reddit:core:test          # unit tests (MockWebServer)
 ./gradlew :reddit:app:assembleDebug  # APK: reddit/app/build/outputs/apk/debug/app-debug.apk
 ./gradlew :reddit:app:installDebug   # install on a connected phone

@@ -257,8 +257,7 @@ private fun NicheList(viewModel: MainViewModel, niches: NicheState) {
 @Composable
 private fun NicheGifs(viewModel: MainViewModel, niches: NicheState) {
     val labels = mapOf(
-        "best" to R.string.order_best, "hot" to R.string.order_hot,
-        "trending" to R.string.order_trending, "latest" to R.string.order_latest,
+        "best" to R.string.order_best, "hot" to R.string.order_hot, "latest" to R.string.order_latest,
     )
     Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         Redgifs.NICHE_ORDERS.forEach { order ->

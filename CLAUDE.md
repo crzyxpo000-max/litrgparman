@@ -28,7 +28,8 @@ Oyun kuralları ona uygulanmaz; ayrıntı `scraper/README.md`. Komutlar: `./grad
 ## Ayrı uygulama: Upvote Saver (`reddit/`)
 
 Oyundan bağımsız ikinci küçük Android uygulaması (Reddit'te beğenilen medyayı indirir): `:reddit:core` (saf Kotlin/JVM) ve `:reddit:app` (Compose, WorkManager).
-Oyun kuralları ona uygulanmaz; ayrıntı `reddit/README.md`. Komutlar: `./gradlew :reddit:core:test :reddit:app:assembleDebug`.
+`:reddit:desktop` aynı çekirdeği kullanan Windows (Swing) sürümüdür; paket: `reddit/desktop/package-windows.sh`.
+Oyun kuralları ona uygulanmaz; ayrıntı `reddit/README.md`. Komutlar: `./gradlew :reddit:core:test :reddit:desktop:test :reddit:app:assembleDebug`.
 
 ## Komutlar
 

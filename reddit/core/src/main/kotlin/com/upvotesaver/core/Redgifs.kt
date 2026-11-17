@@ -136,7 +136,7 @@ class Redgifs(
 
     companion object {
         /** Sort orders of a niche's clips; "best" is the most liked. */
-        val NICHE_ORDERS = listOf("best", "hot", "trending", "latest")
+        val NICHE_ORDERS = listOf("best", "hot", "latest")
     }
 }
 
