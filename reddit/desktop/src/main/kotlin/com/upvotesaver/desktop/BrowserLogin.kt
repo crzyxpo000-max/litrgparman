@@ -27,6 +27,28 @@ import java.util.concurrent.atomic.AtomicInteger
 class BrowserToken(val token: String, val userAgent: String)
 
 /**
+ * Reads a sign-in the user copied from their everyday browser: a request to the Redgifs API copied
+ * from the developer tools ("Copy as cURL", any shell flavour), a bare `Authorization` header, or
+ * just the token. The User-Agent is taken along when the text holds one.
+ */
+object PastedSignIn {
+    private val HEADER = Regex("""authorization["']?\s*[:=]\s*\^?["']?\s*Bearer\s+([A-Za-z0-9._~+/=-]+)""", RegexOption.IGNORE_CASE)
+    private val BEARER = Regex("""Bearer\s+([A-Za-z0-9._~+/=-]+)""", RegexOption.IGNORE_CASE)
+    private val JWT = Regex("""[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}""")
+    private val AGENT_HEADER = Regex("""user-agent["']?\s*[:=]\s*\^?["']?\s*([^"'\r\n^]+)""", RegexOption.IGNORE_CASE)
+    private val AGENT_FLAG = Regex("""-UserAgent\s+["']([^"'\r\n]+)["']""", RegexOption.IGNORE_CASE)
+
+    fun parse(text: String): BrowserToken? {
+        val token = HEADER.find(text)?.groupValues?.get(1)
+            ?: BEARER.find(text)?.groupValues?.get(1)
+            ?: JWT.find(text)?.value
+            ?: return null
+        val agent = (AGENT_FLAG.find(text) ?: AGENT_HEADER.find(text))?.groupValues?.get(1)?.trim()?.trimEnd('\\').orEmpty()
+        return BrowserToken(token, agent.trim())
+    }
+}
+
+/**
  * Sign-in through the user's own browser (Edge, Chrome or Brave). The browser is started with a
  * profile folder of its own and its debugging interface; the app watches the site's requests to
  * its API and notes the bearer token they carry. The password never reaches the app.

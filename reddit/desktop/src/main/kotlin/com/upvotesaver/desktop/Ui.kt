@@ -135,7 +135,8 @@ private fun row(vararg parts: java.awt.Component) = JPanel(FlowLayout(FlowLayout
 /** Account, likes, a link field and the list of what was saved. */
 private class DownloadTab(private val app: App) {
     private val account = JLabel()
-    private val signIn = JButton(t("Sign in to Redgifs", "Redgifs'e giriş yap")).apply { addActionListener { app.signIn() } }
+    private val paste = JButton(t("Sign in (paste from my browser)…", "Giriş yap (tarayıcımdan yapıştır)…")).apply { addActionListener { pasteDialog() } }
+    private val signIn = JButton(t("Sign in in a new browser window", "Yeni tarayıcı penceresinde giriş yap")).apply { addActionListener { app.signIn() } }
     private val signedIn = JButton(t("I have signed in", "Giriş yaptım")).apply { addActionListener { app.confirmSignIn() } }
     private val signOut = JButton(t("Sign out", "Çıkış yap")).apply { addActionListener { app.signOut() } }
     private val newLikes = JButton(t("Check for new likes", "Yeni beğenileri denetle")).apply { addActionListener { app.syncLikes(false) } }
@@ -159,7 +160,7 @@ private class DownloadTab(private val app: App) {
         val top = JPanel().apply {
             layout = BoxLayout(this, BoxLayout.Y_AXIS)
             border = BorderFactory.createEmptyBorder(8, 8, 4, 8)
-            add(row(account, signIn, signedIn, signOut))
+            add(row(account, paste, signIn, signedIn, signOut))
             add(row(newLikes, allLikes))
             add(row(JLabel(t("Redgifs link:", "Redgifs bağlantısı:")), link, send))
             add(row(counts))
@@ -180,16 +181,48 @@ private class DownloadTab(private val app: App) {
         refresh()
     }
 
+    /** Explains how to copy a signed-in request from the user's own browser, and takes the pasted text. */
+    private fun pasteDialog() {
+        val steps = t(
+            "1. In the browser you use every day, open redgifs.com and sign in.\n" +
+                "2. Press F12, open the \"Network\" tab, then reload the page (F5).\n" +
+                "3. Type api.redgifs.com into the filter box. Right-click any line in the list,\n" +
+                "   choose Copy > \"Copy as cURL\".\n" +
+                "4. Paste it below (Ctrl+V) and press OK.\n\n" +
+                "The app reads only the sign-in token and the browser name from it. Treat the copied text\n" +
+                "like a password: do not send it to anyone.",
+            "1. Her gün kullandığın tarayıcıda redgifs.com'u aç ve giriş yap.\n" +
+                "2. F12'ye bas, \"Network\" (Ağ) sekmesini aç, sonra sayfayı yenile (F5).\n" +
+                "3. Filtre kutusuna api.redgifs.com yaz. Listedeki herhangi bir satıra sağ tıkla,\n" +
+                "   Copy (Kopyala) > \"Copy as cURL\" seç.\n" +
+                "4. Aşağıya yapıştır (Ctrl+V) ve Tamam'a bas.\n\n" +
+                "Uygulama bundan yalnızca oturum jetonunu ve tarayıcı adını okur. Kopyaladığın metni\n" +
+                "parola gibi düşün: kimseye gönderme.",
+        )
+        val area = javax.swing.JTextArea(8, 60).apply { lineWrap = true }
+        val content = JPanel(BorderLayout(0, 8)).apply {
+            add(javax.swing.JTextArea(steps).apply { isEditable = false; isOpaque = false; font = account.font }, BorderLayout.NORTH)
+            add(JScrollPane(area), BorderLayout.CENTER)
+        }
+        val answer = javax.swing.JOptionPane.showConfirmDialog(
+            panel, content, t("Sign in to Redgifs", "Redgifs'e giriş"), javax.swing.JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.PLAIN_MESSAGE,
+        )
+        if (answer == javax.swing.JOptionPane.OK_OPTION && area.text.isNotBlank()) app.signInWithPaste(area.text)
+    }
+
     fun refresh() {
         val s = app.settings
         account.text = when {
-            app.signedIn -> t("Signed in as ${s.user}", "Giriş yapıldı: ${s.user}")
+            app.signedIn -> t("Signed in as ${s.user}", "Giriş yapıldı: ${s.user}") + (app.tokenExpiresAtMs?.let {
+                " (" + t("valid until ", "geçerlilik sonu: ") + SimpleDateFormat("yyyy-MM-dd HH:mm").format(Date(it)) + ")"
+            } ?: "")
             s.user.isNotEmpty() -> t("Sign-in expired (${s.user})", "Oturumun süresi doldu (${s.user})")
             else -> t("Not signed in", "Giriş yapılmadı")
         }
         signOut.isVisible = s.user.isNotEmpty()
         val waiting = app.signInWaiting != null
         signIn.isVisible = !app.signedIn && !waiting
+        paste.isVisible = !app.signedIn && !waiting
         signedIn.isVisible = waiting
         newLikes.isEnabled = s.user.isNotEmpty()
         allLikes.isEnabled = s.user.isNotEmpty()

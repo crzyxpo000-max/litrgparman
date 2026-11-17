@@ -79,6 +79,10 @@ same `reddit/core`; Reddit upvotes are not included (they need Reddit's API appr
   user signs in and closes the window. Then the same profile is opened briefly with the browser's debugging
   interface, and the bearer token the Redgifs site sends to its API is noted. An expired token is refreshed the
   same way (a browser window appears for a moment).
+- **Sign in (paste from my browser)** is the fallback when that browser window is refused by site checks: the
+  user copies any `api.redgifs.com` request from their everyday browser's developer tools ("Copy as cURL") and
+  pastes it; `PastedSignIn` takes the token and User-Agent from it. Such a sign-in cannot be refreshed by the app,
+  so it is pasted again when it expires.
 - **Likes** are checked on the chosen interval while the app runs; closing the window keeps it in the system tray
   when the interval is on. **Start with Windows** writes a launcher into the user's Startup folder.
 - Files go to `Videos\UpvoteSaver` (changeable); **Hide the download folder** sets the Windows hidden attribute.

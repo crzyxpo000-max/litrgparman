@@ -41,6 +41,11 @@ class DesktopSettings(private val file: File) {
         get() = get("userAgent") ?: DEFAULT_USER_AGENT
         set(value) = set("userAgent", value)
 
+    /** True when the sign-in was pasted by the user; such a sign-in cannot be refreshed by the app. */
+    var pasted: Boolean
+        get() = get("pasted") == "true"
+        set(value) = set("pasted", value.toString())
+
     var folder: File
         get() = File(get("folder") ?: File(System.getProperty("user.home"), "Videos/UpvoteSaver").path)
         set(value) = set("folder", value.path)

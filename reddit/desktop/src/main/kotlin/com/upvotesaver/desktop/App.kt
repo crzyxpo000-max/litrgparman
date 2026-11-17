@@ -169,14 +169,40 @@ class App(val dir: File = DesktopSettings.dataDir()) {
         delay(1_500)
         onStatus(t("Reading the sign-in… (a browser window opens for a moment)", "Giriş okunuyor… (bir tarayıcı penceresi kısa süre açılır)"), true)
         val token = login.capture(headless = false, userAgent = null, timeoutMs = 60_000L, accept = ::accept)
+        if (token != null) settings.pasted = false
         if (token != null) t("Signed in as ${settings.user}.", "Giriş yapıldı: ${settings.user}.")
         else t("No sign-in was found. Sign in, close the browser window and try again.",
             "Giriş bulunamadı. Giriş yap, tarayıcı penceresini kapat ve yeniden dene.")
     }
 
+    /**
+     * Signs in with a request (or token) the user copied from their own browser, where they are
+     * already signed in. Nothing is opened by the app.
+     */
+    fun signInWithPaste(text: String) = run {
+        val candidate = PastedSignIn.parse(text)
+            ?: return@run t("No sign-in token found in that text.", "Bu metinde oturum jetonu bulunamadı.")
+        if (jwtField(candidate.token, "sub")?.startsWith("client/") == true) {
+            return@run t("That is a visitor's token. Sign in on redgifs.com first, then copy a request again.",
+                "Bu bir ziyaretçi jetonu. Önce redgifs.com'da giriş yap, sonra isteği yeniden kopyala.")
+        }
+        onStatus(t("Checking the sign-in…", "Giriş denetleniyor…"), true)
+        if (!accept(candidate)) {
+            return@run t("Redgifs did not accept that token. Copy a fresh request and try again.",
+                "Redgifs bu jetonu kabul etmedi. Yeni bir istek kopyalayıp yeniden dene.")
+        }
+        settings.pasted = true
+        t("Signed in as ${settings.user}.", "Giriş yapıldı: ${settings.user}.")
+    }
+
+    /** When the current token stops being valid (from the token itself), or null if it does not say. */
+    val tokenExpiresAtMs: Long?
+        get() = settings.token?.let { jwtField(it, "exp") }?.toLongOrNull()?.times(1000)
+
     fun signOut() {
         settings.token = null
         settings.user = ""
+        settings.pasted = false
         // Forget the browser profile too, or the next sign-in would reuse its session.
         runCatching { File(dir, "browser").deleteRecursively() }
         onChanged()
@@ -184,7 +210,7 @@ class App(val dir: File = DesktopSettings.dataDir()) {
 
     /** Keeps a token only if it belongs to a signed-in user (visitors get a client token too). */
     private suspend fun accept(candidate: BrowserToken): Boolean {
-        if (jwtSubject(candidate.token)?.startsWith("client/") == true) return false
+        if (jwtField(candidate.token, "sub")?.startsWith("client/") == true) return false
         val agent = candidate.userAgent.ifEmpty { settings.userAgent }
         val name = try {
             Redgifs(Http(userAgent = { agent }), userToken = { candidate.token }).me()
@@ -200,14 +226,16 @@ class App(val dir: File = DesktopSettings.dataDir()) {
         return true
     }
 
-    private fun jwtSubject(token: String): String? = runCatching {
+    /** A field of the token's payload, if the token is a readable JWT. */
+    private fun jwtField(token: String, name: String): String? = runCatching {
         val payload = String(Base64.getUrlDecoder().decode(token.split('.')[1]))
-        Regex("\"sub\"\\s*:\\s*\"([^\"]*)\"").find(payload)?.groupValues?.get(1)
+        Regex("\"$name\"\\s*:\\s*\"?([^\",}]*)").find(payload)?.groupValues?.get(1)
     }.getOrNull()
 
     /** Opens the site briefly in the browser profile so its refreshed token is picked up. */
     private suspend fun refreshSignIn(): Boolean {
-        if (settings.user.isEmpty()) return false
+        // A pasted sign-in lives in the user's own browser; the app has no session of its own to reopen.
+        if (settings.user.isEmpty() || settings.pasted) return false
         onStatus(t("Refreshing the Redgifs sign-in…", "Redgifs oturumu yenileniyor…"), true)
         return runCatching {
             login.capture(headless = false, userAgent = null, timeoutMs = 45_000L, accept = ::accept)
@@ -215,7 +243,12 @@ class App(val dir: File = DesktopSettings.dataDir()) {
     }
 
     fun syncLikes(full: Boolean, quiet: Boolean = false) = run(quiet) {
-        val expired = t("The Redgifs sign-in has expired. Sign in again.", "Redgifs oturumunun süresi doldu. Yeniden giriş yap.")
+        val expired = if (settings.pasted) {
+            t("The Redgifs sign-in has expired. Copy a request from your browser and paste it again.",
+                "Redgifs oturumunun süresi doldu. Tarayıcından bir isteği kopyalayıp yeniden yapıştır.")
+        } else {
+            t("The Redgifs sign-in has expired. Sign in again.", "Redgifs oturumunun süresi doldu. Yeniden giriş yap.")
+        }
         if (!signedIn && !refreshSignIn()) return@run expired
         onStatus(t("Reading your likes…", "Beğenilerin okunuyor…"), true)
         val result = try {
