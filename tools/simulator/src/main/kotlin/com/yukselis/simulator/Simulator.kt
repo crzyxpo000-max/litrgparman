@@ -90,6 +90,11 @@ data class RunResult(
     val levels: Map<Int, Int>,
     /** Gün → Dikkat. */
     val attention: Map<Int, Int>,
+    /** Gün → Öz Kristali bakiyesi (DECISIONS #167). */
+    val crystals: Map<Int, Int> = emptyMap(),
+    /** Görünen `oz_kristali_min` seçenekleriyle karşılaşma ve yetersiz bakiyeyle kilitli kalma sayısı. */
+    val crystalChecks: Int = 0,
+    val crystalLocked: Int = 0,
     /** Perde sonu → ana NPC'lerin ortalama seviyesi ve en güçlüsü. */
     val npcMean: Map<Int, Double>,
     val npcMax: Map<Int, Int>,
@@ -211,6 +216,9 @@ class Simulator(private val content: Content) {
         var steps = 0
         val levels = sortedMapOf<Int, Int>()
         val attention = sortedMapOf<Int, Int>()
+        val crystals = sortedMapOf<Int, Int>()
+        var crystalChecks = 0
+        var crystalLocked = 0
         val npcMean = sortedMapOf<Int, Double>()
         val npcMax = sortedMapOf<Int, Int>()
         var daysAhead = 0
@@ -230,6 +238,7 @@ class Simulator(private val content: Content) {
                 CHECKPOINTS.filter { it <= s.day && it !in levels }.forEach { d ->
                     levels[d] = s.player.level
                     attention[d] = s.attention
+                    crystals[d] = s.player.essenceCrystals
                 }
                 ACT_ENDS.filter { it <= s.day && it !in npcMean }.forEach { d ->
                     val lv = MAIN_NPCS.mapNotNull { id -> s.npcs[id]?.takeIf { it.alive }?.level }
@@ -274,6 +283,13 @@ class Simulator(private val content: Content) {
                     engine.hubAction(s, a, lang).state
                 }
                 else -> {
+                    content.scenes[s.sceneId]?.choices?.forEach { ch ->
+                        val req = ch.requires
+                        if ((ch.showWhen == null || ch.showWhen!!.test(s)) && req != null && hasCrystalGate(req)) {
+                            crystalChecks++
+                            if (crystalFailed(req, s)) crystalLocked++
+                        }
+                    }
                     val c = pickChoice(s, rng, profile)
                     actionName = "secim:$c"
                     engine.choose(s, c, lang).state
@@ -303,10 +319,13 @@ class Simulator(private val content: Content) {
         val lv = MAIN_NPCS.mapNotNull { id -> s.npcs[id]?.takeIf { it.alive }?.level }
         ACT_ENDS.filter { it !in npcMean }.forEach { d -> npcMean[d] = if (lv.isEmpty()) 0.0 else lv.average(); npcMax[d] = lv.maxOrNull() ?: 0 }
         // Erken biten oynanış (Demir Mod ölümü) sonraki kontrol noktalarına değer yazmaz; eğriyi kirletmesin.
-        if (s.day >= 358) CHECKPOINTS.filter { it !in levels }.forEach { d -> levels[d] = s.player.level; attention[d] = s.attention }
+        if (s.day >= 358) CHECKPOINTS.filter { it !in levels }.forEach {
+            d -> levels[d] = s.player.level; attention[d] = s.attention; crystals[d] = s.player.essenceCrystals
+        }
         return RunResult(
             seed = seed, profile = profile.name + if (profile.ironman) " (Demir)" else "", ending = engine.endingOf(s)?.id, finished = s.ended,
             day = s.day, level = s.player.level, deaths = deaths, ironman = profile.ironman, levels = levels, attention = attention,
+            crystals = crystals, crystalChecks = crystalChecks, crystalLocked = crystalLocked,
             npcMean = npcMean, npcMax = npcMax,
             dominance = if (daysCounted == 0) 0.0 else daysAhead.toDouble() / daysCounted,
             crushShare = if (fights == 0) 0.0 else crushes.toDouble() / fights,
@@ -339,6 +358,20 @@ class Simulator(private val content: Content) {
     }
 
     private fun ChoiceDef.allEffects() = effects + (check?.failEffects ?: emptyList())
+
+    private fun hasCrystalGate(c: com.yukselis.engine.story.Condition): Boolean = when (c) {
+        is com.yukselis.engine.story.Condition.CrystalsAtLeast -> true
+        is com.yukselis.engine.story.Condition.All -> c.conditions.any { hasCrystalGate(it) }
+        is com.yukselis.engine.story.Condition.AnyOf -> c.conditions.any { hasCrystalGate(it) }
+        else -> false
+    }
+
+    private fun crystalFailed(c: com.yukselis.engine.story.Condition, s: WorldState): Boolean = when (c) {
+        is com.yukselis.engine.story.Condition.CrystalsAtLeast -> !c.test(s)
+        is com.yukselis.engine.story.Condition.All -> c.conditions.any { crystalFailed(it, s) }
+        is com.yukselis.engine.story.Condition.AnyOf -> !c.test(s) && c.conditions.any { crystalFailed(it, s) }
+        else -> false
+    }
 
     private fun effectScore(e: Effect, p: Profile): Double = when (e) {
         is Effect.ShiftMorality -> (p.moral[e.axis] ?: 0.0) * e.delta

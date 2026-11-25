@@ -1,8 +1,8 @@
 # İlerleme
 
-Şu an: İnceleme (`docs/INCELEME_AKIS.md`) ve Paket 1–7 (hikaye, ilk saat, ritim, sistem çıkarma, arayüz incelemesi, açılış hızı & kayıt güvenliği, savaş hissi & bosslar & final & Arşiv) bitti.
+Şu an: İnceleme (`docs/INCELEME_AKIS.md`) ve Paket 1–8 (hikaye, ilk saat, ritim, sistem çıkarma, arayüz incelemesi, açılış hızı & kayıt güvenliği, savaş hissi & bosslar & final & Arşiv, denge & kristal telemetrisi & yaşayan dünya) bitti.
 Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
-Son commit: 159c7f8 Paket 6 (sonraki: Paket 7 commit'i)
+Son commit: dd67b2f Paket 7 (sonraki: Paket 8 commit'i)
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
@@ -11,6 +11,18 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - SDK: `local.properties` → `sdk.dir=C:/Users/alpar/AppData/Local/Android/Sdk` (git dışı).
 - Emülatör: `Medium_Phone_API_36.0` (`emulator -avd Medium_Phone_API_36.0`), adb ile kurulum.
 - OneDrive kilidi yüzünden lint ara sıra "dosya kullanılıyor" der: `./gradlew --stop` ve tekrar.
+
+## Paket 8: denge, kristal telemetrisi ve yaşayan dünya (2026-11-26)
+- [x] **Öz Kristali telemetrisi (DECISIONS #187):** `Simulator` + `Report` kontrol noktalarında kristal yüzdeliklerini ve `oz_kristali_min`
+      kilitlenme oranını raporlar (`docs/BALANCE.md`: kilitlenme %11,3 < %50; p50 Gün 30: 10, Gün 60: 29, Gün 180: 309, Gün 365: 986).
+- [x] **Perde 2 açılış savaşları ve Perde 3–4 `@oyuncu±n%` (DECISIONS #188):** `liman_yan_yatmis_vapur`, `kordon_fener_baligi` ve
+      `eski_sehir_kapi_avcilari` yumuşatıldı; `70_cok_evren.yaml`, `72_kule.yaml` (Kat 60–100) ve `80_perde4.yaml` taktik/destek/tekrar
+      savaşları `@oyuncu±n%` ölçeğine alındı (1000 oynanış: hakimiyet %72,1, sonlar %6,0–%18,3, yere düşme %11,8).
+- [x] **Erişilebilirlik (`elif_yoldas_darbe`, DECISIONS #189):** Demir Gece tohumlarından `elif_yoldas_teklif` engeli kaldırıldı; hiç
+      görülmeyen olay 6 → 5'e indi (kalan 5 olayın tamamı yapısal).
+- [x] **Yaşayan dünya bültenleri ve NG+ fısıltıları (DECISIONS #190):** `96_zaman_atlama.yaml` içine perde/fraksiyon Sistem bültenleri ve
+      Dikkat söylentileri; `00_prolog.yaml`, `07_bolumler_p1.yaml`, `08_bolumler_p2.yaml` içine `yeni_dongu` Yankı fısıltıları eklendi.
+      `Paket8Test` eklendi.
 
 ## Paket 7: savaş hissi, bosslar, final ve Arşiv (2026-11-25)
 - [x] **Ekransız anında Ezme (DECISIONS #183):** `NoticeMoment.CRUSH` tam ekran `BREACH` açmaz; akışta tek kart olarak çözülür.
@@ -41,7 +53,7 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - [x] Simülatör botu (DECISIONS #178): seçim puanı savaşın zafer sahnesinden ileri bakar; bot yenilgiden sonra yeniden dener.
       `docs/BALANCE.md` 1000 oynanışla yeniden üretildi: Koruyucu hedefe ulaşma %45,5 → %73,9, Demir Taht %56,8 → %77,3,
       son dağılımı %6,6–%17,7, hakimiyet %70,6; `DengeTest` geçiyor.
-- [ ] Açık: Perde 3–4'ün öteki `@oyuncu±n` yeniden deneme indirimleri aynı biçimde etkisiz (dokunulmadı). Sv. 700'ün altında
+- [x] Perde 3–4'ün öteki `@oyuncu±n` yeniden deneme ve taktik indirimleri Paket 8'de `@oyuncu±n%` biçimine geçirildi (DECISIONS #188). Açık: Sv. 700'ün altında
       istilaya gelen oyuncu Vali'yi nadiren yener (neden ölçülmedi). Emülatörde istila oynanmadı.
 
 ## Oyuncu gözüyle inceleme ve sadeleştirme paketleri (2026-11-09)

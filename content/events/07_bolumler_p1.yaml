@@ -33,6 +33,8 @@ olaylar:
             metin: { tr: "İpliklerin hepsi aynı yöne gerilmiş: kuzeye, sisin içine. Bir şey avını kampa doğru değil, kamptan uzağa çekiyor.", en: "Every thread runs the same way: north, into the fog. Whatever spun them isn't reaching toward camp. It's pulling things away from it." }
           - kosul: { bayrak: "yanki_bagi" }
             metin: { tr: "sekiz göz. hepsi açık. hepsi aç.", en: "eight eyes. all open. all hungry." }
+          - kosul: { bayrak: ["yanki_bagi", "yeni_dongu"] }
+            metin: { tr: "kuzeydeki yuvaya bakarken hiç şaşırmadın. yolunu şimdiden ezberlemiş gibisin.", en: "you didn't even blink looking north toward the nest. it's like you already know the way by heart." }
         secenekler:
           - id: "izle"
             etiket: { tr: "İpliklerin uzandığı yöne bak", en: "Look where the threads lead" }
@@ -84,6 +86,8 @@ olaylar:
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
             metin: { tr: "bir sınırı yırttın. ikimiz birlikte. bunu kimse sana veremezdi, ben de veremezdim. ama artık senin.", en: "you tore a limit. both of us together. nobody could've given you that, not even me. but it's yours now." }
+          - kosul: { bayrak: ["yanki_bagi", "yeni_dongu"] }
+            metin: { tr: "ilk kırılma. geçen sefer de tam burada ellerine bakmıştın, öyle geliyor bana.", en: "first breakthrough. i get the feeling you looked down at your hands right here last time, too." }
           - kosul: { dikkat_min: 25 }
             metin: { tr: "Kampın kenarındaki birkaç kişi sana bakarken birbirine bir şey fısıldıyor. Bakışlarında minnetten çok hesap var.", en: "A few people at the edge of camp whisper to each other while they watch you. There's more calculation than gratitude in it." }
             anlati: true

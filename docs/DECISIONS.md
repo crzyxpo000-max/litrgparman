@@ -2,6 +2,15 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Paket 8: denge, kristal telemetrisi ve yaşayan dünya — 2026-11-26
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 187 | **Öz Kristali simülatör telemetrisi** (`Simulator`, `Report`, `docs/BALANCE.md`). Kontrol noktalarında (Gün 30/60/120/180/270/365) kristal bakiyesi yüzdelikleri ve görünen `oz_kristali_min` hikaye seçeneklerinin yetersiz bakiyeyle kilitli kalma oranı raporlanır. 1000 oynanış ölçümü: kilitlenme **%11,3** (2519 / 22221; eşik <%50), bakiye p50 Gün 30'da **10**, Gün 60'ta **29**, Gün 180'de **309**, Gün 365'te **986**. | DECISIONS #167 geri dönüş tetikleyicisi ölçülmüyordu. Erken oyun kıtlığı sağlıklı (Gün 30–60 p50 10–29, kilitlenme %11,3); Perde 2 sonu sonrası birikim (309+), üretim kapalıyken (#166) tekrarlayan kristal gideri olmamasından kaynaklanıyor. | İleride geç oyun kristal gideri (ör. saha ikmali ya da yüksek Perde 3–4 hazırlık bedelleri) istenirse `BALANCE.md` tablosuyla ayarlanır. |
+| 188 | **Perde 2 açılış savaşları ve Perde 3–4 `@oyuncu±n%` ölçeklemesi.** `liman_yan_yatmis_vapur` yılanları `@dunya-15`, `fenerci_ana` (can 1800→1500, ilk savaş `@oyuncu`, yeniden deneme `@oyuncu-12%`), `eski_sehir_kapi_avcilari` (`hamam_buhar_hayaleti@dunya-12`, `hamam_gobek_tasi` can 1600→1350, düz `@oyuncu+1`, taktik `@oyuncu-10%`). `70_cok_evren.yaml`, `72_kule.yaml` (Kat 60–100) ve `80_perde4.yaml` içindeki taktik/destek/yeniden deneme `@oyuncu±n` savaşları yüzdeli `@oyuncu±n%` biçimine geçirildi. | Perde 2 açılışında çift sersemleme/körlük ve arka arkaya iki aşamalı savaş ~%50 kayıp üretiyordu; Perde 3–4'te (Sv. 300–850) düz ±2–5 seviye <%1 stat farkı yaratıyordu (#177). Yere düşme oranı %11,8, hakimiyet %72,1. | — |
+| 189 | **`elif_yoldas_darbe` erişilebilirliği ve yapısal görünmeyen olay notu.** `51_siginak_elif.yaml` içindeki 5 `elif_yoldas_darbe` tohumundan `elif_yoldas_teklif` engeli kaldırıldı (`bayrak_yok: "elif_yoldas"` kaldı); simülatör kapsam raporunda kalan 5 görünmeyen olayın (`atlama_meslek`, `bildirim_*`, `hasat_vakti`) yapısal nedeni belgelendi. | `elif_yoldas_konsey` her dalda (red ve dolu parti dahil) `elif_yoldas_teklif` koyduğu için Perde 3 Demir Gece sonrası yoldaşlık daveti 1000 oynanışta 0 kez açılıyordu; düzeltme sonrası hiç görülmeyen olay 6 → 5'e indi. | — |
+| 190 | **Zaman atlama dünya bültenleri ve Yeni Döngü (`yeni_dongu`) Yankı fısıltıları.** `96_zaman_atlama.yaml` özet sahnelerine perdeye ve lider fraksiyona duyarlı Sistem bültenleri ile yüksek Dikkat söylentileri eklendi; `00_prolog.yaml`, `07_bolumler_p1.yaml`, `08_bolumler_p2.yaml` ve `atlama_antrenman_1` içine `yeni_dongu` koşullu Yankı fısıltıları yazıldı (`StoryEngine.NG_PLUS_FLAG` doğrulayıcıda motor bayrağı). | Zaman atlama günlerinde dış dünya sessiz kalıyordu; `yeni_dongu` bayrağı motorda set edilmesine karşın içerikte hiç okunmuyordu. | Yeni döngüye özel ek sahne veya seçenek istenirse genişletilir. |
+
 ## Paket 7: savaş hissi, bosslar, final ve Arşiv — 2026-11-25
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |

@@ -1228,7 +1228,7 @@ olaylar:
             etkiler:
               - gorev: { vapuru_yuzdur: "basla" }
               - ahlak: { merhamet: 2 }
-              - savas: { dusmanlar: ["vapur_safra_yilani@dunya", "vapur_safra_yilani@dunya"], ortam: ["su", "karanlik"], kazan: "vapur_govde", kaybet: "vapur_govde_kayip", kac: "vapur_govde_kayip" }
+              - savas: { dusmanlar: ["vapur_safra_yilani@dunya-15", "vapur_safra_yilani@dunya-15"], ortam: ["su", "karanlik"], kazan: "vapur_govde", kaybet: "vapur_govde_kayip", kac: "vapur_govde_kayip" }
           - id: "kaptan"
             etiket: { tr: "Genç tayfaya kaptanın son anını anlat", en: "Tell the deckhand about the captain's last moment" }
             goster: { bayrak: "mahsur_kaptan_kaldi" }
@@ -1278,7 +1278,7 @@ olaylar:
             etiket: { tr: "Gövdeye dal, onları dışarı sürükle", en: "Dive into the hull and drag them out" }
             etkiler:
               - ahlak: { merhamet: 2, duzen: 1 }
-              - savas: { dusmanlar: ["vapur_safra_yilani@dunya", "vapur_safra_yilani@dunya"], ortam: ["su", "karanlik"], kazan: "vapur_govde", kaybet: "vapur_govde_kayip", kac: "vapur_govde_kayip" }
+              - savas: { dusmanlar: ["vapur_safra_yilani@dunya-15", "vapur_safra_yilani@dunya-15"], ortam: ["su", "karanlik"], kazan: "vapur_govde", kaybet: "vapur_govde_kayip", kac: "vapur_govde_kayip" }
           - id: "tek"
             tur: "aciga_vur"
             etiket: { tr: "Halatı bırak; gerisini herkesin önünde sen yap", en: "Let go of the rope. Finish it yourself, in front of everyone" }
@@ -2581,7 +2581,7 @@ olaylar:
             etiket: { tr: "Sapı kopar, ışığı söndür", en: "Rip off the stalk. Kill the light" }
             etkiler:
               - ahlak: { merhamet: 2, duzen: 1 }
-              - savas: { dusmanlar: ["fenerci_ana@oyuncu+3"], ortam: ["su", "karanlik"], kazan: "fenerci_zafer", kaybet: "fenerci_kayip", kac: "fenerci_kayip" }
+              - savas: { dusmanlar: ["fenerci_ana@oyuncu"], ortam: ["su", "karanlik"], kazan: "fenerci_zafer", kaybet: "fenerci_kayip", kac: "fenerci_kayip" }
 
       - id: "fenerci_kayip"
         yer: "kordon"
@@ -2593,7 +2593,7 @@ olaylar:
             etiket: { tr: "Soluklan, yeniden gir", en: "Catch your breath. Go back in" }
             etkiler:
               - ahlak: { merhamet: 1 }
-              - savas: { dusmanlar: ["fenerci_ana@oyuncu+1"], ortam: ["su"], kazan: "fenerci_zafer", kaybet: "fenerci_cekil", kac: "fenerci_cekil" }
+              - savas: { dusmanlar: ["fenerci_ana@oyuncu-12%"], ortam: ["su"], kazan: "fenerci_zafer", kaybet: "fenerci_cekil", kac: "fenerci_cekil" }
           - id: "cekil"
             etiket: { tr: "Bu gece değil", en: "Not tonight" }
             etkiler:
@@ -3764,7 +3764,7 @@ olaylar:
           - id: "savas"
             etiket: { tr: "Buharın içindekileri karşıla", en: "Meet what's in the steam" }
             etkiler:
-              - savas: { dusmanlar: ["hamam_buhar_hayaleti@dunya", "hamam_buhar_hayaleti@dunya"], ortam: ["dar_gecit", "karanlik"], kazan: "cakal_gobek", kaybet: "cakal_kayip", kac: "cakal_kayip" }
+              - savas: { dusmanlar: ["hamam_buhar_hayaleti@dunya-12", "hamam_buhar_hayaleti@dunya-12"], ortam: ["dar_gecit", "karanlik"], kazan: "cakal_gobek", kaybet: "cakal_kayip", kac: "cakal_kayip" }
 
       - id: "cakal_gobek"
         yer: "eski_sehir"
@@ -3782,13 +3782,13 @@ olaylar:
             etkiler:
               - aciga_vur: true
               - ahlak: { merhamet: 3 }
-              - savas: { dusmanlar: ["hamam_gobek_tasi@oyuncu+4"], ortam: ["dar_gecit"], kazan: "cakal_zafer", kaybet: "cakal_kayip", kac: "cakal_kayip" }
+              - savas: { dusmanlar: ["hamam_gobek_tasi@oyuncu+1"], ortam: ["dar_gecit"], kazan: "cakal_zafer", kaybet: "cakal_kayip", kac: "cakal_kayip" }
           - id: "bitir"
             etiket: { tr: "Taşı ortasından kır", en: "Break the stone down the middle" }
             goster: { bayrak_yok: "cakallar_tasiyici" }
             etkiler:
               - ahlak: { duzen: 1 }
-              - savas: { dusmanlar: ["hamam_gobek_tasi@oyuncu+4"], ortam: ["dar_gecit"], kazan: "cakal_zafer", kaybet: "cakal_kayip", kac: "cakal_kayip" }
+              - savas: { dusmanlar: ["hamam_gobek_tasi@oyuncu+1"], ortam: ["dar_gecit"], kazan: "cakal_zafer", kaybet: "cakal_kayip", kac: "cakal_kayip" }
           - id: "ogret"
             etiket: { tr: "Onlar dövüşsün, sen yalnızca yönlendir", en: "Let them fight it. You just call the moves" }
             goster: { bayrak_yok: "cakallar_tasiyici" }
@@ -3796,7 +3796,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: 2, merhamet: 1 }
               - bayrak: "cakallar_ogrendi"
-              - savas: { dusmanlar: ["hamam_gobek_tasi@oyuncu+4"], ortam: ["dar_gecit"], kazan: "cakal_zafer", kaybet: "cakal_kayip", kac: "cakal_kayip" }
+              - savas: { dusmanlar: ["hamam_gobek_tasi@oyuncu-10%"], ortam: ["dar_gecit"], kazan: "cakal_zafer", kaybet: "cakal_kayip", kac: "cakal_kayip" }
 
       - id: "cakal_kayip"
         yer: "eski_sehir"

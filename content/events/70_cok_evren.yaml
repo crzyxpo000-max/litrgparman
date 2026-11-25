@@ -1172,7 +1172,7 @@ olaylar:
             etkiler:
               - bolge: "batik_takimada"
               - ahlak: { merhamet: 4, duzen: -1 }
-              - savas: { dusmanlar: ["son_basakci@oyuncu+5"], ortam: ["su"], kazan: "basakci_zafer", kaybet: "basakci_yenilgi", kac: "basakci_kacis" }
+              - savas: { dusmanlar: ["son_basakci@oyuncu+5%"], ortam: ["su"], kazan: "basakci_zafer", kaybet: "basakci_yenilgi", kac: "basakci_kacis" }
             kronik: { tr: "Son Fener'in önünde, hasat edilmiş bir dünyanın son insanlarıyla Hasat'ın geride bıraktığı şeyin arasına dikildin.", en: "You stood in front of the Last Light, between a harvested world's last people and the thing the Harvest left behind." }
           - id: "canlar"
             etiket: { tr: "Önce çanları çaldır; sonra saldır", en: "Get the bells ringing first. Then attack" }
@@ -1180,7 +1180,7 @@ olaylar:
             etkiler:
               - bolge: "batik_takimada"
               - ahlak: { merhamet: 3, duzen: 2 }
-              - savas: { dusmanlar: ["son_basakci@oyuncu+2"], ortam: ["su"], kazan: "basakci_zafer", kaybet: "basakci_yenilgi", kac: "basakci_kacis" }
+              - savas: { dusmanlar: ["son_basakci@oyuncu-10%"], ortam: ["su"], kazan: "basakci_zafer", kaybet: "basakci_yenilgi", kac: "basakci_kacis" }
             kronik: { tr: "Bir dünyanın bütün çanlarını birden çaldırdın; o seste Başakçı iki yüz yılda ilk kez yolunu şaşırdı.", en: "You got every bell in a world ringing at once, and for the first time in two hundred years the Gleaner lost its way." }
           - id: "cek"
             etiket: { tr: "Onu fenerden uzağa, derin suya çek", en: "Draw it away from the Light, into deep water" }
@@ -1188,7 +1188,7 @@ olaylar:
             etkiler:
               - bolge: "batik_takimada"
               - ahlak: { merhamet: 6 }
-              - savas: { dusmanlar: ["son_basakci@oyuncu+4"], ortam: ["su"], kazan: "basakci_zafer", kaybet: "basakci_yenilgi", kac: "basakci_kacis" }
+              - savas: { dusmanlar: ["son_basakci@oyuncu"], ortam: ["su"], kazan: "basakci_zafer", kaybet: "basakci_yenilgi", kac: "basakci_kacis" }
             kronik: { tr: "Başakçı'yı kendi ışığınla fenerden uzağa, derin suya çekmeye kalktın; sallardakilerle onun arasına kendini attın.", en: "You tried to lure the Gleaner away from the Light and into deep water with your own light, putting yourself between it and the rafts." }
           - id: "konus"
             etiket: { tr: "{npc:yanki} onunla konuşsun", en: "Let {npc:yanki} talk to it" }
@@ -1218,7 +1218,7 @@ olaylar:
             etiket: { tr: "Ağı yırt ve dövüş", en: "Tear free of the net and fight" }
             etkiler:
               - ahlak: { merhamet: 2 }
-              - savas: { dusmanlar: ["son_basakci@oyuncu+5"], ortam: ["su"], kazan: "basakci_zafer", kaybet: "basakci_yenilgi", kac: "basakci_kacis" }
+              - savas: { dusmanlar: ["son_basakci@oyuncu+5%"], ortam: ["su"], kazan: "basakci_zafer", kaybet: "basakci_yenilgi", kac: "basakci_kacis" }
             kronik: { tr: "Başakçı'nın ağını yırtıp kurtuldun, onunla fenerin dibinde dövüşe tutuştun.", en: "You tore your way out of the Gleaner's net and fought it at the foot of the Light." }
 
       - id: "basakci_konus"
@@ -1239,7 +1239,7 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: -4, duzen: 2 }
               - iliski: { yanki: { guven: -8, saygi: -4 } }
-              - savas: { dusmanlar: ["son_basakci@oyuncu+1"], ortam: ["su"], kazan: "basakci_zafer", kaybet: "basakci_yenilgi", kac: "basakci_kacis" }
+              - savas: { dusmanlar: ["son_basakci@oyuncu-15%"], ortam: ["su"], kazan: "basakci_zafer", kaybet: "basakci_yenilgi", kac: "basakci_kacis" }
             kronik: { tr: "Başakçı kafandaki sesi dinlerken ona saldırdın; sesin sana olan güveni orada kırıldı.", en: "You attacked the Gleaner while it was listening to the voice in your head, and the voice's trust in you broke right there." }
 
       - id: "basakci_huzur"
@@ -2385,13 +2385,13 @@ olaylar:
             etiket: { tr: "Mühürdar'la yüzleş", en: "Face the Sealwarden" }
             etkiler:
               - ahlak: { duzen: -3 }
-              - savas: { dusmanlar: ["muhurdar@oyuncu+6"], ortam: ["dar_gecit"], kazan: "kefe_zafer", kaybet: "kefe_yenilgi", kac: "kefe_kacis" }
+              - savas: { dusmanlar: ["muhurdar@oyuncu+6%"], ortam: ["dar_gecit"], kazan: "kefe_zafer", kaybet: "kefe_yenilgi", kac: "kefe_kacis" }
             kronik: { tr: "Dört yüz yıllık bir senedin bekçisiyle {yer:pirinc_kervan|in} kalbinde dövüştün.", en: "You fought the guardian of a four-hundred-year-old treaty in the heart of {yer:pirinc_kervan}." }
           - id: "zincir"
             etiket: { tr: "Önce Kesra'nın gençleri zincirleri kessin", en: "Have Kesra's kids cut the chains first" }
             etkiler:
               - ahlak: { duzen: -2, merhamet: -2 }
-              - savas: { dusmanlar: ["muhurdar@oyuncu+3"], ortam: ["dar_gecit"], kazan: "kefe_zafer", kaybet: "kefe_yenilgi", kac: "kefe_kacis" }
+              - savas: { dusmanlar: ["muhurdar@oyuncu-10%"], ortam: ["dar_gecit"], kazan: "kefe_zafer", kaybet: "kefe_yenilgi", kac: "kefe_kacis" }
             kronik: { tr: "Mühürdar'ın zincirlerini, neye mal olabileceğini bile bile isyancıların ellerine kestirdin.", en: "You had the rebels cut the Sealwarden's chains by hand, knowing what it might cost them." }
 
       - id: "kefe_zafer"
@@ -3306,7 +3306,7 @@ olaylar:
             etkiler:
               - bolge: "yedi_taht"
               - ahlak: { duzen: -3, merhamet: 1 }
-              - savas: { dusmanlar: ["varis_ossiran@oyuncu+8"], kazan: "varis_zafer", kaybet: "varis_yenilgi", kac: "varis_kacis" }
+              - savas: { dusmanlar: ["varis_ossiran@oyuncu+8%"], kazan: "varis_zafer", kaybet: "varis_yenilgi", kac: "varis_kacis" }
             kronik: { tr: "{yer:yedi_taht|in} hüküm salonunda, altı tahtın önünde, dünyanı isteyen Kadim'le dövüştün.", en: "In {yer:yedi_taht|pos} Hall of Decree, before all six thrones, you fought the Ancient who wanted your world." }
           - id: "oku"
             tur: "gosteris"
@@ -3317,7 +3317,7 @@ olaylar:
               - bilgi: "ossiran_gercek_seviye"
               - aciga_vur: true
               - ahlak: { duzen: -2, insanlik: 2 }
-              - savas: { dusmanlar: ["varis_ossiran@oyuncu+5"], kazan: "varis_zafer", kaybet: "varis_yenilgi", kac: "varis_kacis" }
+              - savas: { dusmanlar: ["varis_ossiran@oyuncu-5%"], kazan: "varis_zafer", kaybet: "varis_yenilgi", kac: "varis_kacis" }
             kronik: { tr: "{yer:yedi_taht|in} varisinin gerçek seviyesini altı tahtın önünde yüksek sesle okudun; o tanrılığın ne kadarının ödünç olduğunu herkes duydu.", en: "You read {yer:yedi_taht} heir's real level out loud before all six thrones, and everyone heard how much of a god was borrowed." }
           - id: "yanki"
             etiket: { tr: "{npc:yanki} içindeki üç dünyayı karıştırsın", en: "Have {npc:yanki} stir up the three worlds in him" }
@@ -3327,7 +3327,7 @@ olaylar:
               - dikkat: 5
               - ahlak: { insanlik: -3, duzen: -2 }
               - iliski: { yanki: { guven: 6, baglilik: 4 } }
-              - savas: { dusmanlar: ["varis_ossiran@oyuncu+4"], kazan: "varis_zafer", kaybet: "varis_yenilgi", kac: "varis_kacis" }
+              - savas: { dusmanlar: ["varis_ossiran@oyuncu-12%"], kazan: "varis_zafer", kaybet: "varis_yenilgi", kac: "varis_kacis" }
             kronik: { tr: "{yer:yedi_taht|in} varisinin içindeki üç dünyayı kafandaki sese birbirine düşürttün; bedelini ikiniz birlikte ödediniz.", en: "The voice in your head turned the three worlds inside {yer:yedi_taht|pos} heir against each other, and the two of you paid for it together." }
           - id: "reddet"
             etiket: { tr: "Düelloyu reddet ve salondan çık", en: "Refuse the duel. Walk out of the hall" }

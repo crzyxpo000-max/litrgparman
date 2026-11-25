@@ -118,6 +118,21 @@ object Report {
             sb.appendLine("| $d | ${percentile(a, 0.1)} | ${percentile(a, 0.5)} | ${percentile(a, 0.9)} |")
         }
         sb.appendLine()
+        sb.appendLine("### Öz Kristali ekonomisi")
+        sb.appendLine()
+        val crystalChecks = results.sumOf { it.crystalChecks }
+        val crystalLocked = results.sumOf { it.crystalLocked }
+        val lockShare = if (crystalChecks == 0) 0.0 else crystalLocked.toDouble() / crystalChecks
+        sb.appendLine("- **İsteğe bağlı ödeme seçenekleri (`oz_kristali_min`):** karşılaşılan $crystalChecks, yetersiz bakiyeyle kilitli " +
+            "$crystalLocked (${pct(lockShare)}; geri dönüş eşiği <%50, DECISIONS #167).")
+        sb.appendLine()
+        sb.appendLine("| Gün | p10 | p50 | p90 |")
+        sb.appendLine("| ---: | ---: | ---: | ---: |")
+        listOf(30, 60, 120, 180, 270, 365).forEach { d ->
+            val cr = results.mapNotNull { it.crystals[d] }
+            sb.appendLine("| $d | ${percentile(cr, 0.1)} | ${percentile(cr, 0.5)} | ${percentile(cr, 0.9)} |")
+        }
+        sb.appendLine()
 
         // ---- Ölümler
         sb.appendLine("## Ölüm oranları")
@@ -147,7 +162,11 @@ object Report {
         sb.appendLine("- Oynanış başına görülen olay: ortalama ${num(results.map { it.events.toDouble() }.average())}.")
         val freq = content.events.keys.associateWith { id -> results.count { id in it.seenIds } }
         val never = freq.filter { it.value == 0 }.keys.sorted()
-        sb.appendLine("- Hiç görülmeyen olay: ${never.size} / ${freq.size}" + if (never.isEmpty()) "." else ": " + never.joinToString(", ") { "`$it`" } + ".")
+        val structuralNever = setOf("atlama_meslek", "bildirim_goz", "bildirim_kapi", "bildirim_rakip", "hasat_vakti")
+        val note = if (never.isNotEmpty() && structuralNever.containsAll(never)) {
+            " *(tamamı yapısal: `atlama_meslek` kapalı meslek sistemi, `bildirim_*` oturum dışı Android bildirimi, `hasat_vakti` Gün 365 yedek güvenlik ağı)*"
+        } else ""
+        sb.appendLine("- Hiç görülmeyen olay: ${never.size} / ${freq.size}" + (if (never.isEmpty()) "." else ": " + never.joinToString(", ") { "`$it`" } + ".") + note)
         val seenSorted = freq.filter { it.value > 0 }.entries.sortedBy { it.value }
         sb.appendLine("- En nadir 10 olay: " + seenSorted.take(10).joinToString(", ") { "`${it.key}` ${pct(it.value.toDouble() / results.size)}" } + ".")
         sb.appendLine("- En sık 10 olay: " + seenSorted.takeLast(10).reversed().joinToString(", ") { "`${it.key}` ${pct(it.value.toDouble() / results.size)}" } + ".")

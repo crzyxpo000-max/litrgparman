@@ -598,7 +598,10 @@ const val REMINDER_MIN_DELAY = 3
 
 private val ENGINE_FLAG_PREFIXES = listOf("yenildi_", "uyanis_", "olay_", "dikkat_esik_", "yozlasma_esik_", "_red_", "_zar_", "_sira_", "bolum_", "hazirlik_")
 private val ENGINE_FLAGS_EXTRA = setOf(com.yukselis.engine.npc.NpcEngine.FLAG_MOURNED)
-private val ENGINE_FLAGS = setOf(com.yukselis.engine.world.WorldEngine.DAILY_WIDE_FLAG)
+private val ENGINE_FLAGS = setOf(
+    com.yukselis.engine.world.WorldEngine.DAILY_WIDE_FLAG,
+    com.yukselis.engine.story.StoryEngine.NG_PLUS_FLAG,
+)
 
 fun flagUsage(content: Content): FlagUsage {
     val read = mutableSetOf<String>()

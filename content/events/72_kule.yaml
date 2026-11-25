@@ -1661,13 +1661,13 @@ olaylar:
           - id: "dovus"
             etiket: { tr: "Yarım kaydınla aleve yürü", en: "Walk into the fire with your half-written record" }
             etkiler:
-              - savas: { dusmanlar: ["kule_arsiv_alevi@oyuncu+5"], ortam: ["yanici"], kazan: "k60_zafer", kaybet: "k60_yenilgi", kac: "k60_kacis" }
+              - savas: { dusmanlar: ["kule_arsiv_alevi@oyuncu+5%"], ortam: ["yanici"], kazan: "k60_zafer", kaybet: "k60_yenilgi", kac: "k60_kacis" }
           - id: "dosyalar"
             etiket: { tr: "Kurtardığın dosyaları kalkan yap", en: "Use the files you saved as a shield" }
             goster: { bayrak: "kule_dosyalar_kurtarildi" }
             etkiler:
               - ahlak: { merhamet: 1 }
-              - savas: { dusmanlar: ["kule_arsiv_alevi@oyuncu+3"], ortam: ["yanici"], kazan: "k60_zafer", kaybet: "k60_yenilgi", kac: "k60_kacis" }
+              - savas: { dusmanlar: ["kule_arsiv_alevi@oyuncu-8%"], ortam: ["yanici"], kazan: "k60_zafer", kaybet: "k60_yenilgi", kac: "k60_kacis" }
           - id: "kademe"
             etiket: { tr: "Kademesine meydan oku: alevle onun seviyesinde dövüş", en: "Challenge its Grade. Fight the fire at its own level" }
             gerekli: { seviye_min: 150 }
@@ -1928,18 +1928,18 @@ olaylar:
           - id: "dovus"
             etiket: { tr: "Tarlanın ortasında dur", en: "Stand your ground in the middle of the field" }
             etkiler:
-              - savas: { dusmanlar: ["kule_hasat_oragi@oyuncu+6"], ortam: ["karanlik"], kazan: "k70_zafer", kaybet: "k70_yenilgi", kac: "k70_kacis" }
+              - savas: { dusmanlar: ["kule_hasat_oragi@oyuncu+6%"], ortam: ["karanlik"], kazan: "k70_zafer", kaybet: "k70_yenilgi", kac: "k70_kacis" }
           - id: "ates"
             etiket: { tr: "Kozaların dibinde ateş yak; orağı ikiye böl", en: "Light fires by the pods. Split the scythe's attention" }
             gerekli: { egilim_min: { buyu: 15 } }
             etkiler:
               - ahlak: { merhamet: -3, insanlik: -2 }
-              - savas: { dusmanlar: ["kule_hasat_oragi@oyuncu+3"], ortam: ["yanici"], kazan: "k70_zafer", kaybet: "k70_yenilgi", kac: "k70_kacis" }
+              - savas: { dusmanlar: ["kule_hasat_oragi@oyuncu-10%"], ortam: ["yanici"], kazan: "k70_zafer", kaybet: "k70_yenilgi", kac: "k70_kacis" }
           - id: "koru"
             etiket: { tr: "Kozaları arkana al; orağı onlardan uzak tut", en: "Keep the pods at your back. Draw the scythe away" }
             etkiler:
               - ahlak: { merhamet: 4 }
-              - savas: { dusmanlar: ["kule_hasat_oragi@oyuncu+6"], ortam: ["dar_gecit"], kazan: "k70_zafer", kaybet: "k70_yenilgi", kac: "k70_kacis" }
+              - savas: { dusmanlar: ["kule_hasat_oragi@oyuncu+6%"], ortam: ["dar_gecit"], kazan: "k70_zafer", kaybet: "k70_yenilgi", kac: "k70_kacis" }
 
       - id: "k70_zafer"
         yer: "kule"
@@ -2169,7 +2169,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 5, duzen: -2 }
               - itibar: { kadimler: -6 }
-              - savas: { dusmanlar: ["kule_gok_gozcusu@oyuncu+6"], ortam: ["karanlik", "tavan"], kazan: "k80_zafer", kaybet: "k80_yenilgi", kac: "k80_kacis" }
+              - savas: { dusmanlar: ["kule_gok_gozcusu@oyuncu+6%"], ortam: ["karanlik", "tavan"], kazan: "k80_zafer", kaybet: "k80_yenilgi", kac: "k80_kacis" }
           - id: "kabul"
             etiket: { tr: "Damgayı al; sonra yine de dövüş", en: "Take the stamp. Then fight anyway" }
             etkiler:
@@ -2177,7 +2177,7 @@ olaylar:
               - ahlak: { insanlik: -6, merhamet: -3 }
               - itibar: { kadimler: 8 }
               - degisken: { kadim_tehdit: 3 }
-              - savas: { dusmanlar: ["kule_gok_gozcusu@oyuncu+4"], ortam: ["karanlik", "tavan"], kazan: "k80_zafer", kaybet: "k80_yenilgi", kac: "k80_kacis" }
+              - savas: { dusmanlar: ["kule_gok_gozcusu@oyuncu-10%"], ortam: ["karanlik", "tavan"], kazan: "k80_zafer", kaybet: "k80_yenilgi", kac: "k80_kacis" }
           - id: "ucuncu"
             etiket: { tr: "\"Üçüncüsü benim.\" Tahtı yıldızlarından sök", en: "\"I'm the third option.\" Tear the stars out of its throne" }
             gerekli: { stat: { int: 255 } }
@@ -2185,7 +2185,7 @@ olaylar:
               - bayrak: "kule_ucuncu_yol"
               - dikkat: 6
               - ahlak: { duzen: -5, insanlik: 2 }
-              - savas: { dusmanlar: ["kule_gok_gozcusu@oyuncu+5"], ortam: ["karanlik"], kazan: "k80_zafer", kaybet: "k80_yenilgi", kac: "k80_kacis" }
+              - savas: { dusmanlar: ["kule_gok_gozcusu@oyuncu-5%"], ortam: ["karanlik"], kazan: "k80_zafer", kaybet: "k80_yenilgi", kac: "k80_kacis" }
 
       - id: "k80_zafer"
         yer: "kule"
@@ -2455,19 +2455,19 @@ olaylar:
           - id: "dovus"
             etiket: { tr: "İstediğini ver: seni durdurmayı denesin", en: "Give them what they want. Let them try to stop you" }
             etkiler:
-              - savas: { dusmanlar: ["kule_onceki_tasiyici@oyuncu+7"], ortam: ["karanlik"], kazan: "k90_zafer", kaybet: "k90_yenilgi", kac: "k90_kacis" }
+              - savas: { dusmanlar: ["kule_onceki_tasiyici@oyuncu+7%"], ortam: ["karanlik"], kazan: "k90_zafer", kaybet: "k90_yenilgi", kac: "k90_kacis" }
           - id: "isik"
             etiket: { tr: "Taslağı keskin bir ışığa boğ; çizgileri sil", en: "Flood the draft with hard light. Erase their lines" }
             gerekli: { egilim_min: { buyu: 20 } }
             etkiler:
               - ahlak: { merhamet: -2 }
-              - savas: { dusmanlar: ["kule_onceki_tasiyici@oyuncu+5"], ortam: ["dar_gecit"], kazan: "k90_zafer", kaybet: "k90_yenilgi", kac: "k90_kacis" }
+              - savas: { dusmanlar: ["kule_onceki_tasiyici@oyuncu-8%"], ortam: ["dar_gecit"], kazan: "k90_zafer", kaybet: "k90_yenilgi", kac: "k90_kacis" }
           - id: "birlikte"
             etiket: { tr: "{npc:yanki} ile birlikte dövüş: onun yalnız kaldığı yerde siz ikisiniz", en: "Fight it with {npc:yanki}. Two of you, where they were alone" }
             goster: { bayrak: "kule_yanki_secti" }
             etkiler:
               - iliski: { yanki: { saygi: 5 } }
-              - savas: { dusmanlar: ["kule_onceki_tasiyici@oyuncu+5"], ortam: ["karanlik"], kazan: "k90_zafer", kaybet: "k90_yenilgi", kac: "k90_kacis" }
+              - savas: { dusmanlar: ["kule_onceki_tasiyici@oyuncu-8%"], ortam: ["karanlik"], kazan: "k90_zafer", kaybet: "k90_yenilgi", kac: "k90_kacis" }
 
       - id: "k90_zafer"
         yer: "kule"
@@ -2717,7 +2717,7 @@ olaylar:
             etiket: { tr: "Başlangıçla dövüş", en: "Fight the beginning" }
             etkiler:
               - ahlak: { duzen: -2, insanlik: 2 }
-              - savas: { dusmanlar: ["kule_ilk_pencere@oyuncu+8"], ortam: ["su"], kazan: "k100_zafer", kaybet: "k100_yenilgi", kac: "k100_kacis" }
+              - savas: { dusmanlar: ["kule_ilk_pencere@oyuncu+8%"], ortam: ["su"], kazan: "k100_zafer", kaybet: "k100_yenilgi", kac: "k100_kacis" }
             kronik: { tr: "Sistem'in İlk Pencere'sine meydan okudun; sana hiç düğmesi verilmemiş o \"hayır\"ı söylemeye kararlıydın.", en: "At the top of the Spire you challenged the System's First Window, set on saying the \"no\" it never gave you a button for." }
           - id: "yanki_dovus"
             etiket: { tr: "{npc:yanki} ile birlikte tek bir bozuk satır gibi dövüş", en: "Fight it with {npc:yanki}, like one corrupted line" }
@@ -2727,7 +2727,7 @@ olaylar:
               - hafiza: { npc: "yanki", id: "olay:kule_kat_100", agirlik: 60 }
               - dikkat: 4
               - ahlak: { insanlik: -3, duzen: -3 }
-              - savas: { dusmanlar: ["kule_ilk_pencere@oyuncu+6"], ortam: ["su"], kazan: "k100_zafer", kaybet: "k100_yenilgi", kac: "k100_kacis" }
+              - savas: { dusmanlar: ["kule_ilk_pencere@oyuncu-6%"], ortam: ["su"], kazan: "k100_zafer", kaybet: "k100_yenilgi", kac: "k100_kacis" }
             kronik: { tr: "Kafanın içindeki sesle tek bir bozuk satır gibi dövüşmeye karar verdin; Sistem'in ne silebileceği ne okuyabileceği bir satır olmayı umdun.", en: "At the summit you chose to fight beside the voice in your head as a single corrupted line, hoping to be one the System could neither delete nor read." }
 
       - id: "k100_zafer"

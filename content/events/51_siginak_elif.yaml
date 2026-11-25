@@ -2565,7 +2565,7 @@ olaylar:
               - ahlak: { duzen: 2, merhamet: -1 }
               - itibar: { siginak: -8, lonca: 6 }
               - iliski: { elif_sari: { guven: -8, baglilik: 3 } }
-              - tohum: { olay: "elif_yoldas_darbe", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: ["elif_yoldas", "elif_yoldas_teklif"] }, hatirlatma: { tr: "Demir Gece'den beri {npc:elif_sari} Gümrük'ün kırık camlarıyla uğraşıyor; seni görmek istiyormuş.", en: "Ever since the Iron Night, {npc:elif_sari} has been patching the Customs House windows. Word is she wants to see you." } }
+              - tohum: { olay: "elif_yoldas_darbe", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: "elif_yoldas" }, hatirlatma: { tr: "Demir Gece'den beri {npc:elif_sari} Gümrük'ün kırık camlarıyla uğraşıyor; seni görmek istiyormuş.", en: "Ever since the Iron Night, {npc:elif_sari} has been patching the Customs House windows. Word is she wants to see you." } }
             kronik: { tr: "Demir Gece'de hekimi kurtardın ama koğuşun ilaçlarını Lonca'ya verdin; Gümrük'ün ilaçsız kalacağını bile bile.", en: "On Iron Night you saved the doctor and handed the ward's medicine to the Guild, knowing the Customs House would go without." }
             sonraki: "@akis"
           - id: "geri"
@@ -2578,7 +2578,7 @@ olaylar:
               - itibar: { siginak: -4, lonca: 2 }
               - iliski: { elif_sari: { guven: -3 } }
               - tohum: { olay: "pala_yargilanmasi", gecikme: { min: 3, max: 6 }, hatirlatma: { tr: "Demir Gece'nin hesabı bekleme salonunda görülecek.", en: "The bill for the Iron Night comes due in the waiting room." } }
-              - tohum: { olay: "elif_yoldas_darbe", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: ["elif_yoldas", "elif_yoldas_teklif"] }, hatirlatma: { tr: "Demir Gece'den beri {npc:elif_sari} Gümrük'ün kırık camlarıyla uğraşıyor; seni görmek istiyormuş.", en: "Ever since the Iron Night, {npc:elif_sari} has been patching the Customs House windows. Word is she wants to see you." } }
+              - tohum: { olay: "elif_yoldas_darbe", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: "elif_yoldas" }, hatirlatma: { tr: "Demir Gece'den beri {npc:elif_sari} Gümrük'ün kırık camlarıyla uğraşıyor; seni görmek istiyormuş.", en: "Ever since the Iron Night, {npc:elif_sari} has been patching the Customs House windows. Word is she wants to see you." } }
             kronik: { tr: "Demir Gece'de Lonca'ya verdiğin ilaçları geri getireceğine söz verdin.", en: "On Iron Night you promised to bring back the medicine you'd handed the Guild." }
             sonraki: "@akis"
 
@@ -2602,7 +2602,7 @@ olaylar:
               - ahlak: { duzen: 4, merhamet: 2 }
               - itibar: { siginak: 8, lonca: -6 }
               - iliski: { elif_sari: { saygi: 4 } }
-              - tohum: { olay: "elif_yoldas_darbe", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: ["elif_yoldas", "elif_yoldas_teklif"] }, hatirlatma: { tr: "Demir Gece'den beri {npc:elif_sari} Gümrük'ün kırık camlarıyla uğraşıyor; seni görmek istiyormuş.", en: "Ever since the Iron Night, {npc:elif_sari} has been patching the Customs House windows. Word is she wants to see you." } }
+              - tohum: { olay: "elif_yoldas_darbe", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: "elif_yoldas" }, hatirlatma: { tr: "Demir Gece'den beri {npc:elif_sari} Gümrük'ün kırık camlarıyla uğraşıyor; seni görmek istiyormuş.", en: "Ever since the Iron Night, {npc:elif_sari} has been patching the Customs House windows. Word is she wants to see you." } }
             kronik: { tr: "Demir Gece'yi püskürtüp Konsey'in kayıtlarına geçirdin; o gece artık {yer:kiyikent_liman|in} tarihinin bir parçasıydı.", en: "You beat back Iron Night and had it entered into the Council's record. That night was part of {yer:kiyikent_liman|pos} history now." }
             sonraki: "@akis"
           - id: "kal"
@@ -2615,7 +2615,7 @@ olaylar:
               - itibar: { siginak: 6 }
               - iliski: { elif_sari: { baglilik: 6, guven: 4 } }
               - hafiza: { npc: "elif_sari", id: "olay:elif_lonca_darbesi", agirlik: 40 }
-              - tohum: { olay: "elif_yoldas_darbe", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: ["elif_yoldas", "elif_yoldas_teklif"] }, hatirlatma: { tr: "Demir Gece'den beri {npc:elif_sari} Gümrük'ün kırık camlarıyla uğraşıyor; seni görmek istiyormuş.", en: "Ever since the Iron Night, {npc:elif_sari} has been patching the Customs House windows. Word is she wants to see you." } }
+              - tohum: { olay: "elif_yoldas_darbe", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: "elif_yoldas" }, hatirlatma: { tr: "Demir Gece'den beri {npc:elif_sari} Gümrük'ün kırık camlarıyla uğraşıyor; seni görmek istiyormuş.", en: "Ever since the Iron Night, {npc:elif_sari} has been patching the Customs House windows. Word is she wants to see you." } }
             kronik: { tr: "Demir Gece'nin ardından Gümrük'ün merdivenlerinde bir hekime 'Bu gece de buradayım' dedin ve ciddiydin.", en: "After Iron Night, on the Customs House steps, you told a doctor, \"I'm here tonight, too.\" You meant it." }
             sonraki: "@akis"
           - id: "hesap"
@@ -2628,7 +2628,7 @@ olaylar:
               - ahlak: { duzen: -1, merhamet: 1 }
               - itibar: { lonca: -10, siginak: 5 }
               - iliski: { elif_sari: { korku: 2 } }
-              - tohum: { olay: "elif_yoldas_darbe", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: ["elif_yoldas", "elif_yoldas_teklif"] }, hatirlatma: { tr: "Demir Gece'den beri {npc:elif_sari} Gümrük'ün kırık camlarıyla uğraşıyor; seni görmek istiyormuş.", en: "Ever since the Iron Night, {npc:elif_sari} has been patching the Customs House windows. Word is she wants to see you." } }
+              - tohum: { olay: "elif_yoldas_darbe", gecikme: { min: 2, max: 4 }, kosul: { npc_hayatta: "elif_sari", bayrak_yok: "elif_yoldas" }, hatirlatma: { tr: "Demir Gece'den beri {npc:elif_sari} Gümrük'ün kırık camlarıyla uğraşıyor; seni görmek istiyormuş.", en: "Ever since the Iron Night, {npc:elif_sari} has been patching the Customs House windows. Word is she wants to see you." } }
             kronik: { tr: "Demir Gece'nin sabahı {yer:sanayi|e} yürüyüp Lonca'ya {yer:kiyikent_liman|e} yürümenin hesabını sordun.", en: "The morning after Iron Night you walked into {yer:sanayi} and made the Guild answer for marching on {yer:kiyikent_liman}." }
             sonraki: "@akis"
 

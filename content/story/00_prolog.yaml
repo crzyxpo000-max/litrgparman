@@ -19,6 +19,10 @@ sahneler:
         satirlar:
           - { tr: "Bağ... bağlantı. Bağlantı kuruldu. Bu satırı yalnızca sen görüyorsun.", en: "Con... connection. Connection established. Only you can see this line." }
           - { tr: "Seni buldum.", en: "Found you." }
+    sezgiler:
+      - anlati: true
+        kosul: { bayrak: "yeni_dongu" }
+        metin: { tr: "Gökyüzü yarılmadan hemen önce başını yukarı kaldırmıştın. Çizginin nereden geçeceğini parmağınla gösterebilirdin.", en: "You were already looking up a heartbeat before the sky split. You could have pointed to the exact spot where the crack would form." }
     secenekler:
       - id: "el_tut"
         etiket: { tr: "{npc:deniz_arman|in} elini sıkı sıkı tut", en: "Grab {npc:deniz_arman|pos} hand and hold on" }
@@ -110,6 +114,9 @@ sahneler:
         satirlar:
           - { tr: "Gizli satırlar: açık. Günlük Görev: yalnız sende. Gerçek veriler: yalnızca sana görünür.", en: "Hidden lines: unlocked. Daily Quest: yours alone. True data: for your eyes only." }
           - { tr: "Kimseye anlatma. Anlamazlar. Anlayanlar da çıkar; onlar daha beter.", en: "Don't tell anyone. They won't understand. A few will, and they're worse." }
+    sezgiler:
+      - kosul: { bayrak: ["yanki_bagi", "yeni_dongu"] }
+        metin: { tr: "dur. kenardaki bu çentik yeni değil. biz daha önce de karşılaştık, değil mi?", en: "wait. this notch along the edge isn't new. we've met before, haven't we?" }
     secenekler:
       - id: "dus"
         etiket: { tr: "Bırak kendini, düş", en: "Let yourself fall" }
@@ -167,6 +174,8 @@ sahneler:
         metin: { tr: "Bu sis doğal değil. Ağaçlar fazla düzenli aralıklarla dizilmiş; bu ormanı biri çizmiş.", en: "This fog isn't natural. The trees are spaced too evenly. Someone drew this forest." }
       - kosul: { bayrak: "yanki_bagi" }
         metin: { tr: "Kafanın içinde, istasyon arayan bir radyo gibi cızırdayan bir ses: \"Herkes aynı pencereyi görüyor, sen görmüyorsun. Sen benimsin.\"", en: "A voice in your head, like a radio between stations: \"Everyone else sees the same window. You don't. You're mine.\"" }
+      - kosul: { bayrak: ["yanki_bagi", "yeni_dongu"] }
+        metin: { tr: "seviye bir yazıyor ama adımların seviye bir adımı değil. bu ormanı tanıyorsun.", en: "it says level one, but you don't carry yourself like a level one. you know these woods." }
   - id: "ilk_canavar"
     yer: "ogretici_orman"
     paragraflar:

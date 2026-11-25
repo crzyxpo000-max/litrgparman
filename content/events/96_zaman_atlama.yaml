@@ -23,9 +23,35 @@ olaylar:
             kosul: { degisken_min: { _atlama_gun: 5 } }
           - metin: { tr: "Programı bitiremeden haber geliyor: başka bir yerde biri seni bekliyor. Havluyu omzuna atıp toparlanıyorsun.", en: "Word reaches you before you can finish the program: someone, somewhere else, is waiting on you. You sling the towel over your shoulder and pack up." }
             kosul: { degisken_min: { _atlama_kesildi: 1 } }
+        bildirimler:
+          - tur: "sistem"
+            kosul: { perde: 2, itibar_min: { siginak: 15 }, lider_fraksiyon: "siginak" }
+            baslik: { tr: "[Şehir bülteni · {yer:kiyikent}]", en: "[City bulletin · {yer:kiyikent}]" }
+            satirlar:
+              - { tr: "{fraksiyon:siginak} rıhtım aşevlerini genişletti; kıyı devriyeleri sıklaştı.", en: "The {fraksiyon:siginak} expanded the dockside kitchens; waterfront patrols are tighter." }
+          - tur: "sistem"
+            kosul: { perde: 2, itibar_min: { lonca: 15 }, lider_fraksiyon: "lonca" }
+            baslik: { tr: "[Şehir bülteni · {yer:kiyikent}]", en: "[City bulletin · {yer:kiyikent}]" }
+            satirlar:
+              - { tr: "{fraksiyon:lonca} kapı ganimetlerine yeni tarife koydu; {yer:sanayi} vardiyaları uzadı.", en: "The {fraksiyon:lonca} posted new Gate-loot tariffs; shifts in {yer:sanayi} ran late." }
+          - tur: "sistem"
+            kosul: { perde: 3 }
+            baslik: { tr: "[Ağ bülteni · Küresel Sıralama]", en: "[Network bulletin · Global Ranking]" }
+            satirlar:
+              - { tr: "Üst basamaklarda üç isim yer değiştirdi; {yer:kule_dibi} çevresinde kamp ateşleri çoğaldı.", en: "Three names traded spots near the top of the board; campfires multiplied around {yer:kule_dibi}." }
+          - tur: "uyari"
+            kosul: { perde: 4 }
+            baslik: { tr: "[Yörünge izleme]", en: "[Orbital watch]" }
+            satirlar:
+              - { tr: "Gökyüzündeki sayaç bir dilim daha eridi. Şehirde kimse yüksek sesle konuşmuyor.", en: "The counter in the sky shaved off another sliver. Nobody in the city talks above a murmur." }
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
             metin: { tr: "sayıyorum ben de. sen yoruldukça büyüyorsun, büyüdükçe daha az yoruluyorsun. güzel bir kısır döngü bu.", en: "i'm counting too. the more you tire, the more you grow, and the more you grow, the less you tire. it's a nice little loop." }
+          - kosul: { bayrak: ["yanki_bagi", "yeni_dongu"] }
+            metin: { tr: "kasların hatırlamıyor ama elin hatırlıyor. aynı tutuş, aynı nefes.", en: "your muscles don't remember, but your hands do. same grip, same breath." }
+          - anlati: true
+            kosul: { dikkat_min: 45 }
+            metin: { tr: "Antrenman alanının uzağında iki yabancı durmuş, açık pencereleriyle hareketlerini not ediyor. Göz göze geldiğinizde ikisi de sokağa karışıp kayboldu.", en: "Past the edge of the yard, two strangers stood taking notes on your form against open windows. The second you met their eyes, they slipped back into the street." }
         secenekler:
           - id: "devam"
             etiket: { tr: "Güne dön", en: "Get back to the day" }
@@ -52,9 +78,28 @@ olaylar:
             kosul: { degisken_min: { _atlama_gun: 5 } }
           - metin: { tr: "Son kapıyı kapatırken bir koşucu soluk soluğa yanına varıyor: başka bir yerde seni bekleyen bir iş var.", en: "You're closing the last Gate when a runner skids up, out of breath: there's a job waiting for you somewhere else." }
             kosul: { degisken_min: { _atlama_kesildi: 1 } }
+        bildirimler:
+          - tur: "sistem"
+            kosul: { perde: 2, itibar_min: { sessiz_ag: 15 }, lider_fraksiyon: "sessiz_ag" }
+            baslik: { tr: "[Frekans özeti · {fraksiyon:sessiz_ag}]", en: "[Frequency digest · {fraksiyon:sessiz_ag}]" }
+            satirlar:
+              - { tr: "Gece yayınlarında kayıtsız iki kapı koordinatı paylaşıldı; ikisi de sabaha karşı kapandı.", en: "Two unregistered Gate coordinates went out on the night broadcast; both were sealed before dawn." }
+          - tur: "sistem"
+            kosul: { perde: 3 }
+            baslik: { tr: "[Kapı yoğunluğu · Çok-evren Ağı]", en: "[Gate density · Multiverse Network]" }
+            satirlar:
+              - { tr: "Kıyı hattındaki çatlakların tınısı ağırlaştı; komşu katmanların basıncı hissediliyor.", en: "Rifts along the coast carry a heavier hum; pressure from neighboring Layers is bleeding through." }
+          - tur: "uyari"
+            kosul: { perde: 4 }
+            baslik: { tr: "[Son kapılar]", en: "[Final Gates]" }
+            satirlar:
+              - { tr: "Küçük kapılar artık ganimet bırakmıyor; içlerinden yalnızca soğumuş kül kokusu sızıyor.", en: "Small Gates aren't dropping loot anymore; only the smell of cold ash leaks through." }
         sezgiler:
           - kosul: { bayrak: "yanki_bagi" }
             metin: { tr: "küçük kapılar. küçük lokmalar. doymuyorum ama oyalanıyorum.", en: "little gates. little bites. it doesn't fill me up, but it keeps me busy." }
+          - anlati: true
+            kosul: { dikkat_min: 50 }
+            metin: { tr: "Kapattığın son kapının kenarında {fraksiyon:lonca} mühürlü gözlem çivisi buldun. Biri nöbet saatlerini ölçmüş.", en: "By the rim of the last Gate you sealed, you found a survey spike stamped by the {fraksiyon:lonca}. Somebody's been timing your shifts." }
         secenekler:
           - id: "devam"
             etiket: { tr: "Güne dön", en: "Get back to the day" }
@@ -107,6 +152,23 @@ olaylar:
             kosul: { degisken_min: { _atlama_gun: 5 } }
           - metin: { tr: "Sonra haber geliyor: başka bir yerde bir iş seni bekliyor. {npc:@} omzunu sıvazlayıp \"Git hadi\" diyor, \"burada bekliyor olacağım.\"", en: "Then word comes: there's something waiting for you somewhere else. {npc:@} claps you on the shoulder. \"Go on,\" {zamir:@|o} {zamir:@|s}. \"I'll be right here.\"" }
             kosul: { degisken_min: { _atlama_kesildi: 1 } }
+        bildirimler:
+          - tur: "sistem"
+            kosul: { perde: 3 }
+            baslik: { tr: "[Üs günlüğü]", en: "[Base log]" }
+            satirlar:
+              - { tr: "Dış mahallelerden yeni sığınmacılar ulaştı; nöbet çizelgeleri yeniden yazıldı.", en: "New refugees came in from the outer districts; the watch rosters were rewritten." }
+          - tur: "sistem"
+            kosul: { perde: 4 }
+            baslik: { tr: "[Üs günlüğü]", en: "[Base log]" }
+            satirlar:
+              - { tr: "Üste mektup ve emanet bırakanların sayısı arttı; herkes son haftaya hazırlanıyor.", en: "More people are leaving letters and keepsakes at base; everyone is bracing for the final week." }
+        sezgiler:
+          - kosul: { bayrak: "yanki_bagi" }
+            metin: { tr: "ateş sıcak. sesleri de fena değil. arada susup dinlemek iyi geliyor.", en: "the fire's warm. their voices aren't bad either. going quiet and listening for once feels alright." }
+          - anlati: true
+            kosul: { dikkat_min: 45 }
+            metin: { tr: "Ateşin uzağından geçen devriyeler adınızı fısıltıyla anıyor; hanginizden çekindikleri belli değil.", en: "Patrols passing wide of your fire say your names under their breath, and it's hard to tell which of you makes them nervous." }
         secenekler:
           - id: "devam"
             etiket: { tr: "Güne dön", en: "Get back to the day" }

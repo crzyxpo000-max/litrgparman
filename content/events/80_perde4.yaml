@@ -1591,7 +1591,7 @@ olaylar:
             etiket: { tr: "İlk kapını kendi ellerinle kır", en: "Break your first Gate with your own hands" }
             etkiler:
               - ahlak: { duzen: 2, insanlik: -1 }
-              - savas: { dusmanlar: ["cekirdek_kapicisi@oyuncu+4"], ortam: ["dar_gecit"], kazan: "p4_cyol_esik", kaybet: "p4_cyol_yenilgi" }
+              - savas: { dusmanlar: ["cekirdek_kapicisi@oyuncu+5%"], ortam: ["dar_gecit"], kazan: "p4_cyol_esik", kaybet: "p4_cyol_yenilgi" }
           - id: "hatirlat"
             tur: "gosteris"
             etiket: { tr: "Kapıcıya her Kapı'nın neden kapandığını anlat", en: "Tell the Doorwarden why every Gate was closed" }
@@ -1605,7 +1605,7 @@ olaylar:
             gerekli: { ordu_min: 30 }
             etkiler:
               - ahlak: { duzen: 3, insanlik: -3 }
-              - savas: { dusmanlar: ["cekirdek_kapicisi@oyuncu+1"], ortam: ["dar_gecit"], kazan: "p4_cyol_esik", kaybet: "p4_cyol_yenilgi" }
+              - savas: { dusmanlar: ["cekirdek_kapicisi@oyuncu-10%"], ortam: ["dar_gecit"], kazan: "p4_cyol_esik", kaybet: "p4_cyol_yenilgi" }
 
       - id: "p4_cyol_konusma"
         yer: "kule_dibi"
@@ -1642,7 +1642,7 @@ olaylar:
             etiket: { tr: "Kalk ve hemen yeniden in", en: "Get up and go right back down" }
             etkiler:
               - ahlak: { duzen: -2, insanlik: -1 }
-              - savas: { dusmanlar: ["cekirdek_kapicisi@oyuncu"], ortam: ["dar_gecit"], kazan: "p4_cyol_esik", kaybet: "p4_cyol_geri" }
+              - savas: { dusmanlar: ["cekirdek_kapicisi@oyuncu-15%"], ortam: ["dar_gecit"], kazan: "p4_cyol_esik", kaybet: "p4_cyol_geri" }
           - id: "dinlen"
             etiket: { tr: "Bir gece dinlen; merdiven bekler", en: "Rest one night. The stairs will wait" }
             etkiler:
@@ -1806,7 +1806,7 @@ olaylar:
               - bolge: "sistem_cekirdegi"
               - ahlak: { duzen: -6, insanlik: 4 }
               - tohum: { olay: "yanki_son_sir", gecikme: { min: 1, max: 2 }, kosul: { npc_hayatta: "yanki", bayrak_yok: "yanki_silindi" } }
-              - savas: { dusmanlar: ["cekirdek_duzeltici@oyuncu+6"], ortam: ["karanlik"], kazan: "p4_scek_kok", kaybet: "p4_scek_kovuldu" }
+              - savas: { dusmanlar: ["cekirdek_duzeltici@oyuncu+8%"], ortam: ["karanlik"], kazan: "p4_scek_kok", kaybet: "p4_scek_kovuldu" }
             kronik: { tr: "Sistem Çekirdeği'ne vardığında tek bir soru sormadan yumruğunu kaldırdın; karşına senin boyunda bir düzeltme dikildi.", en: "When you reached the System Core, you raised your fist without asking a single question, and a correction your own height rose to meet you." }
 
       - id: "p4_scek_dokun"
@@ -1854,7 +1854,7 @@ olaylar:
             etiket: { tr: "Arkanı dön ve düzeltmeyle yüzleş", en: "Turn around and face the correction" }
             etkiler:
               - ahlak: { duzen: -2, insanlik: 2 }
-              - savas: { dusmanlar: ["cekirdek_duzeltici@oyuncu+5"], ortam: ["karanlik"], kazan: "p4_scek_kok", kaybet: "p4_scek_kovuldu" }
+              - savas: { dusmanlar: ["cekirdek_duzeltici@oyuncu"], ortam: ["karanlik"], kazan: "p4_scek_kok", kaybet: "p4_scek_kovuldu" }
           - id: "gizlen"
             etiket: { tr: "{npc:yanki} seni satırların arasına saklasın", en: "Let {npc:yanki} hide you between the lines" }
             goster: { bayrak: "yanki_bagi" }
@@ -2063,7 +2063,7 @@ olaylar:
             etkiler:
               - ahlak: { duzen: -3, insanlik: 2 }
               - iliski: { deniz_arman: { saygi: 4 } }
-              - savas: { dusmanlar: ["p4_meclis_makasi@oyuncu+6"], ortam: ["karanlik"], kazan: "p4_d100_zafer", kaybet: "p4_d100_yenilgi" }
+              - savas: { dusmanlar: ["p4_meclis_makasi@oyuncu+6%"], ortam: ["karanlik"], kazan: "p4_d100_zafer", kaybet: "p4_d100_yenilgi" }
           - id: "gizle"
             tur: "gizle"
             etiket: { tr: "{npc:yanki} seni listeden silsin", en: "Have {npc:yanki} scrub you off the list" }
@@ -2081,7 +2081,7 @@ olaylar:
             etkiler:
               - aciga_vur: true
               - ahlak: { insanlik: -2, duzen: -2 }
-              - savas: { dusmanlar: ["p4_meclis_makasi@oyuncu+2"], ortam: ["karanlik"], kazan: "p4_d100_zafer", kaybet: "p4_d100_yenilgi" }
+              - savas: { dusmanlar: ["p4_meclis_makasi@oyuncu-10%"], ortam: ["karanlik"], kazan: "p4_d100_zafer", kaybet: "p4_d100_yenilgi" }
           - id: "thessar"
             etiket: { tr: "{npc:thessar} Meclis adına araya girsin", en: "Let {npc:thessar} step in on the Conclave's behalf" }
             goster: { npc_hayatta: "thessar", iliski_min: { thessar: { baglilik: 40 } } }
@@ -2559,13 +2559,13 @@ olaylar:
             etkiler:
               - ahlak: { merhamet: 2, duzen: 2 }
               - iliski: { kaya_demir: { saygi: 4 } }
-              - savas: { dusmanlar: ["p4_tasma_anasi@oyuncu+4"], ortam: ["karanlik"], kazan: "p4_sonkapi_zafer", kaybet: "p4_sonkapi_yenilgi" }
+              - savas: { dusmanlar: ["p4_tasma_anasi@oyuncu+5%"], ortam: ["karanlik"], kazan: "p4_sonkapi_zafer", kaybet: "p4_sonkapi_yenilgi" }
           - id: "avcilar"
             etiket: { tr: "Avcıları topla; birlikte girin", en: "Rally the hunters. Go in together" }
             etkiler:
               - ahlak: { duzen: 4, insanlik: 3 }
               - itibar: { lonca: 3, siginak: 2 }
-              - savas: { dusmanlar: ["p4_tasma_anasi@oyuncu+2"], ortam: ["karanlik"], kazan: "p4_sonkapi_zafer", kaybet: "p4_sonkapi_yenilgi" }
+              - savas: { dusmanlar: ["p4_tasma_anasi@oyuncu-10%"], ortam: ["karanlik"], kazan: "p4_sonkapi_zafer", kaybet: "p4_sonkapi_yenilgi" }
           - id: "gunes"
             tur: "gosteris"
             etiket: { tr: "Kapı'yı kenarlarından tut, içini dışına, güneşe çevir", en: "Grab the Gate by its edges. Turn it inside out, into the sun" }

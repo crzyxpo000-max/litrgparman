@@ -11,7 +11,7 @@ Bu dosya `CLAUDE.md` ile aynı proje kurallarını taşır; kural değişiklikle
 
 - **Hikaye yapısı değişikliği (bölüm, üs/görev, konum, son tarih; `docs/CHAPTERS.md`, `docs/STORY_FLOW.md`, DECISIONS #130–#139) bitti.**
 - **Aşama 9 (denge ve yayın) bitti; imzalama anahtarı ve Play Console kullanıcıda.** Aşama 0–7 tamam. Aşama 7: Perde 2–4 ve sonlar (`docs/PERDE2_4.md` içerik sözleşmesi: perdeler, bölgeler, ortak bayraklar, son koşulları, partiler).
-- Oyuncu gözüyle inceleme (`docs/INCELEME_AKIS.md`) ve Paket 1–7 (`docs/UI_REVIEW.md`, DECISIONS #151–#186) tamamlandı; açık maddeler ve önerilen sıra `DEVIR.md`'de.
+- Oyuncu gözüyle inceleme (`docs/INCELEME_AKIS.md`) ve Paket 1–8 (`docs/UI_REVIEW.md`, DECISIONS #151–#190) tamamlandı; açık maddeler ve önerilen sıra `DEVIR.md`'de.
 - Aşama 8 kaldırıldı. Aşama 6: Perde 1 dikey dilimi (`docs/PERDE1.md`; 48 olay, yeni açılış, zindanlar).
 - Aşama 5 tamam. Aşama 5: NPC sistemi (`npc/`: 4 eksen, hafıza, gündem, eşikler, ölüm, yoldaşlar, düello,
   Küresel Sıralama, yoldaş görüşleri, güce tepkiler, bilgi günlüğü, yalanlar, izler, Ordu modeli).
