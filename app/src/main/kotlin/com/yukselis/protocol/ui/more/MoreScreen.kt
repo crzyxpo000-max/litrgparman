@@ -202,6 +202,9 @@ fun MoreScreen(
                     ToggleRow(stringResource(R.string.combat_numbers), null, settings.combatNumbers, enabled = true) { on ->
                         onSettings { it.copy(combatNumbers = on) }
                     }
+                    ToggleRow(stringResource(R.string.fast_combat), null, settings.fastCombat, enabled = true) { on ->
+                        onSettings { it.copy(fastCombat = on) }
+                    }
                     NotificationToggle(settings.notifications, notificationDenied, onSettings, onNotificationPermission)
                     LicensesRow()
                 }

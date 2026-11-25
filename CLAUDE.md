@@ -238,8 +238,9 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Savaş varken Hikaye sekmesi `CombatScreen` gösterir; savaş başında Normal modda `checkpoint` kaydı yazılır.
 - Release: R8 açık (`app/proguard-rules.pro`), imzalama `keystore.properties` (git dışı). compileSdk 37, targetSdk 36.
 - Bildirimler: `data/Notifications.kt` (WorkManager, kanal, izin); Ayarlar'da anahtar; `ProvideLanguage` izin kaydını taşır.
-- Gün akışında Kule Dibi'nde Kule düğmesi (`HubView.tower`); kademenin altındaki katlar varsa "Hızlı tırmanış" düğmesi (`TowerView.fastTo`). Son sahnesinde epilog kartları (`EndingView`: son, OP MC türü, NPC'ler,
-  fraksiyonlar, en kritik 5 seçim). Bitirilen oyunlar ve Döngü (New Game+) `SettingsStore` metasında; başlıkta Yeni Oyun+ anahtarı.
+- Gün akışında Kule Dibi'nde Kule düğmesi (`HubView.tower`); kademenin altındaki katlar varsa "Hızlı tırmanış" düğmesi (`TowerView.fastTo`). Son sahnesinde adım adım epilog kartları (`EndingView`: son, OP MC türü, kritik 5 seçim, NPC'ler,
+  fraksiyonlar; `Tümünü göster` seçeneğiyle, DECISIONS #185). Bölüm kapanış kartı (`ChapterLine.highlights`, `nextTitle`) o bölümdeki kritik seçimleri ve sonraki bölüm adını gösterir.
+- Bitirilen oyunlar, Döngü (New Game+) ve kalıcı Arşiv (Sonlar, OP MC türleri, Gizli sınıflar, Benzersiz yetenekler; `StoryEngine.archive`) `SettingsStore` metasında; başlıkta Yeni Oyun+ anahtarı ve Arşiv sayfası (#186). Savaşta boss faz çentikleri, Analiz zaaf vurgusu, hızlı otomatik savaş ayarı (`Settings.fastCombat`), ekransız anında Ezme ve katmanlı titreşim (`Haptics.kt`, #183–#186).
 
 ## Test notları
 

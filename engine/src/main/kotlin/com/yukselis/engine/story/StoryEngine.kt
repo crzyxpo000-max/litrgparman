@@ -105,6 +105,17 @@ class StoryEngine(val content: Content) {
         val label = m?.let {
             content.texts.formatL("gorev_etiket_${it.kind.key}", "region" to world.regionName(it.region))[lang]
         }
+        val highlights = state.chronicle
+            .filter { it.day in ch.open..ch.end }
+            .sortedWith(compareByDescending<ChronicleEntry> { it.weight }.thenBy { it.day })
+            .mapNotNull { c ->
+                val choice = content.scenes[c.scene]?.choices?.firstOrNull { it.id == c.choice }
+                val raw = choice?.chronicle ?: content.events[c.event]?.card
+                raw?.let { text(it[lang], state, lang) }
+            }
+            .distinct()
+            .take(3)
+        val next = content.chapters.next(ch.no)
         return com.yukselis.engine.world.ChapterLine(
             no = ch.no,
             title = text(ch.title[lang], state, lang),
@@ -113,13 +124,15 @@ class StoryEngine(val content: Content) {
             phase = state.chapterPhase,
             onMission = m != null,
             missionLabel = label,
-            isFinal = content.chapters.next(ch.no) == null,
+            isFinal = next == null,
             countdown = ch.countdown?.takeIf {
                 state.chapterPhase == com.yukselis.engine.world.ChapterPhase.BRIEF || state.chapterPhase == com.yukselis.engine.world.ChapterPhase.PREP
             }?.let { cd ->
                 val n = chapterDaysLeft(state, ch)
                 text(LText(cd.tr.replace("{n}", "$n"), cd.en.replace("{n}", "$n"))[lang], state, lang)
             },
+            highlights = highlights,
+            nextTitle = next?.let { text(it.title[lang], state, lang) },
         )
     }
 
@@ -358,6 +371,8 @@ class StoryEngine(val content: Content) {
                 phase = e.phase,
                 intelligent = d.intelligent,
                 alive = e.alive,
+                phaseThresholds = d.phases.map { it.threshold },
+                weaknessKey = if (e.analyzed) d.weakness else null,
             )
         }
         val skills = p.skills.mapNotNull { s ->
@@ -373,6 +388,7 @@ class StoryEngine(val content: Content) {
                 usable = cd == 0 && p.mp >= d.costMp && c.stamina >= d.costStamina,
                 targetsAll = d.target == com.yukselis.engine.system.SkillTarget.ALL,
                 self = d.target == com.yukselis.engine.system.SkillTarget.SELF || d.heals,
+                tags = d.tags,
             )
         }
         val items = p.inventory.entries.sortedBy { it.key }.mapNotNull { (id, n) ->
@@ -483,7 +499,83 @@ class StoryEngine(val content: Content) {
             grade = s.player.grade.name,
             day = s.day,
             unlocksNewGamePlus = def.id == LOOP_ENDING,
+            archetypeId = archetype?.id,
         )
+    }
+
+    // ---- Paket 7: kalıcı Arşiv / Kodeks ----
+
+    /** Oyuncunun şu anki gizli sınıf kimliği (varsa); evrilmişse temel gizli sınıfı da içerir. */
+    fun unlockedHiddenClasses(state: WorldState): Set<String> {
+        val cid = state.player.classId ?: return emptySet()
+        val cls = content.classes[cid] ?: return emptySet()
+        return buildSet {
+            if (cls.kind == ClassKind.HIDDEN) add(cls.id)
+            cls.evolvesFrom?.let { parent -> if (content.classes[parent]?.kind == ClassKind.HIDDEN) add(parent) }
+        }
+    }
+
+    /** Oyuncunun sahip olduğu Benzersiz yetenek kimlikleri. */
+    fun unlockedUniqueSkills(state: WorldState): Set<String> =
+        state.player.skills.mapNotNull { s -> content.skills[s.id]?.takeIf { it.rarity == Rarity.UNIQUE }?.id }.toSet()
+
+    /** Başlık ekranı Arşiv görünümü: kilitli girdiler "???" olarak saklanır (spoiler yok). */
+    fun archive(
+        unlockedEndings: Set<String>,
+        unlockedArchetypes: Set<String>,
+        unlockedClasses: Set<String>,
+        unlockedSkills: Set<String>,
+        completedGames: Int,
+        lang: Lang,
+    ): ArchiveView {
+        fun plain(raw: String) = resolver.resolve(raw, lang, if (lang == Lang.TR) "Arda" else "Alex")
+        fun <T> section(items: List<T>, idOf: (T) -> String, nameOf: (T) -> String, descOf: (T) -> String, unlocked: Set<String>, rarityOf: (T) -> Rarity? = { null }): ArchiveSectionView {
+            val entries = items.map { item ->
+                val id = idOf(item)
+                val open = id in unlocked
+                ArchiveEntryView(
+                    id = id,
+                    name = if (open) nameOf(item) else "???",
+                    description = if (open) descOf(item) else "",
+                    unlocked = open,
+                    rarity = if (open) rarityOf(item) else null,
+                )
+            }
+            return ArchiveSectionView(entries.count { it.unlocked }, entries.size, entries)
+        }
+        val endings = section(
+            content.endings.endings.values.sortedBy { it.order },
+            idOf = { it.id },
+            nameOf = { it.name[lang] },
+            descOf = { plain(it.summary[lang]) },
+            unlocked = unlockedEndings,
+            rarityOf = { if (it.hidden) Rarity.UNIQUE else Rarity.EPIC },
+        )
+        val archetypes = section(
+            content.endings.archetypes,
+            idOf = { it.id },
+            nameOf = { it.name[lang] },
+            descOf = { plain(it.description[lang]) },
+            unlocked = unlockedArchetypes,
+            rarityOf = { Rarity.RARE },
+        )
+        val hiddenClasses = section(
+            content.classes.values.filter { it.kind == ClassKind.HIDDEN }.sortedBy { it.id },
+            idOf = { it.id },
+            nameOf = { it.name[lang] },
+            descOf = { plain(it.description[lang]) },
+            unlocked = unlockedClasses,
+            rarityOf = { Rarity.LEGENDARY },
+        )
+        val uniqueSkills = section(
+            content.skills.values.filter { it.rarity == Rarity.UNIQUE }.sortedBy { it.id },
+            idOf = { it.id },
+            nameOf = { it.name[lang] },
+            descOf = { plain(it.description[lang]) },
+            unlocked = unlockedSkills,
+            rarityOf = { Rarity.UNIQUE },
+        )
+        return ArchiveView(completedGames, endings, archetypes, hiddenClasses, uniqueSkills)
     }
 
     /** En kritik 5 seçim: ağırlığa göre, eşitlikte erken olan; gün sırasıyla gösterilir. */

@@ -167,4 +167,8 @@ data class ChapterLine(
     val isFinal: Boolean,
     /** Tarihli operasyonun geri sayımı ("Gemi inişine 6 gün"); yoksa null. */
     val countdown: String? = null,
+    /** Bölüm kapanış kartında: bu bölümde yapılan en önemli 2–3 seçim (UI_REVIEW E3). */
+    val highlights: List<String> = emptyList(),
+    /** Bölüm kapanış kartında: bir sonraki bölümün adı (finalde null). */
+    val nextTitle: String? = null,
 )

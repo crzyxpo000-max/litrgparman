@@ -128,7 +128,36 @@ data class EndingView(
     val day: Int,
     /** Gizli Döngü sonu: New Game+ açılır. */
     val unlocksNewGamePlus: Boolean,
+    /** Arşiv kaydı için OP MC türü kimliği. */
+    val archetypeId: String? = null,
 )
+
+// ---- Paket 7: başlık ekranı Arşiv / Kodeks ----
+
+data class ArchiveEntryView(
+    val id: String,
+    val name: String,
+    val description: String,
+    val unlocked: Boolean,
+    val rarity: Rarity? = null,
+)
+
+data class ArchiveSectionView(
+    val unlockedCount: Int,
+    val totalCount: Int,
+    val entries: List<ArchiveEntryView>,
+)
+
+data class ArchiveView(
+    val completedGames: Int,
+    val endings: ArchiveSectionView,
+    val archetypes: ArchiveSectionView,
+    val hiddenClasses: ArchiveSectionView,
+    val uniqueSkills: ArchiveSectionView,
+) {
+    val unlockedTotal: Int get() = endings.unlockedCount + archetypes.unlockedCount + hiddenClasses.unlockedCount + uniqueSkills.unlockedCount
+    val grandTotal: Int get() = endings.totalCount + archetypes.totalCount + hiddenClasses.totalCount + uniqueSkills.totalCount
+}
 
 data class RegionView(
     val id: String,
@@ -403,6 +432,10 @@ data class EnemyView(
     val phase: Int,
     val intelligent: Boolean,
     val alive: Boolean,
+    /** Boss can çubuğu faz eşikleri (yüzde, örn. [70, 40, 15]; UI_REVIEW E4). */
+    val phaseThresholds: List<Int> = emptyList(),
+    /** Analiz edildiyse zaaf etiketi (`ates`, `buz`, `goz` …): eşleşen yetenek/ortam vurgusu için. */
+    val weaknessKey: String? = null,
 )
 
 data class CombatLogView(val prose: String, val numbers: String?)
@@ -418,6 +451,8 @@ data class CombatSkillView(
     val usable: Boolean,
     val targetsAll: Boolean,
     val self: Boolean,
+    /** Yeteneğin hasar/öğe etiketleri (`ates`, `buz`, `goz` …): zaaf eşleşmesi için. */
+    val tags: List<String> = emptyList(),
 )
 
 data class EnvironmentView(val tag: String, val name: String, val used: Boolean)

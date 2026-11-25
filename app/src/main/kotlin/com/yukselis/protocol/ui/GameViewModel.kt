@@ -41,6 +41,7 @@ import kotlin.random.Random
 
 private const val TAG = "Yukselis"
 private const val AUTO_DELAY_MS = 650L
+private const val FAST_AUTO_DELAY_MS = 120L
 
 enum class UiMessage { SAVED, LOADED, LOAD_FAILED, IRONMAN_NO_MANUAL, ACTION_FAILED }
 
@@ -79,6 +80,8 @@ data class UiState(
     val recap: com.yukselis.engine.story.RecapView? = null,
     /** Döngü sonu görüldü: başlıkta New Game+ seçeneği. */
     val newGamePlusUnlocked: Boolean = false,
+    /** Başlık ekranı Arşiv / Kodeks görünümü (Paket 7). */
+    val archive: com.yukselis.engine.story.ArchiveView? = null,
     /** Android 13+ bildirim izni reddedildi (bir daha kendiliğinden istenmez). */
     val notificationDenied: Boolean = false,
 ) {
@@ -115,8 +118,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         if (warming) return
         warming = true
         viewModelScope.launch(Dispatchers.Default) {
-            runCatching { app.engine }.onFailure { Log.e(TAG, "İçerik yüklenemedi", it) }
-            _ui.update { it.copy(engineReady = true) }
+            val loaded = runCatching { app.engine }.onFailure { Log.e(TAG, "İçerik yüklenemedi", it) }.isSuccess
+            val arch = if (loaded) buildArchive(_ui.value.lang) else null
+            _ui.update { it.copy(engineReady = true, archive = arch) }
         }
     }
 
@@ -202,7 +206,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 combatAction(app.engine.autoCombatAction(s))
                 // Eylem reddedildiyse durum değişmez: sonsuz döngüye girme.
                 if (_ui.value.game === s) break
-                delay(AUTO_DELAY_MS)
+                delay(if (_ui.value.settings.fastCombat) FAST_AUTO_DELAY_MS else AUTO_DELAY_MS)
             }
             _ui.update { it.copy(autoCombat = false) }
         }
@@ -274,7 +278,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     fun setLanguage(lang: Lang) {
         if (lang == _ui.value.lang) return
         app.settings.setLanguage(lang)
-        _ui.update { it.copy(lang = lang) }
+        val arch = if (_ui.value.engineReady) runCatching { buildArchive(lang) }.getOrNull() else null
+        _ui.update { it.copy(lang = lang, archive = arch ?: it.archive) }
         // Bildirimler eski dilde çözülmüştü; yeniden çizerken temizlenir.
         _ui.value.game?.let { render(it, emptyList(), advanceTurn = false) }
         _ui.update { it.copy(actionNotices = emptyList(), celebration = emptyList()) }
@@ -418,14 +423,27 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    /** Son: bitirilmiş oyun meta kaydına girer (Döngü sonu New Game+'ı açar). */
+    private fun buildArchive(lang: Lang): com.yukselis.engine.story.ArchiveView = app.engine.archive(
+        unlockedEndings = app.settings.endingsSeen(),
+        unlockedArchetypes = app.settings.archetypesSeen(),
+        unlockedClasses = app.settings.hiddenClassesSeen(),
+        unlockedSkills = app.settings.uniqueSkillsSeen(),
+        completedGames = app.settings.completedGames(),
+        lang = lang,
+    )
+
+    /** Son: bitirilmiş oyun meta kaydına girer (Döngü sonu New Game+'ı açar; Arşiv güncellenir). */
     private fun recordEnding(state: WorldState) {
         val ending = app.engine.endingOf(state) ?: return
-        app.settings.recordEnding(state.seed, ending.id, ending.id == com.yukselis.engine.story.StoryEngine.LOOP_ENDING)
-        _ui.update { it.copy(newGamePlusUnlocked = app.settings.newGamePlusUnlocked()) }
+        val archetypeId = app.engine.endingView(state, _ui.value.lang)?.archetypeId
+        app.settings.recordEnding(state.seed, ending.id, ending.id == com.yukselis.engine.story.StoryEngine.LOOP_ENDING, archetypeId)
+        _ui.update { it.copy(newGamePlusUnlocked = app.settings.newGamePlusUnlocked(), archive = buildArchive(it.lang)) }
     }
 
     private fun persistAuto(state: WorldState) {
+        if (app.settings.recordProgress(app.engine.unlockedHiddenClasses(state), app.engine.unlockedUniqueSkills(state))) {
+            _ui.update { it.copy(archive = buildArchive(it.lang)) }
+        }
         if (state.ended) recordEnding(state)
         // Tek iş parçacıklı kuyruk: kayıtlar sırayla yazılır, eski durum yenisinin üstüne yazılamaz.
         viewModelScope.launch(saveDispatcher) {

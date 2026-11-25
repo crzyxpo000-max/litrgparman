@@ -1,8 +1,8 @@
 # İlerleme
 
-Şu an: İnceleme (`docs/INCELEME_AKIS.md`) ve Paket 1–6 (hikaye, ilk saat, ritim, sistem çıkarma, arayüz incelemesi, açılış hızı & kayıt güvenliği & ilk saat arayüzü) bitti.
+Şu an: İnceleme (`docs/INCELEME_AKIS.md`) ve Paket 1–7 (hikaye, ilk saat, ritim, sistem çıkarma, arayüz incelemesi, açılış hızı & kayıt güvenliği, savaş hissi & bosslar & final & Arşiv) bitti.
 Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
-Son commit: 04a94d9 (sonraki: Paket 6 commit'i)
+Son commit: 159c7f8 Paket 6 (sonraki: Paket 7 commit'i)
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
@@ -11,6 +11,16 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - SDK: `local.properties` → `sdk.dir=C:/Users/alpar/AppData/Local/Android/Sdk` (git dışı).
 - Emülatör: `Medium_Phone_API_36.0` (`emulator -avd Medium_Phone_API_36.0`), adb ile kurulum.
 - OneDrive kilidi yüzünden lint ara sıra "dosya kullanılıyor" der: `./gradlew --stop` ve tekrar.
+
+## Paket 7: savaş hissi, bosslar, final ve Arşiv (2026-11-25)
+- [x] **Ekransız anında Ezme (DECISIONS #183):** `NoticeMoment.CRUSH` tam ekran `BREACH` açmaz; akışta tek kart olarak çözülür.
+- [x] **Boss sunumu, zaaf vurgusu ve hızlı otomatik savaş (`E4`, DECISIONS #184):** `[ BOSS ]` etiketi, faz çentikli can çubuğu,
+      faz geçişi bandı + titreşim, `Analiz` sonrası Yetenek/Ortam zaaf vurgusu (`★ Zaaf`), Ayarlar'da `Hızlı otomatik savaş`.
+- [x] **Kademeli epilog ve zengin bölüm kapanışı (`E1`, `E3`, DECISIONS #185):** `ChapterLine.highlights` + `nextTitle` kapanış kartında;
+      son ekranında adım adım epilog kartları + `Tümünü göster` geçişi.
+- [x] **Başlık Arşivi ve katmanlı titreşim (DECISIONS #186):** `StoryEngine.archive` + `SettingsStore` (Sonlar, OP MC türleri,
+      Gizli sınıflar, Benzersiz yetenekler; kilitliler `???`), başlıkta `Arşiv` alt sayfası; `Haptics.kt` (Sistem / Büyük an / Yankı).
+      `Paket7Test` eklendi.
 
 ## Paket 6: açılış hızı, kayıt güvenliği ve ilk saat arayüzü (2026-11-25)
 - [x] **İkili içerik önbelleği (`B5`, DECISIONS #179):** `ContentCache` (`content.bin`, ortak anahtar sözlüğü) + `:app:compileContentCache`;

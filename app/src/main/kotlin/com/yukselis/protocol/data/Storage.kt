@@ -55,6 +55,8 @@ data class Settings(
     val textSize: TextSize = TextSize.MEDIUM,
     /** Savaş günlüğünde hasar sayıları. */
     val combatNumbers: Boolean = false,
+    /** Otomatik savaşta hızlı tur aralığı (Paket 7). */
+    val fastCombat: Boolean = false,
     /** Bir kez gösterilen ipuçları (sembol açıklamaları); görüldükçe eklenir. */
     val seenTips: Set<String> = emptySet(),
 )
@@ -82,6 +84,7 @@ class SettingsStore(context: Context) {
         textSize = prefs.getString(KEY_TEXT_SIZE, null)
             ?.let { name -> TextSize.entries.firstOrNull { it.name == name } } ?: TextSize.MEDIUM,
         combatNumbers = prefs.getBoolean(KEY_COMBAT_NUMBERS, false),
+        fastCombat = prefs.getBoolean(KEY_FAST_COMBAT, false),
         seenTips = prefs.getStringSet(KEY_SEEN_TIPS, emptySet())?.toSet() ?: emptySet(),
     )
 
@@ -95,6 +98,7 @@ class SettingsStore(context: Context) {
             putBoolean(KEY_NOTIFICATIONS, settings.notifications)
             putString(KEY_TEXT_SIZE, settings.textSize.name)
             putBoolean(KEY_COMBAT_NUMBERS, settings.combatNumbers)
+            putBoolean(KEY_FAST_COMBAT, settings.fastCombat)
             putStringSet(KEY_SEEN_TIPS, settings.seenTips)
         }
     }
@@ -133,24 +137,48 @@ class SettingsStore(context: Context) {
     /** Döngü sonu görüldü: başlıkta New Game+ açılır. */
     fun newGamePlusUnlocked(): Boolean = prefs.getBoolean(KEY_NG_PLUS, false)
 
-    fun endingsSeen(): Set<String> = prefs.getStringSet(KEY_ENDINGS, emptySet()) ?: emptySet()
+    fun endingsSeen(): Set<String> = prefs.getStringSet(KEY_ENDINGS, emptySet())?.toSet() ?: emptySet()
+
+    fun archetypesSeen(): Set<String> = prefs.getStringSet(KEY_ARCHETYPES, emptySet())?.toSet() ?: emptySet()
+
+    fun hiddenClassesSeen(): Set<String> = prefs.getStringSet(KEY_HIDDEN_CLASSES, emptySet())?.toSet() ?: emptySet()
+
+    fun uniqueSkillsSeen(): Set<String> = prefs.getStringSet(KEY_UNIQUE_SKILLS, emptySet())?.toSet() ?: emptySet()
 
     /**
      * Bir oyunun sonunu kaydeder. Bitirilmiş oyun sayısı farklı tohumlardan gelir (aynı oyun ya da eski bir kaydın
-     * yeniden yüklenmesi iki kez sayılmaz); görülen sonlar ve New Game+ her seferinde birleşir.
+     * yeniden yüklenmesi iki kez sayılmaz); görülen sonlar, OP MC türü ve New Game+ her seferinde birleşir.
      */
-    fun recordEnding(gameSeed: Long, endingId: String, unlocksNewGamePlus: Boolean) {
+    fun recordEnding(gameSeed: Long, endingId: String, unlocksNewGamePlus: Boolean, archetypeId: String? = null) {
         prefs.edit {
             putStringSet(KEY_SEEDS, finishedSeeds() + gameSeed.toString())
             putStringSet(KEY_ENDINGS, endingsSeen() + endingId)
+            if (archetypeId != null) putStringSet(KEY_ARCHETYPES, archetypesSeen() + archetypeId)
             putBoolean(KEY_NG_PLUS, newGamePlusUnlocked() || unlocksNewGamePlus)
         }
+    }
+
+    /** Oynanış sırasında açılan gizli sınıf ve Benzersiz yetenekleri kalıcı Arşive ekler; yeni öğe varsa true. */
+    fun recordProgress(hiddenClasses: Set<String>, uniqueSkills: Set<String>): Boolean {
+        val oldC = hiddenClassesSeen()
+        val oldS = uniqueSkillsSeen()
+        val newC = oldC + hiddenClasses
+        val newS = oldS + uniqueSkills
+        if (newC.size == oldC.size && newS.size == oldS.size) return false
+        prefs.edit {
+            putStringSet(KEY_HIDDEN_CLASSES, newC)
+            putStringSet(KEY_UNIQUE_SKILLS, newS)
+        }
+        return true
     }
 
     private companion object {
         const val KEY_COMPLETED = "meta_completed"
         const val KEY_NG_PLUS = "meta_ng_plus"
         const val KEY_ENDINGS = "meta_endings"
+        const val KEY_ARCHETYPES = "meta_archetypes"
+        const val KEY_HIDDEN_CLASSES = "meta_hidden_classes"
+        const val KEY_UNIQUE_SKILLS = "meta_unique_skills"
         const val KEY_SEEDS = "meta_finished_seeds"
         const val KEY_LANG = "lang"
         const val KEY_TYPEWRITER = "typewriter"
@@ -163,6 +191,7 @@ class SettingsStore(context: Context) {
         const val KEY_NOTIFICATIONS = "notifications"
         const val KEY_TEXT_SIZE = "text_size"
         const val KEY_COMBAT_NUMBERS = "combat_numbers"
+        const val KEY_FAST_COMBAT = "fast_combat"
         const val KEY_SEEN_TIPS = "seen_tips"
         const val KEY_NOTIF_TIME = "notif_last_time"
         const val KEY_NOTIF_KEY = "notif_last_key"

@@ -50,7 +50,9 @@ import com.yukselis.protocol.ui.components.SystemCard
 import com.yukselis.protocol.ui.theme.GameType
 import com.yukselis.protocol.ui.theme.Game
 import com.yukselis.protocol.ui.components.EchoLine
+import com.yukselis.protocol.ui.components.HapticCue
 import com.yukselis.protocol.ui.components.leftRule
+import com.yukselis.protocol.ui.components.playCue
 import com.yukselis.protocol.ui.components.systemWindow
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
@@ -118,10 +120,15 @@ fun StoryScreen(
         }
     }
 
-    val hapticFeedback = LocalHapticFeedback.current
-    val hasBigMoment = freshNotices.any { it.kind == NoticeKind.LEVEL_UP || it.kind == NoticeKind.TITLE }
+    val view = androidx.compose.ui.platform.LocalView.current
+    val hapticCue = when {
+        freshNotices.any { it.kind == NoticeKind.ECHO } -> HapticCue.ECHO
+        freshNotices.any { it.kind == NoticeKind.LEVEL_UP || it.kind == NoticeKind.TITLE || it.kind == NoticeKind.EVOLUTION || it.kind == NoticeKind.CLASS } -> HapticCue.BIG_MOMENT
+        freshNotices.isNotEmpty() -> HapticCue.SYSTEM
+        else -> null
+    }
     LaunchedEffect(passageKey) {
-        if (haptics && hasBigMoment) hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+        if (hapticCue != null) view.playCue(hapticCue, haptics)
     }
 
     // Seçenekler, "metni göster" düğmesinin yerinde belirir: aynı yere yapılan ikinci dokunuş yanlışlıkla
@@ -335,6 +342,25 @@ private fun ChapterCard(line: com.yukselis.engine.world.ChapterLine, opening: Bo
                 )
             } else {
                 Text(text = stringResource(R.string.chapter_day, day), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                if (line.highlights.isNotEmpty()) {
+                    Text(
+                        text = stringResource(R.string.chapter_highlights),
+                        style = GameType.systemTitle.copy(fontSize = 12.sp),
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(top = 6.dp),
+                    )
+                    line.highlights.forEach { h ->
+                        Text(text = "• $h", style = GameType.system, color = MaterialTheme.colorScheme.onSurface)
+                    }
+                }
+                line.nextTitle?.let { next ->
+                    Text(
+                        text = stringResource(R.string.chapter_next, next),
+                        style = GameType.systemTitle.copy(fontSize = 12.sp),
+                        color = Game.colors.amber,
+                        modifier = Modifier.padding(top = 6.dp),
+                    )
+                }
             }
         }
     }
@@ -504,33 +530,82 @@ private fun EndingContent(ending: com.yukselis.engine.story.EndingView?) {
     }
 }
 
-/** Epilog kartları: son, OP MC türü, NPC akıbetleri, fraksiyonlar, en kritik 5 seçim (Aşama 7). */
+/** Epilog kartları: sırayla açılan adımlar (UI_REVIEW E1) + isteyenler için "Tümünü göster". */
 @Composable
 private fun EndingCards(e: com.yukselis.engine.story.EndingView) {
     val gold = Game.colors.unique
-    Text(text = stringResource(R.string.ending_label, e.name), style = GameType.heading.copy(fontSize = 30.sp, lineHeight = 34.sp), color = gold)
-    Text(text = e.summary, style = GameType.narration)
-    Text(text = stringResource(R.string.ending_stats, e.level, e.grade, e.day), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
-    e.archetype?.let { name ->
-        EpilogueSection(stringResource(R.string.ending_archetype))
-        EpilogueCardView(name, e.archetypeText ?: "")
-    }
-    if (e.npcs.isNotEmpty()) {
-        EpilogueSection(stringResource(R.string.ending_people))
-        e.npcs.forEach { EpilogueCardView(it.title, it.text) }
-    }
-    if (e.factions.isNotEmpty()) {
-        EpilogueSection(stringResource(R.string.ending_factions))
-        e.factions.forEach { EpilogueCardView(it.title, it.text) }
-    }
-    if (e.choices.isNotEmpty()) {
-        EpilogueSection(stringResource(R.string.ending_choices))
-        e.choices.forEach { c ->
-            EpilogueCardView(stringResource(R.string.ending_choice_day, c.day, c.event), listOfNotNull(c.choice, c.effect).joinToString("\n"))
+    val steps = buildList<@Composable () -> Unit> {
+        add {
+            Text(text = stringResource(R.string.ending_label, e.name), style = GameType.heading.copy(fontSize = 30.sp, lineHeight = 34.sp), color = gold)
+            Text(text = e.summary, style = GameType.narration)
+            Text(text = stringResource(R.string.ending_stats, e.level, e.grade, e.day), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            e.archetype?.let { name ->
+                EpilogueSection(stringResource(R.string.ending_archetype))
+                EpilogueCardView(name, e.archetypeText ?: "")
+            }
+        }
+        if (e.choices.isNotEmpty()) {
+            add {
+                EpilogueSection(stringResource(R.string.ending_choices))
+                e.choices.forEach { c ->
+                    EpilogueCardView(stringResource(R.string.ending_choice_day, c.day, c.event), listOfNotNull(c.choice, c.effect).joinToString("\n"))
+                }
+            }
+        }
+        if (e.npcs.isNotEmpty()) {
+            add {
+                EpilogueSection(stringResource(R.string.ending_people))
+                e.npcs.forEach { EpilogueCardView(it.title, it.text) }
+            }
+        }
+        if (e.factions.isNotEmpty()) {
+            add {
+                EpilogueSection(stringResource(R.string.ending_factions))
+                e.factions.forEach { EpilogueCardView(it.title, it.text) }
+            }
         }
     }
-    if (e.unlocksNewGamePlus) {
-        Text(text = stringResource(R.string.ng_plus_unlocked), style = GameType.systemTitle, color = gold)
+    var step by rememberSaveable(e.id) { mutableIntStateOf(0) }
+    var showAll by rememberSaveable(e.id) { mutableStateOf(false) }
+    val safeStep = step.coerceIn(0, (steps.size - 1).coerceAtLeast(0))
+
+    if (steps.size > 1) {
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+            Text(
+                text = if (showAll) stringResource(R.string.epilogue_show_all) else stringResource(R.string.epilogue_step, safeStep + 1, steps.size),
+                style = GameType.system,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.weight(1f),
+            )
+            TextButton(onClick = { showAll = !showAll }) {
+                Text(stringResource(if (showAll) R.string.epilogue_stepped else R.string.epilogue_show_all), style = GameType.system)
+            }
+        }
+    }
+
+    if (showAll) {
+        steps.forEach { it() }
+    } else {
+        steps.getOrNull(safeStep)?.invoke()
+    }
+
+    if ((showAll || safeStep == steps.lastIndex) && e.unlocksNewGamePlus) {
+        Text(text = stringResource(R.string.ng_plus_unlocked), style = GameType.systemTitle, color = gold, modifier = Modifier.padding(top = 8.dp))
+    }
+
+    if (!showAll && steps.size > 1) {
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth().padding(top = 8.dp)) {
+            if (safeStep > 0) {
+                OutlinedButton(onClick = { step = safeStep - 1 }, modifier = Modifier.weight(1f)) {
+                    Text(stringResource(R.string.epilogue_prev))
+                }
+            }
+            if (safeStep < steps.lastIndex) {
+                Button(onClick = { step = safeStep + 1 }, modifier = Modifier.weight(1f)) {
+                    Text(stringResource(R.string.epilogue_next))
+                }
+            }
+        }
     }
 }
 

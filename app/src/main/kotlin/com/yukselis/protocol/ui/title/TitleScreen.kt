@@ -38,12 +38,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.yukselis.engine.i18n.Lang
 import com.yukselis.engine.save.SlotInfo
+import com.yukselis.engine.story.ArchiveSectionView
+import com.yukselis.engine.story.ArchiveView
 import com.yukselis.protocol.R
 import com.yukselis.protocol.data.ThemeMode
+import com.yukselis.protocol.ui.components.Localized
+import com.yukselis.protocol.ui.components.SectionTitle
+import com.yukselis.protocol.ui.components.systemWindow
 import com.yukselis.protocol.ui.more.LanguagePicker
 import com.yukselis.protocol.ui.more.ThemePicker
+import com.yukselis.protocol.ui.theme.Game
 import com.yukselis.protocol.ui.theme.GameType
+import com.yukselis.protocol.ui.theme.rarityColorOf
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.rememberModalBottomSheetState
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TitleScreen(
     lang: Lang,
@@ -55,6 +67,7 @@ fun TitleScreen(
     theme: ThemeMode,
     onTheme: (ThemeMode) -> Unit,
     ready: Boolean = true,
+    archive: ArchiveView? = null,
 ) {
     val defaultName = stringResource(R.string.default_player_name)
     var name by rememberSaveable { mutableStateOf("") }
@@ -187,7 +200,14 @@ fun TitleScreen(
             stringResource(if (autosave != null) R.string.title_echo_back else R.string.title_echo_new),
             modifier = Modifier.align(Alignment.Start),
         )
-        Spacer(Modifier.height(24.dp))
+        var showArchive by rememberSaveable { mutableStateOf(false) }
+        if (ready && archive != null) {
+            Spacer(Modifier.height(16.dp))
+            OutlinedButton(onClick = { showArchive = true }, modifier = Modifier.fillMaxWidth()) {
+                Text(stringResource(R.string.archive_button, archive.unlockedTotal, archive.grandTotal))
+            }
+        }
+        Spacer(Modifier.height(20.dp))
         LanguagePicker(lang, onLanguage)
         ThemePicker(theme, onTheme)
         Spacer(Modifier.height(16.dp))
@@ -198,6 +218,51 @@ fun TitleScreen(
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth(),
         )
+        if (showArchive && archive != null) {
+            ModalBottomSheet(onDismissRequest = { showArchive = false }, sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)) {
+                Localized { ArchiveSheet(archive) }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ArchiveSheet(archive: ArchiveView) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 20.dp, vertical = 12.dp),
+    ) {
+        Text(stringResource(R.string.archive_title), style = GameType.heading, color = MaterialTheme.colorScheme.primary)
+        Text(stringResource(R.string.archive_runs, archive.completedGames), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        if (archive.unlockedTotal == 0) {
+            Text(stringResource(R.string.archive_empty), style = GameType.narrationPast, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+        ArchiveSection(stringResource(R.string.archive_endings), archive.endings)
+        ArchiveSection(stringResource(R.string.archive_archetypes), archive.archetypes)
+        ArchiveSection(stringResource(R.string.archive_hidden_classes), archive.hiddenClasses)
+        ArchiveSection(stringResource(R.string.archive_unique_skills), archive.uniqueSkills)
+        Spacer(Modifier.height(20.dp))
+    }
+}
+
+@Composable
+private fun ArchiveSection(title: String, section: ArchiveSectionView) {
+    SectionTitle("$title (${section.unlockedCount}/${section.totalCount})")
+    section.entries.forEach { entry ->
+        val accent = if (entry.unlocked) (entry.rarity?.let { rarityColorOf(it) } ?: Game.colors.edge) else Game.colors.line
+        Column(modifier = Modifier.fillMaxWidth().systemWindow(accent = accent, cut = 8).padding(horizontal = 12.dp, vertical = 8.dp)) {
+            Text(
+                text = entry.name,
+                style = GameType.systemTitle,
+                color = if (entry.unlocked) accent else MaterialTheme.colorScheme.outline,
+            )
+            if (entry.unlocked && entry.description.isNotBlank()) {
+                Text(entry.description, style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+        }
     }
 }
 

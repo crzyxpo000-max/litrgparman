@@ -61,6 +61,7 @@ import com.yukselis.engine.system.Grade
 import com.yukselis.engine.system.Rarity
 import com.yukselis.protocol.R
 import com.yukselis.protocol.ui.components.EchoLine
+import com.yukselis.protocol.ui.components.playCue
 import com.yukselis.protocol.ui.components.systemWindow
 import com.yukselis.protocol.ui.theme.Game
 import com.yukselis.protocol.ui.theme.GameMotion
@@ -82,7 +83,8 @@ import kotlin.random.Random
 enum class Moment { LEVEL, EVOLUTION, CLASS, UNIQUE, RANK, BREACH }
 
 fun momentOf(n: NoticeView): Moment? = when {
-    n.moment == NoticeMoment.REVEAL || n.moment == NoticeMoment.CRUSH -> Moment.BREACH
+    // Sınır kırılması tam ekran; sıradan Ezme (CRUSH) akışta tek kart olarak gösterilir (ekran geçişi yok, Paket 7).
+    n.moment == NoticeMoment.REVEAL -> Moment.BREACH
     n.moment == NoticeMoment.RANK_UP -> Moment.RANK
     n.rarity == Rarity.UNIQUE && (n.kind == NoticeKind.SKILL || n.kind == NoticeKind.EVOLUTION) -> Moment.UNIQUE
     n.kind == NoticeKind.EVOLUTION && n.to != null -> Moment.EVOLUTION
@@ -95,14 +97,20 @@ fun momentOf(n: NoticeView): Moment? = when {
 /** Öncelik: aynı anda birden çok büyük an varsa en çarpıcısı kartın başına geçer. */
 private val PRIORITY = listOf(Moment.BREACH, Moment.EVOLUTION, Moment.UNIQUE, Moment.CLASS, Moment.LEVEL, Moment.RANK)
 
-/** Açılış ilerlemesi 0→1 (pencere açılması) ve titreşim. Hareket kapalıysa hemen 1. */
+/** Açılış ilerlemesi 0→1 (pencere açılması) ve katmanlı titreşim. Hareket kapalıysa hemen 1. */
 @Composable
-private fun rememberOpening(key: Any, haptics: Boolean, durationMs: Int = 260, delayMs: Long = 0): Float {
+private fun rememberOpening(
+    key: Any,
+    haptics: Boolean,
+    durationMs: Int = 260,
+    delayMs: Long = 0,
+    cue: com.yukselis.protocol.ui.components.HapticCue = com.yukselis.protocol.ui.components.HapticCue.BIG_MOMENT,
+): Float {
     val reduce = Game.reduceMotion
     val p = remember(key) { Animatable(if (reduce) 1f else 0f) }
-    val feedback = LocalHapticFeedback.current
+    val view = androidx.compose.ui.platform.LocalView.current
     LaunchedEffect(key) {
-        if (haptics) feedback.performHapticFeedback(HapticFeedbackType.LongPress)
+        view.playCue(cue, haptics)
         if (!reduce) {
             delay(delayMs)
             p.animateTo(1f, tween(durationMs, easing = FastOutSlowInEasing))
@@ -191,7 +199,8 @@ fun CelebrationOverlay(notices: List<NoticeView>, haptics: Boolean, onDismiss: (
     val spoken = notices.joinToString(". ") { (listOf(it.title) + it.lines).joinToString(". ") }
     // Sınır kırılması önce ekranı bozar; pencere ancak bozulma bitince açılır.
     val crashMs = if (moment == Moment.BREACH && !Game.reduceMotion) CRASH_MS else 0L
-    val open = rememberOpening(notices, haptics, delayMs = crashMs)
+    val cue = if (moment == Moment.BREACH) com.yukselis.protocol.ui.components.HapticCue.ECHO else com.yukselis.protocol.ui.components.HapticCue.BIG_MOMENT
+    val open = rememberOpening(notices, haptics, delayMs = crashMs, cue = cue)
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier

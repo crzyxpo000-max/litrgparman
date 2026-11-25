@@ -53,10 +53,19 @@ import com.yukselis.engine.story.EnemyView
 import com.yukselis.engine.story.NoticeView
 import com.yukselis.protocol.R
 import com.yukselis.protocol.ui.theme.Game
+import com.yukselis.protocol.ui.components.HapticCue
 import com.yukselis.protocol.ui.components.StatBar
 import com.yukselis.protocol.ui.components.SystemCard
+import com.yukselis.protocol.ui.components.playCue
 import com.yukselis.protocol.ui.theme.EchoColor
 import com.yukselis.protocol.ui.theme.GameType
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.ui.text.style.TextOverflow
 
 private enum class Picker { NONE, SKILL, ENV, ITEM, TALK }
 
@@ -74,6 +83,7 @@ fun CombatScreen(
     onToggleAuto: () -> Unit,
     onCheckpoint: () -> Unit,
     modifier: Modifier = Modifier,
+    haptics: Boolean = true,
 ) {
     var chosen by rememberSaveable { mutableStateOf(0) }
     var detail by rememberSaveable { mutableStateOf<Int?>(null) }
@@ -82,12 +92,44 @@ fun CombatScreen(
     val living = combat.enemies.filter { it.alive }
     // Seçili hedef düştüyse ilk yaşayan düşman hedeflenir (bileşim sırasında durum yazılmaz).
     val target = if (living.any { it.uid == chosen }) chosen else living.firstOrNull()?.uid ?: chosen
+    val targetEnemy = combat.enemies.firstOrNull { it.uid == target }
+    val targetWeakness = targetEnemy?.weaknessKey
+    val skillWeakMatch = targetWeakness != null && combat.skills.any { it.usable && targetWeakness in it.tags }
+    val envWeakMatch = targetWeakness != null && combat.environment.any { !it.used && envMatchesWeakness(it.tag, targetWeakness) }
+
+    // Boss faz geçişi anı: titreşim + kısa tek satırlık çağrı bandı (UI_REVIEW E4).
+    val activeBoss = combat.enemies.firstOrNull { it.boss && it.phase > 0 }
+    val bossPhaseKey = activeBoss?.let { "${it.uid}:${it.phase}" }
+    var lastBossPhase by rememberSaveable { mutableStateOf(0) }
+    var phaseBanner by androidx.compose.runtime.remember { mutableStateOf<Pair<Int, String>?>(null) }
+    val view = androidx.compose.ui.platform.LocalView.current
+    LaunchedEffect(bossPhaseKey) {
+        val p = activeBoss?.phase ?: 0
+        if (p > lastBossPhase && activeBoss != null) {
+            lastBossPhase = p
+            phaseBanner = p to activeBoss.name
+            view.playCue(HapticCue.BIG_MOMENT, haptics)
+        } else if (p < lastBossPhase) {
+            lastBossPhase = p
+            phaseBanner = null
+        }
+    }
 
     Column(modifier = modifier.fillMaxSize().padding(horizontal = 12.dp, vertical = 8.dp)) {
         // Düşmanlar: dokun → hedef, uzun bas → ayrıntı (gerçek statlar)
         combat.enemies.forEach { e ->
             EnemyCard(e, selected = e.uid == target, onSelect = { if (e.alive) chosen = e.uid }, onDetail = { detail = e.uid })
             Spacer(Modifier.height(6.dp))
+        }
+        phaseBanner?.let { (ph, bossName) ->
+            Box(modifier = Modifier.fillMaxWidth().padding(bottom = 6.dp).systemWindow(accent = Game.colors.danger, cut = 6)) {
+                Text(
+                    text = stringResource(R.string.boss_phase_shift, ph, bossName),
+                    style = GameType.systemTitle,
+                    color = Game.colors.danger,
+                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                )
+            }
         }
         // Yoldaşlar: kendi turlarında otomatik davranır.
         combat.allies.forEach { a ->
@@ -157,7 +199,9 @@ fun CombatScreen(
             else -> ActionGrid(
                 combat = combat,
                 auto = auto,
-                targetIntelligent = combat.enemies.firstOrNull { it.uid == target }?.intelligent == true,
+                targetIntelligent = targetEnemy?.intelligent == true,
+                skillHighlight = skillWeakMatch,
+                envHighlight = envWeakMatch,
                 onAttack = { onAction(CombatAction.Attack(target)) },
                 onDefend = { onAction(CombatAction.Defend) },
                 onAnalyze = { onAction(CombatAction.Analyze(target)) },
@@ -172,6 +216,7 @@ fun CombatScreen(
 
     if (tactics && combat.tacticsUnlocked) TacticsDialog(combat.stance, combat.effort, onAction) { tactics = false }
 
+    val weakSuffix = "  " + stringResource(R.string.weakness_match)
     when (picker) {
         Picker.SKILL -> PickerDialog(
             title = stringResource(R.string.action_skill),
@@ -181,14 +226,18 @@ fun CombatScreen(
                     if (s.costStamina > 0) "${s.costStamina} ${stringResource(R.string.stamina_short)}" else null,
                     if (s.cooldownLeft > 0) stringResource(R.string.cooldown_n, s.cooldownLeft) else null,
                 ).joinToString(" · ")
-                Triple(s.id, "${s.name}  $cost", s.usable)
+                val match = if (targetWeakness != null && targetWeakness in s.tags) weakSuffix else ""
+                Triple(s.id, "${s.name}  $cost$match", s.usable)
             },
             onPick = { id -> picker = Picker.NONE; onAction(CombatAction.UseSkill(id, target)) },
             onDismiss = { picker = Picker.NONE },
         )
         Picker.ENV -> PickerDialog(
             title = stringResource(R.string.action_environment),
-            options = combat.environment.map { Triple(it.tag, it.name, !it.used) },
+            options = combat.environment.map { e ->
+                val match = if (targetWeakness != null && !e.used && envMatchesWeakness(e.tag, targetWeakness)) weakSuffix else ""
+                Triple(e.tag, e.name + match, !e.used)
+            },
             onPick = { tag -> picker = Picker.NONE; onAction(CombatAction.Environment(tag)) },
             onDismiss = { picker = Picker.NONE },
         )
@@ -277,6 +326,13 @@ private fun EnemyCard(e: EnemyView, selected: Boolean, onSelect: () -> Unit, onD
         com.yukselis.protocol.ui.components.CappedFontScale {
             Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
+                    if (e.boss) {
+                        Text(
+                            text = "[ ${stringResource(R.string.boss_badge)} ] ",
+                            style = GameType.systemTitle.copy(fontSize = 11.sp),
+                            color = Game.colors.danger,
+                        )
+                    }
                     Text(
                         e.name,
                         style = GameType.heading.copy(fontSize = 17.sp, lineHeight = 22.sp),
@@ -285,7 +341,11 @@ private fun EnemyCard(e: EnemyView, selected: Boolean, onSelect: () -> Unit, onD
                     )
                     Text(stringResource(R.string.enemy_level, e.level, e.gradeName), style = GameType.system)
                 }
-                StatBar(stringResource(R.string.hp), e.hp.toLong(), e.maxHp.toLong(), Game.colors.danger, Modifier.padding(top = 2.dp))
+                if (e.boss && e.phaseThresholds.isNotEmpty()) {
+                    BossHpBar(e.hp.toLong(), e.maxHp.toLong(), e.phaseThresholds, Modifier.padding(top = 2.dp))
+                } else {
+                    StatBar(stringResource(R.string.hp), e.hp.toLong(), e.maxHp.toLong(), Game.colors.danger, Modifier.padding(top = 2.dp))
+                }
                 val extra = listOfNotNull(
                     if (e.boss && e.phase > 0) stringResource(R.string.boss_phase, e.phase) else null,
                     e.statuses.joinToString(" · ").ifEmpty { null },
@@ -316,10 +376,64 @@ private fun EnemyDetail(e: EnemyView, onDismiss: () -> Unit) {
 }
 
 @Composable
+private fun BossHpBar(hp: Long, maxHp: Long, thresholds: List<Int>, modifier: Modifier = Modifier) {
+    val fraction = if (maxHp <= 0) 0f else (hp.toFloat() / maxHp).coerceIn(0f, 1f)
+    val barColor = Game.colors.danger
+    val notchColor = Game.colors.night
+    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
+        Text(
+            text = stringResource(R.string.hp),
+            style = GameType.system,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            maxLines = 1,
+            modifier = Modifier.widthIn(min = 28.dp).padding(end = 4.dp),
+        )
+        LinearProgressIndicator(
+            progress = { fraction },
+            color = barColor,
+            trackColor = barColor.copy(alpha = 0.18f),
+            gapSize = 0.dp,
+            drawStopIndicator = {},
+            modifier = Modifier
+                .weight(1f)
+                .height(8.dp)
+                .drawWithContent {
+                    drawContent()
+                    // Faz eşikleri: can çubuğu üstünde dikey çentikler (UI_REVIEW E4).
+                    val notchW = 2.dp.toPx()
+                    thresholds.forEach { pct ->
+                        if (pct in 1..99) {
+                            val x = size.width * (pct / 100f)
+                            drawRect(notchColor, topLeft = Offset(x - notchW / 2f, 0f), size = Size(notchW, size.height))
+                        }
+                    }
+                },
+        )
+        Spacer(Modifier.width(8.dp))
+        Text(
+            text = "$hp/$maxHp",
+            style = GameType.system,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            maxLines = 1,
+            overflow = TextOverflow.Clip,
+        )
+    }
+}
+
+private fun envMatchesWeakness(envTag: String, weakness: String): Boolean = when (envTag) {
+    "yanici" -> weakness == "ates"
+    "su" -> weakness == "simsek" || weakness == "buz"
+    "karanlik" -> weakness == "karanlik"
+    else -> false
+}
+
+@Composable
 private fun ActionGrid(
     combat: CombatView,
     auto: Boolean,
     targetIntelligent: Boolean,
+    skillHighlight: Boolean,
+    envHighlight: Boolean,
     onAttack: () -> Unit,
     onDefend: () -> Unit,
     onAnalyze: () -> Unit,
@@ -332,10 +446,10 @@ private fun ActionGrid(
         // Tam düzen: 3 sütunlu ızgara; konuşulamayan düşmanda "Konuş" gizlenir (UI_REVIEW G5).
         val buttons = buildList<@Composable (Modifier) -> Unit> {
             add { m -> GridButton(R.string.action_attack, enabled, m, primary = true, onClick = onAttack) }
-            add { m -> GridButton(R.string.action_skill, enabled && combat.skills.isNotEmpty(), m) { onPick(Picker.SKILL) } }
+            add { m -> GridButton(R.string.action_skill, enabled && combat.skills.isNotEmpty(), m, accent = skillHighlight) { onPick(Picker.SKILL) } }
             add { m -> GridButton(R.string.action_defend, enabled, m, onClick = onDefend) }
             add { m -> GridButton(R.string.action_analyze, enabled, m, onClick = onAnalyze) }
-            add { m -> GridButton(R.string.action_environment, enabled && combat.environment.any { !it.used }, m) { onPick(Picker.ENV) } }
+            add { m -> GridButton(R.string.action_environment, enabled && combat.environment.any { !it.used }, m, accent = envHighlight) { onPick(Picker.ENV) } }
             if (targetIntelligent) add { m -> GridButton(R.string.action_talk, enabled, m) { onPick(Picker.TALK) } }
             add { m -> GridButton(R.string.action_item, enabled && combat.items.isNotEmpty() && !combat.minorUsed, m) { onPick(Picker.ITEM) } }
             add { m -> GridButton(R.string.action_flee, enabled, m, onClick = onFlee) }
@@ -356,7 +470,7 @@ private fun ActionGrid(
     val buttons = buildList<@Composable (Modifier) -> Unit> {
         add { m -> GridButton(R.string.action_attack, enabled, m, primary = true, onClick = onAttack) }
         add { m -> GridButton(R.string.action_defend, enabled, m, onClick = onDefend) }
-        if (combat.skills.isNotEmpty()) add { m -> GridButton(R.string.action_skill, enabled, m) { onPick(Picker.SKILL) } }
+        if (combat.skills.isNotEmpty()) add { m -> GridButton(R.string.action_skill, enabled, m, accent = skillHighlight) { onPick(Picker.SKILL) } }
         add { m -> GridButton(R.string.action_analyze, enabled, m, onClick = onAnalyze) }
         if (targetIntelligent) add { m -> GridButton(R.string.action_talk, enabled, m) { onPick(Picker.TALK) } }
         if (combat.items.isNotEmpty() && !combat.minorUsed) add { m -> GridButton(R.string.action_item, enabled, m) { onPick(Picker.ITEM) } }
@@ -374,10 +488,12 @@ private fun ActionGrid(
 }
 
 @Composable
-private fun GridButton(label: Int, enabled: Boolean, modifier: Modifier, primary: Boolean = false, onClick: () -> Unit) {
+private fun GridButton(label: Int, enabled: Boolean, modifier: Modifier, primary: Boolean = false, accent: Boolean = false, onClick: () -> Unit) {
     val padding = PaddingValues(horizontal = 4.dp, vertical = 8.dp)
     if (primary) {
         Button(onClick = onClick, enabled = enabled, contentPadding = padding, modifier = modifier) { GridLabel(label) }
+    } else if (accent && enabled) {
+        OutlinedButton(onClick = onClick, enabled = true, border = BorderStroke(1.5.dp, Game.colors.amber), contentPadding = padding, modifier = modifier) { GridLabel(label, Game.colors.amber) }
     } else {
         OutlinedButton(onClick = onClick, enabled = enabled, contentPadding = padding, modifier = modifier) { GridLabel(label) }
     }
@@ -385,8 +501,8 @@ private fun GridButton(label: Int, enabled: Boolean, modifier: Modifier, primary
 
 /** Düğme etiketi: büyük yazıda kesilmesin diye ölçeği en çok 1.3 (UI_REVIEW C3). */
 @Composable
-private fun GridLabel(label: Int) {
-    com.yukselis.protocol.ui.components.CappedFontScale { Text(stringResource(label), maxLines = 1, softWrap = false) }
+private fun GridLabel(label: Int, color: Color = Color.Unspecified) {
+    com.yukselis.protocol.ui.components.CappedFontScale { Text(stringResource(label), maxLines = 1, softWrap = false, color = color) }
 }
 
 @Composable

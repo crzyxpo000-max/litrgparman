@@ -134,6 +134,7 @@ fun App(viewModel: GameViewModel) {
                         theme = ui.settings.theme,
                         onTheme = { mode -> viewModel.updateSettings { it.copy(theme = mode) } },
                         ready = ui.engineReady,
+                        archive = ui.archive,
                     )
                     }
                 }
@@ -238,6 +239,7 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
                 notices = ui.actionNotices,
                 auto = ui.autoCombat,
                 showNumbers = ui.settings.combatNumbers,
+                haptics = ui.settings.haptics,
                 onAction = viewModel::combatAction,
                 onToggleAuto = viewModel::toggleAuto,
                 onCheckpoint = viewModel::returnToCheckpoint,

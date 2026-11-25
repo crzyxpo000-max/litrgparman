@@ -2,6 +2,15 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Paket 7: savaş hissi, bosslar, final ve Arşiv — 2026-11-25
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 183 | **Ekransız anında Ezme.** `Overlays.momentOf` artık `NoticeMoment.CRUSH` için tam ekran `BREACH` kartı açmaz; yalnızca `NoticeMoment.REVEAL` sınır kırılması tam ekrandır. Ezilen sıradan karşılaşmalar gün akışında tek Sistem kartıyla biter. | Oynanış başına ~60 ezilen savaş her seferinde tam ekran kart ve ek dokunuş çıkarıyordu (`INCELEME_AKIS` §1.3). | — |
+| 184 | **Boss sunumu, zaaf vurgusu ve hızlı otomatik savaş.** `EnemyView.phaseThresholds` + `weaknessKey`, `CombatSkillView.tags`: boss kartında `[ BOSS ]` etiketi, faz çentikli can çubuğu ve faz geçişi bandı + titreşimi (UI_REVIEW E4); `Analiz` sonrası zaafa uyan Yetenek/Ortam düğmesi kehribar kenarlı ve listede `★ Zaaf` işaretli; Ayarlar'da `Hızlı otomatik savaş` (120 ms / 650 ms). | Boss ile sıradan düşman görsel olarak ayrışmıyordu; 300+ savaşta zaaf eşleşmesi ve hız okunurluğu artırıldı. | — |
+| 185 | **Kademeli epilog ve zengin bölüm kapanışı.** `ChapterLine.highlights` (bölüm gün aralığındaki en önemli 3 kronik seçimi) ve `nextTitle` kapanış kartında (`darbogaz_<n>_1`) gösterilir (UI_REVIEW E3). Son ekranında `EndingCards` adım adım (Son+Tür → Kritik seçimler → Yoldaşlar → Fraksiyonlar) ve `Tümünü göster` seçeneğiyle açılır (E1). | Bölüm sonları ve 20 saatlik oyunun finali tek kaydırmada geçiyordu. | — |
+| 186 | **Kalıcı başlık Arşivi ve katmanlı titreşim.** `StoryEngine.archive` + `SettingsStore` oynanışlar arası açılan Sonları, OP MC türlerini, Gizli sınıfları ve Benzersiz yetenekleri (kilitliler `???`) saklar; başlık ekranında `Arşiv · X / Y` alt sayfası açar. `Haptics.kt` Sistem (hafif tık), Büyük an/Boss fazı (çift vuruş) ve Yankı (çift kısa titreşim) ipuçlarını ayırır. | Tekrar oynanabilirlik hedefi ve "Kırık pencere" dokunsal hissi. | — |
+
 ## Paket 6: açılış hızı, kayıt güvenliği ve ilk saat arayüzü — 2026-11-25
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |

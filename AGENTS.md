@@ -11,7 +11,7 @@ Bu dosya `CLAUDE.md` ile aynı proje kurallarını taşır; kural değişiklikle
 
 - **Hikaye yapısı değişikliği (bölüm, üs/görev, konum, son tarih; `docs/CHAPTERS.md`, `docs/STORY_FLOW.md`, DECISIONS #130–#139) bitti.**
 - **Aşama 9 (denge ve yayın) bitti; imzalama anahtarı ve Play Console kullanıcıda.** Aşama 0–7 tamam. Aşama 7: Perde 2–4 ve sonlar (`docs/PERDE2_4.md` içerik sözleşmesi: perdeler, bölgeler, ortak bayraklar, son koşulları, partiler).
-- Oyuncu gözüyle inceleme (`docs/INCELEME_AKIS.md`) ve Paket 1–6 (`docs/UI_REVIEW.md`, DECISIONS #151–#182) tamamlandı; açık maddeler ve önerilen sıra `DEVIR.md`'de.
+- Oyuncu gözüyle inceleme (`docs/INCELEME_AKIS.md`) ve Paket 1–7 (`docs/UI_REVIEW.md`, DECISIONS #151–#186) tamamlandı; açık maddeler ve önerilen sıra `DEVIR.md`'de.
 - Aşama 8 kaldırıldı. Aşama 6: Perde 1 dikey dilimi (`docs/PERDE1.md`; 48 olay, yeni açılış, zindanlar).
 - Aşama 5 tamam. Aşama 5: NPC sistemi (`npc/`: 4 eksen, hafıza, gündem, eşikler, ölüm, yoldaşlar, düello,
   Küresel Sıralama, yoldaş görüşleri, güce tepkiler, bilgi günlüğü, yalanlar, izler, Ordu modeli).
@@ -242,8 +242,9 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Savaş varken Hikaye sekmesi `CombatScreen` gösterir; savaş başında Normal modda `checkpoint` kaydı yazılır.
 - Release: R8 açık (`app/proguard-rules.pro`), imzalama `keystore.properties` (git dışı). compileSdk 37, targetSdk 36.
 - Bildirimler: `data/Notifications.kt` (WorkManager, kanal, izin); Ayarlar'da anahtar; `ProvideLanguage` izin kaydını taşır.
-- Gün akışında Kule Dibi'nde Kule düğmesi (`HubView.tower`); kademenin altındaki katlar varsa "Hızlı tırmanış" düğmesi (`TowerView.fastTo`). Son sahnesinde epilog kartları (`EndingView`: son, OP MC türü, NPC'ler,
-  fraksiyonlar, en kritik 5 seçim). Bitirilen oyunlar ve Döngü (New Game+) `SettingsStore` metasında; başlıkta Yeni Oyun+ anahtarı.
+- Gün akışında Kule Dibi'nde Kule düğmesi (`HubView.tower`); kademenin altındaki katlar varsa "Hızlı tırmanış" düğmesi (`TowerView.fastTo`). Son sahnesinde adım adım epilog kartları (`EndingView`: son, OP MC türü, kritik 5 seçim, NPC'ler,
+  fraksiyonlar; `Tümünü göster` seçeneğiyle, DECISIONS #185). Bölüm kapanış kartı (`ChapterLine.highlights`, `nextTitle`) o bölümdeki kritik seçimleri ve sonraki bölüm adını gösterir.
+- Bitirilen oyunlar, Döngü (New Game+) ve kalıcı Arşiv (Sonlar, OP MC türleri, Gizli sınıflar, Benzersiz yetenekler; `StoryEngine.archive`) `SettingsStore` metasında; başlıkta Yeni Oyun+ anahtarı ve Arşiv sayfası (#186). Savaşta boss faz çentikleri, Analiz zaaf vurgusu, hızlı otomatik savaş ayarı (`Settings.fastCombat`), ekransız anında Ezme ve katmanlı titreşim (`Haptics.kt`, #183–#186).
 
 ## Test notları
 
