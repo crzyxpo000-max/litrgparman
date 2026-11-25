@@ -114,12 +114,15 @@ fun CombatScreen(
             modifier = Modifier.fillMaxWidth().padding(top = 2.dp),
         ) {
             if (combat.tacticsUnlocked) {
-                AssistChip(
-                    onClick = { tactics = true },
-                    label = { Text(stringResource(R.string.tactics_line, stringResource(stanceLabel(combat.stance)), combat.effort), maxLines = 1) },
-                    leadingIcon = { Text(stringResource(R.string.tactics), style = GameType.system, color = MaterialTheme.colorScheme.primary) },
-                    modifier = Modifier.weight(1f, fill = false),
-                )
+                Box(modifier = Modifier.weight(1f, fill = false)) {
+                    com.yukselis.protocol.ui.components.CappedFontScale {
+                        AssistChip(
+                            onClick = { tactics = true },
+                            label = { Text(stringResource(R.string.tactics_line, stringResource(stanceLabel(combat.stance)), combat.effort), maxLines = 1) },
+                            leadingIcon = { Text(stringResource(R.string.tactics), style = GameType.system, color = MaterialTheme.colorScheme.primary) },
+                        )
+                    }
+                }
             } else {
                 Spacer(Modifier.weight(1f))
             }
@@ -132,7 +135,7 @@ fun CombatScreen(
         LaunchedEffect(combat.log.size, notices.size) { listState.animateScrollToItem((combat.log.size + notices.size - 1).coerceAtLeast(0)) }
         LazyColumn(
             state = listState,
-            contentPadding = PaddingValues(vertical = 6.dp),
+            contentPadding = PaddingValues(vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(4.dp),
             modifier = Modifier.weight(1f).fillMaxWidth(),
         ) {
@@ -271,23 +274,25 @@ private fun EnemyCard(e: EnemyView, selected: Boolean, onSelect: () -> Unit, onD
             .systemWindow(accent = accent, cut = 8)
             .combinedClickable(onClick = onSelect, onLongClick = onDetail),
     ) {
-        Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    e.name,
-                    style = GameType.heading.copy(fontSize = 17.sp, lineHeight = 22.sp),
-                    color = if (e.alive) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.outline,
-                    modifier = Modifier.weight(1f),
+        com.yukselis.protocol.ui.components.CappedFontScale {
+            Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        e.name,
+                        style = GameType.heading.copy(fontSize = 17.sp, lineHeight = 22.sp),
+                        color = if (e.alive) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.outline,
+                        modifier = Modifier.weight(1f),
+                    )
+                    Text(stringResource(R.string.enemy_level, e.level, e.gradeName), style = GameType.system)
+                }
+                StatBar(stringResource(R.string.hp), e.hp.toLong(), e.maxHp.toLong(), Game.colors.danger, Modifier.padding(top = 2.dp))
+                val extra = listOfNotNull(
+                    if (e.boss && e.phase > 0) stringResource(R.string.boss_phase, e.phase) else null,
+                    e.statuses.joinToString(" · ").ifEmpty { null },
+                    e.weakness?.let { stringResource(R.string.weakness_short) },
                 )
-                Text(stringResource(R.string.enemy_level, e.level, e.gradeName), style = GameType.system)
+                if (extra.isNotEmpty()) Text(extra.joinToString(" · "), style = GameType.system, color = Game.colors.amber)
             }
-            StatBar(stringResource(R.string.hp), e.hp.toLong(), e.maxHp.toLong(), Game.colors.danger, Modifier.padding(top = 2.dp))
-            val extra = listOfNotNull(
-                if (e.boss && e.phase > 0) stringResource(R.string.boss_phase, e.phase) else null,
-                e.statuses.joinToString(" · ").ifEmpty { null },
-                e.weakness?.let { stringResource(R.string.weakness_short) },
-            )
-            if (extra.isNotEmpty()) Text(extra.joinToString(" · "), style = GameType.system, color = Game.colors.amber)
         }
     }
 }
@@ -324,22 +329,24 @@ private fun ActionGrid(
 ) {
     val enabled = !auto
     if (combat.tacticsUnlocked) {
-        // Tam düzen: 3×3 ızgara, kullanılamayan eylemler gri.
+        // Tam düzen: 3 sütunlu ızgara; konuşulamayan düşmanda "Konuş" gizlenir (UI_REVIEW G5).
+        val buttons = buildList<@Composable (Modifier) -> Unit> {
+            add { m -> GridButton(R.string.action_attack, enabled, m, primary = true, onClick = onAttack) }
+            add { m -> GridButton(R.string.action_skill, enabled && combat.skills.isNotEmpty(), m) { onPick(Picker.SKILL) } }
+            add { m -> GridButton(R.string.action_defend, enabled, m, onClick = onDefend) }
+            add { m -> GridButton(R.string.action_analyze, enabled, m, onClick = onAnalyze) }
+            add { m -> GridButton(R.string.action_environment, enabled && combat.environment.any { !it.used }, m) { onPick(Picker.ENV) } }
+            if (targetIntelligent) add { m -> GridButton(R.string.action_talk, enabled, m) { onPick(Picker.TALK) } }
+            add { m -> GridButton(R.string.action_item, enabled && combat.items.isNotEmpty() && !combat.minorUsed, m) { onPick(Picker.ITEM) } }
+            add { m -> GridButton(R.string.action_flee, enabled, m, onClick = onFlee) }
+            add { m -> GridButton(if (auto) R.string.auto_stop else R.string.auto_turn, true, m, onClick = onToggleAuto) }
+        }
         Column(verticalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.padding(top = 4.dp)) {
-            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                GridButton(R.string.action_attack, enabled, Modifier.weight(1f), primary = true, onClick = onAttack)
-                GridButton(R.string.action_skill, enabled && combat.skills.isNotEmpty(), Modifier.weight(1f)) { onPick(Picker.SKILL) }
-                GridButton(R.string.action_defend, enabled, Modifier.weight(1f), onClick = onDefend)
-            }
-            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                GridButton(R.string.action_analyze, enabled, Modifier.weight(1f), onClick = onAnalyze)
-                GridButton(R.string.action_environment, enabled && combat.environment.any { !it.used }, Modifier.weight(1f)) { onPick(Picker.ENV) }
-                GridButton(R.string.action_talk, enabled && targetIntelligent, Modifier.weight(1f)) { onPick(Picker.TALK) }
-            }
-            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                GridButton(R.string.action_item, enabled && combat.items.isNotEmpty() && !combat.minorUsed, Modifier.weight(1f)) { onPick(Picker.ITEM) }
-                GridButton(R.string.action_flee, enabled, Modifier.weight(1f), onClick = onFlee)
-                GridButton(if (auto) R.string.auto_stop else R.string.auto_turn, true, Modifier.weight(1f), onClick = onToggleAuto)
+            buttons.chunked(3).forEach { row ->
+                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    row.forEach { b -> b(Modifier.weight(1f)) }
+                    repeat(3 - row.size) { Spacer(Modifier.weight(1f)) }
+                }
             }
         }
         return

@@ -52,11 +52,11 @@ fun TipCard(id: String, text: String, modifier: Modifier = Modifier) {
     }
 }
 
-/** Küçük (i) düğmesi: dokununca başlık + açıklama penceresi. */
+/** Küçük (i) düğmesi: dokununca başlık + açıklama penceresi (dokunma hedefi 48dp, UI_REVIEW G3). */
 @Composable
 fun HelpButton(title: String, entries: List<Pair<String, String>>, modifier: Modifier = Modifier) {
     var open by remember { mutableStateOf(false) }
-    IconButton(onClick = { open = true }, modifier = modifier.size(36.dp)) {
+    IconButton(onClick = { open = true }, modifier = modifier.size(48.dp)) {
         Icon(Icons.Filled.Info, contentDescription = title, tint = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.size(20.dp))
     }
     if (open) HelpDialog(title, entries) { open = false }

@@ -329,6 +329,12 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             _ui.update { it.copy(message = UiMessage.LOAD_FAILED) }
             return
         }
+        // Yüklemeden önce mevcut oturumu "Önceki oturum" satırına al: yanlış yükleme geri alınabilir (UI_REVIEW B3).
+        val previous = _ui.value.game
+        if (previous != null && slot != SaveManager.AUTO && previous.mode != GameMode.IRONMAN) {
+            app.saves.savePreviousSession(previous)
+            refreshSlots()
+        }
         show(state, emptyList())
         if (slot != SaveManager.AUTO) _ui.update { it.copy(message = UiMessage.LOADED) }
         // Uzun bir aradan sonra dönülüyorsa: dünya durumundan ve önemli seçimlerden kısa bir özet.

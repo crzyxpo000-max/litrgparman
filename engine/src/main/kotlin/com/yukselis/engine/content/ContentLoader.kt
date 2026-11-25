@@ -49,10 +49,10 @@ object ContentLoader {
     )
 
     /** Unvanlar düz bir eşlemdir (üst düzey anahtar = unvan kimliği); `titles/` parçaları da birleşir. */
-    private fun mergedTitles(source: ContentSource): String {
+    private fun mergedTitlesObject(source: ContentSource): kotlinx.serialization.json.JsonObject {
         val main = source.read(TITLES)
         val parts = source.list("titles").filter { it.endsWith(".yaml") }.sorted()
-        if (parts.isEmpty()) return main
+        if (parts.isEmpty()) return YamlTree.parseObject(main, TITLES)
         val merged = linkedMapOf<String, kotlinx.serialization.json.JsonElement>()
         (listOf(main) + parts.map { source.read("titles/$it") }).forEachIndexed { i, text ->
             YamlTree.parseObject(text, "titles parça ${i + 1}").forEach { (k, v) ->
@@ -60,15 +60,16 @@ object ContentLoader {
                 merged[k] = v
             }
         }
-        return kotlinx.serialization.json.JsonObject(merged).toString()
+        return kotlinx.serialization.json.JsonObject(merged)
     }
 
-    private fun mergedFile(source: ContentSource, name: String): String? {
+    private fun mergedFileObject(source: ContentSource, name: String): kotlinx.serialization.json.JsonObject? {
         val main = source.readOrNull(name)
-        if (name !in MERGEABLE) return main
+        if (name !in MERGEABLE) return main?.let { YamlTree.parseObject(it, name) }
         val dir = name.removeSuffix(".yaml")
         val parts = listOfNotNull(main) + source.list(dir).filter { it.endsWith(".yaml") }.sorted().map { source.read("$dir/$it") }
-        if (parts.size <= 1) return parts.firstOrNull()
+        if (parts.isEmpty()) return null
+        if (parts.size == 1) return YamlTree.parseObject(parts.first(), name)
         val merged = mutableMapOf<String, MutableMap<String, kotlinx.serialization.json.JsonElement>>()
         parts.forEachIndexed { i, text ->
             YamlTree.parseObject(text, "$dir parça ${i + 1}").forEach { (top, v) ->
@@ -81,17 +82,28 @@ object ContentLoader {
                 }
             }
         }
-        return kotlinx.serialization.json.JsonObject(merged.mapValues { kotlinx.serialization.json.JsonObject(it.value) }).toString()
+        return kotlinx.serialization.json.JsonObject(merged.mapValues { kotlinx.serialization.json.JsonObject(it.value) })
     }
 
-    fun load(source: ContentSource): Content {
-        val storyFiles = source.list(STORY_DIR)
+    /** Tüm YAML kaynaklarını (paralel olarak) [ContentBundle] ağaçlarına çevirir. */
+    fun loadBundle(source: ContentSource): ContentBundle {
+        val storyTexts = source.list(STORY_DIR)
             .filter { it.endsWith(".yaml") }
             .sorted()
             .map { source.read("$STORY_DIR/$it") }
-        val files = SYSTEM_FILES.mapNotNull { name -> mergedFile(source, name)?.let { name to it } }.toMap()
-        val eventFiles = source.list(EVENTS_DIR).filter { it.endsWith(".yaml") }.sorted().map { source.read("$EVENTS_DIR/$it") }
-        val npcFiles = source.list(NPCS_DIR).filter { it.endsWith(".yaml") }.sorted().map { source.read("$NPCS_DIR/$it") }
-        return ContentParser.load(storyFiles, source.read(NAMES), mergedTitles(source), files, eventFiles, npcFiles)
+        val eventTexts = source.list(EVENTS_DIR).filter { it.endsWith(".yaml") }.sorted().map { source.read("$EVENTS_DIR/$it") }
+        val npcTexts = source.list(NPCS_DIR).filter { it.endsWith(".yaml") }.sorted().map { source.read("$NPCS_DIR/$it") }
+        val stories = ContentParser.parallelMap(storyTexts) { YamlTree.parseObject(it, "hikaye") }
+        val events = ContentParser.parallelMap(eventTexts) { YamlTree.parseObject(it, "olaylar") }
+        val npcs = ContentParser.parallelMap(npcTexts) { YamlTree.parseObject(it, "npc") }
+        val names = YamlTree.parseObject(source.read(NAMES), NAMES)
+        val titles = mergedTitlesObject(source)
+        val files = SYSTEM_FILES.mapNotNull { name -> mergedFileObject(source, name)?.let { name to it } }.toMap()
+        return ContentBundle(stories, names, titles, files, events, npcs)
     }
+
+    fun load(source: ContentSource): Content = ContentParser.loadTrees(loadBundle(source))
+
+    /** Önceden derlenmiş ikili önbellekten (`content.bin`) doğrudan [Content] kurar. */
+    fun loadFromCache(input: java.io.InputStream): Content = ContentParser.loadTrees(ContentCache.read(input))
 }

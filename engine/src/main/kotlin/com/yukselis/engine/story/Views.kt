@@ -300,6 +300,17 @@ data class StatusView(
     val showArmy: Boolean = true,
     /** Bilgi günlüğü: ilk gizli bilgi. */
     val showKnowledge: Boolean = true,
+    // ---- İlk saat kendini açan arayüz (Paket 6, UI_REVIEW D1) ----
+    /** MP çubuğu: ilk mana harcayan yetenek, mana kullanımı ya da Perde 2. */
+    val showMana: Boolean = true,
+    /** Kademe etiketi (F → S): Seviye 10 / sınıf, ilk Evrim Görevi ya da Perde 2. */
+    val showGrade: Boolean = true,
+    /** Durum'da Nefes satırı: ilk savaştan sonra ya da Perde 2. */
+    val showStamina: Boolean = true,
+    /** Üste Tehlike göstergesi: ilk kapı / taşma olayı ya da Perde 2. */
+    val showDanger: Boolean = true,
+    /** Çanta'da Öz Kristali sayacı: ilk kristal ya da Perde 2. */
+    val showCrystals: Boolean = true,
 )
 
 data class SkillView(

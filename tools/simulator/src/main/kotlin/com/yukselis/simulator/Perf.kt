@@ -1,9 +1,12 @@
 package com.yukselis.simulator
 
+import com.yukselis.engine.content.ContentCache
 import com.yukselis.engine.content.ContentLoader
 import com.yukselis.engine.content.DirectoryContentSource
 import com.yukselis.engine.core.WorldState
 import com.yukselis.engine.save.SaveCodec
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import java.io.File
 
 /**
@@ -15,8 +18,12 @@ import java.io.File
 fun main() {
     val src = DirectoryContentSource(File("content"))
     val loads = (1..6).map { val t = System.nanoTime(); ContentLoader.load(src); (System.nanoTime() - t) / 1_000_000 }
-    println("İçerik yükleme (ms): ilk ${loads.first()} · ısınmış en iyi ${loads.drop(1).min()}")
-    val content = ContentLoader.load(src)
+    println("İçerik yükleme YAML (ms): ilk ${loads.first()} · ısınmış en iyi ${loads.drop(1).min()}")
+    val bundle = ContentLoader.loadBundle(src)
+    val bytes = ByteArrayOutputStream().also { ContentCache.write(bundle, it) }.toByteArray()
+    val cacheLoads = (1..6).map { val t = System.nanoTime(); ContentLoader.loadFromCache(ByteArrayInputStream(bytes)); (System.nanoTime() - t) / 1_000_000 }
+    println("İçerik yükleme önbellek (ms, ${bytes.size / 1024} KB): ilk ${cacheLoads.first()} · ısınmış en iyi ${cacheLoads.drop(1).min()}")
+    val content = ContentLoader.loadFromCache(ByteArrayInputStream(bytes))
     val sim = Simulator(content)
     var mid: WorldState? = null
     val t0 = System.nanoTime()

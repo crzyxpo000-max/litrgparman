@@ -93,30 +93,37 @@ fun StatusScreen(
             )
             Column(modifier = Modifier.weight(1f)) {
                 Text(status.playerName, style = GameType.heading)
+                val levelText = if (status.showGrade) stringResource(R.string.level_grade, status.level, status.grade.name)
+                    else stringResource(R.string.level_only, status.level)
                 Text(
-                    text = listOfNotNull(stringResource(R.string.level_grade, status.level, status.grade.name), status.className).joinToString(" · "),
+                    text = listOfNotNull(levelText, status.className).joinToString(" · "),
                     style = GameType.systemTitle.copy(fontSize = 12.sp, letterSpacing = 0.4.sp),
                     color = MaterialTheme.colorScheme.primary,
                 )
-                Text(
-                    text = stringResource(R.string.humanity_percentile, formatPercent(status.humanityTopPercent)),
-                    style = GameType.system,
-                    color = Game.colors.amber,
-                )
+                if (status.showRank) {
+                    Text(
+                        text = stringResource(R.string.humanity_percentile, formatPercent(status.humanityTopPercent)),
+                        style = GameType.system,
+                        color = Game.colors.amber,
+                    )
+                }
             }
             HelpButton(stringResource(R.string.help_status), Glossary.status())
         }
-        TabRow(selectedTabIndex = tab, containerColor = MaterialTheme.colorScheme.background, modifier = Modifier.padding(top = 8.dp)) {
-            listOf(R.string.status_tab_stats, R.string.status_tab_titles, R.string.status_tab_morality).forEachIndexed { i, label ->
-                Tab(
-                    selected = tab == i,
-                    onClick = { tab = i },
-                    text = {
-                        // Harcanacak puan varsa Statlar sekmesinde nokta.
-                        val dot = if (i == 0 && status.freePoints > 0) " •" else ""
-                        Text(stringResource(label) + dot, maxLines = 1)
-                    },
-                )
+        // Alt sekme etiketleri büyük yazıda kesilmesin ("Unvanl" sorunu, UI_REVIEW): tavan 1.2.
+        com.yukselis.protocol.ui.components.CappedFontScale(max = 1.2f) {
+            TabRow(selectedTabIndex = tab, containerColor = MaterialTheme.colorScheme.background, modifier = Modifier.padding(top = 8.dp)) {
+                listOf(R.string.status_tab_stats, R.string.status_tab_titles, R.string.status_tab_morality).forEachIndexed { i, label ->
+                    Tab(
+                        selected = tab == i,
+                        onClick = { tab = i },
+                        text = {
+                            // Harcanacak puan varsa Statlar sekmesinde nokta.
+                            val dot = if (i == 0 && status.freePoints > 0) " •" else ""
+                            Text(stringResource(label) + dot, maxLines = 1, softWrap = false, overflow = TextOverflow.Ellipsis)
+                        },
+                    )
+                }
             }
         }
         Column(
@@ -167,16 +174,20 @@ private fun StatsTab(status: StatusView, pending: MutableMap<Stat, Int>, spent: 
 
         Spacer(Modifier.height(12.dp))
         StatBar(stringResource(R.string.hp), status.hp.toLong(), status.maxHp.toLong(), Game.colors.danger)
-        Spacer(Modifier.height(6.dp))
-        StatBar(stringResource(R.string.mp), status.mp.toLong(), status.maxMp.toLong(), Game.colors.system)
+        if (status.showMana) {
+            Spacer(Modifier.height(6.dp))
+            StatBar(stringResource(R.string.mp), status.mp.toLong(), status.maxMp.toLong(), Game.colors.system)
+        }
         Spacer(Modifier.height(6.dp))
         StatBar("XP", status.xp, status.xpToNext, Game.colors.amber)
-        Spacer(Modifier.height(6.dp))
-        Text(
-            text = "${stringResource(R.string.stamina)}: ${status.stamina}",
-            style = GameType.system,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
+        if (status.showStamina) {
+            Spacer(Modifier.height(6.dp))
+            Text(
+                text = "${stringResource(R.string.stamina)}: ${status.stamina}",
+                style = GameType.system,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
 
         SectionTitle(stringResource(R.string.stats))
         val left = status.freePoints - spent
@@ -311,8 +322,8 @@ private fun StatCell(
             }
             if (allocating) {
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(top = 6.dp)) {
-                    FilledTonalIconButton(onClick = onRemove, enabled = added > 0, modifier = Modifier.size(36.dp)) { Text("−") }
-                    FilledTonalIconButton(onClick = onAdd, enabled = canAdd, modifier = Modifier.size(36.dp)) { Text("+") }
+                    FilledTonalIconButton(onClick = onRemove, enabled = added > 0, modifier = Modifier.size(48.dp)) { Text("−") }
+                    FilledTonalIconButton(onClick = onAdd, enabled = canAdd, modifier = Modifier.size(48.dp)) { Text("+") }
                 }
             }
         }

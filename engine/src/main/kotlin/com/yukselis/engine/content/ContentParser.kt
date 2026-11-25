@@ -104,7 +104,7 @@ object ContentParser {
     data class StoryFile(val start: String?, val scenes: List<Scene>)
 
     /** Sırayı koruyan paralel dönüşüm; hata, ayrıştırıcının kendi istisnasıyla çıkar. */
-    private fun <T, R> parallelMap(items: List<T>, f: (T) -> R): List<R> {
+    internal fun <T, R> parallelMap(items: List<T>, f: (T) -> R): List<R> {
         val threads = Runtime.getRuntime().availableProcessors().coerceIn(1, MAX_PARSE_THREADS)
         if (items.size < 2 || threads < 2) return items.map(f)
         val pool = java.util.concurrent.Executors.newFixedThreadPool(threads)
@@ -132,24 +132,36 @@ object ContentParser {
         eventFiles: List<String> = emptyList(),
         npcFiles: List<String> = emptyList(),
     ): Content {
+        val bundle = ContentBundle(
+            stories = parallelMap(storyFiles) { YamlTree.parseObject(it, "hikaye") },
+            names = YamlTree.parseObject(namesJson, "names.yaml"),
+            titles = YamlTree.parseObject(titlesJson, "titles.yaml"),
+            files = files.mapValues { (name, text) -> parse(text, name) },
+            events = parallelMap(eventFiles) { YamlTree.parseObject(it, "olaylar") },
+            npcs = parallelMap(npcFiles) { YamlTree.parseObject(it, "npc") },
+        )
+        return loadTrees(bundle)
+    }
+
+    /** Önceden ayrıştırılmış [JsonObject] ağaçlarından (YAML ya da [ContentCache]) [Content] kurar. */
+    fun loadTrees(bundle: ContentBundle): Content {
         // Sonlar tablosu olaylardan önce kurulur: `son_uygun` koşulları ona bağlanır, tablo sonra doldurulur.
         val endingTable = EndingTable()
         EndingTable.current = endingTable
-        // Dosyalar birbirinden bağımsızdır: çekirdek sayısı kadar iş parçacığında ayrıştırılır (UI_REVIEW B5, açılış süresi).
-        val stories = parallelMap(storyFiles) { parseStory(it) }
-        val eventPacks = parallelMap(eventFiles) { parseEvents(it) }
+        val stories = parallelMap(bundle.stories) { parseStory(it) }
+        val eventPacks = parallelMap(bundle.events) { parseEvents(it) }
         val scenes = stories.flatMap { it.scenes } + eventPacks.flatMap { it.second }
         val duplicates = scenes.groupBy { it.id }.filterValues { it.size > 1 }.keys
         if (duplicates.isNotEmpty()) throw ContentFormatException("Aynı kimliğe sahip sahneler: $duplicates")
         val start = stories.mapNotNull { it.start }.distinct().singleOrNull()
             ?: throw ContentFormatException("Tam olarak bir 'baslangic' sahnesi tanımlanmalı")
-        fun obj(name: String): JsonObject? = files[name]?.let { parse(it, name) }
+        fun obj(name: String): JsonObject? = bundle.files[name]
 
         val skillsRoot = obj(SKILLS)
         val profRoot = obj(PROFESSIONS)
-        val names = NameRegistry(parseNames(namesJson))
+        val names = NameRegistry(parseNames(bundle.names))
         val texts = SystemTexts(obj(SYSTEM)?.map { (k, v) -> k to ltext(v, "system.$k") }?.toMap() ?: emptyMap())
-        val npcs = parallelMap(npcFiles) { parseNpc(YamlTree.parseObject(it, "npc")) }.also { list ->
+        val npcs = parallelMap(bundle.npcs) { parseNpc(it) }.also { list ->
             val dup = list.groupBy { it.id }.filterValues { it.size > 1 }.keys
             if (dup.isNotEmpty()) throw ContentFormatException("Aynı kimliğe sahip NPC'ler: $dup")
         }.associateBy { it.id }
@@ -172,7 +184,7 @@ object ContentParser {
             }?.associateBy { it.id } ?: emptyMap(),
             scenes = scenes.associateBy { it.id },
             names = names,
-            titles = parseTitles(titlesJson).associateBy { it.id },
+            titles = parseTitles(bundle.titles).associateBy { it.id },
             startScene = start,
             classes = obj(CLASSES)?.objectOf("siniflar")?.map { (id, v) -> parseClass(id, v.jsonObject) }?.associateBy { it.id } ?: emptyMap(),
             skills = skillsRoot?.objectOf("yetenekler")?.map { (id, v) -> parseSkill(id, v.jsonObject) }?.associateBy { it.id } ?: emptyMap(),
@@ -342,8 +354,10 @@ object ContentParser {
     private fun parse(text: String, name: String): JsonObject = YamlTree.parseObject(text, name)
 
     /** Olay dosyası: `olaylar` listesi; her olay kendi `sahneler`ini taşır. */
-    fun parseEvents(text: String): Pair<List<EventDef>, List<Scene>> {
-        val root = YamlTree.parseObject(text, "olaylar")
+    fun parseEvents(text: String): Pair<List<EventDef>, List<Scene>> =
+        parseEvents(YamlTree.parseObject(text, "olaylar"))
+
+    internal fun parseEvents(root: JsonObject): Pair<List<EventDef>, List<Scene>> {
         val events = mutableListOf<EventDef>()
         val scenes = mutableListOf<Scene>()
         root.array("olaylar").forEach { e ->
@@ -512,14 +526,16 @@ object ContentParser {
         title = (o["unvan"] as? JsonObject)?.string("id"),
     )
 
-    fun parseStory(text: String): StoryFile {
-        val root = YamlTree.parseObject(text, "hikaye")
+    fun parseStory(text: String): StoryFile = parseStory(YamlTree.parseObject(text, "hikaye"))
+
+    internal fun parseStory(root: JsonObject): StoryFile {
         val scenes = root.array("sahneler").map { parseScene(it.jsonObject) }
         return StoryFile(root.string("baslangic"), scenes)
     }
 
-    fun parseNames(text: String): List<NameEntry> {
-        val root = YamlTree.parseObject(text, "names.yaml")
+    fun parseNames(text: String): List<NameEntry> = parseNames(YamlTree.parseObject(text, "names.yaml"))
+
+    internal fun parseNames(root: JsonObject): List<NameEntry> {
         return NameEntry.Kind.entries.flatMap { kind ->
             val group = root[kind.tokenKey]?.jsonObject ?: JsonObject(emptyMap())
             group.map { (id, value) ->
@@ -533,8 +549,9 @@ object ContentParser {
         }
     }
 
-    fun parseTitles(text: String): List<TitleDef> {
-        val root = YamlTree.parseObject(text, "titles.yaml")
+    fun parseTitles(text: String): List<TitleDef> = parseTitles(YamlTree.parseObject(text, "titles.yaml"))
+
+    internal fun parseTitles(root: JsonObject): List<TitleDef> {
         return root.map { (id, value) ->
             val o = value.jsonObject
             TitleDef(

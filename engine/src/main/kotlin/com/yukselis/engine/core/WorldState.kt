@@ -230,9 +230,10 @@ data class WorldState(
         const val TAB_SKILLS = "yetenekler"
         const val TAB_BAG = "canta"
 
-        /** Kendini açan arayüz (Paket 4, DECISIONS #169): ilk birlik / ilk gizli bilgi kalıcı olarak Ordu ve Bilgi günlüğünü açar. */
+        /** Kendini açan arayüz (Paket 4–6): ilk birlik / gizli bilgi / kristal ilgili bölümü kalıcı açar. */
         const val UI_ARMY_VAR = "_ui_ordu"
         const val UI_KNOWLEDGE_VAR = "_ui_bilgi"
+        const val UI_CRYSTALS_VAR = "_ui_kristal"
         const val TAB_MAP = "harita"
         val TABS = listOf(TAB_SKILLS, TAB_BAG, TAB_MAP)
 

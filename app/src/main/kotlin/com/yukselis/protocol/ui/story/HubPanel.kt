@@ -70,7 +70,8 @@ private fun leave(hub: HubView, ui: HubUi, onAction: (HubAction) -> Unit, a: Hub
  * operasyon, hazırlıklar ve fırsat kartları. Rutin eylemler burada değil, alttaki [HubActionBar]'da.
  */
 @Composable
-fun HubStory(hub: HubView, ui: HubUi, onAction: (HubAction) -> Unit) {
+fun HubStory(hub: HubView, ui: HubUi, onAction: (HubAction) -> Unit, showDanger: Boolean = true) {
+    val largeFont = androidx.compose.ui.platform.LocalDensity.current.fontScale >= 1.4f
     Column(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
@@ -79,8 +80,14 @@ fun HubStory(hub: HubView, ui: HubUi, onAction: (HubAction) -> Unit) {
                 color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.weight(1f),
             )
-            Text(stringResource(R.string.hub_danger, hub.danger), style = GameType.system, color = dangerColor(hub.danger))
+            if (showDanger && !largeFont) {
+                Text(stringResource(R.string.hub_danger, hub.danger), style = GameType.system, color = dangerColor(hub.danger))
+            }
             HelpButton(stringResource(R.string.help_hub), Glossary.hub())
+        }
+        // Büyük yazıda (ölçek ≥ 1.4) Tehlike ayrı satıra iner: "Kalan eylem" sıkışıp 3 satır olmasın (UI_REVIEW C5).
+        if (showDanger && largeFont) {
+            Text(stringResource(R.string.hub_danger, hub.danger), style = GameType.system, color = dangerColor(hub.danger))
         }
         // Bölüm yapısı: görevdeysen nerede olduğun, üsteysen girilebilecek operasyon (DECISIONS #130).
         hub.mission?.let { Text(it, style = GameType.system, color = MaterialTheme.colorScheme.tertiary) }

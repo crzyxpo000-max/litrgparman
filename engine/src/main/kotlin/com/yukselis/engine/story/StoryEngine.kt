@@ -813,6 +813,11 @@ class StoryEngine(val content: Content) {
             showMap = state.act >= 2,
             showArmy = npcEngine.armyPower(state) > 0 || state.variable(WorldState.UI_ARMY_VAR) > 0,
             showKnowledge = state.knowledge.isNotEmpty() || state.variable(WorldState.UI_KNOWLEDGE_VAR) > 0,
+            showMana = state.act >= 2 || p.mp < p.maxMp || p.skills.any { (content.skills[it.id]?.costMp ?: 0) > 0 },
+            showGrade = state.act >= 2 || p.grade > Grade.F || state.prompts.any { it.kind == PromptKind.EVOLUTION } || p.level >= Progression.CLASS_OFFER_LEVEL,
+            showStamina = state.act >= 2 || state.variable(CombatEngine.VAR_FIGHTS) > 0,
+            showDanger = state.act >= 2 || state.regions.values.any { it.gates.isNotEmpty() } || state.flags.any { it.contains("kapi") || it.contains("tasma") },
+            showCrystals = state.act >= 2 || p.essenceCrystals > 0 || state.variable(WorldState.UI_CRYSTALS_VAR) > 0,
         )
     }
 

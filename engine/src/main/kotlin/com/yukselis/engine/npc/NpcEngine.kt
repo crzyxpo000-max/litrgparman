@@ -413,7 +413,7 @@ class NpcEngine(private val content: Content, private val effects: EffectApplier
         val p = personality(state, id)
         val rel = npc.relation
         val kind = when {
-            state.corruption >= 20 || state.attention >= 50 || (p[Trait.CONSCIENCE] >= 7 && state.morality.humanity < 0) -> PowerReaction.WORRY
+            state.attention >= 50 || (p[Trait.CONSCIENCE] >= 7 && state.morality.humanity < 0) -> PowerReaction.WORRY
             p[Trait.AMBITION] >= 7 && rel.trust < 40 -> PowerReaction.ENVY
             p[Trait.COURAGE] <= 4 || rel.fear >= 40 -> PowerReaction.DEPENDENCE
             else -> PowerReaction.ADMIRATION

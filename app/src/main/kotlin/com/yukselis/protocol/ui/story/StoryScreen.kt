@@ -98,6 +98,7 @@ fun StoryScreen(
     onBackToTitle: () -> Unit,
     modifier: Modifier = Modifier,
     ending: com.yukselis.engine.story.EndingView? = null,
+    showDanger: Boolean = true,
 ) {
     val fullText = scene.current.paragraphs.joinToString("\n\n")
     val textLength by rememberUpdatedState(fullText.length)
@@ -205,7 +206,7 @@ fun StoryScreen(
             // Seçenekler ve fırsat kartları metnin devamıdır: okuyup kaydırınca gelir.
             if (finished && !scene.isEnding) {
                 if (hubScene != null) {
-                    item(key = "hub-$passageKey") { HubStory(hubScene, hubUi, hubAct) }
+                    item(key = "hub-$passageKey") { HubStory(hubScene, hubUi, hubAct, showDanger) }
                 } else if (scene.choices.isNotEmpty()) {
                     item(key = "choices-$passageKey") { Choices(scene.choices, passageKey, choose) }
                 }
@@ -282,6 +283,7 @@ private fun ChapterBar(line: com.yukselis.engine.world.ChapterLine) {
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
+            .heightIn(min = 48.dp)
             .clickable(onClickLabel = stringResource(R.string.a11y_chapter)) { open = !open }
             .padding(horizontal = 20.dp, vertical = 8.dp),
     ) {
@@ -401,6 +403,10 @@ private fun Insights(lines: List<InsightView>) {
 
 @Composable
 private fun AppearingCard(notice: NoticeView) {
+    if (Game.reduceMotion) {
+        SystemCard(notice)
+        return
+    }
     var visible by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) { visible = true }
     AnimatedVisibility(

@@ -75,7 +75,7 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 | `system` | `Stat`, `Stats`, `Grade`, `Progression` (GDD formülleri + OP MC: büyüme çarpanı, yüzdelik), `Rarity`, `Affinity`, içerik tanımları (`Defs.kt`) |
 | `i18n` | `Lang`, `LText`, `NameRegistry`, `TokenResolver`, `TurkishSuffix`, `EnglishGrammar` |
 | `story` | İçerik modeli (`Model.kt`), `EffectApplier` (etkiler + tetikleyiciler), `PlayerActions` (istem, dağıtım, üretim, eşya, antrenman), `StoryEngine`, görünümler (`Views.kt`), `SystemTexts` |
-| `content` | `ContentParser` (YAML → `YamlTree`), `ContentLoader`, `ContentValidator` (+ `main`) |
+| `content` | `ContentParser` (YAML → `YamlTree`), `ContentLoader`, `ContentCache` (ikili `content.bin` önbelleği), `ContentValidator` (+ `main`) |
 | `combat` | `CombatModel` (düşman/uyanış tanımları, `CombatState`, duruş, durumlar), `CombatMath` (GDD formülleri), `CombatEngine` (tur, yapay zeka, fazlar, infaz, zafer, ölüm, Ezme) |
 | `world` | `WorldModel` (olay/bölge/fraksiyon/başarı/görev tanımları, `RegionState`, `Gate`, `Seed`, `DayState`), `Chapters` (bölüm tablosu, evre, görev), `Director` (puanlama, konum kuralı, tohumlar, fırsat eli), `WorldEngine` (gün döngüsü, üs/görev akışı, bölüm ilerlemesi, son tarih ve taşma, akış eylemleri, kapılar) |
 | `npc` | `NpcModel` (kişilik, ilişki, `NpcDef`, `NpcState`, hafıza, iz/bilgi/ordu/sıralama tanımları), `NpcEngine` (etkiler, günlük gündem, eşikler, tanık yorumu, görüşler, güce tepki, Küresel Sıralama, düello) |
@@ -202,10 +202,10 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 - Uygulama içi dil `ProvideLanguage` (App.kt) ile seçilir; cihaz dilinden bağımsız ve anında değişir.
 - Türkçe büyük harf dönüşümünde yerel ayar kullan (`uppercase(locale)`): i → İ.
 - Türkçe metinde sayıya ek getirme ("Aşama 4'te" sayıya göre değişir); "Aşama %d ile" gibi eksiz kalıp kullan.
-- Kayıt: her seçimden ve her Sistem eyleminden sonra ve `onStop`'ta otomatik; dosyalar `files/saves/*.json`, Auto Backup kapsamında.
-- Kendini açan arayüz: Yetenekler ve Çanta sekmeleri `StatusView.tabs` içinde yoksa gizlidir. `StatusView.showHidden/showRank/showRelations/showMap/showArmy/showKnowledge`
-  Durum'un gizli ölçülerini ve Daha fazla karolarını ilgili sistem oyuna girene kadar gizler; `CombatView.tacticsUnlocked` yanlışken savaş ekranı
-  Saldır · Savun · Analiz · Kaç · Otomatik'e iner (Taktik, Ortam, Nefes yok). Operasyon düğmesi onay penceresi açar (`OperationChoiceView`).
+- Kayıt: her seçimden ve her Sistem eyleminden sonra ve `onStop`'ta otomatik; dosyalar `files/saves/*.json`, Auto Backup kapsamında. Yükleme öncesi mevcut Normal mod oturumu `SaveManager.PREVIOUS_SESSION` (`onceki`) yuvasına alınır (DECISIONS #180).
+- Kendini açan arayüz: Yetenekler ve Çanta sekmeleri `StatusView.tabs` içinde yoksa gizlidir. `StatusView.showHidden/showRank/showRelations/showMap/showArmy/showKnowledge/showMana/showGrade/showStamina/showDanger/showCrystals`
+  ilgili sistem oyuna girene kadar göstergeleri gizler (DECISIONS #181); `CombatView.tacticsUnlocked` yanlışken savaş ekranı
+  Saldır · Savun · Analiz · Kaç · Otomatik'e iner (Taktik, Ortam, Nefes yok), konuşulamayan düşmanda Konuş gizlidir (#182). Operasyon düğmesi onay penceresi açar (`OperationChoiceView`).
 - Tam ekran kartlar `ui/system/Overlays.kt`: önce kutlama (seviye/evrim/sınıf), sonra bekleyen istem.
 - Tema: Sistem · Açık · Koyu (koyu temanın zemini saf siyah; ayrı AMOLED seçeneği yok, DECISIONS #148).
 - **Görsel kimlik "Kırık pencere"** (DECISIONS #147): renk/yazı/şekil/hareket tokenları yalnız `ui/theme/Theme.kt`'de
@@ -230,7 +230,7 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
   logo 1.3; DECISIONS #172); okuma metnine tavan konmaz.
 - Bölüm kartları ve son (DECISIONS #173): `brifing_<n>_1` sahnesinde açılış, `darbogaz_<n>_1` sahnesinde kapanış kartı (`ChapterCard`,
   sahne kimliğinden tanınır: bu adlandırmayı bozma); son ekranı tam ekrandır (üst şerit ve sekmeler gizli). TR terimler (#174): savaş kaynağı
-  "Nefes" (NFS), defter karosu "Görevler"; "Dayanım" ve tek başına "Günlük" yazma. İçerik dosyaları paralel ayrıştırılır (#175).
+  "Nefes" (NFS), defter karosu "Görevler"; "Dayanım" ve tek başına "Günlük" yazma. İçerik derleme zamanında ikili önbelleğe (`content.bin`, `:app:compileContentCache`, #179) derlenir.
 - Arayüz incelemesi araçları: `:tools:simulator:fixtures` (anlık kayıt üretir), `tools/qa/ui/cap.py`, `s_all.py` (koşul matrisi görüntüleri →
   `docs/ui-review/`), rapor `docs/UI_REVIEW.md`.
 - **Diyalog/alt sayfa:** `AlertDialog` değil `AppAlertDialog` kullan; `ModalBottomSheet` içeriğini `Localized {}` ile sar

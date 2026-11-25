@@ -64,9 +64,36 @@ android {
 
     sourceSets {
         getByName("main") {
-            // Oyun içeriği (content/) doğrudan assets olarak paketlenir.
-            assets.srcDirs("../content")
+            // Oyun içeriği derleme zamanında ikili önbelleğe (content.bin) çevrilir (UI_REVIEW B5).
+            assets.setSrcDirs(listOf(layout.buildDirectory.dir("generated/content-cache")))
         }
+    }
+}
+
+val contentCompiler by configurations.creating {
+    isCanBeConsumed = false
+    isCanBeResolved = true
+}
+
+val contentCacheDir = layout.buildDirectory.dir("generated/content-cache")
+val compileContentCache by tasks.registering(JavaExec::class) {
+    group = "build"
+    description = "content/ YAML dosyalarını açılış hızı için ikili önbelleğe (content.bin) derler."
+    classpath = contentCompiler
+    mainClass.set("com.yukselis.engine.content.ContentCacheKt")
+    val contentDir = rootProject.file("content")
+    inputs.dir(contentDir)
+    outputs.dir(contentCacheDir)
+    doFirst {
+        val outFile = contentCacheDir.get().file("content.bin").asFile
+        args = listOf(contentDir.absolutePath, outFile.absolutePath)
+    }
+    jvmArgs("-Dstdout.encoding=UTF-8", "-Dstderr.encoding=UTF-8")
+}
+
+tasks.configureEach {
+    if (name == "preBuild" || name.endsWith("Assets") || name.startsWith("generate") && name.contains("Assets")) {
+        dependsOn(compileContentCache)
     }
 }
 
@@ -77,6 +104,7 @@ kotlin {
 }
 
 dependencies {
+    contentCompiler(project(":engine"))
     implementation(project(":engine"))
 
     implementation(libs.androidx.core.ktx)

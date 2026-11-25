@@ -246,8 +246,9 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
                 scene = scene,
                 freshNotices = ui.freshNotices,
                 turn = ui.turn,
-                typewriter = ui.settings.typewriter,
+                typewriter = ui.settings.typewriter && !Game.reduceMotion,
                 haptics = ui.settings.haptics,
+                showDanger = status.showDanger,
                 onChoose = viewModel::choose,
                 onHub = viewModel::hubAction,
                 onBackToTitle = viewModel::backToTitle,
@@ -256,7 +257,7 @@ private fun GameScaffold(ui: UiState, scene: SceneView, status: StatusView, view
             )
             Tab.STATUS -> StatusScreen(status, ui.actionNotices, viewModel::allocate, content)
             Tab.SKILLS -> ui.skills?.let { SkillsScreen(it, content) } ?: CenteredNote("", content)
-            Tab.BAG -> ui.bag?.let { BagScreen(it, ui.actionNotices, viewModel::useItem, viewModel::craft, content) } ?: CenteredNote("", content)
+            Tab.BAG -> ui.bag?.let { BagScreen(it, ui.actionNotices, viewModel::useItem, viewModel::craft, content, showCrystals = status.showCrystals) } ?: CenteredNote("", content)
             Tab.MORE -> MoreScreen(
                 lang = ui.lang,
                 settings = ui.settings,
@@ -328,15 +329,18 @@ private fun Header(scene: SceneView, status: StatusView) {
                     modifier = Modifier.weight(1f).padding(end = 8.dp),
                 )
                 Text(
-                    text = stringResource(R.string.level_grade_short, status.level, status.grade.name),
+                    text = if (status.showGrade) stringResource(R.string.level_grade_short, status.level, status.grade.name)
+                        else stringResource(R.string.level_only_short, status.level),
                     style = GameType.systemTitle,
                     color = MaterialTheme.colorScheme.primary,
                 )
             }
-            // Can ve mana yan yana: hikayeye bir satır daha kalır.
+            // Can ve mana yan yana: mana ilk mana harcayan yetenekle açılır (UI_REVIEW D1).
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.padding(top = 6.dp)) {
                 StatBar(stringResource(R.string.hp), status.hp.toLong(), status.maxHp.toLong(), Game.colors.danger, Modifier.weight(1f))
-                StatBar(stringResource(R.string.mp), status.mp.toLong(), status.maxMp.toLong(), Game.colors.system, Modifier.weight(1f))
+                if (status.showMana) {
+                    StatBar(stringResource(R.string.mp), status.mp.toLong(), status.maxMp.toLong(), Game.colors.system, Modifier.weight(1f))
+                }
             }
             Spacer(Modifier.height(8.dp))
             HorizontalDivider(color = Game.colors.line)

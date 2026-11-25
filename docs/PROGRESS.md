@@ -1,8 +1,8 @@
 # İlerleme
 
-Şu an: İnceleme (`docs/INCELEME_AKIS.md`), Paket 1 (hikaye), Paket 2 (ilk saat), Paket 3 (ritim), Paket 4 (sistem çıkarma) ve Paket 5 (arayüz incelemesi + seçilen düzeltmeler) bitti.
+Şu an: İnceleme (`docs/INCELEME_AKIS.md`) ve Paket 1–6 (hikaye, ilk saat, ritim, sistem çıkarma, arayüz incelemesi, açılış hızı & kayıt güvenliği & ilk saat arayüzü) bitti.
 Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
-Son commit: fde916d Paket 3 (sonraki: Paket 4 commit'i)
+Son commit: 04a94d9 (sonraki: Paket 6 commit'i)
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
@@ -11,6 +11,17 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - SDK: `local.properties` → `sdk.dir=C:/Users/alpar/AppData/Local/Android/Sdk` (git dışı).
 - Emülatör: `Medium_Phone_API_36.0` (`emulator -avd Medium_Phone_API_36.0`), adb ile kurulum.
 - OneDrive kilidi yüzünden lint ara sıra "dosya kullanılıyor" der: `./gradlew --stop` ve tekrar.
+
+## Paket 6: açılış hızı, kayıt güvenliği ve ilk saat arayüzü (2026-11-25)
+- [x] **İkili içerik önbelleği (`B5`, DECISIONS #179):** `ContentCache` (`content.bin`, ortak anahtar sözlüğü) + `:app:compileContentCache`;
+      `ContentLoader.loadBundle/loadFromCache` + `ContentParser.loadTrees`; masaüstü soğuk yükleme 1570 ms → 61 ms (ısınmış 348 → 50 ms).
+- [x] **Önceki oturum kaydı (`B3`, DECISIONS #180):** `SaveManager.PREVIOUS_SESSION` (`onceki`), Normal modda yükleme öncesi mevcut oturumu
+      saklar, otomatik kayıtla ezilmez; Kayıtlar ekranında görünür.
+- [x] **İlk saat kendini açan arayüz (`D1`, DECISIONS #181):** `StatusView.showMana/showGrade/showStamina/showDanger/showCrystals`,
+      `WorldState.UI_CRYSTALS_VAR`, insanlık yüzdeliği `showRank`'e bağlı, Operasyon öncesi satırı doluysa görünür.
+- [x] **Arayüz / erişilebilirlik / temizlik (`C5`, `C6`, `G3–G5`, DECISIONS #182):** Durum alt sekmeleri ölçek tavanı, üste büyük yazıda
+      Tehlike ayrı satır, 2×2 yazı boyutu ızgarası, savaşta konuşulamayan düşmanda Konuş gizli, 48dp hedefler (`HelpButton`, `ChapterBar`,
+      stat `±`), `ReduceMotion` daktilo ve kart girişini kapatır, `NpcEngine` ölü `corruption >= 20` dalı silindi. `Paket6Test` eklendi.
 
 ## Final dengesi: Vali savaşı (2026-11-10)
 - [x] Ölçüm: 400 oynanışlık akış izi + Vali savaşına gelen 163 durumun 20'şer kez yeniden oynatılması. Düşük "istila kazanma oranı"

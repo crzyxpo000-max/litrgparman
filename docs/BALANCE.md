@@ -1,6 +1,6 @@
 # Denge raporu (simülatör)
 
-`./gradlew :tools:simulator:run --args="1000"` ile üretildi; 1000 oynanış, 23 sn. Nüfus: %30 rastgele oyuncu, %70 sekiz hedefli
+`./gradlew :tools:simulator:run --args="1000"` ile üretildi; 1000 oynanış, 24 sn. Nüfus: %30 rastgele oyuncu, %70 sekiz hedefli
 oyun tarzı (%25 rastgele seçim gürültüsüyle); her 10 oynanıştan biri Demir Mod. Ayrıntı: `tools/simulator`.
 
 ## Son dağılımı

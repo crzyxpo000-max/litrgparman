@@ -40,6 +40,7 @@ fun BagScreen(
     onUse: (String) -> Unit,
     onCraft: (String) -> Unit,
     modifier: Modifier = Modifier,
+    showCrystals: Boolean = true,
 ) {
     LazyColumn(
         contentPadding = PaddingValues(20.dp),
@@ -48,12 +49,14 @@ fun BagScreen(
     ) {
         items(notices.size) { SystemCard(notices[it]) }
         item {
-            Text(
-                text = stringResource(R.string.currency_crystals, bag.crystals),
-                style = GameType.systemTitle,
-                color = Game.colors.amber,
-            )
-            SectionTitle(stringResource(R.string.inventory))
+            if (showCrystals) {
+                Text(
+                    text = stringResource(R.string.currency_crystals, bag.crystals),
+                    style = GameType.systemTitle,
+                    color = Game.colors.amber,
+                )
+            }
+            SectionTitle(stringResource(R.string.inventory), if (showCrystals) Modifier else Modifier.padding(top = 0.dp))
             if (bag.items.isEmpty()) Text(stringResource(R.string.inventory_empty), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
         // Kullanılabilir eşyalar üstte (UI_REVIEW D2).

@@ -57,6 +57,15 @@ class SaveManager(
         storage.write(OPERATION, SaveCodec.encode(state, now()))
     }
 
+    /**
+     * Başka bir slot yüklenmeden önce o anki oturumu saklar (UI_REVIEW B3): yanlışlıkla yükleme yapıldığında
+     * önceki oturuma geri dönülebilir. Demir Mod'da yazılmaz (tek kayıt kuralı).
+     */
+    fun savePreviousSession(state: WorldState) {
+        if (state.mode == GameMode.IRONMAN) return
+        storage.write(PREVIOUS_SESSION, SaveCodec.encode(state, now()))
+    }
+
     /** Savaş başında: Normal modda ölümden sonra dönülecek nokta. Demir Mod'da yazılmaz. */
     fun saveCheckpoint(state: WorldState) {
         if (state.mode == GameMode.IRONMAN) return
@@ -77,7 +86,12 @@ class SaveManager(
         SlotInfo(slot, s.playerName, s.day, s.player.level, s.mode, s.ended, data.savedAtMillis)
     }
 
-    fun allSlots(): List<Pair<String, SlotInfo?>> = (listOf(AUTO, OPERATION) + MANUAL).map { it to info(it) }
+    fun allSlots(): List<Pair<String, SlotInfo?>> = buildList {
+        add(AUTO to info(AUTO))
+        info(PREVIOUS_SESSION)?.let { add(PREVIOUS_SESSION to it) }
+        add(OPERATION to info(OPERATION))
+        MANUAL.forEach { add(it to info(it)) }
+    }
 
     fun delete(slot: String) {
         storage.delete(slot)
@@ -92,6 +106,8 @@ class SaveManager(
         const val AUTO = "auto"
         /** Bir önceki sağlam otomatik kayıt; yalnız otomatik kayıt okunamazsa kullanılır. */
         const val AUTO_PREV = "auto.prev"
+        /** Başka bir kayıt yüklenmeden önce saklanan oturum (UI_REVIEW B3). */
+        const val PREVIOUS_SESSION = "onceki"
         val MANUAL = listOf("slot1", "slot2", "slot3")
 
         /** Operasyon öncesi otomatik kayıt. */

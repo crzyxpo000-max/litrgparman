@@ -1,6 +1,7 @@
 package com.yukselis.protocol
 
 import android.app.Application
+import com.yukselis.engine.content.ContentCache
 import com.yukselis.engine.content.ContentLoader
 import com.yukselis.engine.save.SaveManager
 import com.yukselis.engine.story.StoryEngine
@@ -13,7 +14,13 @@ import java.io.File
 class YukselisApplication : Application() {
 
     val engine: StoryEngine by lazy {
-        StoryEngine(ContentLoader.load(AssetContentSource(assets)))
+        // Derleme zamanında üretilen ikili önbellekten yükle (UI_REVIEW B5); yoksa YAML'a geri düş.
+        val content = runCatching {
+            assets.open(ContentCache.FILE_NAME).use { ContentLoader.loadFromCache(it) }
+        }.getOrElse {
+            ContentLoader.load(AssetContentSource(assets))
+        }
+        StoryEngine(content)
     }
 
     val saves: SaveManager by lazy {

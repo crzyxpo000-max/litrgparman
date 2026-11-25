@@ -2,6 +2,15 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Paket 6: açılış hızı, kayıt güvenliği ve ilk saat arayüzü — 2026-11-25
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 179 | **Derleme zamanı ikili içerik önbelleği** (`ContentCache`, `content.bin`). `:app:compileContentCache` görevi `content/` YAML klasörünü ortak anahtar sözlüklü ikili `JsonObject` paketine derler ve APK `assets` olarak yalnızca `content.bin` taşır (`YukselisApplication` yoksa YAML'a geri düşer). Masaüstünde soğuk yükleme 1570 ms → 61 ms (ısınmış 348 → 50 ms). | UI_REVIEW B5 (#175'in öngördüğü ikili önbellek): paralel YAML ayrıştırma 4,3 sn'de kalıyordu. | `ContentCache.VERSION` biçim değişirse artırılır; Android gerçek cihaz açılışı release derlemesinde ölçülür. |
+| 180 | **"Önceki oturum" kayıt yuvası** (`SaveManager.PREVIOUS_SESSION = "onceki"`). Normal modda Kayıtlar ekranından başka bir slot yüklenmeden önce mevcut oyun bu yuvaya alınır ve Kayıtlar'da `Otomatik kayıt`'ın hemen altında görünür; sonraki otomatik kayıtlarla (`auto`/`auto.prev`) ezilmez. Demir Mod'da yazılmaz. | UI_REVIEW B3: yüklenen oyunun ilk seçiminde eski otomatik kayıt eziliyordu. | — |
+| 181 | **İlk saat kendini açan arayüz genişletmesi** (`StatusView.showMana/showGrade/showStamina/showDanger/showCrystals`, `WorldState.UI_CRYSTALS_VAR`). MP ilk mana harcayan yetenek/kullanımda, Kademe Seviye 10/evrimde, Nefes ilk savaştan sonra, Tehlike ilk kapıda, Öz Kristali ilk kristalde (kalıcı), insanlık yüzdeliği `showRank` ile, Operasyon öncesi satırı ilk operasyon kaydında açılır; Perde 2'de hepsi açık. | UI_REVIEW D1: ilk saatte gereksiz 7 gösterge ekrandaydı. | — |
+| 182 | **Büyük yazı (`2.0x`), 48dp hedefler ve erişilebilirlik.** Durum alt sekmeleri `CappedFontScale(1.2f)`, üste ölçek ≥ 1,4'te Tehlike ayrı satıra iner (C5), yazı boyutu seçici 2×2 ızgara (C6), savaşta konuşulamayan düşmanda "Konuş" gizli (G5) ve düşman/taktik başlıkları ölçek tavanlı, `HelpButton`/`ChapterBar`/stat `±` 48dp (G3), `Game.reduceMotion` daktilo ve kart girişini kapatır (G4). `NpcEngine`'deki ölü `state.corruption >= 20` dalı silindi. | UI_REVIEW C5, C6, G3–G5 ve düzeltme sonrası `2.0x` bulguları. | Gerçek cihazda TalkBack dinlemesi. |
+
 ## Final dengesi: Vali savaşı — 2026-11-10
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |

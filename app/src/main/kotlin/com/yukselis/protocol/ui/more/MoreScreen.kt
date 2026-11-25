@@ -175,7 +175,8 @@ fun MoreScreen(
                 MorePage.RELATIONS -> relations?.let { RelationsSection(it) }
                 MorePage.RANKING -> ranking?.let { RankingSection(it) }
                 MorePage.SAVES -> {
-                    slots.forEach { (slot, info) ->
+                    // Operasyon öncesi satırı ilk operasyon kaydına kadar gizli (UI_REVIEW D1); Önceki oturum yalnız doluysa listede (B3).
+                    slots.filter { (slot, info) -> slot != SaveManager.OPERATION || info != null }.forEach { (slot, info) ->
                         SlotRow(
                             slot = slot,
                             info = info,
@@ -255,21 +256,24 @@ private fun HelpPage(onResetTips: () -> Unit) {
 
 @Composable
 private fun TextSizePicker(current: TextSize, onPick: (TextSize) -> Unit) {
-    Column(modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp)) {
+    Column(modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
         Text(stringResource(R.string.text_size), style = MaterialTheme.typography.bodyLarge)
-        Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth().padding(top = 6.dp)) {
-            listOf(
-                TextSize.SMALL to R.string.text_small,
-                TextSize.MEDIUM to R.string.text_medium,
-                TextSize.LARGE to R.string.text_large,
-                TextSize.XLARGE to R.string.text_xlarge,
-            ).forEach { (size, label) ->
-                val padding = PaddingValues(horizontal = 2.dp, vertical = 8.dp)
-                if (size == current) {
-                    Button(onClick = { }, contentPadding = padding, modifier = Modifier.weight(1f)) { Text(stringResource(label), maxLines = 1, overflow = TextOverflow.Ellipsis) }
-                } else {
-                    OutlinedButton(onClick = { onPick(size) }, contentPadding = padding, modifier = Modifier.weight(1f)) {
-                        Text(stringResource(label), maxLines = 1, overflow = TextOverflow.Ellipsis)
+        // 2×2 ızgara: "Çok büyük" / "Extra large" tek satırda kesilmeden sığar (UI_REVIEW C6).
+        listOf(
+            TextSize.SMALL to R.string.text_small,
+            TextSize.MEDIUM to R.string.text_medium,
+            TextSize.LARGE to R.string.text_large,
+            TextSize.XLARGE to R.string.text_xlarge,
+        ).chunked(2).forEach { pair ->
+            Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth()) {
+                pair.forEach { (size, label) ->
+                    val padding = PaddingValues(horizontal = 8.dp, vertical = 8.dp)
+                    if (size == current) {
+                        Button(onClick = { }, contentPadding = padding, modifier = Modifier.weight(1f)) { Text(stringResource(label), maxLines = 1, overflow = TextOverflow.Ellipsis) }
+                    } else {
+                        OutlinedButton(onClick = { onPick(size) }, contentPadding = padding, modifier = Modifier.weight(1f)) {
+                            Text(stringResource(label), maxLines = 1, overflow = TextOverflow.Ellipsis)
+                        }
                     }
                 }
             }
@@ -372,6 +376,7 @@ private fun DailyPanel(daily: DailyView, onTrain: () -> Unit, inDayLoop: Boolean
 private fun SlotRow(slot: String, info: SlotInfo?, canSave: Boolean, onSave: () -> Unit, onLoad: () -> Unit) {
     val name = when (slot) {
         SaveManager.AUTO -> stringResource(R.string.slot_auto)
+        SaveManager.PREVIOUS_SESSION -> stringResource(R.string.slot_previous)
         SaveManager.OPERATION -> stringResource(R.string.slot_operation)
         else -> stringResource(R.string.slot_n, SaveManager.MANUAL.indexOf(slot) + 1)
     }

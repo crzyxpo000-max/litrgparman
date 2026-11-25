@@ -69,10 +69,13 @@ class EffectApplier(private val content: Content) {
             val tab = if (effect.amount > 0) unlockTab(base, WorldState.TAB_BAG) else Result(base, emptyList())
             Result(tab.state, listOf(Notice(NoticeKind.SYSTEM, signed(texts.format("kredi", "n" to effect.amount), effect.amount))) + tab.notices)
         }
-        is Effect.AddCrystals -> Result(
-            state.withPlayer { it.copy(essenceCrystals = (it.essenceCrystals + effect.amount).coerceAtLeast(0)) },
-            listOf(Notice(NoticeKind.SYSTEM, signed(texts.format("oz_kristali", "n" to effect.amount), effect.amount))),
-        )
+        is Effect.AddCrystals -> {
+            val vars = if (effect.amount > 0) state.vars + (WorldState.UI_CRYSTALS_VAR to 1) else state.vars
+            Result(
+                state.copy(vars = vars).withPlayer { it.copy(essenceCrystals = (it.essenceCrystals + effect.amount).coerceAtLeast(0)) },
+                listOf(Notice(NoticeKind.SYSTEM, signed(texts.format("oz_kristali", "n" to effect.amount), effect.amount))),
+            )
+        }
         is Effect.EssenceInsight -> essenceInsight(state, effect.essenceId, effect.amount)
         is Effect.DailyProgress -> dailyProgress(state, effect.kind, effect.amount)
         Effect.OfferProfession -> offerProfession(state)
