@@ -430,6 +430,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         unlockedSkills = app.settings.uniqueSkillsSeen(),
         completedGames = app.settings.completedGames(),
         lang = lang,
+        // Son özetlerindeki {oyuncu}: son oynanan karakterin adı, yoksa varsayılan ad.
+        playerName = _ui.value.autosave?.playerName ?: app.getString(com.yukselis.protocol.R.string.default_player_name),
     )
 
     /** Son: bitirilmiş oyun meta kaydına girer (Döngü sonu New Game+'ı açar; Arşiv güncellenir). */

@@ -1,6 +1,7 @@
 # Elif'in ikinci yoldaşlık fırsatı (DECISIONS #149): ilk fırsat Bölüm 1'deki sahra hastanesindedir (seyrek tutar).
 # Konsey oylamasının ve Demir Gece'den sağ çıkışın son seçimleri bu olayları tohumlar; Elif yaşıyorsa, henüz yoldaş
-# değilse ve güven yeterliyse (gerekli) katılır. İki olaydan biri oynanınca öbürü gelmez (elif_yoldas_teklif bayrağı).
+# değilse ve güven yeterliyse (gerekli) katılır. Elif'i açıkça geri çeviren oyuncuya ikinci teklif gelmez (elif_yoldas_red);
+# konsey teklifinde yalnız yer olmadığı için katılamadıysa Demir Gece'den sonra bir kez daha sorar (DECISIONS #189, #194).
 olaylar:
   - id: "elif_yoldas_konsey"
     konum: ["us"]
@@ -34,8 +35,20 @@ olaylar:
               - bayrak: "elif_yoldas"
               - bayrak: "elif_yoldas_teklif"
             sonraki: "elif_yoldas_konsey_evet"
+          # Açık ret: Elif gerçekten katılabilecekken (yer var, güven yeterli) geri çevrilirse ikinci teklif gelmez (DECISIONS #194).
           - id: "konsey"
             etiket: { tr: "\"Yanımdan çok Konsey'de lazımsın.\"", en: "\"The Council needs you more than I do.\"" }
+            goster: { yoldas_yer: true, iliski_min: { elif_sari: { guven: 20 } } }
+            etkiler:
+              - iliski: { elif_sari: { saygi: 4, baglilik: -2 } }
+              - itibar: { siginak: 2 }
+              - bayrak: "elif_yoldas_red"
+              - bayrak: "elif_yoldas_teklif"
+            sonraki: "elif_yoldas_konsey_hayir"
+          # Aynı söz, ama katılma seçeneği zaten kapalıyken (güven yetmiyor ya da yer yok): ret sayılmaz, Demir Gece'den sonra yine sorar.
+          - id: "konsey_bekle"
+            etiket: { tr: "\"Yanımdan çok Konsey'de lazımsın.\"", en: "\"The Council needs you more than I do.\"" }
+            goster: { herhangi: [{ yoldas_yer: false }, { iliski_max: { elif_sari: { guven: 19 } } }] }
             etkiler:
               - iliski: { elif_sari: { saygi: 4, baglilik: -2 } }
               - itibar: { siginak: 2 }
@@ -99,6 +112,7 @@ olaylar:
           - id: "kogus"
             etiket: { tr: "\"Koğuş seni bekleyemez. Burada kal.\"", en: "\"The ward can't wait for you. Stay here.\"" }
             etkiler:
+              - bayrak: "elif_yoldas_red"
               - iliski: { elif_sari: { saygi: 4, baglilik: -2 } }
               - itibar: { siginak: 2 }
               - bayrak: "elif_yoldas_teklif"

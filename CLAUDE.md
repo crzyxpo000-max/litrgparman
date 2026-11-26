@@ -9,7 +9,7 @@ Verilen tasarım kararları: `docs/DECISIONS.md`. Belirsiz bir noktada varsayım
 
 - **Hikaye yapısı değişikliği (bölüm, üs/görev, konum, son tarih; `docs/CHAPTERS.md`, `docs/STORY_FLOW.md`, DECISIONS #130–#139) bitti.**
 - **Aşama 9 (denge ve yayın) bitti; imzalama anahtarı ve Play Console kullanıcıda.** Aşama 0–7 tamam. Aşama 7: Perde 2–4 ve sonlar (`docs/PERDE2_4.md` içerik sözleşmesi: perdeler, bölgeler, ortak bayraklar, son koşulları, partiler).
-- Oyuncu gözüyle inceleme (`docs/INCELEME_AKIS.md`) ve Paket 1–9 (`docs/UI_REVIEW.md`, DECISIONS #151–#193) tamamlandı; açık maddeler ve önerilen sıra `DEVIR.md`'de.
+- Oyuncu gözüyle inceleme (`docs/INCELEME_AKIS.md`) ve Paket 1–9 (`docs/UI_REVIEW.md`, DECISIONS #151–#196) tamamlandı; açık maddeler ve önerilen sıra `DEVIR.md`'de.
 - Aşama 8 kaldırıldı. Aşama 6: Perde 1 dikey dilimi (`docs/PERDE1.md`; 48 olay, yeni açılış, zindanlar).
 - Aşama 5 tamam. Aşama 5: NPC sistemi (`npc/`: 4 eksen, hafıza, gündem, eşikler, ölüm, yoldaşlar, düello,
   Küresel Sıralama, yoldaş görüşleri, güce tepkiler, bilgi günlüğü, yalanlar, izler, Ordu modeli).
@@ -175,7 +175,7 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
 
 - **Aşama 7:** düşman başvurusu `"id@120"` (sabit seviye), `"id@dunya"`/`"@dunya+20"` (dünya seviyesi ±%, `Progression.worldLevel`),
   `"id@oyuncu+5"` (oyuncu seviyesi ±n), `"id@oyuncu-10%"` (oyuncu seviyesinin ±%n'i, oyuncunun kademesinde; Perde 3–4'te destek ve
-  yeniden deneme indirimi bununla yazılır, ±n seviye o seviyelerde etkisizdir, DECISIONS #177); ölçekleme `combat/EnemyScaling.kt`. Perde 2+ bölge düşmanları ve kapılar dünya seviyesine ölçeklenir
+  yeniden deneme indirimi bununla yazılır, ±n seviye o seviyelerde etkisizdir, DECISIONS #177; ilk denemeyi yüzdeyle sertleştirme, #195); ölçekleme `combat/EnemyScaling.kt`. Perde 2+ bölge düşmanları ve kapılar dünya seviyesine ölçeklenir
   (`Progression.worldLevel`: Gün 30'da eğrinin yarısı, Gün 50'ye doğru tam eğri; DECISIONS #164).
   Etkiler `xp_seviye n` (seviye XP'sinin %n'i; Perde 2+ ödüllerinde sabit `xp` yerine), `kule_kat n`, `yol id`. Koşullar `kademe_min`,
   `ordu_min` (birlik sayısı), `yoldas_sayisi_max`, `oz`, `yol`, `son_uygun`, `hicbir_son`, `son` (epilog). Seçenekte `kronik {tr,en}`
@@ -231,7 +231,8 @@ Sürümler: Gradle 9.1, AGP 8.13.2, Kotlin 2.2.21, JDK 25 (Android Studio JBR). 
   logo 1.3; DECISIONS #172); okuma metnine tavan konmaz.
 - Bölüm kartları ve son (DECISIONS #173): `brifing_<n>_1` sahnesinde açılış, `darbogaz_<n>_1` sahnesinde kapanış kartı (`ChapterCard`,
   sahne kimliğinden tanınır: bu adlandırmayı bozma); son ekranı tam ekrandır (üst şerit ve sekmeler gizli). TR terimler (#174): savaş kaynağı
-  "Nefes" (NFS), defter karosu "Görevler"; "Dayanım" ve tek başına "Günlük" yazma. İçerik derleme zamanında ikili önbelleğe (`content.bin`, `:app:compileContentCache`, #179) derlenir.
+  "Nefes" (NFS), defter karosu "Görevler"; "Dayanım" ve tek başına "Günlük" yazma. İçerik derleme zamanında ikili önbelleğe (`content.bin`, `:app:compileContentCache`, #179) derlenir; APK'da YAML yoktur, `src/main/assets`
+  (lisans metinleri) pakette kalır (#196). Kuralların tek kaynağı bu dosyadır; `AGENTS.md` yalnız buraya yönlendirir.
 - Arayüz incelemesi araçları: `:tools:simulator:fixtures` (anlık kayıt üretir), `tools/qa/ui/cap.py`, `s_all.py` (koşul matrisi görüntüleri →
   `docs/ui-review/`), rapor `docs/UI_REVIEW.md`.
 - **Diyalog/alt sayfa:** `AlertDialog` değil `AppAlertDialog` kullan; `ModalBottomSheet` içeriğini `Localized {}` ile sar

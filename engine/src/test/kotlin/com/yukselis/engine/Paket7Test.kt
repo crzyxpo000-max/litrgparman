@@ -92,13 +92,13 @@ class Paket7Test {
         val uniqueSkill = content.skills.values.first { it.rarity == Rarity.UNIQUE }
 
         // Hiçbir şey açık değilken kilitli girdiler "???" döner.
-        val empty = engine.archive(emptySet(), emptySet(), emptySet(), emptySet(), 0, Lang.TR)
+        val empty = engine.archive(emptySet(), emptySet(), emptySet(), emptySet(), 0, Lang.TR, "Arda")
         assertEquals(0, empty.unlockedTotal)
         assertTrue(empty.grandTotal > 10)
         assertTrue(empty.endings.entries.all { !it.unlocked && it.name == "???" && it.description.isEmpty() })
 
         // Açılan girdiler TR ve EN'de gerçek ad ve açıklamayla görünür.
-        val partial = engine.archive(setOf(endingId), setOf(archetypeId), setOf(hiddenClass.id), setOf(uniqueSkill.id), 2, Lang.EN)
+        val partial = engine.archive(setOf(endingId), setOf(archetypeId), setOf(hiddenClass.id), setOf(uniqueSkill.id), 2, Lang.EN, "Alex")
         assertEquals(4, partial.unlockedTotal)
         assertEquals(2, partial.completedGames)
         val unlockedEnding = partial.endings.entries.first { it.id == endingId }

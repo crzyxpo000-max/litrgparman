@@ -65,7 +65,8 @@ android {
     sourceSets {
         getByName("main") {
             // Oyun içeriği derleme zamanında ikili önbelleğe (content.bin) çevrilir (UI_REVIEW B5).
-            assets.setSrcDirs(listOf(layout.buildDirectory.dir("generated/content-cache")))
+            // `src/main/assets` (yazı tipi lisans metinleri) korunur; YAML kaynakları pakete girmez.
+            assets.setSrcDirs(listOf("src/main/assets", layout.buildDirectory.dir("generated/content-cache")))
         }
     }
 }

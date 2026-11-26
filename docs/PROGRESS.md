@@ -12,6 +12,12 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - Emülatör: `Medium_Phone_API_36.0` (`emulator -avd Medium_Phone_API_36.0`), adb ile kurulum.
 - OneDrive kilidi yüzünden lint ara sıra "dosya kullanılıyor" der: `./gradlew --stop` ve tekrar.
 
+## Paket 6–9 incelemesi ve düzeltmeler (2026-11-26)
+- [x] Paket 6–9 gözden geçirildi (kod, içerik TR/EN, denge, emülatör); düzeltmeler DECISIONS #194–#196: lisans metinleri yeniden
+      APK'da, YAML yedek yolu kaldırıldı, Tehlike koşulu sayaçlara bağlandı, Elif'in ikinci teklifi açık retten sonra gelmez,
+      Perde 3–4 ilk denemeleri eski değerlerinde, `AGENTS.md` yönlendirme dosyası, 12 üslup düzeltmesi
+- [ ] Açık: Perde 3–4 final bosslarının ilk deneme zorluğu elle oynanmadı (#195)
+
 ## Paket 9: arayüz P2 kapanış turu (2026-11-26)
 - [x] **Kayıtlar, Görevler ve Harita (`B6`, `C7`, `D4`, DECISIONS #191):** Kaydet birincil + 1 sn yeşil vurgu; Görevler kartlı düzen
       (Etkin/Tamamlanan + anlatı yazı tipi); Harita bulunulan bölge üstte, perdeye göre gruplu, 0 gün kalan kapıda kırmızı "Taşmak üzere".

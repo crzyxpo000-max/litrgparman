@@ -1172,7 +1172,7 @@ olaylar:
             etkiler:
               - bolge: "batik_takimada"
               - ahlak: { merhamet: 4, duzen: -1 }
-              - savas: { dusmanlar: ["son_basakci@oyuncu+5%"], ortam: ["su"], kazan: "basakci_zafer", kaybet: "basakci_yenilgi", kac: "basakci_kacis" }
+              - savas: { dusmanlar: ["son_basakci@oyuncu+5"], ortam: ["su"], kazan: "basakci_zafer", kaybet: "basakci_yenilgi", kac: "basakci_kacis" }
             kronik: { tr: "Son Fener'in önünde, hasat edilmiş bir dünyanın son insanlarıyla Hasat'ın geride bıraktığı şeyin arasına dikildin.", en: "You stood in front of the Last Light, between a harvested world's last people and the thing the Harvest left behind." }
           - id: "canlar"
             etiket: { tr: "Önce çanları çaldır; sonra saldır", en: "Get the bells ringing first. Then attack" }
@@ -1218,7 +1218,7 @@ olaylar:
             etiket: { tr: "Ağı yırt ve dövüş", en: "Tear free of the net and fight" }
             etkiler:
               - ahlak: { merhamet: 2 }
-              - savas: { dusmanlar: ["son_basakci@oyuncu+5%"], ortam: ["su"], kazan: "basakci_zafer", kaybet: "basakci_yenilgi", kac: "basakci_kacis" }
+              - savas: { dusmanlar: ["son_basakci@oyuncu+5"], ortam: ["su"], kazan: "basakci_zafer", kaybet: "basakci_yenilgi", kac: "basakci_kacis" }
             kronik: { tr: "Başakçı'nın ağını yırtıp kurtuldun, onunla fenerin dibinde dövüşe tutuştun.", en: "You tore your way out of the Gleaner's net and fought it at the foot of the Light." }
 
       - id: "basakci_konus"
@@ -2385,7 +2385,7 @@ olaylar:
             etiket: { tr: "Mühürdar'la yüzleş", en: "Face the Sealwarden" }
             etkiler:
               - ahlak: { duzen: -3 }
-              - savas: { dusmanlar: ["muhurdar@oyuncu+6%"], ortam: ["dar_gecit"], kazan: "kefe_zafer", kaybet: "kefe_yenilgi", kac: "kefe_kacis" }
+              - savas: { dusmanlar: ["muhurdar@oyuncu+6"], ortam: ["dar_gecit"], kazan: "kefe_zafer", kaybet: "kefe_yenilgi", kac: "kefe_kacis" }
             kronik: { tr: "Dört yüz yıllık bir senedin bekçisiyle {yer:pirinc_kervan|in} kalbinde dövüştün.", en: "You fought the guardian of a four-hundred-year-old treaty in the heart of {yer:pirinc_kervan}." }
           - id: "zincir"
             etiket: { tr: "Önce Kesra'nın gençleri zincirleri kessin", en: "Have Kesra's kids cut the chains first" }
@@ -3306,7 +3306,7 @@ olaylar:
             etkiler:
               - bolge: "yedi_taht"
               - ahlak: { duzen: -3, merhamet: 1 }
-              - savas: { dusmanlar: ["varis_ossiran@oyuncu+8%"], kazan: "varis_zafer", kaybet: "varis_yenilgi", kac: "varis_kacis" }
+              - savas: { dusmanlar: ["varis_ossiran@oyuncu+8"], kazan: "varis_zafer", kaybet: "varis_yenilgi", kac: "varis_kacis" }
             kronik: { tr: "{yer:yedi_taht|in} hüküm salonunda, altı tahtın önünde, dünyanı isteyen Kadim'le dövüştün.", en: "In {yer:yedi_taht|pos} Hall of Decree, before all six thrones, you fought the Ancient who wanted your world." }
           - id: "oku"
             tur: "gosteris"

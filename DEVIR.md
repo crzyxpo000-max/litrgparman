@@ -3,7 +3,7 @@
 Yazıldığı gün: 2026-11-26. Dal: `main`, son commit `9f6da2c` (+ Paket 9).
 Çalışma ağacı: `art/*.jpg` (7 dosya) izlenmiyor, bilinçli olarak depoya girmedi.
 
-Bu dosya bir özet ve yol haritasıdır. Ayrıntının kaynağı: `CLAUDE.md` / `AGENTS.md` (kurallar), `docs/PROGRESS.md` (kutu kutu durum),
+Bu dosya bir özet ve yol haritasıdır. Ayrıntının kaynağı: `CLAUDE.md` (kurallar; `AGENTS.md` yalnız ona yönlendirir), `docs/PROGRESS.md` (kutu kutu durum),
 `docs/DECISIONS.md` (#1–#193), `docs/UI_REVIEW.md`, `docs/INCELEME_AKIS.md`, `docs/STORY_FLOW.md`, `docs/BALANCE.md`.
 
 ## 1. Şu anki durum

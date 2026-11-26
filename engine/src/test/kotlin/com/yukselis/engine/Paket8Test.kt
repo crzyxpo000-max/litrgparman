@@ -20,7 +20,7 @@ import java.io.File
  * Paket 8 testleri:
  * - Yeni Döngü (`yeni_dongu`) Yankı fısıltıları: yalnız NG+ oturumunda görünür ve Yankı susturulduğunda susar
  * - Zaman atlama (`96_zaman_atlama.yaml`) bültenleri ve yüksek Dikkat söylentileri
- * - `elif_yoldas_darbe` tohum koşulu: Perde 2'de `elif_yoldas_teklif` reddedilmiş olsa da Perde 3'te açılabilir
+ * - `elif_yoldas_darbe` tohum koşulu: Konsey teklifi yer olmadığı için kaçtıysa Perde 3'te açılır; açık retten sonra açılmaz
  * - Perde 3–4 `@oyuncu±n%` ölçeklemeleri yüksek seviyede anlamlı fark yaratır ve kademeyi korur
  */
 class Paket8Test {
@@ -58,7 +58,19 @@ class Paket8Test {
     }
 
     @Test
-    fun `elif yoldas darbe tohumlari onceki teklif reddedilmis olsa bile tutar`() {
+    fun `elif acik ret secenekleri ikinci teklifi kapatir yer yok kapatmaz`() {
+        fun flags(scene: String, choice: String) = content.scenes.getValue(scene).choices.first { it.id == choice }
+            .effects.filterIsInstance<Effect.SetFlag>().map { it.flag }
+        assertTrue("elif_yoldas_red" in flags("elif_yoldas_konsey_1", "konsey"))
+        assertFalse("elif_yoldas_red" in flags("elif_yoldas_konsey_1", "yer_yok"))
+        // Katılma seçeneği kapalıyken söylenen aynı söz ret sayılmaz.
+        assertFalse("elif_yoldas_red" in flags("elif_yoldas_konsey_1", "konsey_bekle"))
+        assertFalse("elif_yoldas_red" in flags("elif_yoldas_konsey_1", "katil"))
+        assertTrue("elif_yoldas_red" in flags("elif_yoldas_darbe_1", "kogus"))
+    }
+
+    @Test
+    fun `elif yoldas darbe tohumlari yer yokken tutar acik retten sonra tutmaz`() {
         val seeds = content.scenes.values.flatMap { sc ->
             sc.choices.flatMap { it.effects }.filterIsInstance<Effect.PlantSeed>()
                 .filter { it.eventId == "elif_yoldas_darbe" }
@@ -69,11 +81,14 @@ class Paket8Test {
             it.copy(flags = it.flags + "elif_yoldas_teklif")
         }
         val alreadyCompanion = declinedEarlier.copy(flags = declinedEarlier.flags + "elif_yoldas")
+        // Açık ret (DECISIONS #194): Konsey teklifinde "Konsey'de lazımsın" diyen oyuncuya ikinci teklif gelmez.
+        val refused = declinedEarlier.copy(flags = declinedEarlier.flags + "elif_yoldas_red")
 
         seeds.forEach { seed ->
             val cond = ContentParser.condition(YamlTree.parseObject(seed.condition!!, "test"), content.endings)
             assertTrue(cond.test(declinedEarlier))
             assertFalse(cond.test(alreadyCompanion))
+            assertFalse(cond.test(refused))
         }
     }
 

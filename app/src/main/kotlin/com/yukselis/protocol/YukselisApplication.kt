@@ -5,7 +5,6 @@ import com.yukselis.engine.content.ContentCache
 import com.yukselis.engine.content.ContentLoader
 import com.yukselis.engine.save.SaveManager
 import com.yukselis.engine.story.StoryEngine
-import com.yukselis.protocol.data.AssetContentSource
 import com.yukselis.protocol.data.FileSaveStorage
 import com.yukselis.protocol.data.SettingsStore
 import java.io.File
@@ -14,13 +13,9 @@ import java.io.File
 class YukselisApplication : Application() {
 
     val engine: StoryEngine by lazy {
-        // Derleme zamanında üretilen ikili önbellekten yükle (UI_REVIEW B5); yoksa YAML'a geri düş.
-        val content = runCatching {
-            assets.open(ContentCache.FILE_NAME).use { ContentLoader.loadFromCache(it) }
-        }.getOrElse {
-            ContentLoader.load(AssetContentSource(assets))
-        }
-        StoryEngine(content)
+        // Derleme zamanında üretilen ikili önbellekten yüklenir (DECISIONS #179). YAML kaynakları pakette yoktur; önbellek
+        // okunamazsa hata olduğu gibi yükselir (GameViewModel günlüğe yazar), başka bir hatayla örtülmez.
+        StoryEngine(assets.open(ContentCache.FILE_NAME).use { ContentLoader.loadFromCache(it) })
     }
 
     val saves: SaveManager by lazy {

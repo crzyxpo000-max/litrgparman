@@ -28,7 +28,7 @@ olaylar:
             kosul: { perde: 2, itibar_min: { siginak: 15 }, lider_fraksiyon: "siginak" }
             baslik: { tr: "[Şehir bülteni · {yer:kiyikent}]", en: "[City bulletin · {yer:kiyikent}]" }
             satirlar:
-              - { tr: "{fraksiyon:siginak} rıhtım aşevlerini genişletti; kıyı devriyeleri sıklaştı.", en: "The {fraksiyon:siginak} expanded the dockside kitchens; waterfront patrols are tighter." }
+              - { tr: "{fraksiyon:siginak} rıhtım aşevlerini genişletti; kıyı devriyeleri sıklaştı.", en: "The {fraksiyon:siginak} expanded the dockside soup kitchens; waterfront patrols are tighter." }
           - tur: "sistem"
             kosul: { perde: 2, itibar_min: { lonca: 15 }, lider_fraksiyon: "lonca" }
             baslik: { tr: "[Şehir bülteni · {yer:kiyikent}]", en: "[City bulletin · {yer:kiyikent}]" }
@@ -51,7 +51,7 @@ olaylar:
             metin: { tr: "kasların hatırlamıyor ama elin hatırlıyor. aynı tutuş, aynı nefes.", en: "your muscles don't remember, but your hands do. same grip, same breath." }
           - anlati: true
             kosul: { dikkat_min: 45 }
-            metin: { tr: "Antrenman alanının uzağında iki yabancı durmuş, açık pencereleriyle hareketlerini not ediyor. Göz göze geldiğinizde ikisi de sokağa karışıp kayboldu.", en: "Past the edge of the yard, two strangers stood taking notes on your form against open windows. The second you met their eyes, they slipped back into the street." }
+            metin: { tr: "Antrenman alanının ucunda iki yabancı durmuş, açık Sistem pencerelerine hareketlerini not ediyor. Göz göze gelir gelmez ikisi de sokağa karışıp kayboluyor.", en: "Past the edge of the yard, two strangers stand logging your form in open System windows. The second you meet their eyes, they slip back into the street." }
         secenekler:
           - id: "devam"
             etiket: { tr: "Güne dön", en: "Get back to the day" }
@@ -74,7 +74,7 @@ olaylar:
             kosul: { degisken_min: { _atlama_varyant: 1 }, degisken_max: { _atlama_varyant: 1 } }
           - metin: { tr: "Kapıların açıldığı yerleri haritaya işleyip aralarındaki düzeni arıyorsun. Bulduğun düzen sayesinde iki gün sonra bir kapı daha ışımadan onun başında bekliyorsun.", en: "You mark every spot where a Gate has opened on a map and look for the pattern. Two days later the pattern pays off: you're already standing there waiting when the next one lights up." }
             kosul: { degisken_min: { _atlama_varyant: 2 } }
-          - metin: { tr: "Bir hafta dolmadan çevredekiler gece kapı ışığını görünce panikle değil, omuz silkerek karşılamaya başlıyor. \"O halleder\" diyorlar.", en: "Before the week's out, people around base stop panicking when a Gate lights up at night. They just shrug. \"They'll handle it,\" they say." }
+          - metin: { tr: "Bir hafta dolmadan çevredekiler gece kapı ışığını görünce panikle değil, omuz silkerek karşılamaya başlıyor. \"O halleder,\" diyorlar.", en: "Before the week's out, people around base stop panicking when a Gate lights up at night. They just shrug. \"That one's got it,\" they say." }
             kosul: { degisken_min: { _atlama_gun: 5 } }
           - metin: { tr: "Son kapıyı kapatırken bir koşucu soluk soluğa yanına varıyor: başka bir yerde seni bekleyen bir iş var.", en: "You're closing the last Gate when a runner skids up, out of breath: there's a job waiting for you somewhere else." }
             kosul: { degisken_min: { _atlama_kesildi: 1 } }
@@ -99,7 +99,7 @@ olaylar:
             metin: { tr: "küçük kapılar. küçük lokmalar. doymuyorum ama oyalanıyorum.", en: "little gates. little bites. it doesn't fill me up, but it keeps me busy." }
           - anlati: true
             kosul: { dikkat_min: 50 }
-            metin: { tr: "Kapattığın son kapının kenarında {fraksiyon:lonca} mühürlü gözlem çivisi buldun. Biri nöbet saatlerini ölçmüş.", en: "By the rim of the last Gate you sealed, you found a survey spike stamped by the {fraksiyon:lonca}. Somebody's been timing your shifts." }
+            metin: { tr: "Kapattığın son kapının kenarında {fraksiyon:lonca} mühürlü bir gözlem çivisi görüyorsun. Biri nöbet saatlerini ölçmüş.", en: "By the rim of the last Gate you sealed, you find a survey spike stamped by the {fraksiyon:lonca}. Somebody's been timing your shifts." }
         secenekler:
           - id: "devam"
             etiket: { tr: "Güne dön", en: "Get back to the day" }
@@ -142,15 +142,15 @@ olaylar:
     sahneler:
       - id: "atlama_yoldas_1"
         paragraflar:
-          - metin: { tr: "Günleri {npc:@|le} birlikte geçiriyorsun: sabah beraber antrenman, akşam aynı ateşin başında yemek. Konuşmak çoğu zaman gerekmiyor, ama konuştuğunuzda saatin nasıl geçtiğini anlamıyorsunuz.", en: "You spend the days with {npc:@}: training together in the morning, eating by the same fire at night. Most of the time you don't need to talk, and when you do, the hours just disappear." }
+          - metin: { tr: "Günleri {npc:@|le} geçiriyorsun: sabah antrenman, akşam aynı ateşin başında yemek. Konuşmak çoğu zaman gerekmiyor, ama konuştuğunuzda saatin nasıl geçtiğini anlamıyorsunuz.", en: "You spend the days with {npc:@}: training together in the morning, eating by the same fire at night. Most of the time you don't need to talk, and when you do, the hours just disappear." }
             kosul: { degisken_max: { _atlama_varyant: 0 } }
-          - metin: { tr: "{npc:@} sana kendi bildiği bir şeyi öğretmeye kalkıyor, sen de ona kendininkini. İkiniz de beceriksiz çıkıyorsunuz ve buna ikiniz de gülüyorsunuz.", en: "{npc:@} decides to teach you something {zamir:@|o} knows, and you return the favor. You're both terrible at it, and you both end up laughing about it." }
+          - metin: { tr: "{npc:@} sana kendi bildiği bir şeyi öğretmeye kalkıyor, sen de ona kendininkini. İkiniz de beceriksiz çıkıyorsunuz, sonunda birlikte gülüyorsunuz.", en: "{npc:@} decides to teach you something {zamir:@|o} knows, and you return the favor. You're both terrible at it, and you both end up laughing about it." }
             kosul: { degisken_min: { _atlama_varyant: 1 }, degisken_max: { _atlama_varyant: 1 } }
           - metin: { tr: "Üssün çevresinde {npc:@|le} uzun yürüyüşlere çıkıyorsunuz. Bir akşam {npc:@} hiç sormadığın halde eskiden anlatmadığı bir şeyi anlatıyor; sen de sözünü kesmiyorsun.", en: "You and {npc:@} take long walks around base. One evening, without you asking, {npc:@} tells you something {zamir:@|o} {zamir:@|has} never told you before, and you don't interrupt." }
             kosul: { degisken_min: { _atlama_varyant: 2 } }
           - metin: { tr: "Günler geçtikçe birbirinizin sessizliğini okumayı öğreniyorsunuz. Artık ne zaman yalnız kalmak istediğini sormadan biliyorsun.", en: "As the days go by, you learn to read each other's silences. You can tell now when {zamir:@|o} {zamir:@|is} after some time alone without having to ask." }
             kosul: { degisken_min: { _atlama_gun: 5 } }
-          - metin: { tr: "Sonra haber geliyor: başka bir yerde bir iş seni bekliyor. {npc:@} omzunu sıvazlayıp \"Git hadi\" diyor, \"burada bekliyor olacağım.\"", en: "Then word comes: there's something waiting for you somewhere else. {npc:@} claps you on the shoulder. \"Go on,\" {zamir:@|o} {zamir:@|s}. \"I'll be right here.\"" }
+          - metin: { tr: "Sonra haber geliyor: başka bir yerde bir iş seni bekliyor. {npc:@} omzunu sıvazlayıp \"Git hadi,\" diyor, \"ben buradayım.\"", en: "Then word comes: there's something waiting for you somewhere else. {npc:@} claps you on the shoulder. \"Go on,\" {zamir:@|o} {zamir:@|s}. \"I'll be right here.\"" }
             kosul: { degisken_min: { _atlama_kesildi: 1 } }
         bildirimler:
           - tur: "sistem"

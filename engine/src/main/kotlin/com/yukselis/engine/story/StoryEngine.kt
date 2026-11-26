@@ -537,8 +537,9 @@ class StoryEngine(val content: Content) {
         unlockedSkills: Set<String>,
         completedGames: Int,
         lang: Lang,
+        playerName: String,
     ): ArchiveView {
-        fun plain(raw: String) = resolver.resolve(raw, lang, if (lang == Lang.TR) "Arda" else "Alex")
+        fun plain(raw: String) = resolver.resolve(raw, lang, playerName)
         fun <T> section(items: List<T>, idOf: (T) -> String, nameOf: (T) -> String, descOf: (T) -> String, unlocked: Set<String>, rarityOf: (T) -> Rarity? = { null }): ArchiveSectionView {
             val entries = items.map { item ->
                 val id = idOf(item)
@@ -919,7 +920,9 @@ class StoryEngine(val content: Content) {
             showMana = state.act >= 2 || p.mp < p.maxMp || p.skills.any { (content.skills[it.id]?.costMp ?: 0) > 0 },
             showGrade = state.act >= 2 || p.grade > Grade.F || state.prompts.any { it.kind == PromptKind.EVOLUTION } || p.level >= Progression.CLASS_OFFER_LEVEL,
             showStamina = state.act >= 2 || state.variable(CombatEngine.VAR_FIGHTS) > 0,
-            showDanger = state.act >= 2 || state.regions.values.any { it.gates.isNotEmpty() } || state.flags.any { it.contains("kapi") || it.contains("tasma") },
+            showDanger = state.act >= 2 || state.regions.values.any { it.gates.isNotEmpty() } ||
+                state.variable(com.yukselis.engine.world.WorldEngine.GATES_CLOSED_VAR) > 0 ||
+                state.variable(com.yukselis.engine.world.WorldEngine.OVERFLOW_VAR) > 0,
             showCrystals = state.act >= 2 || p.essenceCrystals > 0 || state.variable(WorldState.UI_CRYSTALS_VAR) > 0,
         )
     }
@@ -1094,12 +1097,7 @@ class StoryEngine(val content: Content) {
     }
 
     private fun bonusLine(bonus: Map<Stat, Int>, lang: Lang): String {
-        val stats = statList(bonus, lang)
-        return if (content.texts["evrim_simdi"] != null) {
-            content.texts.format("evrim_simdi", "stats" to stats)[lang]
-        } else {
-            stats
-        }
+        return content.texts.format("evrim_simdi", "stats" to statList(bonus, lang))[lang]
     }
 
     private fun growthLine(growth: Map<Stat, Int>, lang: Lang): String {

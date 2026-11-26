@@ -636,7 +636,7 @@ olaylar:
           - { tr: "O sonuncusu dönüp sana bakıyor ve tuttuğu eli bırakıyor. Camın ardında salonun sonuna doğru yürümeye başlıyor; seninle aynı hızda ama senden yarım adım önde.", en: "That last one turns and looks at you. Lets go of the hand. Behind the glass, it starts walking toward the end of the hall, at your pace, but half a step ahead of you." }
           - metin: { tr: "Buraya daha önce de geldin. Yansımalardan biri, geçen seferki yaralarını taşıyarak sana el sallıyor.", en: "You've been here before. One of the reflections, wearing last time's wounds, waves at you." }
             kosul: { degisken_min: { kule30_deneme: 1 } }
-          - metin: { tr: "Aynalardan biri seni gösteriyor ama oradaki sen bu salonu çoktan tanıyor; üstünde başka bir oyunun, başka bir tırmanışın yorgunluğu var. Bir an hangisinin yansıma olduğundan emin olamıyorsun.", en: "One of the mirrors shows you, but the you in there already knows this hall, wearing the exhaustion of another run, another climb. For a second you can't tell which one of you is the reflection." }
+          - metin: { tr: "Aynalardan biri seni gösteriyor ama oradaki sen bu salonu çoktan tanıyor; üstünde başka bir oyunun, başka bir tırmanışın yorgunluğu var. Bir an hangisinin yansıma olduğundan emin olamıyorsun.", en: "One of the mirrors shows you, but the you in there already knows this hall and carries the exhaustion of another playthrough, another climb. For a second you can't tell which one of you is the reflection." }
             kosul: { degisken_min: { onceki_oyun: 1 } }
         bildirimler:
           - tur: "sistem"
@@ -1512,7 +1512,7 @@ olaylar:
           - { tr: "Bir başka sayfa: [Katman: Tavvar · Sonuç: vassal.] Son satırı aynı. Bir başkası: [Sonuç: kabul edildi.] Son satırı yine aynı.", en: "Another page: [Layer: Tavvar · Outcome: vassal.] Same last line. Another: [Outcome: accepted.] Same last line." }
           - metin: { tr: "Buraya daha önce de geldin. Rafların arasında, geçen seferki ayak izlerin hâlâ külün içinde duruyor, seni bekler gibi.", en: "You've been here before. On one aisle, your footprints from last time are still in the ash, like they're waiting for you." }
             kosul: { degisken_min: { kule60_deneme: 1 } }
-          - metin: { tr: "Sayfalardan birinin köşesinde bir çizim var: bir vapur, bir iskele. Kenarına senin el yazınla bir not düşülmüş: \"yine.\" Nereden tanıdığını bilmiyorsun. Ya da biliyorsun da bilmek istemiyorsun.", en: "In the corner of one page there's a sketch: a ferry. A pier. Someone added a note in the margin in your handwriting: \"again.\" You don't know how you recognize it. Or you do, and you don't want to." }
+          - metin: { tr: "Sayfalardan birinin köşesinde bir çizim var: bir vapur, bir iskele. Kenarında senin el yazınla bir not: \"yine.\" Nereden tanıdığını bilmiyorsun; ya da biliyorsun da bilmek istemiyorsun.", en: "In the corner of one page there's a sketch: a ferry. A pier. Someone added a note in the margin in your handwriting: \"again.\" You don't know how you recognize it. Or you do, and you don't want to." }
             kosul: { degisken_min: { onceki_oyun: 1 } }
         bildirimler:
           - tur: "sistem"
@@ -1661,7 +1661,7 @@ olaylar:
           - id: "dovus"
             etiket: { tr: "Yarım kaydınla aleve yürü", en: "Walk into the fire with your half-written record" }
             etkiler:
-              - savas: { dusmanlar: ["kule_arsiv_alevi@oyuncu+5%"], ortam: ["yanici"], kazan: "k60_zafer", kaybet: "k60_yenilgi", kac: "k60_kacis" }
+              - savas: { dusmanlar: ["kule_arsiv_alevi@oyuncu+5"], ortam: ["yanici"], kazan: "k60_zafer", kaybet: "k60_yenilgi", kac: "k60_kacis" }
           - id: "dosyalar"
             etiket: { tr: "Kurtardığın dosyaları kalkan yap", en: "Use the files you saved as a shield" }
             goster: { bayrak: "kule_dosyalar_kurtarildi" }
@@ -1928,7 +1928,7 @@ olaylar:
           - id: "dovus"
             etiket: { tr: "Tarlanın ortasında dur", en: "Stand your ground in the middle of the field" }
             etkiler:
-              - savas: { dusmanlar: ["kule_hasat_oragi@oyuncu+6%"], ortam: ["karanlik"], kazan: "k70_zafer", kaybet: "k70_yenilgi", kac: "k70_kacis" }
+              - savas: { dusmanlar: ["kule_hasat_oragi@oyuncu+6"], ortam: ["karanlik"], kazan: "k70_zafer", kaybet: "k70_yenilgi", kac: "k70_kacis" }
           - id: "ates"
             etiket: { tr: "Kozaların dibinde ateş yak; orağı ikiye böl", en: "Light fires by the pods. Split the scythe's attention" }
             gerekli: { egilim_min: { buyu: 15 } }
@@ -1939,7 +1939,7 @@ olaylar:
             etiket: { tr: "Kozaları arkana al; orağı onlardan uzak tut", en: "Keep the pods at your back. Draw the scythe away" }
             etkiler:
               - ahlak: { merhamet: 4 }
-              - savas: { dusmanlar: ["kule_hasat_oragi@oyuncu+6%"], ortam: ["dar_gecit"], kazan: "k70_zafer", kaybet: "k70_yenilgi", kac: "k70_kacis" }
+              - savas: { dusmanlar: ["kule_hasat_oragi@oyuncu+6"], ortam: ["dar_gecit"], kazan: "k70_zafer", kaybet: "k70_yenilgi", kac: "k70_kacis" }
 
       - id: "k70_zafer"
         yer: "kule"
@@ -2169,7 +2169,7 @@ olaylar:
             etkiler:
               - ahlak: { insanlik: 5, duzen: -2 }
               - itibar: { kadimler: -6 }
-              - savas: { dusmanlar: ["kule_gok_gozcusu@oyuncu+6%"], ortam: ["karanlik", "tavan"], kazan: "k80_zafer", kaybet: "k80_yenilgi", kac: "k80_kacis" }
+              - savas: { dusmanlar: ["kule_gok_gozcusu@oyuncu+6"], ortam: ["karanlik", "tavan"], kazan: "k80_zafer", kaybet: "k80_yenilgi", kac: "k80_kacis" }
           - id: "kabul"
             etiket: { tr: "Damgayı al; sonra yine de dövüş", en: "Take the stamp. Then fight anyway" }
             etkiler:
@@ -2455,7 +2455,7 @@ olaylar:
           - id: "dovus"
             etiket: { tr: "İstediğini ver: seni durdurmayı denesin", en: "Give them what they want. Let them try to stop you" }
             etkiler:
-              - savas: { dusmanlar: ["kule_onceki_tasiyici@oyuncu+7%"], ortam: ["karanlik"], kazan: "k90_zafer", kaybet: "k90_yenilgi", kac: "k90_kacis" }
+              - savas: { dusmanlar: ["kule_onceki_tasiyici@oyuncu+7"], ortam: ["karanlik"], kazan: "k90_zafer", kaybet: "k90_yenilgi", kac: "k90_kacis" }
           - id: "isik"
             etiket: { tr: "Taslağı keskin bir ışığa boğ; çizgileri sil", en: "Flood the draft with hard light. Erase their lines" }
             gerekli: { egilim_min: { buyu: 20 } }
@@ -2588,7 +2588,7 @@ olaylar:
             kosul: { npc_olu: "deniz_arman" }
           - metin: { tr: "Korkuluğun dibinde biri simidinin son parçasını martılara uzatıyor. Yanındaki boşluğu tanıyorsun: senin durduğun yer. Orada kimse yok. Ya da henüz yok.", en: "By the railing, someone holds the last of a pretzel out to the gulls. You know the empty spot beside them: the place where you stood. Nobody's there. Or nobody's there yet." }
             kosul: { npc_hayatta: "deniz_arman" }
-          - metin: { tr: "Bu iskeleyi biliyorsun, bu dakikayı da. Bir önceki seferde burada durmuş, gökyüzüne bakmıştın; ne olacağını bildiğin hâlde yine de bakmıştın. Bu sefer de bakıyorsun.", en: "You know this pier. You know this minute. Last time you stood right here, looked up at the sky, and looked anyway, even knowing what was coming. You're looking this time too." }
+          - metin: { tr: "Bu iskeleyi biliyorsun, bu dakikayı da. Geçen sefer burada durmuş, gökyüzüne bakmıştın; ne olacağını bildiğin hâlde yine de bakmıştın. Bu sefer de bakıyorsun.", en: "You know this pier. You know this minute. Last time you stood right here, looked up at the sky, and kept looking even though you knew what was coming. You're looking this time too." }
             kosul: { degisken_min: { onceki_oyun: 1 } }
         bildirimler:
           - tur: "sistem"
@@ -2717,7 +2717,7 @@ olaylar:
             etiket: { tr: "Başlangıçla dövüş", en: "Fight the beginning" }
             etkiler:
               - ahlak: { duzen: -2, insanlik: 2 }
-              - savas: { dusmanlar: ["kule_ilk_pencere@oyuncu+8%"], ortam: ["su"], kazan: "k100_zafer", kaybet: "k100_yenilgi", kac: "k100_kacis" }
+              - savas: { dusmanlar: ["kule_ilk_pencere@oyuncu+8"], ortam: ["su"], kazan: "k100_zafer", kaybet: "k100_yenilgi", kac: "k100_kacis" }
             kronik: { tr: "Sistem'in İlk Pencere'sine meydan okudun; sana hiç düğmesi verilmemiş o \"hayır\"ı söylemeye kararlıydın.", en: "At the top of the Spire you challenged the System's First Window, set on saying the \"no\" it never gave you a button for." }
           - id: "yanki_dovus"
             etiket: { tr: "{npc:yanki} ile birlikte tek bir bozuk satır gibi dövüş", en: "Fight it with {npc:yanki}, like one corrupted line" }
@@ -2735,7 +2735,7 @@ olaylar:
         paragraflar:
           - { tr: "İlk Pencere önce çatlıyor, sonra kırılıyor. Mavi kırıklar iskelenin üstüne yaz yağmuru gibi yağıyor. Martılar yeniden çığlık çığlığa; gökyüzü bütün. Akşam vapuru sonunda iskeleye yanaşıyor.", en: "The First Window cracks, then breaks. Blue shards rain down on the pier like a summer shower. The gulls start screaming again. The sky is whole. The evening ferry, finally, pulls up to the dock." }
           - { tr: "Kırıkların ortasında avuç içi büyüklüğünde, titrek, küçük bir pencere kalıyor. Üstünde iki satır var. Birincisi: [Entegrasyon başlatılsın mı?] İkincisi yeni, daha önce hiç orada olmamış: [Döngü kaydı: █ · Taşıyıcı: sen · Sonraki taşıyıcı: belirlenmedi.]", en: "In the middle of the shards, one small window is left: palm-sized, flickering. There are two lines on it. The first: [Initiate Integration?] The second is new; it's never been there before: [Cycle record: █ · Carrier: you · Next carrier: TBD.]" }
-          - metin: { tr: "Altında da ilk kez ikinci bir düğme beliriyor: soluk, neredeyse görünmez, bir önceki seferden kalma bir parmak iziyle bulanık. Üstünde ne yazdığını okuyamıyorsun ama orada. Bir önceki sefer yoktu.", en: "And under it, for the first time, a second button appears. Faint, almost invisible, smudged with a fingerprint from last time. You can't read what it says. But it's there. Last time, it wasn't." }
+          - metin: { tr: "Altında da ilk kez ikinci bir düğme beliriyor: soluk, neredeyse görünmez, geçen seferden kalma bir parmak iziyle bulanık. Üstünde ne yazdığını okuyamıyorsun ama orada. Geçen sefer yoktu.", en: "And under it, for the first time, a second button appears. Faint, almost invisible, smudged with a fingerprint from last time. You can't read what it says. But it's there. Last time, it wasn't." }
             kosul: { degisken_min: { onceki_oyun: 1 } }
         bildirimler:
           - tur: "gorev"
