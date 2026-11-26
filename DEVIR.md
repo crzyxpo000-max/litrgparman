@@ -1,17 +1,17 @@
 # DEVIR — Yükseliş Protokolü / Ascension Protocol
 
-Yazıldığı gün: 2026-11-26. Dal: `main`, son commit `9f6da2c` (+ Paket 9).
+Yazıldığı gün: 2026-11-26. Dal: `main`, son commit `0019dba`; `origin/main` ile aynı (push edildi).
 Çalışma ağacı: `art/*.jpg` (7 dosya) izlenmiyor, bilinçli olarak depoya girmedi.
 
 Bu dosya bir özet ve yol haritasıdır. Ayrıntının kaynağı: `CLAUDE.md` (kurallar; `AGENTS.md` yalnız ona yönlendirir), `docs/PROGRESS.md` (kutu kutu durum),
-`docs/DECISIONS.md` (#1–#193), `docs/UI_REVIEW.md`, `docs/INCELEME_AKIS.md`, `docs/STORY_FLOW.md`, `docs/BALANCE.md`.
+`docs/DECISIONS.md` (#1–#196), `docs/UI_REVIEW.md`, `docs/INCELEME_AKIS.md`, `docs/STORY_FLOW.md`, `docs/BALANCE.md`.
 
 ## 1. Şu anki durum
 
 - Oyun baştan sona oynanıyor: prolog, 18 bölüm (4 perde), 9 son, New Game+, başlık Arşivi. Tamamen çevrimdışı, iki dilli (TR / EN-NA).
-- Aşama 0–7 ve 9 bitti (Aşama 8 kaldırıldı). Üstüne "oyuncu gözüyle inceleme" ve **Paket 1–9** tamamlandı (`UI_REVIEW.md` P0/P1/arayüz P2 sıfırlandı).
+- Aşama 0–7 ve 9 bitti (Aşama 8 kaldırıldı). Üstüne "oyuncu gözüyle inceleme" ve **Paket 1–9** tamamlandı (`UI_REVIEW.md` P0/P1/arayüz P2 sıfırlandı). Paket 6–9'u başka bir model yaptı; hepsi gözden geçirildi ve bulunan sorunlar düzeltildi (#194–#196).
 - Tüm doğrulama adımları geçti (`:engine:validateContent`, `:engine:test`, `:tools:uslup:test`, `:tools:simulator:test`, `assembleDebug`, `lint`).
-- Denge (1000 oynanış, `docs/BALANCE.md`): hakimiyet **%72,1** (hedef %60+), sonlar **%6,0–%18,3** (hedef %1–%40), kristal kilitlenme **%11,3** (hedef <%50).
+- Denge (1000 oynanış, `docs/BALANCE.md`): hakimiyet **%69,5** (hedef %60+), sonlar **%6,4–%19,4** (hedef %1–%40), kristal kilitlenme **%11,3** (hedef <%50).
 - Yayın için bekleyen, kullanıcıda: imzalama anahtarı (`keystore.properties`) ve Google Play Console.
 
 ## 2. Yapılanlar (son dönem, eskiden yeniye)
@@ -29,7 +29,8 @@ Bu dosya bir özet ve yol haritasıdır. Ayrıntının kaynağı: `CLAUDE.md` (k
 | `159c7f8` | **Paket 6: açılış hızı, kayıt güvenliği ve ilk saat arayüzü.** İkili içerik önbelleği (`content.bin`, soğuk yükleme 1570 → 61 ms), `onceki` oturum kaydı, 7 yeni kendini açan gösterge, `2.0x` yazı ölçeği ve 48dp hedef düzeltmeleri, `AGENTS.md`. | #179–#182 |
 | `dd67b2f` | **Paket 7: savaş hissi, bosslar, final ve Arşiv.** Ekransız anında Ezme, boss faz çentikleri ve `★ Zaaf` vurgusu, hızlı otomatik savaş, kademeli epilog, bölüm kapanış özetleri, başlık Arşivi, katmanlı titreşim. | #183–#186 |
 | `9f6da2c` | **Paket 8: denge, kristal telemetrisi ve yaşayan dünya.** Öz Kristali telemetrisi (%11,3 kilitlenme), Perde 2 açılış savaşları ve Perde 3–4 `@oyuncu±n%` ölçeklemeleri, `elif_yoldas_darbe` erişilebilirliği, zaman atlama bültenleri ve NG+ (`yeni_dongu`) Yankı fısıltıları. | #187–#190 |
-| Paket 9 | **Paket 9: arayüz P2 kapanış turu.** Kayıtlar vurgusu (`B6`), Yetenekler ipucu (`B7`), kartlı Görevler (`C7`), ortadan iki yönlü Ahlak çubuğu (`D3`), perde gruplu Harita ve "Taşmak üzere" (`D4`), Evrim `Şimdi:` / `Her seviye:` (`D5`), Yenilgi bandı (`E5`), TR `Can`/`Yoldaşlar` (`F3`/`F4`), başlık yükleme göstergesi (`F6`). | #191–#193 |
+| `8fb5273` | **Paket 9: arayüz P2 kapanış turu.** Kayıtlar vurgusu (`B6`), Yetenekler ipucu (`B7`), kartlı Görevler (`C7`), ortadan iki yönlü Ahlak çubuğu (`D3`), perde gruplu Harita ve "Taşmak üzere" (`D4`), Evrim `Şimdi:` / `Her seviye:` (`D5`), Yenilgi bandı (`E5`), TR `Can`/`Yoldaşlar` (`F3`/`F4`), başlık yükleme göstergesi (`F6`). | #191–#193 |
+| `0019dba` | **Paket 6–9 incelemesi ve düzeltmeler.** Lisans metinleri yeniden APK'da (`src/main/assets` pakete girmiyordu), YAML yedek yolu kaldırıldı, Tehlike göstergesi motor sayaçlarına bağlı, `evrim_simdi` zorunlu Sistem metni, Arşiv gerçek oyuncu adını kullanır, TR üst şeritte "Mana", `AGENTS.md` yalnız `CLAUDE.md`'ye yönlendirir. Elif'in ikinci teklifi açık retten sonra gelmez (`elif_yoldas_red`); Perde 3–4'ün 14 ilk deneme başvurusu eski değerlerinde; 12 TR/EN üslup düzeltmesi. | #194–#196 |
 
 Bu dönemde eklenen araçlar:
 
@@ -50,8 +51,10 @@ Bu dönemde eklenen araçlar:
 
 **Denge ve oynanış**
 
+- **Perde 3–4 final bosslarının ilk deneme zorluğu elle oynanmadı (#195).** İlk denemeler `@oyuncu+N` (fiilen eşit seviye); fazla kolay bulunursa küçük bir yüzde (≤ +3%) ölçülerek eklenir.
+- `elif_yoldas_darbe` 1000 oynanışın yalnız %0,9'unda görülüyor (#194); daha sık istenirse Konsey teklifinin tohum koşullarına bakılır.
 - Sv. 700'ün altında istilaya gelen oyuncu Vali'yi nadiren yeniyor; neden ölçülmedi. İstila emülatörde elle oynanmadı.
-- Kristal ekonomisi (#187): erken oyunda kıtlık sağlıklı (Gün 30 p50: 10, Gün 60: 29; kilitlenme %11,3 < %50), ancak üretim kapalıyken (#166) geç oyunda bakiye birikiyor (Gün 180 p50: 309, Gün 365: 986).
+- Kristal ekonomisi (#187): erken oyunda kıtlık sağlıklı (Gün 30 p50: 10, Gün 60: 29; kilitlenme %11,3 < %50), ancak üretim kapalıyken (#166) geç oyunda bakiye birikiyor (Gün 180 p50: 309, Gün 365: 983).
 - Kabul edilmiş riskler: Bölüm 16–18 taşma satırları hiç tetiklenmiyor (#140); bedava yolculukla el tazeleme (#162).
 
 **Kod temizliği (zararsız)**
@@ -62,7 +65,7 @@ Bu dönemde eklenen araçlar:
 
 1. **Yayın hazırlığı (kullanıcı):** keystore oluştur, `keystore.properties` yaz, `./gradlew bundleRelease`, Play Console kaydı. Mağaza görselleri için `art/*.jpg` karar bekliyor (depoya girecek mi).
 2. **Release derlemesini gerçek cihazda dene:** `content.bin` ile açılış süresi, R8 sonrası çökme var mı, TalkBack dinlemesi.
-3. **Elle oynanış turu:** Bölüm 1–3 ve Kadim istilası baştan sona, emülatörde ya da cihazda.
+3. **Elle oynanış turu:** Bölüm 1–3, Perde 3–4 final bossları (ilk deneme zorluğu, #195) ve Kadim istilası, emülatörde ya da cihazda.
 4. **İçerik (isteğe bağlı):** A6'daki 21 sahneyi kademelendir (`/olay-yaz` kurallarıyla, `tr-editor` ve `en-localizer` incelemesi); geç oyun için isteğe bağlı kristal harcama yerleri.
 
 ## 5. Çalışma düzeni ve ortam
