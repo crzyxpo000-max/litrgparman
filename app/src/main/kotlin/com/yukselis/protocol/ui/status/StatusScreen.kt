@@ -330,12 +330,17 @@ private fun StatCell(
     }
 }
 
-/** −100 (sol uç) ile +100 (sağ uç) arasında tek eksen. */
+/** −100 (sol uç) ile +100 (sağ uç) arasında ortadan iki yöne dolan eksen (UI_REVIEW D3). */
 @Composable
 private fun MoralityBar(negative: String, positive: String, value: Int) {
     Column(modifier = Modifier.padding(bottom = 12.dp)) {
         Row(modifier = Modifier.fillMaxWidth()) {
-            Text(negative, style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
+            Text(
+                text = negative,
+                style = if (value < 0) GameType.systemTitle else GameType.system,
+                color = if (value < 0) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.weight(1f),
+            )
             Text(
                 text = if (value > 0) "+$value" else "$value",
                 style = GameType.systemTitle,
@@ -343,23 +348,46 @@ private fun MoralityBar(negative: String, positive: String, value: Int) {
                 modifier = Modifier.width(56.dp),
             )
             Text(
-                positive,
-                style = GameType.system,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                text = positive,
+                style = if (value > 0) GameType.systemTitle else GameType.system,
+                color = if (value > 0) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.End,
                 modifier = Modifier.weight(1f),
             )
         }
-        val color = MaterialTheme.colorScheme.secondary
-        LinearProgressIndicator(
-            progress = { ((value + 100) / 200f).coerceIn(0f, 1f) },
-            color = color,
-            trackColor = color.copy(alpha = 0.18f),
+        val fillColor = MaterialTheme.colorScheme.secondary
+        val trackColor = fillColor.copy(alpha = 0.18f)
+        val tickColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.55f)
+        val fraction = (value / 100f).coerceIn(-1f, 1f)
+        androidx.compose.foundation.Canvas(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 4.dp)
-                .height(6.dp)
-                .clip(RoundedCornerShape(3.dp)),
-        )
+                .height(8.dp)
+                .clip(RoundedCornerShape(4.dp)),
+        ) {
+            drawRect(color = trackColor)
+            val mid = size.width / 2f
+            if (fraction > 0f) {
+                drawRect(
+                    color = fillColor,
+                    topLeft = androidx.compose.ui.geometry.Offset(mid, 0f),
+                    size = androidx.compose.ui.geometry.Size(mid * fraction, size.height),
+                )
+            } else if (fraction < 0f) {
+                val w = mid * (-fraction)
+                drawRect(
+                    color = fillColor,
+                    topLeft = androidx.compose.ui.geometry.Offset(mid - w, 0f),
+                    size = androidx.compose.ui.geometry.Size(w, size.height),
+                )
+            }
+            val tickW = 1.5.dp.toPx()
+            drawRect(
+                color = tickColor,
+                topLeft = androidx.compose.ui.geometry.Offset(mid - tickW / 2f, 0f),
+                size = androidx.compose.ui.geometry.Size(tickW, size.height),
+            )
+        }
     }
 }

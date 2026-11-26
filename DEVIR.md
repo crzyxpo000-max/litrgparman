@@ -1,15 +1,15 @@
 # DEVIR — Yükseliş Protokolü / Ascension Protocol
 
-Yazıldığı gün: 2026-11-26. Dal: `main`, son commit `dd67b2f` (+ Paket 8).
+Yazıldığı gün: 2026-11-26. Dal: `main`, son commit `9f6da2c` (+ Paket 9).
 Çalışma ağacı: `art/*.jpg` (7 dosya) izlenmiyor, bilinçli olarak depoya girmedi.
 
 Bu dosya bir özet ve yol haritasıdır. Ayrıntının kaynağı: `CLAUDE.md` / `AGENTS.md` (kurallar), `docs/PROGRESS.md` (kutu kutu durum),
-`docs/DECISIONS.md` (#1–#190), `docs/UI_REVIEW.md`, `docs/INCELEME_AKIS.md`, `docs/STORY_FLOW.md`, `docs/BALANCE.md`.
+`docs/DECISIONS.md` (#1–#193), `docs/UI_REVIEW.md`, `docs/INCELEME_AKIS.md`, `docs/STORY_FLOW.md`, `docs/BALANCE.md`.
 
 ## 1. Şu anki durum
 
 - Oyun baştan sona oynanıyor: prolog, 18 bölüm (4 perde), 9 son, New Game+, başlık Arşivi. Tamamen çevrimdışı, iki dilli (TR / EN-NA).
-- Aşama 0–7 ve 9 bitti (Aşama 8 kaldırıldı). Üstüne "oyuncu gözüyle inceleme" ve **Paket 1–8** tamamlandı.
+- Aşama 0–7 ve 9 bitti (Aşama 8 kaldırıldı). Üstüne "oyuncu gözüyle inceleme" ve **Paket 1–9** tamamlandı (`UI_REVIEW.md` P0/P1/arayüz P2 sıfırlandı).
 - Tüm doğrulama adımları geçti (`:engine:validateContent`, `:engine:test`, `:tools:uslup:test`, `:tools:simulator:test`, `assembleDebug`, `lint`).
 - Denge (1000 oynanış, `docs/BALANCE.md`): hakimiyet **%72,1** (hedef %60+), sonlar **%6,0–%18,3** (hedef %1–%40), kristal kilitlenme **%11,3** (hedef <%50).
 - Yayın için bekleyen, kullanıcıda: imzalama anahtarı (`keystore.properties`) ve Google Play Console.
@@ -28,7 +28,8 @@ Bu dosya bir özet ve yol haritasıdır. Ayrıntının kaynağı: `CLAUDE.md` / 
 | `b512faf` | README güncellendi. | — |
 | `159c7f8` | **Paket 6: açılış hızı, kayıt güvenliği ve ilk saat arayüzü.** İkili içerik önbelleği (`content.bin`, soğuk yükleme 1570 → 61 ms), `onceki` oturum kaydı, 7 yeni kendini açan gösterge, `2.0x` yazı ölçeği ve 48dp hedef düzeltmeleri, `AGENTS.md`. | #179–#182 |
 | `dd67b2f` | **Paket 7: savaş hissi, bosslar, final ve Arşiv.** Ekransız anında Ezme, boss faz çentikleri ve `★ Zaaf` vurgusu, hızlı otomatik savaş, kademeli epilog, bölüm kapanış özetleri, başlık Arşivi, katmanlı titreşim. | #183–#186 |
-| Paket 8 | **Paket 8: denge, kristal telemetrisi ve yaşayan dünya.** Öz Kristali telemetrisi (%11,3 kilitlenme), Perde 2 açılış savaşları ve Perde 3–4 `@oyuncu±n%` ölçeklemeleri, `elif_yoldas_darbe` erişilebilirliği, zaman atlama bültenleri ve NG+ (`yeni_dongu`) Yankı fısıltıları. | #187–#190 |
+| `9f6da2c` | **Paket 8: denge, kristal telemetrisi ve yaşayan dünya.** Öz Kristali telemetrisi (%11,3 kilitlenme), Perde 2 açılış savaşları ve Perde 3–4 `@oyuncu±n%` ölçeklemeleri, `elif_yoldas_darbe` erişilebilirliği, zaman atlama bültenleri ve NG+ (`yeni_dongu`) Yankı fısıltıları. | #187–#190 |
+| Paket 9 | **Paket 9: arayüz P2 kapanış turu.** Kayıtlar vurgusu (`B6`), Yetenekler ipucu (`B7`), kartlı Görevler (`C7`), ortadan iki yönlü Ahlak çubuğu (`D3`), perde gruplu Harita ve "Taşmak üzere" (`D4`), Evrim `Şimdi:` / `Her seviye:` (`D5`), Yenilgi bandı (`E5`), TR `Can`/`Yoldaşlar` (`F3`/`F4`), başlık yükleme göstergesi (`F6`). | #191–#193 |
 
 Bu dönemde eklenen araçlar:
 
@@ -44,7 +45,7 @@ Bu dönemde eklenen araçlar:
 
 - **B5, cihaz ölçümü:** `content.bin` ikili önbelleği (#179) masaüstünde soğuk yüklemeyi 1570 ms → 61 ms'ye indirdi; release derlemesinde gerçek Android cihazda henüz ölçülmedi.
 - **A6, yapılmadı:** 6–8 görünür seçenekli 21 sahne içerik düzeyinde kademelendirilmedi (liste raporda). Katlama bu sahnelerde çalışıyor.
-- **Kalan P2'ler:** D3–D5, E5, F3–F6, C7, B6, B7 (Paket 6–7 ile B3, B5, C5, C6, D1, E1, E3, E4, G3–G5 kapandı).
+- `UI_REVIEW.md` kapsamındaki tüm P0, P1 ve arayüz P2 maddeleri (Paket 5–9) kapatıldı.
 - TalkBack gerçek okuyucuyla hiç dinlenmedi; etiketler yalnız erişilebilirlik ağacından ölçüldü.
 
 **Denge ve oynanış**

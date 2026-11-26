@@ -114,12 +114,20 @@ fun TitleScreen(
         Spacer(Modifier.height(36.dp))
         if (autosave != null) {
             Button(onClick = onContinue, enabled = ready, modifier = Modifier.fillMaxWidth()) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(stringResource(R.string.continue_game))
-                    Text(
-                        text = stringResource(R.string.continue_summary, autosave.playerName, autosave.level, autosave.day),
-                        style = GameType.system,
-                    )
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    if (!ready) {
+                        androidx.compose.material3.CircularProgressIndicator(
+                            strokeWidth = 2.dp,
+                            modifier = Modifier.height(16.dp).widthIn(min = 16.dp, max = 16.dp),
+                        )
+                    }
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(stringResource(R.string.continue_game))
+                        Text(
+                            text = stringResource(R.string.continue_summary, autosave.playerName, autosave.level, autosave.day),
+                            style = GameType.system,
+                        )
+                    }
                 }
             }
             Spacer(Modifier.height(24.dp))
@@ -183,7 +191,17 @@ fun TitleScreen(
         if (autosave != null) {
             OutlinedButton(onClick = { confirmNew = true }, enabled = ready, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.start)) }
         } else {
-            Button(onClick = start, enabled = ready, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.start)) }
+            Button(onClick = start, enabled = ready, modifier = Modifier.fillMaxWidth()) {
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    if (!ready) {
+                        androidx.compose.material3.CircularProgressIndicator(
+                            strokeWidth = 2.dp,
+                            modifier = Modifier.height(16.dp).widthIn(min = 16.dp, max = 16.dp),
+                        )
+                    }
+                    Text(stringResource(R.string.start))
+                }
+            }
         }
         if (!ready) {
             Text(

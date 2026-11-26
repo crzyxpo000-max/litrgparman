@@ -185,6 +185,24 @@ fun StoryScreen(
                 }
             }
 
+            if (scene.isDefeat) {
+                // Yenilgi sahnesi üstünde kırmızı ince bant (UI_REVIEW E5).
+                item(key = "defeat-$passageKey") {
+                    Surface(
+                        color = Game.colors.danger.copy(alpha = 0.14f),
+                        shape = RoundedCornerShape(2.dp),
+                        modifier = Modifier.fillMaxWidth().leftRule(Game.colors.danger, width = 3.dp),
+                    ) {
+                        Text(
+                            text = "[ ${stringResource(R.string.defeat_banner)} ]",
+                            style = GameType.systemTitle,
+                            color = Game.colors.danger,
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                        )
+                    }
+                }
+            }
+
             item(key = "text-$passageKey") {
                 val visible = if (finished) fullText else fullText.take(shown)
                 Text(

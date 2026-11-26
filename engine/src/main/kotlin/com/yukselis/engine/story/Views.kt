@@ -167,6 +167,7 @@ data class RegionView(
     val gates: List<GateView>,
     val current: Boolean,
     val neighbor: Boolean,
+    val act: Int = 1,
 )
 
 data class QuestView(val name: String, val description: String, val status: com.yukselis.engine.world.QuestStatus)
@@ -250,6 +251,8 @@ data class SceneView(
     val opinions: List<CompanionLineView> = emptyList(),
     /** Her zaman görünen "Bölüm N · Hedef · Kalan gün" satırı (gün akışından önce null). */
     val chapter: com.yukselis.engine.world.ChapterLine? = null,
+    /** Savaş yenilgisi sahnesi (UI_REVIEW E5): sahne üstünde ince kırmızı "Yenildin" bandı gösterir. */
+    val isDefeat: Boolean = false,
 )
 
 /** `echo`: stat sezgisi değil, Yankı'nın sesi (öneksiz satır). */

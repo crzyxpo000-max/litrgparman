@@ -1,8 +1,8 @@
 # İlerleme
 
-Şu an: İnceleme (`docs/INCELEME_AKIS.md`) ve Paket 1–8 (hikaye, ilk saat, ritim, sistem çıkarma, arayüz incelemesi, açılış hızı & kayıt güvenliği, savaş hissi & bosslar & final & Arşiv, denge & kristal telemetrisi & yaşayan dünya) bitti.
+Şu an: İnceleme (`docs/INCELEME_AKIS.md`) ve Paket 1–9 (hikaye, ilk saat, ritim, sistem çıkarma, arayüz incelemesi, açılış hızı & kayıt güvenliği, savaş hissi & bosslar & final & Arşiv, denge & kristal telemetrisi & yaşayan dünya, arayüz P2 kapanış turu) bitti.
 Bekleyen (kullanıcı): imzalama anahtarı (keystore) ve Google Play Console
-Son commit: dd67b2f Paket 7 (sonraki: Paket 8 commit'i)
+Son commit: 9f6da2c Paket 8 (sonraki: Paket 9 commit'i)
 Uzak depo: https://github.com/crzyxpo000-max/litrgparman (origin/main)
 Görev tanımı: `CLAUDE_CODE_GOREV.md`
 
@@ -11,6 +11,14 @@ Görev tanımı: `CLAUDE_CODE_GOREV.md`
 - SDK: `local.properties` → `sdk.dir=C:/Users/alpar/AppData/Local/Android/Sdk` (git dışı).
 - Emülatör: `Medium_Phone_API_36.0` (`emulator -avd Medium_Phone_API_36.0`), adb ile kurulum.
 - OneDrive kilidi yüzünden lint ara sıra "dosya kullanılıyor" der: `./gradlew --stop` ve tekrar.
+
+## Paket 9: arayüz P2 kapanış turu (2026-11-26)
+- [x] **Kayıtlar, Görevler ve Harita (`B6`, `C7`, `D4`, DECISIONS #191):** Kaydet birincil + 1 sn yeşil vurgu; Görevler kartlı düzen
+      (Etkin/Tamamlanan + anlatı yazı tipi); Harita bulunulan bölge üstte, perdeye göre gruplu, 0 gün kalan kapıda kırmızı "Taşmak üzere".
+- [x] **Ahlak çubuğu, Evrim önekleri ve Yenilgi bandı (`D3`, `D5`, `E5`, DECISIONS #192):** Ortadan iki yönlü `MoralityBar`; evrimde
+      `Şimdi:` / `Her seviye:` (`Now:` / `Per level:`); `SceneView.isDefeat` kırmızı `[ YENİLDİN ]` bandı.
+- [x] **Terim tutarlılığı ve yükleme göstergesi (`B7`, `F3`, `F4`, `F6`, DECISIONS #193):** Yetenekler ipucu "dokun"; TR'de `Can` ve
+      `Yoldaşlar` tek terim; başlık düğmesinde yükleme göstergesi. `Paket9Test` eklendi; `UI_REVIEW.md` arayüz P2 listesi kapandı.
 
 ## Paket 8: denge, kristal telemetrisi ve yaşayan dünya (2026-11-26)
 - [x] **Öz Kristali telemetrisi (DECISIONS #187):** `Simulator` + `Report` kontrol noktalarında kristal yüzdeliklerini ve `oz_kristali_min`

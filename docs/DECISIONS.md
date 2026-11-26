@@ -2,6 +2,14 @@
 
 GDD'nin açık bıraktığı ya da bilinçli olarak saptığımız noktalar. En yeni en üstte.
 
+## Paket 9: arayüz P2 kapanış turu — 2026-11-26
+
+| # | Karar | Neden | Ne zaman yeniden bakılır |
+| --- | --- | --- | --- |
+| 191 | **Kayıtlar, Görevler ve Harita P2 düzeltmeleri (`B6`, `C7`, `D4`).** Elle kayıt slotlarında `Kaydet` birincil (`Button`), `Yükle` ikincil (`OutlinedButton`) ve kaydedilen satırda 1 sn yeşil vurgu (`B6`). `Görevler` ekranında bölüm hedefi, her yan görev (Etkin / Tamamlanan ayrımı + durum etiketi) ve Bilgi günlüğü maddeleri ayrı kartlarda, açıklamalar anlatı yazı tipinde (`C7`). `Harita`'da bulunulan bölge ilk sırada, diğerleri perdeye göre gruplu (`RegionView.act`); `daysLeft ≤ 0` olan kapılar hem Harita'da hem Kapılar penceresinde kırmızı "Taşmak üzere" etiketi taşır (`D4`). | `UI_REVIEW.md` B6, C7, D4. | — |
+| 192 | **Ortadan iki yönlü Ahlak çubuğu, Evrim önekleri ve Yenilgi bandı (`D3`, `D5`, `E5`).** `StatusScreen.MoralityBar` 0 noktasındaki orta çizgiden sola/sağa dolar ve etkin ucu kalınlaştırır (`D3`). `StoryEngine` evrim isteminde anlık bonusları `Şimdi:` / `Now:` (`evrim_simdi`), seviye başı artışı `Her seviye:` / `Per level:` (`seviye_basi`) önekiyle verir (`D5`). `SceneView.isDefeat` savaşların yalnızca `kaybet` hedefi olan sahneleri işaretler; `StoryScreen` üstte ince kırmızı `[ YENİLDİN ]` / `[ DEFEATED ]` bandı gösterir (`E5`). | `UI_REVIEW.md` D3, D5, E5. | — |
+| 193 | **Terim tutarlılığı ve yükleme göstergesi (`B7`, `F3`, `F4`, `F6`).** Yetenekler ipucu "dokun" oldu (`B7`); TR'de `hp` → `Can` (`F3`) ve operasyon onayında `Yanındakiler` → `Yoldaşlar` (`F4`); başlık ekranında içerik yüklenirken `Devam et` / `Entegrasyonu başlat` düğmesinde dönen ilerleme göstergesi görünür (`F6`). Böylece `UI_REVIEW.md`'deki tüm P0, P1 ve arayüz P2 maddeleri kapandı. | `UI_REVIEW.md` B7, F3, F4, F6. | — |
+
 ## Paket 8: denge, kristal telemetrisi ve yaşayan dünya — 2026-11-26
 
 | # | Karar | Neden | Ne zaman yeniden bakılır |

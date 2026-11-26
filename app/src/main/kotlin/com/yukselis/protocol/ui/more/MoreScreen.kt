@@ -284,66 +284,122 @@ private fun TextSizePicker(current: TextSize, onPick: (TextSize) -> Unit) {
     }
 }
 
-/** Harita: bölgeler, tehlike, kontrol, açık kapılar. */
+/** Harita: bulunduğun bölge üstte, diğerleri perdeye göre gruplu; süresi dolan kapı "Taşmak üzere" (UI_REVIEW D4). */
 @Composable
 private fun MapSection(regions: List<RegionView>) {
-    regions.forEach { r ->
-        Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small, modifier = Modifier.fillMaxWidth().padding(vertical = 3.dp)) {
-            Column(modifier = Modifier.padding(10.dp)) {
+    val current = regions.firstOrNull { it.current }
+    val others = regions.filterNot { it.current }
+    current?.let { RegionCard(it) }
+    val acts = others.map { it.act }.distinct()
+    if (acts.size <= 1) {
+        others.forEach { RegionCard(it) }
+    } else {
+        others.groupBy { it.act }.forEach { (act, list) ->
+            Text(
+                text = stringResource(R.string.act_short, act),
+                style = GameType.systemTitle,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.padding(top = 10.dp, bottom = 2.dp),
+            )
+            list.forEach { RegionCard(it) }
+        }
+    }
+}
+
+@Composable
+private fun RegionCard(r: RegionView) {
+    Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small, modifier = Modifier.fillMaxWidth().padding(vertical = 3.dp)) {
+        Column(modifier = Modifier.padding(10.dp)) {
+            Text(
+                text = (if (r.current) "▶ " else "") + r.name,
+                style = GameType.systemTitle,
+                color = if (r.current) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+            )
+            Text(stringResource(R.string.map_line, r.danger, r.control, r.gates.size), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            r.gates.forEach { g ->
+                val imminent = g.daysLeft <= 0
                 Text(
-                    text = (if (r.current) "▶ " else "") + r.name,
-                    style = GameType.systemTitle,
-                    color = if (r.current) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+                    text = if (imminent) stringResource(R.string.hub_gate_imminent, g.grade, g.enemies)
+                    else androidx.compose.ui.res.pluralStringResource(R.plurals.hub_gate, g.daysLeft, g.grade, g.enemies, g.daysLeft),
+                    style = GameType.system,
+                    color = if (imminent) Game.colors.danger else Game.colors.amber,
                 )
-                Text(stringResource(R.string.map_line, r.danger, r.control, r.gates.size), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                r.gates.forEach { g -> Text(androidx.compose.ui.res.pluralStringResource(R.plurals.hub_gate, g.daysLeft, g.grade, g.enemies, g.daysLeft), style = GameType.system, color = Game.colors.amber) }
             }
         }
     }
 }
 
-/** Görevler ve efsane (tanıklı başarılar). */
+/** Görevler ve efsane (UI_REVIEW C7): her görev kendi kartında, etkin/tamamlanan ayrımı ve anlatı yazı tipiyle açıklama. */
 @Composable
 private fun JournalSection(journal: JournalView, showKnowledge: Boolean) {
-    // Bölüm hedefi yan görevlerden ayrı (DECISIONS #130).
     journal.chapter?.let { ch ->
-        Text(stringResource(R.string.chapter_goal_title), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
-        Column(modifier = Modifier.padding(vertical = 3.dp)) {
-            Text(stringResource(R.string.chapter_line, ch.no, ch.title), style = GameType.systemTitle)
-            Text(ch.goal, style = GameType.system)
-            if (ch.threat.isNotEmpty()) Text(ch.threat, style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            Text(
-                ch.phase + " · " + androidx.compose.ui.res.pluralStringResource(R.plurals.chapter_days, ch.daysLeft, ch.daysLeft),
-                style = GameType.system,
-                color = MaterialTheme.colorScheme.tertiary,
-            )
+        SectionTitle(stringResource(R.string.chapter_goal_title), Modifier.padding(top = 6.dp))
+        Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small, modifier = Modifier.fillMaxWidth()) {
+            Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(stringResource(R.string.chapter_line, ch.no, ch.title), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary)
+                Text(ch.goal, style = GameType.narrationPast, color = MaterialTheme.colorScheme.onSurface)
+                if (ch.threat.isNotEmpty()) Text(ch.threat, style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(
+                    ch.phase + " · " + androidx.compose.ui.res.pluralStringResource(R.plurals.chapter_days, ch.daysLeft, ch.daysLeft),
+                    style = GameType.system,
+                    color = Game.colors.amber,
+                )
+            }
         }
     }
-    Text(stringResource(R.string.side_quests), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
-    if (journal.quests.isEmpty()) Text(stringResource(R.string.no_quests), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
-    journal.quests.forEach { q ->
-        val color = when (q.status) {
-            QuestStatus.ACTIVE -> MaterialTheme.colorScheme.onSurface
-            QuestStatus.DONE -> Game.colors.success
-            QuestStatus.FAILED -> Game.colors.danger
+    SectionTitle(stringResource(R.string.side_quests))
+    if (journal.quests.isEmpty()) {
+        Text(stringResource(R.string.no_quests), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    } else {
+        val active = journal.quests.filter { it.status == QuestStatus.ACTIVE }
+        val finished = journal.quests.filter { it.status != QuestStatus.ACTIVE }
+        if (active.isNotEmpty()) {
+            Text(stringResource(R.string.quests_active), style = GameType.system, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(bottom = 4.dp))
+            active.forEach { QuestCard(it) }
         }
-        Column(modifier = Modifier.padding(vertical = 3.dp)) {
-            Text(q.name, style = GameType.systemTitle, color = color)
-            Text(q.description, style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        if (finished.isNotEmpty()) {
+            Text(stringResource(R.string.quests_finished), style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 6.dp, bottom = 4.dp))
+            finished.forEach { QuestCard(it) }
         }
     }
     if (journal.legend.isNotEmpty()) {
-        Text(stringResource(R.string.legend), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
-        journal.legend.forEach { Text("${it.name} ×${it.count}", style = GameType.system) }
+        SectionTitle(stringResource(R.string.legend))
+        journal.legend.forEach { Text("${it.name} ×${it.count}", style = GameType.system, modifier = Modifier.padding(vertical = 2.dp)) }
     }
     // OP MC bilgi günlüğü: söylentiler, sırlar, gerçek seviyeler (ilk bilgiyle açılır).
     if (showKnowledge && journal.knowledge.isNotEmpty()) {
-        Text(stringResource(R.string.intel_log), style = GameType.systemTitle, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp))
+        SectionTitle(stringResource(R.string.intel_log))
         journal.knowledge.forEach { k ->
-            Column(modifier = Modifier.padding(vertical = 3.dp)) {
-                Text(k.name, style = GameType.systemTitle, color = Game.colors.system)
-                Text(k.description, style = GameType.system, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small, modifier = Modifier.fillMaxWidth().padding(bottom = 6.dp)) {
+                Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                    Text(k.name, style = GameType.systemTitle, color = Game.colors.system)
+                    Text(k.description, style = GameType.narrationPast, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
             }
+        }
+    }
+}
+
+@Composable
+private fun QuestCard(q: com.yukselis.engine.story.QuestView) {
+    val badgeColor = when (q.status) {
+        QuestStatus.ACTIVE -> MaterialTheme.colorScheme.primary
+        QuestStatus.DONE -> Game.colors.success
+        QuestStatus.FAILED -> Game.colors.danger
+    }
+    Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small, modifier = Modifier.fillMaxWidth().padding(bottom = 6.dp)) {
+        Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+                Text(q.name, style = GameType.systemTitle, color = MaterialTheme.colorScheme.onSurface, modifier = Modifier.weight(1f))
+                if (q.status != QuestStatus.ACTIVE) {
+                    Text(
+                        text = stringResource(if (q.status == QuestStatus.DONE) R.string.quest_status_done else R.string.quest_status_failed),
+                        style = GameType.system,
+                        color = badgeColor,
+                    )
+                }
+            }
+            Text(q.description, style = GameType.narrationPast, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
@@ -384,14 +440,28 @@ private fun SlotRow(slot: String, info: SlotInfo?, canSave: Boolean, onSave: () 
         else -> stringResource(R.string.slot_n, SaveManager.MANUAL.indexOf(slot) + 1)
     }
     var confirm by androidx.compose.runtime.remember(slot) { mutableStateOf<SlotConfirm?>(null) }
+    // Kaydedilen satırda 1 sn vurgu (UI_REVIEW B6): aynı gün içinde kaydedilince geri bildirim netleşir.
+    var savedPulse by androidx.compose.runtime.remember(slot) { mutableStateOf(0) }
+    var highlighted by androidx.compose.runtime.remember(slot) { mutableStateOf(false) }
+    androidx.compose.runtime.LaunchedEffect(savedPulse) {
+        if (savedPulse > 0) {
+            highlighted = true
+            kotlinx.coroutines.delay(1000L)
+            highlighted = false
+        }
+    }
+    val doSave = {
+        onSave()
+        savedPulse++
+    }
     Surface(
-        color = MaterialTheme.colorScheme.surfaceVariant,
+        color = if (highlighted) Game.colors.success.copy(alpha = 0.16f) else MaterialTheme.colorScheme.surfaceVariant,
         shape = MaterialTheme.shapes.small,
         modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(12.dp)) {
             Column(modifier = Modifier.weight(1f)) {
-                Text(name, style = GameType.systemTitle)
+                Text(name, style = GameType.systemTitle, color = if (highlighted) Game.colors.success else MaterialTheme.colorScheme.onSurface)
                 Text(
                     text = info?.let { stringResource(R.string.continue_summary, it.playerName, it.level, it.day) }
                         ?: stringResource(R.string.empty_slot),
@@ -399,12 +469,14 @@ private fun SlotRow(slot: String, info: SlotInfo?, canSave: Boolean, onSave: () 
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
-            // Dolu slota kaydetmek ve yüklemek geri alınamaz: önce onay (UI_REVIEW B2, B3).
+            // Dolu slota kaydetmek ve yüklemek geri alınamaz: önce onay (UI_REVIEW B2, B3). Kaydet birincil, Yükle ikincil (B6).
             if (canSave) {
-                OutlinedButton(onClick = { if (info != null) confirm = SlotConfirm.SAVE else onSave() }) { Text(stringResource(R.string.save)) }
+                Button(onClick = { if (info != null) confirm = SlotConfirm.SAVE else doSave() }) { Text(stringResource(R.string.save)) }
                 Spacer(Modifier.width(8.dp))
+                OutlinedButton(onClick = { confirm = SlotConfirm.LOAD }, enabled = info != null) { Text(stringResource(R.string.load)) }
+            } else {
+                Button(onClick = { confirm = SlotConfirm.LOAD }, enabled = info != null) { Text(stringResource(R.string.load)) }
             }
-            Button(onClick = { confirm = SlotConfirm.LOAD }, enabled = info != null) { Text(stringResource(R.string.load)) }
         }
     }
     val pending = confirm
@@ -414,7 +486,7 @@ private fun SlotRow(slot: String, info: SlotInfo?, canSave: Boolean, onSave: () 
         com.yukselis.protocol.ui.components.AppAlertDialog(
             onDismissRequest = { confirm = null },
             confirmButton = {
-                androidx.compose.material3.TextButton(onClick = { confirm = null; if (saving) onSave() else onLoad() }) {
+                androidx.compose.material3.TextButton(onClick = { confirm = null; if (saving) doSave() else onLoad() }) {
                     Text(stringResource(if (saving) R.string.confirm_overwrite_ok else R.string.confirm_load_ok))
                 }
             },

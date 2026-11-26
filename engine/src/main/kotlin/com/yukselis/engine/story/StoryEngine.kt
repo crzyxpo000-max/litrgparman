@@ -50,6 +50,13 @@ class StoryEngine(val content: Content) {
     private val combat = CombatEngine(content, effects)
     val world = com.yukselis.engine.world.WorldEngine(content, effects, combat)
 
+    /** Savaşların `kaybet` hedefi olan ama `kazan` hedefi olmayan sahneler (UI_REVIEW E5). */
+    private val defeatScenes: Set<String> by lazy {
+        val starts = content.scenes.values.flatMap { it.choices }.flatMap { it.effects }.filterIsInstance<Effect.StartCombat>()
+        val wins = starts.map { it.spec.win }.toSet()
+        starts.mapNotNull { it.spec.lose }.filter { it != WorldState.HUB && it !in wins }.toSet()
+    }
+
     // ---- Gün akışı ----
 
     fun hubAction(state: WorldState, action: com.yukselis.engine.world.HubAction, lang: Lang): Outcome {
@@ -59,18 +66,21 @@ class StoryEngine(val content: Content) {
 
     fun map(state: WorldState, lang: Lang): List<RegionView> {
         val here = state.region?.let { content.regions[it] }
-        return content.regions.values.sortedBy { it.act * 1000 + it.baseDanger }.map { d ->
-            val r = state.regions[d.id]
-            RegionView(
-                id = d.id,
-                name = world.regionName(d.id)[lang],
-                danger = r?.danger ?: d.baseDanger,
-                control = controlName(r?.control ?: d.control, lang),
-                gates = r?.gates?.map { gateView(it, state, lang) } ?: emptyList(),
-                current = d.id == state.region,
-                neighbor = here != null && world.canTravel(state, d.id),
-            )
-        }
+        return content.regions.values
+            .sortedWith(compareByDescending<com.yukselis.engine.world.RegionDef> { it.id == state.region }.thenBy { it.act * 1000 + it.baseDanger })
+            .map { d ->
+                val r = state.regions[d.id]
+                RegionView(
+                    id = d.id,
+                    name = world.regionName(d.id)[lang],
+                    danger = r?.danger ?: d.baseDanger,
+                    control = controlName(r?.control ?: d.control, lang),
+                    gates = r?.gates?.map { gateView(it, state, lang) } ?: emptyList(),
+                    current = d.id == state.region,
+                    neighbor = here != null && world.canTravel(state, d.id),
+                    act = d.act,
+                )
+            }
     }
 
     fun journal(state: WorldState, lang: Lang): JournalView = JournalView(
@@ -766,6 +776,7 @@ class StoryEngine(val content: Content) {
             prompt = state.prompts.firstOrNull()?.let { promptView(it, state, lang) },
             opinions = opinions,
             chapter = chapterLine(state, lang),
+            isDefeat = scene.id in defeatScenes,
         )
     }
 
@@ -1034,7 +1045,7 @@ class StoryEngine(val content: Content) {
                             )
                         } else {
                             val details = listOfNotNull(
-                                c.bonus.takeIf { it.isNotEmpty() }?.let { statList(it, lang) },
+                                c.bonus.takeIf { it.isNotEmpty() }?.let { bonusLine(it, lang) },
                                 growthLine(c.growth, lang),
                             ) + skillLine(c.skill)
                             PromptOptionView(id, c.name[lang], l(c.description), details, Rarity.EPIC)
@@ -1079,6 +1090,15 @@ class StoryEngine(val content: Content) {
                     acceptOptions(),
                 )
             }
+        }
+    }
+
+    private fun bonusLine(bonus: Map<Stat, Int>, lang: Lang): String {
+        val stats = statList(bonus, lang)
+        return if (content.texts["evrim_simdi"] != null) {
+            content.texts.format("evrim_simdi", "stats" to stats)[lang]
+        } else {
+            stats
         }
     }
 

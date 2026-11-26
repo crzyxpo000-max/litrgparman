@@ -182,8 +182,14 @@ fun HubDialogs(hub: HubView, ui: HubUi, onAction: (HubAction) -> Unit) {
             onDismiss = { ui.dialog = null },
         ) {
             hub.gates.forEach { g ->
+                val imminent = g.daysLeft <= 0
                 OutlinedButton(onClick = { ui.dialog = null; onAction(HubAction.EnterGate(g.uid)) }, modifier = Modifier.fillMaxWidth()) {
-                    Text(pluralStringResource(R.plurals.hub_gate, g.daysLeft, g.grade, g.enemies, g.daysLeft), style = GameType.system, color = GateColor)
+                    Text(
+                        text = if (imminent) stringResource(R.string.hub_gate_imminent, g.grade, g.enemies)
+                        else pluralStringResource(R.plurals.hub_gate, g.daysLeft, g.grade, g.enemies, g.daysLeft),
+                        style = GameType.system,
+                        color = if (imminent) Game.colors.danger else GateColor,
+                    )
                 }
             }
         }
